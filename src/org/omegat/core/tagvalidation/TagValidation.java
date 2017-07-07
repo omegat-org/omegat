@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -137,6 +138,8 @@ public class TagValidation {
         // extract tags from src and loc string
         List<Tag> srcTags = TagUtil.buildTagList(report.source, ste.getProtectedParts());
         List<Tag> locTags = TagUtil.buildTagList(report.translation, ste.getProtectedParts());
+        // Add extra tags in target that are not in protected parts
+        locTags = TagUtil.buildExtraTagList(locTags, srcTags, report.translation); 
 
         inspectOrderedTags(srcTags, locTags, Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING), report);
     }
@@ -154,12 +157,12 @@ public class TagValidation {
     
     protected static void inspectUnorderedTags(List<Tag> srcTags, List<Tag> locTags, ErrorReport report) {
         for (Tag tag : srcTags) {
-            if (!containsTag(locTags, tag.tag)) {
+            if (!TagUtil.containsTag(locTags, tag.tag)) {
                 report.srcErrors.put(tag, TagError.MISSING);
             }
         }
         for (Tag tag : locTags) {
-            if (!containsTag(srcTags, tag.tag)) {
+            if (!TagUtil.containsTag(srcTags, tag.tag)) {
                 report.transErrors.put(tag, TagError.EXTRANEOUS);
             }
         }
@@ -200,7 +203,7 @@ public class TagValidation {
         Stack<Tag> tagStack = new Stack<Tag>();
         for (Tag tag : locTags) {
             // Make sure tag exists in source.
-            if (!containsTag(srcTags, tag.tag)) {
+            if (!TagUtil.containsTag(srcTags, tag.tag)) {
                 report.transErrors.put(tag, TagError.EXTRANEOUS);
                 continue;
             }
@@ -235,9 +238,9 @@ public class TagValidation {
                     // report the tag, but only if it's not a valid orphan.
                     if (tagStack.isEmpty()) {
                         String pair = tag.getPairedTag();
-                        if (containsTag(srcTags, pair)) {
+                        if (TagUtil.containsTag(srcTags, pair)) {
                             report.transErrors.put(tag,
-                                    containsTag(locTags, pair) ? TagError.MALFORMED : TagError.ORPHANED);
+                                    TagUtil.containsTag(locTags, pair) ? TagError.MALFORMED : TagError.ORPHANED);
                         }
                     }
                 }
@@ -257,9 +260,9 @@ public class TagValidation {
             // Allow stragglers only if they're orphans.
             Tag tag = tagStack.pop();
             String pair = tag.getPairedTag();
-            if (containsTag(srcTags, pair)) {
+            if (TagUtil.containsTag(srcTags, pair)) {
                 report.transErrors.put(tag,
-                        containsTag(locTags, pair) ? TagError.MALFORMED : TagError.ORPHANED);
+                        TagUtil.containsTag(locTags, pair) ? TagError.MALFORMED : TagError.ORPHANED);
             }
         }
     }
@@ -278,19 +281,7 @@ public class TagValidation {
         }
         return result;
     }
-    
-    private static boolean containsTag(List<Tag> tags, String tag) {
-        if (tag == null) {
-            return false;
-        }
-        for (Tag t : tags) {
-            if (t.tag.equals(tag)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
+       
     private static Tag removeTag(List<Tag> tags, String tag) {
         for (int i = 0; i < tags.size(); i++) {
             Tag t = tags.get(i);

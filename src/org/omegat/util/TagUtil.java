@@ -47,12 +47,7 @@ import org.omegat.core.statistics.StatisticsSettings;
  */
 public class TagUtil {
 
-    private static final Comparator<Tag> TAG_COMPARATOR = new Comparator<Tag>() {
-        @Override
-        public int compare(Tag o1, Tag o2) {
-            return o1.pos - o2.pos;
-        }
-    };
+    private static final Comparator<Tag> TAG_COMPARATOR = (o1, o2) -> o1.pos - o2.pos;
 
     public static class Tag {
         public final int pos;

@@ -139,7 +139,7 @@ public class TagValidation {
         List<Tag> srcTags = TagUtil.buildTagList(report.source, ste.getProtectedParts());
         List<Tag> locTags = TagUtil.buildTagList(report.translation, ste.getProtectedParts());
         // Add extra tags in target that are not in protected parts
-        locTags = TagUtil.buildExtraTagList(locTags, srcTags, report.translation); 
+        TagUtil.addExtraTags(locTags, srcTags, report.translation);
 
         inspectOrderedTags(srcTags, locTags, Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING), report);
     }

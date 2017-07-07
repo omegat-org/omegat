@@ -296,7 +296,7 @@ public class TagUtil {
      * in protected parts.
      *
     */
-    public static List<Tag> buildExtraTagList(List<Tag> extraTags, List<Tag> srcTags, String str) {
+    public static void addExtraTags(List<Tag> resultList, List<Tag> srcTags, String str) {
         
         StringBuilder sb = new StringBuilder(str);
         
@@ -306,14 +306,13 @@ public class TagUtil {
             if (!containsTag(srcTags, placeholderMatcher.group(0))) {
                 int pos;
                 if ((pos = sb.indexOf(placeholderMatcher.group(0))) != -1) {
-                    extraTags.add(new Tag(pos, placeholderMatcher.group(0)));
+                    resultList.add(new Tag(pos, placeholderMatcher.group(0)));
                     replaceWith(sb, pos, pos + placeholderMatcher.group(0).length(), TEXT_REPLACEMENT);
                 }               
             }
         }
         
-        Collections.sort(extraTags, TAG_COMPARATOR);
-        return extraTags;
+        Collections.sort(resultList, TAG_COMPARATOR);
     }
     
     /**

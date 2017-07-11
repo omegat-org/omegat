@@ -36,6 +36,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PushbackInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -470,15 +471,23 @@ public final class StaticUtils {
     public static List<String> extractFromZip(InputStream in, File destination,
             Predicate<String> filenameFilter) throws IOException {
         List<String> extracted = new ArrayList<>();
-        try (ZipInputStream zis = new ZipInputStream(in)) {
-            // parse the entries
-            ZipEntry entry;
-            while ((entry = zis.getNextEntry()) != null) {
-                if (filenameFilter.test(entry.getName())) {
-                    // match found
-                    File f = new File(destination, entry.getName());
-                    FileUtils.copyToFile(zis, f);
-                    extracted.add(entry.getName());
+        try (PushbackInputStream pis = new PushbackInputStream(in, 2)) {
+            byte[] sig = new byte[2];
+            pis.read(sig);
+            if (!(sig[0] == 0x50 && sig[1] == 0x4b)) {
+                throw new IllegalArgumentException("Input stream was not a zip file");
+            }
+            pis.unread(sig);
+            try (ZipInputStream zis = new ZipInputStream(pis)) {
+                // parse the entries
+                ZipEntry entry;
+                while ((entry = zis.getNextEntry()) != null) {
+                    if (filenameFilter.test(entry.getName())) {
+                        // match found
+                        File f = new File(destination, entry.getName());
+                        FileUtils.copyToFile(zis, f);
+                        extracted.add(entry.getName());
+                    }
                 }
             }
         }

@@ -36,8 +36,6 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
@@ -130,7 +128,10 @@ public class DictionaryInstallerDialog extends JDialog {
                 }
                 progressBar.setVisible(false);
             } catch (InterruptedException | ExecutionException ex) {
-                Logger.getLogger(DictionaryInstallerDialog.class.getName()).log(Level.SEVERE, null, ex);
+                Log.log(ex);
+                JOptionPane.showMessageDialog(DictionaryInstallerDialog.this, ex.getLocalizedMessage(),
+                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                closeButtonActionPerformed(null);
             }
         }
     }

@@ -524,7 +524,7 @@ public final class StaticUtils {
             }
         }
         if (!toExtract.isEmpty()) {
-            throw new FileNotFoundException("Failed to extract all of the specified files.");
+            throw new FileNotFoundException("Failed to extract all of the specified files; remaining: " + toExtract);
         }
     }
 

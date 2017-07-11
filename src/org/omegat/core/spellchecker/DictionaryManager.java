@@ -27,10 +27,11 @@
 package org.omegat.core.spellchecker;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -38,7 +39,6 @@ import java.util.regex.Matcher;
 
 import org.apache.commons.io.FilenameUtils;
 import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -231,14 +231,7 @@ public class DictionaryManager {
      *            : the language code (xx_YY)
      */
     public void installRemoteDictionary(String langCode) throws MalformedURLException, IOException {
-        // download the package in question to the disk to a temporary location
-        String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) + "/" + langCode
-                + ".zip";
-
-        // TODO: replace this with something meaningful
-        File tempFile = File.createTempFile(langCode, ".zip");
-
-        StaticUtils.downloadFileToDisk(from, tempFile.getAbsolutePath());
+        String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) + "/" + langCode + ".zip";
 
         // Dirty hack for the French dictionary. Since it is named
         // fr_FR_1-3-2.zip, we remove the "_1-3-2" portion
@@ -248,12 +241,13 @@ public class DictionaryManager {
             langCode = langCode.substring(0, pos);
         }
 
-        try {
-            StaticUtils.extractFileFromJar(tempFile,
-                    dir.getAbsolutePath(), langCode + OConsts.SC_AFFIX_EXTENSION,
+        URL url = new URL(from);
+        URLConnection conn = url.openConnection();
+        conn.setConnectTimeout(TIMEOUT_MS);
+        conn.setReadTimeout(TIMEOUT_MS);
+        try (InputStream in = conn.getInputStream()) {
+            StaticUtils.extractFileFromJar(in, dir.getAbsolutePath(), langCode + OConsts.SC_AFFIX_EXTENSION,
                     langCode + OConsts.SC_DICTIONARY_EXTENSION);
-        } catch (FileNotFoundException ex) {
-            throw new RuntimeException(OStrings.getString("GUI_SPELLCHECKER_ERROR_ON_INSTALL"), ex);
         }
     }
 }

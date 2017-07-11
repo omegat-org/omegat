@@ -33,15 +33,10 @@ package org.omegat.util;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -459,50 +454,6 @@ public final class StaticUtils {
         try (InputStream in = urlConn.getInputStream()) {
             return IOUtils.toString(in, StandardCharsets.UTF_8);
         }
-    }
-
-    /**
-     * Download a file to the disk
-     */
-    public static void downloadFileToDisk(String address, String filename) throws MalformedURLException {
-        URLConnection urlConn;
-        InputStream in = null;
-        OutputStream out = null;
-        try {
-            URL url = new URL(address);
-            urlConn = url.openConnection();
-            in = urlConn.getInputStream();
-            out = new BufferedOutputStream(new FileOutputStream(filename));
-
-            byte[] byteBuffer = new byte[1024];
-
-            int numRead;
-            while ((numRead = in.read(byteBuffer)) != -1) {
-                out.write(byteBuffer, 0, numRead);
-            }
-        } catch (IOException ex) {
-            Log.logErrorRB("IO exception");
-            Log.log(ex);
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException ex) {
-                // munch this
-            }
-        }
-    }
-
-    public static void extractFileFromJar(File archive, String destination, String... filenames)
-            throws IOException {
-        InputStream is = new FileInputStream(archive);
-        extractFileFromJar(is, destination, filenames);
-        is.close();
     }
 
     public static void extractFileFromJar(InputStream in, String destination, String... filenames) throws IOException {

@@ -55,6 +55,7 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.omegat.util.Platform.OsType;
 
@@ -518,16 +519,7 @@ public final class StaticUtils {
                 }
                 // match found
                 File f = new File(destination, entry.getName());
-                f.getParentFile().mkdirs();
-
-                try (FileOutputStream fos = new FileOutputStream(f);
-                        BufferedOutputStream out = new BufferedOutputStream(fos)) {
-                    byte[] byteBuffer = new byte[1024];
-                    int numRead;
-                    while ((numRead = zis.read(byteBuffer)) != -1) {
-                        out.write(byteBuffer, 0, numRead);
-                    }
-                }
+                FileUtils.copyToFile(zis, f);
                 toExtract.remove(entry.getName());
             }
         }

@@ -33,6 +33,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -46,6 +47,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 import org.omegat.core.spellchecker.DictionaryManager;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -233,9 +235,10 @@ public class DictionaryInstallerDialog extends JDialog {
         installer.execute();
     }//GEN-LAST:event_installButtonActionPerformed
 
+    private static final Cursor HOURGLASS_CURSOR = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+
     private class InstallerWorker extends SwingWorker<List<String>, String> {
 
-        private final Cursor HOURGLASS_CURSOR = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
         private Cursor oldCursor;
 
         @Override
@@ -254,14 +257,22 @@ public class DictionaryInstallerDialog extends JDialog {
                     dicMan.installRemoteDictionary(langCode);
                     completed.add(item);
                     publish(item);
+                } catch (FileNotFoundException ex) {
+                    Log.log(ex);
+                    showError(OStrings.getString("GUI_SPELLCHECKER_ERROR_ON_INSTALL"));
                 } catch (Exception ex) {
-                    setCursor(oldCursor);
-                    JOptionPane.showMessageDialog(DictionaryInstallerDialog.this, ex.getLocalizedMessage(), "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                    setCursor(HOURGLASS_CURSOR);
+                    Log.log(ex);
+                    showError(ex.getLocalizedMessage());
                 }
             }
             return completed;
+        }
+
+        private void showError(String msg) {
+            setCursor(oldCursor);
+            JOptionPane.showMessageDialog(DictionaryInstallerDialog.this, msg, OStrings.getString("ERROR_TITLE"),
+                    JOptionPane.ERROR_MESSAGE);
+            setCursor(HOURGLASS_CURSOR);
         }
 
         @Override

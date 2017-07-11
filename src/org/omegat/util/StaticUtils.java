@@ -51,9 +51,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.jar.JarEntry;
-import java.util.jar.JarInputStream;
 import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.omegat.util.Platform.OsType;
@@ -509,10 +509,10 @@ public final class StaticUtils {
             throw new IllegalArgumentException("Caller must provide non-empty list of files to extract.");
         }
         List<String> toExtract = new ArrayList<>(Arrays.asList(filenames));
-        try (JarInputStream jis = new JarInputStream(in)) {
+        try (ZipInputStream zis = new ZipInputStream(in)) {
             // parse the entries
-            JarEntry entry;
-            while ((entry = jis.getNextJarEntry()) != null) {
+            ZipEntry entry;
+            while ((entry = zis.getNextEntry()) != null) {
                 if (!toExtract.contains(entry.getName())) {
                     continue;
                 }
@@ -524,7 +524,7 @@ public final class StaticUtils {
                         BufferedOutputStream out = new BufferedOutputStream(fos)) {
                     byte[] byteBuffer = new byte[1024];
                     int numRead;
-                    while ((numRead = jis.read(byteBuffer)) != -1) {
+                    while ((numRead = zis.read(byteBuffer)) != -1) {
                         out.write(byteBuffer, 0, numRead);
                     }
                 }

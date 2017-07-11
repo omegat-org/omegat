@@ -27,12 +27,14 @@
 package org.omegat.core.spellchecker;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -240,14 +242,19 @@ public class DictionaryManager {
         if (pos != -1) {
             langCode = langCode.substring(0, pos);
         }
+        List<String> expectedFiles = Arrays.asList(langCode + OConsts.SC_AFFIX_EXTENSION,
+                langCode + OConsts.SC_DICTIONARY_EXTENSION);
 
         URL url = new URL(from);
         URLConnection conn = url.openConnection();
         conn.setConnectTimeout(TIMEOUT_MS);
         conn.setReadTimeout(TIMEOUT_MS);
         try (InputStream in = conn.getInputStream()) {
-            StaticUtils.extractFileFromZip(in, dir.getAbsolutePath(), langCode + OConsts.SC_AFFIX_EXTENSION,
-                    langCode + OConsts.SC_DICTIONARY_EXTENSION);
+            List<String> extracted = StaticUtils.extractFromZip(in, dir, expectedFiles::contains);
+            if (!expectedFiles.containsAll(extracted)) {
+                throw new FileNotFoundException("Could not extract expected files from zip; expected: "
+                        + expectedFiles + ", extracted: " + extracted);
+            }
         }
     }
 }

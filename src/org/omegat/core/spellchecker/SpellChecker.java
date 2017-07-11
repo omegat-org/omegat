@@ -36,6 +36,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -227,8 +228,9 @@ public class SpellChecker implements ISpellChecker {
                 // Relevant dictionary not present.
                 return;
             }
-            StaticUtils.extractFileFromZip(bundledDict, dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION,
-                    language + OConsts.SC_DICTIONARY_EXTENSION);
+            StaticUtils.extractFromZip(bundledDict, new File(dictionaryDir),
+                    Arrays.asList(language + OConsts.SC_AFFIX_EXTENSION,
+                            language + OConsts.SC_DICTIONARY_EXTENSION)::contains);
         } catch (IOException e) {
             Log.log(e);
         }

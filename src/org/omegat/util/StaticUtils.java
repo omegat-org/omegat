@@ -34,7 +34,6 @@ package org.omegat.util;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -44,8 +43,8 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -456,27 +455,34 @@ public final class StaticUtils {
         }
     }
 
-    public static void extractFileFromZip(InputStream in, String destination, String... filenames) throws IOException {
-        if (filenames == null || filenames.length == 0) {
-            throw new IllegalArgumentException("Caller must provide non-empty list of files to extract.");
-        }
-        List<String> toExtract = new ArrayList<>(Arrays.asList(filenames));
+    /**
+     * Extracts files from an InputStream representing a zip archive to the specified destination path.
+     * 
+     * @param in
+     *            InputStream representing a zip archive
+     * @param destination
+     *            Path where archive entries will be saved
+     * @param filenameFilter
+     *            Filter for entry names. Return false to skip extracting an entry
+     * @return List of extracted entry names
+     * @throws IOException
+     */
+    public static List<String> extractFromZip(InputStream in, File destination,
+            Predicate<String> filenameFilter) throws IOException {
+        List<String> extracted = new ArrayList<>();
         try (ZipInputStream zis = new ZipInputStream(in)) {
             // parse the entries
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
-                if (!toExtract.contains(entry.getName())) {
-                    continue;
+                if (filenameFilter.test(entry.getName())) {
+                    // match found
+                    File f = new File(destination, entry.getName());
+                    FileUtils.copyToFile(zis, f);
+                    extracted.add(entry.getName());
                 }
-                // match found
-                File f = new File(destination, entry.getName());
-                FileUtils.copyToFile(zis, f);
-                toExtract.remove(entry.getName());
             }
         }
-        if (!toExtract.isEmpty()) {
-            throw new FileNotFoundException("Failed to extract all of the specified files; remaining: " + toExtract);
-        }
+        return extracted;
     }
 
     /**

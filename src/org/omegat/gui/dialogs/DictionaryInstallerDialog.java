@@ -33,7 +33,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -47,6 +46,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 import org.omegat.core.spellchecker.DictionaryManager;
+import org.omegat.core.spellchecker.DictionaryManager.FlakyDownloadException;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
@@ -257,7 +257,7 @@ public class DictionaryInstallerDialog extends JDialog {
                     dicMan.installRemoteDictionary(langCode);
                     completed.add(item);
                     publish(item);
-                } catch (FileNotFoundException ex) {
+                } catch (FlakyDownloadException ex) {
                     Log.log(ex);
                     showError(OStrings.getString("GUI_SPELLCHECKER_ERROR_ON_INSTALL"));
                 } catch (Exception ex) {

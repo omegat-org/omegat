@@ -255,6 +255,15 @@ public class DictionaryManager {
                 throw new FileNotFoundException("Could not extract expected files from zip; expected: "
                         + expectedFiles + ", extracted: " + extracted);
             }
+        } catch (IllegalArgumentException ex) {
+            throw new FlakyDownloadException(ex);
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public static class FlakyDownloadException extends RuntimeException {
+        public FlakyDownloadException(Exception cause) {
+            super(cause);
         }
     }
 }

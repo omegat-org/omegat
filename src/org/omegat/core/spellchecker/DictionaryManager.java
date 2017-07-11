@@ -246,7 +246,7 @@ public class DictionaryManager {
         conn.setConnectTimeout(TIMEOUT_MS);
         conn.setReadTimeout(TIMEOUT_MS);
         try (InputStream in = conn.getInputStream()) {
-            StaticUtils.extractFileFromJar(in, dir.getAbsolutePath(), langCode + OConsts.SC_AFFIX_EXTENSION,
+            StaticUtils.extractFileFromZip(in, dir.getAbsolutePath(), langCode + OConsts.SC_AFFIX_EXTENSION,
                     langCode + OConsts.SC_DICTIONARY_EXTENSION);
         }
     }

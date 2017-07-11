@@ -456,7 +456,7 @@ public final class StaticUtils {
         }
     }
 
-    public static void extractFileFromJar(InputStream in, String destination, String... filenames) throws IOException {
+    public static void extractFileFromZip(InputStream in, String destination, String... filenames) throws IOException {
         if (filenames == null || filenames.length == 0) {
             throw new IllegalArgumentException("Caller must provide non-empty list of files to extract.");
         }

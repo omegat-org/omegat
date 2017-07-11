@@ -227,7 +227,7 @@ public class SpellChecker implements ISpellChecker {
                 // Relevant dictionary not present.
                 return;
             }
-            StaticUtils.extractFileFromJar(bundledDict, dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION,
+            StaticUtils.extractFileFromZip(bundledDict, dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION,
                     language + OConsts.SC_DICTIONARY_EXTENSION);
         } catch (IOException e) {
             Log.log(e);

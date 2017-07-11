@@ -46,6 +46,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -448,22 +449,14 @@ public final class StaticUtils {
     }
 
     /**
-     * dowload a file from the internet
+     * Download a file to memory
      */
-    public static String downloadFileToString(String urlString) throws IOException {
-        URLConnection urlConn;
-        InputStream in;
-
-        URL url = new URL(urlString);
-        urlConn = url.openConnection();
-        //don't wait forever. 10 seconds should be enough.
-        urlConn.setConnectTimeout(10000);
-        in = urlConn.getInputStream();
-
-        try {
-            return IOUtils.toString(in, "UTF-8");
-        } finally {
-            in.close();
+    public static String downloadFileToString(URL url, int timeout) throws IOException {
+        URLConnection urlConn = url.openConnection();
+        urlConn.setConnectTimeout(timeout);
+        urlConn.setReadTimeout(timeout);
+        try (InputStream in = urlConn.getInputStream()) {
+            return IOUtils.toString(in, StandardCharsets.UTF_8);
         }
     }
 

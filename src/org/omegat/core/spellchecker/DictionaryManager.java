@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -49,6 +50,8 @@ import org.omegat.util.StaticUtils;
  * @author Didier Briel
  */
 public class DictionaryManager {
+
+    private static final int TIMEOUT_MS = 10_000;
 
     /** the directory string */
     private final File dir;
@@ -202,8 +205,8 @@ public class DictionaryManager {
         List<String> result = new ArrayList<String>();
 
         // download the file
-        String htmlfile = StaticUtils
-                .downloadFileToString(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
+        URL url = new URL(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
+        String htmlfile = StaticUtils.downloadFileToString(url, TIMEOUT_MS);
 
         // build a list of available language codes
         Matcher matcher = PatternConsts.DICTIONARY_ZIP.matcher(htmlfile);

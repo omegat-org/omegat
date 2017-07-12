@@ -52,7 +52,7 @@ public final class TagUtil {
 
     private static final Comparator<Tag> TAG_COMPARATOR = (o1, o2) -> o1.pos - o2.pos;
 
-    public static class Tag {
+    public static final class Tag {
         public final int pos;
         public final String tag;
 

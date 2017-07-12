@@ -268,7 +268,13 @@ public final class DragTargetOverlay {
             return handleFiles(filterFiles((List<?>) dropped));
         };
 
-        protected boolean handleFiles(final List<File> files) {
+        /**
+         * Handle the dropped files
+         *
+         * @param files
+         * @return whether any files were successfully handled
+         */
+        protected boolean handleFiles(List<File> files) {
             if (files.isEmpty()) {
                 return false;
             }

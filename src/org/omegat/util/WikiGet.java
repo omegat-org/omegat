@@ -79,7 +79,7 @@ public final class WikiGet {
      * Gets mediawiki wiki-code data from remote server. The get strategy is
      * determined by the url format.
      *
-     * @param remote_url
+     * @param remoteUrl
      *            string representation of well-formed URL of wikipage to be
      *            retrieved
      * @param projectdir
@@ -87,13 +87,13 @@ public final class WikiGet {
      *            file should be saved.
      * @throws IOException
      */
-    public static void doWikiGet(String remote_url, String projectdir) throws IOException {
+    public static void doWikiGet(String remoteUrl, String projectdir) throws IOException {
         String joined = null; // contains edited url
         String name = null; // contains a useful page name which we can use
                             // as our filename
-        if (remote_url.indexOf("index.php?title=") > 0) {
+        if (remoteUrl.indexOf("index.php?title=") > 0) {
             // We're directly calling the mediawiki index.php script
-            String[] splitted = remote_url.split("index.php\\?title=");
+            String[] splitted = remoteUrl.split("index.php\\?title=");
             String s = splitted[splitted.length - 1];
             name = s;
             s = s.replaceAll(" ", "_");
@@ -105,7 +105,7 @@ public final class WikiGet {
         } else {
             // assume script is behind some sort
             // of url-rewriting
-            String[] splitted = remote_url.split("/");
+            String[] splitted = remoteUrl.split("/");
             String s = splitted[splitted.length - 1];
             name = s;
             s = s.replaceAll(" ", "_");

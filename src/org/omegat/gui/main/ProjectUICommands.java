@@ -639,7 +639,7 @@ public final class ProjectUICommands {
                 Core.getMainWindow().showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
                 Core.getMainWindow().showProgressMessage(
                         Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                                MainWindowUI.STATUS_BAR_MODE.DEFAULT) == MainWindowUI.STATUS_BAR_MODE.DEFAULT
+                                MainWindowUI.StatusBarMode.DEFAULT) == MainWindowUI.StatusBarMode.DEFAULT
                         ? OStrings.getString("MW_PROGRESS_DEFAULT") : OStrings.getProgressBarDefaultPrecentageText());
 
                 return null;
@@ -899,16 +899,16 @@ public final class ProjectUICommands {
      * Does wikiread
      */
     public static void doWikiImport() {
-        String remote_url = JOptionPane.showInputDialog(Core.getMainWindow().getApplicationFrame(),
+        String remoteUrl = JOptionPane.showInputDialog(Core.getMainWindow().getApplicationFrame(),
                 OStrings.getString("TF_WIKI_IMPORT_PROMPT"),
                 OStrings.getString("TF_WIKI_IMPORT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
         String projectsource = Core.getProject().getProjectProperties().getSourceRoot();
-        if (remote_url == null || remote_url.trim().isEmpty()) {
+        if (remoteUrl == null || remoteUrl.trim().isEmpty()) {
             // [1762625] Only try to get MediaWiki page if a string has been entered
             return;
         }
         try {
-            WikiGet.doWikiGet(remote_url, projectsource);
+            WikiGet.doWikiGet(remoteUrl, projectsource);
             projectReload();
         } catch (Exception ex) {
             Log.log(ex);

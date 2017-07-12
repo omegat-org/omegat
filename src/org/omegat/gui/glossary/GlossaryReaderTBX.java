@@ -80,7 +80,7 @@ public final class GlossaryReaderTBX {
         }
     }
 
-    static SAXParserFactory SAX_FACTORY = SAXParserFactory.newInstance();
+    static final SAXParserFactory SAX_FACTORY = SAXParserFactory.newInstance();
     static {
         SAX_FACTORY.setNamespaceAware(true);
         SAX_FACTORY.setValidating(false);

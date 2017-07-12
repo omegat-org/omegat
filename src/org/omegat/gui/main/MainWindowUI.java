@@ -88,7 +88,7 @@ public final class MainWindowUI {
 
     public static final String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
 
-    public enum STATUS_BAR_MODE {
+    public enum StatusBarMode {
         DEFAULT,
         PERCENTAGE,
     };
@@ -195,12 +195,12 @@ public final class MainWindowUI {
 
         Border border = UIManager.getBorder("OmegaTStatusArea.border");
 
-        final STATUS_BAR_MODE progressMode = Preferences.getPreferenceEnumDefault(
-                Preferences.SB_PROGRESS_MODE, STATUS_BAR_MODE.DEFAULT);
+        final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(
+                Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
 
         String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
         String tooltipText = "MW_PROGRESS_TOOLTIP";
-        if (progressMode == STATUS_BAR_MODE.PERCENTAGE) {
+        if (progressMode == StatusBarMode.PERCENTAGE) {
             statusText = OStrings.getProgressBarDefaultPrecentageText();
             tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
         }
@@ -211,16 +211,16 @@ public final class MainWindowUI {
         mainWindow.progressLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                STATUS_BAR_MODE[] modes = STATUS_BAR_MODE.values();
-                STATUS_BAR_MODE progressMode = Preferences.getPreferenceEnumDefault(
-                        Preferences.SB_PROGRESS_MODE, STATUS_BAR_MODE.DEFAULT);
+                StatusBarMode[] modes = StatusBarMode.values();
+                StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(
+                        Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
                 progressMode = modes[(progressMode.ordinal() + 1) % modes.length];
 
                 Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
 
                 String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
                 String tooltipText = "MW_PROGRESS_TOOLTIP";
-                if (progressMode == STATUS_BAR_MODE.PERCENTAGE) {
+                if (progressMode == StatusBarMode.PERCENTAGE) {
                     statusText = OStrings.getProgressBarDefaultPrecentageText();
                     tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
                 }

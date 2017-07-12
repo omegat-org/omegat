@@ -54,7 +54,7 @@ public final class Log {
     private Log() {
     }
 
-    private static Logger LOGGER;
+    private static final Logger LOGGER;
 
     static {
         LOGGER = Logger.getLogger("global");

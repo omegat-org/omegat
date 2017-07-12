@@ -83,7 +83,7 @@ public final class ExternalFinder {
 
     public static final String FINDER_FILE = "finder.xml";
 
-    private static Logger LOGGER = Logger.getLogger(ExternalFinder.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ExternalFinder.class.getName());
 
     /**
      * OmegaT will call this method when loading.
@@ -142,7 +142,7 @@ public final class ExternalFinder {
                 menuItems.forEach(menu::remove);
                 menuItems.clear();
 
-                PROJECT_CONFIG = null;
+                projectConfig = null;
             }
         };
     }
@@ -165,7 +165,7 @@ public final class ExternalFinder {
     public static void unloadPlugins() {
     }
 
-    private static ExternalFinderConfiguration GLOBAL_CONFIG;
+    private static ExternalFinderConfiguration globalConfig;
 
     /**
      * Get the global configuration. This is stored in the user's OmegaT
@@ -175,21 +175,21 @@ public final class ExternalFinder {
      * @return The configuration (will never be null)
      */
     public static ExternalFinderConfiguration getGlobalConfig() {
-        if (GLOBAL_CONFIG == null) {
+        if (globalConfig == null) {
             try {
                 File globalFile = getGlobalConfigFile();
                 IExternalFinderItemLoader userItemLoader = new ExternalFinderXMLLoader(globalFile, SCOPE.GLOBAL);
-                GLOBAL_CONFIG = userItemLoader.load();
+                globalConfig = userItemLoader.load();
             } catch (FileNotFoundException e) {
                 // Ignore
             } catch (Exception e) {
                 LOGGER.log(Level.SEVERE, e.getMessage(), e);
             }
-            if (GLOBAL_CONFIG == null) {
-                GLOBAL_CONFIG = ExternalFinderConfiguration.empty();
+            if (globalConfig == null) {
+                globalConfig = ExternalFinderConfiguration.empty();
             }
         }
-        return GLOBAL_CONFIG;
+        return globalConfig;
     }
 
     /**
@@ -197,8 +197,8 @@ public final class ExternalFinder {
      * overwritten with the new one. Pass null to delete the config file.
      */
     public static void setGlobalConfig(ExternalFinderConfiguration newConfig) {
-        ExternalFinderConfiguration oldConfig = GLOBAL_CONFIG;
-        GLOBAL_CONFIG = newConfig;
+        ExternalFinderConfiguration oldConfig = globalConfig;
+        globalConfig = newConfig;
         if (!Objects.equals(newConfig, oldConfig)) {
             writeConfig(newConfig, getGlobalConfigFile());
         }
@@ -209,7 +209,7 @@ public final class ExternalFinder {
         return new File(configDir, FINDER_FILE);
     }
 
-    private static ExternalFinderConfiguration PROJECT_CONFIG;
+    private static ExternalFinderConfiguration projectConfig;
 
     /**
      * Get the project-specific configuration.
@@ -222,19 +222,19 @@ public final class ExternalFinder {
         if (!currentProject.isProjectLoaded()) {
             return null;
         }
-        if (PROJECT_CONFIG == null) {
+        if (projectConfig == null) {
             // load project's xml file
             File projectFile = getProjectFile(currentProject);
             IExternalFinderItemLoader projectItemLoader = new ExternalFinderXMLLoader(projectFile, SCOPE.PROJECT);
             try {
-                PROJECT_CONFIG = projectItemLoader.load();
+                projectConfig = projectItemLoader.load();
             } catch (FileNotFoundException e) {
                 // Ignore
             } catch (Exception e) {
                 LOGGER.log(Level.SEVERE, e.getMessage(), e);
             }
         }
-        return PROJECT_CONFIG;
+        return projectConfig;
     }
 
     /**
@@ -247,8 +247,8 @@ public final class ExternalFinder {
         if (!currentProject.isProjectLoaded()) {
             return;
         }
-        ExternalFinderConfiguration oldConfig = PROJECT_CONFIG;
-        PROJECT_CONFIG = newConfig;
+        ExternalFinderConfiguration oldConfig = projectConfig;
+        projectConfig = newConfig;
         if (!Objects.equals(newConfig, oldConfig)) {
             File projectFile = getProjectFile(currentProject);
             writeConfig(newConfig, projectFile);

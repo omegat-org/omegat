@@ -217,15 +217,15 @@ public final class PatternConsts {
     /**
      * combined pattern for all placeholder tags
      */
-    private static Pattern PLACEHOLDERS;
+    private static Pattern placeholders;
     /**
      * pattern for text that should be removed from translation. Can be null!
      */
-    private static Pattern REMOVE;
+    private static Pattern remove;
     /**
      * Pattern for text that should be considered a custom tag. Can be null!
      */
-    private static Pattern CUSTOM_TAGS;
+    private static Pattern customTags;
 
     /**
      * Returns the placeholder pattern (OmegaT tags, printf tags, java
@@ -235,7 +235,7 @@ public final class PatternConsts {
      * @see #updatePlaceholderPattern()
      */
     public static Pattern getPlaceholderPattern() {
-        if (PLACEHOLDERS == null) {
+        if (placeholders == null) {
             String regexp = RE_OMEGAT_TAG;
             if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
                 regexp += "|" + RE_PRINTF_VARS;
@@ -250,49 +250,49 @@ public final class PatternConsts {
             if (!"".equalsIgnoreCase(customRegExp)) {
                 regexp += "|" + customRegExp;
             }
-            PLACEHOLDERS = Pattern.compile(regexp);
+            placeholders = Pattern.compile(regexp);
         }
-        return PLACEHOLDERS;
+        return placeholders;
     }
 
     /**
      * Resets the placeholder pattern. Use it when the user has changed tagvalidation configuration.
      */
     public static void updatePlaceholderPattern() {
-        PLACEHOLDERS = null;
+        placeholders = null;
     }
 
     public static Pattern getRemovePattern() {
-        if (REMOVE == null) {
+        if (remove == null) {
             String removeRegExp = Preferences.getPreference(Preferences.CHECK_REMOVE_PATTERN);
             if (!"".equalsIgnoreCase(removeRegExp)) {
-                REMOVE = Pattern.compile(removeRegExp);
+                remove = Pattern.compile(removeRegExp);
             }
         }
-        return REMOVE;
+        return remove;
     }
 
     /**
      * Resets the remove pattern. Use it when the user has changed tagvalidation configuration.
      */
     public static void updateRemovePattern() {
-        REMOVE = null;
+        remove = null;
     }
 
     public static Pattern getCustomTagPattern() {
-        if (CUSTOM_TAGS == null) {
+        if (customTags == null) {
             String customTagsRegex = Preferences.getPreference(Preferences.CHECK_CUSTOM_PATTERN);
             if (!"".equalsIgnoreCase(customTagsRegex)) {
-                CUSTOM_TAGS = Pattern.compile(customTagsRegex);
+                customTags = Pattern.compile(customTagsRegex);
             }
         }
-        return CUSTOM_TAGS;
+        return customTags;
     }
 
     /**
      * Resets the remove pattern. Use it when the user has changed tagvalidation configuration.
      */
     public static void updateCustomTagPattern() {
-        CUSTOM_TAGS = null;
+        customTags = null;
     }
 }

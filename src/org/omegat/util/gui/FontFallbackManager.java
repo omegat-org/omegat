@@ -57,19 +57,19 @@ public final class FontFallbackManager {
 
     private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());
 
-    private static final Font[] recentFonts = new Font[8];
+    private static final Font[] RECENT_FONTS = new Font[8];
     private static int lastFontIndex = 0;
-    private static final Map<Integer, Font> cache = new ConcurrentHashMap<>();
+    private static final Map<Integer, Font> CACHE = new ConcurrentHashMap<>();
 
     public static Font getCapableFont(int cp) {
         // Skip variation selectors
         if (cp >= '\uFE00' && cp <= '\uFE0F') {
             return null;
         }
-        if (cache.isEmpty()) {
+        if (CACHE.isEmpty()) {
             // Prevent concurrent accesses just the first time, so that we don't
             // get multiple expensive full-searches of the font list.
-            synchronized (cache) {
+            synchronized (CACHE) {
                 return getCapableFontInternal(cp);
             }
         } else {
@@ -81,17 +81,17 @@ public final class FontFallbackManager {
         // Iterate backwards through recent fonts.
         // Presumably, most fallback chars in a given document will be the same
         // language/script/etc. so they are likely to be included in the same font.
-        for (int testIndex, i = 0; i < recentFonts.length; i++) {
-            testIndex = (lastFontIndex - i + recentFonts.length) % recentFonts.length;
-            Font font = recentFonts[testIndex];
+        for (int testIndex, i = 0; i < RECENT_FONTS.length; i++) {
+            testIndex = (lastFontIndex - i + RECENT_FONTS.length) % RECENT_FONTS.length;
+            Font font = RECENT_FONTS[testIndex];
             if (font != null && font.canDisplay(cp)) {
                 lastFontIndex = testIndex;
-                cache.put(cp, font);
+                CACHE.put(cp, font);
                 return font;
             }
         }
         // Try cache in case we've seen this codepoint before.
-        Font cachedFont = cache.get(cp);
+        Font cachedFont = CACHE.get(cp);
         if (cachedFont == FONT_UNAVAILABLE) {
             return null;
         }
@@ -108,7 +108,7 @@ public final class FontFallbackManager {
         Optional<Font> font = Stream.of(allFonts).parallel().filter(f -> {
             return f.canDisplay(cp) && !FONT_BLACKLIST.contains(f.getFamily());
         }).findFirst();
-        cache.put(cp, font.orElse(FONT_UNAVAILABLE));
+        CACHE.put(cp, font.orElse(FONT_UNAVAILABLE));
         font.ifPresent(FontFallbackManager::addRecentFont);
         LOGGER.fine(() -> font.isPresent()
                 ? String.format("Search found %s in %d ms", font.get().getFamily(),
@@ -119,7 +119,7 @@ public final class FontFallbackManager {
     }
 
     private static void addRecentFont(Font font) {
-        lastFontIndex = (lastFontIndex + 1) % recentFonts.length;
-        recentFonts[lastFontIndex] = font;
+        lastFontIndex = (lastFontIndex + 1) % RECENT_FONTS.length;
+        RECENT_FONTS[lastFontIndex] = font;
     }
 }

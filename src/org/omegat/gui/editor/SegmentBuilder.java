@@ -604,7 +604,7 @@ public class SegmentBuilder {
      * @return changed mark text
      */
     private String createSegmentMarkText() {
-        String text = OConsts.segmentMarkerString;
+        String text = OConsts.SEGMENT_MARKER_STRING;
 
         //replace placeholder with actual segment number
         if (text.contains("0000")) {

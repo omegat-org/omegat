@@ -113,7 +113,7 @@ public final class Core {
     private static FilterMaster filterMaster;
 
     protected static IAutoSave saveThread;
-    private static final ReentrantLock exclusiveRunLock = new ReentrantLock();
+    private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
 
     protected static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
@@ -127,9 +127,10 @@ public final class Core {
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
-    private static List<String> pluginsLoadingErrors = Collections.synchronizedList(new ArrayList<String>());
+    private static final List<String> PLUGINS_LOADING_ERRORS = Collections
+            .synchronizedList(new ArrayList<String>());
 
-    private static final List<IMarker> markers = new ArrayList<IMarker>();
+    private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
 
     /** Get project instance. */
     public static IProject getProject() {
@@ -314,11 +315,11 @@ public final class Core {
      *            marker implementation
      */
     public static void registerMarker(IMarker marker) {
-        markers.add(marker);
+        MARKERS.add(marker);
     }
 
     public static List<IMarker> getMarkers() {
-        return markers;
+        return MARKERS;
     }
 
     public static Map<String, String> getParams() {
@@ -345,14 +346,14 @@ public final class Core {
      * Get all plugin loading errors.
      */
     public static List<String> getPluginsLoadingErrors() {
-        return pluginsLoadingErrors;
+        return PLUGINS_LOADING_ERRORS;
     }
 
     /**
      * Any plugin can call this method for say about error on loading.
      */
     public static void pluginLoadingError(String errorText) {
-        pluginsLoadingErrors.add(errorText);
+        PLUGINS_LOADING_ERRORS.add(errorText);
     }
 
     /**
@@ -371,13 +372,13 @@ public final class Core {
      */
     public static void executeExclusively(boolean waitForUnlock, Runnable run)
             throws InterruptedException, TimeoutException {
-        if (!exclusiveRunLock.tryLock(waitForUnlock ? 180000 : 1, TimeUnit.MILLISECONDS)) {
+        if (!EXCLUSIVE_RUN_LOCK.tryLock(waitForUnlock ? 180000 : 1, TimeUnit.MILLISECONDS)) {
             throw new TimeoutException();
         }
         try {
             run.run();
         } finally {
-            exclusiveRunLock.unlock();
+            EXCLUSIVE_RUN_LOCK.unlock();
         }
     }
 }

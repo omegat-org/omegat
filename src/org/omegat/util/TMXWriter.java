@@ -60,20 +60,20 @@ public final class TMXWriter {
      * @param levelTwo
      *            When true, the tmx is made compatible with level 2 (TMX
      *            version 1.4)
-     * @param m_config
+     * @param config
      *            Project configuration, to get the languages
      * @param data
      *            Data for save to TMX, a map of {source segments, translation}
      * @throws IOException
      */
     public static void buildTMXFile(final String filename, final boolean forceValidTMX,
-            final boolean levelTwo, final ProjectProperties m_config, final Map<String, PrepareTMXEntry> data)
+            final boolean levelTwo, final ProjectProperties config, final Map<String, PrepareTMXEntry> data)
             throws IOException {
         // we got this far, so assume lang codes are proper
-        String sourceLocale = m_config.getSourceLanguage().toString();
-        String targetLocale = m_config.getTargetLanguage().toString();
+        String sourceLocale = config.getSourceLanguage().toString();
+        String targetLocale = config.getTargetLanguage().toString();
         String segmenting;
-        if (m_config.isSentenceSegmentingEnabled()) {
+        if (config.isSentenceSegmentingEnabled()) {
             segmenting = "sentence";
         } else {
             segmenting = "paragraph";

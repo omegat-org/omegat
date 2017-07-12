@@ -61,9 +61,9 @@ public class ScriptItem implements Comparable<ScriptItem> {
     private static final String PROPERTIES = "properties/";
 
     public ScriptItem(File scriptFile) {
-        m_file = scriptFile;
+        mFile = scriptFile;
 
-        if (m_file == null) {
+        if (mFile == null) {
             return;
         }
 
@@ -71,10 +71,10 @@ public class ScriptItem implements Comparable<ScriptItem> {
             ClassLoader loader = new URLClassLoader(new URL[]{scriptFile.getParentFile().toURI().toURL()});
             String shortName = FilenameUtils.removeExtension(scriptFile.getName());
             try { // Try first at the root of the script dir, for compatibility
-                m_res = ResourceBundle.getBundle(shortName, Locale.getDefault(), loader);
+                mRes = ResourceBundle.getBundle(shortName, Locale.getDefault(), loader);
             } catch (MissingResourceException e) {
                 try { // Then inside the /properties dir
-                    m_res = ResourceBundle.getBundle(PROPERTIES  + shortName, Locale.getDefault(), loader);
+                    mRes = ResourceBundle.getBundle(PROPERTIES  + shortName, Locale.getDefault(), loader);
                 } catch (MissingResourceException ex) {
                     scanFileForDescription(scriptFile);
                 }
@@ -88,8 +88,8 @@ public class ScriptItem implements Comparable<ScriptItem> {
         try (Scanner scan = new Scanner(file, StandardCharsets.UTF_8.name())) {
             scan.findInLine(":name\\s*=\\s*(.*)\\s+:description\\s*=\\s*(.*)");
             MatchResult results = scan.match();
-            m_scriptName = results.group(1).trim();
-            m_description = results.group(2).trim();
+            mScriptName = results.group(1).trim();
+            mDescription = results.group(2).trim();
         } catch (IllegalStateException e) {
             /* bad luck */
         } catch (FileNotFoundException e) {
@@ -98,8 +98,8 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     public ResourceBundle getResourceBundle() {
-        if (m_res != null) {
-            return m_res;
+        if (mRes != null) {
+            return mRes;
         }
 
         // Create empty resource for confirmation
@@ -119,35 +119,35 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     public String getScriptName() {
-        if (m_scriptName == null) {
-            String name = m_file.getName();
-            if (m_res != null) {
+        if (mScriptName == null) {
+            String name = mFile.getName();
+            if (mRes != null) {
                 try {
-                    name = m_res.getString("name");
+                    name = mRes.getString("name");
                 } catch (MissingResourceException ignore) {
                 }
             }
-            m_scriptName = name;
+            mScriptName = name;
         }
-        return m_scriptName;
+        return mScriptName;
     }
 
     public File getFile() {
-        return m_file;
+        return mFile;
     }
 
     public String getDescription() {
-        if (m_description != null) {
-            return m_description;
+        if (mDescription != null) {
+            return mDescription;
         }
 
         try {
-            m_description = m_res == null ? "" : m_res.getString("description");
+            mDescription = mRes == null ? "" : mRes.getString("description");
         } catch (MissingResourceException e) {
-            m_description = "";
+            mDescription = "";
         }
 
-        return m_description;
+        return mDescription;
     }
 
     public String getToolTip() {
@@ -158,7 +158,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
 
     public String getText() throws FileNotFoundException, IOException {
         StringBuilder sb = new StringBuilder();
-        try (LinebreakPreservingReader lpin = getUTF8LinebreakPreservingReader(m_file)) {
+        try (LinebreakPreservingReader lpin = getUTF8LinebreakPreservingReader(mFile)) {
             String s = lpin.readLine();
             if (s != null) {
                 startsWithBOM = s.startsWith(BOM);
@@ -193,7 +193,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
             text = BOM + text;
         }
 
-        FileUtils.writeStringToFile(m_file, text, StandardCharsets.UTF_8);
+        FileUtils.writeStringToFile(mFile, text, StandardCharsets.UTF_8);
     }
 
     @Override
@@ -210,8 +210,8 @@ public class ScriptItem implements Comparable<ScriptItem> {
     private boolean startsWithBOM = false;
     private String lineBreak = System.lineSeparator();
 
-    private File m_file = null;
-    private String m_scriptName = null;
-    private String m_description = null;
-    private ResourceBundle m_res = null;
+    private File mFile = null;
+    private String mScriptName = null;
+    private String mDescription = null;
+    private ResourceBundle mRes = null;
 }

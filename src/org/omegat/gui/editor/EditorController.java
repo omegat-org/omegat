@@ -988,11 +988,11 @@ public class EditorController implements IEditor {
 
         StatisticsInfo stat = project.getStatistics();
 
-        final MainWindowUI.STATUS_BAR_MODE progressMode =
+        final MainWindowUI.StatusBarMode progressMode =
                 Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                        MainWindowUI.STATUS_BAR_MODE.DEFAULT);
+                        MainWindowUI.StatusBarMode.DEFAULT);
 
-        if (progressMode == MainWindowUI.STATUS_BAR_MODE.DEFAULT) {
+        if (progressMode == MainWindowUI.StatusBarMode.DEFAULT) {
             StringBuilder pMsg = new StringBuilder(1024).append(" ");
             pMsg.append(translatedInFile).append("/").append(fi.entries.size()).append(" (")
                     .append(stat.numberofTranslatedSegments).append("/").append(stat.numberOfUniqueSegments)

@@ -68,7 +68,7 @@ public final class DragTargetOverlay {
     private DragTargetOverlay() {
     }
 
-    private static int MARGIN = 0;
+    private static final int MARGIN = 0;
 
     public static void apply(final JComponent comp, final IDropInfo info) {
         DropTargetListener listener = new DropTargetAdapter() {

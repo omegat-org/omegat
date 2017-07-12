@@ -188,7 +188,7 @@ public final class OConsts {
      */
     public static final int MAX_PARENT_DIRECTORIES_ABS2REL = 5;
 
-    public static final String segmentMarkerString = "<" + OStrings.getSegmentMarker() + ">";
+    public static final String SEGMENT_MARKER_STRING = "<" + OStrings.getSegmentMarker() + ">";
 
     /** Max number of recent projects to remember */
     public static final int MAX_RECENT_PROJECTS = 5;

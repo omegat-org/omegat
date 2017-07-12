@@ -84,18 +84,21 @@ public final class TMXWriter {
                                                 // Buff.Writer
 
         String version = OStrings.VERSION;
-        if (!OStrings.UPDATE.equals("0"))
+        if (!OStrings.UPDATE.equals("0")) {
             version = version + "_" + OStrings.UPDATE;
+        }
         // Write TMX header
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        if (levelTwo)
+        if (levelTwo) {
             out.println("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">");
-        else
+        } else {
             out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");
-        if (levelTwo)
+        }
+        if (levelTwo) {
             out.println("<tmx version=\"1.4\">");
-        else
+        } else {
             out.println("<tmx version=\"1.1\">");
+        }
         out.println("  <header");
         out.println("    creationtool=\"OmegaT\"");
         out.println("    creationtoolversion=\"" + version + "\"");

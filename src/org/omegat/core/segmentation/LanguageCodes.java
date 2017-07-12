@@ -108,8 +108,9 @@ public final class LanguageCodes {
      *            language code
      */
     public static String getLanguageName(String code) {
-        if (!codeKeyHash.containsKey(code))
+        if (!codeKeyHash.containsKey(code)) {
             return code;
+        }
         String key = codeKeyHash.get(code);
         return OStrings.getString(key);
     }

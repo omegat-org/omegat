@@ -111,15 +111,16 @@ public final class TransTips {
                 if (isWordAlone(content, lastIndex, word)) {
                     callback.found(glossaryEntry, lastIndex, endIndex);
 
-                    if (firstOffset == -1)
+                    if (firstOffset == -1) {
                         firstOffset = lastIndex;
+                    }
                 }
             } else {
                 callback.found(glossaryEntry, lastIndex, endIndex);
 
-                if (firstOffset == -1)
+                if (firstOffset == -1) {
                     firstOffset = lastIndex;
-
+                }
             }
 
             lastIndex = endIndex;

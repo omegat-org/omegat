@@ -116,10 +116,11 @@ public class UnderlineFactory {
         public Shape paintLayer(Graphics g, int offs0, int offs1, Shape bounds, JTextComponent c, View view) {
             Rectangle rect = null;
             if (offs0 == view.getStartOffset() && offs1 == view.getEndOffset()) {
-                if (bounds instanceof Rectangle)
+                if (bounds instanceof Rectangle) {
                     rect = (Rectangle) bounds;
-                else
+                } else {
                     rect = bounds.getBounds();
+                }
             } else {
                 try {
                     Shape shape = view.modelToView(offs0, Position.Bias.Forward, offs1,

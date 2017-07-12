@@ -64,13 +64,15 @@ public final class WikiGet {
      * best be moved to a different file
      */
     public static String joinString(String separator, String[] items) {
-        if (items.length < 1)
+        if (items.length < 1) {
             return "";
+        }
         StringBuilder joined = new StringBuilder();
         for (int i = 0; i < items.length; i++) {
             joined.append(items[i]);
-            if (i != items.length - 1)
+            if (i != items.length - 1) {
                 joined.append(separator);
+            }
         }
         return joined.toString();
     }

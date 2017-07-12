@@ -109,8 +109,9 @@ public final class MainWindowUI {
         mainWindow.desktop = new DockingDesktop();
         mainWindow.desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener() {
             public void dockableStateWillChange(DockableStateWillChangeEvent event) {
-                if (event.getFutureState().isClosed())
+                if (event.getFutureState().isClosed()) {
                     event.cancel();
+                }
             }
         });
 

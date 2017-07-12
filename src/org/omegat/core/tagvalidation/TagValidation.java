@@ -68,7 +68,8 @@ public final class TagValidation {
 
     public static void inspectPrintfVariables(boolean simpleCheckOnly, ErrorReport report) {
 
-        Pattern printfPattern = simpleCheckOnly? PatternConsts.SIMPLE_PRINTF_VARS : PatternConsts.PRINTF_VARS;
+        Pattern printfPattern = simpleCheckOnly ? PatternConsts.SIMPLE_PRINTF_VARS
+                : PatternConsts.PRINTF_VARS;
 
         // printf variables should be equal in number,
         // but order can change

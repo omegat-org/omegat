@@ -226,11 +226,11 @@ public final class MainWindowUI {
                 }
 
                 if (Core.getProject().isProjectLoaded()) {
-                    ((EditorController)Core.getEditor()).showStat();
+                    ((EditorController) Core.getEditor()).showStat();
                 } else {
                     Core.getMainWindow().showProgressMessage(statusText);
                 }
-                ((MainWindow)Core.getMainWindow()).setProgressToolTipText(OStrings.getString(tooltipText));
+                ((MainWindow) Core.getMainWindow()).setProgressToolTipText(OStrings.getString(tooltipText));
             }
         });
 

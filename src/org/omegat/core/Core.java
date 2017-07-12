@@ -369,7 +369,8 @@ public final class Core {
      * @throws InterruptedException,
      *             TimeoutException
      */
-    public static void executeExclusively(boolean waitForUnlock, Runnable run) throws InterruptedException, TimeoutException {
+    public static void executeExclusively(boolean waitForUnlock, Runnable run)
+            throws InterruptedException, TimeoutException {
         if (!exclusiveRunLock.tryLock(waitForUnlock ? 180000 : 1, TimeUnit.MILLISECONDS)) {
             throw new TimeoutException();
         }

@@ -57,7 +57,7 @@ public final class MainMenuIcons {
             originalHints = new RenderingHints(null);
             try {
                 defaultHints = (Map) Toolkit.getDefaultToolkit().getDesktopProperty("awt.font.desktophints");
-            } catch(AWTError ignore) {
+            } catch (AWTError ignore) {
             } finally {
                 if (defaultHints == null) {
                     defaultHints = new RenderingHints(null);

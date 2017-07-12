@@ -392,8 +392,8 @@ public class PreferencesWindowController implements FurtherActionListener {
 
     private static void placePluginView(HideableNode root, IPreferencesController view) {
         Class<? extends IPreferencesController> parentClass = view.getParentViewClass();
-        Class<? extends IPreferencesController> effectiveParentClass = parentClass == null ? PluginsPreferencesController.class
-                : parentClass;
+        Class<? extends IPreferencesController> effectiveParentClass = parentClass == null
+                ? PluginsPreferencesController.class : parentClass;
         walkTree(root, node -> {
             IPreferencesController parent = (IPreferencesController) node.getUserObject();
             if (parent != null && parent.getClass().equals(effectiveParentClass)) {

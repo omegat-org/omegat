@@ -126,7 +126,7 @@ public final class ModificationInfoManager {
         timeFormatShort = DateFormat.getTimeInstance(DateFormat.SHORT, defaultLocale);
 
         Locale[] locales = Locale.getAvailableLocales();
-        for(Locale l : locales) {
+        for (Locale l : locales) {
             if (l.getCountry().equals(defaultLocale.getCountry())) {
                 defaultLocale = l;
                 break;
@@ -141,8 +141,8 @@ public final class ModificationInfoManager {
     public static void reset() {
         defaultTemplate = new ModificationInfoVarExpansion(
                 Preferences.getPreferenceDefault(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE, DEFAULT_TEMPLATE));
-        defaultTemplateND = new ModificationInfoVarExpansion(
-                Preferences.getPreferenceDefault(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE_WO_DATE, DEFAULT_TEMPLATE_NO_DATE));
+        defaultTemplateND = new ModificationInfoVarExpansion(Preferences.getPreferenceDefault(
+                Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE_WO_DATE, DEFAULT_TEMPLATE_NO_DATE));
     }
 
     public static String apply(TMXEntry trans) {
@@ -164,7 +164,8 @@ public final class ModificationInfoManager {
             Date creationDate = new Date(trans.creationDate);
             Date changeDate = new Date(trans.changeDate);
 
-            String localTemplate = this.template; // do not modify template directly, so that we can reuse for another change
+            // do not modify template directly, so that we can reuse for another change
+            String localTemplate = this.template;
 
             localTemplate = localTemplate.replace(VAR_CREATION_ID, trans.creator == null
                     ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.creator);

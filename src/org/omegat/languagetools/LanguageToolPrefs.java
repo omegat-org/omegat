@@ -44,7 +44,6 @@ public final class LanguageToolPrefs {
     public static final BridgeType DEFAULT_BRIDGE_TYPE = BridgeType.NATIVE;
 
     private LanguageToolPrefs() {
-
     }
 
     public static void disableRule(String ruleId, String languageCode) {

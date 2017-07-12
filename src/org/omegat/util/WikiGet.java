@@ -231,12 +231,12 @@ public final class WikiGet {
         } else {
             StringBuilder s = new StringBuilder();
             s.append(address).append('?');
-            boolean next=false;
+            boolean next = false;
             for (Map.Entry<String, String> p : params.entrySet()) {
                 if (next) {
                     s.append('&');
-                }else {
-                    next=true;
+                } else {
+                    next = true;
                 }
                 s.append(p.getKey());
                 s.append('=');

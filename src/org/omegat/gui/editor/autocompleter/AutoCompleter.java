@@ -244,7 +244,7 @@ public class AutoCompleter implements IAutoCompleter {
             int pos = Math.min(editor.getCaret().getDot(), editor.getCaret().getMark());
             x = editor.getUI().modelToView(editor, pos).x;
             y = editor.getUI().modelToView(editor, editor.getCaret().getDot()).y + fontSize;
-        } catch(BadLocationException e) {
+        } catch (BadLocationException e) {
             // this should never happen!!!
             Log.log(e);
         }

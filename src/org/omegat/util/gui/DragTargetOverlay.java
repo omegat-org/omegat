@@ -111,13 +111,15 @@ public final class DragTargetOverlay {
             }
 
             @Override
-            public void drop(DropTargetDropEvent dtde) {}
+            public void drop(DropTargetDropEvent dtde) {
+            }
         };
 
         addListener(comp, listener);
     }
 
-    private static JPanel createOverlayPanel(final JComponent comp, final JLayeredPane layeredPane, final IDropInfo info) {
+    private static JPanel createOverlayPanel(final JComponent comp, final JLayeredPane layeredPane,
+            final IDropInfo info) {
         final JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         JLabel label = new JLabel("<html><center>" + info.getOverlayMessage() + "</center></html>");

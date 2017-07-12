@@ -175,7 +175,8 @@ public final class JTextPaneLinkifier {
         }
 
         @Override
-        public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+        public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+                throws BadLocationException {
             super.insertString(fb, offset, string, attr);
 
             if (attr != null && attr.isDefined(StyleConstants.ComposedTextAttribute)) {
@@ -206,7 +207,8 @@ public final class JTextPaneLinkifier {
         }
 
         @Override
-        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+                throws BadLocationException {
             super.replace(fb, offset, length, text, attrs);
 
             if (fb.getDocument().getLength() != 0) {

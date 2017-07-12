@@ -98,7 +98,7 @@ public final class TagUtil {
         }
 
         public String getPairedTag() {
-            switch(getType()) {
+            switch (getType()) {
             case START:
                 return "</" + getName() + ">";
             case END:
@@ -171,7 +171,7 @@ public final class TagUtil {
         public final TagType type;
         public final String name;
 
-        public TagInfo (String name, TagType type) {
+        public TagInfo(String name, TagType type) {
             this.name = name;
             this.type = type;
         }

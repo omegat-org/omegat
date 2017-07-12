@@ -142,7 +142,7 @@ public final class Log {
         Handler[] hand = LOGGER.getParent().getHandlers();
         if (hand[1] instanceof OmegaTFileHandler) {
             OmegaTFileHandler omegatLog = (OmegaTFileHandler) hand[1];
-            return omegatLog.getOmegaTLogFileName()+ ".log";
+            return omegatLog.getOmegaTLogFileName() + ".log";
         } else {
             return "";
         }

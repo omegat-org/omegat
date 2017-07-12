@@ -179,7 +179,8 @@ public class ScriptItem implements Comparable<ScriptItem> {
         return sb.toString();
     }
 
-    private LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file) throws FileNotFoundException, UnsupportedEncodingException {
+    private LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file)
+            throws FileNotFoundException, UnsupportedEncodingException {
         InputStream is = new FileInputStream(file);
         InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
         BufferedReader in = new BufferedReader(isr);

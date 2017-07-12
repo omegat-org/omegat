@@ -133,9 +133,8 @@ public final class TMXWriter {
                 source = makeLevelTwo(source);
                 target = makeLevelTwo(target);
             }
-            String changeIdPropertyString = (transEntry.changer != null && !"".equals(transEntry.changer) ? " changeid=\""
-                    + transEntry.changer + "\""
-                    : "");
+            String changeIdPropertyString = (transEntry.changer != null && !"".equals(transEntry.changer)
+                    ? " changeid=\"" + transEntry.changer + "\"" : "");
             String changeDatePropertyString = (transEntry.changeDate != 0 ? " changedate=\""
                     + dateParser.getTMXDate(transEntry.changeDate) + "\"" : "");
             out.println("    <tu>");

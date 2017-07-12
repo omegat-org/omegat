@@ -137,7 +137,7 @@ public class TagValidation {
     public static void inspectOmegaTTags(SourceTextEntry ste, ErrorReport report) {
         // extract tags from src and loc string
         List<Tag> srcTags = TagUtil.buildTagList(report.source, ste.getProtectedParts());
-        List<Tag> locTags = TagUtil.buildTagList(report.translation, ste.getProtectedParts());
+        List<Tag> locTags = new ArrayList<>(TagUtil.buildTagList(report.translation, ste.getProtectedParts()));
         // Add extra tags in target that are not in protected parts
         TagUtil.addExtraTags(locTags, srcTags, report.translation);
 

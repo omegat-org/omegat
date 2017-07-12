@@ -109,36 +109,36 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             + VAR_SCORE_ADJUSTED + "% "
             + VAR_FILE_PATH + ">";
 
-    public static final Pattern patternSingleProperty = Pattern.compile("@\\{(.+?)\\}");
-    public static final Pattern patternPropertyGroup = Pattern.compile("@\\[(.+?)\\]\\[(.+?)\\]\\[(.+?)\\]");
+    public static final Pattern PATTERN_SINGLE_PROPERTY = Pattern.compile("@\\{(.+?)\\}");
+    public static final Pattern PATTERN_PROPERTY_GROUP = Pattern.compile("@\\[(.+?)\\]\\[(.+?)\\]\\[(.+?)\\]");
 
     private static Replacer sourceTextReplacer = new Replacer() {
-        public void replace(Result R, NearString match) {
-            R.sourcePos = R.text.indexOf(VAR_SOURCE_TEXT);
-            R.text = R.text.replace(VAR_SOURCE_TEXT, match.source);
+        public void replace(Result r, NearString match) {
+            r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
+            r.text = r.text.replace(VAR_SOURCE_TEXT, match.source);
         }
     };
 
     private static Replacer diffReplacer = new Replacer() {
-        public void replace(Result R, NearString match) {
-            int diffPos = R.text.indexOf(VAR_DIFF);
+        public void replace(Result r, NearString match) {
+            int diffPos = r.text.indexOf(VAR_DIFF);
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
             if (diffPos != -1 && ste != null) {
                 Render diffRender = DiffDriver.render(match.source, ste.getSrcText(), true);
-                R.diffInfo.put(diffPos, diffRender.formatting);
-                R.text = R.text.replace(VAR_DIFF, diffRender.text);
+                r.diffInfo.put(diffPos, diffRender.formatting);
+                r.text = r.text.replace(VAR_DIFF, diffRender.text);
             }
         }
     };
 
     private static Replacer diffReversedReplacer = new Replacer() {
-        public void replace(Result R, NearString match) {
-            int diffPos = R.text.indexOf(VAR_DIFF_REVERSED);
+        public void replace(Result r, NearString match) {
+            int diffPos = r.text.indexOf(VAR_DIFF_REVERSED);
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
             if (diffPos != -1 && ste != null) {
                 Render diffRender = DiffDriver.render(ste.getSrcText(), match.source, true);
-                R.diffInfo.put(diffPos, diffRender.formatting);
-                R.text = R.text.replace(VAR_DIFF_REVERSED, diffRender.text);
+                r.diffInfo.put(diffPos, diffRender.formatting);
+                r.text = r.text.replace(VAR_DIFF_REVERSED, diffRender.text);
             }
         }
     };
@@ -154,7 +154,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
 
     /** A simple interface for making anonymous functions that perform string replacements. */
     private interface Replacer {
-        public void replace(Result R, NearString match);
+        void replace(Result r, NearString match);
     }
 
     // ------------------------------ non-static part -------------------
@@ -162,7 +162,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     /** A sorted map that ensures styled replacements are performed in the order of appearance. */
     private Map<Integer, Replacer> styledComponents = new TreeMap<Integer, Replacer>();
 
-    public MatchesVarExpansion (String template) {
+    public MatchesVarExpansion(String template) {
         super(template);
 
     }
@@ -179,24 +179,27 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
      * @param props Map of properties
      * @return Expanded template
      */
-    public String expandProperties (String localTemplate, List<TMXProp> props) {
+    public String expandProperties(String localTemplate, List<TMXProp> props) {
         Matcher matcher;
-        while ((matcher = patternSingleProperty.matcher(localTemplate)).find()) {
+        while ((matcher = PATTERN_SINGLE_PROPERTY.matcher(localTemplate)).find()) {
             String value = getPropValue(props, matcher.group(1));
-            localTemplate = localTemplate.replace (matcher.group(), value == null ? "" : value);
+            localTemplate = localTemplate.replace(matcher.group(), value == null ? "" : value);
         }
-        while ((matcher = patternPropertyGroup.matcher(localTemplate)).find()) {
-            String patternStr = matcher.group(1), separator1 = matcher.group(2), separator2 = matcher.group(3);
-            separator1 = separator1.replace("\\n","\n");
-            separator2 = separator2.replace("\\n","\n");
-            Pattern pattern = Pattern.compile(patternStr.replace("*","(.*)").replace("?","(.)"));
+        while ((matcher = PATTERN_PROPERTY_GROUP.matcher(localTemplate)).find()) {
+            String patternStr = matcher.group(1), separator1 = matcher.group(2),
+                    separator2 = matcher.group(3);
+            separator1 = separator1.replace("\\n", "\n");
+            separator2 = separator2.replace("\\n", "\n");
+            Pattern pattern = Pattern.compile(patternStr.replace("*", "(.*)").replace("?", "(.)"));
             StringBuilder res = new StringBuilder();
-            for (TMXProp me: props) {
-                if (pattern.matcher(me.getType().toString()).matches())
+            for (TMXProp me : props) {
+                if (pattern.matcher(me.getType().toString()).matches()) {
                     res.append(me.getType()).append(separator1).append(me.getValue()).append(separator2);
+                }
             }
-            if (res.toString().endsWith(separator2))
+            if (res.toString().endsWith(separator2)) {
                 res.replace(res.toString().lastIndexOf(separator2), res.length(), "");
+            }
             localTemplate = localTemplate.replace(matcher.group(), res.toString());
         }
         return localTemplate;
@@ -212,29 +215,35 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     @Override
-    public String expandVariables (NearString match) {
-        String localTemplate = this.template; // do not modify template directly, so that we can reuse for another change
+    public String expandVariables(NearString match) {
+        // do not modify template directly, so that we can reuse for another change
+        String localTemplate = this.template;
         localTemplate = localTemplate.replace(VAR_INITIAL_CREATION_ID, match.creator == null ? "" : match.creator);
         // VAR_CREATION_ID is an alias for VAR_CHANGED_ID, for backwards compatibility.
         for (String s : new String[] {VAR_CHANGED_ID, VAR_CREATION_ID}) {
             localTemplate = localTemplate.replace(s, match.changer == null ? "" : match.changer);
         }
-        if (match.creationDate > 0)
-            localTemplate = localTemplate.replace(VAR_INITIAL_CREATION_DATE, DateFormat.getInstance().format(new Date (match.creationDate)));
-        else
+        if (match.creationDate > 0) {
+            localTemplate = localTemplate.replace(VAR_INITIAL_CREATION_DATE,
+                    DateFormat.getInstance().format(new Date(match.creationDate)));
+        } else {
             localTemplate = localTemplate.replace(VAR_INITIAL_CREATION_DATE, "");
+        }
         // VAR_CREATION_DATE is an alias for VAR_CHANGED_DATE, for backwards compatibility.
-        for (String s : new String[] {VAR_CHANGED_DATE, VAR_CREATION_DATE}) {
-            if (match.changedDate > 0)
-                localTemplate = localTemplate.replace(s, DateFormat.getInstance().format(new Date (match.changedDate)));
-            else
+        for (String s : new String[] { VAR_CHANGED_DATE, VAR_CREATION_DATE }) {
+            if (match.changedDate > 0) {
+                localTemplate = localTemplate.replace(s,
+                        DateFormat.getInstance().format(new Date(match.changedDate)));
+            } else {
                 localTemplate = localTemplate.replace(s, "");
+            }
         }
         localTemplate = localTemplate.replace(VAR_SCORE_BASE, Integer.toString(match.scores[0].score));
         localTemplate = localTemplate.replace(VAR_SCORE_NOSTEM, Integer.toString(match.scores[0].scoreNoStem));
         localTemplate = localTemplate.replace(VAR_SCORE_ADJUSTED, Integer.toString(match.scores[0].adjustedScore));
         localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
-        localTemplate = localTemplate.replace(VAR_FUZZY_FLAG, match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : "");
+        localTemplate = localTemplate.replace(VAR_FUZZY_FLAG,
+                match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : "");
         ProjectProperties props = Core.getProject().getProjectProperties();
         if (props != null) {
             localTemplate = expandFileNames(localTemplate, match.projs, props.getTMRoot());
@@ -243,29 +252,29 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     public Result apply(NearString match, int id) {
-        Result R = new Result();
+        Result r = new Result();
         styledComponents.clear();
 
         // Variables
-        R.text = this.expandVariables(match);
-        R.text = R.text.replace(VAR_ID, Integer.toString(id));
+        r.text = this.expandVariables(match);
+        r.text = r.text.replace(VAR_ID, Integer.toString(id));
 
         // Properties (<prop type='xxx'>value</prop>)
         if (match.props != null) {
-            R.text = expandProperties(R.text, match.props);
+            r.text = expandProperties(r.text, match.props);
         } else {
-            R.text = R.text.replaceAll(patternSingleProperty.pattern(), "");
-            R.text = R.text.replaceAll(patternPropertyGroup.pattern(), "");
+            r.text = r.text.replaceAll(PATTERN_SINGLE_PROPERTY.pattern(), "");
+            r.text = r.text.replaceAll(PATTERN_PROPERTY_GROUP.pattern(), "");
         }
 
-        styledComponents.put(R.text.indexOf(VAR_SOURCE_TEXT), sourceTextReplacer);
-        styledComponents.put(R.text.indexOf(VAR_DIFF), diffReplacer);
-        styledComponents.put(R.text.indexOf(VAR_DIFF_REVERSED), diffReversedReplacer);
+        styledComponents.put(r.text.indexOf(VAR_SOURCE_TEXT), sourceTextReplacer);
+        styledComponents.put(r.text.indexOf(VAR_DIFF), diffReplacer);
+        styledComponents.put(r.text.indexOf(VAR_DIFF_REVERSED), diffReversedReplacer);
 
         for (Entry<Integer, Replacer> e : styledComponents.entrySet()) {
-            e.getValue().replace(R, match);
+            e.getValue().replace(r, match);
         }
 
-        return R;
+        return r;
     }
 }

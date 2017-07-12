@@ -137,7 +137,7 @@ public class EditorTextArea3 extends JEditorPane {
         this.controller = controller;
         setEditorKit(new StyledEditorKit() {
             public ViewFactory getViewFactory() {
-                return factory3;
+                return FACTORY3;
             }
 
             protected void createInputAttributes(Element element, MutableAttributeSet set) {
@@ -450,13 +450,16 @@ public class EditorTextArea3 extends JEditorPane {
                 }
             }
             super.processKeyEvent(e);
-            //note that the translation start/end position are not updated yet. This has been updated when then keyreleased event occurs.
+            // note that the translation start/end position are not updated yet. This has been updated when
+            // then keyreleased event occurs.
         }
 
         // some after-processing catches
         if (!processed && e.getKeyChar() != 0 && isNavigationKey(e.getKeyCode())) {
-            //if caret is moved over existing chars, check and fix caret position
-            checkAndFixCaret(false); //works only in after-processing if translation length (start and end position) has not changed, because start and end position are not updated yet.
+            // if caret is moved over existing chars, check and fix caret position
+            // works only in after-processing if translation length (start and end position) has not changed,
+            // because start and end position are not updated yet.
+            checkAndFixCaret(false);
             autoCompleter.updatePopup(true);
         }
     }
@@ -730,7 +733,7 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * Factory for create own view.
      */
-    public static final ViewFactory factory3 = new ViewFactory() {
+    public static final ViewFactory FACTORY3 = new ViewFactory() {
         public View create(Element elem) {
             String kind = elem.getName();
             if (kind != null) {
@@ -756,7 +759,7 @@ public class EditorTextArea3 extends JEditorPane {
         final int priority;
         final IPopupMenuConstructor constructor;
 
-        public PopupMenuConstructorInfo(int priority, IPopupMenuConstructor constructor) {
+        PopupMenuConstructorInfo(int priority, IPopupMenuConstructor constructor) {
             this.priority = priority;
             this.constructor = constructor;
         }

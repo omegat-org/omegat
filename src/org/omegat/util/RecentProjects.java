@@ -44,30 +44,33 @@ import org.omegat.gui.main.ProjectUICommands;
  * @author Briac Pilpre
  * @author Aaron Madlon-Kay
  */
-public class RecentProjects {
+public final class RecentProjects {
 
-    private static final List<String> recentProjects;
-    private static final int mostRecentProjectSize;
+    private static final List<String> RECENT_PROJECTS;
+    private static final int MOST_RECENT_PROJECT_SIZE;
 
     static {
-        mostRecentProjectSize = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_SIZE, OConsts.MAX_RECENT_PROJECTS);
-        recentProjects = new ArrayList<String>(mostRecentProjectSize);
-        for (int i = 0; i < mostRecentProjectSize; i++) {
-            String project = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_PREFIX + i, null);
+        MOST_RECENT_PROJECT_SIZE = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_SIZE,
+                OConsts.MAX_RECENT_PROJECTS);
+        RECENT_PROJECTS = new ArrayList<String>(MOST_RECENT_PROJECT_SIZE);
+        for (int i = 0; i < MOST_RECENT_PROJECT_SIZE; i++) {
+            String project = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_PREFIX + i,
+                    null);
             if (project != null) {
-                recentProjects.add(project);
+                RECENT_PROJECTS.add(project);
             }
         }
     }
 
-    private RecentProjects() {}
+    private RecentProjects() {
+    }
 
     private static void saveToPrefs() {
-        for (int i = 0; i < recentProjects.size(); i++) {
-            String project = recentProjects.get(i);
+        for (int i = 0; i < RECENT_PROJECTS.size(); i++) {
+            String project = RECENT_PROJECTS.get(i);
             if (!StringUtil.isEmpty(project)) {
                 Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX + i,
-                        recentProjects.get(i));
+                        RECENT_PROJECTS.get(i));
             }
         }
     }
@@ -86,8 +89,8 @@ public class RecentProjects {
 
         recentMenu.removeAll();
 
-        synchronized(recentProjects) {
-            for (final String project : recentProjects) {
+        synchronized (RECENT_PROJECTS) {
+            for (final String project : RECENT_PROJECTS) {
                 JMenuItem recentProjectMenuItem = new JMenuItem(project);
                 recentProjectMenuItem.addActionListener(new ActionListener() {
                     @Override
@@ -97,7 +100,7 @@ public class RecentProjects {
                 });
                 recentMenu.add(recentProjectMenuItem);
             }
-            recentMenu.setEnabled(!recentProjects.isEmpty());
+            recentMenu.setEnabled(!RECENT_PROJECTS.isEmpty());
         }
     }
 
@@ -105,12 +108,12 @@ public class RecentProjects {
         if (StringUtil.isEmpty(element)) {
             return;
         }
-        recentProjects.remove(element);
-        recentProjects.add(0, element);
+        RECENT_PROJECTS.remove(element);
+        RECENT_PROJECTS.add(0, element);
 
         // Shrink the list to match the desired size.
-        while (recentProjects.size() > mostRecentProjectSize) {
-            recentProjects.remove(mostRecentProjectSize);
+        while (RECENT_PROJECTS.size() > MOST_RECENT_PROJECT_SIZE) {
+            RECENT_PROJECTS.remove(MOST_RECENT_PROJECT_SIZE);
         }
         updateMenu();
         saveToPrefs();

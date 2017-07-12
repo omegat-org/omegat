@@ -47,7 +47,7 @@ import org.omegat.util.StringUtil;
  */
 public class OmegaTLogFormatter extends Formatter {
 
-    protected static final String lineMark;
+    protected static final String LINE_MARK;
 
     private String logMask;
     private boolean isMaskContainsMark;
@@ -81,13 +81,15 @@ public class OmegaTLogFormatter extends Formatter {
         // convert the number to string, 5 chars max, pad with zero's if
         // necessary
         String sessionID = String.valueOf(random);
-        if (sessionID.length() > 5)
+        if (sessionID.length() > 5) {
             sessionID = sessionID.substring(0, 5);
-        else if (sessionID.length() < 5)
-            for (int i = 5; i > sessionID.length(); i++)
+        } else if (sessionID.length() < 5) {
+            for (int i = 5; i > sessionID.length(); i++) {
                 sessionID = "0" + sessionID;
+            }
+        }
 
-        lineMark = sessionID;
+        LINE_MARK = sessionID;
     }
 
     /**
@@ -168,7 +170,7 @@ public class OmegaTLogFormatter extends Formatter {
 
         String res = logMask;
         if (isMaskContainsMark) {
-            res = res.replace("$mark", lineMark);
+            res = res.replace("$mark", LINE_MARK);
         }
         if (isMaskContainsTime) {
             res = res.replace("$time", timeFormatter.get().format(new Date()));

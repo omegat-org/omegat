@@ -479,7 +479,7 @@ public final class Preferences {
      * @return preference defaultValue as a string
      */
     public static String getPreference(String key) {
-        return m_preferences.getPreference(key);
+        return preferences.getPreference(key);
     }
 
     /**
@@ -492,7 +492,7 @@ public final class Preferences {
      * @return true if preferences exists
      */
     public static boolean existsPreference(String key) {
-        return m_preferences.existsPreference(key);
+        return preferences.existsPreference(key);
     }
 
     /**
@@ -506,7 +506,7 @@ public final class Preferences {
      * @return preference defaultValue as a boolean
      */
     public static boolean isPreference(String key) {
-        return m_preferences.isPreference(key);
+        return preferences.isPreference(key);
     }
 
     /**
@@ -524,7 +524,7 @@ public final class Preferences {
      * @return preference value as an boolean
      */
     public static boolean isPreferenceDefault(String key, boolean defaultValue) {
-        return m_preferences.isPreferenceDefault(key, defaultValue);
+        return preferences.isPreferenceDefault(key, defaultValue);
     }
 
     /**
@@ -542,7 +542,7 @@ public final class Preferences {
      * @return preference value as a string
      */
     public static String getPreferenceDefault(String key, String defaultValue) {
-        return m_preferences.getPreferenceDefault(key, defaultValue);
+        return preferences.getPreferenceDefault(key, defaultValue);
     }
 
     /**
@@ -560,7 +560,7 @@ public final class Preferences {
      * @return preference value as enum
      */
     public static <T extends Enum<T>> T getPreferenceEnumDefault(String key, T defaultValue) {
-        return m_preferences.getPreferenceEnumDefault(key, defaultValue);
+        return preferences.getPreferenceEnumDefault(key, defaultValue);
     }
 
     /**
@@ -578,7 +578,7 @@ public final class Preferences {
      * @return preference value as an integer
      */
     public static int getPreferenceDefault(String key, int defaultValue) {
-        return m_preferences.getPreferenceDefault(key, defaultValue);
+        return preferences.getPreferenceDefault(key, defaultValue);
     }
 
     /**
@@ -591,14 +591,14 @@ public final class Preferences {
      *            preference value as an object
      */
     public static void setPreference(String name, Object value) {
-        Object oldValue = m_preferences.setPreference(name, value);
+        Object oldValue = preferences.setPreference(name, value);
         // Manually compare retrieved new value to old value and check before firing.
         // This is because the preferences store may only store the serialized (string) value
         // so the regular equality check within PropertyChangeSupport will always fail
         // (e.g. when value is Boolean but oldValue is "true"/"false").
-        Object storedNewValue = m_preferences.getPreference(name);
+        Object storedNewValue = preferences.getPreference(name);
         if (!Objects.equals(oldValue, storedNewValue)) {
-            m_propChangeSupport.firePropertyChange(name, oldValue, value);
+            PROP_CHANGE_SUPPORT.firePropertyChange(name, oldValue, value);
         }
     }
 
@@ -612,7 +612,7 @@ public final class Preferences {
      * @param listener
      */
     public static void addPropertyChangeListener(PropertyChangeListener listener) {
-        m_propChangeSupport.addPropertyChangeListener(listener);
+        PROP_CHANGE_SUPPORT.addPropertyChangeListener(listener);
     }
 
     /**
@@ -626,48 +626,48 @@ public final class Preferences {
      * @param listener
      */
     public static void addPropertyChangeListener(String property, PropertyChangeListener listener) {
-        m_propChangeSupport.addPropertyChangeListener(property, listener);
+        PROP_CHANGE_SUPPORT.addPropertyChangeListener(property, listener);
     }
 
     public static void setFilters(Filters newFilters) {
-        Filters oldValue = m_filters;
-        m_filters = newFilters;
+        Filters oldValue = filters;
+        filters = newFilters;
 
         File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
         try {
-            FilterMaster.saveConfig(m_filters, filtersFile);
+            FilterMaster.saveConfig(filters, filtersFile);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         // Must manually check for equality (see FiltersUtil.filtersEqual() Javadoc)
         if (!FiltersUtil.filtersEqual(oldValue, newFilters)) {
-            m_propChangeSupport.firePropertyChange(Preferences.PROPERTY_FILTERS, oldValue, newFilters);
+            PROP_CHANGE_SUPPORT.firePropertyChange(Preferences.PROPERTY_FILTERS, oldValue, newFilters);
         }
     }
 
     public static Filters getFilters() {
-        return m_filters;
+        return filters;
     }
 
     public static void setSRX(SRX newSrx) {
-        SRX oldValue = m_srx;
-        m_srx = newSrx;
+        SRX oldValue = srx;
+        srx = newSrx;
 
         File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
         try {
-            SRX.saveTo(m_srx, srxFile);
+            SRX.saveTo(srx, srxFile);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        m_propChangeSupport.firePropertyChange(Preferences.PROPERTY_SRX, oldValue, newSrx);
+        PROP_CHANGE_SUPPORT.firePropertyChange(Preferences.PROPERTY_SRX, oldValue, newSrx);
     }
 
     public static SRX getSRX() {
-        return m_srx;
+        return srx;
     }
 
     public static void save() {
-        m_preferences.save();
+        preferences.save();
     }
 
     public interface IPreferences {
@@ -717,7 +717,7 @@ public final class Preferences {
 
         File loadFile = getPreferencesFile();
         File saveFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
-        m_preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
+        preferences = new PreferencesImpl(new PreferencesXML(loadFile, saveFile));
     }
 
     public static synchronized void initFilters() {
@@ -727,16 +727,16 @@ public final class Preferences {
         didInitFilters = true;
 
         File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
-        Filters filters = null;
+        Filters f = null;
         try {
-            filters = FilterMaster.loadConfig(filtersFile);
+            f = FilterMaster.loadConfig(filtersFile);
         } catch (Exception ex) {
             Log.log(ex);
         }
-        if (filters == null) {
-            filters = FilterMaster.createDefaultFiltersConfig();
+        if (f == null) {
+            f = FilterMaster.createDefaultFiltersConfig();
         }
-        m_filters = filters;
+        filters = f;
     }
 
     public static synchronized void initSegmentation() {
@@ -746,22 +746,22 @@ public final class Preferences {
         didInitSegmentation = true;
 
         File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
-        SRX srx = SRX.loadSRX(srxFile);
-        if (srx == null) {
-            srx = SRX.getDefault();
+        SRX s = SRX.loadSRX(srxFile);
+        if (s == null) {
+            s = SRX.getDefault();
         }
-        m_srx = srx;
+        srx = s;
     }
 
     private static volatile boolean didInit = false;
-    private static IPreferences m_preferences;
+    private static IPreferences preferences;
     private static volatile boolean didInitSegmentation = false;
-    private static SRX m_srx;
+    private static SRX srx;
     private static volatile boolean didInitFilters = false;
-    private static Filters m_filters;
+    private static Filters filters;
 
     // Support for firing property change events
-    private static final PropertyChangeSupport m_propChangeSupport = new PropertyChangeSupport(Preferences.class);
+    private static final PropertyChangeSupport PROP_CHANGE_SUPPORT = new PropertyChangeSupport(Preferences.class);
 
     /**
      * Gets the prefs file to use. Looks in these places in this order:

@@ -61,9 +61,9 @@ public class HTMLWriter extends Writer {
     private BufferedWriter realWriter;
 
     /** Replacement string for HTML content-type META */
-    private String HTML_META;
+    private String htmlMeta;
     /** Replacement string for XML (XHTML) header */
-    private String XML_HEADER;
+    private String xmlHeader;
 
     /**
      * Encoding to write this file in. null value means no encoding declaration.
@@ -101,10 +101,10 @@ public class HTMLWriter extends Writer {
     }
 
     /** The minimal size of already written HTML that will be appended headers */
-    private static final int minHeaderedBufferSize = 4096;
+    private static final int MIN_HEADERED_BUFFER_SIZE = 4096;
 
     /** The maximal size of a buffer before flush */
-    private static final int maxBufferSize = 65536;
+    private static final int MAX_BUFFER_SIZE = 65536;
 
     /**
      * Signals that the writer is being closed, hence it needs to write any
@@ -140,7 +140,7 @@ public class HTMLWriter extends Writer {
 
             realWriter.write(buffer.toString());
             buffer.setLength(0);
-        } else if (signalClosing || buffer.length() >= minHeaderedBufferSize) {
+        } else if (signalClosing || buffer.length() >= MIN_HEADERED_BUFFER_SIZE) {
             // else if we're closing or the buffer is big enough
             // to (hopefully) contain all the existing headers
 
@@ -149,34 +149,36 @@ public class HTMLWriter extends Writer {
             String contents = buffer.toString();
 
             if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.NEVER) {
-                Matcher matcher_header = PatternConsts.XML_HEADER.matcher(contents);
+                Matcher matcherHeader = PatternConsts.XML_HEADER.matcher(contents);
                 boolean xhtml = false;
-                if (matcher_header.find()) {
-                    XML_HEADER = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>";
-                    contents = matcher_header.replaceFirst(XML_HEADER);
+                if (matcherHeader.find()) {
+                    xmlHeader = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>";
+                    contents = matcherHeader.replaceFirst(xmlHeader);
                     xhtml = true;
                 }
 
-                HTML_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset=" + encoding
+                htmlMeta = "<meta http-equiv=\"content-type\" content=\"text/html; charset=" + encoding
                         + "\"";
-                if (xhtml)
-                    HTML_META += " />";
-                else
-                    HTML_META += ">";
-                Matcher matcher_enc = PatternConsts.HTML_ENCODING.matcher(contents);
-                if (matcher_enc.find())
-                    contents = matcher_enc.replaceFirst(HTML_META);
-                else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFMETA) {
-                    Matcher matcher_head = PatternConsts.HTML_HEAD.matcher(contents);
-                    if (matcher_head.find())
-                        contents = matcher_head.replaceFirst("<head>\n    " + HTML_META);
-                    else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFHEADER) {
-                        Matcher matcher_html = PatternConsts.HTML_HTML.matcher(contents);
-                        if (matcher_html.find())
-                            contents = matcher_html.replaceFirst("<html>\n<head>\n    " + HTML_META
-                                    + "\n</head>\n");
-                        else
-                            contents = "<html>\n<head>\n    " + HTML_META + "\n</head>\n" + contents;
+                if (xhtml) {
+                    htmlMeta += " />";
+                } else {
+                    htmlMeta += ">";
+                }
+                Matcher matcherEnc = PatternConsts.HTML_ENCODING.matcher(contents);
+                if (matcherEnc.find()) {
+                    contents = matcherEnc.replaceFirst(htmlMeta);
+                } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFMETA) {
+                    Matcher matcherHead = PatternConsts.HTML_HEAD.matcher(contents);
+                    if (matcherHead.find()) {
+                        contents = matcherHead.replaceFirst("<head>\n    " + htmlMeta);
+                    } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFHEADER) {
+                        Matcher matcherHtml = PatternConsts.HTML_HTML.matcher(contents);
+                        if (matcherHtml.find()) {
+                            contents = matcherHtml
+                                    .replaceFirst("<html>\n<head>\n    " + htmlMeta + "\n</head>\n");
+                        } else {
+                            contents = "<html>\n<head>\n    " + htmlMeta + "\n</head>\n" + contents;
+                        }
                     }
                 }
             }
@@ -202,7 +204,8 @@ public class HTMLWriter extends Writer {
      */
     public void write(char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
-        if (writer.getBuffer().length() >= maxBufferSize)
+        if (writer.getBuffer().length() >= MAX_BUFFER_SIZE) {
             flush();
+        }
     }
 }

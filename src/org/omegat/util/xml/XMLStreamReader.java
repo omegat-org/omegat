@@ -50,24 +50,24 @@ public class XMLStreamReader implements Closeable {
     private DefaultEntityFilter entityFilter;
 
     public XMLStreamReader() {
-        m_pos = -1;
-        m_stringStream = "";
-        m_charStack = new Stack<Integer>();
-        m_charCache = new ArrayList<Integer>();
-        m_killEmptyBlocks = false;
-        m_ignoreWhiteSpace = false;
-        m_breakWhitespace = false;
-        m_compressWhitespace = false;
-        m_headBlock = null;
+        mPos = -1;
+        mStringStream = "";
+        mCharStack = new Stack<Integer>();
+        mCharCache = new ArrayList<Integer>();
+        mKillEmptyBlocks = false;
+        mIgnoreWhiteSpace = false;
+        mBreakWhitespace = false;
+        mCompressWhitespace = false;
+        mHeadBlock = null;
     }
 
-    public void setStream(File name) throws FileNotFoundException, UnsupportedEncodingException, IOException,
-            TranslationException {
+    public final void setStream(File name)
+            throws FileNotFoundException, UnsupportedEncodingException, IOException, TranslationException {
         setStream(name, "UTF-8");
     }
 
-    public void setStream(String name, String encoding) throws FileNotFoundException,
-            UnsupportedEncodingException, IOException, TranslationException {
+    public final void setStream(String name, String encoding)
+            throws FileNotFoundException, UnsupportedEncodingException, IOException, TranslationException {
         setStream(new File(name), encoding);
     }
 
@@ -78,7 +78,7 @@ public class XMLStreamReader implements Closeable {
      */
     private void setStream(File file, String encoding) throws FileNotFoundException,
             UnsupportedEncodingException, IOException, TranslationException {
-        m_reader = new XMLReader(file.getAbsolutePath(), encoding);
+        mReader = new XMLReader(file.getAbsolutePath(), encoding);
         setStreamImpl();
     }
 
@@ -93,13 +93,13 @@ public class XMLStreamReader implements Closeable {
      * Provide an interface where stream can be opened elsewhere.
      */
     public void setStream(InputStream stream, String encoding) throws IOException, TranslationException {
-        m_reader = new XMLReader(stream, encoding);
+        mReader = new XMLReader(stream, encoding);
         setStreamImpl();
     }
 
     // do the work here
     private void setStreamImpl() throws IOException, TranslationException {
-        m_pos = -1;
+        mPos = -1;
         // make sure XML file is proper
         XMLBlock blk = getNextBlock();
         if (blk == null) {
@@ -116,7 +116,7 @@ public class XMLStreamReader implements Closeable {
                         + "\n"
                         + StringUtil.format(OStrings.getString("XSR_ERROR_UNSUPPORTED_XML_VERSION"), ver));
             }
-            m_headBlock = blk;
+            mHeadBlock = blk;
         } else {
             // not a valid XML file
             throw new IOException(OStrings.getString("XSR_ERROR_NONVALID_XML") + "\n"
@@ -154,7 +154,7 @@ public class XMLStreamReader implements Closeable {
 
         pushChar(cp);
         XMLBlock blk = getNextText();
-        if (blk != null && m_killEmptyBlocks) {
+        if (blk != null && mKillEmptyBlocks) {
             String str = blk.getText();
             str = str.trim();
             if (str.isEmpty()) {
@@ -164,19 +164,19 @@ public class XMLStreamReader implements Closeable {
         return blk;
     }
 
-    public void killEmptyBlocks() {
-        m_killEmptyBlocks = true;
+    public final void killEmptyBlocks() {
+        mKillEmptyBlocks = true;
     }
 
-    public void breakOnWhitespace(boolean brk) {
-        m_breakWhitespace = brk;
+    public final void breakOnWhitespace(boolean brk) {
+        mBreakWhitespace = brk;
     }
 
-    public void compressWhitespace(boolean tof) {
-        m_compressWhitespace = tof;
+    public final void compressWhitespace(boolean tof) {
+        mCompressWhitespace = tof;
     }
 
-    public void setEntityFilter(DefaultEntityFilter filter) {
+    public final void setEntityFilter(DefaultEntityFilter filter) {
         entityFilter = filter;
     }
 
@@ -189,7 +189,7 @@ public class XMLStreamReader implements Closeable {
      * back up to correct for incorrectly formatted document
      */
     private void pushChar(int cp) {
-        m_charStack.push(cp);
+        mCharStack.push(cp);
     }
 
     /**
@@ -197,7 +197,7 @@ public class XMLStreamReader implements Closeable {
      */
     private int getNextCharCache() {
         int c = getNextChar();
-        m_charCache.add(c);
+        mCharCache.add(c);
         return c;
     }
 
@@ -205,15 +205,15 @@ public class XMLStreamReader implements Closeable {
      * Clears the character cache.
      */
     private void clearCache() {
-        m_charCache.clear();
+        mCharCache.clear();
     }
 
     /**
      * Pushes cached chars onto the stack, in effect rewinding stream.
      */
     private void revertToCached() {
-        for (int i = m_charCache.size() - 1; i >= 0; i--) {
-            m_charStack.push(m_charCache.get(i));
+        for (int i = mCharCache.size() - 1; i >= 0; i--) {
+            mCharStack.push(mCharCache.get(i));
         }
     }
 
@@ -222,22 +222,22 @@ public class XMLStreamReader implements Closeable {
      * or from the underlying file reader.
      */
     private int getNextChar() {
-        if (!m_charStack.empty()) {
-            Integer ch = m_charStack.pop();
+        if (!mCharStack.empty()) {
+            Integer ch = mCharStack.pop();
             return ch;
         } else {
-            if (m_pos >= 0) {
+            if (mPos >= 0) {
                 // string
-                if (m_pos < m_stringStream.length()) {
-                    int cp = m_stringStream.codePointAt(m_pos);
-                    m_pos += Character.charCount(cp);
+                if (mPos < mStringStream.length()) {
+                    int cp = mStringStream.codePointAt(mPos);
+                    mPos += Character.charCount(cp);
                     if (cp == 13) {
                         // convert 13 to 10 - or just omit 13
                         // (XML specs instruct this)
-                        cp = m_stringStream.codePointAt(m_pos);
+                        cp = mStringStream.codePointAt(mPos);
                         if (cp == '\n') {
                             // simply drop 13
-                            m_pos += Character.charCount(cp);
+                            mPos += Character.charCount(cp);
                         } else {
                             cp = '\n';
                         }
@@ -252,12 +252,12 @@ public class XMLStreamReader implements Closeable {
                 char[] c = new char[2];
                 try {
                     char b;
-                    int res = m_reader.read(c, 0, 1);
+                    int res = mReader.read(c, 0, 1);
                     if (res > 0) {
                         b = c[0];
                         if (b == 13) {
                             // convert 13 10 to 10 and 13 to 10
-                            res = m_reader.read(c, 0, 1);
+                            res = mReader.read(c, 0, 1);
                             if (res > 0) {
                                 b = c[0];
                                 if (b != '\n') {
@@ -307,12 +307,12 @@ public class XMLStreamReader implements Closeable {
                 }
             } else if (cp == ' ' || cp == '\n' || cp == 13 || cp == 9) {
                 // spaces get special handling
-                if (m_ignoreWhiteSpace) {
+                if (mIgnoreWhiteSpace) {
                     continue;
                 }
 
-                if (m_compressWhitespace) {
-                    if (m_breakWhitespace) {
+                if (mCompressWhitespace) {
+                    if (mBreakWhitespace) {
                         // if we're already in a text segment, break out
                         // and return ws char to stack
                         if (strBuf.length() > 0) {
@@ -412,24 +412,24 @@ public class XMLStreamReader implements Closeable {
      *      bug fixes</a>
      */
     private XMLBlock getNextTagExclamation() throws TranslationException {
-        final int state_start = 1;
-        final int state_name = 2;
-        final int state_finish = 3;
-        final int state_record = 4;
-        final int state_recordSingle = 5;
-        final int state_recordDouble = 6;
-        final int state_escSingle = 7;
-        final int state_escDouble = 8;
-        final int state_cdata = 9;
-        final int state_commentStart = 10;
-        final int state_comment = 11;
+        final int stateStart = 1;
+        final int stateName = 2;
+        final int stateFinish = 3;
+        final int stateRecord = 4;
+        final int stateRecordSingle = 5;
+        final int stateRecordDouble = 6;
+        final int stateEscSingle = 7;
+        final int stateEscDouble = 8;
+        final int stateCdata = 9;
+        final int stateCommentStart = 10;
+        final int stateComment = 11;
 
         XMLBlock blk = new XMLBlock();
         blk.setTypeChar('!');
 
         StringBuilder name = new StringBuilder();
         StringBuilder data = new StringBuilder();
-        int state = state_start;
+        int state = stateStart;
         int type;
         boolean err = false;
         String msg = "";
@@ -440,26 +440,26 @@ public class XMLStreamReader implements Closeable {
         while ((cp = getNextChar()) != 0) {
             type = getCharType(cp);
             switch (state) {
-            case state_start:
+            case stateStart:
                 switch (type) {
-                case type_ws:
+                case TYPE_WS:
                     // this is OK - do nothing
                     break;
 
-                case type_text:
+                case TYPE_TEXT:
                     // name - start copying
-                    state = state_name;
+                    state = stateName;
                     name.appendCodePoint(cp);
                     break;
 
-                case type_opBrac:
+                case TYPE_OPBRAC:
                     blk.setTagName("CDATA");
-                    state = state_cdata;
+                    state = stateCdata;
 
                     break;
 
-                case type_dash:
-                    state = state_commentStart;
+                case TYPE_DASH:
+                    state = stateCommentStart;
                     blk.setComment();
                     break;
 
@@ -470,20 +470,20 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_commentStart:
+            case stateCommentStart:
                 // verify start of comment string
                 if (cp == '-') {
-                    state = state_comment;
+                    state = stateComment;
                 } else {
                     err = true;
                     msg = OStrings.getString("XSR_ERROR_CONFUSED");
                 }
                 break;
 
-            case state_comment:
+            case stateComment:
                 // verify comment string - copy until -->
                 switch (type) {
-                case type_dash:
+                case TYPE_DASH:
                     if (dashCnt >= 2) {
                         data.appendCodePoint(cp);
                     } else {
@@ -491,12 +491,12 @@ public class XMLStreamReader implements Closeable {
                     }
                     break;
 
-                case type_gt:
+                case TYPE_GT:
                     if (dashCnt >= 2) {
                         // all done
                         // blk.setAttribute(data, "");
                         blk.setText(data.toString());
-                        state = state_finish;
+                        state = stateFinish;
                     }
                     break;
 
@@ -513,12 +513,12 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_cdata:
+            case stateCdata:
                 // copy until ]]> encountered
                 switch (type) {
-                case type_opBrac:
+                case TYPE_OPBRAC:
                     // the end of CDATA declaration
-                    state = state_finish;
+                    state = stateFinish;
                     cdataFlag = true;
                     break;
 
@@ -526,22 +526,22 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_name:
+            case stateName:
                 switch (type) {
-                case type_text:
+                case TYPE_TEXT:
                     // continue copying name
                     name.appendCodePoint(cp);
                     break;
 
-                case type_ws:
+                case TYPE_WS:
                     // name done - store it and move on
                     blk.setTagName(name.toString());
-                    state = state_record;
+                    state = stateRecord;
                     break;
 
-                case type_gt:
+                case TYPE_GT:
                     // no declared data - strange, but allow it
-                    state = state_finish;
+                    state = stateFinish;
                     break;
 
                 default:
@@ -551,23 +551,23 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_record:
+            case stateRecord:
                 switch (type) {
-                case type_apos:
+                case TYPE_APOS:
                     // continue copying in 'safe' mode
-                    state = state_recordSingle;
+                    state = stateRecordSingle;
                     data.appendCodePoint(cp);
                     break;
 
-                case type_quote:
+                case TYPE_QUOTE:
                     // continue copying in 'safe' mode
-                    state = state_recordDouble;
+                    state = stateRecordDouble;
                     data.appendCodePoint(cp);
                     break;
 
-                case type_gt:
+                case TYPE_GT:
                     // tag done - record data and close
-                    state = state_finish;
+                    state = stateFinish;
                     blk.setAttribute(data.toString(), "");
                     break;
 
@@ -576,17 +576,17 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_recordSingle:
+            case stateRecordSingle:
                 switch (type) {
-                case type_apos:
+                case TYPE_APOS:
                     // continue copying normally
-                    state = state_record;
+                    state = stateRecord;
                     data.appendCodePoint(cp);
                     break;
 
-                case type_backSlash:
+                case TYPE_BACKSLASH:
                     // ignore meaning of next char
-                    state = state_escSingle;
+                    state = stateEscSingle;
                     data.appendCodePoint(cp);
                     break;
 
@@ -595,23 +595,23 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_escSingle:
+            case stateEscSingle:
                 // whatever happens, just remember character
                 data.appendCodePoint(cp);
-                state = state_recordSingle;
+                state = stateRecordSingle;
                 break;
 
-            case state_recordDouble:
+            case stateRecordDouble:
                 switch (type) {
-                case type_quote:
+                case TYPE_QUOTE:
                     // continue copying normally
-                    state = state_record;
+                    state = stateRecord;
                     data.appendCodePoint(cp);
                     break;
 
-                case type_backSlash:
+                case TYPE_BACKSLASH:
                     // ignore meaning of next char
-                    state = state_escDouble;
+                    state = stateEscDouble;
                     data.appendCodePoint(cp);
                     break;
 
@@ -620,10 +620,12 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_escDouble:
+            case stateEscDouble:
                 // whatever happens, just remember character
                 data.appendCodePoint(cp);
-                state = state_recordDouble;
+                state = stateRecordDouble;
+                break;
+            default:
                 break;
 
             }
@@ -638,7 +640,7 @@ public class XMLStreamReader implements Closeable {
                     str += blk.getAttribute(0).name;
                 }
                 throw new TranslationException(msg + str + "::" + data);
-            } else if (state == state_finish) {
+            } else if (state == stateFinish) {
                 break;
             }
         }
@@ -672,17 +674,17 @@ public class XMLStreamReader implements Closeable {
             return getNextTagExclamation();
         }
 
-        final int state_start = 1;
-        final int state_buildName = 2;
-        final int state_setCloseFlag = 3;
-        final int state_setStandaloneFlag = 4;
-        final int state_attrStandby = 5;
-        final int state_buildAttr = 6;
-        final int state_transitionFromAttr = 7;
-        final int state_buildValue = 8;
-        final int state_closeValueQuote = 9;
-        final int state_finish = 10;
-        final int state_xmlDeclaration = 11;
+        final int stateStart = 1;
+        final int stateBuildName = 2;
+        final int stateSetCloseFlag = 3;
+        final int stateSetStandaloneFlag = 4;
+        final int stateAttrStandby = 5;
+        final int stateBuildAttr = 6;
+        final int stateTransitionFromAttr = 7;
+        final int stateBuildValue = 8;
+        final int stateCloseValueQuote = 9;
+        final int stateFinish = 10;
+        final int stateXmlDeclaration = 11;
 
         XMLBlock blk = new XMLBlock();
 
@@ -693,7 +695,7 @@ public class XMLStreamReader implements Closeable {
             blk.setTypeChar('?');
         }
 
-        int state = state_start;
+        int state = stateStart;
         StringBuilder name = new StringBuilder();
         StringBuilder attr = new StringBuilder();
         StringBuilder val = new StringBuilder();
@@ -702,16 +704,16 @@ public class XMLStreamReader implements Closeable {
         while (cp != 0) {
             type = getCharType(cp);
             switch (state) {
-            case state_start:
+            case stateStart:
                 switch (type) {
-                case type_slash:
+                case TYPE_SLASH:
                     blk.setCloseFlag();
-                    state = state_setCloseFlag;
+                    state = stateSetCloseFlag;
                     break;
 
-                case type_text:
+                case TYPE_TEXT:
                     name.appendCodePoint(cp);
-                    state = state_buildName;
+                    state = stateBuildName;
                     break;
 
                 default:
@@ -722,31 +724,31 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_buildName:
+            case stateBuildName:
                 switch (type) {
-                case type_dash:
-                case type_text:
+                case TYPE_DASH:
+                case TYPE_TEXT:
                     // more name text
                     name.appendCodePoint(cp);
                     break;
 
-                case type_ws:
+                case TYPE_WS:
                     // name is done - move on
-                    state = state_attrStandby;
+                    state = stateAttrStandby;
                     blk.setTagName(name.toString());
                     break;
 
-                case type_slash:
+                case TYPE_SLASH:
                     // name done - standalone tag slash encountered
                     blk.setTagName(name.toString());
                     blk.setStandaloneFlag();
-                    state = state_setStandaloneFlag;
+                    state = stateSetStandaloneFlag;
                     break;
 
-                case type_gt:
+                case TYPE_GT:
                     // all done
                     blk.setTagName(name.toString());
-                    state = state_finish;
+                    state = stateFinish;
                     break;
 
                 default:
@@ -757,15 +759,15 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_setCloseFlag:
+            case stateSetCloseFlag:
                 switch (type) {
-                case type_text:
+                case TYPE_TEXT:
                     // close flag marked not text - start copy
                     name.appendCodePoint(cp);
-                    state = state_buildName;
+                    state = stateBuildName;
                     break;
 
-                case type_ws:
+                case TYPE_WS:
                     // space after close flag - ignore and continue
                     break;
 
@@ -777,15 +779,15 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_setStandaloneFlag:
+            case stateSetStandaloneFlag:
                 switch (type) {
-                case type_ws:
+                case TYPE_WS:
                     // allow white space to be lenient
                     break;
 
-                case type_gt:
+                case TYPE_GT:
                     // all done with standalone tag
-                    state = state_finish;
+                    state = stateFinish;
                     break;
 
                 default:
@@ -796,28 +798,28 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_attrStandby:
+            case stateAttrStandby:
                 switch (type) {
-                case type_text:
+                case TYPE_TEXT:
                     // start of attribute name - start recording
                     attr.appendCodePoint(cp);
-                    state = state_buildAttr;
+                    state = stateBuildAttr;
                     break;
 
-                case type_ques:
+                case TYPE_QUES:
                     // allow question mark so <? ?> tags can
                     // be read by standard parser
-                    state = state_xmlDeclaration;
+                    state = stateXmlDeclaration;
                     break;
 
-                case type_ws:
+                case TYPE_WS:
                     // unexpected space - allow for now because
                     // it isn't ambiguous (be lenient)
                     break;
 
-                case type_slash:
+                case TYPE_SLASH:
                     blk.setStandaloneFlag();
-                    state = state_setStandaloneFlag;
+                    state = stateSetStandaloneFlag;
                     break;
 
                 default:
@@ -828,27 +830,27 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_xmlDeclaration:
+            case stateXmlDeclaration:
                 if (cp != '>') {
                     // parse error - got '?' followed by something
                     // unexpected
                     throwErrorInGetNextTag(blk, OStrings.getString("XSR_ERROR_FLOATING_QUESTION_MARK"));
                 } else {
-                    state = state_finish;
+                    state = stateFinish;
                 }
                 break;
 
-            case state_buildAttr:
+            case stateBuildAttr:
                 switch (type) {
-                case type_dash:
-                case type_text:
+                case TYPE_DASH:
+                case TYPE_TEXT:
                     // more name - keep recording
                     attr.appendCodePoint(cp);
                     break;
 
-                case type_equals:
+                case TYPE_EQUALS:
                     // attr done - begin move to value
-                    state = state_transitionFromAttr;
+                    state = stateTransitionFromAttr;
                     break;
 
                 default:
@@ -859,12 +861,12 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_transitionFromAttr:
+            case stateTransitionFromAttr:
                 switch (type) {
-                case type_quote:
-                case type_apos:
+                case TYPE_QUOTE:
+                case TYPE_APOS:
                     // the only valid next character
-                    state = state_buildValue;
+                    state = stateBuildValue;
                     buildValueStartType = type;
                     break;
 
@@ -876,10 +878,10 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_buildValue:
+            case stateBuildValue:
                 switch (type) {
-                case type_quote:
-                case type_apos:
+                case TYPE_QUOTE:
+                case TYPE_APOS:
                     // checking if it's the char that opened value
                     if (type == buildValueStartType) {
                         // done recording value
@@ -887,7 +889,7 @@ public class XMLStreamReader implements Closeable {
                         blk.setAttribute(attr.toString(), val.toString());
                         attr = new StringBuilder();
                         val = new StringBuilder();
-                        state = state_closeValueQuote;
+                        state = stateCloseValueQuote;
                     // else -- an error!
                     } else {
                         // this is a quoted value - be lenient on OK chars
@@ -902,33 +904,33 @@ public class XMLStreamReader implements Closeable {
                 }
                 break;
 
-            case state_closeValueQuote:
+            case stateCloseValueQuote:
                 switch (type) {
-                case type_text:
+                case TYPE_TEXT:
                     // new attribute - start recording
                     attr.appendCodePoint(cp);
-                    state = state_buildAttr;
+                    state = stateBuildAttr;
                     break;
 
-                case type_ws:
+                case TYPE_WS:
                     // allow this for now
                     break;
 
-                case type_slash:
+                case TYPE_SLASH:
                     // standalone tag with attributes
                     blk.setStandaloneFlag();
-                    state = state_setStandaloneFlag;
+                    state = stateSetStandaloneFlag;
                     break;
 
-                case type_gt:
+                case TYPE_GT:
                     // finished
-                    state = state_finish;
+                    state = stateFinish;
                     break;
 
-                case type_ques:
+                case TYPE_QUES:
                     // allow question mark so <? ?> tags can
                     // be read by standard parser
-                    state = state_xmlDeclaration;
+                    state = stateXmlDeclaration;
                     break;
 
                 default:
@@ -943,7 +945,7 @@ public class XMLStreamReader implements Closeable {
                 Log.log("INTERNAL ERROR untrapped parse state " + state);
             }
 
-            if (state == state_finish) {
+            if (state == stateFinish) {
                 break;
             }
 
@@ -953,79 +955,81 @@ public class XMLStreamReader implements Closeable {
         return blk;
     }
 
-    private static final int type_text = 1;
-    private static final int type_ws = 2;
-    private static final int type_apos = 3;
-    private static final int type_quote = 4;
-    private static final int type_lt = 5;
-    private static final int type_gt = 6;
-    private static final int type_amp = 7;
+    private static final int TYPE_TEXT = 1;
+    private static final int TYPE_WS = 2;
+    private static final int TYPE_APOS = 3;
+    private static final int TYPE_QUOTE = 4;
+    private static final int TYPE_LT = 5;
+    private static final int TYPE_GT = 6;
+    private static final int TYPE_AMP = 7;
 
-    private static final int type_equals = 8;
-    private static final int type_ques = 9;
-    private static final int type_opBrac = 10;
-    private static final int type_clBrac = 11;
-    private static final int type_slash = 12;
-    private static final int type_backSlash = 13;
-    private static final int type_dash = 14;
+    private static final int TYPE_EQUALS = 8;
+    private static final int TYPE_QUES = 9;
+    private static final int TYPE_OPBRAC = 10;
+    private static final int TYPE_CLBRAC = 11;
+    private static final int TYPE_SLASH = 12;
+    private static final int TYPE_BACKSLASH = 13;
+    private static final int TYPE_DASH = 14;
 
     // used by getNextTag for parsing of tag data
     private int getCharType(int cp) {
-        int type = type_text;
+        int type = TYPE_TEXT;
         switch (cp) {
         case 0x20:
         case 0x0a:
         case 0x0d:
         case 0x09:
-            type = type_ws;
+            type = TYPE_WS;
             break;
 
         case '"':
-            type = type_quote;
+            type = TYPE_QUOTE;
             break;
 
         case '\'':
-            type = type_apos;
+            type = TYPE_APOS;
             break;
 
         case '&':
-            type = type_amp;
+            type = TYPE_AMP;
             break;
 
         case '<':
-            type = type_lt;
+            type = TYPE_LT;
             break;
 
         case '>':
-            type = type_gt;
+            type = TYPE_GT;
             break;
 
         case '?':
-            type = type_ques;
+            type = TYPE_QUES;
             break;
 
         case '/':
-            type = type_slash;
+            type = TYPE_SLASH;
             break;
 
         case '=':
-            type = type_equals;
+            type = TYPE_EQUALS;
             break;
 
         case '[':
-            type = type_opBrac;
+            type = TYPE_OPBRAC;
             break;
 
         case ']':
-            type = type_clBrac;
+            type = TYPE_CLBRAC;
             break;
 
         case '-':
-            type = type_dash;
+            type = TYPE_DASH;
             break;
 
         case '\\':
-            type = type_backSlash;
+            type = TYPE_BACKSLASH;
+            break;
+        default:
             break;
         }
         return type;
@@ -1057,7 +1061,7 @@ public class XMLStreamReader implements Closeable {
         return out.toString();
     }
 
-    public List<XMLBlock> closeBlock(XMLBlock block) throws TranslationException {
+    public final List<XMLBlock> closeBlock(XMLBlock block) throws TranslationException {
         return closeBlock(block, false);
     }
 
@@ -1112,7 +1116,7 @@ public class XMLStreamReader implements Closeable {
         return lst.isEmpty() ? null : lst;
     }
 
-    public XMLBlock advanceToTag(String tagname) throws TranslationException {
+    public final XMLBlock advanceToTag(String tagname) throws TranslationException {
         XMLBlock blk;
         while (true) {
             blk = getNextBlock();
@@ -1212,15 +1216,15 @@ public class XMLStreamReader implements Closeable {
         return cp;
     }
 
-    public XMLBlock getHeadBlock() {
-        return m_headBlock;
+    public final XMLBlock getHeadBlock() {
+        return mHeadBlock;
     }
 
     /** Closes the TMX file */
     @Override
     public void close() throws IOException {
-        if (m_reader != null) {
-            m_reader.close();
+        if (mReader != null) {
+            mReader.close();
         }
     }
 
@@ -1228,17 +1232,17 @@ public class XMLStreamReader implements Closeable {
 
     // /////////////////////////////////////////////////////////////
 
-    private XMLReader m_reader;
-    private String m_stringStream;
+    private XMLReader mReader;
+    private String mStringStream;
 
-    private XMLBlock m_headBlock;
+    private XMLBlock mHeadBlock;
 
-    private int m_pos;
-    private Stack<Integer> m_charStack;
-    private List<Integer> m_charCache;
-    private boolean m_killEmptyBlocks;
-    private boolean m_ignoreWhiteSpace; // don't copy ws to text
-    private boolean m_breakWhitespace; // put all ws in own block
-    private boolean m_compressWhitespace; // put ws span in single space
+    private int mPos;
+    private Stack<Integer> mCharStack;
+    private List<Integer> mCharCache;
+    private boolean mKillEmptyBlocks;
+    private boolean mIgnoreWhiteSpace; // don't copy ws to text
+    private boolean mBreakWhitespace; // put all ws in own block
+    private boolean mCompressWhitespace; // put ws span in single space
 
 }

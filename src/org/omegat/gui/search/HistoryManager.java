@@ -27,6 +27,7 @@ package org.omegat.gui.search;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.omegat.util.Preferences;
 
 /**
@@ -34,73 +35,76 @@ import org.omegat.util.Preferences;
  *
  * @author Aaron Madlon-Kay
  */
-public class HistoryManager {
+public final class HistoryManager {
 
-    private static final List<String> searchItems;
-    private static final List<String> replaceItems;
-    private static final int maxItems;
+    private static final List<String> SEARCH_ITEMS;
+    private static final List<String> REPLACE_ITEMS;
+    private static final int MAX_ITEMS;
 
     static {
-        maxItems = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_HISTORY_SIZE, 10);
-        searchItems = new ArrayList<String>(maxItems);
-        replaceItems = new ArrayList<String>(maxItems);
-        for (int i = 0; i < maxItems; i++) {
-            String searchItem = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_HISTORY_ITEM_PREFIX + i, null);
+        MAX_ITEMS = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_HISTORY_SIZE, 10);
+        SEARCH_ITEMS = new ArrayList<String>(MAX_ITEMS);
+        REPLACE_ITEMS = new ArrayList<String>(MAX_ITEMS);
+        for (int i = 0; i < MAX_ITEMS; i++) {
+            String searchItem = Preferences
+                    .getPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_HISTORY_ITEM_PREFIX + i, null);
             if (searchItem != null) {
-                searchItems.add(searchItem);
+                SEARCH_ITEMS.add(searchItem);
             }
-            String replaceItem = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_REPLACE_HISTORY_ITEM_PREFIX + i, null);
+            String replaceItem = Preferences
+                    .getPreferenceDefault(Preferences.SEARCHWINDOW_REPLACE_HISTORY_ITEM_PREFIX + i, null);
             if (replaceItem != null) {
-                replaceItems.add(replaceItem);
+                REPLACE_ITEMS.add(replaceItem);
             }
         }
     }
 
-    private HistoryManager() {}
+    private HistoryManager() {
+    }
 
     public static void addSearchItem(String item) {
-        synchronized (searchItems) {
-            searchItems.remove(item);
-            searchItems.add(0, item);
-            while (searchItems.size() > maxItems) {
-                searchItems.remove(maxItems);
+        synchronized (SEARCH_ITEMS) {
+            SEARCH_ITEMS.remove(item);
+            SEARCH_ITEMS.add(0, item);
+            while (SEARCH_ITEMS.size() > MAX_ITEMS) {
+                SEARCH_ITEMS.remove(MAX_ITEMS);
             }
         }
     }
 
     public static void addReplaceItem(String item) {
-        synchronized (replaceItems) {
-            replaceItems.remove(item);
-            replaceItems.add(0, item);
-            while (replaceItems.size() > maxItems) {
-                replaceItems.remove(maxItems);
+        synchronized (REPLACE_ITEMS) {
+            REPLACE_ITEMS.remove(item);
+            REPLACE_ITEMS.add(0, item);
+            while (REPLACE_ITEMS.size() > MAX_ITEMS) {
+                REPLACE_ITEMS.remove(MAX_ITEMS);
             }
         }
     }
 
     public static String[] getSearchItems() {
-        synchronized (searchItems) {
-            return searchItems.toArray(new String[searchItems.size()]);
+        synchronized (SEARCH_ITEMS) {
+            return SEARCH_ITEMS.toArray(new String[SEARCH_ITEMS.size()]);
         }
     }
 
     public static String[] getReplaceItems() {
-        synchronized (replaceItems) {
-            return replaceItems.toArray(new String[replaceItems.size()]);
+        synchronized (REPLACE_ITEMS) {
+            return REPLACE_ITEMS.toArray(new String[REPLACE_ITEMS.size()]);
         }
     }
 
     public static void save() {
-        synchronized (searchItems) {
-            for (int i = 0; i < searchItems.size(); i++) {
+        synchronized (SEARCH_ITEMS) {
+            for (int i = 0; i < SEARCH_ITEMS.size(); i++) {
                 Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_HISTORY_ITEM_PREFIX + i,
-                        searchItems.get(i));
+                        SEARCH_ITEMS.get(i));
             }
         }
-        synchronized (replaceItems) {
-            for (int i = 0; i < replaceItems.size(); i++) {
+        synchronized (REPLACE_ITEMS) {
+            for (int i = 0; i < REPLACE_ITEMS.size(); i++) {
                 Preferences.setPreference(Preferences.SEARCHWINDOW_REPLACE_HISTORY_ITEM_PREFIX + i,
-                        replaceItems.get(i));
+                        REPLACE_ITEMS.get(i));
             }
         }
     }

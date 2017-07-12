@@ -44,10 +44,12 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TransTipsMarker implements IMarker {
-    protected static final HighlightPainter transTipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(Styles.EditorColor.COLOR_TRANSTIPS.getColor());
+    protected static final HighlightPainter TRANSTIPS_UNDERLINER = new UnderlineFactory.SolidBoldUnderliner(
+            Styles.EditorColor.COLOR_TRANSTIPS.getColor());
 
     @Override
-    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) {
+    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
+            boolean isActive) {
         if (!isActive || sourceText == null) {
             return null;
         }
@@ -66,7 +68,7 @@ public class TransTipsMarker implements IMarker {
         TransTips.Search callback = new TransTips.Search() {
             public void found(GlossaryEntry ge, int start, int end) {
                 Mark m = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
-                m.painter = TransTipsMarker.transTipsUnderliner;
+                m.painter = TransTipsMarker.TRANSTIPS_UNDERLINER;
                 m.toolTipText = ge.toStyledString().toHTML();
                 marks.add(m);
             }

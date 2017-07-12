@@ -59,9 +59,9 @@ import org.omegat.util.Token;
  */
 public abstract class BaseTokenizer implements ITokenizer {
 
-    private static final Map<String, Token[]> tokenCacheNone = new ConcurrentHashMap<String, Token[]>(5000);
-    private static final Map<String, Token[]> tokenCacheMatching = new ConcurrentHashMap<String, Token[]>(5000);
-    private static final Map<String, Token[]> tokenCacheGlossary = new ConcurrentHashMap<String, Token[]>(5000);
+    private static final Map<String, Token[]> TOKEN_CACHE_NONE = new ConcurrentHashMap<String, Token[]>(5000);
+    private static final Map<String, Token[]> TOKEN_CACHE_MATCHING = new ConcurrentHashMap<String, Token[]>(5000);
+    private static final Map<String, Token[]> TOKEN_CACHE_GLOSSARY = new ConcurrentHashMap<String, Token[]>(5000);
 
     protected static final String[] EMPTY_STRING_LIST = new String[0];
     protected static final Token[] EMPTY_TOKENS_LIST = new Token[0];
@@ -82,9 +82,9 @@ public abstract class BaseTokenizer implements ITokenizer {
             @Override
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
-                    tokenCacheNone.clear();
-                    tokenCacheMatching.clear();
-                    tokenCacheGlossary.clear();
+                    TOKEN_CACHE_NONE.clear();
+                    TOKEN_CACHE_MATCHING.clear();
+                    TOKEN_CACHE_GLOSSARY.clear();
                 }
             }
         });
@@ -98,13 +98,13 @@ public abstract class BaseTokenizer implements ITokenizer {
         Map<String, Token[]> cache;
         switch (stemmingMode) {
         case NONE:
-            cache = tokenCacheNone;
+            cache = TOKEN_CACHE_NONE;
             break;
         case GLOSSARY:
-            cache = tokenCacheGlossary;
+            cache = TOKEN_CACHE_GLOSSARY;
             break;
         case MATCHING:
-            cache = tokenCacheMatching;
+            cache = TOKEN_CACHE_MATCHING;
             break;
         default:
             throw new RuntimeException("No cache for specified stemming mode");
@@ -396,7 +396,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         return sb.toString();
     }
 
-    public static ICommentProvider TOKENIZER_DEBUG_PROVIDER = new ICommentProvider() {
+    public static final ICommentProvider TOKENIZER_DEBUG_PROVIDER = new ICommentProvider() {
         @Override
         public String getComment(SourceTextEntry newEntry) {
             return ((BaseTokenizer) Core.getProject().getSourceTokenizer()).test(newEntry.getSrcText());

@@ -25,7 +25,7 @@
 
 package org.omegat.core.team2.impl;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
@@ -38,13 +38,11 @@ public final class TeamUtils {
     private TeamUtils() {
     }
 
-    static final Charset UTF8 = Charset.forName("UTF-8");
-
     public static String encodePassword(String pass) {
         if (pass == null) {
             return null;
         }
-        return Base64.getEncoder().encodeToString(pass.getBytes(UTF8));
+        return Base64.getEncoder().encodeToString(pass.getBytes(StandardCharsets.UTF_8));
     }
 
     public static String decodePassword(String pass) {
@@ -52,6 +50,6 @@ public final class TeamUtils {
             return null;
         }
         byte[] data = Base64.getDecoder().decode(pass);
-        return new String(data, UTF8);
+        return new String(data, StandardCharsets.UTF_8);
     }
 }

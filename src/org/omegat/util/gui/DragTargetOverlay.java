@@ -163,7 +163,7 @@ public final class DragTargetOverlay {
     private static class FileDropListener extends DropTargetAdapter {
         private final IDropInfo info;
 
-        public FileDropListener(IDropInfo info) {
+        FileDropListener(IDropInfo info) {
             this.info = info;
         }
 
@@ -222,12 +222,17 @@ public final class DragTargetOverlay {
     }
 
     public interface IDropInfo {
-        public DataFlavor getDataFlavor();
-        public int getDnDAction();
-        public boolean canAcceptDrop();
-        public Component getComponentToOverlay();
-        public String getOverlayMessage();
-        public boolean handleDroppedObject(Object dropped);
+        DataFlavor getDataFlavor();
+
+        int getDnDAction();
+
+        boolean canAcceptDrop();
+
+        Component getComponentToOverlay();
+
+        String getOverlayMessage();
+
+        boolean handleDroppedObject(Object dropped);
     }
 
     public abstract static class FileDropInfo implements IDropInfo {

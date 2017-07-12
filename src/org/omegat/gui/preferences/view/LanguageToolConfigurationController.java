@@ -560,7 +560,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
 
         private final JTree tree;
 
-        private TreeListener(JTree tree) {
+        TreeListener(JTree tree) {
             this.tree = tree;
         }
 

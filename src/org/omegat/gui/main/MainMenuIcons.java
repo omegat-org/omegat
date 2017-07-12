@@ -53,7 +53,7 @@ public final class MainMenuIcons {
         private Map defaultHints;
         private Map originalHints;
 
-        public BaseIcon() {
+        BaseIcon() {
             originalHints = new RenderingHints(null);
             try {
                 defaultHints = (Map) Toolkit.getDefaultToolkit().getDesktopProperty("awt.font.desktophints");

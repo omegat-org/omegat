@@ -157,7 +157,7 @@ public final class TagUtil {
      * <li>&lt;bar/> = SINGLE</li>
      * </ul>
      */
-    public static enum TagType {
+    public enum TagType {
         START, END, SINGLE
     }
 

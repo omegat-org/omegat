@@ -651,7 +651,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         public final String string;
         public final Component comp;
 
-        public GuiSearchResult(DefaultMutableTreeNode node, String string, Component comp) {
+        GuiSearchResult(DefaultMutableTreeNode node, String string, Component comp) {
             this.node = node;
             this.string = string;
             this.comp = comp;
@@ -758,11 +758,11 @@ public class PreferencesWindowController implements FurtherActionListener {
     static class HideableNode extends DefaultMutableTreeNode {
         private boolean isVisible = true;
 
-        public HideableNode() {
+        HideableNode() {
             super();
         }
 
-        public HideableNode(Object userObject) {
+        HideableNode(Object userObject) {
             super(userObject);
         }
 
@@ -831,7 +831,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         private final Rectangle highlightRect = new Rectangle();
         private Component comp;
 
-        public HighlightablePanel(JRootPane rootPane, Component overlayComponent) {
+        HighlightablePanel(JRootPane rootPane, Component overlayComponent) {
             this.rootPane = rootPane;
             this.overlayComponent = overlayComponent;
             this.mouseAdapter = new MouseAdapter() {

@@ -100,14 +100,14 @@ public final class JTextPaneLinkifier {
     }
 
     private interface IAttributeAction {
-        public void execute();
+        void execute();
     }
 
     private static class AttributeInserterMouseListener extends MouseAdapter {
 
         private final JTextPane jTextPane;
 
-        public AttributeInserterMouseListener(final JTextPane jTextPane) {
+        AttributeInserterMouseListener(final JTextPane jTextPane) {
             this.jTextPane = jTextPane;
         }
 
@@ -163,7 +163,7 @@ public final class JTextPaneLinkifier {
         private final Timer timer;
 
         // as default constructor
-        public AttributeInserterDocumentFilter(StyledDocument doc) {
+        AttributeInserterDocumentFilter(StyledDocument doc) {
             this.doc = doc;
             timer = new Timer(REFRESH_DELAY, new ActionListener() {
                 @Override

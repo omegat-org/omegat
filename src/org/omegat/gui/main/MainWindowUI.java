@@ -132,7 +132,7 @@ public final class MainWindowUI {
         private final MainWindow mainWindow;
         private boolean didApplyPerProjectLayout = false;
 
-        public PerProjectLayoutHandler(MainWindow mainWindow) {
+        PerProjectLayoutHandler(MainWindow mainWindow) {
             this.mainWindow = mainWindow;
         }
 

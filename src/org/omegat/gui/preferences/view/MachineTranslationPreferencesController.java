@@ -76,7 +76,7 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
         private final String label;
         private final Class<?> clazz;
 
-        private ProviderColumn(int i, String label, Class<?> clazz) {
+        ProviderColumn(int i, String label, Class<?> clazz) {
             this.index = i;
             this.label = label;
             this.clazz = clazz;
@@ -174,7 +174,7 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
 
         private final List<IMachineTranslation> mtProviders;
 
-        public ProvidersTableModel(List<IMachineTranslation> mtProviders) {
+        ProvidersTableModel(List<IMachineTranslation> mtProviders) {
             this.mtProviders = mtProviders;
         }
 

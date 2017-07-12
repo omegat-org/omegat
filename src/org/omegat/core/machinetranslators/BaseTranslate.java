@@ -102,9 +102,9 @@ public abstract class BaseTranslate implements IMachineTranslation {
         }
     }
 
-    abstract protected String getPreferenceName();
+    protected abstract String getPreferenceName();
 
-    abstract protected String translate(Language sLang, Language tLang, String text) throws Exception;
+    protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
 
     /**
      * Attempt to clean spaces added around tags by machine translators. Do it by comparing spaces between the source

@@ -45,7 +45,7 @@ import javax.swing.Icon;
 public class MainMenuIcons {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    abstract private static class BaseIcon implements Icon {
+    private abstract static class BaseIcon implements Icon {
 
         private Map defaultHints;
         private Map originalHints;

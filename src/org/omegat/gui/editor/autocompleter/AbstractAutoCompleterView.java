@@ -41,7 +41,7 @@ import org.omegat.util.Language;
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */
-abstract public class AbstractAutoCompleterView {
+public abstract class AbstractAutoCompleterView {
 
     /**
      * the name appearing in the auto-completer.

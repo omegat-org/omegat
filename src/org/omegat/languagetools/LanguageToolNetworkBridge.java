@@ -52,10 +52,10 @@ import org.omegat.util.OStrings;
 public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
     /* Constants */
-    private final static String CHECK_PATH = "/v2/check";
-    private final static String LANGS_PATH = "/v2/languages";
-    private final static String SERVER_CLASS_NAME = "org.languagetool.server.HTTPServer";
-    private final static String API_VERSION = "1";
+    private static final String CHECK_PATH = "/v2/check";
+    private static final String LANGS_PATH = "/v2/languages";
+    private static final String SERVER_CLASS_NAME = "org.languagetool.server.HTTPServer";
+    private static final String API_VERSION = "1";
 
     /* Instance scope fields */
     private Process server;

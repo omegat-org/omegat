@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 
 public class WordPredictor {
     static final double MIN_FREQUENCY = 10d;
-    static final private Comparator<Prediction> RESULT_SORTER = Comparator.comparing(Prediction::getFrequency)
+    private static final Comparator<Prediction> RESULT_SORTER = Comparator.comparing(Prediction::getFrequency)
             .reversed().thenComparing(Prediction::getWord);
 
     private Map<String, FrequencyStrings> data = new HashMap<>();

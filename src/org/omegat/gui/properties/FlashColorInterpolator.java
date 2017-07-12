@@ -40,7 +40,7 @@ public class FlashColorInterpolator {
 
     private final double flashDuration;
     private final long startTime;
-    volatile private long mark;
+    private volatile long mark;
 
     private final Color colorMin;
     private final Color colorMax;

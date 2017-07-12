@@ -174,8 +174,8 @@ public class TagUtil {
         }
     }
 
-    final public static String TAG_SEPARATOR_SENTINEL = "\uE100";
-    final public static char TEXT_REPLACEMENT = '\uE100';
+    public static final String TAG_SEPARATOR_SENTINEL = "\uE100";
+    public static final char TEXT_REPLACEMENT = '\uE100';
 
     public static List<Tag> getAllTagsInSource() {
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();

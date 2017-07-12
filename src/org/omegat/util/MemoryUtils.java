@@ -39,13 +39,13 @@ import java.lang.reflect.Modifier;
  */
 public class MemoryUtils {
     /** JVM architecture. */
-    final protected static boolean IS64 = !"32".equals(System.getProperty("sun.arch.data.model"));
+    protected static final boolean IS64 = !"32".equals(System.getProperty("sun.arch.data.model"));
 
     /** Object footprint - 16 for 64bit, 8 for 32 bit. */
-    final protected static int SZ_OBJFOOT = IS64 ? 16 : 8;
+    protected static final int SZ_OBJFOOT = IS64 ? 16 : 8;
 
     /** Link to object - 8 for 64bit, 4 for 32bit. */
-    final protected static int SZ_OBJLINK = IS64 ? 8 : 4;
+    protected static final int SZ_OBJLINK = IS64 ? 8 : 4;
 
     /**
      * Get memory which used by jvm.

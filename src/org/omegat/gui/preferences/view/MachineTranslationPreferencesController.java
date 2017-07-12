@@ -49,7 +49,7 @@ import org.omegat.util.gui.TableColumnSizer;
  */
 public class MachineTranslationPreferencesController extends BasePreferencesController {
 
-    private final static int MAX_ROW_COUNT = 10;
+    private static final int MAX_ROW_COUNT = 10;
 
     private final Map<String, Boolean> providerStatus = new HashMap<>();
     private MachineTranslationPreferencesPanel panel;

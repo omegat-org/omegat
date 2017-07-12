@@ -124,7 +124,7 @@ public final class CredentialsManager {
         return isMasterPasswordSet() && !Preferences.getPreference(key).isEmpty();
     }
 
-    synchronized private Optional<String> encrypt(String text) {
+    private synchronized Optional<String> encrypt(String text) {
         while (true) {
             try {
                 return Optional.of(textEncryptor.encrypt(text));

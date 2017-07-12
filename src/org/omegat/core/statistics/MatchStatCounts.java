@@ -36,7 +36,7 @@ import java.util.stream.Stream;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MatchStatCounts {
-    private final static int BASE_FOR_PERCENTS = 2;
+    private static final int BASE_FOR_PERCENTS = 2;
     private final StatCount[] counts;
 
     public MatchStatCounts() {

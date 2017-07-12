@@ -73,26 +73,26 @@ import org.omegat.util.gui.Styles;
 
 public class SegmentPropertiesArea implements IPaneMenu {
 
-    private final static Pattern SPLIT_COMMAS = Pattern.compile("\\s*,\\s*");
+    private static final Pattern SPLIT_COMMAS = Pattern.compile("\\s*,\\s*");
 
     private final DateFormat dateFormat = DateFormat.getDateInstance();
     private final DateFormat timeFormat = DateFormat.getTimeInstance();
 
-    private final static String KEY_ISDUP = "isDup";
-    private final static String KEY_FILE = "file";
-    private final static String KEY_ID = "id";
-    private final static String KEY_TRANSLATION = "translation";
-    private final static String KEY_TRANSLATIONISFUZZY = "translationIsFuzzy";
-    // private final static String KEY_NEXT = "next";
-    // private final static String KEY_PREV = "prev";
-    private final static String KEY_PATH = "path";
-    private final static String KEY_HASNOTE = "hasNote";
-    private final static String KEY_CHANGED = "changed";
-    private final static String KEY_CHANGER = "changer";
-    private final static String KEY_CREATED = "created";
-    private final static String KEY_CREATOR = "creator";
-    private final static String KEY_ISALT = "isAlt";
-    private final static String KEY_LINKED = "linked";
+    private static final String KEY_ISDUP = "isDup";
+    private static final String KEY_FILE = "file";
+    private static final String KEY_ID = "id";
+    private static final String KEY_TRANSLATION = "translation";
+    private static final String KEY_TRANSLATIONISFUZZY = "translationIsFuzzy";
+    // private static final String KEY_NEXT = "next";
+    // private static final String KEY_PREV = "prev";
+    private static final String KEY_PATH = "path";
+    private static final String KEY_HASNOTE = "hasNote";
+    private static final String KEY_CHANGED = "changed";
+    private static final String KEY_CHANGER = "changer";
+    private static final String KEY_CREATED = "created";
+    private static final String KEY_CREATOR = "creator";
+    private static final String KEY_ISALT = "isAlt";
+    private static final String KEY_LINKED = "linked";
 
     final List<String> properties = new ArrayList<String>();
 

@@ -38,7 +38,7 @@ import org.omegat.util.gui.StaticUIUtils;
  *
  * @author Aaron Madlon-Kay
  */
-abstract public class MTConfigDialog {
+public abstract class MTConfigDialog {
 
     public final MTConfigPanel panel;
     private final JDialog dialog;

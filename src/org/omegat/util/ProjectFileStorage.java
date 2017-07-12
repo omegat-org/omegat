@@ -67,7 +67,7 @@ public class ProjectFileStorage {
      */
     public static final String DEFAULT_FOLDER_MARKER = "__DEFAULT__";
 
-    static private final JAXBContext CONTEXT;
+    private static final JAXBContext CONTEXT;
     static {
         try {
             CONTEXT = JAXBContext.newInstance(Omegat.class);

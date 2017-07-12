@@ -104,7 +104,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
 
         // Create empty resource for confirmation
         return new ResourceBundle() {
-            final static String MISSING_BUNDLE_MESSAGE = "ResourceBundle (.properties file for localization) is missing.";
+            static final String MISSING_BUNDLE_MESSAGE = "ResourceBundle (.properties file for localization) is missing.";
 
             @Override
             protected Object handleGetObject(String key) {

@@ -33,11 +33,11 @@ package org.omegat.languagetools;
  *
  */
 public class LanguageToolResult {
-    final public String message;
-    final public int start;
-    final public int end;
-    final public String ruleId;
-    final public String ruleDescription;
+    public final String message;
+    public final int start;
+    public final int end;
+    public final String ruleId;
+    public final String ruleDescription;
 
     public LanguageToolResult(String message, int start, int end, String ruleId, String ruleDescription) {
         this.message = message;

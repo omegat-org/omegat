@@ -42,7 +42,7 @@ import org.omegat.util.StaticUtils;
 public class TeamSettings {
     private static File configFile;
 
-    private synchronized static File getConfigFile() {
+    private static synchronized File getConfigFile() {
         if (configFile == null) {
             configFile = new File(StaticUtils.getConfigDir(), "repositories.properties");
         }

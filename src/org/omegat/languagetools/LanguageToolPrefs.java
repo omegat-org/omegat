@@ -39,9 +39,9 @@ import org.omegat.util.Preferences;
  */
 public class LanguageToolPrefs {
 
-    public final static String DEFAULT_DISABLED_CATEGORIES = "SPELL,TYPOS";
-    public final static String DEFAULT_DISABLED_RULES = "SAME_TRANSLATION,TRANSLATION_LENGTH,DIFFERENT_PUNCTUATION";
-    public final static BridgeType DEFAULT_BRIDGE_TYPE = BridgeType.NATIVE;
+    public static final String DEFAULT_DISABLED_CATEGORIES = "SPELL,TYPOS";
+    public static final String DEFAULT_DISABLED_RULES = "SAME_TRANSLATION,TRANSLATION_LENGTH,DIFFERENT_PUNCTUATION";
+    public static final BridgeType DEFAULT_BRIDGE_TYPE = BridgeType.NATIVE;
 
     private LanguageToolPrefs() {
 

@@ -64,6 +64,6 @@ public abstract class BaseLanguageToolBridge implements ILanguageToolBridge {
         }
     }
 
-    abstract protected List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText)
+    protected abstract List<LanguageToolResult> getCheckResultsImpl(String sourceText, String translationText)
             throws Exception;
 }

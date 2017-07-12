@@ -225,7 +225,7 @@ public class DragTargetOverlay {
         public boolean handleDroppedObject(Object dropped);
     }
 
-    public static abstract class FileDropInfo implements IDropInfo {
+    public abstract static class FileDropInfo implements IDropInfo {
         private final boolean doReset;
 
         public FileDropInfo(boolean doReset) {

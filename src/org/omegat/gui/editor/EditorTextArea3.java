@@ -79,39 +79,39 @@ import org.omegat.util.gui.Styles;
 @SuppressWarnings("serial")
 public class EditorTextArea3 extends JEditorPane {
 
-    private final static KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorContextMenu");
-    private final static KeyStroke KEYSTROKE_NEXT = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_NEXT = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorNextSegment");
-    private final static KeyStroke KEYSTROKE_PREV = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_PREV = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorPrevSegment");
-    private final static KeyStroke KEYSTROKE_NEXT_NOT_TAB = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_NEXT_NOT_TAB = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorNextSegmentNotTab");
-    private final static KeyStroke KEYSTROKE_PREV_NOT_TAB = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_PREV_NOT_TAB = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorPrevSegmentNotTab");
-    private final static KeyStroke KEYSTROKE_INSERT_LF = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_INSERT_LF = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorInsertLineBreak");
-    private final static KeyStroke KEYSTROKE_SELECT_ALL = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_SELECT_ALL = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorSelectAll");
-    private final static KeyStroke KEYSTROKE_SWITCH_ORIENTATION = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_SWITCH_ORIENTATION = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorSwitchOrientation");
-    private final static KeyStroke KEYSTROKE_DELETE_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_DELETE_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorDeletePrevToken");
-    private final static KeyStroke KEYSTROKE_DELETE_NEXT_TOKEN = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_DELETE_NEXT_TOKEN = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorDeleteNextToken");
-    private final static KeyStroke KEYSTROKE_FIRST_SEG = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_FIRST_SEG = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorFirstSegment");
-    private final static KeyStroke KEYSTROKE_LAST_SEG = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_LAST_SEG = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorLastSegment");
-    private final static KeyStroke KEYSTROKE_SKIP_NEXT_TOKEN = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_SKIP_NEXT_TOKEN = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorSkipNextToken");
-    private final static KeyStroke KEYSTROKE_SKIP_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_SKIP_PREV_TOKEN = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorSkipPrevToken");
-    private final static KeyStroke KEYSTROKE_SKIP_NEXT_TOKEN_SEL = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_SKIP_NEXT_TOKEN_SEL = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorSkipNextTokenWithSelection");
-    private final static KeyStroke KEYSTROKE_SKIP_PREV_TOKEN_SEL = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_SKIP_PREV_TOKEN_SEL = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorSkipPrevTokenWithSelection");
-    private final static KeyStroke KEYSTROKE_TOGGLE_CURSOR_LOCK = PropertiesShortcuts.getEditorShortcuts()
+    private static final KeyStroke KEYSTROKE_TOGGLE_CURSOR_LOCK = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorToggleCursorLock");
 
     /** Undo Manager to store edits */

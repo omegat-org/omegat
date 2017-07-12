@@ -286,7 +286,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
-    static public boolean deleteDirectory(File path) {
+    public static boolean deleteDirectory(File path) {
         if (path.exists()) {
             File[] files = path.listFiles();
             for (int i = 0; i < files.length; i++) {

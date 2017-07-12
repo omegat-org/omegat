@@ -46,14 +46,14 @@ import org.omegat.util.TagUtil.Tag;
  */
 public class ErrorReport {
 
-    final public Map<Tag, TagError> srcErrors = new HashMap<Tag, TagError>();
-    final public Map<Tag, TagError> transErrors = new HashMap<Tag, TagError>();
+    public final Map<Tag, TagError> srcErrors = new HashMap<Tag, TagError>();
+    public final Map<Tag, TagError> transErrors = new HashMap<Tag, TagError>();
 
-    final public SourceTextEntry ste;
-    final public String source;
-    final public TMXEntry tmxEntry;
-    final public String translation;
-    final public int entryNum;
+    public final SourceTextEntry ste;
+    public final String source;
+    public final TMXEntry tmxEntry;
+    public final String translation;
+    public final int entryNum;
 
     public ErrorReport(SourceTextEntry ste, TMXEntry tmxEntry) {
         this.ste = ste;

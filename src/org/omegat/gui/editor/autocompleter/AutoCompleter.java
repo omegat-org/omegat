@@ -65,14 +65,14 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class AutoCompleter implements IAutoCompleter {
 
-    private final static int MIN_VIEWPORT_HEIGHT = 50;
-    private final static int MAX_POPUP_WIDTH = 500;
+    private static final int MIN_VIEWPORT_HEIGHT = 50;
+    private static final int MAX_POPUP_WIDTH = 500;
 
     JPopupMenu popup = new JPopupMenu();
     private EditorTextArea3 editor;
     private AutoCompleterKeys keys;
 
-    public final static int PAGE_ROW_COUNT = 10;
+    public static final int PAGE_ROW_COUNT = 10;
 
     boolean didPopUpAutomatically = false;
 
@@ -439,7 +439,7 @@ public class AutoCompleter implements IAutoCompleter {
     }
 
     @Override
-    final public void resetKeys() {
+    public final void resetKeys() {
         keys = new AutoCompleterKeys();
         if (canBecomeVisible()) {
             updateViewLabel();

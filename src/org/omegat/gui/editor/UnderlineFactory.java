@@ -136,7 +136,7 @@ public class UnderlineFactory {
             return rect;
         }
 
-        abstract protected void paint(Graphics g, Rectangle rect, JTextComponent c);
+        protected abstract void paint(Graphics g, Rectangle rect, JTextComponent c);
 
         public void paint(Graphics g, int p0, int p1, Shape bounds, JTextComponent c) {
         }

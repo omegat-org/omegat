@@ -90,7 +90,7 @@ import org.xml.sax.SAXException;
  */
 public class LanguageToolConfigurationController extends BasePreferencesController {
 
-    private final static String NEW_RULE_PATTERN = "^[A-Za-z_.]+$";
+    private static final String NEW_RULE_PATTERN = "^[A-Za-z_.]+$";
     private BridgeType selectedBridgeType;
     private Set<String> disabledCategories, disabledRuleIds, enabledRuleIds;
     private String targetLanguageCode;
@@ -512,8 +512,8 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
      */
     static class ExternalRule extends Rule {
 
-        public final static String CATEGORY_ID = "EXTERNAL";
-        public final static Category DEFAULT_CATEGORY = new Category(new CategoryId(CATEGORY_ID),
+        public static final String CATEGORY_ID = "EXTERNAL";
+        public static final Category DEFAULT_CATEGORY = new Category(new CategoryId(CATEGORY_ID),
                 OStrings.getString("GUI_LANGUAGETOOL_EXTERNAL_CATEGORY_NAME"));
 
         private final String id;

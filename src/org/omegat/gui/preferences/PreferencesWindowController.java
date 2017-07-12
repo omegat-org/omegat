@@ -647,9 +647,9 @@ public class PreferencesWindowController implements FurtherActionListener {
     }
 
     static class GuiSearchResult {
-        final public DefaultMutableTreeNode node;
-        final public String string;
-        final public Component comp;
+        public final DefaultMutableTreeNode node;
+        public final String string;
+        public final Component comp;
 
         public GuiSearchResult(DefaultMutableTreeNode node, String string, Component comp) {
             this.node = node;

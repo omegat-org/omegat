@@ -48,7 +48,11 @@ import gen.core.filters.Filters;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class Convert20to21 {
+public final class Convert20to21 {
+
+    private Convert20to21() {
+    }
+
     /**
      * Convert filters config ('filters.conf') into new format.
      *

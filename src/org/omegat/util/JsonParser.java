@@ -44,7 +44,10 @@ import javax.script.ScriptException;
  *      notes</a>
  * @author Aaron Madlon-Kay
  */
-public class JsonParser {
+public final class JsonParser {
+
+    private JsonParser() {
+    }
 
     private static final Invocable INVOCABLE;
     static {

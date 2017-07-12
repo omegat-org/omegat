@@ -61,7 +61,10 @@ import org.omegat.util.Log;
  * @author Chihiro Hio
  * @author Aaron Madlon-Kay
  */
-public class JTextPaneLinkifier {
+public final class JTextPaneLinkifier {
+
+    private JTextPaneLinkifier() {
+    }
 
     private static final String ATTR_LINK = "linkbuilder_link";
 

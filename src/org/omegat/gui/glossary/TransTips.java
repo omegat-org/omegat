@@ -39,7 +39,11 @@ import org.omegat.util.Preferences;
  * @author Alex Buloichik
  * @author Didier Briel
  */
-public class TransTips {
+public final class TransTips {
+
+    private TransTips() {
+    }
+
     // List containing the characters that may be found at the end of a word,
     // that
     // might result in the word not being underlined

@@ -36,7 +36,10 @@ import java.util.stream.IntStream;
  * @author Aaron Madlon-Kay
  *
  */
-public class SegmentProperties {
+public final class SegmentProperties {
+
+    private SegmentProperties() {
+    }
 
     public static final String[] EMPTY_PROPS = new String[0];
 

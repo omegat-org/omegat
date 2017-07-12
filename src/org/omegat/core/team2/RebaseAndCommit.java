@@ -39,7 +39,10 @@ import org.omegat.util.Log;
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
  */
-public class RebaseAndCommit {
+public final class RebaseAndCommit {
+
+    private RebaseAndCommit() {
+    }
     private static final Logger LOGGER = Logger.getLogger(RebaseAndCommit.class.getName());
 
     public static final String VERSION_PREFIX = "version-based-on.";

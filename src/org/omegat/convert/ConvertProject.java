@@ -32,7 +32,11 @@ import java.io.File;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ConvertProject {
+public final class ConvertProject {
+
+    private ConvertProject() {
+    }
+
     public static void convert(File projectRootFolder) throws Exception {
         ConvertProject26to37team.checkTeam(projectRootFolder);
     }

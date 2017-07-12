@@ -63,7 +63,10 @@ import org.omegat.util.Log;
 /**
  * @author Aaron Madlon-Kay
  */
-public class DragTargetOverlay {
+public final class DragTargetOverlay {
+
+    private DragTargetOverlay() {
+    }
 
     private static int MARGIN = 0;
 

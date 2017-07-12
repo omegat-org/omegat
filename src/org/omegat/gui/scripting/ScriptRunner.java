@@ -46,7 +46,10 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
-public class ScriptRunner {
+public final class ScriptRunner {
+
+    private ScriptRunner() {
+    }
 
     /**
      * Scripts that want to run on the Event Dispatch Thread should define a

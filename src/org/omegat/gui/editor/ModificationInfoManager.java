@@ -49,7 +49,10 @@ import org.omegat.util.VarExpansion;
  * @author Piotr Kulik
  */
 
-public class ModificationInfoManager {
+public final class ModificationInfoManager {
+
+    private ModificationInfoManager() {
+    }
 
     // ------------------------------ definitions -------------------
     public static final String VAR_CREATION_ID = "${creationId}";

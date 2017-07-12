@@ -52,7 +52,11 @@ import org.apache.commons.io.IOUtils;
  * @author Didier Briel
  * @author Rashid Umarov
  */
-public class WikiGet {
+public final class WikiGet {
+
+    private WikiGet() {
+    }
+
     protected static final String CHARSET_MARK = "charset=";
 
     /**

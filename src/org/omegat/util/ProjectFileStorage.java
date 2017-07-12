@@ -60,7 +60,10 @@ import gen.core.project.Project.Repositories;
  * @author Aaron Madlon-Kay
  * @author Guido Leenders
  */
-public class ProjectFileStorage {
+public final class ProjectFileStorage {
+
+    private ProjectFileStorage() {
+    }
 
     /**
      * A marker that tells OmegaT that project's subfolder has default location.

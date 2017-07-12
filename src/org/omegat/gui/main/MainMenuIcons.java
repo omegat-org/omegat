@@ -42,7 +42,10 @@ import javax.swing.Icon;
 /**
  * @author Aaron Madlon-Kay
  */
-public class MainMenuIcons {
+public final class MainMenuIcons {
+
+    private MainMenuIcons() {
+    }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     private abstract static class BaseIcon implements Icon {

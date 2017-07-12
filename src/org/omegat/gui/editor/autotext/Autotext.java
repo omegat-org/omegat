@@ -45,7 +45,11 @@ import org.omegat.util.StaticUtils;
  * @author bartkoz
  * @author Aaron Madlon-Kay
  */
-public class Autotext {
+public final class Autotext {
+
+    private Autotext() {
+    }
+
     private static final String AUTOTEXT_FILE_NAME = "omegat.autotext";
     private static final File DEFAULT_FILE = new File(StaticUtils.getConfigDir(), AUTOTEXT_FILE_NAME);
 

@@ -47,7 +47,11 @@ import org.omegat.util.OConsts;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ProjectMedProcessing {
+public final class ProjectMedProcessing {
+
+    private ProjectMedProcessing() {
+    }
+
     /**
      * It creates project internals from MED zip file.
      */

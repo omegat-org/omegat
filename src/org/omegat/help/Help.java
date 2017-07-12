@@ -55,7 +55,10 @@ import org.omegat.util.StaticUtils;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
-public class Help {
+public final class Help {
+
+    private Help() {
+    }
 
     /**
      * URL for the online manual.

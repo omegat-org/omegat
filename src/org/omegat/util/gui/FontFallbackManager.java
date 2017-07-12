@@ -35,7 +35,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-public class FontFallbackManager {
+public final class FontFallbackManager {
+
+    private FontFallbackManager() {
+    }
 
     /**
      * List of fonts that are not supported. All font names

@@ -76,7 +76,10 @@ import org.omegat.util.gui.MenuItemPager;
  *      "https://github.com/hiohiohio/omegat-plugin-externalfinder">omegat-plugin-externalfinder
  *      on GitHub</a>
  */
-public class ExternalFinder {
+public final class ExternalFinder {
+
+    private ExternalFinder() {
+    }
 
     public static final String FINDER_FILE = "finder.xml";
 

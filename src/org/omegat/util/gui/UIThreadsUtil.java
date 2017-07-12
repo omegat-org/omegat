@@ -40,7 +40,11 @@ import org.omegat.util.Log;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class UIThreadsUtil {
+public final class UIThreadsUtil {
+
+    private UIThreadsUtil() {
+    }
+
     /**
      * Execute code in swing thread only.
      */

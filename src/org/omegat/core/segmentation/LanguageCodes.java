@@ -39,6 +39,10 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public final class LanguageCodes {
+
+    private LanguageCodes() {
+    }
+
     // Language Codes
     public static final String CATALAN_CODE = "Catalan";
     public static final String GERMAN_CODE = "German";

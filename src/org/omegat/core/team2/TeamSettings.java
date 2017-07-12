@@ -39,7 +39,11 @@ import org.omegat.util.StaticUtils;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class TeamSettings {
+public final class TeamSettings {
+
+    private TeamSettings() {
+    }
+
     private static File configFile;
 
     private static synchronized File getConfigFile() {

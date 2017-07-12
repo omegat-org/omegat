@@ -52,7 +52,11 @@ import gen.taas.TaasDomain;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class SelectDomainController {
+public final class SelectDomainController {
+
+    private SelectDomainController() {
+    }
+
     static SelectDomainUI dialog;
 
     public static void show() {

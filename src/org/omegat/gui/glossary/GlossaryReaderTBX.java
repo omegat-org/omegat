@@ -66,7 +66,11 @@ import gen.core.tbx.Tig;
  * @author Didier Briel
  * @author Guido Leenders
  */
-public class GlossaryReaderTBX {
+public final class GlossaryReaderTBX {
+
+    private GlossaryReaderTBX() {
+    }
+
     protected static final JAXBContext TBX_CONTEXT;
     static {
         try {

@@ -41,7 +41,10 @@ import java.util.regex.Pattern;
  * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  * @author Martin Fleurke
  */
-public class PatternConsts {
+public final class PatternConsts {
+
+    private PatternConsts() {
+    }
 
     private static final String RE_OMEGAT_TAG = "<\\/?[a-zA-Z]+[0-9]+\\/?>";
     private static final String RE_PRINTF_VARS = "%([1-9]+\\$)?([+-])?('.)?(-)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";

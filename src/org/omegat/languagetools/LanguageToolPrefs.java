@@ -37,7 +37,7 @@ import org.omegat.util.Preferences;
  *
  * @author Lev Abashkin
  */
-public class LanguageToolPrefs {
+public final class LanguageToolPrefs {
 
     public static final String DEFAULT_DISABLED_CATEGORIES = "SPELL,TYPOS";
     public static final String DEFAULT_DISABLED_RULES = "SAME_TRANSLATION,TRANSLATION_LENGTH,DIFFERENT_PUNCTUATION";

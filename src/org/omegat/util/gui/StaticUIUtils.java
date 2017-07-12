@@ -74,7 +74,10 @@ import org.omegat.util.StringUtil;
  * @author Yu-Tang
  * @author Aaron Madlon-Kay
  */
-public class StaticUIUtils {
+public final class StaticUIUtils {
+
+    private StaticUIUtils() {
+    }
 
     private static final KeyStroke ESC_KEYSTROKE = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
 

@@ -32,7 +32,11 @@ import org.omegat.util.Preferences;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class StatisticsSettings {
+public final class StatisticsSettings {
+
+    private StatisticsSettings() {
+    }
+
     public static boolean isCountingProtectedText() {
         return Preferences.isPreferenceDefault(Preferences.STAT_COUNTING_PROTECTED_TEXT,
                 Preferences.STAT_COUNTING_PROTECTED_TEXT_DEFAULT);

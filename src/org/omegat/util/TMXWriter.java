@@ -45,7 +45,10 @@ import org.omegat.core.data.ProjectProperties;
  * @author Maxym Mykhalchuk
  *
  */
-public class TMXWriter {
+public final class TMXWriter {
+
+    private TMXWriter() {
+    }
 
     /**
      * Saves a TMX file to disk

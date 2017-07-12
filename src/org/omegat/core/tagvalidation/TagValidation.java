@@ -44,7 +44,10 @@ import org.omegat.util.TagUtil.Tag;
 /**
  * @author Aaron Madlon-Kay
  */
-public class TagValidation {
+public final class TagValidation {
+
+    private TagValidation() {
+    }
 
     public static void inspectJavaMessageFormat(ErrorReport report) {
 

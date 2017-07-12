@@ -40,7 +40,11 @@ import org.omegat.util.gui.StaticUIUtils;
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class FilenamePatternsEditorController {
+public final class FilenamePatternsEditorController {
+
+    private FilenamePatternsEditorController() {
+    }
+
     static List<String> data, result;
 
     public static List<String> show(List<String> excludes) {

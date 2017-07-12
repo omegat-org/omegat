@@ -35,7 +35,10 @@ import org.omegat.util.TagUtil.Tag;
 /**
  * @author Aaron Madlon-Kay
  */
-public class TagRepair {
+public final class TagRepair {
+
+    private TagRepair() {
+    }
 
     public static void fixTag(SourceTextEntry ste, Tag tag, TagError error, StringBuilder translation, String source) {
         List<Tag> tags;

@@ -37,7 +37,11 @@ import java.lang.reflect.Modifier;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MemoryUtils {
+public final class MemoryUtils {
+
+    private MemoryUtils() {
+    }
+
     /** JVM architecture. */
     protected static final boolean IS64 = !"32".equals(System.getProperty("sun.arch.data.model"));
 

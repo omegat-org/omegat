@@ -42,7 +42,10 @@ package org.omegat.util;
  * @author Didier Briel
  * @author Guido Leenders
  */
-public class OConsts {
+public final class OConsts {
+
+    private OConsts() {
+    }
 
     // project file consts
     /** Project Filename */

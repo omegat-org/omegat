@@ -34,7 +34,11 @@ import org.omegat.core.team2.impl.SVNRemoteRepository2;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class RemoteRepositoryFactory {
+public final class RemoteRepositoryFactory {
+
+    private RemoteRepositoryFactory() {
+    }
+
     public static IRemoteRepository2 create(String type) {
         if ("svn".equals(type)) {
             return new SVNRemoteRepository2();

@@ -49,7 +49,10 @@ import org.omegat.util.logging.OmegaTFileHandler;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class Log {
+public final class Log {
+
+    private Log() {
+    }
 
     private static Logger LOGGER;
 

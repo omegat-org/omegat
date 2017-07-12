@@ -31,7 +31,10 @@ package org.omegat.util;
  *
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
-public class RuntimePreferences {
+public final class RuntimePreferences {
+
+    private RuntimePreferences() {
+    }
 
     /** Quiet mode. */
     private static boolean quietMode;

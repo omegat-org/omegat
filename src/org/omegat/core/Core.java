@@ -98,7 +98,11 @@ import org.omegat.util.RecentProjects;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  */
-public class Core {
+public final class Core {
+
+    private Core() {
+    }
+
     private static IProject currentProject;
     private static IMainWindow mainWindow;
     protected static IEditor editor;

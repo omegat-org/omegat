@@ -53,7 +53,10 @@ import org.tmatesoft.svn.core.wc.SVNClientManager;
  *
  * @author Aaron Madlon-Kay
  */
-public class TeamTool {
+public final class TeamTool {
+
+    private TeamTool() {
+    }
 
     public static final String COMMAND_INIT = "init";
 

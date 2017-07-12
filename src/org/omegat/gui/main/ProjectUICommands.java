@@ -85,7 +85,11 @@ import gen.core.project.RepositoryMapping;
  * @author Thomas Cordonnier
  * @author Aaron Madlon-Kay
  */
-public class ProjectUICommands {
+public final class ProjectUICommands {
+
+    private ProjectUICommands() {
+    }
+
     public static void projectCreate() {
         UIThreadsUtil.mustBeSwingThread();
 

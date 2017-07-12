@@ -69,7 +69,10 @@ import com.vlsolutions.swing.docking.ui.DockingUISettings;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
-public class DockingUI {
+public final class DockingUI {
+
+    private DockingUI() {
+    }
 
     /**
      * Initialize docking subsystem.

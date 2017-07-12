@@ -62,7 +62,11 @@ import gen.core.project.RepositoryMapping;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ConvertProject26to37team {
+public final class ConvertProject26to37team {
+
+    private ConvertProject26to37team() {
+    }
+
     public static void checkTeam(File projectRootFolder) throws Exception {
         if (isSVNDirectory(projectRootFolder) || isGITDirectory(projectRootFolder)) {
             // project is 2.6-style team project

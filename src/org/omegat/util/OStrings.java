@@ -41,7 +41,10 @@ import java.util.ResourceBundle;
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
-public class OStrings {
+public final class OStrings {
+
+    private OStrings() {
+    }
 
     private static String __VERSION_KEY = "version";
     private static String __UPDATE_KEY = "update";

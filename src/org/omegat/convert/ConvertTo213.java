@@ -39,7 +39,11 @@ import org.omegat.util.StaticUtils;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ConvertTo213 {
+public final class ConvertTo213 {
+
+    private ConvertTo213() {
+    }
+
     public static void convertUIConfig(File out) throws Exception {
         File prefsFile = new File(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
         if (!prefsFile.isFile()) {

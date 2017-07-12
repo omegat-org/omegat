@@ -51,7 +51,10 @@ import org.omegat.util.StaticUtils;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Thomas Cordonnier
  */
-public class Statistics {
+public final class Statistics {
+
+    private Statistics() {
+    }
 
     protected static final int PERCENT_EXACT_MATCH = 101;
     protected static final int PERCENT_REPETITIONS = 102;

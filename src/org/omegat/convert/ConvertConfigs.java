@@ -37,7 +37,11 @@ import org.omegat.util.StaticUtils;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ConvertConfigs {
+public final class ConvertConfigs {
+
+    private ConvertConfigs() {
+    }
+
     public static void convert() {
         File newFilters = new File(StaticUtils.getConfigDir(), "filters.xml");
         if (!newFilters.exists()) {

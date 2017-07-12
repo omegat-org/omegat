@@ -38,7 +38,11 @@ import org.omegat.core.events.IProjectEventListener;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ProjectFactory {
+public final class ProjectFactory {
+
+    private ProjectFactory() {
+    }
+
     public static void createNotLoadedProject() {
         Core.setProject(new NotLoadedProject());
     }

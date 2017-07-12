@@ -32,7 +32,10 @@ import org.omegat.util.Language;
 /**
  * @author Aaron Madlon-Kay
  */
-public class Util {
+public final class Util {
+
+    private Util() {
+    }
 
     /**
      * Get the index of an item in a list, not based on equality but on object identity (<code>==</code>).

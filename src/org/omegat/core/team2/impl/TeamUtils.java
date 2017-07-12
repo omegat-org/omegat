@@ -33,7 +33,11 @@ import java.util.Base64;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class TeamUtils {
+public final class TeamUtils {
+
+    private TeamUtils() {
+    }
+
     static final Charset UTF8 = Charset.forName("UTF-8");
 
     public static String encodePassword(String pass) {

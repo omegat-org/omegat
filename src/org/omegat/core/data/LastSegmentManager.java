@@ -43,7 +43,10 @@ import org.omegat.util.OConsts;
  * @author Briac Pilpre
  * @author Aaron Madlon-Kay
  */
-public class LastSegmentManager {
+public final class LastSegmentManager {
+
+    private LastSegmentManager() {
+    }
 
     private static final Logger LOGGER = Logger.getLogger(LastSegmentManager.class.getName());
 

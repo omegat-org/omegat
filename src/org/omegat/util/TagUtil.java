@@ -292,9 +292,9 @@ public class TagUtil {
      *
     */
     public static void addExtraTags(List<Tag> resultList, List<Tag> srcTags, String str) {
-        
+
         StringBuilder sb = new StringBuilder(str);
-        
+
         Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
         Matcher placeholderMatcher = placeholderPattern.matcher(str);
         while (placeholderMatcher.find()) {
@@ -303,13 +303,13 @@ public class TagUtil {
                 if ((pos = sb.indexOf(placeholderMatcher.group(0))) != -1) {
                     resultList.add(new Tag(pos, placeholderMatcher.group(0)));
                     replaceWith(sb, pos, pos + placeholderMatcher.group(0).length(), TEXT_REPLACEMENT);
-                }               
+                }
             }
         }
-        
+
         Collections.sort(resultList, TAG_COMPARATOR);
     }
-    
+
     /**
      * Check whether a tag belongs to a list of tags
      * @param tags

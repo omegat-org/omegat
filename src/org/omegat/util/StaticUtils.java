@@ -458,7 +458,7 @@ public final class StaticUtils {
 
     /**
      * Extracts files from an InputStream representing a zip archive to the specified destination path.
-     * 
+     *
      * @param in
      *            InputStream representing a zip archive
      * @param destination

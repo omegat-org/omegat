@@ -259,7 +259,7 @@ public class EditOptionsDialog extends javax.swing.JDialog {
     /**
      * Checks text value of JTextField if it is a valid regular expression. If not, focus is set to the text field and
      * an alert is shown.
-     * 
+     *
      * @param textfield
      *            the text field with the regular expression
      * @return true if regular expression is valid, false otherwise

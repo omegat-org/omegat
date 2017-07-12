@@ -636,7 +636,7 @@ public class PoFilter extends AbstractFilter {
                         this, protectedParts);
             } else {
                 List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source,
-                        PatternConsts.PRINTF_VARS, null);               
+                        PatternConsts.PRINTF_VARS, null);
                 if (fuzzyTrue) { // We add a reference entry
                     String[] props = { SegmentProperties.COMMENT, comments, SegmentProperties.REFERENCE, "true" };
                     entryParseCallback.addEntryWithProperties(null, sourceFuzzyTrue.toString(), translation, false,
@@ -644,9 +644,9 @@ public class PoFilter extends AbstractFilter {
                     fuzzyTrue = false;
                     fuzzy = false;    // Do not load false fuzzy when there is a real one
                     translation = null;
-                } 
+                }
                 entryParseCallback.addEntry(null, source, translation, fuzzy, comments, path + pathSuffix, this,
-                        protectedParts);                
+                        protectedParts);
             }
         } else if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(null, source, translation, fuzzy, path + pathSuffix, this);

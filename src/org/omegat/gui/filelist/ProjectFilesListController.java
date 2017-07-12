@@ -673,7 +673,7 @@ public class ProjectFilesListController {
             trgCol.setPreferredWidth(srcCol.getWidth());
         }
     }
-    
+
     enum FilesTableColumn {
         FILE_NAME(0, OStrings.getString("PF_FILENAME"), String.class, new DataTableStyling.PatternHighlightRenderer(false)),
         FILTER(1, OStrings.getString("PF_FILTERNAME"), String.class, DataTableStyling.getTextCellRenderer()),
@@ -741,7 +741,7 @@ public class ProjectFilesListController {
         currentSorter.addRowSorterListener(e -> updateTitle());
         list.tableFiles.setRowSorter(currentSorter);
     }
-    
+
     enum TotalsTableColumn {
         LABEL(0, String.class, DataTableStyling.getTextCellRenderer()) {
             @Override
@@ -791,7 +791,7 @@ public class ProjectFilesListController {
             this.clazz = clazz;
             this.renderer = renderer;
         }
-        
+
         protected Object getValue(int row) {
             return "";
         }

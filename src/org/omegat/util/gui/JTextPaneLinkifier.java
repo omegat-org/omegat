@@ -182,12 +182,7 @@ public final class JTextPaneLinkifier {
             if (attr != null && attr.isDefined(StyleConstants.ComposedTextAttribute)) {
                 // ignore
             } else {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshPane();
-                    }
-                });
+                SwingUtilities.invokeLater(this::refreshPane);
             }
         }
 

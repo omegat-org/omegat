@@ -280,13 +280,8 @@ public final class DragTargetOverlay {
             }
             // The import might take a long time if there are collision dialogs.
             // Invoke later so we can return successfully right away.
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    ProjectUICommands.projectImportFiles(getImportDestination(),
-                            files.toArray(new File[files.size()]), doReset);
-                }
-            });
+            SwingUtilities.invokeLater(() -> ProjectUICommands.projectImportFiles(getImportDestination(),
+                    files.toArray(new File[files.size()]), doReset));
             return true;
         }
 

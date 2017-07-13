@@ -54,8 +54,9 @@ public class XMLTag extends Tag {
         StringBuilder buf = new StringBuilder();
 
         buf.append("<");
-        if (Type.END == getType())
+        if (Type.END == getType()) {
             buf.append("/");
+        }
         buf.append(getTag());
         buf.append(getAttributes().toString());
 

@@ -84,9 +84,9 @@ public class LatexFilter extends AbstractFilter {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();
-        if (ch != 0xFEFF)
+        if (ch != 0xFEFF) {
             in.reset();
-
+        }
         init();
 
         processLatexFile(in, out);
@@ -151,8 +151,8 @@ public class LatexFilter extends AbstractFilter {
             // String[] c = s.split(""); In Java 8, that line gave a first empty element, so it was replaced with the
             // following lines, and idx below was started at 0 instead of 1
             String[] c;
-            if (!s.isEmpty()){
-              c = s.split("(?!^)");
+            if (!s.isEmpty()) {
+                c = s.split("(?!^)");
             } else {
               c = new String[0];
             }
@@ -185,8 +185,9 @@ public class LatexFilter extends AbstractFilter {
                         idx++;
                     }
 
-                    if (!commands.contains(cmd.toString()))
+                    if (!commands.contains(cmd.toString())) {
                         commands.add(cmd.toString());
+                    }
                     par.append(cmd);
                 } else if (cat == 4) {
                     /* table column separator */
@@ -238,9 +239,9 @@ public class LatexFilter extends AbstractFilter {
         }
 
         // output remaining buffers
-        if (par.length() > 0)
+        if (par.length() > 0) {
             out.write(processParagraph(commands, par.toString()));
-
+        }
     }
 
     private String substituteUnicode(String par) {
@@ -393,9 +394,9 @@ public class LatexFilter extends AbstractFilter {
                 while (m.find()) {
                     String replace = "<p" + String.valueOf(counter) + ">";
                     String content = "";
-                    if (m.group(2) != null)
+                    if (m.group(2) != null) {
                         content = processParagraph(commands, m.group(2));
-
+                    }
                     String[] subst = { reHarden(m.group(1) + "{" + content + "}"), reHarden(replace) };
 
                     substituted.addFirst(subst);
@@ -472,12 +473,15 @@ public class LatexFilter extends AbstractFilter {
         Matcher m = p.matcher(par);
         if (m.find()) {
             par = "";
-            if (m.group(1) != null)
+            if (m.group(1) != null) {
                 par += m.group(1);
-            if (m.group(3) != null)
+            }
+            if (m.group(3) != null) {
                 par += processEntry(m.group(3));
-            if (m.group(4) != null)
+            }
+            if (m.group(4) != null) {
                 par += m.group(4);
+            }
         }
 
         par = resubstituteTex(par);

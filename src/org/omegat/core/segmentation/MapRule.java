@@ -78,10 +78,11 @@ public class MapRule implements Serializable {
 
     /** Returns Pattern for the language/country ISO code (of a form LL-CC). */
     public String getPattern() {
-        if (pattern != null)
+        if (pattern != null) {
             return pattern.pattern();
-        else
+        } else {
             return null;
+        }
     }
 
     /**

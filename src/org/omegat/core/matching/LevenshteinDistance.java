@@ -91,7 +91,7 @@ public class LevenshteinDistance implements ISimilarityCalculator {
      */
     private short[] p = new short[MAX_N + 1];
 
-    /*
+    /**
      * Compute Levenshtein distance between two lists.
      *
      * <p> The difference between this impl. and the canonical one is that,
@@ -118,21 +118,25 @@ public class LevenshteinDistance implements ISimilarityCalculator {
      * #MAX_N}.
      */
     public int compute(Token[] s, Token[] t) {
-        if (s == null || t == null)
+        if (s == null || t == null) {
             throw new IllegalArgumentException(OStrings.getString("LD_NULL_ARRAYS_ERROR"));
+        }
 
         int n = s.length; // length of s
         int m = t.length; // length of t
 
-        if (n == 0)
+        if (n == 0) {
             return m;
-        else if (m == 0)
+        } else if (m == 0) {
             return n;
+        }
 
-        if (n > MAX_N)
+        if (n > MAX_N) {
             n = MAX_N;
-        if (m > MAX_N)
+        }
+        if (m > MAX_N) {
             m = MAX_N;
+        }
 
         short[] swap; // placeholder to assist in swapping p and d
 
@@ -144,8 +148,9 @@ public class LevenshteinDistance implements ISimilarityCalculator {
 
         short cost; // cost
 
-        for (i = 0; i <= n; i++)
+        for (i = 0; i <= n; i++) {
             p[i] = i;
+        }
 
         for (j = 1; j <= m; j++) {
             t_j = t[j - 1];

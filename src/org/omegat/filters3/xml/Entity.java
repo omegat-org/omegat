@@ -114,8 +114,9 @@ public class Entity {
     public String toString() {
         StringBuilder res = new StringBuilder();
         res.append("<!ENTITY");
-        if (parameter)
+        if (parameter) {
             res.append(" %");
+        }
         res.append(" ");
         res.append(name);
         if (internal) {
@@ -123,8 +124,9 @@ public class Entity {
             res.append(" \"" + value + "\"");
         } else {
             // <!ENTITY gloss SYSTEM "gloss.xml">
-            if (publicId != null)
+            if (publicId != null) {
                 res.append(" PUBLIC \"" + publicId + "\"");
+            }
             res.append(" SYSTEM \"" + systemId + "\"");
         }
         res.append(">");

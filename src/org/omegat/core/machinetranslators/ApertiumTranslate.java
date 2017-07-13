@@ -68,12 +68,13 @@ public class ApertiumTranslate extends BaseTranslate {
         String locale = language.getLocaleCode();
 
         if (!StringUtil.isEmpty(language.getCountryCode())) {
-            if (locale.equalsIgnoreCase("en_us") || locale.equalsIgnoreCase("pt_br"))
+            if (locale.equalsIgnoreCase("en_us") || locale.equalsIgnoreCase("pt_br")) {
                 return locale; // We need en_US and pt_BR
-            else if (locale.equalsIgnoreCase("oc_ar"))
+            } else if (locale.equalsIgnoreCase("oc_ar")) {
                 return "oc_aran";
-            else if (locale.equalsIgnoreCase("ca_va"))
+            } else if (locale.equalsIgnoreCase("ca_va")) {
                 return "ca_valencia";
+            }
         }
 
         return lCode;

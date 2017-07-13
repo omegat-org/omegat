@@ -147,12 +147,13 @@ public class LinebreakPreservingReader extends Reader {
         out.print("Break: ");
         for (int i = 0; i < linebreak.length(); i++) {
             char c = linebreak.charAt(i);
-            if (c == '\r')
+            if (c == '\r') {
                 out.print("\\r");
-            else if (c == '\n')
+            } else if (c == '\n') {
                 out.print("\\n");
-            else
+            } else {
                 out.print(c);
+            }
         }
         out.println();
     }

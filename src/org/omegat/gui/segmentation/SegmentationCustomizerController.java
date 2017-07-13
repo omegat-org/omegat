@@ -229,8 +229,9 @@ public class SegmentationCustomizerController extends BasePreferencesController 
             String title = OStrings.getString("CONFIRM_DIALOG_TITLE");
             String message = StringUtil.format(OStrings.getString("SEG_CONFIRM_REMOVE_SENTSEG_SET"), set);
             if (JOptionPane.showConfirmDialog(panel, message, title,
-                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 model.removeRow(panel.mapTable.getSelectedRow());
+            }
         });
         panel.ruleInsertButton.addActionListener(e -> {
             commitTableEdits();

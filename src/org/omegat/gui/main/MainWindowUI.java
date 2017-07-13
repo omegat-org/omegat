@@ -97,7 +97,7 @@ public final class MainWindowUI {
      * Create main UI panels.
      */
     public static void createMainComponents(final MainWindow mainWindow, final Font font) {
-        mainWindow.m_projWin = new ProjectFilesListController(mainWindow);
+        mainWindow.projWin = new ProjectFilesListController(mainWindow);
     }
 
     /**

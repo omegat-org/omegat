@@ -58,17 +58,18 @@ public class ResXDialect extends DefaultXMLDialect {
      *         translated, <code>true</code> otherwise
      */
     public Boolean validateIntactTag(String tag, Attributes atts) {
-        if (!tag.equalsIgnoreCase("data")) // We test only "data"
+        if (!tag.equalsIgnoreCase("data")) {
             return false;
-
+        }
         if (atts != null) {
             for (int i = 0; i < atts.size(); i++) {
                 Attribute oneAttribute = atts.get(i);
                 if (oneAttribute.getName().equalsIgnoreCase("type")
                         || oneAttribute.getName().equalsIgnoreCase("mimetype")
                         || (oneAttribute.getName().equalsIgnoreCase("name") && (oneAttribute.getValue()
-                                .startsWith("&gt;") || oneAttribute.getValue().endsWith("FieldName"))))
+                                .startsWith("&gt;") || oneAttribute.getValue().endsWith("FieldName")))) {
                     return true;
+                }
             }
         }
         return false;

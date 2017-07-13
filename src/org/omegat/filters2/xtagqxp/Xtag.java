@@ -80,10 +80,11 @@ public class Xtag implements Element {
 
     /** Returns the short form of this tag, most often -- the first letter. */
     public String getShortcut() {
-        if (shortcut != null)
+        if (shortcut != null) {
             return shortcut;
-        else
+        } else {
             return String.valueOf(Character.toChars(getTag().codePointAt(0)));
+        }
     }
 
     public String toSafeCalcShortcut() {
@@ -106,12 +107,13 @@ public class Xtag implements Element {
     public String toShortcut() {
         StringBuilder buf = new StringBuilder();
 
-        if (getShortcut().equals("<"))
+        if (getShortcut().equals("<")) {
             return "<";
-        else if (getShortcut().equals(">"))
+        } else if (getShortcut().equals(">")) {
             return ">";
-        else
+        } else {
             buf.append("<");
+        }
         buf.append(getShortcut());
         buf.append(getIndex());
         // All Xtags are single tags

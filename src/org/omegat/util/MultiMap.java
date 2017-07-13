@@ -60,8 +60,9 @@ public class MultiMap<K, V> {
         if (containsKey(key)) {
             Set<V> values = map.get(key);
             return values.contains(value);
-        } else
+        } else {
             return false;
+        }
     }
 
     /**

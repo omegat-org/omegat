@@ -41,17 +41,18 @@ public class XMLBlock {
     }
 
     private void reset() {
-        m_text = "";
-        m_isClose = false;
-        m_isStandalone = false;
-        m_isComment = false;
-        m_isTag = false;
-        m_typeChar = 0;
-        m_hasText = false;
-        m_shortcut = "";
+        mText = "";
+        mIsClose = false;
+        mIsStandalone = false;
+        mIsComment = false;
+        mIsTag = false;
+        mTypeChar = 0;
+        mHasText = false;
+        mShortcut = "";
 
-        if (m_attrList != null)
-            m_attrList.clear();
+        if (mAttrList != null) {
+            mAttrList.clear();
+        }
     }
 
     // ////////////////////////////////////////////////
@@ -63,74 +64,75 @@ public class XMLBlock {
     }
 
     private void setAttribute(XMLAttribute attr) {
-        if (m_attrList == null)
-            m_attrList = new ArrayList<XMLAttribute>(8);
-
+        if (mAttrList == null) {
+            mAttrList = new ArrayList<XMLAttribute>(8);
+        }
         // assume that this attribute doesn't exist already
-        m_attrList.add(attr);
+        mAttrList.add(attr);
     }
 
     public void setText(String text) {
         setTag(false);
-        m_text = text;
+        mText = text;
 
         // block considered text if it has length=1 and includes non ws
-        m_hasText = false;
+        mHasText = false;
         if (text.codePointCount(0, text.length()) == 1) {
             int cp = text.codePointAt(0);
             if (cp != 9 && cp != 10 && cp != 13 && cp != ' ') {
-                m_hasText = true;
+                mHasText = true;
             }
         } else {
-            m_hasText = true;
+            mHasText = true;
         }
     }
 
     public void setTypeChar(char c) {
-        m_typeChar = c;
+        mTypeChar = c;
     }
 
     public void setShortcut(String shortcut) {
-        m_shortcut = shortcut;
+        mShortcut = shortcut;
     }
 
     public String getShortcut() {
-        if (m_shortcut != null && !m_shortcut.equals("")) {
-            if (m_isClose)
-                return "/" + m_shortcut;
-            else if (m_isComment)
+        if (mShortcut != null && !mShortcut.equals("")) {
+            if (mIsClose) {
+                return "/" + mShortcut;
+            } else if (mIsComment) {
                 return OConsts.XB_COMMENT_SHORTCUT;
+            }
         }
-        return m_shortcut;
+        return mShortcut;
     }
 
     /** Sets that this block is a closing tag. */
     public void setCloseFlag() {
-        m_isClose = true;
-        m_isStandalone = false;
+        mIsClose = true;
+        mIsStandalone = false;
     }
 
     /** Sets that this block is a stand-alone tag. */
     public void setStandaloneFlag() {
-        m_isStandalone = true;
-        m_isClose = false;
+        mIsStandalone = true;
+        mIsClose = false;
     }
 
     public void setComment() {
-        m_isTag = true;
+        mIsTag = true;
         setTypeChar('!');
-        m_isComment = true;
-        m_isClose = false;
-        m_isStandalone = false;
+        mIsComment = true;
+        mIsClose = false;
+        mIsStandalone = false;
     }
 
     public void setTagName(String name) {
         setTag(true);
-        m_text = name;
+        mText = name;
     }
 
     private void setTag(boolean isTag) {
-        m_isTag = isTag;
+        mIsTag = isTag;
     }
 
     // ///////////////////////////////////////////////
@@ -138,27 +140,27 @@ public class XMLBlock {
 
     /** Whether this block is a chunk of text (not a tag). */
     public boolean hasText() {
-        return m_hasText;
+        return mHasText;
     }
 
     /** Whether this block is a tag. */
     public boolean isTag() {
-        return m_isTag;
+        return mIsTag;
     }
 
     /** Whether this block is a standalone tag. */
     public boolean isStandalone() {
-        return m_isStandalone;
+        return mIsStandalone;
     }
 
     /** Whether this is a closing tag. */
     public boolean isClose() {
-        return m_isClose;
+        return mIsClose;
     }
 
     /** Whether this block is a comment. */
     public boolean isComment() {
-        return m_isComment;
+        return mIsComment;
     }
 
     /**
@@ -166,11 +168,11 @@ public class XMLBlock {
      * attributes in text form if it is
      */
     public String getText() {
-        if (m_typeChar == '?') {
+        if (mTypeChar == '?') {
             // write < + [/ +] tagname + attributes + [/ +] >
-            StringBuilder tag = new StringBuilder("<?").append(m_text);
-            if (m_attrList != null) {
-                for (XMLAttribute attr : m_attrList) {
+            StringBuilder tag = new StringBuilder("<?").append(mText);
+            if (mAttrList != null) {
+                for (XMLAttribute attr : mAttrList) {
                     // add attribute/value pair
                     tag.append(' ').append(attr.name).append("=\"").append(attr.value).append('"');
                 }
@@ -178,19 +180,19 @@ public class XMLBlock {
 
             tag.append("?>");
             return tag.toString();
-        } else if (m_typeChar == '!') {
+        } else if (mTypeChar == '!') {
             StringBuilder tag = new StringBuilder("<!");
-            if (m_text.equals("CDATA")) {
-                tag.append('[').append(m_text).append('[');
-            } else if (m_text.equals("]]")) {
+            if (mText.equals("CDATA")) {
+                tag.append('[').append(mText).append('[');
+            } else if (mText.equals("]]")) {
                 tag.append("]]>");
-            } else if (m_isComment) {
-                tag.append("-- ").append(m_text).append(" -->");
+            } else if (mIsComment) {
+                tag.append("-- ").append(mText).append(" -->");
             } else {
-                tag.append(m_text).append(' ');
-                if (m_attrList != null) {
-                    if (!m_attrList.isEmpty()) {
-                        tag.append(m_attrList.get(0).name);
+                tag.append(mText).append(' ');
+                if (mAttrList != null) {
+                    if (!mAttrList.isEmpty()) {
+                        tag.append(mAttrList.get(0).name);
                     }
                 }
                 tag.append('>');
@@ -199,75 +201,82 @@ public class XMLBlock {
         } else if (isTag()) {
             // write < + [/ +] tagname + attributes + [/ +] >
             StringBuilder tag = new StringBuilder("<");
-            if (m_isClose) {
+            if (mIsClose) {
                 tag.append('/');
             }
-            tag.append(m_text);
-            if (m_attrList != null) {
-                for (XMLAttribute attr : m_attrList) {
+            tag.append(mText);
+            if (mAttrList != null) {
+                for (XMLAttribute attr : mAttrList) {
                     // add attribute/value pair
                     tag.append(' ').append(attr.name).append("=\"").append(attr.value).append('"');
                 }
             }
 
-            if (m_isStandalone)
+            if (mIsStandalone) {
                 tag.append(" /");
-
+            }
             tag.append('>');
 
             return tag.toString();
-        } else
-            return m_text;
+        } else {
+            return mText;
+        }
     }
 
     public String getTagName() {
-        if (isTag())
-            return m_text;
-        else
+        if (isTag()) {
+            return mText;
+        } else {
             return "";
+        }
     }
 
     public int numAttributes() {
-        if (m_attrList == null)
+        if (mAttrList == null) {
             return 0;
-        else
-            return m_attrList.size();
+        } else {
+            return mAttrList.size();
+        }
     }
 
     public XMLAttribute getAttribute(int n) {
-        if (n < 0 || !isTag() || m_attrList == null || n > m_attrList.size()) {
+        if (n < 0 || !isTag() || mAttrList == null || n > mAttrList.size()) {
             return null;
-        } else
-            return m_attrList.get(n);
+        } else {
+            return mAttrList.get(n);
+        }
     }
 
     public String getAttribute(String name) {
-        if (!isTag() || m_attrList == null)
+        if (!isTag() || mAttrList == null) {
             return null;
+        }
         XMLAttribute attr = null;
 
-        for (int i = 0; i < m_attrList.size(); i++) {
-            attr = m_attrList.get(i);
-            if (attr.name.equals(name))
+        for (int i = 0; i < mAttrList.size(); i++) {
+            attr = mAttrList.get(i);
+            if (attr.name.equals(name)) {
                 break;
-            else
+            } else {
                 attr = null;
+            }
         }
-        if (attr == null)
+        if (attr == null) {
             return null;
-        else
+        } else {
             return attr.value;
+        }
     }
 
-    private String m_text; // tagname if tag; text if not
-    private String m_shortcut; // user display for tag
-    private boolean m_isClose;
-    private boolean m_isComment;
-    private boolean m_isStandalone;
-    private boolean m_isTag;
-    private boolean m_hasText;
-    private char m_typeChar;
-    private List<XMLAttribute> m_attrList;
+    private String mText; // tagname if tag; text if not
+    private String mShortcut; // user display for tag
+    private boolean mIsClose;
+    private boolean mIsComment;
+    private boolean mIsStandalone;
+    private boolean mIsTag;
+    private boolean mHasText;
+    private char mTypeChar;
+    private List<XMLAttribute> mAttrList;
 
     /** Returns a string representation for debugging purposes mainly. */
     public String toString() {

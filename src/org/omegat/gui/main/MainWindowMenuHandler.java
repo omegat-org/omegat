@@ -213,12 +213,12 @@ public class MainWindowMenuHandler {
     }
 
     public void viewFileListMenuItemActionPerformed() {
-        if (mainWindow.m_projWin == null) {
+        if (mainWindow.projWin == null) {
             mainWindow.menu.viewFileListMenuItem.setSelected(false);
             return;
         }
 
-        mainWindow.m_projWin.setActive(!mainWindow.m_projWin.isActive());
+        mainWindow.projWin.setActive(!mainWindow.projWin.isActive());
     }
 
     public void projectAccessRootMenuItemActionPerformed() {
@@ -337,9 +337,9 @@ public class MainWindowMenuHandler {
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
         boolean projectModified = false;
-        if (Core.getProject().isProjectLoaded())
+        if (Core.getProject().isProjectLoaded()) {
             projectModified = Core.getProject().isProjectModified();
-
+        }
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
         if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
@@ -433,9 +433,9 @@ public class MainWindowMenuHandler {
      * replaces entire edited segment text with a the source text of a segment at cursor position
      */
     public void editOverwriteSourceMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
-
+        }
         String toInsert = Core.getEditor().getCurrentEntry().getSrcText();
         if (Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT)) {
             toInsert = EditorUtils.replaceGlossaryEntries(toInsert);
@@ -445,9 +445,9 @@ public class MainWindowMenuHandler {
 
     /** inserts the source text of a segment at cursor position */
     public void editInsertSourceMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
-
+        }
         String toInsert = Core.getEditor().getCurrentEntry().getSrcText();
         if (Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT)) {
             toInsert = EditorUtils.replaceGlossaryEntries(toInsert);
@@ -456,9 +456,9 @@ public class MainWindowMenuHandler {
     }
 
     public void editExportSelectionMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
-
+        }
         String selection = Core.getEditor().getSelectedText();
         if (selection == null) {
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
@@ -473,16 +473,16 @@ public class MainWindowMenuHandler {
     }
 
     public void editCreateGlossaryEntryMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
-
+        }
         Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
     }
 
     public void editFindInProjectMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
-
+        }
         SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
         mainWindow.addSearchWindow(search);
 
@@ -506,9 +506,9 @@ public class MainWindowMenuHandler {
     }
 
     public void editReplaceInProjectMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded())
+        if (!Core.getProject().isProjectLoaded()) {
             return;
-
+        }
         SearchWindowController search = new SearchWindowController(SearchMode.REPLACE);
         mainWindow.addSearchWindow(search);
 

@@ -39,7 +39,7 @@ import org.omegat.filters2.html2.FilterVisitor;
  * @author Didier Briel
  */
 class HHCFilterVisitor extends FilterVisitor {
-    public HHCFilterVisitor(HHCFilter2 hhcfilter, BufferedWriter bufwriter) {
+    HHCFilterVisitor(HHCFilter2 hhcfilter, BufferedWriter bufwriter) {
         super(hhcfilter, bufwriter, null);
     }
 
@@ -52,9 +52,9 @@ class HHCFilterVisitor extends FilterVisitor {
 
     @Override
     public void visitTag(Tag tag) {
-        if (isParagraphTag(tag) && text)
+        if (isParagraphTag(tag) && text) {
             endup();
-
+        }
         if ("PARAM".equals(tag.getTagName()) && "Name".equalsIgnoreCase(tag.getAttribute("name"))) {
             maybeTranslateAttribute(tag, "value");
         }

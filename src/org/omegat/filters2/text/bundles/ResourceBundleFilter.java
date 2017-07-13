@@ -268,7 +268,8 @@ public class ResourceBundleFilter extends AbstractFilter {
                 result.append("\\=");
             } else if (mode == EscapeMode.KEY && cp == ':') {
                 result.append("\\:");
-            } else if ((cp >= 32 && cp < 127) || charsetEncoder.canEncode(text.substring(i, i + Character.charCount(cp)))) {
+            } else if ((cp >= 32 && cp < 127)
+                    || charsetEncoder.canEncode(text.substring(i, i + Character.charCount(cp)))) {
                 result.appendCodePoint(cp);
             } else {
                 for (char c : Character.toChars(cp)) {
@@ -524,7 +525,8 @@ public class ResourceBundleFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, org.omegat.filters2.FilterContext fc) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile,
+            org.omegat.filters2.FilterContext fc) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 
@@ -545,10 +547,11 @@ public class ResourceBundleFilter extends AbstractFilter {
         try {
             ResourceBundleOptionsDialog dialog = new ResourceBundleOptionsDialog(parent, config);
             dialog.setVisible(true);
-            if (ResourceBundleOptionsDialog.RET_OK == dialog.getReturnStatus())
+            if (ResourceBundleOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions();
-            else
+            } else {
                 return null;
+            }
         } catch (Exception e) {
             Log.log(OStrings.getString("RB_FILTER_EXCEPTION"));
             Log.log(e);

@@ -41,7 +41,7 @@ public class CharTableModel extends AbstractTableModel {
 
     int columnCount = 16;
 
-    int glyphCount = 65535-32;
+    int glyphCount = 65535 - 32;
 
     StringBuilder data = null;
 
@@ -89,8 +89,8 @@ public class CharTableModel extends AbstractTableModel {
 
         StringBuilder temp = new StringBuilder();
         for (int i = 0; i < data.length(); i++) {
-            if (temp.indexOf(data.substring(i,i+1)) == -1) {
-                temp.append(data.substring(i, i+1));
+            if (temp.indexOf(data.substring(i, i + 1)) == -1) {
+                temp.append(data.substring(i, i + 1));
             }
         }
         data = new StringBuilder(temp);
@@ -133,7 +133,7 @@ public class CharTableModel extends AbstractTableModel {
         pos1 = pos1 >= data.length() ? data.length() - 1 : pos1;
         int pos2 = row2 * getColumnCount() + col2;
         pos2 = (pos2 >= data.length()) ? data.length() - 1 : pos2;
-        pos2 = (pos2 == pos1) ? pos1+1 : pos2;
+        pos2 = (pos2 == pos1) ? pos1 + 1 : pos2;
         data.delete(pos1, pos2);
         glyphCount = data.length();
         fireTableDataChanged();
@@ -151,14 +151,16 @@ public class CharTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        int value = rowIndex*columnCount + columnIndex;
-        if (value < glyphCount)
-            if (data!=null)
+        int value = rowIndex * columnCount + columnIndex;
+        if (value < glyphCount) {
+            if (data != null) {
                 return data.charAt(value);
-            else
-                return (char)(value + 32);
-        else
+            } else {
+                return (char) (value + 32);
+            }
+        } else {
             return null;
+        }
     }
 
     @Override

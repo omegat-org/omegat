@@ -58,8 +58,9 @@ public class XMLText extends Text {
             res.append(getText());
             res.append("]]>");
             return res.toString();
-        } else
+        } else {
             return StringUtil.makeValidXML(getText());
+        }
     }
 
     /**

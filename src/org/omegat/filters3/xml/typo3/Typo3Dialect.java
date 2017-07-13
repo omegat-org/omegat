@@ -73,8 +73,9 @@ public class Typo3Dialect extends DefaultXMLDialect {
             for (int i = 0; i < atts.size(); i++) {
                 Attribute oneAttribute = atts.get(i);
                 if (oneAttribute.getName().equalsIgnoreCase("localizable")
-                        && oneAttribute.getValue().equalsIgnoreCase("1"))
+                        && oneAttribute.getValue().equalsIgnoreCase("1")) {
                     return true;
+                }
             }
         }
         return false;

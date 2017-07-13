@@ -120,9 +120,9 @@ public class TextFilter extends AbstractFilter {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();
-        if (ch != 0xFEFF)
+        if (ch != 0xFEFF) {
             in.reset();
-
+        }
         int lineLength, maxLineLength;
         try {
             lineLength = Integer.parseInt(processOptions.get(TextFilter.OPTION_LINE_LENGTH));
@@ -157,8 +157,9 @@ public class TextFilter extends AbstractFilter {
         StringBuilder segment = new StringBuilder();
         char[] buf = new char[4096];
         int len;
-        while ((len = in.read(buf)) >= 0)
+        while ((len = in.read(buf)) >= 0) {
             segment.append(buf, 0, len);
+        }
         out.write(processEntry(segment.toString()));
     }
 
@@ -227,10 +228,11 @@ public class TextFilter extends AbstractFilter {
         try {
             TextOptionsDialog dialog = new TextOptionsDialog(parent, config);
             dialog.setVisible(true);
-            if (TextOptionsDialog.RET_OK == dialog.getReturnStatus())
+            if (TextOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions();
-            else
+            } else {
                 return null;
+            }
         } catch (Exception e) {
             Log.log("Text filter threw an exception:");
             Log.log(e);

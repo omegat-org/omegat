@@ -101,14 +101,15 @@ public class OpenDocDialect extends DefaultXMLDialect {
             // OOo 1.x
             defineIntactTag("text:footnote");
         }
-        if (options.getTranslateComments())
+        if (options.getTranslateComments()) {
             defineOutOfTurnTag("office:annotation");
-        else
+        } else {
             defineIntactTag("office:annotation");
-
-        if (options.getTranslateIndexes())
+        }
+        if (options.getTranslateIndexes()) {
             defineTranslatableTagAttributes("text:alphabetical-index-mark", new String[] {
                     "text:string-value", "text:key1", "text:key2" });
+        }
         if (options.getTranslateBookmarks()) {
             defineTranslatableTagsAttribute(new String[] { "text:bookmark", "text:bookmark-start",
                     "text:bookmark-end" }, "text:name");

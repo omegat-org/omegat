@@ -44,8 +44,9 @@ public final class XMLUtils {
     /** Converts attributes from org.xml.sax package to OmegaT's. */
     public static Attributes convertAttributes(org.xml.sax.Attributes attributes) {
         Attributes res = new Attributes();
-        if (attributes == null)
+        if (attributes == null) {
             return res;
+        }
 
         for (int i = 0; i < attributes.getLength(); i++) {
             String name = StringUtil.makeValidXML(attributes.getQName(i));

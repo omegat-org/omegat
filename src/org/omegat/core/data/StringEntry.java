@@ -40,13 +40,13 @@ import org.omegat.util.StringUtil;
 public class StringEntry {
     /** Creates a new string entry for a unique translatable string. */
     public StringEntry(String srcText) {
-        m_srcText = srcText;
-        m_translation = "";
+        mSrcText = srcText;
+        mTranslation = "";
     }
 
     /** Returns the source string */
     public String getSrcText() {
-        return m_srcText;
+        return mSrcText;
     }
 
     // these methods aren't sychronized - thought about doing so, but
@@ -60,7 +60,7 @@ public class StringEntry {
      * Returns the translation of the StringEntry.
      */
     public String getTranslation() {
-        return m_translation;
+        return mTranslation;
     }
 
     /**
@@ -69,19 +69,19 @@ public class StringEntry {
      * indicate that there's no translation.
      */
     public void setTranslation(String trans) {
-        if (trans == null)
+        if (trans == null) {
             trans = "";
-
-        m_translation = trans;
+        }
+        mTranslation = trans;
     }
 
     /**
      * Returns whether the given string entry is already translated.
      */
     public boolean isTranslated() {
-        return !StringUtil.isEmpty(m_translation);
+        return !StringUtil.isEmpty(mTranslation);
     }
 
-    private String m_srcText;
-    private String m_translation;
+    private String mSrcText;
+    private String mTranslation;
 }

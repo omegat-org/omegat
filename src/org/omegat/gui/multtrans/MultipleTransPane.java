@@ -137,7 +137,9 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
             DisplayedEntry de = new DisplayedEntry();
             de.entry = e;
             de.start = o.length();
-            if (e.entry.translation == null) continue;
+            if (e.entry.translation == null) {
+                continue;
+            }
             if (e.key != null) {
                 o.append(e.entry.translation).append('\n');
                 o.append('<').append(e.key.file);
@@ -228,33 +230,23 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         item = popup.add(OStrings.getString("MULT_POPUP_DEFAULT"));
         item.setEnabled(de != null && de.entry.key != null);
         if (de != null && de.entry.key != null) {
-            item.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Core.getEditor().replaceEditText(de.entry.entry.translation);
-                    Core.getEditor().setAlternateTranslationForCurrentEntry(false);
-                    Core.getEditor().commitAndLeave();
-                }
+            item.addActionListener(e -> {
+                Core.getEditor().replaceEditText(de.entry.entry.translation);
+                Core.getEditor().setAlternateTranslationForCurrentEntry(false);
+                Core.getEditor().commitAndLeave();
             });
         }
         // non-default translation
         item = popup.add(OStrings.getString("MULT_POPUP_REPLACE"));
         item.setEnabled(de != null);
         if (de != null) {
-            item.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Core.getEditor().replaceEditText(de.entry.entry.translation);
-                }
-            });
+            item.addActionListener(e -> Core.getEditor().replaceEditText(de.entry.entry.translation));
         }
 
         item = popup.add(OStrings.getString("MULT_POPUP_GOTO"));
         item.setEnabled(de != null);
         if (de != null) {
-            item.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Core.getEditor().gotoEntry(de.entry.sourceText, de.entry.key);
-                }
-            });
+            item.addActionListener(e -> Core.getEditor().gotoEntry(de.entry.sourceText, de.entry.key));
         }
     }
 
@@ -269,12 +261,8 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         //menu.addSeparator();
         final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("MULT_SETTINGS_NOTIFY"));
         notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_MULTIPLE_TRANSLATIONS));
-        notify.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Preferences.setPreference(Preferences.NOTIFY_MULTIPLE_TRANSLATIONS, notify.isSelected());
-            }
-        });
+        notify.addActionListener(e -> Preferences.setPreference(Preferences.NOTIFY_MULTIPLE_TRANSLATIONS,
+                notify.isSelected()));
         menu.add(notify);
     }
 }

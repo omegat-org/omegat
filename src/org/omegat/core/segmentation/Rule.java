@@ -97,10 +97,11 @@ public class Rule implements Serializable {
      * @return regular expression of a text before break.
      */
     public String getBeforebreak() {
-        if (beforebreak != null)
+        if (beforebreak != null) {
             return beforebreak.pattern();
-        else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -137,10 +138,11 @@ public class Rule implements Serializable {
      * @return regular expression of a text after break.
      */
     public String getAfterbreak() {
-        if (afterbreak != null)
+        if (afterbreak != null) {
             return afterbreak.pattern();
-        else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -177,10 +179,11 @@ public class Rule implements Serializable {
      */
     private Pattern compilePattern(String pattern) {
         Pattern testFlags = Pattern.compile(pattern);
-        if ((testFlags.flags() & Pattern.CASE_INSENSITIVE) == Pattern.CASE_INSENSITIVE)
+        if ((testFlags.flags() & Pattern.CASE_INSENSITIVE) == Pattern.CASE_INSENSITIVE) {
             return Pattern.compile(pattern, Pattern.UNICODE_CASE | Pattern.DOTALL);
-        else
+        } else {
             return Pattern.compile(pattern, Pattern.DOTALL);
+        }
     }
 
     /** Indicates whether some other Rule is "equal to" this one. */

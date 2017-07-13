@@ -57,8 +57,9 @@ public class ConsoleWindow implements IMainWindow {
 
         System.err.println(msg);
         String fulltext = msg;
-        if (ex != null)
+        if (ex != null) {
             fulltext += "\n" + ex.toString();
+        }
         System.err.println(OStrings.getString("TF_ERROR"));
         System.err.println(fulltext);
 
@@ -68,9 +69,9 @@ public class ConsoleWindow implements IMainWindow {
      * {@inheritDoc} Nothing is shown in quiet mode.
      */
     public void showStatusMessageRB(String messageKey, Object... params) {
-        if (RuntimePreferences.isQuietMode())
+        if (RuntimePreferences.isQuietMode()) {
             return;
-
+        }
         final String msg;
         if (messageKey == null) {
             msg = " ";

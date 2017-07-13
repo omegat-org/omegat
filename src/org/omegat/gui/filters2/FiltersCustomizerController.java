@@ -116,8 +116,9 @@ public class FiltersCustomizerController extends BasePreferencesController {
         panel = new FiltersCustomizerPanel();
         panel.filtersTable.setDefaultRenderer(String.class, new FilterFormatCellRenderer());
         panel.filtersTable.getSelectionModel().addListSelectionListener(e -> {
-            if (e.getValueIsAdjusting())
+            if (e.getValueIsAdjusting()) {
                 return;
+            }
             ListSelectionModel lsm = (ListSelectionModel) e.getSource();
             if (lsm.isSelectionEmpty()) {
                 panel.editButton.setEnabled(false);

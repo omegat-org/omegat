@@ -167,15 +167,16 @@ public class TMXWriterTest extends TestFilterBase {
             wr.close();
 
             StringBuilder text = new StringBuilder();
-            Reader rd = new InputStreamReader(new FileInputStream(outFile), "UTF-8");
-            char[] buffer = new char[512];
-            while (true) {
-                int len = rd.read(buffer);
-                if (len < 0)
-                    break;
-                text.append(buffer, 0, len);
+            try (Reader rd = new InputStreamReader(new FileInputStream(outFile), "UTF-8")) {
+                char[] buffer = new char[512];
+                while (true) {
+                    int len = rd.read(buffer);
+                    if (len < 0) {
+                        break;
+                    }
+                    text.append(buffer, 0, len);
+                }
             }
-            rd.close();
             assertTrue(text.toString().contains("tar\r\nget"));
 
             final List<String> trs = new ArrayList<String>();

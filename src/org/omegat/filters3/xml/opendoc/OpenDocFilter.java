@@ -109,21 +109,23 @@ public class OpenDocFilter extends AbstractFilter {
             TranslationException {
         ZipFile zipfile = new ZipFile(inFile);
         ZipOutputStream zipout = null;
-        if (outFile != null)
+        if (outFile != null) {
             zipout = new ZipOutputStream(new FileOutputStream(outFile));
+        }
         Enumeration<? extends ZipEntry> zipcontents = zipfile.entries();
         while (zipcontents.hasMoreElements()) {
             ZipEntry zipentry = zipcontents.nextElement();
             String shortname = zipentry.getName();
-            if (shortname.lastIndexOf('/') >= 0)
+            if (shortname.lastIndexOf('/') >= 0) {
                 shortname = shortname.substring(shortname.lastIndexOf('/') + 1);
+            }
             if (TRANSLATABLE.contains(shortname)) {
                 File tmpin = tmp();
                 FileUtils.copyInputStreamToFile(zipfile.getInputStream(zipentry), tmpin);
                 File tmpout = null;
-                if (zipout != null)
+                if (zipout != null) {
                     tmpout = tmp();
-
+                }
                 try {
                     createXMLFilter(processOptions).processFile(tmpin, tmpout, fc);
                 } catch (Exception e) {
@@ -139,11 +141,13 @@ public class OpenDocFilter extends AbstractFilter {
                     FileUtils.copyFile(tmpout, zipout);
                     zipout.closeEntry();
                 }
-                if (!tmpin.delete())
+                if (!tmpin.delete()) {
                     tmpin.deleteOnExit();
+                }
                 if (tmpout != null) {
-                    if (!tmpout.delete())
+                    if (!tmpout.delete()) {
                         tmpout.deleteOnExit();
+                    }
                 }
             } else {
                 if (zipout != null) {
@@ -154,8 +158,9 @@ public class OpenDocFilter extends AbstractFilter {
                 }
             }
         }
-        if (zipout != null)
+        if (zipout != null) {
             zipout.close();
+        }
         zipfile.close();
     }
 
@@ -206,10 +211,11 @@ public class OpenDocFilter extends AbstractFilter {
         try {
             EditOpenDocOptionsDialog dialog = new EditOpenDocOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
-            if (EditOpenDocOptionsDialog.RET_OK == dialog.getReturnStatus())
+            if (EditOpenDocOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions().getOptionsMap();
-            else
+            } else {
                 return null;
+            }
         } catch (Exception e) {
             Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
             Log.log(e);
@@ -219,7 +225,8 @@ public class OpenDocFilter extends AbstractFilter {
 
     @Override
     public String getInEncodingLastParsedFile() {
-        //Encoding is 'binary', it is zipped. Inside there may be many files. It makes no sense to display the encoding of some xml file inside.
+        // Encoding is 'binary', it is zipped. Inside there may be many files. It makes no sense to display
+        // the encoding of some xml file inside.
         return "OpenDoc";
     }
 }

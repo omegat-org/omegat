@@ -73,14 +73,16 @@ public class SegmentationRulesModel extends AbstractTableModel {
     }
 
     public Class<?> getColumnClass(int columnIndex) {
-        if (columnIndex == 0)
+        if (columnIndex == 0) {
             return Boolean.class;
-        else
+        } else {
             return String.class;
+        }
     }
 
     /** The names of table columns */
-    private static String[] COLUMN_NAMES = new String[] { OStrings.getString("CORE_SRX_TABLE_COLUMN_Break"),
+    private static final String[] COLUMN_NAMES = new String[] {
+            OStrings.getString("CORE_SRX_TABLE_COLUMN_Break"),
             OStrings.getString("CORE_SRX_TABLE_COLUMN_Before_Break"),
             OStrings.getString("CORE_SRX_TABLE_COLUMN_After_Break") };
 

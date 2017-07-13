@@ -53,7 +53,7 @@ public class XHTMLFilter extends XMLFilter {
      */
     public XHTMLFilter() {
         super(new XHTMLDialect());
-        do_not_send_to_core = false;
+        doNotSendToCore = false;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class XHTMLFilter extends XMLFilter {
      * Whether we're now processing the XHTML file the first time, and thus we don't need to send translatable
      * content to OmegaT core.
      */
-    private boolean do_not_send_to_core;
+    private boolean doNotSendToCore;
 
     /** Checking whether it is a valid XHTML file. */
     @Override
@@ -115,7 +115,7 @@ public class XHTMLFilter extends XMLFilter {
         boolean result = super.isFileSupported(inFile, config, context);
         if (result) {
             try {
-                do_not_send_to_core = true;
+                doNotSendToCore = true;
                 // Defining the actual dialect, because at this step
                 // we have the options
                 XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
@@ -125,7 +125,7 @@ public class XHTMLFilter extends XMLFilter {
                 Log.log("XHTML file " + inFile.getName() + " is not valid.");
                 result = false;
             } finally {
-                do_not_send_to_core = false;
+                doNotSendToCore = false;
             }
         }
         return result;
@@ -137,9 +137,9 @@ public class XHTMLFilter extends XMLFilter {
      */
     @Override
     public String translate(String entry, List<ProtectedPart> protectedParts) {
-        if (do_not_send_to_core)
+        if (doNotSendToCore) {
             return entry;
-        else {
+        } else {
             Pattern skipRegExpPattern = ((XHTMLDialect) this.getDialect()).getSkipRegExpPattern();
             if (skipRegExpPattern != null) {
                 if (skipRegExpPattern.matcher(entry).matches()) {
@@ -172,10 +172,11 @@ public class XHTMLFilter extends XMLFilter {
         try {
             EditXOptionsDialog dialog = new EditXOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
-            if (EditXOptionsDialog.RET_OK == dialog.getReturnStatus())
+            if (EditXOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions().getOptionsMap();
-            else
+            } else {
                 return null;
+            }
         } catch (Exception e) {
             Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
             Log.log(e);

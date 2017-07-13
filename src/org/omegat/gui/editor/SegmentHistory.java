@@ -72,9 +72,9 @@ class SegmentHistory {
             int current = history.get(pointer);
 
             // no need for identical values- just to make sure
-            if (current == segmentNumber)
+            if (current == segmentNumber) {
                 return;
-
+            }
             if (pointer < history.size() - 1) {
                 // drop the ones later than the current
                 /*
@@ -94,22 +94,23 @@ class SegmentHistory {
      * return the current segment value. -1 if none available;
      */
     public int getValue() {
-        if (pointer > -1)
+        if (pointer > -1) {
             return get(pointer);
-        else
+        } else {
             return -1;
+        }
     }
 
     /**
      * return the previous segment value. -1 if not applicable (no previous)
      */
     public int back() {
-        if (pointer < 0)
+        if (pointer < 0) {
             return -1;
-
-        if (pointer > 0)
+        }
+        if (pointer > 0) {
             pointer--;
-
+        }
         int result = get(pointer);
 
         return result;
@@ -119,9 +120,9 @@ class SegmentHistory {
      * return the next segment value. -1 if not applicable (no next)
      */
     public int forward() {
-        if (pointer == -1 || pointer >= history.size() - 1)
+        if (pointer == -1 || pointer >= history.size() - 1) {
             return -1;
-
+        }
         return get(++pointer);
     }
 

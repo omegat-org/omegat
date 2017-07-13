@@ -92,8 +92,9 @@ public final class Statistics {
     /** Computes the number of words in a string. */
     public static int numberOfWords(String str) {
         int len = str.length();
-        if (len == 0)
+        if (len == 0) {
             return 0;
+        }
         int nTokens = 0;
         BreakIterator breaker = DefaultTokenizer.getWordBreaker();
         breaker.setText(str);
@@ -125,15 +126,10 @@ public final class Statistics {
      * @param data
      */
     public static void writeStat(String filename, String text) {
-        try {
-            OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8);
-            try {
-                out.write(DateFormat.getInstance().format(new Date()) + "\n");
-                out.write(text);
-                out.flush();
-            } finally {
-                out.close();
-            }
+        try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(filename),
+                StandardCharsets.UTF_8)) {
+            out.write(DateFormat.getInstance().format(new Date()) + "\n");
+            out.write(text);
         } catch (Exception ex) {
             Log.log(ex);
         }

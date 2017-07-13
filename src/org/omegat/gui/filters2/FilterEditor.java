@@ -108,8 +108,9 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting())
+        if (e.getValueIsAdjusting()) {
             return;
+        }
         ListSelectionModel lsm = (ListSelectionModel) e.getSource();
         if (lsm.isSelectionEmpty()) {
             editButton.setEnabled(false);

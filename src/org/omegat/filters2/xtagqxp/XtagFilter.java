@@ -79,14 +79,16 @@ public class XtagFilter extends AbstractFilter {
     }
 
     @Override
-    public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc) throws IOException, TranslationException {
+    public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc)
+            throws IOException, TranslationException {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();
-        if (ch != 0xFEFF)
+        if (ch != 0xFEFF) {
             in.reset();
-        else
+        } else {
             out.write(ch); // If there was a BOM, we rewrite it
+        }
 
         processXtagFile(in, out);
     }
@@ -104,9 +106,9 @@ public class XtagFilter extends AbstractFilter {
      */
     private void processXtagFile(BufferedReader inFile, Writer outFile) throws IOException,
             TranslationException {
-        final int STATE_WAIT_TEXT = 1;
-        final int STATE_READ_TEXT = 2;
-        int state = STATE_WAIT_TEXT;
+        final int stateWaitText = 1;
+        final int stateReadText = 2;
+        int state = stateWaitText;
         String tr;
 
         String s;
@@ -116,18 +118,20 @@ public class XtagFilter extends AbstractFilter {
             if (s.startsWith("@$:")) {
                 outFile.write("@$:");
                 s = s.substring(3);
-                state = STATE_READ_TEXT;
+                state = stateReadText;
             } else if (s.startsWith("#boxname")) {
-                state = STATE_WAIT_TEXT;
+                state = stateWaitText;
             }
-            if (state == STATE_READ_TEXT) {
+            if (state == stateReadText) {
                 tr = privateProcessEntry(s);
-            } else
+            } else {
                 tr = s;
+            }
             outFile.write(tr);
             s = inFile.readLine();
-            if (s != null)
+            if (s != null) {
                 outFile.write(EOL);
+            }
         }
     }
 
@@ -188,10 +192,10 @@ public class XtagFilter extends AbstractFilter {
      */
     private String convertToTags(String s) {
         StringBuilder changedString = new StringBuilder();
-        final int STATE_NORMAL = 1;
-        final int STATE_COLLECT_TAG = 2;
+        final int stateNormal = 1;
+        final int stateCollectTag = 2;
 
-        int state = STATE_NORMAL;
+        int state = stateNormal;
         int num = 0;
         listTags.clear();
 
@@ -199,9 +203,9 @@ public class XtagFilter extends AbstractFilter {
         for (int cp, i = 0; i < s.length(); i += Character.charCount(cp)) {
             cp = s.codePointAt(i);
             // Start of a tag
-            if ((cp == '<') && (!(state == STATE_COLLECT_TAG))) {
+            if ((cp == '<') && (!(state == stateCollectTag))) {
                 tag.setLength(0);
-                state = STATE_COLLECT_TAG;
+                state = stateCollectTag;
                 // Possible end of a tag
                 // Exception for <\>>, which is how CopyFlow stores a >
             } else if ((cp == '>') && (tag.lastIndexOf("\\") != tag.offsetByCodePoints(tag.length(), -1))) {
@@ -210,8 +214,8 @@ public class XtagFilter extends AbstractFilter {
                 changedString.append(oneTag.toShortcut());
                 listTags.add(oneTag);
                 tag.setLength(0);
-                state = STATE_NORMAL;
-            } else if (state == STATE_COLLECT_TAG) {
+                state = stateNormal;
+            } else if (state == stateCollectTag) {
                 tag.appendCodePoint(cp);
             } else {
                 changedString.appendCodePoint(cp);
@@ -231,26 +235,26 @@ public class XtagFilter extends AbstractFilter {
      */
     private String convertToXtags(String s) {
         StringBuilder changedString = new StringBuilder();
-        final int STATE_NORMAL = 1;
-        final int STATE_COLLECT_TAG = 2;
+        final int stateNormal = 1;
+        final int stateCollectTag = 2;
 
-        int state = STATE_NORMAL;
+        int state = stateNormal;
 
         StringBuilder tag = new StringBuilder(s.length());
         for (int cp, i = 0; i < s.length(); i += Character.charCount(cp)) {
             cp = s.codePointAt(i);
             // Start of a tag
-            if ((cp == '<') && (state != STATE_COLLECT_TAG)) {
+            if ((cp == '<') && (state != stateCollectTag)) {
                 tag.setLength(0);
                 tag.appendCodePoint(cp);
-                state = STATE_COLLECT_TAG;
+                state = stateCollectTag;
                 // End of a tag
-            } else if ((cp == '>') && (state == STATE_COLLECT_TAG)) {
+            } else if ((cp == '>') && (state == stateCollectTag)) {
                 tag.appendCodePoint(cp);
                 changedString.append(findTag(tag));
-                state = STATE_NORMAL;
+                state = stateNormal;
                 tag.setLength(0);
-            } else if (state == STATE_COLLECT_TAG) {
+            } else if (state == stateCollectTag) {
                 tag.appendCodePoint(cp);
             } else {
                 changedString.append(convertSpecialCharacter(cp));

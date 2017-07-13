@@ -87,8 +87,8 @@ public class SRX implements Serializable {
      */
     private void init() {
         this.mappingRules = new ArrayList<MapRule>();
-        this.includeEndingTags=true;
-        this.segmentSubflows=true;
+        this.includeEndingTags = true;
+        this.segmentSubflows = true;
         initDefaults();
     }
 
@@ -174,8 +174,9 @@ public class SRX implements Serializable {
             }
         } catch (Exception e) {
             // silently ignoring FNF
-            if (!(e instanceof FileNotFoundException))
+            if (!(e instanceof FileNotFoundException)) {
                 Log.log(e);
+            }
             res = new SRX();
             res.initDefaults();
         }
@@ -258,10 +259,10 @@ public class SRX implements Serializable {
         // renaming "Default (English)" to "Default"
         // and removing English/Text/HTML-specific rules from there
         if (OT160RC9_VERSION.equals(CURRENT_VERSION)) {
-            String DEF = "Default (English)";
+            String def = "Default (English)";
             for (int i = 0; i < current.getMappingRules().size(); i++) {
                 MapRule maprule = current.getMappingRules().get(i);
-                if (DEF.equals(maprule.getLanguageCode())) {
+                if (def.equals(maprule.getLanguageCode())) {
                     maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
                     maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
@@ -376,8 +377,9 @@ public class SRX implements Serializable {
         List<Rule> rules = new ArrayList<Rule>();
         for (int i = 0; i < getMappingRules().size(); i++) {
             MapRule maprule = getMappingRules().get(i);
-            if (maprule.getCompiledPattern().matcher(srclang.getLanguage()).matches())
+            if (maprule.getCompiledPattern().matcher(srclang.getLanguage()).matches()) {
                 rules.addAll(maprule.getRules());
+            }
         }
         return rules;
     }
@@ -546,31 +548,42 @@ public class SRX implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         SRX other = (SRX) obj;
-        if (includeEndingTags != other.includeEndingTags)
+        if (includeEndingTags != other.includeEndingTags) {
             return false;
-        if (includeIsolatedTags != other.includeIsolatedTags)
+        }
+        if (includeIsolatedTags != other.includeIsolatedTags) {
             return false;
-        if (includeStartingTags != other.includeStartingTags)
+        }
+        if (includeStartingTags != other.includeStartingTags) {
             return false;
+        }
         if (mappingRules == null) {
-            if (other.mappingRules != null)
+            if (other.mappingRules != null) {
                 return false;
-        } else if (!mappingRules.equals(other.mappingRules))
+            }
+        } else if (!mappingRules.equals(other.mappingRules)) {
             return false;
-        if (segmentSubflows != other.segmentSubflows)
+        }
+        if (segmentSubflows != other.segmentSubflows) {
             return false;
+        }
         if (version == null) {
-            if (other.version != null)
+            if (other.version != null) {
                 return false;
-        } else if (!version.equals(other.version))
+            }
+        } else if (!version.equals(other.version)) {
             return false;
+        }
         return true;
     }
 }

@@ -88,8 +88,9 @@ public class XHTMLDialect extends DefaultXMLDialect {
         if (publicId != null && PUBLIC_XHTML.matcher(publicId).matches() && systemId.endsWith(".dtd")) {
             URL dtdresource = XHTMLDialect.class.getResource(DTD);
             return new InputSource(dtdresource.toExternalForm());
-        } else
+        } else {
             return null;
+        }
     }
 
     /**
@@ -102,9 +103,9 @@ public class XHTMLDialect extends DefaultXMLDialect {
                 "li", "dl", "dt", "dd", "form", "textarea", "fieldset", "legend", "label", "select",
                 "option", "hr" });
         // Optional paragraph on BR
-        if (options.getParagraphOnBr())
+        if (options.getParagraphOnBr()) {
             defineParagraphTag("br");
-
+        }
         defineShortcut("br", "br");
 
         definePreformatTags(new String[] { "textarea", "pre", });
@@ -113,17 +114,22 @@ public class XHTMLDialect extends DefaultXMLDialect {
 
         defineTranslatableAttributes(new String[] { "abbr", "alt", "content", "summary", "title", "placeholder"});
 
-        if (options.getTranslateHref())
+        if (options.getTranslateHref()) {
             defineTranslatableAttribute("href");
-        if (options.getTranslateSrc())
+        }
+        if (options.getTranslateSrc()) {
             defineTranslatableTagAttribute("img", "src");
-        if (options.getTranslateLang())
+        }
+        if (options.getTranslateLang()) {
             defineTranslatableAttributes(new String[] { "lang", "xml:lang", });
-        if (options.getTranslateHreflang())
+        }
+        if (options.getTranslateHreflang()) {
             defineTranslatableAttribute("hreflang");
+        }
         if ((this.translateValue = options.getTranslateValue())
-                || (this.translateButtonValue = options.getTranslateButtonValue()))
+                || (this.translateButtonValue = options.getTranslateButtonValue())) {
             defineTranslatableTagAttribute("input", "value");
+        }
 
         // Prepare matcher
         String skipRegExp = options.getSkipRegExp();
@@ -168,9 +174,9 @@ public class XHTMLDialect extends DefaultXMLDialect {
         // special case:
         if ("INPUT".equalsIgnoreCase(tag) && attribute.equalsIgnoreCase("value")) {
             // special handling of input tags value attribute.
-            if (this.translateValue)
+            if (this.translateValue) {
                 return true;
-            else if (this.translateButtonValue) {
+            } else if (this.translateButtonValue) {
                 // translate the value only for buttons
                 for (int i = 0; i < atts.size(); i++) {
                     Attribute otherAttribute = atts.get(i);
@@ -183,12 +189,13 @@ public class XHTMLDialect extends DefaultXMLDialect {
                 }
                 // don't translate for other input elements
                 return false;
-            } else
+            } else {
                 // should not be possible, because
                 // validateTranslatableTagAttribute
                 // is only called when input.value is in
                 // translatable(Tag)Attributes.
                 return super.validateTranslatableTagAttribute(tag, attribute, atts);
+            }
         } else if ("META".equalsIgnoreCase(tag) && "content".equalsIgnoreCase(attribute)) {
             // Special handling of meta-tag: depending on the other attributes
             // the content attribute should or should not be translated.
@@ -199,11 +206,13 @@ public class XHTMLDialect extends DefaultXMLDialect {
                 Attribute otherAttribute = atts.get(i);
                 String name = otherAttribute.getName();
                 String value = otherAttribute.getValue();
-                if (name == null || value == null)
+                if (name == null || value == null) {
                     continue;
+                }
                 doSkipMetaTag = checkDoSkipMetaTag(name, value);
-                if (doSkipMetaTag)
+                if (doSkipMetaTag) {
                     break;
+                }
             }
             if (doSkipMetaTag) {
                 return false;

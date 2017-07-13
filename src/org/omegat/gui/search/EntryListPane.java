@@ -51,8 +51,6 @@ import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
@@ -116,11 +114,9 @@ class EntryListPane extends JTextPane {
         bindKeyStrokesFromMainMenuShortcuts(map);
 
         // Add KeyStrokes: Enter, Ctrl+Enter (Cmd+Enter for MacOS)
-        int CTRL_CMD_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
-                KEY_GO_TO_NEXT_SEGMENT);
-        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, CTRL_CMD_MASK),
-                KEY_GO_TO_PREVIOUS_SEGMENT);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), KEY_GO_TO_NEXT_SEGMENT);
+        map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), KEY_GO_TO_PREVIOUS_SEGMENT);
         return map;
     }
 
@@ -144,7 +140,7 @@ class EntryListPane extends JTextPane {
         return map;
     }
 
-    public EntryListPane() {
+    EntryListPane() {
         setDocument(new DefaultStyledDocument());
 
         setDragEnabled(true);
@@ -156,7 +152,7 @@ class EntryListPane extends JTextPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    if (!autoSyncWithEditor && !m_entryList.isEmpty()) {
+                    if (!autoSyncWithEditor && !entryList.isEmpty()) {
                         getActiveDisplayedEntry().gotoEntryInEditor();
                     }
                     JFrame frame = Core.getMainWindow().getApplicationFrame();
@@ -177,14 +173,11 @@ class EntryListPane extends JTextPane {
             }
         });
 
-        addCaretListener(new CaretListener() {
-            @Override
-            public void caretUpdate(CaretEvent e) {
-                SwingUtilities.invokeLater(highlighter);
+        addCaretListener(e -> {
+            SwingUtilities.invokeLater(highlighter);
 
-                if (autoSyncWithEditor) {
-                    getActiveDisplayedEntry().gotoEntryInEditor();
-                }
+            if (autoSyncWithEditor) {
+                getActiveDisplayedEntry().gotoEntryInEditor();
             }
         });
 
@@ -219,14 +212,14 @@ class EntryListPane extends JTextPane {
     public void displaySearchResult(Searcher searcher, int numberOfResults) {
         UIThreadsUtil.mustBeSwingThread();
 
-        m_searcher = searcher;
+        this.searcher = searcher;
 
         this.numberOfResults = numberOfResults;
 
         currentlyDisplayedMatches = null;
-        m_entryList.clear();
-        m_offsetList.clear();
-        m_firstMatchList.clear();
+        entryList.clear();
+        offsetList.clear();
+        firstMatchList.clear();
 
         if (searcher == null || searcher.getSearchResults() == null) {
             // empty marks - just reset
@@ -255,7 +248,7 @@ class EntryListPane extends JTextPane {
         if (nrEntries > 0) {
             int pos = getSelectionStart();
             for (int i = 0; i < nrEntries; i++) {
-                if (pos < m_offsetList.get(i)) {
+                if (pos < offsetList.get(i)) {
                     return i;
                 }
             }
@@ -270,27 +263,27 @@ class EntryListPane extends JTextPane {
         public DisplayMatches(final List<SearchResultEntry> entries) {
             UIThreadsUtil.mustBeSwingThread();
 
-            StringBuilder m_stringBuf = new StringBuilder();
+            StringBuilder stringBuf = new StringBuilder();
             // display what's been found so far
             if (entries.isEmpty()) {
                 // no match
-                addMessage(m_stringBuf, OStrings.getString("ST_NOTHING_FOUND"));
+                addMessage(stringBuf, OStrings.getString("ST_NOTHING_FOUND"));
             }
 
             if (entries.size() >= numberOfResults) {
-                addMessage(m_stringBuf, StringUtil.format(OStrings.getString("SW_MAX_FINDS_REACHED"),
+                addMessage(stringBuf, StringUtil.format(OStrings.getString("SW_MAX_FINDS_REACHED"),
                         numberOfResults));
             }
 
             for (SearchResultEntry e : entries) {
-                addEntry(m_stringBuf, e.getEntryNum(), e.getPreamble(), e.getSrcPrefix(), e.getSrcText(),
+                addEntry(stringBuf, e.getEntryNum(), e.getPreamble(), e.getSrcPrefix(), e.getSrcText(),
                         e.getTranslation(), e.getNote(), e.getSrcMatch(), e.getTargetMatch(), e.getNoteMatch());
             }
 
             Document doc = getDocument();
             try {
                 doc.remove(0, doc.getLength());
-                doc.insertString(0, m_stringBuf.toString(), null);
+                doc.insertString(0, stringBuf.toString(), null);
             } catch (Exception ex) {
                 Log.log(ex);
             }
@@ -301,60 +294,61 @@ class EntryListPane extends JTextPane {
         }
 
         // add entry text - remember what its number is and where it ends
-        public void addEntry(StringBuilder m_stringBuf, int num, String preamble, String srcPrefix,
+        public void addEntry(StringBuilder stringBuf, int num, String preamble, String srcPrefix,
                 String src, String loc, String note, SearchMatch[] srcMatches,
                 SearchMatch[] targetMatches, SearchMatch[] noteMatches) {
-            if (m_stringBuf.length() > 0)
-                m_stringBuf.append(ENTRY_SEPARATOR);
-
-            if (preamble != null && !preamble.equals(""))
-                m_stringBuf.append(preamble + "\n");
+            if (stringBuf.length() > 0) {
+                stringBuf.append(ENTRY_SEPARATOR);
+            }
+            if (preamble != null && !preamble.equals("")) {
+                stringBuf.append(preamble + "\n");
+            }
             if (src != null && !src.equals("")) {
-                m_stringBuf.append("-- ");
+                stringBuf.append("-- ");
                 if (srcPrefix != null) {
-                    m_stringBuf.append(srcPrefix);
+                    stringBuf.append(srcPrefix);
                 }
                 if (srcMatches != null) {
                     for (SearchMatch m : srcMatches) {
-                        m.move(m_stringBuf.length());
+                        m.move(stringBuf.length());
                         matches.add(m);
                     }
                 }
-                m_stringBuf.append(src);
-                m_stringBuf.append('\n');
+                stringBuf.append(src);
+                stringBuf.append('\n');
             }
             if (loc != null && !loc.equals("")) {
-                m_stringBuf.append("-- ");
+                stringBuf.append("-- ");
                 if (targetMatches != null && targetMatches.length > 0) {
                     // Save first match position to select it in Editor pane later
                     if (num > 0) {
                         SearchMatch m = targetMatches[0];
-                        m_firstMatchList.put(num, new CaretPosition(m.getStart(), m.getEnd()));
+                        firstMatchList.put(num, new CaretPosition(m.getStart(), m.getEnd()));
                     }
 
                     for (SearchMatch m : targetMatches) {
-                        m.move(m_stringBuf.length());
+                        m.move(stringBuf.length());
                         matches.add(m);
                     }
                 }
-                m_stringBuf.append(loc);
-                m_stringBuf.append('\n');
+                stringBuf.append(loc);
+                stringBuf.append('\n');
             }
 
             if (note != null && !note.equals("")) {
-                m_stringBuf.append("= ");
+                stringBuf.append("= ");
                 if (noteMatches != null) {
                     for (SearchMatch m : noteMatches) {
-                        m.move(m_stringBuf.length());
+                        m.move(stringBuf.length());
                         matches.add(m);
                     }
                 }
-                m_stringBuf.append(note);
-                m_stringBuf.append('\n');
+                stringBuf.append(note);
+                stringBuf.append('\n');
             }
 
-            m_entryList.add(num);
-            m_offsetList.add(m_stringBuf.length());
+            entryList.add(num);
+            offsetList.add(stringBuf.length());
         }
 
         public void doMarks() {
@@ -385,13 +379,13 @@ class EntryListPane extends JTextPane {
      * @param message
      *            The message to display
      */
-    private void addMessage(StringBuilder m_stringBuf, String message) {
+    private void addMessage(StringBuilder stringBuf, String message) {
         // Insert entry/message separator if necessary
-        if (m_stringBuf.length() > 0)
-            m_stringBuf.append(ENTRY_SEPARATOR);
-
+        if (stringBuf.length() > 0) {
+            stringBuf.append(ENTRY_SEPARATOR);
+        }
         // Insert the message text
-        m_stringBuf.append(message);
+        stringBuf.append(message);
     }
 
     public void reset() {
@@ -399,15 +393,15 @@ class EntryListPane extends JTextPane {
     }
 
     public int getNrEntries() {
-        return m_entryList.size();
+        return entryList.size();
     }
 
     public List<Integer> getEntryList() {
-        return m_entryList;
+        return entryList;
     }
 
     public Searcher getSearcher() {
-        return m_searcher;
+        return searcher;
     }
 
     private void initActions() {
@@ -448,7 +442,7 @@ class EntryListPane extends JTextPane {
         actionMap.put(KEY_JUMP_TO_ENTRY_IN_EDITOR, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!autoSyncWithEditor && !m_entryList.isEmpty()) {
+                if (!autoSyncWithEditor && !entryList.isEmpty()) {
                     getActiveDisplayedEntry().gotoEntryInEditor();
                 }
             }
@@ -508,7 +502,7 @@ class EntryListPane extends JTextPane {
 
         private final int index;
 
-        private DisplayedEntryImpl(int index) {
+        DisplayedEntryImpl(int index) {
             this.index = index;
         }
 
@@ -539,8 +533,8 @@ class EntryListPane extends JTextPane {
 
             int beginPos = 0;
             if (index != 0) {
-                beginPos = m_offsetList.get(index - 1) + ENTRY_SEPARATOR.length();
-                int endPos = m_offsetList.get(index);
+                beginPos = offsetList.get(index - 1) + ENTRY_SEPARATOR.length();
+                int endPos = offsetList.get(index);
                 try {
                     Rectangle endRect = modelToView(endPos);
                     scrollRectToVisible(endRect);
@@ -559,22 +553,19 @@ class EntryListPane extends JTextPane {
                 return;
             }
 
-            final int entry = m_entryList.get(index);
+            final int entry = entryList.get(index);
             if (entry > 0) {
                 final IEditor editor = Core.getEditor();
                 int currEntryInEditor = editor.getCurrentEntryNumber();
                 if (currEntryInEditor != 0 && entry != currEntryInEditor) {
                     final boolean isSegDisplayed = isSegmentDisplayed(entry);
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (isSegDisplayed && m_firstMatchList.containsKey(entry)) {
-                                // Select search word in Editor pane
-                                CaretPosition pos = m_firstMatchList.get(entry);
-                                editor.gotoEntry(entry, pos);
-                            } else {
-                                editor.gotoEntry(entry);
-                            }
+                    SwingUtilities.invokeLater(() -> {
+                        if (isSegDisplayed && firstMatchList.containsKey(entry)) {
+                            // Select search word in Editor pane
+                            CaretPosition pos = firstMatchList.get(entry);
+                            editor.gotoEntry(entry, pos);
+                        } else {
+                            editor.gotoEntry(entry);
                         }
                     });
                 }
@@ -601,7 +592,7 @@ class EntryListPane extends JTextPane {
         private int offset         = -1;
         private int length         = -1;
 
-        public SegmentHighlighter() {
+        SegmentHighlighter() {
             MutableAttributeSet attrNormal = new SimpleAttributeSet();
             StyleConstants.setBackground(attrNormal, getBackground());
             this.attrNormal = attrNormal;
@@ -630,12 +621,12 @@ class EntryListPane extends JTextPane {
 
         public void reset() {
             entryListIndex = -1;
-            offset         = -1;
-            length         = -1;
+            offset = -1;
+            length = -1;
         }
 
         private void removeCurrentHighlight() {
-            if (entryListIndex == -1 || entryListIndex >= m_offsetList.size() || length <= 0) {
+            if (entryListIndex == -1 || entryListIndex >= offsetList.size() || length <= 0) {
                 return;
             }
 
@@ -644,14 +635,13 @@ class EntryListPane extends JTextPane {
         }
 
         private void addHighlight(int entryListIndex) {
-            if (entryListIndex == -1 || entryListIndex >= m_offsetList.size()) {
+            if (entryListIndex == -1 || entryListIndex >= offsetList.size()) {
                 return;
             }
 
-            int offset = entryListIndex == 0
-                    ? 0
-                    : m_offsetList.get(entryListIndex - 1) + ENTRY_SEPARATOR.length();
-            int length = m_offsetList.get(entryListIndex) - offset - 1; // except tail line break
+            int offset = entryListIndex == 0 ? 0
+                    : offsetList.get(entryListIndex - 1) + ENTRY_SEPARATOR.length();
+            int length = offsetList.get(entryListIndex) - offset - 1; // except tail line break
 
             getStyledDocument().setCharacterAttributes(offset, length, attrActive, false);
 
@@ -661,10 +651,10 @@ class EntryListPane extends JTextPane {
         }
     }
 
-    private volatile Searcher m_searcher;
-    private final List<Integer> m_entryList = new ArrayList<Integer>();
-    private final List<Integer> m_offsetList = new ArrayList<Integer>();
-    private final Map<Integer, CaretPosition> m_firstMatchList = new HashMap<Integer, CaretPosition>();
+    private volatile Searcher searcher;
+    private final List<Integer> entryList = new ArrayList<>();
+    private final List<Integer> offsetList = new ArrayList<>();
+    private final Map<Integer, CaretPosition> firstMatchList = new HashMap<>();
     private DisplayMatches currentlyDisplayedMatches;
     private int numberOfResults;
     private boolean useTabForAdvance;

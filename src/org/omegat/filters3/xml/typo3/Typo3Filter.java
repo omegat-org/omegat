@@ -107,15 +107,16 @@ public class Typo3Filter extends XMLFilter {
         }
         try {
             char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
-            int cbuf_len = reader.read(cbuf);
-            String buf = new String(cbuf, 0, cbuf_len);
+            int cbufLen = reader.read(cbuf);
+            String buf = new String(cbuf, 0, cbufLen);
             Matcher matcher = Typo3Dialect.TYPO3_ROOT_TAG.matcher(buf);
             if (matcher.find()) { // This a Typo3 main page...
                 return true;
             } else { // Let's see if we have Typo3 secondary page...
                 matcher = Typo3Dialect.TYPO3_ROOT_TAG2.matcher(buf);
-                if (!matcher.find()) // Neither kind of page
+                if (!matcher.find()) {
                     return false;
+                }
             }
         } catch (Exception e) {
             return false;

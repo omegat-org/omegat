@@ -63,8 +63,8 @@ import org.omegat.util.OStrings;
  */
 public class OpenXMLFilter extends AbstractFilter {
     private static final Logger LOGGER = Logger.getLogger(OpenXMLFilter.class.getName());
-    private String DOCUMENTS;
-    private Pattern TRANSLATABLE;
+    private String documents;
+    private Pattern translatable;
     private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");
 
     /**
@@ -140,9 +140,9 @@ public class OpenXMLFilter extends AbstractFilter {
             sb.append("|(\\w+\\d*\\.xml\\.rels)");
         }
         sb.append("|(page\\d+\\.xml)");
-        DOCUMENTS = sb.toString();
+        documents = sb.toString();
 
-        TRANSLATABLE = Pattern.compile(DOCUMENTS);
+        translatable = Pattern.compile(documents);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class OpenXMLFilter extends AbstractFilter {
                 ZipEntry entry = entries.nextElement();
                 String shortname = entry.getName();
                 shortname = removePath(shortname);
-                Matcher filematch = TRANSLATABLE.matcher(shortname);
+                Matcher filematch = translatable.matcher(shortname);
                 if (filematch.matches()) {
                     return true;
                 }
@@ -206,8 +206,9 @@ public class OpenXMLFilter extends AbstractFilter {
      * @return The filename without an .xml extension if found in it
      */
     private static String removeXML(String fileName) {
-        if (fileName.endsWith(".xml"))
+        if (fileName.endsWith(".xml")) {
             fileName = fileName.substring(0, fileName.lastIndexOf(".xml"));
+        }
         return fileName;
     }
 
@@ -237,7 +238,7 @@ public class OpenXMLFilter extends AbstractFilter {
 
             for (ZipEntry zipentry : filelist) {
                 String shortname = removePath(zipentry.getName());
-                if (TRANSLATABLE.matcher(shortname).matches()) {
+                if (translatable.matcher(shortname).matches()) {
                     File tmpin = tmp();
                     FileUtils.copyInputStreamToFile(zipfile.getInputStream(zipentry), tmpin);
                     File tmpout = null;
@@ -323,8 +324,8 @@ public class OpenXMLFilter extends AbstractFilter {
                 }
             }
 
-            int index1 = DOCUMENTS.indexOf(shortname1);
-            int index2 = DOCUMENTS.indexOf(shortname2);
+            int index1 = documents.indexOf(shortname1);
+            int index2 = documents.indexOf(shortname2);
 
             if (index1 > index2) {
                 return 1;
@@ -395,10 +396,11 @@ public class OpenXMLFilter extends AbstractFilter {
         try {
             EditOpenXMLOptionsDialog dialog = new EditOpenXMLOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
-            if (EditOpenXMLOptionsDialog.RET_OK == dialog.getReturnStatus())
+            if (EditOpenXMLOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions().getOptionsMap();
-            else
+            } else {
                 return null;
+            }
         } catch (Exception e) {
             Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
             Log.log(e);

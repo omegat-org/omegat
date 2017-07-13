@@ -130,9 +130,9 @@ public class XMLReader extends Reader {
             String buffer = defaultEncoding == null ? new String(buf, 0, len, Charset.defaultCharset())
                     : new String(buf, 0, len, defaultEncoding);
 
-            Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
-            if (matcher_xml.find()) {
-                encoding = matcher_xml.group(1);
+            Matcher matcherXml = PatternConsts.XML_ENCODING.matcher(buffer);
+            if (matcherXml.find()) {
+                encoding = matcherXml.group(1);
             }
         }
 
@@ -163,8 +163,9 @@ public class XMLReader extends Reader {
             readFirstTime = false;
             reader.mark(1);
             int ch = reader.read();
-            if (ch != 0xFEFF)
+            if (ch != 0xFEFF) {
                 reader.reset();
+            }
         }
         return reader.read(cbuf, off, len);
     }

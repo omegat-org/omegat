@@ -47,19 +47,21 @@ public class OpenProjectFileChooser extends OmegaTFileChooser {
     public void approveSelection() {
         // user hit 'open' button - redirect command to open project or
         // recurse into lower directory
-        if (StaticUtils.isProjectDir(getSelectedFile()))
+        if (StaticUtils.isProjectDir(getSelectedFile())) {
             // The parent directory is made current,
             // and the project's directory is the selected 'file'.
             super.approveSelection();
-        else
+        } else {
             setCurrentDirectory(getSelectedFile());
+        }
     }
 
     public void setCurrentDirectory(File dir) {
         if (StaticUtils.isProjectDir(dir)) {
             setSelectedFile(dir);
             approveSelection();
-        } else
+        } else {
             super.setCurrentDirectory(dir);
+        }
     }
 }

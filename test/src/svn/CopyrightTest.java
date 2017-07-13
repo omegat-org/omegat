@@ -73,8 +73,9 @@ public class CopyrightTest {
 
     protected void checkNote(File f, String data) {
         int pos = data.indexOf("\npackage ");
-        if (pos > 0)
+        if (pos > 0) {
             data = data.substring(0, pos);
+        }
         for (String con : MUST_EXIST) {
             assertTrue("There is no copyright note in '" + f.getAbsolutePath() + "' : " + con, data.contains(con));
         }

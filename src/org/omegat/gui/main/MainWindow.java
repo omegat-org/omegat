@@ -40,8 +40,6 @@ import java.awt.HeadlessException;
 import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -97,16 +95,16 @@ import com.vlsolutions.swing.docking.FloatingDialog;
 public class MainWindow extends JFrame implements IMainWindow {
     public final MainWindowMenu menu;
 
-    protected ProjectFilesListController m_projWin;
+    protected ProjectFilesListController projWin;
 
     /**
      * The font for main window (source and target text) and for match and
      * glossary windows
      */
-    private Font m_font;
+    private Font font;
 
     /** Set of all open search windows. */
-    private final List<SearchWindowController> m_searches = new ArrayList<SearchWindowController>();
+    private final List<SearchWindowController> searches = new ArrayList<>();
 
     protected JLabel lengthLabel;
     protected JLabel progressLabel;
@@ -137,9 +135,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         String fontName = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_NAME, Preferences.TF_FONT_DEFAULT);
         int fontSize = Preferences.getPreferenceDefault(Preferences.TF_SRC_FONT_SIZE,
                 Preferences.TF_FONT_SIZE_DEFAULT);
-        m_font = new Font(fontName, Font.PLAIN, fontSize);
+        font = new Font(fontName, Font.PLAIN, fontSize);
 
-        MainWindowUI.createMainComponents(this, m_font);
+        MainWindowUI.createMainComponents(this, font);
 
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
         pack();
@@ -147,12 +145,10 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         StaticUIUtils.setWindowIcon(this);
 
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                updateTitle();
-                if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
-                    closeSearchWindows();
-                }
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            updateTitle();
+            if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
+                closeSearchWindows();
             }
         });
 
@@ -167,25 +163,22 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
         });
 
-        CoreEvents.registerFontChangedEventListener(newFont -> m_font = newFont);
+        CoreEvents.registerFontChangedEventListener(newFont -> font = newFont);
 
         MainWindowUI.handlePerProjectLayouts(this);
 
         updateTitle();
 
         // Set up prompt to reload if segmentation or filters settings change
-        Preferences.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (Core.getProject().isProjectLoaded()) {
-                    String prop = evt.getPropertyName();
-                    if (prop.equals(Preferences.PROPERTY_SRX)
-                            && Core.getProject().getProjectProperties().getProjectSRX() == null) {
-                        SwingUtilities.invokeLater(ProjectUICommands::promptReload);
-                    } else if (prop.equals(Preferences.PROPERTY_FILTERS)
-                            && Core.getProject().getProjectProperties().getProjectFilters() == null) {
-                        SwingUtilities.invokeLater(ProjectUICommands::promptReload);
-                    }
+        Preferences.addPropertyChangeListener(evt -> {
+            if (Core.getProject().isProjectLoaded()) {
+                String prop = evt.getPropertyName();
+                if (prop.equals(Preferences.PROPERTY_SRX)
+                        && Core.getProject().getProjectProperties().getProjectSRX() == null) {
+                    SwingUtilities.invokeLater(ProjectUICommands::promptReload);
+                } else if (prop.equals(Preferences.PROPERTY_FILTERS)
+                        && Core.getProject().getProjectProperties().getProjectFilters() == null) {
+                    SwingUtilities.invokeLater(ProjectUICommands::promptReload);
                 }
             }
         });
@@ -202,7 +195,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      * {@inheritDoc}
      */
     public Font getApplicationFont() {
-        return m_font;
+        return font;
     }
 
     /**
@@ -304,29 +297,29 @@ public class MainWindow extends JFrame implements IMainWindow {
                 removeSearchWindow(newSearchWindow);
             }
         });
-        synchronized (m_searches) {
-            m_searches.add(newSearchWindow);
+        synchronized (searches) {
+            searches.add(newSearchWindow);
         }
     }
 
     private void removeSearchWindow(SearchWindowController searchWindow) {
-        synchronized (m_searches) {
-            m_searches.remove(searchWindow);
+        synchronized (searches) {
+            searches.remove(searchWindow);
         }
     }
 
     private void closeSearchWindows() {
-        synchronized (m_searches) {
+        synchronized (searches) {
             // dispose other windows
-            for (SearchWindowController sw : m_searches) {
+            for (SearchWindowController sw : searches) {
                 sw.dispose();
             }
-            m_searches.clear();
+            searches.clear();
         }
     }
 
     protected List<SearchWindowController> getSearchWindows() {
-        return Collections.unmodifiableList(m_searches);
+        return Collections.unmodifiableList(searches);
     }
 
     /**
@@ -422,30 +415,28 @@ public class MainWindow extends JFrame implements IMainWindow {
      * {@inheritDoc}
      */
     public void displayWarningRB(final String warningKey, final String supercedesKey, final Object... params) {
-        UIThreadsUtil.executeInSwingThread(new Runnable() {
-            public void run() {
-                String msg;
-                if (params != null) {
-                    msg = StringUtil.format(OStrings.getString(warningKey), params);
-                } else {
-                    msg = OStrings.getString(warningKey);
-                }
-
-                if (supercedesKey != null && lastDialogText != null && supercedesKey.equals(lastDialogKey)) {
-                    Window w = SwingUtilities.getWindowAncestor(lastDialogText);
-                    if (w != null) {
-                        w.dispose();
-                    }
-                }
-
-                lastDialogText = new JLabel(msg);
-                lastDialogKey = warningKey;
-
-                statusLabel.setText(msg);
-
-                JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
-                        JOptionPane.WARNING_MESSAGE);
+        UIThreadsUtil.executeInSwingThread(() -> {
+            String msg;
+            if (params != null) {
+                msg = StringUtil.format(OStrings.getString(warningKey), params);
+            } else {
+                msg = OStrings.getString(warningKey);
             }
+
+            if (supercedesKey != null && lastDialogText != null && supercedesKey.equals(lastDialogKey)) {
+                Window w = SwingUtilities.getWindowAncestor(lastDialogText);
+                if (w != null) {
+                    w.dispose();
+                }
+            }
+
+            lastDialogText = new JLabel(msg);
+            lastDialogKey = warningKey;
+
+            statusLabel.setText(msg);
+
+            JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
+                    JOptionPane.WARNING_MESSAGE);
         });
     }
 
@@ -453,22 +444,21 @@ public class MainWindow extends JFrame implements IMainWindow {
      * {@inheritDoc}
      */
     public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
-        UIThreadsUtil.executeInSwingThread(new Runnable() {
-            public void run() {
-                String msg;
-                if (params != null) {
-                    msg = StringUtil.format(OStrings.getString(errorKey), params);
-                } else {
-                    msg = OStrings.getString(errorKey);
-                }
-
-                statusLabel.setText(msg);
-                String fulltext = msg;
-                if (ex != null)
-                    fulltext += "\n" + ex.toString();
-                JOptionPane.showMessageDialog(MainWindow.this, fulltext, OStrings.getString("TF_ERROR"),
-                        JOptionPane.ERROR_MESSAGE);
+        UIThreadsUtil.executeInSwingThread(() -> {
+            String msg;
+            if (params != null) {
+                msg = StringUtil.format(OStrings.getString(errorKey), params);
+            } else {
+                msg = OStrings.getString(errorKey);
             }
+
+            statusLabel.setText(msg);
+            String fulltext = msg;
+            if (ex != null) {
+                fulltext += "\n" + ex.toString();
+            }
+            JOptionPane.showMessageDialog(MainWindow.this, fulltext, OStrings.getString("TF_ERROR"),
+                    JOptionPane.ERROR_MESSAGE);
         });
     }
 

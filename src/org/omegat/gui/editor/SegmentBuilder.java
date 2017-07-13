@@ -264,10 +264,10 @@ public class SegmentBuilder {
             int prevOffset = offset;
             sourceText = addInactiveSegPart(true, ste.getSrcText());
 
-            Map<Language,ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
-            for (Map.Entry<Language,ProjectTMX> entry : otherLanguageTMs.entrySet()) {
+            Map<Language, ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
+            for (Map.Entry<Language, ProjectTMX> entry : otherLanguageTMs.entrySet()) {
                 TMXEntry altTrans = entry.getValue().getDefaultTranslation(ste.getSrcText());
-                if (altTrans!=null && altTrans.isTranslated()) {
+                if (altTrans != null && altTrans.isTranslated()) {
                     Language language = entry.getKey();
                     addOtherLanguagePart(altTrans.translation, language);
                 }
@@ -494,7 +494,7 @@ public class SegmentBuilder {
         boolean rtl = EditorUtils.isRTL(language.getLanguageCode());
         insertDirectionEmbedding(false);
         AttributeSet normal = attrs(true, false, false, false);
-        insert(language.getLanguage()+": ", normal);
+        insert(language.getLanguage() + ": ", normal);
         insertDirectionEndEmbedding();
 
         insertDirectionEmbedding(rtl);
@@ -514,9 +514,9 @@ public class SegmentBuilder {
      * @throws BadLocationException
      */
     private void addModificationInfoPart(TMXEntry trans) throws BadLocationException {
-        if (!trans.isTranslated())
+        if (!trans.isTranslated()) {
             return;
-
+        }
         String text;
         if (Preferences.isPreference(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE)) {
              text = ModificationInfoManager.apply(trans);
@@ -634,14 +634,21 @@ public class SegmentBuilder {
 
     /**
      * Choose segment part attributes based on rules.
-     * @param isSource is it a source segment or a target segment
-     * @param isPlaceholder is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
-     * @param isRemoveText is it text that should be removed in the translation?
-     * @param isNBSP is the text a non-breakable space?
+     *
+     * @param isSource
+     *            is it a source segment or a target segment
+     * @param isPlaceholder
+     *            is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the
+     *            segment?
+     * @param isRemoveText
+     *            is it text that should be removed in the translation?
+     * @param isNBSP
+     *            is the text a non-breakable space?
      * @return the attributes to format the text
      */
     public AttributeSet attrs(boolean isSource, boolean isPlaceholder, boolean isRemoveText, boolean isNBSP) {
-        return settings.getAttributeSet(isSource, isPlaceholder, isRemoveText, ste.getDuplicate(), active, transExist, noteExist, isNBSP);
+        return settings.getAttributeSet(isSource, isPlaceholder, isRemoveText, ste.getDuplicate(), active,
+                transExist, noteExist, isNBSP);
     }
 
     /**

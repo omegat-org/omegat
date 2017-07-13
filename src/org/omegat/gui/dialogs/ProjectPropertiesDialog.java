@@ -183,16 +183,16 @@ public class ProjectPropertiesDialog extends JDialog {
         centerBox.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         // hinting message
-        JTextArea m_messageArea = new JTextArea();
-        m_messageArea.setEditable(false);
-        m_messageArea.setOpaque(false);
-        m_messageArea.setFont(new Label().getFont());
-        m_messageArea.setLineWrap(true);
-        m_messageArea.setWrapStyleWord(true);
-        m_messageArea.setBorder(new EmptyBorder(5, 5, 5, 5));
+        JTextArea messageArea = new JTextArea();
+        messageArea.setEditable(false);
+        messageArea.setOpaque(false);
+        messageArea.setFont(new Label().getFont());
+        messageArea.setLineWrap(true);
+        messageArea.setWrapStyleWord(true);
+        messageArea.setBorder(new EmptyBorder(5, 5, 5, 5));
         Box bMes = Box.createHorizontalBox();
         bMes.setBorder(emptyBorder);
-        bMes.add(m_messageArea);
+        bMes.add(messageArea);
         bMes.add(Box.createHorizontalGlue());
         centerBox.add(bMes);
 
@@ -206,40 +206,42 @@ public class ProjectPropertiesDialog extends JDialog {
         localesBox.add(bL);
 
         // Source language label
-        JLabel m_sourceLocaleLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.getString("PP_SRC_LANG"));
+        JLabel sourceLocaleLabel = new JLabel();
+        Mnemonics.setLocalizedText(sourceLocaleLabel, OStrings.getString("PP_SRC_LANG"));
         Box bSL = Box.createHorizontalBox();
         bSL.setBorder(emptyBorder);
-        bSL.add(m_sourceLocaleLabel);
+        bSL.add(sourceLocaleLabel);
         bSL.add(Box.createHorizontalGlue());
         bL.add(bSL);
 
         // Source language field
-        final JComboBox<Language> m_sourceLocaleField = new JComboBox<>(new Vector<>(Language.getLanguages()));
-        if (m_sourceLocaleField.getMaximumRowCount() < 20)
-            m_sourceLocaleField.setMaximumRowCount(20);
-        m_sourceLocaleField.setEditable(true);
-        m_sourceLocaleField.setRenderer(new LanguageComboBoxRenderer());
-        m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
-        bL.add(m_sourceLocaleField);
+        final JComboBox<Language> sourceLocaleField = new JComboBox<>(new Vector<>(Language.getLanguages()));
+        if (sourceLocaleField.getMaximumRowCount() < 20) {
+            sourceLocaleField.setMaximumRowCount(20);
+        }
+        sourceLocaleField.setEditable(true);
+        sourceLocaleField.setRenderer(new LanguageComboBoxRenderer());
+        sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
+        bL.add(sourceLocaleField);
 
         // Target language label
-        JLabel m_targetLocaleLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_targetLocaleLabel, OStrings.getString("PP_LOC_LANG"));
+        JLabel targetLocaleLabel = new JLabel();
+        Mnemonics.setLocalizedText(targetLocaleLabel, OStrings.getString("PP_LOC_LANG"));
         Box bLL = Box.createHorizontalBox();
         bLL.setBorder(emptyBorder);
-        bLL.add(m_targetLocaleLabel);
+        bLL.add(targetLocaleLabel);
         bLL.add(Box.createHorizontalGlue());
         bL.add(bLL);
 
         // Target language field
-        final JComboBox<Language> m_targetLocaleField = new JComboBox<>(new Vector<>(Language.getLanguages()));
-        if (m_targetLocaleField.getMaximumRowCount() < 20)
-            m_targetLocaleField.setMaximumRowCount(20);
-        m_targetLocaleField.setEditable(true);
-        m_targetLocaleField.setRenderer(new LanguageComboBoxRenderer());
-        m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
-        bL.add(m_targetLocaleField);
+        final JComboBox<Language> targetLocaleField = new JComboBox<>(new Vector<>(Language.getLanguages()));
+        if (targetLocaleField.getMaximumRowCount() < 20) {
+            targetLocaleField.setMaximumRowCount(20);
+        }
+        targetLocaleField.setEditable(true);
+        targetLocaleField.setRenderer(new LanguageComboBoxRenderer());
+        targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
+        bL.add(targetLocaleField);
 
         // Tokenizers box
         Box bT = Box.createVerticalBox();
@@ -248,73 +250,75 @@ public class ProjectPropertiesDialog extends JDialog {
                 .toArray(Class[]::new);
 
         // Source tokenizer label
-        JLabel m_sourceTokenizerLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_sourceTokenizerLabel, OStrings.getString("PP_SRC_TOK"));
+        JLabel sourceTokenizerLabel = new JLabel();
+        Mnemonics.setLocalizedText(sourceTokenizerLabel, OStrings.getString("PP_SRC_TOK"));
         Box bST = Box.createHorizontalBox();
         bST.setBorder(emptyBorder);
-        bST.add(m_sourceTokenizerLabel);
+        bST.add(sourceTokenizerLabel);
         bST.add(Box.createHorizontalGlue());
         bT.add(bST);
 
         // Source tokenizer field
-        final JComboBox<Class<?>> m_sourceTokenizerField = new JComboBox<>(tokenizers);
-        if (m_sourceTokenizerField.getMaximumRowCount() < 20)
-            m_sourceTokenizerField.setMaximumRowCount(20);
-        m_sourceTokenizerField.setEditable(false);
-        m_sourceTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
-        m_sourceTokenizerField.setSelectedItem(projectProperties.getSourceTokenizer());
-        bT.add(m_sourceTokenizerField);
+        final JComboBox<Class<?>> sourceTokenizerField = new JComboBox<>(tokenizers);
+        if (sourceTokenizerField.getMaximumRowCount() < 20) {
+            sourceTokenizerField.setMaximumRowCount(20);
+        }
+        sourceTokenizerField.setEditable(false);
+        sourceTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
+        sourceTokenizerField.setSelectedItem(projectProperties.getSourceTokenizer());
+        bT.add(sourceTokenizerField);
 
         String cliTokSrc = Core.getParams().get(CLIParameters.TOKENIZER_SOURCE);
         if (cliTokSrc != null) {
             try {
                 Class<?> srcTokClass = Class.forName(cliTokSrc);
-                m_sourceTokenizerField.setEnabled(false);
-                m_sourceTokenizerField.addItem(srcTokClass);
-                m_sourceTokenizerField.setSelectedItem(cliTokSrc);
+                sourceTokenizerField.setEnabled(false);
+                sourceTokenizerField.addItem(srcTokClass);
+                sourceTokenizerField.setSelectedItem(cliTokSrc);
             } catch (ClassNotFoundException | LinkageError ex) {
                 Log.log(ex);
             }
         }
 
         ActionListener sourceLocaleListener = e -> {
-            if (!m_sourceLocaleField.isEnabled()) {
+            if (!sourceLocaleField.isEnabled()) {
                 return;
             }
-            Object newLang = m_sourceLocaleField.getSelectedItem();
+            Object newLang = sourceLocaleField.getSelectedItem();
             if (newLang instanceof String) {
                 newLang = new Language((String) newLang);
             }
             Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language) newLang);
-            m_sourceTokenizerField.setSelectedItem(newTok);
+            sourceTokenizerField.setSelectedItem(newTok);
         };
-        m_sourceLocaleField.addActionListener(sourceLocaleListener);
+        sourceLocaleField.addActionListener(sourceLocaleListener);
 
         // Target tokenizer label
-        JLabel m_targetTokenizerLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_targetTokenizerLabel, OStrings.getString("PP_LOC_TOK"));
+        JLabel targetTokenizerLabel = new JLabel();
+        Mnemonics.setLocalizedText(targetTokenizerLabel, OStrings.getString("PP_LOC_TOK"));
         Box bTT = Box.createHorizontalBox();
         bTT.setBorder(emptyBorder);
-        bTT.add(m_targetTokenizerLabel);
+        bTT.add(targetTokenizerLabel);
         bTT.add(Box.createHorizontalGlue());
         bT.add(bTT);
 
         // Target tokenizer field
-        final JComboBox<Class<?>> m_targetTokenizerField = new JComboBox<>(tokenizers);
-        if (m_targetTokenizerField.getMaximumRowCount() < 20)
-            m_targetTokenizerField.setMaximumRowCount(20);
-        m_targetTokenizerField.setEditable(false);
-        m_targetTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
-        m_targetTokenizerField.setSelectedItem(projectProperties.getTargetTokenizer());
-        bT.add(m_targetTokenizerField);
+        final JComboBox<Class<?>> targetTokenizerField = new JComboBox<>(tokenizers);
+        if (targetTokenizerField.getMaximumRowCount() < 20) {
+            targetTokenizerField.setMaximumRowCount(20);
+        }
+        targetTokenizerField.setEditable(false);
+        targetTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
+        targetTokenizerField.setSelectedItem(projectProperties.getTargetTokenizer());
+        bT.add(targetTokenizerField);
 
         String cliTokTrg = Core.getParams().get(CLIParameters.TOKENIZER_TARGET);
         if (cliTokTrg != null) {
             try {
                 Class<?> trgTokClass = Class.forName(cliTokTrg);
-                m_targetTokenizerField.setEnabled(false);
-                m_targetTokenizerField.addItem(trgTokClass);
-                m_targetTokenizerField.setSelectedItem(cliTokTrg);
+                targetTokenizerField.setEnabled(false);
+                targetTokenizerField.addItem(trgTokClass);
+                targetTokenizerField.setSelectedItem(cliTokTrg);
             } catch (ClassNotFoundException | LinkageError ex) {
                 Log.log(ex);
             }
@@ -322,17 +326,17 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         ActionListener targetLocaleListener = e -> {
-            if (!m_targetLocaleField.isEnabled()) {
+            if (!targetLocaleField.isEnabled()) {
                 return;
             }
-            Object newLang = m_targetLocaleField.getSelectedItem();
+            Object newLang = targetLocaleField.getSelectedItem();
             if (newLang instanceof String) {
                 newLang = new Language((String) newLang);
             }
             Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language) newLang);
-            m_targetTokenizerField.setSelectedItem(newTok);
+            targetTokenizerField.setSelectedItem(newTok);
         };
-        m_targetLocaleField.addActionListener(targetLocaleListener);
+        targetLocaleField.addActionListener(targetLocaleListener);
 
         centerBox.add(localesBox);
 
@@ -352,109 +356,109 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.insets = new Insets(3, 3, 3, 3);
 
         // sentence-segmenting
-        final JCheckBox m_sentenceSegmentingCheckBox = new JCheckBox();
+        final JCheckBox sentenceSegmentingCheckBox = new JCheckBox();
         Mnemonics
-                .setLocalizedText(m_sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
+                .setLocalizedText(sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        optionsBox.add(m_sentenceSegmentingCheckBox, gbc);
+        optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
-        JButton m_sentenceSegmentingButton = new JButton();
-        Mnemonics.setLocalizedText(m_sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_SENTSEG"));
+        JButton sentenceSegmentingButton = new JButton();
+        Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_SENTSEG"));
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
-        optionsBox.add(m_sentenceSegmentingButton, gbc);
+        optionsBox.add(sentenceSegmentingButton, gbc);
 
         // File Filters
-        JButton m_fileFiltersButton = new JButton();
-        Mnemonics.setLocalizedText(m_fileFiltersButton, OStrings.getString("WM_PROJECTMENU_FILEFILTERS"));
+        JButton fileFiltersButton = new JButton();
+        Mnemonics.setLocalizedText(fileFiltersButton, OStrings.getString("WM_PROJECTMENU_FILEFILTERS"));
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.EAST;
-        optionsBox.add(m_fileFiltersButton, gbc);
+        optionsBox.add(fileFiltersButton, gbc);
 
         // Repositories mapping
-        JButton m_RepositoriesButton = new JButton();
-        Mnemonics.setLocalizedText(m_RepositoriesButton, OStrings.getString("PP_REPOSITORIES"));
+        JButton repositoriesButton = new JButton();
+        Mnemonics.setLocalizedText(repositoriesButton, OStrings.getString("PP_REPOSITORIES"));
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.EAST;
-        optionsBox.add(m_RepositoriesButton, gbc);
+        optionsBox.add(repositoriesButton, gbc);
 
         // Repositories mapping
-        JButton m_ExternalFinderButton = new JButton();
-        Mnemonics.setLocalizedText(m_ExternalFinderButton, OStrings.getString("PP_EXTERNALFINDER"));
+        JButton externalFinderButton = new JButton();
+        Mnemonics.setLocalizedText(externalFinderButton, OStrings.getString("PP_EXTERNALFINDER"));
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.EAST;
-        optionsBox.add(m_ExternalFinderButton, gbc);
+        optionsBox.add(externalFinderButton, gbc);
 
         // multiple translations
-        final JCheckBox m_allowDefaultsCheckBox = new JCheckBox();
-        Mnemonics.setLocalizedText(m_allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
+        final JCheckBox allowDefaultsCheckBox = new JCheckBox();
+        Mnemonics.setLocalizedText(allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.WEST;
-        optionsBox.add(m_allowDefaultsCheckBox, gbc);
+        optionsBox.add(allowDefaultsCheckBox, gbc);
 
         // Remove Tags
-        final JCheckBox m_removeTagsCheckBox = new JCheckBox();
-        Mnemonics.setLocalizedText(m_removeTagsCheckBox, OStrings.getString("PP_REMOVE_TAGS"));
+        final JCheckBox removeTagsCheckBox = new JCheckBox();
+        Mnemonics.setLocalizedText(removeTagsCheckBox, OStrings.getString("PP_REMOVE_TAGS"));
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.WEST;
-        optionsBox.add(m_removeTagsCheckBox, gbc);
+        optionsBox.add(removeTagsCheckBox, gbc);
 
         // Post-processing
-        JLabel m_externalCommandLabel = new JLabel();
+        JLabel externalCommandLabel = new JLabel();
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.WEST;
-        optionsBox.add(m_externalCommandLabel, gbc);
-        final JTextArea m_externalCommandTextArea = new JTextArea();
-        m_externalCommandTextArea.setRows(2);
-        m_externalCommandTextArea.setLineWrap(true);
-        m_externalCommandTextArea.setText(projectProperties.getExternalCommand());
+        optionsBox.add(externalCommandLabel, gbc);
+        final JTextArea externalCommandTextArea = new JTextArea();
+        externalCommandTextArea.setRows(2);
+        externalCommandTextArea.setLineWrap(true);
+        externalCommandTextArea.setText(projectProperties.getExternalCommand());
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-            Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERNAL_COMMAND"));
+            Mnemonics.setLocalizedText(externalCommandLabel, OStrings.getString("PP_EXTERNAL_COMMAND"));
         } else {
-            Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERN_CMD_DISABLED"));
-            m_externalCommandTextArea.setEditable(false);
-            m_externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
-            m_externalCommandLabel.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
-            m_externalCommandTextArea.setBackground(getBackground());
+            Mnemonics.setLocalizedText(externalCommandLabel, OStrings.getString("PP_EXTERN_CMD_DISABLED"));
+            externalCommandTextArea.setEditable(false);
+            externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
+            externalCommandLabel.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
+            externalCommandTextArea.setBackground(getBackground());
         }
-        final JScrollPane m_externalCommandScrollPane = new JScrollPane();
-        m_externalCommandScrollPane.setViewportView(m_externalCommandTextArea);
+        final JScrollPane externalCommandScrollPane = new JScrollPane();
+        externalCommandScrollPane.setViewportView(externalCommandTextArea);
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.weightx = 1;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        optionsBox.add(m_externalCommandScrollPane, gbc);
-        final JLabel m_variablesLabel = new javax.swing.JLabel();
-        final JComboBox<String> m_variablesList = new JComboBox<>(
+        optionsBox.add(externalCommandScrollPane, gbc);
+        final JLabel variablesLabel = new javax.swing.JLabel();
+        final JComboBox<String> variablesList = new JComboBox<>(
                 new Vector<>(CommandVarExpansion.getCommandVariables()));
-        final JButton m_insertButton = new javax.swing.JButton();
+        final JButton insertButton = new javax.swing.JButton();
         // Add variable insertion controls only if project external commands are enabled.
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
             Box bIC = Box.createHorizontalBox();
             bIC.setBorder(emptyBorder);
-            Mnemonics.setLocalizedText(m_variablesLabel,
+            Mnemonics.setLocalizedText(variablesLabel,
                     OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
-            bIC.add(m_variablesLabel);
-            bIC.add(m_variablesList);
-            Mnemonics.setLocalizedText(m_insertButton, OStrings.getString("BUTTON_INSERT"));
-            m_insertButton.addActionListener(new java.awt.event.ActionListener() {
+            bIC.add(variablesLabel);
+            bIC.add(variablesList);
+            Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
+            insertButton.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    m_externalCommandTextArea.replaceSelection(m_variablesList.getSelectedItem().toString());
+                    externalCommandTextArea.replaceSelection(variablesList.getSelectedItem().toString());
                 }
             });
-            bIC.add(m_insertButton);
+            bIC.add(insertButton);
             bIC.add(Box.createHorizontalGlue());
             gbc.gridx = 0;
             gbc.gridy = 5;
@@ -474,86 +478,86 @@ public class ProjectPropertiesDialog extends JDialog {
         dirsBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
                 OStrings.getString("PP_DIRECTORIES")));
 
-        JLabel m_srcRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.getString("PP_SRC_ROOT"));
+        JLabel srcRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(srcRootLabel, OStrings.getString("PP_SRC_ROOT"));
         Box bSrc = Box.createHorizontalBox();
         bSrc.setBorder(emptyBorder);
-        bSrc.add(m_srcRootLabel);
+        bSrc.add(srcRootLabel);
         bSrc.add(Box.createHorizontalGlue());
-        JButton m_srcExcludes = new JButton();
-        Mnemonics.setLocalizedText(m_srcExcludes, OStrings.getString("PP_BUTTON_BROWSE_SRC_EXCLUDES"));
-        bSrc.add(m_srcExcludes);
-        JButton m_srcBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_srcBrowse, OStrings.getString("PP_BUTTON_BROWSE_SRC"));
-        bSrc.add(m_srcBrowse);
-        final JTextField m_srcRootField = new JTextField();
+        JButton srcExcludesBtn = new JButton();
+        Mnemonics.setLocalizedText(srcExcludesBtn, OStrings.getString("PP_BUTTON_BROWSE_SRC_EXCLUDES"));
+        bSrc.add(srcExcludesBtn);
+        JButton srcBrowse = new JButton();
+        Mnemonics.setLocalizedText(srcBrowse, OStrings.getString("PP_BUTTON_BROWSE_SRC"));
+        bSrc.add(srcBrowse);
+        final JTextField srcRootField = new JTextField();
         dirsBox.add(bSrc);
-        dirsBox.add(m_srcRootField);
+        dirsBox.add(srcRootField);
 
-        JLabel m_tmRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_tmRootLabel, OStrings.getString("PP_TM_ROOT"));
+        JLabel tmRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(tmRootLabel, OStrings.getString("PP_TM_ROOT"));
         Box bTM = Box.createHorizontalBox();
         bTM.setBorder(emptyBorder);
-        bTM.add(m_tmRootLabel);
+        bTM.add(tmRootLabel);
         bTM.add(Box.createHorizontalGlue());
-        JButton m_tmBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_tmBrowse, OStrings.getString("PP_BUTTON_BROWSE_TM"));
-        bTM.add(m_tmBrowse);
-        final JTextField m_tmRootField = new JTextField();
+        JButton tmBrowse = new JButton();
+        Mnemonics.setLocalizedText(tmBrowse, OStrings.getString("PP_BUTTON_BROWSE_TM"));
+        bTM.add(tmBrowse);
+        final JTextField tmRootField = new JTextField();
         dirsBox.add(bTM);
-        dirsBox.add(m_tmRootField);
+        dirsBox.add(tmRootField);
 
-        JLabel m_glosRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_glosRootLabel, OStrings.getString("PP_GLOS_ROOT"));
+        JLabel glosRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(glosRootLabel, OStrings.getString("PP_GLOS_ROOT"));
         Box bGlos = Box.createHorizontalBox();
         bGlos.setBorder(emptyBorder);
-        bGlos.add(m_glosRootLabel);
+        bGlos.add(glosRootLabel);
         bGlos.add(Box.createHorizontalGlue());
-        JButton m_glosBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_glosBrowse, OStrings.getString("PP_BUTTON_BROWSE_GL"));
-        bGlos.add(m_glosBrowse);
-        final JTextField m_glosRootField = new JTextField();
+        JButton glosBrowse = new JButton();
+        Mnemonics.setLocalizedText(glosBrowse, OStrings.getString("PP_BUTTON_BROWSE_GL"));
+        bGlos.add(glosBrowse);
+        final JTextField glosRootField = new JTextField();
         dirsBox.add(bGlos);
-        dirsBox.add(m_glosRootField);
+        dirsBox.add(glosRootField);
 
-        JLabel m_writeableGlosLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_writeableGlosLabel, OStrings.getString("PP_WRITEABLE_GLOS"));
+        JLabel writeableGlosLabel = new JLabel();
+        Mnemonics.setLocalizedText(writeableGlosLabel, OStrings.getString("PP_WRITEABLE_GLOS"));
         Box bwGlos = Box.createHorizontalBox();
         bwGlos.setBorder(emptyBorder);
-        bwGlos.add(m_writeableGlosLabel);
+        bwGlos.add(writeableGlosLabel);
         bwGlos.add(Box.createHorizontalGlue());
-        JButton m_wGlosBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_wGlosBrowse, OStrings.getString("PP_BUTTON_BROWSE_WG"));
-        bwGlos.add(m_wGlosBrowse);
-        final JTextField m_writeableGlosField = new JTextField();
+        JButton wGlosBrowse = new JButton();
+        Mnemonics.setLocalizedText(wGlosBrowse, OStrings.getString("PP_BUTTON_BROWSE_WG"));
+        bwGlos.add(wGlosBrowse);
+        final JTextField writeableGlosField = new JTextField();
         dirsBox.add(bwGlos);
-        dirsBox.add(m_writeableGlosField);
+        dirsBox.add(writeableGlosField);
 
-        JLabel m_locDictLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_locDictLabel, OStrings.getString("PP_DICT_ROOT"));
+        JLabel locDictLabel = new JLabel();
+        Mnemonics.setLocalizedText(locDictLabel, OStrings.getString("PP_DICT_ROOT"));
         Box bDict = Box.createHorizontalBox();
         bDict.setBorder(emptyBorder);
-        bDict.add(m_locDictLabel);
+        bDict.add(locDictLabel);
         bDict.add(Box.createHorizontalGlue());
-        JButton m_dictBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_dictBrowse, OStrings.getString("PP_BUTTON_BROWSE_DICT"));
-        bDict.add(m_dictBrowse);
-        final JTextField m_dictRootField = new JTextField();
+        JButton dictBrowse = new JButton();
+        Mnemonics.setLocalizedText(dictBrowse, OStrings.getString("PP_BUTTON_BROWSE_DICT"));
+        bDict.add(dictBrowse);
+        final JTextField dictRootField = new JTextField();
         dirsBox.add(bDict);
-        dirsBox.add(m_dictRootField);
+        dirsBox.add(dictRootField);
 
-        JLabel m_locRootLabel = new JLabel();
-        Mnemonics.setLocalizedText(m_locRootLabel, OStrings.getString("PP_LOC_ROOT"));
+        JLabel locRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(locRootLabel, OStrings.getString("PP_LOC_ROOT"));
         Box bLoc = Box.createHorizontalBox();
         bLoc.setBorder(emptyBorder);
-        bLoc.add(m_locRootLabel);
+        bLoc.add(locRootLabel);
         bLoc.add(Box.createHorizontalGlue());
-        JButton m_locBrowse = new JButton();
-        Mnemonics.setLocalizedText(m_locBrowse, OStrings.getString("PP_BUTTON_BROWSE_TAR"));
-        bLoc.add(m_locBrowse);
-        final JTextField m_locRootField = new JTextField();
+        JButton locBrowse = new JButton();
+        Mnemonics.setLocalizedText(locBrowse, OStrings.getString("PP_BUTTON_BROWSE_TAR"));
+        bLoc.add(locBrowse);
+        final JTextField locRootField = new JTextField();
         dirsBox.add(bLoc);
-        dirsBox.add(m_locRootField);
+        dirsBox.add(locRootField);
 
         centerBox.add(dirsBox);
 
@@ -563,46 +567,46 @@ public class ProjectPropertiesDialog extends JDialog {
         scrollPane.getViewport().setOpaque(false);
         getContentPane().add(scrollPane, "Center");
 
-        JButton m_okButton = new JButton();
-        Mnemonics.setLocalizedText(m_okButton, OStrings.getString("BUTTON_OK"));
-        getRootPane().setDefaultButton(m_okButton);
-        JButton m_cancelButton = new JButton();
-        Mnemonics.setLocalizedText(m_cancelButton, OStrings.getString("BUTTON_CANCEL"));
+        JButton okButton = new JButton();
+        Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
+        getRootPane().setDefaultButton(okButton);
+        JButton cancelButton = new JButton();
+        Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
 
         Box southBox = Box.createHorizontalBox();
         southBox.setBorder(new EmptyBorder(5, 5, 5, 5));
         southBox.add(Box.createHorizontalGlue());
-        southBox.add(m_okButton);
+        southBox.add(okButton);
         southBox.add(Box.createHorizontalStrut(5));
-        southBox.add(m_cancelButton);
+        southBox.add(cancelButton);
         getContentPane().add(southBox, "South");
 
         setResizable(false);
 
-        m_okButton.addActionListener(new ActionListener() {
+        okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doOK(m_sourceLocaleField, m_targetLocaleField, m_sourceTokenizerField, m_targetTokenizerField,
-                        m_sentenceSegmentingCheckBox, m_srcRootField, m_locRootField, m_glosRootField,
-                        m_writeableGlosField, m_tmRootField, m_dictRootField, m_allowDefaultsCheckBox,
-                        m_removeTagsCheckBox, m_externalCommandTextArea);
+                doOK(sourceLocaleField, targetLocaleField, sourceTokenizerField, targetTokenizerField,
+                        sentenceSegmentingCheckBox, srcRootField, locRootField, glosRootField,
+                        writeableGlosField, tmRootField, dictRootField, allowDefaultsCheckBox,
+                        removeTagsCheckBox, externalCommandTextArea);
             }
         });
 
-        m_cancelButton.addActionListener(new ActionListener() {
+        cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 doCancel();
             }
         });
 
-        m_srcBrowse.addActionListener(new ActionListener() {
+        srcBrowse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doBrowseDirectoy(1, m_srcRootField);
+                doBrowseDirectoy(1, srcRootField);
             }
         });
-        m_srcExcludes.addActionListener(new ActionListener() {
+        srcExcludesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<String> result = FilenamePatternsEditorController.show(srcExcludes);
@@ -613,50 +617,50 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         });
 
-        m_locBrowse.addActionListener(new ActionListener() {
+        locBrowse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doBrowseDirectoy(2, m_locRootField);
+                doBrowseDirectoy(2, locRootField);
             }
         });
 
-        m_glosBrowse.addActionListener(new ActionListener() {
+        glosBrowse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Test now, because result may change after doBrowseDirectory().
                 boolean isDefaultGlossaryFile = projectProperties.isDefaultWriteableGlossaryFile();
-                doBrowseDirectoy(3, m_glosRootField);
+                doBrowseDirectoy(3, glosRootField);
                 // If file started as default, automatically use new default.
                 if (isDefaultGlossaryFile) {
                     String newDefault = projectProperties.computeDefaultWriteableGlossaryFile();
                     projectProperties.setWriteableGlossary(newDefault);
-                    m_writeableGlosField.setText(newDefault);
+                    writeableGlosField.setText(newDefault);
                 }
             }
         });
 
-        m_wGlosBrowse.addActionListener(new ActionListener() {
+        wGlosBrowse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doBrowseDirectoy(6, m_writeableGlosField);
+                doBrowseDirectoy(6, writeableGlosField);
             }
         });
 
-        m_tmBrowse.addActionListener(new ActionListener() {
+        tmBrowse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doBrowseDirectoy(4, m_tmRootField);
+                doBrowseDirectoy(4, tmRootField);
             }
         });
 
-        m_dictBrowse.addActionListener(new ActionListener() {
+        dictBrowse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doBrowseDirectoy(5, m_dictRootField);
+                doBrowseDirectoy(5, dictRootField);
             }
         });
 
-        m_sentenceSegmentingButton.addActionListener(new ActionListener() {
+        sentenceSegmentingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SegmentationCustomizer segmentationCustomizer = new SegmentationCustomizer(true,
@@ -667,7 +671,7 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         });
 
-        m_fileFiltersButton.addActionListener(new ActionListener() {
+        fileFiltersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiltersCustomizer dlg = new FiltersCustomizer(true,
@@ -679,7 +683,7 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         });
 
-        m_RepositoriesButton.addActionListener(new ActionListener() {
+        repositoriesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<RepositoryDefinition> r = new RepositoriesMappingController().show(parent,
@@ -690,7 +694,7 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         });
 
-        m_ExternalFinderButton.addActionListener(e -> {
+        externalFinderButton.addActionListener(e -> {
             ExternalFinderCustomizer dlg = new ExternalFinderCustomizer(true, externalFinderConfig);
             if (dlg.show(ProjectPropertiesDialog.this)) {
                 externalFinderConfig = dlg.getResult();
@@ -704,56 +708,56 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         });
 
-        m_srcRootField.setText(projectProperties.getSourceRoot());
-        m_locRootField.setText(projectProperties.getTargetRoot());
-        m_glosRootField.setText(projectProperties.getGlossaryRoot());
-        m_writeableGlosField.setText(projectProperties.getWriteableGlossary());
-        m_tmRootField.setText(projectProperties.getTMRoot());
-        m_dictRootField.setText(projectProperties.getDictRoot());
-        m_sentenceSegmentingCheckBox.setSelected(projectProperties.isSentenceSegmentingEnabled());
-        m_allowDefaultsCheckBox.setSelected(projectProperties.isSupportDefaultTranslations());
-        m_removeTagsCheckBox.setSelected(projectProperties.isRemoveTags());
+        srcRootField.setText(projectProperties.getSourceRoot());
+        locRootField.setText(projectProperties.getTargetRoot());
+        glosRootField.setText(projectProperties.getGlossaryRoot());
+        writeableGlosField.setText(projectProperties.getWriteableGlossary());
+        tmRootField.setText(projectProperties.getTMRoot());
+        dictRootField.setText(projectProperties.getDictRoot());
+        sentenceSegmentingCheckBox.setSelected(projectProperties.isSentenceSegmentingEnabled());
+        allowDefaultsCheckBox.setSelected(projectProperties.isSupportDefaultTranslations());
+        removeTagsCheckBox.setSelected(projectProperties.isRemoveTags());
 
         switch (dialogType) {
         case RESOLVE_DIRS:
             // disabling some of the controls
-            m_sourceLocaleField.setEnabled(false);
-            m_targetLocaleField.setEnabled(false);
-            m_sourceTokenizerField.setEnabled(false);
-            m_targetTokenizerField.setEnabled(false);
-            m_sentenceSegmentingCheckBox.setEnabled(false);
-            m_allowDefaultsCheckBox.setEnabled(false);
-            m_removeTagsCheckBox.setEnabled(false);
-            m_externalCommandTextArea.setEnabled(false);
-            m_insertButton.setEnabled(false);
-            m_variablesList.setEnabled(false);
+            sourceLocaleField.setEnabled(false);
+            targetLocaleField.setEnabled(false);
+            sourceTokenizerField.setEnabled(false);
+            targetTokenizerField.setEnabled(false);
+            sentenceSegmentingCheckBox.setEnabled(false);
+            allowDefaultsCheckBox.setEnabled(false);
+            removeTagsCheckBox.setEnabled(false);
+            externalCommandTextArea.setEnabled(false);
+            insertButton.setEnabled(false);
+            variablesList.setEnabled(false);
 
             // marking missing folder RED
-            File f = new File(m_srcRootField.getText());
+            File f = new File(srcRootField.getText());
             if (!f.isDirectory()) {
-                m_srcRootField.setForeground(Color.RED);
+                srcRootField.setForeground(Color.RED);
             }
-            f = new File(m_locRootField.getText());
+            f = new File(locRootField.getText());
             if (!f.isDirectory()) {
-                m_locRootField.setForeground(Color.RED);
+                locRootField.setForeground(Color.RED);
             }
-            f = new File(m_glosRootField.getText());
+            f = new File(glosRootField.getText());
             if (!f.isDirectory()) {
-                m_glosRootField.setForeground(Color.RED);
+                glosRootField.setForeground(Color.RED);
             }
-            f = new File(m_writeableGlosField.getText());
+            f = new File(writeableGlosField.getText());
             File wGlos = f.getParentFile(); // Remove the file name
             // The writeable glossary must be in in the /glossary folder
-            if (!wGlos.isDirectory() || !wGlos.equals(new File(m_glosRootField.getText()))) {
-                m_writeableGlosField.setForeground(Color.RED);
+            if (!wGlos.isDirectory() || !wGlos.equals(new File(glosRootField.getText()))) {
+                writeableGlosField.setForeground(Color.RED);
             }
-            f = new File(m_tmRootField.getText());
+            f = new File(tmRootField.getText());
             if (!f.isDirectory()) {
-                m_tmRootField.setForeground(Color.RED);
+                tmRootField.setForeground(Color.RED);
             }
-            f = new File(m_dictRootField.getText());
+            f = new File(dictRootField.getText());
             if (!f.isDirectory()) {
-                m_dictRootField.setForeground(Color.RED);
+                dictRootField.setForeground(Color.RED);
             }
             break;
         default:
@@ -762,7 +766,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Pack once to get the width...
         pack();
-        updateUIText(m_messageArea);
+        updateUIText(messageArea);
         // Then again to expand the height to accomodate the message.
         // This is needed because the height isn't known until the
         // amount of linewrapping is known.
@@ -988,51 +992,51 @@ public class ProjectPropertiesDialog extends JDialog {
         }
     }
 
-    private void doOK(JComboBox<Language> m_sourceLocaleField, JComboBox<Language> m_targetLocaleField,
-            JComboBox<Class<?>> m_sourceTokenizerField, JComboBox<Class<?>> m_targetTokenizerField,
-            JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
-            JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField,
-            JTextField m_dictRootField, JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox,
-            JTextArea m_customCommandTextArea) {
-        if (!Language.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
+    private void doOK(JComboBox<Language> sourceLocaleField, JComboBox<Language> targetLocaleField,
+            JComboBox<Class<?>> sourceTokenizerField, JComboBox<Class<?>> targetTokenizerField,
+            JCheckBox sentenceSegmentingCheckBox, JTextField srcRootField, JTextField locRootField,
+            JTextField glosRootField, JTextField writeableGlosField, JTextField tmRootField,
+            JTextField dictRootField, JCheckBox allowDefaultsCheckBox, JCheckBox removeTagsCheckBox,
+            JTextArea customCommandTextArea) {
+        if (!Language.verifySingleLangCode(sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE")
                             + OStrings.getString("NP_LOCALE_SUGGESTION"), OStrings.getString("TF_ERROR"),
                     JOptionPane.ERROR_MESSAGE);
-            m_sourceLocaleField.requestFocusInWindow();
+            sourceLocaleField.requestFocusInWindow();
             return;
         }
-        projectProperties.setSourceLanguage(m_sourceLocaleField.getSelectedItem().toString());
+        projectProperties.setSourceLanguage(sourceLocaleField.getSelectedItem().toString());
 
-        if (!Language.verifySingleLangCode(m_targetLocaleField.getSelectedItem().toString())) {
+        if (!Language.verifySingleLangCode(targetLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
                     OStrings.getString("NP_INVALID_TARGET_LOCALE")
                             + OStrings.getString("NP_LOCALE_SUGGESTION"), OStrings.getString("TF_ERROR"),
                     JOptionPane.ERROR_MESSAGE);
-            m_targetLocaleField.requestFocusInWindow();
+            targetLocaleField.requestFocusInWindow();
             return;
         }
-        projectProperties.setTargetLanguage(m_targetLocaleField.getSelectedItem().toString());
+        projectProperties.setTargetLanguage(targetLocaleField.getSelectedItem().toString());
 
-        if (m_sourceTokenizerField.isEnabled()) {
-            projectProperties.setSourceTokenizer((Class<?>) m_sourceTokenizerField.getSelectedItem());
+        if (sourceTokenizerField.isEnabled()) {
+            projectProperties.setSourceTokenizer((Class<?>) sourceTokenizerField.getSelectedItem());
         }
 
-        if (m_targetTokenizerField.isEnabled()) {
-            projectProperties.setTargetTokenizer((Class<?>) m_targetTokenizerField.getSelectedItem());
+        if (targetTokenizerField.isEnabled()) {
+            projectProperties.setTargetTokenizer((Class<?>) targetTokenizerField.getSelectedItem());
         }
 
-        projectProperties.setSentenceSegmentingEnabled(m_sentenceSegmentingCheckBox.isSelected());
+        projectProperties.setSentenceSegmentingEnabled(sentenceSegmentingCheckBox.isSelected());
 
-        projectProperties.setSupportDefaultTranslations(m_allowDefaultsCheckBox.isSelected());
+        projectProperties.setSupportDefaultTranslations(allowDefaultsCheckBox.isSelected());
 
-        projectProperties.setRemoveTags(m_removeTagsCheckBox.isSelected());
+        projectProperties.setRemoveTags(removeTagsCheckBox.isSelected());
 
-        projectProperties.setExternalCommand(m_customCommandTextArea.getText());
+        projectProperties.setExternalCommand(customCommandTextArea.getText());
 
-        projectProperties.setSourceRoot(m_srcRootField.getText());
+        projectProperties.setSourceRoot(srcRootField.getText());
         if (!projectProperties.getSourceRoot().endsWith(File.separator)) {
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);
         }
@@ -1040,37 +1044,37 @@ public class ProjectPropertiesDialog extends JDialog {
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getSourceRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-            m_srcRootField.requestFocusInWindow();
+            srcRootField.requestFocusInWindow();
             return;
         }
 
-        projectProperties.setTargetRoot(m_locRootField.getText());
+        projectProperties.setTargetRoot(locRootField.getText());
         if (!projectProperties.getTargetRoot().endsWith(File.separator)) {
             projectProperties.setTargetRoot(projectProperties.getTargetRoot() + File.separator);
         }
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getTargetRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_TRANSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-            m_locRootField.requestFocusInWindow();
+            locRootField.requestFocusInWindow();
             return;
         }
 
-        projectProperties.setGlossaryRoot(m_glosRootField.getText());
+        projectProperties.setGlossaryRoot(glosRootField.getText());
         if (!projectProperties.getGlossaryRoot().endsWith(File.separator)) {
             projectProperties.setGlossaryRoot(projectProperties.getGlossaryRoot() + File.separator);
         }
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getGlossaryRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-            m_glosRootField.requestFocusInWindow();
+            glosRootField.requestFocusInWindow();
             return;
         }
 
-        projectProperties.setWriteableGlossary(m_writeableGlosField.getText());
+        projectProperties.setWriteableGlossary(writeableGlosField.getText());
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getWriteableGlossaryDir()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_W_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-            m_writeableGlosField.requestFocusInWindow();
+            writeableGlosField.requestFocusInWindow();
             return;
         }
 
@@ -1081,29 +1085,29 @@ public class ProjectPropertiesDialog extends JDialog {
         if (!glossaryDir.contains(projectProperties.getGlossaryRoot())) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_W_GLOSDIR_NOT_INSIDE_GLOS"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-            m_writeableGlosField.requestFocusInWindow();
+            writeableGlosField.requestFocusInWindow();
             return;
         }
 
-        projectProperties.setTMRoot(m_tmRootField.getText());
+        projectProperties.setTMRoot(tmRootField.getText());
         if (!projectProperties.getTMRoot().endsWith(File.separator)) {
             projectProperties.setTMRoot(projectProperties.getTMRoot() + File.separator);
         }
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getTMRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_TMDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-            m_tmRootField.requestFocusInWindow();
+            tmRootField.requestFocusInWindow();
             return;
         }
 
-        projectProperties.setDictRoot(m_dictRootField.getText());
+        projectProperties.setDictRoot(dictRootField.getText());
         if (!projectProperties.getDictRoot().endsWith(File.separator)) {
             projectProperties.setDictRoot(projectProperties.getDictRoot() + File.separator);
         }
         if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getDictRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_DICTDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-            m_dictRootField.requestFocusInWindow();
+            dictRootField.requestFocusInWindow();
             return;
         }
 
@@ -1114,7 +1118,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         ExternalFinder.setProjectConfig(externalFinderConfig);
 
-        m_dialogCancelled = false;
+        dialogCancelled = false;
         setVisible(false);
     }
 
@@ -1126,24 +1130,24 @@ public class ProjectPropertiesDialog extends JDialog {
         if (dialogType == Mode.NEW_PROJECT) {
             new File(projectProperties.getProjectRoot()).delete();
         }
-        m_dialogCancelled = true;
+        dialogCancelled = true;
         setVisible(false);
     }
 
-    private void updateUIText(JTextArea m_messageArea) {
+    private void updateUIText(JTextArea messageArea) {
         switch (dialogType) {
         case NEW_PROJECT:
             setTitle(OStrings.getString("PP_CREATE_PROJ"));
-            m_messageArea.setText(OStrings.getString("PP_MESSAGE_CONFIGPROJ"));
+            messageArea.setText(OStrings.getString("PP_MESSAGE_CONFIGPROJ"));
             break;
         case RESOLVE_DIRS:
             setTitle(OStrings.getString("PP_OPEN_PROJ"));
-            m_messageArea.setText(OStrings.getString("PP_MESSAGE_BADPROJ"));
-            m_messageArea.setFont(m_messageArea.getFont().deriveFont(Font.BOLD));
+            messageArea.setText(OStrings.getString("PP_MESSAGE_BADPROJ"));
+            messageArea.setFont(messageArea.getFont().deriveFont(Font.BOLD));
             break;
         case EDIT_PROJECT:
             setTitle(OStrings.getString("PP_EDIT_PROJECT"));
-            m_messageArea.setText(OStrings.getString("PP_MESSAGE_EDITPROJ"));
+            messageArea.setText(OStrings.getString("PP_MESSAGE_EDITPROJ"));
             break;
         }
     }
@@ -1184,12 +1188,12 @@ public class ProjectPropertiesDialog extends JDialog {
     /**
      * Whether the user cancelled the dialog.
      */
-    private boolean m_dialogCancelled;
+    private boolean dialogCancelled;
 
     /**
      * Return new properties or null if dialog cancelled.
      */
     public ProjectProperties getResult() {
-        return m_dialogCancelled ? null : projectProperties;
+        return dialogCancelled ? null : projectProperties;
     }
 }

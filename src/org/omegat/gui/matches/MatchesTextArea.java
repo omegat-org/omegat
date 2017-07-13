@@ -102,13 +102,19 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final String EXPLANATION = OStrings.getString("GUI_MATCHWINDOW_explanation");
 
     private static final AttributeSet ATTRIBUTES_EMPTY = Styles.createAttributeSet(null, null, null, null);
-    private static final AttributeSet ATTRIBUTES_CHANGED = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_CHANGED.getColor(), null, null, null);
-    private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_UNCHANGED.getColor(), null, null, null);
+    private static final AttributeSet ATTRIBUTES_CHANGED = Styles
+            .createAttributeSet(Styles.EditorColor.COLOR_MATCHES_CHANGED.getColor(), null, null, null);
+    private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles
+            .createAttributeSet(Styles.EditorColor.COLOR_MATCHES_UNCHANGED.getColor(), null, null, null);
     private static final AttributeSet ATTRIBUTES_SELECTED = Styles.createAttributeSet(null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_DELETED_ACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE.getColor(), null, true, null, true, null);
-    private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE.getColor(), null, null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_INS_ACTIVE.getColor(), null, true, null, null, true);
-    private static final AttributeSet ATTRIBUTES_INSERTED_INACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE.getColor(), null, null, null, null, true);
+    private static final AttributeSet ATTRIBUTES_DELETED_ACTIVE = Styles.createAttributeSet(
+            Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE.getColor(), null, true, null, true, null);
+    private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(
+            Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE.getColor(), null, null, null, true, null);
+    private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(
+            Styles.EditorColor.COLOR_MATCHES_INS_ACTIVE.getColor(), null, true, null, null, true);
+    private static final AttributeSet ATTRIBUTES_INSERTED_INACTIVE = Styles.createAttributeSet(
+            Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE.getColor(), null, null, null, null, true);
 
     private final DockableScrollPane scrollPane;
     private final List<NearString> matches = new ArrayList<NearString>();
@@ -193,7 +199,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         delimiters.add(0);
         StringBuilder displayBuffer = new StringBuilder();
 
-        MatchesVarExpansion template = new MatchesVarExpansion(Preferences.getPreferenceDefault(Preferences.EXT_TMX_MATCH_TEMPLATE, MatchesVarExpansion.DEFAULT_TEMPLATE));
+        MatchesVarExpansion template = new MatchesVarExpansion(Preferences.getPreferenceDefault(
+                Preferences.EXT_TMX_MATCH_TEMPLATE, MatchesVarExpansion.DEFAULT_TEMPLATE));
 
         for (int i = 0; i < newMatches.size(); i++) {
             NearString match = newMatches.get(i);
@@ -202,8 +209,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             sourcePos.add(result.sourcePos);
             diffInfos.add(result.diffInfo);
 
-            if (i < (newMatches.size() - 1))
+            if (i < (newMatches.size() - 1)) {
                 displayBuffer.append("\n\n");
+            }
             delimiters.add(displayBuffer.length());
         }
 
@@ -633,9 +641,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      */
     @Override
     public void setNextActiveMatch() {
-        if (activeMatch < matches.size()-1) {
-            setActiveMatch(activeMatch+1);
-}
+        if (activeMatch < matches.size() - 1) {
+            setActiveMatch(activeMatch + 1);
+        }
     }
 
     /**
@@ -644,7 +652,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     @Override
     public void setPrevActiveMatch() {
         if (activeMatch > 0) {
-            setActiveMatch(activeMatch-1);
+            setActiveMatch(activeMatch - 1);
         }
     }
 
@@ -654,12 +662,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         menu.addSeparator();
         final JMenuItem notify = new JCheckBoxMenuItem(OStrings.getString("GUI_MATCHWINDOW_SETTINGS_NOTIFICATIONS"));
         notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_FUZZY_MATCHES));
-        notify.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Preferences.setPreference(Preferences.NOTIFY_FUZZY_MATCHES, notify.isSelected());
-            }
-        });
+        notify.addActionListener(
+                e -> Preferences.setPreference(Preferences.NOTIFY_FUZZY_MATCHES, notify.isSelected()));
         menu.add(notify);
         menu.addSeparator();
         final JMenuItem prefs = new JMenuItem(OStrings.getString("MATCHES_OPEN_PREFERENCES"));

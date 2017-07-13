@@ -103,13 +103,15 @@ public class HTMLReader extends Reader {
         int char1 = is.read();
         int char2 = is.read();
         int char3 = is.read();
-        if (char1 == 0xFE && char2 == 0xFF)
+        if (char1 == 0xFE && char2 == 0xFF) {
             encoding = "UTF-16BE";
-        if (char1 == 0xFF && char2 == 0xFE)
+        }
+        if (char1 == 0xFF && char2 == 0xFE) {
             encoding = "UTF-16LE";
-        if (char1 == 0xEF && char2 == 0xBB && char3 == 0xBF)
+        }
+        if (char1 == 0xEF && char2 == 0xBB && char3 == 0xBF) {
             encoding = "UTF-8";
-
+        }
         is.reset();
         if (encoding != null) {
             return new InputStreamReader(is, encoding);
@@ -122,17 +124,17 @@ public class HTMLReader extends Reader {
             String buffer = defaultEncoding == null ? new String(buf, 0, len, Charset.defaultCharset())
                     : new String(buf, 0, len, defaultEncoding);
 
-            Matcher matcher_html = PatternConsts.HTML_ENCODING.matcher(buffer);
-            if (matcher_html.find()) {
-                encoding = matcher_html.group(1);
+            Matcher matcherHtml = PatternConsts.HTML_ENCODING.matcher(buffer);
+            if (matcherHtml.find()) {
+                encoding = matcherHtml.group(1);
             } else if (encoding == null) {
-                Matcher matcher_html5 = PatternConsts.HTML5_ENCODING.matcher(buffer);
-                if (matcher_html5.find()) {
-                    encoding = matcher_html5.group(1);
+                Matcher matcherHtml5 = PatternConsts.HTML5_ENCODING.matcher(buffer);
+                if (matcherHtml5.find()) {
+                    encoding = matcherHtml5.group(1);
                 } else if (encoding == null) {
-                    Matcher matcher_xml = PatternConsts.XML_ENCODING.matcher(buffer);
-                    if (matcher_xml.find()) {
-                        encoding = matcher_xml.group(1);
+                    Matcher matcherXml = PatternConsts.XML_ENCODING.matcher(buffer);
+                    if (matcherXml.find()) {
+                        encoding = matcherXml.group(1);
                     }
                 }
             }
@@ -179,8 +181,9 @@ public class HTMLReader extends Reader {
             readFirstTime = false;
             reader.mark(1);
             int ch = reader.read();
-            if (ch != 0xFEFF)
+            if (ch != 0xFEFF) {
                 reader.reset();
+            }
         }
         return reader.read(cbuf, off, len);
     }

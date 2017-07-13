@@ -179,12 +179,14 @@ public abstract class Tag implements Element {
         StringBuilder buf = new StringBuilder();
 
         buf.append("&amp;lt;");
-        if (Type.END == getType())
+        if (Type.END == getType()) {
             buf.append("/");
+        }
         buf.append(getTag());
         buf.append(getAttributes().toString());
-        if (Type.ALONE == getType())
+        if (Type.ALONE == getType()) {
             buf.append("/");
+        }
         buf.append("&amp;gt;");
 
         return buf.toString();
@@ -198,12 +200,14 @@ public abstract class Tag implements Element {
         StringBuilder buf = new StringBuilder();
 
         buf.append('<');
-        if (Type.END == getType())
+        if (Type.END == getType()) {
             buf.append('/');
+        }
         buf.append(getShortcut());
         buf.append(getIndex());
-        if (Type.ALONE == getType())
+        if (Type.ALONE == getType()) {
             buf.append('/');
+        }
         buf.append('>');
 
         return buf.toString();

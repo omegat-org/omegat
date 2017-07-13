@@ -171,15 +171,16 @@ public final class Segmenter {
                 String prev = segments.get(segments.size() - 1);
                 prev += oneseg;
                 segments.set(segments.size() - 1, prev);
-            } else
+            } else {
                 segments.add(oneseg);
+            }
         } catch (IndexOutOfBoundsException iobe) {
         }
 
         return segments;
     }
 
-    private static Pattern DEFAULT_BEFOREBREAK_PATTERN = Pattern.compile(".", Pattern.DOTALL);
+    private static final Pattern DEFAULT_BEFOREBREAK_PATTERN = Pattern.compile(".", Pattern.DOTALL);
 
     /**
      * Returns the places of possible breaks between sentences.
@@ -188,36 +189,41 @@ public final class Segmenter {
         List<BreakPosition> res = new ArrayList<BreakPosition>();
 
         Matcher bbm = null;
-        if (rule.getBeforebreak() != null)
-                bbm = rule.getCompiledBeforebreak().matcher(paragraph);
+        if (rule.getBeforebreak() != null) {
+            bbm = rule.getCompiledBeforebreak().matcher(paragraph);
+        }
         Matcher abm = null;
-        if (rule.getAfterbreak() != null)
+        if (rule.getAfterbreak() != null) {
             abm = rule.getCompiledAfterbreak().matcher(paragraph);
-
-        if (bbm == null && abm == null)
+        }
+        if (bbm == null && abm == null) {
             return res;
-
-        if (abm != null)
-            if (!abm.find())
+        }
+        if (abm != null) {
+            if (!abm.find()) {
                 return res;
+            }
+        }
 
-        if (bbm == null)
+        if (bbm == null) {
             bbm = DEFAULT_BEFOREBREAK_PATTERN.matcher(paragraph);
-
+        }
         while (bbm.find()) {
             int bbe = bbm.end();
-            if (abm == null)
+            if (abm == null) {
                 res.add(new BreakPosition(bbe, rule));
-            else {
+            } else {
                 int abs = abm.start();
                 while (abs < bbe) {
                     boolean found = abm.find();
-                    if (!found)
+                    if (!found) {
                         return res;
+                    }
                     abs = abm.start();
                 }
-                if (abs == bbe)
+                if (abs == bbe) {
                     res.add(new BreakPosition(bbe, rule));
+                }
             }
         }
 
@@ -241,10 +247,12 @@ public final class Segmenter {
          * Other BreakPosition is "equal to" this one iff it has the same position.
          */
         public boolean equals(Object obj) {
-            if (obj == null)
+            if (obj == null) {
                 return false;
-            if (!(obj instanceof BreakPosition))
+            }
+            if (!(obj instanceof BreakPosition)) {
                 return false;
+            }
             BreakPosition that = (BreakPosition) obj;
 
             return this.position == that.position;

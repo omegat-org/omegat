@@ -116,7 +116,7 @@ public class RepositoriesCredentialsController extends BasePreferencesController
     static class Model extends AbstractTableModel {
         List<String> lines;
 
-        public Model(Set<String> urls) {
+        Model(Set<String> urls) {
             lines = new ArrayList<String>(urls);
         }
 

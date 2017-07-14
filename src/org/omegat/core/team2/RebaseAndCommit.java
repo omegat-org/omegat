@@ -175,7 +175,7 @@ public final class RebaseAndCommit {
             // only remote changes - get remote
             Log.logDebug(LOGGER, "only remote changes - get remote '" + path + "'");
             needBackup = true;
-            if (headRepoFile.exists()) {// otherwise file was removed remotelly
+            if (headRepoFile.exists()) { // otherwise file was removed remotely
                 FileUtils.copyFile(headRepoFile, tempOut);
             }
         } else {
@@ -228,7 +228,8 @@ public final class RebaseAndCommit {
             return null;
         }
         provider.copyFilesFromProjectToRepo(prep.path, prep.charset);
-        String newVersion = provider.commitFileAfterVersion(prep.path, prep.commitComment, prep.versionHead, possibleHeadVersion);
+        String newVersion = provider.commitFileAfterVersion(prep.path, prep.commitComment, prep.versionHead,
+                possibleHeadVersion);
         if (newVersion != null) {
             // file was committed good
             provider.getTeamSettings().set(VERSION_PREFIX + prep.path, newVersion);

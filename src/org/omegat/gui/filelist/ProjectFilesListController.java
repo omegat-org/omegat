@@ -649,7 +649,8 @@ public class ProjectFilesListController {
 
         uiUpdateImportButtonStatus();
 
-        OSXIntegration.setProxyIcon(list.getRootPane(), new File(Core.getProject().getProjectProperties().getSourceRoot()));
+        OSXIntegration.setProxyIcon(list.getRootPane(),
+                new File(Core.getProject().getProjectProperties().getSourceRoot()));
 
         setTableFilesModel(files);
         updateTitle();
@@ -675,18 +676,20 @@ public class ProjectFilesListController {
     }
 
     enum FilesTableColumn {
-        FILE_NAME(0, OStrings.getString("PF_FILENAME"), String.class, new DataTableStyling.PatternHighlightRenderer(false)),
+        FILE_NAME(0, OStrings.getString("PF_FILENAME"), String.class,
+                new DataTableStyling.PatternHighlightRenderer(false)),
         FILTER(1, OStrings.getString("PF_FILTERNAME"), String.class, DataTableStyling.getTextCellRenderer()),
         ENCODING(2, OStrings.getString("PF_ENCODING"), String.class, DataTableStyling.getTextCellRenderer()),
         SEGMENTS(3, OStrings.getString("PF_NUM_SEGMENTS"), Integer.class, DataTableStyling.getNumberCellRenderer()),
-        UNIQUE_SEGMENTS(4, OStrings.getString("PF_NUM_UNIQUE_SEGMENTS"), Integer.class, DataTableStyling.getNumberCellRenderer());
+        UNIQUE_SEGMENTS(4, OStrings.getString("PF_NUM_UNIQUE_SEGMENTS"), Integer.class,
+                DataTableStyling.getNumberCellRenderer());
 
         private final int index;
         private final String label;
         private final Class<?> clazz;
         private final TableCellRenderer renderer;
 
-        private FilesTableColumn(int index, String label, Class<?> clazz, TableCellRenderer renderer) {
+        FilesTableColumn(int index, String label, Class<?> clazz, TableCellRenderer renderer) {
             this.index = index;
             this.label = label;
             this.clazz = clazz;
@@ -786,7 +789,7 @@ public class ProjectFilesListController {
         private final Class<?> clazz;
         private final TableCellRenderer renderer;
 
-        private TotalsTableColumn(int index, Class<?> clazz, TableCellRenderer renderer) {
+        TotalsTableColumn(int index, Class<?> clazz, TableCellRenderer renderer) {
             this.index = index;
             this.clazz = clazz;
             this.renderer = renderer;
@@ -885,7 +888,7 @@ public class ProjectFilesListController {
         private final List<IProject.FileInfo> files;
         private final TableCellRenderer childRenderer;
 
-        public CustomRenderer(List<IProject.FileInfo> files, TableCellRenderer childRenderer) {
+        CustomRenderer(List<IProject.FileInfo> files, TableCellRenderer childRenderer) {
             this.files = files;
             this.childRenderer = childRenderer;
         }
@@ -987,7 +990,7 @@ public class ProjectFilesListController {
         private List<Integer> viewToModel;
         private Pattern filter;
 
-        public Sorter(final List<IProject.FileInfo> files) {
+        Sorter(final List<IProject.FileInfo> files) {
             this.files = files;
             init();
             applyPrefs();
@@ -1157,14 +1160,14 @@ public class ProjectFilesListController {
         public int moveTo(int[] selected, int newPos) {
             int[] temp = new int[selected.length];
             int n = selected.length;
-            for(int i = 0; i < selected.length; i++) {
+            for (int i = 0; i < selected.length; i++) {
                 temp[i] = viewToModel.remove(selected[--n]);
             }
 
             newPos = Math.max(newPos, 0);
             newPos = Math.min(newPos, viewToModel.size());
 
-            for(int i = 0; i < temp.length; i++) {
+            for (int i = 0; i < temp.length; i++) {
                 viewToModel.add(newPos, temp[i]);
             }
             recalc();

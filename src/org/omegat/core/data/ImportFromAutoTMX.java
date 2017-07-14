@@ -76,7 +76,7 @@ public class ImportFromAutoTMX {
                 boolean hasICE = id != null && e.hasPropValue(ProjectTMX.PROP_XICE, id);
                 boolean has100PC = id != null && e.hasPropValue(ProjectTMX.PROP_X100PC, id);
 
-                if (!hasICE && !has100PC) {// TMXEntry without x-ids
+                if (!hasICE && !has100PC) { // TMXEntry without x-ids
                     boolean isDefaultTranslation = !isAltTranslation(e);
                     if (!existTranslation.defaultTranslation && isDefaultTranslation) {
                         // Existing translation is alt but the TMX entry is not.
@@ -98,7 +98,7 @@ public class ImportFromAutoTMX {
                         // default translation not exist - use from auto tmx
                         setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
                     }
-                } else {// TMXEntry with x-ids
+                } else { // TMXEntry with x-ids
                     if (!existTranslation.isTranslated() || existTranslation.defaultTranslation) {
                         // need to update if id in xICE or x100PC
                         if (hasICE) {

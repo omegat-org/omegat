@@ -73,7 +73,11 @@ import com.vlsolutions.swing.docking.Dockable;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class TestTeamIntegrationChild {
+public final class TestTeamIntegrationChild {
+
+    private TestTeamIntegrationChild() {
+    }
+
     static final String CONCURRENT_NAME = "concurrent";
 
     static long finishTime;
@@ -525,7 +529,7 @@ public class TestTeamIntegrationChild {
      * Override RealProject for own merge.
      */
     static class TestRealProject extends RealProject {
-        public TestRealProject(final ProjectProperties props) {
+        TestRealProject(final ProjectProperties props) {
             super(props);
         }
 
@@ -663,7 +667,8 @@ public class TestTeamIntegrationChild {
 
         void use(TMXEntry en) {
             EntryKey k = new EntryKey("file", en.source, null, null, null, null);
-            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.source, Collections.<ProtectedPart> emptyList());
+            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.source,
+                    Collections.<ProtectedPart> emptyList());
             mergedTMX.setTranslation(ste, en, true);
         }
 

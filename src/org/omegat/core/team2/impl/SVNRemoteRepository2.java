@@ -194,7 +194,8 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         try {
 
             ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-            SVNClientManager ourClientManager = SVNClientManager.newInstance(options, (ISVNAuthenticationManager)null);
+            SVNClientManager ourClientManager = SVNClientManager.newInstance(options,
+                    (ISVNAuthenticationManager) null);
 
             ourClientManager.getWCClient().doInfo(SVNURL.parseURIEncoded(SVNEncodingUtil.autoURIEncode(url)),
                     SVNRevision.HEAD,

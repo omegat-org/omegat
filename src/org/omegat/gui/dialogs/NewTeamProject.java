@@ -191,7 +191,7 @@ public class NewTeamProject extends javax.swing.JDialog {
 
         private final String url;
 
-        public RepoTypeWorker(String url) {
+        RepoTypeWorker(String url) {
             this.url = url;
         }
 

@@ -86,21 +86,21 @@ import gen.core.filters.Filters;
  */
 public class FilterMaster {
     /** name of the filter configuration file */
-    public final static String FILE_FILTERS = "filters.xml";
+    public static final String FILE_FILTERS = "filters.xml";
 
     private static final JAXBContext CONFIG_CTX;
 
     /**
      * There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0 RC12).
      */
-    public static String INITIAL_VERSION = "";
+    public static final String INITIAL_VERSION = "";
     /** File filters support of 1.6.0 RC12a: now upgrading the configuration. */
-    public static String OT160RC12a_VERSION = "1.6 RC12a";
-    public static String OT160FINAL_VERSION = "1.6.0";
-    public static String OT161_VERSION = "1.6.1";
-    public static String OT170_VERSION = "1.7.0";
+    public static final String OT160RC12A_VERSION = "1.6 RC12a";
+    public static final String OT160FINAL_VERSION = "1.6.0";
+    public static final String OT161_VERSION = "1.6.1";
+    public static final String OT170_VERSION = "1.7.0";
     /** Currently file filters support version. */
-    public static String CURRENT_VERSION = "2.0";
+    public static final String CURRENT_VERSION = "2.0";
 
     /** Filters config stored in XML file. */
     private final Filters config;
@@ -290,7 +290,7 @@ public class FilterMaster {
         public final IFilter filterObject;
         public final Map<String, String> config;
 
-        public LookupInformation(IFilter filterObject, Files outFilesInfo, Map<String, String> config) {
+        LookupInformation(IFilter filterObject, Files outFilesInfo, Map<String, String> config) {
             this.filterObject = filterObject;
             this.outFilesInfo = outFilesInfo;
             this.config = config;
@@ -514,10 +514,12 @@ public class FilterMaster {
      * @throws IOException
      * @throws TranslationException
      */
-    public String getTargetForSource(String sourceDir, String srcRelPath, FilterContext fc) throws IOException, TranslationException {
+    public String getTargetForSource(String sourceDir, String srcRelPath, FilterContext fc)
+            throws IOException, TranslationException {
         File srcFile = new File(sourceDir, srcRelPath);
         if (!srcFile.isFile()) {
-            throw new IllegalArgumentException("The sourceDir and srcRelPath arguments must together point to an existing file.");
+            throw new IllegalArgumentException(
+                    "The sourceDir and srcRelPath arguments must together point to an existing file.");
         }
         LookupInformation lookup = lookupFilter(srcFile, fc);
         return getTargetForSource(srcRelPath, lookup, fc.getTargetLang());
@@ -665,7 +667,7 @@ public class FilterMaster {
         res = res.replace(AbstractFilter.TFP_FILE_FILTER_NAME, filterFormatName);
         //
 
-        String sourceMaskPattern = sourceMask.replaceAll("\\?","(.)").replaceAll("\\*","(.*?)");
+        String sourceMaskPattern = sourceMask.replaceAll("\\?", "(.)").replaceAll("\\*", "(.*?)");
         java.util.regex.Matcher sourceMatcher = Pattern.compile(sourceMaskPattern).matcher(filename);
         if (sourceMatcher.find()) {
             for (int i = 1; i <= sourceMatcher.groupCount(); i++) {
@@ -674,13 +676,13 @@ public class FilterMaster {
         }
 
         String[] splitName = filename.split("\\.");
-        StringBuilder nameOnlyBuf = new StringBuilder (splitName[0]);
-        StringBuilder extensionBuf = new StringBuilder (splitName[splitName.length - 1]);
+        StringBuilder nameOnlyBuf = new StringBuilder(splitName[0]);
+        StringBuilder extensionBuf = new StringBuilder(splitName[splitName.length - 1]);
         for (int i = 0; i < splitName.length; i++) {
-            res = res.replaceAll ("\\$\\{nameOnly-" + i + "\\}", nameOnlyBuf.toString());
-            res = res.replaceAll ("\\$\\{extension-" + i + "\\}", extensionBuf.toString());
+            res = res.replaceAll("\\$\\{nameOnly-" + i + "\\}", nameOnlyBuf.toString());
+            res = res.replaceAll("\\$\\{extension-" + i + "\\}", extensionBuf.toString());
             if (i + 1 < splitName.length) {
-                nameOnlyBuf.append (".").append(splitName[i + 1]);
+                nameOnlyBuf.append(".").append(splitName[i + 1]);
                 extensionBuf.insert(0, splitName[splitName.length - i - 2] + '.');
             }
         }

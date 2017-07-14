@@ -72,7 +72,7 @@ public class CharacterWrapEditorKit extends StyledEditorKit {
 
     private static class CharacterWrapLabelView extends LabelView {
 
-        public CharacterWrapLabelView(Element elem) {
+        CharacterWrapLabelView(Element elem) {
             super(elem);
         }
 

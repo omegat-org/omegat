@@ -67,15 +67,15 @@ class MutableBead {
         this.status = srcEqualsTrg ? MutableBead.Status.ACCEPTED : MutableBead.Status.DEFAULT;
     }
 
-    public MutableBead(Alignment alignment) {
+    MutableBead(Alignment alignment) {
         this(alignment.getScore(), alignment.getSourceSegmentList(), alignment.getTargetSegmentList());
     }
 
-    public MutableBead(List<String> sourceLines, List<String> targetLines) {
+    MutableBead(List<String> sourceLines, List<String> targetLines) {
         this(Float.MAX_VALUE, sourceLines, targetLines);
     }
 
-    public MutableBead(String source, String target) {
+    MutableBead(String source, String target) {
         this(Arrays.asList(source), Arrays.asList(target));
     }
 
@@ -84,7 +84,7 @@ class MutableBead {
      * default because it is assumed that the caller will populate the bead with
      * interesting data.
      */
-    public MutableBead() {
+    MutableBead() {
         this(Collections.emptyList(), Collections.emptyList());
         this.enabled = true;
         this.status = Status.DEFAULT;

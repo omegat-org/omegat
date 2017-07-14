@@ -37,5 +37,5 @@ public class StatisticsInfo {
     public int numberofTranslatedSegments;
     public int numberOfUniqueSegments;
     public int numberOfSegmentsTotal;
-    public Map<String,Integer> uniqueCountsByFile = new HashMap<String, Integer>();
+    public Map<String, Integer> uniqueCountsByFile = new HashMap<>();
 }

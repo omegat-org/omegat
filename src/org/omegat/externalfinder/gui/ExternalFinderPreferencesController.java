@@ -50,7 +50,7 @@ import org.omegat.util.gui.TableColumnSizer;
 
 public class ExternalFinderPreferencesController extends BasePreferencesController {
 
-    private static int MAX_ROW_COUNT = 10;
+    private static final int MAX_ROW_COUNT = 10;
 
     private final boolean isProjectSpecific;
     private final ExternalFinderConfiguration originalConfig;
@@ -179,7 +179,7 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
                 : OStrings.getString("PREFS_TITLE_EXTERNALFINDER");
     }
 
-    static enum ItemColumn {
+    enum ItemColumn {
         NAME(0, OStrings.getString("PREFS_EXTERNALFINDER_COL_NAME"), String.class),
         CONTENTS(1, OStrings.getString("PREFS_EXTERNALFINDER_COL_SUMMARY"), String.class),
         KEYSTROKE(2, OStrings.getString("PREFS_EXTERNALFINDER_COL_KEYSTROKE"), String.class),
@@ -189,7 +189,7 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
         final String label;
         final Class<?> clazz;
 
-        private ItemColumn(int index, String label, Class<?> clazz) {
+        ItemColumn(int index, String label, Class<?> clazz) {
             this.index = index;
             this.label = label;
             this.clazz = clazz;
@@ -205,7 +205,7 @@ public class ExternalFinderPreferencesController extends BasePreferencesControll
 
         private final List<ExternalFinderItem> data;
 
-        public ItemsTableModel(List<ExternalFinderItem> data) {
+        ItemsTableModel(List<ExternalFinderItem> data) {
             this.data = new ArrayList<>(data);
         }
 

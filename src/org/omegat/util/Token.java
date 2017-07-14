@@ -62,46 +62,47 @@ public class Token {
      */
     private int hash;
 
+    @Override
     public int hashCode() {
         return hash;
     }
 
-    private static Pattern AMP = Pattern.compile("\\&");
+    private static final Pattern AMP = Pattern.compile("\\&");
 
-    private final String stripAmpersand(String s) {
+    private String stripAmpersand(String s) {
         return AMP.matcher(s).replaceAll("");
     }
 
     /**
      * Creates a new token.
      *
-     * @param _text
+     * @param text
      *            the text of the token
-     * @param _offset
+     * @param offset
      *            the starting position of this token in parent string
      */
-    public Token(String _text, int _offset) {
-        this(_text, _offset, _text.length());
+    public Token(String text, int offset) {
+        this(text, offset, text.length());
     }
 
     /**
      * Creates a new token.
      *
-     * @param _text
+     * @param text
      *            the text of the token
-     * @param _offset
+     * @param offset
      *            the starting position of this token in parent string
-     * @param _length
+     * @param length
      *            length of token
      */
-    public Token(String _text, int _offset, int _length) {
-        length = _length;
-        hash = (_text == null) ? -1 : stripAmpersand(_text).hashCode();
-        offset = _offset;
+    public Token(String text, int offset, int length) {
+        this.length = length;
+        this.hash = (text == null) ? -1 : stripAmpersand(text).hashCode();
+        this.offset = offset;
     }
 
-    private int length;
-    private int offset;
+    private final int length;
+    private final int offset;
 
     /** Returns the length of a token. */
     public final int getLength() {

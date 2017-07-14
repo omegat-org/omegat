@@ -38,7 +38,7 @@ public class XMLSpreadsheetTest extends TestFilterBase {
     public void testParse() throws Exception {
         List<String> lines = parse(new XMLSpreadsheetFilter(),
                 "test/data/filters/XMLSpreadsheet/XMLSpreadsheet2003.xml", null);
-        assertTrue(lines.size()== 1);
+        assertTrue(lines.size() == 1);
         assertEquals("This is a test sentence with <b>HTML tags</b> inside.", lines.get(0));
     }
 

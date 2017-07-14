@@ -179,7 +179,7 @@ public class NearString {
         }
 
         private int primaryScore(Scores s) {
-            switch(key) {
+            switch (key) {
             case SCORE:
                 return s.score;
             case SCORE_NO_STEM:
@@ -191,7 +191,7 @@ public class NearString {
         }
 
         private int secondaryScore(Scores s) {
-            switch(key) {
+            switch (key) {
             case SCORE:
                 return s.scoreNoStem;
             case SCORE_NO_STEM:
@@ -203,7 +203,7 @@ public class NearString {
         }
 
         private int ternaryScore(Scores s) {
-            switch(key) {
+            switch (key) {
             case SCORE:
                 return s.adjustedScore;
             case SCORE_NO_STEM:

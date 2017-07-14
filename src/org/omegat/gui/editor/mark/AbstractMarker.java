@@ -46,9 +46,9 @@ import org.omegat.core.data.SourceTextEntry;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public abstract class AbstractMarker implements IMarker {
-    protected HighlightPainter PAINTER;
+    protected HighlightPainter painter;
     protected String toolTip;
-    protected AttributeSet ATTRIBUTES;
+    protected AttributeSet attributes;
     /** Regexp for mark. */
     protected Pattern pattern;
     /** char for mark. */
@@ -78,15 +78,15 @@ public abstract class AbstractMarker implements IMarker {
 
         List<Mark> r = new ArrayList<Mark>();
         Matcher match;
-        if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) {// TODO
+        if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) { // TODO
             initDrawers(true, isActive);
             if (pattern != null) {
                 match = pattern.matcher(sourceText);
                 while (match.find()) {
                     Mark m = new Mark(Mark.ENTRY_PART.SOURCE, match.start(), match.end());
-                    m.painter = PAINTER;
+                    m.painter = painter;
                     m.toolTipText = toolTip;
-                    m.attributes = ATTRIBUTES;
+                    m.attributes = attributes;
                     r.add(m);
                 }
             }
@@ -95,9 +95,9 @@ public abstract class AbstractMarker implements IMarker {
                 while ((pos = sourceText.indexOf(patternChar, pos)) >= 0) {
                     int next = sourceText.offsetByCodePoints(pos, 1);
                     Mark m = new Mark(Mark.ENTRY_PART.SOURCE, pos, next);
-                    m.painter = PAINTER;
+                    m.painter = painter;
                     m.toolTipText = toolTip;
-                    m.attributes = ATTRIBUTES;
+                    m.attributes = attributes;
                     r.add(m);
                     pos = next;
                 }
@@ -109,9 +109,9 @@ public abstract class AbstractMarker implements IMarker {
                 match = pattern.matcher(translationText);
                 while (match.find()) {
                     Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.start(), match.end());
-                    m.painter = PAINTER;
+                    m.painter = painter;
                     m.toolTipText = toolTip;
-                    m.attributes = ATTRIBUTES;
+                    m.attributes = attributes;
                     r.add(m);
                 }
             }
@@ -120,9 +120,9 @@ public abstract class AbstractMarker implements IMarker {
                 while ((pos = translationText.indexOf(patternChar, pos)) >= 0) {
                     int next = translationText.offsetByCodePoints(pos, 1);
                     Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, pos, next);
-                    m.painter = PAINTER;
+                    m.painter = painter;
                     m.toolTipText = toolTip;
-                    m.attributes = ATTRIBUTES;
+                    m.attributes = attributes;
                     r.add(m);
                     pos = next;
                 }

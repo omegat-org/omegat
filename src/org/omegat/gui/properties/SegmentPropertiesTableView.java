@@ -251,7 +251,7 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
         private FlashColorInterpolator flasher;
         private List<Integer> rows;
 
-        public FlashingTable(TableModel model) {
+        FlashingTable(TableModel model) {
             super(model);
         }
 
@@ -348,7 +348,7 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
 
         private final Border noFocusBorder = new EmptyBorder(FOCUS_BORDER.getBorderInsets(this));
 
-        public MultilineCellRenderer() {
+        MultilineCellRenderer() {
             setLineWrap(true);
             setWrapStyleWord(true);
             setOpaque(true);

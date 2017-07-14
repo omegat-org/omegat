@@ -53,11 +53,13 @@ public class DocumentFilter3 extends DocumentFilter {
     }
 
     @Override
-    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+            throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
 
         if (attr != null) {
-            ((Document3)fb.getDocument()).textBeingComposed = attr.isDefined(StyleConstants.ComposedTextAttribute);
+            ((Document3) fb.getDocument()).textBeingComposed = attr
+                    .isDefined(StyleConstants.ComposedTextAttribute);
         }
 
         if (isPossible(fb.getDocument(), offset, 0)) {
@@ -71,7 +73,8 @@ public class DocumentFilter3 extends DocumentFilter {
         UIThreadsUtil.mustBeSwingThread();
 
         if (attrs != null) {
-            ((Document3)fb.getDocument()).textBeingComposed = attrs.isDefined(StyleConstants.ComposedTextAttribute);
+            ((Document3) fb.getDocument()).textBeingComposed = attrs
+                    .isDefined(StyleConstants.ComposedTextAttribute);
         }
 
         if (isPossible(fb.getDocument(), offset, length)) {

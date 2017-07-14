@@ -176,7 +176,7 @@ public class TaaSClient {
         conn.setRequestProperty("Accept", "text/xml");
         conn.setRequestMethod("POST");
 
-        conn.setRequestProperty("Content-Type", "text/plain");// ; charset=UTF-8
+        conn.setRequestProperty("Content-Type", "text/plain"); // ; charset=UTF-8
         conn.setDoOutput(true);
         OutputStream out = conn.getOutputStream();
         try {

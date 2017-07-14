@@ -233,7 +233,7 @@ public class Searcher {
     private void addEntry(int num, String preamble, String srcPrefix, String src, String target,
             String note, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch) {
         SearchResultEntry entry = new SearchResultEntry(num, preamble, srcPrefix,
-                src, target, note, srcMatch,targetMatch, noteMatch);
+                src, target, note, srcMatch, targetMatch, noteMatch);
         m_searchResults.add(entry);
         m_numFinds++;
     }

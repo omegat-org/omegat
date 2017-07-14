@@ -64,7 +64,7 @@ public interface IEditor {
     /**
      * Storage for caret position and selection.
      */
-    public class CaretPosition {
+    class CaretPosition {
         Integer position;
         Integer selectionStart, selectionEnd;
 

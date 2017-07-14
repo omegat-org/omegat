@@ -47,12 +47,12 @@ import org.omegat.util.gui.ResourcesUtil;
  * @author Aaron Madlon-Kay
  */
 public interface ISegmentPropertiesView {
-    static Icon SETTINGS_ICON = new ImageIcon(ResourcesUtil.getBundledImage("appbar.settings.active.png"));
-    static Icon SETTINGS_ICON_INACTIVE = new ImageIcon(
+    Icon SETTINGS_ICON = new ImageIcon(ResourcesUtil.getBundledImage("appbar.settings.active.png"));
+    Icon SETTINGS_ICON_INACTIVE = new ImageIcon(
             ResourcesUtil.getBundledImage("appbar.settings.inactive.png"));
-    static Icon SETTINGS_ICON_PRESSED = new ImageIcon(
+    Icon SETTINGS_ICON_PRESSED = new ImageIcon(
             ResourcesUtil.getBundledImage("appbar.settings.pressed.png"));
-    static Icon SETTINGS_ICON_INVISIBLE = new Icon() {
+    Icon SETTINGS_ICON_INVISIBLE = new Icon() {
         @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
         }
@@ -68,18 +68,18 @@ public interface ISegmentPropertiesView {
         }
     };
 
-    static final String PROPERTY_TRANSLATION_KEY = "SEGPROP_KEY_";
-    static final Border FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
-    static final Border MARGIN_BORDER = new EmptyBorder(1, 5, 1, 5);
-    static final Border FOCUS_COMPOUND_BORDER = new CompoundBorder(MARGIN_BORDER, FOCUS_BORDER);
+    String PROPERTY_TRANSLATION_KEY = "SEGPROP_KEY_";
+    Border FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
+    Border MARGIN_BORDER = new EmptyBorder(1, 5, 1, 5);
+    Border FOCUS_COMPOUND_BORDER = new CompoundBorder(MARGIN_BORDER, FOCUS_BORDER);
 
-    public void update();
+    void update();
 
-    public JComponent getViewComponent();
+    JComponent getViewComponent();
 
-    public void notifyUser(List<Integer> notify);
+    void notifyUser(List<Integer> notify);
 
-    public void install(SegmentPropertiesArea parent);
+    void install(SegmentPropertiesArea parent);
 
-    public String getKeyAtPoint(Point p);
+    String getKeyAtPoint(Point p);
 }

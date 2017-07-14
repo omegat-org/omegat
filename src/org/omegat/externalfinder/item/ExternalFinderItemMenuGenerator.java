@@ -92,11 +92,11 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
     private static class ExternalFinderItemActionListener implements ActionListener {
 
         private final SCOPE scope;
-        private final List<ExternalFinderItemURL> URLs;
+        private final List<ExternalFinderItemURL> urls;
         private final List<ExternalFinderItemCommand> commands;
 
-        public ExternalFinderItemActionListener(ExternalFinderItem finderItem) {
-            this.URLs = finderItem.getURLs();
+        ExternalFinderItemActionListener(ExternalFinderItem finderItem) {
+            this.urls = finderItem.getURLs();
             this.commands = finderItem.getCommands();
             this.scope = finderItem.getScope();
         }
@@ -110,52 +110,44 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
             final String targetWords = selection; // selection.trim();
             final boolean isASCII = ExternalFinderItem.isASCII(targetWords);
 
-            new Thread(new Runnable() {
+            new Thread(() -> {
+                for (ExternalFinderItemURL url : urls) {
+                    if ((isASCII && (url.getTarget() == ExternalFinderItem.TARGET.NON_ASCII_ONLY))
+                            || (!isASCII && (url.getTarget() == ExternalFinderItem.TARGET.ASCII_ONLY))) {
+                        continue;
+                    }
 
-                public void run() {
-                    for (ExternalFinderItemURL url : URLs) {
-                        if ((isASCII && (url.getTarget() == ExternalFinderItem.TARGET.NON_ASCII_ONLY))
-                                || (!isASCII && (url.getTarget() == ExternalFinderItem.TARGET.ASCII_ONLY))) {
-                            continue;
-                        }
-
-                        try {
-                            Desktop.getDesktop().browse(url.generateURL(targetWords));
-                        } catch (Exception ex) {
-                            Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName())
-                                    .log(Level.SEVERE, null, ex);
-                            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                                    ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
-                                    JOptionPane.ERROR_MESSAGE);
-                        }
+                    try {
+                        Desktop.getDesktop().browse(url.generateURL(targetWords));
+                    } catch (Exception ex) {
+                        Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE,
+                                null, ex);
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), ex.getLocalizedMessage(),
+                                OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }).start();
 
-            new Thread(new Runnable() {
-
-                public void run() {
-                    for (ExternalFinderItemCommand command : commands) {
-                        if ((isASCII && (command.getTarget() == ExternalFinderItem.TARGET.NON_ASCII_ONLY))
-                                || (!isASCII && (command.getTarget() == ExternalFinderItem.TARGET.ASCII_ONLY))) {
-                            continue;
-                        }
-                        if (scope == SCOPE.PROJECT
-                                && !Preferences.isPreference(Preferences.EXTERNAL_FINDER_ALLOW_PROJECT_COMMANDS)) {
-                            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                                    OStrings.getString("EXTERNALFINDER_PROJECT_COMMANDS_DISALLOWED_MESSAGE"),
-                                    OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-                        try {
-                            Runtime.getRuntime().exec(command.generateCommand(targetWords));
-                        } catch (Exception ex) {
-                            Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName())
-                                    .log(Level.SEVERE, null, ex);
-                            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                                    ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
-                                    JOptionPane.ERROR_MESSAGE);
-                        }
+            new Thread(() -> {
+                for (ExternalFinderItemCommand command : commands) {
+                    if ((isASCII && (command.getTarget() == ExternalFinderItem.TARGET.NON_ASCII_ONLY))
+                            || (!isASCII && (command.getTarget() == ExternalFinderItem.TARGET.ASCII_ONLY))) {
+                        continue;
+                    }
+                    if (scope == SCOPE.PROJECT && !Preferences
+                            .isPreference(Preferences.EXTERNAL_FINDER_ALLOW_PROJECT_COMMANDS)) {
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                                OStrings.getString("EXTERNALFINDER_PROJECT_COMMANDS_DISALLOWED_MESSAGE"),
+                                OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    try {
+                        Runtime.getRuntime().exec(command.generateCommand(targetWords));
+                    } catch (Exception ex) {
+                        Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE,
+                                null, ex);
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), ex.getLocalizedMessage(),
+                                OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }).start();

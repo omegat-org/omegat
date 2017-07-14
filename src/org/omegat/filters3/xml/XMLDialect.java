@@ -202,38 +202,38 @@ public interface XMLDialect {
     /**
      * Unboxed (of primitive type </code>int</code>) constraint on Doctype name.
      */
-    static final int CONSTRAINT_DOCTYPE_UNBOXED = 1;
+    int CONSTRAINT_DOCTYPE_UNBOXED = 1;
     /**
      * Unboxed (of primitive type </code>int</code>) constraint on PUBLIC
      * Doctype declaration.
      */
-    static final int CONSTRAINT_PUBLIC_DOCTYPE_UNBOXED = 2;
+    int CONSTRAINT_PUBLIC_DOCTYPE_UNBOXED = 2;
     /**
      * Unboxed (of primitive type </code>int</code>) constraint on SYSTEM
      * Doctype declaration.
      */
-    static final int CONSTRAINT_SYSTEM_DOCTYPE_UNBOXED = 3;
+    int CONSTRAINT_SYSTEM_DOCTYPE_UNBOXED = 3;
     /**
      * Unboxed (of primitive type </code>int</code>) constraint on root tag
      * name.
      */
-    static final int CONSTRAINT_ROOT_UNBOXED = 4;
+    int CONSTRAINT_ROOT_UNBOXED = 4;
     /**
      * Unboxed (of primitive type </code>int</code>) constraint on xmlns
      * declaration.
      */
-    static final int CONSTRAINT_XMLNS_UNBOXED = 5;
+    int CONSTRAINT_XMLNS_UNBOXED = 5;
 
     /** Constraint on Doctype name. */
-    static final int CONSTRAINT_DOCTYPE = CONSTRAINT_DOCTYPE_UNBOXED;
+    int CONSTRAINT_DOCTYPE = CONSTRAINT_DOCTYPE_UNBOXED;
     /** Constraint on PUBLIC Doctype declaration. */
-    static final int CONSTRAINT_PUBLIC_DOCTYPE = CONSTRAINT_PUBLIC_DOCTYPE_UNBOXED;
+    int CONSTRAINT_PUBLIC_DOCTYPE = CONSTRAINT_PUBLIC_DOCTYPE_UNBOXED;
     /** Constraint on SYSTEM Doctype declaration. */
-    static final int CONSTRAINT_SYSTEM_DOCTYPE = CONSTRAINT_SYSTEM_DOCTYPE_UNBOXED;
+    int CONSTRAINT_SYSTEM_DOCTYPE = CONSTRAINT_SYSTEM_DOCTYPE_UNBOXED;
     /** Constraint on root tag name. */
-    static final int CONSTRAINT_ROOT = CONSTRAINT_ROOT_UNBOXED;
+    int CONSTRAINT_ROOT = CONSTRAINT_ROOT_UNBOXED;
     /** Constraint on xmlns declaration. */
-    static final int CONSTRAINT_XMLNS = CONSTRAINT_XMLNS_UNBOXED;
+    int CONSTRAINT_XMLNS = CONSTRAINT_XMLNS_UNBOXED;
 
     /**
      * Returns defined constraints to restrict supported subset of XML files.

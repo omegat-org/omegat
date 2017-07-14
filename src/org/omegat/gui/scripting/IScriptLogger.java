@@ -36,9 +36,9 @@ package org.omegat.gui.scripting;
  */
 public interface IScriptLogger {
 
-    public void print(Object o);
+    void print(Object o);
 
-    public void println(Object o);
+    void println(Object o);
 
-    public void clear();
+    void clear();
 }

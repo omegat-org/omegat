@@ -93,5 +93,5 @@ public interface ITokenizer {
      * Indicate that this should be used by setting the {@link Tokenizer} annotation
      * to contain only {@link Tokenizer#DISCOVER_AT_RUNTIME}.
      */
-    public String[] getSupportedLanguages();
+    String[] getSupportedLanguages();
 }

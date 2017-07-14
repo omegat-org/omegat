@@ -111,7 +111,7 @@ public class TMXReader2 {
         factory = XMLInputFactory.newInstance();
         factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
         factory.setXMLReporter(new XMLReporter() {
-            public void report(String message, String error_type, Object info, Location location)
+            public void report(String message, String errorType, Object info, Location location)
                     throws XMLStreamException {
                 Log.logWarningRB("TMXR_WARNING_WHILE_PARSING",
                         location.getLineNumber(),
@@ -301,7 +301,7 @@ public class TMXReader2 {
             case XMLEvent.END_ELEMENT:
                 EndElement eEnd = (EndElement) e;
                 if ("note".equals(eEnd.getName().getLocalPart())) {
-                    currentTu.note=noteContent.toString();
+                    currentTu.note = noteContent.toString();
                     return;
                 }
                 break;
@@ -411,19 +411,19 @@ public class TMXReader2 {
                 segInlineTag.setLength(0);
                 if ("bpt".equals(eStart.getName().getLocalPart())) {
                     inlineTagHandler.startBPT(getAttributeValue(eStart, "i"), getAttributeValue(eStart, "x"));
-                    inlineTagHandler.setTagShortcutLetter(StringUtil.getFirstLetterLowercase(getAttributeValue(eStart,
-                            "type")));
+                    inlineTagHandler.setTagShortcutLetter(
+                            StringUtil.getFirstLetterLowercase(getAttributeValue(eStart, "type")));
                 } else if ("ept".equals(eStart.getName().getLocalPart())) {
                     inlineTagHandler.startEPT(getAttributeValue(eStart, "i"));
                 } else if ("it".equals(eStart.getName().getLocalPart())) {
                     inlineTagHandler.startOTHER();
-                    inlineTagHandler.setOtherTagShortcutLetter(StringUtil.getFirstLetterLowercase(getAttributeValue(eStart,
-                            "type")));
+                    inlineTagHandler.setOtherTagShortcutLetter(
+                            StringUtil.getFirstLetterLowercase(getAttributeValue(eStart, "type")));
                     inlineTagHandler.setCurrentPos(getAttributeValue(eStart, "pos"));
                 } else if ("ph".equals(eStart.getName().getLocalPart())) {
                     inlineTagHandler.startOTHER();
-                    inlineTagHandler.setOtherTagShortcutLetter(StringUtil.getFirstLetterLowercase(getAttributeValue(eStart,
-                            "type")));
+                    inlineTagHandler.setOtherTagShortcutLetter(
+                            StringUtil.getFirstLetterLowercase(getAttributeValue(eStart, "type")));
                 } else {
                     inlineTagHandler.startOTHER();
                 }

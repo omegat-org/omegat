@@ -60,9 +60,9 @@ public class SearchThread extends LongProcessThread {
      *           this function on successful setting of the search parameters.
      */
     public SearchThread(SearchWindowController window, Searcher searcher) {
-        m_window = window;
-        m_searcher = searcher;
-        m_searcher.setThread(this);
+        this.window = window;
+        this.searcher = searcher;
+        this.searcher.setThread(this);
     }
 
     // /////////////////////////////////////////////////////////
@@ -71,17 +71,17 @@ public class SearchThread extends LongProcessThread {
     public void run() {
         try {
             try {
-                m_searcher.search();
+                searcher.search();
 
                 checkInterrupted();
 
-                m_window.displaySearchResult(m_searcher);
-            } catch(LongProcessInterruptedException ex) {
+                window.displaySearchResult(searcher);
+            } catch (LongProcessInterruptedException ex) {
                 // interrupted - nothing to do
             } catch (PatternSyntaxException e) {
                 // bad regexp input
                 // alert user to badness
-                m_window.displayErrorRB(e, "ST_REGEXP_ERROR");
+                window.displayErrorRB(e, "ST_REGEXP_ERROR");
             } catch (Exception e) {
                 // something bad happened
                 // alert user to badness
@@ -94,6 +94,6 @@ public class SearchThread extends LongProcessThread {
         }
     }
 
-    private SearchWindowController m_window;
-    private Searcher m_searcher;
+    private SearchWindowController window;
+    private Searcher searcher;
 }

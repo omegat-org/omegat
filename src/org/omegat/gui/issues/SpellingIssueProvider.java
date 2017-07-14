@@ -95,7 +95,7 @@ class SpellingIssueProvider implements IIssueProvider {
         private final TMXEntry tmxEntry;
         private final List<Token> misspelledTokens;
 
-        public SpellingIssue(SourceTextEntry ste, TMXEntry tmxEntry, List<Token> misspelledTokens) {
+        SpellingIssue(SourceTextEntry ste, TMXEntry tmxEntry, List<Token> misspelledTokens) {
             this.ste = ste;
             this.tmxEntry = tmxEntry;
             this.misspelledTokens = misspelledTokens;

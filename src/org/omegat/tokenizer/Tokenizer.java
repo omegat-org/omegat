@@ -41,7 +41,7 @@ public @interface Tokenizer {
      * supported languages should be determined at runtime via
      * {@link BaseTokenizer#getSupportedLanguages()}.
      */
-    public static final String DISCOVER_AT_RUNTIME = "discoverAtRuntime";
+    String DISCOVER_AT_RUNTIME = "discoverAtRuntime";
 
     /**
      * The languages supported by the tokenizer.

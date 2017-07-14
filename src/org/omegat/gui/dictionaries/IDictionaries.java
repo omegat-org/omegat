@@ -31,9 +31,9 @@ public interface IDictionaries {
     /**
      * Refresh content on dictionary file changed.
      */
-    public void refresh();
+    void refresh();
 
-    public void addDictionaryFactory(IDictionaryFactory factory);
+    void addDictionaryFactory(IDictionaryFactory factory);
 
-    public void removeDictionaryFactory(IDictionaryFactory factory);
+    void removeDictionaryFactory(IDictionaryFactory factory);
 }

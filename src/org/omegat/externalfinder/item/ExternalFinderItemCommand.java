@@ -43,7 +43,8 @@ public class ExternalFinderItemCommand {
     private final ExternalFinderItem.ENCODING encoding;
     private final String delimiter;
 
-    public ExternalFinderItemCommand(String command, ExternalFinderItem.TARGET target, ExternalFinderItem.ENCODING encoding, String delimiter) {
+    public ExternalFinderItemCommand(String command, ExternalFinderItem.TARGET target,
+            ExternalFinderItem.ENCODING encoding, String delimiter) {
         this.command = command;
         this.target = target;
         this.encoding = encoding;
@@ -116,7 +117,7 @@ public class ExternalFinderItemCommand {
         return generateCommand(command, delimiter, encoding, findingWords);
     }
 
-    private static final String[] generateCommand(String command, String delimiter,
+    private static String[] generateCommand(String command, String delimiter,
             ExternalFinderItem.ENCODING encoding, String findingWords) throws UnsupportedEncodingException {
         String encodedWords;
         if (encoding == ExternalFinderItem.ENCODING.NONE) {
@@ -137,7 +138,7 @@ public class ExternalFinderItemCommand {
         return ret;
     }
 
-    public static class Builder {
+    public static final class Builder {
         private String command;
         private ExternalFinderItem.TARGET target = ExternalFinderItem.TARGET.BOTH;
         private ExternalFinderItem.ENCODING encoding = ExternalFinderItem.ENCODING.NONE;

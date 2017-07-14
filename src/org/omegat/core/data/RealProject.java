@@ -622,7 +622,7 @@ public class RealProject implements IProject {
                 remoteRepositoryProvider.copyFilesFromProjectToRepo(config.getTargetDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
             } catch (Exception e) {
-                Log.logErrorRB("CT_ERROR_CREATING_TARGET_DIR");// TODO: change to better error
+                Log.logErrorRB("CT_ERROR_CREATING_TARGET_DIR"); // TODO: change to better error
                 Log.log(e);
                 throw new IOException(OStrings.getString("CT_ERROR_CREATING_TARGET_DIR") + "\n"
                         + e.getMessage());

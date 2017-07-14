@@ -64,10 +64,10 @@ public abstract class AlphabeticalMarkers extends JPanel {
 
     private final ColorScheme colorScheme;
 
-    private final Font TITLE_FONT = getTitleFont();
-    private final int BOX_SIZE = getBoxSize(TITLE_FONT);
-    private final Polygon MARKER_SHAPE = createMarkerShape(BOX_SIZE);
-    private final Rectangle GUIDING_SQUARE = new Rectangle(BOX_SIZE, BOX_SIZE);
+    private final Font titleFont = getTitleFont();
+    private final int boxSize = getBoxSize(titleFont);
+    private final Polygon markerShape = createMarkerShape(boxSize);
+    private final Rectangle guidingSquare = new Rectangle(boxSize, boxSize);
     private List<Marker> markers = null;
     private final JLayeredPane parent;
     private final JScrollPane scrollPane;
@@ -83,9 +83,9 @@ public abstract class AlphabeticalMarkers extends JPanel {
     }
 
     private ColorScheme createColorScheme(final Color editorBackground) {
-        int MINIMUM_VISIBILITY = 0x8000;
+        int minimumVisibility = 0x8000;
         int distanceToLightScheme = calculateSSD(editorBackground, Color.YELLOW);
-        if (distanceToLightScheme >= MINIMUM_VISIBILITY) {
+        if (distanceToLightScheme >= minimumVisibility) {
             // Use the light scheme: background, foreground, border
             return new ColorScheme(Color.YELLOW, Color.RED, Color.ORANGE);
         } else {
@@ -132,30 +132,30 @@ public abstract class AlphabeticalMarkers extends JPanel {
         // map location to the appropriate corner of the guiding square.
         Point boxLocation = new Point(location);
         if (sourceLangIsRTL) {
-            boxLocation.translate(-BOX_SIZE, -BOX_SIZE); // right-bottom corner
+            boxLocation.translate(-boxSize, -boxSize); // right-bottom corner
         } else {
-            boxLocation.translate(0, -BOX_SIZE); // left-bottom corner
+            boxLocation.translate(0, -boxSize); // left-bottom corner
         }
-        GUIDING_SQUARE.setLocation(boxLocation);
+        guidingSquare.setLocation(boxLocation);
 
         // create TextLayout
-        TextLayout layout = new TextLayout(title, TITLE_FONT, g2.getFontRenderContext());
+        TextLayout layout = new TextLayout(title, titleFont, g2.getFontRenderContext());
         Rectangle pixelBounds = layout.getPixelBounds(null, location.x, location.y);
-        Dimension diffForCentered = getCenteredDimension(pixelBounds, GUIDING_SQUARE);
+        Dimension diffForCentered = getCenteredDimension(pixelBounds, guidingSquare);
 
         // set marker shape's position
-        MARKER_SHAPE.translate(boxLocation.x, boxLocation.y);
+        markerShape.translate(boxLocation.x, boxLocation.y);
 
         // fill rectangle
         g2.setColor(colorScheme.background);
-        g2.fill(MARKER_SHAPE);
+        g2.fill(markerShape);
 
         // draw rectangle
         g2.setColor(colorScheme.border);
-        g2.draw(MARKER_SHAPE);
+        g2.draw(markerShape);
 
         // hideMarkers position for next time
-        MARKER_SHAPE.translate(-boxLocation.x, -boxLocation.y);
+        markerShape.translate(-boxLocation.x, -boxLocation.y);
 
         // draw title letter
         g2.setColor(colorScheme.foreground);
@@ -264,7 +264,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
         try {
             Marker marker = findMarkerByTitle(inputValue);
             return String.valueOf(marker.segmentNumber);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             return inputValue;
         }
     }
@@ -278,7 +278,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
         try {
             findMarkerByTitle(title);
             return true;
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             return false;
         }
     }
@@ -298,7 +298,8 @@ public abstract class AlphabeticalMarkers extends JPanel {
                 return marker;
             }
         }
-        throw new RuntimeException("Marker with the title '" + String.valueOf(Character.toChars(title)) + "' is not found");
+        throw new RuntimeException(
+                "Marker with the title '" + String.valueOf(Character.toChars(title)) + "' is not found");
     }
 
     private static class Marker {
@@ -316,11 +317,11 @@ public abstract class AlphabeticalMarkers extends JPanel {
     }
 
     private static class ColorScheme {
-        Color background;
-        Color foreground;
-        Color border;
+        final Color background;
+        final Color foreground;
+        final Color border;
 
-        public ColorScheme(Color background, Color foreground, Color border) {
+        ColorScheme(Color background, Color foreground, Color border) {
             this.background = background;
             this.foreground = foreground;
             this.border = border;

@@ -35,5 +35,5 @@ import javax.swing.JPopupMenu;
 public interface IPaneMenu {
     String PROPERTY_PANE_MENU_ACTION_LISTENER = "pane_menu_action_listener";
 
-    public void populatePaneMenu(JPopupMenu menu);
+    void populatePaneMenu(JPopupMenu menu);
 }

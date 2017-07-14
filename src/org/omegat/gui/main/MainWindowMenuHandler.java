@@ -712,26 +712,28 @@ public class MainWindowMenuHandler {
                         mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
     }
 
-    public void viewMarkNotedSegmentsCheckBoxMenuItemActionPerformed(){
+    public void viewMarkNotedSegmentsCheckBoxMenuItemActionPerformed() {
         Core.getEditor()
                 .getSettings()
                 .setMarkNotedSegments(
                         mainWindow.menu.viewMarkNotedSegmentsCheckBoxMenuItem.isSelected());
     }
 
-    public void viewMarkNBSPCheckBoxMenuItemActionPerformed(){
+    public void viewMarkNBSPCheckBoxMenuItemActionPerformed() {
         Core.getEditor()
                 .getSettings()
                 .setMarkNBSP(
                         mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
     }
-    public void viewMarkWhitespaceCheckBoxMenuItemActionPerformed(){
+
+    public void viewMarkWhitespaceCheckBoxMenuItemActionPerformed() {
         Core.getEditor()
                 .getSettings()
                 .setMarkWhitespace(
                         mainWindow.menu.viewMarkWhitespaceCheckBoxMenuItem.isSelected());
     }
-    public void viewMarkBidiCheckBoxMenuItemActionPerformed(){
+
+    public void viewMarkBidiCheckBoxMenuItemActionPerformed() {
         Core.getEditor()
                 .getSettings()
                 .setMarkBidi(

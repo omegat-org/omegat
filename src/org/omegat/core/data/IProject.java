@@ -239,7 +239,7 @@ public interface IProject {
      */
     void setSourceFilesOrder(List<String> filesList);
 
-    public static class FileInfo {
+    class FileInfo {
         public String filePath;
         /**
          * IFilter implementing Class that was used to parse the file
@@ -267,7 +267,7 @@ public interface IProject {
     /**
      * These translations can't be null. Only value or EMPTY_TRANSLATION.
      */
-    public class AllTranslations {
+    class AllTranslations {
         protected TMXEntry defaultTranslation;
         protected TMXEntry alternativeTranslation;
         protected TMXEntry currentTranslation;
@@ -290,7 +290,7 @@ public interface IProject {
      * but user also changed data.
      */
     @SuppressWarnings("serial")
-    public class OptimisticLockingFail extends Exception {
+    class OptimisticLockingFail extends Exception {
         private final String oldTranslationText;
         private final String newTranslationText;
         private final AllTranslations previous;

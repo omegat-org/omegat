@@ -87,7 +87,7 @@ public interface IRemoteRepository2 {
      *
      */
     @SuppressWarnings("serial")
-    public static class BadRepositoryException extends Exception {
+    class BadRepositoryException extends Exception {
         public BadRepositoryException(String message) {
             super(message);
         }
@@ -97,7 +97,7 @@ public interface IRemoteRepository2 {
      * Network problems. E.g. no internet available.
      */
     @SuppressWarnings("serial")
-    public static class NetworkException extends Exception {
+    class NetworkException extends Exception {
         public NetworkException(Throwable ex) {
             super(ex);
         }

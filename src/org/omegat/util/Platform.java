@@ -73,7 +73,7 @@ public final class Platform {
         return osType;
     }
 
-    public static final boolean isWebStart() {
+    public static boolean isWebStart() {
         return System.getProperty("javawebstart.version") != null;
     }
 

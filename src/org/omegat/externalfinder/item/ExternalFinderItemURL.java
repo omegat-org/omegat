@@ -120,7 +120,7 @@ public class ExternalFinderItemURL {
         return new URI(replaced);
     }
 
-    public static class Builder {
+    public static final class Builder {
         private String url;
         private ExternalFinderItem.TARGET target = ExternalFinderItem.TARGET.BOTH;
         private ExternalFinderItem.ENCODING encoding = ExternalFinderItem.ENCODING.DEFAULT;

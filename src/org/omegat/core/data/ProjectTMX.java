@@ -82,7 +82,8 @@ public class ProjectTMX {
 
     final CheckOrphanedCallback checkOrphanedCallback;
 
-    public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled, File file, CheckOrphanedCallback callback) throws Exception {
+    public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
+            File file, CheckOrphanedCallback callback) throws Exception {
         this.checkOrphanedCallback = callback;
         alternatives = new HashMap<EntryKey, TMXEntry>();
         defaults = new HashMap<String, TMXEntry>();
@@ -161,8 +162,8 @@ public class ProjectTMX {
         TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);
         try {
-            Map<String, TMXEntry> tempDefaults = new TreeMap<String, TMXEntry>();
-            Map<EntryKey, TMXEntry> tempAlternatives = new TreeMap<EntryKey, TMXEntry>();
+            Map<String, TMXEntry> tempDefaults = new TreeMap<>();
+            Map<EntryKey, TMXEntry> tempAlternatives = new TreeMap<>();
 
             synchronized (this) {
                 if (useOrphaned) {
@@ -171,12 +172,12 @@ public class ProjectTMX {
                     tempAlternatives.putAll(alternatives);
                 } else {
                     // slow call - copy non-orphaned only
-                    for(Map.Entry<String, TMXEntry> en:defaults.entrySet()) {
+                    for (Map.Entry<String, TMXEntry> en : defaults.entrySet()) {
                         if (checkOrphanedCallback.existSourceInProject(en.getKey())) {
                             tempDefaults.put(en.getKey(), en.getValue());
                         }
                     }
-                    for(Map.Entry<EntryKey, TMXEntry> en:alternatives.entrySet()) {
+                    for (Map.Entry<EntryKey, TMXEntry> en : alternatives.entrySet()) {
                         if (checkOrphanedCallback.existEntryInProject(en.getKey())) {
                             tempAlternatives.put(en.getKey(), en.getValue());
                         }
@@ -184,9 +185,9 @@ public class ProjectTMX {
                 }
             }
 
-            List<String> p=new ArrayList<String>();
+            List<String> p = new ArrayList<>();
             wr.writeComment(" Default translations ");
-            for (Map.Entry<String, TMXEntry> en : new TreeMap<String, TMXEntry>(tempDefaults).entrySet()) {
+            for (Map.Entry<String, TMXEntry> en : new TreeMap<>(tempDefaults).entrySet()) {
                 p.clear();
                 if (Preferences.isPreferenceDefault(Preferences.SAVE_AUTO_STATUS, false)) {
                     if (en.getValue().linked == TMXEntry.ExternalLinked.xAUTO) {
@@ -198,8 +199,7 @@ public class ProjectTMX {
             }
 
             wr.writeComment(" Alternative translations ");
-            for (Map.Entry<EntryKey, TMXEntry> en : new TreeMap<EntryKey, TMXEntry>(tempAlternatives)
-                    .entrySet()) {
+            for (Map.Entry<EntryKey, TMXEntry> en : new TreeMap<>(tempAlternatives).entrySet()) {
                 EntryKey k = en.getKey();
                 p.clear();
                 p.add(PROP_FILE);
@@ -278,8 +278,7 @@ public class ProjectTMX {
         private final Language targetLang;
         private final boolean sentenceSegmentingEnabled;
 
-        public Loader(Language sourceLang, Language targetLang,
-                boolean sentenceSegmentingEnabled) {
+        Loader(Language sourceLang, Language targetLang, boolean sentenceSegmentingEnabled) {
             this.sourceLang = sourceLang;
             this.targetLang = targetLang;
             this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
@@ -395,8 +394,11 @@ public class ProjectTMX {
 
     @Override
     public String toString() {
-        return "[" + Stream.concat(defaults.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).map(e -> e.getKey() + ": " + e.getValue().translation),
-                alternatives.entrySet().stream().sorted(Comparator.comparing(e -> e.getKey().sourceText)).map(e -> e.getKey().sourceText + ": " + e.getValue().translation))
+        return "[" + Stream.concat(
+                defaults.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey))
+                        .map(e -> e.getKey() + ": " + e.getValue().translation),
+                alternatives.entrySet().stream().sorted(Comparator.comparing(e -> e.getKey().sourceText))
+                        .map(e -> e.getKey().sourceText + ": " + e.getValue().translation))
                 .collect(Collectors.joining(", ")) + "]";
     }
 }

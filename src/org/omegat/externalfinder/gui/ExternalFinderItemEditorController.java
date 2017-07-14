@@ -56,7 +56,7 @@ import org.omegat.util.gui.TableColumnSizer;
  */
 public class ExternalFinderItemEditorController {
 
-    private static int MAX_ROW_COUNT = 5;
+    private static final int MAX_ROW_COUNT = 5;
 
     private final ExternalFinderItemEditorPanel panel;
     private final ExternalFinderItem.Builder builder;
@@ -296,7 +296,7 @@ public class ExternalFinderItemEditorController {
         panel.editCommandButton.setEnabled(enabled);
     }
 
-    static enum UrlColumn {
+    enum UrlColumn {
         URL(0, OStrings.getString("EXTERNALFINDER_EDITOR_COLUMN_URL"), String.class),
         TARGET(1, OStrings.getString("EXTERNALFINDER_EDITOR_COLUMN_TARGET"), TARGET.class),
         ENCODING(2, OStrings.getString("EXTERNALFINDER_EDITOR_COLUMN_ENCODING"), ENCODING.class);
@@ -305,7 +305,7 @@ public class ExternalFinderItemEditorController {
         final String label;
         final Class<?> clazz;
 
-        private UrlColumn(int index, String label, Class<?> clazz) {
+        UrlColumn(int index, String label, Class<?> clazz) {
             this.index = index;
             this.label = label;
             this.clazz = clazz;
@@ -353,7 +353,7 @@ public class ExternalFinderItemEditorController {
         }
     }
 
-    static enum CommandColumn {
+    enum CommandColumn {
         COMMAND(0, OStrings.getString("EXTERNALFINDER_EDITOR_COLUMN_COMMAND"), String.class),
         TARGET(1, OStrings.getString("EXTERNALFINDER_EDITOR_COLUMN_TARGET"), TARGET.class),
         ENCODING(2, OStrings.getString("EXTERNALFINDER_EDITOR_COLUMN_ENCODING"), ENCODING.class),
@@ -363,7 +363,7 @@ public class ExternalFinderItemEditorController {
         final String label;
         final Class<?> clazz;
 
-        private CommandColumn(int index, String label, Class<?> clazz) {
+        CommandColumn(int index, String label, Class<?> clazz) {
             this.index = index;
             this.label = label;
             this.clazz = clazz;

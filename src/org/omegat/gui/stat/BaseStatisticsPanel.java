@@ -78,7 +78,7 @@ public abstract class BaseStatisticsPanel extends JPanel implements IStatsConsum
 
         private final String[][] data;
 
-        public StringArrayTableModel(String[][] data) {
+        StringArrayTableModel(String[][] data) {
             this.data = data;
         }
 

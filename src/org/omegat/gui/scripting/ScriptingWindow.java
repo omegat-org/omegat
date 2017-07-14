@@ -42,7 +42,6 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
@@ -423,12 +422,7 @@ public class ScriptingWindow {
         Mnemonics.setLocalizedText(m_btnRunScript, OStrings.getString("SCW_RUN_SCRIPT"));
         m_btnRunScript.setAlignmentX(Component.LEFT_ALIGNMENT);
         m_btnRunScript.setHorizontalAlignment(SwingConstants.LEFT);
-        m_btnRunScript.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent a) {
-                runScript();
-            }
-        });
+        m_btnRunScript.addActionListener(a -> runScript());
         panel.add(m_btnRunScript);
 
         m_btnCancelScript = new JButton();
@@ -445,14 +439,11 @@ public class ScriptingWindow {
             m_quickScriptButtons[i] = new JButton(String.valueOf(scriptKey));
 
             // Run a script from the quick button bar
-            m_quickScriptButtons[i].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent a) {
-                    if (Preferences.existsPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey)) {
-                        runQuickScript(index);
-                    } else {
-                        logResult(StringUtil.format(OStrings.getString("SCW_NO_SCRIPT_BOUND"), scriptKey));
-                    }
+            m_quickScriptButtons[i].addActionListener(a -> {
+                if (Preferences.existsPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey)) {
+                    runQuickScript(index);
+                } else {
+                    logResult(StringUtil.format(OStrings.getString("SCW_NO_SCRIPT_BOUND"), scriptKey));
                 }
             });
 
@@ -465,18 +456,16 @@ public class ScriptingWindow {
 
             // Remove a script from the button bar
             final JMenuItem removeQuickScriptMenuItem = new JMenuItem(OStrings.getString("SCW_REMOVE_SCRIPT"));
-            removeQuickScriptMenuItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-                    String scriptName = Preferences.getPreferenceDefault(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey,
-                            "(unknown)");
-                    logResult(StringUtil.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptName, scriptKey));
-                    Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "");
-                    m_quickScriptButtons[index].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
-                    m_quickScriptButtons[index].setText(" " + scriptKey + " ");
+            removeQuickScriptMenuItem.addActionListener(evt -> {
+                String scriptName = Preferences
+                        .getPreferenceDefault(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "(unknown)");
+                logResult(StringUtil.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptName,
+                        scriptKey));
+                Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "");
+                m_quickScriptButtons[index].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
+                m_quickScriptButtons[index].setText(" " + scriptKey + " ");
 
-                    unsetQuickScriptMenu(index);
-                }
+                unsetQuickScriptMenu(index);
             });
             quickScriptPopup.add(removeQuickScriptMenuItem);
 
@@ -1011,14 +1000,7 @@ public class ScriptingWindow {
             return;
         }
 
-        for (File script : m_scriptsDirectory.listFiles(new FileFilter(){
-
-            @Override
-            public boolean accept(File script) {
-                return script.getName().endsWith(".set");
-            }
-
-        })) {
+        for (File script : m_scriptsDirectory.listFiles(script -> script.getName().endsWith(".set"))) {
 
             ScriptSet set = new ScriptSet(script);
 

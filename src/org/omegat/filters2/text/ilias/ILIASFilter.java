@@ -81,12 +81,13 @@ public class ILIASFilter extends AbstractFilter {
     @Override
     public Instance[] getDefaultInstances() {
         String targetFile = "ilias_" + AbstractFilter.TFP_TARGET_LANG_CODE + "." + TFP_EXTENSION;
-        return new Instance[] { new Instance
-                ("*.lang", null, "UTF-8", targetFile), new Instance("*.lang.local", null, "UTF-8", targetFile),};
+        return new Instance[] { new Instance("*.lang", null, "UTF-8", targetFile),
+                new Instance("*.lang.local", null, "UTF-8", targetFile), };
     }
 
     /**
      * Doing the processing of the file...
+     *
      * @param reader
      * @param outfile
      */
@@ -120,7 +121,7 @@ public class ILIASFilter extends AbstractFilter {
             String key = mat.group(1) + "#:#" + mat.group(2);
             String value = mat.group(3);
 
-            if(value.isEmpty()) { // If original text is empty, the translated is empty too
+            if (value.isEmpty()) { // If original text is empty, the translated is empty too
                 outfile.write(line + lbpr.getLinebreak());
                 continue;
             }
@@ -140,12 +141,12 @@ public class ILIASFilter extends AbstractFilter {
     protected boolean isFileSupported(BufferedReader reader) {
         boolean markFound = false;
         boolean textFound = false;
-        final int MAX_LINES_TO_CHECK = 128;
+        final int maxLinesToCheck = 128;
 
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader);
         try {
             String line;
-            int more = MAX_LINES_TO_CHECK + 1;
+            int more = maxLinesToCheck + 1;
             while ((line = lbpr.readLine()) != null && --more > 0) {
                 line = line.trim();
                 if (line.isEmpty()) {
@@ -170,7 +171,8 @@ public class ILIASFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, org.omegat.filters2.FilterContext fc) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile,
+            org.omegat.filters2.FilterContext fc) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 

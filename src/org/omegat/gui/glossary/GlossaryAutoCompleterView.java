@@ -159,7 +159,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         private final List<GlossaryEntry> entries;
         private final String matchTo;
 
-        public GlossaryComparator(List<GlossaryEntry> entries, String matchTo) {
+        GlossaryComparator(List<GlossaryEntry> entries, String matchTo) {
             this.entries = entries;
             this.matchTo = matchTo;
         }

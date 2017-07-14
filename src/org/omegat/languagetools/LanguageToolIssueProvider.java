@@ -96,7 +96,7 @@ public class LanguageToolIssueProvider implements IIssueProvider {
         private final String targetText;
         private final LanguageToolResult result;
 
-        public LanguageToolIssue(SourceTextEntry ste, String targetText, LanguageToolResult result) {
+        LanguageToolIssue(SourceTextEntry ste, String targetText, LanguageToolResult result) {
             this.ste = ste;
             this.targetText = targetText;
             this.result = result;

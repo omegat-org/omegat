@@ -50,14 +50,14 @@ public class TransparentHighlightPainter extends Underliner {
      * @param color the color to paint the background in
      * @param alpha the transparency level (1.0 = not transparent, 0.0 = full transparency)
      */
-    public TransparentHighlightPainter (Color color, float alpha) {
+    public TransparentHighlightPainter(Color color, float alpha) {
         super();
         this.color = color;
         this.alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
     }
 
     protected void paint(Graphics g, Rectangle rect, JTextComponent c) {
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D) g;
         Composite originalComposite = g2d.getComposite();
         g2d.setComposite(alphaComposite);
         g2d.setPaint(color);

@@ -536,7 +536,7 @@ public class IssuesPanelController implements IIssues {
 
         private int progress = 0;
 
-        public IssueLoader(int jumpToEntry, List<String> jumpToTypes) {
+        IssueLoader(int jumpToEntry, List<String> jumpToTypes) {
             this.jumpToEntry = jumpToEntry;
             this.jumpToTypes = Objects.requireNonNull(jumpToTypes);
         }
@@ -705,7 +705,7 @@ public class IssuesPanelController implements IIssues {
         private final String label;
         private final Class<?> clazz;
 
-        private IssueColumn(int index, String label, Class<?> clazz) {
+        IssueColumn(int index, String label, Class<?> clazz) {
             this.index = index;
             this.label = label;
             this.clazz = clazz;
@@ -740,7 +740,7 @@ public class IssuesPanelController implements IIssues {
 
         private final List<IIssue> issues;
 
-        public IssuesTableModel(List<IIssue> issues) {
+        IssuesTableModel(List<IIssue> issues) {
             this.issues = issues;
         }
 
@@ -794,7 +794,7 @@ public class IssuesPanelController implements IIssues {
 
         private final List<Map.Entry<String, Long>> types;
 
-        public TypeListModel(List<IIssue> issues) {
+        TypeListModel(List<IIssue> issues) {
             this.types = calculateData(issues);
         }
 

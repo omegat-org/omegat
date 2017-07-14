@@ -246,7 +246,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
     /**
      * Updates the language list based on the directory text field
      */
-    private final void updateLanguageList() {
+    private void updateLanguageList() {
         DefaultListModel<String> languageListModel = (DefaultListModel<String>) panel.languageList.getModel();
 
         // initialize the language list model

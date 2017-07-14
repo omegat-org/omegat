@@ -27,5 +27,5 @@ package org.omegat.externalfinder.item;
 
 public interface IExternalFinderItemLoader {
 
-    public ExternalFinderConfiguration load() throws Exception;
+    ExternalFinderConfiguration load() throws Exception;
 }

@@ -49,5 +49,5 @@ public interface ILanguageToolBridge {
      * @param translationText
      * @return List of results
      */
-    public List<LanguageToolResult> getCheckResults(String sourceText, String translationText);
+    List<LanguageToolResult> getCheckResults(String sourceText, String translationText);
 }

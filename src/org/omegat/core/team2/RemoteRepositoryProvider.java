@@ -62,7 +62,8 @@ public class RemoteRepositoryProvider {
     final List<RepositoryDefinition> repositoriesDefinitions;
     final List<IRemoteRepository2> repositories = new ArrayList<IRemoteRepository2>();
 
-    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions) throws Exception {
+    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions)
+            throws Exception {
         this.projectRoot = projectRoot;
         teamSettings = new ProjectTeamSettings(new File(projectRoot, REPO_SUBDIR));
         this.repositoriesDefinitions = repositoriesDefinitions;
@@ -287,7 +288,7 @@ public class RemoteRepositoryProvider {
         final RepositoryMapping repoMapping;
         final List<String> forceExcludes;
 
-        public Mapping(String path, IRemoteRepository2 repo, RepositoryDefinition repoDefinition,
+        Mapping(String path, IRemoteRepository2 repo, RepositoryDefinition repoDefinition,
                 RepositoryMapping repoMapping, String... forceExcludes) {
             this.repo = repo;
             this.repoDefinition = repoDefinition;

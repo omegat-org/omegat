@@ -58,7 +58,7 @@ public class MixedEolHandlingReader extends Reader {
         init();
     }
 
-    private final void init() throws IOException {
+    private void init() throws IOException {
         in.mark(OConsts.READ_AHEAD_LIMIT);
         char[] buf = new char[OConsts.READ_AHEAD_LIMIT];
         int read = in.read(buf);

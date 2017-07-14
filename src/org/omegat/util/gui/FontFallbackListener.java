@@ -128,7 +128,7 @@ public class FontFallbackListener implements DocumentListener {
         public final int length;
         public final AttributeSet attrs;
 
-        public StyleRun(int start, int length, AttributeSet attrs) {
+        StyleRun(int start, int length, AttributeSet attrs) {
             this.start = start;
             this.length = length;
             this.attrs = attrs;

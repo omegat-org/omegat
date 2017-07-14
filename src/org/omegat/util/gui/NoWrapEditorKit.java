@@ -72,7 +72,7 @@ public class NoWrapEditorKit extends StyledEditorKit {
 
     private static class NoWrapParagraphView extends ParagraphView {
 
-        public NoWrapParagraphView(Element elem) {
+        NoWrapParagraphView(Element elem) {
             super(elem);
         }
 

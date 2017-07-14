@@ -72,7 +72,7 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
     private static class Lucene30GermanAnalyzer extends Analyzer {
         private final CharArraySet stopWords;
 
-        public Lucene30GermanAnalyzer(CharArraySet stopWords) {
+        Lucene30GermanAnalyzer(CharArraySet stopWords) {
             this.stopWords = stopWords;
         }
 

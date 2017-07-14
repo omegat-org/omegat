@@ -30,6 +30,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
 import javax.swing.text.JTextComponent;
 
 import org.omegat.gui.editor.UnderlineFactory.Underliner;
@@ -50,7 +51,7 @@ public class SymbolPainter extends Underliner {
     protected void paint(Graphics g, Rectangle rect, JTextComponent c) {
         Font f = c.getFont();
         FontMetrics fm = c.getFontMetrics(f);
-        int y = rect.y -1 + fm.getAscent();
+        int y = rect.y - 1 + fm.getAscent();
 
         g.setFont(f);
         g.setColor(color);

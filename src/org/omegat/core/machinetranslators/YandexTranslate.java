@@ -102,7 +102,7 @@ public class YandexTranslate extends BaseTranslate {
         p.put("lang", lvSourceLang + '-' + lvTargetLang);
         p.put("text", lvShorText);
 
-        YTPPostResponse response = requestTranslate(p);//WikiGet.post(GT_URL, p);
+        YTPPostResponse response = requestTranslate(p); // WikiGet.post(GT_URL, p);
 
         XPathFactory xPathFactory = XPathFactory.newInstance();
 
@@ -111,24 +111,24 @@ public class YandexTranslate extends BaseTranslate {
         //String code = (String) xPathCode.evaluate(pathCode, new InputSource(new StringReader(lvResponse)));
 
         switch (response.code) {
-            case ERR_OK:
-                break;
-            case ERR_KEY_INVALID:
-                return response.code +": " + OStrings.getString("MT_ENGINE_YANDEX_INVALID_KEY");
-            case ERR_KEY_BLOCKED:
-                return response.code +": " + OStrings.getString("MT_ENGINE_YANDEX_API_BLOCKED");
-            case ERR_DAILY_REQ_LIMIT_EXCEEDED:
-                return response.code +": " + OStrings.getString("MT_ENGINE_YANDEX_DAILY_LIMIT_DETECT");
-            case ERR_DAILY_CHAR_LIMIT_EXCEEDED:
-                return response.code +": " + OStrings.getString("MT_ENGINE_YANDEX_DAILY_LIMIT_VOLUME");
-            case ERR_TEXT_TOO_LONG:
-                return response.code +": " + OStrings.getString("MT_ENGINE_YANDEX_MAZ_SIZE");
-            case ERR_UNPROCESSABLE_TEXT:
-                return response.code +": " + OStrings.getString("MT_ENGINE_YANDEX_TRANSLATION_NOT_POSSIBLE");
-            case ERR_LANG_NOT_SUPPORTED:
-                return response.code +": " + OStrings.getString("MT_ENGINE_YANDEX_DIRECTION_NOT_SUPPORTED");
-            default:
-                break;
+        case ERR_OK:
+            break;
+        case ERR_KEY_INVALID:
+            return response.code + ": " + OStrings.getString("MT_ENGINE_YANDEX_INVALID_KEY");
+        case ERR_KEY_BLOCKED:
+            return response.code + ": " + OStrings.getString("MT_ENGINE_YANDEX_API_BLOCKED");
+        case ERR_DAILY_REQ_LIMIT_EXCEEDED:
+            return response.code + ": " + OStrings.getString("MT_ENGINE_YANDEX_DAILY_LIMIT_DETECT");
+        case ERR_DAILY_CHAR_LIMIT_EXCEEDED:
+            return response.code + ": " + OStrings.getString("MT_ENGINE_YANDEX_DAILY_LIMIT_VOLUME");
+        case ERR_TEXT_TOO_LONG:
+            return response.code + ": " + OStrings.getString("MT_ENGINE_YANDEX_MAZ_SIZE");
+        case ERR_UNPROCESSABLE_TEXT:
+            return response.code + ": " + OStrings.getString("MT_ENGINE_YANDEX_TRANSLATION_NOT_POSSIBLE");
+        case ERR_LANG_NOT_SUPPORTED:
+            return response.code + ": " + OStrings.getString("MT_ENGINE_YANDEX_DIRECTION_NOT_SUPPORTED");
+        default:
+            break;
         }
 
         XPath xPathText = xPathFactory.newXPath();

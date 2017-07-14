@@ -234,7 +234,7 @@ public final class TagValidation {
                         // the way as malformed.
                         Tag last = tagStack.pop();
                         report.transErrors.put(last, TagError.MALFORMED);
-                        if (last.getName().equals(tag.getName())){
+                        if (last.getName().equals(tag.getName())) {
                             break;
                         }
                     }

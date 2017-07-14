@@ -115,7 +115,7 @@ public class StarDict implements IDictionaryFactory {
          * @param ifoFile
          *            ifo file with dictionary
          */
-        public StarDictDict(File ifoFile, Language language) throws Exception {
+        StarDictDict(File ifoFile, Language language) throws Exception {
 
             this.language = language;
 

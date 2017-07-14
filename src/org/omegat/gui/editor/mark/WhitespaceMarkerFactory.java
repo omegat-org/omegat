@@ -44,7 +44,7 @@ public class WhitespaceMarkerFactory {
      */
     public static class SpaceMarker extends AbstractMarker {
         public SpaceMarker() throws Exception {
-            PAINTER = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00B7");
+            painter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00B7");
             toolTip = null; //don't overdo it. Space occurs many times.
             patternChar = ' ';
         }
@@ -58,7 +58,7 @@ public class WhitespaceMarkerFactory {
      */
     public static class TabMarker extends AbstractMarker {
         public TabMarker() throws Exception {
-            PAINTER = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00BB");
+            painter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00BB");
             toolTip = OStrings.getString("MARKER_TAB");
             patternChar = '\t';
         }
@@ -76,7 +76,7 @@ public class WhitespaceMarkerFactory {
      */
     public static class LFMarker extends AbstractMarker {
         public LFMarker() throws Exception {
-            PAINTER = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00B6");
+            painter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "\u00B6");
             toolTip = "LF";
             patternChar = '\n';
         }

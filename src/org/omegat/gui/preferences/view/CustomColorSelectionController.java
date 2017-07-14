@@ -226,7 +226,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
 
         private final Class<?> clss;
 
-        private ColorColumns(Class<?> clss) {
+        ColorColumns(Class<?> clss) {
             this.clss = clss;
         }
 
@@ -239,7 +239,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
         private final int size;
         private Color color;
 
-        public ColorIcon(int size) {
+        ColorIcon(int size) {
             this.size = size;
         }
 
@@ -287,7 +287,7 @@ public class CustomColorSelectionController extends BasePreferencesController {
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             EditorColor style = getEditorColorAtRow(rowIndex);
-            switch(ColorColumns.get(columnIndex)) {
+            switch (ColorColumns.get(columnIndex)) {
             case NAME:
                 return style.getDisplayName();
             case ICON:

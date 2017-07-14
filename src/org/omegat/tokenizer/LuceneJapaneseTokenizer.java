@@ -256,7 +256,7 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
             public final char[] chars;
             public final int startOffset;
 
-            public CachedToken(char[] chars, int startOffset) {
+            CachedToken(char[] chars, int startOffset) {
                 this.chars = chars;
                 this.startOffset = startOffset;
             }

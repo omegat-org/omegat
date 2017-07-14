@@ -56,10 +56,10 @@ public interface IMatcher {
     /**
      * Make the next match active
      */
-    public void setNextActiveMatch();
+    void setNextActiveMatch();
 
     /**
      * Make the previous match active
      */
-    public void setPrevActiveMatch();
+    void setPrevActiveMatch();
 }

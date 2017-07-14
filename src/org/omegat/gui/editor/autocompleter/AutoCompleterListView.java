@@ -54,7 +54,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
 
     private static JList<AutoCompleterItem> list;
 
-    private static AutoCompleterItem NO_SUGGESTIONS = new AutoCompleterItem(
+    private static final AutoCompleterItem NO_SUGGESTIONS = new AutoCompleterItem(
             OStrings.getString("AC_NO_SUGGESTIONS"), null, 0);
 
     public AutoCompleterListView(String name) {
@@ -259,7 +259,7 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
                 int index, boolean isSelected, boolean cellHasFocus) {
             setBorder(LIST_MARGIN_BORDER);
             if (value == NO_SUGGESTIONS) {
-                setText(((AutoCompleterItem)value).payload);
+                setText(((AutoCompleterItem) value).payload);
             } else {
                 AutoCompleterListView aclView = (AutoCompleterListView) completer.getCurrentView();
                 AutoCompleterItem acItem = (AutoCompleterItem) value;

@@ -138,7 +138,7 @@ public class LinebreakPreservingReader extends Reader {
         return in.skip(n);
     }
 
-    private final boolean isLinebreakCharacter(int chr) {
+    private boolean isLinebreakCharacter(int chr) {
         return chr == '\n' || chr == '\r';
     }
 

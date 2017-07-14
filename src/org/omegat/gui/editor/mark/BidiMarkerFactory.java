@@ -42,7 +42,7 @@ public class BidiMarkerFactory {
      */
     public static class RLMMarker extends AbstractMarker {
         public RLMMarker() throws Exception {
-            PAINTER = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u200F");
+            painter = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u200F");
             toolTip = "RLM";
             patternChar = '\u200F';
         }
@@ -56,7 +56,7 @@ public class BidiMarkerFactory {
      */
     public static class LRMMarker extends AbstractMarker {
         public LRMMarker() throws Exception {
-            PAINTER = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u200E");
+            painter = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u200E");
             toolTip = "LRM";
             patternChar = '\u200E';
         }
@@ -70,7 +70,7 @@ public class BidiMarkerFactory {
      */
     public static class LREMarker extends AbstractMarker {
         public LREMarker() throws Exception {
-            PAINTER = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202A");
+            painter = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202A");
             toolTip = "LRE";
             patternChar = '\u202A';
         }
@@ -84,7 +84,7 @@ public class BidiMarkerFactory {
      */
     public static class RLEMarker extends AbstractMarker {
         public RLEMarker() throws Exception {
-            PAINTER = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202B");
+            painter = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202B");
             toolTip = "RLE";
             patternChar = '\u202B';
         }
@@ -98,7 +98,7 @@ public class BidiMarkerFactory {
      */
     public static class PDFMarker extends AbstractMarker {
         public PDFMarker() throws Exception {
-            PAINTER = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202C");
+            painter = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202C");
             toolTip = "PDF";
             patternChar = '\u202C';
         }
@@ -112,7 +112,7 @@ public class BidiMarkerFactory {
      */
     public static class LROMarker extends AbstractMarker {
         public LROMarker() throws Exception {
-            PAINTER = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202D");
+            painter = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202D");
             toolTip = "LRO";
             patternChar = '\u202D';
         }
@@ -126,7 +126,7 @@ public class BidiMarkerFactory {
      */
     public static class RLOMarker extends AbstractMarker {
         public RLOMarker() throws Exception {
-            PAINTER = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202E");
+            painter = new BidiPainter(Styles.EditorColor.COLOR_BIDIMARKERS.getColor(), "\u202E");
             toolTip = "RLO";
             patternChar = '\u202E';
         }

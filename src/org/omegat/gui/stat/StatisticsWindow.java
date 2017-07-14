@@ -54,7 +54,7 @@ public class StatisticsWindow extends javax.swing.JDialog {
 
     private String textData;
 
-    public static enum STAT_TYPE {
+    public enum STAT_TYPE {
         STANDARD, MATCHES, MATCHES_PER_FILE
     };
 

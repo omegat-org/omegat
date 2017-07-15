@@ -138,7 +138,7 @@ public final class ExternalFinderItem {
         return true;
     }
 
-    public static final boolean isASCII(String s) {
+    public static boolean isASCII(String s) {
         for (int i = 0, n = s.length(); i < n; i++) {
             if ((int) s.charAt(i) > 0x7F) {
                 return false;

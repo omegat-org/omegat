@@ -35,7 +35,6 @@
 
 package org.omegat.util;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
@@ -618,10 +617,9 @@ public final class Preferences {
     /**
      * Register to receive notifications when the specified preference changes.
      * <p>
-     * Note: The value returned by {@link PropertyChangeEvent#getNewValue()}
-     * will be of the "correct" type (Integer, Boolean, Enum, etc.) but the
-     * value returned by {@link PropertyChangeEvent#getOldValue()} will be the
-     * String equivalent for storing in XML.
+     * Note: The value returned by {@code getNewValue()} will be of the "correct" type (Integer, Boolean,
+     * Enum, etc.) but the value returned by {@code getOldValue()} will be the String equivalent for storing
+     * in XML.
      *
      * @param listener
      */

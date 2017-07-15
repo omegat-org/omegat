@@ -46,7 +46,7 @@ public class AndroidFilter extends XMLFilter {
     static final String DO_NOT_TRANSLATE = "do not translate";
     static final String DONT_TRANSLATE = "don't translate";
 
-    static Set<String> NAMED_TAGS = new HashSet<String>(Arrays.asList("/resources/string",
+    static final Set<String> NAMED_TAGS = new HashSet<>(Arrays.asList("/resources/string",
             "/resources/color", "/resources/array", "/resources/string-array", "/resources/integer-array"));
 
     private String id, idPlurals = "", comment, idComment;

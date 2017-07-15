@@ -38,7 +38,7 @@ import gen.core.filters.Filters;
  *
  * @author Aaron Madlon-Kay
  */
-public class FiltersUtil {
+public final class FiltersUtil {
 
     private FiltersUtil() {
     }

@@ -667,8 +667,7 @@ public final class TestTeamIntegrationChild {
 
         void use(TMXEntry en) {
             EntryKey k = new EntryKey("file", en.source, null, null, null, null);
-            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.source,
-                    Collections.<ProtectedPart> emptyList());
+            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.source, Collections.emptyList());
             mergedTMX.setTranslation(ste, en, true);
         }
 

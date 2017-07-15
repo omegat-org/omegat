@@ -1789,7 +1789,7 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     @Override
-    public void insertTextAndMark (String text) {
+    public void insertTextAndMark(String text) {
         insertText(text);
         markAsComesFromMT(text);
     }

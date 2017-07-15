@@ -119,8 +119,8 @@ public class DocBookFilter extends XMLFilter {
         }
         try {
             char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
-            int cbuf_len = reader.read(cbuf);
-            String buf = new String(cbuf, 0, cbuf_len);
+            int cbufLen = reader.read(cbuf);
+            String buf = new String(cbuf, 0, cbufLen);
             return DocBookDialect.DOCBOOK_PUBLIC_DTD.matcher(buf).find()
                     || DocBookDialect.DB5_XMLNS.matcher(buf).find();
         } catch (Exception e) {

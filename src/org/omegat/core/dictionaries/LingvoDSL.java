@@ -91,7 +91,7 @@ public class LingvoDSL implements IDictionaryFactory {
     static class LingvoDSLDict implements IDictionary {
         protected final DictionaryData<String> data;
 
-        private LingvoDSLDict(DictionaryData<String> data) throws Exception {
+        LingvoDSLDict(DictionaryData<String> data) throws Exception {
             this.data = data;
         }
 

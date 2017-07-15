@@ -176,7 +176,7 @@ public class LogDialog extends javax.swing.JDialog {
             return;
         }
         try {
-            FileUtils.copyFile(new File (Log.getLogFilePath()), chooser.getSelectedFile());
+            FileUtils.copyFile(new File(Log.getLogFilePath()), chooser.getSelectedFile());
         } catch (IOException ex) {
             Log.log(ex);
         }

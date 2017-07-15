@@ -228,7 +228,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         String[] stemmed = tokenizer.tokenizeWordsToStrings(word, StemmingMode.MATCHING);
         if (stemmed.length == 0) {
             // Stop word. Skip.
-            return Collections.<DictionaryEntry> emptyList();
+            return Collections.emptyList();
         }
         try {
             List<DictionaryEntry> result = dict.readArticles(word);
@@ -242,7 +242,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         } catch (Exception ex) {
             Log.log(ex);
         }
-        return Collections.<DictionaryEntry> emptyList();
+        return Collections.emptyList();
     }
 
     public void setIndexLanguage(Language indexLanguage) {

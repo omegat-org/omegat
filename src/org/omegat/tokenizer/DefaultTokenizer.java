@@ -265,7 +265,7 @@ public class DefaultTokenizer implements ITokenizer {
 
     /**
      * Check if a list of tokens is found contiguously in another list of tokens
-     * 
+     *
      * @param tokensList
      *            a list of tokens to be searched
      * @param listForFind

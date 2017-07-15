@@ -53,10 +53,10 @@ import org.openide.awt.Mnemonics;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class TaaSPlugin {
+public final class TaaSPlugin {
 
     private static class ClientHolder {
-        private static TaaSClient CLIENT = new TaaSClient();
+        private static final TaaSClient CLIENT = new TaaSClient();
     }
 
     public static TaaSClient getClient() {

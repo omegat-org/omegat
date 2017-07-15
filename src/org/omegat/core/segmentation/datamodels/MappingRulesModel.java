@@ -73,7 +73,7 @@ public class MappingRulesModel extends AbstractTableModel {
     }
 
     /** The names of table columns */
-    private static String[] COLUMN_NAMES = new String[] {
+    private static final String[] COLUMN_NAMES = new String[] {
             OStrings.getString("CORE_SRX_TABLE_HEADER_Language_Name"),
             OStrings.getString("CORE_SRX_TABLE_HEADER_Language_Pattern") };
 

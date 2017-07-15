@@ -76,7 +76,7 @@ public class CharTableAutoCompleterView extends AutoCompleterTableView {
         }
 
         if (model.setData(input)) {
-            setSelection(new Point(0,0));
+            setSelection(new Point(0, 0));
         }
     }
 

@@ -108,8 +108,8 @@ public final class Convert20to21 {
         convertTextFilter(res);
         convertHTMLFilter2(res);
 
-        JAXBContext CTX = JAXBContext.newInstance(Filters.class);
-        Marshaller m = CTX.createMarshaller();
+        JAXBContext ctx = JAXBContext.newInstance(Filters.class);
+        Marshaller m = ctx.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.marshal(res, toFile);
     }

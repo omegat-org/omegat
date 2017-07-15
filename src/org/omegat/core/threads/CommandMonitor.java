@@ -42,7 +42,7 @@ import org.omegat.core.Core;
  *
  * @author aaron.madlon-kay
  */
-public class CommandMonitor extends Thread {
+public final class CommandMonitor extends Thread {
 
     private static final Logger LOGGER = Logger.getLogger(CommandMonitor.class.getName());
 

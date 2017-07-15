@@ -56,13 +56,13 @@ import org.omegat.util.gui.Styles;
  * @author Aaron Madlon-Kay
  * @author Lev Abashkin
  */
-public class LanguageToolWrapper {
+public final class LanguageToolWrapper {
 
     public enum BridgeType {
         NATIVE, REMOTE_URL, LOCAL_INSTALLATION
     }
 
-    private static volatile ILanguageToolBridge BRIDGE;
+    private static volatile ILanguageToolBridge bridge;
 
     private LanguageToolWrapper() {
     }
@@ -79,8 +79,8 @@ public class LanguageToolWrapper {
                     setBridgeFromCurrentProject();
                     break;
                 case CLOSE:
-                    BRIDGE.stop();
-                    BRIDGE = null;
+                    bridge.stop();
+                    bridge = null;
                     break;
                 default:
                     // Nothing
@@ -90,8 +90,8 @@ public class LanguageToolWrapper {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             @Override
             public void onApplicationShutdown() {
-                if (BRIDGE != null) {
-                    BRIDGE.stop();
+                if (bridge != null) {
+                    bridge.stop();
                 }
             }
 
@@ -102,7 +102,7 @@ public class LanguageToolWrapper {
     }
 
     static ILanguageToolBridge getBridge() {
-        return BRIDGE;
+        return bridge;
     }
 
     static class LanguageToolMarker implements IMarker {
@@ -138,7 +138,7 @@ public class LanguageToolWrapper {
                 sourceText = ste.getSrcText();
             }
 
-            return BRIDGE.getCheckResults(sourceText, translationText).stream().map(match -> {
+            return bridge.getCheckResults(sourceText, translationText).stream().map(match -> {
                 Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.start, match.end);
                 m.toolTipText = match.message;
                 m.painter = PAINTER;
@@ -155,13 +155,13 @@ public class LanguageToolWrapper {
      * Set this instance's LanguageTool bridge based on the current project.
      */
     public static void setBridgeFromCurrentProject() {
-        if (BRIDGE != null) {
-            BRIDGE.stop();
+        if (bridge != null) {
+            bridge.stop();
         }
         if (Core.getProject().isProjectLoaded()) {
             Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
             Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
-            BRIDGE = createBridgeFromPrefs(sourceLang, targetLang);
+            bridge = createBridgeFromPrefs(sourceLang, targetLang);
         }
     }
 

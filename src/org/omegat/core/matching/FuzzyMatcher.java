@@ -35,7 +35,7 @@ import org.omegat.util.Token;
  *
  * @author Maxym Mykhalchuk
  */
-public class FuzzyMatcher {
+public final class FuzzyMatcher {
 
     private FuzzyMatcher() {
     }

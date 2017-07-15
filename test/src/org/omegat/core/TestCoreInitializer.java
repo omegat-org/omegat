@@ -35,7 +35,11 @@ import org.omegat.gui.main.IMainWindow;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class TestCoreInitializer {
+public final class TestCoreInitializer {
+
+    private TestCoreInitializer() {
+    }
+
     public static void initEditor(IEditor editor) {
         Core.editor = editor;
     }

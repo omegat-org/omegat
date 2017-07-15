@@ -46,11 +46,11 @@ public class LanguageTest {
      */
     @Test
     public void testGetLanguage() {
-        String LANG_1 = "xx-YY";
-        assertEquals(LANG_1, new Language(LANG_1).getLanguage());
+        String lang1 = "xx-YY";
+        assertEquals(lang1, new Language(lang1).getLanguage());
 
-        String LANG_2 = "XX-yy";
-        assertEquals(LANG_2, new Language(LANG_2).getLanguage());
+        String lang2 = "XX-yy";
+        assertEquals(lang2, new Language(lang2).getLanguage());
     }
 
     /**
@@ -58,8 +58,8 @@ public class LanguageTest {
      */
     @Test
     public void testGetLocale() {
-        String LANG = "XXX-yy";
-        assertEquals("xxx_YY", new Language(LANG).getLocaleCode());
+        String lang = "XXX-yy";
+        assertEquals("xxx_YY", new Language(lang).getLocaleCode());
     }
 
     /**

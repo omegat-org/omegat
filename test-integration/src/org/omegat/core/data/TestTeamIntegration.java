@@ -88,21 +88,22 @@ import gen.core.project.RepositoryMapping;
  *
  *         TODO: "svn: E160028: Commit failed" during commit
  */
-public class TestTeamIntegration {
+public final class TestTeamIntegration {
+
+    private TestTeamIntegration() {
+    }
+
     static final String DIR = "/tmp/teamtest";
     static final String REPO = System.getProperty("omegat.test.repo", "git@github.com:alex73/trans.git");
     // static final String REPO = "svn+ssh://alex73@svn.code.sf.net/p/mappy/test/";
     // static final String REPO = "https://github.com/alex73/trans/trunk/";
-    static int PROCESS_SECONDS = 4 * 60 * 60;
-    static {
-        Optional.ofNullable(System.getProperty("omegat.test.duration"))
-                .ifPresent(duration -> PROCESS_SECONDS = Integer.parseInt(duration));
-    }
-    static int MAX_DELAY_SECONDS = 15;
-    static int SEG_COUNT = 4;
+    static final int PROCESS_SECONDS = Optional.ofNullable(System.getProperty("omegat.test.duration"))
+            .map(Integer::parseInt).orElse(4 * 60 * 60);
+    static final int MAX_DELAY_SECONDS = 15;
+    static final int SEG_COUNT = 4;
 
-    static Language SRC_LANG = new Language("en");
-    static Language TRG_LANG = new Language("be");
+    static final Language SRC_LANG = new Language("en");
+    static final Language TRG_LANG = new Language("be");
 
     static final String[] THREADS = new String[] { "s1", "s2", "s3" };
 

@@ -928,7 +928,7 @@ public class ProjectFilesListController {
     static class FileInfoModel extends AbstractTableModel {
         private final List<IProject.FileInfo> files;
 
-        public FileInfoModel(List<IProject.FileInfo> files) {
+        FileInfoModel(List<IProject.FileInfo> files) {
             this.files = files;
         }
 

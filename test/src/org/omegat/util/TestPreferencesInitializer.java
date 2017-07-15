@@ -38,7 +38,10 @@ import org.apache.commons.io.FileUtils;
  * @author Aaron Madlon-Kay
  *
  */
-public class TestPreferencesInitializer {
+public final class TestPreferencesInitializer {
+
+    private TestPreferencesInitializer() {
+    }
 
     /**
      * Init the preferences system using a temp dir for the config dir where

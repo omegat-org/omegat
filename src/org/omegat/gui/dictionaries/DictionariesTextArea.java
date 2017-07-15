@@ -131,8 +131,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         StyleSheet styleSheet = ((HTMLDocument) doc).getStyleSheet();
         styleSheet.addRule("body { font-family: " + font.getName() + "; "
                 + " font-size: " + font.getSize() + "; "
-                + " font-style: " + (font.getStyle() == Font.BOLD ? "bold" :
-                    font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
+                + " font-style: " + (font.getStyle() == Font.BOLD ? "bold"
+                        : font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
                 + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + "; "
                 + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + "; "
                 + " }");

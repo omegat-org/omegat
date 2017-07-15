@@ -66,24 +66,24 @@ public class PropertiesShortcutsTest {
     private static final String USER_FILE_NAME = "test.properties";
     private static final String BUNDLED_ROOT = "/org/omegat/gui/shortcuts/";
 
-    private static File USER_FILE;
+    private static File userFile;
 
     private PropertiesShortcuts shortcuts;
 
     @BeforeClass
     public static void setUpClass() throws IOException {
         // Copy user-defined properties to user config dir
-        USER_FILE = new File(StaticUtils.getConfigDir(), USER_FILE_NAME);
+        userFile = new File(StaticUtils.getConfigDir(), USER_FILE_NAME);
         try (InputStream in = PropertiesShortcutsTest.class.getResourceAsStream("test.user.properties")) {
-            FileUtils.copyInputStreamToFile(in, USER_FILE);
+            FileUtils.copyInputStreamToFile(in, userFile);
         }
-        assertTrue(USER_FILE.isFile());
+        assertTrue(userFile.isFile());
     }
 
     @AfterClass
     public static void tearDownClass() {
         // Delete user-defined properties
-        assertTrue(USER_FILE.delete());
+        assertTrue(userFile.delete());
     }
 
     @Before
@@ -91,7 +91,7 @@ public class PropertiesShortcutsTest {
         shortcuts = new PropertiesShortcuts();
         assertTrue(shortcuts.isEmpty());
         shortcuts.loadFromClasspath(BUNDLED_ROOT + USER_FILE_NAME);
-        shortcuts.loadFromFile(USER_FILE);
+        shortcuts.loadFromFile(userFile);
         assertFalse(shortcuts.isEmpty());
     }
 
@@ -124,7 +124,7 @@ public class PropertiesShortcutsTest {
      * Test of bindKeyStrokes method, of class PropertiesShortcuts.
      */
     @Test
-    public void testBindKeyStrokes_JMenuBar() {
+    public void testBindKeyStrokesJMenuBar() {
         JMenuBar menu = new JMenuBar();
         JMenu parent = new JMenu();
         JMenuItem child1 = new JMenu();
@@ -160,7 +160,7 @@ public class PropertiesShortcutsTest {
      * Test of bindKeyStrokes method, of class PropertiesShortcuts.
      */
     @Test
-    public void testBindKeyStrokes_JMenuItem() {
+    public void testBindKeyStrokesJMenuItem() {
         // case JMenuItem with no children
         JMenuItem item = new JMenuItem();
         item.setActionCommand(TEST_SAVE);
@@ -182,7 +182,7 @@ public class PropertiesShortcutsTest {
      * Test of bindKeyStrokes method, of class PropertiesShortcuts.
      */
     @Test
-    public void testBindKeyStrokes_JMenuItem_Recursive() {
+    public void testBindKeyStrokesJMenuItemRecursive() {
         // case JMenu with children
         JMenu parent = new JMenu();
         JMenuItem child1 = new JMenu();
@@ -217,7 +217,7 @@ public class PropertiesShortcutsTest {
      * Test of bindKeyStrokes method, of class PropertiesShortcuts.
      */
     @Test
-    public void testBindKeyStrokes_InputMap_ObjectArr() {
+    public void testBindKeyStrokesInputMapObjectArr() {
         // bind
         InputMap inputMap = new InputMap();
         shortcuts.bindKeyStrokes(inputMap, TEST_SAVE, TEST_CUT, TEST_USER_1);

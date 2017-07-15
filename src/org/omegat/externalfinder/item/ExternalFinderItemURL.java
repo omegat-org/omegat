@@ -104,7 +104,7 @@ public class ExternalFinderItemURL {
         return generateURL(url, encoding, findingWords);
     }
 
-    private static final URI generateURL(String url, ExternalFinderItem.ENCODING encoding,
+    private static URI generateURL(String url, ExternalFinderItem.ENCODING encoding,
             String findingWords) throws UnsupportedEncodingException, URISyntaxException {
         String encodedWords;
         if (encoding == ExternalFinderItem.ENCODING.NONE) {

@@ -127,7 +127,7 @@ public final class WikiGet {
      *            The UTF-8 format string to be printed.
      */
     public static void printUTF8(String output) {
-        try (BufferedWriter out = UTF8WriterBuilder(System.out)) {
+        try (BufferedWriter out = utf8WriterBuilder(System.out)) {
             out.write(output);
             out.flush();
         } catch (Exception e) {
@@ -142,7 +142,7 @@ public final class WikiGet {
      * @param out
      *            Outputstream to connect to.
      */
-    public static BufferedWriter UTF8WriterBuilder(OutputStream out) throws Exception {
+    public static BufferedWriter utf8WriterBuilder(OutputStream out) throws Exception {
         return new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8.name()));
     }
 
@@ -161,7 +161,7 @@ public final class WikiGet {
         // Contributed by Anatoly Techtonik
         filename = filename.replaceAll("[\\\\/:\\*\\?\\\"\\|\\<\\>]", "_");
         File path = new File(dir, filename);
-        try (BufferedWriter out = UTF8WriterBuilder(new FileOutputStream(path))) {
+        try (BufferedWriter out = utf8WriterBuilder(new FileOutputStream(path))) {
             out.write(output);
         } catch (Exception e) {
             e.printStackTrace();

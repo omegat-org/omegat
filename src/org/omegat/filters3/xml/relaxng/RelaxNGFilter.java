@@ -111,8 +111,8 @@ public class RelaxNGFilter extends XMLFilter {
         }
         try {
             char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
-            int cbuf_len = reader.read(cbuf);
-            String buf = new String(cbuf, 0, cbuf_len);
+            int cbufLen = reader.read(cbuf);
+            String buf = new String(cbuf, 0, cbufLen);
             return RelaxNGDialect.RELAXNG_ROOT_TAG.matcher(buf).find()
                     && RelaxNGDialect.RELAXNG_XMLNS.matcher(buf).find();
         } catch (Exception e) {

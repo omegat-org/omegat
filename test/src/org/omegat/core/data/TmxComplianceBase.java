@@ -64,7 +64,7 @@ import org.omegat.util.TestPreferencesInitializer;
  */
 public abstract class TmxComplianceBase {
 
-    static Pattern RE_SEG = Pattern.compile("(<seg>.+</seg>)");
+    static final Pattern RE_SEG = Pattern.compile("(<seg>.+</seg>)");
 
     protected File outFile;
 
@@ -135,7 +135,8 @@ public abstract class TmxComplianceBase {
     protected void translateUsingTmx(IFilter filter, Map<String, String> config, final String fileTextIn,
             String inCharset, String fileTMX, String outCharset, ProjectProperties props,
             Map<String, TMXEntry> tmxPatch) throws Exception {
-        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
+        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
                 orphanedCallback);
         if (tmxPatch != null) {
             tmx.defaults.putAll(tmxPatch);
@@ -203,7 +204,8 @@ public abstract class TmxComplianceBase {
 
         filter.alignFile(sourceFile, translatedFile, null, fc, callback);
 
-        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
 
         for (Map.Entry<String, TMXEntry> en : callback.data.entrySet()) {
             tmx.defaults.put(en.getKey(), en.getValue());

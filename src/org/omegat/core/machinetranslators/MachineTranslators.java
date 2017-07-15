@@ -41,7 +41,7 @@ import org.omegat.gui.exttrans.IMachineTranslation;
  * @author Aaron Madlon-Kay
  *
  */
-public class MachineTranslators {
+public final class MachineTranslators {
 
     private static final List<IMachineTranslation> TRANSLATORS = new CopyOnWriteArrayList<>();
 

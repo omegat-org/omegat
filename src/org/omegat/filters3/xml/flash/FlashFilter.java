@@ -28,6 +28,7 @@ package org.omegat.filters3.xml.flash;
 
 import java.io.BufferedReader;
 import java.util.regex.Matcher;
+
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OConsts;
@@ -99,11 +100,11 @@ public class FlashFilter extends XMLFilter {
     public boolean isFileSupported(BufferedReader reader) {
         try {
             char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
-            int cbuf_len = reader.read(cbuf);
-            String buf = new String(cbuf, 0, cbuf_len);
+            int cbufLen = reader.read(cbuf);
+            String buf = new String(cbuf, 0, cbufLen);
             Matcher matcher = FlashDialect.FLASH_XMLNS.matcher(buf);
             if (matcher.find()) {
-                    return true;
+                return true;
             }
         } catch (Exception e) {
             return false;

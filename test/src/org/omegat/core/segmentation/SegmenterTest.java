@@ -74,38 +74,35 @@ public class SegmenterTest {
      */
     @Test
     public void testGlueCJK() {
-        final String EN_FULLSTOP = ".";
-        final String JA_FULLSTOP = "\\u3002"; // Unicode escaped
+        final String enFullstop = ".";
+        final String jaFullstop = "\\u3002"; // Unicode escaped
 
         // basic combination
-        final String SOURCE = "Foo. Bar.\nHere.\n\nThere.\r\nThis.\tThat.\n\tOther.";
-        final String TRANSLATED = SOURCE.replace(" ", "").replace(EN_FULLSTOP, JA_FULLSTOP);
-        String translated = getPseudoTranslationFromEnToJa(SOURCE);
-        assertEquals(TRANSLATED, translated);
+        final String source = "Foo. Bar.\nHere.\n\nThere.\r\nThis.\tThat.\n\tOther.";
+        final String translated = source.replace(" ", "").replace(enFullstop, jaFullstop);
+        assertEquals(translated, getPseudoTranslationFromEnToJa(source));
 
         // spaces after/before \n
-        final String SOURCE2 = "Foo. \n Bar.";
-        final String TRANSLATED2 = "Foo\\u3002\n Bar\\u3002";
-        translated = getPseudoTranslationFromEnToJa(SOURCE2);
-        assertEquals(TRANSLATED2, translated);
+        final String source2 = "Foo. \n Bar.";
+        final String translated2 = "Foo\\u3002\n Bar\\u3002";
+        assertEquals(translated2, getPseudoTranslationFromEnToJa(source2));
 
         // spaces after/before \t
-        final String SOURCE3 = "Foo. \t Bar.";
-        final String TRANSLATED3 = "Foo\\u3002\t Bar\\u3002";
-        translated = getPseudoTranslationFromEnToJa(SOURCE3);
-        assertEquals(TRANSLATED3, translated);
+        final String source3 = "Foo. \t Bar.";
+        final String translated3 = "Foo\\u3002\t Bar\\u3002";
+        assertEquals(translated3, getPseudoTranslationFromEnToJa(source3));
     }
 
     private String getPseudoTranslationFromEnToJa(final String source) {
-        final String EN_FULLSTOP = ".";
-        final String JA_FULLSTOP = "\\u3002";
+        final String enFullstop = ".";
+        final String jaFullstop = "\\u3002";
         List<StringBuilder> spaces = new ArrayList<StringBuilder>();
         List<Rule> brules = new ArrayList<Rule>();
         List<String> segments = segmenter.segment(new Language("en"), source, spaces, brules);
 
         // pseudo-translation (just replace full-stop char)
         for (int i = 0; i < segments.size(); i++) {
-            segments.set(i, segments.get(i).replace(EN_FULLSTOP, JA_FULLSTOP));
+            segments.set(i, segments.get(i).replace(enFullstop, jaFullstop));
         }
         return segmenter.glue(new Language("en"), new Language("ja"), segments, spaces, brules);
     }

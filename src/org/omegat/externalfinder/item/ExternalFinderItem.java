@@ -43,7 +43,7 @@ import org.omegat.util.OStrings;
  * we leave mnemonic setting up to the Mnemonics library so <code>&</code> is
  * the character to use.
  */
-public class ExternalFinderItem {
+public final class ExternalFinderItem {
 
     public static final String PLACEHOLDER_TARGET = "{target}";
 

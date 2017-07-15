@@ -28,8 +28,6 @@ package org.omegat.gui.align;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
@@ -153,56 +151,47 @@ public class AlignFilePickerController {
         picker.targetLanguagePicker.setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
         picker.targetLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.targetLanguagePicker.setSelectedItem(targetLanguage);
-        picker.targetLanguagePicker.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() != ItemEvent.SELECTED) {
-                    return;
-                }
-                if (e.getItem() instanceof String) {
-                    String newVal = (String) e.getItem();
-                    if (Language.verifySingleLangCode(newVal)) {
-                        targetLanguage = new Language(newVal);
-                    } else {
-                        targetLanguage = null;
-                        JOptionPane.showMessageDialog(frame,
-                                OStrings.getString("NP_INVALID_TARGET_LOCALE")
-                                        + OStrings.getString("NP_LOCALE_SUGGESTION"),
-                                OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-                        picker.targetLanguagePicker.requestFocusInWindow();
-                    }
-                } else if (e.getItem() instanceof Language) {
-                    targetLanguage = (Language) e.getItem();
+        picker.targetLanguagePicker.addItemListener(e -> {
+            if (e.getStateChange() != ItemEvent.SELECTED) {
+                return;
+            }
+            if (e.getItem() instanceof String) {
+                String newVal = (String) e.getItem();
+                if (Language.verifySingleLangCode(newVal)) {
+                    targetLanguage = new Language(newVal);
                 } else {
-                    throw new IllegalArgumentException();
+                    targetLanguage = null;
+                    JOptionPane.showMessageDialog(frame,
+                            OStrings.getString("NP_INVALID_TARGET_LOCALE")
+                                    + OStrings.getString("NP_LOCALE_SUGGESTION"),
+                            OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                    picker.targetLanguagePicker.requestFocusInWindow();
                 }
-                updatePicker(picker);
+            } else if (e.getItem() instanceof Language) {
+                targetLanguage = (Language) e.getItem();
+            } else {
+                throw new IllegalArgumentException();
+            }
+            updatePicker(picker);
+        });
+        picker.sourceChooseFileButton.addActionListener(e -> {
+            File file = chooseFile(frame, OStrings.getString("ALIGNER_FILEPICKER_CHOOSE_SOURCE"),
+                    StringUtil.isEmpty(sourceFile) ? sourceDefaultDir : sourceFile);
+            if (file != null) {
+                sourceDefaultDir = file.getParent();
+                targetDefaultDir = targetDefaultDir == null ? sourceDefaultDir : targetDefaultDir;
+                defaultSaveDir = defaultSaveDir == null ? sourceDefaultDir : defaultSaveDir;
+                picker.sourceLanguageFileField.setText(file.getAbsolutePath());
             }
         });
-        picker.sourceChooseFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                File file = chooseFile(frame, OStrings.getString("ALIGNER_FILEPICKER_CHOOSE_SOURCE"),
-                        StringUtil.isEmpty(sourceFile) ? sourceDefaultDir : sourceFile);
-                if (file != null) {
-                    sourceDefaultDir = file.getParent();
-                    targetDefaultDir = targetDefaultDir == null ? sourceDefaultDir : targetDefaultDir;
-                    defaultSaveDir = defaultSaveDir == null ? sourceDefaultDir : defaultSaveDir;
-                    picker.sourceLanguageFileField.setText(file.getAbsolutePath());
-                }
-            }
-        });
-        picker.targetChooseFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                File file = chooseFile(frame, OStrings.getString("ALIGNER_FILEPICKER_CHOOSE_TARGET"),
-                        StringUtil.isEmpty(targetFile) ? targetDefaultDir : targetFile);
-                if (file != null) {
-                    targetDefaultDir = file.getParent();
-                    sourceDefaultDir = sourceDefaultDir == null ? targetDefaultDir : sourceDefaultDir;
-                    defaultSaveDir = defaultSaveDir == null ? targetDefaultDir : defaultSaveDir;
-                    picker.targetLanguageFileField.setText(file.getAbsolutePath());
-                }
+        picker.targetChooseFileButton.addActionListener(e -> {
+            File file = chooseFile(frame, OStrings.getString("ALIGNER_FILEPICKER_CHOOSE_TARGET"),
+                    StringUtil.isEmpty(targetFile) ? targetDefaultDir : targetFile);
+            if (file != null) {
+                targetDefaultDir = file.getParent();
+                sourceDefaultDir = sourceDefaultDir == null ? targetDefaultDir : sourceDefaultDir;
+                defaultSaveDir = defaultSaveDir == null ? targetDefaultDir : defaultSaveDir;
+                picker.targetLanguageFileField.setText(file.getAbsolutePath());
             }
         });
         picker.sourceLanguageFileField.setText(sourceFile);
@@ -306,42 +295,35 @@ public class AlignFilePickerController {
             }
         });
 
-        picker.okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                picker.bottomPanel.remove(picker.messageTextArea);
-                picker.bottomPanel.add(picker.progressBar, BorderLayout.CENTER);
-                picker.bottomPanel.revalidate();
-                new SwingWorker<Aligner, Void>() {
-                    @Override
-                    protected Aligner doInBackground() throws Exception {
-                        Aligner aligner = new Aligner(sourceFile, sourceLanguage, targetFile, targetLanguage);
-                        aligner.loadFiles();
-                        return aligner;
+        picker.okButton.addActionListener(e -> {
+            picker.bottomPanel.remove(picker.messageTextArea);
+            picker.bottomPanel.add(picker.progressBar, BorderLayout.CENTER);
+            picker.bottomPanel.revalidate();
+            new SwingWorker<Aligner, Void>() {
+                @Override
+                protected Aligner doInBackground() throws Exception {
+                    Aligner aligner = new Aligner(sourceFile, sourceLanguage, targetFile, targetLanguage);
+                    aligner.loadFiles();
+                    return aligner;
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        Aligner aligner = get();
+                        new AlignPanelController(aligner, defaultSaveDir).show(parent);
+                    } catch (CancellationException e) {
+                        // Ignore
+                    } catch (Exception e) {
+                        Log.log(e);
+                        JOptionPane.showMessageDialog(frame, OStrings.getString("ALIGNER_ERROR_LOADING"),
+                                OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                     }
-                    @Override
-                    protected void done() {
-                        try {
-                            Aligner aligner = get();
-                            new AlignPanelController(aligner, defaultSaveDir).show(parent);
-                        } catch (CancellationException e) {
-                            // Ignore
-                        } catch (Exception e) {
-                            Log.log(e);
-                            JOptionPane.showMessageDialog(frame, OStrings.getString("ALIGNER_ERROR_LOADING"),
-                                    OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
-                        }
-                        frame.dispose();
-                    }
-                }.execute();
-            }
+                    frame.dispose();
+                }
+            }.execute();
         });
-        picker.cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-            }
-        });
+        picker.cancelButton.addActionListener(e -> frame.dispose());
 
         frame.getRootPane().setDefaultButton(picker.okButton);
 
@@ -445,7 +427,7 @@ public class AlignFilePickerController {
     public static void main(String[] args) throws Exception {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
 
-        PluginUtils.loadPlugins(Collections.<String, String> emptyMap());
+        PluginUtils.loadPlugins(Collections.emptyMap());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
 

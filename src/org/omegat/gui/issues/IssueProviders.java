@@ -43,7 +43,7 @@ import org.omegat.util.Preferences;
  * @author Aaron Madlon-Kay
  *
  */
-public class IssueProviders {
+public final class IssueProviders {
 
     static final String ISSUE_IDS_DELIMITER = ",";
 

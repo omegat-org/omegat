@@ -37,7 +37,7 @@ import java.util.function.Supplier;
  *
  * @author Aaron Madlon-Kay
  */
-public class PreferencesControllers {
+public final class PreferencesControllers {
     static final List<Supplier<IPreferencesController>> CONTROLLER_SUPPLIERS = new ArrayList<>();
 
     private PreferencesControllers() {

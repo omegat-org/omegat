@@ -451,7 +451,7 @@ could fail with duplicate numbers
  OmegaT 3.6.0 update 7
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bug fix
+  2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 7 vs 3.6.0 update 6
@@ -460,6 +460,9 @@ could fail with duplicate numbers
 
   - Extra tags not recognised by tag validation 
   https://sourceforge.net/p/omegat/bugs/876/
+
+  - CR/LF replaced with LF on LaTex files 
+  https://sourceforge.net/p/omegat/bugs/865/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 6

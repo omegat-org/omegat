@@ -9,6 +9,7 @@
                2009 Arno Peters
                2011 Didier Briel
                2014 Adiel Mittmann
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +43,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
@@ -136,6 +138,8 @@ public class LatexFilter extends AbstractFilter {
      * @throws java.io.IOException
      */
     private void processLatexFile(BufferedReader in, Writer out) throws IOException {
+        LinebreakPreservingReader lpin = new LinebreakPreservingReader(in);
+
         StringBuilder par = new StringBuilder();
         String s;
         StringBuilder comment = new StringBuilder();
@@ -147,7 +151,7 @@ public class LatexFilter extends AbstractFilter {
          * blanks
          */
         String state;
-        while ((s = in.readLine()) != null) {
+        while ((s = lpin.readLine()) != null) {
             // String[] c = s.split(""); In Java 8, that line gave a first empty element, so it was replaced with the 
             // following lines, and idx below was started at 0 instead of 1
             String[] c;
@@ -219,18 +223,20 @@ public class LatexFilter extends AbstractFilter {
 
             /* at the end of the line */
             if (state.equals("N")) {
+                String endOfLine = lpin.getLinebreak();
                 /* \par */
                 if (par.length() > 0) {
                     out.write(processParagraph(commands, par.toString()));
-                    out.write("\n\n");
+                    out.write(endOfLine);
+                    out.write(endOfLine);
                     par.setLength(0);
                 }
                 // System.out.println(commands);
                 commands.clear();
                 if (comment.length() > 0) { // If there is a comment, write it
-                     out.write(comment.toString());
-                     out.write("\n");
-                     comment.setLength(0);
+                    out.write(comment.toString());
+                    out.write(endOfLine);
+                    comment.setLength(0);
                 }
             } else if (state.equals("M")) {
                 par.append(" ");

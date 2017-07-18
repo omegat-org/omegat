@@ -138,115 +138,117 @@ public class LatexFilter extends AbstractFilter {
      * @throws java.io.IOException
      */
     private void processLatexFile(BufferedReader in, Writer out) throws IOException {
-        LinebreakPreservingReader lpin = new LinebreakPreservingReader(in);
+        try (LinebreakPreservingReader lpin = new LinebreakPreservingReader(in)) {
+            StringBuilder par = new StringBuilder();
+            String s;
+            StringBuilder comment = new StringBuilder();
 
-        StringBuilder par = new StringBuilder();
-        String s;
-        StringBuilder comment = new StringBuilder();
+            LinkedList<String> commands = new LinkedList<String>();
 
-        LinkedList<String> commands = new LinkedList<String>();
+            /**
+             * Possible states: N: beginning of a new line M: middle S: skipping
+             * blanks
+             */
+            String state;
+            while ((s = lpin.readLine()) != null) {
+                // String[] c = s.split(""); In Java 8, that line gave a first
+                // empty element, so it was replaced with the
+                // following lines, and idx below was started at 0 instead of 1
+                String[] c;
+                if (!s.isEmpty()) {
+                    c = s.split("(?!^)");
+                } else {
+                    c = new String[0];
+                }
+                state = "N";
 
-        /**
-         * Possible states: N: beginning of a new line M: middle S: skipping
-         * blanks
-         */
-        String state;
-        while ((s = lpin.readLine()) != null) {
-            // String[] c = s.split(""); In Java 8, that line gave a first empty element, so it was replaced with the
-            // following lines, and idx below was started at 0 instead of 1
-            String[] c;
-            if (!s.isEmpty()) {
-                c = s.split("(?!^)");
-            } else {
-              c = new String[0];
-            }
-            state = "N";
+                int idx = 0;
+                while (idx < c.length) {
+                    String cidx = c[idx];
+                    int cat = findStringCategory(cidx);
 
-            int idx = 0;
-            while (idx < c.length) {
-                String cidx = c[idx];
-                int cat = findStringCategory(cidx);
-
-                if (cat == 0) {
-                    /* parse control sequence */
-                    StringBuilder cmd = new StringBuilder();
-                    cmd.append(cidx);
-                    idx++;
-                    while (idx < c.length) {
-                        String cmdc = c[idx];
-                        if (findStringCategory(cmdc) == 11) {
-                            cmd.append(cmdc);
-                        } else if (cmd.length() == 1) {
-                            cmd.append(cmdc);
-                            state = "M";
-                            break;
-                        } else {
-                            idx--;
-                            // state = "S";
-                            state = "M";
-                            break;
-                        }
+                    if (cat == 0) {
+                        /* parse control sequence */
+                        StringBuilder cmd = new StringBuilder();
+                        cmd.append(cidx);
                         idx++;
-                    }
+                        while (idx < c.length) {
+                            String cmdc = c[idx];
+                            if (findStringCategory(cmdc) == 11) {
+                                cmd.append(cmdc);
+                            } else if (cmd.length() == 1) {
+                                cmd.append(cmdc);
+                                state = "M";
+                                break;
+                            } else {
+                                idx--;
+                                // state = "S";
+                                state = "M";
+                                break;
+                            }
+                            idx++;
+                        }
 
-                    if (!commands.contains(cmd.toString())) {
-                        commands.add(cmd.toString());
-                    }
-                    par.append(cmd);
-                } else if (cat == 4) {
-                    /* table column separator */
-                    out.write(processParagraph(commands, par.toString()));
-                    out.write("&");
-                    par.setLength(0);
-                    // System.out.println(commands);
-                    commands.clear();
-                } else if (cat == 10) {
-                    if (state.equals("M")) {
-                        state = "S";
+                        if (!commands.contains(cmd.toString())) {
+                            commands.add(cmd.toString());
+                        }
+                        par.append(cmd);
+                    } else if (cat == 4) {
+                        /* table column separator */
+                        out.write(processParagraph(commands, par.toString()));
+                        out.write("&");
+                        par.setLength(0);
+                        // System.out.println(commands);
+                        commands.clear();
+                    } else if (cat == 10) {
+                        if (state.equals("M")) {
+                            state = "S";
+                            par.append(cidx);
+                        }
+                    } else if (cat == 14) {
+                        /* parse comment */
+                        comment.append(cidx);
+                        idx++;
+                        while (idx < c.length) {
+                            String commentc = c[idx];
+                            comment.append(commentc);
+                            idx++;
+                        }
+                    } else {
+                        state = "M";
                         par.append(cidx);
                     }
-                } else if (cat == 14) {
-                    /* parse comment */
-                    comment.append(cidx);
+
                     idx++;
-                    while (idx < c.length) {
-                        String commentc = c[idx];
-                        comment.append(commentc);
-                        idx++;
+                }
+
+                /* at the end of the line */
+                if (state.equals("N")) {
+                    String endOfLine = lpin.getLinebreak();
+                    /* \par */
+                    if (par.length() > 0) {
+                        out.write(processParagraph(commands, par.toString()));
+                        out.write(endOfLine);
+                        out.write(endOfLine);
+                        par.setLength(0);
                     }
-                } else {
-                    state = "M";
-                    par.append(cidx);
+                    // System.out.println(commands);
+                    commands.clear();
+                    if (comment.length() > 0) { // If there is a comment, write
+                                                // it
+                        out.write(comment.toString());
+                        out.write(endOfLine);
+                        comment.setLength(0);
+                    }
+                } else if (state.equals("M")) {
+                    par.append(" ");
                 }
-
-                idx++;
             }
 
-            /* at the end of the line */
-            if (state.equals("N")) {
-                String endOfLine = lpin.getLinebreak();
-                /* \par */
-                if (par.length() > 0) {
-                    out.write(processParagraph(commands, par.toString()));
-                    out.write(endOfLine);
-                    out.write(endOfLine);
-                    par.setLength(0);
-                }
-                // System.out.println(commands);
-                commands.clear();
-                if (comment.length() > 0) { // If there is a comment, write it
-                    out.write(comment.toString());
-                    out.write(endOfLine);
-                    comment.setLength(0);
-                }
-            } else if (state.equals("M")) {
-                par.append(" ");
+            // output remaining buffers
+            if (par.length() > 0) {
+                out.write(processParagraph(commands, par.toString()));
             }
-        }
-
-        // output remaining buffers
-        if (par.length() > 0) {
-            out.write(processParagraph(commands, par.toString()));
         }
     }
 

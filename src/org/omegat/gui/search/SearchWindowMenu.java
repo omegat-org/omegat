@@ -28,13 +28,10 @@ package org.omegat.gui.search;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JComboBox;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
-import javax.swing.text.BadLocationException;
 
 import org.omegat.core.Core;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
@@ -45,11 +42,9 @@ import org.openide.awt.Mnemonics;
 @SuppressWarnings("serial")
 public class SearchWindowMenu extends JMenuBar {
 
-    private final SearchWindowForm form;
     private final SearchWindowController controller;
 
-    public SearchWindowMenu(SearchWindowForm form, SearchWindowController controller) {
-        this.form = form;
+    public SearchWindowMenu(SearchWindowController controller) {
         this.controller = controller;
         init();
     }
@@ -64,14 +59,11 @@ public class SearchWindowMenu extends JMenuBar {
         Mnemonics.setLocalizedText(item, OStrings.getString("SW_FILE_MENU_SELECT_SEARCH_FIELD"));
         item.setActionCommand("editFindInProjectMenuItem");
         item.addActionListener(e -> {
-            String selection = form.m_viewer.getSelectedText();
-            JComboBox<String> field = form.m_searchField;
+            String selection = controller.getViewerSelection();
             if (!StringUtil.isEmpty(selection)) {
-                JTextField editor = (JTextField) field.getEditor().getEditorComponent();
-                editor.setText(selection);
+                controller.setSearchText(selection);
             }
-            field.requestFocus();
-            field.getEditor().selectAll();
+            controller.focusSearchField();
         });
 
         item = fileMenu.add(new JMenuItem());
@@ -89,38 +81,21 @@ public class SearchWindowMenu extends JMenuBar {
         item = editMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"));
         item.setActionCommand("editInsertSourceMenuItem");
-        item.addActionListener(e -> {
-            JComboBox<String> currentBox = form.m_searchField;
-            if (form.m_replaceField.hasFocus()) {
-                currentBox = form.m_replaceField;
-            }
-            JTextField editor = (JTextField) currentBox.getEditor().getEditorComponent();
-            int offset = editor.getCaretPosition();
-            String source = Core.getEditor().getCurrentEntry().getSrcText();
-            try {
-                editor.getDocument().insertString(offset, source, null);
-            } catch (BadLocationException ignore) {
-            }
-        });
+        item.addActionListener(
+                e -> controller.insertIntoActiveField(Core.getEditor().getCurrentEntry().getSrcText()));
 
         item = editMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"));
         item.setActionCommand("editOverwriteSourceMenuItem");
-        item.addActionListener(e -> {
-            JComboBox<String> currentBox = form.m_searchField;
-            if (form.m_replaceField.hasFocus()) {
-                currentBox = form.m_replaceField;
-            }
-            JTextField editor = (JTextField) currentBox.getEditor().getEditorComponent();
-            editor.setText(Core.getEditor().getCurrentEntry().getSrcText());
-        });
+        item.addActionListener(
+                e -> controller.replaceCurrentFieldText(Core.getEditor().getCurrentEntry().getSrcText()));
 
         editMenu.addSeparator();
 
         item = editMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"));
         item.setActionCommand("editCreateGlossaryEntryMenuItem");
-        item.addActionListener(e -> Core.getGlossary().showCreateGlossaryEntryDialog(form));
+        item.addActionListener(e -> Core.getGlossary().showCreateGlossaryEntryDialog(controller.getWindow()));
 
         PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(this);
     }

@@ -58,6 +58,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
@@ -109,7 +110,7 @@ public class SearchWindowController {
 
     public SearchWindowController(SearchMode mode) {
         form = new SearchWindowForm();
-        form.setJMenuBar(new SearchWindowMenu(form, this));
+        form.setJMenuBar(new SearchWindowMenu(this));
         this.mode = mode;
         initialEntry = Core.getEditor().getCurrentEntryNumber();
         initialCaret = getCurrentPositionInEntryTranslationInEditor(Core.getEditor());
@@ -606,8 +607,7 @@ public class SearchWindowController {
                 form.m_replaceAllButton.setEnabled(haveResults);
                 if (!haveResults) {
                     // RFE#1143 https://sourceforge.net/p/omegat/feature-requests/1143/
-                    form.m_searchField.requestFocus();
-                    form.m_searchField.getEditor().selectAll();
+                    focusSearchField();
                 } else {
                     viewer.requestFocus();
                 }
@@ -828,7 +828,7 @@ public class SearchWindowController {
      */
     public void makeVisible(String query) {
         if (!StringUtil.isEmpty(query)) {
-            ((JTextField) form.m_searchField.getEditor().getEditorComponent()).setText(query);
+            setSearchText(query);
         }
         form.setVisible(true);
         form.setState(JFrame.NORMAL);
@@ -906,6 +906,78 @@ public class SearchWindowController {
             // move focus to search edit field
             form.m_searchField.requestFocus();
         }
+    }
+
+    /**
+     * Get the currently selected text in the search results pane
+     *
+     * @return Selected text, or {@code null} if none
+     */
+    public String getViewerSelection() {
+        return form.m_viewer.getSelectedText();
+    }
+
+    /**
+     * Set the content of the search query
+     *
+     * @param text
+     *            The query text
+     */
+    public void setSearchText(String text) {
+        JComboBox<String> field = form.m_searchField;
+        JTextField editor = (JTextField) field.getEditor().getEditorComponent();
+        editor.setText(text);
+    }
+
+    /**
+     * Focus the search field and select the current query text
+     */
+    public void focusSearchField() {
+        JComboBox<String> field = form.m_searchField;
+        field.requestFocus();
+        field.getEditor().selectAll();
+    }
+
+    private JComboBox<String> getActiveField() {
+        return form.m_replaceField.hasFocus() ? form.m_replaceField : form.m_searchField;
+    }
+
+    private JTextField getActiveFieldEditor() {
+        return (JTextField) getActiveField().getEditor().getEditorComponent();
+    }
+
+    /**
+     * Insert the specified text into the currently active (focused) search field: either Search or Replace
+     *
+     * @param text
+     *            The text to insert
+     */
+    public void insertIntoActiveField(String text) {
+        JTextField editor = getActiveFieldEditor();
+        int offset = editor.getCaretPosition();
+        try {
+            editor.getDocument().insertString(offset, text, null);
+        } catch (BadLocationException ignore) {
+        }
+    }
+
+    /**
+     * Replace the text of the currently active (focused) search field: either Search or Replace
+     *
+     * @param text
+     *            The text to set
+     */
+    public void replaceCurrentFieldText(String text) {
+        getActiveFieldEditor().setText(text);
+    }
+
+    /**
+     * Get the search window frame
+     *
+     * @return search window frame
+     */
+    public JFrame getWindow() {
+        return form;
     }
 
     private void loadAdvancedOptionPreferences() {

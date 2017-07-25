@@ -979,6 +979,9 @@ public class SearchWindowController {
         }
     }
 
+    /*
+     * TODO: This should be a method on EditorController exposed via IEditor, NOT here.
+     */
     private CaretPosition getCurrentPositionInEntryTranslationInEditor(IEditor editor) {
         if (editor instanceof EditorController) {
             EditorController c = (EditorController) editor;

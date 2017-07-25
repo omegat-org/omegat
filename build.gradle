@@ -185,9 +185,9 @@ jar {
                 'OmegaT-Plugins': omtPlugins.plugin,
                 'OmegaT-Plugin': 'true',
                 'Main-Class': mainClassName)
-        omtPlugins.each { key, _ ->
+        omtPlugins.each { key, val ->
             if (key != 'plugin') {
-                omtPlugins[key].tokenize().each { cls ->
+                val.tokenize().each { cls ->
                     attributes('OmegaT-Plugin': key, cls)
                 }
             }

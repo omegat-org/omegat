@@ -328,6 +328,7 @@ public class SearchWindowController {
         KeyStroke undoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
         map.put(undoKey, new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (undoManager.canUndo()) {
                     undoManager.undo();
@@ -337,6 +338,7 @@ public class SearchWindowController {
         KeyStroke redoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
         map.put(redoKey, new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (undoManager.canRedo()) {
                     undoManager.redo();
@@ -416,9 +418,8 @@ public class SearchWindowController {
         form.m_searchTranslation.setSelected(Preferences.isPreferenceDefault(
                 Preferences.SEARCHWINDOW_SEARCH_TRANSLATION, true));
 
-        SearchExpression.SearchState searchState = SearchExpression.SearchState.valueOf(Preferences
-                .getPreferenceEnumDefault(Preferences.SEARCHWINDOW_SEARCH_STATE,
-                        SearchExpression.SearchState.TRANSLATED_UNTRANSLATED).name());
+        SearchExpression.SearchState searchState = Preferences.getPreferenceEnumDefault(
+                Preferences.SEARCHWINDOW_SEARCH_STATE, SearchExpression.SearchState.TRANSLATED_UNTRANSLATED);
         switch (searchState) {
         case TRANSLATED_UNTRANSLATED:
         default:
@@ -441,9 +442,8 @@ public class SearchWindowController {
                 Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP_REPLACE, false));
 
         // replace type
-        SearchExpression.SearchExpressionType replaceType = SearchExpression.SearchExpressionType
-                .valueOf(Preferences.getPreferenceEnumDefault(Preferences.SEARCHWINDOW_REPLACE_TYPE,
-                        SearchExpression.SearchExpressionType.EXACT).name());
+        SearchExpression.SearchExpressionType replaceType = Preferences.getPreferenceEnumDefault(
+                Preferences.SEARCHWINDOW_REPLACE_TYPE, SearchExpression.SearchExpressionType.EXACT);
         switch (replaceType) {
         case EXACT:
         default:
@@ -657,8 +657,7 @@ public class SearchWindowController {
         EntryListPane viewer = (EntryListPane) form.m_viewer;
         Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
         Core.getEditor()
-                .setFilter(
-                        new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), replaceString));
+                .setFilter(new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), replaceString));
     }
 
     private void doReplaceAll() {

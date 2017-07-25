@@ -154,10 +154,10 @@ class EntryListPane extends JTextPane {
                 if (e.getClickCount() == 2) {
                     if (!autoSyncWithEditor && !entryList.isEmpty()) {
                         getActiveDisplayedEntry().gotoEntryInEditor();
+                        JFrame frame = Core.getMainWindow().getApplicationFrame();
+                        frame.setState(JFrame.NORMAL);
+                        frame.toFront();
                     }
-                    JFrame frame = Core.getMainWindow().getApplicationFrame();
-                    frame.setState(JFrame.NORMAL);
-                    frame.toFront();
                 }
             }
         });

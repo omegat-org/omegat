@@ -58,8 +58,6 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
@@ -196,92 +194,28 @@ public class SearchWindowController {
 
         // ///////////////////////////////////
         // action listeners
-        form.m_dismissButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doCancel();
-            }
-        });
-        form.m_filterButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doFilter();
-            }
-        });
-        form.m_replaceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doReplace();
-            }
-        });
-        form.m_replaceAllButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doReplaceAll();
-            }
-        });
+        form.m_dismissButton.addActionListener(e -> doCancel());
+        form.m_filterButton.addActionListener(e -> doFilter());
+        form.m_replaceButton.addActionListener(e -> doReplace());
+        form.m_replaceAllButton.addActionListener(e -> doReplaceAll());
 
-        form.m_searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doSearch();
-            }
-        });
-        form.m_advancedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setAdvancedOptionsVisible(!form.m_advancedVisiblePane.isVisible());
-            }
-        });
+        form.m_searchButton.addActionListener(e -> doSearch());
+        form.m_advancedButton.addActionListener(e ->
+            setAdvancedOptionsVisible(!form.m_advancedVisiblePane.isVisible()));
 
-        form.m_authorCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enableDisableAuthor();
-            }
-        });
+        form.m_authorCB.addActionListener(e -> enableDisableAuthor());
 
-        form.m_authorField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doSearch();
-            }
-        });
+        form.m_authorField.addActionListener(e -> doSearch());
 
-        form.m_dateToCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enableDisableDateTo();
-            }
-        });
+        form.m_dateToCB.addActionListener(e -> enableDisableDateTo());
 
-        form.m_dateToButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doResetDateTo();
-            }
-        });
+        form.m_dateToButton.addActionListener(e -> doResetDateTo());
 
-        form.m_dateFromButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doResetDateFrom();
-            }
-        });
+        form.m_dateFromButton.addActionListener(e -> doResetDateFrom());
 
-        form.m_dateFromCB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                enableDisableDateFrom();
-            }
-        });
+        form.m_dateFromCB.addActionListener(e -> enableDisableDateFrom());
 
-        form.m_dirButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                doBrowseDirectory();
-            }
-        });
+        form.m_dirButton.addActionListener(e -> doBrowseDirectory());
 
         StaticUIUtils.setEscapeAction(form, new AbstractAction() {
             @Override
@@ -301,6 +235,8 @@ public class SearchWindowController {
         // file search only works with exact/regex search
         //
         // keep track of settings and only show what are valid choices
+
+        ActionListener searchFieldRequestFocus = e -> form.m_searchField.requestFocus();
 
         form.m_searchExactSearchRB.addActionListener(searchFieldRequestFocus);
 
@@ -328,43 +264,31 @@ public class SearchWindowController {
         form.m_allResultsCB.addActionListener(searchFieldRequestFocus);
         form.m_fileNamesCB.addActionListener(searchFieldRequestFocus);
 
-        form.m_autoSyncWithEditor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // update auto-sync flag in EntryListPane
-                EntryListPane viewer = (EntryListPane) form.m_viewer;
-                viewer.setAutoSyncWithEditor(form.m_autoSyncWithEditor.isSelected());
-            }
+        form.m_autoSyncWithEditor.addActionListener(e -> {
+            // update auto-sync flag in EntryListPane
+            EntryListPane viewer = (EntryListPane) form.m_viewer;
+            viewer.setAutoSyncWithEditor(form.m_autoSyncWithEditor.isSelected());
         });
 
-        form.m_rbDir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateOptionStatus();
+        form.m_rbDir.addActionListener(e -> {
+            updateOptionStatus();
 
-                // move focus to dir edit field if dir search is selected
-                // otherwise move focus to search field
-                if (form.m_rbDir.isSelected()) {
-                    form.m_dirField.requestFocus();
-                } else {
-                    form.m_searchField.requestFocus();
-                }
-            }
-        });
-        form.m_rbProject.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateOptionStatus();
+            // move focus to dir edit field if dir search is selected
+            // otherwise move focus to search field
+            if (form.m_rbDir.isSelected()) {
+                form.m_dirField.requestFocus();
+            } else {
                 form.m_searchField.requestFocus();
             }
         });
+        form.m_rbProject.addActionListener(e -> {
+            updateOptionStatus();
+            form.m_searchField.requestFocus();
+        });
 
-        form.m_numberOfResults.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                // move focus to search edit field
-                form.m_searchField.requestFocus();
-            }
+        form.m_numberOfResults.addChangeListener(e -> {
+            // move focus to search edit field
+            form.m_searchField.requestFocus();
         });
 
         form.addWindowListener(new WindowAdapter() {
@@ -442,14 +366,6 @@ public class SearchWindowController {
             }
         });
     }
-
-    ActionListener searchFieldRequestFocus = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // move focus to search edit field
-            form.m_searchField.requestFocus();
-        }
-    };
 
     /**
      * Loads the position and size of the search window and the button selection
@@ -1111,23 +1027,20 @@ public class SearchWindowController {
      *            error text parameters
      */
     public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
-        UIThreadsUtil.executeInSwingThread(new Runnable() {
-            @Override
-            public void run() {
-                String msg;
-                if (params != null) {
-                    msg = StringUtil.format(OStrings.getString(errorKey), params);
-                } else {
-                    msg = OStrings.getString(errorKey);
-                }
-
-                String fulltext = msg;
-                if (ex != null) {
-                    fulltext += "\n" + ex.getLocalizedMessage();
-                }
-                JOptionPane.showMessageDialog(form, fulltext, OStrings.getString("TF_ERROR"),
-                        JOptionPane.ERROR_MESSAGE);
+        UIThreadsUtil.executeInSwingThread(() -> {
+            String msg;
+            if (params != null) {
+                msg = StringUtil.format(OStrings.getString(errorKey), params);
+            } else {
+                msg = OStrings.getString(errorKey);
             }
+
+            String fulltext = msg;
+            if (ex != null) {
+                fulltext += "\n" + ex.getLocalizedMessage();
+            }
+            JOptionPane.showMessageDialog(form, fulltext, OStrings.getString("TF_ERROR"),
+                    JOptionPane.ERROR_MESSAGE);
         });
     }
 

@@ -97,6 +97,14 @@ public class SearchWindowMenu extends JMenuBar {
         item.setActionCommand("editCreateGlossaryEntryMenuItem");
         item.addActionListener(e -> Core.getGlossary().showCreateGlossaryEntryDialog(controller.getWindow()));
 
+        editMenu.addSeparator();
+
+        item = editMenu.add(new JMenuItem());
+        Mnemonics.setLocalizedText(item, OStrings.getString("SW_EDIT_MENU_RESET_OPTIONS"));
+        // TODO: Make this customizable
+        item.setAccelerator(KeyStroke.getKeyStroke('R', getToolkit().getMenuShortcutKeyMask()));
+        item.addActionListener(e -> controller.resetOptions());
+
         PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(this);
     }
 }

@@ -578,6 +578,51 @@ public class SearchWindowController {
     }
 
     /**
+     * Reset search options to their default values. Search terms are left unchanged, as are any settings that
+     * don't affect the search results (such as syncing with editor).
+     */
+    public void resetOptions() {
+        form.m_rbProject.setSelected(true);
+        form.m_recursiveCB.setSelected(true);
+        form.m_searchExactSearchRB.setSelected(true);
+        form.m_searchCase.setSelected(false);
+
+        form.m_searchSpaceMatchNbsp.setSelected(false);
+
+        form.m_searchSource.setSelected(true);
+        form.m_searchTranslation.setSelected(true);
+
+        form.m_searchTranslatedUntranslated.setSelected(true);
+        form.m_replaceCase.setSelected(false);
+
+        form.m_replaceSpaceMatchNbsp.setSelected(false);
+        form.m_replaceExactSearchRB.setSelected(true);
+
+        form.m_replaceUntranslated.setSelected(true);
+
+        form.m_searchNotesCB.setSelected(true);
+        form.m_searchCommentsCB.setSelected(true);
+
+        form.m_cbSearchInGlossaries.setSelected(true);
+        form.m_cbSearchInMemory.setSelected(true);
+        form.m_cbSearchInTMs.setSelected(true);
+
+        form.m_allResultsCB.setSelected(false);
+        form.m_fileNamesCB.setSelected(false);
+
+        updateOptionStatus();
+
+        form.m_authorCB.setSelected(false);
+        form.m_dateFromCB.setSelected(false);
+        form.m_dateToCB.setSelected(false);
+        form.m_numberOfResults.setValue(OConsts.ST_MAX_SEARCH_RESULTS);
+        form.m_excludeOrphans.setSelected(false);
+        form.m_fullHalfWidthInsensitive.setSelected(false);
+
+        updateAdvancedOptionStatus();
+    }
+
+    /**
      * Updates the enabled/selected status of the options in the dialog.
      */
     private void updateOptionStatus() {

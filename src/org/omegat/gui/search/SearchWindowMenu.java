@@ -26,8 +26,6 @@
 package org.omegat.gui.search;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JComboBox;
@@ -65,30 +63,22 @@ public class SearchWindowMenu extends JMenuBar {
         item = fileMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("SW_FILE_MENU_SELECT_SEARCH_FIELD"));
         item.setActionCommand("editFindInProjectMenuItem");
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selection = form.m_viewer.getSelectedText();
-                JComboBox<String> field = form.m_searchField;
-                if (!StringUtil.isEmpty(selection)) {
-                    JTextField editor = (JTextField) field.getEditor().getEditorComponent();
-                    editor.setText(selection);
-                }
-                field.requestFocus();
-                field.getEditor().selectAll();
+        item.addActionListener(e -> {
+            String selection = form.m_viewer.getSelectedText();
+            JComboBox<String> field = form.m_searchField;
+            if (!StringUtil.isEmpty(selection)) {
+                JTextField editor = (JTextField) field.getEditor().getEditorComponent();
+                editor.setText(selection);
             }
+            field.requestFocus();
+            field.getEditor().selectAll();
         });
 
         item = fileMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("SW_FILE_MENU_CLOSE"));
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.doCancel();
-            }
-        });
+        item.addActionListener(e -> controller.doCancel());
 
         JMenu editMenu = add(new JMenu());
         Mnemonics.setLocalizedText(editMenu, OStrings.getString("SW_EDIT_MENU"));
@@ -99,36 +89,30 @@ public class SearchWindowMenu extends JMenuBar {
         item = editMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"));
         item.setActionCommand("editInsertSourceMenuItem");
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JComboBox<String> currentBox = form.m_searchField;
-                if (form.m_replaceField.hasFocus()) {
-                    currentBox = form.m_replaceField;
-                }
-                JTextField editor = (JTextField) currentBox.getEditor().getEditorComponent();
-                int offset = editor.getCaretPosition();
-                String source = Core.getEditor().getCurrentEntry().getSrcText();
-                try {
-                    editor.getDocument().insertString(offset, source, null);
-                } catch (BadLocationException ignore) {
-                }
+        item.addActionListener(e -> {
+            JComboBox<String> currentBox = form.m_searchField;
+            if (form.m_replaceField.hasFocus()) {
+                currentBox = form.m_replaceField;
+            }
+            JTextField editor = (JTextField) currentBox.getEditor().getEditorComponent();
+            int offset = editor.getCaretPosition();
+            String source = Core.getEditor().getCurrentEntry().getSrcText();
+            try {
+                editor.getDocument().insertString(offset, source, null);
+            } catch (BadLocationException ignore) {
             }
         });
 
         item = editMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"));
         item.setActionCommand("editOverwriteSourceMenuItem");
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JComboBox<String> currentBox = form.m_searchField;
-                if (form.m_replaceField.hasFocus()) {
-                    currentBox = form.m_replaceField;
-                }
-                JTextField editor = (JTextField) currentBox.getEditor().getEditorComponent();
-                editor.setText(Core.getEditor().getCurrentEntry().getSrcText());
+        item.addActionListener(e -> {
+            JComboBox<String> currentBox = form.m_searchField;
+            if (form.m_replaceField.hasFocus()) {
+                currentBox = form.m_replaceField;
             }
+            JTextField editor = (JTextField) currentBox.getEditor().getEditorComponent();
+            editor.setText(Core.getEditor().getCurrentEntry().getSrcText());
         });
 
         editMenu.addSeparator();
@@ -136,12 +120,7 @@ public class SearchWindowMenu extends JMenuBar {
         item = editMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"));
         item.setActionCommand("editCreateGlossaryEntryMenuItem");
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Core.getGlossary().showCreateGlossaryEntryDialog(form);
-            }
-        });
+        item.addActionListener(e -> Core.getGlossary().showCreateGlossaryEntryDialog(form));
 
         PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(this);
     }

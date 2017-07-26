@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   1 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,8 @@
   - Move First and Move Last buttons were added to the segmentation
 dialog to move quickly the selected rule to the first or last position 
 in the table
+
+  - New Reset Options feature in the Search window menu
 
   Bug fixes:
 

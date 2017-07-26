@@ -9,6 +9,8 @@
                2013 Yu Tang
                2014 Aaron Madlon-Kay, Piotr Kulik
                2015 Aaron Madlon-Kay, Yu Tang
+               2016 Alex Buloichik             
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -84,6 +86,7 @@ import gen.core.project.RepositoryMapping;
  * @author Martin Fleurke
  * @author Thomas Cordonnier
  * @author Aaron Madlon-Kay
+ * @author Didier Briel
  */
 public final class ProjectUICommands {
 
@@ -329,10 +332,12 @@ public final class ProjectUICommands {
                     remoteRepositoryProvider.copyFilesFromRepoToProject(file);
                 }
 
-                // update repo into
                 ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRoot);
-                props.setRepositories(repos);
-                ProjectFileStorage.writeProjectFile(props);
+                if (props.getRepositories() == null) { // We assume it's a 3.6 style project with no repository mapping,
+                    props.setRepositories(repos);      // so we add root repository mapping
+                }
+                // We write in all cases, because we might have added default excludes, for instance
+                ProjectFileStorage.writeProjectFile(props); 
 
                 //String projectFileURL = dialog.txtRepositoryOrProjectFileURL.getText();
                 //File localDirectory = new File(dialog.txtDirectory.getText());

@@ -10,7 +10,7 @@ plugins {
     id 'com.jfrog.bintray' version '1.7.3'
     id 'org.hidetake.ssh' version '2.9.0'
     // Uncomment and run `dependencyUpdates` task to check for updates to dependencies
-    //id 'com.github.ben-manes.versions' version '0.14.0'
+    //id 'com.github.ben-manes.versions' version '0.15.0'
 }
 
 applicationName = 'OmegaT'

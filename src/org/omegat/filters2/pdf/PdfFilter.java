@@ -37,6 +37,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -84,7 +85,7 @@ public class PdfFilter  extends AbstractFilter {
         try (PDDocument document = PDDocument.load(infile)) {
             String text = stripper.getText(document);
             return new BufferedReader(new StringReader(text));
-        } catch (NoClassDefFoundError ex) {
+        } catch (InvalidPasswordException ex) {
             Logger.getLogger(getClass().getName()).log(Level.WARNING,
                     OStrings.getString("PDFFILTER_ENCRYPTED_FILE"), infile);
             throw new TranslationException(ex);

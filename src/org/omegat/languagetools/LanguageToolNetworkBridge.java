@@ -234,7 +234,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         Map<String, Object> response = (Map<String, Object>) JsonParser.parse(json);
         Map<String, String> software = (Map<String, String>) response.get("software");
 
-        if (!software.get("apiVersion").equals(API_VERSION)) {
+        if (!String.valueOf(software.get("apiVersion")).equals(API_VERSION)) {
             Log.logWarningRB("LT_API_VERSION_MISMATCH");
         }
 

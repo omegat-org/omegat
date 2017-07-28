@@ -138,7 +138,7 @@ dependencies {
         // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
         compile 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
         compile 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
-        compile 'org.tmatesoft.svnkit:svnkit:1.8.12'
+        compile 'org.tmatesoft.svnkit:svnkit:1.8.14'
 
         // Team project conflict resolution
         compile 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'

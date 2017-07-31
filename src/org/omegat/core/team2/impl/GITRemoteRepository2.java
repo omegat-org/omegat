@@ -27,6 +27,7 @@
 package org.omegat.core.team2.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -47,7 +48,9 @@ import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.dircache.DirCache;
 import org.eclipse.jgit.dircache.DirCacheIterator;
+import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.CoreConfig.AutoCRLF;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Ref;
@@ -132,23 +135,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 git.submoduleInit().call();
                 git.submoduleUpdate().call();
             }
-
-            // Deal with line endings. A normalized repo has LF line endings.
-            // OmegaT uses line endings of OS for storing tmx files.
-            // To do auto converting, we need to change a setting:
-            StoredConfig config = repository.getConfig();
-            if ("\r\n".equals(System.lineSeparator())) {
-                // on windows machines, convert text files to CRLF
-                config.setBoolean("core", null, "autocrlf", true);
-            } else {
-                // on Linux/Mac machines (using LF), don't convert text files
-                // but use input format, unchanged.
-                // NB: I don't know correct setting for OS'es like MacOS <= 9,
-                // which uses CR. Git manual only speaks about converting from/to
-                // CRLF, so for CR, you probably don't want conversion either.
-                config.setString("core", null, "autocrlf", "input");
-            }
-            config.save();
+            configRepo();
             Log.logInfoRB("GIT_FINISH", "clone");
         }
 
@@ -156,6 +143,27 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         try (Git git = new Git(repository)) {
             git.reset().setMode(ResetType.HARD).call();
         }
+    }
+
+    private void configRepo() throws IOException {
+        StoredConfig config = repository.getConfig();
+
+        // Deal with line endings. A normalized repo has LF line endings.
+        // OmegaT uses line endings of OS for storing tmx files.
+        // To do auto converting, we need to change a setting:
+        if ("\r\n".equals(System.lineSeparator())) {
+            // on windows machines, convert text files to CRLF
+            config.setBoolean(ConfigConstants.CONFIG_CORE_SECTION, null, ConfigConstants.CONFIG_KEY_AUTOCRLF, true);
+        } else {
+            // on Linux/Mac machines (using LF), don't convert text files
+            // but use input format, unchanged.
+            // NB: I don't know correct setting for OS'es like MacOS <= 9,
+            // which uses CR. Git manual only speaks about converting from/to
+            // CRLF, so for CR, you probably don't want conversion either.
+            config.setEnum(ConfigConstants.CONFIG_CORE_SECTION, null, ConfigConstants.CONFIG_KEY_AUTOCRLF,
+                    AutoCRLF.INPUT);
+        }
+        config.save();
     }
 
     @Override

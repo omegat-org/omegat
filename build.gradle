@@ -586,7 +586,6 @@ jnlp {
         signJarAddedManifestEntries = ['Codebase': webstartProps.codebase,
             'Permissions': 'all-permissions',
             'Application-Name': applicationName]
-        signJarRemovedManifestEntries = '(?:Trusted-Only|Trusted-Library|.*-Digest)'
         signJarParams = webstartProps.subMap('keystore', 'alias', 'storepass', 'keypass', 'tsaurl')
     }
 }

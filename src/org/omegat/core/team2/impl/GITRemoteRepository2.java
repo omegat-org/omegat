@@ -163,6 +163,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             config.setEnum(ConfigConstants.CONFIG_CORE_SECTION, null, ConfigConstants.CONFIG_KEY_AUTOCRLF,
                     AutoCRLF.INPUT);
         }
+
+        // Perform GC synchronously to avoid locking issues
+        config.setBoolean(ConfigConstants.CONFIG_GC_SECTION, null, ConfigConstants.CONFIG_KEY_AUTODETACH, false);
+
         config.save();
     }
 

@@ -567,7 +567,7 @@ jnlp {
         information {
             title applicationName
             vendor "${applicationName} Development Team"
-            homepage href: 'http://www.omegat.org'
+            homepage href: 'https://omegat.org'
             shortcut(online: false) {
                 desktop()
                 menu submenu: "${applicationName} from WebStart"

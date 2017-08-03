@@ -66,27 +66,46 @@ import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
 
 /**
- * This is test for team project concurrent modification. It doesn't simple junit test, but looks like
- * 'integration' test.
+ * This is test for team project concurrent modification. It doesn't simple
+ * junit test, but looks like 'integration' test.
+ * <p>
+ * This test prepare scenario, execute separate JVMs for concurrent updates,
+ * then check remote repository data.
+ * <p>
+ * Each child process updates own segments with source1..5/0/1/2/3 by values
+ * from 1 and more. Segment source/0 updated each time, but source/1/2/3 updated
+ * once per cycle. After process will be finished, values in tmx should be in
+ * right order, i.e. only by increasing order. That means user will not commit
+ * previous translation for other user's segments.
+ * <p>
+ * Segment with 'concurrent' source will be modified by all users by values from
+ * 1 and more with user's prefix. Conflicts should be resolved by choose higher
+ * value. After process will be finished, values in 'concurrent' segment should
+ * be also increased only.
+ * <p>
+ * Each child saves {@code Integer.MAXVALUE} as last translation, but current
+ * OmegaT implementation doesn't require to commit it, see "GIT_CONFLICT=Push
+ * failed. Will be synchronized next time."
+ * <p>
+ * Note that when using a git repository accessed by the {@code file://}
+ * protocol, gc can cause concurrency issues that result in an error saving the
+ * project and missed sync cycles. When this happens near the end of the test
+ * the test will fail (seen with JGit 4.8). This has not been seen when using
+ * {@code git+ssh} protocol. This is unlikely to be a problem in real-world
+ * scenarios, but a workaround for this test is to disable gc on the repo with
  *
- * This test prepare scenario, execute separate JVMs for concurrent updates, then check remote repository
- * data.
- *
- * Each child process updates own segments with source1..5/0/1/2/3 by values from 1 and more. Segment source/0
- * updated each time, but source/1/2/3 updated once per cycle. After process will be finished, values in tmx
- * should be in right order, i.e. only by increasing order. That means user will not commit previous
- * translation for other user's segments.
- *
- * Segment with 'concurrent' source will be modified by all users by values from 1 and more with user's
- * prefix. Conflicts should be resolved by choose higher value. After process will be finished, values in
- * 'concurrent' segment should be also increased only.
- *
- * Each child saves Integer.MAXVALUE as last translation, but current OmegaT implementation doesn't require to
- * commit it, see "GIT_CONFLICT=Push failed. Will be synchronized next time."
+ * <pre>
+ * {@code
+ * git config gc.auto 0
+ * git config gc.autodetach false
+ * git config receive.autogc false
+ * }
+ * </pre>
+ * <p>
+ * TODO: "svn: E160028: Commit failed" during commit
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  *
- *         TODO: "svn: E160028: Commit failed" during commit
  */
 public final class TestTeamIntegration {
 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 1
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   2 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
@@ -9,13 +9,16 @@
 
   Implemented requests:
 
+  - Garbage-collect git-based projects
+  https://sourceforge.net/p/omegat/feature-requests/1029/
+
   - Do not load fake PO fuzzies when real ones exist
   https://sourceforge.net/p/omegat/feature-requests/1323/
 
   Other changes:
 
   - Move First and Move Last buttons were added to the segmentation
-dialog to move quickly the selected rule to the first or last position 
+dialog to move quickly the selected rule to the first or last position
 in the table
 
   - New Reset Options feature in the Search window menu
@@ -463,10 +466,10 @@ could fail with duplicate numbers
 
   Bug fixes:
 
-  - Extra tags not recognised by tag validation 
+  - Extra tags not recognised by tag validation
   https://sourceforge.net/p/omegat/bugs/876/
 
-  - CR/LF replaced with LF on LaTex files 
+  - CR/LF replaced with LF on LaTex files
   https://sourceforge.net/p/omegat/bugs/865/
 
 ----------------------------------------------------------------------

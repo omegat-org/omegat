@@ -15,9 +15,6 @@
   - Do not load fake PO fuzzies when real ones exist
   https://sourceforge.net/p/omegat/feature-requests/1323/
 
-  - Garbage-collect git-based projects
-  https://sourceforge.net/p/omegat/feature-requests/1029/
-
   Other changes:
 
   - Move First and Move Last buttons were added to the segmentation

@@ -25,7 +25,7 @@ Copyright (C) 2014 Alex Buloichik
 
 package org.omegat.gui.editor.mark;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
@@ -41,34 +41,35 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromAutoTMMarker implements IMarker {
-    protected final HighlightPainter PAINTER_XICE = new TransparentHighlightPainter(
+    protected static final HighlightPainter PAINTER_XICE = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XICE.getColor(), 0.5F);
-    protected final HighlightPainter PAINTER_X100PC = new TransparentHighlightPainter(
+    protected static final HighlightPainter PAINTER_X100PC = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getColor(), 0.5F);
-    protected final HighlightPainter PAINTER_XAUTO = new TransparentHighlightPainter(
+    protected static final HighlightPainter PAINTER_XAUTO = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor(), 0.5F);
 
     @Override
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
             String translationText, boolean isActive) {
-        TMXEntry e = Core.getProject().getTranslationInfo(ste);
-        List<Mark> marks = new ArrayList<Mark>(1);
-        if (Core.getEditor().getSettings().isMarkAutoPopulated() && e.linked != null) {
-            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
-            switch (e.linked) {
-            case xICE:
-                m.painter = PAINTER_XICE;
-                break;
-            case x100PC:
-                m.painter = PAINTER_X100PC;
-                break;
-            case xAUTO:
-                m.painter = PAINTER_XAUTO;
-                break;
-            }
-            marks.add(m);
+        if (!Core.getEditor().getSettings().isMarkAutoPopulated()) {
+            return null;
         }
-
-        return marks;
+        TMXEntry e = Core.getProject().getTranslationInfo(ste);
+        if (e.linked == null) {
+            return null;
+        }
+        Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
+        switch (e.linked) {
+        case xICE:
+            m.painter = PAINTER_XICE;
+            break;
+        case x100PC:
+            m.painter = PAINTER_X100PC;
+            break;
+        case xAUTO:
+            m.painter = PAINTER_XAUTO;
+            break;
+        }
+        return Collections.singletonList(m);
     }
 }

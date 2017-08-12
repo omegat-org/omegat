@@ -44,8 +44,8 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ReplaceMarker implements IMarker {
-    protected static final HighlightPainter PAINTER = new TransparentHighlightPainter(Styles.EditorColor.COLOR_REPLACE.getColor(),
-            0.4F);
+    protected static final HighlightPainter PAINTER = new TransparentHighlightPainter(
+            Styles.EditorColor.COLOR_REPLACE.getColor(), 0.4F);
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,

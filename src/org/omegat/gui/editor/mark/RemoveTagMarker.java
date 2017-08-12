@@ -32,10 +32,8 @@ import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.Document3;
 import org.omegat.gui.editor.EditorController;
-import org.omegat.gui.editor.IEditor;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.gui.Styles;
@@ -48,43 +46,33 @@ import org.omegat.util.gui.Styles;
  * @author Aaron Madlon-Kay
  */
 public class RemoveTagMarker extends AbstractMarker {
-    HighlightPainter PAINTERrtl;
-    AttributeSet ATTRIBUTESltrSource;
-    AttributeSet ATTRIBUTESltrTranslation;
+    private final HighlightPainter painterRtl;
+    private final AttributeSet attributesLtrSource;
+    private final AttributeSet attributesLtrTranslation;
 
     public RemoveTagMarker() throws Exception {
-        // PAINTER = new javax.swing.text.DefaultHighlighter.DefaultHighlightPainter(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor());
-        PAINTERrtl = new TransparentHighlightPainter(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(), 0.2F);
+        painterRtl = new TransparentHighlightPainter(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(), 0.2f);
         toolTip = OStrings.getString("MARKER_REMOVETAG");
 
-        ATTRIBUTESltrSource = Styles.createAttributeSet(null, null, null, true);
-        ATTRIBUTESltrTranslation = Styles.createAttributeSet(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(), null, null, null);
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            @Override
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                pattern = PatternConsts.getRemovePattern();
-            }
-        });
+        attributesLtrSource = Styles.createAttributeSet(null, null, null, true);
+        attributesLtrTranslation = Styles.createAttributeSet(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(),
+                null, null, null);
+        CoreEvents.registerProjectChangeListener(e -> pattern = PatternConsts.getRemovePattern());
     }
 
     @Override
     protected boolean isEnabled() {
-        IEditor e = Core.getEditor();
-        if (e != null && e instanceof EditorController) {
-            // return ((EditorController) e).getOrientation() !=
-            // Document3.ORIENTATION.ALL_LTR;
-        }
         return true;
     }
 
     @Override
     protected void initDrawers(boolean isSource, boolean isActive) {
         if (((EditorController) Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
-            attributes = isSource ? ATTRIBUTESltrSource : ATTRIBUTESltrTranslation;
+            attributes = isSource ? attributesLtrSource : attributesLtrTranslation;
             painter = null;
         } else {
             attributes = null;
-            painter = PAINTERrtl;
+            painter = painterRtl;
         }
     }
 }

@@ -68,6 +68,13 @@ public class ProtectedPartsMarker implements IMarker {
             painter = PAINTER_RTL;
         }
 
+        if (ste.getProtectedParts().length == 0) {
+            return null;
+        }
+        if (sourceText == null && translationText == null) {
+            return null;
+        }
+
         List<Mark> r = new ArrayList<Mark>();
 
         // find protected parts

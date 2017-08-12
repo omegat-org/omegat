@@ -25,7 +25,7 @@ Copyright (C) 2013 Alex Buloichik
 
 package org.omegat.gui.editor.mark;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
@@ -42,7 +42,8 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromMTMarker implements IMarker {
-    protected final HighlightPainter PAINTER = new TransparentHighlightPainter(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM.getColor(), 0.5F);
+    protected static final HighlightPainter PAINTER = new TransparentHighlightPainter(
+            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM.getColor(), 0.5F);
 
     private SourceTextEntry markedSte;
     private String markedText;
@@ -78,8 +79,6 @@ public class ComesFromMTMarker implements IMarker {
         }
         Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
         m.painter = PAINTER;
-        List<Mark> marks = new ArrayList<Mark>(1);
-        marks.add(m);
-        return marks;
+        return Collections.singletonList(m);
     }
 }

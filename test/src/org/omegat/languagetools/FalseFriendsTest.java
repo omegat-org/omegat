@@ -177,6 +177,15 @@ public class FalseFriendsTest extends TestCore {
             @Override
             public void teamSyncPrepare() throws Exception {
             }
+
+            @Override
+            public boolean isRemoteProject() {
+                return false;
+            }
+
+            @Override
+            public void commitSourceFiles() throws Exception {
+            }
         });
         LanguageToolWrapper.setBridgeFromCurrentProject();
     }

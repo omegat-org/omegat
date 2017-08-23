@@ -455,11 +455,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
             }
         });
 
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                onProjectStatusChanged(Core.getProject().isProjectLoaded());
-            }
-        });
+        CoreEvents.registerProjectChangeListener(e -> onProjectStatusChanged(Core.getProject().isProjectLoaded()));
 
         Preferences.addPropertyChangeListener(e -> {
             if (e.getNewValue() instanceof Boolean) {
@@ -543,19 +539,10 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     private void initMacSpecific() {
         try {
             // MacOSX-specific
-            OSXIntegration.setQuitHandler(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    mainWindowMenuHandler.projectExitMenuItemActionPerformed();
-                }
-            });
-            OSXIntegration.setAboutHandler(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    mainWindowMenuHandler.helpAboutMenuItemActionPerformed();
-                }
-            });
-            OSXIntegration.setPreferencesHandler(e -> {
-                mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed();
-            });
+            OSXIntegration.setQuitHandler(e -> mainWindowMenuHandler.projectExitMenuItemActionPerformed());
+            OSXIntegration.setAboutHandler(e -> mainWindowMenuHandler.helpAboutMenuItemActionPerformed());
+            OSXIntegration
+                    .setPreferencesHandler(e -> mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed());
         } catch (NoClassDefFoundError e) {
             Log.log(e);
         }

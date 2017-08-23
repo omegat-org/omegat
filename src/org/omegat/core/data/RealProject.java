@@ -1835,9 +1835,9 @@ public class RealProject implements IProject {
     public boolean isRemoteProject() {
         return remoteRepositoryProvider != null;
     }
-    
+
     @Override
-    public void commitSourceFiles() throws Exception { 
+    public void commitSourceFiles() throws Exception {
         if (isRemoteProject() && config.getSourceDir().isUnderRoot())  {
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_START");

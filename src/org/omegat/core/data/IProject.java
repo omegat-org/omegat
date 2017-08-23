@@ -84,7 +84,7 @@ public interface IProject {
      * @return whether the project is a team project
      */
     boolean isRemoteProject();
-    
+
     /**
      * Commit source files in a team project.
      * @throws java.lang.Exception

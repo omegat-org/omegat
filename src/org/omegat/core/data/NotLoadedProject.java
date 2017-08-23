@@ -51,10 +51,10 @@ public class NotLoadedProject implements IProject {
     public boolean isRemoteProject() {
         return false;
     }
-    
+
     @Override
     public void commitSourceFiles() throws Exception {
-        
+
     }
     public void closeProject() {
     }

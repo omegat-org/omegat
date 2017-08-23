@@ -186,7 +186,7 @@ public class MainWindowMenuHandler {
 
         ProjectUICommands.projectCompile();
     }
-    
+
     /**
      * Commit source files
      */

@@ -337,7 +337,7 @@ public final class ProjectUICommands {
                     props.setRepositories(repos);      // so we add root repository mapping
                 }
                 // We write in all cases, because we might have added default excludes, for instance
-                ProjectFileStorage.writeProjectFile(props); 
+                ProjectFileStorage.writeProjectFile(props);
 
                 //String projectFileURL = dialog.txtRepositoryOrProjectFileURL.getText();
                 //File localDirectory = new File(dialog.txtDirectory.getText());
@@ -789,7 +789,7 @@ public final class ProjectUICommands {
         }.execute();
     }
 
-       public static void projectCommitSourceFiles() {
+    public static void projectCommitSourceFiles() {
         UIThreadsUtil.mustBeSwingThread();
 
         if (!Core.getProject().isProjectLoaded()) {

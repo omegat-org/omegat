@@ -63,7 +63,6 @@ import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
@@ -659,8 +658,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
             projectTeamNewMenuItem.setEnabled(false);
         }
-        if (isProjectOpened && Core.getProject().isRemoteProject() && 
-            Core.getProject().getProjectProperties().getSourceDir().isUnderRoot()) {
+        if (isProjectOpened && Core.getProject().isRemoteProject()
+                && Core.getProject().getProjectProperties().getSourceDir().isUnderRoot()) {
             projectCommitSourceFiles.setEnabled(true);
         } else {
             projectCommitSourceFiles.setEnabled(false);

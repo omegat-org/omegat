@@ -109,8 +109,8 @@ public final class ProjectUICommands {
         }
         final File dir = ndc.getSelectedFile();
 
-        new SwingWorker<Object, Void>() {
-            protected Object doInBackground() throws Exception {
+        new SwingWorker<Void, Void>() {
+            protected Void doInBackground() throws Exception {
 
                 dir.mkdirs();
 
@@ -183,8 +183,8 @@ public final class ProjectUICommands {
         }
         final File dir = ndc.getSelectedFile();
 
-        new SwingWorker<Object, Void>() {
-            protected Object doInBackground() throws Exception {
+        new SwingWorker<Void, Void>() {
+            protected Void doInBackground() throws Exception {
                 dir.mkdirs();
 
                 final ProjectProperties newProps = new ProjectProperties(dir);
@@ -249,8 +249,8 @@ public final class ProjectUICommands {
         final File med = ndm.getSelectedFile().getName().toLowerCase().endsWith(".zip")
                 ? ndm.getSelectedFile() : new File(ndm.getSelectedFile().getAbsolutePath() + ".zip");
 
-        new SwingWorker<Object, Void>() {
-            protected Object doInBackground() throws Exception {
+        new SwingWorker<Void, Void>() {
+            protected Void doInBackground() throws Exception {
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
@@ -292,9 +292,9 @@ public final class ProjectUICommands {
         if (Core.getProject().isProjectLoaded()) {
             return;
         }
-        new SwingWorker<Object, Void>() {
+        new SwingWorker<Void, Void>() {
             File projectRoot;
-            protected Object doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB(null);
 
                 final NewTeamProject dialog = new NewTeamProject(Core.getMainWindow().getApplicationFrame());
@@ -428,8 +428,8 @@ public final class ProjectUICommands {
             projectRootFolder = projectDirectory;
         }
 
-        new SwingWorker<Object, Void>() {
-            protected Object doInBackground() throws Exception {
+        new SwingWorker<Void, Void>() {
+            protected Void doInBackground() throws Exception {
 
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
@@ -541,10 +541,10 @@ public final class ProjectUICommands {
 
         final ProjectProperties props = Core.getProject().getProjectProperties();
 
-        new SwingWorker<Object, Void>() {
+        new SwingWorker<Void, Void>() {
             int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
-            protected Object doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
@@ -585,8 +585,8 @@ public final class ProjectUICommands {
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
-        new SwingWorker<Object, Void>() {
-            protected Object doInBackground() throws Exception {
+        new SwingWorker<Void, Void>() {
+            protected Void doInBackground() throws Exception {
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
@@ -621,8 +621,8 @@ public final class ProjectUICommands {
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
-        new SwingWorker<Object, Void>() {
-            protected Object doInBackground() throws Exception {
+        new SwingWorker<Void, Void>() {
+            protected Void doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVING");
 
                 IMainWindow mainWindow = Core.getMainWindow();
@@ -692,10 +692,10 @@ public final class ProjectUICommands {
             return;
         }
 
-        new SwingWorker<Object, Void>() {
+        new SwingWorker<Void, Void>() {
             int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
-            protected Object doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(true);
                     ProjectFactory.closeProject();
@@ -731,8 +731,8 @@ public final class ProjectUICommands {
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
-        new SwingWorker<Object, Void>() {
-            protected Object doInBackground() throws Exception {
+        new SwingWorker<Void, Void>() {
+            protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(true);
                     try {
@@ -764,9 +764,9 @@ public final class ProjectUICommands {
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
-        new SwingWorker<Object, Void>() {
+        new SwingWorker<Void, Void>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(false);
                     try {
@@ -799,9 +799,9 @@ public final class ProjectUICommands {
         // Commit the current entry first
         Core.getEditor().commitAndLeave();
 
-        new SwingWorker<Object, Void>() {
+        new SwingWorker<Void, Void>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
                     try {
                         Core.getProject().commitSourceFiles();

@@ -1849,7 +1849,7 @@ public class RealProject implements IProject {
                 Log.logErrorRB("TF_COMMIT_ERROR");
                 Log.log(e);
                 throw new IOException(OStrings.getString("TF_COMMIT_ERROR") + "\n"
-                        + e.getMessage());
+                        + e.getMessage(), e);
             }
         }
     }

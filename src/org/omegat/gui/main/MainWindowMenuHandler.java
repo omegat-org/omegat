@@ -101,7 +101,7 @@ import org.omegat.util.TagUtil.Tag;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
-public class MainWindowMenuHandler {
+public final class MainWindowMenuHandler {
     private final MainWindow mainWindow;
 
     public MainWindowMenuHandler(final MainWindow mainWindow) {

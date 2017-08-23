@@ -3,7 +3,8 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008      Alex Buloichik
+ Copyright (C) 2008 Alex Buloichik
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,12 +40,22 @@ import org.omegat.util.Language;
  * Project implementation when project not really loaded.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class NotLoadedProject implements IProject {
 
     public void compileProject(String sourcePattern) throws IOException, TranslationException {
     }
 
+    @Override
+    public boolean isRemoteProject() {
+        return false;
+    }
+    
+    @Override
+    public void commitSourceFiles() throws Exception {
+        
+    }
     public void closeProject() {
     }
 

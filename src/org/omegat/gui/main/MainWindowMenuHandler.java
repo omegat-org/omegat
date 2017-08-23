@@ -13,6 +13,7 @@
                2013 Zoltan Bartko, Didier Briel, Yu Tang
                2014 Aaron Madlon-Kay
                2015 Yu Tang, Aaron Madlon-Kay, Didier Briel
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -184,6 +185,13 @@ public class MainWindowMenuHandler {
         }
 
         ProjectUICommands.projectCompile();
+    }
+    
+    /**
+     * Commit source files
+     */
+    public void projectCommitSourceFilesActionPerformed() {
+        ProjectUICommands.projectCommitSourceFiles();
     }
 
     /**

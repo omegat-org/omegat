@@ -6,6 +6,7 @@
  Copyright (C) 2008 Alex Buloichik
                2010 Didier Briel
                2014-2015 Alex Buloichik
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -77,6 +78,18 @@ public interface IProject {
      * Create translated documents.
      */
     void compileProject(String sourcePattern) throws Exception;
+
+    /**
+     * Tells whether a project is a team project
+     * @return whether the project is a team project
+     */
+    boolean isRemoteProject();
+    
+    /**
+     * Commit source files in a team project.
+     * @throws java.lang.Exception
+     */
+    void commitSourceFiles() throws Exception;
 
     /**
      * Get project properties.

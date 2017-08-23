@@ -789,6 +789,40 @@ public final class ProjectUICommands {
         }.execute();
     }
 
+       public static void projectCommitSourceFiles() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // Commit the current entry first
+        Core.getEditor().commitAndLeave();
+
+        new SwingWorker<Object, Void>() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                Core.executeExclusively(true, () -> {
+                    try {
+                        Core.getProject().commitSourceFiles();
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+                } catch (Exception ex) {
+                    processSwingWorkerException(ex, "TF_COMMIT_ERROR");
+                }
+            }
+        }.execute();
+    }
+
     public static void projectRemote(String url) {
         String dir = url.replace("/", "_").replace(':', '_');
         File projectDir = new File(StaticUtils.getConfigDir() + "/remoteProjects/" + dir);

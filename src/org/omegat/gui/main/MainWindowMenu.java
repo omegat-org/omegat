@@ -14,6 +14,7 @@
                2013 Zoltan Bartko, Didier Briel, Yu Tang
                2014 Aaron Madlon-Kay
                2015 Didier Briel, Yu Tang
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -226,6 +227,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.addSeparator();
         projectMenu.add(projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE"));
         projectMenu.addSeparator();
+        projectMenu.add(projectCommitSourceFiles = createMenuItem("TF_MENU_FILE_COMMIT"));
+        projectMenu.addSeparator();       
         projectMenu.add(projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE"));
         projectMenu.add(projectSingleCompileMenuItem = createMenuItem("TF_MENU_FILE_SINGLE_COMPILE"));
         projectMenu.addSeparator();
@@ -669,6 +672,14 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
             projectTeamNewMenuItem.setEnabled(false);
         }
+        if (isProjectOpened && Core.getProject().isRemoteProject() && 
+            Core.getProject().getProjectProperties().getSourceDir().isUnderRoot()) {
+            projectCommitSourceFiles.setEnabled(true);
+        } else {
+            projectCommitSourceFiles.setEnabled(false);
+        }
+            
+
 
     }
 
@@ -770,6 +781,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JCheckBoxMenuItem optionsMTAutoFetchCheckboxMenuItem;
     JMenuItem optionsPreferencesMenuItem;
     JMenuItem projectCloseMenuItem;
+    JMenuItem projectCommitSourceFiles;
     JMenuItem projectCompileMenuItem;
     JMenuItem projectSingleCompileMenuItem;
     JMenuItem projectMedOpenMenuItem;

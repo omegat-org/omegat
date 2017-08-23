@@ -11,6 +11,7 @@
                2013 Aaron Madlon-Kay, Didier Briel
                2014 Aaron Madlon-Kay, Didier Briel
                2015 Aaron Madlon-Kay
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -1830,4 +1831,26 @@ public class RealProject implements IProject {
         isOnlineMode = false;
     }
 
+    @Override
+    public boolean isRemoteProject() {
+        return remoteRepositoryProvider != null;
+    }
+    
+    @Override
+    public void commitSourceFiles() throws Exception { 
+        if (isRemoteProject() && config.getSourceDir().isUnderRoot())  {
+            try {
+                Core.getMainWindow().showStatusMessageRB("TF_COMMIT_START");
+                remoteRepositoryProvider.switchAllToLatest();
+                remoteRepositoryProvider.copyFilesFromProjectToRepo(config.getSourceDir().getUnderRoot(), null);
+                remoteRepositoryProvider.commitFiles(config.getSourceDir().getUnderRoot(), "Commit source files");
+                Core.getMainWindow().showStatusMessageRB("TF_COMMIT_DONE");
+            } catch (Exception e) {
+                Log.logErrorRB("TF_COMMIT_ERROR");
+                Log.log(e);
+                throw new IOException(OStrings.getString("TF_COMMIT_ERROR") + "\n"
+                        + e.getMessage());
+            }
+        }
+    }
 }

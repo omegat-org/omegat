@@ -41,15 +41,16 @@
                   <dl>
                      <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5809">1.1. Plain text files</a></span></dt>
                      <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5888">1.2. Formatted text files</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5986">1.3. PDF files</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Other file formats</a></span></dt>
                <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Right to left languages</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6114">3.1. Mixing RTL and LTR strings in segments</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6137">3.2. <span class="application">OmegaT</span> tags in RTL segments</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6151">3.3. Creating translated RTL documents</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6157">3.1. Mixing RTL and LTR strings in segments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6180">3.2. <span class="application">OmegaT</span> tags in RTL segments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6194">3.3. Creating translated RTL documents</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -298,19 +299,66 @@
                         correctly.
                </p>
             </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5986"></a>1.3.&nbsp;PDF files<a class="indexterm" name="d0e5989"></a><a class="indexterm" name="d0e5994"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>PDF files are a special case. They contain text formatting
+                    information, but such information cannot be reused by
+                    <span class="application">OmegaT</span> in order to create target files.
+                    Thus, PDF files are handled as plain text files, and output files are
+                    plain text files.
+               </p>
+               <p>If you need to reproduce text formatting (as well as other
+                    things such as drawings) in your translation, there are three ways
+                    to try:
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Use <span class="application">OmegaT’s</span> default filter
+                                 (PDF input), translate, create a target file (it will be a plain
+                                 text file), add relevant formatting and items manually.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Use the Iceni Infix filter.
+                                 See <a class="ulink" href="https://omegat.org/howtos/iceni_infix.html" target="_top">Howto - Translating PDF files with Iceni Infix and OmegaT</a>.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Import the source file to
+                                 <a class="ulink" href="https://www.libreoffice.org/discover/draw/" target="_top">LibreOffice Draw</a>,
+                                 save it as an ODG file, translate, export to PDF as needed.
+                        </p>
+                     </li>
+                  </ol>
+               </div>
+               <p><span class="bold"><strong>Note:</strong></span> the above information
+                    applies only to PDF files with a text layer. If you have a PDF file
+                    made of scanned pages (sometimes such files are referred to as ‘dead’
+                    PDFs), you need to use an OCR (optical character recognition) program
+                    to recognize the text and convert it to a format that can be handled
+                    by OmegaT.
+               </p>
+            </div>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Other file formats<a class="indexterm" name="d0e5989"></a><a class="indexterm" name="d0e5994"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Other file formats<a class="indexterm" name="d0e6032"></a><a class="indexterm" name="d0e6037"></a></h2>
                   </div>
                </div>
             </div>
             <p>Other plain text or formatted text file formats suitable for
                    processing in OmegaT may also exist.
             </p>
-            <p><a class="indexterm" name="d0e6002"></a>External tools can be used to convert files to supported
+            <p><a class="indexterm" name="d0e6045"></a>External tools can be used to convert files to supported
                    formats. The translated files will then need to be converted back to the
                    original format. For example, if you have an outdated Microsoft Word
                    version, that does not handle the ODT format, here's a round trip for Word
@@ -361,7 +409,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Right to left languages<a class="indexterm" name="d0e6036"></a><a class="indexterm" name="d0e6039"></a><a class="indexterm" name="d0e6044"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Right to left languages<a class="indexterm" name="d0e6079"></a><a class="indexterm" name="d0e6082"></a><a class="indexterm" name="d0e6087"></a></h2>
                   </div>
                </div>
             </div>
@@ -410,7 +458,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6114"></a>3.1.&nbsp;Mixing RTL and LTR strings in segments<a class="indexterm" name="d0e6117"></a><a class="indexterm" name="d0e6122"></a><a class="indexterm" name="d0e6127"></a></h3>
+                        <h3 class="title"><a name="d0e6157"></a>3.1.&nbsp;Mixing RTL and LTR strings in segments<a class="indexterm" name="d0e6160"></a><a class="indexterm" name="d0e6165"></a><a class="indexterm" name="d0e6170"></a></h3>
                      </div>
                   </div>
                </div>
@@ -432,7 +480,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6137"></a>3.2.&nbsp;<span class="application">OmegaT</span> tags in RTL segments<a class="indexterm" name="d0e6142"></a></h3>
+                        <h3 class="title"><a name="d0e6180"></a>3.2.&nbsp;<span class="application">OmegaT</span> tags in RTL segments<a class="indexterm" name="d0e6185"></a></h3>
                      </div>
                   </div>
                </div>
@@ -456,7 +504,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6151"></a>3.3.&nbsp;Creating translated RTL documents<a class="indexterm" name="d0e6154"></a><a class="indexterm" name="d0e6159"></a><a class="indexterm" name="d0e6164"></a></h3>
+                        <h3 class="title"><a name="d0e6194"></a>3.3.&nbsp;Creating translated RTL documents<a class="indexterm" name="d0e6197"></a><a class="indexterm" name="d0e6202"></a><a class="indexterm" name="d0e6207"></a></h3>
                      </div>
                   </div>
                </div>

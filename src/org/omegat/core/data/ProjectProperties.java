@@ -8,6 +8,7 @@
                2013 Aaron Madlon-Kay, Yu Tang
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
+               2017 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -106,8 +107,8 @@ public class ProjectProperties {
         setSourceLanguage("EN-US");
         setTargetLanguage("EN-GB");
 
-        projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
-        projectFilters = FilterMaster.loadConfig(new File(getProjectInternal(), FilterMaster.FILE_FILTERS));
+        loadProjectSRX();
+        loadProjectFilters();
 
         setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(getSourceLanguage()));
         setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(getTargetLanguage()));
@@ -399,12 +400,27 @@ public class ProjectProperties {
         this.projectSRX = projectSRX;
     }
 
+    /**
+     * Loads segmentation.conf if found in the /omegat folder of the project
+     */
+    public void loadProjectSRX(){
+        this.projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
+    }
+
     public Filters getProjectFilters() {
         return projectFilters;
     }
 
     public void setProjectFilters(Filters projectFilters) {
         this.projectFilters = projectFilters;
+    }
+    
+    /**
+     * Loads filters.xml if found in the /omegat filter of the project
+     * @throws IOException 
+     */
+    public void loadProjectFilters() throws IOException {
+        projectFilters = FilterMaster.loadConfig(new File(getProjectInternal(), FilterMaster.FILE_FILTERS));
     }
 
     public String getExternalCommand() {

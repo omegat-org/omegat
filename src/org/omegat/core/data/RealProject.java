@@ -336,16 +336,6 @@ public class RealProject implements IProject {
 
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
-            // Set project specific file filters if they exist, or defaults otherwise.
-            // This MUST happen before calling loadTranslations() because the setting to ignore file context
-            // for alt translations is a filter setting, and it affects how alt translations are hashed.
-            Filters filters = Optional.ofNullable(config.getProjectFilters()).orElse(Preferences.getFilters());
-            Core.setFilterMaster(new FilterMaster(filters));
-
-            // Set project specific segmentation rules if they exist, or defaults otherwise.
-            SRX srx = Optional.ofNullable(config.getProjectSRX()).orElse(Preferences.getSRX());
-            Core.setSegmenter(new Segmenter(srx));
-
             if (remoteRepositoryProvider != null) {
                 tmxPrepared = null;
                 glossaryPrepared = null;
@@ -354,6 +344,18 @@ public class RealProject implements IProject {
                 // save changed TMX or just retrieve from repository
                 remoteRepositoryProvider.switchAllToLatest();
 
+                // Add filters.xml and segmentation.conf
+                for (String file : new String[] {
+                    '/' + config.getProjectInternalRelative() + FilterMaster.FILE_FILTERS,
+                    '/' + config.getProjectInternalRelative() + SRX.CONF_SENTSEG }) {
+                remoteRepositoryProvider.copyFilesFromRepoToProject(file);
+                }
+                // After adding filters.xml and segmentation.conf, we must reload them again
+                config.loadProjectFilters();
+                config.loadProjectSRX();
+                
+                loadFilterSettings();
+                
                 loadTranslations();
                 Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                 rebaseAndCommitProject(true);
@@ -372,9 +374,15 @@ public class RealProject implements IProject {
                             '/' + config.getWritableGlossaryFile().getUnderRoot());
                 }
             } else {
+                loadFilterSettings();
                 loadTranslations();
             }
 
+            // Set project specific segmentation rules if they exist, or defaults otherwise.
+            // This can be done after loadTranslations(), as segmentation is not used for this
+            SRX srx = Optional.ofNullable(config.getProjectSRX()).orElse(Preferences.getSRX());
+            Core.setSegmenter(new Segmenter(srx));
+            
             loadSourceFiles();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
@@ -426,6 +434,17 @@ public class RealProject implements IProject {
         }
 
         Log.logInfoRB("LOG_DATAENGINE_LOAD_END");
+    }
+
+    /**
+     * Load filter settings, either from the project or from global options
+     */
+    private void loadFilterSettings() {
+        // Set project specific file filters if they exist, or defaults otherwise.
+        // This MUST happen before calling loadTranslations() because the setting to ignore file context
+        // for alt translations is a filter setting, and it affects how alt translations are hashed.
+        Filters filters = Optional.ofNullable(config.getProjectFilters()).orElse(Preferences.getFilters());
+        Core.setFilterMaster(new FilterMaster(filters));
     }
 
     /**

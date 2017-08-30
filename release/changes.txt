@@ -2,7 +2,7 @@
  OmegaT 4.1.2 update 2 
 ----------------------------------------------------------------------
   1 Enhancement
-  0 Bug fix
+  1 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 2 vs 4.1.2 update 1
@@ -11,6 +11,12 @@
 
   - Commit source files
   https://sourceforge.net/p/omegat/feature-requests/1329/
+
+
+  Bug fixes:
+
+  - segmentation.conf and filters.xml not mirrored in team projects
+  https://sourceforge.net/p/omegat/bugs/864/
 
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 1 (2017-08-09)

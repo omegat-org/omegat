@@ -41,15 +41,16 @@
                   <dl>
                      <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5814">1.1. Fichiers texte brut</a></span></dt>
                      <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5893">1.2. Fichiers texte formaté</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5991">1.3. Fichiers PDF</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Autres formats de fichier</a></span></dt>
                <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Les langues qui se lisent de droite à gauche</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6119">3.1. Mélange entre les chaînes RTL et LTR dans les segments</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6142">3.2. <span class="application">OmegaT</span> Les balises dans les segments RTL</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6156">3.3. Création de documents traduits RTL(droite à gauche)</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6162">3.1. Mélange entre les chaînes RTL et LTR dans les segments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6185">3.2. <span class="application">OmegaT</span> Les balises dans les segments RTL</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6199">3.3. Création de documents traduits RTL(droite à gauche)</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -276,19 +277,55 @@
                   correctement.
                </p>
             </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5991"></a>1.3.&nbsp;Fichiers PDF<a class="indexterm" name="d0e5994"></a><a class="indexterm" name="d0e5999"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Les fichiers PDF sont un cas particulier. Ils contiennent des informations de mise en forme du texte qu'<span class="application">OmegaT</span> ne peut pas réutiliser pour créer les fichiers cible. Les fichiers PDF sont donc traités comme des fichiers de texte brut
+                  et les fichiers de sortie sont aussi au format texte brut.
+               </p>
+               <p>Pour reproduire la mise en forme du texte et d'autres éléments, par exemple des graphiques, dans votre traduction, suivez
+                  une des trois méthodes suivantes&nbsp;:
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Utilisez le filtre par défaut d'<span class="application">OmegaT</span> (Entrée PDF), traduisez, créez le fichier cible (qui sera au format de fichier texte brut), puis ajoutez manuellement la
+                           mise en forme et les éléments.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Utilisez le filtre Iceni Infix. Consultez le <a class="ulink" href="https://omegat.org/fr/howtos/iceni_infix" target="_top">guide pratique relatif à la traduction de fichiers PDF avec Iceni Infix et OmegaT</a>.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Importez le fichier source dans <a class="ulink" href="https://fr.libreoffice.org/discover/draw/" target="_top">LibreOffice Draw</a>, enregistrez-le sous le format ODG, traduisez-le et puis exportez-le au format PDF si besoin.
+                        </p>
+                     </li>
+                  </ol>
+               </div>
+               <p><span class="bold"><strong>Note&nbsp;:</strong></span> la méthode ci-dessus convient uniquement aux fichiers PDF qui contiennent une couche de texte. Si votre fichier PDF se compose
+                  de pages numérisées, vous devrez utiliser un programme de reconnaissance optique de caractères (ROC ou, en anglais, OCR) pour
+                  reconnaître et convertir le texte dans un format pris en charge par OmegaT.
+               </p>
+            </div>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Autres formats de fichier<a class="indexterm" name="d0e5994"></a><a class="indexterm" name="d0e5999"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Autres formats de fichier<a class="indexterm" name="d0e6037"></a><a class="indexterm" name="d0e6042"></a></h2>
                   </div>
                </div>
             </div>
             <p>Il est également possible de trouver d'autres fichiers texte brut ou fichiers texte formaté susceptibles d'être pris en charge
                par OmegaT.
             </p>
-            <p><a class="indexterm" name="d0e6007"></a>Des outils externes peuvent être utilisés pour convertir les fichiers dans des formats pris en charge. Les fichiers traduits
+            <p><a class="indexterm" name="d0e6050"></a>Des outils externes peuvent être utilisés pour convertir les fichiers dans des formats pris en charge. Les fichiers traduits
                devront alors être reconvertis dans le format original. Par exemple, si vous possédez une ancienne version de Microsoft Word,
                qui ne prend pas en charge le format ODT, vous trouverez ici le moyen de permettre aux fichiers Word portant l'extension DOC
                de faire l'aller-retour :
@@ -336,7 +373,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Les langues qui se lisent de droite à gauche<a class="indexterm" name="d0e6041"></a><a class="indexterm" name="d0e6044"></a><a class="indexterm" name="d0e6049"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Les langues qui se lisent de droite à gauche<a class="indexterm" name="d0e6084"></a><a class="indexterm" name="d0e6087"></a><a class="indexterm" name="d0e6092"></a></h2>
                   </div>
                </div>
             </div>
@@ -376,7 +413,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6119"></a>3.1.&nbsp;Mélange entre les chaînes RTL et LTR dans les segments<a class="indexterm" name="d0e6122"></a><a class="indexterm" name="d0e6127"></a><a class="indexterm" name="d0e6132"></a></h3>
+                        <h3 class="title"><a name="d0e6162"></a>3.1.&nbsp;Mélange entre les chaînes RTL et LTR dans les segments<a class="indexterm" name="d0e6165"></a><a class="indexterm" name="d0e6170"></a><a class="indexterm" name="d0e6175"></a></h3>
                      </div>
                   </div>
                </div>
@@ -393,7 +430,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6142"></a>3.2.&nbsp;<span class="application">OmegaT</span> Les balises dans les segments RTL<a class="indexterm" name="d0e6147"></a></h3>
+                        <h3 class="title"><a name="d0e6185"></a>3.2.&nbsp;<span class="application">OmegaT</span> Les balises dans les segments RTL<a class="indexterm" name="d0e6190"></a></h3>
                      </div>
                   </div>
                </div>
@@ -413,7 +450,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6156"></a>3.3.&nbsp;Création de documents traduits RTL(droite à gauche)<a class="indexterm" name="d0e6159"></a><a class="indexterm" name="d0e6164"></a><a class="indexterm" name="d0e6169"></a></h3>
+                        <h3 class="title"><a name="d0e6199"></a>3.3.&nbsp;Création de documents traduits RTL(droite à gauche)<a class="indexterm" name="d0e6202"></a><a class="indexterm" name="d0e6207"></a><a class="indexterm" name="d0e6212"></a></h3>
                      </div>
                   </div>
                </div>

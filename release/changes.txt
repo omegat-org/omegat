@@ -12,7 +12,6 @@
   - Commit source files
   https://sourceforge.net/p/omegat/feature-requests/1329/
 
-
   Bug fixes:
 
   - segmentation.conf and filters.xml not mirrored in team projects

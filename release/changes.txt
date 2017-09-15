@@ -2,7 +2,7 @@
  OmegaT 4.1.2 update 2 
 ----------------------------------------------------------------------
   1 Enhancement
-  1 Bug fix
+  2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 2 vs 4.1.2 update 1
@@ -16,6 +16,9 @@
 
   - segmentation.conf and filters.xml not mirrored in team projects
   https://sourceforge.net/p/omegat/bugs/864/
+
+  - When retrieving files from mapped HTTP locations, OmegaT crashed
+if the server didn't send an Etag
 
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 1 (2017-08-09)

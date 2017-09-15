@@ -205,7 +205,11 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
             if (!temp.renameTo(out)) {
                 throw new IOException();
             }
-            etags.setProperty(file, etag);
+            try {
+                etags.setProperty(file, etag);
+            } catch (Exception ex) {
+                // Etags are optionnal, we eat the exception is there is none
+            }
         } finally {
             conn.disconnect();
         }

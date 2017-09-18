@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   1 Enhancement
   2 Bug fixes
-  0 Localisation update
+  1 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 2 vs 4.1.2 update 1
 
@@ -19,6 +19,10 @@
 
   - When retrieving files from mapped HTTP locations, OmegaT crashed
 if the server didn't send an Etag
+
+  Localisation Updates:
+
+  - Dutch localisation updated to 4.1.2 update 2 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 1 (2017-08-09)

@@ -47,12 +47,9 @@
 
       <literallayout><code># OmegaT.exe runtime configuration
 # To use a parameter, remove the '#' before the '-'
-# Memory 
--Xmx1024M 
-# Language 
--Duser.language=FR
-# Country 
--Duser.country=CA </code></literallayout>
+# Memory -Xmx1024M
+# Language -Duser.language=FR
+# Country -Duser.country=CA </code></literallayout>
 
       <para>Advies: als OmegaT traag werkt in sessies van Remote Desktop onder Windows, zou u deze optie kunnen gebruiken:</para>
 
@@ -228,7 +225,7 @@
 
       <para>U kunt het gedrag van OmegaT' aanpassen door de <emphasis>Eigenschappen</emphasis> als ook het bestand <emphasis>Configuration.properties</emphasis> in het pakket te bewerken.</para>
 
-      <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>Configuration.properties</emphasis></application>, en open dan het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>Configuration.properties</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<indexterm class="singular">
+      <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>Configuration.properties</emphasis></application>, en open dan het bestand door er met rechts op te klikken en selecteer de tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>Configuration.properties</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<indexterm class="singular">
           <primary>OmegaT aanpassen</primary> <secondary>OS X</secondary> <tertiary>Startparameters</tertiary>
         </indexterm></para>
 

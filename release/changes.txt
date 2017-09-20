@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 2 
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancement
   2 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,11 @@
 
   - Commit source files
   https://sourceforge.net/p/omegat/feature-requests/1329/
+  
+  Other enhancements:
+
+  - The script svn_cleanup_selected.groovy was rewritten to fully support
+team projects in 4.x format or work on any selected folder (recursively)
 
   Bug fixes:
 

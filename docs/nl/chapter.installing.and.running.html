@@ -154,12 +154,9 @@
                <div class="literallayout">
                   <p><code class="code">#&nbsp;OmegaT.exe&nbsp;runtime&nbsp;configuration<br>
                         #&nbsp;To&nbsp;use&nbsp;a&nbsp;parameter,&nbsp;remove&nbsp;the&nbsp;'#'&nbsp;before&nbsp;the&nbsp;'-'<br>
-                        #&nbsp;Memory&nbsp;<br>
-                        -Xmx1024M&nbsp;<br>
-                        #&nbsp;Language&nbsp;<br>
-                        -Duser.language=FR<br>
-                        #&nbsp;Country&nbsp;<br>
-                        -Duser.country=CA&nbsp;</code></p>
+                        #&nbsp;Memory&nbsp;-Xmx1024M<br>
+                        #&nbsp;Language&nbsp;-Duser.language=FR<br>
+                        #&nbsp;Country&nbsp;-Duser.country=CA&nbsp;</code></p>
                </div>
                <p>Advies: als OmegaT traag werkt in sessies van Remote Desktop onder Windows, zou u deze optie kunnen gebruiken:</p>
                <div class="literallayout">
@@ -410,7 +407,7 @@
                </p>
                <p>U kunt het gedrag van OmegaT' aanpassen door de <span class="emphasis"><em>Eigenschappen</em></span> als ook het bestand <span class="emphasis"><em>Configuration.properties</em></span> in het pakket te bewerken.
                </p>
-               <p>Klik met rechts op <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> en selecteer "Pakketinhoud weergeven" om toegang te krijgen tot <span class="application"><span class="emphasis"><em>Configuration.properties</em></span></span>, en open dan het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met "cd"
+               <p>Klik met rechts op <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> en selecteer "Pakketinhoud weergeven" om toegang te krijgen tot <span class="application"><span class="emphasis"><em>Configuration.properties</em></span></span>, en open dan het bestand door er met rechts op te klikken en selecteer de tekstverwerker van uw keuze. U kunt ook met "cd"
                   daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <span class="application"><span class="emphasis"><em>Configuration.properties</em></span> openen in een verwerker voor de opdrachtregel zoals emacs of vi</span>.<a class="indexterm" name="d0e823"></a></p>
                <p>Opties worden gewijzigd door <span class="emphasis"><em>Configuration.properties</em></span> aan te passen. Verwijder, voor vooraf gedefinieerde opties, de # vóór een parameter om het in te schakelen. Bijvoorbeeld:
                   <code class="filename">LANGUAGE="-Duser.language=ja"</code> (zonder de #) zal <span class="application">OmegaT</span> starten met de gebruikersinterface in het Japans.

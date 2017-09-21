@@ -666,7 +666,7 @@ public class EditorController implements IEditor {
      */
     public String getCurrentFile() {
         IProject proj = Core.getProject();
-        if (proj == null) {
+        if (proj == null || !proj.isProjectLoaded()) {
             return null;
         }
         if (proj.getProjectFiles().isEmpty()) {

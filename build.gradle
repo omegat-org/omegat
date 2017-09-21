@@ -431,8 +431,11 @@ if (macDistEnabled) {
     }
     
     task macSignedDistZip(type: Zip) {
-        from installMacSignedDist.outputs
-        archiveName = "${applicationName}_${version}${omtVersion.beta}_Mac_Signed.zip"
+        def zipRoot = "${applicationName}_${version}${omtVersion.beta}_Mac_Signed"
+        from(installMacSignedDist.outputs) {
+            into zipRoot
+        }
+        archiveName = "${zipRoot}.zip"
     }
     
     task mac(dependsOn: [macDistZip, macSignedDistZip]) {

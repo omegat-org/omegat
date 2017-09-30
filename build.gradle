@@ -17,7 +17,7 @@ applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
 ext {
-    javaVersion = '1.8'
+    javaVersion = '1.9'
     omtVersion = loadProperties file('src/org/omegat/Version.properties')
     envIsCi = project.hasProperty('envIsCi')
 }
@@ -56,6 +56,47 @@ repositories {
     jcenter()
     maven {
         url 'http://dl.bintray.com/omegat-org/maven'
+    }
+}
+
+// Java 9 module stuff. See:
+// https://guides.gradle.org/building-java-9-modules/#modify_the_code_compilejava_code_task_to_produce_a_module
+
+ext.moduleName = 'org.omegat'
+
+compileJava {
+    inputs.property('moduleName', moduleName)
+    doFirst {
+        options.compilerArgs = [
+            '--module-path', classpath.asPath,
+        ]
+        classpath = files()
+    }
+}
+
+compileTestJava {
+    inputs.property("moduleName", moduleName)
+    doFirst {
+        options.compilerArgs = [
+            '--module-path', classpath.asPath, 
+            '--add-modules', 'junit',  
+            '--add-reads', "$moduleName=junit", 
+            '--patch-module', "$moduleName=" + files(sourceSets.test.java.srcDirs).asPath, 
+        ]
+        classpath = files()
+    }
+}
+
+test {
+    inputs.property("moduleName", moduleName)
+    doFirst {
+        jvmArgs = [
+            '--module-path', classpath.asPath, 
+            '--add-modules', 'ALL-MODULE-PATH', 
+            '--add-reads', "$moduleName=junit", 
+            '--patch-module', "$moduleName=" + files(sourceSets.test.java.outputDir).asPath, 
+        ]
+        classpath = files()
     }
 }
 

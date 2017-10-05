@@ -429,7 +429,7 @@ if (macDistEnabled) {
             }
         }
     }
-    
+
     task macSignedDistZip(type: Zip) {
         def zipRoot = "${applicationName}_${version}${omtVersion.beta}_Mac_Signed"
         from(installMacSignedDist.outputs) {
@@ -437,7 +437,7 @@ if (macDistEnabled) {
         }
         archiveName = "${zipRoot}.zip"
     }
-    
+
     task mac(dependsOn: [macDistZip, macSignedDistZip]) {
         description = 'Build the Mac distributions.'
     }
@@ -613,7 +613,7 @@ processResources {
     def revision = detectRevision()
     inputs.property 'revision', revision
     doLast {
-        logger.lifecycle("Detected revision ${revision}") 
+        logger.lifecycle("Detected revision ${revision}")
         def versionFile = file("${sourceSets.main.output.resourcesDir}/org/omegat/Version.properties")
         ant.propertyfile(file: versionFile) {
             entry(key: 'revision', value: revision)
@@ -700,7 +700,7 @@ allprojects {
     }
     tasks.withType(JavaCompile) {
        options.compilerArgs.addAll '-Xlint', '-Werror'
-    } 
+    }
 }
 
 findbugs {
@@ -787,7 +787,7 @@ publishing {
             groupId 'org.omegat'
             artifactId 'omegat'
             version mavenStyleVersion
-    
+
             from components.java
             artifact sourceJar {
                 classifier 'sources'

@@ -219,7 +219,7 @@ ext {
 
 task genDocIndex(type: Copy) {
     description = 'Generate the docs index file'
-    def docPropsFiles = fileTree(dir: 'docs', include: '*/version.properties').findAll {
+    def docPropsFiles = fileTree(dir: 'docs', include: '*/version*.properties').findAll {
         file("${it.parent}/index.html").file
     }
     inputs.files docPropsFiles

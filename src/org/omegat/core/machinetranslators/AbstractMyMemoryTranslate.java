@@ -51,7 +51,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
 
     private static final String MYMEMORY_API_EMAIL = "mymemory.api.email";
     private static final String MYMEMORY_API_KEY = "mymemory.api.key";
-    private static final String GT_URL = "http://mymemory.translated.net/api/get";
+    private static final String GT_URL = "https://mymemory.translated.net/api/get";
 
     @Override
     protected abstract String getPreferenceName();

@@ -1245,16 +1245,14 @@ public class RealProject implements IProject {
                 return;
             }
             // create new translation memories map
-            Map<String, ExternalTMX> newTransMemories = new TreeMap<String, ExternalTMX>(transMemories);
+            Map<String, ExternalTMX> newTransMemories = new TreeMap<>(transMemories);
             if (file.exists()) {
                 try {
                     ExternalTMX newTMX = ExternalTMFactory.load(file);
                     newTransMemories.put(file.getPath(), newTMX);
 
-                    //
                     // Please note the use of "/". FileUtil.computeRelativePath rewrites all other
                     // directory separators into "/".
-                    //
                     if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_TM + "/")) {
                         appendFromAutoTMX(newTMX, false);
                     } else if (FileUtil.computeRelativePath(tmRoot, file)
@@ -1281,31 +1279,30 @@ public class RealProject implements IProject {
      * updates.
      */
     private void loadOtherLanguages() throws IOException {
-        final File tmOtherLanguagesRoot = new File(config.getTMOtherLangRoot());
-        tmOtherLanguagesMonitor = new DirectoryMonitor(tmOtherLanguagesRoot, new DirectoryMonitor.Callback() {
-            public void fileChanged(File file) {
-                if (!file.getName().matches("[A-Z]{2}([-_][A-Z]{2})?\\.tmx")) {
-                    // not a TMX file in XX_XX.tmx format
-                    return;
-                }
-                Language targetLanguage = new Language(file.getName().substring(0, file.getName().length() - 4));
-                // create new translation memories map
-                Map<Language, ProjectTMX> newOtherTargetLangTMs = new TreeMap<Language, ProjectTMX>(otherTargetLangTMs);
-                if (file.exists()) {
-                    try {
-                        ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), targetLanguage,
-                            config.isSentenceSegmentingEnabled(), file, checkOrphanedCallback);
-                        newOtherTargetLangTMs.put(targetLanguage, newTMX);
-                    } catch (Exception e) {
-                        String filename = file.getPath();
-                        Log.logErrorRB(e, "TF_TM_LOAD_ERROR", filename);
-                        Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR", filename);
-                    }
-                } else {
-                    newOtherTargetLangTMs.remove(targetLanguage);
-                }
-                otherTargetLangTMs = newOtherTargetLangTMs;
+        File tmOtherLanguagesRoot = new File(config.getTMOtherLangRoot());
+        tmOtherLanguagesMonitor = new DirectoryMonitor(tmOtherLanguagesRoot, file -> {
+            String name = file.getName();
+            if (!name.matches("[A-Z]{2}([-_][A-Z]{2})?\\.tmx")) {
+                // not a TMX file in XX_XX.tmx format
+                return;
             }
+            Language targetLanguage = new Language(name.substring(0, name.length() - ".tmx".length()));
+            // create new translation memories map
+            Map<Language, ProjectTMX> newOtherTargetLangTMs = new TreeMap<>(otherTargetLangTMs);
+            if (file.exists()) {
+                try {
+                    ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), targetLanguage,
+                            config.isSentenceSegmentingEnabled(), file, checkOrphanedCallback);
+                    newOtherTargetLangTMs.put(targetLanguage, newTMX);
+                } catch (Exception e) {
+                    String filename = file.getPath();
+                    Log.logErrorRB(e, "TF_TM_LOAD_ERROR", filename);
+                    Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR", filename);
+                }
+            } else {
+                newOtherTargetLangTMs.remove(targetLanguage);
+            }
+            otherTargetLangTMs = newOtherTargetLangTMs;
         });
         tmOtherLanguagesMonitor.checkChanges();
         tmOtherLanguagesMonitor.start();

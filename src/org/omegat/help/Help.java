@@ -32,6 +32,7 @@ package org.omegat.help;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -107,7 +108,7 @@ public final class Help {
             try {
                 return url.toURI();
             } catch (URISyntaxException ex) {
-                // Ignore
+                throw new RuntimeException(ex);
             }
         }
         return null;
@@ -161,9 +162,9 @@ public final class Help {
 
         // Load the property file containing the doc version
         Properties prop = new Properties();
-        try {
-            URI u = getHelpFileURI(locale, "version_" + locale + ".properties");
-            prop.load(u.toURL().openStream());
+        URI u = getHelpFileURI(locale, "version_" + locale + ".properties");
+        try (InputStream in = u.toURL().openStream()) {
+            prop.load(in);
         } catch (IOException ex) {
             return null;
         }

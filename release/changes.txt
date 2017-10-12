@@ -490,7 +490,7 @@ could fail with duplicate numbers
  OmegaT 3.6.0 update 8
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bug fix
+  2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 8 vs 3.6.0 update 7
@@ -498,6 +498,9 @@ could fail with duplicate numbers
   Bug fixes:
 
   - MyMemory machine translation engines were not working anymore
+
+  - Matches from tmx2source appear as fuzzy matches on Windows
+    https://sourceforge.net/p/omegat/bugs/884/  
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 7 (2017-08-08)

@@ -1240,7 +1240,7 @@ public class RealProject implements IProject {
                 // not a TMX file
                 return;
             }
-            if (file.getPath().startsWith(config.getTMOtherLangRoot())) {
+            if (file.getPath().replace('\\', '/').startsWith(config.getTMOtherLangRoot())) {
                 // tmx in other language, which is already shown in editor. Skip it.
                 return;
             }

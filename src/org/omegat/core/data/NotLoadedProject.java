@@ -44,6 +44,7 @@ import org.omegat.util.Language;
  */
 public class NotLoadedProject implements IProject {
 
+    @Override
     public void compileProject(String sourcePattern) throws IOException, TranslationException {
     }
 
@@ -53,9 +54,15 @@ public class NotLoadedProject implements IProject {
     }
 
     @Override
-    public void commitSourceFiles() throws Exception {
-
+    public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) 
+            throws Exception {
     }
+    
+    @Override
+    public void commitSourceFiles() throws Exception {
+    }
+
+    @Override
     public void closeProject() {
     }
 

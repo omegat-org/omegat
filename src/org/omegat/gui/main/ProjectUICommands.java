@@ -789,6 +789,39 @@ public final class ProjectUICommands {
         }.execute();
     }
 
+    public static void projectCompileAndCommit() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
+
+        new SwingWorker<Void, Void>() {
+            protected Void doInBackground() throws Exception {
+                Core.executeExclusively(true, () -> {
+                    Core.getProject().saveProject(true);
+                    try {
+                        Core.getProject().compileProjectAndCommit(".*", true, true);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+                return null;
+            }
+
+            protected void done() {
+                try {
+                    get();
+                } catch (Exception ex) {
+                    processSwingWorkerException(ex, "TF_COMPILE_ERROR");
+                }
+            }
+        }.execute();
+    }
+
     public static void projectCommitSourceFiles() {
         UIThreadsUtil.mustBeSwingThread();
 

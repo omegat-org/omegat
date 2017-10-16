@@ -80,6 +80,20 @@ public interface IProject {
     void compileProject(String sourcePattern) throws Exception;
 
     /**
+     * Builds translated files corresponding to sourcePattern and creates fresh TM files.
+     *
+     * @param sourcePattern
+     *            The regexp of files to create
+     * @param doPostProcessing
+     *            Whether or not we should perform external post-processing.
+     * @param commitTargetFiles
+     *            Whether or not we should commit target files
+     * @throws Exception
+     */
+    void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) 
+            throws Exception;
+    
+    /**
      * Tells whether a project is a team project
      * @return whether the project is a team project
      */

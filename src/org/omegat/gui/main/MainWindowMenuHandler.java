@@ -176,17 +176,36 @@ public final class MainWindowMenuHandler {
      * Create translated documents.
      */
     public void projectCompileMenuItemActionPerformed() {
-        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
-            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
-            if (!stes.isEmpty()) {
-                Core.getIssues().showAll(OStrings.getString("TF_MESSAGE_COMPILE"));
+        if (!checkTags()) {
                 return;
-            }
         }
 
         ProjectUICommands.projectCompile();
     }
 
+    /**
+     * Check whether tags are OK
+     * @return false is there is a tag issue, true otherwise
+     */
+    private boolean checkTags() {
+        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
+            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
+            if (!stes.isEmpty()) {
+                Core.getIssues().showAll(OStrings.getString("TF_MESSAGE_COMPILE"));
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void projectCommitTargetFilesActionPerformed() {
+        if (!checkTags()) {
+                return;
+        }
+        
+        ProjectUICommands.projectCompileAndCommit();
+    }
+    
     /**
      * Commit source files
      */

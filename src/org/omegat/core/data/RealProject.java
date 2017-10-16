@@ -562,6 +562,7 @@ public class RealProject implements IProject {
 
     /**
      * Builds translated files corresponding to sourcePattern and creates fresh TM files.
+     * Calls the actual compile project method, assumes we don't want to commit target files.
      *
      * @param sourcePattern
      *            The regexp of files to create
@@ -570,6 +571,23 @@ public class RealProject implements IProject {
      * @throws Exception
      */
     public void compileProject(String sourcePattern, boolean doPostProcessing) throws Exception {
+        compileProjectAndCommit(sourcePattern, doPostProcessing, false);
+    }
+    
+    /**
+     * Builds translated files corresponding to sourcePattern and creates fresh TM files.
+     *
+     * @param sourcePattern
+     *            The regexp of files to create
+     * @param doPostProcessing
+     *            Whether or not we should perform external post-processing.
+     * @param commitTargetFiles
+     *            Whether or not we should commit target files
+     * @throws Exception
+     */
+    @Override
+    public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) 
+            throws Exception {
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -633,18 +651,20 @@ public class RealProject implements IProject {
                 numberOfCompiled++;
             }
         }
-        if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot()) {
+        if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles) {
             tmxPrepared = null;
             glossaryPrepared = null;
             // commit translations
             try {
+                Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
                 remoteRepositoryProvider.switchAllToLatest();
                 remoteRepositoryProvider.copyFilesFromProjectToRepo(config.getTargetDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
+                Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
-                Log.logErrorRB("CT_ERROR_CREATING_TARGET_DIR"); // TODO: change to better error
+                Log.logErrorRB("TF_COMMIT_TARGET_ERROR"); 
                 Log.log(e);
-                throw new IOException(OStrings.getString("CT_ERROR_CREATING_TARGET_DIR") + "\n"
+                throw new IOException(OStrings.getString("TF_COMMIT_TARGET_ERROR") + "\n"
                         + e.getMessage());
             }
         }

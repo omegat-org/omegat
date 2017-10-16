@@ -2,7 +2,7 @@
  OmegaT 4.1.2 update 3
 ----------------------------------------------------------------------
   1 Enhancement
-  0 Bug fix
+  1 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 3 vs 4.1.2 update 2
@@ -11,6 +11,11 @@
 
   - Commit target files
   https://sourceforge.net/p/omegat/feature-requests/1341/
+
+  Bug fixes:
+
+  - Forced versioned /target in 4.1-compatible team projects 
+  https://sourceforge.net/p/omegat/bugs/863/
 
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 2 (2017-09-22)

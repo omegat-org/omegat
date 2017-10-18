@@ -10,6 +10,7 @@
                2013 Aaron Madlon-Kay, Alex Buloichik
                2014 Alex Buloichik, Piotr Kulik, Aaron Madlon-Kay
                2015 Aaron Madlon-Kay
+               2017 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -82,6 +83,7 @@ import org.omegat.util.StringUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Piotr Kulik
+ * @author Thomas Cordonnier
  */
 public class Searcher {
 
@@ -628,7 +630,24 @@ public class Searcher {
             }
             while (true) {
                 int start = matcher.start();
-                foundMatches.add(new SearchMatch(start, matcher.end()));
+                if (m_searchExpression.mode == SearchMode.REPLACE && m_searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
+                    String repl = m_searchExpression.replacement;
+                    Matcher replaceMatcher = Pattern.compile("(?<!\\\\)\\$(\\d+)").matcher(repl);
+                    while (replaceMatcher.find()) {
+                        int varId = Integer.parseInt(replaceMatcher.group(1));
+                        repl = repl.substring(0, replaceMatcher.start())
+                            + matcher.group (varId) // yes, from source matcher!
+                            + repl.substring(replaceMatcher.end());
+                        replaceMatcher.reset(repl);
+                    }
+                    if (! repl.equals(m_searchExpression.replacement)) { 
+                        foundMatches.add(new ReplaceMatch(start, matcher.end(), replaceCase(repl)));                                            
+                    } else {
+                        foundMatches.add(new SearchMatch(start, matcher.end()));
+                    }
+                } else {
+                    foundMatches.add(new SearchMatch(start, matcher.end()));
+                }
                 if (start >= text.length() || !matcher.find(start + 1)) {
                     break;
                 }
@@ -660,6 +679,55 @@ public class Searcher {
             }
         }
         return true;
+    }
+    
+    // Interpret case changes in regex. Must be called _AFTER_ variables replacement!
+    private static String replaceCase (String txt) {
+        if (! txt.startsWith("\\")) {
+            int idx = txt.indexOf("\\");
+            if (idx == -1) {
+                return txt; 
+            } else {
+                return txt.substring(0,idx) + replaceCase(txt.substring(idx));
+            }
+        }
+        // Double symbols are longer, so they must be treated first
+        if (txt.startsWith("\\u\\L")) {
+            return txt.substring(4,5).toUpperCase() + replaceCase("\\L" + txt.substring(5));
+        }
+        if (txt.startsWith("\\l\\U")) {
+            return txt.substring(4,5).toLowerCase() + replaceCase("\\U" + txt.substring(5));
+        }
+        // Simple symbols without delimiters
+        if (txt.startsWith("\\u")) {
+            return txt.substring(2,3).toUpperCase() + replaceCase(txt.substring(3)); 
+        }            
+        if (txt.startsWith("\\l")) {
+            return txt.substring(2,3).toLowerCase() + replaceCase(txt.substring(3)); 
+        }
+        // Simple symbols with \E as delimiter
+        if (txt.startsWith("\\E")) {
+            return replaceCase(txt.substring(2)); 
+        }
+        if (txt.startsWith("\\U")) { // Upper until \E or \L
+            txt = txt.substring(2).replace("\\L","\\E\\L").replace("\\U","\\E\\U");
+            int idx = txt.indexOf("\\E");
+            if (idx == -1) {
+                return txt.toUpperCase(); 
+            } else {
+                return txt.substring(0,idx).toUpperCase() + replaceCase(txt.substring(idx + 2));  
+            }              
+        }
+        if (txt.startsWith("\\L")) {    // Lower until \E or \U
+            txt = txt.substring(2).replace("\\L","\\E\\L").replace("\\U","\\E\\U");
+            int idx = txt.indexOf("\\E");
+            if (idx == -1) {
+                return txt.toLowerCase(); 
+            } else {
+                return txt.substring(0,idx).toLowerCase() + replaceCase(txt.substring(idx + 2));  
+            }              
+        }
+        return replaceCase (txt.substring(1)); // then '\' was only here as a protection (for example '\$' ==> '$')
     }
 
     public List<SearchMatch> getFoundMatches() {

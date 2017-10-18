@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
+               2017 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,6 +40,7 @@ import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.search.SearchMatch;
+import org.omegat.core.search.ReplaceMatch;
 import org.omegat.core.search.Searcher;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
@@ -49,6 +51,7 @@ import org.omegat.gui.editor.IEditorFilter;
  * Editor filter implementation.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Thomas Cordonnier
  */
 public class ReplaceFilter implements IEditorFilter {
     private final Map<Integer, SourceTextEntry> entries = new HashMap<Integer, SourceTextEntry>();
@@ -107,13 +110,23 @@ public class ReplaceFilter implements IEditorFilter {
             if (trans == null) {
                 continue;
             }
+            // Avoid to replace more than once with variables when entries have duplicates
+            if ((en.defaultTranslation) && (ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT)) {
+                continue; // Already replaced when we parsed the first entry
+            }
             List<SearchMatch> found = getReplacementsForEntry(trans);
             if (found != null) {
                 int off = 0;
                 StringBuilder o = new StringBuilder(trans);
                 for (SearchMatch m : found) {
-                    o.replace(m.getStart() + off, m.getEnd() + off, replacement);
-                    off += replacement.length() - m.getLength();
+                    String repl;
+                    try {
+                        repl = ((ReplaceMatch) m).getReplacement();
+                    } catch (ClassCastException cce) {
+                        repl = this.replacement;
+                    }
+                    o.replace(m.getStart() + off, m.getEnd() + off, repl);
+                    off += repl.length() - m.getLength();
                 }
                 PrepareTMXEntry prepare = new PrepareTMXEntry(en);
                 prepare.translation = o.toString();
@@ -216,10 +229,16 @@ public class ReplaceFilter implements IEditorFilter {
         String str = ec.getCurrentTranslation();
         List<SearchMatch> found = getReplacementsForEntry(str);
         if (found != null) {
-            for (SearchMatch m : getReplacementsForEntry(str)) {
+            for (SearchMatch m : found) {
                 if (m.getStart() <= pos && pos <= m.getEnd()) {
                     // yes - replace
-                    ec.replacePartOfText(replacement, m.getStart(), m.getEnd());
+                    String repl;
+                    try {
+                        repl = ((ReplaceMatch) m).getReplacement();
+                    } catch (ClassCastException cce) { // non-regex replacement
+                        repl = this.replacement;
+                    }
+                    ec.replacePartOfText(repl, m.getStart(), m.getEnd());
                     break;
                 }
             }

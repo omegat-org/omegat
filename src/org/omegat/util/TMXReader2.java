@@ -187,7 +187,8 @@ public class TMXReader2 {
 
     private InputStream getInputStream(File file) throws IOException {
         if (file.getName().endsWith(".gz")) {
-            return new BufferedInputStream(new GZIPInputStream(new FileInputStream(file)));
+            // BufferedInputStream.DEFAULT_BUFFER_SIZE = 8192
+            return new GZIPInputStream(new FileInputStream(file), 8192);
         } else {
             return new BufferedInputStream(new FileInputStream(file));
         }

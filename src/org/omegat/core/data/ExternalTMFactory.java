@@ -79,7 +79,8 @@ public final class ExternalTMFactory {
     public static final class TMXLoader {
         public static boolean isSupported(File file) {
             String name = file.getName().toLowerCase();
-            return name.endsWith(OConsts.TMX_EXTENSION) || name.endsWith(OConsts.TMX_GZ_EXTENSION);
+            return name.endsWith(OConsts.TMX_EXTENSION) || name.endsWith(OConsts.TMX_GZ_EXTENSION)
+                    || name.endsWith(OConsts.TMX_ZIP_EXTENSION);
         }
 
         private final File file;

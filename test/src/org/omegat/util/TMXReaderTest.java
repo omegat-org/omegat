@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.commons.io.ByteOrderMark;
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.omegat.core.TestCore;
 
@@ -159,15 +158,12 @@ public class TMXReaderTest extends TestCore {
         testXml(xml, null, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>", "ISO-8859-1");
     }
 
-    void testXml(File xml, ByteOrderMark bom, String text, String charset) throws Exception {
-        FileOutputStream out = new FileOutputStream(xml);
-        try {
+    private void testXml(File xml, ByteOrderMark bom, String text, String charset) throws Exception {
+        try (FileOutputStream out = new FileOutputStream(xml)) {
             if (bom != null) {
                 out.write(bom.getBytes());
             }
             out.write(text.getBytes(charset));
-        } finally {
-            IOUtils.closeQuietly(out);
         }
         assertEquals(charset, TMXReader2.detectCharset(xml));
     }

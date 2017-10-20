@@ -28,8 +28,9 @@
 
 package org.omegat.filters3.xml.helpandmanual;
 
-import java.util.regex.Pattern;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
@@ -63,7 +64,8 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
     }
 
     private boolean checkIgnoreTags(String key, String value) {
-        return ignoreTagsAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
+        return ignoreTagsAttributes
+                .containsKey(key.toUpperCase(Locale.ENGLISH) + "=" + value.toUpperCase(Locale.ENGLISH));
     }
 
     /**

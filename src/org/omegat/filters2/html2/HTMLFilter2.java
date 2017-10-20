@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -160,7 +161,7 @@ public class HTMLFilter2 extends AbstractFilter {
         skipMetaAttributes = new HashMap<String, String>();
         String[] skipMetaAttributesStringarray = skipMetaString.split(",");
         for (int i = 0; i < skipMetaAttributesStringarray.length; i++) {
-            String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase();
+            String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
             skipMetaAttributes.put(keyvalue, "");
         }
 
@@ -169,7 +170,7 @@ public class HTMLFilter2 extends AbstractFilter {
         ignoreTagsAttributes = new HashMap<String, String>();
         String[] ignoreTagsAttributesStringarray = ignoreTagString.split(",");
         for (int i = 0; i < ignoreTagsAttributesStringarray.length; i++) {
-            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase();
+            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
             ignoreTagsAttributes.put(keyvalue, "");
         }
 
@@ -278,11 +279,13 @@ public class HTMLFilter2 extends AbstractFilter {
     }
 
     public boolean checkDoSkipMetaTag(String key, String value) {
-        return skipMetaAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
+        return skipMetaAttributes
+                .containsKey(key.toUpperCase(Locale.ENGLISH) + "=" + value.toUpperCase(Locale.ENGLISH));
     }
 
     public boolean checkIgnoreTags(String key, String value) {
-        return ignoreTagsAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
+        return ignoreTagsAttributes
+                .containsKey(key.toUpperCase(Locale.ENGLISH) + "=" + value.toUpperCase(Locale.ENGLISH));
     }
 
     @Override

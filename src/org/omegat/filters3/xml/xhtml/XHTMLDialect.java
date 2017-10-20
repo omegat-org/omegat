@@ -29,6 +29,7 @@ package org.omegat.filters3.xml.xhtml;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -146,7 +147,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
         skipMetaAttributes = new HashMap<String, String>();
         String[] skipMetaAttributesStringarray = skipMetaString.split(",");
         for (int i = 0; i < skipMetaAttributesStringarray.length; i++) {
-            String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase();
+            String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
             skipMetaAttributes.put(keyvalue, "");
         }
 
@@ -155,7 +156,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
         ignoreTagsAttributes = new HashMap<String, String>();
         String[] ignoreTagsAttributesStringarray = ignoreTagsString.split(",");
         for (int i = 0; i < ignoreTagsAttributesStringarray.length; i++) {
-            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase();
+            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
             ignoreTagsAttributes.put(keyvalue, "");
         }
 
@@ -234,11 +235,13 @@ public class XHTMLDialect extends DefaultXMLDialect {
     }
 
     public boolean checkDoSkipMetaTag(String key, String value) {
-        return skipMetaAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
+        return skipMetaAttributes
+                .containsKey(key.toUpperCase(Locale.ENGLISH) + "=" + value.toUpperCase(Locale.ENGLISH));
     }
 
     private boolean checkIgnoreTags(String key, String value) {
-        return ignoreTagsAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
+        return ignoreTagsAttributes
+                .containsKey(key.toUpperCase(Locale.ENGLISH) + "=" + value.toUpperCase(Locale.ENGLISH));
     }
 
     /**

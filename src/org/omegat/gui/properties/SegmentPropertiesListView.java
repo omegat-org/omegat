@@ -30,6 +30,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Locale;
 import java.util.MissingResourceException;
 
 import javax.swing.BoxLayout;
@@ -96,7 +97,7 @@ public class SegmentPropertiesListView implements ISegmentPropertiesView {
             return key;
         }
         try {
-            return OStrings.getString(PROPERTY_TRANSLATION_KEY + key.toUpperCase());
+            return OStrings.getString(PROPERTY_TRANSLATION_KEY + key.toUpperCase(Locale.ENGLISH));
         } catch (MissingResourceException ex) {
             return key;
         }

@@ -41,6 +41,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.ZipInputStream;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.Location;
@@ -186,9 +187,16 @@ public class TMXReader2 {
     }
 
     private InputStream getInputStream(File file) throws IOException {
-        if (file.getName().endsWith(".gz")) {
+        String fileName = file.getName();
+        if (fileName.endsWith(".gz")) {
             // BufferedInputStream.DEFAULT_BUFFER_SIZE = 8192
             return new GZIPInputStream(new FileInputStream(file), 8192);
+        } else if (fileName.endsWith(".zip")) {
+            ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
+            if (zis.getNextEntry() == null) {
+                throw new IOException("Zipped TMX had no entry: " + file);
+            }
+            return zis;
         } else {
             return new BufferedInputStream(new FileInputStream(file));
         }

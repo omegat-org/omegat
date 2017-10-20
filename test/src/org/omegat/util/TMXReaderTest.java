@@ -94,6 +94,21 @@ public class TMXReaderTest extends TestCore {
     }
 
     @Test
+    public void testZip() throws Exception {
+        final Map<String, String> tr = new TreeMap<>();
+        new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx.zip"), new Language("en"), new Language("be"),
+                false, false, true, false, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
+                    tr.put(tuvSource.text, tuvTarget.text);
+                    return true;
+                });
+        // Same content as test-level2.tmx
+        assertFalse(tr.isEmpty());
+        assertEquals("betuv", tr.get("entuv"));
+        assertEquals("tr", tr.get("2 <a0> zz <t1>xx</t1>"));
+        assertEquals("tr", tr.get("3 <n0>xx</n0>"));
+    }
+
+    @Test
     public void testInvalidTMX() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/invalid.tmx"), new Language("en"),

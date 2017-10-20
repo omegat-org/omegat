@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -141,7 +142,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     public void forceReloadTBX() {
         Set<File> files = monitor.getExistFiles();
         for (File f : files) {
-            if (f.getName().toLowerCase().endsWith(OConsts.EXT_TBX)) {
+            if (f.getName().toLowerCase(Locale.ENGLISH).endsWith(OConsts.EXT_TBX)) {
                 fileChanged(f);
             }
         }
@@ -156,7 +157,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      */
     private List<GlossaryEntry> loadGlossaryFile(final File file) throws Exception {
         boolean isPriority = priorityGlossary.equals(file);
-        String fnameLower = file.getName().toLowerCase();
+        String fnameLower = file.getName().toLowerCase(Locale.ENGLISH);
         if (fnameLower.endsWith(OConsts.EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());
             return GlossaryReaderTSV.read(file, isPriority);

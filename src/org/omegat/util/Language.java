@@ -155,7 +155,7 @@ public class Language implements Comparable<Object> {
      * Returns a string representation as a Microsoft locale (xx-yy).
      */
     public String getLocaleLCID() {
-        return getLocaleCode().toLowerCase().replace("_", "-");
+        return getLocaleCode().toLowerCase(Locale.ENGLISH).replace("_", "-");
     }
 
     /**

@@ -43,6 +43,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.omegat.util.EncodingDetector;
@@ -485,7 +486,8 @@ public abstract class AbstractFilter implements IFilter {
         String encoding = fc.getOutEncoding();
         if (encoding == null && isTargetEncodingVariable()) {
             // Use input encoding if it's Unicode; otherwise default to UTF-8
-            if (inEncodingLastParsedFile != null && inEncodingLastParsedFile.toLowerCase().startsWith("utf-")) {
+            if (inEncodingLastParsedFile != null
+                    && inEncodingLastParsedFile.toLowerCase(Locale.ENGLISH).startsWith("utf-")) {
                 encoding = inEncodingLastParsedFile;
             } else {
                 encoding = "UTF-8";

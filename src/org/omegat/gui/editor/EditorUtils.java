@@ -76,7 +76,7 @@ public final class EditorUtils {
      * @return true if locale is Right-To-Left oriented.
      */
     public static boolean localeIsRTL() {
-        String language = Locale.getDefault().getLanguage().toLowerCase();
+        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
         return EditorUtils.isRTL(language);
     }
 

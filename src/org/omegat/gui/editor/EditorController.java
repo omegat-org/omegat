@@ -716,7 +716,7 @@ public class EditorController implements IEditor {
                 || currentOrientation != Document3.ORIENTATION.ALL_LTR;
         Map<Language, ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
         for (Map.Entry<Language, ProjectTMX> entry : otherLanguageTMs.entrySet()) {
-            hasRTL = hasRTL || EditorUtils.isRTL(entry.getKey().getLanguageCode().toLowerCase());
+            hasRTL = hasRTL || EditorUtils.isRTL(entry.getKey().getLanguageCode().toLowerCase(Locale.ENGLISH));
         }
 
         Document3 doc = new Document3(this);

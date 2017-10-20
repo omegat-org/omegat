@@ -45,6 +45,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -146,7 +147,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             }
             @Override
             public boolean acceptFile(File pathname) {
-                return pathname.getName().toLowerCase().endsWith(OConsts.TMX_EXTENSION);
+                return pathname.getName().toLowerCase(Locale.ENGLISH).endsWith(OConsts.TMX_EXTENSION);
             }
             @Override
             public String getOverlayMessage() {

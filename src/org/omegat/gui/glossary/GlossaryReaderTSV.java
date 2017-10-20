@@ -39,6 +39,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.OConsts;
@@ -62,7 +63,7 @@ public final class GlossaryReaderTSV {
     }
 
     public static String getFileEncoding(final File file, String defaultEncoding) throws IOException {
-        String fnameLower = file.getName().toLowerCase();
+        String fnameLower = file.getName().toLowerCase(Locale.ENGLISH);
         if (fnameLower.endsWith(OConsts.EXT_TSV_UTF8)) {
             return StandardCharsets.UTF_8.name();
         } else {

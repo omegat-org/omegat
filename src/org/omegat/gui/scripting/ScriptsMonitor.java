@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.CoreEvents;
@@ -54,7 +55,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
     static {
         List<String> extensions = ScriptRunner.getAvailableScriptExtensions();
-        FILTER = (dir, name) -> extensions.contains(FilenameUtils.getExtension(name).toLowerCase());
+        FILTER = (dir, name) -> extensions.contains(FilenameUtils.getExtension(name).toLowerCase(Locale.ENGLISH));
     }
 
     public ScriptsMonitor(final ScriptingWindow scriptingWindow) {
@@ -233,7 +234,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     }
 
     private void addEventScripts(EventType eventType) {
-        String entryDirName = eventType.name().toLowerCase();
+        String entryDirName = eventType.name().toLowerCase(Locale.ENGLISH);
 
         File entryActivatedDir = new File(m_scriptDir, entryDirName);
         if (!entryActivatedDir.isDirectory()) {

@@ -29,6 +29,7 @@ package org.omegat.filters3.xml.android;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.omegat.core.data.ProtectedPart;
@@ -115,7 +116,7 @@ public class AndroidFilter extends XMLFilter {
          * dirty hack, but there is no other way.
          */
         if (idComment != null) {
-            String c = idComment.toLowerCase();
+            String c = idComment.toLowerCase(Locale.ENGLISH);
             if (c.contains(DO_NOT_TRANSLATE) || c.contains(DONT_TRANSLATE)) {
                 return entry;
             }

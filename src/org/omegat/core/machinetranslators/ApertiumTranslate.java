@@ -27,6 +27,7 @@ package org.omegat.core.machinetranslators;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Locale;
 import java.util.Map;
 
 import org.omegat.util.JsonParser;
@@ -64,7 +65,7 @@ public class ApertiumTranslate extends BaseTranslate {
      */
     private String apertiumCode(Language language) {
 
-        String lCode = language.getLanguageCode().toLowerCase();
+        String lCode = language.getLanguageCode().toLowerCase(Locale.ENGLISH);
         String locale = language.getLocaleCode();
 
         if (!StringUtil.isEmpty(language.getCountryCode())) {

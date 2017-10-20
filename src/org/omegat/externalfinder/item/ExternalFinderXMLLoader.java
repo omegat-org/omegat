@@ -28,6 +28,7 @@ package org.omegat.externalfinder.item;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -163,7 +164,7 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
 
             Node tAttribute = urlNode.getAttributes().getNamedItem("target");
             if (tAttribute != null) {
-                String targetAttribute = tAttribute.getTextContent().toLowerCase();
+                String targetAttribute = tAttribute.getTextContent().toLowerCase(Locale.ENGLISH);
                 if (targetAttribute.equals("ascii_only")) {
                     builder.setTarget(ExternalFinderItem.TARGET.ASCII_ONLY);
                 } else if (targetAttribute.equals("non_ascii_only")) {
@@ -173,7 +174,7 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
 
             Node eAttribute = urlNode.getAttributes().getNamedItem("encoding");
             if (eAttribute != null) {
-                String encodingAttribute = eAttribute.getTextContent().toLowerCase();
+                String encodingAttribute = eAttribute.getTextContent().toLowerCase(Locale.ENGLISH);
                 if (encodingAttribute.equals("escape")) {
                     builder.setEncoding(ExternalFinderItem.ENCODING.ESCAPE);
                 } else if (encodingAttribute.equals("none")) {
@@ -193,7 +194,7 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
 
             Node tAttribute = commandNode.getAttributes().getNamedItem("target");
             if (tAttribute != null) {
-                String targetAttribute = tAttribute.getTextContent().toLowerCase();
+                String targetAttribute = tAttribute.getTextContent().toLowerCase(Locale.ENGLISH);
                 if (targetAttribute.equals("ascii_only")) {
                     builder.setTarget(ExternalFinderItem.TARGET.ASCII_ONLY);
                 } else if (targetAttribute.equals("non_ascii_only")) {
@@ -203,7 +204,7 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
 
             Node eAttribute = commandNode.getAttributes().getNamedItem("encoding");
             if (eAttribute != null) {
-                String encodingAttribute = eAttribute.getTextContent().toLowerCase();
+                String encodingAttribute = eAttribute.getTextContent().toLowerCase(Locale.ENGLISH);
                 if (encodingAttribute.equals("default")) {
                     builder.setEncoding(ExternalFinderItem.ENCODING.DEFAULT);
                 } else if (encodingAttribute.equals("escape")) {

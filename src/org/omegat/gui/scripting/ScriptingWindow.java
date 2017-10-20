@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -730,7 +731,8 @@ public class ScriptingWindow {
     private void displayScriptItem() {
         try {
             m_txtScriptEditor
-                    .setHighlighting(FilenameUtils.getExtension(m_currentScriptItem.getFile().getName().toLowerCase()));
+                    .setHighlighting(FilenameUtils
+                            .getExtension(m_currentScriptItem.getFile().getName().toLowerCase(Locale.ENGLISH)));
             m_txtScriptEditor.getTextArea().setText(m_currentScriptItem.getText());
             m_txtScriptEditor.getTextArea().setCaretPosition(0);
         } catch (IOException ex) {

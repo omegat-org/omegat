@@ -49,6 +49,7 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
@@ -147,7 +148,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                 }
                 @Override
                 public boolean acceptFile(File pathname) {
-                    String name = pathname.getName().toLowerCase();
+                    String name = pathname.getName().toLowerCase(Locale.ENGLISH);
                     return name.endsWith(OConsts.EXT_CSV_UTF8) || name.endsWith(OConsts.EXT_TBX)
                             || name.endsWith(OConsts.EXT_TSV_DEF) || name.endsWith(OConsts.EXT_TSV_TXT)
                             || name.endsWith(OConsts.EXT_TSV_UTF8);

@@ -26,6 +26,7 @@
 package org.omegat.gui.dialogs;
 
 import java.io.File;
+import java.util.Locale;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -52,7 +53,7 @@ public class ChooseMedProject extends JFileChooser {
 
             @Override
             public boolean accept(File f) {
-                return f.isFile() && f.getName().toLowerCase().endsWith(".zip");
+                return f.isFile() && f.getName().toLowerCase(Locale.ENGLISH).endsWith(".zip");
             }
         });
     }
@@ -62,6 +63,6 @@ public class ChooseMedProject extends JFileChooser {
         if (f.isDirectory()) {
             return true;
         }
-        return f.isFile() && f.getName().toLowerCase().endsWith(".zip");
+        return f.isFile() && f.getName().toLowerCase(Locale.ENGLISH).endsWith(".zip");
     }
 }

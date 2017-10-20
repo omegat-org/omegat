@@ -40,6 +40,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -680,7 +681,7 @@ public class PoFilter extends AbstractFilter {
                 } else {
                     //else use predefined number of plurals, if it exists
                     Language targetLang = fc.getTargetLang();
-                    String lang = targetLang.getLanguageCode().toLowerCase();
+                    String lang = targetLang.getLanguageCode().toLowerCase(Locale.ENGLISH);
                     PluralInfo pluralInfo = PLURAL_INFOS.get(lang);
                     if (pluralInfo != null) {
                         plurals = pluralInfo.plurals;
@@ -818,7 +819,7 @@ public class PoFilter extends AbstractFilter {
     private String autoFillInPluralStatement(String header, FilterContext fc) {
         if (autoFillInPluralStatement) {
             Language targetLang = fc.getTargetLang();
-            String lang = targetLang.getLanguageCode().toLowerCase();
+            String lang = targetLang.getLanguageCode().toLowerCase(Locale.ENGLISH);
             PluralInfo pluralInfo = PLURAL_INFOS.get(lang);
             if (pluralInfo != null) {
                 return header.replaceAll("Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;",

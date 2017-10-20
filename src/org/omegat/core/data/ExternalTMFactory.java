@@ -29,6 +29,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ParseEntry.ParseEntryResult;
@@ -78,7 +79,7 @@ public final class ExternalTMFactory {
 
     public static final class TMXLoader {
         public static boolean isSupported(File file) {
-            String name = file.getName().toLowerCase();
+            String name = file.getName().toLowerCase(Locale.ENGLISH);
             return name.endsWith(OConsts.TMX_EXTENSION) || name.endsWith(OConsts.TMX_GZ_EXTENSION)
                     || name.endsWith(OConsts.TMX_ZIP_EXTENSION);
         }

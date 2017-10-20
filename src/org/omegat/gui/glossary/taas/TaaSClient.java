@@ -38,6 +38,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
@@ -203,7 +204,7 @@ public class TaaSClient {
         if (contentType == null) {
             throw new FormatError("Empty Content-Type header");
         }
-        String ct = contentType.replace(" ", "").toLowerCase();
+        String ct = contentType.replace(" ", "").toLowerCase(Locale.ENGLISH);
         if (!"text/xml".equals(ct) && !"application/xml".equals(ct)) {
             throw new FormatError("Wrong Content-Type header: " + contentType);
         }
@@ -217,7 +218,7 @@ public class TaaSClient {
         if (contentType == null) {
             throw new FormatError("Empty Content-Type header");
         }
-        String ct = contentType.replace(" ", "").toLowerCase();
+        String ct = contentType.replace(" ", "").toLowerCase(Locale.ENGLISH);
         if (!"text/xml;charset=utf-8".equals(ct) && !"application/xml;charset=utf-8".equals(ct)) {
             throw new FormatError("Wrong Content-Type header: " + contentType);
         }
@@ -320,8 +321,8 @@ public class TaaSClient {
             throws IOException, Unauthorized, FormatError {
         StringBuilder r = new StringBuilder();
         r.append(WS_URL).append("/extraction/");
-        r.append("?sourceLang=").append(sourceLang.getLanguageCode().toLowerCase());
-        r.append("&targetLang=").append(targetLang.getLanguageCode().toLowerCase());
+        r.append("?sourceLang=").append(sourceLang.getLanguageCode().toLowerCase(Locale.ENGLISH));
+        r.append("&targetLang=").append(targetLang.getLanguageCode().toLowerCase(Locale.ENGLISH));
         r.append("&method=").append(EXTRACTION_METHOD);
         if (!StringUtil.isEmpty(domain)) {
             r.append("&domain=").append(URLEncoder.encode(domain, "UTF-8"));

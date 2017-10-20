@@ -29,6 +29,7 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.StringReader;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -86,8 +87,8 @@ public class YandexTranslate extends BaseTranslate {
             return "";
         }
 
-        String lvSourceLang = sLang.getLanguageCode().substring(0, 2).toLowerCase();
-        String lvTargetLang = tLang.getLanguageCode().substring(0, 2).toLowerCase();
+        String lvSourceLang = sLang.getLanguageCode().substring(0, 2).toLowerCase(Locale.ENGLISH);
+        String lvTargetLang = tLang.getLanguageCode().substring(0, 2).toLowerCase(Locale.ENGLISH);
 
         // U+2026 HORIZONTAL ELLIPSIS
         String lvShorText = text.length() > 10000 ? text.substring(0, 9999) + "\u2026" : text;

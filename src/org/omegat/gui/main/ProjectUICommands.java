@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.JFileChooser;
@@ -246,7 +247,7 @@ public final class ProjectUICommands {
             return;
         }
         // add .zip extension if there is no
-        final File med = ndm.getSelectedFile().getName().toLowerCase().endsWith(".zip")
+        final File med = ndm.getSelectedFile().getName().toLowerCase(Locale.ENGLISH).endsWith(".zip")
                 ? ndm.getSelectedFile() : new File(ndm.getSelectedFile().getAbsolutePath() + ".zip");
 
         new SwingWorker<Void, Void>() {

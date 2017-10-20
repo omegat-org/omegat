@@ -188,7 +188,7 @@ public final class PluginUtils {
             return null;
         }
 
-        lang = lang.toLowerCase();
+        lang = lang.toLowerCase(Locale.ENGLISH);
 
         // Choose first relevant tokenizer as fallback if no
         // "default" tokenizer is found.

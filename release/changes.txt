@@ -9,6 +9,9 @@
 
   Implemented requests:
 
+  - Automatically unzip TMX files in /tm
+  https://sourceforge.net/p/omegat/feature-requests/1339/
+
   - Commit target files
   https://sourceforge.net/p/omegat/feature-requests/1341/
 
@@ -17,7 +20,7 @@
 
   Bug fixes:
 
-  - Forced versioned /target in 4.1-compatible team projects 
+  - Forced versioned /target in 4.1-compatible team projects
   https://sourceforge.net/p/omegat/bugs/863/
 
 ----------------------------------------------------------------------
@@ -33,7 +36,7 @@
 
   - Commit source files
   https://sourceforge.net/p/omegat/feature-requests/1329/
-  
+
   Other enhancements:
 
   - The script svn_cleanup_selected.groovy was rewritten to fully support
@@ -522,7 +525,7 @@ could fail with duplicate numbers
   - MyMemory machine translation engines were not working anymore
 
   - Matches from tmx2source appear as fuzzy matches on Windows
-    https://sourceforge.net/p/omegat/bugs/884/  
+    https://sourceforge.net/p/omegat/bugs/884/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 7 (2017-08-08)

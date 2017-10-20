@@ -171,7 +171,8 @@ public class StarDict implements IDictionaryFactory {
         private DictionaryData<Entry> loadData(File idxFile) throws IOException {
             InputStream is = new FileInputStream(idxFile);
             if (idxFile.getName().endsWith(".gz")) {
-                is = new GZIPInputStream(is);
+                // BufferedInputStream.DEFAULT_BUFFER_SIZE = 8192
+                is = new GZIPInputStream(is, 8192);
             }
             DictionaryData<Entry> newData = new DictionaryData<>(language);
             try (DataInputStream idx = new DataInputStream(new BufferedInputStream(is));

@@ -15,9 +15,6 @@
   - Commit target files
   https://sourceforge.net/p/omegat/feature-requests/1341/
 
-  - Automatically unzip TMs
-  https://sourceforge.net/p/omegat/feature-requests/1339/
-
   Bug fixes:
 
   - Forced versioned /target in 4.1-compatible team projects

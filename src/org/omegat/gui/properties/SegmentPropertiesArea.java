@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -216,7 +217,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         if (!Preferences.isPreference(Preferences.SEGPROPS_SHOW_RAW_KEYS)) {
             try {
                 displayKey = OStrings
-                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + key.toUpperCase());
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + key.toUpperCase(Locale.ENGLISH));
             } catch (MissingResourceException ignore) {
                 // If this is not a known key then we can't translate it,
                 // so use the "raw" key instead.

@@ -30,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 
 /**
  * Localizable strings.
@@ -63,6 +64,7 @@ public final class OStrings {
 
     static {
         ResourceBundle b = ResourceBundle.getBundle("org/omegat/Version");
+        validateVersion(b::getString);
         VERSION = b.getString("version");
         UPDATE = b.getString("update");
         REVISION = b.getString("revision");
@@ -193,4 +195,37 @@ public final class OStrings {
         return getString("TF_CUR_SEGMENT_START");
     }
 
+    /**
+     * Check to make sure the given Properties contains valid information about an OmegaT version. See
+     * Version.properties for more info.
+     *
+     * @param map
+     *            A function that accepts a key and returns a value
+     * @throws IllegalArgumentException
+     *             If the version info is invalid
+     */
+    public static void validateVersion(Function<String, String> map) {
+        String version = map.apply("version");
+        String update = map.apply("update");
+        String revision = map.apply("revision");
+        String beta = map.apply("beta");
+        if (version == null) {
+            throw new IllegalArgumentException("Field 'version' must not be null");
+        }
+        if (update == null) {
+            throw new IllegalArgumentException("Field 'update' must not be null");
+        }
+        if (revision == null) {
+            throw new IllegalArgumentException("Field 'revision' must not be null");
+        }
+        if (beta == null) {
+            throw new IllegalArgumentException("Field 'beta' must not be null");
+        }
+        if (version.split("\\.").length != 3) {
+            throw new IllegalArgumentException("Field 'version' must be 3 parts");
+        }
+        if (!beta.isEmpty() && !"_Beta".equals(beta)) {
+            throw new IllegalArgumentException("Field 'beta' must be empty or '_Beta'");
+        }
+    }
 }

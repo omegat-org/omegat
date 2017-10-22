@@ -27,6 +27,7 @@
 
 package org.omegat.gui.dialogs;
 
+import java.awt.Font;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -73,8 +74,11 @@ public class LogDialog extends javax.swing.JDialog {
         setSize(600, 400);
         setLocationRelativeTo(parent);
 
-        final File logLocation = new File(Log.getLogFilePath());
-        new SwingWorker<String, Object>() {
+        Font currFont = logTextPane.getFont();
+        logTextPane.setFont(new Font(Font.MONOSPACED, currFont.getStyle(), currFont.getSize()));
+
+        File logLocation = new File(Log.getLogFilePath());
+        new SwingWorker<String, Void>() {
             @Override
             protected String doInBackground() throws Exception {
                 try (FileInputStream fis = new FileInputStream(logLocation)) {
@@ -89,7 +93,6 @@ public class LogDialog extends javax.swing.JDialog {
                 } catch (Exception e) {
                     Log.log(e);
                 }
-                logTextPane.setCaretPosition(0);
                 OSXIntegration.setProxyIcon(getRootPane(), logLocation);
             };
         }.execute();

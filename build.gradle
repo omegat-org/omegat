@@ -766,6 +766,13 @@ task release {
     releaseCheck.mustRunAfter genDocIndex
 }
 
+test {
+    // Test in headless mode with ./gradlew test -Pheadless
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+}
+
 task testIntegration(type: JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
     main = 'org.omegat.core.data.TestTeamIntegration'

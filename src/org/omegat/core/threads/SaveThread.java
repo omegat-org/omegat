@@ -58,11 +58,12 @@ public class SaveThread extends Thread implements IAutoSave {
 
     public SaveThread() {
         setName("Save thread");
-        setWaitDuration(Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL, Preferences.AUTO_SAVE_DEFAULT));
+        setWaitDuration(
+                Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL, Preferences.AUTO_SAVE_DEFAULT));
         Preferences.addPropertyChangeListener(Preferences.AUTO_SAVE_INTERVAL, evt -> {
             setWaitDuration((Integer) evt.getNewValue());
-            synchronized (SaveThread.this) {
-                SaveThread.this.notify();
+            synchronized (this) {
+                notify();
             }
         });
     }

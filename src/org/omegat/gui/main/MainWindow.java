@@ -127,7 +127,6 @@ public class MainWindow extends JFrame implements IMainWindow {
             @Override
             public void windowDeactivated(WindowEvent we) {
                 Core.getEditor().windowDeactivated();
-                super.windowDeactivated(we);
             }
         });
 

@@ -307,17 +307,15 @@ public final class Main {
 
         CoreEvents.fireApplicationStartup();
 
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                // setVisible can't be executed directly, because we need to
-                // call all application startup listeners for initialize UI
-                Core.getMainWindow().getApplicationFrame().setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            // setVisible can't be executed directly, because we need to
+            // call all application startup listeners for initialize UI
+            Core.getMainWindow().getApplicationFrame().setVisible(true);
 
-                if (remoteProject != null) {
-                    ProjectUICommands.projectRemote(remoteProject);
-                } else if (projectLocation != null) {
-                    ProjectUICommands.projectOpen(projectLocation);
-                }
+            if (remoteProject != null) {
+                ProjectUICommands.projectRemote(remoteProject);
+            } else if (projectLocation != null) {
+                ProjectUICommands.projectOpen(projectLocation);
             }
         });
         return 0;

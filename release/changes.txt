@@ -2,7 +2,7 @@
  OmegaT 4.1.2 update 3
 ----------------------------------------------------------------------
   2 Enhancements
-  1 Bug fix
+  2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 3 vs 4.1.2 update 2
@@ -19,6 +19,8 @@
 
   - Forced versioned /target in 4.1-compatible team projects
   https://sourceforge.net/p/omegat/bugs/863/
+
+  - Tags were lost when saving TMX from Aligner
 
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 2 (2017-09-22)

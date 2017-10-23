@@ -384,7 +384,7 @@ public class Aligner {
         String creator = OStrings.getApplicationName() + " Aligner";
         long time = System.currentTimeMillis();
         try {
-            writer = new TMXWriter2(outFile, srcLang, trgLang, true, true, true);
+            writer = new TMXWriter2(outFile, srcLang, trgLang, true, true, false);
             for (Entry<String, String> e : pairs) {
                 writer.writeEntry(e.getKey(), e.getValue(), null, creator, time, null, 0L, null);
             }

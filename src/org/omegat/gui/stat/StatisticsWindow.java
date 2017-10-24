@@ -40,6 +40,7 @@ import org.omegat.core.statistics.CalcMatchStatistics;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -111,6 +112,9 @@ public class StatisticsWindow extends javax.swing.JDialog {
         });
 
         setSize(800, 400);
+        StaticUIUtils.persistGeometry(this, Preferences.STATISTICS_WINDOW_GEOMETRY_PREFIX);
+        // setLocationRealativeTo called after persistGeometry
+        // to make sure the stat window always pops up in the center of the parent window
         setLocationRelativeTo(parent);
     }
 

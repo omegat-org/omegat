@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 3
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Commit target files
   https://sourceforge.net/p/omegat/feature-requests/1341/
+
+  - Remember Statistics dialog geometry
+  https://sourceforge.net/p/omegat/feature-requests/1345/
 
   Bug fixes:
 

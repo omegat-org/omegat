@@ -452,6 +452,9 @@ public final class Preferences {
 
     public static final String PROPERTY_SRX = "srx";
     public static final String PROPERTY_FILTERS = "filters";
+    
+    /** Statistics dialog */
+    public static final String STATISTICS_WINDOW_GEOMETRY_PREFIX = "stat_window";
 
     /** Issues */
     public static final String ISSUES_WINDOW_GEOMETRY_PREFIX = "issues_window";

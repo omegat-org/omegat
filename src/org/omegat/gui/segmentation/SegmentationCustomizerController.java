@@ -307,6 +307,7 @@ public class SegmentationCustomizerController extends BasePreferencesController 
 
     @Override
     public void persist() {
+        commitTableEdits();
         if (!isProjectSpecific) {
             Core.setSegmenter(new Segmenter(editableSRX));
             Preferences.setSRX(editableSRX);

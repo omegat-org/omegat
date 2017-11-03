@@ -1,7 +1,7 @@
 Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2017.
 
 
-Qu'est ce qu'OmegaT ?
+Qu'est-ce qu'OmegaT ?
 ===============
 
 OmegaT est un outil de Traduction Assistée par Ordinateur libre, à code source ouvert et multiplateforme, avec recherche de correspondances, mémoire de traduction, recherche par mots clefs, glossaires et réutilisation des traductions dans des projets modifiés.
@@ -11,7 +11,7 @@ OmegaT est un outil de Traduction Assistée par Ordinateur libre, à code source
 Informations sur la licence
 =====================
 
-OmegaT est disponible suivant les termes de la GNU General Public License telle que publiée par la Free Software Foundation , soit la version 3 de la Licence, soit (à votre gré) toute version ultérieure. Vous pouvez trouver le texte de la licence dans
+OmegaT est disponible suivant les termes de la GNU General Public License telle que publiée par la Free Software Foundation, soit la version 3 de la Licence, soit (à votre gré) toute version ultérieure. Vous pouvez trouver le texte de la licence dans
 /docs/OmegaT-license.txt.
 
 OmegaT utilise un certain nombre de bibliothèques. La licence de chaque bibliothèque est mentionnée
@@ -47,7 +47,7 @@ Installation d'OmegaT (Linux)
 
 Placez l'archive dans n'importe quel dossier approprié et décompactez-la. OmegaT est alors prêt à être exécuté.
 
-Vous pouvez cependant bénéficier d'un installation plus orthodoxe et plus conviviale en utilisant le script d'installation (linux-install.sh). Pour l'utiliser, ouvrez un fenêtre de terminal (console), passez dans le dossier contenant OmegaT.jar et le script linux-install.sh et exécuter le script avec ./linux-install.sh.
+Vous pouvez cependant bénéficier d'une installation plus orthodoxe et plus conviviale en utilisant le script d'installation (linux-install.sh). Pour l'utiliser, ouvrez une fenêtre de terminal (console), passez dans le dossier contenant OmegaT.jar et le script linux-install.sh et exécuter le script avec ./linux-install.sh.
 
 
 
@@ -137,7 +137,7 @@ Didier Briel est le responsable du projet OmegaT.
 Les personnes qui ont contribué incluent :
 (ordre alphabétique)
 
-Les contributions au code sont documentés dans /docs/contributors.txt.
+Les contributions au code sont documentées dans /docs/contributors.txt.
 
 Autres contributions par :
   Vincent Bidaux (responsable documentation)
@@ -163,7 +163,7 @@ Les informations les plus récentes au sujet d'OmegaT sont à :
 
 Aide utilisateur sur le groupe Yahoo. Vous pouvez y consulter les archives sans vous inscrire au groupe :
 
-   http://tech.groups.yahoo.com/group/omegat/
+   https://groups.yahoo.com/neo/groups/OmegaT/info
 
 Demandes d'améliorations (en anglais), sur le site de SourceForge :
 

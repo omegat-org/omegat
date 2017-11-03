@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 3
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   3 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Remember Statistics dialog geometry
   https://sourceforge.net/p/omegat/feature-requests/1345/
+
+  - New segmentation rule to default set of Finnish language rules
+  https://sourceforge.net/p/omegat/feature-requests/1347/
 
   Bug fixes:
 

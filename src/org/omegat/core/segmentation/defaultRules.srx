@@ -2075,6 +2075,10 @@
 
       <languagerule languagerulename="Finnish">
         <rule break="no">
+          <beforebreak>\d.</beforebreak>
+          <afterbreak>\s[a-zäö]</afterbreak>
+        </rule>
+        <rule break="no">
           <beforebreak>ao\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>

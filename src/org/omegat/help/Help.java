@@ -163,6 +163,9 @@ public final class Help {
         // Load the property file containing the doc version
         Properties prop = new Properties();
         URI u = getHelpFileURI(locale, "version_" + locale + ".properties");
+        if (u == null) {
+            u = getHelpFileURI(locale, "version.properties");
+        }
         try (InputStream in = u.toURL().openStream()) {
             prop.load(in);
         } catch (IOException ex) {

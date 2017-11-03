@@ -16,7 +16,7 @@
       <para>N'est intéressant que pour les utilisateurs confirmés !</para>
     </note>
 
-    <para>Le but du mode console (c'est-à-dire ligne de commande) est de permettre l'utilisation <application>d'OmegaT</application> en tant qu'outil de traduction dans un environnement de script. Lorsqu'OmegaT est lancé en mode console, aucune interface graphiquen'est chargée (cela fonctionnera donc sur toutes les consoles) et le projet est automatiquement traduit. Prenons l'exemple d'un projet de logiciel dont l'interface graphique est traduite dans un grand nombre de langues. En utilisant le mode console, la création d'une interface localisée peut faire partie du processus de construction.</para>
+    <para>Le but du mode console (c'est-à-dire ligne de commande) est de permettre l'utilisation <application>d'OmegaT</application> en tant qu'outil de traduction dans un environnement de script. Lorsqu'OmegaT est lancé en mode console, aucune interface graphique n'est chargée (cela fonctionnera donc sur toutes les consoles) et le projet est automatiquement traduit. Prenons l'exemple d'un projet de logiciel dont l'interface graphique est traduite dans un grand nombre de langues. En utilisant le mode console, la création d'une interface localisée peut faire partie du processus de construction.</para>
 
     <section id="misc.console.mode.prerequisites">
       <title>Prérequis</title>
@@ -27,7 +27,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>Exécutez <application>OmegaT</application> normallement (avec l'interface graphique) et définissez les paramètres. Si vous démarrez <application>OmegaT</application> en mode console, il utilisera les paramètres que vous avez configurés.</para>
+          <para>Exécutez <application>OmegaT</application> normalement (avec l'interface graphique) et définissez les paramètres. Si vous démarrez <application>OmegaT</application> en mode console, il utilisera les paramètres que vous avez configurés.</para>
         </listitem>
 
         <listitem>
@@ -211,7 +211,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Utilisez ces textes d'aide pour commencer. En cas de problème, publiez un message dans le <ulink url="http://tech.groups.yahoo.com/group/Omegat/">groupe d'utilisateurs <application>OmegaT</application></ulink>. N'hésitez pas à publier votre message dans la langue dans laquelle vous êtes le plus à l'aise.</para>
+        <para>Utilisez ces textes d'aide pour commencer. En cas de problème, publiez un message dans le <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info">groupe d'utilisateurs <application>OmegaT</application></ulink>. N'hésitez pas à publier votre message dans la langue dans laquelle vous êtes le plus à l'aise.</para>
       </listitem>
     </itemizedlist>
   </section>

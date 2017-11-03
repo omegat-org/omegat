@@ -1,4 +1,5 @@
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.apache.tools.ant.filters.FixCrLfFilter
 
 plugins {
     id 'application'
@@ -278,7 +279,8 @@ distributions {
             }
             from('release') {
                 include 'readme.txt'
-                expand(translationNotice: '')
+                filter(ReplaceTokens, tokens: [TRANSLATION_NOTICE: ''])
+                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             from('release/plugins-specific') {
                 into 'plugins'
@@ -397,8 +399,10 @@ distributions {
             from('release') {
                 include 'readme.txt'
                 into 'source'
-                expand(translationNotice: 'This translation is the work of [insert your name], copyright© [insert year].')
+                filter(ReplaceTokens, tokens: [TRANSLATION_NOTICE: 'This translation is the work of [insert your name], copyright\u00a9 [insert year].'])
+                filter(FixCrLfFilter,  eol: FixCrLfFilter.CrLf.newInstance('crlf'))
                 rename '.txt$', '.utf8'
+                filteringCharset = 'UTF-8'
             }
         }
         l10nMinimalDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_L10N_Minimal.zip"

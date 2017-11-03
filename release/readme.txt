@@ -1,4 +1,4 @@
-﻿${translationNotice}
+﻿@TRANSLATION_NOTICE@
 
 
 What is OmegaT?

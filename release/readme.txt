@@ -19,7 +19,7 @@ The most current info about OmegaT can be found at
 
 User support, at the Yahoo user group (multilingual), where the archives are
 searchable without subscription:
-     http://tech.groups.yahoo.com/group/OmegaT/
+     https://groups.yahoo.com/neo/groups/OmegaT/info
 
 Requests for Enhancements (in English), at the SourceForge site:
      https://sourceforge.net/p/omegat/feature-requests/
@@ -257,7 +257,7 @@ And subscribe to the translators' list:
       https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
 To contribute in other ways, subscribe first to the user group at:
-      http://tech.groups.yahoo.com/group/omegat/
+      https://groups.yahoo.com/neo/groups/OmegaT/info
 
 And get a feel of what is going on in the OmegaT world...
 

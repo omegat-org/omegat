@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2015.
+﻿Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2015.
 
 ==============================================================================
   OmegaT 3.0, fichier « Lisez-moi »
@@ -18,7 +18,7 @@ Les informations les plus récentes au sujet d'OmegaT sont à :
       http://www.omegat.org/
 
 Aide utilisateur sur le groupe Yahoo. Vous pouvez y consulter les archives sans vous inscrire au groupe :
-     http://tech.groups.yahoo.com/group/omegat/
+     https://groups.yahoo.com/neo/groups/OmegaT/info
 
 Demandes d'améliorations (en anglais), sur le site de SourceForge :
      https://sourceforge.net/p/omegat/feature-requests/
@@ -304,7 +304,7 @@ Un bon rapport de bogue comporte exactement 3 parties.
 Il est possible d'ajouter des copies de fichiers, des portions du journal, des copies d'écran à votre rapport, tout ce qui vous semble qui aidera les développeurs à résoudre votre problème.
 
 Les archives du groupe utilisateur sont à :
-     http://tech.groups.yahoo.com/group/omegat/
+     https://groups.yahoo.com/neo/groups/OmegaT/info
 
 Pour consulter la page des rapports de bogue et pour remplir un nouveau rapport rendez-vous à :
      https://sourceforge.net/p/omegat/bugs/

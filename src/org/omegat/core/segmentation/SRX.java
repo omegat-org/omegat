@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
+               2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -41,6 +42,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -48,6 +50,7 @@ import org.omegat.util.OStrings;
 
 import gen.core.segmentation.Languagemap;
 import gen.core.segmentation.Languagerule;
+import gen.core.segmentation.ObjectFactory;
 import gen.core.segmentation.Srx;
 
 /**
@@ -55,12 +58,14 @@ import gen.core.segmentation.Srx;
  * It loads and saves its data from/to SRX file.
  *
  * @author Maxym Mykhalchuk
+ * @author Thomas Cordonnier
  */
 public class SRX implements Serializable {
 
     private static final long serialVersionUID = 2182125877925944613L;
 
     public static final String CONF_SENTSEG = "segmentation.conf";
+    public static final String SRX_SENTSEG = "segmentation.srx";
 
     /** Context for JAXB rules processing. */
     protected static final JAXBContext SRX_JAXB_CONTEXT;
@@ -83,16 +88,6 @@ public class SRX implements Serializable {
     }
 
     /**
-     * Initializes SRX rules to defaults.
-     */
-    private void init() {
-        this.mappingRules = new ArrayList<MapRule>();
-        this.includeEndingTags = true;
-        this.segmentSubflows = true;
-        initDefaults();
-    }
-
-    /**
      * Creates an empty SRX, without any rules.
      * <p>
      * Please do not call directly unless you know what you are doing.
@@ -110,13 +105,35 @@ public class SRX implements Serializable {
     }
 
     /**
-     * Saves segmentation rules into specified file.
+     * Saves segmentation rules into specified directory.
+     * @param srx OmegaT object to be written; if null, means that we want to delete the file
+     * @param outDir where to put the file. The file name is forced to {@link #SRX_SENTSEG}
      */
-    public static void saveTo(SRX srx, File outFile) throws IOException {
+    public static void saveTo(SRX srx, File outDir) throws IOException {
+        File outFile = new File (outDir, SRX_SENTSEG);
+        if (! outFile.exists()) {
+            // Unless SRX file exists, check for CONF file. If present, overwrite it. Else, fallback to SRX
+            outFile = new File (outDir, CONF_SENTSEG);
+            if (! outFile.exists()) {
+                outFile = new File (outDir, SRX_SENTSEG);
+            }
+        }
+        // else: SRX file exists, overwrite or delete it
+
         if (srx == null) {
             outFile.delete();
+            new File(outDir, CONF_SENTSEG).delete();
             return;
         }
+
+        if (outFile.getName().endsWith(".conf")) {
+            saveToConf(srx, outFile);
+        } else if (outFile.getName().endsWith(".srx")) {
+            saveToSrx (srx, outFile);
+        }
+    }
+
+    public static void saveToConf(SRX srx, File outFile) throws IOException {        
         try {
             srx.setVersion(CURRENT_VERSION);
             XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(outFile));
@@ -129,21 +146,83 @@ public class SRX implements Serializable {
         }
     }
 
+    public static void saveToSrx(SRX srx, File outFile) throws IOException {
+        ObjectFactory factory = new ObjectFactory();
+        Srx jaxbObject = factory.createSrx();
+        jaxbObject.setVersion("2.0");
+        jaxbObject.setHeader(factory.createHeader());
+        jaxbObject.getHeader().setSegmentsubflows(srx.segmentSubflows ? "yes" : "no");
+        jaxbObject.getHeader().setCascade("yes");  // OmegaT rules are always in cascade
+        jaxbObject.setBody(factory.createBody());
+        jaxbObject.getBody().setMaprules(factory.createMaprules());
+        jaxbObject.getBody().setLanguagerules(factory.createLanguagerules());
+        for (MapRule mr : srx.getMappingRules()) {
+            Languagemap map = new Languagemap();
+            map.setLanguagerulename(mr.getLanguage());
+            map.setLanguagepattern(mr.getPattern());
+            jaxbObject.getBody().getMaprules().getLanguagemap().add(map);
+            Languagerule lr = new Languagerule();
+            lr.setLanguagerulename(mr.getLanguage());
+            jaxbObject.getBody().getLanguagerules().getLanguagerule().add(lr);
+            for (Rule rule : mr.getRules()) {
+                gen.core.segmentation.Rule jaxbRule = factory.createRule();
+                lr.getRule().add(jaxbRule);
+                jaxbRule.setBreak(rule.isBreakRule() ? "yes" : "no");
+                jaxbRule.setBeforebreak(factory.createBeforebreak());
+                jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());
+                jaxbRule.setAfterbreak(factory.createAfterbreak());
+                jaxbRule.getAfterbreak().setContent(rule.getAfterbreak());
+            }
+        }
+
+        try {
+            Marshaller m = SRX_JAXB_CONTEXT.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            m.marshal(jaxbObject, new FileOutputStream(outFile));
+        } catch (JAXBException ioe) {
+            Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
+            Log.log(ioe);
+            throw new IOException(ioe);
+        }
+    }
+
+    /**
+     * Loads the local segmentation file. Accepts SRX (default) or old CONF format.
+     * In case you use conf format, rules about old version remain valid.
+     **/
+    public static SRX loadSRX(File configDir) {
+        File inFile = null;
+        try {
+            inFile = new File(configDir, SRX_SENTSEG);
+            if (inFile.exists()) {
+                return loadSrxFile(inFile.toURI().toURL());
+            }
+        } catch (Exception o2) {
+
+        }
+
+        // If file was not present or not readable
+        inFile = new File(configDir, CONF_SENTSEG);
+        if (inFile.exists()) {
+            return loadConfFile(inFile);
+        }
+
+        // If none of the files (conf and srx) are present,
+        // return null to mimic behavior of previous method
+        return null;
+    }
+
     /**
      * Loads segmentation rules from an XML file. If there's an error loading a
-     * file, it calls <code>initDefaults</code>.
+     * file, it calls <code>getDefaultFromJar</code>.
      * <p>
      * Since 1.6.0 RC8 it also checks if the version of segmentation rules saved
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    public static SRX loadSRX(File configFile) {
-        if (!configFile.exists()) {
-            return null;
-        }
+    private static SRX loadConfFile(File configFile) {
         SRX res;
         try {
-
             MyExceptionListener myel = new MyExceptionListener();
             XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel);
             res = (SRX) xmldec.readObject();
@@ -157,9 +236,7 @@ public class SRX implements Serializable {
                     sb.append("\n");
                 }
                 Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
-                res = new SRX();
-                res.initDefaults();
-                return res;
+                return SRX.getDefault();
             }
 
             // checking the version
@@ -167,20 +244,54 @@ public class SRX implements Serializable {
                 // yeap, the segmentation config file is of the older version
 
                 // initing defaults
-                SRX defaults = new SRX();
-                defaults.initDefaults();
+                SRX defaults = SRX.getDefault();
                 // and merging them into loaded rules
                 res = merge(res, defaults);
             }
+            Log.log("using segmentation rules from " + configFile);
         } catch (Exception e) {
             // silently ignoring FNF
             if (!(e instanceof FileNotFoundException)) {
                 Log.log(e);
             }
-            res = new SRX();
-            res.initDefaults();
+            res = SRX.getDefault();
         }
         return res;
+    }
+
+    private static SRX loadSrxFile(URL rulesUrl) {
+        try {
+            List<MapRule> newMap = new ArrayList<MapRule>();
+            Srx data = (Srx) SRX_JAXB_CONTEXT.createUnmarshaller().unmarshal(rulesUrl);
+
+            for (Languagerule rules : data.getBody().getLanguagerules().getLanguagerule()) {
+
+                String lang = rules.getLanguagerulename();
+                String pattern = DEFAULT_RULES_PATTERN;
+                for (Languagemap lm : data.getBody().getMaprules().getLanguagemap()) {
+                    if (lm.getLanguagerulename().equals(rules.getLanguagerulename())) {
+                        pattern = lm.getLanguagepattern();
+                        break;
+                    }
+                }
+                List<Rule> rulesList = new ArrayList<Rule>(rules.getRule().size());
+                for (gen.core.segmentation.Rule r : rules.getRule()) {
+                    boolean isBreak = "yes".equalsIgnoreCase(r.getBreak());
+                    rulesList.add(new Rule(isBreak, r.getBeforebreak().getContent(), r.getAfterbreak()
+                            .getContent()));
+                }
+
+                newMap.add(new MapRule(lang, pattern, rulesList));
+            }
+            Log.log("using segmentation rules from " + rulesUrl);
+            // set rules only if no errors
+            SRX res = new SRX();
+            res.setMappingRules(newMap);
+            return res;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -322,44 +433,10 @@ public class SRX implements Serializable {
     // Patterns
     private static final String DEFAULT_RULES_PATTERN = ".*";
 
-    /**
-     * Initializes default rules.
-     */
-    private void initDefaults() {
-        try {
-            List<MapRule> newMap = new ArrayList<MapRule>();
-            URL rulesUrl = this.getClass().getResource("defaultRules.srx");
-            Srx data = (Srx) SRX_JAXB_CONTEXT.createUnmarshaller().unmarshal(rulesUrl);
-
-            for (Languagerule rules : data.getBody().getLanguagerules().getLanguagerule()) {
-
-                String lang = rules.getLanguagerulename();
-                String pattern = DEFAULT_RULES_PATTERN;
-                for (Languagemap lm : data.getBody().getMaprules().getLanguagemap()) {
-                    if (lm.getLanguagerulename().equals(rules.getLanguagerulename())) {
-                        pattern = lm.getLanguagepattern();
-                        break;
-                    }
-                }
-                List<Rule> rulesList = new ArrayList<Rule>(rules.getRule().size());
-                for (gen.core.segmentation.Rule r : rules.getRule()) {
-                    boolean isBreak = "yes".equalsIgnoreCase(r.getBreak());
-                    rulesList.add(new Rule(isBreak, r.getBeforebreak().getContent(), r.getAfterbreak()
-                            .getContent()));
-                }
-
-                newMap.add(new MapRule(lang, pattern, rulesList));
-            }
-            // set rules only if no errors
-            getMappingRules().addAll(newMap);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public static SRX getDefault() {
-        SRX srx = new SRX();
-        srx.init();
+        SRX srx = loadSrxFile(SRX.class.getResource("defaultRules.srx"));
+        srx.includeEndingTags = true;
+        srx.segmentSubflows = true;
         return srx;
     }
 

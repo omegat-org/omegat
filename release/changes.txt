@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   4 Enhancements
   3 Bug fixes
-  0 Localisation update
+  1 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 3 vs 4.1.2 update 2
 
@@ -30,6 +30,10 @@
   https://sourceforge.net/p/omegat/bugs/886/
 
   - Tags were lost when saving TMX from Aligner
+
+  Localisation Updates:
+
+  - Russian localisation updated to 4.1.2 update 2 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 2 (2017-09-22)

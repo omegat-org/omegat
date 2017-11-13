@@ -142,17 +142,20 @@ public class AboutDialog extends JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        licenseButton = new javax.swing.JButton();
-        okButton = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        javaversion = new javax.swing.JLabel();
-        memoryusage = new javax.swing.JLabel();
         versionLabel = new javax.swing.JLabel();
         aboutpane = new javax.swing.JScrollPane();
         abouttext = new javax.swing.JTextArea();
+        buttonPanel = new javax.swing.JPanel();
+        javaversion = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 4), new java.awt.Dimension(0, 4), new java.awt.Dimension(32767, 4));
+        memoryusage = new javax.swing.JLabel();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 4), new java.awt.Dimension(0, 4), new java.awt.Dimension(32767, 4));
+        jLabel2 = new javax.swing.JLabel();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 4), new java.awt.Dimension(0, 4), new java.awt.Dimension(32767, 4));
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        licenseButton = new javax.swing.JButton();
+        okButton = new javax.swing.JButton();
 
         setTitle(OStrings.getString("ABOUTDIALOG_TITLE")); // NOI18N
         setModal(true);
@@ -162,43 +165,6 @@ public class AboutDialog extends JDialog {
             }
         });
         getContentPane().setLayout(new java.awt.BorderLayout(5, 5));
-
-        buttonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        buttonPanel.setLayout(new java.awt.BorderLayout());
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("ABOUTDIALOG_COPYRIGHT")); // NOI18N
-        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        buttonPanel.add(jLabel2, java.awt.BorderLayout.WEST);
-
-        org.openide.awt.Mnemonics.setLocalizedText(licenseButton, OStrings.getString("ABOUTDIALOG_LICENSE_BUTTON")); // NOI18N
-        licenseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                licenseButtonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(licenseButton);
-
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(okButton);
-
-        buttonPanel.add(jPanel1, java.awt.BorderLayout.EAST);
-
-        jPanel2.setLayout(new java.awt.GridLayout(0, 1));
-
-        org.openide.awt.Mnemonics.setLocalizedText(javaversion, OStrings.getString("JAVA_VERSION")); // NOI18N
-        jPanel2.add(javaversion);
-
-        org.openide.awt.Mnemonics.setLocalizedText(memoryusage, OStrings.getString("MEMORY_USAGE")); // NOI18N
-        jPanel2.add(memoryusage);
-
-        buttonPanel.add(jPanel2, java.awt.BorderLayout.NORTH);
-
-        getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
         versionLabel.setIcon(new ImageIcon(ResourcesUtil.APP_ICON_32X32));
         org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_VERSION_REVISION")); // NOI18N
@@ -218,6 +184,49 @@ public class AboutDialog extends JDialog {
         aboutpane.setViewportView(abouttext);
 
         getContentPane().add(aboutpane, java.awt.BorderLayout.CENTER);
+
+        buttonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        buttonPanel.setLayout(new javax.swing.BoxLayout(buttonPanel, javax.swing.BoxLayout.PAGE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(javaversion, OStrings.getString("JAVA_VERSION")); // NOI18N
+        buttonPanel.add(javaversion);
+        buttonPanel.add(filler1);
+
+        org.openide.awt.Mnemonics.setLocalizedText(memoryusage, OStrings.getString("MEMORY_USAGE")); // NOI18N
+        buttonPanel.add(memoryusage);
+        buttonPanel.add(filler2);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("ABOUTDIALOG_COPYRIGHT")); // NOI18N
+        buttonPanel.add(jLabel2);
+        buttonPanel.add(filler3);
+
+        jPanel3.setAlignmentX(0.0F);
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setAlignmentX(0.0F);
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(licenseButton, OStrings.getString("ABOUTDIALOG_LICENSE_BUTTON")); // NOI18N
+        licenseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                licenseButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(licenseButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(okButton);
+
+        jPanel3.add(jPanel1, java.awt.BorderLayout.EAST);
+
+        buttonPanel.add(jPanel3);
+
+        getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void licenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_licenseButtonActionPerformed
@@ -243,9 +252,12 @@ public class AboutDialog extends JDialog {
     private javax.swing.JScrollPane aboutpane;
     private javax.swing.JTextArea abouttext;
     private javax.swing.JPanel buttonPanel;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel javaversion;
     private javax.swing.JButton licenseButton;
     private javax.swing.JLabel memoryusage;

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 3
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   3 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - New segmentation rule to default set of Finnish language rules
   https://sourceforge.net/p/omegat/feature-requests/1347/
+
+  - Allow copying support info from Help > About
+  https://sourceforge.net/p/omegat/feature-requests/1351/
 
   Bug fixes:
 

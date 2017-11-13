@@ -26,6 +26,8 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -129,6 +131,16 @@ public class AboutDialog extends JDialog {
         }
     }
 
+    private void copySupportInfo() {
+        Runtime runtime = Runtime.getRuntime();
+        String memory = String.format("%dMiB total / %dMiB free / %dMiB max", runtime.totalMemory() / 1024 / 1024,
+                runtime.freeMemory() / 1024 / 1024, runtime.maxMemory() / 1024 / 1024);
+        String info = String.format("Version: %s\nPlatform: %s %s\nJava: %s %s\nMemory: %s",
+                OStrings.getNameAndVersion(), System.getProperty("os.name"), System.getProperty("os.version"),
+                System.getProperty("java.version"), System.getProperty("os.arch"), memory);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(info), null);
+    }
+
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
     public int getReturnStatus() {
         return returnStatus;
@@ -154,6 +166,7 @@ public class AboutDialog extends JDialog {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 4), new java.awt.Dimension(0, 4), new java.awt.Dimension(32767, 4));
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        copySupportInfoButton = new javax.swing.JButton();
         licenseButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
 
@@ -206,6 +219,14 @@ public class AboutDialog extends JDialog {
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
+        org.openide.awt.Mnemonics.setLocalizedText(copySupportInfoButton, OStrings.getString("ABOUTDIALOG_COPY_SUPPORT_INFO_BUTTON")); // NOI18N
+        copySupportInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copySupportInfoButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(copySupportInfoButton);
+
         org.openide.awt.Mnemonics.setLocalizedText(licenseButton, OStrings.getString("ABOUTDIALOG_LICENSE_BUTTON")); // NOI18N
         licenseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,6 +263,10 @@ public class AboutDialog extends JDialog {
         doClose(RET_CANCEL);
     }//GEN-LAST:event_closeDialog
 
+    private void copySupportInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copySupportInfoButtonActionPerformed
+        copySupportInfo();
+    }//GEN-LAST:event_copySupportInfoButtonActionPerformed
+
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
@@ -252,6 +277,7 @@ public class AboutDialog extends JDialog {
     private javax.swing.JScrollPane aboutpane;
     private javax.swing.JTextArea abouttext;
     private javax.swing.JPanel buttonPanel;
+    private javax.swing.JButton copySupportInfoButton;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;

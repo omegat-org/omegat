@@ -36,7 +36,7 @@
 
   Localisation Updates:
 
-  - Russian localisation updated to 4.1.2 update 2 (UI)
+  - Russian localisation updated to 4.1.2 update 3 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 2 (2017-09-22)

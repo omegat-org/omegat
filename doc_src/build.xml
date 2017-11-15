@@ -172,7 +172,10 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
+        <!-- For English -->
         <copy file="${language}/version.properties" tofile="../docs/${language}/version.properties" />
+        <!-- Other languages -->
+        <copy file="${language}/version_${language}.properties" tofile="../docs/${language}/version_${language}.properties" />
     </target>
      
     <target name="instant-start">

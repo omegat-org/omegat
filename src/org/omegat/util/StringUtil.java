@@ -204,6 +204,9 @@ public final class StringUtil {
     }
 
     public static String capitalizeFirst(String text, Locale locale) {
+        if (text.isEmpty()) {
+            return text;
+        }
         int remainder = text.offsetByCodePoints(0, 1);
         String firstCP = text.substring(0, remainder);
         return StringUtil.toTitleCase(firstCP, locale)
@@ -211,7 +214,7 @@ public final class StringUtil {
     }
 
     public static String matchCapitalization(String text, String matchTo, Locale locale) {
-        if (StringUtil.isEmpty(matchTo)) {
+        if (StringUtil.isEmpty(matchTo) || StringUtil.isEmpty(text)) {
             return text;
         }
         // If input matches term exactly, don't change anything

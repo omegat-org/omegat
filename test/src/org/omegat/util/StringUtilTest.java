@@ -268,6 +268,8 @@ public class StringUtilTest {
         assertEquals("\u01CB", StringUtil.capitalizeFirst("\u01CC", locale));
         // LATIN SMALL LETTER I (U+0069) -> LATIN CAPITAL LETTER I WITH DOT ABOVE (U+0130) in Turkish
         assertEquals("\u0130jk", StringUtil.capitalizeFirst("ijk", new Locale("tr")));
+        // Empty string -> empty string (like toLowerCase, toUpperCase)
+        assertEquals("", StringUtil.capitalizeFirst("", locale));
     }
 
     @Test
@@ -277,6 +279,8 @@ public class StringUtilTest {
         // matchTo is empty -> return original text
         assertEquals(text, StringUtil.matchCapitalization(text, null, locale));
         assertEquals(text, StringUtil.matchCapitalization(text, "", locale));
+        // text is empty -> return original text
+        assertEquals("", StringUtil.matchCapitalization("", "Foo", locale));
         // text starts with matchTo -> return original text
         assertEquals(text, StringUtil.matchCapitalization(text, text + "BAR", locale));
         // matchTo is title case

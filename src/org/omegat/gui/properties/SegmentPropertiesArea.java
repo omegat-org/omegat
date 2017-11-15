@@ -57,6 +57,7 @@ import org.apache.commons.lang.StringUtils;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
@@ -344,8 +345,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
                 }
             }
             setKeyProperties(ste.getKey());
-            TMXEntry trg = Core.getProject().getTranslationInfo(ste);
-            setTranslationProperties(trg);
+            IProject project = Core.getProject();
+            if (project.isProjectLoaded()) {
+                TMXEntry trg = project.getTranslationInfo(ste);
+                setTranslationProperties(trg);
+            }
         }
         viewImpl.update();
     }
@@ -359,6 +363,9 @@ public class SegmentPropertiesArea implements IPaneMenu {
     }
 
     private void setTranslationProperties(TMXEntry entry) {
+        if (entry == null) {
+            return;
+        }
         if (entry.hasNote()) {
             setProperty(KEY_HASNOTE, true);
         }

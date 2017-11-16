@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 3
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   3 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
@@ -23,6 +23,9 @@
 
   - Allow copying support info from Help > About
   https://sourceforge.net/p/omegat/feature-requests/1351/
+
+  - Update local omegat.project in 4.x team projects 
+  https://sourceforge.net/p/omegat/feature-requests/1335/
 
   Bug fixes:
 

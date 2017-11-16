@@ -79,6 +79,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
+import org.omegat.CLIParameters;
 
 /**
  * Handler for project UI commands, like open, save, compile, etc.
@@ -446,7 +447,7 @@ public final class ProjectUICommands {
                     mainWindow.setCursor(oldCursor);
                     return null;
                 }
-
+                
                 // check if project okay
                 ProjectProperties props;
                 try {
@@ -460,7 +461,26 @@ public final class ProjectUICommands {
 
                 try {
                     boolean needToSaveProperties = false;
-                    if (props.hasRepositories()) {
+                    if (props.hasRepositories()) { // This is a remote project
+                        if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
+                            // Update project.properties
+                            mainWindow.showStatusMessageRB("TEAM_OPEN");
+                            try {
+                                RemoteRepositoryProvider remoteRepositoryProvider = 
+                                        new RemoteRepositoryProvider(props.getProjectRootDir(),
+                                        props.getRepositories());
+                                remoteRepositoryProvider.switchAllToLatest();
+                                // Overwrite omegat.project
+                                remoteRepositoryProvider.copyFilesFromRepoToProject(OConsts.FILE_PROJECT);
+                                // Reload project properties
+                                props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
+                            } catch (Exception e) {
+                                Log.logErrorRB(e, "TF_PROJECT_PROPERTIES_ERROR");
+                                    Log.log(e);
+                            throw new IOException(OStrings.getString("TF_PROJECT_PROPERTIES_ERROR") + "\n"
+                                            + e.getMessage(), e);
+                            }
+                        }                       
                         // team project - non-exist directories could be created from repo
                         props.autocreateDirectories();
                     } else {

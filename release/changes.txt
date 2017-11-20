@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   6 Enhancements
   3 Bug fixes
-  1 Localisation update
+  2 Localisation update
 ----------------------------------------------------------------------
 4.1.2 update 3 vs 4.1.2 update 2
 
@@ -40,6 +40,7 @@
   Localisation Updates:
 
   - Russian localisation updated to 4.1.2 update 3 (UI, readme)
+  - Brazilian Portuguese localisation updated to 4.1.2 update 3 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.2 update 2 (2017-09-22)

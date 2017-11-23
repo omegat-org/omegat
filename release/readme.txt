@@ -80,7 +80,7 @@ is to use Java Web Start.
 
 For this purpose download the following file and then execute it:
 
-   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
 
 It will install the correct environment for your computer and the application
 itself on the first run. Later calls do not need to be online.

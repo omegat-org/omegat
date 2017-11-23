@@ -64,8 +64,8 @@ public final class Help {
      * URL for the online manual.
      */
     public static final String ONLINE_HELP_URL = OStrings.IS_BETA
-            ? "http://omegat.sourceforge.net/manual-latest/"
-            : "http://omegat.sourceforge.net/manual-standard/";
+            ? "https://omegat.sourceforge.io/manual-latest/"
+            : "https://omegat.sourceforge.io/manual-standard/";
 
     public static final String ONLINE_JAVADOC_URL = OStrings.IS_BETA
             ? "https://omegat.ci.cloudbees.com/job/omegat-javadoc/javadoc/"

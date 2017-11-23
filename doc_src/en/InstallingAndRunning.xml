@@ -84,11 +84,11 @@
 
       <literallayout><code># OmegaT.exe runtime configuration
 # To use a parameter, remove the '#' before the '-'
-# Memory 
--Xmx1024M 
-# Language 
+# Memory
+-Xmx1024M
+# Language
 -Duser.language=FR
-# Country 
+# Country
 -Duser.country=CA </code></literallayout>
 
       <para>Advice: if OmegaT works slowly in Remote Desktop sessions under
@@ -536,7 +536,7 @@
     Runtime Environment (JRE) used. To start OmegaT for the first time with
     Java Web Start, load the following URL in your browser:</para>
 
-    <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+    <para><emphasis>https://omegat.sourceforge.io/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
     <para>Download the file<emphasis>
     <application>OmegaT</application>.jnlp</emphasis> and then click on it.

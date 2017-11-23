@@ -2,7 +2,7 @@
  OmegaT 4.1.2 update 3
 ----------------------------------------------------------------------
   6 Enhancements
-  3 Bug fixes
+  4 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 4.1.2 update 3 vs 4.1.2 update 2
@@ -24,13 +24,17 @@
   - Allow copying support info from Help > About
   https://sourceforge.net/p/omegat/feature-requests/1351/
 
-  - Update local omegat.project in 4.x team projects 
+  - Update local omegat.project in 4.x team projects
   https://sourceforge.net/p/omegat/feature-requests/1335/
 
   Bug fixes:
 
   - Forced versioned /target in 4.1-compatible team projects
   https://sourceforge.net/p/omegat/bugs/863/
+
+  - Menus not displayed when using a non-English language on macOS
+High Sierra
+  https://sourceforge.net/p/omegat/bugs/883/
 
   - Some segmentation rule edits don't take effect when closing window
   https://sourceforge.net/p/omegat/bugs/886/

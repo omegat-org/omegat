@@ -207,9 +207,7 @@ jar {
 ext {
     assetDir = findProperty('assetDir') ?: '../'
 
-    macExecutable = file("${assetDir}/JavaAppLauncher")
     macJRE = file("${assetDir}/jre-mac-root")
-    macDistEnabled = macExecutable.file && macJRE.directory
 
     linuxJRE = file("${assetDir}/jre-linux")
     linux64JRE = file("${assetDir}/jre-linux-64")
@@ -323,31 +321,23 @@ distributions {
         sourceDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
     }
 
-    if (macDistEnabled) {
-        mac {
-            contents {
-                from('release/mac-specific') {
-                    include '**/Info.plist'
-                    expand(version: project.version,
-                        configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
-                }
-                from('release/mac-specific') {
-                    exclude '**/Info.plist'
-                }
-                into('OmegaT.app/Contents/Java') {
-                    with main.contents
-                    exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat'
-                }
-                from(macExecutable) {
-                    into 'OmegaT.app/Contents/MacOS'
-                    fileMode 0755
-                }
-                from(macJRE) {
-                    into 'OmegaT.app/Contents/PlugIns/jre.bundle'
-                    fileMode 0755
-                }
+    mac {
+        contents {
+            from('release/mac-specific') {
+                exclude 'OmegaT.app/Contents/MacOS/OmegaT'
             }
-            macDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Mac.zip"
+            from('release/mac-specific') {
+                include 'OmegaT.app/Contents/MacOS/OmegaT'
+                fileMode 0755
+            }
+            into('OmegaT.app/Contents/Java') {
+                with main.contents
+                exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat'
+            }
+            from(macJRE) {
+                into 'OmegaT.app/Contents/PlugIns/jre.bundle'
+                fileMode 0755
+            }
         }
     }
 
@@ -393,10 +383,6 @@ distributions {
                 into 'source/scripts'
             }
             from('release') {
-                include 'mac-specific/OmegaT.app/Contents/Resources/en.lproj/Localizable.strings'
-                into 'source/release'
-            }
-            from('release') {
                 include 'readme.txt'
                 into 'source'
                 filter(ReplaceTokens, tokens: [TRANSLATION_NOTICE: 'This translation is the work of [insert your name], copyright\u00a9 [insert year].'])
@@ -421,32 +407,38 @@ distributions {
     }
 }
 
-if (macDistEnabled) {
-    task installMacSignedDist(type: Sync) {
-        onlyIf {
-            // Set this in e.g. gradle.properties
-            project.hasProperty('codesignIdentity')
-        }
-        with distributions.mac.contents
-        destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
-        doLast {
-            exec {
-               commandLine 'codesign', '--deep', '-s', project.property('codesignIdentity'), file("${destinationDir}/OmegaT.app")
-            }
+task installMacSignedDist(type: Sync) {
+    description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
+    onlyIf {
+        // Set this in e.g. gradle.properties
+        project.hasProperty('codesignIdentity')
+    }
+    with distributions.mac.contents
+    destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
+    doLast {
+        exec {
+            commandLine 'codesign', '--deep', '-s', project.property('codesignIdentity'), file("${destinationDir}/OmegaT.app")
         }
     }
+}
 
-    task macSignedDistZip(type: Zip) {
-        def zipRoot = "${applicationName}_${version}${omtVersion.beta}_Mac_Signed"
-        from(installMacSignedDist.outputs) {
-            into zipRoot
-        }
-        archiveName = "${zipRoot}.zip"
+macDistZip {
+    onlyIf {
+        macJRE.directory
     }
+    archiveName = "${applicationName}_${version}${omtVersion.beta}_Mac.zip"
+}
 
-    task mac(dependsOn: [macDistZip, macSignedDistZip]) {
-        description = 'Build the Mac distributions.'
+task macSignedDistZip(type: Zip) {
+    def zipRoot = "${applicationName}_${version}${omtVersion.beta}_Mac_Signed"
+    from(installMacSignedDist.outputs) {
+        into zipRoot
     }
+    archiveName = "${zipRoot}.zip"
+}
+
+task mac(dependsOn: [macDistZip, macSignedDistZip]) {
+    description = 'Build the Mac distributions.'
 }
 
 task linux(dependsOn: [linuxDistTar, linux64DistTar]) {
@@ -662,40 +654,6 @@ task genJAXB {
             exec {
                 commandLine 'xjc', '-no-header', '-d', 'src', '-p', cfg.p, '-b', cfg.b, cfg.xsd
             }
-        }
-    }
-}
-
-task genMac {
-    description = 'Generate the Mac .app skeleton. Requires AppBundler (https://bitbucket.org/infinitekind/appbundler) ' +
-        'to be available in ~/.ant/lib'
-    outputs.dir file('release/mac-specific')
-    def appbundlerJar = file("${System.getProperty('user.home')}/.ant/lib/appbundler-1.0ea.jar")
-    onlyIf {
-        appbundlerJar.file
-    }
-    doLast {
-        ant.taskdef(name: 'appbundler', classname: 'com.oracle.appbundler.AppBundlerTask',
-            classpath: appbundlerJar)
-        ant.appbundler(outputdirectory: 'release/mac-specific',
-            name: applicationName,
-            displayname: applicationName,
-            identifier: 'org.omegat.OmegaT',
-            icon: 'images/OmegaT.icns',
-            version: '${version}',
-            jvmrequired: javaVersion,
-            shortversion: '${version}',
-            mainclassname: mainClassName) {
-            option(value: "-Xdock:name=${applicationName}")
-            argument(value: '--config-file=${configfile}')
-            bundledocument(extensions: 'project',
-                name: "${applicationName} Project",
-                role: 'editor',
-                icon: 'images/OmegaT.icns')
-            bundledocument(extensions: '*',
-                name: 'All Files',
-                role: 'none')
-            plistentry(key: 'JVMRuntime', value: 'jre.bundle')
         }
     }
 }

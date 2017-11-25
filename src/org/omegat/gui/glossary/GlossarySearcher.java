@@ -68,7 +68,7 @@ public class GlossarySearcher {
 
         for (GlossaryEntry glosEntry : entries) {
             checkCancelled();
-            if (isTokenMatch(strTokens, glosEntry.getSrcText())
+            if (isTokenMatch(strTokens, ste.getSrcText(), glosEntry.getSrcText())
                     || isCjkMatch(ste.getSrcText(), glosEntry.getSrcText())) {
                 result.add(glosEntry);
             }
@@ -85,7 +85,7 @@ public class GlossarySearcher {
         // Compute source entry tokens
         Token[] strTokens = tokenize(ste.getSrcText(), TagUtil.buildTagList(ste.getSrcText(), ste.getProtectedParts()));
 
-        Token[] toks = getMatchingTokens(strTokens, entry.getSrcText());
+        Token[] toks = getMatchingTokens(strTokens, ste.getSrcText(), entry.getSrcText());
         if (toks.length == 0) {
             toks = getCjkMatchingTokens(ste.getSrcText(), entry.getSrcText());
         }
@@ -101,7 +101,7 @@ public class GlossarySearcher {
 
         for (String term : entry.getLocTerms(true)) {
             checkCancelled();
-            if (isTokenMatch(strTokens, term) || isCjkMatch(trg, term)) {
+            if (isTokenMatch(strTokens, trg, term) || isCjkMatch(trg, term)) {
                 result.add(term);
             }
         }
@@ -115,11 +115,11 @@ public class GlossarySearcher {
     protected void checkCancelled() {
     }
 
-    private boolean isTokenMatch(Token[] fullTextTokens, String term) {
-        return getMatchingTokens(fullTextTokens, term).length > 0;
+    private boolean isTokenMatch(Token[] fullTextTokens, String fullText, String term) {
+        return getMatchingTokens(fullTextTokens, fullText, term).length > 0;
     }
 
-    private Token[] getMatchingTokens(Token[] fullTextTokens, String term) {
+    private Token[] getMatchingTokens(Token[] fullTextTokens, String fullText, String term) {
         // Compute glossary entry tokens
         Token[] glosTokens = tokenize(term);
         if (glosTokens.length == 0) {
@@ -127,8 +127,25 @@ public class GlossarySearcher {
         }
         boolean notExact = Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH,
                 Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT);
-        return DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
+        Token[] foundTokens = DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
+        if (keepMatch(foundTokens, fullText, term)) {
+            return foundTokens;
+        } else {
+            return DefaultTokenizer.EMPTY_TOKENS_LIST;
+        }
+    }
 
+    private static boolean keepMatch(Token[] tokens, String srcTxt, String locTxt) {
+        // Filter out matches where the glossary entry is all caps but the source-text match is not.
+        if (StringUtil.isUpperCase(locTxt)) {
+            for (Token tok : tokens) {
+                String matched = tok.getTextFromString(srcTxt);
+                if (!StringUtil.isUpperCase(matched)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private static boolean isCjkMatch(String fullText, String term) {

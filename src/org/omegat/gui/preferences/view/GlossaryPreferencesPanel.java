@@ -54,7 +54,6 @@ public class GlossaryPreferencesPanel extends JPanel {
         replaceHitsCheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel1 = new javax.swing.JPanel();
-        enableTransTipsCheckBox = new javax.swing.JCheckBox();
         transTipsExactMatchCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -78,9 +77,6 @@ public class GlossaryPreferencesPanel extends JPanel {
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(enableTransTipsCheckBox, OStrings.getString("PREFS_GLOSSARY_TRANSTIPS_ENABLE")); // NOI18N
-        jPanel1.add(enableTransTipsCheckBox);
-
         org.openide.awt.Mnemonics.setLocalizedText(transTipsExactMatchCheckBox, OStrings.getString("PREFS_GLOSSARY_TRANSTIPS_EXACTMATCH")); // NOI18N
         jPanel1.add(transTipsExactMatchCheckBox);
 
@@ -89,7 +85,6 @@ public class GlossaryPreferencesPanel extends JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox displayContextCheckBox;
-    javax.swing.JCheckBox enableTransTipsCheckBox;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JPanel jPanel1;
     javax.swing.JCheckBox replaceHitsCheckBox;

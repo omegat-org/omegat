@@ -64,6 +64,7 @@ public class EditorSettings implements IEditorSettings {
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
     private boolean markFirstNonUnique;
+    private boolean markGlossaryMatches;
     private boolean markLanguageChecker;
     private boolean doFontFallback;
 
@@ -93,6 +94,7 @@ public class EditorSettings implements IEditorSettings {
         viewSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,
                 Preferences.VIEW_OPTION_SOURCE_ALL_BOLD_DEFAULT);
         markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
+        markGlossaryMatches = Preferences.isPreference(Preferences.TRANSTIPS);
         markLanguageChecker = !Preferences.isPreferenceDefault(Preferences.LT_DISABLED,
                 Preferences.LT_DISABLED_DEFAULT);
         doFontFallback = Preferences.isPreference(Preferences.FONT_FALLBACK);
@@ -302,6 +304,26 @@ public class EditorSettings implements IEditorSettings {
 
         this.doFontFallback = doFontFalback;
         Preferences.setPreference(Preferences.FONT_FALLBACK, doFontFalback);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
+    @Override
+    public boolean isMarkGlossaryMatches() {
+        return markGlossaryMatches;
+    }
+
+    @Override
+    public void setMarkGlossaryMatches(boolean markGlossaryMatches) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markGlossaryMatches = markGlossaryMatches;
+        Preferences.setPreference(Preferences.TRANSTIPS, markGlossaryMatches);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();

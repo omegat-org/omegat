@@ -35,7 +35,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
-import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -53,7 +52,7 @@ public class TransTipsMarker implements IMarker {
         if (!isActive || sourceText == null) {
             return null;
         }
-        if (!Preferences.isPreference(Preferences.TRANSTIPS)) {
+        if (!Core.getEditor().getSettings().isMarkGlossaryMatches()) {
             return null;
         }
         List<GlossaryEntry> glossaryEntries = Core.getGlossary().getDisplayedEntries();

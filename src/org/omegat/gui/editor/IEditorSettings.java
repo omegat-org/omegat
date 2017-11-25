@@ -74,6 +74,10 @@ public interface IEditorSettings {
 
     void setAutoSpellChecking(boolean isNeedToSpell);
 
+    boolean isMarkGlossaryMatches();
+
+    void setMarkGlossaryMatches(boolean markGlossaryMatches);
+
     boolean isMarkLanguageChecker();
 
     void setMarkLanguageChecker(boolean markLanguageChecker);

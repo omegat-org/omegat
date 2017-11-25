@@ -99,16 +99,6 @@
         <Property name="axis" type="int" value="3"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JCheckBox" name="enableTransTipsCheckBox">
-          <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="PREFS_GLOSSARY_TRANSTIPS_ENABLE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JCheckBox" name="transTipsExactMatchCheckBox">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">

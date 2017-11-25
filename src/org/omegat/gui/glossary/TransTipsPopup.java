@@ -37,7 +37,6 @@ import javax.swing.text.JTextComponent;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
-import org.omegat.util.Preferences;
 
 /**
  * Popup for TransTips processing.
@@ -50,7 +49,7 @@ import org.omegat.util.Preferences;
 public class TransTipsPopup implements IPopupMenuConstructor {
     public void addItems(final JPopupMenu menu, JTextComponent comp, final int mousepos,
             boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
-        if (!Preferences.isPreference(Preferences.TRANSTIPS)) {
+        if (!Core.getEditor().getSettings().isMarkGlossaryMatches()) {
             return;
         }
 

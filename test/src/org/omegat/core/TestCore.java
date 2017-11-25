@@ -298,6 +298,15 @@ public abstract class TestCore {
             @Override
             public void setMarkLanguageChecker(boolean markLanguageChecker) {
             }
+
+            @Override
+            public boolean isMarkGlossaryMatches() {
+                return false;
+            }
+
+            @Override
+            public void setMarkGlossaryMatches(boolean markGlossaryMatches) {
+            }
         };
         TestCoreInitializer.initEditor(new IEditor() {
 

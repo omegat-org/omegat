@@ -217,9 +217,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
         nowEntries = entries;
 
-        // If the TransTips is enabled then underline all the matched glossary
-        // entries
-        if (Preferences.isPreference(Preferences.TRANSTIPS)) {
+        // If the TransTips is enabled then underline all the matched glossary entries
+        if (Core.getEditor().getSettings().isMarkGlossaryMatches()) {
             Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
 

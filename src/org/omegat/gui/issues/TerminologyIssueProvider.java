@@ -49,9 +49,9 @@ import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.gui.glossary.TransTips;
 import org.omegat.util.FileUtil;
 import org.omegat.util.OStrings;
+import org.omegat.util.Token;
 import org.omegat.util.gui.Styles.EditorColor;
 
 /**
@@ -204,9 +204,9 @@ class TerminologyIssueProvider implements IIssueProvider {
             splitPanel.firstTextPane.setText(ste.getSrcText());
             splitPanel.lastTextPane.setText(tmxEntry.translation);
             StyledDocument doc = splitPanel.firstTextPane.getStyledDocument();
-            TransTips.search(ste.getSrcText(), glossaryEntry, (ge, start, end) -> {
-                doc.setCharacterAttributes(start, end - start, ERROR_STYLE, false);
-            });
+            for (Token tok : Core.getGlossaryManager().searchSourceMatchTokens(ste, glossaryEntry)) {
+                doc.setCharacterAttributes(tok.getOffset(), tok.getLength(), ERROR_STYLE, false);
+            }
             splitPanel.setMinimumSize(new Dimension(0, splitPanel.firstTextPane.getFont().getSize() * 6));
             return splitPanel;
         }

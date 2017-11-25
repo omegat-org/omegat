@@ -35,6 +35,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -64,17 +65,13 @@ public class TransTipsMarker implements IMarker {
         // Get the index of the current segment in the whole document
         //sourceText = sourceText.toLowerCase();
 
-        TransTips.Search callback = new TransTips.Search() {
-            public void found(GlossaryEntry ge, int start, int end) {
-                Mark m = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
+        for (GlossaryEntry ent : glossaryEntries) {
+            for (Token tok : Core.getGlossaryManager().searchSourceMatchTokens(ste, ent)) {
+                Mark m = new Mark(Mark.ENTRY_PART.SOURCE, tok.getOffset(), tok.getOffset() + tok.getLength());
                 m.painter = TransTipsMarker.TRANSTIPS_UNDERLINER;
-                m.toolTipText = ge.toStyledString().toHTML();
+                m.toolTipText = ent.toStyledString().toHTML();
                 marks.add(m);
             }
-        };
-
-        for (GlossaryEntry ent : glossaryEntries) {
-            TransTips.search(sourceText, ent, callback);
         }
         return marks;
     }

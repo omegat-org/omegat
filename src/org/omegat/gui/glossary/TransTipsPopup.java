@@ -27,8 +27,8 @@
 
 package org.omegat.gui.glossary;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -37,6 +37,7 @@ import javax.swing.text.JTextComponent;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
+import org.omegat.util.Token;
 
 /**
  * Popup for TransTips processing.
@@ -63,27 +64,22 @@ public class TransTipsPopup implements IPopupMenuConstructor {
         if (mousepos < startSource || mousepos > startSource + len) {
             return;
         }
-
-        // Test if clicked on a highlighted word
-        TransTips.Search callback = new TransTips.Search() {
-            public void found(GlossaryEntry ge, int start, int end) {
+        Set<String> added = new HashSet<>();
+        for (GlossaryEntry ge : GlossaryTextArea.nowEntries) {
+            for (Token tok : Core.getGlossaryManager().searchSourceMatchTokens(sb.getSourceTextEntry(), ge)) {
                 // is inside found word ?
-                if (startSource + start <= mousepos && mousepos <= startSource + end) {
+                if (startSource + tok.getOffset() <= mousepos
+                        && mousepos <= startSource + tok.getOffset() + tok.getLength()) {
                     // Create the MenuItems
                     for (String s : ge.getLocTerms(true)) {
-                        final String txt = s;
-                        JMenuItem it = menu.add(txt);
-                        it.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                Core.getEditor().insertText(txt);
-                            }
-                        });
+                        if (!added.contains(s)) {
+                            JMenuItem it = menu.add(s);
+                            it.addActionListener(e -> Core.getEditor().insertText(s));
+                            added.add(s);
+                        }
                     }
                 }
             }
-        };
-        for (GlossaryEntry ge : GlossaryTextArea.nowEntries) {
-            TransTips.search(sb.getSourceText(), ge, callback);
         }
         menu.addSeparator();
     }

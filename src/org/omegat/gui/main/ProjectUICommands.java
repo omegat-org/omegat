@@ -469,7 +469,7 @@ public final class ProjectUICommands {
                                 RemoteRepositoryProvider remoteRepositoryProvider = 
                                         new RemoteRepositoryProvider(props.getProjectRootDir(),
                                         props.getRepositories());
-                                remoteRepositoryProvider.switchAllToLatest();
+                                remoteRepositoryProvider.switchToVersion(OConsts.FILE_PROJECT, null);
                                 // Overwrite omegat.project
                                 remoteRepositoryProvider.copyFilesFromRepoToProject(OConsts.FILE_PROJECT);
                                 // Reload project properties

@@ -182,8 +182,6 @@ public final class Preferences {
 
     /** Enable TransTips */
     public static final String TRANSTIPS = "transtips";
-    /** TransTips Option: Only match exact words */
-    public static final String TRANSTIPS_EXACT_SEARCH = "transtips_exact_search";
 
     /** Mark the segments with a note with a different color */
     public static final String MARK_NOTED_SEGMENTS = "mark_noted_segments";

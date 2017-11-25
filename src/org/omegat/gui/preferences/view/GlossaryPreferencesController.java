@@ -65,7 +65,6 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         panel.useStemmingCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
                 Preferences.GLOSSARY_STEMMING_DEFAULT));
         panel.replaceHitsCheckBox.setSelected(Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT));
-        panel.transTipsExactMatchCheckBox.setSelected(Preferences.isPreference(Preferences.TRANSTIPS_EXACT_SEARCH));
     }
 
     @Override
@@ -74,7 +73,6 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         panel.useSeparateTermsCheckBox.setSelected(Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT);
         panel.useStemmingCheckBox.setSelected(Preferences.GLOSSARY_STEMMING_DEFAULT);
         panel.replaceHitsCheckBox.setSelected(false);
-        panel.transTipsExactMatchCheckBox.setSelected(false);
     }
 
     @Override
@@ -83,6 +81,5 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.GLOSSARY_NOT_EXACT_MATCH, panel.useSeparateTermsCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_STEMMING, panel.useStemmingCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT, panel.replaceHitsCheckBox.isSelected());
-        Preferences.setPreference(Preferences.TRANSTIPS_EXACT_SEARCH, panel.transTipsExactMatchCheckBox.isSelected());
     }
 }

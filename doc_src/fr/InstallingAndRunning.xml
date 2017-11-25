@@ -45,7 +45,14 @@
           <primary>Exécution d'OmegaT</primary> <secondary>Windows</secondary> <tertiary>Fichier INI</tertiary>
         </indexterm>Dans ce cas, les options de démarrage du programme sont lues depuis le fichier <emphasis><application>OmegaT</application>.l4J.ini </emphasis> qui se trouve dans le même dossier que le fichier exe. Ce fichier peut être modifié afin d'être adapté à votre installation. L'exemple suivant du fichier INI utilise 1 Go de mémoire, choisit le français comme langue utilisateur et le Canada comme pays :</para>
 
-      <literallayout><code># OmegaT.exe runtime configuration # Pour utiliser un paramètre, supprimez le '#' avant le '-' # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
+      <literallayout><code># OmegaT.exe runtime configuration
+# To use a parameter, remove the '#' before the '-'
+# Memory
+-Xmx1024M
+# Language
+-Duser.language=FR
+# Country
+-Duser.country=CA </code></literallayout>
 
       <para>Conseil : si OmegaT fonctionne plus lentement dans des sessions de Bureaux à distance, vous pouvez utiliser cette option :</para>
 
@@ -314,7 +321,7 @@
 
     <para>La technologie Java Web Start (proposée dans Java 1.6 et les versions ultérieures) peut être utilisée pour déployer des applications logicielles Java autonomes grâce à un simple clic sur le réseau. Java Web Start s'assure que la dernière version de l'application est déployée et que la version correcte de l'environnement d'exécution Java JRE est utilisée. Pour lancer OmegaT pour la première fois avec Java Web Start, saisissez l'URL suivant dans votre navigateur :</para>
 
-    <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+    <para><emphasis>https://omegat.sourceforge.io/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
     <para>Téléchargez le fichier<emphasis> <application>OmegaT</application>.jnlp</emphasis>, puis cliquez dessus. Il est possible que vous receviez plusieurs alertes de sécurité au cours de l'installation (cela dépend de votre système d'exploitation). Les autorisations que vous donnez à cette version (qui peuvent s'afficher comme  « accès illimité à l'ordinateur ») sont identiques aux autorisations que vous donnez aux versions locales. C'est-à-dire qu'elles donnent accès au disque dur de l'ordinateur. Des clics ultérieurs sur <emphasis><application>OmegaT</application>.jnlp</emphasis> vérifieront les mises à niveau, les installeront (si besoin est) puis lanceront <application>OmegaT</application>. Après l'installation initiale, il est bien entendu également possible d'utiliser <emphasis><application>OmegaT</application>.jnlp</emphasis> lorsque vous êtes hors ligne.</para>
 

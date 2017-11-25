@@ -53,7 +53,7 @@ public class GlossaryTextAreaTest extends TestCore {
      */
     @Test
     public void testSetGlossaryEntries() throws Exception {
-        Preferences.setPreference(org.omegat.util.Preferences.TRANSTIPS, false);
+        Preferences.setPreference(org.omegat.util.Preferences.MARK_GLOSSARY_MATCHES, false);
 
         final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", "", false, null));
@@ -75,7 +75,7 @@ public class GlossaryTextAreaTest extends TestCore {
      */
     @Test
     public void testClear() throws Exception {
-        Preferences.setPreference(org.omegat.util.Preferences.TRANSTIPS, false);
+        Preferences.setPreference(org.omegat.util.Preferences.MARK_GLOSSARY_MATCHES, false);
 
         final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", "", false, null));

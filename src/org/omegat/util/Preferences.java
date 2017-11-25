@@ -180,8 +180,11 @@ public final class Preferences {
 
     public static final String ALLOW_YANDEX_TRANSLATE = "allow_yandex_translate";
 
-    /** Enable TransTips */
-    public static final String TRANSTIPS = "transtips";
+    /**
+     * Mark glossary matches. This feature used to be called "TransTips", and the prefs key remains unchanged for
+     * backwards-compatibility.
+     */
+    public static final String MARK_GLOSSARY_MATCHES = "transtips";
 
     /** Mark the segments with a note with a different color */
     public static final String MARK_NOTED_SEGMENTS = "mark_noted_segments";

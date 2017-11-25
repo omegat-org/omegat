@@ -49,6 +49,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.Token;
 
 /**
  * Class that loads glossary files and adds glossary entries to strings of the source files.
@@ -249,6 +250,24 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
                 Core.getProject().getProjectProperties().getSourceLanguage());
 
         return searcher.searchSourceMatches(ste, entries);
+    }
+
+    /**
+     * Get tokens of the source text that match the supplied glossary entry.
+     *
+     * @param ste
+     *            The entry to search
+     * @return A list of tokens matching the supplied glossary entry
+     */
+    public List<Token> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
+        ITokenizer tok = Core.getProject().getSourceTokenizer();
+        if (tok == null) {
+            return Collections.emptyList();
+        }
+        GlossarySearcher searcher = new GlossarySearcher(tok,
+                Core.getProject().getProjectProperties().getSourceLanguage());
+
+        return searcher.searchSourceMatchTokens(ste, entry);
     }
 
     /**

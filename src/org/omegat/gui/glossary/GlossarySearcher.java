@@ -26,6 +26,7 @@
 package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -80,6 +81,17 @@ public class GlossarySearcher {
         return filterGlossary(result);
     }
 
+    public List<Token> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
+        // Compute source entry tokens
+        Token[] strTokens = tokenize(ste.getSrcText(), TagUtil.buildTagList(ste.getSrcText(), ste.getProtectedParts()));
+
+        Token[] toks = getMatchingTokens(strTokens, entry.getSrcText());
+        if (toks.length == 0) {
+            toks = getCjkMatchingTokens(ste.getSrcText(), entry.getSrcText());
+        }
+        return Arrays.asList(toks);
+    }
+
     public List<String> searchTargetMatches(String trg, ProtectedPart[] protectedParts, GlossaryEntry entry) {
 
         List<String> result = new ArrayList<>();
@@ -104,14 +116,19 @@ public class GlossarySearcher {
     }
 
     private boolean isTokenMatch(Token[] fullTextTokens, String term) {
+        return getMatchingTokens(fullTextTokens, term).length > 0;
+    }
+
+    private Token[] getMatchingTokens(Token[] fullTextTokens, String term) {
         // Compute glossary entry tokens
         Token[] glosTokens = tokenize(term);
         if (glosTokens.length == 0) {
-            return false;
+            return DefaultTokenizer.EMPTY_TOKENS_LIST;
         }
         boolean notExact = Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH,
                 Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT);
-        return DefaultTokenizer.isContainsAll(fullTextTokens, glosTokens, notExact);
+        return DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
+
     }
 
     private static boolean isCjkMatch(String fullText, String term) {
@@ -119,6 +136,27 @@ public class GlossarySearcher {
         // word appears anywhere in source string.
         return !Core.getProject().getProjectProperties().getSourceLanguage().isSpaceDelimited()
                 && StringUtil.isCJK(term) && fullText.contains(term);
+    }
+
+    private static Token[] getCjkMatchingTokens(String fullText, String term) {
+        // This is a CJK word and our source language is not space-delimited, so include if
+        // word appears anywhere in source string.
+        if (Core.getProject().getProjectProperties().getSourceLanguage().isSpaceDelimited()) {
+            return DefaultTokenizer.EMPTY_TOKENS_LIST;
+        }
+        if (!StringUtil.isCJK(term)) {
+            return DefaultTokenizer.EMPTY_TOKENS_LIST;
+        }
+        int i = fullText.indexOf(term);
+        if (i == -1) {
+            return DefaultTokenizer.EMPTY_TOKENS_LIST;
+        }
+        List<Token> result = new ArrayList<>();
+        result.add(new Token(term, i));
+        while ((i = fullText.indexOf(term, i + 1)) != -1) {
+            result.add(new Token(term, i));
+        }
+        return result.toArray(new Token[result.size()]);
     }
 
     private Token[] tokenize(String str) {

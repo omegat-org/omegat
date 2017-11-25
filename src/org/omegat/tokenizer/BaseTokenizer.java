@@ -41,10 +41,8 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.comments.ICommentProvider;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -59,13 +57,13 @@ import org.omegat.util.Token;
  */
 public abstract class BaseTokenizer implements ITokenizer {
 
-    private static final Map<String, Token[]> TOKEN_CACHE_NONE = new ConcurrentHashMap<String, Token[]>(5000);
-    private static final Map<String, Token[]> TOKEN_CACHE_MATCHING = new ConcurrentHashMap<String, Token[]>(5000);
-    private static final Map<String, Token[]> TOKEN_CACHE_GLOSSARY = new ConcurrentHashMap<String, Token[]>(5000);
-
     protected static final String[] EMPTY_STRING_LIST = new String[0];
     protected static final Token[] EMPTY_TOKENS_LIST = new Token[0];
     protected static final int DEFAULT_TOKENS_COUNT = 64;
+
+    private final Map<String, Token[]> tokenCacheNone = new ConcurrentHashMap<>(2500);
+    private final Map<String, Token[]> tokenCacheMatching = new ConcurrentHashMap<>(2500);
+    private final Map<String, Token[]> tokenCacheGlossary = new ConcurrentHashMap<>(2500);
 
     /**
      * Indicates that {@link #tokenizeVerbatim(String)} should use OmegaT's
@@ -77,19 +75,6 @@ public abstract class BaseTokenizer implements ITokenizer {
      */
     protected boolean shouldDelegateTokenizeExactly = true;
 
-    public BaseTokenizer() {
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            @Override
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
-                    TOKEN_CACHE_NONE.clear();
-                    TOKEN_CACHE_MATCHING.clear();
-                    TOKEN_CACHE_GLOSSARY.clear();
-                }
-            }
-        });
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -98,13 +83,13 @@ public abstract class BaseTokenizer implements ITokenizer {
         Map<String, Token[]> cache;
         switch (stemmingMode) {
         case NONE:
-            cache = TOKEN_CACHE_NONE;
+            cache = tokenCacheNone;
             break;
         case GLOSSARY:
-            cache = TOKEN_CACHE_GLOSSARY;
+            cache = tokenCacheGlossary;
             break;
         case MATCHING:
-            cache = TOKEN_CACHE_MATCHING;
+            cache = tokenCacheMatching;
             break;
         default:
             throw new RuntimeException("No cache for specified stemming mode");

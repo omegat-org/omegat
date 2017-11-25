@@ -45,6 +45,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -554,6 +555,34 @@ public final class StaticUtils {
         }
         File projFile = new File(f.getAbsolutePath(), OConsts.FILE_PROJECT);
         return projFile.isFile();
+    }
+
+    /**
+     * Check to see if an array contains another array.
+     *
+     * @param needles
+     *            The contained array
+     * @param haystack
+     *            The containing array
+     * @param offset
+     *            The offset of {@code haystack} at which to start checking
+     * @return Whether or not {@code haystack} contains {@code needles} at {@code offset}
+     * @throws ArrayIndexOutOfBoundsException
+     *             If {@code offset} is not a valid index in {@code haystack}
+     */
+    public static <T> boolean arraysMatchAt(T[] needles, T[] haystack, int offset) {
+        if (offset < 0 || offset >= haystack.length) {
+            throw new ArrayIndexOutOfBoundsException(offset);
+        }
+        if (haystack.length - offset < needles.length) {
+            return false;
+        }
+        for (int i = 0; i < needles.length; i++) {
+            if (!Objects.equals(haystack[i + offset], needles[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
 } // StaticUtils

@@ -30,13 +30,16 @@ package org.omegat.tokenizer;
 
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
@@ -60,8 +63,8 @@ public class DefaultTokenizer implements ITokenizer {
      */
     private static Map<String, Token[]> tokenCache = new HashMap<String, Token[]>(5000);
 
-    private static final Token[] EMPTY_TOKENS_LIST = new Token[0];
-    private static final String[] EMPTY_STRINGS_LIST = new String[0];
+    public static final Token[] EMPTY_TOKENS_LIST = new Token[0];
+    public static final String[] EMPTY_STRINGS_LIST = new String[0];
 
     public DefaultTokenizer() {
         CoreEvents.registerProjectChangeListener(eventType -> {
@@ -234,12 +237,29 @@ public class DefaultTokenizer implements ITokenizer {
      * Check if array contains token.
      */
     public static boolean isContains(Token[] tokensList, Token tokenForCheck) {
-        for (Token t : tokensList) {
-            if (tokenForCheck.equals(t)) {
-                return true;
+        return search(tokensList, tokenForCheck) != null;
+    }
+
+    /**
+     * Search a haystack for an token equal to the needle and return the token from the haystack.
+     * <p>
+     * This makes no sense! Why are we returning an object equal to the one we already have? Because the Token class is
+     * bizarrely implemented to consider two tokens equal based on only their hash field, and in this case we are
+     * explicitly interested in getting the other token with the same hash but different other fields.
+     *
+     * @param haystack
+     *            Array of tokens to search
+     * @param needle
+     *            The token with the hash we want to match
+     * @return The matching token, or null if not found
+     */
+    private static Token search(Token[] haystack, Token needle) {
+        for (Token h : haystack) {
+            if (Objects.equals(needle, h)) {
+                return h;
             }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -251,54 +271,69 @@ public class DefaultTokenizer implements ITokenizer {
      * @return true if the tokens in listForFind are found in tokensList
      */
     public static boolean isContainsAll(Token[] tokensList, Token[] listForFind, boolean notExact) {
-        if (notExact) {
-            for (Token t : listForFind) {
-                if (!isContains(tokensList, t)) {
-                    return false;
-                }
-            }
-            return true;
-        } else {
-            return isContainsExact(tokensList, listForFind);
-        }
+        return searchAll(tokensList, listForFind, notExact).length > 0;
+    }
+
+    public static Token[] searchAll(Token[] tokensList, Token[] listForFind, boolean notExact) {
+        return notExact ? searchInexact(tokensList, listForFind) : searchExact(tokensList, listForFind);
     }
 
     /**
-     * Check if a list of tokens is found contiguously in another list of tokens
+     * Check if all elements of {@code needles} are present in {@code haystack}, and if so, return the matching elements
+     * of {@code haystack}.
+     * <p>
+     * This makes no sense! Why are we returning objects equal to the ones we already have? Because the Token class is
+     * bizarrely implemented to consider two tokens equal based on only their hash field, and in this case we are
+     * explicitly interested in getting the other tokens with the same hashes but different other fields.
      *
-     * @param tokensList
+     * @param haystack
      *            a list of tokens to be searched
-     * @param listForFind
+     * @param needles
      *            a list of tokens to search in tokensList
-     * @return true if the tokens in listForFind are found contiguously in tokensList
+     * @return The elements of {@code haystack} matching {@code needles}, or an empty array if not found
      */
-    private static boolean isContainsExact(Token[] tokensList, Token[] listForFind) {
-        for (int i = 0; i < tokensList.length; i++) { // For all tokens in the searched strings
-            if (tokensList[i].equals(listForFind[0])) { // We found the first position of listForFind
-                if (listForFind.length == 1) { // Only one token, and we found it
-                    return true;
-                }
-                int k = i + 1;
-                if (listForFind.length <= tokensList.length - k + 1) { // Enough words remain to match
-                                                                       // tokensList
-                    boolean found = true;
-                    for (int j = 1; j < listForFind.length; j++) {
-                        if (!listForFind[j].equals(tokensList[k])) { // One of the other tokens doesn't match
-                            found = false;
-                            break;
-                        }
-                        k++;
-                    }
-                    if (found) { // All tokens matched
-                        return true;
-                    }
-                } else {
-                    return false;
-                 }
+    private static Token[] searchInexact(Token[] haystack, Token[] needles) {
+        List<Token> result = null;
+        for (Token n : needles) {
+            Token found = search(haystack, n);
+            if (found == null) {
+                return EMPTY_TOKENS_LIST;
+            }
+            if (result == null) {
+                result = new ArrayList<>();
+            }
+            result.add(found);
+        }
+        return result == null ? EMPTY_TOKENS_LIST : result.toArray(new Token[result.size()]);
+    }
+
+    /**
+     * Check if {@code needles} is found contiguously in {@code haystack}, and if so, return the matching portion of
+     * {@code haystack}.
+     * <p>
+     * This makes no sense! Why are we returning objects equal to the ones we already have? Because the Token class is
+     * bizarrely implemented to consider two tokens equal based on only their hash field, and in this case we are
+     * explicitly interested in getting the other tokens with the same hashes but different other fields.
+     *
+     * @param haystack
+     *            a list of tokens to be searched
+     * @param needles
+     *            a list of tokens to search in tokensList
+     * @return The contiguous portion of {@code haystack} matching {@code needles}, or an empty array if not found
+     */
+    private static Token[] searchExact(Token[] haystack, Token[] needles) {
+        if (needles.length == 0) {
+            return EMPTY_TOKENS_LIST;
+        }
+        for (int i = 0; i < haystack.length; i++) {
+            if (StaticUtils.arraysMatchAt(needles, haystack, i)) {
+                return Arrays.copyOfRange(haystack, i, i + needles.length);
             }
         }
-        return false;
+        return EMPTY_TOKENS_LIST;
     }
+
+
 
     @Override
     public String[] getSupportedLanguages() {

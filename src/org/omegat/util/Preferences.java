@@ -101,6 +101,8 @@ public final class Preferences {
     public static final String GLOSSARY_STEMMING = "glossary_stemming";
     public static final boolean GLOSSARY_STEMMING_DEFAULT = true;
     public static final String GLOSSARY_REPLACE_ON_INSERT = "glossary_replace_on_insert";
+    public static final String GLOSSARY_REQUIRE_SIMILAR_CASE = "glossary_require_similar_case";
+    public static final boolean GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT = true;
     public static final String DICTIONARY_FUZZY_MATCHING = "dictionary_fuzzy_matching";
 
     public static final String MAINWINDOW_GEOMETRY_PREFIX = "screen";

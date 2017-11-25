@@ -137,7 +137,8 @@ public class GlossarySearcher {
 
     private static boolean keepMatch(Token[] tokens, String srcTxt, String locTxt) {
         // Filter out matches where the glossary entry is all caps but the source-text match is not.
-        if (StringUtil.isUpperCase(locTxt)) {
+        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE,
+                Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT) && StringUtil.isUpperCase(locTxt)) {
             for (Token tok : tokens) {
                 String matched = tok.getTextFromString(srcTxt);
                 if (!StringUtil.isUpperCase(matched)) {

@@ -52,6 +52,7 @@ public class GlossaryPreferencesPanel extends JPanel {
         useSeparateTermsCheckBox = new javax.swing.JCheckBox();
         useStemmingCheckBox = new javax.swing.JCheckBox();
         replaceHitsCheckBox = new javax.swing.JCheckBox();
+        requireSimilarCaseCheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -69,6 +70,9 @@ public class GlossaryPreferencesPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(replaceHitsCheckBox, OStrings.getString("PREFS_GLOSSARY_REPLACE_ON_INSERT")); // NOI18N
         add(replaceHitsCheckBox);
+
+        org.openide.awt.Mnemonics.setLocalizedText(requireSimilarCaseCheckBox, OStrings.getString("PREFS_GLOSSARY_REQUIRE_SIMILAR_CASE")); // NOI18N
+        add(requireSimilarCaseCheckBox);
         add(filler1);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -76,6 +80,7 @@ public class GlossaryPreferencesPanel extends JPanel {
     javax.swing.JCheckBox displayContextCheckBox;
     private javax.swing.Box.Filler filler1;
     javax.swing.JCheckBox replaceHitsCheckBox;
+    javax.swing.JCheckBox requireSimilarCaseCheckBox;
     javax.swing.JCheckBox useSeparateTermsCheckBox;
     javax.swing.JCheckBox useStemmingCheckBox;
     // End of variables declaration//GEN-END:variables

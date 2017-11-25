@@ -112,14 +112,14 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static final Pattern PATTERN_SINGLE_PROPERTY = Pattern.compile("@\\{(.+?)\\}");
     public static final Pattern PATTERN_PROPERTY_GROUP = Pattern.compile("@\\[(.+?)\\]\\[(.+?)\\]\\[(.+?)\\]");
 
-    private static Replacer sourceTextReplacer = new Replacer() {
+    private static final Replacer SOURCE_TEXT_REPLACER = new Replacer() {
         public void replace(Result r, NearString match) {
             r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
             r.text = r.text.replace(VAR_SOURCE_TEXT, match.source);
         }
     };
 
-    private static Replacer diffReplacer = new Replacer() {
+    private static final Replacer DIFF_REPLACER = new Replacer() {
         public void replace(Result r, NearString match) {
             int diffPos = r.text.indexOf(VAR_DIFF);
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
@@ -131,7 +131,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         }
     };
 
-    private static Replacer diffReversedReplacer = new Replacer() {
+    private static final Replacer DIFF_REVERSED_REPLACER = new Replacer() {
         public void replace(Result r, NearString match) {
             int diffPos = r.text.indexOf(VAR_DIFF_REVERSED);
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
@@ -267,9 +267,9 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             r.text = r.text.replaceAll(PATTERN_PROPERTY_GROUP.pattern(), "");
         }
 
-        styledComponents.put(r.text.indexOf(VAR_SOURCE_TEXT), sourceTextReplacer);
-        styledComponents.put(r.text.indexOf(VAR_DIFF), diffReplacer);
-        styledComponents.put(r.text.indexOf(VAR_DIFF_REVERSED), diffReversedReplacer);
+        styledComponents.put(r.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
+        styledComponents.put(r.text.indexOf(VAR_DIFF), DIFF_REPLACER);
+        styledComponents.put(r.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);
 
         for (Entry<Integer, Replacer> e : styledComponents.entrySet()) {
             e.getValue().replace(r, match);

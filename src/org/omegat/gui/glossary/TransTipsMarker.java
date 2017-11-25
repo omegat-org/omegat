@@ -26,6 +26,8 @@
 package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
@@ -61,18 +63,54 @@ public class TransTipsMarker implements IMarker {
             return null;
         }
 
-        final List<Mark> marks = new ArrayList<Mark>();
-        // Get the index of the current segment in the whole document
-        //sourceText = sourceText.toLowerCase();
+        List<Mark> marks = new ArrayList<Mark>();
 
         for (GlossaryEntry ent : glossaryEntries) {
-            for (Token tok : Core.getGlossaryManager().searchSourceMatchTokens(ste, ent)) {
-                Mark m = new Mark(Mark.ENTRY_PART.SOURCE, tok.getOffset(), tok.getOffset() + tok.getLength());
-                m.painter = TransTipsMarker.TRANSTIPS_UNDERLINER;
-                m.toolTipText = ent.toStyledString().toHTML();
-                marks.add(m);
-            }
+            String tooltip = ent.toStyledString().toHTML();
+            List<Token> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);
+            marks.addAll(getMarksForTokens(tokens, ste.getSrcText(), tooltip));
         }
         return marks;
+    }
+
+    private static List<Mark> getMarksForTokens(List<Token> tokens, String srcText, String tooltip) {
+        if (tokens.isEmpty() || srcText.isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<Mark> result = new ArrayList<>(tokens.size());
+        tokens.sort(Comparator.comparingInt(Token::getOffset));
+        for (Token tok : tokens) {
+            Mark prev = result.isEmpty() ? null : result.get(result.size() - 1);
+            int currStart = tok.getOffset();
+            int currEnd = currStart + tok.getLength();
+            Mark newMark;
+            // If two tokens (representing the same glossary hit) are separated only by whitespace,
+            // combine them into a single mark
+            if (prev != null && canCloseSpan(srcText, prev.endOffset, currStart)) {
+                newMark = new Mark(Mark.ENTRY_PART.SOURCE, prev.startOffset, currEnd);
+                result.set(result.size() - 1, newMark);
+            } else {
+                newMark = new Mark(Mark.ENTRY_PART.SOURCE, currStart, currEnd);
+                result.add(newMark);
+            }
+            newMark.painter = TRANSTIPS_UNDERLINER;
+            newMark.toolTipText = tooltip;
+        }
+        return result;
+    }
+
+    private static boolean canCloseSpan(String text, int start, int end) {
+        if (start < 0 || end >= text.length() || start > end) {
+            throw new IndexOutOfBoundsException();
+        }
+        for (int cp, i = start; i < end; i += Character.charCount(cp)) {
+            cp = text.codePointAt(i);
+            int type = Character.getType(cp);
+            if (!Character.isWhitespace(cp) && type != Character.DASH_PUNCTUATION
+                    && type != Character.CONNECTOR_PUNCTUATION) {
+                return false;
+            }
+        }
+        return true;
     }
 }

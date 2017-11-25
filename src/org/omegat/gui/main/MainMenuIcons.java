@@ -25,7 +25,6 @@
 
 package org.omegat.gui.main;
 
-import java.awt.AWTError;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -39,6 +38,8 @@ import java.util.Map;
 
 import javax.swing.Icon;
 
+import org.omegat.util.Log;
+
 /**
  * @author Aaron Madlon-Kay
  */
@@ -47,31 +48,15 @@ public final class MainMenuIcons {
     private MainMenuIcons() {
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
     private abstract static class BaseIcon implements Icon {
-
-        private Map defaultHints;
-        private Map originalHints;
-
-        BaseIcon() {
-            originalHints = new RenderingHints(null);
-            try {
-                defaultHints = (Map) Toolkit.getDefaultToolkit().getDesktopProperty("awt.font.desktophints");
-            } catch (AWTError ignore) {
-            } finally {
-                if (defaultHints == null) {
-                    defaultHints = new RenderingHints(null);
-                }
-            }
-        }
 
         @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
-            Graphics2D g2 = (Graphics2D) g;
-            getRenderingHints(g2, defaultHints, originalHints);
-            g2.addRenderingHints(defaultHints);
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.addRenderingHints(DEFAULT_HINTS);
+            g2.setClip(x, y, getIconWidth(), getIconHeight());
             doPaint(g2, x, y);
-            g2.addRenderingHints(originalHints);
+            g2.dispose();
         }
 
         abstract void doPaint(Graphics2D g2, int x, int y);
@@ -84,36 +69,19 @@ public final class MainMenuIcons {
         @Override
 
         public int getIconHeight() {
-            return ICON_SIZE;
+            return getIconWidth();
         }
+    }
 
-        /**
-         * Get rendering hints from a Graphics instance.
-         * "hintsToSave" is a Map of RenderingHint key-values.
-         * For each hint key present in that map, the value of that
-         * hint is obtained from the Graphics and stored as the value
-         * for the key in savedHints.
-         *
-         * From: http://docs.oracle.com/javase/7/docs/api/java/awt/doc-files/DesktopProperties.html
-         */
-        private Map getRenderingHints(Graphics2D g2d, Map hintsToSave, Map savedHints) {
-            if (savedHints == null) {
-                savedHints = new RenderingHints(null);
-            } else {
-                savedHints.clear();
-            }
-            if (hintsToSave.isEmpty()) {
-                return savedHints;
-            }
-            /* RenderingHints.keySet() returns Set */
-            for (Object o : hintsToSave.keySet()) {
-                RenderingHints.Key key = (RenderingHints.Key) o;
-                Object value = g2d.getRenderingHint(key);
-                savedHints.put(key, value);
-            }
-            return savedHints;
-       }
-
+    private static final Map<?, ?> DEFAULT_HINTS;
+    static {
+        Map<?, ?> defaultHints = new RenderingHints(null);
+        try {
+            defaultHints = (Map<?, ?>) Toolkit.getDefaultToolkit().getDesktopProperty("awt.font.desktophints");
+        } catch (Throwable e) {
+            Log.log(e);
+        }
+        DEFAULT_HINTS = defaultHints;
     }
 
     /**
@@ -138,7 +106,7 @@ public final class MainMenuIcons {
 
             @Override
             public int getIconHeight() {
-                return ICON_SIZE;
+                return getIconWidth();
             }
         };
     }
@@ -155,7 +123,7 @@ public final class MainMenuIcons {
                 if (color != null) {
                     g2.setColor(color);
                 }
-                g2.fillRect(x, y, ICON_SIZE, ICON_SIZE);
+                g2.fillRect(x, y, getIconWidth(), getIconHeight());
             }
         };
     }
@@ -178,24 +146,22 @@ public final class MainMenuIcons {
      * @param text char to draw
      */
     static Icon newTextIcon(final Color color, final Font font, final char c) {
-        final char[] chars = new char[] {c};
+        final char[] chars = new char[] { c };
         return new BaseIcon() {
             @Override
             void doPaint(Graphics2D g2, int x, int y) {
                 if (color != null) {
                     g2.setColor(color);
                 }
-                Font originalFont = g2.getFont();
                 if (font != null) {
                     g2.setFont(font);
                 }
-                GlyphVector gv = g2.getFont().layoutGlyphVector(g2.getFontRenderContext(),
-                        chars, 0, 1, Font.LAYOUT_LEFT_TO_RIGHT);
-                Rectangle r = gv.getPixelBounds(g2.getFontRenderContext(), 0, 0);
-                int dx = x + r.x + (ICON_SIZE - r.width) / 2;
-                int dy = y + ICON_SIZE - (r.y + r.height) - (ICON_SIZE - r.height) / 2;
+                GlyphVector gv = g2.getFont().layoutGlyphVector(g2.getFontRenderContext(), chars, 0, 1,
+                        Font.LAYOUT_LEFT_TO_RIGHT);
+                Rectangle r = gv.getPixelBounds(g2.getFontRenderContext(), x, y);
+                int dx = x + (getIconWidth() - r.width) / 2;
+                int dy = y + getIconHeight() - (getIconHeight() - r.height) / 2;
                 g2.drawGlyphVector(gv, dx, dy);
-                g2.setFont(originalFont);
             }
         };
     }

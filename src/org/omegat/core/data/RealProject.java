@@ -339,10 +339,9 @@ public class RealProject implements IProject {
             if (remoteRepositoryProvider != null) {
                 tmxPrepared = null;
                 glossaryPrepared = null;
-                // copy files from repository to project
-
-                // save changed TMX or just retrieve from repository
-                remoteRepositoryProvider.switchAllToLatest();
+                
+                remoteRepositoryProvider.
+                        switchToVersion('/' + config.getProjectInternalRelative() + FilterMaster.FILE_FILTERS, null);
 
                 // Add filters.xml and segmentation.conf
                 for (String file : new String[] {

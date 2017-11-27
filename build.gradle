@@ -8,7 +8,7 @@ plugins {
     id 'findbugs'
     id 'checkstyle'
     id 'de.gliderpilot.jnlp' version '1.2.2'
-    id 'com.jfrog.bintray' version '1.7.3'
+    id 'com.jfrog.bintray' version '1.8.0'
     id 'org.hidetake.ssh' version '2.9.0'
     // Uncomment and run `dependencyUpdates` task to check for updates to dependencies
     //id 'com.github.ben-manes.versions' version '0.15.0'

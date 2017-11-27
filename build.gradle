@@ -324,11 +324,15 @@ distributions {
     mac {
         contents {
             from('release/mac-specific') {
-                exclude 'OmegaT.app/Contents/MacOS/OmegaT'
+                exclude '**/MacOS/OmegaT', '**/Info.plist'
             }
             from('release/mac-specific') {
-                include 'OmegaT.app/Contents/MacOS/OmegaT'
+                include '**/MacOS/OmegaT'
                 fileMode 0755
+            }
+            from('release/mac-specific') {
+                include '**/Info.plist'
+                expand(version: project.version)
             }
             into('OmegaT.app/Contents/Java') {
                 with main.contents

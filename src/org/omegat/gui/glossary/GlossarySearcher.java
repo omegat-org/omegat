@@ -33,6 +33,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.tokenizer.DefaultTokenizer;
@@ -152,14 +153,16 @@ public class GlossarySearcher {
     private static boolean isCjkMatch(String fullText, String term) {
         // This is a CJK word and our source language is not space-delimited, so include if
         // word appears anywhere in source string.
-        return !Core.getProject().getProjectProperties().getSourceLanguage().isSpaceDelimited()
+        IProject project = Core.getProject();
+        return project.isProjectLoaded() && !project.getProjectProperties().getSourceLanguage().isSpaceDelimited()
                 && StringUtil.isCJK(term) && fullText.contains(term);
     }
 
     private static Token[] getCjkMatchingTokens(String fullText, String term) {
         // This is a CJK word and our source language is not space-delimited, so include if
         // word appears anywhere in source string.
-        if (Core.getProject().getProjectProperties().getSourceLanguage().isSpaceDelimited()) {
+        IProject project = Core.getProject();
+        if (!project.isProjectLoaded() || project.getProjectProperties().getSourceLanguage().isSpaceDelimited()) {
             return DefaultTokenizer.EMPTY_TOKENS_LIST;
         }
         if (!StringUtil.isCJK(term)) {

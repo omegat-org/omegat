@@ -34,7 +34,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
@@ -201,9 +200,7 @@ public abstract class BaseTokenizer implements ITokenizer {
 
         List<Token> result = new ArrayList<Token>(64);
 
-        TokenStream in = null;
-        try {
-            in = getTokenStream(strOrig, stemsAllowed, stopWordsAllowed);
+        try (TokenStream in = getTokenStream(strOrig, stemsAllowed, stopWordsAllowed)) {
             in.addAttribute(CharTermAttribute.class);
             in.addAttribute(OffsetAttribute.class);
 
@@ -218,11 +215,8 @@ public abstract class BaseTokenizer implements ITokenizer {
                 }
             }
             in.end();
-            in.close();
         } catch (IOException ex) {
             Log.log(ex);
-        } finally {
-            IOUtils.closeQuietly(in);
         }
         return result.toArray(new Token[result.size()]);
     }
@@ -235,9 +229,7 @@ public abstract class BaseTokenizer implements ITokenizer {
 
         List<String> result = new ArrayList<String>(64);
 
-        TokenStream in = null;
-        try {
-            in = getTokenStream(str, stemsAllowed, stopWordsAllowed);
+        try (TokenStream in = getTokenStream(str, stemsAllowed, stopWordsAllowed)) {
             in.addAttribute(CharTermAttribute.class);
             in.addAttribute(OffsetAttribute.class);
 
@@ -260,11 +252,8 @@ public abstract class BaseTokenizer implements ITokenizer {
                 }
             }
             in.end();
-            in.close();
         } catch (IOException ex) {
             Log.log(ex);
-        } finally {
-            IOUtils.closeQuietly(in);
         }
         return result.toArray(new String[result.size()]);
     }

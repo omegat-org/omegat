@@ -37,17 +37,16 @@ package org.omegat.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.PreferencesImpl.IPrefsPersistence;
 import org.omegat.util.xml.XMLBlock;
@@ -70,25 +69,21 @@ public class PreferencesXML implements IPrefsPersistence {
      */
     @Override
     public void load(List<String> keys, List<String> values) {
-        XMLStreamReader xml = new XMLStreamReader();
-        xml.killEmptyBlocks();
 
-        InputStream is = null;
-        try {
+        try (XMLStreamReader xml = new XMLStreamReader()) {
+            xml.killEmptyBlocks();
             if (loadFile == null) {
                 // If no prefs file is present, look inside JAR for
                 // defaults. Useful for e.g. Web Start.
-                is = getClass().getResourceAsStream(Preferences.FILE_PREFERENCES);
-                if (is != null) {
-                    xml.setStream(is);
-                    readXmlPrefs(xml, keys, values);
-                    is.close();
-                    xml.close();
+                try (InputStream is = getClass().getResourceAsStream(Preferences.FILE_PREFERENCES)) {
+                    if (is != null) {
+                        xml.setStream(is);
+                        readXmlPrefs(xml, keys, values);
+                    }
                 }
             } else {
                 xml.setStream(loadFile);
                 readXmlPrefs(xml, keys, values);
-                xml.close();
             }
         } catch (TranslationException te) {
             // error loading preference file - keep whatever was
@@ -112,9 +107,6 @@ public class PreferencesXML implements IPrefsPersistence {
             // can't read file - forget about it and move on
             Log.logErrorRB(e4, "PM_ERROR_READING_FILE");
             makeBackup(loadFile);
-        } finally {
-            IOUtils.closeQuietly(xml);
-            IOUtils.closeQuietly(is);
         }
     }
 
@@ -182,13 +174,7 @@ public class PreferencesXML implements IPrefsPersistence {
 
     @Override
     public void save(List<String> keys, List<String> values) throws Exception {
-        FileOutputStream fos = null;
-        OutputStreamWriter osw = null;
-        BufferedWriter out = null;
-        try {
-            fos = new FileOutputStream(saveFile);
-            osw = new OutputStreamWriter(fos, "UTF-8");
-            out = new BufferedWriter(osw);
+        try (BufferedWriter out = Files.newBufferedWriter(saveFile.toPath(), StandardCharsets.UTF_8)) {
             out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
             out.write("<omegat>\n");
             out.write("  <preference version=\"1.0\">\n");
@@ -202,13 +188,6 @@ public class PreferencesXML implements IPrefsPersistence {
             }
             out.write("  </preference>\n");
             out.write("</omegat>\n");
-            out.close();
-            osw.close();
-            fos.close();
-        } finally {
-            IOUtils.closeQuietly(out);
-            IOUtils.closeQuietly(osw);
-            IOUtils.closeQuietly(fos);
         }
     }
 }

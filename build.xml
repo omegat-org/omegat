@@ -175,8 +175,7 @@
                     scripts/properties/replace_strip_tags.properties
                     scripts/properties/svn_clear_auth.properties
                     scripts/properties/strip_bidi_marks.properties
-                    scripts/properties/nbsp.properties
-                    release/mac-specific/OmegaT.app/Contents/Resources/en.lproj/Localizable.strings" />
+                    scripts/properties/nbsp.properties" />
         </copy>
         <copy file="release/readme.txt"
               tofile="${l10n.min.dir}/source/readme.utf8"
@@ -207,8 +206,7 @@
                     scripts/properties/replace_strip_tags.properties
                     scripts/properties/svn_clear_auth.properties
                     scripts/properties/strip_bidi_marks.properties
-                    scripts/properties/nbsp.properties
-                    release/mac-specific/OmegaT.app/Contents/Resources/en.lproj/Localizable.strings"
+                    scripts/properties/nbsp.properties"
                     excludes="doc_src/en/index.xml
                     doc_src/en/html/**
                     doc_src/en/pdf/**" />
@@ -372,9 +370,9 @@ Custom strings from release\win32-specific must be added manually to the languag
 
         <zip destfile="dist2/OmegaT_${distversion}${beta}_Mac.zip">
             <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE linux-install.sh omegat.kaptn OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project" prefix="OmegaT.app/Contents/Java"/>
-            <zipfileset dir="release/mac-specific/" excludes="OmegaT.app/Contents/Info.plist"/>
+            <zipfileset dir="release/mac-specific/" excludes="**/Info.plist,**/MacOS/OmegaT"/>
             <zipfileset dir="build/" includes="Info.plist" prefix="OmegaT.app/Contents/"/>
-            <zipfileset dir="${assets.dir}/" includes="JavaAppLauncher" filemode="755" prefix="OmegaT.app/Contents/MacOS/"/>
+            <zipfileset dir="release/mac-specific/" includes="**/MacOS/OmegaT" filemode="755"/>
             <zipfileset dir="${assets.dir}/jre-mac-root/" excludes="bin/" filemode="755" prefix="OmegaT.app/Contents/PlugIns/jre.bundle/"/>
         </zip>
     </target>
@@ -391,39 +389,6 @@ Custom strings from release\win32-specific must be added manually to the languag
 			<zipfileset dir="build/mac-signed/" includes="OmegaT.app/Contents/MacOS/JavaAppLauncher,OmegaT.app/Contents/PlugIns/jre.bundle" filemode="755"/>
 		</zip>
 	</target>
-
-    <!-- Requires AppBundler to be available to Ant (e.g. in ~/.ant/lib):
-         https://bitbucket.org/infinitekind/appbundler
-         AppBundler requires Java 1.7 -->
-    <target name="gen-mac" description="Generate Mac .app bundle.">
-        <taskdef name="bundleapp"
-                 classname="com.oracle.appbundler.AppBundlerTask"/>
-        <bundleapp
-            outputdirectory="release/mac-specific"
-            name="OmegaT"
-            displayname="OmegaT"
-            identifier="org.omegat.OmegaT"
-            icon="images/OmegaT.icns"
-            version="@VERSION_NUMBER_SUBST@"
-            shortversion="@VERSION_NUMBER_SUBST@"
-            mainclassname="org.omegat.Main">
-            <option value="-Xdock:name=OmegaT"/>
-            <option value="-Xmx1024M"/>
-            <argument value="--config-file=$APP_ROOT/Contents/Resources/Configuration.properties"/>
-            <!--<option value="-Xdebug" />
-            <option value="-Xrunjdwp:transport=dt_socket,address=8998,server=y"/>-->
-            <bundledocument
-                extensions="project"
-                name="OmegaT Project"
-                role="editor"
-                icon="images/OmegaT.icns"/>
-            <bundledocument
-                extensions="*"
-                name="All Files"
-                role="none"/>
-            <plistentry key="JVMRuntime" value="jre.bundle"/>
-        </bundleapp>
-    </target>
 
     <target name="check-win" depends="init">
         <condition property="os.windows">

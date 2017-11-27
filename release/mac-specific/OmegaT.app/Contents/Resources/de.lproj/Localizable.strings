@@ -1,5 +1,0 @@
-"JRELoadError" = "Kann die Java Laufzeitumgebung nicht laden.";
-"JRExLoadError" = "Kann die Java %d Laufzeitumgebung nicht laden.";
-"MainClassNameRequired" = "Hauptklassenname ist erforderlich.";
-"JavaDirectoryNotFound" = "Kann den Inhalt des Java-Ordners nicht lesen.";
-"BundlePathContainsColon" = "Kann nicht vom einem Ordner aus starten, der \"/\" in seinem Namen enthält.";

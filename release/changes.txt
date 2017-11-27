@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.3
 ----------------------------------------------------------------------
-  6 Enhancements
+  7 Enhancements
   4 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -26,6 +26,9 @@
 
   - Update local omegat.project in 4.x team projects
   https://sourceforge.net/p/omegat/feature-requests/1335/
+
+  - Improve highlighting of terminology issues
+  https://sourceforge.net/p/omegat/feature-requests/1342/
 
   Bug fixes:
 

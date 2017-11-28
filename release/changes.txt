@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.3
 ----------------------------------------------------------------------
-  7 Enhancements
+  8 Enhancements
   4 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -29,6 +29,9 @@
 
   - Improve highlighting of terminology issues
   https://sourceforge.net/p/omegat/feature-requests/1342/
+
+  - Unify glossary matching and marking logic
+  https://sourceforge.net/p/omegat/feature-requests/1354/
 
   Bug fixes:
 

@@ -339,8 +339,7 @@ public class RealProject implements IProject {
                 tmxPrepared = null;
                 glossaryPrepared = null;
                 
-                remoteRepositoryProvider.
-                        switchToVersion('/' + config.getProjectInternalRelative() + FilterMaster.FILE_FILTERS, null);
+                remoteRepositoryProvider.switchAllToLatest();
 
                 // Add filters.xml and segmentation.conf
                 for (String file : new String[] {

@@ -92,7 +92,9 @@ dependencies {
     if (providedLibsDir.directory) {
         compile fileTree(dir: providedLibsDir, include: '**/*.jar')
     } else {
-        compile 'commons-io:commons-io:2.6'
+        // Do not upgrade to commons-io 2.6 due to
+        // https://issues.apache.org/jira/browse/IO-554
+        compile 'commons-io:commons-io:2.5'
         compile 'commons-lang:commons-lang:2.6'
         compile 'org.slf4j:slf4j-jdk14:1.7.25'
 

@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
@@ -67,16 +68,20 @@ public class HistoryCompleter extends AutoCompleterListView {
                 if (!isEnabled()) {
                     return;
                 }
+                IProject project = Core.getProject();
+                if (!project.isProjectLoaded()) {
+                    return;
+                }
                 SourceTextEntry lastEntry = currentEntry;
                 boolean wasTranslated = isCurrentEntryTranslated;
                 if (lastEntry != null && !wasTranslated) {
-                    TMXEntry newTranslation = Core.getProject().getTranslationInfo(lastEntry);
+                    TMXEntry newTranslation = project.getTranslationInfo(lastEntry);
                     if (newTranslation.isTranslated()) {
                         trainString(newTranslation.translation);
                     }
                 }
                 currentEntry = newEntry;
-                isCurrentEntryTranslated = Core.getProject().getTranslationInfo(newEntry).isTranslated();
+                isCurrentEntryTranslated = project.getTranslationInfo(newEntry).isTranslated();
             }
         });
         Preferences.addPropertyChangeListener(Preferences.AC_HISTORY_COMPLETION_ENABLED, evt -> {
@@ -91,10 +96,14 @@ public class HistoryCompleter extends AutoCompleterListView {
     }
 
     synchronized void train() {
+        IProject project = Core.getProject();
+        if (!project.isProjectLoaded()) {
+            return;
+        }
         long start = System.currentTimeMillis();
         wordCompleter.reset();
-        Core.getProject().iterateByDefaultTranslations((source, trans) -> trainString(trans.translation));
-        Core.getProject().iterateByMultipleTranslations((source, trans) -> trainString(trans.translation));
+        project.iterateByDefaultTranslations((source, trans) -> trainString(trans.translation));
+        project.iterateByMultipleTranslations((source, trans) -> trainString(trans.translation));
         long time = System.currentTimeMillis() - start;
         LOGGER.finer(() -> String.format("Time to train History Completer: %d ms", time));
     }

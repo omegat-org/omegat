@@ -214,6 +214,10 @@ public final class StringUtil {
     }
 
     public static String matchCapitalization(String text, String matchTo, Locale locale) {
+        return matchCapitalization(text, matchTo, locale, true);
+    }
+
+    public static String matchCapitalization(String text, String matchTo, Locale locale, boolean allowUpperCase) {
         if (StringUtil.isEmpty(matchTo) || StringUtil.isEmpty(text)) {
             return text;
         }
@@ -234,7 +238,7 @@ public final class StringUtil {
         }
         // If matching to upper (at least 2 chars; otherwise would have hit isTitleCase()
         // above), turn into upper.
-        if (StringUtil.isUpperCase(matchTo)) {
+        if (allowUpperCase && StringUtil.isUpperCase(matchTo)) {
             return text.toUpperCase(locale);
         }
         return text;

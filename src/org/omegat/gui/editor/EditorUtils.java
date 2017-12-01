@@ -383,7 +383,7 @@ public final class EditorUtils {
             for (GlossaryEntry e : entries) {
                 String[] needle = tokenizer.tokenizeVerbatimToStrings(e.getSrcText());
                 if (tokensPresentAt(needle, haystack, i)) {
-                    sb.append(StringUtil.matchCapitalization(e.getLocText(), tok, locale, false));
+                    sb.append(StringUtil.matchCapitalization(e.getLocText(), tok, locale));
                     replaced = true;
                     i += needle.length - 1;
                     break;

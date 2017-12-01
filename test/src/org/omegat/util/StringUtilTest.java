@@ -296,15 +296,6 @@ public class StringUtilTest {
         // matchTo is mixed or not cased
         assertEquals(text, StringUtil.matchCapitalization(text, "bAzZ", locale));
         assertEquals(text, StringUtil.matchCapitalization(text, ".", locale));
-        // Disallow upper case
-        assertEquals("Foo", StringUtil.matchCapitalization(text, "Abc", locale, false));
-        assertEquals("Foo", StringUtil.matchCapitalization(text, "A", locale, false));
-        assertEquals("foo", StringUtil.matchCapitalization("FOO", "lower", locale, false));
-        assertEquals("foo", StringUtil.matchCapitalization("fOo", "l", locale, false));
-        assertEquals(text, StringUtil.matchCapitalization(text, "UPPER", locale, false));
-        assertEquals("fOo", StringUtil.matchCapitalization("fOo", "UP", locale, false));
-        assertEquals("FOo", StringUtil.matchCapitalization("fOo", "U", locale, false)); // Interpreted as title case
-
     }
 
     @Test

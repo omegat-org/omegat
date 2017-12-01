@@ -382,8 +382,13 @@ public final class EditorUtils {
             boolean replaced = false;
             for (GlossaryEntry e : entries) {
                 String[] needle = tokenizer.tokenizeVerbatimToStrings(e.getSrcText());
-                if (tokensPresentAt(needle, haystack, i)) {
-                    sb.append(StringUtil.matchCapitalization(e.getLocText(), tok, locale));
+                if (tokensPresentAt(needle, haystack, i, true)) {
+                    String toAppend = e.getLocText();
+                    if (!tokensPresentAt(needle, haystack, i, false)) {
+                        // If the source tokens don't have matching case, fix the replacement's case to match
+                        toAppend = StringUtil.matchCapitalization(toAppend, tok, locale);
+                    }
+                    sb.append(toAppend);
                     replaced = true;
                     i += needle.length - 1;
                     break;
@@ -396,14 +401,18 @@ public final class EditorUtils {
         return sb.toString();
     }
 
-    private static boolean tokensPresentAt(String[] needle, String[] haystack, int offset) {
+    private static boolean tokensPresentAt(String[] needle, String[] haystack, int offset, boolean ignoreCase) {
         if (offset < 0 || offset + needle.length > haystack.length) {
             return false;
         }
         for (int i = 0; i < needle.length; i++) {
             String hayToken = haystack[i + offset];
             String needleToken = needle[i];
-            if (!hayToken.equalsIgnoreCase(needleToken)) {
+            if (ignoreCase) {
+                if (!hayToken.equalsIgnoreCase(needleToken)) {
+                    return false;
+                }
+            } else if (!hayToken.equals(needleToken)) {
                 return false;
             }
         }

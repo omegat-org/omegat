@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.3
 ----------------------------------------------------------------------
-  8 Enhancements
+  9 Enhancements
   4 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
@@ -32,6 +32,9 @@
 
   - Unify glossary matching and marking logic
   https://sourceforge.net/p/omegat/feature-requests/1354/
+
+  - Improve capitalization behavior in glossary auto-replacement
+  https://sourceforge.net/p/omegat/feature-requests/1355/
 
   Bug fixes:
 

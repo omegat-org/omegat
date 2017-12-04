@@ -87,8 +87,8 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
     @Override
     public boolean processKeys(KeyEvent e) {
         int code = e.getKeyCode();
-        if ((code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT) && e.getModifiers() == 0
-                && completer.isVisible() && completer.didPopUpAutomatically) {
+        if ((code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT) && completer.isVisible()
+                && completer.didPopUpAutomatically) {
             // Close autocompleter if user presses left or right (we can't use these anyway since it's a
             // vertical list) and the completer appeared automatically.
             completer.setVisible(false);

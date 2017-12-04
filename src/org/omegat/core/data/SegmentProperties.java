@@ -77,7 +77,7 @@ public final class SegmentProperties {
     }
 
     public static String getProperty(String[] props, String key) {
-        for (int i = 0; i < props.length; i++) {
+        for (int i = 0; i < props.length; i += 2) {
             if (key.equals(props[i])) {
                 return props[i + 1];
             }

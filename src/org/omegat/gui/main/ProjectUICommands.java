@@ -463,6 +463,8 @@ public final class ProjectUICommands {
                     boolean needToSaveProperties = false;
                     if (props.hasRepositories()) { // This is a remote project
                         if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
+                            // Save repository mapping
+                            List<RepositoryDefinition> repos = props.getRepositories();
                             // Update project.properties
                             mainWindow.showStatusMessageRB("TEAM_OPEN");
                             try {
@@ -474,6 +476,10 @@ public final class ProjectUICommands {
                                 remoteRepositoryProvider.copyFilesFromRepoToProject(OConsts.FILE_PROJECT);
                                 // Reload project properties
                                 props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
+                                if (props.getRepositories() == null) { // We have a 3.6 style project,
+                                    props.setRepositories(repos);      // so we restore the mapping we just lost
+                                    needToSaveProperties = true;
+                                }
                             } catch (Exception e) {
                                 Log.logErrorRB(e, "TF_PROJECT_PROPERTIES_ERROR");
                                     Log.log(e);

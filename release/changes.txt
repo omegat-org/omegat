@@ -2,7 +2,7 @@
  OmegaT 4.1.3 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  0 Bug fixes
+  1 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
 4.1.3 update 1 vs 4.1.3
@@ -12,6 +12,11 @@
   - Dismiss auto-completer window after hitting Ctrl + right/left
 arrow keys
   https://sourceforge.net/p/omegat/feature-requests/1356/
+
+  Bug fixes:
+
+  - Download Team Projects failed to download content for 3.6-style 
+projects (i.e., with no mapping information)
 
   Localisation Updates:
 

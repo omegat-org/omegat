@@ -1,4 +1,4 @@
-${translationNotice}
+Vertaling: Dick Groskamp © 2017
 
 
 Wat is OmegaT?
@@ -8,7 +8,7 @@ OmegaT is een vrij en open source multiplatform Computer Assisted Translation-pr
 
 
 
-Informatie over Licentie 
+Informatie over Licentie
 
 OmegaT is beschikbaar onder de bepalingen van de GNU General Public License zoals die is gepubliceerd door de Free Software Foundation; ofwel versie 3 van die License of (naar uw eigen inzicht) een willekeurige latere versie. U vindt de tekst van de licentie in
 /docs/OmegaT-license.txt.
@@ -73,7 +73,7 @@ het gebruiken van Java Web Start.
 
 Download voor dit doel het volgende bestand en voer het uit:
 
-   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
 
 Het zal de juiste omgeving voor uw computer installeren en de toepassing
 zelf bij de eerste keer dat het wordt uitgevoerd. Latere aanroepen behoeven niet online te worden gedaan.
@@ -182,7 +182,7 @@ De meest recente informatie over OmegaT is te vinden op:
 
 Gebruikersondersteuning op de Yahoo! gebruikersgroep (meertalig), waar zonder abonnement de archieven kunnen worden doorzocht:
 
-   http://tech.groups.yahoo.com/group/OmegaT/
+   https://groups.yahoo.com/neo/groups/OmegaT/info
 
 Verzoeken tot verbeteringen (in het Engels) op de SourceForge-website:
 

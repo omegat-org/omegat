@@ -204,8 +204,10 @@ class TerminologyIssueProvider implements IIssueProvider {
             splitPanel.firstTextPane.setText(ste.getSrcText());
             splitPanel.lastTextPane.setText(tmxEntry.translation);
             StyledDocument doc = splitPanel.firstTextPane.getStyledDocument();
-            for (Token tok : Core.getGlossaryManager().searchSourceMatchTokens(ste, glossaryEntry)) {
-                doc.setCharacterAttributes(tok.getOffset(), tok.getLength(), ERROR_STYLE, false);
+            for (Token[] toks : Core.getGlossaryManager().searchSourceMatchTokens(ste, glossaryEntry)) {
+                for (Token tok : toks) {
+                    doc.setCharacterAttributes(tok.getOffset(), tok.getLength(), ERROR_STYLE, false);
+                }
             }
             splitPanel.setMinimumSize(new Dimension(0, splitPanel.firstTextPane.getFont().getSize() * 6));
             return splitPanel;

@@ -66,16 +66,18 @@ public class TransTipsPopup implements IPopupMenuConstructor {
         }
         Set<String> added = new HashSet<>();
         for (GlossaryEntry ge : GlossaryTextArea.nowEntries) {
-            for (Token tok : Core.getGlossaryManager().searchSourceMatchTokens(sb.getSourceTextEntry(), ge)) {
-                // is inside found word ?
-                if (startSource + tok.getOffset() <= mousepos
-                        && mousepos <= startSource + tok.getOffset() + tok.getLength()) {
-                    // Create the MenuItems
-                    for (String s : ge.getLocTerms(true)) {
-                        if (!added.contains(s)) {
-                            JMenuItem it = menu.add(s);
-                            it.addActionListener(e -> Core.getEditor().insertText(s));
-                            added.add(s);
+            for (Token[] toks : Core.getGlossaryManager().searchSourceMatchTokens(sb.getSourceTextEntry(), ge)) {
+                for (Token tok : toks) {
+                    // is inside found word ?
+                    if (startSource + tok.getOffset() <= mousepos
+                            && mousepos <= startSource + tok.getOffset() + tok.getLength()) {
+                        // Create the MenuItems
+                        for (String s : ge.getLocTerms(true)) {
+                            if (!added.contains(s)) {
+                                JMenuItem it = menu.add(s);
+                                it.addActionListener(e -> Core.getEditor().insertText(s));
+                                added.add(s);
+                            }
                         }
                     }
                 }

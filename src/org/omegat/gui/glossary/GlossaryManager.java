@@ -259,7 +259,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      *            The entry to search
      * @return A list of tokens matching the supplied glossary entry
      */
-    public List<Token> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
+    public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
         ITokenizer tok = Core.getProject().getSourceTokenizer();
         if (tok == null) {
             return Collections.emptyList();

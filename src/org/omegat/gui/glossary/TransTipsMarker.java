@@ -26,6 +26,7 @@
 package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -67,36 +68,54 @@ public class TransTipsMarker implements IMarker {
 
         for (GlossaryEntry ent : glossaryEntries) {
             String tooltip = ent.toStyledString().toHTML();
-            List<Token> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);
+            List<Token[]> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);
             marks.addAll(getMarksForTokens(tokens, ste.getSrcText(), tooltip));
         }
         return marks;
     }
 
-    private static List<Mark> getMarksForTokens(List<Token> tokens, String srcText, String tooltip) {
+    private static List<Mark> getMarksForTokens(List<Token[]> tokens, String srcText, String tooltip) {
         if (tokens.isEmpty() || srcText.isEmpty()) {
             return Collections.emptyList();
         }
         List<Mark> result = new ArrayList<>(tokens.size());
-        tokens.sort(Comparator.comparingInt(Token::getOffset));
-        for (Token tok : tokens) {
-            Mark prev = result.isEmpty() ? null : result.get(result.size() - 1);
-            int currStart = tok.getOffset();
-            int currEnd = currStart + tok.getLength();
-            Mark newMark;
-            // If two tokens (representing the same glossary hit) are separated only by whitespace,
-            // combine them into a single mark
-            if (prev != null && canCloseSpan(srcText, prev.endOffset, currStart)) {
-                newMark = new Mark(Mark.ENTRY_PART.SOURCE, prev.startOffset, currEnd);
-                result.set(result.size() - 1, newMark);
+        for (Token[] toks : tokens) {
+            Arrays.sort(toks, Comparator.comparing(Token::getOffset));
+            if (canCombineMarks(srcText, toks)) {
+                Token first = toks[0];
+                Token last = toks[toks.length - 1];
+                int start = first.getOffset();
+                int end = last.getOffset() + last.getLength();
+                Mark mark = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
+                mark.painter = TRANSTIPS_UNDERLINER;
+                mark.toolTipText = tooltip;
+                result.add(mark);
             } else {
-                newMark = new Mark(Mark.ENTRY_PART.SOURCE, currStart, currEnd);
-                result.add(newMark);
+                for (Token tok : toks) {
+                    int start = tok.getOffset();
+                    int end = tok.getOffset() + tok.getLength();
+                    Mark mark = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
+                    mark.painter = TRANSTIPS_UNDERLINER;
+                    mark.toolTipText = tooltip;
+                    result.add(mark);
+                }
             }
-            newMark.painter = TRANSTIPS_UNDERLINER;
-            newMark.toolTipText = tooltip;
         }
         return result;
+    }
+
+    private static boolean canCombineMarks(String text, Token[] toks) {
+        if (toks.length < 2) {
+            return false;
+        }
+        for (int i = 1; i < toks.length; i++) {
+            Token prev = toks[i - 1];
+            Token curr = toks[i];
+            if (!canCloseSpan(text, prev.getOffset() + prev.getLength(), curr.getOffset())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean canCloseSpan(String text, int start, int end) {

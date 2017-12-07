@@ -31,6 +31,7 @@ package org.omegat.tokenizer;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -237,7 +238,7 @@ public class DefaultTokenizer implements ITokenizer {
      * Check if array contains token.
      */
     public static boolean isContains(Token[] tokensList, Token tokenForCheck) {
-        return search(tokensList, tokenForCheck) != null;
+        return search(tokensList, tokenForCheck, 0) != -1;
     }
 
     /**
@@ -253,84 +254,149 @@ public class DefaultTokenizer implements ITokenizer {
      *            The token with the hash we want to match
      * @return The matching token, or null if not found
      */
-    private static Token search(Token[] haystack, Token needle) {
-        for (Token h : haystack) {
-            if (Objects.equals(needle, h)) {
-                return h;
+    private static int search(Token[] haystack, Token needle, int start) {
+        for (int i = start; i < haystack.length; i++) {
+            if (Objects.equals(needle, haystack[i])) {
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 
     /**
-     * Check if array contains other array.
-     * @param tokensList a list of tokens to be searched
-     * @param listForFind a list of tokens to search in tokensList
-     * @param notExact is true if the tokens in listForFind can be non-contiguous or in a different order in the
-     * tokensList. If false, tokens must be exactly the same.
-     * @return true if the tokens in listForFind are found in tokensList
+     * Check if the {@code listForFind} tokens are present in {@code tokensList}.
+     *
+     * @param tokensList
+     *            a list of tokens to be searched
+     * @param listForFind
+     *            a list of tokens to search in {@code tokensList}
+     * @param notExact
+     *            is true if the tokens in {@code listForFind} can be non-contiguous or in a different order in the
+     *            {@code tokensList}. If false, tokens must be exactly the same.
+     * @return true if the tokens in {@code listForFind} are found in {@code tokensList}
      */
     public static boolean isContainsAll(Token[] tokensList, Token[] listForFind, boolean notExact) {
-        return searchAll(tokensList, listForFind, notExact).length > 0;
-    }
-
-    public static Token[] searchAll(Token[] tokensList, Token[] listForFind, boolean notExact) {
-        return notExact ? searchInexact(tokensList, listForFind) : searchExact(tokensList, listForFind);
+        return notExact ? containsAllInexact(tokensList, listForFind) : containsAllExact(tokensList, listForFind);
     }
 
     /**
-     * Check if all elements of {@code needles} are present in {@code haystack}, and if so, return the matching elements
-     * of {@code haystack}.
-     * <p>
-     * This makes no sense! Why are we returning objects equal to the ones we already have? Because the Token class is
-     * bizarrely implemented to consider two tokens equal based on only their hash field, and in this case we are
-     * explicitly interested in getting the other tokens with the same hashes but different other fields.
+     * Find and return all tokens in {@code tokensList} that match the tokens in {@code listForFind}.
+     *
+     * @param tokensList
+     *            a list of tokens to be searched
+     * @param listForFind
+     *            a list of tokens to search in tokensList
+     * @param notExact
+     *            is true if the tokens in listForFind can be non-contiguous or in a different order in the tokensList.
+     *            If false, tokens must be exactly the same.
+     * @return A list containing each hit of the matched tokens. Each token array represents a different instance of
+     *         {@code listForFind} that was found in {@code tokensList}.
+     */
+    public static List<Token[]> searchAll(Token[] tokensList, Token[] listForFind, boolean notExact) {
+        return notExact ? searchAllInexact(tokensList, listForFind) : searchAllExact(tokensList, listForFind);
+    }
+
+    /**
+     * Check if all elements of {@code needles} are present in {@code haystack} in any order.
      *
      * @param haystack
      *            a list of tokens to be searched
      * @param needles
-     *            a list of tokens to search in tokensList
-     * @return The elements of {@code haystack} matching {@code needles}, or an empty array if not found
+     *            a list of tokens to search in {@code haystack}
+     * @return Whether or not the {@code needles} were found
      */
-    private static Token[] searchInexact(Token[] haystack, Token[] needles) {
-        List<Token> result = null;
+    private static boolean containsAllInexact(Token[] haystack, Token[] needles) {
         for (Token n : needles) {
-            Token found = search(haystack, n);
-            if (found == null) {
-                return EMPTY_TOKENS_LIST;
+            if (search(haystack, n, 0) == -1) {
+                return false;
             }
-            if (result == null) {
-                result = new ArrayList<>();
-            }
-            result.add(found);
         }
-        return result == null ? EMPTY_TOKENS_LIST : result.toArray(new Token[result.size()]);
+        return true;
     }
 
     /**
-     * Check if {@code needles} is found contiguously in {@code haystack}, and if so, return the matching portion of
-     * {@code haystack}.
-     * <p>
-     * This makes no sense! Why are we returning objects equal to the ones we already have? Because the Token class is
-     * bizarrely implemented to consider two tokens equal based on only their hash field, and in this case we are
-     * explicitly interested in getting the other tokens with the same hashes but different other fields.
+     * Check if all elements of {@code needles} are present in {@code haystack}, and if so, return all matching elements
+     * of {@code haystack}.
+     *
+     * @param haystack
+     *            a list of tokens to be searched
+     * @param needles
+     *            a list of tokens to search in {@code haystack}
+     * @return A list containing each hit of the matched tokens. Each token array represents a different instance of
+     *         {@code needles} that was found in {@code haystack}.
+     */
+    private static List<Token[]> searchAllInexact(Token[] haystack, Token[] needles) {
+        List<Token[]> result = null;
+        for (Token n : needles) {
+            boolean found = false;
+            for (int i = 0; (i = search(haystack, n, i)) != -1; i++) {
+                if (result == null) {
+                    result = new ArrayList<>();
+                }
+                result.add(new Token[] { haystack[i] });
+                found = true;
+            }
+            if (!found) {
+                return Collections.emptyList();
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Check if {@code needles} is found contiguously in {@code haystack}.
      *
      * @param haystack
      *            a list of tokens to be searched
      * @param needles
      *            a list of tokens to search in tokensList
-     * @return The contiguous portion of {@code haystack} matching {@code needles}, or an empty array if not found
+     * @return Whether or not the {@code needles} were found
      */
-    private static Token[] searchExact(Token[] haystack, Token[] needles) {
-        if (needles.length == 0) {
-            return EMPTY_TOKENS_LIST;
+    private static boolean containsAllExact(Token[] haystack, Token[] needles) {
+        return searchExact(haystack, needles, 0) != -1;
+    }
+
+    /**
+     * Check if {@code needles} is found contiguously in {@code haystack}.
+     *
+     * @param haystack
+     *            a list of tokens to be searched
+     * @param needles
+     *            a list of tokens to search in tokensList
+     * @return The contiguous portions of {@code haystack} matching {@code needles}, or an empty list if not found
+     */
+    private static List<Token[]> searchAllExact(Token[] haystack, Token[] needles) {
+        int i = searchExact(haystack, needles, 0);
+        if (i == -1) {
+            return Collections.emptyList();
         }
-        for (int i = 0; i < haystack.length; i++) {
+        List<Token[]> result = new ArrayList<>();
+        result.add(Arrays.copyOfRange(haystack, i, i + needles.length));
+        while ((i = searchExact(haystack, needles, i + needles.length)) != -1) {
+            result.add(Arrays.copyOfRange(haystack, i, i + needles.length));
+        }
+        return result;
+    }
+
+    /**
+     * Check if {@code needles} is found contiguously in {@code haystack}.
+     *
+     * @param haystack
+     *            a list of tokens to be searched
+     * @param needles
+     *            a list of tokens to search in {@code haystack}
+     * @return The index of the start of the match
+     */
+    private static int searchExact(Token[] haystack, Token[] needles, int start) {
+        if (needles.length == 0) {
+            return -1;
+        }
+        for (int i = start; i < haystack.length; i++) {
             if (StaticUtils.arraysMatchAt(needles, haystack, i)) {
-                return Arrays.copyOfRange(haystack, i, i + needles.length);
+                return i;
             }
         }
-        return EMPTY_TOKENS_LIST;
+        return -1;
     }
 
 

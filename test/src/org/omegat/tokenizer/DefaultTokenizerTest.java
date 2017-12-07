@@ -25,12 +25,14 @@
 
 package org.omegat.tokenizer;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.stream.Stream;
 
 import org.junit.Test;
+import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Token;
 
 public class DefaultTokenizerTest {
@@ -64,7 +66,32 @@ public class DefaultTokenizerTest {
         assertFalse(DefaultTokenizer.isContainsAll(tokensList, toTokArr("the dog"), false));
     }
 
+    @Test
+    public void testSearchAll() {
+        String text = "foo bar baz foo";
+        Token[] tokensList = new DefaultTokenizer().tokenizeWords(text, StemmingMode.NONE);
+
+        assertEquals(2, DefaultTokenizer.searchAll(tokensList, toWordTokArr("foo"), true).size());
+        assertEquals(2, DefaultTokenizer.searchAll(tokensList, toWordTokArr("foo"), false).size());
+        assertEquals(1, DefaultTokenizer.searchAll(tokensList, toWordTokArr("bar"), true).size());
+        assertEquals(1, DefaultTokenizer.searchAll(tokensList, toWordTokArr("bar"), false).size());
+        // Inexact search returns each token separately
+        assertEquals(2, DefaultTokenizer.searchAll(tokensList, toWordTokArr("bar baz"), true).size());
+        // Exact search groups tokens from same contiguous match
+        assertEquals(1, DefaultTokenizer.searchAll(tokensList, toWordTokArr("bar baz"), false).size());
+        // Inexact search picks up all instances of all tokens
+        assertEquals(3, DefaultTokenizer.searchAll(tokensList, toWordTokArr("baz foo"), true).size());
+        assertEquals(1, DefaultTokenizer.searchAll(tokensList, toWordTokArr("baz foo"), false).size());
+        assertEquals(3, DefaultTokenizer.searchAll(tokensList, toWordTokArr("bar foo"), true).size());
+        assertEquals(0, DefaultTokenizer.searchAll(tokensList, toWordTokArr("bar foo"), false).size());
+
+    }
+
     private static Token[] toTokArr(String str) {
         return Stream.of(str.split("\\b")).map(w -> new Token(w, 0)).toArray(Token[]::new);
+    }
+
+    private static Token[] toWordTokArr(String str) {
+        return Stream.of(str.split("\\s+")).map(w -> new Token(w, 0)).toArray(Token[]::new);
     }
 }

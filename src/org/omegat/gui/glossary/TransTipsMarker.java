@@ -79,43 +79,30 @@ public class TransTipsMarker implements IMarker {
             return Collections.emptyList();
         }
         List<Mark> result = new ArrayList<>(tokens.size());
+        tokens.sort(Comparator.comparing(toks -> toks[0].getOffset()));
         for (Token[] toks : tokens) {
-            Arrays.sort(toks, Comparator.comparing(Token::getOffset));
-            if (canCombineMarks(srcText, toks)) {
-                Token first = toks[0];
-                Token last = toks[toks.length - 1];
-                int start = first.getOffset();
-                int end = last.getOffset() + last.getLength();
-                Mark mark = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
-                mark.painter = TRANSTIPS_UNDERLINER;
-                mark.toolTipText = tooltip;
-                result.add(mark);
-            } else {
-                for (Token tok : toks) {
-                    int start = tok.getOffset();
-                    int end = tok.getOffset() + tok.getLength();
-                    Mark mark = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
-                    mark.painter = TRANSTIPS_UNDERLINER;
-                    mark.toolTipText = tooltip;
-                    result.add(mark);
+            if (toks.length > 1) {
+                Arrays.sort(toks, Comparator.comparingInt(Token::getOffset));
+            }
+            for (Token tok : toks) {
+                Mark prev = result.isEmpty() ? null : result.get(result.size() - 1);
+                int currStart = tok.getOffset();
+                int currEnd = currStart + tok.getLength();
+                Mark newMark;
+                // If two tokens (representing the same glossary hit) are separated only by whitespace,
+                // combine them into a single mark
+                if (prev != null && canCloseSpan(srcText, prev.endOffset, currStart)) {
+                    newMark = new Mark(Mark.ENTRY_PART.SOURCE, prev.startOffset, currEnd);
+                    result.set(result.size() - 1, newMark);
+                } else {
+                    newMark = new Mark(Mark.ENTRY_PART.SOURCE, currStart, currEnd);
+                    result.add(newMark);
                 }
+                newMark.painter = TRANSTIPS_UNDERLINER;
+                newMark.toolTipText = tooltip;
             }
         }
         return result;
-    }
-
-    private static boolean canCombineMarks(String text, Token[] toks) {
-        if (toks.length < 2) {
-            return false;
-        }
-        for (int i = 1; i < toks.length; i++) {
-            Token prev = toks[i - 1];
-            Token curr = toks[i];
-            if (!canCloseSpan(text, prev.getOffset() + prev.getLength(), curr.getOffset())) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private static boolean canCloseSpan(String text, int start, int end) {

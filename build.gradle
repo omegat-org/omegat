@@ -472,7 +472,8 @@ installDist.doFirst {
     startScripts.outputDir.mkdirs()
     file("${startScripts.outputDir}/${applicationName}").createNewFile()
     if (destinationDir.directory) {
-        file("${destinationDir}/bin").mkdirs()
+        // As of Gradle 4.4(?) the application plugin expects `lib` as well
+        ['lib', 'bin'].each { file("${destinationDir}/${it}").mkdirs() }
     }
 }
 // Delete dummy afterwards.

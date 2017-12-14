@@ -423,7 +423,7 @@ public final class MainWindowMenuHandler {
 
     public void editUndoMenuItemActionPerformed() {
         Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-        if (focused.equals(Core.getNotes())) {
+        if (focused == Core.getNotes()) {
             Core.getNotes().undo();
         } else {
             Core.getEditor().undo();
@@ -432,7 +432,7 @@ public final class MainWindowMenuHandler {
 
     public void editRedoMenuItemActionPerformed() {
         Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-        if (focused.equals(Core.getNotes())) {
+        if (focused == Core.getNotes()) {
             Core.getNotes().redo();
         } else {
             Core.getEditor().redo();

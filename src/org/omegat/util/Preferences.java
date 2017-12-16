@@ -182,6 +182,8 @@ public final class Preferences {
 
     public static final String ALLOW_YANDEX_TRANSLATE = "allow_yandex_translate";
 
+    public static final String ALLOW_MOSES_TRANSLATE = "allow_moses_translate";
+
     /**
      * Mark glossary matches. This feature used to be called "TransTips", and the prefs key remains unchanged for
      * backwards-compatibility.

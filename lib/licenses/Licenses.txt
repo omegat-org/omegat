@@ -77,3 +77,5 @@ version 2.1 or greater.
 
 mALIGNa is distributed under the MIT License (required for Aligner
 tool).
+
+DeNormalize.java is licensed under the DeNormalize license.

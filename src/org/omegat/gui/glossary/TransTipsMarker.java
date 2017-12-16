@@ -106,7 +106,7 @@ public class TransTipsMarker implements IMarker {
     }
 
     private static boolean canCloseSpan(String text, int start, int end) {
-        if (start < 0 || end >= text.length() || start > end) {
+        if (start < 0 || end > text.length()) {
             throw new IndexOutOfBoundsException();
         }
         for (int cp, i = start; i < end; i += Character.charCount(cp)) {

@@ -25,6 +25,7 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.awt.Window;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Locale;
@@ -35,6 +36,7 @@ import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import org.omegat.core.Core;
 import org.omegat.filters2.html2.HTMLUtils;
+import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.DeNormalize;
 import org.omegat.util.Language;
@@ -48,6 +50,8 @@ import org.omegat.util.Preferences;
  */
 public class MosesTranslate extends BaseTranslate {
 
+    private static final String PROPERTY_MOSES_URL = "moses.server.url";
+
     @Override
     protected String getPreferenceName() {
         return Preferences.ALLOW_MOSES_TRANSLATE;
@@ -60,7 +64,7 @@ public class MosesTranslate extends BaseTranslate {
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
 
-        String server = System.getProperty("moses.server.url");
+        String server = getServerUrl();
 
         if (server == null) {
             return OStrings.getString("MT_ENGINE_MOSES_URL_NOTFOUND");
@@ -88,6 +92,10 @@ public class MosesTranslate extends BaseTranslate {
         return mosesPostprocess(result, tLang);
     }
 
+    private String getServerUrl() {
+        return System.getProperty(PROPERTY_MOSES_URL, Preferences.getPreference(PROPERTY_MOSES_URL));
+    }
+
     private String mosesPreprocess(String text, Locale locale) {
         ITokenizer tokenizer = Core.getProject().getSourceTokenizer();
         StringBuilder sb = new StringBuilder();
@@ -109,5 +117,33 @@ public class MosesTranslate extends BaseTranslate {
         }
 
         return cleanSpacesAroundTags(result, text);
+    }
+
+    @Override
+    public boolean isConfigurable() {
+        return true;
+    }
+
+    @Override
+    public void showConfigurationUI(Window parent) {
+        MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
+            @Override
+            protected void onConfirm() {
+                String url = panel.valueField1.getText().trim();
+                System.setProperty(PROPERTY_MOSES_URL, url);
+                Preferences.setPreference(PROPERTY_MOSES_URL, url);
+            }
+        };
+
+        dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_MOSES_URL_LABEL"));
+        dialog.panel.valueField1.setText(getServerUrl());
+        dialog.panel.valueField1.setColumns(20);
+
+        dialog.panel.valueLabel2.setVisible(false);
+        dialog.panel.valueField2.setVisible(false);
+
+        dialog.panel.temporaryCheckBox.setVisible(false);
+
+        dialog.show();
     }
 }

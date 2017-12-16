@@ -30,6 +30,7 @@ import java.io.BufferedWriter;
 
 import org.htmlparser.Tag;
 import org.omegat.filters2.html2.FilterVisitor;
+import org.omegat.filters2.html2.HTMLUtils;
 
 /**
  * The part of HTML filter that actually does the job. This class is called back
@@ -79,8 +80,8 @@ class HHCFilterVisitor extends FilterVisitor {
     protected void maybeTranslateAttribute(Tag tag, String key) {
         String attr = tag.getAttribute(key);
         if (attr != null) {
-            String trans = filter.privateProcessEntry(entitiesToChars(attr), null);
-            tag.setAttribute(key, charsToEntities(trans));
+            String trans = filter.privateProcessEntry(HTMLUtils.entitiesToChars(attr), null);
+            tag.setAttribute(key, HTMLUtils.charsToEntities(trans, filter.getTargetEncoding(), sShortcuts));
         }
     }
 }

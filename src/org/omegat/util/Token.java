@@ -58,6 +58,13 @@ public class Token {
     }
 
     /**
+     * Check that all fields are equal (unlike {@link #equals(Object)}).
+     */
+    public boolean deepEquals(Token other) {
+        return equals(other) && this.offset == other.offset && this.length == other.length;
+    }
+
+    /**
      * -1 if text is null, text's hashcode otherwise.
      */
     private int hash;

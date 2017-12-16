@@ -322,25 +322,42 @@ public class DefaultTokenizer implements ITokenizer {
      *            a list of tokens to be searched
      * @param needles
      *            a list of tokens to search in {@code haystack}
-     * @return A list containing each hit of the matched tokens. Each token array represents a different instance of
-     *         {@code needles} that was found in {@code haystack}.
+     * @return A list of one array containing the unique hits of the matched tokens.
      */
     private static List<Token[]> searchAllInexact(Token[] haystack, Token[] needles) {
-        List<Token[]> result = null;
+        List<Token> result = null;
         for (Token n : needles) {
             boolean found = false;
             for (int i = 0; (i = search(haystack, n, i)) != -1; i++) {
                 if (result == null) {
                     result = new ArrayList<>();
                 }
-                result.add(new Token[] { haystack[i] });
                 found = true;
+                if (!contains(result, haystack[i])) {
+                    result.add(haystack[i]);
+                }
             }
             if (!found) {
                 return Collections.emptyList();
             }
         }
-        return result;
+        // We expect to filter results later, so we can't use Collections.singletonList here
+        List<Token[]> ret = new ArrayList<>();
+        ret.add(result.toArray(new Token[result.size()]));
+        return ret;
+    }
+
+    /*
+     * This is required instead of List#contains because token equality only compares hashes but we want "deep" equality
+     * here.
+     */
+    private static boolean contains(List<Token> list, Token token) {
+        for (Token tok : list) {
+            if (tok.deepEquals(token)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

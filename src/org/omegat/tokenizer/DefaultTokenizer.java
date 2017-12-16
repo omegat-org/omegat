@@ -341,6 +341,9 @@ public class DefaultTokenizer implements ITokenizer {
                 return Collections.emptyList();
             }
         }
+        if (result.size() < needles.length) {
+            return Collections.emptyList();
+        }
         // We expect to filter results later, so we can't use Collections.singletonList here
         List<Token[]> ret = new ArrayList<>();
         ret.add(result.toArray(new Token[result.size()]));

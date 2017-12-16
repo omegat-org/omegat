@@ -70,26 +70,27 @@ public class MosesTranslate extends BaseTranslate {
             return OStrings.getString("MT_ENGINE_MOSES_URL_NOTFOUND");
         }
 
-        Map<String, String> mosesParams = new HashMap<String, String>();
+        XmlRpcClient client = getClient(new URL(server));
 
-        XmlRpcClient client = new XmlRpcClient();
-        XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-
-        config.setServerURL(new URL(server));
-        client.setConfig(config);
-
+        Map<String, String> mosesParams = new HashMap<>();
         mosesParams.put("text", mosesPreprocess(text, sLang.getLocale()));
 
-        Object[] xmlRpcParams = new Object[] { mosesParams };
+        Object[] xmlRpcParams = { mosesParams };
 
-        String result;
         try {
             HashMap<?, ?> response = (HashMap<?, ?>) client.execute("translate", xmlRpcParams);
-            result = (String) response.get("text");
+            return mosesPostprocess((String) response.get("text"), tLang);
         } catch (XmlRpcException e) {
             return e.getLocalizedMessage();
         }
-        return mosesPostprocess(result, tLang);
+    }
+
+    private XmlRpcClient getClient(URL url) {
+        XmlRpcClient client = new XmlRpcClient();
+        XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+        config.setServerURL(url);
+        client.setConfig(config);
+        return client;
     }
 
     private String getServerUrl() {

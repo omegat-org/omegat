@@ -27,9 +27,19 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
@@ -135,6 +145,47 @@ public class MosesTranslate extends BaseTranslate {
                 Preferences.setPreference(PROPERTY_MOSES_URL, url);
             }
         };
+
+        JLabel messageLabel = new JLabel();
+        JButton testButton = new JButton(OStrings.getString("MT_ENGINE_MOSES_TEST_BUTTON"));
+        testButton.addActionListener(e -> {
+            messageLabel.setText(OStrings.getString("MT_ENGINE_MOSES_TEST_TESTING"));
+            String url = dialog.panel.valueField1.getText().trim();
+            new SwingWorker<String, Void>() {
+                @Override
+                protected String doInBackground() throws Exception {
+                    XmlRpcClient client = getClient(new URL(url));
+                    Object response = client.execute("system.listMethods", (Object[]) null);
+                    if (Arrays.asList(((Object[]) response)).contains("translate")) {
+                        return OStrings.getString("MT_ENGINE_MOSES_TEST_RESULT_OK");
+                    } else {
+                        return OStrings.getString("MT_ENGINE_MOSES_TEST_RESULT_NO_TRANSLATE");
+                    }
+                }
+
+                @Override
+                protected void done() {
+                    String message = null;
+                    try {
+                        message = get();
+                    } catch (ExecutionException e) {
+                        message = e.getCause().getLocalizedMessage();
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, message, e);
+                    } catch (Exception e) {
+                        message = e.getLocalizedMessage();
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, message, e);
+                    }
+                    messageLabel.setText(message);
+                }
+            }.execute();
+
+        });
+        JPanel testPanel = new JPanel();
+        testPanel.setLayout(new BoxLayout(testPanel, BoxLayout.LINE_AXIS));
+        testPanel.add(testButton);
+        testPanel.add(messageLabel);
+        testPanel.setAlignmentX(0);
+        dialog.panel.itemsPanel.add(testPanel);
 
         dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_MOSES_URL_LABEL"));
         dialog.panel.valueField1.setText(getServerUrl());

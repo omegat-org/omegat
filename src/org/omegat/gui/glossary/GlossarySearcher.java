@@ -192,7 +192,7 @@ public class GlossarySearcher {
             return tokens;
         }
         List<Token> result = new ArrayList<>(tokens.length);
-        for (Token tok : tokenize(str)) {
+        for (Token tok : tokens) {
             if (!tokenInTag(tok, tags)) {
                 result.add(tok);
             }

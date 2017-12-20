@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.3 update 2
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   1 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
 4.1.3 update 2 vs 4.1.3 update 1
 
   Implemented requests:
+
+  - Add an MT connector for Moses
+  https://sourceforge.net/p/omegat/feature-requests/773/
 
   - Reduce unwanted glossary matches when "using terms appearing
 separately"

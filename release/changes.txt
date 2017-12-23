@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   2 Enhancements
   1 Bug fix
-  1 Localisation update
+  2 Localisation updates
 ----------------------------------------------------------------------
 4.1.3 update 2 vs 4.1.3 update 1
 
@@ -24,6 +24,7 @@ separately"
   Localisation Updates:
 
   - Swedish localisation updated to 4.1.3 update 2 (UI, scripts, readme)
+  - Italian localisation updated to 4.1.3 update 2 (UI, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.3 update 1 (2017-12-14)

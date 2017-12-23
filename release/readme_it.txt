@@ -1,18 +1,15 @@
-Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2017 e revisione di Valter Mura, copyright© 2017.
+Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2017
 
 
 Che cosa è OmegaT?
-==================
+===============
 
-OmegaT è un software di traduzione assistita (CAT, Computer Assisted Translation)
-multi-piattaforma dalle numerose funzioni, tra cui: ricerca delle concordanze parziali,
-uso di memorie di traduzione, ricerca di parole chiave, glossari e integrazione delle
-traduzioni all'interno di progetti aggiornati.
+OmegaT è un software di traduzione assistita (CAT, Computer Assisted Translation) multi-piattaforma dalle numerose funzioni, tra cui: ricerca delle concordanze parziali, uso di memorie di traduzione, ricerca di parole chiave, glossari e integrazione delle traduzioni all'interno di progetti aggiornati.
 
 
 
 Informazioni sulla licenza
-==========================
+=====================
 
 OmegaT è disponibile secondo i termini della GNU General Public License come
 pubblicata dalla Free Software Foundation, sia che si tratti della versione 3 della licenza, oppure
@@ -25,7 +22,7 @@ in /lib/licenses/Licenses.txt.
 
 
 Prerequisiti per l'installazione di OmegaT
-==========================================
+===================================
 
 OmegaT richiede che sul sistema sia installato Java Runtime Environment (JRE) versione 1.8
 o superiore.
@@ -36,14 +33,14 @@ problemi per la sua selezione, ottenimento e installazione.
 
 
 Installazione di OmegaT (Windows)
-=================================
+===========================
 
 Avviare il programma di installazione.
 
 
 
 Installazione di OmegaT (Mac)
-=============================
+=======================
 
 Estrarre l'archivio .zip di OmegaT in modo da ottenere una cartella che contenga
 un file di documentazione e l'applicazione OmegaT. Spostare la cartella in una
@@ -52,7 +49,7 @@ posizione appropriata, per esempio la cartella delle Applicazioni.
 
 
 Installazione di OmegaT (Linux)
-===============================
+=========================
 
 Salvare ed estrarre l'archivio in una cartella di propria scelta. OmegaT è pronto per
 essere avviato.
@@ -66,7 +63,7 @@ install.sh.
 
 
 Installazione di OmegaT (Solaris, FreeBSD, ...)
-===============================================
+=========================================
 
 Salvare ed estrarre l'archivio in una cartella di propria scelta. OmegaT è pronto per
 essere avviato.
@@ -74,14 +71,14 @@ essere avviato.
 
 
 Uso di Java Web Start per l'installazione di OmegaT (tutte le piattaforme)
-==========================================================================
+===========================================================
 
 Se Java è già installato sul proprio sistema, un metodo per installare OmegaT
 è usare Java Web Start.
 
 A questo proposito, scaricare ed eseguire il file seguente:
 
-   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
 
 Esso installerà l'ambiente corretto per il proprio computer e l'applicazione
 per il primo avvio. Non è necessario eseguire online le chiamate successive.
@@ -89,7 +86,7 @@ per il primo avvio. Non è necessario eseguire online le chiamate successive.
 
 
 Avvio di OmegaT (Windows)
-=========================
+==========================
 
 Se durante l'installazione è stato creato un collegamento nel desktop, fare
 doppio clic sul collegamento.
@@ -104,7 +101,7 @@ modificare le impostazioni affinché siano visibili le estensioni.
 
 
 Avvio di OmegaT (Mac)
-=====================
+======================
 
 Fare doppio clic sull'applicazione OmegaT.
 
@@ -115,7 +112,7 @@ dall'area di ricerca di Spotlight.
 
 
 Avvio di OmegaT (Linux)
-=======================
+========================
 
 Se si è usato lo script linux-install.sh, sarà possibile avviare OmegaT con:
 
@@ -138,7 +135,7 @@ e quindi:
 
 
 Avvio di OmegaT dalla riga di comando (tutti i sistemi)
-=======================================================
+====================================================
 
 Il comando per avviare OmegaT è:
 
@@ -153,7 +150,7 @@ non deve essere indicato.)
 
 
 Contributi
-==========
+============
 
 OmegaT è un lavoro originale di Keith Godfrey.
 
@@ -180,7 +177,7 @@ ma il vostro nome non è presente nell'elenco, contattateci senza problemi).
 
 
 Collegamenti utili
-==================
+============
 
 Le informazioni più aggiornate su OmegaT possono essere reperite accedendo a:
 
@@ -188,7 +185,7 @@ Le informazioni più aggiornate su OmegaT possono essere reperite accedendo a:
 
 Assistenza all'utente, nel gruppo utenti di Yahoo (multilingue), in cui è possibile ricercare negli archivi senza necessità di iscrizione:
 
-   http://tech.groups.yahoo.com/group/OmegaT/
+   https://groups.yahoo.com/neo/groups/OmegaT/info
 
 Richieste di miglioramenti (in Inglese), nel sito SourceForge:
 

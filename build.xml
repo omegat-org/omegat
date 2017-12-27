@@ -373,7 +373,7 @@ Custom strings from release\win32-specific must be added manually to the languag
             <zipfileset dir="release/mac-specific/" excludes="**/Info.plist,**/MacOS/OmegaT"/>
             <zipfileset dir="build/" includes="Info.plist" prefix="OmegaT.app/Contents/"/>
             <zipfileset dir="release/mac-specific/" includes="**/MacOS/OmegaT" filemode="755"/>
-            <zipfileset dir="${assets.dir}/jre-mac-root/" excludes="bin/" filemode="755" prefix="OmegaT.app/Contents/PlugIns/jre.bundle/"/>
+            <zipfileset dir="${assets.dir}/jre-mac-root/" filemode="755" prefix="OmegaT.app/Contents/PlugIns/jre.bundle/"/>
         </zip>
     </target>
 
@@ -385,8 +385,8 @@ Custom strings from release\win32-specific must be added manually to the languag
 			<arg value="build/mac-signed/OmegaT.app"/>
 		</exec>
 		<zip destfile="dist2/OmegaT_${distversion}${beta}_Mac_Signed.zip">
-			<zipfileset dir="build/mac-signed/" excludes="OmegaT.app/Contents/MacOS/JavaAppLauncher,OmegaT.app/Contents/PlugIns/jre.bundle"/>
-			<zipfileset dir="build/mac-signed/" includes="OmegaT.app/Contents/MacOS/JavaAppLauncher,OmegaT.app/Contents/PlugIns/jre.bundle" filemode="755"/>
+			<zipfileset dir="build/mac-signed/" excludes="**/MacOS/OmegaT,**/PlugIns/jre.bundle/**"/>
+			<zipfileset dir="build/mac-signed/" includes="**/MacOS/OmegaT,**/PlugIns/jre.bundle/**" filemode="755"/>
 		</zip>
 	</target>
 

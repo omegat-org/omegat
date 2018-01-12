@@ -2,7 +2,7 @@
  OmegaT 4.1.3 update 2
 ----------------------------------------------------------------------
   2 Enhancements
-  1 Bug fix
+  2 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 4.1.3 update 2 vs 4.1.3 update 1
@@ -20,6 +20,9 @@ separately"
 
   - Overlapping glossary marks result in index-out-of-bounds errors
   https://sourceforge.net/p/omegat/bugs/894/
+
+  - Team tool `init` command does not set correct tokenizers
+  https://sourceforge.net/p/omegat/bugs/895/
 
   Localisation Updates:
 

@@ -57,6 +57,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.StaticUIUtils;
@@ -427,6 +428,7 @@ public class AlignFilePickerController {
     public static void main(String[] args) throws Exception {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
 
+        Preferences.init();
         PluginUtils.loadPlugins(Collections.emptyMap());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));

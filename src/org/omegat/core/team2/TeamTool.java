@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.logging.Level;
 
 import org.eclipse.jgit.api.Git;
@@ -41,6 +42,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
 import org.tmatesoft.svn.core.SVNDepth;
@@ -141,6 +143,8 @@ public final class TeamTool {
         Log.setLevel(Level.WARNING);
 
         try {
+            Preferences.init();
+            PluginUtils.loadPlugins(Collections.emptyMap());
             if (COMMAND_INIT.equals(args[0]) && args.length == 3) {
                 initTeamProject(new File("").getAbsoluteFile(), args[1], args[2]);
                 System.exit(0);

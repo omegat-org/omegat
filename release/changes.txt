@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   2 Enhancements
   2 Bug fixes
-  5 Localisation updates
+  6 Localisation updates
 ----------------------------------------------------------------------
 4.1.3 update 2 vs 4.1.3 update 1
 
@@ -28,6 +28,7 @@ separately"
 
   - Brazilian Portuguese localisation updated to 4.1.3 update 2 (UI)
   - Dutch localisation updated to 4.1.3 update 2 (UI)
+  - Interlingua localisation updated to 4.1.3 update 2 (UI)
   - Italian localisation updated to 4.1.3 update 2 (UI, scripts, readme)
   - Russian localisation updated to 4.1.3 update 2 (UI)
   - Swedish localisation updated to 4.1.3 update 2 (UI, scripts, readme)

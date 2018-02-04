@@ -38,7 +38,7 @@ public class ReplaceMatch extends SearchMatch {
         super(start, end);
         this.replacement = replacement;
     }
-    
+
     public final String getReplacement() {
         return replacement;
     }

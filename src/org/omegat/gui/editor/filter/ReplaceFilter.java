@@ -216,7 +216,7 @@ public class ReplaceFilter implements IEditorFilter {
         String str = ec.getCurrentTranslation();
         List<SearchMatch> found = getReplacementsForEntry(str);
         if (found != null) {
-            for (SearchMatch m : getReplacementsForEntry(str)) {
+            for (SearchMatch m : found) {
                 if (m.getStart() <= pos && pos <= m.getEnd()) {
                     // yes - replace
                     ec.replacePartOfText(replacement, m.getStart(), m.getEnd());

@@ -67,6 +67,7 @@ import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -632,7 +633,7 @@ public class Searcher {
                 int start = matcher.start();
                 if (m_searchExpression.mode == SearchMode.REPLACE && m_searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
                     String repl = m_searchExpression.replacement;
-                    Matcher replaceMatcher = Pattern.compile("(?<!\\\\)\\$(\\d+)").matcher(repl);
+                    Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
                     while (replaceMatcher.find()) {
                         int varId = Integer.parseInt(replaceMatcher.group(1));
                         repl = repl.substring(0, replaceMatcher.start())

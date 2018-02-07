@@ -174,6 +174,9 @@ public final class PatternConsts {
 
     public static final Pattern SPACE_TAB = Pattern.compile("( |\t)+");
 
+    /** Pattern for regular expression variable : $n, where n is a number, but should not be preceeded by backslash */
+    public static final Pattern REGEX_VARIABLE = Pattern.compile("(?<!\\\\)\\$(\\d+)");
+
     /**
      * Pattern for detecting the placeholders in a printf-function string which
      * can occur in languages like php, C and others. placeholder ::= "%"

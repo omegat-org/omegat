@@ -213,6 +213,65 @@ public final class StringUtil {
                 + text.substring(remainder);
     }
 
+    /** 
+     * Interpret the case replacement language used in regular expressions:
+     * - backslash u = uppercase next letter
+     * - backslash l = lowercase next letter
+     * - backslash U = uppercase next letters until backslash E
+     * - backslash L = lowercase next letters until backslash E
+     * - backslash u + backslash L = uppercase next letter then lowercase all until backslash E
+     * - backslash l + backslash U = lowercase next letter then uppercase all until backslash E
+     * Warning: this method works with the string you give to it; if you want to do other substitutions, such as variable conversions,
+     * they must be done before the call to replaceCase, else this method will not apply to the non-yet converted parts!
+     **/
+    public static String replaceCase(String txt) {
+        if (!txt.startsWith("\\")) {
+            int idx = txt.indexOf("\\");
+            if (idx == -1) {
+                return txt;
+            } else {
+                return txt.substring(0, idx) + replaceCase(txt.substring(idx));
+            }
+        }
+        // Double symbols are longer, so they must be treated first
+        if (txt.startsWith("\\u\\L")) {
+            return txt.substring(4, 5).toUpperCase() + replaceCase("\\L" + txt.substring(5));
+        }
+        if (txt.startsWith("\\l\\U")) {
+            return txt.substring(4, 5).toLowerCase() + replaceCase("\\U" + txt.substring(5));
+        }
+        // Simple symbols without delimiters
+        if (txt.startsWith("\\u")) {
+            return txt.substring(2, 3).toUpperCase() + replaceCase(txt.substring(3));
+        }
+        if (txt.startsWith("\\l")) {
+            return txt.substring(2, 3).toLowerCase() + replaceCase(txt.substring(3));
+        }
+        // Simple symbols with \E as delimiter
+        if (txt.startsWith("\\E")) {
+            return replaceCase(txt.substring(2));
+        }
+        if (txt.startsWith("\\U")) { // Upper until \E or \L
+            txt = txt.substring(2).replace("\\L", "\\E\\L").replace("\\U", "\\E\\U");
+            int idx = txt.indexOf("\\E");
+            if (idx == -1) {
+                return txt.toUpperCase();
+            } else {
+                return txt.substring(0, idx).toUpperCase() + replaceCase(txt.substring(idx + 2));
+            }
+        }
+        if (txt.startsWith("\\L")) { // Lower until \E or \U
+            txt = txt.substring(2).replace("\\L", "\\E\\L").replace("\\U", "\\E\\U");
+            int idx = txt.indexOf("\\E");
+            if (idx == -1) {
+                return txt.toLowerCase();
+            } else {
+                return txt.substring(0, idx).toLowerCase() + replaceCase(txt.substring(idx + 2));
+            }
+        }
+        return replaceCase(txt.substring(1)); // then '\' was only here as a protection (for example '\$' ==> '$')
+    }
+
     public static String matchCapitalization(String text, String matchTo, Locale locale) {
         if (StringUtil.isEmpty(matchTo) || StringUtil.isEmpty(text)) {
             return text;

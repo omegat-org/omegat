@@ -642,7 +642,7 @@ public class Searcher {
                         replaceMatcher.reset(repl);
                     }
                     if (!repl.equals(m_searchExpression.replacement)) {
-                        foundMatches.add(new ReplaceMatch(start, matcher.end(), StringUtil.replaceCase(repl)));
+                        foundMatches.add(new ReplaceMatch(start, matcher.end(), StringUtil.replaceCase(repl, Core.getProject().getProjectProperties().getTargetLanguage().getLocale())));
                     } else {
                         foundMatches.add(new SearchMatch(start, matcher.end()));
                     }

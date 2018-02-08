@@ -10,6 +10,7 @@
                2010-2013 Alex Buloichik
                2015 Zoltan Bartko, Aaron Madlon-Kay
                2016 Aaron Madlon-Kay
+               2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -50,6 +51,7 @@ import javax.xml.bind.DatatypeConverter;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
 public final class StringUtil {
 

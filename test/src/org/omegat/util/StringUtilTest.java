@@ -5,6 +5,7 @@
 
  Copyright (C) 2013 Alex Buloichik
                2016 Aaron Madlon-Kay
+               2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,6 +41,7 @@ import org.junit.Test;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
 public class StringUtilTest {
     @Test
@@ -363,5 +365,18 @@ public class StringUtilTest {
         } catch (NullPointerException ex) {
             // Should fail when stripping null string.
         }
+    }
+
+    @Test
+    public void testCaseConversion() {
+        assertEquals("This is a test", StringUtil.replaceCase("\\uthis is a test", Locale.ENGLISH));	// uc first 
+        assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\lTHIS IS A TEST", Locale.ENGLISH));	// lc first 
+        assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\l\\Uthis is a test", Locale.ENGLISH));	// lc first + uc
+        assertEquals("THIS IS A TEST", StringUtil.replaceCase("\\Uthis is a test", Locale.ENGLISH));	// uc all
+        assertEquals("THIS IS a test", StringUtil.replaceCase("\\Uthis is\\E a test", Locale.ENGLISH));	// uc until E
+        assertEquals("THIS is A TEST", StringUtil.replaceCase("\\Uthis\\E is \\Ua test", Locale.ENGLISH));	// uc until E
+        // Test that behaviour changes for turkish
+        assertEquals("Istanbul", StringUtil.replaceCase("\\uistanbul", Locale.ENGLISH));	// english version
+        assertEquals("\u0130stanbul", StringUtil.replaceCase("\\uistanbul", new Locale("tr")));	// turkish version
     }
 }

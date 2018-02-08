@@ -10,7 +10,7 @@
                2013 Aaron Madlon-Kay, Alex Buloichik
                2014 Alex Buloichik, Piotr Kulik, Aaron Madlon-Kay
                2015 Aaron Madlon-Kay
-               2017 Thomas Cordonnier
+               2017-2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -631,23 +631,23 @@ public class Searcher {
             }
             while (true) {
                 int start = matcher.start();
-                if (m_searchExpression.mode == SearchMode.REPLACE && m_searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
-                    String repl = m_searchExpression.replacement;
-                    Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
-                    while (replaceMatcher.find()) {
-                        int varId = Integer.parseInt(replaceMatcher.group(1));
-                        repl = repl.substring(0, replaceMatcher.start())
-                            + matcher.group(varId) // yes, from source matcher!
-                            + repl.substring(replaceMatcher.end());
-                        replaceMatcher.reset(repl);
-                    }
-                    if (!repl.equals(m_searchExpression.replacement)) {
-                        foundMatches.add(new ReplaceMatch(start, matcher.end(), StringUtil.replaceCase(repl, Core.getProject().getProjectProperties().getTargetLanguage().getLocale())));
+                if (m_searchExpression.mode == SearchMode.REPLACE) {
+                    if (m_searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
+                        String repl = m_searchExpression.replacement;
+                        Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
+                        while (replaceMatcher.find()) {
+                            int varId = Integer.parseInt(replaceMatcher.group(1));
+                            repl = repl.substring(0, replaceMatcher.start())
+                                + matcher.group(varId) // yes, from source matcher!
+                                + repl.substring(replaceMatcher.end());
+                            replaceMatcher.reset(repl);
+                        }
+                        foundMatches.add(new SearchMatch(start, matcher.end(), StringUtil.replaceCase(repl, Core.getProject().getProjectProperties().getTargetLanguage().getLocale())));						
                     } else {
-                        foundMatches.add(new SearchMatch(start, matcher.end()));
+                        foundMatches.add(new SearchMatch(start, matcher.end(), m_searchExpression.replacement));						
                     }
                 } else {
-                    foundMatches.add(new SearchMatch(start, matcher.end()));
+                    foundMatches.add(new SearchMatch(start, matcher.end(), null));
                 }
                 if (start >= text.length() || !matcher.find(start + 1)) {
                     break;
@@ -671,7 +671,7 @@ public class Searcher {
                 if (pr.getStart() <= cu.getStart() && pr.getEnd() >= cu.getStart()) {
                     int end = Math.max(cu.getEnd(), pr.getEnd());
                     // leave only one region
-                    pr = new SearchMatch(pr.getStart(), end);
+                    pr = new SearchMatch(pr.getStart(), end, pr.getReplacement());
                     foundMatches.set(i - 1, pr);
                     foundMatches.remove(i);
                 } else {

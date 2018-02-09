@@ -197,4 +197,29 @@ public class TMXReaderTest extends TestCore {
         }
         assertEquals(charset, TMXReader2.detectCharset(xml));
     }
+
+    /**
+     * Test for bug #892
+     *
+     * @see <a href="https://sourceforge.net/p/omegat/bugs/892/">Bug #892</a>
+     */
+    @Test
+    public void testMissingSource() throws Exception {
+        Map<String, String> tr = new TreeMap<>();
+        new TMXReader2().readTMX(new File("test/data/tmx/test-missingSource.tmx"), new Language("en"),
+                new Language("be"), false, false, true, false, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
+                    if (tuvSource != null && tuvTarget != null) {
+                        tr.put(tuvSource.text, tuvTarget.text);
+                        return true;
+                    }
+                    return false;
+                });
+        // Make sure everything is loaded despite TU missing source TUV
+        assertFalse(tr.isEmpty());
+        assertEquals(3, tr.size());
+        assertEquals("betuv", tr.get("entuv"));
+        assertNull(tr.get("lang1"));
+        assertEquals("tr2", tr.get("lang2"));
+        assertEquals("tr3", tr.get("lang3"));
+    }
 }

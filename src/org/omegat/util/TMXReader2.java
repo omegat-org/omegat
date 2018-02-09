@@ -160,8 +160,7 @@ public class TMXReader2 {
                         parseTu(eStart);
                         ParsedTuv origTuv = getTuvByLang(sourceLanguage);
                         ParsedTuv targetTuv = getTuvByLang(targetLanguage);
-                        allFound = allFound
-                                && callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype);
+                        allFound = callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype) && allFound;
                     } else if ("header".equals(eStart.getName().getLocalPart())) {
                         parseHeader(eStart, sourceLanguage);
                     }

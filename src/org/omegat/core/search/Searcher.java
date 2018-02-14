@@ -642,12 +642,12 @@ public class Searcher {
                                 + repl.substring(replaceMatcher.end());
                             replaceMatcher.reset(repl);
                         }
-                        foundMatches.add(new SearchMatch(start, matcher.end(), StringUtil.replaceCase(repl, Core.getProject().getProjectProperties().getTargetLanguage().getLocale())));						
+                        foundMatches.add(new SearchMatch(start, matcher.end(), StringUtil.replaceCase(repl, m_project.getProjectProperties().getTargetLanguage().getLocale())));						
                     } else {
                         foundMatches.add(new SearchMatch(start, matcher.end(), m_searchExpression.replacement));						
                     }
                 } else {
-                    foundMatches.add(new SearchMatch(start, matcher.end(), null));
+                    foundMatches.add(new SearchMatch(start, matcher.end()));
                 }
                 if (start >= text.length() || !matcher.find(start + 1)) {
                     break;

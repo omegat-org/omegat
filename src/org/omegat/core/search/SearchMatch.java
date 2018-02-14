@@ -34,6 +34,12 @@ public class SearchMatch implements Comparable<SearchMatch> {
     private int start, end;
     private String replacement;
 
+    public SearchMatch(int start, int end) {
+        this.start = start;
+        this.end = end;
+        this.replacement = null;
+    }
+
     public SearchMatch(int start, int end, String replacement) {
         this.start = start;
         this.end = end;

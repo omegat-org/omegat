@@ -637,6 +637,9 @@ public class Searcher {
                         Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
                         while (replaceMatcher.find()) {
                             int varId = Integer.parseInt(replaceMatcher.group(1));
+                            if (varId > matcher.groupCount()) {
+                                throw new IndexOutOfBoundsException(OStrings.getString("ST_REGEXP_REPLACEGROUP_ERROR", varId));
+                            }
                             repl = repl.substring(0, replaceMatcher.start())
                                 + matcher.group(varId) // yes, from source matcher!
                                 + repl.substring(replaceMatcher.end());

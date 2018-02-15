@@ -86,7 +86,7 @@ public class SearchThread extends LongProcessThread {
                 window.displayErrorRB(e, "ST_REGEXP_ERROR");
             } catch (IndexOutOfBoundsException e) {
                 // replacement with group which does not exist
-                window.displayErrorRB(null, "ST_REGEXP_REPLACEGROUP_ERROR", e.getMessage().substring(e.getMessage().lastIndexOf(" ") + 1));
+                window.displayErrorRB(e, "ST_REGEXP_REPLACE_ERROR");
             } catch (Exception e) {
                 // something bad happened
                 // alert user to badness

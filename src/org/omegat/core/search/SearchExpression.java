@@ -9,6 +9,7 @@
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
                2013 Alex Buloichik
                2014-2015 Aaron Madlon-Kay
+               2017-2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,6 +44,7 @@ import org.omegat.util.OConsts;
  * @author Antonio Vilei
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
 public class SearchExpression {
     public enum SearchExpressionType {
@@ -60,6 +62,7 @@ public class SearchExpression {
     public SearchMode mode;
     public String text;
     public String rootDir;
+    public String replacement;
     public boolean recursive = true;
     public SearchExpressionType searchExpressionType;
     public boolean caseSensitive = false;

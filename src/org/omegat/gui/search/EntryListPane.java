@@ -65,6 +65,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.search.Searcher;
+import org.omegat.core.search.SearchExpression;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
@@ -92,6 +93,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 @SuppressWarnings("serial")
 class EntryListPane extends JTextPane {
     protected static final AttributeSet FOUND_MARK = Styles.createAttributeSet(Color.BLUE, null, true, null);
+    protected static final AttributeSet REPLACE_MARK = Styles.createAttributeSet(Color.ORANGE.darker(), null, false, null);
     protected static final int MARKS_PER_REQUEST = 100;
     protected static final String ENTRY_SEPARATOR = "---------\n";
     private static final String KEY_GO_TO_NEXT_SEGMENT = "gotoNextSegmentMenuItem";
@@ -227,7 +229,7 @@ class EntryListPane extends JTextPane {
             return;
         }
 
-        currentlyDisplayedMatches = new DisplayMatches(searcher.getSearchResults());
+        currentlyDisplayedMatches = new DisplayMatches(searcher.getSearchResults(), searcher.getExpression().replacement != null);
 
         highlighter.reset();
         SwingUtilities.invokeLater(highlighter);
@@ -259,8 +261,9 @@ class EntryListPane extends JTextPane {
 
     protected class DisplayMatches {
         private final List<SearchMatch> matches = new ArrayList<SearchMatch>();
+        private final List<SearchMatch> replMatches = new ArrayList<SearchMatch>();
 
-        public DisplayMatches(final List<SearchResultEntry> entries) {
+        public DisplayMatches(final List<SearchResultEntry> entries, final boolean isReplace) {
             UIThreadsUtil.mustBeSwingThread();
 
             StringBuilder stringBuf = new StringBuilder();
@@ -277,7 +280,7 @@ class EntryListPane extends JTextPane {
 
             for (SearchResultEntry e : entries) {
                 addEntry(stringBuf, e.getEntryNum(), e.getPreamble(), e.getSrcPrefix(), e.getSrcText(),
-                        e.getTranslation(), e.getNote(), e.getSrcMatch(), e.getTargetMatch(), e.getNoteMatch());
+                        e.getTranslation(), e.getNote(), e.getSrcMatch(), e.getTargetMatch(), e.getNoteMatch(), isReplace);
             }
 
             Document doc = getDocument();
@@ -296,7 +299,7 @@ class EntryListPane extends JTextPane {
         // add entry text - remember what its number is and where it ends
         public void addEntry(StringBuilder stringBuf, int num, String preamble, String srcPrefix,
                 String src, String loc, String note, SearchMatch[] srcMatches,
-                SearchMatch[] targetMatches, SearchMatch[] noteMatches) {
+                SearchMatch[] targetMatches, SearchMatch[] noteMatches, boolean isReplace) {
             if (stringBuf.length() > 0) {
                 stringBuf.append(ENTRY_SEPARATOR);
             }
@@ -318,21 +321,39 @@ class EntryListPane extends JTextPane {
                 stringBuf.append('\n');
             }
             if (loc != null && !loc.equals("")) {
-                stringBuf.append("-- ");
+                String repl = null;
+                int shift = 0;
                 if (targetMatches != null && targetMatches.length > 0) {
                     // Save first match position to select it in Editor pane later
                     if (num > 0) {
                         SearchMatch m = targetMatches[0];
                         firstMatchList.put(num, new CaretPosition(m.getStart(), m.getEnd()));
+                        if (isReplace) {
+                            stringBuf.append("<- ");
+                            repl = loc;
+                        } else {
+                            stringBuf.append("-- ");
+                        }
                     }
 
                     for (SearchMatch m : targetMatches) {
+                        if (repl != null) {
+                            repl = repl.substring(0, m.getStart() - shift) + m.getReplacement() + repl.substring(m.getEnd() - shift);
+                            int start = m.getStart() + stringBuf.length() - shift;
+                            start += loc.length() + 4; // (loc + "\n-> ").length()
+                            replMatches.add(new SearchMatch(start, start + m.getReplacement().length()));
+                            shift += m.getEnd() - m.getStart() - m.getReplacement().length();
+                        }
                         m.move(stringBuf.length());
                         matches.add(m);
                     }
+                } else {
+                    stringBuf.append("-- ");
                 }
-                stringBuf.append(loc);
-                stringBuf.append('\n');
+                stringBuf.append(loc).append("\n");
+                if (repl != null) {
+                    stringBuf.append("-> ").append(repl).append("\n");
+                }
             }
 
             if (note != null && !note.equals("")) {
@@ -363,6 +384,10 @@ class EntryListPane extends JTextPane {
             List<SearchMatch> display = matches.subList(0, Math.min(MARKS_PER_REQUEST, matches.size()));
             for (SearchMatch m : display) {
                 doc.setCharacterAttributes(m.getStart(), m.getLength(), FOUND_MARK, true);
+            }
+            display = replMatches.subList(0, Math.min(MARKS_PER_REQUEST, replMatches.size()));
+            for (SearchMatch m : display) {
+                doc.setCharacterAttributes(m.getStart(), m.getLength(), REPLACE_MARK, true);
             }
             display.clear();
 

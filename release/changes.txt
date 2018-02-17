@@ -1,13 +1,19 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.3 update 3
 ----------------------------------------------------------------------
-  0 Enhancement
+  1 Enhancement
   1 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
 4.1.3 update 3 vs 4.1.3 update 2
 
+  Implemented requests:
+
+  - Replacement with regex capture groups and case manipulation
+  https://sourceforge.net/p/omegat/feature-requests/953/
+
   Bug fixes:
+
   - OmegaT ignores valid TU after finding a TU missing source
   https://sourceforge.net/p/omegat/bugs/892/
 

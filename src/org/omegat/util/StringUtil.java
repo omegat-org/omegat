@@ -10,6 +10,7 @@
                2010-2013 Alex Buloichik
                2015 Zoltan Bartko, Aaron Madlon-Kay
                2016 Aaron Madlon-Kay
+               2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -50,6 +51,7 @@ import javax.xml.bind.DatatypeConverter;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
 public final class StringUtil {
 
@@ -211,6 +213,68 @@ public final class StringUtil {
         String firstCP = text.substring(0, remainder);
         return StringUtil.toTitleCase(firstCP, locale)
                 + text.substring(remainder);
+    }
+
+    /**
+     * Interpret the case replacement language used in regular expressions:
+     * <ul>
+     * <li>backslash u = uppercase next letter
+     * <li>backslash l = lowercase next letter
+     * <li>backslash U = uppercase next letters until backslash E
+     * <li>backslash L = lowercase next letters until backslash E
+     * <li>backslash u + backslash L = uppercase next letter then lowercase all until backslash E
+     * <li>backslash l + backslash U = lowercase next letter then uppercase all until backslash E
+     * </ul>
+     * Warning: this method works with the string you give to it; if you want to do other substitutions, such as
+     * variable conversions, they must be done before the call to replaceCase, else this method will not apply to the
+     * non-yet converted parts!
+     **/
+    public static String replaceCase(String txt, Locale lang) {
+        if (!txt.startsWith("\\")) {
+            int idx = txt.indexOf("\\");
+            if (idx == -1) {
+                return txt;
+            } else {
+                return txt.substring(0, idx) + replaceCase(txt.substring(idx), lang);
+            }
+        }
+        // Double symbols are longer, so they must be treated first
+        if (txt.startsWith("\\u\\L")) {
+            return txt.substring(4, 5).toUpperCase(lang) + replaceCase("\\L" + txt.substring(5), lang);
+        }
+        if (txt.startsWith("\\l\\U")) {
+            return txt.substring(4, 5).toLowerCase(lang) + replaceCase("\\U" + txt.substring(5), lang);
+        }
+        // Simple symbols without delimiters
+        if (txt.startsWith("\\u")) {
+            return txt.substring(2, 3).toUpperCase(lang) + replaceCase(txt.substring(3), lang);
+        }
+        if (txt.startsWith("\\l")) {
+            return txt.substring(2, 3).toLowerCase(lang) + replaceCase(txt.substring(3), lang);
+        }
+        // Simple symbols with \E as delimiter
+        if (txt.startsWith("\\E")) {
+            return replaceCase(txt.substring(2), lang);
+        }
+        if (txt.startsWith("\\U")) { // Upper until \E or \L
+            txt = txt.substring(2).replace("\\L", "\\E\\L").replace("\\U", "\\E\\U");
+            int idx = txt.indexOf("\\E");
+            if (idx == -1) {
+                return txt.toUpperCase(lang);
+            } else {
+                return txt.substring(0, idx).toUpperCase(lang) + replaceCase(txt.substring(idx + 2), lang);
+            }
+        }
+        if (txt.startsWith("\\L")) { // Lower until \E or \U
+            txt = txt.substring(2).replace("\\L", "\\E\\L").replace("\\U", "\\E\\U");
+            int idx = txt.indexOf("\\E");
+            if (idx == -1) {
+                return txt.toLowerCase(lang);
+            } else {
+                return txt.substring(0, idx).toLowerCase(lang) + replaceCase(txt.substring(idx + 2), lang);
+            }
+        }
+        return replaceCase(txt.substring(1), lang); // then '\' was only here as a protection (for example '\$' ==> '$')
     }
 
     public static String matchCapitalization(String text, String matchTo, Locale locale) {

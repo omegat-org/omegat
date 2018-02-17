@@ -32,10 +32,18 @@ package org.omegat.core.search;
  */
 public class SearchMatch implements Comparable<SearchMatch> {
     private int start, end;
+    private String replacement;
 
     public SearchMatch(int start, int end) {
         this.start = start;
         this.end = end;
+        this.replacement = null;
+    }
+
+    public SearchMatch(int start, int end, String replacement) {
+        this.start = start;
+        this.end = end;
+        this.replacement = replacement;
     }
 
     public int compareTo(SearchMatch o) {
@@ -56,6 +64,10 @@ public class SearchMatch implements Comparable<SearchMatch> {
 
     public int getLength() {
         return end - start;
+    }
+
+    public String getReplacement() {
+        return replacement;
     }
 
     public void move(int offset) {

@@ -11,6 +11,7 @@
                2013 Aaron Madlon-Kay, Alex Buloichik
                2014 Aaron Madlon-Kay, Piotr Kulik
                2015 Yu Tang, Aaron Madlon-Kay, Hiroshi Miura
+               2017-2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -99,6 +100,7 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Piotr Kulik
  * @author Hiroshi Miura
+ * @author Thomas Cordonnier
  */
 @SuppressWarnings("serial")
 public class SearchWindowController {
@@ -702,7 +704,7 @@ public class SearchWindowController {
         EntryListPane viewer = (EntryListPane) form.m_viewer;
         Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
         Core.getEditor()
-                .setFilter(new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), replaceString));
+                .setFilter(new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher()));
     }
 
     private void doReplaceAll() {
@@ -718,7 +720,7 @@ public class SearchWindowController {
         int r = JOptionPane.showConfirmDialog(form, msg, OStrings.getString("CONFIRM_DIALOG_TITLE"),
                 JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
-            new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), replaceString).replaceAll();
+            new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher()).replaceAll();
         }
         Core.getEditor().activateEntry();
         form.m_replaceButton.setEnabled(false);
@@ -810,6 +812,7 @@ public class SearchWindowController {
             }
             s.widthInsensitive = form.m_fullHalfWidthInsensitive.isSelected();
             s.excludeOrphans = form.m_excludeOrphans.isSelected();
+            s.replacement = null;
             break;
         case REPLACE:
             if (form.m_replaceExactSearchRB.isSelected()) {
@@ -832,6 +835,7 @@ public class SearchWindowController {
             s.replaceUntranslated = form.m_replaceUntranslated.isSelected();
             s.widthInsensitive = form.m_fullHalfWidthInsensitive.isSelected();
             s.excludeOrphans = true;
+            s.replacement = form.m_replaceField.getEditor().getItem().toString();
             break;
         }
 

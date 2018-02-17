@@ -8,6 +8,7 @@
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
                2013 Alex Buloichik
+               2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,6 +47,7 @@ import org.omegat.util.Log;
  * @author Didier Briel
  * @author Martin Fleurke
  * @author Antonio Vilei
+ * @author Thomas Cordonnier
  */
 public class SearchThread extends LongProcessThread {
     /**
@@ -82,6 +84,9 @@ public class SearchThread extends LongProcessThread {
                 // bad regexp input
                 // alert user to badness
                 window.displayErrorRB(e, "ST_REGEXP_ERROR");
+            } catch (IndexOutOfBoundsException e) {
+                // replacement with group which does not exist
+                window.displayErrorRB(e, "ST_REGEXP_REPLACE_ERROR");
             } catch (Exception e) {
                 // something bad happened
                 // alert user to badness

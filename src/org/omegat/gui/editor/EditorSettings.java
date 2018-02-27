@@ -63,6 +63,7 @@ public class EditorSettings implements IEditorSettings {
     private String displayModificationInfo;
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
+    private boolean viewActiveSourceBold;
     private boolean markFirstNonUnique;
     private boolean markGlossaryMatches;
     private boolean markLanguageChecker;
@@ -90,9 +91,11 @@ public class EditorSettings implements IEditorSettings {
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
         markAutoPopulated = Preferences.isPreference(Preferences.MARK_AUTOPOPULATED);
 
-        //options from menu options->view
+        // options from preferences 'view' pane
         viewSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,
                 Preferences.VIEW_OPTION_SOURCE_ALL_BOLD_DEFAULT);
+        viewActiveSourceBold = Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD,
+                Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD_DEFAULT);
         markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
         markGlossaryMatches = Preferences.isPreference(Preferences.MARK_GLOSSARY_MATCHES);
         markLanguageChecker = !Preferences.isPreferenceDefault(Preferences.LT_DISABLED,
@@ -413,6 +416,7 @@ public class EditorSettings implements IEditorSettings {
 
         //update variables
         viewSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD);
+        viewActiveSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD);
         markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
 
         if (Core.getProject().isProjectLoaded()) {
@@ -557,7 +561,7 @@ public class EditorSettings implements IEditorSettings {
         //determine bold
         Boolean bold = false;
         if (isSource) {
-            if (active || viewSourceBold && isDisplaySegmentSources()) {
+            if (viewSourceBold || (active && viewActiveSourceBold)) {
                 bold = true;
             }
         }

@@ -341,6 +341,9 @@ public final class Preferences {
     /** View options: Show all sources in bold */
     public static final String VIEW_OPTION_SOURCE_ALL_BOLD = "view_option_source_all_bold";
     public static final boolean VIEW_OPTION_SOURCE_ALL_BOLD_DEFAULT = true;
+    /** View options: Show active source in bold */
+    public static final String VIEW_OPTION_SOURCE_ACTIVE_BOLD = "view_option_source_active_bold";
+    public static final boolean VIEW_OPTION_SOURCE_ACTIVE_BOLD_DEFAULT = true;
     /** View options: Mark first non-unique */
     public static final String VIEW_OPTION_UNIQUE_FIRST = "view_option_unique_first";
     /** View options: Simplify protected parts tooltips */
@@ -457,7 +460,7 @@ public final class Preferences {
 
     public static final String PROPERTY_SRX = "srx";
     public static final String PROPERTY_FILTERS = "filters";
-    
+
     /** Statistics dialog */
     public static final String STATISTICS_WINDOW_GEOMETRY_PREFIX = "stat_window";
 

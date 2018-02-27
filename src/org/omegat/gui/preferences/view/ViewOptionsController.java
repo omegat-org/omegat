@@ -121,17 +121,17 @@ public class ViewOptionsController extends BasePreferencesController {
     }
 
     private void updateEnabledness() {
-        boolean isEnabled = panel.templateActivator.isSelected();
-        panel.modInfoTemplate.setEnabled(isEnabled);
-        panel.templateLabel.setEnabled(isEnabled);
-        panel.variablesLabel.setEnabled(isEnabled);
-        panel.variablesList.setEnabled(isEnabled);
-        panel.insertButton.setEnabled(isEnabled);
-        panel.modInfoTemplateND.setEnabled(isEnabled);
-        panel.templateLabelND.setEnabled(isEnabled);
-        panel.variablesLabelND.setEnabled(isEnabled);
-        panel.variablesListND.setEnabled(isEnabled);
-        panel.insertButtonND.setEnabled(isEnabled);
+        boolean templatesEnabled = panel.templateActivator.isSelected();
+        panel.modInfoTemplate.setEnabled(templatesEnabled);
+        panel.templateLabel.setEnabled(templatesEnabled);
+        panel.variablesLabel.setEnabled(templatesEnabled);
+        panel.variablesList.setEnabled(templatesEnabled);
+        panel.insertButton.setEnabled(templatesEnabled);
+        panel.modInfoTemplateND.setEnabled(templatesEnabled);
+        panel.templateLabelND.setEnabled(templatesEnabled);
+        panel.variablesLabelND.setEnabled(templatesEnabled);
+        panel.variablesListND.setEnabled(templatesEnabled);
+        panel.insertButtonND.setEnabled(templatesEnabled);
     }
 
     @Override

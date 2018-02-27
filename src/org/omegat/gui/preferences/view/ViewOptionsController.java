@@ -143,6 +143,6 @@ public class ViewOptionsController extends BasePreferencesController {
         Preferences.setPreference(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE, panel.modInfoTemplate.getText());
         Preferences.setPreference(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE_WO_DATE, panel.modInfoTemplateND.getText());
         ModificationInfoManager.reset();
-        SwingUtilities.invokeLater(() -> Core.getEditor().getSettings().updateViewPreferences());
+        SwingUtilities.invokeLater(Core.getEditor().getSettings()::updateViewPreferences);
     }
 }

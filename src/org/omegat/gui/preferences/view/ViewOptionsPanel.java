@@ -54,6 +54,9 @@ public class ViewOptionsPanel extends JPanel {
     private void initComponents() {
 
         viewSourceAllBold = new javax.swing.JCheckBox();
+        activeBoldPanel = new javax.swing.JPanel();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+        viewSourceActiveBold = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         markFirstNonUnique = new javax.swing.JCheckBox();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
@@ -81,6 +84,16 @@ public class ViewOptionsPanel extends JPanel {
         viewSourceAllBold.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(viewSourceAllBold, OStrings.getString("VIEW_OPTION_SOURCE")); // NOI18N
         add(viewSourceAllBold);
+
+        activeBoldPanel.setAlignmentX(0.0F);
+        activeBoldPanel.setLayout(new javax.swing.BoxLayout(activeBoldPanel, javax.swing.BoxLayout.LINE_AXIS));
+        activeBoldPanel.add(filler5);
+
+        viewSourceActiveBold.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(viewSourceActiveBold, OStrings.getString("VIEW_OPTION_ACTIVE_SOURCE")); // NOI18N
+        activeBoldPanel.add(viewSourceActiveBold);
+
+        add(activeBoldPanel);
         add(filler1);
 
         org.openide.awt.Mnemonics.setLocalizedText(markFirstNonUnique, OStrings.getString("VIEW_OPTION_UNIQUE")); // NOI18N
@@ -139,10 +152,12 @@ public class ViewOptionsPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel activeBoldPanel;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
     private javax.swing.Box.Filler filler6;
     javax.swing.JButton insertButton;
     javax.swing.JButton insertButtonND;
@@ -159,6 +174,7 @@ public class ViewOptionsPanel extends JPanel {
     javax.swing.JLabel variablesLabelND;
     javax.swing.JComboBox<String> variablesList;
     javax.swing.JComboBox<String> variablesListND;
+    javax.swing.JCheckBox viewSourceActiveBold;
     javax.swing.JCheckBox viewSourceAllBold;
     // End of variables declaration//GEN-END:variables
 }

@@ -66,6 +66,7 @@ public class ViewOptionsController extends BasePreferencesController {
     private void initGui() {
         panel = new ViewOptionsPanel();
         panel.templateActivator.addActionListener(e -> updateEnabledness());
+        panel.viewSourceAllBold.addActionListener(e -> updateEnabledness());
         panel.variablesList
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(ModificationInfoManager.getModInfoVariables())));
         panel.variablesListND.setModel(
@@ -78,9 +79,11 @@ public class ViewOptionsController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        panel.viewSourceAllBold
-                .setSelected(Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,
-                        Preferences.VIEW_OPTION_SOURCE_ALL_BOLD_DEFAULT));
+        panel.viewSourceAllBold.setSelected(Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD,
+                Preferences.VIEW_OPTION_SOURCE_ALL_BOLD_DEFAULT));
+        panel.viewSourceActiveBold.setSelected(Preferences.isPreferenceDefault(
+                Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD, Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD_DEFAULT));
+
         panel.markFirstNonUnique.setSelected(Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST));
 
         panel.simplifyPPTooltips
@@ -105,6 +108,8 @@ public class ViewOptionsController extends BasePreferencesController {
     @Override
     public void restoreDefaults() {
         panel.viewSourceAllBold.setSelected(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD_DEFAULT);
+        panel.viewSourceActiveBold.setSelected(Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD_DEFAULT);
+
         panel.markFirstNonUnique.setSelected(Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST));
 
         panel.simplifyPPTooltips.setSelected(Preferences.VIEW_OPTION_PPT_SIMPLIFY_DEFAULT);
@@ -132,11 +137,15 @@ public class ViewOptionsController extends BasePreferencesController {
         panel.variablesLabelND.setEnabled(templatesEnabled);
         panel.variablesListND.setEnabled(templatesEnabled);
         panel.insertButtonND.setEnabled(templatesEnabled);
+
+        boolean allBold = panel.viewSourceAllBold.isSelected();
+        panel.viewSourceActiveBold.setEnabled(!allBold);
     }
 
     @Override
     public void persist() {
         Preferences.setPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD, panel.viewSourceAllBold.isSelected());
+        Preferences.setPreference(Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD, panel.viewSourceActiveBold.isSelected());
         Preferences.setPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST, panel.markFirstNonUnique.isSelected());
         Preferences.setPreference(Preferences.VIEW_OPTION_PPT_SIMPLIFY, panel.simplifyPPTooltips.isSelected());
         Preferences.setPreference(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE, panel.templateActivator.isSelected());

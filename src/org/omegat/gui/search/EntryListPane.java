@@ -383,15 +383,15 @@ class EntryListPane extends JTextPane {
             }
 
             StyledDocument doc = (StyledDocument) getDocument();
-            List<SearchMatch> display = matches.subList(0, Math.min(MARKS_PER_REQUEST, matches.size()));
-            for (SearchMatch m : display) {
+            List<SearchMatch> matchesToMark = matches.subList(0, Math.min(MARKS_PER_REQUEST, matches.size()));
+            for (SearchMatch m : matchesToMark) {
                 doc.setCharacterAttributes(m.getStart(), m.getLength(), FOUND_MARK, true);
             }
-            display = replMatches.subList(0, Math.min(MARKS_PER_REQUEST, replMatches.size()));
-            for (SearchMatch m : display) {
+            List<SearchMatch> replToMark = replMatches.subList(0, Math.min(MARKS_PER_REQUEST, replMatches.size()));
+            for (SearchMatch m : replToMark) {
                 doc.setCharacterAttributes(m.getStart(), m.getLength(), REPLACE_MARK, true);
             }
-            display.clear();
+            replToMark.clear();
 
             if (!matches.isEmpty()) {
                 SwingUtilities.invokeLater(this::doMarks);

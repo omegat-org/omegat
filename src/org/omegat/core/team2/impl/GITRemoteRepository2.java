@@ -109,6 +109,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         if (gitDir.exists() && gitDir.isDirectory()) {
             // already cloned
             repository = Git.open(localDirectory).getRepository();
+            try (Git git = new Git(repository)) {
+                git.submoduleInit().call();
+                git.submoduleUpdate().call();
+            }
         } else {
             Log.logInfoRB("GIT_START", "clone");
             CloneCommand c = Git.cloneRepository();

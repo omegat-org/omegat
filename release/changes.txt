@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.4
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Replacement with regex capture groups and case manipulation
   https://sourceforge.net/p/omegat/feature-requests/953/
+
+  - Update git submodules when loading an existing project
+  https://sourceforge.net/p/omegat/feature-requests/1368/
 
   - Scribus filter (*.sla)
 

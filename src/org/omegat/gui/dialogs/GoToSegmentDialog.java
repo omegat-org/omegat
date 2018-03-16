@@ -39,6 +39,7 @@ import javax.swing.event.DocumentListener;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.AlphabeticalMarkers;
 import org.omegat.gui.editor.EditorController;
+import org.omegat.gui.editor.IEditor;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
@@ -91,7 +92,8 @@ public class GoToSegmentDialog extends javax.swing.JDialog {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
-                alphabeticalMarkers = ((EditorController) Core.getEditor()).getAlphabeticalMarkers();
+                // TODO: CLG SUPPORT
+                alphabeticalMarkers = (Core.getEditor()).getAlphabeticalMarkers();
                 alphabeticalMarkers.showMarkers();
             }
         });

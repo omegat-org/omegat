@@ -114,7 +114,7 @@ public class DocumentFilter3 extends DocumentFilter {
                 while ((pos = text.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
                     int checkPos = pos;
                     int checkLen = pp.getTextInSourceSegment().length();
-                    if (sb.hasRTL && doc.controller.targetLangIsRTL) {
+                    if (sb.hasRTL && doc.controller.isTargetLangRTL()) {
                         // should be bidi-chars around tags
                         if (EditorUtils.hasBidiAroundTag(text, pp.getTextInSourceSegment(), pos)) {
                             checkPos -= 2;

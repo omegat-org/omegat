@@ -106,7 +106,7 @@ public class SegmentBuilder {
     private boolean defaultTranslation;
 
     private final Document3 doc;
-    private final EditorController controller;
+    private final IEditor controller;
     private final EditorSettings settings;
     /**
      * Offset of first c.q. last character in active source text
@@ -140,7 +140,7 @@ public class SegmentBuilder {
      */
     protected final boolean hasRTL;
 
-    public SegmentBuilder(final EditorController controller, final Document3 doc, final EditorSettings settings,
+    public SegmentBuilder(final IEditor controller, final Document3 doc, final EditorSettings settings,
             final SourceTextEntry ste, final int segmentNumberInProject, final boolean hasRTL) {
         this.controller = controller;
         this.doc = doc;
@@ -161,8 +161,6 @@ public class SegmentBuilder {
     /**
      * Create element for one segment.
      *
-     * @param doc
-     *            document
      * @return OmElementSegment
      */
     public void createSegmentElement(final boolean isActive, TMXEntry trans) {
@@ -180,10 +178,10 @@ public class SegmentBuilder {
         this.active = isActive;
 
         doc.trustedChangesInProgress = true;
-        StaticUIUtils.setCaretUpdateEnabled(controller.editor, false);
+        StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(), false);
         try {
             try {
-                if (beginPosP1 != null && endPosM1 != null) {
+                if (beginPosP1 != null && endPosM1 != null) {// CLG note this removes translation (current) fro mthe Doc via DocumentFilter3
                     // remove old segment
                     int beginOffset = beginPosP1.getOffset() - 1;
                     int endOffset = endPosM1.getOffset() + 1;
@@ -216,7 +214,7 @@ public class SegmentBuilder {
             }
         } finally {
             doc.trustedChangesInProgress = false;
-            StaticUIUtils.setCaretUpdateEnabled(controller.editor, true);
+            StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(), true);
         }
     }
 
@@ -237,7 +235,7 @@ public class SegmentBuilder {
 
     public void addSegmentSeparator(int index) {
         doc.trustedChangesInProgress = true;
-        StaticUIUtils.setCaretUpdateEnabled(controller.editor, false);
+        StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(), false);
         try {
             try {
                 doc.insertString(index, "\n", null);
@@ -246,7 +244,7 @@ public class SegmentBuilder {
             }
         } finally {
             doc.trustedChangesInProgress = false;
-            StaticUIUtils.setCaretUpdateEnabled(controller.editor, true);
+            StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(), true);
         }
     }
 
@@ -281,7 +279,7 @@ public class SegmentBuilder {
                 translationText = trans.translation;
             } else {
                 boolean insertSource = !Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT);
-                if (controller.entriesFilter != null && controller.entriesFilter.isSourceAsEmptyTranslation()) {
+                if (controller.getFilter() != null && controller.getFilter().isSourceAsEmptyTranslation()) {
                     insertSource = true;
                 }
                 if (insertSource) {
@@ -441,7 +439,7 @@ public class SegmentBuilder {
      */
     private void setAlignment(int begin, int end, boolean isRTL) {
         boolean rtl = false;
-        switch (controller.currentOrientation) {
+        switch (controller.getCurrentTextOrientation()) {
         case ALL_LTR:
             rtl = false;
             break;
@@ -473,7 +471,7 @@ public class SegmentBuilder {
     private String addInactiveSegPart(boolean isSource, String text)
             throws BadLocationException {
         int prevOffset = offset;
-        boolean rtl = isSource ? controller.sourceLangIsRTL : controller.targetLangIsRTL;
+        boolean rtl = isSource ? controller.isSourceLangRTL() : controller.isTargetLangRTL();
         insertDirectionEmbedding(rtl);
         String result = insertTextWithTags(text, isSource);
         insertDirectionEndEmbedding();
@@ -559,7 +557,7 @@ public class SegmentBuilder {
         int prevOffset = offset;
 
         //write translation part
-        boolean rtl = controller.targetLangIsRTL;
+        boolean rtl = controller.isTargetLangRTL();
 
         insertDirectionEmbedding(rtl);
 
@@ -658,7 +656,7 @@ public class SegmentBuilder {
      * @throws BadLocationException
      */
     private String insertTextWithTags(String text, boolean isSource) throws BadLocationException {
-        if (!isSource && hasRTL && controller.targetLangIsRTL) {
+        if (!isSource && hasRTL && controller.isTargetLangRTL()) {
             text = EditorUtils.addBidiAroundTags(text, ste);
         }
         AttributeSet normal = attrs(isSource, false, false, false);

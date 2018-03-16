@@ -28,10 +28,11 @@ package org.omegat.gui.glossary;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.awt.Frame;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import org.junit.Before;
@@ -43,10 +44,7 @@ import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.editor.IEditorFilter;
-import org.omegat.gui.editor.IEditorSettings;
-import org.omegat.gui.editor.IPopupMenuConstructor;
+import org.omegat.gui.editor.*;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
@@ -159,6 +157,25 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             }
 
             @Override
+            public void setCaretPosition(CaretPosition pos) {
+            }
+
+            @Override
+            public int getCurrentPositionInEntryTranslation() {
+                return 0;
+            }
+
+            @Override
+            public CaretPosition getCurrentPositionInEntryTranslationSelection() {
+                return null;
+            }
+
+            @Override
+            public int getPositionInEntryTranslation(int pos) {
+                return 0;
+            }
+
+            @Override
             public int getCurrentEntryNumber() {
                 return 0;
             }
@@ -224,6 +241,11 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             }
 
             @Override
+            public boolean goToSegmentAtLocation(int location) {
+                return false;
+            }
+
+            @Override
             public void refreshViewAfterFix(List<Integer> fixedEntries) {
             }
 
@@ -232,11 +254,21 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             }
 
             @Override
+            public void refreshEntries(Set<Integer> entryNumbers) {
+
+            }
+
+            @Override
             public void requestFocus() {
             }
 
             @Override
             public void changeCase(CHANGE_CASE_TO newCase) {
+            }
+
+            @Override
+            public void replacePartOfText(String text, int start, int end) {
+
             }
 
             @Override
@@ -308,6 +340,36 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             }
 
             @Override
+            public int getSegmentIndexFirst() {
+                return 0;
+            }
+
+            @Override
+            public int getSegmentIndexLast() {
+                return 0;
+            }
+
+            @Override
+            public int getSegmentIndexAtLocation(int location) {
+                return 0;
+            }
+
+            @Override
+            public SegmentBuilder getSegmentAtLocation(int location) {
+                return null;
+            }
+
+            @Override
+            public SegmentBuilder getSegmentAtIndex(int index) {
+                return null;
+            }
+
+            @Override
+            public SegmentBuilder getCurrentSegmentBuilder() {
+                return null;
+            }
+
+            @Override
             public void setFilter(IEditorFilter filter) {
             }
 
@@ -340,6 +402,61 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             public IAutoCompleter getAutoCompleter() {
 
                 return null;
+            }
+
+            @Override
+            public Document3.ORIENTATION getOrientation() {
+                return null;
+            }
+
+            @Override
+            public AlphabeticalMarkers getAlphabeticalMarkers() {
+                return null;
+            }
+
+            @Override
+            public void showStat() {
+
+            }
+
+            @Override
+            public void loadDocument() {
+
+            }
+
+            @Override
+            public Font getFont() {
+                return null;
+            }
+
+            @Override
+            public MarkerController getMarkerController() {
+                return null;
+            }
+
+            @Override
+            public EditorTextArea3 getEditor() {
+                return null;
+            }
+
+            @Override
+            public Document3.ORIENTATION getCurrentTextOrientation() {
+                return null;
+            }
+
+            @Override
+            public boolean isSourceLangRTL() {
+                return false;
+            }
+
+            @Override
+            public boolean isTargetLangRTL() {
+                return false;
+            }
+
+            @Override
+            public void toggleOrientation() {
+
             }
 
         });

@@ -30,12 +30,15 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.*;
 import java.util.List;
+import java.util.Set;
 
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.Preferences;
 
 /**
  * Interface for access to editor functionality.
@@ -112,6 +115,33 @@ public interface IEditor {
      * Can be called from any thread.
      */
     SourceTextEntry getCurrentEntry();
+
+
+    /**
+     * Set a new translation entry.
+     *
+     * Must be called only from UI thread.
+     *
+     */
+    void setCaretPosition(CaretPosition pos);
+
+    /**
+     * Returns current caret position in the editable translation.
+     */
+    int getCurrentPositionInEntryTranslation();
+
+    /**
+     * Get the curent position of the selected translation entry.
+     *
+     */
+    CaretPosition getCurrentPositionInEntryTranslationSelection();
+
+    /**
+     * Returns the relative caret position in the editable translation for a
+     * given absolute index into the overall editor document.
+     */
+    public int getPositionInEntryTranslation(int pos);
+
 
     /**
      * Get current active entry number.
@@ -250,6 +280,15 @@ public interface IEditor {
     void gotoEntryAfterFix(int fixedEntry, String fixedSource);
 
     /**
+     * Go to segment at specified location.
+     *
+     * @param location
+     *            location
+     * @return true if segment changed, false if location inside current segment
+     */
+    public boolean goToSegmentAtLocation(int location);
+
+    /**
      * Refresh the current editor view while avoiding clobbering any tag fixes.
      *
      * @param fixedEntries
@@ -260,6 +299,12 @@ public interface IEditor {
     void refreshViewAfterFix(List<Integer> fixedEntries);
 
     void refreshView(boolean doCommit);
+
+    /**
+     *  Refresh some entries. Usually after external translation changes replacement.
+     * @param entryNumbers
+     */
+    void refreshEntries(Set<Integer> entryNumbers);
 
     /**
      * Set current focus to editor.
@@ -276,6 +321,14 @@ public interface IEditor {
      *            Must be called only from UI thread.
      */
     void changeCase(CHANGE_CASE_TO newCase);
+
+
+    /**
+     * Replaces the specified region with the given text.
+     *
+     * Must be called only from UI thread.
+     */
+    void replacePartOfText(final String text, int start, int end);
 
     /**
      * Replaces the entire edit area with a given text.
@@ -399,7 +452,20 @@ public interface IEditor {
      */
     IEditorFilter getFilter();
 
+    int getSegmentIndexFirst();
+
+    int getSegmentIndexLast();
+
+    int getSegmentIndexAtLocation(int location);
+
+    public SegmentBuilder getSegmentAtLocation(int location);
+
+    public SegmentBuilder getSegmentAtIndex(int index);
+
+    public SegmentBuilder getCurrentSegmentBuilder();
+
     /**
+     *
      * Sets a filter to this editor. The filter causes only the selected entries to be shown in the editor.
      *
      * @param filter
@@ -441,4 +507,58 @@ public interface IEditor {
      * Access the AutoCompleter
      */
     IAutoCompleter getAutoCompleter();
+
+
+    public Document3.ORIENTATION getOrientation();
+
+    public AlphabeticalMarkers getAlphabeticalMarkers();
+
+    /**
+     * Calculate statistic for file, request statistic for project and display in status bar.
+     */
+    public void showStat();
+
+    /**
+     * Displays the {@link Preferences#EDITOR_INITIAL_SEGMENT_LOAD_COUNT}
+     * segments surrounding the displayed entry .  Only load if there
+     * is a document and the project is loaded.
+     */
+    void loadDocument();
+
+    Font getFont();
+
+    /**
+     * The controller for all segment markers.
+     */
+    MarkerController getMarkerController();
+
+    /**
+     * TODO create an editor interface?
+     */
+    EditorTextArea3 getEditor();
+
+    /**
+     * The orientation of the current text ;
+     */
+    Document3.ORIENTATION getCurrentTextOrientation();
+
+    /**
+     * Orientation of the source language
+     */
+    boolean isSourceLangRTL();
+
+    /**
+     * Orientation of the target language
+     */
+    boolean isTargetLangRTL();
+
+    /**
+     * Toggle component orientation: LTR, RTL, language dependent.
+     */
+    void toggleOrientation();
+
+    // todo void setOrientation(ORIENTATION)?
 }
+
+
+

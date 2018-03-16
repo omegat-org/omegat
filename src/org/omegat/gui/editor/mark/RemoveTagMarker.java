@@ -34,6 +34,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.gui.editor.Document3;
 import org.omegat.gui.editor.EditorController;
+import org.omegat.gui.editor.IEditor;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.gui.Styles;
@@ -67,7 +68,7 @@ public class RemoveTagMarker extends AbstractMarker {
 
     @Override
     protected void initDrawers(boolean isSource, boolean isActive) {
-        if (((EditorController) Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
+        if (((IEditor) Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
             attributes = isSource ? attributesLtrSource : attributesLtrTranslation;
             painter = null;
         } else {

@@ -5,6 +5,7 @@ plugins {
     id 'application'
     id 'maven-publish'
     id 'eclipse'
+    id 'idea'
     id 'findbugs'
     id 'checkstyle'
     id 'de.gliderpilot.jnlp' version '1.2.5'

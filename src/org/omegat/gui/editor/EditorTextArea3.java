@@ -77,6 +77,7 @@ import org.omegat.util.gui.Styles;
  * @author Zoltan Bartko
  */
 @SuppressWarnings("serial")
+// TODO CLG:  extract interface?
 public class EditorTextArea3 extends JEditorPane {
 
     private static final KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
@@ -117,7 +118,7 @@ public class EditorTextArea3 extends JEditorPane {
     /** Undo Manager to store edits */
     protected final TranslationUndoManager undoManager = new TranslationUndoManager(this);
 
-    protected final EditorController controller;
+    protected final IEditor controller;
 
     protected final List<PopupMenuConstructorInfo> popupConstructors = new ArrayList<PopupMenuConstructorInfo>();
 
@@ -133,7 +134,7 @@ public class EditorTextArea3 extends JEditorPane {
      */
     protected boolean lockCursorToInputArea = true;
 
-    public EditorTextArea3(EditorController controller) {
+    public EditorTextArea3(IEditor controller) {
         this.controller = controller;
         setEditorKit(new StyledEditorKit() {
             public ViewFactory getViewFactory() {
@@ -142,10 +143,11 @@ public class EditorTextArea3 extends JEditorPane {
 
             protected void createInputAttributes(Element element, MutableAttributeSet set) {
                 set.removeAttributes(set);
-                EditorController c = EditorTextArea3.this.controller;
+                IEditor c = EditorTextArea3.this.controller;
                 try {
-                    c.m_docSegList[c.displayedEntryIndex].createInputAttributes(element, set);
+                    c.getCurrentSegmentBuilder().createInputAttributes(element, set);
                 } catch (Exception ex) {
+                    // SegmentBuilder can be null
                 }
             }
         });
@@ -260,9 +262,8 @@ public class EditorTextArea3 extends JEditorPane {
         }
 
         boolean isInActiveEntry;
-        int ae = controller.displayedEntryIndex;
-        SegmentBuilder sb = controller.m_docSegList[ae];
-        if (sb.isActive()) {
+        SegmentBuilder sb = controller.getCurrentSegmentBuilder();
+        if (null != sb && sb.isActive()) {
             isInActiveEntry = pos >= sb.getStartPosition() && pos <= sb.getEndPosition();
         } else {
             isInActiveEntry = false;
@@ -328,19 +329,19 @@ public class EditorTextArea3 extends JEditorPane {
             }
         } else if (s.equals(KEYSTROKE_NEXT)) {
             // Advance when 'Use TAB to advance'
-            if (controller.settings.isUseTabForAdvance()) {
+            if (controller.getSettings().isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
             }
         } else if (s.equals(KEYSTROKE_PREV)) {
             // Go back when 'Use TAB to advance'
-            if (controller.settings.isUseTabForAdvance()) {
+            if (controller.getSettings().isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
         } else if (s.equals(KEYSTROKE_NEXT_NOT_TAB)) {
             // Advance when not 'Use TAB to advance'
-            if (!controller.settings.isUseTabForAdvance()) {
+            if (!controller.getSettings().isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
             } else {
@@ -349,7 +350,7 @@ public class EditorTextArea3 extends JEditorPane {
             }
         } else if (s.equals(KEYSTROKE_PREV_NOT_TAB)) {
             // Go back when not 'Use TAB to advance'
-            if (!controller.settings.isUseTabForAdvance()) {
+            if (!controller.getSettings().isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
@@ -368,6 +369,7 @@ public class EditorTextArea3 extends JEditorPane {
             Cursor oldCursor = this.getCursor();
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             controller.toggleOrientation();
+
             setCursor(oldCursor);
 
             Core.getMainWindow().showTimedStatusMessageRB("ETA_INFO_TOGGLE_LTR_RTL",
@@ -409,14 +411,13 @@ public class EditorTextArea3 extends JEditorPane {
             }
         } else if (s.equals(KEYSTROKE_FIRST_SEG)) {
             // Jump to beginning of document
-            int segNum = controller.m_docSegList[0].segmentNumberInProject;
-            controller.gotoEntry(segNum);
+            int segNum = controller.getSegmentIndexFirst();
+//            int segNum = controller.m_docSegList[0;
+            controller.gotoEntry(controller.getSegmentIndexFirst());
             processed = true;
         } else if (s.equals(KEYSTROKE_LAST_SEG)) {
             // Jump to end of document
-            int lastSegIndex = controller.m_docSegList.length - 1;
-            int segNum = controller.m_docSegList[lastSegIndex].segmentNumberInProject;
-            controller.gotoEntry(segNum);
+            controller.gotoEntry(controller.getSegmentIndexLast());
             processed = true;
         } else if (s.equals(KEYSTROKE_SKIP_PREV_TOKEN)) {
             // Skip over previous token
@@ -580,11 +581,10 @@ public class EditorTextArea3 extends JEditorPane {
      * @return true if selected
      */
     boolean selectTag(int pos) {
-        int s = controller.getSegmentIndexAtLocation(pos);
-        if (s < 0) {
-            return false;
+        SegmentBuilder segment = controller.getSegmentAtLocation(pos);
+        if (null == segment){
+            return  false;
         }
-        SegmentBuilder segment = controller.m_docSegList[s];
         if (pos < segment.getStartPosition() || pos >= segment.getEndPosition()) {
             return false;
         }
@@ -727,7 +727,7 @@ public class EditorTextArea3 extends JEditorPane {
     public String getToolTipText(MouseEvent event) {
         int pos = viewToModel(event.getPoint());
         int s = controller.getSegmentIndexAtLocation(pos);
-        return s < 0 ? null : controller.markerController.getToolTips(s, pos);
+        return s < 0 ? null : controller.getMarkerController().getToolTips(s, pos);
     }
 
     /**

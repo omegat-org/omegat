@@ -51,7 +51,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class SegmentExportImport {
     static final int WAIT_TIME = 100;
 
-    private final EditorController controller;
+    private final IEditor controller;
     private volatile long exportLastModified = Long.MAX_VALUE;
     private final File importFile;
 
@@ -64,7 +64,7 @@ public class SegmentExportImport {
     /** The name of the file with the source exported segment */
     public static final String SOURCE_EXPORT = "source.txt";
 
-    public SegmentExportImport(EditorController controller) {
+    public SegmentExportImport(IEditor controller) {
         this.controller = controller;
         importFile = new File(StaticUtils.getScriptDir(), "import.txt");
         new Thread() {

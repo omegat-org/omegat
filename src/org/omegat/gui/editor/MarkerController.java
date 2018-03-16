@@ -55,7 +55,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MarkerController {
-    private final EditorController ec;
+    private final IEditor ec;
 
     /** List of marker's class names. */
     private final String[] markerNames;
@@ -65,9 +65,9 @@ public class MarkerController {
 
     private final Highlighter highlighter;
 
-    MarkerController(EditorController ec) {
+    MarkerController(IEditor ec) {
         this.ec = ec;
-        this.highlighter = ec.editor.getHighlighter();
+        this.highlighter = ec.getEditor().getHighlighter();
 
         List<IMarker> ms = new ArrayList<IMarker>();
         // start all markers threads
@@ -111,8 +111,6 @@ public class MarkerController {
     /**
      * Remove all marks for all entries.
      *
-     * @param newEntriesCount
-     *            count of newly displayed entries
      */
     void removeAll() {
         UIThreadsUtil.mustBeSwingThread();
@@ -216,10 +214,12 @@ public class MarkerController {
     public String getToolTips(int entryIndex, int pos) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (entryIndex >= ec.m_docSegList.length || entryIndex < 0) {
+        SegmentBuilder sb = ec.getSegmentAtIndex(entryIndex);
+        if (null == sb)
             return null;
-        }
-        MarkInfo[][] m = ec.m_docSegList[entryIndex].marks;
+
+
+        MarkInfo[][] m = sb.marks;
         if (m == null) {
             return null;
         }
@@ -282,7 +282,7 @@ public class MarkerController {
         if (evs.isEmpty()) {
             return;
         }
-        Document3 doc = ec.editor.getOmDocument();
+        Document3 doc = ec.getEditor().getOmDocument();
         doc.trustedChangesInProgress = true;
         try {
             for (int i = 0; i < evs.size(); i++) {

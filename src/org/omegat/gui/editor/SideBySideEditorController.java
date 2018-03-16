@@ -35,66 +35,13 @@
 
 package org.omegat.gui.editor;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.dnd.DnDConstants;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
-import java.util.function.Predicate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
-
-import javax.swing.JComponent;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import javax.swing.JViewport;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.Timer;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
-
+import com.vlsolutions.swing.docking.DockingDesktop;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.EntryKey;
-import org.omegat.core.data.IProject;
+import org.omegat.core.data.*;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.IProject.OptimisticLockingFail;
-import org.omegat.core.data.LastSegmentManager;
-import org.omegat.core.data.PrepareTMXEntry;
-import org.omegat.core.data.ProjectTMX;
-import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.dialogs.ConflictDialogController;
@@ -108,20 +55,38 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.help.Help;
-import org.omegat.util.Language;
-import org.omegat.util.Log;
-import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
-import org.omegat.util.StringUtil;
+import org.omegat.util.*;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.IDropInfo;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
-import com.vlsolutions.swing.docking.DockingDesktop;
+import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
+import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * Class for control all editor operations.
@@ -144,10 +109,10 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Piotr Kulik
  * @author Yu Tang
  */
-public class EditorController implements IEditor {
+public class SideBySideEditorController implements IEditor {
 
     /** Local logger. */
-    private static final Logger LOGGER = Logger.getLogger(EditorController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SideBySideEditorController.class.getName());
 
     private static final double PAGE_LOAD_THRESHOLD = 0.25;
 
@@ -156,15 +121,15 @@ public class EditorController implements IEditor {
         UNTRANSLATED, EMPTY, EQUALS_TO_SOURCE;
     }
 
-    /** Dockable pane for editor. */
-    private DockablePanel pane;
+    /** Dockable translatePane for editor. */
+    private DockablePanel translatePane;
     private JScrollPane scrollPane;
 
     private String title;
 
     private boolean dockableSelected;
 
-    /** Editor instance. */
+    /** Editor instance for translations, source is not editable. */
     protected final EditorTextArea3 editor;
 
     /** Class for process marks for editor. */
@@ -213,7 +178,7 @@ public class EditorController implements IEditor {
      */
     private IProject.AllTranslations previousTranslations;
 
-    public EditorController(final MainWindow mainWindow) {
+    public SideBySideEditorController(final MainWindow mainWindow) {
         this.mw = mainWindow;
 
         segmentExportImport = new SegmentExportImport(this);
@@ -273,7 +238,7 @@ public class EditorController implements IEditor {
 
         SwingUtilities.invokeLater(() -> {
             updateState(SHOW_TYPE.INTRO);
-            pane.requestFocus();
+            translatePane.requestFocus();
         });
 
         // register font changes callback
@@ -335,10 +300,11 @@ public class EditorController implements IEditor {
     }
 
     private void createUI() {
-        pane = new DockablePanel("EDITOR", " ", false);
-        pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
-        pane.setMinimumSize(new Dimension(100, 100));
-        pane.addComponentListener(new ComponentAdapter() {
+
+        translatePane = new DockablePanel("EDITOR", "SOURCE", false);
+        translatePane.setComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
+        translatePane.setMinimumSize(new Dimension(100, 100));
+        translatePane.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 updateTitle();
@@ -358,14 +324,17 @@ public class EditorController implements IEditor {
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getVerticalScrollBar().addAdjustmentListener(scrollListener);
 
-        pane.setLayout(new BorderLayout());
-        pane.add(scrollPane, BorderLayout.CENTER);
+        translatePane.setLayout(new BorderLayout());
+        translatePane.add(scrollPane, BorderLayout.CENTER);
 
-        mw.addDockable(pane);
+        mw.addDockable(translatePane);
 
-        DockingDesktop desktop = DockingUI.getDesktop(pane);
+        // TODO CLG: TEST ADDING A NEW PANEL:
+        mw.addDockable(new DockablePanel("EDITOR2", "TRANSLATION", false));
+
+        DockingDesktop desktop = DockingUI.getDesktop(translatePane);
         if (desktop != null) {
-            desktop.addDockableSelectionListener(e -> dockableSelected = pane == e.getSelectedDockable());
+            desktop.addDockableSelectionListener(e -> dockableSelected = translatePane == e.getSelectedDockable());
         }
     }
 
@@ -460,7 +429,7 @@ public class EditorController implements IEditor {
         }
 
         updateTitle();
-        pane.setToolTipText(title);
+        translatePane.setToolTipText(title);
 
         if (scrollPane.getViewport().getView() != data) {
             if (UIManager.getBoolean("OmegaTDockablePanel.isProportionalMargins")) {
@@ -544,7 +513,7 @@ public class EditorController implements IEditor {
     };
 
     private void updateTitle() {
-       pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
+       translatePane.setName(StaticUIUtils.truncateToFit(title, translatePane, 70));
     }
 
     private void setFont(final Font font) {
@@ -714,7 +683,7 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         // Currently displayed file
-        IProject.FileInfo file;
+        FileInfo file;
         try {
             file = Core.getProject().getProjectFiles().get(displayedFileIndex);
         } catch (IndexOutOfBoundsException ex) {
@@ -812,7 +781,7 @@ public class EditorController implements IEditor {
      * <p>
      * Also moves document focus to current entry, and makes sure fuzzy info displayed if available.
      */
-    public void activateEntry(CaretPosition pos) {
+    protected void activateEntry(CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 
         SourceTextEntry ste = getCurrentEntry();
@@ -985,13 +954,13 @@ public class EditorController implements IEditor {
      */
     public void showStat() {
         IProject project = Core.getProject();
-        IProject.FileInfo fi = project.getProjectFiles().get(displayedFileIndex);
+        FileInfo fi = project.getProjectFiles().get(displayedFileIndex);
         int translatedInFile = 0;
         int translatedUniqueInFile = 0;
         int uniqueInFile = 0;
         boolean isUnique;
         for (SourceTextEntry ste : fi.entries) {
-            isUnique = ste.getDuplicate() != SourceTextEntry.DUPLICATE.NEXT;
+            isUnique = ste.getDuplicate() != DUPLICATE.NEXT;
             if (isUnique) {
                 uniqueInFile++;
             }
@@ -1533,7 +1502,7 @@ public class EditorController implements IEditor {
         } else {
             IProject dataEngine = Core.getProject();
             for (int i = 0; i < dataEngine.getProjectFiles().size(); i++) {
-                IProject.FileInfo fi = dataEngine.getProjectFiles().get(i);
+                FileInfo fi = dataEngine.getProjectFiles().get(i);
                 SourceTextEntry firstEntry = fi.entries.get(0);
                 SourceTextEntry lastEntry = fi.entries.get(fi.entries.size() - 1);
                 if (firstEntry.entryNum() <= entryNum && lastEntry.entryNum() >= entryNum) {
@@ -2036,13 +2005,13 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         if (entriesFilterControlComponent != null) {
-            pane.remove(entriesFilterControlComponent);
+            translatePane.remove(entriesFilterControlComponent);
         }
 
         entriesFilter = filter;
         entriesFilterControlComponent = filter.getControlComponent();
-        pane.add(entriesFilterControlComponent, BorderLayout.NORTH);
-        pane.revalidate();
+        translatePane.add(entriesFilterControlComponent, BorderLayout.NORTH);
+        translatePane.revalidate();
 
         SourceTextEntry curEntry = getCurrentEntry();
         Document3 doc = editor.getOmDocument();
@@ -2081,8 +2050,8 @@ public class EditorController implements IEditor {
 
         entriesFilter = null;
         if (entriesFilterControlComponent != null) {
-            pane.remove(entriesFilterControlComponent);
-            pane.revalidate();
+            translatePane.remove(entriesFilterControlComponent);
+            translatePane.revalidate();
             entriesFilterControlComponent = null;
         }
 
@@ -2244,5 +2213,6 @@ public class EditorController implements IEditor {
     public boolean isTargetLangRTL(){
         return targetLangIsRTL;
     }
+
 
 }

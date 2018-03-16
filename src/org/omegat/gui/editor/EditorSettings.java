@@ -48,7 +48,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 public class EditorSettings implements IEditorSettings {
-    private final EditorController parent;
+    private final IEditor parent;
 
     private boolean useTabForAdvance;
     private boolean markTranslated;
@@ -73,7 +73,7 @@ public class EditorSettings implements IEditorSettings {
     public static final String DISPLAY_MODIFICATION_INFO_SELECTED = "selected";
     public static final String DISPLAY_MODIFICATION_INFO_ALL = "all";
 
-    protected EditorSettings(final EditorController parent) {
+    protected EditorSettings(final IEditor parent) {
         this.parent = parent;
 
         //options from menu 'view'
@@ -450,7 +450,7 @@ public class EditorSettings implements IEditorSettings {
      *            is it a source segment or a target segment
      * @param isPlaceholder
      *            is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
-     * @param isremovetext
+     * @param isRemoveText
      *            is it text that should be removed from translation?
      * @param duplicate
      *            is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT.

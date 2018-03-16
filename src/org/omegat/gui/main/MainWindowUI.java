@@ -54,6 +54,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.EditorController;
+import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -227,7 +228,7 @@ public final class MainWindowUI {
                 }
 
                 if (Core.getProject().isProjectLoaded()) {
-                    ((EditorController) Core.getEditor()).showStat();
+                    ((IEditor) Core.getEditor()).showStat();
                 } else {
                     Core.getMainWindow().showProgressMessage(statusText);
                 }

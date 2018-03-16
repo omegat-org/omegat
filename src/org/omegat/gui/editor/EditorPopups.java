@@ -64,7 +64,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 public final class EditorPopups {
-    public static void init(EditorController ec) {
+    public static void init(IEditor ec) {
         ec.registerPopupMenuConstructors(100, new SpellCheckerPopup(ec));
         ec.registerPopupMenuConstructors(200, new GoToSegmentPopup(ec));
         ec.registerPopupMenuConstructors(400, new DefaultPopup());
@@ -81,13 +81,11 @@ public final class EditorPopups {
      * create the spell checker popup menu - suggestions for a wrong word, add
      * and ignore. Works only for the active segment, for the translation
      *
-     * @param point
-     *            : where should the popup be shown
      */
     public static class SpellCheckerPopup implements IPopupMenuConstructor {
-        protected final EditorController ec;
+        protected final IEditor ec;
 
-        public SpellCheckerPopup(EditorController ec) {
+        public SpellCheckerPopup(IEditor ec) {
             this.ec = ec;
         }
 
@@ -285,9 +283,9 @@ public final class EditorPopups {
     }
 
     public static class GoToSegmentPopup implements IPopupMenuConstructor {
-        protected final EditorController ec;
+        protected final IEditor ec;
 
-        public GoToSegmentPopup(EditorController ec) {
+        public GoToSegmentPopup(IEditor ec) {
             this.ec = ec;
         }
 
@@ -313,9 +311,9 @@ public final class EditorPopups {
     }
 
     public static class DuplicateSegmentsPopup implements IPopupMenuConstructor {
-        protected final EditorController ec;
+        protected final IEditor ec;
 
-        public DuplicateSegmentsPopup(EditorController ec) {
+        public DuplicateSegmentsPopup(IEditor ec) {
             this.ec = ec;
         }
 
@@ -346,9 +344,9 @@ public final class EditorPopups {
     }
 
     public static class EmptyNoneTranslationPopup implements IPopupMenuConstructor {
-        protected final EditorController ec;
+        protected final IEditor ec;
 
-        public EmptyNoneTranslationPopup(EditorController ec) {
+        public EmptyNoneTranslationPopup(IEditor ec) {
             this.ec = ec;
         }
 
@@ -384,9 +382,9 @@ public final class EditorPopups {
     }
 
     public static class InsertTagsPopup implements IPopupMenuConstructor {
-        protected final EditorController ec;
+        protected final IEditor ec;
 
-        public InsertTagsPopup(EditorController ec) {
+        public InsertTagsPopup(IEditor ec) {
             this.ec = ec;
         }
 
@@ -409,13 +407,13 @@ public final class EditorPopups {
     }
 
     public static class InsertBidiPopup implements IPopupMenuConstructor {
-        protected final EditorController ec;
+        protected final IEditor ec;
         protected String[] names = new String[] { "TF_MENU_EDIT_INSERT_CHARS_LRM",
                 "TF_MENU_EDIT_INSERT_CHARS_RLM", "TF_MENU_EDIT_INSERT_CHARS_LRE",
                 "TF_MENU_EDIT_INSERT_CHARS_RLE", "TF_MENU_EDIT_INSERT_CHARS_PDF" };
         protected String[] inserts = new String[] { "\u200E", "\u200F", "\u202A", "\u202B", "\u202C" };
 
-        public InsertBidiPopup(EditorController ec) {
+        public InsertBidiPopup(IEditor ec) {
             this.ec = ec;
         }
 

@@ -115,7 +115,7 @@ public class SearchWindowController {
         form.setJMenuBar(new SearchWindowMenu(this));
         this.mode = mode;
         initialEntry = Core.getEditor().getCurrentEntryNumber();
-        initialCaret = getCurrentPositionInEntryTranslationInEditor(Core.getEditor());
+        initialCaret = Core.getEditor().getCurrentPositionInEntryTranslationSelection();
 
         if (Platform.isMacOSX()) {
             OSXIntegration.enableFullScreen(form);
@@ -310,7 +310,7 @@ public class SearchWindowController {
                     boolean isSegDisplayed = isSegmentDisplayed(initialEntry);
                     if (isSegDisplayed) {
                         // Restore caretPosition too
-                        ((EditorController) Core.getEditor()).gotoEntry(initialEntry, initialCaret);
+                        Core.getEditor().gotoEntry(initialEntry, initialCaret);  // TODO: clg is this necessary?
                     } else {
                         // The segment is not displayed (maybe filter on). Ignore caretPosition.
                         Core.getEditor().gotoEntry(initialEntry);
@@ -1096,42 +1096,6 @@ public class SearchWindowController {
             if (c instanceof Container) {
                 setEnabled((Container) c, enabled);
             }
-        }
-    }
-
-    /*
-     * TODO: This should be a method on EditorController exposed via IEditor, NOT here.
-     */
-    private CaretPosition getCurrentPositionInEntryTranslationInEditor(IEditor editor) {
-        if (editor instanceof EditorController) {
-            EditorController c = (EditorController) editor;
-            int selectionEnd = c.getCurrentPositionInEntryTranslation();
-            String selection = c.getSelectedText();
-            String translation = c.getCurrentTranslation();
-
-            if (StringUtil.isEmpty(translation) || StringUtil.isEmpty(selection)) {
-                // no translation or no selection
-                return new CaretPosition(selectionEnd);
-            } else {
-                // get selected range
-                int selectionStart = selectionEnd;
-                int pos = 0;
-                do {
-                    pos = translation.indexOf(selection, pos);
-                    if (pos == selectionEnd) {
-                        selectionStart = pos;
-                        selectionEnd = pos + selection.length();
-                        break;
-                    } else if ((pos + selection.length()) == selectionEnd) {
-                        selectionStart = pos;
-                        break;
-                    }
-                    pos++;
-                } while (pos > 0);
-                return new CaretPosition(selectionStart, selectionEnd);
-            }
-        } else {
-            return CaretPosition.startOfEntry();
         }
     }
 

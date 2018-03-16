@@ -53,6 +53,7 @@ import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.SideBySideEditorController;
 import org.omegat.gui.editor.mark.BidiMarkerFactory;
 import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
 import org.omegat.gui.editor.mark.FontFallbackMarker;
@@ -260,7 +261,9 @@ public final class Core {
         filterMaster = new FilterMaster(Preferences.getFilters());
 
         // 3. Initialize other components. They add themselves to the main window.
-        editor = new EditorController(me);
+        // TODO: CLG MAKE THIS CONFIGURABLE...
+        //editor = new EditorController(me);
+        editor = new SideBySideEditorController(me);
         tagValidation = new TagValidationTool();
         issuesWindow = new IssuesPanelController(me);
         matcher = new MatchesTextArea(me);

@@ -59,7 +59,7 @@ public class Document3 extends DefaultStyledDocument {
         DIFFER
     };
 
-    protected final EditorController controller;
+    protected final IEditor controller;
 
     /** Position of active translation in text. */
     Position activeTranslationBeginM1, activeTranslationEndP1;
@@ -95,13 +95,13 @@ public class Document3 extends DefaultStyledDocument {
      */
     protected boolean textBeingComposed = false;
 
-    public Document3(final EditorController controller) {
+    public Document3(final IEditor controller) {
         this.controller = controller;
 
         Style defaultStyle = getDefaultStyle();
         StyleConstants.setForeground(defaultStyle, Styles.EditorColor.COLOR_FOREGROUND.getColor());
         StyleConstants.setBackground(defaultStyle, Styles.EditorColor.COLOR_BACKGROUND.getColor());
-        setFont(controller.font);
+        setFont(controller.getFont());
     }
 
     private Style getDefaultStyle() {

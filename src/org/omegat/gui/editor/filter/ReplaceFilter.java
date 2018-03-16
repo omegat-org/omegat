@@ -124,7 +124,7 @@ public class ReplaceFilter implements IEditorFilter {
                 Core.getProject().setTranslation(ste, prepare, en.defaultTranslation, null);
             }
         }
-        EditorController ec = (EditorController) Core.getEditor();
+        IEditor ec = Core.getEditor();
         ec.refreshEntries(entries.keySet());
     }
 
@@ -147,7 +147,7 @@ public class ReplaceFilter implements IEditorFilter {
     }
 
     private void skip() {
-        EditorController ec = (EditorController) Core.getEditor();
+        IEditor ec = Core.getEditor();
 
         // try to find in current entry
         int pos = ec.getCurrentPositionInEntryTranslation();
@@ -213,7 +213,7 @@ public class ReplaceFilter implements IEditorFilter {
     }
 
     private void replace() {
-        EditorController ec = (EditorController) Core.getEditor();
+        IEditor ec = Core.getEditor();
 
         // is caret inside match ?
         int pos = ec.getCurrentPositionInEntryTranslation();

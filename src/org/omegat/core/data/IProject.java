@@ -35,6 +35,7 @@ import java.util.Map;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
 
 /**
  * Interface for access to loaded project. Each loaded project will be new instance of IProject.

@@ -167,7 +167,7 @@ public class OpenXMLFilter extends AbstractFilter {
                 }
             }
         } catch (IOException e) {
-            LOGGER.log(Level.FINE, e.getLocalizedMessage(), e);
+            LOGGER.log(Level.FINE, "Error checking if file is supported by OpenXMLFilter: " + inFile, e);
         }
         return false;
     }

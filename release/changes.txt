@@ -2,14 +2,18 @@
  OmegaT 3.6.0 update 9
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bug fix
+  2 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 9 vs 3.6.0 update 8
 
   Bug fixes:
-  The issue from https://sourceforge.net/p/omegat/bugs/884/
+
+  - The issue from https://sourceforge.net/p/omegat/bugs/884/
 could still happen in some cases
+
+  - External TMXs containing entries with no source text prevented
+fuzzy match searching from working correctly
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 8 (2017-12-27)

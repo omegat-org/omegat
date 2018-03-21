@@ -33,9 +33,7 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -581,7 +579,7 @@ public abstract class TestCore {
             }
 
             @Override
-            public EditorTextArea3 getEditor() {
+            public JEditorPane getEditor(EditorType type) {
                 return null;
             }
 

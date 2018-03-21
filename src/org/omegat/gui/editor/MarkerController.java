@@ -67,7 +67,7 @@ public class MarkerController {
 
     MarkerController(IEditor ec) {
         this.ec = ec;
-        this.highlighter = ec.getEditor().getHighlighter();
+        this.highlighter = ec.getEditor(IEditor.EditorType.TRANSLATION).getHighlighter();
 
         List<IMarker> ms = new ArrayList<IMarker>();
         // start all markers threads
@@ -282,7 +282,7 @@ public class MarkerController {
         if (evs.isEmpty()) {
             return;
         }
-        Document3 doc = ec.getEditor().getOmDocument();
+        Document3 doc = ((EditorTextArea3)ec.getEditor(IEditor.EditorType.TRANSLATION)).getOmDocument();
         doc.trustedChangesInProgress = true;
         try {
             for (int i = 0; i < evs.size(); i++) {
@@ -339,10 +339,11 @@ public class MarkerController {
             if (m.toolTipText != null) {
                 tooltip = new Tooltip(doc, startOffset + m.startOffset, startOffset + m.endOffset, m.toolTipText);
             }
-            if (m.attributes != null) {
+            // TODO restore
+            /*if (m.attributes != null) {
                 doc.setCharacterAttributes(startOffset + m.startOffset, m.endOffset - m.startOffset, m.attributes,
                         false);
-            }
+            }*/
         }
     }
 

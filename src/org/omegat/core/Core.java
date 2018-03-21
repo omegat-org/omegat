@@ -262,7 +262,7 @@ public final class Core {
 
         // 3. Initialize other components. They add themselves to the main window.
         // TODO: CLG MAKE THIS CONFIGURABLE...
-        //editor = new EditorController(me);
+//        editor = new EditorController(me);
         editor = new SideBySideEditorController(me);
         tagValidation = new TagValidationTool();
         issuesWindow = new IssuesPanelController(me);

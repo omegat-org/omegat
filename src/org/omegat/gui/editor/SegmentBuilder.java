@@ -39,6 +39,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Position;
+import javax.xml.transform.Source;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX;
@@ -67,7 +68,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Hans-Peter Jacobs
  * @author Aaron Madlon-Kay
  */
-public class SegmentBuilder {
+public class SegmentBuilder implements ISegmentBuilder {
     /** Attributes for show text. */
     public static final String SEGMENT_MARK_ATTRIBUTE = "SEGMENT_MARK_ATTRIBUTE";
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
@@ -85,6 +86,7 @@ public class SegmentBuilder {
 
     final SourceTextEntry ste;
     final int segmentNumberInProject;
+
 
     /**
      * Version of displayed variant of segment. Required for check in delayed
@@ -171,6 +173,8 @@ public class SegmentBuilder {
         createSegmentElement(isActive, 0, trans);
     }
 
+    // TODO CLG;  move this to the controller... doesn't seem like this should be so coupled to a Document
+    // TODO CLG: THIS IS WHERE THE DOCUMENT IS CHANGED...
     public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -178,10 +182,10 @@ public class SegmentBuilder {
         this.active = isActive;
 
         doc.trustedChangesInProgress = true;
-        StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(), false);
+        StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(IEditor.EditorType.TRANSLATION), false);
         try {
             try {
-                if (beginPosP1 != null && endPosM1 != null) {// CLG note this removes translation (current) fro mthe Doc via DocumentFilter3
+                if (beginPosP1 != null && endPosM1 != null) {// CLG note this removes translation (current) from the Doc via DocumentFilter3, and the modified info string
                     // remove old segment
                     int beginOffset = beginPosP1.getOffset() - 1;
                     int endOffset = endPosM1.getOffset() + 1;
@@ -214,7 +218,7 @@ public class SegmentBuilder {
             }
         } finally {
             doc.trustedChangesInProgress = false;
-            StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(), true);
+            StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(IEditor.EditorType.TRANSLATION), true);
         }
     }
 
@@ -235,7 +239,7 @@ public class SegmentBuilder {
 
     public void addSegmentSeparator(int index) {
         doc.trustedChangesInProgress = true;
-        StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(), false);
+        StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(IEditor.EditorType.TRANSLATION), false);
         try {
             try {
                 doc.insertString(index, "\n", null);
@@ -244,13 +248,14 @@ public class SegmentBuilder {
             }
         } finally {
             doc.trustedChangesInProgress = false;
-            StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(), true);
+            StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(IEditor.EditorType.TRANSLATION), true);
         }
     }
 
     /**
      * Create active segment for given entry
      */
+    // CLG set the active segment, add the translation marker (if enabled)
     private void createActiveSegmentElement(TMXEntry trans) throws BadLocationException {
         try {
             if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())
@@ -371,7 +376,12 @@ public class SegmentBuilder {
         }
     }
 
+    // todo
     public SourceTextEntry getSourceTextEntry() {
+        return ste;
+    }
+
+    public SourceTextEntry getSource() {
         return ste;
     }
 
@@ -382,6 +392,8 @@ public class SegmentBuilder {
     public boolean isActive() {
         return active;
     }
+
+
 
     /** Get source text of entry with internal bidi chars, or null if not displayed. */
     public String getSourceText() {
@@ -586,7 +598,7 @@ public class SegmentBuilder {
         return result;
     }
 
-    void createInputAttributes(Element element, MutableAttributeSet set) {
+    public void createInputAttributes(Element element, MutableAttributeSet set) {
         set.addAttributes(attrs(false, false, false, false));
     }
 
@@ -625,7 +637,7 @@ public class SegmentBuilder {
     /**
      * Called on the active entry changed. Required for update translation text.
      */
-    void onActiveEntryChanged() {
+    public void onActiveEntryChanged() {
         translationText = doc.extractTranslation();
         displayVersion = globalVersions.incrementAndGet();
     }

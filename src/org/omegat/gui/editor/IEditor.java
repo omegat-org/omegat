@@ -40,6 +40,8 @@ import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Preferences;
 
+import javax.swing.*;
+
 /**
  * Interface for access to editor functionality.
  *
@@ -62,6 +64,11 @@ public interface IEditor {
         UPPER,
         /** cycle between cases */
         CYCLE,
+    }
+
+    enum EditorType {
+        SOURCE,
+        TRANSLATION
     }
 
     /**
@@ -533,9 +540,10 @@ public interface IEditor {
     MarkerController getMarkerController();
 
     /**
-     * TODO create an editor interface?
+     * TODO create an editor interface?  Also there may be multiple editors....
      */
-    EditorTextArea3 getEditor();
+    //EditorTextArea3 getEditor(EditorType type);
+    JEditorPane getEditor(EditorType type);
 
     /**
      * The orientation of the current text ;

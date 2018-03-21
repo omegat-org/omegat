@@ -30,14 +30,7 @@ package org.omegat.gui.editor;
 import java.awt.Font;
 
 import javax.swing.event.DocumentEvent;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultStyledDocument;
-import javax.swing.text.Element;
-import javax.swing.text.MutableAttributeSet;
-import javax.swing.text.Position;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
+import javax.swing.text.*;
 
 import org.omegat.util.gui.Styles;
 
@@ -198,4 +191,16 @@ public class Document3 extends DefaultStyledDocument {
             writeUnlock();
         }
     }
+
+
+    public Style addStyle(String nm, Style parent) {
+        return  getStyle(nm);
+    }
+
+    public void setCharacterAttributes(int offset, int length, AttributeSet s, boolean replace){
+        System.out.println("CLG IGNORING SET CHAR ATTRIBUTES");
+    }
+
+
+
 }

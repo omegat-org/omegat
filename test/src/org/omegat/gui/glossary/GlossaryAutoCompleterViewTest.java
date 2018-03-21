@@ -52,6 +52,8 @@ import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 
+import javax.swing.*;
+
 public class GlossaryAutoCompleterViewTest extends TestCore {
 
     private final List<GlossaryEntry> currentEntries = new ArrayList<>();
@@ -435,7 +437,7 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             }
 
             @Override
-            public EditorTextArea3 getEditor() {
+            public JEditorPane getEditor(EditorType type) {
                 return null;
             }
 

@@ -121,16 +121,24 @@ public class SideBySideEditorController implements IEditor {
         UNTRANSLATED, EMPTY, EQUALS_TO_SOURCE;
     }
 
-    /** Dockable translatePane for editor. */
-    private DockablePanel translatePane;
-    private JScrollPane scrollPane;
+    /** Dockable pane for editor, only translations are are editable */
+    private DockablePanel translationPane;
+    private JScrollPane translationScrollPane;
 
     private String title;
 
     private boolean dockableSelected;
 
     /** Editor instance for translations, source is not editable. */
-    protected final EditorTextArea3 editor;
+    protected final EditorTextArea3 translationEditor;
+
+    /** Dockable pane for the source, not editable by the user*/
+    private DockablePanel sourcePane;
+    private JScrollPane sourceScrollPane;
+
+    /** Editor instance for source (not editable but kept in sync with any translation(s) */
+    protected final EditorTextArea3 sourceEditor;
+
 
     /** Class for process marks for editor. */
     protected MarkerController markerController;
@@ -141,6 +149,7 @@ public class SideBySideEditorController implements IEditor {
 
     /** Currently displayed segments info. */
     protected SegmentBuilder[] m_docSegList;
+    protected ISegmentBuilder[] m_docSourceSegList;
 
     protected int firstLoaded;
     protected int lastLoaded;
@@ -179,14 +188,21 @@ public class SideBySideEditorController implements IEditor {
     private IProject.AllTranslations previousTranslations;
 
     public SideBySideEditorController(final MainWindow mainWindow) {
+
         this.mw = mainWindow;
 
         segmentExportImport = new SegmentExportImport(this);
 
-        editor = new EditorTextArea3(this);
-        DragTargetOverlay.apply(editor, dropInfo);
-        setFont(mainWindow.getApplicationFont());
+        translationEditor = new EditorTextArea3(this);
+        DragTargetOverlay.apply(translationEditor, dropInfo);
 
+
+        // "Editor" for source, which we won't actually allow the user to edit
+        //sourceEditor = new JEditorPane();
+        sourceEditor = new EditorTextArea3(this); // todo do we navigate from the source, translation, or both panes?
+        sourceEditor.setEditable(false);
+
+        setFont(mainWindow.getApplicationFont());
         markerController = new MarkerController(this);
 
         createUI();
@@ -238,15 +254,15 @@ public class SideBySideEditorController implements IEditor {
 
         SwingUtilities.invokeLater(() -> {
             updateState(SHOW_TYPE.INTRO);
-            translatePane.requestFocus();
+            translationPane.requestFocus();
         });
 
         // register font changes callback
         CoreEvents.registerFontChangedEventListener(newFont -> {
             setFont(newFont);
             ViewLabel.fontHeight = 0;
-            editor.revalidate();
-            editor.repaint();
+            translationEditor.revalidate();
+            translationEditor.repaint();
 
             // fonts have changed
             emptyProjectPane.setFont(font);
@@ -261,12 +277,16 @@ public class SideBySideEditorController implements IEditor {
 
         lazyLoadTimer.setRepeats(false);
         lazyLoadTimer.addActionListener(e -> {
-            JScrollBar bar = scrollPane.getVerticalScrollBar();
+
+            loadEditor(translationScrollPane, translationEditor);
+            loadEditor(sourceScrollPane, sourceEditor);
+
+            /*JScrollBar bar = translationScrollPane.getVerticalScrollBar();
             double scrollPercent = bar.getValue() / (double) bar.getMaximum();
             int unitsPerSeg = (bar.getMaximum() - bar.getMinimum()) / (lastLoaded - firstLoaded + 1);
             if (firstLoaded > 0 && scrollPercent <= PAGE_LOAD_THRESHOLD) {
-                int docSize = editor.getDocument().getLength();
-                int visiblePos = editor.viewToModel(scrollPane.getViewport().getViewPosition());
+                int docSize = translationEditor.getDocument().getLength();
+                int visiblePos = translationEditor.viewToModel(translationScrollPane.getViewport().getViewPosition());
                 // Try to load enough segments to restore scrollbar value to
                 // the range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
                 // Formula is obtained by solving the following equations for loadCount:
@@ -280,10 +300,10 @@ public class SideBySideEditorController implements IEditor {
                 // not looking at the same content, because what we were
                 // looking at is now further down the document. Calculate
                 // the correct location and scroll there.
-                int sizeDelta = editor.getDocument().getLength() - docSize;
+                int sizeDelta = translationEditor.getDocument().getLength() - docSize;
                 try {
-                    scrollPane.getViewport()
-                            .setViewPosition(editor.modelToView(visiblePos + sizeDelta).getLocation());
+                    translationScrollPane.getViewport()
+                            .setViewPosition(translationEditor.modelToView(visiblePos + sizeDelta).getLocation());
                 } catch (BadLocationException ex) {
                     Log.log(ex);
                 }
@@ -295,23 +315,131 @@ public class SideBySideEditorController implements IEditor {
                 //   newMax = curMax + loadCount * unitsPerSeg
                 double loadCount = (bar.getValue() / (1 - PAGE_LOAD_THRESHOLD) - bar.getMaximum()) / unitsPerSeg;
                 loadDown((int) Math.ceil(loadCount));
-            }
+            }*/
         });
+    }
+
+    private void loadEditor(JScrollPane scrollPane, JEditorPane editor){
+
+        JScrollBar bar = scrollPane.getVerticalScrollBar();
+        double scrollPercent = bar.getValue() / (double) bar.getMaximum();
+        int unitsPerSeg = (bar.getMaximum() - bar.getMinimum()) / (lastLoaded - firstLoaded + 1);
+        if (firstLoaded > 0 && scrollPercent <= PAGE_LOAD_THRESHOLD) {
+            int docSize = editor.getDocument().getLength();
+            int visiblePos = editor.viewToModel(scrollPane.getViewport().getViewPosition());
+            // Try to load enough segments to restore scrollbar value to
+            // the range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
+            // Formula is obtained by solving the following equations for loadCount:
+            //   PAGE_LOAD_THRESHOLD = newVal / newMax
+            //   newVal = curVal + loadCount * unitsPerSeg
+            //   newMax = curMax + loadCount * unitsPerSeg
+            double loadCount = (PAGE_LOAD_THRESHOLD * bar.getMaximum() - bar.getValue())
+                    / (unitsPerSeg * (1 - PAGE_LOAD_THRESHOLD));
+            loadUp((int) Math.ceil(loadCount));
+            // If we leave the viewport at the same location then we are
+            // not looking at the same content, because what we were
+            // looking at is now further down the document. Calculate
+            // the correct location and scroll there.
+            int sizeDelta = editor.getDocument().getLength() - docSize;
+            try {
+                scrollPane.getViewport()
+                        .setViewPosition(editor.modelToView(visiblePos + sizeDelta).getLocation());
+            } catch (BadLocationException ex) {
+                Log.log(ex);
+            }
+        } else if (lastLoaded < m_docSegList.length - 1 && scrollPercent >= 1 - PAGE_LOAD_THRESHOLD) {
+            // Load enough segments to restore scrollbar value to the
+            // range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
+            // Formula is obtained by solving the following equations for loadCount:
+            //   (1 - PAGE_LOAD_THRESHOLD) = curVal / newMax
+            //   newMax = curMax + loadCount * unitsPerSeg
+            double loadCount = (bar.getValue() / (1 - PAGE_LOAD_THRESHOLD) - bar.getMaximum()) / unitsPerSeg;
+            loadDown((int) Math.ceil(loadCount));
+        }
     }
 
     private void createUI() {
 
-        translatePane = new DockablePanel("EDITOR", "SOURCE", false);
-        translatePane.setComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
-        translatePane.setMinimumSize(new Dimension(100, 100));
-        translatePane.addComponentListener(new ComponentAdapter() {
+       /* Dimension editorDim = new Dimension(100, 100);
+
+        // First create the source pane
+        sourcePane = new DockablePanel("SOURCE", " ", false);
+        sourcePane.setComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
+        sourcePane.setMinimumSize(editorDim);
+        sourcePane.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                //  todo updateTitle(); ???
+                LOGGER.info("CLG set source title????");
+            }
+        });
+        sourceScrollPane = new JScrollPane(sourcePane);
+
+        translationPane = new DockablePanel("EDITOR", "TRANSLATION", false);
+        translationPane.setComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
+        translationPane.setMinimumSize(editorDim);
+        translationPane.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 updateTitle();
             }
         });
 
-        scrollPane = new JScrollPane(editor);
+        translationScrollPane = new JScrollPane(translationEditor);
+        Border panelBorder = UIManager.getBorder("OmegaTDockablePanel.border");
+        if (panelBorder != null) {
+            translationScrollPane.setBorder(panelBorder);
+        }
+        Border viewportBorder = UIManager.getBorder("OmegaTDockablePanelViewport.border");
+        if (viewportBorder != null) {
+            translationScrollPane.setViewportBorder(viewportBorder);
+        }
+        translationScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        translationScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        translationScrollPane.getVerticalScrollBar().addAdjustmentListener(scrollListener);
+
+        translationPane.setLayout(new BorderLayout());
+        translationPane.add(translationScrollPane, BorderLayout.CENTER);
+
+        mw.addDockable(translationPane);
+
+        // TODO CLG: TEST ADDING A NEW PANEL:
+        mw.addDockable(new DockablePanel("EDITOR2", "TRANSLATION", false));
+
+        DockingDesktop desktop = DockingUI.getDesktop(translationPane);
+        if (desktop != null) {
+            desktop.addDockableSelectionListener(e -> dockableSelected = translationPane == e.getSelectedDockable());
+        }*/
+
+       sourcePane = new DockablePanel("SOURCE", "SOURCE", false);
+       sourceScrollPane = new JScrollPane(sourceEditor);
+       createPaneImpl(sourcePane, sourceScrollPane);
+
+       translationPane = new DockablePanel("EDITOR", "TRANSLATION", false);
+       translationScrollPane = new JScrollPane(translationEditor);
+       createPaneImpl(translationPane, translationScrollPane);
+
+        DockingDesktop desktop = DockingUI.getDesktop(translationPane);
+        if (desktop != null) {
+            desktop.addDockableSelectionListener(e -> dockableSelected = translationPane == e.getSelectedDockable());
+        }
+
+    }
+
+    private void createPaneImpl(DockablePanel pane, JScrollPane scrollPane){
+
+        Dimension editorDim = new Dimension(100, 100);
+
+        pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
+        pane.setMinimumSize(editorDim);
+        pane.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                //  todo updateTitle(); ???
+                updateTitle();
+            }
+        });
+
         Border panelBorder = UIManager.getBorder("OmegaTDockablePanel.border");
         if (panelBorder != null) {
             scrollPane.setBorder(panelBorder);
@@ -322,20 +450,25 @@ public class SideBySideEditorController implements IEditor {
         }
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.getVerticalScrollBar().addAdjustmentListener(scrollListener);
+        scrollPane.getVerticalScrollBar().addAdjustmentListener(scrollListener); // todo use same listener???
 
-        translatePane.setLayout(new BorderLayout());
-        translatePane.add(scrollPane, BorderLayout.CENTER);
+        pane.setLayout(new BorderLayout());
+        pane.add(scrollPane, BorderLayout.CENTER);
 
-        mw.addDockable(translatePane);
+        mw.addDockable(pane);
 
-        // TODO CLG: TEST ADDING A NEW PANEL:
-        mw.addDockable(new DockablePanel("EDITOR2", "TRANSLATION", false));
 
-        DockingDesktop desktop = DockingUI.getDesktop(translatePane);
-        if (desktop != null) {
-            desktop.addDockableSelectionListener(e -> dockableSelected = translatePane == e.getSelectedDockable());
+    }
+
+    protected void generateSegments(FileInfo file, Document3 doc, boolean hasRTL){
+        ArrayList<SegmentBuilder> tmpSegList = new ArrayList<SegmentBuilder>(file.entries.size());
+        for (SourceTextEntry ste : file.entries) {
+            if (entriesFilter == null || entriesFilter.allowed(ste)) {
+                SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum(), hasRTL);
+                tmpSegList.add(sb);
+            }
         }
+        m_docSegList = tmpSegList.toArray(new SegmentBuilder[tmpSegList.size()]);
     }
 
     private final AdjustmentListener scrollListener = new AdjustmentListener() {
@@ -353,7 +486,7 @@ public class SideBySideEditorController implements IEditor {
                 return;
             }
 
-            double pos = e.getValue() / (double) scrollPane.getVerticalScrollBar().getMaximum();
+            double pos = e.getValue() / (double) translationScrollPane.getVerticalScrollBar().getMaximum();
 
             if (pos <= PAGE_LOAD_THRESHOLD || pos >= 1.0 - PAGE_LOAD_THRESHOLD) {
                 lazyLoadTimer.restart();
@@ -362,6 +495,8 @@ public class SideBySideEditorController implements IEditor {
     };
 
     private synchronized void loadDown(int count) {
+        // TODO CLG WHAT IS HAPPENING HERE...
+        LOGGER.info("CLG laodDown... ????????????");
         if (lastLoaded < 0 || lastLoaded >= m_docSegList.length - 1) {
             return;
         }
@@ -375,9 +510,14 @@ public class SideBySideEditorController implements IEditor {
         lastLoaded = loadTo;
         SegmentBuilder[] loaded = Arrays.copyOfRange(m_docSegList, loadFrom, loadTo + 1);
         markerController.process(loaded);
+
+
     };
 
     private synchronized void loadUp(int count) {
+
+        // TODO CLG HANDLE THIS...
+
         if (firstLoaded <= 0 || firstLoaded >= m_docSegList.length) {
             return;
         }
@@ -414,7 +554,7 @@ public class SideBySideEditorController implements IEditor {
             displayedFileIndex = 0;
             displayedEntryIndex = 0;
             title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
-            data = editor;
+            data = translationEditor;
             SwingUtilities.invokeLater(() -> {
                 // need to run later because some other event listeners
                 // should be called before
@@ -424,19 +564,19 @@ public class SideBySideEditorController implements IEditor {
             break;
         case NO_CHANGE:
             title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
-            data = editor;
+            data = translationEditor;
             break;
         }
 
         updateTitle();
-        translatePane.setToolTipText(title);
+        translationPane.setToolTipText(title);
 
-        if (scrollPane.getViewport().getView() != data) {
+        if (translationScrollPane.getViewport().getView() != data) {
             if (UIManager.getBoolean("OmegaTDockablePanel.isProportionalMargins")) {
                 int size = data.getFont().getSize() / 2;
                 data.setBorder(new EmptyBorder(size, size, size, size));
             }
-            scrollPane.setViewportView(data);
+            translationScrollPane.setViewportView(data);
         }
     }
 
@@ -497,7 +637,7 @@ public class SideBySideEditorController implements IEditor {
 
         @Override
         public Component getComponentToOverlay() {
-            return scrollPane;
+            return translationScrollPane;
         }
 
         @Override
@@ -513,12 +653,15 @@ public class SideBySideEditorController implements IEditor {
     };
 
     private void updateTitle() {
-       translatePane.setName(StaticUIUtils.truncateToFit(title, translatePane, 70));
+        if (null != translationPane)
+            translationPane.setName(StaticUIUtils.truncateToFit(title, translationPane, 70));
+        // TODO SET SOURCE TITLE???
     }
 
     private void setFont(final Font font) {
         this.font = font;
-        editor.setFont(font);
+        translationEditor.setFont(font);
+        sourceEditor.setFont(font);
     }
 
     public Font getFont(){
@@ -566,7 +709,9 @@ public class SideBySideEditorController implements IEditor {
             }
         }
         // set editor's orientation by target language
-        editor.setComponentOrientation(targetOrientation);
+        translationEditor.setComponentOrientation(targetOrientation);
+        // Set for the source editor as well
+        sourceEditor.setComponentOrientation(targetOrientation);
     }
 
     /**
@@ -614,7 +759,7 @@ public class SideBySideEditorController implements IEditor {
      * {@inheritDoc}
      */
     public void requestFocus() {
-        scrollPane.getViewport().getView().requestFocusInWindow();
+        translationScrollPane.getViewport().getView().requestFocusInWindow();
     }
 
     /**
@@ -704,17 +849,29 @@ public class SideBySideEditorController implements IEditor {
             hasRTL = hasRTL || EditorUtils.isRTL(entry.getKey().getLanguageCode().toLowerCase(Locale.ENGLISH));
         }
 
-        Document3 doc = new Document3(this);
+        Document3 translateDoc = new Document3(this);
 
         // Create all SegmentBuilders now...
         ArrayList<SegmentBuilder> tmpSegList = new ArrayList<SegmentBuilder>(file.entries.size());
         for (SourceTextEntry ste : file.entries) {
             if (entriesFilter == null || entriesFilter.allowed(ste)) {
-                SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum(), hasRTL);
+                SegmentBuilder sb = new SegmentBuilder(this, translateDoc, settings, ste, ste.entryNum(), hasRTL);
                 tmpSegList.add(sb);
             }
         }
         m_docSegList = tmpSegList.toArray(new SegmentBuilder[tmpSegList.size()]);
+
+        // Create the source only segment builders...
+        Document3 sourceDoc = new Document3(this);
+        ArrayList<ISegmentBuilder> tmpSourceList = new ArrayList<>(file.entries.size());
+        for (SourceTextEntry ste : file.entries) {
+            if (entriesFilter == null || entriesFilter.allowed(ste)) {
+                SourceOnlySegmentBuilder sb = new SourceOnlySegmentBuilder(this, sourceDoc, settings, ste, ste.entryNum(), hasRTL);
+                tmpSourceList.add(sb);
+            }
+        }
+
+        m_docSourceSegList = tmpSourceList.toArray(new SourceOnlySegmentBuilder[tmpSourceList.size()]);
 
         // Clamp displayedSegment to actually available entries.
         displayedEntryIndex = Math.max(0, Math.min(m_docSegList.length - 1, displayedEntryIndex));
@@ -728,24 +885,31 @@ public class SideBySideEditorController implements IEditor {
         // ...but only display the ones in [firstLoaded, lastLoaded]
         for (int i = 0; i < m_docSegList.length; i++) {
             if (i >= firstLoaded && i <= lastLoaded) {
-                SegmentBuilder sb = m_docSegList[i];
-                sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.ste));
+                ISegmentBuilder sb = m_docSegList[i];
+                sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.getSource()));
                 sb.addSegmentSeparator();
+
+                // Update the source builders too
+                sb = m_docSourceSegList[i];
+                LOGGER.info("CLG load document source: " + sb.getSource());
+                sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.getSource()));
+                sb.addSegmentSeparator();
+
             }
         }
 
-        doc.setDocumentFilter(new DocumentFilter3());
+        translateDoc.setDocumentFilter(new DocumentFilter3());
 
         // add locate for target language to editor
         Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
-        editor.setLocale(targetLocale);
+        translationEditor.setLocale(targetLocale);
 
-        editor.setDocument(doc);
+        translationEditor.setDocument(translateDoc);
 
-        doc.addUndoableEditListener(editor.undoManager);
-        editor.undoManager.reset();
+        translateDoc.addUndoableEditListener(translationEditor.undoManager);
+        translationEditor.undoManager.reset();
 
-        doc.addDocumentListener(new DocumentListener() {
+        translateDoc.addDocumentListener(new DocumentListener() {
             //we cannot edit the document here, only other stuff.
             public void changedUpdate(DocumentEvent e) {
                 showLengthMessage();
@@ -765,14 +929,22 @@ public class SideBySideEditorController implements IEditor {
 
         markerController.process(m_docSegList);
 
-        editor.repaint();
+        // Set the source document
+        sourceDoc.setDocumentFilter(new DocumentFilter3());
+
+
+        sourceEditor.setDocument(sourceDoc);
+
+
+        translationEditor.repaint();
+        sourceEditor.repaint();
     }
 
     /*
      * Activates the current entry and puts the cursor at the start of segment
      */
     public void activateEntry() {
-        activateEntry(CaretPosition.startOfEntry());
+        activateEntryImpl(CaretPosition.startOfEntry(), CaretPosition.startOfEntry());
     }
 
     /**
@@ -781,7 +953,7 @@ public class SideBySideEditorController implements IEditor {
      * <p>
      * Also moves document focus to current entry, and makes sure fuzzy info displayed if available.
      */
-    protected void activateEntry(CaretPosition pos) {
+    /*protected void activateEntry(CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 
         SourceTextEntry ste = getCurrentEntry();
@@ -789,7 +961,7 @@ public class SideBySideEditorController implements IEditor {
             return;
         }
 
-        if (scrollPane.getViewport().getView() != editor) {
+        if (translationScrollPane.getViewport().getView() != translationEditor) {
             // editor not displayed
             return;
         }
@@ -799,6 +971,7 @@ public class SideBySideEditorController implements IEditor {
         }
 
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
+        ISegmentBuilder  sourceBuilder = m_docSourceSegList[displayedEntryIndex];
 
         // If the builder has not been created then we are trying to jump to a
         // segment that is in the current document but not yet loaded. To avoid
@@ -814,13 +987,14 @@ public class SideBySideEditorController implements IEditor {
         TMXEntry currentTranslation = previousTranslations.getCurrentTranslation();
         // forget about old marks
         builder.createSegmentElement(true, currentTranslation);
+        sourceBuilder.createSegmentElement(true, currentTranslation);
 
         Core.getNotes().setNoteText(currentTranslation.note);
 
         // then add new marks
         markerController.reprocessImmediately(builder);
 
-        editor.undoManager.reset();
+        translationEditor.undoManager.reset();
 
         history.insertNew(builder.segmentNumberInProject);
 
@@ -834,8 +1008,9 @@ public class SideBySideEditorController implements IEditor {
             segmentExportImport.exportCurrentSegment(ste);
         }
 
-        int te = editor.getOmDocument().getTranslationEnd();
-        int ts = editor.getOmDocument().getTranslationStart();
+        int te = translationEditor.getOmDocument().getTranslationEnd();
+        int ts = translationEditor.getOmDocument().getTranslationStart();
+
         //
         // Navigate to entry as requested.
         //
@@ -851,6 +1026,7 @@ public class SideBySideEditorController implements IEditor {
                 pos.selectionEnd = null;
             }
         }
+
         scrollForDisplayNearestSegments(pos);
         // check if file was changed
         if (previousDisplayedFileIndex != displayedFileIndex) {
@@ -858,11 +1034,125 @@ public class SideBySideEditorController implements IEditor {
             CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
         }
 
-        editor.autoCompleter.setVisible(false);
-        editor.repaint();
+        translationEditor.autoCompleter.setVisible(false);
+        translationEditor.repaint();
+
+        // Do the same for the source panel
 
         // fire event about new segment activated
         CoreEvents.fireEntryActivated(ste);
+    }*/
+
+
+
+    protected void activateEntryImpl( CaretPosition transPos, CaretPosition sourcePos) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        SourceTextEntry ste = getCurrentEntry();
+        if (ste == null) {
+            return;
+        }
+
+        if (translationScrollPane.getViewport().getView() != translationEditor) {
+            // translation editor is not displayed, so shouldn't have an update to the source editor either
+            return;
+        }
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        SegmentBuilder builder = m_docSegList[displayedEntryIndex];
+        ISegmentBuilder  sourceBuilder = m_docSourceSegList[displayedEntryIndex];
+
+        // If the builder has not been created then we are trying to jump to a
+        // segment that is in the current document but not yet loaded. To avoid
+        // loading large swaths of the document at once, we then re-load the
+        // document centered at the destination segment.
+        if (!builder.hasBeenCreated()) {
+            loadDocument();  // todo load document type...
+            activateEntryImpl(transPos, sourcePos);
+            return;
+        }
+
+        // todo make generic?
+        previousTranslations = Core.getProject().getAllTranslations(ste);
+        TMXEntry currentTranslation = previousTranslations.getCurrentTranslation();
+
+        // forget about old marks
+        builder.createSegmentElement(true, currentTranslation);
+        LOGGER.info("CLG activate entry: " + currentTranslation.source);
+        sourceBuilder.createSegmentElement(true, currentTranslation);
+
+        Core.getNotes().setNoteText(currentTranslation.note);
+
+        // then add new marks
+        //markerController.reprocessImmediately(builder);
+        // assume the source will not have markers?
+        sourceBuilder.resetTextAttributes();
+
+        translationEditor.undoManager.reset();
+
+        history.insertNew(builder.segmentNumberInProject);
+
+        setMenuEnabled();
+
+        showStat();
+
+        showLengthMessage();
+
+        if (Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT)) {
+            segmentExportImport.exportCurrentSegment(ste);
+        }
+
+        navigateToEntry(translationEditor.getOmDocument(), transPos, EditorType.TRANSLATION, translationScrollPane, translationEditor);
+        navigateToEntry((Document3)sourceEditor.getDocument(), sourcePos, EditorType.SOURCE, sourceScrollPane, sourceEditor);
+
+        // check if file was changed
+        if (previousDisplayedFileIndex != displayedFileIndex) {
+            previousDisplayedFileIndex = displayedFileIndex;
+            CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
+        }
+
+        translationEditor.autoCompleter.setVisible(false);
+        translationEditor.repaint();
+        sourceEditor.repaint();
+
+        // Do the same for the source panel
+
+        // fire event about new segment activated
+        CoreEvents.fireEntryActivated(ste);
+    }
+
+    void navigateToEntry(Document3 doc, CaretPosition pos, EditorType type, JScrollPane scrollPane, JEditorPane editor ){
+
+        int te = doc.getTranslationEnd();
+        int ts = doc.getTranslationStart();
+
+        //
+        // Navigate to entry as requested.
+        //
+        if (pos.position != null) { // check if outside of entry
+            pos.position = Math.max(0, pos.position);
+            pos.position = Math.min(pos.position, te - ts);
+        }
+        if (pos.selectionStart != null && pos.selectionEnd != null) { // check if outside of entry
+            pos.selectionStart = Math.max(0, pos.selectionStart);
+            pos.selectionEnd = Math.min(pos.selectionEnd, te - ts);
+            if (pos.selectionStart >= pos.selectionEnd) { // if end after start
+                pos.selectionStart = null;
+                pos.selectionEnd = null;
+            }
+        }
+
+        scrollForDisplayNearestSegments(pos, type, scrollPane, editor);
+
+        // check if file was changed
+        if (previousDisplayedFileIndex != displayedFileIndex) {
+            previousDisplayedFileIndex = displayedFileIndex;
+            CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
+        }
+
     }
 
     private void setMenuEnabled() {
@@ -877,7 +1167,7 @@ public class SideBySideEditorController implements IEditor {
      * Display length of source and translation parts in the status bar.
      */
     void showLengthMessage() {
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = translationEditor.getOmDocument();
         String trans = doc.extractTranslation();
         if (trans != null) {
             SourceTextEntry ste = m_docSegList[displayedEntryIndex].ste;
@@ -890,7 +1180,7 @@ public class SideBySideEditorController implements IEditor {
      * Called on the text changed in document. Required for recalculate marks for active segment.
      */
     void onTextChanged() {
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = translationEditor.getOmDocument();
         if (doc.trustedChangesInProgress || doc.textBeingComposed) {
             return;
         }
@@ -899,7 +1189,7 @@ public class SideBySideEditorController implements IEditor {
 
             SwingUtilities.invokeLater(() -> {
                 markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
-                editor.autoCompleter.textDidChange();
+                translationEditor.autoCompleter.textDidChange();
             });
         }
     }
@@ -909,17 +1199,32 @@ public class SideBySideEditorController implements IEditor {
      * segment is taller than the editor, the first line of the editable area
      * will be at the bottom of the editor.
      */
-    private void scrollForDisplayNearestSegments(final CaretPosition pos) {
+    private void scrollForDisplayNearestSegments(final CaretPosition pos, EditorType type, JScrollPane scrollPane, JEditorPane editor) {
         SwingUtilities.invokeLater(() -> {
-            Rectangle rect = getSegmentBounds(displayedEntryIndex);
+            Rectangle rect = getSegmentBounds(type/*IEditor.EditorType.TRANSLATION*/, displayedEntryIndex);
+            scrollForDisplayNearestSegmentsImpl(rect, scrollPane, editor);
+
+            // TODO?
+            // repeat for source editor
+            rect = getSegmentBounds(type/*IEditor.EditorType.SOURCE*/, displayedEntryIndex);
+            scrollForDisplayNearestSegmentsImpl(rect, scrollPane, editor);
+
+            setCaretPosition(pos);
+        });
+    }
+    private void scrollForDisplayNearestSegmentsImpl(final Rectangle rect, JScrollPane scrollPane, JEditorPane editor) {
+        SwingUtilities.invokeLater(() -> {
             if (rect != null) {
                 // Expand rect vertically to fill height of viewport.
                 int viewportHeight = scrollPane.getViewport().getHeight();
                 rect.y -= (viewportHeight - rect.height) / 2;
                 rect.height = viewportHeight;
                 editor.scrollRectToVisible(rect);
+
+
             }
-            setCaretPosition(pos);
+
+
         });
     }
 
@@ -928,13 +1233,27 @@ public class SideBySideEditorController implements IEditor {
      * coordinates. Returns null if the specified segment index is invalid or if
      * the segment has not been loaded yet.
      */
-    private Rectangle getSegmentBounds(int index) {
-        if (index < 0 || index >= m_docSegList.length) {
+    private Rectangle getSegmentBounds(EditorType type, int index) {
+
+        ISegmentBuilder[] sbl = null;
+        JEditorPane editor = null;
+        switch (type) {
+            case SOURCE:
+                sbl = m_docSourceSegList;
+                editor = sourceEditor;
+                break;
+            case TRANSLATION:
+                sbl = m_docSegList;
+                editor = translationEditor;
+                break;
+        }
+
+        if (index < 0 || index >= sbl.length) {
             return null;
         }
         Rectangle result = null;
         try {
-            SegmentBuilder sb = m_docSegList[index];
+            ISegmentBuilder sb = sbl[index];
             if (sb.hasBeenCreated()) {
                 Rectangle start = editor.modelToView(sb.getStartPosition());
                 Rectangle end = editor.modelToView(sb.getEndPosition());
@@ -1089,7 +1408,7 @@ public class SideBySideEditorController implements IEditor {
     public void commitAndDeactivate() {
         UIThreadsUtil.mustBeSwingThread();
 
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = translationEditor.getOmDocument();
 
         if (doc == null) {
             // there is no active doc, it's empty project
@@ -1102,6 +1421,7 @@ public class SideBySideEditorController implements IEditor {
 
         // remove internal bidi chars
         String transWithControlChars = doc.extractTranslation();
+        // CLG:  the new (possibly modified) translation
         String newTrans = EditorUtils.removeDirectionCharsAroundTags(transWithControlChars, getCurrentEntry());
         if (newTrans != null) {
             commitAndDeactivate(null, newTrans);
@@ -1111,8 +1431,9 @@ public class SideBySideEditorController implements IEditor {
     void commitAndDeactivate(ForceTranslation forceTranslation, String newTrans) {
         UIThreadsUtil.mustBeSwingThread();
 
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = translationEditor.getOmDocument();
         doc.stopEditMode();
+        // We never edit the source panel
 
         // segment was active
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
@@ -1120,6 +1441,7 @@ public class SideBySideEditorController implements IEditor {
 
         TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
 
+        // Get the finalized translation
         PrepareTMXEntry newen = new PrepareTMXEntry();
         newen.source = sb.ste.getSrcText();
         newen.note = Core.getNotes().getNoteText();
@@ -1193,7 +1515,11 @@ public class SideBySideEditorController implements IEditor {
         }
 
         m_docSegList[displayedEntryIndex].createSegmentElement(false,
-                Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste));
+                Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].getSourceTextEntry()));
+
+        // Also update the source panel
+        m_docSourceSegList[displayedEntryIndex].createSegmentElement(false,
+                Core.getProject().getTranslationInfo(m_docSourceSegList[displayedEntryIndex].getSourceTextEntry()));
 
         // find all identical sources and redraw them
         for (int i = 0; i < m_docSegList.length; i++) {
@@ -1220,7 +1546,7 @@ public class SideBySideEditorController implements IEditor {
         // then add new marks
         markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
 
-        editor.undoManager.reset();
+        translationEditor.undoManager.reset();
 
         // validate tags if required
         if (entry != null && Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
@@ -1261,7 +1587,7 @@ public class SideBySideEditorController implements IEditor {
 
         segmentExportImport.exportCurrentSegment(null);
 
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = translationEditor.getOmDocument();
 
         if (doc == null) {
             // there is no active doc, it's empty project
@@ -1283,9 +1609,10 @@ public class SideBySideEditorController implements IEditor {
     // After deactivating and activating with shrinking and expanding text, we might
     // be able to position the current at this position again.
     //
-        int currentPosition = getCurrentPositionInEntryTranslation();
+        int currentTransPosition = getCurrentPositionInEntryTranslation();
+        int currentSourcePosition = getCurrentPositionInEntrySource();
         commitAndDeactivate();
-        activateEntry(new CaretPosition(currentPosition));
+        activateEntryImpl(new CaretPosition(currentTransPosition), new CaretPosition(currentSourcePosition));
     }
 
     private void iterateToEntry(boolean forward, Predicate<SourceTextEntry> shouldStop) {
@@ -1296,8 +1623,8 @@ public class SideBySideEditorController implements IEditor {
         }
 
         Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = editor.getCursor();
-        editor.setCursor(hourglassCursor);
+        Cursor oldCursor = translationEditor.getCursor();
+        translationEditor.setCursor(hourglassCursor);
 
         commitAndDeactivate();
 
@@ -1354,7 +1681,7 @@ public class SideBySideEditorController implements IEditor {
         }
 
         activateEntry();
-        editor.setCursor(oldCursor);
+        translationEditor.setCursor(oldCursor);
     }
 
     private void anyEntry(boolean forwards) {
@@ -1475,10 +1802,16 @@ public class SideBySideEditorController implements IEditor {
      * {@inheritDoc}
      */
     public void gotoEntry(final int entryNum) {
-        gotoEntry(entryNum, CaretPosition.startOfEntry());
+        gotoEntry(entryNum, CaretPosition.startOfEntry(), CaretPosition.startOfEntry());
     }
 
     public void gotoEntry(final int entryNum, final CaretPosition pos) {
+        // set current source position?
+        gotoEntry(entryNum, pos, new CaretPosition(getCurrentPositionInEntrySource()));
+    }
+
+    private void gotoEntry(final int entryNum, final CaretPosition transPos, final CaretPosition sourcePos) {
+
         UIThreadsUtil.mustBeSwingThread();
 
         if (!Core.getProject().isProjectLoaded()) {
@@ -1490,8 +1823,8 @@ public class SideBySideEditorController implements IEditor {
             return;
         }
         Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = editor.getCursor();
-        editor.setCursor(hourglassCursor);
+        Cursor oldCursor = translationEditor.getCursor();
+        translationEditor.setCursor(hourglassCursor);
         commitAndDeactivate();
 
         if (entryNum == 0) {
@@ -1523,8 +1856,8 @@ public class SideBySideEditorController implements IEditor {
                 }
             }
         }
-        activateEntry(pos);
-        editor.setCursor(oldCursor);
+        activateEntryImpl(transPos, sourcePos);
+        translationEditor.setCursor(oldCursor);
     }
 
     public void gotoEntry(String srcString, EntryKey key) {
@@ -1585,9 +1918,10 @@ public class SideBySideEditorController implements IEditor {
             deactivateWithoutCommit();
         }
         int currentEntry = getCurrentEntryNumber();
-        int caretPosition = getCurrentPositionInEntryTranslation();
+        int caretTransPosition = getCurrentPositionInEntryTranslation();
+        int caretsourcePosition = getCurrentPositionInEntrySource();
         gotoFile(displayedFileIndex);
-        gotoEntry(currentEntry, new CaretPosition(caretPosition));
+        gotoEntry(currentEntry, new CaretPosition(caretTransPosition), new CaretPosition(caretsourcePosition));
     }
 
     /**
@@ -1600,13 +1934,13 @@ public class SideBySideEditorController implements IEditor {
     public void changeCase(CHANGE_CASE_TO toWhat) {
         UIThreadsUtil.mustBeSwingThread();
 
-        int start = editor.getSelectionStart();
-        int end = editor.getSelectionEnd();
+        int start = translationEditor.getSelectionStart();
+        int end = translationEditor.getSelectionEnd();
 
-        int caretPosition = editor.getCaretPosition();
+        int caretPosition = translationEditor.getCaretPosition();
 
-        int translationStart = editor.getOmDocument().getTranslationStart();
-        int translationEnd = editor.getOmDocument().getTranslationEnd();
+        int translationStart = translationEditor.getOmDocument().getTranslationStart();
+        int translationEnd = translationEditor.getOmDocument().getTranslationEnd();
 
         // both should be within the limits
         if (end < translationStart || start > translationEnd) {
@@ -1625,8 +1959,8 @@ public class SideBySideEditorController implements IEditor {
         try {
             // no selection? make it the current word
             if (start == end) {
-                start = EditorUtils.getWordStart(editor, start);
-                end = EditorUtils.getWordEnd(editor, end);
+                start = EditorUtils.getWordStart(translationEditor, start);
+                end = EditorUtils.getWordEnd(translationEditor, end);
 
                 // adjust the bound again
                 if (start < translationStart && end <= translationEnd) {
@@ -1638,10 +1972,10 @@ public class SideBySideEditorController implements IEditor {
                 }
             }
 
-            editor.setSelectionStart(start);
-            editor.setSelectionEnd(end);
+            translationEditor.setSelectionStart(start);
+            translationEditor.setSelectionEnd(end);
 
-            String selectionText = editor.getText(start, end - start);
+            String selectionText = translationEditor.getText(start, end - start);
             String result = EditorUtils.doChangeCase(selectionText, toWhat);
             if (selectionText.equals(result)) {
                 // Nothing changed
@@ -1649,12 +1983,12 @@ public class SideBySideEditorController implements IEditor {
             }
 
             // ok, write it back to the editor document
-            editor.replaceSelection(result);
+            translationEditor.replaceSelection(result);
 
-            editor.setCaretPosition(caretPosition);
+            translationEditor.setCaretPosition(caretPosition);
 
-            editor.setSelectionStart(start);
-            editor.setSelectionEnd(end);
+            translationEditor.setSelectionStart(start);
+            translationEditor.setSelectionEnd(end);
         } catch (BadLocationException ble) {
             // highly improbable
             Log.log("bad location exception when changing case");
@@ -1676,16 +2010,16 @@ public class SideBySideEditorController implements IEditor {
         }
 
         // build local offsets
-        int start = editor.getOmDocument().getTranslationStart();
-        int end = editor.getOmDocument().getTranslationEnd();
+        int start = translationEditor.getOmDocument().getTranslationStart();
+        int end = translationEditor.getOmDocument().getTranslationEnd();
 
         CalcMarkersThread thread = markerController.markerThreads[markerController
                 .getMarkerIndex(ComesFromMTMarker.class.getName())];
         ((ComesFromMTMarker) thread.marker).setMark(null, null);
 
         // remove text
-        editor.select(start, end);
-        editor.replaceSelection(text);
+        translationEditor.select(start, end);
+        translationEditor.replaceSelection(text);
     }
 
     public void replacePartOfText(final String text, int start, int end) {
@@ -1695,10 +2029,10 @@ public class SideBySideEditorController implements IEditor {
                 .getMarkerIndex(ComesFromMTMarker.class.getName())];
         ((ComesFromMTMarker) thread.marker).setMark(null, null);
 
-        int off = editor.getOmDocument().getTranslationStart();
+        int off = translationEditor.getOmDocument().getTranslationStart();
         // remove text
-        editor.select(start + off, end + off);
-        editor.replaceSelection(text);
+        translationEditor.select(start + off, end + off);
+        translationEditor.replaceSelection(text);
     }
 
     /**
@@ -1721,20 +2055,23 @@ public class SideBySideEditorController implements IEditor {
     public String getCurrentTranslation() {
         UIThreadsUtil.mustBeSwingThread();
 
-        return editor.getOmDocument().extractTranslation();
+        return translationEditor.getOmDocument().extractTranslation();
     }
 
     /**
      * Returns current caret position in the editable translation.
      */
     public int getCurrentPositionInEntryTranslation() {
-        UIThreadsUtil.mustBeSwingThread();
+        return getPositionInEntryTranslation(translationEditor.getCaretPosition());
+    }
 
-        return getPositionInEntryTranslation(editor.getCaretPosition());
+    public int getCurrentPositionInEntrySource() {
+        return getPositionInEntryImpl((Document3)sourceEditor.getDocument(), sourceEditor.getCaretPosition());
     }
 
 
     public CaretPosition getCurrentPositionInEntryTranslationSelection() {
+
         int selectionEnd = getCurrentPositionInEntryTranslation();
         String selection = getSelectedText();
         String translation = getCurrentTranslation();
@@ -1768,13 +2105,35 @@ public class SideBySideEditorController implements IEditor {
      * given absolute index into the overall editor document.
      */
     public int getPositionInEntryTranslation(int pos) {
-        UIThreadsUtil.mustBeSwingThread();
+        return getPositionInEntryImpl(translationEditor.getOmDocument(), pos);
+       /* UIThreadsUtil.mustBeSwingThread();
 
-        if (!editor.getOmDocument().isEditMode()) {
+        if (!translationEditor.getOmDocument().isEditMode()) {
             return -1;
         }
-        int beg = editor.getOmDocument().getTranslationStart();
-        int end = editor.getOmDocument().getTranslationEnd();
+        int beg = translationEditor.getOmDocument().getTranslationStart();
+        int end = translationEditor.getOmDocument().getTranslationEnd();
+        if (pos < beg) {
+            pos = beg;
+        }
+        if (pos > end) {
+            pos = end;
+        }
+        return pos - beg;*/
+    }
+
+    /**
+     * Returns the relative caret position in the editable translation for a
+     * given absolute index into the overall editor document.
+     */
+     int getPositionInEntryImpl(Document3 doc, int pos) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!doc.isEditMode()) {
+            return -1;
+        }
+        int beg = doc.getTranslationStart();
+        int end = doc.getTranslationEnd();
         if (pos < beg) {
             pos = beg;
         }
@@ -1784,24 +2143,25 @@ public class SideBySideEditorController implements IEditor {
         return pos - beg;
     }
 
+
     public void setCaretPosition(CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!editor.getOmDocument().isEditMode()) {
+        if (!translationEditor.getOmDocument().isEditMode()) {
             return;
         }
-        int off = editor.getOmDocument().getTranslationStart();
+        int off = translationEditor.getOmDocument().getTranslationStart();
 
         try {
             if (pos.position != null) {
-                editor.setCaretPosition(off + pos.position);
+                translationEditor.setCaretPosition(off + pos.position);
             } else if (pos.selectionStart != null && pos.selectionEnd != null) {
-                editor.select(off + pos.selectionStart, off + pos.selectionEnd);
+                translationEditor.select(off + pos.selectionStart, off + pos.selectionEnd);
             }
         } catch (IllegalArgumentException iae) {
             // ignore; document has changed in the mean time.
         }
-        editor.checkAndFixCaret();
+        translationEditor.checkAndFixCaret();
     }
 
     /**
@@ -1810,14 +2170,14 @@ public class SideBySideEditorController implements IEditor {
     public void insertText(String text) {
         UIThreadsUtil.mustBeSwingThread();
 
-        editor.checkAndFixCaret();
+        translationEditor.checkAndFixCaret();
 
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
             text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste),
                     builder.ste);
         }
-        editor.replaceSelection(text);
+        translationEditor.replaceSelection(text);
     }
 
     /**
@@ -1832,17 +2192,17 @@ public class SideBySideEditorController implements IEditor {
     public void insertTag(final String tag) {
         UIThreadsUtil.mustBeSwingThread();
 
-        editor.checkAndFixCaret();
+        translationEditor.checkAndFixCaret();
 
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
             // add control bidi chars around
             String t = SegmentBuilder.BIDI_RLM + SegmentBuilder.BIDI_LRM + tag + SegmentBuilder.BIDI_LRM
                     + SegmentBuilder.BIDI_RLM;
-            editor.replaceSelection(t);
+            translationEditor.replaceSelection(t);
         } else {
             // just insert tag
-            editor.replaceSelection(tag);
+            translationEditor.replaceSelection(tag);
         }
     }
 
@@ -1883,7 +2243,7 @@ public class SideBySideEditorController implements IEditor {
     public void undo() {
         UIThreadsUtil.mustBeSwingThread();
 
-        editor.undoManager.undo();
+        translationEditor.undoManager.undo();
     }
 
     /**
@@ -1892,7 +2252,7 @@ public class SideBySideEditorController implements IEditor {
     public void redo() {
         UIThreadsUtil.mustBeSwingThread();
 
-        editor.undoManager.redo();
+        translationEditor.undoManager.redo();
     }
 
     /**
@@ -1901,7 +2261,7 @@ public class SideBySideEditorController implements IEditor {
     public String getSelectedText() {
         UIThreadsUtil.mustBeSwingThread();
 
-        return dockableSelected ? editor.getSelectedText() : null;
+        return dockableSelected ? translationEditor.getSelectedText() : null;
     }
 
     /** Loads Instant start article */
@@ -1989,7 +2349,7 @@ public class SideBySideEditorController implements IEditor {
     }
 
     public void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
-        editor.registerPopupMenuConstructors(priority, constructor);
+        translationEditor.registerPopupMenuConstructors(priority, constructor);
     }
 
     @Override
@@ -2005,16 +2365,16 @@ public class SideBySideEditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         if (entriesFilterControlComponent != null) {
-            translatePane.remove(entriesFilterControlComponent);
+            translationPane.remove(entriesFilterControlComponent);
         }
 
         entriesFilter = filter;
         entriesFilterControlComponent = filter.getControlComponent();
-        translatePane.add(entriesFilterControlComponent, BorderLayout.NORTH);
-        translatePane.revalidate();
+        translationPane.add(entriesFilterControlComponent, BorderLayout.NORTH);
+        translationPane.revalidate();
 
         SourceTextEntry curEntry = getCurrentEntry();
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = translationEditor.getOmDocument();
         IProject project = Core.getProject();
         // Prevent NullPointerErrors in loadDocument. Only load if there is a document.
         if (doc != null && project != null && project.getProjectFiles() != null && curEntry != null) {
@@ -2050,13 +2410,13 @@ public class SideBySideEditorController implements IEditor {
 
         entriesFilter = null;
         if (entriesFilterControlComponent != null) {
-            translatePane.remove(entriesFilterControlComponent);
-            translatePane.revalidate();
+            translationPane.remove(entriesFilterControlComponent);
+            translationPane.revalidate();
             entriesFilterControlComponent = null;
         }
 
         int curEntryNum = getCurrentEntryNumber();
-        Document3 doc = editor.getOmDocument();
+        Document3 doc = translationEditor.getOmDocument();
         IProject project = Core.getProject();
         // `if` check is to prevent NullPointerErrors in loadDocument.
         // Only load if there is a document and the project is loaded.
@@ -2111,7 +2471,7 @@ public class SideBySideEditorController implements IEditor {
 
     @Override
     public void windowDeactivated() {
-        editor.autoCompleter.setVisible(false);
+        translationEditor.autoCompleter.setVisible(false);
     }
 
     /**
@@ -2140,7 +2500,7 @@ public class SideBySideEditorController implements IEditor {
     @Override
     public AlphabeticalMarkers getAlphabeticalMarkers() {
 
-        return new AlphabeticalMarkers(scrollPane) {
+        return new AlphabeticalMarkers(translationScrollPane) {
             static final int UPPER_GAP = 5;
 
             @Override
@@ -2152,10 +2512,10 @@ public class SideBySideEditorController implements IEditor {
                     return map;
                 }
 
-                JViewport viewport = scrollPane.getViewport();
+                JViewport viewport = translationScrollPane.getViewport();
                 int x = sourceLangIsRTL
-                        ? editor.getWidth() - editor.getInsets().right
-                        : editor.getInsets().left;
+                        ? translationEditor.getWidth() - translationEditor.getInsets().right
+                        : translationEditor.getInsets().left;
                 Rectangle viewRect = viewport.getViewRect();
 
                 // expand a bit rect for the segment at the upper end of the editor.
@@ -2168,7 +2528,7 @@ public class SideBySideEditorController implements IEditor {
                         continue;
                     }
                     try {
-                        Point location = editor.modelToView(sb.getStartPosition()).getLocation();
+                        Point location = translationEditor.modelToView(sb.getStartPosition()).getLocation();
                         if (viewRect.contains(location)) { // location is viewable
                             int segmentNo = sb.segmentNumberInProject;
                             location.translate(0, -viewPosition.y); // adjust to vertically view position
@@ -2186,7 +2546,7 @@ public class SideBySideEditorController implements IEditor {
 
     @Override
     public IAutoCompleter getAutoCompleter() {
-        return editor.autoCompleter;
+        return translationEditor.autoCompleter;
     }
 
     @Override
@@ -2195,8 +2555,15 @@ public class SideBySideEditorController implements IEditor {
     }
 
     @Override
-    public EditorTextArea3 getEditor(){
-        return editor;
+    public JEditorPane getEditor(EditorType type){
+        switch (type){
+
+            case SOURCE:
+                return sourceEditor;
+            case TRANSLATION:
+            default:
+                return translationEditor;
+        }
     }
 
     @Override

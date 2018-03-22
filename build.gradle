@@ -241,7 +241,7 @@ task genDocIndex(type: Copy) {
             def docVersion = loadProperties(props).version
             def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
             ['code': code, 'name': name, 'version': docVersion, 'status': status]
-        }
+        }.sort { it.code }
         expand('languages': langInfos)
         filteringCharset = 'UTF-8'
     }

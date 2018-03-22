@@ -7,6 +7,7 @@
                2007-2010 Didier Briel
                2013 Alex Buloichik, Didier Briel, Piotr Kulik
                2014 Didier Briel, Aaron Madlon-Kay, Piotr Kulik
+               2018 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -136,9 +137,13 @@ public class XLIFFDialect extends DefaultXMLDialect {
      */
     @Override
     public Boolean validateIntactTag(String tag, Attributes atts) {
-        if (!tag.equalsIgnoreCase("group")     // Translate can only appear in these tags
-            && !tag.equalsIgnoreCase("trans-unit")
-            && !tag.equalsIgnoreCase("bin-unit")) {
+        if (tag.startsWith("str:")) { // All str:* tags should be ignored
+            return true;
+        }
+
+        if (!tag.equalsIgnoreCase("group") &&     // Translate can only appear in these tags
+            !tag.equalsIgnoreCase("trans-unit") &&
+            !tag.equalsIgnoreCase("bin-unit")) {
             return false;
         }
 

@@ -645,7 +645,7 @@ could fail with duplicate numbers
  OmegaT 3.6.0 update 9
 ----------------------------------------------------------------------
   0 Enhancement
-  2 Bug fix
+  3 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 9 vs 3.6.0 update 8
@@ -657,6 +657,8 @@ could still happen in some cases
 
   - External TMXs containing entries with no source text prevented
 fuzzy match searching from working correctly
+
+  - XLIFF filter: str:* tags from SmartTranslate were not ignored
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 8 (2017-12-27)

@@ -58,6 +58,7 @@ public final class WikiGet {
     }
 
     protected static final String CHARSET_MARK = "charset=";
+    protected static final String DEFAULT_RESPONSE_CHARSET = "ISO-8859-1";
 
     /**
      * ~inverse of String.split() refactor note: In future releases, this might
@@ -223,10 +224,28 @@ public final class WikiGet {
      *            parameters
      * @param additionalHeaders
      *            additional headers for request, can be null
-     * @return sever output
+     * @return server output
      */
     public static String get(String address, Map<String, String> params,
             Map<String, String> additionalHeaders) throws IOException {
+        return get(address, params, additionalHeaders, DEFAULT_RESPONSE_CHARSET);
+    }
+
+    /**
+     * Get data from the remote URL.
+     *
+     * @param address
+     *            address to post
+     * @param params
+     *            parameters
+     * @param additionalHeaders
+     *            additional headers for request, can be null
+     * @param defaultOutputCharset
+     *            default charset used to interpret the response
+     * @return server output
+     */
+    public static String get(String address, Map<String, String> params,
+            Map<String, String> additionalHeaders, String defaultOutputCharset) throws IOException {
         String url;
         if (params == null || params.isEmpty()) {
             url = address;
@@ -260,7 +279,7 @@ public final class WikiGet {
 
             conn.setDoOutput(true);
 
-            return getStringContent(conn);
+            return getStringContent(conn, defaultOutputCharset);
         } finally {
             conn.disconnect();
         }
@@ -336,16 +355,20 @@ public final class WikiGet {
         }
     }
 
+    private static String getStringContent(HttpURLConnection conn) throws IOException {
+        return getStringContent(conn, DEFAULT_RESPONSE_CHARSET);
+    }
+
     /**
      * Parse response as string.
      */
-    private static String getStringContent(HttpURLConnection conn) throws IOException {
+    private static String getStringContent(HttpURLConnection conn, String defaultCharset) throws IOException {
         if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
             throw new ResponseError(conn);
         }
         String contentType = conn.getHeaderField("Content-Type");
         int cp = contentType != null ? contentType.indexOf(CHARSET_MARK) : -1;
-        String charset = cp >= 0 ? contentType.substring(cp + CHARSET_MARK.length()) : "ISO8859-1";
+        String charset = cp >= 0 ? contentType.substring(cp + CHARSET_MARK.length()) : defaultCharset;
 
         try (InputStream in = conn.getInputStream()) {
             return IOUtils.toString(in, charset);

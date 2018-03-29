@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.4
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   3 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
@@ -19,6 +19,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1368/
 
   - Scribus filter (*.sla)
+
+  - Integration of DeepL MT
+  https://sourceforge.net/p/omegat/feature-requests/1343/
 
   Bug fixes:
 

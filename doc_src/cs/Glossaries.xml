@@ -72,9 +72,11 @@
 
     <para>Soubory glosáře představují jednoduché soubory v prostém textu a obsahují tři tabulátorem oddělené sloupce, ve kterých se nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použit pro dodatečné informace. Také můžete mít záznamy, kde chybí sloupec s překladem, tj. záznamy jen s nějakým pojmem a příslušný komentář.</para>
 
-    <para>Soubory glosáře mohou být buď  ve výchozím kódování systému (a mít koncovku .tab), v kódování UTF-8 (s koncovkou .utf8 nebo .txt) nebo v kódování UTF-16 LE (s koncovou .txt). Formát CSV je také podporován. Tento formát je prakticky to samé jako když jsou položky odděleny tabulátorem: zdrojový výraz, cílový výraz. Pole s komentářem je odděleno čárkou ','. Jednotlivé řetězce mohou být ohraničeny uvozovkami &quot;, což umožňuje použít čárku uvnitř řetězce.</para>
+    <para>Kódování glosářů je určováno automaticky. Kódování se zajisté musí shodovat s oběma obsaženými jazyky, proto je doporučováno použít Unicode.</para>
 
-    <para><literal>&quot;Toto je zdrojový výraz, který obsahuje čárku&quot;,&quot;c'est un terme, qui contient une virgule&quot;</literal></para>
+    <para>Formát CSV je také podporován. Tento formát je prakticky to samé jako když jsou položky odděleny tabulátorem: zdrojový výraz, cílový výraz. Pole s komentářem je odděleno čárkou ','. Jednotlivé řetězce mohou být ohraničeny uvozovkami &quot;, což umožňuje použít čárku uvnitř řetězce.</para>
+
+    <para><literal>„Toto je zdrojový výraz, který obsahuje čárku“, „c'est un terme, qui contient une virgule“</literal></para>
 
     <para>Vedle prostého textového formátu je podporován <indexterm class="singular">
         <primary>Glosáře</primary> <secondary>formát TBX</secondary>

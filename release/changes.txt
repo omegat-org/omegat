@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   5 Enhancements
   3 Bug fixes
-  0 Localisation update
+  6 Localisation updates
 ----------------------------------------------------------------------
 4.1.4 vs 4.1.3 update 2
 
@@ -33,6 +33,15 @@
 
   - Adjacent next match skipped by Replace Next
   https://sourceforge.net/p/omegat/bugs/899/
+
+  Localisation Updates:
+
+  - Brazilian Portugese localisation updated to 4.1.3 update 2 (UI)
+  - Czech localisation updated to 4.1.4 (UI, scripts, readme, documentation)
+  - Dutch localisation updated to 4.1.3 update 2 (UI)
+  - Interlingua localisation updated to 4.1.3 update 2 (UI)
+  - Italian localisation updated to 4.1.3 update 2 (UI)
+  - Russian localisation updated to 4.1.3 update 2 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.3 update 2 (2018-01-16)

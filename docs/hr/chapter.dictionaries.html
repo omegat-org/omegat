@@ -1,0 +1,165 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;18.&nbsp;Rječnici</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.5 – Korisnički priručnik">
+      <link rel="up" href="index.html" title="OmegaT 3.5 – Korisnički priručnik">
+      <link rel="prev" href="chapter.regexp.html" title="Chapter&nbsp;17.&nbsp;Regularni izrazi">
+      <link rel="next" href="chapter.glossaries.html" title="Chapter&nbsp;19.&nbsp;Glosari">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;18.&nbsp;Rječnici</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.regexp.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.dictionaries"></a>Chapter&nbsp;18.&nbsp;<a class="indexterm" name="d0e8688"></a>Rječnici
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.dictionaries.html#d0e8693">1. Preuzimanje i instaliranje rječnika</a></span></dt>
+               <dt><span class="section"><a href="chapter.dictionaries.html#d0e8794">2. Problemi u korištenju rječnika</a></span></dt>
+            </dl>
+         </div>
+         <p></p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8693"></a>1.&nbsp;Preuzimanje i instaliranje rječnika<a class="indexterm" name="d0e8696"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Rječnici u okviru programa <span class="application">OmegaT</span> temelje se na formatima StarDict ili Lingvo DSL. Datoteke potrebne za format StarDict instalirajte na sljedeći način:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Pronađite odgovarajuću jezičnu kombinaciju, primjerice koristeći <a class="ulink" href="https://sourceforge.net/p/omegat/wiki/Reference%20Material/" target="_top">poveznice za rječnike na servisu OmegaT Wiki</a>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Preuzmite željenu datoteku, koja bi trebala biti arhiva <code class="filename">tarball</code> (datotečnoga nastavka <span class="emphasis"><em>tar.bz</em></span> ili <span class="emphasis"><em>tar.bz2</em></span>).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Njen sadržaj raspakirajte odgovarajućim alatom (untar, ili, primjerice, programom<code class="filename"> winrar</code> za sustav Windows) tako da bude spremljen u mapu projekta „dictionary”. Trebali biste imati tri datoteke s nastavcima <span class="emphasis"><em>dz, idx </em></span>i <span class="emphasis"><em>ifo</em></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Imajte na umu da pored rječnika s izvorišnim i odredišnim parovima imate mogućnost pristupa i drugim informacijama putem funkcije
+               rječnika, npr.:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e8749"></a>Webster's Revised Unabridged Dictionary (1913.)
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e8758"></a>Longman Dictionary of Contemporary English
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e8767"></a>The Britannica Concise Encyclopedia
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>itd.</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Neke od rječnika možete koristiti bez ikakvih obveza, tj. njihovo je korištenje besplatno, dok drugi, poput gore navedenih,
+               podliježu licenci GPL. U sljedećem primjeru vidimo prikaz sučelja prilikom korištenja 10. izdanja rječnika Merriam-Webster:
+            </p>
+            <div class="figure"><a name="Dict.Merriam.Webster"></a><p class="title"><b>Figure&nbsp;18.1.&nbsp;<a class="indexterm" name="d0e8781"></a>Korištenje rječnika Merriam-Webster</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/DictMerriamWebster.png" alt="Korištenje rječnika Merriam-Webster"></div>
+               </div>
+            </div><br class="figure-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8794"></a>2.&nbsp;<a class="indexterm" name="d0e8796"></a>Problemi u korištenju rječnika
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Provjerite jesu li rječničke datoteke u odgovarajućoj mapi (ili njenoj podmapi). Provjeru obavite koristeći <span class="guimenu">Projekt</span> → <span class="guimenuitem">Svojstva</span> (<span class="shortcut"><strong><span class="keycap"><strong><a class="indexterm" name="d0e8810"></a>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Mapa mora sadržavati tri datoteke istoga naziva, a s datotečnim nastavcima. Imate li samo jednu datoteku, obratite pozornost
+                        na njen nastavak. Ako je u pitanju <span class="emphasis"><em>tar.bz</em></span>, to znači da datoteku niste raspakirali.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.regexp.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;17.&nbsp;Regularni izrazi&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;19.&nbsp;Glosari</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

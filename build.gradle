@@ -106,7 +106,7 @@ dependencies {
 
         // Dictionary
         compile 'org.dict.zip:dictzip-lib:0.8.2'
-        compile 'com.github.takawitter:trie4j:0.9.7'
+        compile 'com.github.takawitter:trie4j:0.9.8'
 
         // Encoding dectection
         compile 'com.github.albfernandez:juniversalchardet:2.0.2'

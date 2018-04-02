@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;20.&nbsp;Použití TaaS v OmegaT</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Uživatelská příručka">
       <link rel="prev" href="chapter.glossaries.html" title="Chapter&nbsp;19.&nbsp;Glosáře">
       <link rel="next" href="chapter.machine.translate.html" title="Chapter&nbsp;21.&nbsp;Strojový překlad">
    </head>
@@ -29,14 +29,14 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.TaaS"></a>Chapter&nbsp;20.&nbsp;Použití TaaS v OmegaT<a class="indexterm" name="d0e8658"></a></h1>
+                  <h1 class="title"><a name="chapter.TaaS"></a>Chapter&nbsp;20.&nbsp;Použití TaaS v OmegaT<a class="indexterm" name="d0e9101"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options">1. Všeobecné informace</a></span></dt>
-               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.collections">2. Veřejné a soukromé kolekce</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.generalities">1. Všeobecné informace</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.key">2. Vytvořit klíč</a></span></dt>
                <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.access">3. Přístup ke službě TaaS</a></span></dt>
             </dl>
          </div>
@@ -44,7 +44,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="section.TaaS.options"></a>1.&nbsp;Všeobecné informace
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.generalities"></a>1.&nbsp;Všeobecné informace
                      </h2>
                   </div>
                </div>
@@ -58,19 +58,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.collections"></a>2.&nbsp;Veřejné a soukromé kolekce
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.key"></a>2.&nbsp;Vytvořit klíč
                      </h2>
                   </div>
                </div>
             </div>
-            <p>OmegaT umožňuje přístup k veřejné části TaaS bez jakékoliv registrace.</p>
-            <p>Pro přístup k soukromé části si musí uživatel vytvořit klíč na adrese https://demo.taas-project.eu/account/keys/create?system=omegaT.</p>
-            <p>Klíč se pak musí vložit do OmegaT prostřednictvím -Dtaas.user.key=xxxxx. Konfigurační spouštěče Omega T (OmegaT.l4J.ini, omegat.kaptn
-               a OmegaT.sh) obsahují vzorový záznam.
-            </p>
-            <p>Pokud se pokusíte přístoupit ke službě bez soukromého klíče, zobrazí se v protokolu následující hláška: ‚TaaS API key not
-               found‘ / ‚Klíč TaaS nenalezen‘. Přejděte na adresu https://demo.taas-project.eu/account/keys/create?system=omegaT a vytvořte
-               si vlastní klíč, ten pak zadejte do OmegaT prostřednictvím -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)
+            <p>Pro přístup ke službě TaaS musí uživatel vytvořit klíč za použití odkazu https://term.tilde.com/account/keys/create?system=omegaT.</p>
+            <p>Klíč se pak musí vložit do OmegaT prostřednictvím -Dtaas.user.key=xxxxx. Konfigurační spouštěče OmegaT (OmegaT.l4J.ini, omegat.kaptn
+               a Configuration.properties) obsahují záznam šablony.
             </p>
          </div>
          <div class="section">

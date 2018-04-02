@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.installing.and.running">
+  <title>Instaliranje i pokretanje programa <application>OmegaT</application></title>
+
+  <section>
+    <title id="Windows.users">Korisnici sustava Windows<indexterm class="singular">
+        <primary>Instaliranje programa OmegaT</primary> <secondary>Windows</secondary>
+      </indexterm></title>
+
+    <section>
+      <title id="which.package.to.download.windows">Preuzimanje paketa</title>
+
+      <para>Imate li instaliran programski jezik Java koji je kompatibilan s Oracleovim paketom Java 1.6 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Da: </emphasis>preuzmite <emphasis>OmegaT_3.n.n_Windows_without_JRE.exe</emphasis>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Ne/ne znam:</emphasis> preuzmite<emphasis> OmegaT_3.n.n_Windows.exe.</emphasis></para>
+
+          <para>Ovaj paket sadržava Oracleov Java Runtime Environment. Taj JRE neće ometati funkcije drugih instaliranih inačica programskoga jezika Java koje možda već imate na računalu.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.Windows">
+      <title><application>Instaliranje programa OmegaT</application></title>
+
+      <para>Za instaliranje programa <application>OmegaT</application> dvaput pritisnite lijevom tipkom miša na preuzetu instalacijsku datoteku.</para>
+
+      <para>Na početku instalacije možete odabrati jezik za korištenje tijekom samoga instaliranja. U sljedećemu prozoru možete odrediti da se odabrani jezik koristi i u samome programu OmegaT. Ako označite odgovarajući potvrdni kvadratić, datoteka OmegaT.l4J.ini bit će preinačena radi korištenja odabranoga jezika (o čemu više možete doznati u narednom odjeljku). Nadalje, nakon što prihvatite licencni ugovor, slijedi upit instalacijskoga programa želite li izraditi mapu na izborniku <emphasis>Start</emphasis> i prečac na radnoj površini i traci za brzo pokretanje. Navedene prečace možete izraditi i naknadno jednostavnim odvlačenjem simbola <emphasis><application>OmegaT</application>.exe</emphasis> na radnu površinu ili na traku za brzo pokretanje. Posljednji okvir instalacijskoga programa nudi mogućnost uvida u datoteke procitajme i promjene za inačicu koju instalirate.</para>
+    </section>
+
+    <section id="running.OmegaT.Windows">
+      <title>Pokretanje programa <application>OmegaT<indexterm class="singular">
+          <primary>Pokretanje programa OmegaT</primary> <secondary>Windows</secondary>
+        </indexterm></application></title>
+
+      <para>Nakon instaliranja programa <application>OmegaT</application> možete pritisnuti <emphasis><application>OmegaT</application>.jar</emphasis> za njegovo izravno pokretanje ili ga pak pokrenuti putem naredbenoga retka.</para>
+
+      <para>Općenito uzevši, program OmegaT najjednostavnije je pokrenuti putem programske datoteke <emphasis> <application>OmegaT</application>.exe</emphasis>. <indexterm class="singular">
+          <primary>Pokretanje programa OmegaT</primary> <secondary>Windows</secondary> <tertiary>Datoteka INI</tertiary>
+        </indexterm>U tom se slučaju postavke pokretanja programa učitavaju iz datoteke <emphasis><application>OmegaT</application>.l4J.ini </emphasis>, koja se nalazi u istoj mapi u kojoj je i datoteka exe file, a u njoj možete i mijenjati odgovarajuće podatke u vezi s postavkama. U sljedećem primjeru datoteke INI rezervirali smo 1 GB memorije, postavili francuski kao korisnički jezik, a za državu smo izabrali Kanadu:</para>
+
+      <literallayout><code># OmegaT.exe runtime configuration
+# To use a parameter, remove the '#' before the '-'
+# Memory
+-Xmx1024M
+# Language
+-Duser.language=FR
+# Country
+-Duser.country=CA </code></literallayout>
+
+      <para>Savjet: ako OmegaT usporeno funkcionira u radu s udaljenom radnom površinom u sustavu Windows, pokušajte to riješiti upisivanjem sljedeće postavke:</para>
+
+      <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
+    </section>
+
+    <section>
+      <title>Nadogradnja programa OmegaT<indexterm class="singular">
+          <primary>Nadogradnja programa OmegaT</primary> <secondary>Windows</secondary>
+        </indexterm></title>
+
+      <para><emphasis>Sljedeće informacije vrijede samo za „tradicionalne” inačice programa OmegaT u sustavima Windows. Ne odnosi se na inačice Web Start, koje se nadograđuju automatski, kao ni na međuplatformske inačice instalirane u sustavima Windows.</emphasis></para>
+
+      <para>Ako na računalu već imate instaliranu neku inačicu programa OmegaT, a želite je nadograditi novijom, imate dvije mogućnosti:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Instaliranje preko postojeće instalacije. </emphasis>U ovome slučaju prilikom instaliranja nove inačice jednostavno odaberite istu instalacijsku mapu u kojoj se već nalazi postojeći program. „Stara” inačica programa OmegaT bit će zamijenjena, ali sve njene postavke se zadržavaju. To obuhvaća postavke namještene putem programa OmegaT, sve izmjene koje ste unijeli u datoteku<filename> OmegaT.l4J.ini</filename>, kao i skriptu za pokretanje (datoteka .bat file), ako je koristite.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Ova metoda omogućava i preuzimanje inačice „Windows without JRE”, pa će nova instalacija koristiti vaš postojeći JRE.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Instaliranje u novu mapu. </emphasis>Ovaj vam način omogućava zadržavanje obiju inačica, što je poželjno za one koji se najprije žele priviknuti na novu inačicu. Ova metoda također koristi postavke koje ste namjestili putem programa OmegaT. Međutim, u ovome slučaju:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>ako ste mijenjali datoteku<filename> OmegaT.l4J.ini </filename>i/ili koristite datoteku .bat, morate ih kopirati u mapu nove inačice,</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>ako je postojeća instalacija programa OmegaT inačica „Windows with JRE”, nova inačica također mora biti „Windows with JRE”.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+
+  <section id="Linux.Intel.users">
+    <title>Korisnici sustava Linux (Intel)<indexterm class="singular">
+        <primary>Instaliranje programa OmegaT</primary> <secondary>Linux</secondary>
+      </indexterm></title>
+
+    <section id="which.package.to.download.Linux">
+      <title>Preuzimanje odgovarajućega paketa</title>
+
+      <para>Imate li instaliran programski jezik Java koji je kompatibilan s Oracleovim paketom Java 1.6 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Da: </emphasis>preuzmite <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Ne/ne znam:</emphasis> preuzmite <emphasis>OmegaT_3.n.n_Linux.tar.bz2.</emphasis></para>
+
+          <para>Ovaj paket sadržava Oracleov Java Runtime Environment. Taj JRE neće ometati funkcije drugih instaliranih inačica programskoga jezika Java koje možda već imate na računalu.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.Linux">
+      <title><application>Instaliranje programa OmegaT</application></title>
+
+      <para>Raspakirajte preuzetu datoteku. Time se izrađuje mapa omegat/ u radnoj mapi, i to sa svim datotekama potrebnim za rad programa <application>OmegaT</application>. Za raspakiravanje datoteke <emphasis>.tar.gz</emphasis>:</para>
+
+      <para><emphasis>$ tar xf downloaded_file.tar.gz</emphasis></para>
+    </section>
+
+    <section id="adding.OmegaT.to.your.menus.or.panels">
+      <title>Dodavanje programa <application>OmegaT</application> izbornicima (KDE) ili pločama (Gnome)</title>
+
+      <section id="KDE.users">
+        <title>Korisnici radnoga okruženja KDE 4<indexterm class="singular">
+            <primary>Prilagođavanje programa OmegaT</primary> <secondary>Linux</secondary>
+          </indexterm></title>
+
+        <para>Program <application>OmegaT</application> možete dodati izbornicima kako slijedi:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Pritisnite <emphasis role="bold"> <keysym>Alt+F2</keysym> </emphasis> da biste otvorili KRunner. Za pokretanje naredbe upišite <emphasis>kmenuedit+enter</emphasis>. Prikazat će se KMenuEditor. U programu KMenuEditor odaberite <emphasis>Datoteka -&gt; Nova stavka.</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para>Potom, a nakon odabira odgovarajućega izbornika, dodajte podizbornik/stavku putem <emphasis>Datoteka - Novi podizbornik</emphasis> i <emphasis>Datoteka - Nova stavka</emphasis>. Kao naziv nove stavke upišite <application>OmegaT</application>.</para>
+          </listitem>
+
+          <listitem>
+            <para>U polju „Naredba” koristite navigacijski gumb da biste pronašli skriptu za pokretanje programa <application>OmegaT</application>, tj. datoteku pod nazivom <application>OmegaT</application> u neraspakiranoj mapi, a zatim je odaberite.</para>
+          </listitem>
+
+          <listitem>
+            <para>Pritisnite simbol (desno od polja Naziv/Opis/Komentar)</para>
+          </listitem>
+
+          <listitem>
+            <para>Ostali simboli - Pregled, a zatim prijeđite na podmapu /images u programskoj mapi <application>OmegaT</application>. Odaberite simbol <application>OmegaT</application>.png.</para>
+          </listitem>
+
+          <listitem>
+            <para>Na koncu spremite promjene putem <emphasis>Datoteka - Spremi.</emphasis></para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="GNOME.users">
+        <title>Korisnici radnoga okruženja GNOME</title>
+
+        <para>Program <application>OmegaT</application> možete dodati izbornicima kako slijedi:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Desnom tipkom miša pritisnite na ploču pa odaberite <emphasis>Dodaj novi pokretač.</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para>Upišite „<application>OmegaT</application>” u polje „Naziv”, a u polju „Naredba” koristite navigacijski gumb da biste pronašli skriptu za pokretanje programa <application>OmegaT</application>, tj. datoteku pod nazivom <application>OmegaT</application> u neraspakiranoj mapi. Odaberite je i potvrdite pritiskom na U redu.</para>
+          </listitem>
+
+          <listitem>
+            <para>Pritisnite na simbol, a zatim na <emphasis>Pregled...</emphasis> pa prijeđite na podmapu /images u programskoj mapi <application>OmegaT</application>. Odaberite simbol <emphasis><application>OmegaT</application>.png</emphasis>. GNOME možda neće prikazati datoteke simbola u raspoloživim formatima te će se ispočetka činiti da očekuje datoteku SVG, ali ako je mapa odabrana, datoteke bi trebale biti prikazane, čime je omogućen odabir <application>OmegaT</application>.png.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>
+
+    <section id="running.OmegaT.Linux">
+      <title>Pokretanje programa <application>OmegaT<indexterm class="singular">
+          <primary>Pokretanje programa OmegaT</primary> <secondary>Linux</secondary>
+        </indexterm></application></title>
+
+      <para>Program OmegaT možete pokrenuti naredbenim retkom s pomoću skripte koja sadržava postavke pokretanja, ili možete pritisnuti na <emphasis><application>OmegaT</application>.jar</emphasis> za izravno pokretanje. Metode se razlikuju u ovisnosti o distribucijskome paketu. Vodite računa da postavke za <emphasis>PATH </emphasis>budu ispravne i da su datoteke <emphasis>.jar</emphasis> pravilno pridružene za pokretanje programskoga jezika Java. Više informacija naći ćete niže u tekstu na temu pokretanja programa naredbenim retkom.</para>
+    </section>
+  </section>
+
+  <section id="MAC.OSX.users">
+    <title>Korisnici sustava Mac OS X<indexterm class="singular">
+        <primary>Instaliranje programa OmegaT</primary> <secondary>OS X</secondary>
+      </indexterm></title>
+
+    <section id="which.package.to.download.OSX">
+      <title>Preuzimanje paketa</title>
+
+      <para><application>OmegaT</application> sadržava Java JRE 1.8</para>
+
+      <para>Preuzmite <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
+    </section>
+
+    <section id="OmegaT.installation.OSX">
+      <title><application>Instaliranje programa OmegaT</application></title>
+
+      <para>Za raspakiravanje dvaput pritisnite <emphasis>OmegaT_3.n.n_Mac.zip</emphasis>. Time nastaje mapa pod nazivom <emphasis> <application>OmegaT</application> </emphasis>. Ta mapa sadržava dvije datoteke: index.html i <emphasis><application>OmegaT</application>.app.</emphasis> Kopirajte mapu u odgovarajuću mapu, npr. Aplikacije. Kad to obavite, izbrišite datoteku <emphasis>OmegaT_3.n.n_Mac.zip</emphasis>, jer više nije potrebna.</para>
+    </section>
+
+    <section id="adding.OmegaT.to.the.dock">
+      <title>Dodavanje programa <application>OmegaT</application> u Dock</title>
+
+      <para>Odvucite i ispustite datoteku <emphasis><application>OmegaT</application>.app</emphasis> na Dock.</para>
+    </section>
+
+    <section id="running.OmegaT.OSX">
+      <title>Pokretanje programa <application>OmegaT<indexterm class="singular">
+          <primary>Pokretanje programa OmegaT</primary> <secondary>OS X</secondary>
+        </indexterm></application></title>
+
+      <para>Dvaput pritisnite datoteku<emphasis> <application>OmegaT</application>.app</emphasis> ili njenu lokaciju u Docku.</para>
+
+      <para>Funkcije programa OmegaT's možete mijenjati putem stavke <emphasis>Svojstva</emphasis> ili datoteke <emphasis>Configuration.properties</emphasis> iz paketa.</para>
+
+      <para>Datoteci <application><emphasis>Configuration.properties</emphasis></application> možete pristupiti pritiskom desnom tipkom miša na <emphasis><application>OmegaT</application>.app</emphasis>, nakon čega odabirete „Prikaži sadržaj paketa”, a zatim otvarate datoteku u Sadržaj/Resursi pritiskom desnom tipkom miša na nju i odabirom željenoga programa za obradu teksta. Datoteci <application><emphasis>Configuration.properties</emphasis> možete pristupiti i izravno naredbenim retkom (putem naredbe „cd”) ili nekim programom za uređivanje naredbenih redaka, kao što su emacs ili vi</application>.<indexterm class="singular">
+          <primary>Prilagođavanje programa OmegaT</primary> <secondary>OS X</secondary> <tertiary>Parametri pokretanja</tertiary>
+        </indexterm></para>
+
+      <para>Postavke mijenjate unošenjem izmjena u datoteku <emphasis>Configuration.properties</emphasis>. Kod unaprijed definiranih postavki uklonite znak # prije parametra kako biste ga uključili. Primjerice, <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (bez znaka #) služi za pokretanje programa <application>OmegaT</application> s korisničkim sučeljem na japanskome jeziku.</para>
+
+      <para>Ako želite promijeniti veličinu raspoložive memorije, unesite izmjene u &lt;string&gt;-Xmx1024M&lt;/string&gt; u datoteci <emphasis>OmegaT.app/Contents/Info.plist</emphasis>. Primjerice, &lt;string&gt;-Xmx2048M&lt;/string&gt; znači da je za rad programa OmegaT rezervirano dva gigabajta memorije.</para>
+
+      <para>Za pokretanje više pojavnica <emphasis><application>OmegaT</application>.app</emphasis>, dvaput pritisnite na datoteku <emphasis>OmegaT.sh</emphasis> iz <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+
+      <para>Za pokretanje programa <application>OmegaT</application> naredbenim retkom koristite datoteku <emphasis><application>OmegaT</application>.jar</emphasis> iz <emphasis><application>OmegaT</application>.app/Contents/MacOS/Java/</emphasis>. Više informacija naći ćete niže u tekstu na temu pokretanja programa naredbenim retkom.</para>
+    </section>
+
+    <section id="Mac.OSX.goodies">
+      <title>Dodatni sadržaji za Mac OS X</title>
+
+      <para>Datoteka <emphasis><application>OmegaT</application>.app</emphasis> je dostupna putem Usluga za Mac OS X. Stoga možete odabrati bilo koju riječ u okviru programa <application>OmegaT</application> i koristiti Usluge za njenu provjeru, primjerice na servisima Spotlight ili Google. Također možete koristiti AppleScript ili Automator za izradu Usluga ili skripata radi automatiziranja čestih radnji.</para>
+    </section>
+  </section>
+
+  <section id="other.systems">
+    <title>Ostali sustavi<indexterm class="singular">
+        <primary>Instaliranje programa OmegaT</primary> <secondary>Ostali sustavi</secondary>
+      </indexterm></title>
+
+    <para>Sljedeće informacije vrijede za sustave kao što su Solaris SPARC/x86/x64, Linux x64/PowerPC i Windows x64.</para>
+
+    <section>
+      <title id="which.package.to.download.other">Preuzimanje odgovarajućega paketa</title>
+
+      <para><application>OmegaT</application> je raspoloživa u paketu s Oracle Java JRE-om za platforme Linux (Intel x86) i Windows. Korisnici drugih platformi (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64 i Windows x64 etc) moraju na svojim sustavima imati instaliran kompatibilni Java JRE da bi mogli koristiti program <application>OmegaT</application>.</para>
+
+      <para>Imate li instaliran programski jezik Java koji je kompatibilan s Oracleovim paketom Java 1.6 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Da: </emphasis>preuzmite <emphasis>OmegaT_3.n.n_Windows_without_JRE.</emphasis>zip. Ovaj se paket može koristiti na bilo kojoj platformi s instaliranim JRE-om kompatibilnim s paketom Java 1.6 JRE.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Ne znam:</emphasis> otvorite terminal i upišite „java -version”. Ako se prikaže poruka „command not found” ili slično upozorenje, vjerojatno nemate instaliran programski jezik Java.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Ne:</emphasis> instalirajte Java JRE na svoj sustav (v. tekst dolje) pa preuzmite <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
+
+          <para>Oracle nudi JRE-e za Solaris SPARC/x86 (Java 1.6) i za Linux x64, Solaris x64 i Windows x64 (Java 1.6) na stranici <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>.</para>
+
+          <para>IBM nudi JRE-e za Linux PowerPC na stranici <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html">http://www.ibm.com/developerworks/java/jdk/linux/download.htm</ulink>.</para>
+
+          <para>Pridržavajte se uputa za instaliranje odgovarajućega paketa.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.other">
+      <title><application>Instaliranje programa OmegaT</application><indexterm class="singular">
+          <primary>Instaliranje programa OmegaT</primary> <secondary>Ostali sustavi</secondary>
+        </indexterm></title>
+
+      <para>Program <application>OmegaT</application> možete instalirati jednostavnim raspakiravanjem datoteke <emphasis role="bold">OmegaT_3.n.n_Without_JRE.zip</emphasis>. Time se izrađuje mapa <emphasis>./OmegaT_3.n.n_Without_JRE/</emphasis> u radnoj mapi, i to sa svim datotekama potrebnim za pokretanje programa <application>OmegaT</application>.</para>
+    </section>
+
+    <section id="installing.convenient.shortcuts">
+      <title>Postavljanje odgovarajućih prečaca</title>
+
+      <para>Prečace programa <application>OmegaT</application> možete postaviti na odgovarajuća mjesta prema svojim potrebama u skladu s uputama za sustav koji koristite.</para>
+    </section>
+
+    <section id="running.OmegaT.other">
+      <title>Pokretanje programa <application>OmegaT<indexterm class="singular">
+          <primary>Pokretanje programa OmegaT</primary> <secondary>Ostali sustavi</secondary>
+        </indexterm></application></title>
+
+      <para>Nakon instaliranja, program <application>OmegaT</application> možete pokretati izravno naredbenim retkom, a možete i izraditi skriptu koja sadržava parametre pokretanja za naredbeni redak, ili ga možete pokretati pritiskom na datoteku <emphasis><application>OmegaT</application>.jar</emphasis>. Metode se razlikuju u ovisnosti o distribucijskome paketu. Vodite računa da postavke za <emphasis>PATH</emphasis> budu ispravne i da su datoteke <emphasis>.jar </emphasis> pravilno pridružene za pokretanje programskoga jezika Java. Više informacija naći ćete niže u tekstu na temu pokretanja programa naredbenim retkom.</para>
+    </section>
+  </section>
+
+  <section id="drag.and.drop">
+    <title>Odvlačenje i ispuštanje<indexterm class="singular">
+        <primary>Pokretanje programa OmegaT</primary> <secondary>Odvlačenje i ispuštanje</secondary>
+      </indexterm></title>
+
+    <para>Većina sustava omogućava otvaranje projekta odvlačenjem i ispuštanjem datoteke <filename>omegat.project</filename> na simbol programa OmegaT na radnoj površini. Postoji i mogućnost otvaranja projekta u sklopu programa OmegaT dvostrukim pritiskom mišem na datoteku <filename>omegat.project</filename>.</para>
+  </section>
+
+  <section id="using.Java.Web.Start">
+    <title>Korištenje tehnologije Java Web Start<indexterm class="singular">
+        <primary>Pokretanje programa OmegaT</primary> <secondary>Korištenje tehnologije Java Web Start</secondary>
+      </indexterm></title>
+
+    <para>Tehnologija Java Web Start (dio paketa Java 1.6 i novijih) može poslužiti za korištenje samostalnih programskih aplikacija Java putem mreže samo jednim pritiskom mišem. Java Web Start osigurava korištenje najnovije inačice, kao i ispravne inačice okruženja Java Runtime Environment (JRE). Za prvo pokretanje programa OmegaT tehnologijom Java Web Start, u preglednik upišite sljedeću URL adresu:</para>
+
+    <para><emphasis>https://omegat.sourceforge.io/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+
+    <para>Preuzmite datoteku<emphasis> <application>OmegaT</application>.jnlp</emphasis>, a zatim pritisnite mišem na nju. Moguće je da će se za vrijeme instalacije prikazati nekoliko sigurnosnih upozorenja, ovisno o operacijskome sustavu. Dozvole koje dajete ovoj inačici, a koje mogu biti prikazane kao neograničeni pristup računalu, istovjetne su dozvolama koje dajete lokalnoj inačici, tj. dopuštaju pristup disku računala. Pritisnete li opet na datoteku <emphasis><application>OmegaT</application>.jnlp</emphasis>, aktivirat ćete provjeru dostupnosti nadogradnji, koje zatim možete instalirati, ako ih ima, a na koncu pokrenuti program <application>OmegaT</application>. Naravno, nakon početne instalacije, datoteku <emphasis><application>OmegaT</application>.jnlp</emphasis> možete koristiti i kada niste na mreži.</para>
+
+    <para><emphasis role="bold">Privatnost</emphasis>: <application>OmegaT</application> Java Web Start ne sprema nikakve vaše informacije, osim o računalu na kojemu ga koristite. Program radi samo na vašemu računalu. Vaši dokumenti i prijevodne memorije ostaju na vašemu računalu, a projekti u sklopu programa <application>OmegaT</application> nemaju pristup vašim datotekama ili informacijama.</para>
+
+    <para>Imajte na umu da u slučaju potrebe za korištenjem bilo koje naredbene argumente za pokretanje (v. tekst gore) morate koristiti uobičajenu instalaciju.</para>
+  </section>
+
+  <section>
+    <title>Pokretanje programa OmegaT naredbenim retkom<indexterm class="singular">
+        <primary>Pokretanje programa OmegaT</primary> <secondary>Pokretanje naredbenim retkom</secondary>
+      </indexterm></title>
+
+    <para>Obično nema potrebe za pokretanjem programa <application>OmegaT</application> naredbenim retkom. Međutim, ta mogućnost daje korisnicima prigodu da nadziru i mijenjaju funkcije programa. Program <application>OmegaT</application> je moguće pokrenuti naredbenim retkom na dva načina.</para>
+
+    <section id="method1.opening.commandline.window">
+      <title>Otvaranje prozora naredbenoga retka</title>
+
+      <para>Prozor naredbenoga retka naziva se i „prozorom terminala”. U sustavu Windows poznat je kao „prozor MS-DOS-a”, a dostupan je putem startnoga izbornika programa, gdje je naveden kao „MS-DOS”. Ekvivalent u sustavu Mac OS X je program Terminal, koji možete otvoriti putem izbornika Aplikacije → Uslužni programi.</para>
+
+      <para>Za pokretanje programa <application>OmegaT</application> obično morate upisati dvije naredbe. Prva od njih je:</para>
+
+      <para><emphasis> <literal>cd {mapa}</literal> </emphasis></para>
+
+      <para>pri čemu je<emphasis> {mapa}</emphasis> naziv mape (s cjelokupnom putanjom do nje) u kojoj se nalazi program <application>OmegaT</application>, odnosno datoteka <emphasis><application>OmegaT</application>.jar</emphasis>. U praksi bi navedena naredba glasila otprilike ovako:</para>
+
+      <para>U sustavu Windows</para>
+
+      <para><emphasis> <literal>cd C:\Program
+      Files\<application>OmegaT</application></literal> </emphasis></para>
+
+      <para>U sustavu Mac OS X</para>
+
+      <para><literal> <literal>cd &lt;lokacija gdje se nalazi<application>OmegaT</application>.app&gt;/<application>OmegaT</application>.app/Contents/Resources/Java/</literal>
+      </literal></para>
+
+      <para>U sustavu Linux</para>
+
+      <para><literal>cd /usr/local/omegat</literal></para>
+
+      <para>Tom se naredbom poziva mapa u kojoj se nalazi izvršna datoteka programa <application>OmegaT</application>. Drugom se naredbom zapravo pokreće program <application>OmegaT</application>. U svom najjednostavnijem obliku ta naredba glasi ovako:</para>
+
+      <para><literal>java -jar
+      <application>OmegaT</application>.jar</literal></para>
+
+      <para>Pazite na veličinu slova, jer, s izuzetkom sustava Windows, program neće biti moguće pokrenuti u drugim operacijskim sustavima ako upišete <emphasis>omegat</emphasis> umjesto <emphasis>OmegaT </emphasis>!</para>
+
+      <para>Ova je metoda posebno korisna jer je pogodna za pronalaženje uzroka problema: u slučaju pogreške prilikom korištenja programa u prozoru terminala se prikazuje poruka o pogrešci, i to nerijetko s korisnim informacijama o uzrocima.</para>
+
+      <para>Navedena metoda pak nije sasvim praktična za rutinsko pokretanje programa. Iz toga se razloga dvije gore opisane naredbe nalaze u datoteci („skripti”, koju također nazivamo „datoteka .bat” u sustavima Windows).</para>
+
+      <para>Izvršavanjem te datoteke automatski se provode u nju upisane naredbe. Stoga, kad trebate promijeniti naredbu za pokretanje, dovoljno je unijeti izmjene u datoteku.</para>
+    </section>
+
+    <section id="launch.command.arguments">
+      <title>Naredbeni argumenti za pokretanje<indexterm class="singular">
+          <primary>Pokretanje programa OmegaT</primary> <secondary>Argumenti skripte za pokretanje</secondary>
+        </indexterm></title>
+
+      <para>Osnovnu smo naredbu već spomenuli u gornjemu tekstu. Izmjene te naredbe obuhvaćaju „argumente” koje joj valja dodati. Argumenti se dodaju iza početnoga „<emphasis>java</emphasis>”, a ispred „<emphasis>-jar <application>OmegaT</application>.jar</emphasis>”. Ne zaboravite da u sustavu Windows možete mijenjati <filename>OmegaT.l4J.ini</filename> prema svojim potrebama. Kod drugih platformi isto možete napraviti mijenjanjem datoteke <filename>Configuration.properties</filename> u sustavu Mac, ili datoteke za pokretanje programa <filename>OmegaT</filename> u sustavu Linux.</para>
+
+      <para>Slijedi popis mogućih argumenata. Napredniji korisnici mogu dobiti uvid u dodatne informacije o argumentima upisivanjem izraza <emphasis>man java</emphasis> u prozoru terminala.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Jezik korisničkoga sučelja</emphasis></para>
+
+          <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
+              <primary>Pokretanje programa OmegaT</primary> <secondary>Argumenti skripte za pokretanje</secondary> <tertiary>Jezik korisničkoga sučelja</tertiary>
+            </indexterm> U uobičajenim slučajevima, tj. kada se <application>OmegaT</application> pokreće bez ikakvih argumenat, program najprije traži jezik operacijskoga sustava korisnika. Ako je korisničko sučelje raspoloživo na tom jeziku, <application>OmegaT</application> ga koristi. Stoga, ako operacijski sustav koristi ruski jezik, a <application>OmegaT</application> je lokalizirana na ruski, program <application>OmegaT</application> se prikazuje s korisničkim sučeljem, izbornicima i drugim stavkama na ruskome. Ako jezik operacijskoga sustava korisnika nije na raspolaganju, <application>OmegaT</application> koristi engleski jezik prema zadanim vrijednostima. To je standardni način funkcioniranja.</para>
+
+          <para>Argument <emphasis>&quot;-Duser.language=XX&quot;</emphasis> određuje da <application>OmegaT</application> koristi naznačeni jezik, a ne onaj operacijskoga sustava korisnika. „XX” u naredbi služi za upisivanje dvoslovnoga koda željenoga jezika. Za pokretanje programa <application>OmegaT</application> sa sučeljem na francuskom, i to, primjerice, na operacijskome sustavu koji koristi ruski jezik, naredba bi glasila ovako:</para>
+
+          <para><literal>java -Duser.language=fr -jar
+          <application>OmegaT</application>.jar</literal></para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Država korisnika</emphasis></para>
+
+          <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm class="singular">
+              <primary>Pokretanje programa OmegaT</primary> <secondary>Argumenti skripte za pokretanje</secondary> <tertiary>Država korisnika</tertiary>
+            </indexterm> Pored jezika, možete naznačiti i državu, primjerice CN ili TW u slučaju kineskoga jezika. Ako želite prikaz vodiča za brzi početak rada na željenome jeziku, trebate naznačiti i jezik i državu. To je obavezno čak i kada postoji samo jedna kombinacija, kao što je to pt_BR za brazilski portugalski.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Rezerviranje memorije</emphasis></para>
+
+          <para><emphasis role="bold">-XmxZZM </emphasis><indexterm class="singular">
+              <primary>Pokretanje programa OmegaT</primary> <secondary>Argumenti skripte za pokretanje</secondary> <tertiary>Rezerviranje memorije</tertiary>
+            </indexterm>Ovom se naredbom rezervira više memorije za program <application>OmegaT</application>. Prema zadanim vrijednostima rezervirano je 512 MB, a smanjivanje te veličine ne donosi nikakve prednosti. „ZZ” predstavlja veličinu rezervirane memorije u megabajtima. Naredba za pokretanje programa <application>OmegaT</application> s rezerviranih 1024 MB (1 gigabajt) memorije stoga glasi ovako:</para>
+
+          <para><literal>java -Xmx1024M -jar
+          <application>OmegaT</application>.jar</literal></para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">IP adresa proxy glavnoga računala</emphasis></para>
+
+          <para><emphasis role="bold"><emphasis role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm class="singular">
+              <primary>Pokretanje programa OmegaT</primary> <secondary>Argumenti skripte za pokretanje</secondary> <tertiary>IP adresa proxy glavnoga računala</tertiary>
+            </indexterm></emphasis> IP adresa vašega proxy poslužitelja, ako koristite proxy u svome sustavu.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Broj priključka proxy glavnoga računala</emphasis></para>
+
+          <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis> <indexterm class="singular">
+              <primary>Pokretanje programa OmegaT</primary> <secondary>Argumenti skripte za pokretanje</secondary> <tertiary>Broj priključka proxy glavnoga računala</tertiary>
+            </indexterm> Broj priključka koji vaš sustav koristi za pristup proxy poslužitelju.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Google prevoditelj V2</emphasis></para>
+
+          <para><emphasis role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </emphasis><emphasis role="bold"><indexterm class="singular">
+              <primary>Pokretanje programa OmegaT</primary> <secondary>Argumenti skripte za pokretanje</secondary> <tertiary>Google prevoditelj V2</tertiary>
+            </indexterm></emphasis> Ako ste prijavljeni za korištenje servisa Google prevoditelj, ovdje upišite svoj privatni ključ API-ja za Google. Imajte na umu da se ključ sastoji od 38 znakova.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Microsoft prevoditelj</emphasis><indexterm class="singular">
+              <primary>Pokretanje programa OmegaT</primary> <secondary>Argumenti skripte za pokretanje servisa</secondary> <tertiary>Microsoft prevoditelj</tertiary>
+            </indexterm></para>
+
+          <para>Za ovu funkciju morate imati besplatni Microsoftov račun. Trebat će vam za prijavu na servis <ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink> i korištenje usluga prevođenja. Dobro je znati da mjesečno možete besplatno koristiti do dva milijuna znakova. Dvije potrebne stavke dostupne su na vašoj <ulink url="https://datamarket.azure.com/account">stranici računa</ulink> kao primarni ključ računa (Primary account key) i oznaka klijenta (Customer-ID):</para>
+
+          <para><emphasis role="bold">-Dmicrosoft.api.client_id=</emphasis><emphasis role="bold">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</emphasis></para>
+
+          <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm class="singular">
+              <primary>Pokretanje programa OmegaT</primary> <secondary>Argumenti skripte za pokretanje</secondary> <tertiary>Yandex Translate</tertiary>
+            </indexterm></para>
+
+          <para>Za ovu funkciju morate imati besplatni Yandexov račun. Trebat će vam da biste dobili i koristili ključ API-ja za Yandex Translate. Ključeve API-ja možete zatražiti putem <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">obrasca molbe za izdavanje ključeva</ulink>, a prikazuju se na stranici <ulink url="http://api.yandex.com/key/keyslist.xml">osobnih ključeva</ulink>.</para>
+
+          <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Argumente je moguće kombinirati: za pokretanje programa <application>OmegaT</application> sa svim gore navedenim primjerima, naredba bi glasila ovako:</para>
+
+      <para><literal>java -Dswing.aatext=true -Duser.language=pt
+      -Duser.country=BR -Xmx1024M <application>-Dhttp.proxyHost=192.168.1.1
+      -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
+      -OmegaT</application>.jar</literal></para>
+    </section>
+
+    <section id="omegat.command.arguments">
+      <title>OmegaT u načinu rada naredbenim retkom<indexterm class="singular">
+          <primary>Pokretanje programa OmegaT</primary> <secondary>Način rada naredbenim retkom</secondary>
+        </indexterm></title>
+
+      <para>Namjena konzolnoga načina rada je korištenje programa OmegaT kao prevoditeljskoga alata u okruženju skriptiranja. Pokretanjem u konzolnome načinu rada ne učitava se grafičko korisničko sučelje (što omogućava rad na bilo kojoj konzoli), a projekti se automatski obrađuju prema nalogu.</para>
+
+      <section id="console.mode.prerequisites">
+        <title>Preduvjeti</title>
+
+        <para>Za pokretanje programa <application>OmegaT</application> u načinu rada naredbenim retkom morate imati ispravan projekt u sklopu programa <application>OmegaT</application>. Lokacija nije bitna, budući da je ionako morate unijeti u naredbeni redak prilikom pokretanja.</para>
+
+        <para>Ako trebate drugačije postavke, morate imati konfiguracijske datoteke. To možete ostvariti na dva načina:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Pokrenite program <application>OmegaT</application> na uobičajeni način (s grafičkim korisničkim sučeljem) pa namjestite postavke. Ako program <application>OmegaT</application> pokrenete u konzolnome načinu rada, koristit će iste postavke.</para>
+          </listitem>
+
+          <listitem>
+            <para>Ako nije moguće pokretanje programa <application>OmegaT</application> na uobičajeni način (jer nema raspoloživoga grafičkog okruženja): u odgovarajuću mapu kopirajte postavke iz neke druge instalacije programa <application>OmegaT</application> s drugoga računala. Lokacija nije bitna, budući da je unosite u naredbeni redak prilikom pokretanja. Potrebne su datoteke <literal>filters.conf</literal> i <literal>segmentation.conf</literal>, a možete ih pronaći u korisničkoj početnoj mapi (npr. <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> u sustavu Windows, ili <literal>%user%/.omegat/</literal> u sustavu Linux).</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="starting.in.console.mode">
+        <title>Pokretanje u konzolnome načinu rada</title>
+
+        <para>Za pokretanje programa <application>OmegaT</application> u konzolnome načinu rada potrebni su još neki dodatni parametri. Najznačajniji je <literal>&lt;mapa-projekta&gt;</literal>, a po izboru i <literal>--config-dir=&lt;mapa-konfiguracijskih-datoteka&gt;. </literal>Primjer:</para>
+
+        <para><literal>java -jar <application>OmegaT</application>.jar /putanja/do/projekta \</literal></para>
+
+        <para><literal>--config-dir=/putanja/do/konfiguracijskih datoteka/ \</literal></para>
+
+        <para><literal>--config-file=/putanja/do/konfiguracijske-datoteke/ \</literal></para>
+
+        <para><literal>
+        --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
+
+        <para><literal>--source-pattern={regularni-izraz}</literal></para>
+
+        <para>Vodite računa da svi parametri započinju dvostrukim znakom „-” (bez navodnika).</para>
+
+        <para><emphasis role="bold">Objašnjenje:</emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>&lt;mapa-projekta&gt;</literal> kazuje programu <application>OmegaT</application> gdje se nalazi prijevodni projekt. Kada je ovaj parametar naveden, <application>OmegaT</application> se pokreće u konzolnome načinu rada i prevodi određeni projekt.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--config-dir=&lt;mapa-konfiguracijskih-datoteka&gt;</literal> kazuje programu <application>OmegaT</application> gdje je mapa u kojoj se nalaze konfiguracijske datoteke. Kada ovaj parametar nije naveden, <application>OmegaT</application> koristi zadane vrijednosti (mapa <application>OmegaT</application> u korisničkoj početnoj mapi ili, ako ona nije raspoloživa, u tekućoj radnoj mapi). I ovdje imamo dvostruki znak „-” (bez navodnika).</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>--config-file=&lt;konfiguracijska datoteka&gt;</literal> kazuje programu <application>OmegaT</application> koju će konfiguracijsku datoteku koristiti.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis><literal>--mode</literal>=...-</emphasis> <application>OmegaT</application> se pokreće u konzolnome načinu rada radi automatskoga obavljanja jedne od sljedećih radnji:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
+
+                <para>OmegaT će u ovome načinu rada pokušati prevesti datoteke iz mape /source/ s pomoću raspoloživih prijevodnih memorija. To je korisno kod pokretanja programa OmegaT na poslužitelju s automatski učitanim datotekama TMX za projekt.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-createpseudotranslatetmx</literal></para>
+
+                <para>OmegaT će u ovome načinu rada izraditi datoteku TMX za cijeli projekt, i to samo na temelju izvorišnih datoteka. Datoteku TMX za izrada određujete sljedećim parametrom:</para>
+
+                <para><literal>--pseudotranslatetmx=allsegments.tmx
+                --pseudotranslatetype=[equal|empty]</literal></para>
+
+                <para>Argument <emphasis>pseudotranslatetype</emphasis> određuje trebaju li odredišni segmenti biti istovjetni izvorišnima, ili pak ostati prazni.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-align</literal></para>
+
+                <para>OmegaT u ovome načinu rada sravnjuje datoteku svojstava jezika Java iz projektne mape <literal> /source/ </literal>sa sadržajem pronađenim na naznačenoj lokaciji. Nastala datoteka TMX sprema se u mapu <filename>/omegat/</filename> pod nazivom <filename>align.tmx</filename>.</para>
+
+                <para>U ovome je slučaju potreban dodatni parametar, a kojim se određuje lokacija odredišnih podataka:</para>
+
+                <para><literal>--alignDir={lokacija datoteka prijevoda}</literal></para>
+
+                <para><filename>alignDir</filename> mora sadržavati prijevod na odredišnome jeziku projekta. Primjera radi, ako je projekt postavljen za jezični smjer EN-&gt;FR, alignDir mora sadržavati paket čiji naziv završava nastavkom _fr. Nastala datoteka TMX sprema se u mapu <literal>omegat</literal> pod nazivom <filename>align.tmx</filename>.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--source-pattern={regularni-izraz}</literal></para>
+
+            <para>Nakon korištenja ovoga načina rada, navedenom se postavkom određuju datoteke za automatsku obradu. Ako ovaj parametar nije naznačen, obrađuju se sve datoteke. Evo nekoliko primjera za konkretne odabire:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>Prevode se sve datoteke HTML, ali vodite računa da ispred točke u općenitome izrazu *.html treba dodati prekidni znak (\.) u skladu s pravilima za regularne izraze.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Ovime je za prijevod određena samo datoteka test.html u korijenskoj mapi izvorišnih sadržaja. Ignoriraju se sve druge datoteke pod nazivom test.html, a koje eventualno postoje u drugim mapama.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Ovime je za obradu odrđena samo datoteka test.html u mapi dir-10. Opet vodite računa da ispred točke dodate obrnutu kosu crtu.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--output-tag-validation-={regularni-izraz}</literal></para>
+
+            <para>Nakon korištenja ovoga načina rada, navedenom se postavkom određuju datoteke za automatsku obradu. Ako ovaj parametar nije naznačen, obrađuju se sve datoteke. Evo nekoliko primjera za konkretne odabire:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>Prevode se sve datoteke HTML, ali vodite računa da ispred točke u općenitome izrazu *.html treba dodati prekidni znak (\.) u skladu s pravilima za regularne izraze.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Ovime je za prijevod određena samo datoteka test.html u korijenskoj mapi izvorišnih sadržaja. Ignoriraju se sve druge datoteke pod nazivom test.html, a koje eventualno postoje u drugim mapama.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Ovime je za obradu odrđena samo datoteka test.html u mapi dir-10. Opet vodite računa da ispred točke dodate obrnutu kosu crtu.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--tag-validation=[abort|warn]</literal><parameter> naziv-izlazne-datoteke</parameter></para>
+
+            <para>Ovom se postavkom omogućava skupna provjera valjanosti oznaka teksta. Odabirom <literal>abort </literal>, provjera valjanosti oznaka teksta zaustavlja se na prvome neispravnom segmentu. Odabirom <literal>warn</literal>, provjera valjanosti oznaka teksta obrađuje sve segmente i ispisuje upozorenja u naznačenu datoteku u vezi sa svim segmentima koji sadržavaju neispravne oznake teksta.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--no-team</literal> se odnosi na projekte postavljene za timski rad. Koristite ga kada ne želite da OmegaT sinkronizira sadržaje projekta.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--disable-project-locking</literal> omogućava u sustavu Windows otvaranje jednoga projekta u nekoliko pojavnica programa OmegaT. Prema zadanim postavkama, datoteka <literal>omegat.project</literal> je zaključana u sustavu Windows, a prilikom pokušaja otvaranja projekta koji je već otvoren u nekoj drugoj pojavnici programa OmegaT prikazuje se poruka o pogrešci. Ovom se postavkom onemogućava zaključavanje.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="console.mode.option.quiet">
+        <title>Tihi način rada</title>
+
+        <para>Za „tihi” rad imamo dodatni parametar naredbenoga retka koji vrijedi isključivo za konzolni način rada: <literal>--quiet.</literal> U tihome načinu rada na zaslonu se prikazuje manje informacija o događajima. Ne prikazuju se ni poruke koje se obično nalaze na traci stanja.</para>
+
+        <para>Korištenje: <literal>java -jar <application>OmegaT</application>.jar /putanja/do/projekta --mode=console-translate --quiet</literal></para>
+      </section>
+
+      <section id="console.mode.option.validatetags">
+        <title>Provjera valjanosti oznaka teksta</title>
+
+        <para>Za provjeru valjanosti oznaka teksta imamo dodatni parametar naredbenoga retka koji vrijedi isključivo za konzolni način rada: <literal>--tag-validation=[abort|warn].</literal> Dodamo li ovaj parametar, provjera valjanosti oznaka teksta obavlja se prije prevođenja/sravnjivanja. Odaberemo li vrijednost <literal>abort</literal>, prilikom pronalaska pogrešaka u vezi s oznakama teksta prikazuju se poruke, a program se zaustavlja. Odaberemo li pak vrijednost <literal>warn</literal>, poruke o pogreškama se prikazuju, ali program OmegaT nastavlja s radom.</para>
+
+        <para>Korištenje: <literal>java -jar <application>OmegaT</application>.jar /putanja/do/projekta --mode=console-translate --tag-validation=abort</literal></para>
+      </section>
+    </section>
+  </section>
+
+  <section id="building.OmegaT.from.source">
+    <title>Sastavljanje programa <application>OmegaT</application> iz izvornoga koda<indexterm class="singular">
+        <primary>Pokretanje programa OmegaT</primary> <secondary>Sastavljanje programa OmegaT iz izvornoga koda</secondary>
+      </indexterm></title>
+
+    <para>Za sastavljanje vlastite inačice programa OmegaT trebate program ant, koji možete pronaći na adresi <emphasis>http://ant.apache.org/bindownload.cgi</emphasis>. Raspakirajte datoteku <emphasis>OmegaT_3.n.n_Source.zip</emphasis> i unesite mapu OmegaT_3.n.n_Source folder ili pak unesite mapu <emphasis>./omegat/</emphasis> iz preuzetoga koda SVN-a. Vodite računa da se u navedenoj mapi nalazi datoteka build.xml. Zatim u naredbeni redak upišite sljedeće:</para>
+
+    <para><literal>$ ant jar release</literal></para>
+
+    <para>Time se stvara cijeli distribucijski paket programa <application>OmegaT</application> u mapi ./dist/ folder, gdje će se nalaziti i sve datoteke potrebne za pokretanje programa <application>OmegaT</application>.</para>
+  </section>
+</chapter>

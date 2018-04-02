@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TeamProjects">
+  <title>OmegaT – timski projekti<indexterm class="singular">
+      <primary>OmegaT</primary> <secondary>timski projekti</secondary> <seealso>timski projekti</seealso>
+    </indexterm></title>
+
+  <section>
+    <title>Nadziranje inačica – uvod</title>
+
+    <para>Program OmegaT omogućava timsko prevođenje na temelju funkcionalnosti nadziranja inačica ili revizija, inače u širokoj uporabi u softverskoj zajednici radi držanja pod kontrolom izmjena kôdova programa i osiguranja nesmetane suradnje razvojnih timova. OmegaT podržava dva popularna sustava nadziranja inačica (engl. version control systems – VCS), i to <ulink url="http://subversion.apache.org">Apache Subversion</ulink> (za koji se često koristi kratica SVN, prema istoimenoj naredbi) i <ulink url="http://git-scm.com/">Git</ulink>. Prednosti sustava nadziranja inačica za timove prevoditelja možemo sažeti kako slijedi:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Na prijevodnome projektu može istodobno raditi nekoliko članova tima bez međusobnoga ometanja</para>
+      </listitem>
+
+      <listitem>
+        <para>Mogu dijeliti zajedničke materijale poput prijevodnih memorija i glosara projekta</para>
+      </listitem>
+
+      <listitem>
+        <para>Prema zadanim postavkama, tim dobiva na raspolaganje ažuriranu inačicu zajedničkih podataka svake tri minute</para>
+      </listitem>
+
+      <listitem>
+        <para>Sustav održava utvrđivanje inačice zajedničkih podataka</para>
+      </listitem>
+
+      <listitem>
+        <para>Omogućeno je nadziranje, rješavanje i spajanje kolizija, kao što su alternativni prijevodi istoga segmenta ili razlike u natuknicama glosara</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Sljedeći termini, koji se koriste dalje u tekstu, zaslužuju kraće pojašnjenje:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Poslužitelj VCS – </emphasis>poslužitelj SVN ili Git je okruženje u kojemu se čuvaju i održavaju zajednički materijali na mreži. Poslužitelj se može nalaziti u okviru lokalne mreže, ali u većini je slučajeva dostupan na internetu, tj. putem URL adrese. Jedan član tima, odnosno administrator projekta, treba poznavati rad s poslužiteljima, tj. posao postavljanja okruženja, uvoza projekata programa OmegaT, dodjele prava pristupa članovima tima, rješavanja kolizija itd.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Klijent VCS-a: </emphasis>„voditelji projekata” moraju na svojim računalima imati instaliran klijent sustava SVN ili Git radi povezivanja s poslužiteljem. Vrlo popularni klijenti za okruženje sustava Windows su <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> i <ulink url="http://code.google.com/p/tortoisegit/">TortoiseGit</ulink>. Slični paketi postoje i za druge operacijske sustave (Linux, OS X).</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">repozitorij: </emphasis>mjesto na kojem se čuvaju i održavaju zajednički materijali, bilo na lokalnoj mreži ili na internetu. Članovi tima projekta povezuju se s njim putem svojega klijenta VCS-a.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">završetak pripreme projekta:</emphasis> operacija kojom se stvara radna kopija iz repozitorija na lokalnome računalu. Poslužitelj čuva informacije o pripremljenim materijalima projekta kako bi naredne predaje (v. u nastavku teksta) bile uredno obavljene.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">predaja projekta: </emphasis>kada je nova lokalna inačica preuzetih materijala pripremljena, može se predati u repozitorij i tako staviti na raspolaganje ostatku tima. Poslužitelj osigurava rješavanje svih neusklađenih promjena, nastalih uslijed rada dvaju članova tima na istim pripremljenim sadržajima.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">administrator: </emphasis>osoba odgovorna za izradu i održavanje repozitorija, odnosno za obavljanje zadataka uz korištenje poslužitelja. Da bi se izbjegli bilo kakvi problemi, samo bi jedna osoba trebala imati ta prava, barem u početnoj fazi.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">korisnik: </emphasis>član tima koji surađuje na zajedničkome projektu.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Suradnja na projektima pomoću SVN-a<indexterm class="singular">
+        <primary>Timski projekti</primary> <secondary>Subversion</secondary>
+      </indexterm></title>
+
+    <para>Poslužitelj SVN-a moguće je koristiti na dva načina: instaliranjem SVN-a na vlastitome poslužitelju ili putem komercijalnoga servisa. Kod korištenja vanjskih servisa valja imati na umu moguće posljedice u smislu povjerljivosti zbog učitavanja izvornoga dokumenta na poslužitelj koji nije pod izravnom kontrolom. Umjesto toga, a radi izbjegavanja takvih problema, možete postaviti privatni poslužitelj SVN-a, primjerice ako već imate poslužitelj Apache koji sadržava predmetni softver (npr. VisualSVN).</para>
+
+    <para>Kada poslužitelj SVN-a bude dostupan, voditelji projekata moraju obaviti lokalno instaliranje klijenta SVN-a kako bi mogli upravljati sadržajima projekata na svojim računalima. Za sustav Windows preporučujemo <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Korisnici sustava Mac mogu preuzeti klijent s, primjerice, servisa <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>. Za Linux pogledajte <ulink url="http://www.yolinux.com/TUTORIALS/Subversion.html">Naredbe i skripte Subversion</ulink>.</para>
+
+    <section>
+      <title>Izrada repozitorija<indexterm class="singular">
+          <primary>Timski projekti</primary> <secondary>Izrada repozitorija SVN-a</secondary>
+        </indexterm></title>
+
+      <para>Ovdje opisani postupak zasniva se na besplatnim poslužiteljima SVN-a (s ograničenjem do dva korisnika) koje nudi <ulink url="http://projectlocker.com/">ProjectLocker</ulink>. Napominjemo da tvorac repozitorija ima podrazumijevana administratorska prava za izrađeni repozitorij. Najprije se prijavite na web stranice, a ako ste prvi put na njima, registrirajte se i zabilježite svoje korisničko ime i lozinku radi budućih projekata.</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Izradite novi projekt na servisu ProjectLocker</para>
+        </listitem>
+
+        <listitem>
+          <para>Upišite naziv i opis repozitorija. (U našem primjeru: <literal>OmegaT</literal> i <literal>OmegaT SL Localization </literal>.)</para>
+        </listitem>
+
+        <listitem>
+          <para>Odaberite<guibutton> SVN.</guibutton></para>
+        </listitem>
+
+        <listitem>
+          <para>Pritisnite <guibutton>Create Project</guibutton></para>
+        </listitem>
+      </orderedlist>
+
+      <para>Otvorite prikaz<emphasis role="bold"> Projects</emphasis> za svoj račun. SVN će za povezivanje klijenata s poslužiteljem SVN-a koji ste upravo uspostavili koristiti URL prikazan ispod Project Services. To je također i lokacija za određivanje članova tima projekata i dodjeljivanje odgovarajućih prava. Imajte na umu da članovi tima moraju biti registrirani da biste ih mogli odrediti za projekt. (Napomena: besplatna inačica servisa ProjectLocker omogućava samo dva korisnika po projektu).</para>
+
+      <para>Projektima je moguće upravljati u skladu s osobnim stilom i potrebama. Slično kao što je to s projektima programa OmegaT, za različite jezične parove valja imati zasebne repozitorije. Bilo bi dobro razdvojiti repozitorije i po područjima i/ili naručiteljima za svaki jezični par. Druga je mogućnost da imate jedan repozitorij s podmapama <literal>Projekt1</literal>, <literal>Projekt2</literal> i tako dalje, dok zajedničke materijale dijelite putem zajedničkih mapa: <literal>tm</literal>, <literal>glossary</literal> i <literal>dictionary</literal>.</para>
+
+      <para>Za naš smo se primjer odlučili za jedan projekt programa OmegaT, tj. jedan repozitorij, jednostavnosti radi.</para>
+    </section>
+
+    <section>
+      <title>Uvoz projekta u repozitorij SVN-a – sustav Windows</title>
+
+      <para>Repozitorij je trenutno prazan. Najprije valja izraditi praznu mapu na računalu. Dakle, izradite praznu mapu u kojoj će biti spremljen projekt, a potom je pritisnite desnom tipkom miša. Odaberite<guilabel> TortoiseSVN &gt; Checkout.</guilabel> Prikazat će se sljedeći dijaloški okvir:</para>
+ 
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Team_projects_checkout.png"/>
+        </imageobject>
+		<imageobject role="fo">
+          <imagedata fileref="images/Team_projects_checkout.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+ 
+      <para>Upišite URL koji ste dobili od servisa ProjectLocker u polje <emphasis role="bold">URL of repository</emphasis>. Vodite računa da polje <emphasis role="bold">Checkout directory</emphasis> bude ispravno popunjeno, tj. da u njemu bude navedena prazna mapa koju ste izradili, a zatim pritisnite <emphasis role="bold">OK</emphasis>. Po okončanju radnje možete provjeriti navedenu mapu, koja bi trebala sadržavati podmapu .svn, dok zeleni simbol prikazuje da je sadržaj mape ažuriran:</para>
+
+      <para>U sljedećem ćemo koraku dodati datoteke programa OmegaT u lokalnu mapu. Članovi tima moraju dijeliti sljedeće datoteke, koje stoga u svakome slučaju moraju biti dio sadržaja:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>datoteka projekta programa OmegaT – <filename>omegat.project</filename></para>
+        </listitem>
+
+        <listitem>
+          <para>prijevodna memorija – <filename>omegat\project_save.tmx</filename></para>
+        </listitem>
+
+        <listitem>
+          <para>sadržaj izvorišne mape</para>
+        </listitem>
+
+        <listitem>
+          <para>definicija filtera za predmetni projekt – <filename>omegat\filters.xml</filename></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Administrator može po svojemu nahođenju dodati i sljedeće mape sa sadržajima: <filename>tm</filename>, <filename>glossary</filename> i <filename>dictionary</filename>. Korisnim bi se moglo pokazati i timsko korištenje i održavanje datoteka <filename>ignored_words.txt</filename> i <filename>learned_words.txt</filename> iz mape <filename>omegat</filename>. Uvijek valja izbjegavati dodavanje datoteka <filename>bak</filename>, <filename>project_stats.txt</filename> i <filename>project_stats_match.txt</filename> iz podmape <filename>omegat</filename>, budući da su beskorisne i samo bi nepotrebno povećavale repozitorij. Isto načelo vrijedi i za mapu <filename>target</filename> i njene sadržaje.</para>
+
+      <para>Nakon kopiranja potrebnih datoteka u mapu pripremljenoga projekta, njen zeleni simbol mijenja se u crveni znak uskličnika, što označava promjene u lokalnoj kopiji repozitorija. Inačicu na poslužitelju ažuriramo sljedećim dvjema radnjama:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">dodavanje kopiranih datoteka u lokalnu inačicu repozitorija:</emphasis> desnom tipkom miša pritisnite lokalnu mapu preuzimanja projekta i odaberite <guilabel>TortoiseSVN &gt; Add.</guilabel> U dijaloškome okviru koji se otvori ostavite sve zadane mogućnosti pa potom pritisnite<guilabel> OK</guilabel>. Prikazat će se prozor potvrde obavljenoga dodavanja (Add Finished!), sličan ovome sa sljedeće slike:</para>
+ 
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Team_projects_Add.png"/>
+        </imageobject>
+		<imageobject role="fo">
+          <imagedata fileref="images/Team_projects_Add.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+	  
+          <para>Sadržaj mape pripremljenoga projekta bit će odgovarajuće označen:</para>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Team_projects_checkoutAddFolder.png"/>
+            </imageobject>
+			<imageobject role="fo">
+              <imagedata fileref="images/Team_projects_checkoutAddFolder.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+
+        </listitem>
+        <listitem>
+          <para><emphasis role="bold">predaja lokalnih izmjena na poslužitelj: </emphasis>desnom tipkom miša pritisnite lokalnu mapu preuzimanja projekta i odaberite <guilabel>SVN Commit....</guilabel> Otvorit će se prozor za predaju projekta (Commit) sa sljedeće slike. Označite izmjene koje valja obaviti, tj. dodane mape i datoteke u ovome slučaju.</para>
+ 
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Team_projects_initialCommit.png"/>
+            </imageobject>
+	          <imageobject role="fo">
+              <imagedata fileref="images/Team_projects_initialCommit.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+
+          <para>Unesite odgovarajuću poruku u prozor za poruke pa pritisnite <guilabel>OK</guilabel>. Otvorit će se prozor Commit i prikazati stanje naredbe za predaju projekta. Prvo će biti predan tekući sadržaj u repozitorij poslužitelja, a potom će biti ažurirana lokalna kopija repozitorija, tj. sadržaj podmape .svn, tako da se i ona ažurira prema najnovijoj inačici repozitorija.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">ažuriranje lokalnih datoteka iz lokalne kopije repozitorija</emphasis> – izmjene primljene iz repozitorija poslužitelja bilježe se u podmapi .svn, ali još ne u samim datotekama i mapama. Lokalne datoteke ažuriramo pritiskom desnom tipkom miša na mapu preuzimanja projekta, nakon čega odabiremo <guilabel>SVN Update</guilabel>. Valja provjeriti sadržaje mape radi potvrde jesu li lokalna kopija repozitorija i odgovarajuće datoteke i mape usklađene s najnovijom inačicom na poslužitelju:</para>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Team_projects_checkoutSVNupdate.png"/>
+            </imageobject>
+	          <imageobject role="fo">
+              <imagedata fileref="images/Team_projects_checkoutSVNupdate.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+  <section>
+  <title>Korištenje timskih projekata u programu OmegaT</title>
+  <para>Po okončanju postavljanja timskoga projekta, članovima tima je za pristupanje timskome projektu potreban samo program <application>OmegaT</application>. Najprije trebaju obaviti sljedeće: <guilabel>Projekt &gt; Preuzimanje timskoga projekta</guilabel>. Time se zapravo izvršava završetak pripreme projekta u lokalnoj mapi. Pristupni su podaci spremljeni pa ih stoga ne treba svaki put iznova upisivati. U slučaju da u sustavu Linux program <application>OmegaT</application> nastavi tražiti pristupne podatke, označite potvrdni kvadratić <guilabel>Spremanje lozinke u obliku običnoga teksta</guilabel>.</para>
+  <para>Nakon toga projekt otvaramo baš kao bilo koji drugi projekt programa <application>OmegaT</application>. OmegaT će ga uvijek prepoznati kao timski projekt i sve će usklađivati automatski, odnosno svake tri minute, kao što je zadano.</para>
+  </section>
+</appendix>

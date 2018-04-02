@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.formatted.text">
+  <title>Rad s oblikovanim tekstom<indexterm class="singular">
+      <primary>Odredišne datoteke</primary> <secondary>Oblikovani tekst</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Izvorišne datoteke</primary> <secondary>Oblikovani tekst</secondary>
+    </indexterm></title>
+
+  <para>Informacije o oblikovanju iz izvorišnih datoteka obično treba reproducirati u odredišnim datotekama. Informacije o oblikovanju u tekstu koje omogućavaju podržani formati, za sada poglavito DocBook, HTML, XHTML, Open Document Format (ODF) i Office Open XML (od paketa MS Office 2007 nadalje), OmegaT prikazuje kao oznake teksta. Oznake teksta obično bivaju ignorirane prilikom utvrđivanja sličnosti različitih tekstova radi pronalaženja podudaranja. Oznake teksta reproducirane u segmentima prijevoda ostaju kao takve u prevedenome dokumentu.</para>
+
+  <section id="formatting.tags">
+    <title>Oznake oblikovanja teksta<indexterm class="singular">
+        <primary>Oznake teksta</primary>
+      </indexterm></title>
+
+    <para><indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Imenovanje</secondary>
+      </indexterm><emphasis role="bold">Imenovanje oznaka teksta</emphasis></para>
+
+    <para>Oznake teksta se sastoje od jednoga do tri znaka i broja. Jedinstveno numeriranje omogućava zajedničko grupiranje odgovarajućih oznaka teksta i razlikovanje oznaka teksta s jednakim znakom prečaca, a koje zapravo nisu iste. Znakovi prečaca služe za prikaz temeljnoga značenja oznaka teksta (npr. b za podebljani tekst, i za kurziv itd.).</para>
+
+    <para><indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Numeriranje</secondary>
+      </indexterm><emphasis role="bold">Numeriranje oznaka teksta</emphasis></para>
+
+    <para>Oznake teksta se numeriraju inkrementalno prema skupinama. „Skupine oznaka teksta” u ovome su kontekstu zapravo jedna oznaka teksta (npr. &lt;i0&gt; i &lt;/i0&gt;). U okviru segmenta, prva skupina (par ili jedna oznaka – „samac”) dobiva broj 0, druga broj 1 itd. U prvome primjeru niže u tekstu imamo tri skupine oznaka teksta (par, samca pa još jedan par), dok se u drugome primjeru nalazi samo jedna skupina (par).</para>
+
+    <para><indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Parovi i samci</secondary>
+      </indexterm><emphasis role="bold">Parovi i samci</emphasis></para>
+
+    <para>Oznake teksta su uvijek ili samci ili parovi. Samci ukazuju na informacije o oblikovanju koje ne utječu na okolni tekst (npr. dodatni razmak ili prijelom retka).</para>
+
+    <para><literal>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+    &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segment 2132&gt;
+    </literal></para>
+
+    <para>&lt;br1&gt; je samac i ne utječe na bilo koji dio okolnoga teksta. Oznake u paru obično ukazuju na informacije o stilu koji se odnosi na tekst između početne i završne oznake teksta para. U sljedećem su primjeru &lt;b0&gt; i &lt;/b0&gt; par i utječu na tekst log.txt. Imajte na umu da se početna oznaka uvijek mora nalaziti ispred odgovarajuće završne oznake:</para>
+
+    <para>&lt;<literal>Datoteka zapisnika (&lt;b0&gt;log.txt&lt;/b0&gt;) služi za praćenje postupaka i pogrešaka.&lt;segment 3167&gt;</literal></para>
+
+    <para><application>OmegaT</application> izrađuje svoje oznake teksta prije postupka segmentiranja rečenica. Ovisno o pravilima segmentiranja, par oznaka teksta može biti rastavljen i tako se naći u dva susjedna segmenta, zbog čega će provjera valjanosti oznaka teksta upozoriti na pogrešku i označiti ta dva segmenta.</para>
+  </section>
+
+  <section id="tag.operations">
+    <title>Postupci s oznakama teksta<indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Postupci</secondary>
+      </indexterm></title>
+
+    <para>Pri radu valja biti pažljiv s oznakama teksta. Ako ih nehotice izmijenite, možete oštetiti konačnu inačicu datoteke. Osnovno je pravilo da redoslijed oznaka teksta mora biti očuvan. Međutim, uz strogo pridržavanje određenih principa moguća su i stanovita odstupanja od tog osnovnog pravila.</para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Dupliciranje</secondary>
+      </indexterm>Dupliciranje oznaka teksta</emphasis></para>
+
+    <para>Skupine oznaka teksta možete duplicirati njihovim jednostavnim kopiranjem na željeno mjesto. Vodite računa da se početna oznaka u paru mora nalaziti ispred završne oznake. Oblikovanje koje predstavlja duplicirana skupina primjenjuje se na oba odjeljka.</para>
+
+    <para>Primjer:</para>
+
+    <para><literal>&lt;b0&gt;Ovo oblikovanje&lt;/b0&gt; ćemo duplicirati ovdje.&lt;segment 0001&gt;</literal></para>
+
+    <para>Nakon dupliciranja:</para>
+
+    <para><literal>&lt;b0&gt;Ovo oblikovanje&lt;/b0&gt; je &lt;b0&gt;duplicirano ovdje&lt;/b0&gt;.&lt;segment 0001&gt;</literal></para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Brisanje skupina</secondary>
+      </indexterm>Brisanje skupina oznaka teksta</emphasis></para>
+
+    <para>Skupine oznaka teksta možemo brisati njihovim jednostavnim uklanjanjem iz segmenata. Vodite računa da za skupinu para valja izbrisati i početnu i završnu oznaku kako bi se pravilno uklonili svi tragovi oblikovanja i spriječilo oštećenje datoteke prijevoda. Brisanjem skupine oznaka uklanja se i povezano oblikovanje u datoteci prijevoda.</para>
+
+    <para>Primjer:</para>
+
+    <para><literal>&lt;b0&gt;Ovo oblikovanje&lt;/b0&gt; ćemo izbrisati.&lt;segment 0001&gt;</literal></para>
+
+    <para>Nakon brisanja:</para>
+
+    <para><literal>Ovo oblikovanje je izbrisano.&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.nesting">
+    <title>Gniježđenje skupina oznaka teksta<indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Gniježđenje skupina</secondary>
+      </indexterm></title>
+
+    <para>Mijenjanje redoslijeda skupina oznaka teksta može izazvati gniježđenje jedne skupine oznaka u drugoj. To je prihvatljivo, pod uvjetom da potonja skupina u potpunosti obuhvaća prvu skupinu. Drugim riječima, pri premještanju parova skupina pazite da i početna i završna oznaka budu bilo unutar ili izvan drugih parova skupina. U suprotnome može doći do oštećenja datoteke prijevoda i nećete je moći otvoriti.</para>
+
+    <para>Primjer:</para>
+
+    <para><literal>&lt;b0&gt;Oblikovanje&lt;/b0&gt; &lt;b1&gt;broj jedan&lt;/b1&gt; ćemo ugnijezditi unutar oblikovanja broj nula.&lt;segment 0001&gt;</literal></para>
+
+    <para>Nakon gniježdenja</para>
+
+    <para><literal>&lt;b0&gt;Oblikovanje &lt;b1&gt;broj jedan&lt;/b1&gt;&lt;/b0&gt; je ugniježđeno unutar oblikovanja broj nula.&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.overlapping">
+    <title>Preklapanje skupina oznaka teksta<indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Preklapanje skupina</secondary>
+      </indexterm></title>
+
+    <para>Preklapanje nastaje uslijed pogrešnoga postupanja s parovima oznaka teksta i nedvojbeno izaziva oštećenje oblikovanja, a ponekad sprječava i samu mogućnost otvaranja datoteke prijevoda.</para>
+
+    <para>Primjer:</para>
+
+    <para><literal>&lt;b0&gt;Oblikovanje&lt;/b0&gt; &lt;b1&gt;broj jedan&lt;/b1&gt; ćemo unerediti.&lt;segment 0001&gt;</literal></para>
+
+    <para>Nakon pogrešnoga postupanja:</para>
+
+    <para><literal>&lt;b0&gt;Oblikovanje &lt;b1&gt;broj jedan&lt;/b0&gt; &lt;/b1&gt;smo uneredili do daske.&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section>
+    <title>Mogućnosti provjere valjanosti oznaka teksta</title>
+
+    <para>Rad s oznakama teksta možemo prilagoditi postavljanjem nekih pravila u prozoru <guimenuitem>Mogućnosti &gt; Provjera valjanosti oznaka teksta...</guimenuitem>:</para>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/OptionsTagValidation_25.png"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Sljedeće funkcije vrijede za sve izvorišne datoteke, a ne samo za neke vrste datoteka, primjerice oblikovani tekst.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Varijable printf – bez provjere, provjera jednostavnih, provjera svega</emphasis></para>
+
+        <para>OmegaT može provjeravati nalaze li se varijable programiranja (npr. %s) iz izvorišne datoteke i u prijevodu. Možete odabrati izbjegavanje provjere, provjeru jednostavnih varijabli printf (poput %s, %d itd.) ili varijabli print svih vrsta.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Provjera jednostavnih uzoraka java MessageFormat</emphasis></para>
+
+        <para>Označavanjem ovoga potvrdnoga kvadratića OmegaT provjerava jesu li jednostavne oznake java MessageFormat (npr. {0}) pravilno obrađene.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Regularni izraz za prilagođene oznake teksta</emphasis></para>
+
+        <para>Ovdje upisan regularni izraz upućuje program OmegaT da otkrivene pojavnice tretira kao korisničke oznake teksta. Pritom provjerava istovjetnost broja oznaka teksta i njihov poredak, baš kao u slučaju oznaka teksta programa OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Regularni izraz za fragmente koje valja ukloniti iz prijevoda</emphasis></para>
+
+        <para>U ovo polje možete upisati regularni izraz za neželjeni sadržaj u odredišnoj datoteci. Time se sve pojavnice u odredišnim segmentima bojaju u crveno, što olakšava njihovo pronalaženje i ispravljanje. Ovaj se uzorak za uklanjanje ignorira pri pretraživanju djelomičnih podudaranja. Primjenjuje se fiksno oduzimanje postotka podudaranja u vrijednosti od pet jedinica ako se uklonjeni dio ne podudara s nekim drugim segmentom, tako da se podudaranje ne prikazuje kao 100-postotno.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="tag.group.validation">
+    <title>Provjera valjanosti skupina oznaka teksta<indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Provjera valjanosti skupina</secondary>
+      </indexterm></title>
+
+    <para>Funkcija provjere valjanosti oznaka teksta služi za otkrivanje promjena u sljedovima oznaka (bilo hotimičnih ili nenamjernih) i prikaz segmenata u kojima su obavljene. Pokretanjem ove funkcije – <guimenuitem>Ctrl+Shift+V<indexterm class="singular">
+        <primary>Prečaci</primary> <secondary>Provjera valjanosti oznaka teksta – Ctrl+T</secondary>
+      </indexterm></guimenuitem> – otvara se prozor koji prikazuje sve segmente datoteke u kojima se nalaze oznake teksta u prijevodu za koje se sumnja da su oštećene ili neispravne. Funkcija provjere valjanosti oznaka teksta omogućava jednostavno popravljanje oznaka teksta i obnovu odredišnih dokumenata. Prozor koji se otvara kombinacijom tipki <guimenuitem>Ctrl+Shift+V</guimenuitem> sadržava tablicu od tri stupca s poveznicama na odgovarajuće segmente, tj. na izvorišne i odredišne segmente.</para>
+
+    <figure id="tag.validation">
+      <title>Prikaz provjere valjanosti oznaka teksta</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TagValidation.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TagValidation.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Oznake su istaknute u obliku podebljanoga teksta plave boje radi jednostavnoga usporednog pregleda izvornog i prevedenog sadržaja. Pritiskom na željenu poveznicu otvara se odgovarajući segment u oknu za obradu. Ispravite pogrešku po potrebi (kao npr. u gornjem primjeru, gdje nedostaje par &lt;i2&gt;&lt;/i2&gt;) pa pritisnite <guimenuitem>Ctrl+Shift+V</guimenuitem> za povratak na prozor za provjeru valjanosti oznaka teksta radi ispravljanja drugih pogrešaka. Pogreške u oznakama teksta su sljedovi oznaka u prijevodu u kojima nije reproduciran isti poredak i broj oznaka teksta. Neke intervencije u oznakama teksta su nužne i bezopasne, dok druge znaju izazvati probleme pri sastavljanju prevedenoga dokumenta.</para>
+  </section>
+
+  <section id="hints.for.tag.management">
+    <title>Savjeti za upravljanje oznakama teksta<indexterm class="singular">
+        <primary>Oznake teksta</primary> <secondary>Savjeti</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Pojednostavnite izvorni tekst</emphasis></para>
+
+    <para>Općenito uzevši, oznake teksta predstavljaju oblikovanje izvornoga teksta u određenim oblicima. Pojednostavljivanje oblikovanja izvornika uvelike doprinosi smanjenju broja oznaka. Kada to dopuštaju okolnosti, valja uzeti u obzir objedinjavanje korištenih fontova i njihovih veličina, boja i drugoga, jer time se može pojednostavniti prevođenje i smanjiti mogućnost nastanka pogrešaka u vezi s oznakama teksta. Više pojedinosti o mogućnostima rada s oznakama teksta možete pronaći u odjeljku o postupcima s oznakama teksta. Ne zaboravite da u slučaju problema s oznakama u sklopu programa OmegaT, a kada oblikovanje nije od ključnoga značaja za prijevod, vjerojatno najlakše rješenje problema leži u uklanjanju oznaka teksta.</para>
+
+    <para><emphasis role="bold">Obratite posebnu pozornost na parove oznaka teksta</emphasis></para>
+
+    <para>Ako vam je potreban prikaz oznaka teksta u programu OmegaT, a nije vam nužno zadržati većinu oblikovanja u prijevodu dokumenta, možete izostaviti oznake teksta iz prijevoda. U tom slučaju posebno obratite pozornost na parove oznaka teksta, jer brisanjem jedne strane para uz ostavljanje druge strane dolazi do neizbježnoga oštećenja oblikovanja dokumenta. Budući da se oznake nalaze u samome tekstu, moguće je korištenje pravila segmentacije radi sastavljanja segmenata s manjim brojem oznaka teksta. Riječ je o naprednoj funkciji za čiju je pravilnu primjenu potrebno određeno iskustvo.</para>
+
+    <para>Program OmegaT još nije u stanju potpuno automatski otkrivati pogreške u oblikovanju pa vas stoga ne upozorava kad napravite pogrešku ili promijenite oblikovanje radi prilagodbe odredišnome jeziku. Međutim, može se dogoditi da datoteka prijevoda izgleda neobično, a u najgoremu je slučaju nije moguće ni otvoriti.</para>
+  </section>
+</chapter>

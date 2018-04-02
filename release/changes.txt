@@ -38,6 +38,7 @@
 
   - Brazilian Portugese localisation updated to 4.1.3 update 2 (UI)
   - Czech localisation updated to 4.1.4 (UI, scripts, readme, documentation)
+  - Croatian localisation updated to 4.1.4 (UI, scripts, readme, documentation)
   - Dutch localisation updated to 4.1.3 update 2 (UI)
   - Interlingua localisation updated to 4.1.3 update 2 (UI)
   - Italian localisation updated to 4.1.3 update 2 (UI)

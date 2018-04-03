@@ -574,7 +574,6 @@ jnlp {
     if (webstartProps.codebase) {
         codebase webstartProps.codebase
     }
-    useVersions = false
     withXml {
         information {
             title applicationName

@@ -396,7 +396,7 @@
   </table>
 
   <note>
-    <para>Hladové kvantifikátory se budou snažit najít tolik shody, jak je to jen možné. Například: <emphasis>a+?</emphasis> bude odpovídat aaa v <emphasis>aaabbb</emphasis></para>
+    <para>Hladové kvantifikátory se budou snažit najít tolik shody, jak je to jen možné. Například: <emphasis>a+</emphasis> bude odpovídat aaa v <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>

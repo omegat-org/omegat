@@ -39,6 +39,9 @@
     <para>Ve výchozím nastavení jsou skripty uloženy v adresáři „scripts“, který se nachází v instalačním adresáři OmegaT (je to ten adresář, který obsahuje OmegaT.jar). </para>
 
     <para>Můžete sem přidat nové skrpity, a ty se pak objeví v seznamu dostupných skriptů v podokně Skriptování.</para>
+
+    <para>Některé dodatečné skripty naleznete zde: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Skripty</ulink>
+    </para>
   </section>
 
   <section>

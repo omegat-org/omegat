@@ -39,13 +39,14 @@
 
       <mediaobject>
         <imageobject role="html">
-		          <imagedata fileref="images/Omegatproject.png"/>
-       </imageobject>
-      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
           <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-	  </figure>
+    </figure>
 
     <para>Během vytváření projektu nebo během překladu si můžete vybrat alternativní umístění pro některé adresáře. Je proto možné, vybrat již existující adresář nebo vytvořit adresáře na takovém umístění, které bude odpovídat vašemu pracovnímu postupu a zvykům projektového managementu. I po vytvoření projektu je možno změnit umístění adresářů, a to otevřením <guimenuitem>Projekt &gt; Vlastnosti...</guimenuitem> v nabídce nebo klávesovou zkratkou <guibutton>Ctrl+E</guibutton>, a pak je možno provést potřebné změny.</para>
 
@@ -129,6 +130,12 @@
                 <entry>filters.xml</entry>
 
                 <entry>Pokud existuje, obsahuje specifické filtry souboru daného projektu, když jsou dotazovány přes <guimenuitem>Projekt &gt; Vlastnosti ...</guimenuitem> Viz <link linkend="chapter.project.properties"> kapitolu Vlastnosti projektu</link></entry>
+              </row>
+
+              <row>
+                <entry>uiLayout.xml</entry>
+
+                <entry>pokud extistuje, tak obsahuje nastavení grafického prostředí typické pro daný projekt</entry>
               </row>
             </tbody>
           </tgroup>
@@ -248,6 +255,8 @@
         </tbody>
       </tgroup>
     </informaltable>
+
+    <para>Do tohoto adresáře můžete vstoupit přímo záznamem v nabídce <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Otevřít adresář nastavení</guimenuitem> </menuchoice>.</para>
   </section>
 
   <section id="application.files">
@@ -322,23 +331,16 @@
             <entry><application>O aplikaci OmegaT</application></entry>
 
             <entry><para>Textový soubor, který obsahuje dva řádky:</para>
-
             <programlisting>#!/bin/bash java
-java -jar OmegaT.jar $*</programlisting>
-
-            <para>Uživatelům systémů Linux a Mac OS X se tyto soubory mohou hodit. Po té, co se ujistíte, že jste v příkazovém řádku v adresáři OmegaT, povolte souboru oprávnění na čtení a zápis (chmod +x OmegaT).<literal></literal> Posléze bude možné startovat OmegaT spouštěním tohoto souboru z příkazového řádku.</para>
-            </entry>
+java -jar OmegaT.jar $*</programlisting> <para>Uživatelům systémů Linux a Mac OS X se tyto soubory mohou hodit. Po té, co se ujistíte, že jste v příkazovém řádku v adresáři OmegaT, povolte souboru oprávnění na čtení a zápis (chmod +x OmegaT).<literal></literal> Posléze bude možné startovat OmegaT spouštěním tohoto souboru z příkazového řádku.</para></entry>
           </row>
-          
+
           <row>
             <entry>OmegaT.bat</entry>
 
-            <entry><para>Dávkový soubor, který se používá pro spouštění programu <application>OmegaT</application> z příkazového řádku pod Windows. Obsahuje pouze následující řádek:</para>
-
-            <programlisting>java -jar OmegaT.jar %*</programlisting>
-            </entry>
+            <entry><para>Dávkový soubor, který se používá pro spouštění programu <application>OmegaT</application> z příkazového řádku pod Windows. Obsahuje pouze následující řádek:</para> <programlisting>java -jar OmegaT.jar %*</programlisting></entry>
           </row>
-          
+
           <row>
             <entry><literal>OmegaT.jar</literal></entry>
 

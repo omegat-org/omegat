@@ -45,7 +45,14 @@
           <primary>Spouštění OmegaT</primary> <secondary>Windows</secondary> <tertiary>soubor INI</tertiary>
         </indexterm>Možnosti pro startování programu budou v tomto případě načteny ze souboru <emphasis><application>OmegaT</application>.l4J.ini</emphasis>, který se nachází ve stejném adresáři, jako soubor exe, a který můžete upravit, aby tak odpovídal vašemu nastavení. Následující příklad souboru INI rezervuje 1GB paměti, zadá francouzštinu jako uživatelský jazyk a Kanadu jako zemi:</para>
 
-      <literallayout><code># OmegaT.exe runtime configuration # To use a parameter, remove the '#' before the '-' (configurace běhu Omega.exe; pokud chcete použít zadaný parametr, smažte znak '#' před '-') # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
+      <literallayout><code># OmegaT.exe runtime configuration
+# To use a parameter, remove the '#' before the '-'
+# Memory
+-Xmx1024M
+# Language
+-Duser.language=FR
+# Country
+-Duser.country=CA </code></literallayout>
 
       <para>Tip: pokud OmegaT pracuje pomalu při použití vzdáleného připojení na plochu (‚Remote Desktop Sessions‘) v systému Widnows, můžete pak použít tuto možnost:</para>
 
@@ -195,8 +202,7 @@
     <section id="which.package.to.download.OSX">
       <title>Stažení balíčku</title>
 
-      <para><application>OmegaT</application> contains the Java JRE
-      1.8</para>
+      <para><application>OmegaT</application> obsahuje Java JRE 1.8</para>
 
       <para>Stáhněte si <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -220,15 +226,15 @@
 
       <para>Klikněte dvakrát na <emphasis> <application>OmegaT</application>.app</emphasis> nebo klikněte na ikonu na Docku.</para>
 
-      <para>Můžete změnit chování OmegaT upravením <emphasis>Vlastnosti</emphasis>, ale také souboru v balíčku <emphasis>OmegaT.sh</emphasis>.</para>
+      <para>Můžete změnit chování OmegaT upravením <emphasis>Vlastnosti</emphasis>, ale také souboru v balíčku <emphasis>Configuration.properties</emphasis>.</para>
 
-      <para>Pro přístup s souboru <application><emphasis>OmegaT.sh</emphasis></application> klikněte pravým tlačítkem myši na soubor <emphasis><application>OmegaT</application>.app</emphasis> a vyberte „Ukázat obsah balíčku“, pak poklikem pravým tlačítkem v Contents/MacOS soubor otevřete a vyberete editor textu dle svého výběru. Můžete k souboru přistupovat přímo přes příkazový řádek a otevřít <application><emphasis>OmegaT.sh</emphasis> v editoru příkazového řádku jako je emacs nebo vi</application>.<indexterm class="singular">
+      <para>Pro přístup s souboru <application><emphasis>Configuration.properties</emphasis></application> klikněte pravým tlačítkem myši na soubor <emphasis><application>OmegaT</application>.app</emphasis> a vyberte „Ukázat obsah balíčku“, pak poklikem pravým tlačítkem v Contents/MacOS soubor otevřete a vyberete editor textu dle svého výběru. Můžete k souboru přistupovat přímo přes příkazový řádek a otevřít <application><emphasis>Configuration.properties</emphasis> v editoru příkazového řádku jako je emacs nebo vi</application>.<indexterm class="singular">
           <primary>Přizpůsobení OmegaT</primary> <secondary>OS X</secondary> <tertiary>Parametry spouštění</tertiary>
         </indexterm></para>
 
-      <para>Možnosti lze upravovat změnou <emphasis>OmegaT.sh</emphasis>. U předdefinovaných možností stačí odstranit znak # před parametrem, a tak jej povolit. Například <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (bez #) spustí <application>OmegaT</application> s uživatelským prostředím v japonštině. </para>
+      <para>Možnosti lze upravovat změnou <emphasis>Configuration.properties</emphasis>. U předdefinovaných možností stačí odstranit znak # před parametrem, a tak jej povolit. Například <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (bez #) spustí <application>OmegaT</application> s uživatelským prostředím v japonštině. </para>
 
-      <para>Pokud chcete změnit množství dostupné paměti, upravte přímo spouštěcí řádek. Například <filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> spustí OmegaT s dvěma giga paměti.</para>
+      <para>Pokud chcete změnit množství dostupné paměti, upravte soubor <emphasis>OmegaT.app/Contents/Info.plist</emphasis> a změňte obsah řetězce &lt;string&gt;-Xmx1024M&lt;/string&gt;. Například, &lt;string&gt;-Xmx2048M&lt;/string&gt; spustí OmegaT s 2GB paměti.</para>
 
       <para>Více oken pro <emphasis><application>OmegaT</application>.app</emphasis> spustíte dvojklikem na soubor <emphasis>OmegaT.sh</emphasis> umístěný v <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
@@ -300,6 +306,14 @@
     </section>
   </section>
 
+  <section id="drag.and.drop">
+    <title>Přetáhnout<indexterm class="singular">
+        <primary>Spouštění OmegaT</primary> <secondary>Přetáhnout</secondary>
+      </indexterm></title>
+
+    <para>Ve většině systémů je možné otevřít projekt jeho přetažením souboru <filename>omegat.project</filename> na ikonu OmegaT na ploše. Je také možné otevřít projekt OmegaT dvojím kliknutím na soubor <filename>omega.project</filename>.</para>
+  </section>
+
   <section id="using.Java.Web.Start">
     <title>Použití Java Web Start<indexterm class="singular">
         <primary>Spouštění OmegaT</primary> <secondary>Použití Java Web Start</secondary>
@@ -307,7 +321,7 @@
 
     <para>Technologie Java Web Start (součást verze Java 1.6 a vyšší), může být použita pro začlenění samostatné softwarové aplikace Javy spustitelné prostým kliknutím přes síť. Přes Java Web Start je zajištěn jak přístup k aktuální verzi aplikace, tak i ke správné verzi prostředí Java Runtime Environment (JRE). Pro první spuštění aplikace OmegaT prostřednictvím Java Web Start si zadejte a načtěte ve vašem prohlížeči následující URL:</para>
 
-    <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+    <para><emphasis>https://omegat.sourceforge.io/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
     <para>Stáhněte si soubor<emphasis> <application>OmegaT</application> .jnlp</emphasis> a klikněte na něj. V závislosti na operačním systému se může během instalace objevit několik bezpečnostních výstrah. Práva, která udělíte této verzi (která lze nazývat jako „neomezený přístup k počítači“) jsou identická s právy, která jste přidělili místní verzi, tato práva povolí přístup na pevný disk počítače. Při pozdějším kliknutí na soubor <emphasis><application>OmegaT</application>.jnlp</emphasis> dojde (pokud jste online) ke kontrole verze a když je vydána novější verze, nainstaluje ji a posléze program <application>OmegaT</application> spusťte. Po první instalaci můžete samozřejmě soubor <emphasis><application>OmegaT</application>.jnlp</emphasis> spouštět i v režimu offline.</para>
 
@@ -367,7 +381,7 @@
           <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary>
         </indexterm></title>
 
-      <para>Základní příkaz byl již popsán výše. Změny v tomto příkazu zahrnují doplnění „parametrů“. Jednotlivé parametry se přidávají za počáteční <emphasis>„java“</emphasis> a před část <emphasis>„-jar <application>OmegaT</application>.jar“</emphasis>. Povšimněte si, že ve Windows budete měnit soubor <filename>OmegaT.l4J.ini</filename> a tak definovat své priority. Na jiných platformách můžete pro stejnou akci změnit spouštěč (např., <filename>OmegaT.sh</filename> na Macu, <filename>OmegaT</filename> pod Linuxem).</para>
+      <para>Základní příkaz byl již popsán výše. Změny v tomto příkazu zahrnují doplnění „parametrů“. Jednotlivé parametry se přidávají za počáteční <emphasis>„java“</emphasis> a před část <emphasis>„-jar <application>OmegaT</application>.jar“</emphasis>. Povšimněte si, že ve Windows budete měnit soubor <filename>OmegaT.l4J.ini</filename> a tak definovat své priority. Na jiných platformách můžete pro stejnou akci změnit spouštěč <filename>Configuration.properties</filename> na Macu, <filename>OmegaT</filename> pod Linuxem.</para>
 
       <para>Seznam možných parametrů je uveden níže. Pokročilí uživatelé získají více informací o parametrech zadáním příkazu <emphasis>man java</emphasis> do okna terminálu.</para>
 
@@ -404,8 +418,7 @@
               <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary> <tertiary>Přiřazení množství paměti</tertiary>
             </indexterm> Tento příkaz přiřadí více paměti programu <application>OmegaT</application>. Výchozí nastavení je přiřazeno 512 MB, takže asi bude nevýhodné nastavovat menší hodnotu. Zástupné znaky „ZZ“ reprezentují část paměti zadávanou v megabytech. Příkaz pro spouštění <application>OmegaT</application> s nastavením 1024 MB (1 gigabyte) paměti je tedy:</para>
 
-          <para><literal>java -Xmx1024M -jar
-          <application>OmegaT</application>.jar</literal></para>
+          <para><literal>java -jar <application>OmegaT</application>.jar</literal></para>
         </listitem>
 
         <listitem>
@@ -446,11 +459,7 @@
 
         <listitem>
           <para><emphasis role="bold">Překladač Yandex Translate</emphasis><indexterm class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>Yandex Translate</tertiary>
+              <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary> <tertiary>Yandex Translate</tertiary>
             </indexterm></para>
 
           <para>Ujistěte se, že máte svůj účet zdarma na Yandex. Budete jej potřebovat pro získání a používání překladového klíče Yandex Translate API key. O API klíče můžete zažádat prostřednictvím žádacího formuláře <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">API key request form</ulink>, a zobrazit je na stránce ‚Mé klíče / <ulink url="http://api.yandex.com/key/keyslist.xml">My Keys</ulink>‘</para>
@@ -501,6 +510,8 @@
 
         <para><literal>--config-dir=/cesta/ke/konfiguracnim-souborum/ \</literal></para>
 
+        <para><literal> --config-file=/path/to/config-file/ \</literal></para>
+
         <para><literal>
         --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
 
@@ -519,6 +530,10 @@
         <itemizedlist>
           <listitem>
             <para><literal>--config-dir=&lt;config-dir&gt;</literal> prozradí <application>OmegaT</application>, ve kterém adresáři jsou uloženy konfigurační soubory. Když není zadáno, <application>OmegaT</application> se vrátí k výchozím hodnotám (adresář <application>OmegaT</application> v domovské složce  uživatele, nebo když není dostupné, pak adresář, ve kterém se právě pracuje). Všimněte si dvojitého znaku pomlčky.</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>--config-file=&lt;config-file&gt;</literal> prozradí aplikaci <application>OmegaT</application>  který konfigurační soubor se má použít</para>
           </listitem>
         </itemizedlist>
 

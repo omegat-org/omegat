@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.acknowledgements">
+  <title>Zahvale</title>
+
+  <section>
+    <title>Hvala svima!</title>
+
+    <para>Kakve god nedosljednosti, omaške i očite pogreške netko pronađe u tekućoj inačici, neka se zna da su sve isključivo moje. Međutim, ovaj priručnik ne bi postojao bez pomoći i podrške većega broja ljudi. Izričito se zahvaljujem sljedećima:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Marc Prior: ispravljanje moje prve radne inačice bio je čin ljubavi prema programu OmegaT i engleskome jeziku.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Didier Briel: ne bih mogao ništa bez Didierove strpljive i ustrajne pomoći oko zamršenih detalja sheme DocBook. Ne trebam ni spominjati koliko je bio pažljiv i da je očuvao repozitorije u izvornome obliku i ispravnome stanju.</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray: za uvodno poglavlje „Naučite koristiti program OmegaT za pet minuta”.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Will Helton: njegova završna provjera radne inačice poštedjela me je brojnih neugodnosti. Čovjek se samo može pitati koliko bi određenih i neodređenih članova i dalje nedostajalo u izvorniku na engleskome jeziku da nije bilo njegove dragocjene pomoći.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Christophe Helary: posebno zahvaljujem JC-u za njegov sažeti opis pokretanja, parametara naredbenoga retka i svih drugih pojedinosti koje tek trebam uočiti.</para>
+      </listitem>
+
+      <listitem>
+        <para>Na koncu, no ne i najmanje važno: zahvaljujem svima koji su dali svoj doprinos<ulink url="https://sourceforge.net/p/omegat/documentation/"> praćenju dokumentacije programa OmegaT</ulink> za sve nedosljednosti koje su pronašli u prethodnim inačicama dokumentacije. Samo nastavite tako!</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

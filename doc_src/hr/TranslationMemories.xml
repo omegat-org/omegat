@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.memories">
+  <title>Prijevodne memorije<indexterm class="singular">
+      <primary>Prijevodne memorije</primary>
+    </indexterm><indexterm class="singular">
+      <primary>TMX</primary> <see>Prijevodne memorije</see>
+    </indexterm></title>
+
+  <section id="OmegaT.and.tmx.files">
+    <title>Prijevodne memorije u programu OmegaT</title>
+
+    <section id="tmx.files.location.and.purpose">
+      <title>mape datoteka tmx – lokacija i namjena</title>
+
+      <para>Projekti u okviru programa <application>OmegaT</application> mogu sadržavati prijevodne memorije, tj. datoteke s datotečnim nastavkom tmx, i to na pet različitih lokacija:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Prijevodne memorije</primary> <secondary>Podmapa omegat</secondary> <seealso>Datoteke projekta</seealso>
+            </indexterm>mapa omegat</term>
+
+          <listitem>
+            <para>Mapa omegat sadržava datoteku <filename>project_save.tmx</filename>, a eventualno i više sigurnosnih kopija datoteka TMX. Datoteka <filename>project_save.tmx</filename> sadržava sve segmente spremljene u nju od početka rada na projektu. Ta je datoteka stalni dio projekta. Njen se sadržaj poredava abecedno prema izvorišnome segmentu.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Prijevodne memorije</primary> <secondary>glavna mapa projekta</secondary>
+            </indexterm>glavna mapa projekta</term>
+
+          <listitem>
+            <para>Glavna mapa projekta sadržava tri datoteke tmx – <filename>naziv_projekta-omegat.tmx</filename>, <filename>naziv_projekta-level1.tmx</filename> i <filename>naziv_projekta-level2.tmx</filename> (pri čemu se naziv_projekta odnosi na naziv projekta).</para>
+
+            <itemizedlist>
+              <listitem>
+                <para>Datoteka level1 sadržava samo tekstne informacije.</para>
+              </listitem>
+
+              <listitem>
+                <para>Datoteka level2 sadržava specifične oznake teksta programa <application>OmegaT</application> u obliku ispravnih oznaka TMX-a, što omogućava korištenje datoteke i njenih informacija o oblikovanju u bilo kojemu alatu za prevođenje koji podržava memorije tmx razine 2, ili u samome programu <application>OmegaT</application>.</para>
+              </listitem>
+
+              <listitem>
+                <para>Datoteka <application>OmegaT</application> sadržava specifične oznake oblikovanja teksta programa <application>OmegaT</application>, što omogućava korištenje datoteke i u drugim projektima u sklopu programa <application>OmegaT</application>.</para>
+              </listitem>
+            </itemizedlist>
+
+            <para>Navedene su datoteke kopije datoteke <filename>project_save.tmx</filename>, tj. glavne prijevodne memorije projekta, isključujući tzv. segmente „siročiće”. Nose odgovarajuće promijenjene nazive, tako da se njihov sadržaj i dalje može identificirati pri daljnjem korištenju, primjerice u podmapi <filename>tm</filename> nekoga drugog projekta (pogledajte u nastavku teksta).</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>mapa <filename><indexterm class="singular">
+              <primary>Prijevodne memorije</primary> <secondary>Podmapa tm</secondary> <seealso>Datoteke projekta</seealso>
+            </indexterm>tm</filename></term>
+
+          <listitem>
+            <para>Broj pomoćnih prijevodnih memorija, tj. datoteka tmx, u mapi /tm/ nije ograničen. Te je datoteke moguće izraditi na bilo koji od triju gore navedenih načina. Valja znati da se datoteke tmx mogu uvoziti i izvoziti i s pomoću drugih alata za računalno potpomognuto prevođenje, i to obično u sva tri oblika. Naravno, najbolje je koristiti datoteke TMX predviđene za program OmegaT (pogledajte tekst gore) radi očuvanja oblikovanja u tekstu segmenata.</para>
+
+            <para>Sadržaj prijevodnih memorija u podmapi tm služi za generiranje prijedloga za tekstove koji se prevode. Među prijedlozima djelomičnih podudaranja prikazuje se svaki već prevedeni tekst spremljen u navedenim datotekama, pod uvjetom da je dostatno sličan tekstu koji se upravo prevodi.</para>
+
+            <para>Kada je izvorišni segment u jednoj od pomoćnih prijevodnih memorija istovjetan tekstu koji se upravo prevodi, OmegaT funkcionira kao što je opisano u dijaloškome prozoru <menuchoice> <guimenu>Mogućnosti</guimenu> <guimenuitem>Funkcioniranje obrade...</guimenuitem> </menuchoice>. Primjerice (i to u slučaju zadržavanja zadanih vrijednosti), prijevod iz pomoćne prijevodne memorije se usvaja i dodaje mu se prefiks<emphasis> [fuzzy]</emphasis> kao oznaka djelomičnoga podudaranja, tako da prevoditelj može naknadno pregledati prijevod i provjeriti jesu li tako označeni segmenti dobro prevedeni (pogledajte poglavlje <link linkend="chapter.translation.editing">Funkcioniranje obrade</link>) <menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+
+            <para>Može se dogoditi i da prijevodne memorije u podmapi <filename>tm</filename> sadržavaju segmente s istovjetnim izvorišnim, ali istodobno različitim odredišnim tekstom. Datoteke TMX se čitaju prema poretku po njihovim nazivima, a njihovi segmenti pak redak po redak. Stoga prednost ima zadnji segment s istovjetnim izvorišnim tekstom. (Napomena: naravno, mudrije je to odmah izbjeći.)</para>
+
+            <para>Imajte na umu da datoteke TMX u mapi tm mogu biti sažete programom gzip.<indexterm class="singular">
+                <primary>Prijevodne memorije</primary> <secondary>sažete</secondary>
+              </indexterm></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Prijevodne memorije</primary> <secondary>Podmapa tm/auto</secondary> <seealso>Datoteke projekta</seealso>
+            </indexterm>mapa tm/auto<indexterm class="singular">
+              <primary>Projekt</primary> <secondary>Pretprevođenje</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Kada je od samoga početka poznato da su prijevodi u nekoj prijevodnoj memoriji (ili više njih) dobri, možemo je (ili ih) spremiti u mapu<emphasis role="bold"> tm/auto</emphasis> i time izbjeći brojne slučajeve s oznakom<emphasis> [fuzzy]</emphasis>.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Spremite TMX u mapu /tm/auto.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Otvorite projekt. Prikazat će se izmjene.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Napravite neku manju izmjenu bilo gdje u projektu. Time se mijenja datoteka <filename>project_save.tmx</filename> (dodavanjem odgovarajućih prijevodnih jedinica iz TMX-a u mapi „auto”).</para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Napomena: uklonite li TMX iz mape /tm/auto prije treće radnje, prijevodna jedinica neće biti dodana.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>mapa tm/enforce</term>
+
+          <listitem>
+            <para>Ako ste sasvim sigurni da je neki TMX kvalitetniji od datoteke <filename>project_save.tmx</filename> programa OmegaT, spremite taj TMX u mapu /tm/enforce kako bi se njegova rješenja koristila umjesto postojećih zadanih prijevoda.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Spremite TMX u mapu /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Otvorite projekt. Prikazat će se izmjene.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Napravite neku manju izmjenu bilo gdje u projektu. Time se mijenja datoteka <filename>project_save.tmx</filename>.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Morate donijeti odluku o izuzeću segmenata koji se zamjenjuju:<itemizedlist>
+                      <listitem>
+                        <para>ako <emphasis>ne trebaju</emphasis> biti izuzeti od daljnjih izmjena, uklonite TMX iz mape /tm/enforce,</para>
+                      </listitem>
+
+                      <listitem>
+                        <para>ako <emphasis>trebaju</emphasis> biti izuzeti od daljnjih izmjena, zadržite TMX u mapi /tm/enforce.</para>
+                      </listitem>
+                    </itemizedlist></para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Napomena: uklonite li TMX iz mape /tm/enforce prije treće radnje, zamjenske se jedinice ne spremaju.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>mapa tm/mt</term>
+
+          <listitem>
+            <para>Umetanjem podudaranja iz TMX-a spremljenog u mapu <emphasis role="bold">mt</emphasis>, pozadina otvorenoga segmenta u oknu za obradu postaje crvena. Uobičajeni izgled pozadine vraća se zatvaranjem segmenta.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Prijevodne memorije</primary> <secondary>Podmape tm/penalty-xxx</secondary> <seealso>Datoteke projekta</seealso>
+            </indexterm>mape tm/penalty-xxx</term>
+
+          <listitem>
+            <para>Ponekad je korisno razlikovati prijevodne memorije visoke kvalitete od onih manje pouzdanih, bilo zbog tematike, klijenta, stanja provjere ili nečega drugoga. Podudaranjima iz mapa s nazivom „penalty-xxx” (pri čemu je xxx broj između 0 i 100) automatski se smanjuje postotak, pa se tako 100-postotno podudaranje iz bilo koje prijevodne memorije spremljene u, primjerice, mapu pod nazivom Penalty-30 tretira i prikazuje kao 70-postotno. Oduzimanje postotka vrijedi za sva tri postotka podudaranja pa se tako 75, 80, 90 smanjuju na 45, 50, 60.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para>Povrh toga, <application>OmegaT</application> omogućava i korištenje dodatne datoteke tmx (prema parametrima programa <application>OmegaT</application>), koja sadržava sve prevodive segmente projekta, a možete je spremiti gdje god želite. Pogledajte odjeljak Pseudoprevedena memorija dolje u tekstu.</para>
+
+      <para>Imajte na umu da se otvaranjem projekta u memoriju učitavaju sve prijevodne memorije. Sigurnosne kopije prijevodnih memorija projekta redovito se izrađuju (pogledajte sljedeće poglavlje), dok se datoteka <filename>project_save.tmx</filename> također sprema/ažurira zatvaranjem ili ponovnim učitavanjem projekta. Primjera radi, to znači da nema potrebe za zatvaranjem projekta na kojemu radite ako mu odlučite dodati još jednu pomoćnu prijevodnu memoriju, nego možete jednostavno ponovno učitati projekt, čime se na koncu obuhvaćaju sve promjene.</para>
+
+      <para>Lokacije raznih prijevodnih memorija za određeni projekt određuje korisnik (više pojedinosti o tome možete pronaći u poglavlju <link linkend="chapter.project.properties">Svojstva projekta</link>).</para>
+
+      <para>Ovisno o situaciji, to omogućava različite strategije, npr.:</para>
+
+      <para><emphasis role="bold">nekoliko projekata na istu temu: </emphasis>zadržava se struktura projekta, a mijenjaju se izvorišne i odredišne mape (source = source/order1, target = target/order1 itd.). Vodite računa da se segmenti iz order1 kojih nema u order2 i ostalim naknadnim zadacima označavaju kao segmenti „siročići”; međutim, i dalje su korisni zbog potencijalnih djelomičnih podudaranja.</para>
+
+      <para><emphasis role="bold">nekoliko prevoditelja angažiranih na jednome projektu:</emphasis> izvorišne se datoteke razdvajaju u source/Ana, source/Branko i tako dalje pa se dodjeljuju članovima tima (Ana, Branko...). Oni mogu sastaviti svoje vlastite projekte te po okončanju rada ili određene etape dostaviti svoje datoteke <filename>project_save.tmx</filename>. Potom se prikupljaju datoteke <filename>project_save.tmx</filename> i rješavaju problemi, kao što su eventualne kolizije u terminologiji itd. Zatim se izrađuje nova inačica glavne prijevodne memorije, bilo za spremanje u podmape <emphasis>tm/auto</emphasis>članova tima ili kao zamjena njihovih datoteka <filename>project_save.tmx</filename>. Tim također može koristiti istu strukturu podmapa za odredišne datoteke. To članovima, primjerice, omogućava da u bilo kojemu trenutku provjere valjanost odredišne inačice cijeloga projekta.</para>
+    </section>
+
+    <section id="tmx.backup">
+      <title>sigurnosna kopija TMX-a<indexterm class="singular">
+          <primary>Prijevodne memorije</primary> <secondary>Sigurnosna kopija</secondary>
+        </indexterm></title>
+
+      <para><application>OmegaT</application> prilikom prevođenja stalno sprema rezultate rada u datoteku <filename>project_save.tmx</filename> u podmapi projekta /<filename>omegat</filename>.</para>
+
+      <para><application>OmegaT</application> također pri svakom otvaranju ili ponovnom učitavanju projekta izrađuje sigurnosne kopije prijevodne memorije i sprema ih kao <filename>project_save.tmx.GODNMMDDHHNN.bak</filename>. GODN je četveroznamenkasta godina, MM je mjesec, DD dan u mjesecu, dok HH i NN označavaju sat i minutu spremanja prethodne prijevodne memorije.</para>
+
+      <para>Kad posumnjate da ste izgubili podatke prijevoda, postupite kako slijedi:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Zatvorite projekt.</para>
+        </listitem>
+
+        <listitem>
+          <para>Preimenujte tekuću datoteku <filename>project_save.tmx</filename> (npr. u <filename>project_save.tmx.privremeno</filename>).</para>
+        </listitem>
+
+        <listitem>
+          <para>Odaberite sigurnosnu kopiju prijevodne memorije koja najvjerojatnije sadržava potrebne podatke, npr. najnoviju datoteku ili zadnju inačicu od prethodnoga dana).</para>
+        </listitem>
+
+        <listitem>
+          <para>Preimenujte je u <filename>project_save.tmx</filename></para>
+        </listitem>
+
+        <listitem>
+          <para>Otvorite projekt.</para>
+        </listitem>
+      </orderedlist>
+    </section>
+
+    <section id="tmx.files.and.language">
+      <title>datoteke TMX i jezik<indexterm class="singular">
+          <primary>Prijevodne memorije</primary> <secondary>Jezik</secondary>
+        </indexterm></title>
+
+      <para>Datoteke TMX sadržavaju prijevodne jedinice, sastavljene od više jednakovrijednih segmenata na nekoliko jezika. Svaka prijevodna jedinica sadržava barem dvije varijante prijevodne jedinice (VPJ). Svaka može poslužiti kao izvorišni ili odredišni segment.</para>
+
+      <para>Izvorišni i odredišni jezik određuju se u postavkama projekta. OmegaT stoga koristi segmente VPJ-ova koji odgovaraju oznakama izvorišnog i odredišnog jezika, i to kao odgovarajuće izvorišne i odredišne segmente. OmegaT očitava oznake jezika prema sljedećim dvjema normama:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>dva slova (npr. HR za hrvatski) ili</para>
+        </listitem>
+
+        <listitem>
+          <para>dvoslovna ili troslovna oznaka jezika uz dodatak dvoslovne oznake države (npr. EN-US; ako vas zanima djelomičan popis oznaka jezika i država, pogledajte <xref linkend="appendix.languages"/>).</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Ako se oznake jezika projekta i oznake jezika datoteka tmx u cijelosti podudaraju, segmenti se učitavaju u memoriju. Ako se podudaraju jezici, no ne i države, segmenti se svejedno učitavaju. Ako se ne podudaraju ni oznake jezika ni oznake država, segmenti se ignoriraju.</para>
+
+      <para><indexterm class="singular">
+          <primary>Prijevodne memorije</primary> <secondary>višejezične, rad s</secondary>
+        </indexterm>Datoteke TMX u načelu mogu sadržavati prijevodne jedinice s nekoliko jezika kandidata. Kada za određeni segment nema upisanoga sadržaja za odabrani odredišni jezik, učitavaju se svi drugi odredišni segmenti, bez obzira na jezik. Primjerice, ako je jezični par projekta HR-FR, od pomoći bi mogle biti i pronađene prijevodne jedinice para HR-EN, ako ih već nema za HR-FR.</para>
+    </section>
+
+    <section>
+      <title>Segmenti „siročići”<indexterm class="singular">
+          <primary>Prijevodne memorije</primary> <secondary>Segmenti „siročići”</secondary>
+        </indexterm></title>
+
+      <para>Datoteka <filename>project_save.tmx</filename> sadržava sve segmente prevedene od početka projekta. Ako promijenite pravila segmentacije za projekt ili uklonite datoteke iz izvorišne mape, moguće je da će neka podudaranja biti prikazana kao <emphasis role="bold">nizovi „siročići”</emphasis> u oknu podudaranja, što se odnosi na segmente koji ne postoje više u izvorišnoj dokumentaciji, budući da odgovaraju segmentima koji su prevedeni i spremljeni prije obavljanja izmjena.</para>
+    </section>
+  </section>
+
+  <section id="using.translation.memories.from.previous.projects">
+    <title>Korištenje postojećih prijevodnih memorija<indexterm class="singular">
+        <primary>Prijevodne memorije</primary> <secondary>Korištenje postojećih prijevodnih memorija</secondary>
+      </indexterm></title>
+
+    <para>Na početku, tj. pri sastavljanju novoga projekta, glavna prijevodna memorija projekta (<filename>project_save.tmx</filename>) je prazna. Ta se prijevodna memorija postepeno popunjava tijekom prevođenja. Navedeni se proces može ubrzati opetovanim korištenjem postojećih prijevoda. Kada naiđemo na neku rečenicu koja je već prevedena, i to kvalitetno, nema potrebe da je ponovno prevodimo. Prijevodne memorije također mogu sadržavati i referentne prijevode, kao što su višenacionalni zakonodavni dokumenti, za što je tipičan primjer stečevina Europske zajednice.</para>
+
+    <para>Sastavljanjem odredišnih dokumenata za projekt u sklopu programa <application>OmegaT</application>, prijevodna se memorija sprema u obliku triju datoteka u korijensku mapu projekta (pogledajte opis gore u tekstu). Te tri datoteke tmx (<filename>-omegat.tmx</filename>, <filename>-level1.tmx</filename> i <filename>-level2.tmx</filename>) možete smatrati „izvoznom prijevodnom memorijom”, tj. izvozom sadržaja tekućega projekta u dvojezičnom obliku.</para>
+
+    <para>Ako želite iskoristiti neku postojeću prijevodnu memoriju iz jednoga od prethodnih projekata (primjerice zbog sličnosti novoga i toga projekta ili radi već obrađene terminologije), možete koristiti takve prijevodne memorije kao &quot;ulazne prijevodne memorije&quot;, tj. za uvoz u novi projekt. U tom slučaju te prijevodne memorije valja spremiti u mapu <emphasis>/tm</emphasis> ili <emphasis>/tm</emphasis>/auto novoga projekta; u prvome slučaju nude se prijedlozi iz navedenih prijevodnih memorija u pregledniku djelomičnih podudaranja, dok se u potonjemu te prijevodne memorije koriste za pretprevođenje izvorišnoga teksta.</para>
+
+    <para>Prema zadanim vrijednostima, mapa /tm je na razini ispod korijenske mape projekta (npr. <emphasis>/MojProjekt/tm</emphasis>), ali u dijaloškome okviru svojstava projekta možete odabrati i neku drugu mapu. To je korisno ako često koristite postojeće prijevodne memorije iz prethodnih projekata, primjerice zbog iste tematike ili istoga naručitelja. U tom je slučaju od koristi sljedeći postupak:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Na odgovarajućoj lokaciji diska izradite mapu („mapa repozitorija”) za prijevodne memorije određene tematike ili za nekoga naručitelja.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Kad god okončate neki projekt, kopirajte jednu od triju „izvoznih” prijevodnih memorija iz korijenske mape projekta i spremite je mapu repozitorija.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Kada započnete novi projekt s istom tematikom ili za istoga naručitelja, putem izbornika <guimenuitem>Projekt &gt; Svojstva</guimenuitem> otvorite dijaloški okvir Obrada projekta, odaberite mapu repozitorija i postavite je kao mapu prijevodnih memorija.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Vodite računa da se pri otvaranju projekta obrađuju sve datoteke tmx u repozitoriju /tm pa bi brojne različite prijevodne memorije spremljene u tu mapu mogle nepotrebno usporiti program OmegaT. Ne bi bilo zgorega da razmotrite uklanjanje datoteka koje više ne trebate, a nakon što njihov sadržaj iskoristite za popunjavanje datoteke <filename>project-save.tmx</filename>.</para>
+
+    <section id="importing.and.exporting.translation.memories">
+      <title>Uvoz i izvoz prijevodnih memorija<indexterm class="singular">
+          <primary>Prijevodne memorije</primary> <secondary>Uvoz i izvoz</secondary>
+        </indexterm></title>
+
+      <para>OmegaT podržava uvezene datoteke tmx inačica 1.1 do 1.4b (razina 1 i 2). Stoga OmegaT može očitavati prijevodne memorije proizvedene drugim alatima. Međutim, OmegaT ne podržava u cijelosti uvezene datoteke tmx razine 2 (koje pored prijevoda sadržavaju i informacije o oblikovanju). Datoteke tmx razine 2 svejedno se mogu uvesti, a OmegaT će prikazivati njihov tekstni sadržaj, ali uz nešto manju kvalitetu djelomičnih podudaranja.</para>
+
+      <para>OmegaT slijedi vrlo stroge postupke pri učitavanju datoteka prijevodnih memorija (tmx). U slučaju pronalaska pogreške u nekoj datoteci, OmegaT ukazuje na njenu lokaciju u neispravnoj datoteci.</para>
+
+      <para>Poznato je da neki alati izrađuju neispravne datoteke tmx pod određenim uvjetima. Ako želite koristiti takve datoteke kao referentne prijevode u programu OmegaT, valja ih popraviti ili će OmegaT prijaviti pogrešku i neće ih učitati. Popravci su vrlo jednostavne radnje, a OmegaT pomaže pri rješavanju problema pogrešaka odgovarajućim porukama. U slučaju poteškoća možete se obratiti za savjet korisničkoj skupini.</para>
+
+      <para>OmegaT podržava izvoz datoteka tmx inačice 1.4 (razina 1 i 2). Izvoz razine 2 nije u cijelosti u skladu s normom te razine, ali je ipak dovoljno usklađen i nudit će ispravna podudaranja u drugim alatima koji koriste prijevodne memorije i podržavaju tmx razine 2. Ako trebate samo tekstne informacije (a ne i informacije o oblikovanju), koristite datoteku razine 1 izrađenu programom OmegaT.</para>
+    </section>
+
+    <section id="Creating.a.translation.memory.for.selected.documents">
+      <title>Izrada prijevodne memorije za odabrane dokumente</title>
+
+      <para>U slučajevima kada prevoditelji trebaju dijeliti svoje datoteke tmx uz izuzimanje nekih dijelova ili s prijevodima samo određenih datoteka, dijeljenje cijele datoteke <filename>NazivProjekta-omegat.tmx</filename> ne dolazi u obzir. Sljedeći prijedlog načina rada tek je jedna od mogućnosti, ali prednost mu je što je jednostavan i potpuno bezopasan za vaše resurse.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Sastavite zaseban projekt sa željenim jezičnim parom i odgovarajućega naziva, pri čemu vodite računa da će i izrađene datoteke tmx sadržavati taj naziv.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Kopirajte dokumente za koje trebate prijevodnu memoriju i spremite ih u izvorišnu mapu projekta.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Kopirajte prijevodne memorije koje sadržavaju prijevode navedenih dokumenata i spremite ih u podmapu <filename>tm/auto</filename> novoga projekta.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Otvorite projekt. Provjerite ima li kakvih pogrešaka u oznakama teksta kombinacijom tipki <keycap>Ctrl+T</keycap> i je li neki segment nepreveden s pomoću <keycap>Ctrl+U</keycap>. Kombinacijom tipki <keycap>Ctrl+D</keycap> možete izraditi odredišne dokumente i obaviti kompletnu provjeru njihovog sadržaja.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Po zatvaranju projekta,  datoteke tmx u glavnoj mapi projekta (v. tekst gore) sadržavaju prijevode u odabranome jezičnom paru, i to za datoteke koje ste kopirali i spremili u izvorišnu mapu. Spremite ih na neko sigurno mjesto kako biste ih mogli koristiti i ubuduće.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Da biste izbjegli ponovno korištenje projekta i time moguće probleme u budućim zadacima, izbrišite mapu projekta ili je spremite u arhivu, da je ne miješate s radnim materijalima.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="sharing.translation.memories">
+      <title>Zajedničko korištenje prijevodnih memorija<indexterm class="singular">
+          <primary>Prijevodne memorije</primary> <secondary>Zajedničko korištenje</secondary> <seealso>Projekt, Preuzimanje timskoga projekta...</seealso>
+        </indexterm></title>
+
+      <para>Prevoditeljima prilikom timskoga rada više odgovara zajedničko korištenje prijevodnih memorija od slanja njihovih lokalnih inačica.</para>
+
+      <para>OmegaT se povezuje koristeći SVN i Git, dva uobičajena sustava za nadziranje revizija pri timskome radu, dostupna prema licenci otvorenoga kôda. Za slučajeve korištenja odabranoga sustava za nadziranje revizija radi upravljanja cjelovitim mapama projekta u sklopu programa OmegaT, tj. prijevodnim memorijama, kao i izvorišnim mapama, postavkama projekta i inim,  više pojedinosti možete naći u poglavlju</para>
+    </section>
+
+    <section>
+      <title>Korištenje TMX-ova s alternativnim jezičnim parovima<indexterm class="singular">
+          <primary>Prijevodne memorije</primary> <secondary>Alternativni jezični parovi</secondary>
+        </indexterm></title>
+
+      <para>Može se dogoditi da ste okončali projekt prijevoda s, primjerice, engleskoga na hrvatski jezik. Recimo da sada trebate prijevod na talijanski, ali prevoditeljica ne zna engleski, dok joj je hrvatski materinji jezik. U tom slučaju prijevodna memorija EN-HR može poslužiti kao posredno sredstvo za prijevod EN-IT.</para>
+
+      <para>Rješenje u našemu slučaju svodi se na kopiranje postojeće prijevodne memorije u podmapu tm/tmx2source/ i njeno preimenovanje u IT_IT.tmx, čime se označava odredišni jezik datoteke tmx. Prevoditeljici će se prikazivati hrvatski prijevodi izvorišnih segmenata na engleskom, koje može koristiti za prijevod na talijanski.</para>
+
+      <para><emphasis role="bold">Važno: </emphasis>pomoćni TMX mora biti preimenovan po modelu XX_YY.tmx, pri čemu je XX_YY odredišni jezik datoteke tmx, tj. u našemu primjeru IT_IT.tmx. Naravno, projekt i TMX moraju imati isti izvorišni jezik, u našemu slučaju EN. Imajte na umu da za svaki jezični par možete imati samo jedan TMX, pa stoga, ako trebate nekoliko prijevodnih memorija, sve ih morate spojiti u jednu – XX_YY.tmx.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>Izvorišni segmenti s postojećim prijevodima<indexterm class="singular">
+        <primary>Prijevodne memorije</primary> <secondary>Datoteke PO i OKAPI TTX</secondary> <seealso>Podmapa prijevodnih memorija tm/auto</seealso>
+      </indexterm></title>
+
+    <para>Neke su vrste izvorišnih datoteka (primjerice, PO, TTX itd.) dvojezične, tj. služe i kao izvorišne datoteke i kao prijevodne memorije. U takvim se slučajevima postojeći prijevod iz takvih datoteka uvrštava u <filename>project_save.tmx</filename>. Tretira se kao zadani prijevod kada nema pronađenih podudaranja, ili kao alternativni prijevod kada postoji isti izvorišni segment, ali s odredišnim tekstom. Ishod stoga ovisi o redoslijedu učitavanja izvorišnih segmenata.</para>
+
+    <para>Svi prijevodi iz izvorišnih dokumenata također se prikazuju u oknu komentara, a ne samo u oknu podudaranja. U slučaju datoteka PO primjenjuje se oduzimanje 20 % podudaranja, pa se tako, primjera radi, 100-postotno podudaranje tretira kao 80-postotno. U izvorišnome se segmentu prikazuje oznaka [Fuzzy].</para>
+
+    <para>Kada učitate segmentiranu datoteku TTX, segmenti u kojima je izvorišni tekst jednak odredišnome uzimaju se u obzir ako označite „Prijevod smije biti isti kao izvorišni tekst” u izborniku Mogućnosti → Funkcije obrađivanja. To može biti pomalo zbunjujuće, pa biste u takvim slučajevima možda mogli odznačiti navedenu funkciju.</para>
+  </section>
+
+  <section id="pseudo.translated.memory">
+    <title>Pseudoprevedena memorija<indexterm class="singular">
+        <primary>Prijevodne memorije</primary> <secondary>Pseudoprijevod</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>Samo za napredne korisnike!</para>
+    </note>
+
+    <para>Može se dogoditi da prije prevođenja želite prethodno obraditi segmente ili pripremiti ih na neki način koji nije omogućen u programu OmegaT. Primjerice, ako želite napraviti pseudoprijevod radi ispitivanja, OmegaT omogućava izradu dodatne datoteke tmx, a koja sadržava sve segmente projekta. Imamo dva moguća modela prijevoda u toj datoteci tmx:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>prijevod jednak izvorišnome tekstu (zadana vrijednost)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>prazan prijevodni segment</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Navedenu datoteku tmx možete nazvati kako god želite. Pseudoprevedenu memoriju možete izraditi sljedećim parametrima naredbenoga retka:</para>
+
+    <para><literal>java -jar omegat.jar --pseudotranslatetmx=&lt;naziv_datoteke&gt; [pseudotranslatetype=[equal|empty]]</literal></para>
+
+    <para>Vrijednost <literal>&lt;naziv_datoteke&gt;</literal> zamijenite nazivom datoteke koju želite izraditi, bilo u apsolutnome ili relativnome odnosu prema radnoj mapi (tj. mapi iz koje pokrećete program <application>OmegaT</application>). Drugi argument (<literal>--pseudotranslatetype</literal>) nije obavezan. Njegova je vrijednost ili <literal>equal</literal> (zadana vrijednost, kada želimo da izvorišni tekst bude jednak odredišnome) ili pak <literal>empty</literal> (prazan odredišni segment). Izrađenu datoteku tmx možete obraditi alatom po želji. Ako je želite koristiti u programu <application>OmegaT</application>, preimenujte je u <emphasis>project_save.tmx </emphasis> i spremite u mapu projekta <literal>omegat</literal>.</para>
+  </section>
+
+  <section id="upgrading.translation.memories">
+    <title>Nadogradnja prijevodnih memorija<indexterm class="singular">
+        <primary>Prijevodne memorije</primary> <secondary>Nadogradnja na segmentaciju po rečenicama</secondary>
+      </indexterm></title>
+
+    <para>Početne inačice programa <application>OmegaT</application> omogućavale su segmentiranje izvorišnih datoteka samo po odlomcima i nisu dosljedno numerirale oznake oblikovanja teksta u datotekama HTML i Open Document. <application>OmegaT</application> može otkriti i nadograditi takve datoteke u hodu i time poboljšati kvalitetu djelomičnih podudaranja i iskoristivost postojećih prijevoda, pa nema potrebe da vi to radite ručnim putem.</para>
+
+    <para>Projektna datoteka tmx nadograđuje se samo jednom i u takvome nadograđenom obliku se upisuje u <filename>project-save.tmx</filename>. Datoteke tmx koje su izvorno izrađene programom OmegaT nadograđuju se u hodu pri svakom učitavanju projekta. Vodite računa da promjene u datotečnim filtrima programa <application>OmegaT</application> u nekim rijetkim slučajevima mogu dovesti do sasvim drugačije segmentacije, zbog čega ćete tmx trebati nadograditi ručnim putem.</para>
+  </section>
+</chapter>

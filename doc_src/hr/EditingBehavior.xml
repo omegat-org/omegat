@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>Funkcioniranje obrade<indexterm class="singular">
+      <primary>Izbornik</primary> <secondary>Mogućnosti</secondary> <tertiary>Funkcioniranje obrade...</tertiary>
+    </indexterm></title>
+
+  <para>Dijaloški okvir koji se otvara koristeći <menuchoice> <guimenu>Mogućnosti</guimenu> <guimenuitem>Funkcioniranje obrade...</guimenuitem> </menuchoice> omogućava odabir načina manipulacije tekućim segmentom u polju za obradu:</para>
+
+  <figure id="editing.behavior.options">
+    <title>Mijenjanje mogućnosti funkcioniranja</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para/>
+
+  <para>Datoteke prevodimo segment po segment naizmjeničnom obradom svakoga pojedinačnoga tekućeg segmenta. Pritom imamo mogućnost automatskoga upisivanja postojećega prijevoda iz okna djelomičnih podudaranja ili pak izvorišnoga teksta u polje za obradu tekućega segmenta. Odabirom <menuchoice> <guimenu>Mogućnosti</guimenu> <guimenuitem>Funkcioniranje obrade...</guimenuitem>, </menuchoice> <application>OmegaT</application> nudi izbor sljedećega:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Izvorišni tekst</term>
+
+      <listitem>
+        <para>Mogućnost automatskoga umetanja izvorišnoga teksta u polje za obradu. Ovo je korisno za tekstove u kojima imamo veliki broj imena ili naziva koje ne smijemo mijenjati.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ostavi prazni segment<indexterm class="singular">
+          <primary>Izbornik Mogućnosti</primary> <secondary>Funkcioniranje obrade</secondary> <tertiary>Bez prijevoda</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT ostavlja prazno polje za obradu. Ova mogućnost nudi upisivanje prijevoda bez prethodnoga uklanjanja izvorišnoga teksta i time štedi vrijeme jer uklanja potrebu za dvjema tipkovnim radnjama (<emphasis role="bold">Ctrl+A </emphasis>i <emphasis role="bold">Del). </emphasis> Segmenti bez prijevoda nisu dopušteni. U oknu za obradu prikazuju se kao &lt;PRAZNO&gt;. Ako ipak želite segment bez prijevoda, desnom tipkom miša pritisnite segment pa odaberite „<emphasis role="bold">Ostavi bez prijevoda</emphasis>”. Postavka <emphasis role="bold">Ukloni prijevod</emphasis> iz istoga skočnog izbornika također nudi brisanje postojećega prijevoda u tekućem segmentu. Isto možemo postići i brisanjem sadržaja odredišnoga segmenta, nakon čega valja pritisnuti <guibutton>Enter.</guibutton></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Umetni najkvalitetnije podudaranje<indexterm class="singular">
+          <primary>Izbornik Mogućnosti</primary> <secondary>Funkcioniranje obrade</secondary> <tertiary>Umetanje djelomičnih podudaranja</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT umeće prijevod koji je najsličniji tekućem izvorišnom tekstu, pod uvjetom da je iznad praga sličnosti odabranoga u dijaloškome okviru. Prijevode umetnute putem podudaranja možemo označiti prefiksom (koji inače nije određen prema zadanim postavkama). Dodavanjem prefiksa (primjerice [fuzzy]) možete naknadno pronaći i provjeriti takve prijevode.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>Potvrdni kvadratići u donjoj polovici dijaloškoga prozora služe za sljedeće:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Pretvaraj brojeve prilikom umetanja djelomičnih podudaranja<indexterm class="singular">
+          <primary>Izbornik Mogućnosti</primary> <secondary>Funkcioniranje obrade</secondary> <tertiary>Pretvaranje brojeva</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Označavanjem ove mogućnosti OmegaT pokušava pretvoriti brojeve prilikom ručnog ili automatskog umetanja djelomičnih podudaranja, a u skladu sa sadržajem izvorišnih segmenata. Ovdje imamo više ograničenja:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>izvorišni segment i djelomična podudaranja moraju sadržavati isti skup brojeva,</para>
+          </listitem>
+
+          <listitem>
+            <para>brojevi u izvorišnome tekstu i odredišnim podudaranjima moraju biti istovjetni,</para>
+          </listitem>
+
+          <listitem>
+            <para>u obzir dolaze samo cijeli brojevi i jednostavni decimalni brojevi (s točkom kao decimalnim znakom, npr. 5.4, no ne i 5,4 ili 54E-01).</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Prijevod smije biti isti kao izvorišni tekst<indexterm class="singular">
+          <primary>Izbornik Mogućnosti</primary> <secondary>Funkcioniranje obrade</secondary> <tertiary>Prijevod isti kao izvorišni tekst</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Dokumenti za prijevod katkada imaju dosta imena ili naziva koji trebaju ostati isti i u prijevodu. Za segmente koji sadržavaju samo takav nepromjenjivi tekst imamo dvije strategije.</para>
+
+        <para>Možemo odlučiti da uopće ne prevodimo takve segmente. U tom će slučaju OmegaT prijaviti da navedeni segmenti nisu prevedeni. Ta je postavka standardno zadana. Drugo je rješenje unos prijevoda istovjetnoga izvorišnome tekstu. OmegaT omogućava takav izbor. U tu svrhu koristite <menuchoice> <guimenu>Mogućnosti</guimenu> <guimenuitem>Funkcioniranje obrade...</guimenuitem> </menuchoice> i označite kvadratić <emphasis role="bold">Prijevod smije biti isti kao izvorišni tekst</emphasis>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Izvezi segment u tekstne datoteke<indexterm class="singular">
+          <primary>Izbornik Mogućnosti</primary> <secondary>Funkcioniranje obrade</secondary> <tertiary>Izvoz tekućega segmenta</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Funkcija izvoza teksta služi za izvoz podataka iz tekućega projekta u okviru programa <application>OmegaT</application> u datoteke običnoga teksta. Podaci se izvoze prilikom otvaranja segmenta. Datoteke se spremaju u podmapu /script mape korisničkih datoteka OmegaT, a obuhvaćaju sljedeće:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>sadržaj segmenta izvorišnoga teksta (<filename>source.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>sadržaj segmenta odredišnoga teksta (<filename>target.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>tekst koji označi korisnik putem kombinacije <keycap>Ctrl+Shift+C</keycap> ili odabirom <guimenuitem>Obrada &gt; Izvezi odabrano</guimenuitem> (<filename>selection.txt</filename>).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Sadržaj datoteka briše se bilo otvaranjem novoga segmenta (source.txt i target.txt) ili izvozom novoga odabranog sadržaja (selection.txt). Datoteke su u formatu običnoga teksta bez oblikovanja. Cijelim je procesom moguće upravljati putem skriptiranja Tck/Tcl. Pojedinosti, primjere i prijedloge možete pronaći u odjeljku <ulink url="http://www.omegat.org/en/howtos/text_export.html">Korištenje funkcije izvoza teksta programa OmegaT</ulink>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Funkcija Idi na sljedeći neprevedeni segment automatski se zaustavlja na segmentu za koji postoji barem jedan alternativni prijevod<indexterm class="singular">
+          <primary>Izbornik Mogućnosti</primary> <secondary>Funkcioniranje obrade</secondary> <tertiary>Segmenti s alternativnim prijevodima</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Pogrešne prijevode u slučajevima segmenata s nekoliko mogućih odredišnih rješenja možemo izbjeći označavanjem potvrdnoga kvadratića <emphasis role="bold">Idi na sljedeći neprevedeni segment</emphasis>, čime se program zaustavlja na sljedećem segmentu takve vrste, i to bez obzira na to je li sadržaj već preveden.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Dopusti obradu oznaka teksta</term>
+
+      <listitem>
+        <para>Odznačavanjem ove postavke sprječavamo sva oštećenja oznaka teksta prilikom rada, npr. njihovo djelomično brisanje. Uklanjanje cijele oznake teksta ipak je omogućeno i u tom slučaju, i to ili putem kombinacije Ctrl+Backspace/Delete ili označavanjem cijele oznake (Ctrl+Shift+lijevo/desno), nakon čega je brišemo (Delete ili Ctrl+X).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Provjeri valjanost oznaka teksta pri zatvaranju segmenta</term>
+
+      <listitem>
+        <para>Odabirom ove funkcije primamo upozorenja zbog razlika u oznakama teksta između izvorišnih i odredišnih segmenata pri svakom zatvaranju segmenta ili prijelazu na sljedeći segment.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Spremi stanje automatski upisanih sadržaja</term>
+
+      <listitem>
+        <para>Odabirom ove postavke spremamo u datoteku <filename>project_save.tmx</filename> informacije o automatskome upisivanju u segmente, slijedom čega oni u oknu za obradu bivaju prikazani u određenoj boji (ako je označena funkcija „Označi automatski upisane segmente” na izborniku Prikaz).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Broj početno učitanih segmenata</term>
+
+      <listitem>
+        <para>Prema zadanim postavkama, u oknu za obradu prikazuje se 2000 početnih segmenata, uz usklađivanje s pomicanjem gore ili dolje. Taj broj možete povećati ako imate snažno računalo i/ili ako vam ne odgovara funkcioniranje trake za pomicanje prilikom učitavanja uz pomicanje sadržajem.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</chapter>

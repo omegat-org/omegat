@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.website">
+  <title><application><indexterm class="singular">
+      <primary>OmegaT na webu</primary>
+    </indexterm>OmegaT</application> na webu</title>
+
+  <section id="OmegaT.sites.and.OmegaT.SourceForge.project">
+    <title>Web stranice <application>OmegaT</application> i <application>OmegaT</application> kao projekt na servisu SourceForge<indexterm class="singular">
+        <primary>OmegaT on the web</primary> <secondary>Projekt na servisu SourceForge</secondary>
+      </indexterm></title>
+
+    <para><ulink url="http://www.omegat.org/"><application>Web stranice</application> programa OmegaT </ulink>sadržavaju poveznice na brojne resurse za <application>OmegaT</application>. Korisnička se podrška pruža volonterski na stranicama korisničke skupine programa <ulink url="http://tech.groups.yahoo.com/group/omegat/"><application>OmegaT</application> na servisu Yahoo!</ulink>. <ulink url="http://tech.groups.yahoo.com/group/OmegaT/database?method=reportRows&amp;tbl=1">Česta pitanja</ulink> su korisno polazište za pronalaženje rješenja za eventualne nejasnoće. Najnoviju inačicu programa OmegaT možete pronaći na stranicama za preuzimanja na adresi www.omegat.org. Moguće je i podnošenje <ulink url="https://sourceforge.net/p/omegat/bugs/">prijava pogrešaka</ulink>, kao i <ulink url="https://sourceforge.net/p/omegat/feature-requests/">zahtjeva za poboljšanja programa.</ulink></para>
+  </section>
+
+  <section id="bug.reports">
+    <title>Prijave pogrešaka<indexterm class="singular">
+        <primary>OmegaT na webu</primary> <secondary>Prijavljivanje pogrešaka</secondary>
+      </indexterm></title>
+
+    <para>Vodite računa da su za svaku valjanu prijavu pogreške potrebna tri elementa.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>opis radnji</para>
+      </listitem>
+
+      <listitem>
+        <para>opis očekivanoga ishoda</para>
+      </listitem>
+
+      <listitem>
+        <para>opis stvarnoga ishoda</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Više informacija možete pronaći u članku <ulink url="http://www.joelonsoftware.com/articles/fog0000000029.html">Painless Bug Tracking</ulink>, koji je napisao Joel Spolsky.</para>
+
+    <para>Trebate dodati i kopije datoteka, dijelove zapisnika (engl. log), slike zaslona, kao i sve ostalo za što držite da bi moglo pomoći programerima u cilju otkrivanja i uklanjanja pogreške. Imajte na umu da su prijave pogrešaka i zahtjevi za poboljšanja programa javni i svima vidljivi, pa stoga izbjegavajte dodavanje bilo kakvih datoteka s povjerljivim sadržajima. Ako želite pratiti što se događa s prijavom, registrirajte se kao korisnik servisa SourceForge, prijavite se i podnesite prijavu pogreške ili jednostavno pritisnite Monitor na vrhu prijave.</para>
+  </section>
+
+  <section id="contributing.to.omegat.project">
+    <title>Doprinos projektu <application>OmegaT</application><indexterm class="singular">
+        <primary>OmegaT na webu</primary> <secondary>Doprinos razvoju programa OmegaT</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Ako želite sudjelovati u projektu <application>OmegaT</application>:</emphasis></para>
+
+    <para>najprije se učlanite u <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">korisničku skupinu</ulink> (putem weba ili porukom e-pošte na adresu <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>). Ako želite sudjelovati u programiranju <application>OmegaT</application>, možete se pridružiti programerskoj skupini, također putem weba ili porukom e-pošte na adresu <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink>, pri čemu u polje predmeta poruke valja upisati „subscribe”.</para>
+
+    <para><emphasis role="bold">Za prevođenje korisničkoga sučelja, priručnika ili drugih povezanih materijala programa <application>OmegaT</application>:</emphasis></para>
+
+    <para>najprije pročitajte vodič za <ulink url="http://www.omegat.org/en/howtos/localizing_omegat.php">lokalizaciju i prilagodbu programa <application>OmegaT</application></ulink>, a potom se učlanite u skupinu prevoditelja programa <application>OmegaT</application> putem weba ili porukom e-pošte na adresu <ulink url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink>, pri čemu u polje predmeta valja upisati „subscribe”.</para>
+
+    <indexterm class="singular">
+      <primary>OmegaT na webu</primary> <secondary>Razvoj, lokaliziranje</secondary>
+    </indexterm>
+
+    <para>Financijska potpora projektu OmegaT<indexterm class="singular">
+        <primary>OmegaT na webu</primary> <secondary>Financijska potpora</secondary>
+      </indexterm></para>
+
+    <para>Vrlo smo zahvalni za svaku pomoć stalnome razvoju programa OmegaT. Uplate možete obaviti putem <ulink url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99LL">računa PayPal programa OmegaT</ulink>.</para>
+
+    <indexterm class="singular">
+      <primary>OmegaT na webu</primary> <secondary>Donacije za program OmegaT</secondary>
+    </indexterm>
+  </section>
+</appendix>

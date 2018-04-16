@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.Tokenizers.inOmegaT">
+  <title>Tokenizatori<indexterm class="singular">
+      <primary>Tokenizatori</primary>
+    </indexterm></title>
+
+  <section>
+    <title>Uvod<indexterm class="singular">
+        <primary>Lucene</primary>
+
+        <see>Tokenizer</see>
+      </indexterm><indexterm class="singular">
+        <primary>Alat za prepoznavanje korijena riječi</primary> <see>Tokenizator</see>
+      </indexterm></title>
+
+    <para>Tokenizatori (ili alati za prepoznavanje korijena) poboljšavaju kvalitetu podudaranja prepoznavanjem dekliniranih riječi u izvorišnim podacima i prijevodnim memorijama. Također poboljšavaju i pronalaženje rezultata podudaranja u glosarima.</para>
+
+    <para>Alat za prepoznavanje korijena za engleski, primjera radi, prepoznaje oblik „cats” (pa i „catlike”, „catty” itd.) na temelju korijena „cat”, kao i „stemmer”, „stemming”, „stemmed” prema korijenu „stem”. Algoritam za određivanje korijena svodi riječi „fishing”, „fished”, „fish” i „fisher” na korijensku riječ „fish”. To je posebno korisno kod jezika u kojima se izvedenice tvore dodavanjem prefiksa ili sufiksa korijenskim riječima. Posudit ćemo jedan primjer iz hrvatskoga jezika – pridjev „lijep” u gramatički ispravnim oblicima:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lijep, lijepa, lijepo – jednina, muški rod, ženski rod, srednji rod</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>ljepši, ljepša, ljepše – komparativ, nominativ, muški rod, ženski rod, srednji rod. Množinski oblik pridjeva.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najljepših – superlativ, množina, genitiv muškoga, ženskoga i srednjega roda</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Odabir jezika</title>
+
+    <para>OmegaT već sadržava tokenizatore, i to aktivirane prema zadanim postavkama. OmegaT automatski bira tokenizator za izvorišni i odredišni jezik na temelju postavki jezika projekta. Prozor svojstava projekta nudi i odabir nekoga drugog tokenizatora (Jezični tokenizator) ili druge inačice tokenizatora (Funkcioniranje tokenizatora).</para>
+
+    <para>U slučajevima kada nema tokenizatora za odabrane radne jezike, OmegaT koristi Hunspell (pri čemu valja voditi računa da budu instalirani odgovarajući Hunspellovi rječnici).</para>
+
+    <warning>
+      <title>Nekompatibilnosti</title>
+
+      <para>OmegaT se ne može pokrenuti kada se tokenizatori nalaze u mapi /plugin. Prije pokretanja programa OmegaT valja ukloniti sve tokenizatore iz mape /plugin.</para>
+    </warning>
+  </section>
+</appendix>

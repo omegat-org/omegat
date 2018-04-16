@@ -1,0 +1,1431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menu">
+  <title>Izbornik i tipkovni prečaci</title>
+
+  <section id="ch04.main.menu">
+    <title><indexterm class="singular">
+        <primary>Izbornik</primary>
+      </indexterm>Glavni izbornik</title>
+
+    <para>Sve funkcije programa OmegaT dostupne su putem trake izbornika na vrhu okna za obradu. Većina funkcija dostupna je i putem tipkovnih prečaca. Prečaci se aktiviraju kombinacijom tipke <keycap>Ctrl</keycap> i određenih tipki sa slovima. Za neke se prečace koriste i druge tipke. Radi bolje čitljivosti ovdje koristimo velika slova. <keycap>Ctrl</keycap> se koristi u operacijskim sustavima Windows, UNIX i izvedenicama UNIX-a, kod kojih se koriste tipkovnice s tipkom <keycap>Ctrl</keycap> ili <keycap>Control</keycap>. U sustavu Mac tu funkciju ima tipka <keycombo> <keycap>Cmd</keycap> <keycap></keycap> </keycombo>. Tipka „Cmd” je na Appleovim tipkovnicama označena ili riječju „command” ili simbolom jabuke.</para>
+
+    <para>Postojeće prečace možete prilagođavati ili dodavati nove, već prema svojim potrebama. Više informacija naći ćete u dodatku <link linkend="ch04.shortcuts.customization">Prilagođavanje prečaca</link></para>
+
+    <table colsep="1" id="table.main.menu">
+      <title>Glavni izbornik</title>
+
+      <tgroup cols="7" colsep="1">
+        <tbody>
+          <row>
+            <entry><guimenuitem>Projekt</guimenuitem></entry>
+
+            <entry><guimenuitem>Obrada</guimenuitem></entry>
+
+            <entry><guimenuitem>Idi na</guimenuitem></entry>
+
+            <entry><guimenuitem>Prikaz</guimenuitem></entry>
+
+            <entry><guimenuitem>Alati</guimenuitem></entry>
+
+            <entry><guimenuitem>Mogućnosti</guimenuitem></entry>
+
+            <entry><guimenuitem>Pomoć</guimenuitem></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <section id="submenu.Project">
+      <title>Projekt<indexterm class="singular">
+          <primary>Izbornik</primary> <secondary>Projekt</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Izbornik Projekt</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Novi...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
+
+              <entry>Priprema i otvaranje novoga projekta. Dijaloški okvir za pripremu projekta isti je kao onaj za mijenjanje postavki projekta. Pogledajte<xref linkend="chapter.project.properties"/></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Preuzimanje timskoga projekta...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Sastavljanje lokalne kopije udaljenoga projekta u sklopu programa OmegaT.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Otvori...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Otvaranje prethodno pripremljenoga projekta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Otvori nedavni projekt</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Brzi pristup za pet zadnjih radnih projekata. Odabirom jednoga od njih tekući se projekt sprema i zatvara, a otvara se odabrani.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Kopiraj datoteke u izvorišnu mapu...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Kopiranje odabranih datoteka u mapu <filename>source</filename> i ponovno učitavanje projekta radi pridruživanja novih datoteka.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Preuzmi stranicu MediaWiki...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Preuzimanje stavki sa stranica MediaWiki na temelju upisane URL adrese.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ponovno učitaj</guimenuitem></entry>
+
+              <entry><keycap>F5</keycap></entry>
+
+              <entry>Ponovno učitavanje projekta radi registriranja izmjena u izvorišnim datotekama, starijim prijevodnim memorijama, glosarima i postavkama projekta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zatvori</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Spremanje prijevoda i zatvaranje projekta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Spremi</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Spremanje interne prijevodne memorije na disk. OmegaT automatski sprema prijevode svakih 10 minuta, kao i prilikom zatvaranja projekta ili samoga programa OmegaT.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Izradi prevedene dokumente</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Izrada odredišnih dokumenata na temelju prevedenoga materijala. Izrađeni odredišni dokumenti spremaju se u mapu <filename>target</filename>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Izradi tekući prevedeni dokument</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Izrada odredišnoga dokumenta koji odgovara tekućemu dokumentu prijevoda.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Svojstva...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Prikaz dijaloškoga okvira <link linkend="chapter.project.properties">Svojstva projekta</link>, putem kojega možete mijenjati jezike projekta i lokacije mapa, između ostaloga.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Datoteke projekta...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Zatvaranje ili otvaranje <link linkend="section.project.files">prozora datoteka projekta</link>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Pristup sadržajima projekta</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap/>
+                </keycombo></entry>
+
+              <entry>Pristup mapama projekta.<para>Povrh toga, dvije stavke ovoga izbornika omogućavaju izravno otvaranje tekuće izvorišne i odredišne dokumentacije, kao i zapisivoga glosara. Dokumenti se otvaraju programom zadanim u sklopu operacijskoga sustava. Kada nema raspoloživih dokumenata, stvaka je posivljena.</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zatvori</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Q</keycap>
+                </keycombo></entry>
+
+              <entry>Spremanje projekta i zatvaranje programa <application>OmegaT</application>. Ako niste još spremili projekt, program traži potvrdu zatvaranja.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section>
+      <title>Obrada<indexterm class="singular">
+          <primary>Izbornik</primary> <secondary>Obrada</secondary>
+        </indexterm></title>
+
+      <para>Napomena: stavke koje su inače raspoložive u brojnim programima, primjerice za kopiranje/izrezivanje/lijepljenje, ne prikazuju se na ovome izborniku, nego su dostupne putem uobičajenih tipkovnih prečaca. Navest ćemo neke primjere.</para>
+
+      <table colsep="1">
+        <title>Prečaci za kopiranje/izrezivanje/lijepljenje</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Kopiraj</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Kopiranje odabranoga sadržaja u međuspremnik.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Izreži</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>X</keycap>
+                </keycombo></entry>
+
+              <entry>Kopiranje odabranoga sadržaja u međuspremnik uz njegovo brisanje.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zalijepi</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>V</keycap>
+                </keycombo></entry>
+
+              <entry>Lijepljenje sadržaja iz međuspremnika na položaj pokazivača miša.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <para>Sȃm izbornik Obrada sadržava sljedeće stavke:</para>
+
+      <table colsep="1">
+        <title>Izbornik Obrada</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Poništi zadnju radnju</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Vraćanje stanja koje je prethodilo zadnjoj radnji. Ova naredba ne djeluje nakon potvrđivanja obrađenoga segmenta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ponovi zadnju radnju</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Vraćanje stanja koje je prethodilo poništavanju zadnje radnje. Ova naredba ne djeluje nakon potvrđivanja obrađenoga segmenta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zamijeni podudaranjem ili odabranim sadržajem</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Zamjena cijeloga odredišnoga segmenta odabranim djelomičnim podudaranjem. Prema zadanim vrijednostima odabire se prvo podudaranje po redu.<para>U slučaju odabira dijela djelomičnoga podudaranja, cijeli odredišni segment zamjenjuje se tim odabranim dijelom.</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Umetni podudaranje ili odabrani sadržaj</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Umetanje odabranoga djelomičnog podudaranja na položaj pokazivača miša. U slučaju odabira dijela odredišnoga dijela, ovom se funkcijom zamjenjuje taj odabrani dio.<para>U slučaju odabira dijela djelomičnoga podudaranja, na položaj pokazivača miša umeće se samo taj odabrani dio.</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zamijeni strojnim prijevodom</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Zamjena odredišnoga segmenta prijevodom ponuđenim putem servisa za strojno prevođenje. Kada nije aktiviran nijedan servis za strojno prevođenje, ne poduzima se nikakva radnja (pogledajte odjeljak Izbornik Mogućnosti niže u tekstu).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zamijeni izvorišnim tekstom</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Zamjena cijeloga odredišnoga segmenta izvorišnim.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Umetni izvorišni tekst</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Umetanje izvorišnoga teksta na položaj pokazivača miša.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Umetni izvorišne oznake koje nedostaju</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>Oznake teksta</primary> <secondary>Umetanje izvorišnih oznaka koje nedostaju</secondary>
+                </indexterm>Umetanje izvorišnih oznaka teksta (ako nedostaju u odredišnome tekstu) na položaj pokazivača miša.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Umetni sljedeću oznaku koja nedostaje</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>Oznake</primary> <secondary>Umetanje sljedeće oznake koja nedostaje</secondary>
+                </indexterm>Umetanje samo jedne oznake teksta (od onih koje nedostaju u odredišnome tekstu) na položaj pokazivača miša.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Izvezi odabrano</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Izvoz odabranoga sadržaja u tekstnu datoteku radi obrade. Ako nije odabran nikakav sadržaj, u datoteku se upisuje tekući izvorišni segment. Ta se datoteka ne briše nakon zatvaranja programa <application>OmegaT</application>, i to zbog usklađenosti s uobičajenim funkcioniranjem međuspremnika. Izvezeni se sadržaj kopira u datoteku <filename>selection.txt</filename>, koja se nalazi u mapi korisničkih postavki (pogledajte <xref linkend="chapter.files.and.folders"/>).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Dodavanje termina u glosar</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Omogućava izradu nove natuknice u zadanoj datoteci glosara.<para>Najprije valja odabrati tekstni niz (u bilo kojemu oknu), a zatim koristiti kombinaciju tipki <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, čime se tekst lijepi u polje <guilabel>izvorišnoga termina</guilabel>.</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Pretraživanje projekta...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Otvaranje novoga <link linkend="section.search.window">prozora za pretraživanje</link>.<para>Najprije valja odabrati tekstni niz (u bilo kojemu oknu), a zatim koristiti kombinaciju tipki <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, čime se tekst lijepi u polje <guilabel>Traži</guilabel>.</para><para>Kombinacijom tipki <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo> otvara se zadnji nezatvoreni prozor za pretraživanje (za razliku od otvaranja novoga).</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Pretraživanje i zamjena...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>K</keycap>
+                </keycombo></entry>
+
+              <entry>Otvaranje novoga <link linkend="section.searchreplace.window">prozora za pretraživanje i zamjenu</link>.<para>Najprije valja odabrati tekstni niz (u bilo kojemu oknu), a zatim koristiti kombinaciju tipki <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, čime se tekst lijepi u polje <guilabel>Traži</guilabel>.</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Promjena veličine slova</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (pogledajte tekst)</entry>
+
+              <entry>Mijenjanje veličine slova odabranoga sadržaja u odredišnome segmentu (Mala slova, Velika slova, Velika početna slova ili Prvo slovo rečenice veliko). Za naizmjenično prebacivanje kroz navedene četiri mogućnosti koristite kombinaciju tipki Shift+F3<indexterm>
+                  <primary>Prečaci</primary> <secondary>Odabir veličine slova – Shift+F3</secondary>
+                </indexterm>. U slučaju da nije odabran nikakav sadržaj, <application>OmegaT</application> odabire prvu riječ koja sadržava slovo, a nalazi se desno od pokazivača miša.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Odabir podudaranja</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap> <keycap>br.</keycap>
+                </keycombo></entry>
+
+              <entry>(Kratica br. označava tipke sa znamenkama od 1 do 5.) Odabir jednoga od pet djelomičnih podudaranja prikazanih u oknu podudaranja radi umetanja u segment. <xref linkend="match.viewer"/> sadržava detaljan opis obilježavanja bojom.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Koristi kao zadani prijevod</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Kada za otvoreni segment postoji nekoliko alternativnih prijevoda, jedan od njih možete označiti kao zadani prijevod. Ova je stavka izbornika posivljena kad god postoji samo jedan prijevod.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Izradi alternativni prijevod</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Katkada za neke segmente trebamo nekoliko različitih prijevoda, ovisno o kontekstu. U takvim slučajevima valja odabrati ovu stavku izbornika pa upisati alternativni prijevod.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ukloni prijevod</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Brisanje prijevoda i postavljanje neprevedenoga segmenta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ostavi bez prijevoda</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Postavljanje praznoga segmenta, tj. bez prijevoda. U odredišnome će dokumentu takvi segmenti biti bez ikakvoga sadržaja. U oknu za obradu se umjesto prijevoda prikazuje oznaka &lt;PRAZNO&gt;,</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Registriraj istovjetan prijevod</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Ova se naredba koristi za registriranje prijevoda istovjetnih izvorima, čak i kada nije aktivirana funkcija „Prijevod smije biti isti kao izvorišni tekst” (u izborniku Mogućnosti &gt; Funkcioniranje obrade...).</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.GoTo">
+      <title>Idi na<indexterm class="singular">
+          <primary>Izbornik</primary> <secondary>Idi na</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Izbornik Idi na</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Sljedeći neprevedeni segment</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Prebacivanje na sljedeći segment za koji ne postoji odgovarajući prijevod u prijevodnoj memoriji.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Sljedeći prevedeni segment</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Prebacivanje na sljedeći već prevedeni segment, uz zanemarivanje neprevedenih segmenata.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Sljedeći segment</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> ili <keycap>Enter</keycap></entry>
+
+              <entry>Prebacivanje na sljedeći segment. Kada je tekući segment posljednji u datoteci, obavlja se prebacivanje na prvi segment sljedeće datoteke.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Prethodni segment</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> ili <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo></entry>
+
+              <entry>Prebacivanje na prethodni segment. Kada je tekući segment prvi u datoteci, obavlja se prebacivanje na posljednji segment prethodne datoteke.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Segment pod brojem...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Otvaranje odgovarajućega segmenta prema njegovome broju koji upišete.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Sljedeća bilješka</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Otvaranje sljedećega segmenta kojemu je dodana bilješka.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Prethodna bilješka</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Otvaranje prethodnoga segmenta kojemu je dodana bilješka.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Izvorište odabranoga podudaranja</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Prebacivanje na segment koji odgovara trenutno odabranome podudaranju u oknu <guilabel>Djelomična podudaranja</guilabel>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Naprijed po kronologiji...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
+
+              <entry><application>OmegaT</application> pamti obrađene segmente. Ovom se naredbom možete prebaciti naprijed u segment iz kojega ste prethodno izišli naredbom <guimenuitem>Natrag po kronologiji...</guimenuitem>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Natrag po kronologiji...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Ovom se naredbom možete prebacivati unatrag jedan po jedan segment, a na tekući se segment možete vratiti putem naredbe <guimenuitem>Forward in history... </guimenuitem>.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.View">
+      <title>Prikaz<indexterm class="singular">
+          <primary>Izbornik</primary> <secondary>Prikaz</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Izbornik Prikaz</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Označi prevedene segmente</guimenuitem></entry>
+
+              <entry>Odabirom ove funkcije prevedeni se segmenti označavaju žutom bojom.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označi neprevedene segmente</guimenuitem></entry>
+
+              <entry>Odabirom ove funkcije neprevedeni se segmenti označavaju ljubičastom bojom.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Prikaži izvorišne segmente</guimenuitem></entry>
+
+              <entry>Odabirom ove funkcije izvorišni se segmenti prikazuju i označavaju zelenom bojom. Ako ne odaberete ovu funkciju, izvorišni se segmenti ne prikazuju.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označi višekratne segmente</guimenuitem></entry>
+
+              <entry>Odabirom ove funkcije jednokratni se segmenti označuju svjetlosivom bojom.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označi segmente s bilješkama</guimenuitem></entry>
+
+              <entry>Odabirom ove funkcije segmenti s bilješkama označavaju se bojom cijan. To označavanje ima prednost u odnosu na ono uslijed funkcija Označi prevedene segmente i Označi neprevedene segmente.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označi razmake koji ostavljaju znakove u istome retku</guimenuitem></entry>
+
+              <entry>Odabirom ove funkcije razmaci koji ostavljaju znakove u istome retku prikazuju se sa sivom pozadinom.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označi bjeline</guimenuitem></entry>
+
+              <entry>Odabirom ove funkcije bjeline se prikazuju kao točkice.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označi dvosmjerne kontrolne znakove algoritama</guimenuitem></entry>
+
+              <entry>Ovom se funkcijom prikazuju <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">dvosmjerni kontrolni znakovi</ulink>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označi automatski upisane segmente</guimenuitem></entry>
+
+              <entry>Odabirom ove funkcije boja se pozadina svih segmenata koji su automatski upisani, primjerice sadržajima iz TMX-ova u mapi /tm/auto. Boje se prikazuju kada je označen potvrdni kvadratić „Spremi stanje automatski upisanih sadržaja” (u izborniku Mogućnosti &gt; Funkcioniranje obrade..). Uobičajeni prijevodi umetnuti iz mape auto označavaju se narančastom bojom. Ostali specifičniji prijevodi iz TMX-a mogu biti označeni drugim bojama. Tehničke pojedinosti možete naći u ovome <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">zahtjevu za poboljšanja programa</ulink>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Agresivni povrat fontova</guimenuitem></entry>
+
+              <entry>Ovu funkciju odaberite u slučajevima kada OmegaT ne prikazuje pravilno neke znakove (čak i kada imate fontove s takvim znakovima instalirane na računalu). Napomena: izgleda da u sustavu Windows ovakav mehanizam ručnoga povrata fontova ometa standardni povrat, što izaziva neželjenu zamjenu fontova. Iz toga je razloga ova funkcija isključena prema zadanim postavkama.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Informacije o izmjenama</guimenuitem></entry>
+
+              <entry>Postavljanjem prikaza izmjena na <emphasis>Tekući segment</emphasis> prikazuju se vrijeme i autor zadnje izmjene tekućega segmenta. Postavljanjem na <emphasis>Sve segmente</emphasis> navedene se informacije prikazuju za sve segmente, dok se odabirom <emphasis>Ništa</emphasis> funkcija isključuje.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <para>Napomena: boje možete mijenjati putem dijaloškoga okvira na izborniku <guimenu>Mogućnosti &gt; Prilagođene boje...</guimenu>.</para>
+    </section>
+
+    <section id="submenu.Tools">
+      <title>Alati<indexterm class="singular">
+          <primary>Izbornik</primary> <secondary>Alati</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Izbornik Alati</title>
+
+        <indexterm class="singular">
+          <primary>Podudaranja</primary> <secondary>Statistika podudaranja</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Projekt</primary> <secondary>Statistika podudaranja</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Projekt</primary> <secondary>Statistika</secondary>
+        </indexterm>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Provjera valjanosti oznaka teksta</guimenuitem></entry>
+
+              <entry><guimenu>Ctrl+Shift+V</guimenu>: provjera broja i položaja oznaka teksta u oblikovanim datotekama. Omogućava prikaz popisa segmenata s pogreškama u vezi s oznakama teksta i eventualnim neujednačenostima. Pogledajte odjeljak <link linkend="section.tag.validation">Provjera valjanosti oznaka teksta</link> i <xref linkend="chapter.formatted.text"/>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Provjera valjanosti oznaka teksta za tekući dokument</guimenuitem></entry>
+
+              <entry>Vrijedi isto kao za gore navedeno, ali samo za tekući dokument prijevoda.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Statistika</guimenuitem></entry>
+
+              <entry>Otvaranje novoga prozora i prikaz statističkih podataka projekta, odnosno zbirnih rezultata za projekt i za svaku pojedinu datoteku projekta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Statistika podudaranja</guimenuitem></entry>
+
+              <entry>Prikaz statistike podudaranja za projekt, tj. broja ponavljanja, potpunih podudaranja, djelomičnih podudaranja i nepodudaranja, i to po segmentima, riječima i znakovima.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Statistika podudaranja po datotekama</guimenuitem></entry>
+
+              <entry>Prikaz statistike podudaranja za svaku pojedinu datoteku projekta, tj. broja ponavljanja, potpunih podudaranja, djelomičnih podudaranja i nepodudaranja, i to po segmentima, riječima i znakovima.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Skriptiranje...</guimenuitem></entry>
+
+              <entry>Otvaranje dijaloškoga okvira u kojemu možete raditi sa skriptama: odrediti im lokaciju, upisivati ih, pokretati ih i dodijeliti im prečace (pogledajte primjer <link linkend="appendix.Scripts.inOmegaT">prozora skriptiranja</link>).</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Options">
+      <title><indexterm class="singular">
+          <primary>Izbornik</primary> <secondary>Mogućnosti</secondary>
+        </indexterm>Mogućnosti</title>
+
+      <table colsep="1">
+        <title>Izbornik Mogućnosti</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>TAB za pomicanje naprijed</guimenuitem></entry>
+
+              <entry>Postavljanje tabulatora (<guimenuitem>Tab</guimenuitem>) za tipku kojom se potvrđuju segmenti, umjesto zadane tipke <guimenuitem>Enter</guimenuitem>. Ova je funkcija korisna za neke sustave unosa kineskih, japanskih ili korejskih znakova.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Potvrda zatvaranja programa</guimenuitem></entry>
+
+              <entry>Program prikazuje potvrdu zatvaranja.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Strojni prijevod</guimenuitem></entry>
+
+              <entry>Mogućnost uključivanja/isključivanja korištenja ponuđenih alata za strojno prevođenje. Kada je ova funkcija uključena, prijedloge možete umetati u odredišni dio tekućega segmenta kombinacijom tipki <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>.<para>Iz razloga povjerljivosti nije uputno davati sve segmente na prijevod alatima za strojno prevođenje. Odznačavanjem stavke izbornika <emphasis role="bold">Automatsko dohvaćanje prijevoda</emphasis>, strojni se prijevodi dohvaćaju za tekući segment samo po zahtjevu kombinacijom tipki <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> (<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo> u sustavu OS X). Zatim za umetanje prijedloga valja još jednom koristiti kombinaciju <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>.</para><para>Za isključivanje korištenja alata za strojno prevođenje u već prevedenim segmentima, označite stavku izbornika <emphasis role="bold">Samo neprevedeni segmenti</emphasis>. Napomena: u tom slučaju i dalje možete koristiti kombinaciju tipki <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> radi strojnoga prevođenja već prevedenoga segmenta.</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Glosar</guimenuitem></entry>
+
+              <entry>Funkcija <guimenuitem>Prikaz konteksta za glosare u formatu TBX</guimenuitem> omogućava prikazivanje ili skrivanje kontekstnih informacija uz termine (iz glosara u formatu TBX u mapi <filename>glossary</filename>) u oknu glosara.<para>Uključivanje funkcije <guimenuitem>Termini mogu biti razdvojeni u izvorišnome tekstu</guimenuitem> omogućava pronalaženje natuknice glosara „stavkaA stavkaB” u izvorišnome tekstu u obliku „stavkaA neka druga riječ stavkaB”. Isključivanjem navedene funkcije onemogućavamo pronalaženje spomenute natuknice glosara.</para><para>Uključivanje funkcije <guimenuitem>Koristi određivanje korijena riječi za natuknice glosara</guimenuitem> omogućava pronalaženje natuknice glosara „element” u izvorišnome tekstu koji sadržava riječ „elementi”. Isključivanjem navedene funkcije onemogućavamo pronalaženje spomenute natuknice glosara.</para><para>Funkcija <emphasis>Zamijeni pronađene natuknice glosara pri umetanju izvorišnoga teksta</emphasis> omogućava automatsku zamjenu pronađenih natuknica glosara njihovim ekvivalentima prilikom umetanja izvorišnoga teksta. Iskoristiva je kod funkcija <emphasis>Obrada &gt; Zamijeni izvorišnim tekstom</emphasis>, <emphasis>Obrada &gt; Umetni izvorišni tekst</emphasis>, kao i pri unošenju segmenta kada je uključena funkcija <emphasis>Mogućnosti &gt; Funkcioniranje obrade &gt; Umetni izvorišni tekst</emphasis>. U slučajevima kada imamo dva ili više ekvivalenata, koristi se prvi (prikazan u oknu glosara). Za pronalaženje rezultata podudaranja u glosarima ne koristi se određivanje korijena riječi ni uobičajene riječi (stop words), ali zato nije bitna veličina slova. Svejedno, prednost imaju riječi s podudarnom veličinom slova.</para><para>Tri preostale mogućnosti opisane su na stranici posvećenoj servisu <link linkend="section.TaaS.options.access">TaaS</link> (Terminology as a Service).</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Savjetnik</guimenuitem></entry>
+
+              <entry>Omogućava uključivanje/isključivanje <emphasis>Savjetnika </emphasis>i postavljanje njegove funkcije <emphasis> Potpuno podudaranje.</emphasis> Kada je <emphasis>Savjetnik</emphasis> uključen, pritiskom desnom tipkom miša na označenu riječ u izvorišnome tekstu otvaramo skočni izbornik s natuknicama glosara za tu riječ. Zatim možemo pritisnuti željeni ekvivalent i time ga umetnuti u odredišni segment na trenutni položaj. Uključivanjem funkcije <emphasis>Savjetnik &gt; Potpuno podudaranje </emphasis> u obzir se uzimaju samo cjelovite riječi, a u suprotnome pak i dijelovi riječi.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Automatsko dovršavanje upisa</guimenuitem></entry>
+
+              <entry><para>Za postavljanje automatskoga dovršavanja upisa ekvivalenata iz glosara najprije pritisnite stavku izbornika <guimenuitem>Glosar...</guimenuitem>.</para><para>Pritisnite <guimenuitem>Automatski tekst...</guimenuitem> radi podešavanja funkcija automatskoga teksta i dodavanja ili uklanjanja natuknica.</para><para>Za postavljanje tablice znakova automatskoga dovršavanja pritisnite <guimenuitem>Tablica znakova...</guimenuitem>.</para><para>Automatsko dovršavanje upisa možete pokrenuti iz odredišnoga segmenta tipkovnim prečacem <emphasis role="bold">Ctrl+Space</emphasis>.</para><para>Uključivanjem funkcije <emphasis role="bold">Automatski prikaz odgovarajućih prijedloga</emphasis>, automatsko dovršavanje upisa pokreće se automatski po upisivanju prvoga slova natuknice glosara s ekvivalentom, ili pak upisivanjem znaka „&lt;” u slučaju oznaka teksta.</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Font...</guimenuitem></entry>
+
+              <entry>Prikaz dijaloškoga okvira za odabir fonta prikaza sadržaja. Korisnici koji se služe starijim računalima pa stoga imaju osjećaj da se promjene veličina prozora sporo odvijaju mogu pokušati riješiti taj problem promjenom fonta. Više o postavkama fonta naći ćete u poglavlju <link linkend="chapter.misc">Razno</link></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Prilagođene boje...</guimenuitem></entry>
+
+              <entry><para>Mogućnost odabira različitih boja za razne dijelove korisničkoga sučelja.</para>Skriptom je moguće postaviti unaprijed definirane teme. Zadana skripta pod nazivom Promjena teme po boji nudi zadanu temu „Tama”.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Datotečni filtri...</guimenuitem></entry>
+
+              <entry>Prikaz dijaloškoga okvira <link linkend="chapter.file.filters">Datotečni filtri</link> radi postavljanja načina manipulacije i analize datoteka.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Segmentacija...</guimenuitem></entry>
+
+              <entry>Otvaranje dijaloškoga okvira <link linkend="chapter.segmentation">Segmentacija izvorišnoga teksta</link> radi postavljanja segmentacije teksta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Provjera pravopisa...</guimenuitem></entry>
+
+              <entry>Prikaz prozora za postavljanje <link linkend="chapter.spellchecker">Provjere pravopisa</link> radi instaliranja, namještanja i aktiviranja provjere pravopisa.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Funkcioniranje obrade...</guimenuitem></entry>
+
+              <entry>Prikaz dijaloškoga okvira <link linkend="chapter.translation.editing">Revidiranje prijevoda</link> radi namještanja postavki.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Obrada oznaka teksta...</guimenuitem></entry>
+
+              <entry>Kod prevođenja datoteka na temu softvera: omogućavanje namještanja postavki provjere valjanosti oznaka teksta radi obuhvaćanja varijabli programiranja (%...). Također je omogućeno i definiranje raznih postavki u vezi s provjerom valjanosti oznaka teksta, kao i definiranje prilagođenih oznaka teksta.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Tim...</guimenuitem></entry>
+
+              <entry>Ovdje upisujete svoje ime, koje će zatim biti pridruženo svim segmentima koje prevedete.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vanjske datoteke u formatu TMX...</guimenuitem></entry>
+
+              <entry>Omogućava korisniku odluku o načinu koji će se tretirati oznake teksta u datotekama TMX koje nisu izrađene programom OmegaT.<para>Moguće je i poredavanje djelomičnih podudaranja na različite načine (samo za prikaz; bez utjecaja na statističke podatke). Područje za Predložak prikaza podudaranja također omogućava mijenjanje načina prikaza djelomičnih podudaranja s pomoću već namještenih varijabli.</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Prikaz...</guimenuitem></entry>
+
+              <entry>Mogućnost prikazivanja sadržaja i informacija o revizijama na različite načine.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Spremanje i izlazni rezultati...</guimenuitem></entry>
+
+              <entry>Omogućavanje korisničkoga odabira vremenskoga razmaka (u minutama i sekundama) između uzastopnih automatskih spremanja projekta. Najmanja vrijednost je 10 sekundi.<para>Dijaloški okvir omogućava namještanje postobradnih naredbi, koje se izvršavaju nakon naredbe <guimenuitem>Izradi prevedene dokumente</guimenuitem>.</para></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Prijava za proxy...</guimenuitem></entry>
+
+              <entry>Ako za pristup projektima koristite proxy, upišite svoje korisničko ime i lozinku.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vrati glavni prozor</guimenuitem></entry>
+
+              <entry>Vraćanje komponenti glavnoga prozora programa OmegaT u zadano stanje. Ova je funkcija korisna kada ne možete vratiti željeni raspored uslijed jedne ili više premještenih ili skrivenih komponenti. Također je možete koristiti kada okna nisu postavljena kako valja nakon nadogradnje programa OmegaT.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Jezična provjera</guimenuitem></entry>
+
+              <entry>Aktiviranjem funkcije jezičnoga alata LanguageTool obavlja se provjeravanje prijevoda, pri čemu se potencijalni problemi podcrtavaju plavom bojom.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Help">
+      <title>Pomoć<indexterm class="singular">
+          <primary>Izbornik</primary> <secondary>Pomoć</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Izbornik Pomoć</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Priručnik...</guimenuitem></entry>
+
+              <entry><keycap>F1:</keycap> otvaranje ovoga priručnika u zadanome pregledniku.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>O programu...</guimenuitem></entry>
+
+              <entry>Prikaz autorskih prava, zahvala i podataka o licenciranju.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zadnje promjene...</guimenuitem></entry>
+
+              <entry>Prikaz popisa novih funkcija, poboljšanja i ispravcima nedostataka za svaku novu inačicu programa.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zapisnik...</guimenuitem></entry>
+
+              <entry>Prikaz tekuće datoteke zapisnika. Naslov dijaloškoga okvira odnosi se na datoteku na kojoj se radi (što pak ovisi broju pojavnica programa OmegaT koje se istodobno izvode).</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+
+  <section id="keyboard.shortcuts">
+    <title>Tipkovni prečaci<indexterm class="singular">
+        <primary>Tipkovni prečaci</primary>
+      </indexterm></title>
+
+    <para>Osvrnut ćemo se na prečace raspoložive u glavnome prozoru programa. Kada želite vratiti glavni prozor u prednji plan, pritisnite na njega, ili pak zatvorite drugi prozor koji je u prednjemu planu s pomoću tipke <keycap>Esc</keycap>.</para>
+
+    <para>Prečaci se aktiviraju kombinacijom tipke <keycap>Ctrl</keycap> i određenih tipki sa slovima. Za neke se prečace koriste i druge tipke. Radi bolje čitljivosti ovdje koristimo velika slova.</para>
+
+    <para>Ctrl se koristi u operacijskim sustavima Windows i UNIX, kao i u izvedenicama UNIX-a, kod kojih se koriste tipkovnice s tipkom <keycap>Ctrl</keycap> ili <keycap>Control</keycap>. Korisnici sustava Mac umjesto toga koriste kombinaciju <guimenuitem>cmd + odgovarajuću tipku.</guimenuitem> Na tipkovnicama Apple tipka <guimenuitem>cmd</guimenuitem> označena je riječju „command” ili simbolom jabuke.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Upravljanje projektima</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Obrađivanje</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Prebacivanje</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Referentni prozori</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ostalo</para>
+      </listitem>
+    </itemizedlist>
+
+    <section>
+      <title id="keyboard.project.management"><indexterm class="singular">
+          <primary>Tipkovni prečaci</primary> <secondary>Projekt</secondary>
+        </indexterm>Upravljanje projektima<indexterm class="singular">
+          <primary>Projekt</primary> <secondary>Prečaci za upravljanje projektima</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Prečaci za upravljanje projektima</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Otvaranje projekta</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Prikaz dijaloškoga okvira za pronalaženje pripremljenoga projekta.</entry>
+            </row>
+
+            <row>
+              <entry>Spremi</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Spremanje tekućega prijevoda u internu prijevodnu memoriju (tj. datoteku project_save.tmx u mapi projekta <filename>omegat</filename>).</entry>
+            </row>
+
+            <row>
+              <entry>Zatvaranje projekta</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Zatvaranje tekućega projekta.</entry>
+            </row>
+
+            <row>
+              <entry>Izradi prevedene dokumente</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Izrada prevedenih dokumenata i njihovo spremanje u mapu projekta (target) i izrada datoteka prijevodnih memorija (datoteke tmx level1, level2 i omegat) u korijenskoj mapi projekta.</entry>
+            </row>
+
+            <row>
+              <entry>Svojstva projekta</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Prikaz postavki projekta, a koje možete mijenjati po potrebi.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.editing">
+      <title><indexterm class="singular">
+          <primary>Tipkovni prečaci</primary> <secondary>Obrađivanje</secondary>
+        </indexterm>Obrađivanje<indexterm class="singular">
+          <primary>Tipkovni prečaci</primary> <secondary>Idi na</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Prečaci za obrađivanje</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Poništi zadnju radnju</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Poništavanje zadnje radnje prilikom obrađivanja tekućega odredišnog segmenta.</entry>
+            </row>
+
+            <row>
+              <entry>Ponovi zadnju radnju</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Ponavljanje zadnje radnje prilikom obrađivanja tekućega odredišnog segmenta.</entry>
+            </row>
+
+            <row>
+              <entry>Odaberi podudaranje br. N</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap> <keycap>br.</keycap>
+                </keycombo></entry>
+
+              <entry>N je broj od 1 do 5. Ovim se prečacem odabire jedan od pet podudaranja prikazanih u prozoru podudaranja. Prema zadanim se vrijednostima bira prvo podudaranje.</entry>
+            </row>
+
+            <row>
+              <entry>Zamijeni podudaranjem</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Zamjena sadržaja tekućega odredišnog segmenta odabranim podudaranjem. Prema zadanim se vrijednostima bira prvo podudaranje.</entry>
+            </row>
+
+            <row>
+              <entry>Umetni podudaranje</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Umetanje odabranoga podudaranja na položaj pokazivača miša u tekućemu odredišnom segmentu. Prema zadanim se vrijednostima umeće prvo podudaranje.</entry>
+            </row>
+
+            <row>
+              <entry>Zamijeni izvorišnim tekstom</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+R</keycap>
+                </keycombo></entry>
+
+              <entry>Zamjena sadržaja tekućega odredišnog segmenta izvorišnim tekstom.</entry>
+            </row>
+
+            <row>
+              <entry>Umetni izvorišni tekst</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+I</keycap>
+                </keycombo></entry>
+
+              <entry>Umetanje izvorišnoga teksta u odredišni segment na položaj pokazivača miša.</entry>
+            </row>
+
+            <row>
+              <entry>Umetni izvorišne oznake teksta</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+T</keycap>
+                </keycombo></entry>
+
+              <entry>Umetanje izvorišnih oznaka teksta u odredišni segment na položaj pokazivača miša.</entry>
+            </row>
+
+            <row>
+              <entry>Pretraživanje projekta</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Prikaz dijaloškoga okvira za pretraživanje sadržaja projekta.</entry>
+            </row>
+
+            <row>
+              <entry>Zamijeni strojnim prijevodom</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Zamjena odredišnoga segmenta strojnim prijevodom izvorišnoga teksta. Ova se radnja ne obavlja kada je funkcija strojnoga prevođenja isključena. Pogledajte izbornik Mogućnosti &gt; Strojni prijevod.</entry>
+            </row>
+
+            <row>
+              <entry>Izvezi odabrano</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Izvoz odabranoga sadržaja u tekstnu datoteku radi obrade.</entry>
+            </row>
+
+            <row>
+              <entry>Dodavanje termina u glosar</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Omogućava izradu nove natuknice u zadanoj datoteci glosara.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.moving.around">
+      <title><indexterm class="singular">
+          <primary>Tipkovni prečaci</primary> <secondary>Idi na</secondary>
+        </indexterm>Prebacivanje</title>
+
+      <table colsep="1">
+        <title>Prečaci za prebacivanje</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Sljedeći neprevedeni segment</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Prebacivanje na polje za obradu sljedećega segmenta koji nije upisan u prijevodnu memoriju projekta.</entry>
+            </row>
+
+            <row>
+              <entry>Sljedeći segment</entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycap>Enter</keycap> ili <keycap>Return</keycap></entry>
+
+              <entry>Prebacivanje na polje za obradu sljedećega segmenta.</entry>
+            </row>
+
+            <row>
+              <entry>Prethodni segment</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Prebacivanje na polje za obradu prethodnoga segmenta.</entry>
+            </row>
+
+            <row>
+              <entry>Segment pod brojem...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Prebacivanje na segment pod upisanim brojem.</entry>
+            </row>
+
+            <row>
+              <entry>Natrag po kronologiji...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+P</keycap>
+                </keycombo></entry>
+
+              <entry>Prebacivanje natrag za jedan segment po kronologiji.</entry>
+            </row>
+
+            <row>
+              <entry>Naprijed po kronologiji...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+N</keycap>
+                </keycombo></entry>
+
+              <entry>Prebacivanje naprijed za jedan segment po kronologiji.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.other">
+      <title><indexterm class="singular">
+          <primary>Tipkovni prečaci</primary> <secondary>Ostalo</secondary>
+        </indexterm>Ostalo</title>
+
+      <table colsep="1">
+        <title>Razni prečaci</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Popis datoteka projekta</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Prikaz popisa datoteka projekta.</entry>
+            </row>
+
+            <row>
+              <entry>Provjera valjanosti oznaka teksta</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry>Otvaranje prozora za provjeru valjanosti oznaka teksta.</entry>
+            </row>
+
+            <row>
+              <entry>Izvezi odabrano</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl+C</keycap>
+                </keycombo></entry>
+
+              <entry>Izvoz odabranoga sadržaja ili pak tekućega izvorišnog sadržaja, ako ništa nije odabrano. Sadržaj se izvozi u datoteku običnoga teksta.</entry>
+            </row>
+
+            <row>
+              <entry>Search Project</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Otvaranje novoga prozora za pretraživanje.</entry>
+            </row>
+
+            <row>
+              <entry>Datoteke pomoći</entry>
+
+              <entry><keycap>F1</keycap></entry>
+
+              <entry>Prikaz datoteka pomoći programa <application>OmegaT</application> u zasebnome prozoru.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</chapter>

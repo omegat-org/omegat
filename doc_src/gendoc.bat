@@ -10,6 +10,7 @@ call ant -Dlanguage=eu instant-start
 call ant -Dlanguage=fr all
 call ant -Dlanguage=gl all
 call ant -Dlanguage=hu instant-start
+call ant -Dlanguage=hr all
 call ant -Dlanguage=ia all
 call ant -Dlanguage=it all
 call ant -Dlanguage=ja html pdf-cjk

@@ -1,0 +1,507 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;17.&nbsp;Regularni izrazi</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.5 – Korisnički priručnik">
+      <link rel="up" href="index.html" title="OmegaT 3.5 – Korisnički priručnik">
+      <link rel="prev" href="chapter.searchandreplace.html" title="Chapter&nbsp;16.&nbsp;Pretraživanje i zamjena">
+      <link rel="next" href="chapter.dictionaries.html" title="Chapter&nbsp;18.&nbsp;Rječnici">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;17.&nbsp;Regularni izrazi</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.searchandreplace.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.regexp"></a>Chapter&nbsp;17.&nbsp;Regularni izrazi<a class="indexterm" name="d0e8203"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. Alati za regex i primjeri korištenja</a></span></dt>
+            </dl>
+         </div>
+         <p>Regularni izrazi (skraćeno – regex) koji se koriste za pretraživanje i pravila segmentacije su oni koje podržava Java. Više
+            konkretnih podataka možete pronaći u <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">dokumentaciji o regularnim izrazima u Javi</a>. Dodatne upute i primjeri slijede u daljnjem tekstu.
+         </p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>Ovo je poglavlje namijenjeno naprednim korisnicima koji trebaju mogućnost određivanja vlastitih varijanti pravila segmentacije
+               ili složenije i efikasnije načine pretraživanja.
+            </p>
+         </div>
+         <div class="table"><a name="d0e8218"></a><p class="title"><b>Table&nbsp;17.1.&nbsp;Regex – indikatori</b></p>
+            <div class="table-contents">
+               <table summary="Regex – indikatori" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">(?i)</td>
+                        <td align="left">omogućavanje podudaranja bez razlikovanja veličine slova (prema zadanim vrijednostima uzorak razlikuje velika i mala slova)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e8235"></a><p class="title"><b>Table&nbsp;17.2.&nbsp;Regex – znak</b></p>
+            <div class="table-contents">
+               <table summary="Regex – znak" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">x</td>
+                        <td align="left">znak x, osim u sljedećim slučajevima...</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\uhhhh</td>
+                        <td align="left">znak heksadecimalne vrijednosti 0xhhhh</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\t</td>
+                        <td align="left">znak tabulatora ('\u0009')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\n</td>
+                        <td align="left">znak novoga retka ('\u000A')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\r</td>
+                        <td align="left">znak kraja retka ('\u000D')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\f</td>
+                        <td align="left">znak nove stranice ('\u000C')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\a</td>
+                        <td align="left">znak zvona ('\u0007')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\e</td>
+                        <td align="left">prekidni znak ('\u001B')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\cx</td>
+                        <td align="left">kontrolni znak koji odgovara znaku x</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0n</td>
+                        <td align="left">znak oktalne vrijednosti 0n (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0nn</td>
+                        <td align="left">znak oktalne vrijednosti 0nn (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0mnn</td>
+                        <td align="left">znak oktalne vrijednosti 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\xhh</td>
+                        <td align="left">znak heksadecimalne vrijednosti 0xhh</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e8312"></a><p class="title"><b>Table&nbsp;17.3.&nbsp;Regex – citat</b></p>
+            <div class="table-contents">
+               <table summary="Regex – citat" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\</td>
+                        <td align="left">ništa, ali citira sljedeći znak; potreban je kada želite upisati neki od metaznakova !$()*+.&lt;&gt;?[\]^{|} da predstavljaju same
+                           sebe
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\\</td>
+                        <td align="left">primjera radi, ovo je znak obrnute kose crte</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\Q</td>
+                        <td align="left">ništa, ali citira sve znakove do \E</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\E</td>
+                        <td align="left">ništa, ali okončava citiranje započeto s \Q</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e8344"></a><p class="title"><b>Table&nbsp;17.4.&nbsp;Regex – klase za blokove i kategorije Unicode</b></p>
+            <div class="table-contents">
+               <table summary="Regex – klase za blokove i kategorije Unicode" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\p{InGreek}</td>
+                        <td align="left">znak u grčkome bloku (jednostavni <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> blok</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Lu}</td>
+                        <td align="left">veliko slovo (jednostavna <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> kategorija</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Sc}</td>
+                        <td align="left">simbol valute</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\P{InGreek}</td>
+                        <td align="left">bilo koji znak osim znaka iz grčkoga bloka (negacija)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td align="left">bilo koje slovo osim velikih slova (oduzimanje)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e8387"></a><p class="title"><b>Table&nbsp;17.5.&nbsp;Regex – klase znakova</b></p>
+            <div class="table-contents">
+               <table summary="Regex – klase znakova" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">[abc]</td>
+                        <td align="left">a, b ili c (jednostavna klasa)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[^abc]</td>
+                        <td align="left">bilo koji znak osim a, b ili c (negacija)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[a-zA-Z]</td>
+                        <td align="left">a do z ili A do Z, uključujući navedena slova (raspon)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e8414"></a><p class="title"><b>Table&nbsp;17.6.&nbsp;Regex – unaprijed određene klase znakova</b></p>
+            <div class="table-contents">
+               <table summary="Regex – unaprijed određene klase znakova" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">.</td>
+                        <td align="left">bilo koji znak (osim onih za okončanje retka)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\d</td>
+                        <td align="left">znamenka: [0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\D</td>
+                        <td align="left">nije znamenka: [^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\s</td>
+                        <td align="left">znak bjeline: [ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\S</td>
+                        <td align="left">nije praznina: [^\s]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\w</td>
+                        <td align="left">znak riječi: [a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\W</td>
+                        <td align="left">nije riječ: [^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e8461"></a><p class="title"><b>Table&nbsp;17.7.&nbsp;Regex – granični podudarivači</b></p>
+            <div class="table-contents">
+               <table summary="Regex – granični podudarivači" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">^</td>
+                        <td align="left">početak retka</td>
+                     </tr>
+                     <tr>
+                        <td align="left">$</td>
+                        <td align="left">kraj retka</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\b</td>
+                        <td align="left">granica riječi</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\B</td>
+                        <td align="left">granica svega osim riječi</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e8493"></a><p class="title"><b>Table&nbsp;17.8.&nbsp;Regex – pohlepni kvantifikatori</b></p>
+            <div class="table-contents">
+               <table summary="Regex – pohlepni kvantifikatori" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
+                        <td align="left">X, jednom ili nijednom</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
+                        <td align="left">X, nula ili više puta</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
+                        <td align="left">X, jednom ili više puta</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>Pohlepni kvantifikatori pokušavaju pronaći što je moguće više podudaranja. Primjerice, <span class="emphasis"><em>a+</em></span> pronalazi aaa u <span class="emphasis"><em>aaabbb</em></span>.
+            </p>
+         </div>
+         <div class="table"><a name="d0e8535"></a><p class="title"><b>Table&nbsp;17.9.&nbsp;Regex – reluktantni (nepohlepni) kvantifikatori</b></p>
+            <div class="table-contents">
+               <table summary="Regex – reluktantni (nepohlepni) kvantifikatori" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X??</td>
+                        <td align="left">X, jednom ili nijednom</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X*?</td>
+                        <td align="left">X, nula ili više puta</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X+?</td>
+                        <td align="left">X, jednom ili više puta</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>Nepohlepni kvantifikatori pokušavaju pronaći što je moguće manje podudaranja. Primjerice, <span class="emphasis"><em>a+?</em></span> pronalazi prvo slovo <span class="emphasis"><em>a</em></span> u <span class="emphasis"><em>aaabbb</em></span>.
+            </p>
+         </div>
+         <div class="table"><a name="d0e8574"></a><p class="title"><b>Table&nbsp;17.10.&nbsp;Regex – logički operatori</b></p>
+            <div class="table-contents">
+               <table summary="Regex – logički operatori" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Konstrukt</th>
+                        <th align="left">...odgovara sljedećem</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">XY</td>
+                        <td align="left">X nakon kojega slijedi Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X|Y</td>
+                        <td align="left">ili X ili Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">(XY)</td>
+                        <td align="left">XY kao jedna skupina</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;<a class="indexterm" name="d0e8603"></a>Alati za regex i primjeri korištenja<a class="indexterm" name="d0e8609"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Za sastavljanje i testiranje regularnih izraza dostupno je više interaktivnih alata. U načelu djeluju prema manje-više jednakome
+               obrascu (na sljedećoj slici možemo vidjeti primjer alata Regular Expression Tester): regularnim izrazom (prvo polje) analizira
+               se tekst i pronalaze tražene vrijednosti koje se prikazuju u tekstnome okviru rezultata.
+            </p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Figure&nbsp;17.1.&nbsp;Regular Expression Tester</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Regular Expression Tester"></div>
+               </div>
+            </div><br class="figure-break"><p>Za sustave Windows, Linux i FreeBSD postoji i samostalni alat <a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a>. Funkcionira uglavnom na isti način kao što je to prikazano u gornjemu primjeru.
+            </p>
+            <p>I sȃm program <span class="application">OmegaT</span> nudi dobru zbirku korisnih regularnih izraza (pogledajte izbornik Mogućnosti &gt; Segmentacija). Na sljedećem popisu imamo izraze
+               koji mogu biti korisni pri pretraživanju prijevodne memorije.
+            </p>
+            <div class="table"><a name="d0e8634"></a><p class="title"><b>Table&nbsp;17.11.&nbsp;Regex – primjeri regularnih izraza u prijevodima</b></p>
+               <div class="table-contents">
+                  <table summary="Regex – primjeri regularnih izraza u prijevodima" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Regularni izraz</th>
+                           <th align="left">Za pronalaženje sljedećega:</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">(\b\w+\b)\s\1\b</td>
+                           <td align="left">dvostruke riječi</td>
+                        </tr>
+                        <tr>
+                           <td align="left">[\.,]\s*[\.,]+</td>
+                           <td align="left">zarez ili točka, nakon čega slijede razmaci pa još jedan zarez ili točka</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\. \s+$</td>
+                           <td align="left">dodatni razmaci nakon točke na kraju retka</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+a\s+[aeiou]</td>
+                           <td align="left">engleski: ispred riječi koje počinju samoglasnicima u načelu se treba nalaziti neodređeni član „an”, a ne „a”</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+an\s+[^aeiou]</td>
+                           <td align="left">engleski: provjera na istome načelu kao gornja, osim što se radi o riječima koje počinju suglasnicima („a”, a ne „an”)</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s{2,}</td>
+                           <td align="left">više od jednoga razmaka</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\.[A-Z]</td>
+                           <td align="left">točka nakon koje slijedi veliko slovo – moguće je da nedostaje razmak između točke i početka nove rečenice</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\bis\b</td>
+                           <td align="left">traženje „is”, a ne „this” ili „isn't” itd.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.searchandreplace.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;16.&nbsp;Pretraživanje i zamjena&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;18.&nbsp;Rječnici</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

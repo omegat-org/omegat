@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;21.&nbsp;Strojový překlad</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - Uživatelská příručka">
+      <link rel="home" href="index.html" title="OmegaT 3.5 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.5 - Uživatelská příručka">
       <link rel="prev" href="chapter.TaaS.html" title="Chapter&nbsp;20.&nbsp;Použití TaaS v OmegaT">
       <link rel="next" href="chapter.spellchecker.html" title="Chapter&nbsp;22.&nbsp;Kontrola pravopisu">
    </head>
@@ -29,27 +29,28 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.machine.translate"></a>Chapter&nbsp;21.&nbsp;Strojový překlad<a class="indexterm" name="d0e8701"></a></h1>
+                  <h1 class="title"><a name="chapter.machine.translate"></a>Chapter&nbsp;21.&nbsp;Strojový překlad<a class="indexterm" name="d0e9140"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8704">1. Úvod</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e9143">1. Úvod</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Překladač</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8745">3. Uživatelé <span class="application">OmegaT</span> a Google Překladač</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8798">4. Belazar</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8810">5. Apertium</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8838">6. Překladač Microsoft Translator</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8880">7. Překladač Yandex Translate</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">8. Strojový překlad – Odstraňování problémů</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e9184">3. Uživatelé <span class="application">OmegaT</span> a Google Překladač</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e9237">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e9249">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e9277">6. MyMemory (stroj)</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e9321">7. Překladač Microsoft Translator</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e9363">8. Překladač Yandex Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">9. Strojový překlad – Odstraňování problémů</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8704"></a>1.&nbsp;Úvod<a class="indexterm" name="d0e8707"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e9143"></a>1.&nbsp;Úvod<a class="indexterm" name="d0e9146"></a></h2>
                   </div>
                </div>
             </div>
@@ -65,7 +66,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="introduction"></a>2.&nbsp;Google Překladač<a class="indexterm" name="d0e8725"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2.&nbsp;Google Překladač<a class="indexterm" name="d0e9164"></a></h2>
                   </div>
                </div>
             </div>
@@ -86,7 +87,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8745"></a>3.&nbsp;Uživatelé <span class="application">OmegaT</span> a Google Překladač
+                     <h2 class="title" style="clear: both"><a name="d0e9184"></a>3.&nbsp;Uživatelé <span class="application">OmegaT</span> a Google Překladač
                      </h2>
                   </div>
                </div>
@@ -103,7 +104,7 @@
                jména. Je prakticky docela pravděpodobné, že španělský překlad se zakládá přinejmenším z části na skutečném překladu knihy.
             </p>
             <p>Jakmile bude služba aktivní, zobrazí se návrh překladu v podokně Strojový překlad pokaždé, když otevřete nový zdrojový segment.
-               Pokud se vám návrh zdá být přijatelný, stiskněte <span class="keycap"><strong><a class="indexterm" name="d0e8776"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> a vložíte tak tento návrh do cílové části otevřeného segmentu. Jako příklad se podívejme na segment nahoře, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> by nahradilo španělskou verzi návrhem ve slovinštině.
+               Pokud se vám návrh zdá být přijatelný, stiskněte <span class="keycap"><strong><a class="indexterm" name="d0e9215"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> a vložíte tak tento návrh do cílové části otevřeného segmentu. Jako příklad se podívejme na segment nahoře, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> by nahradilo španělskou verzi návrhem ve slovinštině.
             </p>
             <p>Pokud nechcete, aby <span class="application">OmegaT</span> posílala vaše zdrojové segmenty k překladu firmě Google, zrušte v nabídce Možnosti zaškrtnutí u položky Google Překladač.
             </p>
@@ -115,7 +116,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8798"></a>4.&nbsp;Belazar<a class="indexterm" name="d0e8801"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e9237"></a>4.&nbsp;Belazar<a class="indexterm" name="d0e9240"></a></h2>
                   </div>
                </div>
             </div>
@@ -126,7 +127,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8810"></a>5.&nbsp;Apertium<a class="indexterm" name="d0e8813"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e9249"></a>5.&nbsp;Apertium<a class="indexterm" name="d0e9252"></a></h2>
                   </div>
                </div>
             </div>
@@ -161,7 +162,42 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8838"></a>6.&nbsp;Překladač Microsoft Translator<a class="indexterm" name="d0e8841"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e9277"></a>6.&nbsp;MyMemory (stroj)<a class="indexterm" name="d0e9280"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ve výchozím nastaení umožňuje MyMemory maximálně 100 dotazů za den. Při zadání emailové adresy je možno použít 1000 dotazů
+               za den, místo původních 100.
+            </p>
+            <p>Existují minimálně 3 způsoby, jak specifikovat adresu:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>v souboru OmegaT.l4J.ini (pouze Windows), změňte:</p>
+                     <p># MyMemory email</p>
+                     <p>na:</p>
+                     <p>MyMemory vase@emailova-adresa.com</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Při spouštění OmegaT z příkazového řádku, specifikujte v příkazu:</p>
+                     <p>-Dmymemory.api.email=your@email-address.com</p>
+                  </li>
+                  <li class="listitem">
+                     <p>ve spouštěči Kaptain (pouze v Linuxu), zadejte adresu do odpovídajícího pole v záložece „Online služby“.</p>
+                  </li>
+               </ul>
+            </div>
+            <p>MyMemory nabízí také <span class="bold"><strong>Lidský překlad</strong></span> s původem od profesních překladatelů, LSP, zákazníků a vícejazyčných webů. Abyste se dostali k těmto překladům, musíte nahrát
+               zdrojový soubor <a class="ulink" href="http://mymemory.translated.net/" target="_top">na jejich stránku</a>, která vygeneruje soubor TMX. Pak je nutno umístit tento soubor TMX do adresáře /tm/ nebo /tm/auto ve svém projektu OmegaT.
+            </p>
+            <p>MyMemory tedy nabízí možnost spravovat <span class="bold"><strong>soukromé paměti TM</strong></span>. Poznámka: OmegaT s nimi nespolupracuje dynamicky (musíte ručně exportovat / importovat soubory TMX).
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e9321"></a>7.&nbsp;Překladač Microsoft Translator<a class="indexterm" name="d0e9324"></a></h2>
                   </div>
                </div>
             </div>
@@ -199,7 +235,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8880"></a>7.&nbsp;Překladač Yandex Translate<a class="indexterm" name="d0e8883"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e9363"></a>8.&nbsp;Překladač Yandex Translate<a class="indexterm" name="d0e9366"></a></h2>
                   </div>
                </div>
             </div>
@@ -212,7 +248,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>8.&nbsp;Strojový překlad – Odstraňování problémů<a class="indexterm" name="d0e8904"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>9.&nbsp;Strojový překlad – Odstraňování problémů<a class="indexterm" name="d0e9387"></a></h2>
                   </div>
                </div>
             </div>

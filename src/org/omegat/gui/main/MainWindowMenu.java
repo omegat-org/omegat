@@ -243,7 +243,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE"));
         projectMenu.addSeparator();
         projectMenu.add(projectCommitSourceFiles = createMenuItem("TF_MENU_FILE_COMMIT"));
-        projectMenu.add(projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET"));        
+        projectMenu.add(projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET"));
         projectMenu.addSeparator();
         projectMenu.add(projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE"));
         projectMenu.add(projectSingleCompileMenuItem = createMenuItem("TF_MENU_FILE_SINGLE_COMPILE"));
@@ -690,8 +690,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         } else {
             projectCommitTargetFiles.setEnabled(false);
         }
-        
-        
     }
 
     public JMenu getMachineTranslationMenu() {

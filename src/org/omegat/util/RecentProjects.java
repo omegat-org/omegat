@@ -52,10 +52,9 @@ public final class RecentProjects {
     static {
         MOST_RECENT_PROJECT_SIZE = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_SIZE,
                 OConsts.MAX_RECENT_PROJECTS);
-        RECENT_PROJECTS = new ArrayList<String>(MOST_RECENT_PROJECT_SIZE);
+        RECENT_PROJECTS = new ArrayList<>(MOST_RECENT_PROJECT_SIZE);
         for (int i = 0; i < MOST_RECENT_PROJECT_SIZE; i++) {
-            String project = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_PREFIX + i,
-                    null);
+            String project = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_PREFIX + i, null);
             if (project != null) {
                 RECENT_PROJECTS.add(project);
             }
@@ -90,7 +89,7 @@ public final class RecentProjects {
         recentMenu.removeAll();
 
         synchronized (RECENT_PROJECTS) {
-            for (final String project : RECENT_PROJECTS) {
+            for (String project : RECENT_PROJECTS) {
                 JMenuItem recentProjectMenuItem = new JMenuItem(project);
                 recentProjectMenuItem.addActionListener(new ActionListener() {
                     @Override

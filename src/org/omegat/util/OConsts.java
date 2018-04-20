@@ -192,5 +192,5 @@ public final class OConsts {
     public static final String SEGMENT_MARKER_STRING = "<" + OStrings.getSegmentMarker() + ">";
 
     /** Max number of recent projects to remember */
-    public static final int MAX_RECENT_PROJECTS = 5;
+    public static final int MAX_RECENT_PROJECTS = 10;
 }

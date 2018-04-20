@@ -7,6 +7,17 @@
 ----------------------------------------------------------------------
 3.6.0 update 10 vs 3.6.0 update 9
 
+  Bug fixes:
+
+  - Adjacent search matches are collapsed when doing a search/replace
+  https://sourceforge.net/p/omegat/bugs/675/
+
+  - Find-replace results overlap
+  https://sourceforge.net/p/omegat/bugs/898/
+
+  - Adjacent next match skipped by Replace Next
+  https://sourceforge.net/p/omegat/bugs/899/
+
   Localisation Updates:
 
   - Czech localisation updated to 3.6 (documentation)

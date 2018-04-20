@@ -26,8 +26,6 @@
 
 package org.omegat.util;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,12 +90,10 @@ public final class RecentProjects {
         synchronized (RECENT_PROJECTS) {
             for (String project : RECENT_PROJECTS) {
                 JMenuItem recentProjectMenuItem = new JMenuItem(project);
-                recentProjectMenuItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent event) {
-                        ProjectUICommands.projectOpen(new File(project), true);
-                    }
-                });
+                File projectFile = new File(project);
+                recentProjectMenuItem
+                        .addActionListener(event -> ProjectUICommands.projectOpen(projectFile, true));
+                recentProjectMenuItem.setEnabled(projectFile.isDirectory() && projectFile.canRead());
                 recentMenu.add(recentProjectMenuItem);
             }
             recentMenu.setEnabled(!RECENT_PROJECTS.isEmpty());
@@ -118,7 +114,6 @@ public final class RecentProjects {
                 RECENT_PROJECTS.remove(MOST_RECENT_PROJECT_SIZE);
             }
         }
-        updateMenu();
         saveToPrefs();
     }
 

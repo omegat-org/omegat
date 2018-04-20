@@ -69,6 +69,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.RecentProjects;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
@@ -218,6 +219,21 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(projectTeamNewMenuItem = createMenuItem("TF_MENU_FILE_TEAM_CREATE"));
         projectMenu.add(projectOpenMenuItem = createMenuItem("TF_MENU_FILE_OPEN"));
         projectMenu.add(projectOpenRecentMenuItem = createMenu("TF_MENU_FILE_OPEN_RECENT"));
+        projectOpenRecentMenuItem.addMenuListener(new MenuListener() {
+
+            @Override
+            public void menuSelected(MenuEvent e) {
+                RecentProjects.updateMenu();
+            }
+
+            @Override
+            public void menuDeselected(MenuEvent e) {
+            }
+
+            @Override
+            public void menuCanceled(MenuEvent e) {
+            }
+        });
 
         projectMenu.add(projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT"));
         projectMenu.add(projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT"));

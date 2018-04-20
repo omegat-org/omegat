@@ -82,7 +82,6 @@ import org.omegat.gui.properties.SegmentPropertiesArea;
 import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
-import org.omegat.util.RecentProjects;
 
 /**
  * Class which contains all components instances.
@@ -235,8 +234,6 @@ public final class Core {
         // 2. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
-        // Load recent used projects
-        RecentProjects.updateMenu();
 
         Core.registerMarker(new ProtectedPartsMarker());
         Core.registerMarker(new RemoveTagMarker());

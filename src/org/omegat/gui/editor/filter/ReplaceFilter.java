@@ -151,7 +151,7 @@ public class ReplaceFilter implements IEditorFilter {
         List<SearchMatch> found = getReplacementsForEntry(str);
         if (found != null) {
             for (SearchMatch m : found) {
-                if (m.getStart() > pos) {
+                if (m.getStart() >= pos) {
                     ec.setCaretPosition(new IEditor.CaretPosition(m.getStart(), m.getEnd()));
                     ec.requestFocus();
                     return;

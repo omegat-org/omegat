@@ -638,12 +638,18 @@ public class Searcher {
                         while (replaceMatcher.find()) {
                             int varId = Integer.parseInt(replaceMatcher.group(1));
                             if (varId > matcher.groupCount()) {
+                                // Group wasn't even present in search regex.
                                 throw new IndexOutOfBoundsException(
                                         OStrings.getString("ST_REGEXP_REPLACEGROUP_ERROR", varId));
                             }
-                            repl = repl.substring(0, replaceMatcher.start())
-                                + matcher.group(varId) // yes, from source matcher!
-                                + repl.substring(replaceMatcher.end());
+                            String substitution = matcher.group(varId); // yes, from source matcher!
+                            if (substitution == null) {
+                                // If group was present in search regex but didn't match anything,
+                                // replace with empty string.
+                                substitution = "";
+                            }
+                            repl = repl.substring(0, replaceMatcher.start()) + substitution
+                                    + repl.substring(replaceMatcher.end());
                             replaceMatcher.reset(repl);
                         }
                         foundMatches.add(new SearchMatch(start, matcher.end(), StringUtil.replaceCase(repl,

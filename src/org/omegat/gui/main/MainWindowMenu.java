@@ -235,6 +235,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
             public void menuCanceled(MenuEvent e) {
             }
         });
+        projectClearRecentMenuItem = createMenuItem("TF_MENU_FILE_CLEAR_RECENT");
 
         projectMenu.add(projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT"));
         projectMenu.add(projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT"));
@@ -578,6 +579,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
             recentProjectMenuItem.setEnabled(projectFile.isDirectory() && projectFile.canRead());
             projectOpenRecentMenuItem.add(recentProjectMenuItem);
         }
+        projectOpenRecentMenuItem.addSeparator();
+        projectOpenRecentMenuItem.add(projectClearRecentMenuItem);
+        projectClearRecentMenuItem.setEnabled(!items.isEmpty());
     }
 
     /**
@@ -813,6 +817,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectTeamNewMenuItem;
     JMenuItem projectOpenMenuItem;
     JMenu projectOpenRecentMenuItem;
+    JMenuItem projectClearRecentMenuItem;
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
     JMenuItem projectWikiImportMenuItem;

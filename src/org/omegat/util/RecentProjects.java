@@ -57,11 +57,9 @@ public final class RecentProjects {
 
     private static void saveToPrefs() {
         synchronized (RECENT_PROJECTS) {
-            for (int i = 0; i < RECENT_PROJECTS.size(); i++) {
-                String project = RECENT_PROJECTS.get(i);
-                if (!StringUtil.isEmpty(project)) {
-                    Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX + i, RECENT_PROJECTS.get(i));
-                }
+            for (int i = 0; i < MOST_RECENT_PROJECT_SIZE; i++) {
+                String project = i < RECENT_PROJECTS.size() ? RECENT_PROJECTS.get(i) : "";
+                Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX + i, project);
             }
         }
     }
@@ -85,6 +83,13 @@ public final class RecentProjects {
             while (RECENT_PROJECTS.size() > MOST_RECENT_PROJECT_SIZE) {
                 RECENT_PROJECTS.remove(MOST_RECENT_PROJECT_SIZE);
             }
+        }
+        saveToPrefs();
+    }
+
+    public static void clear() {
+        synchronized (RECENT_PROJECTS) {
+            RECENT_PROJECTS.clear();
         }
         saveToPrefs();
     }

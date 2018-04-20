@@ -508,11 +508,11 @@ public class Searcher {
             break;
         case REPLACE:
             if (m_searchExpression.replaceTranslated && locText != null) {
-                if (searchString(locText)) {
+                if (searchString(locText, false)) {
                     targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
                 }
             } else if (m_searchExpression.replaceUntranslated && locText == null) {
-                if (searchString(srcText)) {
+                if (searchString(srcText, false)) {
                     srcMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
                 }
             }

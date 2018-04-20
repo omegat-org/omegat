@@ -38,7 +38,6 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
@@ -461,10 +460,6 @@ public final class TestTeamIntegrationChild {
         IMainMenu menu = new IMainMenu() {
 
             public JMenu getToolsMenu() {
-                return null;
-            }
-
-            public JMenuItem getProjectRecentMenuItem() {
                 return null;
             }
 

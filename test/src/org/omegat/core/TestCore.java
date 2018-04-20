@@ -34,7 +34,6 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -85,10 +84,6 @@ public abstract class TestCore {
             }
 
             public JMenu getGlossaryMenu() {
-                return new JMenu();
-            }
-
-            public JMenuItem getProjectRecentMenuItem() {
                 return new JMenu();
             }
 

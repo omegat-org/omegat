@@ -65,11 +65,12 @@ public final class RecentProjects {
     }
 
     private static void saveToPrefs() {
-        for (int i = 0; i < RECENT_PROJECTS.size(); i++) {
-            String project = RECENT_PROJECTS.get(i);
-            if (!StringUtil.isEmpty(project)) {
-                Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX + i,
-                        RECENT_PROJECTS.get(i));
+        synchronized (RECENT_PROJECTS) {
+            for (int i = 0; i < RECENT_PROJECTS.size(); i++) {
+                String project = RECENT_PROJECTS.get(i);
+                if (!StringUtil.isEmpty(project)) {
+                    Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX + i, RECENT_PROJECTS.get(i));
+                }
             }
         }
     }
@@ -107,12 +108,15 @@ public final class RecentProjects {
         if (StringUtil.isEmpty(element)) {
             return;
         }
-        RECENT_PROJECTS.remove(element);
-        RECENT_PROJECTS.add(0, element);
 
-        // Shrink the list to match the desired size.
-        while (RECENT_PROJECTS.size() > MOST_RECENT_PROJECT_SIZE) {
-            RECENT_PROJECTS.remove(MOST_RECENT_PROJECT_SIZE);
+        synchronized (RECENT_PROJECTS) {
+            RECENT_PROJECTS.remove(element);
+            RECENT_PROJECTS.add(0, element);
+
+            // Shrink the list to match the desired size.
+            while (RECENT_PROJECTS.size() > MOST_RECENT_PROJECT_SIZE) {
+                RECENT_PROJECTS.remove(MOST_RECENT_PROJECT_SIZE);
+            }
         }
         updateMenu();
         saveToPrefs();

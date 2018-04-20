@@ -635,7 +635,7 @@ public class Searcher {
             while (true) {
                 int start = matcher.start();
                 foundMatches.add(new SearchMatch(start, matcher.end()));
-                if (start >= text.length() || !matcher.find(start + 1)) {
+                if (start >= text.length() || !matcher.find(matcher.end())) {
                     break;
                 }
             }

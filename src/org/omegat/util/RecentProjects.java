@@ -26,15 +26,8 @@
 
 package org.omegat.util;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JMenuItem;
-
-import org.omegat.core.Core;
-import org.omegat.gui.main.IMainWindow;
-import org.omegat.gui.main.ProjectUICommands;
 
 /**
  * Management of recent projects
@@ -73,30 +66,9 @@ public final class RecentProjects {
         }
     }
 
-    public static void updateMenu() {
-
-        IMainWindow window = Core.getMainWindow();
-        if (window == null) {
-            return;
-        }
-
-        JMenuItem recentMenu = window.getMainMenu().getProjectRecentMenuItem();
-        if (recentMenu == null) {
-            return;
-        }
-
-        recentMenu.removeAll();
-
+    public static List<String> getRecentProjects() {
         synchronized (RECENT_PROJECTS) {
-            for (String project : RECENT_PROJECTS) {
-                JMenuItem recentProjectMenuItem = new JMenuItem(project);
-                File projectFile = new File(project);
-                recentProjectMenuItem
-                        .addActionListener(event -> ProjectUICommands.projectOpen(projectFile, true));
-                recentProjectMenuItem.setEnabled(projectFile.isDirectory() && projectFile.canRead());
-                recentMenu.add(recentProjectMenuItem);
-            }
-            recentMenu.setEnabled(!RECENT_PROJECTS.isEmpty());
+            return new ArrayList<>(RECENT_PROJECTS);
         }
     }
 

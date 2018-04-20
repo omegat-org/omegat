@@ -43,6 +43,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -223,7 +224,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
             @Override
             public void menuSelected(MenuEvent e) {
-                RecentProjects.updateMenu();
+                populateRecentProjects();
             }
 
             @Override
@@ -564,6 +565,18 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                     .setPreferencesHandler(e -> mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed());
         } catch (NoClassDefFoundError e) {
             Log.log(e);
+        }
+    }
+
+    private void populateRecentProjects() {
+        projectOpenRecentMenuItem.removeAll();
+        List<String> items = RecentProjects.getRecentProjects();
+        for (String project : items) {
+            JMenuItem recentProjectMenuItem = new JMenuItem(project);
+            File projectFile = new File(project);
+            recentProjectMenuItem.addActionListener(event -> ProjectUICommands.projectOpen(projectFile, true));
+            recentProjectMenuItem.setEnabled(projectFile.isDirectory() && projectFile.canRead());
+            projectOpenRecentMenuItem.add(recentProjectMenuItem);
         }
     }
 

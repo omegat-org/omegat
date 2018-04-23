@@ -12,16 +12,16 @@
   - Port TagWipe from DGT-OmegaT project as an OmegaT script
   https://sourceforge.net/p/omegat/feature-requests/1384/
 
-  Bug fixes:
-
-  - Empty regex capture group becomes "null" in replacement
-  https://sourceforge.net/p/omegat/bugs/907/
-
   Other changes:
 
   - Project > Open Recent Project now remembers up to 10 projects
 
   - Added Project > Open Recent Project > Clear Menu
+
+  Bug fixes:
+
+  - Empty regex capture group becomes "null" in replacement
+  https://sourceforge.net/p/omegat/bugs/907/
 
 ----------------------------------------------------------------------
  OmegaT 4.1.4 (2018-04-02)

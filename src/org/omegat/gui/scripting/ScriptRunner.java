@@ -62,7 +62,7 @@ public final class ScriptRunner {
     public static final String VAR_MAINWINDOW = "mainWindow";
     public static final String VAR_GLOSSARY = "glossary";
     public static final String VAR_CORE = "Core";
-    public static final String VAR_EDITOR = "editor";
+    public static final String VAR_EDITOR = "translationEditor";
     public static final String VAR_PROJECT = "project";
     public static final String VAR_RESOURCES = "res";
 

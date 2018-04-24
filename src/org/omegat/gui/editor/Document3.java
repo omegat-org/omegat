@@ -114,14 +114,14 @@ public class Document3 extends DefaultStyledDocument {
      * Calculate the position of the start of the current translation
      */
     public int getTranslationStart() {
-        return activeTranslationBeginM1.getOffset() + 1;
+        return activeTranslationBeginM1.getOffset() /*+ 1*/;
     }
 
     /**
      * Calculate the position of the end of the current translation
      */
     protected int getTranslationEnd() {
-        return activeTranslationEndP1.getOffset() - 1;
+        return activeTranslationEndP1.getOffset() /*- 1*/;
     }
 
     /**
@@ -168,7 +168,7 @@ public class Document3 extends DefaultStyledDocument {
      * @param isRightAlignment
      *            false - left alignment, true - right alignment
      */
-    protected void setAlignment(int beginOffset, int endOffset, boolean isRightAlignment) {
+    protected void setAlignment(int beginOffset, int  endOffset, boolean isRightAlignment) {
         try {
             writeLock();
 
@@ -198,7 +198,6 @@ public class Document3 extends DefaultStyledDocument {
     }
 
     public void setCharacterAttributes(int offset, int length, AttributeSet s, boolean replace){
-        System.out.println("CLG IGNORING SET CHAR ATTRIBUTES");
     }
 
 

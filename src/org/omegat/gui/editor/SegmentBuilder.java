@@ -33,7 +33,9 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Logger;
 
+import javax.swing.event.DocumentEvent;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
@@ -69,6 +71,9 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 public class SegmentBuilder implements ISegmentBuilder {
+
+    static final Logger LOGGER = Logger.getLogger(SegmentBuilder.class.getName());
+
     /** Attributes for show text. */
     public static final String SEGMENT_MARK_ATTRIBUTE = "SEGMENT_MARK_ATTRIBUTE";
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
@@ -173,7 +178,6 @@ public class SegmentBuilder implements ISegmentBuilder {
         createSegmentElement(isActive, 0, trans);
     }
 
-    // TODO CLG;  move this to the controller... doesn't seem like this should be so coupled to a Document
     // TODO CLG: THIS IS WHERE THE DOCUMENT IS CHANGED...
     public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans) {
         UIThreadsUtil.mustBeSwingThread();
@@ -187,9 +191,10 @@ public class SegmentBuilder implements ISegmentBuilder {
             try {
                 if (beginPosP1 != null && endPosM1 != null) {// CLG note this removes translation (current) from the Doc via DocumentFilter3, and the modified info string
                     // remove old segment
+                    // TODO clg check for negative offset?
                     int beginOffset = beginPosP1.getOffset() - 1;
                     int endOffset = endPosM1.getOffset() + 1;
-                    doc.remove(beginOffset, endOffset - beginOffset);
+                    doc.remove(beginOffset, endOffset - beginOffset); // todo remove translation mod, trans, and segment tag
                     offset = beginOffset;
                 } else {
                     // there is no segment in document yet - need to add
@@ -211,6 +216,7 @@ public class SegmentBuilder implements ISegmentBuilder {
                 }
                 int endOffset = offset;
 
+                // todo clg check if beginOffset is negative?
                 beginPosP1 = doc.createPosition(beginOffset + 1);
                 endPosM1 = doc.createPosition(endOffset - 1);
             } catch (BadLocationException ex) {
@@ -265,7 +271,20 @@ public class SegmentBuilder implements ISegmentBuilder {
             }
 
             int prevOffset = offset;
-            sourceText = addInactiveSegPart(true, ste.getSrcText());
+            // Don't display the source in an active segment, if doing side by side editing
+            if(settings.isDisplayEditorSegmentSources()) {
+                sourceText = addInactiveSegPart(true, ste.getSrcText());
+            }
+            else {
+                sourceText = "";
+                // TODO may need to adjust position to keep aligned with source pane
+
+                int srcLength = trans.source == null ? 0 : trans.source.length();
+                int transLength = trans.translation == null ? 0 : trans.translation.length();
+                // doc.getLength()  the length of text in document
+                LOGGER.warning(String.format("Translation only editor, doc size: %d, src size: %d (%s), trans size: %d (%s)", (int)controller.getEditor(IEditor.EditorType.TRANSLATION).getSize().getWidth(), srcLength, trans.source, transLength, trans.translation ));
+
+            }
 
             Map<Language, ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
             for (Map.Entry<Language, ProjectTMX> entry : otherLanguageTMs.entrySet()) {
@@ -303,8 +322,9 @@ public class SegmentBuilder implements ISegmentBuilder {
             translationText = addActiveSegPart(translationText);
             posTranslationBeg = null;
 
-            doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset - 1);
-            doc.activeTranslationEndP1 = doc.createPosition(activeTranslationEndOffset + 1);
+            // TODO I DON'T KNOW HOW TO HANDLE THIS BECAUSE YOU MAY NEED A NEGATIVE POSITION IF THIS IS THE FIRST ELEMENT
+            doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset /*- 1*/);
+            doc.activeTranslationEndP1 = doc.createPosition(activeTranslationEndOffset /*+ 1*/);
         } catch (OutOfMemoryError oome) {
             // Oh shit, we're all out of storage space!
             // Of course we should've cleaned up after ourselves earlier,
@@ -339,7 +359,7 @@ public class SegmentBuilder implements ISegmentBuilder {
         sourceText = null;
         translationText = null;
 
-        if (settings.isDisplaySegmentSources()) {
+        if (settings.isDisplaySegmentSources() &&  settings.isDisplayEditorSegmentSources())  {
             sourceText = ste.getSrcText();
         }
 
@@ -609,7 +629,7 @@ public class SegmentBuilder implements ISegmentBuilder {
 
     /**
      * Make some changes of segment mark from resource bundle for display
-     * correctly in editor.
+     * correctly in translationEditor.
      *
      * @return changed mark text
      */

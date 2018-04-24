@@ -60,6 +60,7 @@ public class EditingBehaviorPanel extends JPanel {
         descriptionTextArea = new javax.swing.JTextArea();
         defaultRadio = new javax.swing.JRadioButton();
         leaveEmptyRadio = new javax.swing.JRadioButton();
+        sideBySideRadio = new javax.swing.JRadioButton();
         insertFuzzyCheckBox = new javax.swing.JCheckBox();
         similarityLabel = new javax.swing.JLabel();
         similaritySpinner = new javax.swing.JSpinner();
@@ -97,7 +98,7 @@ public class EditingBehaviorPanel extends JPanel {
         add(descriptionTextArea, gridBagConstraints);
 
         ourButtonGroup.add(defaultRadio);
-        defaultRadio.setSelected(true);
+        defaultRadio.setSelected(true);// todo always true
         org.openide.awt.Mnemonics.setLocalizedText(defaultRadio, OStrings.getString("WF_OPTION_INSERT_SOURCE")); // NOI18N
         defaultRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         defaultRadio.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +127,25 @@ public class EditingBehaviorPanel extends JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         add(leaveEmptyRadio, gridBagConstraints);
 
+        ourButtonGroup.add(sideBySideRadio);
+        org.openide.awt.Mnemonics.setLocalizedText(sideBySideRadio, "Side &by side editor mode");
+        sideBySideRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        sideBySideRadio.setIgnoreRepaint(true);
+
+        sideBySideRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sideBySideRadioActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        add(sideBySideRadio, gridBagConstraints);
+
         org.openide.awt.Mnemonics.setLocalizedText(insertFuzzyCheckBox, OStrings.getString("WF_OPTION_INSERT_FUZZY_MATCH")); // NOI18N
         insertFuzzyCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +154,7 @@ public class EditingBehaviorPanel extends JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -146,7 +166,7 @@ public class EditingBehaviorPanel extends JPanel {
         similarityLabel.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 5);
@@ -156,7 +176,7 @@ public class EditingBehaviorPanel extends JPanel {
         similaritySpinner.setValue(90);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -168,14 +188,14 @@ public class EditingBehaviorPanel extends JPanel {
         prefixLabel.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 5);
         add(prefixLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 150;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(prefixText, gridBagConstraints);
@@ -183,7 +203,7 @@ public class EditingBehaviorPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(convertNumbers, OStrings.getString("WF_OPTION_CONVERT_NUMBERS")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -193,7 +213,7 @@ public class EditingBehaviorPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(allowTranslationEqualToSource, OStrings.getString("WF_OPTION_ALLOW_TRANS_EQ_TO_SRC")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -203,7 +223,7 @@ public class EditingBehaviorPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(exportCurrentSegment, OStrings.getString("WF_OPTION_EXPORT__CURRENT_SEGMENT")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -213,7 +233,7 @@ public class EditingBehaviorPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(stopOnAlternativeTranslation, OStrings.getString("WF_OPTION_GOTO_NEXT_UNTRANSLATED")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -223,7 +243,7 @@ public class EditingBehaviorPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(allowTagEditing, OStrings.getString("WF_TAG_EDITING")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -233,7 +253,7 @@ public class EditingBehaviorPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(tagValidateOnLeave, OStrings.getString("WG_TAG_VALIDATE_ON_LEAVE")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -243,7 +263,7 @@ public class EditingBehaviorPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(cbSaveAutoStatus, OStrings.getString("WG_SAVE_AUTO_STATUS")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -255,7 +275,7 @@ public class EditingBehaviorPanel extends JPanel {
         initialSegCountLabel.setToolTipText(OStrings.getString("WG_INITIAL_SEGMENT_LOAD_COUNT_TOOLTIP")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 15;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
         add(initialSegCountLabel, gridBagConstraints);
@@ -263,13 +283,13 @@ public class EditingBehaviorPanel extends JPanel {
         initialSegCountSpinner.setToolTipText(OStrings.getString("WG_INITIAL_SEGMENT_LOAD_COUNT_TOOLTIP")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 15;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(initialSegCountSpinner, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 15;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
@@ -280,6 +300,11 @@ public class EditingBehaviorPanel extends JPanel {
     private void radiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiosActionPerformed
 
     }//GEN-LAST:event_radiosActionPerformed
+
+    private void sideBySideRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sideBySideRadioActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_sideBySideRadioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox allowTagEditing;
@@ -297,6 +322,7 @@ public class EditingBehaviorPanel extends JPanel {
     private javax.swing.ButtonGroup ourButtonGroup;
     javax.swing.JLabel prefixLabel;
     javax.swing.JTextField prefixText;
+    javax.swing.JRadioButton sideBySideRadio;
     javax.swing.JLabel similarityLabel;
     javax.swing.JSpinner similaritySpinner;
     javax.swing.JCheckBox stopOnAlternativeTranslation;

@@ -55,6 +55,7 @@ public class EditorSettings implements IEditorSettings {
     private boolean markUntranslated;
     private boolean markAutoPopulated;
     private boolean displaySegmentSources;
+    private boolean displayEditorSegmentSources;
     private boolean markNonUniqueSegments;
     private boolean markNoted;
     private boolean markNBSP;
@@ -81,6 +82,7 @@ public class EditorSettings implements IEditorSettings {
         markTranslated = Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS);
         markUntranslated = Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
         displaySegmentSources = Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
+        displayEditorSegmentSources = Preferences.isPreference(Preferences.DISPLAY_EDITOR_SEGMENT_SOURCES);
         markNonUniqueSegments = Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
         markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
@@ -179,6 +181,13 @@ public class EditorSettings implements IEditorSettings {
         return displaySegmentSources;
     }
 
+    /**
+     *
+     *
+     * @return true if source strings can be displayed in the primary editor
+     */
+    public boolean isDisplayEditorSegmentSources() {return displayEditorSegmentSources;}
+
     public boolean isMarkNonUniqueSegments() {
         return markNonUniqueSegments;
     }
@@ -231,6 +240,49 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
+
+    public void setDisplayEditorSegmentSources(boolean enabled) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.displayEditorSegmentSources = enabled;
+        Preferences.setPreference(Preferences.DISPLAY_EDITOR_SEGMENT_SOURCES, enabled);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
+    public void setDisplayBoldSources(boolean enabled) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.viewSourceBold = enabled;
+        Preferences.setPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD, enabled);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
+    public void setDisplayBoldActiveSources(boolean enabled) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.viewActiveSourceBold = enabled;
+        Preferences.setPreference(Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD, enabled);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
 
     public void setMarkNonUniqueSegments(boolean markNonUniqueSegments) {
         UIThreadsUtil.mustBeSwingThread();

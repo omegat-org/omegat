@@ -53,6 +53,7 @@ import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.text.JTextComponent;
 
+import com.vlsolutions.swing.docking.*;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
@@ -68,11 +69,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
-
-import com.vlsolutions.swing.docking.Dockable;
-import com.vlsolutions.swing.docking.DockableState;
-import com.vlsolutions.swing.docking.DockingDesktop;
-import com.vlsolutions.swing.docking.FloatingDialog;
 
 /**
  * The main window of OmegaT application (unless the application is started in
@@ -209,6 +205,16 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     public void addDockable(Dockable pane) {
         desktop.addDockable(pane);
+    }
+
+    public void addDockable(Dockable base, Dockable newPane,
+                            DockingConstants.Split position, double proportion) {
+        desktop.split(base, newPane, position, proportion);
+    }
+
+
+    public void removeDockable(Dockable pane) {
+        desktop.remove(pane);
     }
 
     /**

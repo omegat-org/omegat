@@ -68,7 +68,7 @@ public class RemoveTagMarker extends AbstractMarker {
 
     @Override
     protected void initDrawers(boolean isSource, boolean isActive) {
-        if (((IEditor) Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
+        if ((Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
             attributes = isSource ? attributesLtrSource : attributesLtrTranslation;
             painter = null;
         } else {

@@ -66,6 +66,7 @@ import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
@@ -109,6 +110,7 @@ public final class Main {
     /** Execution mode. */
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
+    @SuppressWarnings("fallthrough")
     public static void main(String[] args) {
         if (args.length > 0 && (CLIParameters.HELP_SHORT.equals(args[0])
                 || CLIParameters.HELP.equals(args[0]))) {
@@ -176,10 +178,14 @@ public final class Main {
         Preferences.initSegmentation();
 
         int result;
+        IEditor.EditorMode mode = IEditor.EditorMode.DEFAULT;
         try {
             switch (runMode) {
+
+            case SIDE_BY_SIDE:
+                mode = IEditor.EditorMode.SIDE_BY_SIDE;
             case GUI:
-                result = runGUI();
+                result = runGUI(mode);
                 // GUI has own shutdown code
                 break;
             case CONSOLE_TRANSLATE:
@@ -253,7 +259,7 @@ public final class Main {
     /**
      * Execute standard GUI.
      */
-    protected static int runGUI() {
+    protected static int runGUI(IEditor.EditorMode mode) {
         // MacOSX-specific - they must be setted BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();
@@ -292,7 +298,7 @@ public final class Main {
         }
 
         try {
-            Core.initializeGUI(PARAMS);
+            Core.initializeGUI(PARAMS, mode);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);

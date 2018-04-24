@@ -50,6 +50,16 @@ public interface IEditorSettings {
 
     void setDisplaySegmentSources(boolean displaySegmentSources);
 
+    void setDisplayEditorSegmentSources(boolean enabled);
+
+    void setDisplayBoldSources(boolean enabled);
+
+    void setDisplayBoldActiveSources(boolean enabled);
+
+//    void setEditMode(IEditor.EditorMode mode);
+
+//    IEditor.EditorMode getEditMode();
+
     boolean isMarkNonUniqueSegments();
 
     void setMarkNonUniqueSegments(boolean markNonUniqueSegments);

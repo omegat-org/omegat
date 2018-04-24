@@ -207,6 +207,21 @@ public abstract class TestCore {
             }
 
             @Override
+            public void setDisplayEditorSegmentSources(boolean enabled) {
+
+            }
+
+            @Override
+            public void setDisplayBoldSources(boolean enabled) {
+
+            }
+
+            @Override
+            public void setDisplayBoldActiveSources(boolean enabled) {
+
+            }
+
+            @Override
             public boolean isMarkNonUniqueSegments() {
                 return false;
             }

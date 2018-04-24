@@ -61,7 +61,7 @@ public class ProtectedPartsMarker implements IMarker {
             throws Exception {
         HighlightPainter painter;
         AttributeSet attrs;
-        if (((IEditor) Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
+        if (( Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
             attrs = ATTRIBUTES_LTR;
             painter = null;
         } else {

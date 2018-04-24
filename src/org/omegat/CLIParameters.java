@@ -92,6 +92,9 @@ public final class CLIParameters {
     // CONSOLE_ALIGN mode
     public static final String ALIGNDIR = "alignDir";
 
+    // SIDE BY SIDE UI
+    public static final String SIDE_BY_SIDE = "sideBySide";
+
     // Development
     public static final String DEV_MANIFESTS = "dev-manifests";
 
@@ -102,7 +105,7 @@ public final class CLIParameters {
      * Application execution mode. Value of {@link #MODE}.
      */
     enum RUN_MODE {
-        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN;
+        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN, SIDE_BY_SIDE;
         public static RUN_MODE parse(String s) {
             try {
                 return valueOf(normalize(s));

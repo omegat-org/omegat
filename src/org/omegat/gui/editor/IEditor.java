@@ -53,6 +53,7 @@ import javax.swing.*;
  * @author Aaron Madlon-Kay
  */
 public interface IEditor {
+
     enum CHANGE_CASE_TO {
         /** lower case */
         LOWER,
@@ -64,6 +65,12 @@ public interface IEditor {
         UPPER,
         /** cycle between cases */
         CYCLE,
+    }
+
+
+    enum EditorMode{
+        DEFAULT,
+        SIDE_BY_SIDE
     }
 
     enum EditorType {

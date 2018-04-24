@@ -136,7 +136,7 @@ class EntryListPane extends JTextPane {
                 KEY_TRANSFER_FOCUS);
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK),
                 KEY_TRANSFER_FOCUS_BACKWARD);
-        // Enter to jump to selected segment in editor
+        // Enter to jump to selected segment in translationEditor
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), KEY_JUMP_TO_ENTRY_IN_EDITOR);
         return map;
     }

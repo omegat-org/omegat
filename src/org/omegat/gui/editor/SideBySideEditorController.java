@@ -927,16 +927,7 @@ public class SideBySideEditorController implements IEditor {
             }
         });
 
-        markerController.process(m_docSegList);
-
-        // Set the source document
-        sourceDoc.setDocumentFilter(new DocumentFilter3());
-
-
         sourceEditor.setDocument(sourceDoc);
-
-
-        translationEditor.repaint();
         sourceEditor.repaint();
     }
 

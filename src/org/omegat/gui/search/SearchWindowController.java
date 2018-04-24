@@ -474,7 +474,7 @@ public class SearchWindowController {
         form.m_allResultsCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_ALL_RESULTS, false));
         form.m_fileNamesCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_FILE_NAMES, false));
 
-        // editor related options
+        // translationEditor related options
         form.m_autoSyncWithEditor
                 .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_AUTO_SYNC, false));
         form.m_backToInitialSegment
@@ -566,7 +566,7 @@ public class SearchWindowController {
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_FILES, form.m_rbDir.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_RECURSIVE, form.m_recursiveCB.isSelected());
 
-        // editor related options
+        // translationEditor related options
         Preferences.setPreference(Preferences.SEARCHWINDOW_AUTO_SYNC, form.m_autoSyncWithEditor.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_BACK_TO_INITIAL_SEGMENT,
                 form.m_backToInitialSegment.isSelected());
@@ -581,7 +581,7 @@ public class SearchWindowController {
 
     /**
      * Reset search options to their default values. Search terms are left unchanged, as are any settings that
-     * don't affect the search results (such as syncing with editor).
+     * don't affect the search results (such as syncing with translationEditor).
      */
     public void resetOptions() {
         form.m_rbProject.setSelected(true);

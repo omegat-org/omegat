@@ -54,6 +54,7 @@ import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SideBySideEditorController;
+import org.omegat.gui.editor.SideBySideEditorController2;
 import org.omegat.gui.editor.mark.BidiMarkerFactory;
 import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
 import org.omegat.gui.editor.mark.FontFallbackMarker;
@@ -84,6 +85,8 @@ import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
 import org.omegat.util.RecentProjects;
+
+import javax.swing.*;
 
 /**
  * Class which contains all components instances.
@@ -227,7 +230,7 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(final Map<String, String> params) throws Exception {
+    public static void initializeGUI(final Map<String, String> params, IEditor.EditorMode mode) throws Exception {
         cmdLineParams = params;
 
         // 1. Initialize project
@@ -261,9 +264,25 @@ public final class Core {
         filterMaster = new FilterMaster(Preferences.getFilters());
 
         // 3. Initialize other components. They add themselves to the main window.
-        // TODO: CLG MAKE THIS CONFIGURABLE...
-//        editor = new EditorController(me);
-        editor = new SideBySideEditorController(me);
+        if(IEditor.EditorMode.DEFAULT == mode) {
+            editor = new EditorController(me);
+            SwingUtilities.invokeLater(() -> {
+                // When using the EditorController be sure to set/restore these:
+                editor.getSettings().setDisplayEditorSegmentSources(true);
+                editor.getSettings().setDisplayBoldSources(true);
+            });
+        }
+        else {
+          //editor = new SideBySideEditorController(me);
+          editor = new SideBySideEditorController2(me);
+            SwingUtilities.invokeLater(() -> {
+                // When using the EditorController be sure to set/restore these:
+                editor.getSettings().setDisplayEditorSegmentSources(false);
+                editor.getSettings().setDisplayBoldSources(false);
+                editor.getSettings().setDisplayBoldActiveSources(false);
+            });
+        }
+
         tagValidation = new TagValidationTool();
         issuesWindow = new IssuesPanelController(me);
         matcher = new MatchesTextArea(me);

@@ -228,7 +228,7 @@ public final class MainWindowUI {
                 }
 
                 if (Core.getProject().isProjectLoaded()) {
-                    ((IEditor) Core.getEditor()).showStat();
+                    (Core.getEditor()).showStat();
                 } else {
                     Core.getMainWindow().showProgressMessage(statusText);
                 }
@@ -311,6 +311,8 @@ public final class MainWindowUI {
      */
     private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
         try (InputStream in = new FileInputStream(uiLayoutFile)) {
+            // todo clg where is UI layout file at?
+            System.out.println("ClG XML layout file: " + uiLayoutFile.toString() );
             mainWindow.desktop.readXML(in);
         } catch (Exception ex) {
             Log.log(ex);

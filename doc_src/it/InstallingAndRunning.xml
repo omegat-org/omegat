@@ -45,7 +45,14 @@
           <primary>Avvio di OmegaT</primary> <secondary>Windows</secondary> <tertiary>file INI</tertiary>
         </indexterm>In questo caso, le opzioni per l'avvio del programma saranno lette dal file <emphasis><application>OmegaT</application>.l4J.ini </emphasis>, che si trova nella stessa cartella del file eseguibile e che può essere modificato affinché rispecchi le proprie impostazioni. L'esempio di file INI che segue riserva 1GB di memoria, richiede il francese come lingua dell'utente e il Canada come nazione:</para>
 
-      <literallayout><code># OmegaT.exe runtime configuration # Per usare un parametro, rimuovere '#' prima del '-' # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
+      <literallayout><code># OmegaT.exe runtime configuration
+# Per usare un parametro, rimuovere '#' prima del '-'
+# Memory 
+-Xmx1024M 
+# Language 
+-Duser.language=FR
+# Country 
+-Duser.country=CA </code></literallayout>
 
       <para>Nota: se OmegaT risultasse lento durante le sessioni di desktop remoto in Windows, sarà possibile usare questa opzione:</para>
 
@@ -219,15 +226,15 @@
 
       <para>Fare doppio-clic su <emphasis> <application>OmegaT</application>.app</emphasis> o sulla sua posizione nella Dock.</para>
 
-      <para>È possibile cambiare il comportamento di OmegaT modificando sia la sezione <emphasis>Properties</emphasis>, sia il file <emphasis>OmegaT.sh</emphasis> contenuti nel pacchetto.</para>
+      <para>È possibile cambiare il comportamento di OmegaT modificando sia la sezione <emphasis>Properties</emphasis>, sia il file <emphasis>Configuration.properties</emphasis> contenuti nel pacchetto.</para>
 
-      <para>Aprire il file <application><emphasis>OmegaT.sh</emphasis></application>, facendo clic col pulsante destro su <emphasis><application>OmegaT</application>.app</emphasis> e selezionare &quot;Show Package Contents&quot;, poi aprirlo facendovi sopra clic col pulsante destro e selezionando il proprio editor di testo preferito. È possibile anche arrivare direttamente alla cartella dalla riga di comando (con &quot;cd&quot;) e aprire <application><emphasis>OmegaT.sh</emphasis> in un editor a riga di comando come emacs o vi</application>.<indexterm class="singular">
+      <para>Per aprire <application><emphasis>Configuration.properties</emphasis></application>, facendo clic col pulsante destro su <emphasis><application>OmegaT</application>.app</emphasis> e selezionare &quot;Show Package Contents&quot;, poi aprirlo in Contents/Resources facendovi sopra clic col pulsante destro e selezionando il proprio editor di testo preferito. È possibile anche arrivare direttamente alla cartella dalla riga di comando (con &quot;cd&quot;) e aprire <application><emphasis>Configuration.properties</emphasis> in un editor a riga di comando come emacs o vi</application>.<indexterm class="singular">
           <primary>Personalizzazione di OmegaT</primary> <secondary>OS X</secondary> <tertiary>Parametri di avvio</tertiary>
         </indexterm></para>
 
-      <para>Le opzioni vengono cambiate modificando <emphasis>OmegaT.sh</emphasis>. Per ottenere delle opzioni predefinite, abilitare un parametro rimuovendo il carattere # all'inizio della riga. Per esempio, <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (senza #) avvierà <application>OmegaT</application> con l'interfaccia giapponese.</para>
+      <para>Le opzioni vengono cambiate modificando <emphasis>Configuration.properties</emphasis>. Per ottenere delle opzioni predefinite, abilitare un parametro rimuovendo il carattere # all'inizio della riga. Per esempio, <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (senza #) avvierà <application>OmegaT</application> con l'interfaccia giapponese.</para>
 
-      <para>Per cambiare la quantità di memoria disponibile, modificare direttamente la riga di avvio. Per esempio, <filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> avvierà OmegaT con due GB di memoria.</para>
+      <para>Per cambiare la quantità di memoria disponibile, modificare il file <emphasis>OmegaT.app/Contents/Info.plist</emphasis> e modificare il contenuto di &lt;string&gt;-Xmx1024M&lt;/string&gt;. Per esempio, &lt;string&gt;-Xmx2048M&lt;/string&gt; avvierà OmegaT con 2 GB di memoria.</para>
 
       <para>Per avviare più istanze di <emphasis><application>OmegaT</application>.app</emphasis>, fare doppio clic sul file <emphasis>OmegaT.sh</emphasis> che si trova in <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
@@ -299,6 +306,14 @@
     </section>
   </section>
 
+  <section id="drag.and.drop">
+    <title>Trascinare e rilasciare (Drag and drop)<indexterm class="singular">
+        <primary>Avvio di OmegaT</primary> <secondary>Drag and drop</secondary>
+      </indexterm></title>
+
+    <para>Nella maggior parte dei sistemi, è possibile aprire un progetto trascinando e rilasciando un file <filename>omegat.project</filename> sull'icona OmegaT presente nel desktop. Dovrebbe essere anche possibile aprire un progetto OmegaT facendo doppio clic su un file <filename>omegat.project</filename>.</para>
+  </section>
+
   <section id="using.Java.Web.Start">
     <title>Uso di Java Web Start<indexterm class="singular">
         <primary>Avvio di OmegaT</primary> <secondary>Uso di Java Web Start</secondary>
@@ -365,7 +380,7 @@
           <primary>Avvio di OmegaT</primary> <secondary>Argomenti dello script di avvio</secondary>
         </indexterm></title>
 
-      <para>Il comando di base è stato già citato prima. Le modifiche a questo comando implicano l'aggiunta di &quot;argomenti&quot;. Gli argomenti sono aggiunti dopo la parte <emphasis>&quot;java&quot;</emphasis> iniziale e prima di <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Si noti che in Windows è possibile cambiare il file <filename>OmegaT.l4J.ini</filename> per farle coincidere con proprie preferenze. In altre piattaforme è possibile modificare l'avviatore (ossia <filename>OmegaT.sh</filename> sul Mac, <filename>OmegaT</filename> in Linux) in modo che esegua le stesse operazioni.</para>
+      <para>Il comando di base è stato già citato prima. Le modifiche a questo comando implicano l'aggiunta di &quot;argomenti&quot;. Gli argomenti sono aggiunti dopo la parte <emphasis>&quot;java&quot;</emphasis> iniziale e prima di <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Si noti che in Windows è possibile cambiare il file <filename>OmegaT.l4J.ini</filename> per farle coincidere con proprie preferenze. In altre piattaforme è possibile modificare il file <filename>Configuration.properties</filename> in Mac, o l'avviatore <filename>OmegaT</filename> in Linux in modo che esegua le stesse operazioni.</para>
 
       <para>Sotto viene fornito un elenco di argomenti possibili. Gli utenti avanzati possono ottenere ulteriori informazioni sugli argomenti digitando <emphasis>man java</emphasis> nella finestra di terminale.</para>
 
@@ -496,6 +511,8 @@
 
         <para><literal>--config-dir=/percorso/ai/file-di-configurazione/ \</literal></para>
 
+        <para><literal>--config-file=/percorso/ai/file-di-configurazione/ \</literal></para>
+
         <para><literal>
         --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
 
@@ -514,6 +531,10 @@
         <itemizedlist>
           <listitem>
             <para><literal>--config-dir=&lt;config-dir&gt;</literal> dice a <application>OmegaT</application> in quale cartella sono memorizzati i file di configurazione. Se non indicato, <application>OmegaT</application> torna ai valori predefiniti (la cartella <application>OmegaT</application> nella home dell'utente o, se non disponibile, la cartella di lavoro corrente). Si noti il carattere trattino - doppio</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>--config-file=&lt;config-file&gt;</literal> dice a <application>OmegaT</application> quale file di configurazione utilizzare.</para>
           </listitem>
         </itemizedlist>
 

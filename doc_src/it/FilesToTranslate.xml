@@ -167,6 +167,18 @@
           <listitem>
             <para>Visio (*.vxd)</para>
           </listitem>
+
+          <listitem>
+            <para>Java property XML (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para> Schematron (*.sch)</para>
+          </listitem>
+
+          <listitem>
+            <para>schema RELAX NG per XML (*.rng)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>Gli altri tipi di file di testo formattato possono essere gestiti da OmegaT associando le loro estensioni di file a un tipo supportato, presupponendo che le regole di segmentazione corrispondenti li segmentino correttamente.</para>
@@ -284,12 +296,12 @@
         </indexterm></title>
 
       <para>Quando viene creato un documento di arrivo, la sua direzione di visualizzazione sarà quella del documento originale. Se il documento originale era LTR, la direzione di visualizzazione del documento di arrivo deve essere cambiata manualmente in RTL nella sua applicazione per la visualizzazione. Ciascun formato di uscita ha un modo specifico di trattare la visualizzazione RTL; per i dettagli consultare i manuali delle applicazioni appropriate.</para>
-      
+
       <para>Per i file .docx, vengono comunque eseguite automaticamente una serie di modifiche:<itemizedlist>
-      <listitem>I paragrafi, le sezioni e le tabelle sono impostate nel formato bidirezionale</listitem>
-      <listitem>Le direzioni (elementi di testo) sono impostate a RTL</listitem>     
-      </itemizedlist>
-      </para>
+          <listitem>I paragrafi, le sezioni e le tabelle sono impostate nel formato bidirezionale</listitem>
+
+          <listitem>Le direzioni (elementi di testo) sono impostate a RTL</listitem>
+        </itemizedlist></para>
 
       <para>Per evitare la modifica dei parametri di visualizzazione dei file di arrivo ogni volta che i file sono aperti, può essere possibile cambiare i parametri di visualizzazione dei file di partenza, affinché essi vengano passati a quelli di arrivo. Tali modifiche sono possibili nei file ODF, per esempio.</para>
     </section>

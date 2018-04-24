@@ -94,6 +94,42 @@
   </section>
 
   <section>
+    <title>MyMemory (automatico)<indexterm class="singular">
+        <primary>Traduzione automatica</primary> <secondary>MyMemory</secondary>
+      </indexterm></title>
+
+    <para>Per impostazione predefinita, MyMemory consente un massimo di cento richieste al giorno. Se si fornisce un indirizzo di posta elettronica, è possibile usare mille richieste anziché cento.</para>
+
+    <para>Esistono almeno tre metodi per specificare il proprio indirizzo di posta elettronica:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para>nel file OmegaT.l4J.ini (solo Windows), cambiare:</para>
+
+          <para># MyMemory email</para>
+
+          <para>in:</para>
+
+          <para>MyMemory tuo@indirizzo-email.com</para>
+        </listitem>
+
+        <listitem>
+          <para>Quando si avvia OmegaT da riga di comando, specificare nel comando:</para>
+
+          <para>-Dmymemory.api.email=tuo@indirizzo-email.com</para>
+        </listitem>
+
+        <listitem>
+          <para>Nell'avviatore Kaptain (solo Linux), digitare l'indirizzo nel campo corrispondente della scheda &quot;Online Services&quot;.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>MyMemory fornisce anche <emphasis role="bold">traduzioni umane</emphasis> derivanti da traduttori professionisti, LSP, clienti e contenuti web multilingua. Per ottenere queste traduzioni è necessario caricare il proprio file di partenza <ulink url="http://mymemory.translated.net/">sul loro sito</ulink>, il quale genererà un file TMX. Successivamente, bisogna salvare il file TMX nella cartella /tm/ o /tm/auto/ del proprio progetto OmegaT.</para>
+
+    <para>MyMemory offre anche la possibilità di gestire <emphasis role="bold">TM personali</emphasis>. Nota: OmegaT non interagisce dinamicamente con esse (è necessario esportare/importare manualmente i file TMX).</para>
+  </section>
+
+  <section>
     <title>Microsoft Translator<indexterm class="singular">
         <primary>Traduzione automatica</primary> <secondary>Microsoft Translator</secondary>
       </indexterm></title>

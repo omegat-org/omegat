@@ -12,9 +12,33 @@
 
     <para>Aprire la finestra “Cerca” tramite la combinazione da tastiera <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> e inserire nel campo <emphasis>Cerca</emphasis> la parola o la frase da trovare.</para>
 
-    <para>In alternativa, selezionare una parola o una frase in un punto qualsiasi nella finestra dell'Editor (il testo di destinazione del segmento attivo) e premere <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. La parola o la frase selezionata viene automaticamente immessa all'interno del campo <emphasis>Cerca</emphasis>. È possibile mantenere aperte contemporaneamente più finestre di ricerca, ma è preferibile chiuderle quando non sono più necessarie, per non intasare lo spazio di lavoro in cui si sta lavorando.</para>
+    <para>In alternativa, selezionare una parola o una frase nella finestra dell'Editor e premere <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. La parola o la frase selezionata viene automaticamente immessa all'interno del campo <emphasis>Cerca</emphasis>. È possibile mantenere aperte contemporaneamente più finestre di ricerca, ma è preferibile chiuderle quando non sono più necessarie, per non intasare lo spazio di lavoro in cui si sta lavorando.</para>
 
     <para>Fare clic sulla freccia del menu a tendina della finestra <emphasis>Cerca</emphasis> per visualizzare le ultime dieci ricerche.</para>
+
+    <para>La finestra Cerca ha i suoi propri menu:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>File &gt; Cerca selezione (<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>): il programma si posiziona sul campo di ricerca e seleziona tutto il suo contenuto.</para>
+      </listitem>
+
+      <listitem>
+        <para>File &gt; Chiudi (<keycombo> <keycap>Ctrl</keycap> <keycap>W</keycap> </keycombo>): chiude la finestra di ricerca (alla stessa maniera del comando <keycap>Esc</keycap>)</para>
+      </listitem>
+
+      <listitem>
+        <para>Modifica &gt; Inserisci il testo di partenza (<keycombo> <keycap>Ctrl</keycap> <keycap>Maiusc</keycap> <keycap>I</keycap> </keycombo>): inserisce il segmento di partenza corrente.</para>
+      </listitem>
+
+      <listitem>
+        <para>Modifica &gt; Sostituisci col testo di partenza (<keycombo> <keycap>Ctrl</keycap> <keycap>Maiusc</keycap> <keycap>R</keycap> </keycombo>): sostituisce col segmento corrente del testo di partenza.</para>
+      </listitem>
+
+      <listitem>
+        <para>Modifica &gt; Crea voce di glossario (<keycombo> <keycap>Ctrl</keycap> <keycap>Maiusc</keycap> <keycap>G</keycap> </keycombo>): aggiunge un nuovo elemento di glossario.</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="using.wild.cards">
@@ -128,7 +152,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Premendo il pulsante <guibutton>Opzioni avanzate</guibutton> potranno essere selezionati criteri di ricerca aggiuntivi (autore, data della traduzione, ecc.).</para>
+    <para>Premendo il pulsante <guibutton>Opzioni avanzate</guibutton> potranno essere selezionati criteri di ricerca aggiuntivi (autore o revisore della traduzione, data di traduzione, ad esclusione dei segmenti orfani, ecc.). Se è selezionata l'opzione <emphasis>Non considerare la larghezza carattere</emphasis>, le ricerche per le forme a larghezza intera (caratteri CJK, ossia cinesi, giapponesi e coreani) troveranno le corrispondenze con le forme a metà larghezza e viceversa.</para>
   </section>
 
   <section id="search.result.display">
@@ -136,7 +160,9 @@
 
     <para>La pressione del pulsante “Cerca”, dopo aver immesso una stringa nel campo del testo da trovare, genera la visualizzazione di tutti i segmenti del progetto contenenti la stringa digitata. Dato che <application>OmegaT</application> gestisce i segmenti identici come una singola entità, viene mostrato solo il primo segmento univoco. I segmenti vengono visualizzati in ordine di comparsa all'interno del progetto. I segmenti tradotti vengono visualizzati con sopra il testo originale e sotto il testo tradotto; per i segmenti non tradotti viene, invece, visualizzato solo come testo sorgente.</para>
 
-    <para>Quando si fa clic sul segmento, esso viene aperto nella finestra dell'Editor per le modifiche. A questo punto si può tornare alla finestra “Cerca” e passare al successivo segmento estratto, per eseguire il controllo e apportare le eventuali modifiche.</para>
+    <para>Il doppio clic su un segmento apre quest'ultimo nell'Editor, al fine di consentirne la modifica (il singolo clic esegue la stessa azione quando è attivata l'opzione <emphasis role="bold">Sincronizzazione automatica con Editor</emphasis>). A questo punto si può tornare alla finestra “Cerca” e passare al successivo segmento estratto, per eseguire il controllo e apportare le eventuali modifiche.</para>
+
+    <para>Nella finestra di Ricerca testo è possibile usare le scorciatoie standard (<keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo>) per spostarsi da un segmento all'altro.</para>
 
     <para>Si potranno aprire insieme più finestre di ricerca. È possibile visualizzare rapidamente il loro contenuto leggendone il titolo, che contiene il termine di ricerca utilizzato.</para>
   </section>

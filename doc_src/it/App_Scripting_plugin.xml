@@ -39,6 +39,9 @@
     <para>Per impostazione predefinita, gli script vengono memorizzati nella cartella &quot;scripts&quot; che si trova nella cartella di installazione di OmegaT (quella in cui è presente il file OmegaT.jar).</para>
 
     <para>È possibile aggiungere i nuovi script in quella cartella, essi appariranno nell'elenco degli script disponibili all'interno della finestra Azioni di script.</para>
+
+    <para>Si possono trovare alcuni script aggiuntivi qui: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>
+    </para>
   </section>
 
   <section>

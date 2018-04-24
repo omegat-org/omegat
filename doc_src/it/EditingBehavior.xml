@@ -166,4 +166,14 @@
       </listitem>
     </varlistentry>
   </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Carica inizialmente questo numero di segmenti</term>
+
+      <listitem>
+        <para>Per impostazione predefinita l'editor mostra i primi duemila segmenti, caricando progressivamente gli altri allo scorrere in alto o in basso della pagina. È possibile, se si possiede una macchina potente, o se non piace il comportamento della finestra durante il caricamento progressivo della pagina, aumentare il numero predefinito.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
 </chapter>

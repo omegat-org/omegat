@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Спалучэньні клявішаў у вакне рэдагаваньня</title>
+
+  <para>Гэты кароткі тэкст — апісаньне паводзінаў клявішаў у вакне рэдагаваньня. “Перайсьці ўнутр сэгмэнта” азначае, што курсор перамяшчаецца ў пачатак сэгмэнта, калі ён да гэтага знаходзіўся перад сэгмэнтам, і ў канец сэгмэнта, калі раней знаходзіўся пасьля яго.</para>
+
+  <table>
+    <title>Паводзіны клявішаў у рэдактары</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <colspec align="left" colnum="2"/>
+
+      <thead>
+        <row>
+          <entry align="left">Спалучэньне клявішаў</entry>
+
+          <entry align="left">Дзеяньне</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Улева:</emphasis></entry>
+
+          <entry>на адзін сымбаль улева, але не далей, чым за пачатак сэгмэнта</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Управа:</emphasis></entry>
+
+          <entry>на адзін сымбаль управа, але не далей, чым за канец сэгмэнта</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+улева:</emphasis></entry>
+
+          <entry>на адно слова ўлева, але не далей, чым за пачатак сэгмэнта</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+управа:</emphasis></entry>
+
+          <entry>на адно слова ўправа, але не далей, чым за канец сэгмэнта</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgUp</emphasis></entry>
+
+          <entry>на старонку ўверх у дакумэнце</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgDn</emphasis></entry>
+
+          <entry>на старонку ўніз у дакумэнце</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Home*</emphasis></entry>
+
+          <entry>перайсьці ў пачатак радка ў сэгмэнце</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">End*</emphasis></entry>
+
+          <entry>перайсьці ў канец радка ў сэгмэнце</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Home</emphasis></entry>
+
+          <entry>перайсьці ў пачатак сэгмэнта</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+End</emphasis></entry>
+
+          <entry>перайсьці ў канец сэгмэнта</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgUp</emphasis></entry>
+
+          <entry>перайсьці ў першы сэгмэнт дакумэнта (Mac: <emphasis role="bold">Cmd + PgUp</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgDn</emphasis></entry>
+
+          <entry>перайсьці ў апошні сэгмэнт дакумэнта (Mac: <emphasis role="bold">Cmd + PgDn</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Backspace*</emphasis></entry>
+
+          <entry>выдаліць сымбаль перад курсорам</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Delete*</emphasis></entry>
+
+          <entry>выдаліць сымбаль пасьля курсора</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Backspace</emphasis></entry>
+
+          <entry>выдаліць сымбалі да пачатку бягучага слова (Mac: <emphasis role="bold">Alt+Backspace</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Delete</emphasis></entry>
+
+          <entry>выдаліць сымбалі да пачатку наступнага слова (Mac: <emphasis role="bold">Alt+Delete</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
+
+          <entry>адчыніць папярэдні сэгмэнт (Mac: <emphasis role="bold">Ctrl+Enter</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>вылучыць увесь сэгмэнт (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
+
+          <entry>пераключыцца ў рэжым тэксту справа-налева (або наадварот)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Space</emphasis></entry>
+
+          <entry>адчыніць дыялёгавае вакно аўтазапаўненьня з кантэкстазалежнымі прапановамі (Mac: <emphasis role="bold">Esc</emphasis>). Пасьля зьяўленьня вакна аўтазавяршэньня, паўторна націскаючы <emphasis role="bold">Ctrl+Space</emphasis>, можна пераключацца пасьлядоўна паміж <emphasis>запісамі глясароў</emphasis>, <emphasis>элемэнтамі аўтатэксту,</emphasis> <emphasis>адсутнымі тэгамі</emphasis> і <emphasis>табліцай сымбаляў</emphasis>.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Паводзіны гэтых клявішаў іншыя, калі курсор знаходзіцца па-за межамі рэдагаванага сэгмэнта:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Home:</emphasis> курсор у пачатак актыўнага сэгмэнта</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">End:</emphasis> курсор у канец актыўнага сэгмэнта</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Backspace:</emphasis> нічога</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Delete:</emphasis> нічога</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Якая заўгодна клявіша з сымбалем,</emphasis> калі націснутая па-за межамі рэдагаванага сэгмэнта, будзе ігнаравацца.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Клявіша Shift сама па сабе нічога ня робіць: пры націску на на яе ўсе клявішы перамяшчэньня курсора працуюць звычайным спосабам, за выключэньнем <literal>Shift + Enter</literal> — пры гэтым уводзіцца разрыў радка ў тэксьце.</para>
+
+  <para>Сыстэмныя каманды “вылучыць усё” (<keycap>Ctrl+A</keycap>), “уставіць” (<emphasis role="bold">Ctrl+V</emphasis>), “выразаць” (<emphasis role="bold">Ctrl+X</emphasis>), “скапіяваць” (<emphasis role="bold">Ctrl+C)</emphasis>, “уставіць супадзеньне” (<emphasis role="bold">Ctrl+I</emphasis>), “уставіць крыніцу” (<emphasis role="bold">Ctrl+Shift+I</emphasis>) дзейнічаюць у прынцыпе толькі для тэксту адчыненага сэгмэнта.</para>
+
+  <para>Каб пераключацца паміж панэлямі (напрыклад, з панэлі рэдагаваньня ў панэль недакладных супадзеньняў), трэба ўжываць <keycap>Ctrl+Tab</keycap>. Пры націсканьні <keycap>Ctrl+Shift+Tab</keycap> адбываецца вяртаньне ў папярэднюю панэль. У панэлях працуюць скароты <keycap>Ctrl+A</keycap> і <keycap>Ctrl+C</keycap>, якія дазваляюць капіяваць зьвесткі (цалкам або часткова) у буфэр абмену.</para>
+
+  <para>Заўважце, што спалучэньні клявішаў можна перавызначыць паводле сваіх патрэбаў. Гл. <link linkend="ch04.shortcuts.customization">дадатак “Дапасаваньне спалучэньняў клявішаў”</link></para>
+</appendix>

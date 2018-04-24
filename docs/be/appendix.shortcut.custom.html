@@ -1,0 +1,892 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;H.&nbsp;Наладка спалучэньняў клявішаў</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.5 — Дапаможнік карыстальніка">
+      <link rel="up" href="index.html" title="OmegaT 3.5 — Дапаможнік карыстальніка">
+      <link rel="prev" href="appendix.website.html" title="Appendix&nbsp;G.&nbsp;OmegaT у Інтэрнэце">
+      <link rel="next" href="appendix.legal.notices.html" title="Appendix&nbsp;I.&nbsp;Юрыдычныя заўвагі">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;H.&nbsp;Наладка спалучэньняў клявішаў</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.website.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.shortcut.custom"></a>Appendix&nbsp;H.&nbsp;Наладка спалучэньняў клявішаў
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.customization">1. Наладка спалучэньняў клявішаў</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu">2. Мэню “Праект”</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.EditMenu">3. Мэню “Праўка”</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu">4. Мэню “Пераход”</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu">5. Мэню “Выгляд”</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu">6. Мэню “Сэрвіс”</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu">7. Мэню “Налады”</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu">8. Мэню “Даведка”</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1.&nbsp;<a class="indexterm" name="d0e12150"></a>Наладка спалучэньняў клявішаў
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Для большасьці пунктаў галоўнага мэню можа прызначыць спалучэньні клявішаў. Каб зьмяніць ужо прызначаныя спалучэньні або дадаваць
+               новыя, трэба іх запісаць у файл вызначэньня спалучэньняў клявішаў у каталёгу наладаў OmegaT (гл. <a class="link" href="chapter.files.and.folders.html#user.files" title="2.&nbsp;Файлы наладаў карыстальніка">Месцазнаходжаньне файлаў карыстальніка</a>).
+            </p>
+            <p>Файл вызначэньняў спалучэньняў клявішаў павінен мець назву <code class="filename">MainMenuShortcuts.properties</code> і ўтрымліваць не больш аднаго вызначэньня спалучэньня клявішаў у радку. Дапускаюцца пустыя радкі, а таксама радкі каментарыяў,
+               якія мусяць пачынацца з “//”. Усё, што пасьля “//”, будзе ігнаравацца.
+            </p>
+            <p>Пасьля рэдагаваньня файла <code class="filename">MainMenuShortcuts.properties</code> патрабуецца перазапуск <span class="application">OmegaT</span>, каб новыя спалучэньні клявішаў сталі дзейснымі.
+            </p>
+            <p>Сынтаксыс апісаньня спалучэньняў наступны: <code class="code">&lt;элемэнт коду мэню&gt; = &lt;спалучэньне&gt;</code>, дзе <span class="emphasis"><em>&lt;элемэнт коду мэню&gt;</em></span> — код, узяты з паданых ніжэй табліцаў, а <span class="emphasis"><em> &lt;спалучэньне&gt; </em></span> — спалучэньне націснутых клявішаў, якое задаецца карыстальнікам.<a href="#ftn.d0e12185" class="footnote" name="d0e12185"><sup class="footnote">[2]</sup></a>.
+            </p>
+            <p>&lt;спалучэньне&gt; павінна мець наступны выгляд: 0 або некалькі <code class="code">&lt;клявішаў-мадыфікатараў&gt;</code>, затым 0 або 1 <code class="code">&lt;падзея&gt;</code>, затым 1 <code class="code">&lt;клявіша&gt;</code>, прычым:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="code"> &lt;клявіша-мадыфікатар&gt; </code> можа быць: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>Ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e12219" class="footnote" name="d0e12219"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
+                                  <span class="emphasis"><em>altGraph</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">&lt;падзея&gt;</code> можа быць: <span class="emphasis"><em>typed</em></span>, <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p>а <code class="code">&lt;клявіша&gt;</code> можа быць якой заўгодна клявішай на клявіятуры<a href="#ftn.d0e12253" class="footnote" name="d0e12253"><sup class="footnote">[4]</sup></a>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Напрыклад, у спалучэньнях клявішаў OmegaT па змаўчаньні<a href="#ftn.d0e12261" class="footnote" name="d0e12261"><sup class="footnote">[5]</sup></a>, можна знайсьці:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="code">projectOpenMenuItem=ctrl O</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">editCreateGlossaryEntryMenuItem=ctrl shift G</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>Першае спалучэньне — для каманды <span class="guimenuitem">Адчыніць праект…</span>, другое — для <span class="guimenuitem">Стварыць запіс глясара</span>.
+            </p>
+            <p>Калі вы хочаце выкарыстоўваць <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span>, каб адчыніць праект, зьмянеце значэньне парамэтра <code class="filename">MainMenuShortcuts.properties</code> наступным чынам:<code class="code">
+                      </code></p>
+            <p><code class="code">projectOpenMenuItem=shift ctrl O</code>.
+            </p>
+            <p>Калі вы карыстаецеся “макам” і хочаце дадаць спалучэньне <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> для пункта мэню <span class="guimenu">Сэрвіс</span> → <span class="guimenuitem">Статыстыка</span>, дадайце наступны радок у файл <code class="filename">MainMenuShortcuts.properties</code>:<code class="code"></code></p>
+            <p><code class="code"> toolsShowStatisticsStandardMenuItem=shift meta
+                      S</code></p>
+            <p>Захавайце файл і перазапусьцеце <span class="application">OmegaT</span>. Новыя спалучэньні клявішаў цяпер павінны зьявіцца побач са зьмененымі пунктамі мэню. Калі яны не канфліктуюць з сыстэмнымі
+               спалучэньнямі клявішаў, яны будуць працаваць у OmegaT.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ProjectMenu"></a>2.&nbsp;Мэню “Праект”
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e12343"></a><p class="title"><b>Table&nbsp;H.1.&nbsp;Мэню “Праект”</b></p>
+               <div class="table-contents">
+                  <table summary="Мэню “Праект”" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Пункт мэню</th>
+                           <th align="left">Спалучэньне клявішаў па змаўчаньні</th>
+                           <th align="left">Код элемэнта мэню</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Стварыць праект</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;N</strong></span></td>
+                           <td align="left">projectNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Спампаваць камандны праект</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectTeamNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Адчыніць праект</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;O</strong></span></td>
+                           <td align="left">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Адчыніць нядаўні праект</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectOpenRecentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Імпартаваць зыходныя файлы…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Спампаваць старонку MediaWiki…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectWikiImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Перазагрузіць</td>
+                           <td align="left"><span class="keycap"><strong>F5</strong></span></td>
+                           <td align="left">projectReloadMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Зачыніць</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;W</strong></span></td>
+                           <td align="left">projectCloseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Захаваць</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;S</strong></span></td>
+                           <td align="left">projectSaveMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Адкампіляваць праект</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;D</strong></span></td>
+                           <td align="left">projectCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Скампіляваць пераклад для гэтага дакумэнта</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;D</strong></span></td>
+                           <td align="left">projectSingleCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Уласьцівасьці…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;E</strong></span></td>
+                           <td align="left">projectEditMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Файлы праекта…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;L</strong></span></td>
+                           <td align="left">viewFileListMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Доступ да зьмесьціва/каранёвага каталёга праекта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessRootMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Доступ да зьмесьціва/слоўнікаў праекта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessDictionaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Доступ да зьмесьціва/глясароў праекта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessGlossaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Доступ да зьмесьціва/зыходных файлаў праекта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessSourceMenuItem&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Доступ да зьмесьціва/файлаў перакладаў праекта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessTargetMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Доступ да зьмесьціва/бягучага зыходнага дакумэнта праекта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessCurrentSourceDocumentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Доступ да зьмесьціва/бягучага дакумэнта перакладу праекта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessCurrentTargetDocumentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Доступ да зьмесьціва/глясара, у які дазволены запіс, праекта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessWriteableGlossaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выхад</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Q</strong></span></td>
+                           <td align="left">projectExitMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.EditMenu"></a>3.&nbsp;Мэню “Праўка”
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e12514"></a><p class="title"><b>Table&nbsp;H.2.&nbsp;Мэню “Праўка”</b></p>
+               <div class="table-contents">
+                  <table summary="Мэню “Праўка”" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Пункт мэню</th>
+                           <th align="left">Спалучэньне клявішаў па змаўчаньні</th>
+                           <th align="left">Код элемэнта мэню</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Адмяніць</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Z</strong></span></td>
+                           <td align="left">editUndoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Вярнуць</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Y</strong></span></td>
+                           <td align="left">editRedoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Замяніць пераклад на супадзеньне або вылучэньне</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;R</strong></span></td>
+                           <td align="left">editOverwriteTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Уставіць супадзеньне або вылучэньне</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;I</strong></span></td>
+                           <td align="left">editInsertTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Замяніць на машынны пераклад</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;M</strong></span></td>
+                           <td align="left">editOverwriteMachineTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Аднавіць зыходны тэкст</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;R</strong></span></td>
+                           <td align="left">editOverwriteSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Уставіць зыходны тэкст</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;I</strong></span></td>
+                           <td align="left">editInsertSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Уставіць адсутныя тэгі зыходнага тэксту</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;T</strong></span></td>
+                           <td align="left">editTagPainterMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Уставіць наступны адсутны тэг</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;T</strong></span></td>
+                           <td align="left">editTagNextMissedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Экспартаваць вылучанае</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;C</strong></span></td>
+                           <td align="left">editExportSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Стварыць запіс глясара</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;G</strong></span></td>
+                           <td align="left">editCreateGlossaryEntryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Пошук у праекце…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;F</strong></span></td>
+                           <td align="left">editFindInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">&nbsp;</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;F</strong></span></td>
+                           <td align="left">findInProjectReuseLastWindow</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Пошук і замена…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;K</strong></span></td>
+                           <td align="left">editReplaceInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Зьмяніць рэгістар на/усе малыя</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">lowerCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Зьмяніць рэгістар на/усе вялікія</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">upperCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Зьмяніць рэгістар на “як у загалоўках”</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">titleCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Зьмяніць рэгістар на “як у сказах”</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">sentenceCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Зьмяняць рэгістар цыклічна</td>
+                           <td align="left"><span class="keycap"><strong>Shift&nbsp;+&nbsp;F3</strong></span></td>
+                           <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выбраць папярэдняе супадзеньне</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;↑</strong></span></td>
+                           <td align="left">editSelectFuzzyPrevMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выбраць наступнае супадзеньне</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;↓</strong></span></td>
+                           <td align="left">editSelectFuzzyNextMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выбраць недакладнае супадзеньне №&nbsp;1</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;1</strong></span></td>
+                           <td align="left">editSelectFuzzy1MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выбраць недакладнае супадзеньне №&nbsp;2</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;2</strong></span></td>
+                           <td align="left">editSelectFuzzy2MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выбраць недакладнае супадзеньне №&nbsp;3</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;3</strong></span></td>
+                           <td align="left">editSelectFuzzy3MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выбраць недакладнае супадзеньне №&nbsp;4</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;4</strong></span></td>
+                           <td align="left">editSelectFuzzy4MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выбраць недакладнае супадзеньне №&nbsp;5</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;5</strong></span></td>
+                           <td align="left">editSelectFuzzy5MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выкарыстоўваць як пераклад па змаўчаньні</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleDefault</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Стварыць альтэрнатыўны пераклад</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleAlternate</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выдаліць пераклад</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editRegisterUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Задаць пусты пераклад</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editRegisterEmptyMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Зарэгістраваць ідэнтычны пераклад</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;S</strong></span></td>
+                           <td align="left">editRegisterIdenticalMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.GoToMenu"></a>4.&nbsp;Мэню “Пераход”
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e12764"></a><p class="title"><b>Table&nbsp;H.3.&nbsp;Мэню “Пераход”</b></p>
+               <div class="table-contents">
+                  <table summary="Мэню “Пераход”" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Пункт мэню</th>
+                           <th align="left">Спалучэньне клявішаў па змаўчаньні</th>
+                           <th align="left">Код элемэнта мэню</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Наступны неперакладзены сэгмэнт</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;U</strong></span></td>
+                           <td align="left">gotoNextUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Наступны перакладзены сэгмэнт</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;U</strong></span></td>
+                           <td align="left">gotoNextTranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Наступны сэгмэнт</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;N</strong></span>, або <span class="keycap"><strong>Enter</strong></span>, або <span class="keycap"><strong>Tab</strong></span></td>
+                           <td align="left">gotoNextSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Папярэдні сэгмэнт</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;P</strong></span>, або <span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Enter</strong></span>, або <span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Tab</strong></span></td>
+                           <td align="left">gotoPreviousSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Сэгмэнт нумар…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;J</strong></span></td>
+                           <td align="left">gotoSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Наступная зацемка</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoNextNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Папярэдняя зацемка</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoPreviousNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Наступны ўнікальны сэгмэнт</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;Q</strong></span></td>
+                           <td align="left">gotoNextUniqueMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Крыніца выбранага супадзеньня</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;M</strong></span></td>
+                           <td align="left">gotoMatchSourceSegment</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Наперад у гісторыі…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;N</strong></span></td>
+                           <td align="left">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Назад у гісторыі…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;P</strong></span></td>
+                           <td align="left">gotoHistoryBackMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ViewMenu"></a>5.&nbsp;Мэню “Выгляд”
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e12879"></a><p class="title"><b>Table&nbsp;H.4.&nbsp;Мэню “Выгляд”</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e12882"></a><table summary="Мэню “Выгляд”" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Пункт мэню</th>
+                           <th align="left">Спалучэньне клявішаў па змаўчаньні</th>
+                           <th align="left">Код элемэнта мэню</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Пазначаць перакладзеныя сэгмэнты</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkTranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Пазначаць неперакладзеныя сэгмэнты</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkUntranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Паказваць зыходныя сэгмэнты</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplaySegmentSourceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Пазначаць неўнікальныя сэгмэнты</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Пазначаць сэгмэнты з зацемкамі</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNotedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Пазначаць неразрыўныя прабелы</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNBSPCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Пазначаць прабельныя сымбалі</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkWhitespaceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Паказваць сымбалі кіраваньня напрамкам тэксту</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkBidiCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Пазначаць аўтаматычна запоўненыя сэгмэнты</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkAutoPopulatedCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Інфармацыя пра зьмены / Нічога не паказваць</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Інфармацыя пра зьмены / Паказваць для бягучага сэгмэнта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoSelectedRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Інфармацыя пра зьмены / Паказваць для ўсіх сэгмэнтаў</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ToolsMenu"></a>6.&nbsp;Мэню “Сэрвіс”
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e12975"></a><p class="title"><b>Table&nbsp;H.5.&nbsp;Мэню “Сэрвіс”</b></p>
+               <div class="table-contents">
+                  <table summary="Мэню “Сэрвіс”" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Пункт мэню</th>
+                           <th align="left">Спалучэньне клявішаў па змаўчаньні</th>
+                           <th align="left">Код элемэнта мэню</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Праверка тэгаў</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;V</strong></span></td>
+                           <td align="left">toolsValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Праверка тэгаў для гэтага дакумэнта</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsSingleValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Статыстыка</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsStandardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Статыстыка супадзеньняў</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Статыстыка супадзеньняў па файлах</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesPerFileMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.OptionsMenu"></a>7.&nbsp;Мэню “Налады”
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e13026"></a><p class="title"><b>Table&nbsp;H.6.&nbsp;Мэню “Налады”</b></p>
+               <div class="table-contents">
+                  <table summary="Мэню “Налады”" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Пункт мэню</th>
+                           <th align="left">Спалучэньне клявішаў па змаўчаньні</th>
+                           <th align="left">Код элемэнта мэню</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Выкарыстоўваць TAB для пераходу далей</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTabAdvanceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Заўсёды пацьвярджаць выхад</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAlwaysConfirmQuitCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Глясар/паказваць апісаньне кантэксту для глясароў у фармаце TBX</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsGlossaryTBXDisplayContextCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ужываць тэрміны, якія зьяўляюцца паасобку ў зыходным тэксьце</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsGlossaryExactMatchCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Глясар/ужываць марфалягічны пошук для тэрмінаў глясара</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsGlossaryStemmingCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips/Уключыць TransTips</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsEnableMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Аўтазавяршэньне/аўтаматычна паказваць адпаведныя прапановы</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteShowAutomaticallyItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Аўтазавяршэньне / Глясар…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteGlossaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Аўтазавяршэньне / Аўтатэкст…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteAutoTextMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Аўтазавяршэньне / Табліца сымбаляў…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteCharTableMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Шрыфт…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsFontSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Карыстальніцкія колеры…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsColorsSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Файлавыя фільтры…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSetupFileFiltersMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Сэгмэнтаваньне…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSentsegMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Праверка правапісу…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSpellCheckMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Налады рэдагаваньня…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsWorkflowMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Апрацоўка тэгаў…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTagValidationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Каманда…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTeamMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Зьнешнія файлы TMX…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsExtTMXMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выгляд…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Захаваньне і вывад…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSaveOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Злучэньне з проксі-сэрвэрам…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuLoginItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Аднавіць галоўнае вакно</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsRestoreGUIMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Доступ да каталёга канфігурацыі</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAccessConfigDirMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.HelpMenu"></a>8.&nbsp;Мэню “Даведка”
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e13189"></a><p class="title"><b>Table&nbsp;H.7.&nbsp;Мэню “Даведка”</b></p>
+               <div class="table-contents">
+                  <table summary="Мэню “Даведка”" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Пункт мэню</th>
+                           <th align="left">Спалучэньне клявішаў па змаўчаньні</th>
+                           <th align="left">Код элемэнта мэню</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Дапаможнік карыстальніка…</td>
+                           <td align="left"><span class="keycap"><strong>F1</strong></span></td>
+                           <td align="left">helpContentsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Пра праграму…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpAboutMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Апошнія зьмены…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpLastChangesMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Часопіс…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpLogMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e12185" class="footnote">
+               <p><a href="#d0e12185" class="para"><sup class="para">[2] </sup></a>Поўны сынтаксыс спалучэньняў клявішаў вызначаны ў наступным дакумэнце Java 1.6 ад Oracle (унізе старонкі): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 keystrokes shortcuts</a></p>
+            </div>
+            <div id="ftn.d0e12219" class="footnote">
+               <p><a href="#d0e12219" class="para"><sup class="para">[3] </sup></a>На Mac трэба ўжываць <span class="emphasis"><em>meta</em></span>, каб вызначыць клявішу <span class="emphasis"><em>command</em></span>.
+               </p>
+            </div>
+            <div id="ftn.d0e12253" class="footnote">
+               <p><a href="#d0e12253" class="para"><sup class="para">[4] </sup></a>Магчымыя падзеі клявішаў (клявішы), пералічаныя ў наступнай дакумэнтацыі па Java 1.6 ад Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Java 1.6 keyEvents description</a></p>
+            </div>
+            <div id="ftn.d0e12261" class="footnote">
+               <p><a href="#d0e12261" class="para"><sup class="para">[5] </sup></a>Спалучэньні клявішаў OmegaT па змаўчаньні можна атрымаць з Sourceforge: <a class="ulink" href="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">спалучэньні клявішаў OmegaT па змаўчаньні</a></p>
+               <p>Спалучэньні клявішаў OmegaT па змаўчаньні для Mac таксама даступныя з Sourceforge, у іх выкарыстоўваецца “meta” замест “Ctrl”:
+                  <a class="ulink" href="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Спалучэньні клявішаў OmegaT па змаўчаньні для Mac</a></p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.website.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;G.&nbsp;OmegaT у Інтэрнэце&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;I.&nbsp;Юрыдычныя заўвагі</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

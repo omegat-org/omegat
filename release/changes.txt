@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   0 Enhancement
   3 Bug fixes
-  2 Localisation updates
+  6 Localisation updates
 ----------------------------------------------------------------------
 3.6.0 update 10 vs 3.6.0 update 9
 
@@ -20,8 +20,12 @@
 
   Localisation Updates:
 
+  - Belarusian localisation updated to 3.6 (documentation)
   - Czech localisation updated to 3.6 (documentation)
   - Croatian localisation updated to 3.6 (documentation)
+  - Interlingua localisation updated to 3.6 (documentation)
+  - Italian localisation updated to 3.6 (documentation)
+  - Brazilian Portuguese localisation updated to 3.6 (documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 9 (2018-03-31)

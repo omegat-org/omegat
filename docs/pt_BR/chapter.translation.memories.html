@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Memórias de tradução<a class="indexterm" name="d0e6566"></a><a class="indexterm" name="d0e6569"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Memórias de tradução<a class="indexterm" name="d0e6629"></a><a class="indexterm" name="d0e6632"></a></h1>
                </div>
             </div>
          </div>
@@ -41,7 +41,7 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. pastas tmx - localização e propósito</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. Backup de tmx</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. arquivos e idiomas de tmx</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6882">1.4. Segmentos órfãos</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6947">1.4. Segmentos órfãos</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Reutilizando memórias de tradução</a></span></dt>
@@ -50,10 +50,10 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. Importação e exportação de memórias de tradução</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. Criação de uma memória de tradução de documentos selecionados</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. Compartilhando memórias de tradução</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7035">2.4. Utilização da TMX com pares de idiomas alternativos</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7100">2.4. Utilização da TMX com pares de idiomas alternativos</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#d0e7051">3. Fontes com traduções existentes</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e7116">3. Fontes com traduções existentes</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Memória pseudo-traduzida</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Utualizar memórias de tradução</a></span></dt>
             </dl>
@@ -80,13 +80,13 @@
                </p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term"><a class="indexterm" name="d0e6588"></a>pasta OmegaT</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6651"></a>pasta OmegaT</span></dt>
                      <dd>
                         <p>A pasta omegat contém o <code class="filename">project_save.tmx</code> e possivelmente um número de arquivos backup de TMX. O arquivo <code class="filename">project_save.tmx</code> contém todos os segmento que foram gravados na memória desde o início do projeto. Este arquivo sempre existe no projeto.
                            Seu conteúdo estará sempre em ordem alfabética pelo segmento fonte.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6607"></a>pasta principal do projeto</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6670"></a>pasta principal do projeto</span></dt>
                      <dd>
                         <p>A pasta principal do projeto contém 3 arquivos tmx, <code class="filename">project_name-omegat.tmx</code>, <code class="filename">project_name-level1.tmx</code> e <code class="filename">project_name-level2.tmx</code> (project_name é o nome do seu projeto).
                         </p>
@@ -110,7 +110,7 @@
                            <code class="filename">tm</code> de algum outro projeto (veja abaixo).
                         </p>
                      </dd>
-                     <dt><span class="term">pasta <code class="filename"><a class="indexterm" name="d0e6661"></a>tm</code></span></dt>
+                     <dt><span class="term">pasta <code class="filename"><a class="indexterm" name="d0e6724"></a>tm</code></span></dt>
                      <dd>
                         <p>A pasta /tm/ pode conter qualquer número de memórias de tradução auxiliares - ou seja, arquivos TMX. Tais arquivos podem ser
                            criados em qualquer uma das três variedades acima indicadas. Observe que outras ferramentas CAT podem exportar (e também importar)
@@ -128,9 +128,9 @@
                            e segmentos dentro de um determinado arquivo TMX linha por linha. O último segmento com texto fonte idêntico irá prevalecer
                            (observe que, obviamente, faz mais sentido evitar que isso aconteça já de início).
                         </p>
-                        <p>Observe que os arquivos TMX na pasta tm podem ser compactados com gzip.<a class="indexterm" name="d0e6698"></a></p>
+                        <p>Observe que os arquivos TMX na pasta tm podem ser compactados com gzip.<a class="indexterm" name="d0e6761"></a></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6705"></a>pasta tm/auto<a class="indexterm" name="d0e6713"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6768"></a>pasta tm/auto<a class="indexterm" name="d0e6776"></a></span></dt>
                      <dd>
                         <p>Se estiver claro desde o início que as traduções numa determinada TM (ou TMs) estão todas corretas, pode-se colocá-las na
                            pasta <span class="bold"><strong> tm/auto</strong></span> e evitar a confirmação de muitos casos de <span class="emphasis"><em> [parcial]</em></span> . Isso fará a <span class="bold"><strong>pré-tradução </strong></span> efetiva do texto fonte: todos os segmentos no texto fonte para os quais pode-se achar traduções nas TMs "auto" irão para
@@ -141,13 +141,14 @@
                      <dd>
                         <p>Se tiver certeza que um arquivo TMX está mais correto do que o arquivo <code class="filename">project_save.tmx</code> do OmegaT, coloque este arquivo TMX em /tm/enforce para sobrescrever as traduções padrão existentes incondicionalmente.
                         </p>
+                        <p>A substituição (sobrescrita) estará em operação até a TMX ser removida de /tm/enforce.</p>
                      </dd>
                      <dt><span class="term">pasta tm/mt</span></dt>
                      <dd>
                         <p>No painel Editor, quando uma correspondência é inserida a partir de um arquivo TMX contido numa pasta chamada <span class="bold"><strong>mt</strong></span>, a cor de fundo do segmento ativo passa a ser vermelha. A cor de fundo volta ao normal ao sair do segmento.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6750"></a>Pastas tm/penalidade-xxx</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6815"></a>Pastas tm/penalidade-xxx</span></dt>
                      <dd>
                         <p>Às vezes, é útil distinguir entre memórias de tradução de alta qualidade e aquelas que são, devido ao assunto, cliente, estado
                            de revisão, etc., menos confiáveis. Para as memórias de tradução em pastas com um nome "penalidade-xxx" (com xxx entre 0 e
@@ -183,7 +184,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;Backup de tmx<a class="indexterm" name="d0e6803"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;Backup de tmx<a class="indexterm" name="d0e6868"></a></h3>
                      </div>
                   </div>
                </div>
@@ -220,7 +221,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;arquivos e idiomas de tmx<a class="indexterm" name="d0e6855"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;arquivos e idiomas de tmx<a class="indexterm" name="d0e6920"></a></h3>
                      </div>
                   </div>
                </div>
@@ -250,7 +251,7 @@
                   memória. Se as línguas combinam, mas não o país, os segmentos ainda são carregados. Se nem o código de idioma nem o código
                   do país combinarem, os segmentos serão ignorados.
                </p>
-               <p><a class="indexterm" name="d0e6876"></a>os arquivos TMX podem geralmente conter unidades de tradução com vários idiomas utilizáveis. Se para um determinado segmento
+               <p><a class="indexterm" name="d0e6941"></a>os arquivos TMX podem geralmente conter unidades de tradução com vários idiomas utilizáveis. Se para um determinado segmento
                   fonte não houver entrada para o idioma-alvo selecionado, todos os outros segmentos-alvo são carregados, independentemente
                   do idioma. Por exemplo, se o par de línguas do projeto é DE-FR, pode ser útil ver os hits na tradução DE-EN se não houver
                   nenhum par DE-FR.
@@ -260,7 +261,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6882"></a>1.4.&nbsp;Segmentos órfãos<a class="indexterm" name="d0e6885"></a></h3>
+                        <h3 class="title"><a name="d0e6947"></a>1.4.&nbsp;Segmentos órfãos<a class="indexterm" name="d0e6950"></a></h3>
                      </div>
                   </div>
                </div>
@@ -274,7 +275,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reutilizando memórias de tradução<a class="indexterm" name="d0e6901"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reutilizando memórias de tradução<a class="indexterm" name="d0e6966"></a></h2>
                   </div>
                </div>
             </div>
@@ -328,7 +329,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importação e exportação de memórias de tradução<a class="indexterm" name="d0e6964"></a></h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importação e exportação de memórias de tradução<a class="indexterm" name="d0e7029"></a></h3>
                      </div>
                   </div>
                </div>
@@ -418,7 +419,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Compartilhando memórias de tradução<a class="indexterm" name="d0e7024"></a></h3>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Compartilhando memórias de tradução<a class="indexterm" name="d0e7089"></a></h3>
                      </div>
                   </div>
                </div>
@@ -435,7 +436,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7035"></a>2.4.&nbsp;Utilização da TMX com pares de idiomas alternativos<a class="indexterm" name="d0e7038"></a></h3>
+                        <h3 class="title"><a name="d0e7100"></a>2.4.&nbsp;Utilização da TMX com pares de idiomas alternativos<a class="indexterm" name="d0e7103"></a></h3>
                      </div>
                   </div>
                </div>
@@ -459,7 +460,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7051"></a>3.&nbsp;Fontes com traduções existentes<a class="indexterm" name="d0e7054"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e7116"></a>3.&nbsp;Fontes com traduções existentes<a class="indexterm" name="d0e7119"></a></h2>
                   </div>
                </div>
             </div>
@@ -480,7 +481,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Memória pseudo-traduzida<a class="indexterm" name="d0e7073"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Memória pseudo-traduzida<a class="indexterm" name="d0e7138"></a></h2>
                   </div>
                </div>
             </div>
@@ -519,7 +520,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Utualizar memórias de tradução<a class="indexterm" name="d0e7125"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Utualizar memórias de tradução<a class="indexterm" name="d0e7190"></a></h2>
                   </div>
                </div>
             </div>

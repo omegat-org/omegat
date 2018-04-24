@@ -80,7 +80,23 @@
             </indexterm></term>
 
           <listitem>
-            <para>Si illo es clar a partir del initio, que le traductiones in certe  TMs es omne correcte, on pote mitter los in le plica <emphasis role="bold"> tm/auto</emphasis> e evitar de confirmar multe casos<emphasis> [fuzzy]</emphasis>. Isto effectivemente <emphasis role="bold">pre traducera </emphasis>le texto fonte: omne le segmentos  in le texto fonte, pro le qual on pote trovar traductiones in illos TMs &quot;auto&quot;, se inserera in le TM principal del projecto sin alicun opera del usator.</para>
+            <para>Si illo es clar a partir del initio, que le traductiones in certe  TMs es omne correcte, on pote mitter los in le plica <emphasis role="bold"> tm/auto</emphasis> e evitar de confirmar multe casos<emphasis> [fuzzy]</emphasis>.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Pone le TMX in /tm/auto.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Aperi le projecto Le cambiamentos es displicate.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Facer un legier cambiamento ubicunque in le projecto. Isto modifica le memoria de traduction <filename>project_save.tmx</filename> (per le addition de proprie unitates de traduction ex le TMX del plica &quot;auto&quot;)</para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Nota: si le TMX es removite ab le plica /tm/auto ante le grado 3, nulle unitate de traduction extra es addite.</para>
           </listitem>
         </varlistentry>
 
@@ -89,6 +105,34 @@
 
           <listitem>
             <para>Si tu non ha ulle dubita que un TMX es plus accurate del file <filename>project_save.tmx</filename> de OmegaT, pone iste TMX in le plica /tm/enforce pro superscriber inconditionatemente le traductiones base existente.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Pone le TMX in /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Aperi le projecto Le cambiamentos es displicate.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Facer un legier cambiamento ubicunque in le projecto. Isto modifica <filename>project_save.tmx</filename>.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Prender decision circa le immunitate del segmentos vigente:<itemizedlist>
+                      <listitem>
+                        <para>Si il <emphasis>non necessita</emphasis> remaner immune de additional cambiamentos, pois remove le TMX ab le plica /tm/enforce.</para>
+                      </listitem>
+
+                      <listitem>
+                        <para>Si il <emphasis>necessita</emphasis> remaner immune de additional cambiamentos, pois mantene le TMX in /tm/enforce.</para>
+                      </listitem>
+                    </itemizedlist></para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Nota: si TMX es removite ab /tm/enforce ante le grado 3, le fortiamentos non essera mantenite del toto.</para>
           </listitem>
         </varlistentry>
 
@@ -113,7 +157,7 @@
 
       <para>Optionalmente, tu pote permitter que <application>OmegaT</application> ha, alicubi tu specifica lo, un file tmx additional (<application>OmegaT</application>-style), continente tote segmentos traducibile del projecto. Vide memoria pseudo-rendite in ultra.</para>
 
-      <para>Nota que omne le memorias de traduction es cargate in memoria quando le projecto es aperte. Copias de reserva del memoria de traduction del projecto es producite regularmente (vide le capitulo successive), e <filename>project_save.tmx</filename> es alsi salvate/renovate quando le projecto es clause o cargate de nove. Isto significa per exemplo que tu non necessitate exir de un projecto re le qual tu actualmente labora, si tu decide de adder a illo un altere TM auxiliar: tu recarga simplemente le projecto, e le cambios tu ha facite essera includite.</para>
+      <para>Nota que omne le memorias de traduction es cargate in memoria quando le projecto es aperte. Copias de reserva del memoria de traduction del projecto es producite regularmente (vide le capitulo successive), e <filename>project_save.tmx</filename> es alsi salvate/renovate quando le projecto es clause o cargate de nove. Isto significa per exemplo que tu non necessita exir de un projecto re le qual tu actualmente labora, si tu decide de adder a illo un altere TM auxiliar: tu recarga simplemente le projecto, e le cambiamentos tu ha facite essera includite.</para>
 
       <para>Le locationes del varie differente memorias de traduction pro un projecto date es definite per le usator (vide le fenestra de dialogo Projecto in <link linkend="chapter.project.properties">Proprietates de Projecto)</link></para>
 
@@ -202,7 +246,7 @@
 
     <para>Quando tu crea le documentos final in un projecto <application>OmegaT</application>, le memoria de traduction del projecto es emittite in le forma de tres files in le plica radice de tu projecto <application>OmegaT</application> (vide le description precedente). Tu pote considerar iste tres files TMX (<filename>-omegat.tmx</filename>, <filename>-level1.tmx</filename> e <filename>-level2.tmx</filename>) como un &quot;memoria de traduction pro exportation&quot;, id es como un exportation de tu contento del projecto actual in forma bilingue.</para>
 
-    <para>Deberea tu desirar de reusar un memoria de traduction de un projecto previe (per exemplo quia le nove projecto es simile al projecto previe, o usa terminologia que poteva esser usate antea), tu pote usar iste memorias de traduction como &quot;memorias de traduction de ingresso&quot;, id es pro importar los in tu nove projecto. In iste caso, pone le memorias de traduction tu desidera usar in le plica <emphasis>/tm</emphasis> o <emphasis>/tm</emphasis>/auto de tu nove projecto: in le prime caso tu obtenera occurrentias ex iste memorias de traduction in the quadro del concordantias partial, e in le ultime caso iste TMs essera usate pro pre-traducer tu texto fonte.</para>
+    <para>debe tu desirar de reusar un memoria de traduction de un projecto previe (per exemplo quia le nove projecto es simile al projecto previe, o usa terminologia que poteva esser usate antea), tu pote usar iste memorias de traduction como &quot;memorias de traduction de ingresso&quot;, id es pro importar los in tu nove projecto. In iste caso, pone le memorias de traduction tu desidera usar in le plica <emphasis>/tm</emphasis> o <emphasis>/tm</emphasis>/auto de tu nove projecto: in le prime caso tu obtenera occurrentias ex iste memorias de traduction in the quadro del concordantias partial, e in le ultime caso iste TMs essera usate pro pre-traducer tu texto fonte.</para>
 
     <para>Normalmente, le plica /tm es sub le plica radice del projecto (per exemplo ...<emphasis>/MyProject/tm</emphasis>), ma tu pote eliger un plica differente in le fenestra de dialogo Proprietates de projecto si tu lo desira. Isto es utile si tu usa frequentemente memorias de traduction producite in le passato, per exemplo quia illos son re le identic subjecto o pro le mesme cliente. In iste caso, un procedura utile poterea esser:</para>
 
@@ -301,7 +345,7 @@
 
       <para>Le solution in nostre exemplo es de copiar le memoria de traduction existente in le sub plica tm/tmx2source/ e renominar lo ZH_CN.tmx pro indicar le nove lingua de destination del TMX. Al traductor essera monstrate le traductiones anglese pro le segmentos fonte in nederlandese e usar los pro crear le traduction chinese.</para>
 
-      <para><emphasis role="bold">Importante: </emphasis>le TMX que supporta debe esser renominate XX_YY.tmx, ubi XX_YY es le lingua de destination del TMX, per exemplo a ZH_CN.tmx in le exemplo precedente. Le linguas fonte del projecto e del TMX deberea naturalmente esser identic: - NL, in nostre exemplo. Nota que sol un TMX pro un date copula de linguas es possibile, ergo si deberea implicar plure memorias de traduction, tu necessitara funder los omne in le XX_YY.tmx.</para>
+      <para><emphasis role="bold">Importante: </emphasis>le TMX que supporta debe esser renominate XX_YY.tmx, ubi XX_YY es le lingua de destination del TMX, per exemplo a ZH_CN.tmx in le exemplo precedente. Le linguas fonte del projecto e del TMX debe naturalmente esser identic: - NL, in nostre exemplo. Nota que sol un TMX pro un date copula de linguas es possibile, ergo si debe implicar plure memorias de traduction, tu necessitara funder los omne in le XX_YY.tmx.</para>
     </section>
   </section>
 
@@ -355,6 +399,6 @@
 
     <para>Le versiones initial de <application>OmegaT</application> esseva capabile de segmentar le Files fonte in paragraphos solmente e esseva inconsistente le numeration del tags de formattation in files HTML e Open Document. <application>OmegaT</application> pote discoperir e promover tal files TMX al volo pro accrescer le qualitate del Concordantia partial e elevar melio tu traduction existente, sparniante te del travalio de facer isto manualmente.</para>
 
-    <para>Un TMX del projecto essera promovite sol un vice, e essera scripte in forma promovite in le <filename>project-save.tmx</filename>; le files TMX hereditage essera promovite al volo cata vece le projecto es cargate. Nota que in alicun casos le cambios in le filtros de file in <application>OmegaT</application> pote ducer a segmentation totalmente differente; in consequentia, tu debera promover tu traduction manualmente in tal rar casos.</para>
+    <para>Un TMX del projecto essera promovite sol un vice, e essera scripte in forma promovite in le <filename>project-save.tmx</filename>; le files TMX hereditage essera promovite al volo cata vece le projecto es cargate. Nota que in alicun casos le cambiamentos in le filtros de file in <application>OmegaT</application> pote ducer a segmentation totalmente differente; in consequentia, tu debera promover tu traduction manualmente in tal rar casos.</para>
   </section>
 </chapter>

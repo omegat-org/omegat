@@ -22,7 +22,7 @@
 
             <entry><guimenuitem>Modificar</guimenuitem></entry>
 
-            <entry><guimenuitem>Vader a</guimenuitem></entry>
+            <entry><guimenuitem>Ir a</guimenuitem></entry>
 
             <entry><guimenuitem>Vider</guimenuitem></entry>
 
@@ -93,11 +93,11 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Copia le files in le plica fonte...</guimenuitem></entry>
+              <entry><guimenuitem>Copiar le files in le plica fonte...</guimenuitem></entry>
 
               <entry/>
 
-              <entry>Copia le files seligite in le plica <filename>source</filename> e recarga le projecto pro cargar le nove files.<filename></filename></entry>
+              <entry>Copia le files seligite in le plica <filename>source</filename> e recarga le projecto pro cargar le nove files.</entry>
             </row>
 
             <row>
@@ -113,7 +113,7 @@
 
               <entry><keycap>F5</keycap></entry>
 
-              <entry>Recarga le projecto pro recolliger cambios externe in le files fonte, le memorias de traduction hereditage, le glossarios e le configurationes del projecto in tu conto.</entry>
+              <entry>Recarga le projecto pro recolliger cambiamentos externe in le files fonte, le memorias de traduction hereditage, le glossarios e le configurationes del projecto in tu conto.</entry>
             </row>
 
             <row>
@@ -160,6 +160,8 @@
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
+                  <keycap>Shift</keycap>
+
                   <keycap>D</keycap>
                 </keycombo></entry>
 
@@ -188,6 +190,16 @@
                 </keycombo></entry>
 
               <entry>Claude o aperi le <link linkend="section.project.files">Fenestra del files del projecto</link> (dependente de ille es aperte o clause).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Acceder al contentos del projecto</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap/>
+                </keycombo></entry>
+
+              <entry>Da accesso al plicas del projecto.<para>In addition, duo entratas del menu consenti le apertura directemente del actual documentos fonte e de destination e le scribibile glossario. Le documentos es aperte per le application electe per le systema operative. Si le documentos non es disponibile, le entrata es gris.</para></entry>
             </row>
 
             <row>
@@ -297,7 +309,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Reimplaciar con le concordantia</guimenuitem></entry>
+              <entry><guimenuitem>Replaciar con le concordantia o le selection</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -305,11 +317,11 @@
                   <keycap>R</keycap>
                 </keycombo></entry>
 
-              <entry>Reimplacia le integre segmento final con le concordantia partial actualmente eligite (initialmente es eligite le prime concordantia).</entry>
+              <entry>Reimplacia le integre segmento final con le concordantia partial actualmente eligite (initialmente es eligite le prime concordantia).<para>Si alcun textos es selecte del concordantia partial, solmente iste selection replaciara totalmente le segmento de destination.</para></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Inserer le concordantia</guimenuitem></entry>
+              <entry><guimenuitem>Inserer le concordantia o le selection</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -317,7 +329,7 @@
                   <keycap>I</keycap>
                 </keycombo></entry>
 
-              <entry>Insere le concordantia partial actualmente eligite al position del cursor. Si esseva eligite parte del segmento, iste function superscribe le portion eligite.</entry>
+              <entry>Insere le concordantia partial actualmente eligite al position del cursor. Si esseva eligite parte del segmento, iste function superscribe le portion eligite.<para>Si alcun textos es selecte intra le concordantia partial, solmente iste selection essera inserite al position del cursor.</para></entry>
             </row>
 
             <row>
@@ -333,7 +345,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Reimplaciar con le segmento fonte</guimenuitem></entry>
+              <entry><guimenuitem>Replaciar con le segmento fonte</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -415,7 +427,7 @@
                   <keycap>G</keycap>
                 </keycombo></entry>
 
-              <entry>Permitte al usator de crear un entrata in le file glossario scribibile.</entry>
+              <entry>Permitte al usator de crear un entrata in le file glossario scribibile.<para>Si tu elige un fila de texto (in qualcunque quadro) ante pulsar <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, le texto essera collate per option predefinite in le campo<guilabel>Termino fonte</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -427,7 +439,7 @@
                   <keycap>F</keycap>
                 </keycombo></entry>
 
-              <entry>Aperi un <link linkend="section.search.window">Fenestra de Recerca</link> nove.</entry>
+              <entry>Aperi un <link linkend="section.search.window">Fenestra de Recerca</link> nove.<para>Si tu elige un fila de texto (in qualcunque quadro) ante pulsar <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, le texto essera collate per option predefinite in le campo <guilabel>Cercar pro</guilabel>.</para><para>Le pulsata <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo> monstra le ultime fenestra de recerca jam aperte (in vice del apertura de una nove).</para></entry>
             </row>
 
             <row>
@@ -439,7 +451,7 @@
                   <keycap>K</keycap>
                 </keycombo></entry>
 
-              <entry>Aperi un nove <link linkend="section.searchreplace.window">fenestra de Cerca e Reimplacia</link>.</entry>
+              <entry>Aperi un nove <link linkend="section.searchreplace.window">fenestra de Cerca e Reimplacia</link>.<para>Si tu elige un fila de texto (in qualcunque quadro) ante pulsar <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, le texto essera collate per option predefinite in le campo <guilabel>Cercar pro</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -447,13 +459,13 @@
 
               <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (vider texto)</entry>
 
-              <entry>Cambia le character del texto marcate in le segmento final al option seligite (Minuscule, Majuscule o Littera initial Majuscule). Usa Shift+F3 <indexterm>
+              <entry>Excambia majusculas e minusculas del texto evidentiate in le segmento de destination al option selecte (Minusculas, Majusculas, Titulo o Sententia). Usar Shift+F3 <indexterm>
                   <primary>Vias breve</primary> <secondary>Selection del majuscule o minuscule - Shift+F3</secondary>
-                </indexterm>pro recyclar intra le tres alternativas. Si nulle texto es eligite, <application>OmegaT</application> elige le parola que contine le littera immediatemente al derecta del cursor.</entry>
+                </indexterm>pro cyclar inter le quatro alternativas. Si nulle texto es eligite, <application>OmegaT</application> elige le parola que contine le littera immediatemente al dextra del cursor.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Elige le concordantia</guimenuitem></entry>
+              <entry><guimenuitem>Eliger le concordantia</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -515,12 +527,12 @@
     </section>
 
     <section id="submenu.GoTo">
-      <title>Vader a<indexterm class="singular">
-          <primary>Menu</primary> <secondary>Vader a</secondary>
+      <title>Ir a<indexterm class="singular">
+          <primary>Menu</primary> <secondary>Ir a</secondary>
         </indexterm></title>
 
       <table colsep="1">
-        <title>Menu Vader a</title>
+        <title>Menu Ir a</title>
 
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1"/>
@@ -579,7 +591,7 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>Le segmento es aperte quando su numero de segmento es inscribite.</entry>
+              <entry>Le segmento es aperte sia quando su call-out sia su numero  de segmento es inserite.</entry>
             </row>
 
             <row>
@@ -701,14 +713,19 @@
             <row>
               <entry><guimenuitem>Marcar le characteres de controlo del algorithmo bidirectional </guimenuitem></entry>
 
-              <entry>Iste option monstra le <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">characteres de controlo bidirectional</ulink>
-              </entry>
+              <entry>Iste option monstra le <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">characteres de controlo bidirectional</ulink></entry>
             </row>
 
             <row>
               <entry><guimenuitem>Marcar le Segmentos Auto-Populate</guimenuitem></entry>
 
               <entry>Si marcate, le fundo de omne segmentos de destination que ha essite auto-populate (per exemplo per TMXs ubicate in le plica /tm/auto) es monstrate in color. Le colores monstrate si es marcate le option &quot;Salva le stato auto-populate&quot; (in Optiones/Comportamento del Modifica). Usualmente le traductiones inserite per le plica auto es monstrate in orange. Altere traductiones, identificate specificamente in le memorias TMX, pote esser monstrate con colores differente. Pro le detalios technic, vider le <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Requestas Pro Meliorationes</ulink></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Aggressive  Font Fallback</guimenuitem></entry>
+
+              <entry>Controla iste option in caso OmegaT non monstra propriemente alcun glyphos (mesmo si le typos de characteres continente le glyphos pertinente es installate sur tu machina). Nota: sur Windows sembla que iste mechanismo de reserva del typo de characteres manual pote interferer con le reserva standard, causante non desirabile substitution del typo de characteres. Pro iste ration, illo es DISACTIVATE per option predefinite.</entry>
             </row>
 
             <row>
@@ -814,13 +831,13 @@
             <row>
               <entry><guimenuitem>Traduction automatic</guimenuitem></entry>
 
-              <entry>Permitte te de activar/disactivar le applicationes de Traduction Automatic offerite. Quando active, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> inserera le suggestion in le parte de destination del segmento elaborate.</entry>
+              <entry>Permitte te de activar/disactivar le applicationes de Traduction Automatic offerite. Quando active, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> inserera le suggestion in le parte de destination del segmento elaborate.<para>Pro rationes de confidentialitate, tu pote non desirar mitter tote le segmentos al application de traduction automatic. Si tu dismarca le option <emphasis role="bold">Apportar automaticamente le traductiones</emphasis> , le traductiones automatic essera reportate solmente per le pulsata de <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> (<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo> sur OS X) sur le actual segmento. Pois tu debe usar <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> un secunde vice, pro inserer le suggestion.</para><para>Marca le  option<emphasis role="bold">Solmente segmentos non rendite</emphasis> pro disactivar le applicationes de traduction automatic sur le segmentos jam rendite. Nota: in ille caso, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> pote ancora esser usate, pro fortiar un appello al traduction automatic sur un segmento ja rendite.</para></entry>
             </row>
 
             <row>
               <entry><guimenuitem>Glossario</guimenuitem></entry>
 
-              <entry>Le option <guimenuitem>Monstrar le Description Contextual pro le Glossarios TBX</guimenuitem> permitte de exhibir o occultar le informationes contextual con le terminos (que veni ex glossarios TBX locate in le plica <filename>glossary</filename> ) in le quadro Glossario.<para>Le 3 altere optiones es describite in le specific pagina reguardante <link linkend="section.TaaS.options">TaaS</link> (Terminologia 'as' Servicio).</para></entry>
+              <entry>Le option <guimenuitem>Monstrar le Description Contextual pro le Glossarios TBX</guimenuitem> permitte de exhibir o occultar le informationes contextual con le terminos (que veni ex glossarios TBX locate in le plica <filename>glossary</filename> ) in le quadro Glossario.<para>Si le option <guimenuitem>Usar terminos que appare separatemente in le texto fonte</guimenuitem> es ACTIVE, le entrata del glossario &quot;elementoA elementoB&quot; essera trovate in le texto fonte &quot;elementoA altere parola elementoB&quot;. Si le option es INACTIVE, le dicite entrata del glossario non essera trovate.</para><para>Si le option <guimenuitem>Usar le radices verbal pro le entratas del glossario</guimenuitem> es ACTIVE, con un texto fonte anglese, le entrata del glossario &quot;element&quot; essera trovate alsi si le texto fonte contine &quot;elements&quot;. Si le option es INACTIVE, le dicite entrata del glossario non essera trovate.</para><para>Le option <emphasis>Replaciar le colpos del glossario al insertion del texto fonte</emphasis> consenti replaciar automaticamente le colpos del glossario con le termino rendite quando le texto fonte es inserite. Isto es effective su <emphasis>Rediger &gt; Replaciar con le fonte</emphasis>, <emphasis>Rediger &gt; Inserer fonte</emphasis>, e durante le insertion de un segmento quando <emphasis>Optiones &gt; Comportamento de redactor &gt; [Inserer] Le texto fonte</emphasis> es activate. Quando es disponibile plure terminos de destination, le primo (como monstrate in le quadro Glossario) essera usate. Le concordantia del glossario non usa le radices verbal o le parolas de stop, ma es insensibile al cassa del litteras (majusculas o minusculas). Un tentativa es facite pro concordar le cassa del litteras del parola fonte.</para><para>Le 3 altere optiones es describite in le specific pagina reguardante <link linkend="section.TaaS.options.access">TaaS</link> (Terminologia 'as' Servicio).</para></entry>
             </row>
 
             <row>
@@ -832,7 +849,7 @@
             <row>
               <entry><guimenuitem>Auto-completamento</guimenuitem></entry>
 
-              <entry><para>Cliccar sur <guimenuitem>Glossario...</guimenuitem> pro configurar le Vista del Glossario Auto-completamento.</para><para>Cliccar sur <guimenuitem>Auto-texto...</guimenuitem> pro configurar le optiones de Auto-texto e adder o remover entratas.</para><para>Cliccar sur <guimenuitem>Tabella del Character...</guimenuitem> pro poner le optiones del auto-completator del tabella del Character.</para></entry>
+              <entry><para>Cliccar sur <guimenuitem>Glossario...</guimenuitem> pro configurar le Vista del Glossario Auto-completamento.</para><para>Cliccar sur <guimenuitem>Auto-texto...</guimenuitem> pro configurar le optiones de Auto-texto e adder o remover entratas.</para><para>Cliccar sur <guimenuitem>Tabella del Character...</guimenuitem> pro poner le optiones del auto-completator del tabella del Character.</para><para>Le auto-completator es lanceate in le segmento de destination per le via breve <emphasis role="bold">Ctrl+Space</emphasis>.</para><para>Si le option <emphasis role="bold">Monstrar automaticamente le suggestiones pertinente</emphasis> es marcate, le auto-completator es lanceate automaticamente per inserer le prime littera del un entrata de glossario rendite, o per inserer &quot;&lt;&quot; in caso de tags.</para></entry>
             </row>
 
             <row>
@@ -872,9 +889,9 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Validation del tags...</guimenuitem></entry>
+              <entry><guimenuitem>Processar le tag...</guimenuitem></entry>
 
-              <entry>Pro le programmatores: permitte te de configurar le optiones de validation del tags pro verificar alsi le variabiles de programmation (%...) .</entry>
+              <entry>Durante le traduction de files relative a software: consenti te configurar le optiones del validator de tags pro controlar alsi le variabiles (%...) de programmation. Il consenti alsi definir plure optiones relative pro le validation de tag e pro definir tags personalisate.</entry>
             </row>
 
             <row>
@@ -938,7 +955,7 @@
             <row>
               <entry><guimenuitem>Manual del Usator...</guimenuitem></entry>
 
-              <entry><keycap>F1:</keycap> Aperi le lector del Adjuta pro monstrar iste manual in un fenestra separate.</entry>
+              <entry><keycap>F1:</keycap> Aperi iste manual in le explorator predefinite.</entry>
             </row>
 
             <row>
@@ -1322,7 +1339,7 @@
                   <keycap>Shift+P</keycap>
                 </keycombo></entry>
 
-              <entry>Move un segmento a retro in historia</entry>
+              <entry>Move un segmento a retro in chronologia</entry>
             </row>
 
             <row>
@@ -1334,7 +1351,7 @@
                   <keycap>Shift+N</keycap>
                 </keycombo></entry>
 
-              <entry>Move un segmento in avante in historia</entry>
+              <entry>Move un segmento in avante in chronologia</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1364,7 +1381,7 @@
                   <keycap>L</keycap>
                 </keycombo></entry>
 
-              <entry>Monstra le Lista del Files del Projecto</entry>
+              <entry>Monstra le lista del Files del projecto</entry>
             </row>
 
             <row>
@@ -1376,7 +1393,7 @@
                   <keycap>T</keycap>
                 </keycombo></entry>
 
-              <entry>Aperi le Fenestra Validation del tag.</entry>
+              <entry>Aperi le fenestra de validation de tag.</entry>
             </row>
 
             <row>

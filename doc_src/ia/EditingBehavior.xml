@@ -99,7 +99,7 @@
 
   <variablelist>
     <varlistentry>
-      <term>Exportar le segmento in files texto<indexterm class="singular">
+      <term>Exportar le segmento in files de texto<indexterm class="singular">
           <primary>Menu Optiones</primary> <secondary>Comportamento de Modification</secondary> <tertiary>Exportar le segmento actual </tertiary>
         </indexterm></term>
 
@@ -162,7 +162,17 @@
       <term>Salvar le statos auto-populate</term>
 
       <listitem>
-        <para>Marca iste option pro registrar in le file <filename>project_save.tmx</filename> le informationes que un segmento ha essite auto-populate, si que illo pote esser monstrate con un color specific in le quadro de Modification (si le option &quot;Marca le Segmentos Auto-Populate&quot;, in le menu Vide... , es marcate).</para>
+        <para>Marca iste option pro registrar in le file <filename>project_save.tmx</filename> le informationes que un segmento ha essite auto-populate, si que illo pote esser monstrate con un color specific in le Quadro de modification (si le option &quot;Marca le Segmentos Auto-Populate&quot;, in le menu Vide... , es marcate).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Cargar initialmente iste plure segmentos:</term>
+
+      <listitem>
+        <para>Per option predefinite le editor monstra 2,000 del initial segmentos, e progressivemente carga los que necessita quando tu rola in alto o in basso. Si tu ha un machina potente, e/o si tu non agrada como le barra de rolamento se comporta durante le progresso del cargamento, tu pote incrementar iste numero.</para>
       </listitem>
     </varlistentry>
   </variablelist>

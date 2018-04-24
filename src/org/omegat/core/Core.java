@@ -53,7 +53,6 @@ import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.dictionaries.IDictionaries;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.editor.SideBySideEditorController;
 import org.omegat.gui.editor.SideBySideEditorController2;
 import org.omegat.gui.editor.mark.BidiMarkerFactory;
 import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
@@ -273,7 +272,7 @@ public final class Core {
             });
         }
         else {
-          //editor = new SideBySideEditorController(me);
+          //editor = new SideBySideEditorController_old(me);
           editor = new SideBySideEditorController2(me);
             SwingUtilities.invokeLater(() -> {
                 // When using the EditorController be sure to set/restore these:

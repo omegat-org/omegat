@@ -8,3 +8,5 @@ build
 bin
 .nb-gradle
 gradle.properties
+/OmT/nbproject/private/
+/nbproject/private/

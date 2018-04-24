@@ -109,10 +109,10 @@ import java.util.regex.Pattern;
  * @author Piotr Kulik
  * @author Yu Tang
  */
-public class SideBySideEditorController implements IEditor {
+public class SideBySideEditorController_old implements IEditor {
 
     /** Local logger. */
-    private static final Logger LOGGER = Logger.getLogger(SideBySideEditorController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SideBySideEditorController_old.class.getName());
 
     private static final double PAGE_LOAD_THRESHOLD = 0.25;
 
@@ -187,7 +187,7 @@ public class SideBySideEditorController implements IEditor {
      */
     private IProject.AllTranslations previousTranslations;
 
-    public SideBySideEditorController(final MainWindow mainWindow) {
+    public SideBySideEditorController_old(final MainWindow mainWindow) {
 
         this.mw = mainWindow;
 

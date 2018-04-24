@@ -458,7 +458,7 @@ public class EditorController implements IEditor {
         firstLoaded = loadTo;
     };
 
-    private void updateState(SHOW_TYPE showType) {
+    protected void updateState(SHOW_TYPE showType) {
         UIThreadsUtil.mustBeSwingThread();
 
         JComponent data = null;

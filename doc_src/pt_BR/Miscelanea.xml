@@ -31,7 +31,7 @@
         </listitem>
 
         <listitem>
-          <para>If you are unable to run <application>OmegaT</application> normally (no graphical environment available): copy the settings files from some other <application>OmegaT</application> installation on another machine to a specific folder. A localização não importa, pois você pode adicioná-la na linha de comando ao iniciar (veja abaixo). Os arquivos relevantes <literal>filters.conf</literal> e <literal>segmentation.conf</literal> estão na pasta base do usuário (p.ex. <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> no Windows, <literal>%user%/.omegat/</literal> no Linux)</para>
+          <para>Se não estiver conseguindo fazer o <application>OmegaT</application> funcionar normalmente (ambiente gráfico não disponível): copie os arquivos de configuração de outra instalação do <application>OmegaT</application> em outro computador para uma pasta específica. A localização não importa, pois você pode adicioná-la na linha de comando ao iniciar (veja abaixo). Os arquivos relevantes <literal>filters.conf</literal> e <literal>segmentation.conf</literal> estão na pasta base do usuário (p.ex. <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> no Windows, <literal>%user%/.omegat/</literal> no Linux)</para>
         </listitem>
       </itemizedlist>
     </section>

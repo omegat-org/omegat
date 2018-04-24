@@ -82,7 +82,7 @@
         </thead>
 
         <tbody>
-          <row><entry>Novo</entry><entry><keycap>Shift+Ctrl+N</keycap></entry><entry>projectNewMenuItem</entry></row>
+          <row><entry>New</entry><entry><keycap>Shift+Ctrl+N</keycap></entry><entry>projectNewMenuItem</entry></row>
           <row><entry>Abrir</entry><entry><keycap>Ctrl+O</keycap></entry><entry>projectOpenMenuItem</entry></row>
           <row><entry>Baixar projetos de equipe</entry><entry/><entry>projectTeamNewMenuItem</entry></row>
           <row><entry>Copiar arquivos para a pasta source...</entry><entry/><entry>projectImportMenuItem</entry></row>
@@ -122,11 +122,11 @@
           <row><entry>Substituir com texto fonte</entry><entry><keycap>Shift+Ctrl+R</keycap></entry><entry>editOverwriteSourceMenuItem</entry></row>
           <row><entry>Inserir texto fonte</entry><entry><keycap>Shift+Ctrl+I</keycap></entry><entry>editInsertSourceMenuItem</entry></row>
           <row><entry>Inserir tags do texto fonte</entry><entry><keycap>Shift+Ctrl+T</keycap></entry><entry>editTagPainterMenuItem</entry></row>
-          <row><entry>Inserir próxima tag ausente</entry><entry><keycap>Ctrl+T</keycap></entry><entry>editTagNextMissedMenuItem</entry></row>
+          <row><entry>Inserir Próxima Tag Ausente</entry><entry><keycap>Ctrl+T</keycap></entry><entry>editTagNextMissedMenuItem</entry></row>
           <row><entry>Exportar seleção</entry><entry><keycap>Shift+Ctrl+C</keycap></entry><entry>editExportSelectionMenuItem</entry></row>
-          <row><entry>Criar termos no glossário</entry><entry><keycap>Shift+Ctrl+G</keycap></entry><entry>editCreateGlossaryEntryMenuItem</entry></row>
+          <row><entry>Criar Termos no Glossário</entry><entry><keycap>Shift+Ctrl+G</keycap></entry><entry>editCreateGlossaryEntryMenuItem</entry></row>
           <row><entry>Buscar no projeto...</entry><entry><keycap>Ctrl+F</keycap></entry><entry>editFindInProjectMenuItem</entry></row>
-          <row><entry>Buscar e substituir...</entry><entry><keycap>Ctrl+K</keycap></entry><entry>editReplaceInProjectMenuItem</entry></row>
+          <row><entry>Buscar e Substituir...</entry><entry><keycap>Ctrl+K</keycap></entry><entry>editReplaceInProjectMenuItem</entry></row>
           <row><entry>Selecionar correspondência anterior</entry><entry><keycap>Ctrl+↑</keycap></entry><entry>editSelectFuzzyPrevMenuItem</entry></row>
           <row><entry>Selecionar próxima correspondência</entry><entry><keycap>Ctrl+↓</keycap></entry><entry>editSelectFuzzyNextMenuItem</entry></row>
           <row><entry>Selecionar correspondência parcial 1</entry><entry><keycap>Ctrl+1</keycap></entry><entry>editSelectFuzzy1MenuItem</entry></row>
@@ -138,9 +138,9 @@
           <row><entry>Trocar letras para/Maiúsculas</entry><entry/><entry>upperCaseMenuItem</entry></row>
           <row><entry>Trocar letras para/Títulos</entry><entry/><entry>titleCaseMenuItem</entry></row>
           <row><entry>Alternar letra para...</entry><entry><keycap>Shift+F3</keycap></entry><entry>cycleSwitchCaseMenuItem</entry></row>
-          <row><entry>Usar como tradução padrão</entry><entry/><entry>editMultipleDefault</entry></row>
-          <row><entry>Criar tradução alternativa</entry><entry/><entry>editMultipleAlternate</entry></row>
-          <row><entry>Registrar tradução idêntica</entry><entry/><entry>editRegisterIdenticalMenuItem</entry></row>
+          <row><entry>Usar como Tradução Padrão</entry><entry/><entry>editMultipleDefault</entry></row>
+          <row><entry>Criar Tradução Alternativa</entry><entry/><entry>editMultipleAlternate</entry></row>
+          <row><entry>Registrar Tradução Idêntica</entry><entry/><entry>editRegisterIdenticalMenuItem</entry></row>
 
         </tbody>
       </tgroup>
@@ -227,8 +227,8 @@
           <row><entry>Verificar tags</entry><entry><keycap>Shift+Ctrl+V</keycap></entry><entry>toolsValidateTagsMenuItem</entry></row>
           <row><entry>Verificar tags para o documento atual</entry><entry/><entry>toolsSingleValidateTagsMenuItem</entry></row>
           <row><entry>Estatísticas</entry><entry/><entry>toolsShowStatisticsStandardMenuItem</entry></row>
-          <row><entry>Estatística das correspondências</entry><entry/><entry>toolsShowStatisticsMatchesMenuItem</entry></row>
-          <row><entry>Estatísticas das correspondências por arquivo</entry><entry/><entry>toolsShowStatisticsMatchesPerFileMenuItem</entry></row>
+          <row><entry>Estatística das Correspondências</entry><entry/><entry>toolsShowStatisticsMatchesMenuItem</entry></row>
+          <row><entry>Estatísticas das Correspondências por Arquivo</entry><entry/><entry>toolsShowStatisticsMatchesPerFileMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -261,7 +261,7 @@
           <row><entry>Segmentação...</entry><entry/><entry>optionsSentsegMenuItem</entry></row>
           <row><entry>Verificador ortográfico...</entry><entry/><entry>optionsSpellCheckMenuItem</entry></row>
           <row><entry>Modo de trabalho…</entry><entry/><entry>optionsWorkflowMenuItem</entry></row>
-          <row><entry>Verificação de tags...</entry><entry/><entry>optionsTagValidationMenuItem</entry></row>
+          <row><entry>Processamento de tags...</entry><entry/><entry>optionsTagValidationMenuItem<para>[vbdx: le chgt de nom a-t-il impact sur le code ?]</para></entry></row>
           <row><entry>Equipe...</entry><entry/><entry>optionsTeamMenuItem</entry></row>
           <row><entry>TMXs externas...</entry><entry/><entry>optionsExtTMXMenuItem</entry></row>
           <row><entry>Exibição...</entry><entry/><entry>optionsViewOptionsMenuItem</entry></row>

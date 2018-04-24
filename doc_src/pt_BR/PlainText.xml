@@ -42,29 +42,24 @@
   <section id="OmegaT.solution">
     <title>A solução <application>OmegaT</application></title>
 
-    <para>Existem basicamente três maneiras de fazer isso funcionar no <application>OmegaT</application>. They all involve the application of file filters in the<emphasis role="bold"> Options </emphasis>menu.</para>
+    <para>Existem basicamente três maneiras de fazer isso funcionar no <application>OmegaT</application>. Todas envolvem a aplicação de fitros de arquivos no menu <emphasis role="bold"> Opções </emphasis>.</para>
 
     <variablelist>
       <varlistentry>
         <term>Alterar a codificação de seus arquivos para Unicode</term>
 
         <listitem>
-          <para>open your source file in a text editor that correctly interprets its encoding and save the file in <emphasis role="bold">&quot;UTF-8&quot;</emphasis> encoding. Change the file extension from <literal>.txt</literal> to <literal>.utf8.</literal> <application>OmegaT</application> will automatically interpret the file as a UTF-8 file. Está é a alternativa mais óbvia, extinguindo o problema a longo prazo.</para>
+          <para>abra o arquivo-fonte em um editor de texto que interprete corretamente sua codificação e salve o arquivo em <emphasis role="bold">&quot;UTF-8&quot;</emphasis>. Mude a extensão do arquivo de <literal>.txt</literal> para <literal>.utf8.</literal> O <application>OmegaT</application> lerá o arquivo como UTF-8 automaticamente. Está é a alternativa mais óbvia, extinguindo o problema a longo prazo.</para>
         </listitem>
       </varlistentry>
     </variablelist>
 
     <variablelist>
       <varlistentry>
-        <term>Specify the encoding for your plain text files</term>
+        <term>Especifique a codificação de seus arquivos simples de texto</term>
 
         <listitem>
-          <para>- i.e. files with a <filename>.txt </filename>extension - : in
-          the <emphasis role="bold">Text files </emphasis>section of the file
-          filters dialog, change the <emphasis role="bold">Source File
-          Encoding</emphasis> from &lt;auto&gt; to the encoding that
-          corresponds to your source <filename>.txt</filename> file, for
-          instance to .jp for the above example.</para>
+          <para>- ou seja, arquivos com extensão <filename>.txt </filename>: na seção <emphasis role="bold">Arquivos de texto </emphasis> da caixa de diálogo com os filtros de arquivo, mude a <emphasis role="bold">Codificação do arquivo-fonte</emphasis> de &lt;auto&gt; para a codificação que corresponde ao seu arquivo <filename>.txt</filename>, por exemplo, para .jp no caso do exemplo acima.</para>
         </listitem>
       </varlistentry>
     </variablelist>

@@ -498,7 +498,7 @@
       </mediaobject>
     </figure>
 
-    <para>Veja <ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> para as versões Windows, Linux, FreeBSD de ferramenta autônoma. This is much the same as the above example.</para>
+    <para>Veja <ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> para as versões Windows, Linux, FreeBSD de ferramenta autônoma. O mesmo vale para o exemplo acima..</para>
 
     <para>Uma boa coleção de casos de regex úteis pode ser encontrada no próprio <application>OmegaT</application> (veja Opções &gt; Segmentação). A seguinte lista inclui expressões que podem ser úteis na busca em memória de tradução:</para>
 
@@ -512,7 +512,7 @@
           <row>
             <entry>Expressão regular</entry>
 
-            <entry>Encontra o seguinte:</entry>
+            <entry>Encontra os seguintes:</entry>
           </row>
         </thead>
 

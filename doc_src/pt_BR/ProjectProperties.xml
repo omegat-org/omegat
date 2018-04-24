@@ -14,7 +14,7 @@
   </section>
 
   <section>
-    <title>Línguas</title>
+    <title>Idiomas</title>
 
     <para>As línguas de origem e destino podem ser digitadas ou então selecionadas dos menus suspensos. Lembre-se de que modificar as línguas pode inutilizar as memórias de tradução usadas, pois elas podem não corresponder às novas línguas definidas.</para>
 
@@ -31,7 +31,7 @@
         <listitem>
           <para>As definições da segmentação apenas tratam da forma como os arquivos fonte são processados pelo <application>OmegaT</application>. A maneira predominante de segmentar as fontes é pela segmentação a nível de frase, então esta caixa de seleção deve permanecer marcada de maneira geral.</para>
 
-          <para>Em raros casos pode-se preferir, por exemplo, a segmentação em parágrafos. Modificar esta marcação não modifica a segmentação das memórias de tradução já existentes. Se no meio da tradução você decidir trocar de tradução de sentença para parágrafo, a memória de tradução interna do projeto não irá ser alterada (o OmegaT pode atualizar memórias de tradução antigas que não usaram a segmentação por frase, mas não o contrário), mas o OmegaT irá tentar criar correspondências parciais de parágrafos ao juntar traduções de sentenças existentes. </para>
+          <para>Em raros casos pode-se preferir, por exemplo, a segmentação em parágrafos. Modificar esta marcação não modifica a segmentação das memórias de tradução já existentes. Se no meio da tradução você decidir trocar de tradução de sentença para parágrafo, a memória de tradução interna do projeto não será alterada (o OmegaT pode atualizar memórias de tradução antigas que não usaram a segmentação por frase, mas não o contrário). Porém, o OmegaT irá tentar criar correspondências parciais de parágrafos ao juntar traduções de sentenças existentes. </para>
 
           <para>Modificar as configurações de segmentação pode fazer com que alguns segmentos já traduzidos fiquem divididos ou combinados. Isto efetivamente fará com que eles sejam retornados ao estado &quot;não traduzido&quot;, pois eles não corresponderão mais aos segmentos gravados na memória do projeto, mesmo que a tradução original ainda esteja presente.</para>
         </listitem>
@@ -78,7 +78,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Comando de pós-processamento externo</term>
+        <term>Comando de Pós-processamento Externo</term>
 
         <listitem>
           <para>Esta área permite digitar um comando externo de pós-processamento (por exemplo, um script que renomeie arquivos) que será aplicado a cada vez que forem criados os documentos traduzidos. Este comando externo não pode incluir caracteres como o &quot;pipe&quot; (|), etc., e por isso é recomendado usar um script.</para>

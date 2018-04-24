@@ -132,14 +132,14 @@
         </indexterm></term>
 
       <listitem>
-        <para>Se quisermos evitar alguma tradução incorreta em segmentos com vários conteúdos possíveis, marcar esta caixa de seleção fará com que <emphasis role="bold"> Ir para - Próximo segmento não traduzido</emphasis>pare no segmento seguinte que obedeça esta condição, esteja ele traduzido ou não.</para>
+        <para>Se quisermos evitar alguma tradução incorreta em segmentos com vários conteúdos traduzidos possíveis, marcar esta caixa de seleção fará com que <emphasis role="bold"> Ir para - Próximo segmento não traduzido</emphasis>pare no segmento seguinte que se enquadre nesta condição, esteja ele traduzido ou não.</para>
       </listitem>
     </varlistentry>
   </variablelist>
 
   <variablelist>
     <varlistentry>
-      <term>Permitir edição de tag</term>
+      <term>Permitir edição de tags</term>
 
       <listitem>
         <para>Desmarque esta opção para prevenir danos às tags (por exemplo, exclusão parcial) durante a edição. Remover uma tag inteira ainda é possível neste caso, basta usar Ctrl+Backspace/Delete ou selecioná-la inteira (Ctrl+Shift+Esquerda/Direita) e então apagá-la (Delete ou Ctrl+X).</para>
@@ -159,7 +159,7 @@
 
   <variablelist>
     <varlistentry>
-      <term>Salvar estados auto-preenchidos</term>
+      <term>Salvar estado auto-preenchido</term>
 
       <listitem>
         <para>Marque esta opção para salvar no arquivo <filename>project_save.tmx</filename> a informação que um segmento foi auto-preenchido, para que ele possa ser exibido com uma cor específica no Editor (se a opção &quot;&quot;Marcar segmentos auto-preenchidos&quot;, no menu Visualizar, estiver marcada).</para>

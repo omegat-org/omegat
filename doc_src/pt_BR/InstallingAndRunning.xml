@@ -327,7 +327,7 @@
 
       <para>A janela da linha de comando também é chamada como &quot;janela do terminal&quot;. No Windows, ela é chamada &quot;janela do MS-DOS&quot; e está disponível no menu Iniciar, em Programas, no item &quot;MS-DOS&quot;. O equivalente no Mac OS X é a aplicação Terminal localizada em Aplicativos  → Utilitários.</para>
 
-      <para>Para iniciar o <application>OmegaT</application>, normalmente são digitados dois comandos. O primeiro deles é:</para>
+      <para>Para iniciar o <application>OmegaT</application>, normalmente são digitados dois comandos. The first of these is:</para>
 
       <para><emphasis> <literal>cd {pasta}</literal> </emphasis></para>
 
@@ -454,7 +454,6 @@
 
           <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>Os parâmetros podem ser combinados: para iniciar o <application>OmegaT</application> com todos os exemplos descritos acima, o comando seria:</para>
@@ -493,7 +492,7 @@
       <section id="starting.in.console.mode">
         <title>Iniciando no modo console</title>
 
-        <para>Para iniciar o <application>OmegaT</application> no modo console, alguns parâmetros extras devem ser executados na inicialização. O mais importante é o<literal>&lt;project-dir&gt;</literal>, e opcionalmente<literal> --config-dir=&lt;config-dir&gt;. </literal>Exemplo:</para>
+        <para>Para iniciar o <application>OmegaT</application> no modo console, alguns parâmetros extras devem ser executados na inicialização. O mais importante é o<literal>&lt;project-dir&gt;</literal>, e opcionalmente<literal> --config-dir=&lt;config-dir&gt;. </literal>Example:</para>
 
         <para><literal>java -jar <application>OmegaT</application>.jar
         /path/to/project \</literal></para>

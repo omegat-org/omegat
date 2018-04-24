@@ -12,7 +12,7 @@
   </section>
 
   <section>
-    <title>Uso</title>
+    <title>Use</title>
 
     <para>Ao clicar em <guisubmenu>Ferramentas &gt; </guisubmenu><guisubmenu>Scripts</guisubmenu> a janela Scripts abre:<screenshot> <screeninfo>Janela de Scripts</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 

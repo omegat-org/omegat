@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;9.&nbsp;File da tradurre</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1- Manuale dell'Utente">
-      <link rel="up" href="index.html" title="OmegaT 3.1- Manuale dell'Utente">
+      <link rel="home" href="index.html" title="OmegaT 3.5- Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT 3.5- Manuale dell'Utente">
       <link rel="prev" href="chapter.files.and.folders.html" title="Chapter&nbsp;8.&nbsp;File e cartelle di OmegaT">
       <link rel="next" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Comportamento di modifica">
    </head>
@@ -39,17 +39,17 @@
                <dt><span class="section"><a href="chapter.files.to.translate.html#file.formats">1. Formati di file</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5600">1.1. File di solo testo</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5679">1.2. File di testo formattato</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5811">1.1. File di solo testo</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5890">1.2. File di testo formattato</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Altri formati di file</a></span></dt>
                <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Lingue da destra a sinistra</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5899">3.1. Unire stringhe RTL e LTR in segmenti</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5922">3.2. Tag <span class="application">OmegaT</span> nei segmenti RTL</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5937">3.3. Creare documenti di arrivo RTL</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6119">3.1. Unire stringhe RTL e LTR in segmenti</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6142">3.2. Tag <span class="application">OmegaT</span> nei segmenti RTL</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6157">3.3. Creare documenti di arrivo RTL</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -58,7 +58,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;Formati di file<a class="indexterm" name="d0e5586"></a><a class="indexterm" name="d0e5591"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;Formati di file<a class="indexterm" name="d0e5797"></a><a class="indexterm" name="d0e5802"></a></h2>
                   </div>
                </div>
             </div>
@@ -68,7 +68,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5600"></a>1.1.&nbsp;File di solo testo<a class="indexterm" name="d0e5603"></a><a class="indexterm" name="d0e5608"></a></h3>
+                        <h3 class="title"><a name="d0e5811"></a>1.1.&nbsp;File di solo testo<a class="indexterm" name="d0e5814"></a><a class="indexterm" name="d0e5819"></a></h3>
                      </div>
                   </div>
                </div>
@@ -76,7 +76,7 @@
                   corrispondente. Esistono diversi metodi per specificare la codifica del file, affinché il suo contenuto non sia alterato quando
                   aperto in <span class="application">OmegaT</span>. Tali file non contengono alcuna informazione di formattazione oltre lo "spazio bianco" usato per allineare il testo, indicare
                   paragrafi o inserire interruzioni di pagina. Essi non sono in grado di contenere o mantenere informazioni sul colore, il carattere,
-                  e via discorrendo, del testo. Attualmente, <span class="application">OmegaT</span> è in grado di riconoscere i seguenti formati di file di solo testo:<a class="indexterm" name="d0e5621"></a></p>
+                  e via discorrendo, del testo. Attualmente, <span class="application">OmegaT</span> è in grado di riconoscere i seguenti formati di file di solo testo:<a class="indexterm" name="d0e5832"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -139,7 +139,7 @@
                <p>Gli altri tipi di file di solo testo possono essere gestiti associando la loro estensione a un tipo di file supportato da
                   <span class="application">OmegaT</span> (per esempio, i file .pod si possono associare al filtro di testo ASCII) e pre-elaborandoli con regole di segmentazione specifiche.
                </p>
-               <p>I file PO<a class="indexterm" name="d0e5670"></a> possono contenere sia il testo di partenza, sia quello di destinazione. Da questo punto di vista, possono essere considerati
+               <p>I file PO<a class="indexterm" name="d0e5881"></a> possono contenere sia il testo di partenza, sia quello di destinazione. Da questo punto di vista, possono essere considerati
                   come file di solo testo <span class="emphasis"><em>più</em></span> le memorie di traduzione. Se per uno specifico segmento di partenza non è ancora presente una traduzione nella memoria di
                   traduzione del progetto (file project_save.tmx), l'attuale traduzione verrà salvata come traduzione predefinita nel file project_save.tmx.
                   Nel caso in cui, tuttavia, per lo stesso segmento di partenza esistesse una traduzione diversa, la nuova traduzione verrà
@@ -150,7 +150,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5679"></a>1.2.&nbsp;File di testo formattato<a class="indexterm" name="d0e5682"></a><a class="indexterm" name="d0e5689"></a></h3>
+                        <h3 class="title"><a name="d0e5890"></a>1.2.&nbsp;File di testo formattato<a class="indexterm" name="d0e5893"></a><a class="indexterm" name="d0e5900"></a></h3>
                      </div>
                   </div>
                </div>
@@ -166,7 +166,7 @@
                   utilizzati, della loro dimensione, dei loro colori ecc., in modo da semplificare il processo di traduzione e ridurre la quantità
                   di possibili errori nei tag. OmegaT gestisce in modo differente i vari tipi di file. Gli specifici comportamenti possono essere
                   impostati nei filtri dei file. Al momento della stesura di questa guida, OmegaT è in grado di riconoscere i seguenti formati
-                  di file formattati:<a class="indexterm" name="d0e5696"></a></p>
+                  di file formattati:<a class="indexterm" name="d0e5907"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -267,6 +267,15 @@
                      <li class="listitem">
                         <p>Visio (*.vxd)</p>
                      </li>
+                     <li class="listitem">
+                        <p>Java property XML (*.xml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p> Schematron (*.sch)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>schema RELAX NG per XML (*.rng)</p>
+                     </li>
                   </ul>
                </div>
                <p>Gli altri tipi di file di testo formattato possono essere gestiti da OmegaT associando le loro estensioni di file a un tipo
@@ -278,12 +287,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Altri formati di file<a class="indexterm" name="d0e5774"></a><a class="indexterm" name="d0e5779"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Altri formati di file<a class="indexterm" name="d0e5994"></a><a class="indexterm" name="d0e5999"></a></h2>
                   </div>
                </div>
             </div>
             <p>Possono esistere anche altri formati di file di solo testo o formattati che OmegaT è in grado di elaborare.</p>
-            <p><a class="indexterm" name="d0e5787"></a>Per convertire i nei formati supportati possono essere usati gli strumenti esterni. I file tradotti dovranno poi essere riconvertiti
+            <p><a class="indexterm" name="d0e6007"></a>Per convertire i nei formati supportati possono essere usati gli strumenti esterni. I file tradotti dovranno poi essere riconvertiti
                nel formato originale. Per esempio, se si possiede una versione datata di Microsoft Word che non gestisce il formato ODT,
                esiste un modo per aggirare i file Word con estensione DOC:
             </p>
@@ -331,7 +340,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Lingue da destra a sinistra<a class="indexterm" name="d0e5821"></a><a class="indexterm" name="d0e5824"></a><a class="indexterm" name="d0e5829"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Lingue da destra a sinistra<a class="indexterm" name="d0e6041"></a><a class="indexterm" name="d0e6044"></a><a class="indexterm" name="d0e6049"></a></h2>
                   </div>
                </div>
             </div>
@@ -370,7 +379,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5899"></a>3.1.&nbsp;Unire stringhe RTL e LTR in segmenti<a class="indexterm" name="d0e5902"></a><a class="indexterm" name="d0e5907"></a><a class="indexterm" name="d0e5912"></a></h3>
+                        <h3 class="title"><a name="d0e6119"></a>3.1.&nbsp;Unire stringhe RTL e LTR in segmenti<a class="indexterm" name="d0e6122"></a><a class="indexterm" name="d0e6127"></a><a class="indexterm" name="d0e6132"></a></h3>
                      </div>
                   </div>
                </div>
@@ -387,7 +396,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5922"></a>3.2.&nbsp;Tag <span class="application">OmegaT</span> nei segmenti RTL<a class="indexterm" name="d0e5928"></a></h3>
+                        <h3 class="title"><a name="d0e6142"></a>3.2.&nbsp;Tag <span class="application">OmegaT</span> nei segmenti RTL<a class="indexterm" name="d0e6148"></a></h3>
                      </div>
                   </div>
                </div>
@@ -407,7 +416,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5937"></a>3.3.&nbsp;Creare documenti di arrivo RTL<a class="indexterm" name="d0e5940"></a><a class="indexterm" name="d0e5945"></a><a class="indexterm" name="d0e5950"></a></h3>
+                        <h3 class="title"><a name="d0e6157"></a>3.3.&nbsp;Creare documenti di arrivo RTL<a class="indexterm" name="d0e6160"></a><a class="indexterm" name="d0e6165"></a><a class="indexterm" name="d0e6170"></a></h3>
                      </div>
                   </div>
                </div>
@@ -423,9 +432,6 @@
                      <li class="listitem">Le direzioni (elementi di testo) sono impostate a RTL</li>
                   </ul>
                </div>
-               <p>
-                        
-               </p>
                <p>Per evitare la modifica dei parametri di visualizzazione dei file di arrivo ogni volta che i file sono aperti, può essere
                   possibile cambiare i parametri di visualizzazione dei file di partenza, affinché essi vengano passati a quelli di arrivo.
                   Tali modifiche sono possibili nei file ODF, per esempio.

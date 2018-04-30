@@ -452,9 +452,14 @@ public abstract class TestCore {
             }
 
             @Override
+            public boolean goToSegmentAtIndex(int index) {
+                return true;
+            }
+
+            /*@Override
             public boolean goToSegmentAtLocation(int location) {
                 return false;
-            }
+            }*/
 
             @Override
             public void gotoEntry(String srcString, EntryKey key) {

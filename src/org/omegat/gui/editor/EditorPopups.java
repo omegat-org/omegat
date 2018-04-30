@@ -64,9 +64,9 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 public final class EditorPopups {
-    public static void init(IEditor ec) {
+    public static void init(IEditor ec, IEditor.LocationLookup ll) {
         ec.registerPopupMenuConstructors(100, new SpellCheckerPopup(ec));
-        ec.registerPopupMenuConstructors(200, new GoToSegmentPopup(ec));
+        ec.registerPopupMenuConstructors(200, new GoToSegmentPopup(ec, ll ));
         ec.registerPopupMenuConstructors(400, new DefaultPopup());
         ec.registerPopupMenuConstructors(500, new DuplicateSegmentsPopup(ec));
         ec.registerPopupMenuConstructors(600, new EmptyNoneTranslationPopup(ec));
@@ -284,9 +284,11 @@ public final class EditorPopups {
 
     public static class GoToSegmentPopup implements IPopupMenuConstructor {
         protected final IEditor ec;
+        protected final EditorController.LocationLookup ll;
 
-        public GoToSegmentPopup(IEditor ec) {
+        public GoToSegmentPopup(IEditor ec, EditorController.LocationLookup ll) {
             this.ec = ec;
+            this.ll = ll;
         }
 
         /**
@@ -303,7 +305,10 @@ public final class EditorPopups {
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     comp.setCaretPosition(mousepos);
-                    ec.goToSegmentAtLocation(comp.getCaretPosition());
+                    // convert our caret location into an index for the parent
+                    int index = ll.getSegmentIndexAtLocation(comp.getCaretPosition());
+                    ec.goToSegmentAtIndex(index);
+                    // was: ec.goToSegmentAtLocation(comp.getCaretPosition());
                 }
             });
             menu.addSeparator();

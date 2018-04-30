@@ -77,7 +77,6 @@ import org.omegat.util.gui.Styles;
  * @author Zoltan Bartko
  */
 @SuppressWarnings("serial")
-// TODO CLG:  extract interface?
 public class EditorTextArea3 extends JEditorPane {
 
     private static final KeyStroke KEYSTROKE_CONTEXT_MENU = PropertiesShortcuts.getEditorShortcuts()
@@ -126,6 +125,9 @@ public class EditorTextArea3 extends JEditorPane {
 
     protected AutoCompleter autoCompleter = new AutoCompleter(this);
 
+
+    protected EditorController.LocationLookup locationLookup;
+
     /**
      * Whether or not we are confining the cursor to the editable part of the
      * text area. The user can optionally allow the caret to roam freely.
@@ -134,8 +136,10 @@ public class EditorTextArea3 extends JEditorPane {
      */
     protected boolean lockCursorToInputArea = true;
 
-    public EditorTextArea3(IEditor controller) {
+    public EditorTextArea3(IEditor controller, EditorController.LocationLookup lookup) {
         this.controller = controller;
+        this.locationLookup = lookup;
+
         setEditorKit(new StyledEditorKit() {
             public ViewFactory getViewFactory() {
                 return FACTORY3;
@@ -218,7 +222,10 @@ public class EditorTextArea3 extends JEditorPane {
             // Handle double-click
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                 int mousepos = viewToModel(e.getPoint());
-                boolean changed = controller.goToSegmentAtLocation(getCaretPosition());
+                // was: boolean changed = controller.goToSegmentAtLocation(getCaretPosition()); // TODO CLG TEST FOR SIDE BY SIDE
+                boolean changed = controller.goToSegmentAtIndex(locationLookup.getSegmentIndexAtLocation(getCaretPosition())); // TODO CLG TEST FOR SIDE BY SIDE
+
+
                 if (!changed) {
                     if (selectTag(mousepos)) {
                         e.consume();

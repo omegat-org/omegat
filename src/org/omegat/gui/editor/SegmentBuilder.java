@@ -282,7 +282,7 @@ public class SegmentBuilder implements ISegmentBuilder {
                 int srcLength = trans.source == null ? 0 : trans.source.length();
                 int transLength = trans.translation == null ? 0 : trans.translation.length();
                 // doc.getLength()  the length of text in document
-                LOGGER.warning(String.format("Translation only editor, doc size: %d, src size: %d (%s), trans size: %d (%s)", (int)controller.getEditor(IEditor.EditorType.TRANSLATION).getSize().getWidth(), srcLength, trans.source, transLength, trans.translation ));
+                //LOGGER.warning(String.format("Translation only editor, doc size: %d, src size: %d (%s), trans size: %d (%s)", (int)controller.getEditor(IEditor.EditorType.TRANSLATION).getSize().getWidth(), srcLength, trans.source, transLength, trans.translation ));
 
             }
 
@@ -323,7 +323,8 @@ public class SegmentBuilder implements ISegmentBuilder {
             posTranslationBeg = null;
 
             // TODO I DON'T KNOW HOW TO HANDLE THIS BECAUSE YOU MAY NEED A NEGATIVE POSITION IF THIS IS THE FIRST ELEMENT
-            doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset /*- 1*/);
+            //doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset > 0 ? activeTranslationBeginOffset-1 : activeTranslationBeginOffset /*- 1*/);
+            doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset  /*- 1*/);
             doc.activeTranslationEndP1 = doc.createPosition(activeTranslationEndOffset /*+ 1*/);
         } catch (OutOfMemoryError oome) {
             // Oh shit, we're all out of storage space!

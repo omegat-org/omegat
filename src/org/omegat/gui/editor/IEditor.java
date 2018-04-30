@@ -78,6 +78,13 @@ public interface IEditor {
         TRANSLATION
     }
 
+    // todo RENAME SegmentLocator?
+    // todo should this include a controller/IEditor???
+    interface LocationLookup {
+        int getSegmentIndexAtLocation(int location);
+    }
+
+
     /**
      * Storage for caret position and selection.
      */
@@ -296,11 +303,12 @@ public interface IEditor {
     /**
      * Go to segment at specified location.
      *
-     * @param location
+     * @param index
      *            location
      * @return true if segment changed, false if location inside current segment
      */
-    public boolean goToSegmentAtLocation(int location);
+    // was public boolean goToSegmentAtLocation(int location);
+    public boolean goToSegmentAtIndex(int index);
 
     /**
      * Refresh the current editor view while avoiding clobbering any tag fixes.

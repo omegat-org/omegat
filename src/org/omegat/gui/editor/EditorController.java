@@ -288,19 +288,17 @@ public class EditorController implements IEditor {
             LOGGER.log(Level.SEVERE, "Uncatched exception in thread [" + t.getName() + "]", e);
         });
 
-        EditorPopups.init(this);
+        EditorPopups.init(this, l -> getSegmentIndexAtLocationImpl(m_docSegList, l));
 
         lazyLoadTimer.setRepeats(false);
         lazyLoadTimer.addActionListener(e -> {
-
             loadEditor(translationScrollPane, translationEditor);
             //loadEditor(sourceScrollPane, sourceEditor);
-
         });
     }
 
     void initEditor(){
-        translationEditor = new EditorTextArea3(this);
+        translationEditor = new EditorTextArea3(this, l -> getSegmentIndexAtLocationImpl(m_docSegList, l));
     }
 
     void loadEditor(JScrollPane scrollPane, JEditorPane editor){
@@ -932,6 +930,8 @@ public class EditorController implements IEditor {
     public void activateEntry(CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 
+        //LOGGER.warning("CLG EditorController activateEntry pos: " + pos.position + ", index: " + displayedEntryIndex   );
+
         SourceTextEntry ste = getCurrentEntry();
         if (ste == null) {
             return;
@@ -1063,6 +1063,7 @@ public class EditorController implements IEditor {
     }
 */
 
+    // CLG: ASSUME POS IS A location in the translation pane?
     void navigateToEntry(Document3 doc, CaretPosition pos, ISegmentBuilder sb, JScrollPane scrollPane, JEditorPane editor ){
 
         int te = doc.getTranslationEnd();
@@ -1102,7 +1103,7 @@ public class EditorController implements IEditor {
      */
 
     void scrollForDisplayNearestSegments(final CaretPosition pos, JScrollPane scrollPane, JEditorPane editor, ISegmentBuilder segment) {
-
+        // CLG: Only used for translation editor, so not needed for SideBySide source "editor pane"
         /*
         segment = m_docSegList[displayedEntryIndex]
 
@@ -1134,7 +1135,7 @@ public class EditorController implements IEditor {
             setCaretPosition(pos);
         });*/
     }
-    private void scrollForDisplayNearestSegmentsImpl(final Rectangle rect, JScrollPane scrollPane, JEditorPane editor) {
+    protected void scrollForDisplayNearestSegmentsImpl(final Rectangle rect, JScrollPane scrollPane, JEditorPane editor) {
         SwingUtilities.invokeLater(() -> {
             if (rect != null) {
                 // Expand rect vertically to fill height of viewport.
@@ -1152,7 +1153,7 @@ public class EditorController implements IEditor {
      * coordinates. Returns null if the specified segment index is invalid or if
      * the segment has not been loaded yet.
      */
-    private Rectangle getSegmentBounds(ISegmentBuilder sb, JEditorPane editor) {
+    protected Rectangle getSegmentBounds(ISegmentBuilder sb, JEditorPane editor) {
 
         Rectangle result = null;
         try {
@@ -1259,17 +1260,25 @@ public class EditorController implements IEditor {
     /**
      * Go to segment at specified location.
      *
-     * @param location
+     * @param segmentAtLocation
      *            location
      * @return true if segment changed, false if location inside current segment
      */
-    public boolean goToSegmentAtLocation(int location) {
+    // todo was: public boolean goToSegmentAtLocation(int location) { // TODO SHOULD NOT BE PUBLIC SINCE LOCATION ASSUMES ONE EDITOR....
+    public boolean goToSegmentAtIndex(int segmentAtLocation) { // TODO SHOULD NOT BE PUBLIC SINCE LOCATION ASSUMES ONE EDITOR....
         // clicked segment
+        //int segmentAtLocation = getSegmentIndexAtLocation(location);  // TODO CLG since there are 2 Editors in SideBySide mode, how do we know which editor position this is?
 
-        int segmentAtLocation = getSegmentIndexAtLocation(location);
+        // I think this would be better if we pass segment, not location since location is property of the editor?
+
+        // todo clg note:  @ 0,16, 1,201 7,1119  - I assume
+        //LOGGER.warning("CLG EditorController go to seg @ " + segmentAtLocation + ", location: " + location);
+        LOGGER.warning("CLG EditorController go to seg @ " + segmentAtLocation );
+
         if (segmentAtLocation < 0) {
             return false;
         }
+
         if (displayedEntryIndex != segmentAtLocation) {
             commitAndDeactivate();
             displayedEntryIndex = segmentAtLocation;
@@ -1281,7 +1290,7 @@ public class EditorController implements IEditor {
     }
 
     @Override
-    public int getSegmentIndexAtLocation(int location) {
+    public int getSegmentIndexAtLocation(int location) { // todo CLG hide/remove... this is implemented per editor
         if (m_docSegList == null) {
             return -1;
         }
@@ -1295,6 +1304,22 @@ public class EditorController implements IEditor {
             }
         }
         return m_docSegList.length - 1;
+    }
+
+    protected int getSegmentIndexAtLocationImpl(ISegmentBuilder[] list, int location) {
+        if (list == null) {
+            return -1;
+        }
+        for (int i = 0; i < list.length; i++) {
+            ISegmentBuilder builder = list[i];
+            // Treat start and end positions inclusively to give
+            // intuitive results when double-clicking to jump in translationEditor
+            if (builder.hasBeenCreated() && location >= builder.getStartPosition()
+                    && location <= builder.getEndPosition()) {
+                return i;
+            }
+        }
+        return list.length - 1;
     }
 
     public int getSegmentIndexFirst() {
@@ -1445,6 +1470,7 @@ public class EditorController implements IEditor {
             }
         }
 
+        // Derived controllers may update their segment(s) here:
         updateSegmentElement(displayedEntryIndex, false, m_docSegList);
        /* m_docSegList[displayedEntryIndex].createSegmentElement(false,
                 Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste));*/
@@ -1732,6 +1758,7 @@ public class EditorController implements IEditor {
         gotoEntry(entryNum, CaretPosition.startOfEntry()); // TODO CLG VERIFY VALUE SO WE CAN USE THE CORRECT SOURCE ENTRY POSITION IN REFACTOR
     }
 
+    // CLG: NOTE new editor entry and translation editor position (where edit caret should be located).  So CaretPosition may be okay here...
     public void gotoEntry(final int entryNum, final CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 

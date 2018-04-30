@@ -243,9 +243,14 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             }
 
             @Override
+            public boolean goToSegmentAtIndex(int index) {
+                return true;
+            }
+
+           /* @Override
             public boolean goToSegmentAtLocation(int location) {
                 return false;
-            }
+            }*/
 
             @Override
             public void refreshViewAfterFix(List<Integer> fixedEntries) {

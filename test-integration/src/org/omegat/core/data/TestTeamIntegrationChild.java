@@ -29,16 +29,9 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
@@ -52,10 +45,7 @@ import org.omegat.core.data.IProject.DefaultTranslationsIterator;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.IAutoSave;
-import org.omegat.gui.editor.EditorSettings;
-import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.editor.IEditorFilter;
-import org.omegat.gui.editor.IPopupMenuConstructor;
+import org.omegat.gui.editor.*;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.IMainMenu;
@@ -314,6 +304,11 @@ public final class TestTeamIntegrationChild {
         public void refreshView(boolean doCommit) {
         }
 
+        @Override
+        public void refreshEntries(Set<Integer> entryNumbers) {
+
+        }
+
         public void redo() {
         }
 
@@ -360,6 +355,11 @@ public final class TestTeamIntegrationChild {
         public void gotoEntryAfterFix(int fixedEntry, String fixedSource) {
         }
 
+        @Override
+        public boolean goToSegmentAtIndex(int index) {
+            return false;
+        }
+
         public void gotoEntry(String srcString, EntryKey key) {
         }
 
@@ -381,6 +381,36 @@ public final class TestTeamIntegrationChild {
             return null;
         }
 
+        @Override
+        public int getSegmentIndexFirst() {
+            return 0;
+        }
+
+        @Override
+        public int getSegmentIndexLast() {
+            return 0;
+        }
+
+        @Override
+        public int getSegmentIndexAtLocation(int location) {
+            return 0;
+        }
+
+        @Override
+        public SegmentBuilder getSegmentAtLocation(int location) {
+            return null;
+        }
+
+        @Override
+        public SegmentBuilder getSegmentAtIndex(int index) {
+            return null;
+        }
+
+        @Override
+        public SegmentBuilder getCurrentSegmentBuilder() {
+            return null;
+        }
+
         public String getCurrentTranslation() {
             return null;
         }
@@ -397,6 +427,26 @@ public final class TestTeamIntegrationChild {
             return null;
         }
 
+        @Override
+        public void setCaretPosition(CaretPosition pos) {
+
+        }
+
+        @Override
+        public int getCurrentPositionInEntryTranslation() {
+            return 0;
+        }
+
+        @Override
+        public CaretPosition getCurrentPositionInEntryTranslationSelection() {
+            return null;
+        }
+
+        @Override
+        public int getPositionInEntryTranslation(int pos) {
+            return 0;
+        }
+
         public void commitAndLeave() {
         }
 
@@ -406,12 +456,72 @@ public final class TestTeamIntegrationChild {
         public void changeCase(CHANGE_CASE_TO newCase) {
         }
 
+        @Override
+        public void replacePartOfText(String text, int start, int end) {
+
+        }
+
         public void activateEntry() {
         }
 
         @Override
         public IAutoCompleter getAutoCompleter() {
             return null;
+        }
+
+        @Override
+        public Document3.ORIENTATION getOrientation() {
+            return null;
+        }
+
+        @Override
+        public AlphabeticalMarkers getAlphabeticalMarkers() {
+            return null;
+        }
+
+        @Override
+        public void showStat() {
+
+        }
+
+        @Override
+        public void loadDocument() {
+
+        }
+
+        @Override
+        public Font getFont() {
+            return null;
+        }
+
+        @Override
+        public MarkerController getMarkerController() {
+            return null;
+        }
+
+        @Override
+        public JEditorPane getEditor(EditorType type) {
+            return null;
+        }
+
+        @Override
+        public Document3.ORIENTATION getCurrentTextOrientation() {
+            return null;
+        }
+
+        @Override
+        public boolean isSourceLangRTL() {
+            return false;
+        }
+
+        @Override
+        public boolean isTargetLangRTL() {
+            return false;
+        }
+
+        @Override
+        public void toggleOrientation() {
+
         }
 
         @Override

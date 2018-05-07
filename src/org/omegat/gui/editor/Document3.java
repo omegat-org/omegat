@@ -114,14 +114,15 @@ public class Document3 extends DefaultStyledDocument {
      * Calculate the position of the start of the current translation
      */
     public int getTranslationStart() {
-        return activeTranslationBeginM1.getOffset() /*+ 1*/;
+        return activeTranslationBeginM1.getOffset() > 0 ? activeTranslationBeginM1.getOffset() + 1 : activeTranslationBeginM1.getOffset();
     }
 
     /**
      * Calculate the position of the end of the current translation
      */
     protected int getTranslationEnd() {
-        return activeTranslationEndP1.getOffset() /*- 1*/;
+        //assume offset can not be 0?
+        return activeTranslationEndP1.getOffset() - 1;
     }
 
     /**

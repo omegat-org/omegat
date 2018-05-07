@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Interface displaying segments in an translationEditor.
+ *
  *
  * CLG:  Consider using as a base class for SegmentBuild and SourceOnlySegmentBuilder so that code can be reused as there there is some good and well tested code in the SegmentBuilder that I would like to reuse...
  *
@@ -142,16 +142,15 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
      *
      * @return OmElementSegment
      */
-    public void createSegmentElement(final boolean isActive, TMXEntry trans) {
+    /*public void createSegmentElement(final boolean isActive, TMXEntry trans) {
         createSegmentElement(isActive, doc.getLength(), trans);
-    }
+    }*/
 
-    public void prependSegmentElement(final boolean isActive, TMXEntry trans) {
+    /*public void prependSegmentElement(final boolean isActive, TMXEntry trans) {
         createSegmentElement(isActive, 0, trans);
-    }
+    }*/
 
-    // TODO CLG;  move this to the controller... doesn't seem like this should be so coupled to a Document
-    public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans) {
+    /*public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans) {
         UIThreadsUtil.mustBeSwingThread();
 
         displayVersion = globalVersions.incrementAndGet();
@@ -196,7 +195,7 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
             doc.trustedChangesInProgress = false;
             StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(IEditor.EditorType.TRANSLATION), true);
         }
-    }
+    }*/
 
     public boolean hasBeenCreated() {
         return beginPosP1 != null && endPosM1 != null;
@@ -231,8 +230,7 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
     /**
      * Create active segment for given entry
      */
-    // CLG set the active segment, add the translation marker (if enabled)
-    void createActiveSegmentElement(TMXEntry trans) throws BadLocationException {
+   /* void createActiveSegmentElement(TMXEntry trans) throws BadLocationException {
         try {
             if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())
                     || EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(settings
@@ -279,8 +277,8 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
             translationText = addActiveSegPart(translationText);
             posTranslationBeg = null;
 
-            doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset /*- 1*/);
-            doc.activeTranslationEndP1 = doc.createPosition(activeTranslationEndOffset /*+ 1*/);
+            doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset *//*- 1*//*);
+            doc.activeTranslationEndP1 = doc.createPosition(activeTranslationEndOffset *//*+ 1*//*);
         } catch (OutOfMemoryError oome) {
             // Oh shit, we're all out of storage space!
             // Of course we should've cleaned up after ourselves earlier,
@@ -300,14 +298,10 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
             System.exit(0);
 
         }
-    }
+    }*/
 
-    /**
-     * Create method for inactive segment.
-     * @param trans TMX entry with translation
-     * @throws BadLocationException
-     */
-    void createInactiveSegmentElement(TMXEntry trans) throws BadLocationException {
+
+    /*void createInactiveSegmentElement(TMXEntry trans) throws BadLocationException {
         if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())) {
             addModificationInfoPart(trans);
         }
@@ -350,7 +344,7 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
         } else {
             posTranslationBeg = null;
         }
-    }
+    }*/
 
     public SourceTextEntry getSourceTextEntry() {
         return ste;
@@ -572,36 +566,23 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
         return result;
     }
 
-    String addActiveSourceSegPart(String text) throws BadLocationException {
+/*    String addActiveSourceSegPart(String text) throws BadLocationException {
         int prevOffset = offset;
 
         // TODO Add a newline to offset maker tag (IF MARKER ENABLED)
         //insert("\n", null);
         activeTranslationBeginOffset = offset;
         //String result = insertTextWithTags(text, true); // TODO WHAT IF THIS IS SOURCE...
-        text = text;
 
         AttributeSet normal = attrs(true, false, false, false);
         insert(text, normal);
         activeTranslationEndOffset = offset;
 
-//        insertDirectionEndEmbedding();
-
-
-        //the marker itself is in user language
-//        insertDirectionEmbedding(EditorUtils.localeIsRTL());
-        //AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
-        //insert(createSegmentMarkText(), attrSegmentMark);
-//        insertDirectionEndEmbedding();
-
-        //we want the marker AFTER the translated text, so embed in same direction as target text.
-        //insertDirectionMarker(rtl);
 
         insert("\n", null);
 
-//        setAlignment(prevOffset, offset, rtl);
         return text;
-    }
+    }*/
 
     public void createInputAttributes(Element element, MutableAttributeSet set) {
         set.addAttributes(attrs(false, false, false, false));
@@ -738,5 +719,9 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
         if (this.hasRTL) {
             insert(isRTL ? BIDI_RLM : BIDI_LRM, null); // RTL- or LTR- marker
         }
+    }
+
+    public Document3 getDocument(){
+        return doc;
     }
 }

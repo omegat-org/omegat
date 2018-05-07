@@ -768,9 +768,11 @@ public class EditorController implements IEditor {
 
         Document3 doc = new Document3(this);
         // Move common segment loading tasks to generateSegments(), which can be intercepted by derived editors
-        generateSegments(file, doc, hasRTL);
         doc.setDocumentFilter(new DocumentFilter3());
+        // Set the document now, since we may start creating the segments while still loading
         translationEditor.setDocument(doc);
+        generateSegments(file, doc, hasRTL);
+
 
 //        ArrayList<SegmentBuilder> tmpSegList = new ArrayList<SegmentBuilder>(file.entries.size());
 //        for (SourceTextEntry ste : file.entries) {
@@ -820,8 +822,6 @@ public class EditorController implements IEditor {
         // add locate for target language to translationEditor
         Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         translationEditor.setLocale(targetLocale);
-
-
 
 
         doc.addUndoableEditListener(translationEditor.undoManager);
@@ -1120,21 +1120,9 @@ public class EditorController implements IEditor {
             });
         }
 
-       /* SwingUtilities.invokeLater(() -> {
-            Rectangle rect = getSegmentBounds(type*//*IEditor.EditorType.TRANSLATION*//*, displayedEntryIndex);
-            scrollForDisplayNearestSegmentsImpl(rect, translationScrollPane, translationEditor);
 
-            // TODO?  does this need to be called twice or do we just make 2 calls to navigatetoentry....????
-            // todo
-            // todo
-            // todo
-            // repeat for source translationEditor
-            rect = getSegmentBounds(type*//*IEditor.EditorType.SOURCE*//*, displayedEntryIndex);
-            scrollForDisplayNearestSegmentsImpl(rect, translationScrollPane, translationEditor);
-
-            setCaretPosition(pos);
-        });*/
     }
+
     protected void scrollForDisplayNearestSegmentsImpl(final Rectangle rect, JScrollPane scrollPane, JEditorPane editor) {
         SwingUtilities.invokeLater(() -> {
             if (rect != null) {
@@ -1290,7 +1278,7 @@ public class EditorController implements IEditor {
     }
 
     @Override
-    public int getSegmentIndexAtLocation(int location) { // todo CLG hide/remove... this is implemented per editor
+    public int getSegmentIndexAtLocation(int location) { // todo CLG hide/remove... this should be implemented per editor/source pane?
         if (m_docSegList == null) {
             return -1;
         }

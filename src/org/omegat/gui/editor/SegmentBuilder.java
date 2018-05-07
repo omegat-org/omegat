@@ -191,10 +191,10 @@ public class SegmentBuilder implements ISegmentBuilder {
             try {
                 if (beginPosP1 != null && endPosM1 != null) {// CLG note this removes translation (current) from the Doc via DocumentFilter3, and the modified info string
                     // remove old segment
-                    // TODO clg check for negative offset?
-                    int beginOffset = beginPosP1.getOffset() - 1;
+                    // check/handle negative offset
+                    int beginOffset = /*beginPosP1.getOffset() - 1*/ getStartPosition();
                     int endOffset = endPosM1.getOffset() + 1;
-                    doc.remove(beginOffset, endOffset - beginOffset); // todo remove translation mod, trans, and segment tag
+                    doc.remove(beginOffset, endOffset - beginOffset);
                     offset = beginOffset;
                 } else {
                     // there is no segment in document yet - need to add
@@ -216,8 +216,8 @@ public class SegmentBuilder implements ISegmentBuilder {
                 }
                 int endOffset = offset;
 
-                // todo clg check if beginOffset is negative?
-                beginPosP1 = doc.createPosition(beginOffset + 1);
+                // check if beginOffset is negative or zero
+                beginPosP1 = doc.createPosition(beginOffset > 0 ? beginOffset + 1 : 0);
                 endPosM1 = doc.createPosition(endOffset - 1);
             } catch (BadLocationException ex) {
                 throw new RuntimeException(ex);
@@ -322,10 +322,9 @@ public class SegmentBuilder implements ISegmentBuilder {
             translationText = addActiveSegPart(translationText);
             posTranslationBeg = null;
 
-            // TODO I DON'T KNOW HOW TO HANDLE THIS BECAUSE YOU MAY NEED A NEGATIVE POSITION IF THIS IS THE FIRST ELEMENT
-            //doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset > 0 ? activeTranslationBeginOffset-1 : activeTranslationBeginOffset /*- 1*/);
-            doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset  /*- 1*/);
-            doc.activeTranslationEndP1 = doc.createPosition(activeTranslationEndOffset /*+ 1*/);
+            // offset's can be zero, so check for that:
+            doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset > 0 ? activeTranslationBeginOffset-1 : activeTranslationBeginOffset  /*- 1*/);
+            doc.activeTranslationEndP1 = doc.createPosition(activeTranslationEndOffset + 1);
         } catch (OutOfMemoryError oome) {
             // Oh shit, we're all out of storage space!
             // Of course we should've cleaned up after ourselves earlier,
@@ -448,7 +447,7 @@ public class SegmentBuilder implements ISegmentBuilder {
      * @return start position
      */
     public int getStartPosition() {
-        return beginPosP1.getOffset() - 1;
+        return beginPosP1.getOffset() > 0 ? beginPosP1.getOffset() - 1 : 0;
     }
 
     /**
@@ -490,7 +489,7 @@ public class SegmentBuilder implements ISegmentBuilder {
      * Check if location inside segment.
      */
     public boolean isInsideSegment(int location) {
-        return beginPosP1.getOffset() - 1 <= location && location < endPosM1.getOffset() + 1;
+        return getStartPosition() <= location && location < endPosM1.getOffset() + 1;
     }
 
     /**
@@ -754,5 +753,9 @@ public class SegmentBuilder implements ISegmentBuilder {
         if (this.hasRTL) {
             insert(isRTL ? BIDI_RLM : BIDI_LRM, null); // RTL- or LTR- marker
         }
+    }
+
+    public Document3 getDocument(){
+        return doc;
     }
 }

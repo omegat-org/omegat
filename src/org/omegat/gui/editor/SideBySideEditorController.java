@@ -114,7 +114,6 @@ public class SideBySideEditorController extends EditorController {
                     // do we need to set these visible?
                     sourceEditor.setVisible(true);
                     sourceScrollPane.setVisible(true);
-                    //mw.addDockable(sourcePane); // todo confirm only added once...
                     String title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Source"), getCurrentFile());
                     sourcePane.setName(StaticUIUtils.truncateToFit(title, sourcePane, 70));
                     mw.addDockable(translationPane, sourcePane, DockingConstants.SPLIT_LEFT, 50);
@@ -169,17 +168,6 @@ public class SideBySideEditorController extends EditorController {
     }
 
 
-//    protected void updateSegmentElement(ISegmentBuilder builder, boolean active, TMXEntry currentTranslation){
-//
-//        super.updateSegmentElement(builder, active, currentTranslation);
-//
-//        // Also update our source translationEditor
-//        //ISegmentBuilder  sourceBuilder = m_docSourceSegList[displayedEntryIndex];
-////        builder.createSegmentElement(active, currentTranslation);
-////
-////        builder.resetTextAttributes();
-//    }
-
 
     protected void generateSegments(FileInfo file, Document3 doc, boolean hasRTL){
 
@@ -189,23 +177,17 @@ public class SideBySideEditorController extends EditorController {
         Document3 sourceDoc = new Document3(this);
         // Set the source document
         sourceDoc.setDocumentFilter(new DocumentFilter3());
+        // Note set the source document now since the segments can be updated before we finish here
+        sourceEditor.setDocument(sourceDoc);
         ArrayList<ISegmentBuilder> tmpSourceList = new ArrayList<>(file.entries.size());
+        int builderIndex = 0;
         for (SourceTextEntry ste : file.entries) {
             if (entriesFilter == null || entriesFilter.allowed(ste)) {
-                SourceOnlySegmentBuilder sb = new SourceOnlySegmentBuilder(this, sourceDoc, settings, ste, ste.entryNum(), hasRTL);
+                SourceOnlySegmentBuilder sb = new SourceOnlySegmentBuilder(this, sourceDoc, settings, ste, ste.entryNum(), hasRTL, m_docSegList[builderIndex++]);
                 tmpSourceList.add(sb);
             }
         }
         m_docSourceSegList = tmpSourceList.toArray(new SourceOnlySegmentBuilder[tmpSourceList.size()]);
-//        if(m_docSourceSegList.length > 0) {
-//            // would be better if handled as part of a state change...
-//            sourceEditor.setVisible(true);
-//            sourceScrollPane.setVisible(true);
-//
-//        }
-
-
-        // ...but only display the ones in [firstLoaded, lastLoaded]
 
         // NOTE: below duplicates functionality in the base EditorController->loadDocument(), where firstLoaded and lastLoaded are set
         for (int i = 0; i < m_docSourceSegList.length; i++) {
@@ -216,37 +198,10 @@ public class SideBySideEditorController extends EditorController {
             }
         }
 
-        sourceDoc.setDocumentFilter(new DocumentFilter3());
-        sourceEditor.setDocument(sourceDoc);
-
-
         // add locate for target language to translationEditor
         Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         sourceEditor.setLocale(targetLocale);
     }
-
-//    protected void generateSegments(FileInfo file, Document3 doc, boolean hasRTL){
-//
-//        super.generateSegments(file, doc, hasRTL);
-//
-//        // Create the source only segment builders...
-//        Document3 sourceDoc = new Document3(this);
-//        // Set the source document
-//        sourceDoc.setDocumentFilter(new DocumentFilter3());
-//        ArrayList<ISegmentBuilder> tmpSourceList = new ArrayList<>(file.entries.size());
-//        for (SourceTextEntry ste : file.entries) {
-//            if (entriesFilter == null || entriesFilter.allowed(ste)) {
-//                SourceOnlySegmentBuilder sb = new SourceOnlySegmentBuilder(this, sourceDoc, settings, ste, ste.entryNum(), hasRTL);
-//                tmpSourceList.add(sb);
-//            }
-//        }
-//        m_docSourceSegList = tmpSourceList.toArray(new SourceOnlySegmentBuilder[tmpSourceList.size()]);
-//
-//        // Add the source document to our source "editor"
-//        sourceEditor.setDocument(sourceDoc);
-//
-//    }
-
 
     void setFont(final Font font) {
         super.setFont(font);
@@ -265,135 +220,12 @@ public class SideBySideEditorController extends EditorController {
     }
 
 
-    /**
-     * Displays the {@link Preferences#EDITOR_INITIAL_SEGMENT_LOAD_COUNT}
-     * segments surrounding the entry with index {@link #displayedEntryIndex}.
-     */
-/*
-    public void loadDocument() {
-
-        super.loadDocument();
-
-*/
-/*        for (int i = 0; i < m_docSegList.length; i++) {
-            if (i >= firstLoaded && i <= lastLoaded) {
-                // Update the source builders too
-                ISegmentBuilder sb = m_docSourceSegList[i];
-                LOGGER.info("CLG load document source: " + sb.getSource());
-                sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.getSource()));
-                sb.addSegmentSeparator();
-
-            }
-        }*//*
-
-
-        //sourceEditor.repaint();
-    }
-*/
-
     /*
      * Activates the current entry and puts the cursor at the start of segment
      */
     public void activateEntry() {
         activateEntryImpl(CaretPosition.startOfEntry(), CaretPosition.startOfEntry());
     }
-
-    /**
-     * Activates the current entry (if available) by displaying source text and embedding displayed text in
-     * markers.
-     * <p>
-     * Also moves document focus to current entry, and makes sure fuzzy info displayed if available.
-     */
-    /*protected void activateEntry(CaretPosition pos) {
-        UIThreadsUtil.mustBeSwingThread();
-
-        SourceTextEntry ste = getCurrentEntry();
-        if (ste == null) {
-            return;
-        }
-
-        if (translationScrollPane.getViewport().getView() != translationEditor) {
-            // translationEditor not displayed
-            return;
-        }
-
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        SegmentBuilder builder = m_docSegList[displayedEntryIndex];
-        ISegmentBuilder  sourceBuilder = m_docSourceSegList[displayedEntryIndex];
-
-        // If the builder has not been created then we are trying to jump to a
-        // segment that is in the current document but not yet loaded. To avoid
-        // loading large swaths of the document at once, we then re-load the
-        // document centered at the destination segment.
-        if (!builder.hasBeenCreated()) {
-            loadDocument();
-            activateEntry(pos);
-            return;
-        }
-
-        previousTranslations = Core.getProject().getAllTranslations(ste);
-        TMXEntry currentTranslation = previousTranslations.getCurrentTranslation();
-        // forget about old marks
-        builder.createSegmentElement(true, currentTranslation);
-        sourceBuilder.createSegmentElement(true, currentTranslation);
-
-        Core.getNotes().setNoteText(currentTranslation.note);
-
-        // then add new marks
-        markerController.reprocessImmediately(builder);
-
-        translationEditor.undoManager.reset();
-
-        history.insertNew(builder.segmentNumberInProject);
-
-        setMenuEnabled();
-
-        showStat();
-
-        showLengthMessage();
-
-        if (Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT)) {
-            segmentExportImport.exportCurrentSegment(ste);
-        }
-
-        int te = translationEditor.getOmDocument().getTranslationEnd();
-        int ts = translationEditor.getOmDocument().getTranslationStart();
-
-        //
-        // Navigate to entry as requested.
-        //
-        if (pos.position != null) { // check if outside of entry
-            pos.position = Math.max(0, pos.position);
-            pos.position = Math.min(pos.position, te - ts);
-        }
-        if (pos.selectionStart != null && pos.selectionEnd != null) { // check if outside of entry
-            pos.selectionStart = Math.max(0, pos.selectionStart);
-            pos.selectionEnd = Math.min(pos.selectionEnd, te - ts);
-            if (pos.selectionStart >= pos.selectionEnd) { // if end after start
-                pos.selectionStart = null;
-                pos.selectionEnd = null;
-            }
-        }
-
-        scrollForDisplayNearestSegments(pos);
-        // check if file was changed
-        if (previousDisplayedFileIndex != displayedFileIndex) {
-            previousDisplayedFileIndex = displayedFileIndex;
-            CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
-        }
-
-        translationEditor.autoCompleter.setVisible(false);
-        translationEditor.repaint();
-
-        // Do the same for the source panel
-
-        // fire event about new segment activated
-        CoreEvents.fireEntryActivated(ste);
-    }*/
-
 
     public void activateEntry(CaretPosition pos) {
         CaretPosition sourcePos;
@@ -445,23 +277,6 @@ public class SideBySideEditorController extends EditorController {
 
     }
 
-
-
-
-
- /*   public void refreshView(boolean doCommit) {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (!doCommit) {
-            deactivateWithoutCommit();
-        }
-        int currentEntry = getCurrentEntryNumber();
-        int caretTransPosition = getCurrentPositionInEntryTranslation();
-        int caretsourcePosition = getCurrentPositionInEntrySource();
-        gotoFile(displayedFileIndex);
-        gotoEntry(currentEntry, new CaretPosition(caretTransPosition), new CaretPosition(caretsourcePosition));
-    }
-*/
 
     public int getCurrentPositionInEntrySource() {
         return getPositionInEntryImpl((Document3)sourceEditor.getDocument(), sourceEditor.getCaretPosition());

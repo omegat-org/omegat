@@ -10,22 +10,38 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import java.awt.*;
 import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- * A class to view only the source segments in a side by side translationEditor arrangement
+ * A class to view only the source segments in a side by side translationEditor arrangement.  Copied from
+ * SegmentBuilder, attempted to refactor some common functionality via AbstractSegmentBuilder, however, not
  */
 public class SourceOnlySegmentBuilder extends AbstractSegmentBuilder {
 
 
     static final Logger LOGGER = Logger.getLogger(SourceOnlySegmentBuilder.class.getName());
 
-    public SourceOnlySegmentBuilder(IEditor controller, Document3 doc, EditorSettings settings, SourceTextEntry ste, int segmentNumberInProject, boolean hasRTL) {
+    SegmentBuilder translationBuilder;
+
+    public SourceOnlySegmentBuilder(IEditor controller, Document3 doc, EditorSettings settings, SourceTextEntry ste, int segmentNumberInProject, boolean hasRTL, SegmentBuilder transBuilder) {
         super(controller, doc, settings, ste, segmentNumberInProject, hasRTL);
-        //TODO SINCE WE WON'T EDIT THE SOURCE, SHOULD hasRTL be set to false?
+        this.translationBuilder = transBuilder;
     }
 
+    public void createSegmentElement(final boolean isActive, TMXEntry trans, SegmentBuilder translationBuilder) {
+        createSegmentElement(isActive, doc.getLength(), trans);
+    }
+
+    public void createSegmentElement(final boolean isActive, TMXEntry trans) {
+        createSegmentElement(isActive, doc.getLength(), trans);
+    }
+
+    public void prependSegmentElement(final boolean isActive, TMXEntry trans) {
+        createSegmentElement(isActive, 0, trans);
+    }
 
     public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans) {
         UIThreadsUtil.mustBeSwingThread();
@@ -57,10 +73,11 @@ public class SourceOnlySegmentBuilder extends AbstractSegmentBuilder {
                 noteExist = trans.hasNote();
 
                 int beginOffset = offset;
+                //beginPosP1 = doc.createPosition(beginOffset + 1);
                 if (isActive) {
                     createActiveSegmentElement(trans);
                 } else {
-                    createInactiveSegmentElement(trans);
+                    createInactiveSegmentElement(trans, beginOffset);  // Add one to beginOffset?
                 }
                 int endOffset = offset;
 
@@ -98,7 +115,6 @@ public class SourceOnlySegmentBuilder extends AbstractSegmentBuilder {
 
             //sourceText = addActiveSourceSegPart( ste.getSrcText());
             sourceText = ste.getSrcText();
-            //LOGGER.warning("CLG active source text: " + sourceText + ", translation: " + trans.translation);
 
             int transLength = trans.translation == null ? 0 : trans.translation.length();
 
@@ -115,7 +131,12 @@ public class SourceOnlySegmentBuilder extends AbstractSegmentBuilder {
             insert(sourceText, normal);
             activeTranslationEndOffset = offset;
 
+            LOGGER.warning("CLG active source text: " + sourceText + ", translation: " + trans.translation );
             // TODO what if they have a very long source/translation string or the window is scrunched?
+
+            // Add a segment marker (we may not want to keep this, but does seem to improve readability
+            AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
+            insert(createSegmentMarkText(), attrSegmentMark);
 
             // should we add extra line spacing to keep the editor rows in sync?
             insert("\n", null);
@@ -124,12 +145,6 @@ public class SourceOnlySegmentBuilder extends AbstractSegmentBuilder {
             posSourceLength = sourceText.length();
 
             // Nor do we show translations
-            /*if (trans.isTranslated()) {
-                //translation exist
-                translationText = trans.translation;
-            } else {
-
-            }*/
 
             // we always insert the source text
             String srcText = ste.getSrcText();
@@ -165,7 +180,7 @@ public class SourceOnlySegmentBuilder extends AbstractSegmentBuilder {
      * @param trans TMX entry with translation
      * @throws BadLocationException
      */
-    void createInactiveSegmentElement(TMXEntry trans) throws BadLocationException {
+    void createInactiveSegmentElement(TMXEntry trans, int beginOffset) throws BadLocationException {
 
         // We don't display modification info in a source only translationEditor
 
@@ -173,26 +188,135 @@ public class SourceOnlySegmentBuilder extends AbstractSegmentBuilder {
         sourceText = ste.getSrcText();
 
         int prevOffset = offset;
-        sourceText = addInactiveSegPart(true, sourceText);
+
+        //sourceText = addInactiveSegPart(true, sourceText);
+        int srcLength = sourceText.length();
+        boolean rtl = controller.isSourceLangRTL();
+        insertDirectionEmbedding(rtl);
+        sourceText = insertTextWithTags(sourceText, true);
+        insertDirectionEndEmbedding();
+
+        // If the translation text is longer than the
+
+        //int transLength = trans.translation == null ? 0 : trans.translation.length();
+
+        // test getting and comparing the the view of the translation and source panes
+//        try {
+//            Rectangle startT = controller.getEditor(IEditor.EditorType.TRANSLATION).modelToView(translationBuilder.getStartPosition());
+//            Rectangle endT = controller.getEditor(IEditor.EditorType.TRANSLATION).modelToView(translationBuilder.getEndPosition());
+//            Rectangle unionT = startT.union(endT);
+//
+//
+//            Rectangle startS = controller.getEditor(IEditor.EditorType.SOURCE).modelToView(beginOffset);
+//            Rectangle endS = controller.getEditor(IEditor.EditorType.SOURCE).modelToView(offset == 0 ? 0 : offset+1);
+//            Rectangle unionS = startS.union(endS);
+//
+//            /*LOGGER.warning(String.format("CLG INactive source: %s, \nT start/end: (%d, %d), S start/end: (%d, %d). \nTrans  start (%f, %f), Trans  end (%f, %f) \nSource start (%f, %f), Source end (%f, %f)",
+//                    sourceText, translationBuilder.getStartPosition(), translationBuilder.getEndPosition(), beginOffset, offset+1,
+//                    startT.getX(), startT.getY(), endT.getX(), endT.getY(), startS.getX(), startS.getY(), endS.getX(), endS.getY() )); */
+//
+//            LOGGER.warning(String.format("CLG INactive source: %s, \nTrans start/end: (%d, %d), Source start/end: (%d, %d). \nTrans union (%f, %f) height: %f, Source union (%f, %f) height: %f",
+//                    sourceText, translationBuilder.getStartPosition(), translationBuilder.getEndPosition(), beginOffset, offset+1,
+//                    unionT.getX(), unionT.getY(), unionT.getHeight(), unionS.getX(), unionS.getY(), unionS.getHeight() ));
+//
+//
+//            //LOGGER.warning("CLG INactive source: "+ sourceText + ", Translation X: " + startT.getX() +  ", ");
+//        } catch (Exception e) {
+//            LOGGER.severe("Bad location: " + e.getMessage());
+//        }
+
+        adjustSourcePosition(trans, beginOffset);
+
+        //LOGGER.warning("CLG INactive source text: " + sourceText + ", translation: " + trans.translation + " source len: " + sourceText.length() + "(" + srcLength + "), trans length: " + transLength);
+        /*if(transLength > sourceText.length()){
+            LOGGER.warning("$$$$$$$ Adding padding to source: " + sourceText);
+            // quick hack to see if this helps space out segments correctly when the translation is longer than the source, would be better to add newlines if position is off
+            for(int i = 0; i < transLength - sourceText.length(); i++){
+                insert(" ", null);
+            }
+            // todo  test if position valid? if(translationBuilder.getStartPosition())??
+
+            //LOGGER.warning("CLG INactive source end pos:" + offset + ", translation end: " + translationBuilder.getEndPosition());
+            // soo... they can have the same end position, but visually they may not be the same location/position.
+
+            try {
+                Rectangle startT = controller.getEditor(IEditor.EditorType.TRANSLATION).modelToView(translationBuilder.getStartPosition());
+                Rectangle endT = controller.getEditor(IEditor.EditorType.TRANSLATION).modelToView(translationBuilder.getEndPosition());
+                Rectangle unionT = startT.union(endT);
+
+
+                Rectangle startS = controller.getEditor(IEditor.EditorType.SOURCE).modelToView(beginOffset);
+                Rectangle endS = controller.getEditor(IEditor.EditorType.SOURCE).modelToView(offset == 0 ? 0 : offset+1);
+                Rectangle unionS = startS.union(endS);
+
+            *//*LOGGER.warning(String.format("CLG INactive source: %s, \nT start/end: (%d, %d), S start/end: (%d, %d). \nTrans  start (%f, %f), Trans  end (%f, %f) \nSource start (%f, %f), Source end (%f, %f)",
+                    sourceText, translationBuilder.getStartPosition(), translationBuilder.getEndPosition(), beginOffset, offset+1,
+                    startT.getX(), startT.getY(), endT.getX(), endT.getY(), startS.getX(), startS.getY(), endS.getX(), endS.getY() )); *//*
+
+
+                LOGGER.warning(String.format("CLG INactive source: %s, \nTrans start/end: (%d, %d), Source start/end: (%d, %d). \nTrans union (%f, %f) height: %f, Source union (%f, %f) height: %f",
+                        sourceText, translationBuilder.getStartPosition(), translationBuilder.getEndPosition(), beginOffset, offset+1,
+                        unionT.getX(), unionT.getY(), unionT.getHeight(), unionS.getX(), unionS.getY(), unionS.getHeight() ));
+
+
+                //LOGGER.warning("CLG INactive source: "+ sourceText + ", Translation X: " + startT.getX() +  ", ");
+            } catch (Exception e) {
+                LOGGER.severe("Bad location: " + e.getMessage());
+            }
+
+
+        }*/
+
+        insert("\n", null);
+        setAlignment(prevOffset, offset, rtl);
+
+
         posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
         posSourceLength = sourceText.length();
 
     }
 
-//    public void resetTextAttributes() {
-//        doc.trustedChangesInProgress = true;
-//        try {
-//            if (posSourceBeg != null) {
-//                // Set only the source text
-//                int sBeg = posSourceBeg.getOffset();
-//                int sLen = posSourceLength;
-//                AttributeSet attrs = attrs(true, false, false, false);
-//                //AttributeSet attrs = attrs(true, false, false, false);
-//                doc.setCharacterAttributes(sBeg, sLen, attrs, true);
-//            }
-//        } finally {
-//            doc.trustedChangesInProgress = false;
-//        }
-//    }
+    private void adjustSourcePosition(TMXEntry trans, int beginOffset){
+        try{
+            // First get the location of the translation text
+            Rectangle startT = controller.getEditor(IEditor.EditorType.TRANSLATION).modelToView(translationBuilder.getStartPosition());  // is this actually the offset of the translation.... o
+            Rectangle endT = controller.getEditor(IEditor.EditorType.TRANSLATION).modelToView(translationBuilder.getEndPosition()-2);  // Assume translation contains an extra newline
+            Rectangle unionT = startT.union(endT);
+
+            // Second, get the location of the source text
+            Rectangle startS = controller.getEditor(IEditor.EditorType.SOURCE).modelToView(beginOffset);
+            Rectangle endS = controller.getEditor(IEditor.EditorType.SOURCE).modelToView(offset );
+            Rectangle unionS = startS.union(endS);
+
+
+           /* LOGGER.warning(String.format("aligned source: %s, \nTrans start/end: (%d, %d), Source start/end: (%d, %d). \nTrans union (%f, %f) height: %f, Source union (%f, %f) height: %f",
+                    sourceText, translationBuilder.getStartPosition(), translationBuilder.getEndPosition(), beginOffset, offset+1,
+                    unionT.getX(), unionT.getY(), unionT.getHeight(), unionS.getX(), unionS.getY(), unionS.getHeight() ));*/
+
+            int editorWdith = (int)controller.getEditor(IEditor.EditorType.SOURCE).getSize().getWidth();
+            int rowHeight = (int)startS.getHeight();
+            // Not adjusting for border...
+
+            // Get the number of rows the source and translation span
+            int sourceRows = ((int)endS.getY() - (int)startS.getY())/rowHeight + 1;
+            int transRows = ((int)endT.getY() - (int)startT.getY())/rowHeight + 1;
+            // Now calculate the actual row wrapping for our segment
+            double  sourceDocLength =( (sourceRows*editorWdith - (startS.getX()) - (editorWdith-endS.getX()))/editorWdith );
+            double transDocLength   =( (transRows*editorWdith - ((int)startT.getX()) - (editorWdith-(int)endT.getX()))/editorWdith) ;
+
+            // Instert extra newlines for each row in the tranlation pane, but not in the source pane
+            for(; sourceDocLength  < transDocLength; sourceDocLength++){
+                insert("\n", null);
+            }
+
+            // TODO will need to handle case where source is larger than the translation, but require modification to SegmentBuilder, which ....
+
+        }
+        catch (Exception e){
+            // TODO ADD BETTER ERROR HANDLING TO AVOID THESE.. deal with later?
+            LOGGER.warning("INVALID location");
+        }
+
+    }
 
 }

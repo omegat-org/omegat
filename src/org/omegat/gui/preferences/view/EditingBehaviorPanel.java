@@ -31,6 +31,8 @@ package org.omegat.gui.preferences.view;
 
 import javax.swing.JPanel;
 
+import org.omegat.core.Core;
+import org.omegat.gui.editor.IEditor;
 import org.omegat.util.OStrings;
 
 /**
@@ -303,6 +305,7 @@ public class EditingBehaviorPanel extends JPanel {
 
     private void sideBySideRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sideBySideRadioActionPerformed
         // TODO add your handling code here:
+        //Core.getEditor().getSettings();
 
     }//GEN-LAST:event_sideBySideRadioActionPerformed
 

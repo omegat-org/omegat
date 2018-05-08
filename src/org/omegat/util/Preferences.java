@@ -234,7 +234,7 @@ public final class Preferences {
     public static final String CONVERT_NUMBERS = "wf_convertNumbers";
     /** Workflow Option: Save auto-populated status */
     public static final String SAVE_AUTO_STATUS = "save_auto_status";
-    /** Workflow Option: Number of segments to load initially in translationEditor */
+    /** Workflow Option: Number of segments to load initially in editor */
     public static final String EDITOR_INITIAL_SEGMENT_LOAD_COUNT = "editor_initial_segment_load_count";
     public static final int EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT = 2000;
 
@@ -252,10 +252,10 @@ public final class Preferences {
     /** Tag Validation Option: check target for text that should have been removed according to regexp.*/
     public static final String CHECK_REMOVE_PATTERN = "tagValidation_removePattern";
 
-    /** Tag Validation Option: allow tag editing in translationEditor. */
+    /** Tag Validation Option: allow tag editing in editor. */
     public static final String ALLOW_TAG_EDITING = "allowTagEditing";
 
-    /** Tag Validation Option: allow tag editing in translationEditor. */
+    /** Tag Validation Option: allow tag editing in editor. */
     public static final String TAG_VALIDATE_ON_LEAVE = "tagValidateOnLeave";
 
     /** Team option: author ID */
@@ -323,6 +323,8 @@ public final class Preferences {
      * display the segment sources in the editor (set when using side by side editing)
      */
     public static final String DISPLAY_EDITOR_SEGMENT_SOURCES = "display_editor_segment_sources";
+
+    public static final String TOGGLE_EDITOR_MODE= "toggle_editor_mode";
 
     /**
      * mark unique segments

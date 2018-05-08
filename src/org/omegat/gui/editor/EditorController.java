@@ -106,11 +106,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
-import org.omegat.util.gui.DragTargetOverlay;
+import org.omegat.util.gui.*;
 import org.omegat.util.gui.DragTargetOverlay.IDropInfo;
-import org.omegat.util.gui.StaticUIUtils;
-import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -135,12 +132,41 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Piotr Kulik
  * @author Yu Tang
  */
-public class EditorController implements IEditor {
+public class EditorController implements IEditor, IPaneMenu {
 
     /** Local logger. */
     private static final Logger LOGGER = Logger.getLogger(EditorController.class.getName());
 
     private static final double PAGE_LOAD_THRESHOLD = 0.25;
+
+    @Override
+    /**
+     * Creates the "settings" button on the Editor's toolbar.
+     */
+    public void populatePaneMenu(JPopupMenu menu) {
+        menu.addSeparator();
+
+        final JMenuItem toggleMode = new JCheckBoxMenuItem(OStrings.getString("GUI_EDITOR_SETTINGS_MODE"));
+        // set selection? toggleMode.setSelected(Preferences.isPreference(Preferences.TOGGLE_EDITOR_MODE));
+
+        toggleMode.addActionListener(
+                e -> toggleMode());
+
+        menu.add(toggleMode);
+
+        menu.addSeparator();
+    }
+
+    private void toggleMode(){
+
+        if(Core.getProject().isProjectLoaded()) {
+            //String lbl = editMode == EditorMode.DEFAULT ? "DEFAULT": "SIDE_BY_SIDE";
+            editMode = editMode == EditorMode.DEFAULT ? EditorMode.SIDE_BY_SIDE : EditorMode.DEFAULT;
+
+            reloadEditor();
+        }
+
+    }
 
     /** Some predefined translations that OmegaT can assign by popup. */
     enum ForceTranslation {
@@ -148,15 +174,15 @@ public class EditorController implements IEditor {
     }
 
     /** Dockable pane for editor. */
-    DockablePanel translationPane;
-    JScrollPane translationScrollPane;
+    DockablePanel pane;
+    JScrollPane scrollPane;
 
     String title;
 
     private boolean dockableSelected;
 
     /** Editor instance. */
-    protected EditorTextArea3 translationEditor;
+    protected EditorTextArea3 editor;
 
     /** Class for process marks for editor. */
     protected MarkerController markerController;
@@ -179,6 +205,9 @@ public class EditorController implements IEditor {
      * Current active segment in current file, if there are segments in file (can be fale if filter active!)
      */
     protected int displayedEntryIndex;
+
+    // by default assume the normal (not side by side) mode;
+    protected EditorMode editMode;
 
     /** Object which store history of moving by segments. */
      SegmentHistory history = new SegmentHistory();
@@ -207,16 +236,18 @@ public class EditorController implements IEditor {
      */
     IProject.AllTranslations previousTranslations;
 
-    public EditorController(final MainWindow mainWindow) {
+
+    public EditorController(final MainWindow mainWindow, EditorMode mode) {
+        this.editMode = mode;
         this.mw = mainWindow;
 
         segmentExportImport = new SegmentExportImport(this);
 
-        //translationEditor = new EditorTextArea3(this);
+        //editor = new EditorTextArea3(this);
 
         // Allow any derived classes to perform initialization:
         initEditor();
-        DragTargetOverlay.apply(translationEditor, dropInfo);
+        DragTargetOverlay.apply(editor, dropInfo);
         setFont(mainWindow.getApplicationFont());
 
         markerController = new MarkerController(this);
@@ -269,15 +300,15 @@ public class EditorController implements IEditor {
 
         SwingUtilities.invokeLater(() -> {
             updateState(SHOW_TYPE.INTRO);
-            translationPane.requestFocus();
+            pane.requestFocus();
         });
 
         // register font changes callback
         CoreEvents.registerFontChangedEventListener(newFont -> {
             setFont(newFont);
             ViewLabel.fontHeight = 0;
-            translationEditor.revalidate();
-            translationEditor.repaint();
+            editor.revalidate();
+            editor.repaint();
 
             // fonts have changed
             emptyProjectPane.setFont(font);
@@ -292,13 +323,13 @@ public class EditorController implements IEditor {
 
         lazyLoadTimer.setRepeats(false);
         lazyLoadTimer.addActionListener(e -> {
-            loadEditor(translationScrollPane, translationEditor);
+            loadEditor(scrollPane, editor);
             //loadEditor(sourceScrollPane, sourceEditor);
         });
     }
 
     void initEditor(){
-        translationEditor = new EditorTextArea3(this, l -> getSegmentIndexAtLocationImpl(m_docSegList, l));
+        editor = new EditorTextArea3(this, l -> getSegmentIndexAtLocationImpl(m_docSegList, l));
     }
 
     void loadEditor(JScrollPane scrollPane, JEditorPane editor){
@@ -343,20 +374,23 @@ public class EditorController implements IEditor {
 
     void createUI() {
 
-        translationPane = new DockablePanel("EDITOR", "TRANSLATION", false);
-        translationScrollPane = new JScrollPane(translationEditor);
-        createPaneImpl(translationPane, translationScrollPane);
+        pane = new DockablePanel("EDITOR", "TRANSLATION", false);
+        pane.getDockKey().putProperty(IPaneMenu.PROPERTY_PANE_MENU_ACTION_LISTENER, this);
+        scrollPane = new JScrollPane(editor);
+
+        createPaneImpl(pane, scrollPane);
 
         /*sourcePane = new DockablePanel("SOURCE", "SOURCE", false);
         sourceScrollPane = new JScrollPane(sourceEditor);
         createPaneImpl(sourcePane, sourceScrollPane);*/
 
-        DockingDesktop desktop = DockingUI.getDesktop(translationPane);
+        DockingDesktop desktop = DockingUI.getDesktop(pane);
         if (desktop != null) {
-            desktop.addDockableSelectionListener(e -> dockableSelected = translationPane == e.getSelectedDockable());
+            desktop.addDockableSelectionListener(e -> dockableSelected = pane == e.getSelectedDockable());
         }
 
     }
+
 
     void createPaneImpl(DockablePanel pane, JScrollPane scrollPane){
 
@@ -387,7 +421,7 @@ public class EditorController implements IEditor {
         pane.add(scrollPane, BorderLayout.CENTER);
 
         // Derived controllers may not want their pane added to the MainWindow just yet:
-        if(translationScrollPane == scrollPane) {
+        if(this.scrollPane == scrollPane) {
             mw.addDockable(pane);
         }
 
@@ -409,7 +443,7 @@ public class EditorController implements IEditor {
                 return;
             }
 
-            double pos = e.getValue() / (double) translationScrollPane.getVerticalScrollBar().getMaximum();
+            double pos = e.getValue() / (double) scrollPane.getVerticalScrollBar().getMaximum();
 
             if (pos <= PAGE_LOAD_THRESHOLD || pos >= 1.0 - PAGE_LOAD_THRESHOLD) {
                 lazyLoadTimer.restart();
@@ -419,7 +453,6 @@ public class EditorController implements IEditor {
 
     private synchronized void loadDown(int count) {
 
-        // TODO CLG TEST THIS...
         if (lastLoaded < 0 || lastLoaded >= m_docSegList.length - 1) {
             return;
         }
@@ -437,7 +470,6 @@ public class EditorController implements IEditor {
 
     private synchronized void loadUp(int count) {
 
-        // TODO CLG TEST THIS...
         if (firstLoaded <= 0 || firstLoaded >= m_docSegList.length) {
             return;
         }
@@ -474,7 +506,7 @@ public class EditorController implements IEditor {
             displayedFileIndex = 0;
             displayedEntryIndex = 0;
             title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
-            data = translationEditor;
+            data = editor;
             SwingUtilities.invokeLater(() -> {
                 // need to run later because some other event listeners
                 // should be called before
@@ -484,21 +516,49 @@ public class EditorController implements IEditor {
             break;
         case NO_CHANGE:
             title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
-            data = translationEditor;
+            data = editor;
             break;
         }
 
         updateTitle();
-        translationPane.setToolTipText(title);
+        pane.setToolTipText(title);
 
-        if (translationScrollPane.getViewport().getView() != data) {
+        if (scrollPane.getViewport().getView() != data) {
             if (UIManager.getBoolean("OmegaTDockablePanel.isProportionalMargins")) {
                 int size = data.getFont().getSize() / 2;
                 data.setBorder(new EmptyBorder(size, size, size, size));
             }
-            translationScrollPane.setViewportView(data);
+            scrollPane.setViewportView(data);
         }
     }
+
+    protected void reloadEditor(){
+       //Close and then reload... should only be called when edit mode has been changed
+        boolean reload = m_docSegList != null;
+
+        SHOW_TYPE showType;
+        m_docSegList = null;
+        history.clear();
+        removeFilter();
+        markerController.removeAll();
+        showType = SHOW_TYPE.INTRO;
+        deactivateWithoutCommit();
+
+        if(reload) {
+            history.clear();
+            removeFilter();
+            if (!Core.getProject().getAllEntries().isEmpty()) {
+                showType = SHOW_TYPE.FIRST_ENTRY;
+            } else {
+                showType = SHOW_TYPE.EMPTY_PROJECT;
+            }
+            markerController.removeAll();
+            setInitialOrientation();
+            updateState(showType);
+        }
+
+    }
+
 
     final IDropInfo dropInfo = new IDropInfo() {
 
@@ -557,7 +617,7 @@ public class EditorController implements IEditor {
 
         @Override
         public Component getComponentToOverlay() {
-            return translationScrollPane;
+            return scrollPane;
         }
 
         @Override
@@ -573,12 +633,12 @@ public class EditorController implements IEditor {
     };
 
     private void updateTitle() {
-       translationPane.setName(StaticUIUtils.truncateToFit(title, translationPane, 70));
+       pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
     }
 
     void setFont(final Font font) {
         this.font = font;
-        translationEditor.setFont(font);
+        editor.setFont(font);
     }
 
     public Font getFont(){
@@ -627,7 +687,7 @@ public class EditorController implements IEditor {
             }
         }
         // set editor's orientation by target language
-        translationEditor.setComponentOrientation(targetOrientation);
+        editor.setComponentOrientation(targetOrientation);
     }
 
     /**
@@ -675,7 +735,7 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public void requestFocus() {
-        translationScrollPane.getViewport().getView().requestFocusInWindow();
+        scrollPane.getViewport().getView().requestFocusInWindow();
     }
 
     /**
@@ -695,12 +755,29 @@ public class EditorController implements IEditor {
     }
 
     public SegmentBuilder getSegmentAtIndex(int index) {
-        if (m_docSegList == null || index < 0 || index >= m_docSegList.length ) {
+        return (SegmentBuilder)getSegmentAtIndexImpl(m_docSegList, index);
+       /* if (m_docSegList == null || index < 0 || index >= m_docSegList.length ) {
             // there is no entry for the requested index
             return null;
         }
 
-        return m_docSegList[index];
+        return m_docSegList[index];*/
+    }
+
+    protected ISegmentBuilder getSegmentAtIndexImpl(ISegmentBuilder[] builderList, int index) {
+        if (builderList == null || index < 0 || index >= builderList.length ) {
+            // there is no entry for the requested index
+            return null;
+        }
+
+        return builderList[index];
+    }
+
+
+    public ISegmentBuilder getSegmentAtIndex(EditorType type, int index) {
+        // only the default editing is supported
+        return getSegmentAtIndex(index);
+
     }
 
     public SegmentBuilder getSegmentAtLocation(int location) {
@@ -770,62 +847,16 @@ public class EditorController implements IEditor {
         // Move common segment loading tasks to generateSegments(), which can be intercepted by derived editors
         doc.setDocumentFilter(new DocumentFilter3());
         // Set the document now, since we may start creating the segments while still loading
-        translationEditor.setDocument(doc);
+        editor.setDocument(doc);
         generateSegments(file, doc, hasRTL);
 
-
-//        ArrayList<SegmentBuilder> tmpSegList = new ArrayList<SegmentBuilder>(file.entries.size());
-//        for (SourceTextEntry ste : file.entries) {
-//            if (entriesFilter == null || entriesFilter.allowed(ste)) {
-//                SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum(), hasRTL);
-//                tmpSegList.add(sb);
-//            }
-//        }
-//        m_docSegList = tmpSegList.toArray(new SegmentBuilder[tmpSegList.size()]);
-
-        // Create the source only segment builders...
-/*        Document3 sourceDoc = new Document3(this);
-
-        // Set the source document
-        sourceDoc.setDocumentFilter(new DocumentFilter3());
-        ArrayList<ISegmentBuilder> tmpSourceList = new ArrayList<>(file.entries.size());
-        for (SourceTextEntry ste : file.entries) {
-            if (entriesFilter == null || entriesFilter.allowed(ste)) {
-                SourceOnlySegmentBuilder sb = new SourceOnlySegmentBuilder(this, sourceDoc, settings, ste, ste.entryNum(), hasRTL);
-                tmpSourceList.add(sb);
-            }
-        }
-        m_docSourceSegList = tmpSourceList.toArray(new SourceOnlySegmentBuilder[tmpSourceList.size()]);
-        sourceEditor.setDocument(sourceDoc);*/
-
-
-       /* // Clamp displayedSegment to actually available entries.
-        displayedEntryIndex = Math.max(0, Math.min(m_docSegList.length - 1, displayedEntryIndex));
-        // Calculate start, end indices of a span of initialSegCount segments
-        // centered around displayedEntryIndex and clamped to [0, m_docSegList.length).
-        final int initialSegCount = Preferences.getPreferenceDefault(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT,
-                Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT);
-        firstLoaded = Math.max(0, displayedEntryIndex - initialSegCount / 2);
-        lastLoaded = Math.min(file.entries.size() - 1, firstLoaded + initialSegCount - 1);
-
-        // ...but only display the ones in [firstLoaded, lastLoaded]
-        for (int i = 0; i < m_docSegList.length; i++) {
-            if (i >= firstLoaded && i <= lastLoaded) {
-                SegmentBuilder sb = m_docSegList[i];
-                sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.ste));
-                sb.addSegmentSeparator();
-            }
-        }*/
-
-
-
-        // add locate for target language to translationEditor
+        // add locate for target language to editor
         Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
-        translationEditor.setLocale(targetLocale);
+        editor.setLocale(targetLocale);
 
 
-        doc.addUndoableEditListener(translationEditor.undoManager);
-        translationEditor.undoManager.reset();
+        doc.addUndoableEditListener(editor.undoManager);
+        editor.undoManager.reset();
 
         doc.addDocumentListener(new DocumentListener() {
             //we cannot edit the document here, only other stuff.
@@ -847,7 +878,7 @@ public class EditorController implements IEditor {
 
         markerController.process(m_docSegList);
 
-        translationEditor.repaint();
+        editor.repaint();
     }
 
 
@@ -900,18 +931,6 @@ public class EditorController implements IEditor {
             }
         }
 
-/*        // Create the source only segment builders...
-        Document3 sourceDoc = new Document3(this);
-        // Set the source document
-        sourceDoc.setDocumentFilter(new DocumentFilter3());
-        ArrayList<ISegmentBuilder> tmpSourceList = new ArrayList<>(file.entries.size());
-        for (SourceTextEntry ste : file.entries) {
-            if (entriesFilter == null || entriesFilter.allowed(ste)) {
-                SourceOnlySegmentBuilder sb = new SourceOnlySegmentBuilder(this, sourceDoc, settings, ste, ste.entryNum(), hasRTL);
-                tmpSourceList.add(sb);
-            }
-        }
-        m_docSourceSegList = tmpSourceList.toArray(new SourceOnlySegmentBuilder[tmpSourceList.size()]);*/
     }
 
     /*
@@ -930,15 +949,13 @@ public class EditorController implements IEditor {
     public void activateEntry(CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 
-        //LOGGER.warning("CLG EditorController activateEntry pos: " + pos.position + ", index: " + displayedEntryIndex   );
-
         SourceTextEntry ste = getCurrentEntry();
         if (ste == null) {
             return;
         }
 
-        if (translationScrollPane.getViewport().getView() != translationEditor) {
-            // translationEditor not displayed
+        if (scrollPane.getViewport().getView() != editor) {
+            // editor not displayed
             return;
         }
 
@@ -970,7 +987,7 @@ public class EditorController implements IEditor {
         // then add new marks
         markerController.reprocessImmediately(builder);
 
-        translationEditor.undoManager.reset();
+        editor.undoManager.reset();
 
         history.insertNew(builder.segmentNumberInProject);
 
@@ -984,11 +1001,11 @@ public class EditorController implements IEditor {
             segmentExportImport.exportCurrentSegment(ste);
         }
 
-        int te = translationEditor.getOmDocument().getTranslationEnd();
-        int ts = translationEditor.getOmDocument().getTranslationStart();
+        int te = editor.getOmDocument().getTranslationEnd();
+        int ts = editor.getOmDocument().getTranslationStart();
         //
         // Navigate to entry as requested.
-        navigateToEntry(translationEditor.getOmDocument(), pos, m_docSegList[displayedEntryIndex], translationScrollPane, translationEditor);
+        navigateToEntry(editor.getOmDocument(), pos, m_docSegList[displayedEntryIndex], scrollPane, editor);
 
 
         // check if file was changed
@@ -997,8 +1014,8 @@ public class EditorController implements IEditor {
             CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
         }
 
-        translationEditor.autoCompleter.setVisible(false);
-        translationEditor.repaint();
+        editor.autoCompleter.setVisible(false);
+        editor.repaint();
 
         // fire event about new segment activated
         CoreEvents.fireEntryActivated(ste);
@@ -1016,7 +1033,7 @@ public class EditorController implements IEditor {
      * Display length of source and translation parts in the status bar.
      */
     void showLengthMessage() {
-        Document3 doc = translationEditor.getOmDocument();
+        Document3 doc = editor.getOmDocument();
         String trans = doc.extractTranslation();
         if (trans != null) {
             SourceTextEntry ste = m_docSegList[displayedEntryIndex].ste;
@@ -1029,7 +1046,7 @@ public class EditorController implements IEditor {
      * Called on the text changed in document. Required for recalculate marks for active segment.
      */
     void onTextChanged() {
-        Document3 doc = translationEditor.getOmDocument();
+        Document3 doc = editor.getOmDocument();
         if (doc.trustedChangesInProgress || doc.textBeingComposed) {
             return;
         }
@@ -1038,32 +1055,21 @@ public class EditorController implements IEditor {
 
             SwingUtilities.invokeLater(() -> {
                 markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
-                translationEditor.autoCompleter.textDidChange();
+                editor.autoCompleter.textDidChange();
             });
         }
     }
 
-   /* *//**
-     * Attempt to center the active segment in the translationEditor. When the active
-     * segment is taller than the translationEditor, the first line of the editable area
-     * will be at the bottom of the translationEditor.
-     *//*
-    private void scrollForDisplayNearestSegments(final CaretPosition pos) {
-        SwingUtilities.invokeLater(() -> {
-            Rectangle rect = getSegmentBounds(displayedEntryIndex);
-            if (rect != null) {
-                // Expand rect vertically to fill height of viewport.
-                int viewportHeight = translationScrollPane.getViewport().getHeight();
-                rect.y -= (viewportHeight - rect.height) / 2;
-                rect.height = viewportHeight;
-                translationEditor.scrollRectToVisible(rect);
-            }
-            setCaretPosition(pos);
-        });
-    }
-*/
 
-    // CLG: ASSUME POS IS A location in the translation pane?
+    /**
+     * Navigate to the specified entry, made generic so this method works with derived IEditors.
+     *
+     * @param doc
+     * @param pos
+     * @param sb
+     * @param scrollPane
+     * @param editor
+     */
     void navigateToEntry(Document3 doc, CaretPosition pos, ISegmentBuilder sb, JScrollPane scrollPane, JEditorPane editor ){
 
         int te = doc.getTranslationEnd();
@@ -1097,18 +1103,12 @@ public class EditorController implements IEditor {
 
 
     /**
-     * Attempt to center the active segment in the translationEditor. When the active
-     * segment is taller than the translationEditor, the first line of the editable area
-     * will be at the bottom of the translationEditor.
+     * Attempt to center the active segment in the editor. When the active
+     * segment is taller than the editor, the first line of the editable area
+     * will be at the bottom of the editor.
      */
 
     void scrollForDisplayNearestSegments(final CaretPosition pos, JScrollPane scrollPane, JEditorPane editor, ISegmentBuilder segment) {
-        // CLG: Only used for translation editor, so not needed for SideBySide source "editor pane"
-        /*
-        segment = m_docSegList[displayedEntryIndex]
-
-
-        */
         if(segment.hasBeenCreated()){
 
             SwingUtilities.invokeLater(() -> {
@@ -1137,7 +1137,7 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Get a rectangle that bounds the specified segment in translationEditor-space pixel
+     * Get a rectangle that bounds the specified segment in editor-space pixel
      * coordinates. Returns null if the specified segment index is invalid or if
      * the segment has not been loaded yet.
      */
@@ -1157,36 +1157,7 @@ public class EditorController implements IEditor {
         }
         return result;
 
-        /*ISegmentBuilder[] sbl = null;
-        JEditorPane translationEditor = null;
-        switch (type) {
-            case SOURCE:
-                sbl = m_docSourceSegList;
-                translationEditor = sourceEditor;
-                break;
-            case TRANSLATION:
-                sbl = m_docSegList;
-                translationEditor = translationEditor;
-                break;
-        }
 
-        if (index < 0 || index >= sbl.length) {
-            return null;
-        }
-        Rectangle result = null;
-        try {
-            ISegmentBuilder sb = sbl[index];
-            if (sb.hasBeenCreated()) {
-                Rectangle start = translationEditor.modelToView(sb.getStartPosition());
-                Rectangle end = translationEditor.modelToView(sb.getEndPosition());
-                if (start != null && end != null) {
-                    result = start.union(end);
-                }
-            }
-        } catch (BadLocationException ex) {
-            Log.log(ex);
-        }
-        return result;*/
     }
 
     @Override
@@ -1252,17 +1223,8 @@ public class EditorController implements IEditor {
      *            location
      * @return true if segment changed, false if location inside current segment
      */
-    // todo was: public boolean goToSegmentAtLocation(int location) { // TODO SHOULD NOT BE PUBLIC SINCE LOCATION ASSUMES ONE EDITOR....
-    public boolean goToSegmentAtIndex(int segmentAtLocation) { // TODO SHOULD NOT BE PUBLIC SINCE LOCATION ASSUMES ONE EDITOR....
+    public boolean goToSegmentAtIndex(int segmentAtLocation) {
         // clicked segment
-        //int segmentAtLocation = getSegmentIndexAtLocation(location);  // TODO CLG since there are 2 Editors in SideBySide mode, how do we know which editor position this is?
-
-        // I think this would be better if we pass segment, not location since location is property of the editor?
-
-        // todo clg note:  @ 0,16, 1,201 7,1119  - I assume
-        //LOGGER.warning("CLG EditorController go to seg @ " + segmentAtLocation + ", location: " + location);
-        LOGGER.warning("CLG EditorController go to seg @ " + segmentAtLocation );
-
         if (segmentAtLocation < 0) {
             return false;
         }
@@ -1278,14 +1240,14 @@ public class EditorController implements IEditor {
     }
 
     @Override
-    public int getSegmentIndexAtLocation(int location) { // todo CLG hide/remove... this should be implemented per editor/source pane?
+    public int getSegmentIndexAtLocation(int location) {
         if (m_docSegList == null) {
             return -1;
         }
         for (int i = 0; i < m_docSegList.length; i++) {
             SegmentBuilder builder = m_docSegList[i];
             // Treat start and end positions inclusively to give
-            // intuitive results when double-clicking to jump in translationEditor
+            // intuitive results when double-clicking to jump in editor
             if (builder.hasBeenCreated() && location >= builder.getStartPosition()
                     && location <= builder.getEndPosition()) {
                 return i;
@@ -1301,7 +1263,7 @@ public class EditorController implements IEditor {
         for (int i = 0; i < list.length; i++) {
             ISegmentBuilder builder = list[i];
             // Treat start and end positions inclusively to give
-            // intuitive results when double-clicking to jump in translationEditor
+            // intuitive results when double-clicking to jump in editor
             if (builder.hasBeenCreated() && location >= builder.getStartPosition()
                     && location <= builder.getEndPosition()) {
                 return i;
@@ -1336,7 +1298,6 @@ public class EditorController implements IEditor {
         for (int i = 0; i < m_docSegList.length; i++) {
             if (entryNumbers.contains(m_docSegList[i].ste.entryNum())) {
                 // the same source text - need to update
-                //m_docSegList[i].createSegmentElement(false, Core.getProject().getTranslationInfo(m_docSegList[i].ste));
                 updateSegmentElement(i, false, m_docSegList);
             }
         }
@@ -1355,7 +1316,7 @@ public class EditorController implements IEditor {
     public void commitAndDeactivate() {
         UIThreadsUtil.mustBeSwingThread();
 
-        Document3 doc = translationEditor.getOmDocument();
+        Document3 doc = editor.getOmDocument();
 
         if (doc == null) {
             // there is no active doc, it's empty project
@@ -1377,7 +1338,7 @@ public class EditorController implements IEditor {
     void commitAndDeactivate(ForceTranslation forceTranslation, String newTrans) {
         UIThreadsUtil.mustBeSwingThread();
 
-        Document3 doc = translationEditor.getOmDocument();
+        Document3 doc = editor.getOmDocument();
         doc.stopEditMode();
 
         // segment was active
@@ -1401,7 +1362,7 @@ public class EditorController implements IEditor {
                 newen.translation = newen.source;
                 break;
             }
-        } else { // translation from translationEditor
+        } else { // translation from editor
             if (newTrans.isEmpty()) { // empty translation
                 if (oldTE.isTranslated() && "".equals(oldTE.translation)) {
                     // It's an empty translation which should remain empty
@@ -1460,8 +1421,6 @@ public class EditorController implements IEditor {
 
         // Derived controllers may update their segment(s) here:
         updateSegmentElement(displayedEntryIndex, false, m_docSegList);
-       /* m_docSegList[displayedEntryIndex].createSegmentElement(false,
-                Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste));*/
 
         // find all identical sources and redraw them
         for (int i = 0; i < m_docSegList.length; i++) {
@@ -1488,7 +1447,7 @@ public class EditorController implements IEditor {
         // then add new marks
         markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
 
-        translationEditor.undoManager.reset();
+        editor.undoManager.reset();
 
         // validate tags if required
         if (entry != null && Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
@@ -1529,7 +1488,7 @@ public class EditorController implements IEditor {
 
         segmentExportImport.exportCurrentSegment(null);
 
-        Document3 doc = translationEditor.getOmDocument();
+        Document3 doc = editor.getOmDocument();
 
         if (doc == null) {
             // there is no active doc, it's empty project
@@ -1564,8 +1523,8 @@ public class EditorController implements IEditor {
         }
 
         Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = translationEditor.getCursor();
-        translationEditor.setCursor(hourglassCursor);
+        Cursor oldCursor = editor.getCursor();
+        editor.setCursor(hourglassCursor);
 
         commitAndDeactivate();
 
@@ -1622,7 +1581,7 @@ public class EditorController implements IEditor {
         }
 
         activateEntry();
-        translationEditor.setCursor(oldCursor);
+        editor.setCursor(oldCursor);
     }
 
     private void anyEntry(boolean forwards) {
@@ -1743,10 +1702,9 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public void gotoEntry(final int entryNum) {
-        gotoEntry(entryNum, CaretPosition.startOfEntry()); // TODO CLG VERIFY VALUE SO WE CAN USE THE CORRECT SOURCE ENTRY POSITION IN REFACTOR
+        gotoEntry(entryNum, CaretPosition.startOfEntry());
     }
 
-    // CLG: NOTE new editor entry and translation editor position (where edit caret should be located).  So CaretPosition may be okay here...
     public void gotoEntry(final int entryNum, final CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1759,8 +1717,8 @@ public class EditorController implements IEditor {
             return;
         }
         Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-        Cursor oldCursor = translationEditor.getCursor();
-        translationEditor.setCursor(hourglassCursor);
+        Cursor oldCursor = editor.getCursor();
+        editor.setCursor(hourglassCursor);
         commitAndDeactivate();
 
         if (entryNum == 0) {
@@ -1793,7 +1751,7 @@ public class EditorController implements IEditor {
             }
         }
         activateEntry(pos);
-        translationEditor.setCursor(oldCursor);
+        editor.setCursor(oldCursor);
     }
 
     public void gotoEntry(String srcString, EntryKey key) {
@@ -1869,13 +1827,13 @@ public class EditorController implements IEditor {
     public void changeCase(CHANGE_CASE_TO toWhat) {
         UIThreadsUtil.mustBeSwingThread();
 
-        int start = translationEditor.getSelectionStart();
-        int end = translationEditor.getSelectionEnd();
+        int start = editor.getSelectionStart();
+        int end = editor.getSelectionEnd();
 
-        int caretPosition = translationEditor.getCaretPosition();
+        int caretPosition = editor.getCaretPosition();
 
-        int translationStart = translationEditor.getOmDocument().getTranslationStart();
-        int translationEnd = translationEditor.getOmDocument().getTranslationEnd();
+        int translationStart = editor.getOmDocument().getTranslationStart();
+        int translationEnd = editor.getOmDocument().getTranslationEnd();
 
         // both should be within the limits
         if (end < translationStart || start > translationEnd) {
@@ -1894,8 +1852,8 @@ public class EditorController implements IEditor {
         try {
             // no selection? make it the current word
             if (start == end) {
-                start = EditorUtils.getWordStart(translationEditor, start);
-                end = EditorUtils.getWordEnd(translationEditor, end);
+                start = EditorUtils.getWordStart(editor, start);
+                end = EditorUtils.getWordEnd(editor, end);
 
                 // adjust the bound again
                 if (start < translationStart && end <= translationEnd) {
@@ -1907,23 +1865,23 @@ public class EditorController implements IEditor {
                 }
             }
 
-            translationEditor.setSelectionStart(start);
-            translationEditor.setSelectionEnd(end);
+            editor.setSelectionStart(start);
+            editor.setSelectionEnd(end);
 
-            String selectionText = translationEditor.getText(start, end - start);
+            String selectionText = editor.getText(start, end - start);
             String result = EditorUtils.doChangeCase(selectionText, toWhat);
             if (selectionText.equals(result)) {
                 // Nothing changed
                 return;
             }
 
-            // ok, write it back to the translationEditor document
-            translationEditor.replaceSelection(result);
+            // ok, write it back to the editor document
+            editor.replaceSelection(result);
 
-            translationEditor.setCaretPosition(caretPosition);
+            editor.setCaretPosition(caretPosition);
 
-            translationEditor.setSelectionStart(start);
-            translationEditor.setSelectionEnd(end);
+            editor.setSelectionStart(start);
+            editor.setSelectionEnd(end);
         } catch (BadLocationException ble) {
             // highly improbable
             Log.log("bad location exception when changing case");
@@ -1945,16 +1903,16 @@ public class EditorController implements IEditor {
         }
 
         // build local offsets
-        int start = translationEditor.getOmDocument().getTranslationStart();
-        int end = translationEditor.getOmDocument().getTranslationEnd();
+        int start = editor.getOmDocument().getTranslationStart();
+        int end = editor.getOmDocument().getTranslationEnd();
 
         CalcMarkersThread thread = markerController.markerThreads[markerController
                 .getMarkerIndex(ComesFromMTMarker.class.getName())];
         ((ComesFromMTMarker) thread.marker).setMark(null, null);
 
         // remove text
-        translationEditor.select(start, end);
-        translationEditor.replaceSelection(text);
+        editor.select(start, end);
+        editor.replaceSelection(text);
     }
 
     public void replacePartOfText(final String text, int start, int end) {
@@ -1964,10 +1922,10 @@ public class EditorController implements IEditor {
                 .getMarkerIndex(ComesFromMTMarker.class.getName())];
         ((ComesFromMTMarker) thread.marker).setMark(null, null);
 
-        int off = translationEditor.getOmDocument().getTranslationStart();
+        int off = editor.getOmDocument().getTranslationStart();
         // remove text
-        translationEditor.select(start + off, end + off);
-        translationEditor.replaceSelection(text);
+        editor.select(start + off, end + off);
+        editor.replaceSelection(text);
     }
 
     /**
@@ -1990,7 +1948,7 @@ public class EditorController implements IEditor {
     public String getCurrentTranslation() {
         UIThreadsUtil.mustBeSwingThread();
 
-        return translationEditor.getOmDocument().extractTranslation();
+        return editor.getOmDocument().extractTranslation();
     }
 
     /**
@@ -1999,7 +1957,7 @@ public class EditorController implements IEditor {
     public int getCurrentPositionInEntryTranslation() {
         UIThreadsUtil.mustBeSwingThread();
 
-        return getPositionInEntryTranslation(translationEditor.getCaretPosition());
+        return getPositionInEntryTranslation(editor.getCaretPosition());
     }
 
 
@@ -2034,16 +1992,16 @@ public class EditorController implements IEditor {
 
     /**
      * Returns the relative caret position in the editable translation for a
-     * given absolute index into the overall translationEditor document.
+     * given absolute index into the overall editor document.
      */
     public int getPositionInEntryTranslation(int pos) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!translationEditor.getOmDocument().isEditMode()) {
+        if (!editor.getOmDocument().isEditMode()) {
             return -1;
         }
-        int beg = translationEditor.getOmDocument().getTranslationStart();
-        int end = translationEditor.getOmDocument().getTranslationEnd();
+        int beg = editor.getOmDocument().getTranslationStart();
+        int end = editor.getOmDocument().getTranslationEnd();
         if (pos < beg) {
             pos = beg;
         }
@@ -2056,21 +2014,21 @@ public class EditorController implements IEditor {
     public void setCaretPosition(CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (!translationEditor.getOmDocument().isEditMode()) {
+        if (!editor.getOmDocument().isEditMode()) {
             return;
         }
-        int off = translationEditor.getOmDocument().getTranslationStart();
+        int off = editor.getOmDocument().getTranslationStart();
 
         try {
             if (pos.position != null) {
-                translationEditor.setCaretPosition(off + pos.position);
+                editor.setCaretPosition(off + pos.position);
             } else if (pos.selectionStart != null && pos.selectionEnd != null) {
-                translationEditor.select(off + pos.selectionStart, off + pos.selectionEnd);
+                editor.select(off + pos.selectionStart, off + pos.selectionEnd);
             }
         } catch (IllegalArgumentException iae) {
             // ignore; document has changed in the mean time.
         }
-        translationEditor.checkAndFixCaret();
+        editor.checkAndFixCaret();
     }
 
     /**
@@ -2079,14 +2037,14 @@ public class EditorController implements IEditor {
     public void insertText(String text) {
         UIThreadsUtil.mustBeSwingThread();
 
-        translationEditor.checkAndFixCaret();
+        editor.checkAndFixCaret();
 
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
             text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste),
                     builder.ste);
         }
-        translationEditor.replaceSelection(text);
+        editor.replaceSelection(text);
     }
 
     /**
@@ -2101,17 +2059,17 @@ public class EditorController implements IEditor {
     public void insertTag(final String tag) {
         UIThreadsUtil.mustBeSwingThread();
 
-        translationEditor.checkAndFixCaret();
+        editor.checkAndFixCaret();
 
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
             // add control bidi chars around
             String t = SegmentBuilder.BIDI_RLM + SegmentBuilder.BIDI_LRM + tag + SegmentBuilder.BIDI_LRM
                     + SegmentBuilder.BIDI_RLM;
-            translationEditor.replaceSelection(t);
+            editor.replaceSelection(t);
         } else {
             // just insert tag
-            translationEditor.replaceSelection(tag);
+            editor.replaceSelection(tag);
         }
     }
 
@@ -2152,7 +2110,7 @@ public class EditorController implements IEditor {
     public void undo() {
         UIThreadsUtil.mustBeSwingThread();
 
-        translationEditor.undoManager.undo();
+        editor.undoManager.undo();
     }
 
     /**
@@ -2161,7 +2119,7 @@ public class EditorController implements IEditor {
     public void redo() {
         UIThreadsUtil.mustBeSwingThread();
 
-        translationEditor.undoManager.redo();
+        editor.undoManager.redo();
     }
 
     /**
@@ -2170,7 +2128,7 @@ public class EditorController implements IEditor {
     public String getSelectedText() {
         UIThreadsUtil.mustBeSwingThread();
 
-        return dockableSelected ? translationEditor.getSelectedText() : null;
+        return dockableSelected ? editor.getSelectedText() : null;
     }
 
     /** Loads Instant start article */
@@ -2189,7 +2147,7 @@ public class EditorController implements IEditor {
                 introPane.setPage(uri.toURL());
             }
         } catch (IOException e) {
-            // editorScroller.setViewportView(translationEditor);
+            // editorScroller.setViewportView(editor);
         }
 
         emptyProjectPaneTitle = OStrings.getString("TF_INTRO_EMPTYPROJECT_FILENAME");
@@ -2258,7 +2216,7 @@ public class EditorController implements IEditor {
     }
 
     public void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
-        translationEditor.registerPopupMenuConstructors(priority, constructor);
+        editor.registerPopupMenuConstructors(priority, constructor);
     }
 
     @Override
@@ -2274,16 +2232,16 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         if (entriesFilterControlComponent != null) {
-            translationPane.remove(entriesFilterControlComponent);
+            pane.remove(entriesFilterControlComponent);
         }
 
         entriesFilter = filter;
         entriesFilterControlComponent = filter.getControlComponent();
-        translationPane.add(entriesFilterControlComponent, BorderLayout.NORTH);
-        translationPane.revalidate();
+        pane.add(entriesFilterControlComponent, BorderLayout.NORTH);
+        pane.revalidate();
 
         SourceTextEntry curEntry = getCurrentEntry();
-        Document3 doc = translationEditor.getOmDocument();
+        Document3 doc = editor.getOmDocument();
         IProject project = Core.getProject();
         // Prevent NullPointerErrors in loadDocument. Only load if there is a document.
         if (doc != null && project != null && project.getProjectFiles() != null && curEntry != null) {
@@ -2319,13 +2277,13 @@ public class EditorController implements IEditor {
 
         entriesFilter = null;
         if (entriesFilterControlComponent != null) {
-            translationPane.remove(entriesFilterControlComponent);
-            translationPane.revalidate();
+            pane.remove(entriesFilterControlComponent);
+            pane.revalidate();
             entriesFilterControlComponent = null;
         }
 
         int curEntryNum = getCurrentEntryNumber();
-        Document3 doc = translationEditor.getOmDocument();
+        Document3 doc = editor.getOmDocument();
         IProject project = Core.getProject();
         // `if` check is to prevent NullPointerErrors in loadDocument.
         // Only load if there is a document and the project is loaded.
@@ -2380,7 +2338,7 @@ public class EditorController implements IEditor {
 
     @Override
     public void windowDeactivated() {
-        translationEditor.autoCompleter.setVisible(false);
+        editor.autoCompleter.setVisible(false);
     }
 
     /**
@@ -2409,7 +2367,7 @@ public class EditorController implements IEditor {
     @Override
     public AlphabeticalMarkers getAlphabeticalMarkers() {
 
-        return new AlphabeticalMarkers(translationScrollPane) {
+        return new AlphabeticalMarkers(scrollPane) {
             static final int UPPER_GAP = 5;
 
             @Override
@@ -2421,13 +2379,13 @@ public class EditorController implements IEditor {
                     return map;
                 }
 
-                JViewport viewport = translationScrollPane.getViewport();
+                JViewport viewport = scrollPane.getViewport();
                 int x = sourceLangIsRTL
-                        ? translationEditor.getWidth() - translationEditor.getInsets().right
-                        : translationEditor.getInsets().left;
+                        ? editor.getWidth() - editor.getInsets().right
+                        : editor.getInsets().left;
                 Rectangle viewRect = viewport.getViewRect();
 
-                // expand a bit rect for the segment at the upper end of the translationEditor.
+                // expand a bit rect for the segment at the upper end of the editor.
                 viewRect.setBounds(viewRect.x, viewRect.y - UPPER_GAP,
                                     viewRect.width, viewRect.height + UPPER_GAP);
 
@@ -2437,7 +2395,7 @@ public class EditorController implements IEditor {
                         continue;
                     }
                     try {
-                        Point location = translationEditor.modelToView(sb.getStartPosition()).getLocation();
+                        Point location = editor.modelToView(sb.getStartPosition()).getLocation();
                         if (viewRect.contains(location)) { // location is viewable
                             int segmentNo = sb.segmentNumberInProject;
                             location.translate(0, -viewPosition.y); // adjust to vertically view position
@@ -2455,7 +2413,7 @@ public class EditorController implements IEditor {
 
     @Override
     public IAutoCompleter getAutoCompleter() {
-        return translationEditor.autoCompleter;
+        return editor.autoCompleter;
     }
 
     @Override
@@ -2465,8 +2423,8 @@ public class EditorController implements IEditor {
 
     @Override
     public JEditorPane getEditor(EditorType type){
-        // Only support one translationEditor
-        return translationEditor;
+        // Only support one editor
+        return editor;
     }
 
     @Override

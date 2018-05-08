@@ -69,7 +69,7 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
      * thread, like spell checking. Version changed(in Swing thread only) each
      * time when entry drawn, and when user edits it (for active entry).
      */
-    volatile long displayVersion;  // todo CLG should each translationEditor have it's own disaply version?  likely something I don't understand here... Maybe display version belongs to the Controller?
+    volatile long displayVersion;  // CLG should each builder/editor have it's own display version?
 
     /** Source text of entry with internal bidi chars, or null if not displayed. */
     String sourceText;
@@ -595,7 +595,7 @@ public abstract class AbstractSegmentBuilder implements ISegmentBuilder {
 
     /**
      * Make some changes of segment mark from resource bundle for display
-     * correctly in translationEditor.
+     * correctly in editor.
      *
      * @return changed mark text
      */

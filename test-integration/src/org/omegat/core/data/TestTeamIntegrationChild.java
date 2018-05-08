@@ -407,6 +407,11 @@ public final class TestTeamIntegrationChild {
         }
 
         @Override
+        public ISegmentBuilder getSegmentAtIndex(EditorType type, int index) {
+            return null;
+        }
+
+        @Override
         public SegmentBuilder getCurrentSegmentBuilder() {
             return null;
         }

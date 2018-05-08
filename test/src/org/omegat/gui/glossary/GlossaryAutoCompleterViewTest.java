@@ -372,6 +372,11 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             }
 
             @Override
+            public ISegmentBuilder getSegmentAtIndex(EditorType type, int index) {
+                return null;
+            }
+
+            @Override
             public SegmentBuilder getCurrentSegmentBuilder() {
                 return null;
             }

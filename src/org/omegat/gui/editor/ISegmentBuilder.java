@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Interface displaying segments in an translationEditor.
+ * Interface displaying segments in an editor.
  *
  * CLG:  Not sure if we should do this, but thought the old SegmentBuilder will become a CompoundSegmentBuilder
  * (or better name?) since it creates a compound view of both the source and translation(s)

@@ -55,7 +55,7 @@ public class DocBookFilterTest extends TestFilterBase {
     public void testParseIntroLinux() throws Exception {
         List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/Intro-Linux/abook.xml");
         assertTrue("Message not exist, i.e. entities not loaded",
-                lines.contains("Why should I use an translationEditor?"));
+                lines.contains("Why should I use an editor?"));
     }
 
     @Test

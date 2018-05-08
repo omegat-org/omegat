@@ -311,8 +311,6 @@ public final class MainWindowUI {
      */
     private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
         try (InputStream in = new FileInputStream(uiLayoutFile)) {
-            // todo clg where is UI layout file at?
-            System.out.println("ClG XML layout file: " + uiLayoutFile.toString() );
             mainWindow.desktop.readXML(in);
         } catch (Exception ex) {
             Log.log(ex);

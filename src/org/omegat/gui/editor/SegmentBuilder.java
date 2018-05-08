@@ -28,6 +28,7 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.*;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -35,6 +36,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -178,7 +180,6 @@ public class SegmentBuilder implements ISegmentBuilder {
         createSegmentElement(isActive, 0, trans);
     }
 
-    // TODO CLG: THIS IS WHERE THE DOCUMENT IS CHANGED...
     public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -189,7 +190,7 @@ public class SegmentBuilder implements ISegmentBuilder {
         StaticUIUtils.setCaretUpdateEnabled(controller.getEditor(IEditor.EditorType.TRANSLATION), false);
         try {
             try {
-                if (beginPosP1 != null && endPosM1 != null) {// CLG note this removes translation (current) from the Doc via DocumentFilter3, and the modified info string
+                if (beginPosP1 != null && endPosM1 != null) {
                     // remove old segment
                     // check/handle negative offset
                     int beginOffset = /*beginPosP1.getOffset() - 1*/ getStartPosition();
@@ -261,7 +262,6 @@ public class SegmentBuilder implements ISegmentBuilder {
     /**
      * Create active segment for given entry
      */
-    // CLG set the active segment, add the translation marker (if enabled)
     private void createActiveSegmentElement(TMXEntry trans) throws BadLocationException {
         try {
             if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())
@@ -396,7 +396,39 @@ public class SegmentBuilder implements ISegmentBuilder {
         }
     }
 
-    // todo
+    // Bit of a hack for side by side editing... this adjusts the position of the translation text to match the same
+    // source segment, when the  sof the to use a a proof of concept for side by side editing and alignment
+    void adjustSideBySidePosition(double transDocLength, double sourceDocLength){
+
+        try{
+
+            // Minor validation, should do more...
+            if( !(controller instanceof  SideBySideEditorController)){
+                return;
+            }
+
+            // insert extra newlines in the translation pane
+            doc.trustedChangesInProgress = true;
+            for(; transDocLength  < sourceDocLength; transDocLength++){
+                insert("\n", null);
+            }
+            doc.trustedChangesInProgress = false;
+            // Update the end position
+            endPosM1 = doc.createPosition(offset - 1);
+
+
+
+        }
+        catch (Exception e){
+            // ADD BETTER ERROR HANDLING TO AVOID THESE...
+            LOGGER.warning("INVALID location");
+        }
+
+    }
+
+
+
+
     public SourceTextEntry getSourceTextEntry() {
         return ste;
     }
@@ -624,12 +656,12 @@ public class SegmentBuilder implements ISegmentBuilder {
 
     private void insert(String text, AttributeSet attrs) throws BadLocationException {
         doc.insertString(offset, text, attrs);
-        offset += text.length();
+        offset += text.length();  // CLG: is it correct to assume the text was inserted and the offset should be adjusted?
     }
 
     /**
      * Make some changes of segment mark from resource bundle for display
-     * correctly in translationEditor.
+     * correctly in editor.
      *
      * @return changed mark text
      */

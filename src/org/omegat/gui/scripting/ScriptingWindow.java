@@ -378,8 +378,8 @@ public class ScriptingWindow {
             Class<?> richScriptEditorClass = Class.forName("org.omegat.gui.scripting.RichScriptEditor");
             return (AbstractScriptEditor) richScriptEditorClass.newInstance();
         } catch (ClassNotFoundException e) {
-         // RichScriptEditor not present, fallback to the standard translationEditor
-            logResult("RichScriptEditor not present, fallback to the standard translationEditor");
+         // RichScriptEditor not present, fallback to the standard editor
+            logResult("RichScriptEditor not present, fallback to the standard editor");
         } catch (InstantiationException | IllegalAccessException e) {
             logResult("Error loading RichScriptEditor: ", e);
         }
@@ -771,7 +771,7 @@ public class ScriptingWindow {
         public void actionPerformed(ActionEvent e) {
             m_currentScriptItem = null;
             // TODO Check if the current script needs saving before clearing the
-            // translationEditor.
+            // editor.
             m_txtScriptEditor.getTextArea().setText("");
             m_txtScriptEditor.getTextArea().setCaretPosition(0);
             // Avoid selecting scripts in the list after hitting Ctrl+N

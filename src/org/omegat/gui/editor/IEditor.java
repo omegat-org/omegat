@@ -484,6 +484,8 @@ public interface IEditor {
 
     public SegmentBuilder getSegmentAtIndex(int index);
 
+    public ISegmentBuilder getSegmentAtIndex(EditorType type, int index);
+
     public SegmentBuilder getCurrentSegmentBuilder();
 
     /**

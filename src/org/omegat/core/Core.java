@@ -264,18 +264,16 @@ public final class Core {
 
         // 3. Initialize other components. They add themselves to the main window.
         if(IEditor.EditorMode.DEFAULT == mode) {
-            editor = new EditorController(me);
+            //was editor = new EditorController(me, IEditor.EditorMode.DEFAULT);
+            editor = new SideBySideEditorController(me, IEditor.EditorMode.DEFAULT);
             SwingUtilities.invokeLater(() -> {
-                // When using the EditorController be sure to set/restore these:
                 editor.getSettings().setDisplayEditorSegmentSources(true);
                 editor.getSettings().setDisplayBoldSources(true);
             });
         }
         else {
-          //editor = new SideBySideEditorController_old(me);
-          editor = new SideBySideEditorController(me);
+          editor = new SideBySideEditorController(me, IEditor.EditorMode.SIDE_BY_SIDE);
             SwingUtilities.invokeLater(() -> {
-                // When using the EditorController be sure to set/restore these:
                 editor.getSettings().setDisplayEditorSegmentSources(false);
                 editor.getSettings().setDisplayBoldSources(false);
                 editor.getSettings().setDisplayBoldActiveSources(false);

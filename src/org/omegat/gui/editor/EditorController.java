@@ -144,7 +144,7 @@ public class EditorController implements IEditor, IPaneMenu {
      * Creates the "settings" button on the Editor's toolbar.
      */
     public void populatePaneMenu(JPopupMenu menu) {
-        menu.addSeparator();
+        //menu.addSeparator();
 
         final JMenuItem toggleMode = new JCheckBoxMenuItem(OStrings.getString("GUI_EDITOR_SETTINGS_MODE"));
         // set selection? toggleMode.setSelected(Preferences.isPreference(Preferences.TOGGLE_EDITOR_MODE));

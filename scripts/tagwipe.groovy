@@ -650,6 +650,7 @@ def _clean(p, pat) {
         )
 
         pack()
+        setLocationRelativeTo(null)
     }
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {

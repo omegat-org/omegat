@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searches">
+  <title>Pretraživanja<indexterm class="singular">
+      <primary>Pretraživanja</primary>
+    </indexterm></title>
+
+  <section id="search.window">
+    <title>Prozor za pretraživanje<indexterm class="singular">
+        <primary>Prečaci</primary> <secondary>Pretraživanje – Ctrl+F</secondary>
+      </indexterm></title>
+
+    <para>Pozor za pretraživanje možete otvoriti kombinacijom tipki <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, a zatim upisati riječ ili frazu koju želite pronaći u okvir <emphasis>Traži</emphasis>.</para>
+
+    <para>Drugi je način da označite riječ ili frazu u oknu za obradu, oknu djelomičnih podudaranja ili oknu glosara pa koristite kombinaciju tipki <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Time se označena riječ ili fraza automatski upisuje u okvir <emphasis>Traži</emphasis>. Možete imati nekoliko istodobno otvorenih prozora za pretraživanje, ali bi ipak bilo bolje da ih zatvarate kada vam više ne budu od koristi kako se ne bi gomilali bez potrebe.</para>
+
+    <para>Zadnjih 10 pretraživanja dostupno je putem strelice za otvaranje padajućega izbornika okvira <emphasis>Traži</emphasis>.</para>
+
+    <para>Prozor za pretraživanje ima svoje izbornike:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Datoteka &gt; Traži odabrano (<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>): vraćanje na polje za pretraživanje i odabir njegovoga sadržaja.</para>
+      </listitem>
+
+      <listitem>
+        <para>Datoteka &gt; Zatvori (<keycombo> <keycap>Ctrl</keycap> <keycap>W</keycap> </keycombo>): zatvaranje prozora za pretraživanje (jednako kao tipkom <keycap>Esc</keycap>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Obrada &gt; Umetni izvorišni tekst (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>I</keycap> </keycombo>): umetanje tekućega izvorišnog segmenta.</para>
+      </listitem>
+
+      <listitem>
+        <para>Obrada &gt; Zamijeni izvorišnim tekstom (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>R</keycap> </keycombo>): zamjena tekućim izvorišnim segmentom.</para>
+      </listitem>
+
+      <listitem>
+        <para>Obrada &gt; Dodavanje termina u glosar (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>): izrada nove natuknice glosara.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="using.wild.cards">
+    <title>Korištenje zamjenskih znakova<indexterm class="singular">
+        <primary>Pretraživanja</primary> <secondary>Korištenje zamjenskih znakova</secondary>
+      </indexterm></title>
+
+    <para>Zamjenske znakove „*” i „?” možete koristiti za pretraživanje po istovjetnosti i po ključnim riječima. Njihova je funkcionalnost već poznata korisnicima programa MS Word:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Znak „*” zamjenjuje nula ili više znakova, i to od tekućega položaja u odabranoj riječi do njenoga konca. Primjerice, tako bi izraz za pretraživanje „<literal>slika*</literal>” odgovarao riječima „<literal>slika</literal>”, „<literal>slikar</literal>” i „<literal>slikarstvo</literal>”.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Znak „?” zamjenjuje bilo koji znak, i to isključivo samo jedan. Primjera radi, „<literal>slika?</literal>” bi odgovarala riječima „<literal>slikar</literal>” i „<literal>slikam</literal>”, no ne i riječi „<literal>slikarstvo</literal>”.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Pronađeni rezultati ističu se prikazom u obliku podebljanoga plavog teksta. Imajte na umu da znakovi „*” i „?” imaju posebno značenje u regularnim izrazima, pa stoga ovdje opisano pretraživanje s pomoću zamjenskih znakova vrijedi samo za za pretraživanje po istovjetnosti i po ključnim riječima (pogledajte niže u tekstu).</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Metode i mogućnosti pretraživanja<indexterm class="singular">
+        <primary>Pretraživanja</primary> <secondary>Metode i mogućnosti</secondary>
+      </indexterm></title>
+
+    <para>Željenu metodu odabirete putem kružića za označavanje. Na raspolaganju su sljedeće metode pretraživanja:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Pretraživanje po istovjetnosti</term>
+
+        <listitem>
+          <para>Služi za traženje segmenata koji su u potpunosti istovjetni upisanome nizu za pretraživanje. Kada pretraživanjem po istovjetnosti tražimo neku frazu, tj. nekoliko odabranih riječi, program će je pronaći samo ako postoji takav potpuno istovjetan niz riječi. Tako ćemo, primjerice, pretraživanjem niza <literal>otvoriti datoteku</literal> pronaći sve pojavnice istoga niza <emphasis><literal>otvoriti datoteku</literal></emphasis>, no ne i one koje glase <emphasis><literal>datoteka otvorena</literal></emphasis> ili <emphasis><literal>otvoriti ulaznu datoteku</literal></emphasis>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Pretraživanje po ključnim riječima</term>
+
+        <listitem>
+          <para>Služi za traženje segmenata koji sadržavaju sve upisane ključne riječi, i to bez obzira na redoslijed. Pretraživanjem po ključnim riječima pronaći ćemo bilo koji broj pojedinačnih riječi u bilo kojemu redoslijedu. OmegaT prikazuje popis svih segmenata koji sadržavaju sve upisane riječi. Pretraživanje po ključnim riječima slično je pretraživanju „sa svim riječima”, koje koristimo u pretraživačima weba, kao što je Google (po logici „AND”). Tako ćemo, primjerice, traženjem po ključnim riječima za izraz <emphasis><literal>otvoriti datoteku</literal></emphasis> pronaći sve pojavnice niza <emphasis><literal>otvoriti datoteku</literal>,</emphasis>, kao i <emphasis><literal>datoteku otvoriti</literal>, <literal>otvoriti ulaznu datoteku</literal>, <literal>datoteku nije moguće otvoriti</literal></emphasis> itd.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">Regularni izrazi</emphasis></term>
+
+        <listitem>
+          <para>Niz za pretraživanje se tretira kao regularni izraz. Primjerice, nizom za pretraživanje - [a-zA-Z]+[öäüqwß] - tražimo riječi u odredišnim segmentima koje sadržavaju potencijalno dvojbene njemačke znakove. Regularni izrazi nude velike mogućnosti traženja pojavnica upisanih nizova. Više pojedinosti naći ćete u poglavlju<link linkend="chapter.regexp"> Regularni izrazi</link>.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Pored navedenih metoda možete postavljati i sljedeće funkcije:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Razlikovanje velikih/malih slova</emphasis>: pretraživanje se obavlja uz strogo poštivanje veličine slova.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Razmak uključuje i nbsp</emphasis>: označavanjem ove funkcije znak razmaka iz upisanoga niza za pretraživanje obuhvaća i običan razmak i neodvojivi razmak (\u00A).</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">U izvorniku</emphasis>: pretraživanje izvorišnih segmenata.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">U prijevodima</emphasis>: pretraživanje odredišnih segmenata.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">U bilješkama</emphasis>: pretraživanje bilješki segmenata.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">U komentarima</emphasis>: pretraživanje komentara segmenata.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Prevedeno ili neprevedeno</emphasis>: pretraživanje i prevedenih i neprevedenih segmenata.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Prevedeno</emphasis>: pretraživanje samo prevedenih segmenata.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Neprevedeno</emphasis>: pretraživanje samo neprevedenih segmenata.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Prikaz: svi pronađeni segmenti</emphasis>: označavanjem ove funkcije prikazuju se svi segmenti pojedinačno, čak i kada se pojavljuju više puta u jednome ili više dokumenata.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Prikaz: file names</emphasis>: odabirom ove funkcije iznad svakoga se rezultata prikazuje naziv datoteke i kojoj je pronađen svaki pojedini segment.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Pretraži Projekt</emphasis>: označite potvrdni kvadratić <emphasis>Memorija</emphasis> ako želite pretraživanjem obuhvatiti i memoriju projekta, tj. datoteku project_save.tmx file. Označite potvrdni kvadratić <emphasis>TM-ovi</emphasis> ako želite pretraživanjem obuhvatiti i prijevodne memorije iz mape <filename>tm</filename>. Označite potvrdni kvadratić <emphasis>Glosari</emphasis> ako želite pretraživanjem obuhvatiti i glosare iz mape <filename>glossary</filename>.</para>
+      </listitem>
+
+      <listitem>
+        <para>Označite li kružić <emphasis role="bold">Datoteke</emphasis>, možete odabrati pretraživanje jedne datoteke ili mape s više datoteka. Pri pretraživanju datoteka (za razliku od prijevodnih memorija), OmegaT ograničava traženje na datoteke u formatima izvorišnih datoteka. Dakle, premda je OmegaT itekako dobro programirana za manipuliranje datotekama <filename> tmx</filename>, ipak ih ne uključuje u pretraživanje datoteka.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Putem gumba <guibutton>Prikaz naprednih mogućnosti</guibutton> možete odabrati dodatne kriterije, npr. autora ili revidenta prijevoda, datum prijevoda, isključivanje segmenata „siročića” itd. Označavanjem funkcije <emphasis>Bez razlikovanja širine znakova</emphasis> pretražuju se oblici pune širine (znakovi za CJK), kao i oni poluširoki.</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>Prikaz rezultata pretraživanja</title>
+
+    <para>Nakon pritiska na gumb za pretraživanje po upisivanju niza u polje za pretraživanje prikazat će se svi segmenti iz projekta koji sadržavaju upisani niz. Budući da <application>OmegaT</application> tretira istovjetne segmente kao jednu pojavnicu, prikazuje se samo prvi jednokratni segment. Segmenti se prikazuju prema redoslijedu pojavljivanja u projektu. Prevedeni segmenti se prikazuju s izvornim tekstom i prevedenim tekstom ispod njega, a neprevedeni segmenti samo kao izvorišni tekst.</para>
+
+    <para>Dvostrukim pritiskom na željeni segment otvaramo ga u oknu za obradu, gdje ga možemo revidirati. Uključivanjem funkcije <emphasis role="bold">Automatska sinkronizacija s oknom za obradu</emphasis> dovoljan je jedan pritisak tipkom miša. Zatim se možemo vratiti na prozor za pretraživanje radi daljnjega pregledavanja segmenata i, primjerice, eventualnoga ispravljanja terminologije.</para>
+
+    <para>U prozoru za pretraživanje možemo koristiti standardne prečace (<keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo>) za pomicanje sa segmenta na segment.</para>
+
+    <para>Istodobno možemo imati nekoliko otvorenih prozora za pretraživanje. Njihov sadržaj možemo lako i brzo uočiti putem njihovih naslova, koje čine sami nizovi za pretraživanje.</para>
+  </section>
+
+  <section id="search.filter">
+    <title>Filtriranje pojavnica prilikom pretraživanja u oknu za obradu</title>
+
+    <para>Radi lakšega snalaženja s ponuđenim rezultatima pretraživanja, možemo suziti njihov prikaz u oknu za obradu. Broj prikazanih rezultata u oknu za obradu možemo ograničiti na one koji se podudaraju s upisanim nizom za pretraživanje putem gumba <emphasis role="bold">Filtriraj</emphasis> na dnu prozora za pretraživanje. Za prijelaz na sljedeći (neprevedeni) segment koji odgovara kriterijima pretraživanja možete koristiti uobičajene načine pomicanja.</para>
+
+    <para>Napomene:</para>
+
+    <itemizedlist>
+      <listitem>Moguće je da je pretraživanje ograničeno na 1 000 pronađenih pojavnica koje se prikazuju u oknu za obradu, što možda nije dovoljno za neke uobičajene termine ili fraze.</listitem>
+
+      <listitem>Za datoteke u kojima nema pronađenih odgovarajućih pojavnica prikazuje se da nema rezultata.</listitem>
+
+      <listitem>Duplikati koji se uklanjaju pri pretraživanju ne prikazuju se u oknu za obradu.</listitem>
+    </itemizedlist>
+
+    <para>Filtar možete jednostavno isključiti putem gumba <emphasis role="bold">Ukloni filtar</emphasis> u zaglavlju okna za obradu ili pak ponovnim učitavanjem projekta.</para>
+  </section>
+</chapter>

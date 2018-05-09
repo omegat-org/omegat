@@ -166,9 +166,42 @@
           <listitem>
             <para>Visio (*.vxd)</para>
           </listitem>
+
+          <listitem>
+            <para>Java property XML (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para> Schematron (*.sch)</para>
+          </listitem>
+
+          <listitem>
+            <para>RELAX NG schema pro XML (*.rng)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>Jiné typy souborů obsahujících prostý text mohou být zpracovány programem OmegaT pomocí asociování své koncovky k podporovanému typu souboru, za předpokladu, že budou správně segmentovány podle odpovídajících segmentačních pravidel.</para>
+    </section>
+    <section>
+		<title>Soubory PDF<indexterm class="singular">
+          <primary>Cílové soubory</primary> <secondary>textové soubory PDF</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Cílové soubory</primary> <secondary>soubory PDF</secondary>
+        </indexterm></title>
+  <para>Soubory PDF představují zvláštní případ Obsahují informaci k formátování textu, ale taková informace nemůže být znovu použita aplikací <application>OmegaT</application> při tvoření cílových souborů. Tudíž jsou soubory PDF zpracovávány jako soubory prostého textu a výstup představují soubory s neformátovaným prostým textem.</para>
+  <para>Pokud potřebujte reprodukovat formátování textu (a nebo také jiné objekty jako kresby) ve svém překladu, tak se nabízejí tři způsoby:</para>
+  <orderedlist>
+    <listitem>
+      <para>Použijte výchozí filtr v <application>OmegaT</application> (vstup PDF), přeložte, vytvořte cílový soubor (bude to soubor s prostým textem) a přidejte důležité formátování a položky ručně.</para>
+    </listitem>
+    <listitem>
+      <para>Použití filtru Iceni Infix Viz <ulink url="https://omegat.org/howtos/iceni_infix.html">Jak na to - překlad souborů PDF za použití Iceni Infix a OmegaT</ulink>.</para>
+    </listitem>
+    <listitem>
+      <para>Importujte zdrojové soubory do <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>, uložte je jako soubor s koncovkou ODG, přeložte, vyexportujte do PDF dle potřeby.</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">Pozor:</emphasis> výše zmíněné informace se vztahují pouze na soubory PDF obsahující textovou vrstvu. Pokud máte soubor PDF vytvořený z naskenovaných stránek (někdy se těmto stránkám řáká 'mrtvá' PDF), pak poutřebujete použít program OCR (optical character recognition - optické rozpoznání znaků) pro rozeznání textu a převod souboru do formátu, který umí OmegaT zpracovat.</para>
     </section>
   </section>
 
@@ -283,12 +316,12 @@
         </indexterm></title>
 
       <para>Když se vytváří přeložené dokumenty, směr zobrazení bude stejný jako u výchozího dokumentu. Pokud byl výchozí dokument typu LTR, směr zobrazování cílového dokumentu se musí změnit ručně na RLT v konkrétní aplikaci, která umí takovéto dokumenty otevírat a zpracovávat. Každý výstupní formát má specifické způsoby jak pracovat se zobrazením RTL; více detailů najdete v nápovědě pro konkrétní aplikace.</para>
-      
+
       <para>U souborů .docx byla spousta změn již provedena automaticky:<itemizedlist>
-      <listitem>Odstavce, oddíly a tabulky jsou nastaveny na oba směry.</listitem>
-      <listitem>Ucelené textové prvky jsou nastaveny na RTL</listitem>     
-      </itemizedlist>
-      </para>
+          <listitem>Odstavce, oddíly a tabulky jsou nastaveny na oba směry.</listitem>
+
+          <listitem>Ucelené textové prvky jsou nastaveny na RTL</listitem>
+        </itemizedlist></para>
 
       <para>Abyste se vyhnuli měnění zobrazovacích parametrů cílového souboru při každém otevření souboru, je u vybraných typů možné změnit zobrazovací parametry u zdrojového souboru a to tak, že tyto parametry budou přeneseny na cílový soubor. Takové úpravy je možné provádět například u souborů OpenOffice.org.</para>
     </section>

@@ -173,6 +173,8 @@ public final class Preferences {
 
     public static final String ALLOW_BELAZAR_TRANSLATE = "allow_belazar_translate";
 
+    public static final String ALLOW_DEEPL_TRANSLATE = "allow_deepl_translate";
+
     public static final String ALLOW_APERTIUM_TRANSLATE = "allow_apertium_translate";
 
     public static final String ALLOW_MICROSOFT_TRANSLATOR_AZURE = "allow_microsoft_translator_azure";

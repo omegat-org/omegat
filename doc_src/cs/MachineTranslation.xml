@@ -94,6 +94,42 @@
   </section>
 
   <section>
+    <title>MyMemory (stroj)<indexterm class="singular">
+        <primary>Strojový překlad</primary> <secondary>MyMemory</secondary>
+      </indexterm></title>
+
+    <para>Ve výchozím nastaení umožňuje MyMemory maximálně 100 dotazů za den. Při zadání emailové adresy je možno použít 1000 dotazů za den, místo původních 100.</para>
+
+    <para>Existují minimálně 3 způsoby, jak specifikovat adresu:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para>v souboru OmegaT.l4J.ini (pouze Windows), změňte:</para>
+
+          <para># MyMemory email</para>
+
+          <para>na:</para>
+
+          <para>MyMemory vase@emailova-adresa.com</para>
+        </listitem>
+
+        <listitem>
+          <para>Při spouštění OmegaT z příkazového řádku, specifikujte v příkazu:</para>
+
+          <para>-Dmymemory.api.email=your@email-address.com</para>
+        </listitem>
+
+        <listitem>
+          <para>ve spouštěči Kaptain (pouze v Linuxu), zadejte adresu do odpovídajícího pole v záložece „Online služby“.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>MyMemory nabízí také <emphasis role="bold">Lidský překlad</emphasis> s původem od profesních překladatelů, LSP, zákazníků a vícejazyčných webů. Abyste se dostali k těmto překladům, musíte nahrát zdrojový soubor <ulink url="http://mymemory.translated.net/">na jejich stránku</ulink>, která vygeneruje soubor TMX. Pak je nutno umístit tento soubor TMX do adresáře /tm/ nebo /tm/auto ve svém projektu OmegaT.</para>
+
+    <para>MyMemory tedy nabízí možnost spravovat <emphasis role="bold">soukromé paměti TM</emphasis>. Poznámka: OmegaT s nimi nespolupracuje dynamicky (musíte ručně exportovat / importovat soubory TMX).</para>
+  </section>
+
+  <section>
     <title>Překladač Microsoft Translator<indexterm class="singular">
         <primary>Strojový překlad</primary> <secondary>Překladač Microsoft Translator</secondary>
       </indexterm></title>

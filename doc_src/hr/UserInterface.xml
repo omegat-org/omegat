@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>Korisničko sučelje</title>
+
+  <section id="user.interface.items">
+    <title>Glavni prozor programa OmegaT i ostali prozori i dijaloški okviri</title>
+
+    <para>Glavni prozor programa OmegaT sadržava glavni izbornik, traku stanja i nekoliko okana. Raspoloživi su i dodatni prozori te dijaloški okviri, a koji služe za mijenjanje postavki projekata u okviru programa OmegaT. Slijedi sažeti prikaz njihove namjene i načina korištenja.</para>
+
+    <table colsep="0" rowsep="0">
+      <title>Glavni prozor programa OmegaT<indexterm class="singular">
+          <primary>Korisničko sučelje</primary> <secondary>Glavni prozor programa OmegaT</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Okno za obradu</guimenuitem></entry>
+
+            <entry>služi za upisivanje i mijenjanje prijevoda</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno podudaranja</guimenuitem></entry>
+
+            <entry>prikaz najsličnijih segmenata iz prijevodnih memorija</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno glosara</guimenuitem></entry>
+
+            <entry>prikaz terminologije pronađene za elemente tekućega segmenta</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno rječnika</guimenuitem></entry>
+
+            <entry>prikaz natuknica pronađenih u rječnicima za elemente tekućega segmenta</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno strojnoga prijevoda</guimenuitem></entry>
+
+            <entry>prikaz rezultata strojnoga prevođenja</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno bilješki</guimenuitem></entry>
+
+            <entry>bilješke koje se odnose na tekući segment, npr. alternativni prijevodi ili tekući ključ u slučaju datotečnih formata ključ=vrijednost</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno komentara</guimenuitem></entry>
+
+            <entry>komentari autora u datotekama PO, ili naziv atributa koji se prevodi (u XHTML-u)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table colsep="0" rowsep="0">
+      <title>Ostali prozori<indexterm class="singular">
+          <primary>Korisničko sučelje</primary> <secondary>Ostali prozori</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Prečaci</primary> <secondary>Provjera valjanosti oznaka teksta – Ctrl+Shift+V</secondary>
+              </indexterm>Prozor za provjeru valjanosti oznaka teksta</guimenuitem></entry>
+
+            <entry><para>služi za provjeru valjanosti oznaka teksta (otvara se kombinacijom tipki <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>V</keycap> </keycombo>, a zatvara tipkom <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Prečaci</primary> <secondary>Pomoć – F1</secondary>
+              </indexterm>Preglednik pomoći</guimenuitem></entry>
+
+            <entry><para>služi za prikaz priručnika (otvara se tipkom <keycap>F1</keycap>)<keycap/></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Prozor statističkih podataka</guimenuitem></entry>
+
+            <entry><para>služi za otvaranje prozora za prikaz statističkih podataka projekta (otvara se putem izbornika <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Izbornik Alati</primary> <secondary>statistički podaci</secondary>
+                  </indexterm>Alati</guimenu> <guimenuitem>Statistika.</guimenuitem> </menuchoice></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Prozor statistike podudaranja</guimenuitem></entry>
+
+            <entry><para>služi za prikaz statističkih podataka o podudaranjima za projekt (otvara se putem izbornika <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Izbornik Alati</primary> <secondary>Statistika podudaranja</secondary>
+                  </indexterm>Alati</guimenu> <guimenuitem>Statistika podudaranja</guimenuitem></menuchoice>.</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table border="0" colsep="0" rowsep="0">
+      <title>Dijaloški okviri postavki<indexterm class="singular">
+          <primary>Korisničko sučelje</primary> <secondary>Dijaloški okviri postavki</secondary> <seealso>Postavke projekta</seealso>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Svojstva projekta<indexterm class="singular">
+                <primary>Izbornik Projekt</primary> <secondary>Svojstva</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Prečaci</primary> <secondary>Svojstva projekta – Ctrl+E</secondary>
+              </indexterm></entry>
+
+            <entry>služe za mijenjanje mapa i jezika projekta (otvara se kombinacijom tipki <guimenuitem>Ctrl+E </guimenuitem>ili izbornika <menuchoice> <guimenu>Projekt</guimenu> <guimenuitem>Svojstva...</guimenuitem> </menuchoice>, a zatvara tipkom <keycap>Esc)</keycap></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Font<indexterm class="singular">
+                <primary>Font</primary>
+              </indexterm></guimenuitem></entry>
+
+            <entry><para>služi za mijenjanje fonta koji se koristi u programu <application>OmegaT</application> za prikaz izvorišnoga teksta, prijevoda, podudaranja i termina iz glosara (otvara se putem izbornika <menuchoice> <guimenu>Mogućnosti</guimenu> <guimenuitem>Font...</guimenuitem> </menuchoice>, a zatvara tipkom <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Datotečni filtri<indexterm class="singular">
+                <primary>Datotečni filtri</primary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>služe za manipuliranje podržanim datotečnim formatima (otvara se putem izbornika <menuchoice> <guimenu>Mogućnosti</guimenu> <guimenuitem>Datotečni filtri...</guimenuitem> </menuchoice>, a zatvara tipkom <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Segmentacija<indexterm class="singular">
+                <primary>Segmentacija</primary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>služi za mijenjanje načina segmentiranja teksta (otvara se putem izbornika <menuchoice> <guimenu>Mogućnosti</guimenu> <guimenuitem>Segmentacija</guimenuitem> </menuchoice>, a zatvara tipkom <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Funkcioniranje obrade<indexterm class="singular">
+                <primary>Funkcioniranje obrade</primary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>služi za mijenjanje načina funkcioniranja programa <application>OmegaT</application> prilikom prijelaza od segmenta na segment (otvara se putem izbornika <menuchoice> <guimenu>Mogućnosti</guimenu> <guimenuitem>Funkcioniranje...</guimenuitem> </menuchoice>, a zatvara tipkom <keycap>Esc</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title><application>OmegaT</application> – glavni prozor<indexterm class="singular">
+        <primary>Prozori i okna u programu OmegaT</primary> <secondary>Glavni prozor</secondary>
+      </indexterm></title>
+
+    <figure id="OmegaT.main.window.figure">
+      <title>Glavni prozor programa OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Glavni se prozor sastoji od nekoliko okana, glavnoga izbornika i trake stanja. Možete mijenjati gabarite svakoga okna ili ga čak premjestiti u zaseban prozor pritiskom na traku s nazivom okna i odvlačenjem na novu lokaciju. U gornjemu desnom kutu okana nalaze se različiti simboli u ovisnosti o njihovome stanju.</para>
+
+    <note>
+      <para>Ako ne vidite sva okna (bilo otvorena ili smanjena), možete ih vratiti u stanje definirano instalacijom putem izbornika <guisubmenu>Mogućnosti &gt; Vrati glavni prozor</guisubmenu>.</para>
+    </note>
+
+    <table>
+      <title>Alatni blokovi okana<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Alatni blokovi okana</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>služi za smanjivanje okna, tako da se samo njegov naziv prikazuje na dnu prozora</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>služi za povećavanje okna</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>služi za vraćanje oblika okna prije povećavanja</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>služi za oslobađanje okna iz glavnoga prozora</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>služi za vraćanje okna u glavni prozor</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Možete i preklapati okna ako to želite. Preklopljena okna birate putem kartica na vrhu. Razdjelnike okana možete odvlačiti radi promjene veličine okana. U slučaju problema s promijenjenim korisničkim sučeljem, izvorni raspored možete vratiti kad god želite putem izbornika <guimenuitem><indexterm class="singular">
+        <primary>Prozori programa OmegaT</primary> <seealso>Prozori i okna programa OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>Prozori programa OmegaT</primary> <secondary>Vraćanje tvorničkih postavki</secondary>
+      </indexterm>Mogućnosti → Vrati glavni prozor</guimenuitem>.</para>
+
+    <para>Moguće je i jednostavno odvlačenje i ispuštanje datoteka u odgovarajuća okna.<itemizedlist>
+        <listitem>
+          <para>Okno za obradu: odvlačenjem i ispuštanjem datoteke projekta u sklopu programa OmegaT (<filename>omegat.project</filename>) na ovo okno, predmetni se projekt otvara, a zatvara se eventualni trenutno aktivni projekt. Ostale odvučene i ispuštene datoteke kopiraju se u mapu <filename>source</filename>. Isto vrijedi i za prozor <link linkend="section.project.files">Datoteke projekta</link> window.</para>
+        </listitem>
+
+        <listitem>
+          <para>Okno djelomičnih podudaranja: odvučene i ispuštene datoteke <filename>.tmx</filename> kopiraju se u mapu <filename>tm</filename>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Okno glosara: odvučene i ispuštene datoteke s datotečnim nastavcima koji vrijede za glosare (<filename>.txt</filename>, <filename>.tab</filename> itd.) kopiraju se u mapu <filename>glossary</filename>.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>Brojači u donjemu desnom kutu pružaju uvid u stanje prijevoda. Brojevi u lijevome stupcu sljedeće tablice odnose se na gornju sliku:</para>
+
+    <table>
+      <title>Glavni prozor – brojači<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Brojači</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>broj prevedenih segmenata tekuće datoteke u odnosu na ukupan broj segmenata</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>broj jednokratnih prevedenih segmenata u okviru projekta u odnosu na ukupan broj takvih segmenata</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>ukupni broj segmenata u projektu, uključujući ponavljanja</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>broj izvorišnih i odredišnih znakova u tekućemu segmentu</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>S praktične točke gledišta, najznačajniji je drugi par brojeva, jer nam kazuje količinu prevedenoga materijala u odnosu na ukupni, tj, drugi, broj iz toga para. Projekt iz našega primjera očito je dovršen, budući da su svi jednokratni segmenti prevedeni.</para>
+
+    <section id="editor.pane">
+      <title>Okno za obradu<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Okno za obradu</secondary>
+        </indexterm></title>
+
+      <para>Ovo je okno predviđeno za upisivanje i revidiranje prijevoda. U oknu za obradu prikazuje se tekst dokumenta za prijevod, pri čemu se već prevedeni dijelovi prikazuju kao prijevodi, a neprevedeni na izvornome jeziku. Tekst se prikazuje rastavljen u segmente, a moguće je pomicanje do bilo kojega od njih, kao i njegovo otvaranje dvostrukim pritiskom mišem radi eventualne revizije. U gornjemu su primjeru već prevedeni segmenti obojani u žuto.</para>
+
+      <para>Jedan od segmenata iz gornjega primjera je tekući segment. Taj je segment prikazan u dva dijela. U gornjemu je dijelu izvorišni jezik, prikazan podebljanim znakovima i na zelenoj pozadini, dok je u donjemu dijelu polje za obradu, nakon kojega se nalazi <indexterm class="singular">
+          <primary>Marker segmenta</primary>
+        </indexterm>marker u obliku <literal>&lt;segment nnnn&gt;</literal>, pri čemu je nnnn broj segmenta u okviru projekta. Gornji dio služi kao referenca, dok se prijevod upisuje ili revidira u polju za obradu.</para>
+
+      <para>Napomena: kod višekratnih se segmenata u markeru prikazuje <literal>&lt;segment nnnn +yy istih&gt;. U takvim je slučajevima yy broj drugih pojavnica istoga segmenta u sklopu projekta.</literal></para>
+
+      <para>U ovisnosti o željenome funkcioniranju okna za obradu, polje za obradu kod neprevedenih segmenata može biti prazn, ili pak sadržavati prijevod prema djelomičnome podudaranju, tj. najsličniji predložak. Prijevod se prelaskom na sljedeći ili neki drugi segment potvrđuje i sprema. Kada je potrebno da prijevod bude istovjetan izvorišnome tekstu, jednostavno uklonite sav tekst iz polja za obradu: najprije označite cijeli tekst kombinacijom tipki <keycap>Ctrl+A</keycap>, a zatim ga izbrišite tipkom <keycap>Delete</keycap>). OmegaT omogućava spremanje prijevoda istovjetnih izvorišnome tekstu. To je korisno kod tekstova koji sadržavaju zaštitne znakove, imena, nazive i slično, ili pak dijelove teksta na trećemu jeziku, a koji nisu predviđeni za prijevod. Više pojedinosti naći ćete u odjeljku o <emphasis>revidiranju prijevoda</emphasis>.</para>
+
+      <para>Pritiskom desnom tipkom miša u okno za obradu otvara se skočni izbornik koji nudi funkcije <emphasis role="bold"> Izreži, Kopiraj, Zalijepi</emphasis> (tj. isto kao kod kombinacija tipki <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> i <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>), <emphasis role="bold">Idi na segment</emphasis> i <emphasis role="bold">Dodaj natuknicu u glosar</emphasis>. Povrh toga, pritiskom desnom tipkom miša na otvoreni segment predlažu se mogućnosti vezane za funkciju <emphasis role="bold">Alternativni prijevodi</emphasis>, primjerice prijelaz na sljedeću pojavnicu višekratnih segmenata.</para>
+
+      <para>Omogućeno je odvlačenje teksta iz bilo kojega dijela glavnoga prozora i njegovo ispuštanje u segment. Tekst odvučen i ispušten s lokacije izvan odredišnoga segmenta se kopira, dok se onaj s pozicije unutar segmenta premješta.</para>
+
+      <para>Prema zadanim vrijednostima nije moguć odabir riječi u izvorišnome segmentu s pomoću tipkovnice, nego isključivo mišem. Pritiskom na tipku <keycap>F2</keycap> omogućava se pomicanje pokazivača miša u izvorišni segment (ili na bilo koji drugi položaj u okviru okna za obradu) s pomoću tipki strelica. U tom se na činu rada na dnu okna prikazuje poruka „<guilabel>Isključeno zaključavanje pokazivača miša</guilabel>”. Za vraćanje u standardni način rada („<guilabel>Uključeno zaključavanje pokazivača miša</guilabel>”) ponovno pritisnite tipku <keycap>F2</keycap>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Okno djelomičnih podudaranja<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Okno djelomičnih podudaranja</secondary>
+        </indexterm></title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Podudaranja</primary> <secondary>Okno podudaranja – slika</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Prozori i okna u programu OmegaT</primary> <secondary>Okno podudaranja – slika</secondary>
+            </indexterm>Okno podudaranja</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>U oknu podudaranja prikazuju se najsličniji segmenti iz prijevodnih memorija, kako iz interne prijevodne memorije projekta, koja se dopunjava prilikom prevođenja materijala projekta, tako i iz uvezenih pomoćnih prijevodnih memorija iz prijašnjih poslova ili dobivenih od naručitelja ili prevoditeljske agencije.</para>
+
+      <para>Pomicanjem na sljedeći segment automatski se odabire prvo djelomično podudaranje, tj. ono s najvećim postotkom podudaranja. Neko od sljedećih raspoloživih podudaranja možete odabrati kombinacijom tipki <guimenuitem>Ctrl+2, 3, 4 ili 5</guimenuitem>.<indexterm>
+          <primary>Prečaci</primary> <secondary>Odabir podudaranja – Ctrl+N</secondary>
+        </indexterm> Naravno, <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> neće imati nikakvoga učinka ako ne postoji podudaranje pod brojem pet. Odabrano podudaranje možete iskoristiti za prijevod kombinacijom tipki <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Zamjena teksta – Ctrl+R</secondary>
+        </indexterm>, čime podudaranje mijenja sadržaj odredišnoga polja, ili pak kombinacijom <guimenuitem>Ctrl+I <indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Umetanje teksta – Ctrl+I</secondary>
+        </indexterm></guimenuitem>, čime se umeće na položaj pokazivača miša.</para>
+
+      <para>Postotak podudaranja ugrubo odgovara broju riječi zajedničkih obama segmentima podijeljenom s brojem riječi u dužemu segmentu. Odabrano djelomično podudaranje istaknuto je u obliku podebljanoga teksta, dok su riječi koje nedostaju u segmentu za prijevod obojane u plavo, a riječi do dijelova koji nedostaju u zeleno. U gornjemu primjeru izvorni segment glasi <emphasis role="bold">Context menu command</emphasis>. Najgornje je podudaranje 100-postotno, budući da se podudaraju sve riječi. Isto vrijedi i za sljedeća dva podudaranja, dok je ono pod brojem četiri tek donekle slično. U retku s navedenim postotkom podudaranja prikazuje se i naziv prijevodne memorije <indexterm class="singular">
+          <primary>Prijevodne memorije</primary> <secondary>Podudaranja</secondary>
+        </indexterm> u kojoj se podudaranje nalazi. Kada naziv datoteke nije prikazan, to znači da je izvor interna prijevodna memorija projekta. Segmenti „siročići”<indexterm class="singular">
+          <primary>Prijevodne memorije</primary> <secondary>Segmenti „siročići”</secondary>
+        </indexterm> (podudaranje pod rednim brojem dva) zapravo su segmenti u zadanoj prijevodnoj memoriji projekta za koje nema odgovarajućih izvorišnih segemenata.</para>
+
+      <para>U retku se prikazuju tri procjene podudaranja, npr. 66/66/30 u slučaju podudaranja pod brojem četiri na gornjoj slici. Redom ih možemo definirati kako slijedi:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>postotak podudaranja (uz uzimanje tokenizatora u obzir)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>zadano podudaranje programa OmegaT – broj riječi koje se podudaraju (uz zanemarivanje brojeva i oznaka teksta) podijeljen s ukupnim brojem riječi</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>podudaranje programa OmegaT, uključujući brojeve i oznake teksta</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Prilagođavanje okna djelomičnih podudaranja<indexterm class="singular">
+            <primary>Prozori i okna u programu OmegaT</primary> <secondary>Okno djelomičnih podudaranja</secondary> <tertiary>Prilagođavanje</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>Izvorišne datoteke</primary> <secondary>Prevođenje ažuriranih izvorišnih tekstova</secondary>
+          </indexterm></title>
+
+        <para>Putem izbornika <guimenu>Mogućnosti &gt; Vanjske datoteke u formatu TMX</guimenu> možete namjestiti prikaz okna podudaranja s pomoću više varijabli.</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Podudaranja</primary> <secondary>Postavke okna podudaranja – slika</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Prozori i okna u programu OmegaT</primary> <secondary>Postavke okna podudaranja – slika</secondary>
+            </indexterm>Postavke okna podudaranja</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Na gornjoj slici prikazan je zadani obrazac prikaza podudaranja. Sadržaj možete mijenjati s pomoću sljedećih varijabli:</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Postavke okna podudaranja<indexterm class="singular">
+              <primary>Korisničko sučelje</primary> <secondary>Postavke okna podudaranja</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1"/>
+
+            <colspec align="left" colnum="2"/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>broj podudaranja od jedan do pet</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>izvorišni tekst podudaranja</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>odredišni tekst podudaranja</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>niz koji prikazuje razlike između izvorišnoga teksta i podudaranja.<emphasis> Savjet:</emphasis> koristite ga ako je tekst koji prevodite ažuriranje….</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diffReversed}</literal></entry>
+
+                <entry>isto što i ${diff}, samo u obrnutome obliku (što se umeće, a što briše).</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>postotak s tokenizatorom</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>postotak bez brojeva i oznaka teksta</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>prilagođeni postotak</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>naziv TMX-a</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>puna putanja TMX-a</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>putanja TMX-a počevši od korijenske mape /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${initialCreationID}</literal></entry>
+
+                <entry>autor izrađenoga podudaranja</entry>
+              </row>
+
+              <row>
+                <entry><literal>${initialCreationDate}</literal></entry>
+
+                <entry>datum izrade podudaranja</entry>
+              </row>
+
+              <row>
+                <entry><literal>${changedID}</literal></entry>
+
+                <entry>autor ažuriranoga podudaranja</entry>
+              </row>
+
+              <row>
+                <entry><literal>${changedDate}</literal></entry>
+
+                <entry>datum zadnjega ažuriranja podudaranja</entry>
+              </row>
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>oznaka za djelomična podudaranja (trenutno samo za prijevode datoteka PO s oznakom #fuzzy)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <title>Okno glosara<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Okno glosara</secondary>
+        </indexterm></title>
+
+      <para>Okno glosara omogućava pristup korisničkim terminološkim zbirkama iz datoteka glosara. U njemu se prikazuju ekvivalenti termina iz tekućega segmenta. Izvorišni segment u primjeru na sljedećoj slici glasi „<emphasis>Context menu command</emphasis>”, baš kao i u gornjemu primjeru za djelomična podudaranja, a prikazani su termini pronađeni u raspoloživim glosarima (Microsoftova terminološka zbirka i glosar slovenske korisničke skupine za Linux).</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Glosari</primary>
+          </indexterm>Višerječna natuknica u glosaru</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/GlossaryPane_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Ako ste aktivirali funkciju Savjetnika (<guimenuitem>Mogućnosti → Savjetnik</guimenuitem>), možete desnom tipkom miša pritisnuti označenu riječ u izvorišnome segmentu radi otvaranja skočnoga izbornika s prijedlozima ekvivalenata raspoloživih u glosarima. Odabirom jednoga od njih umećemo ga na trenutni položaj pokazivača miša u odredišnome segmentu. Također možete označiti i željeni alternativni ekvivalent u oknu glosara pa ga umetnuti u odredišni segment pritiskom desnom tipkom miša na odabranu stavku.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Okno rječnika<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Okno rječnika</secondary>
+        </indexterm></title>
+
+      <para>Rječnici su zapravo elektronički pandani tiskanih rječnika, kao što su Merriam Webster, Duden, Larousse i drugi, koje možda već imate u svojoj zbirci. Više o njima možete pronaći u poglavlju <link linkend="chapter.dictionaries">Rječnici</link></para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>Okno višestrukih prijevoda<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Okno višestrukih prijevoda</secondary>
+        </indexterm></title>
+
+      <para>Katkada za neke izvorišne segmente trebamo nekoliko različitih prijevoda, ovisno o kontekstu. Ako tekući prijevod segmenta nije prikladan, možete odabrati <guisubmenu>Obrada → Izradi alternativni prijevod</guisubmenu>. Odredišni tekst upisan nakon toga tretirat će se kao alternativni prijevod izvorišnoga segmenta. Jedan od alternativnih prijevoda, primjerice najprikladniji, možete odrediti kao zadani putem izbornika <guisubmenu>Obrada → Koristi kao zadani prijevod</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>Okno bilješki</title>
+
+      <para>Prevoditelji mogu dodavati bilješke otvorenim segmentima, primjerice kao podsjetnike za naknadnu provjeru i eventualnu reviziju, radi utvrđivanja valjanosti alternativnih prijevoda ili pak zbog traženja mišljenja od kolega. Bilješke možete pregledavati putem izbornika <guisubmenu>Idi na → Sljedeća bilješka</guisubmenu> i <guisubmenu>Idi na → Prethodna bilješka</guisubmenu>.</para>
+    </section>
+
+    <section>
+      <title>Okno komentara</title>
+
+      <para>Neki datotečni formati koji su specijalizirani za prevoditeljski rad, kao što je PO, omogućavaju dodavanje komentara. Prevoditeljima se na taj način može dati uvid u kontekst segmenata za prijevod. U primjeru na donjoj slici autor datoteke PO dodao je upozorenje prevoditelju da pazi na broj slovnih znakova u prijevodu.</para>
+
+      <figure id="comments.pane">
+        <title>Okno komentara<indexterm class="singular">
+            <primary>Komentari</primary> <secondary>Okno komentara</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Okno strojnoga prijevoda<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Okno strojnoga prijevoda</secondary>
+        </indexterm></title>
+
+      <para>Otvaranjem okna strojnoga prijevoda prikazuju se prijedlozi koje nude alati za strojno prevođenje za tekući segment. Za zamjenu tekućega segmenta predloženim prijevodom koristite kombinaciju tipki <keysym>Ctrl+M</keysym>. Više o ovoj temi naći ćete u poglavlju <link linkend="chapter.machine.translate">Strojno prevođenje</link></para>
+    </section>
+
+    <section>
+      <title id="main.menu">Glavni izbornik</title>
+
+      <para>Glavni izbornik omogućava pristup svim funkcijama programa <application>OmegaT</application>. Cjeloviti opis svih izbornika i stavki izbornika naći ćete u dodatku <emphasis>Glavni izbornik</emphasis>. Najčešće korištene funkcije dostupne su putem tipkovnih prečaca, tako da, kada se priviknete na njih, nećete više trebati pregledavati izbornike za vrijeme prevođenja. Pojedinosti ćete naći u poglavlju <link linkend="chapter.menu">Izbornik i tipkovni prečaci</link>.</para>
+    </section>
+
+    <section id="status.bar">
+      <title>Traka stanja</title>
+
+      <para>Na traci stanja (na dnu glavnoga prozora) prikazuju se poruke vezane za tijek rada. Traka pruža uvid u informacije o pojedinim radnjama u tijeku. Također prikazuje i broj djelomičnih podudaranja i pronađenih natuknica glosara za tekući segment.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Ostali prozori</title>
+
+    <section id="section.project.files">
+      <title>Datoteke projekta<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Datoteke projekta</secondary>
+        </indexterm></title>
+
+      <para>Ovaj prozor prikazuje popis datoteka projekta i druge informacije u vezi s projektom. Otvara se automatski kada program OmegaT učitava projekt.</para>
+
+      <para><remark>Napomena:</remark> prikaz prozora datoteka projekta možete onemogućiti postavljanjem parametra <emphasis>project_files_show_on_load</emphasis> na <emphasis>false</emphasis> u datoteci <filename>omegat.prefs</filename> (koju možete otvoriti putem izbornika Mogućnosti → Pristup konfiguracijskoj mapi).</para>
+
+      <para>Za njegovo otvaranje koristite kombinaciju tipki <guimenuitem>Ctrl+L<indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Popis datoteka projekta – Ctrl+L</secondary>
+        </indexterm></guimenuitem>, a za zatvaranje tipku <keycap>Esc</keycap>. Prozor datoteka projekta prikazuje sljedeće informacije:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Ukupni broj prevodivih datoteka projekta. Riječ je o datotekama koje se nalaze u mapi /source, i to u formatu koji podržava program OmegaT. Taj se broj prikazuje u zagradama pored naslova „Datoteke projekta”.</para>
+        </listitem>
+
+        <listitem>
+          <para>Popis svih prevodivih datoteka projekta. Pritiskom na željenu datoteku otvaramo je za prijevod.</para>
+
+          <para>Upisivanjem teksta otvara se polje filtra, u koje možemo unijeti dio naziva datoteka. Određenu datoteku možete odabrati i tipkama strelica <keycap>gore</keycap> i <keycap>dolje</keycap> pa je otvoriti pritiskom na <keycap>Enter</keycap></para>
+
+          <para>Napomena: nazive datoteka (u prvome stupcu) možete poredati po abecedi pritiskom na redak zaglavlja. Položaj naziva neke datoteke moguće je promijeniti i njegovim označavanjem mišem, nakon čega koristimo gumbe <emphasis>Premjesti...</emphasis>.</para>
+
+          <para>Pritiskom desnom tipkom miša na naziv datoteke otvara se skočni prozor koji omogućava otvaranje izvorišne datoteke i odredišne datoteke, ako potonja postoji.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Stavke datoteka obuhvaćaju njihove nazive, vrste datotečnih filtara, kodiranje i broj segmenata u svakoj datoteci.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Na dnu se prikazuje ukupni broj segmenata, broj jednokratnih segmenata u cijelome projektu i broj već prevedenih jednokratnih segmenata.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">Jednokratni </emphasis>se segmenti računaju zbrajanjem svih segmenata te oduzimanjem svih dupliciranih segmenata. („Jednokratnost” ovisi o veličini slova, pa se stoga „Hrvatska” i „hrvatska” tretiraju kao različiti elementi.)</para>
+
+      <para>Razlika između „broja segmenata” i „broja jednokratnih segmenata” pruža okvirni uvid u broj ponavljanja u tekstu. Međutim, imajte na umu da brojevi ne ukazuju na stupanj relevantnosti ponavljanja, jer mogu predstavljati relativno duge rečenice koje se ponavljaju više puta (i zbog čega možemo biti sretni) ili, s druge strane, tablicu ključnih riječi (što nas pak neće previše usrećiti). U datoteci <filename>project_stats.txt</filename> iz projektne mape omegat nalaze se detaljnije informacije o segmentima, i to za svaku pojedinu datoteku.</para>
+
+      <para>Mijenjanje pravila segmentacije može izazvati promjenu u broju segmenata/jednokratnih segmenata. To pak u načelu treba izbjegavati nakon započinjanja prevođenja. Više informacija naći ćete u poglavlju <emphasis>Pravila segmentacije</emphasis>.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Izvorišne datoteke</primary> <secondary>Dodavanje datoteka u projekt</secondary>
+        </indexterm>Dodavanje datoteka u projekt: </emphasis>izvorišne datoteke možete dodavati u projekt pritiskom na gumb „<guimenuitem>Uvoz izvorišnih datoteka...</guimenuitem>”. Time se odabrane datoteke kopiraju u mapu <filename>source</filename>, a projekt se ponovno učitava radi uvoza novih datoteka. Također možete dodavati izvorišne datoteke internetskih stranica, izrađene softverom MediaWiki, i to pritiskom na gumb „<guimenuitem>Uvoz iz okruženja MediaWiki</guimenuitem>” i unošenjem odgovarajuće URL adrese.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>Prozor za pretraživanje<indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Okno za pretraživanje</secondary>
+        </indexterm></title>
+
+      <para>Prozor za pretraživanje služi za pronalaženje određenih segmenata u sklopu projekta. Moguće je imati nekoliko istovremeno otvorenih prozora. Novi prozor za pretraživanje možete otvoriti kombinacijom tipki <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> u glavnome prozoru. Prozor za pretraživanje sastoji se od polja za unos teksta (nizova ili ključnih riječi za pretraživanje), izbornih polja i kružića za označavanje u svrhu postavljanja pretraživanja, te od područja prikaza rezultata pretraživanja. Više informacija o prozoru za pretraživanje naći ćete u poglavlju <emphasis> <link linkend="chapter.user.interface">Pretraživanja</link></emphasis>.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Provjera valjanosti oznaka teksta<indexterm class="singular">
+          <primary>Provjera valjanosti oznaka teksta</primary> <seealso>Prečaci, oznake teksta</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Prozori i okna u programu OmegaT</primary> <secondary>Provjera valjanosti oznaka teksta</secondary> <seealso>Oznake teksta</seealso>
+        </indexterm></title>
+
+      <para>U prozoru za provjeru valjanosti oznaka teksta prikazuje se popis svih pogrešaka u vezi s oznakama teksta i neujednačenosti u prijevodu. Prozor možete otvoriti kombinacijom tipki <guimenuitem>Ctrl+T. </guimenuitem>Prozor se sastoji od tablice od tri stupca s poveznicama na segmente i njihovim izvorišnim i odredišnim sadržajem.</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Provjera valjanosti oznaka teksta</primary> <secondary>Prozor – slika</secondary> <seealso>Oznake teksta</seealso>
+            </indexterm>Prozor za provjeru valjanosti oznaka teksta</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Oznake teksta su istaknute u obliku podebljanoga teksta plave boje radi lakšega uspoređivanja izvornoga i prevedenoga sadržaja. Pritiskom na poveznicu željenoga segmenta otvaramo ga u oknu za obradu. Zatim možemo ispraviti pogrešku pa se kombinacijom tipki <guimenuitem>Ctrl+T</guimenuitem> vratiti na prozor za provjeru valjanosti oznaka teksta radi ispravljanja ostalih pogrešaka. U prvome i trećemu slučaju iz gornjega primjera imamo nepravilno združene oznake teksta, dok u drugome nedostaje znak &lt; u početnoj oznaci.</para>
+
+      <para>Pogreške u oznakama teksta u prijevodu obično se svode na razlike u poretku i broju u odnosu na izvorne segmente. Neke intervencije u oznakama teksta su nužne i bezopasne, dok druge znaju izazvati probleme pri sastavljanju prevedenoga dokumenta. Općenito uzevši, oznake teksta predstavljaju oblikovanje izvornoga teksta u određenim oblicima. Pojednostavljivanje oblikovanja izvornoga teksta prije prevođenja uvelike doprinosi smanjenju broja oznaka teksta.</para>
+    </section>
+
+    <section>
+      <title>Statistika<indexterm class="singular">
+          <primary>Statistika</primary> <seealso>Izbornik Alati</seealso>
+        </indexterm></title>
+
+      <para>Prozor statističkih podataka, koji možete otvoriti putem izbornika <emphasis role="bold">Alati &gt; Statistika </emphasis>, prikazuje statističke podatke o tekućemu projektu u sklopu programa OmegaT, kako u sažetome obliku, tako i detaljno za svaku datoteku za prijevod. Prikazani statistički podaci raspoloživi su i u datoteci <filename>project_stats.txt</filename> (u podmapi <filename>omegat</filename>), s podacima razdvojenim tabulatorom, pa ih možete lako učitati u neki program za rad s proračunskim tablicama radi lakšega pregledavanja. Za označavanje cijeloga sadržaja koristite kombinaciju tipki <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Označavanje svih informacija – Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, za kopiranje Ctrl+C <indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Kopiranje teksta – Ctrl+C</secondary>
+        </indexterm></guimenuitem>, a za lijepljenje <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Lijepljenje teksta – Ctrl+V</secondary>
+        </indexterm></guimenuitem>.<figure id="ProjectStatistic.Window">
+          <title>Statistika projekta</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
+      <title>Statistika podudaranja<indexterm class="singular">
+          <primary>Statistika podudaranja</primary> <seealso>Izbornik Alati</seealso>
+        </indexterm></title>
+
+      <para>Statistički podaci o podudaranjima dostupni su putem izbornika <guimenuitem>Alati &gt; Statistika podudaranja.</guimenuitem> Prikupljanje podataka prilično je zahtjevno za CPU i zna potrajati, što se prilikom procesa računanja može pratiti na traci prikaza tijeka. Što se tiče kategorija, koristi se de facto industrijska norma klasifikacije podudaranja u sljedeće skupine: Ponavljanja, Potpuno podudaranje, 95 % – 100 %, 85 % – 94 %, 75 % – 84 %, 50 % – 74 % i Bez podudaranja. Informacije se računaju kako za segmente, tako i za riječi i znakove (bez razmaka i s njima). Imajte na umu da su moguća manja odstupanja u izračunima programa OmegaT u odnosu na rezultate analiza obavljenih u drugim alatima za računalno potpomognuto prevođenje.<figure>
+          <title>Statistika podudaranja</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Uzmite u obzir da konačne vrijednosti predstavljaju (koliko je god to moguće) dobre približne količine rada potrebnoga za projekt te mogu poslužiti kao osnova za obračun troškova i cijena.</para>
+
+      <para>U zadnjemu se stupcu ne uzimaju u obzir razmaci između segmenata. Ponavljanja se odnose na istovjetne segmente koji se u tekstu pojavljuju barem dvaput. Prvi segment i njegov sadržaj spadaju u klasu „Bez podudaranja”, dok se ostale pojavnice tretiraju kao ponavljanja tog prvog segmenta. Kada za nekoliko istovjetnih izvorišnih segmenata već imamo odgovarajuće prijevode u prijevodnoj memoriji projekta, ti se segmenti, i to zajedno s ostalim već prevedenim jednokratnim segmentima, klasificiraju kao „Potpuno podudaranje”. Broj jednokratnih segmenata prikazuje se u standardnome prozoru statističkih podataka kada je to potrebno, bez obzira jesu li ti segmenti prevedeni ili ne.</para>
+
+      <para>Ostale kategorije (50 – 100 %) odnose se na neprevedene segmente s djelomičnim podudaranjima. Izvori djelomičnih podudaranja mogu se nalaziti i u mapi <filename>/tm</filename>, a ne samo u internoj prijevodnoj memoriji iz mape <filename>/omegaT,</filename> kao što je to slučaj s ponavljanjima i potpunim podudaranjima. Jedina razlika u odnosu na podudaranja iz prijevodne memorije <filename>project_save</filename> jest u tome što vanjske prijevodne memorije ne mogu biti izvori potpunih, nego samo 100-postotnih podudaranja. Kada ne želite koristiti vanjske prijevodne memorije za izračun, trebate ili isprazniti mapu /tm ili (privremeno) promijeniti postavke projekta, tako da se vrijednost za /tm odnosi na neku drugu lokaciju.</para>
+
+      <para>Statistički podaci podudaranja razdvojeni su tabulatorom, pa stoga možete označiti sve podatke kombinacijom tipki <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Označavanje svih informacija – Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, kopirati ih s pomoću Ctrl+C <indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Kopiranje teksta – Ctrl+C</secondary>
+        </indexterm></guimenuitem>, pa na koncu zalijepiti putem <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Lijepljenje teksta – Ctrl+V</secondary>
+        </indexterm></guimenuitem> u neki program za rad s proračunskim tablicama radi lakšega pregledavanja. Podaci su nakon izračuna raspoloživi i u datoteci <filename>omegat/project_stats_match.txt.</filename> Imajte na umu da je ta datoteka vremenski označena, budući da izračun (za razliku od standardne statistike) nije trenutan pa stoga  brzo zastarijeva.</para>
+    </section>
+
+    <section>
+      <title>Preglednik pomoći<indexterm class="singular">
+          <primary>Izbornik Pomoć</primary> <secondary>Preglednik pomoći</secondary>
+        </indexterm></title>
+
+      <para>Preglednik pomoći, kojim se prikazuje priručnik, dostupan je putem tipke <keycap><indexterm class="singular">
+          <primary>Prečaci</primary> <secondary>Pomoć – F1</secondary>
+        </indexterm>F1</keycap> ili glavnoga izbornika (<guimenuitem><indexterm class="singular">
+          <primary>Izbornik Pomoć</primary> <secondary>Priručnik...</secondary>
+        </indexterm>Pomoć → Priručnik...</guimenuitem>). U prozoru se prikazuje priručnik i dva gumba: Natrag i Sadržaj. Priručnik je dokument u formatu HTML s poveznicama za različita poglavlja. Željene stranice otvaramo pritiskom na odgovarajuću poveznicu, baš kao u pregledniku weba.</para>
+
+      <para>Priručnik se nalazi u podmapi docs instalacijske mape programa OmegaT, pa stoga, ako želite pogledati dokumentaciju na, primjerice, engleskome jeziku, otvorit ćete datoteku <filename>docs/en/index.html </filename>putem preglednika. Otvaranjem priručnika na taj način također vam omogućava korištenje poveznica prema vanjskim sadržajima, budući da ugrađeni preglednik ne podržava poveznice takve vrste.</para>
+    </section>
+  </section>
+</chapter>

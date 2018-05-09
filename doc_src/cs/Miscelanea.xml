@@ -41,14 +41,13 @@
 
       <para>Pro spuštění OmegaT v režimu příkazového řádku je nutné při startu specifikovat dodatečné parametry. Nejdůležitější z nich je <literal>&lt;project-dir&gt;</literal>, a volitelně <literal>--config-dir=&lt;config-dir&gt;</literal>. Příklad:</para>
 
-      <para><literal>$&gt; java -jar <application>OmegaT</application>.jar
-      /path/to/project \</literal></para>
+      <para><literal>java -jar <application>OmegaT</application>.jar /cesta/k/projektu \</literal></para>
 
       <para><literal>--config-dir=/cesta/ke/konfiguracnim-souborum/ \</literal></para>
 
       <para><literal> --mode=console-translate \</literal></para>
 
-      <para><literal> --source-pattern={regexp} \</literal></para>
+      <para><literal>--source-pattern={regulární výraz}</literal></para>
 
       <para><literal> --tag-validation=[block|warn] </literal></para>
 
@@ -212,7 +211,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Do začátku využívejte tyto texty Nápovědy. Pokud narazíte na problémy, zeptejte se v <ulink url="http://tech.groups.yahoo.com/group/Omegat/">Uživatelské skupině <application>OmegaT</application></ulink>. Neváhejte se zeptat v jazyce, který nejlépe ovládáte.</para>
+        <para>Do začátku využívejte tyto texty Nápovědy. Pokud narazíte na problémy, zeptejte se v <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info">Uživatelské skupině <application>OmegaT</application></ulink>. Neváhejte se zeptat v jazyce, který nejlépe ovládáte.</para>
       </listitem>
     </itemizedlist>
   </section>

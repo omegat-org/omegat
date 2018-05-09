@@ -80,7 +80,23 @@
             </indexterm></term>
 
           <listitem>
-            <para>Pokud je na samotném začátku jasné, že překlady v dané překladové paměti (nebo více pamětech) jsou správné, je možné je vložit do adresáře <emphasis role="bold">tm/auto</emphasis> a vyhnout se tak potvrzování spousty případů <emphasis>[přibližně]</emphasis>. Tímto způsobem dojde k efektivnímu <emphasis role="bold">předběžnému překladu</emphasis> zdrojového textu: všechny segmenty ve zdrojovém textu, pro které lze najít překlady v této „automatické“ překladové paměti, se tak bez dalšího zásahu uživatele dostanou do hlavní překladové paměti projektu.</para>
+            <para>Pokud je na samotném začátku jasné, že překlady v dané překladové paměti (nebo více pamětech) jsou správné, je možné je vložit do adresáře <emphasis role="bold">tm/auto</emphasis> a vyhnout se tak potvrzování spousty případů <emphasis>[přibližně]</emphasis>.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Vložit TMX do /tm/auto.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Otevřete projekt. Změny jsou zobrazeny.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Udělejte drobnou změnu kdekoliv v projektu. Toto upraví soubor <filename>project_save.tmx</filename> (přidáním správných překladových jednotek z „auto“ TMX)</para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Poznámka: pokud je paměť TMX z adresáře /tm/auto odstraněna před spuštěním kroku 3, tak se nepřidá žádná dodatečná překladová jednotka.</para>
           </listitem>
         </varlistentry>
 
@@ -89,6 +105,34 @@
 
           <listitem>
             <para>Pokud nejsou žádné pochybnosti o tom, že dodaná paměť TMX je přesnější než <filename>project_save.tmx</filename> programu OmegaT, pak vložt tuto TMX do adresáře /tm/enforce a existující výchozí paměť bude přepsána bez dalších podmínek.</para>
+
+            <para><orderedlist>
+                <listitem>
+                  <para>Vložte TMX do /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Otevřete projekt. Změny jsou zobrazeny.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Udělejte drobnou změnu kdekoliv v projektu. Toto upraví soubor <filename>project_save.tmx</filename>.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Učiňte rozhodnutí o imunitě vynucených segmentů:<itemizedlist>
+                      <listitem>
+                        <para>Pokud <emphasis>nepotřebují</emphasis> zůstat imunní vůči dalším změnám, pak přesuňte paměť TMX z /tm/enforce.</para>
+                      </listitem>
+
+                      <listitem>
+                        <para>Pokud <emphasis>musí</emphasis> zůstat imunní vůči dalším zěmnám, pak nechejte TMX v adresáři /tm/enforce.</para>
+                      </listitem>
+                    </itemizedlist></para>
+                </listitem>
+              </orderedlist></para>
+
+            <para>Poznámka: pokud bude TMX odstraněna z /tm/enforce před krokem 3, pak nebudou žádné nucené změny uchovány.</para>
           </listitem>
         </varlistentry>
 
@@ -153,7 +197,7 @@
         </listitem>
 
         <listitem>
-          <para>otevřete projekt</para>
+          <para>Otevřete projekt</para>
         </listitem>
       </orderedlist>
     </section>
@@ -243,7 +287,7 @@
     <section id="Creating.a.translation.memory.for.selected.documents">
       <title>Vytvoření překladové paměti pro vybrané dokumenty</title>
 
-      <para>In case translators need to share their TMX bases while excluding some of their parts or including just translations of certain files, sharing the complete <filename>ProjectName-omegat.tmx</filename> is out of question. Následující postup znázorňuje jen jednu z možností, ale dostatečně jednoduchou k porozumění a bez jakéhokoli ohrožení obsahu.</para>
+      <para>V případě, kdy překladatel potřebuje sdílet svou překladovou paměť tím způsobem, že vynechá některé části nebo zahrne pouze překlady určitých souborů, nebude pak sdílet celý soubor<filename>NazevProjektu-omegat.tmx</filename>. Následující postup znázorňuje jen jednu z možností, ale dostatečně jednoduchou k porozumění a bez jakéhokoli ohrožení obsahu.</para>
 
       <itemizedlist>
         <listitem>

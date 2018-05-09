@@ -5,22 +5,18 @@
       <primary>Hledat</primary>
     </indexterm></title>
 
-  <section id="section.TaaS.options">
+  <section id="section.TaaS.generalities">
     <title>Všeobecné informace</title>
 
     <para>Služba TaaS na adrese https://demo.taas-project.eu/info poskytuje terminologický servis pro evropské jazyky (plus ruštinu). Umožňuje přístup jak k veřejným, tak i k soukromým datům, kde soukromé glosáře (zde nazývané „kolekce“) mohou být extrahovány z existujících dokumentů a cílové pojmy bývají částečně doplněny automaticky z různých zdrojů. </para>
   </section>
 
-  <section id="section.TaaS.options.collections">
-    <title>Veřejné a soukromé kolekce</title>
+  <section id="section.TaaS.options.key">
+    <title>Vytvořit klíč</title>
 
-    <para>OmegaT umožňuje přístup k veřejné části TaaS bez jakékoliv registrace.</para>
+    <para>Pro přístup ke službě TaaS musí uživatel vytvořit klíč za použití odkazu https://term.tilde.com/account/keys/create?system=omegaT.</para>
 
-    <para>Pro přístup k soukromé části si musí uživatel vytvořit klíč na adrese https://demo.taas-project.eu/account/keys/create?system=omegaT.</para>
-
-    <para>Klíč se pak musí vložit do OmegaT prostřednictvím -Dtaas.user.key=xxxxx. Konfigurační spouštěče Omega T (OmegaT.l4J.ini, omegat.kaptn a OmegaT.sh) obsahují vzorový záznam.</para>
-
-    <para>Pokud se pokusíte přístoupit ke službě bez soukromého klíče, zobrazí se v protokolu následující hláška: ‚TaaS API key not found‘ / ‚Klíč TaaS nenalezen‘. Přejděte na adresu https://demo.taas-project.eu/account/keys/create?system=omegaT a vytvořte si vlastní klíč, ten pak zadejte do OmegaT prostřednictvím -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)</para>
+    <para>Klíč se pak musí vložit do OmegaT prostřednictvím -Dtaas.user.key=xxxxx. Konfigurační spouštěče OmegaT (OmegaT.l4J.ini, omegat.kaptn a Configuration.properties) obsahují záznam šablony.</para>
   </section>
 
   <section id="section.TaaS.options.access">

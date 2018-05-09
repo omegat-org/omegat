@@ -40,7 +40,7 @@
         </indexterm></term>
 
       <listitem>
-        <para>OmegaT ponechá pole editace prázdné. Tato možnost vám umožní překládat bez potřeby odstraňovat zdrojový text, a tak vám ušetří množství přebytečných stisků kláves při mazání (<emphasis role="bold">Ctrl+A </emphasis>a <emphasis role="bold">Del). </emphasis> Prázdné překlady jsou tímto povoleny. V Editoru jsou zobrazeny s označením &lt;EMPTY&gt;. Prázdný překlad vytvoříte tak, že kliknete pravým tlačítkem na segment, a vyberete možnost „<emphasis role="bold">Použít prázdný překlad</emphasis>&quot; Položka <emphasis role="bold">Odstranit překlad</emphasis> v téže pop up nabídce také umožňuje smazat stávající překlad v aktuálním segmentu. Stejného efektu dosáhnete smazáním cílového segmentu a stiskem <guibutton>Enter.</guibutton></para>
+        <para>OmegaT ponechá pole editace prázdné. Tato možnost vám umožní překládat bez potřeby odstraňovat zdrojový text, a tak vám ušetří množství přebytečných stisků kláves při mazání (<emphasis role="bold">Ctrl+A </emphasis>a <emphasis role="bold">Del). </emphasis> Prázdné překlady jsou tímto povoleny. V Editoru jsou zobrazeny s označením &lt;EMPTY&gt;. Prázdný překlad vytvoříte tak, že kliknete pravým tlačítkem na segment, a vyberete možnost „<emphasis role="bold">Použít prázdný překlad</emphasis>“ Položka <emphasis role="bold">Odstranit překlad</emphasis> v téže pop up nabídce také umožňuje smazat stávající překlad v aktuálním segmentu. Stejného efektu dosáhnete smazáním cílového segmentu a stiskem <guibutton>Enter.</guibutton></para>
       </listitem>
     </varlistentry>
 
@@ -163,6 +163,16 @@
 
       <listitem>
         <para>Označte tuto možnost pro zápis do souboru <filename>project_save.tmx</filename>, zapisuje se informace, že segment byl vyplněn automaticky, takže je možno jej zobrazit v editoru se specifickou barvou (pokud je označena možnost „Označit automaticky vyplněné segmenty“ v menu Zobrazit).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Nejprve nahrát tento počet segmentů</term>
+
+      <listitem>
+        <para>Ve výchozím nastavení zobrazí editor 2 000 prvních segmentů a postupně nahrává další jak uživatel roluje dolů dokumentem. Toto číslo můžete zvětšit, a to pokud máte výkonný počítač, anebo se vám nelíbí, jak se skrolovací jezdec chová během postupného nahrávání.</para>
       </listitem>
     </varlistentry>
   </variablelist>

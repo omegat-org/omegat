@@ -503,11 +503,11 @@ public class Searcher {
             break;
         case REPLACE:
             if (m_searchExpression.replaceTranslated && locText != null) {
-                if (searchString(locText)) {
+                if (searchString(locText, false)) {
                     targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
                 }
             } else if (m_searchExpression.replaceUntranslated && locText == null) {
-                if (searchString(srcText)) {
+                if (searchString(srcText, false)) {
                     srcMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
                 }
             }
@@ -638,12 +638,18 @@ public class Searcher {
                         while (replaceMatcher.find()) {
                             int varId = Integer.parseInt(replaceMatcher.group(1));
                             if (varId > matcher.groupCount()) {
+                                // Group wasn't even present in search regex.
                                 throw new IndexOutOfBoundsException(
                                         OStrings.getString("ST_REGEXP_REPLACEGROUP_ERROR", varId));
                             }
-                            repl = repl.substring(0, replaceMatcher.start())
-                                + matcher.group(varId) // yes, from source matcher!
-                                + repl.substring(replaceMatcher.end());
+                            String substitution = matcher.group(varId); // yes, from source matcher!
+                            if (substitution == null) {
+                                // If group was present in search regex but didn't match anything,
+                                // replace with empty string.
+                                substitution = "";
+                            }
+                            repl = repl.substring(0, replaceMatcher.start()) + substitution
+                                    + repl.substring(replaceMatcher.end());
                             replaceMatcher.reset(repl);
                         }
                         foundMatches.add(new SearchMatch(start, matcher.end(), StringUtil.replaceCase(repl,
@@ -654,7 +660,7 @@ public class Searcher {
                 } else {
                     foundMatches.add(new SearchMatch(start, matcher.end()));
                 }
-                if (start >= text.length() || !matcher.find(start + 1)) {
+                if (start >= text.length() || !matcher.find(matcher.end())) {
                     break;
                 }
             }

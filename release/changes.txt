@@ -1,11 +1,42 @@
 ----------------------------------------------------------------------
- OmegaT 4.1.3 update 3
+ OmegaT 4.1.4 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
-  2 Bug fixes
+  5 Enhancements
+  1 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
-4.1.3 update 3 vs 4.1.3 update 2
+4.1.4 update 1 vs 4.1.4
+
+  Implemented requests:
+
+  - Port TagWipe from DGT-OmegaT project as an OmegaT script
+  https://sourceforge.net/p/omegat/feature-requests/1384/
+
+  - Clarify XLIFF filter options description
+  https://sourceforge.net/p/omegat/feature-requests/1387/
+
+  - Add support for Microsoft neural machine translation
+  https://sourceforge.net/p/omegat/feature-requests/1366/
+
+  Other changes:
+
+  - Project > Open Recent Project now remembers up to 10 projects
+
+  - Added Project > Open Recent Project > Clear Menu
+
+  Bug fixes:
+
+  - Empty regex capture group becomes "null" in replacement
+  https://sourceforge.net/p/omegat/bugs/907/
+
+----------------------------------------------------------------------
+ OmegaT 4.1.4 (2018-04-02)
+----------------------------------------------------------------------
+  5 Enhancements
+  2 Bug fixes
+  6 Localisation updates
+----------------------------------------------------------------------
+4.1.4 vs 4.1.3 update 2
 
   Implemented requests:
 
@@ -15,6 +46,14 @@
   - Replacement with regex capture groups and case manipulation
   https://sourceforge.net/p/omegat/feature-requests/953/
 
+  - Update git submodules when loading an existing project
+  https://sourceforge.net/p/omegat/feature-requests/1368/
+
+  - Scribus filter (*.sla)
+
+  - Integration of DeepL MT
+  https://sourceforge.net/p/omegat/feature-requests/1343/
+
   Bug fixes:
 
   - OmegaT ignores valid TU after finding a TU missing source
@@ -22,6 +61,16 @@
 
   - Search result marking never ends, consuming CPU
   https://sourceforge.net/p/omegat/bugs/897/
+
+  Localisation Updates:
+
+  - Brazilian Portugese localisation updated to 4.1.3 update 2 (UI)
+  - Czech localisation updated to 4.1.4 (UI, scripts, readme, documentation)
+  - Croatian localisation updated to 4.1.4 (UI, scripts, readme, documentation)
+  - Dutch localisation updated to 4.1.3 update 2 (UI)
+  - Interlingua localisation updated to 4.1.3 update 2 (UI)
+  - Italian localisation updated to 4.1.3 update 2 (UI)
+  - Russian localisation updated to 4.1.3 update 2 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.3 update 2 (2018-01-16)
@@ -216,7 +265,7 @@ in the table
  OmegaT 4.1.2 (2017-06-22)
 ----------------------------------------------------------------------
  12 Enhancements
-  7 Bug fixes
+  6 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 4.1.2 vs 4.1.1
@@ -280,9 +329,6 @@ tags. It has been reverted to HTML mode.
   - Segmentation rules not immediately editable upon making
 project-specific
   https://sourceforge.net/p/omegat/bugs/870/
-
-  - Adjacent search matches are collapsed when doing a search/replace
-  https://sourceforge.net/p/omegat/bugs/675/
 
   - Tokenizer language discovery at runtime not working
   https://sourceforge.net/p/omegat/bugs/869/
@@ -634,18 +680,48 @@ could fail with duplicate numbers
   - Interlingua localisation updated to 4.0 (UI, documentation, readme, scripts)
 
 ----------------------------------------------------------------------
- OmegaT 3.6.0 update 9
+ OmegaT 3.6.0 update 10
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bug fix
+  3 Bug fixes
+  2 Localisation updates
+----------------------------------------------------------------------
+3.6.0 update 10 vs 3.6.0 update 9
+
+  Bug fixes:
+
+  - Adjacent search matches are collapsed when doing a search/replace
+  https://sourceforge.net/p/omegat/bugs/675/
+
+  - Find-replace results overlap
+  https://sourceforge.net/p/omegat/bugs/898/
+
+  - Adjacent next match skipped by Replace Next
+  https://sourceforge.net/p/omegat/bugs/899/
+
+  Localisation Updates:
+
+  - Czech localisation updated to 3.6 (documentation)
+  - Croatian localisation updated to 3.6 (documentation)
+
+----------------------------------------------------------------------
+ OmegaT 3.6.0 update 9 (2018-03-31)
+----------------------------------------------------------------------
+  0 Enhancement
+  3 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 3.6.0 update 9 vs 3.6.0 update 8
 
   Bug fixes:
-  The issue from https://sourceforge.net/p/omegat/bugs/884/
+
+  - The issue from https://sourceforge.net/p/omegat/bugs/884/
 could still happen in some cases
 
+  - External TMXs containing entries with no source text prevented
+fuzzy match searching from working correctly
+
+  - XLIFF filter: str:* tags from SmartTranslate were not ignored
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 8 (2017-12-27)

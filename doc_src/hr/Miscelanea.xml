@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.misc">
+  <title>Razne teme<indexterm class="singular">
+      <primary>Razno</primary>
+    </indexterm></title>
+
+  <section id="omegat.misc.console.mode">
+    <title><application><indexterm class="singular">
+        <primary>Konzolni način rada u programu OmegaT</primary> <seealso>Razno</seealso>
+      </indexterm>OmegaT</application> Konzolni način rada<indexterm class="singular">
+        <primary>Razno</primary> <secondary>Konzolni način rada u programu OmegaT</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>Samo za napredne korisnike!</para>
+    </note>
+
+    <para>Konzolni način rada (tj. naredbenim retkom) omogućava korištenje programa <application>OmegaT</application> kao prevoditeljskoga alata u okruženju skriptiranja. Pokretanjem u konzolnome načinu rada ne učitava se grafičko korisničko sučelje (što omogućava rad na bilo kojoj konzoli), a projekti se automatski prevode. Primjer za to bio bi neki softverski projekt s grafičkim korisničkim sučeljem lokaliziranim na više jezika. U konzolnome načinu rada moguće je izradu lokaliziranoga sučelja uvrstiti u radni proces.</para>
+
+    <section id="misc.console.mode.prerequisites">
+      <title>Preduvjeti</title>
+
+      <para>Za pokretanje programa OmegaT potreban je odgovarajući projekt. Lokacija nije bitna, budući da je morate unijeti u naredbeni redak prilikom pokretanja.</para>
+
+      <para>Ako trebate nestandardne postavke, morate imati odgovarajuće konfiguracijske datoteke (<literal>filters.conf</literal> i <literal>segmentation.conf</literal>). To možete ostvariti na dva načina:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Pokrenite program <application>OmegaT</application> na uobičajeni način (s grafičkim korisničkim sučeljem) pa namjestite postavke. Pokrenete li zatim program <application>OmegaT</application> u konzolnome načinu rada, koristit će iste postavke.</para>
+        </listitem>
+
+        <listitem>
+          <para>Ako nije moguće pokretanje programa <application>OmegaT</application> na uobičajeni način (jer nema raspoloživoga grafičkog okruženja), u odgovarajuću mapu kopirajte postavke iz neke druge instalacije programa <application>OmegaT</application> s drugoga računala. Lokacija nije bitna, budući da je možete upisati u naredbeni redak prilikom pokretanja (pogledajte u nastavku teksta). Potrebne datoteke <literal>filters.conf</literal> i <literal>segmentation.conf</literal> možete pronaći u korisničkoj početnoj mapi (npr. <literal>C:\Documents and Settings\%Korisnik%\<application>OmegaT</application></literal> u sustavu Windows, ili <literal>%korisnik%/.omegat/</literal> u sustavu Linux).</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="starting.in.misc.console.mode">
+      <title>Pokretanje programa OmegaT u konzolnome načinu rada</title>
+
+      <para>Za pokretanje programa OmegaT u konzolnome načinu rada potrebni su još neki dodatni parametri. Najznačajniji je <literal>&lt;mapa-projekta&gt;</literal>, a po izboru i <literal>--config-dir=&lt;mapa-konfiguracijskih-datoteka&gt;</literal>. Primjer:</para>
+
+      <para><literal>$&gt; java -jar <application>OmegaT</application>.jar /putanja/do/projekta \</literal></para>
+
+      <para><literal>--config-dir=/putanja/do/konfiguracijskih datoteka/ \</literal></para>
+
+      <para><literal> --mode=console-translate \</literal></para>
+
+      <para><literal> --source-pattern={regexp} \</literal></para>
+
+      <para><literal> --tag-validation=[block|warn] </literal></para>
+
+      <para><emphasis role="bold">Objašnjenje:</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>&lt;mapa-projekta&gt;</literal> kazuje programu <application>OmegaT</application> gdje se nalazi prijevodni projekt. Upisivanjem ovoga parametra pokrećemo program <application>OmegaT</application> u konzolnome načinu rada, koji potom prevodi odabrani projekt.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--config-dir=&lt;mapa-konfiguracijskih-datoteka&gt;</literal> kazuje programu OmegaT gdje je mapa u kojoj se nalaze konfiguracijske datoteke. Kada ovaj parametar nije naveden, OmegaT koristi zadane vrijednosti (mapa OmegaT u korisničkoj početnoj mapi ili, ako ona nije raspoloživa, u tekućoj radnoj mapi).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--mode=console-translate </literal>: program <application>OmegaT</application> se pokreće u konzolnome načinu rada i prevodi odabrani projekt.</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--source-pattern={regexp} </literal>služi za određivanje datoteka za prijevod. Primjer regularnoga izraza: <filename>test\.html</filename></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--tag-validation=[abort|warn]</literal>: odaberete li abort, program se zaustavlja kada se provjerom valjanosti oznaka teksta pronađu pogreške. Odaberete li warn, program se ne zaustavlja, a prikazuju se poruke o pogreškama. U svim ostalim slučajevima se ne obavlja provjera valjanosti oznaka teksta.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="misc.console.mode.option.quiet">
+      <title>Tihi način rada</title>
+
+      <para>Za „tihi” rad imamo dodatni parametar naredbenoga retka koji vrijedi isključivo za konzolni način rada: <literal>--quiet</literal>. U tihome načinu rada na zaslonu se prikazuje manje informacija o događajima. Ne prikazuju se ni poruke koje se obično nalaze na traci stanja.</para>
+
+      <para>Korištenje: <literal>java -jar <application>OmegaT</application>.jar /putanja/do/projekta --mode=console-translate --quiet</literal></para>
+    </section>
+
+    <section id="misc.console.mode.option.validatetags">
+      <title>Provjera valjanosti oznaka teksta</title>
+
+      <para>Za provjeru valjanosti oznaka teksta imamo dodatni parametar naredbenoga retka koji vrijedi isključivo za konzolni način rada: <literal>--tag-validation=[abort|warn]</literal>. Dodamo li ovaj parametar, provjera valjanosti oznaka teksta obavlja se prije prevođenja/sravnjivanja. Odaberemo li vrijednost <literal>abort</literal>, prilikom pronalaska pogrešaka u vezi s oznakama teksta prikazuju se poruke, a program se zaustavlja. Odaberemo li pak vrijednost <literal>warn</literal>, poruke o pogreškama se prikazuju, ali program OmegaT nastavlja s radom.</para>
+
+      <para>Korištenje: <literal>java -jar <application>OmegaT</application>.jar /putanja/do/projekta --mode=console-translate --tag-validation=abort</literal></para>
+    </section>
+  </section>
+
+  <section>
+    <title>Alat za automatsko sravnjivanje za svojstva jezika Java<indexterm class="singular">
+        <primary>Razno</primary> <secondary>Alat za automatsko sravnjivanje za svojstva jezika Java</secondary>
+      </indexterm></title>
+
+    <para>Programom OmegaT možete sravnjivati svojstva jezika Java u konzolnome načinu rada. Ako imate izvorišnu i odredišnu datoteku svojstava s jednakim sadržajem na odabranome jezičnom paru, ovim postupkom možete izraditi odgovarajuću datoteku tmx za taj sadržaj. Korištenje:</para>
+
+    <para><literal>java -jar OmegaT.jar --mode=console-align /mapa-moj-projekt --alignDir=/prevedeneDatoteke/</literal></para>
+
+    <para><filename>alignDir</filename> mora sadržavati prijevod na odredišnome jeziku projekta. Primjera radi, ako je projekt postavljen za jezični smjer EN-&gt;FR, alignDir mora sadržavati paket čiji naziv završava nastavkom _fr. Izrađena datoteka tmx sprema se u mapu <literal>omegat</literal> pod nazivom <filename>align.tmx</filename>.</para>
+  </section>
+
+  <section id="font.settings">
+    <title>Postavke fonta<indexterm class="singular">
+        <primary>Razno</primary> <secondary>Postavke fonta</secondary>
+      </indexterm></title>
+
+    <para>U ovome dijaloškom okviru možete odrediti font za korištenje u sljedećim prozorima programa <application>OmegaT</application>:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>glavni prozor programa <application>OmegaT</application> (okna za obradu, podudaranja i glosare)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Prozor za pretraživanje</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Prozor za provjeru valjanosti oznaka teksta</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Dijaloški okvir možete otvoriti putem izbornika <indexterm class="singular">
+        <primary>Izbornik Mogućnosti</primary> <secondary>Font...</secondary>
+      </indexterm><menuchoice> <guimenu>Mogućnosti</guimenu> <guimenuitem>Font...</guimenuitem> </menuchoice>. Dialoški okvir sadržava sljedeće elemente:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Font</emphasis>: padajući izbornik za odabir jednoga od raspoloživih fontova računala.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Veličina</emphasis>: izbornik veličine fonta.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Ogledni tekst</emphasis>: polje izravnoga prikaza odabranoga fonta.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Napomena: </emphasis>ponekad je potrebno dulje vrijeme da OmegaT ažurira prikaz nakon promjene postavki fonta. To poglavito vrijedi kada je u oknu za obradu otvorena veća datoteka s puno segmenata i/ili zbog sporijega računala. Također uzmite u obzir da nekim jezičnim parovima bolje odgovaraju određeni fontovi. Konkretno, za jezike različitih pisama/načina pisanja (npr. ruski i japanski) prilikom prevođenja valja koristiti font koji se može upotrebljavati za oba jezika.</para>
+  </section>
+
+  <section id="preventing.data.loss">
+    <title>Sprječavanje gubitka podataka<indexterm class="singular">
+        <primary>Razno</primary> <secondary>Sprječavanje gubitka podataka</secondary>
+      </indexterm></title>
+
+    <para><application>OmegaT</application> je robustan program. Međutim, morate poduzimati mjere sprječavanja gubitka podatka prilikom korištenja programa <application>OmegaT</application>, baš kao i sa svim drugim programima. <application>OmegaT</application> tijekom prevođenja sprema sve zgotovljene segmente u prijevodnu memoriju <literal>project_save.tmx</literal>, koja se nalazi u podmapi projekta <literal>/omegat</literal> subfolder.</para>
+
+    <para>OmegaT također izrađuje sigurnosne kopije prijevodne memorije, tj. datoteke project_save.tmx.GODNMMDDHHNN.bak, i sprema ih u istu podmapu pri svakom otvaranju ili ponovnom učitavanju projekta. GODN je četveroznamenkasta godina, MM je mjesec, DD dan u mjesecu, dok HH i NN označavaju sat i minutu spremanja prethodne prijevodne memorije.</para>
+
+    <para>Kad posumnjate da ste izgubili podatke prijevoda, možete vratiti projekt u stanje u kojemu je bio pri zadnjemu spremanju (obično prije 10-ak minuta), i to prema sljedećemu postupku:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Zatvorite projekt.</para>
+      </listitem>
+
+      <listitem>
+        <para>Preimenujte tekuću datoteku <filename>project_save.tmx</filename> (npr. u <filename>project_save.tmx.privremeno</filename>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Odaberite sigurnosnu kopiju prijevodne memorije koja najvjerojatnije sadržava potrebne podatke.</para>
+      </listitem>
+
+      <listitem>
+        <para>Preimenujte je u <literal>project_save.tmx</literal>.</para>
+      </listitem>
+
+      <listitem>
+        <para>Otvorite projekt.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Da biste izbjegli gubitak značajnih podataka:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Redovito kopirajte datoteku /omegat/project_save.tmx na medije za sigurnosno kopiranje, kao što su CD ili DVD.</para>
+      </listitem>
+
+      <listitem>
+        <para>Redovito izrađujte datoteke prijevoda i provjeravajte sadržavaju li sav prevedeni sadržaj sve dok se ne izvještite s programom <application>OmegaT</application>.</para>
+      </listitem>
+
+      <listitem>
+        <para>Posebnu pozornost obratite pri bilo kakvome mijenjanju sadržaja u mapi <literal>/source</literal> usred rada na projektu. Svaka promjena izvorišnih datoteka nakon početka prevođenja može dovesti do toga da <application>OmegaT</application> neće biti u stanju pronaći segmente koji su zapravo već prevedeni.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Na početku korištenja programa koristite ove tekstove pomoći. Ako naletite na probleme, objavite poruku na stranicama <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info">korisničke skupine programa <application>OmegaT</application></ulink>. Poruke možete slobodno objavljivati na jeziku po svojoj volji.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

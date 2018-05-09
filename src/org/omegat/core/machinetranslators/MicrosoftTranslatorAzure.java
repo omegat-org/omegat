@@ -5,6 +5,7 @@
 
  Copyright (C) 2012 Alex Buloichik, Didier Briel
                2016-2017 Aaron Madlon-Kay
+               2018 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +35,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JCheckBox;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.Language;
@@ -55,6 +57,7 @@ import org.omegat.util.WikiGet;
 public class MicrosoftTranslatorAzure extends BaseTranslate {
     private static final Logger LOGGER = Logger.getLogger(MicrosoftTranslatorAzure.class.getName());
 
+    protected static final String PROPERTY_NEURAL = "microsoft.neural";
     protected static final String PROPERTY_SUBSCRIPTION_KEY = "microsoft.api.subscription_key";
 
     protected static final String URL_TOKEN = "https://api.cognitive.microsoft.com/sts/v1.0/issueToken";
@@ -148,6 +151,9 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
         p.put("from", langFrom);
         p.put("to", langTo);
         p.put("contentType", "text/plain");
+        if (isNeural()) {
+            p.put("category", "generalnn");
+        }
 
         String r = WikiGet.get(URL_TRANSLATE, p, null);
         Matcher m = RE_RESPONSE.matcher(r);
@@ -162,6 +168,18 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
         }
     }
 
+    /**
+     * Whether or not to use the new Neural Machine Translation System
+     *
+     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1366/">Add support for 
+     * Microsoft neural machine translation</a>
+     */
+    private boolean isNeural() {
+        String value = System.getProperty(PROPERTY_NEURAL,
+                Preferences.getPreference(PROPERTY_NEURAL));
+        return Boolean.parseBoolean(value);
+    }
+    
     @Override
     public boolean isConfigurable() {
         return true;
@@ -169,12 +187,18 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
 
     @Override
     public void showConfigurationUI(Window parent) {
+        JCheckBox neuralCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_MICROSOFT_NEURAL_LABEL"));
+        neuralCheckBox.setSelected(isNeural());
+
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
             @Override
             protected void onConfirm() {
                 String key = panel.valueField1.getText().trim();
                 boolean temporary = panel.temporaryCheckBox.isSelected();
                 setCredential(PROPERTY_SUBSCRIPTION_KEY, key, temporary);
+                
+                System.setProperty(PROPERTY_NEURAL, Boolean.toString(neuralCheckBox.isSelected()));
+                Preferences.setPreference(PROPERTY_NEURAL, neuralCheckBox.isSelected());                
             }
         };
         dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_MICROSOFT_SUBSCRIPTION_KEY_LABEL"));
@@ -182,6 +206,8 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
         dialog.panel.valueLabel2.setVisible(false);
         dialog.panel.valueField2.setVisible(false);
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_SUBSCRIPTION_KEY));
+        dialog.panel.itemsPanel.add(neuralCheckBox);
+
         dialog.show();
     }
 }

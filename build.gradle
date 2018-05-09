@@ -100,17 +100,17 @@ dependencies {
         compile 'org.slf4j:slf4j-jdk14:1.7.25'
 
         // PDF Filter
-        compile 'org.apache.pdfbox:pdfbox:2.0.8'
+        compile 'org.apache.pdfbox:pdfbox:2.0.9'
 
         // Aligner
         compile 'net.loomchild:maligna:3.0.0'
 
         // Dictionary
         compile 'org.dict.zip:dictzip-lib:0.8.2'
-        compile 'com.github.takawitter:trie4j:0.9.7'
+        compile 'com.github.takawitter:trie4j:0.9.8'
 
         // Encoding dectection
-        compile 'com.github.albfernandez:juniversalchardet:2.0.2'
+        compile 'com.github.albfernandez:juniversalchardet:2.1.0'
 
         // Legacy projects re-hosted on GitHub + Bintray
         compile 'org.omegat:vldocking:3.0.5'
@@ -242,7 +242,7 @@ task genDocIndex(type: Copy) {
             def docVersion = loadProperties(props).version
             def status = docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'
             ['code': code, 'name': name, 'version': docVersion, 'status': status]
-        }
+        }.sort { it.code }
         expand('languages': langInfos)
         filteringCharset = 'UTF-8'
     }

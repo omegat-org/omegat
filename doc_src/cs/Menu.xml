@@ -160,6 +160,8 @@
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
+                  <keycap>Shift</keycap>
+
                   <keycap>D</keycap>
                 </keycombo></entry>
 
@@ -188,6 +190,16 @@
                 </keycombo></entry>
 
               <entry>Zavře nebo otevře okno <link linkend="section.project.files">Soubory projektu</link> (záleží to na tom, zda je toto okno právě otevřené či zavřené).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Procházet obsah projektu</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap/>
+                </keycombo></entry>
+
+              <entry>Zprostředkovává přístu do adresářů projektu.<para>A navíc, dva záznamy v menu umožňují otevřít přímo aktuální dokumenty zdroje a cíle a zapisovatelný glosář. Dokumenty budou otevřeny v aplikaci vybrané operačním systémem. Pokud dané dokumenty nejsou k dispozici, bude záznam zobrazen šedě.</para></entry>
             </row>
 
             <row>
@@ -297,7 +309,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Přepsat nalezeným překladem</guimenuitem></entry>
+              <entry><guimenuitem>Nahradit shodou nebo výběrem</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -305,11 +317,11 @@
                   <keycap>R</keycap>
                 </keycombo></entry>
 
-              <entry>Přepíše celý cílový segment vybraným přibližným překladem (ve výchozím nastavení je vybraný první přibližný překlad).</entry>
+              <entry>Přepíše celý cílový segment vybraným přibližným překladem (ve výchozím nastavení je vybraný první přibližný překlad).<para>Pokud je v rámci přibližného překladu vybrán jen určitý text, tak pak jen tento výběr nahradí celý cílový segment.</para></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Vložit nalezený překlad</guimenuitem></entry>
+              <entry><guimenuitem>Vložit přibližný překlad nebo výběr</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -317,7 +329,7 @@
                   <keycap>I</keycap>
                 </keycombo></entry>
 
-              <entry>Vloží vybraný přibližný překlad na pozici kurzoru. Pokud je část cílového segmentu zvýrazněna výběrem, tato funkce přepíše vybranou část.</entry>
+              <entry>Vloží vybraný přibližný překlad na pozici kurzoru. Pokud je část cílového segmentu zvýrazněna výběrem, tato funkce přepíše vybranou část.<para>Pokud jsou vybrané nějaké texty uvnitř přibližného překladu, tak jen tento výběr bude vložen na pozici kurzoru.</para></entry>
             </row>
 
             <row>
@@ -415,11 +427,11 @@
                   <keycap>G</keycap>
                 </keycombo></entry>
 
-              <entry>Umožňuje uživateli vytvořit záznam ve výchozím souboru glosáře.</entry>
+              <entry>Umožňuje uživateli vytvořit záznam ve výchozím souboru glosáře.<para>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, pak bude tento text - ve výchozím nastavení vložen do políčka  <guilabel>Termín zdroje</guilabel>.</para></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Hledat v projektu</guimenuitem></entry>
+              <entry><guimenuitem>Hledat v projektu...</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -427,7 +439,7 @@
                   <keycap>F</keycap>
                 </keycombo></entry>
 
-              <entry>Otevře nové okno <link linkend="section.search.window">Hledat</link>.</entry>
+              <entry>Otevře nové okno <link linkend="section.search.window">Hledat</link>.<para>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, pak bude tento text - ve výchozím nastavení vložen do políčka <guilabel>Hledat</guilabel>.</para><para>Stisknutí <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo>zobrazí poslední již otevřené okno Hledat (místo aby se otevřeno nové).</para></entry>
             </row>
 
             <row>
@@ -439,7 +451,7 @@
                   <keycap>K</keycap>
                 </keycombo></entry>
 
-              <entry>Otevře nové okno <link linkend="section.searchreplace.window">Najít a nahradit</link></entry>
+              <entry>Otevře nové okno <link linkend="section.searchreplace.window">Najít a nahradit</link><para>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, pak bude tento text - ve výchozím nastavení vložen do políčka <guilabel>Hledat</guilabel>.</para></entry>
             </row>
 
             <row>
@@ -447,7 +459,7 @@
 
               <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (viz text)</entry>
 
-              <entry>Změní velikost písmen zvýrazněného textu v cílovém segmentu podle vybrané možnosti (malá písmena, VELKÁ PÍSMENA, Velká První Písmena). Tyto tři možnosti můžete cyklicky procházet opakovaným tisknutím Shift+F3.<indexterm>
+              <entry>Změní velikost písmen zvýrazněného textu v cílovém segmentu podle vybrané možnosti (malá písmena, VELKÁ PÍSMENA, Velká První Písmena nebo Velké písmeno na začátku věty). Tyto čtyři možnosti můžete cyklicky procházet opakovaným tisknutím Shift+F3.<indexterm>
                   <primary>Klávesové zkratky</primary> <secondary>Přepnout velikost písma - Shift+F3</secondary>
                 </indexterm> Pokud není vybrán žádný text, <application>OmegaT</application> vybere slovo, které se zprava dotýká kurzoru.</entry>
             </row>
@@ -707,7 +719,13 @@
             <row>
               <entry><guimenuitem>Označit automaticky vyplněné segmenty</guimenuitem></entry>
 
-              <entry>Když je tato možnost aktivní, pozadí všech segmentů, kde byl cílový segment automaticky vyplněn (např. z paměti TMX umístěné v /tm/auto), je barevně zvýrazněno. Barvy se zobrazují tehdy, když je aktivní možnost „Uložit automaticky vyplněný status“ (v Možnosti / Nastavení editace ...). Běžné překlady vložené z adresáře auto jsou zobrazeny oranžově. Ostatní překlady, rozpoznány obzvláště v TMX, lze zobrazit s použitím různých barev. Více technických detailů najdete v <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Požadavky na vylepšení</ulink>.</entry>
+              <entry>Když je tato možnost aktivní, pozadí všech segmentů, kde byl cílový segment automaticky vyplněn (např. z paměti TMX umístěné v /tm/auto), je barevně zvýrazněno. Barvy se zobrazují tehdy, když je aktivní možnost „Uložit automaticky vyplněný status“ (v Možnosti / Nastavení editace ...). Běžné překlady vložené z adresáře auto jsou zobrazeny oranžově. Ostatní překlady, rozpoznány obzvláště v TMX, lze zobrazit s použitím různých barev. Více technických detailů najdete v <ulink url="https://sourceforge.net/p/omegat/feature-requests/">Požadavky na vylepšení</ulink>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Nucené záložní fonty</guimenuitem></entry>
+
+              <entry>Zatrhněte tuto možnost tehdy, když OmegaT nezobrazuje některé znaky správně (a to i tehdy, když jsou znakové sady obsahující požadované znaky na vašem počítači správně instalovány). Poznámka: ve Windows se může tento manuální výpadek krýt se standardním výpadkem fontů, který způsobuje nežádoucí substituci fontů. Z tohoto důvodu je tato funkce ve výchozím nastavení vypnuta.</entry>
             </row>
 
             <row>
@@ -813,13 +831,13 @@
             <row>
               <entry><guimenuitem>Strojový překlad</guimenuitem></entry>
 
-              <entry>Umožní vám aktivovat / deaktivovat nabízené nástroje Strojového překladu. Pokud je toto aktivní, zkratkou <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> vložíte návrh do cílové části aktivního segmentu.</entry>
+              <entry>Umožní vám aktivovat / deaktivovat nabízené nástroje Strojového překladu. Pokud je toto aktivní, zkratkou <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> vložíte návrh do cílové části aktivního segmentu.<para>Z bezpečnostních důvodů se může stát, že nebudete chtít poslat všechny své segmenty nástroji na strojový překlad. Při zrušení zatržení <emphasis role="bold">Automaticky doplnit překlad</emphasis>, se bude strojový překlad chovat tak, že při stistku <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>(<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo> v OS X) bude přeložen pouze aktuální segment. Pak musíte použít <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap></keycombo> podruhé, aby se vložil návrh.</para><para>Zatrhněte možnost <emphasis role="bold">Pouze nepřeložené segmenty</emphasis> k dekativaci nástrojů Strojového překladu pro již přeložené segmenty. Poznámka: v tomto případě, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>můžete stále použít k tomu, aby se zaktivoval dotaz na strojový překlad v již přeloženém segmentu.</para></entry>
             </row>
 
             <row>
               <entry><guimenuitem>Glosář</guimenuitem></entry>
 
-              <entry>Možnost <guimenuitem>Zobrazit popis kontextu pro glosáře TBX</guimenuitem> umožňuje zobrazit nebo skrýt kontextové informace zároveň s pojmy (které pochází z glosářů TBX umístěných v adresáři <filename>glossary</filename>) v podokně Glosář.<para>Další 3 možnosti jsou popsány na specifické stránce zabývající se  <link linkend="section.TaaS.options">TaaS</link> (‚Terminology as a Service / Terminologie jako služba‘).</para></entry>
+              <entry>Možnost <guimenuitem>Zobrazit popis kontextu pro glosáře TBX</guimenuitem> umožňuje zobrazit nebo skrýt kontextové informace zároveň s pojmy (které pochází z glosářů TBX umístěných v adresáři <filename>glossary</filename>) v podokně Glosář.<para>Pokud je možnost <guimenuitem>Ve zdrojovém textu zobrazovat pojmy odděleně</guimenuitem> aktivní, pak bude záznam glosáře „položkaA položkaB“ nalezen ve zdrojovém textu „položkaA jiné slovo položkaB“. Pokud je tato možnost neaktviní, nebude nahoře zmíněný záznam glosáře nalezen.</para><para>Pokud je aktivní možnost <guimenuitem>Použít algoritmus pro nalezení kořene pro záznamy glosáře</guimenuitem> - v anglickém zdrojovém textu - pak bude záznam glosáře „element“ nalezen pokud zrojový text obsahuje „elements“. Pokud je tato možnost neaktviní, nebude nahoře zmíněný záznam glosáře nalezen.</para><para>Možnost <emphasis>Nahradit tipy glosáře při vkládání zdrojového textu</emphasis> umožňuje automaticky nahradit shodu z glosáře cílovým pojmen pokud je vložen zdrojvý text. Toto je aktivní při <emphasis>Upravit &gt; Přepsat zdrojem</emphasis>, <emphasis>Upravit &gt; Vložit zdroj</emphasis> a když vstupu do segmentu je povoleno <emphasis>Možnosti &gt; Nastavení editace &gt; [Vložit] Zdrojový text</emphasis>. Pokud je k dispozici víc cílových pojmů, pak bude použitý ten první (jak je to ukázáno v podokně Glosář). Hledání shody v glosáři nepoužívá algoritmus pro nalezení kořene slova nebo stop-slova, ale je citlivé na velká a malá písmena. Snažte se najít shodu při psaní velkých a malých písmen zdrojového slova.</para><para>Další 3 možnosti jsou popsány na specifické stránce zabývající se  <link linkend="section.TaaS.options.access">TaaS</link> (‚Terminology as a Service / Terminologie jako služba‘).</para></entry>
             </row>
 
             <row>
@@ -831,7 +849,7 @@
             <row>
               <entry><guimenuitem>Automatické doplnění</guimenuitem></entry>
 
-              <entry><para>Kliknutím na <guimenuitem>Glosář...</guimenuitem>  můžete nastavit zobrazení glosáře při automatickém doplnění.</para><para>Možnosti nastavení pro automatický text otevřete kliknutím na <guimenuitem>Automatický text...</guimenuitem>, zde také můžete přidávat nebo odstranit záznamy.</para><para>Volba <guimenuitem>Tabulka znaků...</guimenuitem> slouží k nastavení možností tabulky znaků automatického doplnění textu.</para></entry>
+              <entry><para>Kliknutím na <guimenuitem>Glosář...</guimenuitem>  můžete nastavit zobrazení glosáře při automatickém doplnění.</para><para>Možnosti nastavení pro automatický text otevřete kliknutím na <guimenuitem>Automatický text...</guimenuitem>, zde také můžete přidávat nebo odstranit záznamy.</para><para>Volba <guimenuitem>Tabulka znaků...</guimenuitem> slouží k nastavení možností tabulky znaků automatického doplnění textu.</para><para>Klávesovou zkratkou <emphasis role="bold">Sctr+Mezerník</emphasis> se v cílovém segmentu spustí automatické doplňování.</para><para>Pokud je zatržena možnost <emphasis role="bold">Automatické doplňovánícky ukazovat relevantní návrhy</emphasis>, pak bude automaticky spuštěno automatické doplňování již při psaní prvních znaků přeloženého záznamu glosáře, nebo při zadání &quot;&lt;&quot; v případě tagu.</para></entry>
             </row>
 
             <row>
@@ -871,9 +889,9 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Ověření tagů...</guimenuitem></entry>
+              <entry><guimenuitem>Zpracování tagů...</guimenuitem></entry>
 
-              <entry>Pro programátory: Umožňuje vám konfigurovat možnosti validátoru tagů tak, aby kontroloval i programovací proměnné (%...).</entry>
+              <entry>Při překladu souborů vztahujících se k software: Umožňuje vám konfigurovat možnosti validátoru tagů tak, aby kontroloval i programovací proměnné (%...). Taktéž umožňuje definovat různé možnosti vztahujících se k validaci tagů a definování uživatelských tagů.</entry>
             </row>
 
             <row>
@@ -937,7 +955,7 @@
             <row>
               <entry><guimenuitem>Uživatelská příručka...</guimenuitem></entry>
 
-              <entry><keycap>F1:</keycap> Otevře prohlížeč nápovědy, který zobrazí uživatelskou příručku v samostatném okně.</entry>
+              <entry><keycap>F1:</keycap> Otevře tuto příručku ve výchozím prohlížeči.</entry>
             </row>
 
             <row>
@@ -1175,7 +1193,7 @@
             </row>
 
             <row>
-              <entry>Vložit zdroj</entry>
+              <entry>Vložit zdrojový text</entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>

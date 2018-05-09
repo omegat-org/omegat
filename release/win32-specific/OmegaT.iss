@@ -39,6 +39,7 @@ Source: "readme_es.txt"; DestDir: "{app}"; Flags: isreadme; Languages: es
 Source: "readme_eu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: eu
 Source: "readme_fr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: fr
 Source: "readme_gl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: gl
+Source: "readme_hr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hr
 Source: "readme_hu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hu
 ;Source: "readme_id.txt"; DestDir: "{app}"; Flags: isreadme; Languages: id
 Source: "readme_it.txt"; DestDir: "{app}"; Flags: isreadme; Languages: it
@@ -113,7 +114,7 @@ Name: "be"; MessagesFile: "compiler:Languages\Belarusian.isl"
 ;Name: "bg"; MessagesFile: "compiler:Languages\Bulgarian.isl"
 Name: "zh_CN"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 Name: "zh_TW"; MessagesFile: "compiler:Languages\ChineseTraditional.isl"
-;Name: "hr"; MessagesFile: "compiler:Languages\Croatian.isl"
+Name: "hr"; MessagesFile: "compiler:Languages\Croatian.isl"
 Name: "eo"; MessagesFile: "compiler:Languages\Esperanto.isl"
 ;Name: "et"; MessagesFile: "compiler:Languages\Estonian.isl"
 ;Name: "fa"; MessagesFile: "compiler:Languages\Farsi.isl"

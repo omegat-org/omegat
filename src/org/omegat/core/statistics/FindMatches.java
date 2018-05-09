@@ -215,6 +215,10 @@ public class FindMatches {
             }
             for (PrepareTMXEntry tmen : en.getValue().getEntries()) {
                 checkStopped(stop);
+                if (tmen.source == null) {
+                    // Not all TMX entries have a source; in that case there can be no meaningful match, so skip.
+                    continue;
+                }
                 if (requiresTranslation && tmen.translation == null) {
                     continue;
                 }

@@ -579,10 +579,6 @@ public final class TestTeamIntegrationChild {
                 return null;
             }
 
-            public JMenuItem getProjectRecentMenuItem() {
-                return null;
-            }
-
             public JMenu getProjectMenu() {
                 return new JMenu();
             }

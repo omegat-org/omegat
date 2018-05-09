@@ -74,4 +74,9 @@ public class SearchMatch implements Comparable<SearchMatch> {
         start += offset;
         end += offset;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%d,%d] => %s", start, end, replacement);
+    }
 }

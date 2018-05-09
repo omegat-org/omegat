@@ -52,7 +52,7 @@
 
     <para>Kliknutím na <guibutton>Instalovat nový slovník</guibutton> se otevře okno Instalátor slovníků, kde si můžete vybrat slovníky, které chcete instalovat.</para>
 
-    <para>Názvy souborů musí odpovídat jazykovému kódu cílového jazyka tak jak je definován v okně Vlastnosti projektu (<guimenu>Projekt &gt; Vlastnosti</guimenu>). Například, pokud jste si vybrali ES-MX (mexická španělština) jako cílový jazyk, musí být soubory slovníku pojmenovány ‚es_MX.dic‘ a ‚es_MX.aff‘. Pokud pak třeba máte k dispozici slovník se standardní španělštinou, označené např. ‚es_es.dic‘ and ‚es_es.aff‘, můžete je přejmenovat na ‚es_MX.dic‘ a ‚es_MX.aff‘ a kontrola pravopisu budu fungovat.  Nezapomeňte ale na to, že pak se bude postupovat dle pravidel pro standardní španělštinu (kastilštinu) a ne pro mexickou španělštinu.</para>
+    <para>Názvy souborů musí odpovídat jazykovému kódu cílového jazyka tak jak je definován v okně Vlastnosti projektu (<guimenu>Projekt &gt; Vlastnosti</guimenu>). Například, pokud jste si vybrali ES-MX (mexická španělština) jako cílový jazyk, musí být soubory slovníku pojmenovány ‚es_MX.dic‘ a ‚es_MX.aff‘. Pokud pak třeba máte k dispozici slovník se standardní španělštinou, označené např. ‚es_es.dic‘ and ‚es_es.aff‘, můžete je přejmenovat na ‚es_MX.dic‘ a ‚es_MX.aff‘ a kontrola pravopisu bude fungovat.  Nezapomeňte ale na to, že pak se bude postupovat dle pravidel pro standardní španělštinu (kastilštinu) a ne pro mexickou španělštinu.</para>
   </section>
 
   <section>

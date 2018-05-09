@@ -43,6 +43,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,6 +70,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.RecentProjects;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
@@ -218,6 +220,22 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(projectTeamNewMenuItem = createMenuItem("TF_MENU_FILE_TEAM_CREATE"));
         projectMenu.add(projectOpenMenuItem = createMenuItem("TF_MENU_FILE_OPEN"));
         projectMenu.add(projectOpenRecentMenuItem = createMenu("TF_MENU_FILE_OPEN_RECENT"));
+        projectOpenRecentMenuItem.addMenuListener(new MenuListener() {
+
+            @Override
+            public void menuSelected(MenuEvent e) {
+                populateRecentProjects();
+            }
+
+            @Override
+            public void menuDeselected(MenuEvent e) {
+            }
+
+            @Override
+            public void menuCanceled(MenuEvent e) {
+            }
+        });
+        projectClearRecentMenuItem = createMenuItem("TF_MENU_FILE_CLEAR_RECENT");
 
         projectMenu.add(projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT"));
         projectMenu.add(projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT"));
@@ -227,7 +245,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE"));
         projectMenu.addSeparator();
         projectMenu.add(projectCommitSourceFiles = createMenuItem("TF_MENU_FILE_COMMIT"));
-        projectMenu.add(projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET"));        
+        projectMenu.add(projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET"));
         projectMenu.addSeparator();
         projectMenu.add(projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE"));
         projectMenu.add(projectSingleCompileMenuItem = createMenuItem("TF_MENU_FILE_SINGLE_COMPILE"));
@@ -551,6 +569,21 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         }
     }
 
+    private void populateRecentProjects() {
+        projectOpenRecentMenuItem.removeAll();
+        List<String> items = RecentProjects.getRecentProjects();
+        for (String project : items) {
+            JMenuItem recentProjectMenuItem = new JMenuItem(project);
+            File projectFile = new File(project);
+            recentProjectMenuItem.addActionListener(event -> ProjectUICommands.projectOpen(projectFile, true));
+            recentProjectMenuItem.setEnabled(projectFile.isDirectory() && projectFile.canRead());
+            projectOpenRecentMenuItem.add(recentProjectMenuItem);
+        }
+        projectOpenRecentMenuItem.addSeparator();
+        projectOpenRecentMenuItem.add(projectClearRecentMenuItem);
+        projectClearRecentMenuItem.setEnabled(!items.isEmpty());
+    }
+
     /**
      * Create menu instance and set title.
      *
@@ -674,8 +707,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         } else {
             projectCommitTargetFiles.setEnabled(false);
         }
-        
-        
     }
 
     public JMenu getMachineTranslationMenu() {
@@ -696,10 +727,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
     public JMenu getProjectMenu() {
         return projectMenu;
-    }
-
-    public JMenuItem getProjectRecentMenuItem() {
-        return projectOpenRecentMenuItem;
     }
 
     public JMenu getAutoCompletionMenu() {
@@ -790,6 +817,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectTeamNewMenuItem;
     JMenuItem projectOpenMenuItem;
     JMenu projectOpenRecentMenuItem;
+    JMenuItem projectClearRecentMenuItem;
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
     JMenuItem projectWikiImportMenuItem;

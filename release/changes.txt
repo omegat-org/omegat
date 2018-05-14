@@ -20,7 +20,9 @@
 
   Other changes:
 
-  - Project > Open Recent Project now remembers up to 10 projects
+  - Project > Open Recent Project now remembers up to 10 projects by
+default. Existing users should remove the `most_recent_projects_size`
+item in the omegat.prefs file to take advantage of this change.
 
   - Added Project > Open Recent Project > Clear Menu
 

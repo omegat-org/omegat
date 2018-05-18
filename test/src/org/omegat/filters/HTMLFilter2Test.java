@@ -36,6 +36,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.html2.HTMLFilter2;
+import org.omegat.filters2.html2.HTMLUtils;
 import org.omegat.util.Language;
 
 public class HTMLFilter2Test extends TestFilterBase {
@@ -96,5 +97,11 @@ public class HTMLFilter2Test extends TestFilterBase {
         checkMultiStart(fi, f);
         checkMultiNoPrevNext("<c0>This</c0> is <i1>first</i1> line.", null, null, null);
         translateXML(filter, f);
+    }
+
+    @Test
+    public void testHtmlEntityDecode() {
+        // Should decode &apos; (was missing for some reason)
+        assertEquals("foo 'bar'", HTMLUtils.entitiesToChars("foo &apos;bar&apos;"));
     }
 }

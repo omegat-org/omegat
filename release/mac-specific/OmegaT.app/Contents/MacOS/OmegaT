@@ -8,7 +8,12 @@ APP_CONTENTS="$(dirname "$0")/.."
 
 JAVA_HOME="$APP_CONTENTS/PlugIns/jre.bundle/Contents/Home"
 
+# Increase maximum memory usage
+# Remove leading '#' to enable
+#MEMORY=-Xmx6g
+
 exec "$JAVA_HOME/bin/java" \
+    $MEMORY \
     -Xdock:name=OmegaT \
     -Xdock:icon="$APP_CONTENTS/Resources/OmegaT.icns" \
     -jar "$APP_CONTENTS/Java/OmegaT.jar" \

@@ -9,7 +9,7 @@ APP_CONTENTS="$(dirname "$0")/.."
 JAVA_HOME="$APP_CONTENTS/PlugIns/jre.bundle/Contents/Home"
 
 exec "$JAVA_HOME/bin/java" \
-     -Xdock:name=OmegaT \
-     -Xdock:icon="$APP_CONTENTS/Resources/OmegaT.icns" \
-     -jar "$APP_CONTENTS/Java/OmegaT.jar" \
-     --config-file="$APP_CONTENTS/Resources/Configuration.properties"
+    -Xdock:name=OmegaT \
+    -Xdock:icon="$APP_CONTENTS/Resources/OmegaT.icns" \
+    -jar "$APP_CONTENTS/Java/OmegaT.jar" \
+    --config-file="$APP_CONTENTS/Resources/Configuration.properties"

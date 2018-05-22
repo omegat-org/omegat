@@ -2,7 +2,7 @@
  OmegaT 4.1.4 update 1
 ----------------------------------------------------------------------
   5 Enhancements
-  1 Bug fix
+  2 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 4.1.4 update 1 vs 4.1.4
@@ -27,6 +27,9 @@ item in the omegat.prefs file to take advantage of this change.
   - Added Project > Open Recent Project > Clear Menu
 
   Bug fixes:
+
+  - Infinite loop when searching with no keyword
+  https://sourceforge.net/p/omegat/bugs/901/
 
   - Empty regex capture group becomes "null" in replacement
   https://sourceforge.net/p/omegat/bugs/907/

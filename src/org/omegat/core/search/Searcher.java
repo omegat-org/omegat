@@ -669,6 +669,11 @@ public class Searcher {
                     // No more matches
                     break;
                 }
+                if (start == matcher.start()) {
+                    // Match has not moved forward despite additional search;
+                    // break to avoid infinite loop
+                    break;
+                }
             }
         }
 

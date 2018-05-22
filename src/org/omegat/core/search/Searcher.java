@@ -660,7 +660,13 @@ public class Searcher {
                 } else {
                     foundMatches.add(new SearchMatch(start, matcher.end()));
                 }
-                if (start >= text.length() || !matcher.find(matcher.end())) {
+                if (start >= text.length()) {
+                    // Reached the end of the text
+                    break;
+                }
+                // Check for additional matches (matcher will now contain data of next match)
+                if (!matcher.find(matcher.end())) {
+                    // No more matches
                     break;
                 }
             }

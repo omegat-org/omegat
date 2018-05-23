@@ -658,7 +658,9 @@ public class Searcher {
                     } else {
                         foundMatches.add(new SearchMatch(start, end, m_searchExpression.replacement));
                     }
-                } else {
+                } else if (end > start) {
+                    // Add a match only if the matched region is not empty.
+                    // We still return true so the hit will still be recorded.
                     foundMatches.add(new SearchMatch(start, end));
                 }
                 if (start >= text.length()) {

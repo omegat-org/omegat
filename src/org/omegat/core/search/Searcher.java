@@ -631,6 +631,7 @@ public class Searcher {
             }
             while (true) {
                 int start = matcher.start();
+                int end = matcher.end();
                 if (m_searchExpression.mode == SearchMode.REPLACE) {
                     if (m_searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
                         String repl = m_searchExpression.replacement;
@@ -652,20 +653,20 @@ public class Searcher {
                                     + repl.substring(replaceMatcher.end());
                             replaceMatcher.reset(repl);
                         }
-                        foundMatches.add(new SearchMatch(start, matcher.end(), StringUtil.replaceCase(repl,
+                        foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl,
                                 m_project.getProjectProperties().getTargetLanguage().getLocale())));
                     } else {
-                        foundMatches.add(new SearchMatch(start, matcher.end(), m_searchExpression.replacement));
+                        foundMatches.add(new SearchMatch(start, end, m_searchExpression.replacement));
                     }
                 } else {
-                    foundMatches.add(new SearchMatch(start, matcher.end()));
+                    foundMatches.add(new SearchMatch(start, end));
                 }
                 if (start >= text.length()) {
                     // Reached the end of the text
                     break;
                 }
                 // Check for additional matches (matcher will now contain data of next match)
-                if (!matcher.find(matcher.end())) {
+                if (!matcher.find(end)) {
                     // No more matches
                     break;
                 }

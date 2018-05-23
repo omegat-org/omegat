@@ -665,14 +665,12 @@ public class Searcher {
                     // Reached the end of the text
                     break;
                 }
-                // Check for additional matches (matcher will now contain data of next match)
-                if (!matcher.find(end)) {
+                // Check for additional matches (matcher will now contain data of next match).
+                // Prevent infinite loop when match was zero-length by forcibly incrementing
+                // next start index.
+                int nextStart = end == start ? end + 1 : end;
+                if (!matcher.find(nextStart)) {
                     // No more matches
-                    break;
-                }
-                if (start == matcher.start()) {
-                    // Match has not moved forward despite additional search;
-                    // break to avoid infinite loop
                     break;
                 }
             }

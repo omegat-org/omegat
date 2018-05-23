@@ -146,13 +146,12 @@ public final class ProjectUICommands {
                     // create project
                     try {
                         ProjectFactory.createProject(newProps);
+                        RecentProjects.add(dir.getAbsolutePath());
                     } catch (Exception ex) {
                         Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     }
                 }
-
-                RecentProjects.add(dir.getAbsolutePath());
 
                 mainWindow.setCursor(oldCursor);
                 return null;
@@ -194,12 +193,11 @@ public final class ProjectUICommands {
                 // create project
                 try {
                     ProjectFactory.createProject(newProps);
+                    RecentProjects.add(dir.getAbsolutePath());
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
-
-                RecentProjects.add(dir.getAbsolutePath());
 
                 return null;
             }
@@ -515,14 +513,12 @@ public final class ProjectUICommands {
                     if (needToSaveProperties) {
                         Core.getProject().saveProjectProperties();
                     }
+
+                    RecentProjects.add(projectRootFolder.getAbsolutePath());
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                    mainWindow.setCursor(oldCursor);
-                    return null;
                 }
-
-                RecentProjects.add(projectRootFolder.getAbsolutePath());
 
                 mainWindow.setCursor(oldCursor);
                 return null;

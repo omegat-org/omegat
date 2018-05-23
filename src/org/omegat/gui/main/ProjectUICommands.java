@@ -35,6 +35,8 @@ package org.omegat.gui.main;
 import java.awt.Cursor;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -110,11 +112,12 @@ public final class ProjectUICommands {
             return;
         }
         final File dir = ndc.getSelectedFile();
+        if (!ensureProjectDir(dir)) {
+            return;
+        }
 
         new SwingWorker<Void, Void>() {
             protected Void doInBackground() throws Exception {
-
-                dir.mkdirs();
 
                 // ask about new project properties
                 ProjectProperties props = new ProjectProperties(dir);
@@ -183,10 +186,12 @@ public final class ProjectUICommands {
             return;
         }
         final File dir = ndc.getSelectedFile();
+        if (!ensureProjectDir(dir)) {
+            return;
+        }
 
         new SwingWorker<Void, Void>() {
             protected Void doInBackground() throws Exception {
-                dir.mkdirs();
 
                 final ProjectProperties newProps = new ProjectProperties(dir);
                 ProjectMedProcessing.extractFromMed(med, newProps);
@@ -305,6 +310,11 @@ public final class ProjectUICommands {
                     return null;
                 }
 
+                File dir = new File(dialog.getSaveLocation());
+                if (!ensureProjectDir(dir)) {
+                    return null;
+                }
+
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
@@ -312,7 +322,7 @@ public final class ProjectUICommands {
                 Core.getMainWindow().showStatusMessageRB("CT_DOWNLOADING_PROJECT");
 
                 // retrieve omegat.project
-                projectRoot = new File(dialog.getSaveLocation());
+                projectRoot = dir;
                 List<RepositoryDefinition> repos = new ArrayList<RepositoryDefinition>();
                 RepositoryDefinition repo = new RepositoryDefinition();
                 repos.add(repo);
@@ -1009,6 +1019,22 @@ public final class ProjectUICommands {
             Log.log(ex);
             Core.getMainWindow().displayErrorRB(ex, "TF_WIKI_IMPORT_FAILED");
         }
+    }
+
+    private static boolean ensureProjectDir(File dir) {
+        if (!dir.isDirectory() && !dir.mkdirs()) {
+            Log.logErrorRB("CT_ERROR_CREATING_PROJECT_DIR", dir);
+            Core.getMainWindow().displayWarningRB("CT_ERROR_CREATING_PROJECT");
+            return false;
+        }
+        Path path = dir.toPath();
+        // Use NIO methods because File.canRead/canWrite give incorrect responses on Windows
+        if (!Files.isWritable(path) || !Files.isReadable(path)) {
+            Log.logErrorRB("CT_ERROR_PROJECT_DIR_PERMISSIONS", path);
+            Core.getMainWindow().displayWarningRB("CT_ERROR_CREATING_PROJECT");
+            return false;
+        }
+        return true;
     }
 
     private static void processSwingWorkerException(Exception ex, String errorCode) {

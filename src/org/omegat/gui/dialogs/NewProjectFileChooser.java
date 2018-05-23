@@ -27,6 +27,8 @@
 package org.omegat.gui.dialogs;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import javax.swing.JOptionPane;
 
@@ -67,6 +69,16 @@ public class NewProjectFileChooser extends OmegaTFileChooser {
                 // must select non-existing name or empty dir for project
                 JOptionPane.showMessageDialog(this, OStrings.getString("NDC_SELECT_NEW_OR_EMPTY"),
                     OStrings.getString("NDC_SELECT_UNIQUE_TITLE"), JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        if (!dir.exists()) {
+            Path parent = dir.getParentFile().toPath();
+            // Use NIO methods because File.canRead/canWrite give incorrect responses on Windows
+            if (parent != null && (!Files.isReadable(parent) || !Files.isWritable(parent))) {
+                // Must select readable + writable dir
+                JOptionPane.showMessageDialog(this, OStrings.getString("NDC_SELECT_PERMISSIONS"),
+                        OStrings.getString("NDC_SELECT_UNIQUE_TITLE"), JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }

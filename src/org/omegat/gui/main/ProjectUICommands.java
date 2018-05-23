@@ -46,6 +46,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.io.FileUtils;
+import org.omegat.CLIParameters;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -79,7 +80,6 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
-import org.omegat.CLIParameters;
 
 /**
  * Handler for project UI commands, like open, save, compile, etc.

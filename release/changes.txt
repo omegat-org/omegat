@@ -2,7 +2,7 @@
  OmegaT 4.1.4 update 1
 ----------------------------------------------------------------------
   5 Enhancements
-  2 Bug fixes
+  3 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 4.1.4 update 1 vs 4.1.4
@@ -33,6 +33,9 @@ item in the omegat.prefs file to take advantage of this change.
 
   - Empty regex capture group becomes "null" in replacement
   https://sourceforge.net/p/omegat/bugs/907/
+
+  - Edits may be lost without warning when closing OmegaT
+  https://sourceforge.net/p/omegat/bugs/902/
 
 ----------------------------------------------------------------------
  OmegaT 4.1.4 (2018-04-02)

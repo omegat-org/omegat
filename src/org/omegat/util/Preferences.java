@@ -175,6 +175,8 @@ public final class Preferences {
 
     public static final String ALLOW_DEEPL_TRANSLATE = "allow_deepl_translate";
 
+    public static final String ALLOW_IBMWATSON_TRANSLATE = "allow_ibmwatson_translate";
+
     public static final String ALLOW_APERTIUM_TRANSLATE = "allow_apertium_translate";
 
     public static final String ALLOW_MICROSOFT_TRANSLATOR_AZURE = "allow_microsoft_translator_azure";

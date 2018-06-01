@@ -446,6 +446,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         helpMenu.add(helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT"));
         helpMenu.add(helpLastChangesMenuItem = createMenuItem("TF_MENU_HELP_LAST_CHANGES"));
         helpMenu.add(helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG"));
+        helpMenu.add(helpUpdateCheckMenuItem = createMenuItem("TF_MENU_HELP_CHECK_FOR_UPDATES"));
 
         setActionCommands();
         PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(mainMenu);
@@ -783,6 +784,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem helpContentsMenuItem;
     JMenuItem helpLastChangesMenuItem;
     JMenuItem helpLogMenuItem;
+    JMenuItem helpUpdateCheckMenuItem;
     JMenu helpMenu;
     JMenuItem lowerCaseMenuItem;
     JMenuBar mainMenu;

@@ -477,6 +477,10 @@ public final class Preferences {
     /** External Finder */
     public static final String EXTERNAL_FINDER_ALLOW_PROJECT_COMMANDS = "external_finder_allow_project_commands";
 
+    /** Version Checker */
+    public static final String VERSION_CHECK_AUTOMATIC = "automatically_check_version";
+    public static final boolean VERSION_CHECK_AUTOMATIC_DEFAULT = true;
+
     /** Private constructor, because this file is singleton */
     private Preferences() {
     }

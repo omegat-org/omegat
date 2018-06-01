@@ -44,6 +44,7 @@ import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
+import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -275,6 +276,8 @@ public final class Core {
         SaveThread th = new SaveThread();
         saveThread = th;
         th.start();
+
+        new VersionCheckThread(10).start();
     }
 
     /**

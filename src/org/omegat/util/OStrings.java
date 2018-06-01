@@ -177,6 +177,23 @@ public final class OStrings {
         return StringUtil.format(getString("version-template"), VERSION, UPDATE, REVISION);
     }
 
+    /**
+     * Returns the OmegaT simple version for displaying to the user for comparison e.g. in a version update message.
+     * Does not include the revision because the revision is not guaranteed to be consistent across binaries in a single
+     * release. Example: "3.5.0", "3.5.1_1"
+     */
+    public static String getSimpleVersion() {
+        return getSimpleVersion(VERSION, UPDATE);
+    }
+
+    public static String getSimpleVersion(String version, String update) {
+        if (update != null && !update.equals("0")) {
+            return getString("version-template-simple", version, update);
+        } else {
+            return version;
+        }
+    }
+
     /** Returns default text for progress bar when no project is loaded
      *
      */

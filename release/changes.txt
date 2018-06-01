@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.4 update 1
 ----------------------------------------------------------------------
-  6 Enhancements
+  7 Enhancements
   3 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Watson Language Translator Integration
   https://sourceforge.net/p/omegat/feature-requests/1389/
+
+  - Automatically check for updates 
+  https://sourceforge.net/p/omegat/feature-requests/293/
 
   Other changes:
 

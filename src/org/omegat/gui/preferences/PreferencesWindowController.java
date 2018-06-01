@@ -124,6 +124,7 @@ import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.preferences.view.TagProcessingOptionsController;
 import org.omegat.gui.preferences.view.TeamOptionsController;
 import org.omegat.gui.preferences.view.UserPassController;
+import org.omegat.gui.preferences.view.VersionCheckPreferencesController;
 import org.omegat.gui.preferences.view.ViewOptionsController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.util.OStrings;
@@ -386,6 +387,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         root.add(new HideableNode(new SecureStoreController()));
         HideableNode pluginsNode = new HideableNode(new PluginsPreferencesController());
         root.add(pluginsNode);
+        root.add(new HideableNode(new VersionCheckPreferencesController()));
         PreferencesControllers.getSuppliers().forEach(s -> placePluginView(root, s.get()));
         return root;
     }

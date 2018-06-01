@@ -49,7 +49,7 @@ public class VersionCheckDialog {
         new SwingWorker<Boolean, Void>() {
             @Override
             protected Boolean doInBackground() throws Exception {
-                return VersionChecker.getInstance().isUpToDate();
+                return VersionChecker.getInstance().isUpToDate(true);
             }
 
             @Override

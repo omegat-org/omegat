@@ -81,8 +81,8 @@ public final class VersionChecker {
         return System.currentTimeMillis() - lastFetched >= FETCH_INTERVAL;
     }
 
-    private void fetch() throws Exception {
-        if (!shouldFetch()) {
+    private void fetch(boolean force) throws Exception {
+        if (!force && !shouldFetch()) {
             return;
         }
         LOGGER.fine("Fetching latest version info");
@@ -100,15 +100,22 @@ public final class VersionChecker {
         LOGGER.log(Level.FINE, "Fetched latest version info: {0}", props);
     }
 
-    public int compareVersions() throws Exception {
-        fetch();
+    private int compareVersions(boolean force) throws Exception {
+        fetch(force);
         // Don't compare REVISION because it is not always consistent across release binaries
         return compareVersions(OStrings.VERSION, OStrings.UPDATE, mProps.getProperty("version"),
                 mProps.getProperty("update"));
     }
 
-    public boolean isUpToDate() throws Exception {
-        boolean result = compareVersions() >= 0;
+    /**
+     * Check if OmegaT is up to date.
+     * 
+     * @param force
+     *            If true, fetch the latest data from the server even if the current data is not stale yet
+     * @throws Exception
+     */
+    public boolean isUpToDate(boolean force) throws Exception {
+        boolean result = compareVersions(force) >= 0;
         if (result) {
             LOGGER.fine("OmegaT is up to date");
         } else {
@@ -118,7 +125,7 @@ public final class VersionChecker {
     }
 
     public String getRemoteVersion() throws Exception {
-        fetch();
+        fetch(false);
         return OStrings.getSimpleVersion(mProps.getProperty("version"), mProps.getProperty("update"));
     }
 

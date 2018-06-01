@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.4 update 1
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   3 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Add support for Microsoft neural machine translation
   https://sourceforge.net/p/omegat/feature-requests/1366/
+
+  - Watson Language Translator Integration
+  https://sourceforge.net/p/omegat/feature-requests/1389/
 
   Other changes:
 

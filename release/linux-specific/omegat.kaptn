@@ -84,7 +84,7 @@ memory "Assign memory limit for OmegaT" -> defm | halfg | ! oneg | twog | memory
 defm "Default" -> "" ;
 halfg "512 MB" -> " -Xmx512M" ;
 oneg "1 GB" -> " -Xmx1024M" ;
-twog "2 GB" -> " -Xmx2048M" ;
+twog :beside "2 GB" -> " -Xmx2048M" memory_help;
 memory_help :dialog "Help" -> memory_m memory_hc ;
 memory_m :horizontal ->  memory_t ;
 memory_t "Determine how much RAM OmegaT is allowed to make use of. \nToo low a value will make large projects slow or impossible to open; too high a value \nwill prevent OmegaT from launching." -> @ ;
@@ -107,9 +107,9 @@ proxyport "Port number used by your system to access the proxy server" -> @strin
 
 # Team connectivity
 
-team :vertical "Team connectivity for Team projects" -> !ton | toff | thelp ;
-ton "Sync with the server" -> " " ;
-toff "Disable sync" -> " --no-team" ;
+team "Synchronization for Team projects" -> !ton | toff | thelp ;
+ton "Enable sync with the server" -> " " ;
+toff :beside "Disable sync with the server" -> " --no-team" thelp ;
 
 thelp :dialog "Help" -> team_m team_hc ;
 team_m :horizontal -> team_t ;
@@ -118,11 +118,11 @@ team_hc :horizontal -> @close="Close" ;
 
 ### Services tab
 
-services :framed "Online Services" -> gt ms mymem taas yand ;
+services :framed "Online Services" -> gt ms_azk ibm deepl mymem taas yand ;
 
 # Google Translate API key
 
-gt "Google Translate API key" -> @password="" gt_prem gt_help ;
+gt :beside "Google Translate API key" -> @password="" gt_prem gt_help ;
 
 gt_prem :beside "Enable Premium Service" -> " -Dgoogle.api.premium=true" | @ ;
 gt_help :dialog "Help" -> gt_m gt_hc ;
@@ -130,33 +130,49 @@ gt_m :horizontal ->  gt_t ;
 gt_t "To use Google Translate within OmegaT, you must order \na password from Google and enter it here." -> @ ;
 gt_hc :horizontal -> @close="Close";
 
+# Microsoft Translator (Azure)
 
-# Microsoft Translator API key
+ms_azk :beside "Microsoft Translator Subscription Key" -> @password="" ms_neural ms_azhelp;
+ms_neural :beside "Neural Machine Translation" -> " -Dmicrosoft.neural=true" | @ ;
+ms_azhelp :dialog "Help" -> ms_azm ms_azhc ;
+ms_azm :horizontal ->  ms_azt ;
+ms_azt "Obtain the subsription key \n(see https://translatorbusiness.uservoice.com/knowledgebase/articles/1078534-microsoft-translator-on-azure) \nand enter it here." -> @ ;
+ms_azhc :horizontal -> @close="Close";
 
-ms "Microsoft Translator settings" -> msi msk ms_help ;
-msi "Microsoft Translator API Client ID" -> @password="" ;
-msk "Microsoft Translator API Secret Key" -> @password="" ;
+# IBM Watson
+ibm "IBM Watson Machine Translation" -> ibm_login ibm_pass;
+ibm_login :horizontal "API login" -> @password="" ;
+ibm_pass :horizontal "API password" -> @password="" ibm_neural ibm_help ;
+ibm_neural :beside "Neural Machine Translation" -> " -Dibmwatson.api.neural=true" | @ ;
+ibm_help :dialog "Help" -> ibm_hmes ibm_hclose ;
+ibm_hmes :horizontal -> ibm_htext ;
+ibm_htext "For details about API see\nhttps://www.ibm.com/watson/developercloud/language-translator/api/v2/curl.html?curl" -> @ ;
+ibm_hclose :horizontal -> @close="Close" ;
 
+# DeepL
 
-ms_help :dialog "Help" -> ms_m ms_hc ;
-ms_m :horizontal ->  ms_t ;
-ms_t "To use Microsoft Translator within OmegaT, you must order \na client ID and a secret key from Microsoft Azure Marketplace \n(see https://datamarket.azure.com/dataset/bing/microsofttranslator) \nand enter them here." -> @ ;
-ms_hc :horizontal -> @close="Close";
+deepl :beside "DeepL Pro Authentication Key" -> @password="" deepl_help ;
+deepl_help :dialog "Help" -> deepl_m deepl_hc ;
+deepl_m :horizontal ->  deepl_t ;
+deepl_t "DeepL Pro Authentication Key (available for registered users) can be found in your DeepL Pro Contract page:\nhttps://www.deepl.com/subscription.html" -> @ ;
+deepl_hc :horizontal -> @close="Close";
 
 # MyMemory MT email address
 
-mymem "MyMemory Machine Translation" -> mymem_em mymem_help ;
-mymem_em "Valid email address" -> @string="" ;
+mymem "MyMemory Machine Translation" -> 
+mymem_em mymem_api ;
+mymem_em :horizontal "Valid email address" -> @string=""  ;
+mymem_api :horizontal "MyMemory API Key" -> @password="" mymem_help ;
 
 mymem_help :dialog "Help" -> mymem_m mymem_hc ;
 mymem_m :horizontal -> mymem_t ;
-mymem_t "Provide your email address to be able to make \n1000 requests to MyMemory server a day \ninstead of 100" -> @ ;
+mymem_t "Provide your email address to be able to make \n1000 requests to MyMemory server a day \ninstead of 100.\nAPI key is used to fetch matches from private TMs" -> @ ;
 mymem_hc :horizontal -> @close="Close" ;
 
 # TaaS key
 
-taas "TaaS user key" -> taas_k taas_help ;
-taas_k "User key for TaaS" -> @password="" ;
+taas "TaaS user key" -> taas_k ;
+taas_k :horizontal "User key for TaaS" -> @password="" taas_help ;
 
 taas_help :dialog "Help" -> taas_m taas_hc ;
 taas_m :horizontal -> taas_t ;
@@ -165,8 +181,7 @@ taas_hc :horizontal -> @close="Close" ;
 
 # Yandex Translate
 
-yand "Yandex Translate API key" -> yand_k yand_help ;
-yand_k "Yandex Translate API key" -> @password="" ;
+yand :beside "Yandex Translate API key" -> @password="" yand_help ;
 
 yand_help :dialog "Help" -> yand_m yand_hc ;
 yand_m :horizontal -> yand_t ;
@@ -190,7 +205,7 @@ UIlang "User interface language (nn)" -> @combow("en", "ar", "be", "ca", "cs", "
 
 # Selection of the user country
 
-country "User country (NN)" -> @string(2) ;
+country :horizontal "User country (NN)" -> @string(2) languages_help;
 
 languages_help :dialog "Help" -> languages_m languages_hc ;
 languages_m :horizontal ->  languages_t ;
@@ -218,9 +233,10 @@ aa_hc :horizontal -> @close="Close";
 
 # Look and feel settings
 
-laf "Look and Feel" -> deflaf | gtk | motif | laf_help ;
+laf :double "Look and Feel" -> deflaf | deflaf_steel | gtk | motif | laf_help ;
 deflaf "Default" -> " " ;
-gtk "GTK" -> " -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ";
+deflaf_steel "Default (Steel)" -> "-Dswing.metalTheme=steel" ;
+gtk "GTK" -> " -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel " ;
 motif "Motif" -> " -Dswing.defaultlaf=com.sun.java.swing.plaf.motif.MotifLookAndFeel " ;
 laf_help :dialog "Help" -> laf_m laf_hc ;
 laf_m :horizontal ->  laf_t ;
@@ -262,4 +278,4 @@ close_button -> @close="Cancel" ;
 
 ### Launch command
 
-omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.client_secret=" msk " -Dmicrosoft.api.client_id=" msi " -Dmymemory.api.email=" mymem " -Dtaas.user.key=" taas " -Dyandex.api.key=" yand " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team;
+omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.subscription_key=" ms_azk " -Dibmwatson.api.login=" ibm_login " -Dibmwatson.api.password=" ibm_pass " -Ddeepl.api.key=" deepl " -Dmymemory.api.email=" mymem_em " -Dmymemory.api.key=" mymem_api " -Dtaas.user.key=" taas " -Dyandex.api.key=" yand " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team ;

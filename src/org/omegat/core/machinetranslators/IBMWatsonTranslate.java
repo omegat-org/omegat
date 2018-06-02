@@ -37,6 +37,8 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JCheckBox;
+
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -56,6 +58,7 @@ import org.omegat.util.WikiGet;
 public class IBMWatsonTranslate extends BaseTranslate {
     protected static final String PROPERTY_LOGIN = "ibmwatson.api.login";
     protected static final String PROPERTY_PASSWORD = "ibmwatson.api.password";
+    protected static final String PROPERTY_NEURAL = "ibmwatson.api.neural";
     protected static final String WATSON_URL = "https://gateway.watsonplatform.net/language-translator/api/v2/translate";
     protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
@@ -99,6 +102,10 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
         // Let's opt out then.
         headers.put("X-Watson-Learning-Opt-Out", "true");
+        
+        if (isNeural()) {
+            headers.put("X-Watson-Technology-Preview", "2017-07-01");
+        }
 
         String authentication = "Basic " + Base64.getMimeEncoder().encodeToString((apiLogin + ":" + apiPassword).getBytes(StandardCharsets.ISO_8859_1));
         headers.put("Authorization", authentication);
@@ -138,6 +145,17 @@ public class IBMWatsonTranslate extends BaseTranslate {
         }
         return text;
     }
+    
+    /**
+     * Whether or not to use the new Neural Machine Translation System
+     *
+     * @see <a href="https://console.bluemix.net/docs/services/language-translator/release-notes.html">Add support for NMT</a>
+     */
+    private boolean isNeural() {
+        String value = System.getProperty(PROPERTY_NEURAL,
+                Preferences.getPreference(PROPERTY_NEURAL));
+        return Boolean.parseBoolean(value);
+    }
 
     @Override
     public boolean isConfigurable() {
@@ -146,6 +164,8 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
     @Override
     public void showConfigurationUI(Window parent) {
+        JCheckBox neuralCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_IBMWATSON_NEURAL_LABEL"));
+        neuralCheckBox.setSelected(isNeural());
 
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
             @Override
@@ -157,7 +177,9 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
                 String password = panel.valueField2.getText().trim();
                 setCredential(PROPERTY_PASSWORD, password, temporary);
-
+                
+                System.setProperty(PROPERTY_NEURAL, Boolean.toString(neuralCheckBox.isSelected()));
+                Preferences.setPreference(PROPERTY_NEURAL, neuralCheckBox.isSelected());  
             }
         };
 
@@ -170,7 +192,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
         // TODO Apparently, the API URL can change if the user has their own instance.
 
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_PASSWORD));
-
+        dialog.panel.itemsPanel.add(neuralCheckBox);
         dialog.show();
     }
 }

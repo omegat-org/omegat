@@ -183,6 +183,27 @@
 
       <para>Gli altri tipi di file di testo formattato possono essere gestiti da OmegaT associando le loro estensioni di file a un tipo supportato, presupponendo che le regole di segmentazione corrispondenti li segmentino correttamente.</para>
     </section>
+    <section>
+		<title>File PDF<indexterm class="singular">
+          <primary>File di arrivo</primary> <secondary>File di testo PDF</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>File di partenza</primary> <secondary>File PDF</secondary>
+        </indexterm></title>
+  <para>I file PDF sono da considerare un caso speciale. Essi contengono informazioni di formattazione relative al testo, le quali non possono essere riutilizzate da <application>OmegaT</application> per creare file di arrivo. I file PDF sono dunque trattati come file di solo testo, e i file che si ottengono sono file di solo testo.</para>
+  <para>Se nella traduzione si ha bisogno di riprodurre la formattazione del testo (così come elementi, per esempio, come i disegni), si può procedere in tre modi:</para>
+  <orderedlist>
+    <listitem>
+      <para>Usare il filtro predefinito di <application>OmegaT</application> (Input PDF), tradurre, creare un file di arrivo (che sarà in file di solo testo) e aggiungere manualmente le informazioni e gli elementi di rilievo.</para>
+    </listitem>
+    <listitem>
+      <para>Usare il filtro Iceni Infix. Si veda <ulink url="https://omegat.org/howtos/iceni_infix.html">Howto - Translating PDF files with Iceni Infix and OmegaT</ulink>.</para>
+    </listitem>
+    <listitem>
+      <para>Importare il file di partenza in <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>, salvarlo come file ODG, tradurre ed esportarlo in PDF in base alle proprie esigenze.</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">Nota:</emphasis> le informazioni sopra riportate si applicano solo ai file PDF con un livello di testo. Se si possiede un file PDF composto di pagine scannerizzate (a volte questi file vengono chiamati ‘dead PDF'), è necessario un programma OCR (riconoscimento ottico dei caratteri) per individuare il testo e convertirlo in un formato che OmegaT può gestire.</para>
+    </section>
   </section>
 
   <section id="other.file.formats">

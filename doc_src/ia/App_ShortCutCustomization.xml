@@ -5,17 +5,17 @@
 
   <section id="ch04.shortcuts.customization">
     <title><indexterm class="singular">
-        <primary>Vias breve</primary><secondary>Personalisation</secondary>
+        <primary>Personalisation</primary><secondary></secondary> del vias breve
       </indexterm>Personalisation del vias breve</title>
 
     <para>On pote assignar nove vias breve al major parte del commandos que appare in le menu principal. Tu pote mutar le vias breve jam assignate e adder vias breve nove, ponente un file definition de via breve in tu plica del preferentias de OmegaT (vide <link linkend="user.files">Ubication del files del usator</link>).</para>
 
-    <para>Le file definition del via breve debe esser nominate <filename>MainMenuShortcuts.properties</filename> e debe continer al maximo un definition de via breve per cata linea. Le lineas vacue es acceptate e le lineas commento debera initiar con &quot;//&quot;. Tote le cosas post le &quot;//&quot; usque al fin del linea, essera ignorate.</para>
+    <para>Le file definition del via breve debe esser nominate <filename>MainMenuShortcuts.properties</filename> e debe continer al maximo un definition de via breve per cata linea. Le lineas vacue es acceptate e le lineas commento debera initiar con &quot;//&quot;. Alicun cosa post le &quot;//&quot; usque al fin del linea, essera ignorate.</para>
 
     <para>Un vice que le file <filename>MainMenuShortcuts.properties</filename> es modificate, <application>OmegaT</application> debe esser reinitiate pro prender in conto le nove vias breve.</para>
 
     <para>Le syntaxe de definition del via breve es le sequente: <code>&lt;codice del commando del menu&gt;=&lt;via breve&gt;</code>, ubi <emphasis>&lt;codice del commando del menu&gt;</emphasis> es un codice ex le tabellas sequente e <emphasis>&lt;via breve&gt;</emphasis> es un combination de percussiones de clave specificate per le usator<footnote>
-        <para>Le syntaxe complete pro le pulsatas de claves (vias breve) es definite in le documentation sequente de Java 1.6 ex Oracle (al fundo del pagina): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 vias breve e pulsatas de claves,</ulink></para>
+        <para>Le syntaxe complete pro le percussiones de clave (vias breve) es definite in le documentation sequente de Java 1.6 ex Oracle (al fundo del pagina): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 vias breve e percussiones de clave,</ulink></para>
       </footnote>.</para>
 
     <para>&lt;via breve&gt; debe esser del forma sequente: 0 o plus <code>&lt;modificator&gt;</code> sequite per 0 o 1 <code>&lt;evento&gt;</code> sequite per 1 <code>&lt;clave&gt;</code>, ubi:<itemizedlist>
@@ -32,12 +32,12 @@
 
         <listitem>
           <para>e <code>&lt;clave&gt;</code> pote esser qualcunque clave disponibile sur tu claviero<footnote>
-              <para>Le possibile evento(s) clave es listate in le documentation sequente de Java 1.6 ex Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java 1.6 description del eventos clave ,</ulink>&gt;</para>
+              <para>Le possibile evento del clave(s) es listate in le documentation sequente de Java 1.6 ex Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java 1.6 vias breve e eventos de clave,</ulink>&gt;</para>
             </footnote>.</para>
         </listitem>
       </itemizedlist></para>
 
-    <para>Per exemplo, in le vias breve base de OmegaT<footnote>
+    <para>Per exemplo, in le vias breve initial de OmegaT<footnote>
         <para>Le vias breve initial de OmegaT es disponibile ex Sourceforge: <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Vias breve initial de OmegaT</ulink></para>
 
         <para>Le vias breve initial de OmegaT pro le Mac es alsi disponibile ex Sourceforge, illos usa omne &quot;meta&quot; in vice de &quot;ctrl&quot;: <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Vias breve initial de OmegaT pro le Mac</ulink></para>
@@ -55,7 +55,7 @@
 
     <para>Le primo es le via breve pro <guimenuitem>Aperi Projecto</guimenuitem>, le secunde pro <guimenuitem>Crea entrata del glossario</guimenuitem>.</para>
 
-    <para>Si tu vole usar <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> pro aperir un projecto, modifica tu <filename>MainMenuShortcuts.properties</filename> como seque:<code>
+    <para>Si tu vole usar <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> pro aperir un projecto, modifica tu <filename>MainMenuShortcuts.properties</filename> ut seque:<code>
     </code></para>
 
     <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
@@ -65,7 +65,7 @@
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>
 
-    <para>Salva le file e relancea <application>OmegaT</application>. Tu vias breve nove debe ora apparer juncte al commandos del menu que tu ha modificate. Si illos non conflige con le vias breve de systema, illos debe esser utilisabile in OmegaT.</para>
+    <para>Salva le file e relancea <application>OmegaT</application>. Tu vias breve nove deberea ora apparer proxime al commandos del menu que tu ha modificate. Si illos non conflige con le vias breve de systema, illos deberea esser utilisabile inter OmegaT.</para>
   </section>
 
   <section id="ch04.shortcuts.ProjectMenu">
@@ -83,11 +83,11 @@
 
         <thead>
           <row>
-            <entry>Menu, Commando</entry>
+            <entry>Commando de menu</entry>
 
             <entry>Via breve base</entry>
 
-            <entry>Menu, codice del commando</entry>
+            <entry>Codice de commando del Menu</entry>
           </row>
         </thead>
 
@@ -101,7 +101,7 @@
           </row>
 
           <row>
-            <entry>Discargar un projecto in equipa</entry>
+            <entry>Discarga Projecto de equipa</entry>
 
             <entry/>
 
@@ -111,7 +111,7 @@
           <row>
             <entry>Aperir</entry>
 
-            <entry><keycap>Ctrl+O</keycap></entry>
+            <entry><keycap>Ctrl O</keycap></entry>
 
             <entry>projectOpenMenuItem</entry>
           </row>
@@ -125,7 +125,7 @@
           </row>
 
           <row>
-            <entry>Copiar le files in le plica fonte...</entry>
+            <entry>Copiar le files in le plica \source...</entry>
 
             <entry/>
 
@@ -173,7 +173,7 @@
           </row>
 
           <row>
-            <entry>Crea le documento actual rendite</entry>
+            <entry>Crea le Documentos Actual Rendite</entry>
 
             <entry><keycap>Ctrl+Shift+D</keycap></entry>
 
@@ -189,7 +189,7 @@
           </row>
 
           <row>
-            <entry>Files de projecto...</entry>
+            <entry>Files del projecto ...</entry>
 
             <entry><keycap>Ctrl+L</keycap></entry>
 
@@ -273,10 +273,10 @@
   </section>
 
   <section id="ch04.shortcuts.EditMenu">
-    <title>Menu Modificar</title>
+    <title>Menu Modifica</title>
 
     <table>
-      <title>Menu Modificar</title>
+      <title>Menu Modifica</title>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
@@ -287,17 +287,17 @@
 
         <thead>
           <row>
-            <entry>Menu, commando</entry>
+            <entry>Commando de menu</entry>
 
             <entry>Via breve base</entry>
 
-            <entry>Menu, codice del commando</entry>
+            <entry>Codice de commando del Menu</entry>
           </row>
         </thead>
 
         <tbody>
           <row>
-            <entry>Disfacer le ultime action</entry>
+            <entry>Disfacer le Ultime Action</entry>
 
             <entry><keycap>Ctrl+Z</keycap></entry>
 
@@ -329,7 +329,7 @@
           </row>
 
           <row>
-            <entry>Reimplaciar con le traduction automatic</entry>
+            <entry>Replaciar con le traduction automatic</entry>
 
             <entry><keycap>Ctrl+M</keycap></entry>
 
@@ -337,7 +337,7 @@
           </row>
 
           <row>
-            <entry>Replaciar con le segmento fonte</entry>
+            <entry>Replaciar con le fonte</entry>
 
             <entry><keycap>Ctrl+Shift+R</keycap></entry>
 
@@ -345,7 +345,7 @@
           </row>
 
           <row>
-            <entry>Inserer le fonte</entry>
+            <entry>Inserer fonte</entry>
 
             <entry><keycap>Ctrl+Shift+I</keycap></entry>
 
@@ -361,7 +361,7 @@
           </row>
 
           <row>
-            <entry>Inserer le tag mancante sequente</entry>
+            <entry>Inserer le Tag Mancante Sequente</entry>
 
             <entry><keycap>Ctrl +T</keycap></entry>
 
@@ -385,7 +385,7 @@
           </row>
 
           <row>
-            <entry>Cercar in le projecto...</entry>
+            <entry>Recerca le projecto...</entry>
 
             <entry><keycap>Ctrl F</keycap></entry>
 
@@ -409,7 +409,7 @@
           </row>
 
           <row>
-            <entry>Cambiar character a minuscule</entry>
+            <entry>Cambia Character a Minuscule</entry>
 
             <entry/>
 
@@ -417,7 +417,7 @@
           </row>
 
           <row>
-            <entry>Cambiar character a majuscule</entry>
+            <entry>Cambia Character a Majuscule</entry>
 
             <entry/>
 
@@ -425,7 +425,7 @@
           </row>
 
           <row>
-            <entry>Cambiar le prime character a majuscule</entry>
+            <entry>Cambia Character a Majuscule</entry>
 
             <entry/>
 
@@ -449,7 +449,7 @@
           </row>
 
           <row>
-            <entry>Eliger le concordantia precedente</entry>
+            <entry>Selige le Concordantia Previe</entry>
 
             <entry><keycap>Ctrl+↑</keycap></entry>
 
@@ -457,7 +457,7 @@
           </row>
 
           <row>
-            <entry>Eliger le concordantia sequente</entry>
+            <entry>Selige le Concordantia Sequente</entry>
 
             <entry><keycap>Ctrl+↓</keycap></entry>
 
@@ -505,7 +505,7 @@
           </row>
 
           <row>
-            <entry>Usar como traduction base</entry>
+            <entry>Usa como Traduction Base</entry>
 
             <entry/>
 
@@ -513,7 +513,7 @@
           </row>
 
           <row>
-            <entry>Crear un traduction alternativa</entry>
+            <entry>Crear un traduction alternative</entry>
 
             <entry/>
 
@@ -537,7 +537,7 @@
           </row>
 
           <row>
-            <entry>Registrar un traduction identic</entry>
+            <entry>Registrar un Identic traduction</entry>
 
             <entry><keycap>Ctrl+Shift+S</keycap></entry>
 
@@ -549,10 +549,10 @@
   </section>
 
   <section id="ch04.shortcuts.GoToMenu">
-    <title>Ir al Menu</title>
+    <title>Vade al Menu</title>
 
     <table>
-      <title>Ir al Menu</title>
+      <title>Vade al Menu</title>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
@@ -563,17 +563,17 @@
 
         <thead>
           <row>
-            <entry>Menu, commando</entry>
+            <entry>Commando de menu</entry>
 
             <entry>Via breve base</entry>
 
-            <entry>Menu, codice del commando</entry>
+            <entry>Codice de commando del Menu</entry>
           </row>
         </thead>
 
         <tbody>
           <row>
-            <entry>Segmento sequente non rendite</entry>
+            <entry>Al Segmento sequente Non Rendite</entry>
 
             <entry><keycap>Ctrl+U</keycap></entry>
 
@@ -581,7 +581,7 @@
           </row>
 
           <row>
-            <entry>Segmento rendite sequente</entry>
+            <entry>Segmento Sequente Rendite</entry>
 
             <entry><keycap>Ctrl+Shift+U</keycap></entry>
 
@@ -589,7 +589,7 @@
           </row>
 
           <row>
-            <entry>Segmento sequente</entry>
+            <entry>Al Segmento Sequente</entry>
 
             <entry><keycap> Ctrl N </keycap> o <keycap>Enter</keycap>o <keycap> Tab</keycap> </entry>
 
@@ -597,7 +597,7 @@
           </row>
 
           <row>
-            <entry>Segmento precedente</entry>
+            <entry>A le previe segmento</entry>
 
             <entry><keycap>Ctrl+P</keycap> or <keycap>Ctrl+Enter</keycap> or
             <keycap>Ctrl+Tab</keycap></entry>
@@ -606,7 +606,7 @@
           </row>
 
           <row>
-            <entry>Al segmento numero ...</entry>
+            <entry>A le segmento numero ...</entry>
 
             <entry><keycap>Ctrl+J</keycap></entry>
 
@@ -614,7 +614,7 @@
           </row>
 
           <row>
-            <entry>Al nota sequente</entry>
+            <entry>Nota sequente</entry>
 
             <entry/>
 
@@ -622,7 +622,7 @@
           </row>
 
           <row>
-            <entry>Nota precedente</entry>
+            <entry>Nota Previe</entry>
 
             <entry/>
 
@@ -646,7 +646,7 @@
           </row>
 
           <row>
-            <entry>Avantiar in le chronologia...</entry>
+            <entry>Avante in chronologia...</entry>
 
             <entry><keycap>Ctrl+Shift+N</keycap></entry>
 
@@ -654,7 +654,7 @@
           </row>
 
           <row>
-            <entry>Retroceder in le chronologia...</entry>
+            <entry>Retro in chronologia...</entry>
 
             <entry><keycap>Ctrl+Shift+P</keycap></entry>
 
@@ -666,10 +666,10 @@
   </section>
 
   <section id="ch04.shortcuts.ViewMenu">
-    <title>Menu, Vista</title>
+    <title>Menu Vista</title>
 
     <table>
-      <title>Menu, Vista</title>
+      <title>Menu Vista</title>
 
       <indexterm class="singular">
         <primary>Personalisation del vias breve</primary> <secondary>Menu Vista</secondary>
@@ -684,17 +684,17 @@
 
         <thead>
           <row>
-            <entry>Menu, commando</entry>
+            <entry>Commando de menu</entry>
 
             <entry>Via breve base</entry>
 
-            <entry>Menu, codice del commando</entry>
+            <entry>Codice de commando del Menu</entry>
           </row>
         </thead>
 
         <tbody>
           <row>
-            <entry>Marcar le segmentos rendite</entry>
+            <entry>Marca le Segmentos Rendite</entry>
 
             <entry/>
 
@@ -702,7 +702,7 @@
           </row>
 
           <row>
-            <entry>Marcar le segmentos non rendite</entry>
+            <entry>Marca segmentos non rendite</entry>
 
             <entry/>
 
@@ -710,7 +710,7 @@
           </row>
 
           <row>
-            <entry>Monstrar le segmentos fonte</entry>
+            <entry>Monstra le Segmentos Fte</entry>
 
             <entry/>
 
@@ -718,7 +718,7 @@
           </row>
 
           <row>
-            <entry>Marcar le segmentos non unic</entry>
+            <entry>Marca le Segmentos Non Unic</entry>
 
             <entry/>
 
@@ -726,7 +726,7 @@
           </row>
 
           <row>
-            <entry>Marcar le segmentos con notas</entry>
+            <entry>Marca le Segmentos con Notas</entry>
 
             <entry/>
 
@@ -734,7 +734,7 @@
           </row>
 
           <row>
-            <entry>Marcar le spatios non-frangibile</entry>
+            <entry>Marca le Spatios Non-frangibile</entry>
 
             <entry/>
 
@@ -742,7 +742,7 @@
           </row>
 
           <row>
-            <entry>Marcar le spatios blanc</entry>
+            <entry>Marca (&amp;k) un Spatio blanc</entry>
 
             <entry/>
 
@@ -750,7 +750,7 @@
           </row>
 
           <row>
-            <entry>Marcar le characteres de controlo del algorithmo bidirectional </entry>
+            <entry>Marca algorithmo &amp;Bidirectional de controlo characteres</entry>
 
             <entry/>
 
@@ -758,7 +758,7 @@
           </row>
 
           <row>
-            <entry>Marcar le Segmentos Auto-Populate</entry>
+            <entry>Marca le Segmentos Auto-Populate</entry>
 
             <entry/>
 
@@ -766,7 +766,7 @@
           </row>
 
           <row>
-            <entry>Informationes le le modificationes/Monstrar nihil</entry>
+            <entry>Modification Info/Displica Necun</entry>
 
             <entry/>
 
@@ -774,7 +774,7 @@
           </row>
 
           <row>
-            <entry>Informationes le le modificationes/Monstrar sol pro le segmento active</entry>
+            <entry>Modification Info/Displica Seligite</entry>
 
             <entry/>
 
@@ -782,7 +782,7 @@
           </row>
 
           <row>
-            <entry>Informationes le le modificationes/Monstrar pro tote le segmentos</entry>
+            <entry>Modification Info/Displica Omne</entry>
 
             <entry/>
 
@@ -794,10 +794,10 @@
   </section>
 
   <section id="ch04.shortcuts.ToolsMenu">
-    <title>Menu, instrumentos</title>
+    <title>Menu Instrumentos</title>
 
     <table>
-      <title>Menu, instrumentos</title>
+      <title>Menu Instrumentos</title>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
@@ -808,17 +808,17 @@
 
         <thead>
           <row>
-            <entry>Menu, commando</entry>
+            <entry>Commando de menu</entry>
 
             <entry>Via breve base</entry>
 
-            <entry>Menu, codice del commando</entry>
+            <entry>Codice de commando del Menu</entry>
           </row>
         </thead>
 
         <tbody>
           <row>
-            <entry>Validar le tags</entry>
+            <entry>Valida le tags</entry>
 
             <entry><keycap>Ctrl+Shift+V</keycap></entry>
 
@@ -826,7 +826,7 @@
           </row>
 
           <row>
-            <entry>Valida tags pro le documento active</entry>
+            <entry>Valida Tags pro le Actual Documento</entry>
 
             <entry/>
 
@@ -862,10 +862,10 @@
   </section>
 
   <section id="ch04.shortcuts.OptionsMenu">
-    <title>Menu, Optiones</title>
+    <title>Menu Optiones</title>
 
     <table>
-      <title>Menu, Optiones</title>
+      <title>Menu Optiones</title>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
@@ -876,17 +876,17 @@
 
         <thead>
           <row>
-            <entry>Menu, commando</entry>
+            <entry>Commando de menu</entry>
 
             <entry>Via breve base</entry>
 
-            <entry>Menu, codice del commando</entry>
+            <entry>Codice de commando del Menu</entry>
           </row>
         </thead>
 
         <tbody>
           <row>
-            <entry>Usar le clave &quot;Tab&quot; pro avantiar</entry>
+            <entry>Usa le clave &quot;Tab&quot; pro avantiar</entry>
 
             <entry/>
 
@@ -894,7 +894,7 @@
           </row>
 
           <row>
-            <entry>Confirmar sempre le cessation</entry>
+            <entry>Confirma semper le cessation</entry>
 
             <entry/>
 
@@ -910,7 +910,7 @@
           </row>
 
           <row>
-            <entry>Usar terminos que appare separate in le texto fonte</entry>
+            <entry>Usar Terminos que appare separate in le Texto fonte</entry>
 
             <entry/>
 
@@ -918,7 +918,7 @@
           </row>
 
           <row>
-            <entry>Glossario/Usar in le recerca del radicales pro le entratas del glossario</entry>
+            <entry>Glossario/Usar le recerca del radices pro le entratas del glossario</entry>
 
             <entry/>
 
@@ -926,7 +926,7 @@
           </row>
 
           <row>
-            <entry>TransTips/activar le suggestiones pro le traduction (Transtips)</entry>
+            <entry>TransTips/Enable Transtips</entry>
 
             <entry/>
 
@@ -934,7 +934,7 @@
           </row>
 
           <row>
-            <entry>Auto-completion/Monstrar automaticamente le suggestiones pertinente</entry>
+            <entry>Auto-completamento/Monstrar automaticamente le suggestiones pertinente</entry>
 
             <entry/>
 
@@ -950,7 +950,7 @@
           </row>
 
           <row>
-            <entry>Auto-completamento/Texto automatic...</entry>
+            <entry>Auto-completamento/Auto-text...</entry>
 
             <entry/>
 
@@ -958,7 +958,7 @@
           </row>
 
           <row>
-            <entry>Auto-completamento/Tabella del characteres...</entry>
+            <entry>Auto-completamento/Character Table...</entry>
 
             <entry/>
 
@@ -966,7 +966,7 @@
           </row>
 
           <row>
-            <entry>Typo de characteres...</entry>
+            <entry>F&amp;ont...</entry>
 
             <entry/>
 
@@ -1006,7 +1006,7 @@
           </row>
 
           <row>
-            <entry>Comportamento de Modification...</entry>
+            <entry>Comportamento del editor</entry>
 
             <entry/>
 
@@ -1014,7 +1014,7 @@
           </row>
 
           <row>
-            <entry>Processar le tag...</entry>
+            <entry>Processo de tag...</entry>
 
             <entry/>
 
@@ -1054,7 +1054,7 @@
           </row>
 
           <row>
-            <entry>Registrar se al Procurator (Proxy)...</entry>
+            <entry>Connexion al proxy (Proxy)...</entry>
 
             <entry/>
 
@@ -1082,10 +1082,10 @@
   </section>
 
   <section id="ch04.shortcuts.HelpMenu">
-    <title>Menu, Adjuta</title>
+    <title>Menu Adjuta</title>
 
     <table>
-      <title>Menu, Adjuta</title>
+      <title>Menu Adjuta</title>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
@@ -1096,11 +1096,11 @@
 
         <thead>
           <row>
-            <entry>Menu, commando</entry>
+            <entry>Commando de menu</entry>
 
             <entry>Via breve base</entry>
 
-            <entry>Menu, codice del commando</entry>
+            <entry>Codice de commando del Menu</entry>
           </row>
         </thead>
 
@@ -1122,7 +1122,7 @@
           </row>
 
           <row>
-            <entry>Ultime modificationes...</entry>
+            <entry>Last Changes...</entry>
 
             <entry/>
 
@@ -1130,7 +1130,7 @@
           </row>
 
           <row>
-            <entry>Registro del eventos...</entry>
+            <entry>Log...</entry>
 
             <entry/>
 

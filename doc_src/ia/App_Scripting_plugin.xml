@@ -8,15 +8,15 @@
   <section>
     <title>Introduction</title>
 
-    <para>OmegaT permitte le execution de scriptes scribite in plure linguas.</para>
+    <para>OmegaT permitte le execution del scripts in plure linguages de script.</para>
   </section>
 
   <section>
     <title>Uso</title>
 
-    <para>Cliccar sur <guisubmenu>Instrumentos &gt; </guisubmenu><guisubmenu>Script</guisubmenu> pro displicar the fenestra de dialogo de Script:<screenshot> <screeninfo>Fenestra de dialogo Script</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Cliccar sur <guisubmenu>Instrumentos &gt; </guisubmenu><guisubmenu>Scripting</guisubmenu> pro displicar the fenestra de dialogo de Scripting:<screenshot> <screeninfo>Fenestra de dialogo Scripting</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
-    <para>Le Fenestra del Script te permitte de cargar un script existente in le area texto e exequer lo verso le projecto aperte currente. Pro personalisar le characteristica del script, face le sequente:</para>
+    <para>Le Fenestra de Scripting te permitte de cargar un script existente in le area texto e exequer lo verso le projecto aperte currente. Pro personalisar le characteristica del script, face le sequente:</para>
 
     <itemizedlist>
       <listitem>
@@ -26,7 +26,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Clicca con le dextera sur un button de &quot;&lt;1&gt;&quot; a &quot;&lt;12&gt;&quot; in le quadro basse e selige &quot;Adde&quot;. In le exemplo precedente, duo scriptes (position 1 e 2) esseva jam addite.</para>
+        <para>Clicca con le dextre sur un button de &quot;&lt;1&gt;&quot; a &quot;&lt;12&gt;&quot; in le quadro basse e selige &quot;Adde&quot;. In le exemplo super, duo scripts (position 1 e 2) esseva jam addite.</para>
       </listitem>
     </itemizedlist>
 
@@ -36,16 +36,16 @@
       </listitem>
     </itemizedlist>
 
-    <para>Normalmente, le scriptes es continite in le plica &quot;scripts&quot; ubicate in le plica de installation de OmegaT (le plica que contine OmegaT.jar).</para>
+    <para>Normalmente, le scripts es continite in le plica &quot;scripts&quot; locate in le plica de installation de OmegaT (le plica que contine OmegaT.jar).</para>
 
-    <para>Tu pote adder nove scriptes ibi, si que illos apparera in le lista del scriptes disponibile in le fenestra Script.</para>
+    <para>Tu pote adder nove scripts ibi, si que illos apparera in le lista del scripts disponibile in le fenestra de Scripting.</para>
 
     <para>On pote trovar additional scriptes ci: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>
     </para>
   </section>
 
   <section>
-    <title>Linguas de Script</title>
+    <title>Linguages de Script</title>
 
     <para>Le sequente linguas de script esseva implementate:</para>
 
@@ -55,9 +55,9 @@
         </listitem>
       </itemizedlist><itemizedlist>
         <listitem>
-          <para><emphasis role="bold">JavaScript</emphasis> (alicun vices abbreviate JS, non confunder con Java): es un lingua de scripting, basate sur prototypo,  que es dynamic, debilemente typate, e ha functiones de prima classe. Illo es un lingua de programmation plure-paradigma, que supporta stilos de programmation orientate al objecto, imperative, e functional. Pois que illo es le lingua de un software ultra popular como Firefox, illo es un instrumento de programmation familiar e ideal in le dominio del open-source.</para>
+          <para><emphasis role="bold">JavaScript</emphasis> (alicun vices abbreviate JS, non confunder con Java): es un lingua de scripting, basate sur prototypo,  que es dynamic, debilemente typate, e ha le functiones de prima classe. Illo es un lingua de programmation multo-paradigma, que supporta stilos de programmation orientate al objecto, imperative, e functional. Pois que illo es le lingua de un software ultra popular como Firefox, illo es un instrumento de programmation familiar e ideal in le dominio del open-source.</para>
         </listitem>
-      </itemizedlist>Omne le linguas ha accesso al modello a objectos OmegaT, con le projecto como objecto culmine. Le sequente retalio de codice in groovy per exemplo, scande trans tote le segmentos in omne le files del projecto actual e, si le traduction existe, stampa le segmento fonte e su traduction:</para>
+      </itemizedlist>Omne le linguas ha accesso al modello a objectos OmegaT, con le projecto como objecto culmine. Le sequente retalio de codice in groovy per exemplo, scande a transverso de tote le segmentos in tote le files in le projecto currente e, si le traduction existe, stampa le segmento fonte e le traduction del segmento:</para>
 
     <programlisting>    files = project.projectFiles;
     for (i in 0 ..&lt; files.size())

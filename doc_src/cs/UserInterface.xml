@@ -353,7 +353,7 @@
 
       <para>Je možné přetáhnout text z jiného místa v hlavním okně a vložit jej tak do segmentu. Text, který je přetažený z venku cílového segmentu, bude zkopírován, zatímco text přetažený v rámci segmentu, bude přesunut.</para>
 
-      <para>Ve výchozím nastavení není možno vybrat slova ve zdrojovém segmentu za použití klávesnice, ale jde to s myší. Stiskem <keycap>F2</keycap> umožníte pohyb kurzoru do zdrojového setmentu (nebo jinde v editoru) za pomocí kláves s šipkami. V tomto režimu je ve spodní hraně okna zobrazen text „<guilabel>Kurzor volný</guilabel>“ . Pro návrat do standardního režimu &quot;<guilabel>Cursor zamčen</guilabel>&quot; stiskněte opět <keycap>F2</keycap>.</para>
+      <para>Ve výchozím nastavení není možno vybrat slova ve zdrojovém segmentu za použití klávesnice, ale jde to s myší. Stiskem <keycap>F2</keycap> umožníte pohyb kurzoru do zdrojového setmentu (nebo jinde v editoru) za pomocí kláves s šipkami. V tomto režimu je ve spodní hraně okna zobrazen text &quot;<guilabel>Kurzor volný</guilabel>&quot; . Pro návrat do standardního režimu &quot;<guilabel>Cursor zamčen</guilabel>&quot; stiskněte opět <keycap>F2</keycap>.</para>
     </section>
 
     <section id="match.viewer">
@@ -405,7 +405,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>výchozí shoda OmegaT - číslo shodujících se slov – kdy se ignorují číslovky a tagy - děleno celkovým počtem slova celkem</para>
+          <para>výchozí shoda OmegaT - číslo shodujících se slov – kdy se ignorují číslovky a tagy - děleno celkovým počtem slov</para>
         </listitem>
       </itemizedlist>
 

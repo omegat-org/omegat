@@ -131,20 +131,31 @@ OmegaT je izvorno djelo Keitha Godfreya.
 
 Didier Briel je voditelj projekta OmegaT.
 
-Neki od prijašnjih suradnika:
+Tekući tim:
 (abecednim redoslijedom)
+
+  Vincent Bidaux (voditelj dokumentacije)
+  Didier Briel (voditelj projekta OmegaT, voditelj zajednice za Twitter)
+  Kos Ivantsov (voditelj lokalizacije)
+  Aaron Madlon-Kay (voditelj integracije)
+  Concepción Martin (voditeljica zajednice za Facebook)
+  Briac Pilpré (održavanje web stranica)
+  Lucie Vecerova (voditeljica zajednice za Facebook)
 
 Doprinosi u razvoju kôda dokumentirani su u datoteci /docs/contributors.txt.
 
-Na druge su načine doprinijeli sljedeći suradnici:
-  Vincent Bidaux (voditelj dokumentacije)
+Neki od prijašnjih suradnika:
+(abecednim redoslijedom)
+
   Alex Buloichik (glavni programer)
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (voditelj lokalizacije)
-  Aaron Madlon-Kay (voditelj integracije)
+  Jean-Christophe Helary (vlasnik skupine za podršku, voditelj lokalizacije)
+  Maxym Mykhalchuk (glavni programer)
   Samuel Murray
-  Marc Prior (održavanje web stranica)
+  Henry Pijffers (voditelj izdavanja inačica)
+  Marc Prior (koordinator projekta, održavanje web stranica)
+  Vito Smolej (voditelj dokumentacije)
   i još brojni drugi nesebični ljudi
 
 (Ako smatrate da ste značajno doprinijeli projektu OmegaT, a ime vam nije na popisu, javite nam se.)

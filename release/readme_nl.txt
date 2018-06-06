@@ -152,20 +152,31 @@ OmegaT is van origine het werk van Keith Godfrey.
 
 Didier Briel is de projectmanager voor OmegaT.
 
-Eerdere bijdragen van:
+Huidige team:
 (alfabetische volgorde)
+
+  Vincent Bidaux (documentatie-manager)
+  Didier Briel (OmegaT projectmanager, Twitter-manager voor de gemeenschap)
+  Kos Ivantsov (localisatiemanager)
+  Aaron Madlon-Kay (integratiemanager)
+  Concepción Martin (Facebook-manager voor de gemeenschap)
+  Briac Pilpré (webmaster)
+  Lucie Vecerova (Facebook-manager voor de gemeenschap)
 
 Bijdragen aan de code zijn gedocumenteerd in /docs/contributors.txt.
 
-Andere bijdragen door
-  Vincent Bidaux (documentatie-manager)
+Eerdere bijdragen van:
+(alfabetische volgorde)
+
   Alex Buloichik (lead developer)
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (manager lokalisatie)
-  Aaron Madlon-Kay (integratiemanager)
+  Jean-Christophe Helary (eigenaar ondersteuningsgroep, localisatiemanager)
+  Maxym Mykhalchuk (hoofdontwikkelaar)
   Samuel Murray
-  Marc Prior (webmaster)
+  Henry Pijffers (uitgavemanager)
+  Marc Prior (projectcoördinator, webmaster)
+  Vito Smolej (documentatiemanager)
   en vele, vele andere zeer behulpzame mensen
 
 (Als u denkt dat u een significante bijdrage heeft geleverd aan het OmegaT-project,

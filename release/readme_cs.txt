@@ -133,20 +133,31 @@ Autorem původního projektu OmegaT je Keith Godfrey.
 
 Projektovým managerem OmegaT je Didier Briel.
 
-Mezi dřívější přispěvatele patří:
-(podle abecedy)
+Aktuální tým:
+(v abecedním pořadí)
+
+  Vincent Bidaux (správce dokumentace)
+  Didier Briel (Správce projektu OmegaT, správce komunity Twitter)
+  Kos Ivantsov (správce lokalizací)
+  Aaron Madlon-Kay (manager integrace)
+  Concepción Martin (spávce komunity Facebook)
+  Briac Pilpré (webmaster)
+  Lucie Vecerova (správce komunity Facebook)
 
 Příspěvky do kódu jsou zdokumentovány v souboru /docs/contributors.txt.
 
-Ostatní přispěvatelé
-  Vincent Bidaux (správce dokumentace)
+Mezi dřívější přispěvatele patří:
+(podle abecedy)
+
   Alex Buloichik (vedoucí vývojář)
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (správce lokalizace)
-  Aaron Madlon-Kay (manager integrace)
+  Jean-Christophe Helary (vlastník skupiny podpory, správce lokalizace)
+  Maxym Mykhalchuk (vedoucí vývojář)
   Samuel Murray
-  Marc Prior (webmaster)
+  Henry Pijffers (správce vydání)
+  Marc Prior (koordinátor projektu, webmaster)
+  Vito Smolej (správce dokumentace)
   a mnoho, mnoho dalších velmi nápomocných lidí
 
 (Pokud si myslíte, že jste významně přispěli k projektu OmegaT,

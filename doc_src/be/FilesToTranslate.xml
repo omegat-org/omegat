@@ -168,15 +168,40 @@
           </listitem>
 
           <listitem>
-            <para>Java property XML (*.xml)</para>
+            <para>Уласьцівасьці Java у XML (.xml)</para>
           </listitem>
 
           <listitem>
             <para> Schematron (*.sch)</para>
           </listitem>
+
+          <listitem>
+            <para>Схема RELAX NG для XML (*.rng)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>Іншыя тыпы файлаў фарматаванага тэксту можна апрацоўваць з дапамогай OmegaT, зьвязваючы пашырэньне назвы файла з тыпам файла, які падтрымліваецца (зыходзячы з таго, што адпаведныя правілы сэгмэнтаваньня будуць карэктна ўжывацца).</para>
+    </section>
+    <section>
+		<title>Файлы PDF<indexterm class="singular">
+          <primary>Файлы перакладаў</primary> <secondary>Файлы PDF</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Зыходныя файлы</primary> <secondary>Файлы PDF</secondary>
+        </indexterm></title>
+  <para>Файлы PDF — гэта асобны выпадак. Яны зьмяшчаюць Інфармацыю пра фарматаваньне, але <application>OmegaT</application> ня можа ўжыць гэтую інфармацыю, каб скампіляваць файлы перакладаў. Такім чынам, файлы PDF апрацоўваюцца як файлы нефарматаванага тэксту, і на выхадзе атрымліваюцца файлы нефарматаванага тэксту.</para>
+  <para>Калі трэба аднавіць фарматаваньне тэксту ў перакладзе (а таксама іншыя элемэнты, напрыклад, малюнкі), ёсьць тры варыянты, якія можна паспрабаваць:</para>
+  <orderedlist>
+    <listitem>
+      <para>Скарыстацца з фільтра па змаўчаньні <application>OmegaT</application> (увод PDF), перакласьці, скампіляваць файл перакладу (атрымаецца файл нефарматаванага тэксту), дадаць адпаведнае фарматаваньне і элемэнты ўручную.</para>
+    </listitem>
+    <listitem>
+      <para>Скарыстацца зь фільтра Iceni Infix. Гл. <ulink url="https://omegat.org/howtos/iceni_infix.html">Howto - Translating PDF files with Iceni Infix and OmegaT</ulink>.</para>
+    </listitem>
+    <listitem>
+      <para>Імпартаваць зыходны файл у <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>, захаваць яго як файл ODG, перакласьці, экспартаваць у PDF пры неабходнасьці.</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">Заўвага:</emphasis> гэтая інфармацыя тычыцца толькі файлаў PDF з тэкставым слоем. Калі файл PDF створаны з адсканаваных старонак, спатрэбіцца скарыстацца з праграмы аптычнага распазнаваньня сымбаляў, каб распазнаць тэкст і пераўтварыць яго ў фармат файла, які OmegaT можа апрацаваць.</para>
     </section>
   </section>
 

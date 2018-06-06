@@ -1,9 +1,9 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5
 ----------------------------------------------------------------------
-  7 Enhancements
+  8 Enhancements
   3 Bug fixes
-  0 Localisation update
+  8 Localisation updates
 ----------------------------------------------------------------------
 4.1.5 vs 4.1.4
 
@@ -32,6 +32,8 @@ item in the omegat.prefs file to take advantage of this change.
 
   - Added Project > Open Recent Project > Clear Menu
 
+  - Linux: Updated Kaptain launcher to include fields for new MT credentials. 
+
   Bug fixes:
 
   - Infinite loop when searching with no keyword
@@ -42,6 +44,17 @@ item in the omegat.prefs file to take advantage of this change.
 
   - Edits may be lost without warning when closing OmegaT
   https://sourceforge.net/p/omegat/bugs/902/
+
+  Localisation Updates:
+
+  - Belarusian localisation updated to 4.5.1 (UI, scripts, readme, documentation)
+  - Croatian localisation updated to 4.5.1 (UI, readme, documentation)
+  - Czech localisation updated to 4.5.1 (UI, scripts, readme, documentation)
+  - Dutch localisation updated to 4.5.1 (UI, scripts, readme, documentation)
+  - Interlingua localisation updated to 4.5.1 (UI, scripts, readme, documentation)
+  - Italian localisation updated to 4.5.1 (UI, scripts, readme, documentation)
+  - Russian localisation updated to 4.5.1 (UI)
+  - Swedish localisation updated to 4.5.1 (UI, Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.4 (2018-04-02)

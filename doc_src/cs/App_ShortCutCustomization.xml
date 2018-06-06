@@ -253,7 +253,7 @@
           </row>
 
           <row>
-            <entry>Procházet obsah projektu/Zapisovatelný glosář; slovník; terminologická databáze</entry>
+            <entry>Procházet obsah projektu/Zapisovatelný glosář</entry>
 
             <entry/>
 
@@ -483,7 +483,7 @@
           <row>
             <entry>Označit přibližný překlad #3</entry>
 
-            <entry><keycap>Ctrl+3</keycap></entry>
+            <entry><keycap>Ctrl+1</keycap></entry>
 
             <entry>editSelectFuzzy3MenuItem</entry>
           </row>
@@ -491,7 +491,7 @@
           <row>
             <entry>Označit přibližný překlad #4</entry>
 
-            <entry><keycap>Ctrl+4</keycap></entry>
+            <entry><keycap>Ctrl+1</keycap></entry>
 
             <entry>editSelectFuzzy4MenuItem</entry>
           </row>
@@ -499,7 +499,7 @@
           <row>
             <entry>Označit přibližný překlad #5</entry>
 
-            <entry><keycap>Ctrl+5</keycap></entry>
+            <entry><keycap>Ctrl+1</keycap></entry>
 
             <entry>editSelectFuzzy5MenuItem</entry>
           </row>

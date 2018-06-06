@@ -328,7 +328,7 @@
           </row>
 
           <row>
-            <entry><application>O aplikaci OmegaT</application></entry>
+            <entry><application>O aplikaci OO</application></entry>
 
             <entry><para>Textový soubor, který obsahuje dva řádky:</para>
             <programlisting>#!/bin/bash java

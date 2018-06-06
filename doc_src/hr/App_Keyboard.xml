@@ -169,7 +169,7 @@
     </listitem>
   </itemizedlist>
 
-  <para>Tipka „Shift” nema nikakvu posebnu funkciju sama po sebi: pritiskom na nju pokazivač se pomoću svih ostalih tipki pomiče na uobičajeni način, osim u slučaju kombinacije <literal>Shift+Enter</literal>, kojom se u tekst umeće prijelom retka.</para>
+  <para>Tipka „Shift” nema nikakvu posebnu funkciju sama po sebi: pritiskom na nju pokazivač se s pomoću svih ostalih tipki pomiče na uobičajeni način, osim u slučaju kombinacije <literal>Shift+Enter</literal>, kojom se u tekst umeće prijelom retka.</para>
 
   <para>Naredbe na razini cijeloga sustava, tj. za označavanje svih informacija (<keycap>Ctrl+A</keycap>), lijepljenje (<emphasis role="bold">Ctrl+V</emphasis>), izrezivanje (<emphasis role="bold">Ctrl+X</emphasis>), kopiranje (<emphasis role="bold">Ctrl+C)</emphasis>, umetanje podudaranja ili odabranoga teksta <emphasis role="bold">(Ctrl+I</emphasis>) i umetanje izvorišnoga teksta (<emphasis role="bold">Ctrl+Shift+I</emphasis>) u načelu imaju učinka samo na tekst u otvorenome segmentu.</para>
 

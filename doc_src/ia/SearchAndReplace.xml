@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.searchandreplace">
-  <title>Cercar e replaciar<indexterm class="singular">
-      <primary>Cercar</primary>
+  <title>Cerca e replacia<indexterm class="singular">
+      <primary>Cerca</primary>
     </indexterm></title>
 
   <section id="section.searchreplace.window">
-    <title>Fenestra de recerca<indexterm class="singular">
+    <title>Fenestra Recerca<indexterm class="singular">
         <primary>Vias breve</primary> <secondary>Cercar e reimplaciar - Ctrl+K</secondary>
       </indexterm></title>
 
     <para>Aperi le Fenestra de recerca e replacia con <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo> e inscribe le parola o phrase que tu desidera pro recercar in le cassa  <emphasis>pro le Recerca</emphasis>.</para>
 
-    <para>Clicca alora sur le button <emphasis>Cercar</emphasis> pro monstrar omne le occurrentias correspondente.</para>
+    <para>Clicca alora sur le button <emphasis>Cercar</emphasis> pro monstrar tote le occurrentias correspondente.</para>
 
     <para>Insere le nove parola o phrase (le expressiones regular non es supportate) in le cassa <emphasis>Reimplacia con</emphasis>, pois clicca un del optiones sequente:<itemizedlist>
         <listitem>

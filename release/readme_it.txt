@@ -156,22 +156,33 @@ OmegaT è un lavoro originale di Keith Godfrey.
 
 Didier Briel è il gestore del progetto OmegaT.
 
-Elenco dei contributi precedenti (in ordine alfabetico)
+Team attuale:
+(ordine alfabetico)
+
+  Vincent Bidaux (gestore della documentazione)
+  Didier Briel (responsabile di progetto di OmegaT, responsabile della comunità di Twitter)
+  Kos Ivantsov (responsabile della localisazzazione)
+  Aaron Madlon-Kay (responsabile dell'integrazione)
+  Concepción Martin (responsabile della comunità di Facebook)
+  Briac Pilpré (webmaster)
+  Lucie Vecerova (responsabile della comunità di Facebook)
 
 I contributi al codice sono documentati in /docs/contributors.txt.
 
-Altri contributi:
-  Vincent Bidaux (gestore della documentazione)
+Elenco dei contributi precedenti (in ordine alfabetico)
+
   Alex Buloichik (sviluppatore primario)
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (gestore della localizzazione)
-  Aaron Madlon-Kay (responsabile dell'integrazione)
+  Jean-Christophe Helary (titolare del gruppo di supporto group owner, responsabile della localizzazione)
+  Maxym Mykhalchuk (sviluppatore capo developper)
   Samuel Murray
-  Marc Prior (webmaster)
-  e tantissime altre persone che hanno contribuito
+  Henry Pijffers (responsabile della edizione)
+  Marc Prior (co-ordinatore del progetto, webmaster)
+  Vito Smolej (responsabile della documentazione)
+  e tantissime altre persone utilissime
 
-(se ritenete di aver contribuito in modo significativo al Progetto OmegaT ma
+(se ritenete di aver contribuito in modo significativo al Progetto OmegaT,
 ma il vostro nome non è presente nell'elenco, contattateci senza problemi).
 
 

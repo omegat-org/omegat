@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.installing.and.running">
-  <title>Installar e executar <application>OmegaT</application></title>
+  <title>Installar e facer fluer <application>OmegaT</application></title>
 
   <section>
     <title id="Windows.users">Usatores de Windows <indexterm class="singular">
@@ -21,7 +21,7 @@
         <listitem>
           <para><emphasis role="bold">No / Io non sape:</emphasis> discarga<emphasis> OmegaT_3.n.n_Windows.exe.</emphasis></para>
 
-          <para>Iste pacchetto comprende Java Runtime Environment de Oracle (JRE). Iste JRE non interferera con altere installationes de Java que pote jam esser installate in tu systema.</para>
+          <para>Iste pacchetto ha Java Runtime Environment de Oracle incorporate. Iste JRE non interferera con altere installationes de Java que pote jam esser installate in tu systema.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -31,24 +31,30 @@
 
       <para>Pro installar <application>OmegaT</application>, clicca duo vices sur le programma que tu ha discargate.</para>
 
-      <para>Al initio del installation tu pote seliger le lingua a utilisar per le installation. In le fenestra sequente tu pote indicar que le lingua seligite debe esser usate in OmegaT. Actualmente interlingua non es disponibile e tu habera configurar lo con le fila 
--Duser.language=ia in le file OmegaT.I4j.ini . Si tu marca le quadrato de option, le file OmegaT.l4J.ini file es modificate pro usar le lingua eligite (vide le section sequente pro le detalios). Plus tarde, postquam tu ha acceptate le accordo de licentia, le programma de preparation demanda te si tu desidera crear un plica in le menu <emphasis>Initio</emphasis>, e si tu desira crear un via breve sur le scriptorio e in le barra de lanceamento celere - tu pote crear iste vias breve plus tarde con le tiramento de <emphasis><application>OmegaT</application>.exe</emphasis> al scriptorio o al menu de Initio pro ligar lo ex illac. Le quadro ultime offere te un reguardo al files readme e changes pro le version que tu ha installate.</para>
+      <para>Al initio del installation tu pote seliger le lingua a utilisar durante le installation. In le fenestra sequente tu pote indicar que le lingua seligite debe esser usate in OmegaT. Si tu marca le quadrato de controlo, le file OmegaT.l4J.ini file es modificate pro usar le lingua seligite (vide le section sequente pro le detalios). Plus tarde, postquam tu ha acceptate le accordo de licentia, le programma de preparation demanda a te si tu desidera crear un plica in le menu <emphasis>Initio</emphasis>, e si tu desira crear un via breve sur le scriptorio e in le barra de lanceamento celere - tu pote crear iste vias breve plus tarde trahente <emphasis><application>OmegaT</application>.exe</emphasis> al scriptorio o al menu de Initio pro ligar lo ex illac. Le quadro ultime te offere un reguardo al files readme e changes pro le version que tu ha installate.</para>
     </section>
 
     <section id="running.OmegaT.Windows">
-      <title>Executar <application>OmegaT<indexterm class="singular">
-          <primary>Executar OmegaT</primary> <secondary>Windows</secondary>
+      <title>Exequer <application>OmegaT<indexterm class="singular">
+          <primary>Exequer OmegaT</primary> <secondary>Windows</secondary>
         </indexterm></application></title>
 
       <para>Un vice que <application>OmegaT</application> es installate, pro lancear lo directemente, on pote cliccar sur <emphasis><application>OmegaT</application>.jar</emphasis> o on pote usar le linea de commando.</para>
 
-      <para>Le maniera plus simple pro lancear OmegaT, comocunque, es executar le programma <emphasis> <application>OmegaT</application>.exe</emphasis>. <indexterm class="singular">
-          <primary>Executar OmegaT</primary> <secondary>Windows</secondary>&gt; <tertiary>file INI</tertiary>
-        </indexterm>Le optiones per le initio del programma in iste caso essera legite ex le file  <emphasis><application>OmegaT </application>.l4J.ini </emphasis>, le qual reside in le mesme plica que le file .exe e que tu pote editar pro ser conforme a tu configuration. Le exemplo sequente del file .INI reserva 1GB de memoria, demanda le francese como lingua del usator e le Canada como pais:</para>
+      <para>Le maniera plus simple pro lancear OmegaT, comocunque, es exequer le programma <emphasis> <application>OmegaT</application>.exe</emphasis>. <indexterm class="singular">
+          <primary>Exequer OmegaT</primary> <secondary>Windows</secondary>&gt; <tertiary>file INI</tertiary>
+        </indexterm>Le optiones per le initio del programma in iste caso essera legite ab le file  <emphasis><application>OmegaT </application>.l4J.ini </emphasis>, le qual reside in le mesme plica que le file .exe e que tu pote editar per respicer tu preparation. Le exemplo sequente del file .INI reserva 1GB de memoria, demanda le francese como lingua del usator e le Canada como pais:</para>
 
-      <literallayout><code># OmegaT.exe runtime configuration # Pro usar un parametro, remove le '#' ante que le '-' # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
+      <literallayout><code># OmegaT.exe runtime configuration
+# To use a parameter, remove the '#' before the '-'
+# Memory
+-Xmx1024M
+# Language
+-Duser.language=FR
+# Country
+-Duser.country=CA </code></literallayout>
 
-      <para>Consilio: si OmegaT flue lentemente in le sessiones de scriptorio remote sub Windows, tu pote usar iste option:</para>
+      <para>Consilio: si OmegaT flue lentemente in Remote Desktop sessiones sub Windows, tu pote usar iste option:</para>
 
       <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
     </section>
@@ -58,13 +64,13 @@
           <primary>Promotion de OmegaT</primary> <secondary>Windows</secondary>
         </indexterm></title>
 
-      <para><emphasis>Iste information se refere sol al versiones &quot;Traditional&quot; de OmegaT pro Windows. Isto non se refere al version Web Start , que es promovite automaticamente al version ultime, ni al version cross-platform sur Windows .</emphasis></para>
+      <para><emphasis>Iste information se refere sol al versiones &quot;Traditional&quot; de OmegaT pro Windows. Isto non refere al version Web Start , que es promovite automaticamente al version ultime, neque al version cross-platform sur Windows .</emphasis></para>
 
-      <para>Si tu jam ha un version de OmegaT installate in tu PC e desira promover lo a un version plus recente, tu ha duo optiones:</para>
+      <para>Si tu ja ha un version de OmegaT installate in tu PC e desira lo promover a un version plus recente, tu ha duo optiones:</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Installar super le installation existente. </emphasis>Pro facer isto, selige simplemente le mesme plica del installation existente, quando tu installara le version nove. Le version &quot;vetule&quot; de OmegaT essera superscribite, ma omne le configurationes essera retenite. Isto include preferentias fixate intra OmegaT, qualcunque cambiamentos que tu faceva a tu file <filename>OmegaT.l4J.ini</filename> , e alsi a tu script de lanceamento (file .bat), si tu usa illo.</para>
+          <para><emphasis role="bold">Installar super le installation existente. </emphasis>Pro facer isto, selige simplemente le mesme plica del installation existente, quando tu installara le version nove. Le version &quot;vetule&quot; de OmegaT essera superscribite, ma tote le configurationes essera retenite. Isto include preferentias fixate intra OmegaT, qualcunque cambios que tu faceva a tu file <filename>OmegaT.l4J.ini</filename> , e alsi a tu script de lanceamento (file .bat), si tu usa ipso.</para>
         </listitem>
       </itemizedlist>
 
@@ -72,11 +78,11 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Installar in un plica nove. </emphasis>Isto habilitara te a retener ambe versiones uno al latere del altere, le qual tu potera desirar facer usque tu sentira te confortabile con le nove version. Iste methodo usara alsi le preferentias e le configurationes que tu ha facite in OmegaT. In iste caso, comocunque:</para>
+          <para><emphasis role="bold">Installar in un plica nove. </emphasis>Isto habilitara te a retener ambe versiones uno al latere del altere, le qual tu potera desirar facer usque tu sentira te confortabile con le nove version. Iste methodo usara alsi le preferentias e le configurationes que tu ha facite inter OmegaT. In iste caso, comocunque:</para>
 
           <itemizedlist>
             <listitem>
-              <para>Si tu ha cambiate tu file<filename> OmegaT.l4J.ini </filename>o es usante un file .bat, tu debe copiar isto super.</para>
+              <para>Si tu ha cambiate tu file<filename> OmegaT.l4J.ini </filename>o usa un file .bat, tu debe copiar isto super.</para>
             </listitem>
           </itemizedlist>
 
@@ -106,9 +112,9 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">No / Io non sape:</emphasis> discarga  <emphasis>OmegaT_3.n.n_Linux.tar.bz2.</emphasis></para>
+          <para><emphasis role="bold">No / Io non sape:</emphasis> discarga  <emphasis>OmegaT_3.x_Windows.exe.</emphasis></para>
 
-          <para>Iste pacchetto comprende Java Runtime Environment de Oracle (JRE). Iste JRE non interferera con altere installationes de Java que pote jam esser installate in tu systema.</para>
+          <para>Iste pacchetto ha Java Runtime Environment de Oracle incorporate. Iste JRE non interferera con altere installationes de Java que pote jam esser installate in tu systema.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -116,7 +122,7 @@
     <section id="OmegaT.installation.Linux">
       <title><application>Installar OmegaT</application></title>
 
-      <para>Que tu dispacchetta (Unpack/untar) le file discargate. Isto creara un plica omegat/ in le plica laborante in le qual tu trovara omne le files que necessita pro exequer <application>OmegaT</application>. Pro decomprimer le file <emphasis>.tar.gz</emphasis>:</para>
+      <para>Que tu dispacchetta (Unpack/untar) le file discargate. Isto creara un plica omegat/ in le plica laborante in le qual tu trovara tote le files que necessita pro exequer <application>OmegaT</application>. Pro decomprimer le file <emphasis>.tar.gz</emphasis>:</para>
 
       <para><emphasis>$ tar xf downloaded_file.tar.gz</emphasis></para>
     </section>
@@ -153,7 +159,7 @@
           </listitem>
 
           <listitem>
-            <para>Finalmente, salva le cambiamentos con <emphasis>Salva - File.</emphasis></para>
+            <para>Finalmente, salva le cambios con <emphasis>Salva - File.</emphasis></para>
           </listitem>
         </itemizedlist>
       </section>
@@ -173,18 +179,18 @@
           </listitem>
 
           <listitem>
-            <para>Clicca sur le button icone, pois pulsa <emphasis>Naviga...</emphasis> al sub plica /images in le plica del application <application>OmegaT</application>. Selige le icone <emphasis><application>OmegaT</application>.png</emphasis>. GNOME pote faller a monstrar le files icone in le formatos disponibile e initialmente appare pro expectar un file SVG, ma si le plica es seligite, le files debe apparer e <application>OmegaT</application>.png pote esser seligite.</para>
+            <para>Clicca sur le button icone, pois pulsa <emphasis>Naviga...</emphasis> al sub plica /images in le plica del application <application>OmegaT</application>. Selige le icone <emphasis><application>OmegaT</application>.png</emphasis>. GNOME pote faller a monstrar le files icone in le formatos disponibile e initialmente appare pro expectar un file SVG, ma si le plica es seligite, le files deberea apparer e <application>OmegaT</application>.png pote esser seligite.</para>
           </listitem>
         </itemizedlist>
       </section>
     </section>
 
     <section id="running.OmegaT.Linux">
-      <title>Executar <application>OmegaT<indexterm class="singular">
-          <primary>Executar OmegaT</primary> <secondary>Linux</secondary>
+      <title>Exequer <application>OmegaT<indexterm class="singular">
+          <primary>Exequer OmegaT</primary> <secondary>Linux</secondary>
         </indexterm></application></title>
 
-      <para>Tu pote lancear OmegaT ab le linea de commando con un script que include le optiones initial o tu pote cliccar sur <emphasis><application>OmegaT</application>.jar</emphasis> pro lancear lo directemente. Le methodos differe dependente del distribution. Face secur te que tu preparationes PERCURSO es correcte e que le files .jar  es associate debitemente con un lanceator de Java.<emphasis></emphasis><emphasis></emphasis> Controla in ultra &quot;Lanceamento per linea de commando&quot; pro plus de informationes.</para>
+      <para>Tu pote lancear OmegaT ab le linea de commando con un script que include le optiones initial o tu pote cliccar sur <emphasis><application>OmegaT</application>.jar</emphasis> pro lancear lo directemente. Le methodos differe dependente del distribution. Face secur te que tu configurationes PERCURSO es correcte e que le files .jar  es associate debitemente con un lanceator de Java.<emphasis></emphasis><emphasis></emphasis> Controla in sequito &quot;Lanceamento per linea de commando&quot; pro plus de informationes.</para>
     </section>
   </section>
 
@@ -204,7 +210,7 @@
     <section id="OmegaT.installation.OSX">
       <title><application>Installar OmegaT</application></title>
 
-      <para>Clicca duple sur <emphasis>OmegaT_3.n.n_Mac.zip</emphasis> pro dispacchettar lo. Isto crea un plica appellate <emphasis> <application>OmegaT</application> </emphasis>. Le plica contine 2 files: index.html e <emphasis><application>OmegaT</application>.app.</emphasis> Copia le plica in un plica convenibile (e.g. Applicationes). Un vice que tu ha exequite lo, tu pote deler le file <emphasis>OmegaT_3.n.n_Mac.zip</emphasis>, illo non necessita plus.</para>
+      <para>Clicca duple sur <emphasis>OmegaT_3.n.n_Mac.zip</emphasis> pro dispacchettar lo. Isto crea un plica nominate <emphasis> <application>OmegaT</application> </emphasis>. Le plica contine 2 files: index.html e <emphasis><application>OmegaT</application>.app.</emphasis> Copia le plica in un plica convenibile (e.g. Applicationes). Un vice que tu ha exequite lo, tu pote deler le file <emphasis>OmegaT_3.n.n_Mac.zip</emphasis>, illo non necessita plus.</para>
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
@@ -214,8 +220,8 @@
     </section>
 
     <section id="running.OmegaT.OSX">
-      <title>Executar <application>OmegaT<indexterm class="singular">
-          <primary>Executar OmegaT</primary> <secondary>OS X</secondary>
+      <title>Exequer <application>OmegaT<indexterm class="singular">
+          <primary>Exequer OmegaT</primary> <secondary>OS X</secondary>
         </indexterm></application></title>
 
       <para>Clicca duo vices sur<emphasis> <application>OmegaT</application>.app</emphasis> o clicca sur su location in le Dock.</para>
@@ -228,11 +234,11 @@
 
       <para>Le optiones es cambiate per modificar le file <emphasis>Configuration.properties</emphasis>. Per optiones pre-definite, remover le # ante un parametro pro habilitar lo. Per exemplo, <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (sin le #) lanceara <application>OmegaT</application> con le Interfacie del Usator in japonese.</para>
 
-      <para>Pro cambiar le quantitate del memoria disponibile, rediger le file <emphasis>OmegaT.app/Contentos/Info.plist</emphasis> e cambiar le contento del fila &lt;string&gt;-Xmx1024M&lt;/string&gt;. Pro instance, &lt;string&gt;-Xmx2048M&lt;/string&gt; will lanceamento OmegaT con le 2 gigas del memoria.</para>
+      <para>Pro mutar le quantitate de memoria disponibile, modifica <emphasis>OmegaT.app/Contentos/Info.plist</emphasis> file e muta le contento de &lt;string&gt;-Xmx1024M&lt;/string&gt;. Per exemplo, &lt;string&gt;-Xmx2048M&lt;/string&gt; lanceara OmegaT con le 2 GB de memoria.</para>
 
-      <para>Pro lancear instantias multiple de <emphasis><application>OmegaT</application>.app</emphasis>, clicca duo vices le file <emphasis>OmegaT.sh</emphasis> locate in <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+      <para>Pro lancear plure instantias de <emphasis><application>OmegaT</application>.app</emphasis>, clicca duo vices le file <emphasis>OmegaT.sh</emphasis> localisate in <emphasis><application>OmegaT</application>.app/ Contentos/MacOS/</emphasis>.</para>
 
-      <para>Usa le file <emphasis><application>OmegaT</application>.jar</emphasis> ubicate in <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> pro lancear  <application>OmegaT</application> per linea de commando. Controla in ultra &quot;Lanceamento per linea de commando&quot; pro plus de informationes.</para>
+      <para>Usa le file <emphasis><application>OmegaT</application>.jar</emphasis> ubicate in <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> pro lancear  <application>OmegaT</application> per linea de commando. Controla in sequito &quot;Lanceamento per linea de commando&quot; pro plus de informationes.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -258,7 +264,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Si: </emphasis>discarga <emphasis>OmegaT_3.n.n_Windows_without_JRE.exe</emphasis>. Iste pacchetto pote esser usate sur omne platteforma ubi es installate un Java 1.6 JRE compatibile JRE.</para>
+          <para><emphasis role="bold">Si: </emphasis>discarga <emphasis>OmegaT_3.n.n_Windows_without_JRE.exe</emphasis>. Iste pacchetto can esser usate sur omne platteforma ubi es installate un Java 1.6 JRE compatibile JRE.</para>
         </listitem>
 
         <listitem>
@@ -266,13 +272,13 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">No:</emphasis> obtene un Java JRE pro tu systema (vide in basso) e discarga <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">No:</emphasis> obtener  un Java JRE pro tu systema (vide in basso) e discargar <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
 
           <para>Oracle provide JREs pro Solaris SPARC/x86 (Java 1.6) e pro Linux x64, Solaris x64, Windows x64 (Java 1.6) in <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink></para>
 
           <para>IBM provide JREs for Linux PowerPC a <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html">http://www.ibm.com/developerworks/java/jdk/linux/download.html</ulink></para>
 
-          <para>Seque le instructiones de installation del pacchetto que tu necessita.</para>
+          <para>Sequer le instructiones de installation del pacchetto que vos necessita.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -288,15 +294,15 @@
     <section id="installing.convenient.shortcuts">
       <title>Installar le vias breve commode</title>
 
-      <para>Seque tu instructiones de systema pro installar le vias breve de <application>OmegaT</application> in locos commode de tu election.</para>
+      <para>Seque tu instructiones de systema pro installar le vias breve de <application>OmegaT</application> in locos commode de tu agradamento.</para>
     </section>
 
     <section id="running.OmegaT.other">
-      <title>Executar <application>OmegaT<indexterm class="singular">
-          <primary>Executar OmegaT</primary> <secondary>Altere systemas</secondary>
+      <title>Exequer <application>OmegaT<indexterm class="singular">
+          <primary>Exequer OmegaT</primary> <secondary>Altere systemas</secondary>
         </indexterm></application></title>
 
-      <para>Un vice que <application>OmegaT</application> es installate, tu pote lancear lo directemente per linea de commando, tu pote crear un script que include le parametros de lanceamento pro le linea de commando o tu pote cliccar sur <emphasis><application>OmegaT</application>.jar</emphasis> pro lancear  lo directemente. Le methodos differe dependente del distribution. Face secur te que tu preparationes del <emphasis>PATH</emphasis> son correcte e que le files <emphasis>.jar </emphasis> son associate debitemente con un lanceator Java. Controla in ultra &quot;Lanceamento per linea de commando&quot; pro plus de informationes.</para>
+      <para>Un vice que <application>OmegaT</application> es installate, tu pote lancear lo directemente ex le linea de commando, tu pote crear un script que include le parametros de lanceamento pro le linea de commando o tu pote cliccar sur <emphasis><application>OmegaT</application>.jar</emphasis> pro lancear  lo directemente. Le methodos differe dependente del distribution. Face secur te que tu configurationes del <emphasis>PATH</emphasis> son correcte e que le files <emphasis>.jar </emphasis> son associate debitemente con un lanceator Java. Controla in sequito &quot;Lanceamento per linea de commando&quot; pro plus de informationes.</para>
     </section>
   </section>
 
@@ -310,37 +316,37 @@
 
   <section id="using.Java.Web.Start">
     <title>Usar Java Web Start<indexterm class="singular">
-        <primary>Executar OmegaT</primary> <secondary>In Java Web Start</secondary>
+        <primary>Exequer OmegaT</primary> <secondary>In Java Web Start</secondary>
       </indexterm></title>
 
-    <para>Le technologia Java Web Start (depost Java 1.6 e sequente) pote ser usate pro le functionamento autonome del applicationes software Java con un sol clic sur le rete. Java Web Start assecura que le ultime version del application essera displicate, assi como usate le correcte version de Java Runtime Environment (JRE). Pro initiar OmegaT le prime vice con Java Web Start, carga in tu navigator le sequente URL:</para>
+    <para>Le technologia Java Web Start (depost Java 1.6 e sequente) pote essere usate pro le functionamento autonome del applicationes software Java con un sol clic sur le rete. Java Web Start assecura que le ultime version del application essera displicate, assi como usate le correcte version de Java Runtime Environment (JRE). Pro initiar OmegaT le prime vice con Java Web Start, carga in tu navigator le sequente URL:</para>
 
-    <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+    <para><emphasis>https://omegat.sourceforge.io/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
-    <para>Discarga le file<emphasis> <application>OmegaT</application>.jnlp</emphasis> e clicca sur illo. Durante le installation, dependente de tu systema operative, tu pote reciper plure advertimentos de securitate. Le permissiones que tu da a iste version (le qual pote apparer como &quot;accesso libere al computator&quot;) son identic al permissiones que  tu da al version local de OmegaT, id es, illos permitte accesso al disco dur del computator. Le cliccas subsequente sur <emphasis><application>OmegaT</application>.jnlp</emphasis> controlara pro tote le promotiones, installara los, si il ha alicun, e pois lanceara <application>OmegaT</application>. Post le installation initial tu pote, naturalmente, alsi usar <emphasis><application>OmegaT</application>.jnlp</emphasis> off-line.</para>
+    <para>Discarga le file<emphasis> <application>OmegaT</application>.jnlp</emphasis> e clicca sur illo. Durante le installation, dependente de tu systema operative, tu pote reciper plure advertimentos de securitate. Le permissiones que tu da a iste version (le qual pote apparer como &quot;accesso libere al computator&quot;) son identic al permissiones que  tu da al versiona local del OmegaT, id es, illos permitte accesso al disco dur del computator. Cliccas subsequente sur <emphasis><application>OmegaT</application>.jnlp</emphasis> controlara per omne renovationes, installara los, si il ha alicun, e alora lanceara <application>OmegaT</application>. Post le installation initial tu pote, naturalmente, alsi usar <emphasis><application>OmegaT</application>.jnlp</emphasis> alsi quando tu es off-line.</para>
 
-    <para><emphasis role="bold">Confidentialitate</emphasis>: <application>OmegaT</application> Java Web Start non salva alicun cosa de tu information ul le computator sur le illo es fluente. Le application flue solmente sur tu machina. Tu documentos e memorias de traduction resta sur tu computator, e le projecto <application>OmegaT</application> non habera ulle accesso a tu obras o informationes.</para>
+    <para><emphasis role="bold">Privacy</emphasis>: <application>OmegaT</application> Java Web Start does not save any of your information beyond the computer on which you are running it. Le application functiona sur tu  machina. Tu documentos e memorias de traduction remane sur tu computator, e le projecto <application>OmegaT</application> non habera ulle accesso a tu  obras o informationes.</para>
 
     <para>Nota que si tu necessita o desidera usar omne argumentos del commando de lanceamento (vide supra), tu debe usar le installation normal.</para>
   </section>
 
   <section>
-    <title>Lancear OmegaT per le linea de commando<indexterm class="singular">
-        <primary>Facer fluer OmegaT,</primary> <secondary>lancear per linea de commando</secondary>
+    <title>Initiar OmegaT del linea de commando<indexterm class="singular">
+        <primary>Exequer OmegaT</primary> <secondary>Lancear con le linea de commando</secondary>
       </indexterm></title>
 
-    <para>Normalmente, il non es necessari lancear <application>OmegaT</application> per linea de commando. Totevia, le alternativa del linea de commando permitte al usator de controlar e modificar melio le comportamento del programma. Il ha duo manieras de lancear <application>OmegaT</application> per linea de commando.</para>
+    <para>Normalmente, il non es necessari initiar <application>OmegaT</application> a partir del linea de commando. Tamen, le alternativa del linea de commando permitte al usator de controlar e modificar le comportamento del programma. Il ha duo manieras de lancear <application>OmegaT</application> per un linea de commando.</para>
 
     <section id="method1.opening.commandline.window">
       <title>Aperir un fenestra pro linea de commando</title>
 
-      <para>Un fenestra de linea de commando es alsi referite como &quot;fenestra de terminal&quot;. Sur Windows il es clamate un &quot;fenestra MS-DOS&quot; e es disponibile per le menu Initio, intra Programmas, per le commando &quot;MS-DOS&quot;. Le equivalente Mac OS X es le application Terminal ubicate in Applicationes → Utilitates.</para>
+      <para>Un fenestra de linea de commando es alsi referite como &quot;fenestra terminal&quot;. Sur Windows il es clamate un &quot;MS-DOS window&quot; e es disponibile ab le Menu Initio, intra Programmas, per le commando &quot;MS-DOS&quot;. Le equivalente Mac OS X es le application Terminal ubicate in Applicationes → Utilitates.</para>
 
       <para>Pro lancear  <application>OmegaT</application>, tu debe normalmente scriber duo commandos. Le prime de istos es:</para>
 
       <para><emphasis> <literal>cd {plica}</literal> </emphasis></para>
 
-      <para>ubi<emphasis> {plica}</emphasis> es le nomine del plica, con le percurso complete, in le qual tu programma  <application>OmegaT</application> - specificamente le file <emphasis><application>OmegaT</application>.jar</emphasis> - es ubicate. In practica, iste commando resimilara ergo a isto:</para>
+      <para>ubi<emphasis> {plica}</emphasis> es le nomine del plica, con le percurso complete, in le qual tu programma  - specificamente <application>OmegaT</application>, le file <emphasis><application>OmegaT</application>.jar</emphasis> - es ubicate. In practica, iste commando resimilara ergo a isto:</para>
 
       <para>Sur Windows</para>
 
@@ -362,31 +368,31 @@
       <para><literal>java -jar
       <application>OmegaT</application>.jar</literal></para>
 
-      <para>Paga attention al majusculas e minusculas: in OS alteremente que in Windows, le programma non initiara, si tu scribe <emphasis>omegat</emphasis> in loco de<emphasis>OmegaT</emphasis>!</para>
+      <para>Paga attention al majusculas e minusculas - in OS alteremente que in Windows, le programma non initiara, si tu scribe <emphasis>omegat</emphasis> in loco de<emphasis>OmegaT </emphasis>!</para>
 
       <para>Iste methodo ha le beneficio particular de esser commode pro discoperir causas de problemas: si occurre un error durante le uso del programma, in le fenestra del terminal es emittite un message de error que pote continer information utile sur le causa del error.</para>
 
       <para>Le methodo supra es un via aliquanto impractic pro initiar de routine un programma. Per iste ration, le duo commandos describite precedentemente es continite in un file (un &quot;script&quot;, alsi nominate un &quot;file .bat&quot; sur le systemas Windows).</para>
 
-      <para>Quando es exequite iste file, es exequite automaticamente alsi le commandos continite. Per consequentia, pro cambiar le commando de lanceamento, il es sufficiente modificar le file.</para>
+      <para>Quando es exequite iste file, son exequite automaticamente alsi le commandos interne. Per consequentia, pro cambiar le commando de lanceamento, il es sufficiente modificar le file.</para>
     </section>
 
     <section id="launch.command.arguments">
-      <title>Lancear le argumentos de commando<indexterm class="singular">
-          <primary>Facer fluer OmegaT</primary> <secondary>Lancear le argumentos de script</secondary>
+      <title>Lancear argumentos de commando<indexterm class="singular">
+          <primary>Exequer OmegaT</primary> <secondary>Lancear argumentos de script</secondary>
         </indexterm></title>
 
-      <para>Le commando basic esseva ja mentionate precedentemente. Le cambiamentos a iste commando implica le addition de &quot;argumentos&quot;. Le argumentos es addite post le <emphasis>&quot;java&quot;</emphasis> initial, e ante  <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Nota que in Windows tu pote cambiar le file <filename>OmegaT.l4J.ini</filename> pro reflecter tu preferentias. In altere platteformas, tu pote modificar le file <filename>Configuration.proprieties</filename> sur Mac, o le lanceator de <filename>OmegaT</filename> sub Linux pro facer le mesmo.</para>
+      <para>Le commando basic esseva ja mentionate precedentemente. Le cambios a iste commando implica le addition de &quot;argumentos&quot;. Le argumentos son addite post le initial <emphasis>&quot;java&quot;</emphasis>, e ante le <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Nota que in Windows tu pote cambiar le file <filename>OmegaT.l4J.ini</filename> pro reflecter tu preferentias. In altere platteformas, tu pote modificar le file <filename>Configuration.proprieties</filename> sur Mac, o le lanceator de <filename>OmegaT</filename> sub Linux pro facer le mesmo.</para>
 
-      <para>Un lista de argumentos possibile is fornite in sequito. Le usatores experte pote obtener re le argumentos plus de informationes scribente <emphasis>man java</emphasis> in le fenestra de terminal.</para>
+      <para>Un lista de argumentos possibile is fornite in basso. Le usatores experte pote obtener plus information sur le argumentos scribente <emphasis>man java</emphasis> in le fenestra terminal.</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Lingua del interfacie de usator</emphasis></para>
+          <para><emphasis role="bold">Lingua del interfacie del usator</emphasis></para>
 
           <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
-              <primary>Facer fluer OmegaT</primary> <secondary>lancear argumentos de script</secondary> <tertiary>Lingua del interfacie de usator</tertiary>
-            </indexterm> Normalmente, id es quando <application>OmegaT</application> es lanceate sin alicun argumento, le programma releva antea le lingua del systema operative del usator. Si es disponibile un interfacie de usator in tal lingua, <application>OmegaT</application> usara lo. Assi, si le systema operative del usator es russe e <application>OmegaT</application> esseva localisate in russo, <application>OmegaT</application> es monstrate con un interfacie del usator russe, menus russe, et cetera. Si le lingua del systema del usator non es disponibile, <application>OmegaT</application> adopta normalmente le anglese. Isto es le comportamento standard.</para>
+              <primary>Exequer OmegaT</primary> <secondary>Lancear argumentos de script</secondary> <tertiary>Lingua del interfacie del usator</tertiary>
+            </indexterm> Normalmente, id es quando <application>OmegaT</application> es lanceate sin alicun argumentos, le programma releva in prime loco le lingua del systema operative del usator. Si es disponibile un Interfacie del Usator in iste lingua, <application>OmegaT</application> usara lo. Assi, si le systema operative del usator es russe e <application>OmegaT</application> esseva localisate in russo, <application>OmegaT</application> es monstrate con un interfacie del usator russe, menus russe, et cetera. Si le lingua del systema del usator non es disponibile, <application>OmegaT</application> adopta le configurationes base in anglese. Isto es le comportamento standard.</para>
 
           <para>Le argumento <emphasis>&quot;-Duser.language=XX&quot;</emphasis> causa que <application>OmegaT</application> usa le lingua specificate plus tosto que le lingua del systema operative del usator. &quot;XX&quot; in le commando consiste in le codice de duo cifras del lingua desiderate. Pro lancear <application>OmegaT</application> con un interfacie francese (per exemplo sur un systema operative russe), le commando esserea in consequentia:</para>
 
@@ -400,7 +406,7 @@
           <para><emphasis role="bold">Pais del usator</emphasis></para>
 
           <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm class="singular">
-              <primary>Facer fluer OmegaT</primary> <secondary>Lancear argumentos de script</secondary> <tertiary>Pais del usator</tertiary>
+              <primary>Exequer OmegaT</primary> <secondary>Lancear argumentos de script</secondary> <tertiary>Pais del usator</tertiary>
             </indexterm> In ultra al lingua, tu pote alsi specificar le pais, per exemplo CN o TW in caso del lingua Chinese. Pro monstrar le guida de initio celere in le lingua desiderate, tu necessita specificar ambe le lingua e le pais. Isto es necessari etiam si il ha sol un combination disponibile, como pt_BR in caso de portugese / Brasil.</para>
         </listitem>
       </itemizedlist>
@@ -410,42 +416,42 @@
           <para><emphasis role="bold">Assignation del memoria</emphasis></para>
 
           <para><emphasis role="bold">-XmxZZM </emphasis><indexterm class="singular">
-              <primary>Executar OmegaT</primary> <secondary>Lancear argumentos de script</secondary> <tertiary>Assignation de memoria</tertiary>
-            </indexterm>Iste commando assigna plus memoria a <application>OmegaT</application>. Normalmente, es assignate 512 MB, assi il non ha beneficio assignar minus de iste cifra. &quot;ZZ&quot; sta pro le amontar de memoria assignate, in megabytes. Le commando pro lancear  <application>OmegaT</application> con assignation de 1024 MB (1 gigabyte) de memoria es in consequentia:</para>
+              <primary>Exequer OmegaT</primary> <secondary>Lancear argumentos de script</secondary> <tertiary>Assignation de memoria</tertiary>
+            </indexterm>Iste commando assigna plus memoria a <application>OmegaT</application>. Per arrangiamento base, son assignate 512 MB, assi il non ha beneficio assignar minus de iste cifra. &quot;ZZ&quot; sta pro le amontar de memoria assignate, in megabytes. Le commando pro lancear  <application>OmegaT</application> con assignation de 1024 MB (1 gigabyte) de memoria es in consequentia:</para>
 
           <para><literal>java -Xmx1024M -jar <application>OmegaT</application> .jar</literal></para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Adresse IP del hospite proxy</emphasis></para>
+          <para><emphasis role="bold">Adresse IP del proxy</emphasis></para>
 
           <para><emphasis role="bold"><emphasis role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm class="singular">
-              <primary>Executar OmegaT</primary> <secondary>Argumentos del script de lanceamento</secondary> <tertiary>Adresse IP del proxy hospite</tertiary>
-            </indexterm></emphasis> Le adresse IP de tu servitor proxy, si tu systema usa un proxy.</para>
+              <primary>Exequer OmegaT</primary> <secondary>Argumentos del script de lanceamento</secondary> <tertiary>Adresse IP del proxy hospite</tertiary>
+            </indexterm></emphasis> Le adresse IP de tu server proxy, si tu systema usa un proxy.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Numero del porta del hospite proxy</emphasis></para>
+          <para><emphasis role="bold">Numero del porta del proxy hospite</emphasis></para>
 
           <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis> <indexterm class="singular">
-              <primary>Executar OmegaT</primary> <secondary>Argumentos del script de lanceamento</secondary> <tertiary>Numero del porta del proxy hospite</tertiary>
-            </indexterm> The numero del porta que tu systema usa pro acceder al servitor proxy.</para>
+              <primary>Exequer OmegaT</primary> <secondary>Argumentos del script de lanceamento</secondary> <tertiary>Numero del porta del proxy hospite</tertiary>
+            </indexterm> The numero del porta que tu systema usa pro acceder al server proxy.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">Google Translate v2</emphasis></para>
 
           <para><emphasis role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </emphasis><emphasis role="bold"><indexterm class="singular">
-              <primary>Executar OmegaT</primary> <secondary>Lancear argumentos de script</secondary> <tertiary>Google Translate V2</tertiary>
+              <primary>Exequer OmegaT</primary> <secondary>Lancear argumentos de script</secondary> <tertiary>Google Translate V2</tertiary>
             </indexterm></emphasis> Si tu ha signate pro le servicios Google Translate, scribe ci tu clave private de API Google. Note que le clave es longe 38 characteres.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">Traductor Microsoft</emphasis><indexterm class="singular">
-              <primary>Executar OmegaT</primary> <secondary>Lancear argumentos de script</secondary> <tertiary>Microsoft Translator</tertiary>
+              <primary>Exequer OmegaT</primary> <secondary>Lancear argumentos de script</secondary> <tertiary>Microsoft Translator</tertiary>
             </indexterm></para>
 
-          <para>Face te secur que tu ha un conto gratuite Microsoft. Tu necessitara isto pro tu connexion a <ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink> e pro usar le servicio de traductor. Nota que usque 2M characteres per mense es gratuite. Le duo entratas requirite son disponibile in tu <ulink url="https://datamarket.azure.com/account">pagina del conto</ulink> sub clave del conto Primari e Customer-ID:</para>
+          <para>Face te secur que tu ha un conto gratuite Microsoft. Tu necessitara isto pro sign-in a <ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink> e usar le servicio de traductor. Nota que usque 2M characteres per mense son gratuite. Le duo entratas requirite son disponibile in tu <ulink url="https://datamarket.azure.com/account">pagina del conto</ulink> sub clave del conto Primari e Customer-ID:</para>
 
           <para><emphasis role="bold">-Dmicrosoft.api.client_id=</emphasis><emphasis role="bold">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</emphasis></para>
 
@@ -473,25 +479,25 @@
 
     <section id="omegat.command.arguments">
       <title>OmegaT in modo linea de commando<indexterm class="singular">
-          <primary>Executar OmegaT</primary> <secondary>Modo linea de commando</secondary>
+          <primary>Exequer OmegaT</primary> <secondary>Modo linea de commando</secondary>
         </indexterm></title>
 
-      <para>Le proposito del modo consola (linea de commando) es  permitter le uso de &lt;a0&gt;OmegaT&lt;/a0&gt; como instrumento de traduction in un ambiente script. Quando initiava in modo consola, nulle GUI es cargate (assi il laborara sur omne consola) e le projecto date es processate automaticamente como requirite.</para>
+      <para>OmegaT in modo linea de commando Quando initiava in modo consola, nulle GUI es cargate (assi il laborara sur omne consola) e le projecto date es processate automaticamente como requirite.</para>
 
       <section id="console.mode.prerequisites">
         <title>Pre-requisitos</title>
 
-        <para>Pro lancear <application>OmegaT</application> in le modo linea de commando, debe esser presente un projecto <application>OmegaT</application> valide. Le ubication non face substantia, pois que tu debe adder lo al linea de commando del lanceamento in omne caso.</para>
+        <para>Pro lancear <application>OmegaT</application> in le modo linea de commando, debe esser presente un projecto <application>OmegaT</application> valide . Le ubication non face substantia, pois que tu debe adder lo al linea de commando al lanceamento  in omne caso.</para>
 
         <para>Si tu necessita configurationes alterate, le files de configuration debe esser disponibile. Isto pote esser complite in duo manieras:</para>
 
         <itemizedlist>
           <listitem>
-            <para>Exeque <application>OmegaT</application> normalmente (con le GUI) e specifica le configurationes. Si tu lancea <application>OmegaT</application> in modo consola, il usara le mesme preparationes.</para>
+            <para>Exeque <application>OmegaT</application> normalmente (con le GUI) e specifica le configurationes. Si tu lancea <application>OmegaT</application> in modo consola, il usara le mesme configurationes.</para>
           </listitem>
 
           <listitem>
-            <para>Si tu non pote exequer <application>OmegaT</application> normalmente (nulle ambiente graphic disponibile): copia le files del preparationes ex alicun altere installation <application>OmegaT</application> sur un altere machina a un plica specific. Le ubication non face substantia, pois que tu pote adder lo al linea de commando al lanceamento. Le files pertinente son <literal>filters.conf</literal> e <literal>segmentation.conf</literal> e pote esser trovate in le plica domo del usator (per exemplo <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> sub Windows, <literal>%user%/.omegat/</literal> sub Linux)</para>
+            <para>Si tu non pote exequer <application>OmegaT</application> normalmente (nulle ambiente graphic disponibile): copia le files del configurationes ex alicun altere installation <application>OmegaT</application> sur un altere machina a un plica specific. Le ubication non face substantia, pois que tu pote adder lo al linea de commando al lanceamento. Le files pertinente son <literal>filters.conf</literal> e <literal>segmentation.conf</literal> e pote esser trovate in le plica domo del usator (per exemplo <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> sub Windows, <literal>%user%/.omegat/</literal> sub Linux)</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -513,7 +519,7 @@
 
         <para><literal> --source-pattern={regexp}</literal></para>
 
-        <para>Nota que tote le parametros initia con un character &quot;duple -&quot;.</para>
+        <para>Nota que omne parametros initia con un character - duple.</para>
 
         <para><emphasis role="bold">Explication:</emphasis></para>
 
@@ -525,7 +531,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><literal>--config-dir=&lt;config-dir&gt;</literal> indica a <application>OmegaT</application> in qual plica es servate le files de configuration. Si non date, <application>OmegaT</application> reveni al plica del valores de preparation base (<application>OmegaT</application> sub le home del usator o, si indisponibile, in le plica de labor actual). Nota le character &quot;duple -&quot; </para>
+            <para><literal>--config-dir=&lt;config-dir&gt;</literal> indica a <application>OmegaT</application> in qual plica es servate le files de configuration. Si non date, <application>OmegaT</application> reveni al plica del valores de preparation base (<application>OmegaT</application> sub home del usator o, si indisponibile, le plica de labor actual). Nota le duple - character</para>
           </listitem>
 
           <listitem>
@@ -541,7 +547,7 @@
               <listitem>
                 <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
-                <para>In iste modo, OmegaT tentara de traducer le files in /source/ con le memorias de traduction disponibile. Isto es utile pro exequer OmegaT sur un servitor con le files TMX que alimenta automaticamente un projecto.</para>
+                <para>In iste modo, OmegaT tentara de traducer le files in /source/ con le memorias de traduction disponibile. Isto es utile pro exequer OmegaT sur un server con le files TMX que alimenta automaticamente un projecto.</para>
               </listitem>
 
               <listitem>
@@ -562,7 +568,8 @@
 
                 <para>Un parametro additional necessita in iste caso, specificante le ubication del datos final:</para>
 
-                <para><literal>--alignDir={ubication del files rendite}</literal></para>
+                <para><literal>--alignDir={location of translated
+                files}</literal></para>
 
                 <para><filename>alignDir</filename> debe continer un traduction in le lingua de destination del projecto. Per exemplo, si le projecto es EN-&gt;FR, alignDir debe continer un desinentia con _fr. Le TMX resultante es immagazinate in le plica <literal>/omegat/</literal> sub le nomine <filename>align.tmx</filename>.</para>
               </listitem>
@@ -576,7 +583,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+                <para><emphasis><literal>&lt;html&gt;</literal></emphasis></para>
 
                 <para>Omne le files HTML essera traducite - Nota que le periodo in le *.html usual debe esser escappate (\.) assi como specificate ab le regulas pro le expressiones regular.</para>
               </listitem>
@@ -602,7 +609,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+                <para><emphasis><literal>&lt;html&gt;</literal></emphasis></para>
 
                 <para>Omne le files HTML essera traducite - Nota que le periodo in le *.html usual debe esser escappate (\.) assi como specificate ab le regulas pro le expressiones regular.</para>
               </listitem>
@@ -625,7 +632,7 @@
             <para><literal>--tag-validation=[abort|warn]</literal><parameter>
             outputFileName</parameter></para>
 
-            <para>Iste option permitte le validation del tag in modo batch. Si es seligite <literal>abort </literal>, le validator de tag arrestara se sur le prime segmento non valide. Si es specificate <literal>warn</literal>, le validator del tag processara omne le segmentos e scribera advertimentos re omne segmentos con tags invalide in le file specificate.</para>
+            <para>Iste option permitte le validation del tag in modo batch. Si es seligite <literal>abort </literal>, le validator de tag arrestara se sur le prime segmento invalide. Si es specificate <literal>warn</literal>, le validator del tag processara tote le segmentos e scribera advertimentos re omne segmentos con tags invalide in le file specificate.</para>
           </listitem>
         </itemizedlist>
 
@@ -637,15 +644,15 @@
 
         <itemizedlist>
           <listitem>
-            <para><literal>--disable-project-locking</literal> permitte, sub Windows, de aperir le mesme projecto con plure occurrentias de OmegaT. Per arrangiamento initial, sub Windows, <literal>omegat.project</literal> es blocate, e es recipite un message de error quando on proba a aperir un projecto jam aperite in un altere instantia de OmegaT. With that option, no locking occurs.</para>
+            <para><literal>--disable-project-locking</literal> permitte, sub Windows, de aperir le mesme projecto Con plure occurrentias de OmegaT. Per arrangiamento initial, sub Windows, <literal>omegat.project</literal> es blocate, e es recipite un message de error quando on proba a aperir un projecto jam aperite in un altere instantia de OmegaT. With that option, no locking occurs.</para>
           </listitem>
         </itemizedlist>
       </section>
 
       <section id="console.mode.option.quiet">
-        <title>Option quiete</title>
+        <title>Option Silentiose</title>
 
-        <para>Un parametro extra pro linea de commando specific al modo consola: <literal>--quiet.</literal> In le modo quiete, minus informationes es registrate verso le schermo. Le messages que tu trovarea habitualmente in le barra de stato non es monstrate.</para>
+        <para>Un parametro extra pro linea de commando specific al modo consola: <literal>--quiet.</literal> In le modo quiete, minus informationes es registrate verso le schermo. Le messages que tu trovarea habitualmente in le barra de stato non son monstrate.</para>
 
         <para>Uso: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --quiet</literal></para>
       </section>
@@ -662,7 +669,7 @@
 
   <section id="building.OmegaT.from.source">
     <title>Construer <application>OmegaT</application> ex le fonte<indexterm class="singular">
-        <primary>Executar OmegaT</primary> <secondary>Construer OmegaT ex le fonte</secondary>
+        <primary>Exequer OmegaT</primary> <secondary>Construer OmegaT ex le fonte</secondary>
       </indexterm></title>
 
     <para>Nota que tu necessitara le programma ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>) pro construer tu proprie version de OmegaT. Dispacchetta le file <emphasis>OmegaT_3.n.n_Source.zip</emphasis> e entra in le plica OmegaT_3.n.n_Source o entra in le plica <emphasis>./omegat/</emphasis> del codice SVN discargate. Per favor face secur te que un file build.xml es presente in iste plica. Eo, sur le linea de commando, scribe:</para>

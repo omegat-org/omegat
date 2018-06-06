@@ -76,7 +76,7 @@
 
     <para>Formát CSV je také podporován. Tento formát je prakticky to samé jako když jsou položky odděleny tabulátorem: zdrojový výraz, cílový výraz. Pole s komentářem je odděleno čárkou ','. Jednotlivé řetězce mohou být ohraničeny uvozovkami &quot;, což umožňuje použít čárku uvnitř řetězce.</para>
 
-    <para><literal>„Toto je zdrojový výraz, který obsahuje čárku“, „c'est un terme, qui contient une virgule“</literal></para>
+    <para><literal>&quot;Toto je zdrojový výraz, který obsahuje čárku&quot;,&quot;c'est un terme, qui contient une virgule&quot;</literal></para>
 
     <para>Vedle prostého textového formátu je podporován <indexterm class="singular">
         <primary>Glosáře</primary> <secondary>formát TBX</secondary>

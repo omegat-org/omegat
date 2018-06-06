@@ -84,7 +84,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Пасьля завяршэньня перакладу OmegaT робіць экспарт у тры файлы памяці перакладаў, якія маюць у сваіх назвах <filename>“level1”</filename>, <filename>“level2”</filename> і <filename>“omegat”</filename>, у каталёгу праекта. Файлы з <filename>“level1”</filename> або <filename>“level2”</filename> у назвах можна выкарыстоўваць для абмену зь іншымі праграмамі аўтаматызацыі перакладу. Файл з <filename>omegat</filename> у назьве можна выкарыстаць у самой OmegaT, у будучых праектах, якія вы створыце. Калі памясьціць такія файлы памяці перакладаў у падкаталёг <filename>/tm/</filename> праекта, OmegaT будзе аўтаматычна шукаць у іх падобныя сэгмэнты, г. зв. “недакладныя супадзеньні”.</para>
+        <para>Пасьля завяршэньня перакладу OmegaT робіць экспарт у тры файлы памяці перакладаў, якія маюць у сваіх назвах <filename>“level1”</filename>, <filename>“level2”</filename> і <filename>“omegat”</filename>, у каталёгу праекта. Файлы з <filename>“level1”</filename> або <filename>“level2”</filename> у назвах можна выкарыстоўваць для абмену зь іншымі праграмамі аўтаматызацыі перакладу. Файл з <filename>omegat</filename> у назьве можна выкарыстаць у самой OmegaT, у наступных праектах. Калі памясьціць такія файлы памяці перакладаў у падкаталёг <filename>/tm/</filename> праекта, OmegaT будзе аўтаматычна шукаць у іх падобныя сэгмэнты, г. зв. “недакладныя супадзеньні”.</para>
       </listitem>
     </itemizedlist>
 
@@ -102,7 +102,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Больш падрабязныя ўводзіны ўтрымліваюцца ў дапаможніку <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">“OmegaT for beginners” (“OmegaT для пачаткоўцаў”)</ulink> на сайце OmegaT (на ангельскай мове). Калі спатрэбіцца дапамога ў любым аспэкце OmegaT, далучайцеся да <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">групы карыстальнікаў OmegaT</ulink>.</para>
+        <para>Больш падрабязныя ўводзіны ўтрымліваюцца ў дапаможніку <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">“OmegaT for beginners” (“OmegaT для пачаткоўцаў”)</ulink> на сайце OmegaT (на ангельскай мове). Калі спатрэбіцца дапамога ў любым аспэкце OmegaT, далучайцеся да <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info">групы карыстальнікаў OmegaT</ulink>.</para>
       </listitem>
     </itemizedlist>
   </section>

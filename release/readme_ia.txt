@@ -156,21 +156,32 @@ OmegaT is the original work of Keith Godfrey. (OmegaT es le opera original de Ke
 
 Didier Briel es le Director del Projecto OmegaT.
 
-Le previe contributores include:
-(in ordine alphabetic)
+Equipa actual:
+(ordine alphabetic)
+
+  Vincent Bidaux (director del documentation)
+  Didier Briel (administrator de projecto de OmegaT, administrator de collectivitate de Twitter)
+  Kos Ivantsof (administrator del localisation)
+  Aaron Madlon-Kay (gerente del integration)
+  Concepción Martin (Administrator collectivitate de Facebook)
+  Briac Pilpré (webmaster)
+  Lucie Vecerova (Administrator collectivitate de Facebook)
 
 Le contributiones al codice es documentate in /docs/contributors.txt.
 
-Altere contributiones per
-  Vincent Bidaux (director del documentation)
+Le previe contributores include:
+(in ordine alphabetic)
+
   Alex Buloichik (conducer disveloppator)
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (director del localisation)
-  Aaron Madlon-Kay (gerente del integration)
+  Jean-Christophe Helary (supporto gruppo possessor, localisation administrator)
+  Maxym Mykhalchuk (disveloppator chef)
   Samuel Murray
-  Marc Prior (webmaster)
-  e multe, multo plus maxime adjuvante personas
+  Henrico Pijffers (administrator de edition)
+  Marc Prior (co-ordinator de projecto, webmaster)
+  Vito Smolej (director del documentation)
+  e multe, multo plus maxime personas adjuvante
 
 (si tu pensa que tu ha significativemente contribuite al projecto OmegaT 
 ma tu non vide tu nomine in le listas, senti te libere de nos continger.)
@@ -180,7 +191,7 @@ ma tu non vide tu nomine in le listas, senti te libere de nos continger.)
 Ligamines utile
 ============
 
-Le plus actual information circa OmegaT pote esser trovate al ligamine:
+Le plus actual information circa OmegaT pote ser trovate al ligamine:
 
    http://www.omegat.org/
 

@@ -47,11 +47,11 @@
 
       <literallayout><code># OmegaT.exe runtime configuration
 # To use a parameter, remove the '#' before the '-'
-# Memory 
--Xmx1024M 
-# Language 
+# Memory
+-Xmx1024M
+# Language
 -Duser.language=FR
-# Country 
+# Country
 -Duser.country=CA </code></literallayout>
 
       <para>Парада: калі OmegaT працуе павольна ў сэансах аддаленага працоўнага стала пад Windows, можна выкарыстоўваць наступны парамэтар:</para>
@@ -143,7 +143,7 @@
           </listitem>
 
           <listitem>
-            <para>Затым, пасьля выбару прыдатнага мэню, дадайце падмэню/пункт праз <emphasis>File - New</emphasis> Submenu і <emphasis>File - New Item</emphasis>. Падайце <application>OmegaT</application> у якасьці назвы новага пункта.</para>
+            <para>Затым, пасьля выбару прыдатнага мэню, дадайце падмэню/пункт праз падмэню <emphasis>File - New</emphasis> і <emphasis>File - New Item</emphasis>. Падайце <application>OmegaT</application> у якасьці назвы новага пункта.</para>
           </listitem>
 
           <listitem>
@@ -234,7 +234,7 @@
 
       <para>Парамэтры зьмяняюцца шляхам рэдагаваньня <emphasis>Configuration.properties</emphasis>. Калі пэўны парамэтар папярэдне вызначаны, дастаткова проста выдаліць сымбаль # перад ім. Напрыклад, пры <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (без #) <application>OmegaT</application> запускаецца з інтэрфэйсам на японскай мове.</para>
 
-      <para>To change the amount of memory available, edit <emphasis>OmegaT.app/Contents/Info.plist</emphasis> file and change the content of &lt;string&gt;-Xmx1024M&lt;/string&gt;. Наперад, у выпадку &lt;string&gt;-Xmx2048M&lt;/string&gt; пры запуску OmegaT будзе выдзелена 2 Гб памяці.</para>
+      <para>Для зьмяненьня даступнага аб’ёму памяці сьлед адрэдагаваць файл <emphasis>OmegaT.app/Contents/Info.plist</emphasis> і зьмяніць зьмесьціва &lt;string&gt;-Xmx1024M&lt;/string&gt;. Наперад, у выпадку &lt;string&gt;-Xmx2048M&lt;/string&gt; пры запуску OmegaT будзе выдзелена 2 Гб памяці.</para>
 
       <para>Для запуску некалькіх асобнікаў <emphasis><application>OmegaT</application>.app</emphasis> клікнеце двойчы па файле <emphasis>OmegaT.sh</emphasis> у <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
@@ -321,7 +321,7 @@
 
     <para>Тэхналёгія Java Web Start (частка Java пачынаючы ад вэрсіі 1.6) можа ўжывацца для разгортваньня аўтаномных праграмаў Java праз адзін клік па сетцы. Java Web Start забясьпечвае разгортваньне апошняй вэрсіі праграмы і выкарыстаньне належнай вэрсіі асяродка выкананьня Java (JRE). Для першага запуску OmegaT праз Java Web Start увядзеце ў браўзэры наступны URL:</para>
 
-    <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+    <para><emphasis>https://omegat.sourceforge.io/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
     <para>Спампуйце файл <emphasis><application>OmegaT</application>.jnlp</emphasis>, затым клікнеце па ім. Падчас усталёўкі, у залежнасьці ад апэрацыйнай сыстэмы, вы можаце атрымаць некалькі папярэджаньняў бясьпекі. Дазволы, якія вы даяце гэтай вэрсіі (што можа быць пазначанае як “неабмежаваны доступ да кампутара”), зьяўляюцца такімі ж самымі, што і дазволы, якія даюцца лякальнай вэрсіі, усталяванай паводле працэдуры, апісанай далей, г. зн., яны дазваляюць доступ да жорсткага дыска кампутара. Калі зноў клікнуць па <emphasis><application>OmegaT.jnlp</application></emphasis>, будуць правераныя абнаўленьні, пры наяўнасьці яны будуць усталяваныя, а пасьля гэтага запусьціцца <application>OmegaT</application>. Пасьля першапачатковай усталёўкі можна, вядома, выкарыстоўваць <emphasis><application>OmegaT</application>.jnlp</emphasis> таксама і без злучэньня з Інтэрнэтам.</para>
 

@@ -41,15 +41,16 @@
                   <dl>
                      <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5882">1.1. Файлы нефарматаванага тэксту</a></span></dt>
                      <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5961">1.2. Файлы фарматаванага тэксту</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6062">1.3. Файлы PDF</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Іншыя фарматы файлаў</a></span></dt>
                <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Мовы зь пісьмовасьцю справа-налева</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6187">3.1. Радкі з рознымі напрамкамі пісьмовасьці ў сэгмэнтах</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6210">3.2. Тэгі <span class="application">OmegaT</span> OmegaT у сэгмэнтах зь пісьмовасьцю справа-налева</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6225">3.3. Кампіляцыя перакладаў зь пісьмовасьцю справа-налева</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6233">3.1. Радкі з рознымі напрамкамі пісьмовасьці ў сэгмэнтах</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6256">3.2. Тэгі <span class="application">OmegaT</span> OmegaT у сэгмэнтах зь пісьмовасьцю справа-налева</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6271">3.3. Кампіляцыя перакладаў зь пісьмовасьцю справа-налева</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -259,10 +260,13 @@
                         <p>Visio (*.vxd)</p>
                      </li>
                      <li class="listitem">
-                        <p>Java property XML (*.xml)</p>
+                        <p>Уласьцівасьці Java у XML (.xml)</p>
                      </li>
                      <li class="listitem">
                         <p> Schematron (*.sch)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Схема RELAX NG для XML (*.rng)</p>
                      </li>
                   </ul>
                </div>
@@ -270,17 +274,53 @@
                   які падтрымліваецца (зыходзячы з таго, што адпаведныя правілы сэгмэнтаваньня будуць карэктна ўжывацца).
                </p>
             </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6062"></a>1.3.&nbsp;Файлы PDF<a class="indexterm" name="d0e6065"></a><a class="indexterm" name="d0e6070"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Файлы PDF — гэта асобны выпадак. Яны зьмяшчаюць Інфармацыю пра фарматаваньне, але <span class="application">OmegaT</span> ня можа ўжыць гэтую інфармацыю, каб скампіляваць файлы перакладаў. Такім чынам, файлы PDF апрацоўваюцца як файлы нефарматаванага
+                  тэксту, і на выхадзе атрымліваюцца файлы нефарматаванага тэксту.
+               </p>
+               <p>Калі трэба аднавіць фарматаваньне тэксту ў перакладзе (а таксама іншыя элемэнты, напрыклад, малюнкі), ёсьць тры варыянты,
+                  якія можна паспрабаваць:
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Скарыстацца з фільтра па змаўчаньні <span class="application">OmegaT</span> (увод PDF), перакласьці, скампіляваць файл перакладу (атрымаецца файл нефарматаванага тэксту), дадаць адпаведнае фарматаваньне
+                           і элемэнты ўручную.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Скарыстацца зь фільтра Iceni Infix. Гл. <a class="ulink" href="https://omegat.org/howtos/iceni_infix.html" target="_top">Howto - Translating PDF files with Iceni Infix and OmegaT</a>.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Імпартаваць зыходны файл у <a class="ulink" href="https://www.libreoffice.org/discover/draw/" target="_top">LibreOffice Draw</a>, захаваць яго як файл ODG, перакласьці, экспартаваць у PDF пры неабходнасьці.
+                        </p>
+                     </li>
+                  </ol>
+               </div>
+               <p><span class="bold"><strong>Заўвага:</strong></span> гэтая інфармацыя тычыцца толькі файлаў PDF з тэкставым слоем. Калі файл PDF створаны з адсканаваных старонак, спатрэбіцца
+                  скарыстацца з праграмы аптычнага распазнаваньня сымбаляў, каб распазнаць тэкст і пераўтварыць яго ў фармат файла, які OmegaT
+                  можа апрацаваць.
+               </p>
+            </div>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Іншыя фарматы файлаў<a class="indexterm" name="d0e6062"></a><a class="indexterm" name="d0e6067"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Іншыя фарматы файлаў<a class="indexterm" name="d0e6108"></a><a class="indexterm" name="d0e6113"></a></h2>
                   </div>
                </div>
             </div>
             <p>У OmegaT могуць апрацоўвацца іншыя фарматы файлаў нефарматаванага або фарматаванага тэксту.</p>
-            <p><a class="indexterm" name="d0e6075"></a>Для пераўтварэньня файлаў у падтрыманыя фарматы можна скарыстацца са зьнешніх інструмэнтаў. Перакладзеныя файлы затым спатрэбіцца
+            <p><a class="indexterm" name="d0e6121"></a>Для пераўтварэньня файлаў у падтрыманыя фарматы можна скарыстацца са зьнешніх інструмэнтаў. Перакладзеныя файлы затым спатрэбіцца
                пераўтварыць назад у арыгінальны фармат. Напрыклад, калі ў вас састарэлая вэрсія Microsoft Word, якая не падтрымлівае фармат
                ODT, вось што можна зрабіць з файламі Word з пашырэньнем DOC:
             </p>
@@ -327,7 +367,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Мовы зь пісьмовасьцю справа-налева<a class="indexterm" name="d0e6109"></a><a class="indexterm" name="d0e6112"></a><a class="indexterm" name="d0e6117"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Мовы зь пісьмовасьцю справа-налева<a class="indexterm" name="d0e6155"></a><a class="indexterm" name="d0e6158"></a><a class="indexterm" name="d0e6163"></a></h2>
                   </div>
                </div>
             </div>
@@ -367,7 +407,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6187"></a>3.1.&nbsp;Радкі з рознымі напрамкамі пісьмовасьці ў сэгмэнтах<a class="indexterm" name="d0e6190"></a><a class="indexterm" name="d0e6195"></a><a class="indexterm" name="d0e6200"></a></h3>
+                        <h3 class="title"><a name="d0e6233"></a>3.1.&nbsp;Радкі з рознымі напрамкамі пісьмовасьці ў сэгмэнтах<a class="indexterm" name="d0e6236"></a><a class="indexterm" name="d0e6241"></a><a class="indexterm" name="d0e6246"></a></h3>
                      </div>
                   </div>
                </div>
@@ -384,7 +424,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6210"></a>3.2.&nbsp;Тэгі <span class="application">OmegaT</span> OmegaT у сэгмэнтах зь пісьмовасьцю справа-налева<a class="indexterm" name="d0e6216"></a></h3>
+                        <h3 class="title"><a name="d0e6256"></a>3.2.&nbsp;Тэгі <span class="application">OmegaT</span> OmegaT у сэгмэнтах зь пісьмовасьцю справа-налева<a class="indexterm" name="d0e6262"></a></h3>
                      </div>
                   </div>
                </div>
@@ -402,7 +442,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6225"></a>3.3.&nbsp;Кампіляцыя перакладаў зь пісьмовасьцю справа-налева<a class="indexterm" name="d0e6228"></a><a class="indexterm" name="d0e6233"></a><a class="indexterm" name="d0e6238"></a></h3>
+                        <h3 class="title"><a name="d0e6271"></a>3.3.&nbsp;Кампіляцыя перакладаў зь пісьмовасьцю справа-налева<a class="indexterm" name="d0e6274"></a><a class="indexterm" name="d0e6279"></a><a class="indexterm" name="d0e6284"></a></h3>
                      </div>
                   </div>
                </div>

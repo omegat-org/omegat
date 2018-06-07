@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Праца з фарматаваным тэкстам<a class="indexterm" name="d0e6677"></a><a class="indexterm" name="d0e6682"></a></h1>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Праца з фарматаваным тэкстам<a class="indexterm" name="d0e6723"></a><a class="indexterm" name="d0e6728"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Апэрацыі з тэгамі</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Укладаньне групаў тэгаў</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Перакрыцьцё групаў тэгаў</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6829">5. Магчымасьці праверкі тэгаў</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6875">5. Магчымасьці праверкі тэгаў</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Праверка групаў тэгаў</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Парады наконт кіраваньня тэгамі</a></span></dt>
             </dl>
@@ -53,22 +53,22 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Тэгі фарматаваньня<a class="indexterm" name="d0e6692"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Тэгі фарматаваньня<a class="indexterm" name="d0e6738"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6696"></a><span class="bold"><strong>Іменаваньне тэгаў</strong></span></p>
+            <p><a class="indexterm" name="d0e6742"></a><span class="bold"><strong>Іменаваньне тэгаў</strong></span></p>
             <p>Тэгі складаюцца з аднаго-трох сымбаляў і нумара. Унікальны нумар дазваляе групаваць тэгі, якія адпавядаюць адзін аднаму, і
                адрозьніваць тэгі, якія маюць аднолькавы сымбаль-скарот, але зьяўляюцца насамрэч рознымі. Спалучэньні сымбаляў, якія выкарыстоўваюцца,
                прызначаныя, каб паказваць схаваны сэнс тэга (напрыклад b [bold] для паўтлустага шрыфту, i [italics] для курсіва і г. д.)
             </p>
-            <p><a class="indexterm" name="d0e6706"></a><span class="bold"><strong>Нумарацыя тэгаў:</strong></span></p>
+            <p><a class="indexterm" name="d0e6752"></a><span class="bold"><strong>Нумарацыя тэгаў:</strong></span></p>
             <p>Тэгі нумаруюцца з пасьлядоўным павелічэньнем па групе тэгаў. “Групы тэгаў” у гэтым кантэксьце — гэта адзін тэг (напрыклад,
                &lt;i0&gt; і &lt;/i0&gt;). У адным сэгмэньце першая група (парны або адзіночны тэг) атрымлівае нумар 0, другая — нумар 1 і г. д. У першым
                прыкладзе, гл. ніжэй, ёсьць 3 групы тэгаў (пара, адзінкавы, далей яшчэ адна пара), у другім прыкладзе — толькі адна група
                (пара).
             </p>
-            <p><a class="indexterm" name="d0e6716"></a><span class="bold"><strong>Пары і адзіночныя:</strong></span></p>
+            <p><a class="indexterm" name="d0e6762"></a><span class="bold"><strong>Пары і адзіночныя:</strong></span></p>
             <p>Тэгі заўжды або адзіночныя, або парныя. Адзіночныя тэгі прадстаўляюць інфармацыю пра фарматаваньне, якое не кранае навакольны
                тэкст (множныя прабельныя сымбалі або разрыў радка, напрыклад).
             </p>
@@ -87,7 +87,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Апэрацыі з тэгамі<a class="indexterm" name="d0e6742"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Апэрацыі з тэгамі<a class="indexterm" name="d0e6788"></a></h2>
                   </div>
                </div>
             </div>
@@ -95,7 +95,7 @@
                пасьлядоўнасьць тэгаў павінна захоўвацца ў тым самым парадку. Тым ня менш, пры строгім выкананьні пэўных правілаў, з гэтага
                агульнага правіла можна рабіць пэўныя выключэньні.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6751"></a>Дубляваньне тэгаў:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6797"></a>Дубляваньне тэгаў:</strong></span></p>
             <p>Каб прадубляваць групы тэгаў, проста скапіюйце іх у патрэбную пазыцыю. Памятайце, што ў пары тэгаў адчыняльны тэг павінны
                стаяць перад зачыняльным. Фарматаваньне, прадстаўленае групай, якая дублюецца, будзе ўжытым да абедзвюх частак.
             </p>
@@ -103,7 +103,7 @@
             <p><code class="literal">&lt;b0&gt;Гэтае фарматаваньне&lt;/b0&gt; будзе прадубляваным тут.&lt;сэгмэнт 0001&gt;</code></p>
             <p>Пасьля дубляваньня:</p>
             <p><code class="literal">&lt;b0&gt;Гэтае фарматаваньне&lt;/b0&gt; было &lt;b0&gt;прадубляванае тут&lt;/b0&gt;.&lt;сэгмэнт 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6771"></a>Выдаленьне групаў тэгаў:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6817"></a>Выдаленьне групаў тэгаў:</strong></span></p>
             <p>Каб выдаліць групы тэгаў, проста выдалеце іх з сэгмэнта. Майце на ўвазе, што з групаў, якія складаюцца з пар тэгаў, трэба
                выдаляць і адчыняльны, і адпаведны зачынены тэгі, каб касаваць адпаведнае фарматаваньне, у адваротным выпадку файл перакладу
                можа быць пашкоджаны. Пры выдаленьні групы тэгаў з файла перакладу будзе выдаленае адпаведнае фарматаваньне.
@@ -117,7 +117,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Укладаньне групаў тэгаў<a class="indexterm" name="d0e6792"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Укладаньне групаў тэгаў<a class="indexterm" name="d0e6838"></a></h2>
                   </div>
                </div>
             </div>
@@ -134,7 +134,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Перакрыцьцё групаў тэгаў<a class="indexterm" name="d0e6812"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Перакрыцьцё групаў тэгаў<a class="indexterm" name="d0e6858"></a></h2>
                   </div>
                </div>
             </div>
@@ -150,7 +150,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6829"></a>5.&nbsp;Магчымасьці праверкі тэгаў
+                     <h2 class="title" style="clear: both"><a name="d0e6875"></a>5.&nbsp;Магчымасьці праверкі тэгаў
                      </h2>
                   </div>
                </div>
@@ -205,12 +205,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Праверка групаў тэгаў<a class="indexterm" name="d0e6873"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Праверка групаў тэгаў<a class="indexterm" name="d0e6919"></a></h2>
                   </div>
                </div>
             </div>
             <p>Пры праверцы тэгаў выяўляюцца зьмены ў пасьлядоўнасьцях тэгаў (выпадковыя або наўмысныя) і паказваюцца сэгмэнты зь імі. Пры
-               выкарыстаньні гэтай функцыі (<span class="guimenuitem">Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;V<a class="indexterm" name="d0e6882"></a></span>) адчыняецца дыялёг з усімі сэгмэнтамі, у якіх, верагодна, былі пашкоджаныя тэгі ў перакладах. Функцыя праверкі тэгаў дазваляе
+               выкарыстаньні гэтай функцыі (<span class="guimenuitem">Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;V<a class="indexterm" name="d0e6928"></a></span>) адчыняецца дыялёг з усімі сэгмэнтамі, у якіх, верагодна, былі пашкоджаныя тэгі ў перакладах. Функцыя праверкі тэгаў дазваляе
                лёгка рапараваць тэгі і аднаўляць дакумэнты перакладаў. Пры націсканьні <span class="guimenuitem">Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;V</span> зьяўляецца вакно з 3-слупковай табліцай, якая ўтрымлівае спасылку на сэгмэнт, зыходны сэгмэнт і пераклад.
             </p>
             <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;Элемэнт праверкі тэгаў</b></p>
@@ -228,7 +228,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Парады наконт кіраваньня тэгамі<a class="indexterm" name="d0e6907"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Парады наконт кіраваньня тэгамі<a class="indexterm" name="d0e6953"></a></h2>
                   </div>
                </div>
             </div>

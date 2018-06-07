@@ -153,11 +153,11 @@
                <div class="literallayout">
                   <p><code class="code">#&nbsp;OmegaT.exe&nbsp;runtime&nbsp;configuration<br>
                         #&nbsp;To&nbsp;use&nbsp;a&nbsp;parameter,&nbsp;remove&nbsp;the&nbsp;'#'&nbsp;before&nbsp;the&nbsp;'-'<br>
-                        #&nbsp;Memory&nbsp;<br>
-                        -Xmx1024M&nbsp;<br>
-                        #&nbsp;Language&nbsp;<br>
+                        #&nbsp;Memory<br>
+                        -Xmx1024M<br>
+                        #&nbsp;Language<br>
                         -Duser.language=FR<br>
-                        #&nbsp;Country&nbsp;<br>
+                        #&nbsp;Country<br>
                         -Duser.country=CA&nbsp;</code></p>
                </div>
                <p>Парада: калі OmegaT працуе павольна ў сэансах аддаленага працоўнага стала пад Windows, можна выкарыстоўваць наступны парамэтар:</p>
@@ -289,7 +289,7 @@
                            <p>Націсьнеце <span class="bold"><strong> <span class="keysym">Alt+F2</span> </strong></span>, каб выклікаць KRunner. Удрукуйце <span class="emphasis"><em>kmenuedit+Enter</em></span>, каб выканаць каманду. Зьявіцца KMenuEditor. У KMenuEditor выберыце <span class="emphasis"><em>File → New Item.</em></span></p>
                         </li>
                         <li class="listitem">
-                           <p>Затым, пасьля выбару прыдатнага мэню, дадайце падмэню/пункт праз <span class="emphasis"><em>File - New</em></span> Submenu і <span class="emphasis"><em>File - New Item</em></span>. Падайце <span class="application">OmegaT</span> у якасьці назвы новага пункта.
+                           <p>Затым, пасьля выбару прыдатнага мэню, дадайце падмэню/пункт праз падмэню <span class="emphasis"><em>File - New</em></span> і <span class="emphasis"><em>File - New Item</em></span>. Падайце <span class="application">OmegaT</span> у якасьці назвы новага пункта.
                            </p>
                         </li>
                         <li class="listitem">
@@ -414,8 +414,8 @@
                   тэкставы рэдактар. Можна таксама ўвесьці “cd” проста там з каманднага радку і адчыніць <span class="application"><span class="emphasis"><em>Configuration.properties</em></span> у кансольным тэкставым рэдактары тыпу emacs ці vi</span>.<a class="indexterm" name="d0e818"></a></p>
                <p>Парамэтры зьмяняюцца шляхам рэдагаваньня <span class="emphasis"><em>Configuration.properties</em></span>. Калі пэўны парамэтар папярэдне вызначаны, дастаткова проста выдаліць сымбаль # перад ім. Напрыклад, пры <code class="filename">LANGUAGE="-Duser.language=ja"</code> (без #) <span class="application">OmegaT</span> запускаецца з інтэрфэйсам на японскай мове.
                </p>
-               <p>To change the amount of memory available, edit <span class="emphasis"><em>OmegaT.app/Contents/Info.plist</em></span> file and change the content of &lt;string&gt;-Xmx1024M&lt;/string&gt;. Наперад, у выпадку &lt;string&gt;-Xmx2048M&lt;/string&gt; пры запуску OmegaT
-                  будзе выдзелена 2 Гб памяці.
+               <p>Для зьмяненьня даступнага аб’ёму памяці сьлед адрэдагаваць файл <span class="emphasis"><em>OmegaT.app/Contents/Info.plist</em></span> і зьмяніць зьмесьціва &lt;string&gt;-Xmx1024M&lt;/string&gt;. Наперад, у выпадку &lt;string&gt;-Xmx2048M&lt;/string&gt; пры запуску OmegaT будзе
+                  выдзелена 2 Гб памяці.
                </p>
                <p>Для запуску некалькіх асобнікаў <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> клікнеце двойчы па файле <span class="emphasis"><em>OmegaT.sh</em></span> у <span class="emphasis"><em><span class="application">OmegaT</span>.app/ Contents/MacOS/</em></span>.
                </p>
@@ -541,7 +541,7 @@
                праз адзін клік па сетцы. Java Web Start забясьпечвае разгортваньне апошняй вэрсіі праграмы і выкарыстаньне належнай вэрсіі
                асяродка выкананьня Java (JRE). Для першага запуску OmegaT праз Java Web Start увядзеце ў браўзэры наступны URL:
             </p>
-            <p><span class="emphasis"><em>http://omegat.sourceforge.net/webstart/<span class="application">OmegaT</span>.jnlp</em></span></p>
+            <p><span class="emphasis"><em>https://omegat.sourceforge.io/webstart/<span class="application">OmegaT</span>.jnlp</em></span></p>
             <p>Спампуйце файл <span class="emphasis"><em><span class="application">OmegaT</span>.jnlp</em></span>, затым клікнеце па ім. Падчас усталёўкі, у залежнасьці ад апэрацыйнай сыстэмы, вы можаце атрымаць некалькі папярэджаньняў
                бясьпекі. Дазволы, якія вы даяце гэтай вэрсіі (што можа быць пазначанае як “неабмежаваны доступ да кампутара”), зьяўляюцца
                такімі ж самымі, што і дазволы, якія даюцца лякальнай вэрсіі, усталяванай паводле працэдуры, апісанай далей, г. зн., яны дазваляюць

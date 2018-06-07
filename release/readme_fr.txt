@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2017.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2018.
 
 
 Qu'est-ce qu'OmegaT ?
@@ -65,7 +65,7 @@ Si vous disposez déjà de Java, l'une des façons d'installer OmegaT est d'util
 
 Pour ce faire, téléchargez le fichier suivant et exécutez-le :
 
-   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
 
 Il installera l'environnement approprié pour votre ordinateur et l'application elle-même lors de la première exécution. Il ne sera pas nécessaire d'être en ligne pour les lancements suivants.
 
@@ -134,20 +134,31 @@ OmegaT est l'œuvre initiale de Keith Godfrey.
 
 Didier Briel est le responsable du projet OmegaT.
 
-Les personnes qui ont contribué incluent :
+Équipe actuelle :
 (ordre alphabétique)
+
+  Vincent Bidaux (responsable documentation)
+  Didier Briel (responsable du projet OmegaT, gestionnaire de communauté Twitter)
+  Kos Ivantsof (responsable de la localisation)
+  Aaron Madlon-Kay (responsable de l'intégration)
+  Concepción Martin (gestionnaire de communauté Facebook)
+  Briac Pilpré (webmestre)
+  Lucie Vecerova (gestionnaire de communauté Facebook)
 
 Les contributions au code sont documentées dans /docs/contributors.txt.
 
-Autres contributions par :
-  Vincent Bidaux (responsable documentation)
+Les personnes qui ont contribué incluent :
+(ordre alphabétique)
+
   Alex Buloichik (développeur principal)
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (responsable localisations)
-  Aaron Madlon-Kay (responsable de l'intégration)
+  Jean-Christophe Helary (gestionnaire du groupe d'assistance, responsable de la localisation)
+  Maxym Mykhalchuk (développeur principal)
   Samuel Murray
-  Marc Prior (webmestre)
+  Henry Pijffers (responsable des versions)
+  Marc Prior (coordinateur du projet, webmestre)
+  Vito Smolej (responsable documentation)
   ainsi que beaucoup d'autres personnes.
 
 (Si vous pensez avoir contribué à OmegaT de manière significative et si votre nom ne se trouve pas sur cette liste, n'hésitez pas à nous contacter.)

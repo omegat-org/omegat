@@ -88,6 +88,10 @@ ext {
 }
 
 dependencies {
+     
+     compile 'javax.json:javax.json-api:1.0'
+     compile 'org.glassfish:javax.json:1.0.4'
+     
     // Libs are provided in the "source" distribution only
     if (providedLibsDir.directory) {
         compile fileTree(dir: providedLibsDir, include: '**/*.jar')

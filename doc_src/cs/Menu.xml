@@ -439,7 +439,7 @@
                   <keycap>F</keycap>
                 </keycombo></entry>
 
-              <entry>Otevře nové okno <link linkend="section.search.window">Hledat</link>.<para>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, pak bude tento text - ve výchozím nastavení vložen do políčka <guilabel>Hledat</guilabel>.</para><para>Stisknutí <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> zobrazí poslední již otevřené okno Hledat (místo aby se otevřeno nové).</para></entry>
+              <entry>Otevře nové okno <link linkend="section.search.window">Hledat</link>.<para>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, pak bude tento text - ve výchozím nastavení vložen do políčka <guilabel>Hledat</guilabel>.</para><para>Stisknutí <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap></keycombo> zobrazí poslední již otevřené okno Hledat (místo aby se otevřeno nové).</para></entry>
             </row>
 
             <row>
@@ -831,7 +831,7 @@
             <row>
               <entry><guimenuitem>Strojový překlad</guimenuitem></entry>
 
-              <entry>Umožní vám aktivovat / deaktivovat nabízené nástroje Strojového překladu. Pokud je toto aktivní, zkratkou <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> vložíte návrh do cílové části aktivního segmentu.<para>Z bezpečnostních důvodů se může stát, že nebudete chtít poslat všechny své segmenty nástroji na strojový překlad. Při zrušení zatržení <emphasis role="bold">Automaticky doplnit překlad</emphasis>, se bude strojový překlad chovat tak, že při stistku <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>(<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo> v OS X) bude přeložen pouze aktuální segment. Pak musíte použít <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> podruhé, aby se vložil návrh.</para><para>Zatrhněte možnost <emphasis role="bold">Pouze nepřeložené segmenty</emphasis> k dekativaci nástrojů Strojového překladu pro již přeložené segmenty. Poznámka: v tomto případě, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> můžete stále použít k tomu, aby se zaktivoval dotaz na strojový překlad v již přeloženém segmentu.</para></entry>
+              <entry>Umožní vám aktivovat / deaktivovat nabízené nástroje Strojového překladu. Pokud je toto aktivní, zkratkou <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> vložíte návrh do cílové části aktivního segmentu.<para>Z bezpečnostních důvodů se může stát, že nebudete chtít poslat všechny své segmenty nástroji na strojový překlad. Při zrušení zatržení <emphasis role="bold">Automaticky doplnit překlad</emphasis>, se bude strojový překlad chovat tak, že při stistku <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>(<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo> v OS X) bude přeložen pouze aktuální segment. Pak musíte použít <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap></keycombo> podruhé, aby se vložil návrh.</para><para>Zatrhněte možnost <emphasis role="bold">Pouze nepřeložené segmenty</emphasis> k dekativaci nástrojů Strojového překladu pro již přeložené segmenty. Poznámka: v tomto případě, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap></keycombo> můžete stále použít k tomu, aby se zaktivoval dotaz na strojový překlad v již přeloženém segmentu.</para></entry>
             </row>
 
             <row>

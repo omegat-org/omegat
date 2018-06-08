@@ -20,7 +20,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Soubor &gt; Hledat výběr (<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap>): zaměří se na vyhledávací políčko a vybere veškerý obsah.</para>
+        <para>Soubor &gt; Hledat výběr (<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap></keycombo>): zaměří se na vyhledávací políčko a vybere veškerý obsah.</para>
       </listitem>
 
       <listitem>
@@ -28,7 +28,7 @@
       </listitem>
 
       <listitem>
-        <para>Upravit &gt; Vložit zdroj (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>I</keycap>): vloží zdrojový text aktuálního segmentu.</para>
+        <para>Upravit &gt; Vložit zdroj (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>I</keycap></keycombo>): vloží zdrojový text aktuálního segmentu.</para>
       </listitem>
 
       <listitem>

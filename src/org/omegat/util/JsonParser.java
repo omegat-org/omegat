@@ -57,8 +57,7 @@ public final class JsonParser {
             jsEngine.eval("function parse(json) { return Java.asJSONCompatible(JSON.parse(json)) }");
             invocable = (Invocable) jsEngine;
         } catch (ScriptException e) {
-            Logger.getLogger(JsonParser.class.getName()).log(Level.SEVERE, "Unable to initialize JSON parser",
-                    e);
+            Logger.getLogger(JsonParser.class.getName()).log(Level.SEVERE, "Unable to initialize JSON parser", e);
         }
         INVOCABLE = invocable;
     }
@@ -68,59 +67,56 @@ public final class JsonParser {
     }
 
     /** Returns a quoted String suitable to use in JSON. */
-    // Adapted from https://github.com/stleary/JSON-java/blob/master/JSONObject.java
     public static String quote(String string) {
-        if (string == null || string.length() == 0) {
+
+        if (string == null || string.isEmpty()) {
             return "\"\"";
         }
-        char c = 0;
-        int stringLength = string.length();
-        StringBuilder sw = new StringBuilder(stringLength + 4);
-        sw.append('\"');
+        StringBuilder sb = new StringBuilder();
+        sb.append('"');
 
-        for (int i = 0; i < stringLength; ++i) {
-            char previousChar = c;
-            c = string.charAt(i);
-            switch (c) {
-            case '\"':
-            case '\\':
-                sw.append('\\');
-                sw.append(c);
-                break;
-            case '/':
-                if (previousChar == '<') {
-                    sw.append('\\');
-                }
-                sw.append(c);
-                break;
-            case '\b':
-                sw.append("\\b");
-                break;
-            case '\t':
-                sw.append("\\t");
-                break;
-            case '\n':
-                sw.append("\\n");
-                break;
-            case '\f':
-                sw.append("\\f");
-                break;
-            case '\r':
-                sw.append("\\r");
-                break;
-            default:
-                if (c < ' ' || c >= '\u0080' && c < '\u00a0' || c >= '\u2000' && c < '\u2100') {
-                    sw.append("\\u");
-                    String hhhh = "000" + Integer.toHexString(c);
-                    sw.append(hhhh.substring(hhhh.length() - 4));
-                } else {
-                    sw.append(c);
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            // https://tools.ietf.org/html/rfc7159.html#section-7
+            // unescaped = %x20-21 / %x23-5B / %x5D-10FFFF
+            if (c >= 0x20 && c != 0x22 && c != 0x5c && c <= 0x10ffff) {
+                sb.append(c);
+            } else {
+                switch (c) {
+                case '"':
+                case '\\':
+                    sb.append('\\');
+                    sb.append(c);
+                    break;
+                case '\b':
+                    sb.append('\\');
+                    sb.append('b');
+                    break;
+                case '\f':
+                    sb.append('\\');
+                    sb.append('f');
+                    break;
+                case '\n':
+                    sb.append('\\');
+                    sb.append('n');
+                    break;
+                case '\r':
+                    sb.append('\\');
+                    sb.append('r');
+                    break;
+                case '\t':
+                    sb.append('\\');
+                    sb.append('t');
+                    break;
+                default:
+                    String hex = "000" + Integer.toHexString(c);
+                    sb.append("\\u").append(hex.substring(hex.length() - 4));
                 }
             }
         }
 
-        sw.append('\"');
-        return sw.toString();
+        sb.append('"');
+        return sb.toString();
     }
 
 }

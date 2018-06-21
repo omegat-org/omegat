@@ -294,7 +294,7 @@ public final class WikiGet {
      *            parameters
      * @param additionalHeaders
      *            additional headers for request, can be null
-     * @return sever output
+     * @return Server output
      */
     public static String post(String address, Map<String, String> params,
             Map<String, String> additionalHeaders) throws IOException {
@@ -332,6 +332,45 @@ public final class WikiGet {
             cout.write(pout.toByteArray());
             cout.flush();
             return getStringContent(conn);
+        } finally {
+            conn.disconnect();
+        }
+    }
+
+    /**
+     * Post JSON data to the remote URL.
+     *
+     * @param address
+     *            address to post
+     * @param json
+     *            JSON-encoded data
+     * @param additionalHeaders
+     *            additional headers for request, can be null
+     * @return Server output
+     */
+    public static String postJSON(String address, String json, 
+            Map<String, String> additionalHeaders) throws IOException {
+        URL url = new URL(address);
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Content-Length", Integer.toString(json.length()));
+        if (additionalHeaders != null) {
+            for (Map.Entry<String, String> en : additionalHeaders.entrySet()) {
+                conn.setRequestProperty(en.getKey(), en.getValue());
+            }
+        }
+
+        addProxyAuthentication(conn);
+
+        conn.setDoInput(true);
+        conn.setDoOutput(true);
+
+        try (OutputStream cout = conn.getOutputStream()) {
+            cout.write(json.getBytes());
+            cout.flush();
+            return getStringContent(conn, "utf-8");
         } finally {
             conn.disconnect();
         }

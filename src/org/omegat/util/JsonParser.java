@@ -66,4 +66,61 @@ public final class JsonParser {
     public static Object parse(String json) throws Exception {
         return INVOCABLE.invokeFunction("parse", json);
     }
+
+    /** Returns a quoted String suitable to use in JSON. */
+    // Adapted from https://github.com/stleary/JSON-java/blob/master/JSONObject.java
+    public static String quote(String string) {
+        if (string == null || string.length() == 0) {
+            return "\"\"";
+        }
+        char c = 0;
+        int stringLength = string.length();
+        StringBuilder sw = new StringBuilder(stringLength + 4);
+        sw.append('\"');
+
+        for (int i = 0; i < stringLength; ++i) {
+            char previousChar = c;
+            c = string.charAt(i);
+            switch (c) {
+            case '\"':
+            case '\\':
+                sw.append('\\');
+                sw.append(c);
+                break;
+            case '/':
+                if (previousChar == '<') {
+                    sw.append('\\');
+                }
+                sw.append(c);
+                break;
+            case '\b':
+                sw.append("\\b");
+                break;
+            case '\t':
+                sw.append("\\t");
+                break;
+            case '\n':
+                sw.append("\\n");
+                break;
+            case '\f':
+                sw.append("\\f");
+                break;
+            case '\r':
+                sw.append("\\r");
+                break;
+            default:
+                if (c < ' ' || c >= '\u0080' && c < '\u00a0' || c >= '\u2000' && c < '\u2100') {
+                    sw.append("\\u");
+                    String hhhh = "000" + Integer.toHexString(c);
+                    sw.append(hhhh.substring(hhhh.length() - 4));
+                } else {
+                    sw.append(c);
+                }
+            }
+        }
+
+        sw.append('\"');
+        return sw.toString();
+    }
+
 }

@@ -28,19 +28,25 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.awt.GridBagConstraints;
 import java.awt.Window;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
+import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.WikiGet;
@@ -53,13 +59,15 @@ import org.omegat.util.WikiGet;
  * @author Briac Pilpre
  * @author Aaron Madlon-Kay
  *
- * @see <a href="https://www.ibm.com/watson/developercloud/language-translator/api/v2/curl.html?curl#introduction">Translation API</a>
+ * @see <a href="https://www.ibm.com/watson/developercloud/language-translator/api/v3/">Translation API</a>
  */
 public class IBMWatsonTranslate extends BaseTranslate {
     protected static final String PROPERTY_LOGIN = "ibmwatson.api.login";
     protected static final String PROPERTY_PASSWORD = "ibmwatson.api.password";
-    protected static final String PROPERTY_NEURAL = "ibmwatson.api.neural";
-    protected static final String WATSON_URL = "https://gateway.watsonplatform.net/language-translator/api/v2/translate";
+    protected static final String PROPERTY_MODEL = "ibmwatson.api.model";
+
+    protected static final String WATSON_URL = "https://gateway.watsonplatform.net/language-translator/api/v3/translate";
+    protected static final String WATSON_VERSION = "2018-05-01";
     protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
     @Override
@@ -87,11 +95,16 @@ public class IBMWatsonTranslate extends BaseTranslate {
             return OStrings.getString("IBMWATSON_API_KEY_NOTFOUND");
         }
 
-        Map<String, String> params = new TreeMap<>();
+        StringBuilder json = new StringBuilder();
+        json.append("{");
+        json.append("\"text\":[" + JsonParser.quote(trText) + "],");
 
-        params.put("text", trText);
-        params.put("source", sLang.getLanguageCode().toUpperCase());
-        params.put("target", tLang.getLanguageCode().toUpperCase());
+        String modelId = getModelId();
+        if (modelId != null && !modelId.isEmpty()) {
+            json.append("\"model_id\":" + JsonParser.quote(modelId) + ",");
+        }
+        json.append("\"source\":" + JsonParser.quote(sLang.getLanguageCode().toUpperCase()) + ",");
+        json.append("\"target\":" + JsonParser.quote(tLang.getLanguageCode().toUpperCase()) + "}");
 
         Map<String, String> headers = new TreeMap<>();
 
@@ -102,22 +115,19 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
         // Let's opt out then.
         headers.put("X-Watson-Learning-Opt-Out", "true");
-        
-        if (isNeural()) {
-            headers.put("X-Watson-Technology-Preview", "2017-07-01");
-        }
 
         String authentication = "Basic " + Base64.getMimeEncoder().encodeToString((apiLogin + ":" + apiPassword).getBytes(StandardCharsets.ISO_8859_1));
         headers.put("Authorization", authentication);
-        // No need to parse JSON
-        headers.put("Accept", "text/plain");
+        headers.put("Accept", "application/json");
 
-        String tr;
+        String v;
         try {
-            tr = WikiGet.get(WATSON_URL, params, headers, "UTF-8");
+            v = WikiGet.postJSON(WATSON_URL + "?version=" + WATSON_VERSION, json.toString(), headers);
         } catch (IOException e) {
             return e.getLocalizedMessage();
         }
+
+        String tr = getJsonResults(v);
 
         if (tr == null) {
             return "";
@@ -129,6 +139,37 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
         putToCache(sLang, tLang, trText, tr);
         return tr;
+    }
+
+    private String getModelId() {
+        return System.getProperty(PROPERTY_MODEL, Preferences.getPreference(PROPERTY_MODEL));
+    }
+
+    @SuppressWarnings("unchecked")
+    protected String getJsonResults(String json) {
+        Map<String, Object> rootNode;
+        try {
+            rootNode = (Map<String, Object>) JsonParser.parse(json);
+        } catch (Exception e) {
+            Log.logErrorRB(e, "MT_JSON_ERROR");
+            return OStrings.getString("MT_JSON_ERROR");
+        }
+
+        //    {
+        //        "translations": [{
+        //          "translation": "translated text goes here."
+        //        }],
+        //        "word_count": 4,
+        //        "character_count": 53
+        //      }
+
+        try {
+            List<Object> translationsList = (List<Object>) rootNode.get("translations");
+            Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);
+            return translationNode.get("translation");
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 
     /** Convert entities to character. Ex: "&#39;" to "'". */
@@ -145,17 +186,6 @@ public class IBMWatsonTranslate extends BaseTranslate {
         }
         return text;
     }
-    
-    /**
-     * Whether or not to use the new Neural Machine Translation System
-     *
-     * @see <a href="https://console.bluemix.net/docs/services/language-translator/release-notes.html">Add support for NMT</a>
-     */
-    private boolean isNeural() {
-        String value = System.getProperty(PROPERTY_NEURAL,
-                Preferences.getPreference(PROPERTY_NEURAL));
-        return Boolean.parseBoolean(value);
-    }
 
     @Override
     public boolean isConfigurable() {
@@ -164,8 +194,32 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
     @Override
     public void showConfigurationUI(Window parent) {
-        JCheckBox neuralCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_IBMWATSON_NEURAL_LABEL"));
-        neuralCheckBox.setSelected(isNeural());
+
+        JPanel modelPanel = new JPanel();
+        modelPanel.setLayout(new java.awt.GridLayout(1, 2));
+        modelPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
+        modelPanel.setAlignmentX(0.0F);
+
+        JLabel modelIdLabel = new JLabel(OStrings.getString("MT_ENGINE_IBMWATSON_MODELID_LABEL"));
+        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 5);
+        modelPanel.add(modelIdLabel, gridBagConstraints);
+
+        JTextField modelIdField = new JTextField(Preferences.getPreferenceDefault(PROPERTY_MODEL, ""));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        modelIdLabel.setLabelFor(modelIdField);
+        modelPanel.add(modelIdField, gridBagConstraints);
 
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
             @Override
@@ -177,9 +231,9 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
                 String password = panel.valueField2.getText().trim();
                 setCredential(PROPERTY_PASSWORD, password, temporary);
-                
-                System.setProperty(PROPERTY_NEURAL, Boolean.toString(neuralCheckBox.isSelected()));
-                Preferences.setPreference(PROPERTY_NEURAL, neuralCheckBox.isSelected());  
+
+                System.setProperty(PROPERTY_MODEL, modelIdField.getText());
+                Preferences.setPreference(PROPERTY_MODEL, modelIdField.getText());
             }
         };
 
@@ -192,7 +246,9 @@ public class IBMWatsonTranslate extends BaseTranslate {
         // TODO Apparently, the API URL can change if the user has their own instance.
 
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_PASSWORD));
-        dialog.panel.itemsPanel.add(neuralCheckBox);
+
+        dialog.panel.itemsPanel.add(modelPanel);
+
         dialog.show();
     }
 }

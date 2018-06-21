@@ -175,10 +175,11 @@ Contributions to the code are documented in /docs/contributors.txt.
 Previous contributors include:
 (alphabetical order)
 
+  Anthony Baldwin (localisation manager)
   Alex Buloichik (lead developer)
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (support group owner, localization manager)
+  Jean-Christophe Helary (support group owner, localisation manager)
   Maxym Mykhalchuk (lead developper)
   Samuel Murray
   Henry Pijffers (release manager)

@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   0 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
-4.1.5 vs 4.1.4
+4.1.5 update 1 vs 4.1.5
+
+  Implemented requests:
+
+  - Extract Text Content script to export to UTF-8 
+  https://sourceforge.net/p/omegat/feature-requests/1393/
 
   Other changes:
 

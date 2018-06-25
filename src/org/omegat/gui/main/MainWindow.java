@@ -234,6 +234,11 @@ public class MainWindow extends JFrame implements IMainWindow {
             NearString near = Core.getMatcher().getActiveMatch();
             if (near != null) {
                 text = near.translation;
+                if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
+                    text = Core.getMatcher().substituteNumbers(Core.getEditor().getCurrentEntry().getSrcText(),
+                        near.source, near.translation);
+                }
+
                 if (near.comesFrom == NearString.MATCH_SOURCE.TM
                     && FileUtil.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"),
                     new File(near.projs[0]))) {

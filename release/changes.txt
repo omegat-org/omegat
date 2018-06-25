@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   0 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
   - Watson Language Translator: Neural translation is always on, it's 
 possible to enter a Model ID in the credential dialog. See
 https://sourceforge.net/p/omegat/feature-requests/1389/
+
+  - Automatic conversion of numbers when inserting fuzzy matches now 
+works with Ctrl+I in addition to Ctrl+R
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 (2018-06-08)

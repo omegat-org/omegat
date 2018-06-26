@@ -676,7 +676,7 @@ public final class Preferences {
 
         File srxDir = new File(StaticUtils.getConfigDir());
         try {
-            SRX.saveTo(srx, srxDir);	// defaults to SRX format, but if conf file exists, overwrite it
+            SRX.saveTo(srx, srxDir);	// save to segmentation.srx in the given directory
         } catch (IOException ex) {
             ex.printStackTrace();
         }

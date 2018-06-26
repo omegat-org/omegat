@@ -31,7 +31,7 @@
  Default segmentation rules and exceptions
 -->
 <srx xmlns="http://www.lisa.org/srx20" version="2.0">
-<header></header>
+<header cascade="yes"></header>
   <body>
     <languagerules>
       <!-- CA

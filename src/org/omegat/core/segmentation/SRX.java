@@ -29,7 +29,6 @@ package org.omegat.core.segmentation;
 
 import java.beans.ExceptionListener;
 import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -108,18 +107,10 @@ public class SRX implements Serializable {
     /**
      * Saves segmentation rules into specified directory.
      * @param srx OmegaT object to be written; if null, means that we want to delete the file
-     * @param outDir where to put the file. The file name is forced to {@link #SRX_SENTSEG}
+     * @param outDir where to put the file. The file name is forced to {@link #SRX_SENTSEG} and will be in standard SRX format.
      */
-    public static void saveTo(SRX srx, File outDir) throws IOException {
+    public static void saveToSrx(SRX srx, File outDir) throws IOException {
         File outFile = new File (outDir, SRX_SENTSEG);
-        if (! outFile.exists()) {
-            // Unless SRX file exists, check for CONF file. If present, overwrite it. Else, fallback to SRX
-            outFile = new File (outDir, CONF_SENTSEG);
-            if (! outFile.exists()) {
-                outFile = new File (outDir, SRX_SENTSEG);
-            }
-        }
-        // else: SRX file exists, overwrite or delete it
 
         if (srx == null) {
             outFile.delete();
@@ -127,27 +118,6 @@ public class SRX implements Serializable {
             return;
         }
 
-        if (outFile.getName().endsWith(".conf")) {
-            saveToConf(srx, outFile);
-        } else if (outFile.getName().endsWith(".srx")) {
-            saveToSrx (srx, outFile);
-        }
-    }
-
-    public static void saveToConf(SRX srx, File outFile) throws IOException {
-        try {
-            srx.setVersion(CURRENT_VERSION);
-            XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(outFile));
-            xmlenc.writeObject(srx);
-            xmlenc.close();
-        } catch (IOException ioe) {
-            Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
-            Log.log(ioe);
-            throw ioe;
-        }
-    }
-
-    public static void saveToSrx(SRX srx, File outFile) throws IOException {
         ObjectFactory factory = new ObjectFactory();
         Srx jaxbObject = factory.createSrx();
         jaxbObject.setVersion("2.0");
@@ -211,7 +181,13 @@ public class SRX implements Serializable {
         // If file was not present or not readable
         inFile = new File(configDir, CONF_SENTSEG);
         if (inFile.exists()) {
-            return loadConfFile(inFile);
+            SRX srx = loadConfFile(inFile);
+            try {
+                saveToSrx(srx, configDir);
+            } catch (Exception o3) {
+                Log.log(o3); // detail why conversion failed, but continue
+            }
+            return srx;
         }
 
         // If none of the files (conf and srx) are present,

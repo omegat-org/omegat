@@ -123,7 +123,7 @@ public class SRX implements Serializable {
         jaxbObject.setVersion("2.0");
         jaxbObject.setHeader(factory.createHeader());
         jaxbObject.getHeader().setSegmentsubflows(srx.segmentSubflows ? "yes" : "no");
-        jaxbObject.getHeader().setCascade("yes");  // OmegaT rules are always in cascade
+        jaxbObject.getHeader().setCascade(srx.cascade ? "yes" : "no");
         jaxbObject.setBody(factory.createBody());
         jaxbObject.getBody().setMaprules(factory.createMaprules());
         jaxbObject.getBody().setLanguagerules(factory.createLanguagerules());
@@ -269,6 +269,8 @@ public class SRX implements Serializable {
             // set rules only if no errors
             SRX res = new SRX();
             res.setMappingRules(newMap);
+            res.setCascade(! ((data.getHeader() != null) && ("no".equals(data.getHeader().getCascade())))); 	// in OmegaT, defaults to true
+            res.setSegmentSubflows((data.getHeader() != null) && ("yes".equals(data.getHeader().getSegmentsubflows())));	// not really used
             return res;
         } catch (Exception ex) {
             Log.log(ex);
@@ -438,9 +440,36 @@ public class SRX implements Serializable {
             MapRule maprule = getMappingRules().get(i);
             if (maprule.getCompiledPattern().matcher(srclang.getLanguage()).matches()) {
                 rules.addAll(maprule.getRules());
+                if (!this.cascade) {
+                    break; // non-cascading means: do not search for other patterns
+                }
             }
         }
         return rules;
+    }
+
+    /**
+     * Holds value of property cascade: true, unless we read an SRX where it was set to false.
+     */
+    private boolean cascade = true;
+
+    /**
+     * Getter for property cascade.
+     *
+     * @return Value of property cascade.
+     */
+    public boolean isCascade() {
+        return this.cascade;
+    }
+
+    /**
+     * Setter for property cascade.
+     *
+     * @param cascade
+     *            New value of property cascade.
+     */
+    public void setCascade(boolean cascade) {
+        this.cascade = cascade;
     }
 
     /**

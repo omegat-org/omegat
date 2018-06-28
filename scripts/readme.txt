@@ -1,7 +1,7 @@
-All the scripts in this folder are under the GPLv3 license.
+﻿All the scripts in this folder are under the GPLv3 license.
 https://www.gnu.org/licenses/gpl-3.0.en.html
 
-Copyright (c) 2011-2017 Briac PilPré, Didier Briel, Yu Tang, Kos Ivantsov, Piotr Kulik
+Copyright (c) 2011-2018 Briac PilPré, Didier Briel, Yu Tang, Kos Ivantsov, Piotr Kulik
 
 References:
 OmegaT Javadoc: https://omegat.ci.cloudbees.com/job/omegat-trunk/javadoc/

@@ -5,8 +5,8 @@
  * @author  Piotr Kulik
  * @author  Kos Ivantsov
  * @author  Didier Briel
- * @date    2017-05-24
- * @version 0.7.3
+ * @date    2018-06-28
+ * @version 0.7.4
  */
 
 // if FALSE only current file will be checked
@@ -498,14 +498,14 @@ def getRuleMatchesForEntry(sourceText, translationText) {
 
     def ltSource = sourceLt;
     def ltTarget = targetLt;
-    if (ltTarget == null) {
+    if (ltTarget == null || !ltTarget) {
         // LT doesn't know anything about source language
         return null;
     }
 
     List<RuleMatch> r = new ArrayList<RuleMatch>();
     List<RuleMatch> matches;
-    if (ltSource != null && bRules != null) {
+    if (ltSource != null && !ltTarget && bRules != null) {
         // LT knows about source and target languages both and has bitext rules
         matches = Tools.checkBitext(sourceText, translationText, ltSource, ltTarget, bRules);
     } else {

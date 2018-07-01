@@ -368,7 +368,7 @@ public final class WikiGet {
         conn.setDoOutput(true);
 
         try (OutputStream cout = conn.getOutputStream()) {
-            cout.write(json.getBytes());
+            cout.write(json.getBytes(StandardCharsets.UTF_8));
             cout.flush();
             return getStringContent(conn, "utf-8");
         } finally {

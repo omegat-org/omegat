@@ -35,6 +35,7 @@ import javax.swing.SwingUtilities;
 import org.omegat.core.Core;
 import org.omegat.gui.dialogs.VersionCheckDialog;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.VersionChecker;
 
@@ -68,7 +69,7 @@ public final class VersionCheckThread extends LongProcessThread {
                             SwingUtilities.invokeAndWait(() -> dialog.show(getParentWindow()));
                         }
                     } catch (Exception e) {
-                        LOGGER.log(Level.WARNING, e.getLocalizedMessage(), e);
+                        LOGGER.log(Level.WARNING, OStrings.getString("VERSION_CHECK_FAILED") + ": " + e.toString());
                     }
                     wait(CHECK_INTERVAL);
                 }

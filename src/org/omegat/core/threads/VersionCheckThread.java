@@ -69,7 +69,7 @@ public final class VersionCheckThread extends LongProcessThread {
                             SwingUtilities.invokeAndWait(() -> dialog.show(getParentWindow()));
                         }
                     } catch (Exception e) {
-                        LOGGER.log(Level.WARNING, OStrings.getString("VERSION_CHECK_FAILED") + ": " + e.toString());
+                        LOGGER.log(Level.WARNING, OStrings.getString("VERSION_CHECK_FAILED", e.toString()));
                     }
                     wait(CHECK_INTERVAL);
                 }

@@ -129,7 +129,7 @@ public class RealProject implements IProject {
     protected final RemoteRepositoryProvider remoteRepositoryProvider;
 
     enum PreparedStatus {
-        NONE, PREPARED, REBASED
+        NONE, PREPARED, PREPARED2, REBASED
     };
 
     /**
@@ -843,6 +843,7 @@ public class RealProject implements IProject {
         }
         LOGGER.fine("Rebase team sync");
         try {
+            preparedStatus = PreparedStatus.PREPARED2;
             synchronized (RealProject.this) {
                 projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
                         isProjectModified());
@@ -879,6 +880,7 @@ public class RealProject implements IProject {
             }).start();
         } catch (Exception ex) {
             Log.logErrorRB(ex, "CT_ERROR_SAVING_PROJ");
+            preparedStatus = PreparedStatus.NONE;
         }
     }
 

@@ -341,12 +341,13 @@ public class RealProject implements IProject {
                 
                 remoteRepositoryProvider.switchAllToLatest();
 
-                // Add filters.xml and segmentation.conf
-                for (String file : new String[] {
-                    '/' + config.getProjectInternalRelative() + FilterMaster.FILE_FILTERS,
-                    '/' + config.getProjectInternalRelative() + SRX.CONF_SENTSEG }) {
-                remoteRepositoryProvider.copyFilesFromRepoToProject(file);
-                }
+                remoteRepositoryProvider.copyFilesFromRepoToProject("", '/' + RemoteRepositoryProvider.REPO_SUBDIR,
+                        '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR, '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR,
+                        '/' + OConsts.FILE_PROJECT,
+                        '/' + config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
+                        '/' + config.getWritableGlossaryFile().getUnderRoot(),
+                        '/' + config.getTargetDir().getUnderRoot());
+
                 // After adding filters.xml and segmentation.conf, we must reload them again
                 config.loadProjectFilters();
                 config.loadProjectSRX();
@@ -356,20 +357,6 @@ public class RealProject implements IProject {
                 loadTranslations();
                 Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                 rebaseAndCommitProject(true);
-
-                // retrieve other directories
-                remoteRepositoryProvider.switchAllToLatest();
-                for (String dir : new String[] { config.getSourceDir().getUnderRoot(),
-                        config.getGlossaryDir().getUnderRoot(), config.getTmDir().getUnderRoot(),
-                        config.getDictDir().getUnderRoot() }) {
-                    if (dir == null || dir.contains("..")) {
-                        continue;
-                    }
-                    // copy but skip project_save.tmx and glossary.txt
-                    remoteRepositoryProvider.copyFilesFromRepoToProject(dir,
-                            '/' + config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
-                            '/' + config.getWritableGlossaryFile().getUnderRoot());
-                }
             } else {
                 loadFilterSettings();
                 loadTranslations();

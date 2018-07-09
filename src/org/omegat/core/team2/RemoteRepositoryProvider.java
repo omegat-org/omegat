@@ -56,6 +56,8 @@ import gen.core.project.RepositoryMapping;
 public class RemoteRepositoryProvider {
     public static final String REPO_SUBDIR = ".repositories/";
     public static final String REPO_PREPARE_SUBDIR = ".repositories/prep/";
+    public static final String REPO_GIT_SUBDIR = ".git/";
+    public static final String REPO_SVN_SUBDIR = ".svn/";
 
     final File projectRoot;
     final ProjectTeamSettings teamSettings;

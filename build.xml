@@ -379,7 +379,7 @@ Custom strings from release\win32-specific must be added manually to the languag
 
 	<target name="mac-signed" description="Build signed Mac distro; supply identity in `codesignIdentity` envar" depends="mac">
 		<unzip src="dist2/OmegaT_${distversion}${beta}_Mac.zip" dest="build/mac-signed"/>
-		<exec executable="codesign">
+		<exec executable="codesign" failonerror="true">
 			<arg line="--deep -s"/>
 			<arg value="${env.codesignIdentity}"/>
 			<arg value="build/mac-signed/OmegaT.app"/>

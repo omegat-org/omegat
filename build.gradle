@@ -166,7 +166,7 @@ dependencies {
 
     // Test dependencies
     testCompile 'junit:junit:4.12'
-    testCompile 'org.xmlunit:xmlunit-legacy:2.5.1'
+    testCompile 'org.xmlunit:xmlunit-legacy:2.6.0'
     testCompile("org.languagetool:languagetool-server:${languageToolVersion}") {
         exclude group: 'org.slf4j'
     }

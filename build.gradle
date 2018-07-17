@@ -56,7 +56,7 @@ sourceSets {
 repositories {
     jcenter()
     maven {
-        url 'http://dl.bintray.com/omegat-org/maven'
+        url 'https://dl.bintray.com/omegat-org/maven'
     }
 }
 

@@ -2,7 +2,7 @@
  OmegaT 4.1.5 update 1
 ----------------------------------------------------------------------
   3 Enhancements
-  3 Bug fixes
+  4 Bug fixes
   0 Localisation update
 ----------------------------------------------------------------------
 4.1.5 update 1 vs 4.1.5
@@ -31,6 +31,9 @@ works with Ctrl+I in addition to Ctrl+R
 
   - Learned_words.txt and ignored_words.txt not downloaded in team projects
   https://sourceforge.net/p/omegat/bugs/893/
+
+  - Error with Tagwipe
+  https://sourceforge.net/p/omegat/bugs/916/
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 (2018-06-08)

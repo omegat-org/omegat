@@ -452,8 +452,13 @@ def _clean(p, pat) {
           return
       }
 
-      prefsFile.withInputStream { 
-        stream -> preferences.load(stream) 
+     try {
+          prefsFile.withInputStream { 
+              stream -> preferences.load(stream) 
+          }
+      }
+      catch (IOException e) {
+      	console.println("Error when loading preferences: " + e.message);
       }
 
       beautify = Boolean.parseBoolean(preferences["beautify"])
@@ -470,7 +475,13 @@ def _clean(p, pat) {
       preferences.setProperty("convertAll", ""+convertAll)
       preferences.setProperty("backupFiles", ""+backupFiles)
       preferences.setProperty("debug", ""+debug)
-      preferences.store(new File(currentDir + "/properties/tagwipe.prefs.properties").newWriter(), " Tagwipe preferences")
+
+      try {
+          preferences.store(new File(currentDir + "/properties/tagwipe.prefs.properties").newWriter(), " Tagwipe preferences")
+      }
+      catch (IOException e) {
+      	console.println("Error when storing preferences: " + e.message);
+      }
     }
 
     private void initComponents() {

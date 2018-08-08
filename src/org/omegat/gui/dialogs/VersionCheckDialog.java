@@ -61,9 +61,9 @@ public class VersionCheckDialog {
                         new VersionCheckDialog(VersionChecker.getInstance().getRemoteVersion()).show(parent);
                     }
                 } catch (Exception e) {
-                    Log.logWarningRB("VERSION_CHECK_FAILED", e.toString());
+                    Log.logWarningRB("VERSION_CHECK_FAILED", e);
                     JOptionPane.showMessageDialog(parent,
-                            OStrings.getString("VERSION_CHECK_FAILED", e.getCause().toString()),
+                            OStrings.getString("VERSION_CHECK_FAILED", e.getCause()),
                             OStrings.getString("ERROR_TITLE"),
                             JOptionPane.ERROR_MESSAGE);
                 }

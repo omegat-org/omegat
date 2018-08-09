@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 2
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   0 Bug fix
   0 Localisation update
 ----------------------------------------------------------------------
@@ -10,6 +10,9 @@
   Other changes:
 
   - Show human readable error on version check failure
+
+  - Allow to use two methods of authentication (username/password or 
+apiKey) for IBM Watson MT
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 1 (2018-08-06)

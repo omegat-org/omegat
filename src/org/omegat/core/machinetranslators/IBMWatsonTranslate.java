@@ -91,8 +91,15 @@ public class IBMWatsonTranslate extends BaseTranslate {
         String apiLogin = getCredential(PROPERTY_LOGIN);
         String apiPassword = getCredential(PROPERTY_PASSWORD);
 
-        if (apiPassword == null || apiPassword.isEmpty() || apiLogin == null || apiLogin.isEmpty()) {
+        if (apiLogin == null || apiLogin.isEmpty()) {
             return OStrings.getString("IBMWATSON_API_KEY_NOTFOUND");
+        }
+
+        // If the instance uses IAM authentication (https://console.bluemix.net/docs/services/watson/getting-started-iam.html)
+        // only an API Key is provided, in this case the authentication header is "apikey:apikey"
+        // see https://www.ibm.com/watson/developercloud/language-translator/api/v2/curl.html?curl#authentication
+        if (apiPassword == null || apiPassword.isEmpty()) {
+        	apiPassword = apiLogin;
         }
 
         StringBuilder json = new StringBuilder();
@@ -195,13 +202,27 @@ public class IBMWatsonTranslate extends BaseTranslate {
     @Override
     public void showConfigurationUI(Window parent) {
 
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new java.awt.GridLayout(1, 1));
+        infoPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
+        infoPanel.setAlignmentX(0.0F);
+
+        JLabel iamAuthLabel = new JLabel(OStrings.getString("MT_ENGINE_IBMWATSON_IAM_AUTHENTICATION"));
+        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 5);
+        infoPanel.add(iamAuthLabel, gridBagConstraints);
+
         JPanel modelPanel = new JPanel();
         modelPanel.setLayout(new java.awt.GridLayout(1, 2));
         modelPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
         modelPanel.setAlignmentX(0.0F);
 
         JLabel modelIdLabel = new JLabel(OStrings.getString("MT_ENGINE_IBMWATSON_MODELID_LABEL"));
-        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -247,6 +268,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_PASSWORD));
 
+        dialog.panel.itemsPanel.add(infoPanel);
         dialog.panel.itemsPanel.add(modelPanel);
 
         dialog.show();

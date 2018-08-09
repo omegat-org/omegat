@@ -65,6 +65,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
     protected static final String PROPERTY_LOGIN = "ibmwatson.api.login";
     protected static final String PROPERTY_PASSWORD = "ibmwatson.api.password";
     protected static final String PROPERTY_MODEL = "ibmwatson.api.model";
+    protected static final String PROPERTY_URL = "ibmwatson.api.url";
 
     protected static final String WATSON_URL = "https://gateway.watsonplatform.net/language-translator/api/v3/translate";
     protected static final String WATSON_VERSION = "2018-05-01";
@@ -99,7 +100,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
         // only an API Key is provided, in this case the authentication header is "apikey:apikey"
         // see https://www.ibm.com/watson/developercloud/language-translator/api/v2/curl.html?curl#authentication
         if (apiPassword == null || apiPassword.isEmpty()) {
-        	apiPassword = apiLogin;
+            apiPassword = apiLogin;
         }
 
         StringBuilder json = new StringBuilder();
@@ -123,13 +124,13 @@ public class IBMWatsonTranslate extends BaseTranslate {
         // Let's opt out then.
         headers.put("X-Watson-Learning-Opt-Out", "true");
 
-        String authentication = "Basic " + Base64.getMimeEncoder().encodeToString((apiLogin + ":" + apiPassword).getBytes(StandardCharsets.ISO_8859_1));
+        String authentication = "Basic " + Base64.getMimeEncoder(-1, new byte[] {}).encodeToString((apiLogin + ":" + apiPassword).getBytes(StandardCharsets.ISO_8859_1));
         headers.put("Authorization", authentication);
         headers.put("Accept", "application/json");
 
         String v;
         try {
-            v = WikiGet.postJSON(WATSON_URL + "?version=" + WATSON_VERSION, json.toString(), headers);
+            v = WikiGet.postJSON(getWatsonUrl() + "?version=" + WATSON_VERSION, json.toString(), headers);
         } catch (IOException e) {
             return e.getLocalizedMessage();
         }
@@ -150,6 +151,14 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
     private String getModelId() {
         return System.getProperty(PROPERTY_MODEL, Preferences.getPreference(PROPERTY_MODEL));
+    }
+
+    private String getWatsonUrl() {
+        String url = System.getProperty(PROPERTY_URL, Preferences.getPreference(PROPERTY_URL));
+        if (url == null || url.isEmpty()) {
+            url = WATSON_URL;
+        }
+        return url;
     }
 
     @SuppressWarnings("unchecked")
@@ -202,45 +211,65 @@ public class IBMWatsonTranslate extends BaseTranslate {
     @Override
     public void showConfigurationUI(Window parent) {
 
-        JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new java.awt.GridLayout(1, 1));
-        infoPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
-        infoPanel.setAlignmentX(0.0F);
+        JPanel watsonPanel = new JPanel();
+        watsonPanel.setLayout(new java.awt.GridBagLayout());
+        watsonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
+        watsonPanel.setAlignmentX(0.0F);
 
+        // Info about IAM authentication
         JLabel iamAuthLabel = new JLabel(OStrings.getString("MT_ENGINE_IBMWATSON_IAM_AUTHENTICATION"));
         GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 5);
-        infoPanel.add(iamAuthLabel, gridBagConstraints);
+        watsonPanel.add(iamAuthLabel, gridBagConstraints);
 
-        JPanel modelPanel = new JPanel();
-        modelPanel.setLayout(new java.awt.GridLayout(1, 2));
-        modelPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
-        modelPanel.setAlignmentX(0.0F);
+        // API URL
+        JLabel urlLabel = new JLabel(OStrings.getString("MT_ENGINE_IBMWATSON_URL"));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 5);
+        watsonPanel.add(urlLabel, gridBagConstraints);
 
+        JTextField urlField = new JTextField(Preferences.getPreferenceDefault(PROPERTY_URL, WATSON_URL));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
+        urlLabel.setLabelFor(urlField);
+        watsonPanel.add(urlField, gridBagConstraints);
+
+        // Custom Model
         JLabel modelIdLabel = new JLabel(OStrings.getString("MT_ENGINE_IBMWATSON_MODELID_LABEL"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 5);
-        modelPanel.add(modelIdLabel, gridBagConstraints);
+        watsonPanel.add(modelIdLabel, gridBagConstraints);
 
         JTextField modelIdField = new JTextField(Preferences.getPreferenceDefault(PROPERTY_MODEL, ""));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         modelIdLabel.setLabelFor(modelIdField);
-        modelPanel.add(modelIdField, gridBagConstraints);
+        watsonPanel.add(modelIdField, gridBagConstraints);
 
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
             @Override
@@ -255,6 +284,9 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
                 System.setProperty(PROPERTY_MODEL, modelIdField.getText());
                 Preferences.setPreference(PROPERTY_MODEL, modelIdField.getText());
+
+                System.setProperty(PROPERTY_URL, urlField.getText());
+                Preferences.setPreference(PROPERTY_URL, urlField.getText());
             }
         };
 
@@ -268,8 +300,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_PASSWORD));
 
-        dialog.panel.itemsPanel.add(infoPanel);
-        dialog.panel.itemsPanel.add(modelPanel);
+        dialog.panel.itemsPanel.add(watsonPanel);
 
         dialog.show();
     }

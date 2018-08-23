@@ -1,10 +1,5 @@
 OmegaT.app includes the following software in binary form.
 
-JavaAppLauncher, part of appbundler
-License: GNU Public License, version 2
-See OmegaT.app/Contents/Java/lib/gpl-2.0.txt
-Source available at https://bitbucket.org/infinitekind/appbundler
-
 Java Runtime Environment
 License: Oracle Binary Code License Agreement for the Java SE Platform
 Products and JavaFX

@@ -152,7 +152,9 @@ public class SRX implements Serializable {
         try {
             Marshaller m = SRX_JAXB_CONTEXT.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            m.marshal(jaxbObject, new FileOutputStream(outFile));
+            try (FileOutputStream fos = new FileOutputStream(outFile)) {
+                m.marshal(jaxbObject, fos);
+            }
         } catch (JAXBException ioe) {
             Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
             Log.log(ioe);
@@ -204,9 +206,9 @@ public class SRX implements Serializable {
         SRX res;
         try {
             MyExceptionListener myel = new MyExceptionListener();
-            XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel);
-            res = (SRX) xmldec.readObject();
-            xmldec.close();
+            try (XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel)) {
+                res = (SRX) xmldec.readObject();
+            }
 
             if (myel.isExceptionOccured()) {
                 StringBuilder sb = new StringBuilder();

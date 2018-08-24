@@ -101,6 +101,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
         // see https://www.ibm.com/watson/developercloud/language-translator/api/v2/curl.html?curl#authentication
         if (apiPassword == null || apiPassword.isEmpty()) {
             apiPassword = apiLogin;
+            apiLogin = "apiKey";
         }
 
         StringBuilder json = new StringBuilder();

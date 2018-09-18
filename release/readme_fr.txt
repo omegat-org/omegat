@@ -65,7 +65,7 @@ Si vous disposez déjà de Java, l'une des façons d'installer OmegaT est d'util
 
 Pour ce faire, téléchargez le fichier suivant et exécutez-le :
 
-   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
 Il installera l'environnement approprié pour votre ordinateur et l'application elle-même lors de la première exécution. Il ne sera pas nécessaire d'être en ligne pour les lancements suivants.
 
@@ -150,6 +150,7 @@ Les contributions au code sont documentées dans /docs/contributors.txt.
 Les personnes qui ont contribué incluent :
 (ordre alphabétique)
 
+  Anthony Baldwin (responsable de la localisation)
   Alex Buloichik (développeur principal)
   Sabine Cretella
   Dmitri Gabinski

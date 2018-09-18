@@ -106,9 +106,9 @@ public class SRX implements Serializable {
     /**
      * Saves segmentation rules into specified directory.
      * @param srx OmegaT object to be written; if null, means that we want to delete the file
-     * @param outDir where to put the file. The file name is forced to {@link #SRX_SENTSEG}
+     * @param outDir where to put the file. The file name is forced to {@link #SRX_SENTSEG} and will be in standard SRX format.
      */
-    public static void saveTo(SRX srx, File outDir) throws IOException {
+    public static void saveToSrx(SRX srx, File outDir) throws IOException {
         File outFile = new File (outDir, SRX_SENTSEG);
 
         if (srx == null) {
@@ -117,10 +117,6 @@ public class SRX implements Serializable {
             return;
         }
 
-        saveToSrx(srx, outFile);
-    }
-
-    public static void saveToSrx(SRX srx, File outFile) throws IOException {
         ObjectFactory factory = new ObjectFactory();
         Srx jaxbObject = factory.createSrx();
         jaxbObject.setVersion("2.0");
@@ -182,7 +178,7 @@ public class SRX implements Serializable {
         if (inFile.exists()) {
             SRX srx = loadConfFile(inFile);
             try {
-                saveToSrx(srx, new File(configDir, SRX_SENTSEG));
+                saveToSrx(srx, configDir);
             } catch (Exception o3) {
                 Log.log(o3); // detail why conversion failed, but continue
             }

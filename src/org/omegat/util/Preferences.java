@@ -702,7 +702,7 @@ public final class Preferences {
 
         File srxDir = new File(StaticUtils.getConfigDir());
         try {
-            SRX.saveTo(srx, srxDir);	// save to segmentation.srx in the given directory
+            SRX.saveToSrx(srx, srxDir);	// save to segmentation.srx in the given directory
         } catch (IOException ex) {
             ex.printStackTrace();
         }

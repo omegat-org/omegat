@@ -365,9 +365,6 @@ public class RemoteRepositoryProvider {
                     throw new RuntimeException(
                             "Filter prefix should have been / for file mapping, but was " + filterPrefix);
                 }
-                if (!forceExcludes.isEmpty()) {
-                    return;
-                }
                 copyFile(from, to, null);
             }
         }

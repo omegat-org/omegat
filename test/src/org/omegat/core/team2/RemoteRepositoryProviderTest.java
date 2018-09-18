@@ -382,28 +382,8 @@ public class RemoteRepositoryProviderTest {
         checkCopyEnd();
     }
 
-    @Test
-    public void testCopyFilesFromRepoToProject52() throws Exception {
-        filesRemote();
-        mapping1();
-        provider.copyFilesFromRepoToProject("", "/**/localfile");
-        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
-        checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
-        checkCopyEnd();
-    }
 
-    @Test
-    public void testCopyFilesFromRepoToProject52a() throws Exception {
-        filesRemote();
-        mapping1a();
-        provider.copyFilesFromRepoToProject("/", "**/localfile/");
-        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
-        // checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
-        checkCopyEnd();
-    }
-
+    
     @Test
     public void testCopyFilesFromProjectToRepo11() throws Exception {
         filesLocal();

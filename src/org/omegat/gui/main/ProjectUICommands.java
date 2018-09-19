@@ -58,6 +58,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.ChooseMedProject;
@@ -488,11 +489,11 @@ public final class ProjectUICommands {
                                     props.setRepositories(repos);      // so we restore the mapping we just lost
                                     needToSaveProperties = true;
                                 }
+                            } catch (IRemoteRepository2.NetworkException e) {
+                                // Do nothing. Network errors are handled in RealProject.
                             } catch (Exception e) {
                                 Log.logErrorRB(e, "TF_PROJECT_PROPERTIES_ERROR");
-                                    Log.log(e);
-                            throw new IOException(OStrings.getString("TF_PROJECT_PROPERTIES_ERROR") + "\n"
-                                            + e.getMessage(), e);
+                                throw e;
                             }
                         }                       
                         // team project - non-exist directories could be created from repo

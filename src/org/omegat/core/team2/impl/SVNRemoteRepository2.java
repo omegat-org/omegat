@@ -67,7 +67,6 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     File baseDirectory;
     SVNClientManager ourClientManager;
     List<File> filesForCommit = new ArrayList<File>();
-    int credentialAskCount;
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
@@ -122,6 +121,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             Log.logInfoRB("SVN_FINISH", "checkout");
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "checkout", ex.getMessage());
+            checkNetworkException(ex);
             throw ex;
         }
     }

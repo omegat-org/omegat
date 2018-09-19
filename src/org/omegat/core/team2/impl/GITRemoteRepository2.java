@@ -175,7 +175,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
-    public String getFileVersion(String file) throws Exception {
+    public String getFileVersion(String file) throws IOException {
         File f = new File(localDirectory, file);
         if (!f.exists()) {
             return null;
@@ -183,7 +183,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         return getCurrentVersion();
     }
 
-    protected String getCurrentVersion() throws Exception {
+    protected String getCurrentVersion() throws IOException {
         try (RevWalk walk = new RevWalk(repository)) {
             Ref localBranch = repository.findRef("HEAD");
             RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
@@ -204,6 +204,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             git.checkout().setName(version).call();
             git.branchDelete().setForce(true).setBranchNames(LOCAL_BRANCH).call();
             git.checkout().setCreateBranch(true).setName(LOCAL_BRANCH).setStartPoint(version).call();
+        } catch (TransportException e) {
+            throw new NetworkException(e);
         }
     }
 

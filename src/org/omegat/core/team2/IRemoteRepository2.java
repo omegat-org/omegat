@@ -98,6 +98,7 @@ public interface IRemoteRepository2 {
      */
     @SuppressWarnings("serial")
     class NetworkException extends Exception {
+
         public NetworkException(Throwable ex) {
             super(ex);
         }

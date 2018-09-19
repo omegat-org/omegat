@@ -71,6 +71,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.CommandMonitor;
@@ -218,8 +219,6 @@ public class RealProject implements IProject {
      *
      * @param props
      *            project properties
-     * @param isNewProject
-     *            true if project need to be created
      */
     public RealProject(final ProjectProperties props) {
         config = props;
@@ -336,30 +335,34 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
             if (remoteRepositoryProvider != null) {
-                tmxPrepared = null;
-                glossaryPrepared = null;
-                
-                remoteRepositoryProvider.switchAllToLatest();
+                try {
+                    tmxPrepared = null;
+                    glossaryPrepared = null;
 
-                remoteRepositoryProvider.copyFilesFromRepoToProject("", '/' + RemoteRepositoryProvider.REPO_SUBDIR,
-                        '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR, '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR,
-                        '/' + OConsts.FILE_PROJECT,
-                        '/' + config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
-                        '/' + config.getWritableGlossaryFile().getUnderRoot(),
-                        '/' + config.getTargetDir().getUnderRoot());
+                    remoteRepositoryProvider.switchAllToLatest();
 
-                // After adding filters.xml and segmentation.conf, we must reload them again
-                config.loadProjectFilters();
-                config.loadProjectSRX();
-                
-                loadFilterSettings();
-                
-                loadTranslations();
+		            remoteRepositoryProvider.copyFilesFromRepoToProject("", '/' + RemoteRepositoryProvider.REPO_SUBDIR,
+		                    '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR, '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR,
+		                    '/' + OConsts.FILE_PROJECT,
+		                    '/' + config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
+		                    '/' + config.getWritableGlossaryFile().getUnderRoot(),
+		                    '/' + config.getTargetDir().getUnderRoot());
+
+		            // After adding filters.xml and segmentation.conf, we must reload them again
+		            config.loadProjectFilters();
+		            config.loadProjectSRX();
+                } catch (IRemoteRepository2.NetworkException e) {
+                    Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause());
+                    setOfflineMode();
+                }
+            }
+
+            loadFilterSettings();
+            loadTranslations();
+
+            if (remoteRepositoryProvider != null && isOnlineMode) {
                 Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                 rebaseAndCommitProject(true);
-            } else {
-                loadFilterSettings();
-                loadTranslations();
             }
 
             // Set project specific segmentation rules if they exist, or defaults otherwise.
@@ -647,7 +650,7 @@ public class RealProject implements IProject {
                 numberOfCompiled++;
             }
         }
-        if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles) {
+        if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles && isOnlineMode) {
             tmxPrepared = null;
             glossaryPrepared = null;
             // commit translations
@@ -766,14 +769,19 @@ public class RealProject implements IProject {
                         tmxPrepared = null;
                         glossaryPrepared = null;
                         remoteRepositoryProvider.cleanPrepared();
-                        preparedStatus = PreparedStatus.NONE;
                         Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
                         rebaseAndCommitProject(true);
+                        setOnlineMode();
                     }
 
                     setProjectModified(false);
                 } catch (KnownException ex) {
                     throw ex;
+                } catch (IRemoteRepository2.NetworkException e) {
+                    if (isOnlineMode) {
+                        Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause());
+                        setOfflineMode();
+                    }
                 } catch (Exception e) {
                     Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
                     Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
@@ -805,7 +813,7 @@ public class RealProject implements IProject {
      */
     @Override
     public void teamSyncPrepare() throws Exception {
-        if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.NONE) {
+        if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.NONE || !isOnlineMode) {
             return;
         }
         LOGGER.fine("Prepare team sync");
@@ -1113,9 +1121,6 @@ public class RealProject implements IProject {
 
     /**
      * Load source files for project.
-     *
-     * @param projectRoot
-     *            project root dir
      */
     private void loadSourceFiles() throws Exception {
         long st = System.currentTimeMillis();
@@ -1855,6 +1860,7 @@ public class RealProject implements IProject {
             Core.getMainWindow().displayWarningRB("VCS_ONLINE", "VCS_OFFLINE");
         }
         isOnlineMode = true;
+        preparedStatus = PreparedStatus.NONE;
     }
 
     void setOfflineMode() {
@@ -1863,6 +1869,7 @@ public class RealProject implements IProject {
             Core.getMainWindow().displayWarningRB("VCS_OFFLINE", "VCS_ONLINE");
         }
         isOnlineMode = false;
+        preparedStatus = PreparedStatus.NONE;
     }
 
     @Override

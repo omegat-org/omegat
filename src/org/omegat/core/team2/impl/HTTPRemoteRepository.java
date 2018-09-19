@@ -32,6 +32,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.util.Formatter;
@@ -175,16 +177,16 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
                 conn.setRequestProperty("If-None-Match", etag);
             }
             switch (conn.getResponseCode()) {
-            case HttpURLConnection.HTTP_OK:
-                etag = conn.getHeaderField("ETag");
-                Log.logDebug(LOGGER, "Retrieve " + url + ": 200 with ETag=" + etag);
-                break;
-            case HttpURLConnection.HTTP_NOT_MODIFIED:
-                // not modified - just return
-                Log.logDebug(LOGGER, "Retrieve " + url + ": not modified");
-                return;
-            default:
-                throw new RuntimeException("HTTP response code: " + conn.getResponseCode());
+                case HttpURLConnection.HTTP_OK:
+                    etag = conn.getHeaderField("ETag");
+                    Log.logDebug(LOGGER, "Retrieve " + url + ": 200 with ETag=" + etag);
+                    break;
+                case HttpURLConnection.HTTP_NOT_MODIFIED:
+                    // not modified - just return
+                    Log.logDebug(LOGGER, "Retrieve " + url + ": not modified");
+                    return;
+                default:
+                    throw new RuntimeException("HTTP response code: " + conn.getResponseCode());
             }
 
             // load into .tmp file
@@ -210,6 +212,8 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
             } catch (Exception ex) {
                 // Etags are optionnal, we eat the exception is there is none
             }
+        } catch (UnknownHostException | SocketException e) {
+            throw new NetworkException(e);
         } finally {
             conn.disconnect();
         }

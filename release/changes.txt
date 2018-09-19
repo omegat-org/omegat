@@ -2,7 +2,7 @@
  OmegaT 4.1.5 update 2
 ----------------------------------------------------------------------
   2 Enhancements
-  1 Bug fix
+  2 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
 4.1.5 update 2 vs 4.1.5 update 1
@@ -15,6 +15,9 @@
 apiKey) for IBM Watson MT
 
   Bug fixes:
+
+  - Team projects fail to open in offline mode
+  https://sourceforge.net/p/omegat/bugs/849/
 
   - Incomplete mirroring in team projects
   https://sourceforge.net/p/omegat/bugs/920/

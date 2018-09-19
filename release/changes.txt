@@ -11,7 +11,7 @@
 
   - Show human readable error on version check failure
 
-  - Allow to use two methods of authentication (username/password or 
+  - Allow to use two methods of authentication (username/password or
 apiKey) for IBM Watson MT
 
   Bug fixes:
@@ -34,20 +34,20 @@ apiKey) for IBM Watson MT
 
   Implemented requests:
 
-  - Extract Text Content script to export to UTF-8 
+  - Extract Text Content script to export to UTF-8
   https://sourceforge.net/p/omegat/feature-requests/1393/
 
   Other changes:
 
-  - Watson Language Translator: Neural translation is always on, it's 
+  - Watson Language Translator: Neural translation is always on, it's
 possible to enter a Model ID in the credential dialog. See
 https://sourceforge.net/p/omegat/feature-requests/1389/
 
-  - Automatic conversion of numbers when inserting fuzzy matches now 
+  - Automatic conversion of numbers when inserting fuzzy matches now
 works with Ctrl+I in addition to Ctrl+R
 
   Bug fixes:
-  
+
   - Segment marked as empty causes error when running QA check script
   https://sourceforge.net/p/omegat/bugs/915/
 
@@ -83,7 +83,7 @@ works with Ctrl+I in addition to Ctrl+R
   - Watson Language Translator Integration
   https://sourceforge.net/p/omegat/feature-requests/1389/
 
-  - Automatically check for updates 
+  - Automatically check for updates
   https://sourceforge.net/p/omegat/feature-requests/293/
 
   Other changes:
@@ -94,7 +94,7 @@ item in the omegat.prefs file to take advantage of this change.
 
   - Added Project > Open Recent Project > Clear Menu
 
-  - Linux: Updated Kaptain launcher to include fields for new MT credentials. 
+  - Linux: Updated Kaptain launcher to include fields for new MT credentials.
 
   Bug fixes:
 

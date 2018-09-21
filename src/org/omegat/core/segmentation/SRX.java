@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -242,16 +243,10 @@ public class SRX implements Serializable {
             List<MapRule> newMap = new ArrayList<MapRule>();
             Srx data = (Srx) SRX_JAXB_CONTEXT.createUnmarshaller().unmarshal(rulesUrl);
 
-            for (Languagerule rules : data.getBody().getLanguagerules().getLanguagerule()) {
+            // Correction: in SRX, the same "languagerulename" can be used more than once
+            HashMap<String,List<Rule>> mapping = new HashMap<>();
 
-                String lang = rules.getLanguagerulename();
-                String pattern = DEFAULT_RULES_PATTERN;
-                for (Languagemap lm : data.getBody().getMaprules().getLanguagemap()) {
-                    if (lm.getLanguagerulename().equals(rules.getLanguagerulename())) {
-                        pattern = lm.getLanguagepattern();
-                        break;
-                    }
-                }
+            for (Languagerule rules : data.getBody().getLanguagerules().getLanguagerule()) {
                 List<Rule> rulesList = new ArrayList<Rule>(rules.getRule().size());
                 for (gen.core.segmentation.Rule r : rules.getRule()) {
                     boolean isBreak = "yes".equalsIgnoreCase(r.getBreak());
@@ -259,8 +254,13 @@ public class SRX implements Serializable {
                             .getContent()));
                 }
 
-                newMap.add(new MapRule(lang, pattern, rulesList));
+                mapping.put(rules.getLanguagerulename(), rulesList);
             }
+
+            for (Languagemap lm : data.getBody().getMaprules().getLanguagemap()) {
+                newMap.add(new MapRule(lm.getLanguagerulename(), lm.getLanguagepattern(), mapping.get(lm.getLanguagerulename())));
+            }
+
             Log.log("using segmentation rules from " + rulesUrl);
             // set rules only if no errors
             SRX res = new SRX();
@@ -269,7 +269,7 @@ public class SRX implements Serializable {
             res.setSegmentSubflows((data.getHeader() != null) && ("yes".equals(data.getHeader().getSegmentsubflows())));	// not really used
             return res;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Log.log(ex);
             return null;
         }
     }

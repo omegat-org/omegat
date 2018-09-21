@@ -70,6 +70,11 @@ public class DictionariesManagerTest {
             @Override
             public void removeDictionaryFactory(IDictionaryFactory factory) {
             }
+
+            @Override
+            public void searchText(String text) {
+            }
+
         }) {
             @Override
             protected boolean doFuzzyMatching() {

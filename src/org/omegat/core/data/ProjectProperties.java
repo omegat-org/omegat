@@ -499,7 +499,7 @@ public class ProjectProperties {
      * Loads segmentation.conf if found in the /omegat folder of the project
      */
     public void loadProjectSRX() {
-        this.projectSRX = SRX.loadSRX(new File(getProjectInternal()));
+        this.projectSRX = SRX.loadFromDir(new File(getProjectInternal()));
     }
 
     public Filters getProjectFilters() {

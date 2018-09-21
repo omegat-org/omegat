@@ -764,7 +764,7 @@ public final class Preferences {
         didInitSegmentation = true;
 
         File srxDir = new File(StaticUtils.getConfigDir());
-        SRX s = SRX.loadSRX(srxDir); // may read SRX or CONF
+        SRX s = SRX.loadFromDir(srxDir); // may read SRX or CONF
         if (s == null) {
             s = SRX.getDefault();
         }

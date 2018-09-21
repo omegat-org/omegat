@@ -162,7 +162,7 @@ public class SRX implements Serializable {
      * Loads the local segmentation file. Accepts SRX (default) or old CONF format.
      * In case you use conf format, rules about old version remain valid.
      **/
-    public static SRX loadSRX(File configDir) {
+    public static SRX loadFromDir(File configDir) {
         File inFile = null;
         try {
             inFile = new File(configDir, SRX_SENTSEG);

@@ -139,10 +139,14 @@ public class SRX implements Serializable {
                 gen.core.segmentation.Rule jaxbRule = factory.createRule();
                 lr.getRule().add(jaxbRule);
                 jaxbRule.setBreak(rule.isBreakRule() ? "yes" : "no");
-                jaxbRule.setBeforebreak(factory.createBeforebreak());
-                jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());
-                jaxbRule.setAfterbreak(factory.createAfterbreak());
-                jaxbRule.getAfterbreak().setContent(rule.getAfterbreak());
+                if (rule.getBeforebreak() != null) {
+                    jaxbRule.setBeforebreak(factory.createBeforebreak());
+                    jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());                
+                }
+                if (rule.getAfterbreak() != null) {
+                    jaxbRule.setAfterbreak(factory.createAfterbreak());                
+                    jaxbRule.getAfterbreak().setContent(rule.getAfterbreak());
+                }
             }
         }
 

@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;  
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;
@@ -27,6 +26,8 @@ import org.omegat.util.StringUtil;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -35,8 +36,39 @@ import java.net.URLConnection;
 public class IADAATPATranslate extends BaseTranslate{
     private static final String PROPERTY_API_KEY = "IADAATPA.api.key";
 
-    protected static final String GT_URL = "https://iadaatpa.eu/api/translate";
+    protected static final String GT_URL = "https://app.iadaatpa.eu/api/translate";
+
     protected static final int limit_character = 1000;
+    
+    private ArrayList<String> available_language_codes = new ArrayList<String>();
+
+    private void setAvailable_language_codes() {
+       
+       String IADAATPAKey = getCredential(PROPERTY_API_KEY);
+
+       URLConnection connection = null;
+       String codesIADAATPA = "";
+       try { 
+             
+            URL iadaatpa = new URL("https://app.iadaatpa.eu/api/describelanguages/"+IADAATPAKey);
+            connection = iadaatpa.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                                    connection.getInputStream()));
+            String inputLine;
+            
+            while ((inputLine = in.readLine()) != null) 
+                codesIADAATPA += inputLine;
+            in.close();
+            this.available_language_codes = getJsonCodes(codesIADAATPA);            
+            
+        }catch (Exception e){
+                System.err.println("IOException: " + e);            
+        }
+    }
+
+    private ArrayList<String> getAvailable_language_codes() {
+        return available_language_codes;
+    }    
     
     @Override
     protected String getPreferenceName() {
@@ -73,6 +105,11 @@ public class IADAATPATranslate extends BaseTranslate{
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
+        if(this.available_language_codes.isEmpty())
+        {
+         this.setAvailable_language_codes();
+        }        
+                
         String IADAATPAKey = getCredential(PROPERTY_API_KEY);
         if (IADAATPAKey == null || IADAATPAKey.isEmpty()) {  
             return OStrings.getString("MT_ENGINE_IADAATPA_KEY_NOTFOUND");
@@ -90,10 +127,11 @@ public class IADAATPATranslate extends BaseTranslate{
        JsonObject request = factory.createObjectBuilder()
           .add("token", IADAATPAKey)
           .add("source", normaliseCode(sLang))
-          .add("target", normaliseCode(tLang))
-          //.add("domain", "invalidDomain")//TODO validDomain
-          .add("segments", factory.createObjectBuilder()
-            .add("segment01", text.substring(0, Math.min(text.length(), limit_character-1))))
+          .add("target", normaliseCode(tLang))          
+          .add("domain", "")//TODO validDomain
+          .add("segments", factory.createArrayBuilder()
+                  .add(text.substring(0, Math.min(text.length(), limit_character-1)))
+          )
          .build();
        // Get the results from IADAATPA
         URLConnection connection = null;
@@ -169,11 +207,16 @@ public class IADAATPATranslate extends BaseTranslate{
         if (rootNode.containsKey("success") && (Boolean)rootNode.get("success")==true
             && rootNode.containsKey("error") && rootNode.get("error")==null &&
                rootNode.containsKey("data") 
-           ) {                 
-            Map<String, Object> dataNode = (Map<String, Object>) rootNode.get("data");
-            Map<String, Object> segmentsNode = (Map<String, Object>) dataNode.get("segments");
-            Map<String, Object> segmentNode = (Map<String, Object>) segmentsNode.get("segment01");
-            tr = segmentNode.get("translation").toString();
+           ) {   
+            try {
+              Map<String, Object> dataNode = (Map<String, Object>) rootNode.get("data");
+              List<Object> translationsList = (List<Object>) dataNode.get("segments");
+              Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);
+
+              tr = translationNode.get("translation");
+            } catch (NullPointerException e) {
+              return null;
+            }                   
         }
         
         if (rootNode.containsKey("error") && rootNode.get("error") != null) {
@@ -206,6 +249,31 @@ public class IADAATPATranslate extends BaseTranslate{
 
         return tr;
     }
+    
+    @SuppressWarnings("unchecked")
+    private ArrayList<String> getJsonCodes(String json) {
+        ArrayList<String> codes = new ArrayList<String>();
+        Map<String, Object> rootNode = null;
+        try {
+            rootNode = (Map<String, Object>) JsonParser.parse(json);
+            if (rootNode.containsKey("success") && (Boolean)rootNode.get("success")==true
+            && rootNode.containsKey("error") && rootNode.get("error")==null &&
+               rootNode.containsKey("data") 
+           ) { 
+                Map<String, Object> dataNode = (Map<String, Object>) rootNode.get("data");
+                List<Map<String, String>> languagesList = (List<Map<String, String>>) dataNode.get("languages");
+
+                for (Map<String, String> o : languagesList){
+                    codes.add(o.get("code").toUpperCase());
+                }                
+            }            
+        } catch (Exception e) {
+            Log.logErrorRB(e, "MT_JSON_ERROR");
+            return new ArrayList<String>();
+        }
+        return codes; 
+    }
+    
     /**
      * Normalise language codes
      *
@@ -213,8 +281,14 @@ public class IADAATPATranslate extends BaseTranslate{
      *            An OmegaT language
      * @return A normalise code for IADAATPA languages (ISO 639-1 Code)
      */
-    private String normaliseCode(Language language) {
-        String lCode = language.getLanguageCode().toLowerCase(Locale.ENGLISH);
+    private String normaliseCode(Language language) { 
+        
+        String lCode = language.getLanguage();
+        if(!this.available_language_codes.isEmpty() && !this.available_language_codes.contains(language.getLanguage()))
+        {
+            lCode = language.getLanguageCode();
+        }      
+                       
         return lCode;
     }
           

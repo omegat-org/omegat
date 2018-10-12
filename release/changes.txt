@@ -1,11 +1,20 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 3
 ----------------------------------------------------------------------
+  0 Enhancement
+  1 Bug fix
   1 Localisation update
+----------------------------------------------------------------------
+4.1.5 update 3 vs 4.1.5 update 2
+
+  Bug fixes:
+
+  - Team projects: some Subversion network errors were not detected
+as an offline condition
 
   Localisation Updates:
 
-  - Russian localisation updated to 4.1.5_2 (UI)
+  - Russian localisation updated to 4.1.5 update 2 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 2 (2018-09-19)

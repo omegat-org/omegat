@@ -176,6 +176,11 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             if (se.getErrorMessage().getErrorCode().getCategory() == SVNErrorCode.RA_DAV_CATEGORY) {
                 throw new NetworkException(se);
             }
+
+            if (Arrays.asList(SVNErrorCode.RA_SVN_IO_ERROR, SVNErrorCode.RA_SVN_CONNECTION_CLOSED).
+                    contains(se.getErrorMessage().getErrorCode())) {
+                throw new NetworkException(se);
+            }
         }
     }
 

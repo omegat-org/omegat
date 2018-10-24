@@ -52,8 +52,6 @@ import org.omegat.util.StringUtil;
 
 /**
  * Filter for support Moodle PHP files.
- *
- * Filter for lang files.
  * 
  * Code adapted from the file: MozillaDTDFilter.java
  *
@@ -132,13 +130,7 @@ public class MoodlePHPFilter extends AbstractFilter {
             } else {
                 outFile.write(c);
             }
-            
-            // Find out the character used as begin and end of the segment
-            // if (!foundQuotes && (c == '"' || c == 39)) { // 39 is single quote
-            //    foundQuotes = true;
-            //    quotes = c;
-            //}
-            
+
             if (c == ';' && isInBlock && previousChar == quotes) {
                 isInBlock = false;
                 foundQuotes = false;
@@ -154,7 +146,6 @@ public class MoodlePHPFilter extends AbstractFilter {
     protected void processBlock(String block, BufferedWriter out) throws IOException {
         Matcher m = RE_ENTITY.matcher(block);
         if (!m.matches()) {
-            // not ENTITY declaration
             out.write(block);
             return;
         }

@@ -11,7 +11,7 @@
                2013 Aaron Madlon-Kay, Didier Briel
                2014 Aaron Madlon-Kay, Didier Briel
                2015 Aaron Madlon-Kay
-               2017 Didier Briel
+               2017-2018 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -356,20 +356,15 @@ public class RealProject implements IProject {
                     setOfflineMode();
                 }
             }
-
-            loadFilterSettings();
-            loadTranslations();
-
+            
             if (remoteRepositoryProvider != null && isOnlineMode) {
                 Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                 rebaseAndCommitProject(true);
             }
-
-            // Set project specific segmentation rules if they exist, or defaults otherwise.
-            // This can be done after loadTranslations(), as segmentation is not used for this
-            SRX srx = Optional.ofNullable(config.getProjectSRX()).orElse(Preferences.getSRX());
-            Core.setSegmenter(new Segmenter(srx));
             
+            loadFilterSettings();
+            loadSegmentationSettings();         
+            loadTranslations();
             loadSourceFiles();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
@@ -434,6 +429,16 @@ public class RealProject implements IProject {
         Core.setFilterMaster(new FilterMaster(filters));
     }
 
+    /**
+     * Load segmentation settings, either from the project or from global options 
+    */ 
+    private void loadSegmentationSettings() {
+        // Set project specific segmentation rules if they exist, or defaults otherwise.
+        // This MUST happen before calling loadTranslations(), because projectTMX needs a segmenter.
+        SRX srx = Optional.ofNullable(config.getProjectSRX()).orElse(Preferences.getSRX());
+        Core.setSegmenter(new Segmenter(srx));   
+    }
+    
     /**
      * Align project.
      */

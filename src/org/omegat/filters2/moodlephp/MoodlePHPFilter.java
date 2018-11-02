@@ -69,7 +69,7 @@ public class MoodlePHPFilter extends AbstractFilter {
     /**
      * If true, will remove non-translated segments in the target files
      */
-    public static boolean removeStringsUntranslated = false;
+    public boolean removeStringsUntranslated = false;
 
     @Override
     public Instance[] getDefaultInstances() {
@@ -117,7 +117,6 @@ public class MoodlePHPFilter extends AbstractFilter {
 
         StringBuilder block = new StringBuilder();
         boolean isInBlock = false;
-        boolean foundQuotes = false;
         int quotes = 39;
         int previousChar = 0;
         int c;
@@ -133,7 +132,6 @@ public class MoodlePHPFilter extends AbstractFilter {
 
             if (c == ';' && isInBlock && previousChar == quotes) {
                 isInBlock = false;
-                foundQuotes = false;
                 processBlock(block.toString(), outFile);
                 block.setLength(0);
             } 

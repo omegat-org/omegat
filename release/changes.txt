@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 3
 ----------------------------------------------------------------------
-  0 Enhancement
+  1 Enhancement
   2 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
 4.1.5 update 3 vs 4.1.5 update 2
+
+  Implemented requests:
+
+  - Add Moodle .php files filter
+  https://sourceforge.net/p/omegat/feature-requests/1407/
 
   Bug fixes:
 

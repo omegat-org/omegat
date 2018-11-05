@@ -8,6 +8,7 @@
                2012 Aaron Madlon-Kay
                2013 Kyle Katarn, Aaron Madlon-Kay
                2014 Alex Buloichik
+               2018 Enrique Estevez Fernandez
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -81,6 +82,9 @@ import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
+import java.util.ArrayList;
+import org.omegat.core.data.EntryKey;
+import org.omegat.util.TMXWriter2;
 
 /**
  * The main OmegaT class, used to launch the program.
@@ -477,16 +481,39 @@ public final class Main {
 
         System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
 
-        Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
-        Map<String, PrepareTMXEntry> result = new TreeMap<>();
-        for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
-            result.put(en.getKey(), new PrepareTMXEntry(en.getValue()));
+        // If the project is not configured to propagate the translations,
+        // it generates tmx with multiples translations
+        if (p.getProjectProperties().isSupportDefaultTranslations())
+        {
+            Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
+            Map<String, PrepareTMXEntry> result = new TreeMap<>();
+            for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
+                result.put(en.getKey(), new PrepareTMXEntry(en.getValue()));
+            }
+            String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
+            TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), result);
+        // Generation of the alternative tmx file
+        } else
+        {
+            Map<EntryKey, TMXEntry> data;
+            data = p.alignAlt(p.getProjectProperties(), new File(dir));
+            String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
+            File filename = new File(tmxFile);
+            TMXWriter2 wr = new TMXWriter2(filename, p.getProjectProperties().getSourceLanguage(), p.getProjectProperties().getTargetLanguage(),
+                    p.getProjectProperties().isSentenceSegmentingEnabled(), true, true);
+            List<String> pa = new ArrayList<>();
+            wr.writeComment(" Alternative translations ");
+            for (Map.Entry<EntryKey, TMXEntry> en : new TreeMap<>(data).entrySet()) {
+                EntryKey k = en.getKey();
+                pa.clear();
+                pa.add("file");
+                pa.add(k.file);
+                pa.add("id");
+                pa.add(k.id);
+                wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), pa);
+            }
+            wr.close();
         }
-
-        String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
-
-        TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), result);
-
         p.closeProject();
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
         return 0;

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  13 Enhancements
+  14 Enhancements
   11 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -79,6 +79,9 @@
 
   - Machine translation results sorting
   https://sourceforge.net/p/omegat/feature-requests/1467/
+
+  - In mode=console-align, generate tmx with mutiples translations
+  https://sourceforge.net/p/omegat/feature-requests/1408/
 
 ----------------------------------------------------------------------
 OmegaT 5.7.1 (2022-03-19)

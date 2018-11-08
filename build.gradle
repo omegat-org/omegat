@@ -811,31 +811,35 @@ remotes {
 
 ext.htdocs = '/home/project-web/omegat/htdocs'
 
-task publishManual {
-    description = 'Copy the manual to SourceForge web.'
-    dependsOn webManual
-    doLast {
-        ssh.run {
-            session(remotes.sourceforgeWeb) {
-                def timestamp = new Date().format('yyyyMMddHHmmss')
-                def tempDir = "manual-temp-${timestamp}"
-                def manualDir = "manual-${omtVersion.beta.empty ? 'standard' : 'latest'}"
-                sftp {
-                    cd htdocs
-                    mkdir tempDir
-                }
-                put from: webManual.outputs.files, into: "${htdocs}/${tempDir}"
-                sftp {
-                    cd htdocs
-                    try { rename manualDir, "${manualDir}-old-${timestamp}" }
+ext.publishAtomically = { name, sourceTask ->
+    task("publish${name.capitalize()}") {
+        description = "Copy ${name} to SourceForge web."
+        dependsOn sourceTask
+        doLast {
+            ssh.run {
+                session(remotes.sourceforgeWeb) {
+                    def timestamp = new Date().format('yyyyMMddHHmmss')
+                    def tempDir = "${name}-temp-${timestamp}"
+                    def targetDir = "${name}-${omtVersion.beta.empty ? 'standard' : 'latest'}"
+                    sftp {
+                        cd htdocs
+                        mkdir tempDir
+                    }
+                    put from: sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
+                    sftp {
+                        cd htdocs
+                        try { rename targetDir, "${targetDir}-old-${timestamp}" }
                         catch (ignored) {}
-                    rename "${tempDir}/${webManual.destinationDir.name}", manualDir
-                    rmdir tempDir
+                        rename "${tempDir}/${sourceTask.destinationDir.name}", targetDir
+                        rmdir tempDir
+                    }
                 }
             }
         }
     }
 }
+
+publishAtomically("manual", webManual)
 
 task publishVersion {
     description = 'Update the version considered current by the version check.'

@@ -840,6 +840,7 @@ ext.publishAtomically = { name, sourceTask ->
 }
 
 publishAtomically("manual", webManual)
+publishAtomically("javadoc", javadoc)
 
 task publishVersion {
     description = 'Update the version considered current by the version check.'

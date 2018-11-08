@@ -837,6 +837,18 @@ task publishManual {
     }
 }
 
+task publishVersion {
+    description = 'Update the version considered current by the version check.'
+    doLast {
+        ssh.run {
+            session(remotes.sourceforgeWeb) {
+                def target = "${htdocs}/Version-${omtVersion.beta.empty ? 'standard' : 'latest'}.properties"
+                put from: 'src/org/omegat/Version.properties', into: target
+            }
+        }
+    }
+}
+
 // Allow setting the max heap size for the run task from the command line, e.g.
 // `gradle -PrunMaxHeapSize=1024M run`
 run.maxHeapSize = findProperty('runMaxHeapSize')

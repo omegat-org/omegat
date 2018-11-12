@@ -77,7 +77,7 @@ es usar Java Web Start..
 
 Pro ce fin, discarga le sequente file e pois exeque lo:
 
-   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
 Illo installara le correcte ambiente pro tu computator e le application
 ipse al prime lanceamento. Le successive executiones non habe necessitate de esser in linea.
@@ -172,10 +172,11 @@ Le contributiones al codice es documentate in /docs/contributors.txt.
 Le previe contributores include:
 (in ordine alphabetic)
 
+  Antonio Baldwin (gestor de localisation)
   Alex Buloichik (conducer disveloppator)
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (supporto gruppo possessor, localisation administrator)
+  Jean-Christophe Helary (proprietario del gruppo de supporto, gestor de localisation)
   Maxym Mykhalchuk (disveloppator chef)
   Samuel Murray
   Henrico Pijffers (administrator de edition)

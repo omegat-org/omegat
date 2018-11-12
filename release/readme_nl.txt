@@ -73,7 +73,7 @@ het gebruiken van Java Web Start.
 
 Download voor dit doel het volgende bestand en voer het uit:
 
-   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
 Het zal de juiste omgeving voor uw computer installeren en de toepassing
 zelf bij de eerste keer dat het wordt uitgevoerd. Latere aanroepen behoeven niet online te worden gedaan.
@@ -168,7 +168,8 @@ Bijdragen aan de code zijn gedocumenteerd in /docs/contributors.txt.
 Eerdere bijdragen van:
 (alfabetische volgorde)
 
-  Alex Buloichik (lead developer)
+  Anthony Baldwin (localisatiemanager)
+  Alex Buloichik (hoofdontwikkelaar)
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (eigenaar ondersteuningsgroep, localisatiemanager)

@@ -20,6 +20,7 @@ call ant -Dlanguage=nl all
 call ant -Dlanguage=no instant-start
 call ant -Dlanguage=pt_BR all
 call ant -Dlanguage=ru all
+call ant -Dlanguage=sc instant-start
 call ant -Dlanguage=sv instant-start
 call ant -Dlanguage=uk instant-start
 call ant -Dlanguage=zh_CN html

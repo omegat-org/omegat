@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   1 Enhancement
   2 Bug fixes
-  4 Localisation updates
+  5 Localisation updates
 ----------------------------------------------------------------------
 4.1.5 update 3 vs 4.1.5 update 2
 
@@ -26,6 +26,7 @@ as an offline condition
   - Interlingua localisation updated to 4.1.5 update 3 (UI, readme)
   - Italian localisation updated to 4.1.5 update 3 (UI, scripts, readme)
   - Russian localisation updated to 4.1.5 update 3 (UI, scripts, readme)
+  - Sardinian localisation updated to 4.1.5 update 3 (Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 2 (2018-09-19)

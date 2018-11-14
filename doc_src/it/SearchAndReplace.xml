@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.searchandreplace">
   <title>Cerca e sostituisci<indexterm class="singular">
-      <primary>Ricerca</primary>
+      <primary>Cerca</primary>
     </indexterm></title>
 
   <section id="section.searchreplace.window">

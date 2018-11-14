@@ -27,7 +27,7 @@ as an offline condition
 
   - Dutch localisation updated to 4.1.5 update 3 (UI, readme)
   - Interlingua localisation updated to 4.1.5 update 3 (UI, readme)
-  - Italian localisation updated to 4.1.5 update 3 (UI, scripts, readme)
+  - Italian localisation updated to 4.1.5 update 3 (UI, scripts, readme, documentation)
   - Russian localisation updated to 4.1.5 update 3 (UI, scripts, readme)
   - Sardinian localisation updated to 4.1.5 update 3 (Instant Start)
 

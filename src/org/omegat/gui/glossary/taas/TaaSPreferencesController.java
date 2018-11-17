@@ -27,7 +27,6 @@
 package org.omegat.gui.glossary.taas;
 
 import java.awt.Desktop;
-import java.io.IOException;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,7 +72,7 @@ public class TaaSPreferencesController extends BasePreferencesController {
         panel.getKeyButton.addActionListener(e -> {
             try {
                 Desktop.getDesktop().browse(URI.create(TAAS_KEY_URL));
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(),
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }

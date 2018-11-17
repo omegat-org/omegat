@@ -26,7 +26,6 @@
 package org.omegat.gui.preferences.view;
 
 import java.awt.Desktop;
-import java.io.IOException;
 import java.net.URI;
 
 import javax.swing.JComponent;
@@ -62,7 +61,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.browsePluginsButton.addActionListener(e -> {
             try {
                 Desktop.getDesktop().browse(URI.create(PLUGINS_WIKI_URL));
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(),
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }

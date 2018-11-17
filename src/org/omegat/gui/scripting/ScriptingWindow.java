@@ -930,7 +930,7 @@ public class ScriptingWindow {
         item.addActionListener(e -> {
             try {
                 Help.showJavadoc();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(frame, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
                         JOptionPane.ERROR_MESSAGE);
                 Log.log(ex);

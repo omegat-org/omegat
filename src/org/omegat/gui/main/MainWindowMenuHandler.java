@@ -372,7 +372,7 @@ public final class MainWindowMenuHandler {
          // Bug #902: commit the current entry first
         // We do it before checking project status, so that it can eventually change it
         if (Core.getProject().isProjectLoaded()) {
-            Core.getEditor().commitAndLeave();		
+            Core.getEditor().commitAndLeave();
         }
 
         boolean projectModified = false;

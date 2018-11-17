@@ -95,16 +95,16 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             }
         }
     }
-    
+
     /** Cycle getDisplayedTranslation **/
     private Iterator<MachineTranslationInfo> cycle;
 
     public String getDisplayedTranslation() {
-        if ((cycle == null) || (! cycle.hasNext())) {
+        if ((cycle == null) || (!cycle.hasNext())) {
             cycle = displayed.iterator();
         }
-        if (! cycle.hasNext()) {    // only possible if displayed.isEmpty()
-            return null; 
+        if (!cycle.hasNext()) { // only possible if displayed.isEmpty()
+            return null;
         }
         return cycle.next().result;
     }
@@ -140,7 +140,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         UIThreadsUtil.mustBeSwingThread();
 
         if (data != null && data.result != null) {
-            displayed.add (data);            
+            displayed.add (data);
             setText(getText() + data.result + "\n<" + data.translatorName + ">\n\n");
         }
     }

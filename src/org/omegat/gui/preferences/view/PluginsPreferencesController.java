@@ -65,7 +65,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
             } catch (IOException ex) {
                 JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(),
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
-
             }
         });
     }

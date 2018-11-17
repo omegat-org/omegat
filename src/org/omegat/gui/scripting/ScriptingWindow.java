@@ -931,6 +931,8 @@ public class ScriptingWindow {
             try {
                 Help.showJavadoc();
             } catch (IOException ex) {
+                JOptionPane.showMessageDialog(frame, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+                        JOptionPane.ERROR_MESSAGE);
                 Log.log(ex);
             }
         });

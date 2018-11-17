@@ -37,6 +37,7 @@ import java.net.URISyntaxException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -51,6 +52,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 
 /**
  * Adapted from omegat-plugin-linkbuilder by Chihiro Hio, provided under GPLv3.
@@ -254,6 +256,8 @@ public final class JTextPaneLinkifier {
                     try {
                         Desktop.getDesktop().browse(target);
                     } catch (Exception e) {
+                        JOptionPane.showConfirmDialog(null, e.getLocalizedMessage(),
+                                OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                         Log.log(e);
                     }
                 }

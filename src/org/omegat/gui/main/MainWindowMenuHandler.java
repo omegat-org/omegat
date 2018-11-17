@@ -954,6 +954,8 @@ public final class MainWindowMenuHandler {
         try {
             Help.showHelp();
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(mainWindow, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+                    JOptionPane.ERROR_MESSAGE);
             Log.log(ex);
         }
     }

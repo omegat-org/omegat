@@ -120,21 +120,22 @@ public class IADAATPATranslate extends BaseTranslate{
             return prev;   
         }
 
-       Map<String, Object> config = new HashMap<String, Object>();
-       config.put("javax.json.stream.JsonGenerator.prettyPrinting", Boolean.valueOf(true));
+        Map<String, Object> config = new HashMap<String, Object>();
+        config.put("javax.json.stream.JsonGenerator.prettyPrinting", Boolean.valueOf(true));
 
-       JsonBuilderFactory factory = Json.createBuilderFactory(config);
-       JsonObject request = factory.createObjectBuilder()
+        JsonBuilderFactory factory = Json.createBuilderFactory(config);
+        JsonObject request = factory.createObjectBuilder()
           .add("token", IADAATPAKey)
           .add("source", normaliseCode(sLang))
           .add("target", normaliseCode(tLang))          
-          .add("domain", "")//TODO validDomain
+          //.add("domain", "")
           .add("segments", factory.createArrayBuilder()
                   .add(text.substring(0, Math.min(text.length(), limit_character-1)))
           )
          .build();
-       // Get the results from IADAATPA
+        // Get the results from IADAATPA
         URLConnection connection = null;
+        
         String inputLine = "";
         try { 
               
@@ -176,7 +177,7 @@ public class IADAATPATranslate extends BaseTranslate{
                 }
                 error.close();
                 
-                return this.getJsonResults(inputLine);
+                return this.getJsonResults(inputLine);//dos
                 
             } catch (Exception ex) {
                 try {
@@ -235,12 +236,22 @@ public class IADAATPATranslate extends BaseTranslate{
                             break;
                         case 17:
                             tr=StringUtil.format(OStrings.getString("IADAATPA_ERROR"), (int)error.get("code"), OStrings.getString("MT_ENGINE_IADAATPA_MISSING_SEGMENTS"));
-                            break;
+                            break;                         
                         default:
                             tr=StringUtil.format(OStrings.getString("IADAATPA_ERROR"), (int)error.get("code"), OStrings.getString("MT_ENGINE_IADAATPA_MISSING_PARAMETERS"));
                             break;
                     }
                     break;
+            case 500:
+                switch ((int)error.get("code")) {
+                        case 19:
+                            tr=StringUtil.format(OStrings.getString("IADAATPA_ERROR"), (int)error.get("code"), OStrings.getString("MT_ENGINE_IADAATPA_INVALID_LANG_CODE"));
+                            break;                                             
+                        default:
+                            tr=StringUtil.format(OStrings.getString("IADAATPA_ERROR"), (int)error.get("code"), OStrings.getString("MT_ENGINE_IADAATPA_MISSING_PARAMETERS"));
+                            break;
+                    }
+                    break;                
             default:
                     tr=StringUtil.format(OStrings.getString("IADAATPA_ERROR"), 1, (String)error.get("message"));
                     break;

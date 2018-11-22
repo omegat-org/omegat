@@ -7,6 +7,7 @@
                2012 Thomas Cordonnier
                2013 Alex Buloichik
                2014 Aaron Madlon-Kay
+               2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -548,15 +549,15 @@ public class TMXReader2 {
         ParsedTuv tuvLW = null; // Tuv with the same language+whatever country
         for (int i = 0; i < currentTu.tuvs.size(); i++) {
             ParsedTuv tuv = currentTu.tuvs.get(i);
-            String tuvLang = tuv.lang;
-            if (!langLanguage.regionMatches(true, 0, tuvLang, 0, 2)) {
+            String[] tuvLangParts = tuv.lang.split("\\W");
+            if (!langLanguage.equalsIgnoreCase(tuvLangParts[0])) {
                 // language not equals - there is no sense to processing
                 continue;
             }
-            if (tuvLang.length() < 3) {
+            if (tuvLangParts.length == 1) {
                 // language only, without country
                 tuvL = tuv;
-            } else if (langCountry.regionMatches(true, 0, tuvLang, 3, 2)) {
+            } else if (langCountry.equalsIgnoreCase(tuvLangParts[1])) {
                 // the same country
                 tuvLC = tuv;
             } else {

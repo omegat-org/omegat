@@ -818,6 +818,21 @@ could fail with duplicate numbers
   - Interlingua localisation updated to 4.0 (UI, documentation, readme, scripts)
 
 ----------------------------------------------------------------------
+ OmegaT 3.6.0 update 11
+----------------------------------------------------------------------
+  0 Enhancement
+  1 Bug fix
+  0 Localisation update
+----------------------------------------------------------------------
+3.6.0 update 11 vs 3.6.0 update 10
+
+  Bug fixes:
+
+  - Translations not loaded when first 2 letters of 3-character language 
+codes are the same
+  https://sourceforge.net/p/omegat/bugs/845/
+
+----------------------------------------------------------------------
  OmegaT 3.6.0 update 10
 ----------------------------------------------------------------------
   0 Enhancement

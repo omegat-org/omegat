@@ -38,11 +38,11 @@ public class IADAATPATranslate extends BaseTranslate{
 
     protected static final String GT_URL = "https://app.iadaatpa.eu/api/translate";
 
-    protected static final int limit_character = 1000;
+    protected static final int LIMIT_CHARACTER = 1000;
     
-    private ArrayList<String> available_language_codes = new ArrayList<String>();
-
-    private void setAvailable_language_codes() {
+    private ArrayList<String> AVAILABLE_LANGUAGE_CODES = new ArrayList<String>();
+ 
+    private void setAvailableLanguageCodes() {
        
        String IADAATPAKey = getCredential(PROPERTY_API_KEY);
 
@@ -59,15 +59,15 @@ public class IADAATPATranslate extends BaseTranslate{
             while ((inputLine = in.readLine()) != null) 
                 codesIADAATPA += inputLine;
             in.close();
-            this.available_language_codes = getJsonCodes(codesIADAATPA);            
+            this.AVAILABLE_LANGUAGE_CODES = getJsonCodes(codesIADAATPA);            
             
         }catch (Exception e){
                 System.err.println("IOException: " + e);            
         }
     }
 
-    private ArrayList<String> getAvailable_language_codes() {
-        return available_language_codes;
+    private ArrayList<String> getAvailableLanguageCodes() {
+        return AVAILABLE_LANGUAGE_CODES;
     }    
     
     @Override
@@ -105,9 +105,9 @@ public class IADAATPATranslate extends BaseTranslate{
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        if(this.available_language_codes.isEmpty())
+        if(this.AVAILABLE_LANGUAGE_CODES.isEmpty())
         {
-         this.setAvailable_language_codes();
+         this.setAvailableLanguageCodes();
         }        
                 
         String IADAATPAKey = getCredential(PROPERTY_API_KEY);
@@ -126,11 +126,11 @@ public class IADAATPATranslate extends BaseTranslate{
         JsonBuilderFactory factory = Json.createBuilderFactory(config);
         JsonObject request = factory.createObjectBuilder()
           .add("token", IADAATPAKey)
-          .add("source", normaliseCode(sLang))
-          .add("target", normaliseCode(tLang))          
+          .add("source", getNormaliseCode(sLang))
+          .add("target", getNormaliseCode(tLang))          
           //.add("domain", "")
           .add("segments", factory.createArrayBuilder()
-                  .add(text.substring(0, Math.min(text.length(), limit_character-1)))
+                  .add(text.substring(0, Math.min(text.length(), LIMIT_CHARACTER-1)))
           )
          .build();
         // Get the results from IADAATPA
@@ -292,10 +292,10 @@ public class IADAATPATranslate extends BaseTranslate{
      *            An OmegaT language
      * @return A normalise code for IADAATPA languages (ISO 639-1 Code)
      */
-    private String normaliseCode(Language language) { 
+    private String getNormaliseCode(Language language) { 
         
         String lCode = language.getLanguage();
-        if(!this.available_language_codes.isEmpty() && !this.available_language_codes.contains(language.getLanguage()))
+        if(!this.AVAILABLE_LANGUAGE_CODES.isEmpty() && !this.AVAILABLE_LANGUAGE_CODES.contains(language.getLanguage()))
         {
             lCode = language.getLanguageCode();
         }      

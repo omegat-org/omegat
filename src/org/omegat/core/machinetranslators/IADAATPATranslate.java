@@ -49,11 +49,11 @@ public class IADAATPATranslate extends BaseTranslate{
        URLConnection connection = null;
        String codesIADAATPA = "";
        try { 
-             
+            
             URL iadaatpa = new URL("https://app.iadaatpa.eu/api/describelanguages/"+IADAATPAKey);
             connection = iadaatpa.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(
-                                    connection.getInputStream()));
+                                    connection.getInputStream(), "UTF-8"));
             String inputLine;
             
             while ((inputLine = in.readLine()) != null) 

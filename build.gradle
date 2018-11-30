@@ -109,7 +109,7 @@ dependencies {
         compile 'com.github.takawitter:trie4j:0.9.8'
 
         // Encoding dectection
-        compile 'com.github.albfernandez:juniversalchardet:2.1.0'
+        compile 'com.github.albfernandez:juniversalchardet:2.2.0'
 
         // Legacy projects re-hosted on GitHub + Bintray
         compile 'org.omegat:vldocking:3.0.5'

@@ -7,8 +7,8 @@
  * for event driven automatically execution.
  *
  * @author  Yu Tang
- * @date    2014-09-16
- * @version 0.2
+ * @date    2018-12-05
+ * @version 0.3
  */
 
 import org.omegat.util.Log

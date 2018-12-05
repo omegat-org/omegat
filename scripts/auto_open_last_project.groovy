@@ -37,7 +37,7 @@ void openLastProject() {
 JMenuItem getLastProjectMenuItem() {
     JMenuItem item = null
     try {
-        JMenu menu = (JMenu) mainWindow.mainMenu.projectRecentMenuItem
+        JMenu menu = (JMenu) mainWindow.mainMenu.projectOpenRecentMenuItem
         if (menu.itemCount > 0) {
             item = menu.getItem(0)
         }

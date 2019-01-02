@@ -188,15 +188,15 @@ yand_m :horizontal -> yand_t ;
 yand_t "Enter your Yandex Translate API key. It can be requested at\nhttps://api.yandex.com/key/form.xml?service=trnsl" -> @ ;
 yand_hc :horizontal -> @close="Close" ;
 
-# IADAATPA Translate
+# MTHUB Translate
 
-IADAATPA " IADAATPA Translate API key" -> IADAATPA_k IADAATPA_help ;
-IADAATPA_k "IADAATPA Translate API key" -> @password="" ;
+MTHUB " MTHUB Translate API key" -> MTHUB_k MTHUB_help ;
+MTHUB_k "MTHUB Translate API key" -> @password="" ;
 
-IADAATPA_help :dialog "Help" -> IADAATPA_m IADAATPA_hc ;
-IADAATPA_m :horizontal -> IADAATPA_t ;
-IADAATPA_t "Enter your IADAATPA Translate API key. If you don’t know yours, please contact help@prompsit.com" -> @ ;
-IADAATPA_hc :horizontal -> @close="Close" ;
+MTHUB_help :dialog "Help" -> MTHUB_m MTHUB_hc ;
+MTHUB_m :horizontal -> MTHUB_t ;
+MTHUB_t "Enter your MTHUB Translate API key. If you don’t know yours, please contact help@prompsit.com" -> @ ;
+MTHUB_hc :horizontal -> @close="Close" ;
 
 
 ### Appearance settings tab
@@ -288,5 +288,5 @@ close_button -> @close="Cancel" ;
 
 ### Launch command
 
-omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.subscription_key=" ms_azk " -Dibmwatson.api.login=" ibm_login " -Dibmwatson.api.password=" ibm_pass " -Ddeepl.api.key=" deepl " -Dmymemory.api.email=" mymem_em " -Dmymemory.api.key=" mymem_api " -Dtaas.user.key=" taas " -Dyandex.api.key=" yand " -Diadaatpa.api.key=" IADAATPA " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team ;
+omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.subscription_key=" ms_azk " -Dibmwatson.api.login=" ibm_login " -Dibmwatson.api.password=" ibm_pass " -Ddeepl.api.key=" deepl " -Dmymemory.api.email=" mymem_em " -Dmymemory.api.key=" mymem_api " -Dtaas.user.key=" taas " -Dyandex.api.key=" yand " -Dmthub.api.key=" MTHUB " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team ;
 

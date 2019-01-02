@@ -4,18 +4,12 @@
  * and open the template in the editor.
  */
 package org.omegat.core.machinetranslators;
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.awt.Window;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader; 
-import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
-import java.util.HashMap;
 import java.util.Map;  
-import javax.json.Json;
-import javax.json.JsonBuilderFactory;
-import javax.json.JsonObject;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
@@ -23,16 +17,33 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;   
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.OutputStream;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
  * @author prompsit
  */
+
+class IADATPATranslateRequest{
+    public String token;
+    public String source;
+    public String target;
+    public ArrayList<String> segments = new ArrayList<String>();
+
+    public IADATPATranslateRequest(String token, String source, String target, ArrayList<String> segments) {
+        this.token = token;
+        this.source = source;
+        this.target = target;
+        this.segments = segments;
+    }  
+}
+
+
 public class IADAATPATranslate extends BaseTranslate{
     private static final String PROPERTY_API_KEY = "IADAATPA.api.key";
 
@@ -119,89 +130,54 @@ public class IADAATPATranslate extends BaseTranslate{
         if (prev != null) {
             return prev;   
         }
-
-        Map<String, Object> config = new HashMap<String, Object>();
-        config.put("javax.json.stream.JsonGenerator.prettyPrinting", Boolean.valueOf(true));
-
-        JsonBuilderFactory factory = Json.createBuilderFactory(config);
-        JsonObject request = factory.createObjectBuilder()
-          .add("token", IADAATPAKey)
-          .add("source", getNormaliseCode(sLang))
-          .add("target", getNormaliseCode(tLang))          
-          //.add("domain", "")
-          .add("segments", factory.createArrayBuilder()
-                  .add(text.substring(0, Math.min(text.length(), LIMIT_CHARACTER-1)))
-          )
-         .build();
-        // Get the results from IADAATPA
-        URLConnection connection = null;
+        String charset = "UTF-8";        
         
-        String inputLine = "";
-        try { 
-              
-            String charset = "UTF-8";
-            
-            connection = (HttpURLConnection) new URL(GT_URL).openConnection();
+        try
+        {            
+            URLConnection connection = new URL(GT_URL).openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Accept-Charset", charset);
             connection.setRequestProperty("Content-Type", "application/json ;charset=" + charset);
+         
+            OutputStream output = connection.getOutputStream();
+         
+            ObjectMapper om = new ObjectMapper();
             
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream(),charset);
-            writer.write(request.toString());
-            writer.flush();
-            String line;   
-            StringBuilder response = new StringBuilder("");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(),charset));
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-            writer.close();
-            reader.close();
-            String tr = getJsonResults(response.toString());
+            ArrayList<String> segments = new ArrayList<String>();
+            segments.add(text.substring(0, Math.min(text.length(), LIMIT_CHARACTER-1)));
+            
+            IADATPATranslateRequest itr = new IADATPATranslateRequest(IADAATPAKey, getNormaliseCode(sLang), getNormaliseCode(tLang), segments);
+                  
+            String json = om.writeValueAsString(itr);
+            output.write(json.getBytes(charset));
+                
+            
+            Map<String, Object> map = om.readValue(connection.getInputStream(), new TypeReference<Map<String,Object>>(){});
+            String tr = getJsonResults(map);
            
             putToCache(sLang, tLang, text, tr);
-            return tr;
+            return tr;            
 
-        }catch (MalformedURLException e){
+        }        
+        catch(MalformedURLException e)
+        {
             return StringUtil.format(OStrings.getString("IADAATPA_ERROR"), e.getMessage());
-        }catch (IOException e){
-            System.err.println("IOException: " + e);
-         
-            InputStream error = ((HttpURLConnection) connection).getErrorStream();
-
-            try {
-                int data = error.read();
-                while (data != -1) {                   
-                    inputLine = inputLine + (char)data;
-                    data = error.read();
-                }
-                error.close();
-                
-                return this.getJsonResults(inputLine);//dos
-                
-            } catch (Exception ex) {
-                try {
-                    if (error != null) {
-                        error.close();
-                    }
-                } catch (Exception e2) {
-                    return StringUtil.format(OStrings.getString("IADAATPA_ERROR"), e2.getMessage());
-                }
-            }return StringUtil.format(OStrings.getString("IADAATPA_ERROR"), e.getMessage());
-        }catch (Exception e){
-            return StringUtil.format(OStrings.getString("IADAATPA_ERROR"), e.getMessage());
-        }   
+        }        
+        catch (Exception e){                                 
+            if(e.getMessage().contains("401")){
+                return StringUtil.format(OStrings.getString("IADAATPA_ERROR"), 401 , OStrings.getString("MT_ENGINE_IADAATPA_INVALID_KEY"));
+            }else if(e.getMessage().contains("400")){
+                return StringUtil.format(OStrings.getString("IADAATPA_ERROR"), 400, OStrings.getString("MT_ENGINE_IADAATPA_MISSING_PARAMETERS"));
+            }else if(e.getMessage().contains("500")){
+                return StringUtil.format(OStrings.getString("IADAATPA_ERROR"), 500, OStrings.getString("MT_ENGINE_IADAATPA_INVALID_LANG_CODE"));
+            }else{
+                return StringUtil.format(OStrings.getString("IADAATPA_ERROR"), 1, e.getMessage());
+            }            
+        }
     }
     
     @SuppressWarnings("unchecked")
-    protected String getJsonResults(String json) {
-        Map<String, Object> rootNode;
-        try {
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
-        } catch (Exception e) {
-            Log.logErrorRB(e, "MT_JSON_ERROR");
-            return OStrings.getString("MT_JSON_ERROR");
-        }
+    protected String getJsonResults(Map<String, Object> rootNode) {
          
         String tr = "";
         
@@ -302,5 +278,4 @@ public class IADAATPATranslate extends BaseTranslate{
                        
         return lCode;
     }
-          
 }

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package org.omegat.core.machinetranslators;
-import com.fasterxml.jackson.core.type.TypeReference;
 import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.InputStreamReader; 
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.OutputStream;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 /**
  *
@@ -266,7 +266,7 @@ public class MTHUBTranslate extends BaseTranslate{
      *
      * @param language
      *            An OmegaT language
-     * @return A normalise code for MTHUB languages (ISO 639-1 Code)
+     * @return A normalise code for MT-HUB languages (ISO 639-1 Code)
      */
     private String getNormaliseCode(Language language) { 
         

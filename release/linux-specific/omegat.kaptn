@@ -233,11 +233,12 @@ aa_hc :horizontal -> @close="Close";
 
 # Look and feel settings
 
-laf :double "Look and Feel" -> deflaf | deflaf_steel | gtk | motif | laf_help ;
+laf :horizontal "Look and Feel" -> deflaf | deflaf_steel | gtk | motif | nimbus | laf_help ;
 deflaf "Default" -> " " ;
 deflaf_steel "Default (Steel)" -> "-Dswing.metalTheme=steel" ;
 gtk "GTK" -> " -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel " ;
 motif "Motif" -> " -Dswing.defaultlaf=com.sun.java.swing.plaf.motif.MotifLookAndFeel " ;
+nimbus "Nimbus" -> " -Dswing.crossplatformlaf=javax.swing.plaf.nimbus.NimbusLookAndFeel " ;
 laf_help :dialog "Help" -> laf_m laf_hc ;
 laf_m :horizontal ->  laf_t ;
 laf_t "Modern Linux distributions attempt to create \na uniform look and feel, and you may notice little or no difference with these settings." -> @ ;

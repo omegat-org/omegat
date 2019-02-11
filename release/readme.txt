@@ -164,6 +164,7 @@ Current team:
 
   Vincent Bidaux (documentation manager)
   Didier Briel (OmegaT project manager, Twitter community manager)
+  Marco Cevoli (Telegram community manager)
   Kos Ivantsof (localisation manager)
   Aaron Madlon-Kay (integration manager)
   Concepción Martin (Facebook community manager)

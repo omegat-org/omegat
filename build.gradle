@@ -210,6 +210,8 @@ jar {
 }
 
 ext {
+    distsDir = file("${buildDir}/${distsDirName}")
+
     assetDir = findProperty('assetDir') ?: '../'
 
     macJRE = file("${assetDir}/jre-mac-root")

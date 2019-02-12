@@ -5,8 +5,8 @@ plugins {
     id 'application'
     id 'maven-publish'
     id 'eclipse'
-    id 'findbugs'
     id 'checkstyle'
+    id "com.github.spotbugs" version '1.6.9'
     id 'de.gliderpilot.jnlp' version '1.2.5'
     id 'com.jfrog.bintray' version '1.8.4'
     id 'org.hidetake.ssh' version '2.9.0'
@@ -677,11 +677,11 @@ allprojects {
     }
 }
 
-findbugs {
+spotbugs {
     reportLevel = 'high'
 }
 
-tasks.withType(FindBugs) {
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
     reports {
         xml {
             enabled envIsCi

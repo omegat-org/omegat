@@ -124,7 +124,7 @@ public final class Main {
         // Workaround for bug #812. Remove this when appropriate; see
         // https://sourceforge.net/p/omegat/bugs/812/
         System.setProperty("jna.encoding", Charset.defaultCharset().name());
-
+        
         PARAMS.putAll(CLIParameters.parseArgs(args));
 
         String projectDir = PARAMS.get(CLIParameters.PROJECT_DIR);
@@ -165,7 +165,7 @@ public final class Main {
         Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System.getProperty("java.version"),
                 System.getProperty("java.home"));
 
-        System.setProperty("http.user", OStrings.getDisplayNameAndVersion());
+        System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
 
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();

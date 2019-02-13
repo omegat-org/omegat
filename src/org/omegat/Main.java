@@ -124,7 +124,7 @@ public final class Main {
         // Workaround for bug #812. Remove this when appropriate; see
         // https://sourceforge.net/p/omegat/bugs/812/
         System.setProperty("jna.encoding", Charset.defaultCharset().name());
-        
+
         PARAMS.putAll(CLIParameters.parseArgs(args));
 
         String projectDir = PARAMS.get(CLIParameters.PROJECT_DIR);

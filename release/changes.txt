@@ -2,7 +2,7 @@
  OmegaT 4.1.5 update 4
 ----------------------------------------------------------------------
   1 Enhancement
-  2 Bug fix
+  3 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
 4.1.5 update 4 vs 4.1.5 update 3
@@ -17,6 +17,9 @@
 
   -  Error 404 when using IBM Watson
   https://sourceforge.net/p/omegat/bugs/932/
+
+  - The user agent (used for instance for machine translation) was
+not defined correctly
 
   Localisation Updates:
 

@@ -511,6 +511,18 @@ public final class MainWindowMenuHandler {
         SegmentExportImport.exportCurrentSelection(selection);
     }
 
+    public void editSearchDictionaryMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String selection = Core.getEditor().getSelectedText();
+        if (selection == null) {
+            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+            selection = ste.getSrcText();
+        }
+        Core.getDictionaries().searchText(selection);
+    }
+
     public void editCreateGlossaryEntryMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;

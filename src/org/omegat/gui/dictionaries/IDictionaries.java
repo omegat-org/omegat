@@ -36,4 +36,6 @@ public interface IDictionaries {
     void addDictionaryFactory(IDictionaryFactory factory);
 
     void removeDictionaryFactory(IDictionaryFactory factory);
+
+    void searchText(String text);
 }

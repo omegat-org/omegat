@@ -4305,8 +4305,1808 @@
           <beforebreak>\s[A-ZŁŚŻ]\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
+
+      <!-- PL
+      Polish non-break rules, contributed by Szymon Luczak -->
+
+        <rule break="no">
+          <beforebreak>[0-9]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b[A-ZŁŚŻŹĆŃ]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\s[a-złśzźćń]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)łac\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)łow\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)śp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)śr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)środ.\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)św\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)źr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)żart\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)żeń\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)żegl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)żyw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)chr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)Dz\.(?i)U\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)Dz\.(?i)Urz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\bN\.T\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)P\.S\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)A\.C\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)a\.i\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)a\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)a\.t\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)a\.s\.c\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)a\.u\.c\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)abs\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)absolw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)acc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)adm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)aero\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)akust\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)al\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)alchem\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)anat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ang\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ant\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)antr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)arch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)archeol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)archit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)art\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)astr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)aut\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bł\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)błp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)b\.d\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)b\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)b\.p\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)b\.r\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)b\.u\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bajk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)belg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bezok\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bibl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)biochem\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)biol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)biur\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)blp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bot\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)br\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bud\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cdn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)chłodn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)chem\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)chor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)col\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cybern\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cykl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cyt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)czyt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dł\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)szer\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wys\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)daw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dawn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dent\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dep\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dgn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)diag\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)doc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dod\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dosł\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dot\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)drewn.\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)druk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ds\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dyr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dziec\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)e\.a\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)e\.i\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)eeg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)egz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ekon\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ekspr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)el\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)elakust\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)elektr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)emg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)energ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)etc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)etn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fam\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fant\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)farb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)farm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fax\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)film\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)filoz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fin\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fiz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fizjol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)flam\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fot\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)franc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)górn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gł\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gen\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)geod\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)geogr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)geol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)geotech\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)giełd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gleb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)godz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gosp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hab\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hand\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)handl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hist\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hutn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hydr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hydrogeol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ib\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ibid\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)iin\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)inż\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)in\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)inf\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)inform\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)inst\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)iron\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)itd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)itp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)jęz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)jeźdz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)jedn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)jm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)jun\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)jw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kap\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)chor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sierż\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)szer\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)karc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kard\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kier\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kolej\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kompl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kop\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kosm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kosmet\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kraw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ks\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)książ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)książk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)księg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kul\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kult\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kulin\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)l\.c\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)l\.d\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)l\.dz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lab\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ldz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)leśn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lek\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lek\.dent\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lek\.stom\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lek\.wet\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lekceważ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lic\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)licz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lmn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)log\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lotn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)m\.b\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)l\.p\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)m\.in\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)maks\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)max\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)masz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)med\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)meteor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mies\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mil\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)min\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)miner\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mit\.gr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mkw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mld\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mors\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)muz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)n\.med\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)n\.e\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)n\.p\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nadzw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nar\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nast\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nawig\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ndzw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nid\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nieżyw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nieos\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)niesygn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nlb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)np\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nukl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)num\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)numiz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nzw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ośw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)o\.o\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ob\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)obraźl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)obuw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)obyw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ocean\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)odc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)odl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ogr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)op\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)opak\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)op\.cit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)org\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)os\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)płd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)płn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)p\.C\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)p\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)p\.n\.e\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)p\.o\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)p\.wyż\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)paleont\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)paliw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)par\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)part\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pas\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pedag\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pejor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pes\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)petr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pieszcz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pieszczot\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)podn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poet\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poez\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pograd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)polit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)por\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)posp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pot\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pouf\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)powł\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pow\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pow\.b\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)praw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)prawn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)proc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)prof\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)prz\.Chr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)przec\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)przecz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)przen\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)przest\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)przyim\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)przym\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)przysłów\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)przysł\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)przysz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ps\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)psych\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)psychol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)psycht\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pszcz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)publ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)qu\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rż\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rad\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)red\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)reg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rel\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)roln\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ros\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)niem\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rozdz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rozk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rozp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rtg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ryb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ryc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rys\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rzad\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rzecz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rzem\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)słow\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)s\.a\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)s\.c\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sam\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)san\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sek\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sen\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)siln\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)slang\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)socjal\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spój\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spaw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spec\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spoż\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sport\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ss\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)st\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mł\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)stom\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)str\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)subkl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sygn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)szach\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)szkl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)szkol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)szt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tłum\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tab\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tabl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)teatr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)techn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tel\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)telef\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)telegr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)term\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tow\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)transp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tw\.szt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tyg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tys\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tzn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tzw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ub\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ub\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ub\.r\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ubezp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)uczn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ukr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ul\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ur\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zam\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)urb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)urzęd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)urz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)urzecz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ust\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)uw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)uw\.tłum\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)uzbr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)v\.v\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vs\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)włók\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)włókn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wł\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)w\.d\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)w\.g\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wet\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wiech\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wiertn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)woj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wojsk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wsch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wsp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wulg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ww\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wyż\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wym\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wybuch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wydz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wyj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wyk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wykrz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wym\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wytrz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wzbog\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)wzgl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zł\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zach\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zagr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zaim\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zazw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zdj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zdr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zeg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zgr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zob\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zool\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zootech\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zw\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)[a-zżśćźń]??(?i)[a-zżśćźń]\.(?i)[a-zżśćźń]??(?i)[a-zżśćźń]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)[a-zżśćźń]??(?i)[a-zżśćźń]\.\s(?i)[a-zżśćźń]??(?i)[a-zżśćźń]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
       </languagerule>
-      
+            
        <!-- RU
       Russian non-break rules
       including http://sourceforge.net/support/tracker.php?aid=2835535 -->
@@ -4628,6 +6428,1880 @@
         </rule>
       </languagerule>
 
+      <!-- SK
+      Slovak non-break rules, contributed by Szymon Luczak -->
+
+      <languagerule languagerulename="Slovak">
+        <rule break="no">
+          <beforebreak>[0-9]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b[A-ZŠŽČŇĽÁÚ]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\s[a-zšžčňľáú]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)ázij\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)úct\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)účt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)čísl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)číslov\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)č\.d\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)č\.u\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)čast\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)čes\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)čl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)čs\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ľud\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)š\.p\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)šach\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)škol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)špan\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)šport\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)št\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)štud\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)štyl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)švéd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)žart\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)žel\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)žen\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)žid\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)živ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>A\.D\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>Bc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>CSc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>DrSc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)ing\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)arch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)ing\.(?i)arch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>JUDr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>L\.S\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>MDDr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>MUDr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>MVDr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)mgr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>art\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>Mgr\.art\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>PeadDr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>PhD\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>PhDr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>PharmDr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>ThDr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)zb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>Z\.z\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>Zb\.z\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>RNDr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pod\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)a\.a\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)a\.h\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)a\.s\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)abstr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)admin\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)afr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)akuz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)al\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)amer\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)anat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)angl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)anorg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)antrop\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ap\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)arab\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)arch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)archeol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)archit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)argot\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)astron\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)atď\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)aut\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bás\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)býv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)b\.c\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)b\.r\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ban\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bezpredm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bibl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)biol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bot\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)bud\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)burž\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)charakt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)chem\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)chorv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cirk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cukrár\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)cukrovar\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)defekt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)det\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dipl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)distrib\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)div\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)doc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dok\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dopr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dram\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)druh\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)duš\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)dvojčl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ekol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ekon\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)elektr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)elektrotech\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)energet\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)est\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)etn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)eur\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ev\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)evid\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)expr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fín\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fam\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)farm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fax\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)feud\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)filat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)film\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)filol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)filoz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fin\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fon\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fot\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)franc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fraz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fyz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)fyziol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)garb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gen\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)genet\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)geod\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)geogr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)geol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)geom\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gréc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gréckokat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)graf\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)gram\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hebr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hist\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hlav\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hod\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hosp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hovor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hromad\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hrub\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hud\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hut\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hyd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)hypok\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)inštr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ind\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)indik\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)inf\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)inform\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)int\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ing\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)int\.vr\.riad\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)iron\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>(?i)j\.č\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)jap\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)jaz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)jedn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)juž\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)juhoamer\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)juhových\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)juhozáp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kanc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kap\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kapit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kart\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ker\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kniž\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)knih\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)koef\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)konkr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kozmet\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)krajč\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kraj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kresť\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\bKr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kuch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)kult\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)latinskoamer\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lek\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)les\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)let\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lingv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)log\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lok\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)lud\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)míl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)m\.r\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)m\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)maď\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mal\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)max\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mech\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)medzinár\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)meteor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)metr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mgr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mil\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)min\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)min\.č\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)miner\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mld\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mn\.č\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mob\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)motor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)muž\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mytol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)mz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)náb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nám\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)námor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nár\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nás\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)n\.l\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)n\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)napr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nar\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)naznač\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)neživ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nedok\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)neg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nem\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)neodb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)neos\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)neskl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nespis\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nespráv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)neurč\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)neurc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)neved\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)niž\.hovor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)niekt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)nom\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)o\.i\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)o\.o\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)obch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)obr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)obuv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)obyč\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)obyc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)odb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)odd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)odkaz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ods\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)op\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)opak\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)opt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)opyt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)org\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)os\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)oslab\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)osob\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ovoc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)označ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)oznam\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)oznam\.tech\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pís\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pôdohosp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pôv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)p\.č\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)par\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)peňaž\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ped\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pejor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)penaž\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)phdr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)piv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poľ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poľnohosp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poľov\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pošt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)podčl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pod\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)podm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poraď\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)podst\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i) podst\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)poet\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)polit\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)politol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)polnohosp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)polov\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)polygr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pomn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)porov\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)posch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)potrav\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)použ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)práv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)príč\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)príd\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)príp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)prír\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)prísl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)príslov\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pr\.n\.l\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)prac\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)predl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)pren\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)prir\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)priraď\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)privl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)prof\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)psych\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)publ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rádiotech\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rím\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)róm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rad\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)reč\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)reg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)relat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)resp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rob\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)roc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rozhl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rozhlas\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rozk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rozlič\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rozpráv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rumun\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)rus\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ryb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)súvzť\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)s\.r\.o\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sev\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)severoamer\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)skr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)skup\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)slang\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)slov\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sloven\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)soc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)soch\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sociol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sov\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spôs\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spis\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spoj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spoloč\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)správ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)srb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)st\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)star\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)starogréc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)starorím\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)stav\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)stol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)stor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)str\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)stred\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)stredoškol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)stredoamer\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)stroj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)subšt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)subj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)sv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)svet\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)t\.č\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)t\.j\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)t\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)t\.r\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)t\.z\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tab\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tal\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tech\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tel\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)telef\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)teles\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)telev\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)teoret\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)text\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tis\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tur\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)turist\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)typ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tzn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tzv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ukaz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ul\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)umel\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)univ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)urč\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)urc\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vých\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)výr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)výsl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)výtvar\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)význ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)včel\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)všeob\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)spoj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)v\.r\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vedľ\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ved\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)ver\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)veter\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)viď\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vin\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vnút\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vodohosp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)voj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vok\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vonk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vs\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vulg\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vyj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vymedz\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vys\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vysokoškol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)vzťaž\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)záhr\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zákl\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zám\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)záp\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)západoeur\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zápor\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)z\.z\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zal\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zastaráv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zastar\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zb\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zdrav\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zdrob\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zjemn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zlat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zlom\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zool\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zried\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zv\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zvel\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zvol\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)zvrat\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)písm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)tj\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)n\.m\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.\s(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.\s(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.\s(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+        <rule break="no">
+          <beforebreak>\b(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.\s(?i)[a-zšžčňľáú]??(?i)[a-zšžčňľáú]\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule> 
+      </languagerule>
+
       <!-- ZH
       Chinese non-break rules
       http://sourceforge.net/p/omegat/feature-requests/945/ -->
@@ -4710,6 +8384,7 @@
       <languagemap languagepattern="PL.*" languagerulename="Polish"/>
       <languagemap languagepattern="RU.*" languagerulename="Russian"/>
       <languagemap languagepattern="SV.*" languagerulename="Swedish"/>
+      <languagemap languagepattern="SK.*" languagerulename="Slovak"/>
       <languagemap languagepattern="ZH.*" languagerulename="Chinese"/>
       <languagemap languagepattern=".*" languagerulename="Default"/>
       <languagemap languagepattern=".*" languagerulename="Text"/>

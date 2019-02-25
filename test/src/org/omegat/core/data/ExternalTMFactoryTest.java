@@ -44,6 +44,9 @@ import org.omegat.util.Language;
 
 public class ExternalTMFactoryTest extends TestCore {
 
+    private Language sourceLang = new Language("en");
+    private Language targetLang = new Language("pl");
+
     @Before
     public final void setUp() {
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
@@ -51,11 +54,11 @@ public class ExternalTMFactoryTest extends TestCore {
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         ProjectProperties props = new ProjectProperties() {
             public Language getSourceLanguage() {
-                return new Language("en");
+                return sourceLang;
             }
 
             public Language getTargetLanguage() {
-                return new Language("pl");
+                return targetLang;
             }
 
             @Override
@@ -74,6 +77,8 @@ public class ExternalTMFactoryTest extends TestCore {
     @Test
     public void testLoadTMX() throws Exception {
         File tmxFile = new File("test/data/tmx/resegmenting.tmx");
+        sourceLang = new Language("en");
+        targetLang = new Language("fr");
 
         assertTrue(ExternalTMFactory.isSupported(tmxFile));
 
@@ -89,6 +94,8 @@ public class ExternalTMFactoryTest extends TestCore {
     @Test
     public void testLoadPO() throws Exception {
         File tmxFile = new File("test/data/filters/po/file-POFilter-be-utf8.po");
+        sourceLang = new Language("en");
+        targetLang = new Language("be");
 
         assertTrue(ExternalTMFactory.isSupported(tmxFile));
 
@@ -109,6 +116,8 @@ public class ExternalTMFactoryTest extends TestCore {
     @Test
     public void testLoadMozillaLang() throws Exception {
         File tmxFile = new File("test/data/filters/MozillaLang/file-MozillaLangFilter-de.lang");
+        sourceLang = new Language("en");
+        targetLang = new Language("de");
 
         assertTrue(ExternalTMFactory.isSupported(tmxFile));
 

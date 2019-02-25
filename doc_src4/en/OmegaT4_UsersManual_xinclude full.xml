@@ -5,8 +5,6 @@
   <bookinfo>
     <title>OmegaT 4.1 - User's Guide</title>
 
-    <authorinitials>vs</authorinitials>
-
     <author>
       <firstname>OmegaT team</firstname>
     </author>
@@ -19,7 +17,6 @@
       instructions.</para>
     </abstract>
   </bookinfo>
-
 
   <xi:include href="InstallingAndRunning.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

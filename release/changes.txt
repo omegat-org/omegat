@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 4
 ----------------------------------------------------------------------
-  3 Enhancements
+  5 Enhancements
   3 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
@@ -12,6 +12,11 @@
   - Search selected text in the dictionary
   https://sourceforge.net/p/omegat/feature-requests/1401/
 
+  - Separate paragraphs in Editor
+  https://sourceforge.net/p/omegat/feature-requests/314/
+
+  - Show where paragraphs begin and end
+  https://sourceforge.net/p/omegat/feature-requests/431/
 
   Other changes:
 

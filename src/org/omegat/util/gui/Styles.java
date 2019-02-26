@@ -82,6 +82,7 @@ public final class Styles {
         COLOR_NBSP("#c8c8c8"),
         COLOR_WHITESPACE("#808080"),
         COLOR_BIDIMARKERS("#c80000"),
+         COLOR_PARAGRAPH_START("#aeaeae"),
         COLOR_MARK_COMES_FROM_TM("#fa8072"), // Salmon red
         COLOR_MARK_COMES_FROM_TM_XICE("#af76df"), // Purple
         COLOR_MARK_COMES_FROM_TM_X100PC("#ff9408"), // Dark Orange

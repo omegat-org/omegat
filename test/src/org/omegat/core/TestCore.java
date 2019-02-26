@@ -302,6 +302,15 @@ public abstract class TestCore {
             @Override
             public void setMarkGlossaryMatches(boolean markGlossaryMatches) {
             }
+
+            @Override
+            public void setMarkParagraphDelimitations(boolean mark) {
+            }
+
+            @Override
+            public boolean isMarkParagraphDelimitations() {
+                return false;
+            }
         };
         TestCoreInitializer.initEditor(new IEditor() {
 

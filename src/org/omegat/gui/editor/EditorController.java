@@ -14,6 +14,7 @@
                2014 Aaron Madlon-Kay, Piotr Kulik
                2015 Aaron Madlon-Kay, Yu Tang
                2016 Didier Briel
+               2019 Thomas Cordonnier, Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -400,6 +401,7 @@ public class EditorController implements IEditor {
         int loadTo = Math.min(m_docSegList.length - 1, loadFrom + count - 1);
         for (int i = loadFrom; i <= loadTo; i++) {
             SegmentBuilder builder = m_docSegList[i];
+            insertStartParagraphMark(editor.getOmDocument(), builder);
             builder.createSegmentElement(false, Core.getProject().getTranslationInfo(builder.ste));
             builder.addSegmentSeparator();
         }
@@ -744,6 +746,7 @@ public class EditorController implements IEditor {
         for (int i = 0; i < m_docSegList.length; i++) {
             if (i >= firstLoaded && i <= lastLoaded) {
                 SegmentBuilder sb = m_docSegList[i];
+                insertStartParagraphMark(doc, sb);
                 sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.ste));
                 sb.addSegmentSeparator();
             }
@@ -781,6 +784,20 @@ public class EditorController implements IEditor {
         markerController.process(m_docSegList);
 
         editor.repaint();
+    }
+
+    private void insertStartParagraphMark(Document3 doc, SegmentBuilder sb) {
+        if (Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS, false)) {
+            if (sb.getSourceTextEntry().isParagraphStart()) {
+                try {
+                    doc.insertString(doc.getLength(), Preferences.getPreferenceDefault(
+                            Preferences.MARK_PARA_TEXT, Preferences.MARK_PARA_TEXT_DEFAULT) + "\n\n",
+                            settings.getParagraphStartAttributeSet());
+                } catch (BadLocationException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
     }
 
     /*

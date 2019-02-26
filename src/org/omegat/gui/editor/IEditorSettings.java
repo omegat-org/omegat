@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
+               2019 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -65,6 +66,10 @@ public interface IEditorSettings {
     boolean isMarkWhitespace();
 
     void setMarkWhitespace(boolean markWhitespace);
+    
+    void setMarkParagraphDelimitations(boolean mark);
+    
+    public boolean isMarkParagraphDelimitations();
 
     boolean isMarkBidi();
 

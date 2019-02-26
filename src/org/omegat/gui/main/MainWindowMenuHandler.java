@@ -14,6 +14,7 @@
                2014 Aaron Madlon-Kay
                2015 Yu Tang, Aaron Madlon-Kay, Didier Briel
                2017 Didier Briel
+               2019 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -747,6 +748,13 @@ public final class MainWindowMenuHandler {
                 .getSettings()
                 .setMarkUntranslated(
                         mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
+    }
+
+    public void viewMarkParagraphStartCheckBoxMenuItemActionPerformed() {
+        Core.getEditor()
+                .getSettings()
+                .setMarkParagraphDelimitations(
+                        mainWindow.menu.viewMarkParagraphStartCheckBoxMenuItem.isSelected());
     }
 
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {

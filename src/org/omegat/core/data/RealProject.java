@@ -12,6 +12,7 @@
                2014 Aaron Madlon-Kay, Didier Briel
                2015 Aaron Madlon-Kay
                2017-2018 Didier Briel
+               2019 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -1744,7 +1745,7 @@ public class RealProject implements IProject {
                 segmentTranslation = null;
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, props,
-                    segmentTranslation, protectedParts);
+                    segmentTranslation, protectedParts, segmentIndex == 0);
             srcTextEntry.setSourceTranslationFuzzy(segmentTranslationFuzzy);
 
             if (SegmentProperties.isReferenceEntry(props)) {

@@ -45,6 +45,7 @@ public final class LanguageCodes {
 
     // Language Codes
     public static final String CATALAN_CODE = "Catalan";
+    public static final String CZECH_CODE = "Czech";
     public static final String GERMAN_CODE = "German";
     public static final String ENGLISH_CODE = "English";
     public static final String SPANISH_CODE = "Spanish";
@@ -64,6 +65,7 @@ public final class LanguageCodes {
 
     // Language Keys from Resource Bundle
     public static final String CATALAN_KEY = "CORE_SRX_RULES_LANG_CATALAN";
+    public static final String CZECH_KEY = "CORE_SRX_RULES_LANG_CZECH";
     public static final String GERMAN_KEY = "CORE_SRX_RULES_LANG_GERMAN";
     public static final String ENGLISH_KEY = "CORE_SRX_RULES_LANG_ENGLISH";
     public static final String SPANISH_KEY = "CORE_SRX_RULES_LANG_SPANISH";
@@ -86,6 +88,7 @@ public final class LanguageCodes {
 
     static {
         codeKeyHash.put(CATALAN_CODE, CATALAN_KEY);
+        codeKeyHash.put(CZECH_CODE, CZECH_KEY);
         codeKeyHash.put(GERMAN_CODE, GERMAN_KEY);
         codeKeyHash.put(ENGLISH_CODE, ENGLISH_KEY);
         codeKeyHash.put(SPANISH_CODE, SPANISH_KEY);

@@ -17,7 +17,7 @@
 
   - Linux: Nimbus look and feel added to omegat.kaptn
 
-  - New Polish and Slovak segmentation rules
+  - New Polish, Czech and Slovak segmentation rules
 
   Bug fixes:
 

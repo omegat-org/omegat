@@ -67,6 +67,7 @@ import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
 import org.omegat.util.Log;
@@ -529,17 +530,24 @@ public final class Main {
         return p;
     }
 
-    /** Execute script as PROJECT_CHANGE events. We can't use the regular project listener because
-     *  the SwingUtilities.invokeLater method used in CoreEvents doesn't stop the project processing
-     *  in console mode.
+    /**
+     * Execute script as PROJECT_CHANGE events. We can't use the regular project
+     * listener because the SwingUtilities.invokeLater method used in CoreEvents
+     * doesn't stop the project processing in console mode.
      */
     private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
         if (PARAMS.containsKey(CLIParameters.SCRIPT)) {
             File script = new File(PARAMS.get("script").toString());
-
+            Log.log(OStrings.getString("CONSOLE_EXECUTE_SCRIPT", script, eventType));
             if (script.isFile()) {
                 HashMap<String, Object> binding = new HashMap<>();
                 binding.put("eventType", eventType);
+
+                ConsoleBindings consoleBindigs = new ConsoleBindings();
+                binding.put(ScriptRunner.VAR_CONSOLE, consoleBindigs);
+                binding.put(ScriptRunner.VAR_GLOSSARY, consoleBindigs);
+                binding.put(ScriptRunner.VAR_EDITOR, consoleBindigs);
+
                 try {
                     String result = ScriptRunner.executeScript(new ScriptItem(script), binding);
                     Log.log(result);

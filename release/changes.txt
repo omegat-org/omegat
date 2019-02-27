@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 4
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   3 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
@@ -23,6 +23,11 @@
   - Linux: Nimbus look and feel added to omegat.kaptn
 
   - New Polish, Czech and Slovak segmentation rules
+
+  - When running scripts on the command line, mock bindings are added for 
+"editor" and "glossary", and "console" output are written on System.out. 
+Calls to console scripts are logged.
+
 
   Bug fixes:
 

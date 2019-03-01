@@ -2,7 +2,7 @@
  OmegaT 4.1.5 update 4
 ----------------------------------------------------------------------
   6 Enhancements
-  3 Bug fixes
+  4 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
 4.1.5 update 4 vs 4.1.5 update 3
@@ -33,11 +33,14 @@ Calls to console scripts are logged.
 
   - The script auto_open_last_project was not working
 
-  -  Error 404 when using IBM Watson
+  - Error 404 when using IBM Watson
   https://sourceforge.net/p/omegat/bugs/932/
 
   - The user agent (used for instance for machine translation) was
 not defined correctly
+
+  - OmegaT ignores Word document with different file structure
+  https://sourceforge.net/p/omegat/bugs/935/
 
   Localisation Updates:
 

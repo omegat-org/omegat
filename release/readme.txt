@@ -157,16 +157,15 @@ Contributors
 
 OmegaT is the original work of Keith Godfrey.
 
-Didier Briel is the OmegaT project manager.
+Aaron Madlon-Kay is the OmegaT project manager.
 
 Current team:
 (alphabetical order)
 
   Vincent Bidaux (documentation manager)
-  Didier Briel (OmegaT project manager, Twitter community manager)
   Marco Cevoli (Telegram community manager)
+  Jean-Christophe Helary (Twitter community manager) 
   Kos Ivantsof (localisation manager)
-  Aaron Madlon-Kay (integration manager)
   Concepción Martin (Facebook community manager)
   Briac Pilpré (webmaster)
   Lucie Vecerova (Facebook community manager)
@@ -177,6 +176,7 @@ Previous contributors include:
 (alphabetical order)
 
   Anthony Baldwin (localisation manager)
+  Didier Briel (project manager)
   Alex Buloichik (lead developer)
   Sabine Cretella
   Dmitri Gabinski

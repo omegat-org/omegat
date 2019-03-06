@@ -188,7 +188,7 @@ public final class Preferences {
 
     public static final String ALLOW_MOSES_TRANSLATE = "allow_moses_translate";
     
-    public static final String ALLOW_MTHUB_TRANSLATE = "allow_MTHUB_translate";
+    public static final String ALLOW_MTHUB_TRANSLATE = "allow_mthub_translate";
 
     /**
      * Mark glossary matches. This feature used to be called "TransTips", and the prefs key remains unchanged for

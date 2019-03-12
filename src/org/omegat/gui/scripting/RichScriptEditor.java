@@ -52,6 +52,9 @@ import org.fife.rsta.ui.search.ReplaceDialog;
 import org.fife.rsta.ui.search.ReplaceToolBar;
 import org.fife.rsta.ui.search.SearchEvent;
 import org.fife.rsta.ui.search.SearchListener;
+import org.fife.ui.autocomplete.AutoCompletion;
+import org.fife.ui.autocomplete.CompletionProvider;
+import org.fife.ui.autocomplete.DefaultCompletionProvider;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
@@ -228,6 +231,10 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         m_scriptingWindow = scriptingWindow;
         m_scriptEditor = new RSyntaxTextArea();
         m_scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN, m_scriptEditor.getFont().getSize()));
+
+        CompletionProvider provider = new DefaultCompletionProvider();
+        AutoCompletion ac = new AutoCompletion(provider);
+        ac.install(m_scriptEditor);
 
         m_scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_GROOVY);
         m_scriptEditor.setCodeFoldingEnabled(true);

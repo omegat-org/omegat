@@ -552,7 +552,6 @@ ext.makeWinTask = { args ->
                 into(destinationDir)
                 filter(ReplaceTokens, tokens: [
                     VERSION_NUMBER_SUBST: fullVersion,
-                    OUTPUT_DIR_SUBST: distsDir.path,
                     OUTPUT_BASENAME_SUBST: installerBasename.toString(),
                     JRE_COMMENT_SUBST: args.jrePath ? '' : ';',
                     CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
@@ -563,6 +562,8 @@ ext.makeWinTask = { args ->
             exec {
                 commandLine 'iscc', "${destinationDir}/OmegaT.iss"
             }
+            ant.move file: "${destinationDir}/${installerBasename}.exe",
+                todir: distsDir
         }
     }
     assemble.dependsOn args.name

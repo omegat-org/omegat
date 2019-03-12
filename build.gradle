@@ -488,12 +488,14 @@ installDist.doLast {
 }
 
 ext.haveInnoSetup = {
-    try {
-        def findIscc = 'where iscc'.execute()
-        findIscc.waitForProcessOutput()
-        return findIscc.exitValue() == 0
-    } catch (any) {
-        return false
+    ['where iscc', 'which iscc'].any {
+        try {
+            def findIscc = it.execute()
+            findIscc.waitForProcessOutput()
+            return findIscc.exitValue() == 0
+        } catch (any) {
+            return false
+        }
     }
 }
 

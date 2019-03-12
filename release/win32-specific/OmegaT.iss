@@ -151,18 +151,18 @@ var
 procedure InitializeWizard;
 begin
   Page := CreateInputOptionPage(wpWelcome,
-    CustomMessage('OmTUseInstallLanguageTitle'), CustomMessage('OmTUseInstallLanguageSubTitle'), 
+    CustomMessage('OmTUseInstallLanguageTitle'), CustomMessage('OmTUseInstallLanguageSubTitle'),
     CustomMessage('OmTUseInstallLanguageText'), False, False);
   Page.Add(CustomMessage('OmTUseInstallLanguageOption'));
   Page.Values[0] := true;
 end;
 
 procedure SetUserLanguage;
-var 
+var
   InstallLanguage: String;
   InstallCountry: String;
   IniFileAnsi: AnsiString;
-  IniFileUnicode: String; 
+  IniFileUnicode: String;
 begin
   if Page.Values[0] then
   begin

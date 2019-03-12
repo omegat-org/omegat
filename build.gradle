@@ -532,6 +532,11 @@ ext.makeWinTask = { args ->
         from ('release/win32-specific') {
             include 'OmegaT.exe', 'OmegaT.l4J.ini'
         }
+        if (args.jrePath) {
+            from (args.jrePath) {
+                into 'jre'
+            }
+        }
         destinationDir = file("${buildDir}/innosetup/${args.name}")
         def fullVersion = project.version + omtVersion.beta
         def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
@@ -550,7 +555,6 @@ ext.makeWinTask = { args ->
                     OUTPUT_DIR_SUBST: distsDir.path,
                     OUTPUT_BASENAME_SUBST: installerBasename.toString(),
                     JRE_COMMENT_SUBST: args.jrePath ? '' : ';',
-                    JRE_PATH_SUBST: args.jrePath ? args.jrePath.path : '',
                     CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
                     ARCHITECTURE_SUBST: args.arch ?: ''
                 ])

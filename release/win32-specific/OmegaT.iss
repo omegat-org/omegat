@@ -64,7 +64,7 @@ Source: "join.html"; DestDir: "{app}"
 Source: "index.html"; DestDir: "{app}"
 Source: "changes.txt"; DestDir: "{app}"; Flags: isreadme;
 Source: "omegat.prefs"; DestDir: "{app}"; Flags: skipifsourcedoesntexist;
-@JRE_COMMENT_SUBST@Source: "@JRE_PATH_SUBST@\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
+@JRE_COMMENT_SUBST@Source: "jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\plugins\"

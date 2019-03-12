@@ -14,9 +14,7 @@ Gradle Support plugin to open the OmegaT project in NetBeans.)
 
 Check the other files in this directory for documentation. You can
 produce Javadoc by running `gradlew javadoc`, or browse online:
-    Trunk:    https://omegat.ci.cloudbees.com/job/omegat-trunk/javadoc/
-    Releases: https://omegat.ci.cloudbees.com/job/omegat-javadoc/
-              (Open desired version and click "Javadoc" link on left)
+    https://omegat.sourceforge.io/javadoc-latest/
 
 
 Working with Dependencies

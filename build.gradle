@@ -557,6 +557,7 @@ ext.makeWinTask = { args ->
                     CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
                     ARCHITECTURE_SUBST: args.arch ?: ''
                 ])
+                filter(FixCrLfFilter,  eol: FixCrLfFilter.CrLf.newInstance('crlf'))
                 filteringCharset = 'UTF-8'
             }
             exec {

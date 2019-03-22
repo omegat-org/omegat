@@ -453,15 +453,15 @@ public class MTHUBTranslate extends BaseTranslate {
                     }
                     return translation;
                 } catch (Exception e) {
-                    return OStrings.getString("MTHUB_ERROR", e.getMessage());
+                    return OStrings.getString("MTHUB_ERROR_MESSAGE", e.getMessage());
                 }
             } catch (Exception e) {
-                return OStrings.getString("MTHUB_ERROR", e.getMessage());
+                return OStrings.getString("MTHUB_ERROR_MESSAGE", e.getMessage());
             }
         } catch (MalformedURLException e) {
-            return OStrings.getString("MTHUB_ERROR", e.getMessage());
+            return OStrings.getString("MTHUB_ERROR_MESSAGE", e.getMessage());
         } catch (Exception e) {
-            return OStrings.getString("MTHUB_ERROR", e.getMessage());
+            return OStrings.getString("MTHUB_ERROR_MESSAGE", e.getMessage());
         }
     }
 

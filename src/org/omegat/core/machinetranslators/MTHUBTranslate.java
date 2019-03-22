@@ -447,21 +447,21 @@ public class MTHUBTranslate extends BaseTranslate {
                                     response.getError().get(0).code,
                                     OStrings.getString("MT_ENGINE_MTHUB_INVALID_LANG_CODE"));
                             default: return OStrings.getString(
-                                        "MTHUB_ERROR", "400",
+                                        "MTHUB_ERROR", response.getError().get(0).getCode(),
                                         response.getError().get(0).getMessage());
                         }
                     }
                     return translation;
                 } catch (Exception e) {
-                    return OStrings.getString("MTHUB_ERROR", "400", e.getMessage());
+                    return OStrings.getString("MTHUB_ERROR", e.getMessage());
                 }
             } catch (Exception e) {
-                return OStrings.getString("MTHUB_ERROR", "400", e.getMessage());
+                return OStrings.getString("MTHUB_ERROR", e.getMessage());
             }
         } catch (MalformedURLException e) {
-            return OStrings.getString("MTHUB_ERROR", "404", e.getMessage());
+            return OStrings.getString("MTHUB_ERROR", e.getMessage());
         } catch (Exception e) {
-            return OStrings.getString("MTHUB_ERROR", "400", e.getMessage());
+            return OStrings.getString("MTHUB_ERROR", e.getMessage());
         }
     }
 

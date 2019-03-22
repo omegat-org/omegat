@@ -42,6 +42,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import org.apache.commons.io.IOUtils;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A class for keep the request translate from MT-Hub.
@@ -285,6 +287,7 @@ class MTHUBLanguageResponse {
  * @see <a href="https://iadaatpa.docs.apiary.io/">Translation API</a>
  */
 public class MTHUBTranslate extends BaseTranslate {
+    private static final Logger LOGGER = Logger.getLogger(MTHUBTranslate.class.getName());
     private static final String PROPERTY_API_KEY = "mthub.api.key";
     protected static final String GT_URL = "https://app.mt-hub.eu/api/translate";
     protected static final int LIMIT_CHARACTER = 2000;
@@ -325,19 +328,27 @@ public class MTHUBTranslate extends BaseTranslate {
                     }
                     return codes;
                 } else {
-                    System.err.println("IOException: "
-                            + response.getError().get(0).getCode() + " "
-                            + response.getError().get(0).getMessage());
+                    LOGGER.log(Level.FINE,
+                            new StringBuilder().append("Exception: ").
+                            append(response.getError().get(0).getCode()).
+                            append(response.getError().get(0).getMessage()).
+                            toString());
                 }
             } catch (Exception e) {
-                System.err.println("IOException: " + e.getLocalizedMessage());
+                LOGGER.log(Level.FINE,
+                        new StringBuilder().append("Exception: ").
+                        append(e.getLocalizedMessage()).toString());
                 return Collections.emptyList();
             }
         } catch (MalformedURLException e) {
-            System.err.println("IOException: " + e.getLocalizedMessage());
+            LOGGER.log(Level.FINE,
+                    new StringBuilder().append("MalformedURLException: ").
+                            append(e.getLocalizedMessage()).toString());
             return Collections.emptyList();
         } catch (Exception e) {
-            System.err.println("IOException: " + e.getLocalizedMessage());
+            LOGGER.log(Level.FINE,
+                    new StringBuilder().append("Exception: ").
+                            append(e.getLocalizedMessage()).toString());
             return Collections.emptyList();
         }
        return Collections.emptyList();

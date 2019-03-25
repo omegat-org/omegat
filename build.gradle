@@ -769,10 +769,12 @@ task testIntegration(type: JavaExec) {
 
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
+    classifier = 'sources'
 }
 
 task javadocJar(type: Jar) {
     from javadoc.outputs
+    classifier = 'javadoc'
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')
@@ -783,14 +785,9 @@ publishing {
             groupId 'org.omegat'
             artifactId 'omegat'
             version mavenStyleVersion
-
             from components.java
-            artifact sourceJar {
-                classifier 'sources'
-            }
-            artifact javadocJar {
-                classifier 'javadoc'
-            }
+            artifact sourceJar
+            artifact javadocJar
         }
     }
 }

@@ -149,8 +149,8 @@ dependencies {
         // Credentials encryption
         compile 'org.jasypt:jasypt:1.9.2'
 
-        // Groovy used for (runtime) scripts, tests only
-        runtime 'org.codehaus.groovy:groovy-all:2.4.12'
+        // Groovy used for scripts - needed at compile for GroovyClassLoader modifications
+        compile 'org.codehaus.groovy:groovy-all:2.4.12'
 
         // Script editor
         compile 'com.fifesoft:rsyntaxtextarea:2.5.8'

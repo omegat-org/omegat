@@ -8,6 +8,7 @@
   Other changes:
   
   - Added basic autocompletion to the scripting window (Ctrl+Enter to cycle through suggestions)
+  - Groovy adds all the jar files located in the scripts/ directory to the Groovy ClassLoader.
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 4 (2019-03-04)

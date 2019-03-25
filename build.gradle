@@ -867,7 +867,7 @@ run.maxHeapSize = findProperty('runMaxHeapSize')
 def Properties loadProperties(File propFile) {
     def config = new Properties()
     if (propFile.canRead()) {
-        config.load(new FileInputStream(propFile))
+        propFile.withInputStream { config.load(it) }
     }
     return config
 }

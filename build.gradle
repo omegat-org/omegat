@@ -20,6 +20,7 @@ mainClassName = 'org.omegat.Main'
 ext {
     javaVersion = '1.8'
     omtVersion = loadProperties file('src/org/omegat/Version.properties')
+    omtWebsite = 'https://omegat.org'
     envIsCi = project.hasProperty('envIsCi')
 }
 
@@ -590,7 +591,7 @@ jnlp {
         information {
             title applicationName
             vendor "${applicationName} Development Team"
-            homepage href: 'https://omegat.org'
+            homepage href: omtWebsite
             shortcut(online: false) {
                 desktop()
                 menu submenu: "${applicationName} from WebStart"

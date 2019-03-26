@@ -569,8 +569,34 @@ ext.makeWinTask = { args ->
                 todir: distsDir
         }
     }
-    assemble.dependsOn args.name
-    win.dependsOn args.name
+    def signedTaskName = "${args.name}Signed"
+    task(signedTaskName) {
+        onlyIf {
+            // Set these in e.g. gradle.properties
+            ['winCodesignFile', 'winCodesignPassword', 'winCodesignTimestampUrl'].every {
+                project.hasProperty(it)
+            }
+        }
+        def signedExe = "${distsDir}/${installerBasename}_Signed.exe"
+        inputs.file installerExe
+        outputs.file signedExe
+        doLast {
+            exec {
+                commandLine 'osslsigncode','sign',
+                    '-pkcs12', project.property('winCodesignFile'),
+                    '-pass', project.property('winCodesignPassword'),
+                    '-n', applicationName,
+                    '-i', omtWebsite,
+                    '-t', project.property('winCodesignTimestampUrl'),
+                    '-h', 'sha2',
+                    '-in', installerExe,
+                    '-out', signedExe
+            }
+        }
+        dependsOn args.name
+    }
+    assemble.dependsOn args.name, signedTaskName
+    win.dependsOn args.name, signedTaskName
 }
 makeWinTask name: 'winNoJRE', suffix: 'Windows_without_JRE'
 makeWinTask name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE

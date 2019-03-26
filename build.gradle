@@ -423,13 +423,13 @@ task installMacSignedDist(type: Sync) {
     description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
     onlyIf {
         // Set this in e.g. gradle.properties
-        project.hasProperty('codesignIdentity')
+        project.hasProperty('macCodesignIdentity')
     }
     with distributions.mac.contents
     destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
     doLast {
         exec {
-            commandLine 'codesign', '--deep', '-s', project.property('codesignIdentity'), file("${destinationDir}/OmegaT.app")
+            commandLine 'codesign', '--deep', '-s', project.property('macCodesignIdentity'), file("${destinationDir}/OmegaT.app")
         }
     }
 }

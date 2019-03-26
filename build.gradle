@@ -526,6 +526,9 @@ task win {
 }
 
 ext.makeWinTask = { args ->
+    def fullVersion = project.version + omtVersion.beta
+    def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
+    def installerExe = "${distsDir}/${installerBasename}.exe"
     task(type: Sync, args.name) {
         description = "Create a Windows installer for ${args.name} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
@@ -539,9 +542,7 @@ ext.makeWinTask = { args ->
             }
         }
         destinationDir = file("${buildDir}/innosetup/${args.name}")
-        def fullVersion = project.version + omtVersion.beta
-        def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
-        outputs.file "${distsDir}/${installerBasename}.exe"
+        outputs.file installerExe
         onlyIf {
             (!args.jrePath || args.jrePath.directory) && haveInnoSetup()
         }

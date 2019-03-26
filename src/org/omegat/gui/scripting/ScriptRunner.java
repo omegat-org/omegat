@@ -25,10 +25,8 @@
 
 package org.omegat.gui.scripting;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,14 +41,10 @@ import javax.script.ScriptException;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.io.FilenameUtils;
-import org.codehaus.groovy.jsr223.GroovyScriptEngineImpl;
 import org.omegat.core.Core;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-
-import groovy.lang.GroovyClassLoader;
 
 public final class ScriptRunner {
 
@@ -159,19 +153,6 @@ public final class ScriptRunner {
      */
     public static Object executeScript(String script, ScriptEngine engine, Map<String, Object> additionalBindings)
             throws ScriptException {
-
-        // If we're using Groovy, we add all the Jar files in the scripts/ directory
-        // to the ClassLoader to avoid manipulating it inside the script.
-        if (engine instanceof GroovyScriptEngineImpl) {
-            GroovyClassLoader gcl = new GroovyClassLoader();
-
-            File scriptDir = new File(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY,
-                    ScriptingWindow.DEFAULT_SCRIPTS_DIR));
-            addJarToClassloader(gcl, scriptDir);
-
-            ((GroovyScriptEngineImpl) engine).setClassLoader(gcl);
-        }
-
         // logResult(StaticUtils.format(OStrings.getString("SCW_SELECTED_LANGUAGE"),
         // engine.getFactory().getEngineName()));
         Bindings bindings = engine.createBindings();
@@ -190,30 +171,6 @@ public final class ScriptRunner {
             invokeGuiScript((Invocable) engine);
         }
         return result;
-    }
-
-    private static void addJarToClassloader(GroovyClassLoader gcl, File scriptDir) {
-        if (scriptDir.isDirectory()) {
-            File[] children = scriptDir.listFiles();
-
-            if (children != null) {
-                for (File f : children) {
-                    if (f.isDirectory()) {
-                        addJarToClassloader(gcl, f);
-                    } else {
-                        if (!f.getName().endsWith(".jar")) {
-                            continue;
-                        }
-                        try {
-                            gcl.addURL(f.toURI().toURL());
-                            Log.log("Added " + f + " to Groovy ClassLoader");
-                        } catch (MalformedURLException e) {
-                            Log.log("Invalid URL for ClassLoader member \"" + f.toURI() + "\".");
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private static void invokeGuiScript(Invocable engine) throws ScriptException {

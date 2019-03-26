@@ -151,7 +151,9 @@ dependencies {
         compile 'org.jasypt:jasypt:1.9.2'
 
         // Groovy used for scripts - needed at compile for GroovyClassLoader modifications
-        compile 'org.codehaus.groovy:groovy-all:2.4.12'
+        // Ivy is needed to handle Grape/@Grab dependencies
+        runtime 'org.codehaus.groovy:groovy-all:2.4.12'
+        runtime 'org.apache.ivy:ivy:2.4.0'
 
         // Script editor
         compile 'com.fifesoft:rsyntaxtextarea:2.5.8'

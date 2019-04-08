@@ -24,30 +24,33 @@
  **************************************************************************/
 
 package org.omegat.core.machinetranslators;
+
 import java.awt.Window;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.commons.io.IOUtils;
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.OutputStream;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import org.apache.commons.io.IOUtils;
-import java.sql.Timestamp;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * A class for keep the request translate from MT-Hub.
-*/
+ */
 class MTHUBTranslateRequest {
     public final String token;
     public final String source;
@@ -64,7 +67,7 @@ class MTHUBTranslateRequest {
 
 /**
  * A class for keep the response data segments from MT-Hub.
-*/
+ */
 class MTHUBTranslateResponseDataSegments {
     public String segment;
     public String translation;
@@ -88,7 +91,7 @@ class MTHUBTranslateResponseDataSegments {
 
 /**
  * A class for keep the response debug from MT-Hub.
-*/
+ */
 class MTHUBTranslateResponseDataDebug {
     public int supplierId;
     public String engineName;
@@ -112,7 +115,7 @@ class MTHUBTranslateResponseDataDebug {
 
 /**
  * A class for keep the response data from MT-Hub.
-*/
+ */
 class MTHUBTranslateResponseData {
     public List<List<MTHUBTranslateResponseDataSegments>> segments;
     public List<MTHUBTranslateResponseDataDebug> debug;
@@ -121,8 +124,7 @@ class MTHUBTranslateResponseData {
         return segments;
     }
 
-    public void setSegments(List<List<MTHUBTranslateResponseDataSegments>>
-                            segments) {
+    public void setSegments(List<List<MTHUBTranslateResponseDataSegments>> segments) {
         this.segments = segments;
     }
 
@@ -137,7 +139,7 @@ class MTHUBTranslateResponseData {
 
 /**
  * A class for keep the response error from MT-Hub.
-*/
+ */
 class MTHUBResponseError {
     public int statusCode;
     public int code;
@@ -179,7 +181,7 @@ class MTHUBResponseError {
 
 /**
  * A class for keep the translate response from MT-Hub.
-*/
+ */
 class MTHUBTranslateResponse {
     public boolean success;
     public List<MTHUBResponseError> error;
@@ -212,7 +214,7 @@ class MTHUBTranslateResponse {
 
 /**
  * A class for keep the response data languages from MT-Hub.
-*/
+ */
 class MTHUBLanguageResponseDataLanguages {
     public String code;
     public String name;
@@ -236,7 +238,7 @@ class MTHUBLanguageResponseDataLanguages {
 
 /**
  * A class for keep the response data languages list from MT-Hub.
-*/
+ */
 class MTHUBLanguageResponseData {
     public List<List<MTHUBLanguageResponseDataLanguages>> languages;
 
@@ -251,7 +253,7 @@ class MTHUBLanguageResponseData {
 
 /**
  * A class for keep the language response from MT-Hub.
-*/
+ */
 class MTHUBLanguageResponse {
     public boolean success;
     public List<MTHUBResponseError> error;
@@ -281,8 +283,10 @@ class MTHUBLanguageResponse {
         this.data = data;
     }
 }
+
 /**
  * MT-HUB (https://mt-hub.eu/)
+ *
  * @author prompsit (help@prompsit.com)
  * @see <a href="https://iadaatpa.docs.apiary.io/">Translation API</a>
  */
@@ -294,34 +298,31 @@ public class MTHUBTranslate extends BaseTranslate {
     private List<String> availableLanguageCodes = null;
     private static final ObjectMapper OM = new ObjectMapper();
     static {
-        OM.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY,
-                        true);
+        OM.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
     }
 
     /**
      * Get from mt-hub the available language codes and set into the arraylist.
-    */
+     */
     private List<String> fetchAvailableLanguageCodes() {
 
-       String mthubKey = getCredential(PROPERTY_API_KEY);
-       String encoding = StandardCharsets.UTF_8.name();
+        String mthubKey = getCredential(PROPERTY_API_KEY);
+        String encoding = StandardCharsets.UTF_8.name();
 
-       try {
+        try {
             List<String> codes = new ArrayList<String>();
-            URL url = new URL("https://app.mt-hub.eu/api/describelanguages/"
-                              + mthubKey);
+            URL url = new URL("https://app.mt-hub.eu/api/describelanguages/" + mthubKey);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             conn.setDoOutput(true);
             conn.setRequestProperty("Accept-Charset", encoding);
-            conn.setRequestProperty("Content-Type",
-                                        "application/json;charset=" + encoding);
+            conn.setRequestProperty("Content-Type", "application/json;charset=" + encoding);
             int statusCode = conn.getResponseCode();
 
-            try (InputStream in = (statusCode >= 200 && statusCode < 400)
-                    ? conn.getInputStream() : conn.getErrorStream();) {
+            try (InputStream in = (statusCode >= 200 && statusCode < 400) ? conn.getInputStream()
+                    : conn.getErrorStream();) {
                 MTHUBLanguageResponse response = OM.readValue(IOUtils.toString(in, StandardCharsets.UTF_8),
-                                                      MTHUBLanguageResponse.class);
+                        MTHUBLanguageResponse.class);
                 if (response.isSuccess()) {
                     for (List<MTHUBLanguageResponseDataLanguages> dl : response.getData().get(0).getLanguages()) {
                         codes.add(dl.get(0).getCode().toUpperCase());
@@ -329,29 +330,24 @@ public class MTHUBTranslate extends BaseTranslate {
                     return codes;
                 } else {
                     LOGGER.log(Level.FINE,
-                            new StringBuilder().append("Exception: ").
-                            append(response.getError().get(0).getCode()).
-                            append(response.getError().get(0).getMessage()).
-                            toString());
+                            new StringBuilder().append("Exception: ").append(response.getError().get(0).getCode())
+                                    .append(response.getError().get(0).getMessage()).toString());
                 }
             } catch (Exception e) {
                 LOGGER.log(Level.FINE,
-                        new StringBuilder().append("Exception: ").
-                        append(e.getLocalizedMessage()).toString());
+                        new StringBuilder().append("Exception: ").append(e.getLocalizedMessage()).toString());
                 return Collections.emptyList();
             }
         } catch (MalformedURLException e) {
             LOGGER.log(Level.FINE,
-                    new StringBuilder().append("MalformedURLException: ").
-                            append(e.getLocalizedMessage()).toString());
+                    new StringBuilder().append("MalformedURLException: ").append(e.getLocalizedMessage()).toString());
             return Collections.emptyList();
         } catch (Exception e) {
             LOGGER.log(Level.FINE,
-                    new StringBuilder().append("Exception: ").
-                            append(e.getLocalizedMessage()).toString());
+                    new StringBuilder().append("Exception: ").append(e.getLocalizedMessage()).toString());
             return Collections.emptyList();
         }
-       return Collections.emptyList();
+        return Collections.emptyList();
     }
 
     private synchronized List<String> getAvailableLanguageCodes() {
@@ -363,7 +359,7 @@ public class MTHUBTranslate extends BaseTranslate {
 
     @Override
     protected String getPreferenceName() {
-       return Preferences.ALLOW_MTHUB_TRANSLATE;
+        return Preferences.ALLOW_MTHUB_TRANSLATE;
     }
 
     @Override
@@ -386,19 +382,16 @@ public class MTHUBTranslate extends BaseTranslate {
                 setCredential(PROPERTY_API_KEY, key, temporary);
             }
         };
-        dialog.panel.valueLabel1.setText(OStrings.getString(
-                                              "MT_ENGINE_MTHUB_API_KEY_LABEL"));
+        dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_MTHUB_API_KEY_LABEL"));
         dialog.panel.valueField1.setText(getCredential(PROPERTY_API_KEY));
         dialog.panel.valueLabel2.setVisible(false);
         dialog.panel.valueField2.setVisible(false);
-        dialog.panel.temporaryCheckBox.setSelected(
-                isCredentialStoredTemporarily(PROPERTY_API_KEY));
+        dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_API_KEY));
         dialog.show();
     }
 
     @Override
-    protected String translate(Language sLang, Language tLang, String text)
-            throws Exception {
+    protected String translate(Language sLang, Language tLang, String text) throws Exception {
 
         String mthubKey = getCredential(PROPERTY_API_KEY);
         if (mthubKey == null || mthubKey.isEmpty()) {
@@ -421,45 +414,40 @@ public class MTHUBTranslate extends BaseTranslate {
 
             conn.setDoOutput(true);
             conn.setRequestProperty("Accept-Charset", encoding);
-            conn.setRequestProperty("Content-Type",
-                                        "application/json;charset=" + encoding);
+            conn.setRequestProperty("Content-Type", "application/json;charset=" + encoding);
 
             try (OutputStream output = conn.getOutputStream()) {
 
-                List<String> segments = Collections.singletonList(text.substring(0,
-                                 Math.min(text.length(), LIMIT_CHARACTER - 1)));
+                List<String> segments = Collections
+                        .singletonList(text.substring(0, Math.min(text.length(), LIMIT_CHARACTER - 1)));
 
-                MTHUBTranslateRequest mttr = new MTHUBTranslateRequest(
-                        mthubKey, normaliseCode(sLang), normaliseCode(tLang),
-                        segments);
+                MTHUBTranslateRequest mttr = new MTHUBTranslateRequest(mthubKey, normaliseCode(sLang),
+                        normaliseCode(tLang), segments);
 
                 String json = OM.writeValueAsString(mttr);
                 output.write(json.getBytes(encoding));
 
                 int statusCode = conn.getResponseCode();
 
-                try (InputStream in = (statusCode >= 200 && statusCode < 400)
-                        ? conn.getInputStream() : conn.getErrorStream();) {
-                    MTHUBTranslateResponse response = OM.readValue(
-                            IOUtils.toString(in, StandardCharsets.UTF_8),
+                try (InputStream in = (statusCode >= 200 && statusCode < 400) ? conn.getInputStream()
+                        : conn.getErrorStream();) {
+                    MTHUBTranslateResponse response = OM.readValue(IOUtils.toString(in, StandardCharsets.UTF_8),
                             MTHUBTranslateResponse.class);
                     String translation = "";
                     if (response.isSuccess()) {
-                        translation = response.getData().
-                                      get(0).getSegments().get(0).get(0).
-                                        getTranslation();
+                        translation = response.getData().get(0).getSegments().get(0).get(0).getTranslation();
                         putToCache(sLang, tLang, text, translation);
                     } else {
                         switch (response.getError().get(0).code) {
-                            case 1: return OStrings.getString("MTHUB_ERROR",
-                                    response.getError().get(0).code,
+                        case 1:
+                            return OStrings.getString("MTHUB_ERROR", response.getError().get(0).code,
                                     OStrings.getString("MT_ENGINE_MTHUB_INVALID_KEY"));
-                            case 3: return OStrings.getString("MTHUB_ERROR",
-                                    response.getError().get(0).code,
+                        case 3:
+                            return OStrings.getString("MTHUB_ERROR", response.getError().get(0).code,
                                     OStrings.getString("MT_ENGINE_MTHUB_INVALID_LANG_CODE"));
-                            default: return OStrings.getString(
-                                        "MTHUB_ERROR", response.getError().get(0).getCode(),
-                                        response.getError().get(0).getMessage());
+                        default:
+                            return OStrings.getString("MTHUB_ERROR", response.getError().get(0).getCode(),
+                                    response.getError().get(0).getMessage());
                         }
                     }
                     return translation;

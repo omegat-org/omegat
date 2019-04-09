@@ -1,17 +1,26 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 5
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancement
+  1 Bug fix
 ----------------------------------------------------------------------
 4.1.5 update 5 vs 4.1.5 update 4
 
   Implemented requests:
+
   - Added Apache Ivy to allow fetching external libraries in Groovy scripts
   https://sourceforge.net/p/omegat/feature-requests/1204/
   
+  
+  Bug fixes:
+
+  - Plugins classes are only loaded once, even if multiple copies are 
+  present in the plugins/ folder.
+  
   Other changes:
   
-  - Added basic autocompletion to the scripting window (Ctrl+Enter to cycle through suggestions)
+  - Added basic autocompletion to the scripting window (Ctrl+Enter to cycle 
+  through suggestions)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 4 (2019-03-04)

@@ -288,6 +288,10 @@ public final class PluginUtils {
     protected static void loadClass(String clazz, ClassLoader classLoader) {
         try {
             Class<?> c = classLoader.loadClass(clazz);
+            if (LOADED_PLUGINS.contains(c)) {
+                Log.logInfoRB("PLUGIN_SKIP_PREVIOUSLY_LOADED", clazz);
+                return;
+            }
             Method load = c.getMethod("loadPlugins");
             load.invoke(c);
             LOADED_PLUGINS.add(c);

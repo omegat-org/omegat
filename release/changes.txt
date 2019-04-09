@@ -19,6 +19,9 @@
   
   Other changes:
   
+  - When listing available dictionaries from the net, allow dictionaries with 
+  only the language code in the name (e.g FR.dic)
+  
   - Added basic autocompletion to the scripting window (Ctrl+Enter to cycle 
   through suggestions)
 

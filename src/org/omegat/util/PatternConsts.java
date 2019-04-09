@@ -170,7 +170,7 @@ public final class PatternConsts {
             // (fr_FR_1-3-2.zip) in addition to the others
             // The initial pattern is above.
             // [ 2138846 ] French dictionary cannot be downloaded and installed
-            "\"([a-z]{1,8})(_([A-Z]{1,8})?)(_1-3-2)?\\.zip\"");
+            "\"([a-z]{1,8})(_([A-Z]{1,8}))?(_1-3-2)?\\.zip\"");
 
     public static final Pattern SPACE_TAB = Pattern.compile("( |\t)+");
 

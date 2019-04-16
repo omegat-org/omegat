@@ -63,4 +63,17 @@ ext {
             }
         }
     }
+
+    conditions = { List... items ->
+        items.each { val, str ->
+            if (!val) {
+                logger.warn(str)
+            }
+        }
+        items.every { it[0] }
+    }
+
+    condition = { val, str ->
+        conditions([val, str])
+    }
 }

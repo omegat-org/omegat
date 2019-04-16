@@ -452,7 +452,7 @@ task installMacSignedDist(type: Sync) {
     description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
     onlyIf {
         // Set this in e.g. local.properties
-        project.hasProperty('macCodesignIdentity')
+        condition(hasProperty('macCodesignIdentity'), 'Code signing property not set')
     }
     with distributions.mac.contents
     destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
@@ -465,7 +465,7 @@ task installMacSignedDist(type: Sync) {
 
 macDistZip {
     onlyIf {
-        !macJRE.empty
+        condition(!macJRE.empty, 'JRE not found')
     }
     archiveName = "${applicationName}_${version}${omtVersion.beta}_Mac.zip"
 }
@@ -492,7 +492,7 @@ task linux(dependsOn: [linuxDistTar, linux64DistTar]) {
 }
 [(linuxDistTar): linuxJRE, (linux64DistTar): linux64JRE].each { task, requirement ->
     task.onlyIf {
-        !requirement.empty
+        condition(!requirement.empty, 'JRE not found')
     }
     def suffix = task.name.contains('64') ? 'Linux_64' : 'Linux'
     task.archiveName = "${applicationName}_${version}${omtVersion.beta}_${suffix}.tar.bz2"
@@ -572,9 +572,9 @@ ext.makeWinTask = { args ->
         destinationDir = file("${buildDir}/innosetup/${args.name}")
         outputs.file installerExe
         onlyIf {
-            def jreOk = !args.jrePath || !args.jrePath.empty
-            def installerOk = exePresent('iscc') || exePresent('docker')
-            jreOk && installerOk
+            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
+                       [exePresent('iscc') || exePresent('docker'),
+                        'InnoSetup or Docker not installed'])
         }
         doFirst {
             delete "$destinationDir/jre"
@@ -609,9 +609,11 @@ ext.makeWinTask = { args ->
     task(signedTaskName) {
         onlyIf {
             // Set these in e.g. local.properties
-            ['winCodesignFile', 'winCodesignPassword', 'winCodesignTimestampUrl'].every {
-                project.hasProperty(it)
-            }
+            def props = ['winCodesignFile', 'winCodesignPassword', 'winCodesignTimestampUrl']
+            conditions([props.every { hasProperty(it) }, 'Code signing properties not set'],
+                       [file(installerExe).file, 'Unsigned installer not built'],
+                       [exePresent('osslsigncode') || exePresent('docker'),
+                        'osslsigncode or Docker not installed'])
         }
         def signedExe = "${distsDir}/${installerBasename}_Signed.exe"
         inputs.file installerExe
@@ -680,7 +682,8 @@ jnlp {
 
 signJars {
     onlyIf {
-        ['jwsCodebase', 'jwsKeystore'].every { hasProperty(it) }
+        condition(['jwsCodebase', 'jwsKeystore'].every { hasProperty(it) },
+                   'Java Web Start properties not set')
     }
 }
 
@@ -703,7 +706,7 @@ task checksums {
     def checksumsDir = file("${distsDir}/checksums")
     outputs.dir checksumsDir
     onlyIf {
-        distsDir.directory
+        condition(distsDir.directory, 'Distfiles not found')
     }
     doLast {
         distsDir.listFiles().findAll { it.file }.each { f ->

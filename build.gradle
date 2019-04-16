@@ -14,6 +14,8 @@ plugins {
     // id 'com.github.ben-manes.versions' version '0.21.0'
 }
 
+apply from: 'gradle/utils.gradle'
+
 applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
@@ -678,22 +680,6 @@ jnlp {
     }
 }
 
-ext.detectRevision = { ->
-    /* Set the revision number included in version strings. The value is chosen from the first valid value in:
-    0. Provided as the Gradle property 'repo.revision'
-    1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a source package not under VCS)
-    2. This svn checkout's revision
-    3. This git clone's SHA-1
-    4. If none of the above, the value "unknown"
-     */
-    def provided = findProperty('repoRevision') ?: ''
-    def git = file('.git').directory ? doCmd('git rev-parse --short HEAD') : ''
-    def svn = file('.svn').directory ? doCmd('svnversion') : ''
-    [provided, omtVersion.revision, git, svn, 'unknown'].find {
-        it != 'dev' && !it.empty
-    }
-}
-
 processResources {
     def revision = detectRevision()
     inputs.property 'revision', revision
@@ -816,16 +802,6 @@ task debug(type: JavaExec) {
     main = mainClassName
     classpath = sourceSets.main.runtimeClasspath
     debug true
-}
-
-ext.repoHasChanges = {
-    if (file('.git').directory) {
-        !doCmd('git status -s').empty
-    } else if (file('.svn').directory) {
-        !doCmd('svn status -q').empty
-    } else {
-        false
-    }
 }
 
 task releaseCheck {
@@ -954,27 +930,3 @@ task publishVersion {
 // Allow setting the max heap size for the run task from the command line, e.g.
 // `gradle -PrunMaxHeapSize=1024M run`
 run.maxHeapSize = findProperty('runMaxHeapSize')
-
-def Properties loadProperties(File propFile) {
-    def config = new Properties()
-    if (propFile.canRead()) {
-        propFile.withInputStream { config.load(it) }
-    }
-    return config
-}
-
-def doCmd(String cmd) {
-    StringBuilder output = new StringBuilder()
-    cmd.execute().waitForProcessOutput(output, null)
-    return output.toString().trim()
-}
-
-def getUpdateSuffix(String update) {
-    if (!update || update == '0') {
-        return ''
-    }
-    if (update.length() == 1) {
-        return "_0${update}"
-    }
-    return "_${update}"
-}

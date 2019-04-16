@@ -359,10 +359,7 @@ distributions {
                     into 'OmegaT.app/Contents/PlugIns'
                     includeEmptyDirs = false
                     eachFile {
-                        def segs = it.relativePath.segments.collect {
-                            it =~ /jre.*\.jre/ ? 'jre.bundle' : it
-                        }
-                        it.relativePath = new RelativePath(!it.directory, segs as String[])
+                        replaceRelativePathSegment(it, /jre.*\.jre/, 'jre.bundle')
                     }
                 }
             }
@@ -378,10 +375,7 @@ distributions {
                     from(tarTree(jrePath.singleFile)) {
                         includeEmptyDirs = false
                         eachFile {
-                            def segs = it.relativePath.segments.collect {
-                                it =~ /jre.*/ ? 'jre' : it
-                            }
-                            it.relativePath = new RelativePath(!it.directory, segs as String[])
+                            replaceRelativePathSegment(it, /jre.*/, 'jre')
                         }
                     }
                 }
@@ -562,10 +556,7 @@ ext.makeWinTask = { args ->
             from (tarTree(args.jrePath.singleFile)) {
                 includeEmptyDirs = false
                 eachFile {
-                    def segs = it.relativePath.segments.collect {
-                        it =~ /jre.*/ ? 'jre' : it
-                    }
-                    it.relativePath = new RelativePath(!it.directory, segs as String[])
+                    replaceRelativePathSegment(it, /jre.*/, 'jre')
                 }
             }
         }

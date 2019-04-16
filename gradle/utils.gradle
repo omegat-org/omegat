@@ -76,4 +76,11 @@ ext {
     condition = { val, str ->
         conditions([val, str])
     }
+
+    replaceRelativePathSegment = { FileCopyDetails deets, pattern, replacement ->
+        def segs = deets.relativePath.segments.collect {
+            it =~ pattern ? replacement : it
+        }
+        deets.relativePath = new RelativePath(!deets.directory, segs as String[])
+    }
 }

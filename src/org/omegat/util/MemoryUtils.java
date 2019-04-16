@@ -121,6 +121,7 @@ public final class MemoryUtils {
                     Class<?> fc = f.getType();
                     result += getSimpleTypeSize(fc);
                     if (!fc.isPrimitive()) {
+                        @SuppressWarnings("deprecation")
                         boolean achanged = !f.isAccessible();
                         if (achanged) {
                             f.setAccessible(true);

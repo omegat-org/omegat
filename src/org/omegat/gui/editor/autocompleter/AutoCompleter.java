@@ -243,8 +243,8 @@ public class AutoCompleter implements IAutoCompleter {
         int fontSize = editor.getFont().getSize();
         try {
             int pos = Math.min(editor.getCaret().getDot(), editor.getCaret().getMark());
-            x = editor.getUI().modelToView(editor, pos).x;
-            y = editor.getUI().modelToView(editor, editor.getCaret().getDot()).y + fontSize;
+            x = Java8Compat.modelToView(editor.getUI(), editor, pos).x;
+            y = Java8Compat.modelToView(editor.getUI(), editor, editor.getCaret().getDot()).y + fontSize;
         } catch (BadLocationException e) {
             // this should never happen!!!
             Log.log(e);

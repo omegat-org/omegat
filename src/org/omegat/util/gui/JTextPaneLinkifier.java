@@ -51,6 +51,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
@@ -117,7 +118,8 @@ public final class JTextPaneLinkifier {
         public void mouseClicked(final MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON1) {
                 final StyledDocument doc = jTextPane.getStyledDocument();
-                final Element characterElement = doc.getCharacterElement(jTextPane.viewToModel(e.getPoint()));
+                final Element characterElement = doc
+                        .getCharacterElement(Java8Compat.viewToModel(jTextPane, e.getPoint()));
                 final AttributeSet as = characterElement.getAttributes();
                 final Object attr = as.getAttribute(ATTR_LINK);
                 if (attr instanceof IAttributeAction) {
@@ -131,7 +133,7 @@ public final class JTextPaneLinkifier {
         @Override
         public void mouseMoved(final MouseEvent e) {
             final StyledDocument doc = jTextPane.getStyledDocument();
-            final Element characterElement = doc.getCharacterElement(jTextPane.viewToModel(e.getPoint()));
+            final Element characterElement = doc.getCharacterElement(Java8Compat.viewToModel(jTextPane, e.getPoint()));
             final AttributeSet as = characterElement.getAttributes();
             final Object attr = as.getAttribute(ATTR_LINK);
             if (attr instanceof IAttributeAction) {

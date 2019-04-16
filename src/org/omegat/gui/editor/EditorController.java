@@ -109,6 +109,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.help.Help;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -302,7 +303,7 @@ public class EditorController implements IEditor {
             int unitsPerSeg = (bar.getMaximum() - bar.getMinimum()) / (lastLoaded - firstLoaded + 1);
             if (firstLoaded > 0 && scrollPercent <= PAGE_LOAD_THRESHOLD) {
                 int docSize = editor.getDocument().getLength();
-                int visiblePos = editor.viewToModel(scrollPane.getViewport().getViewPosition());
+                int visiblePos = Java8Compat.viewToModel(editor, scrollPane.getViewport().getViewPosition());
                 // Try to load enough segments to restore scrollbar value to
                 // the range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
                 // Formula is obtained by solving the following equations for loadCount:
@@ -319,7 +320,7 @@ public class EditorController implements IEditor {
                 int sizeDelta = editor.getDocument().getLength() - docSize;
                 try {
                     scrollPane.getViewport()
-                            .setViewPosition(editor.modelToView(visiblePos + sizeDelta).getLocation());
+                            .setViewPosition(Java8Compat.modelToView(editor, visiblePos + sizeDelta).getLocation());
                 } catch (BadLocationException ex) {
                     Log.log(ex);
                 }
@@ -968,8 +969,8 @@ public class EditorController implements IEditor {
         try {
             SegmentBuilder sb = m_docSegList[index];
             if (sb.hasBeenCreated()) {
-                Rectangle start = editor.modelToView(sb.getStartPosition());
-                Rectangle end = editor.modelToView(sb.getEndPosition());
+                Rectangle start = Java8Compat.modelToView(editor, sb.getStartPosition());
+                Rectangle end = Java8Compat.modelToView(editor, sb.getEndPosition());
                 if (start != null && end != null) {
                     result = start.union(end);
                 }
@@ -2147,7 +2148,7 @@ public class EditorController implements IEditor {
                         continue;
                     }
                     try {
-                        Point location = editor.modelToView(sb.getStartPosition()).getLocation();
+                        Point location = Java8Compat.modelToView(editor, sb.getStartPosition()).getLocation();
                         if (viewRect.contains(location)) { // location is viewable
                             int segmentNo = sb.segmentNumberInProject;
                             location.translate(0, -viewPosition.y); // adjust to vertically view position

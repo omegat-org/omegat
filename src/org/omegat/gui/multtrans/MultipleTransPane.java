@@ -48,6 +48,7 @@ import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -217,7 +218,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
                 return;
             }
             JPopupMenu popup = new JPopupMenu();
-            populateContextMenu(popup, viewToModel(p));
+            populateContextMenu(popup, Java8Compat.viewToModel(MultipleTransPane.this, p));
             popup.show(MultipleTransPane.this, p.x, p.y);
         }
     };

@@ -564,7 +564,7 @@ class EntryListPane extends JTextPane {
                 beginPos = offsetList.get(index - 1) + ENTRY_SEPARATOR.length();
                 int endPos = offsetList.get(index);
                 try {
-                    Rectangle endRect = modelToView(endPos);
+                    Rectangle endRect = Java8Compat.modelToView(EntryListPane.this, endPos);
                     scrollRectToVisible(endRect);
                 } catch (BadLocationException ex) {
                     // Eat exception silently

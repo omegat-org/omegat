@@ -66,6 +66,7 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -186,7 +187,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         }
         try {
             // rectangle to be visible
-            Rectangle rect = modelToView(el.getStartOffset());
+            Rectangle rect = Java8Compat.modelToView(this, el.getStartOffset());
             // show 2 lines
             if (rect != null) {
                 rect.height *= 2;
@@ -279,7 +280,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             UIThreadsUtil.mustBeSwingThread();
 
             JPopupMenu popup = new JPopupMenu();
-            int mousepos = viewToModel(p);
+            int mousepos = Java8Compat.viewToModel(DictionariesTextArea.this, p);
             final String word = getWordAtOffset(mousepos);
             if (word != null) {
                 JMenuItem item = popup.add(StringUtil.format(OStrings.getString("DICTIONARY_HIDE"), word));

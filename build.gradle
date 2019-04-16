@@ -19,7 +19,7 @@ mainClassName = 'org.omegat.Main'
 
 ext {
     javaVersion = '1.8'
-    omtVersion = loadProperties file('src/org/omegat/Version.properties')
+    omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     omtWebsite = 'https://omegat.org'
     envIsCi = project.hasProperty('envIsCi')
 }
@@ -186,7 +186,7 @@ dependencies {
 }
 
 jar {
-    def omtPlugins = loadProperties file('Plugins.properties')
+    def omtPlugins = loadProperties(file('Plugins.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                 'Implementation-Version': project.version,
@@ -238,7 +238,7 @@ task genDocIndex(type: Copy) {
     into 'docs'
     rename('index_template.html', 'index.html')
     doFirst {
-        def langNameExceptions = loadProperties file('doc_src/lang_exceptions.properties')
+        def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
         def langInfos = docPropsFiles.collect { props ->
             def code = props.parentFile.name
             def locale = Locale.forLanguageTag(code.replace('_', '-'))
@@ -635,16 +635,16 @@ ext.makeWinTask = { args ->
     assemble.dependsOn args.name, signedTaskName
     win.dependsOn args.name, signedTaskName
 }
-makeWinTask name: 'winNoJRE', suffix: 'Windows_without_JRE'
-makeWinTask name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE
-makeWinTask name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE64, arch: 'x64'
+makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
+makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE)
+makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE64, arch: 'x64')
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }
 // Disable .zip distributions for Linux
 tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { it.enabled = false }
 
-ext.webstartProps = loadProperties file("${assetDir}/webstart.properties")
+ext.webstartProps = loadProperties(file("${assetDir}/webstart.properties"))
 
 jnlp {
     href "${applicationName}.jnlp"

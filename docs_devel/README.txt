@@ -1,8 +1,10 @@
 Building OmegaT
 ===============
 
-OmegaT is built with Gradle. Run `gradlew tasks` from the top level to
-see the available tasks.
+OmegaT is built with Gradle. Run `gradlew tasks` from the top level to see the
+available tasks. Run `gradlew build` to build all possible distfiles and run the
+main tests. Tasks skipped due to missing requirements will be noted in the
+output.
 
 OmegaT will run on the latest Java, but is required to be compatible with Java
 1.8. Further, JREs other than Oracle's are not officially supported. You are

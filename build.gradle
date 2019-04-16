@@ -518,18 +518,6 @@ installDist.doLast {
     delete startScripts.outputDir
 }
 
-ext.haveInnoSetup = {
-    ['where iscc', 'which iscc'].any {
-        try {
-            def findIscc = it.execute()
-            findIscc.waitForProcessOutput()
-            return findIscc.exitValue() == 0
-        } catch (any) {
-            return false
-        }
-    }
-}
-
 // Read in all our custom messages and massage them for inclusion in the .iss
 ext.getInnoSetupCustomMessages = {
     // Don't include languages that InnoSetup doesn't have strings for
@@ -580,7 +568,7 @@ ext.makeWinTask = { args ->
         destinationDir = file("${buildDir}/innosetup/${args.name}")
         outputs.file installerExe
         onlyIf {
-            (!args.jrePath || !args.jrePath.empty) && haveInnoSetup()
+            (!args.jrePath || !args.jrePath.empty) && exePresent('iscc')
         }
         doFirst {
             delete "$destinationDir/jre"

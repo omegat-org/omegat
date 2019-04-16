@@ -51,4 +51,16 @@ ext {
             false
         }
     }
+
+    exePresent = { exe ->
+        ["where $exe", "which $exe"].any {
+            try {
+                def findExe = it.execute()
+                findExe.waitForProcessOutput()
+                return findExe.exitValue() == 0
+            } catch (any) {
+                return false
+            }
+        }
+    }
 }

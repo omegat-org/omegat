@@ -6,6 +6,18 @@ the License, or (at your option) any later version.
 
 # Installation
 
+The easy way is to install
+[Docker](https://www.docker.com/products/docker-desktop) and run the `docgen`
+script provided in `doc_src`. Arguments to `docgen` are the same as the
+arguments to `ant` described below in the Usage section.
+
+See also:
+
+- [docgen-docker](https://github.com/omegat-org/docgen-docker): source for the
+  docgen container
+
+## The hard way
+
 The creation of the documentation requires a number of tools:
 
 - DocBook XSL Stylesheets 1.75.2 ("dbk")
@@ -22,7 +34,7 @@ reference). Depending on the actual configuration, it might be changed to a
 standard reference (`http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd`) or
 to another local reference.
 
-## Windows
+### Windows
 
 dbk must be installed at the root of `C:`
 
@@ -86,7 +98,7 @@ as your OmegaT development folder.
 
 The ones available in `doc_src` are only there for reference.
 
-## macOS
+### macOS
 
 All the dependencies can be installed through MacPorts except for Saxon 6-5-5:
 
@@ -138,7 +150,9 @@ The following fonts must be installed:
 
 # Usage
 
-All the scripts require the language folder as argument. Examples:
+All the scripts require the language folder as argument.
+
+Note: Replace `ant` with `docgen` if you are using the `docgen` script.
 
 ## Building Instant Start only
 

@@ -219,8 +219,8 @@ ext {
 
     macJRE = fileTree(dir: assetDir, include: 'jre-*-macosx-x64.tar.gz')
 
-    linuxJRE = file("${assetDir}/jre-linux")
-    linux64JRE = file("${assetDir}/jre-linux-64")
+    linuxJRE = fileTree(dir: assetDir, include: 'jre-*-linux-i586.tar.gz')
+    linux64JRE = fileTree(dir: assetDir, include: 'jre-*-linux-x64.tar.gz')
 
     windowsJRE = file("${assetDir}/jre")
     windowsJRE64 = file("${assetDir}/jre-64")
@@ -368,9 +368,16 @@ distributions {
             contents {
                 with main.contents
                 exclude 'OmegaT.bat'
-                from(jrePath) {
-                    into 'jre'
-                    fileMode 0755
+                if (!jrePath.empty) {
+                    from(tarTree(jrePath.singleFile)) {
+                        includeEmptyDirs = false
+                        eachFile {
+                            def segs = it.relativePath.segments.collect {
+                                it =~ /jre.*/ ? 'jre' : it
+                            }
+                            it.relativePath = new RelativePath(!it.directory, segs as String[])
+                        }
+                    }
                 }
             }
         }
@@ -472,9 +479,14 @@ task mac(dependsOn: [macDistZip, macSignedDistZip]) {
 task linux(dependsOn: [linuxDistTar, linux64DistTar]) {
     description = 'Build the Linux distributions.'
 }
+[installLinuxDist, installLinux64Dist].each {
+    it.doFirst {
+        delete "$destinationDir/jre"
+    }
+}
 [(linuxDistTar): linuxJRE, (linux64DistTar): linux64JRE].each { task, requirement ->
     task.onlyIf {
-        requirement.directory
+        !requirement.empty
     }
     def suffix = task.name.contains('64') ? 'Linux_64' : 'Linux'
     task.archiveName = "${applicationName}_${version}${omtVersion.beta}_${suffix}.tar.bz2"

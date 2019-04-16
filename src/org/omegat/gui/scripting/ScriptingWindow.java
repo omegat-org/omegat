@@ -376,11 +376,11 @@ public class ScriptingWindow {
 
         try {
             Class<?> richScriptEditorClass = Class.forName("org.omegat.gui.scripting.RichScriptEditor");
-            return (AbstractScriptEditor) richScriptEditorClass.newInstance();
+            return (AbstractScriptEditor) richScriptEditorClass.getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
          // RichScriptEditor not present, fallback to the standard editor
             logResult("RichScriptEditor not present, fallback to the standard editor");
-        } catch (InstantiationException | IllegalAccessException e) {
+        } catch (Exception e) {
             logResult("Error loading RichScriptEditor: ", e);
         }
 

@@ -168,7 +168,7 @@ public class FilterMaster {
         for (Class<?> f : filtersClasses) {
             if (f.getName().equals(classname)) {
                 try {
-                    return (IFilter) f.newInstance();
+                    return (IFilter) f.getDeclaredConstructor().newInstance();
                 } catch (Exception ex) {
                     Log.log("Failed to instantiate filter: " + classname);
                     Log.log(ex);

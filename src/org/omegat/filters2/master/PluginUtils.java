@@ -136,7 +136,7 @@ public final class PluginUtils {
         // run base plugins
         for (Class<?> pl : BASE_PLUGIN_CLASSES) {
             try {
-                pl.newInstance();
+                pl.getDeclaredConstructor().newInstance();
             } catch (Exception ex) {
                 Log.log(ex);
             }
@@ -202,9 +202,9 @@ public final class PluginUtils {
             String[] languages = ann.languages();
             try {
                 if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
-                    languages = ((ITokenizer) c.newInstance()).getSupportedLanguages();
+                    languages = ((ITokenizer) c.getDeclaredConstructor().newInstance()).getSupportedLanguages();
                 }
-            } catch (IllegalAccessException | InstantiationException ex) {
+            } catch (Exception ex) {
                 Log.log(ex);
             }
             for (String s : languages) {

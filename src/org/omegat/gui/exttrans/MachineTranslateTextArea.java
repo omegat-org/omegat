@@ -30,10 +30,9 @@
 package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
-
-import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -89,7 +88,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
         for (Class<?> mtc : PluginUtils.getMachineTranslationClasses()) {
             try {
-                MachineTranslators.add((IMachineTranslation) mtc.newInstance());
+                MachineTranslators.add((IMachineTranslation) mtc.getDeclaredConstructor().newInstance());
             } catch (Exception ex) {
                 Log.log(ex);
             }

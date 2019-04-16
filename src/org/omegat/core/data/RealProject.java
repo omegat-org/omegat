@@ -1605,7 +1605,8 @@ public class RealProject implements IProject {
     protected ITokenizer createTokenizer(String cmdLine, Class<?> projectPref) {
         if (!StringUtil.isEmpty(cmdLine)) {
             try {
-                return (ITokenizer) this.getClass().getClassLoader().loadClass(cmdLine).newInstance();
+                return (ITokenizer) this.getClass().getClassLoader().loadClass(cmdLine).getDeclaredConstructor()
+                        .newInstance();
             } catch (ClassNotFoundException e) {
                 Log.log(e.toString());
             } catch (Throwable e) {
@@ -1613,7 +1614,7 @@ public class RealProject implements IProject {
             }
         }
         try {
-            return (ITokenizer) projectPref.newInstance();
+            return (ITokenizer) projectPref.getDeclaredConstructor().newInstance();
         } catch (Throwable e) {
             Log.log(e);
         }

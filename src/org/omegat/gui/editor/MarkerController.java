@@ -73,7 +73,7 @@ public class MarkerController {
         // start all markers threads
         for (Class<?> mc : PluginUtils.getMarkerClasses()) {
             try {
-                ms.add((IMarker) mc.newInstance());
+                ms.add((IMarker) mc.getDeclaredConstructor().newInstance());
             } catch (Exception ex) {
                 Log.logErrorRB(ex, "PLUGIN_MARKER_INITIALIZE", mc.getName());
             }

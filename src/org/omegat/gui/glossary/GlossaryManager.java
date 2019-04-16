@@ -77,7 +77,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         List<IGlossary> gl = new ArrayList<IGlossary>();
         for (Class<?> glc : PluginUtils.getGlossaryClasses()) {
             try {
-                gl.add((IGlossary) glc.newInstance());
+                gl.add((IGlossary) glc.getDeclaredConstructor().newInstance());
             } catch (Exception ex) {
                 Log.log(ex);
             }

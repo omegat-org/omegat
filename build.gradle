@@ -644,13 +644,9 @@ tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { 
 // Disable .zip distributions for Linux
 tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { it.enabled = false }
 
-ext.webstartProps = loadProperties(file("${assetDir}/webstart.properties"))
-
 jnlp {
     href "${applicationName}.jnlp"
-    if (webstartProps.codebase) {
-        codebase webstartProps.codebase
-    }
+    codebase findProperty('jwsCodebase')
     withXml {
         information {
             title applicationName
@@ -670,11 +666,13 @@ jnlp {
             property name: 'javaws.cfg.jauthenticator', value: true
         }
     }
-    if (webstartProps.keystore) {
-        signJarAddedManifestEntries = ['Codebase': webstartProps.codebase,
-            'Permissions': 'all-permissions',
-            'Application-Name': applicationName]
-        signJarParams = webstartProps.subMap('keystore', 'alias', 'storepass', 'keypass', 'tsaurl')
+    signJarAddedManifestEntries = [
+        'Codebase': findProperty('jwsCodebase'),
+        'Permissions': 'all-permissions',
+        'Application-Name': applicationName
+    ]
+    signJarParams = ['keystore', 'alias', 'storepass', 'keypass', 'tsaurl'].collectEntries {
+        [it, findProperty("jws${it.capitalize()}")]
     }
 }
 

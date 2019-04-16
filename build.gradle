@@ -612,7 +612,10 @@ ext.makeWinTask = { args ->
         outputs.file signedExe
         doLast {
             exec {
-                commandLine 'osslsigncode','sign',
+                // You'd think we could just set the PATH, but there be dragons here
+                // https://github.com/palantir/gradle-docker/issues/162
+                def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('release/ci/osslsigncode')
+                commandLine exe, 'sign',
                     '-pkcs12', project.property('winCodesignFile'),
                     '-pass', project.property('winCodesignPassword'),
                     '-n', applicationName,

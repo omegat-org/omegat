@@ -568,7 +568,7 @@ ext.makeWinTask = { args ->
         destinationDir = file("${buildDir}/innosetup/${args.name}")
         outputs.file installerExe
         onlyIf {
-            (!args.jrePath || !args.jrePath.empty) && exePresent('iscc')
+            !args.jrePath || !args.jrePath.empty
         }
         doFirst {
             delete "$destinationDir/jre"
@@ -590,7 +590,10 @@ ext.makeWinTask = { args ->
                 filteringCharset = 'UTF-8'
             }
             exec {
-                commandLine 'iscc', "${destinationDir}/OmegaT.iss"
+                // You'd think we could just set the PATH, but there be dragons here
+                // https://github.com/palantir/gradle-docker/issues/162
+                def exe = exePresent('iscc') ?  'iscc' : file('release/ci/iscc')
+                commandLine exe, "${destinationDir}/OmegaT.iss"
             }
             ant.move file: "${destinationDir}/${installerBasename}.exe",
                 todir: distsDir

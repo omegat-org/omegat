@@ -5,7 +5,7 @@
  OmegaT - Java based Computer Assisted Translation (CAT) tool
  Copyright (C) 2011-2012 Didier Briel
                2014-2015 Didier Briel
- 
+
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,9 +26,9 @@
 **************************************************************************/
 -->
 <project name="OmegaT documentation" default="all">
-  
-    <include file="../../doc_src_paths.xml"/>   
-   
+
+    <include file="../../doc_src_paths.xml"/>
+
     <target name="include">
         <exec executable="xmllint"
               dir="." >
@@ -54,7 +54,7 @@
             <arg value="page.margin.outer=&quot;12mm&quot;" />
             <arg value="page.margin.top=&quot;8mm&quot;" />
             <arg value="page.margin.bottom=&quot;8mm&quot;" />
-            <arg value="generate.toc=book toc,title,figure,table" />       
+            <arg value="generate.toc=book toc,title,figure,table" />
             <arg value="chapter.autolabel=1" />
             <arg value="section.autolabel=1" />
             <arg value="toc.max.depth=2" />
@@ -87,7 +87,7 @@
             <arg value="page.margin.outer=&quot;12mm&quot;" />
             <arg value="page.margin.top=&quot;8mm&quot;" />
             <arg value="page.margin.bottom=&quot;8mm&quot;" />
-            <arg value="generate.toc=book toc,title,figure,table" />       
+            <arg value="generate.toc=book toc,title,figure,table" />
             <arg value="chapter.autolabel=1" />
             <arg value="section.autolabel=1" />
             <arg value="toc.max.depth=2" />
@@ -104,16 +104,16 @@
             </classpath>
         </java>
     </target>
-    
+
     <condition property="fop.home.lib" else="${fop.home}/lib">
         <isset property="fop.home.lib"/>
     </condition>
-    
+
     <condition property="fop.home.build" else="${fop.home}/build">
         <isset property="fop.home.build"/>
-    </condition>      
+    </condition>
 
-    <taskdef name="fop" 
+    <taskdef name="fop"
              classname="org.apache.fop.tools.anttasks.Fop">
         <classpath>
             <fileset dir="${fop.home.lib}">
@@ -127,18 +127,18 @@
     </taskdef>
 
     <target name="pdf" depends="fo">
-        <fop format="application/pdf" 
+        <fop format="application/pdf"
              fofile="${language}/PDF/OmegaT_documentation.fo"
-             outfile="${language}/PDF/OmegaT_documentation_${language}.PDF" 
+             outfile="${language}/PDF/OmegaT_documentation_${language}.PDF"
              basedir="${language}/"
              userconfig="fop.xconf"
              force="true" />
     </target>
 
     <target name="pdf-cjk" depends="fo-cjk">
-        <fop format="application/pdf" 
+        <fop format="application/pdf"
              fofile="${language}/PDF/OmegaT_documentation.fo"
-             outfile="${language}/PDF/OmegaT_documentation_${language}.PDF" 
+             outfile="${language}/PDF/OmegaT_documentation_${language}.PDF"
              basedir="${language}/"
              userconfig="fop.xconf"
              force="true" />
@@ -177,7 +177,7 @@
         <!-- Other languages -->
         <copy file="${language}/version_${language}.properties" tofile="../docs/${language}/version_${language}.properties" />
     </target>
-     
+
     <target name="instant-start">
         <java dir="."
               fork="true"
@@ -198,7 +198,7 @@
             <arg value="toc.max.depth=0" />
             <arg value="generate.toc=0" />
             <arg value="generate.index=0" />
-            <arg value="html.stylesheet=OmegaT.css" />  
+            <arg value="html.stylesheet=OmegaT.css" />
             <classpath>
                 <pathelement location="${saxon}" />
                 <pathelement path="${saxon}" />
@@ -209,11 +209,11 @@
              <fileset dir="${language}/images" />
         </copy>
     </target>
-     
+
     <target name="html" depends="chunk,instant-start">
     </target>
-        
-     
+
+
     <target name="javahelp" depends="include"> <!-- Not yet operationnal -->
         <java dir="."
               fork="true"
@@ -242,6 +242,5 @@
      </target>
 
     <target name="all" depends="pdf,html" />
-    
-</project>
 
+</project>

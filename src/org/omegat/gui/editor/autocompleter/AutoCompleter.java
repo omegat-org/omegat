@@ -51,6 +51,7 @@ import org.omegat.gui.editor.chartable.CharTableAutoCompleterView;
 import org.omegat.gui.editor.history.HistoryCompleter;
 import org.omegat.gui.editor.history.HistoryPredictor;
 import org.omegat.gui.glossary.GlossaryAutoCompleterView;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -402,7 +403,7 @@ public class AutoCompleter implements IAutoCompleter {
      * @return
      */
     public String keyText(int base, int modifier) {
-         return KeyEvent.getKeyModifiersText(modifier) + "+" + KeyEvent.getKeyText(base);
+        return KeyEvent.getModifiersExText(modifier) + "+" + KeyEvent.getKeyText(base);
     }
 
     public void textDidChange() {

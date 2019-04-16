@@ -126,7 +126,7 @@ public final class StaticUtils {
      * @return true if checked key pressed
      */
     public static boolean isKey(KeyEvent e, int code, int modifiers) {
-        return e.getKeyCode() == code && e.getModifiers() == modifiers;
+        return e.getKeyCode() == code && e.getModifiersEx() == modifiers;
     }
 
     /**

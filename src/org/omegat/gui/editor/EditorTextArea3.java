@@ -441,7 +441,8 @@ public class EditorTextArea3 extends JEditorPane {
         if (processed) {
             e.consume();
         } else {
-            if ((e.getModifiers() & (KeyEvent.CTRL_MASK | KeyEvent.META_MASK | KeyEvent.ALT_MASK)) == 0) {
+            if ((e.getModifiersEx()
+                    & (KeyEvent.CTRL_DOWN_MASK | KeyEvent.META_DOWN_MASK | KeyEvent.ALT_DOWN_MASK)) == 0) {
                 // there is no Alt,Ctrl,Cmd keys, i.e. it's char
                 if (e.getKeyCode() != KeyEvent.VK_SHIFT && !isNavigationKey(e.getKeyCode())) {
                     // it's not a single 'shift' press or navigation key

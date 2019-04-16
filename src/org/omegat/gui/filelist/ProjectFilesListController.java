@@ -433,7 +433,7 @@ public class ProjectFilesListController {
         @Override
         public void keyTyped(KeyEvent e) {
             char c = e.getKeyChar();
-            if ((e.getModifiers() == 0 || e.getModifiers() == KeyEvent.SHIFT_MASK)
+            if ((e.getModifiersEx() == 0 || e.getModifiersEx() == KeyEvent.SHIFT_DOWN_MASK)
                     && !Character.isWhitespace(c) && !Character.isISOControl(c)) {
                 if (isFiltering()) {
                     resumeFilter(e.getKeyChar());

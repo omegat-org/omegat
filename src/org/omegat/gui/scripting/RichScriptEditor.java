@@ -214,7 +214,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
         menu.addSeparator();
 
-        int metaShiftMask = getToolkit().getMenuShortcutKeyMask() | InputEvent.SHIFT_MASK;
+        int metaShiftMask = Java8Compat.getMenuShortcutKeyMaskEx() | InputEvent.SHIFT_DOWN_MASK;
         KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F, metaShiftMask);
         Action a = m_csp.addBottomComponent(ks, m_findToolBar);
         a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_FIND_BAR"));

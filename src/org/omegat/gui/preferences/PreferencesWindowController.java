@@ -792,7 +792,9 @@ public class PreferencesWindowController implements FurtherActionListener {
                 }
                 realIndex++;
                 if (visibleIndex == index) {
-                    return (TreeNode) children.elementAt(realIndex);
+                    // Java 11 compatibility: suppress redundant cast warning
+                    Object result = children.elementAt(realIndex);
+                    return (TreeNode) result;
                 }
             }
 

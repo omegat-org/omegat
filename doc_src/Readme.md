@@ -128,10 +128,13 @@ as `docbook-xml-4.5`.
 The ones available in `doc_src` are only there for reference.
 
 # Fonts
+The following fonts must be installed:
 
-Creating PDFs requires having the DejaVu Sans font family available.
-
-Creating PDFs for CJK languages requires having the Arial Unicode MS font family available.
+- Latin: [DejaVu Sans](https://dejavu-fonts.github.io/)
+- Japanese: [IPA P
+  Gothic](https://ipafont.ipa.go.jp/old/ipafont/download.html#en)
+- Chinese: [WenQuanYi Micro
+  Hei](http://wenq.org/wqy2/index.cgi?action=browse&id=Home&lang=en)
 
 # Usage
 
@@ -152,10 +155,6 @@ All the scripts require the language folder as argument. Examples:
 ## Building PDF
 
     ant -Dlanguage=en pdf
-
-## Building PDF for a CJK language
-
-    ant -Dlanguage=ja pdf-cjk
 
 ## Building Javahelp
 

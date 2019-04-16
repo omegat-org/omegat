@@ -40,6 +40,15 @@
         </exec>
     </target>
 
+    <!-- The fonts must be available in the system -->
+    <condition property="font.family" value="IPAPGothic">
+        <equals arg1="${language}" arg2="ja"/>
+    </condition>
+    <condition property="font.family" value="WenQuanYi Micro Hei">
+        <equals arg1="${language}" arg2="zh_CN"/>
+    </condition>
+    <property name="font.family" value="DejaVu Sans"/>
+
     <target name="fo" depends="include">
         <java dir="."
               fork="true"
@@ -62,43 +71,9 @@
             <arg value="indent=no" />
             <arg value="fop.extension=1" />
             <arg value="insert.olink.pdf.frag=1" />
-            <!-- The DejaVu fonts must be available in the system -->
-            <arg value="body.font.family=DejaVu Sans" />
-            <arg value="title.font.family=DejaVu Sans" />
-            <arg value="monospace.font.family=DejaVu Sans" />
-            <classpath>
-                <pathelement location="${saxon}"/>
-                <pathelement path="${saxon}"/>
-            </classpath>
-        </java>
-    </target>
-
-    <target name="fo-cjk" depends="include">
-        <java dir="."
-              fork="true"
-              failonerror="true"
-              maxmemory="128m"
-              classname="com.icl.saxon.StyleSheet" >
-            <arg value="-o" />
-            <arg value="${language}/pdf/OmegaT_documentation.fo" />
-            <arg value="${language}/index.xml" />
-            <arg value="${dbk}/fo/docbook.xsl" />
-            <arg value="paper.type=A4" />
-            <arg value="page.margin.inner=18mm" />
-            <arg value="page.margin.outer=12mm" />
-            <arg value="page.margin.top=8mm" />
-            <arg value="page.margin.bottom=8mm" />
-            <arg value="generate.toc=book toc,title,figure,table" />
-            <arg value="chapter.autolabel=1" />
-            <arg value="section.autolabel=1" />
-            <arg value="toc.max.depth=2" />
-            <arg value="indent=no" />
-            <arg value="fop.extension=1" />
-            <arg value="insert.olink.pdf.frag=1" />
-            <!-- The Arial Unicode MS fonts must be available in the system -->
-            <arg value="body.font.family=Arial Unicode MS" />
-            <arg value="title.font.family=Arial Unicode MS" />
-            <arg value="monospace.font.family=Arial Unicode MS" />
+            <arg value="body.font.family=${font.family}" />
+            <arg value="title.font.family=${font.family}" />
+            <arg value="monospace.font.family=${font.family}" />
             <classpath>
                 <pathelement location="${saxon}"/>
                 <pathelement path="${saxon}"/>
@@ -128,15 +103,6 @@
     </taskdef>
 
     <target name="pdf" depends="fo">
-        <fop format="application/pdf"
-             fofile="${language}/PDF/OmegaT_documentation.fo"
-             outfile="${language}/PDF/OmegaT_documentation_${language}.PDF"
-             basedir="${language}/"
-             userconfig="fop.xconf"
-             force="true" />
-    </target>
-
-    <target name="pdf-cjk" depends="fo-cjk">
         <fop format="application/pdf"
              fofile="${language}/PDF/OmegaT_documentation.fo"
              outfile="${language}/PDF/OmegaT_documentation_${language}.PDF"

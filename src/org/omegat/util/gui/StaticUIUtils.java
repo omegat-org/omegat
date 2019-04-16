@@ -425,7 +425,7 @@ public final class StaticUIUtils {
         comp.getDocument().addUndoableEditListener(manager);
 
         // Handle undo (Ctrl/Cmd+Z);
-        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
+        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Java8Compat.getMenuShortcutKeyMaskEx(),
                 false);
         Action undoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -438,7 +438,7 @@ public final class StaticUIUtils {
         comp.getActionMap().put("UNDO", undoAction);
 
         // Handle redo (Ctrl/Cmd+Y);
-        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
+        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Java8Compat.getMenuShortcutKeyMaskEx(),
                 false);
         Action redoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {

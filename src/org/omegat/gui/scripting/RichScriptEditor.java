@@ -61,6 +61,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 
@@ -195,19 +196,19 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
         JMenuItem item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_FIND"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, getToolkit().getMenuShortcutKeyMask()));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, Java8Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowFindDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_REPLACE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, getToolkit().getMenuShortcutKeyMask()));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, Java8Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowReplaceDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_GOTO_LINE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, getToolkit().getMenuShortcutKeyMask()));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, Java8Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(new GoToLineAction());
         menu.add(item);
 

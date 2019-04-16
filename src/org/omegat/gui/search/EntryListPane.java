@@ -31,7 +31,6 @@ package org.omegat.gui.search;
 
 import java.awt.Color;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -69,6 +68,7 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -117,7 +117,7 @@ class EntryListPane extends JTextPane {
         // Add KeyStrokes: Enter, Ctrl+Enter (Cmd+Enter for MacOS)
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), KEY_GO_TO_NEXT_SEGMENT);
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), KEY_GO_TO_PREVIOUS_SEGMENT);
+                Java8Compat.getMenuShortcutKeyMaskEx()), KEY_GO_TO_PREVIOUS_SEGMENT);
         return map;
     }
 

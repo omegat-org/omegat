@@ -37,7 +37,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
-import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
@@ -127,6 +126,7 @@ import org.omegat.gui.preferences.view.UserPassController;
 import org.omegat.gui.preferences.view.VersionCheckPreferencesController;
 import org.omegat.gui.preferences.view.ViewOptionsController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -311,7 +311,7 @@ public class PreferencesWindowController implements FurtherActionListener {
             }
         });
         KeyStroke searchKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+                Java8Compat.getMenuShortcutKeyMaskEx());
         inputMap.put(searchKeyStroke, ACTION_KEY_NEW_SEARCH);
         actionMap.put(ACTION_KEY_CLEAR_OR_CLOSE, new AbstractAction() {
             @Override

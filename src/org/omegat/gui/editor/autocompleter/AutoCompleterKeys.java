@@ -25,12 +25,12 @@
 
 package org.omegat.gui.editor.autocompleter;
 
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 import javax.swing.KeyStroke;
 
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Preferences;
 
 /**
@@ -79,7 +79,7 @@ public class AutoCompleterKeys {
         // AutoCompleter
         trigger = shortcuts.getKeyStroke("autocompleterTrigger");
         boolean useLeftRight = Preferences.isPreference(Preferences.AC_SWITCH_VIEWS_WITH_LR);
-        int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+        int mask = Java8Compat.getMenuShortcutKeyMaskEx();
         nextView = useLeftRight ? KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, mask)
                 : shortcuts.getKeyStroke("autocompleterNextView");
         prevView = useLeftRight ? KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, mask)

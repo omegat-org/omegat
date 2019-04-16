@@ -145,6 +145,12 @@
              force="true" />
     </target>
 
+    <condition property="version.properties.filename"
+               value="version.properties"
+               else="version_${language}.properties">
+        <equals arg1="${language}" arg2="en"/>
+    </condition>
+
     <target name="chunk" depends="include">
         <java dir="."
               fork="true"
@@ -173,10 +179,8 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <!-- For English -->
-        <copy file="${language}/version.properties" tofile="../docs/${language}/version.properties" />
-        <!-- Other languages -->
-        <copy file="${language}/version_${language}.properties" tofile="../docs/${language}/version_${language}.properties" />
+        <copy file="${language}/${version.properties.filename}"
+              tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
     <target name="instant-start">

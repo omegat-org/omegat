@@ -24,6 +24,10 @@ ext {
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     omtWebsite = 'https://omegat.org'
     envIsCi = project.hasProperty('envIsCi')
+    localPropsFile = file('local.properties')
+    if (localPropsFile.file) {
+        loadProperties(localPropsFile).each { k, v -> set(k, v) }
+    }
 }
 
 sourceCompatibility = javaVersion
@@ -324,7 +328,7 @@ distributions {
                 include 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
-                exclude '**/build/**', 'doc_src/**/pdf/**', 'gradle.properties'
+                exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
             }
             into('lib/provided') {
                 from configurations.runtime
@@ -447,7 +451,7 @@ installMacDist {
 task installMacSignedDist(type: Sync) {
     description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
     onlyIf {
-        // Set this in e.g. gradle.properties
+        // Set this in e.g. local.properties
         project.hasProperty('macCodesignIdentity')
     }
     with distributions.mac.contents
@@ -602,7 +606,7 @@ ext.makeWinTask = { args ->
     def signedTaskName = "${args.name}Signed"
     task(signedTaskName) {
         onlyIf {
-            // Set these in e.g. gradle.properties
+            // Set these in e.g. local.properties
             ['winCodesignFile', 'winCodesignPassword', 'winCodesignTimestampUrl'].every {
                 project.hasProperty(it)
             }

@@ -1,0 +1,16 @@
+## Windows code signing
+winCodesignFile=
+winCodesignPassword=
+winCodesignTimestampUrl=
+
+## Mac code signing
+macCodesignIdentity=
+
+## Bintray publishing
+bintrayUser=
+bintrayKey=
+
+## SourceForge web
+sourceforgeWebUser=
+# Not required when using SSH auth
+sourceforgeWebPassword=

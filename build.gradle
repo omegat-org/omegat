@@ -572,7 +572,9 @@ ext.makeWinTask = { args ->
         destinationDir = file("${buildDir}/innosetup/${args.name}")
         outputs.file installerExe
         onlyIf {
-            !args.jrePath || !args.jrePath.empty
+            def jreOk = !args.jrePath || !args.jrePath.empty
+            def installerOk = exePresent('iscc') || exePresent('docker')
+            jreOk && installerOk
         }
         doFirst {
             delete "$destinationDir/jre"
@@ -673,6 +675,12 @@ jnlp {
     ]
     signJarParams = ['keystore', 'alias', 'storepass', 'keypass', 'tsaurl'].collectEntries {
         [it, findProperty("jws${it.capitalize()}")]
+    }
+}
+
+signJars {
+    onlyIf {
+        ['jwsCodebase', 'jwsKeystore'].every { hasProperty(it) }
     }
 }
 

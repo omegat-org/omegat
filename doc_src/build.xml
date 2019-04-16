@@ -5,6 +5,7 @@
  OmegaT - Java based Computer Assisted Translation (CAT) tool
  Copyright (C) 2011-2012 Didier Briel
                2014-2015 Didier Briel
+               2019 Aaron Madlon-Kay
 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -50,15 +51,15 @@
             <arg value="${language}/index.xml" />
             <arg value="${dbk}/fo/docbook.xsl" />
             <arg value="paper.type=A4" />
-            <arg value="page.margin.inner=&quot;18mm&quot;" />
-            <arg value="page.margin.outer=&quot;12mm&quot;" />
-            <arg value="page.margin.top=&quot;8mm&quot;" />
-            <arg value="page.margin.bottom=&quot;8mm&quot;" />
+            <arg value="page.margin.inner=18mm" />
+            <arg value="page.margin.outer=12mm" />
+            <arg value="page.margin.top=8mm" />
+            <arg value="page.margin.bottom=8mm" />
             <arg value="generate.toc=book toc,title,figure,table" />
             <arg value="chapter.autolabel=1" />
             <arg value="section.autolabel=1" />
             <arg value="toc.max.depth=2" />
-            <arg value="indent=&quot;no&quot;" />
+            <arg value="indent=no" />
             <arg value="fop.extension=1" />
             <arg value="insert.olink.pdf.frag=1" />
             <!-- The DejaVu fonts must be available in the system -->
@@ -83,15 +84,15 @@
             <arg value="${language}/index.xml" />
             <arg value="${dbk}/fo/docbook.xsl" />
             <arg value="paper.type=A4" />
-            <arg value="page.margin.inner=&quot;18mm&quot;" />
-            <arg value="page.margin.outer=&quot;12mm&quot;" />
-            <arg value="page.margin.top=&quot;8mm&quot;" />
-            <arg value="page.margin.bottom=&quot;8mm&quot;" />
+            <arg value="page.margin.inner=18mm" />
+            <arg value="page.margin.outer=12mm" />
+            <arg value="page.margin.top=8mm" />
+            <arg value="page.margin.bottom=8mm" />
             <arg value="generate.toc=book toc,title,figure,table" />
             <arg value="chapter.autolabel=1" />
             <arg value="section.autolabel=1" />
             <arg value="toc.max.depth=2" />
-            <arg value="indent=&quot;no&quot;" />
+            <arg value="indent=no" />
             <arg value="fop.extension=1" />
             <arg value="insert.olink.pdf.frag=1" />
             <!-- The Arial Unicode MS fonts must be available in the system -->

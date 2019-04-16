@@ -217,7 +217,7 @@ ext {
 
     assetDir = findProperty('assetDir') ?: '../'
 
-    macJRE = file("${assetDir}/jre-mac-root")
+    macJRE = fileTree(dir: assetDir, include: 'jre-*-macosx-x64.tar.gz')
 
     linuxJRE = file("${assetDir}/jre-linux")
     linux64JRE = file("${assetDir}/jre-linux-64")
@@ -348,9 +348,17 @@ distributions {
                 with main.contents
                 exclude '*.sh', '*.kaptn', 'OmegaT', 'OmegaT.bat'
             }
-            from(macJRE) {
-                into 'OmegaT.app/Contents/PlugIns/jre.bundle'
-                fileMode 0755
+            if (!macJRE.empty) {
+                from(tarTree(macJRE.singleFile)) {
+                    into 'OmegaT.app/Contents/PlugIns'
+                    includeEmptyDirs = false
+                    eachFile {
+                        def segs = it.relativePath.segments.collect {
+                            it =~ /jre.*\.jre/ ? 'jre.bundle' : it
+                        }
+                        it.relativePath = new RelativePath(!it.directory, segs as String[])
+                    }
+                }
             }
         }
     }
@@ -421,6 +429,12 @@ distributions {
     }
 }
 
+installMacDist {
+    doFirst {
+        delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
+    }
+}
+
 task installMacSignedDist(type: Sync) {
     description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
     onlyIf {
@@ -438,7 +452,7 @@ task installMacSignedDist(type: Sync) {
 
 macDistZip {
     onlyIf {
-        macJRE.directory
+        !macJRE.empty
     }
     archiveName = "${applicationName}_${version}${omtVersion.beta}_Mac.zip"
 }

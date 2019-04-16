@@ -880,6 +880,34 @@ task jar2(type: Sync) {
     }
 }
 
+ext.getModules = {
+    // TODO: Figure out why we need to exclude JAXB deps here
+    execGetOutput "jdeps -q --print-module-deps --multi-release 11 " +
+        (jar.outputs.files +
+         configurations.runtime.findAll { !it.name.contains('jaxb') }.collect { it.path }).join(' ')
+}
+
+task printModules {
+    dependsOn jar
+    doFirst {
+        println getModules()
+    }
+}
+
+task runtime(type: Exec) {
+    outputs.dir "$buildDir/runtime"
+    dependsOn jar
+    doFirst {
+        delete "$buildDir/runtime"
+        def args = ["${System.env.JAVA_HOME}/bin/jlink",
+                    '--no-header-files', '--no-man-pages',
+                    '--compress=2', '--strip-debug',
+                    '--add-modules', getModules(),
+                    '--output', "$buildDir/runtime"]
+        commandLine args
+    }
+}
+
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
     main = mainClassName

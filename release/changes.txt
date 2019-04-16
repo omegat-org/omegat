@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 5
 ----------------------------------------------------------------------
-  2 Enhancement
+  3 Enhancements
   1 Bug fix
 ----------------------------------------------------------------------
 4.1.5 update 5 vs 4.1.5 update 4
@@ -10,19 +10,18 @@
 
   - Added Apache Ivy to allow fetching external libraries in Groovy scripts
   https://sourceforge.net/p/omegat/feature-requests/1204/
-  
-  
+
   Bug fixes:
 
-  - Plugins classes are only loaded once, even if multiple copies are 
+  - Plugins classes are only loaded once, even if multiple copies are
   present in the plugins/ folder.
-  
+
   Other changes:
-  
-  - When listing available dictionaries from the net, allow dictionaries with 
+
+  - When listing available dictionaries from the net, allow dictionaries with
   only the language code in the name (e.g FR.dic)
-  
-  - Added basic autocompletion to the scripting window (Ctrl+Enter to cycle 
+
+  - Added basic autocompletion to the scripting window (Ctrl+Enter to cycle
   through suggestions)
 
 ----------------------------------------------------------------------
@@ -51,8 +50,8 @@
 
   - New Polish, Czech and Slovak segmentation rules
 
-  - When running scripts on the command line, mock bindings are added for 
-"editor" and "glossary", and "console" output are written on System.out. 
+  - When running scripts on the command line, mock bindings are added for
+"editor" and "glossary", and "console" output are written on System.out.
 Calls to console scripts are logged.
 
 
@@ -890,7 +889,7 @@ could fail with duplicate numbers
 
   Bug fixes:
 
-  - Translations not loaded when first 2 letters of 3-character language 
+  - Translations not loaded when first 2 letters of 3-character language
 codes are the same
   https://sourceforge.net/p/omegat/bugs/845/
 

@@ -14,7 +14,48 @@ Gradle Support plugin to open the OmegaT project in NetBeans.)
 
 Check the other files in this directory for documentation. You can
 produce Javadoc by running `gradlew javadoc`, or browse online:
+
     https://omegat.sourceforge.io/javadoc-latest/
+
+
+Configuring Build Tasks
+=======================
+
+Some build tasks, such as signed installers, require additional configuration
+via a `local.properties` file placed at the root of the source tree. See
+`local.properties.example`.
+
+
+Build Assets
+============
+
+Some build tasks require the user to supply additional files not included in the
+OmegaT source. These files should be placed in the assets directory, which by
+default is `..`, i.e. one level up from the OmegaT source root. You can specify
+a different directory by supplying the argument `-PassetDir=/path/to/wherever`.
+
+In particular, with-JRE builds require a JRE tarball for the appropriate
+platform, e.g. `jre-*-macosx-x64.tar.gz`.
+
+
+Containerized Tasks
+===================
+
+Some build tasks require additional software to be installed:
+
+- Windows installers require InnoSetup with all optional language files
+  http://www.jrsoftware.org/isinfo.php
+
+- Signed Windows installers require osslsigncode
+  https://sourceforge.net/projects/osslsigncode/
+
+- Docs generation requires a whole ecosystem. See /doc_src/Readme.txt
+
+To alleviate the pain of installing and configuring things, these tools have
+been containerized and automated via Docker. If you want to run these build
+tasks, you are strongly recommended to install Docker:
+
+    https://www.docker.com/
 
 
 Working with Dependencies

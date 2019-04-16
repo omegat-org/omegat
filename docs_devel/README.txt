@@ -92,6 +92,22 @@ Dependencies not available for consumption via Maven/Gradle are committed to
 /lib/manual.
 
 
+Versioning
+==========
+
+OmegaT versions loosely follow semver (https://semver.org/). The version number
+consists of three parts: MAJOR.MINOR.PATCH. When PATCH is zero it can be elided
+from documentation or casual references, but not in code.
+
+- MAJOR: The distinction between "standard" (sometimes "beta" in the code) and
+  "latest"
+- MINOR: "Large" changes that affect the UI or core functionality
+- PATCH: Bug fixes and small changes that aren't "large"
+
+In the past there was also an "update" number following PATCH, but this has been
+deprecated.
+
+
 Contributing to OmegaT
 ======================
 

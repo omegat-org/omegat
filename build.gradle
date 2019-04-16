@@ -105,6 +105,10 @@ dependencies {
         compile 'commons-lang:commons-lang:2.6'
         compile 'org.slf4j:slf4j-jdk14:1.7.25'
 
+        compile 'javax.xml.bind:jaxb-api:2.3.1'
+        compile 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+        compile 'com.sun.xml.bind:jaxb-impl:2.3.2'
+
         // PDF Filter
         compile 'org.apache.pdfbox:pdfbox:2.0.14'
 

@@ -738,6 +738,32 @@ checkstyle {
 }
 checkstyleMain.exclude '**/gen/**'
 
+task manualPdfs {
+    description = 'Build PDF manuals for all languages. Requires Docker.'
+}
+
+ext.pdfManualXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
+pdfManualXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def taskName = "manualPdf${lang.capitalize()}"
+    task(taskName) {
+        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        outputs.file "${distsDir}/OmegaT_documentation_${lang}.PDF"
+        doLast {
+            exec {
+                workingDir = 'doc_src'
+                commandLine './docgen', "-Dlanguage=${lang}", 'pdf'
+            }
+            copy {
+                from fileTree(dir: "doc_src/${lang}/pdf", include: '*.PDF')
+                into distsDir
+            }
+            delete fileTree(dir: "doc_src/${lang}", includes: ['pdf/*', 'index.xml'])
+        }
+    }
+    manualPdfs.dependsOn taskName
+}
+
 task jar2(type: Sync) {
     description = 'Create minimal executable output for debugging.'
     destinationDir = file("${buildDir}/install/jar2")

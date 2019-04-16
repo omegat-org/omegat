@@ -7,7 +7,7 @@ ext {
         config
     }
 
-    doCmd = { cmd ->
+    execGetOutput = { cmd ->
         StringBuilder output = new StringBuilder()
         cmd.execute().waitForProcessOutput(output, null)
         output.toString().trim()
@@ -35,8 +35,8 @@ ext {
          4. If none of the above, the value "unknown"
          */
         def provided = findProperty('repoRevision') ?: ''
-        def git = file('.git').directory ? doCmd('git rev-parse --short HEAD') : ''
-        def svn = file('.svn').directory ? doCmd('svnversion') : ''
+        def git = file('.git').directory ? execGetOutput('git rev-parse --short HEAD') : ''
+        def svn = file('.svn').directory ? execGetOutput('svnversion') : ''
         [provided, omtVersion.revision, git, svn, 'unknown'].find {
             it != 'dev' && !it.empty
         }
@@ -44,9 +44,9 @@ ext {
 
     repoHasChanges = {
         if (file('.git').directory) {
-            !doCmd('git status -s').empty
+            !execGetOutput('git status -s').empty
         } else if (file('.svn').directory) {
-            !doCmd('svn status -q').empty
+            !execGetOutput('svn status -q').empty
         } else {
             false
         }

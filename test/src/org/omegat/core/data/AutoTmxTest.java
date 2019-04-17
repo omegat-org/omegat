@@ -95,6 +95,39 @@ public class AutoTmxTest {
         checkTranslation(ste12, "Modifier", TMXEntry.ExternalLinked.xICE);
     }
 
+    @Test
+    public void test2() throws Exception {
+        ProjectProperties props = new ProjectProperties();
+        props.setSourceLanguage("en");
+        props.setTargetLanguage("fr");
+        props.setTargetTokenizer(LuceneFrenchTokenizer.class);
+        File file = new File("test/data/enforcetmx/enforce1.tmx");
+        ExternalTMX enforceTMX = new ExternalTMFactory.TMXLoader(file)
+                .setDoSegmenting(props.isSentenceSegmentingEnabled())
+                .load(props.getSourceLanguage(), props.getTargetLanguage());
+
+        Core.initializeConsole(new HashMap<String, String>());
+
+        p = new RealProject(props);
+        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false,
+                new File("test/data/enforcetmx/project1.tmx"), new ProjectTMX.CheckOrphanedCallback() {
+                    public boolean existSourceInProject(String src) {
+                        return true;
+                    }
+
+                    public boolean existEntryInProject(EntryKey key) {
+                        return true;
+                    }
+                });
+
+        SourceTextEntry ste;
+        p.allProjectEntries.add(ste = createSTE(null, "Edit"));
+        checkTranslation(ste, "foobar", null);
+        p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
+        p.appendFromAutoTMX(enforceTMX, true);
+        checkTranslation(ste, "bizbaz", TMXEntry.ExternalLinked.xENFORCED);
+    }
+
     SourceTextEntry createSTE(String id, String source) {
         EntryKey ek = new EntryKey("file", source, id, null, null, null);
         return new SourceTextEntry(ek, 0, null, null, new ArrayList<ProtectedPart>());

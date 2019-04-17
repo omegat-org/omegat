@@ -45,7 +45,7 @@ import java.util.Objects;
 public class TMXEntry {
     public enum ExternalLinked {
         // declares how this entry linked to external TMX in the tm/auto/
-        xICE, x100PC, xAUTO
+        xICE, x100PC, xAUTO, xENFORCED
     };
 
     public final String source;

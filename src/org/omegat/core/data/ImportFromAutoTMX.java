@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik, Didier Briel
+               2019 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -86,10 +87,11 @@ public class ImportFromAutoTMX {
                         // TMX entry is an alternative translation that does not match this STE.
                         continue;
                     }
-                    if (existTranslation.isTranslated()) { // default translation already exist
+                    if (isEnforcedTMX) {
+                        setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xENFORCED);
+                    } else if (existTranslation.isTranslated()) { // default translation already exist
                         if (existTranslation.linked == TMXEntry.ExternalLinked.xAUTO
-                                && !Objects.equals(existTranslation.translation, e.translation)
-                                || isEnforcedTMX) {
+                                && !Objects.equals(existTranslation.translation, e.translation)) {
                             // translation already from auto and really changed or translation comes
                             // from the enforce folder
                             setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);

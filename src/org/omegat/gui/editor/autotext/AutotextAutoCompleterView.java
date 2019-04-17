@@ -77,13 +77,13 @@ public class AutotextAutoCompleterView extends AutoCompleterListView {
     public String itemToString(AutoCompleterItem item) {
         StringBuilder b = new StringBuilder();
 
-        if (item.extras != null && item.extras[0] != null && !item.extras[0].isEmpty()) {
+        if (item.extras != null && item.extras.length > 0 && item.extras[0] != null && !item.extras[0].isEmpty()) {
             b.append(item.extras[0]).append(" \u2192 ");
         }
         if (item.payload != null) {
             b.append(item.payload);
         }
-        if (item.extras != null && item.extras[1] != null && !item.extras[1].isEmpty()) {
+        if (item.extras != null && item.extras.length > 1 && item.extras[1] != null && !item.extras[1].isEmpty()) {
             b.append(" (").append(item.extras[1]).append(")");
         }
         return b.toString();

@@ -112,7 +112,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
 
     @Override
     public String itemToString(AutoCompleterItem item) {
-        return item.extras[0];
+        return item.extras != null && item.extras.length > 0 ? item.extras[0] : item.payload;
     }
 
     private static class TagTokenizer implements ITokenizer {

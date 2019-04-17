@@ -139,7 +139,8 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
 
     @Override
     public String itemToString(AutoCompleterItem item) {
-        if (Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_SOURCE) && item.extras != null) {
+        if (Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_SOURCE) && item.extras != null
+                && item.extras.length > 0) {
             if (Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE)) {
                 return item.payload + " \u2190 " + item.extras[0];
             } else {

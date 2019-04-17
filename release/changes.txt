@@ -16,9 +16,6 @@
 
   - Java 11 compatibility
   https://sourceforge.net/p/omegat/feature-requests/1436/
-  
-  - Updated Groovy to 2.5.6, and including groovy-dateutil module
-  https://sourceforge.net/p/omegat/feature-requests/1441/
 
   Bug fixes:
 

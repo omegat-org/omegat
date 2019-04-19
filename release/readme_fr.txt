@@ -132,15 +132,15 @@ Contributeurs
 
 OmegaT est l'œuvre initiale de Keith Godfrey.
 
-Didier Briel est le responsable du projet OmegaT.
+Aaron Madlon-Kay est le responsable du projet OmegaT.
 
 Équipe actuelle :
 (ordre alphabétique)
 
   Vincent Bidaux (responsable documentation)
-  Didier Briel (responsable du projet OmegaT, gestionnaire de communauté Twitter)
+  Marco Cevoli (gestionnaire de la communauté Telegram)
+  Jean-Christophe Helary (gestionnaire de la communauté Twitter) 
   Kos Ivantsof (responsable de la localisation)
-  Aaron Madlon-Kay (responsable de l'intégration)
   Concepción Martin (gestionnaire de communauté Facebook)
   Briac Pilpré (webmestre)
   Lucie Vecerova (gestionnaire de communauté Facebook)
@@ -151,6 +151,7 @@ Les personnes qui ont contribué incluent :
 (ordre alphabétique)
 
   Anthony Baldwin (responsable de la localisation)
+  Didier Briel (responsable du projet OmegaT)
   Alex Buloichik (développeur principal)
   Sabine Cretella
   Dmitri Gabinski

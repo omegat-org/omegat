@@ -3,6 +3,7 @@
 ----------------------------------------------------------------------
   5 Enhancements
   1 Bug fix
+  5 Localisation updates
 ----------------------------------------------------------------------
 4.2.0 vs 4.1.5 update 4
 
@@ -29,6 +30,14 @@
 
   - Added basic autocompletion to the scripting window (Ctrl+Enter to cycle
   through suggestions)
+
+  Localisation Updates:
+
+  - Dutch localisation updated to 4.2.0 (UI, readme)
+  - French localisation updated to 4.2.0 (UI, readme)
+  - Russian localisation updated to 4.2.0 (UI, scripts, readme)
+  - Turkish localisation updated to 4.2.0 (UI, scripts, readme)
+  - Simplified Chinese localisation updated to 4.2.0 (UI, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 4 (2019-03-04)

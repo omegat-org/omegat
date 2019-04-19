@@ -1,0 +1,6 @@
+#!/bin/sh
+
+exec docker run -i --rm \
+    -v "$(dirname "$PWD")":/work/root \
+    -w /work/root/doc_src4 \
+    omegatorg/docgen "$@"

@@ -5,18 +5,14 @@
   <title>Installing and running <application>OmegaT</application></title>
 
   <section>
-    <title id="Windows.users">Windows Users<indexterm class="singular">
-        <primary>Installing OmegaT</primary>
-
-        <secondary>Windows</secondary>
-      </indexterm></title>
+    <title id="Windows.users">Windows Users</title>
 
     <section>
       <title id="which.package.to.download.windows">Downloading the
       package</title>
 
-      <para>Do you have a Java implementation compatible with Oracle's Java
-      1.6 JRE?</para>
+      <para>Do you have a Java implementation compatible with Oracle's Java 8
+      JRE?</para>
 
       <itemizedlist>
         <listitem>
@@ -57,11 +53,7 @@
     </section>
 
     <section id="running.OmegaT.Windows">
-      <title>Running <application>OmegaT<indexterm class="singular">
-          <primary>Running OmegaT</primary>
-
-          <secondary>Windows</secondary>
-        </indexterm></application></title>
+      <title>Running <application>OmegaT</application></title>
 
       <para>Once <application>OmegaT</application> is installed, you can click
       on <emphasis><application>OmegaT</application>.jar</emphasis> to launch
@@ -69,18 +61,12 @@
 
       <para>The simplest way to launch OmegaT, however, is to execute
       the<emphasis> <application>OmegaT</application>.exe</emphasis> program.
-      <indexterm class="singular">
-          <primary>Running OmegaT</primary>
-
-          <secondary>Windows</secondary>
-
-          <tertiary>INI file</tertiary>
-        </indexterm>The options for the program start-up in this case will be
-      read from the <emphasis><application>OmegaT</application>.l4J.ini
-      </emphasis>file, which resides in the same folder as the exe file and
-      which you can edit to reflect your setup. The following example for the
-      INI file reserves 1GB of memory, requests French as the user language
-      and Canada as the country:</para>
+      The options for the program start-up in this case will be read from the
+      <emphasis><application>OmegaT</application>.l4J.ini </emphasis>file,
+      which resides in the same folder as the exe file and which you can edit
+      to reflect your setup. The following example for the INI file reserves
+      1GB of memory, requests French as the user language and Canada as the
+      country:</para>
 
       <literallayout><code># OmegaT.exe runtime configuration
 # To use a parameter, remove the '#' before the '-'
@@ -98,11 +84,7 @@
     </section>
 
     <section>
-      <title>Upgrading OmegaT <indexterm class="singular">
-          <primary>Upgrading OmegaT</primary>
-
-          <secondary>Windows</secondary>
-        </indexterm></title>
+      <title>Upgrading OmegaT</title>
 
       <para><emphasis>This information applies only to the "Traditional"
       Windows versions of OmegaT. It does not apply to the Web Start versions,
@@ -157,17 +139,13 @@
   </section>
 
   <section id="Linux.Intel.users">
-    <title>Linux (Intel) Users<indexterm class="singular">
-        <primary>Installing OmegaT</primary>
-
-        <secondary>Linux</secondary>
-      </indexterm></title>
+    <title>Linux (Intel) Users</title>
 
     <section id="which.package.to.download.Linux">
       <title>Downloading the right package</title>
 
-      <para>Do you have a Java implementation compatible with Oracle's Java
-      1.6 JRE?</para>
+      <para>Do you have a Java implementation compatible with Oracle's Java 8
+      JRE?</para>
 
       <itemizedlist>
         <listitem>
@@ -202,11 +180,7 @@
       panels (Gnome)</title>
 
       <section id="KDE.users">
-        <title>KDE 4 Users<indexterm class="singular">
-            <primary>Customizing OmegaT</primary>
-
-            <secondary>Linux</secondary>
-          </indexterm></title>
+        <title>KDE 4 Users</title>
 
         <para>You can add <application>OmegaT</application> to your menus as
         follows:</para>
@@ -288,11 +262,7 @@
     </section>
 
     <section id="running.OmegaT.Linux">
-      <title>Running <application>OmegaT<indexterm class="singular">
-          <primary>Running OmegaT</primary>
-
-          <secondary>Linux</secondary>
-        </indexterm></application></title>
+      <title>Running <application>OmegaT</application></title>
 
       <para>You can launch OmegaT from the command line with a script that
       includes start-up options or you can click on
@@ -306,11 +276,7 @@
   </section>
 
   <section id="MAC.OSX.users">
-    <title>Mac OS X Users<indexterm class="singular">
-        <primary>Installing OmegaT</primary>
-
-        <secondary>OS X</secondary>
-      </indexterm></title>
+    <title>Mac OS X Users</title>
 
     <section id="which.package.to.download.OSX">
       <title>Downloading the package</title>
@@ -342,11 +308,7 @@
     </section>
 
     <section id="running.OmegaT.OSX">
-      <title>Running <application>OmegaT<indexterm class="singular">
-          <primary>Running OmegaT</primary>
-
-          <secondary>OS X</secondary>
-        </indexterm></application></title>
+      <title>Running <application>OmegaT</application></title>
 
       <para>Double-click on<emphasis>
       <application>OmegaT</application>.app</emphasis> or click on its
@@ -365,13 +327,7 @@
       right-clicking on it and selecting your text editor of choice. You can
       also "cd" there directly from the command line and open
       <application><emphasis>Configuration.properties</emphasis> in a command
-      line editor like emacs or vi</application>.<indexterm class="singular">
-          <primary>Customizing OmegaT</primary>
-
-          <secondary>OS X</secondary>
-
-          <tertiary>Launch parameters</tertiary>
-        </indexterm></para>
+      line editor like emacs or vi</application>.</para>
 
       <para>Options are changed by modifying
       <emphasis>Configuration.properties</emphasis>. For pre-defined options,
@@ -381,10 +337,10 @@
       Japanese.</para>
 
       <para>To change the amount of memory available, edit
-      <emphasis>OmegaT.app/Contents/Info.plist</emphasis> file and
-      change the content of &lt;string&gt;-Xmx1024M&lt;/string&gt;. For
-      instance, &lt;string&gt;-Xmx2048M&lt;/string&gt; will launch OmegaT with
-      2 gigas of memory.</para>
+      <emphasis>OmegaT.app/Contents/Info.plist</emphasis> file and change the
+      content of &lt;string&gt;-Xmx1024M&lt;/string&gt;. For instance,
+      &lt;string&gt;-Xmx2048M&lt;/string&gt; will launch OmegaT with 2 gigas
+      of memory.</para>
 
       <para>To launch multiple instances of
       <emphasis><application>OmegaT</application>.app</emphasis>, double-click
@@ -412,11 +368,7 @@
   </section>
 
   <section id="other.systems">
-    <title>Other Systems<indexterm class="singular">
-        <primary>Installing OmegaT</primary>
-
-        <secondary>Other systems</secondary>
-      </indexterm></title>
+    <title>Other Systems</title>
 
     <para>This information applies to systems such as Solaris SPARC/x86/x64,
     Linux x64/PowerPC, Windows x64</para>
@@ -431,14 +383,14 @@
       Windows x64 etc) must have a running compatible Java JRE on their system
       to be able to use <application>OmegaT</application>.</para>
 
-      <para>Do you have a Java implementation compatible with Oracle's Java
-      1.6 JRE?</para>
+      <para>Do you have a Java implementation compatible with Oracle's Java 8
+      JRE?</para>
 
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
           <emphasis>OmegaT_3.n.n_Windows_without_JRE.</emphasis>zip. This
-          package can be used on any platform where a Java 1.6 JRE compatible
+          package can be used on any platform where a Java 8 JRE compatible
           JRE is installed.</para>
         </listitem>
 
@@ -454,8 +406,8 @@
           your system (see below) and download
           <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
 
-          <para>Oracle provides JREs for Solaris SPARC/x86 (Java 1.6) and for
-          Linux x64, Solaris x64, Windows x64 (Java 1.6) at <ulink
+          <para>Oracle provides JREs for Solaris SPARC/x86 (Java 8) and for
+          Linux x64, Solaris x64, Windows x64 (Java 8) at <ulink
           url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink></para>
 
           <para>IBM provides JREs for Linux PowerPC at <ulink
@@ -468,12 +420,7 @@
     </section>
 
     <section id="OmegaT.installation.other">
-      <title><application>Installing OmegaT</application><indexterm
-          class="singular">
-          <primary>Installing OmegaT</primary>
-
-          <secondary>Other systems</secondary>
-        </indexterm></title>
+      <title><application>Installing OmegaT</application></title>
 
       <para>To install <application>OmegaT</application>, simply unpack the
       <emphasis role="bold">OmegaT_3.n.n_Without_JRE.zip</emphasis> file. This
@@ -491,11 +438,7 @@
     </section>
 
     <section id="running.OmegaT.other">
-      <title>Running <application>OmegaT<indexterm class="singular">
-          <primary>Running OmegaT</primary>
-
-          <secondary>Other systems</secondary>
-        </indexterm></application></title>
+      <title>Running <application>OmegaT</application></title>
 
       <para>Once <application>OmegaT</application> is installed, you can
       launch it directly from the command line, you can create a script that
@@ -510,11 +453,7 @@
   </section>
 
   <section id="drag.and.drop">
-    <title>Drag and drop<indexterm class="singular">
-        <primary>Running OmegaT</primary>
-
-        <secondary>Drag and drop</secondary>
-      </indexterm></title>
+    <title>Drag and drop</title>
 
     <para>In most systems, it is possible to open a project by dropping an
     <filename>omegat.project</filename> file onto the OmegaT icon on the
@@ -523,18 +462,14 @@
   </section>
 
   <section id="using.Java.Web.Start">
-    <title>Using Java Web Start<indexterm class="singular">
-        <primary>Running OmegaT</primary>
+    <title>Using Java Web Start</title>
 
-        <secondary>Using Java Web Start</secondary>
-      </indexterm></title>
-
-    <para>Java Web Start technology (part of Java 1.6 and above) can be used
-    to deploy standalone Java software applications with a single click over
-    the network. Java Web Start ensures that the latest version of the
-    application will be deployed, as well as the correct version of the Java
-    Runtime Environment (JRE) used. To start OmegaT for the first time with
-    Java Web Start, load the following URL in your browser:</para>
+    <para>Java Web Start technology (part of Java 8 and above) can be used to
+    deploy standalone Java software applications with a single click over the
+    network. Java Web Start ensures that the latest version of the application
+    will be deployed, as well as the correct version of the Java Runtime
+    Environment (JRE) used. To start OmegaT for the first time with Java Web
+    Start, load the following URL in your browser:</para>
 
     <para><emphasis>https://omegat.sourceforge.io/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
@@ -565,11 +500,7 @@
   </section>
 
   <section>
-    <title>Starting OmegaT from the command line<indexterm class="singular">
-        <primary>Running OmegaT</primary>
-
-        <secondary>Command line launching</secondary>
-      </indexterm></title>
+    <title>Starting OmegaT from the command line</title>
 
     <para>Normally, it is not necessary to start
     <application>OmegaT</application> from the command line. However, the
@@ -640,11 +571,7 @@
     </section>
 
     <section id="launch.command.arguments">
-      <title>Launch command arguments<indexterm class="singular">
-          <primary>Running OmegaT</primary>
-
-          <secondary>Launch script arguments</secondary>
-        </indexterm></title>
+      <title>Launch command arguments</title>
 
       <para>The basic command has already been mentioned above. Changes to
       this command involve the addition of "arguments" to it. Arguments are
@@ -664,23 +591,17 @@
           <para><emphasis role="bold">User interface language
           </emphasis></para>
 
-          <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm
-              class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>User interface language</tertiary>
-            </indexterm> Normally, i.e. when <application>OmegaT</application>
-          is launched without any arguments, the program first detects the
-          language of the user's operating system. If a user interface in this
-          language is available, <application>OmegaT</application> uses it.
-          So, if the user's operating system is Russian and
-          <application>OmegaT</application> has been localized in Russian,
-          <application>OmegaT</application> is displayed with a Russian user
-          interface, Russian menus, etc. If the language of the user's system
-          is not available, <application>OmegaT</application> defaults to
-          English. This is the standard behavior.</para>
+          <para><emphasis role="bold">-Duser.language=XX</emphasis> Normally,
+          i.e. when <application>OmegaT</application> is launched without any
+          arguments, the program first detects the language of the user's
+          operating system. If a user interface in this language is available,
+          <application>OmegaT</application> uses it. So, if the user's
+          operating system is Russian and <application>OmegaT</application>
+          has been localized in Russian, <application>OmegaT</application> is
+          displayed with a Russian user interface, Russian menus, etc. If the
+          language of the user's system is not available,
+          <application>OmegaT</application> defaults to English. This is the
+          standard behavior.</para>
 
           <para>The <emphasis>"-Duser.language=XX"</emphasis> argument causes
           <application>OmegaT</application> to use the language specified
@@ -699,19 +620,12 @@
         <listitem>
           <para><emphasis role="bold">User country</emphasis></para>
 
-          <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm
-              class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>User country</tertiary>
-            </indexterm> Besides the language, you can also specify the
-          country, for example CN or TW in case of the Chinese language. To
-          display the instant start guide in the desired language, you need to
-          specify both the language and the country. This is necessary even if
-          there's only one combination available, like pt_BR in case of
-          Portuguese / Brazil.</para>
+          <para><emphasis role="bold">-Duser.country=XX</emphasis> Besides the
+          language, you can also specify the country, for example CN or TW in
+          case of the Chinese language. To display the instant start guide in
+          the desired language, you need to specify both the language and the
+          country. This is necessary even if there's only one combination
+          available, like pt_BR in case of Portuguese / Brazil.</para>
         </listitem>
       </itemizedlist>
 
@@ -719,19 +633,12 @@
         <listitem>
           <para><emphasis role="bold">Memory assignment</emphasis></para>
 
-          <para><emphasis role="bold">-XmxZZM </emphasis><indexterm
-              class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>Memory assignment</tertiary>
-            </indexterm>This command assigns more memory to
-          <application>OmegaT</application>. By default, 512 MB are assigned,
-          so there is no advantage in assigning less than this figure. "ZZ"
-          stands for the amount of memory assigned, in megabytes. The command
-          to launch <application>OmegaT</application> with assignment of 1024
-          MB (1 gigabyte) of memory is therefore:</para>
+          <para><emphasis role="bold">-XmxZZM </emphasis>This command assigns
+          more memory to <application>OmegaT</application>. By default, 512 MB
+          are assigned, so there is no advantage in assigning less than this
+          figure. "ZZ" stands for the amount of memory assigned, in megabytes.
+          The command to launch <application>OmegaT</application> with
+          assignment of 1024 MB (1 gigabyte) of memory is therefore:</para>
 
           <para><literal>java -Xmx1024M -jar
           <application>OmegaT</application>.jar</literal></para>
@@ -740,30 +647,16 @@
         <listitem>
           <para><emphasis role="bold">Proxy host IP address</emphasis></para>
 
-          <para><emphasis role="bold"><emphasis
-          role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm
-              class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>Proxy host IP address</tertiary>
-            </indexterm></emphasis> The IP address of your proxy server, if
-          your system uses a proxy.</para>
+          <para><emphasis
+          role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> The IP
+          address of your proxy server, if your system uses a proxy.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">Proxy host port number</emphasis></para>
 
-          <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis>
-          <indexterm class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>Proxy host port number</tertiary>
-            </indexterm> The port number your system uses to access the proxy
-          server.</para>
+          <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis> The
+          port number your system uses to access the proxy server.</para>
         </listitem>
 
         <listitem>
@@ -771,26 +664,13 @@
 
           <para><emphasis
           role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678
-          </emphasis><emphasis role="bold"><indexterm class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>Google Translate V2</tertiary>
-            </indexterm></emphasis> If you have signed up for the Google
-          Translate services, enter your private Google API key here. Note
-          that the key is 38 characters long.</para>
+          </emphasis> If you have signed up for the Google Translate services,
+          enter your private Google API key here. Note that the key is 38
+          characters long.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Microsoft
-          Translator</emphasis><indexterm class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>Microsoft Translator</tertiary>
-            </indexterm></para>
+          <para><emphasis role="bold">Microsoft Translator</emphasis></para>
 
           <para>Make sure that you have a free Microsoft account. You’ll need
           this to sign-in to <ulink
@@ -810,14 +690,7 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm
-              class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>Yandex Translate</tertiary>
-            </indexterm></para>
+          <para><emphasis role="bold">Yandex Translate</emphasis></para>
 
           <para>Make sure that you have a free Yandex account. You’ll need
           this to be able to obtain and use Yandex Translate API key. API keys
@@ -843,11 +716,7 @@
     </section>
 
     <section id="omegat.command.arguments">
-      <title>OmegaT in the command line mode<indexterm class="singular">
-          <primary>Running OmegaT</primary>
-
-          <secondary>Command line mode</secondary>
-        </indexterm></title>
+      <title>OmegaT in the command line mode</title>
 
       <para>The purpose of the console mode is to use OmegaT as a translation
       tool in a scripting environment. When started in console mode, no GUI is
@@ -1130,26 +999,30 @@
   </section>
 
   <section id="building.OmegaT.from.source">
-    <title>Building <application>OmegaT</application> From Source<indexterm
-        class="singular">
-        <primary>Running OmegaT</primary>
+    <title>Building <application>OmegaT</application> From Source</title>
 
-        <secondary>Building OmegaT from source</secondary>
-      </indexterm></title>
+    <para>The sources of the current version can be retrieved with a SVN
+    client from the repository <filename>svn.code.sf.net/p/omegat/svn/trunk
+    omegat-svn</filename> or directly on <ulink
+    url="https://sourceforge.net/p/omegat/svn/HEAD/tarball?path=/trunk">SourceForge</ulink>.
+    </para>
 
-    <para>Note that you will need the ant program
-    (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>) to build your
-    own version of OmegaT. Unpack the
-    <emphasis>OmegaT_3.n.n_Source.zip</emphasis> file and enter the
-    OmegaT_3.n.n_Source folder or enter the <emphasis>./omegat/</emphasis>
-    folder of the SVN checked out code. Please make sure that a build.xml file
-    is present in that folder. Then, on the command line, type:</para>
+    <para>Once the code is downloaded, open a command in the source folder and
+    type: </para>
 
-    <para><literal>$ ant jar release</literal></para>
+    <para><literal>gradlew assembleDist</literal></para>
 
-    <para>This will create a full distribution of
-    <application>OmegaT</application> in the ./dist/ folder, where you will
-    find all the files necessary to run
+    <para>This will create a full distribution of OmegaT in the
+    <filename>./build/distributions</filename> folder, where you will find a
+    zip containing everything needed to run
     <application>OmegaT</application>.</para>
+
+    <para>You can also run directly the application with the following
+    command:</para>
+
+    <para><literal>gradlew run</literal></para>
+
+    <para>Detailed instructions on building are in the docs_devel <ulink
+    url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">readme</ulink>.</para>
   </section>
 </chapter>

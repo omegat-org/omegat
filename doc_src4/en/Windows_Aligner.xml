@@ -51,6 +51,6 @@
 
     <para>Only rows with the <guilabel>Keep</guilabel> box ticked in the first column will be included when the translation memory is created.</para>
 
-    <para>When the two columns are sufficiently aligned, click <guibutton>Save TMX…</guibutton> to create the resulting translation memory.</para>
+    <para>When the two columns are sufficiently aligned, click <guibutton>Save TMX...</guibutton> to create the resulting translation memory.</para>
   </section>
 </section>

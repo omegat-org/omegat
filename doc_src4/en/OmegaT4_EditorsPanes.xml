@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <chapter id="panes.fulltopic">
   <title>Panes</title>
 
@@ -99,15 +98,7 @@
   <para>You can overlap panes if desired. When this is done the panes display
   a tab at the top. The separators between the panes can be dragged to resize
   panes. Should you lose track of your changes to the user interface, you can
-  use <guimenuitem><indexterm class="singular">
-      <primary>OmegaT windows</primary>
-
-      <seealso>Windows and panes in OmegaT</seealso>
-    </indexterm> <indexterm class="singular">
-      <primary>OmegaT windows</primary>
-
-      <secondary>Restoring to factory setup</secondary>
-    </indexterm>Options → Restore the main window</guimenuitem> any time to
+  use <guimenuitem> Options → Restore the main window</guimenuitem> any time to
   return to the original layout.</para>
 
   <para>It is possible to drag and drop files to each pane, which will react
@@ -117,8 +108,7 @@
         (<filename>omegat.project</filename>) is dropped on this pane, the
         corresponding project will be opened, closing first any opened
         project. Other dropped files will be copied to the
-        <filename>source</filename> folder. This applies also to the <link
-        linkend="section.project.files">Project files</link> window.</para>
+        <filename>source</filename> folder. This applies also to the <link linkend="section.project.files">Project files</link> window.</para>
       </listitem>
 
       <listitem>
@@ -147,9 +137,7 @@
     <para>One of the above segments is the current segment. It is the segment
     that is displayed in two parts. The upper part is in the source language,
     in bold characters with a green background color, the lower part is the
-    editing field, ended by a marker: <indexterm class="singular">
-        <primary>Segment marker</primary>
-      </indexterm>the marker is <literal>&lt;segment nnnn&gt;</literal> where
+    editing field, ended by a marker: the marker is <literal>&lt;segment nnnn&gt;</literal> where
     nnnn is a number of the segment in the project. Use the upper part as a
     reference and replace or modify the contents of the editing field with
     your translation.</para>
@@ -199,9 +187,9 @@
     <para>By default, it is not possible to select words in the source segment
     using the keyboard rather than the mouse. Pressing <keycap>F2</keycap> key
     allows to move the cursor into the source segment (or anywhere in the
-    editor) with the keyboard arrows. In this mode, "<guilabel>Cursor lock
-    off</guilabel>" is displayed at the bottom of the pane. To come back to
-    the standard mode "<guilabel>Cursor lock on</guilabel>", press
+    editor) with the keyboard arrows. In this mode, &quot;<guilabel>Cursor lock
+    off</guilabel>&quot; is displayed at the bottom of the pane. To come back to
+    the standard mode &quot;<guilabel>Cursor lock on</guilabel>&quot;, press
     <keycap>F2</keycap> again.</para>
   </section>
 
@@ -217,70 +205,27 @@
     <para>When you move to the next segment, the first fuzzy match (the one
     with the best matching percentage) is automatically selected. You may
     select a different match by pressing <guimenuitem>Ctrl+2, 3, 4, or
-    5</guimenuitem>.<indexterm>
-        <primary>Shortcuts</primary>
-
-        <secondary>Selecting the match - Ctrl+N</secondary>
-      </indexterm> Of course, pressing <keycombo>
+    5</guimenuitem>. Of course, pressing <keycombo>
         <keycap>Ctrl</keycap>
 
         <keycap>5</keycap>
       </keycombo> will have no effect, if there is no match #5. To use the
     selected match in your translation, use
-    <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
-        <primary>Shortcuts</primary>
-
-        <secondary>Replace text - Ctrl+R</secondary>
-      </indexterm> to replace the target field with the match or use
-    <guimenuitem>Ctrl+I <indexterm class="singular">
-        <primary>Shortcuts</primary>
-
-        <secondary>Insert text - Ctrl+I</secondary>
-      </indexterm></guimenuitem> to insert it at the cursor position.</para>
+    <guimenuitem>Ctrl+R</guimenuitem> to replace the target field with the match or use
+    <guimenuitem>Ctrl+I </guimenuitem> to insert it at the cursor position.</para>
 
     <para>The matching percentage is roughly equivalent to taking the number
     of common words in the matched and the matching segment and dividing by
     the number of words in the longer of the two. The selected fuzzy match is
     highlighted in bold, words that are missing in the segment you are
     translating are colored blue and words adjacent to the missing parts
-    green. In the above example the source segment is <emphasis
-    role="bold">Context menu command</emphasis>. The top match is 100%,
+    green. In the above example the source segment is <emphasis role="bold">Context menu command</emphasis>. The top match is 100%,
     because all words match. So do the next two matches, and the match #4 is
     similar, but different. The line with the matching percentage also
-    includes the name of the translation memory <indexterm class="singular">
-        <primary>Translation memories</primary>
-
-        <secondary>Matches</secondary>
-      </indexterm> containing the match. If there's no file name displayed,
+    includes the name of the translation memory containing the match. If there's no file name displayed,
     the source is the internal project translation memory. Orphan
-    segments<indexterm class="singular">
-        <primary>Translation memories</primary>
-
-        <secondary>Orphan segments</secondary>
-      </indexterm> (the match #2) describe segments in the default project
+    segments (the match #2) describe segments in the default project
     translation memory that have no corresponding source segment.</para>
-
-    <para>There are actually three match estimates available (66/66/30 in the
-    case of the match #4 above). They are defined as follows:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>match percentage (taking into account tokenizers)</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>default OmegaT match - number of matched words - with numerals
-        and tags ignored - divided by the total word count</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>OmegaT match, including numbers, tags</para>
-      </listitem>
-    </itemizedlist>
   </section>
 
   <section>
@@ -308,8 +253,7 @@
 
     <para>Dictionaries are the electronic equivalents of printed dictionaries
     like Merriam Webster, Duden, Larousse etc., that you may have on your
-    desk. See more about them in the chapter on <link
-    linkend="chapter.dictionaries">Dictionaries</link></para>
+    desk. See more about them in the chapter on <link linkend="chapter.dictionaries">Dictionaries</link></para>
   </section>
 
   <section id="Google.Translate">
@@ -318,8 +262,7 @@
     <para>The machine translation pane, when opened, contains the suggestions
     by machine translation tools for the current segment. Press
     <keysym>Ctrl+M</keysym> to replace the translation of the current segment
-    with the suggested translation. More in the chapter <link
-    linkend="chapter.machine.translate">Machine translation</link></para>
+    with the suggested translation. More in the chapter <link linkend="chapter.machine.translate">Machine translation</link></para>
   </section>
 
   <section id="Multiple.Translations">
@@ -369,11 +312,7 @@
     above):</para>
 
     <table>
-      <title>Main Window - counters<indexterm class="singular">
-          <primary>Windows and panes in OmegaT</primary>
-
-          <secondary>Counters</secondary>
-        </indexterm></title>
+      <title>Main Window - counters</title>
 
       <tgroup cols="2">
         <colspec align="left" colnum="1"/>

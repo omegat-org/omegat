@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.help">
+  <title>Help</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>User's Manual...</term>
+
+      <listitem>
+        <para>Opens this manual in the default browser.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>About...</term>
+
+      <listitem>
+        <para>Displays copyright, credits and license information.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Last Changes...</term>
+
+      <listitem>
+        <para>Displays the list of new functionalities, enhancements and bug
+        fixes for each new release.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Log...</term>
+
+      <listitem>
+        <para>Displays the current log file. The title of the dialog reflects
+        the file actually used (which depends on how many instances of OmegaT
+        are running concurrently).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Check for Updates...</term>
+
+      <listitem>
+        <para>Checks to see whether a more recent version of <application>OmegaT</application> has been released.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

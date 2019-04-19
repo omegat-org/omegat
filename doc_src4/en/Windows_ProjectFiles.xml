@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.projectfiles">
+  <title>Project Files</title>
+
+  <para>This window is displayed automatically when OmegaT loads a project,
+  and at any time by pressing <menuchoice>
+      <guimenuitem>Project</guimenuitem>
+
+      <guimenuitem>Project Files...</guimenuitem>
+    </menuchoice>.</para>
+
+  <para><remark>Note:</remark> it is possible to inhibit the window displaying
+  at opening, by setting <emphasis>project_files_show_on_load</emphasis> to
+  <emphasis>false</emphasis> in <filename>omegat.prefs</filename> file
+  (accessible by <menuchoice>
+      <guimenuitem>Options</guimenuitem>
+
+      <guimenuitem>Access Configuration Folder</guimenuitem>
+    </menuchoice> menu).</para>
+
+  <para>Use <guimenuitem>Ctrl+L</guimenuitem> to open and <keycap>Esc</keycap>
+  to close it. The <guilabel>Project Files</guilabel> Window displays the
+  following information:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>the total number of translatable files in the project. These are
+      the files present in the /source folder in a format that OmegaT is able
+      to recognize. This number is displayed in brackets, next to the &quot;Project
+      file&quot; title</para>
+    </listitem>
+
+    <listitem>
+      <para>the list of all translatable files in the project. Clicking on any
+      file will open it for translation.</para>
+
+      <para>Typing any text will open a <guilabel>Filter</guilabel> field
+      where parts of filenames can be entered. You can select a file with
+      <keycap>Up</keycap> and <keycap>Down</keycap> keys, and open it for
+      translation by pressing <keycap>Enter</keycap></para>
+
+      <para>Note: filenames (in first column) can be sorted alphabetically by
+      clicking in the header. It also possible to change the position of a
+      filename, by clicking on it and pressing <emphasis>Move ...</emphasis>
+      buttons.</para>
+
+      <para>Right-clicking on a filename opens a popup that allows to open the
+      source file and (if it exists) the target file.</para>
+    </listitem>
+
+    <listitem>
+      <para>File entries include their names, file filter types, their
+      encoding and the number of segments each file contains</para>
+    </listitem>
+
+    <listitem>
+      <para>the total number of segments, the number of unique segments in the
+      whole project, and the number of unique segments already translated are
+      shown at the bottom</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>The set of <emphasis role="bold">Unique </emphasis>segments is
+  computed by taking all the segments and removing all duplicate segments.
+  (The definition of “unique” is case-sensitive: &quot;Run&quot; and &quot;run&quot; are treated
+  as being different)</para>
+
+  <para>The difference between &quot;Number of segments&quot; and &quot;Number of unique
+  segments&quot; provides an approximate idea of the number of repetitions in the
+  text. Note however that the numbers do not indicate how relevant the
+  repetitions are: they could mean relatively long sentences repeated a number
+  of times (in which case you are fortunate) or it could describe a table of
+  keywords (not so fortunate). The <filename>project_stats.txt</filename>
+  located in the omegat folder of your project contains more detailed segment
+  information, broken down by file.</para>
+
+  <para>Modifying the segmentation rules may have the effect of modifying the
+  number of segments/unique segments. This, however, should generally be
+  avoided once you have started translating the project. See the chapter
+  <emphasis>Segmentation rules</emphasis> for more information.</para>
+
+  <para><emphasis role="bold">Adding files to the project: </emphasis>You can
+  add source files to the project by clicking on the &quot;<guimenuitem>Import
+  Source Files...&quot;</guimenuitem> button. This copies the selected files to the
+  <filename>source</filename> folder and reloads the project to import the new
+  files. You can also add source files from Internet pages, written in
+  MediaWiki, by clicking on<guimenuitem> &quot;Import from MediaWiki&quot;</guimenuitem>
+  button and providing the corresponding URL.</para>
+</section>

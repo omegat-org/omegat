@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.preventdataloss">
+  <title>Prevent data loss</title>
+
+  <para><application>OmegaT</application> is a robust application. However,
+  you should take precautions against data loss when using
+  <application>OmegaT</application>, just as with any other application. When
+  you translate your files, <application>OmegaT</application> stores all your
+  progress in the translation memory <literal>project_save.tmx</literal> that
+  resides in the project's <literal>/omegat</literal> subfolder.</para>
+
+  <para>OmegaT also backs up the translation memory to
+  project_save.tmx.YEARMMDDHHNN.bak in the same subfolder each time a project
+  is opened or reloaded. YEAR is the 4-digit year, MM is the month, DD the day
+  of the month, and HH and NN are the hours and minutes when the previous
+  translation memory was saved.</para>
+
+  <para>If you believe that you have lost translation data, you can use the
+  following procedure to restore the project to its most recently saved state,
+  usually not older than approximately 10 minutes or so:</para>
+
+  <orderedlist>
+    <listitem>
+      <para>close the project</para>
+    </listitem>
+
+    <listitem>
+      <para>rename the current <filename>project_save.tmx </filename>file
+      (e.g. to <filename>project_save.tmx.temporary</filename>)</para>
+    </listitem>
+
+    <listitem>
+      <para>select the backup translation memory that is the most likely to
+      contain the data you are looking for</para>
+    </listitem>
+
+    <listitem>
+      <para>rename it <literal>project_save.tmx</literal></para>
+    </listitem>
+
+    <listitem>
+      <para>open the project</para>
+    </listitem>
+  </orderedlist>
+
+  <para>To avoid losing important data:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Make regular copies of the file /omegat/project_save.tmx to backup
+      media, such as CD or DVD.</para>
+    </listitem>
+
+    <listitem>
+      <para>Until you are familiar with <application>OmegaT</application>,
+      create translated files at regular intervals and check that the
+      translated file contains the latest version of your translation.</para>
+    </listitem>
+
+    <listitem>
+      <para>Take particular care when making changes to the files in
+      <literal>/source</literal> while in the middle of a project. If the
+      source file is modified after you have begun translating,
+      <application>OmegaT</application> may be unable to find a segment that
+      you have already translated.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Use these Help texts to get started. Should you run into problems,
+      post a message in the <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info"><application>OmegaT</application>
+      user group</ulink>. Do not hesitate to post in the language you feel the
+      most familiar with.</para>
+    </listitem>
+  </itemizedlist>
+</section>

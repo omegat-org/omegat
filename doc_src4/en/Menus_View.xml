@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>View</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Mark Translated Segments</term>
+
+      <listitem>
+        <para>If checked, the translated segments will be marked in
+        yellow.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mark Untranslated Segments</term>
+
+      <listitem>
+        <para>If checked, the untranslated segments will be marked in
+        violet.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mark Paragraph delimitations</term>
+
+      <listitem>
+        <para>If checked, the separations between paragraphs in the source document are indicated visually.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Display Source Segments</term>
+
+      <listitem>
+        <para>If checked, source segments will be shown and marked in green.
+        If not checked, source segments will not be shown.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mark Non-Unique Segments</term>
+
+      <listitem>
+        <para>If checked, non-unique segments will be marked in pale
+        grey.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mark Segments with Notes</term>
+
+      <listitem>
+        <para>If checked, segments with notes will be marked in cyan. This
+        marking has priority over <guimenuitem>Mark Translated
+        Segments</guimenuitem> and <guimenuitem>Mark Untranslated
+        Segments</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mark Non-breakable Spaces</term>
+
+      <listitem>
+        <para>If checked, non-breakable spaces will be displayed with a grey
+        background.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mark Whitespace</term>
+
+      <listitem>
+        <para>If checked, white spaces will be displayed with a small
+        dot.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mark Bidirectional Algorithm Control Characters</term>
+
+      <listitem>
+        <para>This option displays <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional
+        control characters</ulink></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mark Auto-Populated Segments</term>
+
+      <listitem>
+        <para>If checked, the background of all segments where the target
+        segment has been auto-populated (from TMXs placed in
+        <filename>/tm/auto</filename> for example) are displayed in colour.
+        The colours are displayed as long as the <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Save
+        auto-populated status</guimenuitem></link> option is checked. Usual
+        translations inserted from the auto folder are displayed in orange.
+        Other translations, identified specifically in the TMX, can be
+        displayed using different colours. For technical details, see the
+        <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request
+        For Enhancement</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Aggressive Font Fallback</term>
+
+      <listitem>
+        <para>Check this option in case <application>OmegaT</application> does
+        not display some glyphs properly (even if the fonts containing the
+        relevant glyphs are installed on your machine). Note: on Windows it
+        seems that this manual font fallback mechanism can interfere with
+        standard font fallback, causing undesirable font substitution. For
+        that reason, it is OFF by default.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Modification Info</term>
+
+      <listitem>
+        <para>Setting the Display Modification option to <guimenuitem>Current
+        segment</guimenuitem> will display the time and the author of the last
+        change in the current segment. Setting it to <guimenuitem>All
+        segments</guimenuitem> shows this information for all segments and
+        <guimenuitem>None</guimenuitem> turns this option off.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

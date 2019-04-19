@@ -34,8 +34,8 @@
   PDFs), you need to use an OCR (optical character recognition) program
   to recognize the text and convert it to a format that can be handled
   by OmegaT.</para>
-    </section>
-  </section>
+
+
 
   <section id="other.file.formats">
     <title>Other file formats</title>
@@ -84,4 +84,5 @@
     conversions, be sure to test all options. Check the <ulink
     url="http://www.omegat.org">OmegaT home page</ulink> for an up-to-date
     listing of auxiliary translation tools.</para>
+</section>
 </section>

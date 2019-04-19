@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<chapter id="panes.fulltopic">
+<chapter id="panes">
   <title>Panes</title>
 
   <para>The main window consists of several panes, the main menu and a status
@@ -108,7 +108,7 @@
         (<filename>omegat.project</filename>) is dropped on this pane, the
         corresponding project will be opened, closing first any opened
         project. Other dropped files will be copied to the
-        <filename>source</filename> folder. This applies also to the <link linkend="section.project.files">Project files</link> window.</para>
+        <filename>source</filename> folder. This applies also to the <link linkend="windows.projectfiles">Project files</link> window.</para>
       </listitem>
 
       <listitem>
@@ -193,7 +193,7 @@
     <keycap>F2</keycap> again.</para>
   </section>
 
-  <section id="match.viewer">
+  <section>
     <title>Fuzzy Matches</title>
 
     <para>The match viewer shows the most similar segments from translation
@@ -248,24 +248,24 @@
     target by right clicking on the selection.</para>
   </section>
 
-  <section id="dictionaries">
+  <section>
     <title>Dictionary</title>
 
     <para>Dictionaries are the electronic equivalents of printed dictionaries
     like Merriam Webster, Duden, Larousse etc., that you may have on your
-    desk. See more about them in the chapter on <link linkend="chapter.dictionaries">Dictionaries</link></para>
+    desk. See more about them in the chapter on <link linkend="appendix.dictionaries">Dictionaries</link></para>
   </section>
 
-  <section id="Google.Translate">
+  <section>
     <title>Machine Translation</title>
 
     <para>The machine translation pane, when opened, contains the suggestions
     by machine translation tools for the current segment. Press
     <keysym>Ctrl+M</keysym> to replace the translation of the current segment
-    with the suggested translation. More in the chapter <link linkend="chapter.machine.translate">Machine translation</link></para>
+    with the suggested translation.</para>
   </section>
 
-  <section id="Multiple.Translations">
+  <section>
     <title>Multiple Translations</title>
 
     <para>A given source segment may require several different translations,
@@ -299,7 +299,7 @@
     check the length of the translation:</para>
   </section>
 
-  <section id="status.bar">
+  <section>
     <title>Status bar</title>
 
     <para>The status bar displays work-flow related messages at the bottom of

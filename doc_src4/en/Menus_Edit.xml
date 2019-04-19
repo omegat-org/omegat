@@ -146,7 +146,7 @@
       <term>Search Project...</term>
 
       <listitem>
-        <para>Opens a new <link linkend="section.search.window">Search
+        <para>Opens a new <link linkend="windows.textsearch">Search
         window</link>.</para>
 
         <para>If you select a text string (in any pane) before pressing
@@ -172,7 +172,7 @@
       <term>Search and Replace...</term>
 
       <listitem>
-        <para>Opens a new <link linkend="section.searchreplace.window">Search
+        <para>Opens a new <link linkend="windows.textreplace">Search
         and replace window</link>.</para>
 
         <para>If you select a text string (in any pane) before pressing

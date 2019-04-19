@@ -176,7 +176,7 @@
       <term>Properties...</term>
 
       <listitem>
-        <para>Displays <link linkend="chapter.project.properties">Project
+        <para>Displays <link linkend="dialogs.projectproperties">Project
         properties</link> dialog to edit project languages and folder
         locations.</para>
       </listitem>
@@ -186,7 +186,7 @@
       <term>Project Files...</term>
 
       <listitem>
-        <para>Opens the <link linkend="section.project.files">Project files
+        <para>Opens the <link linkend="windows.projectfiles">Project files
         window</link>.</para>
       </listitem>
     </varlistentry>

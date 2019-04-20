@@ -5,7 +5,7 @@ relpaths() {
 }
 
 bindpaths() {
-    for arg in "$(relpaths "$@")"; do
+    for arg in $(relpaths "$@"); do
         if [ -e "$arg" ] && [[ "$arg" == /* ]]; then
             printf -- "-v %s:%s" "$arg" "$arg"
         fi

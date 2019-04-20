@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   5 Enhancements
   1 Bug fix
-  6 Localisation updates
+  7 Localisation updates
 ----------------------------------------------------------------------
 4.2.0 vs 4.1.5 update 4
 
@@ -36,9 +36,10 @@
   - Croatian localisation updated to 4.2.0 (UI, readme)
   - Dutch localisation updated to 4.2.0 (UI, readme)
   - French localisation updated to 4.2.0 (UI, readme)
+  - Italian localisation updated to 4.2.0 (UI, readme)
   - Russian localisation updated to 4.2.0 (UI, scripts, readme)
-  - Turkish localisation updated to 4.2.0 (UI, scripts, readme)
   - Simplified Chinese localisation updated to 4.2.0 (UI, scripts, readme)
+  - Turkish localisation updated to 4.2.0 (UI, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 4 (2019-03-04)

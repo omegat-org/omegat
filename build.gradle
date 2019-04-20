@@ -679,8 +679,8 @@ jnlp {
     }
 }
 
-signJars {
-    onlyIf {
+[webstartDistZip, signJars].each { task ->
+    task.onlyIf {
         condition(['jwsCodebase', 'jwsKeystore'].every { hasProperty(it) },
                    'Java Web Start properties not set')
     }

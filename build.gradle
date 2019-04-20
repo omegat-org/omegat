@@ -819,6 +819,9 @@ task releaseCheck {
     }
 }
 
+// E.g. when doing `build`, run checks before making distfiles
+assemble.mustRunAfter check
+
 task release {
     description = 'Create distribution packages for release.'
     dependsOn clean, genDocIndex, releaseCheck, build

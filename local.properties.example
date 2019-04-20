@@ -11,6 +11,7 @@ macCodesignIdentity=
 jwsCodebase=
 # Setup key information for signing jar
 # - keystore:  keystore file
+# - storetype: the type of keystore; specify 'pkcs12' if not default ('jks')
 # - alias:     alias of private key in keystore file
 # - storepass: password for access to keystore
 # - keypass:   password for private key (comment out when equal to storepass)
@@ -20,6 +21,7 @@ jwsCodebase=
 # e.g.,
 #  keytool -genkey -alias webstart -keystore OmegaT.keystore
 #jwsKeystore=
+#jwsStoretype=
 #jwsAlias=
 #jwsStorepass=
 #jwsKeypass=

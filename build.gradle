@@ -674,7 +674,7 @@ jnlp {
         'Permissions': 'all-permissions',
         'Application-Name': applicationName
     ]
-    signJarParams = ['keystore', 'alias', 'storepass', 'keypass', 'tsaurl'].collectEntries {
+    signJarParams = ['keystore', 'storetype', 'alias', 'storepass', 'keypass', 'tsaurl'].collectEntries {
         [it, findProperty("jws${it.capitalize()}")]
     }
 }

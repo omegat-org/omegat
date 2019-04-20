@@ -454,7 +454,7 @@ task installMacSignedDist(type: Sync) {
     description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
     onlyIf {
         // Set this in e.g. local.properties
-        condition(hasProperty('macCodesignIdentity'), 'Code signing property not set')
+        condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
     }
     with distributions.mac.contents
     destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
@@ -609,7 +609,7 @@ ext.makeWinTask = { args ->
         onlyIf {
             // Set these in e.g. local.properties
             def props = ['winCodesignFile', 'winCodesignPassword', 'winCodesignTimestampUrl']
-            conditions([props.every { hasProperty(it) }, 'Code signing properties not set'],
+            conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
                        [file(installerExe).file, 'Unsigned installer not built'],
                        [exePresent('osslsigncode') || exePresent('docker'),
                         'osslsigncode or Docker not installed'])
@@ -681,7 +681,7 @@ jnlp {
 
 [webstartDistZip, signJars].each { task ->
     task.onlyIf {
-        condition(['jwsCodebase', 'jwsKeystore'].every { hasProperty(it) },
+        condition(['jwsCodebase', 'jwsKeystore'].every { project.hasProperty(it) },
                    'Java Web Start properties not set')
     }
 }

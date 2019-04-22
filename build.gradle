@@ -924,6 +924,14 @@ ext.publishAtomically = { name, sourceTask ->
 publishAtomically("manual", webManual)
 publishAtomically("javadoc", javadoc)
 
+ext {
+    codebasePattern = /^https:\/\/omegat\.sourceforge\.io\/([^\/]+)\/$/
+    jwsFlavor = (findProperty('jwsCodebase') =~ codebasePattern)?.getAt(0)[1]
+}
+if (jwsFlavor) {
+    publishAtomically('webstart', installWebstartDist)
+}
+
 task publishVersion {
     description = 'Update the version considered current by the version check.'
     doLast {

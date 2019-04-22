@@ -76,11 +76,20 @@ Make sure `jwsCodebase` is set correctly e.g. in `local.properties`:
 - Latest: `https://omegat.sourceforge.io/webstart-dev/`
 - Standard: `https://omegat.sourceforge.io/webstart/`
 
+If you have SourceForge Web credentials set up (see `local.properties.example`),
+you can just do:
+
 ```sh
-./gradlew webstartDistZip
+./gradlew publishWebstart
 ```
 
-Publish contents of zip to SourceForge Web.
+Otherwise do
+
+```sh
+./gradlew installWebstartDist
+```
+
+and publish the contents to SourceForge Web manually.
 
 
 ## 9. Announce to News, user group

@@ -100,5 +100,7 @@ Publish contents of zip to SourceForge Web.
 
 - Bump version in `Version.properties`, `changes.txt`
 - Move old versions in SourceForge Files into `OldFiles/Releases`
+  - Leave one previous version just in case
+- If promoting from Latest to Standard, move the old Standard versions to Legacy
 - Set fixed bug tickets and implemented RFEs to `closed-fixed`
 - Update ticket milestones if necessary

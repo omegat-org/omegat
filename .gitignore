@@ -8,3 +8,6 @@ build
 bin
 .nb-gradle
 local.properties
+
+# Docs
+.fop

@@ -893,26 +893,27 @@ remotes {
 
 ext.htdocs = '/home/project-web/omegat/htdocs'
 
-ext.publishAtomically = { name, sourceTask ->
-    task("publish${name.capitalize()}") {
-        description = "Copy ${name} to SourceForge web."
-        dependsOn sourceTask
+ext.publishAtomically = { args ->
+    task("publish${args.name.capitalize()}") {
+        description = "Copy ${args.name} to SourceForge web."
+        dependsOn args.sourceTask
         doLast {
             ssh.run {
                 session(remotes.sourceforgeWeb) {
                     def timestamp = new Date().format('yyyyMMddHHmmss')
-                    def tempDir = "${name}-temp-${timestamp}"
-                    def targetDir = "${name}-${omtVersion.beta.empty ? 'standard' : 'latest'}"
+                    def tempDir = "${args.name}-temp-${timestamp}"
+                    def defaultFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
+                    def targetDir = "${args.name}-${args.flavor ?: defaultFlavor}"
                     sftp {
                         cd htdocs
                         mkdir tempDir
                     }
-                    put from: sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
+                    put from: args.sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
                     sftp {
                         cd htdocs
                         try { rename targetDir, "${targetDir}-old-${timestamp}" }
                         catch (ignored) {}
-                        rename "${tempDir}/${sourceTask.destinationDir.name}", targetDir
+                        rename "${tempDir}/${args.sourceTask.destinationDir.name}", targetDir
                         rmdir tempDir
                     }
                 }
@@ -921,15 +922,16 @@ ext.publishAtomically = { name, sourceTask ->
     }
 }
 
-publishAtomically("manual", webManual)
-publishAtomically("javadoc", javadoc)
+publishAtomically(name: 'manual', sourceTask: webManual)
+publishAtomically(name: 'javadoc', sourceTask: javadoc)
 
 ext {
-    codebasePattern = /^https:\/\/omegat\.sourceforge\.io\/([^\/]+)\/$/
-    jwsFlavor = (findProperty('jwsCodebase') =~ codebasePattern)?.getAt(0)[1]
+    codebasePattern = /^https:\/\/omegat\.sourceforge\.io\/webstart-([^\/]+)\/$/
+    def matcher = findProperty('jwsCodebase') =~ codebasePattern
+    jwsFlavor = matcher ? matcher[0][1] : null
 }
 if (jwsFlavor) {
-    publishAtomically('webstart', installWebstartDist)
+    publishAtomically(name: 'webstart', sourceTask: installWebstartDist, flavor: jwsFlavor)
 }
 
 task publishVersion {

@@ -102,7 +102,9 @@ and publish the contents to SourceForge Web manually.
 ## 9. Announce to News, user group
 
 - [OmegaT News](https://sourceforge.net/p/omegat/news/)
+  - [Example](https://sourceforge.net/p/omegat/news/2019/03/omegat-latest-version-415-update-4-released/)
 - [User Group](https://groups.yahoo.com/neo/groups/OmegaT/info)
+  - [Example](https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/43871)
 
 
 ## 10. Push new version for version check

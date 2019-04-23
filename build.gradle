@@ -27,7 +27,11 @@ ext {
     envIsCi = project.hasProperty('envIsCi')
     localPropsFile = file('local.properties')
     if (localPropsFile.file) {
-        loadProperties(localPropsFile).each { k, v -> set(k, v) }
+        loadProperties(localPropsFile).each { k, v ->
+            if (!findProperty(k)) {
+                set(k, v)
+            }
+        }
     }
 }
 

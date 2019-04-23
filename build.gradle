@@ -906,8 +906,8 @@ ext.publishAtomically = { args ->
             ssh.run {
                 session(remotes.sourceforgeWeb) {
                     def timestamp = new Date().format('yyyyMMddHHmmss')
-                    def tempDir = "${args.name}-temp-${timestamp}"
-                    def targetDir = "${args.name}-${args.flavor ?: omtFlavor}"
+                    def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
+                    def tempDir = "${targetDir}-temp-${timestamp}"
                     sftp {
                         cd htdocs
                         mkdir tempDir
@@ -930,14 +930,14 @@ publishAtomically(name: 'manual', sourceTask: webManual)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)
 
 ext {
-    codebasePattern = /^https:\/\/omegat\.sourceforge\.io\/webstart-([^\/]+)\/$/
+    codebasePattern = /^https:\/\/omegat\.sourceforge\.io\/([^\/]+)\/$/
     def matcher = findProperty('jwsCodebase') =~ codebasePattern
-    jwsFlavor = matcher ? matcher[0][1] : null
+    jwsTargetDir = matcher ? matcher[0][1] : null
 }
-if (jwsFlavor) {
-    publishAtomically(name: "webstart${jwsFlavor.capitalize()}",
+if (jwsTargetDir) {
+    publishAtomically(name: camelCase(jwsTargetDir),
                       sourceTask: installWebstartDist,
-                      flavor: jwsFlavor)
+                      targetDir: jwsTargetDir)
 }
 
 task publishVersion {

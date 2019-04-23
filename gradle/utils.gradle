@@ -83,4 +83,10 @@ ext {
         }
         deets.relativePath = new RelativePath(!deets.directory, segs as String[])
     }
+
+    camelCase = { str ->
+        str.tokenize('-_ ').withIndex().collect { tok, i ->
+            i == 0 ? tok : tok.capitalize()
+        }.join()
+    }
 }

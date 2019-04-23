@@ -28,6 +28,7 @@ See `/docs_devel/README.txt` for details about versioning scheme.
 
 ```sh
 svn copy ^/trunk ^/tags/vX.Y.Z -m "Published version X.Y.Z of OmegaT"
+svn switch ^/tags/vX.Y.Z
 ```
 
 Replace `^/trunk` with the appropriate branch if releasing a Stable version.

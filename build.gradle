@@ -684,10 +684,16 @@ jnlp {
     }
 }
 
-[webstartDistZip, signJars].each { task ->
-    task.onlyIf {
-        condition(['jwsCodebase', 'jwsKeystore'].every { project.hasProperty(it) },
-                   'Java Web Start properties not set')
+[webstartDistZip, signJars, generateJnlp].each { task ->
+    task.configure {
+        def requiredProps = ['jwsCodebase', 'jwsKeystore', 'jwsAlias']
+        onlyIf {
+            condition(requiredProps.every { project.hasProperty(it) },
+                      'Java Web Start properties not set')
+        }
+        requiredProps.each {
+            inputs.property it, findProperty(it)
+        }
     }
 }
 

@@ -22,6 +22,7 @@ mainClassName = 'org.omegat.Main'
 ext {
     javaVersion = '1.8'
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
+    omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
     omtWebsite = 'https://omegat.org'
     envIsCi = project.hasProperty('envIsCi')
     localPropsFile = file('local.properties')
@@ -902,8 +903,7 @@ ext.publishAtomically = { args ->
                 session(remotes.sourceforgeWeb) {
                     def timestamp = new Date().format('yyyyMMddHHmmss')
                     def tempDir = "${args.name}-temp-${timestamp}"
-                    def defaultFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
-                    def targetDir = "${args.name}-${args.flavor ?: defaultFlavor}"
+                    def targetDir = "${args.name}-${args.flavor ?: omtFlavor}"
                     sftp {
                         cd htdocs
                         mkdir tempDir
@@ -939,7 +939,7 @@ task publishVersion {
     doLast {
         ssh.run {
             session(remotes.sourceforgeWeb) {
-                def target = "${htdocs}/Version-${omtVersion.beta.empty ? 'standard' : 'latest'}.properties"
+                def target = "${htdocs}/Version-${omtFlavor}.properties"
                 put from: 'src/org/omegat/Version.properties', into: target
             }
         }

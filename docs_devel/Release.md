@@ -71,7 +71,8 @@ Only if a Standard release:
 
 ## 8. Build WebStart dist locally, publish
 
-Make sure `jwsCodebase` is set correctly e.g. in `local.properties`:
+Make sure `jwsCodebase` is set correctly e.g. in `local.properties` or on the
+command line:
 
 - Latest: `https://omegat.sourceforge.io/webstart-dev/`
 - Standard: `https://omegat.sourceforge.io/webstart/`
@@ -80,7 +81,13 @@ If you have SourceForge Web credentials set up (see `local.properties.example`),
 you can just do:
 
 ```sh
-./gradlew publishWebstart
+./gradlew publishWebstartDev -PjwsCodebase=https://omegat.sourceforge.io/webstart-dev/
+```
+
+or
+
+```sh
+./gradlew publishWebstart -PjwsCodebase=https://omegat.sourceforge.io/webstart/
 ```
 
 Otherwise do

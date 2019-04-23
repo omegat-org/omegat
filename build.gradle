@@ -931,7 +931,9 @@ ext {
     jwsFlavor = matcher ? matcher[0][1] : null
 }
 if (jwsFlavor) {
-    publishAtomically(name: 'webstart', sourceTask: installWebstartDist, flavor: jwsFlavor)
+    publishAtomically(name: "webstart${jwsFlavor.capitalize()}",
+                      sourceTask: installWebstartDist,
+                      flavor: jwsFlavor)
 }
 
 task publishVersion {

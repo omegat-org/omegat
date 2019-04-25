@@ -777,11 +777,15 @@ task manualPdfs {
     description = 'Build PDF manuals for all languages. Requires Docker.'
 }
 
-ext.pdfManualXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
-pdfManualXmls.each { xml ->
+task manualHtmls {
+    description = 'Build HTML manuals for all languages. Requires Docker.'
+}
+
+ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
+manualIndexXmls.each { xml ->
     def lang = xml.parentFile.name
-    def taskName = "manualPdf${lang.capitalize()}"
-    task(taskName) {
+    def pdfTaskName = "manualPdf${lang.capitalize()}"
+    task(pdfTaskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
         outputs.file "${distsDir}/OmegaT_documentation_${lang}.PDF"
         doLast {
@@ -796,11 +800,29 @@ pdfManualXmls.each { xml ->
             delete fileTree(dir: "doc_src/${lang}", includes: ['pdf/*', 'index.xml'])
         }
     }
-    manualPdfs.dependsOn taskName
+    manualPdfs.dependsOn pdfTaskName
+
+    def htmlTaskName = "manualHtml${lang.capitalize()}"
+    task(htmlTaskName) {
+        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        doLast {
+            exec {
+                workingDir = 'doc_src'
+                commandLine './docgen', "-Dlanguage=${lang}", 'chunk'
+            }
+            delete file("doc_src/${lang}/index.xml")
+        }
+    }
+    manualHtmls.dependsOn htmlTaskName
 }
 
 task instantStartGuides {
     description = 'Build Instant Start guides for all languages. Requires Docker.'
+}
+
+task updateManuals {
+    description = 'Update Instant Start guides and HTML manuals.'
+    dependsOn manualHtmls, instantStartGuides
 }
 
 ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.xml')

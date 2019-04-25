@@ -293,6 +293,7 @@ distributions {
             from('release') {
                 into 'docs'
                 include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt', 'contributors.txt'
+                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             from('scripts') {
                 into 'scripts'
@@ -302,10 +303,6 @@ distributions {
             }
             from('release') {
                 include '*.txt', '*.html'
-                exclude 'readme.txt'
-            }
-            from('release') {
-                include 'readme.txt'
                 filter(ReplaceTokens, tokens: [TRANSLATION_NOTICE: ''])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }

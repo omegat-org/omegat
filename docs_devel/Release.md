@@ -117,14 +117,7 @@ and publish the contents to SourceForge Web manually.
   - [Example](https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/43871)
 
 
-## 11. Push new version for version check
-
-```sh
-./gradlew publishVersion
-```
-
-
-## 12. Cleanup
+## 11. Cleanup
 
 - Bump version in `Version.properties`, `changes.txt`
 - Move old versions in SourceForge Files into `OldFiles/Releases`
@@ -132,3 +125,13 @@ and publish the contents to SourceForge Web manually.
 - If promoting from Latest to Standard, move the old Standard versions to Legacy
 - Set fixed bug tickets and implemented RFEs to `closed-fixed`
 - Update ticket milestones if necessary
+
+
+## 12. Push new version for version check
+
+If no catastrophic problems are reported with the new version, bump the version
+check master file:
+
+```sh
+./gradlew publishVersion
+```

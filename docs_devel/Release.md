@@ -24,7 +24,16 @@ See `/docs_devel/README.txt` for details about versioning scheme.
   - "[current] vs [previous]" line
 
 
-## 4. Tag release revision
+## 4. Update manuals
+
+Run the following, then commit any changes:
+
+```sh
+./gradlew updateManuals
+```
+
+
+## 5. Tag release revision
 
 ```sh
 svn copy ^/trunk ^/tags/vX.Y.Z -m "Published version X.Y.Z of OmegaT"
@@ -37,7 +46,7 @@ Replace `^/trunk` with the appropriate branch if releasing a Stable version.
   Tags](http://svnbook.red-bean.com/en/1.7/svn.branchmerge.tags.html)
 
 
-## 5. Run build job on Azure Devops
+## 6. Run build job on Azure Devops
 
 1. Go to [OmegaT Builds](https://dev.azure.com/omegat-org/OmegaT/_build)
 2. Queue a Release Build, specifying for Branch the tag created earlier,
@@ -49,7 +58,7 @@ After building, the distfiles will be deployed automatically to the [SourceForge
 This will publish all distfiles except for Signed Mac and WebStart.
 
 
-## 6. Build signed Mac distfile locally, publish
+## 7. Build signed Mac distfile locally, publish
 
 ```sh
 ./gradlew macSignedDistZip
@@ -58,7 +67,7 @@ This will publish all distfiles except for Signed Mac and WebStart.
 Publish to SourceForge Files.
 
 
-## 7. Set default downloads
+## 8. Set default downloads
 
 Only if a Standard release:
 
@@ -70,7 +79,7 @@ Only if a Standard release:
 5. Click Save
 
 
-## 8. Build WebStart dist locally, publish
+## 9. Build WebStart dist locally, publish
 
 Make sure `jwsCodebase` is set correctly e.g. in `local.properties` or on the
 command line:
@@ -100,7 +109,7 @@ Otherwise do
 and publish the contents to SourceForge Web manually.
 
 
-## 9. Announce to News, user group
+## 10. Announce to News, user group
 
 - [OmegaT News](https://sourceforge.net/p/omegat/news/)
   - [Example](https://sourceforge.net/p/omegat/news/2019/03/omegat-latest-version-415-update-4-released/)
@@ -108,14 +117,14 @@ and publish the contents to SourceForge Web manually.
   - [Example](https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/43871)
 
 
-## 10. Push new version for version check
+## 11. Push new version for version check
 
 ```sh
 ./gradlew publishVersion
 ```
 
 
-## 11. Cleanup
+## 12. Cleanup
 
 - Bump version in `Version.properties`, `changes.txt`
 - Move old versions in SourceForge Files into `OldFiles/Releases`

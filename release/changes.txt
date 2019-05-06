@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 4.2.1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   0 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -11,6 +11,10 @@
 
   - Search results panel supports custom color scheme
   https://sourceforge.net/p/omegat/feature-requests/1065/
+  
+  - Added a shortcut to jump to the selected search result (Ctrl+J by default).
+  https://sourceforge.net/p/omegat/feature-requests/1416/
+  
 
 ----------------------------------------------------------------------
  OmegaT 4.2.0 (2019-04-23)

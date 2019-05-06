@@ -1,12 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 4.2.1
 ----------------------------------------------------------------------
-  0 Enhancement
+  1 Enhancement
   0 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.2.1 vs 4.2.0
 
+  Implemented requests:
+
+  - Search results panel supports custom color scheme
+  https://sourceforge.net/p/omegat/feature-requests/1065/
 
 ----------------------------------------------------------------------
  OmegaT 4.2.0 (2019-04-23)

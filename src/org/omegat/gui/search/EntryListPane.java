@@ -29,7 +29,6 @@
 
 package org.omegat.gui.search;
 
-import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
@@ -91,8 +90,8 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 @SuppressWarnings("serial")
 class EntryListPane extends JTextPane {
-    protected static final AttributeSet FOUND_MARK = Styles.createAttributeSet(Color.BLUE, null, true, null);
-    protected static final AttributeSet REPLACE_MARK = Styles.createAttributeSet(Color.ORANGE.darker(), null, false, null);
+    protected static final AttributeSet FOUND_MARK = Styles.createAttributeSet(Styles.EditorColor.COLOR_SEARCH_FOUND_MARK.getColor(), null, true, null);
+    protected static final AttributeSet REPLACE_MARK = Styles.createAttributeSet(Styles.EditorColor.COLOR_SEARCH_REPLACE_MARK.getColor(), null, false, null);
     protected static final int MARKS_PER_REQUEST = 100;
     protected static final String ENTRY_SEPARATOR = "---------\n";
     private static final String KEY_GO_TO_NEXT_SEGMENT = "gotoNextSegmentMenuItem";
@@ -148,6 +147,10 @@ class EntryListPane extends JTextPane {
         setFont(Core.getMainWindow().getApplicationFont());
         StaticUIUtils.makeCaretAlwaysVisible(this);
         StaticUIUtils.setCaretUpdateEnabled(this, false);
+        
+        setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -622,14 +625,14 @@ class EntryListPane extends JTextPane {
 
         SegmentHighlighter() {
             MutableAttributeSet attrNormal = new SimpleAttributeSet();
-            StyleConstants.setBackground(attrNormal, getBackground());
+            StyleConstants.setBackground(attrNormal, Styles.EditorColor.COLOR_BACKGROUND.getColor());
             this.attrNormal = attrNormal;
 
             MutableAttributeSet attrActive = new SimpleAttributeSet();
             // This is the same as the default value for
             // Styles.EditorColor.COLOR_ACTIVE_SOURCE, but we hard-code it here
             // because this panel does not currently support customized colors.
-            StyleConstants.setBackground(attrActive, Color.decode("#c0ffc0"));
+            StyleConstants.setBackground(attrActive, Styles.EditorColor.COLOR_ACTIVE_SOURCE.getColor());
             this.attrActive = attrActive;
         }
 

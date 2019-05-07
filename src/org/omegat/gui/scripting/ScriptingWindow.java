@@ -70,7 +70,6 @@ import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.ListModel;
 import javax.swing.SwingConstants;
@@ -667,24 +666,16 @@ public class ScriptingWindow {
         try {
             dir = new File(scriptsDir).getCanonicalFile();
         } catch (IOException ex) {
-            dir = new File(scriptsDir).getAbsoluteFile();
+            dir = new File(scriptsDir);
         }
-        setScriptsDirectory(dir);
-    }
 
-    private void setScriptsDirectory(File scriptsDir) {
-
-        if (!scriptsDir.isDirectory()) {
+        if (!dir.isDirectory()) {
             updateQuickScripts();
             return;
         }
-        m_scriptsDirectory = scriptsDir;
-        Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, scriptsDir.getPath());
+        m_scriptsDirectory = dir;
+        Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, scriptsDir);
         OSXIntegration.setProxyIcon(frame.getRootPane(), m_scriptsDirectory);
-
-        if (m_txtScriptsDir != null) {
-            m_txtScriptsDir.setText(scriptsDir.getPath());
-        }
 
         if (monitor != null) {
             monitor.stop();
@@ -827,7 +818,7 @@ public class ScriptingWindow {
             if (result == JFileChooser.APPROVE_OPTION) {
                 // we should write the result into the directory text field
                 File file = chooser.getSelectedFile();
-                setScriptsDirectory(file);
+                setScriptsDirectory(file.getPath());
             }
         }
     }
@@ -1037,7 +1028,6 @@ public class ScriptingWindow {
 
     private File m_scriptsDirectory;
     private ScriptItem m_currentScriptItem;
-    private JTextField m_txtScriptsDir;
 
     private JMenu m_setsMenu = new JMenu();
 

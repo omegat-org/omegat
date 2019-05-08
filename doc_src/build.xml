@@ -44,10 +44,17 @@
     <condition property="font.family" value="IPAPGothic">
         <equals arg1="${language}" arg2="ja"/>
     </condition>
+    <condition property="monospace.font.family" value="IPAGothic">
+        <equals arg1="${language}" arg2="ja"/>
+    </condition>
     <condition property="font.family" value="WenQuanYi Micro Hei">
         <equals arg1="${language}" arg2="zh_CN"/>
     </condition>
+    <condition property="monospace.font.family" value="WenQuanYi Micro Hei">
+        <equals arg1="${language}" arg2="zh_CN"/>
+    </condition>
     <property name="font.family" value="DejaVu Sans"/>
+    <property name="monospace.font.family" value="DejaVu Sans Mono"/>
 
     <target name="fo" depends="include">
         <java dir="."
@@ -73,7 +80,7 @@
             <arg value="insert.olink.pdf.frag=1" />
             <arg value="body.font.family=${font.family}" />
             <arg value="title.font.family=${font.family}" />
-            <arg value="monospace.font.family=${font.family}" />
+            <arg value="monospace.font.family=${monospace.font.family}" />
             <classpath>
                 <pathelement location="${saxon}"/>
                 <pathelement path="${saxon}"/>

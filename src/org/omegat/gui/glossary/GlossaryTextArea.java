@@ -39,6 +39,7 @@ import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -54,7 +55,9 @@ import java.util.Locale;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
 import javax.swing.text.AttributeSet;
+import javax.swing.text.Caret;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.StyledDocument;
 
@@ -67,6 +70,7 @@ import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -99,7 +103,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
     private static final AttributeSet NO_ATTRIBUTES = Styles.createAttributeSet(null, null, false, null);
     private static final AttributeSet PRIORITY_ATTRIBUTES = Styles.createAttributeSet(null, null, true, null);
-
     /**
      * Currently processed entry. Used to detect if user moved into new entry. In this case, new find should
      * be started.
@@ -297,6 +300,20 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     }
 
     @Override
+    protected void processKeyEvent(KeyEvent e) {
+        KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
+        if (s.equals(PropertiesShortcuts.getEditorShortcuts().getKeyStroke("editorContextMenu"))) {
+            JPopupMenu popup = new JPopupMenu();
+            populateContextMenu(popup);
+            Caret caret = getCaret();
+            Point p = caret == null ? getMousePosition() : caret.getMagicCaretPosition();
+            popup.show(this, (int) p.getX(), (int) p.getY());
+            e.consume();
+        }
+        super.processKeyEvent(e);
+    }
+
+    @Override
     public void showCreateGlossaryEntryDialog(final Frame parent) {
         CreateGlossaryEntry d = createGlossaryEntryDialog;
         if (d != null) {
@@ -404,4 +421,5 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         });
         menu.add(notify);
     }
+
 }

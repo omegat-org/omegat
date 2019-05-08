@@ -11,6 +11,12 @@ The easy way is to install
 script provided in `doc_src`. Arguments to `docgen` are the same as the
 arguments to `ant` described below in the Usage section.
 
+Get Docker without needing to make an account:
+
+- [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/#install-docker-desktop-for-windows-desktop-app)
+- [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/release-notes/)
+- [Docker CE for Linux](https://docs.docker.com/install/#supported-platforms)
+
 See also:
 
 - [docgen-docker](https://github.com/omegat-org/docgen-docker): source for the

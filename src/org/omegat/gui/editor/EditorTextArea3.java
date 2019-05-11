@@ -32,7 +32,9 @@ package org.omegat.gui.editor;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -48,6 +50,7 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
 import javax.swing.text.MutableAttributeSet;
@@ -114,6 +117,8 @@ public class EditorTextArea3 extends JEditorPane {
             .getKeyStroke("editorSkipPrevTokenWithSelection");
     private static final KeyStroke KEYSTROKE_TOGGLE_CURSOR_LOCK = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorToggleCursorLock");
+    private static final KeyStroke KEYSTROKE_TOGGLE_OVERTYPE = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorToggleOvertype");
 
     /** Undo Manager to store edits */
     protected final TranslationUndoManager undoManager = new TranslationUndoManager(this);
@@ -134,6 +139,11 @@ public class EditorTextArea3 extends JEditorPane {
      */
     protected boolean lockCursorToInputArea = true;
 
+    /**
+     * Flag indicating if the editor is in Insert (false) or Overwrite (true) mode.
+     */
+    protected boolean overtypeMode = false;
+
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
         setEditorKit(new StyledEditorKit() {
@@ -152,6 +162,11 @@ public class EditorTextArea3 extends JEditorPane {
         });
 
         addMouseListener(mouseListener);
+
+        // Custom caret for overtype mode
+        OvertypeCaret c = new OvertypeCaret();
+        c.setBlinkRate(getCaret().getBlinkRate());
+        setCaret(c);
 
         addCaretListener(e -> {
             try {
@@ -436,6 +451,8 @@ public class EditorTextArea3 extends JEditorPane {
             final String key = lockEnabled ? "MW_STATUS_CURSOR_LOCK_ON" : "MW_STATUS_CURSOR_LOCK_OFF";
             Core.getMainWindow().showStatusMessageRB(key);
             lockCursorToInputArea = lockEnabled;
+        } else if (s.equals(KEYSTROKE_TOGGLE_OVERTYPE)) {
+            processed = switchOvertypeMode();
         }
 
         // leave standard processing if need
@@ -464,6 +481,41 @@ public class EditorTextArea3 extends JEditorPane {
             checkAndFixCaret(false);
             autoCompleter.updatePopup(true);
         }
+    }
+
+    private boolean switchOvertypeMode() {
+        boolean switchOvertypeMode = !overtypeMode;
+        final String key = switchOvertypeMode ? "MW_STATUS_OVERWRITE_MODE" : "MW_STATUS_INSERT_MODE";
+        Core.getMainWindow().showTimedStatusMessageRB(key);
+        overtypeMode = switchOvertypeMode;
+
+        if (overtypeMode) {
+            // Change the caret shape, width and color
+            setCaretColor(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+            try {
+                int pos = getCaretPosition();
+                Rectangle v = Java8Compat.modelToView(this, pos);
+                Rectangle rPos = v != null ? v.getBounds() : new Rectangle();
+                int caretX = rPos.x;
+                int caretEndX = rPos.x;
+                if (pos < getDocument().getLength()) {
+                    v = Java8Compat.modelToView(this, pos + 1);
+                    Rectangle rNextPos = v != null ? v.getBounds() : new Rectangle();
+            
+                    if (rPos.y == rNextPos.y) {
+                        caretEndX = rNextPos.x;
+                    }
+                }
+                putClientProperty("caretWidth", Math.max(1, caretEndX - caretX + 1));
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // reset to default insert caret
+            setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+            putClientProperty("caretWidth", 1);
+        }
+        return true;
     }
 
     private boolean isNavigationKey(int keycode) {
@@ -764,6 +816,49 @@ public class EditorTextArea3 extends JEditorPane {
         PopupMenuConstructorInfo(int priority, IPopupMenuConstructor constructor) {
             this.priority = priority;
             this.constructor = constructor;
+        }
+    }
+
+    @Override
+    public void replaceSelection(String content) {
+        // Overwrite current selection, and if at the end of the segment, allow
+        // inserting new text.
+        if (isEditable() && overtypeMode && getSelectionStart() == getSelectionEnd()
+                && getCaretPosition() < getOmDocument().getTranslationEnd()) {
+            int pos = getCaretPosition();
+            int lastPos = Math.min(getDocument().getLength(), pos + content.length());
+            select(pos, lastPos);
+        }
+        super.replaceSelection(content);
+    }
+
+    private class OvertypeCaret extends DefaultCaret {
+        @Override
+        public void paint(Graphics g) {
+            if (overtypeMode) {
+                int w = (Integer) getClientProperty("caretWidth");
+                g.setXORMode(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+                g.translate(w / 2, 0);
+                super.paint(g);
+            } else {
+                super.paint(g);
+            }
+        }
+
+        @Override
+        protected synchronized void damage(Rectangle r) {
+            if (overtypeMode) {
+                if (r != null) {
+                    int damageWidth = (Integer) getClientProperty("caretWidth");
+                    x = r.x - 4 - (damageWidth / 2);
+                    y = r.y;
+                    width = 9 + 3 * damageWidth / 2;
+                    height = r.height;
+                    repaint();
+                }
+            } else {
+                super.damage(r);
+            }
         }
     }
 }

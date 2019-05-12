@@ -518,6 +518,9 @@ public final class TestTeamIntegrationChild {
 
         public void addDockable(Dockable pane) {
         }
+
+        public void showLockInsertMessage(String messageText, String toolTip) {
+        }
     };
 
     /**

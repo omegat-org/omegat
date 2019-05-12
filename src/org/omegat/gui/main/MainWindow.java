@@ -109,6 +109,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     protected JLabel lengthLabel;
     protected JLabel progressLabel;
     protected JLabel statusLabel;
+    protected JLabel lockInsertLabel;
 
     protected DockingDesktop desktop;
 
@@ -401,6 +402,11 @@ public class MainWindow extends JFrame implements IMainWindow {
         lengthLabel.setText(messageText);
     }
 
+    public void showLockInsertMessage(String messageText, String toolTip) {
+        lockInsertLabel.setText(messageText);
+        lockInsertLabel.setToolTipText(toolTip);
+    }
+   
     // /////////////////////////////////////////////////////////////
     // /////////////////////////////////////////////////////////////
     // display oriented code

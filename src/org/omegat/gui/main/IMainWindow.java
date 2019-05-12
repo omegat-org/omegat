@@ -97,6 +97,14 @@ public interface IMainWindow {
     void showLengthMessage(String messageText);
 
     /**
+     * Show message indicating the state of the Lock cursor and Insert/overwrite mode
+     *
+     * @param messageText
+     *            message text
+     */
+    void showLockInsertMessage(String messageText, String toolTip);
+
+    /**
      * Display warning.
      *
      * @param warningKey

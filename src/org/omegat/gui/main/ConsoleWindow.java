@@ -157,4 +157,9 @@ public class ConsoleWindow implements IMainWindow {
         System.out.println(message);
     }
 
+    @Override
+    public void showLockInsertMessage(String messageText, String toolTip) {
+        /* empty */
+    }
+
 }

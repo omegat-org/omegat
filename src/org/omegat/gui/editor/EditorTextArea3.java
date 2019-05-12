@@ -67,6 +67,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Java8Compat;
+import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
@@ -190,6 +191,8 @@ public class EditorTextArea3 extends JEditorPane {
         setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+
+        updateLockInsertMessage();
     }
 
     @Override
@@ -448,11 +451,11 @@ public class EditorTextArea3 extends JEditorPane {
             processed = moveCursorOverTag(true, true);
         } else if (s.equals(KEYSTROKE_TOGGLE_CURSOR_LOCK)) {
             boolean lockEnabled = !lockCursorToInputArea;
-            final String key = lockEnabled ? "MW_STATUS_CURSOR_LOCK_ON" : "MW_STATUS_CURSOR_LOCK_OFF";
-            Core.getMainWindow().showStatusMessageRB(key);
             lockCursorToInputArea = lockEnabled;
+            updateLockInsertMessage();
         } else if (s.equals(KEYSTROKE_TOGGLE_OVERTYPE)) {
             processed = switchOvertypeMode();
+            updateLockInsertMessage();
         }
 
         // leave standard processing if need
@@ -483,10 +486,17 @@ public class EditorTextArea3 extends JEditorPane {
         }
     }
 
+    private void updateLockInsertMessage() {
+        String lock = OStrings.getString("MW_STATUS_CURSOR_LOCK_" + (lockCursorToInputArea ? "ON" : "OFF"));
+        String ins = OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_" + (overtypeMode ? "ON" : "OFF"));
+
+        String lockTip = OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_" + (lockCursorToInputArea ? "ON" : "OFF"));
+        String insTip = OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_" + (overtypeMode ? "ON" : "OFF"));
+        Core.getMainWindow().showLockInsertMessage(lock + " | " + ins, lockTip + " | " + insTip);
+    }
+
     private boolean switchOvertypeMode() {
         boolean switchOvertypeMode = !overtypeMode;
-        final String key = switchOvertypeMode ? "MW_STATUS_OVERWRITE_MODE" : "MW_STATUS_INSERT_MODE";
-        Core.getMainWindow().showTimedStatusMessageRB(key);
         overtypeMode = switchOvertypeMode;
 
         if (overtypeMode) {

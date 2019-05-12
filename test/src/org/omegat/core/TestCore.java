@@ -155,6 +155,9 @@ public abstract class TestCore {
 
             public void showMessageDialog(String message) {
             }
+
+            public void showLockInsertMessage(String messageText, String toolTip) {
+            }
         });
         Core.setCurrentProject(new NotLoadedProject());
 

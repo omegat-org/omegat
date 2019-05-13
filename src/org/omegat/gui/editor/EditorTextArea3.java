@@ -32,6 +32,7 @@ package org.omegat.gui.editor;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -502,21 +503,14 @@ public class EditorTextArea3 extends JEditorPane {
         if (overtypeMode) {
             // Change the caret shape, width and color
             setCaretColor(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+            putClientProperty("caretWidth", getCaretWidth());
+
+            // We need to force the caret damage to have the rectangle to correctly show up,
+            // otherwise half of the caret is shown.
             try {
-                int pos = getCaretPosition();
-                Rectangle v = Java8Compat.modelToView(this, pos);
-                Rectangle rPos = v != null ? v.getBounds() : new Rectangle();
-                int caretX = rPos.x;
-                int caretEndX = rPos.x;
-                if (pos < getDocument().getLength()) {
-                    v = Java8Compat.modelToView(this, pos + 1);
-                    Rectangle rNextPos = v != null ? v.getBounds() : new Rectangle();
-            
-                    if (rPos.y == rNextPos.y) {
-                        caretEndX = rNextPos.x;
-                    }
-                }
-                putClientProperty("caretWidth", Math.max(1, caretEndX - caretX + 1));
+                OvertypeCaret caret = (OvertypeCaret) getCaret();
+                Rectangle r = Java8Compat.modelToView(this, caret.getDot());
+                caret.damage(r);
             } catch (BadLocationException e) {
                 e.printStackTrace();
             }
@@ -842,13 +836,26 @@ public class EditorTextArea3 extends JEditorPane {
         super.replaceSelection(content);
     }
 
+    /** Get the caret width from the size of the current letter. */
+    private int getCaretWidth() {
+        FontMetrics fm = getFontMetrics(getFont());
+        int carWidth = 1;
+        try {
+            carWidth = fm.stringWidth(getText(getCaretPosition(), 1));
+        } catch (BadLocationException e) {
+            /* empty */
+        }
+        return carWidth;
+    }
+
     private class OvertypeCaret extends DefaultCaret {
         @Override
         public void paint(Graphics g) {
             if (overtypeMode) {
-                int w = (Integer) getClientProperty("caretWidth");
+                int caretWidth = getCaretWidth();
+                putClientProperty("caretWidth", caretWidth);
                 g.setXORMode(Styles.EditorColor.COLOR_FOREGROUND.getColor());
-                g.translate(w / 2, 0);
+                g.translate(caretWidth / 2, 0);
                 super.paint(g);
             } else {
                 super.paint(g);
@@ -859,7 +866,7 @@ public class EditorTextArea3 extends JEditorPane {
         protected synchronized void damage(Rectangle r) {
             if (overtypeMode) {
                 if (r != null) {
-                    int damageWidth = (Integer) getClientProperty("caretWidth");
+                    int damageWidth = getCaretWidth();
                     x = r.x - 4 - (damageWidth / 2);
                     y = r.y;
                     width = 9 + 3 * damageWidth / 2;

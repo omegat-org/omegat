@@ -435,35 +435,35 @@ public class EditorController implements IEditor {
 
         JComponent data = null;
 
+        String updatedTitle = null;
         switch (showType) {
         case INTRO:
             data = introPane;
-            title = introPaneTitle;
+            updatedTitle = introPaneTitle;
             break;
         case EMPTY_PROJECT:
             data = emptyProjectPane;
-            title = emptyProjectPaneTitle;
+            updatedTitle = emptyProjectPaneTitle;
             break;
         case FIRST_ENTRY:
             displayedFileIndex = 0;
             displayedEntryIndex = 0;
-            title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
             SwingUtilities.invokeLater(() -> {
                 // need to run later because some other event listeners
                 // should be called before
                 loadDocument();
                 gotoEntry(LastSegmentManager.getLastSegmentNumber());
+                updateTitleCurrentFile();
             });
             break;
         case NO_CHANGE:
-            title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            updatedTitle = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
             break;
         }
 
-        updateTitle();
-        pane.setToolTipText(title);
+        updateTitle(updatedTitle);
 
         if (scrollPane.getViewport().getView() != data) {
             if (UIManager.getBoolean("OmegaTDockablePanel.isProportionalMargins")) {
@@ -547,7 +547,17 @@ public class EditorController implements IEditor {
     };
 
     private void updateTitle() {
-       pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
+        pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
+        pane.setToolTipText(title);
+    }
+
+    private void updateTitleCurrentFile() {
+        updateTitle(StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile()));
+    }
+
+    private void updateTitle(String title) {
+        this.title = title;
+        updateTitle();
     }
 
     private void setFont(final Font font) {
@@ -1538,6 +1548,7 @@ public class EditorController implements IEditor {
         }
         activateEntry(pos);
         editor.setCursor(oldCursor);
+        updateTitleCurrentFile();
     }
 
     public void gotoEntry(String srcString, EntryKey key) {

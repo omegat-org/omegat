@@ -24,11 +24,11 @@
         <row>
           <entry><inlinemediaobject>
               <imageobject role="html">
-                <imagedata fileref="images/Minimize.gif" width="60%"/>
+                <imagedata fileref="images/Minimize.png" width="60%"/>
               </imageobject>
 
               <imageobject role="fo">
-                <imagedata fileref="images/Minimize.gif" width="40%"/>
+                <imagedata fileref="images/Minimize.png" width="40%"/>
               </imageobject>
             </inlinemediaobject></entry>
 
@@ -39,11 +39,11 @@
         <row>
           <entry><inlinemediaobject>
               <imageobject role="html">
-                <imagedata fileref="images/Maximize.gif" width="60%"/>
+                <imagedata fileref="images/Maximize.png" width="60%"/>
               </imageobject>
 
               <imageobject role="fo">
-                <imagedata fileref="images/Maximize.gif" width="40%"/>
+                <imagedata fileref="images/Maximize.png" width="40%"/>
               </imageobject>
             </inlinemediaobject></entry>
 
@@ -53,11 +53,11 @@
         <row>
           <entry><inlinemediaobject>
               <imageobject role="html">
-                <imagedata fileref="images/Restore.gif" width="60%"/>
+                <imagedata fileref="images/Restore.png" width="60%"/>
               </imageobject>
 
               <imageobject role="fo">
-                <imagedata fileref="images/Restore.gif" width="40%"/>
+                <imagedata fileref="images/Restore.png" width="40%"/>
               </imageobject>
             </inlinemediaobject></entry>
 
@@ -67,11 +67,11 @@
         <row>
           <entry><inlinemediaobject>
               <imageobject role="html">
-                <imagedata fileref="images/Undock.gif" width="60%"/>
+                <imagedata fileref="images/Undock.png" width="60%"/>
               </imageobject>
 
               <imageobject role="fo">
-                <imagedata fileref="images/Undock.gif" width="40%"/>
+                <imagedata fileref="images/Undock.png" width="40%"/>
               </imageobject>
             </inlinemediaobject></entry>
 
@@ -81,11 +81,11 @@
         <row>
           <entry><inlinemediaobject>
               <imageobject role="html">
-                <imagedata fileref="images/Dock.gif" width="60%"/>
+                <imagedata fileref="images/Dock.png" width="60%"/>
               </imageobject>
 
               <imageobject role="fo">
-                <imagedata fileref="images/Dock.gif" width="40%"/>
+                <imagedata fileref="images/Dock.png" width="40%"/>
               </imageobject>
             </inlinemediaobject></entry>
 

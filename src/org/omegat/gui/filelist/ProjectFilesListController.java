@@ -231,6 +231,7 @@ public class ProjectFilesListController {
                 SwingUtilities.invokeLater(() -> {
                     list.toFront();
                     list.tableFiles.requestFocus();
+                    // Correctly set the active file in the Project Files dialog after reloading the project.
                     SwingUtilities.invokeLater(() -> selectCurrentFile(Core.getProject().getProjectFiles()));
                 });
                 break;

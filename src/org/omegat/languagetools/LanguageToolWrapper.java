@@ -79,7 +79,9 @@ public final class LanguageToolWrapper {
                     setBridgeFromCurrentProject();
                     break;
                 case CLOSE:
-                    bridge.stop();
+                    if (bridge != null) {
+                        bridge.stop();
+                    }
                     bridge = null;
                     break;
                 default:

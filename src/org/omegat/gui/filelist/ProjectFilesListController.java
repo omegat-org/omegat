@@ -231,6 +231,7 @@ public class ProjectFilesListController {
                 SwingUtilities.invokeLater(() -> {
                     list.toFront();
                     list.tableFiles.requestFocus();
+                    SwingUtilities.invokeLater(() -> selectCurrentFile(Core.getProject().getProjectFiles()));
                 });
                 break;
             default:

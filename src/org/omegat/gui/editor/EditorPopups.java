@@ -35,6 +35,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -43,7 +44,9 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
+import org.omegat.core.states.SegmentState;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Log;
@@ -72,6 +75,7 @@ public final class EditorPopups {
         ec.registerPopupMenuConstructors(600, new EmptyNoneTranslationPopup(ec));
         ec.registerPopupMenuConstructors(700, new InsertTagsPopup(ec));
         ec.registerPopupMenuConstructors(800, new InsertBidiPopup(ec));
+        ec.registerPopupMenuConstructors(900, new SegmentStatePopup(ec));
     }
 
     private EditorPopups() {
@@ -280,7 +284,6 @@ public final class EditorPopups {
             });
 
             menu.addSeparator();
-
         }
     }
 
@@ -437,6 +440,42 @@ public final class EditorPopups {
                 submenu.add(item);
             }
             menu.add(submenu);
+        }
+    }
+    
+    public static class SegmentStatePopup implements IPopupMenuConstructor {
+        protected final EditorController ec;
+        public SegmentStatePopup(EditorController ec) {
+            this.ec = ec;
+        }
+
+        public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos,
+                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+            if (!isInActiveTranslation) {
+                return;
+            }
+
+            SourceTextEntry ste = ec.getCurrentEntry();
+            TMXEntry tmxEntry = Core.getProject().getAllTranslations(ste).getCurrentTranslation();
+            SegmentState currentState = tmxEntry.state;
+
+            menu.addSeparator();
+            // Change segment state
+            JMenu changeStateItem = new JMenu(OStrings.getString("GUI_POPUP_CHANGE_STATE"));
+            menu.add(changeStateItem);
+            for (SegmentState state : SegmentState.values()) {
+                JCheckBoxMenuItem stateItem = new JCheckBoxMenuItem(OStrings.getString("SEGPROP_KEY_STATE_" + state.name()));
+                changeStateItem.add(stateItem);
+                stateItem.setSelected(state == currentState);
+                stateItem.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        Log.logInfoRB("LOG_INFO_EVENT_STATE_CHANGED", ste.entryNum(), state);
+                        Core.getSegmentProperties().setSegmentState(state);
+                    }
+                });
+            }
+
+
         }
     }
 }

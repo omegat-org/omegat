@@ -30,6 +30,9 @@ package org.omegat.core.data;
 
 import java.util.Objects;
 
+import org.omegat.core.states.SegmentState;
+import org.omegat.util.OConsts;
+
 /**
  * Storage for TMX entry.
  *
@@ -57,6 +60,7 @@ public class TMXEntry {
     public final String note;
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
+    public final SegmentState state;
 
     TMXEntry(PrepareTMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
         this.source = from.source;
@@ -69,6 +73,7 @@ public class TMXEntry {
 
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
+        this.state = from.state != null ? from.state : SegmentState.getSegmentState(from.getPropValue(OConsts.ENTRY_STATE_PROP_NAME));
     }
 
     public boolean isTranslated() {
@@ -101,6 +106,9 @@ public class TMXEntry {
         if (creationDate / 1000 != other.creationDate / 1000) {
             return false;
         }
+        if (state != other.state) {
+            return false;
+        }
         if (!equalsTranslation(other)) {
             return false;
         }
@@ -121,7 +129,7 @@ public class TMXEntry {
 
     @Override
     public int hashCode() {
-        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, linked, changer, creator,
+        return Objects.hash(changeDate / 1000, creationDate / 1000, state, translation, note, linked, changer, creator,
                 defaultTranslation, source);
     }
 

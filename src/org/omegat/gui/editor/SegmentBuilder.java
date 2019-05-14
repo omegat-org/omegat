@@ -539,6 +539,10 @@ public class SegmentBuilder {
             }
         }
 
+        if (trans.state != null) {
+            text = OStrings.getString("STATE_ICON_" + trans.state.name()) + " " + text;
+        }
+
         int prevOffset = offset;
         boolean rtl = EditorUtils.localeIsRTL();
         insertDirectionEmbedding(rtl);

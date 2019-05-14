@@ -107,6 +107,8 @@ public final class OConsts {
     public static final String DEFAULT_OTHERLANG = "tmx2source";
     /** Default name for spelling dictionary directory */
     public static final String SPELLING_DICT_DIR = "spelling";
+    /** Property name for TMXEntry state */ 
+    public static final String ENTRY_STATE_PROP_NAME = "x-omegat-state";
 
     /**
      * Glossary files extensions

@@ -1146,6 +1146,8 @@ public class EditorController implements IEditor {
         PrepareTMXEntry newen = new PrepareTMXEntry();
         newen.source = sb.ste.getSrcText();
         newen.note = Core.getNotes().getNoteText();
+        newen.state = Core.getSegmentProperties().getSegmentState();
+
         if (forceTranslation != null) { // there is force translation
             switch (forceTranslation) {
             case UNTRANSLATED:
@@ -1190,11 +1192,12 @@ public class EditorController implements IEditor {
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
+        boolean stateChanged = newen.state != oldTE.state;
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {
             // Only note was changed, and we are not making a new alt translation.
             Core.getProject().setNote(entry, oldTE, newen.note);
-        } else if (translationChanged || noteChanged) {
+        } else if (translationChanged || noteChanged || stateChanged) {
             while (true) {
                 // iterate before optimistic locking will be resolved
                 try {
@@ -1239,6 +1242,7 @@ public class EditorController implements IEditor {
         }
 
         Core.getNotes().clear();
+        Core.getSegmentProperties().setSegmentState(null);
 
         // then add new marks
         markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);

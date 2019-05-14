@@ -57,6 +57,7 @@ import org.apache.commons.lang.StringUtils;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
+import org.omegat.core.states.SegmentState;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
@@ -67,6 +68,7 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -95,12 +97,16 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_CREATOR = "creator";
     private static final String KEY_ISALT = "isAlt";
     private static final String KEY_LINKED = "linked";
+    private static final String KEY_STATE = "state";
 
     final List<String> properties = new ArrayList<String>();
 
     final DockableScrollPane scrollPane;
 
     private ISegmentPropertiesView viewImpl;
+
+    /** Current state of the active segment. */
+    private SegmentState segmentState;
 
     public SegmentPropertiesArea(IMainWindow mw) {
         scrollPane = new DockableScrollPane("SEGMENTPROPERTIES", OStrings.getString("SEGPROP_PANE_TITLE"),
@@ -385,6 +391,31 @@ public class SegmentPropertiesArea implements IPaneMenu {
         if (!entry.defaultTranslation) {
             setProperty(KEY_ISALT, true);
         }
+        if (entry.state != null || segmentState != null) {
+            if (segmentState == null) {
+                segmentState = entry.state;
+            }
+            setProperty(KEY_STATE, OStrings.getString("SEGPROP_KEY_STATE_" + segmentState.name()));
+        }
         setProperty(KEY_LINKED, entry.linked);
+    }
+    
+    public void setSegmentState(SegmentState s) {
+        this.segmentState = s;
+
+        if (properties.contains(OConsts.ENTRY_STATE_PROP_NAME)) {
+            int stateIndex = properties.indexOf(OConsts.ENTRY_STATE_PROP_NAME);
+            properties.remove(stateIndex);
+            properties.remove(stateIndex);
+        }
+
+        if (segmentState != null) {
+            setProperty(OConsts.ENTRY_STATE_PROP_NAME, OStrings.getString("SEGPROP_KEY_STATE_" + segmentState.name()));
+            viewImpl.update();
+        }
+    }
+
+    public SegmentState getSegmentState() {
+        return segmentState;
     }
 }

@@ -79,6 +79,7 @@ import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.multtrans.MultipleTransPane;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.notes.NotesTextArea;
+import org.omegat.gui.properties.ISegmentPropertiesView;
 import org.omegat.gui.properties.SegmentPropertiesArea;
 import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.tokenizer.ITokenizer;
@@ -124,6 +125,7 @@ public final class Core {
     private static INotes notes;
     private static IComments comments;
     private static Segmenter segmenter;
+    private static SegmentPropertiesArea segmentProperties;
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
@@ -201,6 +203,10 @@ public final class Core {
     public static INotes getNotes() {
         return notes;
     }
+    
+    public static SegmentPropertiesArea getSegmentProperties() {
+        return segmentProperties;
+    }
 
     /**
      * Get comments area
@@ -271,7 +277,7 @@ public final class Core {
         dictionaries = new DictionariesTextArea(me);
         spellChecker = new SpellChecker();
         multiple = new MultipleTransPane(me);
-        new SegmentPropertiesArea(me);
+        segmentProperties = new SegmentPropertiesArea(me);
 
         SaveThread th = new SaveThread();
         saveThread = th;

@@ -33,6 +33,7 @@ import java.util.Locale;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ParseEntry.ParseEntryResult;
+import org.omegat.core.states.SegmentState;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
@@ -312,6 +313,9 @@ public final class ExternalTMFactory {
             }
             if (entry.note == null) {
                 entry.note = SegmentProperties.getProperty(props, SegmentProperties.COMMENT);
+            }
+            if (entry.state == null) {
+                entry.state = SegmentState.getSegmentState(SegmentProperties.getProperty(props, OConsts.ENTRY_STATE_PROP_NAME));
             }
         }
         entry.otherProperties = tmxProps;

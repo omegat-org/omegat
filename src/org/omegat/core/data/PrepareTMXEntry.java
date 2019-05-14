@@ -30,6 +30,7 @@ package org.omegat.core.data;
 
 import java.util.List;
 
+import org.omegat.core.states.SegmentState;
 import org.omegat.util.TMXProp;
 
 /**
@@ -52,6 +53,7 @@ public class PrepareTMXEntry {
     public String creator;
     public long creationDate;
     public String note;
+    public SegmentState state;
     public List<TMXProp> otherProperties;
 
     public PrepareTMXEntry() {
@@ -65,6 +67,7 @@ public class PrepareTMXEntry {
         creator = e.creator;
         creationDate = e.creationDate;
         note = e.note;
+        state = e.state;
     }
 
     public String getPropValue(String propType) {

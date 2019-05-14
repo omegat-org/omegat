@@ -45,6 +45,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.states.SegmentState;
 
 /**
  * Helper for write TMX files, using StAX.
@@ -159,11 +160,18 @@ public class TMXWriter2 {
     public void writeEntry(String source, String translation, TMXEntry entry, List<String> propValues)
             throws Exception {
         writeEntry(source, translation, entry.note, entry.creator, entry.creationDate, entry.changer, entry.changeDate,
-                propValues);
+                entry.state, propValues);
     }
 
     public void writeEntry(String source, String translation, String note, String creator, long creationDate,
             String changer, long changeDate, List<String> propValues) throws Exception {
+        writeEntry(source, translation, note, creator, creationDate, changer, changeDate,
+                null, propValues);
+    }
+
+    private void writeEntry(String source, String translation, String note, String creator, long creationDate,
+                String changer, long changeDate, SegmentState state, List<String> propValues) throws Exception {
+
         if (source == null && translation == null) {
             throw new NullPointerException(
                     "The TMX spec requires at least one <tuv> per <tu>. Source and translation can't both be null.");
@@ -189,6 +197,15 @@ public class TMXWriter2 {
                 xml.writeEndElement(); // prop
                 xml.writeCharacters(lineSeparator);
             }
+        }
+        
+        if (state != null) {
+            xml.writeCharacters("      ");
+            xml.writeStartElement("prop");
+            xml.writeAttribute("type", OConsts.ENTRY_STATE_PROP_NAME);
+            xml.writeCharacters(state.name());
+            xml.writeEndElement(); // prop
+            xml.writeCharacters(lineSeparator);
         }
 
         // add note

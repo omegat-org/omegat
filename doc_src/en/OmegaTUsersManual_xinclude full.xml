@@ -53,6 +53,4 @@
 
   <xi:include href="App_ShortCutCustomization.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <index/>
 </book>

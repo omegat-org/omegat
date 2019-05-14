@@ -64,7 +64,7 @@ public class RepositoriesMappingController {
      * org.omegat.core.team2.impl.*RemoteRepository*
      */
     enum RepoType {
-        GIT, SVN, HTTP;
+        GIT, SVN, HTTP, FILE;
 
         public String getLocalizedString() {
             return OStrings.getString("RMD_TABLE_REPO_TYPE_" + name());

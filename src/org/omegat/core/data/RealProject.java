@@ -1066,16 +1066,6 @@ public class RealProject implements IProject {
                 .setListViewThreshold(5);
         String srcLang = config.getSourceLanguage().getLanguage();
         String trgLang = config.getTargetLanguage().getLanguage();
-
-        if (projectTMX == null) {
-            Log.logDebug(LOGGER, "Current project TMX not yet loaded");
-            try {
-                loadTranslations();
-            } catch (Exception e) {
-                throw new RuntimeException("Error loading current project TMX", e);
-            }
-        }
-
         ProjectTMX mergedTMX = SuperTmxMerge.merge(
                 new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),

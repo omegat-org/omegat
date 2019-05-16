@@ -358,15 +358,16 @@ public class RealProject implements IProject {
                 }
             }
 
+            loadFilterSettings();
+            loadSegmentationSettings();
+            loadTranslations();
+            loadSourceFiles();
+
+            // This MUST happen after calling loadTranslations()
             if (remoteRepositoryProvider != null && isOnlineMode) {
                 Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                 rebaseAndCommitProject(true);
             }
-            
-            loadFilterSettings();
-            loadSegmentationSettings();         
-            loadTranslations();
-            loadSourceFiles();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);

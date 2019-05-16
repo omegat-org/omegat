@@ -297,8 +297,10 @@ public class SpellChecker implements ISpellChecker {
      */
     public void destroy() {
         saveWordLists();
-        checker.destroy();
-        checker = null;
+        if (checker != null) {
+            checker.destroy();
+            checker = null;
+        }
     }
 
     protected void resetCache() {

@@ -357,7 +357,7 @@ public class RealProject implements IProject {
                     setOfflineMode();
                 }
             }
-            
+
             if (remoteRepositoryProvider != null && isOnlineMode) {
                 Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                 rebaseAndCommitProject(true);
@@ -431,15 +431,15 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Load segmentation settings, either from the project or from global options 
-    */ 
+     * Load segmentation settings, either from the project or from global options
+    */
     private void loadSegmentationSettings() {
         // Set project specific segmentation rules if they exist, or defaults otherwise.
         // This MUST happen before calling loadTranslations(), because projectTMX needs a segmenter.
         SRX srx = Optional.ofNullable(config.getProjectSRX()).orElse(Preferences.getSRX());
-        Core.setSegmenter(new Segmenter(srx));   
+        Core.setSegmenter(new Segmenter(srx));
     }
-    
+
     /**
      * Align project.
      */
@@ -578,7 +578,7 @@ public class RealProject implements IProject {
     public void compileProject(String sourcePattern, boolean doPostProcessing) throws Exception {
         compileProjectAndCommit(sourcePattern, doPostProcessing, false);
     }
-    
+
     /**
      * Builds translated files corresponding to sourcePattern and creates fresh TM files.
      *
@@ -591,7 +591,7 @@ public class RealProject implements IProject {
      * @throws Exception
      */
     @Override
-    public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) 
+    public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception {
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");
         UIThreadsUtil.mustNotBeSwingThread();
@@ -667,7 +667,7 @@ public class RealProject implements IProject {
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
-                Log.logErrorRB("TF_COMMIT_TARGET_ERROR"); 
+                Log.logErrorRB("TF_COMMIT_TARGET_ERROR");
                 Log.log(e);
                 throw new IOException(OStrings.getString("TF_COMMIT_TARGET_ERROR") + "\n"
                         + e.getMessage());

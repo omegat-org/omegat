@@ -12,7 +12,7 @@
  OmegaT 4.3.0
 ----------------------------------------------------------------------
   5 Enhancements
-  1 Bug fix
+  2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.3.0 vs 4.2.0
@@ -40,6 +40,9 @@
 
   - Exception on TMX merge when loading team project
   https://sourceforge.net/p/omegat/bugs/946/
+
+  - View menu fails to open with a NullPointerException
+  https://sourceforge.net/p/omegat/bugs/947/
 
 ----------------------------------------------------------------------
  OmegaT 4.2.0 (2019-04-23)

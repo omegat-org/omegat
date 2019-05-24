@@ -90,9 +90,9 @@ public interface IProject {
      *            Whether or not we should commit target files
      * @throws Exception
      */
-    void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) 
+    void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception;
-    
+
     /**
      * Tells whether a project is a team project
      * @return whether the project is a team project

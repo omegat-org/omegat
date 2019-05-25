@@ -147,7 +147,7 @@ class EntryListPane extends JTextPane {
         setFont(Core.getMainWindow().getApplicationFont());
         StaticUIUtils.makeCaretAlwaysVisible(this);
         StaticUIUtils.setCaretUpdateEnabled(this, false);
-        
+
         setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());

@@ -115,13 +115,12 @@ There are two "flavors" of OmegaT:
 Contributing to OmegaT
 ======================
 
-Main development is performed in the `trunk` branch of the SourceForge-hosted
-Subversion repository:
-    https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/
+Main development is performed in the `master` branch of the SourceForge-hosted
+Git repository:
+    https://sourceforge.net/p/omegat/code/ci/master/tree/
 
-Git mirrors are also provided (svn trunk is synced to git master):
-    SourceForge: https://sourceforge.net/p/omegat/code/ci/master/tree/
-    GitHub:      https://github.com/omegat-org/omegat
+A GitHub mirror is also provided:
+    https://github.com/omegat-org/omegat
 
 If you would like to submit a patch, the recommended procedure is as follows:
 
@@ -139,7 +138,7 @@ If you would like to submit a patch, the recommended procedure is as follows:
    GitHub and open a pull request.
 
 3. Patches/PRs will be reviewed by a core developer. If accepted, the changes
-   will be squashed and committed to trunk by the reviewer.
+   will be committed to master by the reviewer.
 
 
 

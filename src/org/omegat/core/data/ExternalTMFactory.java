@@ -43,7 +43,6 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
 import org.omegat.util.TMXReader2;
-import org.omegat.util.TMXReader2.ParsedTuv;
 
 /**
  * Common utility class for external TMs.
@@ -125,7 +124,7 @@ public final class ExternalTMFactory {
 
                     String lang = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
                     // Keep all the Tuvs matching at least the target language
-                    for (ParsedTuv tuv : tu.tuvs) {
+                    for (TMXReader2.ParsedTuv tuv : tu.tuvs) {
                         String[] tuvLangParts = tuv.lang.split("\\W");
                         if (!lang.equalsIgnoreCase(tuvLangParts[0])) {
                             continue;

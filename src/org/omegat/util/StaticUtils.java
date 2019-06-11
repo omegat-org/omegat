@@ -424,7 +424,7 @@ public final class StaticUtils {
         assert quoted.endsWith("\\E");
 
         if (spaceMatchesNbsp) {
-            replaceGlobs(sb, " ", "( |\u00A0)");
+            replaceGlobs(sb, " ", "(?: |\u00A0)");
             replaceGlobs(sb, "*", "[^\\s\u00A0]*");
             replaceGlobs(sb, "?", "[^\\s\u00A0]");
         } else {

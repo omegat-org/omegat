@@ -253,6 +253,9 @@ public class FileUtilTest {
             FileUtil.copyFileWithEolConversion(in, out, StandardCharsets.UTF_8);
             assertEquals("\r\n", FileUtil.getEOL(out, StandardCharsets.UTF_8));
         }
+
+        FileUtils.writeByteArrayToFile(out, new byte[0]);
+        assertEquals(null, FileUtil.getEOL(out, StandardCharsets.UTF_8));
     }
 
     @Test

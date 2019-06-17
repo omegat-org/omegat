@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -469,7 +470,9 @@ public final class ProjectUICommands {
                 }
 
                 try {
+                    File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                     boolean needToSaveProperties = false;
+                    File restoreOnFail = null;
                     if (props.hasRepositories()) { // This is a remote project
                         if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
                             // Save repository mapping
@@ -481,6 +484,7 @@ public final class ProjectUICommands {
                                         new RemoteRepositoryProvider(props.getProjectRootDir(),
                                         props.getRepositories());
                                 remoteRepositoryProvider.switchToVersion(OConsts.FILE_PROJECT, null);
+                                restoreOnFail = FileUtil.backupFile(projectFile);
                                 // Overwrite omegat.project
                                 remoteRepositoryProvider.copyFilesFromRepoToProject(OConsts.FILE_PROJECT);
                                 // Reload project properties
@@ -506,7 +510,7 @@ public final class ProjectUICommands {
                             // to fix it
                             ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
                                     Core.getMainWindow().getApplicationFrame(), props,
-                                    new File(projectRootFolder, OConsts.FILE_PROJECT).getAbsolutePath(),
+                                    projectFile.getAbsolutePath(),
                                     ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
                             prj.setVisible(true);
                             props = prj.getResult();
@@ -520,11 +524,21 @@ public final class ProjectUICommands {
                     }
 
                     final ProjectProperties propsP = props;
-                    Core.executeExclusively(true, () -> ProjectFactory.loadProject(propsP, true));
+                    final File restoreOnFailFinal = restoreOnFail;
+                    Core.executeExclusively(true, () -> {
+                        boolean succeeded = ProjectFactory.loadProject(propsP, true);
+                        if (restoreOnFailFinal != null) {
+                            if (succeeded) {
+                                Files.deleteIfExists(restoreOnFailFinal.toPath());
+                            } else {
+                                Files.move(restoreOnFailFinal.toPath(), projectFile.toPath(),
+                                        StandardCopyOption.REPLACE_EXISTING);
+                            }
+                        }
+                    });
                     if (needToSaveProperties) {
                         Core.getProject().saveProjectProperties();
                     }
-
                     RecentProjects.add(projectRootFolder.getAbsolutePath());
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

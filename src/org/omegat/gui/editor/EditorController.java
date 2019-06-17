@@ -1272,6 +1272,8 @@ public class EditorController implements IEditor {
                 Core.executeExclusively(false, Core.getProject()::teamSync);
             } catch (InterruptedException ex) {
             } catch (TimeoutException ex) {
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
         }
     }

@@ -59,13 +59,13 @@ public final class ProjectFactory {
     }
 
     /**
-     * Loads project in a "big" sense -- loads project's properties, glossaryes,
-     * tms, source files etc.
+     * Loads project in a "big" sense -- loads project's properties, glossaries, tms, source files etc.
      *
      * @param props
      *            properties for new project
+     * @return whether the project was successfully loaded or not
      */
-    public static void loadProject(ProjectProperties props, boolean onlineMode) {
+    public static boolean loadProject(ProjectProperties props, boolean onlineMode) {
         Core.getAutoSave().disable();
         RealProject p = new RealProject(props);
         Core.setProject(p);
@@ -76,6 +76,7 @@ public final class ProjectFactory {
         } else {
             Core.setProject(new NotLoadedProject());
         }
+        return p.isProjectLoaded();
     }
 
     /**

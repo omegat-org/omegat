@@ -110,11 +110,15 @@ public final class FileUtil {
 
     /**
      * Create file backup with datetime suffix.
+     * 
+     * @return Backup file
      */
-    public static void backupFile(File f) throws IOException {
-        long fileMillis = f.lastModified();
+    public static File backupFile(File original) throws IOException {
+        long fileMillis = original.lastModified();
         String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
-        FileUtils.copyFile(f, new File(f.getPath() + "." + str + OConsts.BACKUP_EXTENSION));
+        File backup = new File(original.getPath() + "." + str + OConsts.BACKUP_EXTENSION);
+        FileUtils.copyFile(original, backup);
+        return backup;
     }
 
     /**

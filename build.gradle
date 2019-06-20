@@ -155,7 +155,7 @@ dependencies {
         compile "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        compile 'org.eclipse.jgit:org.eclipse.jgit:4.8.0.201706111038-r'
+        compile 'org.eclipse.jgit:org.eclipse.jgit:4.11.8.201904181247-r'
         compile 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
         // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
         compile 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'

@@ -341,21 +341,21 @@ public class RealProject implements IProject {
                     glossaryPrepared = null;
 
                     remoteRepositoryProvider.switchAllToLatest();
-
-		            remoteRepositoryProvider.copyFilesFromRepoToProject("", '/' + RemoteRepositoryProvider.REPO_SUBDIR,
-		                    '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR, '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR,
-		                    '/' + OConsts.FILE_PROJECT,
-		                    '/' + config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
-		                    '/' + config.getWritableGlossaryFile().getUnderRoot(),
-		                    '/' + config.getTargetDir().getUnderRoot());
-
-		            // After adding filters.xml and segmentation.conf, we must reload them again
-		            config.loadProjectFilters();
-		            config.loadProjectSRX();
                 } catch (IRemoteRepository2.NetworkException e) {
                     Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause());
                     setOfflineMode();
                 }
+
+                remoteRepositoryProvider.copyFilesFromRepoToProject("", '/' + RemoteRepositoryProvider.REPO_SUBDIR,
+                        '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR, '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR,
+                        '/' + OConsts.FILE_PROJECT,
+                        '/' + config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
+                        '/' + config.getWritableGlossaryFile().getUnderRoot(),
+                        '/' + config.getTargetDir().getUnderRoot());
+
+                // After adding filters.xml and segmentation.conf, we must reload them again
+                config.loadProjectFilters();
+                config.loadProjectSRX();
             }
 
             loadFilterSettings();

@@ -372,14 +372,24 @@ public final class Core {
     public static void executeExclusively(boolean waitForUnlock, RunnableWithException run)
             throws Exception {
         if (!EXCLUSIVE_RUN_LOCK.tryLock(waitForUnlock ? 180000 : 1, TimeUnit.MILLISECONDS)) {
-            throw new TimeoutException();
+            Exception ex = new TimeoutException("Timeout waiting for previous exclusive execution");
+            Exception cause = new Exception("Previous exclusive execution");
+            if (runningStackTrace != null) {
+                cause.setStackTrace(runningStackTrace);
+                ex.initCause(cause);
+            }
+            throw ex;
         }
         try {
+            runningStackTrace = new Exception().getStackTrace();
             run.run();
         } finally {
+            runningStackTrace = null;
             EXCLUSIVE_RUN_LOCK.unlock();
         }
     }
+
+    private static StackTraceElement[] runningStackTrace;
 
     public interface RunnableWithException {
         void run() throws Exception;

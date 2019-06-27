@@ -75,6 +75,7 @@ public class NewTeamProject extends javax.swing.JDialog {
                 clearRepo();
             }
         });
+        txtRepositoryOrProjectFileURL.addActionListener(e -> btnOk.doClick());
         txtDirectory.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void removeUpdate(DocumentEvent e) {
@@ -89,6 +90,7 @@ public class NewTeamProject extends javax.swing.JDialog {
                 updateDialog();
             }
         });
+        txtDirectory.addActionListener(e -> btnOk.doClick());
 
         StaticUIUtils.setEscapeClosable(this);
         getRootPane().setDefaultButton(btnOk);

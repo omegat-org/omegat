@@ -4,7 +4,7 @@
 AppName=OmegaT @VERSION_NUMBER_SUBST@
 AppVerName=OmegaT version @VERSION_NUMBER_SUBST@
 AppPublisher=OmegaT
-AppPublisherURL=http://www.omegat.org/
+AppPublisherURL=https://omegat.org/
 DefaultDirName={pf}\OmegaT
 DefaultGroupName=OmegaT
 UninstallDisplayIcon={app}\OmegaT.exe

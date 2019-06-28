@@ -2,7 +2,7 @@
  OmegaT 4.3.0
 ----------------------------------------------------------------------
   5 Enhancements
-  4 Bug fixes
+  6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.3.0 vs 4.2.0
@@ -30,6 +30,9 @@
 
   - Wrong file name in the editor pane
   https://sourceforge.net/p/omegat/bugs/909/
+
+  - Team project forgets being a team project
+  https://sourceforge.net/p/omegat/bugs/938/
 
   - Exception on TMX merge when loading team project
   https://sourceforge.net/p/omegat/bugs/946/

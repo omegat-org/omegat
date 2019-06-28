@@ -12,7 +12,7 @@
  OmegaT 4.3.0
 ----------------------------------------------------------------------
   5 Enhancements
-  2 Bug fixes
+  3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.3.0 vs 4.2.0
@@ -43,6 +43,9 @@
 
   - View menu fails to open with a NullPointerException
   https://sourceforge.net/p/omegat/bugs/947/
+
+  - Unexpected captured groups in replacements
+  https://sourceforge.net/p/omegat/bugs/951/
 
 ----------------------------------------------------------------------
  OmegaT 4.2.0 (2019-04-23)

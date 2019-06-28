@@ -1,8 +1,9 @@
 ﻿; -- OmegaT.iss --
 
 [Setup]
-AppName=OmegaT @VERSION_NUMBER_SUBST@
-AppVerName=OmegaT version @VERSION_NUMBER_SUBST@
+AppName=OmegaT
+AppVersion=@VERSION_NUMBER_SUBST@
+AppId=org.omegat
 AppPublisher=OmegaT
 AppPublisherURL=https://omegat.org/
 DefaultDirName={pf}\OmegaT

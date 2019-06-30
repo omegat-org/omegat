@@ -179,3 +179,25 @@ begin
     SaveStringToFile(ExpandConstant('{app}\OmegaT.l4J.ini'), IniFileAnsi, false);
   end
 end;
+
+function DelTreeIfPresent(const FileName: String): Boolean;
+begin
+  if not DirExists(FileName) then
+    Result := True
+  else
+  begin
+    Log('Deleting existing ' + FileName);
+    Result := DelTree(FileName, true, true, true);
+    if Result then Log('Success') else Log('Failed');
+  end
+end;
+
+function PrepareToInstall(var NeedsRestart: Boolean): String;
+begin
+  if not DelTreeIfPresent(ExpandConstant('{app}/lib')) then
+    Result := 'Failed to remove existing ' + ExpandConstant('{app}/lib') + ' directory'
+  else if not  DelTreeIfPresent(ExpandConstant('{app}/jre')) then
+    Result := 'Failed to remove existing ' + ExpandConstant('{app}/jre') + ' directory'
+  else
+    Result := '';
+end;

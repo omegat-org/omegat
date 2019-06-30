@@ -1,4 +1,4 @@
-﻿; -- OmegaT.iss --
+﻿; -- OmegaT.iss -*- mode: pascal; pascal-indent-level: 2; -*-
 
 [Setup]
 AppName=OmegaT

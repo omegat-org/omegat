@@ -12,7 +12,7 @@
  OmegaT 4.3.0
 ----------------------------------------------------------------------
   6 Enhancements
-  6 Bug fixes
+  7 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.3.0 vs 4.2.0
@@ -52,6 +52,9 @@
 
   - Unexpected captured groups in replacements
   https://sourceforge.net/p/omegat/bugs/951/
+
+  - OmegaT.exe will not launch after updating to 4.2.0
+  https://sourceforge.net/p/omegat/bugs/952/
 
   Other changes:
 

@@ -12,7 +12,7 @@
  OmegaT 4.3.0
 ----------------------------------------------------------------------
   6 Enhancements
-  7 Bug fixes
+  8 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.3.0 vs 4.2.0
@@ -37,6 +37,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1165/
 
   Bug fixes:
+
+  - Previous installations not removed from Windows programs list
+  https://sourceforge.net/p/omegat/bugs/878/
 
   - Wrong file name in the editor pane
   https://sourceforge.net/p/omegat/bugs/909/

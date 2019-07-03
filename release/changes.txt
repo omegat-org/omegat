@@ -47,6 +47,9 @@
   - Team project forgets being a team project
   https://sourceforge.net/p/omegat/bugs/938/
 
+  - Team project TM is overwritten with old content
+  https://sourceforge.net/p/omegat/bugs/943/
+
   - Exception on TMX merge when loading team project
   https://sourceforge.net/p/omegat/bugs/946/
 

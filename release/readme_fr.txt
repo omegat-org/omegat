@@ -1,7 +1,7 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2018.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2019.
 
 
-Qu'est-ce qu'OmegaT ?
+Qu'est-ce qu'OmegaT ?
 ===============
 
 OmegaT est un outil de Traduction Assistée par Ordinateur libre, à code source ouvert et multiplateforme, avec recherche de correspondances, mémoire de traduction, recherche par mots clefs, glossaires et réutilisation des traductions dans des projets modifiés.
@@ -63,7 +63,7 @@ Utilisation de Java Web Start pour l'installation d'OmegaT (toutes plates-formes
 
 Si vous disposez déjà de Java, l'une des façons d'installer OmegaT est d'utiliser Java Web Start.
 
-Pour ce faire, téléchargez le fichier suivant et exécutez-le :
+Pour ce faire, téléchargez le fichier suivant et exécutez-le :
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
@@ -94,20 +94,19 @@ Vous pouvez faire glisser OmegaT.app sur votre dock ou sur la barre d'outils d'u
 Exécution d'OmegaT (Linux)
 ========================
 
-Si vous avez utilisé le script linux-install.sh, vous devriez pouvoir exécuter OmegaT avec :
+Si vous avez utilisé le script linux-install.sh, vous devriez pouvoir exécuter OmegaT avec :
 
   Alt+F2
 
-suivi de :
+suivi de :
 
   omegat
 
-Pour pouvoir exécuter OmegaT de façon plus conviviale, vous pouvez utiliser le script Kaptain fourni (omegat.kaptn). Pour l'utiliser, vous devez tout d'abord installer Kaptain. Vous pouvez ensuite lancer le script d'exécution Kaptain avec :
-
+Pour pouvoir exécuter OmegaT de façon plus conviviale, vous pouvez utiliser le script Kaptain fourni (omegat.kaptn). Pour l'utiliser, vous devez tout d'abord installer Kaptain. Vous pouvez ensuite lancer le script d'exécution Kaptain avec :
 
   Alt+F2
 
-suivi de :
+suivi de :
 
   omegat.kaptn
 
@@ -116,7 +115,7 @@ suivi de :
 Exécution d'OmegaT depuis la ligne de commande (tous systèmes)
 ====================================================
 
-La commande permettant d'exécuter OmegaT est :
+La commande permettant d'exécuter OmegaT est :
 
 cd <dossier dans lequel le fichier OmegaT.jar est situé>
 
@@ -134,7 +133,7 @@ OmegaT est l'œuvre initiale de Keith Godfrey.
 
 Aaron Madlon-Kay est le responsable du projet OmegaT.
 
-Équipe actuelle :
+Équipe actuelle :
 (ordre alphabétique)
 
   Vincent Bidaux (responsable documentation)
@@ -147,7 +146,7 @@ Aaron Madlon-Kay est le responsable du projet OmegaT.
 
 Les contributions au code sont documentées dans /docs/contributors.txt.
 
-Les personnes qui ont contribué incluent :
+Les personnes qui ont contribué incluent :
 (ordre alphabétique)
 
   Anthony Baldwin (responsable de la localisation)
@@ -170,7 +169,7 @@ Les personnes qui ont contribué incluent :
 Liens utiles
 ============
 
-Les informations les plus récentes au sujet d'OmegaT sont à :
+Les informations les plus récentes au sujet d'OmegaT sont à :
 
    http://www.omegat.org/
 
@@ -178,10 +177,10 @@ Aide utilisateur sur le groupe Yahoo. Vous pouvez y consulter les archives sans 
 
    https://groups.yahoo.com/neo/groups/OmegaT/info
 
-Demandes d'améliorations (en anglais), sur le site de SourceForge :
+Demandes d'améliorations (en anglais), sur le site de SourceForge :
 
    https://sourceforge.net/p/omegat/feature-requests/
 
-Rapports de bogues (en anglais), sur le site de SourceForge :
+Rapports de bogues (en anglais), sur le site de SourceForge :
 
    https://sourceforge.net/p/omegat/bugs/

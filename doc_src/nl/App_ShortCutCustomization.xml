@@ -4,11 +4,9 @@
   <title>Aanpassen van sneltoetsen toetsenbord</title>
 
   <section id="ch04.shortcuts.customization">
-    <title><indexterm class="singular">
-        <primary>Sneltoetsen van toetsenbord</primary> <secondary>aanpassen</secondary>
-      </indexterm>Aanpassen van sneltoetsen toetsenbord</title>
+    <title>Aanpassen van sneltoetsen toetsenbord</title>
 
-    <para>Aan de meeste items die verschijnen in het hoofdmenu kan een sneltoets worden toegewezen. U kunt de reeds toegewezen sneltoetsen wijzigen en nieuwe sneltoetsen toevoegen door een bestand met definities voor de sneltoetsen in uw map voor voorkeuren voor OmegaT te plaatsen (zie <link linkend="user.files">Locatie gebruikersbestanden</link>).</para>
+    <para>Aan de meeste items die verschijnen in het hoofdmenu kan een sneltoets worden toegewezen. U kunt de reeds toegewezen sneltoetsen wijzigen en nieuwe sneltoetsen toevoegen door een bestand met definities voor de sneltoetsen in uw map voor voorkeuren voor <application>OmegaT</application> te plaatsen (toegankelijk via het menu <menuchoice> <guimenuitem>Opties</guimenuitem> <guimenuitem>Toegang tot configuratiemap</guimenuitem> </menuchoice>).</para>
 
     <para>Het bestand met definities voor de sneltoetsen moet zijn genaamd <filename>MainMenuShortcuts.properties</filename> en mag ten hoogste één definitie voor een sneltoets per regel bevatten. Lege regels worden geaccepteerd en regels met opmerkingen zouden moeten beginnen met &quot;//&quot;. Alles na de &quot;//&quot; zal worden genegeerd.</para>
 
@@ -125,7 +123,7 @@
           </row>
 
           <row>
-            <entry>Bestanden naar map Bronbestanden kopiëren...</entry>
+            <entry>Bestanden naar map Bronbestanden kopiëren…</entry>
 
             <entry/>
 
@@ -133,7 +131,7 @@
           </row>
 
           <row>
-            <entry>Pagina van MediaWiki downloaden...</entry>
+            <entry>Pagina van MediaWiki downloaden…</entry>
 
             <entry/>
 
@@ -181,7 +179,7 @@
           </row>
 
           <row>
-            <entry>Eigenschappen...</entry>
+            <entry>Eigenschappen…</entry>
 
             <entry><keycap>Ctrl+E</keycap></entry>
 
@@ -189,7 +187,7 @@
           </row>
 
           <row>
-            <entry>Projectbestanden...</entry>
+            <entry>Projectbestanden…</entry>
 
             <entry><keycap>Ctrl+L</keycap></entry>
 
@@ -401,7 +399,7 @@
           </row>
 
           <row>
-            <entry>Zoeken en vervangen...</entry>
+            <entry>Zoeken en vervangen…</entry>
 
             <entry><keycap>Ctrl+K</keycap></entry>
 
@@ -605,7 +603,7 @@
           </row>
 
           <row>
-            <entry>Segmentnummer...</entry>
+            <entry>Segmentnummer…</entry>
 
             <entry><keycap>Ctrl+J</keycap></entry>
 
@@ -653,7 +651,7 @@
           </row>
 
           <row>
-            <entry>Terug in geschiedenis...</entry>
+            <entry>Terug in geschiedenis…</entry>
 
             <entry><keycap>Ctrl+Shift+P</keycap></entry>
 
@@ -670,11 +668,7 @@
     <table>
       <title>menu Weergave</title>
 
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Weergave</secondary>
-      </indexterm>
-
-      <tgroup cols="3" colsep="1">
+       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>
@@ -981,7 +975,7 @@
           </row>
 
           <row>
-            <entry>Bestandsfilters...</entry>
+            <entry>Bestandsfilters…</entry>
 
             <entry/>
 
@@ -989,7 +983,7 @@
           </row>
 
           <row>
-            <entry>Segmentatie...</entry>
+            <entry>Segmentatie…</entry>
 
             <entry/>
 
@@ -1113,7 +1107,7 @@
           </row>
 
           <row>
-            <entry>Over...</entry>
+            <entry>Over…</entry>
 
             <entry/>
 
@@ -1121,7 +1115,7 @@
           </row>
 
           <row>
-            <entry>Laatste wijzigingen...</entry>
+            <entry>Laatste wijzigingen…</entry>
 
             <entry/>
 
@@ -1129,7 +1123,7 @@
           </row>
 
           <row>
-            <entry>Log...</entry>
+            <entry>Log…</entry>
 
             <entry/>
 

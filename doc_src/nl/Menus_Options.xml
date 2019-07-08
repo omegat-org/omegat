@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>Opties</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Voorkeuren…</term>
+
+      <listitem>
+        <para>Open het dialoogvenster <link linkend="dialogs.preferences">Voorkeuren</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Machinevertaling</term>
+
+      <listitem>
+        <para>Stelt u in staat om de aangeboden programma's voor machinevertaling te activeren/deactiveren.</para>
+
+        <para>Als verscheidene programma's voor vertaling zijn geselecteerd, dan wordt <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> ook gebruikt om daar tussen te schakelen en voegt de laatst geselecteerde in.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Woordenlijst</term>
+
+      <listitem>
+        <para>Selecteer <guimenuitem>Taas Terminology Lookup</guimenuitem> om dit opzoeken te activeren.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Woordenboek</term>
+
+      <listitem>
+        <para>Selecteer de optie <guimenuitem>Fuzzy overeenkomsten voor items woordenboek gebruiken</guimenuitem> als u wilt dat woordenboeken woorden weergeven die dezelfde bron hebben.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Auto-aanvullen</term>
+
+      <listitem>
+        <para>Als de optie <guimenuitem>Relevante suggesties automatisch weergeven</guimenuitem> is geselecteerd, wordt Auto-aanvullen automatisch gestart door de eerste letter te typen van een vertaald item voor de woordenlijst, of door &quot;&lt;&quot; te typen in het geval van tags.</para>
+
+        <para>Selecteer <guimenuitem>Geschiedenis aanvullen inschakelen</guimenuitem> om voorgestelde woorden weer te geven zodra hun eerste letters worden getypt.</para>
+
+        <para>Selecteer <guimenuitem>Geschiedenis voorspellen inschakelen</guimenuitem> om voorgestelde woorden weer te geven die gewoonlijk het woord volgen dat zojuist werd ingevoerd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Bestandsfilters…</term>
+
+      <listitem>
+        <para>Opent de opties voor <link linkend="dialogs.preferences.filefilters">Bestandsfilters</link> in het dialoogvenster Voorkeuren.</para>
+
+        <para>Deze instellingen zijn van toepassing op het niveau van OmegaT, voor alle projecten.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentatie…</term>
+
+      <listitem>
+        <para>Opent de opties voor <link linkend="dialogs.preferences.segmentationsetup">Segmentatie-instellingen</link> in het dialoogvenster Voorkeuren.</para>
+
+        <para>Deze instellingen zijn van toepassing op het niveau van OmegaT, voor alle projecten.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>venster Bewerken</term>
+
+      <listitem>
+        <para>Opent de opties voor <link linkend="dialogs.preferences.editor">venster Bewerken</link> in het dialoogvenster Voorkeuren.</para>
+
+        <para>Deze instellingen zijn van toepassing op het niveau van OmegaT, voor alle projecten.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ga naar map voor configuratie</term>
+
+      <listitem>
+        <para>Opent de lokale map waar de configuratiebestanden voor OmegaT zijn opgeslagen (afhankelijk van het besturingssysteem).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>Weergave</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Vertaalde segmenten markeren</term>
+
+      <listitem>
+        <para>Indien aangevinkt, zullen de vertaalde segmenten in geel worden geaccentueerd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Niet-vertaalde segmenten markeren</term>
+
+      <listitem>
+        <para>Indien aangevinkt, zullen de niet-vertaalde segmenten in paars worden geaccentueerd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Alinea-scheidingen markeren</term>
+
+      <listitem>
+        <para>Indien geselecteerd worden de scheidingen tussen alinea's in de bron visueel aangegeven.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Bronsegmenten weergeven</term>
+
+      <listitem>
+        <para>Indien aangevinkt, zullen de bronsegmenten in groen worden geaccentueerd. Indien niet aangevinkt, zullen de bronsegmenten niet worden weergegeven.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Niet-unieke segmenten markeren</term>
+
+      <listitem>
+        <para>Indien aangevinkt zullen niet-unieke segmenten bleekgrijs worden gemarkeerd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmenten met opmerkingen markeren</term>
+
+      <listitem>
+        <para>In aangevinkt zullen segmenten met opmerkingen cyaankleurig worden gemarkeerd. Deze markering heeft prioriteit boven <guimenuitem>Vertaalde segmenten markeren</guimenuitem> en <guimenuitem>Niet-vertaalde segmenten markeren</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Niet-afbreekbare spaties markeren</term>
+
+      <listitem>
+        <para>Indien aangevinkt worden niet-afbreekbare spaties met een grijze achtergrond weergegeven.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Witruimte markeren</term>
+
+      <listitem>
+        <para>Indien aangevinkt wordt witte ruimte met kleine puntjes weergegeven.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Bidirectional Algorithm Control Characters markeren</term>
+
+      <listitem>
+        <para>Deze optie geeft <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters</ulink> weer</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmenten van Automatisch vergroten van vertalingen markeren</term>
+
+      <listitem>
+        <para>Indien geselecteerd wordt de achtergrond van alle segmenten waar het doelsegment automatisch is gevuld (vanuit TMX-en geplaatst in <filename>/tm/auto</filename> bijvoorbeeld) in kleur weergegeven. De kleuren worden weergegeven zolang als de optie <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Status voor automatisch vergroten van vertalingen opslaan</guimenuitem></link> is aangevinkt. Normaal gesproken worden vertalingen die worden ingevoegd vanuit de map auto weergegeven in oranje. Andere vertalingen, specifiek geïdentificeerd in de TMX, kunnen met behulp van verschillende kleuren worden weergegeven. Bekijk het <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink> voor technische details</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Agressief terugvallen op lettertype</term>
+
+      <listitem>
+        <para>Selecteer deze optie in het geval dat <application>OmegaT</application> sommige tekens niet juist weergeeft (zelfs niet als de lettertypen die de relevante tekens bevatten op uw machine zijn geïnstalleerd). Opmerking: op Windows lijkt het erop dat dit handmatige mechanisme voor terugvallen op lettertype kan botsen met de standaard voor terugvallen op lettertype, wat ongewenst vervangen van het lettertype kan veroorzaken. Daarom staat het standaard op OFF.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Info over wijzigingen</term>
+
+      <listitem>
+        <para>Instellen van de optie Info over wijzigingen op <guimenuitem>Weergave voor huidige segment</guimenuitem> zal datum en tijd en de auteur weergeven van de laatste wijziging aan het huidige segment. Het instellen op<guimenuitem> Weergave voor alle segmenten </guimenuitem>geeft deze informatie weer voor alle segmenten en <guimenuitem>Niet weergeven</guimenuitem> schakelt deze optie uit.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

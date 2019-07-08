@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>Bewerken</title>
+
+  <para>Dit menu geeft alleen items weer als een project is geopend.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Laatste actie ongedaan maken</guimenuitem></term>
+
+      <listitem>
+        <para>Herstelt de status naar vóórdat de laatste actie werd uitgevoerd. Deze opdracht werkt niet als het gewijzigde segment al is gevalideerd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Laatste actie opnieuw</term>
+
+      <listitem>
+        <para>Herstelt de status naar vóórdat de laatste actie werd geannuleerd. Deze opdracht werkt niet als het gewijzigde segment al is gevalideerd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Door overeenkomst of selectie vervangen</term>
+
+      <listitem>
+        <para>Vervangt het gehele doelsegment door de huidige geselecteerde overeenkomst (de eerste overeenkomst is standaard geselecteerd)</para>
+
+        <para>Indien binnen de fuzzy overeenkomst enkele teksten zijn geselecteerd, zal alleen die selectie het gehele doelsegment vervangen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Overeenkomst of selectie invoegen</term>
+
+      <listitem>
+        <para>Voegt de huidige geselecteerde overeenkomst in op de cursorpositie. Indien een gedeelte van het doelsegment is geselecteerd, overschrijft deze functie het geselecteerde gedeelte.</para>
+
+        <para>Indien binnen de fuzzy overeenkomst enkele teksten zijn geselecteerd, zal alleen die selectie op de positie van de cursor worden ingevoegd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vervangen door machinevertaling</term>
+
+      <listitem>
+        <para>Vervangt het doelsegment door de vertaling die wordt verschaft door de service van de machinevertaling. Geen actie wordt ondernomen indien er geen service voor machinevertaling is geactiveerd (in <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Machinevertaling</guimenuitem> </menuchoice>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vervangen door bron</term>
+
+      <listitem>
+        <para>Vervangt het huidige doelsegment door de brontekst.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Bron invoegen</term>
+
+      <listitem>
+        <para>Voegt de brontekst in op de cursorpositie.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ontbrekende brontags invoegen</term>
+
+      <listitem>
+        <para>Voegt de brontags (indien zij ontbraken) in op de cursorpositie.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Volgende ontbrekende tag invoegen</term>
+
+      <listitem>
+        <para>Voegt slechts één tag (naast de ontbrekende) in op de cursorpositie.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Selectie exporteren</term>
+
+      <listitem>
+        <para>Exporteert de huidige selectie naar een tekstbestand voor verwerking. Indien geen tekst is geselecteerd, wordt het huidige bronsegment naar dit bestand geschreven. Wanneer de gebruiker <application>OmegaT</application> afsluit, wordt dit bestand niet geleegd, om consistent te zijn aan het gebruikelijke gedrag van het klembord. De geëxporteerde inhoud wordt gekopieerd naar het bestand <filename>selection.txt</filename> dat is geplaatst in de voorkeursmap van de gebruiker.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Item voor woordenlijst maken</term>
+
+      <listitem>
+        <para>Laat de gebruiker een item maken in het standaard bestand voor de woordenlijst.</para>
+
+        <para>Als u een tekstreeks selecteert (in enig paneel) vóórdat u drukt op <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, zal die tekst standaard worden geplakt in het veld <guilabel>Bronterm</guilabel>.</para>
+
+        <para>Dit kan ook van toepassing zijn op de velden <guimenuitem>Doelterm</guimenuitem> en <guimenuitem>Opmerking</guimenuitem> als nieuwe selecties worden gemaakt en <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo> opnieuw wordt ingedrukt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zoeken in project...</term>
+
+      <listitem>
+        <para>Opent een nieuw <link linkend="windows.textsearch">venster Zoeken</link>.</para>
+
+        <para>Als u een tekstreeks selecteert (in enig paneel) vóórdat u drukt op <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap>  </keycombo>, zal die tekst standaard worden geplakt in het veld <guilabel>Zoeken naar</guilabel>.</para>
+
+        <para>Drukken op <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo> geeft het laatst geopende venster Zoeken weer (in plaats van een nieuw te openen).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zoeken en vervangen…</term>
+
+      <listitem>
+        <para>Opent een nieuw <link linkend="windows.textreplace">venster Zoeken en vervangen</link>.</para>
+
+        <para>Als u een tekstreeks selecteert (in enig paneel) vóórdat u drukt op <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap>  </keycombo>, zal die tekst standaard worden geplakt in het veld <guilabel>Zoeken naar</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zoeken in woordenboeken</term>
+
+      <listitem>
+        <para>Als <link linkend="dialogs.preferences.dictionary">Automatisch tekst segment opzoeken in woordenboeken</link> is uitgeschakeld, stelt deze functie u in staat naar het geselecteerde woord te zoeken in de woordenboeken.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Schakel Hoofd-/kleine letters naar</term>
+
+      <listitem>
+        <para>Wijzigt hoofd-/kleine letters van de geaccentueerde tekst in het doelsegment naar de geselecteerde optie (Kleine letters, Hoofdletters of Alle woorden hoofdletters). Gebruik <keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> om tussen de vier keuzes te schakelen. Indien geen tekst is geselecteerd, selecteert <application>OmegaT</application> het woord dat de letter bevat direct rechts naast de cursor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Overeenkomst selecteren</term>
+
+      <listitem>
+        <para>Selecteert de vorige, de volgende of de Ne overeenkomst die is weergegeven in het venster Overeenkomsten om het segment te vervangen of het in te voegen in het segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Als standaard vertaling gebruiken</term>
+
+      <listitem>
+        <para>Indien er meerdere alternatieve vertalingen beschikbaar zijn voor het actieve segment, kunt u het geselecteerde alternatief als de standaard vertaling instellen. Het item zal grijs worden als er slechts één vertaling beschikbaar is.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Alternatieve vertaling maken</term>
+
+      <listitem>
+        <para>Het een en hetzelfde segment kan, afhankelijk van de context, verschillende vertalingen vereisen. Selecteer dit menuitem als de huidige vertaling niet van toepassing is en voer de alternatieve vertaling in.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vertaling verwijderen</term>
+
+      <listitem>
+        <para>Verwijdert de vertaling en stelt segment in als niet-vertaald.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Lege vertaling instellen</term>
+
+      <listitem>
+        <para>De vertaling als leeg definiëren. In het doeldocument zal voor dit segment niets verschijnen. In het venster Bewerken wordt de vertaling weergegeven als &lt;LEEG&gt;</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Identieke vertaling registreren</term>
+
+      <listitem>
+        <para>Gebruik deze opdracht om de vertaling te registreren als identiek aan de bron, zelfs als <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Vertaling mag gelijk zijn aan brontekst</guilabel></link> niet is geselecteerd.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

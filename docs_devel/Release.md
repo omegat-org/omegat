@@ -37,6 +37,7 @@ Run the following, then commit any changes:
 
 ```sh
 git tag vX.Y.Z
+git push origin vX.Y.Z
 ```
 
 

@@ -133,9 +133,12 @@ and publish the contents to SourceForge Web manually.
 
 ## 13. Push new version for version check
 
-If no catastrophic problems are reported with the new version, bump the version
-check master file:
+If no catastrophic problems are reported with the new version, once the
+[website](https://github.com/omegat-org/omegat-website/) has been updated, bump
+the version check master file:
 
 ```sh
 ./gradlew publishVersion
 ```
+
+Consider opening a ticket on the website to coordinate timing.

@@ -1,0 +1,2144 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 3. Vensters en dialoogvensters</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - Gebruikershandleiding">
+      <link rel="prev" href="menus.html" title="Hoofdstuk 2. Menu's">
+      <link rel="next" href="panes.html" title="Hoofdstuk 4. Vensters">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 3. Vensters en dialoogvensters</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="menus.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="panes.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="windows.and.dialogs"></a>Hoofdstuk 3. Vensters en dialoogvensters
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.projectproperties">1. Projecteigenschappen</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2123">1.1. Talen</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2130">1.2. Opties</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2227">1.3. Bestandslocaties</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.projectfiles">2. Projectbestanden</a></span></dt>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.textsearch">3. Tekst zoeken</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#using.wild.cards">3.1. Jokertekens gebruiken</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#search.methoids">3.2. Zoekmethoden en opties</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#search.result.display">3.3. Zoekresultaten weergeven</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#search.filter">3.4. Filteritems in venster Bewerken overeenkomstig de zoekactie</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.textreplace">4. Tekst vervangen</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2749">4.1. Zoekopties</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.aligner">5. Uitlijnen</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2777">5.1. Stap 1: Parameters voor uitlijnen aanpassen</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2811">5.2. Stap 2: Handmatige correcties maken</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.scripts">6. Scripts</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2878">6.1. Gebruiken</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2927">6.2. Scripttalen</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences">7. Algemene voorkeuren</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2960">7.1. Algemeen</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2976">7.2. Machinevertaling</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3020">7.3. Woordenlijst</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.dictionary">7.4. Woordenboek</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3112">7.5. Uiterlijk</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.filefilters">7.6. Bestandsfilters</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup">7.7. Segmentatie-instellingen</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3731">7.8. Auto-aanvullen</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3759">7.9. Spellingscontrole</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3767">7.10. plug-in LanguageTool</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.externalsearch">7.11. Extern zoeken</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.editor">7.12. venster Bewerken</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.tagprocessing">7.13. Tag verwerken</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3979">7.14. Team</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3989">7.15. Overeenkomsten TM</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4092">7.16. Weergave</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.savingandoutput">7.17. Opslaan en uitvoer</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4141">7.18. Inloggen proxy</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4146">7.19. Veilig opslaan</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4151">7.20. Plug-ins</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4159">7.21. Updates</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <p>Het verschil is klein: we noemen "Venster" een venster dat, naast het venster Bewerken, geopend kan zijn en waarmee gewerkt
+            kan worden, en "dialoogvenster" een venster waar u parameters moet selecteren voordat u het sluit en doorgaat met uw vertaalactiviteiten.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="dialogs.projectproperties"></a>1. Projecteigenschappen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dit dialoogvenster is toegankelijk door te selecteren <span class="guimenuitem">Project</span> → <span class="guimenuitem">eigenschappen…</span></p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2123"></a>1.1. Talen
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>U kunt de bron- en doeltalen handmatig instellen of het menu met de keuzelijsten gebruiken. Onthoud goed dat het wijzigen
+                  van de talen er voor kan zorgen dat het de huidige gebruikte vertaalgeheugens onbruikbaar kan maken omdat hun taal niet meer
+                  overeenkomt met de nieuwe talen.
+               </p>
+               <p>Tokenizers, corresponderend met de geselecteerde talen, worden weergegeven.</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2130"></a>1.2. Opties
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Segmentering op zin-niveau inschakelen</span></dt>
+                     <dd>
+                        <p>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <span class="application">OmegaT</span> worden afgehandeld. De vooraf ingestelde manier van het segmenteren van de bronnen is de segmentering op zin-niveau, dus
+                           dit keuzevak zou in normale gevallen geselecteerd moeten worden gelaten.
+                        </p>
+                        <p>In sommige uitzonderlijke gevallen kan het alternatief, d.i. segmenteren op alinea's, de voorkeur genieten. Wijzigen van deze
+                           vlag past niet de segmentatie van de reeds bestaande vertaalgeheugens aan. Indien u gedurende de vertaling besluit om te schakelen
+                           van zin- naar alinea-vertaling, zal het interne vertaalgeheugen van het project niet worden gewijzigd (OmegaT kan oude vertaalgeheugens
+                           bijwerken die geen gebruik maakten van zin-segmentatie, maar niet andersom), maar OmegaT zal proberen fuzzy overeenkomsten
+                           voor alinea's te maken door bestaande vertalingen van zinnen samen te voegen.
+                        </p>
+                        <p>Wijzigen van de instellingen voor segmentatie kunnen er voor zorgen dat sommige reeds vertaalde segmenten opgedeeld of samengevoegd
+                           worden. Zij zullen dan effectief terugkeren naar de status "niet vertaald" omdat zij niet overeenkomen met de opgenomen segmenten
+                           in het projectgeheugen, zelfs als de originele vertaling daar nog steeds in staat.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Automatisch vergroten van vertalingen</span></dt>
+                     <dd>
+                        <p>In het geval dat er niet-unieke segmenten in brondocumenten staan biedt het keuzevak Automatisch vergroten van vertaling de
+                           gebruiker de volgende twee mogelijkheden met betrekking tot automatische vertaling: indien geselecteerd zal het eerste vertaalde
+                           segment worden beschouwd als de standaard vertaling en de tekst van het doel zal automatisch worden gebruikt voor latere hits
+                           gedurende het vertaalproces. Foutief vertaalde segmenten kunnen natuurlijk later handmatig worden gecorrigeerd met behulp
+                           van<span class="guimenuitem">Alternatieve vertaling maken</span>. Als het keuzevak Automatisch vergroten van vertaling niet is geselecteerd zullen de segmenten met alternatieve vertalingen
+                           niet vertaald worden totdat de gebruiker heeft bepaald welke vertaling moet worden gebruikt.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Tags verwijderen</span></dt>
+                     <dd>
+                        <p>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is in het bijzonder handig als teksten
+                           worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde pdf, slecht geconverteerde .odt of .docx,
+                           etc.) In een normaal geval zou het altijd mogelijk moeten zijn om de doeldocumenten te kunnen openen, omdat alleen de in-regelige
+                           tags worden verwijderd. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in de doeldocumenten
+                           behouden.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Externe opdracht nabewerken</span></dt>
+                     <dd>
+                        <p>Dit gebied maakt het mogelijk een externe opdracht voor na-verwerking in te voeren (bijvoorbeeld een script om bestanden te
+                           hernoemen) die, elke keer als Vertaalde documenten maken wordt gebruikt, zal worden toegepast. Deze externe opdracht mag geen
+                           "pipes", etc. bevatten, waarom het aanroepen van een script wordt aanbevolen.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><span class="guibutton">Segmentatie…</span></span></dt>
+                     <dd>
+                        <p>De segmentatieregels zijn in het algemeen geldig voor alle projecten. De gebruiker echter wil misschien een set regels genereren,
+                           specifiek voor het betreffende project. Gebruik deze knop om een dialoogvenster te openen, activeer het keuzevak <span class="guimenuitem">Projectspecifieke segmentatieregels</span>, en ga dan door met het aanpassen van de segmentatieregels, zoals gewenst. De nieuwe set regels zal worden opgeslagen tezamen
+                           met het project en zal niet botsen met de algemene set segmentatieregels. Deselecteer het keuzevak om projectspecifieke segmentatieregels
+                           te verwijderen. Bekijk <a class="link" href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup" title="7.7. Segmentatie-instellingen">Instellen voorkeuren segmentatie</a> voor meer informatie over segmentatieregels.
+                        </p>
+                        <p><span class="emphasis"><em>Hint:</em></span> de set segmentatieregels voor een bepaald project wordt opgeslagen als <code class="filename">project/omegat/segmentation.conf.</code></p>
+                     </dd>
+                     <dt><span class="term"><span class="guibutton">Bestandsfilters…</span></span></dt>
+                     <dd>
+                        <p>Op eenzelfde manier als hierboven kan de gebruiker project-specifieke bestandsfilters maken, die tezamen met het project zullen
+                           worden opgeslagen en alleen geldig zullen zijn voor het huidige project. Klik op de knop <span class="guibutton">Bestandsfilters ... </span>, en activeer dan het keuzevak <span class="guimenuitem">Projectspecifieke filters inschakelen</span> in het venster dat opent om een set projectspecifieke bestandsfilters te maken. Een kopie van de gewijzigde configuratie
+                           van de filters zal met het project worden opgeslagen. Deselecteer het keuzevak om projectspecifieke bestandsfilters te verwijderen.
+                           Onthoud dat in het menu <span class="guimenuitem">Opties-&gt;Bestandsfilters</span>, de globale filters voor de gebruikers worden gewijzigd, niet de filters voor het project. Bekijk <a class="link" href="windows.and.dialogs.html#dialogs.preferences.filefilters" title="7.6. Bestandsfilters">Voorkeuren bestandsfilters</a> voor meer over dit onderwerp.
+                        </p>
+                        <p><span class="emphasis"><em>Hint:</em></span> de set bestandsfilters voor een bepaald project wordt opgeslagen als <code class="filename">project/omegat/filters.xml.</code></p>
+                     </dd>
+                     <dt><span class="term">Mappen in opslagplaats…</span></dt>
+                     <dd>
+                        <p>Dit venster stelt u in staat, bij het werken aan een teamproject, de routes te definiëren tussen de mappen op afstand en lokale
+                           mappen (bekijk <a class="link" href="howtos.html#howto.setupteamproject.mappingparameters" title="1.5. Parameters voor rotutes naar mappen">hier</a> voorbeelden).
+                        </p>
+                     </dd>
+                     <dt><span class="term">Extern zoeken…</span></dt>
+                     <dd>
+                        <p>Definieert de project-specifieke externe bronnen voor zoeken.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2227"></a>1.3. Bestandslocaties
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Hier kunt u verschillende submappen selecteren, bijvoorbeeld de submap met bronbestanden, submap voor doelbestanden etc. Indien
+                  u namen voor mappen invoert die nog niet bestaan, zal <span class="application">OmegaT</span> die voor u maken. Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden
+                  uit oude mappen naar de nieuwe locatie worden verplaatst.
+               </p>
+               <p>Klik op <span class="guibutton">Uitgesloten...</span> om de bestanden of mappen te definiëren  die zullen worden genegeerd door <span class="application">OmegaT</span>. Een genegeerd bestand of map:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>wordt niet weergegeven in het venster Bewerken,</p>
+                     </li>
+                     <li class="listitem">
+                        <p>wordt niet betrokken in de statistieken,</p>
+                     </li>
+                     <li class="listitem">
+                        <p>wordt niet gekopieerd naar de map /target gedurende het proces van het maken van vertaalde bestanden.</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>In het dialoogvenster Patronen voor uitsluiting is het mogelijk een patroon toe te voegen of te verwijderen, of er een te
+                  bewerken door een regel te selecteren en op F2 te drukken. Het is mogelijk jokertekens te gebruiken, met behulp van de <a class="ulink" href="https://ant.apache.org/manual/dirtasks.html#patterns" target="_top">syntaxis ant</a>.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.projectfiles"></a>2. Projectbestanden
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dit venster wordt automatisch weergegeven als OmegaT een project laadt en op elk moment door te drukken op <span class="guimenuitem">Project</span> → <span class="guimenuitem">Projectbestanden…</span>.
+            </p>
+            <p><em><span class="remark">Opmerking:</span></em> het is mogelijk te verhinderen dat het venster wordt weergegeven, door <span class="emphasis"><em>project_files_show_on_load</em></span> in te stellen op <span class="emphasis"><em>false</em></span> in het bestand <code class="filename">omegat.prefs</code> (toegankelijk via menu <span class="guimenuitem">Opties</span> → <span class="guimenuitem">Toegang tot configuratiemap</span>).
+            </p>
+            <p>Gebruik <span class="guimenuitem">Ctrl+L</span> om het te openen en <span class="keycap"><strong>Esc</strong></span> om het te sluiten. Het venster <span class="guilabel">Projectbestanden</span> geeft de volgende informatie weer:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>het totale aantal vertaalbare bestanden in het project. Dit zijn de bestanden die aanwezig zijn in de map /source in een indeling
+                        die OmegaT kan afhandelen. Dit aantal wordt tussen haakjes weergegeven, naast de titel "Projectbestanden"
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>de lijst met alle vertaalbare bestanden in het project. Klikken op een bestand zal het openen om te vertalen.</p>
+                     <p>Typen van enige tekst zal een veld <span class="guilabel">Filter</span> openen waar delen van bestandsnamen kunnen worden ingevoegd. U kunt een bestand selecteren met de toetsen <span class="keycap"><strong>Naar boven</strong></span> en <span class="keycap"><strong>Naar beneden</strong></span>, en het voor vertaling openen door te drukken op <span class="keycap"><strong>Enter</strong></span></p>
+                     <p>Opmerking: bestandsnamen (in de eerste kolom) kunnen alfabetisch worden gesorteerd door te klikken in de kop. Het is ook mogelijk
+                        om de positie van een bestandsnaam te wijzigen door er op te klikken en te drukken op de knoppen <span class="emphasis"><em>Naar ...</em></span>.
+                     </p>
+                     <p>Met rechts klikken op een bestandsnaam opent een pop-up die het mogelijk maakt het bronbestand te openen en (als het al bestaat)
+                        het doelbestand.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Items van bestanden bevatten hun namen, typen bestandsfilters, hun codering en het aantal segmenten dat elk bestand bevat</p>
+                  </li>
+                  <li class="listitem">
+                     <p>het totale aantal segmenten, het aantal unieke segmenten in het gehele project en het aantal reeds vertaalde unieke segmenten
+                        worden weergegeven aan de onderzijde
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>De verzameling <span class="bold"><strong>Unieke </strong></span>segmenten wordt berekend door alle segmenten te nemen en daaruit de duplicaten te verwijderen. (De definitie van “uniek” is
+               gevoelig voor hoofdletters: "Run" en "run" worden als verschillend behandeld)
+            </p>
+            <p>Het verschil tussen "Aantal segmenten" en "Aantal unieke segmenten" geeft een ruwe benadering van het aantal herhalingen in
+               een tekst. Merk echter op dat de aantallen niet vertellen hoe relevant de herhalingen zijn: ze zouden kunnen betekenen dat
+               relatief lange zinnen een aantal keren worden herhaald (in welk geval u geluk hebt) of het zou een tabel met sleutelwoorden
+               kunnen beschrijven (niet zo gelukkig). Het bestand <code class="filename">project_stats.txt</code> dat is geplaatst in de map omegat van uw project bevat meer gedetailleerde informatie over elk segment per bestand.
+            </p>
+            <p>Aanpassen van de segmentatieregels kan effect hebben op het aanpassen van het aantal segmenten/unieke segmenten. Zoiets zou
+               echter in het algemeen moeten worden vermeden nadat u eenmaal met de vertaling van het project bent begonnen. Zie het hoofdstuk
+               <span class="emphasis"><em>Segmentatieregels</em></span> voor meer informatie.
+            </p>
+            <p><span class="bold"><strong>Bestanden toevoegen aan het project: </strong></span>U kunt bronbestanden toevoegen aan het project door te klikken op de knop "<span class="guimenuitem">Bronbestanden importeren…"</span>. Dit kopieert de geselecteerde bestanden naar de map <code class="filename">/source</code> en herlaadt het project om de nieuwe bestanden te importeren. U kunt ook bronbestanden toevoegen vanaf internetpagina's,
+               geschreven in MediaWiki, door te klikken op de knop<span class="guimenuitem"> "Importeren vanuit MediaWiki"</span> en de corresponderende URL op te geven.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.textsearch"></a>3. Tekst zoeken
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Open het venster Zoeken met <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> en voer het woord of de frase waarnaar u wilt zoeken in het vak <span class="emphasis"><em>Zoeken naar</em></span> in.
+            </p>
+            <p>Als alternatief: selecteer een woord of frase ergens in het bewerkingsveld en druk op <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Het woord of de frase wordt automatisch ingevoegd in het vak <span class="emphasis"><em>Zoeken naar</em></span>. U kunt verschillende vensters Zoeken tegelijkertijd geopend hebben, maar sluit ze als u ze niet langer nodig hebt zodat
+               zij uw bureaublad niet vol zetten.
+            </p>
+            <p>Klik op de pijl naar beneden van het vak <span class="emphasis"><em>Zoeken naar</em></span> on toegang te krijgen tot de 10 laatste zoekacties.
+            </p>
+            <p>Het venster Zoeken heeft zijn eigen menu's:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Bestand &gt; Zoeken naar selectie (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>): focus opnieuw op het zoekveld en selecteer alle inhoud.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Bestand &gt; Sluiten (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>W</strong></span>): sluit het venster Zoeken (op dezelfde manier als <span class="keycap"><strong>Esc</strong></span>)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Bewerken &gt; Bron invoegen (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>I</strong></span>): voeg het huidige bronsegment in.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Bewerken &gt; Vervangen door bron (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>R</strong></span>): vervangen met huidige bronsegment.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Bewerken &gt; Item voor woordenlijst maken (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>G</strong></span>): een nieuw item voor de woordenlijst toevoegen.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="using.wild.cards"></a>3.1. Jokertekens gebruiken
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>In zowel exact zoeken als zoeken naar sleutelwoorden kunnen de jokertekens '*' en '?' worden gebruikt. Zij betekenen, bekend
+                  voor gebruikers van Word:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>'*' komt overeen met nul of meer tekens, vanaf de huidige positie in een opgegeven woord tot het einde ervan. De zoekterm
+                           <code class="literal">'run*'</code> zal bijvoorbeeld overeenkomen met <code class="literal">'run</code>, <code class="literal">'runs'</code>' en <code class="literal">'running'</code>.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>'?' komt overeen met exact één teken. <code class="literal">'run?'</code> zal bijvoorbeeld overeenkomen met <code class="literal">'runs'</code>' en <code class="literal">'runn'</code>' in het woord <code class="literal">'running'</code>.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>De overeenkomsten zullen in vet blauw worden weergegeven. Onthoud dat '*' en '?' een speciale betekenis hebben in reguliere
+                  uitdrukkingen, dus zoeken met jokertekens, zoals hier beschreven, is alleen van toepassing voor exacte zoekacties en zoekacties
+                  met sleutelwoorden (zie hieronder).
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="search.methoids"></a>3.2. Zoekmethoden en opties
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Selecteer de methode met behulp van de optieknoppen. De volgende methoden om te zoeken zijn beschikbaar:</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Exact zoeken</span></dt>
+                     <dd>
+                        <p>Zoekt naar segmenten die de exacte tekenreeks bevatten die u heeft opgegeven. Exact zoeken zoekt naar een frase, d.i. als
+                           er meerdere woorden zijn ingevoerd, zullen zij slechts worden gevonden als zij in exact dezelfde volgorde voorkomen. Zoeken
+                           naar <code class="literal">geopend bestand</code> zal dus alle entiteiten van de tekenreeks <span class="emphasis"><em><code class="literal">geopend bestand</code></em></span> vinden, maar niet <span class="emphasis"><em><code class="literal">bestand geopend</code></em></span> of <span class="emphasis"><em><code class="literal">geopend invoerbestand</code></em></span>.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Sleutelwoorden zoeken</span></dt>
+                     <dd>
+                        <p>Zoekt naar segmenten die alle sleutelwoorden bevatten die u heeft opgegeven, in willekeurige volgorde. Selecteer Sleutelwoorden
+                           zoeken om te zoeken naar een willekeurig aantal individuele woorden, in willekeurige volgorde. OmegaT zal een lijst weergeven
+                           waarin alle segmenten staan waarin alle gespecificeerde woorden voorkomen. Zoeken met sleutelwoord is hetzelfde als zoekacties
+                           "met alle woorden" in een internetzoekmachine zoals Google (logische EN). Zoeken met sleutelwoorden naar <span class="emphasis"><em><code class="literal">geopend bestand</code></em></span> zal dus alle entiteiten van de tekenreeks <span class="emphasis"><em><code class="literal">open file</code></em></span> vinden, en ook <span class="emphasis"><em><code class="literal">bestand geopend</code>, <code class="literal">geopend invoer bestand</code>, <code class="literal">bestand kan gevaarlijk zijn als geopend</code></em></span>, etc.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><span class="bold"><strong>reguliere uitdrukkingen</strong></span></span></dt>
+                     <dd>
+                        <p>De zoekterm zal worden behandeld als een reguliere uitdrukking. De zoekterm - [a-zA-Z]+[öäüqwß] - in het voorbeeld hierboven
+                           bijvoorbeeld zoekt naar woorden in het doelsegment die twijfelachtige tekens bevatten vanaf het Duitse toetsenbord. <a class="link" href="appendix.regexp.html" title="Bijlage D. Reguliere uitdrukkingen">Reguliere uitdrukkingen</a> zijn een krachtige manier om naar items van een tekenreeks te zoeken.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>Aanvullend op een van de methoden hierboven kunt u het volgende selecteren:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>hoofdletter gevoelig</strong></span>: het zoeken zal worden uitgevoerd voor de exact opgegeven tekenreeks, d.i. met hoofdletters wordt rekening gehouden.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Spatie komt overeen met nbsp</strong></span>: als deze optie is geselecteerd mag een teken spatie in het zoekitem overeenkomen met ofwel een normaal teken spatie of een
+                           teken niet-afbreekbare spatie (\u00A).
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>in bron: </strong></span>zoek in de bronsegmenten
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>in vertaling: </strong></span>zoek in de doelsegmenten
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>in notities: </strong></span>zoek in notities van segmenten
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>in opmerkingen: </strong></span>zoek in opmerkingen van segmenten
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Vertaald of niet-vertaald: </strong></span>zoek in zowel vertaalde als niet-vertaalde segmenten.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Vertaald: </strong></span>zoek alleen in vertaalde segmenten.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Niet-vertaald: </strong></span>zoek alleen in niet vertaalde segmenten.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Weergeven: alle overeenkomende segmenten: </strong></span>indien geselecteerd worden alle segmenten één voor één weergegeven, zelfs als zij meerdere keren aanwezig zijn in hetzelfde
+                           document of in verschillende documenten.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Weergeven: bestandsnamen: </strong></span>indien geselecteerd, de naam van het bestand waar elk segment is gevonden wordt boven elk resultaat weergegeven.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Zoeken in project</strong></span>: selecteer <span class="emphasis"><em>Geheugen</em></span> om het vertaalgeheugen van het project (bestand project_save.tmx) op te nemen in de zoekactie. Selecteer <span class="emphasis"><em>TM's</em></span> om de vertaalgeheugens, geplaatst in de map <code class="filename">tm</code>, op te nemen in de zoekactie. Selecteer <span class="emphasis"><em>Woordenlijsten</em></span> om de woordenlijsten, geplaatst in de map <code class="filename">glossary</code>, op te nemen in de zoekactie.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Zoeken in bestanden: </strong></span>zoek in één enkel bestand of in een map die meerdere bestanden bevat. Bij het zoeken in bestanden (in tegenstelling tot in
+                           vertaalgeheugens) zal OmegaT zich beperken tot de bestanden in de indelingen van bronbestanden. Als consequentie daarvan zal
+                           OmegaT, hoewel het in staat is om<code class="filename"> tmx</code>-bestanden te behandelen, die niet opnemen bij zoekacties met Zoeken in bestanden.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Als u klikt op de knop <span class="guibutton">Gevorderde opties</span> kunnen aanvullende criteria (auteur of maker van wijziging van de vertaling, datum van vertaling, Wezen-segmenten uitsluiten,
+                  etc) worden geselecteerd. Als de optie <span class="emphasis"><em>Volledige/Halve breedte tekens ongevoelig</em></span> is geselecteerd, zullen zoekacties voor volledige vormen (CJK-tekens) overeenkomen met half brede vormen en vice versa.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="search.result.display"></a>3.3. Zoekresultaten weergeven
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Door op de knop Zoeken te drukken na het invoeren van een tekenreeks in het zoekveld zullen alle segmenten in het project,
+                  die de gezochte tekenreeks bevatten, worden weergegeven. Omdat <span class="application">OmegaT</span> identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond. De segmenten worden weergegeven
+                  in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten worden weergegeven met de originele tekst boven en
+                  de vertaalde tekst eronder, niet-vertaalde segmenten worden alleen als bron weergegeven.
+               </p>
+               <p>Dubbelklikken op een segment opent het in het venster Bewerken voor aanpassingen (één enkele klik doet dat als de optie <span class="bold"><strong>Automatisch synchroniseren met venster Bewerken</strong></span> is geselecteerd). Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld
+                  om het te controleren en, indien nodig, de terminologie aan te passen.
+               </p>
+               <p>U kunt, in het venster Zoeken, standaard sneltoetsen gebruiken (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span>, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span>) om van het ene segment naar een ander te gaan.
+               </p>
+               <p>U kunt meerdere vensters Tekst zoeken tegelijkertijd geopend hebben. U kunt hun inhoud snel zien door te kijken naar hun titel:
+                  het zal de gebruikte zoekterm bevatten.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="search.filter"></a>3.4. Filteritems in venster Bewerken overeenkomstig de zoekactie
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Om eenvoudiger te navigeren in de resultaten van de zoekactie, kunt u de zoekactie toepassen in het venster Bewerken. Druk
+                  onderaan op de knop <span class="bold"><strong>Filter</strong></span> om de weergegeven items in het venster Bewerken te beperken tot die welke overeenkomen met de huidige zoekactie. U kunt de
+                  normale navigatie gebruiken om bijv. naar het volgende (niet-vertaalde) segment te gaan dat overeenkomt met de zoekcriteria.
+               </p>
+               <p>NB:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Een zoekactie kan beperkt zijn tot 1000 items, dus als u zoekt op een veel voorkomende frase, geeft de bewerker alleen die
+                           1000 overeenkomende items weer, en niet alle items die overeenkomen met de zoekcriteria.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Een bestand zou geen overeenkomende items kunnen hebben, dus ziet het er leeg uit.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Als een zoekactie duplicaten verwijdert, zullen die duplicaten niet in het venster Bewerken staan.</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Druk op de knop <span class="bold"><strong>Filter verwijderen</strong></span>, of laadt een project opnieuw om een filter te verwijderen .
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.textreplace"></a>4. Tekst vervangen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Open het venster Zoeken en vervangen met <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span> en voer het woord of de uitdrukking die/dat u wilt vervangen in in het vak <span class="emphasis"><em>Zoeken naar</em></span>.
+            </p>
+            <p>Klik dan op de knop <span class="emphasis"><em>Zoeken</em></span> om alle overeenkomende items weer te geven.
+            </p>
+            <p>Voer het nieuwe woord of uitdrukking (reguliere uitdrukkingen worden niet ondersteund) in in het vak <span class="emphasis"><em>Vervangen door</em></span>, en klik dan op één van de volgende opties:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Alles vervangen:</strong></span> voert de vervanging uit voor alle items (na het weergeven van een bevestigingsvenster waarin het aantal vervangingen wordt
+                        weergegeven).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Vervangen:</strong></span> voert een "één op één"-vervanging uit, door middel van de knoppen in de <span class="bold"><strong>kop van het venster Bewerken</strong></span>. Klik op <span class="emphasis"><em>Volgende vervangen</em></span> of <span class="emphasis"><em>Overslaan</em></span>, en beëindig de sessie van het vervangen met <span class="emphasis"><em>Voltooien</em></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Sluiten:</strong></span> sluit het venster zonder enige wijziging.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2749"></a>4.1. Zoekopties
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Zoekopties zijn soortgelijk aan die welke worden weergegeven in het <a class="link" href="windows.and.dialogs.html#windows.textsearch" title="3. Tekst zoeken">venster Zoeken</a>.
+               </p>
+               <p>Uitgezonderd één: selecteer <span class="bold"><strong>Niet-vertaald</strong></span> om Zoeken en vervangen ook uit te voeren op segmenten die nog niet zijn vertaald.
+               </p>
+               <p>OmegaT zal het bronsegment kopiëren naar het doelsegment vóór de vervanging wordt uitgevoerd, om dat mogelijk te maken (hoewel
+                  Zoeken en vervangen alleen op het geheugen wordt uitgevoerd). Indien er geen vervanging wordt uitgevoerd voor een bepaald
+                  segment, zal het doelsegment “leeg gemaakt” worden, d.i. het zal niet-vertaald blijven.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.aligner"></a>5. Uitlijnen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Uitlijnen omvat het maken van een tweetalig vertaalgeheugen vanuit ééntalige documenten die al zijn vertaald.</p>
+            <p>Selecteer <span class="guimenuitem">Extra</span> → <span class="guimenuitem">Bestanden uitlijnen…</span> om toegang te krijgen tot dit venster.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2777"></a>5.1. Stap 1: Parameters voor uitlijnen aanpassen
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Probeer de parameters te wijzigen als het uitlijnen eruit ziet alsof het kan worden verbeterd. In de meeste gevallen geldt:
+                  hoe lager de <span class="guilabel">Gemiddelde score</span> is, hoe beter de uitlijning zal zijn.
+               </p>
+               <p>In modus <span class="guilabel">Heap-gewijze</span> worden de teksten globaal geëvalueerd. In modus <span class="guilabel">Parse-gewijze</span> worden zij segment na segment geëvalueerd.
+               </p>
+               <p>Gebruik modus <span class="guilabel">ID vergelijking</span> om teksten met Sleutel=Waarde uit te lijnen. Dit werkt zelfs als de sleutels niet in dezelfde volgorde in de twee bestanden
+                  staan en/of als de twee bestanden niet dezelfde hoeveelheid informatie bevatten. Deze optie verschijnt alleen als beide geselecteerde
+                  bestanden worden herkend als bestanden met Sleutel=Waarde.
+               </p>
+               <p>De algoritmen <span class="guilabel">Viterbi</span> en <span class="guilabel">Vooruit-Terug</span> zijn twee verschillende methoden voor berekenen. Kies die welke de beste resultaten geeft.
+               </p>
+               <p>Klik op <span class="guibutton">Doorgaan</span> om naar de volgende stap te gaan.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2811"></a>5.2. Stap 2: Handmatige correcties maken
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Na de automatische verwerking vereist de uitlijning van de twee bestanden meestal nog handmatige correcties.</p>
+               <p>Vertaaleenheden zijn geplaatst in cellen in de twee laatste kolommen.</p>
+               <p>Twee segmenten op dezelfde regel uitlijnen:</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Selecteer het eerste segment.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Druk op de spatiebalk (sneltoets voor <span class="guimenuitem">Bewerken</span> → <span class="guimenuitem">Pinpoint uitlijnen beginnen</span>).
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Klik in de andere kolom op de vertaling die overeenkomt met het eerste segment.</p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Selecteer, na verscheidene van deze bewerkingen, <span class="guimenuitem">Bewerken</span> → <span class="guimenuitem">Wachten op opnieuw uitlijnen</span> om het uitlijnen van de andere segmenten bij te werken.
+               </p>
+               <p>Selecteer de/het segment(en) en druk op <strong class="userinput"><code>U</code></strong> (<span class="guilabel">Naar boven</span>) of <strong class="userinput"><code>D</code></strong> (<span class="guilabel">Naar beneden</span>) om de positie van een of meer segmenten individueel aan te passen.
+               </p>
+               <p>Alleen rijen waarvan het vak <span class="guilabel">Behouden</span> in de eerste kolom is geselecteerd zullen worden opgenomen als het vertaalgeheugen wordt gemaakt.
+               </p>
+               <p>Klik op <span class="guibutton">TMX opslaan…</span> om het resulterende vertaalgeheugen te maken als de twee kolommen voldoende zijn uitgelijnd.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.scripts"></a>6. Scripts
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dit venster is toegankelijk door te selecteren <span class="guimenuitem">Extra</span> → <span class="guimenuitem">Scripten…</span></p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2878"></a>6.1. Gebruiken
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Het dialoogvenster Scripten maakt het voor u mogelijk om een bestaand script in het tekstgebied te laden en het uit te voeren
+                  tegen het huidige geopende project. Doe het volgende om de mogelijkheid voor scripten aan te passen:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Laad een script in het bewerkingsvenster door op de naam te klikken in de lijst in het venster links.</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Klik met rechts op een knop van <span class="guilabel">&lt;1&gt;</span> tot en met <span class="guilabel">&lt;12&gt;</span> in het onderste venster en selecteer <span class="guilabel">Script toevoegen</span>.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Als u met links klikt op het cijfer zal het geselecteerde script worden uitgevoerd. U kunt de geselecteerde macro's ook starten
+                           vanuit het hoofdmenu door hun items te gebruiken in het menu <span class="guisubmenu">Extra </span> of door te drukken op<span class="keycap"><strong> Ctrl+Alt+F#</strong></span> (# 1 tot en met 12).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Standaard worden scripts opgeslagen in de map <code class="filename">scripts</code> die zich bevindt in de installatiemap van OmegaT (de map waarin het bestand <code class="filename">OmegaT.jar</code> staat).e
+               </p>
+               <p>U kunt daar nieuwe scripts toevoegen, zodat ze zullen verschijnen in de lijst met beschikbare scripts in het venster <span class="guilabel">Scripten</span>.
+               </p>
+               <p>Enkele aanvullende scripts zijn hier te vinden: <a class="ulink" href="https://sourceforge.net/projects/omegatscripts/" target="_top">OmegaT Scripts</a></p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2927"></a>6.2. Scripttalen
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>De volgende scripttalen zijn geïmplementeerd:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Groovy</strong></span> (http://groovy.codehaus.org): een dynamische taal voor de Java Virtual machine. Het bouwt op de sterke punten van Java maar
+                           heeft aanvullende krachtige mogelijkheden, geïnspireerd op talen als Python, Ruby en Smalltalk.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>JavaScript</strong></span> (soms afgekort tot JS, niet te verwarren met Java): een op prototype gebaseerde scripttaal die dynamisch is, zwak getypeerd
+                           en eersteklas functies heeft. Het is een taal met meerdere paradigma's, ondersteund object-georiënteerde, imperatieve en functionele
+                           programmeerstijlen. Omdat het de taal is achter de populaire software zoals Firefox is het bekend en voorkeursgereedschap
+                           om te programmeren in het domein van open-source.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Alle talen hebben toegang tot het objectmodel van OmegaT, met het project als het hoogste object. De volgende code in Groovy
+                  scant bijvoorbeeld door alle segmenten in alle bestanden in het huidige project en drukt, als de vertaling bestaat, de bron
+                  en het doel van het segment af:
+               </p><pre class="programlisting">    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + " &gt;&gt;&gt;&gt; " + target);
+            }     
+        }
+    }</pre></div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="dialogs.preferences"></a>7. Algemene voorkeuren
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dit dialoogvenster is toegankelijk door te selecteren <span class="guimenuitem">Opties</span> → <span class="guimenuitem">Voorkeuren…</span></p>
+            <p>Het maakt het mogelijk parameters in te stellen voor alle vertaalprojecten.</p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2960"></a>7.1. Algemeen
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist"><a name="dialogs.preferences.general.usetabtoadvance"></a><dl class="variablelist">
+                     <dt><span class="term">Tab gebruiken om door te gaan</span></dt>
+                     <dd>
+                        <p>Stelt de toets voor het valideren van het segment in op Tab in plaats van de standaardtoets Enter. Deze optie is handig voor
+                           sommige invoersystemen voor Chinese, Japanse of Koreaanse tekens.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Afsluiten altijd bevestigen</span></dt>
+                     <dd>
+                        <p>Het programma zal u altijd om bevestiging vragen om af te sluiten.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2976"></a>7.2. Machinevertaling
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Automatisch vertalingen ophalen</span></dt>
+                     <dd>
+                        <p>U zou misschien, om redenen van vetrouwelijheid, niet alle segmenten naar het gereedschap Machinevertaling willen versturen.
+                           Als u deze optie uitschakelt zullen machinevertalingen alleen worden opgehaald als u drukt op <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> (<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>M</strong></span> op OS X) in het huidige segment. Daarna moet u nogmaals op <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> drukken om de suggestie in te voeren.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Alleen niet-vertaalde segmenten</span></dt>
+                     <dd>
+                        <p>Selecteer dit vak om alleen niet-vertaalde segmenten naar de services voor machinevertaling te sturen.</p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>Selecteer een leverancier uit de lijst en klik, indien nodig, op <span class="guibutton">Configureren</span> om de door de leverancier verschafte gegevens voor identificatie in te voeren.
+               </p>
+               <p>De procedures voor het configureren voor toegang tot de services van Microsoft Translator en Google Translate worden <a class="ulink" href="https://sourceforge.net/p/omegat/wiki/Configuring Machine Translation Services" target="_top">hier</a> beschreven.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3020"></a>7.3. Woordenlijst
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Beschrijving context voor TBX woordenlijsten weergeven</span></dt>
+                     <dd>
+                        <p>Deselecteer deze optie als de weergegeven beschrijving van de context voor elk item van de woordenlijst onnodig of te lang
+                           is.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Termen die afzonderlijk in de brontekst verschijnen gebruiken</span></dt>
+                     <dd>
+                        <p>When this option is checked, the glossary will display pairs or groups of words (expressions) even if the words within them
+                           appear separately in the source text.
+                        </p>
+                        <p>Deselecteer deze optie als de woordenlijst teveel valse positieven weergeeft.</p>
+                     </dd>
+                     <dt><span class="term">Stemmen voor Items voor woordenlijst gebruiken</span></dt>
+                     <dd>
+                        <p>Selecteer deze optie als u wilt dat de woordenlijst woorden die dezelfde bron hebben weergeeft.</p>
+                     </dd>
+                     <dt><span class="term">Hits in woordenlijst vervangen bij invoegen brontekst</span></dt>
+                     <dd>
+                        <p>Als zowel deze optie als de optie <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.insertthesourcetext"><span class="guilabel">Brontekst invoegen</span></a> zijn geselecteerd, zullen alle woorden met een overeenkomend item in de woordenlijst automatisch worden vertaald als de brontekst
+                           wordt ingevoegd.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Hits met hele andere letters negeren (bijv. FOO vs foo)</span></dt>
+                     <dd>
+                        <p>Als deze optie is geselecteerd zal de woordenlijst slechts één item weergeven, zelfs als het woord in verschillende vormen
+                           (bijv. met en zonder hoofdletters) bestaat in de woordenlijst.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="d0e3060"></a>7.3.1. TaaS Terminology
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">API-sleutel ophalen</span></dt>
+                        <dd>
+                           <p>Klik op deze knop om naar de projectsite van <a class="ulink" href="https://term.tilde.com/taas" target="_top">TaaS</a> te gaan en een gebruikersaccount aan te maken.
+                           </p>
+                           <p>U kunt dan een toegangssleutel maken op de pagina <a class="ulink" href="https://term.tilde.com/account/keys/create?system=omegaT" target="_top">https://term.tilde.com/account/keys/create?system=omegaT</a>.
+                           </p>
+                        </dd>
+                        <dt><span class="term">Alleen voor deze sessie opslaan</span></dt>
+                        <dd>
+                           <p>Als deze optie is geselecteerd zal OmegaT de toegangssleutel niet onthouden tussen sessies.</p>
+                        </dd>
+                        <dt><span class="term">TaaS Collections bladeren…</span></dt>
+                        <dd>
+                           <p>Deze knop stelt u in staat te bladeren door de collecties en collecties die bestaan voor de bron- en doeltaal van het project
+                              te downloaden. Private collecties worden vet weergegeven. De collecties worden gedownload als TBX-woordenlijsten en opgeslagen
+                              de huidige map glossary.
+                           </p>
+                        </dd>
+                        <dt><span class="term">TaaS Terminology Lookup Domain selecteren…</span></dt>
+                        <dd>
+                           <p>Indien nodig kunt u een specifiek domein selecteren om het volume van de verzonden en te ontvangen gegevens te beperken.</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.dictionary"></a>7.4. Woordenboek
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Automatisch tekst segment opzoeken in woordenboek</span></dt>
+                     <dd>
+                        <p>Deselecteer deze optie om automatisch zoeken uit te schakelen – als woordenboeken te lang zijn bijvoorbeeld.</p>
+                     </dd>
+                     <dt><span class="term">Fuzzy overeenkomsten voor items woordenboek gebruiken</span></dt>
+                     <dd>
+                        <p>Selecteer deze optie als u wilt dat woordenboeken woorden die dezelfde bron hebben weergeeft.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3112"></a>7.5. Uiterlijk
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Hoofdvenster herstellen</span></dt>
+                     <dd>
+                        <p>Herstelt de componenten van het hoofdvenster van OmegaT naar hun standaard status. Gebruik deze mogelijkheid in de gevallen
+                           dat u één of meer componenten heeft losgemaakt, verplaatst of verborgen en u ze niet terug kan krijgen op de manier die u
+                           wilt. Het kan ook worden gebruikt als vensters er niet uitzien zoals u verwachtte na een upgrade van OmegaT.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="d0e3122"></a>7.5.1. Lettertype
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Toont het dialoogvenster om het lettertype voor de weergave van de tekst aan te passen. Gebruikers van oudere computers die
+                     het aanpassen van de venstergrootte heel traag vinden kunnen proberen om het lettertype te wijzigen. Bekijk Lettertype-instellingen
+                     in Diverse onderwerpen
+                  </p>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="d0e3127"></a>7.5.2. Kleuren
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Deze pagina stelt u in staat verschillende kleuren te kiezen voor elk deel van de gebruikersinterface.</p>
+                  <p>Vooraf-gedefinieerde thema's kunnen worden ingesteld met scripts. Een script dat is gebundeld in OmegaT, genaamd Switch Colour
+                     Themes, verschaft een standaard thema "Donker".
+                  </p>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.filefilters"></a>7.6. Bestandsfilters
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Dit dialoogvenster vermeldt de beschikbare bestandsfilters. De door het huidige project gebruikte filters worden vet weergegeven.
+                  Als u OmegaT niet wilt gebruiken om bestanden van een bepaald type te vertalen, kunt u het betreffende filter uitschakelen
+                  door het keuzevak naast de naam niet te selecteren. OmegaT zal dan de betreffende bestanden weglaten bij het laden van projecten
+                  en zal ze ongewijzigd naar de doelmap kopiëren bij het maken van de doeldocumenten. Als u het filter opnieuw wilt gebruiken,
+                  selecteer dan het keuzevak. Klik op <span class="bold"><strong>Standaardinstellingen</strong></span> om de bestandsfilters terug te zetten naar de standaard instellingen. Selecteer het filter uit de lijst en klik op <span class="bold"><strong>Bewerken</strong></span> om de bestanden en de coderingen waarvoor het filter wordt gebruikt te bewerken.
+               </p>
+               <p>Het dialoogvenster stelt u in staat de volgende opties in- of uit te schakelen:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Verwijder voorloop en achterliggende tags: deselecteer deze optie om alle tags weer te geven, inclusief die aan het begin
+                           en einde van het segment. Waarschuwing: in indelingen van Microsoft Open XML (docx, xlsx, etc.), als alle tags worden weergegeven,
+                           plaats dan GEEN tekst vóór de eerste tag - het is een technische tag die altijd aan het begin van het segment moet staan.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Verwijder voor- en achterliggende witruimte in niet-gesegmenteerde projecten: standaard verwijdert OmegaT voor- en achterliggende
+                           witruimte. In niet-gesegmenteerde projecten is het mogelijk deze te behouden door deze optie te deselecteren.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Behoud spaties voor alle tags: selecteer deze optie als de brondocumenten significante spaties bevatten, gebruikt om de opmaak
+                           te beheren, die niet moeten worden genegeerd.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Negeer context van bestand bij identificeren van segmenten met wisselende vertalingen: standaard gebruikt OmegaT de naam van
+                           het bronbestand als deel van de identificatie van een wisselende vertaling. Als de optie is geselecteerd zal de naam van het
+                           bronbestand niet worden gebruikt, en alternatieve vertalingen zullen effect hebben in elk bestand zolang als de andere context
+                           (vorige/volgende segmenten, of enige soort identificatie, afhankelijk van de bestandsindeling) overeenkomt.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="filters.options"></a>7.6.1. Filteropties
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Verschillende filters (Tekstbestanden, XHTML-bestanden, HTML- en XHTML-bestanden, OpenDocument-bestanden en Microsoft Open
+                     XML-bestanden) hebben één of meer specifieke opties. Selecteer, om de opties aan te passen, het filter in de lijst en klik
+                     op <span class="bold"><strong>Opties</strong></span>. De beschikbare opties zijn:
+                  </p>
+                  <p><span class="bold"><strong>Tekstbestanden</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Alineasegmentatie op regeleinden, lege regels of nooit:</em></span></p>
+                           <p>als regels voor zinsegmentatie actief zijn, zal de tekst verder worden gesegmenteerd overeenkomstig de hier geselecteerde
+                              optie.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>PO-bestanden</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Blanco vertalingen in het doelbestand toestaan</em></span>:
+                           </p>
+                           <p>Indien geselecteerd zal, wanneer een PO-segment (wat een gehele alinea kan zijn) niet is vertaald, de vertaling leeg zijn
+                              in het doelbestand. Technisch gesproken zal het segment <code class="code">msgstr</code> in het PO-doelbestand, indien gemaakt, leeg zijn. Het staat standaard aan, omdat dit het standaard gedrag is voor PO-bestanden.
+                              Indien de optie is uitgeschakeld, zal de brontekst worden gekopieerd naar het doelsegment.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>PO-koptekst overslaan</em></span></p>
+                           <p>De koptekst van de PO zal worden overgeslagen en niet worden gewijzigd als deze optie is geselecteerd.</p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Automatisch vervangen van 'nplurals=INTEGER; &amp;plural=EXPRESSION;' in koptekst</em></span></p>
+                           <p><span class="emphasis"><em>Deze optie maakt het voor OmegaT mogelijk om de specificatie in de koptekst van het PO-bestand te overschrijven en de standaard
+                                    voor de geselecteerde doeltaal te gebruiken.</em></span></p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>XHTML-bestanden</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Vertaal de volgende attributen</em></span>: De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Start een nieuwe alinea bij</em></span>: De &lt;br&gt; HTML-tag zal een alinea-einde voor segmentatiedoeleinden maken.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Tekst die overeenkomt met reguliere uitdrukking overslaan</em></span>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven.
+                              Tekst in het bronsegment die overeenkomt wordt cursief weergegeven.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Vertaal het attribuut 'content' van metatags niet: … :</em></span> De metatags zullen niet worden vertaald.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</em></span>: als een tag overeenkomt met een item in de lijst met sleutel-waardenparen zal de inhoud ervan worden genegeerd.
+                           </p>
+                           <p>Het is soms handig om bepaalde tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijvoorbeeld : <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code>. U kunt sleutel-waardenparen definiëren voor tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld
+                              bevatten: <code class="literal">class=hide, translate=no </code></p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>Microsoft Office Open XML-bestanden</strong></span></p>
+                  <p>U kunt selecteren welke elementen vertaald moeten worden. Zij zullen als afzonderlijke segmenten in de vertaling verschijnen.</p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Word:</strong></span> Niet-zichtbare tekst met instructies, Notities, Voetnoten, Eindnoten, Voetteksten
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Excel: </strong></span>Notities, Werkbladnamen
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Powerpoint</strong></span>: Dianotities, Diamodellen, Dia-lay-outs
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Globaal:</strong></span> Grafieken, Diagrammen, Tekeningen, WordArt
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Andere opties:</strong></span></p>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: circle; ">
+                                 <li class="listitem">
+                                    <p><span class="emphasis"><em>Hoeveelheid tags</em></span>: Indien geselecteerd zullen tags, zonder vertaalbare tekst er tussen, worden samengevoegd tot één enkele tag.
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><span class="emphasis"><em>Spaties voor alle tags behouden</em></span>: Indien geselecteerd zal "witruimte" (d.i. spaties en nieuwe regels) worden behouden, zelfs als deze optie niet is gedefinieerd
+                                       in het document.
+                                    </p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>HTML- en XHTML-bestanden</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</em></span>: regelmatig moeten de doelbestanden een andere tekenset voor de codering hebben dan die in het bronbestand (of dat nu expliciet
+                              gedefinieerd is of als gevolg van). Door deze optie te gebruiken kan de vertaler specificeren of in de doelbestanden de declaratie
+                              voor de codering moet worden opgenomen. Als bijvoorbeeld het bestandsfilter UTF8 specificeert als het schema voor codering
+                              voor de doelbestanden, zal het selecteren van Altijd er voor zorgen dat deze informatie zal worden opgenomen in de vertaalde
+                              bestanden.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Vertaal de volgende attributen</em></span>: De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Start een nieuwe alinea bij</em></span>: De &lt;br&gt; HTML-tag zal een alinea-einde voor segmentatiedoeleinden maken.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Tekst die overeenkomt met reguliere uitdrukking overslaan</em></span>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven.
+                              Tekst in het bronsegment die overeenkomt wordt cursief weergegeven.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Vertaal het attribuut 'content' van metatags niet: … :</em></span> De metatags zullen niet worden vertaald.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</em></span>: als een tag overeenkomt met een item in de lijst met sleutel-waardenparen zal de inhoud ervan worden genegeerd.
+                           </p>
+                           <p>Het is soms handig om bepaalde tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijvoorbeeld : <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code>. U kunt sleutel-waardenparen definiëren voor tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld
+                              bevatten: <code class="literal">class=hide, translate=no </code></p>
+                        </li>
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Witruimte in vertaalde documenten comprimeren</em></span>: meerdere doorlopende witruimten zullen worden geconverteerd naar één enkele witruimte in het vertaalde document.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>HTML-opmerkingen in vertaalde document verwijderen</em></span>: alle delen met opmerkingen (tussen &lt;!-- en --&gt;) zullen niet worden gekopieerd naar het vertaalde document.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>Open Document Format (ODF)-bestanden</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>U kunt selecteren welke van de volgende elementen vertaald moeten worden.</p>
+                           <p>Indexitems, bladwijzers, verwijzingen naar bladwijzers, notities, opmerkingen, notities in presentaties, koppelingen (URL),
+                              werkbladnamen
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="edit.filter.dialog"></a>7.6.2. dialoogvenster Filter bewerken
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Dit dialoogvenster stelt u in staat om de patronen van de bronbestandsnaam te specificeren van de bestanden die het filter
+                     zal verwerken, de bestandsnamen van vertaalde bestanden aan te passen en te selecteren welke coderingen het zal gebruiken
+                     bij het laden van het bestand en het opslaan van de vertaling. Pas de velden direct aan of klik op <span class="bold"><strong>Bewerken</strong></span> om een patroon voor het bestandsfilter aan te passen. Klik op <span class="bold"><strong>Toevoegen</strong></span> om een nieuw patroon voor een bestandsfilter toe te voegen. Hetzelfde dialoogvenster wordt gebruikt om een patroon toe te
+                     voegen of een bepaald patroon te bewerken. Het dialoogvenster bevat een speciale bewerker voor het patroon van de doelbestandsnaam,
+                     waarmee u de namen van de te maken bestanden aan kunt passen.
+                  </p>
+                  <div class="section">
+                     <div class="titlepage">
+                        <div>
+                           <div>
+                              <h5 class="title"><a name="source.filetype.and.filename.pattern"></a>7.6.2.1. Type bronbestand, patroon voor bestandsnaam
+                              </h5>
+                           </div>
+                        </div>
+                     </div>
+                     <p>Als OmegaT een bestand tegenkomt in zijn bronmap, probeert dat het filter te selecteren gebaseerd op de extensie van het bestand.
+                        Meer precies: OmegaT probeert of van elk filter het patroon van de bestandsnaam overeenkomt met de bestandsnaam. Het <code class="literal">*.xhtml</code>-patroon zal bijvoorbeeld overeenkomen met elk bestand met de extensie <code class="literal">.xhtml</code>. Als het juiste filter is gevonden wordt dat voor verdere verwerking toegepast op het betreffende bestand. Standaard zal
+                        bijvoorbeeld het XHTML-filter worden gebruikt bij het verwerken van bestanden met de extensie .xhtml. U kunt patronen voor
+                        bestandsnamen toevoegen of wijzigen voor bestanden die door elk filter worden afgehandeld. Patronen voor bronbestandsnamen
+                        gebruiken jokertekens die overeenkomen met die in <span class="bold"><strong>Zoeken. </strong></span>Het teken '*' komt overeen met nul of meer tekens. Het teken '?' komt overeen met exact één teken. Alle andere tekens vertegenwoordigen
+                        zichzelf. Als u bijvoorbeeld wilt dat het tekstfilter readme-bestanden (<code class="literal">readme, read.me</code> en <code class="literal">readme.txt</code>) afhandelt, zou u het patroon <code class="literal">read*</code> moeten gebruiken.
+                     </p>
+                  </div>
+                  <div class="section">
+                     <div class="titlepage">
+                        <div>
+                           <div>
+                              <h5 class="title"><a name="source.and.target.files.encoding"></a>7.6.2.2. Coderen van bron- en doelbestanden
+                              </h5>
+                           </div>
+                        </div>
+                     </div>
+                     <p>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet
+                        specificeren zullen de codering gebruiken die u instelt voor de extensie die overeenkomt met hun naam. Standaard zullen bijvoorbeeld
+                        <code class="literal">.txt</code>-bestanden worden geladen met behulp van de standaard codering van uw besturingssysteem. U kunt de broncodering voor elk verschillend
+                        bronbestandsnaam-patroon wijzigen. Doelbestanden kunnen ook in elke codering worden weggeschreven. Als standaard heeft het
+                        vertaalde bestand dezelfde codering als de codering van het bronbestand. De velden voor bron- en doelcodering gebruiken keuzelijsten
+                        waarin alle ondersteunde coderingen zijn opgenomen. &lt;auto&gt; laat de keuze van de codering aan <span class="application">OmegaT</span> over. Zo werkt het:
+                     </p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>OmegaT identificeert de codering van het bronbestand door de declaratie van de codering te gebruiken, indien aanwezig (HTML-bestanden,
+                                 op XML gebaseerde bestanden).
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>OmegaT is geïnstrueerd om een voorgeschreven codering te gebruiken voor bepaalde bestandsformaten ( Java-properties etc)</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>OmegaT gebruikt de standaard codering van het besturingssysteem voor tekstbestanden.</p>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="section">
+                     <div class="titlepage">
+                        <div>
+                           <div>
+                              <h5 class="title"><a name="target.name"></a>7.6.2.3. Vertaalde bestandsnaam
+                              </h5>
+                           </div>
+                        </div>
+                     </div>
+                     <p>Soms wilt u misschien de bestanden die u vertaalde automatisch hernoemen, bijvoorbeeld door een taalcode achter de bestandsnaam
+                        te zetten. Doelbestandsnaam-patronen gebruiken een speciale syntaxis, dus als u dit veld zou willen bewerken, moet u op <span class="bold"><strong>Bewerken…</strong></span> klikken en het dialoogvenster Patroon bewerken gebruiken. Klik op <span class="bold"><strong>Standaardinstellingen</strong></span> als u terug wilt keren naar de standaard configuratie van het filter. U kunt de naam ook direct aanpassen in het veld voor
+                        het patroon van het doelbestand of in het dialoogvenster Bestandsfilters. Het dialoogvenster Patroon bewerken biedt, naast
+                        andere, de volgende opties:
+                     </p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Standaard is <code class="literal">${filename}</code> - volledige bestandsnaam van het bronbestand met extensie: in dit geval is de naam van het vertaalde bestand hetzelfde als
+                                 dat van het bronbestand.
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${nameOnly}</code> - laat u alleen de naam van het bronbestand invoegen zonder de extensie.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${extension} </code>- de originele bestandsextensie
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${targetLocale}</code> - locale-code voor doel (in de vorm "xx_YY").
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${targetLanguage}</code> - de doeltaal en landcode samen (in de vorm "XX-YY").
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${targetLanguageCode}</code> - de doeltaal - alleen "XX"
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${targetCoutryCode}</code> - de doel-landcode - alleen "YY"
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${timestamp-????}</code> - datum en tijd van het systeem op het moment van genereren in verschillende patronen
+                              </p>
+                              <p>Bekijk <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">documentatie van Oracle</a> voor voorbeelden van de patronen voor "SimpleDateFormat"
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${system-os-name}</code> - besturingssysteem van de gebruikte computer
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${system-user-name}</code> - systeem gebruikersnaam
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${system-host-name}</code> - systeem hostnaam
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${file-source-encoding}</code> - codering bronbestand
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${file-target-encoding}</code> - codering doelbestand
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${targetLocaleLCID}</code> - Microsoft locale voor doel
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Aanvullende varianten zijn beschikbaar voor variabelen ${nameOnly} en ${Extension}. In het geval dat de bestandsnaam een niet
+                        unieke naam heeft, kan men variabelen in de vorm <code class="literal">${name only</code><span class="emphasis"><em>-aantal extensies</em></span>} en <code class="literal">${extension</code>-<span class="emphasis"><em>aantal extensies} </em></span> toepassen. Als bijvoorbeeld het originele bestand is genaamd Document.xx.docx, zullen de volgende variabelen de volgende
+                        resultaten geven:
+                     </p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${nameOnly-0}</code> Document
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${nameOnly-1}</code> Document.xx
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${extension-0}</code> docx
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${extension-1}</code> xx.docx
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${extension-2}</code> Document.xx.docx
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.segmentationsetup"></a>7.7. Segmentatie-instellingen
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Programma's met vertaalgeheugens werken met teksteenheden die segmenten worden genoemd. <span class="application">OmegaT</span> heeft 2 manieren om een tekst te segmenteren: alineasegmentatie en zinsegmentatie (waarnaar ook wel wordt verwezen als “op
+                  regels gebaseerde-segmentatie”). Selecteer <span class="guimenu">Project</span> → <span class="guimenuitem">eigenschappen…</span> uit het hoofdmenu en selecteer het aanwezig keuzevak, of niet, om het type segmentatie te kiezen. Alinea-segmentatie heeft
+                  in bepaalde gevallen voordelen, zoals bij bijzonder creatieve of stilistische vertalingen waarin de vertaler de volgorde van
+                  gehele zinnen zou willen wijzigen; voor het merendeel van de projecten is echter zin- segmentatie de keuze die wordt geprefereerd,
+                  omdat het betere overeenkomsten oplevert vanuit eerdere vertalingen. Als zinsegmentatie is geselecteerd kunt u de regels instellen
+                  door <span class="guimenu">Opties</span> → <span class="guimenuitem">Segmentatie...</span>te selecteren uit het hoofdmenu.
+               </p>
+               <p>Betrouwbare segmentatieregels zijn al beschikbaar voor veel talen, dus is het onwaarschijnlijk dat het voor u nodig is om
+                  uw eigen segmentatieregels te schrijven. Aan de andere kant kan deze functionaliteit in speciale gevallen bijzonder handig
+                  zijn, waarbij u uw productiviteit kunt verhogen door de segmentatieregels af te stemmen op de tekst die vertaald moet worden.
+               </p>
+               <p><span class="bold"><strong>Waarschuwing: </strong></span>omdat de tekst afwijkend zal segmenteren nadat filteropties zijn gewijzigd, zult u misschien geheel opnieuw moeten beginnen
+                  met vertalen. Tegelijkertijd zullen de eerder gevalideerde segmenten in het vertaalgeheugen van het project worden omgezet
+                  naar wezen-segmenten. Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de
+                  wijzigingen effect hebben.
+               </p>
+               <p><span class="application">OmegaT</span> gebruikt de volgende reeks stappen:
+               </p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Segmentatie op niveau van de structuur</span></dt>
+                     <dd>
+                        <p><span class="application">OmegaT</span> parst eerst de tekst voor segmentatie op niveau van de structuur. Gedurende dit proces wordt alleen de structuur van het
+                           brondocument gebruikt om segmenten te maken.
+                        </p>
+                        <p>Tekstbestanden kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden.
+                           Bestanden die opmaak bevatten (ODF-documenten, HTML-documenten, etc.) worden gesegmenteerd op het blokniveau (alinea)tags.
+                           Vertaalbare object-attributen in XHTML of HTML-bestanden kunnen als afzonderlijke segmenten worden geëxtraheerd.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Segmentatie op niveau van de zin</span></dt>
+                     <dd>
+                        <p>Nadat het bronbestand in structurele eenheden is gesegmenteerd, zal <span class="application">OmegaT</span> deze blokken verder segmenteren in zinnen.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="segmentation.rules"></a>7.7.1. Segmentatieregels
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Het proces van segmentering kan als volgt worden voorgesteld: de cursor verplaatst zich langs de tekst, één teken per keer.
+                     Voor elke cursorpositie wordt elke regel, bestaande uit een <span class="bold"><strong>Voor- </strong></span>en <span class="bold"><strong>Na </strong></span>-patroon, in de opgegeven volgorde toegepast en probeert of een van de<span class="bold"><strong> Voor</strong></span>-patronen geldig is voor alle tekst die links van de cursor staat en het overeenkomende <span class="bold"><strong>Na</strong></span>-patroon op de tekst rechts van de cursor. Als de regel overeenkomt gaat de cursor ofwel door zonder een einde voor het segment
+                     in te voegen (voor de uitzonderingsregel) of er wordt een nieuw einde voor het segment ingevoegd op de cursorpositie (voor
+                     de afbreekregels).
+                  </p>
+                  <p>De twee typen regels gedragen zich als volgt:</p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">Afbreekregel</span></dt>
+                        <dd>
+                           <p>Verdeelt de brontekst in segmenten. Voorbeeld: "<span class="emphasis"><em>Begrijpt u dat? Ik was er niet zeker van.</em></span>" zou moeten worden gescheiden in twee segmenten. Wat betekent dat er een afbreekregel zou moeten zijn voor "?", indien die
+                              wordt gevolgd door spaties en een woord met een hoofdletter. Selecteer het keuzevak Afbreken/Uitzondering om een regel te
+                              definiëren als een Afbreekregel.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">Uitzonderingsregel</span></dt>
+                        <dd>
+                           <p>specificeer welke gedeelten van de tekst NIET zouden moeten worden gescheiden. Niettegenstaande de punt zou <span class="emphasis"><em>"Mrs. Dalloway "</em></span> niet moeten worden gesplitst in twee segmenten, dus zou een uitzonderingsregel gemaakt moeten worden voor Mrs (en voor Mr,
+                              voor Dr, voor prof etc), gevolgd door een punt. Selecteer NIET het keuzevak Afbreken/Uitzondering om een regel te definiëren
+                              als een Uitzonderingsregel.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+                  <p>De voorgedefinieerde afbreekregels zouden voldoende moeten zijn voor de meeste Europese talen en Japans. Gelet op de flexibiliteit
+                     kunt u overwegen om meer uitzonderingsregels te definiëren voor de taal waaruit u vertaald om u meer betekenisvolle en samenhangende
+                     segmenten te geven.
+                  </p>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="rules.priority"></a>7.7.2. Prioriteit van regels
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Alle segmentatieregels die zijn ingesteld voor een overeenkomend taalpatroon zijn actief en worden toegepast in de opgegeven
+                     volgorde van prioriteit, dus regels voor een specifieke taal zouden hoger moeten staan dan de standaardregels. Regels voor
+                     Canadees Frans (FR-CA) zouden bijvoorbeeld hoger moeten staan dan de regels voor Frans (FR.*) en hoger dan de standaardregels
+                     (.*). Dus, bij het vertalen vanuit Canadees Frans worden de regels voor Canadees Frans - indien aanwezig - eerst worden toegepast,
+                     gevolgd door de regels voor Frans en tenslotte de standaard regels.
+                  </p>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="creating.new.rule"></a>7.7.3. Een nieuwe regel maken
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Grote wijzigingen aan de segmentatieregels zouden in het algemeen moeten worden vermeden, speciaal na het voltooien van een
+                     eerste gang, maar kleinere wijzigingen, zoals het toevoegen van een herkende afkorting, kan voordelen bieden.
+                  </p>
+                  <p>Klik eenvoudigweg op een verzameling van regels in de bovenste tabel om die te bewerken of uit te breiden. De regels voor
+                     die verzameling zullen in het onderste gedeelte van het venster verschijnen.
+                  </p>
+                  <p>Klik op <span class="bold"><strong>Toevoegen</strong></span> in het bovenste gedeelte van het dialoogvenster, om een lege verzameling van regels te maken voor een nieuw taalpatroon.
+                     Een lege regel zal aan de onderzijde van de bovenste tabel verschijnen (u moet misschien naar beneden scrollen om die te zien).
+                     Wijzig de naam van de regelverzameling en het taalpatroon naar die van de betrokken taal en de code daarvan. De syntaxis van
+                     het taalpatroon komt overeen met de syntaxis voor reguliere uitdrukkingen. Als uw regelverzameling een taal/land-paar betreft
+                     raden wij u aan om het naar boven te verplaatsen met de knop <span class="bold"><strong>Naar boven</strong></span>.
+                  </p>
+                  <p>Voeg de patronen <span class="bold"><strong>Voor</strong></span> en<span class="bold"><strong> Na</strong></span> toe. Het wordt aangeraden om programma's te gebruiken die het mogelijk maken de effecten direct te zien om de syntaxis en
+                     de toepasbaarheid te controleren. Bekijk <a class="link" href="appendix.regexp.html" title="Bijlage D. Reguliere uitdrukkingen">Reguliere uitdrukkingen</a>. Een goed startpunt zullen altijd de bestaande regels zijn.
+                  </p>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="few.simple.examples"></a>7.7.4. Een paar eenvoudige voorbeelden
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="informaltable">
+                     <table class="informaltable" border="1">
+                        <colgroup>
+                           <col align="left">
+                           <col align="center">
+                           <col align="center">
+                           <col align="left">
+                        </colgroup>
+                        <thead>
+                           <tr>
+                              <th align="left">Bedoeling</th>
+                              <th align="center">Vóór</th>
+                              <th align="center">Na</th>
+                              <th align="left">Opmerking</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td align="left">Stel een segment in na een punt ('.') gevolgd door een spatie, tab ...</td>
+                              <td align="center">\.</td>
+                              <td align="center">\s</td>
+                              <td align="left">"\." staat voor het teken punt. "\s" betekent elk teken voor witruimte (spatie, tab, nieuwe pagina etc.)</td>
+                           </tr>
+                           <tr>
+                              <td align="left">Niet segmenteren na Mr.</td>
+                              <td align="center">Mr\.</td>
+                              <td align="center">\s</td>
+                              <td align="left">Dit is een uitzonderingsregel, dus het keuzevak voor de regel moet niet zijn geselecteerd</td>
+                           </tr>
+                           <tr>
+                              <td align="left">Stel een segment in na "。" (Japanse punt)</td>
+                              <td align="center">。</td>
+                              <td align="center">&nbsp;</td>
+                              <td align="left">Let er op dat <code class="literal">Na</code> leeg is
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left">Niet segmenteren na M. Mr. Mrs. en Ms.</td>
+                              <td align="center">Mr??s??\.</td>
+                              <td align="center">\s</td>
+                              <td align="left">Uitzonderingsregel - zie het gebruik van ? in reguliere uitdrukkingen</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3731"></a>7.8. Auto-aanvullen
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Klik op <span class="guimenuitem">Woordenlijst...</span> om de weergave woordenlijst Auto-aanvullen te configureren.
+               </p>
+               <p>Klik op <span class="guimenuitem">Auto-tekst...</span> om opties voor Auto-tekst te configureren en items toe te voegen of te verwijderen.
+               </p>
+               <p>Klik op <span class="guimenuitem">Tabel met tekens...</span> om de opties voor de Tabel met tekens voor auto-aanvullen in te stellen.
+               </p>
+               <p>Auto-aanvullen wordt gestart in het doelsegment met de sneltoets <span class="bold"><strong>Ctrl+Space</strong></span>.
+               </p>
+               <p>Als de optie <span class="bold"><strong>Relevante suggesties automatisch weergeven</strong></span> is geselecteerd, wordt Auto-aanvullen automatisch gestart door de eerste letter te typen van een vertaald item voor de woordenlijst,
+                  of door "&lt;" te typen in het geval van tags.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3759"></a>7.9. Spellingscontrole
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>OmegaT heeft een ingebouwde spellingscontrole die is gebaseerd op de <a class="link" href="appendix.spellchecker.html" title="Bijlage C. Spellingscontrole">spellingscontrole</a> die wordt gebruikt in Apache OpenOffice, LibreOffice, Firefox en Thunderbird. Als consequentie daarvan is het in staat om
+                  het grote aantal gratis woordenboeken voor spelling te gebruiken die beschikbaar is voor die toepassingen.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3767"></a>7.10. plug-in LanguageTool
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Type service</span></dt>
+                     <dd>
+                        <p>Selecteer de locatie van de taalcontrole.</p>
+                        <p>Gebruiken van een andere taalcontrole op uw lokale machine dan die welke met OmegaT is meegeleverd, geeft u de mogelijkheid
+                           om de regels voor verificatie te personaliseren.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Regels</span></dt>
+                     <dd>
+                        <p>Selecteer of deselecteer de regels, afhankelijk van het feit of zij relevant zijn voor het type tekst dat u vertaalt.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.externalsearch"></a>7.11. Extern zoeken
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Projectspecifieke opdrachten inschakelen</span></dt>
+                     <dd>
+                        <p>Standaard voert OmegaT de in de projectspecifieke instellingen gespecificeerde opdrachten niet uit (het bestand <code class="filename">finder.xml</code> in de map <code class="filename">omegat</code>), omdat zij een kritische impact zouden kunnen hebben op de beveiliging van de machine.
+                        </p>
+                        <p>Activeer deze optie alleen als u weet wat u doet, en alleen voor projecten van vertrouwde bronnen.</p>
+                     </dd>
+                     <dt><span class="term">Prioriteit contextmenu:</span></dt>
+                     <dd>
+                        <p>Stelt u in staat de volgorde van de opdrachten in het contextmenu (het menu met rechts-klikken) te wijzigen. Waarden rond
+                           100 geeft opdrachten aan de bovenkant weer, en waarden rond 900 geven ze aan de onderkant weer.
+                        </p>
+                        <p>U dient OmegaT opnieuw te starten om deze wijziging te effectueren.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.editor"></a>7.12. venster Bewerken
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><a name="dialogs.preferences.editor.insertthesourcetext"></a><span class="term">De brontekst invoegen</span></dt>
+                     <dd>
+                        <p>U kunt de brontekst automatisch ingevoegd hebben in het bewerkingsveld. Dit is handig als teksten veel handelsnamen en andere
+                           woorden met hoofdletters bevat die intact gelaten moeten worden.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Segment leeg laten</span></dt>
+                     <dd>
+                        <p>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven
+                           verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<span class="bold"><strong>Ctrl+A </strong></span>en <span class="bold"><strong>Del). </strong></span> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het venster Bewerken. Klik met rechts in een segment
+                           en selecteer "<span class="bold"><strong>Lege vertaling instellen</strong></span>". Het item <span class="bold"><strong>Vertaling verwijderen</strong></span> in hetzelfde pop-upmenu maakt het ook mogelijk de bestaande vertaling van het huidige segment te verwijderen. U bereikt hetzelfde
+                           door het doelsegment leeg te maken en te drukken op <span class="guibutton">Enter.</span></p>
+                     </dd>
+                     <dt><span class="term">Beste overeenkomst invoegen</span></dt>
+                     <dd>
+                        <p>OmegaT voegt de vertaling van de tekenreeks in die het meeste lijkt op de huidige bron, indien die boven de drempel van het
+                           percentage van overeenkomst komt dat in het dialoogvenster is ingesteld. Het voorvoegsel (is standaard leeg) kan worden gebruikt
+                           om vertalingen te taggen, wat wordt gedaan via fuzzy overeenkomsten. Indien u een voorvoegsel toevoegt (bijvoorbeeld [fuzzy]),
+                           kunt u deze vertalingen later traceren om te zien of zij juist zijn.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>De keuzevakken in het onderste gedeelte van het dialoogvenster dienen het volgende doel:</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Poging om nummers te converteren bij het invoegen van een overeenkomst</span></dt>
+                     <dd>
+                        <p>Indien deze optie is geselecteerd zal OmegaT, wanneer een fuzzy overeenkomst wordt ingevoegd, handmatig of automatisch, de
+                           getallen in de fuzzy overeenkomst proberen te converteren in overeenstemming met de inhoud van de bron. Er zijn een aantal
+                           beperkingen:
+                        </p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>Het bronsegment en de fuzzy overeenkomsten moeten dezelfde lijst met getallen bevatten</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>De getallen moeten exact hetzelfde zijn tussen de bron en de overeenkomsten voor het doel.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Alleen gehele getallen en eenvoudige getallen met zwevende komma (die de punt als decimaal scheidingsteken gebruiken, bijv.
+                                    5.4, maar niet 5,4 of 54E-01) worden in overweging genomen.
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><a name="dialogs.preferences.editor.allowtranslationtobeequaltosource"></a><span class="term">Vertaling mag gelijk zijn aan brontekst</span></dt>
+                     <dd>
+                        <p>Te vertalen documenten kunnen handelsnamen, namen of andere woorden met hoofdletters bevatten die hetzelfde moeten blijven
+                           in vertaalde documenten. Er zijn twee strategieën voor segmenten die slechts zulke onveranderlijke tekst bevatten.
+                        </p>
+                        <p>U zou kunnen besluiten om zulke segmenten niet te vertalen. OmegaT zal deze segmenten dan aanmerken als niet-vertaald. Dit
+                           is de standaard. Het alternatief is om een vertaling in te voeren die identiek is aan de brontekst. OmegaT is in staat om
+                           te herkennen dat u dit gedaan hebt. Selecteer deze optie om dit mogelijk te maken.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Segment naar tekstbestanden exporteren</span></dt>
+                     <dd>
+                        <p>De functie Tekst exporteren exporteert gegevens vanuit het huidige <span class="application">OmegaT</span>project naar platte tekst-bestanden. De gegevens worden geëxporteerd als het segment wordt geopend. De bestanden verschijnen
+                           in de submap /script in de map met gebruikersbestanden van OmegaT, en bevatten:
+                        </p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>De inhoud van de brontekst van het segment (<code class="filename">source.txt</code>).
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>De inhoud van de brontekst van het segment (<code class="filename">target.txt</code>).
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>De tekst die door de gebruiker werd geaccentueerd, als <span class="keycap"><strong>Ctrl-Shift-C</strong></span> werd ingedrukt of als <span class="guimenuitem">Bewerken &gt; Selectie exporteren</span> is geselecteerd (<code class="filename">selection.txt</code>).
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>De inhoud van de bestanden wordt overschreven als een nieuw segment wordt geopend (source.txt en target.txt) of als een nieuwe
+                           selectie wordt geëxporteerd (selection.txt). De bestanden zijn niet-opgemaakte platte tekst-bestanden. Het gehele proces kan
+                           worden gestuurd en beheerd via op Tck/Tcl-gebaseerde scripts. Bekijk <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">De functie Tekst exporteren in OmegaT gebruiken</a> voor specificaties, voorbeelden en suggesties.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Ga naar volgende niet-vertaalde segment stopt wanneer er ten minste één alternatieve vertaling is.</span></dt>
+                     <dd>
+                        <p>Als we foutieve vertalingen willen vermijden in het geval van segmenten met verschillende mogelijke inhoud voor het doel,
+                           zal het selecteren van dit keuzevak er voor zorgen dat <span class="bold"><strong>Ga naar volgende niet-vertaalde segment</strong></span> stopt bij het volgende dergelijke segment, ongeacht of het al is vertaald of niet.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Bewerken van tags toestaan</span></dt>
+                     <dd>
+                        <p>Deselecteer deze optie om te voorkomen dat er schade aan de tags ontstaat (d.i. gedeeltelijke verwijdering) gedurende het
+                           bewerken. Verwijderen van een gehele tag blijft in dat geval mogelijk door Ctrl+Backspace/Delete te gebruiken of door het
+                           volledig te selecteren (Ctrl+Shift+Links/Rechts) en het dan te verwijderen (Delete of Ctrl+X).
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Valideer tags bij het verlaten van een segment</span></dt>
+                     <dd>
+                        <p>Selecteer deze optie om te worden gewaarschuwd voor verschillen tussen de tags van segmenten in bron en doel, elke keer als
+                           u een segment verlaat.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist"><a name="dialogs.preferences.editor.saveautopopulatedstatus"></a><dl class="variablelist">
+                     <dt><span class="term">Status voor automatisch vergroten van vertalingen opslaan</span></dt>
+                     <dd>
+                        <p>Selecteer deze optie om in het bestand <code class="filename">project_save.tmx</code> de informatie op te nemen dat een segment automatisch is vergroot, zodat het met een specifieke kleur kan worden weergegeven
+                           in het venster Bewerken (als de optie "Segmenten van Automatisch vergroten van vertalingen markeren ", in het menu Weergave,
+                           is geselecteerd).
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Initieel dit aantal segmenten laden</span></dt>
+                     <dd>
+                        <p>Standaard geeft het venster Bewerken 2.000 initiële segmenten weer, en laadt progressief meer als u naar boven of beneden
+                           scrollt. Als u een krachtige machine heeft, en/of als u vindt dat de schuifbalk zich niet gedraagt gedurende het progressief
+                           laden, kunt u dit aantal verhogen.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.tagprocessing"></a>7.13. Tag verwerken
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Bij het vertalen van aan software gerelateerde bestanden kunt u de opties voor Tags valideren configureren om ook (%…) variabelen
+                  voor programmeren te controleren. U kunt verscheidene opties definiëren die zijn gerelateerd aan het valideren van tags en
+                  om aangepaste tags te definiëren.
+               </p>
+               <p>Als u bijvoorbeeld <strong class="userinput"><code>\d+</code></strong> invoert in het veld <span class="guilabel">Reguliere uitdrukking voor aangepaste tags</span>, zullen alle getallen worden beschouwd als tags, wat u in staat stelt te controleren of getallen niet per ongeluk zijn gewijzigd
+                  tijdens het vertalen.
+               </p>
+               <p>Voer op soortgelijke wijze <strong class="userinput"><code>&lt;.*?&gt;</code></strong> in om er voor te zorgen dat HTML-tags (bijvoorbeeld) die zijn ingevoerd in de bron zonder aanpassingen worden behouden in
+                  de vertaling.
+               </p>
+               <p>Opmerking: deze twee instructies kunnen worden gecombineerd door te schrijven: <strong class="userinput"><code>(&lt;.*?&gt;)|(\d+)</code></strong>.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3979"></a>7.14. Team
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Voer hier uw naam in en die zal worden gekoppeld aan alle door u vertaalde segmenten.</p>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="d0e3984"></a>7.14.1. Inloggegevens opslagplaats
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Lijst met projecten waarvoor details voor inloggen zijn opgeslagen in OmegaT. Verwijder een project uit deze lijst als u wilt
+                     dat OmegaT u naar een login en wachtwoord vraagt, elke keer als u toegang tot het project wilt.
+                  </p>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3989"></a>7.15. Overeenkomsten TM
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Fuzzy overeenkomsten sorteren op:</span></dt>
+                     <dd>
+                        <p>Standaard worden de sterkste overeenkomsten die worden weergegeven in het venster <span class="guilabel">Fuzzy ovbereenkomsten</span> bepaald door middel van stemmen.
+                        </p>
+                        <p>Selecteer de optie <span class="guilabel">Volledige tekst, inclusief tags en getallen</span> om meer letterlijke overeenkomsten, dichter bij 100%, te verkrijgen.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Tags in niet-OmegaT TMX-en weergeven</span></dt>
+                     <dd>
+                        <p>Beslis hoe tags in vreemde TMX-bestanden (d.i. niet gemaakt door OmegaT) moeten worden behandeld.</p>
+                     </dd>
+                     <dt><span class="term">Sjabloon voor weergave van overeenkomsten</span></dt>
+                     <dd>
+                        <p>Wijzigen hoe fuzzy overeenkomsten weergegeven worden, door vooraf geconfigureerde variabelen te gebruiken.</p>
+                        <div class="table"><a name="d0e4019"></a><p class="title"><b>Tabel 3.1. Instellen venster Overeenkomsten</b></p>
+                           <div class="table-contents">
+                              <table class="table" summary="Instellen venster Overeenkomsten" border="1">
+                                 <colgroup>
+                                    <col align="left">
+                                    <col align="left">
+                                 </colgroup>
+                                 <tbody>
+                                    <tr>
+                                       <td align="left"><code class="literal">${id}</code></td>
+                                       <td align="left">Nummer van de overeenkomst van 1 tot en met 5</td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${sourceText}</code></td>
+                                       <td align="left">Brontekst van de overeenkomst</td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${targetText}</code></td>
+                                       <td align="left">Doeltekst van de overeenkomst</td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${diff}</code></td>
+                                       <td align="left">Tekenreeks die de verschillen weergeeft tussen de bron en de overeenkomst.<span class="emphasis"><em> Hint:</em></span> gebruik dit als de tekst, die u hebt vertaald, is bijgewerkt.
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${diffReversed}</code></td>
+                                       <td align="left">Hetzelfde als ${diff}, maar met de verschillen (wat moet worden ingevoegd en verwijderd) geïnverteerd.</td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${score}</code></td>
+                                       <td align="left">Berekend percentage met de optie <span class="guilabel">Stemming, geen tags en geen getallen</span>.
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${noStemScore}</code></td>
+                                       <td align="left">Berekend percentage met de optie <span class="guilabel">Geen tags en geen getallen</span>.
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${adjustedScore}</code></td>
+                                       <td align="left">Berekend percentage met de optie <span class="guilabel">Volledige tekst, inclusief tags en getallen</span>.
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${fuzzyFlag}</code></td>
+                                       <td align="left">Geeft aan dat deze overeenkomst fuzzy is (momenteel alleen voor vertalingen vanuit PO-bestanden met de markering #fuzzy)</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div><br class="table-break"></dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4092"></a>7.16. Weergave
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Bevat opties voor het op verschillende manieren weergeven van teksten en info over wijzigingen.</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Inclusief het eerste niet-unieke segment bij het markeren van niet-unieke segmenten</span></dt>
+                     <dd>
+                        <p>Selecteer deze optie om alle niet-unieke segmenten (herhalingen) grijs weer te geven. Als deze optie niet is geselecteerd
+                           zullen alle niet-unieke segmenten grijs worden weergegeven, behalve het eerste.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.savingandoutput"></a>7.17. Opslaan en uitvoer
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Stelt de gebruiker in staat om de interval te selecteren - in minuten en seconden - tussen het opeenvolgende automatisch opslaan
+                  van het project.
+               </p>
+               <p>De standaard interval (3 minuten) wijzigen, afhankelijk van de karakteristieken van het project:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>korte intervallen (minimum: 10 seconden) voor gesynchroniseerde projecten op een interne server.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>lange intervallen voor teamprojecten die worden gehost op externe servers.</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Externe opdracht nabewerken</span></dt>
+                     <dd>
+                        <p>Opdrachten specificeren die worden uitgevoerd na de opdracht <span class="guimenuitem">Vertaalde documenten maken</span>.
+                        </p>
+                        <p>Een voorbeeld voor het gebruik van deze mogelijkheid zou zijn om automatisch vertaalde documenten te verzenden naar de FTP-server
+                           van de cliënt.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Sta ook externe opdrachten per-project toe</span></dt>
+                     <dd>
+                        <p>Standaard voert OmegaT de in de projectspecifieke instellingen gespecificeerde opdrachten niet uit (het bestand <code class="filename">omegat.project</code>), omdat zij een kritische impact zouden kunnen hebben op de beveiliging van de machine.
+                        </p>
+                        <p>Activeer deze optie alleen als u weet wat u doet, en alleen voor projecten van vertrouwde bronnen.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4141"></a>7.18. Inloggen proxy
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Voer hier de door de beheerder van de proxy verstrekte details in als OmegaT een geauthenticeerde proxyserver dient te gebruiken
+                  om toegang te krijgen tot het internet.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4146"></a>7.19. Veilig opslaan
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Hier kunt u het hoofdwachtwoord, dat wordt gebruikt om details voor inloggen en toegangssleutels voor services voor machinevertaling
+                  te beveiligen, opnieuw definiëren. Zorg er voor dat u een notitie maakt van al deze details voordat u een nieuw wachtwoord
+                  maakt, omdat ze zullen worden verwijderd en opnieuw moeten worden ingevoerd.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4151"></a>7.20. Plug-ins
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Geeft toegang topt de lijst met beschikbare plug-ins. Plug-ins worden geïnstalleerd in de map <code class="filename">/plugins</code>.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4159"></a>7.21. Updates
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Schakelt automatisch notificeren bij updates van<span class="application">OmegaT</span> in.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="menus.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="panes.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 2. Menu's&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 4. Vensters</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

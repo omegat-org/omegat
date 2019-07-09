@@ -76,6 +76,8 @@ Only if a Standard release:
 
 ## 9. Build WebStart dist locally, publish
 
+The Java WebStart dist can only be built with Java 11+.
+
 Make sure `jwsCodebase` is set correctly e.g. in `local.properties` or on the
 command line:
 

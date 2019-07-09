@@ -106,7 +106,14 @@ Otherwise do
 and publish the contents to SourceForge Web manually.
 
 
-## 10. Announce to News, user group
+## 10. Publish the manual and Javadoc
+
+```sh
+./gradlew publishManual publishJavadoc
+```
+
+
+## 11. Announce to News, user group
 
 - [OmegaT News](https://sourceforge.net/p/omegat/news/)
   - [Example](https://sourceforge.net/p/omegat/news/2019/03/omegat-latest-version-415-update-4-released/)
@@ -114,7 +121,7 @@ and publish the contents to SourceForge Web manually.
   - [Example](https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/43871)
 
 
-## 11. Cleanup
+## 12. Cleanup
 
 - Bump version in `Version.properties`, `changes.txt`
 - Move old versions in SourceForge Files into `OldFiles/Releases`
@@ -124,7 +131,7 @@ and publish the contents to SourceForge Web manually.
 - Update ticket milestones if necessary
 
 
-## 12. Push new version for version check
+## 13. Push new version for version check
 
 If no catastrophic problems are reported with the new version, bump the version
 check master file:

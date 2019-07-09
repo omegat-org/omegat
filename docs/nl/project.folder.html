@@ -1,0 +1,328 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 5. Projectmap</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - Gebruikershandleiding">
+      <link rel="prev" href="panes.html" title="Hoofdstuk 4. Vensters">
+      <link rel="next" href="howtos.html" title="Hoofdstuk 6. How-To…">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 5. Projectmap</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="panes.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="howtos.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="project.folder"></a>Hoofdstuk 5. Projectmap
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="project.folder.html#d0e4464">1. source</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4469">2. target</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4492">3. tm</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="project.folder.html#d0e4520">3.1. tm/auto</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4547">3.2. tm/enforce</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4587">3.3. tm/mt</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4595">3.4. tm/penalty-xxx</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="project.folder.html#d0e4606">4. Woordenboek</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4614">5. glossary</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#folder.omegat">6. omegat</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4681">7. omegat.project (bestand)</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4689">8. .repositories</a></span></dt>
+            </dl>
+         </div>
+         <p>Een OmegaT-project is een map die bestanden en submappen bevat.</p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4464"></a>1. source
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>De submap source bevat de bestanden die moeten worden vertaald. U kunt de bestanden er later aan toevoegen. Houdt er wel rekening
+               mee dat de structuur van de submap source elke vorm mag hebben die u wilt. Indien de bestanden die vertaald moeten worden
+               deel uitmaken van een boomstructuur (zoals op een website), hoeft u slechts de bovenste submap op te geven en zal OmegaT de
+               gehele inhoud behouden, waarbij de boomstructuur intact blijft.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4469"></a>2. target
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Deze submap is bij aanvang leeg. Selecteer <span class="guimenu">Project</span> → <span class="guimenuitem">Vertaalde documenten maken</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>) om er inhoud aan toe te voegen. Bestanden in de map <code class="filename">source</code>, of zij vertaald zijn of niet, worden dan hier gegenereerd, in dezelfde hiërarchie als die welke aanwezig is in de submap
+               source. De inhoud van de submap target zal de huidige status van de vertaling weergeven, zoals die aanwezig is in het vertaalgeheugen
+               van het project, opgeslagen in het huidige <span class="bold"><strong>/omegat/project_save.tmx</strong></span>. Niet-vertaalde segmenten zullen hierbij hun brontaal behouden.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4492"></a>3. tm
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>De map /tm/ kan een willekeurig aantal aanvullende vertaalgeheugens bevatten - d.i. tmx-bestanden. Zulke bestanden kunnen
+               worden gemaakt in elk van de drie hierboven aangegeven variëteiten. Onthoud dat andere CAT-programma's tmx-bestanden kunnen
+               exporteren (en ook importeren), gewoonlijk in alle drie vormen. Het beste is natuurlijk om OmegaT-specifieke TMX-bestanden
+               te gebruiken (zie hierboven), zodat de in-regelige opmaak binnen het segment wordt behouden.
+            </p>
+            <p>De inhoud van vertaalgeheugens in de submap tm dienen om suggesties te genereren voor de tekst(en) om te worden vertaald.
+               Elke tekst, reeds vertaald en opgeslagen in deze bestanden, zal tussen de overeenkomsten verschijnen, indien het voldoende
+               overeenkomt met de tekst die momenteel wordt vertaald.
+            </p>
+            <p>Indien het bronsegment in één van de aanvullende TM's identiek is aan de tekst die wordt vertaald, gedraagt OmegaT zich zoals
+               gedefinieerd is in het dialoogvenster <span class="guimenu">Opties</span> → <span class="guimenuitem">Bewerken (gedrag)...</span>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden
+               vooraf gegaan door<span class="emphasis"><em> [fuzzy]</em></span>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn
+               getagd, juist zijn vertaald<span class="guimenu">.</span></p>
+            <p>Het kan gebeuren dat vertaalgeheugens, beschikbaar in de submap <code class="filename">tm</code>, segmenten met identieke brontekst bevatten, maar afwijkende doelen. TMX-bestanden worden, gesorteerd op hun naam, gelezen
+               en segmenten binnen een bepaald TMX-bestand regel na regel. Het laatste segment met de identieke brontekst zal dus worden
+               gekozen (Opmerking: natuurlijk is het verstandiger om dit in de eerste plaats in zijn geheel te vermijden).
+            </p>
+            <p>Onthoud dat de TMX-bestanden in de map tm kunnen worden gecomprimeerd met gzip.</p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4520"></a>3.1. tm/auto
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Als het vanaf het begin duidelijk is dat de vertalingen in een bepaald TM (of TM's) allemaal juist zijn, kan één van hen in
+                  de map<span class="bold"><strong> tm/auto</strong></span> worden geplaatst en heel veel van de gevallen van bevestiging met<span class="emphasis"><em> [fuzzy]</em></span> worden voorkomen.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Dat TMX-bestand dient u dan te plaatsen in de map /tm/ of /tm/auto/ van uw project van OmegaT.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Open het project. De wijzigingen worden weergegeven.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Maak een kleine wijziging ergens in het project. Dit past <code class="filename">project_save.tmx</code> aan (door toevoegen van juiste vertaaleenheden uit de TMX vanuit "auto")
+                        </p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Opmerking: als de TMX  uit /tm/auto  vóór stap 3 wordt verwijderd, worden geen extra vertaaleenheden toegevoegd.</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4547"></a>3.2. tm/enforce
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Als u er niet aan twijfelt dat een TMX meer nauwkeurig is dan het bestand <code class="filename">project_save.tmx</code> van OmegaT, plaats die TMX dan in /tm/enforce om bestaande standaard vertalingen onvoorwaardelijk te overschrijven.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Plaats de TMX in /tm/enforce.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Open het project. De wijzigingen worden weergegeven.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Maak een kleine wijziging ergens in het project. Dit past <code class="filename">project_save.tmx</code> aan.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Neem een beslissing over de immuniteit van de geforceerde segmenten:</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>Als zij <span class="emphasis"><em>niet immuun</em></span> moeten blijven voor nadere wijzigingen, verwijder dan de TMX uit /tm/enforce.
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Als zij <span class="emphasis"><em>immuun</em></span> moeten blijven voor verdere wijzigingen, laat dan de TMX in /tm/enforce staan.
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ol>
+               </div>
+               <p>Opmerking: als de TMX  uit /tm/enforce vóór stap 3 wordt verwijderd, worden in het geheel geen forceringen behouden.</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4587"></a>3.3. tm/mt
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>In het venster Bewerken, wanneer een overeenkomst wordt ingevoegd vanuit een TMX die is opgenomen in een map genaamd <code class="filename">mt</code>, wordt de achtergrond van het actieve segment gewijzigd naar rood. De achtergrond wordt hersteld naar normaal wanneer het
+                  segment wordt verlaten.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4595"></a>3.4. tm/penalty-xxx
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Soms is het handig om onderscheid te maken tussen vertaalgeheugens van hoge kwaliteit en die welke, vanwege het onderwerp,
+                  cliënt, revisiestatus, etc., minder betrouwbaar zijn. Voor vertaalgeheugens in mappen met de naam <code class="filename">penalty-xxx</code> (waarvan xxx ligt tussen 0 en 100), zullen overeenkomsten worden gegradeerd overeenkomstig de naam van de map: een overeenkomst
+                  van 100% in een vertaalgeheugen dat zich bevindt in een map genaamd, bijvoorbeeld <code class="filename">penalty-30</code>, zal worden verlaagd naar een overeenkomst van 70%. De straf is van toepassing op alle drie de percentages voor de overeenkomsten:
+                  overeenkomsten van 75, 80, 90 zullen in dit geval worden verlaagd naar 45, 50, 60.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4606"></a>4. Woordenboek
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Bij aanvang leeg, zal deze map woordenboeken bevatten die u zult toevoegen aan het project. Bekijk <a class="link" href="appendix.dictionaries.html" title="Bijlage A. Woordenboeken">Woordenboeken</a> voor meer over dit onderwerp.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4614"></a>5. glossary
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Deze map is bij aanvang leeg. Hij zal de woordenlijsten bevatten die u in het project zult gebruiken. Bekijk <a class="link" href="appendix.glossaries.html" title="Bijlage B. Woordenlijsten">Woordenlijsten</a> voor meer over dit onderwerp.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="folder.omegat"></a>6. omegat
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>De submap <span class="bold"><strong>omegat</strong></span> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <code class="filename">project_save.tmx, </code>dat het werkende vertaalgeheugen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegd
+               aan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert.
+            </p>
+            <p>Gedurende de vertaling kunnen als volgt aanvullende bestanden in deze submap worden gecreëerd</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">stats.txt</span></dt>
+                  <dd>
+                     <p>bevat de huidige statistieken van het huidige project. U kunt het bekijken door te selecteren <span class="guimenuitem">Extra &gt; Statistieken</span></p>
+                  </dd>
+                  <dt><span class="term">ignored_words.txt., </span><span class="term">learned_words.txt</span></dt>
+                  <dd>
+                     <p>worden gemaakt en gebruikt door de spellingscontrole. Als u al woorden hebt verzameld waarvan u wilt dat de spellingscontrole
+                        die negeert / accepteert, hoeft u slechts de corresponderende twee bestanden naar de submap <code class="filename">omegat</code> van uw huidige project te kopiëren.
+                     </p>
+                  </dd>
+                  <dt><span class="term">project_stats_match.txt</span></dt>
+                  <dd>
+                     <p>bevat de laatste statistieken voor overeenkomsten in het project, gegenereerd door <span class="guimenuitem">Extra &gt; Statistieken voor overeenkomsten</span></p>
+                  </dd>
+                  <dt><span class="term">segmentation.conf</span></dt>
+                  <dd>
+                     <p>als het bestaat bevat het project-specifieke segmentatieregels.</p>
+                  </dd>
+                  <dt><span class="term">filters.xml</span></dt>
+                  <dd>
+                     <p>als het bestaat bevat het project-specifieke bestandsfilters.</p>
+                  </dd>
+                  <dt><span class="term">uiLayout.xml</span></dt>
+                  <dd>
+                     <p>als het bestaat bevat het project-specifieke instellingen voor de GUI&gt;</p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4681"></a>7. omegat.project (bestand)
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Bevat parameters voor het project, zoals gedefinieerd in het dialoogvenster <a class="link" href="windows.and.dialogs.html#dialogs.projectproperties" title="1. Projecteigenschappen">Projecteigenschappen</a>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4689"></a>8. .repositories
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>In een teamproject bevat deze map een geversioneerde kopie van de boomstructuur van het project, direct gekoppeld aan de server
+               op afstand.
+            </p>
+            <p>U kunt wijzigingen maken in bestanden op afstand (bijv. een bestand verwijderen) met deze map en een cliënt voor Git of SVN.</p>
+            <p>In sommige besturingssystemen wordt deze map niet standaard weergegeven. Activeer de optie "Verborgen bestanden weergeven"
+               om hem zichtbaar te maken.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="panes.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="howtos.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 4. Vensters&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 6. How-To…</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -991,7 +991,7 @@ task publishVersion {
         ssh.run {
             session(remotes.sourceforgeWeb) {
                 def target = "${htdocs}/Version-${omtFlavor}.properties"
-                put from: 'src/org/omegat/Version.properties', into: target
+                put from: file('src/org/omegat/Version.properties'), into: target
             }
         }
     }

@@ -822,7 +822,7 @@ task instantStartGuides {
 
 task updateManuals {
     description = 'Update Instant Start guides and HTML manuals.'
-    dependsOn manualHtmls, instantStartGuides
+    dependsOn manualHtmls, instantStartGuides, genDocIndex
 }
 
 ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.xml')

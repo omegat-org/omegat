@@ -36,14 +36,8 @@ Run the following, then commit any changes:
 ## 5. Tag release revision
 
 ```sh
-svn copy ^/trunk ^/tags/vX.Y.Z -m "Published version X.Y.Z of OmegaT"
-svn switch ^/tags/vX.Y.Z
+git tag vX.Y.Z
 ```
-
-Replace `^/trunk` with the appropriate branch if releasing a Stable version.
-
-- [Subversion:
-  Tags](http://svnbook.red-bean.com/en/1.7/svn.branchmerge.tags.html)
 
 
 ## 6. Run build job on Azure Devops

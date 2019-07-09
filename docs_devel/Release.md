@@ -45,7 +45,7 @@ git push origin vX.Y.Z
 
 1. Go to [OmegaT Builds](https://dev.azure.com/omegat-org/OmegaT/_build)
 2. Queue a Release Build, specifying for Branch the tag created earlier,
-   e.g. `tags/vX.Y.Z`.
+   e.g. `refs/tags/vX.Y.Z`.
 
 After building, the distfiles will be deployed automatically to the [SourceForge
 "Files" area](https://sourceforge.net/projects/omegat/files/).

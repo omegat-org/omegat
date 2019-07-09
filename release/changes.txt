@@ -54,7 +54,7 @@
 
   Other changes:
 
-  - Major update to English manual
+  - Revised user manual
 
   Localisation Updates:
 

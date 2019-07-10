@@ -6,6 +6,9 @@ winCodesignTimestampUrl=
 ## Mac code signing
 macCodesignIdentity=
 
+## Mac notarization
+macNotarizationUsername=
+
 ## Java Web Start code signing
 # Base URL for all Web Start files
 jwsCodebase=

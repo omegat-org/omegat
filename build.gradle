@@ -487,7 +487,40 @@ task macSignedDistZip(type: Zip) {
     archiveName = "${zipRoot}.zip"
 }
 
-task mac(dependsOn: [macDistZip, macSignedDistZip]) {
+task macNotarize {
+    onlyIf {
+        condition(project.hasProperty('macNotarizationUsername'),
+                  'Username for notarization not set')
+    }
+    inputs.files macSignedDistZip.outputs.files
+    doLast {
+        exec {
+            // Assuming setup per instructions at
+            // https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/customizing_the_notarization_workflow#3087734
+            commandLine 'xcrun', 'altool', '--notarize-app',
+                '--primary-bundle-id', "org.omegat.$version",
+                '--username', project.property('macNotarizationUsername'),
+                '--password', '@keychain:AC_PASSWORD',
+                '--file', inputs.files.singleFile
+        }
+    }
+}
+
+task macStapledNotarizedDistZip(type: Zip) {
+    def zipRoot = "${applicationName}_${version}${omtVersion.beta}_Mac_Notarized"
+    from(installMacSignedDist.outputs) {
+        into zipRoot
+    }
+    doFirst {
+        def app = "${installMacSignedDist.destinationDir}/OmegaT.app"
+        exec {
+            commandLine 'xcrun', 'stapler', 'staple', app
+        }
+    }
+    archiveName = "${zipRoot}.zip"
+}
+
+task mac(dependsOn: [macDistZip, macNotarize]) {
     description = 'Build the Mac distributions.'
 }
 

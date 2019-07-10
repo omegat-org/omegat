@@ -19,21 +19,16 @@
 
   Implemented requests:
 
-  - Search results panel supports custom color scheme
+  - Add custom color setting for search results
   https://sourceforge.net/p/omegat/feature-requests/1065/
 
-  - Added a shortcut to jump to the selected search result (Ctrl+J by default).
-  https://sourceforge.net/p/omegat/feature-requests/1416/
-
-  - Context menu keyboard shortcut supported in Glossary, Fuzzy Matches,
-  Multiple Translations panes
+  - Enable Context Menu key in all panes
   https://sourceforge.net/p/omegat/feature-requests/1415/
 
-  - In the editor, the "Insert" key switches between Edit and Overwrite mode.
+  - Allow overwriting text in editor
   https://sourceforge.net/p/omegat/feature-requests/45/
 
-  - Cursor lock and Insert/Overwrite mode status indicator (LCK/UNL | INS/OVR at
-  the bottom right of the status bar)
+  - Add a persistent cursor lock indicator
   https://sourceforge.net/p/omegat/feature-requests/1165/
 
   Bug fixes:
@@ -63,6 +58,8 @@
   https://sourceforge.net/p/omegat/bugs/952/
 
   Other changes:
+
+  - Added a shortcut to jump to the selected search result (Ctrl+J by default)
 
   - Revised user manual
 

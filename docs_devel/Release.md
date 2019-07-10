@@ -113,7 +113,16 @@ and publish the contents to SourceForge Web manually.
 ```
 
 
-## 11. Announce to News, user group
+## 11. Publish to Bintray
+
+```sh
+./gradlew bintrayUpload
+```
+
+Then log onto Bintray and publish the release.
+
+
+## 12. Announce to News, user group
 
 - [OmegaT News](https://sourceforge.net/p/omegat/news/)
   - [Example](https://sourceforge.net/p/omegat/news/2019/03/omegat-latest-version-415-update-4-released/)
@@ -121,7 +130,7 @@ and publish the contents to SourceForge Web manually.
   - [Example](https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/43871)
 
 
-## 12. Cleanup
+## 13. Cleanup
 
 - Bump version in `Version.properties`, `changes.txt`
 - Move old versions in SourceForge Files into `OldFiles/Releases`
@@ -131,7 +140,7 @@ and publish the contents to SourceForge Web manually.
 - Update ticket milestones if necessary
 
 
-## 13. Push new version for version check
+## 14. Push new version for version check
 
 If no catastrophic problems are reported with the new version, once the
 [website](https://github.com/omegat-org/omegat-website/) has been updated, bump

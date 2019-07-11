@@ -467,7 +467,11 @@ task installMacSignedDist(type: Sync) {
     destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
     doLast {
         exec {
-            commandLine 'codesign', '--deep', '-s', project.property('macCodesignIdentity'), file("${destinationDir}/OmegaT.app")
+            commandLine 'codesign', '--deep', '--force',
+                '--sign', project.property('macCodesignIdentity'),
+                '--timestamp',
+                '--options', 'runtime',
+                file("${destinationDir}/OmegaT.app")
         }
     }
 }

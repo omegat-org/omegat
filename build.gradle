@@ -10,6 +10,7 @@ plugins {
     id 'de.gliderpilot.jnlp' version '1.2.5'
     id 'com.jfrog.bintray' version '1.8.4'
     id 'org.hidetake.ssh' version '2.10.1'
+    id 'com.diffplug.gradle.spotless' version '3.23.1'
     // Uncomment and run `dependencyUpdates` task to check for updates to dependencies
     // id 'com.github.ben-manes.versions' version '0.21.0'
 }
@@ -772,6 +773,15 @@ checkstyle {
     toolVersion = '8.8'
 }
 checkstyleMain.exclude '**/gen/**'
+
+spotless {
+    enforceCheck false
+    java {
+        targetExclude 'src/gen/**'
+        eclipse().configFile 'docs_devel/eclipse-formatting.xml'
+        removeUnusedImports()
+    }
+}
 
 task manualPdfs {
     description = 'Build PDF manuals for all languages. Requires Docker.'

@@ -52,6 +52,44 @@ ext {
         }
     }
 
+    gitBranch = {
+        execGetOutput('git name-rev --name-only HEAD')
+    }
+
+    gitRemote = {
+        def branch = gitBranch()
+        def remote = execGetOutput("git config branch.${branch}.remote")
+        if (!remote.empty) {
+            remote
+        } else {
+            remote = execGetOutput("git config branch.${branch}.pushRemote")
+        }
+        if (!remote.empty) {
+            remote
+        } else {
+            logger.warning("Could not detect git remote name. Assuming 'origin'.")
+            'origin'
+        }
+    }
+
+    gitBranchSplitPoint = {
+        def remote = gitRemote()
+        if (!remote.empty) {
+            execGetOutput("git merge-base HEAD $remote/master")
+        } else {
+            ''
+        }
+    }
+
+    gitModifiedFiles = {
+        def splitPoint = gitBranchSplitPoint()
+        if (!splitPoint.empty) {
+            execGetOutput("git diff --name-only HEAD $splitPoint").tokenize()
+        } else {
+            []
+        }
+    }
+
     exePresent = { exe ->
         ["where $exe", "which $exe"].any {
             try {

@@ -783,6 +783,25 @@ spotless {
     }
 }
 
+task changedOnBranch {
+    description = 'List files that have been modified on this git branch.'
+    doLast {
+        ext.files = project.files(gitModifiedFiles())
+        ext.files.each { println(it) }
+    }
+}
+
+task spotlessChangedApply {
+    description = 'Apply code formatting to files that have been changed on the current branch.'
+    finalizedBy 'spotlessApply'
+    dependsOn changedOnBranch
+    doFirst {
+        spotlessJava.target = changedOnBranch.files.findAll {
+            it.path.endsWith('.java')
+        }
+    }
+}
+
 task manualPdfs {
     description = 'Build PDF manuals for all languages. Requires Docker.'
 }

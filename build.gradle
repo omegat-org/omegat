@@ -166,7 +166,7 @@ dependencies {
         compile 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
 
         // Credentials encryption
-        compile 'org.jasypt:jasypt:1.9.2'
+        compile 'org.jasypt:jasypt:1.9.3'
 
         // Groovy used for scripts - needed at compile for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies

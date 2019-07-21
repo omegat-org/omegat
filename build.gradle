@@ -118,7 +118,7 @@ dependencies {
         compile 'com.sun.xml.bind:jaxb-impl:2.3.2'
 
         // PDF Filter
-        compile 'org.apache.pdfbox:pdfbox:2.0.15'
+        compile 'org.apache.pdfbox:pdfbox:2.0.16'
 
         // Aligner
         compile 'net.loomchild:maligna:3.0.0'

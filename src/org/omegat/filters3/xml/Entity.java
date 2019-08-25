@@ -35,11 +35,17 @@ package org.omegat.filters3.xml;
  * @author Alex Buloichik
  */
 public class Entity {
-    private boolean internal;
+    enum Type {
+        INTERNAL,
+        EXTERNAL,
+        REFERENCE
+    }
+
+    private Type entityType;
 
     /** Whether entity is internal. If false, it's an external entity. */
-    public boolean isInternal() {
-        return internal;
+    public Type getType() {
+        return entityType;
     }
 
     private boolean parameter;
@@ -95,17 +101,23 @@ public class Entity {
 
     /** Creates internal entity. */
     public Entity(String name, String value) {
-        internal = true;
+        entityType = Type.INTERNAL;
         setName(name);
         this.value = value;
     }
 
     /** Creates external entity. */
     public Entity(String name, String publicId, String systemId) {
-        internal = false;
+        entityType = Type.EXTERNAL;
         setName(name);
         this.publicId = publicId;
         this.systemId = systemId;
+    }
+
+    /** Creates entity reference. */
+    public Entity(String name) {
+        entityType = Type.REFERENCE;
+        setName(name);
     }
 
     /**
@@ -113,23 +125,31 @@ public class Entity {
      */
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append("<!ENTITY");
-        if (parameter) {
-            res.append(" %");
-        }
-        res.append(" ");
-        res.append(name);
-        if (internal) {
-            // <!ENTITY % name "value">
-            res.append(" \"" + value + "\"");
-        } else {
-            // <!ENTITY gloss SYSTEM "gloss.xml">
-            if (publicId != null) {
-                res.append(" PUBLIC \"" + publicId + "\"");
+        if (entityType == Type.REFERENCE) {
+            if (parameter) {
+                res.append("%").append(name).append(";");
+            } else {
+                res.append("&").append(name).append(";");
             }
-            res.append(" SYSTEM \"" + systemId + "\"");
+        } else {
+            res.append("<!ENTITY");
+            if (parameter) {
+                res.append(" %");
+            }
+            res.append(" ");
+            res.append(name);
+            if (entityType == Type.INTERNAL) {
+                // <!ENTITY % name "value">
+                res.append(" \"").append(value).append("\"");
+            } else if (entityType == Type.EXTERNAL) {
+                // <!ENTITY gloss SYSTEM "gloss.xml">
+                if (publicId != null) {
+                    res.append(" PUBLIC \"").append(publicId).append("\"");
+                }
+                res.append(" SYSTEM \"").append(systemId).append("\"");
+            }
+            res.append(">");
         }
-        res.append(">");
         return res.toString();
     }
 

@@ -6,6 +6,7 @@ Kim Bruning
 Alex Buloichik
 Sandra Jean Chua
 Thomas Cordonnier
+Martin Dufour
 Enrique Estévez Fernández
 Martin Fleurke
 Wildrich Fourie

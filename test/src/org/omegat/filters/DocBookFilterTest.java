@@ -52,6 +52,11 @@ public class DocBookFilterTest extends TestFilterBase {
     }
 
     @Test
+    public void testTranslateExtWriter() throws Exception {
+        translateText(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter-extWriter.xml");
+    }
+
+    @Test
     public void testParseIntroLinux() throws Exception {
         List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/Intro-Linux/abook.xml");
         assertTrue("Message not exist, i.e. entities not loaded",

@@ -127,28 +127,28 @@ public class Entity {
         StringBuilder res = new StringBuilder();
         if (entityType == Type.REFERENCE) {
             if (parameter) {
-                res.append("%").append(name).append(";");
+                res.append('%').append(name).append(';');
             } else {
-                res.append("&").append(name).append(";");
+                res.append('&').append(name).append(';');
             }
         } else {
             res.append("<!ENTITY");
             if (parameter) {
                 res.append(" %");
             }
-            res.append(" ");
+            res.append(' ');
             res.append(name);
             if (entityType == Type.INTERNAL) {
                 // <!ENTITY % name "value">
-                res.append(" \"").append(value).append("\"");
+                res.append(" \"").append(value).append('"');
             } else if (entityType == Type.EXTERNAL) {
                 // <!ENTITY gloss SYSTEM "gloss.xml">
                 if (publicId != null) {
-                    res.append(" PUBLIC \"").append(publicId).append("\"");
+                    res.append(" PUBLIC \"").append(publicId).append('"');
                 }
-                res.append(" SYSTEM \"").append(systemId).append("\"");
+                res.append(" SYSTEM \"").append(systemId).append('"');
             }
-            res.append(">");
+            res.append('>');
         }
         return res.toString();
     }

@@ -289,7 +289,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             Path sourceFolderFile = new File(getSourceFolderAbsolutePath()).toPath();
             try {
                 String thisOutPath = sourceFolderFile.relativize(thisOutFile).toString();
-                return thisOutPath.replace("\\","/");
+                return thisOutPath.replace("\\", "/");
             }
             catch (IllegalArgumentException ex) {
                 // Failed to relativize
@@ -1113,7 +1113,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         if (extEntity != null) {
             if (extWriter != null) {
                 StringBuilder res = new StringBuilder();
-                res.append(entity.toString()).append("\n");
+                res.append(entity.toString()).append('\n');
                 try {
                     extWriter.write(res.toString());
                 } catch (IOException e) {

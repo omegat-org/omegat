@@ -8,6 +8,7 @@
                2010-2011 Didier Briel
                2012 Guido Leenders
                2016 Aaron Madlon-Kay
+               2019 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -88,6 +89,16 @@ public class Language implements Comparable<Object> {
         this.countryCode = "";
         this.locale = new Locale("");
         if (str != null) {
+            this.locale = Locale.forLanguageTag(str);
+            
+            // Locale matches BCP 47 
+            if (!this.locale.getLanguage().isEmpty()) {
+                this.languageCode = this.locale.getLanguage();
+                this.countryCode = this.locale.getCountry();
+                return;
+            }
+
+            // If this did not work, fallback to the old parsing method
             Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(str);
             if (m.matches() && m.groupCount() >= 1) {
                 this.languageCode = m.group(1);
@@ -120,11 +131,7 @@ public class Language implements Comparable<Object> {
      * Returns a string representation as an ISO language code (XX-YY).
      */
     public String getLanguage() {
-        String langstring = getLanguageCode();
-        if (!langstring.isEmpty() && !getCountryCode().isEmpty()) {
-            langstring += "-" + getCountryCode();
-        }
-        return langstring;
+        return this.locale.toLanguageTag();
     }
 
     /**
@@ -693,6 +700,12 @@ public class Language implements Comparable<Object> {
      * Verifies whether the language code is OK.
      */
     public static boolean verifySingleLangCode(String code) {
+        boolean isOk = !Locale.forLanguageTag(code).getLanguage().isEmpty();
+        if (isOk) {
+            return true;
+        }
+
+        // Fallback to old check for backward compatibility.
         int cpc = code.codePointCount(0, code.length());
         if (cpc == 2 || cpc == 3) {
             return Language.verifyLangCode(code);

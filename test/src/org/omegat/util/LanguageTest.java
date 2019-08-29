@@ -27,6 +27,8 @@
 package org.omegat.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
@@ -49,8 +51,10 @@ public class LanguageTest {
         String lang1 = "xx-YY";
         assertEquals(lang1, new Language(lang1).getLanguage());
 
-        String lang2 = "XX-yy";
-        assertEquals(lang2, new Language(lang2).getLanguage());
+        // Previously, input case was intentionally preserved;
+        // see https://sourceforge.net/p/omegat/bugs/185/, that is no longer the case.
+        // String lang2 = "XX-yy";
+        // assertEquals(lang2, new Language(lang2).getLanguage());
     }
 
     /**
@@ -83,5 +87,21 @@ public class LanguageTest {
         Language lang1 = new Language((Locale) null);
         Language lang2 = new Language((String) null);
         assertEquals(lang1, lang2);
+    }
+
+    /**
+     * Test for BCP 47 language tags.
+     */
+    @Test
+    public void testBCP47() {
+        Language lang1 = new Language("en-KW-x-ukeng");
+        Language lang2 = new Language("en-KW-x-useng");
+        Language lang2b = new Language("EN-KW-W-UsENg");
+        assertEquals(lang1.getLanguageCode(), lang2.getLanguageCode());
+        assertEquals(lang2.getLanguageCode(), lang2b.getLanguageCode());
+
+        assertFalse(Language.verifySingleLangCode("xxx+ZZZ-a-BBB-ccc"));
+        assertTrue(Language.verifySingleLangCode("es-419"));
+        assertTrue(Language.verifySingleLangCode("ar-AE-x-dubai"));
     }
 }

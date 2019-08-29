@@ -143,7 +143,7 @@ public class ExternalTMFactoryTest extends TestCore {
     public void testFuzzyMultipleTuv() throws Exception {
         File tmxFile = new File("test/data/tmx/test-multiple-tuv.tmx");
         sourceLang = new Language("en");
-        targetLang = new Language("fr-ca");
+        targetLang = new Language("fr");
 
         assertTrue(ExternalTMFactory.isSupported(tmxFile));
 
@@ -151,9 +151,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
         assertEquals(5, tmx.getEntries().size());
 
-        long matchingEntries = tmx.getEntries().stream()
-                .peek(t -> System.out.println(t.source + " => " + t.translation))
-                .filter(t -> t.source.equals("Hello World!")).count();
+        long matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!")).count();
 
         assertEquals(3, matchingEntries);
     }

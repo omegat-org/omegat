@@ -160,9 +160,12 @@ public class TMXReader2 {
                     if ("tu".equals(eStart.getName().getLocalPart())) {
                         parseTu(eStart);
                         ParsedTuv origTuv = getTuvByLang(sourceLanguage);
+                        // This ParsedTuv for the target translation is not used, but is there to avoid
+                        // any NPE during the callback.onEntry below.
+                        ParsedTuv targetTuv = getTuvByLang(targetLanguage);
                         // The filtering of the target Tuvs is done in
-                        // TMXLoader.loadImpl.LoadCallback.onEntry,
-                        allFound = callback.onEntry(currentTu, origTuv, null, isParagraphSegtype) && allFound;
+                        // ExternalTMFactory.TMXLoader.loadImpl => LoadCallback.onEntry,
+                        allFound = callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype) && allFound;
                     } else if ("header".equals(eStart.getName().getLocalPart())) {
                         parseHeader(eStart, sourceLanguage);
                     }

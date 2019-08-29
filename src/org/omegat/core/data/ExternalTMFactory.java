@@ -118,11 +118,12 @@ public final class ExternalTMFactory {
             TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
                 public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                         TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-                    if (tuvSource == null) {
+                    if (tuvSource == null || tuvTarget == null) {
                         return false;
                     }
 
                     String lang = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
+
                     // Keep all the Tuvs matching at least the target language
                     for (TMXReader2.ParsedTuv tuv : tu.tuvs) {
                         String[] tuvLangParts = tuv.lang.split("\\W");
@@ -131,6 +132,7 @@ public final class ExternalTMFactory {
                         }
                         addTuv(tu, tuvSource, tuv, isParagraphSegtype);
                     }
+
                     return true;
                 }
 

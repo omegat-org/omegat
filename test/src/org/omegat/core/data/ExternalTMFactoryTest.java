@@ -131,4 +131,30 @@ public class ExternalTMFactoryTest extends TestCore {
         assertEquals("Laden Sie %s in Ihrer Sprache herunter",
                 tmx.getEntries().get(1).translation);
     }
+    
+    
+    /**
+     * Test for RFE #1452
+     *
+     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1452/">RFE
+     *      #1452</a>
+     */
+    @Test
+    public void testFuzzyMultipleTuv() throws Exception {
+        File tmxFile = new File("test/data/tmx/test-multiple-tuv.tmx");
+        sourceLang = new Language("en");
+        targetLang = new Language("fr-ca");
+
+        assertTrue(ExternalTMFactory.isSupported(tmxFile));
+
+        ExternalTMX tmx = ExternalTMFactory.load(tmxFile);
+
+        assertEquals(5, tmx.getEntries().size());
+
+        long matchingEntries = tmx.getEntries().stream()
+                .peek(t -> System.out.println(t.source + " => " + t.translation))
+                .filter(t -> t.source.equals("Hello World!")).count();
+
+        assertEquals(3, matchingEntries);
+    }
 }

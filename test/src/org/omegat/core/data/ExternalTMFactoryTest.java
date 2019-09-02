@@ -149,10 +149,14 @@ public class ExternalTMFactoryTest extends TestCore {
 
         ExternalTMX tmx = ExternalTMFactory.load(tmxFile);
 
-        assertEquals(5, tmx.getEntries().size());
+        // 5 FR + 2 others
+        assertEquals(7, tmx.getEntries().size());
 
         long matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!")).count();
 
         assertEquals(3, matchingEntries);
+        
+        matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("This is an english sentence.")).count();
+        assertEquals(2, matchingEntries);
     }
 }

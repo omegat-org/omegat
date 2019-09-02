@@ -42,5 +42,18 @@
       </tuv>
     </tu>
 
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This is an english sentence.</seg>
+      </tuv>
+      <tuv lang="DE">
+        <seg>Es ist ein Satz in Englisch.</seg>
+      </tuv>
+      <tuv lang="ES">
+        <seg>Es una oración en inglés.</seg>
+      </tuv>
+    </tu>
+
+
   </body>
 </tmx>

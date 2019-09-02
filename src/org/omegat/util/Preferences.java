@@ -234,6 +234,14 @@ public final class Preferences {
      * Match to insert
      */
     public static final int BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = 80;
+
+    /**
+     * When a fuzzy match is displayed from a memory belonging to a language other
+     * than the target language, a penalty is applied.
+     */
+    public static final String PENALTY_FOR_NON_TARGET = "penalty_non_target";
+    public static final int PENALTY_FOR_NON_TARGET_DEFAULT = 30;
+
     /** Workflow Option: Insert Explanatory Text before the Best Fuzzy Match */
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";
     /** Workflow Option: Export current segment */

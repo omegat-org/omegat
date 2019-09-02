@@ -139,7 +139,9 @@ public final class ExternalTMFactory {
 
                     // If there was no match, use the original tuvTarget
                     if (tuvTarget != null) {
-                        addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype);
+                        if  (entries.isEmpty()) {
+                            addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype);
+                        }
                     } else {
                         // add all non-source Tuv
                         for (int i = 0; i < tu.tuvs.size(); i++) {

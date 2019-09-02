@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
+import org.omegat.core.data.ExternalTMFactory;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.DefaultTranslationsIterator;
@@ -89,6 +90,12 @@ public class FindMatches {
     static final int PENALTY_FOR_FUZZY = 40;
     private static final int PENALTY_FOR_REMOVED = 5;
     private static final int SUBSEGMENT_MATCH_THRESHOLD = 85;
+
+    /**
+     * Penalty applied for fuzzy matches in another language (if no match in the
+     * target language was found.)
+     */
+    private static final int PENALTY_FOR_NON_TARGET = 30;
 
     private static final Pattern SEARCH_FOR_PENALTY = Pattern.compile("penalty-(\\d+)");
 
@@ -222,6 +229,11 @@ public class FindMatches {
                 if (requiresTranslation && tmen.translation == null) {
                     continue;
                 }
+
+                if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_NON_TARGET, "true")) {
+                    penalty += PENALTY_FOR_NON_TARGET;
+                }
+
                 processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, penalty,
                         en.getKey(), tmen.creator, tmen.creationDate, tmen.changer, tmen.changeDate,
                         tmen.otherProperties);

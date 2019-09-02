@@ -43,6 +43,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
 import org.omegat.util.TMXReader2;
+import org.omegat.util.TMXReader2.ParsedTuv;
 
 /**
  * Common utility class for external TMs.
@@ -78,6 +79,10 @@ public final class ExternalTMFactory {
     }
 
     public static final class TMXLoader {
+        public static final String PROP_SOURCE_LANGUAGE = "sourceLanguage";
+        public static final String PROP_TARGET_LANGUAGE = "targetLanguage";
+        public static final String PROP_NON_TARGET = "nonTarget";
+
         public static boolean isSupported(File file) {
             String name = file.getName().toLowerCase(Locale.ENGLISH);
             return name.endsWith(OConsts.TMX_EXTENSION) || name.endsWith(OConsts.TMX_GZ_EXTENSION)
@@ -119,7 +124,7 @@ public final class ExternalTMFactory {
                 public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                         TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                     
-                  if (tuvSource == null || tuvTarget == null) {
+                  if (tuvSource == null) {
                         return false;
                     }
 
@@ -133,8 +138,16 @@ public final class ExternalTMFactory {
                     }
 
                     // If there was no match, use the original tuvTarget
-                    if (entries.isEmpty()) {
+                    if (tuvTarget != null) {
                         addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype);
+                    } else {
+                        // add all non-source Tuv
+                        for (int i = 0; i < tu.tuvs.size(); i++) {
+                            ParsedTuv tuvTarget2 = tu.tuvs.get(i);
+                            if (tuvTarget2 != tuvSource) {
+                                addTuv(tu, tuvSource, tuvTarget2, isParagraphSegtype, true);
+                            }
+                        }
                     }
 
                     return true;
@@ -142,6 +155,11 @@ public final class ExternalTMFactory {
 
                 private void addTuv(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                         TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                    addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype, false);
+                }
+
+                private void addTuv(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                        TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype, boolean nonSource) {
                     String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
                             tu.creationid);
                     String creator = StringUtil.nvl(tuvTarget.creationid, tu.creationid);
@@ -153,6 +171,12 @@ public final class ExternalTMFactory {
                     List<String> targets = new ArrayList<String>();
                     Core.getSegmenter().segmentEntries(doSegmenting && isParagraphSegtype, sourceLang,
                             tuvSource.text, targetLang, tuvTarget.text, sources, targets);
+
+                    tu.props.add(new TMXProp(PROP_SOURCE_LANGUAGE, tuvSource.lang));
+                    tu.props.add(new TMXProp(PROP_TARGET_LANGUAGE, tuvTarget.lang));
+                    if (nonSource) {
+                        tu.props.add(new TMXProp(PROP_NON_TARGET, "true"));
+                    }
 
                     for (int i = 0; i < sources.size(); i++) {
                         PrepareTMXEntry te = new PrepareTMXEntry();

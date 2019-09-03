@@ -58,6 +58,7 @@ import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.Preferences;
 import org.omegat.util.TMXProp;
 import org.omegat.util.Token;
 
@@ -95,7 +96,7 @@ public class FindMatches {
      * Penalty applied for fuzzy matches in another language (if no match in the
      * target language was found.)
      */
-    private static final int PENALTY_FOR_NON_TARGET = 30;
+    private static final int PENALTY_FOR_NON_TARGET = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_NON_TARGET, Preferences.PENALTY_FOR_NON_TARGET_DEFAULT);
 
     private static final Pattern SEARCH_FOR_PENALTY = Pattern.compile("penalty-(\\d+)");
 
@@ -231,7 +232,7 @@ public class FindMatches {
                 }
 
                 if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_NON_TARGET, "true")) {
-                    penalty += PENALTY_FOR_NON_TARGET;
+                    penalty = PENALTY_FOR_NON_TARGET;
                 }
 
                 processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, penalty,

@@ -143,7 +143,7 @@ public final class ExternalTMFactory {
                             addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype);
                         }
                     } else {
-                        // add all non-source Tuv
+                        // add all matching Tuv from other languages
                         for (int i = 0; i < tu.tuvs.size(); i++) {
                             ParsedTuv tuvTarget2 = tu.tuvs.get(i);
                             if (tuvTarget2 != tuvSource) {
@@ -161,7 +161,7 @@ public final class ExternalTMFactory {
                 }
 
                 private void addTuv(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                        TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype, boolean nonSource) {
+                        TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype, boolean nonTarget) {
                     String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
                             tu.creationid);
                     String creator = StringUtil.nvl(tuvTarget.creationid, tu.creationid);
@@ -176,7 +176,7 @@ public final class ExternalTMFactory {
 
                     tu.props.add(new TMXProp(PROP_SOURCE_LANGUAGE, tuvSource.lang));
                     tu.props.add(new TMXProp(PROP_TARGET_LANGUAGE, tuvTarget.lang));
-                    if (nonSource) {
+                    if (nonTarget) {
                         tu.props.add(new TMXProp(PROP_NON_TARGET, "true"));
                     }
 

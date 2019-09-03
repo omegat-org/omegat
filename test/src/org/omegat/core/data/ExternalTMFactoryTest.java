@@ -30,6 +30,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -125,14 +127,11 @@ public class ExternalTMFactoryTest extends TestCore {
 
         assertEquals(33, tmx.getEntries().size());
         assertEquals("Download %s for Android in your language", tmx.getEntries().get(0).source);
-        assertEquals("Laden Sie %s f\u00FCr Android in Ihrer Sprache herunter",
-                tmx.getEntries().get(0).translation);
+        assertEquals("Laden Sie %s f\u00FCr Android in Ihrer Sprache herunter", tmx.getEntries().get(0).translation);
         assertEquals("Download %s in your language", tmx.getEntries().get(1).source);
-        assertEquals("Laden Sie %s in Ihrer Sprache herunter",
-                tmx.getEntries().get(1).translation);
+        assertEquals("Laden Sie %s in Ihrer Sprache herunter", tmx.getEntries().get(1).translation);
     }
-    
-    
+
     /**
      * Test for RFE #1452
      *
@@ -152,11 +151,20 @@ public class ExternalTMFactoryTest extends TestCore {
         // 5 FR + 2 others
         assertEquals(7, tmx.getEntries().size());
 
-        long matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!")).count();
+        List<PrepareTMXEntry> matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!"))
+                .collect(Collectors.toList());
 
-        assertEquals(3, matchingEntries);
-        
-        matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("This is an english sentence.")).count();
-        assertEquals(2, matchingEntries);
+        assertEquals(3, matchingEntries.size());
+
+        matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("This is an english sentence."))
+                .collect(Collectors.toList());
+        assertEquals(2, matchingEntries.size());
+        PrepareTMXEntry entry = matchingEntries.get(0);
+        assertEquals("DE", entry.getPropValue("targetLanguage"));
+        assertEquals("true", entry.getPropValue("nonTarget"));
+
+        entry = matchingEntries.get(1);
+        assertEquals("ES", entry.getPropValue("targetLanguage"));
+        assertEquals("true", entry.getPropValue("nonTarget"));
     }
 }

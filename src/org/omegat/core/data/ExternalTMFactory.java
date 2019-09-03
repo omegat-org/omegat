@@ -123,15 +123,15 @@ public final class ExternalTMFactory {
             TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
                 public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                         TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-                    
-                  if (tuvSource == null) {
+
+                    if (tuvSource == null) {
                         return false;
                     }
 
                     // Keep all the Tuvs matching at least the target language
                     for (TMXReader2.ParsedTuv tuv : tu.tuvs) {
                         String[] tuvLangParts = tuv.lang.split("\\W");
-                        if (!targetLang.getLanguage().equalsIgnoreCase(tuvLangParts[0])) {
+                        if (!targetLang.getLanguageCode().equalsIgnoreCase(tuvLangParts[0])) {
                             continue;
                         }
                         addTuv(tu, tuvSource, tuv, isParagraphSegtype);
@@ -139,7 +139,7 @@ public final class ExternalTMFactory {
 
                     // If there was no match, use the original tuvTarget
                     if (tuvTarget != null) {
-                        if  (entries.isEmpty()) {
+                        if (entries.isEmpty()) {
                             addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype);
                         }
                     } else {
@@ -174,12 +174,6 @@ public final class ExternalTMFactory {
                     Core.getSegmenter().segmentEntries(doSegmenting && isParagraphSegtype, sourceLang,
                             tuvSource.text, targetLang, tuvTarget.text, sources, targets);
 
-                    tu.props.add(new TMXProp(PROP_SOURCE_LANGUAGE, tuvSource.lang));
-                    tu.props.add(new TMXProp(PROP_TARGET_LANGUAGE, tuvTarget.lang));
-                    if (nonTarget) {
-                        tu.props.add(new TMXProp(PROP_NON_TARGET, "true"));
-                    }
-
                     for (int i = 0; i < sources.size(); i++) {
                         PrepareTMXEntry te = new PrepareTMXEntry();
                         te.source = sources.get(i);
@@ -189,7 +183,13 @@ public final class ExternalTMFactory {
                         te.creator = creator;
                         te.creationDate = created;
                         te.note = tu.note;
-                        te.otherProperties = tu.props;
+                        te.otherProperties = new ArrayList<TMXProp>(tu.props);
+                        te.otherProperties.add(new TMXProp(PROP_SOURCE_LANGUAGE, tuvSource.lang));
+                        te.otherProperties.add(new TMXProp(PROP_TARGET_LANGUAGE, tuvTarget.lang));
+                        if (nonTarget) {
+                            te.otherProperties.add(new TMXProp(PROP_NON_TARGET, "true"));
+                        }
+
                         entries.add(te);
                     }
                 }

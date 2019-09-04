@@ -231,11 +231,12 @@ public class FindMatches {
                     continue;
                 }
 
+                int tmenPenalty = penalty; 
                 if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_NON_TARGET, "true")) {
-                    penalty = PENALTY_FOR_NON_TARGET;
+                    tmenPenalty += PENALTY_FOR_NON_TARGET;
                 }
 
-                processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, penalty,
+                processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, tmenPenalty,
                         en.getKey(), tmen.creator, tmen.creationDate, tmen.changer, tmen.changeDate,
                         tmen.otherProperties);
             }

@@ -130,8 +130,7 @@ public final class ExternalTMFactory {
 
                     // Keep all the Tuvs matching at least the target language
                     for (TMXReader2.ParsedTuv tuv : tu.tuvs) {
-                        String[] tuvLangParts = tuv.lang.split("\\W");
-                        if (!targetLang.getLanguageCode().equalsIgnoreCase(tuvLangParts[0])) {
+                        if (!targetLang.isSameLanguage(tuv.lang)) {
                             continue;
                         }
                         addTuv(tu, tuvSource, tuv, isParagraphSegtype);

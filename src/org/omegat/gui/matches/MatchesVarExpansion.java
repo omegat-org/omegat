@@ -253,8 +253,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             for (TMXProp prop : match.props) {
                 if (prop.getType().equals(ExternalTMFactory.TMXLoader.PROP_SOURCE_LANGUAGE)) {
                     localTemplate = localTemplate.replace(VAR_SOURCE_LANGUAGE, prop.getValue());            
-                }
-                else if (prop.getType().equals(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE)) {
+                } else if (prop.getType().equals(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE)) {
                     localTemplate = localTemplate.replace(VAR_TARGET_LANGUAGE, prop.getValue());
                 }
             }

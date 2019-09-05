@@ -61,17 +61,12 @@ import java.util.regex.Matcher;
  * @author Aaron Madlon-Kay
  */
 public class Language implements Comparable<Object> {
-    private Locale locale = new Locale("");
-    private String languageCode;
-    private String countryCode;
+    private static final Locale EMPTY_LOCALE = new Locale("");
+    private final Locale locale;
 
     /** Creates a new instance of Language, based on Locale */
     public Language(Locale locale) {
-        if (locale != null) {
-            this.locale = locale;
-        }
-        this.languageCode = this.locale.getLanguage();
-        this.countryCode = this.locale.getCountry();
+        this.locale = locale == null ? EMPTY_LOCALE : locale;
     }
 
     /**
@@ -85,30 +80,27 @@ public class Language implements Comparable<Object> {
      * This form is described in <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP47</a>.
      */
     public Language(String str) {
-        this.languageCode = "";
-        this.countryCode = "";
-        this.locale = new Locale("");
         if (str != null) {
-            this.locale = Locale.forLanguageTag(str);
+            Locale checkLocale = Locale.forLanguageTag(str);
 
             // Locale matches BCP 47
-            if (!this.locale.getLanguage().isEmpty()) {
-                this.languageCode = this.locale.getLanguage();
-                this.countryCode = this.locale.getCountry();
+            if (!checkLocale.getLanguage().isEmpty()) {
+                this.locale = checkLocale;
                 return;
             }
 
             // If this did not work, fallback to the old parsing method
             Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(str);
             if (m.matches() && m.groupCount() >= 1) {
-                this.languageCode = m.group(1);
-                if (m.group(2) != null) {
-                    this.countryCode = m.group(2);
-                }
-                this.locale = new Locale(this.languageCode.toLowerCase(Locale.ENGLISH),
-                        this.countryCode.toUpperCase(Locale.ENGLISH));
+                String languageCode = m.group(1);
+                String countryCode = m.group(2) == null ? "" : m.group(2);
+
+                this.locale = new Locale(languageCode.toLowerCase(Locale.ENGLISH),
+                        countryCode.toUpperCase(Locale.ENGLISH));
+                return;
             }
         }
+        this.locale = EMPTY_LOCALE;
     }
 
     /**
@@ -176,10 +168,10 @@ public class Language implements Comparable<Object> {
      * Returns only a language (XX).
      */
     public String getLanguageCode() {
-        if (this.languageCode == null) {
+        if (this.locale.getLanguage() == null) {
             return "";
         } else {
-            return this.languageCode;
+            return this.locale.getLanguage();
         }
     }
 
@@ -187,10 +179,10 @@ public class Language implements Comparable<Object> {
      * Returns only a country (YY).
      */
     public String getCountryCode() {
-        if (this.countryCode == null) {
+        if (this.locale.getCountry() == null) {
             return "";
         } else {
-            return this.countryCode;
+            return this.locale.getCountry();
         }
     }
 
@@ -202,8 +194,9 @@ public class Language implements Comparable<Object> {
      *      List 6.1302</a>
      */
     public boolean isSpaceDelimited() {
-        return !"ZH".equalsIgnoreCase(this.languageCode) && !"JA".equalsIgnoreCase(this.languageCode)
-                && !"BO".equalsIgnoreCase(this.languageCode);
+        String languageCode = this.locale.getLanguage();
+        return !"ZH".equalsIgnoreCase(languageCode) && !"JA".equalsIgnoreCase(languageCode)
+                && !"BO".equalsIgnoreCase(languageCode);
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -659,7 +652,7 @@ public class Language implements Comparable<Object> {
             return false;
         }
         Language that = (Language) lang;
-        return this.getLocaleCode().equals(that.getLocaleCode());
+        return this.getLocale().equals(that.getLocale());
     }
 
     /**

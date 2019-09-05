@@ -90,8 +90,8 @@ public class Language implements Comparable<Object> {
         this.locale = new Locale("");
         if (str != null) {
             this.locale = Locale.forLanguageTag(str);
-            
-            // Locale matches BCP 47 
+
+            // Locale matches BCP 47
             if (!this.locale.getLanguage().isEmpty()) {
                 this.languageCode = this.locale.getLanguage();
                 this.countryCode = this.locale.getCountry();

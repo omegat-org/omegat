@@ -711,4 +711,34 @@ public class Language implements Comparable<Object> {
         return false;
     }
 
+    /**
+     * Returns true if two languages have the same language code (eg. fr-FR / fr-CA;
+     * es-419/es-BO).
+     */
+    public boolean isSameLanguage(Language target) {
+        return this.getLanguageCode().equalsIgnoreCase(target.getLanguageCode());
+    }
+
+    public boolean isSameLanguage(String target) {
+        return isSameLanguage(new Language(target));
+    }
+
+    /**
+     * Returns true if two languages have the same language and country (eg. fr-FR /
+     * fr-FR).
+     * 
+     * Note that it is slightly different than <code>Language.equals()</code>
+     * because of the possible use of BCP47 tags (eg. en-GB-x-ulster /
+     * en-GB-x-scotland)
+     */
+    public boolean isSameCountryLanguage(Language target) {
+        if (!isSameLanguage(target)) {
+            return false;
+        }
+        return this.getCountryCode().equalsIgnoreCase(target.getCountryCode());
+    }
+
+    public boolean isSameCountryLanguage(String target) {
+        return isSameCountryLanguage(new Language(target));
+    }
 }

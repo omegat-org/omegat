@@ -542,23 +542,21 @@ public class TMXReader2 {
      * - if not exist, then with the same language with whatever country<br>
      */
     protected ParsedTuv getTuvByLang(Language lang) {
-        String langLanguage = lang.getLanguageCode();
-        String langCountry = lang.getCountryCode();
         ParsedTuv tuvLC = null; // Tuv with the same language+country
         ParsedTuv tuvL = null; // Tuv with the same language only, without country
         ParsedTuv tuvLW = null; // Tuv with the same language+whatever country
         for (int i = 0; i < currentTu.tuvs.size(); i++) {
             ParsedTuv tuv = currentTu.tuvs.get(i);
-            String[] tuvLangParts = tuv.lang.split("\\W");
-            if (!langLanguage.equalsIgnoreCase(tuvLangParts[0])) {
+            Language tuvLang = new Language(tuv.lang);
+            if (!lang.isSameLanguage(tuvLang)) {
                 // language not equals - there is no sense to processing
                 continue;
             }
-            if (tuvLangParts.length == 1) {
+            if (tuvLang.getCountryCode().isEmpty()) {
                 // language only, without country
                 tuvL = tuv;
-            } else if (langCountry.equalsIgnoreCase(tuvLangParts[1])) {
-                // the same country
+            } else if (lang.isSameCountryLanguage(tuvLang)) {
+                // the same country and language
                 tuvLC = tuv;
             } else {
                 // other country

@@ -557,7 +557,7 @@ public class TMXReader2 {
             if (tuvLang.getCountryCode().isEmpty()) {
                 // language only, without country
                 tuvL = tuv;
-            } else if (tuvLang.isSameCountryLanguage(tuvLang)) {
+            } else if (lang.isSameCountryLanguage(tuvLang)) {
                 // the same country and language
                 tuvLC = tuv;
             } else {

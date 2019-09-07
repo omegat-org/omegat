@@ -97,4 +97,15 @@ public class PrepareTMXEntry {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("PrepareTMXEntry [source=").append(source).append(", translation=").append(translation)
+                .append(", creator=").append(creator).append(", changer=").append(changer).append(", creationDate=")
+                .append(creationDate).append(", changeDate=").append(changeDate).append(", note=").append(note)
+                .append(", otherProperties=").append(otherProperties).append("]");
+        return builder.toString();
+    }
+
 }

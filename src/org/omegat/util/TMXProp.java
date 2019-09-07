@@ -45,4 +45,11 @@ public class TMXProp {
     public String getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append(type).append("=").append(value).toString();
+    }
+
 }

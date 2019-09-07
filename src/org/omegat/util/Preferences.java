@@ -239,8 +239,8 @@ public final class Preferences {
      * When a fuzzy match is displayed from a memory belonging to a language other
      * than the target language, a penalty is applied.
      */
-    public static final String PENALTY_FOR_NON_TARGET = "penalty_non_target";
-    public static final int PENALTY_FOR_NON_TARGET_DEFAULT = 30;
+    public static final String PENALTY_FOR_FOREIGN_MATCHES = "penalty_foreign_matches";
+    public static final int PENALTY_FOR_FOREIGN_MATCHES_DEFAULT = 30;
 
     /** Workflow Option: Insert Explanatory Text before the Best Fuzzy Match */
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";
@@ -356,6 +356,8 @@ public final class Preferences {
     public static final String EXT_TMX_MATCH_TEMPLATE = "ext_tmx_match_template";
     /** External TMX options: Fuzzy match sort key **/
     public static final String EXT_TMX_SORT_KEY = "ext_tmx_sort_key";
+    /** External TMX options: Whether to show fuzzy matches from foreign (non-target language) matches. */
+    public static final String EXT_TMX_KEEP_FOREIGN_MATCH = "keep_foreign_matches";
 
     /** View options: Show all sources in bold */
     public static final String VIEW_OPTION_SOURCE_ALL_BOLD = "view_option_source_all_bold";

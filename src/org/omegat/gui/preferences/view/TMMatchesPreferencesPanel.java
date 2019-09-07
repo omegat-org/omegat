@@ -61,6 +61,12 @@ public class TMMatchesPreferencesPanel extends JPanel {
         tagHandlingLabel = new javax.swing.JLabel();
         displayLevel2Tags = new javax.swing.JCheckBox();
         useSlash = new javax.swing.JCheckBox();
+        jPanel5 = new javax.swing.JPanel();
+        keepForeignMatches = new javax.swing.JCheckBox();
+        foreignPenaltyPanel = new javax.swing.JPanel();
+        foreignPenaltyLabel = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        foreignPenaltySpinner = new javax.swing.JSpinner();
         jPanel3 = new javax.swing.JPanel();
         templateLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -97,7 +103,28 @@ public class TMMatchesPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(useSlash, OStrings.getString("EXT_TMX_USE_XML")); // NOI18N
         jPanel7.add(useSlash);
 
-        jPanel2.add(jPanel7, java.awt.BorderLayout.PAGE_END);
+        jPanel2.add(jPanel7, java.awt.BorderLayout.LINE_START);
+
+        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.Y_AXIS));
+
+        keepForeignMatches.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(keepForeignMatches, OStrings.getString("EXT_TMX_KEEP_FOREIGN_MATCHES")); // NOI18N
+        jPanel5.add(keepForeignMatches);
+
+        foreignPenaltyPanel.setAlignmentX(0.0F);
+        foreignPenaltyPanel.setLayout(new javax.swing.BoxLayout(foreignPenaltyPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(foreignPenaltyLabel, OStrings.getString("EXT_TMX_PENALTY_FOR_FOREIGN_MATCHES")); // NOI18N
+        foreignPenaltyPanel.add(foreignPenaltyLabel);
+        foreignPenaltyPanel.add(filler1);
+
+        foreignPenaltySpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
+        foreignPenaltySpinner.setMaximumSize(new java.awt.Dimension(60, 32767));
+        foreignPenaltyPanel.add(foreignPenaltySpinner);
+
+        jPanel5.add(foreignPenaltyPanel);
+
+        jPanel2.add(jPanel5, java.awt.BorderLayout.SOUTH);
 
         add(jPanel2, java.awt.BorderLayout.NORTH);
 
@@ -133,13 +160,19 @@ public class TMMatchesPreferencesPanel extends JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox displayLevel2Tags;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JLabel foreignPenaltyLabel;
+    javax.swing.JPanel foreignPenaltyPanel;
+    javax.swing.JSpinner foreignPenaltySpinner;
     javax.swing.JButton insertButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    javax.swing.JCheckBox keepForeignMatches;
     javax.swing.JTextArea matchesTemplate;
     private javax.swing.JLabel sortMatchesLabel;
     javax.swing.JComboBox<SORT_KEY> sortMatchesList;

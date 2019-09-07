@@ -92,12 +92,6 @@ public class FindMatches {
     private static final int PENALTY_FOR_REMOVED = 5;
     private static final int SUBSEGMENT_MATCH_THRESHOLD = 85;
 
-    /**
-     * Penalty applied for fuzzy matches in another language (if no match in the
-     * target language was found.)
-     */
-    private static final int PENALTY_FOR_NON_TARGET = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_NON_TARGET, Preferences.PENALTY_FOR_NON_TARGET_DEFAULT);
-
     private static final Pattern SEARCH_FOR_PENALTY = Pattern.compile("penalty-(\\d+)");
 
     private static final String ORPHANED_FILE_NAME = OStrings.getString("CT_ORPHAN_STRINGS");
@@ -213,6 +207,14 @@ public class FindMatches {
                         trans.changeDate, null);
             }
         });
+        
+
+        /**
+         * Penalty applied for fuzzy matches in another language (if no match in the
+         * target language was found.)
+         */
+        int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
+                Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
 
         // travel by translation memories
         for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
@@ -232,8 +234,8 @@ public class FindMatches {
                 }
 
                 int tmenPenalty = penalty; 
-                if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_NON_TARGET, "true")) {
-                    tmenPenalty += PENALTY_FOR_NON_TARGET;
+                if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
+                    tmenPenalty += foreignPenalty;
                 }
 
                 processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, tmenPenalty,

@@ -88,6 +88,9 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
                 .setSelectedItem(Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE));
         panel.displayLevel2Tags.setSelected(Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2));
         panel.useSlash.setSelected(Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH));
+        panel.keepForeignMatches.setSelected(Preferences.isPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH));
+        panel.foreignPenaltySpinner.setValue(Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
+                Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT));
         panel.matchesTemplate.setText(Preferences.getPreferenceDefault(Preferences.EXT_TMX_MATCH_TEMPLATE,
                 MatchesVarExpansion.DEFAULT_TEMPLATE));
         panel.matchesTemplate.setCaretPosition(0);
@@ -98,6 +101,8 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         panel.sortMatchesList.getModel().setSelectedItem(SORT_KEY.SCORE);
         panel.displayLevel2Tags.setSelected(false);
         panel.useSlash.setSelected(false);
+        panel.keepForeignMatches.setSelected(false);
+        panel.foreignPenaltySpinner.setValue(Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
         panel.matchesTemplate.setText(MatchesVarExpansion.DEFAULT_TEMPLATE);
         panel.matchesTemplate.setCaretPosition(0);
     }
@@ -108,5 +113,11 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, panel.displayLevel2Tags.isSelected());
         Preferences.setPreference(Preferences.EXT_TMX_USE_SLASH, panel.useSlash.isSelected());
         Preferences.setPreference(Preferences.EXT_TMX_MATCH_TEMPLATE, panel.matchesTemplate.getText());
+        // TMX need to be reloaded to include/disable the foreign matches.
+        if (Preferences.isPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH) != panel.keepForeignMatches.isSelected()) {
+            this.setReloadRequired(true);
+        }
+        Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, panel.keepForeignMatches.isSelected());
+        Preferences.setPreference(Preferences.PENALTY_FOR_FOREIGN_MATCHES, panel.foreignPenaltySpinner.getValue());
     }
 }

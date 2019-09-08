@@ -160,9 +160,12 @@ public class TMXReader2 {
                     if ("tu".equals(eStart.getName().getLocalPart())) {
                         parseTu(eStart);
                         ParsedTuv origTuv = getTuvByLang(sourceLanguage);
-                        // This ParsedTuv for the target translation is not used, but is there to avoid
-                        // any NPE during the callback.onEntry below.
+
+                        // Find the best matching target Tuv.
+                        // This targetTuv is used to keep the LoadCallback interface compatibility with
+                        // current tests and other implementations.
                         ParsedTuv targetTuv = getTuvByLang(targetLanguage);
+
                         allFound = callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype) && allFound;
                     } else if ("header".equals(eStart.getName().getLocalPart())) {
                         parseHeader(eStart, sourceLanguage);

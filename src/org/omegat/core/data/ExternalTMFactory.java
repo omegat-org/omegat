@@ -43,7 +43,6 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
 import org.omegat.util.TMXReader2;
-import org.omegat.util.TMXReader2.ParsedTuv;
 
 /**
  * Common utility class for external TMs.
@@ -81,7 +80,7 @@ public final class ExternalTMFactory {
     public static final class TMXLoader {
         public static final String PROP_SOURCE_LANGUAGE = "sourceLanguage";
         public static final String PROP_TARGET_LANGUAGE = "targetLanguage";
-        public static final String PROP_NON_TARGET = "nonTarget";
+        public static final String PROP_FOREIGN_MATCH = "foreignMatch";
 
         public static boolean isSupported(File file) {
             String name = file.getName().toLowerCase(Locale.ENGLISH);
@@ -128,35 +127,23 @@ public final class ExternalTMFactory {
                         return false;
                     }
 
+                    boolean keepForeign = Preferences.isPreferenceDefault(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, false);
+
                     // Keep all the Tuvs matching at least the target language
-                    for (TMXReader2.ParsedTuv tuv : tu.tuvs) {
-                        if (!targetLang.isSameLanguage(tuv.lang)) {
+                    for (TMXReader2.ParsedTuv tuvTarget2 : tu.tuvs) {
+                        // Skip entries from source language
+                        if (sourceLang.isSameLanguage(tuvTarget2.lang)) {
                             continue;
                         }
-                        addTuv(tu, tuvSource, tuv, isParagraphSegtype);
-                    }
-
-                    // If there was no match, use the original tuvTarget
-                    if (tuvTarget != null) {
-                        if (entries.isEmpty()) {
-                            addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype);
+                        // Matching entries for foreign languages are included with a penalty
+                        boolean isForeign = !targetLang.isSameLanguage(tuvTarget2.lang);
+                        if (isForeign && !keepForeign) {
+                            continue;
                         }
-                    } else {
-                        // add all matching Tuv from other languages
-                        for (int i = 0; i < tu.tuvs.size(); i++) {
-                            ParsedTuv tuvTarget2 = tu.tuvs.get(i);
-                            if (tuvTarget2 != tuvSource) {
-                                addTuv(tu, tuvSource, tuvTarget2, isParagraphSegtype, true);
-                            }
-                        }
+                        addTuv(tu, tuvSource, tuvTarget2, isParagraphSegtype, isForeign);
                     }
 
                     return true;
-                }
-
-                private void addTuv(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                        TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-                    addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype, false);
                 }
 
                 private void addTuv(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
@@ -186,7 +173,7 @@ public final class ExternalTMFactory {
                         te.otherProperties.add(new TMXProp(PROP_SOURCE_LANGUAGE, tuvSource.lang));
                         te.otherProperties.add(new TMXProp(PROP_TARGET_LANGUAGE, tuvTarget.lang));
                         if (nonTarget) {
-                            te.otherProperties.add(new TMXProp(PROP_NON_TARGET, "true"));
+                            te.otherProperties.add(new TMXProp(PROP_FOREIGN_MATCH, "true"));
                         }
 
                         entries.add(te);

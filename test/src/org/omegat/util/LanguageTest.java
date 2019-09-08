@@ -51,7 +51,8 @@ public class LanguageTest {
         String lang1 = "xx-YY";
         assertEquals(lang1, new Language(lang1).getLanguage());
 
-        // Obsolete, the language (Locale) is always stored as lc-UC
+        // Previously, input case was intentionally preserved;
+        // see https://sourceforge.net/p/omegat/bugs/185/, that is no longer the case.
         // String lang2 = "XX-yy";
         // assertEquals(lang2, new Language(lang2).getLanguage());
     }

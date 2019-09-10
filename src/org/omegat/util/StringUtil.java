@@ -238,6 +238,12 @@ public final class StringUtil {
                 return txt.substring(0, idx) + replaceCase(txt.substring(idx), lang);
             }
         }
+        if (!txt.matches("^\\\\[ulEU].*")) { // No need to worry about uppercase/lowercase
+            if (txt.length() < 2) {
+                return txt;
+            }
+            return txt.substring(0, 2) + replaceCase(txt.substring(2), lang);
+        }
         // Double symbols are longer, so they must be treated first
         if (txt.startsWith("\\u\\L")) {
             return txt.substring(4, 5).toUpperCase(lang) + replaceCase("\\L" + txt.substring(5), lang);
@@ -274,7 +280,15 @@ public final class StringUtil {
                 return txt.substring(0, idx).toLowerCase(lang) + replaceCase(txt.substring(idx + 2), lang);
             }
         }
-        return replaceCase(txt.substring(1), lang); // then '\' was only here as a protection (for example '\$' ==> '$')
+
+        if (txt.startsWith("\\\\")) { // literal backslash
+            return "\\" + replaceCase(txt.substring(2), lang);
+        }
+        if (txt.startsWith("\\$")) { // protected $
+            return "$" + replaceCase(txt.substring(2), lang);
+        }
+        // for all other cases, don't consider \ as an escape character
+        return "\\" + replaceCase(txt.substring(1), lang);
     }
 
     public static String matchCapitalization(String text, String matchTo, Locale locale) {

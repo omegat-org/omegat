@@ -32,6 +32,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -369,7 +371,23 @@ public class StringUtilTest {
 
     @Test
     public void testCaseConversion() {
-        assertEquals("This is a test", StringUtil.replaceCase("\\uthis is a test", Locale.ENGLISH)); // uc first
+        List<String> tests = new ArrayList<>();
+        tests.add("foo\\\\bar");
+        tests.add("\\foo");
+        tests.add("foo\\bar");
+        tests.add("\\foo\\bar");
+        tests.add("foo\\$bar");
+        tests.add("\\foo\\$bar");
+        tests.add("\\foo\\");
+        tests.add("\\foo\\x");
+        tests.add("\\");
+
+        for (String s : tests) {
+            assertEquals(s, StringUtil.replaceCase(s, Locale.ENGLISH));
+        }
+
+        assertEquals("\\hello This is a test", StringUtil.replaceCase("\\hello \\uthis is a test", Locale.ENGLISH));
+        assertEquals("This is a test", StringUtil.replaceCase("\\uthis is a test", Locale.ENGLISH));
         assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\lTHIS IS A TEST", Locale.ENGLISH)); // lc first
         assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\l\\Uthis is a test", Locale.ENGLISH)); // lc first + uc
         assertEquals("THIS IS A TEST", StringUtil.replaceCase("\\Uthis is a test", Locale.ENGLISH)); // uc all

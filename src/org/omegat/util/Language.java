@@ -80,27 +80,31 @@ public class Language implements Comparable<Object> {
      * This form is described in <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP47</a>.
      */
     public Language(String str) {
-        if (str != null) {
+        if (str == null) {
+            locale = EMPTY_LOCALE;
+        } else {
             Locale checkLocale = Locale.forLanguageTag(str);
 
             // Locale matches BCP 47
             if (!checkLocale.getLanguage().isEmpty()) {
-                this.locale = checkLocale;
-                return;
-            }
+                locale = checkLocale;
+            } else {
+                // If this did not work, fallback to the old parsing method
+                Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(str);
+                if (m.matches() && m.groupCount() >= 1) {
+                    String languageCode = m.group(1);
+                    String countryCode = m.group(2) == null ? "" : m.group(2);
 
-            // If this did not work, fallback to the old parsing method
-            Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(str);
-            if (m.matches() && m.groupCount() >= 1) {
-                String languageCode = m.group(1);
-                String countryCode = m.group(2) == null ? "" : m.group(2);
+                    locale = new Locale(languageCode.toLowerCase(Locale.ENGLISH),
+                            countryCode.toUpperCase(Locale.ENGLISH));
 
-                this.locale = new Locale(languageCode.toLowerCase(Locale.ENGLISH),
-                        countryCode.toUpperCase(Locale.ENGLISH));
-                return;
+                } else {
+                    // We tried really hard to match something, but it does not
+                    // look at all like a language string.
+                    locale = EMPTY_LOCALE;
+                }
             }
         }
-        this.locale = EMPTY_LOCALE;
     }
 
     /**
@@ -123,7 +127,7 @@ public class Language implements Comparable<Object> {
      * Returns a string representation as an ISO language code (XX-YY).
      */
     public String getLanguage() {
-        return this.locale.toLanguageTag();
+        return locale.toLanguageTag();
     }
 
     /**
@@ -168,10 +172,10 @@ public class Language implements Comparable<Object> {
      * Returns only a language (XX).
      */
     public String getLanguageCode() {
-        if (this.locale.getLanguage() == null) {
+        if (locale.getLanguage() == null) {
             return "";
         } else {
-            return this.locale.getLanguage();
+            return locale.getLanguage();
         }
     }
 
@@ -179,10 +183,10 @@ public class Language implements Comparable<Object> {
      * Returns only a country (YY).
      */
     public String getCountryCode() {
-        if (this.locale.getCountry() == null) {
+        if (locale.getCountry() == null) {
             return "";
         } else {
-            return this.locale.getCountry();
+            return locale.getCountry();
         }
     }
 
@@ -194,7 +198,7 @@ public class Language implements Comparable<Object> {
      *      List 6.1302</a>
      */
     public boolean isSpaceDelimited() {
-        String languageCode = this.locale.getLanguage();
+        String languageCode = locale.getLanguage();
         return !"ZH".equalsIgnoreCase(languageCode) && !"JA".equalsIgnoreCase(languageCode)
                 && !"BO".equalsIgnoreCase(languageCode);
     }

@@ -160,10 +160,6 @@ public class TMXReader2 {
                     if ("tu".equals(eStart.getName().getLocalPart())) {
                         parseTu(eStart);
                         ParsedTuv origTuv = getTuvByLang(sourceLanguage);
-
-                        // Find the best matching target Tuv.
-                        // This targetTuv is used to keep the LoadCallback interface compatibility with
-                        // current tests and other implementations.
                         ParsedTuv targetTuv = getTuvByLang(targetLanguage);
 
                         allFound = callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype) && allFound;

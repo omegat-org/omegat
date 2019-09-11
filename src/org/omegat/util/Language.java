@@ -668,11 +668,12 @@ public class Language implements Comparable<Object> {
         return locale.hashCode();
     }
 
+    @Override
     public int compareTo(Object o) {
         if (o instanceof Language) {
-            return this.getLanguage().compareTo(((Language) o).getLanguage());
+            return getLanguage().compareTo(((Language) o).getLanguage());
         }
-        return this.getLanguage().compareTo(o.toString());
+        return getLanguage().compareTo(o.toString());
     }
 
     /**

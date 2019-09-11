@@ -59,7 +59,7 @@ import java.util.regex.Matcher;
  * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
- * @author Briac Pilpré
+ * @author Briac Pilpre
  */
 public class Language implements Comparable<Object> {
     private static final Locale EMPTY_LOCALE = new Locale("");

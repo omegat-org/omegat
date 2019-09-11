@@ -66,6 +66,7 @@ public final class ExternalTMFactory {
                     .setExtTmxLevel2(Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2))
                     .setUseSlash(Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH))
                     .setDoSegmenting(props.isSentenceSegmentingEnabled())
+                    .setKeepForeignMatches(Preferences.isPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH))
                     .load(props.getSourceLanguage(), props.getTargetLanguage());
         } else if (BifileLoader.isSupported(file)) {
             return new BifileLoader(file).setRemoveTags(props.isRemoveTags())
@@ -92,6 +93,7 @@ public final class ExternalTMFactory {
         private boolean extTmxLevel2;
         private boolean useSlash;
         private boolean doSegmenting;
+        private boolean keepForeignMatches;
 
         public TMXLoader(File file) {
             this.file = file;
@@ -112,6 +114,11 @@ public final class ExternalTMFactory {
             return this;
         }
 
+        public TMXLoader setKeepForeignMatches(boolean keepForeignMatches) {
+            this.keepForeignMatches = keepForeignMatches;
+            return this;
+        }
+
         public ExternalTMX load(Language sourceLang, Language targetLang) throws Exception {
             return new ExternalTMX(file.getName(), loadImpl(sourceLang, targetLang));
         }
@@ -127,8 +134,6 @@ public final class ExternalTMFactory {
                         return false;
                     }
 
-                    boolean keepForeign = Preferences.isPreferenceDefault(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, false);
-
                     // Keep all the Tuvs matching at least the target language
                     for (TMXReader2.ParsedTuv tuvTarget2 : tu.tuvs) {
                         // Skip entries from source language
@@ -137,7 +142,7 @@ public final class ExternalTMFactory {
                         }
                         // Matching entries for foreign languages are included with a penalty
                         boolean isForeign = !targetLang.isSameLanguage(tuvTarget2.lang);
-                        if (isForeign && !keepForeign) {
+                        if (isForeign && !keepForeignMatches) {
                             continue;
                         }
                         addTuv(tu, tuvSource, tuvTarget2, isParagraphSegtype, isForeign);

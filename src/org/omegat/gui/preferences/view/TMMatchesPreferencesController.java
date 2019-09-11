@@ -80,6 +80,9 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
                         e -> panel.matchesTemplate.replaceSelection(panel.variablesList.getSelectedItem().toString()));
         panel.variablesList
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(MatchesVarExpansion.getMatchesVariables())));
+        panel.keepForeignMatches.addActionListener(e ->
+            panel.foreignPenaltySpinner.setEnabled(panel.keepForeignMatches.isSelected())
+        );
     }
 
     @Override
@@ -91,6 +94,7 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         panel.keepForeignMatches.setSelected(Preferences.isPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH));
         panel.foreignPenaltySpinner.setValue(Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT));
+        panel.foreignPenaltySpinner.setEnabled(panel.keepForeignMatches.isSelected());
         panel.matchesTemplate.setText(Preferences.getPreferenceDefault(Preferences.EXT_TMX_MATCH_TEMPLATE,
                 MatchesVarExpansion.DEFAULT_TEMPLATE));
         panel.matchesTemplate.setCaretPosition(0);
@@ -103,6 +107,7 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         panel.useSlash.setSelected(false);
         panel.keepForeignMatches.setSelected(false);
         panel.foreignPenaltySpinner.setValue(Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
+        panel.foreignPenaltySpinner.setEnabled(panel.keepForeignMatches.isSelected());
         panel.matchesTemplate.setText(MatchesVarExpansion.DEFAULT_TEMPLATE);
         panel.matchesTemplate.setCaretPosition(0);
     }

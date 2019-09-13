@@ -2,10 +2,14 @@
  OmegaT 5.0.0
 ----------------------------------------------------------------------
   0 Enhancements
-  0 Bug fixes
+  1 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
 5.0.0 vs 4.3.0
+
+  Bug fixes:
+
+  - Fixed errors when doing search-and-replace with certain regex strings
 
   Localisation Updates:
 

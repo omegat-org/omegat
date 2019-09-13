@@ -238,12 +238,6 @@ public final class StringUtil {
                 return txt.substring(0, idx) + replaceCase(txt.substring(idx), lang);
             }
         }
-        if (!txt.matches("^\\\\[ulEU].*")) { // No need to worry about uppercase/lowercase
-            if (txt.length() < 2) {
-                return txt;
-            }
-            return txt.substring(0, 2) + replaceCase(txt.substring(2), lang);
-        }
         // Double symbols are longer, so they must be treated first
         if (txt.startsWith("\\u\\L")) {
             return txt.substring(4, 5).toUpperCase(lang) + replaceCase("\\L" + txt.substring(5), lang);

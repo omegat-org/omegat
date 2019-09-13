@@ -634,10 +634,13 @@ public class Searcher {
                 int end = matcher.end();
                 if (m_searchExpression.mode == SearchMode.REPLACE) {
                     if (m_searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
+                        if ((end == start) && (start > 0)) {
+                            break; // do not replace the last occurence of (.*)
+                        }
                         String repl = m_searchExpression.replacement;
                         Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
                         while (replaceMatcher.find()) {
-                            int varId = Integer.parseInt(replaceMatcher.group(1));
+                            int varId = Integer.parseInt(replaceMatcher.group(2));
                             if (varId > matcher.groupCount()) {
                                 // Group wasn't even present in search regex.
                                 throw new IndexOutOfBoundsException(
@@ -649,7 +652,8 @@ public class Searcher {
                                 // replace with empty string.
                                 substitution = "";
                             }
-                            repl = repl.substring(0, replaceMatcher.start()) + substitution
+                            substitution = substitution.replace("\\","\\\\").replace("$","\\$");	// avoid re-eval inside replaceCase;
+                            repl = repl.substring(0, replaceMatcher.start()) + replaceMatcher.group(1) + substitution
                                     + repl.substring(replaceMatcher.end());
                             replaceMatcher.reset(repl);
                         }

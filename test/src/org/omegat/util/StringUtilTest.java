@@ -371,13 +371,11 @@ public class StringUtilTest {
 
     @Test
     public void testCaseConversion() {
+        // Strings which are not affected by replaceCase despite the backslash
         List<String> tests = new ArrayList<>();
-        tests.add("foo\\\\bar");
         tests.add("\\foo");
         tests.add("foo\\bar");
         tests.add("\\foo\\bar");
-        tests.add("foo\\$bar");
-        tests.add("\\foo\\$bar");
         tests.add("\\foo\\");
         tests.add("\\foo\\x");
         tests.add("\\");
@@ -386,6 +384,17 @@ public class StringUtilTest {
             assertEquals(s, StringUtil.replaceCase(s, Locale.ENGLISH));
         }
 
+        // Strings where backslash is used as an escape sequence
+        tests.clear();
+        tests.add("foo\\\\bar"); // double backslash => simple backslash
+        tests.add("foo\\$bar"); // backslash + dollar => dollar
+        tests.add("\\foo\\$bar"); // simple backslash, then backslash + dollar
+
+        for (String s : tests) {
+            assertEquals(s.replace("\\\\","\\").replace("\\$","$"), StringUtil.replaceCase(s, Locale.ENGLISH));
+        }
+
+        // Test normal behaviour of replace case sequences
         assertEquals("\\hello This is a test", StringUtil.replaceCase("\\hello \\uthis is a test", Locale.ENGLISH));
         assertEquals("This is a test", StringUtil.replaceCase("\\uthis is a test", Locale.ENGLISH));
         assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\lTHIS IS A TEST", Locale.ENGLISH)); // lc first

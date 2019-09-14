@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.0.0
 ----------------------------------------------------------------------
-  0 Enhancements
+  1 Enhancements
   1 Bug fix
   1 Localisation update
 ----------------------------------------------------------------------
 5.0.0 vs 4.3.0
+
+  Implemented requests:
+
+  - Display fuzzy matches for all translations in the matching language
+  https://sourceforge.net/p/omegat/feature-requests/1452/
 
   Bug fixes:
 

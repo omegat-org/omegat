@@ -33,6 +33,12 @@ import org.omegat.util.gui.Styles;
 public interface IGlossaryRenderer {
     static final AttributeSet NO_ATTRIBUTES = Styles.createAttributeSet(null, null, false, null);
     static final AttributeSet PRIORITY_ATTRIBUTES = Styles.createAttributeSet(null, null, true, null);
+    static final AttributeSet SOURCE_ATTRIBUTES = Styles.createAttributeSet(
+            Styles.EditorColor.COLOR_GLOSSARY_SOURCE.getColor(), null, null, null);
+    static final AttributeSet TARGET_ATTRIBUTES = Styles.createAttributeSet(
+            Styles.EditorColor.COLOR_GLOSSARY_TARGET.getColor(), null, null, null);
+    static final AttributeSet NOTES_ATTRIBUTES = Styles.createAttributeSet(
+            Styles.EditorColor.COLOR_GLOSSARY_NOTE.getColor(), null, null, null);
 
     void render(GlossaryEntry entry, StyledDocument doc);
 }

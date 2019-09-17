@@ -28,6 +28,7 @@ package org.omegat.gui.glossary;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.awt.Color;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
@@ -93,9 +94,19 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
                 if (StyleConstants.isItalic(attr)) {
                     buf.append("<i>");
                 }
+                Color attrColor = StyleConstants.getForeground(attr);
+                if (attrColor != Color.black) {
+                    String colorString = String.format("%02x%02x%02x",
+                            attrColor.getRed(), attrColor.getGreen(), attrColor.getBlue());
+                    buf.append("<font color=#" + colorString + ">");
+                }
             }
             buf.append(str);
             if (attr != null) {
+                Color attrColor = StyleConstants.getForeground(attr);
+                if (attrColor != Color.black) {
+                    buf.append("</font>");
+                }
                 if (StyleConstants.isItalic(attr)) {
                     buf.append("</i>");
                 }
@@ -119,7 +130,7 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
     }
 
     protected void render(GlossaryEntry entry, IRenderTarget<?> trg) {
-        trg.append(entry.getSrcText());
+        trg.append(entry.getSrcText(), SOURCE_ATTRIBUTES);
         trg.append(" = ");
 
         String[] targets = entry.getLocTerms(false);
@@ -141,7 +152,10 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
                 trg.append(", ");
             }
 
-            SimpleAttributeSet attrs = new SimpleAttributeSet(priorities[i] ? PRIORITY_ATTRIBUTES : NO_ATTRIBUTES);
+            SimpleAttributeSet attrs = new SimpleAttributeSet(TARGET_ATTRIBUTES);
+            if (priorities[i]) {
+                StyleConstants.setBold(attrs, true);
+            }
             attrs.addAttribute(TooltipAttribute.ATTRIBUTE_KEY, new TooltipAttribute(origins[i]));
             trg.append(bracketEntry(targets[i]), attrs);
 
@@ -154,7 +168,7 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
             }
         }
 
-        trg.append(commentsBuf.toString());
+        trg.append(commentsBuf.toString(), NOTES_ATTRIBUTES);
     }
 
     public String renderToHtml(GlossaryEntry entry) {

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="project.folder">
+  <title>Cartella del progetto</title>
+
+  <para>Un progetto OmegaT è una cartella che contiene file e sotto-cartelle.</para>
+
+  <section>
+    <title>source</title>
+
+    <para>La sotto-cartella source contiene i file da tradurre. Potete aggiungervi dei file in un secondo momento. Si noti che la struttura della sotto-cartella source può assumere qualsiasi forma si desideri. Se i file da tradurre fanno parte di una struttura ad albero (come in un sito web), si dovrà specificare la sotto-cartella di livello principale e OmegaT conserverà tutto il contenuto, mantenendo, al contempo intatta la struttura.</para>
+  </section>
+
+  <section>
+    <title>target</title>
+
+    <para>Al principio questa sotto-cartella è vuota. Per aggiungervi del contenuto, selezionare <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Progetto</guimenu> <guimenuitem>Crea i documenti di arrivo</guimenuitem> </menuchoice>. I file all'interno della cartella <filename>source</filename>, che siano o no tradotti, saranno generati qui, rispettando la stessa gerarchia presente nella sotto-cartella source. Il contenuto della sotto-cartella target rifletterà lo stato corrente della traduzione, come salvata nella memoria di traduzione del progetto all'interno del file <emphasis role="bold">/omegat/project_save.tmx</emphasis>. I segmenti non tradotti resteranno nella loro lingua originale.</para>
+  </section>
+
+  <section>
+    <title>tm</title>
+
+    <para>La cartella /tm/ può contenere qualsiasi numero di memorie di traduzione secondarie - cioè i file tmx. Tali file possono essere creati in uno dei tre modi indicati sopra. Notare che gli altri strumenti CAT possono esportare (e importare) file tmx, di solito in tutte e tre le forme. La cosa migliore da fare è, naturalmente, usare i file TMX specifici di OmegaT (vedere sopra), in modo che venga mantenuta la formattazione incorporata all'interno del segmento.</para>
+
+    <para>Il contenuto delle memorie di traduzione, della sotto-cartella tm, serve per generare i suggerimenti per i segmenti di testo da tradurre. Tutto il testo già tradotto e memorizzato in questi file, se sufficientemente simile al testo che si sta traducendo, apparirà tra le concordanze parziali.</para>
+
+    <para>OmegaT agisce come definito nella finestra di dialogo <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Comportamento di modifica...</guimenuitem> </menuchoice>, se il segmento di origine, in una delle memorie di traduzione secondarie, è identico al testo da tradurre. Per esempio, se le impostazioni predefinite vengono lasciate inalterate, la traduzione della TM secondaria è accettata e marcata col prefisso <emphasis>[fuzzy]</emphasis>, in modo da permettere al traduttore di rivedere le traduzioni in un secondo momento e verificare se i segmenti contrassegnati siano stati tradotti correttamente<menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+
+    <para>Può succedere che le memorie di traduzione contenute nella sotto-cartella <filename>tm</filename>, contengano segmenti con testo di origine identico ma testo di destinazione diverso. I file TMX sono letti ordinati per nome e segmenti all'interno di un file TMX dato riga per riga. L'ultimo segmento con il testo di origine identico verrà considerato prioritario (nota: ha naturalmente più senso evitare, in primo luogo, che questo avvenga).</para>
+
+    <para>Si noti che i file TMX contenuti nella cartella tm possono essere compressi con gzip.</para>
+
+    <section>
+      <title>tm/auto</title>
+
+      <para>Se si sa da subito che le traduzioni di una certa memoria di traduzione (o più d'una) sono tutte corrette, esse possono essere inserite all'interno della cartella <emphasis role="bold">tm/auto</emphasis>, al fine di evitare la conferma dei molteplici casi di <emphasis>concordanze parziali [fuzzy]</emphasis>.</para>
+
+      <para><orderedlist>
+          <listitem>
+            <para>Inserire la TMX nella cartella /tm/auto.</para>
+          </listitem>
+
+          <listitem>
+            <para>Aprire il progetto. Vengono visualizzate le modifiche.</para>
+          </listitem>
+
+          <listitem>
+            <para>Eseguire una piccola modifica in un punto qualsiasi del progetto. Questa operazione modifica <filename>project_save.tmx</filename> (aggiungendo le unità di traduzione appropriate dalla TMX &quot;automatica&quot;)</para>
+          </listitem>
+        </orderedlist></para>
+
+      <para>Nota: se la TMX viene rimossa dalla cartella /tm/auto prima del passaggio 3, non verrà aggiunta alcuna unità di traduzione.</para>
+    </section>
+
+    <section>
+      <title>tm/enforce</title>
+
+      <para>Se si è certi che una TMX è più accurata del file <filename>project_save.tmx</filename> di OmegaT, inserire questa TMX nella cartella /tm/enforce per sovrascrivere in modo categorico le traduzioni predefinite esistenti.</para>
+
+      <para><orderedlist>
+          <listitem>
+            <para>Inserire la TMX nella cartella /tm/enforce.</para>
+          </listitem>
+
+          <listitem>
+            <para>Aprire il progetto. Vengono visualizzate le modifiche.</para>
+          </listitem>
+
+          <listitem>
+            <para>Eseguire una piccola modifica in un punto qualsiasi del progetto. Questa operazione modifica <filename>project_save.tmx</filename>.</para>
+          </listitem>
+
+          <listitem>
+            <para>Decidere riguardo l'immunità dei segmenti forzati:<itemizedlist>
+                <listitem>
+                  <para>Se essi <emphasis>non necessitano</emphasis> di essere protetti da modifiche successive, rimuovere allora la TMX dalla cartella /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Se essi <emphasis>necessitano</emphasis> di essere protetti da modifiche successive, allora mantenere la TMX nella cartella /tm/enforce.</para>
+                </listitem>
+              </itemizedlist></para>
+          </listitem>
+        </orderedlist></para>
+
+      <para>Nota: se la TMX viene rimossa dalla cartella /tm/enforce prima del passaggio 3, la protezione non viene applicata.</para>
+    </section>
+
+    <section>
+      <title>tm/mt</title>
+
+      <para>Nel pannello dell'editor, quando viene inserita una concordanza proveniente da una TMX contenuta in una cartella di nome <filename>mt</filename>, lo sfondo del segmento attivo diventa rosso. Lo sfondo ritorna al colore normale se si lascia il segmento.</para>
+    </section>
+
+    <section>
+      <title>tm/penalty-xxx</title>
+
+      <para>A volte può risultare utile distinguere tra memorie di traduzione di alta qualità e quelle che, a causa dell'argomento, del cliente, dello stato di revisione e via discorrendo, sono ritenute meno affidabili. Per le memorie di traduzione contenute nelle cartelle di nome <filename>penalty-xxx</filename> (xxx tra 0 e 100), le corrispondenze verranno ridotte in base al nome della cartella: una corrispondenza del 100% di una qualsiasi TM contenuta in una cartella chiamata <filename>penalty-30</filename>, per esempio, verrà ridotta al 70%. La penalità si applica a tutt'e tre le percentuali di corrispondenza: le corrispondenze 75, 80, 90, in questo caso, saranno abbassate a 45, 50, 60.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>dictionary</title>
+
+    <para>Al principio vuota, questa cartella conterrà i dizionari che saranno aggiunti al progetto dall'utente. Per ulteriori informazioni sull'argomento, si veda il capitolo <link linkend="appendix.dictionaries">Dizionari</link>.</para>
+  </section>
+
+  <section>
+    <title>glossary</title>
+
+    <para>Al principio questa cartella è vuota. Essa conterrà i glossari che verranno usati nel progetto. Per ulteriori informazioni sull'argomento, si veda il capitolo <link linkend="appendix.glossaries">Glossari</link>.</para>
+  </section>
+
+  <section id="folder.omegat">
+    <title>omegat</title>
+
+    <para>La sotto-cartella <emphasis role="bold">omegat</emphasis> contiene almeno un file ed eventualmente vari altri. Il file più importante è <filename>project_save.tmx, </filename>che è la memoria di traduzione funzionante del progetto. In questa sotto-cartella vengono aggiunte progressivamente copie di sicurezza di questo file (con estensione bak), all'inizio della sessione di traduzione, durante e alla fine.</para>
+
+    <para>Durante la traduzione, in questa sotto-cartella potrebbero essere creati altri file, così come specificato</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>stats.txt</term>
+
+        <listitem>
+          <para>contiene le statistiche attuali del progetto corrente. È possibile visualizzarlo selezionando il comando <guimenuitem>Strumenti &gt; Statistiche</guimenuitem></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>ignored_words.txt.</term>
+
+        <term>learned_words.txt</term>
+
+        <listitem>
+          <para>sono file creati e usati dal correttore ortografico. Se si possiede già una raccolta di parole da far ignorare o accettare al correttore ortografico, basta copiare i file corrispondenti nella sotto-cartella <filename>omegat</filename>del proprio progetto attivo.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>project_stats_match.txt</term>
+
+        <listitem>
+          <para>contiene le ultime statistiche di concordanza del progetto generate dal comando <guimenuitem>Strumenti &gt; Statistiche delle concordanze</guimenuitem></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>segmentation.conf</term>
+
+        <listitem>
+          <para>se esistente, contiene le regole di segmentazione specifiche del progetto.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>filters.xml</term>
+
+        <listitem>
+          <para>se esistente, contiene i filtri dei file specifici del progetto.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>uiLayout.xml</term>
+
+        <listitem>
+          <para>se esistente, contiene le impostazioni specifiche del progetto relative all'interfaccia.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>omegat.project (file)</title>
+
+    <para>Contiene i parametri del progetto come definiti nella finestra di dialogo <link linkend="dialogs.projectproperties">Proprietà del progetto</link>.</para>
+  </section>
+
+  <section>
+    <title>.repositories</title>
+
+    <para>In un progetto in collaborazione, questa cartella contiene una copia di versione della struttura ad albero del progetto collegata direttamente al server remoto.</para>
+
+    <para>È possibile apportare modifiche ai file remoti (per es. eliminando un file) utilizzando questa cartella e un client Git o SVN.</para>
+
+    <para>In alcuni sistemi operativi, per impostazione predefinita questa cartella non viene mostrata. Per renderla visibile, attivare l'opzione &quot;Mostra i file nascosti&quot;.</para>
+  </section>
+</chapter>

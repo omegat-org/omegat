@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title>Allineatore</title>
+
+  <para>L'allineamento comporta la creazione di una memoria di traduzione bilingue da documenti monolingue che sono stati già tradotti.</para>
+
+  <para>Per accedere a questa finestra, selezionare <menuchoice> <guimenuitem>Strumenti</guimenuitem> <guimenuitem>Allinea file...</guimenuitem> </menuchoice>.</para>
+
+  <section>
+    <title>Passaggio 1: regolare i parametri di allineamento</title>
+
+    <para>Se si rende necessario dover migliorare l'allineamento, provare a cambiare i parametri. Nella maggior parte dei casi, più basso è il <guilabel>Punteggio medio</guilabel>, migliore sarà l'allineamento.</para>
+
+    <para>In modalità <guilabel>Heapwise</guilabel>, i testi vengono valutati globalmente. In modalità <guilabel>Parsewise</guilabel>, essi vengono valutati per singolo segmento.</para>
+
+    <para>Usare la modalità <guilabel>Confronto ID</guilabel> per allineare i testi Chiave=Valore. Questo sistema funziona anche se le chiavi nei due file non si trovano nello stesso ordine e, o in alternativa, se i due file non contengono la stessa quantità di informazioni. Questa opzione compare solo se i file selezionati sono entrambi riconosciuti come file Chiave=Valore.</para>
+
+    <para>Gli algoritmi <guilabel>Viterbi</guilabel> e <guilabel>Forward-Backward</guilabel> sono due metodi di calcolo differenti. Scegliere quello che restituisce i risultati migliori.</para>
+
+    <para>Fare clic su <guibutton>Continua</guibutton> per andare al passaggio successivo.</para>
+  </section>
+
+  <section>
+    <title>Passaggio 2: eseguire le correzioni manuali</title>
+
+    <para>Dopo l'elaborazione automatica, l'allineamento di due file richiede in genere correzioni manuali.</para>
+
+    <para>Le unità di traduzione si trovano nelle celle all'interno delle due ultime colonne.</para>
+
+    <para>Per allineare due segmenti sulla stessa riga:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Selezionare il primo segmento.</para>
+      </listitem>
+
+      <listitem>
+        <para>Premere la barra spaziatrice (scorciatoia per <menuchoice> <guimenuitem>Modifica</guimenuitem> <guimenuitem>Avvia allineamento millimetrico</guimenuitem> </menuchoice>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Fare clic nell'altra colonna sulla traduzione che corrisponde al primo segmento.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Dopo aver compiuto varie volte questa operazione, selezionare <menuchoice> <guimenuitem>Modifica</guimenuitem> <guimenuitem>Riallinea In sospeso</guimenuitem> </menuchoice> per aggiornare l'allineamento degli altri segmenti.</para>
+
+    <para>Per modificare singolarmente la posizione di uno o più segmenti, selezionare il segmento, o i segmenti, e premere <userinput>U</userinput> (<guilabel>Sposta in alto</guilabel>) o <userinput>D</userinput> (<guilabel>Sposta in basso</guilabel>).</para>
+
+    <para>Quando sarà creata la memoria di traduzione, saranno incluse solo le righe che nella prima colonna presentano marcata l'opzione <guilabel>Mantieni</guilabel>.</para>
+
+    <para>Quando si ritiene che le due colonne siano sufficientemente allineate, premere il pulsante <guibutton>Salva TMX...</guibutton> per creare la memoria di traduzione risultante.</para>
+  </section>
+</section>

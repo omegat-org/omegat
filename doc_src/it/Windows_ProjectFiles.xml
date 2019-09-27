@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.projectfiles">
+  <title>File del progetto</title>
+
+  <para>Questa finestra viene aperta automaticamente ogni volta che OmegaT carica un progetto e ogni volta che si fa clic su <menuchoice> <guimenuitem>Progetto</guimenuitem> <guimenuitem>File del progetto...</guimenuitem> </menuchoice>.</para>
+
+  <para><remark>Nota:</remark> è possibile inibire la visualizzazione della finestra all'apertura impostando il comando <emphasis>project_files_show_on_load</emphasis> a <emphasis>false</emphasis> nel file <filename>omegat.prefs</filename> (raggiungibile dal menu <menuchoice> <guimenuitem>Opzioni</guimenuitem> <guimenuitem>Accedi alla cartella di configurazione</guimenuitem> </menuchoice>).</para>
+
+  <para>Utilizzare <guimenuitem>Ctrl+L</guimenuitem> per aprirla ed <keycap>Esc</keycap> per chiuderla. La finestra <guilabel>File del progetto</guilabel>  visualizza le seguenti informazioni:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>il numero totale dei file traducibili nel progetto. Si tratta dei file contenuti nella cartella /source in un formato che OmegaT è in grado di riconoscere. Il numero è visualizzato tra parentesi, affianco al titolo &quot;File del progetto&quot;</para>
+    </listitem>
+
+    <listitem>
+      <para>l'elenco di tutti i file da tradurre che compongono il progetto. Quando si fa clic su uno dei file, questo verrà aperto e su di esso si potrà immediatamente iniziare a lavorare.</para>
+
+      <para>Digitando del testo si aprirà un <guilabel>filtro</guilabel> in cui potranno essere immesse parti del nome dei file. È possibile selezionare un file tramite i tasti freccia <keycap>Su</keycap> e <keycap>Giù</keycap> e aprirlo per lavorarlo premendo <keycap>Invio</keycap></para>
+
+      <para>Nota: i nomi dei file (nella prima colonna) si possono ordinare alfabeticamente premendo l'intestazione di colonna. È anche possibile modificare la posizione di un nome di file, facendovi clic sopra e premendo i pulsanti <emphasis>Sposta...</emphasis>.</para>
+
+      <para>Il clic col pulsante destro del mouse su un nome di file apre un riquadro che consente di aprire il file di partenza e (se è presente) il file di arrivo.</para>
+    </listitem>
+
+    <listitem>
+      <para>Le voci del file comprendono i loro nomi, i tipi di filtri dei file, la loro codifica e il numero dei segmenti che ciascun file contiene</para>
+    </listitem>
+
+    <listitem>
+      <para>nella parte inferiore sono visualizzati il numero totale dei segmenti, il numero di segmenti univoci contenuti nell'intero processo e quello dei segmenti univoci già tradotti</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>La serie dei segmenti <emphasis role="bold">univoci</emphasis>viene calcolata prendendo in considerazione tutti i segmenti e rimuovendo tutti i segmenti duplicati  (la definizione di “univoco” è sensibile alle maiuscole/minuscole: &quot;Avvio&quot; e &quot;avvio&quot; sono considerati differenti).</para>
+
+  <para>La differenza fra il “Numero dei segmenti” e il “Numero dei segmenti univoci” potrà fornire un quadro approssimativo del numero delle ripetizioni contenute nel testo. Si noti, comunque, che i numeri non indicano quanto importanti siano le ripetizioni: queste possono corrispondere a frasi relativamente lunghe che vengono ripetute per più volte (in questo caso si è molto fortunati), oppure possono descrivere una tabella di parole chiave (e allora non si è poi così fortunati). Il file <filename>project_stats.txt</filename> che si trova nella cartella omegat del progetto contiene informazioni più dettagliate sui segmenti, suddivisi per file.</para>
+
+  <para>La modifica delle regole di segmentazione possono provocare la variazione del numero di segmenti/segmenti univoci. Questa procedura dovrebbe, però, essere evitata dopo aver iniziato la traduzione di un progetto. Per ulteriori informazioni si veda il capitolo <emphasis>Regole di segmentazione</emphasis>.</para>
+
+  <para><emphasis role="bold">Aggiunta di file al progetto: </emphasis>facendo clic sul pulsante &quot;<guimenuitem>Importa i file di partenza...&quot;</guimenuitem> si ha la possibilità di aggiungere nuovi file al progetto. Il comando copia i file selezionati nella cartella <filename>source</filename> e ricarica il progetto per importare i nuovi file. Facendo clic sul pulsante <guimenuitem> &quot;Importa da MediaWiki&quot;</guimenuitem> e indicando l'URL corrispondente, si ha la possibilità di aggiungere pagine internet scritte in formato MediaWiki.</para>
+</section>

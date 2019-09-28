@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   2 Enhancements
   1 Bug fix
-  7 Localisation updates
+  8 Localisation updates
 ----------------------------------------------------------------------
 5.0.0 vs 4.3.0
 
@@ -22,6 +22,7 @@
   Localisation Updates:
 
   - Basque localisation updated to 5.0.0 (UI, Instant Start, scripts, readme)
+  - Czech localisation updated to 5.0.0 (UI, scripts)
   - Dutch localisation updated to 5.0.0 (UI)
   - French localisation updated to 5.0.0 (UI)
   - Italian localisation updated to 5.0.0 (UI, scripts, documentation)

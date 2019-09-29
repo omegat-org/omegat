@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
 
@@ -77,6 +78,10 @@ public class ImportFromAutoTMX {
                 boolean hasICE = id != null && e.hasPropValue(ProjectTMX.PROP_XICE, id);
                 boolean has100PC = id != null && e.hasPropValue(ProjectTMX.PROP_X100PC, id);
 
+                if (e.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
+                    // Never automatically include matches from foreign languages.
+                    continue;
+                }
                 if (!hasICE && !has100PC) { // TMXEntry without x-ids
                     boolean isDefaultTranslation = !isAltTranslation(e);
                     if (!existTranslation.defaultTranslation && isDefaultTranslation) {

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.managerighttoleft">
+  <title>Gestione delle lingue da destra a sinistra (Right-To-Left, RTL)</title>
+
+   <para>La giustificazione dei segmenti di partenza e di arrivo dipende dalle lingue del progetto. Per impostazione predefinita, la giustificazione a sinistra è usata per le lingue da sinistra a destra (LTR), e quella a destra per le lingue da destra a sinistra (RTL). È possibile commutare tra i diversi modi di visualizzazione premendo <keycombo> <keycap>Maiusc</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> (lettera O e non il numerale 0). Il comando di commutazione <keycombo> <keycap>Maiusc</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> ha tre stati:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>giustificazione predefinita, ossia quella definita dalla lingua</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>giustificazione a sinistra</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>giustificazione a destra</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>L'uso della modalità RTL in <application>OmegaT</application> non ha alcuna influenza sulla modalità di visualizzazione dei documenti tradotti creati in <application>OmegaT</application>. La modalità di visualizzazione dei documenti tradotti deve essere modificata all'interno dell'applicazione (come Microsoft Word)comunemente usata per visualizzarli o modificarli (consultare i manuali appropriati per i dettagli). L'uso di <keycombo> <keycap>Maiusc</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> modifica l'immissione e la visualizzazione del testo in <application>OmegaT</application>. Può essere usata in modo separato per i tre pannelli (Editor, Concordanze parziali e Glossario) facendo clic sul pannello e commutando la modalità di visualizzazione. Può essere usata anche in tutti i campi di immissione di <application>OmegaT</application> - nella finestra della ricerca, per le regole di segmentazione, ecc.</para>
+
+    <para>Nota per gli utenti di Mac OS X: usare la scorciatoia <keycombo> <keycap>Maiusc</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> e <emphasis role="bold">non </emphasis>cmd+Ctrl+O.</para>
+
+    <section>
+      <title>Unire stringhe RTL e LTR in segmenti</title>
+
+      <para>Quando si scrive semplicemente del testo RTL, può essere usata la visualizzazione predefinita (LTR). In molti casi, tuttavia, si rende necessario incorporare testo LTR in testo RTL. Per esempio, nei tag OmegaT, possono essere nomi di prodotto che si devono mantenere nella lingua LTR di partenza, segnaposto nei file di localizzazione e numeri nel testo. In questi casi è necessario passare alla modalità RTL, affinché il testo RTL (di fatto bidirezionale) venga visualizzato correttamente. Bisogna notare che quando <application>OmegaT</application> è in modalità RTL, sia i segmenti di partenza che quelli di arrivo vengono visualizzati in modalità RTL. Ciò significa che se la lingua di partenza è LTR e quella di arrivo è RTL, o viceversa, potrebbe essere necessario alternare le due modalità per visualizzare agevolmente i segmenti di partenza e digitare quelli di arrivo nella modalità relativa.</para>
+    </section>
+
+    <section>
+      <title>Tag <application>OmegaT</application> nei segmenti RTL</title>
+
+      <para>Come detto poc'anzi, i tag OmegaT sono stringhe LTR. Quando si traduce tra lingue RTL e LTR, il traduttore potrebbe aver bisogno di alternare spesso le modalità LTR e RTL per leggere correttamente i tag dal file di partenza e digitarli correttamente in quello di arrivo.</para>
+
+      <para>Se il documento lo consente, al traduttore si raccomanda caldamente di rimuovere le informazioni di stile dal documento originale, affinché appaiano meno tag possibili nell'interfaccia di OmegaT. Seguire le indicazioni fornite in Consigli per la gestione dei tag. Convalidare i tag frequentemente (consultare Convalida dei tag) e produrre i documenti di arrivo (vedere sotto e Menu) a intervalli regolari per rendere più semplice individuare qualsiasi problema che possa sorgere. Suggerimento: potrebbe essere meno complicato tradurre una versione del documento in solo testo e aggiungere gli stili necessari in un momento successivo, all'interno dell'applicazione appropriata.</para>
+    </section>
+
+    <section>
+      <title>Creare documenti di arrivo RTL</title>
+
+      <para>Quando viene creato un documento di arrivo, la sua direzione di visualizzazione sarà quella del documento originale. Se il documento originale era LTR, la direzione di visualizzazione del documento di arrivo deve essere cambiata manualmente in RTL nella sua applicazione per la visualizzazione. Ciascun formato di uscita ha un modo specifico di trattare la visualizzazione RTL; per i dettagli consultare i manuali delle applicazioni appropriate.</para>
+
+      <para>Per i file .docx, vengono comunque eseguite automaticamente una serie di modifiche:<itemizedlist>
+          <listitem>I paragrafi, le sezioni e le tabelle sono impostate nel formato bidirezionale</listitem>
+
+          <listitem>Le direzioni (elementi di testo) sono impostate a RTL</listitem>
+        </itemizedlist></para>
+
+      <para>Per evitare la modifica dei parametri di visualizzazione dei file di arrivo ogni volta che i file sono aperti, può essere possibile cambiare i parametri di visualizzazione dei file di partenza, affinché essi vengano passati a quelli di arrivo. Tali modifiche sono possibili nei file ODF, per esempio.</para>
+
+  </section>
+</section>

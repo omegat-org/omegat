@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>Opzioni</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Preferenze...</term>
+
+      <listitem>
+        <para>Apre la finestra di dialogo delle <link linkend="dialogs.preferences">Preferenxe</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Traduzione automatica</term>
+
+      <listitem>
+        <para>Permette di attivare/disattivare gli strumenti di Traduzione automatica offerti.</para>
+
+        <para>Se sono selezionati più motori di traduzione automatica, viene utilizzata anche la combinazione di tasti <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> per passare da un motore all'altro e inserire l'ultima traduzione selezionata.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Glossario</term>
+
+      <listitem>
+        <para>Selezionare <guimenuitem>Ricerca terminologica TaaS</guimenuitem> per attivare questa ricerca.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Dizionario</term>
+
+      <listitem>
+        <para>Attivare l'opzione <guimenuitem>Usa la concordanza parziale per le voci di dizionario</guimenuitem> se si desidera che i dizionari mostrino le parole contenenti la medesima radice.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Completamento automatico</term>
+
+      <listitem>
+        <para>Se l'opzione <guimenuitem>Mostra automaticamente i suggerimenti pertinenti</guimenuitem> è attivata, il completamento automatico viene avviato automaticamente digitando le prime lettere della voce di glossario tradotta, o digitando &quot;&lt;&quot; nel caso di tag.</para>
+
+        <para>Attivare l'opzione <guimenuitem>Abilita il completamento cronologia</guimenuitem> per visualizzare le parole suggerite durante la digitazione delle loro prime lettere.</para>
+
+        <para>Attivare l'opzione <guimenuitem>Abilita la predizione cronologia</guimenuitem> per visualizzare le parole suggerite che seguono comunemente la parola che è stata appena digitata.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Filtri dei file...</term>
+
+      <listitem>
+        <para>Apre la finestra di dialogo <link linkend="dialogs.preferences.filefilters">Filtri dei file</link> all'interno delle Preferenze.</para>
+
+        <para>Queste impostazioni si applicano al livello generale di OmegaT, ossia coinvolgono tutti i progetti.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentazione...</term>
+
+      <listitem>
+        <para>Apre le opzioni <link linkend="dialogs.preferences.segmentationsetup">Configura la segmentazione</link> all'interno della finestra di dialogo delle Preferenze.</para>
+
+        <para>Queste impostazioni si applicano al livello generale di OmegaT, ossia coinvolgono tutti i progetti.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Editor...</term>
+
+      <listitem>
+        <para>Apre le opzioni <link linkend="dialogs.preferences.editor">Editor</link> all'interno della finestra di dialogo delle Preferenze.</para>
+
+        <para>Queste impostazioni si applicano al livello generale di OmegaT, ossia coinvolgono tutti i progetti.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Accedi alla cartella di configurazione</term>
+
+      <listitem>
+        <para>Apre la cartella locale in cui sono memorizzati i file di configurazione di OmegaT (dipende dal sistema operativo utilizzato).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

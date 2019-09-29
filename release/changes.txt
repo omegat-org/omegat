@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   2 Enhancements
   1 Bug fix
-  1 Localisation update
+  8 Localisation updates
 ----------------------------------------------------------------------
 5.0.0 vs 4.3.0
 
@@ -21,8 +21,14 @@
 
   Localisation Updates:
 
+  - Basque localisation updated to 5.0.0 (UI, Instant Start, scripts, readme)
+  - Czech localisation updated to 5.0.0 (UI, scripts)
+  - Dutch localisation updated to 5.0.0 (UI)
+  - French localisation updated to 5.0.0 (UI)
+  - Italian localisation updated to 5.0.0 (UI, scripts, documentation)
+  - Russian localisation updated to 5.0.0 (UI)
+  - Simplified Chinese localisation updated to 5.0.0 (UI, scripts)
   - Ukrainian localisation updated to 5.0.0 (UI, Instant Start, scripts, readme)
-
 
 ----------------------------------------------------------------------
  OmegaT 4.3.0 (2019-07-09)

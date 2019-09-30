@@ -238,7 +238,6 @@ ext {
 
     macJRE = fileTree(dir: assetDir, include: 'jre-*-macosx-x64.tar.gz')
 
-    linuxJRE = fileTree(dir: assetDir, include: 'jre-*-linux-i586.tar.gz')
     linux64JRE = fileTree(dir: assetDir, include: 'jre-*-linux-x64.tar.gz')
 
     windowsJRE = fileTree(dir: assetDir, include: 'jre-*-windows-i586.tar.gz')
@@ -376,17 +375,15 @@ distributions {
         }
     }
 
-    [linux: linuxJRE, linux64: linux64JRE].each { distName, jrePath ->
-        create(distName) {
-            contents {
-                with main.contents
-                exclude 'OmegaT.bat'
-                if (!jrePath.empty) {
-                    from(tarTree(jrePath.singleFile)) {
-                        includeEmptyDirs = false
-                        eachFile {
-                            replaceRelativePathSegment(it, /jre.*/, 'jre')
-                        }
+    linux64 {
+        contents {
+            with main.contents
+            exclude 'OmegaT.bat'
+            if (!linux64JRE.empty) {
+                from(tarTree(linux64JRE.singleFile)) {
+                    includeEmptyDirs = false
+                    eachFile {
+                        replaceRelativePathSegment(it, /jre.*/, 'jre')
                     }
                 }
             }
@@ -486,22 +483,20 @@ task mac(dependsOn: [macDistZip, macSignedDistZip]) {
     description = 'Build the Mac distributions.'
 }
 
-task linux(dependsOn: [linuxDistTar, linux64DistTar]) {
+task linux(dependsOn: [linux64DistTar]) {
     description = 'Build the Linux distributions.'
 }
-[installLinuxDist, installLinux64Dist].each {
-    it.doFirst {
+
+linux64DistTar {
+    onlyIf {
+        condition(!linux64JRE.empty, 'JRE not found')
+    }
+    doFirst {
         delete "$destinationDir/jre"
     }
-}
-[(linuxDistTar): linuxJRE, (linux64DistTar): linux64JRE].each { task, requirement ->
-    task.onlyIf {
-        condition(!requirement.empty, 'JRE not found')
-    }
-    def suffix = task.name.contains('64') ? 'Linux_64' : 'Linux'
-    task.archiveName = "${applicationName}_${version}${omtVersion.beta}_${suffix}.tar.bz2"
-    task.compression = Compression.BZIP2
-    task.extension = 'tar.bz2'
+    archiveName = "${applicationName}_${version}${omtVersion.beta}_Linux_64.tar.bz2"
+    compression = Compression.BZIP2
+    extension = 'tar.bz2'
 }
 
 task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.0.0
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   1 Bug fix
   9 Localisation updates
 ----------------------------------------------------------------------
@@ -11,9 +11,12 @@
 
   - Supports for BCP47 language tags
   https://sourceforge.net/p/omegat/feature-requests/238/
- 
+
   - Display fuzzy matches for all translations in the matching language
   https://sourceforge.net/p/omegat/feature-requests/1452/
+
+  - Switch to a non-Oracle runtime: Bundled JRE is now AdoptOpenJDK
+  https://sourceforge.net/p/omegat/feature-requests/1455/
 
   Bug fixes:
 

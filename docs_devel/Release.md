@@ -41,7 +41,7 @@ git push origin vX.Y.Z
 ```
 
 
-## 6. Run build job on Azure Devops
+## 6. Run build job on Azure DevOps
 
 1. Go to [OmegaT Builds](https://dev.azure.com/omegat-org/OmegaT/_build)
 2. Queue a Release Build, specifying for Branch the tag created earlier,

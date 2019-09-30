@@ -1,0 +1,2161 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;3.&nbsp;Finestre e finestre di dialogo</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2- Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT 4.2- Manuale dell'Utente">
+      <link rel="prev" href="menus.html" title="Chapter&nbsp;2.&nbsp;Menu">
+      <link rel="next" href="panes.html" title="Chapter&nbsp;4.&nbsp;Pannelli">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;3.&nbsp;Finestre e finestre di dialogo</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="menus.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="panes.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="windows.and.dialogs"></a>Chapter&nbsp;3.&nbsp;Finestre e finestre di dialogo
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.projectproperties">1. Proprietà del progetto</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2130">1.1. Lingue</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2137">1.2. Opzioni</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2234">1.3. Posizioni dei file</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.projectfiles">2. File del progetto</a></span></dt>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.textsearch">3. Ricerca testo</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#using.wild.cards">3.1. Uso dei caratteri jolly</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#search.methoids">3.2. Metodi e opzioni di ricerca</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#search.result.display">3.3. Visualizzazione dei risultati</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#search.filter">3.4. Voci dei filtri nell'editor in base alla ricerca</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.textreplace">4. Sostituzione testo</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2757">4.1. Opzioni di ricerca</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.aligner">5. Allineatore</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2785">5.1. Passaggio 1: regolare i parametri di allineamento</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2819">5.2. Passaggio 2: eseguire le correzioni manuali</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#windows.scripts">6. Script</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2886">6.1. Uso</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2935">6.2. Linguaggi delle azioni di script</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences">7. Preferenze generali</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2968">7.1. Generale</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2984">7.2. Traduzione automatica</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3028">7.3. Glossario</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.dictionary">7.4. Dizionario</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3120">7.5. Aspetto</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.filefilters">7.6. Filtri dei file</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup">7.7. Configura la segmentazione</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3740">7.8. Completamento automatico</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3768">7.9. Correttore ortografico</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3776">7.10. Plugin LanguageTool</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.externalsearch">7.11. Ricerca esterna</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.editor">7.12. Editor</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.tagprocessing">7.13. Elaborazione dei tag</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3988">7.14. Squadra...</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3998">7.15. Concordanze TM</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4101">7.16. Vista</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.savingandoutput">7.17. Salvataggio e risultato</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4150">7.18. Accesso proxy</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4155">7.19. Memorizzazione sicura</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4160">7.20. Plugin</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4168">7.21. Aggiornamenti</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <p>La differenza è sottile: chiamiamo "Finestra" una finestra che può restare aperta vicino all'editor e interagisce con esso,
+            mentre chiamiamo "finestra di dialogo" una finestra in cui si devono selezionare dei parametri prima di chiuderla e segue
+            l'attività di traduzione.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="dialogs.projectproperties"></a>1.&nbsp;Proprietà del progetto
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questa finestra di dialogo è raggiungibile selezionando <span class="guimenuitem">Progetto</span> → <span class="guimenuitem">Proprietà...</span></p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2130"></a>1.1.&nbsp;Lingue
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>L'indicazione della lingua può essere inserita manualmente, oppure tramite una selezione dagli elenchi a cascata disponibili.
+                  Tenere presente che la modifica delle lingue potrebbe rendere inutile la memoria di traduzione in uso, se la coppia di lingue
+                  precedentemente impostata non dovesse corrispondere più a quella immessa in corso d'opera.
+               </p>
+               <p>Vengono visualizzati i tokenizer che corrispondono alle lingue selezionate.</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2137"></a>1.2.&nbsp;Opzioni
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Abilita la segmentazione a livello di frase</span></dt>
+                     <dd>
+                        <p>Le impostazioni di segmentazione si occupano solo del modo in cui <span class="application">OmegaT</span> gestisce i file di partenza. Il metodo prevalente di segmentazione dei file sorgenti è quello a livello di frase, dunque
+                           questa opzione dovrebbe essere lasciata normalmente attivata.
+                        </p>
+                        <p>In alcuni rari casi può essere preferibile usare un'alternativa, per es. la segmentazione a livello di paragrafo. La modifica
+                           di questa impostazione non cambia la segmentazione delle memorie di traduzione già esistenti. Se, a metà del lavoro, si decide
+                           di passare da una traduzione a livello di frase a quella a livello di paragrafo, la memoria di traduzione interna del progetto
+                           non verrà alterata (OmegaT può aggiornare le vecchie memorie di traduzione che non utilizzano la segmentazione per frasi,
+                           ma non viceversa). ma OmegaT tenterà di creare corrispondenze parziali di paragrafo combinando assieme le traduzioni di frasi
+                           esistenti.
+                        </p>
+                        <p>La modifica delle impostazioni di segmentazione potrebbe causare il frazionamento o l'accorpamento dei segmenti già tradotti.
+                           Ciò li riporterebbe alla condizione di "non tradotti", dato che, nonostante la vecchia traduzione sia ancora presente, non
+                           corrisponderebbero più ai segmenti registrati nella memoria del progetto.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Propagazione automatica delle traduzioni</span></dt>
+                     <dd>
+                        <p>Nel caso di presenza di segmenti non univoci nei documenti di partenza, l'opzione di Propagazione automatica offre due possibilità,
+                           relativamente alla traduzione automatica: se attivata, il primo segmento tradotto verrà trattato come traduzione predefinita
+                           e il suo testo di destinazione sarà usato automaticamente per le successive corrispondenze durante il lavoro di traduzione.
+                           I segmenti tradotti male possono essere, naturalmente, corretti manualmente in un momento tramite la funzione <span class="guimenuitem">Crea traduzione alternativa</span>. Se l'opzione di propagazione automatica non viene attivata, i segmenti con traduzioni alternative verranno lasciati non
+                           tradotti fino a quando l'utente non decida quale traduzione usare.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Rimuovi i tag</span></dt>
+                     <dd>
+                        <p>Se l'opzione è attivata, tutti i tag di formattazione sono rimossi dai segmenti di partenza. Ciò è particolarmente utile quando
+                           si ha a che fare con testi la cui formattazione incorporata non ha una concreta utilità (per es., PDF OCRed, file .odt o .docx
+                           convertiti in modo errato, e via discorrendo). Nei casi normali deve essere sempre possibile aprire i documenti di destinazione,
+                           dato che solo i tag incorporati vengono rimossi. Nei documenti di arrivo, la formattazione non visibile (per esempio, quella
+                           che non appare sotto forma di tag nell'editor di OmegaT) viene mantenuta.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Comando esterno di post-elaborazione</span></dt>
+                     <dd>
+                        <p>In quest'area è possibile digitare un comando di post-elaborazione esterna (per esempio, uno script che rinomina i file) che
+                           sarà applicato ogni volta che viene utilizzato il comando Crea i documenti di arrivo. Questo comando esterno non permette
+                           di includere "pipe", ecc., motivo per cui è raccomandato il richiamo di uno script.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><span class="guibutton">Segmentazione...</span></span></dt>
+                     <dd>
+                        <p>Le regole di segmentazione valgono, in genere, per tutti i progetti. L'utente, tuttavia, potrebbe aver necessità di creare
+                           regole specifiche per il proprio progetto. Utilizzare questo pulsante per aprire la finestra di dialogo, poi attivare l'opzione
+                           <span class="guimenuitem">Regole di segmentazione specifiche del progetto</span> e regolare la segmentazione a proprio piacimento. Il nuovo gruppo di regole sarà memorizzato assieme al progetto e non influenzerà
+                           il gruppo di regole generali di segmentazione. Per eliminare le regole di segmentazione specifiche del progetto, deselezionare
+                           la casella. Per ulteriori informazioni sulle regole di segmentazione, si veda <a class="link" href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup" title="7.7.&nbsp;Configura la segmentazione">Preferenze della Configurazione della segmentazione</a>.
+                        </p>
+                        <p><span class="emphasis"><em>Suggerimento:</em></span> il gruppo di regole di segmentazione di uno specifico progetto vengono memorizzate nel file <code class="filename">project/omegat/segmentation.conf.</code></p>
+                     </dd>
+                     <dt><span class="term"><span class="guibutton">Filtri dei file...</span></span></dt>
+                     <dd>
+                        <p>In un modo simile a quello sopra descritto, è possibile creare filtri dei file specifici del progetto, che saranno memorizzati
+                           al suo interno e varranno esclusivamente per esso. Per creare un gruppo di filtri dei file specifici del progetto, fare clic
+                           sul pulsante <span class="guibutton">Filtri dei file... </span>, poi attivare l'opzione <span class="guimenuitem">Abilita filtri specifici del progetto</span>, all'interno della finestra che appare. La copia della configurazione dei filtri modificati verrà memorizzata all'interno
+                           del progetto. Per eliminare i filtri dei file specifici del progetto, deselezionare la casella. Si noti che nel menu <span class="guimenuitem">Opzioni -&gt; Filtri dei file</span>, vengono modificati i file generali dell'utente, non quelli specifici del progetto. Per ulteriori informazioni sull'argomento,
+                           si veda <a class="link" href="windows.and.dialogs.html#dialogs.preferences.filefilters" title="7.6.&nbsp;Filtri dei file">Preferenze dei Filtri dei file</a>.
+                        </p>
+                        <p><span class="emphasis"><em>Suggerimento:</em></span> il gruppo dei filtri dei file di uno specifico progetto viene memorizzato nel file <code class="filename">project/omegat/filters.xml.</code></p>
+                     </dd>
+                     <dt><span class="term">Mappatura del deposito...</span></dt>
+                     <dd>
+                        <p>Quando si lavora in un progetto in collaborazione, questa finestra consente di definire la mappatura tra le cartelle remote
+                           e quelle locali (si vedano <a class="link" href="howtos.html#howto.setupteamproject.mappingparameters" title="1.5.&nbsp;Mappatura dei parametri">qui</a> degli esempi).
+                        </p>
+                     </dd>
+                     <dt><span class="term">Ricerca esterna...</span></dt>
+                     <dd>
+                        <p>Definisce le risorse di ricerca esterna specifiche del progetto.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2234"></a>1.3.&nbsp;Posizioni dei file
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>È qui possibile selezionare sotto-cartelle diverse, per esempio la sotto-cartella con i file di partenza, quella per i file
+                  di destinazione, e via discorrendo. Se si inseriscono manualmente i nomi delle cartelle non ancora esistenti, <span class="application">OmegaT</span> si occuperà automaticamente per la loro creazione. Nel caso si volessero modificare le cartelle del progetto, tenere presente
+                  che l'azione non sposterà i file contenuti dalle vecchie cartelle alla nuova posizione.
+               </p>
+               <p>Fare clic su <span class="guibutton">Esclusioni...</span> per definire i file o le cartelle che <span class="application">OmegaT</span> dovrà ignorare. Un file o una cartella ignorata:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>non sono visualizzati nel pannello dell'Editor,</p>
+                     </li>
+                     <li class="listitem">
+                        <p>non vengono considerati nelle statistiche,</p>
+                     </li>
+                     <li class="listitem">
+                        <p>non sono copiati nella cartella /target durante il processo di creazione dei file tradotti.</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Nella finestra di dialogo Modelli di esclusione è possibile aggiungere o rimuovere un modello, oppure modificarne uno selezionando
+                  una riga e premendo F2. L'uso dei caratteri jolly è consentito, tramite <a class="ulink" href="https://ant.apache.org/manual/dirtasks.html#patterns" target="_top">sintassi ant</a>.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.projectfiles"></a>2.&nbsp;File del progetto
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questa finestra viene aperta automaticamente ogni volta che OmegaT carica un progetto e ogni volta che si fa clic su <span class="guimenuitem">Progetto</span> → <span class="guimenuitem">File del progetto...</span>.
+            </p>
+            <p><em><span class="remark">Nota:</span></em> è possibile inibire la visualizzazione della finestra all'apertura impostando il comando <span class="emphasis"><em>project_files_show_on_load</em></span> a <span class="emphasis"><em>false</em></span> nel file <code class="filename">omegat.prefs</code> (raggiungibile dal menu <span class="guimenuitem">Opzioni</span> → <span class="guimenuitem">Accedi alla cartella di configurazione</span>).
+            </p>
+            <p>Utilizzare <span class="guimenuitem">Ctrl+L</span> per aprirla ed <span class="keycap"><strong>Esc</strong></span> per chiuderla. La finestra <span class="guilabel">File del progetto</span>  visualizza le seguenti informazioni:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>il numero totale dei file traducibili nel progetto. Si tratta dei file contenuti nella cartella /source in un formato che
+                        OmegaT è in grado di riconoscere. Il numero è visualizzato tra parentesi, affianco al titolo "File del progetto"
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>l'elenco di tutti i file da tradurre che compongono il progetto. Quando si fa clic su uno dei file, questo verrà aperto e
+                        su di esso si potrà immediatamente iniziare a lavorare.
+                     </p>
+                     <p>Digitando del testo si aprirà un <span class="guilabel">filtro</span> in cui potranno essere immesse parti del nome dei file. È possibile selezionare un file tramite i tasti freccia <span class="keycap"><strong>Su</strong></span> e <span class="keycap"><strong>Giù</strong></span> e aprirlo per lavorarlo premendo <span class="keycap"><strong>Invio</strong></span></p>
+                     <p>Nota: i nomi dei file (nella prima colonna) si possono ordinare alfabeticamente premendo l'intestazione di colonna. È anche
+                        possibile modificare la posizione di un nome di file, facendovi clic sopra e premendo i pulsanti <span class="emphasis"><em>Sposta...</em></span>.
+                     </p>
+                     <p>Il clic col pulsante destro del mouse su un nome di file apre un riquadro che consente di aprire il file di partenza e (se
+                        è presente) il file di arrivo.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Le voci del file comprendono i loro nomi, i tipi di filtri dei file, la loro codifica e il numero dei segmenti che ciascun
+                        file contiene
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>nella parte inferiore sono visualizzati il numero totale dei segmenti, il numero di segmenti univoci contenuti nell'intero
+                        processo e quello dei segmenti univoci già tradotti
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>La serie dei segmenti <span class="bold"><strong>univoci</strong></span>viene calcolata prendendo in considerazione tutti i segmenti e rimuovendo tutti i segmenti duplicati  (la definizione di “univoco”
+               è sensibile alle maiuscole/minuscole: "Avvio" e "avvio" sono considerati differenti).
+            </p>
+            <p>La differenza fra il “Numero dei segmenti” e il “Numero dei segmenti univoci” potrà fornire un quadro approssimativo del numero
+               delle ripetizioni contenute nel testo. Si noti, comunque, che i numeri non indicano quanto importanti siano le ripetizioni:
+               queste possono corrispondere a frasi relativamente lunghe che vengono ripetute per più volte (in questo caso si è molto fortunati),
+               oppure possono descrivere una tabella di parole chiave (e allora non si è poi così fortunati). Il file <code class="filename">project_stats.txt</code> che si trova nella cartella omegat del progetto contiene informazioni più dettagliate sui segmenti, suddivisi per file.
+            </p>
+            <p>La modifica delle regole di segmentazione possono provocare la variazione del numero di segmenti/segmenti univoci. Questa
+               procedura dovrebbe, però, essere evitata dopo aver iniziato la traduzione di un progetto. Per ulteriori informazioni si veda
+               il capitolo <span class="emphasis"><em>Regole di segmentazione</em></span>.
+            </p>
+            <p><span class="bold"><strong>Aggiunta di file al progetto: </strong></span>facendo clic sul pulsante "<span class="guimenuitem">Importa i file di partenza..."</span> si ha la possibilità di aggiungere nuovi file al progetto. Il comando copia i file selezionati nella cartella <code class="filename">source</code> e ricarica il progetto per importare i nuovi file. Facendo clic sul pulsante <span class="guimenuitem"> "Importa da MediaWiki"</span> e indicando l'URL corrispondente, si ha la possibilità di aggiungere pagine internet scritte in formato MediaWiki.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.textsearch"></a>3.&nbsp;Ricerca testo
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Aprire la finestra “Cerca” tramite la combinazione da tastiera <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> e inserire nel campo <span class="emphasis"><em>Cerca</em></span> la parola o la frase da trovare.
+            </p>
+            <p>In alternativa, selezionare una parola o una frase nella finestra dell'Editor e premere <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. La parola o la frase selezionata viene automaticamente immessa all'interno del campo <span class="emphasis"><em>Cerca</em></span>. È possibile mantenere aperte contemporaneamente più finestre di ricerca, ma è preferibile chiuderle quando non sono più
+               necessarie, per non intasare lo spazio di lavoro in cui si sta lavorando.
+            </p>
+            <p>Fare clic sulla freccia del menu a tendina della finestra <span class="emphasis"><em>Cerca</em></span> per visualizzare le ultime dieci ricerche.
+            </p>
+            <p>La finestra Cerca ha i suoi propri menu:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>File &gt; Cerca selezione (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>): il programma si posiziona sul campo di ricerca e seleziona tutto il suo contenuto.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>File &gt; Chiudi (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>W</strong></span>): chiude la finestra di ricerca (alla stessa maniera del comando <span class="keycap"><strong>Esc</strong></span>)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Modifica &gt; Inserisci il testo di partenza (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>I</strong></span>): inserisce il segmento di partenza corrente.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Modifica &gt; Sostituisci col testo di partenza (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>R</strong></span>): sostituisce col segmento corrente del testo di partenza.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Modifica &gt; Crea voce di glossario (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>G</strong></span>): aggiunge un nuovo elemento di glossario.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="using.wild.cards"></a>3.1.&nbsp;Uso dei caratteri jolly
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Sia le ricerche esatte, sia quelle di parole chiave consentono di utilizzare i caratteri jolly '*' and '?'. Il loro significato
+                  è familiare agli utenti di Word:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>'*' corrisponde a zero caratteri o più caratteri consecutivi, dalla posizione attuale in una parola data fino alla sua fine.
+                           Il termine di ricerca <code class="literal">'mobil*'</code>, per esempio, potrebbe estrarre le parole <code class="literal">'mobile'</code>, <code class="literal">'mobili'</code> e <code class="literal">'mobilità'</code>.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>'?' corrisponde a qualsiasi singolo carattere. Per esempio, <code class="literal">'run?'</code> estrarrà le parole <code class="literal">'runs'</code> e <code class="literal">'runn'</code> all'interno della parola <code class="literal">'running'</code>.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Le corrispondenze verranno visualizzate in grassetto blu. Si noti che '*' e '?' possiedono un significato speciale nelle espressioni
+                  regolari, dunque la ricerca con caratteri jolly, come qui descritta, è valida solo per la ricerca di parole chiave e la ricerca
+                  esatta (vedere sotto).
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="search.methoids"></a>3.2.&nbsp;Metodi e opzioni di ricerca
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Selezionare il metodo di ricerca tramite i pulsanti di scelta. Sono disponibili i seguenti metodi di ricerca:</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">ricerca esatta</span></dt>
+                     <dd>
+                        <p>Avvia la ricerca dei segmenti contenenti esattamente la stringa specificata. Una ricerca esatta di una frase, per esempio
+                           se vengono inserite varie parole, darà un risultato solo se le parole immesse verranno individuate in quella medesima sequenza.
+                           Ricercare <code class="literal">open file</code> individuerà dunque tutte le occorrenze della stringa <span class="emphasis"><em><code class="literal">open file</code></em></span>, ma non <span class="emphasis"><em><code class="literal">file opened</code></em></span> o <span class="emphasis"><em><code class="literal">open input file</code></em></span>.
+                        </p>
+                     </dd>
+                     <dt><span class="term">ricerca con parole chiave</span></dt>
+                     <dd>
+                        <p>Avvia la ricerca dei segmenti contenenti tutte le parole specificate, indipendentemente dall'ordine di immissione. Selezionare
+                           la ricerca con parole chiave per eseguire una ricerca su un qualsiasi numero di parole intere singole, in qualsiasi ordine.
+                           OmegaT proporrà un elenco di tutti i segmenti contenente tutte le parole specificate. Le ricerche di parole chiave sono simili
+                           alle ricerche di “tutte le parole” di un motore di ricerca Internet, come Google (in base a un operatore logico AND). L'uso
+                           di una ricerca con parole chiave con <span class="emphasis"><em><code class="literal">open file</code></em></span> individuerà tutte le occorrenze della stringa <span class="emphasis"><em><code class="literal">open file</code>,</em></span>, come pure <span class="emphasis"><em><code class="literal">file opened</code>, <code class="literal">open input file</code>, <code class="literal">file may not be safe to open</code></em></span>, e via discorrendo.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><span class="bold"><strong>espressioni regolari</strong></span></span></dt>
+                     <dd>
+                        <p>La stringa immessa nel campo “Cerca” verrà considerata come un'espressione regolare. La stringa di ricerca - [a-zA-Z]+[öäüqwß]
+                           - nell'esempio sopra, ricerca parole nel segmento di destinazione, contenenti caratteri dubbi provenienti dalla tastiera tedesca.
+                           Le <a class="link" href="appendix.regexp.html" title="Appendix&nbsp;D.&nbsp;Espressioni regolari">espressioni regolari</a> sono un sistema particolarmente valido per reperire alcuni elementi di un segmento.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>Oltre a uno di questi metodi, si avrà la possibilità di selezionare tra le seguenti opzioni:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>maiuscole/minuscole</strong></span>: verrà ricercata l'esatta corrispondenza della stringa immessa nel campo “Cerca”; per esempio, si controllerà la presenza
+                           di lettere maiuscole.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Lo spazio corrisponde a nbsp</strong></span>: se questa opzione è selezionata, un carattere di spazio inserito come voce di ricerca può corrispondere sia a un carattere
+                           di spazio normale, sia a uno di spazio non divisibile (\u00A).
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>nei file di partenza: </strong></span>si eseguirà la ricerca nei segmenti di origine
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>nelle traduzioni: </strong></span>si eseguirà la ricerca nei segmenti di destinazione
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>nelle note: </strong></span>si eseguirà la ricerca nelle note dei segmenti
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>nei commenti: </strong></span>si eseguirà la ricerca nei commenti dei segmenti
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Tradotti o non tradotti: </strong></span>si eseguirà la ricerca sia nei segmenti tradotti, sia in quelli non tradotti.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Tradotti: </strong></span>si eseguirà la ricerca solo nei segmenti tradotti.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Non tradotti: </strong></span>si eseguirà la ricerca solo nei segmenti non tradotti.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Visualizza: tutti i segmenti corrispondenti:</strong></span> se attivata, verrano visualizzati tutti i segmenti in modo analitico, anche se ricorrono più volte nello stesso documento
+                           o in documenti diversi.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Visualizza: nomi dei file:</strong></span> se attivata, il nome del file, dove si trova ciascun segmento, viene visualizzato sopra ogni risultanza.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Cerca in Progetto</strong></span>: attivare <span class="emphasis"><em>Memoria</em></span> per includere nella ricerca la memoria del progetto (il file project_save.tmx). Attivare <span class="emphasis"><em>TM</em></span> per includere nella ricerca le memorie di traduzione che si trovano nella cartella <code class="filename">tm</code>. Attivare <span class="emphasis"><em>Glossari</em></span> per includere nella ricerca i glossari che si trovano nella cartella <code class="filename">glossary</code>.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Cerca in File:</strong></span> esegue la ricerca in un singolo file o una cartella contenente un gruppo di file. Quando si esegue una ricerca all'interno
+                           dei file (al contrario delle memorie di traduzione), OmegaT restringe la ricerca ai file nei formati di file di partenza.
+                           Di conseguenza, sebbene OmegaT sia perfettamente in grado di gestire i file <code class="filename"> tmx</code>, non li include durante la ricerca all'interno dei file.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Premendo il pulsante <span class="guibutton">Opzioni avanzate</span> potranno essere selezionati criteri di ricerca aggiuntivi (autore o revisore della traduzione, data di traduzione, ad esclusione
+                  dei segmenti orfani, ecc.). Se è selezionata l'opzione <span class="emphasis"><em>Non considerare la larghezza carattere</em></span>, le ricerche per le forme a larghezza intera (caratteri CJK, ossia cinesi, giapponesi e coreani) troveranno le corrispondenze
+                  con le forme a metà larghezza e viceversa.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="search.result.display"></a>3.3.&nbsp;Visualizzazione dei risultati
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>La pressione del pulsante “Cerca”, dopo aver immesso una stringa nel campo del testo da trovare, genera la visualizzazione
+                  di tutti i segmenti del progetto contenenti la stringa digitata. Dato che <span class="application">OmegaT</span> gestisce i segmenti identici come una singola entità, viene mostrato solo il primo segmento univoco. I segmenti vengono visualizzati
+                  in ordine di comparsa all'interno del progetto. I segmenti tradotti vengono visualizzati con sopra il testo originale e sotto
+                  il testo tradotto; per i segmenti non tradotti viene, invece, visualizzato solo come testo sorgente.
+               </p>
+               <p>Il doppio clic su un segmento apre quest'ultimo nell'Editor, al fine di consentirne la modifica (il singolo clic esegue la
+                  stessa azione quando è attivata l'opzione <span class="bold"><strong>Sincronizzazione automatica con Editor</strong></span>). A questo punto si può tornare alla finestra “Cerca” e passare al successivo segmento estratto, per eseguire il controllo
+                  e apportare le eventuali modifiche.
+               </p>
+               <p>Nella finestra di Ricerca testo è possibile usare le scorciatoie standard (<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span>, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span>) per spostarsi da un segmento all'altro.
+               </p>
+               <p>Si potranno aprire insieme più finestre di ricerca. È possibile visualizzare rapidamente il loro contenuto leggendone il titolo,
+                  che contiene il termine di ricerca utilizzato.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="search.filter"></a>3.4.&nbsp;Voci dei filtri nell'editor in base alla ricerca
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Al fine di una navigazione più facile all'interno dell'insieme dei risultati di ricerca, è possibile applicare la ricerca
+                  all'interno dell'editor. Per limitare le voci visualizzate nella finestra dell'editor a quelle che corrispondono alla ricerca
+                  corrente, premere il pulsante <span class="bold"><strong>Filtro</strong></span> in basso. Utilizzare la normale navigazione per spostarsi, ad esempio, al successivo segmento (non tradotto) che corrisponde
+                  al criterio di ricerca.
+               </p>
+               <p>N.B.:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>la ricerca può essere limitata a 1000 voci; se si effettua, dunque, una ricerca su una frase comune, l'editor mostrerà solo
+                           quelle 1000 voci e non tutte quelle che corrispondono al criterio di ricerca.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>un file potrebbe non contenere corrispondenze, dunque la finestra sarà vuota.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>se una ricerca rimuove i duplicati, essi non saranno presenti nell'Editor.</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Per rimuovere un filtro, premere il pulsante <span class="bold"><strong>Rimuovi filtro</strong></span> o ricaricare il progetto.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.textreplace"></a>4.&nbsp;Sostituzione testo
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Aprire la finestra "Cerca e sostituisci" tramite la combinazione di tasti <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span> e inserire nella casella <span class="emphasis"><em>Cerca</em></span> la parola o l'espressione da sostituire.
+            </p>
+            <p>Fare clic sul pulsante <span class="emphasis"><em>Cerca</em></span> per visualizzare tutte le corrispondenze trovate.
+            </p>
+            <p>Inserire la nuova parola, o frase, (le espressioni regolari non sono supportate) nella casella <span class="emphasis"><em>Sostituisci con</em></span>, poi fare clic su una delle opzioni seguenti:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Sostituisci tutto:</strong></span> esegue la sostituzione di tutte le corrispondenze (dopo aver visualizzato una finestra di conferma indicante il numero delle
+                        corrispondenze da sostituire).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Sostituisci:</strong></span> una sostituzione "alla volta", tramite lo strumento dei pulsanti presenti nella <span class="bold"><strong>intestazione del pannello dell'Editor</strong></span>. Fare clic su <span class="emphasis"><em>Sostituisci successivo</em></span> o <span class="emphasis"><em>Salta</em></span>, poi terminare la sessione di sostituzione con <span class="emphasis"><em>Fine</em></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Chiudi:</strong></span> chiude la finestra senza apportare modifiche.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2757"></a>4.1.&nbsp;Opzioni di ricerca
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le opzioni di ricerca sono simili a quelle visualizzate nella <a class="link" href="windows.and.dialogs.html#windows.textsearch" title="3.&nbsp;Ricerca testo">finestra di ricerca</a>.
+               </p>
+               <p>Ad eccezione di una: attivare <span class="bold"><strong>Non tradotti</strong></span> per eseguire l'operazione di ricerca e sostituzione anche sui segmenti non ancora tradotti.
+               </p>
+               <p>Per rendere questo possibile (sebbene la funzione Cerca e sostituisci operi solo sulla memoria), OmegaT copia il segmento
+                  di partenza nel segmento di destinazione, prima che avvenga l'operazione di sostituzione. Se non viene eseguita alcuna sostituzione
+                  in un dato segmento, il segmento di destinazione verrà “svuotato”, ossia resterà non tradotto.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.aligner"></a>5.&nbsp;Allineatore
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>L'allineamento comporta la creazione di una memoria di traduzione bilingue da documenti monolingue che sono stati già tradotti.</p>
+            <p>Per accedere a questa finestra, selezionare <span class="guimenuitem">Strumenti</span> → <span class="guimenuitem">Allinea file...</span>.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2785"></a>5.1.&nbsp;Passaggio 1: regolare i parametri di allineamento
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Se si rende necessario dover migliorare l'allineamento, provare a cambiare i parametri. Nella maggior parte dei casi, più
+                  basso è il <span class="guilabel">Punteggio medio</span>, migliore sarà l'allineamento.
+               </p>
+               <p>In modalità <span class="guilabel">Heapwise</span>, i testi vengono valutati globalmente. In modalità <span class="guilabel">Parsewise</span>, essi vengono valutati per singolo segmento.
+               </p>
+               <p>Usare la modalità <span class="guilabel">Confronto ID</span> per allineare i testi Chiave=Valore. Questo sistema funziona anche se le chiavi nei due file non si trovano nello stesso
+                  ordine e, o in alternativa, se i due file non contengono la stessa quantità di informazioni. Questa opzione compare solo se
+                  i file selezionati sono entrambi riconosciuti come file Chiave=Valore.
+               </p>
+               <p>Gli algoritmi <span class="guilabel">Viterbi</span> e <span class="guilabel">Forward-Backward</span> sono due metodi di calcolo differenti. Scegliere quello che restituisce i risultati migliori.
+               </p>
+               <p>Fare clic su <span class="guibutton">Continua</span> per andare al passaggio successivo.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2819"></a>5.2.&nbsp;Passaggio 2: eseguire le correzioni manuali
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Dopo l'elaborazione automatica, l'allineamento di due file richiede in genere correzioni manuali.</p>
+               <p>Le unità di traduzione si trovano nelle celle all'interno delle due ultime colonne.</p>
+               <p>Per allineare due segmenti sulla stessa riga:</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Selezionare il primo segmento.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Premere la barra spaziatrice (scorciatoia per <span class="guimenuitem">Modifica</span> → <span class="guimenuitem">Avvia allineamento millimetrico</span>).
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Fare clic nell'altra colonna sulla traduzione che corrisponde al primo segmento.</p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Dopo aver compiuto varie volte questa operazione, selezionare <span class="guimenuitem">Modifica</span> → <span class="guimenuitem">Riallinea In sospeso</span> per aggiornare l'allineamento degli altri segmenti.
+               </p>
+               <p>Per modificare singolarmente la posizione di uno o più segmenti, selezionare il segmento, o i segmenti, e premere <strong class="userinput"><code>U</code></strong> (<span class="guilabel">Sposta in alto</span>) o <strong class="userinput"><code>D</code></strong> (<span class="guilabel">Sposta in basso</span>).
+               </p>
+               <p>Quando sarà creata la memoria di traduzione, saranno incluse solo le righe che nella prima colonna presentano marcata l'opzione
+                  <span class="guilabel">Mantieni</span>.
+               </p>
+               <p>Quando si ritiene che le due colonne siano sufficientemente allineate, premere il pulsante <span class="guibutton">Salva TMX...</span> per creare la memoria di traduzione risultante.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="windows.scripts"></a>6.&nbsp;Script
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questa finestra di dialogo è raggiungibile selezionando <span class="guimenuitem">Strumenti</span> → <span class="guimenuitem">Azioni di script...</span></p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2886"></a>6.1.&nbsp;Uso
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>La finestra delle Azioni di script consente di caricare uno script esistente all'interno dell'area di testo e avviarlo nel
+                  progetto attivo aperto. Per personalizzare le funzionalità di script, osservare la procedura seguente:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Caricare uno script all'interno dell'editor facendo clic sul suo nome nell'elenco contenuto nel pannello sinistro.</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Fare clic col destro su un pulsante da <span class="guilabel">&lt;1&gt;</span> a <span class="guilabel">&lt;12&gt;</span> nella parte inferiore del pannello e selezionare <span class="guilabel">Aggiungi script</span>.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Il clic sinistro sul numero farà avviare lo script selezionato. È possibile avviare le macro selezionate sia dal menu principale
+                           tramite le voci all'interno del menu <span class="guisubmenu">Strumenti</span>, sia premendo la combinazione <span class="keycap"><strong> Ctrl+Alt+F#</strong></span> (# da 1 a 12).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Per impostazione predefinita, gli script vengono memorizzati nella cartella <code class="filename">scripts</code> che si trova nella cartella di installazione di OmegaT (quella in cui è presente il file <code class="filename">OmegaT.jar</code>).
+               </p>
+               <p>Se si aggiungono i nuovi script in quella cartella, essi appariranno nell'elenco degli script disponibili all'interno della
+                  finestra <span class="guilabel">Azioni di script</span>.
+               </p>
+               <p>Si possono trovare alcuni script aggiuntivi qui: <a class="ulink" href="https://sourceforge.net/projects/omegatscripts/" target="_top">OmegaT Scripts</a></p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2935"></a>6.2.&nbsp;Linguaggi delle azioni di script
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Sono stati implementati i seguenti linguaggi di script:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Groovy</strong></span> (http://groovy.codehaus.org): un linguaggio dinamico per la Java Virtual Machine. Si basa sulle potenzialità Java ma contiene
+                           funzioni aggiuntive avanzate ispirate da linguaggi come Python, Ruby e Smalltalk.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>JavaScript</strong></span> (a volte abbreviato in JS, da non confondere con Java): è un linguaggio di script basato su un prototipo, dinamico, debolmente
+                           tipizzato e con funzioni di prima classe. È un linguaggio a paradigma multiplo, che supporta gli stili di programmazione funzionali,
+                           imperativi e orientati agli oggetti. Essendo il linguaggio che sta dietro programmi diffusi, come Firefox, è uno strumento
+                           di programmazione familiare e preferito nell'ambiente open source.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Tutti i linguaggi hanno accesso al modello oggetti di OmegaT e con il progetto come oggetto primario. La seguente porzione
+                  di codice scritto in Groovy, per esempio, esegue un'analisi di tutti i segmenti, all'interno di tutti i file del progetto
+                  attivo e, se esiste la traduzione, restituisce il testo di partenza e di arrivo del segmento:
+               </p><pre class="programlisting">    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + " &gt;&gt;&gt;&gt; " + target);
+            }     
+        }
+    }</pre></div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="dialogs.preferences"></a>7.&nbsp;Preferenze generali
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questa finestra di dialogo è raggiungibile selezionando <span class="guimenuitem">Opzioni</span> → <span class="guimenuitem">Preferenze...</span></p>
+            <p>Permette di impostare i parametri per tutti i progetti di traduzione.</p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2968"></a>7.1.&nbsp;Generale
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist"><a name="dialogs.preferences.general.usetabtoadvance"></a><dl class="variablelist">
+                     <dt><span class="term">Avanza col tasto TAB</span></dt>
+                     <dd>
+                        <p>Imposta la convalida di un segmento con il tasto Tab invece che con il tasto di Invio predefinito. Questa opzione potrebbe
+                           risultare utile per i sistemi di input di caratteri cinesi, giapponesi o coreani.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Conferma sempre l'uscita</span></dt>
+                     <dd>
+                        <p>Il programma chiederà sempre la conferma dell'uscita prima di chiudersi.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e2984"></a>7.2.&nbsp;Traduzione automatica
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Recupera automaticamente le traduzioni</span></dt>
+                     <dd>
+                        <p>Per ragioni di riservatezza, si potrebbe non voler inviare tutti i segmenti al motore di Traduzione automatica. Deselezionando
+                           questa opzione, le traduzioni automatiche saranno recuperate solo se è premuta la combinazione di tasti <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> (<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>M</strong></span> in OS X) nel segmento attivo. Si deve poi premere una seconda volta <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> per inserire il suggerimento.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Solo segmenti non tradotti</span></dt>
+                     <dd>
+                        <p>Selezionare questa casella se si intendono inviare ai servizi di traduzione automatica solo i segmenti non tradotti.</p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>Selezionare un fornitore dall'elenco e, se necessario, premere il pulsante <span class="guibutton">Configura</span> per immettere i dettagli identificativi ricevuti dal gestore del servizio.
+               </p>
+               <p>Le procedure per la configurazione dell'accesso ai servizi di Microsoft Translator e Google Translate sono descritti <a class="ulink" href="https://sourceforge.net/p/omegat/wiki/Configuring Machine Translation Services" target="_top">qui</a>.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3028"></a>7.3.&nbsp;Glossario
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Mostra la descrizione contestuale per i glossari TBX</span></dt>
+                     <dd>
+                        <p>Deselezionare questa opzione se la descrizione del contesto mostrata per ciascuna voce del glossario non è necessaria o è
+                           eccessivamente lunga.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Usa i termini che appaiono separatamente nel testo di partenza</span></dt>
+                     <dd>
+                        <p>Quando l'opzione è selezionata, il glossario mostrerà le coppie o i gruppi di parole (espressioni) anche se le parole al loro
+                           interno appaiono separate nel testo di partenza.
+                        </p>
+                        <p>Deselezionare questa opzione se il glossario mostra troppi falsi positivi.</p>
+                     </dd>
+                     <dt><span class="term">Usa il riconoscimento della radice per le voci di glossario</span></dt>
+                     <dd>
+                        <p>Selezionare questa opzione se si desidera che il glossario mostri le parole contenenti la medesima radice.</p>
+                     </dd>
+                     <dt><span class="term">Sostituisci i risultati del glossario all'inserimento del testo di partenza</span></dt>
+                     <dd>
+                        <p>Se è selezionata sia questa opzione, sia l'opzione <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.insertthesourcetext"><span class="guilabel">Inserisci il testo di partenza</span></a>, tutte le parole cui corrisponde una voce di glossario saranno tradotte automaticamente quando viene inserito il testo di
+                           partenza.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Ignora i risultati con grosse differenze (es. PIPPO vs. pippo)</span></dt>
+                     <dd>
+                        <p>Se è selezionata questa opzione, il glossario mostrerà solo una voce, anche se la stessa parola esiste in forme diverse (es.
+                           con o senza lettere iniziali maiuscole) all'interno del glossario.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="d0e3068"></a>7.3.1.&nbsp;Terminologia TaaS
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">Ottieni la chiave API</span></dt>
+                        <dd>
+                           <p>Premere questo pulsante per accedere al sito del progetto <a class="ulink" href="https://term.tilde.com/taas" target="_top">TaaS</a> e creare un account per l'utente.
+                           </p>
+                           <p>È quindi possibile creare una chiave di accesso nella pagina <a class="ulink" href="https://term.tilde.com/account/keys/create?system=omegaT" target="_top">https://term.tilde.com/account/keys/create?system=omegaT</a>.
+                           </p>
+                        </dd>
+                        <dt><span class="term">Memorizza solo per questa sessione</span></dt>
+                        <dd>
+                           <p>Se questa opzione è attivata, OmegaT non conserverà in memoria la chiave di accesso tra una sessione e un'altra.</p>
+                        </dd>
+                        <dt><span class="term">Sfoglia le raccolte TaaS...</span></dt>
+                        <dd>
+                           <p>Questo pulsante abilita alla navigazione tra le raccolte presenti per le lingue di arrivo e di partenza del progetto, permettendo
+                              anche di scaricarle. Le raccolte private sono indicate in grassetto. Le raccolte vengono scaricate come glossari TBX e memorizzate
+                              nella cartella di glossario corrente.
+                           </p>
+                        </dd>
+                        <dt><span class="term">Seleziona il dominio di ricerca terminologica TaaS...</span></dt>
+                        <dd>
+                           <p>È possibile selezionare, se necessario, un dominio specifico per limitare il volume di dati inviati e ricevuti.</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.dictionary"></a>7.4.&nbsp;Dizionario
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Controlla automaticamente il testo del segmento nel dizionario</span></dt>
+                     <dd>
+                        <p>Deselezionare l'opzione per disattivare la ricerca automatica – per esempio, se i dizionari sono troppo lunghi.</p>
+                     </dd>
+                     <dt><span class="term">Usa la concordanza parziale per le voci di dizionario</span></dt>
+                     <dd>
+                        <p>Selezionare questa opzione se si desidera che il dizionario mostri le parole contenenti la medesima radice.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3120"></a>7.5.&nbsp;Aspetto
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Ripristina finestra principale</span></dt>
+                     <dd>
+                        <p>Ripristina allo stato predefinito i componenti della finestra principale di OmegaT. Utilizzare questa funzione quando si sono
+                           sbloccati, spostati o nascosti uno o più componenti e non si riesce più a sistemarli come si vorrebbe. È possibile usare la
+                           funzione anche quando i pannelli non appaiono come dovrebbero dopo un aggiornamento del programma.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="d0e3130"></a>7.5.1.&nbsp;Tipo di carattere
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Apre la finestra di dialogo nella quale si potrà modificare il carattere di visualizzazione del testo. Gli utenti con computer
+                     "datati" che sperimentano un ridimensionamento lento delle finestre, possono provare a modificare il carattere. Consultare
+                     le impostazioni dei caratteri in Miscellanea
+                  </p>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="d0e3135"></a>7.5.2.&nbsp;Colori
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Questa pagina permette di scegliere colori diversi per ciascuna parte dell'interfaccia utente.</p>
+                  <p>Possono essere impostati, utilizzando script, temi predefiniti. Uno script incorporato in OmegaT chiamato 'Switch Colour Themes'
+                     fornisce il tema predefinito "Scuro".
+                  </p>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.filefilters"></a>7.6.&nbsp;Filtri dei file
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Questa finestra contiene un elenco dei filtri dei file disponibili. I filtri utilizzati nel progetto corrente sono evidenziati
+                  in grassetto. Se si preferisce non utilizzare OmegaT per tradurre i file di un certo tipo, sarà sufficiente togliere la spunta
+                  alla casella corrispondente al tipo di file, presente nella colonna "Abilitato". In questo caso, OmegaT, quando caricherà
+                  i progetti, ignorerà questo tipo di file e, quando creerà i documenti di arrivo, li copierà senza apportarvi alcuna modifica.
+                  Se si desidera utilizzare di nuovo questo filtro, sarà sufficiente attivare la casella di controllo corrispondente. Fate clic
+                  sul pulsante <span class="bold"><strong>Predefiniti</strong></span> per riportare i filtri dei file alle impostazioni predefinite. Per modificare il modo in cui il filtro interviene sui file
+                  e sulla loro codifica, selezionare dall'elenco il filtro e fare clic su <span class="bold"><strong>Modifica</strong></span>.
+               </p>
+               <p>La finestra di dialogo permette di abilitare o disabilitare le seguenti opzioni:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Rimuovi i tag di inizio e fine: disattivare questa opzione per visualizzare tutti i tag, incluso quelli di inizio e fine segmento.
+                           Attenzione: nei formati Microsoft Open XML (docx, xlsx, e via discorrendo), se tutti i tag sono visualizzati, NON inserire
+                           del testo davanti al primo tag (è un tag tecnico che deve sempre iniziare il segmento).
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Rimuovi lo spazio vuoto di inizio e fine nei progetti non segmentati: OmegaT, per impostazione predefinita, rimuove lo spazio
+                           vuoto di inizio e fine. Nei progetti non segmentati è possibile mantenerlo, disattivando questa opzione.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Preserva gli spazi per tutti i tag: attivare questa opzione se i documenti di partenza contengono spazi significativi utilizzati
+                           per ragioni compositive che non devono essere ignorati.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Ignora il contesto dei file quando si identificano segmenti con traduzioni alternative: per impostazione predefinita, OmegaT
+                           utilizza il nome del file di partenza come parte identificativa di una traduzione alternativa. Se l'opzione è attivata, il
+                           nome del file di partenza non verrà usato e le traduzioni alternative avranno effetto in qualsiasi file, così come le altre
+                           corrispondenze di contesto (segmenti precedenti e successivi oppure qualche tipo di identificativo del segmento che dipende
+                           dal formato del file).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="filters.options"></a>7.6.1.&nbsp;Opzioni dei filtri
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Diversi filtri (file di testo, file XHTML, file HTML e XHTML, file OpenDocument e Microsoft Open XML) hanno una o più opzioni
+                     particolari. Per modificare le opzioni selezionare il filtro nell'elenco e premere il pulsante <span class="bold"><strong>Opzioni</strong></span>. Le opzioni disponibili sono:
+                  </p>
+                  <p><span class="bold"><strong>File di testo</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Segmentazione a livello di paragrafo in corrispondenza delle interruzioni di riga, in base alle righe vuote oppure nessuna
+                                    segmentazione:</em></span></p>
+                           <p>se le regole di segmentazione a livello di frase sono attive, il testo verrà ulteriormente segmentato in base all'opzione
+                              qui selezionata.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>File PO</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Consenti traduzioni vuote nei file tradotti</em></span>:
+                           </p>
+                           <p>se attivata, la traduzione del file di arrivo risulterà vuota se un segmento PO (che può essere un intero paragrafo) non viene
+                              tradotto. In gergo tecnico, il segmento <code class="code">msgstr</code> nel file PO di arrivo, se creato, sarà lasciato vuoto. Poiché questo è il comportamento usuale per i file PO, l'opzione è
+                              attiva in modo predefinito. se l'opzione è disattivata, il testo di partenza verrà copiato nel segmento di arrivo.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Salta l'intestazione PO</em></span></p>
+                           <p>Se questa opzione viene attivata, l'intestazione PO verrà saltata e non modificata..</p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Sostituisci automaticamente 'nplurals=INTEGER; plural=EXPRESSION;' nell'intestazione</em></span></p>
+                           <p><span class="emphasis"><em>L'opzione permette a OmegaT di non tenere conto delle specifiche contenute nell'intestazione del file PO e usare le impostazioni
+                                    predefinite per la lingua di destinazione selezionata.</em></span></p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>File XHTML</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Traduci i seguenti attributi</em></span>: gli attributi selezionati appariranno come segmenti nella finestra dell'Editor.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Avvia un nuovo paragrafo con</em></span>: il tag HTML &lt;br&gt; costituirà un'interruzione di paragrafo per scopi di segmentazione.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Salta l'espressione regolare che corrisponde al testo</em></span>: qualsiasi testo che corrisponde all'espressione regolare viene saltato. Viene mostrato in colore rosso nella convalida dei
+                              tag. Il testo nei segmenti di origine che corrispondono viene mostrato in corsivo.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Non tradurre l'attributo di contenuto dei metatag... :</em></span> i metatag indicati nel riquadro non verranno tradotti.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Non tradurre il contenuto dei tag con la seguente coppia di valori-chiave di attributo (separati da virgole)</em></span>: la corrispondenza di un tag all'interno dell'elenco delle coppie di valori-chiave farà sì che il suo contenuto sia ignorato
+                           </p>
+                           <p>A volte potrebbe essere utile rendere non traducibili certi tag basati sui valori degli attributi. Per esempio, <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code>. È possibile definire coppie di valori-chiave per i tag da non tradurre. L'esempio sopra conterrebbe: <code class="literal">class=hide, translate=no </code>.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>File Microsoft Office Open XML</strong></span></p>
+                  <p>È possibile selezionare quali elementi devono essere tradotti. Essi appariranno come segmenti separati nella traduzione.</p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Word:</strong></span> testo di istruzioni non visibile, commenti, note a piè pagina, note a fine documento, piè di pagina
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Excel: </strong></span>commenti, nomi dei fogli
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Power Point</strong></span>: commenti, master e layout della presentazione
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Globale:</strong></span> grafici, diagrammi, disegni, WordArt
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="bold"><strong>Altre opzioni:</strong></span></p>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: circle; ">
+                                 <li class="listitem">
+                                    <p><span class="emphasis"><em>Tag complessivi</em></span>: se selezionato, i tag senza testo traducibile verranno aggregati in un singolo tag.
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><span class="emphasis"><em>Preserva spazi per tutti i tag</em></span>: se selezionato, lo "spazio vuoto" (ossia gli spazi e le nuove righe) sarà preservato, anche se questa opzione non è definita
+                                       all'interno del documento
+                                    </p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>File HTML e XHTML</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Aggiungi o riscrivi la dichiarazione di codifica nei file HTML e XHTML</em></span>: spesso i file di destinazione devono contenere una codifica dei caratteri diversa da quella specificata nei file di partenza
+                              (che sia definita o no esplicitamente). Tramite l'uso di questa opzione il traduttore può specificare se i file di destinazione
+                              debbano includere la dichiarazione di codifica. Per esempio, se il filtro dei file specifica UTF8 come schema di codifica
+                              per i file di destinazione, selezionando "Sempre" si avrà la certezza di includere tale informazione all'interno dei file
+                              tradotti.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Traduci i seguenti attributi</em></span>: gli attributi selezionati appariranno come segmenti nella finestra dell'Editor.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Avvia un nuovo paragrafo con</em></span>: il tag HTML &lt;br&gt; costituirà un'interruzione di paragrafo per scopi di segmentazione.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Salta l'espressione regolare che corrisponde al testo</em></span>: qualsiasi testo che corrisponde all'espressione regolare viene saltato. Viene mostrato in colore rosso nella convalida dei
+                              tag. Il testo nei segmenti di origine che corrispondono viene mostrato in corsivo.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Non tradurre l'attributo di contenuto dei metatag... :</em></span> i metatag indicati nel riquadro non verranno tradotti.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Non tradurre il contenuto dei tag con la seguente coppia di valori-chiave di attributo (separati da virgole)</em></span>: la corrispondenza di un tag all'interno dell'elenco delle coppie di valori-chiave farà sì che il suo contenuto sia ignorato
+                           </p>
+                           <p>A volte potrebbe essere utile rendere non traducibili certi tag basati sui valori degli attributi. Per esempio, <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code>. È possibile definire coppie di valori-chiave per i tag da non tradurre. L'esempio sopra conterrebbe: <code class="literal">class=hide, translate=no </code>.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Comprimi lo spazio vuoto nel documento tradotto</em></span>: più spazi vuoti continui saranno convertiti in un unico spazio vuoto all'interno del documento tradotto.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p><span class="emphasis"><em>Rimuovi i commenti HTML nel documento tradotto</em></span>: le parti commentate (comprese nei tag &lt;!-- e --&gt;) non saranno copiate nel documento tradotto.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p><span class="bold"><strong>File Open Document Format (ODF)</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>È possibile selezionare quali tra i seguenti elementi devono essere tradotti:</p>
+                           <p>voci di indici, segnalibri, collegamenti a segnalibri, note, commenti, note di presentazione, collegamenti (URL), nomi dei
+                              fogli
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="edit.filter.dialog"></a>7.6.2.&nbsp;Finestra di dialogo "Modifica filtro"
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Questa finestra di dialogo consente di specificare i modelli dei nomi dei file di partenza per quei file che dovranno essere
+                     elaborati dal filtro, di personalizzare i nomi dei file tradotti e di selezionare la codifica da adottare quando viene caricato
+                     il file di partenza e salvato quello di arrivo tradotto. Per modificare un modello di filtro dei file, modificare direttamente
+                     i campi o fare clic su <span class="bold"><strong>Modifica</strong></span>. Per aggiungere un modello di filtro dei file, fare clic su <span class="bold"><strong>Aggiungi</strong></span>. Sia che si desideri aggiungere un nuovo modello o modificarne uno esistente, verrà comunque usata la stessa finestra di
+                     dialogo. La finestra include uno speciale editor dei modelli del nome del file di arrivo, che permette di personalizzare i
+                     nomi dei file prodotti.
+                  </p>
+                  <div class="section">
+                     <div class="titlepage">
+                        <div>
+                           <div>
+                              <h5 class="title"><a name="source.filetype.and.filename.pattern"></a>7.6.2.1.&nbsp;Tipo del file di partenza, modello del nome del file
+                              </h5>
+                           </div>
+                        </div>
+                     </div>
+                     <p>Quando OmegaT apre un file dalla propria cartella di partenza, cerca di selezionare il filtro servendosi dell'estensione associata
+                        allo stesso file. Più precisamente, OmegaT tenta di associare i modelli del nome del file di partenza di ciascun filtro al
+                        nome dello stesso file. Per esempio, il modello <code class="literal">*.xhtml</code> è associato ai file con estensione <code class="literal">.xhtml</code>. Se viene trovato il filtro appropriato, il file viene assegnato ad esso per essere lavorato. Per esempio, per impostazione
+                        predefinita, per lavorare sui file con estensione .xhtml viene utilizzato il filtro XHTML. È possibile modificare o aggiungere
+                        modelli di nome del file per quei file che dovranno essere gestiti da ciascun filtro dei file. I modelli di nome del file
+                        di partenza usano i caratteri jolly simili a quelli usati nelle <span class="bold"><strong>Ricerche. </strong></span>Il carattere '*' corrisponde a zero caratteri o più caratteri consecutivi. Il carattere '?' corrisponde esattamente a un carattere.
+                        Tutti gli altri caratteri rappresentano se stessi. Per esempio, se si desidera utilizzare il filtro di testo per la gestione
+                        dei file "leggimi" (<code class="literal">leggimi, leggi.mi</code>, e <code class="literal">leggimi.txt</code>) si dovrebbe usare il modello <code class="literal">leggi*</code>.
+                     </p>
+                  </div>
+                  <div class="section">
+                     <div class="titlepage">
+                        <div>
+                           <div>
+                              <h5 class="title"><a name="source.and.target.files.encoding"></a>7.6.2.2.&nbsp;Codifica dei file di partenza e dei file tradotti
+                              </h5>
+                           </div>
+                        </div>
+                     </div>
+                     <p>Solo un numero limitato di formati di file specifica una codifica obbligatoria. I formati di file che non specificano la loro
+                        codifica useranno la codifica impostata dall'utente per l'estensione che corrisponde al loro nome. Per esempio, per impostazione
+                        predefinita, i file <code class="literal">.txt</code> verranno caricati utilizzando la codifica predefinita del sistema operativo. Per ogni modello di nome dei file di partenza
+                        si ha la possibilità di modificare la codifica originaria. I file di arrivo possono anche essere scritti utilizzando una qualsiasi
+                        codifica. Per impostazione predefinita, la codifica del file tradotto è la stessa di quella del file di partenza. I campi
+                        di codifica del file di partenza e di quello di arrivo utilizzano i menu a tendina che contengono tutte le codifiche riconosciute.
+                        &lt;auto&gt; lascia la scelta della codifica a <span class="application">OmegaT</span>. Ecco come funziona:
+                     </p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>OmegaT identifica la codifica del file di partenza utilizzando la sua dichiarazione di codifica, se presente (file HTML, file
+                                 basati su XML).
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>OmegaT è impostato per utilizzare una codifica obbligatoria per alcuni formati di file (Java properties, ecc.).</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>OmegaT utilizza la codifica predefinita adottata dal sistema operativo per i file di solo testo.</p>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="section">
+                     <div class="titlepage">
+                        <div>
+                           <div>
+                              <h5 class="title"><a name="target.name"></a>7.6.2.3.&nbsp;Nome del file tradotto
+                              </h5>
+                           </div>
+                        </div>
+                     </div>
+                     <p>A volte, potrebbe essere necessario assegnare automaticamente un nuovo nome al file, o ai file, che vengono tradotti; è il
+                        caso, per esempio, dell'aggiunta di un codice di lingua al nome del file finale. Il modello del nome del file di arrivo utilizza
+                        una sintassi particolare, pertanto, se si vuole intervenire su questo campo, si deve fare clic su <span class="bold"><strong>Modifica...</strong></span> e usare la finestra di dialogo Modifica filtro. Se si vuole tornare alla configurazione predefinita del filtro, fare clic
+                        su <span class="bold"><strong>Predefiniti</strong></span>. È possibile anche modificare direttamente il nome nel campo del modello del nome del file di arrivo della finestra di dialogo
+                        dei filtri dei file. La finestra di dialogo "Modifica modello" offre, tra le altre, le opzioni seguenti:
+                     </p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Come predefinito viene assunto il valore <code class="literal">${filename}</code>, ovvero il nome del file di partenza completo dell'estensione associata: in questo modo il nome del file tradotto sarà uguale
+                                 a quello del file di partenza.
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${nameOnly}</code>– consente di inserire solo il nome del file di partenza senza associarlo all'estensione.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${extension} </code>- l'estensione del file originale
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${targetLocale}</code>– codice locale di arrivo (nella forma "xx_YY").
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${targetLanguage}</code>– lingua e codice nazione di arrivo (nella forma "XX-YY").
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${targetLanguageCode}</code> – il codice della lingua di arrivo - solo nella forma "XX"
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${targetCountryCode}</code>– il codice della nazione di arrivo - solo nella forma "YY"
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${timestamp-????}</code> – la data e l'ora di sistema al momento della generazione, in vari modelli
+                              </p>
+                              <p>Per esempi di modelli di "SimpleDateFormat", consultare la <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">documentazione Oracle</a></p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${system-os-name}</code> - il sistema operativo del computer usato
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${system-user-name}</code> - il nome dell'utente di sistema
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${system-host-name}</code> - il nome host di sistema
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${file-source-encoding}</code> - la codifica del file di partenza
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${file-target-encoding}</code> - la codifica del file di arrivo
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${targetLocaleLCID}</code> - il locale di arrivo Microsoft
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Sono disponibili ulteriori varianti per le variabili ${nameOnly} e ${Extension}. Nel caso in cui il nome_file possieda nome
+                        ambivalente, si possono applicare variabili della forma <code class="literal">${name only</code><span class="emphasis"><em>-numero delle estensioni</em></span>} e <code class="literal">${extension</code>-<span class="emphasis"><em>numero delle estensioni} </em></span>. Se, per esempio, il file originale si chiama Documento.xx.docx, le variabili seguenti restituiranno i risultati seguenti:
+                     </p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p><code class="literal">${nameOnly-0}</code> Documento
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${nameOnly-1}</code> Documento.xx
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${nameOnly-2}</code> Documento.xx.docx
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${extension-0}</code> docx
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${extension-1}</code> xx.docx
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><code class="literal">${extension-2}</code> Documento.xx.docx
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.segmentationsetup"></a>7.7.&nbsp;Configura la segmentazione
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Gli strumenti della memoria di traduzione operano su unità di testo definite “segmenti”. <span class="application">OmegaT</span> utilizza due metodi per segmentare un testo: la segmentazione a livello di paragrafo e quella a livello di frase (chiamata
+                  anche “segmentazione basata su regole”). Per selezionare il tipo di segmentazione, scegliere <span class="guimenu">Progetto</span> → <span class="guimenuitem">Proprietà...</span> dalla barra dei menu e attivare o disattivare l'appropriata casella di controllo. La segmentazione a livello di paragrafo
+                  è utile in alcune situazioni, per esempio nelle traduzioni con stile o altamente creative, in cui il traduttore ritiene di
+                  dover cambiare l'ordine di intere frasi: per la maggior parte dei progetti, tuttavia, la segmentazione a livello di frase
+                  è da preferirsi, dato che restituisce concordanze migliori dalle traduzioni precedenti. Se si seleziona la segmentazione a
+                  livello di frase, è possibile impostarne le regole dal menu principale <span class="guimenu">Opzioni</span> → <span class="guimenuitem">Segmentazione...</span>.
+               </p>
+               <p>Sono già disponibili regole di segmentazione affidabili per molte lingue, dunque molto probabilmente non si dovrà impegnare
+                  tempo a scrivere le proprie regole di segmentazione. D'altro lato, questa funzionalità può essere molto utile nei particolari
+                  casi in cui è possibile incrementare la propria produttività regolando le regole di segmentazione in base al testo da tradurre.
+               </p>
+               <p><span class="bold"><strong>Attenzione: </strong></span>dato che il testo verrà segmentato in modo diverso dopo aver modificato le opzioni dei filtri, è possibile dover iniziare
+                  da zero la traduzione. Allo stesso tempo, i segmenti precedenti ritenuti validi, nella memoria di traduzione del progetto
+                  verranno trasformati in segmenti orfani. Se si modificano le opzioni di segmentazione mentre un progetto è aperto, affinché
+                  le modifiche siano attivate il progetto va ricaricato.
+               </p>
+               <p><span class="application">OmegaT</span> usa i seguenti passaggi:
+               </p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Segmentazione a livello di struttura</span></dt>
+                     <dd>
+                        <p><span class="application">OmegaT</span> prima analizza il testo alla ricerca di una segmentazione a livello della struttura. Nel corso di questo processo, per la
+                           generazione dei segmenti, viene utilizzata solo la struttura del testo di partenza.
+                        </p>
+                        <p>Per esempio, i file di testo possono essere segmentati in corrispondenza delle interruzioni di riga, in base alle righe vuote
+                           oppure potrebbero non venire affatto segmentati. I file contenenti formattazione (documenti ODF, HTML, ecc.) sono segmentati
+                           in base ai tag a livello di blocco (paragrafi). Gli attributi dell'oggetto traducibile nei file XHTML o HTML possono essere
+                           estratti come segmenti separati.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Segmentazione a livello di frase</span></dt>
+                     <dd>
+                        <p>Dopo aver ultimato la segmentazione del file di partenza in unità strutturali, <span class="application">OmegaT</span> avvierà un'ulteriore segmentazione di tali blocchi in frasi.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="segmentation.rules"></a>7.7.1.&nbsp;Regole di segmentazione
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Il processo di segmentazione può essere raffigurato nel modo seguente: il cursore si sposta lungo il testo, un carattere alla
+                     volta. Ad ogni posizione del cursore vengono applicate le regole, che consistono di un modello <span class="bold"><strong>Prima</strong></span> e <span class="bold"><strong>Dopo</strong></span>, nell'ordine dato al fine di verificare se tutti i modelli <span class="bold"><strong> Prima</strong></span> sono validi per il testo alla sinistra del cursore e il corrispondente modello <span class="bold"><strong>Dopo</strong></span> per il testo alla destra del cursore. Se esiste una corrispondenza con la regola, o il cursore passa oltre senza inserire
+                     un'interruzione di segmento (per una regola di eccezione), oppure viene creata una nuova interruzione di segmento alla posizione
+                     attuale del cursore (per la regola di interruzione).
+                  </p>
+                  <p>Le due regole si comportano nel modo spiegato di seguito:</p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">Regola di interruzione</span></dt>
+                        <dd>
+                           <p>Separa il testo di origine in segmenti. Per esempio, la frase "<span class="emphasis"><em>Did it make sense? I was not sure</em></span>." dovrebbe essere divisa in due segmenti. Affinché questo accada, deve esserci una regola di interruzione per "?", quando
+                              seguito da spazi e una parola che inizia per maiuscola. Per definire una regola d'interruzione, spuntare la casella Interruzione/Eccezione.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt><span class="term">Regola di eccezione</span></dt>
+                        <dd>
+                           <p>definisce quali parti del testo NON devono essere separate. Nonostante il punto, <span class="emphasis"><em>"Sig. Rossi"</em></span> non dovrebbe essere separato in due segmenti e dovrebbe essere una regola di eccezione per Sig (come pure per Dott., Ing.
+                              Avv. e via discorrendo), seguita da un punto. Per definire una regola d'interruzione, lasciare disattivata la casella Interruzione/Eccezione.
+                           </p>
+                        </dd>
+                     </dl>
+                  </div>
+                  <p>Le regole d'interruzione predefinite dovrebbero essere sufficienti per la maggior parte delle lingue europee e per il giapponese.
+                     Data la loro flessibilità, è possibile considerare di definire ulteriori regole di eccezione per la lingua da cui si traduce,
+                     al fine di ottenere segmenti più comprensibili e coerenti.
+                  </p>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="rules.priority"></a>7.7.2.&nbsp;Priorità delle regole
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Tutte le serie di regole di segmentazione corrispondenti a un modello linguistico sono attive e applicate in un ordine di
+                     priorità specifico e, pertanto, sarà necessario che le lingue dalle quali comunemente si traduce si trovino in una posizione
+                     precedente rispetto a quelle presenti in modo predefinito. Per esempio, le regole per il francese del Canada (FR-CA) dovrebbero
+                     precedere quelle per il francese comune (FR.*) e anche quelle predefinite (.*). Ossia, quando si traduce dal francese del
+                     Canada, le regole relative, se presenti, dovranno essere applicate per prime, seguite da quelle per il francese comune e,
+                     infine, da quelle predefinite.
+                  </p>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="creating.new.rule"></a>7.7.3.&nbsp;Creazione di una nuova regola
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>In genere si dovrebbe evitare di apportare grosse modifiche alle regole di segmentazione, in particolar modo dopo il completamento
+                     di una prima bozza di traduzione, ma potrebbero essere utili modifiche minori, come l'aggiunta di un'abbreviazione riconosciuta.
+                  </p>
+                  <p>Per modificare o espandere un gruppo esistente di regole, basta farvi clic sopra nella tabella in alto. Le regole di quel
+                     gruppo verranno visualizzate nella metà inferiore della finestra di dialogo.
+                  </p>
+                  <p>Per creare un gruppo vuoto di regole per un nuovo modello linguistico, fare clic sul pulsante <span class="bold"><strong>Aggiungi</strong></span> nella metà superiore della finestra di dialogo. Apparirà una riga vuota nel fondo della tabella superiore (potrebbe rendersi
+                     necessario scorrere la tabella per visualizzare la riga). Cambiare il nome del gruppo di regole e del modello linguistico
+                     nella lingua interessata e il suo codice di lingua. La sintassi del modello della lingua è conforme a quella delle espressioni
+                     regolari. Nel caso in cui la serie di regole gestisca una coppia lingua-nazione, si consiglia di spostarla in cima utilizzando
+                     il pulsante <span class="bold"><strong>Sposta in alto</strong></span>.
+                  </p>
+                  <p>Aggiungere i modelli <span class="bold"><strong>Prima</strong></span> e <span class="bold"><strong>Dopo</strong></span>. Per verificare la loro sintassi e applicabilità, è opportuno usare strumenti che consentono di osservare direttamente il
+                     loro risultato. Si consulti <a class="link" href="appendix.regexp.html" title="Appendix&nbsp;D.&nbsp;Espressioni regolari">Espressioni regolari</a>. Un buon punto di partenza sono sempre le regole esistenti.
+                  </p>
+               </div>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="few.simple.examples"></a>7.7.4.&nbsp;Alcuni semplici esempi
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="informaltable">
+                     <table class="informaltable" border="1">
+                        <colgroup>
+                           <col align="left">
+                           <col align="center">
+                           <col align="center">
+                           <col align="left">
+                        </colgroup>
+                        <thead>
+                           <tr>
+                              <th align="left">Scopo</th>
+                              <th align="center">Prima</th>
+                              <th align="center">Dopo</th>
+                              <th align="left">Nota</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td align="left">Impostare il segmento di inizio dopo un punto ('.') seguito da uno spazio, tabulazione...</td>
+                              <td align="center">\.</td>
+                              <td align="center">\s</td>
+                              <td align="left">"\." indica il carattere punto. "\s" indica qualsiasi carattere di spazio vuoto (spazio, tabulazione, nuova pagina, ecc.)</td>
+                           </tr>
+                           <tr>
+                              <td align="left">Non segmentare dopo Sig.</td>
+                              <td align="center">Sig\.</td>
+                              <td align="center">\s</td>
+                              <td align="left">Questa è una regola di eccezione, dunque la casella non deve essere spuntata</td>
+                           </tr>
+                           <tr>
+                              <td align="left">Impostare un segmento dopo "。" (punto giapponese)</td>
+                              <td align="center">。</td>
+                              <td align="center">&nbsp;</td>
+                              <td align="left">Si noti che <code class="literal">dopo</code> è vuoto
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left">Non segmentare dopo M. Mr. Mrs. e Ms.</td>
+                              <td align="center">Mr??s??\.</td>
+                              <td align="center">\s</td>
+                              <td align="left">Regola di eccezione - si veda l'uso di ? nelle espressioni regolari</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3740"></a>7.8.&nbsp;Completamento automatico
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Fare clic su <span class="guimenuitem">Glossario...</span> per configurare la vista del glossario per il completamento automatico.
+               </p>
+               <p>Fare clic su <span class="guimenuitem">Testo automatico...</span> per configurare le opzioni del testo automatico e aggiungere o rimuovere le voci.
+               </p>
+               <p>Fare clic su <span class="guimenuitem">Tabella caratteri...</span> per impostare le opzioni di completamento automatico relativo alla tabella dei caratteri.
+               </p>
+               <p>Il completamento automatico è avviato all'interno del segmento di arrivo tramite la combinazione di tasti <span class="bold"><strong>Ctrl+Barra spaziatrice</strong></span>.
+               </p>
+               <p>Se l'opzione <span class="bold"><strong>Mostra automaticamente i suggerimenti pertinenti</strong></span> è attivata, il completamento automatico viene avviato automaticamente digitando la prima lettera della voce di glossario
+                  tradotta, o digitando "&lt;" nel caso di tag.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3768"></a>7.9.&nbsp;Correttore ortografico
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>OmegaT possiede un correttore ortografico incorporato che si basa sul <a class="link" href="appendix.spellchecker.html" title="Appendix&nbsp;C.&nbsp;Correttore ortografico">correttore ortografico</a> usato in Apache OpenOffice, LibreOffice, Firefox e Thunderbird. È dunque in grado di utilizzare l'ampia gamma di dizionari
+                  ortografici gratuiti disponibile per queste applicazioni.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3776"></a>7.10.&nbsp;Plugin LanguageTool
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Tipo di servizio</span></dt>
+                     <dd>
+                        <p>Selezionare la posizione del verificatore linguistico.</p>
+                        <p>L'uso, sulla propria macchina, di un verificatore linguistico diverso da quello fornito con OmegaT offre la possibilità di
+                           personalizzazione delle regole di verifica.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Regole</span></dt>
+                     <dd>
+                        <p>Attivare o disattivare le regole a seconda che esse siano o no rilevanti per il tipo di testo che si sta traducendo.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.externalsearch"></a>7.11.&nbsp;Ricerca esterna
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Abilita i comandi specifici del progetto</span></dt>
+                     <dd>
+                        <p>OmegaT, per impostazione predefinita, non esegue i comandi specificati nelle impostazioni proprie del progetto (il file <code class="filename">finder.xml</code> nella cartella <code class="filename">omegat</code>), dato che potrebbero avere un impatto critico sulla sicurezza della macchina.
+                        </p>
+                        <p>Attivare questa opzione solo se si è certi di quello che si sta facendo, e solo per i progetti provenienti da fonti affidabili.</p>
+                     </dd>
+                     <dt><span class="term">Priorità menu contestuale:</span></dt>
+                     <dd>
+                        <p>Abilita a cambiare l'ordine dei comandi nel menu contestuale (quello che appare col pulsante destro del mouse). Impostando
+                           il valore intorno a 100 i comandi saranno visualizzati in cima, mentre se si imposta intorno a 900 saranno visualizzati in
+                           fondo al menu.
+                        </p>
+                        <p>Bisognerà riavviare OmegaT affinché questa modifica diventi operativa.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.editor"></a>7.12.&nbsp;Editor
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><a name="dialogs.preferences.editor.insertthesourcetext"></a><span class="term">Inserisci il testo di partenza</span></dt>
+                     <dd>
+                        <p>È possibile inserire automaticamente il testo di partenza all'interno del campo di modifica. Si tratta di una possibilità
+                           molto utile quando si è in presenza di testi contenenti molti nomi di marchi di fabbrica o altri nomi propri che non necessitano
+                           di traduzione.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Lascia il segmento vuoto</span></dt>
+                     <dd>
+                        <p>OmegaT lascia vuoto il campo di modifica. Questa opzione consente di inserire la propria traduzione senza aver necessità di
+                           eliminare il testo di partenza, facendo così risparmiare due pressioni di tasti (<span class="bold"><strong>Ctrl+A </strong></span>e <span class="bold"><strong>Canc). </strong></span> Ora è possibile usare traduzioni vuote. Esse saranno visualizzate come &lt;VUOTA&gt; all'interno dell'Editor. Per crearne una,
+                           fare clic col destro all'interno di un segmento e selezionare "<span class="bold"><strong>Imposta traduzione vuota</strong></span>". Nello stesso menu contestuale, la voce <span class="bold"><strong>Rimuovi traduzione</strong></span> permette di eliminare la traduzione esistente del segmento attivo. È possibile eseguire la stessa azione cancellando il segmento
+                           di destinazione e premendo il tasto <span class="guibutton">Invio.</span></p>
+                     </dd>
+                     <dt><span class="term">Inserisci la concordanza parziale migliore</span></dt>
+                     <dd>
+                        <p>OmegaT inserirà la traduzione della stringa più simile a quella di partenza attiva, se è sopra la soglia di somiglianza selezionata
+                           nella finestra di dialogo. Per etichettare le traduzioni eseguite tramite concordanze parziali, può essere utilizzato il prefisso,
+                           che per impostazione predefinita è impostato vuoto. Se si aggiunge un prefisso (per esempio [fuzzy]) è possibile recuperare
+                           tali traduzioni in una fase successiva e controllare la loro correttezza.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>Le opzioni nella metà inferiore della finestra di dialogo hanno le seguenti funzioni:</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Tenta di convertire i numeri quando si inserisce una concordanza parziale (fuzzy)</span></dt>
+                     <dd>
+                        <p>Se l'opzione è attivata, quando viene inserita, in modo automatico o manualmente, una concordanza parziale, OmegaT tenta di
+                           convertire i numeri contenuti nelle concordanze parziali in base al contenuto del segmento di partenza. Esistono alcune limitazioni:
+                        </p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>Il segmento di origine e le concordanze parziali devono possedere lo stesso elenco di numeri</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>I numeri devono essere esattamente gli stessi tra le concordanze di partenza e quelle di destinazione.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Sono considerati solo gli interi e le virgole mobili semplici (utilizzando il punto come carattere decimale, per es., 5.4,
+                                    ma non 5,4 o 54E-01).
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><a name="dialogs.preferences.editor.allowtranslationtobeequaltosource"></a><span class="term">Permetti traduzione uguale all'originale</span></dt>
+                     <dd>
+                        <p>I documenti da tradurre possono contenere nomi di marchi di fabbrica, nomi propri, e via discorrendo, che devono essere lasciati
+                           inalterati (ovvero non richiedono traduzione) nel documento tradotto. Vi sono due sistemi per operare sui segmenti che contengono
+                           solo testo che deve rimanere inalterato.
+                        </p>
+                        <p>Si può decidere di non tradurre proprio tali segmenti. OmegaT segnalerà dunque questi segmenti come "non tradotti". Questa
+                           è l'impostazione predefinita. L'alternativa è inserire una traduzione identica al testo di origine. OmegaT è in grado di riconoscere
+                           se è stata compiuta questa azione. Per renderla possibile, selezionare quest'opzione.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Esporta il segmento in file di testo</span></dt>
+                     <dd>
+                        <p>La funzione di esportazione testo esporta i dati dall'interno del progetto <span class="application">OmegaT</span> attivo in file solo testo. I dati vengono esportati quando il segmento viene aperto. I file vengono scritti nella cartella
+                           secondaria /script all'interno della cartella dei file principale di OmegaT e includono:
+                        </p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>Il contenuto del testo del segmento di partenza (<code class="filename">source.txt</code>).
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Il contenuto del testo del segmento di arrivo (<code class="filename">target.txt</code>).
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Il testo evidenziato dall'utente viene selezionato quando si preme <span class="keycap"><strong>Ctrl+Maiusc+C</strong></span> o è selezionato il comando <span class="guimenuitem">Modifica &gt; Esporta la selezione</span> (<code class="filename">selection.txt</code>).
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>Il contenuto dei file viene sovrascritto sia quando un nuovo segmento è aperto (source.txt e target.txt), sia quando una nuova
+                           selezione è esportata (selection.txt). I file sono di solo testo. L'intero processo può essere manovrato e controllato tramite
+                           script basato su Tck/Tcl. Consultare <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Uso della funzione di esportazione testo di OmegaT</a> per specifiche, esempi e suggerimenti.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">"Vai al prossimo segmento non tradotto" si ferma nel punto in cui esiste almeno una traduzione alternativa</span></dt>
+                     <dd>
+                        <p>Per evitare traduzioni sbagliate, nel caso siano presenti segmenti che presentano la possibilità di più traduzioni, si può
+                           attivare l'opzione che ferma il comando <span class="bold"><strong>Vai al prossimo segmento non tradotto</strong></span> sul segmento uguale successivo, a prescindere che esso sia stato o no tradotto.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Consenti la modifica dei tag</span></dt>
+                     <dd>
+                        <p>Disattiva questa opzione per evitare danni ai tag (per es., eliminazione parziale) durante la modifica. La rimozione di un
+                           intero tag rimane possibile in questo caso, tramite l'uso del comando Ctrl+Backspace/Canc o selezionando completamente in
+                           tag (Ctrl+Maiusc+Sinistra/Destra) e poi eliminandolo (Canc o Ctrl+X).
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Convalida i tag quando esci da un segmento</span></dt>
+                     <dd>
+                        <p>Attivare questa opzione per essere avvisati delle differenze tra i tag del segmento di partenza e quello di arrivo, ogni volta
+                           che si passa a un altro segmento.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist"><a name="dialogs.preferences.editor.saveautopopulatedstatus"></a><dl class="variablelist">
+                     <dt><span class="term">Salva lo stato di popolazione automatica</span></dt>
+                     <dd>
+                        <p>Attivare questa opzione per registrare, nel file <code class="filename">project_save.tmx</code>, le informazioni che un segmento è stato popolato automaticamente, in modo che possa essere visualizzato, all'interno dell'Editor,
+                           con un colore specifico (se, nel menu Vista, è attivata la casella "Evidenzia i segmenti popolati automaticamente").
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Carica inizialmente questo numero di segmenti</span></dt>
+                     <dd>
+                        <p>Per impostazione predefinita l'editor mostra i primi duemila segmenti, caricando progressivamente gli altri allo scorrere
+                           in alto o in basso della pagina. È possibile, se si possiede una macchina potente, o se non piace il comportamento della finestra
+                           durante il caricamento progressivo della pagina, aumentare il numero predefinito.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.tagprocessing"></a>7.13.&nbsp;Elaborazione dei tag
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Quando si traducono file relativi a software, permette di configurare le opzioni della Convalida dei tag anche per il controllo
+                  delle variabili di programmazione (%...). È possibile anche definire varie opzioni relative alla convalida dei tag e impostare
+                  tag personalizzati.
+               </p>
+               <p>Se, per esempio, si digita <strong class="userinput"><code>\d+</code></strong> nel campo <span class="guilabel">Espressione regolare per i tag personalizzati</span>, tutti i numeri saranno considerati tag, e ciò permetterà la verifica che i numeri non siano stati modificati per sbaglio
+                  durante la traduzione.
+               </p>
+               <p>In modo simile, l'espressione <strong class="userinput"><code>&lt;.*?&gt;</code></strong> permetterà di accertarsi che i tag HTML, per esempio, inseriti nel testo di partenza siano preservati senza modifiche nella
+                  traduzione.
+               </p>
+               <p>Nota: queste due istruzioni si possono combinare scrivendo <strong class="userinput"><code>(&lt;.*?&gt;)|(\d+)</code></strong>.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3988"></a>7.14.&nbsp;Squadra...
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Digitare qui il proprio nome in modo che venga allegato a tutti i segmenti tradotti.</p>
+               <div class="section">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="d0e3993"></a>7.14.1.&nbsp;Credenziali del deposito
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Elenco dei progetti i cui dettagli di accesso sono memorizzati in OmegaT. Rimuovere un progetto da questo elenco se si desidera
+                     che OmegaT chieda le credenziali di accesso ogni volta che si apre il progetto.
+                  </p>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e3998"></a>7.15.&nbsp;Concordanze TM
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Ordina le concordanze parziali per:</span></dt>
+                     <dd>
+                        <p>Per impostazione predefinita, le concordanze più vicine visualizzate nel pannello <span class="guilabel">Concordanze parziali</span> sono determinate tramite il riconoscimento della radice.
+                        </p>
+                        <p>Per ottenere concordanze più letterali e vicine al 100%, selezionare l'opzione <span class="guilabel">Testo completo, incluso tag e numeri</span>.
+                        </p>
+                     </dd>
+                     <dt><span class="term">Visualizzazione dei tag nelle memorie di traduzione non di OmegaT</span></dt>
+                     <dd>
+                        <p>Permette di decidere quali file TMX esterni (per es., quelli non generati da OmegaT) debbano essere trattati.</p>
+                     </dd>
+                     <dt><span class="term">Modello visualizzazione concordanza</span></dt>
+                     <dd>
+                        <p>È possibile modificare il tipo di visualizzazione delle concordanze parziali, tramite l'uso di variabili preconfigurate:</p>
+                        <div class="table"><a name="d0e4028"></a><p class="title"><b>Table&nbsp;3.1.&nbsp;Configurazione del pannello delle concordanze</b></p>
+                           <div class="table-contents">
+                              <table class="table" summary="Configurazione del pannello delle concordanze" border="1">
+                                 <colgroup>
+                                    <col align="left">
+                                    <col align="left">
+                                 </colgroup>
+                                 <tbody>
+                                    <tr>
+                                       <td align="left"><code class="literal">${id}</code></td>
+                                       <td align="left">Numero della concordanza da 1 a 5</td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${sourceText}</code></td>
+                                       <td align="left">Testo di origine della concordanza</td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${targetText}</code></td>
+                                       <td align="left">Testo di destinazione della concordanza</td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${diff}</code></td>
+                                       <td align="left">Stringa che mostra le differenze tra il testo di origine e la concordanza.<span class="emphasis"><em> Suggerimento:</em></span> usarla se il testo che si è tradotto è stato aggiornato.
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${diffReversed}</code></td>
+                                       <td align="left">Uguale a ${diff}, ma con le differenze (quello che va inserito ed eliminato) invertite.</td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${score}</code></td>
+                                       <td align="left">Percentuale calcolata con l'opzione <span class="guilabel">Elaborazione della radice, nessun tag e nessun numero</span>.
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${noStemScore}</code></td>
+                                       <td align="left">Percentuale calcolata con l'opzione <span class="guilabel">Nessun tag e nessun numero</span>.
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${adjustedScore}</code></td>
+                                       <td align="left">Percentuale calcolata con l'opzione <span class="guilabel">Testo completo, incluso tag e numeri</span>.
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="left"><code class="literal">${fuzzyFlag}</code></td>
+                                       <td align="left">Indica che questa concordanza è parziale (attualmente funziona solo per le traduzioni dai file PO con marcatore #fuzzy)</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div><br class="table-break"></dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4101"></a>7.16.&nbsp;Vista
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Contiene opzioni per la visualizzazione in vari modi del testo e delle informazioni di modifica.</p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Includi il primo segmento non univoco quando evidenzi i segmenti non univoci</span></dt>
+                     <dd>
+                        <p>Selezionare questa opzione per visualizzare in colore grigio tutti i segmenti non univoci (ripetizioni). Quando l'opzione
+                           è disattivata, tutti i segmenti non univoci vengono visualizzati in colore grigio, ad eccezione della prima occorrenza.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="dialogs.preferences.savingandoutput"></a>7.17.&nbsp;Salvataggio e risultato
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Permette all'utente di selezionare l'intervallo, in minuti e secondi, tra un salvataggio automatico e l'altro del progetto.</p>
+               <p>Cambiare l'intervallo predefinito (3 minuti) a seconda delle esigenze per il progetto:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>intervalli brevi (minimo 10 secondi) per i progetti sincronizzati in un server interno.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>intervalli lunghi per progetti in collaborazione ospitati in server esterni.</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">Comando esterno di post-elaborazione</span></dt>
+                     <dd>
+                        <p>Specificare i comandi da eseguire dopo il comando <span class="guimenuitem">Crea i documenti di arrivo</span>.
+                        </p>
+                        <p>Un esempio d'uso di questa funzionalità potrebbe essere l'invio dei documenti tradotti al server FTP del cliente.</p>
+                     </dd>
+                     <dt><span class="term">Permetti anche i comandi esterni per progetto</span></dt>
+                     <dd>
+                        <p>OmegaT, per impostazione predefinita, non esegue i comandi specificati nelle impostazioni proprie del progetto (il file <code class="filename">omegat.project</code>), dato che potrebbero avere un impatto critico sulla sicurezza della macchina.
+                        </p>
+                        <p>Attivare questa opzione solo se si è certi di quello che si sta facendo, e solo per i progetti provenienti da fonti affidabili.</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4150"></a>7.18.&nbsp;Accesso proxy
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Se, per accedere a Internet, OmegaT ha necessità di utilizzare un server proxy autenticato, immettere qui i dettagli forniti
+                  dall'amministratore di rete.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4155"></a>7.19.&nbsp;Memorizzazione sicura
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>In questa finestra è possibile ridefinire la password principale utilizzata per proteggere i dettagli di autenticazione e
+                  le chiavi di accesso per i servizi di traduzione automatica. Prendere nota di tutti questi dettagli prima di creare la nuova
+                  password, perché essi saranno eliminati e si dovrà procedere a reinserirli.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4160"></a>7.20.&nbsp;Plugin
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Permette l'accesso a un elenco di plugin disponibili. I plugin vengono installati nella cartella <code class="filename">/plugins</code>.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4168"></a>7.21.&nbsp;Aggiornamenti
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Abilita le notifiche automatiche degli aggiornamenti di <span class="application">OmegaT</span>.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="menus.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="panes.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;2.&nbsp;Menu&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;4.&nbsp;Pannelli</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

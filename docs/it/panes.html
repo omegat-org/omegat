@@ -1,0 +1,335 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;4.&nbsp;Pannelli</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2- Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT 4.2- Manuale dell'Utente">
+      <link rel="prev" href="windows.and.dialogs.html" title="Chapter&nbsp;3.&nbsp;Finestre e finestre di dialogo">
+      <link rel="next" href="project.folder.html" title="Chapter&nbsp;5.&nbsp;Cartella del progetto">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;4.&nbsp;Pannelli</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="windows.and.dialogs.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="project.folder.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="panes"></a>Chapter&nbsp;4.&nbsp;Pannelli
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="panes.html#editor.pane">1. Editor</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4352">2. Concordanze parziali (fuzzy)</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4379">3. Glossario</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4392">4. Dizionario</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4399">5. Traduzione automatica</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4407">6. Traduzioni multiple</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4417">7. Note</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4428">8. Commenti</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4433">9. Barra di stato</a></span></dt>
+            </dl>
+         </div>
+         <p>La finestra principale di OmegaT è composta da varie finestre, dalla barra dei menu e dalla barra di stato. Si può intervenire
+            sulla posizione e dimensione di ogni finestra e sbloccarla in modo da poterla riposizionare premendo e trascinando con il
+            mouse la sua barra del titolo. In base al suo stato, in corrispondenza dell'angolo superiore destro di ogni finestra possono
+            comparire diversi indicatori.
+         </p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>Se non è possibile visualizzare tutti i pannelli (siano essi aperti o minimizzati), premere il comando <span class="guisubmenu"> Opzioni &gt; Ripristina finestra principale</span> in modo da ripristinarli allo stato predefinito nell'installazione.
+            </p>
+         </div>
+         <div class="table"><a name="d0e4187"></a><p class="title"><b>Table&nbsp;4.1.&nbsp;Widget del pannello</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Widget del pannello" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Minimize.png" width="60%"></span></td>
+                        <td>minimizza il pannello, in modo che sia mostrato solo il suo nome nella parte inferiore della finestra</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Maximize.png" width="60%"></span></td>
+                        <td>massimizza il pannello</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Restore.png" width="60%"></span></td>
+                        <td>ripristina la disposizione prima del passaggio di massimizzazione</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Undock.png" width="60%"></span></td>
+                        <td>separa il pannello dalla finestra principale</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Dock.png" width="60%"></span></td>
+                        <td>posiziona il pannello dietro all'interno della finestra principale</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><p>È possibile sovrapporre i pannelli. Quando questo comando viene eseguito, i pannelli presentano un indicatore di scheda nella
+            loro sommità. I separatori che suddividono le finestre della schermata principale possono essere spostati per ridimensionare
+            le singole finestre. Se si perde traccia delle modifiche apportate alla propria interfaccia, si può usare il comando <span class="guimenuitem">Opzioni → Ripristina la finestra principale</span> in qualsiasi momento per tornare alla disposizione originale.
+         </p>
+         <p>È possibile trascinare e rilasciare file in ciascun pannello, che reagirà di conseguenza.</p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Finestra dell'Editor: se un file di progetto OmegaT (<code class="filename">omegat.project</code>) viene rilasciato in questa finestra, sarà aperto il progetto corrispondente, chiudendo prima qualsiasi altro progetto aperto.
+                     Gli altri file rilasciati verranno copiati nella cartella <code class="filename">source</code>. Questa procedura è valida anche per la finestra <a class="link" href="windows.and.dialogs.html#windows.projectfiles" title="2.&nbsp;File del progetto">File del progetto</a>.
+                  </p>
+               </li>
+               <li class="listitem">
+                  <p>Pannello delle Concordanze parziali: i file <code class="filename">.tmx</code> trascinati qui saranno copiati nella cartella <code class="filename">tm</code>.
+                  </p>
+               </li>
+               <li class="listitem">
+                  <p>Pannello del Glossario: i file con estensione di glossario conosciuta rilasciati qui (<code class="filename">.txt</code>, <code class="filename">.tab</code>, ecc.) saranno copiati nella cartella <code class="filename">glossary</code>.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="editor.pane"></a>1.&nbsp;Editor
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questo è luogo in cui scrivere e modificare la traduzione. La finestra dell'Editor visualizza il testo del documento parzialmente
+               tradotto: il testo già tradotto viene visualizzato nella traduzione, mentre il testo non ancora tradotto viene visualizzato
+               nella lingua di partenza originaria. Il testo visualizzato è suddiviso in segmenti e ogni singolo segmento potrà essere aperto
+               e modificato facendovi sopra doppio clic. Nell'esempio mostrato sopra, i segmenti già tradotti sono mostrati in giallo.
+            </p>
+            <p>Uno dei segmenti mostrati sopra è quello attivo. È il segmento suddiviso in due parti. La parte superiore riporta, in grassetto
+               e in uno sfondo verde, il testo di partenza (da tradurre), mentre la parte inferiore è il “campo di modifica” (ovvero dove
+               si dovrà scrivere o modificare la traduzione), che termina con un marcatore: il marcatore è il <code class="literal">&lt;segmento nnnn&gt;</code> dove nnnn corrisponde al numero del segmento all'interno del progetto. La parte superiore del segmento viene utilizzata come
+               riferimento del testo da tradurre, mentre la parte inferiore (il “campo di modifica”) è quella dove viene scritta, o modificata,
+               la traduzione.
+            </p>
+            <p>Nota: il marcatore di segmento visualizza <code class="literal">&lt;segmento nnnn&nbsp;+yy&nbsp;in più&gt; quando il segmento non è univoco. In questo caso, yy rappresenta il numero di altre occorrenze
+                  del segmento all'interno del progetto.</code></p>
+            <p>A seconda dell'impostazione del comportamento di modifica, il campo di modifica del segmento da tradurre può risultare vuoto
+               oppure contenere il testo di partenza o la traduzione della stringa più simile a quella da tradurre. Quando ci si sposta a
+               un altro segmento, la traduzione verrà confermata e memorizzata. Se si desidera che la traduzione sia uguale al testo originario,
+               sarà sufficiente svuotare il campo di modifica, rimuovendo tutto il testo (selezionare il contenuto con <span class="keycap"><strong>Ctrl+A</strong></span> ed eliminarlo con <span class="keycap"><strong>Canc</strong></span>). OmegaT è in grado di memorizzare traduzioni che risultano uguali al testo di partenza. Si tratta di una funzione particolarmente
+               utile quando i documenti contengono marchi di fabbrica, nomi o altri nomi propri, oppure parti che devono rimanere nella loro
+               lingua originaria e non richiedono, quindi, traduzione. Per ulteriori informazioni si veda <span class="emphasis"><em>Modifica della traduzione</em></span>.
+            </p>
+            <p>Il clic col pulsante destro del mouse, all'interno della finestra dell'Editor, apre un menu contestuale in cui è possibile
+               scegliere le funzioni<span class="bold"><strong> Taglia, Copia, Incolla</strong></span> (ossia le stesse funzioni relative alla combinazione di tasti <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>X</strong></span>, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span> e <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>V</strong></span>), <span class="bold"><strong>Vai al segmento</strong></span> e <span class="bold"><strong>Aggiungi voce di glossario</strong></span>. In aggiunta, quando si fa il clic col pulsante destro del mouse su un segmento aperto, vengono offerte altre opzioni riguardanti
+               le <span class="bold"><strong>traduzioni alternative</strong></span>, per esempio di passare a un'altra istanza di segmenti non univoci.
+            </p>
+            <p>È possibile trascinare del testo da qualsiasi punto all'interno della finestra principale e rilasciarlo all'interno del segmento.
+               Il testo trascinato dall'esterno all'interno del segmento di arrivo viene copiato, mentre quello trascinato al suo interno
+               viene spostato.
+            </p>
+            <p>Per impostazione predefinita, non è possibile selezionare le parole nel segmento di partenza utilizzando la tastiera anziché
+               il mouse. La pressione del tasto <span class="keycap"><strong>F2</strong></span> consente di spostare il cursore all'interno del segmento di partenza (o in qualsiasi punto dell'editor) tramite i tasti freccia.
+               In questa modalità , la dicitura "<span class="guilabel">Blocco cursore disattivo</span>" viene visualizzata nella parte inferiore del pannello. Per tornare alla modalità standard "<span class="guilabel">Blocco cursore attivo</span>", premere di nuovo <span class="keycap"><strong>F2</strong></span>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4352"></a>2.&nbsp;Concordanze parziali (fuzzy)
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>La finestra delle "Concordanze" mostra i segmenti più simili a quelli contenuti nelle memorie di traduzione, sia quella interna
+               del progetto creata in tempo reale durante la traduzione, sia quelle secondarie importate da lavori precedenti o ricevute
+               dal proprio cliente o agenzia di traduzione.
+            </p>
+            <p>Quando ci si sposta a un segmento successivo, nella finestra “Concordanze parziali (fuzzy)” verrà automaticamente selezionata
+               la prima concordanza parziale (ovvero quella con la percentuale di concordanza più alta). Si può selezionare un'altra corrispondenza
+               tramite la combinazione di tasti <span class="guimenuitem">Ctrl+2, 3, 4 o 5</span>. Se non dovesse esistere una corrispondenza #5, ovviamente la combinazione <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>5</strong></span> non sortirà alcun effetto. Per utilizzare la concordanza selezionata all'interno della traduzione, premere <span class="guimenuitem">Ctrl+R</span> per sostituire il testo del campo di modifica oppure <span class="guimenuitem">Ctrl+I </span> se lo si vuole inserire alla posizione del cursore.
+            </p>
+            <p>La percentuale di concordanza equivale approssimativamente al numero di parole comuni nel segmento di origine e quello concordante,
+               diviso per il numero di parole contenute nel più lungo dei due. La concordanza parziale selezionata è evidenziata in grassetto,
+               le parole che non appaiono nel segmento che si sta traducendo sono segnalate in blu e quelle adiacenti alle parti mancanti
+               in verde. Nell'esempio sopra citato, il segmento di origine è <span class="bold"><strong>Context menu command</strong></span>. La prima concordanza è 100%, perché tutte le parole corrispondono. Questo vale anche per le due concordanze successive,
+               mentre per la #4 no, poiché è simile ma non uguale. La riga con la percentuale di concordanza include anche il nome della
+               memoria di traduzione che la contiene. Se non viene visualizzato alcun nome di file, l'origine è la memoria di traduzione
+               interna del progetto. I segmenti orfani (la concordanza #2) indicano i segmenti della memoria di traduzione predefinita del
+               progetto che non presentano corrispondenza nel segmento di origine.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4379"></a>3.&nbsp;Glossario
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Il pannello del Glossario consente di accedere alle raccolte di espressioni e voci terminologiche compilate nei propri file
+               di glossario. Mostra la traduzione dei termini trovati nel segmento attivo. Il segmento originario, nell'esempio sotto, è
+               “<span class="emphasis"><em>Context menu command</em></span>”, come nell'esempio sopra riportato delle concordanze parziali, e i termini mostrati sono stati rinvenuti nei glossari disponibili
+               (raccolta di termini Microsoft e glossario del Slovenian Linux User group).
+            </p>
+            <p>Se l'opzione per i suggerimenti è attivata (<span class="guimenuitem">Opzioni → Abilita suggerimenti</span>), è possibile fare clic col pulsante destro del mouse sulla parola evidenziata e aprire un menu contestuale contenente la
+               traduzione suggerita dal glossario. La selezione di uno di essi ne inserirà il contenuto, all'interno del segmento di destinazione,
+               in corrispondenza della posizione attuale del cursore. È possibile anche evidenziare la propria alternativa preferita all'interno
+               del riquadro del glossario e, tramite clic col pulsante destro del mouse, inserirla nel segmento di destinazione.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4392"></a>4.&nbsp;Dizionario
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>I dizionari sono gli equivalenti elettronici dei formati cartacei dei vocabolari Merriam Webster, Duden, Larousse, e così
+               via, presenti nelle scrivanie di qualsiasi traduttore. Ulteriori informazioni sono consultabili nel capitolo <a class="link" href="appendix.dictionaries.html" title="Appendix&nbsp;A.&nbsp;Dizionari">Dizionari</a></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4399"></a>5.&nbsp;Traduzione automatica
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Se aperto, il pannello della traduzione automatica contiene i suggerimenti, per il segmento attivo, provenienti dagli strumenti
+               di traduzione automatica. Premere <span class="keysym">Ctrl+M</span> per sostituire la traduzione del segmento attivo con quella della traduzione automatica.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4407"></a>6.&nbsp;Traduzioni multiple
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Un segmento originario specifico può comportare traduzioni diverse a seconda del contesto. Se l'attuale traduzione del segmento
+               non è adatta, l'utente può selezionare <span class="guisubmenu">Modifica → Crea traduzione alternativa</span>. Il testo tradotto inserito dopo tale comando verrà considerato come una traduzione alternativa del segmento di partenza.
+               È possibile definire una delle alternative - per esempio, l'occorrenza più probabile - come traduzione predefinita, selezionando
+               <span class="guisubmenu">Modifica → Usa come traduzione predefinita</span></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4417"></a>7.&nbsp;Note
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Il traduttore può aggiungere note al segmento aperto, per esempio per ritornarci in un secondo tempo e lavorare sulla traduzione,
+               accertarsi che le traduzioni siano corrette o chiedere un'opinione ai propri colleghi. È possibile navigare tra le note tramite
+               il comando <span class="guisubmenu">Vai → Nota successiva</span> e <span class="guisubmenu">Vai → Nota precedente</span>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4428"></a>8.&nbsp;Commenti
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Alcuni formati di file, specifici per le traduzioni, come quelli PO, consentono l'inserimento di commenti. In questo modo
+               al traduttore viene offerto il contesto relativo alla segmento da tradurre. Nell'esempio sotto riportato, l'autore del file
+               PO ha incluso un avvertimento del traduttore per verificare la lunghezza della traduzione:
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4433"></a>9.&nbsp;Barra di stato
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>La barra di stato è destinata a contenere i messaggi relativi al flusso di lavoro e si trova nella parte inferiore della schermata
+               principale. Questa barra comunica all'utente quali sono le operazioni specifiche in corso di esecuzione. Riporta anche il
+               numero delle concordanze parziali e di glossario rilevate per il segmento attivo.
+            </p>
+            <p>I contatori nella parte inferiore destra della finestra tengono traccia dell'avanzamento della traduzione (i numeri nella
+               colonna sinistra si riferiscono alla figura sopra riportata):
+            </p>
+            <div class="table"><a name="d0e4440"></a><p class="title"><b>Table&nbsp;4.2.&nbsp;Finestra principale - contatori</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Finestra principale - contatori" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <tbody>
+                        <tr>
+                           <td align="left">27/27</td>
+                           <td>numero di segmenti - tradotti risp. totale del file corrente</td>
+                        </tr>
+                        <tr>
+                           <td align="left">9319/16338</td>
+                           <td>numero di segmenti univoci - tradotti risp. totale nel progetto</td>
+                        </tr>
+                        <tr>
+                           <td align="left">31175</td>
+                           <td>numero totale di segmenti (incluse le ripetizioni) nel progetto</td>
+                        </tr>
+                        <tr>
+                           <td align="left">103/114</td>
+                           <td>numero di caratteri di origine e di destinazione nel segmento attivo</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"><p>Da un punto di vista pratico, la coppia di numeri più importante è la seconda: indica quanto lavoro è stato svolto, in relazione
+               al totale, o secondo numero. Il progetto, nell'esempio, è evidentemente terminato, dato che tutti i segmenti univoci sono
+               stati tradotti.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="windows.and.dialogs.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="project.folder.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;3.&nbsp;Finestre e finestre di dialogo&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;5.&nbsp;Cartella del progetto</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

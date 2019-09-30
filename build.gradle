@@ -236,12 +236,12 @@ ext {
 
     assetDir = findProperty('assetDir') ?: '../'
 
-    macJRE = fileTree(dir: assetDir, include: 'jre-*-macosx-x64.tar.gz')
+    macJRE = fileTree(dir: assetDir, include: '*-jre_x64_mac_*.tar.gz')
 
-    linux64JRE = fileTree(dir: assetDir, include: 'jre-*-linux-x64.tar.gz')
+    linux64JRE = fileTree(dir: assetDir, include: '*-jre_x64_linux_*.tar.gz')
 
-    windowsJRE = fileTree(dir: assetDir, include: 'jre-*-windows-i586.tar.gz')
-    windowsJRE64 = fileTree(dir: assetDir, include: 'jre-*-windows-x64.tar.gz')
+    windowsJRE = fileTree(dir: assetDir, include: '*-jre_x86-32_windows_*.zip')
+    windowsJRE64 = fileTree(dir: assetDir, include: '*-jre_x64_windows_*.zip')
 }
 
 task genDocIndex(type: Copy) {
@@ -368,7 +368,7 @@ distributions {
                     into 'OmegaT.app/Contents/PlugIns'
                     includeEmptyDirs = false
                     eachFile {
-                        replaceRelativePathSegment(it, /jre.*\.jre/, 'jre.bundle')
+                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
                     }
                 }
             }
@@ -383,7 +383,7 @@ distributions {
                 from(tarTree(linux64JRE.singleFile)) {
                     includeEmptyDirs = false
                     eachFile {
-                        replaceRelativePathSegment(it, /jre.*/, 'jre')
+                        replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
                     }
                 }
             }
@@ -558,10 +558,10 @@ ext.makeWinTask = { args ->
             include 'OmegaT.exe', 'OmegaT.l4J.ini'
         }
         if (args.jrePath && !args.jrePath.empty) {
-            from (tarTree(args.jrePath.singleFile)) {
+            from (zipTree(args.jrePath.singleFile)) {
                 includeEmptyDirs = false
                 eachFile {
-                    replaceRelativePathSegment(it, /jre.*/, 'jre')
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
                 }
             }
         }

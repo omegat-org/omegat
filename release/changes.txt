@@ -20,7 +20,8 @@
 
   Bug fixes:
 
-  - Fixed errors when doing search-and-replace with certain regex strings
+  - Regex search-and-replace results are incorrect for some replacements
+  https://sourceforge.net/p/omegat/bugs/955/
 
   Localisation Updates:
 

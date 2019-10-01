@@ -9,7 +9,7 @@
 
   Implemented requests:
 
-  - Supports for BCP47 language tags
+  - Support BCP 47 language tags
   https://sourceforge.net/p/omegat/feature-requests/238/
 
   - Display fuzzy matches for all translations in the matching language

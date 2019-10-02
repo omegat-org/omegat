@@ -530,10 +530,11 @@ ext.getInnoSetupCustomMessages = {
     iniFiles.each { f ->
         def match = f.name =~ /CustomMessages_?([^\.]*).ini/
         if (match) {
-            def lang = match.group(1)
+            def capture = match.group(1)
+            def lang = capture.empty ? 'en' : capture
             if (!blacklist.contains(lang)) {
                 result << f.text.replaceAll(/(?m)^([^=]+)/) {
-                    lang.empty ? it[0] : "${lang}.${it[0]}"
+                    "$lang.${it[0]}"
                 }
                 result << System.lineSeparator()
             }

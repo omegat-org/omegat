@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
+               2019 Marc Riera Irigoyen
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,11 +26,18 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.awt.Window;
+import java.awt.event.*;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.swing.JLabel;
+import javax.swing.JCheckBox;
+import javax.swing.JTextField;
+
+import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -43,9 +51,12 @@ import org.omegat.util.WikiGet;
  * @author Didier Briel
  */
 public class ApertiumTranslate extends BaseTranslate {
-    protected static final String GT_URL = "https://www.apertium.org/apy/translate?q=";
+    protected static final String PROPERTY_APERTIUM_CUSTOM = "apertium.server.custom";
+    protected static final String PROPERTY_APERTIUM_URL = "/translate?q=";
+    protected static final String PROPERTY_APERTIUM_URL2 = "&markUnknown=no&langpair=#sourceLang#|#targetLang#&key=";
+    protected static final String PROPERTY_APERTIUM_SERVER = "https://www.apertium.org/apy";
     // Specific OmegaT key
-    protected static final String GT_URL2 = "&markUnknown=no&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
+    protected static final String PROPERTY_APERTIUM_API_KEY = "bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
 
     @Override
     protected String getPreferenceName() {
@@ -83,18 +94,23 @@ public class ApertiumTranslate extends BaseTranslate {
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String prev = getFromCache(sLang, tLang, text);
-        if (prev != null) {
-            return prev;
-        }
-
         String trText = text;
 
         String sourceLang = apertiumCode(sLang);
         String targetLang = apertiumCode(tLang);
 
-        String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang);
-        String url = GT_URL + URLEncoder.encode(trText, "UTF-8") + url2;
+        String server = getServerUrl();
+        String apiKey = getCredential(PROPERTY_APERTIUM_API_KEY);
+
+        if (!useCustomServer()) {
+            server = PROPERTY_APERTIUM_SERVER;
+        }
+        if (!useCustomServer()) {
+            apiKey = PROPERTY_APERTIUM_API_KEY;
+        }
+
+        String url2 = PROPERTY_APERTIUM_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang);
+        String url = server + PROPERTY_APERTIUM_URL + URLEncoder.encode(trText, "UTF-8") + url2 + apiKey;
         String v;
         try {
             v = WikiGet.getURL(url);
@@ -138,4 +154,67 @@ public class ApertiumTranslate extends BaseTranslate {
 
         return tr;
     }
+
+    private String getServerUrl() {
+        return System.getProperty(PROPERTY_APERTIUM_SERVER, Preferences.getPreference(PROPERTY_APERTIUM_SERVER));
+    }
+
+    private boolean useCustomServer() {
+        String value = System.getProperty(PROPERTY_APERTIUM_CUSTOM,
+                Preferences.getPreference(PROPERTY_APERTIUM_CUSTOM));
+        return Boolean.parseBoolean(value);
+    }
+
+    @Override
+    public boolean isConfigurable() {
+        return true;
+    }
+
+    @Override
+    public void showConfigurationUI(Window parent) {
+
+        JCheckBox apiCheckBox = new JCheckBox(OStrings.getString("APERTIUM_CUSTOM_SERVER_LABEL"));
+        apiCheckBox.setSelected(useCustomServer());
+
+        MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
+            @Override
+            protected void onConfirm() {
+                boolean temporary = panel.temporaryCheckBox.isSelected();
+                System.setProperty(PROPERTY_APERTIUM_CUSTOM, Boolean.toString(apiCheckBox.isSelected()));
+                Preferences.setPreference(PROPERTY_APERTIUM_CUSTOM, apiCheckBox.isSelected());
+                String server = panel.valueField1.getText().trim();
+                String apiKey = panel.valueField2.getText().trim();
+                System.setProperty(PROPERTY_APERTIUM_SERVER, server);
+                Preferences.setPreference(PROPERTY_APERTIUM_SERVER, server);
+                setCredential(PROPERTY_APERTIUM_API_KEY, apiKey, temporary);
+            }
+        };
+
+        apiCheckBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent event) {
+                dialog.panel.valueLabel1.setEnabled(apiCheckBox.isSelected());
+                dialog.panel.valueLabel2.setEnabled(apiCheckBox.isSelected());
+                dialog.panel.valueField1.setEnabled(apiCheckBox.isSelected());
+                dialog.panel.valueField2.setEnabled(apiCheckBox.isSelected());
+                dialog.panel.temporaryCheckBox.setEnabled(apiCheckBox.isSelected());
+            }
+        });
+
+        dialog.panel.itemsPanel.add(apiCheckBox,1);
+        dialog.panel.valueLabel1.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_URL_LABEL"));
+        dialog.panel.valueField1.setText(getServerUrl());
+        dialog.panel.valueField1.setColumns(20);
+        dialog.panel.valueLabel2.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_KEY_LABEL"));
+        dialog.panel.valueField2.setText(getCredential(PROPERTY_APERTIUM_API_KEY));
+
+        dialog.panel.valueLabel1.setEnabled(apiCheckBox.isSelected());
+        dialog.panel.valueLabel2.setEnabled(apiCheckBox.isSelected());
+        dialog.panel.valueField1.setEnabled(apiCheckBox.isSelected());
+        dialog.panel.valueField2.setEnabled(apiCheckBox.isSelected());
+        dialog.panel.temporaryCheckBox.setEnabled(apiCheckBox.isSelected());
+
+        dialog.show();
+    }
+
 }

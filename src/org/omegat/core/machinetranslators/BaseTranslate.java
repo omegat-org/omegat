@@ -146,6 +146,13 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     /**
+     * Clear the machine translation cache.
+     */
+    protected void clearCache() {
+        cache.clear();
+    }
+
+    /**
      * Retrieve a credential with the given ID. First checks temporary system properties, then falls back to
      * the program's persistent preferences. Store a credential with
      * {@link #setCredential(String, String, boolean)}.

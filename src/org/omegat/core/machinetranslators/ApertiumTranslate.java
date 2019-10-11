@@ -51,12 +51,13 @@ import org.omegat.util.WikiGet;
  * @author Didier Briel
  */
 public class ApertiumTranslate extends BaseTranslate {
-    protected static final String PROPERTY_APERTIUM_CUSTOM = "apertium.server.custom";
-    protected static final String PROPERTY_APERTIUM_URL = "/translate?q=";
-    protected static final String PROPERTY_APERTIUM_URL2 = "&markUnknown=no&langpair=#sourceLang#|#targetLang#&key=";
-    protected static final String PROPERTY_APERTIUM_SERVER = "https://www.apertium.org/apy";
+    protected static final String PROPERTY_APERTIUM_SERVER_CUSTOM = "apertium.server.custom";
+    protected static final String PROPERTY_APERTIUM_SERVER_URL = "apertium.server.url";
+    protected static final String PROPERTY_APERTIUM_SERVER_KEY = "apertium.server.key";
+    protected static final String APERTIUM_SERVER_URL = "https://www.apertium.org/apy";
+    protected static final String APERTIUM_SERVER_URL_FORMAT = "%s/translate?q=%s&markUnknown=no&langpair=%s|%s&key=%s";
     // Specific OmegaT key
-    protected static final String PROPERTY_APERTIUM_API_KEY = "bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
+    protected static final String APERTIUM_SERVER_KEY = "bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
 
     @Override
     protected String getPreferenceName() {
@@ -94,23 +95,27 @@ public class ApertiumTranslate extends BaseTranslate {
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
+        String prev = getFromCache(sLang, tLang, text);
+        if (prev != null) {
+            return prev;
+        }
+
         String trText = text;
 
         String sourceLang = apertiumCode(sLang);
         String targetLang = apertiumCode(tLang);
 
-        String server = getServerUrl();
-        String apiKey = getCredential(PROPERTY_APERTIUM_API_KEY);
+        String server = getCredential(PROPERTY_APERTIUM_SERVER_URL);
+        String apiKey = getCredential(PROPERTY_APERTIUM_SERVER_KEY);
 
         if (!useCustomServer()) {
-            server = PROPERTY_APERTIUM_SERVER;
+            server = APERTIUM_SERVER_URL;
         }
         if (!useCustomServer()) {
-            apiKey = PROPERTY_APERTIUM_API_KEY;
+            apiKey = APERTIUM_SERVER_KEY;
         }
 
-        String url2 = PROPERTY_APERTIUM_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang);
-        String url = server + PROPERTY_APERTIUM_URL + URLEncoder.encode(trText, "UTF-8") + url2 + apiKey;
+        String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(trText, "UTF-8"), sourceLang, targetLang, apiKey);
         String v;
         try {
             v = WikiGet.getURL(url);
@@ -155,13 +160,12 @@ public class ApertiumTranslate extends BaseTranslate {
         return tr;
     }
 
-    private String getServerUrl() {
-        return System.getProperty(PROPERTY_APERTIUM_SERVER, Preferences.getPreference(PROPERTY_APERTIUM_SERVER));
-    }
-
+    /**
+     * Whether or not to use a custom Apertium server
+     */
     private boolean useCustomServer() {
-        String value = System.getProperty(PROPERTY_APERTIUM_CUSTOM,
-                Preferences.getPreference(PROPERTY_APERTIUM_CUSTOM));
+        String value = System.getProperty(PROPERTY_APERTIUM_SERVER_CUSTOM,
+                Preferences.getPreference(PROPERTY_APERTIUM_SERVER_CUSTOM));
         return Boolean.parseBoolean(value);
     }
 
@@ -180,17 +184,16 @@ public class ApertiumTranslate extends BaseTranslate {
             @Override
             protected void onConfirm() {
                 boolean temporary = panel.temporaryCheckBox.isSelected();
-                System.setProperty(PROPERTY_APERTIUM_CUSTOM, Boolean.toString(apiCheckBox.isSelected()));
-                Preferences.setPreference(PROPERTY_APERTIUM_CUSTOM, apiCheckBox.isSelected());
+                System.setProperty(PROPERTY_APERTIUM_SERVER_CUSTOM, Boolean.toString(apiCheckBox.isSelected()));
+                Preferences.setPreference(PROPERTY_APERTIUM_SERVER_CUSTOM, apiCheckBox.isSelected());
                 String server = panel.valueField1.getText().trim();
                 String apiKey = panel.valueField2.getText().trim();
-                System.setProperty(PROPERTY_APERTIUM_SERVER, server);
-                Preferences.setPreference(PROPERTY_APERTIUM_SERVER, server);
-                setCredential(PROPERTY_APERTIUM_API_KEY, apiKey, temporary);
+                setCredential(PROPERTY_APERTIUM_SERVER_URL, server, temporary);
+                setCredential(PROPERTY_APERTIUM_SERVER_KEY, apiKey, temporary);
             }
         };
 
-        apiCheckBox.addItemListener(new ItemListener() {
+        ItemListener toggleInterface = new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent event) {
                 dialog.panel.valueLabel1.setEnabled(apiCheckBox.isSelected());
@@ -199,20 +202,18 @@ public class ApertiumTranslate extends BaseTranslate {
                 dialog.panel.valueField2.setEnabled(apiCheckBox.isSelected());
                 dialog.panel.temporaryCheckBox.setEnabled(apiCheckBox.isSelected());
             }
-        });
+        };
+
+        apiCheckBox.addItemListener(toggleInterface);
 
         dialog.panel.itemsPanel.add(apiCheckBox,1);
         dialog.panel.valueLabel1.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_URL_LABEL"));
-        dialog.panel.valueField1.setText(getServerUrl());
+        dialog.panel.valueField1.setText(getCredential(PROPERTY_APERTIUM_SERVER_URL));
         dialog.panel.valueField1.setColumns(20);
         dialog.panel.valueLabel2.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_KEY_LABEL"));
-        dialog.panel.valueField2.setText(getCredential(PROPERTY_APERTIUM_API_KEY));
+        dialog.panel.valueField2.setText(getCredential(PROPERTY_APERTIUM_SERVER_KEY));
 
-        dialog.panel.valueLabel1.setEnabled(apiCheckBox.isSelected());
-        dialog.panel.valueLabel2.setEnabled(apiCheckBox.isSelected());
-        dialog.panel.valueField1.setEnabled(apiCheckBox.isSelected());
-        dialog.panel.valueField2.setEnabled(apiCheckBox.isSelected());
-        dialog.panel.temporaryCheckBox.setEnabled(apiCheckBox.isSelected());
+        toggleInterface.itemStateChanged(null);
 
         dialog.show();
     }

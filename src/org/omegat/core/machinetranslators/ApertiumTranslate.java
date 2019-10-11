@@ -54,10 +54,10 @@ public class ApertiumTranslate extends BaseTranslate {
     protected static final String PROPERTY_APERTIUM_SERVER_CUSTOM = "apertium.server.custom";
     protected static final String PROPERTY_APERTIUM_SERVER_URL = "apertium.server.url";
     protected static final String PROPERTY_APERTIUM_SERVER_KEY = "apertium.server.key";
-    protected static final String APERTIUM_SERVER_URL = "https://www.apertium.org/apy";
+    protected static final String APERTIUM_SERVER_URL_DEFAULT = "https://www.apertium.org/apy";
     protected static final String APERTIUM_SERVER_URL_FORMAT = "%s/translate?q=%s&markUnknown=no&langpair=%s|%s&key=%s";
     // Specific OmegaT key
-    protected static final String APERTIUM_SERVER_KEY = "bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
+    protected static final String APERTIUM_SERVER_KEY_DEFAULT = "bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
 
     @Override
     protected String getPreferenceName() {
@@ -105,14 +105,12 @@ public class ApertiumTranslate extends BaseTranslate {
         String sourceLang = apertiumCode(sLang);
         String targetLang = apertiumCode(tLang);
 
-        String server = getCredential(PROPERTY_APERTIUM_SERVER_URL);
+        String server = getCustomServerUrl();
         String apiKey = getCredential(PROPERTY_APERTIUM_SERVER_KEY);
 
         if (!useCustomServer()) {
-            server = APERTIUM_SERVER_URL;
-        }
-        if (!useCustomServer()) {
-            apiKey = APERTIUM_SERVER_KEY;
+            server = APERTIUM_SERVER_URL_DEFAULT;
+            apiKey = APERTIUM_SERVER_KEY_DEFAULT;
         }
 
         String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(trText, "UTF-8"), sourceLang, targetLang, apiKey);
@@ -120,7 +118,8 @@ public class ApertiumTranslate extends BaseTranslate {
         try {
             v = WikiGet.getURL(url);
         } catch (IOException e) {
-            return e.getLocalizedMessage();
+            Log.logErrorRB(e, "APERTIUM_CUSTOM_SERVER_NOTFOUND");
+            return OStrings.getString("APERTIUM_CUSTOM_SERVER_NOTFOUND");
         }
 
         String tr = getJsonResults(v);
@@ -143,6 +142,9 @@ public class ApertiumTranslate extends BaseTranslate {
         String tr = null;
         if (rootNode.containsKey("responseStatus")) {
             code = (Integer) rootNode.get("responseStatus");
+        }
+        else {
+            return OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID");
         }
 
         if (rootNode.containsKey("responseData")) {
@@ -169,6 +171,15 @@ public class ApertiumTranslate extends BaseTranslate {
         return Boolean.parseBoolean(value);
     }
 
+    /**
+     * Get the custom server URL
+     */
+    private String getCustomServerUrl() {
+        String value = System.getProperty(PROPERTY_APERTIUM_SERVER_URL,
+                Preferences.getPreference(PROPERTY_APERTIUM_SERVER_URL));
+        return value;
+    }
+
     @Override
     public boolean isConfigurable() {
         return true;
@@ -188,7 +199,13 @@ public class ApertiumTranslate extends BaseTranslate {
                 Preferences.setPreference(PROPERTY_APERTIUM_SERVER_CUSTOM, apiCheckBox.isSelected());
                 String server = panel.valueField1.getText().trim();
                 String apiKey = panel.valueField2.getText().trim();
-                setCredential(PROPERTY_APERTIUM_SERVER_URL, server, temporary);
+
+                if (server != getCustomServerUrl()) {
+                    clearCache();
+                }
+
+                System.setProperty(PROPERTY_APERTIUM_SERVER_URL, server);
+                Preferences.setPreference(PROPERTY_APERTIUM_SERVER_URL, server);
                 setCredential(PROPERTY_APERTIUM_SERVER_KEY, apiKey, temporary);
             }
         };
@@ -208,10 +225,11 @@ public class ApertiumTranslate extends BaseTranslate {
 
         dialog.panel.itemsPanel.add(apiCheckBox,1);
         dialog.panel.valueLabel1.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_URL_LABEL"));
-        dialog.panel.valueField1.setText(getCredential(PROPERTY_APERTIUM_SERVER_URL));
+        dialog.panel.valueField1.setText(getCustomServerUrl());
         dialog.panel.valueField1.setColumns(20);
         dialog.panel.valueLabel2.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_KEY_LABEL"));
         dialog.panel.valueField2.setText(getCredential(PROPERTY_APERTIUM_SERVER_KEY));
+        dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_APERTIUM_SERVER_KEY));
 
         toggleInterface.itemStateChanged(null);
 

@@ -200,7 +200,7 @@ public class ApertiumTranslate extends BaseTranslate {
                 String server = panel.valueField1.getText().trim();
                 String apiKey = panel.valueField2.getText().trim();
 
-                if (server != getCustomServerUrl()) {
+                if (!getCustomServerUrl().equals(server)) {
                     clearCache();
                 }
 

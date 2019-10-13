@@ -150,7 +150,6 @@ public abstract class BaseTranslate implements IMachineTranslation {
      */
     protected void clearCache() {
         cache.clear();
-        return;
     }
 
     /**

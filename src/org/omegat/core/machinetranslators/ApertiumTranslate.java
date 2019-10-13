@@ -27,15 +27,16 @@
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
-import java.awt.event.*;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.swing.JLabel;
 import javax.swing.JCheckBox;
-import javax.swing.JTextField;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.DocumentEvent;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.JsonParser;
@@ -113,7 +114,8 @@ public class ApertiumTranslate extends BaseTranslate {
             apiKey = APERTIUM_SERVER_KEY_DEFAULT;
         }
 
-        String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(trText, "UTF-8"), sourceLang, targetLang, apiKey);
+        String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(trText, "UTF-8"),
+                sourceLang, targetLang, apiKey);
         String v;
         try {
             v = WikiGet.getURL(url);
@@ -142,8 +144,7 @@ public class ApertiumTranslate extends BaseTranslate {
         String tr = null;
         if (rootNode.containsKey("responseStatus")) {
             code = (Integer) rootNode.get("responseStatus");
-        }
-        else {
+        } else {
             return OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID");
         }
 
@@ -210,6 +211,26 @@ public class ApertiumTranslate extends BaseTranslate {
             }
         };
 
+        Runnable updateOk = () -> {
+            boolean needsFields = apiCheckBox.isSelected();
+            boolean hasFields = !dialog.panel.valueField1.getText().trim().isEmpty();
+            boolean canConfirm = !needsFields || hasFields;
+            dialog.panel.okButton.setEnabled(canConfirm);
+        };
+
+        DocumentListener toggleOkButton = new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent event) {
+                updateOk.run();
+            }
+            public void insertUpdate(DocumentEvent event) {
+                updateOk.run();
+            }
+            public void removeUpdate(DocumentEvent event) {
+                updateOk.run();
+            }
+        };
+
         ItemListener toggleInterface = new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent event) {
@@ -218,12 +239,15 @@ public class ApertiumTranslate extends BaseTranslate {
                 dialog.panel.valueField1.setEnabled(apiCheckBox.isSelected());
                 dialog.panel.valueField2.setEnabled(apiCheckBox.isSelected());
                 dialog.panel.temporaryCheckBox.setEnabled(apiCheckBox.isSelected());
+                updateOk.run();
             }
         };
 
         apiCheckBox.addItemListener(toggleInterface);
+        dialog.panel.valueField1.getDocument().addDocumentListener(toggleOkButton);
 
-        dialog.panel.itemsPanel.add(apiCheckBox,1);
+
+        dialog.panel.itemsPanel.add(apiCheckBox, 1);
         dialog.panel.valueLabel1.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_URL_LABEL"));
         dialog.panel.valueField1.setText(getCustomServerUrl());
         dialog.panel.valueField1.setColumns(20);

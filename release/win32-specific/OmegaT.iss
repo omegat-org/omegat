@@ -8,6 +8,7 @@ AppPublisher=OmegaT
 AppPublisherURL=https://omegat.org/
 DefaultDirName={pf}\OmegaT
 DefaultGroupName=OmegaT
+DisableDirPage=no
 UninstallDisplayIcon={app}\OmegaT.exe
 AllowNoIcons=yes
 Compression=lzma

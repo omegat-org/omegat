@@ -590,7 +590,6 @@ ext.makeWinTask = { args ->
                 filter(ReplaceTokens, tokens: [
                     VERSION_NUMBER_SUBST: fullVersion,
                     OUTPUT_BASENAME_SUBST: installerBasename.toString(),
-                    JRE_COMMENT_SUBST: args.jrePath ? '' : ';',
                     CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
                     ARCHITECTURE_SUBST: args.arch ?: ''
                 ])

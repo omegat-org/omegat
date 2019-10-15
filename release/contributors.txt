@@ -15,6 +15,7 @@ Phillip Hall
 Jean-Christophe Helary
 Chihiro Hio
 Thomas Huriaux
+Marc Riera Irigoyen
 Hans-Peter Jacobs
 Kyle Katarn
 Piotr Kulik

@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.1.0
 ----------------------------------------------------------------------
-  0 Enhancements
+  1 Enhancement
   1 Bug fix
   0 Localisation updates
 ----------------------------------------------------------------------
 5.1.0 vs 5.0.0
+
+  Implemented requests:
+
+  - Allow users to choose Apertium server
+  https://sourceforge.net/p/omegat/feature-requests/1466/
 
   Bug fixes:
 

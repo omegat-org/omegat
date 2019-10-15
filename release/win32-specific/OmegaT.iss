@@ -76,7 +76,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Icons]
-Name: "{group}\OmegaT @VERSION_NUMBER_SUBST@"; Filename: "{app}\OmegaT.exe"; WorkingDir: "{app}"
+Name: "{group}\OmegaT"; Filename: "{app}\OmegaT.exe"; WorkingDir: "{app}"
 Name: "{commondesktop}\OmegaT"; Filename: "{app}\OmegaT.exe"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\OmegaT"; Filename: "{app}\OmegaT.exe"; Tasks: quicklaunchicon
 Name: "{group}\OmegaT Readme"; Filename: "{app}\readme.txt"

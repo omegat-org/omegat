@@ -56,10 +56,8 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
-import javax.swing.text.AttributeSet;
 import javax.swing.text.Caret;
 import javax.swing.text.JTextComponent;
-import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
@@ -81,7 +79,6 @@ import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.StaticUIUtils;
-import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -101,8 +98,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
     private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
 
-    private static final AttributeSet NO_ATTRIBUTES = Styles.createAttributeSet(null, null, false, null);
-    private static final AttributeSet PRIORITY_ATTRIBUTES = Styles.createAttributeSet(null, null, true, null);
     /**
      * Currently processed entry. Used to detect if user moved into new entry. In this case, new find should
      * be started.
@@ -117,6 +112,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     private CreateGlossaryEntry createGlossaryEntryDialog;
 
     private final DockableScrollPane scrollPane;
+
+    private final IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer();
 
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea(IMainWindow mw) {
@@ -225,18 +222,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
 
-        GlossaryEntry.StyledString buf = new GlossaryEntry.StyledString();
         for (GlossaryEntry entry : entries) {
-            GlossaryEntry.StyledString str = entry.toStyledString();
-            buf.append(str);
-            buf.append("\n\n");
-        }
-        setText(buf.text.toString());
-        StyledDocument doc = getStyledDocument();
-        doc.setCharacterAttributes(0, doc.getLength(), NO_ATTRIBUTES, true); // remove old bold settings first
-        for (int i = 0; i < buf.boldStarts.size(); i++) {
-            doc.setCharacterAttributes(buf.boldStarts.get(i), buf.boldLengths.get(i), PRIORITY_ATTRIBUTES,
-                    true);
+            entryRenderer.render(entry, getStyledDocument());
         }
     }
 

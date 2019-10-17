@@ -56,8 +56,12 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
+import javax.swing.ToolTipManager;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.Caret;
+import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
+import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
@@ -69,6 +73,7 @@ import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -79,6 +84,7 @@ import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.TooltipAttribute;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -160,6 +166,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             });
         }
 
+        ToolTipManager.sharedInstance().registerComponent(this);
+
         JTextPaneLinkifier.linkify(this);
     }
 
@@ -224,6 +232,19 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
         for (GlossaryEntry entry : entries) {
             entryRenderer.render(entry, getStyledDocument());
+        }
+    }
+
+    @Override
+    public String getToolTipText(MouseEvent event) {
+        StyledDocument doc = getStyledDocument();
+        Element elem = doc.getCharacterElement(Java8Compat.viewToModel(this, event.getPoint()));
+        AttributeSet as = elem.getAttributes();
+        Object attr = as.getAttribute(TooltipAttribute.ATTRIBUTE_KEY);
+        if (attr instanceof TooltipAttribute) {
+            return ((TooltipAttribute) attr).getPayload();
+        } else {
+            return super.getToolTipText(event);
         }
     }
 

@@ -30,8 +30,11 @@ import java.util.logging.Logger;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+
+import org.omegat.util.gui.TooltipAttribute;
 
 public class DefaultGlossaryRenderer implements IGlossaryRenderer {
 
@@ -110,8 +113,13 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
 
     @Override
     public void render(GlossaryEntry entry, StyledDocument doc) {
+        int start = doc.getLength();
         DocTarget trg = new DocTarget(doc);
         render(entry, trg);
+        int end = doc.getLength();
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        attrs.addAttribute(TooltipAttribute.ATTRIBUTE_KEY, new TooltipAttribute(renderToHtml(entry)));
+        doc.setCharacterAttributes(start, end - start, attrs, false);
         trg.append("\n\n");
     }
 

@@ -113,13 +113,8 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
 
     @Override
     public void render(GlossaryEntry entry, StyledDocument doc) {
-        int start = doc.getLength();
         DocTarget trg = new DocTarget(doc);
         render(entry, trg);
-        int end = doc.getLength();
-        SimpleAttributeSet attrs = new SimpleAttributeSet();
-        attrs.addAttribute(TooltipAttribute.ATTRIBUTE_KEY, new TooltipAttribute(renderToHtml(entry)));
-        doc.setCharacterAttributes(start, end - start, attrs, false);
         trg.append("\n\n");
     }
 
@@ -130,6 +125,7 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
         String[] targets = entry.getLocTerms(false);
         String[] comments = entry.getComments();
         boolean[] priorities = entry.getPriorities();
+        String[] origins = entry.getOrigins(false);
         StringBuilder commentsBuf = new StringBuilder();
         for (int i = 0, commentIndex = 0; i < targets.length; i++) {
             if (i > 0 && targets[i].equals(targets[i - 1])) {
@@ -145,7 +141,9 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
                 trg.append(", ");
             }
 
-            trg.append(bracketEntry(targets[i]), priorities[i] ? PRIORITY_ATTRIBUTES : null);
+            SimpleAttributeSet attrs = new SimpleAttributeSet(priorities[i] ? PRIORITY_ATTRIBUTES : NO_ATTRIBUTES);
+            attrs.addAttribute(TooltipAttribute.ATTRIBUTE_KEY, new TooltipAttribute(origins[i]));
+            trg.append(bracketEntry(targets[i]), attrs);
 
             commentIndex++;
             if (!comments[i].equals("")) {

@@ -351,7 +351,7 @@ distributions {
     mac {
         contents {
             from('release/mac-specific') {
-                exclude '**/MacOS/OmegaT', '**/Info.plist'
+                exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
             }
             from('release/mac-specific') {
                 include '**/MacOS/OmegaT'
@@ -471,6 +471,7 @@ task installMacSignedDist(type: Sync) {
                 '--sign', project.property('macCodesignIdentity'),
                 '--timestamp',
                 '--options', 'runtime',
+                '--entitlements', file('release/mac-specific/java.entitlements'),
                 file("${destinationDir}/OmegaT.app")
         }
     }

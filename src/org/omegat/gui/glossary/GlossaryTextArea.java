@@ -119,8 +119,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
     private final DockableScrollPane scrollPane;
 
-    private transient final IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer();
-
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea(IMainWindow mw) {
         super(true);
@@ -230,6 +228,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
 
+        IGlossaryRenderer entryRenderer = GlossaryRenderers.getPreferredGlossaryRenderer();
         for (GlossaryEntry entry : entries) {
             entryRenderer.render(entry, getStyledDocument());
         }

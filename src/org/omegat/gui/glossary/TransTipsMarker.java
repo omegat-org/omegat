@@ -50,8 +50,6 @@ public class TransTipsMarker implements IMarker {
     protected static final HighlightPainter TRANSTIPS_UNDERLINER = new UnderlineFactory.SolidBoldUnderliner(
             Styles.EditorColor.COLOR_TRANSTIPS.getColor());
 
-    private final DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer();
-
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
             boolean isActive) {
@@ -68,6 +66,7 @@ public class TransTipsMarker implements IMarker {
 
         List<Mark> marks = new ArrayList<Mark>();
 
+        IGlossaryRenderer renderer = GlossaryRenderers.getPreferredGlossaryRenderer();
         for (GlossaryEntry ent : glossaryEntries) {
             String tooltip = renderer.renderToHtml(ent);
             List<Token[]> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);

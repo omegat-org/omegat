@@ -36,6 +36,8 @@ import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.util.Language;
+import org.omegat.util.Preferences;
 
 /**
  * Class for find glossary entries for current entry in editor.
@@ -84,8 +86,11 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             return Collections.emptyList();
         }
 
-        GlossarySearcher searcher = new GlossarySearcher(tok,
-                Core.getProject().getProjectProperties().getSourceLanguage()) {
+        Language language = Core.getProject().getProjectProperties().getSourceLanguage();
+        boolean merge = Preferences.isPreferenceDefault(Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS,
+                Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS_DEFAULT);
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, language, merge) {
             @Override
             protected void checkCancelled() {
                 checkEntryChanged();

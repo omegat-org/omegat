@@ -103,6 +103,9 @@ public final class Preferences {
     public static final String GLOSSARY_REPLACE_ON_INSERT = "glossary_replace_on_insert";
     public static final String GLOSSARY_REQUIRE_SIMILAR_CASE = "glossary_require_similar_case";
     public static final boolean GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT = true;
+    public static final String GLOSSARY_LAYOUT = "glossary_layout";
+    public static final String GLOSSARY_MERGE_ALTERNATE_DEFINITIONS = "glossary_merge_alternate_definitions";
+    public static final boolean GLOSSARY_MERGE_ALTERNATE_DEFINITIONS_DEFAULT = true;
     public static final String DICTIONARY_FUZZY_MATCHING = "dictionary_fuzzy_matching";
     public static final String DICTIONARY_AUTO_SEARCH = "dictionary_auto_search";
 

@@ -3,9 +3,9 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2019 Aaron Madlon-Kay
+ Copyright (C) 2019 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: https://omegat.org/support
+               Support center: http://groups.yahoo.com/group/OmegaT/
 
  This file is part of OmegaT.
 
@@ -31,11 +31,11 @@ import javax.swing.text.StyleConstants;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.TooltipAttribute;
 
-public class DefaultGlossaryRenderer implements IGlossaryRenderer {
+public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
 
     @Override
     public String getName() {
-        return OStrings.getString("GLOSSARY_RENDERER_DEFAULT");
+        return OStrings.getString("GLOSSARY_RENDERER_DICTIONARY");
     }
 
     @Override
@@ -46,44 +46,35 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
     @Override
     public void render(GlossaryEntry entry, IRenderTarget<?> trg) {
         trg.append(entry.getSrcText(), SOURCE_ATTRIBUTES);
-        trg.append(" = ");
+        trg.append(": ");
 
         String[] targets = entry.getLocTerms(false);
         String[] comments = entry.getComments();
         boolean[] priorities = entry.getPriorities();
         String[] origins = entry.getOrigins(false);
-        StringBuilder commentsBuf = new StringBuilder();
-        for (int i = 0, commentIndex = 0; i < targets.length; i++) {
-            if (i > 0 && targets[i].equals(targets[i - 1])) {
-                if (!comments[i].equals("")) {
-                    commentsBuf.append("\n");
-                    commentsBuf.append(String.valueOf(commentIndex));
-                    commentsBuf.append(". ");
-                    commentsBuf.append(comments[i]);
+
+        boolean hasComments = false;
+        for (int i = 0; i < targets.length; i++) {
+            if (i == 0 || (!targets[i].equals(targets[i - 1]))) {
+                if (hasComments) {
+                    trg.append("\n\t");
+                    hasComments = false;
                 }
-                continue;
+                SimpleAttributeSet attrs = new SimpleAttributeSet(TARGET_ATTRIBUTES);
+                if (priorities[i]) {
+                    StyleConstants.setBold(attrs, true);
+                }
+                attrs.addAttribute(TooltipAttribute.ATTRIBUTE_KEY, new TooltipAttribute(origins[i]));
+                trg.append(bracketEntry(targets[i]), attrs);
+                if (i < targets.length - 1) {
+                    trg.append(",", null);
+                }
             }
-            if (i > 0) {
-                trg.append(", ");
-            }
-
-            SimpleAttributeSet attrs = new SimpleAttributeSet(TARGET_ATTRIBUTES);
-            if (priorities[i]) {
-                StyleConstants.setBold(attrs, true);
-            }
-            attrs.addAttribute(TooltipAttribute.ATTRIBUTE_KEY, new TooltipAttribute(origins[i]));
-            trg.append(bracketEntry(targets[i]), attrs);
-
-            commentIndex++;
             if (!comments[i].equals("")) {
-                commentsBuf.append("\n");
-                commentsBuf.append(String.valueOf(commentIndex));
-                commentsBuf.append(". ");
-                commentsBuf.append(comments[i]);
+                trg.append("\n\t- " + comments[i], NOTES_ATTRIBUTES);
+                hasComments = true;
             }
         }
-
-        trg.append(commentsBuf.toString(), NOTES_ATTRIBUTES);
     }
 
     /**

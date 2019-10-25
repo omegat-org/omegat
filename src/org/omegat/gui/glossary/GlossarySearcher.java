@@ -53,10 +53,12 @@ import org.omegat.util.Token;
 public class GlossarySearcher {
     private final ITokenizer tok;
     private final Language lang;
+    private final boolean mergeAltDefinitions;
 
-    public GlossarySearcher(ITokenizer tok, Language lang) {
+    public GlossarySearcher(ITokenizer tok, Language lang, boolean mergeAltDefinitions) {
         this.tok = tok;
         this.lang = lang;
+        this.mergeAltDefinitions = mergeAltDefinitions;
     }
 
     public List<GlossaryEntry> searchSourceMatches(SourceTextEntry ste, List<GlossaryEntry> entries) {
@@ -78,7 +80,7 @@ public class GlossarySearcher {
         // We reorder entries: 1) by priority, 2) by length, 3) by alphabet
         // Then remove the duplicates and combine the synonyms.
         sortGlossaryEntries(result);
-        return filterGlossary(result);
+        return filterGlossary(result, mergeAltDefinitions);
     }
 
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
@@ -230,13 +232,11 @@ public class GlossarySearcher {
         });
     }
 
-    private static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result) {
+    private static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result, boolean mergeAltDefinitions) {
         // First check that entries exist in the list.
         if (result.isEmpty()) {
             return result;
         }
-
-        List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
 
         // The default replace entry
         GlossaryEntry replaceEntry = new GlossaryEntry("", "", "", false, null);
@@ -283,6 +283,12 @@ public class GlossarySearcher {
 
             result = newList;
         }
+
+        if (!mergeAltDefinitions) {
+            return result;
+        }
+
+        List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
 
         // Group items with same scrTxt
         for (int i = 0; i < result.size(); i++) {

@@ -27,6 +27,7 @@ package org.omegat.gui.preferences.view;
 
 import javax.swing.JPanel;
 
+import org.omegat.gui.glossary.IGlossaryRenderer;
 import org.omegat.util.OStrings;
 
 /**
@@ -54,6 +55,11 @@ public class GlossaryPreferencesPanel extends JPanel {
         replaceHitsCheckBox = new javax.swing.JCheckBox();
         requireSimilarCaseCheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        jPanel1 = new javax.swing.JPanel();
+        cbGlossaryLayoutLabel = new javax.swing.JLabel();
+        cbGlossaryLayout = new javax.swing.JComboBox<>();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        mergeAlternateDefinitionsCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -74,11 +80,30 @@ public class GlossaryPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(requireSimilarCaseCheckBox, OStrings.getString("PREFS_GLOSSARY_REQUIRE_SIMILAR_CASE")); // NOI18N
         add(requireSimilarCaseCheckBox);
         add(filler1);
+
+        jPanel1.setAlignmentX(0.0F);
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        cbGlossaryLayoutLabel.setLabelFor(cbGlossaryLayout);
+        org.openide.awt.Mnemonics.setLocalizedText(cbGlossaryLayoutLabel, OStrings.getString("PREFS_GLOSSARY_LAYOUT")); // NOI18N
+        jPanel1.add(cbGlossaryLayoutLabel, java.awt.BorderLayout.NORTH);
+        jPanel1.add(cbGlossaryLayout, java.awt.BorderLayout.CENTER);
+
+        add(jPanel1);
+        add(filler2);
+
+        org.openide.awt.Mnemonics.setLocalizedText(mergeAlternateDefinitionsCheckBox, OStrings.getString("PREFS_GLOSSARY_MERGE_ALTERNATE_DEFINITIONS")); // NOI18N
+        add(mergeAlternateDefinitionsCheckBox);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JComboBox<IGlossaryRenderer> cbGlossaryLayout;
+    private javax.swing.JLabel cbGlossaryLayoutLabel;
     javax.swing.JCheckBox displayContextCheckBox;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.JPanel jPanel1;
+    javax.swing.JCheckBox mergeAlternateDefinitionsCheckBox;
     javax.swing.JCheckBox replaceHitsCheckBox;
     javax.swing.JCheckBox requireSimilarCaseCheckBox;
     javax.swing.JCheckBox useSeparateTermsCheckBox;

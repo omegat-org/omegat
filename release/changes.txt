@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.5.0
 ----------------------------------------------------------------------
-  2 Enhancements
+  4 Enhancements
   0 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -9,11 +9,17 @@
 
   Implemented requests:
 
+  - Alternative layout for glossary pane
+  https://sourceforge.net/p/omegat/feature-requests/1386/
+
   - Improve access speed for uncompressed StarDict dictionaries
   https://sourceforge.net/p/omegat/feature-requests/1532/
 
   - Make glossary colors customizable
   https://sourceforge.net/p/omegat/feature-requests/1537/
+
+  - Glossary layout plugin system
+  https://sourceforge.net/p/omegat/feature-requests/1538/
 
 ----------------------------------------------------------------------
  OmegaT 5.4.1 (2020-12-15)

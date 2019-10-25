@@ -246,8 +246,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
             return Collections.emptyList();
         }
 
-        GlossarySearcher searcher = new GlossarySearcher(tok,
-                Core.getProject().getProjectProperties().getSourceLanguage());
+        GlossarySearcher searcher = buildSearcher(tok, Core.getProject().getProjectProperties().getSourceLanguage());
 
         return searcher.searchSourceMatches(ste, entries);
     }
@@ -264,8 +263,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         if (tok == null) {
             return Collections.emptyList();
         }
-        GlossarySearcher searcher = new GlossarySearcher(tok,
-                Core.getProject().getProjectProperties().getSourceLanguage());
+        GlossarySearcher searcher = buildSearcher(tok, Core.getProject().getProjectProperties().getSourceLanguage());
 
         return searcher.searchSourceMatchTokens(ste, entry);
     }
@@ -286,9 +284,14 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         if (tok == null) {
             return Collections.emptyList();
         }
-        GlossarySearcher searcher = new GlossarySearcher(tok,
-                Core.getProject().getProjectProperties().getTargetLanguage());
+        GlossarySearcher searcher = buildSearcher(tok, Core.getProject().getProjectProperties().getTargetLanguage());
 
         return searcher.searchTargetMatches(trg, protectedParts, entry);
+    }
+
+    private GlossarySearcher buildSearcher(ITokenizer tokenizer, Language language) {
+        boolean merge = Preferences.isPreferenceDefault(Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS,
+                Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS_DEFAULT);
+        return new GlossarySearcher(tokenizer, language, merge);
     }
 }

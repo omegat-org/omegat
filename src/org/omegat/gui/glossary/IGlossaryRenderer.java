@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2019 Aaron Madlon-Kay
+ Copyright (C) 2019 Aaron Madlon-Kay, Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,8 +25,14 @@
 
 package org.omegat.gui.glossary;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import java.awt.Color;
 import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
+import javax.swing.text.StyleConstants;
 
 import org.omegat.util.gui.Styles;
 
@@ -40,5 +46,100 @@ public interface IGlossaryRenderer {
     static final AttributeSet NOTES_ATTRIBUTES = Styles.createAttributeSet(
             Styles.EditorColor.COLOR_GLOSSARY_NOTE.getColor(), null, null, null);
 
-    void render(GlossaryEntry entry, StyledDocument doc);
+    interface IRenderTarget<T> {
+        void append(String str);
+
+        void append(String str, AttributeSet attr);
+
+        T get();
+    }
+
+    static class DocTarget implements IRenderTarget<Void> {
+        DocTarget(StyledDocument doc) {
+            this.doc = doc;
+        }
+
+        private final StyledDocument doc;
+
+        @Override
+        public void append(String str) {
+            append(str, null);
+        }
+
+        @Override
+        public void append(String str, AttributeSet attr) {
+            try {
+                doc.insertString(doc.getLength(), str, attr);
+            } catch (BadLocationException e) {
+                // Should never happen since we only insert at end
+                Logger.getLogger(DefaultGlossaryRenderer.class.getName()).log(Level.SEVERE,
+                        e.getLocalizedMessage(), e);
+            }
+        }
+
+        @Override
+        public Void get() {
+            return null;
+        }
+    }
+
+    static class HtmlTarget implements IRenderTarget<String> {
+
+        private final StringBuilder buf = new StringBuilder();
+
+        @Override
+        public void append(String str) {
+            append(str, null);
+        }
+
+        @Override
+        public void append(String str, AttributeSet attr) {
+            if (attr != null) {
+                if (StyleConstants.isBold(attr)) {
+                    buf.append("<b>");
+                }
+                if (StyleConstants.isItalic(attr)) {
+                    buf.append("<i>");
+                }
+                Color attrColor = StyleConstants.getForeground(attr);
+                if (attrColor != Color.black) {
+                    String colorString = String.format("%02x%02x%02x",
+                            attrColor.getRed(), attrColor.getGreen(), attrColor.getBlue());
+                    buf.append("<font color=#" + colorString + ">");
+                }
+            }
+            buf.append(str);
+            if (attr != null) {
+                Color attrColor = StyleConstants.getForeground(attr);
+                if (attrColor != Color.black) {
+                    buf.append("</font>");
+                }
+                if (StyleConstants.isItalic(attr)) {
+                    buf.append("</i>");
+                }
+                if (StyleConstants.isBold(attr)) {
+                    buf.append("</b>");
+                }
+            }
+        }
+
+        @Override
+        public String get() {
+            return "<html><p>" + buf.toString().replace("\n", "<br>") + "</p></html>";
+        }
+    }
+
+    void render(GlossaryEntry entry, IRenderTarget<?> trg);
+
+    default void render(GlossaryEntry entry, StyledDocument doc) {
+        DocTarget trg = new DocTarget(doc);
+        render(entry, trg);
+        trg.append("\n\n");
+    }
+
+    default String renderToHtml(GlossaryEntry entry) {
+        HtmlTarget trg = new HtmlTarget();
+        render(entry, trg);
+        return trg.get();
+    }
 }

@@ -25,111 +25,14 @@
 
 package org.omegat.gui.glossary;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import java.awt.Color;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 import org.omegat.util.gui.TooltipAttribute;
 
 public class DefaultGlossaryRenderer implements IGlossaryRenderer {
 
-    protected interface IRenderTarget<T> {
-        void append(String str);
-
-        void append(String str, AttributeSet attr);
-
-        T get();
-    }
-
-    protected static class DocTarget implements IRenderTarget<Void> {
-        DocTarget(StyledDocument doc) {
-            this.doc = doc;
-        }
-
-        private final StyledDocument doc;
-
-        @Override
-        public void append(String str) {
-            append(str, null);
-        }
-
-        @Override
-        public void append(String str, AttributeSet attr) {
-            try {
-                doc.insertString(doc.getLength(), str, attr);
-            } catch (BadLocationException e) {
-                // Should never happen since we only insert at end
-                Logger.getLogger(DefaultGlossaryRenderer.class.getName()).log(Level.SEVERE,
-                        e.getLocalizedMessage(), e);
-            }
-        }
-
-        @Override
-        public Void get() {
-            return null;
-        }
-    }
-
-    protected static class HtmlTarget implements IRenderTarget<String> {
-
-        private final StringBuilder buf = new StringBuilder();
-
-        @Override
-        public void append(String str) {
-            append(str, null);
-        }
-
-        @Override
-        public void append(String str, AttributeSet attr) {
-            if (attr != null) {
-                if (StyleConstants.isBold(attr)) {
-                    buf.append("<b>");
-                }
-                if (StyleConstants.isItalic(attr)) {
-                    buf.append("<i>");
-                }
-                Color attrColor = StyleConstants.getForeground(attr);
-                if (attrColor != Color.black) {
-                    String colorString = String.format("%02x%02x%02x",
-                            attrColor.getRed(), attrColor.getGreen(), attrColor.getBlue());
-                    buf.append("<font color=#" + colorString + ">");
-                }
-            }
-            buf.append(str);
-            if (attr != null) {
-                Color attrColor = StyleConstants.getForeground(attr);
-                if (attrColor != Color.black) {
-                    buf.append("</font>");
-                }
-                if (StyleConstants.isItalic(attr)) {
-                    buf.append("</i>");
-                }
-                if (StyleConstants.isBold(attr)) {
-                    buf.append("</b>");
-                }
-            }
-        }
-
-        @Override
-        public String get() {
-            return "<html><p>" + buf.toString().replace("\n", "<br>") + "</p></html>";
-        }
-    }
-
-    @Override
-    public void render(GlossaryEntry entry, StyledDocument doc) {
-        DocTarget trg = new DocTarget(doc);
-        render(entry, trg);
-        trg.append("\n\n");
-    }
-
-    protected void render(GlossaryEntry entry, IRenderTarget<?> trg) {
+    public void render(GlossaryEntry entry, IRenderTarget<?> trg) {
         trg.append(entry.getSrcText(), SOURCE_ATTRIBUTES);
         trg.append(" = ");
 
@@ -169,12 +72,6 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
         }
 
         trg.append(commentsBuf.toString(), NOTES_ATTRIBUTES);
-    }
-
-    public String renderToHtml(GlossaryEntry entry) {
-        HtmlTarget trg = new HtmlTarget();
-        render(entry, trg);
-        return trg.get();
     }
 
     /**

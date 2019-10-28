@@ -882,15 +882,13 @@ task printModules {
 
 task runtime(type: Exec) {
     outputs.dir "$buildDir/runtime"
-    dependsOn jar
     doFirst {
         delete "$buildDir/runtime"
         // jdk.crypto.* required for SSL but not detected by jdeps
-        def modules = "${getModules()},jdk.crypto.ec,jdk.crypto.cryptoki"
         def args = ["${System.env.JAVA_HOME}/bin/jlink",
                     '--no-header-files', '--no-man-pages',
                     '--compress=2', '--strip-debug',
-                    '--add-modules', modules,
+                    '--add-modules', 'ALL-MODULE-PATH',
                     '--output', "$buildDir/runtime"]
         commandLine args
     }

@@ -358,7 +358,9 @@ distributions {
             }
             from('release/mac-specific') {
                 include '**/Info.plist'
-                expand(version: project.version)
+                expand(version: project.version,
+                       // $APP_ROOT is expanded at runtime by the launcher binary
+                       configfile: '$APP_ROOT/Contents/Resources/Configuration.properties')
             }
             into('OmegaT.app/Contents/Java') {
                 with main.contents
@@ -420,6 +422,10 @@ distributions {
                     'properties/nbsp.properties',
                     'extract_text_content.properties'
                 into 'source/scripts'
+            }
+            from('release') {
+                include 'mac-specific/OmegaT.app/Contents/Resources/en.lproj/Localizable.strings'
+                into 'source/release'
             }
             from('release') {
                 include 'readme.txt'
@@ -741,6 +747,41 @@ task genJAXB {
             exec {
                 commandLine 'xjc', '-no-header', '-d', 'src', '-p', cfg.p, '-b', cfg.b, cfg.xsd
             }
+        }
+    }
+}
+
+task genMac {
+    description = 'Generate the Mac .app skeleton. Requires AppBundler (https://bitbucket.org/infinitekind/appbundler) ' +
+        'to be available in ~/.ant/lib'
+    outputs.dir file('release/mac-specific')
+    def appbundlerJar = file("${System.getProperty('user.home')}/.ant/lib/appbundler-1.0ea.jar")
+    onlyIf {
+        appbundlerJar.file
+    }
+    doLast {
+        ant.taskdef(name: 'appbundler',
+                    classname: 'com.oracle.appbundler.AppBundlerTask',
+                    classpath: appbundlerJar)
+        ant.appbundler(outputdirectory: 'release/mac-specific',
+                       name: applicationName,
+                       displayname: applicationName,
+                       identifier: 'org.omegat.OmegaT',
+                       icon: 'images/OmegaT.icns',
+                       version: '${version}',
+                       jvmrequired: javaVersion,
+                       shortversion: '${version}',
+                       mainclassname: mainClassName) {
+            option(value: "-Xdock:name=${applicationName}")
+            argument(value: '--config-file=${configfile}')
+            bundledocument(extensions: 'project',
+                           name: "${applicationName} Project",
+                           role: 'editor',
+                           icon: 'images/OmegaT.icns')
+            bundledocument(extensions: '*',
+                           name: 'All Files',
+                           role: 'none')
+            plistentry(key: 'JVMRuntime', value: 'jre.bundle')
         }
     }
 }

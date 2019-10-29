@@ -26,6 +26,8 @@
         <string>????</string>
         <key>NSHumanReadableCopyright</key>
         <string></string>
+        <key>LSMinimumSystemVersion</key>
+        <string>10.7</string>
         <key>NSHighResolutionCapable</key>
         <true/>
         <key>NSSupportsAutomaticGraphicsSwitching</key>
@@ -47,8 +49,7 @@
                 <string>OmegaT Project</string>
                 <key>CFBundleTypeRole</key>
                 <string>Editor</string>
-                <key>LSTypeIsPackage</key>
-            <false/></dict>
+            </dict>
             <dict>
                 <key>CFBundleTypeExtensions</key>
                 <array>
@@ -58,8 +59,7 @@
                 <string>All Files</string>
                 <key>CFBundleTypeRole</key>
                 <string>None</string>
-                <key>LSTypeIsPackage</key>
-            <false/></dict>
+            </dict>
         </array>
         <key>LSArchitecturePriority</key>
         <array>
@@ -69,5 +69,19 @@
             <key>LC_CTYPE</key>
             <string>UTF-8</string>
         </dict>
+        <key>JVMOptions</key>
+        <array>
+            <string>-Xdock:name=OmegaT</string>
+        </array>
+        <key>JVMDefaultOptions</key>
+        <dict>
+        </dict>
+        <key>JVMArguments</key>
+        <array>
+            <string>--config-file=${configfile}</string>
+        </array>
+        <key>JVMRuntime</key>
+        <string>jre.bundle</string>
     </dict>
 </plist>
+

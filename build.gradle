@@ -766,6 +766,7 @@ task genMac {
         ant.appbundler(outputdirectory: 'release/mac-specific',
                        name: applicationName,
                        displayname: applicationName,
+                       executablename: applicationName,
                        identifier: 'org.omegat.OmegaT',
                        icon: 'images/OmegaT.icns',
                        version: '${version}',

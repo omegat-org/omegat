@@ -9,7 +9,7 @@
 <surname>Smolej</surname>
     </author>
 
-    <pubdate><?dbtimestamp?></pubdate>
+    <pubdate/>
 
     <abstract>
       <para>Este documento es la guía oficial del usuario de OmegaT, la herramienta libre de traducción asistida por ordenador. También contiene instrucciones de instalación.</para>
@@ -37,7 +37,7 @@
 
   <xi:include href="EditingBehavior.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Font.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>            
+  <xi:include href="Font.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="FormattedText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

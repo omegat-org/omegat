@@ -72,6 +72,7 @@
         <key>JVMOptions</key>
         <array>
             <string>-Xdock:name=OmegaT</string>
+            <!-- <string>-Xmx6g</string> -->
         </array>
         <key>JVMDefaultOptions</key>
         <dict>

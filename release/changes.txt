@@ -2,7 +2,7 @@
  OmegaT 4.3.1
 ----------------------------------------------------------------------
   0 Enhancements
-  1 Bug fix
+  2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.3.1 vs 4.3.0
@@ -11,6 +11,9 @@
 
   - First Windows installation screen not translated
   https://sourceforge.net/p/omegat/bugs/957/
+
+  - OmegaT can't access projects in macOS 10.15 Catalina
+  https://sourceforge.net/p/omegat/bugs/959/
 
 ----------------------------------------------------------------------
  OmegaT 4.3.0 (2019-07-09)

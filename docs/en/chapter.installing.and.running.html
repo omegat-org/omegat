@@ -514,11 +514,11 @@
                         the user interface in Japanese.
                </p>
                <p>To change the amount of memory available, edit
-                        <code class="filename">OmegaT.app/Contents/MacOS/OmegaT</code> file and remove the
-                        <code class="literal">#</code> before the
-                        <code class="literal">MEMORY=-Xmx<em class="parameter"><code>?</code></em>g</code> entry. For
-                        instance, <code class="literal">MEMORY=-Xmx6g</code> will launch OmegaT with 6 GB of
-                        memory.
+                        <span class="emphasis"><em>OmegaT.app/Contents/Info.plist</em></span> file and un-comment
+                        the line <code class="literal">&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt;
+                           --&gt;</code> by removing the <code class="literal">&lt;!--</code> and
+                        <code class="literal">--&gt;</code>. This will launch OmegaT with 6 GB of memory;
+                        change the <code class="literal">6g</code> to the desired amount.
                </p>
                <p>To launch multiple instances of <code class="filename">OmegaT.app</code>,
                         double-click the file <span class="emphasis"><em>OmegaT</em></span> located in

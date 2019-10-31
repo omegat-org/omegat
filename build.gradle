@@ -286,8 +286,10 @@ distributions {
         contents {
             from('docs') {
                 into 'docs'
+                exclude 'index.html'
             }
             from(genDocIndex.outputs) {
+                into 'docs'
                 include 'index.html'
             }
             from('release') {

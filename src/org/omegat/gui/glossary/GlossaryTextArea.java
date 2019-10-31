@@ -47,6 +47,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
@@ -119,7 +120,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
     private final DockableScrollPane scrollPane;
 
-    private transient final IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer();
+    private transient IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer();
 
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea(IMainWindow mw) {
@@ -230,6 +231,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
 
+        try {
+            String layout = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, "Default");
+            Constructor<?> cns = Class.forName("org.omegat.gui.glossary." + layout + "GlossaryRenderer").getConstructor();
+            entryRenderer = (IGlossaryRenderer) cns.newInstance();
+        } catch (Exception e) {
+        }
         for (GlossaryEntry entry : entries) {
             entryRenderer.render(entry, getStyledDocument());
         }

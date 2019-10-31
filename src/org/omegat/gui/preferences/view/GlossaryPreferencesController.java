@@ -67,6 +67,8 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         panel.replaceHitsCheckBox.setSelected(Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT));
         panel.requireSimilarCaseCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE,
                 Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT));
+        panel.cbGlossaryLayout.setSelectedItem(Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT,
+                "Default"));
     }
 
     @Override
@@ -76,6 +78,7 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         panel.useStemmingCheckBox.setSelected(Preferences.GLOSSARY_STEMMING_DEFAULT);
         panel.replaceHitsCheckBox.setSelected(false);
         panel.requireSimilarCaseCheckBox.setSelected(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT);
+        panel.cbGlossaryLayout.setSelectedItem("Default");
     }
 
     @Override
@@ -85,5 +88,6 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.GLOSSARY_STEMMING, panel.useStemmingCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT, panel.replaceHitsCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE, panel.requireSimilarCaseCheckBox.isSelected());
+        Preferences.setPreference(Preferences.GLOSSARY_LAYOUT, panel.cbGlossaryLayout.getSelectedItem());
     }
 }

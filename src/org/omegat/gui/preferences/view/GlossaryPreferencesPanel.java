@@ -54,6 +54,10 @@ public class GlossaryPreferencesPanel extends JPanel {
         replaceHitsCheckBox = new javax.swing.JCheckBox();
         requireSimilarCaseCheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        cbGlossaryLayout = new javax.swing.JComboBox<>();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -73,12 +77,26 @@ public class GlossaryPreferencesPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(requireSimilarCaseCheckBox, OStrings.getString("PREFS_GLOSSARY_REQUIRE_SIMILAR_CASE")); // NOI18N
         add(requireSimilarCaseCheckBox);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("PREFS_GLOSSARY_LAYOUT"));
+        jPanel1.add(jLabel1);
+
+        cbGlossaryLayout.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Default", "Dictionary" }));
+        jPanel1.add(filler2);
+        jPanel1.add(cbGlossaryLayout);
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.X_AXIS));
+
+        add(jPanel1);
         add(filler1);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JComboBox<String> cbGlossaryLayout;
     javax.swing.JCheckBox displayContextCheckBox;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     javax.swing.JCheckBox replaceHitsCheckBox;
     javax.swing.JCheckBox requireSimilarCaseCheckBox;
     javax.swing.JCheckBox useSeparateTermsCheckBox;

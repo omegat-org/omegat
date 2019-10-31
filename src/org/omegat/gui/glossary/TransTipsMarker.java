@@ -25,6 +25,7 @@
 
 package org.omegat.gui.glossary;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,6 +39,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.Preferences;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
@@ -50,7 +52,7 @@ public class TransTipsMarker implements IMarker {
     protected static final HighlightPainter TRANSTIPS_UNDERLINER = new UnderlineFactory.SolidBoldUnderliner(
             Styles.EditorColor.COLOR_TRANSTIPS.getColor());
 
-    private final DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer();
+    private IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer();
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
@@ -68,8 +70,14 @@ public class TransTipsMarker implements IMarker {
 
         List<Mark> marks = new ArrayList<Mark>();
 
+        try {
+            String layout = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, "Default");
+            Constructor<?> cns = Class.forName("org.omegat.gui.glossary." + layout + "GlossaryRenderer").getConstructor();
+            entryRenderer = (IGlossaryRenderer) cns.newInstance();
+        } catch (Exception e) {
+        }
         for (GlossaryEntry ent : glossaryEntries) {
-            String tooltip = renderer.renderToHtml(ent);
+            String tooltip = entryRenderer.renderToHtml(ent);
             List<Token[]> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);
             marks.addAll(getMarksForTokens(tokens, ste.getSrcText(), tooltip));
         }

@@ -4,11 +4,9 @@
   <title>Personalizzazione delle scorciatoie</title>
 
   <section id="ch04.shortcuts.customization">
-    <title><indexterm class="singular">
-        <primary>Scorciatoie</primary> <secondary>Personalizzazione</secondary>
-      </indexterm>Personalizzazione delle scorciatoie</title>
+    <title>Personalizzazione delle scorciatoie</title>
 
-    <para>Alla maggior parte degli elementi che appaiono nel menu principale si può applicare una nuova scorciatoia. Si possono modificare le scorciatoie già assegnate, come pure aggiungerne di nuove, inserendo un file di definizione delle scorciatoie all'interno della cartella delle preferenze di OmegaT (si veda <link linkend="user.files">Posizione dei file utente</link>).</para>
+    <para>Alla maggior parte degli elementi che appaiono nel menu principale si può applicare una nuova scorciatoia. È possibile modificare le scorciatoie già assegnate, come pure aggiungerne di nuove, inserendo un file di definizione delle scorciatoie all'interno della cartella delle preferenze di <application>OmegaT</application> (raggiungibile dal menu <menuchoice> <guimenuitem>Opzioni</guimenuitem> <guimenuitem>Accedi alla cartella di configurazione</guimenuitem> </menuchoice>).</para>
 
     <para>Il file di definizione delle scorciatoie si deve chiamare <filename>MainMenuShortcuts.properties</filename> e deve contenere una definizione di scorciatoia per riga. Sono accettate le righe vuote, mentre quelle di commento devono iniziare con &quot;//&quot;. Tutto quello che segue i segni &quot;//&quot; viene ignorato.</para>
 
@@ -670,11 +668,7 @@
     <table>
       <title>Menu Vista</title>
 
-      <indexterm class="singular">
-        <primary>Personalizzazione scorciatoie</primary> <secondary>Menu Vista</secondary>
-      </indexterm>
-
-      <tgroup cols="3" colsep="1">
+       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>

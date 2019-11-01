@@ -66,7 +66,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Fitxategi bat ez bada  <guilabel>editore-panelean</guilabel>  kargatzen ez bada, agian OmegaT-k ulertzen ez duen formatu batean dago. Ikusi <link linkend="chapter.file.filters">Fitxategi-iragazkiak</link> OmegaT-k ulertzen dituen fitxategi-formatuak ezagutzeko.</para>
+        <para>Fitxategi bat ez bada  <guilabel>editore-panelean</guilabel>  kargatzen ez bada, agian OmegaT-k ulertzen ez duen formatu batean dago. Ikusi <menuchoice><guimenuitem>Aukerak</guimenuitem><guimenuitem>Hobespenak...</guimenuitem><guimenuitem>Fitxategi-iragazkiak</guimenuitem></menuchoice> OmegaT-k ulertzen dituen fitxategi-formatuak ezagutzeko.</para>
       </listitem>
     </itemizedlist>
 
@@ -102,7 +102,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>OmegaT erabiltzen ikasteko sarrera sakonagoa nahi baduzu, joan OmegaT-ren webgunean dagoen <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for beginners</ulink> atalera. OmegaT-ren edozein gauzari buruzko laguntza behar baduzu, eman izena <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT erabiltzaileen taldean.</ulink></para>
+        <para>OmegaT erabiltzen ikasteko sarrera sakonagoa nahi baduzu, joan OmegaT-ren webgunean dagoen <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for beginners</ulink> atalera. OmegaT-ren edozein gauzari buruzko laguntza behar baduzu, eman izena <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info">OmegaT erabiltzaileen taldean.</ulink></para>
       </listitem>
     </itemizedlist>
   </section>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="dialogs.projectproperties">
+  <title>Vlastnosti projektu</title>
+
+  <para>Tento dialog je přístupný přes nabídku <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Vlastnosti</guimenuitem> </menuchoice></para>
+
+  <section>
+    <title>Jazyky</title>
+
+    <para>Jazyky můžete zadat buď ručně, nebo použít rozbalovací nabídky. Mějte na paměti, že po změně jazyků mohou být aktuálně používané překladové paměti nepoužitelné, obzvláště když se pak už neshodují s nově nastavenými jazyky.</para>
+
+    <para>Zobrazují se tokenizery, které odpovídají vybraným jazykům.</para>
+  </section>
+
+  <section>
+    <title>Možnosti</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Zapnout segmentaci na úrovni vět</term>
+
+        <listitem>
+          <para>Nastavení segmentace upravuje způsob, jakým <application>OmegaT</application> nakládá se zdrojovými soubory. Segmentace na úrovni vět představuje hlavní způsob segmentování zdroje, takže toto zaškrtávací políčko by mělo v normálním případě zůstat označené.</para>
+
+          <para>V některých málo častých případech je možno upřednostnit alternativu, tj. segmentování podle odstavců. Změna statusu tohoto zaškrtávacího pole nezmění segmentaci již existujících překladových pamětí. Pokud se během překladu rozhodnete změnit segmentaci na úrovni vět na segmentaci po odstavcích, pak vnitřní překladová paměť projektu nebude změněna (OmegaT může aktualizovat staré překladové paměti, které nepoužívaly segmentaci na úrovni vět, ale ne naopak), ale OmegaT se pokusí vytvořit přibližné překlady na úrovni odstavců tak, že spojí existující překlady vět.</para>
+
+          <para>Změna nastavení segmentace může vést k tomu, že již přeložené segmenty budou nově rozděleny nebo spojeny. To je prakticky navrátí do „nepřeloženého“ stavu, protože neodpovídají segmentům uloženým v paměti projektu, dokonce i přesto, že dřívější a teď nekorespondující překlad tam stále je.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Automatické upřednostnění jednoho překladu</term>
+
+        <listitem>
+          <para>V případě, že ve zdrojovém dokumentu jsou nejedinečné segmenty, nabízí zaškrtávací políčko Automatické upřednostnění následující dvě možnosti týkající se automatického překladu: pokud je zaškrtnuto, první přeložený segment bude považován za výchozí překlad a jeho cílový text bude automaticky použit pro pozdější shody během překladového procesu. Segmenty, které byly takto chybně přeloženy, je možno samozřejmě opravit později ručně použitím <guimenuitem>Vytvořit alternativní překlad</guimenuitem>. Pokud ale zaškrtávací políčko Automatické upřednostnění není zaškrtnuto, pak segmenty nabízející alternativní překlad zůstanou nepřeloženy, dokud uživatel sám nerozhodne, který překlad použít.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Odstranit tagy</term>
+
+        <listitem>
+          <para>Pokud je aktivováno, všechny formátovací tagy budou ze zdrojových segmentů odstraněny. Tato funkce je užitečná obzvláště při práci s texty, kde vnitřní formátování nemá žádné skutečné využití (např. PDF rozpoznané pomocí OCR, špatně zkonvertované .odt nebo .docx, atd). Odstraněny budou jen vnitřní tagy, takže běžně by neměl být žádný problém s otevíráním přeložených dokumentů. Neviditelné formátování (tj. takové, které se nezobrazí jako tagy v editoru OmegaT) v přeloženém dokumentu zůstane.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Externí příkaz pro dodatečné zpracování</term>
+
+        <listitem>
+          <para>Toto okno umožňuje vkládání externích příkazů k dodatečnému zpracování (například skript pro přejmenování souborů), které budou prováděny pokaždé, když se aktivuje příkaz Vytvořit přeložené dokumenty. Tento externí příkaz nemůže obsahovat znaky, tzv. „pipes“, atd. protže volání skriptu je doporučeno.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>Segmentace...</guibutton></term>
+
+        <listitem>
+          <para>Pravidla segmentace obecně platí ve všech projektech. Nicméně se může stát, že uživatel bude potřebovat si vytvořit několik pravidel, která jsou specifická pro konkrétní projekt. Použijte toto tlačítko pro otevření dialogového okna, aktivujte zaškrtávací políčko <guimenuitem>Upravit pravidla segmentace podle konkrétního projektu</guimenuitem>, pak si dle vlastní potřeby upravte segmentační pravidla. Nová sada pravidel bude uložena spolu s projektem a nebude odporovat obecným pravidlům segmentace. Až budete chtít smazat pravidla segmentace specifická pro daný projekt, zrušte označení tohoto zaškrtávacího políčka. V kapitole <link linkend="dialogs.preferences.segmentationsetup">Předvolby nastavení segmentace</link> naleznete více informací k pravidlům segmentace.</para>
+
+          <para><emphasis>Tip:</emphasis> sada pravidel segmentace pro daný projekt je uložena v <filename>project/omegat/segmentation.conf.</filename></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>Filtry souborů...</guibutton></term>
+
+        <listitem>
+          <para>Podobně jak je výše popsáno si může uživatel vytvořit projektově specifické Filtry souborů, které budou uloženy spolu s projektem, a které budou platné jen pro daný projekt. Projektově specifickou sadu filtrů souborů vytvoříte kliknutím na tlačítko <guibutton>Filtry souborů...</guibutton>, pak v zobrazeném okně aktivujte zaškrtávací políčko <guimenuitem>Upravit nastavení filtru souborů podle konkrétního projektu</guimenuitem>. Kopie nastavení filtrů se případě uloží s projektem. Až budete chtít smazat specifické filtry souborů, zrušte označení tohoto zaškrtávacího políčka. Za poznámku stojí, že v nabídce <guimenuitem>Možnosti -&gt; Filtry souborů</guimenuitem> se mění obecné uživatelské filtry, ne filtry specifické pro daný projekt. Více informací k tomuto tématu najdete v kapitole <link linkend="dialogs.preferences.filefilters">Předvolby filtrů souborů</link>.</para>
+
+          <para><emphasis>Tip:</emphasis> sada filtrů souborů pro daný projekt je uložena v <filename>project/omegat/filters.xml.</filename></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Mapování úložiště...</term>
+
+        <listitem>
+          <para>Pokud pracujete na týmovém projektu, pak Vám toto okno umožní definovat zápis mezi vzdálenými a místními adresáři (příklady vizte <link linkend="howto.setupteamproject.mappingparameters">zde</link>).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Externí hledání...</term>
+
+        <listitem>
+          <para>Definuje zdroje pro projektově specifické externí hledání</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Umístění souborů</title>
+
+    <para>Zde můžete vybrat různé podadresáře, například podadresář se zdrojovými soubory, podadresář se soubory překladu atd. a pokud vložíte názvy adresářů, které dosud neexistují, <application>OmegaT</application> je pro vás vytvoří. Pokud se rozhodnete změnit projektové adresáře, nezapomeňte na to, že takto nepřesunete existující soubory ze starých adresářů na novou pozici.</para>
+
+    <para>Kliknutím na <guibutton>Výjimky...</guibutton> definujete soubory nebo adresáře, které budou ignorovány programem <application>OmegaT</application>. Ignorovaný soubor či adresář:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>není zobrazen v okně Editoru,</para>
+      </listitem>
+
+      <listitem>
+        <para>není zahrnut do statistik,</para>
+      </listitem>
+
+      <listitem>
+        <para>není kopírován do cílového adresáře /target během procesu vytváření přeložených souborů.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>V dialogovém okně pro vzory výjimek je možno přidávat či odstranit vzory, nebo je měnit vybráním řádku a stiskem klávesy F2. Můžete používat zástupné znaky použitím <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">syntaxe ant</ulink>.</para>
+  </section>
+</section>

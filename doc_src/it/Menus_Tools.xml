@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>Strumenti</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Verifica problemi...</term>
+
+      <listitem>
+        <para>Lo strumento per il controllo della qualità che esegue in un'unica operazione tutte le verifiche automatiche e ne mostra i risultati in una finestra.</para>
+
+        <para>Vengono individuati quattro tipi di problemi:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Tag mancanti o usati in modo scorretto, incluso i <link linkend="dialogs.preferences.tagprocessing">tag personalizzati</link>. L'opzione <guilabel>Problemi con tag</guilabel> è sempre selezionata.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Problemi ortografici</guilabel> (facoltativa). Funziona solo se è installato un dizionario ortografico.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Problemi con la terminologia</guilabel> (facoltativa).</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Problemi di LanguageTool</guilabel> (facoltativa).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>La finestra dei risultati è visualizzata in forma tabellare, in cui:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>il doppio clic su una riga attiva il segmento corrispondente nel pannello dell'Editor,</para>
+          </listitem>
+
+          <listitem>
+            <para>il clic su un'intestazione di colonna cambia l'ordine della colonna,</para>
+          </listitem>
+
+          <listitem>
+            <para>la selezione o lo spostamento del mouse su una riga mostra un'icona di un menu a comparsa, nell'ultima colonna, che contiene le azioni per correggere o ignorare gli errori.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Verifica problemi per il documento attivo</term>
+
+      <listitem>
+        <para>Come sopra, ma solo per il documento correntemente aperto nel pannello dell'Editor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistiche</term>
+
+      <listitem>
+        <para>Apre una nuova finestra e mostra le statistiche del progetto, per esempio i totali del progetto e quelli per ciascun file al suo interno.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistiche delle concordanze</term>
+
+      <listitem>
+        <para>Mostra le statistiche di concordanza per il progetto: numero di ripetizioni, concordanze esatte, parziali e nessuna, per i segmenti, le parole e i caratteri.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistiche delle concordanze per file</term>
+
+      <listitem>
+        <para>Mostra le statistiche di concordanza per ciascun file del progetto: numero di ripetizioni, concordanze esatte, parziali e nessuna, per i segmenti, le parole e i caratteri.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Allinea file...</term>
+
+      <listitem>
+        <para>Selezionare i due file da allineare (il file di partenza e la sua traduzione) e premere OK per aprire la finestra <link linkend="windows.aligner"><guilabel>Allinea</guilabel></link>.</para>
+
+        <para>I formati di file supportati sono quelli elencati in <menuchoice> <guimenuitem>Progetto</guimenuitem> <guimenuitem>Proprietà</guimenuitem> <guimenuitem>Filtri dei file</guimenuitem> </menuchoice>.</para>
+
+        <para>I file di partenza e quelli di arrivo possono avere formati diversi (per esempio, un file <filename>.docx</filename> può essere allineato con un file <filename>.pdf</filename>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Azioni di script...</term>
+
+      <listitem>
+        <para>Apre la <link linkend="windows.scripts">finestra <guilabel>Azioni di script</guilabel></link> in cui è possibile impostare la posizione degli script, e in cui essi possono essere scritti, avviati e associati a una scorciatoia.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - (nome script)</term>
+
+      <listitem>
+        <para>Avvia gli script associati con un numero.</para>
+
+        <para>per associare uno script a un numero:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Aprire la finestra Azioni di script</para>
+          </listitem>
+
+          <listitem>
+            <para>Selezionare lo script dall'elenco a sinistra</para>
+          </listitem>
+
+          <listitem>
+            <para>Nella parte inferiore della finestra, fare clic col pulsante destro su un numero libero e e selezionare <guilabel>Aggiungi script</guilabel>.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(comandi per la ricerca esterna)</term>
+
+      <listitem>
+        <para>Se, nelle <link linkend="dialogs.preferences.externalsearch">Preferenze</link>, sono stati definiti i comandi per eseguire ricerche esterne, essi sono elencati e raggiungibili da qui.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

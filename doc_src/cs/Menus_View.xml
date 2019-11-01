@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>Zobrazit</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Označit přeložené segmenty</term>
+
+      <listitem>
+        <para>Pokud je tato možnost vybraná, přeložené segmenty budou označeny žlutým zvýrazněním.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Označit nepřeložené segmenty</term>
+
+      <listitem>
+        <para>Pokud je tato možnost vybraná, nepřeložené segmenty budou označeny fialovým zvýrazněním.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Označit oddělovače odstavců.</term>
+
+      <listitem>
+        <para>Pokud je tato volba vybrána, pak budou oddělovače odstavců ve zdrojovém dokumentu indikovány vizuálně.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ukázat zdrojové segmenty</term>
+
+      <listitem>
+        <para>Pokud je tato možnost vybraná, budou zdrojové segmenty zobrazeny se zeleným zvýrazněním. Pokud tato možnost vybraná není, zdrojové segmenty nebudou takto zobrazovány.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Označit nejedinečné segmenty</term>
+
+      <listitem>
+        <para>Pokud je tato možnost vybraná, nejedinečné segmenty budou označeny světle šedou.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Označit segmenty s Poznámkami</term>
+
+      <listitem>
+        <para>Pokud je tato možnost vybraná, segmenty s poznámkami budou označeny modrozeleně. Toto označení má přednost před volbami <guimenuitem>Označit přeložené segmenty</guimenuitem> a <guimenuitem>Označit nepřeložené segmenty</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Označit nezlomitelné mezery</term>
+
+      <listitem>
+        <para>Pokud je tato možnost vybraná, pak budou nezlomitelné mezery označeny s šedým pozadím.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Označit netisknutelné znaky</term>
+
+      <listitem>
+        <para>Pokud je tato možnost vybraná, pak budou netisknutelné znaky označeny malou tečkou.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Označit řídicí znak bidirekcionálního algoritmu</term>
+
+      <listitem>
+        <para>Tato možnost zobrazí <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">znaky obousměrného zápisu</ulink></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Označit automaticky vyplněné segmenty</term>
+
+      <listitem>
+        <para>Když je tato možnost aktivní, pozadí všech segmentů, kde byl cílový segment automaticky vyplněn (např. z paměti TMX umístěné v <filename>/tm/auto</filename>), je barevně zvýrazněno. Barvy se zobrazují tehdy, když je aktivní možnost <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Uložit automaticky vyplněný status</guimenuitem></link> (v Možnosti / Nastavení editace ...). Běžné překlady vložené z adresáře auto jsou zobrazeny oranžově. Ostatní překlady, rozpoznány obzvláště v TMX, lze zobrazit s použitím různých barev. Více technických detailů najdete v <ulink url="https://sourceforge.net/p/omegat/feature-requests/">Požadavky na vylepšení</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nucené záložní fonty</term>
+
+      <listitem>
+        <para>Zatrhněte tuto možnost tehdy, když <application>OmegaT</application> nezobrazuje některé znaky správně (a to i tehdy, když jsou znakové sady obsahující požadované znaky na vašem počítači správně instalovány). Poznámka: ve Windows se může tento manuální výpadek krýt se standardním výpadkem fontů, který způsobuje nežádoucí substituci fontů. Z tohoto důvodu je tato funkce ve výchozím nastavení vypnuta.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Informace k úpravám</term>
+
+      <listitem>
+        <para>Když v možnosti zobrazit Informace k úpravám vyberete volbu <guimenuitem>Aktuální segment</guimenuitem>, bude zobrazen čas a autor poslední změny u aktuálně otevřeného segmentu. Když vyberete volbu <guimenuitem>Všechny segmenty</guimenuitem>, bude tato informace u všech segmentů a volba <guimenuitem>Nezobrazovat žádné</guimenuitem> zobrazování vypne.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Přejít</title>
+
+  <para>Tato nabídka zobrazí záznamy jen tehdy, pokud je právě otevřen nějaký projekt.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Další nepřeložený segment</term>
+
+      <listitem>
+        <para>Přesune se na následující segment, který nemá v překladové paměti žádný ekvivalent.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Další přeložený segment</term>
+
+      <listitem>
+        <para>Přejde na další již přeložený segment, ignoruje nepřeložené segmenty.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Další segment</term>
+
+      <listitem>
+        <para>Přesune se na další segment. Pokud je aktuální segment posledním v souboru, přesune se na první segment dalšího souboru.</para>
+
+        <para>Pozor: <keycap>Enter</keycap> je alternativní příkaz pokud není vybrána možnost <link linkend="dialogs.preferences.general.usetabtoadvance">Použít TAB pro postup</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Předchozí segment</term>
+
+      <listitem>
+        <para>Přesune se na předchozí segment. Pokud je aktuální segment prvním v souboru, přesune se na poslední segment předchozího souboru.</para>
+
+        <para>Pozor: <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> je alternativní příkaz pokud není vybrána možnost <link linkend="dialogs.preferences.general.usetabtoadvance">Použít TAB pro postup</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segment číslo...</term>
+
+      <listitem>
+        <para>Segment je otevřen když je zadána jeho identifikace nebo číslo.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Další poznámka</term>
+
+      <listitem>
+        <para>Otevře další segment s přiloženou poznámkou.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Předchozí poznámka</term>
+
+      <listitem>
+        <para>Otevře předchozí segment s poznámkou.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zdroj vybraných přibližných překladů</term>
+
+      <listitem>
+        <para>Přejde na segment, který neodpovídá aktuálně vybranému přibližnému překladu v podokně <guilabel>Přibližné překlady</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vpřed v historii</term>
+
+      <listitem>
+        <para><application>OmegaT</application> si pamatuje zpracovávané segmenty. Tímto příkazem můžete přejít na segment, který jste v předchozím kroku opustili příkazem <guimenuitem>Zpět v historii...</guimenuitem></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zpět v historii</term>
+
+      <listitem>
+        <para>Tímto příkazem se můžete přesunout zpět o jeden segment, a vrátit se zpět na aktuální segment použitím příkazu <guimenuitem>Vpřed v historii</guimenuitem>. </para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

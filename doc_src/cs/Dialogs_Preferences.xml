@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="dialogs.preferences">
+  <title>Obecné předvolby</title>
+
+  <para>Toto dialogové okno zpřístupníte výběrem možnosti <menuchoice> <guimenuitem>Možnosti</guimenuitem> <guimenuitem>Předvolby ...</guimenuitem> </menuchoice></para>
+
+  <para>Umožňuje nastavit parametry pro všechny překladatelské projekty</para>
+
+  <section>
+    <title>Všeobecné informace</title>
+
+    <variablelist id="dialogs.preferences.general.usetabtoadvance">
+      <varlistentry>
+        <term>Použít TAB pro postup</term>
+
+        <listitem>
+          <para>Nastaví klíč potvrzení segmentu na TAB místo přednastaveného Enter. Tato možnost je užitečná pro některé čínské, japonské nebo korejské znakové vstupní systémy.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Vždy potvrdit ukončení</term>
+
+        <listitem>
+          <para>Program si před ukončením vyžádá potvrzení.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Strojový překlad</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Automaticky doplnit překlady</term>
+
+        <listitem>
+          <para>Z bezpečnostních důvodů se může stát, že nebudete chtít poslat všechny své segmenty nástroji na strojový překlad. Při zrušení zatržení této možnosti, se bude strojový překlad chovat tak, že při stistku <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>(<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo> v OS X) bude přeložen pouze aktuální segment. Pak musíte použít <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>podruhé, aby se vložil návrh.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Pouze nepřeložené segmenty</term>
+
+        <listitem>
+          <para>Zaškrtněte toto políčko, pokud chcete do služby strojového překladu poslat pouze nepřeložené segmenty.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Ze seznamu vyberte poskytovatele, a pokud je to nutné, klikněte na volbu <guibutton>Konfigurovat</guibutton> a vložte identifikační údaje dodané poskytovatelem.</para>
+
+    <para>Postupy pro konfiguraci přístupu k překladačům Microsoff Translator a Google Translate jsou popsány <ulink url="https://sourceforge.net/p/omegat/wiki/Configuring Machine Translation Services">zde</ulink>.</para>
+  </section>
+
+  <section>
+    <title>Glosář</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Zobrazit popis kontextu pro glosáře TBX</term>
+
+        <listitem>
+          <para>Zrušte označení této možnosti v tom případě, pokud je zobrazený popis kontextu pro každý záznam klosáře nepotřebný nebo příliš dlouhý.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Ve zdrojovém textu zobrazovat pojmy odděleně</term>
+
+        <listitem>
+          <para>Když je tato možnost označena, pak glosář zobrazí páry nebo skupiny slov (výrazů), a to i tehdy, když se zde zastoupená slova budou vyskytovat ve zdrojovém textu každé zvlášť.</para>
+
+          <para>Zrušte označení této možnosti, pokud glosář zobrazuje příliš mnoho nevhodných návrhů.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>U záznamů glosáře vytvářet základní tvar</term>
+
+        <listitem>
+          <para>Označte tuto možnost když chcete, aby glosář zobrazoval slova, která mají stejný kořen.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Nahradit tipy glosáře při vkládání zdrojového textu</term>
+
+        <listitem>
+          <para>Když máte označny obě tyto možnosti a <link linkend="dialogs.preferences.editor.insertthesourcetext"><guilabel>Vložit zdrojový text</guilabel></link> také, pak se dojde k automatickému překladu slov s odpovídajícím záznamem glošáře v okamžiku vkládání zdrojového textu.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Ignorovat shody s velmi rozlišnou velikostí písmen (např. FOO vs. foo)</term>
+
+        <listitem>
+          <para>Když je tato možnost označena, pak glosář zobrazí jen jeden záznam, a to i tehdy, když se zde zastoupená slova budou vyskytovat v glosáři v několika formách (např. s nebo bez velkých počátečních písmen).</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <section>
+      <title>Terminologie TaaS</title>
+
+      <variablelist>
+        <varlistentry>
+          <term>Získat klíč API</term>
+
+          <listitem>
+            <para>Kliknutím na toto tlačítko se dostanete na stránku projektu <ulink url="https://term.tilde.com/taas">Taas</ulink> a můžete zde založit uživatelský účet.</para>
+
+            <para>Pak můžete vytvořit přístupový klíč na stránce <ulink url="https://term.tilde.com/account/keys/create?system=omegaT">https://term.tilde.com/account/keys/create?system=omegaT</ulink>.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Uložit pouze pro toto sezení</term>
+
+          <listitem>
+            <para>Pokud je tato možnost označena, pak si OmegaT nezapamatuje přístup mezi různými sezeními.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Procházet kolekce TaaS...</term>
+
+          <listitem>
+            <para>Toto tlačítko Vám umožní procházet a stahovat kolekce, které existují pro zdrojový a cílový jazyk projektu. Soukromé kolekce jsou zobrazeny tučně. Kolekce se stahují jako glosáře TBX a ukl8daj9 se do aktuálního adresáře glosáře.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Vybrat oblast hledání terminologie v TaaS</term>
+
+          <listitem>
+            <para>V případě potřeby můžete označit specifickou doménu k vymezení objemu dat, která se mají posílat či přijmout.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+  </section>
+
+  <section id="dialogs.preferences.dictionary">
+    <title>Slovník</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Automaticky hledat segmentovaný text ve slovníku</term>
+
+        <listitem>
+          <para>Zrušte označení této možnosti pro deaktivaci automatického hledání  - například pokud jsou slovníky příliš velké.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>U záznamů glosáře použít přibližné shody</term>
+
+        <listitem>
+          <para>Vyberte tuto možnost pokud chcete, aby slovníky zobrazovaly slova se stejným kořenem.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Vzhled</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Obnovit Hlavní okno</term>
+
+        <listitem>
+          <para>Obnovit výchozí nastavení všech komponent hlavního okna OmegaT. Tuto vlastnost využijete, když jste odpojili, přesunuli nebo skryli jednu nebo více komponent a nedaří se vám obnovit jejich žádané rozestavění. Je možno toto použít také tehdy, když se podokna nezobrazují správně po upgradu OmegaT.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <section>
+      <title>Písmo</title>
+
+      <para>Zobrazí dialogové okno pro změnu písma zobrazování písma. Uživatelé starších počítačů, kde je změna velikosti okna pomalá, mohou vyzkoušet změnu písma. Viz nastavení písma v Různé</para>
+    </section>
+
+    <section>
+      <title>Barvy</title>
+
+      <para>Tato stránka umožňuje vybrat různé barvy pro každou část uživatelského prostředí.</para>
+
+      <para>Pomocí skriptu si můžete vybrat předdefinované ucelené nastavení barev. Výchozí skript nazývaný Switch Colour Themes/Přepnout barevné nastavení poskytuje výchozí Dark/Temný.</para>
+    </section>
+  </section>
+
+  <section id="dialogs.preferences.filefilters">
+    <title>Filtry souborů</title>
+
+    <para>Toto dialogové okno zobrazí dostupné filtry souborů. Filtry používané v aktuálním projektu jsou zobrazeny tučně. Pokud nechcete používat aplikaci OmegaT na překlad souborů nějakého určitého typu, můžete daný filtr vypnout odznačením zaškrtávacího políčka vedle jeho názvu. OmegaT pak při načítání projektů vynechá všechny příslušné soubory, a při vytváření cílových dokumentů je zkopíruje v nezměněné podobě. Když se rozhodnete používat filtr znovu, stačí příslušné políčko opět zaškrtnout. Kliknutím na <emphasis role="bold">Výchozí nastavení</emphasis> obnovíte výchozí nastavení filtrů. Když chcete upravit nastavení, které soubory budou v jakém kódování, vyberte filtr ze seznamu a klikněte na <emphasis role="bold">Editovat</emphasis>.</para>
+
+    <para>Dialogové okno umožňuje zpřístupnit nebo zakázat následující možnosti:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Odstranit úvodní a koncové tagy: zrušením označení této možnosti zobrazíte všechny tagy včetně tagů na začátku a na konci segmentu. Upozornění: ve formátech Microsoft Open XML (docx, xlsx, atd.), pokud jsou tagy zobrazeny, NIKDY nezapisujte žádný text před první tag - je to technický tag, kterým segment vždy začíná.</para>
+      </listitem>
+
+      <listitem>
+        <para>Odstranit úvodní a koncové netisknutelné znaky v nesegmentovaných projektech: ve výchozím nastavení OmegaT odstraňuje úvodní a koncové netisknutelné znaky. U nesegmentovaných projektů můžete tyto znaky ponechat tím, že zrušíte označení této možnosti.</para>
+      </listitem>
+
+      <listitem>
+        <para>Zachovat mezery pro všechny tagy: označte tuto možnost pokud zdrojové dokumenty obsahují důležité mezery, které nesmí být ignorovány.</para>
+      </listitem>
+
+      <listitem>
+        <para>Ignorovat obsah souboru pokud se naleznou segmenty s alternativními překlady: ve výchozím nastavení OmegaT používá název zdrojového souboru jako část identifikace alternativního překladu. Pokud je tato možnost označena, název zdrojového souboru nebude použit a alternativní překlady se projeví v libovolném souboru, pokud se jiný kontext (předchozí/následný segment nebo nějaký typ identifikátoru segmentu v závislosti na souborovém formátu) shoduje s přibližným překladem.</para>
+      </listitem>
+    </itemizedlist>
+
+    <section id="filters.options">
+      <title>Možnosti filtrů</title>
+
+      <para>Několik filtrů (textové soubory, soubory XHTML, soubory HTML a XHTML, OpenDocument/OpenOffice.org a Microsoft Open XML) nabízí jednu nebo více specifických možností. Pro změnu možností vyberte filtr ze seznamu a klikněte na <emphasis role="bold">Možnosti</emphasis>. Dostupné možnosti jsou:</para>
+
+      <para><emphasis role="bold">Textové soubory</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Segmentace podle odstavců na zalomení řádků, prázdných řádcích nebo vůbec:</emphasis></para>
+
+          <para>pokud jsou aktivní pravidla segmentace podle vět, text bude i nadále segmentován podle možnosti, která je zde označena.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">Soubory PO</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Povolit prázdné překlady v cílových souborech</emphasis>:</para>
+
+          <para>Když je tato možnost povolena, tak když není segment PO (což může být i celý odstavec) přeložen, překlad zůstane v cílovém souboru prázdný. Technicky řečeno, segment <code>msgstr</code> v PO cílovém souboru, pokud bude tento vytvořen, zůstane prázdný. Protože toto je standardní chování PO souborů a ve výchozím nastavení je tato možnost zapnuta. Pokud je tato možnost vypnuta, do cílového segmentu bude zkopírován zdrojový text.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Přeskočit hlavičku PO</emphasis></para>
+
+          <para>Jestliže je tato možnost zaznačena, tak hlavička PO bude přeskočena a ponechána beze změny.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Automaticky v hlavičce nahradit 'nplurals=INTEGER; &amp;plural=EXPRESSION;'</emphasis></para>
+
+          <para><emphasis>Tato možnost umožňuje aplikaci OmegaT přepsat specifikaci v hlavičce souboru PO a použít výchozí hodnoty pro vybraný cílový jazyk.</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">Soubory XHTML</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Přeložit následující atributy:</emphasis> - označené atributy se objeví jak segmenty v okně Editoru.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Začít nový odstavec od:</emphasis> tag &lt;br&gt; v HTML vytvoří odstavec pro účely segmentace.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Přeskočit text který se rovná regulárnímu výrazu: </emphasis> text představující regulární výraz bude ignorován. Validátor tagů toto zobrazí červeně. Text ve zdrojovém segmentu, který má shodu, bude zobrazen kurzívou.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Nepřekládejte obsah atributů meta-tagů ... :</emphasis> Meta-tagy v políčku nebudou přeloženy.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Nepřekládejte obsah tagů s následujícími atributy párů key-value [klíč-hodnota] (odděleno čárkou):</emphasis>: shoda v seznamu párů klíč-hodnota zapříčiní, že obsah tagů bude ignorován.</para>
+
+          <para>Někdy se to totiž může hodit, když je možno definovat tagy podle hodnoty jejich atributů, a tyto tagy pak nepřekládat. Například <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. Můžete definovat páry klíč-hodnota pro tagy, které mají zůstat nepřeložené. Jako příklad poslouží nahoře uvedený příklad, pole by pak obsahovalo: <literal>class=hide, translate=no </literal></para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">Soubory Microsoft Office Open XML</emphasis></para>
+
+      <para>Můžete vybrat, které elementy se mají překládat. V překladu budou zobrazeny jako samostatné segmenty.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">MS Word:</emphasis> – text typu Neviditelné pokyny, komentáře, poznámky, koncové poznámky, zápatí</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Excel: </emphasis>komentáře, Jména listů tabulkového procesoru</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Power Point</emphasis>: Komentáře snímků, šablony snímků, rozložení snímků</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Obecně:</emphasis> grafy, diagramy, kresby, WordArt</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Další Možnosti:</emphasis></para>
+
+          <itemizedlist>
+            <listitem>
+              <para><emphasis>Slučovat tagy do skupin</emphasis>: pokud je tato možnost zaškrtnuta, tagy bez překládaného textu mezi nimi budou sloučeny do jednoho tagu.</para>
+            </listitem>
+
+            <listitem>
+              <para><emphasis>Zachovat mezery pro všechny tagy</emphasis>: když je tato možnost označena, budou zachovány tzv. „neviditelné znaky“ (tj. mezery a znaky nového řádku), dokonce i když nejsou definovány v samotném dokumentu.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">Soubory HTML a XHTML</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Přidat nebo přepsat deklaraci kódování v souborech HTML a XHTML</emphasis>: cílové soubory často vyžadují kódování znakové sady odlišné od kódování ve zdrojovém souboru (nezáleží na tom, jestli je to přímo definováno či implicitně obsaženo). Použitím této možnosti si překladatel může určit, zda cílové soubory mají obsahovat deklaraci kódování. Například, pokud pokud filtr souboru určí UTF8 jako kódovací schéma pro cílové soubory, výběrem možnosti ‚Vždy‘ zajistí, že tato informace bude obsažena v přeložených souborech.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Přeložit následující atributy:</emphasis> - označené atributy se objeví jak segmenty v okně Editoru.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Začít nový odstavec od:</emphasis> tag &lt;br&gt; v HTML vytvoří odstavec pro účely segmentace.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Přeskočit text který se rovná regulárnímu výrazu: </emphasis> text představující regulární výraz bude ignorován. Validátor tagů toto zobrazí červeně. Text ve zdrojovém segmentu, který má shodu, bude zobrazen kurzívou.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Nepřekládejte obsah atributů meta-tagů ... :</emphasis> Meta-tagy v políčku nebudou přeloženy.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Nepřekládejte obsah tagů s následujícími atributy párů key-value [klíč-hodnota] (odděleno čárkou):</emphasis>: shoda v seznamu párů klíč-hodnota zapříčiní, že obsah tagů bude ignorován.</para>
+
+          <para>Někdy se to totiž může hodit, když je možno definovat tagy podle hodnoty jejich atributů, a tyto tagy pak nepřekládat. Například <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. Můžete definovat páry klíč-hodnota pro tagy, které mají zůstat nepřeložené. Jako příklad poslouží nahoře uvedený příklad, pole by pak obsahovalo: <literal>class=hide, translate=no </literal></para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis>V přeloženém dokumentu komprimovat netisknutelné znaky</emphasis>: více po sobě jdoucích netisknutelných znaků bude v přeloženém dokumentu převedeno na jeden jediný netisknutelný znak.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis>V přeloženém dokumentu odstranit HTML komentáře</emphasis>: žádné části kódu označené jako komentář (mezi značkami &lt;!-- a --&gt;) nebudou skopírovány do přeloženého dokumentu.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">Soubory formátu Open Document Format (ODF)</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Můžete vybrat, které elementy se mají překládat.</para>
+
+          <para>položky seznamu, záložky, odkazy na záložky, poznámky, komentáře, poznámky k prezentaci, linky (URL), jména listů tabulkového procesoru.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="edit.filter.dialog">
+      <title>Dialogové okno Editovat Filtr</title>
+
+      <para>Dialogové okno vám umožní specifikovat vzory názvů zdrojových souborů pro soubory, které bude filtr zpracovávat, přizpůsobit si názvy přeložených souborů a vybrat, jaké kódování se bude používat pro načtení souboru a uložení jeho překladu. Aby se daly upravovat vzory filtrů souborů, buď změníte daná pole přímo, nebo nakliknutím <emphasis role="bold">Editovat ...</emphasis>.  Kliknutím na <emphasis role="bold">Přidat...</emphasis> přidáte nový filtr. K přidání vzoru nebo editaci konkrétního vzoru se používá stejné dialogové okno. Dialogové okno obsahuje speciální vzory názvů cílových souborů a editor vám umožňuje upravovat názvy výstupních souborů.</para>
+
+      <section id="source.filetype.and.filename.pattern">
+        <title>Typ zdrojového souboru, vzor názvu souboru</title>
+
+        <para>Když OmegaT narazí na soubor ve svém zdrojovém adresáři (source), pokusí se vybrat filtr na základě přípony souboru. Přesněji, OmegaT se pokusí přiřadit vzory názvů zdrojových souborů každého filtru k názvu souboru. Například vzor <literal>*.xhtml</literal> se pak bude shodovat s jakýmkoliv souborem s příponou <literal>.xhtml</literal>. Pokud je nalezen vhodný filtr, soubor postupuje k dalšímu zpracování programem. Například ve výchozím nastavení se použije filtr XHTML pro zpracování souborů s příponou .xhtml. Můžete měnit nebo přidávat vzory názvů souborů pro filtry souborů, které budou u každého souboru zpracovávány. Vzory názvů zdrojových souborů používají náhradní znaky podobně jako v rámci funkce <emphasis role="bold">Hledat. </emphasis>Znak ‚*‛ reprezentuje nula nebo více znaků. Znak ‚?‛ reprezentuje jeden znak. Všechny ostatní znaky reprezentují sebe sama. Například, když chcete, aby byl textový filtr použitý na soubory čtimě (<literal>ctime, cti.me</literal> a <literal>ctime.txt</literal>) měli byste použít vzor <literal>cti*</literal>.</para>
+      </section>
+
+      <section id="source.and.target.files.encoding">
+        <title>Kódování zdrojových a cílových souborů</title>
+
+        <para>Pouze omezené množství formátů souborů uvádí povinné kódování. Formáty souborů, které nespecifikují své kódování, použijí kódování, které zadáte v příponě odpovídající jeho názvu. Například může být implicitně nastaveno, že soubory <literal>.txt</literal> budou načítány s použitím výchozího kódování operačního systému. Můžete změnit kódování zdrojového souboru pro každý odlišný vzor názvu zdrojového souboru. Cílové soubory mohou být zapsány v jakémkoliv kódování. Při výchozím nastavení je kódování přeloženého souboru stejné jako kódování souboru výchozího. Pole zdrojového a cílového kódování používají nabídky obsahující všechna podporovaná kódování. Volba &lt;auto&gt; ponechá výběr kódování na aplikaci <application>OmegaT</application>. A takto to funguje:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT najde kódování zdrojového souboru za užití jeho deklarace kódování, tedy pokud je nějaká deklarace k dispozici (soubory HTML, soubory založené na XML).</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT má instrukci, že se má použít povinné kódování pro vybrané formáty souborů (Java properties atd.)</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT použije pro textové soubory výchozí kódování operačního systému.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="target.name">
+        <title>Název přeloženého souboru</title>
+
+        <para>Někdy můžete chtít automaticky přejmenovat soubory které překládáte, např. přidat kód jazyka za název souboru. Vzor názvu cílového souboru používá speciální syntaxi, takže pokud chcete editovat toto pole, musíte kliknout na <emphasis role="bold">Editovat ...</emphasis> a použít dialogové okno Upravit vzor. Pokud budete chtít obnovit výchozí nastavení filtru, klikněte na <emphasis role="bold">Výchozí nastavení.</emphasis> Můžete tedy upravovat název přímo v políčku vzoru pro název cílového souboru nebo v dialogovém okně filtrů souborů. Dialogové okno Upravit vzor nabízí následující možnosti:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Výchozí nastavení je <literal>${filename}</literal> – celý název zdrojového souboru s příponou, takže název přeloženého souboru je stejný jako název zdrojového souboru.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${nameOnly}</literal> – umožňuje vložit jen název zdrojového souboru bez přípony.</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension} </literal>– původní koncovka souboru</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLocale}</literal> – kód cílového místního nastavení (ve formátu „xx_YY“).</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLanguage}</literal> – kód cílového jazyka a země (ve formátu „XX-YY“).</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLanguageCode}</literal> – pouze cílový jazyk („XX“).</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetCountryCode}</literal>– kód země jazyka překladu - jen &quot;YY&quot;</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>$(timestamp-????)</literal> – systémový čas s datumem v době generování, v různých formátech</para>
+
+            <para>Příklady formátů jednoduchého formátování dat najdete v <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">Dokumentaci Oracle</ulink>.</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-os-name}</literal> – operační systém užívaného počítač</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-user-name)</literal> – jméno uživatele systému</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-host-name}</literal> – jméno hostitelského systému</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${file-source-encoding}</literal> – kódování zdrojového souboru</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${file-target-encoding}</literal> – kódování souboru s překladem</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${targetLocaleLCID)</literal> – cílové umístění ‚Microsoft target locale‛</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Dodatečné varianty jsou dostupné pro proměnné ${nameOnly} (název) a ${Extension} (koncovka). V případě, že název souboru se kryje s jiným, je možno aplikovat proměnné ve tvaru <literal>$(název</literal><emphasis>-počet koncovek</emphasis>) a <literal>${koncovka</literal>-<emphasis>počet koncovek}</emphasis>. Pokud například se původní soubor jmenuje Dokument.xx.docx, následující proměnná vydá následující výsledek:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${nameOnly-0}</literal> Dokument</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${nameOnly-1}</literal> Dokument.xx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${nameOnly-2}</literal> Dokument.xx.docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-0}</literal> docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-1}</literal> xx.docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-2}</literal> Dokument.xx.docx</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>
+  </section>
+
+  <section id="dialogs.preferences.segmentationsetup">
+    <title>Nastavení segmentace</title>
+
+    <para>Nástroje pro práci s překladovými paměťmi pracují s textovými jednotkami nazývanými segmenty. <application>OmegaT</application> nabízí dva způsoby segmentace textu: segmentace podle odstavců nebo segmentace na úrovni vět (také zvaná jako „rule-based segmentation“). Pro výběr typu segmentace, vyberte z hlavní nabídky <menuchoice> <guimenu>Projekt</guimenu> <guimenuitem>Vlastnosti...</guimenuitem> </menuchoice> a zaškrtněte, nebo zrušte zaškrtnutí nabízeného zaškrtávacího políčka. Segmentace podle odstavců je výhodná jen v určitých případech, jako jsou velmi kreativní nebo stylové překlady, ve kterých překladatel asi bude chtít změnit pořadí celých vět; nicméně ve většině projektů je upřednostňovanou volbou právě segmentace podle vět, protože tato poskytuje lepší shody s předchozími překlady. Pokud je vybráno Segmentace na úrovni vět, pak můžete nastavit pravidla vybráním položky <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Segmentace...</guimenuitem> </menuchoice> v hlavní nabídce.</para>
+
+    <para>Spolehlivá pravidla segmentace jsou dostupná pro spoustu jazyků, takže pravděpodobně nebudete potřebovat si psát vlastní pravidla segmentace. Na druhou stranu tato funkce může být velmi užitečná ve speciálních případech, kdy můžete zvýšit svou produktivitu úpravou segmentačních pravidel u textu, který máte překládat.</para>
+
+    <para><emphasis role="bold">Upozornění</emphasis>: protože po změně možností filtrů bude text segmentován odlišně, je možné, že bude nutné začít překlad zase zcela od začátku. Současně se dřívější platné segmenty v překladové paměti změní na nespárované segmenty. Pokud změníte volby segmentace ve chvíli, kdy je otevřený nějaký projekt, budete muset projekt znovu načíst, aby se změny projevily.</para>
+
+    <para><application>OmegaT</application> používá následující sled kroků:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Segmentace na úrovni struktury</term>
+
+        <listitem>
+          <para><application>OmegaT</application> nejprve zpracuje text pomocí segmentace na úrovni struktur. Během tohoto procesu je to jen struktura zdrojového souboru, která je použitá na vytvoření segmentů.</para>
+
+          <para>Například mohou být textové soubory segmentovány podle zlomů řádků, prázdných řádků nebo vůbec nemusí být segmentovány na strukturální úrovni. Soubory s formátováním (dokumenty ODF, HTML, atd.) jsou segmentovány na úrovni tagů bloků (odstavce). Atributy přeložitelných objektů v souborech XHTML nebo HTML lze extrahovat jako samostatné segmenty.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Segmentace na úrovni vět</term>
+
+        <listitem>
+          <para>Po segmentaci zdrojového souboru podle logických jednotek, bude <application>OmegaT</application> dále segmentovat tyto bloky do vět.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <section id="segmentation.rules">
+      <title>Pravidla segmentace</title>
+
+      <para>Průběh segmentace lze znázornit následovně: kurzor se pohybuje v textu, vždy po jednom znaku. Pravidlo pozice kurzoru se skládá ze vzoru <emphasis role="bold">Před</emphasis> a <emphasis role="bold">Za</emphasis>, pravidla jsou aplikována v předem daném pořadí, aby se tak ověřilo, jestli některý ze vzorů <emphasis role="bold">Před</emphasis> je platný pro text vlevo, a stejným způsobem vzor <emphasis role="bold">Za</emphasis> pro text vpravo od kurzoru. Pokud pravidlo lze aplikovat, tak se kurzor buď pohne bez vložení zalomení segmentu (v případě výjimky pravidla) nebo je vytvořeno zalomení segmentu na aktuální pozici kurzoru (v případě aplikování pravidla pro zalomení).</para>
+
+      <para>Tyto dva typy pravidel se chovají následovně:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term>Pravidla zalomení</term>
+
+          <listitem>
+            <para>Rozdělí zdrojový text na segmenty. Například: „<emphasis>Did it make sense? I was not sure.“</emphasis> by mělo být rozděleno na dva segmenty. Aby se tak stalo, mělo by tu být pravidlo zalomení pro „?“, po kterém následuje mezera a slovo začínající velkým písmenem. Když chcete definovat pravidlo jako pravidlo zalomení, zaškrtněte zaškrtávací políčko Zlom/Výjimka.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <variablelist>
+        <varlistentry>
+          <term>Pravidlo výjimky</term>
+
+          <listitem>
+            <para>Specifikuje, které části textu by NEMĚLY být rozděleny. Nehledě na tečku v <emphasis>„Mrs. Dalloway“</emphasis> by zde neměl být text rozdělen, tzn. mělo by být založeno pravidlo výjimky pro Mrs (stejně tak Mr a Dr a prof atd.), což je normálně následováno tečkou. Když chcete definovat pravidlo jakožto výjimku, nechte zaškrtávací políčko Zlom/Výjimka prázdné.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para>Předdefinovaná pravidla zalomení by měla být dostatečná pro většinu evropských jazyků a Japonštinu. Vzhledem k flexibilitě, můžete zvážit definování více pravidel pro výjimky pro jazyk ze kterého překládáte, abyste získali smysluplnější a souvislejší segmenty.</para>
+    </section>
+
+    <section id="rules.priority">
+      <title>Pravidla přednosti</title>
+
+      <para>Všechny sady pravidel segmentace pro odpovídající vzor jazyka jsou použité v daném pořadí priority, takže pravidla pro konkrétní jazyk by měla být vyšší než ta z výchozího nastavení. Tak například, pravidla pro kanadskou francouzštinu (FR-CA) by měla být ve výchozím nastavení výše než pravidla pro francouzštinu (FR.*), a výše než (.*). Takže v průběhu překladu z kanadské francouzštiny bude váš projekt používat jako první pravidla pro kanadskou francouzštinu (pokud jsou tedy definována), pak se vychází z pravidel pro francouzštinu, a nakonec v pořadí se uplatní pravidla výchozího nastavení</para>
+    </section>
+
+    <section id="creating.new.rule">
+      <title>Vytváření nového pravidla</title>
+
+      <para>Obecně by se u aktivního projektu neměly provádět změny pravidel segmentace, obzvláště po kompletaci prvního konceptu, ale drobné změny, jako je přidání rozpoznané zkratky, mohou být prospěšné. </para>
+
+      <para>Pro úpravu nebo rozšíření již existující sady pravidel, jednoduše klikněte na danou sadu v horní tabulce. Pravidla této sady se objeví v dolní půlce okna.</para>
+
+      <para>Pro vytvoření prázdné sady pravidel pro nový jazykový vzor klikněte na <emphasis role="bold">Přidat</emphasis> v horní polovině dialogového okna. Ve spodní části horní tabulky se objeví prázdný řádek (abyste jej viděli, budete asi muset srolovat dolů). Změňte název sady pravidel a vzor jazyka pro daný jazyk a jeho kód. Syntaxe vzoru jazyka odpovídá syntaxi regulárních výrazů. Pokud vaše sada pravidel platí pro pár jazyk-země, doporučujeme posunout ji nahoru pomocí tlačítka <emphasis role="bold">Přesunout nahoru</emphasis>.</para>
+
+      <para>Přidejte vzory <emphasis role="bold">Před</emphasis> a <emphasis role="bold">Za</emphasis>. Pro kontrolu jejich syntaxe a použitelnosti, je vhodné použít nástroje, které vám umožní vidět jejich účinek přímo. VIz <link linkend="appendix.regexp">Regulární výrazy</link>. Dobrým výchozím bodem vždy bude již existující pravidlo.</para>
+    </section>
+
+    <section id="few.simple.examples">
+      <title>Pár jednoduchých příkladů</title>
+
+      <informaltable>
+        <tgroup cols="4">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="center" colnum="2"/>
+
+          <colspec align="center" colnum="3"/>
+
+          <colspec align="left" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Cíl</entry>
+
+              <entry align="center">Vzor před</entry>
+
+              <entry align="center">Vzor za</entry>
+
+              <entry>Poznámka</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Nastavit segment po tečce (‚.‘) a před mezerou, tabulátorem ...</entry>
+
+              <entry align="center">\.</entry>
+
+              <entry align="center">\s</entry>
+
+              <entry>„\.“ zastupuje znak tečky „\.“ znamená znak „.“ „\s“ znamená jakýkoliv netisknutelný znak (mezera, tabulátor, nová stránka, atd.).</entry>
+            </row>
+
+            <row>
+              <entry>Nesegmentovat po Mr.</entry>
+
+              <entry align="center">Mr\.</entry>
+
+              <entry align="center">\s</entry>
+
+              <entry>Toto je pravidlo výjimky, takže zaškrtávací políčko pravidla musí zůstat neoznačeno</entry>
+            </row>
+
+            <row>
+              <entry>segmentovat po „。“ (japonská tečka)</entry>
+
+              <entry align="center">。</entry>
+
+              <entry align="center"/>
+
+              <entry>Všimněte si, že políčko <literal>Vzor za</literal> je prázdné </entry>
+            </row>
+
+            <row>
+              <entry>Nesegmentovat po M. Mr. Mrs. a Ms.</entry>
+
+              <entry align="center">Mr??s??\.</entry>
+
+              <entry align="center">\s</entry>
+
+              <entry>Pravidlo výjimky – viz použití znaku ‚?‘ v regulárních výrazech</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </section>
+  </section>
+
+  <section>
+    <title>Automatické doplnění</title>
+
+    <para>Kliknutím na <guimenuitem>Glosář...</guimenuitem>  můžete nastavit zobrazení glosáře při automatickém doplnění.</para>
+
+    <para>Možnosti nastavení pro automatický text otevřete kliknutím na <guimenuitem>Automatický text...</guimenuitem>, zde také můžete přidávat nebo odstranit záznamy.</para>
+
+    <para>Volba <guimenuitem>Tabulka znaků...</guimenuitem> slouží k nastavení možností tabulky znaků automatického doplnění textu.</para>
+
+    <para>Klávesovou zkratkou <emphasis role="bold">Sctr+Mezerník</emphasis> se v cílovém segmentu spustí automatické doplňování.</para>
+
+    <para>Pokud je zatržena možnost <emphasis role="bold">Automatické doplňovánícky ukazovat relevantní návrhy</emphasis>, pak bude automaticky spuštěno automatické doplňování již při psaní prvních znaků přeloženého záznamu glosáře, nebo při zadání &quot;&lt;&quot; v případě tagu.</para>
+  </section>
+
+  <section>
+    <title>Kontrola pravopisu</title>
+
+    <para>OmegaT má vestavěnou kontrolu pravopisu založenou na <link linkend="appendix.spellchecker">kontrole pravopisu</link>, která se používá v programech Apache OpenOffice, LibreOffice, Firefox a Thunderbird. Takže je možné použít na širokou škálu volných slovníků kontroly pravopisu, které jsou k dispozici pro tyto aplikace.</para>
+  </section>
+
+  <section>
+    <title>Plugin LanguageTool</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Typ služby</term>
+
+        <listitem>
+          <para>Vyberte umístění nástroje kontroly pravopisu</para>
+
+          <para>Když budete používat jinou kontrolu pravopisu na svém počítači, než tu, která je dádávaná s OmegaT, pak máte možnost si personalizovat pravidla ověřování.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Pravidla</term>
+
+        <listitem>
+          <para>Označte, nebo zrušte označení, v závislosti na tom, jestli jsou daná pravidla důležitá pro daný text, který překládáte.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.externalsearch">
+    <title>Externí hledání</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Povolit projektově specifické příkazy</term>
+
+        <listitem>
+          <para>Ve výchozím nastavení OmegaT nevykonává příkazy specifikované v nastaveních pro daný projekt (soubor <filename>finder.xm.</filename> v adresáři <filename>omegat</filename>), protože můžou mít zásadní dopad na bezpečnost.</para>
+
+          <para>Tuto možnost aktivujte pouze v případě, že víte co děláte, a pouze pokud projekt pochází z důvěryhodných zdrojů.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Priorita kontextové nabídky:</term>
+
+        <listitem>
+          <para>Umožní změnit pořadí příkazů v kontextové nabídce (nabídka zobrazená po kliknutí pravým tlačítkem myši). Hodnoty okolo 100 zobrazí příkazy nahoře a hodnoty kolem 900 je zobrazí dole.</para>
+
+          <para>Bude nutno OmegaT restartovat k tomu, aby se změny projevily.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.editor">
+    <title>V Editoru</title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.editor.insertthesourcetext">
+        <term>Vložit zdrojový text</term>
+
+        <listitem>
+          <para>Je možno nechat do pole editace automaticky vložit zdrojový text. Toto se hodí u textů, které obsahují spousty obchodních značek nebo vlastních jmen, které musí zůstat nezměněny.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Ponechat segment prázdný</term>
+
+        <listitem>
+          <para>OmegaT ponechá pole editace prázdné. Tato možnost vám umožní překládat bez potřeby odstraňovat zdrojový text, a tak vám ušetří množství přebytečných stisků kláves při mazání (<emphasis role="bold">Ctrl+A </emphasis>a <emphasis role="bold">Del). </emphasis> Prázdné překlady jsou tímto povoleny. V Editoru jsou zobrazeny s označením &lt;EMPTY&gt;. Prázdný překlad vytvoříte tak, že kliknete pravým tlačítkem na segment, a vyberete možnost „<emphasis role="bold">Použít prázdný překlad</emphasis>&quot; Položka <emphasis role="bold">Odstranit překlad</emphasis> v téže pop up nabídce také umožňuje smazat stávající překlad v aktuálním segmentu. Stejného efektu dosáhnete smazáním cílového segmentu a stiskem <guibutton>Enter.</guibutton></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Vložit nejpřibližnější překlad</term>
+
+        <listitem>
+          <para>OmegaT vloží překlad řetězce, který nejlépe odpovídá aktuálnímu zdroji, ovšem jen tedy, pokud je podobnost nad prahem výše zmíněné podobnosti, která je nastavena v tomto dialogovém okně. Předpona (ve výchozím nastavení prázdné) může být použita k dodatečnému označení překladů, což se děje např. při automatickém vkládání přibližných překladů. Když přidáte předponu (například [přibližně]), můžete tyto překlady později jednoduše najít a zkontrolovat jejich správnost.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Zaškrtávací políčka v dolní polovině dialogového okna slouží těmto účelům:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Pokusit se převést čísla při vkládání přibližného překladu.</term>
+
+        <listitem>
+          <para>Když je tato možnost zaškrtnuta, tak při vložení přibližného překladu, buď ručně nebo automaticky, se OmegaT pokusí převést čísla v daném přibližném překladu, a to tak, že se místo dostupného čísla použije číslo ze zdroje. Je tu ale celá kupa omezení.</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Zdrojový segment a přibližné překlady musí obsahovat stejné počty čísel.</para>
+            </listitem>
+
+            <listitem>
+              <para>Čísla musí být stejná mezi zdrojem a odpovídajícím textem překladu.</para>
+            </listitem>
+
+            <listitem>
+              <para>V potaz tedy přichází celá čísla a čísla s desetinnými místy (za použití tečky jako značky desetiny, např. 5.4, ale ne 5,4 nebo 54E-01).</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.editor.allowtranslationtobeequaltosource">
+        <term>Povolit překlad rovnající se zdroji</term>
+
+        <listitem>
+          <para>Překládaný dokument může obsahovat obchodní značky, označení nebo vlastní jména, která zůstanou ve stejném tvaru v přeloženém dokumentu. Existují dva postupy pro segmenty, které obsahují jen takový neměnitelný text.</para>
+
+          <para>Můžete se rozhodnout takové segmenty vůbec nepřekládat. OmegaT bude pak takové segmenty reportovat jako nepřeložené. Toto odpovídá výchozímu nastavení. Alternativa je vložit překlad, který je identický se zdrojovým textem. OmegaT je schopna takovýto krok rozeznat. Abyste toto umožnili, pak vyberte tuto možnost.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Exportovat segment do textového souboru</term>
+
+        <listitem>
+          <para>Funkce exportu textu exportuje data z aktuálního projektu <application>OmegaT</application> do prostého textového souboru. Data jsou exportována jen tehdy, když je daný segment otevřený. Tento soubor bude uložen v podadresáři /script v uživatelském adresáři OmegaT a obsahuje:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>obsah zdrojového segmentu (<filename>source.txt</filename>)</para>
+            </listitem>
+
+            <listitem>
+              <para>obsah segmentu s překladem (<filename>target.txt</filename>)</para>
+            </listitem>
+
+            <listitem>
+              <para>Text zvýrazněný uživatelem, tj. když stisknete <keycap>Ctrl+Shift+C</keycap> nebo vyberete možnost <guimenuitem>Upravit &gt; Exportovat výběr</guimenuitem> (<filename>selection.txt</filename>).</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>Obsah těchto souborů bude přepsán buď když otevřete nový segment (source.txt a target.txt) nebo když exportujete nový výběr (selection.txt) Jedná se o textové soubory s neformátovaným prostým textem. Celý proces je možno řídit a ovládat přes skriptování založené na Tck/Tcl. Pro specifika, příklady a návrhy viz <ulink url="http://www.omegat.org/en/howtos/text_export.html">OmegaT – použití funkce export textu</ulink>.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Funkce ‚Přejít na další nepřeložený segment‛ se zastaví, když narazí na segment s minimálně jedním alternativním překladem.</term>
+
+        <listitem>
+          <para>Pokud chcete zabránit chybným překladům v případě, kdy se u segmentů nabízí několik možných překladů, zaškrtnutí tohoto políčka způsobí, že funkce <emphasis role="bold">Přejít na další nepřeložený segment</emphasis> se zastaví u dalšího takového segmentu, nehledě na to, jestli již byl přeložený nebo ne.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Povolit editaci tagů</term>
+
+        <listitem>
+          <para>Zrušte označení této možnosti a zabraňte tak poškození tagů (tj. částečné smazání) během úpravy textu. Odstranění celého tagu je pak možné jen v případě, že použijete zkratku Ctrl+Backspace/Delete nebo označením celého tagu (Ctrl+Shift+Vlevo/Vpravo) a pak jeho smazáním (Delete nebo Ctrl+X).</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Ověřit tagy při opouštění segmentu</term>
+
+        <listitem>
+          <para>Označte tuto možnost pokud chcete být varování při výskytu rozdílů mezi tagy v segmentu zdroje a cíle, a to pokaždé, jakmil segment opouštíte.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist id="dialogs.preferences.editor.saveautopopulatedstatus">
+      <varlistentry>
+        <term>Uložit automaticky vyplněný status</term>
+
+        <listitem>
+          <para>Označte tuto možnost pro zápis do souboru <filename>project_save.tmx</filename>, zapisuje se informace, že segment byl vyplněn automaticky, takže je možno jej zobrazit v editoru se specifickou barvou (pokud je označena možnost „Označit automaticky vyplněné segmenty“ v menu Zobrazit).</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Nejprve nahrát tento počet segmentů</term>
+
+        <listitem>
+          <para>Ve výchozím nastavení zobrazí editor 2 000 prvních segmentů a postupně nahrává další jak uživatel roluje dolů dokumentem. Toto číslo můžete zvětšit, a to pokud máte výkonný počítač, anebo se vám nelíbí, jak se skrolovací jezdec chová během postupného nahrávání.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.tagprocessing">
+    <title>Zpracování tagů</title>
+
+    <para>Při překladu souborů vztahujících se k software, můžete konfigurovat možnosti validátoru tagů tak, aby kontroloval i programovací proměnné (%...). Také můžete definovat různé možnsti vztahující se k validaci tagů a definování vlastních tagů.</para>
+
+    <para>Například, když vložíte <userinput>\d+</userinput> do políčka <guilabel>Regulární výraz pro vlastní tagy</guilabel>, pak budou všechny čísla pokládána za tagy a umožní Vám zajistit, že čísla během překladu omylem nezměníte.</para>
+
+    <para>Podobně třeba vložte <userinput>&lt;.*?&gt;</userinput> a tím zajistíte, že HTML tagy vložené ze zdrojového textu budou v překladu zachovány bez změny.</para>
+
+    <para>Poznámka: tyto dvě instrukce lze kombinovat napsáním <userinput>(&lt;.*?&gt;)|(\d+)</userinput>.</para>
+  </section>
+
+  <section>
+    <title>Tým</title>
+
+    <para>Vloží se vaše jméno a to bude přiloženo ke každému segmentu, který přeložíte.</para>
+
+    <section>
+      <title>Přihlašovací údaje k úložišti</title>
+
+      <para>Seznam projektů, pro které jsou v OmegaT uloženy přihlašovací údaje. Odstraňte projekt z tohoto seznamu pokud chcete, aby OmegaT při každém přístupu k danému projektu vyžadovala login a heslo.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>Shody TM</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Třídit přibližné překlady podle:</term>
+
+        <listitem>
+          <para>Vy výchozím nastavení jsou nejbližší shody zobrazené v okně <guilabel>Přibližné překlady</guilabel> určeny pomocí základních tvarů.</para>
+
+          <para>Pro získání více doslovných překladů blížících se 100% označte možnost <guilabel>Kompletní text včetně tagů a čísel</guilabel>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Zobrazení tagů v překladových pamětech nepocházejících z OmegaT</term>
+
+        <listitem>
+          <para>Zde se určuje, jak se má zacházet s tagy z cizích překladových pamětí TMX (tj. takových, které nebyly vygenerovány pomocí OmegaT).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Šablona pro zobrazení shody</term>
+
+        <listitem>
+          <para>Pomocí použití přednastavených proměnných změňte nastavení jak zobrazovat přibližné překlady:</para>
+
+          <table colsep="0" rowsep="0">
+            <title>Nastavení podokna Přibližné překlady</title>
+
+            <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+              <colspec align="left"/>
+
+              <colspec align="left"/>
+
+              <tbody>
+                <row>
+                  <entry><literal>${id}</literal></entry>
+
+                  <entry>Číslo zobrazeného přibližného překladu od 1 do 5</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${sourceText}</literal></entry>
+
+                  <entry>Zdrojový text přibližného překladu</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${targetText}</literal></entry>
+
+                  <entry>Cílový text přibližného překladu</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${diff}</literal></entry>
+
+                  <entry>Řetězec zobrazující rozdíl mezi zdrojem a přibližným překladem.<emphasis> Tip:</emphasis> použijte tuto proměnnou v případě, že text, na kterém pracujete, byl aktualizován.</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${diffReversed}</literal></entry>
+
+                  <entry>To stejné jako ${diff}, ale s obrácenými rozdíly (to, co má být vloženo a smazáno).</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${score}</literal></entry>
+
+                  <entry>Procento vypočítané pomocí možnosti <guilabel>Podle základního tvaru, žádné tagy a čísla</guilabel></entry>
+                </row>
+
+                <row>
+                  <entry><literal>${noStemScore}</literal></entry>
+
+                  <entry>Procento vypočítané pomocí možnosti <guilabel>Žádné tagy a čísl.a</guilabel></entry>
+                </row>
+
+                <row>
+                  <entry><literal>${adjustedScore}</literal></entry>
+
+                  <entry>Procento vypočítané pomocí možnsti <guilabel>Kompletní text včetně tagů a čísel</guilabel>.</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${fuzzyFlag}</literal></entry>
+
+                  <entry>Tato proměnná ukazuje, že tato shoda je jen přibližná (tzv. ‚fuzzy‘) (v současnosti jen pro překlady souborů PO se značkou #fuzzy)</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Zobrazit</title>
+
+    <para>Nabízí různé možnosti zobrazení textu a informací ke změnám.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Označením nejedinečných segmentů zahrno&amp;ut první nejedinečný segment. </term>
+
+        <listitem>
+          <para>Označte tuto možnost pro zobrazení všech nejedinečných segmentů (opakování) šedou barvou. Když je u této možnosti zrušeno označení, pak budou všechny nejedinečné segmenty zobrazeny šedou kromě prvního výskytu.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.savingandoutput">
+    <title>Uložení a výstup</title>
+
+    <para>Zde si uživatel může vybrat interval – v minutách a sekundách – mezi průběžným automatickým ukládáním projektu.</para>
+
+    <para>Změnit výchozí interval (3 minuty) v závislosti na vlastnostech projektu:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>krátké intervaly (minimum: 10 vteřin) pro synchronizované projekty na interním serveru.</para>
+      </listitem>
+
+      <listitem>
+        <para>dlouhé intervaly pro týmové projekty hostované na externích serverech.</para>
+      </listitem>
+    </itemizedlist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Externí příkaz pro dodatečné zpracování</term>
+
+        <listitem>
+          <para>Specifikujte příkazy, které se budou vykonávat po příkazu <guimenuitem>Vytvořit přeložené dokumenty</guimenuitem>.</para>
+
+          <para>Příklad použití této funkce by bylo automatické poslání přeložených dokumentů na FTP server klienta.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Také umožnit externí příkazy pro konkrétní projekt.</term>
+
+        <listitem>
+          <para>Ve výchozím nastavení OmegaT nevykonává příkazy specifikované v nastaveních pro daný projekt (soubor <filename>omega.project</filename>), protože můžou mít zásadní dopad na bezpečnost.</para>
+
+          <para>Tuto možnost aktivujte pouze v případě, že víte co děláte, a pouze pokud projekt pochází z důvěryhodných zdrojů.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Proxy přihlášení ...</title>
+
+    <para>V případě, že OmegaT vyžaduje použití ověřeného proxy serveru pro přístup na internet., pak sem vložte údaje poskytnuté proxy administrátorem.</para>
+  </section>
+
+  <section>
+    <title>Bezpečnost</title>
+
+    <para>Zde můžete předefinovat hlavní heslo používané k ochraně přihlašovacích údajů a přístupových klíčů ke službám strojového překladu. Nezapomeňte si poznačit všechny tyto údaje před vytvářením nového hesla, protože všechny budou smazány a bude nutno je zadat znova.</para>
+  </section>
+
+  <section>
+    <title>Pluginy</title>
+
+    <para>Poskytují přístup k seznamu dostupných pluginů. Pluginy se instalují do adresáře <filename>/plugins</filename>.</para>
+  </section>
+
+  <section>
+    <title>Aktualizace</title>
+
+    <para>Umožňuje automatické informování o aktualizacích <application>OmegaT</application>.</para>
+  </section>
+</section>

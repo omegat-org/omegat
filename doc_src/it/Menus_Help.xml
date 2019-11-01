@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.help">
+  <title>Aiuto</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Manuale dell'utente...</term>
+
+      <listitem>
+        <para>Apre questo manuale nel browser predefinito.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Informazioni su...</term>
+
+      <listitem>
+        <para>Visualizza le informazioni di copyright, i crediti e le informazioni di licenza.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ultime modifiche...</term>
+
+      <listitem>
+        <para>Mostra l'elenco delle nuove funzionalità, i miglioramenti e le correzioni errori per ciascun nuovo rilascio.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Registro...</term>
+
+      <listitem>
+        <para>Mostra il file di registro corrente. Il titolo della finestra rispecchia il file realmente usato (che dipende da quante istanze di OmegaT sono in esecuzione assieme).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Controlla aggiornamenti...</term>
+
+      <listitem>
+        <para>Verifica se è stata rilasciata una versione più recente di <application>OmegaT</application>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

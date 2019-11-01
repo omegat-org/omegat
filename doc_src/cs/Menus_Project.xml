@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.project">
+  <title>Projekt</title>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Nový...</guimenuitem></term>
+
+      <listitem>
+        <para>Vytvoří a otevře nový projekt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><guimenuitem>Stáhnout týmový projekt...</guimenuitem></term>
+
+      <listitem>
+        <para>Vytvoří místní kopii vzdáleného projektu OmegaT. Detaily naleznete v části <link linkend="howto.useteamproject">Jak používat týmový projekt</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Otevřít...</term>
+
+      <listitem>
+        <para>Otevírá dříve vytvořený projekt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Otevřít nedávný projekt</term>
+
+      <listitem>
+        <para>Poskytuje přístup k deseti posledním upravovaným projektům. Kliknutím na jeden vybraný uloží aktuální projekt, zavře jej a otevře ten nově vybraný.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Kopírovat soubory do zdrojového adresáře...</term>
+
+      <listitem>
+        <para>Zkopíruje vybrané soubory do zdrojového adresáře <filename>/source</filename> a znovu načte projekt pro načtení nových souborů.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Stáhnout stránku MediaWiki...</term>
+
+      <listitem>
+        <para>Pro překlad obsahu stránky Wikipedia (na příklad):</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Klikněte na záložku <guilabel>Upravit</guilabel> na stránce Wikipedia.</para>
+          </listitem>
+
+          <listitem>
+            <para>Zkopírujte URL stránky (končící <guilabel>action=edit</guilabel>) a vložte ji do <application>OmegaT</application>.</para>
+          </listitem>
+        </orderedlist>
+
+        <para>Jakmile dokončíte svůj překlad, importujete jej na Wikipedii takto.</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Otevřete soubor <filename>.UTF8</filename>, který je vygenerován v cílovém adresáři <filename>/target</filename>.</para>
+          </listitem>
+
+          <listitem>
+            <para>Zkopírujte text a vložte jej do přeložené verze stránky Wikipedia.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Znovu načíst</term>
+
+      <listitem>
+        <para>Načte projekt a tak převezme externí změny ve zdrojových souborech a projektových nastaveních.</para>
+
+        <para>Nové překladové paměti umístěné v adresáři <filename>/tm</filename> se během překladu automaticky nahrávají jakmile se kurzor přesune z jednoho segmentu do jiného.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zavřít</term>
+
+      <listitem>
+        <para>Uloží překlad a zavře projekt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Uložit</term>
+
+      <listitem>
+        <para>Uloží interní překladovou paměť na pevný disk. OmegaT automaticky ukládá překlad každé 3 minuty, stejně tak při zavření projektu, nebo při ukončení OmegaT.</para>
+
+        <para>Interval 3 minut lze změnit v <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Možnosti</guimenuitem> <guimenuitem>Předvolby</guimenuitem> <guimenuitem>Uložení a výstup</guimenuitem></menuchoice></link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zapsat zdrojové soubory</term>
+
+      <listitem>
+        <para>Nahraje soubory do repozitáře, které byly přidány nebo upraveny místně v adresáři <filename>source</filename> / zdroj.</para>
+
+        <para>Tato funkce je specifická pro týmové projekty.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zapsat cílové soubory</term>
+
+      <listitem>
+        <para>Nahraje do repozitáře soubory, které byly vytvořny místně v adresáři <filename>target</filename> / cíl.</para>
+
+        <para>Tato funkce je specifická pro týmové projekty.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vytvořit přeložené dokumenty</term>
+
+      <listitem>
+        <para>Vytvoří cílové dokumenty založené na vašem překladu. Přeložené dokumenty budou umístěné v adresáři překladu <filename>/target</filename>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vytvořit aktuálně přeložené dokumenty</term>
+
+      <listitem>
+        <para>Vytvoří cílový dokument, který odpovídá aktuálnímu překládanému dokumentu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Otevřít projekt MED...</term>
+
+      <listitem>
+        <para>Otevře projektový balíček ve formátu MED, který je definován směrnicemi EU Directorate-General for Translation.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vytvořit projekt MED...</term>
+
+      <listitem>
+        <para>Převede aktuální projekt na balíček MED.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vlastnosti...</term>
+
+      <listitem>
+        <para>Zobrazí dialogové okno <link linkend="dialogs.projectproperties">Vlastnosti projektu</link> pro úpravu jazyků projektu a umístění projektu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Soubory projektu...</term>
+
+      <listitem>
+        <para>Ptevře okno <link linkend="windows.projectfiles">Soubory projektu</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Procházet obsah projektu</term>
+
+      <listitem>
+        <para>Zprostředkovává přístu do adresářů projektu.</para>
+
+        <para>A navíc, dva záznamy v menu umožňují otevřít přímo aktuální dokumenty zdroje a cíle a zapisovatelný glosář. Dokumenty budou otevřeny v aplikaci vybrané operačním systémem. Pokud dané dokumenty nejsou k dispozici, bude záznam zobrazen šedě.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Konec</term>
+
+      <listitem>
+        <para>Uloží projekt a ukončí <application>OmegaT</application>. Pokud jste projekt dosud neuložili, budete požádáni ukončení programu ručně potvrdit.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>Uso di progetti in collaborazione</title>
+
+  <para>Innanzitutto i progetti in collaborazione di OmegaT devono essere <link linkend="howto.setupteamproject">configurati</link> in un server.</para>
+
+  <para>Per utilizzare la prima volta un progetto in collaborazione, seguire le istruzioni fornite dal responsabile del progetto.</para>
+
+  <para>Una volta aperto il progetto, la traduzione procede allo stesso modo di un progetto individuale, ad eccezione dei punti che seguono.</para>
+
+  <para><emphasis role="bold">Salvataggio automatico</emphasis></para>
+
+  <para>Ogni tre minuti (impostazione predefinita) il progetto locale viene sincronizzato col deposito remoto, in modo che il responsabile del progetto o gli altri traduttori possano visualizzare e utilizzare le traduzioni apportate durante quel periodo.</para>
+
+  <para>Il tempo dell'intervallo è modificabile in <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Opzioni</guimenuitem> <guimenuitem>Preferenze</guimenuitem> <guimenuitem>Salvataggio e risultato</guimenuitem> </menuchoice></link>.</para>
+
+  <para><emphasis role="bold">File sincronizzati</emphasis></para>
+
+  <para>Ogniqualvolta si salva il progetto, ma anche quando lo si apre, chiude o ricarica, vengono sincronizzati realmente solo due file:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Tutti gli altri file saranno sostituiti dai file presenti nel deposito remoto.</para>
+
+  <para><emphasis role="bold">Aggiunta di nuovi file di partenza</emphasis></para>
+
+  <para>Per aggiungere un nuovo file di partenza procedere come segue:</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>copiare i file nella cartella <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>usare il comando <menuchoice> <guimenuitem>Progetto</guimenuitem> <guimenuitem>Invia i file di partenza</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>I file di partenza presenti sono modificabili, ma l'operazione di invio (commit) deve essere eseguita prima di un salvataggio automatico e prima che il progetto venga ricaricato o chiuso.</para>
+
+  <para><emphasis role="bold">Eliminazione di file di partenza</emphasis></para>
+
+  <para>I file vanno eliminati prima dal responsabile del progetto, poi a livello locale.</para>
+
+  <para><emphasis role="bold">Modifica delle regole di segmentazione o dei filtri dei file</emphasis></para>
+
+  <para>I parametri del progetto devono essere modificati dal responsabile del progetto.</para>
+
+  <para><emphasis role="bold">Lavorare fuori linea</emphasis></para>
+
+  <para>È possibile aprire e tradurre un progetto in collaborazione fuori linea. Tutte le modifiche saranno sincronizzate non appena sarà disponibile una connessione alla rete.</para>
+
+  <para>Per lavorare fuori linea:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Disconnettersi dalla rete prima di aprire il progetto,</para>
+    </listitem>
+
+    <listitem>
+      <para>o aprire il progetto col la riga di comando utilizzando l'opzione <command>--no-team</command>.</para>
+    </listitem>
+  </itemizedlist>
+</section>

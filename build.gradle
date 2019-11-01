@@ -465,6 +465,9 @@ task installMacSignedDist(type: Sync) {
     }
     with distributions.mac.contents
     destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
+    doFirst {
+        delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
+    }
     doLast {
         exec {
             commandLine 'codesign', '--deep', '--force',

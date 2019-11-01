@@ -40,8 +40,15 @@ git tag vX.Y.Z
 git push origin vX.Y.Z
 ```
 
+## 6. Update bundled JREs
 
-## 6. Run build job on Azure DevOps
+See if an update is available for the bundled JREs, and update
+[jre-prep-ci](https://github.com/omegat-org/jre-prep-ci) if necessary.
+
+Make sure the JRE Prep build on Azure is caught up before proceeding.
+
+
+## 7. Run build job on Azure DevOps
 
 1. Go to [OmegaT Builds](https://dev.azure.com/omegat-org/OmegaT/_build)
 2. Queue a Release Build, specifying for Branch the tag created earlier,
@@ -53,7 +60,9 @@ After building, the distfiles will be deployed automatically to the [SourceForge
 This will publish all distfiles except for Signed Mac and WebStart.
 
 
-## 7. Build notarized Mac distfile locally, publish
+## 8. Build notarized Mac distfile locally, publish
+
+First make sure the local JRE is up to date.
 
 Sign and submit binary to Apple:
 
@@ -70,7 +79,7 @@ When the confirmation email arrives, do:
 Publish to SourceForge Files.
 
 
-## 8. Set default downloads
+## 9. Set default downloads
 
 Only if a Standard release:
 
@@ -82,7 +91,7 @@ Only if a Standard release:
 5. Click Save
 
 
-## 9. Build WebStart dist locally, publish
+## 10. Build WebStart dist locally, publish
 
 The Java WebStart dist can only be built with Java 11+.
 
@@ -114,14 +123,14 @@ Otherwise do
 and publish the contents to SourceForge Web manually.
 
 
-## 10. Publish the manual and Javadoc
+## 11. Publish the manual and Javadoc
 
 ```sh
 ./gradlew publishManual publishJavadoc
 ```
 
 
-## 11. Publish to Bintray
+## 12. Publish to Bintray
 
 ```sh
 ./gradlew bintrayUpload
@@ -130,7 +139,7 @@ and publish the contents to SourceForge Web manually.
 Then log onto Bintray and publish the release.
 
 
-## 12. Announce to News, user group
+## 13. Announce to News, user group
 
 - [OmegaT News](https://sourceforge.net/p/omegat/news/)
   - [Example](https://sourceforge.net/p/omegat/news/2019/03/omegat-latest-version-415-update-4-released/)
@@ -138,7 +147,7 @@ Then log onto Bintray and publish the release.
   - [Example](https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/43871)
 
 
-## 13. Cleanup
+## 14. Cleanup
 
 - Bump version in `Version.properties`, `changes.txt`
 - Move old versions in SourceForge Files into `OldFiles/Releases`
@@ -148,7 +157,7 @@ Then log onto Bintray and publish the release.
 - Update ticket milestones if necessary
 
 
-## 14. Push new version for version check
+## 15. Push new version for version check
 
 If no catastrophic problems are reported with the new version, once the
 [website](https://github.com/omegat-org/omegat-website/) has been updated, bump

@@ -55,11 +55,16 @@
 ----------------------------------------------------------------------
  OmegaT 4.3.1
 ----------------------------------------------------------------------
-  0 Enhancements
+  1 Enhancement
   2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 4.3.1 vs 4.3.0
+
+  Implemented requests:
+
+  - Notarize the Mac distribution
+  https://sourceforge.net/p/omegat/feature-requests/1454/
 
   Bug fixes:
 

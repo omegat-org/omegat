@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   2 Enhancements
   0 Bug fixes
-  5 Localisation updates
+  6 Localisation updates
 ----------------------------------------------------------------------
 5.1.0 vs 5.0.0
 
@@ -22,6 +22,7 @@
   - Dutch localisation updated to 5.1.0 (UI)
   - Russian localisation updated to 5.1.0 (UI)
   - Turkish localisation updated to 5.1.0 (UI)
+  - Ukrainian localisation updated to 5.1.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 5.0.0 (2019-10-01)

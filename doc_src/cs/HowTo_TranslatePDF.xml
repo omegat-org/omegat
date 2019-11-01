@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.translatepdf">
+  <title>Překlad souboru PDF</title>
+
+<para>Soubory PDF představují zvláštní případ Obsahují informaci k formátování textu, ale taková informace nemůže být znovu použita aplikací <application>OmegaT</application> při tvoření cílových souborů. Tudíž jsou soubory PDF zpracovávány jako soubory prostého textu a výstup představují soubory s neformátovaným prostým textem.</para>
+  <para>Pokud potřebujte reprodukovat formátování textu (a nebo také jiné objekty jako kresby) ve svém překladu, tak se nabízejí tři způsoby:</para>
+  <orderedlist>
+    <listitem>
+      <para>Použijte výchozí filtr v <application>OmegaT</application> (vstup PDF), přeložte, vytvořte cílový soubor (bude to soubor s prostým textem) a přidejte důležité formátování a položky ručně.</para>
+    </listitem>
+    <listitem>
+      <para>Použití filtru Iceni Infix Viz <ulink url="https://omegat.org/howtos/iceni_infix.html">Jak na to - překlad souborů PDF za použití Iceni Infix a OmegaT</ulink>.</para>
+    </listitem>
+    <listitem>
+      <para>Importujte zdrojové soubory do <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>, uložte je jako soubor s koncovkou ODG, přeložte, vyexportujte do PDF dle potřeby.</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">Pozor:</emphasis> výše zmíněné informace se vztahují pouze na soubory PDF obsahující textovou vrstvu. Pokud máte soubor PDF vytvořený z naskenovaných stránek (někdy se těmto stránkám řáká 'mrtvá' PDF), pak poutřebujete použít program OCR (optical character recognition - optické rozpoznání znaků) pro rozeznání textu a převod souboru do formátu, který umí OmegaT zpracovat.</para>
+
+
+
+  <section id="other.file.formats">
+    <title>Jiné formáty souborů</title>
+
+    <para>Pro aplikaci OmegaT jsou vhodné i jiné souborové formáty prostého nebo formátovaného textu.</para>
+
+    <para>Převod souborů na podporované formáty lze provádět prostřednictvím externích nástrojů. Přeložené soubory bude nutno převést zpět do originálního formátu. Například, pokud máte zastaralou verzi Microsoft Word, která neumí pracovat s formátem ODT, ukažme si příklad práce s Wordovskými soubory s koncovkou DOC:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>importujte soubor do Textového editoru pro zpracování formátu ODF (např. LibreOffice Writer, OpenOffice.org Writer)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>uložte soubor ve formátu ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>přeložte soubor ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>otevřete přeložený cílový soubor do Textového editoru pro zpracování formátu ODF (např. LibreOffice Writer, OpenOffice.org Writer)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>soubor uložte jako DOC</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Kvalita formátování přeložených souborů bude záležet na kvalitě takovéto konverze. Před tím, než budete takové konverze provádět, tak si pro jistotu otestujte všechny možnosti. Více informací a aktuální seznam pomocných překladatelských nástrojů najdete na <ulink url="http://www.omegat.org">webu OmegaT</ulink>.</para>
+</section>
+</section>

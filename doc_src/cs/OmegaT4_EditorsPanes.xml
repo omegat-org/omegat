@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="panes">
+  <title>Podokna</title>
+
+  <para>Hlavní okno sestává z několika podoken, Hlavní nabídky a stavové lišty Můžete měnit pozici jakéhokoliv podokna nebo dokonce jej odpojit a získat tak samostatné okno tím, že dané podokno nakliknete a potáhnete za jeho název.  V závislosti na stavu podokna se mohou v jeho horním pravém rohu objevovat různé znaky:</para>
+
+  <note>
+    <para>Pokud nemůžete vidět všechna podokna (ať už jsou otevřena nebo minimalizována), prostřednictvím volby <guisubmenu> Možnosti &gt; Obnovit Hlavní okno </guisubmenu> obnovíte prostředí programu do takového stavu, který je definován v instalaci.</para>
+  </note>
+
+  <table>
+    <title>Tlačítka podoken</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <tbody>
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Minimize.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Minimize.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>minimalizuje podokno, potom ve spodní čísti okna programu je vidět jen název minimalizovaného podokna.</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Maximize.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Maximize.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>maximalizuje podokno</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Restore.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Restore.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>obnoví nastavení vzhledu před krokem maximalizace</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Undock.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Undock.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>odpojí podokno z hlavního okna</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Dock.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Dock.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>vrátí podokno zpět do hlavního okna.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>Pokud chcete, okna se můžou i překrývat. V takovém případě zobrazí podokno v horní části záložky. Oddělovače mezi podokny je možno táhnout a docílit tak změnu velikosti podoken. Pokud ztratíte přehled o změnách zobrazení podoken v uživatelském prostředí, můžete použít možnost <guimenuitem>Možnosti → Obnovit hlavní okno</guimenuitem> a kdykoliv tak vrátit původní rozestavění.</para>
+
+  <para>Je možno přesouvat soubory do jakého koliv podokna, které pak bude reagovat dle svých možností.<itemizedlist>
+      <listitem>
+        <para>Podokno Editoru: Pokud do tohoto okna přesunete soubor projektu (<filename>omega.project</filename>), tak se otevře odpovídající projekt, přičemž bude aktuálně otevřený projekt nejprve zavřen. Ostatní sem přesunuté soubory budou nakopírovány do adresáře zrdoje <filename>source</filename>. Toto se týká také okna <link linkend="windows.projectfiles">Soubory projektu</link></para>
+      </listitem>
+
+      <listitem>
+        <para>Podokno Přibližné překlady: Když sem přesunete soubory <filename>.tmx</filename>, pak budou tyto zkopírovány do adresáře <filename>tm</filename>.</para>
+      </listitem>
+
+      <listitem>
+        <para>Podokno Glosář: Když sem přesunete soubory s rozeznatelnou koncovkou glosáře (<filename>.txt</filename>, <filename>.tab</filename>, atd.) pak budou tyto nakopírovány do adresáře glosáře <filename>glossary</filename>.</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section id="editor.pane">
+    <title>V Editoru</title>
+
+    <para>Sem vpisujete a zde upravujete překlad. Podokno editoru zobrazuje text částečně přeloženého dokumentu, tzn. text, který je už přeložený je také jako přeložený zobrazen, a text, který ještě není přeložený se zobrazuje v původním jazyce.  Zobrazený text je rozdělený do segmentů a překladatel může přecházet dokumentem na kterýkoliv segment a editovat jej. Ve výše uvedeném případě, jsou již přeložené segmenty zobrazeny žlutě.</para>
+
+    <para>Jeden z nahoře ukázaných segmentů představuje aktivní segment. Je to ten segment, který je v zobrazení rozdělen na dvě části. Horní část je v jazyce zdroje, tučným písmem a na zeleném pozadí, spodní část je pole editace, které je ukončené značkou: značka je <literal>&lt;segment nnnn&gt;</literal>, kde nnnn představuje číslo segmentu v daném projektu. Horní část se používá jako reference a nahrazuje či upravuje se obsah editačního pole, které obsahuje vlastní překlad.</para>
+
+    <para>Pozor: popisek segmentu ukazuje <literal>&lt;segment nnn +yy víc&gt; tehdy, když segment není jedinečný. V takovémto případě představuje yy počet jiných výskytů segmentu v projektu.</literal></para>
+
+    <para>V závislosti na nastavení hodnot u Nastavení editace, může být editační pole pro nepřeložený segment prázdné, obsahovat zdrojový text nebo překladový řetězec nejpřibližnější k tomu, který právě překládáte.  Jakmile přejdete na jiný segment, překlad bude validován a uložen. Pokud chcete, aby se překlad rovnal zdroji, jednoduše vyprázdněte editační pole odstraněním veškerého textu (vyberte vše stiskem <keycap>Ctrl+A</keycap> a smažte pomocí <keycap>Del</keycap>). OmegaT umí uložit překlad, který je identický se zdrojem. Toto je užitečné u dokumentů, které obsahují obchodní značky, názvy nebo také vlastní jména, nebo části textu ve třetím jazyce, které nevyžadují překlad. Více podrobností najdete v části <emphasis>Editace překladu</emphasis>.</para>
+
+    <para>Když kliknete pravým tlačítkem myši do Editoru, otevře se vyskakovací nabídka, která nabízí možnosti <emphasis role="bold"> Vyjmout, Kopírovat, Vložit</emphasis> (tj. stejné funkce jako <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> a <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) a funkce <emphasis role="bold">Přejít na segment</emphasis> a <emphasis role="bold">Vytvořit nový záznam glosáře</emphasis>.  A navíc, když kliknete pravým tlačítkem myši na otevřený segment, tak budou navrženy související <emphasis role="bold">Alternativní překlady</emphasis>, například přejít na další výskyt nejedinečných segmentů.</para>
+
+    <para>Je možné přetáhnout text z jiného místa v hlavním okně a vložit jej tak do segmentu. Text, který je přetažený z venku cílového segmentu, bude zkopírován, zatímco text přetažený v rámci segmentu, bude přesunut.</para>
+
+    <para>Ve výchozím nastavení není možno vybrat slova ve zdrojovém segmentu za použití klávesnice, ale jde to s myší. Stiskem <keycap>F2</keycap> umožníte pohyb kurzoru do zdrojového setmentu (nebo jinde v editoru) za pomocí kláves s šipkami. V tomto režimu je ve spodní hraně okna zobrazen text &quot;<guilabel>Kurzor volný</guilabel>&quot; . Pro návrat do standardního režimu &quot;<guilabel>Cursor zamčen</guilabel>&quot; stiskněte opět <keycap>F2</keycap>.</para>
+  </section>
+
+  <section>
+    <title>Přibližné překlady</title>
+
+    <para>Podokno přibližných překladů ukazuje nejvíce podobné segmenty z překladových pamětí, jednak z interní překladové paměti projektu vytvořeného během překládání vašeho projektu, za další i ze starších překladových pamětí, které importuje z vašich předchozích zakázek, nebo je můžete získat od vašeho klienta či překladatelské agentury.</para>
+
+    <para>Když se přesunete na následující segment, první přibližný překlad (ten s nejvyšší mírou shody) je již vybraný automaticky. You may select a different match by pressing <guimenuitem>Ctrl+2, 3, 4, or 5</guimenuitem>. Nicméně pokud není dostupný návrh č. 5, stiskem <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> ničeho nedocílíte. Vybraný shodný výraz bude vložen do vašeho překladu po stisku <guimenuitem>Ctrl+R</guimenuitem>, cílové pole tak bude nahrazeno nalezeným výrazem, nebo stiskněte <guimenuitem>Ctrl+I</guimenuitem> pro vložení této shody na pozici kurzoru.</para>
+
+    <para>Míra shody je zhruba vypočítávána z počtu společných slov v nalezeném a původním segmentu, děleno počtem slov v tom delším. Označený přibližný překlad bude zvýrazněn tučně; slova, která v překládaném segmentu chybí, budou zbarvena modře a slova sousedící s chybějícími částmi se zobrazí zeleně. Ve výše uvedeném příkladě obsahuje zdrojový segment tento text <emphasis role="bold">Context menu command</emphasis>.  Nejvyšší shoda je 100%, protože se všechna slova shodují. Stejně jsou na tom další dvě shody a shoda č. 4 je podobná, ale přece odlišná. Na řádku, kde je vypsáno procento shody, je také uveden název překladové paměti obsahující danou shodu. Pokud není zobrazen žádný název souboru, znamená to, že zdroj pochází z výchozí překladové paměti projektu. Nespárované (osiřelé) segmenty (shoda č. 2) představují takové segmenty ve výchozí překladové paměti, které nemají odpovídajícího zdrojové segmenty v aktuálním projektu.</para>
+  </section>
+
+  <section>
+    <title>Glosář</title>
+
+    <para>Podokno Glosář umožňuje přístup k vlastní, soukromé sbírce výrazů a zvláštní terminologie, kterou jste si vytvořili v souborech glosáře. Ukazuje překlad termínů, které jsou nalezeny v aktuálním segmentu. Zdrojový segment v příkladě níže byl „<emphasis>Context menu command</emphasis>“, jako v příkladě Přibližného překladu nahoře, a zobrazená slova nalezená v dostupných glosářích (Terminologická sbírka Microsoft a Slovinský glosář Linuxové uživatelské skupiny).</para>
+
+    <para>Pokud jste si aktivovali možnost TransTips (<guimenuitem>Možnosti → TransTips</guimenuitem>), klikněte pravým tlačítkem myši na zvýrazněné slovo ve zdrojovém segmentu a otevře se tak  nabídka s navrhovaným překladem, stejně jako je to nabízeno přímo v glosáři. Když vyberete jeden z navrhovaných záznamů, pak bude tento překlad vložen na aktuální pozici kurzoru v segmentu s překladem. Podobně můžete postupovat, když zvýrazníte a zkopírujete upřednostněnou variantu v podokně glosáře, a vložíte ji do cílového segmentu (příp. stačí zvýraznit a pak pravý klik (nebo klik kolečkem) v cílovém segmentu, kam to chcete vložit).</para>
+  </section>
+
+  <section>
+    <title>Slovník</title>
+
+    <para>Slovníky představují elektronický ekvivalent tištěných slovníků, jako Merriam Webster, Duden, Larousse, atd., které máte na svém stole. Více informací k tomuto tématu najdete v kapitole o <link linkend="appendix.dictionaries">Slovnících</link>.</para>
+  </section>
+
+  <section>
+    <title>Strojový překlad</title>
+
+    <para>V otevřeném podokně Strojový překlad se zobrazují návrhy překladu aktuálního segmentu zprostředkované z nástrojů strojového překladu.  Když stisknete klávesovou zkratku <keysym>Ctrl+M </keysym>, nahradíte překlad aktuálního segmentu navrženým překladem. </para>
+  </section>
+
+  <section>
+    <title>Překlad s více významy</title>
+
+    <para>Daný zdrojový segment může vykazovat různé možnosti překladu, vždy v závislosti na kontextu. Pokud se v konkrétní situaci určitý překlad nehodí, uživatel může vybrat položku nabídky <guisubmenu>Upravit → Vytvořit alternativní překlad</guisubmenu>. S textem překladu, který vložíte tímto krokem, se bude zacházet jako s alternativním překladem zdrojového segmentu. Můžete pak vybrat jeden z alternativních překladů (např. nejpravděpodobnější mezi nimi) jako výchozí překlad, vyberte <guisubmenu>Upravit → Použít jako výchozí překlad</guisubmenu></para>
+  </section>
+
+  <section>
+    <title>Poznámky</title>
+
+    <para>Překladatel může přidávat poznámky k otevřenému segmentu, například když se chce později vrátit k segmentu a předělat překlad, zkontrolovat správnost alternativního překladu nebo se zeptat kolegů na jejich názor. Poznámkami můžete procházet použitím položek nabídky <guisubmenu>Přejít → Další poznámka</guisubmenu> a <guisubmenu>Přejít → Předchozí poznámka.</guisubmenu></para>
+  </section>
+
+  <section>
+    <title>Komentáře</title>
+
+    <para>Některé souborové formáty, specializované pro práci s překladem, jako např. PO, povolují zahrnout komentáře. Tímto způsobem je možno překladateli poskytnout kontext o překládaném segmentu. V níže uvedeném příkladě vidíme, že autor souboru PO zahrnul varování pro překladatele, aby zkontroloval délku překladu:</para>
+  </section>
+
+  <section>
+    <title>Stavová lišta</title>
+
+    <para>Stavová lišta zobrazuje zprávy vztahující se k běhu práce ve spodní části hlavního okna. Tato lišta podává uživateli zpětnou vazbu o specifických operacích, které právě probíhají. Také zobrazuje počet přibližných překladů a nalezených položek v glosáři pro aktuální segment.</para>
+
+    <para>Počitadla v dolním pravém rohu sledují proces překladu (příklad pro tato čísla vidíte např. na výše uvedeném obrázku):</para>
+
+    <table>
+      <title>Hlavní okno – počitadla</title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>počet segmentů – přeložených vs. celkový počet v aktuálním souboru</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>počet jedinečných (nepárových) segmentů – přeložených vs. celkový počet v projektu</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>celkový počet segmentů (včetně opakujících se) v projektu</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>počet znaků ve zdroji a překladu v aktuálním segmentu</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Z praktického pohledu se dá říci, že nejdůležitější číselný pár je ten druhý: informuje o tom, kolik z překladu jste již zvládli vhledem k celkovému počtu segmentů (spárovaných nebo jedinečných). Projekt ukázaný v příkladě je zjevně již kompletní, protože ukazuje, že všechny jedinečné segmenty byly přeloženy.</para>
+  </section>
+</chapter>

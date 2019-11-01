@@ -4,11 +4,9 @@
   <title>Přizpůsobení klávesových zkratek</title>
 
   <section id="ch04.shortcuts.customization">
-    <title><indexterm class="singular">
-        <primary>Klávesové zkratky</primary> <secondary>Přizpůsobení</secondary>
-      </indexterm>Přizpůsobení klávesových zkratek</title>
+    <title>Přizpůsobení klávesových zkratek</title>
 
-    <para>Většině položek, které jsou dostupné v Hlavní nabídce může být přiřazena nová klávesová zkratka. Můžete změnit již přiřazené klávesové zkratky a přidat nové zkratky tak, že přidáte soubor definic klávesových zkratek do svého adresáře OmegaT (<link linkend="user.files">Umístění souborů uživatele</link>).</para>
+    <para>Většině položek, které jsou dostupné v Hlavní nabídce může být přiřazena nová klávesová zkratka. Můžete změnit již přiřazené klávesové zkratky a přidat nové zkratky tak, že přidáte soubor definic klávesových zkratek do svého adresáře nastavení <application>OmegaT</application> (nalzenete jej v nabídce <menuchoice> <guimenuitem>Možnosti</guimenuitem> <guimenuitem>Zpřístupnit adresář nastavení</guimenuitem> </menuchoice>).</para>
 
     <para>Soubor definic klávesových zkratek musí být pojmenován <filename>MainMenuShortcuts.properties</filename> a musí obsahovat nanejvýš jednu definici klávesové zkratky na jednom řádku. Prázdné řádky jsou akceptovány a řádky s komentářem musí začínat dvěma lomítky „//“.  Cokoliv za „//“ bude ignorováno.</para>
 
@@ -670,11 +668,7 @@
     <table>
       <title>Nabídka ‚Zobrazit‛</title>
 
-      <indexterm class="singular">
-        <primary>Přizpůsobení zkratek</primary> <secondary>Nabídka ‚Zobrazit‛</secondary>
-      </indexterm>
-
-      <tgroup cols="3" colsep="1">
+       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>

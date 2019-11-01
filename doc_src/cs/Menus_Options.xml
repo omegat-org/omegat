@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>Možnosti</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Předvolby...</term>
+
+      <listitem>
+        <para>Otevře dialogové okno <link linkend="dialogs.preferences">Předvolby</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Strojový překlad</term>
+
+      <listitem>
+        <para>Umožní vám aktivovat / deaktivovat nabízené nástroje Strojového překladu.</para>
+
+        <para>Pokud je vybráno víc nástrojů strojového překladu, pak se také používá zkratka <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>k přepínání mezi nimi a vložení posledního vybraného.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Glosář</term>
+
+      <listitem>
+        <para>Vybrat možnost <guimenuitem>oblast hledání terminologie v TaaS</guimenuitem> pro aktivaci tohoto typu hledání.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Slovník</term>
+
+      <listitem>
+        <para>Označte možnost <guimenuitem>U záznamů glosáře použít přibližné shody</guimenuitem> pro zobrazení slov, která mají stejný kořen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Automatické doplnění</term>
+
+      <listitem>
+        <para>Pokud je zatržena možnost <guimenuitem>Automatické doplňovánícky ukazovat relevantní návrhy</guimenuitem>, pak bude automaticky spuštěno automatické doplňování již při psaní prvních znaků přeloženého záznamu glosáře, nebo při zadání &quot;&lt;&quot; v případě tagu.</para>
+
+        <para>Označte <guimenuitem>Doplnění historie</guimenuitem>, pak se budou zobrazovat navrhovaná slova hned, jakmile se napíšou první znaky.</para>
+
+        <para>Označte <guimenuitem>Navrhování historie</guimenuitem>, pak se budou zobrazovat navrhovaná slova, která běžně následují po slově, které jste právě zadali.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Filtry souborů...</term>
+
+      <listitem>
+        <para>Otevře možnosti <link linkend="dialogs.preferences.filefilters">Filtry souborů</link> v dialogovém okně Předvolby.</para>
+
+        <para>Tato nastavení platí na úrovni OmegaT, na všechny projekty.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentace...</term>
+
+      <listitem>
+        <para>Otevře možnosti <link linkend="dialogs.preferences.segmentationsetup">Nastavení segmentace</link> v dialogovém okně Předvolby.</para>
+
+        <para>Tato nastavení platí na úrovni OmegaT, na všechny projekty.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Editor</term>
+
+      <listitem>
+        <para>Otevře možnosti <link linkend="dialogs.preferences.editor">Editoru</link> v dialogovém okně Předvolby.</para>
+
+        <para>Tato nastavení platí na úrovni OmegaT, na všechny projekty.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zpřístupnit adresář nastavení</term>
+
+      <listitem>
+        <para>Otevře místní adresář OmegaT, ve kterém jsou uloženy konfigurační soubory (záleží na operačním systému).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.managerighttoleft">
+  <title>Spravovat jazyky se zápisem zprava doleva</title>
+
+   <para>Zarovnání zdrojových a cílových segmentů závisí na jazycích projektu. Ve výchozím nastavení se vychází ze zarovnání vlevo pro jazyky se zápisem zleva doprava (LTR) a zarovnání vpravo pro jazyky se zápisem zprava doleva (RTL). Mezi různými způsoby zobrazení můžete přepínat stisknutím <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> (jedná se o písmeno O, ne o číslici 0). Při přepínání <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> se volí mezi třemi nastaveními:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>výchozí zarovnání, které je definováno s jazykem</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>zarovnání vlevo</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>zarovnání vpravo</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Použití módu RTL v aplikaci <application>OmegaT</application> nikterak neovlivní zobrazovací mód přeložených dokumentů, které byly sestaveny prostřednictvím <application>OmegaT</application>. Zobrazovací mód přeloženého dokumentu bude nutno upravit s aplikací, která je běžně určena k zobrazování a úpravě takového textu (více informací v konkrétních manuálech). Použití zkratky <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> vyvolá v aplikaci <application>OmegaT</application> změnu jak pro vkládání, tak i pro zobrazení textu. Lze ji použít odděleně pro všechny tři okna (Editor, Přibližné překlady a Glosář). Tuto možnost lze použít i ve všech polích pro zadávání textu v rámci <application>OmegaT</application> – v okně pro vyhledávání, segmentační pravidla atd.</para>
+
+    <para>Pozor: Mac OS X používá stejnou zkratku <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> (a <emphasis role="bold">ne </emphasis>cmd+Ctrl+O) .</para>
+
+    <section>
+      <title>Současné užívání řetězců LTR a RTL v segmentech</title>
+
+      <para>Když zadáváte prostý text ve směru RTL, můžete používat výchozí (LTR) zobrazení. Nicméně v mnoha případech je nutné vložit text LTR do textu RTL. U tagů aplikace OmegaT si uveďme příklady jako názvy produktů, které musí zůstat ve směru LTR zdrojového jazyka, různé zástupné znaky v textu v lokalizačních souborech a čísla. V takovýchto případech je důležité přepnout do módu RTL, takže text RTL (ve skutečnosti dvousměrný) bude zobrazován správně. Je nutno uvést, že když je <application>OmegaT</application> v módu RTL, tak oba, jak zdrojový, tak i cílový text, texty jsou zobrazeny v módu RTL. To znamená, že jestli je zdrojový jazyk LTR a cílový RTL, nebo naopak, může být nezbytné vzájemně přepínat mezi módy RTL a LTR a jednoduchým způsobem zobrazovat zdroj a vkládat cílový text v odpovídajícím módu.</para>
+    </section>
+
+    <section>
+      <title>Tagy aplikace <application>OmegaT</application> v segmentech typu RTL</title>
+
+      <para>Jak již byl dříve zmíněno, tagy OmegaT jsou řetězce typu LTR. Když překládáte mezi jazyky RTL a LTR, tak abyste mohli tagy správně číst ze zdroje a řádně je vkládat do cílového textu, budete určitě chtít často přepínat mezi módy LTR a RTL.</para>
+
+      <para>Pokud to dokument umožní, lze překladateli doporučit odstranit informace o stylu z originálního dokumentu tak, aby se pak v prostředí OmegaT zobrazovalo tagů co nejméně. Bližší informace poskytují údaje v části Tipy pro správu tagů. Často ověřujte tagy (viz Ověření tagů) a vytvářejte přeložené dokumenty (viz níže a položky Hlavní nabídky) v pravidelných časových odstupech především kvůli tomu, že je pak jednodušší vyřešit případné problémy. TIP: co se týče zpracování formátování, někdy může být jednodušší si text k překladu uložit bez jakéhokoliv formátování, přeložit a formátování doplnit posléze v konkrétním editoru.</para>
+    </section>
+
+    <section>
+      <title>Vytvoření dokumentů se zápisem RTL</title>
+
+      <para>Když se vytváří přeložené dokumenty, směr zobrazení bude stejný jako u výchozího dokumentu. Pokud byl výchozí dokument typu LTR, směr zobrazování cílového dokumentu se musí změnit ručně na RLT v konkrétní aplikaci, která umí takovéto dokumenty otevírat a zpracovávat. Každý výstupní formát má specifické způsoby jak pracovat se zobrazením RTL; více detailů najdete v nápovědě pro konkrétní aplikace.</para>
+
+      <para>U souborů .docx byla spousta změn již provedena automaticky:<itemizedlist>
+          <listitem>Odstavce, oddíly a tabulky jsou nastaveny na oba směry.</listitem>
+
+          <listitem>Ucelené textové prvky jsou nastaveny na RTL</listitem>
+        </itemizedlist></para>
+
+      <para>Abyste se vyhnuli měnění zobrazovacích parametrů cílového souboru při každém otevření souboru, je u vybraných typů možné změnit zobrazovací parametry u zdrojového souboru a to tak, že tyto parametry budou přeneseny na cílový soubor. Takové úpravy je možné provádět například u souborů OpenOffice.org.</para>
+
+  </section>
+</section>

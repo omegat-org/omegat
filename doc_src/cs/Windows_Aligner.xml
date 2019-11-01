@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title>Párovací nástroj</title>
+
+  <para>Alignment / Párování zahrnuje vytvoření dvoujazyčné překladatelské paměti z jednojazyčných dokumentů, který již byly přeloženy.</para>
+
+  <para>Okno otevřete následovně, vyberte <menuchoice> <guimenuitem>Nástroje</guimenuitem> <guimenuitem>Párovat soubory...</guimenuitem> </menuchoice>.</para>
+
+  <section>
+    <title>Krok 1: Přizpůsobit parametry párování</title>
+
+    <para>Pokud se při párování textů vyskytne situace, kdy se nabízí vylepšení, zkuste změnit parametry. Ve většině případů je to tak, že čím je <guilabel>Průměrná hodnota</guilabel> nižší, tak o to bude lepší párování.</para>
+
+    <para>V <guilabel>Hromadném</guilabel> režimu se texty vyhodnocují globálně. V <guilabel>Parsovacím</guilabel> režimu se vyhodnocuje segment za segmentem.</para>
+
+    <para>V režimu <guilabel>Porovnání ID</guilabel> se párují texty typu Klíč=Hodnota (Key=Value). Toto funguje i v případě, že klíče nejsou ve stejném pořadí ve dvou souborech, anebo když ty dva soubory neobsahují stejné množství informací. Tato možnost se zobrazí tehdy, když jsou oba označené soubory rozeznány jako soubory typu Key=Value.</para>
+
+    <para>Algoritmy <guilabel>Viterbiho</guilabel> a <guilabel>Forward-Backward</guilabel> představují dvě odlišné metody výpočtu. Vyberte jeden z nich, který poskytne lepší výsledky.</para>
+
+    <para>Klikněte na <guibutton>Pokračovat</guibutton> a přejděte na další krok.</para>
+  </section>
+
+  <section>
+    <title>Krok 2: Provést ruční opravy</title>
+
+    <para>Po skončení automatického zpracování se zpravidla pro párování dvou souborů obecně vyžadují ruční opravy.</para>
+
+    <para>Jednotky překladu se nacházejí v buňkách ve dvou posledních sloupcích.</para>
+
+    <para>Jak párovat dva segmenty na stejný řádek:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Vyberte první segment.</para>
+      </listitem>
+
+      <listitem>
+        <para>Stiskněte mezerník (zkratka pro <menuchoice> <guimenuitem>Editovat</guimenuitem> <guimenuitem>Začátek detailního párování</guimenuitem> </menuchoice>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Klikněte do dalšího sloupce na ten překlad, který odpovídá prvnímu segmentu.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Po několika takovýchto krocích vyberte <menuchoice><guimenuitem>Upravit</guimenuitem> <guimenuitem>Spárovat rozpracované</guimenuitem> </menuchoice>a tím zaktualizujete spárování ostatních segmentů.</para>
+
+    <para>Pozice jednoho nebo více segmentů samostatně upravíte tak, že vyberete daný segment či segmenty a stisknete <userinput>U</userinput> (<guilabel>Pohyb nahoru</guilabel>) nebo <userinput>D</userinput> (<guilabel>Pohyb dolů</guilabel>).</para>
+
+    <para>Při vytváření překladové paměti budou zahrnuty jen ty řádky, které budou mít zaškrtno <guilabel>zaškrtávací</guilabel> políčko v prvním sloupci.</para>
+
+    <para>Jakmile jsou oba sloupce dostatečně spárovány, klikněte na <guibutton>Uložit TMX...</guibutton> a vytvoříte tak hotovu překladovou paměť.</para>
+  </section>
+</section>

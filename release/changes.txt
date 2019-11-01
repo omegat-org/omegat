@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   2 Enhancements
   0 Bug fixes
-  0 Localisation updates
+  5 Localisation updates
 ----------------------------------------------------------------------
 5.1.0 vs 5.0.0
 
@@ -14,6 +14,14 @@
 
   - Show glossary file name as tooltip in the glossary pane
   https://sourceforge.net/p/omegat/feature-requests/1183/
+
+  Localisation Updates:
+
+  - Belarusian localisation updated to 5.1.0 (UI)
+  - Czech localisation updated to 5.1.0 (UI, documentation)
+  - Dutch localisation updated to 5.1.0 (UI)
+  - Russian localisation updated to 5.1.0 (UI)
+  - Turkish localisation updated to 5.1.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 5.0.0 (2019-10-01)

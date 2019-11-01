@@ -2,7 +2,7 @@
  OmegaT 5.1.0
 ----------------------------------------------------------------------
   1 Enhancement
-  1 Bug fix
+  0 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.1.0 vs 5.0.0
@@ -12,11 +12,6 @@
   - Allow users to choose Apertium server
   https://sourceforge.net/p/omegat/feature-requests/1466/
 
-  Bug fixes:
-
-  - First Windows installation screen not translated
-  https://sourceforge.net/p/omegat/bugs/957/
-
 ----------------------------------------------------------------------
  OmegaT 5.0.0 (2019-10-01)
 ----------------------------------------------------------------------
@@ -24,7 +19,7 @@
   1 Bug fix
   9 Localisation updates
 ----------------------------------------------------------------------
-5.0.0 vs 4.3.0
+5.0.0 vs 4.3.1
 
   Implemented requests:
 
@@ -53,6 +48,23 @@
   - Russian localisation updated to 5.0.0 (UI)
   - Simplified Chinese localisation updated to 5.0.0 (UI, scripts)
   - Ukrainian localisation updated to 5.0.0 (UI, Instant Start, scripts, readme)
+
+----------------------------------------------------------------------
+ OmegaT 4.3.1
+----------------------------------------------------------------------
+  0 Enhancements
+  2 Bug fixes
+  0 Localisation updates
+----------------------------------------------------------------------
+4.3.1 vs 4.3.0
+
+  Bug fixes:
+
+  - First Windows installation screen not translated
+  https://sourceforge.net/p/omegat/bugs/957/
+
+  - OmegaT can't access projects in macOS 10.15 Catalina
+  https://sourceforge.net/p/omegat/bugs/959/
 
 ----------------------------------------------------------------------
  OmegaT 4.3.0 (2019-07-09)

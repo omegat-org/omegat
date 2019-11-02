@@ -214,7 +214,7 @@
 
       <para>Le opzioni vengono cambiate modificando <filename>Configuration.properties</filename>. Per ottenere delle opzioni predefinite, abilitare un parametro rimuovendo il carattere <literal>#</literal> all'inizio della riga. Per esempio, <literal>user.language=ja</literal> (senza <literal>#</literal>) avvierà <application>OmegaT</application> con l'interfaccia giapponese.</para>
 
-      <para>Per cambiare la quantità di memoria disponibile, modificare il file <filename>OmegaT.app/Contents/MacOS/OmegaT</filename> e rimuovere <literal>#</literal> prima della voce <literal>MEMORY=-Xmx<parameter>?</parameter>g</literal>. Per esempio, <literal>MEMORY=-Xmx6g</literal> avvierà OmegaT con 6 GB di memoria.</para>
+      <para>Per cambiare la quantità di memoria disponibile, modificare il file <emphasis>OmegaT.app/Contents/Info.plist</emphasis> e decommentare la riga <literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt; --&gt;</literal> rimuovendo <literal>&lt;!--</literal> e <literal>--&gt;</literal>. OmegaT sarà avviato con 6 GB di memoria; cambiare <literal>6g</literal> con la quantità prescelta.</para>
 
       <para>Per avviare più istanze di <filename>OmegaT.app</filename>, fare doppio clic sul file <emphasis>OmegaT</emphasis> che si trova in <filename>OmegaT.app/Contents/MacOS/</filename>.</para>
 

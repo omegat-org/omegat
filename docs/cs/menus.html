@@ -1,0 +1,684 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;2.&nbsp;Nabídka</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - Uživatelská příručka">
+      <link rel="prev" href="chapter.installing.and.running.html" title="Chapter&nbsp;1.&nbsp;Instalace a provoz programu OmegaT">
+      <link rel="next" href="windows.and.dialogs.html" title="Chapter&nbsp;3.&nbsp;Okna a dialogová okna">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;2.&nbsp;Nabídka</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.installing.and.running.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="windows.and.dialogs.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="menus"></a>Chapter&nbsp;2.&nbsp;Nabídka
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="menus.html#menus.project">1. Projekt</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.edit">2. Upravit</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.goto">3. Přejít</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.view">4. Zobrazit</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.tools">5. Nástroje</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.options">6. Možnosti</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.help">7. Nápověda</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.project"></a>1.&nbsp;Projekt
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><span class="guimenuitem">Nový...</span></span></dt>
+                  <dd>
+                     <p>Vytvoří a otevře nový projekt.</p>
+                  </dd>
+                  <dt><span class="term"><span class="guimenuitem">Stáhnout týmový projekt...</span></span></dt>
+                  <dd>
+                     <p>Vytvoří místní kopii vzdáleného projektu OmegaT. Detaily naleznete v části <a class="link" href="howtos.html#howto.useteamproject" title="2.&nbsp;Využití týmového projektu">Jak používat týmový projekt</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Otevřít...</span></dt>
+                  <dd>
+                     <p>Otevírá dříve vytvořený projekt.</p>
+                  </dd>
+                  <dt><span class="term">Otevřít nedávný projekt</span></dt>
+                  <dd>
+                     <p>Poskytuje přístup k deseti posledním upravovaným projektům. Kliknutím na jeden vybraný uloží aktuální projekt, zavře jej a
+                        otevře ten nově vybraný.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Kopírovat soubory do zdrojového adresáře...</span></dt>
+                  <dd>
+                     <p>Zkopíruje vybrané soubory do zdrojového adresáře <code class="filename">/source</code> a znovu načte projekt pro načtení nových souborů.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Stáhnout stránku MediaWiki...</span></dt>
+                  <dd>
+                     <p>Pro překlad obsahu stránky Wikipedia (na příklad):</p>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>Klikněte na záložku <span class="guilabel">Upravit</span> na stránce Wikipedia.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>Zkopírujte URL stránky (končící <span class="guilabel">action=edit</span>) a vložte ji do <span class="application">OmegaT</span>.
+                              </p>
+                           </li>
+                        </ol>
+                     </div>
+                     <p>Jakmile dokončíte svůj překlad, importujete jej na Wikipedii takto.</p>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>Otevřete soubor <code class="filename">.UTF8</code>, který je vygenerován v cílovém adresáři <code class="filename">/target</code>.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>Zkopírujte text a vložte jej do přeložené verze stránky Wikipedia.</p>
+                           </li>
+                        </ol>
+                     </div>
+                  </dd>
+                  <dt><span class="term">Znovu načíst</span></dt>
+                  <dd>
+                     <p>Načte projekt a tak převezme externí změny ve zdrojových souborech a projektových nastaveních.</p>
+                     <p>Nové překladové paměti umístěné v adresáři <code class="filename">/tm</code> se během překladu automaticky nahrávají jakmile se kurzor přesune z jednoho segmentu do jiného.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Zavřít</span></dt>
+                  <dd>
+                     <p>Uloží překlad a zavře projekt.</p>
+                  </dd>
+                  <dt><span class="term">Uložit</span></dt>
+                  <dd>
+                     <p>Uloží interní překladovou paměť na pevný disk. OmegaT automaticky ukládá překlad každé 3 minuty, stejně tak při zavření projektu,
+                        nebo při ukončení OmegaT.
+                     </p>
+                     <p>Interval 3 minut lze změnit v <a class="link" href="windows.and.dialogs.html#dialogs.preferences.savingandoutput" title="7.17.&nbsp;Uložení a výstup"><span class="guimenuitem">Možnosti</span> → <span class="guimenuitem">Předvolby</span> → <span class="guimenuitem">Uložení a výstup</span></a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Zapsat zdrojové soubory</span></dt>
+                  <dd>
+                     <p>Nahraje soubory do repozitáře, které byly přidány nebo upraveny místně v adresáři <code class="filename">source</code> / zdroj.
+                     </p>
+                     <p>Tato funkce je specifická pro týmové projekty.</p>
+                  </dd>
+                  <dt><span class="term">Zapsat cílové soubory</span></dt>
+                  <dd>
+                     <p>Nahraje do repozitáře soubory, které byly vytvořny místně v adresáři <code class="filename">target</code> / cíl.
+                     </p>
+                     <p>Tato funkce je specifická pro týmové projekty.</p>
+                  </dd>
+                  <dt><span class="term">Vytvořit přeložené dokumenty</span></dt>
+                  <dd>
+                     <p>Vytvoří cílové dokumenty založené na vašem překladu. Přeložené dokumenty budou umístěné v adresáři překladu <code class="filename">/target</code>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Vytvořit aktuálně přeložené dokumenty</span></dt>
+                  <dd>
+                     <p>Vytvoří cílový dokument, který odpovídá aktuálnímu překládanému dokumentu.</p>
+                  </dd>
+                  <dt><span class="term">Otevřít projekt MED...</span></dt>
+                  <dd>
+                     <p>Otevře projektový balíček ve formátu MED, který je definován směrnicemi EU Directorate-General for Translation.</p>
+                  </dd>
+                  <dt><span class="term">Vytvořit projekt MED...</span></dt>
+                  <dd>
+                     <p>Převede aktuální projekt na balíček MED.</p>
+                  </dd>
+                  <dt><span class="term">Vlastnosti...</span></dt>
+                  <dd>
+                     <p>Zobrazí dialogové okno <a class="link" href="windows.and.dialogs.html#dialogs.projectproperties" title="1.&nbsp;Vlastnosti projektu">Vlastnosti projektu</a> pro úpravu jazyků projektu a umístění projektu.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Soubory projektu...</span></dt>
+                  <dd>
+                     <p>Ptevře okno <a class="link" href="windows.and.dialogs.html#windows.projectfiles" title="2.&nbsp;Soubory projektu">Soubory projektu</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Procházet obsah projektu</span></dt>
+                  <dd>
+                     <p>Zprostředkovává přístu do adresářů projektu.</p>
+                     <p>A navíc, dva záznamy v menu umožňují otevřít přímo aktuální dokumenty zdroje a cíle a zapisovatelný glosář. Dokumenty budou
+                        otevřeny v aplikaci vybrané operačním systémem. Pokud dané dokumenty nejsou k dispozici, bude záznam zobrazen šedě.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Konec</span></dt>
+                  <dd>
+                     <p>Uloží projekt a ukončí <span class="application">OmegaT</span>. Pokud jste projekt dosud neuložili, budete požádáni ukončení programu ručně potvrdit.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.edit"></a>2.&nbsp;Upravit
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tato nabídka zobrazí záznamy jen tehdy, pokud je právě otevřen nějaký projekt.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><span class="guimenuitem">Zpět</span></span></dt>
+                  <dd>
+                     <p>Obnoví stav před poslední úpravou. Tento příkaz nebude fungovat, jakmile potvrdíte upravovaný segment.</p>
+                  </dd>
+                  <dt><span class="term">Obnovit</span></dt>
+                  <dd>
+                     <p>Obnoví stav před tím, než byla poslední akce zrušena. Tento příkaz nebude fungovat, jakmile potvrdíte upravovaný segment.</p>
+                  </dd>
+                  <dt><span class="term">Nahradit shodou nebo výběrem</span></dt>
+                  <dd>
+                     <p>Přepíše celý cílový segment vybraným přibližným překladem (ve výchozím nastavení je vybraný první přibližný překlad).</p>
+                     <p>Pokud je v rámci přibližného překladu vybrán jen určitý text, tak pak jen tento výběr nahradí celý cílový segment.</p>
+                  </dd>
+                  <dt><span class="term">Vložit přibližný překlad nebo výběr</span></dt>
+                  <dd>
+                     <p>Vloží vybraný přibližný překlad na pozici kurzoru. Pokud je část cílového segmentu zvýrazněna výběrem, tato funkce přepíše
+                        vybranou část.
+                     </p>
+                     <p>Pokud jsou vybrané nějaké texty uvnitř přibližného překladu, tak jen tento výběr bude vložen na pozici kurzoru.</p>
+                  </dd>
+                  <dt><span class="term">Přepsat Strojovým překladem</span></dt>
+                  <dd>
+                     <p>Přepíše cílový segment překladem, který nabízí služba Strojového překladu. Nebude provedena žádná akce, pokud služba Strojového
+                        překladu není zaktivována (viz <span class="guimenu">Možnosti</span> → <span class="guimenuitem">Strojový překlad</span>).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Přepsat zdrojem</span></dt>
+                  <dd>
+                     <p>Přepíše celý cílový segment zdrojem.</p>
+                  </dd>
+                  <dt><span class="term">Vložit zdroj</span></dt>
+                  <dd>
+                     <p>Vloží zdroj na pozici kurzoru.</p>
+                  </dd>
+                  <dt><span class="term">Vložit chybějící tagy zdroje</span></dt>
+                  <dd>
+                     <p>Vloží tagy zdroje (pokud chyběly) na pozici kurzoru.</p>
+                  </dd>
+                  <dt><span class="term">Vložit další chybějící tag</span></dt>
+                  <dd>
+                     <p>Vloží jen jeden tag (z chybějících) na pozici kurzoru.</p>
+                  </dd>
+                  <dt><span class="term">Exportovat výběr</span></dt>
+                  <dd>
+                     <p>Exportuje aktuální výběr do textového souboru k dalšímu zpracování. Pokud nebyl vybrán žádný text, bude do tohoto souboru
+                        zapsán aktuální zdrojový segment. Když uživatel zavře <span class="application">OmegaT</span> nebude tento soubor smazán, jak je tomu zvykem s běžným chováním schránky v operačním systému. Exportovaný obsah je zkopírován
+                        do souboru <code class="filename">selection.txt</code>, který se nachází v adresáři dle předvoleb uživatele.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Vytvořit nový záznam Glosáře</span></dt>
+                  <dd>
+                     <p>Umožňuje uživateli vytvořit záznam ve výchozím souboru glosáře.</p>
+                     <p>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>G</strong></span>, pak bude tento text - ve výchozím nastavení vložen do políčka  <span class="guilabel">Termín zdroje</span>.
+                     </p>
+                     <p>Toto lze použít také na pole <span class="guimenuitem">Cílový pojem</span> a <span class="guimenuitem">Komentář</span>, a to tehdy, když je učiněn nový výběr a když znovu stisknete <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>G</strong></span></p>
+                  </dd>
+                  <dt><span class="term">Hledat v projektu...</span></dt>
+                  <dd>
+                     <p>Otevře nové okno <a class="link" href="windows.and.dialogs.html#windows.textsearch" title="3.&nbsp;Hledat v textu">Hledat</a>.
+                     </p>
+                     <p>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>, pak bude tento text - ve výchozím nastavení vložen do políčka <span class="guilabel">Hledat</span>.
+                     </p>
+                     <p>Stisknutí <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>F</strong></span>zobrazí poslední již otevřené okno Hledat (místo aby se otevřeno nové).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Najít a nahradit...</span></dt>
+                  <dd>
+                     <p>Otevře nové okno <a class="link" href="windows.and.dialogs.html#windows.textreplace" title="4.&nbsp;Nahradit text">Najít a nahradit</a></p>
+                     <p>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span>, pak bude tento text - ve výchozím nastavení vložen do políčka <span class="guilabel">Hledat</span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Prohledat slovníky</span></dt>
+                  <dd>
+                     <p>Pokud je deaktivováno <a class="link" href="windows.and.dialogs.html#dialogs.preferences.dictionary" title="7.4.&nbsp;Slovník">Automaticky hledat ve slovnících</a>, pak vám tato funkce umožní hledat označené slovo ve slovnících.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Změnit velikost písma</span></dt>
+                  <dd>
+                     <p>Změní velikost písmen zvýrazněného textu v cílovém segmentu podle vybrané možnosti (malá písmena, VELKÁ PÍSMENA, Velká První
+                        Písmena nebo Velké písmeno na začátku věty). Tyto čtyři možnosti můžete cyklicky procházet opakovaným tisknutím <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>F3</strong></span>.&gt; Pokud není vybrán žádný text, <span class="application">OmegaT</span> vybere slovo, které se zprava dotýká kurzoru.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Označit přibližný překlad</span></dt>
+                  <dd>
+                     <p>Vybere předchozí, další nebo několikátý přibližný překlad, který je zobrazen v okně Přibližné překlady a vloží jej místo stávajíchího
+                        textu v segmetnu nebo jej prostě vloží do prázného segmentu.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Použít jako výchozí překlad</span></dt>
+                  <dd>
+                     <p>Pokud existuje několik alternativních překladu aktivního segmentu, můžete označit vybranou alternativu jako výchozí překlad.
+                        Pokud je k dispozici jen jeden překlad, bude záznam zašeděn.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Vytvořit alternativní překlad</span></dt>
+                  <dd>
+                     <p>Jeden a ten samý segment může, v závislosti na kontextu, vyžadovat různé překlady. Vyberte tuto položku v nabídce, pokud se
+                        aktuální segment nehodí a vložte alternativní překlad.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Odstranit překlad</span></dt>
+                  <dd>
+                     <p>Smaže překlad a označí segment jako nepřeložený.</p>
+                  </dd>
+                  <dt><span class="term">Použít prázdný překlad</span></dt>
+                  <dd>
+                     <p>Definuje překlad jako ‚prázdný‘. V cílovém dokumentu se v tomto segmentu nic nezobrazí. V Editoru se místo překladu zobrazí
+                        &lt;PRÁZDNÝ&gt; / &lt;EMPTY&gt;.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Zapsat identický překlad</span></dt>
+                  <dd>
+                     <p>Použitím tohoto příkazu registrujete překlad jako identický se zdrojem, a to i když políčko <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.allowtranslationtobeequaltosource"><span class="guilabel">Povolit překlad rovnající se zdroji</span></a> (v Možnosti / Nastavení editace...) není označeno.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.goto"></a>3.&nbsp;Přejít
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tato nabídka zobrazí záznamy jen tehdy, pokud je právě otevřen nějaký projekt.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Další nepřeložený segment</span></dt>
+                  <dd>
+                     <p>Přesune se na následující segment, který nemá v překladové paměti žádný ekvivalent.</p>
+                  </dd>
+                  <dt><span class="term">Další přeložený segment</span></dt>
+                  <dd>
+                     <p>Přejde na další již přeložený segment, ignoruje nepřeložené segmenty.</p>
+                  </dd>
+                  <dt><span class="term">Další segment</span></dt>
+                  <dd>
+                     <p>Přesune se na další segment. Pokud je aktuální segment posledním v souboru, přesune se na první segment dalšího souboru.</p>
+                     <p>Pozor: <span class="keycap"><strong>Enter</strong></span> je alternativní příkaz pokud není vybrána možnost <a class="link" href="windows.and.dialogs.html#dialogs.preferences.general.usetabtoadvance">Použít TAB pro postup</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Předchozí segment</span></dt>
+                  <dd>
+                     <p>Přesune se na předchozí segment. Pokud je aktuální segment prvním v souboru, přesune se na poslední segment předchozího souboru.</p>
+                     <p>Pozor: <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Enter</strong></span> je alternativní příkaz pokud není vybrána možnost <a class="link" href="windows.and.dialogs.html#dialogs.preferences.general.usetabtoadvance">Použít TAB pro postup</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Segment číslo...</span></dt>
+                  <dd>
+                     <p>Segment je otevřen když je zadána jeho identifikace nebo číslo.</p>
+                  </dd>
+                  <dt><span class="term">Další poznámka</span></dt>
+                  <dd>
+                     <p>Otevře další segment s přiloženou poznámkou.</p>
+                  </dd>
+                  <dt><span class="term">Předchozí poznámka</span></dt>
+                  <dd>
+                     <p>Otevře předchozí segment s poznámkou.</p>
+                  </dd>
+                  <dt><span class="term">Zdroj vybraných přibližných překladů</span></dt>
+                  <dd>
+                     <p>Přejde na segment, který neodpovídá aktuálně vybranému přibližnému překladu v podokně <span class="guilabel">Přibližné překlady</span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Vpřed v historii</span></dt>
+                  <dd>
+                     <p><span class="application">OmegaT</span> si pamatuje zpracovávané segmenty. Tímto příkazem můžete přejít na segment, který jste v předchozím kroku opustili příkazem
+                        <span class="guimenuitem">Zpět v historii...</span></p>
+                  </dd>
+                  <dt><span class="term">Zpět v historii</span></dt>
+                  <dd>
+                     <p>Tímto příkazem se můžete přesunout zpět o jeden segment, a vrátit se zpět na aktuální segment použitím příkazu <span class="guimenuitem">Vpřed v historii</span>. 
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.view"></a>4.&nbsp;Zobrazit
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Označit přeložené segmenty</span></dt>
+                  <dd>
+                     <p>Pokud je tato možnost vybraná, přeložené segmenty budou označeny žlutým zvýrazněním.</p>
+                  </dd>
+                  <dt><span class="term">Označit nepřeložené segmenty</span></dt>
+                  <dd>
+                     <p>Pokud je tato možnost vybraná, nepřeložené segmenty budou označeny fialovým zvýrazněním.</p>
+                  </dd>
+                  <dt><span class="term">Označit oddělovače odstavců.</span></dt>
+                  <dd>
+                     <p>Pokud je tato volba vybrána, pak budou oddělovače odstavců ve zdrojovém dokumentu indikovány vizuálně.</p>
+                  </dd>
+                  <dt><span class="term">Ukázat zdrojové segmenty</span></dt>
+                  <dd>
+                     <p>Pokud je tato možnost vybraná, budou zdrojové segmenty zobrazeny se zeleným zvýrazněním. Pokud tato možnost vybraná není,
+                        zdrojové segmenty nebudou takto zobrazovány.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Označit nejedinečné segmenty</span></dt>
+                  <dd>
+                     <p>Pokud je tato možnost vybraná, nejedinečné segmenty budou označeny světle šedou.</p>
+                  </dd>
+                  <dt><span class="term">Označit segmenty s Poznámkami</span></dt>
+                  <dd>
+                     <p>Pokud je tato možnost vybraná, segmenty s poznámkami budou označeny modrozeleně. Toto označení má přednost před volbami <span class="guimenuitem">Označit přeložené segmenty</span> a <span class="guimenuitem">Označit nepřeložené segmenty</span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Označit nezlomitelné mezery</span></dt>
+                  <dd>
+                     <p>Pokud je tato možnost vybraná, pak budou nezlomitelné mezery označeny s šedým pozadím.</p>
+                  </dd>
+                  <dt><span class="term">Označit netisknutelné znaky</span></dt>
+                  <dd>
+                     <p>Pokud je tato možnost vybraná, pak budou netisknutelné znaky označeny malou tečkou.</p>
+                  </dd>
+                  <dt><span class="term">Označit řídicí znak bidirekcionálního algoritmu</span></dt>
+                  <dd>
+                     <p>Tato možnost zobrazí <a class="ulink" href="http://www.w3.org/International/questions/qa-bidi-controls" target="_top">znaky obousměrného zápisu</a></p>
+                  </dd>
+                  <dt><span class="term">Označit automaticky vyplněné segmenty</span></dt>
+                  <dd>
+                     <p>Když je tato možnost aktivní, pozadí všech segmentů, kde byl cílový segment automaticky vyplněn (např. z paměti TMX umístěné
+                        v <code class="filename">/tm/auto</code>), je barevně zvýrazněno. Barvy se zobrazují tehdy, když je aktivní možnost <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.saveautopopulatedstatus"><span class="guimenuitem">Uložit automaticky vyplněný status</span></a> (v Možnosti / Nastavení editace ...). Běžné překlady vložené z adresáře auto jsou zobrazeny oranžově. Ostatní překlady, rozpoznány
+                        obzvláště v TMX, lze zobrazit s použitím různých barev. Více technických detailů najdete v <a class="ulink" href="https://sourceforge.net/p/omegat/feature-requests/" target="_top">Požadavky na vylepšení</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Nucené záložní fonty</span></dt>
+                  <dd>
+                     <p>Zatrhněte tuto možnost tehdy, když <span class="application">OmegaT</span> nezobrazuje některé znaky správně (a to i tehdy, když jsou znakové sady obsahující požadované znaky na vašem počítači správně
+                        instalovány). Poznámka: ve Windows se může tento manuální výpadek krýt se standardním výpadkem fontů, který způsobuje nežádoucí
+                        substituci fontů. Z tohoto důvodu je tato funkce ve výchozím nastavení vypnuta.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Informace k úpravám</span></dt>
+                  <dd>
+                     <p>Když v možnosti zobrazit Informace k úpravám vyberete volbu <span class="guimenuitem">Aktuální segment</span>, bude zobrazen čas a autor poslední změny u aktuálně otevřeného segmentu. Když vyberete volbu <span class="guimenuitem">Všechny segmenty</span>, bude tato informace u všech segmentů a volba <span class="guimenuitem">Nezobrazovat žádné</span> zobrazování vypne.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.tools"></a>5.&nbsp;Nástroje
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Zkontrolovat problém&amp;y...</span></dt>
+                  <dd>
+                     <p>Přístroj pro zajištění kvality, který provádí všechny automatické kontroly v jednom kroku a zobrazí výsledky v okně.</p>
+                     <p>Lze detekovat čtyři typy problémů:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>chybějící nebo chybně umístěné tagy, včetně <a class="link" href="windows.and.dialogs.html#dialogs.preferences.tagprocessing" title="7.13.&nbsp;Zpracování tagů">vlastních tagů</a>. Možnost <span class="guilabel">Problémy s tagy</span> je vybrána vždy.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="guilabel">Problémy s pravopisem</span> (volitelně). Funguje jen tehdy, když je instalován slovník pro kontrolu pravopisu.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="guilabel">Problémy s terminologií</span> (volitelně).
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="guilabel">Problémy s LanguageTools</span> (volitelně).
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Okno s výsledky je zobrazeno formou tabulky ve které:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>dvojté kliknutí na řádek aktivuje odpovídající segment v okně Editoru.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>kliknutí na hlavičku sloupce změní pořadí zobrazení pro daný sloupec,</p>
+                           </li>
+                           <li class="listitem">
+                              <p>výběr nebo pohyb myší přes řádek zobrazí ikonu vyskakovací nabídky v posledním sloupci obsahující akci pro opravu nebo ignorování
+                                 dané chyby.
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt><span class="term">Zkontrolovat problémy v aktuálním dokumentu</span></dt>
+                  <dd>
+                     <p>Jak bylo popsáno výše, ale jen platí jen pro dokument, který je aktuálně zobrazen v okně Editoru.</p>
+                  </dd>
+                  <dt><span class="term">Statistika</span></dt>
+                  <dd>
+                     <p>Otevře nové okno a zobrazí statistiku projektu, tj. celkové hodnoty projektu a hodnoty pro každý soubor v projektu.</p>
+                  </dd>
+                  <dt><span class="term">Statistika shody</span></dt>
+                  <dd>
+                     <p>Zobrazí Statistiku shody pro projekt: počty opakování, přesné shody, shody přibližných překladů a nulové shody pro segmenty,
+                        slova a znaky.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Statistika shody podle souboru</span></dt>
+                  <dd>
+                     <p>Zobrazí Statistiku shody pro každý soubor projektu: počet opakování, přesné shody, přibližné překlady a segmenty bez shody,
+                        a to pro segmenty, slova a znaky.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Spárovat soubory...</span></dt>
+                  <dd>
+                     <p>Vyberte ty dva soubory, které chcete alignovat / zarovnat (zdrojový soubor a jeho překlad) a klikněte na OK, tím se otevře
+                        okno <a class="link" href="windows.and.dialogs.html#windows.aligner" title="5.&nbsp;Párovací nástroj"><span class="guilabel">Párování</span> </a>.
+                     </p>
+                     <p>Podporované formáty souborů jsou uvedeny v <span class="guimenuitem">Projekt</span> → <span class="guimenuitem">Vlastnosti</span> → <span class="guimenuitem">Filtry souborů</span>.
+                     </p>
+                     <p>Soubory zdroje a překladu mohou mít různé formáty (například soubor <code class="filename">.docx</code> lze párovat se souborem <code class="filename">.pdf</code>).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Skriptování...</span></dt>
+                  <dd>
+                     <p>Otevře dialogové okno <a class="link" href="windows.and.dialogs.html#windows.scripts" title="6.&nbsp;Skriptování"><span class="guilabel">Skriptování</span> </a>, kde lze nastavit umístění skriptů a kde můžete skripty zapisovat, spouštět a přiřazovat jim zkratky.
+                     </p>
+                  </dd>
+                  <dt><span class="term">n - (název skriptu)</span></dt>
+                  <dd>
+                     <p>Spouští skripty, které byly asociovány s číslem.</p>
+                     <p>Jak asociovat skript s číslem:</p>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>Otevřete okno Skriptování</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Vyberte požadovaný skript ze seznamu vlevo</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Ve spodní části okna klikněte pravým tlačítkem myši na volné číslo a vyberte možnost <span class="guilabel">Přidat skript</span>.
+                              </p>
+                           </li>
+                        </ol>
+                     </div>
+                  </dd>
+                  <dt><span class="term">(extermí příkazy hledání)</span></dt>
+                  <dd>
+                     <p>Pokud byly definovány příkazy k vykonávání externího hledání v <a class="link" href="windows.and.dialogs.html#dialogs.preferences.externalsearch" title="7.11.&nbsp;Externí hledání">Předvolbách</a>, pak jsou tyto příkazy zobrazeny a přístupny na tomto místě.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.options"></a>6.&nbsp;Možnosti
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Předvolby...</span></dt>
+                  <dd>
+                     <p>Otevře dialogové okno <a class="link" href="windows.and.dialogs.html#dialogs.preferences" title="7.&nbsp;Obecné předvolby">Předvolby</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Strojový překlad</span></dt>
+                  <dd>
+                     <p>Umožní vám aktivovat / deaktivovat nabízené nástroje Strojového překladu.</p>
+                     <p>Pokud je vybráno víc nástrojů strojového překladu, pak se také používá zkratka <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span>k přepínání mezi nimi a vložení posledního vybraného.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Glosář</span></dt>
+                  <dd>
+                     <p>Vybrat možnost <span class="guimenuitem">oblast hledání terminologie v TaaS</span> pro aktivaci tohoto typu hledání.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Slovník</span></dt>
+                  <dd>
+                     <p>Označte možnost <span class="guimenuitem">U záznamů glosáře použít přibližné shody</span> pro zobrazení slov, která mají stejný kořen.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Automatické doplnění</span></dt>
+                  <dd>
+                     <p>Pokud je zatržena možnost <span class="guimenuitem">Automatické doplňovánícky ukazovat relevantní návrhy</span>, pak bude automaticky spuštěno automatické doplňování již při psaní prvních znaků přeloženého záznamu glosáře, nebo při zadání
+                        "&lt;" v případě tagu.
+                     </p>
+                     <p>Označte <span class="guimenuitem">Doplnění historie</span>, pak se budou zobrazovat navrhovaná slova hned, jakmile se napíšou první znaky.
+                     </p>
+                     <p>Označte <span class="guimenuitem">Navrhování historie</span>, pak se budou zobrazovat navrhovaná slova, která běžně následují po slově, které jste právě zadali.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Filtry souborů...</span></dt>
+                  <dd>
+                     <p>Otevře možnosti <a class="link" href="windows.and.dialogs.html#dialogs.preferences.filefilters" title="7.6.&nbsp;Filtry souborů">Filtry souborů</a> v dialogovém okně Předvolby.
+                     </p>
+                     <p>Tato nastavení platí na úrovni OmegaT, na všechny projekty.</p>
+                  </dd>
+                  <dt><span class="term">Segmentace...</span></dt>
+                  <dd>
+                     <p>Otevře možnosti <a class="link" href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup" title="7.7.&nbsp;Nastavení segmentace">Nastavení segmentace</a> v dialogovém okně Předvolby.
+                     </p>
+                     <p>Tato nastavení platí na úrovni OmegaT, na všechny projekty.</p>
+                  </dd>
+                  <dt><span class="term">Editor</span></dt>
+                  <dd>
+                     <p>Otevře možnosti <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor" title="7.12.&nbsp;V Editoru">Editoru</a> v dialogovém okně Předvolby.
+                     </p>
+                     <p>Tato nastavení platí na úrovni OmegaT, na všechny projekty.</p>
+                  </dd>
+                  <dt><span class="term">Zpřístupnit adresář nastavení</span></dt>
+                  <dd>
+                     <p>Otevře místní adresář OmegaT, ve kterém jsou uloženy konfigurační soubory (záleží na operačním systému).</p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.help"></a>7.&nbsp;Nápověda
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Uživatelská příručka...</span></dt>
+                  <dd>
+                     <p>Otevře tuto příručku ve výchozím prohlížeči.</p>
+                  </dd>
+                  <dt><span class="term">O aplikaci...</span></dt>
+                  <dd>
+                     <p>Zobrazí informace o autorských právech, poděkování a licenci.</p>
+                  </dd>
+                  <dt><span class="term">Poslední změny...</span></dt>
+                  <dd>
+                     <p>Zobrazí seznam nových funkcí, rozšíření a oprav chyb pro každé nové vydání.</p>
+                  </dd>
+                  <dt><span class="term">Protokol...</span></dt>
+                  <dd>
+                     <p>Zobrazí soubor s aktuálním protokolem. Název dialogového okna odpovídá právě používanému souboru (který závisí na tom, kolik
+                        oken OmegaT je v daný moment spuštěno).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Zkontrolovat aktualizace...</span></dt>
+                  <dd>
+                     <p>Překontrolujte jestli byla vydána novější verze <span class="application">OmegaT</span>.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.installing.and.running.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="windows.and.dialogs.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;Instalace a provoz programu <span class="application">OmegaT</span>&nbsp;
+               </td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;Okna a dialogová okna</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

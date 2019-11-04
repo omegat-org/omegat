@@ -1,0 +1,330 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;5.&nbsp;Adresář projektu</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - Uživatelská příručka">
+      <link rel="prev" href="panes.html" title="Chapter&nbsp;4.&nbsp;Podokna">
+      <link rel="next" href="howtos.html" title="Chapter&nbsp;6.&nbsp;Jak na to...">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;5.&nbsp;Adresář projektu</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="panes.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="howtos.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="project.folder"></a>Chapter&nbsp;5.&nbsp;Adresář projektu
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="project.folder.html#d0e4467">1. source</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4472">2. target</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4495">3. tm</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="project.folder.html#d0e4523">3.1. tm/auto</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4550">3.2. tm/enforce</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4590">3.3. tm/mt</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4598">3.4. tm/penalty-xxx</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="project.folder.html#d0e4609">4. dictionary</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4617">5. glossary</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#folder.omegat">6. O aplikaci OmegaT</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4684">7. soubor omegat.project</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4692">8. .repositories</a></span></dt>
+            </dl>
+         </div>
+         <p>Projekt OmegaT je adresář obsahující soubory a podadresáře.</p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4467"></a>1.&nbsp;source
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Podadresář zdrojového textu (source) obsahuje soubory, které se mají překládat. Můžete přidávat soubory i později. Nezapomeňte
+               ale, že struktura zdrojového podadresáře může mít libovolnou formu. Pokud jsou soubory, které budete překládat, součástí stromové
+               struktury (jako např. webová stránka), vše co musíte udělat je určit nejvyšší podadresář a OmegaT zkopíruje veškerý obsah,
+               a stromová struktura zůstane zachována.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4472"></a>2.&nbsp;target
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ze začátku je tento podadresář prázdný. Naplníte jej obsahem vybráním <span class="guimenu">Projekt</span> → <span class="guimenuitem">Vytvořit přeložené dokumenty.</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>). Soubory z adresáře <code class="filename">source</code>, ať už jsou přeloženy nebo ne, budou generovány do adresáře ‚target‛, a to se stejnou hierarchií, která se nachází ve zdrojovém
+               adresáři. Obsah podadresáře překladu odpovídá aktuálnímu stavu překladu, stejně jako v překladové paměti překladu, která je
+               uložena aktuálně v <span class="bold"><strong>/omegat/project_save.tmx</strong></span>. Nepřeložené segmenty proto zůstanou ve výchozím jazyce.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4495"></a>3.&nbsp;tm
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Adresář /tm/ může obsahovat libovolné množství vedlejších překladových pamětí, čili souborů tmx. Takové soubory mohly být
+               vytvořeny jakýmkoliv z výše jmenovaných způsobů. Všimněte si, že jiné nástroje CAT umí exportovat (a také importovat) soubory
+               tmx, obvykle všechny tři formy. Samozřejmě nejlepší věc je použít soubory překladové paměti specifické pro OmegaT (viz výše),
+               takže zůstane zachované formátování textu.
+            </p>
+            <p>Obsahy překladových pamětí v podadresáři tm slouží ke generování návrhů pro překládaný text či texty. Jakýkoliv text, který
+               byl již přeložený a uložený do těchto souborů, se objeví mezi návrhy přibližného překladu, pokud je tedy v dostatečné míře
+               podobný textu, který je právě překládán.
+            </p>
+            <p>Pokud je zdrojový segment v jedné z vedlejších překladových pamětí identický s právě překládaným textem, OmegaT se zachová
+               tak, jak je to nastaveno v dialogovém okně <span class="guimenu">Možnosti</span> → <span class="guimenuitem">Nastavení editace...</span>  Například (pokud je akceptováno výchozí nastavení), překlad z vedlejší překladové paměti je akceptován a je přidána předpona
+               <span class="emphasis"><em>[přibližně]</em></span>, takže překladatel si může takovéto překlady v pozdější fázi překladu projít a zkontrolovat, jestli takto označené segmenty
+               byly přeloženy správně<span class="guimenu">.</span></p>
+            <p>Může se stát, že překladové paměti dostupné v podadresáři <code class="filename">tm</code> obsahují segmenty s identickým zdrojovým textem, ale odlišnými překlady. Soubory překladových pamětí jsou načítány podle
+               svých názvů a segmenty obsažené v dané překladové paměti jsou načítány po řádcích. Poslední segment s identickým zdrojovým
+               textem má tedy větší váhu (samozřejmě je smysluplnější v první řadě takovýmto situacím předcházet).
+            </p>
+            <p>Soubory překladových pamětí v adresáři tm mohou být komprimovány jako gzip.</p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4523"></a>3.1.&nbsp;tm/auto
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Pokud je na samotném začátku jasné, že překlady v dané překladové paměti (nebo více pamětech) jsou správné, je možné je vložit
+                  do adresáře <span class="bold"><strong>tm/auto</strong></span> a vyhnout se tak potvrzování spousty případů <span class="emphasis"><em>[přibližně]</em></span>.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Vložit TMX do /tm/auto.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Otevřete projekt. Změny jsou zobrazeny.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Udělejte drobnou změnu kdekoliv v projektu. Toto upraví soubor <code class="filename">project_save.tmx</code> (přidáním správných překladových jednotek z "auto" TMX)
+                        </p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Poznámka: pokud je paměť TMX z adresáře /tm/auto odstraněna před spuštěním kroku 3, tak se nepřidá žádná dodatečná překladová
+                  jednotka.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4550"></a>3.2.&nbsp;tm/enforce
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Pokud nejsou žádné pochybnosti o tom, že dodaná paměť TMX je přesnější než <code class="filename">project_save.tmx</code> programu OmegaT, pak vložt tuto TMX do adresáře /tm/enforce a existující výchozí paměť bude přepsána bez dalších podmínek.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Vložte TMX do /tm/enforce.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Otevřete projekt. Změny jsou zobrazeny.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Udělejte drobnou změnu kdekoliv v projektu. Toto upraví soubor <code class="filename">project_save.tmx</code>.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Učiňte rozhodnutí o imunitě vynucených segmentů:</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>Pokud <span class="emphasis"><em>nepotřebují</em></span> zůstat imunní vůči dalším změnám, pak přesuňte paměť TMX z /tm/enforce.
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Pokud <span class="emphasis"><em>musí</em></span> zůstat imunní vůči dalším zěmnám, pak nechejte TMX v adresáři /tm/enforce.
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ol>
+               </div>
+               <p>Poznámka: pokud bude TMX odstraněna z /tm/enforce před krokem 3, pak nebudou žádné nucené změny uchovány.</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4590"></a>3.3.&nbsp;tm/mt
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Když se vloží přibližný překlad z paměti TMX, která je umístěna v adresáři nazvaném <code class="filename">mt</code>, pak se v podokně editoru pozadí aktivního segmentu změní na červenou. Pozadí bude obnoveno na běžnou barvu, když segment
+                  opustíte.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4598"></a>3.4.&nbsp;tm/penalty-xxx
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Někdy je užitečné rozlišovat mezi překladovými pamětmi, kde je kladen důraz na kvalitu, a takovými, které nejsou tolik spolehlivé,
+                  čili, kde se tolik neklade důraz na obsah, klienta, revizi, status, atd. Pro překladové paměti v adresářích s názvem <code class="filename">penalty-xxx</code> (s hodnotou xxx mezi 0 a 100), jsou přibližné překlady negativně hodnoceny dle názvu adresáře: např. 100% shody v jakékoli
+                  překladové paměti, která je v adresáři nazvaném <code class="filename">Penalty-30</code>, bude snížena na 70% shody. Snížení míry shody je pak aplikováno na všechny tři typy procentní shody: shody 75, 80, 90 budou
+                  v takovém případě sníženy na 45, 50, 60.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4609"></a>4.&nbsp;dictionary
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tento adresář je u nového projektu prázdný, ale pak sem budou ukládány slovníky, které vytvoříte během práce na projektu.
+               Více informací k tomuto tématu naleznete v části <a class="link" href="appendix.dictionaries.html" title="Appendix&nbsp;A.&nbsp;Slovníky">Slovníky</a>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4617"></a>5.&nbsp;glossary
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Na začátku projektu v tomto adresáři nic není. Bude ale obsahovat glosáře, které používáte během práce na projektu. Více informací
+                k tomuto tématu naleznete v části <a class="link" href="appendix.glossaries.html" title="Appendix&nbsp;B.&nbsp;Glosáře">Glosáře</a>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="folder.omegat"></a>6.&nbsp;O aplikaci OmegaT
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Podadresář <span class="bold"><strong>omegat</strong></span> obsahuje minimálně jeden nebo více dalších souborů. Soubor <code class="filename">project_save.tmx</code> představuje pracovní překladovou paměť projektu. Zálohy tohoto souboru (s koncovkou .bak) se průběžně ukládají do tohoto
+               podadresáře, nejprve na začátku překladového sezení, na jeho konci, ale také v průběhu překládání.
+            </p>
+            <p>Během překladu dalších souborů mohou být v tomto adresáři vytvořeny i tyto soubory </p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">stats.txt</span></dt>
+                  <dd>
+                     <p>obsahují aktuální statistiky právě zpracovávaného projektu. Obsah můžete zobrazit vybráním <span class="guimenuitem">Nástroje &gt; Statistika</span></p>
+                  </dd>
+                  <dt><span class="term">ignored_words.txt., </span><span class="term">learned_words.txt</span></dt>
+                  <dd>
+                     <p>Oba vytvoří a využívá kontrola pravopisu. Pokud jste již nasbírali slova, která má kontrola pravopisu ignorovat nebo akceptovat,
+                        stačí, abyste tyto oba soubory nakopírovali do podadresáře <code class="filename">omegat</code> ve vašem aktuálním projektu. 
+                     </p>
+                  </dd>
+                  <dt><span class="term">project_stats_match.txt</span></dt>
+                  <dd>
+                     <p>Pbsahuje statistiku shody posledního zpracovávaného projektu, je generován přes <span class="guimenuitem">Nástroje &gt; Statistika shody</span></p>
+                  </dd>
+                  <dt><span class="term">segmentation.conf</span></dt>
+                  <dd>
+                     <p>pokud existuje, pak obsahuje segmentační pravidla specifická pro daný projekt.</p>
+                  </dd>
+                  <dt><span class="term">filters.xml</span></dt>
+                  <dd>
+                     <p>pokud existuje, obsahuje filtry souborů specifické pro daný projekt.</p>
+                  </dd>
+                  <dt><span class="term">uiLayout.xml</span></dt>
+                  <dd>
+                     <p>pokud extistuje, tak obsahuje nastavení grafického prostředí typické pro daný projekt</p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4684"></a>7.&nbsp;soubor omegat.project
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Obsahuje projektový paramtery tak, jak byla definována v dialogu <a class="link" href="windows.and.dialogs.html#dialogs.projectproperties" title="1.&nbsp;Vlastnosti projektu">Vlastnosti projektu</a>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4692"></a>8.&nbsp;.repositories
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>V týmovém projektu obsahuje tento adresář různé verze kopií projektové stromové struktury napojené přímo na vzdálený server.</p>
+            <p>Můžete měnit vzdálené soubory (např. smazáním souboru) jak použitím tohoto adresáře, tak i klienta Git nebo SVN.</p>
+            <p>V některých operačních systémech se tento adresář při výchozím nastavení nezobrazuje. Aby jste jej mohli vidět, kativujte
+               možnost „Zobrazit skryté soubory“.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="panes.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="howtos.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;4.&nbsp;Podokna&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;6.&nbsp;Jak na to...</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

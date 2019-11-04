@@ -1,0 +1,709 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;2.&nbsp;Menu</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2- Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT 4.2- Manuale dell'Utente">
+      <link rel="prev" href="chapter.installing.and.running.html" title="Chapter&nbsp;1.&nbsp;Installazione e avvio di OmegaT">
+      <link rel="next" href="windows.and.dialogs.html" title="Chapter&nbsp;3.&nbsp;Finestre e finestre di dialogo">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;2.&nbsp;Menu</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.installing.and.running.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="windows.and.dialogs.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="menus"></a>Chapter&nbsp;2.&nbsp;Menu
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="menus.html#menus.project">1. Progetto</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.edit">2. Modifica</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.goto">3. Vai</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.view">4. Vista</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.tools">5. Strumenti</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.options">6. Opzioni</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.help">7. Aiuto</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.project"></a>1.&nbsp;Progetto
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><span class="guimenuitem">Nuovo...</span></span></dt>
+                  <dd>
+                     <p>Crea e apre un nuovo progetto.</p>
+                  </dd>
+                  <dt><span class="term"><span class="guimenuitem">Scarica il progetto in collaborazione...</span></span></dt>
+                  <dd>
+                     <p>Crea una copia locale di un progetto OmegaT remoto. Per i dettagli si veda <a class="link" href="howtos.html#howto.useteamproject" title="2.&nbsp;Uso di progetti in collaborazione">Come utilizzare un progetto in collaborazione</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Apri...</span></dt>
+                  <dd>
+                     <p>Apre un progetto esistente.</p>
+                  </dd>
+                  <dt><span class="term">Apri progetto recente</span></dt>
+                  <dd>
+                     <p>Dà accesso agli ultimi dieci progetti modificati di recente. Facendo clic su uno qualsiasi, verrà salvato e chiuso il progetto
+                        attivo e aperto l'altro.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Copia i file nella cartella di partenza...</span></dt>
+                  <dd>
+                     <p>Copia i file selezionati nella cartella <code class="filename">source</code> e ricarica il progetto per caricare i nuovi file.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Scarica la pagina MediaWiki...</span></dt>
+                  <dd>
+                     <p>Per tradurre il contenuto di una pagina Wikipedia (per esempio):</p>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>Fare clic sulla scheda <span class="guilabel">Modifica</span> della pagina Wikipedia.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>Copiare l'URL della pagina (che termina con <span class="guilabel">action=edit</span>) e incollarlo in <span class="application">OmegaT</span>.
+                              </p>
+                           </li>
+                        </ol>
+                     </div>
+                     <p>Dopo aver completato la traduzione, ecco la procedura per importarla in Wikipedia:</p>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>Aprire il file <code class="filename">.UTF8</code> generato nella cartella <code class="filename">/target</code>.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>Copiare il testo e incollarlo nella versione tradotta della pagina Wikipedia.</p>
+                           </li>
+                        </ol>
+                     </div>
+                  </dd>
+                  <dt><span class="term">Ricarica</span></dt>
+                  <dd>
+                     <p>Ricarica il progetto per riflettere le modifiche esterne nei file di partenza e nelle impostazioni del progetto.</p>
+                     <p>Le nuove memorie di traduzione che si trovano nella cartella <code class="filename">/tm</code> durante la traduzione vengono caricate automaticamente non appena il cursore si sposta da un segmento a un altro.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Chiudi</span></dt>
+                  <dd>
+                     <p>Salva la traduzione e chiude il progetto.</p>
+                  </dd>
+                  <dt><span class="term">Salva</span></dt>
+                  <dd>
+                     <p>Salva la memoria di traduzione interna nel disco rigido. OmegaT salva automaticamente le traduzioni ogni tre minuti, oppure
+                        tutte le volte che si chiude un progetto o che si esce da OmegaT.
+                     </p>
+                     <p>Il tempo dell'intervallo è modificabile in <a class="link" href="windows.and.dialogs.html#dialogs.preferences.savingandoutput" title="7.17.&nbsp;Salvataggio e risultato"><span class="guimenuitem">Opzioni</span> → <span class="guimenuitem">Preferenze</span> → <span class="guimenuitem">Salvataggio e risultato</span></a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Invia i file di partenza</span></dt>
+                  <dd>
+                     <p>Carica nel deposito i file che sono stati aggiunti o modificati localmente nella cartella <code class="filename">source</code>.
+                     </p>
+                     <p>Questa funzione è specifica dei progetti in collaborazione.</p>
+                  </dd>
+                  <dt><span class="term">Invia i file di arrivo</span></dt>
+                  <dd>
+                     <p>Carica nel deposito i file che sono stati creati localmente nella cartella <code class="filename">target</code>.
+                     </p>
+                     <p>Questa funzione è specifica dei progetti in collaborazione.</p>
+                  </dd>
+                  <dt><span class="term">Crea i documenti di arrivo</span></dt>
+                  <dd>
+                     <p>Crea i documenti finali inserendo negli stessi la traduzione. I documenti finali saranno creati nella cartella <code class="filename">target</code>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Crea il documento tradotto corrente</span></dt>
+                  <dd>
+                     <p>Crea il documento di arrivo che corrisponde al documento corrente contenuto nella traduzione.</p>
+                  </dd>
+                  <dt><span class="term">Apri progetto MED...</span></dt>
+                  <dd>
+                     <p>Apre un pacchetto di progetto nel formato MED definito dalla EU Directorate-General for Translation (EU-Direzione generale
+                        della Traduzione).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Crea progetto MED...</span></dt>
+                  <dd>
+                     <p>Converte il progetto attivo in un pacchetto MED.</p>
+                  </dd>
+                  <dt><span class="term">Proprietà...</span></dt>
+                  <dd>
+                     <p>Visualizza la finestra di dialogo <a class="link" href="windows.and.dialogs.html#dialogs.projectproperties" title="1.&nbsp;Proprietà del progetto">Proprietà del progetto</a> nella quale si potranno modificare le lingue del progetto e il percorso di memorizzazione delle cartelle.
+                     </p>
+                  </dd>
+                  <dt><span class="term">File del progetto...</span></dt>
+                  <dd>
+                     <p>Apre la <a class="link" href="windows.and.dialogs.html#windows.projectfiles" title="2.&nbsp;File del progetto">finestra dei file del progetto</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Accedi al contenuto del progetto</span></dt>
+                  <dd>
+                     <p>Permette l'accesso alle cartelle del progetto.</p>
+                     <p>In aggiunta, due voci di menu permettono l'apertura diretta dei documenti correnti di arrivo e di partenza e del glossario
+                        modificabile. I documenti sono aperti dall'applicazione scelta dal sistema operativo. Se i documenti non sono disponibili,
+                        la voce è disattivata.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Esci</span></dt>
+                  <dd>
+                     <p>Salva il progetto ed esce da <span class="application">OmegaT</span>. Se il progetto non è ancora stato salvato manualmente, verrà richiesto se si desidera davvero uscire dall'applicazione.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.edit"></a>2.&nbsp;Modifica
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questo menu visualizza le voci solo quando è aperto un progetto.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><span class="guimenuitem">Annulla l'ultima azione</span></span></dt>
+                  <dd>
+                     <p>Ripristina lo stato prima dell'ultima azione di modifica intrapresa. Questo comando non funziona dopo aver eseguito l'operazione
+                        di convalida sul segmento modificato.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Ripristina l'ultima azione</span></dt>
+                  <dd>
+                     <p>Ripristina lo stato prima dell'ultima azione di modifica annullata. Questo comando non funziona dopo aver eseguito l'operazione
+                        di convalida sul segmento modificato.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Sostituisci con concordanza o selezione</span></dt>
+                  <dd>
+                     <p>Sostituisce l'intero segmento di destinazione con la concordanza parziale attualmente selezionata (per impostazione predefinita,
+                        viene selezionata la prima dell'elenco).
+                     </p>
+                     <p>Se è selezionato del testo all'interno della concordanza parziale, l'intero segmento di arrivo sarà sostituito da tale selezione.</p>
+                  </dd>
+                  <dt><span class="term">Inserisci concordanza o selezione</span></dt>
+                  <dd>
+                     <p>Inserisce la concordanza parziale attualmente selezionata alla posizione del cursore. Se è stata selezionata una parte del
+                        segmento da tradurre, questa funzione sovrascrive la porzione selezionata.
+                     </p>
+                     <p>Se è selezionato del testo all'interno della concordanza parziale, solo questa selezione sarà inserita alla posizione del
+                        cursore.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Sostituisci con la Traduzione automatica</span></dt>
+                  <dd>
+                     <p>Sostituisce il segmento da tradurre con la traduzione suggerita dal servizio di Traduzione automatica selezionato. Non viene
+                        intrapresa alcuna azione se non è stato attivato alcun servizio di Traduzione automatica (in <span class="guimenu">Opzioni</span> → <span class="guimenuitem">Traduzione automatica</span>).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Sostituisci con testo di partenza</span></dt>
+                  <dd>
+                     <p>Sostituisce l'intero segmento di destinazione con quello originale.</p>
+                  </dd>
+                  <dt><span class="term">Inserisci il testo di partenza</span></dt>
+                  <dd>
+                     <p>Inserisce il contenuto originale alla posizione del cursore.</p>
+                  </dd>
+                  <dt><span class="term">Inserisci i tag di partenza mancanti</span></dt>
+                  <dd>
+                     <p>Inserisce i tag originali (se mancanti) alla posizione del cursore.</p>
+                  </dd>
+                  <dt><span class="term">Inserisci il tag mancante successivo</span></dt>
+                  <dd>
+                     <p>Inserisce solo un tag (tra gli altri mancanti) alla posizione del cursore.</p>
+                  </dd>
+                  <dt><span class="term">Esporta la selezione</span></dt>
+                  <dd>
+                     <p>Esporta la selezione attiva in un file di testo per successiva elaborazione. Se non è stato selezionato alcun testo, nel file
+                        viene copiato il segmento originale attivo. Quando l'utente chiude <span class="application">OmegaT</span>, questo file non è vuoto, in modo da essere coerente col normale comportamento degli Appunti. Il contenuto esportato viene
+                        copiato nel file <code class="filename">selection.txt</code>, memorizzato nella cartella delle preferenze dell'utente.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Crea voce di glossario</span></dt>
+                  <dd>
+                     <p>Permette all'utente di creare una voce nel file di glossario predefinito.</p>
+                     <p>Selezionando una stringa di testo (in qualsiasi pannello) prima di premere <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>G</strong></span>, il testo sarà incollato in maniera predefinita nel campo <span class="guilabel">Termine di partenza</span>.
+                     </p>
+                     <p>Questo vale anche per i campi <span class="guimenuitem">Termine di arrivo</span> e <span class="guimenuitem">Commento</span>, se si fanno nuove selezioni e la combinazione di tasti <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>G</strong></span> è premuta di nuovo.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Cerca nel progetto...</span></dt>
+                  <dd>
+                     <p>Apre una nuova <a class="link" href="windows.and.dialogs.html#windows.textsearch" title="3.&nbsp;Ricerca testo">finestra di ricerca</a>.
+                     </p>
+                     <p>Selezionando una stringa di testo (in qualsiasi pannello) prima di premere <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>, il testo sarà incollato in maniera predefinita nel campo <span class="guilabel">Cerca</span>.
+                     </p>
+                     <p>Premendo <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>F</strong></span> si visualizza l'ultima finestra di ricerca già aperta (anziché aprirne una nuova).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Cerca e sostituisci...</span></dt>
+                  <dd>
+                     <p>Apre una nuova <a class="link" href="windows.and.dialogs.html#windows.textreplace" title="4.&nbsp;Sostituzione testo">finestra di ricerca e sostituzione</a>.
+                     </p>
+                     <p>Selezionando una stringa di testo (in qualsiasi pannello) prima di premere <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span>, il testo sarà incollato in maniera predefinita nel campo <span class="guilabel">Cerca</span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Cerca dizionari</span></dt>
+                  <dd>
+                     <p>Se la <a class="link" href="windows.and.dialogs.html#dialogs.preferences.dictionary" title="7.4.&nbsp;Dizionario">ricerca automatica nei dizionari</a> è disattivata, questa funzione permette di ricercare la parola all'interno dei dizionari.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Commuta carattere in</span></dt>
+                  <dd>
+                     <p>Commuta il carattere del testo selezionato nel segmento di destinazione in base all'opzione scelta (minuscolo, MAIUSCOLO,
+                        Prima lettera maiuscola o Prima frase maiuscola). Usare <span class="keycap"><strong>Maiusc</strong></span>+<span class="keycap"><strong>F3</strong></span> per alternare da uno stato all'altro. Se non è selezionato alcun testo, <span class="application">OmegaT</span> sceglie la parola che contiene una lettera immediatamente alla destra del cursore.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Seleziona la concordanza</span></dt>
+                  <dd>
+                     <p>Seleziona la concordanza parziale precedente, successiva o n visualizzata nel pannello delle concordanze parziali e la inserisce,
+                        o sostituisce il testo, all'interno del segmento.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Usa come traduzione predefinita</span></dt>
+                  <dd>
+                     <p>Se sono presenti alternative per il segmento attivo, è possibile contrassegnare l'alternativa selezionata come traduzione
+                        predefinita. L'elemento sarà visualizzato in grigio, se è l'unica traduzione a disposizione.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Crea traduzione alternativa</span></dt>
+                  <dd>
+                     <p>Due segmenti uguali possono, a seconda del contesto, richiedere traduzioni differenti. Selezionare questa voce di menu, se
+                        l'attuale traduzione, non è adatta e inserire la traduzione alternativa.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Rimuovi traduzione</span></dt>
+                  <dd>
+                     <p>Elimina la traduzione e imposta il segmento come non tradotto.</p>
+                  </dd>
+                  <dt><span class="term">Imposta traduzione vuota</span></dt>
+                  <dd>
+                     <p>Definisce la traduzione come vuota. Nel documento di destinazione per questo segmento non apparirà nulla. Nell'Editor, la
+                        traduzione risulterà &lt;VUOTA&gt;
+                     </p>
+                  </dd>
+                  <dt><span class="term">Registra traduzione uguale</span></dt>
+                  <dd>
+                     <p>Usare questo comando affinché la traduzione sia registrata uguale al segmento di partenza, anche se non è attivata l'opzione
+                        <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.allowtranslationtobeequaltosource"><span class="guilabel">Permetti traduzione uguale all'originale</span></a>.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.goto"></a>3.&nbsp;Vai
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Questo menu visualizza le voci solo quando è aperto un progetto.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Prossimo segmento non tradotto</span></dt>
+                  <dd>
+                     <p>Si sposta al segmento successivo che non presenta equivalenti nella memoria di traduzione.</p>
+                  </dd>
+                  <dt><span class="term">Segmento tradotto successivo</span></dt>
+                  <dd>
+                     <p>Si sposta al segmento successivo già tradotto, ignorando i segmenti non tradotti.</p>
+                  </dd>
+                  <dt><span class="term">Segmento successivo</span></dt>
+                  <dd>
+                     <p>Si sposta al segmento immediatamente successivo a quello attivo. Se il segmento attivo è l'ultimo di un file, verrà attivato
+                        il primo segmento del file successivo.
+                     </p>
+                     <p>Nota: il tasto <span class="keycap"><strong>Invio</strong></span> è una scorciatoia alternativa se non è attivata l'opzione <a class="link" href="windows.and.dialogs.html#dialogs.preferences.general.usetabtoadvance">Avanza con il tasto TAB</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Segmento precedente</span></dt>
+                  <dd>
+                     <p>Si sposta al segmento immediatamente precedente a quello attivo. Se il segmento attivo è il primo di un file, verrà attivato
+                        l'ultimo segmento del file precedente.
+                     </p>
+                     <p>Nota: <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Invio</strong></span> è una scorciatoia alternativa se non è attivata l'opzione <a class="link" href="windows.and.dialogs.html#dialogs.preferences.general.usetabtoadvance">Avanza con il tasto TAB</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Numero di segmento...</span></dt>
+                  <dd>
+                     <p>Il segmento è aperto quando viene digitato o il numero di segmento o il suo richiamo.</p>
+                  </dd>
+                  <dt><span class="term">Nota successiva</span></dt>
+                  <dd>
+                     <p>Sarà aperto il segmento immediatamente successivo che contenga una nota.</p>
+                  </dd>
+                  <dt><span class="term">Nota precedente</span></dt>
+                  <dd>
+                     <p>Sarà aperto il segmento immediatamente precedente che contenga una nota.</p>
+                  </dd>
+                  <dt><span class="term">Origine della concordanza selezionata</span></dt>
+                  <dd>
+                     <p>Si sposta al segmento che corrisponde alla corrispondenza selezionata corrente nel pannello <span class="guilabel">Concordanze parziali</span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Avanti nella cronologia...</span></dt>
+                  <dd>
+                     <p><span class="application">OmegaT</span> tiene traccia dei segmenti eseguiti. Con questo comando si può saltare al segmento lasciato in precedenza tramite il comando
+                        <span class="guimenuitem">Indietro nella cronologia...</span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Indietro nella cronologia...</span></dt>
+                  <dd>
+                     <p>Con questo comando ci si può spostare indietro di un segmento alla volta, per tornare poi a quello attivo tramite il comando
+                        <span class="guimenuitem">Avanti nella cronologia...</span>.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.view"></a>4.&nbsp;Vista
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Evidenzia i segmenti tradotti</span></dt>
+                  <dd>
+                     <p>Se si seleziona l'opzione, i segmenti tradotti saranno evidenziati in giallo.</p>
+                  </dd>
+                  <dt><span class="term">Evidenzia i segmenti non tradotti</span></dt>
+                  <dd>
+                     <p>Se si seleziona l'opzione, i segmenti non tradotti saranno evidenziati in lilla.</p>
+                  </dd>
+                  <dt><span class="term">Evidenzia le delimitazioni dei paragrafi</span></dt>
+                  <dd>
+                     <p>Se l'opzione è attivata, viene indicata visivamente la separazione tra i paragrafi nel documento di partenza.</p>
+                  </dd>
+                  <dt><span class="term">Mostra i segmenti di origine</span></dt>
+                  <dd>
+                     <p>Se si seleziona l'opzione, i segmenti di origine verrano mostrati e saranno evidenziati in verde. Se non si seleziona, i segmenti
+                        di origine non verranno mostrati.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Evidenzia i segmenti non univoci</span></dt>
+                  <dd>
+                     <p>Se si seleziona l'opzione, i segmenti non univoci saranno evidenziati in grigio chiaro.</p>
+                  </dd>
+                  <dt><span class="term">Evidenzia i segmenti con note</span></dt>
+                  <dd>
+                     <p>Se si seleziona l'opzione, i segmenti con note saranno evidenziati in ciano. Questo contrassegno ha la priorità sui contrassegni
+                        <span class="guimenuitem">Evidenzia i segmenti tradotti</span> ed <span class="guimenuitem">Evidenzia i segmenti non tradotti</span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Evidenzia gli spazi non divisibili</span></dt>
+                  <dd>
+                     <p>Se si seleziona l'opzione, gli spazi non divisibili saranno evidenziati con uno sfondo grigio.</p>
+                  </dd>
+                  <dt><span class="term">Evidenza gli spazi vuoti</span></dt>
+                  <dd>
+                     <p>Se si seleziona l'opzione, gli spazi vuoti saranno evidenziati con un punto.</p>
+                  </dd>
+                  <dt><span class="term">Evidenzia caratteri di controllo algoritmo bidirezionale</span></dt>
+                  <dd>
+                     <p>Questa opzione mostra i <a class="ulink" href="http://www.w3.org/International/questions/qa-bidi-controls" target="_top">caratteri di controllo bidirezionali</a></p>
+                  </dd>
+                  <dt><span class="term">Evidenzia i segmenti popolati automaticamente</span></dt>
+                  <dd>
+                     <p>Se si seleziona questa opzione, lo sfondo di tutti i segmenti popolati automaticamente (dalle memorie di traduzione presenti
+                        in <code class="filename">/tm/auto</code>, per esempio) viene colorato. I colori sono visualizzati se è attivata l'opzione <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.saveautopopulatedstatus"><span class="guimenuitem">Salva lo stato di popolazione automatica</span></a>. Le solite traduzioni inserite dalla cartella "auto" vengono visualizzate in arancione. Le altre traduzioni, individuate
+                        in modo specifico nella TMX, possono essere visualizzate usando colori diversi. Per i dettagli tecnici, vedere il capitolo
+                        <a class="ulink" href="http://sourceforge.net/p/omegat/feature-requests/963/" target="_top">Proposte di miglioramenti</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Sostituzione aggressiva del carattere</span></dt>
+                  <dd>
+                     <p>Attivare questa opzione nel caso in cui <span class="application">OmegaT</span> non visualizzi correttamente determinati glifi (anche se i caratteri che li contengono sono installati nella propria macchina).
+                        Nota: in Windows sembra che questo meccanismo di sostituzione manuale dei caratteri possa interferire con la sostituzione
+                        standard, causando sostituzioni di carattere impreviste non volute. Per tale motivo, la sua impostazione predefinita è DISATTIVO.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Informazioni sulla modifica</span></dt>
+                  <dd>
+                     <p>Se si imposta la visualizzazione della modifica su <span class="guimenuitem">Segmento corrente</span>, sarà visualizzata l'ora e l'autore dell'ultima modifica eseguita sul segmento attivo. Se si imposta su <span class="guimenuitem">Per tutti i segmenti</span>, l'informazione sarà visualizzata per tutti, mentre <span class="guimenuitem">Nessuna</span> la disattiverà.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.tools"></a>5.&nbsp;Strumenti
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Verifica problemi...</span></dt>
+                  <dd>
+                     <p>Lo strumento per il controllo della qualità che esegue in un'unica operazione tutte le verifiche automatiche e ne mostra i
+                        risultati in una finestra.
+                     </p>
+                     <p>Vengono individuati quattro tipi di problemi:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Tag mancanti o usati in modo scorretto, incluso i <a class="link" href="windows.and.dialogs.html#dialogs.preferences.tagprocessing" title="7.13.&nbsp;Elaborazione dei tag">tag personalizzati</a>. L'opzione <span class="guilabel">Problemi con tag</span> è sempre selezionata.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="guilabel">Problemi ortografici</span> (facoltativa). Funziona solo se è installato un dizionario ortografico.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="guilabel">Problemi con la terminologia</span> (facoltativa).
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="guilabel">Problemi di LanguageTool</span> (facoltativa).
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>La finestra dei risultati è visualizzata in forma tabellare, in cui:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>il doppio clic su una riga attiva il segmento corrispondente nel pannello dell'Editor,</p>
+                           </li>
+                           <li class="listitem">
+                              <p>il clic su un'intestazione di colonna cambia l'ordine della colonna,</p>
+                           </li>
+                           <li class="listitem">
+                              <p>la selezione o lo spostamento del mouse su una riga mostra un'icona di un menu a comparsa, nell'ultima colonna, che contiene
+                                 le azioni per correggere o ignorare gli errori.
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt><span class="term">Verifica problemi per il documento attivo</span></dt>
+                  <dd>
+                     <p>Come sopra, ma solo per il documento correntemente aperto nel pannello dell'Editor.</p>
+                  </dd>
+                  <dt><span class="term">Statistiche</span></dt>
+                  <dd>
+                     <p>Apre una nuova finestra e mostra le statistiche del progetto, per esempio i totali del progetto e quelli per ciascun file
+                        al suo interno.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Statistiche delle concordanze</span></dt>
+                  <dd>
+                     <p>Mostra le statistiche di concordanza per il progetto: numero di ripetizioni, concordanze esatte, parziali e nessuna, per i
+                        segmenti, le parole e i caratteri.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Statistiche delle concordanze per file</span></dt>
+                  <dd>
+                     <p>Mostra le statistiche di concordanza per ciascun file del progetto: numero di ripetizioni, concordanze esatte, parziali e
+                        nessuna, per i segmenti, le parole e i caratteri.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Allinea file...</span></dt>
+                  <dd>
+                     <p>Selezionare i due file da allineare (il file di partenza e la sua traduzione) e premere OK per aprire la finestra <a class="link" href="windows.and.dialogs.html#windows.aligner" title="5.&nbsp;Allineatore"><span class="guilabel">Allinea</span></a>.
+                     </p>
+                     <p>I formati di file supportati sono quelli elencati in <span class="guimenuitem">Progetto</span> → <span class="guimenuitem">Proprietà</span> → <span class="guimenuitem">Filtri dei file</span>.
+                     </p>
+                     <p>I file di partenza e quelli di arrivo possono avere formati diversi (per esempio, un file <code class="filename">.docx</code> può essere allineato con un file <code class="filename">.pdf</code>).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Azioni di script...</span></dt>
+                  <dd>
+                     <p>Apre la <a class="link" href="windows.and.dialogs.html#windows.scripts" title="6.&nbsp;Script">finestra <span class="guilabel">Azioni di script</span></a> in cui è possibile impostare la posizione degli script, e in cui essi possono essere scritti, avviati e associati a una scorciatoia.
+                     </p>
+                  </dd>
+                  <dt><span class="term">n - (nome script)</span></dt>
+                  <dd>
+                     <p>Avvia gli script associati con un numero.</p>
+                     <p>per associare uno script a un numero:</p>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>Aprire la finestra Azioni di script</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Selezionare lo script dall'elenco a sinistra</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Nella parte inferiore della finestra, fare clic col pulsante destro su un numero libero e e selezionare <span class="guilabel">Aggiungi script</span>.
+                              </p>
+                           </li>
+                        </ol>
+                     </div>
+                  </dd>
+                  <dt><span class="term">(comandi per la ricerca esterna)</span></dt>
+                  <dd>
+                     <p>Se, nelle <a class="link" href="windows.and.dialogs.html#dialogs.preferences.externalsearch" title="7.11.&nbsp;Ricerca esterna">Preferenze</a>, sono stati definiti i comandi per eseguire ricerche esterne, essi sono elencati e raggiungibili da qui.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.options"></a>6.&nbsp;Opzioni
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Preferenze...</span></dt>
+                  <dd>
+                     <p>Apre la finestra di dialogo delle <a class="link" href="windows.and.dialogs.html#dialogs.preferences" title="7.&nbsp;Preferenze generali">Preferenxe</a>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Traduzione automatica</span></dt>
+                  <dd>
+                     <p>Permette di attivare/disattivare gli strumenti di Traduzione automatica offerti.</p>
+                     <p>Se sono selezionati più motori di traduzione automatica, viene utilizzata anche la combinazione di tasti <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> per passare da un motore all'altro e inserire l'ultima traduzione selezionata.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Glossario</span></dt>
+                  <dd>
+                     <p>Selezionare <span class="guimenuitem">Ricerca terminologica TaaS</span> per attivare questa ricerca.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Dizionario</span></dt>
+                  <dd>
+                     <p>Attivare l'opzione <span class="guimenuitem">Usa la concordanza parziale per le voci di dizionario</span> se si desidera che i dizionari mostrino le parole contenenti la medesima radice.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Completamento automatico</span></dt>
+                  <dd>
+                     <p>Se l'opzione <span class="guimenuitem">Mostra automaticamente i suggerimenti pertinenti</span> è attivata, il completamento automatico viene avviato automaticamente digitando le prime lettere della voce di glossario
+                        tradotta, o digitando "&lt;" nel caso di tag.
+                     </p>
+                     <p>Attivare l'opzione <span class="guimenuitem">Abilita il completamento cronologia</span> per visualizzare le parole suggerite durante la digitazione delle loro prime lettere.
+                     </p>
+                     <p>Attivare l'opzione <span class="guimenuitem">Abilita la predizione cronologia</span> per visualizzare le parole suggerite che seguono comunemente la parola che è stata appena digitata.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Filtri dei file...</span></dt>
+                  <dd>
+                     <p>Apre la finestra di dialogo <a class="link" href="windows.and.dialogs.html#dialogs.preferences.filefilters" title="7.6.&nbsp;Filtri dei file">Filtri dei file</a> all'interno delle Preferenze.
+                     </p>
+                     <p>Queste impostazioni si applicano al livello generale di OmegaT, ossia coinvolgono tutti i progetti.</p>
+                  </dd>
+                  <dt><span class="term">Segmentazione...</span></dt>
+                  <dd>
+                     <p>Apre le opzioni <a class="link" href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup" title="7.7.&nbsp;Configura la segmentazione">Configura la segmentazione</a> all'interno della finestra di dialogo delle Preferenze.
+                     </p>
+                     <p>Queste impostazioni si applicano al livello generale di OmegaT, ossia coinvolgono tutti i progetti.</p>
+                  </dd>
+                  <dt><span class="term">Editor...</span></dt>
+                  <dd>
+                     <p>Apre le opzioni <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor" title="7.12.&nbsp;Editor">Editor</a> all'interno della finestra di dialogo delle Preferenze.
+                     </p>
+                     <p>Queste impostazioni si applicano al livello generale di OmegaT, ossia coinvolgono tutti i progetti.</p>
+                  </dd>
+                  <dt><span class="term">Accedi alla cartella di configurazione</span></dt>
+                  <dd>
+                     <p>Apre la cartella locale in cui sono memorizzati i file di configurazione di OmegaT (dipende dal sistema operativo utilizzato).</p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.help"></a>7.&nbsp;Aiuto
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Manuale dell'utente...</span></dt>
+                  <dd>
+                     <p>Apre questo manuale nel browser predefinito.</p>
+                  </dd>
+                  <dt><span class="term">Informazioni su...</span></dt>
+                  <dd>
+                     <p>Visualizza le informazioni di copyright, i crediti e le informazioni di licenza.</p>
+                  </dd>
+                  <dt><span class="term">Ultime modifiche...</span></dt>
+                  <dd>
+                     <p>Mostra l'elenco delle nuove funzionalità, i miglioramenti e le correzioni errori per ciascun nuovo rilascio.</p>
+                  </dd>
+                  <dt><span class="term">Registro...</span></dt>
+                  <dd>
+                     <p>Mostra il file di registro corrente. Il titolo della finestra rispecchia il file realmente usato (che dipende da quante istanze
+                        di OmegaT sono in esecuzione assieme).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Controlla aggiornamenti...</span></dt>
+                  <dd>
+                     <p>Verifica se è stata rilasciata una versione più recente di <span class="application">OmegaT</span>.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.installing.and.running.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="windows.and.dialogs.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;Installazione e avvio di <span class="application">OmegaT</span>&nbsp;
+               </td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;Finestre e finestre di dialogo</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

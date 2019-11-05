@@ -129,6 +129,16 @@ public interface IGlossaryRenderer {
         }
     }
 
+    // --------------- Identification methods -----------------
+
+    /** Name to be displayed in the drop box. Can be language-dependant **/
+    String getName();
+
+    /** String to be stored in config file. Must be language-independant, and unique **/
+    String getId();
+
+    // --------------- Rendering methods -----------------
+
     void render(GlossaryEntry entry, IRenderTarget<?> trg);
 
     default void render(GlossaryEntry entry, StyledDocument doc) {

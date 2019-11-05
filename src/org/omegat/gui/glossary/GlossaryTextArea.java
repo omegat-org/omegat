@@ -47,7 +47,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.io.File;
-import java.lang.reflect.Constructor;
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
@@ -232,9 +231,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
 
         try {
-            String layout = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, "Default");
-            Constructor<?> cns = Class.forName("org.omegat.gui.glossary." + layout + "GlossaryRenderer").getConstructor();
-            entryRenderer = (IGlossaryRenderer) cns.newInstance();
+            String layout = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, "org.omegat.gui.glossary.DefaultGlossaryRenderer");
+            for (IGlossaryRenderer r: Core.getGlossaryRenderers()) {
+                if (r.getId().equals(layout)) {
+                    entryRenderer = r;
+                }
+            }
         } catch (Exception e) {
         }
         for (GlossaryEntry entry : entries) {

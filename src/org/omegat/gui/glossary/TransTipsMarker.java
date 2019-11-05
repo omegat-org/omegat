@@ -25,7 +25,6 @@
 
 package org.omegat.gui.glossary;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -71,9 +70,12 @@ public class TransTipsMarker implements IMarker {
         List<Mark> marks = new ArrayList<Mark>();
 
         try {
-            String layout = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, "Default");
-            Constructor<?> cns = Class.forName("org.omegat.gui.glossary." + layout + "GlossaryRenderer").getConstructor();
-            entryRenderer = (IGlossaryRenderer) cns.newInstance();
+            String layout = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, "org.omegat.gui.glossary.DefaultGlossaryRenderer");
+            for (IGlossaryRenderer r: Core.getGlossaryRenderers()) {
+                if (r.getId().equals(layout)) {
+                    entryRenderer = r;
+                }
+            }
         } catch (Exception e) {
         }
         for (GlossaryEntry ent : glossaryEntries) {

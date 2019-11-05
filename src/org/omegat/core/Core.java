@@ -68,6 +68,7 @@ import org.omegat.gui.exttrans.MachineTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.glossary.IGlossaries;
+import org.omegat.gui.glossary.IGlossaryRenderer;
 import org.omegat.gui.glossary.TransTipsMarker;
 import org.omegat.gui.issues.IIssues;
 import org.omegat.gui.issues.IssuesPanelController;
@@ -131,6 +132,7 @@ public final class Core {
             .synchronizedList(new ArrayList<String>());
 
     private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
+    private static final List<IGlossaryRenderer> GLOS_RENDERERS = new ArrayList<IGlossaryRenderer>();
 
     /** Get project instance. */
     public static IProject getProject() {
@@ -316,6 +318,14 @@ public final class Core {
 
     public static List<IMarker> getMarkers() {
         return MARKERS;
+    }
+
+    public static void registerGlossaryRenderer(IGlossaryRenderer rdr) {
+        GLOS_RENDERERS.add(rdr);
+    }
+
+    public static List<IGlossaryRenderer> getGlossaryRenderers() {
+        return GLOS_RENDERERS;
     }
 
     public static Map<String, String> getParams() {

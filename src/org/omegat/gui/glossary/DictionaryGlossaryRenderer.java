@@ -28,9 +28,29 @@ package org.omegat.gui.glossary;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import org.omegat.core.Core;
+import org.omegat.util.OStrings;
 import org.omegat.util.gui.TooltipAttribute;
 
 public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerGlossaryRenderer(new DictionaryGlossaryRenderer());
+    }
+
+    public static void unloadPlugins() {
+    }
+
+    public String getName() {
+        return OStrings.getString("GLOSSARY_RENDERER_DICTIONARY");
+    }
+
+    public String getId() {
+        return "org.omegat.gui.glossary.DictionaryGlossaryRenderer";
+    }
 
     public void render(GlossaryEntry entry, IRenderTarget<?> trg) {
         trg.append(entry.getSrcText(), SOURCE_ATTRIBUTES);

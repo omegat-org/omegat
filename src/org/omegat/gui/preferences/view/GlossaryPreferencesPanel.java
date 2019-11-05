@@ -26,8 +26,14 @@
 package org.omegat.gui.preferences.view;
 
 import javax.swing.JPanel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
+import org.omegat.gui.glossary.IGlossaryRenderer;
+import org.omegat.util.gui.DelegatingComboBoxRenderer;
+
 
 /**
  * @author Aaron Madlon-Kay
@@ -81,7 +87,13 @@ public class GlossaryPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("PREFS_GLOSSARY_LAYOUT"));
         jPanel1.add(jLabel1);
 
-        cbGlossaryLayout.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Default", "Dictionary" }));
+        cbGlossaryLayout.setModel(new DefaultComboBoxModel<IGlossaryRenderer>(Core.getGlossaryRenderers().toArray(new IGlossaryRenderer[0])));
+        cbGlossaryLayout.setRenderer(new DelegatingComboBoxRenderer<IGlossaryRenderer,String>() {
+            @Override
+            protected String getDisplayText(IGlossaryRenderer value) {
+                return value.getName();
+            }
+        });
         jPanel1.add(filler2);
         jPanel1.add(cbGlossaryLayout);
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.X_AXIS));
@@ -91,7 +103,7 @@ public class GlossaryPreferencesPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JComboBox<String> cbGlossaryLayout;
+    javax.swing.JComboBox<IGlossaryRenderer> cbGlossaryLayout;
     javax.swing.JCheckBox displayContextCheckBox;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;

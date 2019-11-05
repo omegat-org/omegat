@@ -119,7 +119,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
     private final DockableScrollPane scrollPane;
 
-    private transient IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer();
+    private transient IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer(true);
 
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea(IMainWindow mw) {

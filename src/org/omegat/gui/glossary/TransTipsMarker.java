@@ -51,7 +51,7 @@ public class TransTipsMarker implements IMarker {
     protected static final HighlightPainter TRANSTIPS_UNDERLINER = new UnderlineFactory.SolidBoldUnderliner(
             Styles.EditorColor.COLOR_TRANSTIPS.getColor());
 
-    private IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer();
+    private IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer(true);
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,

@@ -236,8 +236,6 @@ public class GlossarySearcher {
             return result;
         }
 
-        List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
-
         // The default replace entry
         GlossaryEntry replaceEntry = new GlossaryEntry("", "", "", false, null);
 
@@ -283,6 +281,12 @@ public class GlossarySearcher {
 
             result = newList;
         }
+        
+        if (! Core.getGlossary().getLocalRenderer().wantsMerge()) {
+            return result;
+        }
+
+        List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
 
         // Group items with same scrTxt
         for (int i = 0; i < result.size(); i++) {

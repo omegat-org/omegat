@@ -61,7 +61,7 @@ public class MoodlePHPFilter extends AbstractFilter {
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
 
-    protected static final Pattern RE_ENTITY = Pattern.compile("\\$string\\['(.+)'] (=) '(.+)';",
+    protected static final Pattern RE_ENTITY = Pattern.compile("\\$string\\['(.+)'\\] (=) '(.+)(';)$",
             Pattern.DOTALL);
 
     protected Map<String, String> align;
@@ -117,7 +117,7 @@ public class MoodlePHPFilter extends AbstractFilter {
 
         StringBuilder block = new StringBuilder();
         boolean isInBlock = false;
-        int quotes = 39;
+        final char quotes = '\'';
         int previousChar = 0;
         int c;
         while ((c = inFile.read()) != -1) {
@@ -135,7 +135,9 @@ public class MoodlePHPFilter extends AbstractFilter {
                 processBlock(block.toString(), outFile);
                 block.setLength(0);
             }
-            if (!Character.isWhitespace(c)) { // In the regexp, there could be whitespace between " and >
+            if (c == quotes && previousChar == '\\') {
+                previousChar = 0;
+            } else {
                 previousChar = c;
             }
         }

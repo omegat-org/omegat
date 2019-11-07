@@ -50,7 +50,8 @@ public class MoodlePHPFilterTest extends TestFilterBase {
         checkMulti("Unrecognised options:\n" +
                 "  {$a}\n" + 
                 "Please use --help option.", "cliunknowoption", null, null, null, null);
-        checkMulti("You cannot uninstall the \\'{$a->filter}\\' because it is part of the \\'{$a->module}\\' module.", "cannotdeletemodfilter", null, null, null, null);        
+        checkMulti("You cannot uninstall the \\'{$a->filter}\\' because it is part of the \\'{$a->module}\\' module.", "cannotdeletemodfilter", null, null, null, null);
+        checkMulti("List of groups or contexts whose members are allowed to create attributes. Separate multiple groups with \\';\\'. Usually something like \\'cn=teachers,ou=staff,o=myorg\\'", "auth_ldap_attrcreators", null, null, null, null);
         checkMultiEnd();
     }
     

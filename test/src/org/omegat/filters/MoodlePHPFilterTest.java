@@ -38,10 +38,10 @@ public class MoodlePHPFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
         parse(new MoodlePHPFilter(), "test/data/filters/MoodlePHP/file.php");
     }
-
+    
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/MoodlePHP/file.php";
+        String f = "test/data/filters/MoodlePHP/file.php"; 
         IProject.FileInfo fi = loadSourceFiles(new MoodlePHPFilter(), f);
 
         checkMultiStart(fi, f);
@@ -51,9 +51,10 @@ public class MoodlePHPFilterTest extends TestFilterBase {
                 "  {$a}\n" +
                 "Please use --help option.", "cliunknowoption", null, null, null, null);
         checkMulti("You cannot uninstall the \\'{$a->filter}\\' because it is part of the \\'{$a->module}\\' module.", "cannotdeletemodfilter", null, null, null, null);
+        checkMulti("List of groups or contexts whose members are allowed to create attributes. Separate multiple groups with \\';\\'. Usually something like \\'cn=teachers,ou=staff,o=myorg\\'", "auth_ldap_attrcreators", null, null, null, null);
         checkMultiEnd();
     }
-
+    
     @Test
     public void testTranslate() throws Exception {
         translateText(new MoodlePHPFilter(),
@@ -74,7 +75,7 @@ public class MoodlePHPFilterTest extends TestFilterBase {
     }
 
     public static class AlignResult {
-
+        
         boolean found = false;
     }
 }

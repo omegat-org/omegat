@@ -969,24 +969,8 @@ task debug(type: JavaExec) {
     debug true
 }
 
-task releaseCheck {
-    description = 'Check that the repository is in the right condition for a release'
-    doLast {
-        if (repoHasChanges()) {
-            throw new GradleException('Repository has uncommitted changes. Please commit before releasing.')
-        }
-    }
-}
-
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
-
-task release {
-    description = 'Create distribution packages for release.'
-    dependsOn clean, genDocIndex, releaseCheck, build
-    build.mustRunAfter clean, genDocIndex, releaseCheck
-    releaseCheck.mustRunAfter genDocIndex
-}
 
 test {
     // Test in headless mode with ./gradlew test -Pheadless

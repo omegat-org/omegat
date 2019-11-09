@@ -138,8 +138,9 @@ public class MoodlePHPFilter extends AbstractFilter {
             if (c == quotes && previousChar == '\\') {
                 previousChar = 0;
             }
-            else
+            else {
                 previousChar = c;
+            }
         }
     }
 

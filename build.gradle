@@ -795,7 +795,7 @@ task genMac {
     outputs.dir file('release/mac-specific')
     def appbundlerJar = file("${System.getProperty('user.home')}/.ant/lib/appbundler-1.0ea.jar")
     onlyIf {
-        appbundlerJar.file
+        condition(appbundlerJar.file, 'AppBundler not found')
     }
     doLast {
         ant.taskdef(name: 'appbundler',

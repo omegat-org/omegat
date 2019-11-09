@@ -38,7 +38,7 @@ public class MoodlePHPFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
         parse(new MoodlePHPFilter(), "test/data/filters/MoodlePHP/file.php");
     }
-    
+
     @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/MoodlePHP/file.php"; 
@@ -54,7 +54,7 @@ public class MoodlePHPFilterTest extends TestFilterBase {
         checkMulti("List of groups or contexts whose members are allowed to create attributes. Separate multiple groups with \\';\\'. Usually something like \\'cn=teachers,ou=staff,o=myorg\\'", "auth_ldap_attrcreators", null, null, null, null);
         checkMultiEnd();
     }
-    
+
     @Test
     public void testTranslate() throws Exception {
         translateText(new MoodlePHPFilter(),

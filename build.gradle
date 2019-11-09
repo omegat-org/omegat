@@ -74,7 +74,7 @@ repositories {
 
 task webstartDocsJar(type: Jar) {
     description = 'Bundle documents for Java WebStart.'
-    baseName = 'docs'
+    archiveBaseName = 'docs'
     from('release') {
         include 'changes.txt', 'OmegaT-license.txt'
         into 'docs'
@@ -106,102 +106,102 @@ dependencies {
     } else {
         // Do not upgrade to commons-io 2.6 due to
         // https://issues.apache.org/jira/browse/IO-554
-        compile 'commons-io:commons-io:2.5'
-        compile 'commons-lang:commons-lang:2.6'
-        compile 'org.slf4j:slf4j-jdk14:1.7.25'
+        implementation 'commons-io:commons-io:2.5'
+        implementation 'commons-lang:commons-lang:2.6'
+        implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 
         // macOS integration
-        compile 'org.madlonkay:desktopsupport:0.3.0'
+        implementation 'org.madlonkay:desktopsupport:0.3.0'
 
-        compile 'javax.xml.bind:jaxb-api:2.3.1'
-        compile 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-        compile 'com.sun.xml.bind:jaxb-impl:2.3.2'
+        implementation 'javax.xml.bind:jaxb-api:2.3.1'
+        implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+        implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
 
         // PDF Filter
-        compile 'org.apache.pdfbox:pdfbox:2.0.16'
+        implementation 'org.apache.pdfbox:pdfbox:2.0.16'
 
         // Aligner
-        compile 'net.loomchild:maligna:3.0.0'
+        implementation 'net.loomchild:maligna:3.0.0'
 
         // Dictionary
-        compile 'org.dict.zip:dictzip-lib:0.8.2'
-        compile 'com.github.takawitter:trie4j:0.9.8'
+        implementation 'org.dict.zip:dictzip-lib:0.8.2'
+        implementation 'com.github.takawitter:trie4j:0.9.8'
 
         // Encoding dectection
-        compile 'com.github.albfernandez:juniversalchardet:2.3.0'
+        implementation 'com.github.albfernandez:juniversalchardet:2.3.0'
 
         // Legacy projects re-hosted on GitHub + Bintray
-        compile 'org.omegat:vldocking:3.0.5'
-        compile 'org.omegat:htmlparser:1.5'
-        compile 'org.omegat:gnudiff4j:1.15'
-        compile 'org.omegat:lib-mnemonics:1.0'
-        compile 'org.omegat:jmyspell-core:1.0.0-beta-2'
+        implementation 'org.omegat:vldocking:3.0.5'
+        implementation 'org.omegat:htmlparser:1.5'
+        implementation 'org.omegat:gnudiff4j:1.15'
+        implementation 'org.omegat:lib-mnemonics:1.0'
+        implementation 'org.omegat:jmyspell-core:1.0.0-beta-2'
 
         // LanguageTool
-        compile "org.languagetool:languagetool-core:${languageToolVersion}"
-        runtime("org.languagetool:language-all:${languageToolVersion}") {
+        implementation "org.languagetool:languagetool-core:${languageToolVersion}"
+        runtimeOnly("org.languagetool:language-all:${languageToolVersion}") {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen-ipadic'
         }
-        runtime 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
-        runtime 'org.languagetool:hunspell-native-libs:2.9'
+        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
+        runtimeOnly 'org.languagetool:hunspell-native-libs:2.9'
 
         // Lucene for tokenizers
         // Temporary use of custom lucene-core; see https://sourceforge.net/p/omegat/bugs/813/
-        compile "org.omegat.lucene:lucene-core:${luceneVersion}-1"
-        compile "org.apache.lucene:lucene-analyzers-common:${luceneVersion}"
-        compile "org.apache.lucene:lucene-analyzers-kuromoji:${luceneVersion}"
-        compile "org.apache.lucene:lucene-analyzers-smartcn:${luceneVersion}"
-        compile "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
+        implementation "org.omegat.lucene:lucene-core:${luceneVersion}-1"
+        implementation "org.apache.lucene:lucene-analyzers-common:${luceneVersion}"
+        implementation "org.apache.lucene:lucene-analyzers-kuromoji:${luceneVersion}"
+        implementation "org.apache.lucene:lucene-analyzers-smartcn:${luceneVersion}"
+        implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        compile 'org.eclipse.jgit:org.eclipse.jgit:4.11.8.201904181247-r'
-        compile 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit:4.11.8.201904181247-r'
+        implementation 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
         // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
-        compile 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
-        compile 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
-        compile 'org.tmatesoft.svnkit:svnkit:1.8.14'
+        implementation 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
+        implementation 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
+        implementation 'org.tmatesoft.svnkit:svnkit:1.8.14'
 
         // Team project conflict resolution
-        compile 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
+        implementation 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
 
         // Credentials encryption
-        compile 'org.jasypt:jasypt:1.9.3'
+        implementation 'org.jasypt:jasypt:1.9.3'
 
-        // Groovy used for scripts - needed at compile for GroovyClassLoader modifications
+        // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies
-        runtime 'org.codehaus.groovy:groovy-all:2.5.6'
-        runtime 'org.codehaus.groovy:groovy-dateutil:2.5.6'
-        runtime 'org.apache.ivy:ivy:2.4.0'
+        runtimeOnly 'org.codehaus.groovy:groovy-all:2.5.6'
+        runtimeOnly 'org.codehaus.groovy:groovy-dateutil:2.5.6'
+        runtimeOnly 'org.apache.ivy:ivy:2.4.0'
 
         // Script editor
-        compile 'com.fifesoft:rsyntaxtextarea:2.5.8'
-        compile 'com.fifesoft:rstaui:2.5.7'
-        compile ('com.fifesoft:languagesupport:2.5.8') {
+        implementation 'com.fifesoft:rsyntaxtextarea:2.5.8'
+        implementation 'com.fifesoft:rstaui:2.5.7'
+        implementation ('com.fifesoft:languagesupport:2.5.8') {
             exclude module: 'rhino'
         }
-        compile 'com.fifesoft:autocomplete:2.5.8'
+        implementation 'com.fifesoft:autocomplete:2.5.8'
 
         // Moses MT connector
-        compile 'org.apache.xmlrpc:xmlrpc-client:3.1.3'
+        implementation 'org.apache.xmlrpc:xmlrpc-client:3.1.3'
     }
 
     // Test dependencies
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.xmlunit:xmlunit-legacy:2.6.3'
-    testCompile("org.languagetool:languagetool-server:${languageToolVersion}") {
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.xmlunit:xmlunit-legacy:2.6.3'
+    testImplementation("org.languagetool:languagetool-server:${languageToolVersion}") {
         exclude group: 'org.slf4j'
     }
     // LanguageTool unit tests exercise these languages
     ['be', 'en', 'fr'].each {
-        testCompile "org.languagetool:language-${it}:${languageToolVersion}"
+        testImplementation "org.languagetool:language-${it}:${languageToolVersion}"
     }
-    testRuntime "org.languagetool:language-pl:${languageToolVersion}"
+    testRuntimeOnly "org.languagetool:language-pl:${languageToolVersion}"
 
     // WebStart-only
     jnlp webstartDocsJar.outputs.files
 
-    testIntegrationCompile sourceSets.main.output, sourceSets.test.output, configurations.compile
+    testIntegrationImplementation sourceSets.main.output, sourceSets.test.output, configurations.implementation
 }
 
 jar {
@@ -225,10 +225,10 @@ jar {
         // Set this attribute at execution time because accessing configurations.runtime as an
         // instance forces configuration blocks to be evaluated and this causes problems like
         // introducing ordering dependencies on various definitions in this file.
-        manifest.attributes 'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' ')
+        manifest.attributes 'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' ')
     }
     // Don't include extra stuff like version number in JAR name
-    archiveName = "${jar.baseName}.${jar.extension}"
+    archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
 }
 
 ext {
@@ -330,7 +330,7 @@ distributions {
                 }
             }
         }
-        distZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Without_JRE.zip"
+        distZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Without_JRE.zip"
     }
 
     source {
@@ -345,7 +345,7 @@ distributions {
                 from configurations.runtime
             }
         }
-        sourceDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
+        sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
     }
 
     mac {
@@ -435,7 +435,7 @@ distributions {
                 filteringCharset = 'UTF-8'
             }
         }
-        l10nMinimalDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_L10N_Minimal.zip"
+        l10nMinimalDistZip.archiveFileName = "${applicationName}_${project.version}${omtVersion.beta}_L10N_Minimal.zip"
     }
 
     l10nFull {
@@ -447,7 +447,7 @@ distributions {
                 into 'source/doc_src'
             }
         }
-        l10nFullDistZip.archiveName = "${applicationName}_${version}${omtVersion.beta}_L10N_Full.zip"
+        l10nFullDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_L10N_Full.zip"
     }
 }
 
@@ -484,15 +484,15 @@ macDistZip {
     onlyIf {
         condition(!macJRE.empty, 'JRE not found')
     }
-    archiveName = "${applicationName}_${version}${omtVersion.beta}_Mac.zip"
+    archiveFileName = "${applicationName}_${project.version}${omtVersion.beta}_Mac.zip"
 }
 
 task macSignedDistZip(type: Zip) {
-    def zipRoot = "${applicationName}_${version}${omtVersion.beta}_Mac_Signed"
+    def zipRoot = "${applicationName}_${project.version}${omtVersion.beta}_Mac_Signed"
     from(installMacSignedDist.outputs) {
         into zipRoot
     }
-    archiveName = "${zipRoot}.zip"
+    archiveFileName = "${zipRoot}.zip"
 }
 
 task macNotarize {
@@ -515,7 +515,7 @@ task macNotarize {
 }
 
 task macStapledNotarizedDistZip(type: Zip) {
-    def zipRoot = "${applicationName}_${version}${omtVersion.beta}_Mac_Notarized"
+    def zipRoot = "${applicationName}_${project.version}${omtVersion.beta}_Mac_Notarized"
     from(installMacSignedDist.outputs) {
         into zipRoot
     }
@@ -525,7 +525,7 @@ task macStapledNotarizedDistZip(type: Zip) {
             commandLine 'xcrun', 'stapler', 'staple', app
         }
     }
-    archiveName = "${zipRoot}.zip"
+    archiveFileName = "${zipRoot}.zip"
 }
 
 task mac(dependsOn: [macDistZip, macNotarize]) {
@@ -541,11 +541,11 @@ linux64DistTar {
         condition(!linux64JRE.empty, 'JRE not found')
     }
     doFirst {
-        delete "$destinationDir/jre"
+        delete "$destinationDirectory/jre"
     }
-    archiveName = "${applicationName}_${version}${omtVersion.beta}_Linux_64.tar.bz2"
+    archiveFileName = "${applicationName}_${project.version}${omtVersion.beta}_Linux_64.tar.bz2"
     compression = Compression.BZIP2
-    extension = 'tar.bz2'
+    archiveExtension = 'tar.bz2'
 }
 
 task l10n(dependsOn: [l10nMinimalDistZip, l10nFullDistZip]) {

@@ -11,7 +11,7 @@ plugins {
     id 'com.jfrog.bintray' version '1.8.4'
     id 'org.hidetake.ssh' version '2.10.1'
     id 'com.diffplug.gradle.spotless' version '3.23.1'
-    id 'com.github.ben-manes.versions' version '0.21.0'
+    id 'com.github.ben-manes.versions' version '0.27.0'
 }
 
 apply from: 'gradle/utils.gradle'

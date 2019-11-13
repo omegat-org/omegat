@@ -51,8 +51,6 @@ public class TransTipsMarker implements IMarker {
     protected static final HighlightPainter TRANSTIPS_UNDERLINER = new UnderlineFactory.SolidBoldUnderliner(
             Styles.EditorColor.COLOR_TRANSTIPS.getColor());
 
-    private IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer(true);
-
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
             boolean isActive) {
@@ -69,15 +67,7 @@ public class TransTipsMarker implements IMarker {
 
         List<Mark> marks = new ArrayList<Mark>();
 
-        try {
-            String layout = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, "org.omegat.gui.glossary.DefaultGlossaryRenderer");
-            for (IGlossaryRenderer r: Core.getGlossaryRenderers()) {
-                if (r.getId().equals(layout)) {
-                    entryRenderer = r;
-                }
-            }
-        } catch (Exception e) {
-        }
+        IGlossaryRenderer entryRenderer = Core.getGlossary().getLocalRenderer();
         for (GlossaryEntry ent : glossaryEntries) {
             String tooltip = entryRenderer.renderToHtml(ent);
             List<Token[]> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);

@@ -37,6 +37,7 @@ import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.IGlossaries;
+import org.omegat.gui.glossary.IGlossaryRenderer;
 
 /** Class mocking the GUI elements when scripts are executed in console mode. */
 public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
@@ -291,6 +292,16 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
     @Override
     public final List<GlossaryEntry> getDisplayedEntries() {
         return null;
+    }
+
+    @Override
+    public final IGlossaryRenderer getLocalRenderer() {
+        return null;
+    }
+
+    @Override
+    public final void setLocalRenderer(IGlossaryRenderer preference) {
+
     }
 
     @Override

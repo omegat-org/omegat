@@ -167,8 +167,24 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
 
         ToolTipManager.sharedInstance().registerComponent(this);
-
+        String preference = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT,
+             entryRenderer.getId());
+        for (IGlossaryRenderer r: Core.getGlossaryRenderers()) {
+            if (r.getId().equals(preference)) {
+                entryRenderer = r;
+            }
+        }
         JTextPaneLinkifier.linkify(this);
+    }
+
+    /** Creates renderer according to value saved in preferences **/
+    public void setLocalRenderer(IGlossaryRenderer preference) {
+        entryRenderer = preference;
+    }
+
+    @Override
+    public IGlossaryRenderer getLocalRenderer() {
+        return entryRenderer;
     }
 
     @Override
@@ -230,15 +246,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
 
-        try {
-            String layout = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, "org.omegat.gui.glossary.DefaultGlossaryRenderer");
-            for (IGlossaryRenderer r: Core.getGlossaryRenderers()) {
-                if (r.getId().equals(layout)) {
-                    entryRenderer = r;
-                }
-            }
-        } catch (Exception e) {
-        }
         for (GlossaryEntry entry : entries) {
             entryRenderer.render(entry, getStyledDocument());
         }

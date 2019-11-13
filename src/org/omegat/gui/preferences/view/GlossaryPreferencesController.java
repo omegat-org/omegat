@@ -28,6 +28,7 @@ package org.omegat.gui.preferences.view;
 import javax.swing.JComponent;
 
 import org.omegat.gui.glossary.IGlossaryRenderer;
+import org.omegat.core.Core;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -90,5 +91,6 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT, panel.replaceHitsCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE, panel.requireSimilarCaseCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_LAYOUT, ((IGlossaryRenderer) panel.cbGlossaryLayout.getSelectedItem()).getId());
+        Core.getGlossary().setLocalRenderer((IGlossaryRenderer) panel.cbGlossaryLayout.getSelectedItem());
     }
 }

@@ -7,7 +7,7 @@ plugins {
     id 'eclipse'
     id 'checkstyle'
     id "com.github.spotbugs" version '2.0.1'
-    id 'de.gliderpilot.jnlp' version '1.2.5'
+    id 'de.gliderpilot.jnlp' version '1.2.6'
     id 'com.jfrog.bintray' version '1.8.4'
     id 'org.hidetake.ssh' version '2.10.1'
     id 'com.diffplug.gradle.spotless' version '3.26.0'

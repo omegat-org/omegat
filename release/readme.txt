@@ -199,8 +199,7 @@ The most current info about OmegaT can be found at:
 
   https://omegat.org/
 
-User support, at the Yahoo user group (multilingual), where the archives are
-searchable without subscription:
+User support resources:
 
   https://omegat.org/support
 

@@ -9,7 +9,7 @@
   <chdir></chdir>
   <priority>normal</priority>
   <downloadUrl>http://java.com/download</downloadUrl>
-  <supportUrl>https://groups.yahoo.com/neo/groups/OmegaT/info</supportUrl>
+  <supportUrl>https://omegat.org/support</supportUrl>
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>

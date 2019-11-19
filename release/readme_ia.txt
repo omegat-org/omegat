@@ -199,7 +199,7 @@ Le plus actual information circa OmegaT pote ser trovate al ligamine:
 Supporto al usator, al Gruppo del usatores Yahoo (multilingual), ubi le archivos es
 cercabile sin subscription:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Demandas pro augmentationes (in anglese), in le sito SourceForge:
 

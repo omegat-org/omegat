@@ -174,7 +174,7 @@ Nejaktuálnější informace o aplikaci OmegaT naleznete na adrese:
 
 Uživatelská podpora, v rámci uživatelské skupiny na Yahoo! (vícejazyčně), je zde možno prohledávat archívy i bez registrace:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Požadavky a návrhy na zlepšení (anglicky), na stránce SourceForge:
 

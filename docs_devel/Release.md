@@ -143,7 +143,7 @@ Then log onto Bintray and publish the release.
 
 - [OmegaT News](https://sourceforge.net/p/omegat/news/)
   - [Example](https://sourceforge.net/p/omegat/news/2019/03/omegat-latest-version-415-update-4-released/)
-- [User Group](https://groups.yahoo.com/neo/groups/OmegaT/info)
+- [User Group](https://omegat.org/support)
   - [Example](https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/43871)
 
 

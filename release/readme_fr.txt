@@ -175,7 +175,7 @@ Les informations les plus récentes au sujet d'OmegaT sont à :
 
 Aide utilisateur sur le groupe Yahoo. Vous pouvez y consulter les archives sans vous inscrire au groupe :
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Demandes d'améliorations (en anglais), sur le site de SourceForge :
 

@@ -198,7 +198,7 @@ Le informazioni più aggiornate su OmegaT possono essere reperite accedendo a:
 
 Assistenza all'utente, nel gruppo utenti di Yahoo (multilingue), in cui è possibile ricercare negli archivi senza necessità di iscrizione:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Richieste di miglioramenti (in Inglese), nel sito SourceForge:
 

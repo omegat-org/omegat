@@ -195,7 +195,7 @@ De meest recente informatie over OmegaT is te vinden op:
 
 Gebruikersondersteuning op de Yahoo! gebruikersgroep (meertalig), waar zonder abonnement de archieven kunnen worden doorzocht:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Verzoeken tot verbeteringen (in het Engels) op de SourceForge-website:
 

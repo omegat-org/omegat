@@ -173,7 +173,7 @@ Najnovije informacije o programu OmegaT možete naći na sljedećoj adresi:
 
 Korisnička podrška na (višejezičnim) stranicama korisničke skupine Yahoo, gdje možete pretraživati arhive bez potrebe za registriranjem:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Zahtjevi za poboljšanja programa (na engleskome jeziku) na web stranicama servisa SourceForge:
 

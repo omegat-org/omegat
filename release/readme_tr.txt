@@ -203,7 +203,7 @@ OmegaT hakkındaki en güncel bilgilere şu adresten ulaşabilirsiniz:
 Arşivlerde arama yapma imkanı olan Yahoo kullanıcı grubundan (çok dilli)
 kullanıcı desteği alabilirsiniz:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Özellik İstekleri (İngilizce) SourceForge sitesinden yapılabilir:
 

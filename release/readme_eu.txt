@@ -177,7 +177,7 @@ OmegaT-ri buruzko informaziorik eguneratuena hemen dago:
 
 Erabiltzaileentzako laguntza, Yahoo-ren erabiltzaile-taldean (eleanitza). Mezuak arakatzeko ez da harpidetu behar:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Hobekuntzen eskaera (ingelesez), SourceForge-ko gunean:
 

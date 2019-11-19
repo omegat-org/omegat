@@ -189,7 +189,7 @@ Den mest aktuella informationen om OmegaT finns på:
 Användarsupport i en användargrupp hos Yahoo (flerspråkig), vars arkiv är
 sökbara utan prenumeration:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 "Requests for Enhancements" (på Engelska), på webbplatsen SourceForge:
 

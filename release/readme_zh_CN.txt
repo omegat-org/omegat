@@ -188,7 +188,7 @@ Aaron Madlon-Kay 是 OmegaT 的项目经理。
 
 在 Yahoo 用户组可以获得（多语种）用户支持，无需订阅也可以对归档进行搜索：
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 在 SourceForge 网站可以（用英语）提出改进建议与意见：
 

@@ -14,7 +14,7 @@
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

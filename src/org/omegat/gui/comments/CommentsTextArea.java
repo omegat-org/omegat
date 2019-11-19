@@ -7,7 +7,7 @@
                2007 Zoltan Bartko
                2011 Martin Fleurke, Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 

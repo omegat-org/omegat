@@ -21,7 +21,7 @@ Najaktuálnejšie informácie o OmegaT môžete nájsť
 
 Používateľská podpora, v používateľskej skupine na Yahoo (viacjazyčná), kde sa dajú prehľadávať
 archívy bez prihlasovania:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Požiadavky na zlepšenia (v angličtine), na stránke SourceForge:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -255,7 +255,7 @@ Môžete pridať kópie súborov, časti logu, snímky obrazovky, čokoľvek o �
 si myslíte, že pomôže vývojárom nájsť a opraviť vašu chybu.
 
 Archívy používateľskej skupiny môžete prehliadať na:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Prehliadať stránku hlásení o chybách a v prípade potreby pridať nové hlásenie o chybe môžete na:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347

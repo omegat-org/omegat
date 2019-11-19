@@ -20,7 +20,7 @@ Informatat më të fundme për OmegaT mund t'i gjeni te:
 
 Përkrahja për shfrytëzues, në grupin e shfrytëzuesve në Yahoo (shumë gjuhë), 
 ku arkivat janë janë të kërkueshme pa abonim:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
      
 Kërkesat për përmirësime, te faqja e SourceForge-it:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -155,7 +155,7 @@ Dhe abonohu te lista e përthyesëve:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 Për kontribute të tjera, abonohu së pari të grupi i shfrytëzuesve në:
-      http://groups.yahoo.com/group/OmegaT/
+      https://omegat.org/support
 
 Dhe për të ndjerë se çfarë po ndodhë në botën OmegaT...
 
@@ -235,7 +235,7 @@ Ju mund të shtoni kopje të skedarëve, pjesë të llogut, pamje të kapura, os
 mendoni që do tu ndihmone zhvilluesve të gjejn dhe të përmirësojnë gabimin tuaj.
 
 Për të shfletuar arkivat e grupit të shfrytëzuesve, shko te:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Për ta shfletuar faqen e raportimit të gabimeve dhe për të dërguar një raport të ri 
 të gabim nëse është e nevojshme, shko te:

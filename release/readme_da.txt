@@ -18,7 +18,7 @@ De nyeste informationer om OmegaT kan findes på
       http://www.omegat.org/
 
 Brugerstøtte, på Yahoo brugergruppe (flersproget), hvor arkiverne er søgbare uden abonnement:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Anmodninger om ekstraudstyr (på engelsk), på SourceForge hjemmeside:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -150,7 +150,7 @@ Og abonner på oversætternes liste:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 For andre former for bidrag, abonner først på brugergruppen på:
-      http://groups.yahoo.com/group/OmegaT/
+      https://omegat.org/support
 
 Og få en fornemmelse af, hvad der foregår i OmegaT verdenen ...
 
@@ -224,7 +224,7 @@ Enhver god fejlrapport har behov for nøjagtig tre ting.
 Du kan tilføje kopier af filer, dele af loggen, skærmbilleder, eller andet som du tror vil hjælpe udviklerne med at finde og rette din fejl.
 
 For at gennemse arkiverne i brugergruppen, skal du gå til:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 For at gennemse fejlrapportsiden og om nødvendigt indsende en ny fejlrapport, gå til:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347

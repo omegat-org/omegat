@@ -43,7 +43,7 @@ Asistencia a  usuarios en el grupo  de usuarios de Yahoo  (en varios idiomas),
 
 donde puedes buscar en los archivos sin suscripción:
 
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 
 
@@ -721,7 +721,7 @@ encontrar y corregir tu error.
 
 Para ver los archivos del grupo de usuarios, ve a:
 
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 
 

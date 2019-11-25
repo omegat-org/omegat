@@ -2,12 +2,15 @@
  OmegaT 5.2.0
 ----------------------------------------------------------------------
   0 Enhancements
-  1 Bug fix
+  2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.2.0 vs 5.1.0
 
   Bug fixes:
+
+  - LanguageTool rule settings not persisted correctly
+  https://sourceforge.net/p/omegat/bugs/960/
 
   - Parsing bug in Moodle filter when string contains ";"
   https://sourceforge.net/p/omegat/bugs/962/

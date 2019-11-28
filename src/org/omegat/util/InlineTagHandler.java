@@ -72,16 +72,14 @@ public class InlineTagHandler {
         }
         currentI = i;
         int index = tagIndex++;
-        try {
-            // If a value for the @x attr was provided, base the tag
-            // number off of it for matching purposes.
-            // Subtract 1 because OmegaT 0-indexes tags, while TMX
-            // seems to start at 1 (though the spec only says it must be
-            // unique for each <bpt> in the segment, so we clip to 0
-            // to prevent negative tag numbers).
-            index = Math.max(0, Integer.parseInt(x) - 1);
-        } catch (Exception ex) {
-            // Ignore
+        if (x != null) {
+            try {
+                // If a value for the @x attr was provided, base the tag
+                // number off of it for matching purposes.
+                index = Integer.parseInt(x);
+            } catch (Exception ex) {
+                // Ignore
+            }
         }
         pairTags.put(currentI, index);
     }

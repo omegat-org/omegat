@@ -35,7 +35,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -411,9 +413,52 @@ public class TMXReader2 {
         segInlineTag.setLength(0);
         inlineTagHandler.reset();
 
+        // OmegaT uses 0-indexed tags while the TMX spec *implies* that tags
+        // should be 1-indexed. To correctly handle both, we normalize by
+        // looking ahead at all tags and finding the smallest "x" attr value,
+        // then subtracting it from all tag numbers.
+
+        int minSeenTag = Integer.MAX_VALUE;
+        Deque<XMLEvent> buf = new ArrayDeque<XMLEvent>();
+
+        outer: while (true) {
+            XMLEvent e = xml.nextEvent();
+            buf.add(e);
+            switch (e.getEventType()) {
+            case XMLEvent.END_ELEMENT:
+                EndElement evEnd = (EndElement) e;
+                if ("seg".equals(evEnd.getName().getLocalPart())) {
+                    break outer;
+                }
+                break;
+            case XMLEvent.START_ELEMENT:
+                StartElement eStart = e.asStartElement();
+                switch (eStart.getName().getLocalPart()) {
+                case "bpt":
+                case "it":
+                case "ph":
+                    String x = getAttributeValue(eStart, "x");
+                    if (x != null) {
+                        try {
+                            int xVal = Integer.parseInt(x);
+                            minSeenTag = Math.min(minSeenTag, xVal);
+                        } catch (NumberFormatException ex) {
+                            // Ignore
+                        }
+                    }
+                    break;
+                }
+                break;
+            }
+        }
+
+        if (minSeenTag == Integer.MAX_VALUE) {
+            minSeenTag = 0;
+        }
+
         int inlineLevel = 0;
         while (true) {
-            XMLEvent e = xml.nextEvent();
+            XMLEvent e = buf.pop();
             switch (e.getEventType()) {
             case XMLEvent.START_ELEMENT:
                 StartElement eStart = e.asStartElement();
@@ -463,10 +508,16 @@ public class TMXReader2 {
                         tagName = inlineTagHandler.getTagShortcutLetter();
                     }
                     tagN = inlineTagHandler.endBPT();
+                    if (tagN != null) {
+                        tagN -= minSeenTag;
+                    }
                 } else if ("ept".equals(eEnd.getName().getLocalPart())) {
                     slashBefore = true;
                     tagName = inlineTagHandler.getTagShortcutLetter();
                     tagN = inlineTagHandler.endEPT();
+                    if (tagN != null) {
+                        tagN -= minSeenTag;
+                    }
                 } else if ("it".equals(eEnd.getName().getLocalPart())) {
                     if (tagName != 0) {
                         inlineTagHandler.setOtherTagShortcutLetter(tagName);
@@ -502,17 +553,7 @@ public class TMXReader2 {
                             .getLocation().getColumnNumber());
                     errorsCount++;
                     segContent.setLength(0);
-                    // wait for end seg
-                    while (true) {
-                        XMLEvent ev = xml.nextEvent();
-                        switch (ev.getEventType()) {
-                        case XMLEvent.END_ELEMENT:
-                            EndElement evEnd = (EndElement) ev;
-                            if ("seg".equals(evEnd.getName().getLocalPart())) {
-                                return;
-                            }
-                        }
-                    }
+                    return;
                 }
 
                 segContent.append('<');

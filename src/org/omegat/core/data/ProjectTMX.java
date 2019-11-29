@@ -58,7 +58,7 @@ import org.omegat.util.TMXWriter2;
 public class ProjectTMX {
 
     protected static final String PROP_FILE = "file";
-    protected static final String PROP_ID = "id";
+    protected static final String PROP_ID = TMXWriter2.PROP_ID;
     protected static final String PROP_PREV = "prev";
     protected static final String PROP_NEXT = "next";
     protected static final String PROP_PATH = "path";

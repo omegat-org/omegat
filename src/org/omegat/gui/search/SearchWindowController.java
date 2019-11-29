@@ -58,6 +58,8 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
@@ -326,6 +328,35 @@ public class SearchWindowController {
 
         final UndoManager undoManager = new UndoManager();
         field.getDocument().addUndoableEditListener(undoManager);
+
+        // Invalidate replacement if search or replace strings change.
+        // Otherwise you can accidentally do the wrong thing like:
+        // 1. Search for "foo"
+        // 2. Enter "bar" in replacement field
+        // 3. Hit "Replace all"
+        // => You replaced "foo" with "" because you didn't re-search after
+        // entering "bar"
+        field.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                invalidateReplacement();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                invalidateReplacement();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                invalidateReplacement();
+            }
+
+            private void invalidateReplacement() {
+                form.m_replaceButton.setEnabled(false);
+                form.m_replaceAllButton.setEnabled(false);
+            }
+        });
 
         // Set up undo/redo handling
         KeyStroke undoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Z,

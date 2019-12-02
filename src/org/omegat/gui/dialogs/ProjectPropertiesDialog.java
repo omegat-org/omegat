@@ -403,18 +403,26 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.anchor = GridBagConstraints.WEST;
         optionsBox.add(allowDefaultsCheckBox, gbc);
 
+        // Show multiple translation in the Fuzzy Matches panel
+        final JCheckBox showMultipleTranslationsMatches = new JCheckBox();
+        Mnemonics.setLocalizedText(showMultipleTranslationsMatches, OStrings.getString("PP_SHOW_MULTIPLE_TRANSLATION_MATCHES"));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+        optionsBox.add(showMultipleTranslationsMatches, gbc);
+
         // Remove Tags
         final JCheckBox removeTagsCheckBox = new JCheckBox();
         Mnemonics.setLocalizedText(removeTagsCheckBox, OStrings.getString("PP_REMOVE_TAGS"));
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.WEST;
         optionsBox.add(removeTagsCheckBox, gbc);
 
         // Post-processing
         JLabel externalCommandLabel = new JLabel();
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.anchor = GridBagConstraints.WEST;
         optionsBox.add(externalCommandLabel, gbc);
         final JTextArea externalCommandTextArea = new JTextArea();
@@ -433,7 +441,7 @@ public class ProjectPropertiesDialog extends JDialog {
         final JScrollPane externalCommandScrollPane = new JScrollPane();
         externalCommandScrollPane.setViewportView(externalCommandTextArea);
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.weightx = 1;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.WEST;
@@ -461,7 +469,7 @@ public class ProjectPropertiesDialog extends JDialog {
             bIC.add(insertButton);
             bIC.add(Box.createHorizontalGlue());
             gbc.gridx = 0;
-            gbc.gridy = 5;
+            gbc.gridy = 6;
             gbc.weightx = 1;
             gbc.gridwidth = 2;
             gbc.anchor = GridBagConstraints.WEST;
@@ -589,7 +597,7 @@ public class ProjectPropertiesDialog extends JDialog {
                 doOK(sourceLocaleField, targetLocaleField, sourceTokenizerField, targetTokenizerField,
                         sentenceSegmentingCheckBox, srcRootField, locRootField, glosRootField,
                         writeableGlosField, tmRootField, dictRootField, allowDefaultsCheckBox,
-                        removeTagsCheckBox, externalCommandTextArea);
+                        showMultipleTranslationsMatches, removeTagsCheckBox, externalCommandTextArea);
             }
         });
 
@@ -716,6 +724,7 @@ public class ProjectPropertiesDialog extends JDialog {
         dictRootField.setText(projectProperties.getDictRoot());
         sentenceSegmentingCheckBox.setSelected(projectProperties.isSentenceSegmentingEnabled());
         allowDefaultsCheckBox.setSelected(projectProperties.isSupportDefaultTranslations());
+        showMultipleTranslationsMatches.setSelected(projectProperties.isShowMultipleTranslationsMatches());
         removeTagsCheckBox.setSelected(projectProperties.isRemoveTags());
 
         switch (dialogType) {
@@ -727,6 +736,7 @@ public class ProjectPropertiesDialog extends JDialog {
             targetTokenizerField.setEnabled(false);
             sentenceSegmentingCheckBox.setEnabled(false);
             allowDefaultsCheckBox.setEnabled(false);
+            showMultipleTranslationsMatches.setEnabled(false);
             removeTagsCheckBox.setEnabled(false);
             externalCommandTextArea.setEnabled(false);
             insertButton.setEnabled(false);
@@ -996,8 +1006,8 @@ public class ProjectPropertiesDialog extends JDialog {
             JComboBox<Class<?>> sourceTokenizerField, JComboBox<Class<?>> targetTokenizerField,
             JCheckBox sentenceSegmentingCheckBox, JTextField srcRootField, JTextField locRootField,
             JTextField glosRootField, JTextField writeableGlosField, JTextField tmRootField,
-            JTextField dictRootField, JCheckBox allowDefaultsCheckBox, JCheckBox removeTagsCheckBox,
-            JTextArea customCommandTextArea) {
+            JTextField dictRootField, JCheckBox allowDefaultsCheckBox, JCheckBox showMultipleTranslationMatches, 
+            JCheckBox removeTagsCheckBox, JTextArea customCommandTextArea) {
         if (!Language.verifySingleLangCode(sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
@@ -1031,6 +1041,8 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setSentenceSegmentingEnabled(sentenceSegmentingCheckBox.isSelected());
 
         projectProperties.setSupportDefaultTranslations(allowDefaultsCheckBox.isSelected());
+
+        projectProperties.setShowMultipleTranslationMatches(showMultipleTranslationMatches.isSelected());
 
         projectProperties.setRemoveTags(removeTagsCheckBox.isSelected());
 

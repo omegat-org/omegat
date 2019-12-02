@@ -196,7 +196,9 @@ public class FindMatches {
                 checkStopped(stop);
                 if (!searchExactlyTheSame && source.sourceText.equals(searchText)) {
                     // skip original==original entry comparison
-                    return;
+                    if (!project.getProjectProperties().isShowMultipleTranslationsMatches()) {
+                        return;
+                    }
                 }
                 if (requiresTranslation && trans.translation == null) {
                     return;

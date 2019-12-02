@@ -371,6 +371,14 @@ public class ProjectProperties {
     public void setSupportDefaultTranslations(boolean supportDefaultTranslations) {
         this.supportDefaultTranslations = supportDefaultTranslations;
     }
+    
+    public boolean isShowMultipleTranslationsMatches() {
+        return showMultipleTranslationsMatches;
+    }
+
+    public void setShowMultipleTranslationMatches(boolean showMultipleTranslationsMatches) {
+        this.showMultipleTranslationsMatches = showMultipleTranslationsMatches;
+    }
 
     public boolean isRemoveTags() {
         return removeTags;
@@ -518,6 +526,7 @@ public class ProjectProperties {
 
     private boolean sentenceSegmentingEnabled;
     private boolean supportDefaultTranslations;
+    private boolean showMultipleTranslationsMatches;
     private boolean removeTags;
 
     private SRX projectSRX;

@@ -84,6 +84,9 @@ public final class FilenamePatternsEditorController {
 
         dialog.btnOk.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (dialog.table.getCellEditor() != null){
+                    dialog.table.getCellEditor().stopCellEditing();
+                }
                 result = data;
                 dialog.dispose();
             }

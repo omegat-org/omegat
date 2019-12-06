@@ -554,6 +554,8 @@ public final class Main {
                 } catch (Exception ex) {
                     Log.log(ex);
                 }
+            } else {
+                Log.log(OStrings.getString("SCW_SCRIPT_LOAD_ERROR", "the script is not a file"));
             }
         }
     }

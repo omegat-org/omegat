@@ -234,6 +234,11 @@ public class TMXReader2 {
         currentTu.creationid = getAttributeValue(element, "creationid");
         currentTu.creationdate = parseISO8601date(getAttributeValue(element, "creationdate"));
 
+        String tuid = getAttributeValue(element, "tuid");
+        if (tuid != null) {
+            currentTu.props.add(new TMXProp("tuid", getAttributeValue(element, "tuid")));
+        }
+
         while (true) {
             XMLEvent e = xml.nextEvent();
             switch (e.getEventType()) {

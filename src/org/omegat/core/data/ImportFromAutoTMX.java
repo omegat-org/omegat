@@ -147,7 +147,7 @@ public class ImportFromAutoTMX {
                 hasOtherProp = true;
             }
         }
-        return EntryKey.isIgnoreFileContext() ? hasFileProp && hasOtherProp : hasFileProp;
+        return EntryKey.isIgnoreFileContext() ? hasOtherProp : hasFileProp;
     }
 
     private boolean altTranslationMatches(PrepareTMXEntry entry, EntryKey key) {

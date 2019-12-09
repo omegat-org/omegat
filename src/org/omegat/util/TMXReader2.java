@@ -475,12 +475,12 @@ public class TMXReader2 {
                 } else if ("ept".equals(eStart.getName().getLocalPart())) {
                     inlineTagHandler.startEPT(getAttributeValue(eStart, "i"));
                 } else if ("it".equals(eStart.getName().getLocalPart())) {
-                    inlineTagHandler.startOTHER();
+                    inlineTagHandler.startIT(getAttributeValue(eStart, "x"));
                     inlineTagHandler.setOtherTagShortcutLetter(
                             StringUtil.getFirstLetterLowercase(getAttributeValue(eStart, "type")));
                     inlineTagHandler.setCurrentPos(getAttributeValue(eStart, "pos"));
                 } else if ("ph".equals(eStart.getName().getLocalPart())) {
-                    inlineTagHandler.startOTHER();
+                    inlineTagHandler.startPH(getAttributeValue(eStart, "x"));
                     inlineTagHandler.setOtherTagShortcutLetter(
                             StringUtil.getFirstLetterLowercase(getAttributeValue(eStart, "type")));
                 } else {
@@ -508,23 +508,17 @@ public class TMXReader2 {
                         tagName = inlineTagHandler.getTagShortcutLetter();
                     }
                     tagN = inlineTagHandler.endBPT();
-                    if (tagN != null) {
-                        tagN -= minSeenTag;
-                    }
                 } else if ("ept".equals(eEnd.getName().getLocalPart())) {
                     slashBefore = true;
                     tagName = inlineTagHandler.getTagShortcutLetter();
                     tagN = inlineTagHandler.endEPT();
-                    if (tagN != null) {
-                        tagN -= minSeenTag;
-                    }
                 } else if ("it".equals(eEnd.getName().getLocalPart())) {
                     if (tagName != 0) {
                         inlineTagHandler.setOtherTagShortcutLetter(tagName);
                     } else {
                         tagName = inlineTagHandler.getOtherTagShortcutLetter();
                     }
-                    tagN = inlineTagHandler.endOTHER();
+                    tagN = inlineTagHandler.endIT();
                     if ("end".equals(inlineTagHandler.getCurrentPos())) {
                         slashBefore = true;
                     }
@@ -534,7 +528,7 @@ public class TMXReader2 {
                     } else {
                         tagName = inlineTagHandler.getOtherTagShortcutLetter();
                     }
-                    tagN = inlineTagHandler.endOTHER();
+                    tagN = inlineTagHandler.endPH();
                     if (useSlash) {
                         slashAfter = true;
                     }
@@ -554,6 +548,10 @@ public class TMXReader2 {
                     errorsCount++;
                     segContent.setLength(0);
                     return;
+                }
+
+                if (inlineTagHandler.getIsExternallyMatched()) {
+                    tagN -= minSeenTag;
                 }
 
                 segContent.append('<');

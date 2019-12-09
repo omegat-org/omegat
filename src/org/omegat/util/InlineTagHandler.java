@@ -41,9 +41,11 @@ import org.omegat.filters3.Tag;
 public class InlineTagHandler {
     /** map of 'i' attributes to tag numbers */
     Map<String, Integer> pairTags = new TreeMap<String, Integer>();
+    Map<String, String> pairTagsExternalMatch = new TreeMap<>();
     Map<String, ArrayDeque<Integer>> pairedOtherTags = new TreeMap<String, ArrayDeque<Integer>>();
     Map<String, Integer> shortcutLetters = new TreeMap<String, Integer>();
     String currentI;
+    String currentX;
     String currentPos;
     int tagIndex;
     int otherTagShortcutLetter;
@@ -53,8 +55,10 @@ public class InlineTagHandler {
      */
     public void reset() {
         pairTags.clear();
+        pairTagsExternalMatch.clear();
         pairedOtherTags.clear();
         currentI = null;
+        currentX = null;
         currentPos = null;
         tagIndex = 0;
     }
@@ -71,17 +75,31 @@ public class InlineTagHandler {
             throw new RuntimeException("Wrong index in inline tag");
         }
         currentI = i;
-        int index = tagIndex++;
-        if (x != null) {
-            try {
-                // If a value for the @x attr was provided, base the tag
-                // number off of it for matching purposes.
-                index = Integer.parseInt(x);
-            } catch (Exception ex) {
-                // Ignore
-            }
-        }
-        pairTags.put(currentI, index);
+        currentX = x;
+        pairTags.put(currentI, tagIndex++);
+        pairTagsExternalMatch.put(currentI, x);
+    }
+
+    /**
+     * Handle "it" tag start for TMX. OmegaT internal tag number will be based off the x attr (if provided).
+     *
+     * @param x
+     *            TMX x attribute value (can be null)
+     */
+    public void startIT(String x) {
+        currentX = x;
+    }
+
+    /**
+     * Handle "ph" tag start for TMX. OmegaT internal tag number will be based off the x attr (if provided).
+     *
+     * @param i
+     *            TMX i attribute value
+     * @param x
+     *            TMX x attribute value (can be null)
+     */
+    public void startPH(String x) {
+        currentX = x;
     }
 
     /**
@@ -95,6 +113,7 @@ public class InlineTagHandler {
      */
     public void startBPT(String... attributeValues) {
         currentI = nvl(attributeValues);
+        currentX = null;
         pairTags.put(currentI, tagIndex++);
     }
 
@@ -154,6 +173,7 @@ public class InlineTagHandler {
      */
     public void startOTHER() {
         currentI = null;
+        currentX = null;
     }
 
     /**
@@ -162,7 +182,38 @@ public class InlineTagHandler {
      * @return shortcut index
      */
     public Integer endBPT() {
-        return pairTags.get(currentI);
+        String x = pairTagsExternalMatch.get(currentI);
+        if (x != null) {
+            return Integer.parseInt(x);
+        } else {
+            return pairTags.get(currentI);
+        }
+    }
+
+    private Integer endExternalMatchTag() {
+        if (currentX != null) {
+            return Integer.parseInt(currentX);
+        } else {
+            return endOTHER();
+        }
+    }
+
+    /**
+     * Handle "IT" tag end.
+     *
+     * @return shortcut index
+     */
+    public Integer endIT() {
+        return endExternalMatchTag();
+    }
+
+    /**
+     * Handle "PH" tag end.
+     *
+     * @return shortcut index
+     */
+    public Integer endPH() {
+        return endExternalMatchTag();
     }
 
     /**
@@ -171,7 +222,12 @@ public class InlineTagHandler {
      * @return shortcut index
      */
     public Integer endEPT() {
-        return pairTags.get(currentI);
+        String x = pairTagsExternalMatch.get(currentI);
+        if (x != null) {
+            return Integer.parseInt(x);
+        } else {
+            return pairTags.get(currentI);
+        }
     }
 
     /**
@@ -243,6 +299,13 @@ public class InlineTagHandler {
      */
     public String getCurrentPos() {
         return currentPos;
+    }
+
+    /**
+     * Returns whether the current tag is externally matched (has a TMX "x" attribute)
+     */
+    public boolean getIsExternallyMatched() {
+        return (currentI != null && pairTagsExternalMatch.containsKey(currentI)) || currentX != null;
     }
 
     private String nvl(String... attributeValues) {

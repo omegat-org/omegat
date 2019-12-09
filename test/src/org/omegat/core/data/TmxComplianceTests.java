@@ -41,7 +41,8 @@ import org.omegat.filters2.rc.RcFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
 /**
- * TMX Compliance tests as described on http://www.localization.org/fileadmin/standards/tmx1.4/comp.htm
+ * TMX Compliance tests as described on
+ * https://web.archive.org/web/20071011191836/http://www.lisa.org/standards/tmx/specification.html
  *
  * The Level 1 Compliance verifies mostly TMX structure, white spaces handling
  * and how the application deals with non-ASCII characters and special characters

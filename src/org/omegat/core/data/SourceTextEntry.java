@@ -40,6 +40,7 @@ import java.util.List;
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Briac Pilpre
  */
 public class SourceTextEntry {
 
@@ -211,5 +212,23 @@ public class SourceTextEntry {
 
     public boolean isParagraphStart() {
         return paragraphStart;
+    }
+    
+    public List<String> getSearchableMetadata() {
+        List<String> searchableMetadata = new ArrayList<>();
+
+        SegmentProperties.getPropValuesStream(props).map(value -> searchableMetadata.add(value));
+
+        if (key.id != null) {
+            searchableMetadata.add(key.id);
+        }
+        if (key.path != null) {
+            searchableMetadata.add(key.path);
+        }
+        if (sourceTranslation != null) {
+            searchableMetadata.add(sourceTranslation);
+        }
+
+        return searchableMetadata;
     }
 }

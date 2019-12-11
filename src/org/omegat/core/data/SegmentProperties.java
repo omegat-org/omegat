@@ -28,6 +28,7 @@ package org.omegat.core.data;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Utility methods for working with segment property arrays. These arrays are simple key-value maps, where
@@ -55,6 +56,13 @@ public final class SegmentProperties {
         return isEmpty(props) ? EMPTY_PROPS : Arrays.copyOf(props, props.length);
     }
 
+    public static Stream<String> getPropValuesStream(String[] props) {
+        if (props == null) {
+            return Stream.empty();
+        }
+        return IntStream.range(0, props.length).filter(i -> i % 2 != 0).mapToObj(i -> props[i]);
+    }
+
     public static String joinValues(String[] props) {
         if (props.length == 0) {
             return "";
@@ -64,8 +72,8 @@ public final class SegmentProperties {
         if (props.length == 2) {
             return props[1];
         }
-        return IntStream.range(0, props.length).filter(i -> i % 2 != 0).mapToObj(i -> props[i])
-                .collect(Collectors.joining("\n"));
+
+        return getPropValuesStream(props).collect(Collectors.joining("\n"));
     }
 
     public static boolean isReferenceEntry(String[] props) {

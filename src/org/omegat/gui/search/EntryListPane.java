@@ -284,7 +284,7 @@ class EntryListPane extends JTextPane {
             for (SearchResultEntry e : entries) {
                 addEntry(stringBuf, e.getEntryNum(), e.getPreamble(), e.getSrcPrefix(), e.getSrcText(),
                         e.getTranslation(), e.getNote(), e.getSrcMatch(), e.getTargetMatch(), e.getNoteMatch(),
-                        isReplace);
+                        e.getCommentMatch(), isReplace);
             }
 
             Document doc = getDocument();
@@ -303,12 +303,17 @@ class EntryListPane extends JTextPane {
         // add entry text - remember what its number is and where it ends
         public void addEntry(StringBuilder stringBuf, int num, String preamble, String srcPrefix,
                 String src, String loc, String note, SearchMatch[] srcMatches,
-                SearchMatch[] targetMatches, SearchMatch[] noteMatches, boolean isReplace) {
+                SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] commentMatches, boolean isReplace) {
             if (stringBuf.length() > 0) {
                 stringBuf.append(ENTRY_SEPARATOR);
             }
             if (preamble != null && !preamble.equals("")) {
-                stringBuf.append(preamble + "\n");
+                stringBuf.append(preamble);
+                // Indicate a match was from a comment/property
+                if (commentMatches != null && commentMatches.length > 0) {
+                    stringBuf.append(" *");    
+                }
+                stringBuf.append("\n");
             }
             if (src != null && !src.equals("")) {
                 stringBuf.append("-- ");

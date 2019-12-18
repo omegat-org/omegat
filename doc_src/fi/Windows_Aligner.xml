@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title>Kohdistaja</title>
+
+  <para>Kohdistaminen luo yksikielisistä jo käännetyistä asiakirjoista kaksikielisen käännösmuistin.</para>
+
+  <para>Avaa tämä ikkuna valitsemalla <menuchoice> <guimenuitem>Työkalut</guimenuitem> <guimenuitem>Kohdista tiedostoja…</guimenuitem> </menuchoice></para>
+
+  <section>
+    <title>1. vaihe: Muokkaa kohdistusparametrejä.</title>
+
+    <para>Jos näyttää siltä, että kohdistusta voisi parantaa, yritä muuttaa parametrejä. Useimmissa tapauksissa on niin, että mitä alempi <guilabel>Keskiarvotulos</guilabel> on, sitä parempi kohdistuksen lopputulos on.</para>
+
+    <para><guilabel>Kokonaisuutena</guilabel>-tilassa tekstit arvoidaan kokonaisuutena. <guilabel>Segmentti kerrallaan</guilabel>-tilassa tekstit arvioidaan – segmentti kerrallaan.</para>
+
+    <para><guilabel>ID-vertailu</guilabel>-tilassa saat kohdistettua avain–arvo-tekstipareja. Tämä toimii silloinkin, kun tekstit eivät ole samassa järjestyksessä molemmissa tiedostoissa ja/tai jos tiedostoissa on eri määrä sisältöä. Tämä valinta näkyy vain, jos molemmat tiedostot tunnistetaan avain–arvo-tiedostoiksi.</para>
+
+    <para><guilabel>Viterbi</guilabel>- ja <guilabel>Edestakaisin</guilabel>-algoritmit ovat kaksi eri laskentatapaa. Valitse se, joka antaa parhaimmat tulokset.</para>
+
+    <para>Siirry seuraavaan vaiheeseen napsauttamalla <guibutton>Jatka</guibutton>-painiketta.</para>
+  </section>
+
+  <section>
+    <title>2. vaihe: Tee manuaalisia korjauksia.</title>
+
+    <para>Automaattisen prosessin jälkeen kahta kohdistettavaa tiedostoa on yleensä korjattava käsin.</para>
+
+    <para>Kaksi viimeistä saraketta sisältävät käännösyksikköjä.</para>
+
+    <para>Näin kohdistat kaksi segmenttiä samalle riville:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Valitse ensimmäinen segmentti.</para>
+      </listitem>
+
+      <listitem>
+        <para>Paina välilyöntinäppäintä (komennon <menuchoice> <guimenuitem>Muokkaa</guimenuitem> <guimenuitem>Käynnistä osoittava kohdistus</guimenuitem> </menuchoice> pikanäppäin).</para>
+      </listitem>
+
+      <listitem>
+        <para>Napsauta sitä toisen sarakkeen käännöstä, joka vastaa ensimmäistä segmenttiä.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Kun olet tehnyt näin useamman kerran, valitse <menuchoice> <guimenuitem>Muokkaa</guimenuitem> <guimenuitem>Kohdista odottavat uudelleen</guimenuitem> </menuchoice>, jolloin muiden segmenttien kohdistus päivittyy.</para>
+
+    <para>Voit muuttaa yhden tai useamman segmentin sijaintia valitsemalla se/ne ja painamalla <userinput>U</userinput> (<guilabel>Siirrä ylöspäin</guilabel>)- tai <userinput>D</userinput> (<guilabel>Siirrä alaspäin</guilabel>) -näppäintä.</para>
+
+    <para>Käännösmuistiin viedään vain ne rivit, joiden kohdalla olevassa ensimmäisen sarakkeen <guilabel>Pidä</guilabel>-valintaruudussa on rasti.</para>
+
+    <para>Kun sarakkeet ovat riittävän kohdakkain, napsauta painiketta <guibutton>Tallenna TMX…</guibutton>, jolloin ohjelma luo käännösmuistitiedoston.</para>
+  </section>
+</section>

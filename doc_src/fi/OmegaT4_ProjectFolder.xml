@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="project.folder">
+  <title>Projektikansio</title>
+
+  <para>OmegaT-projekti koostuu kansiosta, jossa on tiedostoja ja alikansioita.</para>
+
+  <section>
+    <title>source</title>
+
+    <para>Käännettävät tiedostot ovat source-alikansiossa. Voit lisätä kansioon tiedostoja myöhemmin. Voit myös muokata source-kansion rakennetta haluamaksesi. Jos käännettävät tiedostot ovat osa puurakennetta (kuten nettisivuilla), sinun täytyy määritellä vain ylimmän tason alikansio. OmegaT pitää koko puurakenteen ja kaiken sisällön toiminnassa.</para>
+  </section>
+
+  <section>
+    <title>target</title>
+
+    <para>Tämä alikansio on aluksi tyhjä. Luo sinne sisältöä painamalla näppäinyhdistelmää <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Projekti</guimenu> <guimenuitem>Luo käännetyt tiedostot</guimenuitem> </menuchoice>. Silloin kaikki <filename>source</filename>-kansiossa olevat tiedostot luodaan tänne, olivatpa ne sitten käännettyjä tai eivät. Toiminto luo target-kansioon myös saman kansiohierarkian kuin source-kansiossa. Target-alikansion sisältö kuvaa käännöstyön senhetkistä tilaa sellaisena, kuin se on projektin käännösmuistissa (tallennettuna tiedostoon <emphasis role="bold">/omegat/project_save.tmx</emphasis>). Siksi segmentit, joita ei vielä ole käännetty, ovat luoduissa tiedostoissa lähdekielisinä.</para>
+  </section>
+
+  <section>
+    <title>tm</title>
+
+    <para>Kansiossa /tm/ voi olla vaikka kuinka monta lisäkäännösmuistia eli TMX-tiedostoa. Käännösmuisteja voidaan luoda yhdellä kolmesta yllä mainitusta tavasta. Huomaa, että muut CAT-työkalut voivat viedä (ja niihin voi tuoda) TMX-tiedostoja, yleensä kaikissa kolmessa muodossa. Parasta on tietysti käyttää erityisesti OmegaT:tä varten olevia TMX-tiedostoja (ks. yllä), jolloin segmentit sisäiset inline-muotoilut säilyvät ennallaan.</para>
+
+    <para>OmegaT etsii (sumeita) käännösosumia alikansiossa tm olevista käännösmuisteista. Mikä tahansa jo käännetty tekstinpätkä, joka on tallennettu TMX-tiedostoon, näkyy sumeiden osumien listalla, kunhan teksti vain vastaa riittävän hyvin käännettävänä olevaa tekstiä.</para>
+
+    <para>Jos jossakin lisäkäännösmuistissa oleva lähdekielinen segmentti on täsmälleen samanlainen kuin käännettävä segmentti, OmegaT toimii kuten valintaikkunassa <menuchoice> <guimenu>Valinnat</guimenu> <guimenuitem>Muokkaustapa…</guimenuitem> </menuchoice>. Esimerkiksi (jos oletuskäytös on valittu) lisäkäännösmuistista tuleva käännös otetaan käyttöön ja merkitään etuliitteellä <emphasis>[fuzzy]</emphasis>, jotta kääntäjä voi myöhemmin tarkastaa käännökset ja tarkistaa, ovatko tällä merkinnällä varustetut käännökset oikein<menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+
+    <para>Voi olla, että <filename>tm</filename>-alikansion käännösmuisteissa on identtisiä lähdekielisiä segmenttejä, joiden käännökset eroavat toisistaan. TMX-tiedostot luetaan niiden nimien mukaisessa järjestyksessä, ja yhden käännösmuistin segmentit luetaan rivi riviltä. Siksi näkyvillä on viimeinen identtisen lähdekielisen segmentin sisältävä käännösmuistiosuma (on tietysti järkevää pitää huolta siitä, että jo lähtökohtaisesti näin ei pääse käymään).</para>
+
+    <para>Huomaa, että tm-kansion TMX-tiedostot voidaan pakata GZIP-muotoon.</para>
+
+    <section>
+      <title>tm/auto</title>
+
+      <para>Jos tiedät jo käännöstyön alussa, että tietyn käännösmuistin (tai tiettyjen käännösmuistien) kaikki käännökset ovat oikein, aseta se/ne <emphasis role="bold">tm/auto</emphasis>-kansioon. Tällöin sinun ei tarvitse vahvistaa monen monta <emphasis>[fuzzy]</emphasis>-osumaa.</para>
+
+      <para><orderedlist>
+          <listitem>
+            <para>Laita TMX-tiedosto kansioon /tm/auto.</para>
+          </listitem>
+
+          <listitem>
+            <para>Avaa projekti. Muutokset tulevat näkyviin.</para>
+          </listitem>
+
+          <listitem>
+            <para>Tee pieni muutos jossakin kohtaa projektia. Tämä muuttaa tiedostoa <filename>project_save.tmx</filename> (lisäämällä siihen oikeita käännösyksikköjä auto-kansion käännösmuistista).</para>
+          </listitem>
+        </orderedlist></para>
+
+      <para>Huom.: Jos käännösmuisti poistetaan /tm/auto-kansiosta ennen kolmosvaihetta, ylimääräistä käännösyksikköä ei lisätä projektin käännösmuistiin.</para>
+    </section>
+
+    <section>
+      <title>tm/enforce</title>
+
+      <para>Jos olet varma siitä, että jokin käännösmuisti on oikeampi kuin OmegaT-ohjelman <filename>project_save.tmx</filename>, laita käännösmuisti kansioon /tm/enforce. Tällöin projektin käännösmuistissa olevat oletuskäännökset korvataan kuin pakotettuina enforce-kansion käännösmuistin osumilla.</para>
+
+      <para><orderedlist>
+          <listitem>
+            <para>Laita TMX-tiedosto kansioon /tm/enforce.</para>
+          </listitem>
+
+          <listitem>
+            <para>Avaa projekti. Muutokset tulevat näkyviin.</para>
+          </listitem>
+
+          <listitem>
+            <para>Tee pieni muutos jossakin kohtaa projektia. Tämä muuttaa tiedostoa <filename>project_save.tmx</filename>.</para>
+          </listitem>
+
+          <listitem>
+            <para>Päätä pakotettujen segmenttien immuniteetista:<itemizedlist>
+                <listitem>
+                  <para>Jos niiden <emphasis>ei tarvi</emphasis> pysyä immuuneina tuleville muutoksille, poista TMX-tiedosto /tm/enforce-kansiosta.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Jos niiden <emphasis>on säilyttävä</emphasis> immuuneina tuleville muutoksilla, pidä TMX-tiedosto /tm/enforce-kansiossa.</para>
+                </listitem>
+              </itemizedlist></para>
+          </listitem>
+        </orderedlist></para>
+
+      <para>Huom.: Jos TMX-tiedosto poistetaan /tm/enforce-kansiosa ennen kolmosvaihetta, pakotetut käännökset eivät tallennu lainkaan.</para>
+    </section>
+
+    <section>
+      <title>tm/mt</title>
+
+      <para>Kun lisäät editoriruutuun <filename>mt</filename>-kansiossa olevasta käännösmuistista löytyneen osuman, aktiivisen segmentin taustaväri muuttuu punaiseksi. Taustaväri muuttuu normaaliksi, kun poistut segmentistä.</para>
+    </section>
+
+    <section>
+      <title>tm/penalty-xxx</title>
+
+      <para>Toisinaan on hyvä erottaa asiasisällön, asiakkaan, tarkastustilan tms. kannalta hyvälaatuiset käännösmuistit vähemmän luotettavista muisteista. Kun käännösmuisti on <filename>penalty-xxx</filename>-kansiossa (xxx on luku väliltä 0–100), siitä löytyneiden osumien prosenttiosuutta pienennetään kansion nimen mukaisesti: Esimerkiksi kansiossa <filename>penalty-30</filename> olevista käännösmuisteista löytynyt sataprosenttinen osuma esitetään vain 70-prosenttisena osumana. Samaa kolmenkymmenen prosenttiyksikön rangaistusta käytetään kaikkiin osumiin: 75-, 80- ja 90-prosenttiset osumat näytetään 45, 50- ja 60-prosenttisina osumina.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>dictionary</title>
+
+    <para>Projektin aluksi tämä kansio on tyhjä. Sijoita projektiin liittämäsi sanakirjat tänne. Lisätietoa aiheesta löydät kohdasta <link linkend="appendix.dictionaries">Sanakirjat</link>.</para>
+  </section>
+
+  <section>
+    <title>glossary</title>
+
+    <para>Tämä kansio on aluksi tyhjä. Projektissa käyttämäsi sanakirjat tulevat sinne. Lisätietoa aiheesta löydät kohdasta <link linkend="appendix.glossaries">Sanastot</link>.</para>
+  </section>
+
+  <section id="folder.omegat">
+    <title>omegat</title>
+
+    <para>Alikansiossa <emphasis role="bold">omegat</emphasis> on vähintään yksi ja mahdollisesti useampia tiedostoja. Tärkein tiedostoista on <filename>project_save.tmx</filename>, projektin sisäinen työkäännösmuisti. Tiedoston varmuuskopioita (tunniste .bak) lisätään tänne sitä mukaa, kun niitä syntyy: käännösistunnon alussa, käännöstyön edistyessä ja aina käännösistunnon lopuksi.</para>
+
+    <para>Käännöstyön aikana tähän alikansioon voi ilmestyä seuraavia tiedostoja:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>stats.txt</term>
+
+        <listitem>
+          <para>sisältää senhetkisen projektin senhetkiset tilastot. Voit tutkailla tiedostoa valitsemalla <guimenuitem>Työkalut &gt; Tilastotiedot</guimenuitem>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>ignored_words.txt.</term>
+
+        <term>learned_words.txt</term>
+
+        <listitem>
+          <para>ovat kielentarkastimen luomia ja käyttämiä tiedostoja. Jos olet jo kerännyt sanoja, jotka haluat kielentarkistimen ohittavan/hyväksyvät, kopioi vastaavat tiedostot projektin <filename>omegat</filename>-alikansioon.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>project_stats_match.txt</term>
+
+        <listitem>
+          <para>sisältää projektin viimeisimmät osumatilastot, jotka on luotu kohdassa <guimenuitem>Työkalut &gt; Osumatilastot</guimenuitem>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>segmentation.conf</term>
+
+        <listitem>
+          <para>Mahdolliset projektikohtaiset segmentointisäännöt löytyvät tästä tiedostosta.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>filters.xml</term>
+
+        <listitem>
+          <para>Mahdolliset projektikohtaiset tiedostosuodattimet löytyvät tästä tiedostosta.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>uiLayout.xml</term>
+
+        <listitem>
+          <para>Mahdolliset projektikohtaiset käyttöliittymäasetukset löytyvät tästä tiedostosta.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>omegat.project (tiedosto)</title>
+
+    <para><link linkend="dialogs.projectproperties">Projektin ominaisuudet</link> -valintaikkunassa määritellyt pojektiasetukset löytyvät tästä tiedostosta.</para>
+  </section>
+
+  <section>
+    <title>.repositories</title>
+
+    <para>Kun työskentelet ryhmäprojektin parissa, tässä kansiossa on projektin puurakenteen kopio, joka on linkitetty suoraan etäpalvelimelle.</para>
+
+    <para>Voit muuttaa etätiedostoja (esim. poistaa tiedoston) käyttämällä tätä kansiota ja Git- tai SVN-asiakasta.</para>
+
+    <para>Joissakin käyttöjärjestelmissä tätä kansiota ei oletusarvoisesti näy. Saat kansion näkyvillä aktivoimalla &quot;Näytä piilotetut kansiot&quot;-valinnan.</para>
+  </section>
+</chapter>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.project">
+  <title>Projekti</title>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Uusi…</guimenuitem></term>
+
+      <listitem>
+        <para>Luo ja avaa uusi projekti.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><guimenuitem>Lataa ryhmäprojekti…</guimenuitem></term>
+
+      <listitem>
+        <para>OmegaT-etäprojektista luodaan paikallinen kopio. Lisää tietoa löydät kohdasta <link linkend="howto.useteamproject">Ryhmäprojektin käyttäminen</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Avaa…</term>
+
+      <listitem>
+        <para>Avaa aiemmin luotu projekti.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Avaa viime projekti</term>
+
+      <listitem>
+        <para>Tässä valinnassa voit avata yhden kymmenestä viime projektista. Jos napsautat niistä yhtä, OmegaT tallentaa ja sulkee nykyisen projektin ja avaa valitsemasi projektin.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Kopioi tiedostoja lähdekansioon…</term>
+
+      <listitem>
+        <para>Valitut tiedostot kopioidaan <filename>source</filename>-kansioon ja projekti ladataan uudelleen, jolloin uudet tiedostot tulevat näkyviin.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Lataa MediaWiki-sivu…</term>
+
+      <listitem>
+        <para>Näin käännät (esimerkiksi) Wikipedia-sivun sisällön:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Napsauta Wikipedia-sivun <guilabel>Muokkaa</guilabel>-välilehteä.</para>
+          </listitem>
+
+          <listitem>
+            <para>Kopioi sivun URL-osoite (jonka päätteenä on <guilabel>action=edit</guilabel>) ja liimaa se <application>OmegaT</application>:hen.</para>
+          </listitem>
+        </orderedlist>
+
+        <para>Kun olet saanut käännöksen valmiiksi, vie se Wikipediaan:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Avaa <filename>/target</filename>-kansioon luotu <filename>.UTF8</filename>-tiedosto.</para>
+          </listitem>
+
+          <listitem>
+            <para>Kopioi tiedoston teksti ja liimaa se Wikipedia-sivun käännettyyn versioon.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Lataa uudelleen</term>
+
+      <listitem>
+        <para>Projekti ladataan uudelleen, jolloin lähdetiedostoihin ja projektin asetuksiin tehdyt muutokset otetaan käyttöön.</para>
+
+        <para>OmegaT ottaa käännöstyön aikana <filename>/tm</filename>-kansioon sijoitetut uudet käännösmuistit käyttöön heti, kun kohdistin siirtyy yhdestä segmentistä toiseen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Sulje</term>
+
+      <listitem>
+        <para>OmegaT tallentaa käännöksen ja sulkee projektin.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Tallenna</term>
+
+      <listitem>
+        <para>Ohjelman sisäinen käännösmuisti tallennetaan tietokoneen kovalevylle. OmegaT tallentaa käännökset automaattisesti 3 minuutin välein sekä silloin, kun suljet projektin tai koko ohjelman.</para>
+
+        <para>Kolmen minuutin väliajan voi muuttaa kohdassa <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Valinnat</guimenuitem> <guimenuitem>Asetukset</guimenuitem> <guimenuitem>Tallentaminen ja tuotos</guimenuitem> </menuchoice></link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vahvista lähdetiedostot</term>
+
+      <listitem>
+        <para>Paikallisesti muokatut tai projektiin lisätyt <filename>source</filename>-kansion tiedostot ladataan etävarastoon.</para>
+
+        <para>Tämä on ryhmäprojekteihin kuuluva erityistoiminto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vahvista kohdetiedostot</term>
+
+      <listitem>
+        <para>Paikallisesti luodut <filename>target</filename>-kansion tiedostot ladataan etävarastoon.</para>
+
+        <para>Tämä on ryhmäprojekteihin kuuluva erityistoiminto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Luo käännetyt tiedostot</term>
+
+      <listitem>
+        <para>OmegaT luo kääntämäsi kohdeasiakirjat. Kohdeasiakirjat löytyvät <filename>target</filename>-kansiosta.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Luo nykyinen käännetty tiedosto</term>
+
+      <listitem>
+        <para>OmegaT luo sillä hetkellä kääntämästäsi asiakirjasta kohdekielisen asiakirjan.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Avaa MED-projekti…</term>
+
+      <listitem>
+        <para>OmegaT avaa Euroopan komission käännöstoimen pääosaston määrittelemän MED-muotoisen projektipaketin.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Luo MED-projekti…</term>
+
+      <listitem>
+        <para>Nykyinen projekti muuntuu MED-paketiksi.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ominaisuudet…</term>
+
+      <listitem>
+        <para>Saat näkyviin <link linkend="dialogs.projectproperties">Projektin ominaisuudet</link> -valintaikkunan, jossa voit muokata projektin kieliä ja alikansioiden sijaintia.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Projektin tiedostot…</term>
+
+      <listitem>
+        <para><link linkend="windows.projectfiles">Projektin tiedostot</link> -ikkuna avautuu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Avaa projektin sisältö</term>
+
+      <listitem>
+        <para>Tässä pääset käsittelemään projektin kansioita.</para>
+
+        <para>Kohdassa on lisäksi alivalintoja, jotka avaavat suoraan senhetkisen lähde- ja kohdeasiakirjan sekä kirjoituskelpoisen sanaston. Asiakirjat avautuvat käyttöjärjestelmän valitsemassa ohjelmassa. Jos asiakirjoja ei ole saatavilla, kohta näkyy harmaana.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Lopeta</term>
+
+      <listitem>
+        <para><application>OmegaT</application> tallentaa projektin, ja ohjelma sulkeutuu. Jos et vielä ollut tallentanut projektia, ohjelma varmistaa erikseen, haluatko todella lopettaa.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

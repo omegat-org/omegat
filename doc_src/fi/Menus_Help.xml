@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.help">
+  <title>Ohjeet</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Käyttäjän käsikirja…</term>
+
+      <listitem>
+        <para>Tämä käsikirja avautuu oletusselaimessa.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Tietoja…</term>
+
+      <listitem>
+        <para>Saat tekijänoikeustiedot, tekijät ja tiedot lisenssistä näkyville.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Viimeksi muutettu…</term>
+
+      <listitem>
+        <para>Näytölle tulee luettelo jokaisen uuden jakelun uusista toiminnoista, parannuksista ja korjatuista bugeista.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Loki…</term>
+
+      <listitem>
+        <para>Nykyinen lokitiedosto tulee näytölle. Valintaikkunan otsikkona on senhetkisen käännettävän tiedoston nimi (joka riippuu siitä, kuinka monta OmegaT-istuntoa on käynnissä yhtä aikaa).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Tarkista päivitykset…</term>
+
+      <listitem>
+        <para>Tarkista, onko <application>OmegaT</application>:stä saatavilla uudempaa versiota.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

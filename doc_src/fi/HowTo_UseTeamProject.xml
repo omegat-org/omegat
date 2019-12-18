@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>Ryhmäprojektin käyttäminen</title>
+
+  <para>OmegaT-ryhmäprojektit on ensi alkuun <link linkend="howto.setupteamproject">määritettävä</link> palvelimella.</para>
+
+  <para>Seuraa projektipäällikön antamia ohjeita, kun käytät ryhmäprojektia ensimmäistä kertaa.</para>
+
+  <para>Kun projekti on avattu, käännöstyö tapahtuu lähes samaan tapaan kuin muissakin projekteissa. Ainoastaan seuraavat kohdat eroavat ryhmäprojekteissa.</para>
+
+  <para><emphasis role="bold">Automaattinen tallennus</emphasis></para>
+
+  <para>Paikallinen projekti synkronoidaan etävaraston kanssa (oletusarvoisesti) kolmen minuutin välein. Näin projektipäällikkö tai muut kääntäjät voivat nähdä ja käyttää tänä aikana käännösmuistiin lisättyjä käännöksiä.</para>
+
+  <para>Kolmen minuutin väliajan voi muuttaa kohdassa <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Valinnat</guimenuitem> <guimenuitem>Asetukset</guimenuitem> <guimenuitem>Tallentaminen ja tuotos</guimenuitem> </menuchoice></link>.</para>
+
+  <para><emphasis role="bold">Synkronoidut tiedostot</emphasis></para>
+
+  <para>Aina kun projekti tallennetaan automaattisesti ja aina kun projekti avataan, suljetaan tai ladataan uudelleen, synkronoitavana on vain kaksi tiedostoa: </para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Kaikki muut tiedostot korvataan etävarastossa olevilla tiedostoilla.</para>
+
+  <para><emphasis role="bold">Uusien lähdetiedostojen lisääminen</emphasis></para>
+
+  <para>Lisää uusi lähdetiedosto näin:</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>Kopioi tiedostot <filename>/source</filename>-kansioon.</para>
+      </listitem>
+
+      <listitem>
+        <para>Valitse <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Lähetä lähdetiedostot</guimenuitem> </menuchoice>.</para>
+      </listitem>
+    </orderedlist>Olemassa olevia lähdetiedostoja voi muokata, mutta muokatut tiedostot on lähetettävä ennen automaattista tallennusta sekä ennen kuin projekti ladataan uudelleen tai suljetaan.</para>
+
+  <para><emphasis role="bold">Lähdetiedostojen poistaminen</emphasis></para>
+
+  <para>Projektipäällikön on ensin poistettava tiedostot etävarastosta, ja tämän jälkeen tiedostot on poistettava paikallisesti.</para>
+
+  <para><emphasis role="bold">Segmentointisääntöjen tai tiedostosuodattimen muuttaminen</emphasis></para>
+
+  <para>Projektiasetuksia voi muuttaa vain projektipäällikkö.</para>
+
+  <para><emphasis role="bold">Työskentely offline-tilassa</emphasis></para>
+
+  <para>Ryhmäprojektin voi avata ja sitä voi kääntää offline-tilassa. Kaikki muutokset synkronoidaan, kun yhteys etävarastoon on seuraavan kerran käytössä.</para>
+
+  <para>Näin työskentelet offline-tilassa:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Laita verkkoyhteys pois päältä ennen kuin avaat projektin</para>
+    </listitem>
+
+    <listitem>
+      <para>tai käytä vaihtoehtoa <command>--no-team</command>, kun avaat projektin komentoriviltä.</para>
+    </listitem>
+  </itemizedlist>
+</section>

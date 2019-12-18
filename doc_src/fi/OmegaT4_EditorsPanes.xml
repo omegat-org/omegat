@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="panes">
+  <title>Ruudut</title>
+
+  <para>OmegaT:n pääikkuna on useita ruutuja, päävalikko ja tilarivi. Napsauttamalla ja vetämällä ruudun nimeä voit vaihtaa kaikkien ruutujen sijaintia ja jopa irrottaa ruudut omiksi ikkunoikseen. Ruudun oikeassa yläkulmassa näkyy erilaisia merkkejä ruudun tilan mukaan.</para>
+
+  <note>
+    <para>Jos et näe kaikkia (avattuja tai kutistettuja) ruutuja, valitse valikon kohta <guisubmenu>Valinnat &gt; Palauta pääikkuna</guisubmenu>. Tällöin ruudut palautuvat asennuksen aikana määriteltyyn tilaan.</para>
+  </note>
+
+  <table>
+    <title>Ruutujen vimpaimet</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <tbody>
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Minimize.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Minimize.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>pienentää ruudun niin, että ainoastaan sen nimi näkyy ikkunan alaosassa</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Maximize.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Maximize.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>suurentaa ruudun suurimpaan kokoonsa</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Restore.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Restore.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>palauttaa ruudun samankokoiseksi kuin ennen suurennusta</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Undock.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Undock.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>irrottaa ruudun pääikkunasta</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Dock.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Dock.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>asettaa ruudun takaisin pääikkunan osaksi.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>Käyttäjä voi pinota ruudut eri välilehdille. Tällöin välilehtipalkki näkyy ruudun yläosassa. Voit muuttaa ruutujen kokoa vetämällä ruutujen välistä erotinta. Kun haluat palata takaisin pääikkunan alkuperäiseen asetteluun, valitse <guimenuitem> Valinnat → Palauta pääikkuna</guimenuitem>. Voit käyttää sitä milloin tahansa.</para>
+
+  <para>Voit vetää ja pudottaa tiedostoja mihin tahansa ikkunaan, ja ikkuna reagoi sen mukaisesti.<itemizedlist>
+      <listitem>
+        <para>Kun pudotat editoriruutuun OmegaT-projektitiedoston (<filename>omegat.project</filename>), ohjelma avaa sen tallennettuaan ja suljettuaan ensin avattuna olleen projektin. Muut ruutuun pudotetut tiedostot kopioidaan avattuna olevan projektin <filename>source</filename>-kansioon. <link linkend="windows.projectfiles">Projektin tiedostot</link> toimii samalla tavoin.</para>
+      </listitem>
+
+      <listitem>
+        <para>Sumeiden osumien ruutuun pudotettu <filename>.tmx</filename>-tiedosto kopioidaan avattuna olevan projektin <filename>tm</filename>-kansioon</para>
+      </listitem>
+
+      <listitem>
+        <para>Kun sanastoruutuun pudotetaan sanastotiedosto (tiedostopäätteenä <filename>.txt</filename>, <filename>.tab</filename> tms.), se kopioidaan avattuna olevan projektin <filename>glossary</filename>-kansioon.</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section id="editor.pane">
+    <title>Editori</title>
+
+    <para>Käännös kirjoitetaan ja sitä muokataan tässä ruudussa. Editoriruutu näyttää asiakirjan tekstin osittain käännettynä: kääntämättä oleva teksti on lähdekielellä ja jo käännetty teksti kohdekielellä. Ruudulla oleva teksti on jaettu segmentteihin. Voit selata koko tekstiä ruudulla, ja voit avata minkä tahansa segmentin kaksoisnapsauttamalla, niin pääset muokkaamaan käännöstä. Yllä olevassa kuvassa jo käännetyt segmentit näkyvät keltaisella pohjalla.</para>
+
+    <para>Eräs kuvan segmenteistä on senhetkinen segmentti. Segmentti näkyy kahtena osana. Vihreällä pohjalla oleva lihavoitu teksti on lähdekielinen segmentti, ja alempi osa on muokkauskenttä, joka päättyy loppumerkkiin <literal>&lt;segment nnnn&gt;</literal>. Merkin numero nnnn on segmentin numero. Kirjoita segmentin yläosan lähdetekstiä vastaava käännöksesi muokkauskentään.</para>
+
+    <para>Huom.: Segmentin loppumerkki <literal>&lt;segment nnnn + yymore&gt; tarkoittaa, että segmentti on toistuva. Merkinnän yy osoittaa, kuinka monta muuta kertaa segmentti esiintyy projektissa.</literal></para>
+
+    <para>Kääntämättömän segmentin muokkauskenttä voi halutusta käännös- ja muokkaustavasta riippuen olla tyhjä, siinä voi olla lähdekielinen teksti tai käännettävää tekstiä lähinnä oleva käännös. Kun siirryt seuraavaan segmenttiin, käännös vahvistetaan ja tallennetaan käännösmuistiin. Jos haluat, että käännös on sama kuin lähdeteksti, poista muokkauskentän teksti (valitse koko teksti näppäinyhdistelmällä <keycap>Ctrl+A</keycap> ja poista se <keycap>Del</keycap>-näppäimellä). OmegaT pystyy tallentamaan käännössegmenttejä, jotka ovat samoja kuin lähdeteksti. Toiminto on hyödyllinen silloin, kun asiakirjoissa on paljon esimerkiksi henkilöiden nimiä, tuotenimiä, tai kolmannella kielellä olevia osia, joita ei tarvitse kääntää. Lisää tietoa löydät kohdasta <emphasis>Käännöksen muokkaaminen</emphasis>.</para>
+
+    <para>Kun napsautat editoriruutua hiiren kakkospainikkeella, näytölle avautuu ponnahdusvalikko, jossa on toiminnot <emphasis role="bold">Leikkaa, Kopioi, Liitä</emphasis> (siis samat toiminnot kuin näppäinyhdistelmillä <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> ja <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>), <emphasis role="bold">Mene segmenttiin</emphasis> sekä <emphasis role="bold">Lisää sanaston termi</emphasis>. Lisää sanaston termiJos napsautat kakkospainikkeella avoimen segmentin kohdalla, ponnahdusvalikossa on lisäksi<emphasis role="bold">vaihtoehtoisten käännösten</emphasis> valintoja: voit esimerkiksi siirtyä seuraavaan toistuvaan segmenttiin.</para>
+
+    <para>Voit valita tekstiä missä tahansa pääikkunan osassa ja vetää ja pudottaa sen käännettävänä olevaan segmenttiin. Kohdesegmentin ulkopuolelta tuleva teksti kopioidaan segmenttiin, ja segmentin sisällä oleva teksti siirretään uuteen paikkaansa.</para>
+
+    <para>Oletusasetuksena on, että lähdesegmentin tekstiä ei voi valita näppäinkomennoilla, vaan teksti on valittavaa hiirellä. Paina <keycap>F2</keycap>-näppäintä, niin saat liikutettua kohdistinta nuolinäppäimillä minne tahansa editoriruudussa. Tämä tila näkyy ruudun alareunassa UNL-merkkinä. Kun viet hiiren kohdistimen merkin päälle, näet tekstin <guilabel>Kursori vapaana</guilabel>. Pääset takaisin <guilabel>Kursori lukittu</guilabel> -oletustilaan painamalla <keycap>F2</keycap>-näppäintä uudelleen.</para>
+  </section>
+
+  <section>
+    <title>Sumeat osumat</title>
+
+    <para>Käännösmuisteista löytyvät samankaltaiset segmentit näkyvät osumaruudulla. OmegaT etsii osumia niin projektin omasta käännösmuistista, joka täyttyy sitä mukaa kun käännät, tai muista käännösmuisteista, joita olet tuonut projektiin. Lisäkäännösmuistit voivat olla peräisin aiemmista käännösprojekteistasi, asiakkaaltasi tai käännöstoimistolta.</para>
+
+    <para>Kun siirryt seuravaan segmenttiin, OmegaT valitsee automaattisesti osumaruudun ensimmäisen (siis prosentuaalisesti parhaiten vastaavan) sumean osuman. Voit valita jonkin toisen sumean osuman näppäinyhdistelmällä <guimenuitem>Ctrl+2, 3, 4 tai 5</guimenuitem>. Näppäinyhdistelmä <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> ei tietenkään johda mihinkään, jos viidettä osumaa ei ole. Näppäinyhdistelmä <guimenuitem>Ctrl+R</guimenuitem> korvaa kaiken kohdekentän tekstin valitulla osumalla, ja <guimenuitem>Ctrl+I</guimenuitem> lisää osuman kohdistimen kohdalle.</para>
+
+    <para>Osuman prosentuaalinen vastaavuus on suurin piirtein sama kuin käännettävän segmentin ja osumesegmentin yhteisten sanojen lukumäärä jaettuna näistä pidemmän segmentin sanamäärällä. Valitun sumean osuman teksti on lihavoitu, sanat, joita ei ole käännettävässä segmentissä, ovat vihreitä, ja puuttuvien osien vieressä olevat sanat ovat vihreitä. Äskeisessä esimerkissä lähdesegmentti on <emphasis role="bold">Context menu command</emphasis>. Ylin osuma on sataprosenttinen, sillä kaikki osuman sanat vastaavat käännettävänä olevan segmentin sanoja. Myös kaksi seuraavaa osumaa ovat sataprosenttisia, ja osuma nr 4 on samankaltainen, mutta erilainen. Samalla rivillä, jossa on osumaprosentti, on myös osuman sisältävän käännösmuistin nimi. Jos käännösmuistin nimeä ei näy, osuma on peräisin projektin sisäisestä käännösmuistista. Orposegmentit (osuma nro 2) ovat projektin sisäisessä käännösmuistissa olevia segmenttejä, joilla ei ole vastaavaa lähdekielistä segmenttiä.</para>
+  </section>
+
+  <section>
+    <title>Sanasto</title>
+
+    <para>Sanastoruudussa näet sanoja ja erikoistermejä, joita olet koonnut omiin sanastotiedostoihisi. Ruudulla näkyy senhetkisestä lähdesegmentistä löytyvien termien käännöksiä. Esimerkissä käytetty lähdekielinen segmentti oli sama <emphasis>Context menu command</emphasis> kuin sumeiden osumien esimerkissä, ja näytetyt termit löytyivät sanastoista (Microsoftin termikokoelma ja sloveniankielinen Linux User group -sanasto).</para>
+
+    <para>Jos olet ottanut TransTipsin käyttöön (<guimenuitem>Valinnat → TransTips</guimenuitem>), napsauta lähdesegmentin lihavoitua sanaa hiiren kakkospainikkeella, niin saat näkyviin ponnahdusvalikon sanaston tarjoamine käännösehdotuksineen. Se, jonka valitset, lisätään kursorin kohdalle kohdesegmenttiin. Voit myös valita sanastoruudussa haluamasi käännösvaihtoehdon ja lisätä sen kohdesegmenttiin napsauttamalla valintaa hiiren kakkospainikkeella.</para>
+  </section>
+
+  <section>
+    <title>Sanakirja</title>
+
+    <para>OmegaT:n käyttämät elektroniset sanakirjat vastaavat painettuja Merriam Webster-, Duden-, Larousse- tms. sanakirjoja. Lisää tietoa niistä löydät kappaleesta <link linkend="appendix.dictionaries">Sanakirjat</link>.</para>
+  </section>
+
+  <section>
+    <title>Konekäännös</title>
+
+    <para>Konekäännösruutu näyttää sinulle senhetkisen segmentin konekäännöksen. Näppäinyhdistelmä <keysym>Ctrl+M</keysym> korvaa segmentin senhetkisen käännöksen konekäännösehdotuksella.</para>
+  </section>
+
+  <section>
+    <title>Useita käännöksiä</title>
+
+    <para>Tietty lähdesegmentti voi vaatia kontekstista riippuen useita erilaisia käännöksiä. Jos segmentin senhetkinen käännös ei sovi, valitse <guisubmenu>Muokkaa → Luo vaihtoehtoinen käännös</guisubmenu>. Tämän jälkeen kirjoittamastasi tekstistä tulee lähdesegmentin vaihtoehtoinen käännös. Voit määritellä yhden vaihtoehdon – esimerkiksi todennäköisimmän – käännöksen – oletuskäännökseksi valitsemalla <guisubmenu>Muokkaa → Käytä vaihtoehtoisena käännöksenä</guisubmenu>.</para>
+  </section>
+
+  <section>
+    <title>Muistiinpanot</title>
+
+    <para>Voit lisätä avattuun segmenttiin muistiinpanoja, esimerkiksi merkinnän siitä, että segmentti on käännettävä uudelleen tai että on kysyttävä lisätietoja asiantuntijoilta. Voit selata muistiinpanoja valitsemalla <guisubmenu>Mene → Seuraavaan muistiinpanoon</guisubmenu> ja <guisubmenu>Mene → Edelliseen muistiinpanoon</guisubmenu>.</para>
+  </section>
+
+  <section>
+    <title>Kommentit</title>
+
+    <para>Joihinkin erityisesti käännöstyötä varten oleviin tiedostomuotoihin (esim. PO) voi lisätä kommentteja. Näin kääntäjälle voidaan antaa lisätietoa käännettävän segmentin kontekstista. Alla olevassa esimerkissä PO-tiedoston luoja sisällytti tiedostoon huomautuksen kääntäjälle, että tämän on tarkistettava käännöksen pituus:</para>
+  </section>
+
+  <section>
+    <title>Tilarivi</title>
+
+    <para>Pääikkunan alareunassa olevalla tilarivillä on käännöstyön kulkuun liittyviä viestejä. Tilarivi näyttää käyttäjälle tietoa tietyistä käynnissä olevista toimenpiteistä. Rivillä näkyy myös senhetkisen segmentin sumeiden osumien ja sanasto-osumien määrä.</para>
+
+    <para>Oikeassa alanurkassa olevat laskurit näyttävät käännöksen edistymisen (vasemman sarakkeen numerot viittaavat tilarivin numeroihin):</para>
+
+    <table>
+      <title>Pääikkunan laskurit</title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>tiedoston käännettyjen segmenttien määrä / tiedoston kaikkien segmenttien määrä</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>uniikkien segmenttien määrä / projektin kaikkien segmenttien määrä</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>projektin segmenttien kokonaismäärä (sis. toistot)</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>lähde- ja kohdesegmentin merkkimäärät</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Käytännössä tärkein näistä numerosarjoista on toinen numeropari. Se kertoo, kuinka paljon olet siihen mennessä kääntänyt ja kuinka paljon käännettävää on yhteensä. On selvää, että esimerkin projekti on valmistunut, sillä kaikki uniikit segmentit on käännetty.</para>
+  </section>
+</chapter>

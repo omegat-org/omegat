@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Siirry</title>
+
+  <para>Tämän valikon kohdat näkyvät vain silloin, kun projekti on avoinna.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Seuraavaan kääntämättömään segmenttiin</term>
+
+      <listitem>
+        <para>Kohdistin siirtyy seuraavaan segmenttiin, jolle käännösmuistista ei löydy käännöstä.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Seuraavaan käännettyyn segmenttiin</term>
+
+      <listitem>
+        <para>Kohdistin siirtyy seuraavaan jo käännettyyn segmenttiin, kääntämättömiä segmenttejä ei huomioida.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Seuraavaan segmenttiin</term>
+
+      <listitem>
+        <para>Kohdistin siirtyy seuraavaan segmenttiin. Jos senhetkinen segmentti on tiedoston viimeinen segmentti, kohdistin siirtyy seuraavan tiedoston ensimmäiseen segmenttiin.</para>
+
+        <para>Huom.: Mikäli vaihtoehtoa <link linkend="dialogs.preferences.general.usetabtoadvance">Siirry eteenpäin sarkainnäppäimellä</link> ei ole valittu, pikanäppäimenä toimii <keycap>Enter</keycap>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Edelliseen segmenttiin</term>
+
+      <listitem>
+        <para>Kohdistin siirtyy edelliseen segmenttiin. Jos senhetkinen segmentti on tiedoston ensimmäinen, kohdistin siirtyy edellisen tiedoston viimeiseen segmenttiin.</para>
+
+        <para>Huom.: Mikäli vaihtoehtoa <link linkend="dialogs.preferences.general.usetabtoadvance">Siirry eteenpäin sarkainnäppäimellä</link> ei ole valittu, pikanäppäimenä toimii <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmenttiin nro…</term>
+
+      <listitem>
+        <para>Segmentti avautuu joko sitä kutsuttaessa tai kun sen numero kirjoitetaan.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Seuraavaan muistiinpanoon</term>
+
+      <listitem>
+        <para>Seuraava segmentti, jossa on muistiinpano, avautuu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Edelliseen muistiinpanoon</term>
+
+      <listitem>
+        <para>Edellinen segmentti, jossa on muistiinpano, avautuu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Valitun osuman lähteeseen</term>
+
+      <listitem>
+        <para>Kohdistin siirtyy segmenttiin, jonka teksti vastaa <guilabel>Sumeat osumat</guilabel> -ruudussa valittua tekstiä.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Siirry historiassa eteenpäin…</term>
+
+      <listitem>
+        <para><application>OmegaT</application> muistaa, mitä segmenttejä on käsitelty. Valitse tämä, niin pääset segmenttiin, josta poistuit <guimenuitem>Siirry historiassa taaksepäin…</guimenuitem> -komennolla.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Siirry historiassa taaksepäin…</term>
+
+      <listitem>
+        <para>Valitse tämä, niin voit liikkua taaksepäin käännöshistoriassa segmentti kerrallaan. Voit sitten palata tämänhetkiseen segmenttiin valitsemalla <guimenuitem>Siirry historiassa eteenpäin…</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

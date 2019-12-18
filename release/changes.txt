@@ -18,7 +18,7 @@
   Localisation Updates:
 
   - Finnish localisation added at 5.2.0 (UI, Instant Start, scripts, readme, documentation)
-  - Turkmen localisation updated to 5.2.0 (UI)
+  - Turkmen localisation added at 5.2.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 5.1.0 (2019-11-04)

@@ -5,7 +5,7 @@
 
  Copyright (C) 2014 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -84,6 +84,9 @@ public final class FilenamePatternsEditorController {
 
         dialog.btnOk.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (dialog.table.getCellEditor() != null){
+                    dialog.table.getCellEditor().stopCellEditing();
+                }
                 result = data;
                 dialog.dispose();
             }

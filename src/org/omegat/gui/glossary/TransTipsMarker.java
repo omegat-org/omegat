@@ -5,7 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -50,6 +50,8 @@ public class TransTipsMarker implements IMarker {
     protected static final HighlightPainter TRANSTIPS_UNDERLINER = new UnderlineFactory.SolidBoldUnderliner(
             Styles.EditorColor.COLOR_TRANSTIPS.getColor());
 
+    private final DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer();
+
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
             boolean isActive) {
@@ -67,7 +69,7 @@ public class TransTipsMarker implements IMarker {
         List<Mark> marks = new ArrayList<Mark>();
 
         for (GlossaryEntry ent : glossaryEntries) {
-            String tooltip = ent.toStyledString().toHTML();
+            String tooltip = renderer.renderToHtml(ent);
             List<Token[]> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);
             marks.addAll(getMarksForTokens(tokens, ste.getSrcText(), tooltip));
         }

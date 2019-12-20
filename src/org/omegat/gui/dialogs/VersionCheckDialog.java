@@ -5,7 +5,7 @@
 
  Copyright (C) 2017 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -27,7 +27,6 @@ package org.omegat.gui.dialogs;
 
 import java.awt.Desktop;
 import java.awt.Window;
-import java.io.IOException;
 import java.net.URI;
 
 import javax.swing.JDialog;
@@ -94,7 +93,7 @@ public class VersionCheckDialog {
             try {
                 Desktop.getDesktop().browse(URI.create(DOWNLOAD_URL));
                 StaticUIUtils.closeWindowByEvent(dialog);
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 Log.log(ex);
                 JOptionPane.showMessageDialog(parent, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
                         JOptionPane.ERROR_MESSAGE);

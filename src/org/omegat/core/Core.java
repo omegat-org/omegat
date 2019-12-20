@@ -6,7 +6,7 @@
  Copyright (C) 2008 Alex Buloichik
                2010 Wildrich Fourie
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -359,26 +359,39 @@ public final class Core {
     /**
      * Use this to perform operations that must not be run concurrently.
      * <p>
-     * For instance project load/save/compile/autosave operations must not be executed in parallel because it
-     * will break project files, especially during team synchronization. For guaranteed non-parallel
-     * execution, all such operations must be executed via this method.
+     * For instance project load/save/compile/autosave operations must not be executed in parallel because it will break
+     * project files, especially during team synchronization. For guaranteed non-parallel execution, all such operations
+     * must be executed via this method.
      *
      * @param waitForUnlock
      *            should execution wait for unlock 3 minutes
      * @param run
      *            code for execute
-     * @throws InterruptedException,
-     *             TimeoutException
+     * @throws Exception
      */
-    public static void executeExclusively(boolean waitForUnlock, Runnable run)
-            throws InterruptedException, TimeoutException {
+    public static void executeExclusively(boolean waitForUnlock, RunnableWithException run)
+            throws Exception {
         if (!EXCLUSIVE_RUN_LOCK.tryLock(waitForUnlock ? 180000 : 1, TimeUnit.MILLISECONDS)) {
-            throw new TimeoutException();
+            Exception ex = new TimeoutException("Timeout waiting for previous exclusive execution");
+            Exception cause = new Exception("Previous exclusive execution");
+            if (runningStackTrace != null) {
+                cause.setStackTrace(runningStackTrace);
+                ex.initCause(cause);
+            }
+            throw ex;
         }
         try {
+            runningStackTrace = new Exception().getStackTrace();
             run.run();
         } finally {
+            runningStackTrace = null;
             EXCLUSIVE_RUN_LOCK.unlock();
         }
+    }
+
+    private static StackTraceElement[] runningStackTrace;
+
+    public interface RunnableWithException {
+        void run() throws Exception;
     }
 }

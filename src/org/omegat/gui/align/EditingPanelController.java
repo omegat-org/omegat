@@ -5,7 +5,7 @@
 
  Copyright (C) 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -27,7 +27,6 @@ package org.omegat.gui.align;
 
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,6 +38,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 
+import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -104,7 +104,7 @@ public class EditingPanelController {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER
-                        && ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0)) {
+                        && ((e.getModifiersEx() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0)) {
                     panel.okButton.doClick();
                 }
             }

@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2013 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -28,7 +28,6 @@ package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -127,66 +126,6 @@ public class GlossaryEntry {
         return Stream.of(mOrigins).distinct().toArray(String[]::new);
     }
 
-    public StyledString toStyledString() {
-        StyledString result = new StyledString();
-
-        result.text.append(mSource);
-        result.text.append(" = ");
-
-        StringBuilder comments = new StringBuilder();
-
-        int commentIndex = 0;
-        for (int i = 0; i < mTargets.length; i++) {
-            if (i > 0 && mTargets[i].equals(mTargets[i - 1])) {
-                if (!mComments[i].equals("")) {
-                    comments.append("\n");
-                    comments.append(commentIndex);
-                    comments.append(". ");
-                    comments.append(mComments[i]);
-                }
-                continue;
-            }
-            if (i > 0) {
-                result.text.append(", ");
-            }
-            if (mPriorities[i]) {
-                result.markBoldStart();
-            }
-            result.text.append(bracketEntry(mTargets[i]));
-            if (mPriorities[i]) {
-                result.markBoldEnd();
-            }
-            commentIndex++;
-            if (!mComments[i].equals("")) {
-                comments.append("\n");
-                comments.append(commentIndex);
-                comments.append(". ");
-                comments.append(mComments[i]);
-            }
-        }
-
-        result.text.append(comments);
-
-        return result;
-    }
-
-    /**
-     * If a combined glossary entry contains ',', it needs to be bracketed by
-     * quotes, to prevent confusion when entries are combined. However, if the
-     * entry contains ';' or '"', it will automatically be bracketed by quotes.
-     *
-     * @param entry
-     *            A glossary text entry
-     * @return A glossary text entry possibly bracketed by quotes
-     */
-    private String bracketEntry(String entry) {
-
-        if (entry.contains(",") && !(entry.contains(";") || entry.contains("\""))) {
-            entry = '"' + entry + '"';
-        }
-        return entry;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -209,44 +148,6 @@ public class GlossaryEntry {
         hash = hash * 31 + (mTargets == null ? 0 : Arrays.hashCode(mTargets));
         hash = hash * 13 + (mComments == null ? 0 : Arrays.hashCode(mComments));
         return hash;
-    }
-
-    static class StyledString {
-        public StringBuilder text = new StringBuilder();
-        public List<Integer> boldStarts = new ArrayList<Integer>();
-        public List<Integer> boldLengths = new ArrayList<Integer>();
-
-        void markBoldStart() {
-            boldStarts.add(text.length());
-        }
-
-        void markBoldEnd() {
-            int start = boldStarts.get(boldStarts.size() - 1);
-            boldLengths.add(text.length() - start);
-        }
-
-        public void append(StyledString str) {
-            int off = text.length();
-            text.append(str.text);
-            for (int s : str.boldStarts) {
-                boldStarts.add(off + s);
-            }
-            boldLengths.addAll(str.boldLengths);
-        }
-
-        public void append(String str) {
-            text.append(str);
-        }
-
-        public String toHTML() {
-            StringBuilder sb = new StringBuilder(text);
-            for (int i = boldStarts.size() - 1; i >= 0; i--) {
-                sb.insert(boldStarts.get(i) + boldLengths.get(i), "</b>");
-                sb.insert(boldStarts.get(i), "<b>");
-            }
-            sb.insert(0, "<html><p>").append("</p></html>");
-            return sb.toString().replaceAll("\n", "<br>");
-        }
     }
 
     private void normalize(String[] strs) {

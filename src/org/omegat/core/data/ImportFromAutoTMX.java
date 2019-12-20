@@ -4,8 +4,9 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2014 Alex Buloichik, Didier Briel
+               2019 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -76,6 +77,10 @@ public class ImportFromAutoTMX {
                 boolean hasICE = id != null && e.hasPropValue(ProjectTMX.PROP_XICE, id);
                 boolean has100PC = id != null && e.hasPropValue(ProjectTMX.PROP_X100PC, id);
 
+                if (e.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
+                    // Never automatically include matches from foreign languages.
+                    continue;
+                }
                 if (!hasICE && !has100PC) { // TMXEntry without x-ids
                     boolean isDefaultTranslation = !isAltTranslation(e);
                     if (!existTranslation.defaultTranslation && isDefaultTranslation) {
@@ -86,10 +91,11 @@ public class ImportFromAutoTMX {
                         // TMX entry is an alternative translation that does not match this STE.
                         continue;
                     }
-                    if (existTranslation.isTranslated()) { // default translation already exist
+                    if (isEnforcedTMX) {
+                        setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xENFORCED);
+                    } else if (existTranslation.isTranslated()) { // default translation already exist
                         if (existTranslation.linked == TMXEntry.ExternalLinked.xAUTO
-                                && !Objects.equals(existTranslation.translation, e.translation)
-                                || isEnforcedTMX) {
+                                && !Objects.equals(existTranslation.translation, e.translation)) {
                             // translation already from auto and really changed or translation comes
                             // from the enforce folder
                             setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
@@ -135,13 +141,14 @@ public class ImportFromAutoTMX {
             if (p.getType().equals(ProjectTMX.PROP_FILE)) {
                 hasFileProp = true;
             } else if (p.getType().equals(ProjectTMX.PROP_ID)
+                    || p.getType().equals(ProjectTMX.ATTR_TUID)
                     || p.getType().equals(ProjectTMX.PROP_NEXT)
                     || p.getType().equals(ProjectTMX.PROP_PATH)
                     || p.getType().equals(ProjectTMX.PROP_PREV)) {
                 hasOtherProp = true;
             }
         }
-        return EntryKey.isIgnoreFileContext() ? hasFileProp && hasOtherProp : hasFileProp;
+        return EntryKey.isIgnoreFileContext() ? hasOtherProp : hasFileProp;
     }
 
     private boolean altTranslationMatches(PrepareTMXEntry entry, EntryKey key) {
@@ -153,6 +160,9 @@ public class ImportFromAutoTMX {
             if (ProjectTMX.PROP_FILE.equals(p.getType())) {
                 file = p.getValue();
             } else if (ProjectTMX.PROP_ID.equals(p.getType())) {
+                id = p.getValue();
+            } else if (ProjectTMX.ATTR_TUID.equals(p.getType()) && id == null) {
+                // Use @tuid as fallback when id prop is not available
                 id = p.getValue();
             } else if (ProjectTMX.PROP_NEXT.equals(p.getType())) {
                 next = p.getValue();

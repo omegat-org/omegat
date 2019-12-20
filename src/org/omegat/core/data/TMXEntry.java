@@ -8,7 +8,7 @@
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -45,7 +45,7 @@ import java.util.Objects;
 public class TMXEntry {
     public enum ExternalLinked {
         // declares how this entry linked to external TMX in the tm/auto/
-        xICE, x100PC, xAUTO
+        xICE, x100PC, xAUTO, xENFORCED
     };
 
     public final String source;

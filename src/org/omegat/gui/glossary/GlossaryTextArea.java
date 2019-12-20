@@ -11,7 +11,7 @@
                2013 Aaron Madlon-Kay, Alex Buloichik
                2015 Yu Tang, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -39,6 +39,7 @@ import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -54,7 +55,11 @@ import java.util.Locale;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.ToolTipManager;
 import javax.swing.text.AttributeSet;
+import javax.swing.text.Caret;
+import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.StyledDocument;
 
@@ -67,6 +72,8 @@ import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -77,7 +84,7 @@ import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.StaticUIUtils;
-import org.omegat.util.gui.Styles;
+import org.omegat.util.gui.TooltipAttribute;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -97,9 +104,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
     private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
 
-    private static final AttributeSet NO_ATTRIBUTES = Styles.createAttributeSet(null, null, false, null);
-    private static final AttributeSet PRIORITY_ATTRIBUTES = Styles.createAttributeSet(null, null, true, null);
-
     /**
      * Currently processed entry. Used to detect if user moved into new entry. In this case, new find should
      * be started.
@@ -114,6 +118,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     private CreateGlossaryEntry createGlossaryEntryDialog;
 
     private final DockableScrollPane scrollPane;
+
+    private transient final IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer();
 
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea(IMainWindow mw) {
@@ -159,6 +165,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                 }
             });
         }
+
+        ToolTipManager.sharedInstance().registerComponent(this);
 
         JTextPaneLinkifier.linkify(this);
     }
@@ -222,18 +230,21 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
 
-        GlossaryEntry.StyledString buf = new GlossaryEntry.StyledString();
         for (GlossaryEntry entry : entries) {
-            GlossaryEntry.StyledString str = entry.toStyledString();
-            buf.append(str);
-            buf.append("\n\n");
+            entryRenderer.render(entry, getStyledDocument());
         }
-        setText(buf.text.toString());
+    }
+
+    @Override
+    public String getToolTipText(MouseEvent event) {
         StyledDocument doc = getStyledDocument();
-        doc.setCharacterAttributes(0, doc.getLength(), NO_ATTRIBUTES, true); // remove old bold settings first
-        for (int i = 0; i < buf.boldStarts.size(); i++) {
-            doc.setCharacterAttributes(buf.boldStarts.get(i), buf.boldLengths.get(i), PRIORITY_ATTRIBUTES,
-                    true);
+        Element elem = doc.getCharacterElement(Java8Compat.viewToModel(this, event.getPoint()));
+        AttributeSet as = elem.getAttributes();
+        Object attr = as.getAttribute(TooltipAttribute.ATTRIBUTE_KEY);
+        if (attr instanceof TooltipAttribute) {
+            return ((TooltipAttribute) attr).getPayload();
+        } else {
+            return super.getToolTipText(event);
         }
     }
 
@@ -294,6 +305,20 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                 showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
             }
         });
+    }
+
+    @Override
+    protected void processKeyEvent(KeyEvent e) {
+        KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
+        if (s.equals(PropertiesShortcuts.getEditorShortcuts().getKeyStroke("editorContextMenu"))) {
+            JPopupMenu popup = new JPopupMenu();
+            populateContextMenu(popup);
+            Caret caret = getCaret();
+            Point p = caret == null ? getMousePosition() : caret.getMagicCaretPosition();
+            popup.show(this, (int) p.getX(), (int) p.getY());
+            e.consume();
+        }
+        super.processKeyEvent(e);
     }
 
     @Override
@@ -404,4 +429,5 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         });
         menu.add(notify);
     }
+
 }

@@ -5,7 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -118,7 +118,7 @@ public class FilterContext {
 
     public ITokenizer getSourceTokenizer() {
         try {
-            return (ITokenizer) sourceTokenizerClass.newInstance();
+            return (ITokenizer) sourceTokenizerClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             return null;
         }
@@ -131,7 +131,7 @@ public class FilterContext {
 
     public ITokenizer getTargetTokenizer() {
         try {
-            return (ITokenizer) targetTokenizerClass.newInstance();
+            return (ITokenizer) targetTokenizerClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             return null;
         }

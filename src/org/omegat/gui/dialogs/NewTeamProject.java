@@ -6,7 +6,7 @@
  Copyright (C) 2012 Alex Buloichick
                2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -75,6 +75,7 @@ public class NewTeamProject extends javax.swing.JDialog {
                 clearRepo();
             }
         });
+        txtRepositoryOrProjectFileURL.addActionListener(e -> btnOk.doClick());
         txtDirectory.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void removeUpdate(DocumentEvent e) {
@@ -89,6 +90,7 @@ public class NewTeamProject extends javax.swing.JDialog {
                 updateDialog();
             }
         });
+        txtDirectory.addActionListener(e -> btnOk.doClick());
 
         StaticUIUtils.setEscapeClosable(this);
         getRootPane().setDefaultButton(btnOk);

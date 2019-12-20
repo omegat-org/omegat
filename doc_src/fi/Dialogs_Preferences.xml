@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="dialogs.preferences">
+  <title>Yleiset asetukset</title>
+
+  <para>Löydät valintaikkunan valitsemalla kohdan <menuchoice> <guimenuitem>Valinnat</guimenuitem> <guimenuitem>Asetukset…</guimenuitem> </menuchoice></para>
+
+  <para>jossa voit tehdä kaikkia käännösprojekteja koskevia valintoja ja asetuksia.</para>
+
+  <section>
+    <title>Yleistä</title>
+
+    <variablelist id="dialogs.preferences.general.usetabtoadvance">
+      <varlistentry>
+        <term>Siirry eteenpäin sarkainnäppäimellä</term>
+
+        <listitem>
+          <para>Valitse tämä, niin segmentin tarkistus tapahtuu sarkainnäppäimellä (oletusnäppäimenä on Enter). Tämä kannattaa valita, kun käytössä on kiinan, japanin tai korean merkkien syöttöjärjestelmä.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Pyydä aina lopetusvahvistusta</term>
+
+        <listitem>
+          <para>Ohjelma pyytää vahvistusta ennen kuin se sulkeutuu.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Konekäännös</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Hakee käännöksiä automaattisesti.</term>
+
+        <listitem>
+          <para>Tietoturvasyistä kaikkia segmenttejä ei ole syytä lähettää konekääntimeen. Jos jätät tämän valinnan tekemättä, ohjelma hakee konekäännöksiä vain, kun painat atiivisen segmentin kohdalla näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> (<keycombo> <keycap>Komento (cmd) ⌘</keycap> <keycap>M</keycap> </keycombo> macOS-käyttöjärjestelmässä). Lisää ehdotus painamalla uudelleen näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Vain kääntämättömät segmentit</term>
+
+        <listitem>
+          <para>Jos haluat lähettää ainoastaan kääntämättömät segmentit konekäännöspalveluun, laita tähän ruutuun rasti.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Valitse palveluntarjoaja listalta ja tarvittaessa napsauta <guibutton>Määritä</guibutton>-painiketta, jolloin pääset syöttämään palveluntarjoajan tunnistetiedot.</para>
+
+    <para><ulink url="https://sourceforge.net/p/omegat/wiki/Configuring Machine Translation Services">Täällä</ulink> kuvataan, miten Microsoft Translator- tai Google Translate -palvelun asetukset määritellään.</para>
+  </section>
+
+  <section>
+    <title>Sanasto</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Näytä TBX-sanastojen kontekstitiedot</term>
+
+        <listitem>
+          <para>Älä rastita tätä kohtaa, jos et tarvitse jokaisen sanaston tietueen kontekstitietoja tai jos kontekstitiedot ovat liian pitkät.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Käytä lähdetekstissä olevia yksittäisiä termejä</term>
+
+        <listitem>
+          <para>Kun tässä kohdassa on rasti, sanasto näyttää sanaryhmiä tai lausekkeita, vaikka niiden sanat esiintyvät yksittäin lähdetekstissä.</para>
+
+          <para>Jätä tämä kohta rastittamatta, jos sanastossa näkyy liikaa virheellisiä esiintymiä.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Käytä sanaston termien vartaloita</term>
+
+        <listitem>
+          <para>Rastita tämä kohta, jos haluat, että sanastoruudussa näkyy vartaloltaan samoja sanoja.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Korvaa sanasto-osumat lähdetekstiä lisättäessä</term>
+
+        <listitem>
+          <para>Kun sekä tämä kohta että <link linkend="dialogs.preferences.editor.insertthesourcetext"><guilabel>Lisää lähdeteksti</guilabel></link> on rastitettu, kaikki lähdetekstin sanat, joille sanastossa on käännös, käännetään automaattisesti, kun lähdeteksti lisätään käännökseen.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Ohita osumat, joissa isoja kirjaimia käytetään eri tavoin (esim. FOO ja foo)</term>
+
+        <listitem>
+          <para>Jos tässä kohdassa on rasti, sanastossa näkyy vain yksi osuma, vaikka samasta sanasta olisi useita muotoja, joissa isoja ja pieniä kirjaimia käytetään eri tavoin.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <section>
+      <title>TaaS-terminologia</title>
+
+      <variablelist>
+        <varlistentry>
+          <term>Hanki API-avain</term>
+
+          <listitem>
+            <para>Napsauta tätä painiketta, niin pääset <ulink url="https://term.tilde.com/taas">TaaS</ulink>-projektin verkkosivulle luomaan itsellesi käyttäjätilin.</para>
+
+            <para>Tämän jälkeen voit luoda salasanan osoitteessa <ulink url="https://term.tilde.com/account/keys/create?system=omegaT">https://term.tilde.com/account/keys/create?system=omegaT</ulink>.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Tallenna vain tämän istunnon ajaksi</term>
+
+          <listitem>
+            <para>Jos tämä kohta on rastitettu, OmegaT ei talleta salasanaa seuraavaa istuntoa varten.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Selaa TaaS-kokoelmia…</term>
+
+          <listitem>
+            <para>Paina tätä painiketta, niin pääset selaamaan ja lataamaan projektin lähde- ja kohdekielillä olevia kokoelmia. Yksityisten kokoelmien nimet on lihavoitu. Kokoelmat ladataan TBX-muotoisina termikantoina kyseisen projektin sanastokansioon.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Valitse TaaS-terminologiahaun aihepiiri…</term>
+
+          <listitem>
+            <para>Voit tarvittaessa rajoittaa lähtevän ja vastaanotetun datan määrää valitsemalla käytettävän domainin.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+  </section>
+
+  <section id="dialogs.preferences.dictionary">
+    <title>Sanakirja</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Segmentin tekstin automaattinen sanakirjahaku</term>
+
+        <listitem>
+          <para>Jätä tämä kohta rastittamatta, niin haku ei tapahdu automaattisesti – hyödyllistä esim. silloin, kun sanakirjat ovat liian suuria.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Käytä sanakirjatietueiden sumeita osumia</term>
+
+        <listitem>
+          <para>Rastita tämä kohta, jos haluat, että sanakirjoissa näkyy vartaloltaan samoja sanoja.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Ulkonäkö</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Palauta pääikkuna</term>
+
+        <listitem>
+          <para>Palauttaa OmegaT-pääikkunan oletusmuotoonsa. Käytä tätä toimintoa, kun olet irrottanut, siirtänyt tai piilottanut yhden tai useampia osia, etkä pysty palauttamaan toivottua asettelua. Voit käyttää tätä myös silloin, kun ruutujen asettelu on muuttunut OmegaT-päivityksen jälkeen.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <section>
+      <title>Fontti</title>
+
+      <para>Näyttää kohdan, jossa voit muokata näytön tekstin fonttia. Jos käytät vanhaa tietokonetta ja ikkunoiden koon muuttaminen tapahtuu mielestäsi hitaasti, voit kokeilla fontin vaihtamista. Lisää fontin asetuksista Sekalaista-osassa.</para>
+    </section>
+
+    <section>
+      <title>Värit</title>
+
+      <para>Tällä sivulla voit valita jokaiseen käyttöliittymään osaan eri värit.</para>
+
+      <para>Voit määritellä valmiita väriteemoja komentosarjojen avulla. OmegaT:n yhteydessä oleva komentosarja Switch Colour Themes tuottaa oletusarvoisen tumman teeman.</para>
+    </section>
+  </section>
+
+  <section id="dialogs.preferences.filefilters">
+    <title>Tiedostosuodattimet</title>
+
+    <para>Tässä kohdassa näkyvät käytössä olevat tiedostosuodattimet. Nykyisen projektin käyttämät suodattimet on lihavoitu. Jos et halua käyttää OmegaT:tä tiettyjen tiedostotyypien kääntämiseen, voit ottaa kyseisen tiedostosuodattimen pois käytöstä poistamalla rastin sen vieressä olevasta ruudusta. Tällöin OmegaT hyppää vastaavien tiedostojen yli projektia ladattaessa ja kopioi ne muuttumattomina kohdekansioon, kun kohdetiedostoja luodaan. Kun haluat ottaa suodattimen uudelleen käyttöön, laita valintaruutuun rasti. Kun napsautat <emphasis role="bold">Oletukset</emphasis>-painiketta, tiedostosuodatinasetukset palautuvat oletusarvoihinsa. Voit muokata käytettäviä tiedostoja ja tiedotosuodattimien koodauksia valitsemalla kyseisen suodattimen ja napsauttamalla <emphasis role="bold">Muokkaa</emphasis>-painiketta.</para>
+
+    <para>Voit ottaa käyttöön tai poistaa käytöstä seuraavat valinnat:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Poista alussa ja lopussa olevat tägit: Jätä tämä kohta rastittamatta, niin kaikki, myös segmentin alussa ja lopussa olevat tägit, ovat näkyvissä. Varoitus: Jos kaikki Microsoft Open XML -muotoisten tiedostojen (docx, xlsx jne.) tägit ovat näkyvissä, ÄLÄ LISÄÄ tekstiä ennen segmentin ensimmäistä tägiä. Se on tekninen tägi, jonka on aina oltava segmentin alussa.</para>
+      </listitem>
+
+      <listitem>
+        <para>Poista alussa ja lopussa olevat tyhjätilamerkit projekteista, joita ei ole jaettu segmentteihin: OmegaT:n oletusasetuksena on, että alussa ja lopussa olevat tyhjätilamerkit poistetaan. Kun tämä kohta jätetään rastittamatta, tyhjätilamerkkejä ei poisteta projekteista, joita ei ole jaettu segmentteihin.</para>
+      </listitem>
+
+      <listitem>
+        <para>Jätä kaikkien tägien välilyönnit: Rastita tämä kohta, jos lähdetiedostoissa käytetään välilyöntejä, jotka ovat tärkeitä tiedoston ulkonäölle ja jotka on huomioitava.</para>
+      </listitem>
+
+      <listitem>
+        <para>Älä huomioi tiedostokontekstia, kun tunnistetaan vaihtoehtoisten käännösten segmenttejä: OmegaT:n oletusasetuksena on, että lähdetiedoston nimi on osa vaihtoehtoisen käännöksen tunnistamista. Jos tätä kohtaa ei ole rastitettu, lähdetiedoston nimeä ei käytetä, ja vaihtoehtoiset käännökset vaikuttavat kaikkiin tiedostoihin aina, kun muu konteksti (tiedostomuodosta riippuen joko edellinen/seuraava segmentti tai jokin segmentin tunniste) on sama.</para>
+      </listitem>
+    </itemizedlist>
+
+    <section id="filters.options">
+      <title>Suodattimen asetukset</title>
+
+      <para>Useissa suodattimissa (tekstitiedostoja, XHTML-tiedostoja, HTML- ja XHTML-tiedostoja, OpenDocument-tiedostoja ja Microsoft Open XML -tiedostoja varten) on yksi tai useampi erityinen asetus. Valitse listalla oleva suodatin ja napsauta <emphasis role="bold">Valinnat</emphasis>-painiketta, niin pääset muokkaamaan asetuksia. Käytettävissä ovat seuraavat asetukset:</para>
+
+      <para><emphasis role="bold">Tekstitiedostot</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Kappaleittainen segmentointi rivinvaihdon tai tyhjän rivin perusteella tai ei koskaan:</emphasis></para>
+
+          <para>Jos segmentointi lauseen mukaan on käytössä, teksti segmentoidaan edelleen myös tässä valitun asetuksen mukaisesti.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">PO-tiedostot</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Kohdetiedostoissa saa olla tyhjiä käännöksiä</emphasis>:</para>
+
+          <para>Jos tämä valinta on rastittu, PO-tiedoston segmentin (joka voi olla kokonainen kappale) käännöksen voi jättää tyhjäksi. Teknisesti tämä tarkoittaa, että PO-kohdetiedoston mahdollisesti luotu <code>msgstr</code>-segmentti jää tyhjäksi. Tämä on oletuksena PO-tiedostoissa, joten oletusarvoisesti valinta on rastitettu. Jos tätä ei ole valittu, lähdeteksti kopioidaan kohdesegmenttiin.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Ohita PO-otsake</emphasis></para>
+
+          <para>Jos tässä kohdassa on rasti, PO-otsaketta ei muuteta vaan se ohitetaan.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Korvaa otsakkeen kohta nplurals=INTEGER; plural=EXPRESSION; automaattisesti</emphasis></para>
+
+          <para><emphasis>Tämä valinta antaa OmegaT:n ohittaa PO-otsakkeessa olevan määrityksen ja käyttää valitun kohdekielen oletusasetusta.</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">XHTML-tiedostot</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Käännä seuraavat attribuutit</emphasis>: Valitut attribuutit näkyvät segmentteinä Editori-ikkunassa.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Merkki, joka aloittaa uuden kappaleen</emphasis>: Segmentoinnissa HTML-tägiä &lt;br&gt; käytetään kappaleen vaihdon merkkinä.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Ohita teksti, joka vastaa säännöllistä lauseketta</emphasis>: Kaikki tekstit, jotka vastaavat säännöllistä lauseketta, ohitetaan. Tägien tarkistuksessa se on kirjoitettu punaisella. Lauseketta vastaava kohdesegmentin teksti on kursivoitu.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Älä käännä meta-tägien content-attribuutteja…</emphasis>: Laatikon meta-tägejä ei käännetä.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Älä käännä sellaisten meta-tägien sisältöattribuuttia, joissa attribuutilla on seuraavat avain–arvo-parit (erota pilkuilla)</emphasis>: Jos tägi vastaa listan avain–arvo-pareja, sen sisältöä ei huomioida.</para>
+
+          <para>Joskus tekstissä on tägejä, joita ei saa kääntää. On hyödyllistä pystyä merkitsemään tällaiset tägit niiden attribuuttien perusteella. Esimerkiksi <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. Voit määritellä kääntämättä jätettävien tägien avain-arvo-parit. Yllä olevassa esimerkissä kentässä lukisi <literal>class=hide, translate=no </literal>.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">Microsoft Office Open XML -tiedostot</emphasis></para>
+
+      <para>Voit valita, mitkä elementit käännetään. Nämä näkyvät käännöksen erillisinä segmentteinä.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Word:</emphasis> näkymättömät ohjetekstit, kommentit, alaviitteet, loppuviitteet, alatunnisteet</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Excel: </emphasis>kommentit, arkkien nimet</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Power Point</emphasis>: dian commentit, dian perustyylit, dian asettelut</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Globaalisti:</emphasis> kaaviot, piirrokset, WordArtit</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Muut asetukset:</emphasis></para>
+
+          <itemizedlist>
+            <listitem>
+              <para><emphasis>Yhdistä tägit</emphasis>: Jos tämä on valittu, erilliset tägit, joiden välissä ei ole käännettävää tekstiä, yhdistetään yhdeksi tägiksi.</para>
+            </listitem>
+
+            <listitem>
+              <para><emphasis>Jätä kaikkien tägien välilyönnit</emphasis>: Jos tämä on valittu, tyhjätilamerkit (eli välilyönnit ja rivinvaihdot) säilytetään, vaikka sitä ei määriteltäisi asiakirjassa.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">HTML- ja XHTML-tiedostot</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Lisää tai kirjoita HTML- ja XHTML-tiedostoihin maininta merkistökoodauksesta</emphasis>: Tämän asetuksen avulla voit määritellä, pitäisikö merkistökoodaustiedon olla osa kohdetiedostoja vai ei. Esimerkiksi kun tiedostosuodatin määrittelee, että kohdetiedostojen merkistökoodaus on UTF8, ja valitset vaihtoehdon &quot;Aina&quot;, tieto merkistökoodauksesta on mukana käännetyissä tiedostoissa.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Käännä seuraavat attribuutit</emphasis>: Valitut attribuutit näkyvät segmentteinä Editori-ikkunassa.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Merkki, joka aloittaa uuden kappaleen</emphasis>: Segmentoinnissa HTML-tägiä &lt;br&gt; käytetään kappaleen vaihdon merkkinä.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Ohita teksti, joka vastaa säännöllistä lauseketta</emphasis>: Kaikki tekstit, jotka vastaavat säännöllistä lauseketta, ohitetaan. Tägien tarkistuksessa se on kirjoitettu punaisella. Lauseketta vastaava kohdesegmentin teksti on kursivoitu.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Älä käännä meta-tägien content-attribuutteja…</emphasis>: Laatikon meta-tägejä ei käännetä.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>Älä käännä sellaisten meta-tägien sisältöattribuuttia, joissa attribuutilla on seuraavat avain–arvo-parit (erota pilkuilla)</emphasis>: Jos tägi vastaa listan avain–arvo-pareja, sen sisältöä ei huomioida.</para>
+
+          <para>Joskus tekstissä on tägejä, joita ei saa kääntää. On hyödyllistä pystyä merkitsemään tällaiset tägit niiden attribuuttien perusteella. Esimerkiksi <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. Voit määritellä kääntämättä jätettävien tägien avain-arvo-parit. Yllä olevassa esimerkissä kentässä lukisi <literal>class=hide, translate=no </literal>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis>Tiivistä käännetyn asiakirjan tyhjätila</emphasis>: Useat peräkkäiset tyhjätilamerkit muutetaan käännetyssä asiakirjassa yhdeksi tyhjätilamerkiksi.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis>Poista käännetyn asiakirjan HTML-kommentit</emphasis>: Kommenttiosia (merkin &lt;!-- ja merkin --&gt; välillä) ei kopioida käännettyyn asiakirjaan.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">Open Document Format (ODF) -tiedostot</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Voit valita, mitkä seuraavista elementeistä käännetään:</para>
+
+          <para>hakemiston hakusanat, kirjanmerkit, kirjanmerkkiviitteet, muistiinpanot, kommentit, esitysmuistiinpanot, linkit (URL), arkkien nimet</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="edit.filter.dialog">
+      <title>Suodattimien muokkaus</title>
+
+      <para>Tässä kohdassa voit määritellä tiedostonimen muodot, joita sisältäviä lähdetiedostoja suodattimen on käsiteltävä. Voit myös mukauttaa käännettyjen tiedostojen tiedostonimiä ja valita lähdetiedoston lataamisessa ja käännöksen tallentamisessa käytettävät merkistökoodaukset. Muokkaa tiedostonimen muotoa joko kirjoittamalla suoraan eri kenttiin tai napsauttamalla <emphasis role="bold">Muokkaa</emphasis>-painiketta. Lisää uusi tiedostonimen muoto napsauttamalla <emphasis role="bold">Lisää</emphasis>. Voit myös lisätä muodon tai muokata tiettyä lausekekuviota. Kohdassa on erityinen kohdetiedoston nimen muodon muokkain, jolla voit mukauttaa tuotettujen tiedostojen nimiä.</para>
+
+      <section id="source.filetype.and.filename.pattern">
+        <title>Lähdetiedoston tyyppi, tiedostonimen muoto</title>
+
+        <para>OmegaT yrittää valita suodattimen lähdekansiosta löytämänsä tiedoston tiedostopäätteen perusteella. Tarkemmin sanottuna OmegaT yrittää yhdistää kunkin suodattimen lähdetiedoston nimen kuvioita tiedostonimeen. Esimerkiksi kuvio <literal>*.xhtml</literal> vastaa kaikkia tiedostoja, joiden pääte on <literal>.xhtml</literal>. Jos sopiva suodatin löytyy, tiedostoa käsitellään sen mukaisesti. Esimerkiksi XHTML-suodattimen oletusasetuksena on, että sitä käytetään .xhtml-päätteisten tiedostojen käsittelyyn. Voit muuttaa kunkin tiedostosuodattimen käsittelemien tiedostonimien muotoja tai lisätä niitä. Lähdetiedoston nimen muodoissa käytetään samoja jokerimerkkejä kuin <emphasis role="bold">hakutoiminnoissa. </emphasis>Asteriski * vastaa nollaa tai useampaa merkkiä. Kysymysmerkki ? vastaa tarkalleen yhtä kirjainta. Kaikki muut merkit tarkoittavat itseään. Jos esimerkiksi haluat, että tekstisuodatin käsittelee readme-tiedostoja (<literal>readme, read.me</literal> sekä <literal>readme.txt</literal>), käytä muotoa <literal>read*</literal>.</para>
+      </section>
+
+      <section id="source.and.target.files.encoding">
+        <title>Lähdetiedoston ja käännetyn tiedoston merkistökoodaukset</title>
+
+        <para>Merkistökoodaus on pakollinen määre vain tietyissä tiedostomuodoissa. Niissä tiedostomuodoissa, joissa merkistökoodausta ei ole määritelty, käytetään sitä merkistökoodausta, joka tiedostopäätteelle on asetettu. Esimerkiksi oletusasetuksena on, että <literal>.txt</literal>-tiedostoissa käytetään käyttöjärjestelmän oletuskoodausta. Voit asettaa jokaiselle erilaiselle lähdetiedoston nimen kuviolle oman merkistökoodauksensa. Myös kohdetiedostoissa voidaan käyttää mitä tahansa merkistökoodausta. Oletusasetuksena on, että käännettyjen tiedostojen merkistökoodaus on sama kuin lähdetiedostoissa. Kaikki tuetut merkistökoodaukset löytyvät lähde- ja kohdetiedostojen merkistökoodauskenttien pudotusvalikosta. Valinta &lt;auto&gt; jättää merkistökoodauksen valinnan <application>OmegaT</application>:n tehtäväksi.&lt; Se toimii näin:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT tunnistaa lähdetiedoston merkistökoodauksen mahdollisen koodausmaininnan perusteella (HTML-tiedostoissa ja XML-pohjaisissa tiedostoissa).</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para>Tietyt tiedostomuodot (Java-ominaisuudet ym.) käyttävät pakollista merkistökoodausta, ja OmegaT käyttää tätä.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para>Tekstitiedostojen merkistökoodauksena OmegaT käyttää käyttöjärjestelmän oletuskoodausta.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="target.name">
+        <title>Käännetty tiedoston nimi</title>
+
+        <para>Kääntämäsi tiedostot nimetään automaattisesti, mutta haluat kenties muokata tiedostonimeä esimerksiksi lisäämällä siihen kielikoodin. Kohdetiedoston nimessä käytetään erityistä syktaksia, joten jos haluat muuttaa tätä kenttää, napsauta <emphasis role="bold">Muokkaa…</emphasis>-painiketta ja siirry kohtaan Muokkaa muotoa. Jos haluat palata suodattimen oletusasetuksiin, napsauta painiketta <emphasis role="bold">Oletukset</emphasis>. Voit myös muokata kohdetiedoston nimen muotoa vastaavassa tiedostosuodattimien kentässä. Muokkaa muotoa -kohdassa valittavanasi on muun muassa seuraavat vaihtoehdot:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Oletusasetuksena on <literal>${filename}</literal> – lähdetiedoston koko tiedostonimi tiedostopäätteineen. Tällöin käännetyn tiedoston nimi on sama kuin lähdetiedostossa.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${nameOnly}</literal> – ainoastaan lähdetiedoston nimi, ilman tiedostopäätettä</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension}</literal> – alkuperäinen tiedostopääte</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLocale}</literal> – kohdekielen kielialueen koodi (muotoa &quot;xx_YY&quot;).</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLanguage}</literal> – kohdekielen ja maan koodi yhdessä (muotoa &quot;XX-YY&quot;).</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLanguageCode}</literal> – kohdekieli, muotona pelkkä &quot;XX&quot;</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetCountryCode}</literal> – kohdemaa, muotona pelkkä &quot;YY&quot;</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${timestamp-????}</literal> – järjestelmän aikaleima luontihetkellä, erilaisia kuvioita</para>
+
+            <para>Esimerkkejä SimpleDateFormat-muodoista löydät <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">Oraclen dokumentaatiosta</ulink>.</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-os-name}</literal> – käytetyn tietokoneen käyttöjärjestelmä</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-user-name}</literal> – järjestelmän käyttäjän nimi</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-host-name}</literal> – järjestelmät isäntänimi</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${file-source-encoding}</literal> – lähdetiedoston merkistökoodaus</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${file-target-encoding}</literal> – kohdetiedoston merkistökoodaus</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${targetLocaleLCID}</literal> – Microsoftin kohdekielialuetunnus</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Lisävariantteja on olemassa muuttujissa ${nameOnly} ja ${Extension} käytettäväksi. Ambivalentin tiedoston nimen yhteydessä voi käyttää muuttujia <literal>${name only</literal><emphasis>-extension number</emphasis>} sekä <literal>${extension</literal>-<emphasis>extension number} </emphasis>. Jos esimerkiksi alkuperäisen tiedoston nimi on Document.xx.docx, seuraavilla muuttujilla saadaan seuraavanlaiset lopputulokset:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${nameOnly-0}</literal> Document</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${nameOnly-1}</literal> Document.xx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${nameOnly-2}</literal> Document.xx.docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-0}</literal> docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-1}</literal> xx.docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-2}</literal> Document.xx.docx</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>
+  </section>
+
+  <section id="dialogs.preferences.segmentationsetup">
+    <title>Segmentointiasetukset</title>
+
+    <para>Käännösmuistityökaluissa työstettäviä tekstiyksikköjä kutsutaan segmenteiksi. <application>OmegaT</application> segmentoi tekstin joko kappaleittain tai lauseittain (tunnetaan myös nimellä &quot;sääntöihin perustuva segmentointi&quot;). Valitse segmentointitapa päävalikon kohdassa <menuchoice> <guimenu>Projekti</guimenu> <guimenuitem>Ominaisuudet…</guimenuitem> </menuchoice> ja rastita valintaruutu tai poista rasti. Kappaleittainen segmentointi sopii parhaiten erittäin luoviin tai tyylillisiin käännöksiin, joissa kääntäjä haluaa vaihtaa kokonaisten lauseiden järjestystä. Suurimpaan osaan projekteista sopii kuitenkin lause lauseelta tapahtuva segmentointi, sillä se tuottaa parempia osumia aiemmista käännöksistä. Voit muokata lauseittaisen segmentoinnin sääntöjä valitsemalla kohdan <menuchoice> <guimenu>Valinnat</guimenu> <guimenuitem>Segmentointi…</guimenuitem> </menuchoice>.</para>
+
+    <para>Luotettavia segmentointisääntöjä on monilla kielillä, joten et todennäköisesti joudu kirjoittamaan omia segmentointisääntöjä. Tietyissä tapauksissa taas tämä toiminto on erittäin hyödyllinen, ja voit parantaa tuottavuuttasi tuunaamalla segmentointisääntöjä käännettävään tekstiin sopiviksi.</para>
+
+    <para><emphasis role="bold">Varoitus!</emphasis> Kun suodatinsääntöjä on muutettu, teksti segmentoituu uudella tavalla ja voit joutua aloittamaan käännöstyön uudelleen alusta. Samanaikaisesti aiemmista kelpo käännössegmenteistä tulee käännösmuistin orposegmenttejä. Jos muutat avoimen projektin segmentointisääntöjä, projekti on ladattava uudelleen, jotta muutokset astuvat voimaan.</para>
+
+    <para><application>OmegaT</application> toimii seuraavassa järjestyksessä:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Rakennetason segmentointi</term>
+
+        <listitem>
+          <para><application>OmegaT</application> jäsentää tekstin ensin rakennetason segmentointia varten. Tässä prosessissa segmenttejä tuotetaan ainoastaan lähdetiedoston rakenteen perusteella.</para>
+
+          <para>Esimerkiksi tekstitiedostot voidaan segmentoida rivinvaihtojen tai tyhjien riven mukaan, tai ne voivat jäädä kokonaan segmentoimatta. Muotoiluja sisältävät tiedostot (ODF-asiakirjat, HTML-tiedostot jne.) segmentoidaan lohkon (kappaleen) tägien perusteella. XHTML- tai HTML-tiedostojen käännettävät objektimääritteet voidaan erottaa omiksi segmenteikseen.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Lausetason segmentointi</term>
+
+        <listitem>
+          <para>Kun lähdetiedosto on segmentoitu rakenteellisiksi yksiköiksi, <application>OmegaT</application> segmentoi ne edelleen lauseiksi.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <section id="segmentation.rules">
+      <title>Segmentointisäännöt</title>
+
+      <para>Segmentointiprosessissa kohdistimen voi ajatella liikkuvan pitkin tekstiä, yksi merkki kerrallaan. Jokaisessa kohdistimen kohdassa käytetään sääntöjä, jotka koostuvat <emphasis role="bold">Ennen-</emphasis> ja <emphasis role="bold">Jälkeen</emphasis>-muodoista. Sääntöjä käytetään niiden esiintymisjärjestyksessä: ohjelma tarkistaa, vastaavatko <emphasis role="bold">Ennen</emphasis>-muodot kohdistimen vasemmalla puolella olevaa tekstiä ja vastaavatko <emphasis role="bold">Jälkeen</emphasis>-muodot kohdistimen oikealla puolella olevaa tekstiä. Jos sääntö vastaa tekstiä, joko kohdistin siirtyy edelleen eikä segmenttiä vaihdeta (poikkeussääntö) tai kohdistimen kohdalla segmentti vaihtuu uuteen (katkaisusääntö).</para>
+
+      <para>Nämä kaksi sääntöä toimivat seuraavasti:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term>Katkaisusääntö</term>
+
+          <listitem>
+            <para>jakaa lähdetekstin segmenteiksi. Esimerkiksi &quot;<emphasis>Oliko siinä järjeä? En ollut varma</emphasis>.&quot; pitäisi jakaa kahdeksi segmentiksi. Jotta näin tapahtuu, tarvitaan katkaisusääntöä, jossa ?-merkin jälkeen tulee välilyönti ja isolla kirjaimella alkava sana. Merkitse sääntö katkaisusäännöksi laittamalla Katkaisu/poikkeus-ruutuun rasti.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <variablelist>
+        <varlistentry>
+          <term>Poikkeussääntö</term>
+
+          <listitem>
+            <para>määrittelee, mitä tekstinosia EI pitäisi erottaa. Vaikka nimityksessä <emphasis>&quot;maist. May Steri&quot;</emphasis> on piste, sitä ei pitäisi jakaa kahdeksi segmentiksi. Siksi dipl. ins (sekä dipl. ins, toht, prof jne.) ja sitä seuraava piste tulisi kirjoittaa poikkeussäännöksi. Merkitse sääntö poikkeussäännöksi jättämällä rasti pois Katkaisu/poikkeus-ruudusta.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para>Valmiita poikkeussäntöjä on olemassa useimmille Euroopan kielille ja japanille. Ne riittävät hyvin alkuun. Voit hyvin laatia lisää poikkeussääntöjä lähdekielellesi, jolloin saat johdonmukaisempia segmenttejä.</para>
+    </section>
+
+    <section id="rules.priority">
+      <title>Sääntöjen tärkeysjärjestys</title>
+
+      <para>Kaikki kielitunnuksen mukaiset segmentointisäännöt ovat voimassa, ja niitä käytetään tärkeysjärjestyksessä. Siksi tietyn kielitunnuksen mukaisten sääntöjen pitäisi olla listalla korkeammalla kuin oletussäännöt. Näin esimerkiksi Kanadan ranskaa (FR-CA) koskevien segmentointisääntöjen tulisi olla listalla ennen ranskaa (FR.*) koskevia sääntöjä, ja näiden molempien tulisi olla ennen oletussääntöjä (.*). Näin Kanadan ranskaa käännettäessä Kanadan ranskan sääntöjä – jos niitä on – noudatetaan ensin, sitten ranskan sääntöjä ja lopuksi oletussääntöjä.</para>
+    </section>
+
+    <section id="creating.new.rule">
+      <title>Uuden säännön luominen</title>
+
+      <para>Segmentointisääntöihin ei tulisi tehdä suuria muutoksia varsinkaan sen jälkeen, kun ensimmäinen käännösluonnos on valmis. Pienemmistä muutoksista, esimerkiksi hyväksytyn lyhenteen lisäyksestä, voi kuitenkin olla suurta hyötyä.</para>
+
+      <para>Voit muokata tai laajentaa segmentointisäännöstöä napsauttamalla ikkunan yläosan taulukossa olevaa nimeä. Sääntölistan säännöt ilmestyvät ikkunan alaosaan.</para>
+
+      <para>Jos haluat luoda uuden segmentointisäännöstön uudelle kielitunnukselle, napsauta <emphasis role="bold">Lisää</emphasis>-painiketta valintaikkunan yläosassa. Ylemmän taulukon loppuun ilmestyy tyhjä rivi (voit joutua vierittämään listaa alaspäin nähdäksesi sen). Nimeä säännöstö ja kielikuvio kielivariantin ja sen kielitunnuksen mukaan. Kielikuvion merkkijonossa käytetään säännöllisten lausekkeiden syntaksia. Jos segmentointisäännöstösi koskee kieli–maa-paria, se kannattaa siirtää säännöstölistalla ylöspäin. Käytä tähän <emphasis role="bold">Siirrä ylöspäin</emphasis> -painiketta.</para>
+
+      <para>Lisää <emphasis role="bold">Ennen</emphasis>- ja <emphasis role="bold">Jälkeen</emphasis>-muodot. Säännön syntaksi ja soveltuvuus kannattaa tarkistaa työkaluissa, joissa näet heti näiden vaikutuksen. Ks. <link linkend="appendix.regexp">Säännölliset lausekkeet</link>. Kannattaa aina aloittaa jo olemassa olevista säännöistä.</para>
+    </section>
+
+    <section id="few.simple.examples">
+      <title>Pari yksinkertaista esimerkkiä</title>
+
+      <informaltable>
+        <tgroup cols="4">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="center" colnum="2"/>
+
+          <colspec align="center" colnum="3"/>
+
+          <colspec align="left" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Tarkoitus</entry>
+
+              <entry align="center">Ennen</entry>
+
+              <entry align="center">Jälkeen</entry>
+
+              <entry>Muistiinpano</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Uusi segmentti alkaa, kun pisteen ( . ) jälkeen tulee välilyönti, sarkainmerkki,…</entry>
+
+              <entry align="center">\.</entry>
+
+              <entry align="center">\s</entry>
+
+              <entry>&quot;\.&quot; tarkoittaa pisteen merkkiä. &quot;\s&quot; tarkoittaa mitä tahansa tyhjätilamerkkiä (välilyönti, sarkainmerkki, sivunvaihto jne.)</entry>
+            </row>
+
+            <row>
+              <entry>Älä aloita segmenttiä pisteellisen lyhenteen maist. jälkeen</entry>
+
+              <entry align="center">maist\.</entry>
+
+              <entry align="center">\s</entry>
+
+              <entry>Tämä on poikkeussääntö, joten säännön valintaruutuun ei saa laittaa rastia.</entry>
+            </row>
+
+            <row>
+              <entry>Aloita segmentti merkkien&quot;。&quot; (japanin kielen piste) jälkeen</entry>
+
+              <entry align="center">。</entry>
+
+              <entry align="center"/>
+
+              <entry>Huomaa, että pisteen <literal>jälkeen</literal> on tyhjää.</entry>
+            </row>
+
+            <row>
+              <entry>Älä aloita segmenttiä pisteellisten lyhenteiden M., Mr., Mrs. ja Ms. jälkeen</entry>
+
+              <entry align="center">Mr??s??\.</entry>
+
+              <entry align="center">\s</entry>
+
+              <entry>Poikkeussääntö – ks. kuinka merkkiä ? käytetään säännöllisissä lausekkeissa</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </section>
+  </section>
+
+  <section>
+    <title>Automaattinen täydennys</title>
+
+    <para>Napsauta kohtaa <guimenuitem>Sanasto…</guimenuitem>, niin pääset määrittelemään automaattista täydennystä Sanaston esikatselussa.</para>
+
+    <para>Napsauta kohtaa <guimenuitem>Automaattinen teksti…</guimenuitem>, niin pääset määrittämään automaattisen töydennyksen asetuksia sekä lisäämään tai poistamaan tietueita.</para>
+
+    <para>Napsauta kohtaa <guimenuitem>Merkkitaulukko…</guimenuitem>, niin pääset valitsemaan Merkkitaulukon automaattisen täydennyksen asetukset.</para>
+
+    <para>Automaattinen täydennys otetaan käyttöön kohdesegmentissä painamalla näppäinyhdistelmää <emphasis role="bold">Ctrl+välilyönti</emphasis>.</para>
+
+    <para>Jos ruuru <emphasis role="bold">Näytä sopivia ehdotuksia automaattisesti</emphasis> on rastitettu, automaattinen täydennys tulee automaattisesti käyttöön, kun käännetyn sanaston termin ensimmäinen kirjain tai (tägin tapauksessa) &quot;&lt;&quot; kirjoitetaan.</para>
+  </section>
+
+  <section>
+    <title>Oikeinkirjoituksen tarkistaja</title>
+
+    <para>OmegaT:n oletuskielentarkistin perustuu Apache OpenOfficessa, LibreOfficessa, Firefoxissa ja Thunderbirdissä käytettyyn <link linkend="appendix.spellchecker">kielentarkistimeen</link>. Näin ollen se voi käyttää näiden sovellusten monia vapaita oikeinkirjoitussanastoja.</para>
+  </section>
+
+  <section>
+    <title>LanguageTool-laajennus</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Palvelutyyppi</term>
+
+        <listitem>
+          <para>Valitse kielentarkistimen sijainti.</para>
+
+          <para>Jos käytät koneellasi muuta kuin OmegaT:n mukana tulevaa kielentarkistinta, voit mukauttaa varmennussääntöjä itsellesi sopiviksi.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Säännöt</term>
+
+        <listitem>
+          <para>Merkitse tai jätä merkitsemättä sääntöjä sen mukaan, sopivatko ne tektiin, jota olet kääntämässä.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.externalsearch">
+    <title>Ulkoinen haku</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Salli projektikohtaiset komennot</term>
+
+        <listitem>
+          <para>OmegaT ei oletusarvoisesti suorita projektikohtaisissa asetuksissa määritettyjä komentoja (<filename>finder.xml</filename>-tiedosto <filename>omegat</filename>-kansiossa), koske ne voivat vaarantaa koneen suojauksen.</para>
+
+          <para>Aktivoi tämä valinta vain, jos tiedät, mitä olet tekemässä ja vain projekteissa, jotka tulevat luotetuista lähteistä.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Pikavalikon tärkeysjärjestys:</term>
+
+        <listitem>
+          <para>Tässä kohdassa voit vaihtaa pikavalikon (kakkospainikkeen napsautuksen valikko) komentojen järjestystä. Komennot, joiden arvo on noin 100, näkyvät yläosassa, ja komennot, joiden arvo noin 900, näkyvät alaosassa.</para>
+
+          <para>OmegaT on käynnistettävä uudelleen, jotta muutos tulee voimaan.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.editor">
+    <title>Editori</title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.editor.insertthesourcetext">
+        <term>Lisää lähdeteksti</term>
+
+        <listitem>
+          <para>Voit saada lähdekielisen tekstin automaattisesti muokkauskenttään. Tästä on hyötyä teksteissä, joissa on paljon tuotemerkkejä tai muita nimiä, joita ei saa muuttaa.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Jätä segmentti tyhjäksi</term>
+
+        <listitem>
+          <para>OmegaT jättää muokkauskentän tyhjäksi. Tämän avulla voit lisätä käännöksen ilman, että sinun täytyy ensin poista lähdeteksti – säästät siis kaksi näppäinpainallusta (<emphasis role="bold">Ctrl+A</emphasis> ja <emphasis role="bold">Del). </emphasis> Tyhjät käännökset ovat nyt sallittuja. Ne näkyvät Editorissa &lt;TYHJÄ&gt;-merkinnällä varustettuina. Luo tyhjä käännös klikkaamalla segmenttiä hiiren kakkospainikkeella, valitse sitten &quot;<emphasis role="bold">Aseta tyhjä käännös</emphasis>&quot;. Samassa ponnahdusvalikossa on vaihtoehto <emphasis role="bold">Poista käännös</emphasis>, jonka avulla poistat segmentissä olevan käännöksen. Saat saman lopputuloksen, kun tyhjennät kohdesegmentin ja painat <guibutton>Enter</guibutton>-näppäintä.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Lisää paras sumea osuma</term>
+
+        <listitem>
+          <para>OmegaT lisää lähinnä lähdetekstiä olevan stringin käännöksen, jos lähdetekstin ja jo käännetyn stringin samankaltaisuus ylittää valitsemasi samankaltaisuuskynnyksen. Etuliitteitä (oletuksena tyhjä) voi käyttää merkitsemään sumeilla käännösosumilla täytettyjä kohdesegmenttejä. Jos lisäät etuliitteen (esimerkiksi [fuzzy]), voit myöhemmin palata näihin kohtiin tarkistamaan, onko käännös oikein.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Valintaikkunan alaosassa olevat valintaruudut tarkoittavat seuraavaa:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Yritä muuntaa sumean osuman numeroita</term>
+
+        <listitem>
+          <para>Jos tässä kohdassa on rasti, OmegaT yrittää muuttaa manuaalisesti tai automaattisesti lisätyssä sumeassa osumassa olevat numerot lähdetekstin mukaisiksi. Rajoituksia on koko joukko:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Lähdesegmentissä ja sumeassa osumassa on oltavat samat numerolistat.</para>
+            </listitem>
+
+            <listitem>
+              <para>Lähdesegmentin ja kohdeosumien numeroiden tulee olla täsmälleen samat.</para>
+            </listitem>
+
+            <listitem>
+              <para>Ainoastaan kokonaisluvut ja yksinkertaiset liukuluvut (desimaalierottimena piste, esim. 5.4 mutta ei 5,4 tai 54E-01) hyväksytään.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.editor.allowtranslationtobeequaltosource">
+        <term>Käännös saa olla sama kuin lähdeteksti</term>
+
+        <listitem>
+          <para>Käännettävissä dokumenteissa voi olle tuotemerkkejä, nimiä tai muita erisnimiä, joiden on pysyttävä samoina myös käännetyssä asiakirjassa. Tällaista muuttumatonta tekstiä sisältäviä segmenttejä käsitellään kahdella tavalla:</para>
+
+          <para>Voit olla kääntämättä tällaisia segmenttejä. OmegaT ilmoittaa nämä segmentit ei-käännettyinä. Tämä on oletusasetus. Vaihtoehtoisesti voit kirjoittaa käännöksen, joka on sama kuin lähdeteksti. OmegaT tunnistaa, että olet tehnyt näin. Ota tämä käyttöön rastittamalla tämä valinta.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Vie segmentti tekstitiedostoihin</term>
+
+        <listitem>
+          <para>Tekstinvientitoiminto vie nykyisen <application>OmegaT</application>-projektin datan vain teksti -tiedostoihin. Data viedään, kun segmentti avataan. Tiedostot päätyvät OmegaT:n käyttäjän tiedostojen kansion /script-alikansioon. Tiedostoissa on:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>segmentin lähdetekstin sisältö (<filename>source.txt</filename>).</para>
+            </listitem>
+
+            <listitem>
+              <para>segmentin kohdetekstin sisältö (<filename>target.txt</filename>)</para>
+            </listitem>
+
+            <listitem>
+              <para>käyttäjän maalaama teksti, jonka jälkeen on painettu <keycap>Ctrl+vaihto+C</keycap> tai valittu <guimenuitem>Muokkaa &gt; Vie valinta</guimenuitem> (<filename>selection.txt</filename>)</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>Tiedostojen sisältö korvataan joko silloin, kun uusi segmentti avataan (uusi teksti tiedostoihin source.txt ja target.txt) tai silloin, kun uusi valinta viedään (uusi teksti tiedostoon selection.txt). Tiedostot ovat muotoilemattomia vain teksti -tiedostoja. Prosessia voidaan ohjata ja tarkkailla Tck/Tcl-pohjaisella komentosarjakielellä. Yksityiskohtaista tietoa, esimerkkjä ja ehdotuksia löytyy kohdasta <ulink url="http://www.omegat.org/en/howtos/text_export.html">OmegaT:n tekstinvientitoiminnon käyttö</ulink>.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>&quot;Mene seuraavaan kääntämättömään segmenttiin&quot; -valinta pysähtyy kohtaan, jolle on vähintään yksi vaihtoehtoinen käännös</term>
+
+        <listitem>
+          <para>Jos käännettävänä on segmenttejä, joille on useita vaihtoehtoisia käännöksiä, ja haluat välttää vääriä käännöksiä, laita rasti ruutuun <emphasis role="bold">Mene seuraavaan kääntämättömään segmenttiin</emphasis>. Silloin ohjelma pysähtyy seuraavan sellaisen segmentin kohdalla, oli se sitten jo käännetty tai ei.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Salli tägien muokkaus</term>
+
+        <listitem>
+          <para>Poista rasti tästä kohdasta, jotta muokkaus (eli tägien osittainen poisto) ei aiheuta vahinkoja tägeille. Tällöin kokonaisen tägin voi poistaa näppäinyhdistelmällä Ctrl+askelpalautin/Delete. Tägin voi myös ensin valita (Ctrl+vaihto+oikea/vasen nuolinäppäin) ja sitten poistaa (Delete tai Ctrl+X).</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Tarkista tägit segmentistä poistuttaessa</term>
+
+        <listitem>
+          <para>Rastita tämä kohta, jolloin ohjelma varoittaa lähde- ja kohdetekstin tägien eroista aina, kun poistut segmentistä.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist id="dialogs.preferences.editor.saveautopopulatedstatus">
+      <varlistentry>
+        <term>Tallenna automaattisesti täytetty tila</term>
+
+        <listitem>
+          <para>Kun rastitat tämän valinnan, <filename>project_save.tmx</filename>-tiedostoon tallentuu tieto siitä, että segmentti on täytetty automaattisesti. Näin saat segmentin näkymään tietyn värisenä Editorissa (rastita tällöin myös Merkitse automaattisesti täytetyt segmentit -valinta).</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Lataa aluksi näin monta segmenttiä:</term>
+
+        <listitem>
+          <para>Editori-ruudussa näkyy oletusarvoisesti 2    000 ensimmäistä segmenttiä. Lisää segmenttejä ladataan progressiivisesti sitä mukaa kun vierität ruutua ylös tai alas. Jos käytät tehokasta konetta ja/tai jos et pidä siitä, kuinka vierityspalkki toimii progressiivisen latauksen yhteydessä, voit kasvattaa tätä lukua.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.tagprocessing">
+    <title>Tägien käsittely</title>
+
+    <para>Kun käännät ohjelmistoon liittyviä tiedostoja, voit määrittää tägien tarkistuksen tarkistamaan myös ohjelmointimuuttujat (%…). Voit myös tehdä erilaisia tägien tarkistukseen liittyviä valintoja ja määritellä mukautettuja tägejä.</para>
+
+    <para>Jos esimerkiksi kirjoitat lausekkeen <userinput>\d+</userinput> <guilabel>Mukautetut tägit säännöllisinä lausekkeina</guilabel> -kenttään, tägien tarkistus käsittelee kaikkia numeroita tägeinä. Tällöin voit tarkistaa, että lähde- ja kohdesegmentin numerot ovat pysyneet samoina.</para>
+
+    <para>Samoin voit kirjoittaa lausekkeen <userinput>&lt;.*?&gt;</userinput>, jolloin lähdetekstissä olevat HTML- ja muut tägit säilyvät sellaisenaan mukana myös käännöksessä.</para>
+
+    <para>Huom.: Voit yhdistää nämä kaksi lauseketta kirjoittamalla <userinput>(&lt;.*?&gt;)|(\d+)</userinput>.</para>
+  </section>
+
+  <section>
+    <title>Ryhmä</title>
+
+    <para>Kirjoita oma nimesi tähän, niin se liitetään kaikkiin segmentteihin, jotka sinä olet kääntänyt.</para>
+
+    <section>
+      <title>Pakettivaraston tunnistetiedot</title>
+
+      <para>Luettelo projekteista, joiden kirjautumistiedot OmegaT pitää tallessa Poista projektin nimi luettelosta, jos haluat, että OmegaT kysyy käyttäjänimeä ja salasanaa aina, kun avaat projektia.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>Käännösmuistiosumat</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Sumeiden osumien järjestelyperuste:</term>
+
+        <listitem>
+          <para>Oletusarvona on, että <guilabel>Sumeat osumat</guilabel> -ruudussa näkyy vartalonmuodostuksen perusteella saatuja lähimpiä osumat.</para>
+
+          <para>Laita <guilabel>Koko teksti tägeineen ja numeroineen</guilabel> -ruutuun rasti, niin saat kirjaimellisempia ja lähempänä 100 % olevia osumia.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Muiden käännöstyökalujen luomissa TMX:ssä olevien tägien esittäminen</term>
+
+        <listitem>
+          <para>Tässä kohdassa päätät, miten ulkopuolisten (siis ei OmegaT:n luomien) TMX-tiedostojen tägejä käsitellään.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Osumanäytön malli</term>
+
+        <listitem>
+          <para>Muuta sumeiden osumien esittämistapaa näiden valmiiksi määriteltyjen muuttujien avulla:</para>
+
+          <table colsep="0" rowsep="0">
+            <title>Osumaruudun asetukset</title>
+
+            <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+              <colspec align="left"/>
+
+              <colspec align="left"/>
+
+              <tbody>
+                <row>
+                  <entry><literal>${id}</literal></entry>
+
+                  <entry>Osuman numero 1–5</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${sourceText}</literal></entry>
+
+                  <entry>Osuman lähdeteksti</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${targetText}</literal></entry>
+
+                  <entry>Osuman kohdeteksti</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${diff}</literal></entry>
+
+                  <entry>Merkkijono, joka näyttää lähteen ja osuman väliset erot<emphasis>Vihje:</emphasis> Käytä tätä, jos kääntämääsi tekstiä on päivitetty.</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${diffReversed}</literal></entry>
+
+                  <entry>Sama kuin ${diff}, mutta muutokset (lisäykset ja poistot) esitetään käännetyssä järjestyksessä</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${score}</literal></entry>
+
+                  <entry><guilabel>Vartalonmuodostus, ei tägejä eikä numeroita</guilabel> -valinnan avulla laskettu prosenttiosuus</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${noStemScore}</literal></entry>
+
+                  <entry><guilabel>Ei tägejä eikä numeroita</guilabel> -valinnan avulla laskettu prosenttiosuus</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${adjustedScore}</literal></entry>
+
+                  <entry><guilabel>Koko teksti tägeineen ja numeroineen</guilabel> -valinnan avulla laskettu prosenttiosuus</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${fuzzyFlag}</literal></entry>
+
+                  <entry>Osoittaa, että osuma on sumea (tällä hetkellä vain silloin, kun käännetään #fuzzy-merkkiä käyttäviä PO-tiedostoja)</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Näkymä</title>
+
+    <para>Tässä on valintoja, joiden avulla tekstit ja muokkaustiedot saadaan näkyville eri tavoin.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Merkitse sekä ensimmäinen toistuva segmentti että muut toistot</term>
+
+        <listitem>
+          <para>Kun tässä kohdassa on rasti, kaikki toistuvat segmentit (toistot) näytetään harmaina. Kun tässä kohdassa ei ole rastia, kaikki muut toistot paitsi toistuvan segmentin ensimmäinen esiintymä näytetään harmaina.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.savingandoutput">
+    <title>Tallentaminen ja tuotos</title>
+
+    <para>Tässä kohdassa voit valita, kuinka monen minuutin ja sekunnin välein projekti tallnnetaan automaattisesti.</para>
+
+    <para>Oletusasetuksena on 3 minuuttia. Muuta sitä projektin ominaisuuksien mukaisesti: käytä</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lyhyitä aikavälejä (väh. 10 sekuntia) silloin, kun projektia synkronoidaan sisäisellä palvelimella ja</para>
+      </listitem>
+
+      <listitem>
+        <para>pitkiä aikavälejä silloin, kun käännät ulkoisella palvelimella isännöityä ryhmäprojektia.</para>
+      </listitem>
+    </itemizedlist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Ulkoinen jälkikäsittelykomento</term>
+
+        <listitem>
+          <para>Määrittele komennot, jotka suoritetaan <guimenuitem>Luo käännetyt tiedostot</guimenuitem> -komennon jälkeen.</para>
+
+          <para>Tätä toimintoa voidaan käyttää esimerkiksi lähettämään käännetyt dokumentit automaattisesti asiakkaan FTP-palvelimelle.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Salli myös projektikohtaiset ulkoiset komennot</term>
+
+        <listitem>
+          <para>OmegaT ei oletusarvoisesti suorita projektikohtaisissa asetuksissa määritettyjä komentoja (<filename>omegat.project</filename>-tiedostossa), koske ne voivat vaarantaa koneen suojauksen.</para>
+
+          <para>Aktivoi tämä valinta vain, jos tiedät, mitä olet tekemässä ja vain projekteissa, jotka tulevat luotetuista lähteistä.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Välityspalvelinkirjautuminen</title>
+
+    <para>Jos OmegaT käyttää internetiä todennetun välityspalvelimen kautta, kirjoita palvelimen järjestelmänvalvojalta saamasi tiedot tähän.</para>
+  </section>
+
+  <section>
+    <title>Suojattu säilö</title>
+
+    <para>Tässä kohdassa voit määrittää uuden pääsalasanan, joka suojaa kirjautumistiedot ja konekäännöspalvelujen salasanat. Ennen kuin luot uuden salasanan, huolehdi siitä, että kaikki nämä yksityiskohdat ovat tallessa, sillä uuden salasanan luominen poistaa ne, ja tiedot on täytettävä uudelleen.</para>
+  </section>
+
+  <section>
+    <title>Liitännäiset</title>
+
+    <para>Antaa pääsyn saatavilla olevien liitännäisten listaan. Liitännäiset asennetaan <filename>/plugins</filename>-kansioon.</para>
+  </section>
+
+  <section>
+    <title>Päivitykset</title>
+
+    <para>Ottaa käyttöön automaattiset ilmoitukset <application>OmegaT</application>-päivityksistä</para>
+  </section>
+</section>

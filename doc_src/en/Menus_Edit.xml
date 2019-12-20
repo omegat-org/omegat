@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>Edit</title>
+
+  <para>This menu displays entries only when a project is open.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Undo Last Action</guimenuitem></term>
+
+      <listitem>
+        <para>Restores the status before the last editing action was taken.
+        This command does not work once the modified segment has been
+        validated.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Redo Last Action</term>
+
+      <listitem>
+        <para>Restores the status before the last editing action was
+        cancelled. This command does not work once the modified segment has
+        been validated.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Replace With Match or Selection</term>
+
+      <listitem>
+        <para>Replaces the whole target segment with the currently selected
+        fuzzy match (by default the first match is selected).</para>
+
+        <para>If some texts are selected within the fuzzy match, only this
+        selection will replace the whole target segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Insert Match or Selection</term>
+
+      <listitem>
+        <para>Inserts the currently selected fuzzy match at the cursor
+        position. If part of the target segment has been selected, this
+        function overwrites the selected portion.</para>
+
+        <para>If some texts are selected within the fuzzy match, only this
+        selection will be inserted at the cursor position.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Replace with Machine Translation</term>
+
+      <listitem>
+        <para>Replaces the target segment with the translation, provided by
+        the selected Machine Translation service. No action is taken, if no
+        Machine Translation service has been activated (in <menuchoice>
+            <guimenu>Options</guimenu>
+
+            <guimenuitem>Machine Translate</guimenuitem>
+          </menuchoice>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Replace with Source</term>
+
+      <listitem>
+        <para>Replaces the whole target segment with the source.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Insert Source</term>
+
+      <listitem>
+        <para>Inserts the source at the cursor position.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Insert Missing Source Tags</term>
+
+      <listitem>
+        <para>Inserts the source tags (if they where missing) at the cursor
+        position.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Insert Next Missing Tag</term>
+
+      <listitem>
+        <para>Inserts only one tag (among the missing ones) at the cursor
+        position.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Export Selection</term>
+
+      <listitem>
+        <para>Exports the current selection to a text file for processing. If
+        no text has been selected, the current source segment is written to
+        this file. When the user exits <application>OmegaT</application>, this
+        file is not emptied, in order to be consistent with usual clipboard
+        behavior. The exported contents are copied to the file
+        <filename>selection.txt</filename> located in the User's preference
+        files folder.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Create Glossary Entry</term>
+
+      <listitem>
+        <para>Allows the user create an entry in the default glossary
+        file.</para>
+
+        <para>If you select a text string (in any pane) before pressing
+        <keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>Shift</keycap>
+
+            <keycap>G</keycap>
+          </keycombo>, the text will be pasted by default in the
+        <guilabel>Source term</guilabel> field.</para>
+
+        <para>This can apply also to <guimenuitem>Target term</guimenuitem>
+        and <guimenuitem>Comment </guimenuitem>fields if new selections are
+        made and <keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>Shift</keycap>
+
+            <keycap>G</keycap>
+          </keycombo> pressed again.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Search Project...</term>
+
+      <listitem>
+        <para>Opens a new <link linkend="windows.textsearch">Search
+        window</link>.</para>
+
+        <para>If you select a text string (in any pane) before pressing
+        <keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>F</keycap>
+          </keycombo>, the text will be pasted by default in the
+        <guilabel>Search for</guilabel> field.</para>
+
+        <para>Pressing <keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>Shift</keycap>
+
+            <keycap>F</keycap>
+          </keycombo> displays the last already opened Search window (instead
+        of opening a new one).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Search and Replace...</term>
+
+      <listitem>
+        <para>Opens a new <link linkend="windows.textreplace">Search
+        and replace window</link>.</para>
+
+        <para>If you select a text string (in any pane) before pressing
+        <keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>K</keycap>
+          </keycombo>, the text will be pasted by default in the
+        <guilabel>Search for</guilabel> field.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Search Dictionaries</term>
+
+      <listitem>
+        <para>If <link linkend="dialogs.preferences.dictionary">automatic searching in dictionaries</link> is disabled, this function allows you to search for the selected word in the dictionaries.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Switch case to</term>
+
+      <listitem>
+        <para>Changes the case of the highlighted text in the target segment
+        to the selected option (Lower case, Upper case, Title case or Sentence
+        case). Use <keycombo>
+            <keycap>Shift</keycap>
+
+            <keycap>F3</keycap>
+          </keycombo> to cycle through the four alternatives. If no text is
+        selected, <application>OmegaT</application> selects the word that
+        contains the letter immediately to the right of the cursor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Select Match</term>
+
+      <listitem>
+        <para>Selects the previous, the next or the Nth fuzzy match displayed
+        in the fuzzy match pane to replace or insert it to the segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Use as Default Translation</term>
+
+      <listitem>
+        <para>If there's several alternative translations available for the
+        active segment, you can label the alternative selected as the default
+        translation. The entry will be greyed, if there's just one translation
+        available.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Create Alternative Translation</term>
+
+      <listitem>
+        <para>The one and the same segment may, depending on the context,
+        require different translations. Select this menu item, if the current
+        translation does not apply and enter the alternative
+        translation.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Remove Translation</term>
+
+      <listitem>
+        <para>Deletes the translation and set the segment as
+        untranslated.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Set empty translation</term>
+
+      <listitem>
+        <para>Define the translation as being empty. In the target document,
+        nothing will appear for this segment. In the Editor, the translation
+        is displayed as &lt;EMPTY&gt;</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Register Identical Translation</term>
+
+      <listitem>
+        <para>Use this command to register the translation to be identical to
+        the source, even if <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Allow
+        translation to be equal to source</guilabel></link> is not
+        checked.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="html" segtype="sentence" adminlang="en-us" srclang="en-us" o-tmf="abc" creationtool="XYZTool" >
+ </header>
+ <body>
+  <tu tuid="1">
+   <tuv xml:lang="en-us">
+    <seg>The big <bpt i="1" x="0" type="bold">&lt;b></bpt>black<ept i="1">&lt;/b></ept> <bpt i="2" x="1" type="ulined">&lt;u></bpt>cat<ept i="2">&lt;/u></ept> sleeps.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Le gros <bpt i="2" x="1" type="ulined">&lt;u></bpt>chat<ept i="2">&lt;/u></ept> <bpt i="1" x="0" type="bold">&lt;b></bpt>noir<ept i="1">&lt;/b></ept> dors.</seg>
+   </tuv>
+  </tu>
+  <tu tuid="2">
+   <tuv xml:lang="en-us">
+    <seg>Test for special characters = <bpt i="1" x="0" type="bold">&lt;b></bpt>&lt;<ept i="1">&lt;/b></ept>=lt, <bpt i="2" x="1" type="bold">&lt;b></bpt>&gt;<ept i="2">&lt;/b></ept>=gt, <bpt i="3" x="2" type="bold">&lt;b></bpt>&amp;<ept i="3">&lt;/b></ept>=amp, <bpt i="4" type="bold" x="3">&lt;b></bpt>&quot;<ept i="4">&lt;/b></ept>=quot.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Test pour caractères spéciaux = <bpt type="bold" i="1" x="0">&lt;b></bpt>&lt;<ept i="1">&lt;/b></ept>=lt, <bpt i="2" type="bold" x="1">&lt;b></bpt>&gt;<ept i="2">&lt;/b></ept>=gt, <bpt i="3" x="2" type='bold'>&lt;b></bpt>&amp;<ept i="3">&lt;/b></ept>=amp, <bpt i="4" x="3" type='bold'>&lt;b></bpt>&quot;<ept i="4">&lt;/b></ept>=quot.</seg>
+   </tuv>
+  </tu>
+  <tu tuid="3">
+   <tuv xml:lang="en-us">
+    <seg>Nested formatting = <bpt i="1" type='bold' x="0">&lt;b></bpt><bpt i="2" x='1' type="italic">&lt;i></bpt><bpt i = '3' type='ulined' x="2">&lt;u></bpt>Bold+Italic+Underlined<ept i="3">&lt;/u></ept>, Bold+Italic<ept i="2">&lt;/i></ept>, Bold<ept i="1">&lt;/b></ept>.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Format en gigogne = <bpt type	=	'bold' i="1" x="0">&lt;b></bpt><bpt type="italic" i="2" x="1">&lt;i></bpt><bpt type='ulined'	i="3" x="2">&lt;u></bpt>gras+italique+souligné<ept i="3">&lt;/u></ept>, gras+italique<ept i="2">&lt;/i></ept>, gras<ept i="1">&lt;/b></ept>.</seg>
+   </tuv>
+  </tu>
+  <tu tuid="4">
+   <tuv xml:lang="en-us">
+    <seg>First <it pos="begin" x="0" type='bold'	>&lt;b></it>sentence.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Première <it type='bold' pos='begin' x="0">&lt;b></it>phrase.</seg>
+   </tuv>
+  </tu>
+  <tu tuid="5">
+   <tuv xml:lang="en-us">
+    <seg>Second<it type='bold'	pos="end" x="0">&lt;/b></it> sentence.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Seconde<it pos='end' x='1' type="bold">&lt;/b></it> phrase.</seg>
+   </tuv>
+  </tu>
+  <tu>	<tuv xml:lang="En-uS">
+    <seg>Picture: <ph x='1' type='image' assoc="p">&lt;img src="img.png"/></ph></seg>
+   </tuv	>
+    <tuv xml:lang="FR-CA">
+    <seg>Image: <ph x='1' type='image' assoc="p">&lt;img src="img.png"/></ph></seg>
+   </tuv>
+  </tu>
+  <tu>
+   <!-- source and target order inverted (valid in TMX) -->
+   <tuv xml:lang="FR-CA">
+    <seg>Du texte avec <hi x='1' type="special-part">une portion délimitée</hi>.</seg>
+   </tuv>
+   <tuv xml:lang="en-us">
+    <seg>Some text with <hi x='1' type="special-part">a part highlighted</hi>.</seg>
+   </tuv>
+  </tu>
+ </body>
+</tmx>

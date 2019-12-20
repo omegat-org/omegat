@@ -7,7 +7,7 @@
                2016 Aaron Madlon-Kay
                2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -32,6 +32,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -369,7 +371,32 @@ public class StringUtilTest {
 
     @Test
     public void testCaseConversion() {
-        assertEquals("This is a test", StringUtil.replaceCase("\\uthis is a test", Locale.ENGLISH)); // uc first
+        // Strings which are not affected by replaceCase despite the backslash
+        List<String> tests = new ArrayList<>();
+        tests.add("\\foo");
+        tests.add("foo\\bar");
+        tests.add("\\foo\\bar");
+        tests.add("\\foo\\");
+        tests.add("\\foo\\x");
+        tests.add("\\");
+
+        for (String s : tests) {
+            assertEquals(s, StringUtil.replaceCase(s, Locale.ENGLISH));
+        }
+
+        // Strings where backslash is used as an escape sequence
+        tests.clear();
+        tests.add("foo\\\\bar"); // double backslash => simple backslash
+        tests.add("foo\\$bar"); // backslash + dollar => dollar
+        tests.add("\\foo\\$bar"); // simple backslash, then backslash + dollar
+
+        for (String s : tests) {
+            assertEquals(s.replace("\\\\","\\").replace("\\$","$"), StringUtil.replaceCase(s, Locale.ENGLISH));
+        }
+
+        // Test normal behaviour of replace case sequences
+        assertEquals("\\hello This is a test", StringUtil.replaceCase("\\hello \\uthis is a test", Locale.ENGLISH));
+        assertEquals("This is a test", StringUtil.replaceCase("\\uthis is a test", Locale.ENGLISH));
         assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\lTHIS IS A TEST", Locale.ENGLISH)); // lc first
         assertEquals("tHIS IS A TEST", StringUtil.replaceCase("\\l\\Uthis is a test", Locale.ENGLISH)); // lc first + uc
         assertEquals("THIS IS A TEST", StringUtil.replaceCase("\\Uthis is a test", Locale.ENGLISH)); // uc all

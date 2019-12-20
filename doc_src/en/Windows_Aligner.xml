@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title>Aligner</title>
+
+  <para>Alignment involves creating a bilingual translation memory from monolingual documents that have already been translated.</para>
+
+  <para>To access this window, select <menuchoice> <guimenuitem>Tools</guimenuitem> <guimenuitem>Align Files...</guimenuitem> </menuchoice>.</para>
+
+  <section>
+    <title>Step 1: Adjust the alignment parameters</title>
+
+    <para>If the alignment looks as if it could be improved, try changing the parameters. In most cases, the lower the <guilabel>Average score</guilabel> is, better the alignment will be.</para>
+
+    <para>In <guilabel>Heapwise</guilabel> mode, the texts are evaluated globally. In <guilabel>Parsewise</guilabel> mode, they are evaluated segment by segment.</para>
+
+    <para>Use <guilabel>ID comparison</guilabel> mode to align Key=Value texts. This works even if the keys are not in the same order in the two files, and/or if the two files do not contain the same amount of information. This option only appears if both the selected files are recognised as Key=Value files.</para>
+
+    <para>The <guilabel>Viterbi</guilabel> and <guilabel>Forward-Backward</guilabel> algorithms are two different calculation methods. Choose the one that provides the best results.</para>
+
+    <para>Click <guibutton>Continue</guibutton> to access the next step.</para>
+  </section>
+
+  <section>
+    <title>Step 2: Make manual corrections</title>
+
+    <para>After the automatic process, the alignment of two files generally requires manual corrections.</para>
+
+    <para>Translation units are located in cells in the two last
+    columns.</para>
+
+    <para>To align two segments on the same line:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Select the first segment.</para>
+      </listitem>
+
+      <listitem>
+        <para>Press the space bar (shortcut for <menuchoice> <guimenuitem>Edit</guimenuitem> <guimenuitem>Start Pinpoint Align</guimenuitem> </menuchoice>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Click in the other column on the translation corresponding to the first segment.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>After several of these operations, select <menuchoice> <guimenuitem>Edit</guimenuitem> <guimenuitem>Realign pending</guimenuitem> </menuchoice> to update the alignment of the other segments.</para>
+
+    <para>To modify the position of one or more segments individually, select the segment(s) and press <userinput>U</userinput> (<guilabel>Move Up</guilabel>) or <userinput>D</userinput> (<guilabel>Move Down</guilabel>).</para>
+
+    <para>Only rows with the <guilabel>Keep</guilabel> box ticked in the first column will be included when the translation memory is created.</para>
+
+    <para>When the two columns are sufficiently aligned, click <guibutton>Save TMX...</guibutton> to create the resulting translation memory.</para>
+  </section>
+</section>

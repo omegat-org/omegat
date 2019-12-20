@@ -18,7 +18,7 @@ A legfrissebb információk az OmegaT-ről megtalálhatók
       http://www.omegat.org/
 
 A felhasználók a Yahoo (többnyelvű) felhasználói csoportjától kaphatnak támogatást, ahol az archivált anyagok között feliratkozás nélkül tallózhat.
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 A program bővítésére vonatkozó kérések (angolul) a SourceForge portálján:
      http://sourceforge.net/tracker/?group_id=68187&amp;atid=520350
@@ -238,7 +238,7 @@ A megfelelő hibajelzés három dologra szorítkozik.
 A jelentéshez csatoljon állományokat, naplórészleteket, képernyőképeket, bármit, amivel véleménye szerint segíti a fejlesztőket a hiba megtalálásában és kijavításában.
 
 A felhasználói csoport archívumában való kereséshez látogasson el ide:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 A hibajelentés oldalán való keresésre és szükség esetén új hibajelentés készítésére itt nyílik lehetősége:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347

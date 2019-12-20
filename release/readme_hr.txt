@@ -1,4 +1,4 @@
-Autor prijevoda je Denis Gracin; autorska prava © 2018 Denis Gracin.
+Autor prijevoda je Denis Gracin; autorska prava © 2019 Denis Gracin.
 
 
 Što je OmegaT?
@@ -63,7 +63,7 @@ Tehnologija Java Web Start je jedan od načina za instaliranje programa OmegaT, 
 
 U tu svrhu trebate preuzeti pa izvršiti sljedeću datoteku:
 
-   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
 Njome se prilikom prvoga pokretanja instalira valjano okruženje koje odgovara i vašemu računalu i samome programu. Naknadni pozivi programa ne moraju biti obavljani putem weba.
 
@@ -129,15 +129,15 @@ Suradnici
 
 OmegaT je izvorno djelo Keitha Godfreya.
 
-Didier Briel je voditelj projekta OmegaT.
+Aaron Madlon-Kay je voditelj projekta OmegaT.
 
 Tekući tim:
 (abecednim redoslijedom)
 
   Vincent Bidaux (voditelj dokumentacije)
-  Didier Briel (voditelj projekta OmegaT, voditelj zajednice za Twitter)
-  Kos Ivantsov (voditelj lokalizacije)
-  Aaron Madlon-Kay (voditelj integracije)
+  Marco Cevoli (voditelj zajednice za Telegram)
+  Jean-Christophe Helary (voditelj zajednice za Twitter) 
+  Kos Ivantsof (voditelj lokalizacije)
   Concepción Martin (voditeljica zajednice za Facebook)
   Briac Pilpré (održavanje web stranica)
   Lucie Vecerova (voditeljica zajednice za Facebook)
@@ -147,6 +147,8 @@ Doprinosi u razvoju kôda dokumentirani su u datoteci /docs/contributors.txt.
 Neki od prijašnjih suradnika:
 (abecednim redoslijedom)
 
+  Anthony Baldwin (voditelj lokalizacije)
+  Didier Briel (voditelj projekta)
   Alex Buloichik (glavni programer)
   Sabine Cretella
   Dmitri Gabinski
@@ -171,7 +173,7 @@ Najnovije informacije o programu OmegaT možete naći na sljedećoj adresi:
 
 Korisnička podrška na (višejezičnim) stranicama korisničke skupine Yahoo, gdje možete pretraživati arhive bez potrebe za registriranjem:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Zahtjevi za poboljšanja programa (na engleskome jeziku) na web stranicama servisa SourceForge:
 

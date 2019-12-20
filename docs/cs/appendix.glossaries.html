@@ -1,0 +1,259 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;B.&nbsp;Glosáře</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - Uživatelská příručka">
+      <link rel="prev" href="appendix.dictionaries.html" title="Appendix&nbsp;A.&nbsp;Slovníky">
+      <link rel="next" href="appendix.spellchecker.html" title="Appendix&nbsp;C.&nbsp;Kontrola pravopisu">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;B.&nbsp;Glosáře</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.dictionaries.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.spellchecker.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.glossaries"></a>Appendix&nbsp;B.&nbsp;Glosáře
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5550">1. Používání</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5589">2. Formát souboru</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5624">3. Jak glosáře vytvořit</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5660">4. Prioritní glosář</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5667">5. Obecné problémy glosáře</a></span></dt>
+            </dl>
+         </div>
+         <p>Glosáře představují soubory, které jsou pro použití v <span class="application">OmegaT</span> tvořené a aktualizované ručně.
+         </p>
+         <p>Pokud projekt <span class="application">OmegaT</span> obsahuje jeden či více glosářů, jakékoliv termíny v glosáři, pokud jsou nalezené v aktuálním segmentu, budou automaticky
+            zobrazené v okně Glosář.
+         </p>
+         <p>Sami si zvolíte umístění a název svého glosáře v dialogovém okně Vlastnosti projektu. Koncovka musí být <code class="filename">.txt</code> nebo <code class="filename">.utf8</code> (pokud chybí, bude přidána). Umístění tohoto souboru musí být sice v adresáři <code class="filename">/glossary</code>, ale zato může být na jakékoliv nižší úrovni (např. <code class="filename">glossary/sub/glossary.txt</code>). Soubor glosáře nemusí existovat v době vytváření adresáře, samotný soubor glosáře bude vytvořen (pokud nutno) přidáním
+            prvního záznamu. Pokud už máte soubor glosáře k dispozici, program nebude ověřovat formát nebo znakovou sadu: nové záznamy
+            budou vždy ve formátu, kdy jsou záznamy od sebe odděleny tabulátorem a kódování bude UTF-8. Protože se nezasahuje do již existujícího
+            obsahu, je též omezeno riziko poškození již existujícího souboru.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5550"></a>1.&nbsp;Používání
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dostupný glosář začněte používat tak, že jej po vytvoření projektu jednoduše umístíte do adresáře <code class="filename">/glossary</code>. Když je projekt otevřený, <span class="application">OmegaT</span> v tomto adresáři soubory glosáře automaticky detekuje. Výrazy aktuálního segmentu, které <span class="application">OmegaT</span> najde v souboru (souborech) glosáře, se zobrazují v okně Glosář:
+            </p>
+            <div class="figure"><a name="d0e5564"></a><p class="title"><b>Figure&nbsp;B.1.&nbsp;Okno Glosář</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Okno Glosář"></div>
+               </div>
+            </div><br class="figure-break"><p>Slovo před znakem rovnítka (=) je termín zdrojového jazyka a jeho překlad (překlady) jsou za rovnítkem. K záznamu v glosáři
+               můžete přidat komentář. Funkce glosáře nalezne jen takové výrazy, pokud se záznam v glosáři přesně shoduje se slovem v překládaném
+               textu (např. nenalezne skloňované tvary atd.). Nové záznamy mohou být ručně přidány do souboru nebo souborů glosáře v průběhu
+               překladu. Nově vložené pojmy budou rozpoznané až po novém načtení projektu.
+            </p>
+            <p>Termín ve zdrojovém jazyce nemusí být položka o jednom slovu, jak to vidíme na příkladě:</p>
+            <div class="figure"><a name="d0e5576"></a><p class="title"><b>Figure&nbsp;B.2.&nbsp;záznamy o více slovech v glosáři – příklad</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="záznamy o více slovech v glosáři – příklad"></div>
+               </div>
+            </div><br class="figure-break"><p>Podtržené slovo „pop-up menu“ může být v glosáři nalezeno jako „pojavni menu“. V glosáři nalezený záznam vložíte do překladu
+               tak, že označíte termín v podokně Glosáře a kliknete pravým tlačítkem (nebo kolečkem) myši do cílového segmentu.<a href="#ftn.d0e5586" class="footnote" name="d0e5586"><sup class="footnote">[1]</sup></a></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5589"></a>2.&nbsp;Formát souboru
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Soubory glosáře představují jednoduché soubory v prostém textu a obsahují tři tabulátorem oddělené sloupce, ve kterých se
+               nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použit pro dodatečné informace. Také
+               můžete mít záznamy, kde chybí sloupec s překladem, tj. záznamy jen s nějakým pojmem a příslušný komentář.
+            </p>
+            <p>Kódování glosářů je určováno automaticky. Kódování se zajisté musí shodovat s oběma obsaženými jazyky, proto je doporučováno
+               použít Unicode.
+            </p>
+            <p>Formát CSV je také podporován. Tento formát je prakticky to samé jako když jsou položky odděleny tabulátorem: zdrojový výraz,
+               cílový výraz. Pole s komentářem je odděleno čárkou ','. Jednotlivé řetězce mohou být ohraničeny uvozovkami ", což umožňuje
+               použít čárku uvnitř řetězce.
+            </p>
+            <p><code class="literal">"Toto je zdrojový výraz, který obsahuje čárku","c'est un terme, qui contient une virgule"</code></p>
+            <p>Vedle prostého textového formátu je podporován formát TBX jakožto formát slovníku určený pouze pro čtení.. Umístění souboru
+               <code class="filename">.tbx</code> musí být sice v adresáři <code class="filename">/glossary</code>, ale zato může být na jakékoliv nižší úrovni (např. <code class="filename">glossary/sub/MujGlosar.txt</code>).
+            </p>
+            <p>TBX - Term Base eXchange - je otevřený standard založený na XML a slouží k výměně strukturovaných dat, TBX se osvědčil jako
+               mezinárodní standard organizací LISA a ISO. Pokud používáte systém pro správu terminologie je docela možné, že bude nabízet
+               export terminologických dat do formátu TBX. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Sbírka terminologických slovníčků Microsoft Terminology Collection</a> nabízí ke stažení terminologii v téměř stech jazycích a slouží jako základ IT glosáře.
+            </p>
+            <p>Poznámka: koncovka <code class="filename">.tbx</code> souborů MultiTerm se zdá být nespolehlivá (listopad 2013), doporučujeme místo ní raději používat pro MultiTerm kocovku <code class="filename">.tab</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5624"></a>3.&nbsp;Jak glosáře vytvořit
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Při nastavování projektu je možno zadat název pro zapisovatelný soubor glosáře (viz začátek této kapitoly). Kliknutím pravým
+               tlačítkem myši v okně glosáře, nebo stiskem klávesové zkratky <span class="keycap"><strong>Ctrl+Shift+G</strong></span> se přidává nový záznam. Otevře se dialogové okno, které umožní vložit zdrojový pojem, překlad a také v případě zájmu i komentář.
+            </p>
+            <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
+            <p>Obsah souboru glosáře je přístupný v paměti a je nahrán když se otevírá nebo znovu načítá projekt. Aktualizace glosáře je
+               tedy zcela jednoduchá: stiskněte <span class="keycap"><strong>Ctrl+Shift+G </strong></span> a zadejte nový termín, jeho překlad a příslušný komentář (ujistěte se, že jste stiskli tabulátor pro přechod mezi jednotlivými
+               poli) a soubor uložte. Současně bude aktualizován obsah podokna Glosář.
+            </p>
+            <p>Umístění zapisovatelného souboru glosáře si můžete nastavit přes dialog <span class="guimenuitem">Projekt &gt; Vlastnosti...</span> Rozeznatelné koncovky jsou <code class="filename">TXT</code> a <code class="filename">UTF8</code>.
+            </p>
+            <p><span class="bold"><strong>Poznámka:</strong></span> Jistě že jsou tu i jiné způsoby a prostředky jak vytvořit prostý soubor se záznamy oddělenými tabulátorem. Pro tyto účely
+               můžete používat například Notepad++ pod Windows, GEdit na Linuxu nebo nějaký tabulkový procesor: lze použít jakoukoliv aplikaci,
+               která umí pracovat s UTF-8 (nebo UTF-16 LE), a která umí zobrazit netisknutelné znaky (takže vám nebude chybět značka tabulátoru
+               <span class="keycap"><strong>TAB</strong></span>).
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5660"></a>4.&nbsp;Prioritní glosář
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Výsledky hledání z prioritního glosáře (ve výchozím nastavení je to soubor glossary/glossary.txt) se zobrazují na prvním místě
+               v podokně Glosář a pro TransTips.
+            </p>
+            <p>Když se mezi zobrazenými záznamy vyskytují slova z prioritních a neprioritních glosářů, pak jsou slova z prioritních glosářů
+               zobrazena tučně.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5667"></a>5.&nbsp;Obecné problémy glosáře
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Problém: Nezobrazují se žádné termíny z glosáře.</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>V adresáři „glossary“ není umístěn žádný glosář.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Soubor glosáře je prázdný.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Položky glosáře nejsou od sebe odděleny tabulátorem.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Soubor glosáře nemá správnou koncovku (.tab, .utf8 nebo .txt).</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Není nalezena PŘESNÁ shoda mezi záznamem v glosáři a zdrojovým textem ve vašem dokumentu – například když je daná položka
+                        v množném čísle.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Soubor glosáře nemá správné kódování.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>V aktuálním segmentu nejsou žádné termíny, které se kryjí s termíny v glosáři.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Jeden nebo více z nahoře zmíněných problémů byl vyřešen, ale projekt nebyl nově načten.</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Problém: V podokně Glosář se některé znaky nezobrazují správně </strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>... ale stejné znaky v okně Editoru jsou zobrazeny správě: koncovka a kódování si neodpovídají.</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e5586" class="footnote">
+               <p><a href="#d0e5586" class="para"><sup class="para">[1] </sup></a>Ve výše uvedeném případě jsme si k věci neřekli vše, protože cílový jazyk (zde slovinština) používá deklinaci. Takže vložený
+                  výraz „pojavni menu“ ve tvaru nominativu musí být změněno na „pojavnem meniju“, tj. tvar lokativu. Je tedy pravděpodobně rychlejší
+                  daný pojem napsat hned správně bez kroku navíc vkládat termín z glosáře, byť pomocí klávesové zkratky, a vyhnout se těmto
+                  úprávám.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.dictionaries.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.spellchecker.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;A.&nbsp;Slovníky&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;C.&nbsp;Kontrola pravopisu</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

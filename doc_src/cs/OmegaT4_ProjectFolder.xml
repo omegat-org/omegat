@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="project.folder">
+  <title>Adresář projektu</title>
+
+  <para>Projekt OmegaT je adresář obsahující soubory a podadresáře.</para>
+
+  <section>
+    <title>source</title>
+
+    <para>Podadresář zdrojového textu (source) obsahuje soubory, které se mají překládat. Můžete přidávat soubory i později. Nezapomeňte ale, že struktura zdrojového podadresáře může mít libovolnou formu. Pokud jsou soubory, které budete překládat, součástí stromové struktury (jako např. webová stránka), vše co musíte udělat je určit nejvyšší podadresář a OmegaT zkopíruje veškerý obsah, a stromová struktura zůstane zachována.</para>
+  </section>
+
+  <section>
+    <title>target</title>
+
+    <para>Ze začátku je tento podadresář prázdný. Naplníte jej obsahem vybráním <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Projekt</guimenu> <guimenuitem>Vytvořit přeložené dokumenty.</guimenuitem> </menuchoice>. Soubory z adresáře <filename>source</filename>, ať už jsou přeloženy nebo ne, budou generovány do adresáře ‚target‛, a to se stejnou hierarchií, která se nachází ve zdrojovém adresáři. Obsah podadresáře překladu odpovídá aktuálnímu stavu překladu, stejně jako v překladové paměti překladu, která je uložena aktuálně v <emphasis role="bold">/omegat/project_save.tmx</emphasis>. Nepřeložené segmenty proto zůstanou ve výchozím jazyce.</para>
+  </section>
+
+  <section>
+    <title>tm</title>
+
+    <para>Adresář /tm/ může obsahovat libovolné množství vedlejších překladových pamětí, čili souborů tmx. Takové soubory mohly být vytvořeny jakýmkoliv z výše jmenovaných způsobů. Všimněte si, že jiné nástroje CAT umí exportovat (a také importovat) soubory tmx, obvykle všechny tři formy. Samozřejmě nejlepší věc je použít soubory překladové paměti specifické pro OmegaT (viz výše), takže zůstane zachované formátování textu.</para>
+
+    <para>Obsahy překladových pamětí v podadresáři tm slouží ke generování návrhů pro překládaný text či texty. Jakýkoliv text, který byl již přeložený a uložený do těchto souborů, se objeví mezi návrhy přibližného překladu, pokud je tedy v dostatečné míře podobný textu, který je právě překládán.</para>
+
+    <para>Pokud je zdrojový segment v jedné z vedlejších překladových pamětí identický s právě překládaným textem, OmegaT se zachová tak, jak je to nastaveno v dialogovém okně <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice>  Například (pokud je akceptováno výchozí nastavení), překlad z vedlejší překladové paměti je akceptován a je přidána předpona <emphasis>[přibližně]</emphasis>, takže překladatel si může takovéto překlady v pozdější fázi překladu projít a zkontrolovat, jestli takto označené segmenty byly přeloženy správně<menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+
+    <para>Může se stát, že překladové paměti dostupné v podadresáři <filename>tm</filename> obsahují segmenty s identickým zdrojovým textem, ale odlišnými překlady. Soubory překladových pamětí jsou načítány podle svých názvů a segmenty obsažené v dané překladové paměti jsou načítány po řádcích. Poslední segment s identickým zdrojovým textem má tedy větší váhu (samozřejmě je smysluplnější v první řadě takovýmto situacím předcházet).</para>
+
+    <para>Soubory překladových pamětí v adresáři tm mohou být komprimovány jako gzip.</para>
+
+    <section>
+      <title>tm/auto</title>
+
+      <para>Pokud je na samotném začátku jasné, že překlady v dané překladové paměti (nebo více pamětech) jsou správné, je možné je vložit do adresáře <emphasis role="bold">tm/auto</emphasis> a vyhnout se tak potvrzování spousty případů <emphasis>[přibližně]</emphasis>.</para>
+
+      <para><orderedlist>
+          <listitem>
+            <para>Vložit TMX do /tm/auto.</para>
+          </listitem>
+
+          <listitem>
+            <para>Otevřete projekt. Změny jsou zobrazeny.</para>
+          </listitem>
+
+          <listitem>
+            <para>Udělejte drobnou změnu kdekoliv v projektu. Toto upraví soubor <filename>project_save.tmx</filename> (přidáním správných překladových jednotek z &quot;auto&quot; TMX)</para>
+          </listitem>
+        </orderedlist></para>
+
+      <para>Poznámka: pokud je paměť TMX z adresáře /tm/auto odstraněna před spuštěním kroku 3, tak se nepřidá žádná dodatečná překladová jednotka.</para>
+    </section>
+
+    <section>
+      <title>tm/enforce</title>
+
+      <para>Pokud nejsou žádné pochybnosti o tom, že dodaná paměť TMX je přesnější než <filename>project_save.tmx</filename> programu OmegaT, pak vložt tuto TMX do adresáře /tm/enforce a existující výchozí paměť bude přepsána bez dalších podmínek.</para>
+
+      <para><orderedlist>
+          <listitem>
+            <para>Vložte TMX do /tm/enforce.</para>
+          </listitem>
+
+          <listitem>
+            <para>Otevřete projekt. Změny jsou zobrazeny.</para>
+          </listitem>
+
+          <listitem>
+            <para>Udělejte drobnou změnu kdekoliv v projektu. Toto upraví soubor <filename>project_save.tmx</filename>.</para>
+          </listitem>
+
+          <listitem>
+            <para>Učiňte rozhodnutí o imunitě vynucených segmentů:<itemizedlist>
+                <listitem>
+                  <para>Pokud <emphasis>nepotřebují</emphasis> zůstat imunní vůči dalším změnám, pak přesuňte paměť TMX z /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Pokud <emphasis>musí</emphasis> zůstat imunní vůči dalším zěmnám, pak nechejte TMX v adresáři /tm/enforce.</para>
+                </listitem>
+              </itemizedlist></para>
+          </listitem>
+        </orderedlist></para>
+
+      <para>Poznámka: pokud bude TMX odstraněna z /tm/enforce před krokem 3, pak nebudou žádné nucené změny uchovány.</para>
+    </section>
+
+    <section>
+      <title>tm/mt</title>
+
+      <para>Když se vloží přibližný překlad z paměti TMX, která je umístěna v adresáři nazvaném <filename>mt</filename>, pak se v podokně editoru pozadí aktivního segmentu změní na červenou. Pozadí bude obnoveno na běžnou barvu, když segment opustíte.</para>
+    </section>
+
+    <section>
+      <title>tm/penalty-xxx</title>
+
+      <para>Někdy je užitečné rozlišovat mezi překladovými pamětmi, kde je kladen důraz na kvalitu, a takovými, které nejsou tolik spolehlivé, čili, kde se tolik neklade důraz na obsah, klienta, revizi, status, atd. Pro překladové paměti v adresářích s názvem <filename>penalty-xxx</filename> (s hodnotou xxx mezi 0 a 100), jsou přibližné překlady negativně hodnoceny dle názvu adresáře: např. 100% shody v jakékoli překladové paměti, která je v adresáři nazvaném <filename>Penalty-30</filename>, bude snížena na 70% shody. Snížení míry shody je pak aplikováno na všechny tři typy procentní shody: shody 75, 80, 90 budou v takovém případě sníženy na 45, 50, 60.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>dictionary</title>
+
+    <para>Tento adresář je u nového projektu prázdný, ale pak sem budou ukládány slovníky, které vytvoříte během práce na projektu. Více informací k tomuto tématu naleznete v části <link linkend="appendix.dictionaries">Slovníky</link>.</para>
+  </section>
+
+  <section>
+    <title>glossary</title>
+
+    <para>Na začátku projektu v tomto adresáři nic není. Bude ale obsahovat glosáře, které používáte během práce na projektu. Více informací  k tomuto tématu naleznete v části <link linkend="appendix.glossaries">Glosáře</link>.</para>
+  </section>
+
+  <section id="folder.omegat">
+    <title>O aplikaci OmegaT</title>
+
+    <para>Podadresář <emphasis role="bold">omegat</emphasis> obsahuje minimálně jeden nebo více dalších souborů. Soubor <filename>project_save.tmx</filename> představuje pracovní překladovou paměť projektu. Zálohy tohoto souboru (s koncovkou .bak) se průběžně ukládají do tohoto podadresáře, nejprve na začátku překladového sezení, na jeho konci, ale také v průběhu překládání.</para>
+
+    <para>Během překladu dalších souborů mohou být v tomto adresáři vytvořeny i tyto soubory </para>
+
+    <variablelist>
+      <varlistentry>
+        <term>stats.txt</term>
+
+        <listitem>
+          <para>obsahují aktuální statistiky právě zpracovávaného projektu. Obsah můžete zobrazit vybráním <guimenuitem>Nástroje &gt; Statistika</guimenuitem></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>ignored_words.txt.</term>
+
+        <term>learned_words.txt</term>
+
+        <listitem>
+          <para>Oba vytvoří a využívá kontrola pravopisu. Pokud jste již nasbírali slova, která má kontrola pravopisu ignorovat nebo akceptovat, stačí, abyste tyto oba soubory nakopírovali do podadresáře <filename>omegat</filename> ve vašem aktuálním projektu. </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>project_stats_match.txt</term>
+
+        <listitem>
+          <para>Pbsahuje statistiku shody posledního zpracovávaného projektu, je generován přes <guimenuitem>Nástroje &gt; Statistika shody</guimenuitem></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>segmentation.conf</term>
+
+        <listitem>
+          <para>pokud existuje, pak obsahuje segmentační pravidla specifická pro daný projekt.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>filters.xml</term>
+
+        <listitem>
+          <para>pokud existuje, obsahuje filtry souborů specifické pro daný projekt.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>uiLayout.xml</term>
+
+        <listitem>
+          <para>pokud extistuje, tak obsahuje nastavení grafického prostředí typické pro daný projekt</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>soubor omegat.project</title>
+
+    <para>Obsahuje projektový paramtery tak, jak byla definována v dialogu <link linkend="dialogs.projectproperties">Vlastnosti projektu</link>.</para>
+  </section>
+
+  <section>
+    <title>.repositories</title>
+
+    <para>V týmovém projektu obsahuje tento adresář různé verze kopií projektové stromové struktury napojené přímo na vzdálený server.</para>
+
+    <para>Můžete měnit vzdálené soubory (např. smazáním souboru) jak použitím tohoto adresáře, tak i klienta Git nebo SVN.</para>
+
+    <para>V některých operačních systémech se tento adresář při výchozím nastavení nezobrazuje. Aby jste jej mohli vidět, kativujte možnost „Zobrazit skryté soubory“.</para>
+  </section>
+</chapter>

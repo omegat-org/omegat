@@ -7,7 +7,7 @@
                2012 Jean-Christophe Helary
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -45,6 +45,7 @@ import java.util.stream.Stream;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
@@ -65,6 +66,8 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
+import org.omegat.util.Java8Compat;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -118,7 +121,10 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             }
         });
 
+        Core.getEditor().registerPopupMenuConstructors(750, new DictionaryPopup());
+
         Preferences.addPropertyChangeListener(Preferences.DICTIONARY_FUZZY_MATCHING, e -> refresh());
+        Preferences.addPropertyChangeListener(Preferences.DICTIONARY_AUTO_SEARCH, e -> refresh());
     }
 
     @Override
@@ -181,7 +187,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         }
         try {
             // rectangle to be visible
-            Rectangle rect = modelToView(el.getStartOffset());
+            Rectangle rect = Java8Compat.modelToView(this, el.getStartOffset());
             // show 2 lines
             if (rect != null) {
                 rect.height *= 2;
@@ -200,7 +206,15 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {
+        if (!Preferences.isPreferenceDefault(Preferences.DICTIONARY_AUTO_SEARCH, true)) {
+            return;
+        };
         new DictionaryEntriesSearchThread(newEntry).start();
+    }
+
+    @Override
+    public void searchText(String text) {
+        new DictionaryTextSearchThread(text).start();
     }
 
     /**
@@ -266,7 +280,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             UIThreadsUtil.mustBeSwingThread();
 
             JPopupMenu popup = new JPopupMenu();
-            int mousepos = viewToModel(p);
+            int mousepos = Java8Compat.viewToModel(DictionariesTextArea.this, p);
             final String word = getWordAtOffset(mousepos);
             if (word != null) {
                 JMenuItem item = popup.add(StringUtil.format(OStrings.getString("DICTIONARY_HIDE"), word));
@@ -322,6 +336,59 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             Collections.sort(result);
 
             return result;
+        }
+    }
+
+    /**
+     * Thread for user requested dictionary search.
+     */
+    public class DictionaryTextSearchThread extends Thread {
+
+        private final String src;
+        private final ITokenizer tok;
+        private final DictionariesTextArea pane;
+
+        public DictionaryTextSearchThread(final String text) {
+            src = text;
+            tok = tokenizer;
+            pane = DictionariesTextArea.this;
+        }
+
+        protected List<DictionaryEntry> search() {
+            if (tok == null) {
+                return null;
+            }
+
+            List<String> words = Stream.of(tok.tokenizeWordsToStrings(src, StemmingMode.NONE)).distinct()
+                    .collect(Collectors.toList());
+
+            List<DictionaryEntry> result = manager.findWords(words);
+            Collections.sort(result);
+
+            return result;
+        }
+
+        @Override
+        public void run() {
+
+            List<DictionaryEntry> result = null;
+            Exception error = null;
+            try {
+                result = search();
+            } catch (Exception ex) {
+                error = ex;
+                Log.log(ex);
+            }
+
+            final List<DictionaryEntry> fresult = result;
+            final Exception ferror = error;
+            SwingUtilities.invokeLater(() -> {
+                if (ferror != null) {
+                    pane.setError(ferror);
+                } else {
+                    pane.setFoundResult(currentlyProcessedEntry, fresult);
+                }
+            });
         }
     }
 

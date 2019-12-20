@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.reusetm">
+  <title>Vanhojen käännösmuistien hyödyntäminen</title>
+
+  <para>Projektin pääkäännösmuisti on <filename>project_save.tmx</filename>. Aluksi, eli kun projekti luodaan, käännösmuisti on tyhjä. Käännösmuistiin kertyy sisältöä käännöstyön aikana. Tätä prosessia voidaan nopeuttaa käyttämällä olemassa olevia käännöksiä uudelleen. Jos käännettävänä on lause, joka on käännetty jo aiemmin ja on käännetty oikein, sitä ei tarvitse kääntää uudelleen. Käännösmuisteissa voi olla myös viitteinä toimivia käännöksiä. Tyypillinen esimerkki tästä on Euroopan unionin monikielinen lainsäädäntö.</para>
+
+  <para>Kun luot <application>OmegaT</application>-projektin kohdeasiakirjoja, projektin käännösmuisti siirtyy kolmeksi tiedostoksi <application>OmegaT</application>-projektin pääkansioon (ks. yllä oleva kuvaus). Näitä kolmea TMX-tiedostoa (<filename>-omegat.tmx</filename>, <filename>-level1.tmx</filename> ja <filename>-level2.tmx</filename>) voi pitää &quot;vientikäännösmuisteina&quot;, joihin senhetkisen projektin sisältö on viety kaksikieliseen muotoon.</para>
+
+  <para>Jos haluat käyttää käännösapuna edellisen projektin käännösmuistia (esim. kun uusi projekti on edellisen projektin kaltainen tai kun projektissa käytetään terminologiaa, jota on käytetty aiemminkin), voit käyttää näitä käännösmuisteja &quot;tuontikäännösmuisteina&quot;, eli tuoda ne mukaan uuteen projektiin. Vie haluamasi käännösmuistit uuden projektin <emphasis>/tm</emphasis>-kansioon. Tämän kansion käännösmuisteista löytyvät osumat näkyvät sumeiden osumien ruudussa. Voit myös viedä käännösmuisteja <emphasis>/tm</emphasis>/auto-kansioon. Tässä kansiossa olevia käännösmuisteja käytetään lähdetekstin esikääntämiseen.</para>
+
+  <para>Oletusarvoisesti /tm-kansio on projektin pääkansiossa (esim. …<emphasis>/OmaProjekti/tm</emphasis>), mutta voit halutessasi valita sille toisen kansion projektin ominaisuuksien valintaikkunassa. Tämä on käytännöllistä, jos käytät usein vanhoja käännösmuisteja uudelleen vaikkapa siksi, koska käännösten aihepiiri on sama tai käännät samalle asiakkaalle. Tällöin voi olla hyödyllistä menetellä näin:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Luo sopivaan sijaintiin tietokoneellesi kansio (&quot;tietovarastokansio&quot;) tiettyä asiakasta tai tiettyä aihepiiriä varten.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Aina kun saat käännösprojektin valmiiksi, kopioi yksi projektin pääkansiossa olevista &quot;vientikäännösmuisteista&quot; tähän tietovarastokansioon.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Kun aloitat uuden projektin, joka käsittelee samaa aihepiiriä tai menee samalle asiakkaalle, etsi kohta <guimenuitem>Projekti &gt; Ominaisuudet &gt; Muokkaa projektia</guimenuitem> ja valitse äsken luomasi tietovarastokansio uuden projektin käännösmuistikansioksi.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Kun projekti avataan, OmegaT käy läpi kaikki /tm-kansiossa olevat TMX-tiedostot. Jos siis kaikki eri käännösmuistisi ovat tässä yhdessä kansiossa, ohjelma voi hidastua aivan suotta. Voit myös poistaa kaikki ne käännösmuistit, joita et enää tarvitse <filename>project-save.tmx</filename>-tiedoston täyttämiseen.</para>
+
+  <section>
+    <title>Käännösmuistien tuonti ja vienti</title>
+
+    <para>OmegaT tukee tuotuja TMX-tiedostoja, joiden versionumerot ovat 1.1–1.4b (sekä ykkös- että kakkostasolla). Näin OmegaT voi lukea toisissa työkaluissa luotuja käännösmuisteja. OmegaT ei kuitenkaan tue täysin kakkostason TMX-tiedostoja (näissä säilytetään käännösten lisäksi myös muotoilut). Kakkostason TMX-tiedostot tuodaan kyllä OmegaT:hen, ja niiden tekstisisältö näkyy ohjelmassa, mutta sumeiden osumien laatu on hieman heikompi.</para>
+
+    <para>OmegaT käyttää erittäin tiukkoja menettelytapoja käännösmuistien (TMX-tiedostojen) lataamiseen. Jos tiedostossa on virhe, OmegaT osoittaa virheen sijainnin tiedostossa.</para>
+
+    <para>Joidenkin työkalujen tiedetään tietyissä olosuhteissa tuottavan virheellisiä TMX-tiedostoja. Jos haluat käyttää tällaisia tiedostoja viitekäännöksinä, ne on korjattava. Muutoin OmegaT ilmoittaa virheestä, eikä käännösmuistien lataaminen onnistu. Vaaditut korjaukset ovat pikkutoimia, ja OmegaT:n antama virheilmoitus on apuna vianmäärityksessä. JOs kohtaat ongelmia, voit kysyä neuvoa käyttäjäryhmältä.</para>
+
+    <para>OmegaT:stä vietävien (sekä ykkös- että kakkostason) TMX-tiedostojen versionumero on 1.4. Kakkostason TMX-tiedoston vienti ei aivan ole kakkostason standardin mukainen, mutta kuitenkin niin lähellä sitä, että siitä löytyy oikeanlaisia osumia muissa kakkostason käännösmuistitiedostoja tukevissa ohjelmissa. Jos tarvitset käännösmuistissa vain tekstuaalista tietoa (etkä siis muotoilutietoja), käytä OmegaT:n luomaa ykköstason tiedostoa.</para>
+  </section>
+
+  <section>
+    <title>Valittujen asiakirjojen käännösmuistin luominen</title>
+
+    <para>Jos kääntäjät haluavat jakaa TMX-tietokantojaan, mutta jättää jotkut osat pois tai ottaa mukaan vain tiettyjen asiakirjojen käännökset, koko <filename>ProjektinNimi-omegat.tmx</filename>-tiedoston jakaminen ei tule kuulonkaan. Seuraava ohje on vain yksi monista, mutta sitä on helppo seurata eikä se vaaranna resursseja.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Luo uusi, erillinen projekti halutulla kieliparilla ja nimeä se sopivasti – projektissa luodut TMX-tiedostot nimetään tämän mukaan.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Kopioi projektin lähdekansioon ne asiakirjat, jotka haluat mukaan käännösmuistiin.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Kopioi näiden asiakirjojen käännökset sisältävät käännösmuistit uuden projektin <filename>tm/auto</filename>-alikansioon.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Aloita projekti. Tarkista mahdolliset tägivirheet näppäinyhdistelmällä <keycap>Ctrl+T</keycap> ja kääntämättömät segmentit näppäinyhdistelmällä <keycap>Ctrl+U</keycap>. Luo kohdeasiakirjat painamalla <keycap>Ctrl+D</keycap>, niin voit tarkistaa, että niiden sisällössä kaikki on kunnossa.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Kun poistut projektista, projektin pääkansiosta (ks. yllä) löytyy kolme TMX-tiedostoa, joissa on lähdetiedostoon kopioitujen asiakirjojen käännökset valitulla kieliparilla. Kopioi nämä varmaan paikkaan, niin voit käyttää niitä tulevaisuudessa viitekäännöksinä.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Poista projektikansio tai arkistoi se kauas työtilastasi, niin et vahingossa käytä sitä uudelleen ja mahdollisesti sotke sillä tulevia käännösprojekteja.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Käännösmuistien jakaminen</title>
+
+    <para>Kun samaa käännöstyötä on tekemässä useita kääntäjiä, he voivat mieluummin haluta käyttää yhteisiä käännösmuisteja kuin jakaa omia versioitaan muille.</para>
+
+    <para>OmegaT:n ryhmäprojektitoiminto käyttää SVN:n ja Gitin versionhallintaa. Ne ovat kaksi paljon tavallista avoimen lähdekoodin lisenssillä julkaistua ryhmätyöohjelmiston versionhallintajärjestelmää (RCS). OmegaT:n ryhmäprojektissa käytettävä RSC huolehtii kokonaisista projektikansioista, eli käännösmuisteista, lähdekansioista, projektin asetuksista jne. Lisää tietoa löydät luvusta</para>
+  </section>
+
+  <section>
+    <title>Käännösmuistin käyttäminen vaihtoehtoisella kielellä</title>
+
+    <para>Joskus voi käydä niin, että olet kääntänyt projektin, jossa lähdekielenä on ollut vaikkapa hollanti ja kohdekielenä englanti. Sitten tarvitaan käännös kiinaksi. Kääntäjäsi ei kuitenkaan ymmärrä hollantia, mutta hallitsee englannin erinomaisesti. Tässä tapauksessa NL–EN-käännösmuistia voidaan käyttää NL–ZH-käännöksen välikappaleena.</para>
+
+    <para>Esimerkkitapaus ratkaistaan kopioimalla olemassa oleva NL–EN-käännösmuistitiedosto tm/tmx2source/-alikansioon, ja tiedostolle annetaan uudeksi nimeksi ZH_CN.tmx osoittamaan käännösmuistin kohdekieltä. Kääntäjä näkee hollanninkielisten lähdesegmenttien englanninkieliset käännökset ja voi käyttää niitä apuna kiinankielisen käännöksen luomisessa.</para>
+
+    <para><emphasis role="bold">Tärkeää:</emphasis> Käännösapuna käytettävä TMX on nimettävä uudelleen muotoon XX_YY.tmx, jossa XX_YY ilmoittaa käännösmuistin kielen. Yllä olevassa tapauksessa oikea tiedostonimi on siis ZH_CN.tmx. Projektissa ja TMX-tiedostossa on tietysti käytettävä samaa lähdekieltä – esimerkkitapauksessa NL. Huomaa, että käytössä voi olla vain yksi TMX-tiedosto kieliparia kohti, joten jos haluat käyttää useita käännösmuisteja, sinun on yhdistettävä ne yhdeksi XX_YYY.tmx-tiedostoksi.</para>
+  </section>
+</section>

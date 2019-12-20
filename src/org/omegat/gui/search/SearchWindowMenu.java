@@ -5,7 +5,7 @@
 
  Copyright (C) 2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -25,7 +25,6 @@
 
 package org.omegat.gui.search;
 
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
@@ -35,6 +34,7 @@ import javax.swing.KeyStroke;
 
 import org.omegat.core.Core;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.openide.awt.Mnemonics;
@@ -69,7 +69,7 @@ public class SearchWindowMenu extends JMenuBar {
         item = fileMenu.add(new JMenuItem());
         Mnemonics.setLocalizedText(item, OStrings.getString("SW_FILE_MENU_CLOSE"));
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                Java8Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(e -> controller.doCancel());
 
         JMenu editMenu = add(new JMenu());

@@ -20,7 +20,7 @@ Najnovejše informacije o OmegaT lahko dobite na:
       http://www.omegat.org/
 
 Podpora uporabnikov, na Yahoo, kjer lahko brskate po arhivu, tudi če niste prijavljeni kot član:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Dodatne funkcije lahko zahtevate (v angleščini) na strani SourceForge:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -220,7 +220,7 @@ Priložite lahko kopije datotek, izreze iz log datoteke, posnetke zaslona, vse, 
 
 
 Po arhivih uporabniške skupine lahko brskate na naslednjem naslovu:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Naslov za brskanje po poročilih o napakah in za prijavo novih napak: :
      http://sourceforge.net/tracker/?group_id=68187&atid=520350

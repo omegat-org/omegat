@@ -12,7 +12,7 @@
                2016 Aaron Madlon-Kay
                2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -274,7 +274,15 @@ public final class StringUtil {
                 return txt.substring(0, idx).toLowerCase(lang) + replaceCase(txt.substring(idx + 2), lang);
             }
         }
-        return replaceCase(txt.substring(1), lang); // then '\' was only here as a protection (for example '\$' ==> '$')
+
+        if (txt.startsWith("\\\\")) { // literal backslash
+            return "\\" + replaceCase(txt.substring(2), lang);
+        }
+        if (txt.startsWith("\\$")) { // protected $
+            return "$" + replaceCase(txt.substring(2), lang);
+        }
+        // for all other cases, don't consider \ as an escape character
+        return "\\" + replaceCase(txt.substring(1), lang);
     }
 
     public static String matchCapitalization(String text, String matchTo, Locale locale) {

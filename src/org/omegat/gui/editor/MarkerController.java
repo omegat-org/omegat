@@ -6,7 +6,7 @@
  Copyright (C) 2010-2013 Alex Buloichik
                2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -73,7 +73,7 @@ public class MarkerController {
         // start all markers threads
         for (Class<?> mc : PluginUtils.getMarkerClasses()) {
             try {
-                ms.add((IMarker) mc.newInstance());
+                ms.add((IMarker) mc.getDeclaredConstructor().newInstance());
             } catch (Exception ex) {
                 Log.logErrorRB(ex, "PLUGIN_MARKER_INITIALIZE", mc.getName());
             }

@@ -66,7 +66,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Indien een bestand niet wordt geladen in het venster <guilabel>Bewerken</guilabel>, dan zou het kunnen zijn dat het in een indeling is die niet werkt in OmegaT. Zie <link linkend="chapter.file.filters">Bestandsfilters</link> voor een lijst van bestandsindelingen die OmegaT kan afhandelen.</para>
+        <para>Indien een bestand niet wordt geladen in het venster <guilabel>Bewerken</guilabel>, dan zou het kunnen zijn dat het in een indeling is die niet werkt in OmegaT. Bekijk <menuchoice><guimenuitem>Opties</guimenuitem><guimenuitem>Voorkeuren…</guimenuitem><guimenuitem>Bestandsfilters</guimenuitem></menuchoice> voor een lijst met bestandsindelingen die OmegaT kan behandelen.</para>
       </listitem>
     </itemizedlist>
 
@@ -102,7 +102,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Voor een meer uitgebreide introductie, bekijk <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for Beginners</ulink> op de website van OmegaT. Als u ondersteuning nodig hebt met enig aspect van OmegaT, neem dan vrijblijvend deel aan de <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info">OmegaT gebruikersgroep.</ulink></para>
+        <para>Voor een meer uitgebreide introductie, bekijk <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for Beginners</ulink> op de website van OmegaT. Als u ondersteuning nodig hebt met enig aspect van OmegaT, neem dan vrijblijvend deel aan de <ulink url="https://omegat.org/support">OmegaT gebruikersgroep.</ulink></para>
       </listitem>
     </itemizedlist>
   </section>

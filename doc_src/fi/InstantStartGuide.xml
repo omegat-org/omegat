@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>Opi käyttämään OmegaT:tä 5 minuutissa!</title>
+
+  <section id="create.and.open.new.project">
+    <title>Määritä uuden projektin asetukset<indexterm class="singular">
+        <primary>Projekti</primary> <secondary>Luo/avaa uusi projekti</secondary>
+      </indexterm></title>
+
+    <para><remark>Huom.:</remark> Jos käytät Applen Mac-konetta, käytä <keycap>Komento (cmd) ⌘</keycap>-näppäintä <keycap>Control</keycap>-näppäimen sijaan.</para>
+
+      <indexterm class="singular">
+        <primary>Projekti-valikko</primary> <secondary>Uusi…</secondary>
+      </indexterm>
+
+    <para>Ensimmäisellä OmegaT-käyttökerralla sinun on luotava projekti, jossa on kaikki tarvitsemasi tiedostot kuten lähdetiedostot, käännösmuistit, sanastota ja lopulta myös kääntämäsi tiedosto. Mene valikkoon <guimenu>Projekti</guimenu>, valitse <menuchoice><guimenuitem>Uusi…</guimenuitem></menuchoice> ja kirjoita projektisi nimi. Muista, mihin sijaintiin olet luomassa projektia, sillä sinun on palattava sinne myöhemmin uudelleen.</para>
+
+    <para>Kun olet antanut projektille nimen, näytölle avautuu valintaikkuna <guilabel>Luo uusi projekti</guilabel>. Valitse lähdetiedoston ja tulevan käännetyn tiedoston kielet ikkunan yläosassa ja jatka napsauttamalla <guibutton>OK</guibutton>-painiketta.</para>
+
+    <para>Pääset milloin tahansa takaisin tähän valintaikkunaan ja sen asetuksiin painamalla näppäinyhdistelmää <keycap>Ctrl+E</keycap>.</para>
+
+    <para>Seuraavaksi näytölle avautuu valintaikkuna <guilabel>Projektin tiedostot</guilabel>. Napsauta painiketta <guibutton>Kopioi tiedostoja lähdekansioon…</guibutton>, niin pääset valitsemaan käännettävät lähdetiedostosi. OmegaT kopioi valitsemasi tiedostot vasta luomasi projektin <filename>/source/</filename>-alikansioon. Kun lähdetiedostot ovat latautuneet, ne näkyvät <guilabel>Editori</guilabel>-ruudussa, ja voit sulkea <guilabel>Projektin tiedostot</guilabel>-ikkunan.</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>Käännä tiedosto</title>
+
+    <para>Käännä tiedosto segmentti kerrallaan OmegaT:ssä. Siirry seuraavaan kääntämättömään segmenttiin näppäinyhdistelmällä <keycap>Ctrl+U</keycap>. Seuraavaan käännettyyn segmenttiin pääset näppäinyhdistelmällä <keycap>Ctrl+vaihto+U</keycap>. Luo käännetyt asiakirjat näppäinyhdistelmällä <keycap>Ctrl+D</keycap>. Voit käyttää sitä aina kun haluat nähdä, miltä käännöksesi näyttää lopullisessa muodossaan. OmegaT luo käännetyt asiakirjat projektin <filename>/target/</filename>-alikansioon. Käännöstyön aikana löydät monia hyödyllisiä toimintoja <guimenu>Muokkaa</guimenu>- ja <guimenu>Siirry</guimenu>-valikoista.</para>
+  </section>
+
+  <section>
+    <title>Tarkista tägit</title>
+
+    <para>Jos lähdetiedostosi ovat esim. Microsoft Word-, LibreOffice Writer- tai HTML-tiedostoja, jotka sisältävät muotoiluja, OmegaT muuttaa muotoilut tägeiksi, jotka ympäröivät käännettyä tekstiä. Asiakirjoissa on myös tägejä, jotka eivät mitenkään liity tekstimuotoiluun, mutta joita tarvitaan lähdetiedostoissa (ja siis myös kohdetiedostoissa). Lähdesegmentti voi näyttää tältä:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+
+    <para>OmegaT esittää kuitenkin segmentin tällaisena:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+    
+    <para>OmegaT-tägit on helppo tunnistaa, sillä ne näkyvät harmaina. Tägit ovat suojeltuja, joten et voi muokata niiden sisältöä. Voit kuitenkin poistaa tägejä, kirjoittaa niitä käsin ja siirtää niiden paikkaa kohdesegmentissä. Mikäli kuitenkin kirjoitit muotoilutägin väärin, käännöstiedostoja ei välttämättä saa avattua. Siksi sinun kannattaa tarkistää tägien oikeellisuus ennen kuin luot käännetyt tiedostot. Tee se painamalla <keycap>Ctrl+vaihto+V</keycap>.</para>
+  </section>
+
+  <section>
+    <title>Luo käännetty tiedosto</title>
+
+    <para>Kun olet varma siitä, että käännöksessäsi ei ole tägivirheitä, luo käännetyt tiedostot näppäinyhdistelmällä <keycap>Ctrl+D</keycap>. OmegaT luo tiedostot projektikansion <filename>/target/</filename>-alikansioon.</para>
+  </section>
+
+  <section>
+    <title>Pari muuta muistettavaa seikkaa</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jos tiedosto ei lataudu näkyville <guilabel>Editori</guilabel>-ruutuun, voi olla, että tiedostomuoto ei toimi OmegaT:ssä. Kohdasta <menuchoice><guimenuitem>Valinnat</guimenuitem><guimenuitem>Asetukset…</guimenuitem><guimenuitem>Tiedostosuodattimet</guimenuitem></menuchoice> löydät luettelon tiedostomuodoista, joita OmegaT pystyy käsittelemään.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Voit luoda jokaiselle käännöstyölle uuden projektin, ja voit lisätä projektiin uusia lähdetiedostoja milloin tahansa.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Näppäinyhdistelmä <keycap>Ctrl+E</keycap> avaa projektin ominaisuuksien valintaikkunan, josta löydät projektin alkuasetukset painamalla. Näppäinyhdistelmä <keycap>Ctrl+L</keycap> avaa <guilabel>Projektin tiedostot</guilabel>-valintaikkunan, josta näet luettelon projektin tiedostoista.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Kun käännöstyö on valmis, OmegaT luo projektikansioon kolme käännösmuistitiedostoa, <filename>level1</filename>, <filename>level2</filename> ja <filename>omegat</filename>. Kaksi ensimmäistä käännösmuistia, <filename>level1</filename> ja <filename>level2</filename>, sopivat käytettäviksi muissa käännösohjelmissa. Käännösmuisti <filename>omegat</filename> taas sopii OmegaT:n käyttöön. Voit käyttää sitä esimerkiksi tulevissa projekteissa. Jos sijoitat tällaisen käännösmuistin projektin <filename>/tm/</filename>-alikansioon, OmegaT etsii siitä automaattisesti samankaltaisia segmenttejä, niin sanottuja sumeita osumia.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Voit lisätä uuden termin sanastoon painamalla näppäinyhdistelmää <keycap>Ctrl+vaihto+G</keycap> tai kopioimalla olemassa olevia sanastoja projektin <filename>/glossary/</filename>-alikansioon. Tällöin OmegaT etsii automaattisesti sanoja niistä.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Voit milloin tahansa etsiä sanoja ja lausekkeita lähdetekstistä ja käännöksestä painamalla näppäinyhdistelmää <keycap>Ctrl+F</keycap>. Tämä avaa <guilabel>Tekstihaku</guilabel>-valintaikkunan.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Tarkemman esittelyn <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for beginners</ulink> löydät OmegaT-verkkosivustolta Jos tarvitset apua mihin tahansa OmegaT-seikkaan liittyen, liity vain reippaasti <ulink url="https://omegat.org/support">OmegaT-käyttäjäryhmään</ulink>.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

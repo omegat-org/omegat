@@ -8,8 +8,9 @@
                2011 John Moran, Didier Briel
                2012 Didier Briel
                2016 Aaron Madlon-Kay
+               2019 Briac Pilpre
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -64,6 +65,8 @@ public class EditingBehaviorPanel extends JPanel {
         similarityLabel = new javax.swing.JLabel();
         similaritySpinner = new javax.swing.JSpinner();
         prefixLabel = new javax.swing.JLabel();
+        paraMarkText = new javax.swing.JTextField();
+        paraMarkLabel = new javax.swing.JLabel();
         prefixText = new javax.swing.JTextField();
         convertNumbers = new javax.swing.JCheckBox();
         allowTranslationEqualToSource = new javax.swing.JCheckBox();
@@ -275,6 +278,24 @@ public class EditingBehaviorPanel extends JPanel {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         add(filler1, gridBagConstraints);
+        
+        // Paragraph mark
+        paraMarkLabel.setLabelFor(paraMarkText);
+        org.openide.awt.Mnemonics.setLocalizedText(paraMarkLabel, OStrings.getString("WG_PARA_MARK")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
+        add(paraMarkLabel, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.ipadx = 250;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        add(paraMarkText, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void radiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiosActionPerformed
@@ -292,6 +313,8 @@ public class EditingBehaviorPanel extends JPanel {
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel initialSegCountLabel;
     javax.swing.JSpinner initialSegCountSpinner;
+    private javax.swing.JLabel paraMarkLabel;
+    javax.swing.JTextField paraMarkText;
     javax.swing.JCheckBox insertFuzzyCheckBox;
     javax.swing.JRadioButton leaveEmptyRadio;
     private javax.swing.ButtonGroup ourButtonGroup;

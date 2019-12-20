@@ -6,7 +6,7 @@
  Copyright (C) 2010 Alex Buloichik, Didier Briel
                2011 Didier Briel, Guido Leenders
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 

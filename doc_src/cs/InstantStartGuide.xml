@@ -66,7 +66,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Když se stane, že se soubor nenahraje do podokna Editoru, pak to může znamenat, že zdrojový soubor je ve formátu, který OmegaT nepodporuje.<guilabel></guilabel> Podívejte se na <link linkend="chapter.file.filters">Filtry souborů</link>, najdete zde seznam formátů souborů, které umí OmegaT zpracovat.</para>
+        <para>Když se stane, že se soubor nenahraje do podokna Editoru, pak to může znamenat, že zdrojový soubor je ve formátu, který OmegaT nepodporuje.<guilabel></guilabel> Podívejte se na <menuchoice><guimenuitem>Možnosti</guimenuitem><guimenuitem>Předvolby...</guimenuitem><guimenuitem>Filtry souborů</guimenuitem></menuchoice>, najdete zde seznam formátů souborů, které umí OmegaT zpracovat.</para>
       </listitem>
     </itemizedlist>
 
@@ -102,7 +102,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Podrobnější úvodní poznámky najdete na webu OmegaT <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT pro začátečníky</ulink>  Pokud potřebujete pomoc s jakýmkoliv aspektem OmegaT, nebojte se přidat k <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info">Uživatelské skupině OmegaT</ulink>.</para>
+        <para>Podrobnější úvodní poznámky najdete na webu OmegaT <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT pro začátečníky</ulink> . Pokud potřebujete pomoc s jakýmkoliv aspektem OmegaT, nebojte se přidat k <ulink url="https://omegat.org/support">Uživatelské skupině OmegaT</ulink>.</para>
       </listitem>
     </itemizedlist>
   </section>

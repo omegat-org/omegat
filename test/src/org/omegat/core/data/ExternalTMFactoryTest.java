@@ -5,7 +5,7 @@
 
  Copyright (C) 2017 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -30,6 +30,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,8 +43,13 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.mozlang.MozillaLangFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 public class ExternalTMFactoryTest extends TestCore {
+
+    private Language sourceLang = new Language("en");
+    private Language targetLang = new Language("pl");
 
     @Before
     public final void setUp() {
@@ -51,11 +58,11 @@ public class ExternalTMFactoryTest extends TestCore {
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         ProjectProperties props = new ProjectProperties() {
             public Language getSourceLanguage() {
-                return new Language("en");
+                return sourceLang;
             }
 
             public Language getTargetLanguage() {
-                return new Language("pl");
+                return targetLang;
             }
 
             @Override
@@ -74,6 +81,8 @@ public class ExternalTMFactoryTest extends TestCore {
     @Test
     public void testLoadTMX() throws Exception {
         File tmxFile = new File("test/data/tmx/resegmenting.tmx");
+        sourceLang = new Language("en");
+        targetLang = new Language("fr");
 
         assertTrue(ExternalTMFactory.isSupported(tmxFile));
 
@@ -89,6 +98,8 @@ public class ExternalTMFactoryTest extends TestCore {
     @Test
     public void testLoadPO() throws Exception {
         File tmxFile = new File("test/data/filters/po/file-POFilter-be-utf8.po");
+        sourceLang = new Language("en");
+        targetLang = new Language("be");
 
         assertTrue(ExternalTMFactory.isSupported(tmxFile));
 
@@ -109,6 +120,8 @@ public class ExternalTMFactoryTest extends TestCore {
     @Test
     public void testLoadMozillaLang() throws Exception {
         File tmxFile = new File("test/data/filters/MozillaLang/file-MozillaLangFilter-de.lang");
+        sourceLang = new Language("en");
+        targetLang = new Language("de");
 
         assertTrue(ExternalTMFactory.isSupported(tmxFile));
 
@@ -116,10 +129,57 @@ public class ExternalTMFactoryTest extends TestCore {
 
         assertEquals(33, tmx.getEntries().size());
         assertEquals("Download %s for Android in your language", tmx.getEntries().get(0).source);
-        assertEquals("Laden Sie %s f\u00FCr Android in Ihrer Sprache herunter",
-                tmx.getEntries().get(0).translation);
+        assertEquals("Laden Sie %s f\u00FCr Android in Ihrer Sprache herunter", tmx.getEntries().get(0).translation);
         assertEquals("Download %s in your language", tmx.getEntries().get(1).source);
-        assertEquals("Laden Sie %s in Ihrer Sprache herunter",
-                tmx.getEntries().get(1).translation);
+        assertEquals("Laden Sie %s in Ihrer Sprache herunter", tmx.getEntries().get(1).translation);
+    }
+
+    /**
+     * Test for RFE #1452
+     *
+     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1452/">RFE
+     *      #1452</a>
+     */
+    @Test
+    public void testFuzzyMultipleTuv() throws Exception {
+        TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, false);
+
+        File tmxFile = new File("test/data/tmx/test-multiple-tuv.tmx");
+        sourceLang = new Language("en");
+        targetLang = new Language("fr");
+
+        assertTrue(ExternalTMFactory.isSupported(tmxFile));
+
+        ExternalTMX tmx = ExternalTMFactory.load(tmxFile);
+
+        // Only 5 FR translations
+        assertEquals(5, tmx.getEntries().size());
+
+        List<PrepareTMXEntry> matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!"))
+                .collect(Collectors.toList());
+        assertEquals(3, matchingEntries.size());
+        
+        // Set the EXT_TMX_KEEP_FOREIGN_MATCH prop
+        Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
+        tmx = ExternalTMFactory.load(tmxFile);
+
+        // All foreign translations are present
+        assertEquals(11, tmx.getEntries().size());
+
+        matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!"))
+                .collect(Collectors.toList());
+        assertEquals(7, matchingEntries.size());
+
+        matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("This is an english sentence."))
+                .collect(Collectors.toList());
+        assertEquals(2, matchingEntries.size());
+        PrepareTMXEntry entry = matchingEntries.get(0);
+        assertEquals("DE", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE));
+        assertEquals("true", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH));
+
+        entry = matchingEntries.get(1);
+        assertEquals("ES", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE));
+        assertEquals("true", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH));
     }
 }

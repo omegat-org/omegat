@@ -6,7 +6,7 @@
  Copyright (C) 2012 Alex Buloichik
                2013-2014 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -57,8 +57,9 @@ import org.omegat.util.TMXWriter2;
  */
 public class ProjectTMX {
 
+    protected static final String ATTR_TUID = "tuid";
     protected static final String PROP_FILE = "file";
-    protected static final String PROP_ID = "id";
+    protected static final String PROP_ID = TMXWriter2.PROP_ID;
     protected static final String PROP_PREV = "prev";
     protected static final String PROP_NEXT = "next";
     protected static final String PROP_PATH = "path";
@@ -326,8 +327,15 @@ public class ProjectTMX {
                     te.note = tu.note;
                     te.otherProperties = tu.props;
 
+                    String id = te.getPropValue(PROP_ID);
+                    if (id == null) {
+                        // Use TMX @tuid if available and "id" prop was not
+                        // present
+                        id = te.getPropValue(ATTR_TUID);
+                    }
+
                     EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source,
-                            te.getPropValue(PROP_ID), te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
+                            id, te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
                             te.getPropValue(PROP_PATH));
 
                     TMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(te);
@@ -352,6 +360,9 @@ public class ProjectTMX {
 
     private TMXEntry.ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
         String id = te.getPropValue(PROP_ID);
+        if (id == null) {
+            id = te.getPropValue(ATTR_TUID);
+        }
         TMXEntry.ExternalLinked externalLinked = null;
         if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
             externalLinked = TMXEntry.ExternalLinked.xICE;

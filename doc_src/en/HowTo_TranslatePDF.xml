@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.translatepdf">
+  <title>Translate a PDF file</title>
+
+<para>PDF files are a special case. They contain text formatting
+  information, but such information cannot be reused by
+  <application>OmegaT</application> in order to create target files.
+  Thus, PDF files are handled as plain text files, and output files are
+  plain text files.</para>
+  <para>If you need to reproduce text formatting (as well as other
+  things such as drawings) in your translation, there are three ways
+  to try:</para>
+  <orderedlist>
+    <listitem>
+      <para>Use <application>OmegaT’s</application> default filter
+      (PDF input), translate, create a target file (it will be a plain
+      text file), add relevant formatting and items manually.</para>
+    </listitem>
+    <listitem>
+      <para>Use the Iceni Infix filter.
+      See <ulink url="https://omegat.org/howtos/iceni_infix.html">Howto - Translating PDF files with Iceni Infix and OmegaT</ulink>.</para>
+    </listitem>
+    <listitem>
+      <para>Import the source file to
+      <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>,
+      save it as an ODG file, translate, export to PDF as needed.</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">Note:</emphasis> the above information
+  applies only to PDF files with a text layer. If you have a PDF file
+  made of scanned pages (sometimes such files are referred to as ‘dead’
+  PDFs), you need to use an OCR (optical character recognition) program
+  to recognize the text and convert it to a format that can be handled
+  by OmegaT.</para>
+
+
+
+  <section id="other.file.formats">
+    <title>Other file formats</title>
+
+    <para>Other plain text or formatted text file formats suitable for
+    processing in OmegaT may also exist.</para>
+
+    <para>External tools can be used to convert files to supported
+    formats. The translated files will then need to be converted back to the
+    original format. For example, if you have an outdated Microsoft Word
+    version, that does not handle the ODT format, here's a round trip for Word
+    files with the DOC extension:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>import the file into ODF writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>save the file in ODT format</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>translate it into the target ODT file</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>load the target file in ODF writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>save the file as a DOC file</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The quality of formatting of the translated file will depend on the
+    quality of the round-trip conversion. Before proceeding with such
+    conversions, be sure to test all options. Check the <ulink
+    url="http://www.omegat.org">OmegaT home page</ulink> for an up-to-date
+    listing of auxiliary translation tools.</para>
+</section>
+</section>

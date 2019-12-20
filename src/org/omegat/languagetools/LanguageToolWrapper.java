@@ -7,7 +7,7 @@
                2015 Aaron Madlon-Kay
                2016 Lev Abashkin
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -79,7 +79,9 @@ public final class LanguageToolWrapper {
                     setBridgeFromCurrentProject();
                     break;
                 case CLOSE:
-                    bridge.stop();
+                    if (bridge != null) {
+                        bridge.stop();
+                    }
                     bridge = null;
                     break;
                 default:

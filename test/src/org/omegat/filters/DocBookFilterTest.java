@@ -5,7 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -49,6 +49,11 @@ public class DocBookFilterTest extends TestFilterBase {
     @Test
     public void testTranslate() throws Exception {
         translateText(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter.xml");
+    }
+
+    @Test
+    public void testTranslateExtWriter() throws Exception {
+        translateText(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter-extWriter.xml");
     }
 
     @Test

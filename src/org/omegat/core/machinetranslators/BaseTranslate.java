@@ -6,7 +6,7 @@
  Copyright (C) 2010-2015 Alex Buloichik
                2013 Didier Briel
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -143,6 +143,13 @@ public abstract class BaseTranslate implements IMachineTranslation {
 
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
         return cache.put(sLang + "/" + tLang + "/" + text, result);
+    }
+
+    /**
+     * Clear the machine translation cache.
+     */
+    protected void clearCache() {
+        cache.clear();
     }
 
     /**

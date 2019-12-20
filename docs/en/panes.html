@@ -1,0 +1,409 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;4.&nbsp;Panes</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - User's Guide">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - User's Guide">
+      <link rel="prev" href="windows.and.dialogs.html" title="Chapter&nbsp;3.&nbsp;Windows and dialogs">
+      <link rel="next" href="project.folder.html" title="Chapter&nbsp;5.&nbsp;Project folder">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;4.&nbsp;Panes</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="windows.and.dialogs.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="project.folder.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="panes"></a>Chapter&nbsp;4.&nbsp;Panes
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="panes.html#editor.pane">1. Editor</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4352">2. Fuzzy Matches</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4379">3. Glossary</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4392">4. Dictionary</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4399">5. Machine Translation</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4407">6. Multiple Translations</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4417">7. Notes</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4428">8. Comments</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4433">9. Status bar</a></span></dt>
+            </dl>
+         </div>
+         <p>The main window consists of several panes, the main menu and a status
+            bar. You can change the position of any pane or even undock it to a separate
+              window by clicking and dragging the pane by its name. Depending on the pane
+              status, different signs can appear at its top right corner:
+         </p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>If you can not see all the panes (be it opened or minimized),
+                   pressing <span class="guisubmenu"> Options &gt; Restore Main Window </span>will
+                   restore them to the state, defined in the installation.
+            </p>
+         </div>
+         <div class="table"><a name="d0e4187"></a><p class="title"><b>Table&nbsp;4.1.&nbsp;Pane widgets</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Pane widgets" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Minimize.png" width="60%"></span></td>
+                        <td>minimizes the pane, so that only its name is shown at the
+                                     bottom of the window
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Maximize.png" width="60%"></span></td>
+                        <td>maximizes the pane</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Restore.png" width="60%"></span></td>
+                        <td>restores the layout before the maximizing step</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Undock.png" width="60%"></span></td>
+                        <td>undocks the pane from the main window</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Dock.png" width="60%"></span></td>
+                        <td>puts the pane back within the main window</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><p>You can overlap panes if desired. When this is done the panes display
+              a tab at the top. The separators between the panes can be dragged to resize
+              panes. Should you lose track of your changes to the user interface, you can
+              use <span class="guimenuitem"> Options → Restore the main window</span> any time to
+              return to the original layout.
+         </p>
+         <p>It is possible to drag and drop files to each pane, which will react
+              accordingly. 
+         </p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Editor pane: If an OmegaT project file
+                             (<code class="filename">omegat.project</code>) is dropped on this pane, the
+                             corresponding project will be opened, closing first any opened
+                             project. Other dropped files will be copied to the
+                             <code class="filename">source</code> folder. This applies also to the <a class="link" href="windows.and.dialogs.html#windows.projectfiles" title="2.&nbsp;Project Files">Project files</a> window.
+                  </p>
+               </li>
+               <li class="listitem">
+                  <p>Fuzzy Matches pane: Dropped <code class="filename">.tmx</code> files will
+                             be copied to the <code class="filename">tm</code> folder.
+                  </p>
+               </li>
+               <li class="listitem">
+                  <p>Glossary pane: Dropped files with known glossary extensions
+                             (<code class="filename">.txt</code>, <code class="filename">.tab</code>, etc.) will be
+                             copied to the <code class="filename">glossary</code> folder.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="editor.pane"></a>1.&nbsp;Editor
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This is where you type and edit your translation. The Editor pane
+                   displays the text of the partially translated document: the text already
+                   translated is displayed in translation while the untranslated text is
+                   displayed in the original language. The displayed text is split into
+                   segments and you may scroll through the document and double-click on any
+                   segment to open and edit it. In the above case, the segments already
+                   translated are shown in yellow.
+            </p>
+            <p>One of the above segments is the current segment. It is the segment
+                   that is displayed in two parts. The upper part is in the source language,
+                   in bold characters with a green background color, the lower part is the
+                   editing field, ended by a marker: the marker is <code class="literal">&lt;segment nnnn&gt;</code> where
+                   nnnn is a number of the segment in the project. Use the upper part as a
+                   reference and replace or modify the contents of the editing field with
+                   your translation.
+            </p>
+            <p>Note: the segment marker displays <code class="literal">&lt;segment
+                      nnnn&nbsp;+yy&nbsp;more&gt; when the segment is non-unique. In that case, yy is the
+                      number of other occurrences of the segment in the
+                      project.</code></p>
+            <p>Depending upon the preferred editing behavior, the editing field for
+                   the untranslated segment may be empty, contain the source text, or contain
+                   the translation of the string most similar to the one to be translated.
+                   When you move to another segment, the translation is validated and stored.
+                   If you want the translation to be the same as the source, simply make the
+                   editing field empty by removing all the text (select all with
+                   <span class="keycap"><strong>Ctrl+A</strong></span> and delete with <span class="keycap"><strong>Del</strong></span>). OmegaT is
+                   able to store translations that are identical to the source. This is
+                   useful for documents that contain trade marks, names or other proper
+                   nouns, or parts in a third language that do not require translation. See
+                   <span class="emphasis"><em>Translation editing</em></span> for more details.
+            </p>
+            <p>If you right click on the Editor pane, a pop-up menu opens,
+                   offering<span class="bold"><strong> Cut, Copy, Paste</strong></span> (i.e. same
+                   functions as <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>X</strong></span>, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span> and <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>V</strong></span>), <span class="bold"><strong>GoTo segment</strong></span> and
+                   <span class="bold"><strong>Add glossary entry</strong></span> functions. In
+                   addition, when the right click occurs on an opened segment, other options
+                   concerning <span class="bold"><strong>Alternative translations</strong></span> are
+                   proposed, for example to to jump to another instance of non-unique
+                   segments.
+            </p>
+            <p>It is possible to drag text from anywhere in the main window and to
+                   drop it within the segment. Texted dragged from outside the target segment
+                   is copied, while text dragged from within the segment is moved.
+            </p>
+            <p>By default, it is not possible to select words in the source segment
+                   using the keyboard rather than the mouse. Pressing <span class="keycap"><strong>F2</strong></span> key
+                   allows to move the cursor into the source segment (or anywhere in the
+                   editor) with the keyboard arrows. In this mode, "<span class="guilabel">Cursor lock
+                      off</span>" is displayed at the bottom of the pane. To come back to
+                   the standard mode "<span class="guilabel">Cursor lock on</span>", press
+                   <span class="keycap"><strong>F2</strong></span> again.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4352"></a>2.&nbsp;Fuzzy Matches
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The match viewer shows the most similar segments from translation
+                   memories, both from internal project translation memory created in real
+                   time as you translate your project and from ancillary translation memories
+                   you have imported from your earlier jobs, or received from your client or
+                   translation agency.
+            </p>
+            <p>When you move to the next segment, the first fuzzy match (the one
+                   with the best matching percentage) is automatically selected. You may
+                   select a different match by pressing <span class="guimenuitem">Ctrl+2, 3, 4, or
+                      5</span>. Of course, pressing <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>5</strong></span> will have no effect, if there is no match #5. To use the
+                   selected match in your translation, use
+                   <span class="guimenuitem">Ctrl+R</span> to replace the target field with the match or use
+                   <span class="guimenuitem">Ctrl+I </span> to insert it at the cursor position.
+            </p>
+            <p>The matching percentage is roughly equivalent to taking the number
+                   of common words in the matched and the matching segment and dividing by
+                   the number of words in the longer of the two. The selected fuzzy match is
+                   highlighted in bold, words that are missing in the segment you are
+                   translating are colored blue and words adjacent to the missing parts
+                   green. In the above example the source segment is <span class="bold"><strong>Context menu command</strong></span>. The top match is 100%,
+                   because all words match. So do the next two matches, and the match #4 is
+                   similar, but different. The line with the matching percentage also
+                   includes the name of the translation memory containing the match. If there's no file name displayed,
+                   the source is the internal project translation memory. Orphan
+                   segments (the match #2) describe segments in the default project
+                   translation memory that have no corresponding source segment.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4379"></a>3.&nbsp;Glossary
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The Glossary pane allows you to access your own collection of
+                   expressions and specialist terminology which you have built up in your
+                   glossary files. It shows translation of terms found in the current
+                   segment. The source segment in the example below was “<span class="emphasis"><em>Context
+                         menu command</em></span>”, as in the Fuzzy Matches example above, and the
+                   terms shown were found in the glossaries, available (Microsoft's Term
+                   collection and Slovenian Linux User group Glossary).
+            </p>
+            <p>If you have TransTips option activated (<span class="guimenuitem">Options →
+                      TransTips</span>), you can right click on the highlighted word in
+                   the source segment to open a pop-up menu with suggested translation, as
+                   offered by your glossary. Selecting one of them will insert it at the
+                   current cursor position into the target segment. You can also highlight
+                   your preferred alternative in the glossary pane and insert it into the
+                   target by right clicking on the selection.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4392"></a>4.&nbsp;Dictionary
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dictionaries are the electronic equivalents of printed dictionaries
+                   like Merriam Webster, Duden, Larousse etc., that you may have on your
+                   desk. See more about them in the chapter on <a class="link" href="appendix.dictionaries.html" title="Appendix&nbsp;A.&nbsp;Dictionaries">Dictionaries</a></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4399"></a>5.&nbsp;Machine Translation
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The machine translation pane, when opened, contains the suggestions
+                   by machine translation tools for the current segment. Press
+                   <span class="keysym">Ctrl+M</span> to replace the translation of the current segment
+                   with the suggested translation.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4407"></a>6.&nbsp;Multiple Translations
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>A given source segment may require several different translations,
+                   depending on the context. If the current translation of the segment does
+                   not fit, the user can select <span class="guisubmenu">Edit → Create Alternative
+                      Translation</span>. The target text entered after that will be
+                   treated as an alternative translation of the source segment. You can
+                   define one of the alternative - for instance the most probable among them
+                   - as default translation by selecting <span class="guisubmenu">Edit → Use as Default
+                      Translation</span></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4417"></a>7.&nbsp;Notes
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The translator can add notes to the opened segment, for instance to
+                   come back later to the segment and redo the translation, check that
+                   alternative translations are correct or to ask colleagues for their
+                   opinion. You can browse through notes using <span class="guisubmenu">GoTo → Next
+                      Note</span> and <span class="guisubmenu">GoTo → Previous
+                      Note</span>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4428"></a>8.&nbsp;Comments
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Some of the file formats, specialized for translation work, for
+                   instance PO, allow the inclusion of comments. This way the translator can
+                   be provided the context about the segment to be translated. In the example
+                   below, the author of the PO file included a warning for the translator to
+                   check the length of the translation:
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4433"></a>9.&nbsp;Status bar
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The status bar displays work-flow related messages at the bottom of
+                   the main window. This bar gives the user feedback on specific operations
+                   that are in progress. It also displays the number of fuzzy and glossary
+                   matches for the current segment.
+            </p>
+            <p>The counters in the lower right corner keep track of the progress of
+                   the translation (numbers in the left hand column refer to the figure
+                   above):
+            </p>
+            <div class="table"><a name="d0e4440"></a><p class="title"><b>Table&nbsp;4.2.&nbsp;Main Window - counters</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Main Window - counters" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <tbody>
+                        <tr>
+                           <td align="left">27/27</td>
+                           <td>number of segments - translated vs total for the current
+                                          file
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">9319/16338</td>
+                           <td>number of unique segments - translated vs total in the
+                                          project
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">31175</td>
+                           <td>total number of segments (including repeats) in the
+                                          project
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">103/114</td>
+                           <td>number of source and target characters in the current
+                                          segment
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"><p>From a practical point of view, the most important pair of numbers
+                   is the second pair: it tells, how much you have done so far, in relation
+                   to the total or second number. The project in the example is evidently
+                   finished, as all the unique segments have been translated.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="windows.and.dialogs.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="project.folder.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;3.&nbsp;Windows and dialogs&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;5.&nbsp;Project folder</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

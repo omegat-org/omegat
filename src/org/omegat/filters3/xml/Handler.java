@@ -10,7 +10,7 @@
                2011 Didier Briel
                2013 Didier Briel, Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -284,11 +284,14 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /** Makes System ID not an absolute, but a relative one. */
     private String localizeSystemId(String systemId) throws URISyntaxException, MalformedURLException {
         if (systemId.startsWith(START_FILESCHEMA)) {
-            File thisOutFile = new File(new URL(systemId).toURI());
-            String thisOutPath = thisOutFile.getAbsolutePath();
-
-            if (thisOutPath.startsWith(getSourceFolderAbsolutePath())) {
-                return thisOutPath.substring(getSourceFolderAbsolutePath().length());
+            Path thisOutFile = new File(new URI(systemId)).toPath();
+            Path sourceFolderFile = new File(getSourceFolderAbsolutePath()).toPath();
+            try {
+                String thisOutPath = sourceFolderFile.relativize(thisOutFile).toString();
+                return thisOutPath.replace("\\", "/");
+            }
+            catch (IllegalArgumentException ex) {
+                // Failed to relativize
             }
         }
         return systemId;
@@ -297,7 +300,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /** Whether the file with given systemId is in source folder. */
     private boolean isInSource(String systemId) throws URISyntaxException, MalformedURLException {
         if (systemId.startsWith(START_FILESCHEMA)) {
-            File thisOutFile = new File(new URL(systemId).toURI());
+            File thisOutFile = new File(new URI(systemId));
             if (thisOutFile.getAbsolutePath().startsWith(getSourceFolderAbsolutePath())) {
                 return true;
             }
@@ -311,7 +314,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             return null;
         }
         for (Entity entity : externalEntities) {
-            if (entity.isInternal()) {
+            if (entity.getType() != Entity.Type.EXTERNAL) {
                 continue;
             }
             if (StringUtil.equal(publicId, entity.getPublicId())
@@ -344,18 +347,24 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             return;
         }
         if (extEntity.getOriginalName().equals(name)) {
-            boolean parameterEntiry = extEntity.isParameter();
+            boolean parameterEntity = extEntity.isParameter();
             extEntity = null;
-            translateAndFlush();
-            extWriter.close();
-            extWriter = null;
-            if (parameterEntiry) {
-                mainWriter.write(name + ';');
+            if (dtd != null) {
+                Entity entity = new Entity(name);
+                dtd.addEntity(entity);
             } else {
-                mainWriter.write('&' + name + ';');
+                if (parameterEntity) {
+                    currEntry().add(new XMLText(name + ';', inCDATA));
+                } else {
+                    currEntry().add(new XMLText('&' + name + ';', inCDATA));
+                }
+            }
+            if (extWriter != null) {
+                translateAndFlush();
+                extWriter.close();
+                extWriter = null;
             }
         }
-
     }
 
     /**
@@ -382,9 +391,9 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             }
 
             if (entity != null) {
-                if (!inDTD && outFile != null && isInSource(systemId) && extEntity == null) {
+                if (!inDTD && outFile != null && extEntity == null) {
                     extEntity = findExternalEntity(publicId, localizeSystemId(systemId));
-                    if (extEntity != null) {
+                    if (extEntity != null && isInSource(systemId)) {
                         // if we resolved a new entity, and:
                         // 1. it's not a DTD
                         // 2. it's in project's source folder
@@ -1100,7 +1109,19 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
         Entity entity = new Entity(name, value);
         internalEntities.put(name, entity);
-        dtd.addEntity(entity);
+        if (extEntity != null) {
+            if (extWriter != null) {
+                StringBuilder res = new StringBuilder();
+                res.append(entity.toString()).append('\n');
+                try {
+                    extWriter.write(res.toString());
+                } catch (IOException e) {
+                    throw new SAXException(e);
+                }
+            }
+        } else {
+            dtd.addEntity(entity);
+        }
     }
 
     /**
@@ -1112,9 +1133,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
         try {
             Entity entity = new Entity(name, publicId, localizeSystemId(systemId));
-            if (isInSource(systemId)) {
-                externalEntities.add(entity);
-            }
+            externalEntities.add(entity);
             dtd.addEntity(entity);
         } catch (MalformedURLException ex) {
             throw new SAXException(ex);

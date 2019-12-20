@@ -12,9 +12,11 @@
                2014 Aaron Madlon-Kay, Didier Briel
                2015 Aaron Madlon-Kay
                2017 Didier Briel
+               2017-2018 Didier Briel
                2018 Enrique Estevez Fernandez
+               2019 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -341,37 +343,33 @@ public class RealProject implements IProject {
                     glossaryPrepared = null;
 
                     remoteRepositoryProvider.switchAllToLatest();
-
-		            remoteRepositoryProvider.copyFilesFromRepoToProject("", '/' + RemoteRepositoryProvider.REPO_SUBDIR,
-		                    '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR, '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR,
-		                    '/' + OConsts.FILE_PROJECT,
-		                    '/' + config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
-		                    '/' + config.getWritableGlossaryFile().getUnderRoot(),
-		                    '/' + config.getTargetDir().getUnderRoot());
-
-		            // After adding filters.xml and segmentation.conf, we must reload them again
-		            config.loadProjectFilters();
-		            config.loadProjectSRX();
                 } catch (IRemoteRepository2.NetworkException e) {
                     Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause());
                     setOfflineMode();
                 }
+
+                remoteRepositoryProvider.copyFilesFromRepoToProject("", '/' + RemoteRepositoryProvider.REPO_SUBDIR,
+                        '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR, '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR,
+                        '/' + OConsts.FILE_PROJECT,
+                        '/' + config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
+                        '/' + config.getWritableGlossaryFile().getUnderRoot(),
+                        '/' + config.getTargetDir().getUnderRoot());
+
+                // After adding filters.xml and segmentation.conf, we must reload them again
+                config.loadProjectFilters();
+                config.loadProjectSRX();
             }
 
             loadFilterSettings();
+            loadSegmentationSettings();
             loadTranslations();
+            loadSourceFiles();
 
+            // This MUST happen after calling loadTranslations()
             if (remoteRepositoryProvider != null && isOnlineMode) {
                 Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                 rebaseAndCommitProject(true);
             }
-
-            // Set project specific segmentation rules if they exist, or defaults otherwise.
-            // This can be done after loadTranslations(), as segmentation is not used for this
-            SRX srx = Optional.ofNullable(config.getProjectSRX()).orElse(Preferences.getSRX());
-            Core.setSegmenter(new Segmenter(srx));
-            
-            loadSourceFiles();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);
@@ -433,6 +431,16 @@ public class RealProject implements IProject {
         // for alt translations is a filter setting, and it affects how alt translations are hashed.
         Filters filters = Optional.ofNullable(config.getProjectFilters()).orElse(Preferences.getFilters());
         Core.setFilterMaster(new FilterMaster(filters));
+    }
+
+    /**
+     * Load segmentation settings, either from the project or from global options
+    */
+    private void loadSegmentationSettings() {
+        // Set project specific segmentation rules if they exist, or defaults otherwise.
+        // This MUST happen before calling loadTranslations(), because projectTMX needs a segmenter.
+        SRX srx = Optional.ofNullable(config.getProjectSRX()).orElse(Preferences.getSRX());
+        Core.setSegmenter(new Segmenter(srx));
     }
 
     /**
@@ -605,7 +613,7 @@ public class RealProject implements IProject {
     public void compileProject(String sourcePattern, boolean doPostProcessing) throws Exception {
         compileProjectAndCommit(sourcePattern, doPostProcessing, false);
     }
-    
+
     /**
      * Builds translated files corresponding to sourcePattern and creates fresh TM files.
      *
@@ -618,7 +626,7 @@ public class RealProject implements IProject {
      * @throws Exception
      */
     @Override
-    public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) 
+    public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception {
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");
         UIThreadsUtil.mustNotBeSwingThread();
@@ -694,7 +702,7 @@ public class RealProject implements IProject {
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
-                Log.logErrorRB("TF_COMMIT_TARGET_ERROR"); 
+                Log.logErrorRB("TF_COMMIT_TARGET_ERROR");
                 Log.log(e);
                 throw new IOException(OStrings.getString("TF_COMMIT_TARGET_ERROR") + "\n"
                         + e.getMessage());
@@ -1632,7 +1640,8 @@ public class RealProject implements IProject {
     protected ITokenizer createTokenizer(String cmdLine, Class<?> projectPref) {
         if (!StringUtil.isEmpty(cmdLine)) {
             try {
-                return (ITokenizer) this.getClass().getClassLoader().loadClass(cmdLine).newInstance();
+                return (ITokenizer) this.getClass().getClassLoader().loadClass(cmdLine).getDeclaredConstructor()
+                        .newInstance();
             } catch (ClassNotFoundException e) {
                 Log.log(e.toString());
             } catch (Throwable e) {
@@ -1640,7 +1649,7 @@ public class RealProject implements IProject {
             }
         }
         try {
-            return (ITokenizer) projectPref.newInstance();
+            return (ITokenizer) projectPref.getDeclaredConstructor().newInstance();
         } catch (Throwable e) {
             Log.log(e);
         }
@@ -1772,7 +1781,7 @@ public class RealProject implements IProject {
                 segmentTranslation = null;
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, props,
-                    segmentTranslation, protectedParts);
+                    segmentTranslation, protectedParts, segmentIndex == 0);
             srcTextEntry.setSourceTranslationFuzzy(segmentTranslationFuzzy);
 
             if (SegmentProperties.isReferenceEntry(props)) {

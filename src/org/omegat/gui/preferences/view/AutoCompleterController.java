@@ -5,7 +5,7 @@
 
  Copyright (C) 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -25,7 +25,6 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
@@ -33,6 +32,7 @@ import javax.swing.KeyStroke;
 
 import org.omegat.core.Core;
 import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
@@ -61,7 +61,7 @@ public class AutoCompleterController extends BasePreferencesController {
 
     private void initGui() {
         panel = new AutoCompleterPreferencesPanel();
-        int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+        int mask = Java8Compat.getMenuShortcutKeyMaskEx();
         KeyStroke left = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, mask);
         KeyStroke right = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, mask);
         panel.switchWithLRCheckBox.setText(OStrings.getString("PREFS_AUTOCOMPLETE_SWITCH_VIEWS_LR",

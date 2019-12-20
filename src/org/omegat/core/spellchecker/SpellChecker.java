@@ -7,7 +7,7 @@
                2009 Didier Briel
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -297,8 +297,10 @@ public class SpellChecker implements ISpellChecker {
      */
     public void destroy() {
         saveWordLists();
-        checker.destroy();
-        checker = null;
+        if (checker != null) {
+            checker.destroy();
+            checker = null;
+        }
     }
 
     protected void resetCache() {

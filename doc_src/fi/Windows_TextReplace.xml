@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.textreplace">
+  <title>Tekstin korvaus</title>
+
+  <para>Avaa etsi ja korvaa -ikkuna painamalla <keycombo><keycap>Ctrl</keycap><keycap>K</keycap></keycombo>ja kirjoita <emphasis>Etsittävä teksti</emphasis> -kenttään sana tai ilmaus, jonka haluat korvata toisella.</para>
+
+  <para>Napsauta sen jälkeen <emphasis>Etsi</emphasis>-painiketta, jolloin haku näyttää kaikki kohdat, joissa kyseinen sana tai ilmaus esiintyy.</para>
+
+  <para>Kirjoita uusi sana tai ilmaisu (säännölliset lausekkeet eivät ole käytössä) <emphasis>Korvaa tällä</emphasis> -kenttään ja napsauta sitten yhtä seuraavista vaihtoehdoista:<itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Korvaa kaikki</emphasis> näyttää vahvistusikkunassa, montako kertaa sana tai ilmaus esiintyy, ja korvaa ne kaikki.</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Korvaa</emphasis> korvaa yhden esiintymän kerrallaan. Käytä tätä varten <emphasis role="bold">editoriruudun ylätunnisteessa</emphasis> olevia painikkeita. Jatka korvaamista painamalla <emphasis>Korvaa seuraava</emphasis> tai <emphasis>Ohita</emphasis>, ja lopeta korvaaminen napsauttamalla <emphasis>Lopeta</emphasis>.</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Sulje</emphasis> sulkee ikkunan muutamatta mitään.</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section>
+    <title>Hakuasetukset</title>
+
+    <para>Hakuasetukset ovat samantapaisia kuin <link linkend="windows.textsearch">hakuikkunassa</link> näkyvät asetukset.</para>
+
+    <para>On kuitenkin yksi poikkeus: rastita <emphasis role="bold">Kääntämättömät</emphasis>, jotta etsi ja korvaa -toiminto hakee tekstiä myös kääntämättömistä segmenteistä.</para>
+
+    <para>Etsi ja korvaa -toiminto hakee tekstiä ainoastaan jo muodostuneesta käännösmuistista, joten OmegaT kopioi lähdesegmentin kohdesegmenttiin ennen tekstin korvaamista. Jos kyseistä segmenttiä ei muuteta, kohdesegmentti &quot;tyhjennetään&quot;, eli segmentti pysyy kääntämättömänä.</para>
+  </section>
+</section>

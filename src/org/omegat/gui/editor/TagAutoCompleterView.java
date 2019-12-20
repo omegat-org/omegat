@@ -6,7 +6,7 @@
  Copyright (C) 2013 Aaron Madlon-Kay, Zoltan Bartko
                2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -112,7 +112,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
 
     @Override
     public String itemToString(AutoCompleterItem item) {
-        return item.extras[0];
+        return item.extras != null && item.extras.length > 0 ? item.extras[0] : item.payload;
     }
 
     private static class TagTokenizer implements ITokenizer {

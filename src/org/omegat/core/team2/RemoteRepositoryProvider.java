@@ -5,7 +5,7 @@
 
  Copyright (C) 2014 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -39,7 +39,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
+import org.omegat.core.team2.IRemoteRepository2.NetworkException;
 import org.omegat.util.FileUtil;
+import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
@@ -163,11 +165,24 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * Switch all repositories into latest version.
+     * Switch all repositories into latest version. Will continue in the event of an error, unless that error is a
+     * {@link NetworkException} in which case it will throw immediately. If any other exceptions occur while updating
+     * the repos, the first will be thrown after all repos have been processed.
      */
     public void switchAllToLatest() throws Exception {
+        List<Exception> errors = new ArrayList<>();
         for (IRemoteRepository2 r : repositories) {
-            r.switchToVersion(null);
+            try {
+                r.switchToVersion(null);
+            } catch (NetworkException e) {
+                throw e;
+            } catch (Exception e) {
+                errors.add(e);
+                Log.logErrorRB("TEAM_UPDATE_REPO_ERROR", e.getMessage());
+            }
+        }
+        if (!errors.isEmpty()) {
+            throw errors.get(0);
         }
     }
 

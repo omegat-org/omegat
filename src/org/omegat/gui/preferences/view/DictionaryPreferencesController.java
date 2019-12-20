@@ -5,7 +5,7 @@
 
  Copyright (C) 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -59,15 +59,18 @@ public class DictionaryPreferencesController extends BasePreferencesController {
     @Override
     protected void initFromPrefs() {
         panel.fuzzyMatchingCheckBox.setSelected(Preferences.isPreference(Preferences.DICTIONARY_FUZZY_MATCHING));
+        panel.autoCheckSegmentsCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_AUTO_SEARCH, true));
     }
 
     @Override
     public void restoreDefaults() {
         panel.fuzzyMatchingCheckBox.setSelected(false);
+        panel.autoCheckSegmentsCheckBox.setSelected(true);
     }
 
     @Override
     public void persist() {
         Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING, panel.fuzzyMatchingCheckBox.isSelected());
+        Preferences.setPreference(Preferences.DICTIONARY_AUTO_SEARCH, panel.autoCheckSegmentsCheckBox.isSelected());
     }
 }

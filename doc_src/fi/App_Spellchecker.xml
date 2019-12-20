@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.spellchecker">
+  <title>Kielentarkastin</title>
+
+  <para>OmegaT:n oletuskielentarkistin perustuu Apache OpenOfficessa, LibreOfficessa, Firefoxissa ja Thunderbirdissä käytettyyn kielentarkistimeen. Näin ollen se voi käyttää näiden sovellusten monia vapaita oikeinkirjoitussanastoja.</para>
+
+  <section>
+    <title>Oikeinkirjoitussanastojen asentaminen</title>
+
+    <para>Ennen kuin kielentarkistustoimintoa voi käyttää, on asennettava yksi tai useampia kohdekielen sanastoja. Näin asennat oikeinkirjoitussanastoja:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Avaa tiedostonhallinnassa sopiva sijainti ja luo sinne uusi kansio, jonne tallennat oikeinkirjoitussanastoja. Alla olevassa esimerkissä käytetään sijaintia D:/Translations/spellchekers.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Avaa OmegaT. Valitse <guimenuitem>Valinnat &gt; Oikeinkirjoituksen tarkistus</guimenuitem> ja napsauta Sanakirjojen kansio -kentän kohtaa <guibutton>Valitse</guibutton>. Etsi juuri luomasi sanakirjojen kansio ja valitse se.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Tuo tähän kansioon sanakirjatiedostot, joita haluat käyttää. Voit tehdä tämän kahdella tavalla. Voit käyttää tiedostonhallintaohjelmaa ja kopioida muualla olevat tiedostot uuteen kansioon, tai käyttää OmegaT:n <emphasis role="bold">Asenna uusi sanakirja</emphasis> -toimintoa. Toiminto laatii listan käytettävistä sanakirjoista, ja voit valita niistä haluamasi. Huomioi, että tarvitset internetyhteyden käyttääksesi asennustoimintoa. Valittujen kielten asentaminen voi kestää jonkin aikaa, mutta näet ne lopulta kielentarkistinikkunassa.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Jos sinulla jo on sopivia sanakirjatiedostoja (esim. Apache OpenOfficen, LibreOfficen, Firefoxin tai Thunderbirdin osana), ne kannattaa kopioida ne käsin sanakirjakansioon. Sanakirjojen haku netistä on kuitenkin helpompaa. Käytä tällöin kenttää <emphasis role="bold">Online-sanakirjojen URL-osoite</emphasis>:</para>
+
+    <figure id="spellchecker.setup">
+      <title>Oikeinkirjoituksen tarkistuksen asetukset</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckerSetup_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Napsauta kenttää <guibutton>Asenna uusi sanakirja</guibutton>, niin sanakirjan asennusikkuna avautuu. Ikkunassa voit valita ne sanakirjat, jotka haluat asentaa.</para>
+
+    <para>Tiedostojen nimien ja kohdekielen kielikoodin on oltava yhtäläiset. (Kielikoodi on asetettu kohdassa <guimenu>Projekti &gt; Ominaisuudet</guimenu>.) Jos kohdekielenäsi on esimerkiksi ES-MX (Meksikon espanja), sanakirjatiedostojen nimien on oltava ex_MX.dic ja es_MX.aff. Jos käytössäsi on vain perusmuotoinen espanjan sanakirja, voit tehdä kopiot sen tiedostoista es_es.dic ja es_es.aff ja nimetä ne uudelleen tiedostoiksi es_MX.dic ja es_MX.aff. Näin saat käyttöön espanjan oikeinkirjoitussanaston. Tällöin oikeinkirjoitus toki tarkistetaan Espanjan espanjan (kastilian), ei Meksikon espanjan mukaisesti.</para>
+  </section>
+
+  <section>
+    <title>Oikeinkirjoitussanastojen käyttö</title>
+
+    <para>Sinun ei tarvitse erikseen määritellä OmegaT:tä käyttämään tiettyä oikeinkirjoitussanastoa. OmegaT käyttää automaattisesti projektin kielikoodin mukaista sanakirjaa. Tarkista silti, että kielikoodit ovat täsmälleen samanlaiset. Esimerkiksi sanakirja, jonka tunnus on FR-FR, ei toimi, kun kohdekieleksi on asetettu pelkkä FR. Nimeä sanakirjatiedostot uudelleen tai muuta projektin kieliasetuksia tarvittaessa.</para>
+
+    <para>Ota oikeinkirjoituksen tarkistuksen käyttöön kohdassa <guimenuitem>Valinnat &gt; Oikeinkirjoituksen tarkistus </guimenuitem> ja laita <guilabel>Tarkista oikeinkirjoitus automaattisesti</guilabel> -ruutuun rasti (ks. yllä).</para>
+
+    <figure id="spellchecker.in.action">
+      <title>Oikeinkirjoituksen tarkistuksen käyttö</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckingText.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckingText.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Napsauta alleviivattua sanaa hiiren kakkospainikkeella (yllä olevassa kuvassa sana Artund) ja valitse oikea korjaus pudotusvalikosta (esimerkissä Art und). Voit myös ohjastaa oikeinkirjoituksen tarkistuksen ohittamaan kaikki väärin kirjoitetun sanan esiintymät tai lisäämään sen sanakirjaan.</para>
+  </section>
+
+  <section id="hints">
+    <title>Vihjeitä</title>
+
+    <para>Jos oikeinkirjoituksen tarkistus ei toimi, tarkista, että olet rastittanut <guilabel>Tarkista oikeinkirjoitus automaattisesti</guilabel> -ruudun (kohdassa <guisubmenu>Valinnat &gt; Oikeinkirjoituksen tarkistus…</guisubmenu>)</para>
+
+    <para>Tarkista myös, että projektin kohdekielen kielikoodi on sama kuin käytettävän sanakirjan kielikoodi. Oikeinkirjoituksen tarkistus tunnistaa käytettävän sanakirjan kohdekielen kielikoodin perusteella. Jos kohdekielenä on brasilianportugali (PT_BR), sanakirjojen alikansiossa on oltava kaksi samannimistä sanakirjatiedostoa, <emphasis>pt_br.aff</emphasis> ja <emphasis>pt_br.dic</emphasis>.</para>
+
+    <para>Jos olet jo kääntänyt suuren määrän tekstiä, kun huomaat että projektin kohdekielen kielikoodi ei vastaa oikeinkirjoituksen tarkistuksen kielikoodia (olet esimerkiksi valinnut kohdekieleksi pt_BR, mutta pt_BR-sanakirjoja ei ole), sinun kannattaa yksinkertaisesti kopioida kaksi sopivaa tiedostoa ja nimetä ne uudelleen (esim. tiedostot <emphasis>pt_PT.aff</emphasis> ja <emphasis>pt_PT.dic</emphasis> muotoon <emphasis>pt_BR.aff</emphasis> ja <emphasis>pt_BR.dic</emphasis>). Järkevämpää on kuitenkin pitää pieni tauko ja ladata oikeinkirjoituksen tarkistuksen vaatimat oikeat sanakirjaversiot.</para>
+
+    <para>Huomaa, että <filename>Poista</filename> poistaa kaikki valitut sanakirjat fyysisesti koneelta. Jos jokin toinen sovellus käyttää samoja tiedostoja, ne katoavat myös tästä sovelluksesta. Jos sinun on syystä tai toisesta poistettava tai uudelleennimettävä sanakirjoja usein, kannattaa kopioida kyseiset tiedostot toiseen kansioon, jota vain OmegaT käyttää.</para>
+  </section>
+</appendix>

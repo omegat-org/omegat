@@ -14,8 +14,9 @@
                2014 Aaron Madlon-Kay
                2015 Yu Tang, Aaron Madlon-Kay, Didier Briel
                2017 Didier Briel
+               2019 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -38,7 +39,6 @@ package org.omegat.gui.main;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.KeyboardFocusManager;
-import java.awt.Toolkit;
 import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -77,6 +77,7 @@ import org.omegat.gui.search.SearchWindowController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.help.Help;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -312,7 +313,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -328,7 +329,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -343,7 +344,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(path);
-        if ((modifier & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -372,7 +373,7 @@ public final class MainWindowMenuHandler {
          // Bug #902: commit the current entry first
         // We do it before checking project status, so that it can eventually change it
         if (Core.getProject().isProjectLoaded()) {
-            Core.getEditor().commitAndLeave();		
+            Core.getEditor().commitAndLeave();
         }
 
         boolean projectModified = false;
@@ -509,6 +510,18 @@ public final class MainWindowMenuHandler {
             }
         }
         SegmentExportImport.exportCurrentSelection(selection);
+    }
+
+    public void editSearchDictionaryMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String selection = Core.getEditor().getSelectedText();
+        if (selection == null) {
+            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+            selection = ste.getSrcText();
+        }
+        Core.getDictionaries().searchText(selection);
     }
 
     public void editCreateGlossaryEntryMenuItemActionPerformed() {
@@ -737,6 +750,13 @@ public final class MainWindowMenuHandler {
                         mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
     }
 
+    public void viewMarkParagraphStartCheckBoxMenuItemActionPerformed() {
+        Core.getEditor()
+                .getSettings()
+                .setMarkParagraphDelimitations(
+                        mainWindow.menu.viewMarkParagraphStartCheckBoxMenuItem.isSelected());
+    }
+
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
         Core.getEditor()
                 .getSettings()
@@ -954,6 +974,8 @@ public final class MainWindowMenuHandler {
         try {
             Help.showHelp();
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(mainWindow, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+                    JOptionPane.ERROR_MESSAGE);
             Log.log(ex);
         }
     }

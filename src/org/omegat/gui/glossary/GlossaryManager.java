@@ -8,7 +8,7 @@
                2013 Alex Buloichik
                2015 Didier Briel
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -77,7 +77,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         List<IGlossary> gl = new ArrayList<IGlossary>();
         for (Class<?> glc : PluginUtils.getGlossaryClasses()) {
             try {
-                gl.add((IGlossary) glc.newInstance());
+                gl.add((IGlossary) glc.getDeclaredConstructor().newInstance());
             } catch (Exception ex) {
                 Log.log(ex);
             }

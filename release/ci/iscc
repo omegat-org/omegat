@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+relpaths() {
+    for arg in "$@"; do printf -- "%s\n" "${arg#$PWD/}"; done
+}
+
+bindpaths() {
+    for arg in $(relpaths "$@"); do
+        if [ -e "$arg" ] && [[ "$arg" == /* ]]; then
+            printf -- "-v %s:%s" "$arg" "$arg"
+        fi
+    done
+}
+
+exec docker run --rm -i -v "$PWD":/work $(bindpaths "$@") amake/innosetup:innosetup5 $(relpaths "$@")

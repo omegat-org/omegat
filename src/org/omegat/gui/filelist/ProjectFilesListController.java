@@ -10,7 +10,7 @@
                2014 Alex Buloichik Piotr Kulik
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -98,6 +98,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -230,6 +231,8 @@ public class ProjectFilesListController {
                 SwingUtilities.invokeLater(() -> {
                     list.toFront();
                     list.tableFiles.requestFocus();
+                    // Correctly set the active file in the Project Files dialog after reloading the project.
+                    SwingUtilities.invokeLater(() -> selectCurrentFile(Core.getProject().getProjectFiles()));
                 });
                 break;
             default:
@@ -387,7 +390,7 @@ public class ProjectFilesListController {
         }
         JMenuItem item = menu.add(defaultTitle);
         item.addActionListener(e -> {
-            boolean openParent = (e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0;
+            boolean openParent = (e.getModifiers() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0;
             Stream<File> stream;
             if (openParent) {
                 stream = files.stream().map(File::getParentFile).distinct().filter(File::isDirectory);
@@ -409,14 +412,14 @@ public class ProjectFilesListController {
             }
             @Override
             public void menuKeyReleased(MenuKeyEvent e) {
-                if ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0
+                if ((e.getModifiersEx() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0
                         || e.getKeyCode() == KeyEvent.VK_META || e.getKeyCode() == KeyEvent.VK_CONTROL) {
                     setText(defaultTitle);
                 }
             }
             @Override
             public void menuKeyPressed(MenuKeyEvent e) {
-                if ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+                if ((e.getModifiersEx() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
                     setText(modTitle);
                 }
             }
@@ -432,7 +435,7 @@ public class ProjectFilesListController {
         @Override
         public void keyTyped(KeyEvent e) {
             char c = e.getKeyChar();
-            if ((e.getModifiers() == 0 || e.getModifiers() == KeyEvent.SHIFT_MASK)
+            if ((e.getModifiersEx() == 0 || e.getModifiersEx() == KeyEvent.SHIFT_DOWN_MASK)
                     && !Character.isWhitespace(c) && !Character.isISOControl(c)) {
                 if (isFiltering()) {
                     resumeFilter(e.getKeyChar());

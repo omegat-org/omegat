@@ -1,8 +1,10 @@
 Building OmegaT
 ===============
 
-OmegaT is built with Gradle. Run `gradlew tasks` from the top level to
-see the available tasks.
+OmegaT is built with Gradle. Run `gradlew tasks` from the top level to see the
+available tasks. Run `gradlew build` to build all possible distfiles and run the
+main tests. Tasks skipped due to missing requirements will be noted in the
+output.
 
 OmegaT will run on the latest Java, but is required to be compatible with Java
 1.8. Further, JREs other than Oracle's are not officially supported. You are
@@ -14,9 +16,48 @@ Gradle Support plugin to open the OmegaT project in NetBeans.)
 
 Check the other files in this directory for documentation. You can
 produce Javadoc by running `gradlew javadoc`, or browse online:
-    Trunk:    https://omegat.ci.cloudbees.com/job/omegat-trunk/javadoc/
-    Releases: https://omegat.ci.cloudbees.com/job/omegat-javadoc/
-              (Open desired version and click "Javadoc" link on left)
+
+    https://omegat.sourceforge.io/javadoc-latest/
+
+
+Configuring Build Tasks
+=======================
+
+Some build tasks, such as signed installers, require additional configuration
+via a `local.properties` file placed at the root of the source tree. See
+`local.properties.example`.
+
+
+Build Assets
+============
+
+Some build tasks require the user to supply additional files not included in the
+OmegaT source. These files should be placed in the assets directory, which by
+default is `..`, i.e. one level up from the OmegaT source root. You can specify
+a different directory by supplying the argument `-PassetDir=/path/to/wherever`.
+
+In particular, with-JRE builds require a JRE tarball for the appropriate
+platform, e.g. `jre-*-macosx-x64.tar.gz`.
+
+
+Containerized Tasks
+===================
+
+Some build tasks require additional software to be installed:
+
+- Windows installers require InnoSetup with all optional language files
+  http://www.jrsoftware.org/isinfo.php
+
+- Signed Windows installers require osslsigncode
+  https://sourceforge.net/projects/osslsigncode/
+
+- Docs generation requires a whole ecosystem. See /doc_src/Readme.txt
+
+To alleviate the pain of installing and configuring things, these tools have
+been containerized and automated via Docker. If you want to run these build
+tasks, you are strongly recommended to install Docker:
+
+    https://www.docker.com/
 
 
 Working with Dependencies
@@ -51,16 +92,35 @@ Dependencies not available for consumption via Maven/Gradle are committed to
 /lib/manual.
 
 
+Versioning
+==========
+
+OmegaT versions loosely follow semver (https://semver.org/). The version number
+consists of three parts: MAJOR.MINOR.PATCH. When PATCH is zero it can be elided
+from documentation or casual references, but not in code.
+
+- MAJOR: The distinction between "standard" and "latest" flavors (see below)
+- MINOR: "Large" changes that affect the UI or core functionality
+- PATCH: Bug fixes and small changes that aren't "large"
+
+In the past there was also an "update" number following PATCH, but this has been
+deprecated.
+
+There are two "flavors" of OmegaT:
+
+- Standard: Stable, with a complete manual (sometimes "beta" in the code)
+- Latest: May have breaking changes, incomplete manual
+
+
 Contributing to OmegaT
 ======================
 
-Main development is performed in the `trunk` branch of the SourceForge-hosted
-Subversion repository:
-    https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/
+Main development is performed in the `master` branch of the SourceForge-hosted
+Git repository:
+    https://sourceforge.net/p/omegat/code/ci/master/tree/
 
-Git mirrors are also provided (svn trunk is synced to git master):
-    SourceForge: https://sourceforge.net/p/omegat/code/ci/master/tree/
-    GitHub:      https://github.com/omegat-org/omegat
+A GitHub mirror is also provided:
+    https://github.com/omegat-org/omegat
 
 If you would like to submit a patch, the recommended procedure is as follows:
 
@@ -78,7 +138,7 @@ If you would like to submit a patch, the recommended procedure is as follows:
    GitHub and open a pull request.
 
 3. Patches/PRs will be reviewed by a core developer. If accepted, the changes
-   will be squashed and committed to trunk by the reviewer.
+   will be committed to master by the reviewer.
 
 
 

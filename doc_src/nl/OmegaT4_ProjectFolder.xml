@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="project.folder">
+  <title>Projectmap</title>
+
+  <para>Een OmegaT-project is een map die bestanden en submappen bevat.</para>
+
+  <section>
+    <title>source</title>
+
+    <para>De submap source bevat de bestanden die moeten worden vertaald. U kunt de bestanden er later aan toevoegen. Houdt er wel rekening mee dat de structuur van de submap source elke vorm mag hebben die u wilt. Indien de bestanden die vertaald moeten worden deel uitmaken van een boomstructuur (zoals op een website), hoeft u slechts de bovenste submap op te geven en zal OmegaT de gehele inhoud behouden, waarbij de boomstructuur intact blijft.</para>
+  </section>
+
+  <section>
+    <title>target</title>
+
+    <para>Deze submap is bij aanvang leeg. Selecteer <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Project</guimenu> <guimenuitem>Vertaalde documenten maken</guimenuitem> </menuchoice> om er inhoud aan toe te voegen. Bestanden in de map <filename>source</filename>, of zij vertaald zijn of niet, worden dan hier gegenereerd, in dezelfde hiërarchie als die welke aanwezig is in de submap source. De inhoud van de submap target zal de huidige status van de vertaling weergeven, zoals die aanwezig is in het vertaalgeheugen van het project, opgeslagen in het huidige <emphasis role="bold">/omegat/project_save.tmx</emphasis>. Niet-vertaalde segmenten zullen hierbij hun brontaal behouden.</para>
+  </section>
+
+  <section>
+    <title>tm</title>
+
+    <para>De map /tm/ kan een willekeurig aantal aanvullende vertaalgeheugens bevatten - d.i. tmx-bestanden. Zulke bestanden kunnen worden gemaakt in elk van de drie hierboven aangegeven variëteiten. Onthoud dat andere CAT-programma's tmx-bestanden kunnen exporteren (en ook importeren), gewoonlijk in alle drie vormen. Het beste is natuurlijk om OmegaT-specifieke TMX-bestanden te gebruiken (zie hierboven), zodat de in-regelige opmaak binnen het segment wordt behouden.</para>
+
+    <para>De inhoud van vertaalgeheugens in de submap tm dienen om suggesties te genereren voor de tekst(en) om te worden vertaald. Elke tekst, reeds vertaald en opgeslagen in deze bestanden, zal tussen de overeenkomsten verschijnen, indien het voldoende overeenkomt met de tekst die momenteel wordt vertaald.</para>
+
+    <para>Indien het bronsegment in één van de aanvullende TM's identiek is aan de tekst die wordt vertaald, gedraagt OmegaT zich zoals gedefinieerd is in het dialoogvenster <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden vooraf gegaan door<emphasis> [fuzzy]</emphasis>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn getagd, juist zijn vertaald<menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+
+    <para>Het kan gebeuren dat vertaalgeheugens, beschikbaar in de submap <filename>tm</filename>, segmenten met identieke brontekst bevatten, maar afwijkende doelen. TMX-bestanden worden, gesorteerd op hun naam, gelezen en segmenten binnen een bepaald TMX-bestand regel na regel. Het laatste segment met de identieke brontekst zal dus worden gekozen (Opmerking: natuurlijk is het verstandiger om dit in de eerste plaats in zijn geheel te vermijden).</para>
+
+    <para>Onthoud dat de TMX-bestanden in de map tm kunnen worden gecomprimeerd met gzip.</para>
+
+    <section>
+      <title>tm/auto</title>
+
+      <para>Als het vanaf het begin duidelijk is dat de vertalingen in een bepaald TM (of TM's) allemaal juist zijn, kan één van hen in de map<emphasis role="bold"> tm/auto</emphasis> worden geplaatst en heel veel van de gevallen van bevestiging met<emphasis> [fuzzy]</emphasis> worden voorkomen.</para>
+
+      <para><orderedlist>
+          <listitem>
+            <para>Dat TMX-bestand dient u dan te plaatsen in de map /tm/ of /tm/auto/ van uw project van OmegaT.</para>
+          </listitem>
+
+          <listitem>
+            <para>Open het project. De wijzigingen worden weergegeven.</para>
+          </listitem>
+
+          <listitem>
+            <para>Maak een kleine wijziging ergens in het project. Dit past <filename>project_save.tmx</filename> aan (door toevoegen van juiste vertaaleenheden uit de TMX vanuit &quot;auto&quot;)</para>
+          </listitem>
+        </orderedlist></para>
+
+      <para>Opmerking: als de TMX  uit /tm/auto  vóór stap 3 wordt verwijderd, worden geen extra vertaaleenheden toegevoegd.</para>
+    </section>
+
+    <section>
+      <title>tm/enforce</title>
+
+      <para>Als u er niet aan twijfelt dat een TMX meer nauwkeurig is dan het bestand <filename>project_save.tmx</filename> van OmegaT, plaats die TMX dan in /tm/enforce om bestaande standaard vertalingen onvoorwaardelijk te overschrijven.</para>
+
+      <para><orderedlist>
+          <listitem>
+            <para>Plaats de TMX in /tm/enforce.</para>
+          </listitem>
+
+          <listitem>
+            <para>Open het project. De wijzigingen worden weergegeven.</para>
+          </listitem>
+
+          <listitem>
+            <para>Maak een kleine wijziging ergens in het project. Dit past <filename>project_save.tmx</filename> aan.</para>
+          </listitem>
+
+          <listitem>
+            <para>Neem een beslissing over de immuniteit van de geforceerde segmenten:<itemizedlist>
+                <listitem>
+                  <para>Als zij <emphasis>niet immuun</emphasis> moeten blijven voor nadere wijzigingen, verwijder dan de TMX uit /tm/enforce.</para>
+                </listitem>
+
+                <listitem>
+                  <para>Als zij <emphasis>immuun</emphasis> moeten blijven voor verdere wijzigingen, laat dan de TMX in /tm/enforce staan.</para>
+                </listitem>
+              </itemizedlist></para>
+          </listitem>
+        </orderedlist></para>
+
+      <para>Opmerking: als de TMX  uit /tm/enforce vóór stap 3 wordt verwijderd, worden in het geheel geen forceringen behouden.</para>
+    </section>
+
+    <section>
+      <title>tm/mt</title>
+
+      <para>In het venster Bewerken, wanneer een overeenkomst wordt ingevoegd vanuit een TMX die is opgenomen in een map genaamd <filename>mt</filename>, wordt de achtergrond van het actieve segment gewijzigd naar rood. De achtergrond wordt hersteld naar normaal wanneer het segment wordt verlaten.</para>
+    </section>
+
+    <section>
+      <title>tm/penalty-xxx</title>
+
+      <para>Soms is het handig om onderscheid te maken tussen vertaalgeheugens van hoge kwaliteit en die welke, vanwege het onderwerp, cliënt, revisiestatus, etc., minder betrouwbaar zijn. Voor vertaalgeheugens in mappen met de naam <filename>penalty-xxx</filename> (waarvan xxx ligt tussen 0 en 100), zullen overeenkomsten worden gegradeerd overeenkomstig de naam van de map: een overeenkomst van 100% in een vertaalgeheugen dat zich bevindt in een map genaamd, bijvoorbeeld <filename>penalty-30</filename>, zal worden verlaagd naar een overeenkomst van 70%. De straf is van toepassing op alle drie de percentages voor de overeenkomsten: overeenkomsten van 75, 80, 90 zullen in dit geval worden verlaagd naar 45, 50, 60.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>Woordenboek</title>
+
+    <para>Bij aanvang leeg, zal deze map woordenboeken bevatten die u zult toevoegen aan het project. Bekijk <link linkend="appendix.dictionaries">Woordenboeken</link> voor meer over dit onderwerp.</para>
+  </section>
+
+  <section>
+    <title>glossary</title>
+
+    <para>Deze map is bij aanvang leeg. Hij zal de woordenlijsten bevatten die u in het project zult gebruiken. Bekijk <link linkend="appendix.glossaries">Woordenlijsten</link> voor meer over dit onderwerp.</para>
+  </section>
+
+  <section id="folder.omegat">
+    <title>omegat</title>
+
+    <para>De submap <emphasis role="bold">omegat</emphasis> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <filename>project_save.tmx, </filename>dat het werkende vertaalgeheugen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegd aan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert.</para>
+
+    <para>Gedurende de vertaling kunnen als volgt aanvullende bestanden in deze submap worden gecreëerd</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>stats.txt</term>
+
+        <listitem>
+          <para>bevat de huidige statistieken van het huidige project. U kunt het bekijken door te selecteren <guimenuitem>Extra &gt; Statistieken</guimenuitem></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>ignored_words.txt.</term>
+
+        <term>learned_words.txt</term>
+
+        <listitem>
+          <para>worden gemaakt en gebruikt door de spellingscontrole. Als u al woorden hebt verzameld waarvan u wilt dat de spellingscontrole die negeert / accepteert, hoeft u slechts de corresponderende twee bestanden naar de submap <filename>omegat</filename> van uw huidige project te kopiëren.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>project_stats_match.txt</term>
+
+        <listitem>
+          <para>bevat de laatste statistieken voor overeenkomsten in het project, gegenereerd door <guimenuitem>Extra &gt; Statistieken voor overeenkomsten</guimenuitem></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>segmentation.conf</term>
+
+        <listitem>
+          <para>als het bestaat bevat het project-specifieke segmentatieregels.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>filters.xml</term>
+
+        <listitem>
+          <para>als het bestaat bevat het project-specifieke bestandsfilters.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>uiLayout.xml</term>
+
+        <listitem>
+          <para>als het bestaat bevat het project-specifieke instellingen voor de GUI&gt;</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>omegat.project (bestand)</title>
+
+    <para>Bevat parameters voor het project, zoals gedefinieerd in het dialoogvenster <link linkend="dialogs.projectproperties">Projecteigenschappen</link>.</para>
+  </section>
+
+  <section>
+    <title>.repositories</title>
+
+    <para>In een teamproject bevat deze map een geversioneerde kopie van de boomstructuur van het project, direct gekoppeld aan de server op afstand.</para>
+
+    <para>U kunt wijzigingen maken in bestanden op afstand (bijv. een bestand verwijderen) met deze map en een cliënt voor Git of SVN.</para>
+
+    <para>In sommige besturingssystemen wordt deze map niet standaard weergegeven. Activeer de optie &quot;Verborgen bestanden weergeven&quot; om hem zichtbaar te maken.</para>
+  </section>
+</chapter>

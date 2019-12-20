@@ -5,7 +5,7 @@
 
  Copyright (C) 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -48,17 +48,22 @@ public class DictionaryPreferencesPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        autoCheckSegmentsCheckBox = new javax.swing.JCheckBox();
         fuzzyMatchingCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
+        org.openide.awt.Mnemonics.setLocalizedText(autoCheckSegmentsCheckBox, OStrings.getString("PREFS_DICTIONARY_AUTO_SEARCH")); // NOI18N
+        add(autoCheckSegmentsCheckBox);
+
         org.openide.awt.Mnemonics.setLocalizedText(fuzzyMatchingCheckBox, OStrings.getString("PREFS_DICTIONARY_FUZZY")); // NOI18N
         add(fuzzyMatchingCheckBox);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JCheckBox autoCheckSegmentsCheckBox;
     javax.swing.JCheckBox fuzzyMatchingCheckBox;
     // End of variables declaration//GEN-END:variables
 }

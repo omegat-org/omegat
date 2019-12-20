@@ -8,7 +8,7 @@
                2012 Didier Briel
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -102,11 +102,7 @@ public class SaveThread extends Thread implements IAutoSave {
                     try {
                         Core.executeExclusively(false, () -> {
                             dataEngine.saveProject(false);
-                            try {
-                                dataEngine.teamSyncPrepare();
-                            } catch (Exception ex) {
-                                LOGGER.log(Level.WARNING, "Error save", ex);
-                            }
+                            dataEngine.teamSyncPrepare();
                         });
                         Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
                                 DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
@@ -114,6 +110,8 @@ public class SaveThread extends Thread implements IAutoSave {
                         LOGGER.warning("Lock trying timeout during autosave");
                     } catch (KnownException ex) {
                         Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
+                    } catch (Exception ex) {
+                        LOGGER.log(Level.WARNING, "Error save", ex);
                     }
                     LOGGER.fine("Finish project save from SaveThread");
                 }

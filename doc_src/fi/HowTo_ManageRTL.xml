@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.managerighttoleft">
+  <title>Oikealta vasemmalle luettavien kielien hallinta</title>
+
+   <para>Lähde- ja kohdesegmenttien tasaus riippuu projektin kielistä. Oletusarvona on, että vasemmalta oikealle luettavissa (left-to-right, LTR) kielissä käytetään vasemman reunan tasausta ja oikealta vasemmalle luettavissa (right-to-left, RTL) kielissä käytetään oikean reunan tasausta. Voit vaihtaa erilaisten näyttötilojen välillä painamalla <keycombo> <keycap>vaihto</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> (O-kirjain, ei numero 0) Näppäinyhdistelmä <keycombo> <keycap>vaihto</keycap> <keycap>Ctrl </keycap> <keycap>O</keycap> </keycombo> vaihtaa kolmen tilan välillä:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>oletustasaus, eli kielen mukainen tasaus</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>vasemman reunan tasaus</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>oikean reunan tasaus</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>RTL-tilan käyttäminen </application>OmegaT<application>-ohjelmassa ei vaikuta mitenkään siihen, miltä <application>OmegaT</application>:llä luodut käännetyt asiakirjat näyttävät. Käännettyjen asiakirjojen näyttötilaa pitää muokata siinä sovelluksessa, jolla asiakirjaa tavallisesti katsellaan tai jolla sitä muokataan (esim. Microsoft Word). Tarkempia ohjeita saat sovelluksen omasta dokumentaatiosta. Näppäinyhdistelmä <keycombo> <keycap>vaihto</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> muuttaa <application>OmegaT</application>:ssä sekä tekstin syöttöä että sen tasausta. Voit valita jokaisen kolmen ruudun (editori, sumeat osumat ja sanasto) näyttötilan erikseen napsauttamalla ruutua ja valitsemalla sopiva näyttötila näppäinyhdistelmällä. Näppäinyhdistelmää voidaan käyttää kaikissa <application>OmegaT</application>-ikkunoissa, joissa voi syöttää tekstiä: hakuikkunassa, segmentointisääntöjen ikkunassa jne.</para>
+
+    <para>Huom.: Käytä myös Macissa näppäinyhdistelmää <keycombo> <keycap>vaihto</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap></keycombo>, <emphasis role="bold">älä</emphasis> yhdistelmää cmd+Ctrl+O.</para>
+
+    <section>
+      <title>RTL- ja LTR-merkkijonojen yhdistäminen yhdessä ja samassa segmentissä</title>
+
+      <para>Kun kirjoitat pelkkää RTL-kielistä tekstiä, voit käyttää oletusnäyttötilaa (vasemmalta oikealle, LTR). Monissa tapauksissa RTL-tekstiin täytyy kuitenkin upottaa LTR-tekstiä. Esimerkiksi OmegaT-tägit, tuotemerkit, lokalisointitiedostojen paikanmerkit ja tekstissä olevat numerot on jätettävä LTR-lähdekielisiksi. Tällöin täytyy vaihtaa RTL-tilaan, jotta RTL-kielinen (tai itse asiassa kaksisuuntaisella kielellä) kirjoitettu teksti näkyy oikein. Kun <application>OmegaT</application> on RTL-tilassa, on huomioitava, että sekä lähde- että kohdeteksti näkyy RTL-muotoisena. Jos siis lähdekieltä kirjoitetaan vasemmalta oikealle ja kohdekieltä oikealta vasemmalle (tai päin vastoin), on tarpeen pystyä vaihtamaan helposti RTL- ja LTR-tilojen välillä, jotta lähdeteksti näkyy omassa tilassaan oikein ja että kohdetekstin saa omassa tilassaan kirjoitettua oikein.</para>
+    </section>
+
+    <section>
+      <title>RTL-segmenteissä olevat <application>OmegaT</application>-tägit</title>
+
+      <para>Kuten edellä kerrottiin, OmegaT-tägit ovat LTR-merkkijonoja. RTL- ja LTR-kielten välillä toimiva kääntäjä voi joutua vaihtamaan LTR- ja RTL-tilan välillä tämän tästä, jotta hän pystyy lukemaan lähdekielisen tägin ja kirjoittamaan sen oikein kohdesegmenttiin.</para>
+
+      <para>Mikäli vain mahdollista, kääntäjän kannattaa poistaa alkuperäisen asiakirjan tyylimuotoilut, jotta OmegaT-käyttöliittymässä olisi mahdollisimman vähän tägejä. Seuraa kohdassa Vihjeitä tägien hallintaan annettuja neuvoja. Tarkista tägit usein (ks. Tägien tarkistaminen) ja luo käännettyjä dokumentteja usein (ks. alla sekä kohta Valikko) tasaisin väliajoin, jotta huomaat mahdolliset ongelmat aikaisessa vaiheessa. Vihje: Voi olla helpointa kääntää OmegaT:ssä vain teksti -muotoinen asiakirja ja lisätä tarvittavat muotoilut myöhemmin toisessa sovelluksessa.</para>
+    </section>
+
+    <section>
+      <title>Käännettyjen RTL-asiakirjojen luonti</title>
+
+      <para>Käännetyn asiakirjan kirjoitussuunta on sama kuin alkuperäisessä asiakirjassa. Jos alkuperäinen asiakirja on kirjoitettu vasemmalta oikealle, kohdeasiakirjan kirjoitussuunta on vaihdettava manuaalisesti oikealta vasemmalle. Käytä tähän sovellusta, jolla asiakirjaa katsellaan. Eri tiedostomuodoissa on omat tapansa käsitellä RTL-tilaa. Tarkista lisätiedot sovellusten omista dokumentaatioista.</para>
+
+      <para>Joitakin muutoksia tapahtuu automaattisesti .docx-tiedostoja luotaessa:<itemizedlist>
+          <listitem>Kappaleet, osat ja taulukot asetetaan kaksisuuntaisiksi</listitem>
+
+          <listitem>Tekstiekstielementit juoksevat oikealta vasemmalle</listitem>
+        </itemizedlist></para>
+
+      <para>Jotta kohdetiedostojen näyttösuunnan asetuksia ei tarvitse muuttaa joka kerta, kun niitä avataan, voi olla mahdollista vaihtaa lähdetiedoston näyttösuunnan asetuksia niin, että kohdeasiakirja perii oikeat asetukset lähdeasiakirjasta. Esimerkiksi ODF-tiedostoihin voidaan tehdä tällaisia muutoksia.</para>
+
+  </section>
+</section>

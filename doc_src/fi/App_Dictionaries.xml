@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.dictionaries">
+  <title>Sanakirjat</title>
+
+  <section>
+    <title>Kuinka sanakirjoja ladataan ja asennetaan</title>
+
+    <para><application>OmegaT</application>:ssä käytettävät sanakirjat ovat joko StarDict- tai Lingvo DSL -muotoisia. Asenna StarDict-muodon vaatimat tiedostot seuraavalla tavalla:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Etsi haluttua kieliyhdistelmää esimerkiksi <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">&lt;i1/&gt;OmegaT-wikin sanakirjalinkeistä</ulink>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Lataa <filename>tarball</filename>-muotoinen tiedostoarkisto (tiedostopääte <emphasis>tar.bz</emphasis> tai <emphasis>tar.bz2</emphasis>).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pura (untar tai vastaava, esim. Windowsin <filename>winrar</filename> tiedoston sisältö projektin Dictionary-kansioon. Kansiossa pitäisi olle kolme tiedostoa, joiden tiedostopäätteet ovat <emphasis>dz, idx</emphasis> ja <emphasis>ifo</emphasis>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Kaksikielisen lähde- ja kohdekielisen sanakirjan lisäksi voit käyttää Sanakirja-toimintoa hakeaksesi tietoa seuraavista:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Webster's Revised Unabridged Dictionary (1913)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Longman Dictionary of Contemporary English</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>The Britannica Concise Encyclopedia</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>jne.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Jotkut sanakirjat ovat vapaasti käytettävissä, toiset – kuten edellä mainitut – on lisensoitu GPL-lisenssillä. Seuraava esimerkki näyttää Merriam Websterin 10. sanakirjan &quot;täydessä vauhdissa&quot;:</para>
+
+    <figure id="Dict.Merriam.Webster">
+      <title>Merriam Webster dictionaryn käyttö</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/DictMerriamWebster.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/DictMerriamWebster.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
+
+  <section>
+    <title>Ongelmia sanakirjojen käytössä</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Tarkista, että sanakirjatiedostosi ovat oikeassa kansiossa (tai sen alikansiossa). Tarkista kohta <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projekti</guimenu> <guimenuitem>Ominaisuudet</guimenuitem> </menuchoice>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Onko kansiossa kolme samannimistä tiedostoa, joiden tiedostopäätteet ovat erilaiset? Jos kansiossa on vain yksi tiedosto, tarkista sen tiedostopääte. Jos se on <emphasis>tar.bz</emphasis>, olet unohtanut purkaa (untar) tiedoston.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

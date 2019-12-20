@@ -6,7 +6,7 @@
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2011 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 

@@ -8,8 +8,9 @@
                2011 John Moran, Didier Briel
                2012 Didier Briel
                2016 Aaron Madlon-Kay
+               2019 Briac Pilpre
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -94,6 +95,8 @@ public class EditingBehaviorController extends BasePreferencesController {
         panel.initialSegCountSpinner.setValue(Preferences.getPreferenceDefault(
                 Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT, Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT));
 
+        panel.paraMarkText.setText(Preferences.getPreferenceDefault(
+                Preferences.MARK_PARA_TEXT, Preferences.MARK_PARA_TEXT_DEFAULT));
         updateEnabledness();
     }
 
@@ -114,6 +117,7 @@ public class EditingBehaviorController extends BasePreferencesController {
         panel.tagValidateOnLeave.setSelected(false);
         panel.cbSaveAutoStatus.setSelected(false);
         panel.initialSegCountSpinner.setValue(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT);
+        panel.paraMarkText.setText(Preferences.MARK_PARA_TEXT_DEFAULT);
 
         updateEnabledness();
     }
@@ -148,5 +152,6 @@ public class EditingBehaviorController extends BasePreferencesController {
 
         int segCount = Math.max(0, (Integer) panel.initialSegCountSpinner.getValue());
         Preferences.setPreference(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT, segCount);
+        Preferences.setPreference(Preferences.MARK_PARA_TEXT, panel.paraMarkText.getText());
     }
 }

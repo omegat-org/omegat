@@ -13,7 +13,7 @@
                2015 Yu Tang, Aaron Madlon-Kay, Hiroshi Miura
                2017-2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -35,7 +35,6 @@ package org.omegat.gui.search;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -59,6 +58,8 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.undo.UndoManager;
 
@@ -74,6 +75,7 @@ import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 import org.omegat.gui.editor.filter.SearchFilter;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -327,9 +329,38 @@ public class SearchWindowController {
         final UndoManager undoManager = new UndoManager();
         field.getDocument().addUndoableEditListener(undoManager);
 
+        // Invalidate replacement if search or replace strings change.
+        // Otherwise you can accidentally do the wrong thing like:
+        // 1. Search for "foo"
+        // 2. Enter "bar" in replacement field
+        // 3. Hit "Replace all"
+        // => You replaced "foo" with "" because you didn't re-search after
+        // entering "bar"
+        field.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                invalidateReplacement();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                invalidateReplacement();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                invalidateReplacement();
+            }
+
+            private void invalidateReplacement() {
+                form.m_replaceButton.setEnabled(false);
+                form.m_replaceAllButton.setEnabled(false);
+            }
+        });
+
         // Set up undo/redo handling
         KeyStroke undoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
+                Java8Compat.getMenuShortcutKeyMaskEx(), false);
         map.put(undoKey, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -339,7 +370,7 @@ public class SearchWindowController {
             }
         });
         KeyStroke redoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
-                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
+                Java8Compat.getMenuShortcutKeyMaskEx(), false);
         map.put(redoKey, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

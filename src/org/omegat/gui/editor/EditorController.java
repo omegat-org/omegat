@@ -14,8 +14,9 @@
                2014 Aaron Madlon-Kay, Piotr Kulik
                2015 Aaron Madlon-Kay, Yu Tang
                2016 Didier Briel
+               2019 Thomas Cordonnier, Briac Pilpre
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -108,6 +109,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.help.Help;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -301,7 +303,7 @@ public class EditorController implements IEditor {
             int unitsPerSeg = (bar.getMaximum() - bar.getMinimum()) / (lastLoaded - firstLoaded + 1);
             if (firstLoaded > 0 && scrollPercent <= PAGE_LOAD_THRESHOLD) {
                 int docSize = editor.getDocument().getLength();
-                int visiblePos = editor.viewToModel(scrollPane.getViewport().getViewPosition());
+                int visiblePos = Java8Compat.viewToModel(editor, scrollPane.getViewport().getViewPosition());
                 // Try to load enough segments to restore scrollbar value to
                 // the range (PAGE_LOAD_THRESHOLD, 1 - PAGE_LOAD_THRESHOLD).
                 // Formula is obtained by solving the following equations for loadCount:
@@ -318,7 +320,7 @@ public class EditorController implements IEditor {
                 int sizeDelta = editor.getDocument().getLength() - docSize;
                 try {
                     scrollPane.getViewport()
-                            .setViewPosition(editor.modelToView(visiblePos + sizeDelta).getLocation());
+                            .setViewPosition(Java8Compat.modelToView(editor, visiblePos + sizeDelta).getLocation());
                 } catch (BadLocationException ex) {
                     Log.log(ex);
                 }
@@ -400,6 +402,7 @@ public class EditorController implements IEditor {
         int loadTo = Math.min(m_docSegList.length - 1, loadFrom + count - 1);
         for (int i = loadFrom; i <= loadTo; i++) {
             SegmentBuilder builder = m_docSegList[i];
+            insertStartParagraphMark(editor.getOmDocument(), builder);
             builder.createSegmentElement(false, Core.getProject().getTranslationInfo(builder.ste));
             builder.addSegmentSeparator();
         }
@@ -432,35 +435,36 @@ public class EditorController implements IEditor {
 
         JComponent data = null;
 
+        String updatedTitle = null;
         switch (showType) {
         case INTRO:
             data = introPane;
-            title = introPaneTitle;
+            updatedTitle = introPaneTitle;
             break;
         case EMPTY_PROJECT:
             data = emptyProjectPane;
-            title = emptyProjectPaneTitle;
+            updatedTitle = emptyProjectPaneTitle;
             break;
         case FIRST_ENTRY:
             displayedFileIndex = 0;
             displayedEntryIndex = 0;
-            title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            updatedTitle = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
             SwingUtilities.invokeLater(() -> {
                 // need to run later because some other event listeners
                 // should be called before
                 loadDocument();
                 gotoEntry(LastSegmentManager.getLastSegmentNumber());
+                updateTitleCurrentFile();
             });
             break;
         case NO_CHANGE:
-            title = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            updatedTitle = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
             break;
         }
 
-        updateTitle();
-        pane.setToolTipText(title);
+        updateTitle(updatedTitle);
 
         if (scrollPane.getViewport().getView() != data) {
             if (UIManager.getBoolean("OmegaTDockablePanel.isProportionalMargins")) {
@@ -544,7 +548,17 @@ public class EditorController implements IEditor {
     };
 
     private void updateTitle() {
-       pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
+        pane.setName(StaticUIUtils.truncateToFit(title, pane, 70));
+        pane.setToolTipText(title);
+    }
+
+    private void updateTitleCurrentFile() {
+        updateTitle(StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile()));
+    }
+
+    private void updateTitle(String title) {
+        this.title = title;
+        updateTitle();
     }
 
     private void setFont(final Font font) {
@@ -744,6 +758,7 @@ public class EditorController implements IEditor {
         for (int i = 0; i < m_docSegList.length; i++) {
             if (i >= firstLoaded && i <= lastLoaded) {
                 SegmentBuilder sb = m_docSegList[i];
+                insertStartParagraphMark(doc, sb);
                 sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.ste));
                 sb.addSegmentSeparator();
             }
@@ -781,6 +796,20 @@ public class EditorController implements IEditor {
         markerController.process(m_docSegList);
 
         editor.repaint();
+    }
+
+    private void insertStartParagraphMark(Document3 doc, SegmentBuilder sb) {
+        if (Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS, false)) {
+            if (sb.getSourceTextEntry().isParagraphStart()) {
+                try {
+                    doc.insertString(doc.getLength(), Preferences.getPreferenceDefault(
+                            Preferences.MARK_PARA_TEXT, Preferences.MARK_PARA_TEXT_DEFAULT) + "\n\n",
+                            settings.getParagraphStartAttributeSet());
+                } catch (BadLocationException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
     }
 
     /*
@@ -951,8 +980,8 @@ public class EditorController implements IEditor {
         try {
             SegmentBuilder sb = m_docSegList[index];
             if (sb.hasBeenCreated()) {
-                Rectangle start = editor.modelToView(sb.getStartPosition());
-                Rectangle end = editor.modelToView(sb.getEndPosition());
+                Rectangle start = Java8Compat.modelToView(editor, sb.getStartPosition());
+                Rectangle end = Java8Compat.modelToView(editor, sb.getEndPosition());
                 if (start != null && end != null) {
                     result = start.union(end);
                 }
@@ -1243,6 +1272,8 @@ public class EditorController implements IEditor {
                 Core.executeExclusively(false, Core.getProject()::teamSync);
             } catch (InterruptedException ex) {
             } catch (TimeoutException ex) {
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
         }
     }
@@ -1520,6 +1551,7 @@ public class EditorController implements IEditor {
         }
         activateEntry(pos);
         editor.setCursor(oldCursor);
+        updateTitleCurrentFile();
     }
 
     public void gotoEntry(String srcString, EntryKey key) {
@@ -2130,7 +2162,7 @@ public class EditorController implements IEditor {
                         continue;
                     }
                     try {
-                        Point location = editor.modelToView(sb.getStartPosition()).getLocation();
+                        Point location = Java8Compat.modelToView(editor, sb.getStartPosition()).getLocation();
                         if (viewRect.contains(location)) { // location is viewable
                             int segmentNo = sb.segmentNumberInProject;
                             location.translate(0, -viewPosition.y); // adjust to vertically view position

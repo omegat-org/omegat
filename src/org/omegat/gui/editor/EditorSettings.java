@@ -6,8 +6,9 @@
  Copyright (C) 2008 Alex Buloichik
                2012 Martin Fleurke, Hans-Peter Jacobs
                2015 Aaron Madlon-Kay
+               2019 Briac Pilpre
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -59,6 +60,7 @@ public class EditorSettings implements IEditorSettings {
     private boolean markNoted;
     private boolean markNBSP;
     private boolean markWhitespace;
+    private boolean markParagraphDelimitations;
     private boolean markBidi;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
@@ -84,6 +86,7 @@ public class EditorSettings implements IEditorSettings {
         markNonUniqueSegments = Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
         markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
+        markParagraphDelimitations = Preferences.isPreference(Preferences.MARK_PARA_DELIMITATIONS);
         markWhitespace  = Preferences.isPreference(Preferences.MARK_WHITESPACE);
         markBidi  = Preferences.isPreference(Preferences.MARK_BIDI);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
@@ -286,6 +289,25 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
+    
+    public void setMarkParagraphDelimitations(boolean delimitations) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markParagraphDelimitations = delimitations;
+        Preferences.setPreference(Preferences.MARK_PARA_DELIMITATIONS, delimitations);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
+    public boolean isMarkParagraphDelimitations() {
+        return markParagraphDelimitations;
+    }
+
     public void setMarkBidi(boolean markBidi) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -574,6 +596,16 @@ public class EditorSettings implements IEditorSettings {
 
         return Styles.createAttributeSet(fg, bg, bold, italic);
     }
+
+    /**
+     * Returns font attributes for paragraph start
+     * @return
+     */
+    public AttributeSet getParagraphStartAttributeSet() {
+        return Styles.createAttributeSet(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(),
+                null, false, true);
+    }
+
     /**
      * Returns font attributes for the modification info line.
      * @return
@@ -594,7 +626,7 @@ public class EditorSettings implements IEditorSettings {
     }
 
     /**
-     * Returns font attributes for other laguages translation.
+     * Returns font attributes for other languages translation.
      *
      * @return
      */

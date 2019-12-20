@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.setupteamproject">
+  <title>Set up a Team Project</title>
+
+  <para>Setting up a team project requires some knowledge of servers and the
+  SVN or Git versioning systems. It should thus be carried out by a project
+  manager, a project leader or a localisation engineer.</para>
+
+  <para>As plenty of information about SVN and Git is easily available, we
+  won't describe how they work here, but only how OmegaT works with
+  them.</para>
+
+  <section>
+    <title>Step 1: Create an empty project on a server</title>
+
+    <para><emphasis role="bold">Creating an empty project on a
+    server</emphasis></para>
+
+    <orderedlist>
+      <listitem>
+        <para>Create an SVN or Git repository on a server that will be
+        accessible by the translators.</para>
+      </listitem>
+
+      <listitem>
+        <para>Create a local copy of the repository (<command>check
+        out</command> with SVN, <command>clone</command> with Git).</para>
+      </listitem>
+
+      <listitem>
+        <para>Create a new, empty OmegaT project in the local repository. This
+        can be done in two ways:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><menuchoice>
+                <guimenuitem>Project</guimenuitem>
+
+                <guimenuitem>New...</guimenuitem>
+              </menuchoice></para>
+          </listitem>
+
+          <listitem>
+            <para>on the command line: <command>java -jar OmegaT.jar team init
+            [lang1] [lang2]</command></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para>Add the new OmegaT project to the versioning system
+        (<command>add</command> with SVN and Git)</para>
+
+        <para>Note: If the project was created with the command line in step
+        3, this step has already been done by the program.</para>
+      </listitem>
+
+      <listitem>
+        <para>Publish the new OmegaT project on the server
+        (<command>commit</command> with SVN, <command>commit</command>
+        followed by <command>push</command> with Git).</para>
+      </listitem>
+    </orderedlist>
+
+    <para><emphasis role="bold">Specific parameters</emphasis></para>
+
+    <para>If the project uses specific filters and segmentation parameters,
+    both the <filename>filters.xml</filename> and
+    <filename>segmentation.conf</filename> files must be added to the
+    versioning system and published on the server.</para>
+  </section>
+
+  <section>
+    <title>Step 2: Add files to translate and other resources</title>
+
+    <para>Use an SVN or Git client to add the files to translate.</para>
+
+    <para>This can also be done within OmegaT:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>copy the files to the <filename>/source</filename> folder</para>
+      </listitem>
+
+      <listitem>
+        <para>use <menuchoice>
+            <guimenuitem>Project</guimenuitem>
+
+            <guimenuitem>Commit Source Files</guimenuitem>
+          </menuchoice></para>
+      </listitem>
+    </orderedlist>
+
+    <para>To add other resources (dictionaries, TMXs or glossaries), use an
+    SVN or Git client.</para>
+
+    <para>To <emphasis role="bold">delete files</emphasis>, use an SVN or Git
+    client. These files won't be deleted automatically on the translator's
+    side: you must ask them to delete the files manually.</para>
+
+    <para>Note that only two files are modified by OmegaT during
+    translation:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><filename>omegat/project_save.tmx</filename></para>
+      </listitem>
+
+      <listitem>
+        <para><filename>glossary/glossary.txt</filename></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>All other files are read-only. If the translator attempts to modify
+    them, they will go back to their original state whenever the project is
+    opened, closed, saved or reloaded.</para>
+  </section>
+
+  <section>
+    <title>Step 3: Send an invitation to the translator</title>
+
+    <para>Once the project is set up on the server, the project manager can
+    invite the translator to work on it in either of two different
+    ways:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>sending the URL of the project and asking the translator to
+        create a local copy with <menuchoice>
+            <guimenuitem>Project</guimenuitem>
+
+            <guimenuitem>Download Team Project</guimenuitem>
+          </menuchoice>.</para>
+      </listitem>
+
+      <listitem>
+        <para>sending an <filename>omegat.project</filename> file containing a
+        reference to the URL and asking the translator to copy it into a
+        dedicated folder and open it with OmegaT.</para>
+
+        <para>The reference to the URL is specified as below (here to a Git
+        repository):</para>
+
+        <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+      </listitem>
+    </itemizedlist>
+
+    <para>In both cases, the project manager must send the translator their ID
+    and password to access the repository.</para>
+
+    <para><emphasis role="bold">Checking statistics</emphasis></para>
+
+    <para>The Project Manager should check with the translator that the
+    statistics are identical on both sides (server side and translator
+    side).</para>
+
+    <para>If there are any differences, check that the
+    <filename>filters.xml</filename> and
+    <filename>segmentation.conf</filename> files are under version
+    control.</para>
+  </section>
+
+  <section>
+    <title>Special case: minimal sharing</title>
+
+    <para>The process above describes the usual case, where the project
+    manager wants to have full control of the project and where the files (and
+    the statistics) are identical on both sides (server side and translator
+    side).</para>
+
+    <para>OmegaT team projects can also be set up in a different way, where
+    several translators share the project_save.tmx file but not the source
+    files.</para>
+
+    <para>In this case, the procedure is the same, but the project manager
+    does not add files to the /source folder.</para>
+  </section>
+
+  <section id="howto.setupteamproject.mappingparameters">
+    <title>Mapping parameters</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>repository type</term>
+
+        <listitem>
+          <para>This can be either http (which includes https), svn or
+          git.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>repository url</term>
+
+        <listitem>
+          <para>Remote location of the files to translate.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>mapping local</term>
+
+        <listitem>
+          <para>Name of the local folder or file, relative to the root of the
+          OmegaT project.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>mapping repository</term>
+
+        <listitem>
+          <para>Name of the remote folder or file, relative to the repository
+          url.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>excludes</term>
+
+        <listitem>
+          <para>Add patterns using wildcards (Apache Ant style): *, ?,
+          **</para>
+
+          <para>Example: <userinput>**/.ini/**</userinput></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>includes</term>
+
+        <listitem>
+          <para>As above.</para>
+
+          <para>Example: <userinput>**/*.docx</userinput> to add all .docx
+          files, wherever they are located in the project.</para>
+
+          <para>The inclusion rules take priority over the exclusion
+          rules.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Example mappings</title>
+
+    <para><programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>All the contents of
+    <filename>https://repo_for_OmegaT_team_project</filename> are mapped to
+    the local OmegaT project</para>
+
+    <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+
+    <para>All the contents of
+    <filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename>
+    are mapped to the local OmegaT project.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>The remote file
+    <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename>
+    is mapped to the local file
+    <filename>source/Bundle.properties</filename>.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>The remote file
+    <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename>
+    is mapped to the local file
+    <filename>source/readme_tr.txt</filename>.</para>
+
+    <para>This makes it possible to rename the file to be translated.</para>
+  </section>
+</section>

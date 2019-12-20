@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Didier Briel
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -45,6 +45,7 @@ public final class LanguageCodes {
 
     // Language Codes
     public static final String CATALAN_CODE = "Catalan";
+    public static final String CZECH_CODE = "Czech";
     public static final String GERMAN_CODE = "German";
     public static final String ENGLISH_CODE = "English";
     public static final String SPANISH_CODE = "Spanish";
@@ -56,6 +57,7 @@ public final class LanguageCodes {
     public static final String POLISH_CODE = "Polish";
     public static final String RUSSIAN_CODE = "Russian";
     public static final String SWEDISH_CODE = "Swedish";
+    public static final String SLOVAK_CODE = "Slovak";
     public static final String CHINESE_CODE = "Chinese";
     public static final String DEFAULT_CODE = "Default";
     public static final String F_TEXT_CODE = "Text";
@@ -63,6 +65,7 @@ public final class LanguageCodes {
 
     // Language Keys from Resource Bundle
     public static final String CATALAN_KEY = "CORE_SRX_RULES_LANG_CATALAN";
+    public static final String CZECH_KEY = "CORE_SRX_RULES_LANG_CZECH";
     public static final String GERMAN_KEY = "CORE_SRX_RULES_LANG_GERMAN";
     public static final String ENGLISH_KEY = "CORE_SRX_RULES_LANG_ENGLISH";
     public static final String SPANISH_KEY = "CORE_SRX_RULES_LANG_SPANISH";
@@ -74,6 +77,7 @@ public final class LanguageCodes {
     public static final String POLISH_KEY = "CORE_SRX_RULES_LANG_POLISH";
     public static final String RUSSIAN_KEY = "CORE_SRX_RULES_LANG_RUSSIAN";
     public static final String SWEDISH_KEY = "CORE_SRX_RULES_LANG_SWEDISH";
+    public static final String SLOVAK_KEY = "CORE_SRX_RULES_LANG_SLOVAK";
     public static final String CHINESE_KEY = "CORE_SRX_RULES_LANG_CHINESE";
     public static final String DEFAULT_KEY = "CORE_SRX_RULES_LANG_DEFAULT";
     public static final String F_TEXT_KEY = "CORE_SRX_RULES_FORMATTING_TEXT";
@@ -84,6 +88,7 @@ public final class LanguageCodes {
 
     static {
         codeKeyHash.put(CATALAN_CODE, CATALAN_KEY);
+        codeKeyHash.put(CZECH_CODE, CZECH_KEY);
         codeKeyHash.put(GERMAN_CODE, GERMAN_KEY);
         codeKeyHash.put(ENGLISH_CODE, ENGLISH_KEY);
         codeKeyHash.put(SPANISH_CODE, SPANISH_KEY);
@@ -95,6 +100,7 @@ public final class LanguageCodes {
         codeKeyHash.put(POLISH_CODE, POLISH_KEY);
         codeKeyHash.put(RUSSIAN_CODE, RUSSIAN_KEY);
         codeKeyHash.put(SWEDISH_CODE, SWEDISH_KEY);
+        codeKeyHash.put(SLOVAK_CODE, SLOVAK_KEY);       
         codeKeyHash.put(CHINESE_CODE, CHINESE_KEY);
         codeKeyHash.put(DEFAULT_CODE, DEFAULT_KEY);
         codeKeyHash.put(F_TEXT_CODE, F_TEXT_KEY);

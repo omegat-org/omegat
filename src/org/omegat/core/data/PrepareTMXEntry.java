@@ -8,7 +8,7 @@
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -97,4 +97,15 @@ public class PrepareTMXEntry {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("PrepareTMXEntry [source=").append(source).append(", translation=").append(translation)
+                .append(", creator=").append(creator).append(", changer=").append(changer).append(", creationDate=")
+                .append(creationDate).append(", changeDate=").append(changeDate).append(", note=").append(note)
+                .append(", otherProperties=").append(otherProperties).append("]");
+        return builder.toString();
+    }
+
 }

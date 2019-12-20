@@ -7,7 +7,7 @@
                2013-2014 Aaron Madlon-Kay
                2014 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -39,6 +39,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ExternalTMFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.DiffDriver;
@@ -83,6 +84,8 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static final String VAR_FUZZY_FLAG = "${fuzzyFlag}";
     public static final String VAR_DIFF = "${diff}";
     public static final String VAR_DIFF_REVERSED = "${diffReversed}";
+    public static final String VAR_SOURCE_LANGUAGE = "${sourceLanguage}";
+    public static final String VAR_TARGET_LANGUAGE = "${targetLanguage}";
 
     private static final String[] MATCHES_VARIABLES = {
         VAR_ID,
@@ -93,7 +96,8 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         VAR_SCORE_BASE, VAR_SCORE_NOSTEM, VAR_SCORE_ADJUSTED,
         VAR_FILE_NAME_ONLY, VAR_FILE_PATH, VAR_FILE_SHORT_PATH,
         VAR_INITIAL_CREATION_ID, VAR_INITIAL_CREATION_DATE,
-        VAR_CHANGED_ID, VAR_CHANGED_DATE, VAR_FUZZY_FLAG
+        VAR_CHANGED_ID, VAR_CHANGED_DATE, VAR_FUZZY_FLAG,
+        VAR_SOURCE_LANGUAGE, VAR_TARGET_LANGUAGE
     };
 
     public static List<String> getMatchesVariables() {
@@ -244,6 +248,20 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
         localTemplate = localTemplate.replace(VAR_FUZZY_FLAG,
                 match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : "");
+
+        if (match.props != null) {
+            for (TMXProp prop : match.props) {
+                if (prop.getType().equals(ExternalTMFactory.TMXLoader.PROP_SOURCE_LANGUAGE)) {
+                    localTemplate = localTemplate.replace(VAR_SOURCE_LANGUAGE, prop.getValue());            
+                } else if (prop.getType().equals(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE)) {
+                    localTemplate = localTemplate.replace(VAR_TARGET_LANGUAGE, prop.getValue());
+                }
+            }
+        }
+        // If the props were not set, avoid printing the variables.
+        localTemplate = localTemplate.replace(VAR_SOURCE_LANGUAGE, "");
+        localTemplate = localTemplate.replace(VAR_TARGET_LANGUAGE, "");
+
         ProjectProperties props = Core.getProject().getProjectProperties();
         if (props != null) {
             localTemplate = expandFileNames(localTemplate, match.projs, props.getTMRoot());

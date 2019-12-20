@@ -8,7 +8,7 @@
                2013 Didier Briel, Piotr Kulik
                2014 Didier Briel, Aaron Madlon-Kay, Piotr Kulik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 

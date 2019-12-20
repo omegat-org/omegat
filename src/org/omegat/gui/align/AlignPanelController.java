@@ -5,7 +5,7 @@
 
  Copyright (C) 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -30,7 +30,6 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -103,6 +102,7 @@ import org.omegat.gui.align.MutableBead.Status;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -297,7 +297,7 @@ public class AlignPanelController {
                 int col = panel.table.getSelectedColumn();
                 boolean up = e.getSource().equals(panel.moveUpButton) || e.getSource().equals(frame.moveUpItem);
                 BeadTableModel model = (BeadTableModel) panel.table.getModel();
-                if ((e.getModifiers() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()) != 0) {
+                if ((e.getModifiers() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
                     int trgRow = up ? model.prevBeadFromRow(rows[0])
                             : model.nextBeadFromRow(rows[rows.length - 1]);
                     moveRows(rows, col, trgRow);
@@ -567,13 +567,13 @@ public class AlignPanelController {
 
         frame.resetItem.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_R,
-                        Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | KeyEvent.SHIFT_DOWN_MASK));
+                        Java8Compat.getMenuShortcutKeyMaskEx() | KeyEvent.SHIFT_DOWN_MASK));
         frame.realignPendingItem.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_R, Java8Compat.getMenuShortcutKeyMaskEx()));
         frame.saveItem.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_S, Java8Compat.getMenuShortcutKeyMaskEx()));
         frame.closeItem.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_W, Java8Compat.getMenuShortcutKeyMaskEx()));
 
         // emacs-like keys for table navigation
         // See javax.swing.plaf.BasicTableUI.Actions for supported action names.

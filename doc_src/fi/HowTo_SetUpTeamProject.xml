@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.setupteamproject">
+  <title>Määritä ryhmäprojektin asetukset</title>
+
+  <para>Ryhmäprojektin määrittäminen vaatii palvelinten ja SVN- tai Git-versionhallintajärjestelmien tuntemusta. Siksi ainoastaan projektin johtaja, projektipäällikkö tai lokalisointi-insinööri saisi tehdä tämän.</para>
+
+  <para>Tietoja SVN:stä ja Gitistä löytyy helposti ja paljon, joten tässä ei kuvata sitä, kuinka ne toimivat, vaan kuinka OmegaT toimii niiden kanssa.</para>
+
+  <section>
+    <title>1. vaihe: Luo palvelimelle tyhjä projekti</title>
+
+    <para><emphasis role="bold">Tyhjän projektin luominen palvelimelle</emphasis></para>
+
+    <orderedlist>
+      <listitem>
+        <para>Luo SVN- tai Git-tietovarasto sellaiselle palvelimelle, jonne kääntäjillä on pääsy.</para>
+      </listitem>
+
+      <listitem>
+        <para>Luo tietovarastosta paikallinen kopio (SVN:ssä komento <command>check out</command>, Gitissä <command>clone</command>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Luo paikalliseet tietovarastoon uusi, tyhjä OmegaT-projekti. Tämän voi tehdä kahdella tapaa:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><menuchoice>
+                <guimenuitem>Projekti</guimenuitem> <guimenuitem>Uusi…</guimenuitem>
+              </menuchoice></para>
+          </listitem>
+
+          <listitem>
+            <para>komentorivillä komennolla <command>java -jar OmegaT.jar team init [kieli1] [kieli2]</command></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para>Lisää uusi OmegaT-projekti versionhallintajärjestelmään (SVN:ssä ja Gitissä komento <command>add</command>).</para>
+
+        <para>Huom.: Jos projekti luotiin 3. vaiheessa komentorivillä, ohjelma on jo suorittanut tämän vaiheen.</para>
+      </listitem>
+
+      <listitem>
+        <para>Julkaise uusi OmegaT-projekti palvelimella (SVN:ssä komento <command>commit</command>, Gitissä ensin <command>commit</command> ja sen jälkeen <command>push</command>).</para>
+      </listitem>
+    </orderedlist>
+
+    <para><emphasis role="bold">Erityiset asetukset</emphasis></para>
+
+    <para>Jos projekti käyttää erityisiä suodattimia ja erityisiä segmentointisääntöjä, sekä <filename>filters.xml</filename>- että <filename>segmentation.conf</filename>-tiedostot on lisättävä versionhallintajärjestelmään ja julkaistava palvelimella.</para>
+  </section>
+
+  <section>
+    <title>2. vaihe: Lisää käännettävät tiedostot ja muut resurssit</title>
+
+    <para>Lisää käännettävät tiedostot SVN- tai Git-asiakasohjelmassa.</para>
+
+    <para>Voit tehdä tämän myös OmegaT:ssä:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Kopioi tiedostot <filename>/source</filename>-kansioon.</para>
+      </listitem>
+
+      <listitem>
+        <para>Valitse <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Lähetä lähdetiedostot</guimenuitem> </menuchoice>.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Lisää muita resursseja (sanakirjoja, TMX-tiedostoja tai sanastoja) SVN- tai Git-asiakasohjelmassa.</para>
+
+    <para><emphasis role="bold">Poista tiedostot</emphasis> SVN- tai Git-asiakasohjelmassa. Nämä tiedostot eivät poistu automaattisesti myös kääntäjältä, vaan sinun on pyydettävä häntä poistamaan tiedostot käsin.</para>
+
+    <para>Huomaa, että käännöstyön aikana OmegaT muokkaa vain näiden kahden tiedoston sisältöä:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><filename>omegat/project_save.tmx</filename></para>
+      </listitem>
+
+      <listitem>
+        <para><filename>glossary/glossary.txt</filename></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Kaikki muut tiedostot ovat vain luku -muotoisia. Jos kääntäjä yrittää muokata niitä, tiedostot palautuvat alkuperäiseen asuunsa aina, kun projekti avataan, suljetaan, tallennetaan tai ladataan uudelleen.</para>
+  </section>
+
+  <section>
+    <title>3. vaihe: Kutsu kääntäjä mukaan projektiin</title>
+
+    <para>Kun projekti on saatu määritettyä palvelimelle, projektipäällikkö voi kutsua kääntäjät työskentelemään sen parissa. Projektipäällikkö voi joko</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lähettämää projektin URL-osoitteen kääntäjälle ja pyytää tätä luomaan projektista paikallinen versio kohdassa <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Lataa ryhmäprojekti</guimenuitem> </menuchoice>
+
+tai</para>
+      </listitem>
+
+      <listitem>
+        <para>lähettää kääntäjälle <filename>omegat.project</filename>-tiedoston, jossa on viite URL-osoitteeseen, ja pyytää kääntäjää kopioimaan tiedosto omaan kansioonsa ja avamaan se OmegaT:llä.</para>
+
+        <para>Viite URL-osoitteseen (tässä esimerkissä Git-tietovarastoon) määritetään alla olevalla tavalla:</para>
+
+        <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+      </listitem>
+    </itemizedlist>
+
+    <para>Molemmissa tavoissa projektipäällikön on lähetettävä kääntäjälle käyttäjätunnus ja salasana, joiden avulla hän pääsee käyttämään tietovarastoa.</para>
+
+    <para><emphasis role="bold">Tilastotietojen tarkistaminen</emphasis></para>
+
+    <para>Projektipäällikön olisi hyvä tarkistaa kääntäjältä, että sekä palvelimen puolella että kääntäjän puolella näkyvät tilastotiedot ovat samanlaisia.</para>
+
+    <para>Jos tiedoissa on eroa, tarkista, että sekä <filename>filters.xml</filename> ja <filename>segmentation.conf</filename> ovat mukana versiontarkistuksessa.</para>
+  </section>
+
+  <section>
+    <title>Erityistapaus: Minimimääräinen jako</title>
+
+    <para>Yllä kuvataan tavallinen ryhmäprojekti, jossa projekti on täysin projektipäällikön valvonnassa ja jossa tiedostot (ja tilastot) ovat identtiset molemmissa päissä (sekä palvelimen että kääntäjän puolella).</para>
+
+    <para>OmegaT-ryhmäprojektit voidaan määrittää myös toisin, jolloin kaikki kääntäjät jakavat yhteisen project_save.tmx-tiedoston, mutta eivät yhteisiä lähdetiedostoja.</para>
+
+    <para>Tässä tapauksessa projekti luodaan samaan tapaan, mutta projektipäällikkö ei lisää tiedostoja /source-kansioon.</para>
+  </section>
+
+  <section id="howto.setupteamproject.mappingparameters">
+    <title>Yhdistämisparametrit</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>repository type</term>
+
+        <listitem>
+          <para>Tämä voi olla joko http (https), svn tai git.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>repository url</term>
+
+        <listitem>
+          <para>Käännettävien tiedostojen etäsijainti</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>mapping local</term>
+
+        <listitem>
+          <para>Paikallisen kansion tai tiedoston nimi suhteessa OmegaT-projektin pääkansioon</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>mapping repository</term>
+
+        <listitem>
+          <para>Etäkansion tai -tiedoston nimi suhteessa tietovaraston URL-osoitteeseen</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>excludes</term>
+
+        <listitem>
+          <para>Lisää kuvioita yleismerkkien avulla (Apache Ant -tyyliin): *, ?, **</para>
+
+          <para>Esimerkki: <userinput>**/.ini/**</userinput></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>includes</term>
+
+        <listitem>
+          <para>Kuten yllä</para>
+
+          <para>Esimerkki: <userinput>**/*.docx</userinput> lisää kaikki .docx-tiedosto, missä päin projektia ne sitten sijaitsevatkaan</para>
+
+          <para>Mukaan lukien -säännöt ovat korkeammalle priorisoituja kuin pois lukien -säännöt.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Yhdistämisesimerkkejä</title>
+
+    <para><programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Kaikki sijainnin <filename>https://repo_for_OmegaT_team_project</filename> sisällöt yhdistetään paikalliseen OmegaT-projektiin.</para>
+
+    <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+
+    <para>Kaikki sijainnin <filename>&gt;https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> sisällöt yhdistetään paikalliseen OmegaT-projektiin.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>Etätiedosto<filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> yhdistetään paikalliseen <filename>source/Bundle.properties</filename>-tiedostoon.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>Etätiedosto <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> yhdistetään paikalliseen <filename>source/readme_tr.txt</filename>-tiedostoon.</para>
+
+    <para>Tällöin on mahdollista nimetä käännettävä tiedosto uudelleen.</para>
+  </section>
+</section>

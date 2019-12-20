@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.textsearch">
+  <title>Hledat v textu</title>
+
+  <para>Okno Hledat otevřete pomocí zkratky <keycombo> <keycap>Ctrl</keycap><keycap>F</keycap> </keycombo>, pak zadejte slovo nebo frázi, kterou chcete vyhledat do pole <emphasis>„Hledat“</emphasis>.</para>
+
+  <para>Nebo vyberte slovo či frázi kdekoliv v podokně Editoru, Přibližné překlady nebo Glosář a stiskněte <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Slovo nebo fráze bude v tomto případě zadané do pole <emphasis>„Hledat“</emphasis> automaticky. Současně je možné mít otevřeno několik oken hledání, ale zavřete je hned, když je už nepotřebujete, aby se tak nezahltila paměť počítače.</para>
+
+  <para>Posledních 10 hledání zobrazíte kliknutím na šipku rozbalovacího menu v okně <emphasis>Hledat</emphasis>.</para>
+
+  <para>Okno Hledat v textu má své nabídky:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Soubor &gt; Hledat výběr (<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>): zaměří se na vyhledávací políčko a vybere veškerý obsah.</para>
+    </listitem>
+
+    <listitem>
+      <para>Soubor &gt; Zavřít (<keycombo> <keycap>Ctrl</keycap> <keycap>W</keycap> </keycombo>): zavře okno hledání (stejně jako stiskem <keycap>Esc</keycap>)</para>
+    </listitem>
+
+    <listitem>
+      <para>Upravit &gt; Vložit zdroj (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>I</keycap> </keycombo>): vloží zdrojový text aktuálního segmentu.</para>
+    </listitem>
+
+    <listitem>
+      <para>Upravit &gt; Přepsat zdrojem (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>R</keycap> </keycombo>): nahradí zdrojovým textem aktuálního segmentu.</para>
+    </listitem>
+
+    <listitem>
+      <para>Upravit &gt; Vytvořit nový záznam Glosáře (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>): přidá novou položku do glosáře</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="using.wild.cards">
+    <title>Použití zástupných znaků</title>
+
+    <para>V přesném vyhledávání, ale i při hledání podle klíčových slov, mohou být použity zástupné vyhledávací znaky ‚*‘ a ‚?‘ . Mají podobný význam jako zástupné znaky v MS Word:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>‚*‘ reprezentuje nula nebo více znaků, počítá se od aktuální pozice v daném slově po jeho konec. Vyhledávané položce ‚<literal>run*</literal>‘ by například odpovídalo ‚<literal>run</literal>‘, ‚<literal>runs</literal>‘ a ‚<literal>running</literal>‘.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>‚?‘ reprezentuje jeden znak. Například hledanému ‚<literal>run?</literal>‘ by odpovídalo ‚<literal>runs</literal>‘ a ‚<literal>runn</literal>‘ ve slově ‚<literal>running</literal>‘.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Nalezené položky budou zobrazené tučným modrým písmem. Mějte na paměti, že znaky ‚*‛ a ‚?‛ mají speciální význam v rámci regulárních výrazů, takže pak hledání za použití zástupných znaků, jak to popisujeme zde, bude fungovat jen u voleb Přesné hledání a Hledat podle klíčových slov (vizte níže). </para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Metody a možnosti vyhledávání</title>
+
+    <para>Metodu hledání vyberte pomocí přepínacích tlačítek. Dostupné jsou následující metody hledání:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Přesné vyhledávání</term>
+
+        <listitem>
+          <para>Vyhledávání segmentů obsahujících zadaný řetězec. Přesné vyhledávání hledá slovní spojení, tj. pokud je zadaných několik slov, budou tato nalezena jen pokud se nacházejí v přesně stejném pořadí. Vyhledávání slovního spojení <literal>open file</literal> nalezne tedy všechny výskyty řetězce <emphasis><literal>open file</literal></emphasis>, ale ne <emphasis><literal>file opened</literal></emphasis> nebo <emphasis><literal>open input file</literal></emphasis>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Hledat podle klíčových slov</term>
+
+        <listitem>
+          <para>Hledá segmenty obsahující všechna zadaná klíčová slova v jakémkoliv pořadí. Označte Hledat podle klíčových slov, a bude se vyhledávat jakékoliv množství samostatných slov, v jakémkoliv pořadí. OmegaT zobrazí seznam všech segmentů, ve kterých se všechna tato slova vyskytují. Vyhledávání podle klíčových slov je podobné jako hledání „se všemi slovy“ v internetovém vyhledávači typu Google (operátor AND). Když použijete volbu Hledat podle klíčových slov pro toto slovní spojení <emphasis><literal>open file</literal></emphasis>, pak budou nalezeny všechny výskyty řetězce <emphasis><literal>open file</literal>,</emphasis> stejně jako <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis>, atd.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">Regulární výrazy</emphasis></term>
+
+        <listitem>
+          <para>Řetězec znaků pro vyhledávání bude zpracován jako regulární výraz. Řetězec znaků pro vyhledávání – [a-zA-Z]+[öäüqwß] – například jako v příkladě nahoře hledá slova v cílovém segmentu, a to taková, která obsahují zadané zvláštní znaky na německé klávesnici. <link linkend="appendix.regexp">Regulární výrazy</link> představují účinný způsob hledání různých podob daného řetězce.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>K nahoře zmíněným metodám můžete přidat následující možnosti:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Rozlišovat velikost písmen</emphasis>: vyhledávání se týká přesně zadaného řetězce; tj. přihlíží se na velikost písmen</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Shody mezer nbsp</emphasis>: když je označena tato možnost, pak mezera vložená do hledacího políčka může odpovídat buď znaku normální mezery nebo znaku nezalomitelné mezery (tj. \u00a).</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Ve zdroji</emphasis>: prohledávají se zdrojové segmenty</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">V překladu</emphasis>: prohledávají se přeložené segmenty</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">V poznámkách</emphasis>: prohledávají se poznámky k segmentům</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">v komentářích: </emphasis>prohledávají se komentáře segmentů</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Přeloeno nebo nepřeloženo: </emphasis>prohledávají se jak přeložené, tak nepřeložené segmenty.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Přeloženo: </emphasis>prohledává se jen v přeložených segmentech.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Nepřeloženo: </emphasis>prohledává se jen v nepřeložených segmentech.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Zobrazit: všechny shodující se segmenty: </emphasis>pokud je tato možnost označena, všechny segmenty jsou zobrazeny jedna ku jedné, a to i kdyby byly přítomny několikrát v tom samém dokumentu nebo v různých dokumentech.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Zobrazit: názvy souborů: </emphasis>pokud j označeno, nad výsledkem se zobrazí název souboru, kde byl daný segment nalezen.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Prohledat Projekt</emphasis>: označením <emphasis>Paměť</emphasis> bude do vyhledávání zahrnuta projektová paměť (soubor project_save.tmx). Označením možnosti <emphasis>Překladové paměti</emphasis> budou do vyhledávání zahrnuty překladové paměti umístěné v adresáři <filename>tm</filename>. Když bude označena možnost <emphasis>Glosáře</emphasis>, pak bude vyhledávání probíhat i v glosářích umístěných ve složce <filename>glossary</filename>.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Prohledat Soubory: </emphasis>prohledává se buď jeden soubor nebo adresář obsahující více souborů. Když procházíte soubory (jako protiklad k překladovým pamětem), bude OmegaT prohledávat jen soubory, které jsou ve zdrojovém formátu. Tedy, ačkoliv je OmegaT schopna zpracovat soubory <filename>TMX</filename>, nezahrne je ale do vyhledávání.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Po kliknutí na tlačítko <guibutton>Pokročilé možnosti</guibutton> si můžete vybrat dodatečná kritéria (jako autor překladu, datum přeložení, vyloučení nespárovaných segmentů, atd.). Když je zaznačena možnost <emphasis>Nezohledňovat plnou/poloviční šíři znaků</emphasis>, pak vyhledávání pro plnou formu znaků (znaky CJK) bude nalézat shodu i na poloviční a naopak.</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>Zobrazení výsledků hledání</title>
+
+    <para>Stisknutí tlačítka pro vyhledávání po zadání řetězce do vyhledávacího pole zobrazí všechny segmenty v projektu, které obsahují zadaný řetězec. Protože <application>OmegaT</application> zpracovává identické segmenty jako jednu entitu, zobrazuje se jen první jedinečný segment. Segmenty jsou zobrazované v takovém pořadí, v jakém se nacházejí v projektu.  Přeložené segmenty se zobrazí s původním textem nahoře a přeloženým textem dole, nepřeložené segmenty se zobrazí jen s původním textem.</para>
+
+    <para>Dvojklik na segment jej otevře v Editoru pro úpravy (jednoduché kliknutí to udělá taky, ale jen když je zatrhnutá možnost  <emphasis role="bold"> Automatická synchronizace s Editorem</emphasis>). Potom se můžete vrátit zpět do okna Hledat a přejít na další nalezený segment, například abyste jej mohli zkontrolovat, a pokud nutno přizpůsobit terminologii.</para>
+
+    <para>V Okně Hledat můžete používat standardní zkratky  (<keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo>) pro přecházení mezi segmenty.</para>
+
+    <para>Současně je možno mít otevřeno víc oken hledání.  V takovém případě se snadno zorientujete v jejich obsahu, a to tak, že když se podíváte na titulek okna: obsahuje použitý hledaný výraz.</para>
+  </section>
+
+  <section id="search.filter">
+    <title>Filtrování záznamů v editoru podle hledání</title>
+
+    <para>Pro snazší navigaci ve výsledcích hledání můžete použít hledání v Editoru. Stiskněte tlačítko <emphasis role="bold">‚Filtr‘</emphasis> ve spodní části okna, a tak omezíte počet zobrazených záznamů v okně editoru na daný počet, který se shoduje s aktuálním hledáním. Můžete využít normální navigaci k přechodu na např. další (nepřeložený) segment, který se shoduje s kritérii vyhledávání.</para>
+
+    <para>Tip:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>hledání je omezeno na 1 000 nálezů, tak pokud hledáte nějakou hodně běžnou frázi, editor zobrazí jen těchto 1 000 shodných nálezů a ne všechny položky, které odpovídají kritériím hledání.</para>
+      </listitem>
+
+      <listitem>
+        <para>v souboru nemusí být žádná nalezená shoda, pak bude zobrazen prázdný prostor</para>
+      </listitem>
+
+      <listitem>
+        <para>Pokud hledání odstraní duplicity, pak tyto duplicity nebudou zobrazeny v Editoru.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Filtr odstraníte stisknutím tlačítka <emphasis role="bold">‚Odstranit filtr‘</emphasis>, nebo opětovným načtením projektu.</para>
+  </section>
+</section>

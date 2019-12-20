@@ -8,7 +8,7 @@
                2014 Briac Pilpre
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -82,10 +82,12 @@ public final class Styles {
         COLOR_NBSP("#c8c8c8"),
         COLOR_WHITESPACE("#808080"),
         COLOR_BIDIMARKERS("#c80000"),
+        COLOR_PARAGRAPH_START("#aeaeae"),
         COLOR_MARK_COMES_FROM_TM("#fa8072"), // Salmon red
         COLOR_MARK_COMES_FROM_TM_XICE("#af76df"), // Purple
         COLOR_MARK_COMES_FROM_TM_X100PC("#ff9408"), // Dark Orange
         COLOR_MARK_COMES_FROM_TM_XAUTO("#ffd596"), // Orange
+        COLOR_MARK_COMES_FROM_TM_XENFORCED("#ffccff"), // Pink
         COLOR_REPLACE("#0000ff"), // Blue
         COLOR_LANGUAGE_TOOLS("#0000ff"),
         COLOR_TRANSTIPS("#0000ff"),
@@ -98,6 +100,8 @@ public final class Styles {
         COLOR_MATCHES_INS_ACTIVE("#0000ff"),
         COLOR_MATCHES_INS_INACTIVE("#808080"), // Color.gray
         COLOR_HYPERLINK("#0000ff"), // Blue
+        COLOR_SEARCH_FOUND_MARK(Color.BLUE),
+        COLOR_SEARCH_REPLACE_MARK("#ff9900"), // Dark orange
         COLOR_NOTIFICATION_MIN("#fff2d4"), // Light orange
         COLOR_NOTIFICATION_MAX("#ff9900"), // Dark orange
         COLOR_ALIGNER_ACCEPTED("#15bb45"), // Green

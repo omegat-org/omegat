@@ -8,7 +8,7 @@
                2009 Alex Buloichik
                2012 Didier Briel, Martin Fleurke
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 

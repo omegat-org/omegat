@@ -5,7 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -155,6 +155,11 @@ public class ConsoleWindow implements IMainWindow {
 
     public void showMessageDialog(String message) {
         System.out.println(message);
+    }
+
+    @Override
+    public void showLockInsertMessage(String messageText, String toolTip) {
+        /* empty */
     }
 
 }

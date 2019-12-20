@@ -6,7 +6,7 @@
  Copyright (C) 2012 Martin Fleurke
                2013 Alex Buloichik (alex73mail@gmail.com)
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 

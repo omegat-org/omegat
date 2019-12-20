@@ -6,7 +6,7 @@
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -139,7 +139,8 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
 
     @Override
     public String itemToString(AutoCompleterItem item) {
-        if (Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_SOURCE) && item.extras != null) {
+        if (Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_SOURCE) && item.extras != null
+                && item.extras.length > 0) {
             if (Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE)) {
                 return item.payload + " \u2190 " + item.extras[0];
             } else {

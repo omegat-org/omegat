@@ -7,8 +7,9 @@
                2010 Alex Buloichik, Didier Briel
                2012 Martin Fleurke, Hans-Peter Jacobs
                2015 Aaron Madlon-Kay
+               2019 Briac Pilpre
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -616,6 +617,11 @@ public class SegmentBuilder {
                         ste.getNumberOfDuplicates());
             }
             text = text.replace("0000", replacement);
+        }
+
+        // Add paragraph mark if the segment is at the beginning of one.
+        if (ste.isParagraphStart()) {
+            text = text.replace(">", " \u00b6>");
         }
 
         // trim and replace spaces to non-break spaces

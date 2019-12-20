@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.textsearch">
+  <title>Tekstihaku</title>
+
+  <para>Avaa hakuikkuna näppäinyhdistelmällä <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> ja kirjoita haettava sana tai lauseke <emphasis>Etsittävä teksti</emphasis> -kenttään.</para>
+
+  <para>Vaihtoehtoisesti voit valita sanan tai lausekkeen editoriruudussa, sumeiden osumien ruudussa tai sanastoruudussa ja painaa näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Sana tai lauseke siirtyy automaattisesti <emphasis>Etsittävä teksti</emphasis> -kenttään. Voit pitää useita hakuikkunoita auki yhtä aikaa, mutta sulje ne sitä mukaa kun et enää tarvitse niitä, jolloin ikkunat eivät ole sotkemassa työpöytääsi.</para>
+
+  <para>Napsauta <emphasis>Etsittävä teksti</emphasis> -kentän lopussa olevaa nuolikuviota, niin löydät kymmenen viimeisintä hakutermiä.</para>
+
+  <para>Hakuikkunassa on omat valikkonsa:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Tiedosto &gt; Etsi valintaa (<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>) aktivoi hakukentän uudelleen ja valitsee koko sen sisällön.</para>
+    </listitem>
+
+    <listitem>
+      <para>Tiedosto &gt; Sulje (<keycombo> <keycap>Ctlr</keycap> <keycap>W</keycap> </keycombo>) sulkee hakuikkunan (samaan tapaan kuten <keycap>Esc</keycap>).</para>
+    </listitem>
+
+    <listitem>
+      <para>Muokkaa &gt; Lisää lähde (<keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>I</keycap> </keycombo>) lisää senhetkisen segmentin lähdetekstin.</para>
+    </listitem>
+
+    <listitem>
+      <para>Muokkaa &gt; Lisää lähde (<keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>R</keycap> </keycombo>) vaihtaa tekstiksi senhetkisen segmentin lähdetekstin.</para>
+    </listitem>
+
+    <listitem>
+      <para>Muokkaa &gt; Luo sanaston termi (<keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap> </keycombo>) luo sanastoon uuden kohdan.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="using.wild.cards">
+    <title>Jokerimerkkien käyttö</title>
+
+    <para>Voit käyttää jokerimerkkejä * ja ? sekä täsmällisessä että avainsanahaussa. Niiden merkitys on sama kuin Wordissa:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>* vastaa nollaa tai useampaa merkkiä nykyisestä sijainnista sanan loppuun saakka. Esimerkiksi hakutermi <literal>run*</literal> löytää sanat <literal>run</literal>, <literal>runs</literal> ja <literal>running</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>? vastaa mitä tahansa yhtä merkkiä. Esimerkiksi hakutermi <literal>run?</literal> löytää sanat <literal>runs</literal> ja <literal>runn</literal> sanasta <literal>running</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Osumat näkyvät sinisinä ja lihavoituina. Huomaa, että merkeillä * ja ? on erityinen merkitys säännöllisissä lausekkeissa, joten tässä kuvattu jokerimerkkihaku toimii ainoastaan täsmällisessä ja avainsanahaussa (ks. alla).</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Hakumenetelmät ja asetukset</title>
+
+    <para>Valitse hakumenetelmä valintanappien avulla. Voit valita seuraavista hakumenetelmistä:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Täsmähaku</term>
+
+        <listitem>
+          <para>Hae segmenttejä, joissa on täsmälleen sama merkkijono kuin kirjoittamasi. Täsmähaku etsii lauseketta, eli jos kirjoitat useamman sanan, niitä haetaan täsmälleen siinä järjestyksessä. Hakutermi <literal>open file</literal> löytää siis kaikki <emphasis><literal>open file</literal></emphasis>-merkkijonot, mutta ei <emphasis><literal>file opened</literal></emphasis>-, tai <emphasis><literal>open input file</literal></emphasis>-merkkijonoja.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Avainsanahaku</term>
+
+        <listitem>
+          <para>Hakee segmenttejä, joissa on kaikki kirjoittamasi avainsanat missä tahansa järjestelmässä. Valitse avainsanahaku, kun haluat etsiä yksittäisiä sanoja missä tahansa järjestyksessä. OmegaT näyttää luettelon segmenteistä, joissa on kaikki määritellyt sanat. Avainsanahaku muistuttaa internetin hakukoneiden käyttämää &quot;hae kaikkia sanoja&quot; -logiikkaa (Boolen haun AND-logiikka). Avainsanahaku sanoilla <emphasis><literal>open file</literal></emphasis> löytää siis kaikki merkkijonon <emphasis><literal>open file</literal></emphasis> esiintymät sekä <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis> jne.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">Säännölliset lausekkeet</emphasis></term>
+
+        <listitem>
+          <para>Hakutermiä käsitellään säännöllisenä lausekkeena. Yllä olevan esimerkin haettava merkkijono – [a-zA-Z]+[öäüqwß] – etsii kohdesegmentin sanoja, joissa on saksalaisen näppäimistön merkkejä. <link linkend="appendix.regexp">Säännölliset lausekkeet</link> ovat tehokas tapa hakea tietyn merkkijonon esiintymiä.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Yhden edellä esitellyn hakumenetelmän lisäksi voit valita seuraavista:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">kirjainkoon mukainen</emphasis> haku toimii täsmälleen kirjoitetun merkkijonon mukaisesti, eli isojen ja pienten kirjainten ero otetaan huomioon.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">väli vastaa nsb:tä</emphasis>: Tässä valinnassa hakulausekkeeseen kirjoitettu välilyönti voi tarkoittaa joko tavallista välilyöntiä tai sitovaa välilyöntiä (\u00A-merkkiä).</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">lähteestä</emphasis> hakee lähdesegmenteistä.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">käännöksistä</emphasis> hakee kohdesegmenteistä.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">muistiinpanoista</emphasis> hakee segmentteihin kirjoitetuista muistiinpanoista.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">kommenteista</emphasis> hakee segmenttien kommenteista.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Käännetty tai kääntämättä</emphasis> hakee sekä käännetyistä että kääntämättömistä segmenteistä.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">käännetyistä</emphasis> hakee vain jo käännetyistä segmenteistä.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">kääntämättömistä</emphasis> hakee vain segmenteistä, joita ei ole käännetty.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Näytä: kaikki osuvat segmentit</emphasis>: Jos tässä kohdassa on rasti, kaikki löydetyt segmentit näytetään yksi kerrallaan, vaikka ne toistuisivat moneen kertaan joko samassa asiakirjassa tai eri asiakirjoissa.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Näytä: tiedostojen nimet</emphasis>: Jos tässä kohdassa on rasti, jokaisen hakutuloksen yläpuolella lukee sen tiedoston nimi, josta löydös on tehty.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Hae: Projektin</emphasis>: Valitse <emphasis>muistista</emphasis>, niin löydöksiä etsitään projektin käännösmuistitiedostosta (project_save.tmx). Valitse <emphasis>TM:istä</emphasis>, niin löydöksiä etsitään <filename>tm</filename>-kansiossa olevista käännösmuisteista. Valitse <emphasis>sanastoista</emphasis>, niin löydöksiä etsitään <filename>glossary</filename>-kansiossa olevista sanastoista.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Hae: Tiedostoista</emphasis>: Haku kohdistuu yksittäiseen tiedostoon tai kansioon, jossa on joukko tiedostoja. Kun haku kohdistuu tiedostoihin (eikä käännösmuisteihin), OmegaT rajoittaa haun koskemaan lähdetiedostojen muotoisia tiedostoja. Tiedostoista haettaessa OmegaT ei huomioi <filename>TMX</filename>-tiedostoja, vaikka ohjelma pystyykin hyvin käsittelemään niitä.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Kun napsautat painiketta <guibutton>Lisäasetukset</guibutton>, pääset valitsemaan hakuun lisäkriteerejä (käännöksen laatija tai muokkaaja, käännöspäivämäärä, jätä orposegmentit huomiotta jne.). Kun <emphasis>Ei erottele täys- ja puolileveitä merkkejä</emphasis> on valittuna, täysleveiden merkkien (CJK-merkit) haku löytää puolileveät merkit ja toisinpäin.</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>Hakutulosten näyttö</title>
+
+    <para>Kirjoita merkkijono hakukenttään ja paina sitten hakupainiketta, niin saat näkyviin kaikki projektin segmentit, joissa on haettu merkkijono. <application>OmegaT</application> käsittelee samanlaisia segmenttejä yhtenä kokonaisuutena, joten toistuvista segmenteistä näytetään ainoastaan ensimmäinen. Segmentit esitetään samassa järjestyksessä kuin ne ovat mukana projektissa. Käännettyjen segmenttien alkukielinen teksti näytetään ensin ja käännetty teksti sen alla. Kääntämättömistä segmenteistä esitetään ainoastaan lähdekieliset tekstit.</para>
+
+    <para>Kaksoisnapsauta segmenttiä, niin saat sen auki editorissa ja voit muuttaa käännöstä. (Sama tapahtuu yhdellä napsautuksella, kun <emphasis role="bold">Automaattinen synkronisointi editorissa</emphasis> on valittu.) Muutoksen jälkeen voit vaihtaa takaisin hakuikkunaan ja seuraavaan segmenttiin. Voit tarvittaessa korjata senkin ja vaikkapa päivittää sanastoa.</para>
+
+    <para>Tavalliset pikanäppäimet (<keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo>) siirtävät sinua hakuikkunassa segmentistä toiseen.</para>
+
+    <para>Voit pitää useita hakuikkunoita auki yhtä aikaa. Käytetty hakutermi näkyy ikkunan otsikkorivillä, joten niitä vilkaisemalla näet nopeasti eri ikkunoiden sisällöt.</para>
+  </section>
+
+  <section id="search.filter">
+    <title>Sisällön suodattaminen editorissa haun mukaan</title>
+
+    <para>Voit navigoida helposti hakutuloksissa siirtämällä ne editoriruudulle. Paina hakuikkunan alareunassa olevaa painiketta <emphasis role="bold">Suodata</emphasis>, niin saat haun tulokset näkymään editoriruudussa. Voit käyttää tavallisia siirtymätapoja päästäksesi esim. seuraavaan (kääntämättömään) segmenttiin, joka vastaa hakukriteerejä.</para>
+
+    <para>HUOM.:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Hakutulosten rajana on 1000 esiintymää. Jos siis etsit tavanomaista lauseketta, editori ei näytä kaikkia hakuosumia vaan vain nämä 1000 osumaa.</para>
+      </listitem>
+
+      <listitem>
+        <para>Hakutulokset näyttävät tyhjiltä, jos tiedostossa ei ole hakulauseketta vastaavia osumia.</para>
+      </listitem>
+
+      <listitem>
+        <para>Jos hakutuloksista poistetaan kaksoiskappaleet, niitä ei näy myöskään editoriruudussa.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Poista suodatin napsauttamalla <emphasis role="bold">Poista suodatin</emphasis>-painiketta tai lataamalla projekti uudelleen.</para>
+  </section>
+</section>

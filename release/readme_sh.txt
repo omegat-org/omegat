@@ -18,7 +18,7 @@ Najaktuelnija obavještenja o OmegaT mogu se naći na:
       http://www.omegat.org/
 
 User support, na višejezičnoj Yahoo mailing listi korisnika, na kojoj se njena arhiva može pretraživati i bez obaveze upisa na listu:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Zahtjevi za poboljšanja (na engleskom), na web sajtu SourceForge:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -211,7 +211,7 @@ Svaki valjan izvještaj o bug-u mora ispunjavati tri uslova.
 Takođe možete pridodati i kopije datoteka, dijelove log-a, snimke sa monitora i bilo šta što smatrate da će informatičarima za razvoj pomoći u pronalaženju i popravci nađenog bug-a.
 
 Radi uvida u arhivu mailing liste korisnika, idite na:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Radi uvida u izvještaje o bug-ovima i prilaganja svog ev. potrebnog bug izvještaja, idite na:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347

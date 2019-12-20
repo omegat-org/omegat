@@ -111,8 +111,8 @@
 
     <itemizedlist>
       <listitem>
-        <para>If a file does not load into the <guilabel>Editor</guilabel> pane, then it could be that it is in a format that doesn't work in OmegaT. See
-        <link linkend="chapter.file.filters">File Filters</link> for a list of file formats that OmegaT can handle.</para>
+        <para>If a file does not load into the <guilabel>Editor</guilabel> pane, then it could be that it is in a format that doesn't work in OmegaT. See 
+        <menuchoice><guimenuitem>Options</guimenuitem><guimenuitem>Preferences...</guimenuitem><guimenuitem>File Filters</guimenuitem></menuchoice> for a list of file formats that OmegaT can handle.</para>
       </listitem>
     </itemizedlist>
 
@@ -168,7 +168,7 @@
         url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT
         for beginners</ulink> on the OmegaT web site. If you need assistance
         with any aspect of OmegaT, feel free to join the <ulink
-        url="https://groups.yahoo.com/neo/groups/OmegaT/info">OmegaT users
+        url="https://omegat.org/support">OmegaT users
         group.</ulink></para>
       </listitem>
     </itemizedlist>

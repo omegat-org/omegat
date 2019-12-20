@@ -5,7 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -95,6 +95,14 @@ public interface IMainWindow {
      *            message text
      */
     void showLengthMessage(String messageText);
+
+    /**
+     * Show message indicating the state of the Lock cursor and Insert/overwrite mode
+     *
+     * @param messageText
+     *            message text
+     */
+    void showLockInsertMessage(String messageText, String toolTip);
 
     /**
      * Display warning.

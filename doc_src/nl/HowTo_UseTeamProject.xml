@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>Een Teamproject gebruiken</title>
+
+  <para>Teamprojecten voor OmegaT moeten eerst zijn <link linkend="howto.setupteamproject">ingesteld</link> op een server.</para>
+
+  <para>Volg de door de projectbeheerder verschafte procedure om een teamproject voor de eerste keer te gebruiken.</para>
+
+  <para>Als het project eenmaal is geopend, gaat het vertalen op dezelfde manier als voor een niet-teamproject, behalve de volgende punten.</para>
+
+  <para><emphasis role="bold">Automatisch opslaan</emphasis></para>
+
+  <para>Elke 3 minuten (standaard) wordt het lokale project gesynchroniseerd met de opslagplaats op afstand, zodat de projectbeheerder of andere vertalers de gedurende die periode toegevoegde vertalingen kunnen zien en gebruiken.</para>
+
+  <para>De interval van 3 minuten kan worden gewijzigd in <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Opties</guimenuitem> <guimenuitem>Voorkeuren</guimenuitem> <guimenuitem>Opslaan en uitvoer</guimenuitem> </menuchoice></link>.</para>
+
+  <para><emphasis role="bold">Gesynchroniseerde bestanden</emphasis></para>
+
+  <para>Wanneer het project automatisch wordt opgeslagen, maar ook als het wordt geopend, gesloten, en opnieuw wordt geladen worden in feite maar twee bestanden gesynchroniseerd:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Alle ander bestanden zullen worden vervangen door de bestanden in de opslagplaats op afstand.</para>
+
+  <para><emphasis role="bold">Nieuwe bronbestanden toevoegen</emphasis></para>
+
+  <para>Een nieuw bronbestand toevoegen:</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>kopieer de bestanden naar de map <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>gebruik <menuchoice> <guimenuitem>Project</guimenuitem> <guimenuitem>Bronbestanden indienen</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>Bestaande bronbestanden kunnen worden aangepast, maar de bewerking voor indienen moet worden uitgevoerd voor het automatisch opslaan en voordat het project opnieuw wordt geladen of gesloten.</para>
+
+  <para><emphasis role="bold">Bronbestanden verwijderen</emphasis></para>
+
+  <para>Bestanden moeten eerst door de projectbeheerder worden verwijderd, en daarna lokaal.</para>
+
+  <para><emphasis role="bold">Segmentatieregels of bestandsfilters wijzigen</emphasis></para>
+
+  <para>Parameters voor het project moeten worden gewijzigd door de projectbeheerder.</para>
+
+  <para><emphasis role="bold">Offline werken</emphasis></para>
+
+  <para>Een teamproject kan offline worden geopend en vertaald. Alle wijzigingen zullen de volgende keer als een verbinding beschikbaar is worden gesynchroniseerd.</para>
+
+  <para>Offline werken:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Verbreek de verbinding met het netwerk vóór het project te openen,</para>
+    </listitem>
+
+    <listitem>
+      <para>of open het project met de opdrachtregel met de optie <command>--no-team</command>.</para>
+    </listitem>
+  </itemizedlist>
+</section>

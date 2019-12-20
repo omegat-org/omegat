@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.projectfiles">
+  <title>Soubory projektu</title>
+
+  <para>Toto okno se zobrazí automaticky, když OmegaT otevře projekt a také pokaždé, když zvolíte <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Soubory projektu...</guimenuitem> </menuchoice>.</para>
+
+  <para><remark>Poznámka:</remark> můžete potlačit zobrazení okna Soubory projektu při otevření projektu nastavením <emphasis>project_files_show_on_load</emphasis> na hodnotu <emphasis>false</emphasis> v souboru <filename>omegat.prefs</filename>  (přístupné <menuchoice>přes nabídku <guimenuitem>Možnosti</guimenuitem> <guimenuitem>Otevřít adresář nastavení</guimenuitem></menuchoice>).</para>
+
+  <para>Dialogové okno otevřete stiskem <guimenuitem>Ctrl+L</guimenuitem> a přes klávesu <keycap>Esc</keycap> jej zavřete. Okno <guilabel>Soubory projektu</guilabel> zobrazuje následující informace:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>celkový počet přeložitelných souborů v projektu. Toto jsou soubory nacházející se v adresáři zdrojových souborů /source, a ve formátech, které OmegaT umí zpracovávat. Jejich počet je zobrazen v závorkách vedle nápisu „Soubory projektu“</para>
+    </listitem>
+
+    <listitem>
+      <para>seznam všech přeložitelných souborů v projektu. Kliknutí na jakýkoliv soubor jej otevře a překlad může začít.</para>
+
+      <para>Psaní libovolného textu otevře pole <guilabel>Filtr</guilabel>, kam lze vkládat části názvu souboru. Za pomoci kláves <keycap>Nahoru</keycap> a <keycap>Dolů</keycap> můžete vybrat soubor a stiskem <keycap>Enter</keycap> se soubor otevře pro překlad.</para>
+
+      <para>Poznámka: názvy souborů (v prvním sloupci) můžete seřadit podle abecedy tak, že kliknete na hlavičku sloupce. Kliknutím na název souboru a výběrem některého z tlačítek <emphasis>Přesunout...</emphasis> můžete změnit umístění názvu souboru.</para>
+
+      <para>Kliknutím pravého tlačítka myši na název souboru otevře vyskakovací okno, které umožní otevřít zdrojový soubor a cílový soubor(pokud existuje).</para>
+    </listitem>
+
+    <listitem>
+      <para>Záznamy o souborech obsahují jejich názvy, typy filtru souborů, jejich kódování a také vždy počet obsažených segmentů.</para>
+    </listitem>
+
+    <listitem>
+      <para>Ve spodní části tabulky jsou zobrazeny údaje o celkovém počtu segmentů, počtu jedinečných segmentů v celém projektu a počet jedinečných segmentů, které jsou již přeloženy.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Celkový počet <emphasis role="bold">Jedinečných</emphasis> segmentů se počítá ze souhrnu všech segmentů a odstraněním všech duplicitních segmentů. (Definice pro „jedinečné“ vychází z rozlišování velikosti písmen: „Run“ a „run“ jsou brány jako dva záznamy.)</para>
+
+  <para>Rozdíl mezi „Počtem segmentů“ a „Počtem jedinečných segmentů“ poskytuje přibližný přehled o tom, kolik opakování máte v textu. Povšimněte si, že čísla poskytují jen orientační údaje, o tom, jak podstatná ta která opakování jsou: segmenty by mohly být poměrně dlouhé věty opakované několikrát (máte štěstí!) nebo jednoduchá klíčová slova zaplňující tabulku (pak už nemáte až takové štěstí...). Soubor <filename>project_stats.txt</filename> umístěný v adresáři /omegat vašeho projektu obsahuje detailnější informace o segmentech vždy podle souboru.</para>
+
+  <para>Dodatečná úprava pravidel segmentace může ovlivnit počet segmentů / jedinečných segmentů. Takovémuto kroku byste se měli po započetí práce na projektu obecně vyhnout. Více informací najdete v části <emphasis>Pravidla segmentace</emphasis>.</para>
+
+  <para><emphasis role="bold">Přidání souborů do projektu:</emphasis> soubory do projektu můžete přidat kliknutím na tlačítko <guimenuitem>„Importovat zdrojové soubory“</guimenuitem>. Tímto zkopírujete vybrané soubory do adresáře <filename>source</filename>, projekt bude znovu načten a je možno importovat nové soubory.  Můžete také přidat zdrojové soubory z internetových stránek, napsaných v MediaWiki, kliknutím na tlačítko <guimenuitem>„Import z Mediawiki“</guimenuitem> a zadáním odpovídající URL.</para>
+</section>

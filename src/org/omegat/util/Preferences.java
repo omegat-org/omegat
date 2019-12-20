@@ -15,7 +15,7 @@
                2015 Aaron Madlon-Kay, Yu Tang, Didier Briel, Hiroshi Miura
                2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -104,6 +104,7 @@ public final class Preferences {
     public static final String GLOSSARY_REQUIRE_SIMILAR_CASE = "glossary_require_similar_case";
     public static final boolean GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT = true;
     public static final String DICTIONARY_FUZZY_MATCHING = "dictionary_fuzzy_matching";
+    public static final String DICTIONARY_AUTO_SEARCH = "dictionary_auto_search";
 
     public static final String MAINWINDOW_GEOMETRY_PREFIX = "screen";
     public static final String MAINWINDOW_LAYOUT = "docking_layout";
@@ -205,6 +206,12 @@ public final class Preferences {
     public static final String MARK_BIDI = "mark_bidi";
     /** Do aggressive font fallback */
     public static final String FONT_FALLBACK = "font_fallback";
+    
+    /** Mark paragraphs starts */
+    public static final String MARK_PARA_DELIMITATIONS = "mark_para_delimitation";
+    public static final String MARK_PARA_TEXT = "mark_para_delimitation_text";
+    /** Default paragraph delimitation indicator */
+    public static final String MARK_PARA_TEXT_DEFAULT = "\u2014 \u00b6 \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014";
 
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";
@@ -227,6 +234,14 @@ public final class Preferences {
      * Match to insert
      */
     public static final int BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = 80;
+
+    /**
+     * When a fuzzy match is displayed from a memory belonging to a language other
+     * than the target language, a penalty is applied.
+     */
+    public static final String PENALTY_FOR_FOREIGN_MATCHES = "penalty_foreign_matches";
+    public static final int PENALTY_FOR_FOREIGN_MATCHES_DEFAULT = 30;
+
     /** Workflow Option: Insert Explanatory Text before the Best Fuzzy Match */
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";
     /** Workflow Option: Export current segment */
@@ -341,6 +356,8 @@ public final class Preferences {
     public static final String EXT_TMX_MATCH_TEMPLATE = "ext_tmx_match_template";
     /** External TMX options: Fuzzy match sort key **/
     public static final String EXT_TMX_SORT_KEY = "ext_tmx_sort_key";
+    /** External TMX options: Whether to show fuzzy matches from foreign (non-target language) matches. */
+    public static final String EXT_TMX_KEEP_FOREIGN_MATCH = "keep_foreign_matches";
 
     /** View options: Show all sources in bold */
     public static final String VIEW_OPTION_SOURCE_ALL_BOLD = "view_option_source_all_bold";

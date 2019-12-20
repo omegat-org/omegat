@@ -15,8 +15,9 @@
                2014 Aaron Madlon-Kay
                2015 Didier Briel, Yu Tang
                2017 Didier Briel
+               2019 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -317,6 +318,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         editMenu.add(editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND"));
         editMenu.add(editReplaceInProjectMenuItem = createMenuItem("TF_MENU_EDIT_REPLACE"));
         editMenu.addSeparator();
+        editMenu.add(editSearchDictionaryMenuItem = createMenuItem("TF_MENU_EDIT_SEARCH_DICTIONARY"));
+        editMenu.addSeparator();
         editMenu.add(switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE"));
         editMenu.add(selectFuzzySubMenu = createMenu("TF_MENU_EDIT_COMPARE"));
         selectFuzzySubMenu.add(editSelectFuzzyPrevMenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_PREV"));
@@ -364,6 +367,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_TRANSLATED"));
         viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
+        viewMenu.add(viewMarkParagraphStartCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_PARAGRAPH"));
         viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
         viewMenu.add(viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS"));
         viewMenu.add(viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NOTED_SEGMENTS"));
@@ -385,6 +389,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_TRANSLATED.getColor()));
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_UNTRANSLATED.getColor()));
+        viewMarkParagraphStartCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(), '\u00b6'));
         viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_SOURCE.getColor()));
         viewMarkNonUniqueSegmentsCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor(), 'M'));
         viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
@@ -513,7 +518,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 .isMarkTranslated());
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isMarkUntranslated());
-
+        viewMarkParagraphStartCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isMarkParagraphDelimitations());
         viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isDisplaySegmentSources());
         viewMarkNonUniqueSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
@@ -765,6 +771,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem editTagNextMissedMenuItem;
     JMenuItem editExportSelectionMenuItem;
     JMenuItem editCreateGlossaryEntryMenuItem;
+    JMenuItem editSearchDictionaryMenuItem;
     JMenuItem editRegisterUntranslatedMenuItem;
     JMenuItem editRegisterEmptyMenuItem;
     JMenuItem editRegisterIdenticalMenuItem;
@@ -861,5 +868,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem viewFileListMenuItem;
     JCheckBoxMenuItem viewMarkTranslatedSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkUntranslatedSegmentsCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkParagraphStartCheckBoxMenuItem;
     JMenu viewMenu;
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.translatepdf">
+  <title>PDF-tiedoston kääntäminen</title>
+
+<para>PDF-tiedostot ovat erikoisia tapauksia. Niissä on tekstin muotoilutietoja, mutta <application>OmegaT</application> ei voi käyttää niitä kohdetiedostojen luomiseen. Siksi ohjelma käsittelee PDF-tiedostoja vain teksti -muotoisina tiedostoina, ja kohdetiedostot ovat vain teksti -tiedostoja.</para>
+  <para>Jos käännöksessä on käytettävä samoja tekstimuotoiluja (sekä muita elementtejä, esim. kuvia) kuin alkuperäisessä asiakirjassa, voit yrittää kolmea tapaa:</para>
+  <orderedlist>
+    <listitem>
+      <para>Käytä <application>OmegaT</application>:n oletussuodatinta (PDF input), käännä, luo kohdetiedosto (vain teksti -tiedosto) ja lisää tarvittavat muotoilut ja muut elementit käsin.</para>
+    </listitem>
+    <listitem>
+      <para>Käytä Iceni Infix -suodatinta. Ks. OmegaT-sivuston kohta <ulink url="https://omegat.org/howtos/iceni_infix.html">Howto – Translating PDF files with Iceni Infix and OmegaT</ulink>.</para>
+    </listitem>
+    <listitem>
+      <para>Tuo lähdetiedosto <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink> -ohjelmaa, tallenna se ODG-tiedostona, käännä se ja vie tarvittaessa PDF-tiedostoksi.</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">Huom.:</emphasis> Yllä olevat ohjeet koskevat vain PDF-tiedostoja, joissa käytetään tekstikerrosta. Jos käännettävänäsi on skannatuista sivuista koottu PDF-tiedosto (joita toisinaan kutsutaan &quot;kuolleiksi&quot; PDF-tiedostoiksi), sinun on käytettävä tekstintunnistusohjelmaa, (OCR, optical character recognition), joka tunnistaa tiedoston tekstiosat ja vie ne OmegaT:n tukemaan tiedostomuotoon.</para>
+
+
+
+  <section id="other.file.formats">
+    <title>Muut tiedostomuodot</title>
+
+    <para>Myös muita vain teksti -tiedostoja tai tekstimuotoiluja sisältäviä tiedostoja voi olla mahdollista käyttää OmegaT:ssä.</para>
+
+    <para>Tiedostoja voi muuttaa ohjelman tukemiin muotoihin muilla työkaluilla. Käännetyt tiedostot on lopuksi muunnettava takaisin alkuperöiseen muotoon. Jos käytössäsi on esimerkiksi vanha Microsoft Word -versio, joka tuottaa DOC-tiedostoja eikä pysty lukemaan ODT-tiedostoja, voit käyttää seuraavaa kiertotietä:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>vie DOC-tiedosto ODF Writeriin</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>tallenna tiedosto ODT-muodossa</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>käännä tiedosto ja luo siitä ODT-tiedosto</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>avaa kohdetiedosto ODF Writerissä</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>tallenna tiedosto DOC-tiedostona</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Käännetyn tiedoston muotoilujen laatu riippuu siitä, kuinka hyvin tiedoston muuttaminen kiertoteitse muodosta toiseen onnistui. Sinun kannattaa kokeilla muita vaihtoehtoja, ennen kuin ryhdyt tällaisiin kiertotiemuunnoksiin. <ulink url="http://www.omegat.org">OmegaT-kotisivulta</ulink> löydät päivitetyn käännöksessä käytettyjen aputyökalujen listan.</para>
+</section>
+</section>

@@ -5,7 +5,7 @@
 
  Copyright (C) 2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -183,7 +183,12 @@ public class HistoryPredictor extends AutoCompleterListView {
 
     @Override
     public String itemToString(AutoCompleterItem item) {
-        return "<html>" + item.payload + " <font color=\"gray\">(" + item.extras[0] + ")</font></html>";
+        StringBuilder sb = new StringBuilder("<html>").append(item.payload);
+        if (item.extras != null && item.extras.length > 0) {
+            sb.append(" <font color=\"gray\">(").append(item.extras[0]).append(")</font>");
+        }
+        sb.append("</html>");
+        return sb.toString();
     }
 
     @Override

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Ga naar</title>
+
+  <para>Dit menu geeft alleen items weer als een project is geopend.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Volgende niet-vertaalde segment</term>
+
+      <listitem>
+        <para>Verplaatst naar het volgende segment dat geen equivalent heeft in het vertaalgeheugen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Volgende vertaalde segment</term>
+
+      <listitem>
+        <para>Verplaatst naar het volgende, reeds vertaalde, segment, niet-vertaalde segmenten negerend.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Volgende segment</term>
+
+      <listitem>
+        <para>Verplaatst naar het volgende segment. Als het huidige segment het laatste in een bestand is, verplaatst het naar het eerste segment van het volgende bestand.</para>
+
+        <para>Opmerking: <keycap>Enter</keycap> is een alternatieve sneltoets als de optie <link linkend="dialogs.preferences.general.usetabtoadvance">TAB gebruiken om door te gaan</link> niet is geselecteerd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vorige segment</term>
+
+      <listitem>
+        <para>Verplaatst naar het vorige segment. Als het huidige segment het eerste in een bestand is, verplaatst het naar het laatste segment van het vorige bestand.</para>
+
+        <para>Opmerking: <keycombo> <keycap>Ctrl</keycap><keycap>Enter</keycap> </keycombo> is een alternatieve sneltoets als de optie <link linkend="dialogs.preferences.general.usetabtoadvance">TAB gebruiken om door te gaan</link> niet is geselecteerd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentnummer…</term>
+
+      <listitem>
+        <para>Het segment wordt geopend ofwel als de letter van de tekstballon of als het segmentnummer wordt ingevoerd.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Volgende notitie</term>
+
+      <listitem>
+        <para>Het volgende segment waar een notitie aan is verbonden, zal openen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vorige notitie</term>
+
+      <listitem>
+        <para>Het vorige segment met een notitie zal openen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Bron van geselecteerde overeenkomst</term>
+
+      <listitem>
+        <para>Verplaatst naar het segment dat correspondeert met de huidige geselecteerde overeenkomst in het venster <guilabel>Fuzzy overeenkomsten</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Verder in geschiedenis...</term>
+
+      <listitem>
+        <para><application>OmegaT</application> onthoudt de verwerkte segmenten. Met deze opdracht kunt u vooruit naar het segment dat u eerder verliet met de opdracht <guimenuitem>Terug in geschiedenis</guimenuitem>…</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Terug in geschiedenis…</term>
+
+      <listitem>
+        <para>Met deze opdracht kunt u één segment terug in de tijd gaan, om later terug te keren naar het huidige segment met behulp van de opdracht <guimenuitem>Verder in geschiedenis…</guimenuitem>hieronder.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

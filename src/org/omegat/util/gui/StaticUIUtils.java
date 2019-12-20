@@ -7,7 +7,7 @@
                2013 Yu Tang
                2014-2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -65,6 +65,7 @@ import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 import javax.swing.undo.UndoManager;
 
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -212,7 +213,7 @@ public final class StaticUIUtils {
     public static void forwardMouseWheelEvent(Component target, MouseWheelEvent evt) {
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(
                 new MouseWheelEvent(target, evt.getID(), evt.getWhen(),
-                        evt.getModifiers(), evt.getX(), evt.getY(),
+                        evt.getModifiersEx(), evt.getX(), evt.getY(),
                         evt.getClickCount(), evt.isPopupTrigger(),
                         evt.getScrollType(), evt.getScrollAmount(), evt.getWheelRotation()));
     }
@@ -407,7 +408,7 @@ public final class StaticUIUtils {
 
     public static String getKeyStrokeText(KeyStroke ks) {
         StringBuilder sb = new StringBuilder();
-        String modifierText = KeyEvent.getKeyModifiersText(ks.getModifiers());
+        String modifierText = KeyEvent.getModifiersExText(ks.getModifiers());
         sb.append(modifierText);
         String keyText = KeyEvent.getKeyText(ks.getKeyCode());
         if (!keyText.isEmpty() && !modifierText.contains(keyText)) {
@@ -425,7 +426,7 @@ public final class StaticUIUtils {
         comp.getDocument().addUndoableEditListener(manager);
 
         // Handle undo (Ctrl/Cmd+Z);
-        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
+        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Java8Compat.getMenuShortcutKeyMaskEx(),
                 false);
         Action undoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -438,7 +439,7 @@ public final class StaticUIUtils {
         comp.getActionMap().put("UNDO", undoAction);
 
         // Handle redo (Ctrl/Cmd+Y);
-        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
+        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Java8Compat.getMenuShortcutKeyMaskEx(),
                 false);
         Action redoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {

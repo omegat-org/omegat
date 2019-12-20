@@ -8,7 +8,7 @@
                2011 Alex Buloichik, Didier Briel
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -71,7 +71,7 @@ public final class EditorPopups {
         ec.registerPopupMenuConstructors(500, new DuplicateSegmentsPopup(ec));
         ec.registerPopupMenuConstructors(600, new EmptyNoneTranslationPopup(ec));
         ec.registerPopupMenuConstructors(700, new InsertTagsPopup(ec));
-        ec.registerPopupMenuConstructors(700, new InsertBidiPopup(ec));
+        ec.registerPopupMenuConstructors(800, new InsertBidiPopup(ec));
     }
 
     private EditorPopups() {

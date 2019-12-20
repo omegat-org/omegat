@@ -7,4 +7,9 @@ build
 .classpath
 bin
 .nb-gradle
-gradle.properties
+local.properties
+
+.idea
+
+# Docs
+.fop

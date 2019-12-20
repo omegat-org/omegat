@@ -5,7 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -155,6 +155,9 @@ public abstract class TestCore {
 
             public void showMessageDialog(String message) {
             }
+
+            public void showLockInsertMessage(String messageText, String toolTip) {
+            }
         });
         Core.setCurrentProject(new NotLoadedProject());
 
@@ -301,6 +304,15 @@ public abstract class TestCore {
 
             @Override
             public void setMarkGlossaryMatches(boolean markGlossaryMatches) {
+            }
+
+            @Override
+            public void setMarkParagraphDelimitations(boolean mark) {
+            }
+
+            @Override
+            public boolean isMarkParagraphDelimitations() {
+                return false;
             }
         };
         TestCoreInitializer.initEditor(new IEditor() {

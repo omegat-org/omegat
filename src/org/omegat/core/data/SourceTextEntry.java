@@ -6,8 +6,9 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009-2013 Alex Buloichik
                2015 Aaron Madlon-Kay
+               2019 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -58,6 +59,9 @@ public class SourceTextEntry {
 
     /** Translation from source files is fuzzy. */
     private boolean sourceTranslationFuzzy;
+    
+    /** Flag indicating if the segment is located at the start of a paragraph. */
+    private boolean paragraphStart;
 
     public enum DUPLICATE {
         /** There is no entries with the same source. */
@@ -103,11 +107,12 @@ public class SourceTextEntry {
      * @param shortcuts
      *            tags shortcuts
      */
-    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts) {
+    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts, boolean paragraphStart) {
         this.key = key;
         m_entryNum = entryNum;
         this.props = props;
         this.sourceTranslation = sourceTranslation;
+        this.paragraphStart = paragraphStart;
         if (protectedParts.isEmpty()) {
             this.protectedParts = EMPTY_PROTECTED_PARTS;
         } else {
@@ -122,6 +127,10 @@ public class SourceTextEntry {
         }
         this.duplicates = null;
         this.firstInstance = null;
+    }
+    
+    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts) {
+        this(key,  entryNum, props, sourceTranslation, protectedParts, true);
     }
 
     public EntryKey getKey() {
@@ -198,5 +207,9 @@ public class SourceTextEntry {
 
     public ProtectedPart[] getProtectedParts() {
         return protectedParts;
+    }
+
+    public boolean isParagraphStart() {
+        return paragraphStart;
     }
 }

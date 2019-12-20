@@ -5,7 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -121,6 +121,7 @@ public final class MemoryUtils {
                     Class<?> fc = f.getType();
                     result += getSimpleTypeSize(fc);
                     if (!fc.isPrimitive()) {
+                        @SuppressWarnings("deprecation")
                         boolean achanged = !f.isAccessible();
                         if (achanged) {
                             f.setAccessible(true);

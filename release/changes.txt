@@ -1,20 +1,311 @@
 ----------------------------------------------------------------------
- OmegaT 4.1.5 update 3
+ OmegaT 5.2.0
 ----------------------------------------------------------------------
-  0 Enhancement
+  0 Enhancements
+  2 Bug fixes
+  2 Localisation updates
+----------------------------------------------------------------------
+5.2.0 vs 5.1.0
+
+  Bug fixes:
+
+  - LanguageTool rule settings not persisted correctly
+  https://sourceforge.net/p/omegat/bugs/960/
+
+  - Parsing bug in Moodle filter when string contains ";"
+  https://sourceforge.net/p/omegat/bugs/962/
+
+  Localisation Updates:
+
+  - Finnish localisation added at 5.2.0 (UI, Instant Start, scripts, readme, documentation)
+  - Turkmen localisation added at 5.2.0 (UI)
+
+----------------------------------------------------------------------
+ OmegaT 5.1.0 (2019-11-04)
+----------------------------------------------------------------------
+  2 Enhancements
+  0 Bug fixes
+  7 Localisation updates
+----------------------------------------------------------------------
+5.1.0 vs 5.0.0
+
+  Implemented requests:
+
+  - Allow users to choose Apertium server
+  https://sourceforge.net/p/omegat/feature-requests/1466/
+
+  - Show glossary file name as tooltip in the glossary pane
+  https://sourceforge.net/p/omegat/feature-requests/1183/
+
+  Localisation Updates:
+
+  - Belarusian localisation updated to 5.1.0 (UI)
+  - Czech localisation updated to 5.1.0 (UI, documentation)
+  - Dutch localisation updated to 5.1.0 (UI)
+  - Italian localisation updated to 5.1.0 (UI, documentation)
+  - Russian localisation updated to 5.1.0 (UI)
+  - Turkish localisation updated to 5.1.0 (UI)
+  - Ukrainian localisation updated to 5.1.0 (UI)
+
+----------------------------------------------------------------------
+ OmegaT 5.0.0 (2019-10-01)
+----------------------------------------------------------------------
+  3 Enhancements
   1 Bug fix
+  9 Localisation updates
+----------------------------------------------------------------------
+5.0.0 vs 4.3.1
+
+  Implemented requests:
+
+  - Support BCP 47 language tags
+  https://sourceforge.net/p/omegat/feature-requests/238/
+
+  - Display fuzzy matches for all translations in the matching language
+  https://sourceforge.net/p/omegat/feature-requests/1452/
+
+  - Switch to a non-Oracle runtime: Bundled JRE is now AdoptOpenJDK
+  https://sourceforge.net/p/omegat/feature-requests/1455/
+
+  Bug fixes:
+
+  - Regex search-and-replace results are incorrect for some replacements
+  https://sourceforge.net/p/omegat/bugs/955/
+
+  Localisation Updates:
+
+  - Basque localisation updated to 5.0.0 (UI, Instant Start, scripts, readme)
+  - Brazilian Portuguese localisation updated to 5.0.0 (UI, scripts)
+  - Czech localisation updated to 5.0.0 (UI, scripts)
+  - Dutch localisation updated to 5.0.0 (UI)
+  - French localisation updated to 5.0.0 (UI)
+  - Italian localisation updated to 5.0.0 (UI, scripts, documentation)
+  - Russian localisation updated to 5.0.0 (UI)
+  - Simplified Chinese localisation updated to 5.0.0 (UI, scripts)
+  - Ukrainian localisation updated to 5.0.0 (UI, Instant Start, scripts, readme)
+
+----------------------------------------------------------------------
+ OmegaT 4.3.1 (2019-11-04)
+----------------------------------------------------------------------
+  1 Enhancement
+  2 Bug fixes
+  10 Localisation updates
+----------------------------------------------------------------------
+4.3.1 vs 4.3.0
+
+  Implemented requests:
+
+  - Notarize the Mac distribution
+  https://sourceforge.net/p/omegat/feature-requests/1454/
+
+  Bug fixes:
+
+  - First Windows installation screen not translated
+  https://sourceforge.net/p/omegat/bugs/957/
+
+  - OmegaT can't access projects in macOS 10.15 Catalina
+  https://sourceforge.net/p/omegat/bugs/959/
+
+  Localisation Updates:
+
+  - Basque localisation updated to 4.3.1 (UI, Instant Start, scripts, readme)
+  - Belarusian localisation updated to 4.3.1 (UI)
+  - Brazilian Portuguese localisation updated to 4.3.1 (UI, scripts)
+  - Czech localisation updated to 4.3.1 (UI, scripts, documentation)
+  - French localisation updated to 4.3.1 (UI)
+  - Italian localisation updated to 4.3.1 (UI, scripts, documentation)
+  - Russian localisation updated to 4.3.1 (UI)
+  - Simplified Chinese localisation updated to 4.3.1 (UI, scripts)
+  - Turkish localisation updated to 4.3.1 (UI)
+  - Ukrainian localisation updated to 4.3.1 (UI, Instant Start, scripts, readme)
+
+----------------------------------------------------------------------
+ OmegaT 4.3.0 (2019-07-09)
+----------------------------------------------------------------------
+  6 Enhancements
+  8 Bug fixes
+  5 Localisation updates
+----------------------------------------------------------------------
+4.3.0 vs 4.2.0
+
+  Implemented requests:
+
+  - Add custom color setting for search results
+  https://sourceforge.net/p/omegat/feature-requests/1065/
+
+  - Enable Context Menu key in all panes
+  https://sourceforge.net/p/omegat/feature-requests/1415/
+
+  - Allow overwriting text in editor
+  https://sourceforge.net/p/omegat/feature-requests/45/
+
+  - Add a persistent cursor lock indicator
+  https://sourceforge.net/p/omegat/feature-requests/1165/
+
+  Bug fixes:
+
+  - Previous installations not removed from Windows programs list
+  https://sourceforge.net/p/omegat/bugs/878/
+
+  - Wrong file name in the editor pane
+  https://sourceforge.net/p/omegat/bugs/909/
+
+  - Team project forgets being a team project
+  https://sourceforge.net/p/omegat/bugs/938/
+
+  - Team project TM is overwritten with old content
+  https://sourceforge.net/p/omegat/bugs/943/
+
+  - Exception on TMX merge when loading team project
+  https://sourceforge.net/p/omegat/bugs/946/
+
+  - View menu fails to open with a NullPointerException
+  https://sourceforge.net/p/omegat/bugs/947/
+
+  - Unexpected captured groups in replacements
+  https://sourceforge.net/p/omegat/bugs/951/
+
+  - OmegaT.exe will not launch after updating to 4.2.0
+  https://sourceforge.net/p/omegat/bugs/952/
+
+  Other changes:
+
+  - Added a shortcut to jump to the selected search result (Ctrl+J by default)
+
+  - Revised user manual
+
+  Localisation Updates:
+
+  - Brazilian Portuguese localisation updated to 4.3.0 (UI)
+  - Dutch localisation updated to 4.3.0 (UI, readme, documentation)
+  - French localisation updated to 4.3.0 (UI, scripts, readme)
+  - Russian localisation updated to 4.3.0 (UI)
+  - Simplified Chinese localisation updated to 4.3.0 (UI)
+
+----------------------------------------------------------------------
+ OmegaT 4.2.0 (2019-04-23)
+----------------------------------------------------------------------
+  5 Enhancements
+  1 Bug fix
+  8 Localisation updates
+----------------------------------------------------------------------
+4.2.0 vs 4.1.5 update 4
+
+  Implemented requests:
+
+  - Added Apache Ivy to allow fetching external libraries in Groovy scripts
+  https://sourceforge.net/p/omegat/feature-requests/1204/
+
+  - Independent colour setting for "enforced" TM matches
+  https://sourceforge.net/p/omegat/feature-requests/1395/
+
+  - Java 11 compatibility
+  https://sourceforge.net/p/omegat/feature-requests/1436/
+
+  Bug fixes:
+
+  - Plugins classes are only loaded once, even if multiple copies are
+  present in the plugins/ folder.
+
+  Other changes:
+
+  - When listing available dictionaries from the net, allow dictionaries with
+  only the language code in the name (e.g FR.dic)
+
+  - Added basic autocompletion to the scripting window (Ctrl+Enter to cycle
+  through suggestions)
+
+  Localisation Updates:
+
+  - Brazilian Portuguese localisation updated to 4.2.0 (UI, readme)
+  - Croatian localisation updated to 4.2.0 (UI, readme)
+  - Dutch localisation updated to 4.2.0 (UI, readme)
+  - French localisation updated to 4.2.0 (UI, readme)
+  - Italian localisation updated to 4.2.0 (UI, readme)
+  - Russian localisation updated to 4.2.0 (UI, scripts, readme)
+  - Simplified Chinese localisation updated to 4.2.0 (UI, scripts, readme)
+  - Turkish localisation updated to 4.2.0 (UI, scripts, readme)
+
+----------------------------------------------------------------------
+ OmegaT 4.1.5 update 4 (2019-03-04)
+----------------------------------------------------------------------
+  6 Enhancements
+  4 Bug fixes
   1 Localisation update
 ----------------------------------------------------------------------
+4.1.5 update 4 vs 4.1.5 update 3
+
+  Implemented requests:
+
+  - Search selected text in the dictionary
+  https://sourceforge.net/p/omegat/feature-requests/1401/
+
+  - Separate paragraphs in Editor
+  https://sourceforge.net/p/omegat/feature-requests/314/
+
+  - Show where paragraphs begin and end
+  https://sourceforge.net/p/omegat/feature-requests/431/
+
+  Other changes:
+
+  - Linux: Nimbus look and feel added to omegat.kaptn
+
+  - New Polish, Czech and Slovak segmentation rules
+
+  - When running scripts on the command line, mock bindings are added for
+"editor" and "glossary", and "console" output are written on System.out.
+Calls to console scripts are logged.
+
+
+  Bug fixes:
+
+  - The script auto_open_last_project was not working
+
+  - Error 404 when using IBM Watson
+  https://sourceforge.net/p/omegat/bugs/932/
+
+  - The user agent (used for instance for machine translation) was
+not defined correctly
+
+  - OmegaT ignores Word document with different file structure
+  https://sourceforge.net/p/omegat/bugs/935/
+
+  Localisation Updates:
+
+  - Italian localisation updated to 4.1.5 update 3 (documentation)
+
+----------------------------------------------------------------------
+ OmegaT 4.1.5 update 3 (2018-11-14)
+----------------------------------------------------------------------
+  2 Enhancements
+  2 Bug fixes
+  5 Localisation updates
+----------------------------------------------------------------------
 4.1.5 update 3 vs 4.1.5 update 2
+
+  Implemented requests:
+
+  - Add Moodle .php files filter
+  https://sourceforge.net/p/omegat/feature-requests/1407/
+
+  - Allow user to choose which MT suggestion to insert
+  https://sourceforge.net/p/omegat/feature-requests/1406/
 
   Bug fixes:
 
   - Team projects: some Subversion network errors were not detected
 as an offline condition
 
+  - Console mode crashes with a valid project
+  https://sourceforge.net/p/omegat/bugs/926/
+
   Localisation Updates:
 
-  - Russian localisation updated to 4.1.5 update 2 (UI)
+  - Dutch localisation updated to 4.1.5 update 3 (UI, readme)
+  - Interlingua localisation updated to 4.1.5 update 3 (UI, readme)
+  - Italian localisation updated to 4.1.5 update 3 (UI, scripts, readme, documentation)
+  - Russian localisation updated to 4.1.5 update 3 (UI, scripts, readme)
+  - Sardinian localisation updated to 4.1.5 update 3 (Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 4.1.5 update 2 (2018-09-19)
@@ -788,6 +1079,21 @@ could fail with duplicate numbers
   Localisation Updates:
 
   - Interlingua localisation updated to 4.0 (UI, documentation, readme, scripts)
+
+----------------------------------------------------------------------
+ OmegaT 3.6.0 update 11
+----------------------------------------------------------------------
+  0 Enhancement
+  1 Bug fix
+  0 Localisation update
+----------------------------------------------------------------------
+3.6.0 update 11 vs 3.6.0 update 10
+
+  Bug fixes:
+
+  - Translations not loaded when first 2 letters of 3-character language
+codes are the same
+  https://sourceforge.net/p/omegat/bugs/845/
 
 ----------------------------------------------------------------------
  OmegaT 3.6.0 update 10

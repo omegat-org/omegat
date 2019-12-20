@@ -7,8 +7,8 @@
  * for event driven automatically execution.
  *
  * @author  Yu Tang
- * @date    2014-09-16
- * @version 0.2
+ * @date    2018-12-05
+ * @version 0.3
  */
 
 import org.omegat.util.Log
@@ -37,7 +37,7 @@ void openLastProject() {
 JMenuItem getLastProjectMenuItem() {
     JMenuItem item = null
     try {
-        JMenu menu = (JMenu) mainWindow.mainMenu.projectRecentMenuItem
+        JMenu menu = (JMenu) mainWindow.mainMenu.projectOpenRecentMenuItem
         if (menu.itemCount > 0) {
             item = menu.getItem(0)
         }

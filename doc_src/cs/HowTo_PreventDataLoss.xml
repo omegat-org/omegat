@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.preventdataloss">
+  <title>Prevence ztráty dat</title>
+
+  <para><application>OmegaT</application> je robustní aplikace. Nicméně byste měli při používání programu <application>OmegaT</application> dbát na preventivní opatření proti ztrátě dat stejně, jako byste to činili s jakoukoliv jinou aplikací. Když překládáte své soubory, ukládá <application>OmegaT</application> celý váš postup do překladové paměti <literal>project_save.tmx</literal>, která se nachází v podadresáři projektu <literal>/omegat</literal>.</para>
+
+  <para>Do stejného adresáře zálohuje OmegaT překladovou paměť project_save.tmx.YEARMMDDHHNN.bak, a to při každém otevření nebo znovunačtení projektu. YEAR představuje 4-ciferně rok, MM je měsíc, DD den měsíce, HH a NN jsou hodiny a minuty, kdy byla uložena předcházející překladová paměť.</para>
+
+  <para>Pokud se domníváte, že jste přišli o svůj překlad, zkuste následující postup k obnovení projektu do takového stavu, kdy byl naposledy uložen, ve většině případů to bude v rámci 10 minut od posledních úprav:</para>
+
+  <orderedlist>
+    <listitem>
+      <para>zavřete projekt</para>
+    </listitem>
+
+    <listitem>
+      <para>přejmenujte aktuální soubor <filename>project_save.tmx </filename> na něco, co si budete pamatovat (např. <filename>project_save.tmx.nahradni</filename>)</para>
+    </listitem>
+
+    <listitem>
+      <para>označte zálohovou překladovou paměť, u které je nejpravděpodobnější, že obsahuje vámi hledaná data</para>
+    </listitem>
+
+    <listitem>
+      <para>přejmenujte ji na <literal>project_save.tmx</literal></para>
+    </listitem>
+
+    <listitem>
+      <para>otevřete projekt</para>
+    </listitem>
+  </orderedlist>
+
+  <para>Jak se vyhnout ztrátě importovaných dat:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Pravidelně si pořizujte kopii souboru /omegat/project_save.tmx na záložní médium, jako je CD nebo DVD.</para>
+    </listitem>
+
+    <listitem>
+      <para>Dokud se dobře neseznámíte s programem <application>OmegaT</application>, pravidelně vytvářejte přeložené soubory a kontrolujte, zda přeložený soubor obsahuje nejnovější verzi vašeho překladu.</para>
+    </listitem>
+
+    <listitem>
+      <para>Během práce na projektu buďte obzvláště opatrní při provádění jakýchkoliv změn v souborech v <literal>/source</literal>. Když změníte zdrojový soubor po té, co jste začali práci na překladu, může se stát, že <application>OmegaT</application> nebude sto nalézt již přeložený segment.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Do začátku využívejte tyto texty Nápovědy. Pokud narazíte na problémy, zeptejte se v <ulink url="https://omegat.org/support">Uživatelské skupině <application>OmegaT</application></ulink>. Neváhejte se zeptat v jazyce, který nejlépe ovládáte.</para>
+    </listitem>
+  </itemizedlist>
+</section>

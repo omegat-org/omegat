@@ -1,18 +1,20 @@
-﻿; -- OmegaT.iss --
+﻿; -- OmegaT.iss -*- mode: pascal; pascal-indent-level: 2; -*-
 
 [Setup]
-AppName=OmegaT @VERSION_NUMBER_SUBST@
-AppVerName=OmegaT version @VERSION_NUMBER_SUBST@
+AppName=OmegaT
+AppVersion=@VERSION_NUMBER_SUBST@
+AppId=org.omegat
 AppPublisher=OmegaT
-AppPublisherURL=http://www.omegat.org/
+AppPublisherURL=https://omegat.org/
 DefaultDirName={pf}\OmegaT
 DefaultGroupName=OmegaT
+DisableDirPage=no
 UninstallDisplayIcon={app}\OmegaT.exe
 AllowNoIcons=yes
 Compression=lzma
 SolidCompression=yes
 LicenseFile=OmegaT-license.txt
-OutputDir=@OUTPUT_DIR_SUBST@
+OutputDir=.
 OutputBaseFilename=@OUTPUT_BASENAME_SUBST@
 ArchitecturesAllowed=@ARCHITECTURE_SUBST@
 ArchitecturesInstallIn64BitMode=@ARCHITECTURE_SUBST@
@@ -64,7 +66,9 @@ Source: "join.html"; DestDir: "{app}"
 Source: "index.html"; DestDir: "{app}"
 Source: "changes.txt"; DestDir: "{app}"; Flags: isreadme;
 Source: "omegat.prefs"; DestDir: "{app}"; Flags: skipifsourcedoesntexist;
-@JRE_COMMENT_SUBST@Source: "@JRE_PATH_SUBST@\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
+#if DirExists("jre")
+  Source: "jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs
+#endif
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\plugins\"
@@ -74,7 +78,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Icons]
-Name: "{group}\OmegaT @VERSION_NUMBER_SUBST@"; Filename: "{app}\OmegaT.exe"; WorkingDir: "{app}"
+Name: "{group}\OmegaT"; Filename: "{app}\OmegaT.exe"; WorkingDir: "{app}"
 Name: "{commondesktop}\OmegaT"; Filename: "{app}\OmegaT.exe"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\OmegaT"; Filename: "{app}\OmegaT.exe"; Tasks: quicklaunchicon
 Name: "{group}\OmegaT Readme"; Filename: "{app}\readme.txt"
@@ -151,18 +155,18 @@ var
 procedure InitializeWizard;
 begin
   Page := CreateInputOptionPage(wpWelcome,
-    CustomMessage('OmTUseInstallLanguageTitle'), CustomMessage('OmTUseInstallLanguageSubTitle'), 
+    CustomMessage('OmTUseInstallLanguageTitle'), CustomMessage('OmTUseInstallLanguageSubTitle'),
     CustomMessage('OmTUseInstallLanguageText'), False, False);
   Page.Add(CustomMessage('OmTUseInstallLanguageOption'));
   Page.Values[0] := true;
 end;
 
 procedure SetUserLanguage;
-var 
+var
   InstallLanguage: String;
   InstallCountry: String;
   IniFileAnsi: AnsiString;
-  IniFileUnicode: String; 
+  IniFileUnicode: String;
 begin
   if Page.Values[0] then
   begin
@@ -177,4 +181,26 @@ begin
     IniFileAnsi := AnsiString(IniFileUnicode)
     SaveStringToFile(ExpandConstant('{app}\OmegaT.l4J.ini'), IniFileAnsi, false);
   end
+end;
+
+function DelTreeIfPresent(const FileName: String): Boolean;
+begin
+  if not DirExists(FileName) then
+    Result := True
+  else
+  begin
+    Log('Deleting existing ' + FileName);
+    Result := DelTree(FileName, true, true, true);
+    if Result then Log('Success') else Log('Failed');
+  end
+end;
+
+function PrepareToInstall(var NeedsRestart: Boolean): String;
+begin
+  if not DelTreeIfPresent(ExpandConstant('{app}/lib')) then
+    Result := 'Failed to remove existing ' + ExpandConstant('{app}/lib') + ' directory'
+  else if not  DelTreeIfPresent(ExpandConstant('{app}/jre')) then
+    Result := 'Failed to remove existing ' + ExpandConstant('{app}/jre') + ' directory'
+  else
+    Result := '';
 end;

@@ -5,7 +5,7 @@
 
  Copyright (C) 2014 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -45,4 +45,11 @@ public class TMXProp {
     public String getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        return builder.append(type).append("=").append(value).toString();
+    }
+
 }

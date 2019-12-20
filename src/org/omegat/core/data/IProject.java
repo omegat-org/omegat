@@ -8,7 +8,7 @@
                2014-2015 Alex Buloichik
                2017 Didier Briel
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -90,9 +90,9 @@ public interface IProject {
      *            Whether or not we should commit target files
      * @throws Exception
      */
-    void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) 
+    void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception;
-    
+
     /**
      * Tells whether a project is a team project
      * @return whether the project is a team project

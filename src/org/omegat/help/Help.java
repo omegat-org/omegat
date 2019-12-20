@@ -9,7 +9,7 @@
                2009 Alex Buloichik
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -68,8 +68,8 @@ public final class Help {
             : "https://omegat.sourceforge.io/manual-standard/";
 
     public static final String ONLINE_JAVADOC_URL = OStrings.IS_BETA
-            ? "https://omegat.ci.cloudbees.com/job/omegat-javadoc/javadoc/"
-            : "https://omegat.ci.cloudbees.com/job/omegat-stable-javadoc/javadoc/";
+            ? "https://omegat.sourceforge.io/javadoc-latest/"
+            : "https://omegat.sourceforge.io/javadoc-standard/";
 
     public static void showJavadoc() throws IOException {
         URI uri = URI.create(ONLINE_JAVADOC_URL);

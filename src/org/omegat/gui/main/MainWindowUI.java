@@ -10,7 +10,7 @@
                2014 Piotr Kulik
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -191,6 +191,7 @@ public final class MainWindowUI {
         mainWindow.statusLabel = new JLabel();
         mainWindow.progressLabel = new JLabel();
         mainWindow.lengthLabel = new JLabel();
+        mainWindow.lockInsertLabel = new JLabel();
 
         mainWindow.statusLabel.setFont(mainWindow.statusLabel.getFont().deriveFont(11f));
 
@@ -241,6 +242,7 @@ public final class MainWindowUI {
         mainWindow.lengthLabel.setFocusable(false);
 
         JPanel statusPanel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        statusPanel2.add(mainWindow.lockInsertLabel);
         statusPanel2.add(mainWindow.progressLabel);
         statusPanel2.add(mainWindow.lengthLabel);
 

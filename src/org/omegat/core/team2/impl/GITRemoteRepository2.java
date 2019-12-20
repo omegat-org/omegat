@@ -6,7 +6,7 @@
  Copyright (C) 2012 Alex Buloichik
                2014 Alex Buloichik, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -84,6 +84,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     protected static final String REMOTE_BRANCH = "origin/master";
     protected static final String REMOTE = "origin";
 
+    protected static final int TIMEOUT = 30; // seconds
+
     String repositoryURL;
     File localDirectory;
 
@@ -109,15 +111,17 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         if (gitDir.exists() && gitDir.isDirectory()) {
             // already cloned
             repository = Git.open(localDirectory).getRepository();
+            configRepo();
             try (Git git = new Git(repository)) {
                 git.submoduleInit().call();
-                git.submoduleUpdate().call();
+                git.submoduleUpdate().setTimeout(TIMEOUT).call();
             }
         } else {
             Log.logInfoRB("GIT_START", "clone");
             CloneCommand c = Git.cloneRepository();
             c.setURI(repositoryURL);
             c.setDirectory(localDirectory);
+            c.setTimeout(TIMEOUT);
             try {
                 c.call();
             } catch (InvalidRemoteException e) {
@@ -137,7 +141,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             repository = Git.open(localDirectory).getRepository();
             try (Git git = new Git(repository)) {
                 git.submoduleInit().call();
-                git.submoduleUpdate().call();
+                git.submoduleUpdate().setTimeout(TIMEOUT).call();
             }
             configRepo();
             Log.logInfoRB("GIT_FINISH", "clone");
@@ -197,7 +201,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             if (version == null) {
                 version = REMOTE_BRANCH;
                 // TODO fetch
-                git.fetch().setRemote(REMOTE).call();
+                git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }
             Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
             git.reset().setMode(ResetType.HARD).call();
@@ -257,7 +261,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         Log.logInfoRB("GIT_START", "upload");
         try (Git git = new Git(repository)) {
             RevCommit commit = git.commit().setMessage(comment).call();
-            Iterable<PushResult> results = git.push().setRemote(REMOTE).add(LOCAL_BRANCH)
+            Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE).add(LOCAL_BRANCH)
                     .call();
             List<Status> statuses = StreamSupport.stream(results.spliterator(), false)
                     .flatMap(r -> r.getRemoteUpdates().stream()).map(RemoteRefUpdate::getStatus)
@@ -331,7 +335,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     public static boolean isGitRepository(String url) {
         // Heuristics to save some waiting time
         try {
-            Collection<Ref> result = new LsRemoteCommand(null).setRemote(url).call();
+            Collection<Ref> result = new LsRemoteCommand(null).setRemote(url).setTimeout(TIMEOUT).call();
             return !result.isEmpty();
         } catch (TransportException ex) {
             String message = ex.getMessage();

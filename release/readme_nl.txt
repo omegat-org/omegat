@@ -73,7 +73,7 @@ het gebruiken van Java Web Start.
 
 Download voor dit doel het volgende bestand en voer het uit:
 
-   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
 Het zal de juiste omgeving voor uw computer installeren en de toepassing
 zelf bij de eerste keer dat het wordt uitgevoerd. Latere aanroepen behoeven niet online te worden gedaan.
@@ -150,15 +150,15 @@ Bijdragen
 
 OmegaT is van origine het werk van Keith Godfrey.
 
-Didier Briel is de projectmanager voor OmegaT.
+Aaron Madlon-Kay is de projectmanager voor OmegaT.
 
 Huidige team:
 (alfabetische volgorde)
 
   Vincent Bidaux (documentatie-manager)
-  Didier Briel (OmegaT projectmanager, Twitter-manager voor de gemeenschap)
+  Marco Cevoli (community manager voor Telegram)
+  Jean-Christophe Helary (community manager voor Twitter) 
   Kos Ivantsov (localisatiemanager)
-  Aaron Madlon-Kay (integratiemanager)
   Concepción Martin (Facebook-manager voor de gemeenschap)
   Briac Pilpré (webmaster)
   Lucie Vecerova (Facebook-manager voor de gemeenschap)
@@ -168,7 +168,9 @@ Bijdragen aan de code zijn gedocumenteerd in /docs/contributors.txt.
 Eerdere bijdragen van:
 (alfabetische volgorde)
 
-  Alex Buloichik (lead developer)
+  Anthony Baldwin (localisatiemanager)
+  Didier Briel (projectmanager)
+  Alex Buloichik (hoofdontwikkelaar)
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (eigenaar ondersteuningsgroep, localisatiemanager)
@@ -193,7 +195,7 @@ De meest recente informatie over OmegaT is te vinden op:
 
 Gebruikersondersteuning op de Yahoo! gebruikersgroep (meertalig), waar zonder abonnement de archieven kunnen worden doorzocht:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Verzoeken tot verbeteringen (in het Engels) op de SourceForge-website:
 

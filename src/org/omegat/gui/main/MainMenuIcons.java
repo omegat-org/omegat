@@ -5,7 +5,7 @@
 
  Copyright (C) 2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -75,13 +75,13 @@ public final class MainMenuIcons {
 
     private static final Map<?, ?> DEFAULT_HINTS;
     static {
-        Map<?, ?> defaultHints = new RenderingHints(null);
+        Map<?, ?> defaultHints = null;
         try {
             defaultHints = (Map<?, ?>) Toolkit.getDefaultToolkit().getDesktopProperty("awt.font.desktophints");
         } catch (Throwable e) {
             Log.log(e);
         }
-        DEFAULT_HINTS = defaultHints;
+        DEFAULT_HINTS = defaultHints != null ? defaultHints : new RenderingHints(null);
     }
 
     /**

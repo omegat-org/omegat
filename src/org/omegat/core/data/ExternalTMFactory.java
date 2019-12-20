@@ -5,7 +5,7 @@
 
  Copyright (C) 2017 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -66,6 +66,7 @@ public final class ExternalTMFactory {
                     .setExtTmxLevel2(Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2))
                     .setUseSlash(Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH))
                     .setDoSegmenting(props.isSentenceSegmentingEnabled())
+                    .setKeepForeignMatches(Preferences.isPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH))
                     .load(props.getSourceLanguage(), props.getTargetLanguage());
         } else if (BifileLoader.isSupported(file)) {
             return new BifileLoader(file).setRemoveTags(props.isRemoveTags())
@@ -78,6 +79,10 @@ public final class ExternalTMFactory {
     }
 
     public static final class TMXLoader {
+        public static final String PROP_SOURCE_LANGUAGE = "sourceLanguage";
+        public static final String PROP_TARGET_LANGUAGE = "targetLanguage";
+        public static final String PROP_FOREIGN_MATCH = "foreignMatch";
+
         public static boolean isSupported(File file) {
             String name = file.getName().toLowerCase(Locale.ENGLISH);
             return name.endsWith(OConsts.TMX_EXTENSION) || name.endsWith(OConsts.TMX_GZ_EXTENSION)
@@ -88,6 +93,7 @@ public final class ExternalTMFactory {
         private boolean extTmxLevel2;
         private boolean useSlash;
         private boolean doSegmenting;
+        private boolean keepForeignMatches;
 
         public TMXLoader(File file) {
             this.file = file;
@@ -108,6 +114,11 @@ public final class ExternalTMFactory {
             return this;
         }
 
+        public TMXLoader setKeepForeignMatches(boolean keepForeignMatches) {
+            this.keepForeignMatches = keepForeignMatches;
+            return this;
+        }
+
         public ExternalTMX load(Language sourceLang, Language targetLang) throws Exception {
             return new ExternalTMX(file.getName(), loadImpl(sourceLang, targetLang));
         }
@@ -118,26 +129,30 @@ public final class ExternalTMFactory {
             TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
                 public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                         TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+
                     if (tuvSource == null) {
                         return false;
                     }
 
-                    if (tuvTarget != null) {
-                        // add only target Tuv
-                        addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype);
-                    } else {
-                        // add all non-source Tuv
-                        for (int i = 0; i < tu.tuvs.size(); i++) {
-                            if (tu.tuvs.get(i) != tuvSource) {
-                                addTuv(tu, tuvSource, tu.tuvs.get(i), isParagraphSegtype);
-                            }
+                    // Keep all the Tuvs matching at least the target language
+                    for (TMXReader2.ParsedTuv tuvTarget2 : tu.tuvs) {
+                        // Skip entries from source language
+                        if (sourceLang.isSameLanguage(tuvTarget2.lang)) {
+                            continue;
                         }
+                        // Matching entries for foreign languages are included with a penalty
+                        boolean isForeign = !targetLang.isSameLanguage(tuvTarget2.lang);
+                        if (isForeign && !keepForeignMatches) {
+                            continue;
+                        }
+                        addTuv(tu, tuvSource, tuvTarget2, isParagraphSegtype, isForeign);
                     }
+
                     return true;
                 }
 
                 private void addTuv(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                        TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                        TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype, boolean nonTarget) {
                     String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
                             tu.creationid);
                     String creator = StringUtil.nvl(tuvTarget.creationid, tu.creationid);
@@ -159,7 +174,13 @@ public final class ExternalTMFactory {
                         te.creator = creator;
                         te.creationDate = created;
                         te.note = tu.note;
-                        te.otherProperties = tu.props;
+                        te.otherProperties = new ArrayList<TMXProp>(tu.props);
+                        te.otherProperties.add(new TMXProp(PROP_SOURCE_LANGUAGE, tuvSource.lang));
+                        te.otherProperties.add(new TMXProp(PROP_TARGET_LANGUAGE, tuvTarget.lang));
+                        if (nonTarget) {
+                            te.otherProperties.add(new TMXProp(PROP_FOREIGN_MATCH, "true"));
+                        }
+
                         entries.add(te);
                     }
                 }

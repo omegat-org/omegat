@@ -18,7 +18,7 @@ Die aktuellste Info über OmegaT befindet sich hier:
       http://www.omegat.org/
 
 Unterstützung der Benutzer (mehrsprachig), mit Archiven, die auch ohne Abonnement zugänglich sind:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Anfragen für Verbesserungen (Englisch), auf der SourceForge Seite:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -289,7 +289,7 @@ Jeder gute Fehler-Bericht braucht genau drei Dinge.
 Sie können Kopien von Dateien, Teile des Logs, screen shots, und irgendwas, das den Entwicklern beim Finden und Ausbessern des Fehlers behilflich ist, hinzufügen.
 
 Um die Archive der Benutzergruppe zu durchsuchen, gehen Sie zu:
-     http://groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Um die Fehler-Berichtsseite zu durchsuchen und notfalls einen neuen Fehler-Bericht einzureichen, gehen Sie zu:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347

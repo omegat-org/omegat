@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>Nástroje</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Zkontrolovat problém&amp;y...</term>
+
+      <listitem>
+        <para>Přístroj pro zajištění kvality, který provádí všechny automatické kontroly v jednom kroku a zobrazí výsledky v okně.</para>
+
+        <para>Lze detekovat čtyři typy problémů:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>chybějící nebo chybně umístěné tagy, včetně <link linkend="dialogs.preferences.tagprocessing">vlastních tagů</link>. Možnost <guilabel>Problémy s tagy</guilabel> je vybrána vždy.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Problémy s pravopisem</guilabel> (volitelně). Funguje jen tehdy, když je instalován slovník pro kontrolu pravopisu.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Problémy s terminologií</guilabel> (volitelně).</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Problémy s LanguageTools</guilabel> (volitelně).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Okno s výsledky je zobrazeno formou tabulky ve které:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>dvojté kliknutí na řádek aktivuje odpovídající segment v okně Editoru.</para>
+          </listitem>
+
+          <listitem>
+            <para>kliknutí na hlavičku sloupce změní pořadí zobrazení pro daný sloupec,</para>
+          </listitem>
+
+          <listitem>
+            <para>výběr nebo pohyb myší přes řádek zobrazí ikonu vyskakovací nabídky v posledním sloupci obsahující akci pro opravu nebo ignorování dané chyby.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zkontrolovat problémy v aktuálním dokumentu</term>
+
+      <listitem>
+        <para>Jak bylo popsáno výše, ale jen platí jen pro dokument, který je aktuálně zobrazen v okně Editoru.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistika</term>
+
+      <listitem>
+        <para>Otevře nové okno a zobrazí statistiku projektu, tj. celkové hodnoty projektu a hodnoty pro každý soubor v projektu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistika shody</term>
+
+      <listitem>
+        <para>Zobrazí Statistiku shody pro projekt: počty opakování, přesné shody, shody přibližných překladů a nulové shody pro segmenty, slova a znaky.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistika shody podle souboru</term>
+
+      <listitem>
+        <para>Zobrazí Statistiku shody pro každý soubor projektu: počet opakování, přesné shody, přibližné překlady a segmenty bez shody, a to pro segmenty, slova a znaky.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Spárovat soubory...</term>
+
+      <listitem>
+        <para>Vyberte ty dva soubory, které chcete alignovat / zarovnat (zdrojový soubor a jeho překlad) a klikněte na OK, tím se otevře okno <link linkend="windows.aligner"><guilabel>Párování</guilabel> </link>.</para>
+
+        <para>Podporované formáty souborů jsou uvedeny v <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Vlastnosti</guimenuitem> <guimenuitem>Filtry souborů</guimenuitem> </menuchoice>.</para>
+
+        <para>Soubory zdroje a překladu mohou mít různé formáty (například soubor <filename>.docx</filename> lze párovat se souborem <filename>.pdf</filename>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Skriptování...</term>
+
+      <listitem>
+        <para>Otevře dialogové okno <link linkend="windows.scripts"><guilabel>Skriptování</guilabel> </link>, kde lze nastavit umístění skriptů a kde můžete skripty zapisovat, spouštět a přiřazovat jim zkratky.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - (název skriptu)</term>
+
+      <listitem>
+        <para>Spouští skripty, které byly asociovány s číslem.</para>
+
+        <para>Jak asociovat skript s číslem:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Otevřete okno Skriptování</para>
+          </listitem>
+
+          <listitem>
+            <para>Vyberte požadovaný skript ze seznamu vlevo</para>
+          </listitem>
+
+          <listitem>
+            <para>Ve spodní části okna klikněte pravým tlačítkem myši na volné číslo a vyberte možnost <guilabel>Přidat skript</guilabel>.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(extermí příkazy hledání)</term>
+
+      <listitem>
+        <para>Pokud byly definovány příkazy k vykonávání externího hledání v <link linkend="dialogs.preferences.externalsearch">Předvolbách</link>, pak jsou tyto příkazy zobrazeny a přístupny na tomto místě.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

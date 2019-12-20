@@ -7,7 +7,7 @@
                2008 Alex Buloichik
                2013 Didier Briel
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -108,11 +108,11 @@ public final class Log {
                 String word = hn.trim();
                 try {
                     Class<?> clz = Log.class.getClassLoader().loadClass(word);
-                    Handler h = (Handler) clz.newInstance();
+                    Handler h = (Handler) clz.getDeclaredConstructor().newInstance();
                     String fname = props.getProperty(word + ".formatter");
                     if (fname != null) {
                         Class<?> clzF = Log.class.getClassLoader().loadClass(fname.trim());
-                        h.setFormatter((Formatter) clzF.newInstance());
+                        h.setFormatter((Formatter) clzF.getDeclaredConstructor().newInstance());
                     }
                     String level = props.getProperty(word + ".level");
                     if (level != null) {

@@ -9,7 +9,7 @@
                2014 Alex Buloichik, Aaron Madlon-Kay
                2015-2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -110,11 +110,15 @@ public final class FileUtil {
 
     /**
      * Create file backup with datetime suffix.
+     * 
+     * @return Backup file
      */
-    public static void backupFile(File f) throws IOException {
-        long fileMillis = f.lastModified();
+    public static File backupFile(File original) throws IOException {
+        long fileMillis = original.lastModified();
         String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
-        FileUtils.copyFile(f, new File(f.getPath() + "." + str + OConsts.BACKUP_EXTENSION));
+        File backup = new File(original.getPath() + "." + str + OConsts.BACKUP_EXTENSION);
+        FileUtils.copyFile(original, backup);
+        return backup;
     }
 
     /**
@@ -147,12 +151,13 @@ public final class FileUtil {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        String eol;
+        String eol = null;
         if (outFile.exists()) {
-            // file exist - read EOL from file
+            // file exists - read EOL from file
             eol = getEOL(outFile, charset);
-        } else {
-            // file not exist - use system-dependent
+        }
+        if (eol == null) {
+            // file does not exist or EOL not detected - use system-dependent value
             eol = System.lineSeparator();
         }
         try (BufferedReader in = Files.newBufferedReader(inFile.toPath(), charset)) {
@@ -167,6 +172,16 @@ public final class FileUtil {
         }
     }
 
+    /**
+     * Read a file to determine its end-of-line character(s).
+     * 
+     * If neither '\n' nor '\r' are present in the file then it will return null.
+     * 
+     * @param file
+     * @param charset
+     * @return The EOL character(s) as a string, or null if not detectable
+     * @throws IOException
+     */
     public static String getEOL(File file, Charset charset) throws IOException {
         String r = null;
         try (BufferedReader in = Files.newBufferedReader(file.toPath(), charset)) {

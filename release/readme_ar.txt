@@ -18,7 +18,7 @@ This translation is the work of [Faycal Alami], copyright© [2008].
       									     http://www.omegat.org/
 
 دعم المستخدم، يمكنكم البحث عما تودون بمجموعة مستخدمي ياهو المتعددة اللغات بدون الحاجة إلى التسجيل
-                                                              http://groups.yahoo.com/group/OmegaT/
+                                                              https://omegat.org/support
 
  طلبات التحسين (باللغة الانجليزية)، على موقع SourceForge:  
 ‏http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -215,7 +215,7 @@ Submenu.
 يمكنك إضافة نسخ من الملفات، مقاطع من السجل، لقطات من الشاشة أو أي شيء تظن أنه سوف يساعد المبرمجين في البحث عن الخلل و إصلاحه.
 
 لتصفح مستندات مستخدمي المجموعة، اذهب إلى:
-‏http://groups.yahoo.com/group/OmegaT/    
+‏https://omegat.org/support    
 
 لزيارة صفحة العيوب البرمجية و التبليغ بخلل برمجي إذا اقتضت الضرورة، اذهب إلى:
 ‏http://sourceforge.net/tracker/?group_id=68187&atid=520347

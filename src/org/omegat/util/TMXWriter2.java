@@ -9,7 +9,7 @@
                2012 Alex Buloichik, Didier Briel
                2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -58,6 +58,8 @@ import org.omegat.core.data.TMXEntry;
  */
 public class TMXWriter2 {
     static String lineSeparator = System.lineSeparator();
+
+    public static final String PROP_ID = "id";
 
     private static final XMLOutputFactory FACTORY;
 
@@ -171,6 +173,21 @@ public class TMXWriter2 {
 
         xml.writeCharacters("    ");
         xml.writeStartElement("tu");
+        // Output ID as tuid for level 2 only for now, because internally OmegaT
+        // uses <note type="id"> and tuid is intended for external
+        // interoperability
+        if (levelTwo && propValues != null) {
+            for (int i = 0; i < propValues.size(); i += 2) {
+                String key = propValues.get(i);
+                if (key.equals(PROP_ID)) {
+                    String idValue = propValues.get(i + 1);
+                    if (idValue != null) {
+                        xml.writeAttribute("tuid", StringUtil.removeXMLInvalidChars(idValue));
+                    }
+                    break;
+                }
+            }
+        }
         xml.writeCharacters(lineSeparator);
 
         // add properties

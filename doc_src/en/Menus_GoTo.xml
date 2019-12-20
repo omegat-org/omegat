@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Go To</title>
+
+  <para>This menu displays entries only when a project is open.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Next Untranslated Segment</term>
+
+      <listitem>
+        <para>Moves to the next segment that has no equivalent in the
+        translation memory.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Next Translated Segment</term>
+
+      <listitem>
+        <para>Moves to the next already translated segment, ignoring
+        untranslated segments.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Next Segment</term>
+
+      <listitem>
+        <para>Moves to the next segment. If the current segment is the last
+        segment in a file, it moves to the first segment of the next
+        file.</para>
+
+        <para>Note: <keycap>Enter</keycap> is an alternate shortcut if <link linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
+        Advance</link> option is not selected.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Previous Segment</term>
+
+      <listitem>
+        <para>Moves to the previous segment. If the current segment is the
+        first one in a file, it moves to the last segment of the previous
+        file.</para>
+
+        <para>Note: <keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>Enter</keycap>
+          </keycombo> is an alternate shortcut if <link linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
+        Advance</link> option is not selected.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segment number...</term>
+
+      <listitem>
+        <para>The segment is opened when either its segment call-out or
+        segment number is entered.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Next Note</term>
+
+      <listitem>
+        <para>The next segment with a note attached to it, will open.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Previous Note</term>
+
+      <listitem>
+        <para>The previous segment with a note will open.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Source of Selected Match</term>
+
+      <listitem>
+        <para>Moves to the segment that does correspond to the current
+        selected match in the <guilabel>Fuzzy matches</guilabel> pane.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Forward in history...</term>
+
+      <listitem>
+        <para><application>OmegaT</application> remembers the segments
+        executed. With this command you can step forward to the segment, you
+        have previously left by the <guimenuitem>Back in
+        history</guimenuitem>... command.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Back in history...</term>
+
+      <listitem>
+        <para>With this command you can move backward one segment at a time,
+        to return later to the current segment using <guimenuitem>Forward in
+        history...</guimenuitem>command below.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

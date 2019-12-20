@@ -5,7 +5,7 @@
 
  Copyright (C) 2013 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -25,6 +25,7 @@
 
 package org.omegat.gui.editor;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.text.AbstractDocument;
+import javax.swing.undo.UndoableEdit;
 
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -148,7 +150,7 @@ public class TranslationUndoManager implements UndoableEditListener {
         if (inProgress || editor.getOmDocument().trustedChangesInProgress) {
             return;
         }
-        AbstractDocument.DefaultDocumentEvent event = (AbstractDocument.DefaultDocumentEvent) e.getEdit();
+        AbstractDocument.DefaultDocumentEvent event = extractEvent(e.getEdit());
         if (event.getType() == DocumentEvent.EventType.CHANGE) {
             // attributes changed
             return;
@@ -159,6 +161,30 @@ public class TranslationUndoManager implements UndoableEditListener {
             caretPos += event.getLength();
         }
         remember(caretPos);
+    }
+
+    private AbstractDocument.DefaultDocumentEvent extractEvent(UndoableEdit edit) {
+        if (edit instanceof AbstractDocument.DefaultDocumentEvent) {
+            // Java 8
+            return (AbstractDocument.DefaultDocumentEvent) edit;
+        } else if ("javax.swing.text.AbstractDocument.DefaultDocumentEventUndoableWrapper"
+                .equals(edit.getClass().getCanonicalName())) {
+            // Java 11
+            try {
+                return extractEventFromWrapper(edit);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to extract DefaultDocumentEvent from UndoableEdit", e);
+            }
+        } else {
+            throw new RuntimeException("Failed to extract DefaultDocumentEvent from UndoableEdit; unknown class: "
+                    + edit.getClass().getName());
+        }
+    }
+
+    private AbstractDocument.DefaultDocumentEvent extractEventFromWrapper(UndoableEdit edit) throws Exception {
+        Field ddeField = edit.getClass().getDeclaredField("dde");
+        ddeField.setAccessible(true);
+        return (AbstractDocument.DefaultDocumentEvent) ddeField.get(edit);
     }
 
     protected static final class Change {

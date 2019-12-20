@@ -7,7 +7,7 @@
                2013 Aaron Madlon-Kay
                2016 Piotr Kulik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 

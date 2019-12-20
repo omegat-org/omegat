@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>Extra</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Controleren op problemen…</term>
+
+      <listitem>
+        <para>Gereedschap voor kwaliteitsbeheer dat alle automatische controles in één gang uitvoert en de resultaten in een venster weergeeft.</para>
+
+        <para>Vier typen problemen worden gedetecteerd:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>ontbrekende of misplaatste tags, inclusief <link linkend="dialogs.preferences.tagprocessing">aangepaste tags</link>. De optie <guilabel>Problemen met tags</guilabel> is altijd geselecteerd.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Spellingsproblemen</guilabel> (optioneel). Werkt alleen als een woordenboek voor spelling is geïnstalleerd.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Problemen met  terminologie</guilabel> (optioneel).</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Problemen voor LanguageTool</guilabel> (optioneel).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Het venster met de resultaten is opgemaakt in de vorm van een tabel waarin:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>dubbelklikken op een rij het overeenkomende segment in het venster Bewerken activeert.</para>
+          </listitem>
+
+          <listitem>
+            <para>klikken op een kolomkop de sorteervolgorde voor de kolom wijzigt,</para>
+          </listitem>
+
+          <listitem>
+            <para>selecteren of de muis over een rij verplaatsen geeft een pictogram voor een pop-up menu weer in de laatste kolom die acties bevat voor corrigeren of negeren van de fout.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Huidige document controleren op problemen</term>
+
+      <listitem>
+        <para>Als boven, maar alleen voor het document dat momenteel wordt weergegeven in het venster Bewerken.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistieken</term>
+
+      <listitem>
+        <para>Opent een nieuw venster en geeft de statistieken voor het project weer, d.i. de totalen voor het project en de totalen voor elk bestand in het project.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistieken voor overeenkomsten</term>
+
+      <listitem>
+        <para>Geeft de Statistieken voor overeenkomsten weer voor het project: het aantal herhalingen, exacte overeenkomsten, overeenkomsten en geen overeenkomsten, voor segmenten, woorden en tekens.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistieken voor overeenkomsten per bestand</term>
+
+      <listitem>
+        <para>Geeft de Statistieken voor overeenkomsten weer voor elk bestand van het project: het aantal herhalingen, exacte overeenkomsten, overeenkomsten en geen overeenkomsten, voor segmenten, woorden en tekens.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Bestanden uitlijnen…</term>
+
+      <listitem>
+        <para>Selecteer de twee bestanden die moeten worden uitgelijnd (het bronbestand en de vertaling ervan) en klik op OK om het <link linkend="windows.aligner">venster <guilabel>Uitlijnen</guilabel></link> te openen.</para>
+
+        <para>De ondersteunde bestandsindelingen zijn die welke zijn vermeld in <menuchoice> <guimenuitem>Project</guimenuitem><guimenuitem>eigenschappen</guimenuitem> <guimenuitem>Bestandsfilters</guimenuitem> </menuchoice>.</para>
+
+        <para>De bron- en doelbestanden mogen verschillende indelingen hebben (bijvoorbeeld: een bestand <filename>.docx</filename> kan worden uitgelijnd met een bestand <filename>.pdf</filename>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Scripten…</term>
+
+      <listitem>
+        <para>Opent het  <link linkend="windows.scripts"> venster <guilabel>Scripten</guilabel></link>, waar de locatie van scripts kan worden ingesteld, en waar scripts kunnen worden geschreven, uitgevoerd en worden geassocieerd met een sneltoets.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - (scriptnaam)</term>
+
+      <listitem>
+        <para>Start scripts die zijn geassocieerd met een nummer.</para>
+
+        <para>Een script associëren met een nummer:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Open het venster Scripten</para>
+          </listitem>
+
+          <listitem>
+            <para>Selecteer het script dat u wilt uit de lijst aan de linkerkant</para>
+          </listitem>
+
+          <listitem>
+            <para>Klik met rechts, aan de onderzijde van het venster, op een vrij nummer en selecteer <guilabel>Script toevoegen</guilabel>.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(externe opdrachten voor zoeken)</term>
+
+      <listitem>
+        <para>Als er in de <link linkend="dialogs.preferences.externalsearch">Voorkeuren</link> opdrachten zijn gedefinieerd om externe zoekacties uit te voeren, dan zijn zij hier vermeld en zijn ze hier toegankelijk.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

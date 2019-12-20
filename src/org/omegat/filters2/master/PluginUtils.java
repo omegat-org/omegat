@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2010 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -136,7 +136,7 @@ public final class PluginUtils {
         // run base plugins
         for (Class<?> pl : BASE_PLUGIN_CLASSES) {
             try {
-                pl.newInstance();
+                pl.getDeclaredConstructor().newInstance();
             } catch (Exception ex) {
                 Log.log(ex);
             }
@@ -202,9 +202,9 @@ public final class PluginUtils {
             String[] languages = ann.languages();
             try {
                 if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
-                    languages = ((ITokenizer) c.newInstance()).getSupportedLanguages();
+                    languages = ((ITokenizer) c.getDeclaredConstructor().newInstance()).getSupportedLanguages();
                 }
-            } catch (IllegalAccessException | InstantiationException ex) {
+            } catch (Exception ex) {
                 Log.log(ex);
             }
             for (String s : languages) {
@@ -288,6 +288,10 @@ public final class PluginUtils {
     protected static void loadClass(String clazz, ClassLoader classLoader) {
         try {
             Class<?> c = classLoader.loadClass(clazz);
+            if (LOADED_PLUGINS.contains(c)) {
+                Log.logInfoRB("PLUGIN_SKIP_PREVIOUSLY_LOADED", clazz);
+                return;
+            }
             Method load = c.getMethod("loadPlugins");
             load.invoke(c);
             LOADED_PLUGINS.add(c);

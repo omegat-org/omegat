@@ -1,0 +1,130 @@
+ext {
+    loadProperties = { propFile ->
+        def config = new Properties()
+        if (propFile.canRead()) {
+            propFile.withInputStream { config.load(it) }
+        }
+        config
+    }
+
+    execGetOutput = { cmd ->
+        StringBuilder output = new StringBuilder()
+        cmd.execute().waitForProcessOutput(output, null)
+        output.toString().trim()
+    }
+
+    getUpdateSuffix = { update ->
+        if (!update || update == '0') {
+            return ''
+        }
+        if (update.length() == 1) {
+            return "_0${update}"
+        }
+        "_${update}"
+    }
+
+    detectRevision = { ->
+        /*
+         Set the revision number included in version strings. The value is
+         chosen from the first valid value in:
+         0. Provided as the Gradle property 'repo.revision'
+         1. src/org/omegat/Version.properties (only if not "dev", i.e. this is a
+            source package not under VCS)
+         2. This svn checkout's revision
+         3. This git clone's SHA-1
+         4. If none of the above, the value "unknown"
+         */
+        def provided = findProperty('repoRevision') ?: ''
+        def git = file('.git').directory ? execGetOutput('git rev-parse --short HEAD') : ''
+        def svn = file('.svn').directory ? execGetOutput('svnversion') : ''
+        [provided, omtVersion.revision, git, svn, 'unknown'].find {
+            it != 'dev' && !it.empty
+        }
+    }
+
+    repoHasChanges = {
+        if (file('.git').directory) {
+            !execGetOutput('git status -s').empty
+        } else if (file('.svn').directory) {
+            !execGetOutput('svn status -q').empty
+        } else {
+            false
+        }
+    }
+
+    gitBranch = {
+        execGetOutput('git name-rev --name-only HEAD')
+    }
+
+    gitRemote = {
+        def branch = gitBranch()
+        def remote = execGetOutput("git config branch.${branch}.remote")
+        if (!remote.empty) {
+            remote
+        } else {
+            remote = execGetOutput("git config branch.${branch}.pushRemote")
+        }
+        if (!remote.empty) {
+            remote
+        } else {
+            logger.warning("Could not detect git remote name. Assuming 'origin'.")
+            'origin'
+        }
+    }
+
+    gitBranchSplitPoint = {
+        def remote = gitRemote()
+        if (!remote.empty) {
+            execGetOutput("git merge-base HEAD $remote/master")
+        } else {
+            ''
+        }
+    }
+
+    gitModifiedFiles = {
+        def splitPoint = gitBranchSplitPoint()
+        if (!splitPoint.empty) {
+            execGetOutput("git diff --name-only HEAD $splitPoint").tokenize()
+        } else {
+            []
+        }
+    }
+
+    exePresent = { exe ->
+        ["where $exe", "which $exe"].any {
+            try {
+                def findExe = it.execute()
+                findExe.waitForProcessOutput()
+                return findExe.exitValue() == 0
+            } catch (any) {
+                return false
+            }
+        }
+    }
+
+    conditions = { List... items ->
+        items.each { val, str ->
+            if (!val) {
+                logger.warn(str)
+            }
+        }
+        items.every { it[0] }
+    }
+
+    condition = { val, str ->
+        conditions([val, str])
+    }
+
+    replaceRelativePathSegment = { FileCopyDetails deets, pattern, replacement ->
+        def segs = deets.relativePath.segments.collect {
+            it =~ pattern ? replacement : it
+        }
+        deets.relativePath = new RelativePath(!deets.directory, segs as String[])
+    }
+
+    camelCase = { str ->
+        str.tokenize('-_ ').withIndex().collect { tok, i ->
+            i == 0 ? tok : tok.capitalize()
+        }.join()
+    }
+}

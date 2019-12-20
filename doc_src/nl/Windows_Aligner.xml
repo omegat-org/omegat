@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title>Uitlijnen</title>
+
+  <para>Uitlijnen omvat het maken van een tweetalig vertaalgeheugen vanuit ééntalige documenten die al zijn vertaald.</para>
+
+  <para>Selecteer <menuchoice> <guimenuitem>Extra</guimenuitem> <guimenuitem>Bestanden uitlijnen…</guimenuitem> </menuchoice> om toegang te krijgen tot dit venster.</para>
+
+  <section>
+    <title>Stap 1: Parameters voor uitlijnen aanpassen</title>
+
+    <para>Probeer de parameters te wijzigen als het uitlijnen eruit ziet alsof het kan worden verbeterd. In de meeste gevallen geldt: hoe lager de <guilabel>Gemiddelde score</guilabel> is, hoe beter de uitlijning zal zijn.</para>
+
+    <para>In modus <guilabel>Heap-gewijze</guilabel> worden de teksten globaal geëvalueerd. In modus <guilabel>Parse-gewijze</guilabel> worden zij segment na segment geëvalueerd.</para>
+
+    <para>Gebruik modus <guilabel>ID vergelijking</guilabel> om teksten met Sleutel=Waarde uit te lijnen. Dit werkt zelfs als de sleutels niet in dezelfde volgorde in de twee bestanden staan en/of als de twee bestanden niet dezelfde hoeveelheid informatie bevatten. Deze optie verschijnt alleen als beide geselecteerde bestanden worden herkend als bestanden met Sleutel=Waarde.</para>
+
+    <para>De algoritmen <guilabel>Viterbi</guilabel> en <guilabel>Vooruit-Terug</guilabel> zijn twee verschillende methoden voor berekenen. Kies die welke de beste resultaten geeft.</para>
+
+    <para>Klik op <guibutton>Doorgaan</guibutton> om naar de volgende stap te gaan.</para>
+  </section>
+
+  <section>
+    <title>Stap 2: Handmatige correcties maken</title>
+
+    <para>Na de automatische verwerking vereist de uitlijning van de twee bestanden meestal nog handmatige correcties.</para>
+
+    <para>Vertaaleenheden zijn geplaatst in cellen in de twee laatste kolommen.</para>
+
+    <para>Twee segmenten op dezelfde regel uitlijnen:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Selecteer het eerste segment.</para>
+      </listitem>
+
+      <listitem>
+        <para>Druk op de spatiebalk (sneltoets voor <menuchoice> <guimenuitem>Bewerken</guimenuitem> <guimenuitem>Pinpoint uitlijnen beginnen</guimenuitem> </menuchoice>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Klik in de andere kolom op de vertaling die overeenkomt met het eerste segment.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Selecteer, na verscheidene van deze bewerkingen, <menuchoice> <guimenuitem>Bewerken</guimenuitem> <guimenuitem>Wachten op opnieuw uitlijnen</guimenuitem> </menuchoice> om het uitlijnen van de andere segmenten bij te werken.</para>
+
+    <para>Selecteer de/het segment(en) en druk op <userinput>U</userinput> (<guilabel>Naar boven</guilabel>) of <userinput>D</userinput> (<guilabel>Naar beneden</guilabel>) om de positie van een of meer segmenten individueel aan te passen.</para>
+
+    <para>Alleen rijen waarvan het vak <guilabel>Behouden</guilabel> in de eerste kolom is geselecteerd zullen worden opgenomen als het vertaalgeheugen wordt gemaakt.</para>
+
+    <para>Klik op <guibutton>TMX opslaan…</guibutton> om het resulterende vertaalgeheugen te maken als de twee kolommen voldoende zijn uitgelijnd.</para>
+  </section>
+</section>

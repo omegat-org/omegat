@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="dialogs.projectproperties">
+  <title>Projektin ominaisuudet</title>
+
+  <para>Pääset tähän valikkoon valitsemalla kohdan <menuchoice><guimenuitem>Projekti</guimenuitem> <guimenuitem>Ominaisuudet…</guimenuitem> </menuchoice></para>
+
+  <section>
+    <title>Kielet</title>
+
+    <para>Voit joko lisätä lähde- ja kohdekielet käsin tai valita ne pudotusvalikosta. Pidäthän mielessä, että projektikielien vaihtaminen voi tehdä senhetkisistä käännösmuisteista käyttökelvottomia. Käännösmuistin kieliparin on oltava juuri sama kuin projektissakin.</para>
+
+    <para>Valittujen kielten saneistimet tulevat näkyville.</para>
+  </section>
+
+  <section>
+    <title>Valinnat</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Lausetason segmentointi</term>
+
+        <listitem>
+          <para>Segmentointisäännöt vaikuttavat vain tapaan, jolla <application>OmegaT</application> käsittelee lähdetiedostoja. Lausetason segmentointi on tavallisin lähdetiedostojen segmentointitapa, joten tähän ruutuun on tavallisesti syytä jättää rasti.</para>
+
+          <para>Joissakin harvinaisissa tapauksissa suositaan kappaletason segmentointia. Tämän merkinnän muuttaminen ei vaikuta jo olemassa olevien käännösmuistien segmentointiin. Jos kesken käännöstyötä päätät vaihtaa segmentoinnin lausetasolta kappaleittaiseksi, projektin sisäinen käännösmuisti ei muutu (OmegaT saattaa päivittää vanhat käännösmuistit, joissa lausetason segmentointia ei ole käytetty, mutta ei päin vastoin), mutta OmegaT yrittää luoda kappaleittaisia sumeita osumia yhdistämällä olemassa olevia lausekohtaisia käännöksiä.</para>
+
+          <para>Segmentointisääntöjen muuttaminen saattaa jakaa tai yhdistää joitakin jo käännettyjä segmenttejä. Tällöin käännösten tila muuttuu ja niistä tulee &quot;kääntämättömiä&quot;, sillä segmentit eivät enää vastaa projektin muistissa olevia segmenttejä, vaikka alkuperäinen käännös onkin siellä tallessa.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Käytä käännösehdotuksia automaattisesti</term>
+
+        <listitem>
+          <para>Mikäli lähdeasiakirjoissa on toistuvia segmenttejä, tämä valintaruutu tarjoaa käyttäjälle kaksi tapaa käyttää käännösehdotuksia automaattisesti. Jos ruudussa on rasti, ensimmäisestä käännetystä segmentistä tulee oletuskäännös, ja käännöstä käytetään myöhempien toistojen käännöksenä automaattisesti. Väärin käännetyt segmentit voidaan tietysti korjata myöhemmin käyttämällä valintaa <guimenuitem>Luo vaihtoehtoinen käännös</guimenuitem>. Jos automaattisen käytön valintaruudussa ei ole rastia, vaihtoehtoisia käännöksiä sisältävät segmentit pysyvät kääntämättä niin kauan, kunnes käyttäjä on valinnut sopivan käännöksen.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Poista tägit</term>
+
+        <listitem>
+          <para>Kun tässä ruudussa on rasti, ohjelma poistaa lähdesegmenteistä kaikki muotoilutägit. Toiminto on erityisen kätevä silloin, kun käsitellään tekstejä, joissa tekstiin sidottujen muotoilujen käyttö ei ole kovin järkevää (esim. OCR-luetut PDF-tiedostot, huonosti muunnetut .odt- tai .docx-tiedostot jne.). Tavallisesti kohdeasiakirjat on aina mahdollista avata, sillä vain tekstimuotoilutägit poistetaan. Näkymätön muotoilu (mikä ei siis näy tägeinä OmegaT-editorissa) säilyy ennallaan kohdeasiakirjoissa.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Ulkoinen jälkikäsittelykomento</term>
+
+        <listitem>
+          <para>Tälle alueelle voi lisätä ulkoisen jälkikäsittelykomennon (esim. tiedostot uudelleen nimeävän komentosarjan), joka suoritetaan joka kerta, kun Luo käännetyt tiedostot -komento suoritetaan. Tässä ulkoisessa komennossa ei voi käyttää putkimerkkejä tms., minkä vuoksi komentosarjan käyttö on suositeltavaa.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>Segmentointi…</guibutton></term>
+
+        <listitem>
+          <para>Segmentointisääntöjä käytetään kaikissa projekteissa. Käyttäjä voi kuitenkin joutua luomaan erityisen säännöstön, joka koskee kyseistä projektia. Avaa valintaikkuna napsauttamalla tätä painiketta, laita rasti <guimenuitem>Projektikohtaiset segmentointisäännöt</guimenuitem> -ruutuun ja muokkaa segmentointisääntöjä toivotun laisiksi. Uusi säännöstö tallentuu muiden joukkoon projektin osaksi, eikä se vaikuta yleisiin segmentointisääntöihin. Poista projektikohtaiset segmentointisäännöt ottamalla rasti pois ruudusta. Lisää tietoa segmentointisäännöistä löydät kohdasta <link linkend="dialogs.preferences.segmentationsetup">Segmentoinnin asetukset</link>.</para>
+
+          <para><emphasis>Vihje:</emphasis> Tietyn projektin segmentointisäännöstö tallentuu tiedostoon <filename>project/omegat/segmentation.conf.</filename></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>Tiedostosuodattimet…</guibutton></term>
+
+        <listitem>
+          <para>Käyttäjä voi luoda projektikohtaisia tiedostosuodattimia samaan tapaan kuin edellä. Tiedostosuodattimet tallennetaan osaksi projektia, ja ne ovat voimassa vain kyseisessä projektissa. Luo projektikohtainen tiedostosuodatinsetti napsauttamalla <guibutton>Tiedostosuodattimet…</guibutton>-painiketta, jolloin avautuu uusi ikkuna. Laita rasti <guimenuitem>Tee suodattimista projektikohtaiset</guimenuitem> -ruutuun. Muutettujen tiedostoasetusten kopio tallennetaan osaksi projektia. Poista projektikohtaiset tiedostosuodattimet ottamalla rasti pois ruudusta. Huomaa, että valikossa <guimenuitem>Asetukset -&gt; Tiedostosuodattimet</guimenuitem> muutetaan yleisiä käyttäjäsuodattimia, ei projektikohtaisia suodattimia. Lisätietoa aiheesta löydät kohdasta <link linkend="dialogs.preferences.filefilters">Tiedostosuodattimien asetukset</link>.</para>
+
+          <para><emphasis>Vihje:</emphasis> Tietyn projektin tiedostosuodatinsetti tallentuu tiedostoon <filename>project/omegat/filters.xml.</filename>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Pakettivarastojen määritys…</term>
+
+        <listitem>
+          <para>Kun työskentelet ryhmäprojektin parissa, voit tässä ikkunassa määritellä yhteyksiä etäkansioiden ja paikallisten kansioiden välillä (ks. esimerkkejä <link linkend="howto.setupteamproject.mappingparameters">täällä</link>).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Ulkoinen haku…</term>
+
+        <listitem>
+          <para>Määrittelee projektikohtaiset ulkoiset hakuresurssit.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Tiedostosijainnit</title>
+
+    <para>Tässä kohdassa voit valita eri alikansioita, esim. lähdetiedostojen alikansion, kohdetiedostojen alikansio jne. Jos valitset käyttöön kansioita, joita ei vielä ole, <application>OmegaT</application> luo ne sinulle. Mikäli päätät muokata projektikansioita, muistathan, että tämä ei muuta olemassa olevia tiedostoja vanhoista kansioista uuten sijaintiin.</para>
+
+    <para>Napsauta <guibutton>Poikkeukset…</guibutton>-painiketta, niin pääset määrittelemään tiedostot tai kansiot, jotka <application>OmegaT</application> jättää huomioimatta. Tiedosto tai kansio, jota ohjelma ei huomioi:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>ei näy editoriruudussa</para>
+      </listitem>
+
+      <listitem>
+        <para>ei ole mukana tilastoissa</para>
+      </listitem>
+
+      <listitem>
+        <para>ei kopioidu /target-kansioon silloin, kun käännettyjä tiedostoja luodaan.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Kohdassa Älä sisällytä muotoja voit lisätä tai poistaa kuvioita tai muokata niitä valitsemalla rivin ja painamalla F2-näppäintä. Voit käyttää <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache Ant-syntaksin</ulink> mukaisia yleismerkkejä.</para>
+  </section>
+</section>

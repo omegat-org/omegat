@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.project">
+  <title>Progetto</title>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Nuovo...</guimenuitem></term>
+
+      <listitem>
+        <para>Crea e apre un nuovo progetto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><guimenuitem>Scarica il progetto in collaborazione...</guimenuitem></term>
+
+      <listitem>
+        <para>Crea una copia locale di un progetto OmegaT remoto. Per i dettagli si veda <link linkend="howto.useteamproject">Come utilizzare un progetto in collaborazione</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Apri...</term>
+
+      <listitem>
+        <para>Apre un progetto esistente.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Apri progetto recente</term>
+
+      <listitem>
+        <para>Dà accesso agli ultimi dieci progetti modificati di recente. Facendo clic su uno qualsiasi, verrà salvato e chiuso il progetto attivo e aperto l'altro.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Copia i file nella cartella di partenza...</term>
+
+      <listitem>
+        <para>Copia i file selezionati nella cartella <filename>source</filename> e ricarica il progetto per caricare i nuovi file.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Scarica la pagina MediaWiki...</term>
+
+      <listitem>
+        <para>Per tradurre il contenuto di una pagina Wikipedia (per esempio):</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Fare clic sulla scheda <guilabel>Modifica</guilabel> della pagina Wikipedia.</para>
+          </listitem>
+
+          <listitem>
+            <para>Copiare l'URL della pagina (che termina con <guilabel>action=edit</guilabel>) e incollarlo in <application>OmegaT</application>.</para>
+          </listitem>
+        </orderedlist>
+
+        <para>Dopo aver completato la traduzione, ecco la procedura per importarla in Wikipedia:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Aprire il file <filename>.UTF8</filename> generato nella cartella <filename>/target</filename>.</para>
+          </listitem>
+
+          <listitem>
+            <para>Copiare il testo e incollarlo nella versione tradotta della pagina Wikipedia.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ricarica</term>
+
+      <listitem>
+        <para>Ricarica il progetto per riflettere le modifiche esterne nei file di partenza e nelle impostazioni del progetto.</para>
+
+        <para>Le nuove memorie di traduzione che si trovano nella cartella <filename>/tm</filename> durante la traduzione vengono caricate automaticamente non appena il cursore si sposta da un segmento a un altro.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Chiudi</term>
+
+      <listitem>
+        <para>Salva la traduzione e chiude il progetto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Salva</term>
+
+      <listitem>
+        <para>Salva la memoria di traduzione interna nel disco rigido. OmegaT salva automaticamente le traduzioni ogni tre minuti, oppure tutte le volte che si chiude un progetto o che si esce da OmegaT.</para>
+
+        <para>Il tempo dell'intervallo è modificabile in <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Opzioni</guimenuitem> <guimenuitem>Preferenze</guimenuitem> <guimenuitem>Salvataggio e risultato</guimenuitem> </menuchoice></link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Invia i file di partenza</term>
+
+      <listitem>
+        <para>Carica nel deposito i file che sono stati aggiunti o modificati localmente nella cartella <filename>source</filename>.</para>
+
+        <para>Questa funzione è specifica dei progetti in collaborazione.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Invia i file di arrivo</term>
+
+      <listitem>
+        <para>Carica nel deposito i file che sono stati creati localmente nella cartella <filename>target</filename>.</para>
+
+        <para>Questa funzione è specifica dei progetti in collaborazione.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Crea i documenti di arrivo</term>
+
+      <listitem>
+        <para>Crea i documenti finali inserendo negli stessi la traduzione. I documenti finali saranno creati nella cartella <filename>target</filename>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Crea il documento tradotto corrente</term>
+
+      <listitem>
+        <para>Crea il documento di arrivo che corrisponde al documento corrente contenuto nella traduzione.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Apri progetto MED...</term>
+
+      <listitem>
+        <para>Apre un pacchetto di progetto nel formato MED definito dalla EU Directorate-General for Translation (EU-Direzione generale della Traduzione).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Crea progetto MED...</term>
+
+      <listitem>
+        <para>Converte il progetto attivo in un pacchetto MED.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Proprietà...</term>
+
+      <listitem>
+        <para>Visualizza la finestra di dialogo <link linkend="dialogs.projectproperties">Proprietà del progetto</link> nella quale si potranno modificare le lingue del progetto e il percorso di memorizzazione delle cartelle.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>File del progetto...</term>
+
+      <listitem>
+        <para>Apre la <link linkend="windows.projectfiles">finestra dei file del progetto</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Accedi al contenuto del progetto</term>
+
+      <listitem>
+        <para>Permette l'accesso alle cartelle del progetto.</para>
+
+        <para>In aggiunta, due voci di menu permettono l'apertura diretta dei documenti correnti di arrivo e di partenza e del glossario modificabile. I documenti sono aperti dall'applicazione scelta dal sistema operativo. Se i documenti non sono disponibili, la voce è disattivata.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Esci</term>
+
+      <listitem>
+        <para>Salva il progetto ed esce da <application>OmegaT</application>. Se il progetto non è ancora stato salvato manualmente, verrà richiesto se si desidera davvero uscire dall'applicazione.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

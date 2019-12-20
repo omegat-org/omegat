@@ -8,7 +8,7 @@
                2012 Thomas Cordonnier, Martin Fleurke
                2013 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
+import org.omegat.core.data.ExternalTMFactory;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.DefaultTranslationsIterator;
@@ -57,6 +58,7 @@ import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.Preferences;
 import org.omegat.util.TMXProp;
 import org.omegat.util.Token;
 
@@ -206,6 +208,14 @@ public class FindMatches {
             }
         });
 
+
+        /**
+         * Penalty applied for fuzzy matches in another language (if no match in the
+         * target language was found.)
+         */
+        int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
+                Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
+
         // travel by translation memories
         for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
             int penalty = 0;
@@ -222,7 +232,13 @@ public class FindMatches {
                 if (requiresTranslation && tmen.translation == null) {
                     continue;
                 }
-                processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, penalty,
+
+                int tmenPenalty = penalty;
+                if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
+                    tmenPenalty += foreignPenalty;
+                }
+
+                processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, tmenPenalty,
                         en.getKey(), tmen.creator, tmen.creationDate, tmen.changer, tmen.changeDate,
                         tmen.otherProperties);
             }

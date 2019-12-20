@@ -8,7 +8,7 @@
                2014 Briac Pilpre (briacp@gmail.com), Yu Tang
                2015 Yu Tang, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -32,7 +32,6 @@ import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -71,7 +70,6 @@ import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.ListModel;
 import javax.swing.SwingConstants;
@@ -90,6 +88,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.help.Help;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -376,11 +375,11 @@ public class ScriptingWindow {
 
         try {
             Class<?> richScriptEditorClass = Class.forName("org.omegat.gui.scripting.RichScriptEditor");
-            return (AbstractScriptEditor) richScriptEditorClass.newInstance();
+            return (AbstractScriptEditor) richScriptEditorClass.getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
          // RichScriptEditor not present, fallback to the standard editor
             logResult("RichScriptEditor not present, fallback to the standard editor");
-        } catch (InstantiationException | IllegalAccessException e) {
+        } catch (Exception e) {
             logResult("Error loading RichScriptEditor: ", e);
         }
 
@@ -667,24 +666,16 @@ public class ScriptingWindow {
         try {
             dir = new File(scriptsDir).getCanonicalFile();
         } catch (IOException ex) {
-            dir = new File(scriptsDir).getAbsoluteFile();
+            dir = new File(scriptsDir);
         }
-        setScriptsDirectory(dir);
-    }
 
-    private void setScriptsDirectory(File scriptsDir) {
-
-        if (!scriptsDir.isDirectory()) {
+        if (!dir.isDirectory()) {
             updateQuickScripts();
             return;
         }
-        m_scriptsDirectory = scriptsDir;
-        Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, scriptsDir.getPath());
+        m_scriptsDirectory = dir;
+        Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, scriptsDir);
         OSXIntegration.setProxyIcon(frame.getRootPane(), m_scriptsDirectory);
-
-        if (m_txtScriptsDir != null) {
-            m_txtScriptsDir.setText(scriptsDir.getPath());
-        }
 
         if (monitor != null) {
             monitor.stop();
@@ -827,7 +818,7 @@ public class ScriptingWindow {
             if (result == JFileChooser.APPROVE_OPTION) {
                 // we should write the result into the directory text field
                 File file = chooser.getSelectedFile();
-                setScriptsDirectory(file);
+                setScriptsDirectory(file.getPath());
             }
         }
     }
@@ -866,28 +857,28 @@ public class ScriptingWindow {
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_LOAD_FILE"));
         item.addActionListener(new OpenScriptAction());
         item.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_O, Java8Compat.getMenuShortcutKeyMaskEx()));
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_NEW_SCRIPT"));
         item.addActionListener(new NewScriptAction());
         item.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_N, Java8Compat.getMenuShortcutKeyMaskEx()));
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_SAVE_SCRIPT"));
         item.addActionListener(new SaveScriptAction());
         item.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_S, Java8Compat.getMenuShortcutKeyMaskEx()));
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_RUN_SCRIPT"));
         item.addActionListener(new RunScriptAction());
         item.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_R, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_R, Java8Compat.getMenuShortcutKeyMaskEx()));
         menu.add(item);
 
         menu.addSeparator();
@@ -907,7 +898,7 @@ public class ScriptingWindow {
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_CLOSE"));
         item.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+                KeyStroke.getKeyStroke(KeyEvent.VK_W, Java8Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(e -> {
             frame.setVisible(false);
             frame.dispose();
@@ -930,7 +921,9 @@ public class ScriptingWindow {
         item.addActionListener(e -> {
             try {
                 Help.showJavadoc();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+                        JOptionPane.ERROR_MESSAGE);
                 Log.log(ex);
             }
         });
@@ -1035,7 +1028,6 @@ public class ScriptingWindow {
 
     private File m_scriptsDirectory;
     private ScriptItem m_currentScriptItem;
-    private JTextField m_txtScriptsDir;
 
     private JMenu m_setsMenu = new JMenu();
 

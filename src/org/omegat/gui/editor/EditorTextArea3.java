@@ -10,7 +10,7 @@
                2014 Aaron Madlon-Kay
                2015 Yu Tang
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -32,7 +32,10 @@ package org.omegat.gui.editor;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -48,6 +51,7 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
 import javax.swing.text.MutableAttributeSet;
@@ -63,6 +67,8 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.Java8Compat;
+import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
@@ -113,6 +119,8 @@ public class EditorTextArea3 extends JEditorPane {
             .getKeyStroke("editorSkipPrevTokenWithSelection");
     private static final KeyStroke KEYSTROKE_TOGGLE_CURSOR_LOCK = PropertiesShortcuts.getEditorShortcuts()
             .getKeyStroke("editorToggleCursorLock");
+    private static final KeyStroke KEYSTROKE_TOGGLE_OVERTYPE = PropertiesShortcuts.getEditorShortcuts()
+            .getKeyStroke("editorToggleOvertype");
 
     /** Undo Manager to store edits */
     protected final TranslationUndoManager undoManager = new TranslationUndoManager(this);
@@ -133,6 +141,11 @@ public class EditorTextArea3 extends JEditorPane {
      */
     protected boolean lockCursorToInputArea = true;
 
+    /**
+     * Flag indicating if the editor is in Insert (false) or Overwrite (true) mode.
+     */
+    protected boolean overtypeMode = false;
+
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
         setEditorKit(new StyledEditorKit() {
@@ -151,6 +164,11 @@ public class EditorTextArea3 extends JEditorPane {
         });
 
         addMouseListener(mouseListener);
+
+        // Custom caret for overtype mode
+        OvertypeCaret c = new OvertypeCaret();
+        c.setBlinkRate(getCaret().getBlinkRate());
+        setCaret(c);
 
         addCaretListener(e -> {
             try {
@@ -174,6 +192,8 @@ public class EditorTextArea3 extends JEditorPane {
         setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+
+        updateLockInsertMessage();
     }
 
     @Override
@@ -215,7 +235,7 @@ public class EditorTextArea3 extends JEditorPane {
 
             // Handle double-click
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
-                int mousepos = viewToModel(e.getPoint());
+                int mousepos = Java8Compat.viewToModel(EditorTextArea3.this, e.getPoint());
                 boolean changed = controller.goToSegmentAtLocation(getCaretPosition());
                 if (!changed) {
                     if (selectTag(mousepos)) {
@@ -240,7 +260,7 @@ public class EditorTextArea3 extends JEditorPane {
         }
 
         private void doPopup(Point p) {
-            int mousepos = viewToModel(p);
+            int mousepos = Java8Compat.viewToModel(EditorTextArea3.this, p);
             JPopupMenu popup = makePopupMenu(mousepos);
             if (popup.getComponentCount() > 0) {
                 popup.show(EditorTextArea3.this, p.x, p.y);
@@ -432,16 +452,19 @@ public class EditorTextArea3 extends JEditorPane {
             processed = moveCursorOverTag(true, true);
         } else if (s.equals(KEYSTROKE_TOGGLE_CURSOR_LOCK)) {
             boolean lockEnabled = !lockCursorToInputArea;
-            final String key = lockEnabled ? "MW_STATUS_CURSOR_LOCK_ON" : "MW_STATUS_CURSOR_LOCK_OFF";
-            Core.getMainWindow().showStatusMessageRB(key);
             lockCursorToInputArea = lockEnabled;
+            updateLockInsertMessage();
+        } else if (s.equals(KEYSTROKE_TOGGLE_OVERTYPE)) {
+            processed = switchOvertypeMode();
+            updateLockInsertMessage();
         }
 
         // leave standard processing if need
         if (processed) {
             e.consume();
         } else {
-            if ((e.getModifiers() & (KeyEvent.CTRL_MASK | KeyEvent.META_MASK | KeyEvent.ALT_MASK)) == 0) {
+            if ((e.getModifiersEx()
+                    & (KeyEvent.CTRL_DOWN_MASK | KeyEvent.META_DOWN_MASK | KeyEvent.ALT_DOWN_MASK)) == 0) {
                 // there is no Alt,Ctrl,Cmd keys, i.e. it's char
                 if (e.getKeyCode() != KeyEvent.VK_SHIFT && !isNavigationKey(e.getKeyCode())) {
                     // it's not a single 'shift' press or navigation key
@@ -462,6 +485,41 @@ public class EditorTextArea3 extends JEditorPane {
             checkAndFixCaret(false);
             autoCompleter.updatePopup(true);
         }
+    }
+
+    private void updateLockInsertMessage() {
+        String lock = OStrings.getString("MW_STATUS_CURSOR_LOCK_" + (lockCursorToInputArea ? "ON" : "OFF"));
+        String ins = OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_" + (overtypeMode ? "ON" : "OFF"));
+
+        String lockTip = OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_" + (lockCursorToInputArea ? "ON" : "OFF"));
+        String insTip = OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_" + (overtypeMode ? "ON" : "OFF"));
+        Core.getMainWindow().showLockInsertMessage(lock + " | " + ins, lockTip + " | " + insTip);
+    }
+
+    private boolean switchOvertypeMode() {
+        boolean switchOvertypeMode = !overtypeMode;
+        overtypeMode = switchOvertypeMode;
+
+        if (overtypeMode) {
+            // Change the caret shape, width and color
+            setCaretColor(Styles.EditorColor.COLOR_BACKGROUND.getColor());
+            putClientProperty("caretWidth", getCaretWidth());
+
+            // We need to force the caret damage to have the rectangle to correctly show up,
+            // otherwise half of the caret is shown.
+            try {
+                OvertypeCaret caret = (OvertypeCaret) getCaret();
+                Rectangle r = Java8Compat.modelToView(this, caret.getDot());
+                caret.damage(r);
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // reset to default insert caret
+            setCaretColor(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+            putClientProperty("caretWidth", 1);
+        }
+        return true;
     }
 
     private boolean isNavigationKey(int keycode) {
@@ -725,7 +783,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     @Override
     public String getToolTipText(MouseEvent event) {
-        int pos = viewToModel(event.getPoint());
+        int pos = Java8Compat.viewToModel(EditorTextArea3.this, event.getPoint());
         int s = controller.getSegmentIndexAtLocation(pos);
         return s < 0 ? null : controller.markerController.getToolTips(s, pos);
     }
@@ -762,6 +820,62 @@ public class EditorTextArea3 extends JEditorPane {
         PopupMenuConstructorInfo(int priority, IPopupMenuConstructor constructor) {
             this.priority = priority;
             this.constructor = constructor;
+        }
+    }
+
+    @Override
+    public void replaceSelection(String content) {
+        // Overwrite current selection, and if at the end of the segment, allow
+        // inserting new text.
+        if (isEditable() && overtypeMode && getSelectionStart() == getSelectionEnd()
+                && getCaretPosition() < getOmDocument().getTranslationEnd()) {
+            int pos = getCaretPosition();
+            int lastPos = Math.min(getDocument().getLength(), pos + content.length());
+            select(pos, lastPos);
+        }
+        super.replaceSelection(content);
+    }
+
+    /** Get the caret width from the size of the current letter. */
+    private int getCaretWidth() {
+        FontMetrics fm = getFontMetrics(getFont());
+        int carWidth = 1;
+        try {
+            carWidth = fm.stringWidth(getText(getCaretPosition(), 1));
+        } catch (BadLocationException e) {
+            /* empty */
+        }
+        return carWidth;
+    }
+
+    private class OvertypeCaret extends DefaultCaret {
+        @Override
+        public void paint(Graphics g) {
+            if (overtypeMode) {
+                int caretWidth = getCaretWidth();
+                putClientProperty("caretWidth", caretWidth);
+                g.setXORMode(Styles.EditorColor.COLOR_FOREGROUND.getColor());
+                g.translate(caretWidth / 2, 0);
+                super.paint(g);
+            } else {
+                super.paint(g);
+            }
+        }
+
+        @Override
+        protected synchronized void damage(Rectangle r) {
+            if (overtypeMode) {
+                if (r != null) {
+                    int damageWidth = getCaretWidth();
+                    x = r.x - 4 - (damageWidth / 2);
+                    y = r.y;
+                    width = 9 + 3 * damageWidth / 2;
+                    height = r.height;
+                    repaint();
+                }
+            } else {
+                super.damage(r);
+            }
         }
     }
 }

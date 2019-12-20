@@ -11,7 +11,7 @@
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -126,7 +126,7 @@ public final class StaticUtils {
      * @return true if checked key pressed
      */
     public static boolean isKey(KeyEvent e, int code, int modifiers) {
-        return e.getKeyCode() == code && e.getModifiers() == modifiers;
+        return e.getKeyCode() == code && e.getModifiersEx() == modifiers;
     }
 
     /**
@@ -424,9 +424,9 @@ public final class StaticUtils {
         assert quoted.endsWith("\\E");
 
         if (spaceMatchesNbsp) {
-            replaceGlobs(sb, " ", "( |\u00A0)");
             replaceGlobs(sb, "*", "[^\\s\u00A0]*");
             replaceGlobs(sb, "?", "[^\\s\u00A0]");
+            replaceGlobs(sb, " ", "(?: |\u00A0)");
         } else {
             replaceGlobs(sb, "*", "\\S*");
             replaceGlobs(sb, "?", "\\S");

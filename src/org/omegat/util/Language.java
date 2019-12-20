@@ -8,8 +8,9 @@
                2010-2011 Didier Briel
                2012 Guido Leenders
                2016 Aaron Madlon-Kay
+               2019 Briac Pilpre
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -58,19 +59,15 @@ import java.util.regex.Matcher;
  * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
+ * @author Briac Pilpre
  */
 public class Language implements Comparable<Object> {
-    private Locale locale = new Locale("");
-    private String languageCode;
-    private String countryCode;
+    private static final Locale EMPTY_LOCALE = new Locale("");
+    private final Locale locale;
 
     /** Creates a new instance of Language, based on Locale */
     public Language(Locale locale) {
-        if (locale != null) {
-            this.locale = locale;
-        }
-        this.languageCode = this.locale.getLanguage();
-        this.countryCode = this.locale.getCountry();
+        this.locale = locale == null ? EMPTY_LOCALE : locale;
     }
 
     /**
@@ -84,18 +81,29 @@ public class Language implements Comparable<Object> {
      * This form is described in <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP47</a>.
      */
     public Language(String str) {
-        this.languageCode = "";
-        this.countryCode = "";
-        this.locale = new Locale("");
-        if (str != null) {
-            Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(str);
-            if (m.matches() && m.groupCount() >= 1) {
-                this.languageCode = m.group(1);
-                if (m.group(2) != null) {
-                    this.countryCode = m.group(2);
+        if (str == null) {
+            locale = EMPTY_LOCALE;
+        } else {
+            Locale checkLocale = Locale.forLanguageTag(str);
+
+            // Locale matches BCP 47
+            if (!checkLocale.getLanguage().isEmpty()) {
+                locale = checkLocale;
+            } else {
+                // If this did not work, fallback to the old parsing method
+                Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(str);
+                if (m.matches() && m.groupCount() >= 1) {
+                    String languageCode = m.group(1);
+                    String countryCode = m.group(2) == null ? "" : m.group(2);
+
+                    locale = new Locale(languageCode.toLowerCase(Locale.ENGLISH),
+                            countryCode.toUpperCase(Locale.ENGLISH));
+
+                } else {
+                    // We tried really hard to match something, but it does not
+                    // look at all like a language string.
+                    locale = EMPTY_LOCALE;
                 }
-                this.locale = new Locale(this.languageCode.toLowerCase(Locale.ENGLISH),
-                        this.countryCode.toUpperCase(Locale.ENGLISH));
             }
         }
     }
@@ -120,11 +128,7 @@ public class Language implements Comparable<Object> {
      * Returns a string representation as an ISO language code (XX-YY).
      */
     public String getLanguage() {
-        String langstring = getLanguageCode();
-        if (!langstring.isEmpty() && !getCountryCode().isEmpty()) {
-            langstring += "-" + getCountryCode();
-        }
-        return langstring;
+        return locale.toLanguageTag();
     }
 
     /**
@@ -169,10 +173,10 @@ public class Language implements Comparable<Object> {
      * Returns only a language (XX).
      */
     public String getLanguageCode() {
-        if (this.languageCode == null) {
+        if (locale.getLanguage() == null) {
             return "";
         } else {
-            return this.languageCode;
+            return locale.getLanguage();
         }
     }
 
@@ -180,10 +184,10 @@ public class Language implements Comparable<Object> {
      * Returns only a country (YY).
      */
     public String getCountryCode() {
-        if (this.countryCode == null) {
+        if (locale.getCountry() == null) {
             return "";
         } else {
-            return this.countryCode;
+            return locale.getCountry();
         }
     }
 
@@ -195,8 +199,9 @@ public class Language implements Comparable<Object> {
      *      List 6.1302</a>
      */
     public boolean isSpaceDelimited() {
-        return !"ZH".equalsIgnoreCase(this.languageCode) && !"JA".equalsIgnoreCase(this.languageCode)
-                && !"BO".equalsIgnoreCase(this.languageCode);
+        String languageCode = locale.getLanguage();
+        return !"ZH".equalsIgnoreCase(languageCode) && !"JA".equalsIgnoreCase(languageCode)
+                && !"BO".equalsIgnoreCase(languageCode);
     }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -652,7 +657,7 @@ public class Language implements Comparable<Object> {
             return false;
         }
         Language that = (Language) lang;
-        return this.getLocaleCode().equals(that.getLocaleCode());
+        return this.getLocale().equals(that.getLocale());
     }
 
     /**
@@ -664,11 +669,12 @@ public class Language implements Comparable<Object> {
         return locale.hashCode();
     }
 
+    @Override
     public int compareTo(Object o) {
         if (o instanceof Language) {
-            return this.getLanguage().compareTo(((Language) o).getLanguage());
+            return getLanguage().compareTo(((Language) o).getLanguage());
         }
-        return this.getLanguage().compareTo(o.toString());
+        return getLanguage().compareTo(o.toString());
     }
 
     /**
@@ -693,6 +699,12 @@ public class Language implements Comparable<Object> {
      * Verifies whether the language code is OK.
      */
     public static boolean verifySingleLangCode(String code) {
+        boolean isOk = !Locale.forLanguageTag(code).getLanguage().isEmpty();
+        if (isOk) {
+            return true;
+        }
+
+        // Fallback to old check for backward compatibility.
         int cpc = code.codePointCount(0, code.length());
         if (cpc == 2 || cpc == 3) {
             return Language.verifyLangCode(code);
@@ -711,4 +723,34 @@ public class Language implements Comparable<Object> {
         return false;
     }
 
+    /**
+     * Returns true if two languages have the same language code (eg. fr-FR / fr-CA;
+     * es-419/es-BO).
+     */
+    public boolean isSameLanguage(Language target) {
+        return this.getLanguageCode().equalsIgnoreCase(target.getLanguageCode());
+    }
+
+    public boolean isSameLanguage(String target) {
+        return isSameLanguage(new Language(target));
+    }
+
+    /**
+     * Returns true if two languages have the same language and country (eg. fr-FR /
+     * fr-FR).
+     * 
+     * Note that it is slightly different than <code>Language.equals()</code>
+     * because of the possible use of BCP47 tags (eg. en-GB-x-ulster /
+     * en-GB-x-scotland)
+     */
+    public boolean isSameCountryLanguage(Language target) {
+        if (!isSameLanguage(target)) {
+            return false;
+        }
+        return this.getCountryCode().equalsIgnoreCase(target.getCountryCode());
+    }
+
+    public boolean isSameCountryLanguage(String target) {
+        return isSameCountryLanguage(new Language(target));
+    }
 }

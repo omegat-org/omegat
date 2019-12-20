@@ -559,7 +559,7 @@ def _clean(p, pat) {
             }
         })
 
-        buttonTagwipe.setText(res.getString("name"))
+        buttonTagwipe.setText(res.getString("lblName"))
         buttonTagwipe.setToolTipText("")
         buttonTagwipe.setMinimumSize(new java.awt.Dimension(60, 25))
         buttonTagwipe.addActionListener(new java.awt.event.ActionListener() {

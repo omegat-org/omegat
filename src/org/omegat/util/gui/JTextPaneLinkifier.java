@@ -5,7 +5,7 @@
 
  Copyright (C) 2015 Chihiro Hio, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -37,6 +37,7 @@ import java.net.URISyntaxException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -50,7 +51,9 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 
 /**
  * Adapted from omegat-plugin-linkbuilder by Chihiro Hio, provided under GPLv3.
@@ -115,7 +118,8 @@ public final class JTextPaneLinkifier {
         public void mouseClicked(final MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON1) {
                 final StyledDocument doc = jTextPane.getStyledDocument();
-                final Element characterElement = doc.getCharacterElement(jTextPane.viewToModel(e.getPoint()));
+                final Element characterElement = doc
+                        .getCharacterElement(Java8Compat.viewToModel(jTextPane, e.getPoint()));
                 final AttributeSet as = characterElement.getAttributes();
                 final Object attr = as.getAttribute(ATTR_LINK);
                 if (attr instanceof IAttributeAction) {
@@ -129,7 +133,7 @@ public final class JTextPaneLinkifier {
         @Override
         public void mouseMoved(final MouseEvent e) {
             final StyledDocument doc = jTextPane.getStyledDocument();
-            final Element characterElement = doc.getCharacterElement(jTextPane.viewToModel(e.getPoint()));
+            final Element characterElement = doc.getCharacterElement(Java8Compat.viewToModel(jTextPane, e.getPoint()));
             final AttributeSet as = characterElement.getAttributes();
             final Object attr = as.getAttribute(ATTR_LINK);
             if (attr instanceof IAttributeAction) {
@@ -254,6 +258,8 @@ public final class JTextPaneLinkifier {
                     try {
                         Desktop.getDesktop().browse(target);
                     } catch (Exception e) {
+                        JOptionPane.showConfirmDialog(null, e.getLocalizedMessage(),
+                                OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                         Log.log(e);
                     }
                 }

@@ -7,7 +7,7 @@
                2015 Aaron Madlon-Kay
                2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -95,7 +95,7 @@ public class GlossaryAutoCompleterOptionsPanel extends javax.swing.JPanel {
 
         sourceButtonGroup.add(sourceFirstRadioButton);
         org.openide.awt.Mnemonics.setLocalizedText(sourceFirstRadioButton, OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
-        sourceFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST")); // NOI18N
+        sourceFirstRadioButton.setToolTipText(OStrings.getString("AC_OPTIONS_SOURCE_FIRST_TOOLTIP")); // NOI18N
         jPanel2.add(sourceFirstRadioButton);
 
         sourceButtonGroup.add(targetFirstRadioButton);

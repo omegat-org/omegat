@@ -5,7 +5,7 @@
 
  Copyright (C) 2011 Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -41,7 +41,8 @@ import org.omegat.filters2.rc.RcFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
 /**
- * TMX Compliance tests as described on http://www.localization.org/fileadmin/standards/tmx1.4/comp.htm
+ * TMX Compliance tests as described on
+ * https://web.archive.org/web/20071011191836/http://www.lisa.org/standards/tmx/specification.html
  *
  * The Level 1 Compliance verifies mostly TMX structure, white spaces handling
  * and how the application deals with non-ASCII characters and special characters
@@ -288,6 +289,36 @@ public class TmxComplianceTests extends TmxComplianceBase {
                 "windows-1252", props, fix);
 
         List<String> lines1 = readTextFile(new File("test/data/tmx/TMXComplianceKit/ImportTest2A_fr-ca.htm"), "windows-1252");
+        List<String> lines2 = readTextFile(outFile, "windows-1252");
+
+        // fix meta line, since OmegaT writes own meta line for encoding
+        lines2.set(2, "<meta content=\"text/html; charset=windows-1252\" http-equiv=\"Content-Type\">");
+
+        assertEquals(lines1.size(), lines2.size());
+        for (int i = 0; i < lines1.size(); i++) {
+            // HTML spec allows unescaped U+0022 QUOTE MARK (outside of attribute values);
+            // we produce unescaped but the test assumes escaped, so we normalize for comparison purposes.
+            String line1 = normalize(lines1.get(i));
+            String line2 = normalize(lines2.get(i));
+            assertEquals(line1, line2);
+        }
+    }
+
+    @Test
+    public void testImport2A0index() throws Exception {
+        ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
+        props.setSentenceSegmentingEnabled(true);
+        Map<String, String> config = new TreeMap<String, String>();
+        config.put(HTMLOptions.OPTION_TRANSLATE_SRC, "false");
+        config.put(HTMLOptions.OPTION_SKIP_META, "true");
+
+        Map<String, TMXEntry> fix = new TreeMap<String, TMXEntry>();
+        fix.put("Picture:", createTMXEntry("Picture:", "Image:", true));
+        translateUsingTmx(new HTMLFilter2(), config, "ImportTest2A.htm", "UTF-8", "ImportTest2A-0index.tmx",
+                "windows-1252", props, fix);
+
+        List<String> lines1 = readTextFile(new File("test/data/tmx/TMXComplianceKit/ImportTest2A_fr-ca.htm"),
+                "windows-1252");
         List<String> lines2 = readTextFile(outFile, "windows-1252");
 
         // fix meta line, since OmegaT writes own meta line for encoding

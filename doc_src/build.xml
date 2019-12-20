@@ -5,9 +5,10 @@
  OmegaT - Java based Computer Assisted Translation (CAT) tool
  Copyright (C) 2011-2012 Didier Briel
                2014-2015 Didier Briel
- 
+               2019 Aaron Madlon-Kay
+
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -26,9 +27,9 @@
 **************************************************************************/
 -->
 <project name="OmegaT documentation" default="all">
-  
-    <include file="../../doc_src_paths.xml"/>   
-   
+
+    <include file="../../doc_src_paths.xml"/>
+
     <target name="include">
         <exec executable="xmllint"
               dir="." >
@@ -38,6 +39,22 @@
             <arg value="${language}/OmegaTUsersManual_xinclude full.xml" />
         </exec>
     </target>
+
+    <!-- The fonts must be available in the system -->
+    <condition property="font.family" value="IPAPGothic">
+        <equals arg1="${language}" arg2="ja"/>
+    </condition>
+    <condition property="monospace.font.family" value="IPAGothic">
+        <equals arg1="${language}" arg2="ja"/>
+    </condition>
+    <condition property="font.family" value="WenQuanYi Micro Hei">
+        <equals arg1="${language}" arg2="zh_CN"/>
+    </condition>
+    <condition property="monospace.font.family" value="WenQuanYi Micro Hei">
+        <equals arg1="${language}" arg2="zh_CN"/>
+    </condition>
+    <property name="font.family" value="DejaVu Sans"/>
+    <property name="monospace.font.family" value="DejaVu Sans Mono"/>
 
     <target name="fo" depends="include">
         <java dir="."
@@ -50,21 +67,20 @@
             <arg value="${language}/index.xml" />
             <arg value="${dbk}/fo/docbook.xsl" />
             <arg value="paper.type=A4" />
-            <arg value="page.margin.inner=&quot;18mm&quot;" />
-            <arg value="page.margin.outer=&quot;12mm&quot;" />
-            <arg value="page.margin.top=&quot;8mm&quot;" />
-            <arg value="page.margin.bottom=&quot;8mm&quot;" />
-            <arg value="generate.toc=book toc,title,figure,table" />       
+            <arg value="page.margin.inner=18mm" />
+            <arg value="page.margin.outer=12mm" />
+            <arg value="page.margin.top=8mm" />
+            <arg value="page.margin.bottom=8mm" />
+            <arg value="generate.toc=book toc,title,figure,table" />
             <arg value="chapter.autolabel=1" />
             <arg value="section.autolabel=1" />
             <arg value="toc.max.depth=2" />
-            <arg value="indent=&quot;no&quot;" />
+            <arg value="indent=no" />
             <arg value="fop.extension=1" />
             <arg value="insert.olink.pdf.frag=1" />
-            <!-- The DejaVu fonts must be available in the system -->
-            <arg value="body.font.family=DejaVu Sans" />
-            <arg value="title.font.family=DejaVu Sans" />
-            <arg value="monospace.font.family=DejaVu Sans" />
+            <arg value="body.font.family=${font.family}" />
+            <arg value="title.font.family=${font.family}" />
+            <arg value="monospace.font.family=${monospace.font.family}" />
             <classpath>
                 <pathelement location="${saxon}"/>
                 <pathelement path="${saxon}"/>
@@ -72,48 +88,10 @@
         </java>
     </target>
 
-    <target name="fo-cjk" depends="include">
-        <java dir="."
-              fork="true"
-              failonerror="true"
-              maxmemory="128m"
-              classname="com.icl.saxon.StyleSheet" >
-            <arg value="-o" />
-            <arg value="${language}/pdf/OmegaT_documentation.fo" />
-            <arg value="${language}/index.xml" />
-            <arg value="${dbk}/fo/docbook.xsl" />
-            <arg value="paper.type=A4" />
-            <arg value="page.margin.inner=&quot;18mm&quot;" />
-            <arg value="page.margin.outer=&quot;12mm&quot;" />
-            <arg value="page.margin.top=&quot;8mm&quot;" />
-            <arg value="page.margin.bottom=&quot;8mm&quot;" />
-            <arg value="generate.toc=book toc,title,figure,table" />       
-            <arg value="chapter.autolabel=1" />
-            <arg value="section.autolabel=1" />
-            <arg value="toc.max.depth=2" />
-            <arg value="indent=&quot;no&quot;" />
-            <arg value="fop.extension=1" />
-            <arg value="insert.olink.pdf.frag=1" />
-            <!-- The Arial Unicode MS fonts must be available in the system -->
-            <arg value="body.font.family=Arial Unicode MS" />
-            <arg value="title.font.family=Arial Unicode MS" />
-            <arg value="monospace.font.family=Arial Unicode MS" />
-            <classpath>
-                <pathelement location="${saxon}"/>
-                <pathelement path="${saxon}"/>
-            </classpath>
-        </java>
-    </target>
-    
-    <condition property="fop.home.lib" else="${fop.home}/lib">
-        <isset property="fop.home.lib"/>
-    </condition>
-    
-    <condition property="fop.home.build" else="${fop.home}/build">
-        <isset property="fop.home.build"/>
-    </condition>      
+    <property name="fop.home.lib" value="${fop.home}/lib"/>
+    <property name="fop.home.build" value="${fop.home}/build"/>
 
-    <taskdef name="fop" 
+    <taskdef name="fop"
              classname="org.apache.fop.tools.anttasks.Fop">
         <classpath>
             <fileset dir="${fop.home.lib}">
@@ -127,22 +105,19 @@
     </taskdef>
 
     <target name="pdf" depends="fo">
-        <fop format="application/pdf" 
-             fofile="${language}/PDF/OmegaT_documentation.fo"
-             outfile="${language}/PDF/OmegaT_documentation_${language}.PDF" 
+        <fop format="application/pdf"
+             fofile="${language}/pdf/OmegaT_documentation.fo"
+             outfile="${language}/pdf/OmegaT_documentation_${language}.PDF"
              basedir="${language}/"
              userconfig="fop.xconf"
              force="true" />
     </target>
 
-    <target name="pdf-cjk" depends="fo-cjk">
-        <fop format="application/pdf" 
-             fofile="${language}/PDF/OmegaT_documentation.fo"
-             outfile="${language}/PDF/OmegaT_documentation_${language}.PDF" 
-             basedir="${language}/"
-             userconfig="fop.xconf"
-             force="true" />
-    </target>
+    <condition property="version.properties.filename"
+               value="version.properties"
+               else="version_${language}.properties">
+        <equals arg1="${language}" arg2="en"/>
+    </condition>
 
     <target name="chunk" depends="include">
         <java dir="."
@@ -172,12 +147,10 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <!-- For English -->
-        <copy file="${language}/version.properties" tofile="../docs/${language}/version.properties" />
-        <!-- Other languages -->
-        <copy file="${language}/version_${language}.properties" tofile="../docs/${language}/version_${language}.properties" />
+        <copy file="${language}/${version.properties.filename}"
+              tofile="../docs/${language}/${version.properties.filename}" />
     </target>
-     
+
     <target name="instant-start">
         <java dir="."
               fork="true"
@@ -198,7 +171,7 @@
             <arg value="toc.max.depth=0" />
             <arg value="generate.toc=0" />
             <arg value="generate.index=0" />
-            <arg value="html.stylesheet=OmegaT.css" />  
+            <arg value="html.stylesheet=OmegaT.css" />
             <classpath>
                 <pathelement location="${saxon}" />
                 <pathelement path="${saxon}" />
@@ -209,11 +182,11 @@
              <fileset dir="${language}/images" />
         </copy>
     </target>
-     
+
     <target name="html" depends="chunk,instant-start">
     </target>
-        
-     
+
+
     <target name="javahelp" depends="include"> <!-- Not yet operationnal -->
         <java dir="."
               fork="true"
@@ -242,6 +215,5 @@
      </target>
 
     <target name="all" depends="pdf,html" />
-    
-</project>
 
+</project>

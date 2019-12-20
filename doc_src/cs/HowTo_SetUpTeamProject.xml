@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.setupteamproject">
+  <title>Nastavit týmový projekt</title>
+
+  <para>Nastavení týmového projektu vyžaduje znalosti o serverech a systémech sloužících ke správě verzí projektu SVN nebo Git. Proto by jej měl provádět projektový manager, vedoucí projektu nebo správce lokalizace.</para>
+
+  <para>Spousta informací o SVN a Git je dostupná z různých zdrojů, nebudeme zde popisovat jak fungují, ale jen jak OmegaT s nimi spolupracuje.</para>
+
+  <section>
+    <title>Krok 1: Vytvořte na serveru prázdný projekt</title>
+
+    <para><emphasis role="bold">Jak vytvořit prázdný projekt na serveru</emphasis></para>
+
+    <orderedlist>
+      <listitem>
+        <para>Vytvořte repozitář SVN nebo Git na serveru, který bude přístupný pro překladatele.</para>
+      </listitem>
+
+      <listitem>
+        <para>Vytvořte lokální kopii repozitáře (<command>ověřit</command> s SVN, <command>klonovat</command> s Git).</para>
+      </listitem>
+
+      <listitem>
+        <para>Vytvořte nový, prázdný projekt OmegaT v lokálním repozitáři. Toto lze docílit dvěma způsoby:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><menuchoice>
+                <guimenuitem>Projekt</guimenuitem> <guimenuitem>Nový...</guimenuitem>
+              </menuchoice></para>
+          </listitem>
+
+          <listitem>
+            <para>v příkazovém řádku: <command>java -jar OmegaT.jar team init [lang1] [lang2]</command></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para>Přidat nový projekt OmegaT do systému sloužícímu ke správě verzí projektu (<command>přidat</command> s SVN a Git)</para>
+
+        <para>Poznámka: Pokud byl projekt vytvořen v příkazovém řádku dle kroku 3, pak tento krok program již udělal.</para>
+      </listitem>
+
+      <listitem>
+        <para>Zveřejněte nový projekt OmegaT na serveru (<command>commit</command> with SVN, <command>commit</command> followed by <command>push</command> with Git).</para>
+      </listitem>
+    </orderedlist>
+
+    <para><emphasis role="bold">Specifické parametry</emphasis></para>
+
+    <para>Pokud projekt používá specifické parametry souborů a segmentace, pak je nutno přidat oba soubory <filename>filters.xml</filename> a <filename>segmentation.conf</filename> do systému sloužícího ke správě verzí projektu a zveřejněny na serveru.</para>
+  </section>
+
+  <section>
+    <title>Krok 2: Přidat soubory pro překlad a další zdroje</title>
+
+    <para>Použijte klienta SVN nebo Git na přidání souborů pro překlad</para>
+
+    <para>Toto lze provést i v rámci OmegaT:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>zkopírujte soubory do zdrojového adresáře <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>použijte možnost <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Zapsat zdrojové soubory</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>
+
+    <para>Pro přidání dalších zdrpjů (slovníky, překladové paměti nebo glosáře) použijte klienta SVN nebo Git.</para>
+
+    <para>Pro <emphasis role="bold">smazání souborů</emphasis> použijte klienta SVN nebo Git. Tyto soubory nebudou smazány automaticky na straně překladatele: musíte je smazat ručně.</para>
+
+    <para>Pozor, OmegaT během překladu upravuje jen dva soubory:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><filename>omegat/project_save.tmx</filename></para>
+      </listitem>
+
+      <listitem>
+        <para><filename>glossary/glossary.txt</filename></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Všechny ostatní soubory slouží jen ke čtení. Pokud se je překladatel pokusí upravit, vrátí se do původního stavu pokaždé, když je projekt otevřen, zavřen, uložen nebo opětovně načten.</para>
+  </section>
+
+  <section>
+    <title>Krok 3: Poslat pozvánku překladateli</title>
+
+    <para>Jakmile je projekt na serveru nastaven, pak může projektový manager pozvat překladatele k práci na překladu jedním z dvou různých způsobů:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>posláním URL projektu s požadavkem na překladatele vytvořit lokální kopii pomocní možnosti <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Stáhnout Týmový projekt</guimenuitem> </menuchoice>.</para>
+      </listitem>
+
+      <listitem>
+        <para>posláním souboru <filename>omegat.project</filename>, který obsahuje odkaz na URL s požadavkem na překladatele zkopírovat do vyhrazeného adresáře a otevřít jej pomocí OmegaT.</para>
+
+        <para>Odkaz na URL je specifikován níže (zde na repozitář Git):</para>
+
+        <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+      </listitem>
+    </itemizedlist>
+
+    <para>V obou případech musí projektový manager poslat překladateli identifikační údaje a heslo pro přístup do repozitáře.</para>
+
+    <para><emphasis role="bold">Kontrola statistik</emphasis></para>
+
+    <para>Projektový manager by měl s překladatelem zkontrolovat, že statistika projektu je na obou stranách stejná (na straně serveru a na straně překladatele).</para>
+
+    <para>Pokud se vyskytnou nějaké rozdíky, zkontrolujte, jestli se soubory <filename>filters.xml</filename> a <filename>segmentation.conf</filename> nacházejí pod správou verzí.</para>
+  </section>
+
+  <section>
+    <title>Zvláštní případ: minimální sdílení</title>
+
+    <para>Výše zmíněný proces popisuje běžný případ, kdy projektový manager chce mít úplnou kontrolu nad projektem a kde jsou soubory (a statistiky) na obou stranách identické (na straně serveru a u překladatele).</para>
+
+    <para>Týmové projekty OmegaT lze také nastavit jiným způsobem, kde více překladatelů sdílí soubor překladové paměti project_save.tmx ale už ne zdrojové soubory.</para>
+
+    <para>V tomto případě bude postup stejný, ale projektový manager nepřidá soubory do adresáře /source.</para>
+  </section>
+
+  <section id="howto.setupteamproject.mappingparameters">
+    <title>Parametry zápisu</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>repository type</term>
+
+        <listitem>
+          <para>Typ repozitáře může být buď http (což se vztahuje i na https), svn nebo git.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>repository url</term>
+
+        <listitem>
+          <para>URL repozitáře je vzdálené umístění souborů překladu</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>mapping local</term>
+
+        <listitem>
+          <para>Určení jména místního adresáře nebo souboru, odpovídající kořenovému adresáři projektu OmegaT</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>mapping repository</term>
+
+        <listitem>
+          <para>Jméno vzdáleného adresáře nebo souboru, odpovídající URL repozitáře.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>excludes</term>
+
+        <listitem>
+          <para>Přidá vzory za použití zástupných znaků (ve stylu Apache Ant): *, ?, **</para>
+
+          <para>Příklad <userinput>**/.ini/**</userinput></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>includes</term>
+
+        <listitem>
+          <para>Podobně jak uvedeno výše.</para>
+
+          <para>Příklad: použije se <userinput>**/*.docx</userinput> pro přidání všech souborů .docx, a je jedno, kde se v projektu nacházejí.</para>
+
+          <para>Pravidla pro zahrnutí přebírají prioritu nad pravidly vyloučení</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Příklad mapování</title>
+
+    <para><programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Veškerý obsah <filename>https://repo_for_OmegaT_team_project</filename> je zapsán do místního projektu OmegaT</para>
+
+    <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+
+    <para>Všechny komponenty projektu <filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> jsou zapsány do místního projektu OmegaT.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>Vzdálený soubor  <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> je zapsán do místního souboru <filename>source/Bundle.properties</filename>.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>Vzdálený soubor <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> je zapsán do místního souboru <filename>source/readme_tr.txt</filename>.</para>
+
+    <para>Toto umožňuje přejmenovat soubor, který se má překladádat.</para>
+  </section>
+</section>

@@ -6,8 +6,9 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2013 Didier Briel
                2015-2016 Didier Briel
+               2019 Didier Briel
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -74,7 +75,7 @@ public class OpenXMLFilter extends AbstractFilter {
         /*
          Complete string when all options are enabled
          Word
-         "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)|(header\\d+\\.xml)
+         "(document\\d?\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)|(header\\d+\\.xml)
          |(footer\\d+\\.xml)|(core\\.xml)"
          Excel
          "|(sharedStrings\\.xml)|(comments\\d+\\.xml)"
@@ -88,7 +89,7 @@ public class OpenXMLFilter extends AbstractFilter {
          "|(page\\d+\\.xml)
         */
 
-        StringBuilder sb = new StringBuilder("(document\\.xml)");
+        StringBuilder sb = new StringBuilder("(document\\d?\\.xml)");
 
         OpenXMLOptions options = new OpenXMLOptions(config);
 

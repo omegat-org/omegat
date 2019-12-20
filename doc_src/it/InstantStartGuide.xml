@@ -20,13 +20,13 @@
 
     <para>È possibile premere <keycap>Ctrl+E.</keycap> per riaprire questa finestra, nel caso si ritenga di dover modificare altre impostazioni.</para>
 
-    <para>Come passaggio successivo si apre la finestra <guilabel>File del progetto</guilabel>. Fare clic su <guibutton>Copia i file nella cartella di partenza...</guibutton> per selezionare i file di partenza. OmegaT copierà i file scelti nella sottocartella <filename>/source/</filename> del progetto appena creato. È possibile chiudere la finestra dei <guilabel>file del progetto</guilabel> una volta che i file di partenza sono stati caricati nel pannello dell'<guilabel>Editor</guilabel>.</para>
+    <para>Come passaggio successivo si apre la finestra <guilabel>File del progetto</guilabel>. Fare clic su <guibutton>Copia i file nella cartella di partenza...</guibutton> per selezionare i file di partenza. OmegaT copierà i file scelti nella sotto-cartella <filename>/source/</filename> del progetto appena creato. È possibile chiudere la finestra dei <guilabel>file del progetto</guilabel> una volta che i file di partenza sono stati caricati nel pannello dell'<guilabel>Editor</guilabel>.</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
     <title>Tradurre il file</title>
 
-    <para>OmegaT offre da tradurre un segmento alla volta. Una volta che si è tradotto un segmento, premere <keycap>Ctrl+U</keycap> per spostarsi al segmento successivo da tradurre (o <keycap>Ctrl+Maiusc+U</keycap> per spostarsi a quello successivo tradotto). Per visualizzare come apparirà la traduzione nella sua forma finale, premere <keycap>Ctrl+D</keycap> per generare i documenti tradotti, che verranno creati nella sottocartella <filename>/target/</filename>, all'interno della cartella del proprio progetto. Utilizzare, mentre si traduce, i menu <guimenu>Modifica</guimenu> e <guimenu>Vai</guimenu> per eseguire varie e utili funzioni.</para>
+    <para>OmegaT offre da tradurre un segmento alla volta. Una volta che si è tradotto un segmento, premere <keycap>Ctrl+U</keycap> per spostarsi al segmento successivo da tradurre (o <keycap>Ctrl+Maiusc+U</keycap> per spostarsi a quello successivo tradotto). Per visualizzare come apparirà la traduzione nella sua forma finale, premere <keycap>Ctrl+D</keycap> per generare i documenti tradotti, che verranno creati nella sotto-cartella <filename>/target/</filename>, all'interno della cartella del proprio progetto. Utilizzare, mentre si traduce, i menu <guimenu>Modifica</guimenu> e <guimenu>Vai</guimenu> per eseguire varie e utili funzioni.</para>
   </section>
 
   <section>
@@ -58,7 +58,7 @@
   <section>
     <title>Generare il file tradotto</title>
 
-    <para>Una volta che si è sicuri che i tag, all'interno della traduzione, non contengono errori, premere <keycap>Ctrl+D</keycap> per generare i file di arrivo, che verranno creati nella sottocartella <filename>/target/</filename> all'interno della cartella del proprio progetto.</para>
+    <para>Una volta che si è sicuri che i tag, all'interno della traduzione, non contengono errori, premere <keycap>Ctrl+D</keycap> per generare i file di arrivo, che verranno creati nella sotto-cartella <filename>/target/</filename> all'interno della cartella del proprio progetto.</para>
   </section>
 
   <section>
@@ -66,7 +66,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Se l'<guilabel>Editor</guilabel> non riesce a caricare un file di partenza, allora esso potrebbe essere in un formato non gestibile da OmegaT. Per visualizzare un elenco dei formati dei file gestibili da OmegaT, leggere il capitolo <link linkend="chapter.file.filters">Filtri dei file</link>.</para>
+        <para>Se l'<guilabel>Editor</guilabel> non riesce a caricare un file di partenza, allora esso potrebbe essere in un formato non gestibile da OmegaT. Per visualizzare un elenco dei formati dei file gestibili da OmegaT, vedere <menuchoice><guimenuitem>Opzioni</guimenuitem><guimenuitem>Preferenze...</guimenuitem><guimenuitem>Filtri dei file</guimenuitem></menuchoice>.</para>
       </listitem>
     </itemizedlist>
 
@@ -84,13 +84,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>Alla fine del lavoro, OmegaT esporta nella cartella del progetto tre memorie di traduzione chiamate <filename>level1</filename>, <filename>level2</filename> e <filename>omegat</filename>. Le memorie <filename>level1</filename> e <filename>level2</filename> possono essere condivise con gli utenti di altri programmi di traduzione. La memoria chiamata <filename>omegat</filename> si può utilizzare all'interno di OmegaT, nei progetti di futura creazione. Inserendo i file delle memorie di traduzione nella sottocartella <filename>/tm/</filename> della cartella del progetto, OmegaT ricercherà al suo interno automaticamente i segmenti simili, chiamati &quot;concordanze parziali&quot;.</para>
+        <para>Alla fine del lavoro, OmegaT esporta nella cartella del progetto tre memorie di traduzione chiamate <filename>level1</filename>, <filename>level2</filename> e <filename>omegat</filename>. Le memorie <filename>level1</filename> e <filename>level2</filename> possono essere condivise con gli utenti di altri programmi di traduzione. La memoria chiamata <filename>omegat</filename> si può utilizzare all'interno di OmegaT, nei progetti di futura creazione. Inserendo i file delle memorie di traduzione nella sotto-cartella <filename>/tm/</filename> della cartella del progetto, OmegaT ricercherà al suo interno automaticamente i segmenti simili, chiamati &quot;concordanze parziali&quot;.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>È possibile aggiungere un nuovo termine al glossario premendo la combinazione <keycap>Ctrl+Maiusc+G</keycap> o copiando i glossari esistenti nella sottocartella <filename>/glossary/</filename> contenuta nella cartella del proprio progetto: OmegaT vi cercherà automaticamente le parole.</para>
+        <para>È possibile aggiungere un nuovo termine al glossario premendo la combinazione <keycap>Ctrl+Maiusc+G</keycap> o copiando i glossari esistenti nella sotto-cartella <filename>/glossary/</filename> contenuta nella cartella del proprio progetto: OmegaT vi cercherà automaticamente le parole.</para>
       </listitem>
     </itemizedlist>
 
@@ -102,7 +102,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>È disponibile un'introduzione più completa nel documento <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT per principianti</ulink> presente nel sito web di OmegaT. Per ottenere assistenza su qualsiasi aspetto del programma, iscriversi al <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info">Gruppo utenti di OmegaT.</ulink></para>
+        <para>È disponibile un'introduzione più completa nel documento <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT per principianti</ulink> presente nel sito web di OmegaT. Per ottenere assistenza su qualsiasi aspetto del programma, iscriversi al <ulink url="https://omegat.org/support">Gruppo utenti di OmegaT.</ulink></para>
       </listitem>
     </itemizedlist>
   </section>

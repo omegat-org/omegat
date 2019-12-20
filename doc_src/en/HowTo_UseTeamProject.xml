@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>Use a Team Project</title>
+
+  <para>OmegaT team projects must first be <link linkend="howto.setupteamproject">set up</link> on a server.</para>
+
+  <para>To use a team project for the first time, follow the procedure
+  provided by the project manager.</para>
+
+  <para>Once the project has been opened, translation proceeds in the same way
+  as for a non-team project, except the following points.</para>
+
+  <para><emphasis role="bold">Automatic saving</emphasis></para>
+
+  <para>Every 3 minutes (by default), the local project is synchronised with
+  the remote repository so that the project manager or other translators can
+  see and use translations added during that period.</para>
+
+  <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.savingandoutput"><menuchoice>
+      <guimenuitem>Options</guimenuitem>
+
+      <guimenuitem>Preferences</guimenuitem>
+
+      <guimenuitem>Saving and Output</guimenuitem>
+    </menuchoice></link>.</para>
+
+  <para><emphasis role="bold">Synchronised files</emphasis></para>
+
+  <para>Whenever the project is automatically saved, but also when it is
+  opened, closed and reloaded, only two files are actually
+  synchronised:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>All other files will be replaced by the files in the remote
+  repository.</para>
+
+  <para><emphasis role="bold">Adding new source files</emphasis></para>
+
+  <para>To add a new source file:</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>copy the files to the <filename>/source</filename> folder</para>
+      </listitem>
+
+      <listitem>
+        <para>use <menuchoice>
+            <guimenuitem>Project</guimenuitem>
+
+            <guimenuitem>Commit Source Files</guimenuitem>
+          </menuchoice></para>
+      </listitem>
+    </orderedlist>Existing source files can be modified, but the commit
+  operation must be carried out before an automatic save and before the
+  project is reloaded or closed.</para>
+
+  <para><emphasis role="bold">Deleting source files</emphasis></para>
+
+  <para>Files must be deleted first by the project manager, and then
+  locally.</para>
+
+  <para><emphasis role="bold">Changing segmentation rules or file
+  filters</emphasis></para>
+
+  <para>Project parameters must be changed by the project manager.</para>
+
+  <para><emphasis role="bold">Working offline</emphasis></para>
+
+  <para>A team project can be opened and translated offline. All the changes
+  will be synchronised the next time a connection is available.</para>
+
+  <para>To work offline:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Disconnect from the network before opening the project,</para>
+    </listitem>
+
+    <listitem>
+      <para>or open the project with the command line using the
+      <command>--no-team</command> option.</para>
+    </listitem>
+  </itemizedlist>
+</section>

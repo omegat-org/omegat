@@ -7,7 +7,7 @@
                2008-2014 Alex Buloichik
                2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.StyledDocument;
 
 import org.junit.Test;
 import org.omegat.core.Core;
@@ -65,9 +67,12 @@ public class GlossaryTextAreaTest extends TestCore {
             }
         });
         // Make sure representations of both entries are rendered
-        String gtaText = entries.get(0).toStyledString().text.toString() + "\n\n"
-                + entries.get(1).toStyledString().text.toString() + "\n\n";
-        assertEquals(gtaText, gta.getText());
+        DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer();
+        StyledDocument doc = new DefaultStyledDocument();
+        renderer.render(entries.get(0), doc);
+        renderer.render(entries.get(1), doc);
+        String expected = doc.getText(0, doc.getLength());
+        assertEquals(expected, gta.getText());
     }
 
     /**

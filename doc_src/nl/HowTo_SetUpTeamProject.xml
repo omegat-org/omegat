@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.setupteamproject">
+  <title>Instellen van een Teamproject</title>
+
+  <para>Instellen van een teamproject vereist enige kennis van servers en de versiesystemen SVN of Git. Het zou dus moeten worden uitgevoerd door een projectbeheerder, een projectleider of een lokalisatie-ingenieur.</para>
+
+  <para>We zullen, omdat veel informatie over SVN en Git eenvoudig beschikbaar is, hier niet beschrijven hoe zij werken, maar alleen hoe OmegaT werkt met hen.</para>
+
+  <section>
+    <title>Stap 1: Maak een leeg project op een server</title>
+
+    <para><emphasis role="bold">Maken van een leeg project op een server</emphasis></para>
+
+    <orderedlist>
+      <listitem>
+        <para>Maak een opslagplaats voor SVN of Git aan op een server die toegankelijk zal zijn voor de vertalers.</para>
+      </listitem>
+
+      <listitem>
+        <para>Maak een lokale kopie van de opslagplaats (<command>check out</command> met SVN, <command>clone</command> met Git).</para>
+      </listitem>
+
+      <listitem>
+        <para>Maak een nieuw, leeg project van OmegaT in de lokale opslagplaats. Dat kan op twee manieren worden gedaan:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><menuchoice>
+                <guimenuitem>Project</guimenuitem> <guimenuitem>Nieuw…</guimenuitem>
+              </menuchoice></para>
+          </listitem>
+
+          <listitem>
+            <para>op de opdrachtregel: <command>java -jar OmegaT.jar team init [lang1] [lang2]</command></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para>Voeg het nieuwe project van OmegaT toe aan het versiesysteem (<command>add</command> met SVN en Git)</para>
+
+        <para>Opmerking: Als het project werd gemaakt met de opdrachtregel in stap 3, is deze stap al door het programma uitgevoerd.</para>
+      </listitem>
+
+      <listitem>
+        <para>Publiceer het nieuwe project van OmegaT op de server (<command>commit</command> met SVN, <command>commit</command> gevolgd door <command>push</command> met Git).</para>
+      </listitem>
+    </orderedlist>
+
+    <para><emphasis role="bold">Specifieke parameters</emphasis></para>
+
+    <para>Als het project specifieke filters en parameters voor segmentatie gebruikt, moeten beide bestanden <filename>filters.xml</filename> en <filename>segmentation.conf</filename> worden toegevoegd aan het versiesysteem en worden gepubliceerd op de server.</para>
+  </section>
+
+  <section>
+    <title>Stap 2: Te vertalen bestanden en andere bronnen toevoegen</title>
+
+    <para>Gebruik een cliënt voor SVN of Git om de te vertalen bestanden toe te voegen.</para>
+
+    <para>Dit kan ook binnen OmegaT worden gedaan:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>kopieer de bestanden naar de map <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>gebruik <menuchoice> <guimenuitem>Project</guimenuitem> <guimenuitem>Bronbestanden indienen</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>
+
+    <para>Gebruik een cliënt voor SVN of Git om andere bronnen (woordenboeken, TMX-en of woordenlijsten) toe te voegen.</para>
+
+    <para>Gebruik een cliënt voor SVN of Git om <emphasis role="bold">bestanden te verwijderen</emphasis>. Deze bestanden zullen niet automatisch worden verwijderd aan de zijde van de vertaler: u zult ze moeten vragen om de bestanden handmatig te verwijderen.</para>
+
+    <para>Onthoud dat slechts twee bestanden worden aangepast door OmegaT tijdens het vertalen:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><filename>omegat/project_save.tmx</filename></para>
+      </listitem>
+
+      <listitem>
+        <para><filename>glossary/glossary.txt</filename></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Alle andere bestanden zijn alleen-lezen. Als de vertaler probeert ze aan te passen zullen terugkeren naar hun originele status, iedere keer als het project wordt geopend, gesloten, opgeslagen of opnieuw wordt geladen.</para>
+  </section>
+
+  <section>
+    <title>Stap 3: Een invitatie sturen naar de vertaler</title>
+
+    <para>Als het project eenmaal is ingesteld op de server kan de projectbeheerder de vertaler uitnodigen om er in te gaan werken, op twee verschillende manieren:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>versturen van de URL van het project en de vertaler vragen een lokale kopie te maken met <menuchoice> <guimenuitem>Project</guimenuitem> <guimenuitem>Teamproject downloaden</guimenuitem> </menuchoice>.</para>
+      </listitem>
+
+      <listitem>
+        <para>versturen van een bestand <filename>omegat.project</filename> dat een verwijzing bevat naar de URL en de vertaler te vragen die te kopiëren naar een aangewezen map en die te openen met OmegaT.</para>
+
+        <para>De verwijzing naar de URL wordt gespecificeerd als hieronder (hier naar een opslagplaats van Git):</para>
+
+        <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+      </listitem>
+    </itemizedlist>
+
+    <para>In beide gevallen moet de projectbeheerder de vertaler zijn ID en wachtwoord sturen om toegang te krijgen tot de opslagplaats.</para>
+
+    <para><emphasis role="bold">Statistieken controleren</emphasis></para>
+
+    <para>De Projectbeheerder zou met de vertaler moeten controleren of de statistieken aan beide zijden identiek zijn (aan de zijde van de server en aan de zijde van de vertaler).</para>
+
+    <para>Controleer of de bestanden <filename>filters.xml</filename> en <filename>segmentation.conf</filename> onder versiebeheer zijn geplaatst als er verschillen zijn.</para>
+  </section>
+
+  <section>
+    <title>Speciaal geval: minimaal delen</title>
+
+    <para>Het proces hierboven beschrijft de normale gevallen, waar de projectbeheerder volledige controle wil hebben over het project en waar de bestanden (en de statistieken) identiek zijn aan beide zijden (aan de zijde van de server en aan de zijde van de vertaler).</para>
+
+    <para>Teamprojecten voor OmegaT kunnen ook op een andere manier worden ingesteld, waarbij verschillende vertalers het bestand project_save.tmx delen, maar niet de bronbestanden.</para>
+
+    <para>In dit geval is de procedure hetzelfde, maar voegt de projectbeheerder de bestanden niet toe aan de map /source.</para>
+  </section>
+
+  <section id="howto.setupteamproject.mappingparameters">
+    <title>Parameters voor rotutes naar mappen</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>type opslagplaats </term>
+
+        <listitem>
+          <para>Dit kan zijn: http (inclusief https), svn of git.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>url voor opslagplaats</term>
+
+        <listitem>
+          <para>Locatie op afstand van de te vertalen bestanden.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>lokale route naar mappen</term>
+
+        <listitem>
+          <para>Naam van de lokale map of bestand, relatief ten opzichte van de bron van het project van OmegaT.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>opslagplaats route naar mappen</term>
+
+        <listitem>
+          <para>Naam van de map of schijf op afstand, relatief ten opzichte van de URL van de opslagplaats.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>uitsluiten</term>
+
+        <listitem>
+          <para>Voeg patronen toe met jokertekens (stijl van Apache Ant): *, ?, **</para>
+
+          <para>Voorbeeld: <userinput>**/.ini/**</userinput></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>opnemen</term>
+
+        <listitem>
+          <para>Zoals boven.</para>
+
+          <para>Voorbeeld: <userinput>**/*.docx</userinput> om alle bestanden .docx toe te voegen, waar zij ook zijn geplaatst binnen het project.</para>
+
+          <para>De regels voor opnemen hebben prioriteit boven de regels voor uitsluiten.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Voorbeeld routes naar mappen</title>
+
+    <para><programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_OmegaT_teamproject&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Alle inhoud van <filename>https://opslag_voor_OmegaT_teamproject</filename> volgt de route naar het lokale project van OmegaT</para>
+
+    <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_alle_OmegaT_teamprojecten&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+
+    <para>Alle inhoud van <filename>https://opslag_voor_alle_OmegaT_teamprojecten/En-US_DE_project</filename> volgt de route naar het lokale project van OmegaT.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>Het bestand op afstand <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> volgt de route naar het lokale bestand <filename>source/Bundle.properties</filename>.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>Het bestand op afstand <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> volgt de route naar het lokale bestand <filename>source/readme_tr.txt</filename>.</para>
+
+    <para>Dit maakt het mogelijk het te vertalen bestand te hernoemen.</para>
+  </section>
+</section>

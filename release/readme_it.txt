@@ -1,4 +1,4 @@
-Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2017
+Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2019
 
 
 Che cosa è OmegaT?
@@ -78,7 +78,7 @@ Se Java è già installato sul proprio sistema, un metodo per installare OmegaT
 
 A questo proposito, scaricare ed eseguire il file seguente:
 
-   https://omegat.sourceforge.io/webstart/OmegaT.jnlp
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
 Esso installerà l'ambiente corretto per il proprio computer e l'applicazione
 per il primo avvio. Non è necessario eseguire online le chiamate successive.
@@ -124,7 +124,7 @@ e quindi:
 
 l'uso dello script Kaptain (omegat.kaptn), compreso nel pacchetto,
 fornisce un metodo più semplice per avviare OmegaT. Per utilizzare lo script è necessario prima installare
-Kaptain. Si potrà allora avviare lo script di lancio in Kaptain con :
+Kaptain. Si potrà allora avviare lo script di lancio in Kaptain con:
 
   Alt+F2
 
@@ -145,7 +145,7 @@ cd <cartella dove si trova il file OmegaT.jar>
 
 (il file eseguibile Java è il file java in Linux e java.exe in Windows.
 Se Java è installato a livello di sistema ed è nel percorso del comando, il percorso completo
-non deve essere indicato.)
+non deve essere indicato).
 
 
 
@@ -154,15 +154,15 @@ Contributi
 
 OmegaT è un lavoro originale di Keith Godfrey.
 
-Didier Briel è il gestore del progetto OmegaT.
+Aaron Madlon-Kay è il responsabile del progetto OmegaT.
 
 Team attuale:
 (ordine alfabetico)
 
   Vincent Bidaux (gestore della documentazione)
-  Didier Briel (responsabile di progetto di OmegaT, responsabile della comunità di Twitter)
-  Kos Ivantsov (responsabile della localisazzazione)
-  Aaron Madlon-Kay (responsabile dell'integrazione)
+  Marco Cevoli (responsabile comunità di Telegram)
+  Jean-Christophe Helary (responsabile comunità di Twitter) 
+  Kos Ivantsof (responsabile della localizzazione)
   Concepción Martin (responsabile della comunità di Facebook)
   Briac Pilpré (webmaster)
   Lucie Vecerova (responsabile della comunità di Facebook)
@@ -171,14 +171,16 @@ I contributi al codice sono documentati in /docs/contributors.txt.
 
 Elenco dei contributi precedenti (in ordine alfabetico)
 
+  Anthony Baldwin (responsabile della localizzazione)
+  Didier Briel (responsabile del progetto)
   Alex Buloichik (sviluppatore primario)
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (titolare del gruppo di supporto group owner, responsabile della localizzazione)
-  Maxym Mykhalchuk (sviluppatore capo developper)
+  Jean-Christophe Helary (titolare del gruppo di supporto, responsabile della localizzazione)
+  Maxym Mykhalchuk (sviluppatore capo)
   Samuel Murray
-  Henry Pijffers (responsabile della edizione)
-  Marc Prior (co-ordinatore del progetto, webmaster)
+  Henry Pijffers (responsabile dei rilasci)
+  Marc Prior (coordinatore del progetto, webmaster)
   Vito Smolej (responsabile della documentazione)
   e tantissime altre persone utilissime
 
@@ -196,7 +198,7 @@ Le informazioni più aggiornate su OmegaT possono essere reperite accedendo a:
 
 Assistenza all'utente, nel gruppo utenti di Yahoo (multilingue), in cui è possibile ricercare negli archivi senza necessità di iscrizione:
 
-   https://groups.yahoo.com/neo/groups/OmegaT/info
+   https://omegat.org/support
 
 Richieste di miglioramenti (in Inglese), nel sito SourceForge:
 

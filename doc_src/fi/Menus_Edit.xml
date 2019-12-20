@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>Muokkaa</title>
+
+  <para>Tämän valikon kohdat näkyvät vain silloin, kun projekti on avoinna.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Kumoa viime toiminto</guimenuitem></term>
+
+      <listitem>
+        <para>Segmentti palautuu sellaiseksi kuin se oli ennen edellistä muokkaustoimintoa. Komentoa ei voi käyttää sen jälkeen, kun muokattu segmentti on vahvistettu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Toista viime toiminto</term>
+
+      <listitem>
+        <para>Segmentti palautuu sellaiseksi kuin se oli ennen kuin edellinen muokkauskomento peruutettiin. Komentoa ei voi käyttää sen jälkeen, kun muokattu segmentti on vahvistettu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Korvaa osumalla tai valinnalla</term>
+
+      <listitem>
+        <para>Kaikki kohdesegmentissä oleva teksti korvautuu valitulla sumealla osumalla. Oletusarvoisesti valittuna on ensimmäinen osuma.</para>
+
+        <para>Jos sumean osuman tekstistä on valittu vain osa, kaikki kohdesegmentissä oleva teksti korvataan tällä valinnalla.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Lisää osuma tai valinta</term>
+
+      <listitem>
+        <para>Valittu sumea osuma lisätään käännettävään segmenttiin kohdistimen kohdalle. Jos kohdesegmentin tekstistä on valittu vain osa, lisäystoiminto kirjoittaa osuman valitun tekstin päälle.</para>
+
+        <para>Jos sumean osuman tekstistä on valittu vain osa, vain valittu teksti lisätään kohdistimen kohdalle käännettävään segmenttiin.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Korvaa konekäännöksellä</term>
+
+      <listitem>
+        <para>Kohdesegmentissä oleva teksti korvautuu konekäännöksellä, jonka käyttäjän valitsema konekäännöspalvelu on tuottanut. Jos yhtään konekäännöspalvelua ei ole aktivoitu (kohdassa <menuchoice> <guimenu>Valinnat</guimenu> <guimenuitem>Konekäännös</guimenuitem></menuchoice>), mitään ei tapahdu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Korvaa lähdetekstillä</term>
+
+      <listitem>
+        <para>Kaikki kohdesegmentissä oleva teksti korvautuu lähdetekstillä.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Lisää lähdeteksti</term>
+
+      <listitem>
+        <para>Lähdeteksti lisätään kohdistimen kohdalle.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Lisää puuttuvat lähdetägit</term>
+
+      <listitem>
+        <para>Kohdistimen kohdalle lisätään (puuttuvat) lähdesegmentin tägit.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Lisää seuraava puuttuva tägi</term>
+
+      <listitem>
+        <para>Ainoastaan yksi tägi (puuttuvista) lisätään kohdistimen kohdalle.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vie valinta</term>
+
+      <listitem>
+        <para>Senhetkinen valinta viedään tekstitiedostoon käsiteltäväksi. Jos tekstinpätkää ei ole valittu, tiedostoon kirjoitetaan senhetkinen lähdesegmentti. Kun käyttäjä lopettaa <application>OmegaT</application>-istunnon, tiedostoa ei tyhjennetä (yhdenmukainen käytäntö leikepöydän kanssa). Sisältö viedään OmegaT-käyttäjän asetuskansiosta löytyvään tiedostoon <filename>selection.txt</filename>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Luo sanaston termi</term>
+
+      <listitem>
+        <para>Tämä valinta antaa käyttäjän luoda uuden termin oletuksena olevaan sanastotiedostoon.</para>
+
+        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap>, näytölle avautuu sanastoruutu ja valintasi siirtyy sanastoruudun kenttään </keycombo>Lähdekielinen termi<guilabel>.</para>
+
+        <para>Voit täyttää kentät <guimenuitem>Kohdekielinen termi</guimenuitem> ja <guimenuitem>Kommentti</guimenuitem> samalla tavalla: valitse uusi tekstinpätkä ja paina näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Etsi projektista…</term>
+
+      <listitem>
+        <para>Uusi <link linkend="windows.textsearch">Hakuikkuna</link> avautuu.</para>
+
+        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää<keycombo> <keycap>, näytölle avautuu hakuikkuna ja valintasi siirtyy hakuikkunan kenttään </keycap>Etsittävä teksti:<keycap>.</para>
+
+        <para>Näppäinyhdistelmä <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>F</keycap> </keycombo>näyttää viimeksi avatun hakuikkunan (eikä siis avaa uutta hakuikkunaa).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Etsi ja korvaa…</term>
+
+      <listitem>
+        <para>Uusi <link linkend="windows.textreplace">Etsi ja korvaa</link> -ikkuna avautuu.</para>
+
+        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää<keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, näytölle avautuu hakuikkuna ja valintasi siirtyy kenttään <guilabel>Etsittävä teksti:</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Hae sanakirjoista</term>
+
+      <listitem>
+        <para>Jos <link linkend="dialogs.preferences.dictionary">automaattinen haku sanakirjoista</link> ei ole valittuna, tämä toiminto antaa käyttäjän hakea valittua sanaa sanakirjoista.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vaihda kirjainkokoa</term>
+
+      <listitem>
+        <para>Lähdesegmentissä maalattuna olevan tekstin kirjainkoko vaihtuu valinnan mukaiseksi (pienet alkukirjaimet, isot alkukirjaimet, otsikon kirjainkoko tai lauseen kirjainkoko). Näppäinyhdistelmällä <keycombo> <keycap>vaihto</keycap> <keycap>F3</keycap> </keycombo> voit kiertää näiden neljän vaihtoehdon välillä. Jos tekstiä ei ole valittu, <application>OmegaT</application> valitsee sanan, johon heti kohdistimen vieressä oikealla puolella oleva kirjain kuuluu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Valitse osuma</term>
+
+      <listitem>
+        <para>Osumaruudun edellinen, seuraava tai n:nnes sumean osuma lisätään segmenttiin / korvaa segmentissä olevan tekstin.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Käytä oletuskäännöksenä</term>
+
+      <listitem>
+        <para>Jos senhetkiselle segmentille on useita vaihtoehtoisia käännöksiä, voit merkitä valitsemasi vaihtoehdon oletuskäännökseksi. Jos käännösvaihtoehtoja on vain yksi, käännös näkyy harmaana.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Luo vaihtoehtoinen käännös</term>
+
+      <listitem>
+        <para>Yksi ja sama segmentti voi vaatia erilaisia käännöksiä, kontekstista riippuen. Valitse tämä valikon kohta, jos senhetkinen käännös ei kelpaa ja kirjoita vaihtoehtoinen käännös.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Poista käännös</term>
+
+      <listitem>
+        <para>Käännös poistetaan ja segmentti merkitään kääntämättömäksi.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Aseta tyhjä käännös</term>
+
+      <listitem>
+        <para>Käännös merkitään tyhjäksi. Tyhjäksi merkityn käännöksen kohdalla ei kohdeasiakirjassa ole mitään. Editorissa tyhjän käännöksen kohdalla lukee &lt;TYHJÄ&gt;.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Kirjaa sama käännös</term>
+
+      <listitem>
+        <para>Käytä tätä komentoa merkitsemään käännös samaksi kuin lähdeteksti silloinkin, kun <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Käännös saa olla sama kuin lähdeteksti</guilabel></link> -valintaa ei ole valittu.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

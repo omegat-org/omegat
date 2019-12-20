@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Vai</title>
+
+  <para>Questo menu visualizza le voci solo quando è aperto un progetto.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Prossimo segmento non tradotto</term>
+
+      <listitem>
+        <para>Si sposta al segmento successivo che non presenta equivalenti nella memoria di traduzione.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmento tradotto successivo</term>
+
+      <listitem>
+        <para>Si sposta al segmento successivo già tradotto, ignorando i segmenti non tradotti.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmento successivo</term>
+
+      <listitem>
+        <para>Si sposta al segmento immediatamente successivo a quello attivo. Se il segmento attivo è l'ultimo di un file, verrà attivato il primo segmento del file successivo.</para>
+
+        <para>Nota: il tasto <keycap>Invio</keycap> è una scorciatoia alternativa se non è attivata l'opzione <link linkend="dialogs.preferences.general.usetabtoadvance">Avanza con il tasto TAB</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmento precedente</term>
+
+      <listitem>
+        <para>Si sposta al segmento immediatamente precedente a quello attivo. Se il segmento attivo è il primo di un file, verrà attivato l'ultimo segmento del file precedente.</para>
+
+        <para>Nota: <keycombo> <keycap>Ctrl</keycap> <keycap>Invio</keycap> </keycombo> è una scorciatoia alternativa se non è attivata l'opzione <link linkend="dialogs.preferences.general.usetabtoadvance">Avanza con il tasto TAB</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Numero di segmento...</term>
+
+      <listitem>
+        <para>Il segmento è aperto quando viene digitato o il numero di segmento o il suo richiamo.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nota successiva</term>
+
+      <listitem>
+        <para>Sarà aperto il segmento immediatamente successivo che contenga una nota.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nota precedente</term>
+
+      <listitem>
+        <para>Sarà aperto il segmento immediatamente precedente che contenga una nota.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Origine della concordanza selezionata</term>
+
+      <listitem>
+        <para>Si sposta al segmento che corrisponde alla corrispondenza selezionata corrente nel pannello <guilabel>Concordanze parziali</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Avanti nella cronologia...</term>
+
+      <listitem>
+        <para><application>OmegaT</application> tiene traccia dei segmenti eseguiti. Con questo comando si può saltare al segmento lasciato in precedenza tramite il comando <guimenuitem>Indietro nella cronologia...</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Indietro nella cronologia...</term>
+
+      <listitem>
+        <para>Con questo comando ci si può spostare indietro di un segmento alla volta, per tornare poi a quello attivo tramite il comando <guimenuitem>Avanti nella cronologia...</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

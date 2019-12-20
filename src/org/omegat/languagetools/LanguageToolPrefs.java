@@ -5,7 +5,7 @@
 
  Copyright (C) 2016 Lev Abashkin
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -128,7 +128,15 @@ public final class LanguageToolPrefs {
 
     private static Set<String> getLangauageSpecificPreference(String namePrefix, String languageCode,
             String defaultValue) {
-        return setOf(Preferences.getPreferenceDefault(namePrefix + "_" + languageCode, defaultValue));
+        String key = namePrefix + "_" + languageCode;
+        // We can't use Preferences.getPreferenceDefault here because it assumes
+        // that an empty value is unset, whereas here an empty value is
+        // meaningful
+        if (Preferences.existsPreference(key)) {
+            return setOf(Preferences.getPreference(key));
+        } else {
+            return setOf(defaultValue);
+        }
     }
 
     private static Set<String> setOf(String commaDelimited) {

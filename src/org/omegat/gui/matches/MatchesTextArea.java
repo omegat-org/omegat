@@ -11,7 +11,7 @@
                2014 Aaron Madlon-Kay
                2015 Yu Tang
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -36,6 +36,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -54,8 +55,10 @@ import java.util.stream.Stream;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.text.AttributeSet;
+import javax.swing.text.Caret;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
@@ -71,7 +74,9 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.util.Java8Compat;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -532,7 +537,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             int clickedItem = -1;
 
             // where did we click?
-            int mousepos = MatchesTextArea.this.viewToModel(p);
+            int mousepos = Java8Compat.viewToModel(MatchesTextArea.this, p);
 
             for (int i = 0; i < delimiters.size() - 1; i++) {
                 int start = delimiters.get(i);
@@ -671,5 +676,19 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         prefs.addActionListener(e -> new PreferencesWindowController()
                 .show(Core.getMainWindow().getApplicationFrame(), TMMatchesPreferencesController.class));
         menu.add(prefs);
+    }
+
+    @Override
+    protected void processKeyEvent(KeyEvent e) {
+        KeyStroke s = KeyStroke.getKeyStrokeForEvent(e);
+        if (s.equals(PropertiesShortcuts.getEditorShortcuts().getKeyStroke("editorContextMenu"))) {
+            JPopupMenu popup = new JPopupMenu();
+            populateContextMenu(popup, activeMatch);
+            Caret caret = getCaret();
+            Point p = caret == null ? getMousePosition() : caret.getMagicCaretPosition();
+            popup.show(this, (int) p.getX(), (int) p.getY());
+            e.consume();
+        }
+        super.processKeyEvent(e);
     }
 }

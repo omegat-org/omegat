@@ -1,0 +1,316 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;B.&nbsp;Glossaries</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - User's Guide">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - User's Guide">
+      <link rel="prev" href="appendix.dictionaries.html" title="Appendix&nbsp;A.&nbsp;Dictionaries">
+      <link rel="next" href="appendix.spellchecker.html" title="Appendix&nbsp;C.&nbsp;Spell checker">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;B.&nbsp;Glossaries</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.dictionaries.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.spellchecker.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.glossaries"></a>Appendix&nbsp;B.&nbsp;Glossaries
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5558">1. Usage</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5597">2. File format</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5633">3. How to create glossaries</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5668">4. Priority glossary</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5675">5. Common glossary problems</a></span></dt>
+            </dl>
+         </div>
+         <p>Glossaries are files created and updated manually for use in
+              <span class="application">OmegaT</span>.
+         </p>
+         <p>If an <span class="application">OmegaT</span> project contains one or more
+              glossaries, any terms in the glossary which are also found in the current
+              segment will be automatically displayed in the Glossary viewer.
+         </p>
+         <p>You define its location and name in the project properties dialog. The
+              extension must be <code class="filename">.txt</code> or <code class="filename">.utf8</code>
+              (if not, it will be added). The location of the file must be within the
+              <code class="filename">/glossary</code> folder, but it can be in a deeper folder
+              (e.g., <code class="filename">glossary/sub/glossary.txt</code>). The file does not
+              need to exist when setting it, it will be created (if necessary) when adding
+              a glossary entry. If the file already exists, no attempt is done to verify
+              the format or the character set of the file: the new entries will always be
+              in tab-separated format and UTF-8. As the existing content will not be
+              touched, damage to an existing file would be limited.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5558"></a>1.&nbsp;Usage
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>To use an existing glossary, simply place it in the
+                   <code class="filename">/glossary</code> folder after creating the project.
+                   <span class="application">OmegaT</span> automatically detects glossary files in
+                   this folder when a project is opened. Terms in the current segment which
+                   <span class="application">OmegaT</span> finds in the glossary file(s) are
+                   displayed in the Glossary pane:
+            </p>
+            <div class="figure"><a name="d0e5572"></a><p class="title"><b>Figure&nbsp;B.1.&nbsp;Glossary pane</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Glossary pane"></div>
+               </div>
+            </div><br class="figure-break"><p>The word before the = sign is the source term, and its translation
+                   is (or are) the words after =. The vocabulary entry can have a comment
+                   added. The glossary function only finds exact matches with the glossary
+                   entry (e.g. does not find inflected forms etc.). New terms can be added
+                   manually to the glossary file(s) during translation, for example in a text
+                   editor. Newly added terms will not be recognized once the changes in the
+                   text file have been saved.
+            </p>
+            <p>The source term does not have to be a single-word item, as the next
+                   example shows:
+            </p>
+            <div class="figure"><a name="d0e5584"></a><p class="title"><b>Figure&nbsp;B.2.&nbsp;multiple words entries in glossaries - example</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="multiple words entries in glossaries - example"></div>
+               </div>
+            </div><br class="figure-break"><p>The underlined item "pop-up menu" can be found in the glossary pane
+                   as "pojavni menu". Highlighting it in the Glossary pane and then
+                   rightclicking insets at the cursor position in the target
+                   segment.<a href="#ftn.d0e5594" class="footnote" name="d0e5594"><sup class="footnote">[1]</sup></a></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5597"></a>2.&nbsp;File format
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Glossary files are simple plain text files containing three-column,
+                   tab-delimited lists with the source and target terms in the first and
+                   second columns respectively. The third column can be used for additional
+                   information. You can have entries with the target column missing, i.e.
+                   just containing the source term and the comment.
+            </p>
+            <p>The encoding of glossaries is determined automatically. Of course,
+                   the encoding must be compatible with both the languages contained, so
+                   Unicode is recommended.
+            </p>
+            <p>Also supported is the CSV format. This format is the same as the tab
+                   separated one: source term, target term. Comment fields are separated by a
+                   comma ','. Strings can be enclosed by quotes ", which allows having a
+                   comma inside a string:
+            </p>
+            <p><code class="literal">"This is a source term, which contains a comma","c'est un
+                      terme, qui contient une virgule"</code></p>
+            <p>In addition to the plain text format, TBX format is also supported as a read-only glossary format. The
+                   location of the <code class="filename">.tbx</code> file must be within the
+                   <code class="filename">/glossary</code> folder, but it can be in a deeper folder
+                   (e.g., <code class="filename">glossary/sub/MyGlossary.tbx</code>).
+            </p>
+            <p>TBX - Term Base eXchange - is the open, XML-based standard for
+                   exchanging structured terminological data, TBX has been approved as an
+                   international standard by LISA and ISO. If you have an existing
+                   terminology handling system it is quite possible it offers the export of
+                   terminology data via TBX format. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft
+                      Terminology Collection</a> can be downloaded in nearly 100 languages and can serve as
+                   a cornerstone IT glossary.
+            </p>
+            <p>Note: the <code class="filename">.tbx</code> output of MultiTerm seems to not
+                   be reliable (November 2013), it is better to use the
+                   <code class="filename">.tab</code> output of MultiTerm instead.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5633"></a>3.&nbsp;How to create glossaries
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The project setting allows one to enter a name for a writable
+                   glossary file (see beginning of this chapter). Right-click in the glossary
+                   pane or press <span class="keycap"><strong>Ctrl+Shift+G</strong></span> to add a new entry. A dialog
+                   opens, allowing you to enter the source term, target term and any comments
+                   you may have:
+            </p>
+            <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
+            <p>The contents of glossary files are kept in memory and are loaded
+                   when the project is opened or reloaded. Updating a glossary file is thus
+                   rather simple: press <span class="keycap"><strong>Ctrl+Shift+G</strong></span> and enter the new term,
+                   its translation and any comments you may have (ensuring you press tab
+                   between the fields) and save the file. The contents of the glossary pane
+                   will be updated accordingly.
+            </p>
+            <p>The location of the writable glossary file can be set in the
+                   <span class="guimenuitem">Project &gt; Properties ... </span>dialog. The
+                   recognized extensions are <code class="filename">TXT</code> and
+                   <code class="filename">UTF8</code></p>
+            <p><span class="bold"><strong>Note: </strong></span>Of course there are other
+                   ways and means to create a simple file with tab delimited entries. Nothing
+                   speaks against using Notepad++ on Windows, GEdit on Linux for instance or
+                   some spreadsheet program for this purpose: any application, that can
+                   handle UTF-8 (or UTF-16 LE) and that can show white space (so that you do
+                   not miss the required <span class="keycap"><strong>TAB</strong></span> characters) can be used.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5668"></a>4.&nbsp;Priority glossary
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The results from the priority glossary (by default,
+                   glossary/glossary.txt) appear in first places in the Glossary pane and in
+                   TransTips.
+            </p>
+            <p>As entries can mix words from priority and non priority glossaries,
+                   the words from the priority glossary are displayed in bold.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5675"></a>5.&nbsp;Common glossary problems
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Problem: No glossary terms are displayed -
+                         possible causes:</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>No glossary file found in the "glossary" folder.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>The glossary file is empty.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>The items are not separated with a TAB character.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>The glossary file does not have the correct extension (.tab,
+                                .utf8 or .txt).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>There is no EXACT match between the glossary entry and the
+                                source text in your document - for instance plurals.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>The glossary file does not have the correct encoding.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>There are no terms in the current segment which match any terms
+                                in the glossary.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>One or more of the above problems may have been fixed, but the
+                                project has not been reloaded.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Problem: In the glossary pane, some characters
+                         are not displayed properly</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>...but the same characters are displayed properly in the Editing
+                                pane: the extension and the file encoding do not match.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e5594" class="footnote">
+               <p><a href="#d0e5594" class="para"><sup class="para">[1] </sup></a>Note that in the above case, this is just half (or even less) of
+                          the story, as the target language (Slovenian) uses declension. So the
+                          inserted "pojavni meni" in the nominative form - has to be changed to
+                          "pojavnem meniju" , i.e. to the locative. So it is probably faster to
+                          type the term correctly right away without bothering with the glossary
+                          and its shortcuts.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.dictionaries.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.spellchecker.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;A.&nbsp;Dictionaries&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;C.&nbsp;Spell checker</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

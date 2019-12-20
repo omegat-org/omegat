@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>Impara a impreare OmegaT in 5 minutos!</title>
+
+  <section id="create.and.open.new.project">
+    <title>Cunfigura unu progetu nou<indexterm class="singular">
+        <primary>Progetu</primary> <secondary>Crea / aberi nou</secondary>
+      </indexterm></title>
+
+    <para><remark>Note:</remark> In unu Mac de Apple, imprea sa tecla <keycap>Command</keycap> imbetzes de sa tecla <keycap>Control</keycap>.</para>
+
+      <indexterm class="singular">
+        <primary>Menù Progetu</primary> <secondary>Nou...</secondary>
+      </indexterm>
+
+    <para>Pro cumintzare a impreare OmegaT, crea in antis unu progetu chi cuntèngiat totu is archìvios, che a s'archìviu de orìgine, memòrias de tradutzione, glossàrios e mancari puru s'archìviu tradùidu.  In su menù <guimenu>Progetu</guimenu>, sèbera <menuchoice><guimenuitem>Nou...</guimenuitem></menuchoice> e iscrie unu nòmine pro su progetu tuo. Regorda in ue ses creende su progetu, ca as a tènnere bisòngiu de torrare luego a cussa cartella.</para>
+
+    <para>A pustis de àere donadu unu nòmine a su progetu, s'at a abèrrere su cuadru de diàlogu <guilabel>Crea unu progetu nou</guilabel>. In pitzu de cussu cuadru de diàlogu, sèbera sa limba de s'archìviu de orìgine e sa limba chi at a tènnere s'archìviu tradùidu, e incarca <guibutton>AB</guibutton> pro sighire.</para>
+
+    <para>Si boles modificare cale si siat cunfiguratzione de custu cuadru de diàlogu, bi podes torrare cando boles cun <keycap>Ctrl+E.</keycap></para>
+
+    <para>A pustis, s'at a abèrrere su cuadru de diàlogu <guilabel>Archìvios de su progetu</guilabel>. Incarca subra <guibutton>Còpia archìvios in sa cartella de orìgine...</guibutton> pro seberare is archìvios de orìgine tuos. OmegaT at a copiare is archìvios seletzionados in sa cartella <filename>/source/</filename> de su progetu chi as creadu. Cando is archìvios de orìgine ant a èssere istados carrigados in s'<guilabel>Editore</guilabel>, as a pòdere serrare su cuadru de diàlogu <guilabel>Archìvios de su progetu</guilabel>.</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>Borta s'archìviu</title>
+
+    <para>OmegaT t'at a presentare unu segmentu de tradùere a sa borta. Cando as a àere tradùidu cada segmentu, preme <keycap>Ctrl+U</keycap> pro mòere a su segmentu de bortare imbeniente (o <keycap>Ctrl+majùscula+U</keycap> pro mòere a su segmentu tradùidu imbeniente). Cando as a bòlere bìdere comente at a èssere sa tradutzione tua in su formadu finale, preme <keycap>Ctrl+D</keycap> pro generare is documentos tradùidos, chi ant a èssere creados in sa cartella <filename>/target/</filename> de su progetu tuo. In sa tradutzione, imprea is menùs <guimenu>Modìfica</guimenu> e <guimenu>Bae a</guimenu> pro àteras funtziones ùtiles.</para>
+  </section>
+
+  <section>
+    <title>Controlla is etichetas tuas</title>
+
+    <para>Si is archìvios de orìgine tuos tenent formadu, che a Microsoft Word, LibreOffice Writer o HTML, OmegaT at a cunvertire su formadu in etichetas a s'inghìriu de su testu chi ses bortende. A s'ispissu, is documentos ant a cuntènnere etichetas chi no currispondent a su formadu, però chi sunt importantes in is archìvios de orìgine (e in is archìvios tradùidos). Una frase de orìgine podet èssere che:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+
+    <para>In cada manera, OmegaT at a presentare sa frase in custa manera:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+    
+    <para>Is etichetas de OmegaT sunt in colore murru, in manera chi siant fàtziles de reconnòschere. Sunt protègidas, pro chi is cuntenutos non potzant èssere modificados, però ddas podes cantzellare, insertare a manu o ddas mòere in àteras positziones de sa frase tradùida. In cada manera, si faghes una faddina iscriende is etichetas de formadu, podet dare chi is archìvios tradùidos tuos no potzant èssere abertos. Duncas, preme <keycap>Ctrl+majùscula+V</keycap> in antis de generare is archìvios tradùidos pro controllare chi is etichetas sunt curretas.</para>
+  </section>
+
+  <section>
+    <title>Gènera s'archìviu tradùidu</title>
+
+    <para>Cando as a èssere seguru chi non bi sunt faddinas in is etichetas de sa tradutzione tua, preme <keycap>Ctrl+D</keycap> pro generare is archìvios tradùidos, chi ant a èssere creados in sa cartella <filename>/target/</filename> de su progetu tuo.</para>
+  </section>
+
+  <section>
+    <title>Àteras cosas de importu</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Si no resesses a carrigare un'archìviu in s'<guilabel>Editore</guilabel> de OmegaT, podet dare chi siat in unu formadu non reconnotu. Abbàida <link linkend="chapter.file.filters">Filtros de archìviu</link> pro bìdere sa lista de formados reconnotos dae OmegaT. </para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Podes creare unu progetu nou pro cada tarea noa, e semper podes agiùnghere archìvios de orìgine noos a unu progetu.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Su cuadru de diàlogu de propiedades de su progetu cuntenet is cunfiguratziones initziales de su progetu. Si ti ddas ismèntigas, ddu podes abèrrere cun <keycap>Ctrl+E</keycap>. Pro bìdere una lista de is archìvios de su progetu, aberi su cuadru de diàlogu <guilabel>Archìvios de su progetu</guilabel> cun is teclas <keycap>Ctrl+L</keycap>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>A sa fine de sa tradutzione, OmegaT esporta tres memòrias de tradutzione cun su nòmine <filename>level1</filename>, <filename>level2</filename> e <filename>omegat</filename> in sa cartella de su progetu tuo. Is memòrias <filename>level1</filename> e <filename>level2</filename> podent èssere cumpartzidas cun is usuàrios de àteros programmas de tradutzione. Sa memòria cun su nòmine <filename>omegat</filename> podet èssere impreada cun OmegaT in progetos futuros. Si pones custos archìvios de memòria de tradutzione in sa cartella <filename>/tm/</filename> de su progetu, OmegaT bi at a chircare in automàticu segmentos simigiantes, tzerriados &quot;cointzidèntzias partziales&quot; o &quot;fuzzy matches&quot;. </para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Podes agiùnghere tèrmines noos a su glossàriu cun is teclas <keycap>Ctrl+majùscula+G</keycap>, o podes copiare glossàrios chi esistint giai in sa cartella <filename>/glossary/</filename> de su progetu tuo, e OmegaT bi at a chircare paràulas in automàticu.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Podet èssere ùtile chircare paràulas e frases in su testu de orìgine e in sa tradutzione: imprea su cuadru de diàlogu <guilabel>Chirca testu</guilabel> tràmite is teclas <keycap>Ctrl+F</keycap>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Leghe un'introdutzione prus cumpleta in sa ghia <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for beginners</ulink> de su situ web de OmegaT. Si ti serbit agiudu cun cale si siat aspetu de OmegaT, aderi a su <ulink url="https://omegat.org/support">grupu de usuàrios de OmegaT</ulink>.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

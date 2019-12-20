@@ -15,7 +15,7 @@
                2013 Alex Buloichik
 
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -168,7 +168,7 @@ public class FilterMaster {
         for (Class<?> f : filtersClasses) {
             if (f.getName().equals(classname)) {
                 try {
-                    return (IFilter) f.newInstance();
+                    return (IFilter) f.getDeclaredConstructor().newInstance();
                 } catch (Exception ex) {
                     Log.log("Failed to instantiate filter: " + classname);
                     Log.log(ex);
@@ -642,13 +642,16 @@ public class FilterMaster {
         res = res.replace(AbstractFilter.TFP_SYSTEM_OS_VERSION, System.getProperty("os.arch"));
         res = res.replace(AbstractFilter.TFP_SYSTEM_OS_ARCH, System.getProperty("os.version"));
         res = res.replace(AbstractFilter.TFP_SYSTEM_USER_NAME, System.getProperty("user.name"));
-        String hostName = null;
-        try {
-            hostName = java.net.InetAddress.getLocalHost().getHostName();
-        } catch (java.net.UnknownHostException uhe) {
-            hostName = "";
+        if (res.contains(AbstractFilter.TFP_SYSTEM_HOST_NAME)) {
+            String hostName = null;
+            try {
+                // This is expensive! Only do it if necessary!
+                hostName = java.net.InetAddress.getLocalHost().getHostName();
+            } catch (java.net.UnknownHostException uhe) {
+                hostName = "";
+            }
+            res = res.replace(AbstractFilter.TFP_SYSTEM_HOST_NAME, hostName);
         }
-        res = res.replace(AbstractFilter.TFP_SYSTEM_HOST_NAME, hostName);
         //
         // File properties.
         //

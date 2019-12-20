@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>Vista</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Evidenzia i segmenti tradotti</term>
+
+      <listitem>
+        <para>Se si seleziona l'opzione, i segmenti tradotti saranno evidenziati in giallo.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Evidenzia i segmenti non tradotti</term>
+
+      <listitem>
+        <para>Se si seleziona l'opzione, i segmenti non tradotti saranno evidenziati in lilla.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Evidenzia le delimitazioni dei paragrafi</term>
+
+      <listitem>
+        <para>Se l'opzione è attivata, viene indicata visivamente la separazione tra i paragrafi nel documento di partenza.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mostra i segmenti di origine</term>
+
+      <listitem>
+        <para>Se si seleziona l'opzione, i segmenti di origine verrano mostrati e saranno evidenziati in verde. Se non si seleziona, i segmenti di origine non verranno mostrati.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Evidenzia i segmenti non univoci</term>
+
+      <listitem>
+        <para>Se si seleziona l'opzione, i segmenti non univoci saranno evidenziati in grigio chiaro.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Evidenzia i segmenti con note</term>
+
+      <listitem>
+        <para>Se si seleziona l'opzione, i segmenti con note saranno evidenziati in ciano. Questo contrassegno ha la priorità sui contrassegni <guimenuitem>Evidenzia i segmenti tradotti</guimenuitem> ed <guimenuitem>Evidenzia i segmenti non tradotti</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Evidenzia gli spazi non divisibili</term>
+
+      <listitem>
+        <para>Se si seleziona l'opzione, gli spazi non divisibili saranno evidenziati con uno sfondo grigio.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Evidenza gli spazi vuoti</term>
+
+      <listitem>
+        <para>Se si seleziona l'opzione, gli spazi vuoti saranno evidenziati con un punto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Evidenzia caratteri di controllo algoritmo bidirezionale</term>
+
+      <listitem>
+        <para>Questa opzione mostra i <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caratteri di controllo bidirezionali</ulink></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Evidenzia i segmenti popolati automaticamente</term>
+
+      <listitem>
+        <para>Se si seleziona questa opzione, lo sfondo di tutti i segmenti popolati automaticamente (dalle memorie di traduzione presenti in <filename>/tm/auto</filename>, per esempio) viene colorato. I colori sono visualizzati se è attivata l'opzione <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Salva lo stato di popolazione automatica</guimenuitem></link>. Le solite traduzioni inserite dalla cartella &quot;auto&quot; vengono visualizzate in arancione. Le altre traduzioni, individuate in modo specifico nella TMX, possono essere visualizzate usando colori diversi. Per i dettagli tecnici, vedere il capitolo <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Proposte di miglioramenti</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Sostituzione aggressiva del carattere</term>
+
+      <listitem>
+        <para>Attivare questa opzione nel caso in cui <application>OmegaT</application> non visualizzi correttamente determinati glifi (anche se i caratteri che li contengono sono installati nella propria macchina). Nota: in Windows sembra che questo meccanismo di sostituzione manuale dei caratteri possa interferire con la sostituzione standard, causando sostituzioni di carattere impreviste non volute. Per tale motivo, la sua impostazione predefinita è DISATTIVO.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Informazioni sulla modifica</term>
+
+      <listitem>
+        <para>Se si imposta la visualizzazione della modifica su <guimenuitem>Segmento corrente</guimenuitem>, sarà visualizzata l'ora e l'autore dell'ultima modifica eseguita sul segmento attivo. Se si imposta su <guimenuitem>Per tutti i segmenti</guimenuitem>, l'informazione sarà visualizzata per tutti, mentre <guimenuitem>Nessuna</guimenuitem> la disattiverà.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

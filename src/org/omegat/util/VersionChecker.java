@@ -5,7 +5,7 @@
 
  Copyright (C) 2017 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -42,8 +42,8 @@ public final class VersionChecker {
 
     private static final Logger LOGGER = Logger.getLogger(VersionChecker.class.getName());
 
-    // We would prefer to host this on SourceForge, but when HTTPS is enabled SourceForge
-    // uses strong encryption that can't be used with standard JRE restrictions:
+    // When HTTPS is enabled SourceForge at one point used strong encryption
+    // that can't be used with standard JRE restrictions:
     // https://sourceforge.net/p/forge/site-support/14321/
     //
     // - Prior to Java 8u151 you had to install the JCE Unlimited Strength Jurisdiction Policy Files:
@@ -52,11 +52,12 @@ public final class VersionChecker {
     // - As of Java 8u151 you can set `crypto.policy=unlimited` in java.security, however this
     // is still too cumbersome for general use
     //
-    // - As of Java 8u162, unlimited crypto is the default. However switching SourceForge to
-    // HTTPS would break WebStart for the "standard" distro (currently on Java 6), so we must wait
-    // until all distros are on Java 8+.
-    private static final String VERSION_FILE = "https://omegat.ci.cloudbees.com/job/omegat-publish-release-version-"
-            + (OStrings.IS_BETA ? "latest" : "standard") + "/lastSuccessfulBuild/artifact/Version.properties";
+    // - As of Java 8u162, unlimited crypto is the default
+    //
+    // - As of 2018-11-8, everything seems to work fine out-of-the-box as far
+    // - back as Java 8u141 (other versions not tested)
+    private static final String VERSION_FILE = "https://omegat.sourceforge.io/Version-"
+            + (OStrings.IS_BETA ? "latest" : "standard") + ".properties";
 
     private static final int FETCH_INTERVAL = 60 * 5 * 1000;
 
@@ -109,7 +110,7 @@ public final class VersionChecker {
 
     /**
      * Check if OmegaT is up to date.
-     * 
+     *
      * @param force
      *            If true, fetch the latest data from the server even if the current data is not stale yet
      * @throws Exception

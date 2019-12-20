@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>Upravit</title>
+
+  <para>Tato nabídka zobrazí záznamy jen tehdy, pokud je právě otevřen nějaký projekt.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Zpět</guimenuitem></term>
+
+      <listitem>
+        <para>Obnoví stav před poslední úpravou. Tento příkaz nebude fungovat, jakmile potvrdíte upravovaný segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Obnovit</term>
+
+      <listitem>
+        <para>Obnoví stav před tím, než byla poslední akce zrušena. Tento příkaz nebude fungovat, jakmile potvrdíte upravovaný segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nahradit shodou nebo výběrem</term>
+
+      <listitem>
+        <para>Přepíše celý cílový segment vybraným přibližným překladem (ve výchozím nastavení je vybraný první přibližný překlad).</para>
+
+        <para>Pokud je v rámci přibližného překladu vybrán jen určitý text, tak pak jen tento výběr nahradí celý cílový segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vložit přibližný překlad nebo výběr</term>
+
+      <listitem>
+        <para>Vloží vybraný přibližný překlad na pozici kurzoru. Pokud je část cílového segmentu zvýrazněna výběrem, tato funkce přepíše vybranou část.</para>
+
+        <para>Pokud jsou vybrané nějaké texty uvnitř přibližného překladu, tak jen tento výběr bude vložen na pozici kurzoru.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Přepsat Strojovým překladem</term>
+
+      <listitem>
+        <para>Přepíše cílový segment překladem, který nabízí služba Strojového překladu. Nebude provedena žádná akce, pokud služba Strojového překladu není zaktivována (viz <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Strojový překlad</guimenuitem></menuchoice>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Přepsat zdrojem</term>
+
+      <listitem>
+        <para>Přepíše celý cílový segment zdrojem.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vložit zdroj</term>
+
+      <listitem>
+        <para>Vloží zdroj na pozici kurzoru.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vložit chybějící tagy zdroje</term>
+
+      <listitem>
+        <para>Vloží tagy zdroje (pokud chyběly) na pozici kurzoru.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vložit další chybějící tag</term>
+
+      <listitem>
+        <para>Vloží jen jeden tag (z chybějících) na pozici kurzoru.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Exportovat výběr</term>
+
+      <listitem>
+        <para>Exportuje aktuální výběr do textového souboru k dalšímu zpracování. Pokud nebyl vybrán žádný text, bude do tohoto souboru zapsán aktuální zdrojový segment. Když uživatel zavře <application>OmegaT</application> nebude tento soubor smazán, jak je tomu zvykem s běžným chováním schránky v operačním systému. Exportovaný obsah je zkopírován do souboru <filename>selection.txt</filename>, který se nachází v adresáři dle předvoleb uživatele.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vytvořit nový záznam Glosáře</term>
+
+      <listitem>
+        <para>Umožňuje uživateli vytvořit záznam ve výchozím souboru glosáře.</para>
+
+        <para>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, pak bude tento text - ve výchozím nastavení vložen do políčka  <guilabel>Termín zdroje</guilabel>.</para>
+
+        <para>Toto lze použít také na pole <guimenuitem>Cílový pojem</guimenuitem> a <guimenuitem>Komentář</guimenuitem>, a to tehdy, když je učiněn nový výběr a když znovu stisknete <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Hledat v projektu...</term>
+
+      <listitem>
+        <para>Otevře nové okno <link linkend="windows.textsearch">Hledat</link>.</para>
+
+        <para>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, pak bude tento text - ve výchozím nastavení vložen do políčka <guilabel>Hledat</guilabel>.</para>
+
+        <para>Stisknutí <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo>zobrazí poslední již otevřené okno Hledat (místo aby se otevřeno nové).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Najít a nahradit...</term>
+
+      <listitem>
+        <para>Otevře nové okno <link linkend="windows.textreplace">Najít a nahradit</link></para>
+
+        <para>Pokud označíte textový řetězec (v libovolném podokně) před stiskem <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, pak bude tento text - ve výchozím nastavení vložen do políčka <guilabel>Hledat</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Prohledat slovníky</term>
+
+      <listitem>
+        <para>Pokud je deaktivováno <link linkend="dialogs.preferences.dictionary">Automaticky hledat ve slovnících</link>, pak vám tato funkce umožní hledat označené slovo ve slovnících.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Změnit velikost písma</term>
+
+      <listitem>
+        <para>Změní velikost písmen zvýrazněného textu v cílovém segmentu podle vybrané možnosti (malá písmena, VELKÁ PÍSMENA, Velká První Písmena nebo Velké písmeno na začátku věty). Tyto čtyři možnosti můžete cyklicky procházet opakovaným tisknutím <keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo>.&gt; Pokud není vybrán žádný text, <application>OmegaT</application> vybere slovo, které se zprava dotýká kurzoru.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Označit přibližný překlad</term>
+
+      <listitem>
+        <para>Vybere předchozí, další nebo několikátý přibližný překlad, který je zobrazen v okně Přibližné překlady a vloží jej místo stávajíchího textu v segmetnu nebo jej prostě vloží do prázného segmentu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Použít jako výchozí překlad</term>
+
+      <listitem>
+        <para>Pokud existuje několik alternativních překladu aktivního segmentu, můžete označit vybranou alternativu jako výchozí překlad. Pokud je k dispozici jen jeden překlad, bude záznam zašeděn.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vytvořit alternativní překlad</term>
+
+      <listitem>
+        <para>Jeden a ten samý segment může, v závislosti na kontextu, vyžadovat různé překlady. Vyberte tuto položku v nabídce, pokud se aktuální segment nehodí a vložte alternativní překlad.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Odstranit překlad</term>
+
+      <listitem>
+        <para>Smaže překlad a označí segment jako nepřeložený.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Použít prázdný překlad</term>
+
+      <listitem>
+        <para>Definuje překlad jako ‚prázdný‘. V cílovém dokumentu se v tomto segmentu nic nezobrazí. V Editoru se místo překladu zobrazí &lt;PRÁZDNÝ&gt; / &lt;EMPTY&gt;.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zapsat identický překlad</term>
+
+      <listitem>
+        <para>Použitím tohoto příkazu registrujete překlad jako identický se zdrojem, a to i když políčko <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Povolit překlad rovnající se zdroji</guilabel></link> (v Možnosti / Nastavení editace...) není označeno.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

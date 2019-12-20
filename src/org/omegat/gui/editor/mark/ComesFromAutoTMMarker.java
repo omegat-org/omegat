@@ -4,8 +4,9 @@ OmegaT - Computer Assisted Translation (CAT) tool
          glossaries, and translation leveraging into updated projects.
 
 Copyright (C) 2014 Alex Buloichik
+              2019 Aaron Madlon-Kay
               Home page: http://www.omegat.org/
-              Support center: http://groups.yahoo.com/group/OmegaT/
+              Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -47,6 +48,8 @@ public class ComesFromAutoTMMarker implements IMarker {
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getColor(), 0.5F);
     protected static final HighlightPainter PAINTER_XAUTO = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor(), 0.5F);
+    protected static final HighlightPainter PAINTER_XENFORCED = new TransparentHighlightPainter(
+            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getColor(), 0.5F);
 
     @Override
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
@@ -69,6 +72,8 @@ public class ComesFromAutoTMMarker implements IMarker {
         case xAUTO:
             m.painter = PAINTER_XAUTO;
             break;
+        case xENFORCED:
+            m.painter = PAINTER_XENFORCED;
         }
         return Collections.singletonList(m);
     }

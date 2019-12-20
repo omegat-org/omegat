@@ -7,8 +7,9 @@
                2011 Martin Fleurke
                2012 Jean-Christophe Helary
                2015 Aaron Madlon-Kay
+               2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -29,6 +30,9 @@
 package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -60,6 +64,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Martin Fleurke
  * @author Jean-Christophe Helary
  * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
 @SuppressWarnings("serial")
 public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo>
@@ -67,7 +72,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
     private static final String EXPLANATION = OStrings.getString("GUI_MACHINETRANSLATESWINDOW_explanation");
 
-    protected String displayed;
+    protected Set<MachineTranslationInfo> displayed = new HashSet<>();
 
     public MachineTranslateTextArea(IMainWindow mw) {
         super(true);
@@ -83,15 +88,24 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
         for (Class<?> mtc : PluginUtils.getMachineTranslationClasses()) {
             try {
-                MachineTranslators.add((IMachineTranslation) mtc.newInstance());
+                MachineTranslators.add((IMachineTranslation) mtc.getDeclaredConstructor().newInstance());
             } catch (Exception ex) {
                 Log.log(ex);
             }
         }
     }
 
+    /** Cycle getDisplayedTranslation **/
+    private Iterator<MachineTranslationInfo> cycle;
+
     public String getDisplayedTranslation() {
-        return displayed;
+        if ((cycle == null) || (!cycle.hasNext())) {
+            cycle = displayed.iterator();
+        }
+        if (!cycle.hasNext()) { // only possible if displayed.isEmpty()
+            return null;
+        }
+        return cycle.next().result;
     }
 
     @Override
@@ -125,9 +139,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         UIThreadsUtil.mustBeSwingThread();
 
         if (data != null && data.result != null) {
-            if (displayed == null) {
-                displayed = data.result;
-            }
+            displayed.add (data);
             setText(getText() + data.result + "\n<" + data.translatorName + ">\n\n");
         }
     }
@@ -135,7 +147,8 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     @Override
     public void clear() {
         super.clear();
-        displayed = null;
+        displayed.clear();
+        cycle = null;
     }
 
     protected class FindThread extends EntryInfoSearchThread<MachineTranslationInfo> {

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.preventdataloss">
+  <title>Tietojen menetyksen estäminen</title>
+
+  <para><application>OmegaT</application> on kestävä sovellus. Käyttäessäsi <application>OmegaT</application>:tä tai mitä tahansa muuta sovellusta sinun tulisi kuitenkin huolehtia varotoimista, joilla estät tietoja katoamasta. Kun käännät tiedostoja, <application>OmegaT</application> tallentaa työn edistymisen käännösmuistitiedostoon <literal>project_save.tmx</literal>. Tiedosto löytyy projektin alikansiosta <literal>/omegat</literal>.</para>
+
+  <para>Joka kerta kun projekti avataan tai ladataan uudelleen, OmegaT varmuuskopioi käännösmuistin tiedostoon project_save.tmx.VVVVKKPPTTMM.bak, joka löytyy samasta kansiosta. VVVV on nelinumeroinen vuosiluku, KK on kuukausi, PP kuukauden päivä, ja TT ja MM ilmaisevat tunteja ja minuutteja, jolloin edellinen käännösmuisti tallennettiin.</para>
+
+  <para>Jos luulet, että olet kadottanut käännösdatasi, voit käyttää seuraavaa tapaa palauttaaksesi projektin viimeisimpään, yleensä alle 10 minuuttia vanhaan, tallennettuun muotoon:</para>
+
+  <orderedlist>
+    <listitem>
+      <para>sulje projekti</para>
+    </listitem>
+
+    <listitem>
+      <para>nimeä nykyiunen <filename>project_save.tmx</filename>-tiedosto uudelleen (esim. <filename>project_save.tmx.temporary</filename>)</para>
+    </listitem>
+
+    <listitem>
+      <para>valitse se käännösmuistin varmuuskopio, jossa etsimäsi data todennäköisimmin on</para>
+    </listitem>
+
+    <listitem>
+      <para>nimeä se uudelleen tiedostoksi <literal>project_save.tmx</literal></para>
+    </listitem>
+
+    <listitem>
+      <para>avaa projekti</para>
+    </listitem>
+  </orderedlist>
+
+  <para>Näin estät tärkeää dataa katoamasta:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Varmuuskopioi tiedosto /omegat/project_save.tmx säännöllisesti toiseen tietovälineeseen, esim. CD- tai DVD-levylle.</para>
+    </listitem>
+
+    <listitem>
+      <para>Kun opettelet käyttämään <application>OmegaT</application>:tä, luo käännettyjä tiedostoja säännöllisin väliajoin ja tarkista, että tiedostossa on käännöksen uusin versio.</para>
+    </listitem>
+
+    <listitem>
+      <para>Ole erityisen huolellinen, kun muutat <literal>/source</literal>-kansion tiedostoja kesken käännösprojektin. Jos lähdetiedosto on muuttunut sen jälkeen, kun olet alkanut kääntää, <application>OmegaT</application> ei välttämättä löydä segmenttiä, jonka olet jo kääntänyt.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Käytä näitä ohjetekstejä päästäksesi alkuun. Jos törmäät ongelmiin, kirjoita <ulink url="https://omegat.org/support"><application>OmegaT</application>-käyttäjäryhmälle</ulink>. Älä epäröi, vaan kirjoita rohkeasti sillä kielellä, jonka tunnet omimmaksesi.</para>
+    </listitem>
+  </itemizedlist>
+</section>

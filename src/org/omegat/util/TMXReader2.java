@@ -7,8 +7,9 @@
                2012 Thomas Cordonnier
                2013 Alex Buloichik
                2014 Aaron Madlon-Kay
+               2018 Thomas Cordonnier
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -34,7 +35,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -233,6 +236,11 @@ public class TMXReader2 {
         currentTu.creationid = getAttributeValue(element, "creationid");
         currentTu.creationdate = parseISO8601date(getAttributeValue(element, "creationdate"));
 
+        String tuid = getAttributeValue(element, "tuid");
+        if (tuid != null) {
+            currentTu.props.add(new TMXProp("tuid", getAttributeValue(element, "tuid")));
+        }
+
         while (true) {
             XMLEvent e = xml.nextEvent();
             switch (e.getEventType()) {
@@ -405,9 +413,52 @@ public class TMXReader2 {
         segInlineTag.setLength(0);
         inlineTagHandler.reset();
 
+        // OmegaT uses 0-indexed tags while the TMX spec *implies* that tags
+        // should be 1-indexed. To correctly handle both, we normalize by
+        // looking ahead at all tags and finding the smallest "x" attr value,
+        // then subtracting it from all tag numbers.
+
+        int minSeenTag = Integer.MAX_VALUE;
+        Deque<XMLEvent> buf = new ArrayDeque<XMLEvent>();
+
+        outer: while (true) {
+            XMLEvent e = xml.nextEvent();
+            buf.add(e);
+            switch (e.getEventType()) {
+            case XMLEvent.END_ELEMENT:
+                EndElement evEnd = (EndElement) e;
+                if ("seg".equals(evEnd.getName().getLocalPart())) {
+                    break outer;
+                }
+                break;
+            case XMLEvent.START_ELEMENT:
+                StartElement eStart = e.asStartElement();
+                switch (eStart.getName().getLocalPart()) {
+                case "bpt":
+                case "it":
+                case "ph":
+                    String x = getAttributeValue(eStart, "x");
+                    if (x != null) {
+                        try {
+                            int xVal = Integer.parseInt(x);
+                            minSeenTag = Math.min(minSeenTag, xVal);
+                        } catch (NumberFormatException ex) {
+                            // Ignore
+                        }
+                    }
+                    break;
+                }
+                break;
+            }
+        }
+
+        if (minSeenTag == Integer.MAX_VALUE) {
+            minSeenTag = 0;
+        }
+
         int inlineLevel = 0;
         while (true) {
-            XMLEvent e = xml.nextEvent();
+            XMLEvent e = buf.pop();
             switch (e.getEventType()) {
             case XMLEvent.START_ELEMENT:
                 StartElement eStart = e.asStartElement();
@@ -424,12 +475,12 @@ public class TMXReader2 {
                 } else if ("ept".equals(eStart.getName().getLocalPart())) {
                     inlineTagHandler.startEPT(getAttributeValue(eStart, "i"));
                 } else if ("it".equals(eStart.getName().getLocalPart())) {
-                    inlineTagHandler.startOTHER();
+                    inlineTagHandler.startIT(getAttributeValue(eStart, "x"));
                     inlineTagHandler.setOtherTagShortcutLetter(
                             StringUtil.getFirstLetterLowercase(getAttributeValue(eStart, "type")));
                     inlineTagHandler.setCurrentPos(getAttributeValue(eStart, "pos"));
                 } else if ("ph".equals(eStart.getName().getLocalPart())) {
-                    inlineTagHandler.startOTHER();
+                    inlineTagHandler.startPH(getAttributeValue(eStart, "x"));
                     inlineTagHandler.setOtherTagShortcutLetter(
                             StringUtil.getFirstLetterLowercase(getAttributeValue(eStart, "type")));
                 } else {
@@ -467,7 +518,7 @@ public class TMXReader2 {
                     } else {
                         tagName = inlineTagHandler.getOtherTagShortcutLetter();
                     }
-                    tagN = inlineTagHandler.endOTHER();
+                    tagN = inlineTagHandler.endIT();
                     if ("end".equals(inlineTagHandler.getCurrentPos())) {
                         slashBefore = true;
                     }
@@ -477,7 +528,7 @@ public class TMXReader2 {
                     } else {
                         tagName = inlineTagHandler.getOtherTagShortcutLetter();
                     }
-                    tagN = inlineTagHandler.endOTHER();
+                    tagN = inlineTagHandler.endPH();
                     if (useSlash) {
                         slashAfter = true;
                     }
@@ -496,17 +547,11 @@ public class TMXReader2 {
                             .getLocation().getColumnNumber());
                     errorsCount++;
                     segContent.setLength(0);
-                    // wait for end seg
-                    while (true) {
-                        XMLEvent ev = xml.nextEvent();
-                        switch (ev.getEventType()) {
-                        case XMLEvent.END_ELEMENT:
-                            EndElement evEnd = (EndElement) ev;
-                            if ("seg".equals(evEnd.getName().getLocalPart())) {
-                                return;
-                            }
-                        }
-                    }
+                    return;
+                }
+
+                if (inlineTagHandler.getIsExternallyMatched()) {
+                    tagN -= minSeenTag;
                 }
 
                 segContent.append('<');
@@ -541,23 +586,21 @@ public class TMXReader2 {
      * - if not exist, then with the same language with whatever country<br>
      */
     protected ParsedTuv getTuvByLang(Language lang) {
-        String langLanguage = lang.getLanguageCode();
-        String langCountry = lang.getCountryCode();
         ParsedTuv tuvLC = null; // Tuv with the same language+country
         ParsedTuv tuvL = null; // Tuv with the same language only, without country
         ParsedTuv tuvLW = null; // Tuv with the same language+whatever country
         for (int i = 0; i < currentTu.tuvs.size(); i++) {
             ParsedTuv tuv = currentTu.tuvs.get(i);
-            String tuvLang = tuv.lang;
-            if (!langLanguage.regionMatches(true, 0, tuvLang, 0, 2)) {
+            Language tuvLang = new Language(tuv.lang);
+            if (!lang.isSameLanguage(tuvLang)) {
                 // language not equals - there is no sense to processing
                 continue;
             }
-            if (tuvLang.length() < 3) {
+            if (tuvLang.getCountryCode().isEmpty()) {
                 // language only, without country
                 tuvL = tuv;
-            } else if (langCountry.regionMatches(true, 0, tuvLang, 3, 2)) {
-                // the same country
+            } else if (lang.isSameCountryLanguage(tuvLang)) {
+                // the same country and language
                 tuvLC = tuv;
             } else {
                 // other country

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>Options</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Preferences...</term>
+
+      <listitem>
+        <para>Opens the <link linkend="dialogs.preferences">Preferences</link>
+        dialog.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Machine Translate</term>
+
+      <listitem>
+        <para>Allows you to activate/deactivate the Machine Translation tools
+        offered.</para>
+
+        <para>If several translation engines are selected, then <keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>M</keycap>
+          </keycombo> is also used to switch between them and insert the last
+        one selected.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Glossary</term>
+
+      <listitem>
+        <para>Select <guimenuitem>Taas Terminology Lookup</guimenuitem> to
+        activate this lookup.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Dictionary</term>
+
+      <listitem>
+        <para>Check the <guimenuitem>Use Fuzzy Matching for Dictionary Entries</guimenuitem> option if you want dictionaries to display words that have the same root.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Auto-completion</term>
+
+      <listitem>
+        <para>If <guimenuitem>Show Relevant Suggestions
+        Automatically</guimenuitem> option is checked, Auto-completer is
+        launched automatically by typing the first letters of a translated
+        glossary entry, or by typing &quot;&lt;&quot; in case of tags.</para>
+
+        <para>Check <guimenuitem>History Completion</guimenuitem> to display suggested words as soon as their first letters are entered.</para>
+
+        <para>Check <guimenuitem>History Prediction</guimenuitem> to display suggested words that commonly follow the word that has just been entered.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>File Filters...</term>
+
+      <listitem>
+        <para>Opens the <link linkend="dialogs.preferences.filefilters">File
+        Filters</link> options in the Preferences dialog.</para>
+
+        <para>These settings apply to OmegaT level, to all projects.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentation...</term>
+
+      <listitem>
+        <para>Opens the <link linkend="dialogs.preferences.segmentationsetup">Segmentation
+        Setup</link> options in the Preferences dialog.</para>
+
+        <para>These settings apply to OmegaT level, to all projects.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Editor...</term>
+
+      <listitem>
+        <para>Opens the <link linkend="dialogs.preferences.editor">Editor</link> options in the
+        Preferences dialog.</para>
+
+        <para>These settings apply to OmegaT level, to all projects.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Access Configuration Folder</term>
+
+      <listitem>
+        <para>Opens the local directory where OmegaT configuration files are
+        stored (depends on the Operating system).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

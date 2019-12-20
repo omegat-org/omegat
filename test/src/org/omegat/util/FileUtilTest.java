@@ -5,7 +5,7 @@
 
  Copyright (C) 2015 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -253,6 +253,9 @@ public class FileUtilTest {
             FileUtil.copyFileWithEolConversion(in, out, StandardCharsets.UTF_8);
             assertEquals("\r\n", FileUtil.getEOL(out, StandardCharsets.UTF_8));
         }
+
+        FileUtils.writeByteArrayToFile(out, new byte[0]);
+        assertEquals(null, FileUtil.getEOL(out, StandardCharsets.UTF_8));
     }
 
     @Test

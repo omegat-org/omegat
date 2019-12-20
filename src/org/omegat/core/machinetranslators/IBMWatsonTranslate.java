@@ -8,7 +8,7 @@
                2013 Didier Briel
                2016 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -101,7 +101,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
         // see https://www.ibm.com/watson/developercloud/language-translator/api/v2/curl.html?curl#authentication
         if (apiPassword == null || apiPassword.isEmpty()) {
             apiPassword = apiLogin;
-            apiLogin = "apiKey";
+            apiLogin = "apikey";
         }
 
         StringBuilder json = new StringBuilder();
@@ -131,7 +131,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
         String v;
         try {
-            v = WikiGet.postJSON(getWatsonUrl() + "?version=" + WATSON_VERSION, json.toString(), headers);
+            v = WikiGet.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json.toString(), headers);
         } catch (IOException e) {
             return e.getLocalizedMessage();
         }

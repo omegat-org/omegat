@@ -5,7 +5,7 @@
 
  Copyright (C) 2014, 2015 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -29,15 +29,14 @@ import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import org.madlonkay.desktopsupport.DesktopSupport;
+import org.madlonkay.desktopsupport.QuitStrategy;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
@@ -60,9 +59,6 @@ public final class OSXIntegration {
 
     public static final Image APP_ICON_MAC = ResourcesUtil.getBundledImage("OmegaT_mac.png");
 
-    private static volatile Class<?> appClass;
-    private static volatile Object app;
-
     private static boolean guiLoaded = false;
     private static final List<Runnable> DO_AFTER_LOAD = new ArrayList<>();
 
@@ -71,20 +67,11 @@ public final class OSXIntegration {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "OmegaT");
 
-            // Set dock icon
-            Method setDockIconImage = getAppClass().getDeclaredMethod("setDockIconImage", Image.class);
-            setDockIconImage.invoke(getApp(), APP_ICON_MAC);
+            DesktopSupport.getSupport().setDockIconImage(APP_ICON_MAC);
 
-            // Set quit strategy:
-            //   app.setQuitStrategy(com.apple.eawt.QuitStrategy.CLOSE_ALL_WINDOWS);
-            Class<?> strategyClass = Class.forName("com.apple.eawt.QuitStrategy");
-            Method setQuitStrategy = getAppClass().getDeclaredMethod("setQuitStrategy", strategyClass);
-            setQuitStrategy.invoke(getApp(), strategyClass.getField("CLOSE_ALL_WINDOWS").get(null));
+            DesktopSupport.getSupport().setQuitStrategy(QuitStrategy.CLOSE_ALL_WINDOWS);
 
-            // Prevent sudden termination:
-            //   app.disableSuddenTermination();
-            Method disableTerm = getAppClass().getDeclaredMethod("disableSuddenTermination");
-            disableTerm.invoke(getApp());
+            DesktopSupport.getSupport().disableSuddenTermination();
 
             // Register to find out when app finishes loading so we can
             // 1. Set up full-screen support, and...
@@ -172,21 +159,7 @@ public final class OSXIntegration {
 
     public static void setAboutHandler(final ActionListener al) {
         try {
-            // Handler must implement com.apple.eawt.AboutHandler interface.
-            Class<?> aboutHandlerClass = Class.forName("com.apple.eawt.AboutHandler");
-            InvocationHandler ih = (proxy, method, args) -> {
-                if (method.getName().equals("handleAbout")) {
-                    // Respond to handleAbout(com.apple.eawt.AppEvent.AboutEvent)
-                    al.actionPerformed(null);
-                }
-                return null;
-            };
-            Object handler = Proxy.newProxyInstance(OSXIntegration.class.getClassLoader(),
-                    new Class<?>[] { aboutHandlerClass }, ih);
-            // Set handler:
-            //   app.setAboutHandler(handler);
-            Method setAboutHandler = getAppClass().getDeclaredMethod("setAboutHandler", aboutHandlerClass);
-            setAboutHandler.invoke(getApp(), handler);
+            DesktopSupport.getSupport().setAboutHandler(e -> al.actionPerformed(null));
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -194,30 +167,12 @@ public final class OSXIntegration {
 
     public static void setQuitHandler(final ActionListener al) {
         try {
-            // Handler must implement com.apple.eawt.QuitHandler interface.
-            Class<?> quitHandlerClass = Class.forName("com.apple.eawt.QuitHandler");
-            InvocationHandler ih = (proxy, method, args) -> {
-                if (method.getName().equals("handleQuitRequestWith")) {
-                    Class<?> quitResponseClass = Class.forName("com.apple.eawt.QuitResponse");
-                    if (args != null && args.length > 1 && quitResponseClass.isInstance(args[1])
-                            && Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-                        // Respond to handleQuitRequestWith(com.apple.eawt.AppEvent.QuitEvent,
-                        //     com.apple.eawt.QuitResponse)
-                        // Cancel the quit because OmegaT will prompt:
-                        //     arg1.cancelQuit();
-                        Method cancelQuit = quitResponseClass.getDeclaredMethod("cancelQuit");
-                        cancelQuit.invoke(args[1]);
-                    }
-                    al.actionPerformed(null);
+            DesktopSupport.getSupport().setQuitHandler((evt, response) -> {
+                if (Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
+                    response.cancelQuit();
                 }
-                return null;
-            };
-            Object handler = Proxy.newProxyInstance(OSXIntegration.class.getClassLoader(),
-                    new Class<?>[] { quitHandlerClass }, ih);
-            // Set handler:
-            //   app.setAboutHandler(handler);
-            Method setQuitHandler = getAppClass().getDeclaredMethod("setQuitHandler", quitHandlerClass);
-            setQuitHandler.invoke(getApp(), handler);
+                al.actionPerformed(null);
+            });
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -225,33 +180,7 @@ public final class OSXIntegration {
 
     public static void setOpenFilesHandler(final IOpenFilesHandler ofh) {
         try {
-            // Handler must implement com.apple.eawt.OpenFilesHandler interface.
-            Class<?> openFilesHandlerClass = Class.forName("com.apple.eawt.OpenFilesHandler");
-            InvocationHandler ih = (proxy, method, args) -> {
-                try {
-                    if (method.getName().equals("openFiles")) {
-                        Class<?> filesEventClass = Class.forName("com.apple.eawt.AppEvent$FilesEvent");
-                        if (args != null && args.length > 0 && filesEventClass.isInstance(args[0])) {
-                            Object filesEvent = args[0];
-                            // Respond to openFiles(com.apple.eawt.AppEvent.OpenFilesEvent)
-                            // Get provided list of files:
-                            //    arg0.getFiles()
-                            Method getFilesMethod = filesEventClass.getDeclaredMethod("getFiles");
-                            Object filesList = getFilesMethod.invoke(filesEvent);
-                            ofh.openFiles((List<?>) filesList);
-                        }
-                    }
-                } catch (Throwable t) {
-                    Log.log(t);
-                }
-                return null;
-            };
-            Object handler = Proxy.newProxyInstance(OSXIntegration.class.getClassLoader(),
-                    new Class<?>[] { openFilesHandlerClass }, ih);
-            // Set handler:
-            //   app.setOpenFileHandler(handler);
-            Method setOpenFileHandler = getAppClass().getDeclaredMethod("setOpenFileHandler", openFilesHandlerClass);
-            setOpenFileHandler.invoke(getApp(), handler);
+            DesktopSupport.getSupport().setOpenFilesHandler(e -> ofh.openFiles(e.getFiles()));
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -259,22 +188,7 @@ public final class OSXIntegration {
 
     public static void setPreferencesHandler(ActionListener listener) {
         try {
-            // Handler must implement com.apple.eawt.PreferencesHandler interface.
-            Class<?> preferencesHandlerClass = Class.forName("com.apple.eawt.PreferencesHandler");
-            InvocationHandler ih = (proxy, method, args) -> {
-                if (method.getName().equals("handlePreferences")) {
-                    // Respond to
-                    // handlePreferences(com.apple.eawt.AppEvent.PreferencesHandler)
-                    listener.actionPerformed(null);
-                }
-                return null;
-            };
-            Object handler = Proxy.newProxyInstance(OSXIntegration.class.getClassLoader(),
-                    new Class<?>[] { preferencesHandlerClass }, ih);
-            // Set handler:
-            // app.setPreferencesHandler(handler);
-            Method setAboutHandler = getAppClass().getDeclaredMethod("setPreferencesHandler", preferencesHandlerClass);
-            setAboutHandler.invoke(getApp(), handler);
+            DesktopSupport.getSupport().setPreferencesHandler(e -> listener.actionPerformed(null));
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -282,12 +196,7 @@ public final class OSXIntegration {
 
     public static void enableFullScreen(Window window) {
         try {
-            // Enable full-screen mode:
-            //   FullScreenUtilities.setWindowCanFullScreen(java.awt.Window, boolean)
-            Class<?> utilClass = Class.forName("com.apple.eawt.FullScreenUtilities");
-            Method setWindowCanFullScreen = utilClass.getMethod("setWindowCanFullScreen",
-                    new Class<?>[] { java.awt.Window.class, Boolean.TYPE });
-            setWindowCanFullScreen.invoke(utilClass, window, true);
+            DesktopSupport.getSupport().setWindowCanFullScreen(window, true);
         } catch (Exception ex) {
             Log.log(ex);
         }
@@ -303,20 +212,5 @@ public final class OSXIntegration {
 
     public interface IOpenFilesHandler {
         void openFiles(List<?> files);
-    }
-
-    private static Class<?> getAppClass() throws Exception {
-        if (appClass == null) {
-            appClass = Class.forName("com.apple.eawt.Application");
-        }
-        return appClass;
-    }
-
-    private static Object getApp() throws Exception {
-        if (app == null) {
-            Method getApp = getAppClass().getDeclaredMethod("getApplication");
-            app = getApp.invoke(null);
-        }
-        return app;
     }
 }

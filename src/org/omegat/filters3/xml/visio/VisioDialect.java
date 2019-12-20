@@ -7,7 +7,7 @@
                2007-2010 Didier Briel
                2012-2015 Phillip Hall
                Home page: http://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 

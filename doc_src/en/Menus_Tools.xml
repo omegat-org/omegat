@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>Tools</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Check Issues...</term>
+
+      <listitem>
+        <para>Quality assurance tool that carries out all the automatic checks
+        in one go and displays the results in a window.</para>
+
+        <para>Four types of issues are detected:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>missing or displaced tags, including <link linkend="dialogs.preferences.tagprocessing">custom tags</link>.
+            The <guilabel>Tag Issues</guilabel> option is always
+            selected.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Spelling Issues</guilabel> (optional). Only works
+            if a spelling dictionary is installed.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Terminology Issues</guilabel> (optional).</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>LanguageTool Issues</guilabel> (optional).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>The results window is laid out in the form of a table in
+        which:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>double-clicking a row activates the corresponding segment in
+            the Editor pane,</para>
+          </listitem>
+
+          <listitem>
+            <para>clicking a column header changes the sort order for the
+            column,</para>
+          </listitem>
+
+          <listitem>
+            <para>selecting or moving the mouse over a row displays a pop-up
+            menu icon in the last column containing actions for correcting or
+            ignoring the error.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Check Issues for Current Document</term>
+
+      <listitem>
+        <para>As above, but only for the document currently displayed in the
+        Editor pane.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistics</term>
+
+      <listitem>
+        <para>Opens a new window and displays the project statistics, i.e. the
+        project totals and totals for every file in the project.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Match Statistics</term>
+
+      <listitem>
+        <para>Displays the Match Statistics for the project: the number of
+        repetitions, exact matches, fuzzy matches and no-matches for segments,
+        words and characters.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Match Statistics per File</term>
+
+      <listitem>
+        <para>Displays the Match Statistics for each file of the project: the
+        number of repetitions, exact matches, fuzzy matches and no-matches for
+        segments, words and characters.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Align Files...</term>
+
+      <listitem>
+        <para>Select the two files to be aligned (the source file and its
+        translation) and click OK to open the <link linkend="windows.aligner"><guilabel>Align</guilabel>
+        window</link>.</para>
+
+        <para>The supported file formats are those listed in <menuchoice>
+            <guimenuitem>Project</guimenuitem>
+
+            <guimenuitem>Properties</guimenuitem>
+
+            <guimenuitem>File Filters</guimenuitem>
+          </menuchoice>.</para>
+
+        <para>The source and target files can have different formats (for
+        example, a <filename>.docx</filename> file can be aligned with a
+        <filename>.pdf</filename> file).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Scripting...</term>
+
+      <listitem>
+        <para>Opens the <link linkend="windows.scripts"><guilabel>Scripting</guilabel>
+        window</link>, where the location of scripts can be set, and where
+        scripts can be written, run and associated with a shortcut.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - (script name)</term>
+
+      <listitem>
+        <para>Launches scripts that have been associated with a number.</para>
+
+        <para>To associate a script with a number:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Open the Scripting window</para>
+          </listitem>
+
+          <listitem>
+            <para>Select the script you want from the list on the left</para>
+          </listitem>
+
+          <listitem>
+            <para>At the bottom of the window, right-click on a free number
+            and select <guilabel>Add Script</guilabel>.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(external search commands)</term>
+
+      <listitem>
+        <para>If commands to perform external searches have been defined in the <link linkend="dialogs.preferences.externalsearch">Preferences</link>, they are listed and accessible here.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

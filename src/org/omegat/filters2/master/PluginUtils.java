@@ -35,11 +35,13 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
@@ -47,6 +49,7 @@ import java.util.stream.Stream;
 
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
+import org.omegat.core.data.PluginInformation;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.Tokenizer;
@@ -72,6 +75,7 @@ public final class PluginUtils {
     };
 
     protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<Class<?>>();
+    public static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
     /** Private constructor to disallow creation */
     private PluginUtils() {
@@ -262,7 +266,9 @@ public final class PluginUtils {
                 if (clazz.trim().isEmpty()) {
                     continue;
                 }
-                loadClass(clazz, classLoader);
+                if (loadClass(clazz, classLoader)) {
+                    PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, m));
+                }
             }
         }
 
@@ -285,21 +291,23 @@ public final class PluginUtils {
         }
     }
 
-    protected static void loadClass(String clazz, ClassLoader classLoader) {
+    protected static boolean loadClass(String clazz, ClassLoader classLoader) {
         try {
             Class<?> c = classLoader.loadClass(clazz);
             if (LOADED_PLUGINS.contains(c)) {
                 Log.logInfoRB("PLUGIN_SKIP_PREVIOUSLY_LOADED", clazz);
-                return;
+                return false;
             }
             Method load = c.getMethod("loadPlugins");
             load.invoke(c);
             LOADED_PLUGINS.add(c);
             Log.logInfoRB("PLUGIN_LOAD_OK", clazz);
+            return true;
         } catch (Throwable ex) {
             Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
             Core.pluginLoadingError(StringUtil.format(OStrings.getString("PLUGIN_LOAD_ERROR"), clazz,
                     ex.getClass().getSimpleName(), ex.getMessage()));
+            return false;
         }
     }
 
@@ -336,11 +344,13 @@ public final class PluginUtils {
                 // WebStart signing section, or other section
                 continue;
             }
-            loadClassOld(sType, key, classLoader);
+            if (loadClassOld(sType, key, classLoader)) {
+                PLUGIN_INFORMATIONS.add(new PluginInformation(key, m));
+            }
         }
     }
 
-    protected static void loadClassOld(String sType, String key, ClassLoader classLoader)
+    protected static boolean loadClassOld(String sType, String key, ClassLoader classLoader)
             throws ClassNotFoundException {
         PluginType pType;
         try {
@@ -348,6 +358,7 @@ public final class PluginUtils {
         } catch (Exception ex) {
             pType = PluginType.UNKNOWN;
         }
+        boolean loadOk = true;
         switch (pType) {
         case FILTER:
             FILTER_CLASSES.add(classLoader.loadClass(key));
@@ -375,6 +386,9 @@ public final class PluginUtils {
             break;
         default:
             Log.logErrorRB("PLUGIN_UNKNOWN", sType, key);
+            loadOk = false;
         }
+
+        return loadOk;
     }
 }

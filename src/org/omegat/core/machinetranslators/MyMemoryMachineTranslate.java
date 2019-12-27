@@ -31,6 +31,7 @@ package org.omegat.core.machinetranslators;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -98,6 +99,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         }
 
         String translation = (String) bestEntry.get("translation");
+        translation = StringEscapeUtils.unescapeHtml(translation);
 
         putToCache(sLang, tLang, text, translation);
         return translation;

@@ -1,11 +1,22 @@
 ----------------------------------------------------------------------
  OmegaT 5.2.0
 ----------------------------------------------------------------------
-  0 Enhancements
-  2 Bug fixes
+  3 Enhancements
+  5 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 5.2.0 vs 5.1.0
+
+  Implemented requests:
+
+  - Support TMX "tuid" attribute for alternative translation matching
+  https://sourceforge.net/p/omegat/feature-requests/1474/
+
+  - Include "alternative" translation ID as TMX "tuid" attribute in exported TMX
+  https://sourceforge.net/p/omegat/feature-requests/1475/
+
+  - Handle TMX `x` attribute on <it>, <ph> tags
+  https://sourceforge.net/p/omegat/feature-requests/1482/
 
   Bug fixes:
 
@@ -14,6 +25,15 @@
 
   - Parsing bug in Moodle filter when string contains ";"
   https://sourceforge.net/p/omegat/bugs/962/
+
+  - Some exclusion rule edits don't take effect when closing window
+  https://sourceforge.net/p/omegat/bugs/966/
+
+  - MyMemory Machine Translation Displays Apostrophes as HTML Code
+  https://sourceforge.net/p/omegat/bugs/972/
+
+  - Zero-indexed tags in level 2 TMX are not handled correctly
+  https://sourceforge.net/p/omegat/bugs/974/
 
   Localisation Updates:
 

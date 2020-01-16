@@ -1,0 +1,510 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Liite D. Säännölliset lausekkeet</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 – Käyttöopas">
+      <link rel="up" href="index.html" title="OmegaT 4.2 – Käyttöopas">
+      <link rel="prev" href="appendix.spellchecker.html" title="Liite C. Kielentarkastin">
+      <link rel="next" href="appendix.shortcut.custom.html" title="Liite E. Pikanäppäimien mukauttaminen">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Liite D. Säännölliset lausekkeet</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.spellchecker.html">Edellinen</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.shortcut.custom.html">Seuraava</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.regexp"></a>Liite D. Säännölliset lausekkeet
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.regexp.html#regex.tools.and.examples.of.use">1. Regex-työkalut ja esimerkkejä niiden käytöstä</a></span></dt>
+            </dl>
+         </div>
+         <p>Hakutoiminnoissa ja segmentointisäännöissä käytetään Java-ohjelmointikielen tukemia säännöllisiä lausekkeita (lyhyesti: regex).
+            Jos haluat tarkempaa tietoa säännöllisistä lausekkeista, tutustu <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">Javan regex-dokumentaatioon</a>. Lisää esimerkkejä on alla.
+         </p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Huomaa</h3>
+            <p>Tämä kappale on tarkoitettu edistyneille käyttäjille, jotka haluavat määritellä omia segmentointisääntöjä tai laatia monimutkaisia
+               ja tehokkaita hakuavaimia.
+            </p>
+         </div>
+         <div class="table"><a name="d0e5261"></a><p class="title"><b>Taulu D.1. Regex – Merkinnät</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Merkinnät" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">(?i)</td>
+                        <td align="left">Ottaa käyttöön kirjainkoosta riippumattomat osumat (oletusasetuksena on, että osumat huomioivat kirjainkoon).</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5278"></a><p class="title"><b>Taulu D.2. Regex – Merkki</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Merkki" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">x</td>
+                        <td align="left">Merkki x, paitsi seuraavat…</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\uhhhh</td>
+                        <td align="left">Merkki, jonka heksadesimaaliarvo on 0xhhhh</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\t</td>
+                        <td align="left">Sarkainmerkki (\u0009)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\n</td>
+                        <td align="left">Rivinvaihtomerkki (\u000A)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\r</td>
+                        <td align="left">Vaununpalautusmerkki (\u000D)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\f</td>
+                        <td align="left">Sivunvaihdon merkki (\u000C)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\a</td>
+                        <td align="left">Hälytyksen (kello) merkki (\u0007)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\e</td>
+                        <td align="left">Koodinvaihtomerkki (\u001b)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\cx</td>
+                        <td align="left">Koodinvaihtomerkki, joka vastaa x:ää</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0n</td>
+                        <td align="left">Merkki, jonka oktaaliarvo on 0n (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0nn</td>
+                        <td align="left">Merkki, jonka oktaaliarvo on 0nn (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0mnn</td>
+                        <td align="left">Merkki, jonka oktaaliarvo on 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\xhh</td>
+                        <td align="left">Merkki, jonka heksadesimaaliarvo on 0xhhhh</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5355"></a><p class="title"><b>Taulu D.3. Regex – Lainausmerkit</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Lainausmerkit" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\</td>
+                        <td align="left">Tyhjä, mutta lainaa seraavaa merkkiä Tätä tarvitaan silloin, kun haluat etsiä osumia jollekin metamerkille ( !$()*+.&lt;&gt;?[\]^{|}
+                           ).
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\\</td>
+                        <td align="left">Esimerkiksi tämä on kenoviiva.</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\Q</td>
+                        <td align="left">Tyhjä, mutta lainaa kaikkia merkkejä merkkiin \E asti</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\E</td>
+                        <td align="left">Tyhjä, mutta päättää merkin \Q aloittaman lainauksen</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5387"></a><p class="title"><b>Taulu D.4. Regex – Unicode-blokkien luokat ja kategoriat</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Unicode-blokkien luokat ja kategoriat" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\p{InGreek}</td>
+                        <td align="left">Kreikan blokissa oleva merkki (yksinkertainen <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> blokki</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Lu}</td>
+                        <td align="left">Iso kirjain (yksinkertainen <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">kategoria</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Sc}</td>
+                        <td align="left">Rahayksikön tunnus</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\P{InGreek}</td>
+                        <td align="left">Mikä tahansa merkki paitsi kreikan blokissa oleva (negaatio)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td align="left">Mikä tahansa merkki paitsi iso kirjain (vähennys)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5430"></a><p class="title"><b>Taulu D.5. Regex – Merkkiluokat</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Merkkiluokat" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">[abc]</td>
+                        <td align="left">a, b tai c (yksinkertainen luokka)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[^abc]</td>
+                        <td align="left">Mikä tahansa merkki paitsi a, b, tai c (negaatio)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[a-zA-Z]</td>
+                        <td align="left">Merkki väliltä a-z tai A-Z nämä päätymerkit mukaan lukien (alue)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5457"></a><p class="title"><b>Taulu D.6. Regex – Ennalta määritellyt merkkiluokat</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Ennalta määritellyt merkkiluokat" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">.</td>
+                        <td align="left">Mikä tahansa merkki (paitsi rivin päättävät merkit)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\d</td>
+                        <td align="left">Numero: [0–9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\D</td>
+                        <td align="left">Muu kuin numero: [^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\s</td>
+                        <td align="left">Tyhjätilamerkki: [ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\S</td>
+                        <td align="left">Muu kuin tyhjätilamerkki: [^\s]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\w</td>
+                        <td align="left">Sanan merkki: [a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\W</td>
+                        <td align="left">Muu kuin sanan merkki: [^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5504"></a><p class="title"><b>Taulu D.7. Regex – Alueen rajaaminen</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Alueen rajaaminen" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">^</td>
+                        <td align="left">Rivin alku</td>
+                     </tr>
+                     <tr>
+                        <td align="left">$</td>
+                        <td align="left">Rivin loppu</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\b</td>
+                        <td align="left">Sanaraja</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\B</td>
+                        <td align="left">Muu kuin sanaraja</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5536"></a><p class="title"><b>Taulu D.8. Regex – Ahneet rajoittimet</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Ahneet rajoittimet" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
+                        <td align="left">X, kerran tai ei kertaakaan</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
+                        <td align="left">X, nolla kertaa tai useammin</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
+                        <td align="left">X, yhden tai useamman kerran</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Huomaa</h3>
+            <p>Ahneet rajoittimet löytävät niin monta osumaa kuin vain mahdollista. Esimerkiksi <span class="emphasis"><em>a+</em></span> löytää ilmauksesta <span class="emphasis"><em>aaabbb</em></span> joukon aaa.
+            </p>
+         </div>
+         <div class="table"><a name="d0e5578"></a><p class="title"><b>Taulu D.9. Regex – Vastahakoiset (ei-ahneet) rajoittimet</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Vastahakoiset (ei-ahneet) rajoittimet" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X??</td>
+                        <td align="left">X, kerran tai ei kertaakaan</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X*?</td>
+                        <td align="left">X, nolla kertaa tai useammin</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X+?</td>
+                        <td align="left">X, yhden tai useamman kerran</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Huomaa</h3>
+            <p>Ei-ahneet rajoittimet löytävät mahdollisimman vähän osumia. Esimerkiksi <span class="emphasis"><em>a+?</em></span> löytää ilmauksesta <span class="emphasis"><em>aaabbb</em></span> ensimmäisen <span class="emphasis"><em>a</em></span>-merkin.
+            </p>
+         </div>
+         <div class="table"><a name="d0e5617"></a><p class="title"><b>Taulu D.10. Regex – Loogiset operaattorit</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Regex – Loogiset operaattorit" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Muotoilu</th>
+                        <th align="left">… vastaa seuraavaa</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">XY</td>
+                        <td align="left">X ja sen jälkeen Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X|Y</td>
+                        <td align="left">Joko X tai Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">(XY)</td>
+                        <td align="left">XY yhtenä ryhmänä</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. Regex-työkalut ja esimerkkejä niiden käytöstä
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Säännöllisten lausekkeiden kehittämiseen ja testaamiseen on olemassa monia interaktiivisia työkaluja. Yleensä ne seuraavat
+               samankaltaista rakennetta (alla on Regular Expression Tester -esimerkki): säännöllinen lauseke (ylimpänä) analysoi haettavaa
+               tekstiä (keskellä oleva tekstilaatikko), ja löydetyt osumat näkyvät tulosten tekstilaatikossa.
+            </p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Kuva D.1. Regex-testeri</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Regex-testeri"></div>
+               </div>
+            </div><br class="figure-break"><p><a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a> -ohjelmasta on versiot Windows-, Linux- ja FreeBSD-käyttöjärjestelmille. Ohjelma on paljolti samanlainen kuin yllä oleva
+               esimerkki.
+            </p>
+            <p>Jo <span class="application">OmegaT</span>:ssä itsessään on hyvä kokoelma käytännöllisiä regex-tapauksia (ks. kohta Valinnat &gt; Segmentointi). Seuraavalla listalla on
+               lausekkeita, joista voi olla sinulle apua etsiessäsi osumia käännösmuistista.
+            </p>
+            <div class="table"><a name="d0e5666"></a><p class="title"><b>Taulu D.11. Regex – Käännöksissä käytettyjen säännöllisten lausekkeiden esimerkkejä</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Regex – Käännöksissä käytettyjen säännöllisten lausekkeiden esimerkkejä" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Säännöllinen lauseke</th>
+                           <th align="left">Löytää seuraavan:</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">(\b\w+\b)\s\1\b</td>
+                           <td align="left">Kahteen kertaan kirjoitetut sanat</td>
+                        </tr>
+                        <tr>
+                           <td align="left">[\.,]\s*[\.,]+</td>
+                           <td align="left">Piste tai pilkku, jota seuraa välilyönti ja vielä yksi piste tai pilkku</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\. \s+$</td>
+                           <td align="left">Pisteen jälkeen tulevat ylimääräiset välilyönnit rivin lopussa</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+a\s+[aeiou]</td>
+                           <td align="left">Koskee englantia: Vokaalilla alkavien sanojen edellä olevan artikkelin on yleensä oltava "an", ei "a"</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+an\s+[^aeiou]</td>
+                           <td align="left">Koskee englantia: Sama tarkastus kuin edellä, mutta koskee konsonantteja (artikkelina "a", ei "an")</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s{2,}</td>
+                           <td align="left">Useampia välilyöntejä peräkkäin</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\.[A-Z]</td>
+                           <td align="left">Piste, jota seuraa iso kirjain – onkohan pisteen ja uuden lauseen alun välistä jäänyt välilyönti puuttumaan?</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\bis\b</td>
+                           <td align="left">Etsii sanaa is, ei this tai isn't jne.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.spellchecker.html">Edellinen</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.shortcut.custom.html">Seuraava</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Liite C. Kielentarkastin&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Alkuun</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Liite E. Pikanäppäimien mukauttaminen</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

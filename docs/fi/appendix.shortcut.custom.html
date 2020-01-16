@@ -1,0 +1,891 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Liite E. Pikanäppäimien mukauttaminen</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 – Käyttöopas">
+      <link rel="up" href="index.html" title="OmegaT 4.2 – Käyttöopas">
+      <link rel="prev" href="appendix.regexp.html" title="Liite D. Säännölliset lausekkeet">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Liite E. Pikanäppäimien mukauttaminen</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.regexp.html">Edellinen</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;</td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.shortcut.custom"></a>Liite E. Pikanäppäimien mukauttaminen
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.customization">1. Pikanäppäimien mukauttaminen</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu">2. Projektivalikko</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.EditMenu">3. Muokkaa-valikko</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu">4. Mene-valikko</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu">5. Näkymä-valikko</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu">6. Työkalut-valikko</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu">7. Valinnat-valikko</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu">8. Ohjeet-valikko</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. Pikanäppäimien mukauttaminen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Voit asettaa uuden pikanäppäimen lähes kaikkiin päävalikon kohtiin. Voit muuttaa jo olemassa olevia pikanäppäimiä sekä lisätä
+               uusia. Sijoita pikänäppäinten kuvaustiedosto <span class="application">OmegaT</span>-valintakansioon (pääset sinne valitsemalla <span class="guimenuitem">Valinnat</span> → <span class="guimenuitem">Mene määrityskansioon</span>).
+            </p>
+            <p>Anna pikanäppäinten kuvaustiedostolle nimeksi <code class="filename">MainMenuShortcuts.properties</code>. Kirjoita jokainen pikanäppäinmääritelmä omalle rivilleen. Tiedostossa voi olla tyhjiä rivejä. Aloita kommenttirivit merkinnällä
+               //. Rivin muu sisältö // -merkinnän jälkeen ohitetaan.
+            </p>
+            <p>Kun olet muokannut <code class="filename">MainMenuShortcuts.properties</code>-tiedostoa, käynnistä <span class="application">OmegaT</span> uudelleen, niin uudet pikanäppäimet otetaan käyttöön.
+            </p>
+            <p>Määrittele pikanäppäimet seuraavalla tavalla: <code class="code">&lt;valikon kohdan koodi&gt;=&lt;pikanäppäin</code>. Löydät <span class="emphasis"><em>&lt;valikon vaihtoehdon koodin&gt;</em></span> alla olevista taulukoista. <span class="emphasis"><em>&lt;Pikanäppäin&gt;</em></span> on näppäinyhdistelmä, jota haluat käyttää.<a href="#ftn.d0e5759" class="footnote" name="d0e5759"><sup class="footnote">[2]</sup></a>.
+            </p>
+            <p>&lt;Pikanäppäin&gt; määritellään seuraavasti: 0 tai useampi <code class="code">&lt;muuntonäppäin&gt;</code>, sen jälkeen 0 tai 1 <code class="code">&lt;tapahtuma&gt;</code> ja sen jälkeen 1 <code class="code">&lt;näppäin&gt;</code>. Määritelmässä
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="code">&lt;muuntonäppäin&gt;</code> voi olla <span class="emphasis"><em>vaihto (shift)</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e5793" class="footnote" name="d0e5793"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span> tai <span class="emphasis"><em>altGraph</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">&lt;tapahtuma&gt;</code> voi olla <span class="emphasis"><em>typed</em></span> (kirjoitettu), <span class="emphasis"><em>pressed</em></span> (näppäintä painettu), <span class="emphasis"><em>released</em></span> (näppäin vapautettu)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>ja <code class="code">&lt;näppäin&gt;</code> voi olla mikä tahansa näppäimistön käytettävissä oleva näppäin<a href="#ftn.d0e5828" class="footnote" name="d0e5828"><sup class="footnote">[4]</sup></a>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Oletusmuotoisista OmegaT-pikanäppäimistä<a href="#ftn.d0e5836" class="footnote" name="d0e5836"><sup class="footnote">[5]</sup></a>löytyy esimerkiksi:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="code">projectOpenMenuItem=ctrl O</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">editCreateGlossaryEntryMenuItem=ctrl vaihto G</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>Ensimmäinen on komennon <span class="guimenuitem">Avaa projekti</span> pikanäppäin, toinen komennon <span class="guimenuitem">Luo sanaston termi</span> pikanäppäin.
+            </p>
+            <p>Jos haluat avata projektin näppäinyhdstelmällä <span class="keycap"><strong>vaihto</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span>, muokkaa <code class="filename">MainMenuShortcuts.properties</code>-tiedostoa seuraavasti:<code class="code">
+                      </code></p>
+            <p><code class="code">projectOpenMenuItem=vaihto ctrl O</code>.
+            </p>
+            <p>Jos käytä Macia ja haluat lisätä pikanäppäimen <span class="keycap"><strong>vahto</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> avaamaan kohdan <span class="guimenu">Työkalut</span> → <span class="guimenuitem">Tilastot</span>, lisää <code class="filename">MainMenuShortcuts.properties</code>-tiedostoon seuraava rivi:<code class="code"></code></p>
+            <p><code class="code">toolsShowStatisticsStandardMenuItem=vaihto meta S</code></p>
+            <p>Tallenna tiedosto ja käynnistä <span class="application">OmegaT</span> uudelleen. Uudet pikanäppäimet näkyvät nyt niihin liittyvien valikon vaihtoehtojen vierellä. Jos ne eivät ole ristiriidassa
+               järjestelmän omien pikanäppäinten kanssa, voit käyttää niitä OmegaT:ssä.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ProjectMenu"></a>2. Projektivalikko
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e5913"></a><p class="title"><b>Taulu E.1. Projektivalikko</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Projektivalikko" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Valikon vaihtoehto</th>
+                           <th align="left">Oletusmuotoinen pikanäppäin</th>
+                           <th align="left">Valikon vaihtoehdon koodi</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Uusi</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+N</strong></span></td>
+                           <td align="left">projectNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lataa ryhmäprojekti</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectTeamNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+O</strong></span></td>
+                           <td align="left">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa viime projekti</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectOpenRecentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Kopioi tiedostoja lähdekansioon…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lataa MediaWiki-sivu…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectWikiImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lataa uudelleen</td>
+                           <td align="left"><span class="keycap"><strong>F5</strong></span></td>
+                           <td align="left">projectReloadMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Sulje</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+W</strong></span></td>
+                           <td align="left">projectCloseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tallenna</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+S</strong></span></td>
+                           <td align="left">projectSaveMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Luo käännetyt tiedostot</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+D</strong></span></td>
+                           <td align="left">projectCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Luo nykyinen käännetty tiedosto</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+D</strong></span></td>
+                           <td align="left">projectSingleCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ominaisuudet…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+E</strong></span></td>
+                           <td align="left">projectEditMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Projektin tiedostot…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+L</strong></span></td>
+                           <td align="left">viewFileListMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa projektin sisältö / Juuri</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessRootMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa projektin sisältö / Sanakirjat</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessDictionaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa projektin sisältö / Sanastot</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessGlossaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa projektin sisältö / Lähdetiedostot</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessSourceMenuItem&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa projektin sisältö / Kohdetiedostot</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessTargetMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa projektin sisältö / Nykyinen lähdeasiakirja</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessCurrentSourceDocumentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa projektin sisältö / Nykyinen lähdeasiakirja</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessCurrentTargetDocumentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Avaa projektin sisältö / Kirjoituskelpoinen sanasto</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessWriteableGlossaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lopeta</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Q</strong></span></td>
+                           <td align="left">projectExitMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.EditMenu"></a>3. Muokkaa-valikko
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e6084"></a><p class="title"><b>Taulu E.2. Muokkaa-valikko</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Muokkaa-valikko" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Valikon vaihtoehto</th>
+                           <th align="left">Oletusmuotoinen pikanäppäin</th>
+                           <th align="left">Valikon vaihtoehdon koodi</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Kumoa viime toiminto</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Z</strong></span></td>
+                           <td align="left">editUndoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Toista viime toiminto</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Y</strong></span></td>
+                           <td align="left">editRedoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Korvaa osumalla tai valinnalla</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+R</strong></span></td>
+                           <td align="left">editOverwriteTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lisää osuma tai valinta</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+I</strong></span></td>
+                           <td align="left">editInsertTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Korvaa konekäännöksellä</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+M</strong></span></td>
+                           <td align="left">editOverwriteMachineTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Korvaa lähdetekstillä</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+R</strong></span></td>
+                           <td align="left">editOverwriteSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lisää lähdeteksti</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+I</strong></span></td>
+                           <td align="left">editInsertSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lisää puuttuvat lähdetägit</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+T</strong></span></td>
+                           <td align="left">editTagPainterMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lisää seuraava puuttuva tägi</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+T</strong></span></td>
+                           <td align="left">editTagNextMissedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vie valinta</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+C</strong></span></td>
+                           <td align="left">editExportSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Luo sanaston termi</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+G</strong></span></td>
+                           <td align="left">editCreateGlossaryEntryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Etsi projektista…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+F</strong></span></td>
+                           <td align="left">editFindInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">&nbsp;</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+F</strong></span></td>
+                           <td align="left">findInProjectReuseLastWindow</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Etsi ja korvaa…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+K</strong></span></td>
+                           <td align="left">editReplaceInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vaihda kirjainkokoa / Pienet kirjaimet</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">lowerCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vaihda kirjainkokoa / Isot kirjaimet</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">upperCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vaihda kirjainkokoa / Otsikon kirjainkoko</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">titleCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vaihda kirjainkokoa / Lauseen kirjainkoko</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">sentenceCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vaihda/kierrätä kirjainkokoa</td>
+                           <td align="left"><span class="keycap"><strong>vaihto+F3</strong></span></td>
+                           <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Valitse edellinen osuma</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+↑</strong></span></td>
+                           <td align="left">editSelectFuzzyPrevMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Valitse seuraava osuma</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+↓</strong></span></td>
+                           <td align="left">editSelectFuzzyNextMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Valitse osuma nro #1</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+1</strong></span></td>
+                           <td align="left">editSelectFuzzy1MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Valitse osuma nro #2</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+2</strong></span></td>
+                           <td align="left">editSelectFuzzy2MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Valitse osuma nro #3</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+3</strong></span></td>
+                           <td align="left">editSelectFuzzy3MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Valitse osuma nro #4</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+4</strong></span></td>
+                           <td align="left">editSelectFuzzy4MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Valitse osuma nro #5</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+5</strong></span></td>
+                           <td align="left">editSelectFuzzy5MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Käytä oletuskäännöksenä</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleDefault</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Luo vaihtoehtoinen käännös</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleAlternate</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Poista käännös</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editRegisterUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Aseta tyhjä käännös</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editRegisterEmptyMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Kirjaa sama käännös</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+S</strong></span></td>
+                           <td align="left">editRegisterIdenticalMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.GoToMenu"></a>4. Mene-valikko
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e6334"></a><p class="title"><b>Taulu E.3. Mene-valikko</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Mene-valikko" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Valikon vaihtoehto</th>
+                           <th align="left">Oletusmuotoinen pikanäppäin</th>
+                           <th align="left">Valikon vaihtoehdon koodi</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Seuraavaan kääntämättömään segmenttiin</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+U</strong></span></td>
+                           <td align="left">gotoNextUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Seuraavaan käännettyyn segmenttiin</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+U</strong></span></td>
+                           <td align="left">gotoNextTranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Seuraavaan segmenttiin</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+N</strong></span> tai <span class="keycap"><strong>Enter</strong></span> tai <span class="keycap"><strong>sarkain</strong></span></td>
+                           <td align="left">gotoNextSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Edelliseen segmenttiin</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+P</strong></span> tai <span class="keycap"><strong>Ctrl+Enter</strong></span> tai <span class="keycap"><strong>Ctrl+sarkain</strong></span></td>
+                           <td align="left">gotoPreviousSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Segmenttiin nro…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+J</strong></span></td>
+                           <td align="left">gotoSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Seuraavaan muistiinpanoon</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoNextNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Edelliseen muistiinpanoon</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoPreviousNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Seuraavaan uniikkiin segmenttiin</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+Q</strong></span></td>
+                           <td align="left">gotoNextUniqueMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Valitun osuman lähteeseen</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+M</strong></span></td>
+                           <td align="left">gotoMatchSourceSegment</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Siirry historiassa eteenpäin…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+N</strong></span></td>
+                           <td align="left">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Siirry historiassa taaksepäin…</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+P</strong></span></td>
+                           <td align="left">gotoHistoryBackMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ViewMenu"></a>5. Näkymä-valikko
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e6449"></a><p class="title"><b>Taulu E.4. Näkymä-valikko</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Näkymä-valikko" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Valikon vaihtoehto</th>
+                           <th align="left">Oletusmuotoinen pikanäppäin</th>
+                           <th align="left">Valikon vaihtoehdon koodi</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Merkitse käännetyt segmentit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkTranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Merkitse kääntämättömät segmentit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkUntranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Näytä lähdesegmentit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplaySegmentSourceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Merkitse toistuvat segmentit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Merkitse segmentit, joissa on muistiinpanoja</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNotedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Merkitse sitovat välilyönnit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNBSPCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Merkitse tyhjätilamerkit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkWhitespaceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Merkitse kaksisuuntaisen algoritmin kontrollimerkit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkBidiCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Merkitse automaattisesti täytetyt segmentit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkAutoPopulatedCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Muokkaustiedot / Älä näytä</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Muokkaustiedot / Näytä valitut</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoSelectedRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Muokkaustiedot / Näytä kaikki</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ToolsMenu"></a>6. Työkalut-valikko
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e6540"></a><p class="title"><b>Taulu E.5. Työkalut-valikko</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Työkalut-valikko" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Valikon vaihtoehto</th>
+                           <th align="left">Oletusmuotoinen pikanäppäin</th>
+                           <th align="left">Valikon vaihtoehdon koodi</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Tarkista tägit</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+vaihto+V</strong></span></td>
+                           <td align="left">toolsValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tarkista nykyisen segmentin tägit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsSingleValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tilastot</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsStandardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Osumatilastot</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Osumatilastot per tiedosto</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesPerFileMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.OptionsMenu"></a>7. Valinnat-valikko
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e6591"></a><p class="title"><b>Taulu E.6. Valinnat-valikko</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Valinnat-valikko" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Valikon vaihtoehto</th>
+                           <th align="left">Oletusmuotoinen pikanäppäin</th>
+                           <th align="left">Valikon vaihtoehdon koodi</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Siirry eteenpäin sarkainnäppäimellä</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTabAdvanceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Pyydä aina lopetusvahvistusta</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAlwaysConfirmQuitCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Näytä TBX-sanastojen kontekstitiedot</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsGlossaryTBXDisplayContextCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Käytä lähdetekstissä olevia yksittäisiä termejä</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsGlossaryExactMatchCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Sanasto / Käytä sanaston termien vartaloita</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsGlossaryStemmingCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips / Ota TransTips käyttöön</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsEnableMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Automaattinen täydennys / Näytä sopivia ehdotuksia automaattisesti</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteShowAutomaticallyItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Automaattinen täydennys / Sanasto…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteGlossaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Automaattinen täydennys / Automaattinen teksti…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteAutoTextMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Automaattinen täydennys / Merkkitaulukko…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteCharTableMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Fontti…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsFontSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mukautetut värit…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsColorsSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tiedostosuodattimet…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSetupFileFiltersMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Segmentointi…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSentsegMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Oikeinkirjoituksen tarkistus…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSpellCheckMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Muokkaustapa…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsWorkflowMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tägien käsittely…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTagValidationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ryhmä…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTeamMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ulkoiset TMX:t…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsExtTMXMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Näkymä…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tallentaminen ja tuotos…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSaveOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Välityspalvelinkirjautuminen…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuLoginItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Palauta pääikkuna</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsRestoreGUIMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mene määrityskansioon</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAccessConfigDirMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.HelpMenu"></a>8. Ohjeet-valikko
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e6754"></a><p class="title"><b>Taulu E.7. Ohjeet-valikko</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Ohjeet-valikko" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Valikon vaihtoehto</th>
+                           <th align="left">Oletusmuotoinen pikanäppäin</th>
+                           <th align="left">Valikon vaihtoehdon koodi</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Käsikirja…</td>
+                           <td align="left"><span class="keycap"><strong>F1</strong></span></td>
+                           <td align="left">helpContentsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tietoja…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpAboutMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Viimeksi muutettu…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpLastChangesMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Loki…</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpLogMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e5759" class="footnote">
+               <p><a href="#d0e5759" class="para"><sup class="para">[2] </sup></a>Pikanäppäinten koko syntaksi merkitään kuten Oraclen Java 1.6 -dokumentaatiossa (sivun alaosassa): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 keystrokes shortcuts</a></p>
+            </div>
+            <div id="ftn.d0e5793" class="footnote">
+               <p><a href="#d0e5793" class="para"><sup class="para">[3] </sup></a>Macissa on painettava <span class="emphasis"><em>Komento (cmd) ⌘</em></span> -näppäintä<span class="emphasis"><em> toimintonäppäimen</em></span> kanssa.
+               </p>
+            </div>
+            <div id="ftn.d0e5828" class="footnote">
+               <p><a href="#d0e5828" class="para"><sup class="para">[4] </sup></a>Mahdolliset avaintoiminnot (avaimet) on listattu seuraavassa Oraclen Java 1.6 -dokumentaatiossa: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Java 1.6 keyEvents description</a></p>
+            </div>
+            <div id="ftn.d0e5836" class="footnote">
+               <p><a href="#d0e5836" class="para"><sup class="para">[5] </sup></a>Oletusmuotoisten OmegaT-pikanäppäinten lista löytyy Sourceforgesta: <a class="ulink" href="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default OmegaT Shortcuts</a></p>
+               <p>Oletusmuotoiset OmegaT-pikanäppäimet Macille löytyvät myös Sourceforgesta. Niissä kaikissa käytetään Komento (cmd) ⌘ -näppäintä
+                  Ctrl-näppäimen sijasta. <a class="ulink" href="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Default OmegaT Shortcuts for the Mac</a></p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.regexp.html">Edellinen</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;</td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Liite D. Säännölliset lausekkeet&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Alkuun</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

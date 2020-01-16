@@ -1,0 +1,255 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Liite B. Sanastot</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 – Käyttöopas">
+      <link rel="up" href="index.html" title="OmegaT 4.2 – Käyttöopas">
+      <link rel="prev" href="appendix.dictionaries.html" title="Liite A. Sanakirjat">
+      <link rel="next" href="appendix.spellchecker.html" title="Liite C. Kielentarkastin">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Liite B. Sanastot</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.dictionaries.html">Edellinen</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.spellchecker.html">Seuraava</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.glossaries"></a>Liite B. Sanastot
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e4972">1. Käyttö</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5011">2. Tiedostomuoto</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5047">3. Sanastojen luominen</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5083">4. Ensisijainen sanasto</a></span></dt>
+               <dt><span class="section"><a href="appendix.glossaries.html#d0e5090">5. Tavallisia sanasto-ongelmia</a></span></dt>
+            </dl>
+         </div>
+         <p>Sanastot ovat käyttäjän itse luomia tiedostoja, jotka auttavat <span class="application">OmegaT</span>-käännöstöissä. Sanastot on päivitettävä käsin.
+         </p>
+         <p><span class="application">OmegaT</span>-projektissa voi käyttää yhtä tai useampaa sanastotiedostoa. Sanaston termit, joita käytetään aktiivisessa segmentissä, näkyvät
+            automaattisesti Sanaston esikatselu&nbsp;ssa.
+         </p>
+         <p>Voit määritellä sanaston sijainnin ja nimen kohdassa Projektin ominaisuudet. Sanaston tiedostopäätteen on oltava <code class="filename">.txt</code> tai <code class="filename">.utf8</code>. Puuttuva pääte lisätään automaattisesti. Tiedoston on oltava <code class="filename">/glossary</code>-kansiossa, mutta voit käyttää myös alikansiota (esim. <code class="filename">glossary/sub/glossary.txt</code>). Kun asetat sanastotiedostokansiota, erillistä sanastotiedostoa ei vielä tarvita. Tiedosto luodaan (tarvittaessa) automaattisesti,
+            kun lisäät sanastoon uuden termin. Jos tiedosto on jo olemassa, sen tiedostomuotoa tai merkistökoodausta ei tarkisteta. Uudet
+            termit ja niiden käännökset lisätään aina sarkainmerkeillä erotettuna, ja tiedoston merkistökoodauksena on UTF-8. Tiedoston
+            jo olemassa olevaa sisältöä ei käsitellä tai muuteta, joten mahdollisten tiedostovahinkojen määrä pysyy rajallisena.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4972"></a>1. Käyttö
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Jos sinulla on jo sanastotiedosto, jota haluat käyttää, luo OmegaT-käännösprojekti ja vie sanastotiedosto projektin <code class="filename">/glossary</code>-kansioon. Kun projekti avataan, <span class="application">OmegaT</span> tunnistaa automaattisesti tässä kansiossa olevat sanastotiedostot. Jos aktiivisessa segmentissä on termejä, joita <span class="application">OmegaT</span> löytää myös sanastotiedosto(i)sta, termit näkyvät sanastoruudussa:
+            </p>
+            <div class="figure"><a name="d0e4986"></a><p class="title"><b>Kuva B.1. Sanastoruutu</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Sanastoruutu"></div>
+               </div>
+            </div><br class="figure-break"><p>Ensin on lähdekielinen termi, sitten yhtäläisyysmerkki, jo lopuksi termin käännös/käännökset. Sanaston termiin voi liittyä
+               kommentti. Sanastotoiminto löytää sanastosta ainoastaan tarkkoja osumia. Se ei siis löydä taivutettuja muotoja tms. Käännöksen
+               aikana voit lisätä sanastotiedostoon/-tiedostoihin uusia termejä esimerkiksi tekstieditorilla. Ohjelma ei havaitse uusimpia
+               lisättyjä termejä heti, kun tekstitiedoston muutokset on tallennettu.
+            </p>
+            <p>Lähdekielinen termi voi koostua useista sanoista. Tässä esimerkki siitä:</p>
+            <div class="figure"><a name="d0e4998"></a><p class="title"><b>Kuva B.2. Esimerkki sanaston monisanaisista termeistä</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="Esimerkki sanaston monisanaisista termeistä"></div>
+               </div>
+            </div><br class="figure-break"><p>Alleviivattu termi "pop-up menu" on sanastoruudussa "pojavni menu". Maalaa termi sanastoruudussa ja napsauta hiiren kakkospainikkeella,
+               niin termi siirtyy kohdistimen kohdalle kohdesegmenttiin.<a href="#ftn.d0e5008" class="footnote" name="d0e5008"><sup class="footnote">[1]</sup></a></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5011"></a>2. Tiedostomuoto
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Sanastotiedostot ovat yksinkertaisia vain teksti -tiedostoja. Niissä on kolme saraketta, jotka on erotettu toisistaan sarkaimilla.
+               Ensimmäisessä sarakkeessa on lähdekielinen ja toisessa kohdekielinen termi. Kolmas sarake on lisätietoja varten. Kohdekielinen
+               sarake voi olla tyhjä. Sanaston termi voi siis koostua pelkästään lähdekielisestä termistä ja kommentista.
+            </p>
+            <p>Sanastojen merkistökoodaus määritetään automaattisesti. Merkistökoodauksen täytyy tietysti sopia molemmille tiedoston kielille,
+               joten on suositeltavaa käyttää Unicode-merkistökoodausta.
+            </p>
+            <p>Toinen tuettu tiedostomuoto on CSV. Tässä tiedostomuodossa erotinmerkkinä käytetään pilkkua: lähdekielinen termi, kohdekielinen
+               termi. Myös kommentit erotetaan pilkulla. Merkkijonoissa voidaan käyttää lainausmerkkejä (" "), jolloin merkkijonossa voi
+               olla pilkku:
+            </p>
+            <p><code class="literal">"tämä on lähdekielinen termi, jossa käytetään pilkkua","c'est un terme, qui contient une virgule"</code></p>
+            <p>Vain lukukelpoisen sanastotiedoston muodoksi sopii vain teksti -muoto sekä termitiedostomuoto TBX. <code class="filename">.tbx</code>-tiedoston on oltava <code class="filename">/glossary</code>-kansiossa, mutta voit käyttää myös alikansiota (esim. <code class="filename">glossary/sub/MyGlossary.tbx</code>).
+            </p>
+            <p>TBX - Term Base eXchange - on avoin XML:ään perustuva tiedostostandardi, jonka avulla voidaan siirtää jäsenneltyjä terminologiatietoja.
+               Lokalisointiteollisuuden järjestö LISA ja kansainvälinen standardisoimisjärjestö ISO ovat hyväksyneet TBX-muodon kansainväliseksi
+               standardiksi. Jos käytössäsi on terminologiajärjestelmä, on hyvin mahdollista, että se voi jakaa terminologiatietoja TBX-muodossa.
+               <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft Terminology Collection</a> on ladattavissa lähes 100 eri kielellä. Sitä voi käyttää tietotekniikkasanaston peruskivenä.
+            </p>
+            <p>Huom.: MultiTermin <code class="filename">.tbx</code>-tuotos ei vaikuta luotettavalta (marraskuu 2013). On parempi käyttää MultiTermin <code class="filename">tab</code>-tuotosta.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5047"></a>3. Sanastojen luominen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Projektin asetuksissa voi nimetä kirjoituskelpoisen sanastotiedoston (ks. tämän luvun alkuosa). Lisää uusi termi napsauttamalla
+               sanastoruudussa hiiren kakkospainikkeella tai painamalla <span class="keycap"><strong>Ctrl+vaihto+G</strong></span>. Tämä avaa valintaikkunan, johon voit kirjoittaa lähde- ja kohdekielisen termin sekä mahdolliset kommentit:
+            </p>
+            <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
+            <p>Sanastotiedostojen sisältö pysyy ohjelman muistissa. Tiedostot ladataan uudelleen, kun projekti avataan tai ladataan uudelleen.
+               Sanastotiedoston päivittäminen on siis melko helppoa: Paina <span class="keycap"><strong>Ctrl+vaihto+G</strong></span>, kirjoita uusi termi, sen käännös ja mahdolliset kommentit (siirry kentästä toiseen painamalla sarkainnäppäintä) ja lopuksi
+               tallenna tiedosto. Sanastoruudun sisältö päivittyy tämän mukaisesti.
+            </p>
+            <p>Voit asettaa kirjoituskelpoisen sanastotiedoston sijainnin kohdassa <span class="guimenuitem">Projekti &gt; Ominaisuudet…</span> Tuetut tiedostomuodot ovat <code class="filename">TXT</code> ja <code class="filename">UTF8</code>.
+            </p>
+            <p><span class="bold"><strong>Huom.: </strong></span>On tietysti muitakin tapoja laatia yksinkertaisia tiedostoja, joiden sisältämät tiedot on erotettu toisistaan sarkaimilla.
+               Kaikki ohjelmat, jotka tukevat UTF-8- tai UTF-16-merkistökoodausta ja jotka voivat näyttää välilyöntimerkit (jotta et unohda
+               vaadittua <span class="keycap"><strong>TAB</strong></span>-merkkiä) sopivat tähän: Voit käyttää Windowsin Notepad++-ohjelmaa, Linuxin GEdit-ohjelmaa tai vaikkapa taulukkolaskentaohjelmaa.
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5083"></a>4. Ensisijainen sanasto
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ensisijaisen sanaston oletus on /glossary/glossary.txt. Ensisijaisesta sanastosta löydetyt tulokset näkyvät ensimmäisinä sanastoruudussa
+               ja TransTips-ruudussa.
+            </p>
+            <p>Koska ensisijaisen sanaston ja muiden sanastojen termit voivat mennä sekaisin, ensisijaisen sanaston termit on lihavoitu.</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5090"></a>5. Tavallisia sanasto-ongelmia
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Ongelma: Sanastotermejä ei näy. – Mahdollisia syitä:</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Sanastotiedostojen kansiossa ei ole sanastotiedostoa.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Sanastokansio on tyhjä.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Termejä ei ole erotettu sarkaimella.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Sanastotiedoston tiedostopääte ei ole oikea (muu kuin .tab, .utf8 tai .txt).</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Sanaston termi ja käännettävän asiakirjan lähdekielinen termi eivät ole TÄYSIN samanlaisia (sana esim. taivutettu monikkoon).</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Sanastotiedoston merkistökoodaus on väärä.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Aktiivisessa segmentissä ei ole termejä, jotka vastaavat sanaston termejä.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Yksi tai useampi yllä mainituista ongelmista on korjattu, mutta projektia ei ole ladattu uudelleen.</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Ongelma: Jotkin merkit näkyvät väärin sanastoruudussa</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>…mutta samat merkit näkyvät oikein Editori-ruudussa: tiedostopääte ja tiedostokoodaus eroavat toisistaan.</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e5008" class="footnote">
+               <p><a href="#d0e5008" class="para"><sup class="para">[1] </sup></a>Huomaa, että tässä on vain puolet (tai sitäkin vähemmän) totuudesta, sillä kohdekieli (sloveeni) käyttää taivutettuja sanamuotoja.
+                  Lisätty termi "pojavni menu" on nominatiivissa mutta se on muutettava lokatiivimuotoon "pojavnem meniju". Siksi voi olla nopeampaa
+                  näpyttää termi heti oikein välittämättä sanastosta ja sen pikanäppäimistä.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.dictionaries.html">Edellinen</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.spellchecker.html">Seuraava</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Liite A. Sanakirjat&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Alkuun</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Liite C. Kielentarkastin</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

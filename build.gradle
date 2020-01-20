@@ -170,8 +170,8 @@ dependencies {
 
         // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies
-        runtimeOnly 'org.codehaus.groovy:groovy-all:2.5.6'
-        runtimeOnly 'org.codehaus.groovy:groovy-dateutil:2.5.6'
+        runtimeOnly 'org.codehaus.groovy:groovy-all:2.5.9'
+        runtimeOnly 'org.codehaus.groovy:groovy-dateutil:2.5.9'
         runtimeOnly 'org.apache.ivy:ivy:2.5.0'
 
         // Script editor

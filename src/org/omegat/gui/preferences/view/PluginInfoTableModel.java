@@ -19,14 +19,17 @@ public class PluginInfoTableModel extends DefaultTableModel {
     protected static final int COLUMN_AUTHOR = 3;
     protected static final int COLUMN_DESCRIPTION = 4;
 
+    private static final String CORE_PLUGINS_PREFIX = "org.omegat.";
     private static final String[] COLUMN_NAMES = { "CLASS", "NAME", "VERSION", "AUTHOR", "DESCRIPTION" };
 
-    private List<PluginInformation> listPlugins = new ArrayList<>();
+    private final List<PluginInformation> listPlugins = new ArrayList<>();
 
     public PluginInfoTableModel() {
         PluginUtils.PLUGIN_INFORMATIONS.stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
+                .filter( info -> !info.getClassName().startsWith(CORE_PLUGINS_PREFIX))
                 .forEach(info -> listPlugins.add(info));
+        System.out.println(listPlugins);
     }
 
     @Override
@@ -46,7 +49,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
 
     @Override
     public int getRowCount() {
-        return PluginUtils.PLUGIN_INFORMATIONS.size();
+        return listPlugins == null ? 0 : listPlugins.size();
     }
 
     @Override

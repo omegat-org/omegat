@@ -175,12 +175,12 @@ dependencies {
         runtimeOnly 'org.apache.ivy:ivy:2.5.0'
 
         // Script editor
-        implementation 'com.fifesoft:rsyntaxtextarea:2.5.8'
-        implementation 'com.fifesoft:rstaui:2.5.7'
-        implementation ('com.fifesoft:languagesupport:2.5.8') {
+        implementation 'com.fifesoft:rsyntaxtextarea:3.0.8'
+        implementation 'com.fifesoft:rstaui:3.0.4'
+        implementation ('com.fifesoft:languagesupport:3.0.2') {
             exclude module: 'rhino'
         }
-        implementation 'com.fifesoft:autocomplete:2.5.8'
+        implementation 'com.fifesoft:autocomplete:3.0.5'
 
         // Moses MT connector
         implementation 'org.apache.xmlrpc:xmlrpc-client:3.1.3'

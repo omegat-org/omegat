@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="dialogs.projectproperties">
+  <title>项目属性</title>
+
+  <para>此对话框可以通过选择<menuchoice> <guimenuitem>项目</guimenuitem> <guimenuitem>属性...</guimenuitem> </menuchoice>来进入</para>
+
+  <section>
+    <title>语言</title>
+
+    <para>您可以手动输入或者通过下拉菜单选择原文与译文语言。请记住：更改语言可能会导致当前使用的翻译记忆库变得无用，因为其语言对可能与新语言不匹配。</para>
+
+    <para>会显示所选语言所对应的分词器。</para>
+  </section>
+
+  <section>
+    <title>选项</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>启用语句级别分割</term>
+
+        <listitem>
+          <para>分割规则设置只影响 <application>OmegaT</application> 处理原文文件的方式。语句级分割是分割原文的主要方式，所以正常情况下应该选中该复选框。</para>
+
+          <para>在一些少见情况下，替代方案，即按段落分割，可能会更好。更改此标志不会影响现有翻译记忆库中的片段。如果您在翻译中途决定从语句翻译切换至段落翻译，项目的内部翻译记忆库不会更改（OmegaT 可能会升级不使用语句分割的旧翻译记忆库，但反之则不然），但 OmegaT 会尝试通过组合现有的句子翻译来创建段落模糊匹配。</para>
+
+          <para>改变分割规则设置可能导致一些已经译好的片段被分拆或者合并。这实际上会让它们回到“未译”状态，因为它们和记录在翻译记忆库中的片段不再匹配，虽然它们的原始翻译依然存在。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>自动传播翻译</term>
+
+        <listitem>
+          <para>如果原文文档中包含非独特片段，自动传播翻译复选框为用户提供了下面两种自动翻译的可能性：如果勾选，则第一个被翻译的片段将假定为默认翻译，其译文文本在翻译过程中会自动用于后继命中。当然，错译片段之后可以手动用<guimenuitem>创建替代译文</guimenuitem>来纠正。如果未勾选自动传播复选框，则含有替代译文的片段会保持未译状态直到用户决定使用哪种译文。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>删除标签</term>
+
+        <listitem>
+          <para>启用后，将从原文片段中移除所有格式化标签。这在处理内联格式并不真正有用的文本（如 OCRed PDF、转换不良的 .odt 或 .docx 等）时特别有用。正常情况下译文文档应当都能打开，因为只移除了内联标签。不可见的格式信息（即不会在 OmegaT 编辑器中显示为标签的那些）在译文文档中会得已保留。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>外部后处理命令</term>
+
+        <listitem>
+          <para>此区域允许输入一个在每次使用“创建译文文档”之后都会应用的外部后处理命令（例如，用于重命名文件的脚本）。这个外部命令不能包含“管道”等，因此建议调用一个脚本。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>片段分割...</guibutton></term>
+
+        <listitem>
+          <para>分割规则通常适用于所有项目。但是，用户可能需要生成一组所讨论项目专用的规则。用此按钮打开对话框，激活<guimenuitem>将分割规则设为项目专用</guimenuitem>复选框，然后根据需要继续调整分割规则。新的规则集将与项目一起存储，不会干扰到通用的分割规则集。要删除项目专用的分割规则，取消勾选此复选框。更多信息关于分割规则的信息，参见<link linkend="dialogs.preferences.segmentationsetup">分割设置首选项</link>。</para>
+
+          <para><emphasis>提示：</emphasis>给定项目的分割规则集保存为 <filename>project/omegat/segmentation.conf</filename>。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>文件过滤器...</guibutton></term>
+
+        <listitem>
+          <para>和上述类似，用户可以创建项目专用的文件过滤器，这些过滤器将与项目一起存储，且仅对当前项目有效。要创建项目专用的文件过滤器集合，点击<guibutton>文件过滤器...</guibutton>按钮，然后在打开的窗口中激活<guimenuitem>允许项目专用过滤器</guimenuitem>复选框。更改后的过滤器配置的副本会随同项目一起存储。要删除项目专用文件过滤器，取消勾选此复选框。请注意，在菜单<guimenuitem>选项-&gt;文件过滤器</guimenuitem>中，将更改全局用户过滤器，而非项目的过滤器。有关此主题的更多信息，参见<link linkend="dialogs.preferences.filefilters">文件过滤器首选项</link>。</para>
+
+          <para><emphasis>提示：</emphasis>给定项目的文件过滤器集保存为 <filename>project/omegat/filters.xml</filename>。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>存储库映射...</term>
+
+        <listitem>
+          <para>在处理团队项目时，此窗口允许您定义远程文件夹和本地文件夹之间的映射（示例参见<link linkend="howto.setupteamproject.mappingparameters">此处</link>）。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>外部搜索...</term>
+
+        <listitem>
+          <para>定义项目专用的外部搜索源。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>文件位置</title>
+
+    <para>在这里你可以选择不同的子文件夹，例如包含原文文件的子文件夹、译文文件的子文件夹等。如果输入的文件夹名称尚不存在，<application>OmegaT</application> 会创建之。如果你决定修改项目的文件夹，要记住这并不会将现有文件从旧文件夹移动到新位置。</para>
+
+    <para>点击<guibutton>排除...</guibutton>可定义 <application>OmegaT</application> 要忽略的文件或文件夹。被忽略的文件或文件夹：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>不会显示在编辑器窗格中、</para>
+      </listitem>
+
+      <listitem>
+        <para>不会纳入统计、</para>
+      </listitem>
+
+      <listitem>
+        <para>在译文文件创建过程中不会被复制到 /target 文件夹中。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>在排除模式对话框中，可以添加或删除模式，也可以通过选定一行并按 F2 来编辑。可以按 <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">ant 语法</ulink>来使用通配符。</para>
+  </section>
+</section>

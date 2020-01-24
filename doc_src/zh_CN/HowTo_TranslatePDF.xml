@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.translatepdf">
+  <title>翻译 PDF 文件</title>
+
+<para>PDF 文件是一种特殊情况。它们包含文本格式信息，但 <application>OmegaT</application> 无法重用此类信息来创建译文文件。因此，PDF 作为纯文本文件处理，并且输出文件是纯文本文件。</para>
+  <para>如果您需要在翻译中复现文本格式（以及其他东西，例如绘图），有三种方法可供尝试：</para>
+  <orderedlist>
+    <listitem>
+      <para>使用 <application>OmegaT</application> 的默认过滤器 （PDF输入），翻译， 创建译文文件（将会是纯文本文件），手动添加相关的格式和项目。</para>
+    </listitem>
+    <listitem>
+      <para>使用 Iceni Infix 过滤器。参见<ulink url="https://omegat.org/howtos/iceni_infix.html ">指南 - 用 Iceni Infix 和 OmegaT 翻译 PDF 文件</ulink>。</para>
+    </listitem>
+    <listitem>
+      <para>将源文件导入 <ulink url="https://www.libreoffice.org/discover/draw/ ">LibreOffice Draw</ulink>，将其保存为 ODG 文件，翻译，然后按需要导出为 PDF。</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">注：</emphasis>以上信息仅适用于带有文本层的 PDF 文件。如果你有一个由扫描页面组成的 PDF 文件（此类文件有时被称为“死”PDF），你需要用 OCR（光学字符识别）程序识别文本并将其转换为 OmegaT 可以处理的格式。</para>
+
+
+
+  <section id="other.file.formats">
+    <title>其它文件格式</title>
+
+    <para>还存在其他适合 OmegaT 处理的纯文本或格式化文本文件格式。</para>
+
+    <para>可以用外部工具将文件转换为支持的格式。然后需要将译文文件转换回原始格式。例如，如果你拥有的是无法处理 ODT 的过时 Microsoft Word 版本，那么对于有着 DOC 扩展名的 Word 文件需要这样来回：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>将文件导入到 ODF writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>将文件保存为 ODT 格式保存</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>对它进行翻译并创建译文 ODT 文件</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>在 ODF writer 中加载译文文件</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>将文件保存为 DOC 格式</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>译文文件的格式质量取决于来回转换的质量。在进行此类转换之前，请务必测试所有选项。查看<ulink url="http://www.omegat.org">OmegaT 主页</ulink>来获取最新的辅助翻译工具列表。</para>
+</section>
+</section>

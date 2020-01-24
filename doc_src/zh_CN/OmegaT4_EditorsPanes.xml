@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="panes">
+  <title>窗格</title>
+
+  <para>主窗口由若干窗格、主菜单和状态栏组成。您可以改变任何一个窗格的位置，甚至可以通过点击窗格的名称并拖动将其分离成独立的窗口。根据窗格的状态，其右上角会显示不同的符号：</para>
+
+  <note>
+    <para>如果无法看到所有窗格（已打开或最小化），按下<guisubmenu>选项&gt;恢复主窗口</guisubmenu>将其恢复为安装时定义的状态。</para>
+  </note>
+
+  <table>
+    <title>窗格部件</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <tbody>
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Minimize.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Minimize.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>最小化窗格，这样只有其名称显示在窗口底部</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Maximize.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Maximize.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>最大化窗格</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Restore.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Restore.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>恢复最大化之前的布局</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Undock.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Undock.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>将窗格从主窗口中分离出来</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Dock.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Dock.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>将窗格放回主窗口内</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>如果有需要，可以重叠窗格。如果这么做，窗格将在顶部显示标签卡。窗格之间的分隔线可以拖动以调整窗格大小。如果你忘记了对用户界面做过的更改，随时都可以用<guimenuitem> 选项 → 恢复主窗口</guimenuitem>回复到原始布局。</para>
+
+  <para>可以将文件拖放到各个窗格中，窗格将作出相应的反应。<itemizedlist>
+      <listitem>
+        <para>编辑器窗格：如果 OmegaT 项目文件（<filename>omegat.project</filename>）被拖到这个窗格中，则打开相应的项目，在此之前会关闭已打开的项目。其他拖进去的文件会被复制到 <filename>source</filename> 文件夹中。这也适用于<link linkend="windows.projectfiles">项目文件</link>窗口。</para>
+      </listitem>
+
+      <listitem>
+        <para>模糊匹配窗格：拖进去的 <filename>.tmx</filename> 文件将被复制到 <filename>tm</filename> 文件夹中。</para>
+      </listitem>
+
+      <listitem>
+        <para>词汇表窗格：拖进去的带有已知词汇表扩展名（<filename>.txt</filename>、<filename>.tab</filename> 等）的文件将被复制到<filename>词汇表</filename>文件夹中。</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section id="editor.pane">
+    <title>编辑器</title>
+
+    <para>在此输入和编辑翻译。编辑器窗格显示部分翻译的文档的文本：已翻译的文本会显示译文，同时未翻译的文本以原始语言显示。所显示的文本被划分为片段，您可以在文档中滚动并双击任何一个片段将其打开并进行编辑。在上述情况下，已翻译的片段以黄色显示。</para>
+
+    <para>上述片段其中之一是当前片段。该片段分为两部分显示。上半部分以原文语言显示，为带绿色背景色的粗体字符；下半部分是编辑区域，以一个标记结尾：标记格式为 <literal>&lt;片段 nnnn&gt;</literal>，其中 nnnn 是此片段在项目中的编号。以上半部分为参照，并用你的翻译替换或修改编辑区域的内容。</para>
+
+    <para>注意：片段非独特时片段标记会显示 <literal>&lt;片段 nnnn +yy 条&gt;。在这种情况下，yy 是此片段在项目中其余地方出现的次数。</literal></para>
+
+    <para>根据首选的编辑行为，未译片段的编辑区域可能为空、包含原文文本、或包含与此待译字符串最相似的字符串的翻译。当您移动前往另一个片段时，此译文会进行验证并保存。如果您想要让译文与原文相同，只需删除编辑区域中的所有文本将其清空（用 <keycap>Ctrl+A</keycap> 全选再用 <keycap>Del</keycap> 删除）。OmegaT 能保存与原文完全相同的译文。这对于包含商标、名称或其他专有名词、或无需翻译的第三方语言片段的文档非常有用。更多细节请参阅<emphasis>翻译编辑</emphasis>。</para>
+
+    <para>如果在编辑器窗格上右键单击，会打开一个弹出菜单，其中提供了<emphasis role="bold">剪切、复制、粘贴</emphasis>（即<keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>、<keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> 和 <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>的功能)、<emphasis role="bold">转到片段</emphasis>和<emphasis role="bold">添加词汇表条目</emphasis>功能。另外，如果是在打开的片段上右键单击，还会提供与<emphasis role="bold">替代译文</emphasis>有关的其他选项，例如，跳转到非独特片段的另一个实例。</para>
+
+    <para>可以从主窗口的任何地方拖动文本并将其放到该片段中。从译文片段之外的地方拖来的文本会复制过来，而在片段内部拖来的文本则会移动过来。</para>
+
+    <para>默认情况下，如果用键盘而不用鼠标是无法在原文片段中选择单词的。按 <keycap>F2</keycap> 键可以允许用键盘上的方向键将光标移入原文片段（或编辑器内的任何其他地方）。在这种模式下，在窗格底部会显示“<guilabel>光标解锁</guilabel>”。要想返回标准的“<guilabel>光标锁定</guilabel>”模式，再按一次 <keycap>F2</keycap>。</para>
+  </section>
+
+  <section>
+    <title>模糊匹配</title>
+
+    <para>匹配查看器中显示了翻译记忆库中最相似的片段，来源既包括随着您对项目的翻译而实时创建的内部项目翻译记忆库，也包括来自于您的过往工作或从客户或翻译代理那里得到的辅助翻译记忆库。</para>
+
+    <para>当您移动至下一片段时，将自动选择第一个模糊匹配（拥有最佳匹配度百分比的那个）。您可以通过按下 <guimenuitem>Ctrl+2、3、4、或 5</guimenuitem> 来选择其他匹配项。显然，如果没有第五个匹配，按下 <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo>就不会有效果。要在译文中使用选定的匹配项，用 <guimenuitem>Ctrl+R</guimenuitem> 来将译文区域替换为匹配内容，或用 <guimenuitem>Ctrl+I </guimenuitem> 来将其插入到光标位置处。</para>
+
+    <para>匹配度百分比大致上等于匹配和被匹配片段中的公共单词数除以二者中较长那条的单词数。选定的模糊匹配以粗体突出形式，在正翻译的字段中缺失的单词显示为蓝色而与缺失部分相邻的单词为绿色。在上面的例子中，原文片段是 <emphasis role="bold">Context menu command</emphasis>。最顶上的匹配项是 100%，因为所有单词都匹配上了。接下来的两个匹配项亦是如此，而第四个匹配项相似但有所不同。显示匹配度百分比的哪一行还包括有包含此匹配项的那个翻译记忆库的名称。如果没有显示文件名，那么其来源是内部项目翻译记忆库。孤立片段（第二个匹配项）说明片段存在于默认项目翻译记忆库中但没有相对应的原文片段。</para>
+  </section>
+
+  <section>
+    <title>词汇表</title>
+
+    <para>词汇表窗格允许您使用在词汇表文件中建立的表达方式和专业术语的自有集。它会显示出现在当前片段中的词汇的翻译。下面的例子中原文片段和上面模糊匹配的例子里一样是“<emphasis>Context menu command</emphasis>”，而显示的词汇条目则是出现在可用词汇表（Microsoft 名词集和斯洛文尼亚 Linux 用户组词汇表）中的。</para>
+
+    <para>如果你激活了翻译提示选项（<guimenuitem>选项 → 翻译提示</guimenuitem>），则可以在原文片段内高亮标记的单词上右键点击来打开带有建议翻译的弹出菜单，建议翻译由词汇表提供。选择其中之一会将其插入到译文片段中当前光标位置处。您还可以在词汇表窗格中高亮标记想要用的条目并通过在选区上右键点击来将其插入到译文中。</para>
+  </section>
+
+  <section>
+    <title>词典</title>
+
+    <para>词典是印刷的词典的电子版本，比如 Merriam Webster、Duden、Larousse 等等，您的桌面上可能正摆着一本。更多关于它们的信息，请参阅<link linkend="appendix.dictionaries">词典</link>章节。</para>
+  </section>
+
+  <section>
+    <title>机器翻译</title>
+
+    <para>机器翻译窗格在其打开时会包含机器翻译工具对当前片段的建议翻译。按 <keysym>Ctrl+M</keysym> 可将当前片段的译文替换为建议译文。</para>
+  </section>
+
+  <section>
+    <title>多重译文</title>
+
+    <para>一条给定的原文片段可能需要多种不同翻译，具体取决于上下文。如果片段的当前翻译并不合适，用户可以选择<guisubmenu>编辑 → 创建替代译文</guisubmenu>。随后所输入的译文文本会视为此原文片段的一种替代译文。您可以通过选择<guisubmenu>编辑 → 用作默认译文</guisubmenu>将各种替代项之一——例如，其中最可能用到的那条——定义为默认译文</para>
+  </section>
+
+  <section>
+    <title>备注</title>
+
+    <para>译者可以给打开的片段添加备注，例如打算稍后再回到此片段重新做翻译、检查确认替代译文是否正确或向同事征求意见。您可以用<guisubmenu>转到 → 下一备注</guisubmenu>和<guisubmenu>转到 → 上一备注</guisubmenu>来浏览备注。</para>
+  </section>
+
+  <section>
+    <title>注释</title>
+
+    <para>某些专门用于翻译工作的文件格式（比如 PO）可以内含备注。通过就可以为译者提供要翻译片段的相关信息。在下面的例子中，PO 文件的作者警告译者要注意译文的长度：</para>
+  </section>
+
+  <section>
+    <title>状态栏</title>
+
+    <para>状态栏在主窗口的底部显示有关工作流的信息。该栏为用户提供了关于正在进行的特定操作的反馈。它还显示着针对当前片段的模糊匹配和词汇表匹配的数量。</para>
+
+    <para>右下角的计数跟踪着翻译的进度（左栏的数字指的是上图）：</para>
+
+    <table>
+      <title>主窗口 - 计数</title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>片段数 - 已译与总量（当前文件）</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>独特片段数 - 已译/总量（项目中）</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>项目中的片段总数（包括重复）</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>当前片段原文和译文的字符数</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>实际使用的角度看，最重要的是第二对数字：它说明了目前您相对于总量（第二个数字）已经完成了多少。示例中的项目显然已经完成，因为全部独特片段均已翻译。</para>
+  </section>
+</chapter>

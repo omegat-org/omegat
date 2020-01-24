@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.textreplace">
+  <title>文本替换</title>
+
+  <para>用<keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>打开查找并替换窗口，把你要替换掉的单词或表达式输入到<emphasis>查找</emphasis>框里。</para>
+
+  <para>然后点击<emphasis>查找</emphasis>按钮来显示所有相应的出现之处。</para>
+
+  <para>在<emphasis>替换为</emphasis>框内输入新的单词或短语（不支持正则表达式），然后点击以下任一选项：<itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">全部替换：</emphasis>对所有出现之处进行操作（在显示出现次数的确认窗口之后）。</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">替换：</emphasis>通过<emphasis role="bold">编辑器窗格头部</emphasis>的按钮“一个接一个”地执行替换。点击<emphasis>替换下一个</emphasis>或<emphasis>跳过</emphasis>，然后用<emphasis>结束</emphasis>终止替换操作。</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">关闭：</emphasis>关闭窗口，不做任何改变。</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section>
+    <title>查找选项</title>
+
+    <para>查找选项与显示在<link linkend="windows.textsearch">查找窗口</link>中的那些类似。</para>
+
+    <para>只有一点不同：勾选<emphasis role="bold">未译</emphasis>来对尚未翻译的片段同样执行查找与替换。</para>
+
+    <para>为了使其成为可能（查找与替换只对翻译记忆库进行操作），OmegaT 会在进行替换操作之前将原文片段复制到译文片段。如果对于给定片段没有发生替换，译文片段会被“清空”，即，它会维持未译状态。</para>
+  </section>
+</section>

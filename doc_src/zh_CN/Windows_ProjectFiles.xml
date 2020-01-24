@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.projectfiles">
+  <title>项目文件</title>
+
+  <para>当 OmegaT 载入项目时会自动显示此窗口，在任何时候，按下<menuchoice> <guimenuitem>项目</guimenuitem> <guimenuitem>项目文件...</guimenuitem> </menuchoice>也会显示此窗口。</para>
+
+  <para><remark>注意：</remark>可以通过在<filename>omegat.prefs</filename> 文件（可通过<menuchoice> <guimenuitem>选项</guimenuitem> <guimenuitem>访问配置文件夹</guimenuitem> </menuchoice>菜单）中将 <emphasis>project_files_show_on_load</emphasis> 设置为 <emphasis>false</emphasis> 来禁止在打开时显示此窗口。</para>
+
+  <para>用 <guimenuitem>Ctrl+L</guimenuitem> 将其打开，用 <keycap>Esc</keycap> 将其关闭。<guilabel>项目文件</guilabel>窗口显示以下信息：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>项目中可翻译文件的总数。这些文件位于 /source 文件夹中且 OmegaT 要能识别其格式。此数字显示在“项目文件”标题旁边的括号内。</para>
+    </listitem>
+
+    <listitem>
+      <para>项目中所有可翻译文件的列表。点击任何一个文件将打开它进行翻译。</para>
+
+      <para>输入任何文本都会打开<guilabel>过滤器</guilabel>字段，其中可以输入文件名片段。可以用<keycap>上</keycap>和<keycap>下</keycap>方向键来选择文件，并按 <keycap>Enter</keycap> 键将其打开进行翻译。</para>
+
+      <para>注意：文件名（第一列）可以通过点击表头来按字母排序。也可以通过点击文件名并按下各个<emphasis>移动</emphasis>按钮来改变文件名的位置。</para>
+
+      <para>右键单击文件名会打开一个弹出窗口，可以打开原文文件和（如果存在）译文文件。</para>
+    </listitem>
+
+    <listitem>
+      <para>每个文件条目包括其名称、文件过滤器类型、编码和每个文件所包含的片段数</para>
+    </listitem>
+
+    <listitem>
+      <para>整个项目的片段总数、总独特片段数和已译独特片段数显示在底部</para>
+    </listitem>
+  </itemizedlist>
+
+  <para><emphasis role="bold">独特</emphasis>片段集合是通过将所有片段去除重复片段计算得到的。（“独特”的定义是区分大小写的：“Run&quot;”和“run”视为不同）</para>
+
+  <para>“片段数”和“独特片段数”之间的差距对文本中的重复情况提供了大致的概念。但是要注意，这些数字上并不能看出重复的相关程度：它们可能意味着有较长的句子重复了很多次（这种情况下你很走运）或者也可能是关键字表格（不太走运）。位于项目的 omegat 文件夹中的 <filename>project_stats.txt</filename> 内包含有更详细的片段信息，按文件细分。</para>
+
+  <para>修改分割规则可能会有改变片段/独特片段数量的效果。但是，一旦开始对项目进行翻译后，通常应当避免这么做。更多信息请参阅<emphasis>分割规则</emphasis>章节。</para>
+
+  <para><emphasis role="bold">向项目中添加文件：</emphasis>你可以通过点击“<guimenuitem>导入原文文件...</guimenuitem>”按钮来向项目中添加原文文件。这会将所选择的文件复制到 <filename>source</filename> 文件夹并重新载入项目以导入新文件。还可以通过点击<guimenuitem>“从 MediaWiki 导入”</guimenuitem>按钮并提供相应的网址来从用 MediaWiki 编写的网页添加原文文件。</para>
+</section>

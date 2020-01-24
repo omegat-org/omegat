@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.scripts">
+  <title>脚本</title>
+
+  <para>此窗口可通过选择<menuchoice> <guimenuitem>工具</guimenuitem> <guimenuitem>脚本...</guimenuitem> </menuchoice>来进入</para>
+
+  <section>
+    <title>使用</title>
+
+    <para>脚本窗口让您可以将现有脚本加载到文本区中并针对当前打开的项目运行它。要自定义脚本功能，请执行以下操作：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>在左侧面板的列表中点击脚本名称将其加载到编辑器中。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>右键单击底部面板中的<guilabel>&lt;1&gt;</guilabel>到<guilabel>&lt;12&gt;</guilabel>按钮之一并选择<guilabel>添加脚本</guilabel>。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>当左键点击此数字时，将运行所选脚本。也可以用主菜单中<guisubmenu>工具</guisubmenu>菜单下的条目或按<keycap> Ctrl+Alt+F#</keycap>(# 为 1 到 12）来启动所选的宏。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>默认状态下，脚本存储在位于 OmegaT 安装文件夹（包含 <filename>OmegaT.jar</filename> 文件的文件夹）中的 <filename>scripts</filename> 文件夹下。</para>
+
+    <para>如果在此处添加了新脚本，它们将出现在<guilabel>脚本</guilabel>窗口的可用脚本列表中。</para>
+
+    <para>这里可以找到一些其他脚本：<ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT 脚本</ulink></para>
+  </section>
+
+  <section>
+    <title>脚本语言</title>
+
+    <para>已实现以下脚本语言：</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis>（http://groovy.codehaus.org）：用于 Java 虚拟机的一种动态语言。它基于 Java 的优势，但又具有受 Python、Ruby 和 Smalltalk 等语言所启发的其他强大功能。</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis>（有时缩写为 JS，不要与 Java 相混淆）：一种基于原型的脚本语言，它是动态、弱类型的并且具有头等函数。它是多范式语言，支持面向对象、命令式和函数式编程风格。作为诸如 Firefox 等流行软件背后的语言，它是开源领域中参见且首选的编程工具。</para>
+        </listitem>
+      </itemizedlist>所有语言都能访问 OmegaT 的对象模型，其中项目是顶层对象。例如，以下 Groovy 代码片段将扫描当前项目中所有文件内的所有片段，若已存在翻译则打印出片段的原文和译文：</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
+  </section>
+</section>

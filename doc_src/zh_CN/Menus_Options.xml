@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>选项</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>首选项...</term>
+
+      <listitem>
+        <para>打开<link linkend="dialogs.preferences">首选项</link>对话框。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>机器翻译</term>
+
+      <listitem>
+        <para>允许您激活/停用提供的机器翻译工具。</para>
+
+        <para>如果选择了多个翻译引擎，则可以用<keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>在它们之间切换并插入最后一个选定的结果。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>词汇表</term>
+
+      <listitem>
+        <para>选择<guimenuitem>Taas 术语查询</guimenuitem>以激活该查询。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>词典</term>
+
+      <listitem>
+        <para>如果你希望词典中显示有着相同词根的词汇，请勾选<guimenuitem>对词典条目使用模糊匹配</guimenuitem>选项。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>自动完成</term>
+
+      <listitem>
+        <para>如果勾选了<guimenuitem>自动显示相关建议</guimenuitem>选项，自动完成器会在输入已翻译术语表中条目的头几个字母或输入标签的“&lt;”后自动启动。</para>
+
+        <para>勾选<guimenuitem>历史完成</guimenuitem>以在输入第一个字母后就立即显示建议单词。</para>
+
+        <para>勾选<guimenuitem>历史预测</guimenuitem>以显示通常跟在刚输入的单词之后的建议单词。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>文件过滤器...</term>
+
+      <listitem>
+        <para>打开首选项对话框中的<link linkend="dialogs.preferences.filefilters">文件过滤器</link>选项。</para>
+
+        <para>这些设置是应用到 OmegaT 级别的，对所有项目生效。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>片段分割...</term>
+
+      <listitem>
+        <para>打开首选项对话框中的<link linkend="dialogs.preferences.segmentationsetup">分割设置</link>选项。</para>
+
+        <para>这些设置是应用到 OmegaT 级别的，对所有项目生效。</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>编辑器...</term>
+
+      <listitem>
+        <para>打开首选项对话框中的<link linkend="dialogs.preferences.editor">编辑器</link>选项。</para>
+
+        <para>这些设置是应用到 OmegaT 级别的，对所有项目生效。</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>访问配置文件夹</term>
+
+      <listitem>
+        <para>打开存储着 OmegaT 配置文件的本地目录（取决于操作系统）。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

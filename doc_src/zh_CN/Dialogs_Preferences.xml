@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="dialogs.preferences">
+  <title>通用首选项</title>
+
+  <para>此对话框可通过选择<menuchoice> <guimenuitem>选项</guimenuitem> <guimenuitem>首选项...</guimenuitem> </menuchoice>来进入</para>
+
+  <para>它允许为所有翻译项目设置参数。</para>
+
+  <section>
+    <title>通用</title>
+
+    <variablelist id="dialogs.preferences.general.usetabtoadvance">
+      <varlistentry>
+        <term>用 Tab 前进</term>
+
+        <listitem>
+          <para>将片段验证键设置为 Tab 来代替默认的 Enter。此选项对某些中文、日文或韩文字符输入系统很有用。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>退出前确认</term>
+
+        <listitem>
+          <para>程序将在关闭前要求确认。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>机器翻译</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>自动获取翻译</term>
+
+        <listitem>
+          <para>出于保密原因，您可能不想将所有片段发送给机器翻译引擎。如果你取消此选项的勾选，则仅当你在当前片段中按下 <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>（OS X 上是<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo>）时才会获取机器翻译。你需要再按一次<keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>以插入建议。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>仅限未译片段</term>
+
+        <listitem>
+          <para>勾选此框可使得仅有未翻译的片段会被发送至机器翻译服务。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>从列表中选择供应商，如有必要，点击<guibutton>配置</guibutton>来输入供应商提供的详细认证信息。</para>
+
+    <para><ulink url="https://sourceforge.net/p/omegat/wiki/Configuring Machine Translation Services">此处</ulink>描述了配置对 Microsoft Translator 和 Google Translate 服务的访问的过程。</para>
+  </section>
+
+  <section>
+    <title>词汇表</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>显示 TBX 词汇表的上下文描述</term>
+
+        <listitem>
+          <para>如果为每个词汇表条目所显示的上下文描述不必要或者太长，请取消对此选项的勾选。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>使用分开出现在原文文本中的词条</term>
+
+        <listitem>
+          <para>勾选此选项后，对于由一对或一组单词（表达式）所组成的条目，即使其中的单词在原文文本中是分开出现的，词汇表中也会显示此条目。</para>
+
+          <para>如果词汇表中显示了过多误报，请取消对此选项的勾选。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>对词汇表条目使用词干分析</term>
+
+        <listitem>
+          <para>如果希望词汇表中显示有着相同词根的词汇，请选择此选项。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>插入原文文本时替换命中的词汇表条目</term>
+
+        <listitem>
+          <para>如果同时勾选了此选项与<link linkend="dialogs.preferences.editor.insertthesourcetext"><guilabel>插入原文文本</guilabel></link>选项，当插入原文文本时，所有有着相应词汇表条目的词汇都会被自动翻译。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>忽略大小写不同的命中（例如 FOO 和 foo）</term>
+
+        <listitem>
+          <para>勾选此选项后，词汇表中只会显示一个条目，即使此词汇在词汇表中存在有多种形式（例如，有和没有字母是大写的）。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <section>
+      <title>TaaS 术语</title>
+
+      <variablelist>
+        <varlistentry>
+          <term>获取 API 密钥</term>
+
+          <listitem>
+            <para>点击此按钮可访问 <ulink url="https://term.tilde.com/taas">TaaS</ulink> 项目网站并创建用户帐户。</para>
+
+            <para>然后，你可以在页面 <ulink url="https://term.tilde.com/account/keys/create?system=omegaT">https://term.tilde.com/account/keys/create?system=omegaT</ulink> 上创建访问密钥。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>仅为本次会话保存</term>
+
+          <listitem>
+            <para>勾选此选项后，OmegaT 在不同会话之间不会记住访问密钥。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>浏览 TaaS 词库...</term>
+
+          <listitem>
+            <para>此按钮让你能够浏览并下载已有的那些针对项目原文语言与译文语言的词库。私有词库显示为粗体。词库将下载为 TBX 词汇表并存放在当前词汇表文件夹中。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>选择 TaaS 术语查询领域...</term>
+
+          <listitem>
+            <para>如有必要，你可以选择特定领域以限制发送与接受的数据量。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+  </section>
+
+  <section id="dialogs.preferences.dictionary">
+    <title>词典</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>自动在词典中查找片段文本</term>
+
+        <listitem>
+          <para>清除此选项可停用自动搜索——例如词典过长的情况。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>对词典条目使用模糊匹配</term>
+
+        <listitem>
+          <para>如果希望词典中显示有着相同词根的词汇，请选择此选项。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>外观</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>恢复主窗口</term>
+
+        <listitem>
+          <para>将 OmegaT 窗口的组件恢复到默认状态。当你分离、移动或隐藏了一个或多个组件后无法恢复到所需的排列时可以使用此功能。更新 OmegaT 后窗格未按预期显示时也可以使用它。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <section>
+      <title>字体</title>
+
+      <para>显示用于修改文本显示字体的对话框。使用老电脑的用户如果觉得改变窗口大小非常慢可以尝试更改字体。请参阅杂记中的字体设置部分</para>
+    </section>
+
+    <section>
+      <title>颜色</title>
+
+      <para>此页面让您可以为用户界面的各个部分选择不同的颜色。</para>
+
+      <para>可以用脚本设置预定义主题。随同 OmegaT 有一个叫做 Switch Colour Themes 的脚本提供了一套默认的“深色”主题。</para>
+    </section>
+  </section>
+
+  <section id="dialogs.preferences.filefilters">
+    <title>文件过滤器</title>
+
+    <para>此对话框列出了可用的文件过滤器。当前项目所使用的过滤器以粗体显示。如果你不想用 OmegaT 翻译某种类型的文件，可以通过对其名称旁边的复选框的勾选来关闭相应的过滤器。然后，OmegaT 在加载项目时会忽略相应的文件，并在创建译文文档时不加修改地将它们复制到译文文件夹。如果你想再次使用此过滤器，只需要勾选相应复选框即可。点击<emphasis role="bold">默认</emphasis>可以将文件过滤器重置为默认设置。要编辑过滤器所针对的文件和编码，请在列表中选中此过滤器然后点击<emphasis role="bold">编辑</emphasis>。</para>
+
+    <para>该对话框允许您启用或禁用以下选项：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>删除开头和末尾的标签：取消勾选此选项可以显示所有标签，包括在片段开头和结尾处的标签。警告：在 Microsoft Open XML 格式中（docx、xlsx 等等），如果显示所有标签，不要在第一个标签之前放置任何文本——它是个技术性标签，必须始终是开启段落的标签。</para>
+      </listitem>
+
+      <listitem>
+        <para>删除非分割项目中开头和末尾的空白字符：默认情况下，OmegaT 会删除开头和末尾的空白字符。在非分割项目中，可以通过取消勾选此项选来保留之。</para>
+      </listitem>
+
+      <listitem>
+        <para>为所有标签保留空格：如果原文文档包含用于控制布局的不可忽略的重要空格，请勾选此选项。</para>
+      </listitem>
+
+      <listitem>
+        <para>识别有替代翻译的片段时忽略文件上下文：默认情况下，OmegaT 用原文文件名作为替代翻译的识别信息的一部分。如果勾选了此选项，则不使用原文文件名，而只要其他上下文（上一个/下一个片段或依赖于文件格式的某种片段标识）匹配，替代翻译会在任意文件中生效。</para>
+      </listitem>
+    </itemizedlist>
+
+    <section id="filters.options">
+      <title>过滤器选项</title>
+
+      <para>好些过滤器（文本文件、XHTML 文件、HTML 和 XHTML 文件、OpenDocument 文件和 Microsoft Open XML 文件）有一个或多个特定选项。要修改这些选项，在列表中选定此过滤器并点击<emphasis role="bold">选项</emphasis>。可用选项包括：</para>
+
+      <para><emphasis role="bold">文本文件</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>在断行、空行处进行段落分割或不分割：</emphasis></para>
+
+          <para>如果激活了语句分割规则，文本会根据此处所选择的选项进行进一步分割。</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">PO 文件</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>允许译文文件中存在空译文</emphasis>：</para>
+
+          <para>如果选择了此选项，当 PO 文件中的某个片段（可能是整个段落）未翻译时，其在译文文件中的翻译将为空。技术上说，在 PO 译文文件中的 <code>msgstr</code> 片段（如果已创建）将保留为空。由于这是 PO 文件的标准行为，因此它在默认情况下是选中的。如果关闭了此选项，原文文本将被复制到译文段落。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>跳过 PO 头</emphasis></para>
+
+          <para>如果选中此选项，则将跳过 PO 头并保持其不变。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>自动替换头中的‘nplurals=INTEGER; plural=EXPRESSION;’</emphasis></para>
+
+          <para><emphasis>此选项允许 OmegaT 覆盖 PO 文件头中的规范，并使用所选译文语言的默认值。</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">XHTML 文件</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>翻译以下属性</emphasis>：所选属性会作为片段出现在编辑器窗口中。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>在此处开始新段落</emphasis>：对于分割而言，将 &lt;br&gt; HTML 标签视为段落分隔。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>忽略匹配以下正则表达式的文本</emphasis>：跳过所有匹配此正则表达式的文本。在标签验证器中它会显示为红色。在原文文本中相匹配的文本会显示为斜体。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>不翻译带有以下属性键值对的 meta 标签的 content 属性（以逗号分隔）：</emphasis>框中的 meta 标签将不进行翻译。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>不翻译带有以下属性键值对的标签的内容（以逗号分隔）</emphasis>：如果标签与键值对列表匹配，则其内容会被忽略。</para>
+
+          <para>能够根据属性的值来将某些标签标记为不可翻译在某些时候会很有用。例如，<literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>。你可以为标签定义要维持不翻译的键值对。对于上面这个例子，这个字段应当包含：<literal>class=hide, translate=no </literal>。</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">Microsoft Office Open XML 文件</emphasis></para>
+
+      <para>您可以选择要翻译的元素。在翻译中它们将显示为单独的片段。</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Word：</emphasis>不可见说明性文本、批注、脚注、尾注、页脚</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Excel：</emphasis>批注、工作表名称</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Power Point</emphasis>：幻灯片批注、幻灯片母版和幻灯片版式</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">全局：</emphasis>数据图表、图表、绘图和艺术字</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">其他选项：</emphasis></para>
+
+          <itemizedlist>
+            <listitem>
+              <para><emphasis>聚合标签</emphasis>：如果选中，其间没有可翻译文本的多个标签将被聚合成单个标签。</para>
+            </listitem>
+
+            <listitem>
+              <para><emphasis>为所有标签保留空格</emphasis>：如果选中，会保留“空白字符”（即空格和换行符），即使在文档中并未定义此选项也是如此。</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">HTML 和 XHTML 文件</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>在 HTML 和 XHTML 文件中新增或重写编码声明</emphasis>：译文文件通常需要具有与原文文件（无论是显式定义还是隐含）不同的字符集编码。使用此选项，译者可以指定译文文件是否应当包含编码声明。例如，如果文件过滤器指定 UTF8 作为译文文件的编码方案，则勾选本选项将始终确保此信息包含在已译文件中。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>翻译以下属性</emphasis>：所选属性会作为片段出现在编辑器窗口中。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>在此处开始新段落</emphasis>：对于分割而言，将 &lt;br&gt; HTML 标签视为段落分隔。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>忽略匹配以下正则表达式的文本</emphasis>：跳过所有匹配此正则表达式的文本。在标签验证器中它会显示为红色。在原文文本中相匹配的文本会显示为斜体。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>不翻译带有以下属性键值对的 meta 标签的 content 属性（以逗号分隔）：</emphasis>框中的 meta 标签将不进行翻译。</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis>不翻译带有以下属性键值对的标签的内容（以逗号分隔）</emphasis>：如果标签与键值对列表匹配，则其内容会被忽略。</para>
+
+          <para>能够根据属性的值来将某些标签标记为不可翻译在某些时候会很有用。例如，<literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>。你可以为标签定义要维持不翻译的键值对。对于上面这个例子，这个字段应当包含：<literal>class=hide, translate=no </literal>。</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis>在译文文档中压缩空白字符</emphasis>：在译文文档中，多个连续的空白字符会被转换成单个空白字符。</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis>在译文文档中删除 HTML 注释</emphasis>：注释部分（&lt;!-- 和 --&gt; 之间的部分）不会被复制到译文文档中。</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">开放文件格式（ODF）文件</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>您可以选择要翻译下列哪些项：</para>
+
+          <para>索引条目、书签、书签引用、备注、批注、演讲备注、链接（URL）、工作表名称</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="edit.filter.dialog">
+      <title>编辑过滤器对话框</title>
+
+      <para>此对话框让您能够指定要由过滤器处理的原文文件的文件名模式、自定义已译文件的文件名和选择用什么编码来加载原文文件和保存翻译。要修改文件过滤器模式，请直接修改字段名或点击<emphasis role="bold">编辑</emphasis>。要添加新的文件过滤器模式，点击<emphasis role="bold">添加</emphasis>。添加模式和编辑特定模式使用相同的对话框。该对话框包含一个专门的译文文件名模式编辑器，您可以使用它来自定义输出文件的名称。</para>
+
+      <section id="source.filetype.and.filename.pattern">
+        <title>原文文件类型、文件名模式</title>
+
+        <para>当 OmegaT 在其原文文件夹中遇到文件时，它会尝试根据文件的扩展名选择过滤器。更确切地说，OmegaT 尝试将每个过滤器的原文文件名模式与文件名进行匹配。例如，<literal>*.xhtml </literal>模式将会匹配任何扩展名为 <literal>.xhtml</literal> 的文件。如果找到了合适的过滤器，则将文件分配给它进行处理。例如，默认情况下，XHTML 过滤器用于处理扩展名为 .xhtml 的文件。您可以更改或添加由每个文件过滤器处理的文件的文件名模式。原文文件名模式使用的通配符类似于<emphasis role="bold">搜索</emphasis>中所用的。“*”字符匹配零个或多个字符。“?”字符只匹配一个字符。所有其他字符代表其自身。例如，如果您希望文本过滤器处理 readme 文件（<literal>readme、read.me</literal> 和 <literal>readme.txt</literal>），那么您应该使用模式 <literal>read*</literal>。</para>
+      </section>
+
+      <section id="source.and.target.files.encoding">
+        <title>原文文件和译文文件编码</title>
+
+        <para>仅有少量文件格式指定强制编码。未指定编码的文件格式将使用您为其文件扩展名所设置的编码。例如，默认情况下 <literal>.txt</literal> 文件会使用操作系统的默认编码加载。你可以更改每个不同的原文文件名模式的原文编码。译文文件也可以用任意编码编码。默认情况下，已译文件的编码与原文文件编码相同。原文与译文的编码字段使用的是包含所有支持的编码的下拉菜单。&lt;自动&gt;则会让 <application>OmegaT</application> 来选择编码。这是它的工作原理：</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT 使用其编码声明（如果存在）来识别原文文件的编码（HTML 文件、基于 XML 的文件）。</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT 被设置为对某些文件格式使用强制编码（Java 属性等）。</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT 使用操作系统的默认编码来处理文本文件。</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="target.name">
+        <title>译文文件名</title>
+
+        <para>有时候你可能希望自动重命名所翻译的文件，例如在文件名后添加语言代码。译文文件名模式使用特殊的语法，因此如果要编辑此字段，你必须点击<emphasis role="bold">编辑...</emphasis>并使用编辑模式对话框。如果要还原为过滤器的默认配置，点击<emphasis role="bold">恢复默认值</emphasis>。你还可以在文件过滤器对话框的译文文件名模式字段中直接修改名称。编辑模式对话框提供了以下选项：</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>默认值是 <literal>${filename}</literal>——带有扩展名的原文文件的完整文件名：在这种情况下，已译文件的文件名和原文文件的文件名相同。</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${nameOnly}</literal>——允许您只插入原文文件的主文件名，不包括扩展名。</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension} </literal>——原始文件的扩展名</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLocale}</literal>——译文区域设置代码（格式为“xx_YY”）。</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLanguage}</literal>——译文语言和国家/地区代码（格式为“XX-YY”）。</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLanguageCode}</literal>——译文语言——仅“XX”</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetCountryCode}</literal>——译文的国家/地区——仅“YY”</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${timestamp-????}</literal>——生成时的系统日期时间，有各种格式</para>
+
+            <para>有关“SimpleDateFormat”格式的示例，请参阅 <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">Oracle 文档</ulink></para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-os-name}</literal>——电脑所使用的操作系统</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-user-name}</literal>——系统用户名</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-host-name}</literal>——系统主机名</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${file-source-encoding}</literal>——原文文件编码</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${file-target-encoding}</literal>——译文文件编码</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${targetLocaleLCID}</literal>——Microsoft 目标区域设置 </para>
+          </listitem>
+        </itemizedlist>
+
+        <para>对于变量 ${nameOnly} 和 ${Extension} 还有其他变体可用。如果文件名存在疑义，可以用如下形式的变量名： <literal>${name only</literal><emphasis>-扩展数字</emphasis>} 和 <literal>${extension</literal>-<emphasis>扩展数字} </emphasis>。例如，如果原始文件名为 Document.xx.docx，以下变量相应的结果如下：</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${nameOnly-0}</literal> Document</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${nameOnly-1}</literal> Document.xx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${nameOnly-2}</literal> Document.xx.docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-0}</literal> docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-1}</literal> xx.docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-2}</literal> Document.xx.docx</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>
+  </section>
+
+  <section id="dialogs.preferences.segmentationsetup">
+    <title>分割设置</title>
+
+    <para>翻译记忆工具使用称为片段的文本单元。<application>OmegaT</application> 有两种方式来分割文本：按段落或按语句分割（亦称为“基于规则的分割”）。要选择分割的类型，请从主菜单中选择<menuchoice> <guimenu>项目</guimenu> <guimenuitem>属性...</guimenuitem> </menuchoice>，然后勾选或取消勾选所提供的复选框。段落分割在某些情况下是有利的，例如在高度创造性或讲究文体的翻译中，译者可能想要整个改变语句的顺序；然而，对于大多数项目而言，语句分割是首选的选择，因为它能更好地与之前的翻译相匹配。如果选用了语句分割，你可以通过从主菜单中选择<menuchoice> <guimenu>选项</guimenu> <guimenuitem>片段分割...</guimenuitem> </menuchoice>来设置规则。</para>
+
+    <para>许多语言都已经有了可靠的分割规则，因此您很可能并不需要参与编写自己的分割规则。另一方面，此功能在特殊情况下会非常有用，可以针对要翻译的文本调整分割规则来提高工作效率。</para>
+
+    <para><emphasis role="bold">警告：</emphasis>由于在更改过滤器选项后文本将以不同的方式进行分割，因此您可能需要从头开始翻译。同时，项目的翻译记忆库中之前的那些有效片段会变为孤立片段。如果在项目开启状态下更改分割规则，则必须重新加载项目才能使更改生效。</para>
+
+    <para><application>OmegaT</application> 使用以下步骤：</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>结构级分割</term>
+
+        <listitem>
+          <para><application>OmegaT</application> 首先解析文本以进行结构级分割。在此过程中，只使用原文文件的结构来生成片段。</para>
+
+          <para>例如，文本文件可能会在断行、空行处分割，或者完全不分割。包含格式的文件（ODF 文档、HTML 文档等）则在块级（段落）标签上分割。在 XHTML 或 HTML 文件中的可翻译对象属性可以提取为单独的片段。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>语句级分割</term>
+
+        <listitem>
+          <para>在将源文件分割为结构单元之后，<application>OmegaT</application> 将进一步把这些块分割为语句。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <section id="segmentation.rules">
+      <title>片段分割规则</title>
+
+      <para>分割过程可描绘如下：光标沿着文本移动，每次一个字符。在每个光标位置处，由<emphasis role="bold">前</emphasis>与<emphasis role="bold">后</emphasis>模式组成的规则将按给定顺序应用，检查是否有任何<emphasis role="bold">前</emphasis>模式对于光标左侧的文本有效同时相应的<emphasis role="bold">后</emphasis>模式也对光标右侧的文本有效。如果规则匹配，则光标会移动而不插入片段分割符（对于例外规则）或者在当前光标位置创建新的片段分割符（对于断句规则）。</para>
+
+      <para>这两种规则的行为如下：</para>
+
+      <variablelist>
+        <varlistentry>
+          <term>断句规则</term>
+
+          <listitem>
+            <para>将原文文本分割为片段。例如，“<emphasis>Did it make sense? I was not sure</emphasis>.”应当分割为两个片段。要做到这一点，应该有一个断句规则，针对“?”，同时后面要跟着空格和一个首字母大写的单词。要将一条规则定义为断句规则，请勾选断句/例外复选框。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <variablelist>
+        <varlistentry>
+          <term>例外规则</term>
+
+          <listitem>
+            <para>指定不应分开的文本部件。尽管其中有个句点，但<emphasis>“Mrs. Dalloway”</emphasis>不应当分割为两个片段，因此应当为后面跟着句点的 Mrs（以及 Mr、Dr、prof 等）制定一条例外规则。要将一条规则定义为例外规则，请取消对断句/离外复选框的勾选。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para>对于绝大多数欧洲语言和日语来说，预定义的断句规则应当足够了。从灵活性的角度看，您可以考虑为原文语言定义更多例外规则以获取语意更完整也更连贯的片段。</para>
+    </section>
+
+    <section id="rules.priority">
+      <title>规则的优先级</title>
+
+      <para>为匹配的语言模式所定义的所有片段分割规则集都是活动的，并按照规给定的优先级顺序应用，因此为特定语言定义的规则优先级应当高于默认的那些。例如，加拿大法语（FR-CA）的规则优先级应当设置为高于法语（FR.*）的规则，并高于默认（.*）的规则。因此，在翻译加拿大法语时，会首先应用加拿大法语规则（如果存在的话），接着是法语规则，最后为缺省规则。</para>
+    </section>
+
+    <section id="creating.new.rule">
+      <title>创建新规则</title>
+
+      <para>通常应避免对分割规则进行重大更改，尤其在完成初稿后，但进行细微修正，例如添加公认的缩写，可能会有好处。</para>
+
+      <para>要编辑或扩展现有的规则集，只要在顶部的表格中点击它即可。该规则集内的规则将显示在窗口的下半部分。</para>
+
+      <para>若要为新的语言模式创建空的规则集，点击对话框上半部分的<emphasis role="bold">添加</emphasis>。上方表格的底部会出现一个空行（你可能需要向下滚动才能看到它）。将规则集的名称和语言模式更改为相关语言及其代码。语言模式的语法遵循正则表达式的语法规则。如果你的规则集处理的是语言-国家对，我们建议您使用<emphasis role="bold">上移</emphasis>按钮将其移到顶部。</para>
+
+      <para>添加<emphasis role="bold">前模式</emphasis>与<emphasis role="bold">后模式</emphasis>。要检查其语法和适用性，建议使用能直接查看其效果的工具。参见<link linkend="appendix.regexp">正则表达式</link>。现有的规则永远是个良好的起点。</para>
+    </section>
+
+    <section id="few.simple.examples">
+      <title>一些简单的例子</title>
+
+      <informaltable>
+        <tgroup cols="4">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="center" colnum="2"/>
+
+          <colspec align="center" colnum="3"/>
+
+          <colspec align="left" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>目的</entry>
+
+              <entry align="center">前模式</entry>
+
+              <entry align="center">后模式</entry>
+
+              <entry>备注</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>在后面跟着空格、Tab 等的句点（“.”）之后开始新片段。</entry>
+
+              <entry align="center">\.</entry>
+
+              <entry align="center">\s</entry>
+
+              <entry>“\.”代表句点字符。“\s”意味着任意空白字符（空格、Tab、分页符等）</entry>
+            </row>
+
+            <row>
+              <entry>在 Mr. 后不要进行分割</entry>
+
+              <entry align="center">Mr\.</entry>
+
+              <entry align="center">\s</entry>
+
+              <entry>这是一条例外规则，因此此规则的复选框必须取消勾选。</entry>
+            </row>
+
+            <row>
+              <entry>在“。”（日文句号）后进行分割</entry>
+
+              <entry align="center">。</entry>
+
+              <entry align="center"/>
+
+              <entry>注意<literal>后模式</literal>是空的</entry>
+            </row>
+
+            <row>
+              <entry>在 M.、Mr.、Mrs.、和 Ms. 之后不要进行分割</entry>
+
+              <entry align="center">Mr??s??\.</entry>
+
+              <entry align="center">\s</entry>
+
+              <entry>例外规则——参见正则表达式中 ? 的用法</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </section>
+  </section>
+
+  <section>
+    <title>自动完成</title>
+
+    <para>点击<guimenuitem>词汇表...</guimenuitem>来配置自动完成器词汇表视图。</para>
+
+    <para>点击<guimenuitem>自动文本...</guimenuitem>来配置自动文本选项以及添加或移除条目。</para>
+
+    <para>点击<guimenuitem>字符表...</guimenuitem>来设置字符表自动完成器选项。</para>
+
+    <para>在译文片段中可通过快捷键 <emphasis role="bold">Ctrl+空格</emphasis>来启动自动完成器。</para>
+
+    <para>如果勾选了<emphasis role="bold">自动显示相关建议</emphasis>选项，自动完成器会在输入已翻译术语表中条目的首字母或输入标签的“&lt;”后自动启动。</para>
+  </section>
+
+  <section>
+    <title>拼写检查器</title>
+
+    <para>OmegaT 有一个内置的拼写检查器，它基于 Apache OpenOffice、LibreOffice、Firefox 和 Thunderbird 中使用的<link linkend="appendix.spellchecker">拼写检查器</link>。因此，它可以使用大量可用于这些程序的免费拼写词典。</para>
+  </section>
+
+  <section>
+    <title>LanguageTool 插件</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>服务类型</term>
+
+        <listitem>
+          <para>选择语言检查器的位置。</para>
+
+          <para>使用本地电脑上与 OmegaT 提供的语言检查器之外的语言检查器让你能够个性化验证规则。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>规则</term>
+
+        <listitem>
+          <para>是否要勾选这些规则取决于它们与您要翻译的文本的类型是否相关。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.externalsearch">
+    <title>外部搜索</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>允许每个项目自有命令</term>
+
+        <listitem>
+          <para>默认情况下，OmegaT 不会执行项目专有设置（<filename>omegat</filename> 文件夹中的 <filename>finder.xml</filename> 文件）中所指定的命令，因为它们可能会对机器的安全性产生重大影响。</para>
+
+          <para>仅当你明白自己正在做什么且仅针对来自可信来源的项目时才激活此选项。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>上下文菜单优先级：</term>
+
+        <listitem>
+          <para>使您可以更改上下文菜单（右键单击菜单）中的命令的顺序。100 左右的值会让命令显示在顶部，而 900 左右的值会它们显示在底部。</para>
+
+          <para>你需要重新启动 OmegaT 才能使此更改生效。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.editor">
+    <title>编辑器</title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.editor.insertthesourcetext">
+        <term>插入原文文本</term>
+
+        <listitem>
+          <para>你可以将原文文本自动插入编辑区。这对于包含许多商标或其他必须保持不变的专有名词的文本很有用。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>保持片段为空</term>
+
+        <listitem>
+          <para>OmegaT 将把编辑字段留空。该选项允许您直接输入翻译而无需删除原文文本，因此省掉了两次按键（<emphasis role="bold">Ctrl+A</emphasis> 和 <emphasis role="bold">Del</emphasis>）。现在还允许译文为空。它们在编辑器中显示为&lt;空&gt;。要创建空译文，在片段中点击右键并选择“<emphasis role="bold">设置为空译文</emphasis>”。在同一个弹出菜单中的<emphasis role="bold">移除译文</emphasis>还可以用来删除当前片段的现有译文。通过清除译文片段并按下<guibutton>回车</guibutton>可以实现相同的效果。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>插入最佳模糊匹配</term>
+
+        <listitem>
+          <para>OmegaT 将插入与当前原文最相似的字符串的译文，前提是相似度高于在此对话框中设置的阈值。可以使用前缀（默认为空）来标记通过模糊匹配插入的译文。如果添加了前缀（例如[模糊]），您可以稍后跟踪这些翻译检查它们是否正确。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>对话框窗口下半部分的复选框用于以下目的：</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>插入模糊匹配时尝试转换数字</term>
+
+        <listitem>
+          <para>如果勾选了此选项，当手动或自动插入模糊匹配时，OmegaT 会尝试根据原文内容转换模糊匹配中的数字。这里有若干限制：</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>原文片段和模糊匹配中包含的数字清单必须相同</para>
+            </listitem>
+
+            <listitem>
+              <para>数字在匹配的原文和译文中必须完全相同。</para>
+            </listitem>
+
+            <listitem>
+              <para>只考虑整数和简单的浮点数（使用句点作为小数点，如 5.4，不考虑 5,4 或 54E-01）。</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.editor.allowtranslationtobeequaltosource">
+        <term>允许译文与原文相同</term>
+
+        <listitem>
+          <para>要翻译的文档也许包括了一些在译文文档中也要保持原封不动的商标、姓名或其他专有名词。对于只包含此类不可变文本的片段可以采取两种策略。</para>
+
+          <para>您可以决定完全不翻译这类片段。OmegaT 会将这些片段报告为未译。这是默认的情况。另一种方法是输入与原文相同的译文。OmegaT 可以识别出您已经翻译过了。要允许这一点，请勾选此选项。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>将片段导出到文本文件</term>
+
+        <listitem>
+          <para>文本导出功能会从当前 <application>OmegaT</application> 项目导出数据到纯文本文件。当打开片段时其数据会被导出。文件会出现在 OmegaT 用户文件文件夹中的 /script 子文件夹中，包括有：</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>当前片段的原文内容（<filename>source.txt</filename>）。</para>
+            </listitem>
+
+            <listitem>
+              <para>当前片段的译文内容（<filename>target.txt</filename>）。</para>
+            </listitem>
+
+            <listitem>
+              <para>用户按下 <keycap>Ctrl+Shift+C</keycap> 或选择了<guimenuitem>编辑 &gt;导出所选部分</guimenuitem>的时候被高亮选定的文本（<filename>selection.txt</filename>）。</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>文件的内容在打开新片段（source.txt 和 target.txt）或导出新的所选部分（selection.txt）时会被覆盖。这些文件是无格式的纯文本文件。整个过程可以通过基于 Tck/Tcl 的脚本来操纵控制。关于细节、示例和建议，请参阅<ulink url="http://www.omegat.org/en/howtos/text_export.html">使用 OmegaT 的文本导出功能</ulink>。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>转到下一个未译片段的功能在有替代译文的片段处也会停下</term>
+
+        <listitem>
+          <para>如果我们想要避免在具有多个可能译文内容的片段上出现错译，选中此复选框会让<emphasis role="bold">转到下一个未译片段</emphasis>在下一个此类片段处停下，无论其是否已被翻译。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>允许标签编辑</term>
+
+        <listitem>
+          <para>取消勾选此选项可防止在编辑期间损坏标签（即，部分删除）。在这种情况下，依然可以通过使用 Ctrl + Backspace / Delete 或完整选择（Ctrl + Shift +左/右）标签然后删除它（Delete 或 Ctrl + X）来整个删除标签。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>离开片段时验证标签</term>
+
+        <listitem>
+          <para>勾选此选项后，在每次离开片段时，会提醒原文和译文片段之间的标签差异。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist id="dialogs.preferences.editor.saveautopopulatedstatus">
+      <varlistentry>
+        <term>保存自动填充状态</term>
+
+        <listitem>
+          <para>勾选此选项可在 <filename>project_save.tmx</filename>文件中记录片段已被自动填充的信息，这样在编辑器中就可以用特定的颜色显示出来（如果在视图菜单中已勾选“标记自动填充片段”选项）</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>初始载入片段数量</term>
+
+        <listitem>
+          <para>默认情况下，编辑器一开始会显示 2,000 个片段，并在上下滚动时渐进式地加载更多片段。如果您的机器很强力，并且/或者如果您不喜欢渐进式加载过程中滚动条的行为，可以提高此数字。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.tagprocessing">
+    <title>标签处理</title>
+
+    <para>当翻译软件相关的文件时，可以配置标签检验器选项来检查编程（%...）变量。您还可以定义与标签验证相关的各种选项并定义自定义标签。</para>
+
+    <para>例如，如果你在<guilabel>表示自定义标签的正则表达式</guilabel>字段中输入了 <userinput>\d+</userinput>，所有数字都会被视为标签，让你可以检查确认数字在翻译过程中未被错误地更改。</para>
+
+    <para>类似地，输入 <userinput>&lt;.*?&gt;</userinput> 可以确保原文文本中的 HTML 标记（例）在翻译过程中维持原封不动。</para>
+
+    <para>注：可以通过写入 <userinput>(&lt;.*?&gt;)|(\d+)</userinput> 来组合这两个指令。</para>
+  </section>
+
+  <section>
+    <title>团队</title>
+
+    <para>在这里输入您的名字，它将附加到您翻译的所有片段中。</para>
+
+    <section>
+      <title>存储库凭据</title>
+
+      <para>列出了所有在 OmegaT 中存储了登录详细信息的项目。如果您希望 OmegaT 在每次访问此项目时要求输入登录名和密码，请从此列表中删除该项目。</para>
+    </section>
+  </section>
+
+  <section>
+    <title>翻译记忆库匹配</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>模糊匹配排序依据：</term>
+
+        <listitem>
+          <para>默认情况下，显示在<guilabel>模糊匹配</guilabel>窗格中的最接近匹配是用词干分析来确定的。</para>
+
+          <para>要得到字面匹配更接近于 100% 的结果，选择<guilabel>全文，包括标签和数字</guilabel>选项。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>显示非 OmegaT 的 TMX 中的标签</term>
+
+        <listitem>
+          <para>决定如何处理外来 TMX 文件（即并非由 OmegaT 所生成的）中的标签。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>匹配显示模板</term>
+
+        <listitem>
+          <para>通过使用预配置变量来更改模糊匹配的显示方式：</para>
+
+          <table colsep="0" rowsep="0">
+            <title>匹配窗格设置</title>
+
+            <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+              <colspec align="left"/>
+
+              <colspec align="left"/>
+
+              <tbody>
+                <row>
+                  <entry><literal>${id}</literal></entry>
+
+                  <entry>匹配的序号，从 1 到 5 的</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${sourceText}</literal></entry>
+
+                  <entry>匹配的原文文本</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${targetText}</literal></entry>
+
+                  <entry>匹配的译文文本</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${diff}</literal></entry>
+
+                  <entry>显示原文和匹配之间差异的字符串。<emphasis>提示：</emphasis>如果你正在翻译的文本已更新，请使用它。</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${diffReversed}</literal></entry>
+
+                  <entry>与 ${diff} 相同，但差异（要插入和删除的内容）是反向的。</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${score}</literal></entry>
+
+                  <entry>使用<guilabel>词干分析，不考虑标签和数字</guilabel>选项计算得到的百分比。</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${noStemScore}</literal></entry>
+
+                  <entry>使用<guilabel>不考虑标签和数字</guilabel>选项计算得到的百分比。</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${adjustedScore}</literal></entry>
+
+                  <entry>使用<guilabel>全文，包括标签和数字</guilabel>选项计算得到的百分比。</entry>
+                </row>
+
+                <row>
+                  <entry><literal>${fuzzyFlag}</literal></entry>
+
+                  <entry>表示该匹配为模糊匹配（目前仅适用于来自带 #fuzzy 标记的 PO 文件的翻译）</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>视图</title>
+
+    <para>包含以不同方式显示文本和修订信息的选项。</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>标记非独特片段时包含首个非独特片段</term>
+
+        <listitem>
+          <para>勾选此选项可以用灰度显示所有非独特片段（重复）。取消勾选此选项后，除了首次出现外的所有非独特片段都会以灰度显示。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.savingandoutput">
+    <title>保存和输出</title>
+
+    <para>允许用户选择自动保存项目的间隔——以分钟和秒为单位。</para>
+
+    <para>根据项目的特征更改默认间隔（3 分钟）：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>对于内部服务器上的同步项目使用较短的间隔（最小值：10 秒）。</para>
+      </listitem>
+
+      <listitem>
+        <para>对于托管在外部服务器上的团队项目使用较长的间隔。</para>
+      </listitem>
+    </itemizedlist>
+
+    <variablelist>
+      <varlistentry>
+        <term>外部后处理命令</term>
+
+        <listitem>
+          <para>指定在<guimenuitem>创建译文文档</guimenuitem>命令之后需要执行的命令。</para>
+
+          <para>使用此功能的示例之一是自动将译文文档发送到客户的 FTP 服务器上。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>同时允许每个项目自有外部命令</term>
+
+        <listitem>
+          <para>默认情况下，OmegaT 不会执行项目专有设置（<filename>omegat.project</filename> 文件）中所指定的命令，因为它们可能会对机器的安全性产生重大影响。</para>
+
+          <para>仅当你明白自己正在做什么且仅针对来自可信来源的项目时才激活此选项。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>代理服务器登录</title>
+
+    <para>如果 OmegaT 需要使用要身份验证的代理服务器来访问因特网，请在此处输入代理服务器管理员所提供的详细信息。</para>
+  </section>
+
+  <section>
+    <title>安全存储</title>
+
+    <para>您可以在此处重新定义用于保护登录详细信息和机器翻译服务访问密钥的主密码。在创建新密码之前，请务必记下所有这些详细信息，因为它们都将被删除，需要重新输入。</para>
+  </section>
+
+  <section>
+    <title>插件</title>
+
+    <para>可以访问可用插件列表。插件安装在 <filename>/plugins</filename> 文件夹中。</para>
+  </section>
+
+  <section>
+    <title>更新</title>
+
+    <para>启用 <application>OmegaT</application> 更新的自动通知。</para>
+  </section>
+</section>

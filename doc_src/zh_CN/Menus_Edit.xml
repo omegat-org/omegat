@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>编辑</title>
+
+  <para>仅当打开了项目后此菜单下才会显示条目。</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>撤销前一操作</guimenuitem></term>
+
+      <listitem>
+        <para>恢复到执行上一个编辑操作之前的状态。如果修改后的片段已经确认，则该命令不起作用。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>恢复前一操作</term>
+
+      <listitem>
+        <para>恢复到取消上一个编辑操作之前的状态。如果修改后的片段已经确认，则该命令不起作用。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>用匹配或所选内容替换译文</term>
+
+      <listitem>
+        <para>用当前选中的模糊匹配（默认情况下会选中第一个匹配）替换掉整个译文片段。</para>
+
+        <para>如果在模糊匹配内选择了部分文本，那么只有被选中的部分替换掉整个译文片段。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>插入匹配或所选内容</term>
+
+      <listitem>
+        <para>在光标位置插入当前选中的模糊匹配。如果已经选择了译文片段的一部分，则此功能会覆盖所选部分。</para>
+
+        <para>如果在模糊匹配内选择了部分文本，那么只有被选中的部分插入到光标位置处。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>替换为机器翻译</term>
+
+      <listitem>
+        <para>用所选机器翻译服务提供的译文替换掉译文片段。如果未激活任何机器翻译服务（在<menuchoice><guimenu>选项</guimenu><guimenuitem>机器翻译</guimenuitem></menuchoice>中）则不会有任何动作。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>替换为原文</term>
+
+      <listitem>
+        <para>用原文替换掉整个目标片段。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>插入原文</term>
+
+      <listitem>
+        <para>在光标位置插入原文。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>插入缺失的原文标签</term>
+
+      <listitem>
+        <para>在光标位置插入（如果有缺失的）原文标签。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>插入下一个缺失标签</term>
+
+      <listitem>
+        <para>在光标位置处只插入一个标签（所有缺失标签之一）。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>导出所选部分</term>
+
+      <listitem>
+        <para>将当前选中内容导出至文本文件进行处理。如果未选择任何文本，则将当前原文片段写入该文件。当用户退出 <application>OmegaT</application> 时，此文件并不会被清空，以与常规的剪贴板行为一致。导出的内容将被复制到位于用户偏好设置文件所在的文件夹内的 <filename>selection.txt</filename> 文件中。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>创建词汇表条目</term>
+
+      <listitem>
+        <para>允许用户在默认的词汇表文件中创建条目。</para>
+
+        <para>如果您在按<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>之前（于任意窗格中）选择了文本字符串，则默认会将选中的文本粘贴到<guilabel>原文词汇</guilabel>字段中。</para>
+
+        <para>这也能应用于<guimenuitem>译文词汇</guimenuitem>和<guimenuitem>注释</guimenuitem>字段，只要做出新的选择并再次按下<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>即可。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>在项目中查找...</term>
+
+      <listitem>
+        <para>打开新的<link linkend="windows.textsearch">查找窗口</link>。</para>
+
+        <para>如果您按<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>之前（于任意窗格中）选择了文本字符串，则默认会将选中的文本粘贴到<guilabel>查找</guilabel>字段。</para>
+
+        <para>按下<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo>会显示最后一个已打开的查找窗口（而不是新打开一个）。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>查找并替换...</term>
+
+      <listitem>
+        <para>打开新的<link linkend="windows.textreplace">查找与替换窗口</link>。</para>
+
+        <para>如果您在按<keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>之前（于任意窗格中）选择了文本字符串，则默认会将选中的文本粘贴到<guilabel>查找</guilabel>字段。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>查找词典</term>
+
+      <listitem>
+        <para>如果禁用了<link linkend="dialogs.preferences.dictionary">自动在词典中查找</link>，则此功能可让您在词典中查找所选单词。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>转换大小写为</term>
+
+      <listitem>
+        <para>将译文片段中高亮选定的文本的按所选选项（小写、大写、标题式大小写或句子式大小写）改变大小写。用<keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo>可以在四个选项中循环切换。如果未选择任何文本，<application>OmegaT</application> 会选择紧挨着光标右边的那个字符所属的单词。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>选择匹配</term>
+
+      <listitem>
+        <para>选择显示在模糊匹配窗格中的上一个、下一个或第 N 个模糊匹配来将其替换或插入到片段中。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>用作默认译文</term>
+
+      <listitem>
+        <para>如果当前片段有多个替代译文，您可以将所选择的译文标记为默认译文。如果只有一个可用译文，则该条目将为灰色。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>创建替代译文</term>
+
+      <listitem>
+        <para>一个片段和另一个相同的片段可能会因为上下文而需要不同的译文。如果当前译文不适用，请选择此菜单条目，然后输入替代译文。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>移除译文</term>
+
+      <listitem>
+        <para>删除译文并将片段设置为未译</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>设置为空译文</term>
+
+      <listitem>
+        <para>将译文定义为空。此片段在译文文档中不会显示任何东西。在编辑器中，译文会显示为&lt;空&gt;</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>登记全同译文</term>
+
+      <listitem>
+        <para>即使未选中<link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>允许译文和原文相同</guilabel></link>时也可以用此命令来将译文登记为与原文完全相同。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

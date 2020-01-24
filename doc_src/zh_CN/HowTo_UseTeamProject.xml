@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>使用团队项目</title>
+
+  <para>OmegaT 团队项目必须先在服务器上<link linkend="howto.setupteamproject">建立</link>起来。</para>
+
+  <para>首次使用团队项目时，请按照项目经理所提供的流程进行操作。</para>
+
+  <para>一旦项目已经打开，翻译的进行方式与非团队项目相同，但以下几点除外。</para>
+
+  <para><emphasis role="bold">自动保存</emphasis></para>
+
+  <para>每隔 3 分钟（默认情况下），本地项目将与远程存储库进行同步，这样项目经理或其他译者就可以查看并使用在此期间添加的翻译。</para>
+
+  <para>3 分钟的间隔可以在<link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>选项</guimenuitem> <guimenuitem>首选项</guimenuitem> <guimenuitem>保存和输出</guimenuitem> </menuchoice></link>中更改。</para>
+
+  <para><emphasis role="bold">同步文件</emphasis></para>
+
+  <para>每当项目自动保存时，以及打开、关闭和重新载入时，实际上只会同步两个文件：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>所有其他文件将被远程存储库中的文件替换。</para>
+
+  <para><emphasis role="bold">添加新原文文件</emphasis></para>
+
+  <para>要添加新的原文文件：</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>将文件复制到 <filename>/source</filename> 目录中</para>
+      </listitem>
+
+      <listitem>
+        <para>使用 <menuchoice> <guimenuitem>项目</guimenuitem> <guimenuitem>提交原文文件</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>可以修改现有的原文文件，但必须在自动保存之前以及项目被重新载入或关闭之前执行 commit 操作。</para>
+
+  <para><emphasis role="bold">删除原文文件</emphasis></para>
+
+  <para>必须先由项目经理删除文件，然后在本地删除。</para>
+
+  <para><emphasis role="bold">更改片段分割规则或文件过滤器</emphasis></para>
+
+  <para>项目参数必须由项目经理来更改。</para>
+
+  <para><emphasis role="bold">离线工作</emphasis></para>
+
+  <para>团队项目可以离线打开并翻译。所有更改将在下次连接可用时进行同步。</para>
+
+  <para>要离线工作：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>在打开项目前断开网络连接，</para>
+    </listitem>
+
+    <listitem>
+      <para>或者用命令行使用 <command>--no-team</command> 选项来打开项目。</para>
+    </listitem>
+  </itemizedlist>
+</section>

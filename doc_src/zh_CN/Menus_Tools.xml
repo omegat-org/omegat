@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>工具</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>检查问题...</term>
+
+      <listitem>
+        <para>一次执行所有自动检查并将结果显示在窗口中的质量保证工具。</para>
+
+        <para>会检查四种类型的问题：</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>标签缺失或错位，包括<link linkend="dialogs.preferences.tagprocessing">自定义标签</link>。<guilabel>标签问题</guilabel>选项始终是选上的。</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>拼写问题</guilabel>（可选）。仅当安装了拼写字典时才有效。</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>术语问题</guilabel>（可选）。</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>LanguageTool 问题</guilabel>（可选）。</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>结果窗口以表格的形式布置，其中：</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>在一行上双击将在编辑器窗格中激活相应的片段。</para>
+          </listitem>
+
+          <listitem>
+            <para>点击一列的标题会更改此列的排序顺序，</para>
+          </listitem>
+
+          <listitem>
+            <para>选定一行或将鼠标移到这一行上会在最后一列中显示一个弹出菜单图标，其中包含纠正或忽略该错误的操作。</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>检查当前文档问题</term>
+
+      <listitem>
+        <para>同上，但仅针对当前显示在编辑器窗格中的文档。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>统计数据</term>
+
+      <listitem>
+        <para>打开新窗口并在其中显示项目的统计数据，即整个项目的总数据和项目中每个文件的总数据。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>匹配统计数据</term>
+
+      <listitem>
+        <para>显示当前项目的匹配统计数据：片段、单词和字符的重复、完全匹配、模糊匹配和不匹配的数量。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>每个文件的匹配统计数据</term>
+
+      <listitem>
+        <para>显示当前项目中每个文件的匹配统计数据：片段、单词和字符的重复、完全匹配、模糊匹配和不匹配的数量。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>对齐文件...</term>
+
+      <listitem>
+        <para>选择要进行对齐的两个文件（原文文件及其译文），然后点击确定来打开<link linkend="windows.aligner"><guilabel>对齐</guilabel>窗口</link>。</para>
+
+        <para>所支持的文件格式是<menuchoice> <guimenuitem>项目</guimenuitem> <guimenuitem>属性</guimenuitem> <guimenuitem>文件格式</guimenuitem> </menuchoice>中所列的那些。</para>
+
+        <para>原文文件和译文文件的格式可以不同（例如，<filename>.docx</filename> 文件可以和 <filename>.pdf</filename> 文件进行对齐）。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>脚本...</term>
+
+      <listitem>
+        <para>打开<link linkend="windows.scripts"><guilabel>脚本</guilabel>窗口</link>，可以在其中设置脚本的位置，并可以编写、运行脚本，以及为脚本分配快捷键。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - (脚本名称)</term>
+
+      <listitem>
+        <para>启动与此数字相关联的脚本。</para>
+
+        <para>要将脚本与数字关联：</para>
+
+        <orderedlist>
+          <listitem>
+            <para>打开脚本窗口</para>
+          </listitem>
+
+          <listitem>
+            <para>从左侧列表中选择所需的脚本</para>
+          </listitem>
+
+          <listitem>
+            <para>在窗口底部，在某个空闲的数字上右键单击并选择<guilabel>添加脚本</guilabel>。</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(外部搜索命令)</term>
+
+      <listitem>
+        <para>如果在<link linkend="dialogs.preferences.externalsearch">首选项</link>中定义了执行外部搜索的命令，则此处会列出这些命令。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

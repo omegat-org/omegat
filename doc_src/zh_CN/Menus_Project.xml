@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.project">
+  <title>项目</title>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>新建...</guimenuitem></term>
+
+      <listitem>
+        <para>创建并打开新项目。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><guimenuitem>下载团队项目...</guimenuitem></term>
+
+      <listitem>
+        <para>创建远程 OmegaT 项目的本地副本。详细信息请参考<link linkend="howto.useteamproject">如何使用团队项目</link>。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>打开...</term>
+
+      <listitem>
+        <para>打开之前创建的项目。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>打开最近的项目</term>
+
+      <listitem>
+        <para>可以访问最后编辑的十个项目。点击其中之一会保存并关闭当前项目然后打开另一个项目。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>将文件复制到原文文件夹...</term>
+
+      <listitem>
+        <para>将选中的文件复制到 <filename>source</filename> 文件夹然后重新载入项目以载入新文件。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>下载 MediaWiki 页面...</term>
+
+      <listitem>
+        <para>要翻译 Wikipedia 页面的内容（例如）：</para>
+
+        <orderedlist>
+          <listitem>
+            <para>点击 Wikipedia 页面上的<guilabel>编辑</guilabel>标签卡。</para>
+          </listitem>
+
+          <listitem>
+            <para>复制页面的网址（以 <guilabel>action=edit</guilabel> 结尾）并粘贴到 <application>OmegaT</application> 中。</para>
+          </listitem>
+        </orderedlist>
+
+        <para>当你完成了翻译后，将其导入 Wikipedia：</para>
+
+        <orderedlist>
+          <listitem>
+            <para>打开生成的 <filename>/target</filename> 文件夹中 <filename>.UTF8</filename> 文件。</para>
+          </listitem>
+
+          <listitem>
+            <para>复制文本并将其粘贴到 Wikipedia 页面的翻译版本中。</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>重新载入</term>
+
+      <listitem>
+        <para>重新加载项目，让对原文文件与项目设置的外部更改生效。</para>
+
+        <para>在翻译过程中新放入 <filename>/tm</filename> 文件夹的翻译记忆库会在光标从一个片段移动到另一个片段时立即自动载入。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>关闭</term>
+
+      <listitem>
+        <para>保存翻译并关闭项目。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>保存</term>
+
+      <listitem>
+        <para>将内部的翻译记忆库保存到硬盘。OmegaT 每 3 分钟自动保存一次翻译，在关闭项目或退出 OmegaT 前也会自动保存。</para>
+
+        <para>3 分钟的间隔可以在<link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>选项</guimenuitem> <guimenuitem>首选项</guimenuitem> <guimenuitem>保存和输出</guimenuitem> </menuchoice></link>中更改。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>提交原文文件</term>
+
+      <listitem>
+        <para>将 <filename>source</filename> 目录中在本地添加或修改的文件上传到存储库中。</para>
+
+        <para>此功能是团队项目特有的。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>提交译文文件</term>
+
+      <listitem>
+        <para>将 <filename>target</filename> 目录中本地创建的文件上传到存储库。</para>
+
+        <para>此功能是团队项目特有的。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>创建译文文档</term>
+
+      <listitem>
+        <para>根据你的翻译创建译文文档。创建的译文文档位于 <filename>target</filename> 文件夹中。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>创建当前译文文档</term>
+
+      <listitem>
+        <para>为当前正在翻译的文档创建对应的译文文档</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>打开 MED 项目...</term>
+
+      <listitem>
+        <para>打开 MED 格式的项目包。此格式由欧盟翻译总局定义。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>创建 MED 项目...</term>
+
+      <listitem>
+        <para>将当前项目转换为 MED 包。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>属性...</term>
+
+      <listitem>
+        <para>显示<link linkend="dialogs.projectproperties">项目属性</link>对话框以编辑项目语言和文件夹位置。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>项目文件...</term>
+
+      <listitem>
+        <para>打开<link linkend="windows.projectfiles">项目文件窗口</link>。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>访问项目内容</term>
+
+      <listitem>
+        <para>可以访问项目的各个文件夹。</para>
+
+        <para>另外，有两个菜单项允许直接打开当前的原文与译文文档以及可写词汇表。这些文档是用操作系统所选择的应用程序打开的。如果文档不可用，则条目会灰掉。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>退出</term>
+
+      <listitem>
+        <para>保存项目并退出 <application>OmegaT</application>。如果尚未保存项目，则此操作会手工确认您是否确实要退出。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

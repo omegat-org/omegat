@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.reusetm">
+  <title>重用翻译记忆库</title>
+
+  <para>一开始，即项目创建时，项目的主翻译记忆库 <filename>project_save.tmx</filename> 是空的。随着翻译，这个翻译记忆库逐渐得以填充。为了加快此进程，可以重用现有翻译。如果给定语句已被翻译过一次，且翻译是正确的，则无需重新对其进行翻译。翻译记忆库也可能包含参考译文：一个典型的例子是多国立法，例如欧盟的立法。</para>
+
+  <para>当你在 <application>OmegaT</application> 项目中创建译文文件时，项目的翻译记忆库将输出为 <application>OmegaT</application> 项目根目录下的三个文件（参见上文描述）。你可以将这三个 tmx 文件（<filename>-omegat.tmx</filename>、<filename>-level1.tmx</filename> 和 <filename>-level2.tmx</filename>）视为“导出翻译记忆库”，即以双语形式导出的当前项目的内容。</para>
+
+  <para>如果希望重用过往项目的翻译记忆库（例如，因为新项目与之前的项目类似，或者使用之前可能用过的术语），您可以将这些翻译记忆库用作“输入翻译记忆库”，即导入您的新项目中。在这种情况下，将想要使用的翻译记忆库放在新项目的 <emphasis>/tm</emphasis> 或 <emphasis>/tm</emphasis>/auto 文件夹中：前一种情况下，会在模糊匹配查看器中看到来自于这些翻译记忆库的匹配，而后一种情况下，这些翻译记忆库将用于对原文文本进行预翻译。</para>
+
+  <para>默认情况下，/tm 文件夹位于项目的根文件夹下（例如 ...<emphasis>/MyProject/tm</emphasis>），但如果你愿意也可以在项目的属性对话框中选择其他文件夹。如果您经常使用过去生成的翻译记忆库，例如因为它们属于同一主题或者同一客户，则此功能非常有用。在这种情况下，有用的流程可以是这样：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>在硬盘上方便的位置为特定客户或者主题的翻译记忆库创建一个文件夹（“仓库文件夹”）。</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>每当完成一个项目，将三份“导出”翻译记忆库文件之一从项目的根文件夹复制到仓库文件夹。</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>当您为同一主题或者同一客户开始新项目时，在<guimenuitem>项目 &gt; 属性 &gt; 编辑项目</guimenuitem>对话框内转到该仓库文件夹，将其选作翻译记忆库文件夹。</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>请注意，在打开项目时会解析 /tm 仓库中的所有 tmx 文件，因此将手头各种翻译记忆库全放进此文件夹可能会不必要地拖慢 OmegaT。一旦已经用其内容填充了 <filename>project-save.tmx</filename> 文件后，你甚至可以考虑删除那些不再需要的文件。</para>
+
+  <section>
+    <title>导入和导出翻译记忆库</title>
+
+    <para>OmegaT 支持导入 tmx 版本 1.1-1.4b（级别 1 和级别 2 都可）。这使得OmegaT 可以读取其他工具生成的翻译记忆库。但是，OmegaT 并不完全支持导入级别 2 的 tmx 文件（不仅存储翻译，还存储格式）。级别 2 的 tmx 文件依然会被导入，在 OmegaT 中能看到其文本内容，但模糊匹配的质量会有所下降。</para>
+
+    <para>在加载翻译记忆库（tmx）文件时，OmegaT 遵循非常严格的流程。如果在这类文件中发现错误，OmegaT 将指示错误在问题文件中的位置。</para>
+
+    <para>已知一些工具会在某些条件下生成无效的 tmx 文件。如果你想在 OmegaT 中使用这类文件作为参考译文，则必须对其进行修复，否则 OmegaT 将报错并无法加载它们。修复是微小的操作，OmegaT 会用相关错误信息协助进行错误排除。如果遇到问题，可以向用户组咨询。</para>
+
+    <para>OmegaT 导出版本 1.4 的 TMX 文件（级别 1 和级别 2 均有）。级别 2 的导出不完全符合级别 2 标准高，但已足够接近并且在其他支持 TMX 级别 2 的翻译记忆工具中会生成正确的匹配。如果你只需要文本信息（而非格式化信息），请使用 OmegaT 创建的级别 1 文件。</para>
+  </section>
+
+  <section>
+    <title>创建所选文档的翻译记忆</title>
+
+    <para>如果译者需要与别人分享他们的 TMX 而同时需要排除某些部分或者只要包含某些文件的翻译，那么分享完整的 <filename>ProjectName-omegat.tmx</filename> 文件是不行的。以下方案只是其中一种方法，不过足够简单、容易操作且没有危险性。</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>使用所需的语言对和合适的名称（注意：创建的 TMX 文件会包含此名称）创建一个与其他项目分开的项目。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>将需要翻译记忆的原文文档复制到项目的原文文件夹中。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>复制包含上述文档的翻译的翻译记忆库到新项目的 <filename>tm/auto</filename> 子文件夹中。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>开启项目。用 <keycap>Ctrl+T </keycap> 检查可能的标签错误，用 <keycap>Ctrl+U</keycap> 检查未译片段。要检查是否所有内容都符合预期，你可以按 <keycap>Ctrl+D</keycap> 来创建译文文档并检查其内容。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>现在退出项目。主项目目录（见上文）中的 TMX 文件现在包含你复制到原文文件夹中的文件的所选语言对的翻译。将它们复制到安全的地方备用。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>要避免因为重用该项目而污染未来案例的可能，请删除项目文件夹或将其或存档到工作区外的其他位置。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>共享翻译记忆库</title>
+
+    <para>如果涉及翻译团队，译者们会首选共享公共翻译记忆库而不是发布他们的本地版本。</para>
+
+    <para>OmegaT 可连接 SVN 和 Git，这是两种常见的以开源许可提供的团队软件版本与修订控制系统（RCS）。在 OmegaT 的情况下，完整的项目文件夹——换句话说，设计的翻译记忆库和原文文件夹、项目设置等——均由选定 RCS 管理。更多内容参见</para>
+  </section>
+
+  <section>
+    <title>在另一种语言上使用 TMX</title>
+
+    <para>某些情况下，你可能已经完成了一个项目，原文为比如说荷兰语，翻译为比如说英语。然后需要将其翻译为比如说中文，但其译者并不懂荷兰语，不过她精通英语。在这种情况下，NL-EN 翻译记忆库可以作为一个中转来帮助生成 NL 到 ZH 的翻译。</para>
+
+    <para>在这个例子中，解决方案是将已有的翻译记忆库复制到 tm/tmx2source/ 子文件夹中并将其重命名为 ZH_CN.tmx 来指示此 tmx 的译文语言。这样荷兰语的原文片段会以英文翻译的形式显示给译者，译者就能用它们来创建中文翻译。</para>
+
+    <para><emphasis role="bold">重要提示：</emphasis>辅助性的 TMX 必须重命名为 XX_YY.tmx，其中 XX_YY 是此 tmx 的译文语言，例如在上面的例子中是 ZH_CN.tmx。项目的原文语言和 TMX 的原文语言当然应当是相同的——在这个例子中是 NL。注意对于给定语言对只能使用一个 TMX，因此如果涉及多个翻译记忆库，则需要将它们全部合并到 XX_YY.tmx 中。</para>
+  </section>
+</section>

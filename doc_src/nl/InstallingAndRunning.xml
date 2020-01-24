@@ -214,7 +214,7 @@
 
       <para>Opties worden gewijzigd door <filename>Configuration.properties</filename> aan te passen. Verwijder, voor vooraf gedefinieerde opties, de <literal>#</literal> vóór een parameter om het in te schakelen. Bijvoorbeeld: <literal>user.language=ja</literal> (zonder de <literal>#</literal>) zal <application>OmegaT</application> starten met de gebruikersinterface in het Japans.</para>
 
-      <para>Bewerk het bestand <filename>OmegaT.app/Contents/Info.plist</filename> en verwijder de <literal>#</literal>vóór het item <literal>MEMORY=-Xmx<parameter>?</parameter>g</literal>. Bijvoorbeeld:, <literal>MEMORY=-Xmx6g</literal> zal OmegaT starten met 6 GB geheugen.</para>
+      <para>Bewerk het bestand <emphasis>OmegaT.app/Contents/Info.plist</emphasis> en activeer de regel <literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt; --&gt;</literal> door de <literal>&lt;!--</literal> en <literal>--&gt;</literal> te verwijderen, om de beschikbare hoeveelheid geheugen te wijzigen. Dit zal OmegaT starten met 6 GB geheugen; wijzig de <literal>6g</literal> naar de gewenste hoeveelheid.</para>
 
       <para>Als u meerdere instanties van <filename>OmegaT.app</filename> moet uitvoeren, dubbelklik dan op het bestand <emphasis>OmegaT</emphasis> dat zich bevindt in <filename>OmegaT.app/ Contents/MacOS/</filename>.</para>
 

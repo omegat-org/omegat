@@ -2,8 +2,8 @@
  OmegaT 5.2.0
 ----------------------------------------------------------------------
   3 Enhancements
-  5 Bug fixes
-  5 Localisation updates
+  6 Bug fixes
+  6 Localisation updates
 ----------------------------------------------------------------------
 5.2.0 vs 5.1.0
 
@@ -19,6 +19,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1482/
 
   Bug fixes:
+
+  - Context menu not poping-up in repeated segments
+  https://sourceforge.net/p/omegat/bugs/917
 
   - LanguageTool rule settings not persisted correctly
   https://sourceforge.net/p/omegat/bugs/960/
@@ -41,7 +44,8 @@
   - Dutch localisation updated to 5.2.0 (readme, documentation)
   - Finnish localisation added at 5.2.0 (UI, Instant Start, scripts, readme, documentation)
   - Italian localisation updated to 5.2.0 (readme, documentation)
-  - Turkmen localisation added at 5.2.0 (UI)
+  - Simplified Chinese localisation updated to 5.0.0 (UI, readme, documentation)
+  - Turkmen localisation updated to 5.2.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 5.1.0 (2019-11-04)

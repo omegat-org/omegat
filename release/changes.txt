@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   3 Enhancements
   5 Bug fixes
-  2 Localisation updates
+  3 Localisation updates
 ----------------------------------------------------------------------
 5.2.0 vs 5.1.0
 
@@ -37,6 +37,7 @@
 
   Localisation Updates:
 
+  - Brazilian Portuguese localisation updated to 5.2.0 (UI)
   - Finnish localisation added at 5.2.0 (UI, Instant Start, scripts, readme, documentation)
   - Turkmen localisation added at 5.2.0 (UI)
 

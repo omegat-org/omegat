@@ -10,7 +10,7 @@
       <para>Käytä <application>OmegaT</application>:n oletussuodatinta (PDF input), käännä, luo kohdetiedosto (vain teksti -tiedosto) ja lisää tarvittavat muotoilut ja muut elementit käsin.</para>
     </listitem>
     <listitem>
-      <para>Käytä Iceni Infix -suodatinta. Ks. OmegaT-sivuston kohta <ulink url="https://omegat.org/howtos/iceni_infix.html">Howto – Translating PDF files with Iceni Infix and OmegaT</ulink>.</para>
+      <para>Käytä Iceni Infix -suodatinta. Ks. OmegaT-sivuston kohta <ulink url="https://omegat.org/howtos/iceni_infix.html">Miten tämä tehdään? – Translating PDF files with Iceni Infix and OmegaT</ulink>.</para>
     </listitem>
     <listitem>
       <para>Tuo lähdetiedosto <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink> -ohjelmaa, tallenna se ODG-tiedostona, käännä se ja vie tarvittaessa PDF-tiedostoksi.</para>

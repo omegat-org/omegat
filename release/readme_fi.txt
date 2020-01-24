@@ -1,4 +1,4 @@
-@KÄÄNNÖSHUOMAUTUS@
+Kääntäjä: Pia Vinkki © 2019
 
 
 Mikä OmegaT on?

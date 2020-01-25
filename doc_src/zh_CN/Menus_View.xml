@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>视图</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>标记已译片段</term>
+
+      <listitem>
+        <para>如果勾选，已译片段将会标记为黄色。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>标记未译片段</term>
+
+      <listitem>
+        <para>如果勾选，未译片段将会标记为紫色。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>标记段落界定</term>
+
+      <listitem>
+        <para>如果勾选，将会在视觉上指示原文文档中各段落之间的分隔。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>显示原文片段</term>
+
+      <listitem>
+        <para>如果勾选，将会显示原文片段并将其标记为绿色。如果未勾选，则不显示原文片段。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>标记非独特片段</term>
+
+      <listitem>
+        <para>如果勾选， 则非独特片段会被标记为淡灰色。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>标记含备注的片段</term>
+
+      <listitem>
+        <para>如果勾选，含备注的片段将标记为青色。此标记行为优先于<guimenuitem>标记已译片段</guimenuitem>和<guimenuitem>标记未译片段</guimenuitem>。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>标记不换行空格</term>
+
+      <listitem>
+        <para>如果勾选，不换行空格将以灰色背景显示。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>标记空白字符</term>
+
+      <listitem>
+        <para>如果勾选，空格会显示一个小点。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>标记双向算法控制字符</term>
+
+      <listitem>
+        <para>此选项显示<ulink url="http://www.w3.org/International/questions/qa-bidi-controls">双向控制字符</ulink></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>标记自动填充片段</term>
+
+      <listitem>
+        <para>如果勾选，所有译文部分已被自动填充（例如，来自放在 <filename>/tm/auto</filename> 下的 TMX）的片段的背景将以彩色显示。只要<link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>保存自动填充状态</guimenuitem></link>选项已勾选就会显示颜色。通常，从 auto 文件夹插入的翻译会显示为橙色。其他在 TMX 中特别标记的翻译可以用不同的颜色来显示。有关技术细节，参见<ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">改进建议</ulink>。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>激进式字体候补</term>
+
+      <listitem>
+        <para>如果 <application>OmegaT</application> 无法正确显示某些字形（即使你的机器上已经安装了包含相关字形的字体），请勾选此选项。注意：在 Windows 上，这种手动字体候补机制似乎会干扰标准字体候补，从而导致不理想的字体替换。因此，它在默认情况下是关闭的。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>修订信息</term>
+
+      <listitem>
+        <para>将显示修订选项设置为<guimenuitem>当前片段</guimenuitem>会显示当前片段的最后一次更改的时间和作者。将其设置为<guimenuitem>所有片段</guimenuitem>会在所有片段上显示此信息，而<guimenuitem>不显示</guimenuitem>则会关闭此选项。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

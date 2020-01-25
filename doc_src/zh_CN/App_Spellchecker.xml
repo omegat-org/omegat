@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.spellchecker">
+  <title>拼写检查</title>
+
+  <para>OmegaT内置有拼写检查器，它基于 Apache OpenOffice、LibreOffice、Firefox 和 Thunderbird 中使用的拼写检查器。因此，它可以使用大量可用于这些程序的免费拼写词典。</para>
+
+  <section>
+    <title>安装拼写词典</title>
+
+    <para>在使用检查拼写功能前，必须先安装适合的词典（针对您的译文语言）。要安装拼写词典，按以下步骤操作：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>用文件管理器，在适当的位置创建新文件夹用来保存拼写词典（在下面的示例中为 D:\Translations\spellcheckers）。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>在 OmegaT 中，选择 <guimenuitem>选项&gt; 拼写检查</guimenuitem>，然后点击词典文件文件夹字段旁边的 <guibutton>选择</guibutton>。浏览并选择您为词典创建的文件夹。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>将要使用的词典文件放到此文件夹中。基本上有两种方法可以做到这一点。您可以用文件管理器从系统中其他位置手动复制文件，或使用 OmegaT 的<emphasis role="bold">“安装新词典”</emphasis>功能来提供可选择的词典列表。请注意“安装”功能需要因特网连接。随后选中的语言将会安装，并最终显示在拼写检查器窗口中（可能需要一段时间）。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>如果您系统中已经有合适的词典文件，例如来自于 Apache OpenOffice、LibreOffice、Firefox 或 Thunderbird 的已安装文件，那么手工复制文件是有意义的。但是，用<emphasis role="bold">在线词典的网址</emphasis>字段来在线查找词典会更简单：</para>
+
+    <figure id="spellchecker.setup">
+      <title>拼写检查器设置</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckerSetup_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>点击<guibutton>安装新词典</guibutton>按钮将打开词典安装器窗口，此处您可选择要安装的词典。</para>
+
+    <para>文件的名称必须与项目属性对话框（<guimenu>项目 &gt; 属性</guimenu>）中定义的译文语言的的语言代码一致。例如，如果你选择了 ES-MX（墨西哥西班牙语）作为译文语言，则词典文件必须命名为 es_MX.dic 及 es_MX.aff。如果您只有标准西班牙语词典（例如文件名为 es_es.dic 及 es_es.aff），您可以将这些文件复制更名为 es_MX.dic 及 es_MX.aff，拼写检查词典会正常运作。要注意，很显然，这会以标准（卡斯提尔）西班牙语进行检查，而非墨西哥西班牙语。</para>
+  </section>
+
+  <section>
+    <title>使用拼写词典</title>
+
+    <para>并不需要指示 OmegaT 使用特定的拼写词典，它会根据项目的语言代码来使用正确的语言词典。但需要确保语言代码完全一致：例如，FR-FR 词典在以 FR 为译文的设置下将无作用。必要时可以编辑词典文件名或更改项目的语言设置。</para>
+
+    <para>要启用拼写检查器，请选择<guimenuitem>选项 &gt; 拼写检查</guimenuitem>并勾选<guilabel>自动检查文本的拼写</guilabel>复选框（见上图）。</para>
+
+    <figure id="spellchecker.in.action">
+      <title>使用拼写检查器</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckingText.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckingText.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>右键点击带下划线的词汇（上图中是 &quot;Artund&quot;）会打开下拉菜单，其中列出了更正建议（Art und）。此外，您也可以指示拼写检查器忽略这个拼写错误词汇所有出现之处，或者将它添加到词典中。</para>
+  </section>
+
+  <section id="hints">
+    <title>提示</title>
+
+    <para>如果拼写检查器未能正常工作，先确认勾选了拼写检查器对话框（<guisubmenu>选项 &gt; 拼写检查...</guisubmenu>）中<guilabel>“自动检查文本的拼写”</guilabel>复选框。</para>
+
+    <para>还要根据设置窗口中的可用词汇表检查项目的译文语言代码。拼写检查器根据译文语言代码来确定要使用的语言：如果译文语言是巴西葡萄牙语（PT_BR），存放术语表的子文件夹必须包括名为 <emphasis>pt_br.aff</emphasis> 和 <emphasis>pt_br.dic</emphasis> 的两个字典文件。</para>
+
+    <para>如果已经译了大量文本后才意识到项目的译文语言代码与拼写检查器的语言代码不一致（例如，将 pt_BR 设为译文语言，但没有 pt_BR 字典），您只需将对应的两个文件复制并重命名即可（例如把 <emphasis>pt_PT.aff</emphasis> 和 <emphasis>pt_PT.dic</emphasis>重命名为 <emphasis>pt_BR.aff</emphasis> 和 <emphasis>pt_BR.dic</emphasis>）。当然，稍停一会来下载正确版本的拼写检查器更为理智。</para>
+
+    <para>注意<filename>移除</filename>会真正删除选定的字典。如果系统上有其他应用程序使用它们，则它们也会从那些程序中消失。如果出于某种原因，您需要不时地执行该操作，将这些文件复制到另一个文件夹（仅供 OmegaT 使用）可能会好一些。</para>
+  </section>
+</appendix>

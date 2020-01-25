@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.preventdataloss">
+  <title>防止数据丢失</title>
+
+  <para><application>OmegaT</application> 是健壮的应用程序。然而，就像使用任何其他应用程序一样，使用 <application>OmegaT</application> 时应当采取预防措施防止数据丢失。翻译文件时，<application>OmegaT</application> 将所有进度存储在项目的 <literal>/omegat</literal> 子文件夹中的翻译记忆文件 <literal>project_save.tmx</literal> 中。</para>
+
+  <para>OmegaT 在每次打开或者重新载入项目时也会将翻译记忆库备份到同一子目录下的 project_save.tmx.YEARMMDDHHNN.bak 文件。其中 YEAR 是 4 位数年份、MM 是月份、DD 是月份内的日期、而 HH 与 NN 是保存上一份翻译记忆库时的小时和分钟。</para>
+
+  <para>如果您认为丢失了翻译数据，那么可以使用以下步骤将项目恢复到最近保存的状态，通常是大约 10 分钟以内：</para>
+
+  <orderedlist>
+    <listitem>
+      <para>关闭项目</para>
+    </listitem>
+
+    <listitem>
+      <para>重命名当前的 <filename>project_save.tmx </filename>文件（例如改名为 <filename>project_save.tmx.temporary</filename>）</para>
+    </listitem>
+
+    <listitem>
+      <para>选择最有可能包含所需数据的翻译记忆库备份</para>
+    </listitem>
+
+    <listitem>
+      <para>将其重命名为 <literal>project_save.tmx</literal></para>
+    </listitem>
+
+    <listitem>
+      <para>打开项目</para>
+    </listitem>
+  </orderedlist>
+
+  <para>为避免丢失重要数据：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>定期将 /omegat/project_save.tmx 复制到备份媒介上，例如 CD 或 DVD。</para>
+    </listitem>
+
+    <listitem>
+      <para>在熟悉 <application>OmegaT</application> 之前，请定期创建译文文件，并检查译文文件是否包含最新版本的翻译。</para>
+    </listitem>
+
+    <listitem>
+      <para>在项目中途对 <literal>/source</literal> 中的文件进行更改要特别小心。如果在开始翻译后原文文件有所修改，<application>OmegaT</application> 也许会找不到您已翻译的片段。</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>借助这些帮助文字来起步。如果碰到问题，可以在 <ulink url="https://groups.yahoo.com/neo/groups/OmegaT/info"><application>OmegaT</application> 用户组</ulink>中发帖。可以用您所最熟悉的语言发帖，无需犹豫。</para>
+    </listitem>
+  </itemizedlist>
+</section>

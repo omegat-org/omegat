@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.projectfiles">
+  <title>Projektin tiedostot</title>
+
+  <para>Tämä ikkuna näkyy automaattisesti silloin, kun OmegaT lataa projektin. Saat ikkunan milloin tahansa esille valitsemalla <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Projektin tiedostot…</guimenuitem>.</para>
+
+  <para><remark>Huom.:</remark> Jos haluat, että ikkunaa ei näy sen jälkeen kun projekti on avattu, aseta tiedoston <filename>omegat.prefs</filename> kohdan <emphasis>project_files_show_on_load</emphasis> arvoksi <emphasis>false</emphasis>. Pääset käsiksi tiedostoon valitsemalla valikosta <menuchoice> <guimenuitem>Asetukset</guimenuitem> <guimenuitem>Mene määrityskansioon</guimenuitem> </menuchoice>.</para>
+
+  <para>Avaa tiedosto painamalla näppäinyhdistelmää <guimenuitem>Ctrl+L</guimenuitem> ja sulje se painamalla <keycap>Esc</keycap>-näppäintä. <guilabel>Projektin tiedostot</guilabel>-ikkunassa on näkyvissä seuraavat tiedot:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Projektin käännettävien tiedostojen yhteismäärä – Nämä ovat /source-kansiossa olevia tiedostoja, jotka ovat OmegaT:n tunnistamassa tiedostomuodossa. Numero on suluissa ikkunan &quot;Projektin tiedostot&quot;-otsikon vieressä.</para>
+    </listitem>
+
+    <listitem>
+      <para>Luettelo kaikista projektin käännettävistä tiedostoista. – Avaa käännettävä tiedosto napsauttamalla sitä.</para>
+
+      <para>Jos painat mitä tahansa kirjainnäppäintä, ikkunaan avutuu <guilabel>Suodatin</guilabel>-kenttä, johon voit kirjoittaa tiedostonimen osan. Valitse tiedosto <keycap>ylös</keycap>- ja <keycap>alas</keycap>-näppäimillä ja avaa se käännettäväksi painamalla <keycap>Enter</keycap>-näppäintä.</para>
+
+      <para>Huom.: Voit järjestää (ensimmäisessä sarakkeessa olevat) tiedostojen nimet aakkosjärjestykseen napsauttamalla sarakkeen otsikkoa. Voit myös siirtää tiedoston sijaintia valitsemalla sen ja napsauttamalla <emphasis>Siirrä…</emphasis>-painikkeita.</para>
+
+      <para>Jos napsautat tiedoston nimeä hiiren kakkospainikkeella, saat näkyviin ponnahdusikkunan, josta käsin voit avata lähdetiedoston ja (olemassa olevan) kohdetiedoston.</para>
+    </listitem>
+
+    <listitem>
+      <para>Tiedostoluettelo, jossa mainitaan tiedostojen nimet, niiden tiedostosuodattimet ja merkistökoodaus sekä jokaisen tiedoston segmenttien määrä</para>
+    </listitem>
+
+    <listitem>
+      <para>Alimpana segmenttien yhteismäärä, koko projektin uniikkien segmenttien määrä sekä jo käännettyjen uniikkien segmenttien määrä.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para><emphasis role="bold">Uniikkien</emphasis> segmenttien määrä lasketaan poistamalla kaikkien segmenttien määrästä toistuvat segmentit. (&quot;Uniikin&quot; määritelmä huomioi kirjainkoot: &quot;Run&quot; ja &quot;run&quot; käsitetään erilaisiksi.)</para>
+
+  <para>&quot;Segmenttien määrän&quot; ja &quot;uniikkien segmenttien määrän&quot; ero antaa aavistuksen siitä, kuinka paljon tekstissä on toistoa. Huomaathan kuitenkin, että numerot eivät kerro, kuinka relevantteja toistot ovat. Kyse voi olla pitkistä lauseista, jotka toistuvat useampaan kertaan (jolloin olet onnekas) tai kyse voi olla avainsanataulukosta (jolloin otti ohraleipä). Projektisi omegat-kansiossa on <filename>project_stats.txt</filename>-tiedosto, josta löydät tiedostokohtaisesti tarkempaa tietoa segmenteistä.</para>
+
+  <para>Segmentointisääntöjen muokkaaminen voi muuttaa projektin segmenttien tai uniikkien segmenttien määrää. Segmentointisääntöjä ei kuitenkaan tulisi enää muuttaa sen jälkeen, kun olen aloittanut käännöstyön. Lisää tietoa aiheesta löydät kappaleesta <emphasis>Segmentointisäännöt</emphasis>.</para>
+
+  <para><emphasis role="bold">Tiedostojen lisääminen projektiin:</emphasis> Voit lisätä käännettäviä tiedostoja projektiin napsauttamalla painiketta <guimenuitem>Tuo lähdetiedostoja…</guimenuitem>. Tällöin valitut tiedostot kopioidaan <filename>source</filename>-kansioon ja projekti ladataan uudelleen, jolloin uudet tiedostot tulevat näkyviin. Voit lisätä MediaWiki-muotoisia nettisivujen lähdetiedostoja napsauttamalla painiketta <guimenuitem>Tuo MediaWikistä</guimenuitem> ja kirjoittamalla vastaavan URL-osoitteen.</para>
+</section>

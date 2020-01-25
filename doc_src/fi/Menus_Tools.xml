@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>Työkalut</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Tarkista ongelmakohdat…</term>
+
+      <listitem>
+        <para>Laadunvarmistustyökalu, joka suorittaa kerralla kaikki automaattiset tarkistukset ja näyttää tulokset omassa ikkunassaan.</para>
+
+        <para>Työkalu havaitsee seuraavat neljä ongelmaa:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>puuttuvat tai väärin sijoitetut tavanomaiset ja mukautetut tägit. <guilabel>Tägivirheet</guilabel> on aina valittuna.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>oikeinkirjoitusvirheet</guilabel> (valinnainen). Valinta toimii vain silloin, kun oikeinkirjoitussanasto on asennettuna.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>terminologiaongelmat) (valinnainen</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>LanguageTool-virheet</guilabel> (valinnainen).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Tulokset näkyvät omassa ikkunassaan, ja tulostaulukko toimii näin:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Kaksoisnapsauttamalla taulukon riviä vastaava editoriruudun segmentti aktivoituu.</para>
+          </listitem>
+
+          <listitem>
+            <para>Napsauta sarakkeen otsikkoa, niin sarakkeen esitysjärjestys muuttuu.</para>
+          </listitem>
+
+          <listitem>
+            <para>Rivin valinta tai hiiren vieminen rivin yläpuolelle avaa viimeisessä sarakkeessa ponnahdusikkunan, jossa on toimepiteitä virheen korjaamiseksi tai sen huomoioimatta jättämiseksi.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Tarkista nykyisen asiakirjan ongelmakohdat</term>
+
+      <listitem>
+        <para>Valinta toimii edellä kuvattuun tapaan, mutta koskee vain editoriruudussa näkyvää tiedostoa.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Tilastot</term>
+
+      <listitem>
+        <para>Projektitilastot eli projektin yhteiset sekä projektitiedostokohtaiset lukemat avautuvat uudessa ikkunassa.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Osumatilastot</term>
+
+      <listitem>
+        <para>Koko projektin osumatilastot eli toistojen määrät, täydelliset osumat, sumeat osumat ja ei lainkaan osumia ilmoitetaan sekä segmentteinä, sanoina että merkkeinä.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Osumatilastot per tiedosto</term>
+
+      <listitem>
+        <para>Projektin jokaisen tiedoston osumatilastot eli toistojen määrät, täydelliset osumat, sumeat osumat ja ei lainkaan osumia ilmoitetaan sekä segmentteinä, sanoina että merkkeinä.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Kohdista tiedostoja…</term>
+
+      <listitem>
+        <para>Valitse kaksi kohdistettavaa tiedostoa (lähdetiedosto ja sen käännös) ja napsauta OK, niin <link linkend="windows.aligner"><guilabel>Kohdistus</guilabel>-ikkuna</link> avautuu.</para>
+
+        <para>Löydät tuettujen tiedostomuotojen luettelon kohdasta <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Ominaisuudet</guimenuitem> <guimenuitem>Tiedostosuodattimet</guimenuitem>.</para>
+
+        <para>Lähde- ja kohdetiedostojen tiedostomuotojen ei tarvitse olla samat (voit esim. kohdistaa <filename>.docx</filename>-tiedoston ja <filename>.pdf</filename>-tiedoston).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Komentosarjat…</term>
+
+      <listitem>
+        <para>Saat näkyville <link linkend="windows.scripts"><guilabel>Komentosarjat</guilabel>-ikkunan</link>, jossa voit asettaa komentosarjojen sijainnin, kirjoittaa ja suorittaa komentosarjoja sekä määrittää niille pikanäppäimen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - (komentosarjan nimi)</term>
+
+      <listitem>
+        <para>Valinta käynnistää numeroon yhdistetyn komentosarjan.</para>
+
+        <para>Yhdistä komentosarja numeroon näin:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Avaa Komentosarja-ikkuna.</para>
+          </listitem>
+
+          <listitem>
+            <para>Valitse vasemmanpuoleisesta luettelosta haluamasi komentosarja.</para>
+          </listitem>
+
+          <listitem>
+            <para>Napsauta hiiren kakkospainikkeella ikkunan alareunassa olevaa vapaata numeroa ja valitse <guilabel>Lisää komentosarja</guilabel>.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(ulkoiset hakukomennot)</term>
+
+      <listitem>
+        <para>Jos kohdassa <link linkend="dialogs.preferences.externalsearch">Asetukset</link> on määritelty ulkoisia hakukomentoja, ne näkyvät ja voit käyttää niitä tässä.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

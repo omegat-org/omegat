@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.textsearch">
+  <title>文本查找</title>
+
+  <para>用<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>打开查找窗口，把你要查找的单词或短语输入<emphasis>查找</emphasis>框。</para>
+
+  <para>或者，可以在编辑器窗格、模糊匹配窗格或词汇表窗格中选择单词或短语，然后按下<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>。此单词或短语会自动输入到<emphasis>查找</emphasis>框中。可以同时打开多个查找窗口，不过不再需要的时候请关掉它们，免得把桌面搞得乱七八糟。</para>
+
+  <para>点击<emphasis>查找</emphasis>框中的下拉箭头可以访问最后 10 个查找条目。</para>
+
+  <para>查找窗口有它自己的菜单：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>文件 &gt; 查找转选区（<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>）：焦点重新转到查找字段，并选定其全部内容。</para>
+    </listitem>
+
+    <listitem>
+      <para>文件 &gt; 关闭（<keycombo> <keycap>Ctrl</keycap> <keycap>W</keycap> </keycombo>）：关闭查找窗口（与<keycap>Esc</keycap>相同）</para>
+    </listitem>
+
+    <listitem>
+      <para>编辑 &gt; 插入原文（<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>I</keycap> </keycombo>）插入当前片段的原文。</para>
+    </listitem>
+
+    <listitem>
+      <para>编辑 &gt; 替换为原文（<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>R</keycap> </keycombo>）：替换为当前片段的原文。</para>
+    </listitem>
+
+    <listitem>
+      <para>编辑 &gt; 创建词汇表条目（<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>）：添加新词汇表条目。</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="using.wild.cards">
+    <title>使用通配符</title>
+
+    <para>无论是精确查找还是关键字查找，都可以使用通配符“*”和“?”。它们具有 Word 用户很熟悉的含义：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>“*”匹配从给定单词的当前位置到结尾的零个或多个字符。例如，查找词<literal>“run*”</literal>将匹配单词<literal>“run”</literal>、<literal>“runs”</literal>和<literal>“running”</literal>。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>“?”匹配任意单个字符。例如，<literal>“run?”</literal>将匹配单词<literal>“runs”</literal>和单词<literal>“running”</literal>中的<literal>“runn”</literal>。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>匹配部分将以蓝色粗体显示。注意“*”和“?”在正则表达式中有特殊含义，因此此处所述的通配符查找仅适用于精确查找和关键字查找（见下文）。</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>查找方法和选项</title>
+
+    <para>用单选按钮选择方法。有以下查找方法：</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>精确查找</term>
+
+        <listitem>
+          <para>查找包含指定的确切字符串的片段。精确查找以短语方式查找，即，如果输入了多个单词，则只会在完全按此顺序出现时才会被找出来。因此，查找 <literal>open file</literal> 会找到字符串 <emphasis><literal>open file</literal></emphasis> 的所有出现之处，但不会找到 <emphasis><literal>file opened</literal></emphasis> 或 <emphasis><literal>open input file</literal></emphasis>。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>关键字查找</term>
+
+        <listitem>
+          <para>查找以任意顺序包含全部指定关键字的片段。选择关键字查找来以任意顺序查找任意数量的单个完整单词。OmegaT 会显示所有包含全部指定单词的片段的列表。关键字查找类似于诸如 Google 之类因特网搜索引擎的“包含全部关键字”（AND 逻辑）搜索。因此，用 <emphasis><literal>open file</literal></emphasis> 进行关键字查找会找到字符串 <emphasis><literal>open file</literal></emphasis>的所有出现之处，也会找到 <emphasis><literal>file opened</literal>、<literal>open input file</literal>、<literal>file may not be safe to open</literal></emphasis>等的出现之处。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">正则表达式</emphasis></term>
+
+        <listitem>
+          <para>查找字符串将被视为正则表达式。例如，在上面的例子中，查找字符串——[a-zA-Z]+[öäüqwß]——会在译文片段中查找包含疑似来自德语键盘的字符的单词。<link linkend="appendix.regexp">正则表达式</link>是一种强大的查找字符串实例的方法。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>除了选定上述方法之一，您还可以再选择：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">区分大小写</emphasis>：查找将会对指定字符串进行精确匹配，即，会注意大小写。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">空格可匹配不换行空格</emphasis>：勾选此选项时，搜索条目中的空格可以匹配普通的空格字符或不换行空格（\u00A）字符。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在原文中：</emphasis>在原文片段中查找</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在译文中：</emphasis>在译文片段中查找</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在备注中：</emphasis>在片段的备注中查找</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在注释中：</emphasis>在片段的注释中查找</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">已译或未译：</emphasis>已译和未译片段中都进行查找。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">已译：</emphasis>只在已译片段中查找。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">未译：</emphasis>只在未译片段中查找。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">显示：所有匹配的片段：</emphasis>如果勾选，所有片段都会一一显示，即使它们在同一文档或不同文档中多次出现。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">显示：文件名：</emphasis>如果勾选，将在每个结果上方显示片段所在的文件名。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在项目中查找：</emphasis>：勾选<emphasis>项目记忆库</emphasis>以在查找中包含项目记忆库（project_save.tmx file）。勾选<emphasis>翻译记忆库</emphasis>以在查找中包含位于 <filename>tm</filename> 目录中的翻译记忆库。勾选<emphasis>词汇表</emphasis>以在查找中包含位于 <filename>glossary</filename> 目录下的词汇表。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在文件中查找：</emphasis>在单个文件或包含一组文件的文件夹中查找。对文件进行查找（与对翻译记忆库进行查找相对）时，OmegaT 会将查找限制在具有原文文件格式的文件内。因此，尽管 OmegaT 完全有能力处理 <filename> tmx</filename> 文件，但它并不会将其包含在“查找文件”的查找内。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>如果点击<guibutton>高级选项</guibutton>按钮，就可以选择其他约束条件（翻译的作者或修改者、翻译的日期、排除孤立片段等）。勾选<emphasis>不区分全角/半角字符</emphasis>选项后，查找全角形式（CJK 字符）会匹配半角形式，反之亦然。</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>查找结果显示</title>
+
+    <para>在查找字段输入字符串后，点击查找按钮会把项目中所有包含输入字符串的片段显示出来。由于 <application>OmegaT</application> 将完全相同的片段视为单一实体，因此只显示第一个独特片段。片段按在项目中出现的顺序显示。已译片段会以上面显示原文、下面显示译文的形式显示，而未译片段只显示原文。</para>
+
+    <para>双击某个片段可在编辑器中将其打开以进行修改（勾选<emphasis role="bold">自动于编辑器同步</emphasis>选项后只需单击即可）。随后可以切回查找窗口处理下一个结果片段，例如进行检查并在必要的情况下更正术语。</para>
+
+    <para>在查找窗口中，你可以使用标准快捷键（<keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>、<keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo>）从一个片段移动至另一个。</para>
+
+    <para>你可能会同时打开多个查找窗口。可以通过查看其标题来快速确认其内容：标题中会包含所使用的查找词。</para>
+  </section>
+
+  <section id="search.filter">
+    <title>在编辑器中根据查找来过滤条目</title>
+
+    <para>为了跟轻松地在查找结果集中导航，可以将查找应用到编辑器上。按下底部的<emphasis role="bold">过滤器</emphasis>按钮来将编辑器窗口中显示的条目限制为当前查找所匹配的那些。可以用常规的导航操作进行跳转，例如转到下一个符合当前查找约束条件的（未译）片段。</para>
+
+    <para>注意：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>查找可能会被限制为 1000 个条目，因此如果查找常见短语，编辑器会只显示这 1000 个匹配的条目而非所有符合查找约束条件的条目。</para>
+      </listitem>
+
+      <listitem>
+        <para>某个文件可能没有匹配的条目，因此会显示空白。</para>
+      </listitem>
+
+      <listitem>
+        <para>如果查找结果删除了重复项，则这些重复项不会出现在编辑器中。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>要删除过滤器，请按<emphasis role="bold">删除过滤器</emphasis>按钮，或重新载入项目。</para>
+  </section>
+</section>

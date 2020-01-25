@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="windows.and.dialogs">
+  <title>窗口与对话框</title>
+
+  <para>区别很小：我们将可以维持开启放在编辑器旁边并与之交互的窗口称为“窗口”，而将必须选择参数然后关闭之并刷新翻译活动的窗口称为“对话框”。</para>
+
+  <xi:include href="Dialogs_ProjectProperties.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_ProjectFiles.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_TextSearch.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_TextReplace.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_Aligner.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Windows_Scripts.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Dialogs_Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+</chapter>

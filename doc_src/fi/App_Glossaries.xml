@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.glossaries">
+  <title>Sanastot</title>
+
+  <para>Sanastot ovat käyttäjän itse luomia tiedostoja, jotka auttavat <application>OmegaT</application>-käännöstöissä. Sanastot on päivitettävä käsin.</para>
+
+  <para><application>OmegaT</application>-projektissa voi käyttää yhtä tai useampaa sanastotiedostoa. Sanaston termit, joita käytetään aktiivisessa segmentissä, näkyvät automaattisesti Sanaston esikatselu ssa.</para>
+
+  <para>Voit määritellä sanaston sijainnin ja nimen kohdassa Projektin ominaisuudet. Sanaston tiedostopäätteen on oltava <filename>.txt</filename> tai <filename>.utf8</filename>. Puuttuva pääte lisätään automaattisesti. Tiedoston on oltava <filename>/glossary</filename>-kansiossa, mutta voit käyttää myös alikansiota (esim. <filename>glossary/sub/glossary.txt</filename>). Kun asetat sanastotiedostokansiota, erillistä sanastotiedostoa ei vielä tarvita. Tiedosto luodaan (tarvittaessa) automaattisesti, kun lisäät sanastoon uuden termin. Jos tiedosto on jo olemassa, sen tiedostomuotoa tai merkistökoodausta ei tarkisteta. Uudet termit ja niiden käännökset lisätään aina sarkainmerkeillä erotettuna, ja tiedoston merkistökoodauksena on UTF-8. Tiedoston jo olemassa olevaa sisältöä ei käsitellä tai muuteta, joten mahdollisten tiedostovahinkojen määrä pysyy rajallisena.</para>
+
+  <section>
+    <title>Käyttö</title>
+
+    <para>Jos sinulla on jo sanastotiedosto, jota haluat käyttää, luo OmegaT-käännösprojekti ja vie sanastotiedosto projektin <filename>/glossary</filename>-kansioon. Kun projekti avataan, <application>OmegaT</application> tunnistaa automaattisesti tässä kansiossa olevat sanastotiedostot. Jos aktiivisessa segmentissä on termejä, joita <application>OmegaT</application> löytää myös sanastotiedosto(i)sta, termit näkyvät sanastoruudussa:</para>
+
+    <figure>
+      <title>Sanastoruutu</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/GlossaryPane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Ensin on lähdekielinen termi, sitten yhtäläisyysmerkki, jo lopuksi termin käännös/käännökset. Sanaston termiin voi liittyä kommentti. Sanastotoiminto löytää sanastosta ainoastaan tarkkoja osumia. Se ei siis löydä taivutettuja muotoja tms. Käännöksen aikana voit lisätä sanastotiedostoon/-tiedostoihin uusia termejä esimerkiksi tekstieditorilla. Ohjelma ei havaitse uusimpia lisättyjä termejä heti, kun tekstitiedoston muutokset on tallennettu.</para>
+
+    <para>Lähdekielinen termi voi koostua useista sanoista. Tässä esimerkki siitä:</para>
+
+    <figure>
+      <title>Esimerkki sanaston monisanaisista termeistä</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Alleviivattu termi &quot;pop-up menu&quot; on sanastoruudussa &quot;pojavni menu&quot;. Maalaa termi sanastoruudussa ja napsauta hiiren kakkospainikkeella, niin termi siirtyy kohdistimen kohdalle kohdesegmenttiin.<footnote>
+        <para>Huomaa, että tässä on vain puolet (tai sitäkin vähemmän) totuudesta, sillä kohdekieli (sloveeni) käyttää taivutettuja sanamuotoja. Lisätty termi &quot;pojavni menu&quot; on nominatiivissa mutta se on muutettava lokatiivimuotoon &quot;pojavnem meniju&quot;. Siksi voi olla nopeampaa näpyttää termi heti oikein välittämättä sanastosta ja sen pikanäppäimistä.</para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title>Tiedostomuoto</title>
+
+    <para>Sanastotiedostot ovat yksinkertaisia vain teksti -tiedostoja. Niissä on kolme saraketta, jotka on erotettu toisistaan sarkaimilla. Ensimmäisessä sarakkeessa on lähdekielinen ja toisessa kohdekielinen termi. Kolmas sarake on lisätietoja varten. Kohdekielinen sarake voi olla tyhjä. Sanaston termi voi siis koostua pelkästään lähdekielisestä termistä ja kommentista.</para>
+
+    <para>Sanastojen merkistökoodaus määritetään automaattisesti. Merkistökoodauksen täytyy tietysti sopia molemmille tiedoston kielille, joten on suositeltavaa käyttää Unicode-merkistökoodausta.</para>
+
+    <para>Toinen tuettu tiedostomuoto on CSV. Tässä tiedostomuodossa erotinmerkkinä käytetään pilkkua: lähdekielinen termi, kohdekielinen termi. Myös kommentit erotetaan pilkulla. Merkkijonoissa voidaan käyttää lainausmerkkejä (&quot; &quot;), jolloin merkkijonossa voi olla pilkku:</para>
+
+    <para><literal>&quot;tämä on lähdekielinen termi, jossa käytetään pilkkua&quot;,&quot;c'est un terme, qui contient une virgule&quot;</literal></para>
+
+    <para>Vain lukukelpoisen sanastotiedoston muodoksi sopii vain teksti -muoto sekä termitiedostomuoto TBX. <filename>.tbx</filename>-tiedoston on oltava <filename>/glossary</filename>-kansiossa, mutta voit käyttää myös alikansiota (esim. <filename>glossary/sub/MyGlossary.tbx</filename>).</para>
+
+    <para>TBX - Term Base eXchange - on avoin XML:ään perustuva tiedostostandardi, jonka avulla voidaan siirtää jäsenneltyjä terminologiatietoja. Lokalisointiteollisuuden järjestö LISA ja kansainvälinen standardisoimisjärjestö ISO ovat hyväksyneet TBX-muodon kansainväliseksi standardiksi. Jos käytössäsi on terminologiajärjestelmä, on hyvin mahdollista, että se voi jakaa terminologiatietoja TBX-muodossa. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft Terminology Collection</ulink> on ladattavissa lähes 100 eri kielellä. Sitä voi käyttää tietotekniikkasanaston peruskivenä.</para>
+
+    <para>Huom.: MultiTermin <filename>.tbx</filename>-tuotos ei vaikuta luotettavalta (marraskuu 2013). On parempi käyttää MultiTermin <filename>tab</filename>-tuotosta.</para>
+  </section>
+
+  <section>
+    <title>Sanastojen luominen</title>
+
+    <para>Projektin asetuksissa voi nimetä kirjoituskelpoisen sanastotiedoston (ks. tämän luvun alkuosa). Lisää uusi termi napsauttamalla sanastoruudussa hiiren kakkospainikkeella tai painamalla <keycap>Ctrl+vaihto+G</keycap>. Tämä avaa valintaikkunan, johon voit kirjoittaa lähde- ja kohdekielisen termin sekä mahdolliset kommentit:</para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Sanastotiedostojen sisältö pysyy ohjelman muistissa. Tiedostot ladataan uudelleen, kun projekti avataan tai ladataan uudelleen. Sanastotiedoston päivittäminen on siis melko helppoa: Paina <keycap>Ctrl+vaihto+G</keycap>, kirjoita uusi termi, sen käännös ja mahdolliset kommentit (siirry kentästä toiseen painamalla sarkainnäppäintä) ja lopuksi tallenna tiedosto. Sanastoruudun sisältö päivittyy tämän mukaisesti.</para>
+
+    <para>Voit asettaa kirjoituskelpoisen sanastotiedoston sijainnin kohdassa <guimenuitem>Projekti &gt; Ominaisuudet…</guimenuitem> Tuetut tiedostomuodot ovat <filename>TXT</filename> ja <filename>UTF8</filename>.</para>
+
+    <para><emphasis role="bold">Huom.: </emphasis>On tietysti muitakin tapoja laatia yksinkertaisia tiedostoja, joiden sisältämät tiedot on erotettu toisistaan sarkaimilla. Kaikki ohjelmat, jotka tukevat UTF-8- tai UTF-16-merkistökoodausta ja jotka voivat näyttää välilyöntimerkit (jotta et unohda vaadittua <keycap>TAB</keycap>-merkkiä) sopivat tähän: Voit käyttää Windowsin Notepad++-ohjelmaa, Linuxin GEdit-ohjelmaa tai vaikkapa taulukkolaskentaohjelmaa. </para>
+  </section>
+
+  <section>
+    <title>Ensisijainen sanasto</title>
+
+    <para>Ensisijaisen sanaston oletus on /glossary/glossary.txt. Ensisijaisesta sanastosta löydetyt tulokset näkyvät ensimmäisinä sanastoruudussa ja TransTips-ruudussa.</para>
+
+    <para>Koska ensisijaisen sanaston ja muiden sanastojen termit voivat mennä sekaisin, ensisijaisen sanaston termit on lihavoitu.</para>
+  </section>
+
+  <section>
+    <title>Tavallisia sanasto-ongelmia</title>
+
+    <para><emphasis role="bold">Ongelma: Sanastotermejä ei näy. – Mahdollisia syitä:</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Sanastotiedostojen kansiossa ei ole sanastotiedostoa.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Sanastokansio on tyhjä.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Termejä ei ole erotettu sarkaimella.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Sanastotiedoston tiedostopääte ei ole oikea (muu kuin .tab, .utf8 tai .txt).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Sanaston termi ja käännettävän asiakirjan lähdekielinen termi eivät ole TÄYSIN samanlaisia (sana esim. taivutettu monikkoon).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Sanastotiedoston merkistökoodaus on väärä.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Aktiivisessa segmentissä ei ole termejä, jotka vastaavat sanaston termejä.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Yksi tai useampi yllä mainituista ongelmista on korjattu, mutta projektia ei ole ladattu uudelleen.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Ongelma: Jotkin merkit näkyvät väärin sanastoruudussa</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>…mutta samat merkit näkyvät oikein Editori-ruudussa: tiedostopääte ja tiedostokoodaus eroavat toisistaan.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

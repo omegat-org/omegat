@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.managerighttoleft">
+  <title>驾驭从右向左的语言</title>
+
+   <para>原文与译文片段的对齐方式取决于项目的语言。默认情况下，对于从左向右（LTR）的语言的语言使用左对齐，而对于从右向左（RTL）的语言使用右对齐。你可以通过按<keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>（这是字母 O 而非数字 0）在不同显示模式之间切换。<keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> 有三种切换状态：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>默认对齐，由语言定义</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>左对齐</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>右对齐</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>在 <application>OmegaT</application> 中使用从右向左模式对于 <application>OmegaT</application> 中创建的译文文档的显示模式没有任何影响。译文文档的显示模式必须在通常用于显示或修改它的应用程序（诸如 Microsoft Word）中修改（详细信息请查看相关手册）。用 <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> 会导致 <application>OmegaT</application> 中的文本输入与显示都发生变化。通过点击窗格并切换显示模式，它可以单独用于所有三个窗格（编辑器、模糊匹配和词汇表）。它也能在 <application>OmegaT</application> 中出现的所有输入字段中使用——搜索窗口中、分割规则等。</para>
+
+    <para>对于 Mac OS X 用户，请注意：使用 <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> 快捷键而 <emphasis role="bold">不是</emphasis>cmd+Ctrl+O。</para>
+
+    <section>
+      <title>在片段中混合从右向左和从左向右字符串</title>
+
+      <para>在编写纯从右向左文本时，可以使用默认的（从左向右）视图。然而在许多情况下，必须在从右向左文本中嵌入从左向右文本。例如，在 OmegaT 标签中、必须维持使用从左向右的原文语言的产品名称、本地化文件中的占位符、以及文本中的数字。在这类情况下，必须转换为从右向左模式，以正确显示从右向左（实际上是双向）文本。应当注意，当 <application>OmegaT</application> 处于从右向左模式时，原文和译文都以从右向左模式显示。这意味着如果原文语言是从左向右的而目标语言是从右向左的，或反之，就可能必须在从右向左和从左向右模式之间来回切换，以便在各自的模式下查看原文并输入译文。</para>
+    </section>
+
+    <section>
+      <title>从右向左片段中的 <application>OmegaT</application> 标签</title>
+
+      <para>如上所述，OmegaT 标签是从左向右的字符串。当在从右向左和从左向右的语言间进行翻译时，要正确地读取原文中的标签并在译文中正确输入它们可能需要译者在从左向右和从右向左模式之间多次切换。</para>
+
+      <para>如果文档允许，强烈建议译者从原始文档中删除样式信息以在 OmegaT 的界面中尽可能少地显示标签。请遵循标签管理提示中给出的说明。经常验证标签（参见标签验证）并定期生成译文文档（参见下文和菜单）可以更容易发现问题。提示：翻译文本的纯文本版本并在稍后阶段在相关应用程序中添加必要的样式可能会不那么麻烦。</para>
+    </section>
+
+    <section>
+      <title>创建从右向左的译文文档</title>
+
+      <para>创建译文文档时，其显示方式将与原始文档相同。如果原始文档是从左向右的，译文文档的显示方向需要手工在查看它的应用程序中改为从右向左。每种输出格式都有专门的方法来处理从右向左显示；查看相关的应用程序手册来了解详情。</para>
+
+      <para>不过，对于 .docx 文件会自动完成许多更改：<itemizedlist>
+          <listitem>段落、节和表被设为双向</listitem>
+
+          <listitem>内容流（文本元素）被设为从右向左</listitem>
+        </itemizedlist></para>
+
+      <para>为了避免每次打开译文文件都要更改其显示参数，可以更改原文文件的显示参数，以使译文文件继承此类参数。这种修改对诸如 ODF 等文件是可行的。</para>
+
+  </section>
+</section>

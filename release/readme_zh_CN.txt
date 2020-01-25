@@ -1,4 +1,4 @@
-@TRANSLATION_NOTICE@
+本译文由彭钢、尹玉珺完成，版权 2013。
 
 
 OmegaT 是什么？
@@ -179,7 +179,7 @@ Aaron Madlon-Kay 是 OmegaT 的项目经理。
 
 
 
-有用的链接
+重要链接
 ============
 
 关于 OmegaT 的最新信息，请访问：
@@ -190,10 +190,10 @@ Aaron Madlon-Kay 是 OmegaT 的项目经理。
 
    https://groups.yahoo.com/neo/groups/OmegaT/info
 
-在 SourceForge 网站可以（用英语）提出改进建议与意见：
+可以在 SourceForge 网站（用英语）提出改进建议与意见：
 
    https://sourceforge.net/p/omegat/feature-requests/
 
-在 SourceForge 网站可以（用英语）报告 Bug：
+可以在 SourceForge 网站（用英语）报告 Bug：
 
    https://sourceforge.net/p/omegat/bugs/

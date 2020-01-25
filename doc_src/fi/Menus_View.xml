@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>Näkymä</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Merkitse käännetyt segmentit</term>
+
+      <listitem>
+        <para>Jos tässä kohdassa on rasti, käännettyjen segmenttien taustaväri on keltainen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Merkitse kääntämättömät segmentit</term>
+
+      <listitem>
+        <para>Jos tässä kohdassa on rasti, kääntämättömien segmenttien taustaväri on violetti.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Merkitse kappalejaot</term>
+
+      <listitem>
+        <para>Jos tässä kohdassa on rasti, lähdeasiakirjassa olevat välit kappaleiden välillä näytetään visuaalisesti.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Näytä lähdesegmentit</term>
+
+      <listitem>
+        <para>Jos tässä kohdassa on rasti, käännettyjen segmenttien lähde- ja kohdeteksti näytetään yhtä aikaa, ja lähdetekstin taustaväri on vihreä. Jos kohdassa ei ole rastia, käännettyjen segmenttien lähdetekstiä ei näytetä.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Merkitse toistuvat segmentit</term>
+
+      <listitem>
+        <para>Jos tässä kohdassa on rasti, toistuvat segmentit kirjoitetaan vaaleanharmaalla.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Merkitse segmentit, joissa on muistiinpanoja</term>
+
+      <listitem>
+        <para>Jos tässä kohdassa on rasti, muistiinpanoja sisältävien segmenttien taustaväri on syaani. Tämä merkintä on etusijalla valintoihin <guimenuitem>Merkitse käännetyt segmentit</guimenuitem> ja <guimenuitem>Merkitse kääntämättömät segmentit</guimenuitem> nähden.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Merkitse sitovat välilyönnit</term>
+
+      <listitem>
+        <para>Jos tässä kohdassa on rasti, sitovat välilyönnit näytetään harmaina palkkeina.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Merkitse tyhjätilamerkit</term>
+
+      <listitem>
+        <para>Jos tässä kohdassa on rasti, tyhjätilamerkit näytetään pieninä pisteinä keskellä rivikorkeutta.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Merkitse kaksisuuntaisen algoritmin kontrollimerkit</term>
+
+      <listitem>
+        <para>Tämä valinta näyttää <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">kaksisuuntaisen tekstin ohjausmerkit</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Merkitse automaattisesti täytetyt segmentit</term>
+
+      <listitem>
+        <para>Jos tässä kohdassa on rasti, kaikkien automaattisesti täytettyjen käännössegmenttien (joiden sisältö on löytynyt esim. <filename>/tm/auto</filename>-kansiossa olevista TMX-tiedostoista) tausta on väritetty. Värit ovat näkyvissä niin kauan kuin valinta <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Tallenna automaattisesti täytetty tila</guimenuitem></link> on rastitettu! Tavalliset auto-kansion käännösmuistista tulleet käännökset ovat oransseja. Muista TMX-tiedostoista löytyneet käännökset näytetään eri väreillä. Lisää teknisiä tietoja löydät kohdasta <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request for Enhancement (RFE) -listalta</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Aggressiivinen fontin varmistus</term>
+
+      <listitem>
+        <para>Rastita tämä kohta, mikäli <application>OmegaT</application> ei näytä joitakin kirjainmerkkejä oikein (vaikka koneellesi olisikin asennettu fontti, jossa nämä kirjainmerkit ovat mukana). Huom: Manuaalinen fontin varmistusmekanismi saattaa häiritä Windows-koneiden oletusmuotoista fontin varmistusta, mikä saa fonttien vaihtumisen ei-toivotulla tavalla. Tämän vuoksi mekanismi on oletusarvoisesti POIS PÄÄLTÄ.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Muokkaustiedot</term>
+
+      <listitem>
+        <para>Jos valitset <guimenuitem>Nykyisen segmentin</guimenuitem>, saat näkyviin nykyiseen segmenttiin viimeksi tehdyn muutoksen ajankohdan ja tekijän. Jos valitset <guimenuitem>Kaikki segmentit</guimenuitem>, saat näkyviin samat tiedot kaikista segmenteistä. Valinta <guimenuitem>Ei yhtään</guimenuitem> poistaa muokkaustiedot näkyvistä.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

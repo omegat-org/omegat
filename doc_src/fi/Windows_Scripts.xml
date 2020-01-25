@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.scripts">
+  <title>Komentosarjat</title>
+
+  <para>Pääset tähän valikkoon valitsemalla <menuchoice><guimenuitem>Projekti</guimenuitem> <guimenuitem>Komentosarjat…</guimenuitem> </menuchoice></para>
+
+  <section>
+    <title>Käyttö</title>
+
+    <para>Voi tuoda Komentosarjat-ikkunan tekstialueelle komentosarjan ja suorittaa sen avattuna olevassa projektissa. Voit mukauttaa komentosarjatoimintoa näin:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Lataa komentosaja editoriin napsauttamalla sen nimeä vasemmanpuoleisessa ruudussa.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Napsauta painikkeita <guilabel>&lt;1&gt;</guilabel>–<guilabel>&lt;12&gt;</guilabel> hiiren kakkospainikkeella ja valitse <guilabel>Lisää komentosarja</guilabel>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Kun napsautat numeroa hiiren ykköspainikkeella, niin valittu komentosarja suoritetaan. Voit käynnistää valitut makrot myös <guisubmenu>Työkalut</guisubmenu>-valikosta tai painamalla näppäinyhdistelmää <keycap>Ctrl+Alt+F#</keycap> (# tarkoittaa numeroita 1–12). </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Komentosarjojen oletussijainti on OmegaT-asennuskansiossa oleva <filename>scripts</filename>-kansio. (Asennuskansio on se, jossa <filename>OmegaT.jar</filename>-tiedosto sijaitsee.)</para>
+
+    <para>Jos lisäät kansioon lisää komentosarjoja, ne tulevat näkyviin <guilabel>Komentosarjat</guilabel>-ikkunan komentosarjaluettelossa.</para>
+
+    <para>Muutamia lisäkomentosarjoja löytyy täältä: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink></para>
+  </section>
+
+  <section>
+    <title>Komentosarjakielet</title>
+
+    <para>Voit käyttää seuraavia komentosarjakieliä:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): Dynaaminen kieli Java VM:ää varten Se perustuu Javan vahvuuksiin ja on saanut lisää poweria Pythonista, Rubysta ja Smalltalkista.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (toisinaan lyhennetty JS:ksi, ei saa sekoittaa Javaan): Prototyyppinen ja dynaaminen komenntosarjakieli, joka on helposti kirjoitettu ja jonka ominaisuudet ovat ensiluokkaiset. Tämä moniparadigmainen kieli tukee objektikeskeistä, imperatiivista ja funktionaalista ohjelmointitapaa. Firefoxin ja muiden suosittujen ohjelmien taustalla oleva kieli on tuttu ja open source -piireissä suosittu ohjelmointityökalu.</para>
+        </listitem>
+      </itemizedlist>Kaikilla kielillä on pääsy OmegaT-objektimalliin, jossa projekti on ylimmän tason objekti. Esimerkiksi seuraava groovy-kielinen koodinpätkä käy projektin kaikkien tiedostojen kaikki segmentit läpi, ja jos käännös on olemassa, kirjoittaa segmentin lähde- ja kohdekielisen version.</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
+  </section>
+</section>

@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.regexp">
+  <title>Säännölliset lausekkeet</title>
+
+  <para>Hakutoiminnoissa ja segmentointisäännöissä käytetään Java-ohjelmointikielen tukemia säännöllisiä lausekkeita (lyhyesti: regex). Jos haluat tarkempaa tietoa säännöllisistä lausekkeista, tutustu <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">Javan regex-dokumentaatioon</ulink>. Lisää esimerkkejä on alla.</para>
+
+  <note>
+    <para>Tämä kappale on tarkoitettu edistyneille käyttäjille, jotka haluavat määritellä omia segmentointisääntöjä tai laatia monimutkaisia ja tehokkaita hakuavaimia.</para>
+  </note>
+
+  <table>
+    <title>Regex – Merkinnät</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>(?i)</entry>
+
+          <entry>Ottaa käyttöön kirjainkoosta riippumattomat osumat (oletusasetuksena on, että osumat huomioivat kirjainkoon).</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex – Merkki</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>x</entry>
+
+          <entry>Merkki x, paitsi seuraavat…</entry>
+        </row>
+
+        <row>
+          <entry>\uhhhh</entry>
+
+          <entry>Merkki, jonka heksadesimaaliarvo on 0xhhhh</entry>
+        </row>
+
+        <row>
+          <entry>\t</entry>
+
+          <entry>Sarkainmerkki (\u0009)</entry>
+        </row>
+
+        <row>
+          <entry>\n</entry>
+
+          <entry>Rivinvaihtomerkki (\u000A)</entry>
+        </row>
+
+        <row>
+          <entry>\r</entry>
+
+          <entry>Vaununpalautusmerkki (\u000D)</entry>
+        </row>
+
+        <row>
+          <entry>\f</entry>
+
+          <entry>Sivunvaihdon merkki (\u000C)</entry>
+        </row>
+
+        <row>
+          <entry>\a</entry>
+
+          <entry>Hälytyksen (kello) merkki (\u0007)</entry>
+        </row>
+
+        <row>
+          <entry>\e</entry>
+
+          <entry>Koodinvaihtomerkki (\u001b)</entry>
+        </row>
+
+        <row>
+          <entry>\cx</entry>
+
+          <entry>Koodinvaihtomerkki, joka vastaa x:ää</entry>
+        </row>
+
+        <row>
+          <entry>\0n</entry>
+
+          <entry>Merkki, jonka oktaaliarvo on 0n (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0nn</entry>
+
+          <entry>Merkki, jonka oktaaliarvo on 0nn (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0mnn</entry>
+
+          <entry>Merkki, jonka oktaaliarvo on 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\xhh</entry>
+
+          <entry>Merkki, jonka heksadesimaaliarvo on 0xhhhh</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex – Lainausmerkit</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\</entry>
+
+          <entry>Tyhjä, mutta lainaa seraavaa merkkiä Tätä tarvitaan silloin, kun haluat etsiä osumia jollekin metamerkille ( !$()*+.&lt;&gt;?[\]^{|} ).</entry>
+        </row>
+
+        <row>
+          <entry>\\</entry>
+
+          <entry>Esimerkiksi tämä on kenoviiva.</entry>
+        </row>
+
+        <row>
+          <entry>\Q</entry>
+
+          <entry>Tyhjä, mutta lainaa kaikkia merkkejä merkkiin \E asti</entry>
+        </row>
+
+        <row>
+          <entry>\E</entry>
+
+          <entry>Tyhjä, mutta päättää merkin \Q aloittaman lainauksen</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex – Unicode-blokkien luokat ja kategoriat</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\p{InGreek}</entry>
+
+          <entry>Kreikan blokissa oleva merkki (yksinkertainen <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc"> blokki</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Lu}</entry>
+
+          <entry>Iso kirjain (yksinkertainen <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">kategoria</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Sc}</entry>
+
+          <entry>Rahayksikön tunnus</entry>
+        </row>
+
+        <row>
+          <entry>\P{InGreek}</entry>
+
+          <entry>Mikä tahansa merkki paitsi kreikan blokissa oleva (negaatio)</entry>
+        </row>
+
+        <row>
+          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
+
+          <entry>Mikä tahansa merkki paitsi iso kirjain (vähennys)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex – Merkkiluokat</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>[abc]</entry>
+
+          <entry>a, b tai c (yksinkertainen luokka)</entry>
+        </row>
+
+        <row>
+          <entry>[^abc]</entry>
+
+          <entry>Mikä tahansa merkki paitsi a, b, tai c (negaatio)</entry>
+        </row>
+
+        <row>
+          <entry>[a-zA-Z]</entry>
+
+          <entry>Merkki väliltä a-z tai A-Z nämä päätymerkit mukaan lukien (alue)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex – Ennalta määritellyt merkkiluokat</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>.</entry>
+
+          <entry>Mikä tahansa merkki (paitsi rivin päättävät merkit)</entry>
+        </row>
+
+        <row>
+          <entry>\d</entry>
+
+          <entry>Numero: [0–9]</entry>
+        </row>
+
+        <row>
+          <entry>\D</entry>
+
+          <entry>Muu kuin numero: [^0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\s</entry>
+
+          <entry>Tyhjätilamerkki: [ \t\n\x0B\f\r]</entry>
+        </row>
+
+        <row>
+          <entry>\S</entry>
+
+          <entry>Muu kuin tyhjätilamerkki: [^\s]</entry>
+        </row>
+
+        <row>
+          <entry>\w</entry>
+
+          <entry>Sanan merkki: [a-zA-Z_0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\W</entry>
+
+          <entry>Muu kuin sanan merkki: [^\w]</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex – Alueen rajaaminen</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>^</entry>
+
+          <entry>Rivin alku</entry>
+        </row>
+
+        <row>
+          <entry>$</entry>
+
+          <entry>Rivin loppu</entry>
+        </row>
+
+        <row>
+          <entry>\b</entry>
+
+          <entry>Sanaraja</entry>
+        </row>
+
+        <row>
+          <entry>\B</entry>
+
+          <entry>Muu kuin sanaraja</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex – Ahneet rajoittimet</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>?</emphasis></entry>
+
+          <entry>X, kerran tai ei kertaakaan</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*</emphasis></entry>
+
+          <entry>X, nolla kertaa tai useammin</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+</emphasis></entry>
+
+          <entry>X, yhden tai useamman kerran</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>Ahneet rajoittimet löytävät niin monta osumaa kuin vain mahdollista. Esimerkiksi <emphasis>a+</emphasis> löytää ilmauksesta <emphasis>aaabbb</emphasis> joukon aaa.</para>
+  </note>
+
+  <table>
+    <title>Regex – Vastahakoiset (ei-ahneet) rajoittimet</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X??</entry>
+
+          <entry>X, kerran tai ei kertaakaan</entry>
+        </row>
+
+        <row>
+          <entry>X*?</entry>
+
+          <entry>X, nolla kertaa tai useammin</entry>
+        </row>
+
+        <row>
+          <entry>X+?</entry>
+
+          <entry>X, yhden tai useamman kerran</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>Ei-ahneet rajoittimet löytävät mahdollisimman vähän osumia. Esimerkiksi <emphasis>a+?</emphasis> löytää ilmauksesta <emphasis>aaabbb</emphasis> ensimmäisen <emphasis>a</emphasis>-merkin.</para>
+  </note>
+
+  <table>
+    <title>Regex – Loogiset operaattorit</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Muotoilu</entry>
+
+          <entry align="left">… vastaa seuraavaa</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>XY</entry>
+
+          <entry>X ja sen jälkeen Y</entry>
+        </row>
+
+        <row>
+          <entry>X|Y</entry>
+
+          <entry>Joko X tai Y</entry>
+        </row>
+
+        <row>
+          <entry>(XY)</entry>
+
+          <entry>XY yhtenä ryhmänä</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="regex.tools.and.examples.of.use">
+    <title>Regex-työkalut ja esimerkkejä niiden käytöstä</title>
+
+    <para>Säännöllisten lausekkeiden kehittämiseen ja testaamiseen on olemassa monia interaktiivisia työkaluja. Yleensä ne seuraavat samankaltaista rakennetta (alla on Regular Expression Tester -esimerkki): säännöllinen lauseke (ylimpänä) analysoi haettavaa tekstiä (keskellä oleva tekstilaatikko), ja löydetyt osumat näkyvät tulosten tekstilaatikossa.</para>
+
+    <figure id="regerx.tester">
+      <title>Regex-testeri</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/RegexTester.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/RegexTester.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para><ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> -ohjelmasta on versiot Windows-, Linux- ja FreeBSD-käyttöjärjestelmille. Ohjelma on paljolti samanlainen kuin yllä oleva esimerkki.</para>
+
+    <para>Jo <application>OmegaT</application>:ssä itsessään on hyvä kokoelma käytännöllisiä regex-tapauksia (ks. kohta Valinnat &gt; Segmentointi). Seuraavalla listalla on lausekkeita, joista voi olla sinulle apua etsiessäsi osumia käännösmuistista.</para>
+
+    <table>
+      <title>Regex – Käännöksissä käytettyjen säännöllisten lausekkeiden esimerkkejä</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Säännöllinen lauseke</entry>
+
+            <entry>Löytää seuraavan:</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+
+            <entry>Kahteen kertaan kirjoitetut sanat</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+
+            <entry>Piste tai pilkku, jota seuraa välilyönti ja vielä yksi piste tai pilkku</entry>
+          </row>
+
+          <row>
+            <entry>\. \s+$</entry>
+
+            <entry>Pisteen jälkeen tulevat ylimääräiset välilyönnit rivin lopussa</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+
+            <entry>Koskee englantia: Vokaalilla alkavien sanojen edellä olevan artikkelin on yleensä oltava &quot;an&quot;, ei &quot;a&quot;</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+
+            <entry>Koskee englantia: Sama tarkastus kuin edellä, mutta koskee konsonantteja (artikkelina &quot;a&quot;, ei &quot;an&quot;)</entry>
+          </row>
+
+          <row>
+            <entry>\s{2,}</entry>
+
+            <entry>Useampia välilyöntejä peräkkäin</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+
+            <entry>Piste, jota seuraa iso kirjain – onkohan pisteen ja uuden lauseen alun välistä jäänyt välilyönti puuttumaan?</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>Etsii sanaa is, ei this tai isn't jne.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</appendix>

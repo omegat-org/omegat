@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>Valinnat</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Asetukset…</term>
+
+      <listitem>
+        <para><link linkend="dialogs.preferences">Asetukset</link>-valintaikkuna avautuu.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Konekäännös</term>
+
+      <listitem>
+        <para>Valitse tämä, niin voit aktivoida sattavilla olevat konekäännöspalvelut tai ottaa ne pois käytöstä.</para>
+
+        <para>Jos valitset useampia konekääntimiä, voit vaihtaa niiden välillä ja lisätä viimeksi valitun näppäinyhdistelmällä <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Sanasto</term>
+
+      <listitem>
+        <para>Aktivoi tämä haku valitsemalla <guimenuitem>TaaS-terminologiahaku</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Sanakirja</term>
+
+      <listitem>
+        <para>Rastita ruutu <guimenuitem>Käytä sanakirjatietueiden sumeita osumia</guimenuitem>, jos haluat sanakirjojen näyttävän sanoja, joilla on sama vartalo.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Automaattinen täydennys</term>
+
+      <listitem>
+        <para>Jos ruutu &lt;e0&gt;Näytä sopivia ehdotuksia automaattisesti&lt;/e0&gt; on rastitettu, automaattinen täydennys tulee automaattisesti käyttöön, kun käännetyn sanaston termin ensimmäinen kirjain tai (tägin tapauksessa) &quot;&lt;&quot; kirjoitetaan.</para>
+
+        <para>Rastita <guimenuitem>Syöttöhistoriaan perustuva täydennys</guimenuitem>, niin saat näkyviin ehdotettuja sanoja heti, kun kirjoitat sanan alkukirjaimen.</para>
+
+        <para>Rastita <guimenuitem>Syöttöhistoriaan perustuva ennakointi</guimenuitem>, niin saat näkyviin ehdotuksia sanoista, jotka seuraavat juuri kirjoittamaasi sanaa.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Tiedostosuodattimet…</term>
+
+      <listitem>
+        <para>Asetukset-ikkunassa avautuu kohdasta <link linkend="dialogs.preferences.filefilters">Tiedostosuodattimet</link>.</para>
+
+        <para>Nämä asetukset ovat voimassa OmegaT:n laajuisesti ja kaikissa projekteissa.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentointi…</term>
+
+      <listitem>
+        <para>Asetukset-ikkunassa avautuu kohdasta <link linkend="dialogs.preferences.segmentationsetup">Segmentointiasetukset</link>.</para>
+
+        <para>Nämä asetukset ovat voimassa OmegaT:n laajuisesti ja kaikissa projekteissa.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Editori…</term>
+
+      <listitem>
+        <para>Asetukset-ikkunassa avautuu kohdasta <link linkend="dialogs.preferences.editor">Editori</link>.</para>
+
+        <para>Nämä asetukset ovat voimassa OmegaT:n laajuisesti ja kaikissa projekteissa.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mene määrityskansioon</term>
+
+      <listitem>
+        <para>Avaa paikallisen tiedoston, jonne OmegaT-määritystiedostot on tallennettu (käyttöjärjestelmästä riippuen).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

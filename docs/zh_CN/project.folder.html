@@ -1,0 +1,304 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>第&nbsp;5&nbsp;章&nbsp;项目文件夹</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - 用户指南">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - 用户指南">
+      <link rel="prev" href="panes.html" title="第&nbsp;4&nbsp;章&nbsp;窗格">
+      <link rel="next" href="howtos.html" title="第&nbsp;6&nbsp;章&nbsp;指南">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">第&nbsp;5&nbsp;章&nbsp;项目文件夹</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="panes.html">上一页</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="howtos.html">下一页</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="project.folder"></a>第&nbsp;5&nbsp;章&nbsp;项目文件夹
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="project.folder.html#d0e4479">1. source</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4484">2. target</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4507">3. tm</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="project.folder.html#d0e4536">3.1. tm/auto</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4563">3.2. tm/enforce</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4603">3.3. tm/mt</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4611">3.4. tm/penalty-xxx</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="project.folder.html#d0e4622">4. dictionary</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4630">5. glossary</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#folder.omegat">6. omegat</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4698">7. omegat.project（文件）</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4706">8. .repositories</a></span></dt>
+            </dl>
+         </div>
+         <p>OmegaT 项目是一个文件夹，其中包含若干文件和子文件夹。</p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4479"></a>1.&nbsp;source
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>source 子文件夹包含要翻译的文件。之后您可以将文件添加到其中。注意：source 子文件夹的结构可以随您喜好采用任何形式。如果要翻译的文件是树形结构的一部分（比如像网站中），你只需要指定顶级子文件夹，OmegaT 将维护整个内容同时维持树形结构不变。</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4484"></a>2.&nbsp;target
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>该子文件夹一开始是空的。要向其中添加内容，请选择<span class="guimenu">项目</span> → <span class="guimenuitem">创建译文文档</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)。位于 <code class="filename">source</code> 文件夹下的文件，无论是否已翻译，都会在此处生成，维持着与 source 子文件夹中相同的层次结构。target 子文件夹的内容将反映当前的翻译状况，正如保存在 当前 <span class="bold"><strong>/omegat/project_save.tmx</strong></span> 中的项目翻译记忆库所体现的那样。因此，未译片段会维持原文语言。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4507"></a>3.&nbsp;tm
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>/tm/ 文件夹可以包含任意数量的辅助翻译记忆库——即 tmx 文件。此类文件可以使用前文所述三种变体格式任意其一。注意其他 CAT 工具可以输出（也能输入）tmx 文件，通常还能支持全部三种格式。当然，最好是使用 OmegaT 专用的 TMX
+               文件（见前文），这样能够保留片段中的内联格式。
+            </p>
+            <p>tm 子文件夹中的翻译记忆库的内容用于为待翻译的文本生成建议。任何已翻译并存储在这些文件中的文本只要与当前正在翻译的文本足够相似就会出现在模糊匹配中。</p>
+            <p>如果辅助翻译记忆库中有与待译文本完全相同的原文片段，OmegaT 会按照<span class="guimenu">选项</span> → <span class="guimenuitem">编辑行为...</span>对话框窗口中定义的行为进行操作。例如（如果按默认值），使用来自辅助翻译记忆库的翻译并冠以<span class="emphasis"><em>[模糊]</em></span>前缀，这样译者可以在后面检查带有此标签的片段是否已正确翻译<span class="guimenu">。</span>。
+            </p>
+            <p>有可能会出现这种情况：在 <code class="filename">tm</code> 子文件夹中的翻译记忆库中包含多个原文文本完全相同但译文不同的片段。TMX 文件是按照名称顺序进行读取的，并且对于给定 TMX 文件是逐行读取其中的片段的。因此，对于有着完全相同的原文文本的片段，会采用最后一个（注意：显然，先考虑避免出现这种情况会更有意义)。
+            </p>
+            <p>注意，在 tm 文件夹中的 TMX 文件可以用 gzip 进行压缩。</p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4536"></a>3.1.&nbsp;tm/auto
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>如果从一开始就非常确定某些翻译记忆库中的翻译是完全正确的，则可以将其放入 <span class="bold"><strong> tm/auto</strong></span> 文件夹，这样就无需对大量<span class="emphasis"><em>[模糊]</em></span>进行确认。
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>将 TMX 文件放入 /tm/auto 中。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>打开项目。更改会体现出来。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>在项目中任意位置稍做改动。这会修改 <code class="filename">project_save.tmx</code>（添加来自“自动”TMX 的合适的翻译单元）
+                        </p>
+                     </li>
+                  </ol>
+               </div>
+               <p>注意：如果在第 3 步之前就从 /tm/auto 中删除了 TMX，则不会添加任何其他翻译单元。</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4563"></a>3.2.&nbsp;tm/enforce
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>如果你确信某个 TMX 比 OmegaT 的 <code class="filename">project_save.tmx</code> 更靠谱，请将此 TMX 放到 /tm/enforce 中来无条件地覆盖现有的默认翻译。
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>将 TMX 放入 /tm/enforce 中。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>打开项目。更改会体现出来。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>在项目中任意位置稍做改动。这会修改 <code class="filename">project_save.tmx</code>。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>确定被强制更改的片段的豁免权：</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>如果它们<span class="emphasis"><em>不需要</em></span>豁免后继更改，请将 TMX 从 /tm/enforce 中删除。
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>如果它们<span class="emphasis"><em>需要</em></span>豁免后继更改，请将 TMX 保留在 /tm/enforce 中。
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ol>
+               </div>
+               <p>注意：如果在第 3 步之前就从 /tm/enforce 中删除了 TMX，则根本不会保存任何强制修改。</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4603"></a>3.3.&nbsp;tm/mt
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>在编辑器窗格中，如果插入的匹配项来自名为 <code class="filename">mt</code> 的文件夹中的 TMX 文件时，当前所在片段的背景会变为红色。离开此片段后背景恢复正常。
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4611"></a>3.4.&nbsp;tm/penalty-xxx
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>有时，将由于题材、客户、修订状态等原因而不太可靠的翻译记忆库与高质量的翻译记忆库区分开来会很有用。对于放在名为 <code class="filename">penalty-xxx</code>（xxx 在 0 到 100之间）的文件夹中的翻译记忆库，匹配度将根据文件夹的名称而降低：位于名为（例如）<code class="filename">penalty-30</code>的文件夹中的任意翻译记忆库内匹配度为 100% 的匹配项其匹配度会降到 70%。三种匹配度百分比都会施加罚分：匹配度 75、80、90 在这个案例中会降为 45、50、60。
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4622"></a>4.&nbsp;dictionary
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>一开始是空的，此文件夹将包含您添加入项目的词典。关于此主题的更多信息，请参阅<a class="link" href="appendix.dictionaries.html" title="附录&nbsp;A.&nbsp;词典">词典</a>。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4630"></a>5.&nbsp;glossary
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>此文件夹一开始是空的。它将包含你在项目中使用的词汇表。关于此主题的更多信息，请参阅<a class="link" href="appendix.glossaries.html" title="附录&nbsp;B.&nbsp;词汇表">词汇表</a>。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="folder.omegat"></a>6.&nbsp;omegat
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>omegat</strong></span> 子文件夹内至少会包含一个文件，可能还有若干其他文件。这里面最重要的文件是 <code class="filename">project_save.tmx</code>，他是项目的有效翻译记忆库。随着翻译进程，在每次翻译会话开始和结束时，此子文件夹中会逐步添加此文件的备份（扩展名为 bak）。
+            </p>
+            <p>在翻译中，该子文件夹中还可能会创建其他文件，如下所示：</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">stats.txt</span></dt>
+                  <dd>
+                     <p>包含当前项目的当前统计数据。您可以选择<span class="guimenuitem">工具 &gt; 统计数据</span>来查看它。
+                     </p>
+                  </dd>
+                  <dt><span class="term">ignored_words.txt., </span><span class="term">learned_words.txt</span></dt>
+                  <dd>
+                     <p>由拼写检查器创建和使用。如果您已经有了希望拼写检查其忽略/接受的单词集，只需将相应的两个文件复制到当前项目的 <code class="filename">omegat</code> 子文件夹中。
+                     </p>
+                  </dd>
+                  <dt><span class="term">project_stats_match.txt</span></dt>
+                  <dd>
+                     <p>包含最新的项目匹配统计数据，由<span class="guimenuitem">工具&gt;匹配统计数据</span>创建
+                     </p>
+                  </dd>
+                  <dt><span class="term">segmentation.conf</span></dt>
+                  <dd>
+                     <p>如果存在，则包含项目专用的片段分割规则。</p>
+                  </dd>
+                  <dt><span class="term">filters.xml</span></dt>
+                  <dd>
+                     <p>如果存在，则包含项目专用的文件过滤器。</p>
+                  </dd>
+                  <dt><span class="term">uiLayout.xml</span></dt>
+                  <dd>
+                     <p>如果存在，则包含项目专用的图形界面设置。</p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4698"></a>7.&nbsp;omegat.project（文件）
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>包含项目参数在<a class="link" href="windows.and.dialogs.html#dialogs.projectproperties" title="1.&nbsp;项目属性">项目属性</a>对话框中定义的项目参数。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4706"></a>8.&nbsp;.repositories
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>在团队项目中，此文件夹包含直接连接到远程服务器的项目树结构的版本副本。</p>
+            <p>你可以用此文件夹和 Git 或 SVN 客户端对远程文件进行更改（例如，删除某个文件）。</p>
+            <p>在某些操作系统中，默认情况下不显示此文件夹。激活“显示隐藏文件”选项来使其可见。</p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="panes.html">上一页</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="howtos.html">下一页</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">第&nbsp;4&nbsp;章&nbsp;窗格&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;第&nbsp;6&nbsp;章&nbsp;指南</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

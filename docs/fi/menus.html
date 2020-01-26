@@ -37,10 +37,12 @@
          <div class="toc">
             <dl class="toc">
                <dt><span class="section"><a href="menus.html#menus.project">1. Projekti</a></span></dt>
-               <dt><span class="section"><a href="menus.html#menus.goto">2. Siirry</a></span></dt>
-               <dt><span class="section"><a href="menus.html#menus.view">3. Näkymä</a></span></dt>
-               <dt><span class="section"><a href="menus.html#menus.options">4. Valinnat</a></span></dt>
-               <dt><span class="section"><a href="menus.html#menus.help">5. Ohjeet</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.edit">2. Muokkaa</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.goto">3. Siirry</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.view">4. Näkymä</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.tools">5. Työkalut</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.options">6. Valinnat</a></span></dt>
+               <dt><span class="section"><a href="menus.html#menus.help">7. Ohjeet</a></span></dt>
             </dl>
          </div>
          <div class="section">
@@ -121,7 +123,7 @@
                      <p>Ohjelman sisäinen käännösmuisti tallennetaan tietokoneen kovalevylle. OmegaT tallentaa käännökset automaattisesti 3 minuutin
                         välein sekä silloin, kun suljet projektin tai koko ohjelman.
                      </p>
-                     <p>Kolmen minuutin väliajan voi muuttaa kohdassa <a class="link" href="windows.and.dialogs.html#dialogs.preferences.savingandoutput" title="6.17. Tallentaminen ja tuotos"><span class="guimenuitem">Valinnat</span> → <span class="guimenuitem">Asetukset</span> → <span class="guimenuitem">Tallentaminen ja tuotos</span></a>.
+                     <p>Kolmen minuutin väliajan voi muuttaa kohdassa <a class="link" href="windows.and.dialogs.html#dialogs.preferences.savingandoutput" title="7.17. Tallentaminen ja tuotos"><span class="guimenuitem">Valinnat</span> → <span class="guimenuitem">Asetukset</span> → <span class="guimenuitem">Tallentaminen ja tuotos</span></a>.
                      </p>
                   </dd>
                   <dt><span class="term">Vahvista lähdetiedostot</span></dt>
@@ -160,7 +162,7 @@
                   </dd>
                   <dt><span class="term">Projektin tiedostot…</span></dt>
                   <dd>
-                     <p><a class="link" href="">Projektin tiedostot</a> -ikkuna avautuu.
+                     <p><a class="link" href="windows.and.dialogs.html#windows.projectfiles" title="2. Projektin tiedostot">Projektin tiedostot</a> -ikkuna avautuu.
                      </p>
                   </dd>
                   <dt><span class="term">Avaa projektin sisältö</span></dt>
@@ -178,11 +180,147 @@
                   </dd>
                </dl>
             </div>
-         </div><span style="color: red">&lt;xi:include&gt;&lt;/xi:include&gt;</span><div class="section">
+         </div>
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="menus.goto"></a>2. Siirry
+                     <h2 class="title" style="clear: both"><a name="menus.edit"></a>2. Muokkaa
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tämän valikon kohdat näkyvät vain silloin, kun projekti on avoinna.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><span class="guimenuitem">Kumoa viime toiminto</span></span></dt>
+                  <dd>
+                     <p>Segmentti palautuu sellaiseksi kuin se oli ennen edellistä muokkaustoimintoa. Komentoa ei voi käyttää sen jälkeen, kun muokattu
+                        segmentti on vahvistettu.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Toista viime toiminto</span></dt>
+                  <dd>
+                     <p>Segmentti palautuu sellaiseksi kuin se oli ennen kuin edellinen muokkauskomento peruutettiin. Komentoa ei voi käyttää sen
+                        jälkeen, kun muokattu segmentti on vahvistettu.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Korvaa osumalla tai valinnalla</span></dt>
+                  <dd>
+                     <p>Kaikki kohdesegmentissä oleva teksti korvautuu valitulla sumealla osumalla. Oletusarvoisesti valittuna on ensimmäinen osuma.</p>
+                     <p>Jos sumean osuman tekstistä on valittu vain osa, kaikki kohdesegmentissä oleva teksti korvataan tällä valinnalla.</p>
+                  </dd>
+                  <dt><span class="term">Lisää osuma tai valinta</span></dt>
+                  <dd>
+                     <p>Valittu sumea osuma lisätään käännettävään segmenttiin kohdistimen kohdalle. Jos kohdesegmentin tekstistä on valittu vain
+                        osa, lisäystoiminto kirjoittaa osuman valitun tekstin päälle.
+                     </p>
+                     <p>Jos sumean osuman tekstistä on valittu vain osa, vain valittu teksti lisätään kohdistimen kohdalle käännettävään segmenttiin.</p>
+                  </dd>
+                  <dt><span class="term">Korvaa konekäännöksellä</span></dt>
+                  <dd>
+                     <p>Kohdesegmentissä oleva teksti korvautuu konekäännöksellä, jonka käyttäjän valitsema konekäännöspalvelu on tuottanut. Jos yhtään
+                        konekäännöspalvelua ei ole aktivoitu (kohdassa <span class="guimenu">Valinnat</span> → <span class="guimenuitem">Konekäännös</span>), mitään ei tapahdu.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Korvaa lähdetekstillä</span></dt>
+                  <dd>
+                     <p>Kaikki kohdesegmentissä oleva teksti korvautuu lähdetekstillä.</p>
+                  </dd>
+                  <dt><span class="term">Lisää lähdeteksti</span></dt>
+                  <dd>
+                     <p>Lähdeteksti lisätään kohdistimen kohdalle.</p>
+                  </dd>
+                  <dt><span class="term">Lisää puuttuvat lähdetägit</span></dt>
+                  <dd>
+                     <p>Kohdistimen kohdalle lisätään (puuttuvat) lähdesegmentin tägit.</p>
+                  </dd>
+                  <dt><span class="term">Lisää seuraava puuttuva tägi</span></dt>
+                  <dd>
+                     <p>Ainoastaan yksi tägi (puuttuvista) lisätään kohdistimen kohdalle.</p>
+                  </dd>
+                  <dt><span class="term">Vie valinta</span></dt>
+                  <dd>
+                     <p>Senhetkinen valinta viedään tekstitiedostoon käsiteltäväksi. Jos tekstinpätkää ei ole valittu, tiedostoon kirjoitetaan senhetkinen
+                        lähdesegmentti. Kun käyttäjä lopettaa <span class="application">OmegaT</span>-istunnon, tiedostoa ei tyhjennetä (yhdenmukainen käytäntö leikepöydän kanssa). Sisältö viedään OmegaT-käyttäjän asetuskansiosta
+                        löytyvään tiedostoon <code class="filename">selection.txt</code>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Luo sanaston termi</span></dt>
+                  <dd>
+                     <p>Tämä valinta antaa käyttäjän luoda uuden termin oletuksena olevaan sanastotiedostoon.</p>
+                     <p>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>vaihto</strong></span>+<span class="keycap"><strong>G</strong></span>, näytölle avautuu sanastoruutu ja valintasi siirtyy sanastoruudun kenttään Lähdekielinen termi.
+                     </p>
+                     <p>Voit täyttää kentät <span class="guimenuitem">Kohdekielinen termi</span> ja <span class="guimenuitem">Kommentti</span> samalla tavalla: valitse uusi tekstinpätkä ja paina näppäinyhdistelmää <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>vaihto</strong></span>+<span class="keycap"><strong>G</strong></span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Etsi projektista…</span></dt>
+                  <dd>
+                     <p>Uusi <a class="link" href="windows.and.dialogs.html#windows.textsearch" title="3. Tekstihaku">Hakuikkuna</a> avautuu.
+                     </p>
+                     <p>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää, näytölle avautuu hakuikkuna
+                        ja valintasi siirtyy hakuikkunan kenttään Etsittävä teksti:
+                     </p>
+                     <p>Näppäinyhdistelmä <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>vaihto</strong></span>+<span class="keycap"><strong>F</strong></span>näyttää viimeksi avatun hakuikkunan (eikä siis avaa uutta hakuikkunaa).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Etsi ja korvaa…</span></dt>
+                  <dd>
+                     <p>Uusi <a class="link" href="windows.and.dialogs.html#windows.textreplace" title="4. Tekstin korvaus">Etsi ja korvaa</a> -ikkuna avautuu.
+                     </p>
+                     <p>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span>, näytölle avautuu hakuikkuna ja valintasi siirtyy kenttään <span class="guilabel">Etsittävä teksti:</span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Hae sanakirjoista</span></dt>
+                  <dd>
+                     <p>Jos <a class="link" href="windows.and.dialogs.html#dialogs.preferences.dictionary" title="7.4. Sanakirja">automaattinen haku sanakirjoista</a> ei ole valittuna, tämä toiminto antaa käyttäjän hakea valittua sanaa sanakirjoista.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Vaihda kirjainkokoa</span></dt>
+                  <dd>
+                     <p>Lähdesegmentissä maalattuna olevan tekstin kirjainkoko vaihtuu valinnan mukaiseksi (pienet alkukirjaimet, isot alkukirjaimet,
+                        otsikon kirjainkoko tai lauseen kirjainkoko). Näppäinyhdistelmällä <span class="keycap"><strong>vaihto</strong></span>+<span class="keycap"><strong>F3</strong></span> voit kiertää näiden neljän vaihtoehdon välillä. Jos tekstiä ei ole valittu, <span class="application">OmegaT</span> valitsee sanan, johon heti kohdistimen vieressä oikealla puolella oleva kirjain kuuluu.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Valitse osuma</span></dt>
+                  <dd>
+                     <p>Osumaruudun edellinen, seuraava tai n:nnes sumean osuma lisätään segmenttiin / korvaa segmentissä olevan tekstin.</p>
+                  </dd>
+                  <dt><span class="term">Käytä oletuskäännöksenä</span></dt>
+                  <dd>
+                     <p>Jos senhetkiselle segmentille on useita vaihtoehtoisia käännöksiä, voit merkitä valitsemasi vaihtoehdon oletuskäännökseksi.
+                        Jos käännösvaihtoehtoja on vain yksi, käännös näkyy harmaana.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Luo vaihtoehtoinen käännös</span></dt>
+                  <dd>
+                     <p>Yksi ja sama segmentti voi vaatia erilaisia käännöksiä, kontekstista riippuen. Valitse tämä valikon kohta, jos senhetkinen
+                        käännös ei kelpaa ja kirjoita vaihtoehtoinen käännös.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Poista käännös</span></dt>
+                  <dd>
+                     <p>Käännös poistetaan ja segmentti merkitään kääntämättömäksi.</p>
+                  </dd>
+                  <dt><span class="term">Aseta tyhjä käännös</span></dt>
+                  <dd>
+                     <p>Käännös merkitään tyhjäksi. Tyhjäksi merkityn käännöksen kohdalla ei kohdeasiakirjassa ole mitään. Editorissa tyhjän käännöksen
+                        kohdalla lukee &lt;TYHJÄ&gt;.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Kirjaa sama käännös</span></dt>
+                  <dd>
+                     <p>Käytä tätä komentoa merkitsemään käännös samaksi kuin lähdeteksti silloinkin, kun <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.allowtranslationtobeequaltosource"><span class="guilabel">Käännös saa olla sama kuin lähdeteksti</span></a> -valintaa ei ole valittu.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.goto"></a>3. Siirry
                      </h2>
                   </div>
                </div>
@@ -249,7 +387,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="menus.view"></a>3. Näkymä
+                     <h2 class="title" style="clear: both"><a name="menus.view"></a>4. Näkymä
                      </h2>
                   </div>
                </div>
@@ -317,11 +455,124 @@
                   </dd>
                </dl>
             </div>
-         </div><span style="color: red">&lt;xi:include&gt;&lt;/xi:include&gt;</span><div class="section">
+         </div>
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="menus.options"></a>4. Valinnat
+                     <h2 class="title" style="clear: both"><a name="menus.tools"></a>5. Työkalut
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Tarkista ongelmakohdat…</span></dt>
+                  <dd>
+                     <p>Laadunvarmistustyökalu, joka suorittaa kerralla kaikki automaattiset tarkistukset ja näyttää tulokset omassa ikkunassaan.</p>
+                     <p>Työkalu havaitsee seuraavat neljä ongelmaa:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>puuttuvat tai väärin sijoitetut tavanomaiset ja mukautetut tägit. <span class="guilabel">Tägivirheet</span> on aina valittuna.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="guilabel">oikeinkirjoitusvirheet</span> (valinnainen). Valinta toimii vain silloin, kun oikeinkirjoitussanasto on asennettuna.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>terminologiaongelmat) (valinnainen</p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="guilabel">LanguageTool-virheet</span> (valinnainen).
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Tulokset näkyvät omassa ikkunassaan, ja tulostaulukko toimii näin:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Kaksoisnapsauttamalla taulukon riviä vastaava editoriruudun segmentti aktivoituu.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Napsauta sarakkeen otsikkoa, niin sarakkeen esitysjärjestys muuttuu.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Rivin valinta tai hiiren vieminen rivin yläpuolelle avaa viimeisessä sarakkeessa ponnahdusikkunan, jossa on toimepiteitä virheen
+                                 korjaamiseksi tai sen huomoioimatta jättämiseksi.
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt><span class="term">Tarkista nykyisen asiakirjan ongelmakohdat</span></dt>
+                  <dd>
+                     <p>Valinta toimii edellä kuvattuun tapaan, mutta koskee vain editoriruudussa näkyvää tiedostoa.</p>
+                  </dd>
+                  <dt><span class="term">Tilastot</span></dt>
+                  <dd>
+                     <p>Projektitilastot eli projektin yhteiset sekä projektitiedostokohtaiset lukemat avautuvat uudessa ikkunassa.</p>
+                  </dd>
+                  <dt><span class="term">Osumatilastot</span></dt>
+                  <dd>
+                     <p>Koko projektin osumatilastot eli toistojen määrät, täydelliset osumat, sumeat osumat ja ei lainkaan osumia ilmoitetaan sekä
+                        segmentteinä, sanoina että merkkeinä.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Osumatilastot per tiedosto</span></dt>
+                  <dd>
+                     <p>Projektin jokaisen tiedoston osumatilastot eli toistojen määrät, täydelliset osumat, sumeat osumat ja ei lainkaan osumia ilmoitetaan
+                        sekä segmentteinä, sanoina että merkkeinä.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Kohdista tiedostoja…</span></dt>
+                  <dd>
+                     <p>Valitse kaksi kohdistettavaa tiedostoa (lähdetiedosto ja sen käännös) ja napsauta OK, niin <a class="link" href="windows.and.dialogs.html#windows.aligner" title="5. Kohdistaja"><span class="guilabel">Kohdistus</span>-ikkuna</a> avautuu.
+                     </p>
+                     <p>Löydät tuettujen tiedostomuotojen luettelon kohdasta <span class="guimenuitem">Projekti</span> → <span class="guimenuitem">Ominaisuudet</span> → <span class="guimenuitem">Tiedostosuodattimet</span>.
+                     </p>
+                     <p>Lähde- ja kohdetiedostojen tiedostomuotojen ei tarvitse olla samat (voit esim. kohdistaa <code class="filename">.docx</code>-tiedoston ja <code class="filename">.pdf</code>-tiedoston).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Komentosarjat…</span></dt>
+                  <dd>
+                     <p>Saat näkyville <a class="link" href="windows.and.dialogs.html#windows.scripts" title="6. Komentosarjat"><span class="guilabel">Komentosarjat</span>-ikkunan</a>, jossa voit asettaa komentosarjojen sijainnin, kirjoittaa ja suorittaa komentosarjoja sekä määrittää niille pikanäppäimen.
+                     </p>
+                  </dd>
+                  <dt><span class="term">n - (komentosarjan nimi)</span></dt>
+                  <dd>
+                     <p>Valinta käynnistää numeroon yhdistetyn komentosarjan.</p>
+                     <p>Yhdistä komentosarja numeroon näin:</p>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>Avaa Komentosarja-ikkuna.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Valitse vasemmanpuoleisesta luettelosta haluamasi komentosarja.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Napsauta hiiren kakkospainikkeella ikkunan alareunassa olevaa vapaata numeroa ja valitse <span class="guilabel">Lisää komentosarja</span>.
+                              </p>
+                           </li>
+                        </ol>
+                     </div>
+                  </dd>
+                  <dt><span class="term">(ulkoiset hakukomennot)</span></dt>
+                  <dd>
+                     <p>Jos kohdassa <a class="link" href="windows.and.dialogs.html#dialogs.preferences.externalsearch" title="7.11. Ulkoinen haku">Asetukset</a> on määritelty ulkoisia hakukomentoja, ne näkyvät ja voit käyttää niitä tässä.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="menus.options"></a>6. Valinnat
                      </h2>
                   </div>
                </div>
@@ -330,7 +581,7 @@
                <dl class="variablelist">
                   <dt><span class="term">Asetukset…</span></dt>
                   <dd>
-                     <p><a class="link" href="windows.and.dialogs.html#dialogs.preferences" title="6. Yleiset asetukset">Asetukset</a>-valintaikkuna avautuu.
+                     <p><a class="link" href="windows.and.dialogs.html#dialogs.preferences" title="7. Yleiset asetukset">Asetukset</a>-valintaikkuna avautuu.
                      </p>
                   </dd>
                   <dt><span class="term">Konekäännös</span></dt>
@@ -361,19 +612,19 @@
                   </dd>
                   <dt><span class="term">Tiedostosuodattimet…</span></dt>
                   <dd>
-                     <p>Asetukset-ikkunassa avautuu kohdasta <a class="link" href="windows.and.dialogs.html#dialogs.preferences.filefilters" title="6.6. Tiedostosuodattimet">Tiedostosuodattimet</a>.
+                     <p>Asetukset-ikkunassa avautuu kohdasta <a class="link" href="windows.and.dialogs.html#dialogs.preferences.filefilters" title="7.6. Tiedostosuodattimet">Tiedostosuodattimet</a>.
                      </p>
                      <p>Nämä asetukset ovat voimassa OmegaT:n laajuisesti ja kaikissa projekteissa.</p>
                   </dd>
                   <dt><span class="term">Segmentointi…</span></dt>
                   <dd>
-                     <p>Asetukset-ikkunassa avautuu kohdasta <a class="link" href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup" title="6.7. Segmentointiasetukset">Segmentointiasetukset</a>.
+                     <p>Asetukset-ikkunassa avautuu kohdasta <a class="link" href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup" title="7.7. Segmentointiasetukset">Segmentointiasetukset</a>.
                      </p>
                      <p>Nämä asetukset ovat voimassa OmegaT:n laajuisesti ja kaikissa projekteissa.</p>
                   </dd>
                   <dt><span class="term">Editori…</span></dt>
                   <dd>
-                     <p>Asetukset-ikkunassa avautuu kohdasta <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor" title="6.12. Editori">Editori</a>.
+                     <p>Asetukset-ikkunassa avautuu kohdasta <a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor" title="7.12. Editori">Editori</a>.
                      </p>
                      <p>Nämä asetukset ovat voimassa OmegaT:n laajuisesti ja kaikissa projekteissa.</p>
                   </dd>
@@ -388,7 +639,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="menus.help"></a>5. Ohjeet
+                     <h2 class="title" style="clear: both"><a name="menus.help"></a>7. Ohjeet
                      </h2>
                   </div>
                </div>

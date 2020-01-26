@@ -96,9 +96,9 @@
       <listitem>
         <para>Tämä valinta antaa käyttäjän luoda uuden termin oletuksena olevaan sanastotiedostoon.</para>
 
-        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap>, näytölle avautuu sanastoruutu ja valintasi siirtyy sanastoruudun kenttään </keycombo>Lähdekielinen termi<guilabel>.</para>
+        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap></keycombo>, näytölle avautuu sanastoruutu ja valintasi siirtyy sanastoruudun kenttään Lähdekielinen termi.</para>
 
-        <para>Voit täyttää kentät <guimenuitem>Kohdekielinen termi</guimenuitem> ja <guimenuitem>Kommentti</guimenuitem> samalla tavalla: valitse uusi tekstinpätkä ja paina näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap>.</para>
+        <para>Voit täyttää kentät <guimenuitem>Kohdekielinen termi</guimenuitem> ja <guimenuitem>Kommentti</guimenuitem> samalla tavalla: valitse uusi tekstinpätkä ja paina näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap></keycombo>.</para>
       </listitem>
     </varlistentry>
 
@@ -108,7 +108,7 @@
       <listitem>
         <para>Uusi <link linkend="windows.textsearch">Hakuikkuna</link> avautuu.</para>
 
-        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää<keycombo> <keycap>, näytölle avautuu hakuikkuna ja valintasi siirtyy hakuikkunan kenttään </keycap>Etsittävä teksti:<keycap>.</para>
+        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää, näytölle avautuu hakuikkuna ja valintasi siirtyy hakuikkunan kenttään Etsittävä teksti:</para>
 
         <para>Näppäinyhdistelmä <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>F</keycap> </keycombo>näyttää viimeksi avatun hakuikkunan (eikä siis avaa uutta hakuikkunaa).</para>
       </listitem>

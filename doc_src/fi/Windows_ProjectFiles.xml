@@ -3,7 +3,7 @@
 <section id="windows.projectfiles">
   <title>Projektin tiedostot</title>
 
-  <para>Tämä ikkuna näkyy automaattisesti silloin, kun OmegaT lataa projektin. Saat ikkunan milloin tahansa esille valitsemalla <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Projektin tiedostot…</guimenuitem>.</para>
+  <para>Tämä ikkuna näkyy automaattisesti silloin, kun OmegaT lataa projektin. Saat ikkunan milloin tahansa esille valitsemalla <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Projektin tiedostot…</guimenuitem></menuchoice>.</para>
 
   <para><remark>Huom.:</remark> Jos haluat, että ikkunaa ei näy sen jälkeen kun projekti on avattu, aseta tiedoston <filename>omegat.prefs</filename> kohdan <emphasis>project_files_show_on_load</emphasis> arvoksi <emphasis>false</emphasis>. Pääset käsiksi tiedostoon valitsemalla valikosta <menuchoice> <guimenuitem>Asetukset</guimenuitem> <guimenuitem>Mene määrityskansioon</guimenuitem> </menuchoice>.</para>
 

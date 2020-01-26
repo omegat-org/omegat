@@ -1,0 +1,273 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>第&nbsp;4&nbsp;章&nbsp;窗格</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - 用户指南">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - 用户指南">
+      <link rel="prev" href="windows.and.dialogs.html" title="第&nbsp;3&nbsp;章&nbsp;窗口与对话框">
+      <link rel="next" href="project.folder.html" title="第&nbsp;5&nbsp;章&nbsp;项目文件夹">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">第&nbsp;4&nbsp;章&nbsp;窗格</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="windows.and.dialogs.html">上一页</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="project.folder.html">下一页</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="panes"></a>第&nbsp;4&nbsp;章&nbsp;窗格
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="panes.html#editor.pane">1. 编辑器</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4356">2. 模糊匹配</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4383">3. 词汇表</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4396">4. 词典</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4404">5. 机器翻译</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4412">6. 多重译文</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4423">7. 备注</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4434">8. 注释</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4439">9. 状态栏</a></span></dt>
+            </dl>
+         </div>
+         <p>主窗口由若干窗格、主菜单和状态栏组成。您可以改变任何一个窗格的位置，甚至可以通过点击窗格的名称并拖动将其分离成独立的窗口。根据窗格的状态，其右上角会显示不同的符号：</p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">注意</h3>
+            <p>如果无法看到所有窗格（已打开或最小化），按下<span class="guisubmenu">选项&gt;恢复主窗口</span>将其恢复为安装时定义的状态。
+            </p>
+         </div>
+         <div class="table"><a name="d0e4191"></a><p class="title"><b>表&nbsp;4.1.&nbsp;窗格部件</b></p>
+            <div class="table-contents">
+               <table class="table" summary="窗格部件" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Minimize.png" width="60%"></span></td>
+                        <td>最小化窗格，这样只有其名称显示在窗口底部</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Maximize.png" width="60%"></span></td>
+                        <td>最大化窗格</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Restore.png" width="60%"></span></td>
+                        <td>恢复最大化之前的布局</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Undock.png" width="60%"></span></td>
+                        <td>将窗格从主窗口中分离出来</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="inlinemediaobject"><img src="images/Dock.png" width="60%"></span></td>
+                        <td>将窗格放回主窗口内</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><p>如果有需要，可以重叠窗格。如果这么做，窗格将在顶部显示标签卡。窗格之间的分隔线可以拖动以调整窗格大小。如果你忘记了对用户界面做过的更改，随时都可以用<span class="guimenuitem"> 选项 → 恢复主窗口</span>回复到原始布局。
+         </p>
+         <p>可以将文件拖放到各个窗格中，窗格将作出相应的反应。</p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>编辑器窗格：如果 OmegaT 项目文件（<code class="filename">omegat.project</code>）被拖到这个窗格中，则打开相应的项目，在此之前会关闭已打开的项目。其他拖进去的文件会被复制到 <code class="filename">source</code> 文件夹中。这也适用于<a class="link" href="windows.and.dialogs.html#windows.projectfiles" title="2.&nbsp;项目文件">项目文件</a>窗口。
+                  </p>
+               </li>
+               <li class="listitem">
+                  <p>模糊匹配窗格：拖进去的 <code class="filename">.tmx</code> 文件将被复制到 <code class="filename">tm</code> 文件夹中。
+                  </p>
+               </li>
+               <li class="listitem">
+                  <p>词汇表窗格：拖进去的带有已知词汇表扩展名（<code class="filename">.txt</code>、<code class="filename">.tab</code> 等）的文件将被复制到<code class="filename">词汇表</code>文件夹中。
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="editor.pane"></a>1.&nbsp;编辑器
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>在此输入和编辑翻译。编辑器窗格显示部分翻译的文档的文本：已翻译的文本会显示译文，同时未翻译的文本以原始语言显示。所显示的文本被划分为片段，您可以在文档中滚动并双击任何一个片段将其打开并进行编辑。在上述情况下，已翻译的片段以黄色显示。</p>
+            <p>上述片段其中之一是当前片段。该片段分为两部分显示。上半部分以原文语言显示，为带绿色背景色的粗体字符；下半部分是编辑区域，以一个标记结尾：标记格式为 <code class="literal">&lt;片段 nnnn&gt;</code>，其中 nnnn 是此片段在项目中的编号。以上半部分为参照，并用你的翻译替换或修改编辑区域的内容。
+            </p>
+            <p>注意：片段非独特时片段标记会显示 <code class="literal">&lt;片段 nnnn&nbsp;+yy&nbsp;条&gt;。在这种情况下，yy 是此片段在项目中其余地方出现的次数。</code></p>
+            <p>根据首选的编辑行为，未译片段的编辑区域可能为空、包含原文文本、或包含与此待译字符串最相似的字符串的翻译。当您移动前往另一个片段时，此译文会进行验证并保存。如果您想要让译文与原文相同，只需删除编辑区域中的所有文本将其清空（用 <span class="keycap"><strong>Ctrl+A</strong></span> 全选再用 <span class="keycap"><strong>Del</strong></span> 删除）。OmegaT 能保存与原文完全相同的译文。这对于包含商标、名称或其他专有名词、或无需翻译的第三方语言片段的文档非常有用。更多细节请参阅<span class="emphasis"><em>翻译编辑</em></span>。
+            </p>
+            <p>如果在编辑器窗格上右键单击，会打开一个弹出菜单，其中提供了<span class="bold"><strong>剪切、复制、粘贴</strong></span>（即<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>X</strong></span>、<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span> 和 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>V</strong></span>的功能)、<span class="bold"><strong>转到片段</strong></span>和<span class="bold"><strong>添加词汇表条目</strong></span>功能。另外，如果是在打开的片段上右键单击，还会提供与<span class="bold"><strong>替代译文</strong></span>有关的其他选项，例如，跳转到非独特片段的另一个实例。
+            </p>
+            <p>可以从主窗口的任何地方拖动文本并将其放到该片段中。从译文片段之外的地方拖来的文本会复制过来，而在片段内部拖来的文本则会移动过来。</p>
+            <p>默认情况下，如果用键盘而不用鼠标是无法在原文片段中选择单词的。按 <span class="keycap"><strong>F2</strong></span> 键可以允许用键盘上的方向键将光标移入原文片段（或编辑器内的任何其他地方）。在这种模式下，在窗格底部会显示“<span class="guilabel">光标解锁</span>”。要想返回标准的“<span class="guilabel">光标锁定</span>”模式，再按一次 <span class="keycap"><strong>F2</strong></span>。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4356"></a>2.&nbsp;模糊匹配
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>匹配查看器中显示了翻译记忆库中最相似的片段，来源既包括随着您对项目的翻译而实时创建的内部项目翻译记忆库，也包括来自于您的过往工作或从客户或翻译代理那里得到的辅助翻译记忆库。</p>
+            <p>当您移动至下一片段时，将自动选择第一个模糊匹配（拥有最佳匹配度百分比的那个）。您可以通过按下 <span class="guimenuitem">Ctrl+2、3、4、或 5</span> 来选择其他匹配项。显然，如果没有第五个匹配，按下 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>5</strong></span>就不会有效果。要在译文中使用选定的匹配项，用 <span class="guimenuitem">Ctrl+R</span> 来将译文区域替换为匹配内容，或用 <span class="guimenuitem">Ctrl+I </span> 来将其插入到光标位置处。
+            </p>
+            <p>匹配度百分比大致上等于匹配和被匹配片段中的公共单词数除以二者中较长那条的单词数。选定的模糊匹配以粗体突出形式，在正翻译的字段中缺失的单词显示为蓝色而与缺失部分相邻的单词为绿色。在上面的例子中，原文片段是 <span class="bold"><strong>Context menu command</strong></span>。最顶上的匹配项是 100%，因为所有单词都匹配上了。接下来的两个匹配项亦是如此，而第四个匹配项相似但有所不同。显示匹配度百分比的哪一行还包括有包含此匹配项的那个翻译记忆库的名称。如果没有显示文件名，那么其来源是内部项目翻译记忆库。孤立片段（第二个匹配项）说明片段存在于默认项目翻译记忆库中但没有相对应的原文片段。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4383"></a>3.&nbsp;词汇表
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>词汇表窗格允许您使用在词汇表文件中建立的表达方式和专业术语的自有集。它会显示出现在当前片段中的词汇的翻译。下面的例子中原文片段和上面模糊匹配的例子里一样是“<span class="emphasis"><em>Context menu command</em></span>”，而显示的词汇条目则是出现在可用词汇表（Microsoft 名词集和斯洛文尼亚 Linux 用户组词汇表）中的。
+            </p>
+            <p>如果你激活了翻译提示选项（<span class="guimenuitem">选项 → 翻译提示</span>），则可以在原文片段内高亮标记的单词上右键点击来打开带有建议翻译的弹出菜单，建议翻译由词汇表提供。选择其中之一会将其插入到译文片段中当前光标位置处。您还可以在词汇表窗格中高亮标记想要用的条目并通过在选区上右键点击来将其插入到译文中。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4396"></a>4.&nbsp;词典
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>词典是印刷的词典的电子版本，比如 Merriam Webster、Duden、Larousse 等等，您的桌面上可能正摆着一本。更多关于它们的信息，请参阅<a class="link" href="appendix.dictionaries.html" title="附录&nbsp;A.&nbsp;词典">词典</a>章节。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4404"></a>5.&nbsp;机器翻译
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>机器翻译窗格在其打开时会包含机器翻译工具对当前片段的建议翻译。按 <span class="keysym">Ctrl+M</span> 可将当前片段的译文替换为建议译文。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4412"></a>6.&nbsp;多重译文
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>一条给定的原文片段可能需要多种不同翻译，具体取决于上下文。如果片段的当前翻译并不合适，用户可以选择<span class="guisubmenu">编辑 → 创建替代译文</span>。随后所输入的译文文本会视为此原文片段的一种替代译文。您可以通过选择<span class="guisubmenu">编辑 → 用作默认译文</span>将各种替代项之一——例如，其中最可能用到的那条——定义为默认译文
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4423"></a>7.&nbsp;备注
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>译者可以给打开的片段添加备注，例如打算稍后再回到此片段重新做翻译、检查确认替代译文是否正确或向同事征求意见。您可以用<span class="guisubmenu">转到 → 下一备注</span>和<span class="guisubmenu">转到 → 上一备注</span>来浏览备注。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4434"></a>8.&nbsp;注释
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>某些专门用于翻译工作的文件格式（比如 PO）可以内含备注。通过就可以为译者提供要翻译片段的相关信息。在下面的例子中，PO 文件的作者警告译者要注意译文的长度：</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4439"></a>9.&nbsp;状态栏
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>状态栏在主窗口的底部显示有关工作流的信息。该栏为用户提供了关于正在进行的特定操作的反馈。它还显示着针对当前片段的模糊匹配和词汇表匹配的数量。</p>
+            <p>右下角的计数跟踪着翻译的进度（左栏的数字指的是上图）：</p>
+            <div class="table"><a name="d0e4446"></a><p class="title"><b>表&nbsp;4.2.&nbsp;主窗口 - 计数</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="主窗口 - 计数" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <tbody>
+                        <tr>
+                           <td align="left">27/27</td>
+                           <td>片段数 - 已译与总量（当前文件）</td>
+                        </tr>
+                        <tr>
+                           <td align="left">9319/16338</td>
+                           <td>独特片段数 - 已译/总量（项目中）</td>
+                        </tr>
+                        <tr>
+                           <td align="left">31175</td>
+                           <td>项目中的片段总数（包括重复）</td>
+                        </tr>
+                        <tr>
+                           <td align="left">103/114</td>
+                           <td>当前片段原文和译文的字符数</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"><p>实际使用的角度看，最重要的是第二对数字：它说明了目前您相对于总量（第二个数字）已经完成了多少。示例中的项目显然已经完成，因为全部独特片段均已翻译。</p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="windows.and.dialogs.html">上一页</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="project.folder.html">下一页</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">第&nbsp;3&nbsp;章&nbsp;窗口与对话框&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;第&nbsp;5&nbsp;章&nbsp;项目文件夹</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

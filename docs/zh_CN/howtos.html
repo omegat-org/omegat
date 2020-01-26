@@ -1,0 +1,734 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>第&nbsp;6&nbsp;章&nbsp;指南</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - 用户指南">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - 用户指南">
+      <link rel="prev" href="project.folder.html" title="第&nbsp;5&nbsp;章&nbsp;项目文件夹">
+      <link rel="next" href="appendix.dictionaries.html" title="附录&nbsp;A.&nbsp;词典">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">第&nbsp;6&nbsp;章&nbsp;指南</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="project.folder.html">上一页</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.dictionaries.html">下一页</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="howtos"></a>第&nbsp;6&nbsp;章&nbsp;指南
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="howtos.html#howto.setupteamproject">1. 建立团队项目</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="howtos.html#d0e4725">1.1. 第 1 步：在服务器上创建一个空项目</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4791">1.2. 第 2 步：添加要翻译的文件和其他资源</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4833">1.3. 第 3 步：向译者发送邀请</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4873">1.4. 特殊情况：最小化共享</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#howto.setupteamproject.mappingparameters">1.5. 映射参数</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4933">1.6. 示例映射</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="howtos.html#howto.useteamproject">2. 使用团队项目</a></span></dt>
+               <dt><span class="section"><a href="howtos.html#howto.reusetm">3. 重用翻译记忆库</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="howtos.html#d0e5124">3.1. 导入和导出翻译记忆库</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5135">3.2. 创建所选文档的翻译记忆</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5179">3.3. 共享翻译记忆库</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5186">3.4. 在另一种语言上使用 TMX</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="howtos.html#howto.preventdataloss">4. 防止数据丢失</a></span></dt>
+               <dt><span class="section"><a href="howtos.html#howto.translatepdf">5. 翻译 PDF 文件</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="howtos.html#other.file.formats">5.1. 其它文件格式</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="howtos.html#howto.managerighttoleft">6. 驾驭从右向左的语言</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="howtos.html#d0e5407">6.1. 在片段中混合从右向左和从左向右字符串</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5415">6.2. 从右向左片段中的 <span class="application">OmegaT</span> 标签</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5425">6.3. 创建从右向左的译文文档</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.setupteamproject"></a>1.&nbsp;建立团队项目
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>建立团队项目需要一些关于服务器和 SVN 或 Git 版本控制系统的知识。因此，它应当由项目经理、项目负责人或本地化工程师来执行。</p>
+            <p>由于很容易获得大量关于 SVN 和 Git 的信息，在这里我们不描述它们如何工作，而只描述 OmegaT 如何使用它们。</p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4725"></a>1.1.&nbsp;第 1 步：在服务器上创建一个空项目
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="bold"><strong>在服务器上创建一个空项目</strong></span></p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>在服务器上创建一个译者可访问的 SVN 或 Git 存储库。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>创建此存储库的本地副本（对 SVN 是 <span class="command"><strong>check out</strong></span>，对 Git 是 <span class="command"><strong>clone</strong></span>）。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>在本地存储库中建立一个新的、空的 OmegaT 项目。有两种方式可以完成这一点：</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p><span class="guimenuitem">项目</span> → <span class="guimenuitem">新建...</span></p>
+                              </li>
+                              <li class="listitem">
+                                 <p>在命令行：<span class="command"><strong>java -jar OmegaT.jar team init [语言1] [语言2]</strong></span></p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                     <li class="listitem">
+                        <p>将新建立的 OmegaT 项目添加到版本控制系统（对于 SVN 和 Git 都是 <span class="command"><strong>add</strong></span>）
+                        </p>
+                        <p>注意：如果在第 3 步是用命令行创建的项目，则该步骤已由程序完成。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>将新建立的 OmegaT 项目发布到服务器上（对 SVN 是 <span class="command"><strong>commit</strong></span>，对 Gti 是 <span class="command"><strong>commit</strong></span> 然后跟着 <span class="command"><strong>push</strong></span>）。
+                        </p>
+                     </li>
+                  </ol>
+               </div>
+               <p><span class="bold"><strong>专用参数</strong></span></p>
+               <p>如果项目使用专用过滤器和片段分割参数，<code class="filename">filters.xml</code> 和 <code class="filename">segmentation.conf</code> 文件都必须添加到版本控制系统中并发布到服务器上。
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4791"></a>1.2.&nbsp;第 2 步：添加要翻译的文件和其他资源
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>使用 SVN 或 Git 客户端添加要翻译的文件。</p>
+               <p>这也可以在 OmegaT 中完成：</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>将文件复制到 <code class="filename">/source</code> 目录中
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>使用 <span class="guimenuitem">项目</span> → <span class="guimenuitem">提交原文文件</span></p>
+                     </li>
+                  </ol>
+               </div>
+               <p>要添加其他资源（词典、TMX、或词汇表），请使用 SVN 或 Git 客户端。</p>
+               <p>要<span class="bold"><strong>删除文件</strong></span>，请使用 SVN 或 Git 客户端。这些文件在译者侧不会自动删除：你必须让他们手工删除文件。
+               </p>
+               <p>请注意，在翻译期间，OmegaT 只修改两个文件：</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="filename">omegat/project_save.tmx</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="filename">glossary/glossary.txt</code></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>所有其他的文件都是只读的。如果译者试图修改它们，则只要项目被打开、关闭、保存或重新载入，它们就会回复到原始状态。</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4833"></a>1.3.&nbsp;第 3 步：向译者发送邀请
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>一旦项目在服务器上建立好之后，项目经理可以邀请译者在其上工作，两种方式任选其一：</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>发送项目网址并要求译者用<span class="guimenuitem">项目</span> → <span class="guimenuitem">下载团队项目</span>创建本地副本。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>发送包含对网址的引用的 <code class="filename">omegat.project</code>文件并要求译者将其复制到专用的文件夹中然后用 OmegaT 打开它。
+                        </p>
+                        <p>对网址的引用如下所示（此处为 Git 存储库）：</p><pre class="programlisting">&lt;repositories&gt;
+ &lt;repository type="git" url="https://repo_for_OmegaT_team_project.git"&gt;
+  &lt;mapping local="" repository=""/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</pre></li>
+                  </ul>
+               </div>
+               <p>两种情况下，项目经理都必须发给译者他们用来访问的存储库的 ID 和密码。</p>
+               <p><span class="bold"><strong>检查统计数据</strong></span></p>
+               <p>项目经理应当与译者核实确认两侧（服务器侧与译者侧）的统计数据是一致的。</p>
+               <p>如果有所不同，请检查 <code class="filename">filters.xml</code> 和 <code class="filename">segmentation.conf</code> 文件是否受版本控制。
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4873"></a>1.4.&nbsp;特殊情况：最小化共享
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>上面的流程是通常的情况，其中项目经理希望完全控制项目，文件（与统计数据）在两侧（服务器侧与译者侧）是一样的。</p>
+               <p>OmegaT 团队项目也可以以不同的方式建立，其中多个译者共享 project_save.tmx 文件但不共享原文文件。</p>
+               <p>在这种情况下，流程是一样的，但项目经理不往 /source 文件夹中添加文件。</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="howto.setupteamproject.mappingparameters"></a>1.5.&nbsp;映射参数
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">存储库类型（repository type）</span></dt>
+                     <dd>
+                        <p>这可以是 http（包括 https）、svn 或 git。</p>
+                     </dd>
+                     <dt><span class="term">存储库网址（repository url）</span></dt>
+                     <dd>
+                        <p>要翻译的文件的远程位置</p>
+                     </dd>
+                     <dt><span class="term">映射本地（mapping local）</span></dt>
+                     <dd>
+                        <p>本地文件夹或文件的名称，相对于 OmegaT 项目的根文件夹。</p>
+                     </dd>
+                     <dt><span class="term">映射存储库（mapping repository）</span></dt>
+                     <dd>
+                        <p>远程文件夹或文件的名称，相对于存储库网址。</p>
+                     </dd>
+                     <dt><span class="term">排除（excludes）</span></dt>
+                     <dd>
+                        <p>使用通配符（Apache Ant 风格）添加模式：*、?、**</p>
+                        <p>例如：<strong class="userinput"><code>**/.ini/**</code></strong></p>
+                     </dd>
+                     <dt><span class="term">包含（includes）</span></dt>
+                     <dd>
+                        <p>同上。</p>
+                        <p>例如：<strong class="userinput"><code>**/*.docx</code></strong> 添加所有 .docx 文件，无论它们位于项目中何处。
+                        </p>
+                        <p>包含规则优先于排除规则。</p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4933"></a>1.6.&nbsp;示例映射
+                        </h3>
+                     </div>
+                  </div>
+               </div><pre class="programlisting">&lt;repositories&gt;
+ &lt;repository type="svn" url="https://repo_for_OmegaT_team_project"&gt;
+  &lt;mapping local="" repository=""/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</pre><p><code class="filename">https://repo_for_OmegaT_team_project</code> 的所有内容映射到本地 OmegaT 项目
+               </p><pre class="programlisting">&lt;repositories&gt;
+ &lt;repository type="svn" url="https://repo_for_All_OmegaT_team_projects"&gt;
+  &lt;mapping local="" repository="En-US_DE_project"/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</pre><p><code class="filename">https://repo_for_All_OmegaT_team_projects/En-US_DE_project</code> 的所有内容映射到本地 OmegaT 项目。
+               </p><pre class="programlisting">&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+            &lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
+            &lt;/repository&gt;</pre><p>远程文件 <code class="filename">https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</code> 映射到本地文件 <code class="filename">source/Bundle.properties</code>。
+               </p><pre class="programlisting">&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+            &lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
+               &lt;mapping local="source/readme_tr.txt" repository="release/readme.txt"/&gt;
+            &lt;/repository&gt;</pre><p>远程文件 <code class="filename">https://github.com/omegat-org/omegat/raw/master/release/readme.txt</code> 映射到本地文件 <code class="filename">source/readme_tr.txt</code>。
+               </p>
+               <p>这让重命名要翻译的文件成为可能。</p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.useteamproject"></a>2.&nbsp;使用团队项目
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT 团队项目必须先在服务器上<a class="link" href="howtos.html#howto.setupteamproject" title="1.&nbsp;建立团队项目">建立</a>起来。
+            </p>
+            <p>首次使用团队项目时，请按照项目经理所提供的流程进行操作。</p>
+            <p>一旦项目已经打开，翻译的进行方式与非团队项目相同，但以下几点除外。</p>
+            <p><span class="bold"><strong>自动保存</strong></span></p>
+            <p>每隔 3 分钟（默认情况下），本地项目将与远程存储库进行同步，这样项目经理或其他译者就可以查看并使用在此期间添加的翻译。</p>
+            <p>3 分钟的间隔可以在<a class="link" href="windows.and.dialogs.html#dialogs.preferences.savingandoutput" title="7.17.&nbsp;保存和输出"><span class="guimenuitem">选项</span> → <span class="guimenuitem">首选项</span> → <span class="guimenuitem">保存和输出</span></a>中更改。
+            </p>
+            <p><span class="bold"><strong>同步文件</strong></span></p>
+            <p>每当项目自动保存时，以及打开、关闭和重新载入时，实际上只会同步两个文件：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="filename">omegat/project_save.tmx</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="filename">glossary/glossary.txt</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>所有其他文件将被远程存储库中的文件替换。</p>
+            <p><span class="bold"><strong>添加新原文文件</strong></span></p>
+            <p>要添加新的原文文件：</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>将文件复制到 <code class="filename">/source</code> 目录中
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>使用 <span class="guimenuitem">项目</span> → <span class="guimenuitem">提交原文文件</span></p>
+                  </li>
+               </ol>
+            </div>
+            <p>可以修改现有的原文文件，但必须在自动保存之前以及项目被重新载入或关闭之前执行 commit 操作。</p>
+            <p><span class="bold"><strong>删除原文文件</strong></span></p>
+            <p>必须先由项目经理删除文件，然后在本地删除。</p>
+            <p><span class="bold"><strong>更改片段分割规则或文件过滤器</strong></span></p>
+            <p>项目参数必须由项目经理来更改。</p>
+            <p><span class="bold"><strong>离线工作</strong></span></p>
+            <p>团队项目可以离线打开并翻译。所有更改将在下次连接可用时进行同步。</p>
+            <p>要离线工作：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>在打开项目前断开网络连接，</p>
+                  </li>
+                  <li class="listitem">
+                     <p>或者用命令行使用 <span class="command"><strong>--no-team</strong></span> 选项来打开项目。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.reusetm"></a>3.&nbsp;重用翻译记忆库
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>一开始，即项目创建时，项目的主翻译记忆库 <code class="filename">project_save.tmx</code> 是空的。随着翻译，这个翻译记忆库逐渐得以填充。为了加快此进程，可以重用现有翻译。如果给定语句已被翻译过一次，且翻译是正确的，则无需重新对其进行翻译。翻译记忆库也可能包含参考译文：一个典型的例子是多国立法，例如欧盟的立法。
+            </p>
+            <p>当你在 <span class="application">OmegaT</span> 项目中创建译文文件时，项目的翻译记忆库将输出为 <span class="application">OmegaT</span> 项目根目录下的三个文件（参见上文描述）。你可以将这三个 tmx 文件（<code class="filename">-omegat.tmx</code>、<code class="filename">-level1.tmx</code> 和 <code class="filename">-level2.tmx</code>）视为“导出翻译记忆库”，即以双语形式导出的当前项目的内容。
+            </p>
+            <p>如果希望重用过往项目的翻译记忆库（例如，因为新项目与之前的项目类似，或者使用之前可能用过的术语），您可以将这些翻译记忆库用作“输入翻译记忆库”，即导入您的新项目中。在这种情况下，将想要使用的翻译记忆库放在新项目的 <span class="emphasis"><em>/tm</em></span> 或 <span class="emphasis"><em>/tm</em></span>/auto 文件夹中：前一种情况下，会在模糊匹配查看器中看到来自于这些翻译记忆库的匹配，而后一种情况下，这些翻译记忆库将用于对原文文本进行预翻译。
+            </p>
+            <p>默认情况下，/tm 文件夹位于项目的根文件夹下（例如 ...<span class="emphasis"><em>/MyProject/tm</em></span>），但如果你愿意也可以在项目的属性对话框中选择其他文件夹。如果您经常使用过去生成的翻译记忆库，例如因为它们属于同一主题或者同一客户，则此功能非常有用。在这种情况下，有用的流程可以是这样：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>在硬盘上方便的位置为特定客户或者主题的翻译记忆库创建一个文件夹（“仓库文件夹”）。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>每当完成一个项目，将三份“导出”翻译记忆库文件之一从项目的根文件夹复制到仓库文件夹。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>当您为同一主题或者同一客户开始新项目时，在<span class="guimenuitem">项目 &gt; 属性 &gt; 编辑项目</span>对话框内转到该仓库文件夹，将其选作翻译记忆库文件夹。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>请注意，在打开项目时会解析 /tm 仓库中的所有 tmx 文件，因此将手头各种翻译记忆库全放进此文件夹可能会不必要地拖慢 OmegaT。一旦已经用其内容填充了 <code class="filename">project-save.tmx</code> 文件后，你甚至可以考虑删除那些不再需要的文件。
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5124"></a>3.1.&nbsp;导入和导出翻译记忆库
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>OmegaT 支持导入 tmx 版本 1.1-1.4b（级别 1 和级别 2 都可）。这使得OmegaT 可以读取其他工具生成的翻译记忆库。但是，OmegaT 并不完全支持导入级别 2 的 tmx 文件（不仅存储翻译，还存储格式）。级别 2 的
+                  tmx 文件依然会被导入，在 OmegaT 中能看到其文本内容，但模糊匹配的质量会有所下降。
+               </p>
+               <p>在加载翻译记忆库（tmx）文件时，OmegaT 遵循非常严格的流程。如果在这类文件中发现错误，OmegaT 将指示错误在问题文件中的位置。</p>
+               <p>已知一些工具会在某些条件下生成无效的 tmx 文件。如果你想在 OmegaT 中使用这类文件作为参考译文，则必须对其进行修复，否则 OmegaT 将报错并无法加载它们。修复是微小的操作，OmegaT 会用相关错误信息协助进行错误排除。如果遇到问题，可以向用户组咨询。</p>
+               <p>OmegaT 导出版本 1.4 的 TMX 文件（级别 1 和级别 2 均有）。级别 2 的导出不完全符合级别 2 标准高，但已足够接近并且在其他支持 TMX 级别 2 的翻译记忆工具中会生成正确的匹配。如果你只需要文本信息（而非格式化信息），请使用
+                  OmegaT 创建的级别 1 文件。
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5135"></a>3.2.&nbsp;创建所选文档的翻译记忆
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>如果译者需要与别人分享他们的 TMX 而同时需要排除某些部分或者只要包含某些文件的翻译，那么分享完整的 <code class="filename">ProjectName-omegat.tmx</code> 文件是不行的。以下方案只是其中一种方法，不过足够简单、容易操作且没有危险性。
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>使用所需的语言对和合适的名称（注意：创建的 TMX 文件会包含此名称）创建一个与其他项目分开的项目。</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>将需要翻译记忆的原文文档复制到项目的原文文件夹中。</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>复制包含上述文档的翻译的翻译记忆库到新项目的 <code class="filename">tm/auto</code> 子文件夹中。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>开启项目。用 <span class="keycap"><strong>Ctrl+T </strong></span> 检查可能的标签错误，用 <span class="keycap"><strong>Ctrl+U</strong></span> 检查未译片段。要检查是否所有内容都符合预期，你可以按 <span class="keycap"><strong>Ctrl+D</strong></span> 来创建译文文档并检查其内容。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>现在退出项目。主项目目录（见上文）中的 TMX 文件现在包含你复制到原文文件夹中的文件的所选语言对的翻译。将它们复制到安全的地方备用。</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>要避免因为重用该项目而污染未来案例的可能，请删除项目文件夹或将其或存档到工作区外的其他位置。</p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5179"></a>3.3.&nbsp;共享翻译记忆库
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>如果涉及翻译团队，译者们会首选共享公共翻译记忆库而不是发布他们的本地版本。</p>
+               <p>OmegaT 可连接 SVN 和 Git，这是两种常见的以开源许可提供的团队软件版本与修订控制系统（RCS）。在 OmegaT 的情况下，完整的项目文件夹——换句话说，设计的翻译记忆库和原文文件夹、项目设置等——均由选定 RCS 管理。更多内容参见</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5186"></a>3.4.&nbsp;在另一种语言上使用 TMX
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>某些情况下，你可能已经完成了一个项目，原文为比如说荷兰语，翻译为比如说英语。然后需要将其翻译为比如说中文，但其译者并不懂荷兰语，不过她精通英语。在这种情况下，NL-EN 翻译记忆库可以作为一个中转来帮助生成 NL 到 ZH 的翻译。</p>
+               <p>在这个例子中，解决方案是将已有的翻译记忆库复制到 tm/tmx2source/ 子文件夹中并将其重命名为 ZH_CN.tmx 来指示此 tmx 的译文语言。这样荷兰语的原文片段会以英文翻译的形式显示给译者，译者就能用它们来创建中文翻译。</p>
+               <p><span class="bold"><strong>重要提示：</strong></span>辅助性的 TMX 必须重命名为 XX_YY.tmx，其中 XX_YY 是此 tmx 的译文语言，例如在上面的例子中是 ZH_CN.tmx。项目的原文语言和 TMX 的原文语言当然应当是相同的——在这个例子中是 NL。注意对于给定语言对只能使用一个
+                  TMX，因此如果涉及多个翻译记忆库，则需要将它们全部合并到 XX_YY.tmx 中。
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.preventdataloss"></a>4.&nbsp;防止数据丢失
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT</span> 是健壮的应用程序。然而，就像使用任何其他应用程序一样，使用 <span class="application">OmegaT</span> 时应当采取预防措施防止数据丢失。翻译文件时，<span class="application">OmegaT</span> 将所有进度存储在项目的 <code class="literal">/omegat</code> 子文件夹中的翻译记忆文件 <code class="literal">project_save.tmx</code> 中。
+            </p>
+            <p>OmegaT 在每次打开或者重新载入项目时也会将翻译记忆库备份到同一子目录下的 project_save.tmx.YEARMMDDHHNN.bak 文件。其中 YEAR 是 4 位数年份、MM 是月份、DD 是月份内的日期、而 HH 与 NN
+               是保存上一份翻译记忆库时的小时和分钟。
+            </p>
+            <p>如果您认为丢失了翻译数据，那么可以使用以下步骤将项目恢复到最近保存的状态，通常是大约 10 分钟以内：</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>关闭项目</p>
+                  </li>
+                  <li class="listitem">
+                     <p>重命名当前的 <code class="filename">project_save.tmx </code>文件（例如改名为 <code class="filename">project_save.tmx.temporary</code>）
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>选择最有可能包含所需数据的翻译记忆库备份</p>
+                  </li>
+                  <li class="listitem">
+                     <p>将其重命名为 <code class="literal">project_save.tmx</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>打开项目</p>
+                  </li>
+               </ol>
+            </div>
+            <p>为避免丢失重要数据：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>定期将 /omegat/project_save.tmx 复制到备份媒介上，例如 CD 或 DVD。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>在熟悉 <span class="application">OmegaT</span> 之前，请定期创建译文文件，并检查译文文件是否包含最新版本的翻译。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>在项目中途对 <code class="literal">/source</code> 中的文件进行更改要特别小心。如果在开始翻译后原文文件有所修改，<span class="application">OmegaT</span> 也许会找不到您已翻译的片段。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>借助这些帮助文字来起步。如果碰到问题，可以在 <a class="ulink" href="https://groups.yahoo.com/neo/groups/OmegaT/info" target="_top"><span class="application">OmegaT</span> 用户组</a>中发帖。可以用您所最熟悉的语言发帖，无需犹豫。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.translatepdf"></a>5.&nbsp;翻译 PDF 文件
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>PDF 文件是一种特殊情况。它们包含文本格式信息，但 <span class="application">OmegaT</span> 无法重用此类信息来创建译文文件。因此，PDF 作为纯文本文件处理，并且输出文件是纯文本文件。
+            </p>
+            <p>如果您需要在翻译中复现文本格式（以及其他东西，例如绘图），有三种方法可供尝试：</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>使用 <span class="application">OmegaT</span> 的默认过滤器 （PDF输入），翻译， 创建译文文件（将会是纯文本文件），手动添加相关的格式和项目。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>使用 Iceni Infix 过滤器。参见<a class="ulink" href="https://omegat.org/howtos/iceni_infix.html " target="_top">指南 - 用 Iceni Infix 和 OmegaT 翻译 PDF 文件</a>。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>将源文件导入 <a class="ulink" href="https://www.libreoffice.org/discover/draw/ " target="_top">LibreOffice Draw</a>，将其保存为 ODG 文件，翻译，然后按需要导出为 PDF。
+                     </p>
+                  </li>
+               </ol>
+            </div>
+            <p><span class="bold"><strong>注：</strong></span>以上信息仅适用于带有文本层的 PDF 文件。如果你有一个由扫描页面组成的 PDF 文件（此类文件有时被称为“死”PDF），你需要用 OCR（光学字符识别）程序识别文本并将其转换为 OmegaT 可以处理的格式。
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="other.file.formats"></a>5.1.&nbsp;其它文件格式
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>还存在其他适合 OmegaT 处理的纯文本或格式化文本文件格式。</p>
+               <p>可以用外部工具将文件转换为支持的格式。然后需要将译文文件转换回原始格式。例如，如果你拥有的是无法处理 ODT 的过时 Microsoft Word 版本，那么对于有着 DOC 扩展名的 Word 文件需要这样来回：</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>将文件导入到 ODF writer</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>将文件保存为 ODT 格式保存</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>对它进行翻译并创建译文 ODT 文件</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>在 ODF writer 中加载译文文件</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>将文件保存为 DOC 格式</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>译文文件的格式质量取决于来回转换的质量。在进行此类转换之前，请务必测试所有选项。查看<a class="ulink" href="http://www.omegat.org" target="_top">OmegaT 主页</a>来获取最新的辅助翻译工具列表。
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.managerighttoleft"></a>6.&nbsp;驾驭从右向左的语言
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>原文与译文片段的对齐方式取决于项目的语言。默认情况下，对于从左向右（LTR）的语言的语言使用左对齐，而对于从右向左（RTL）的语言使用右对齐。你可以通过按<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span>（这是字母 O 而非数字 0）在不同显示模式之间切换。<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> 有三种切换状态：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>默认对齐，由语言定义</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>左对齐</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>右对齐</p>
+                  </li>
+               </ul>
+            </div>
+            <p>在 <span class="application">OmegaT</span> 中使用从右向左模式对于 <span class="application">OmegaT</span> 中创建的译文文档的显示模式没有任何影响。译文文档的显示模式必须在通常用于显示或修改它的应用程序（诸如 Microsoft Word）中修改（详细信息请查看相关手册）。用 <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> 会导致 <span class="application">OmegaT</span> 中的文本输入与显示都发生变化。通过点击窗格并切换显示模式，它可以单独用于所有三个窗格（编辑器、模糊匹配和词汇表）。它也能在 <span class="application">OmegaT</span> 中出现的所有输入字段中使用——搜索窗口中、分割规则等。
+            </p>
+            <p>对于 Mac OS X 用户，请注意：使用 <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> 快捷键而 <span class="bold"><strong>不是</strong></span>cmd+Ctrl+O。
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5407"></a>6.1.&nbsp;在片段中混合从右向左和从左向右字符串
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>在编写纯从右向左文本时，可以使用默认的（从左向右）视图。然而在许多情况下，必须在从右向左文本中嵌入从左向右文本。例如，在 OmegaT 标签中、必须维持使用从左向右的原文语言的产品名称、本地化文件中的占位符、以及文本中的数字。在这类情况下，必须转换为从右向左模式，以正确显示从右向左（实际上是双向）文本。应当注意，当
+                  <span class="application">OmegaT</span> 处于从右向左模式时，原文和译文都以从右向左模式显示。这意味着如果原文语言是从左向右的而目标语言是从右向左的，或反之，就可能必须在从右向左和从左向右模式之间来回切换，以便在各自的模式下查看原文并输入译文。
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5415"></a>6.2.&nbsp;从右向左片段中的 <span class="application">OmegaT</span> 标签
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>如上所述，OmegaT 标签是从左向右的字符串。当在从右向左和从左向右的语言间进行翻译时，要正确地读取原文中的标签并在译文中正确输入它们可能需要译者在从左向右和从右向左模式之间多次切换。</p>
+               <p>如果文档允许，强烈建议译者从原始文档中删除样式信息以在 OmegaT 的界面中尽可能少地显示标签。请遵循标签管理提示中给出的说明。经常验证标签（参见标签验证）并定期生成译文文档（参见下文和菜单）可以更容易发现问题。提示：翻译文本的纯文本版本并在稍后阶段在相关应用程序中添加必要的样式可能会不那么麻烦。</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5425"></a>6.3.&nbsp;创建从右向左的译文文档
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>创建译文文档时，其显示方式将与原始文档相同。如果原始文档是从左向右的，译文文档的显示方向需要手工在查看它的应用程序中改为从右向左。每种输出格式都有专门的方法来处理从右向左显示；查看相关的应用程序手册来了解详情。</p>
+               <p>不过，对于 .docx 文件会自动完成许多更改：</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">段落、节和表被设为双向</li>
+                     <li class="listitem">内容流（文本元素）被设为从右向左</li>
+                  </ul>
+               </div>
+               <p>为了避免每次打开译文文件都要更改其显示参数，可以更改原文文件的显示参数，以使译文文件继承此类参数。这种修改对诸如 ODF 等文件是可行的。</p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="project.folder.html">上一页</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.dictionaries.html">下一页</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">第&nbsp;5&nbsp;章&nbsp;项目文件夹&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;附录&nbsp;A.&nbsp;词典</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,168 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Liite C. Kielentarkastin</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 – Käyttöopas">
+      <link rel="up" href="index.html" title="OmegaT 4.2 – Käyttöopas">
+      <link rel="prev" href="appendix.glossaries.html" title="Liite B. Sanastot">
+      <link rel="next" href="appendix.regexp.html" title="Liite D. Säännölliset lausekkeet">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Liite C. Kielentarkastin</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.glossaries.html">Edellinen</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.regexp.html">Seuraava</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.spellchecker"></a>Liite C. Kielentarkastin
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.spellchecker.html#d0e5696">1. Oikeinkirjoitussanastojen asentaminen</a></span></dt>
+               <dt><span class="section"><a href="appendix.spellchecker.html#d0e5745">2. Oikeinkirjoitussanastojen käyttö</a></span></dt>
+               <dt><span class="section"><a href="appendix.spellchecker.html#hints">3. Vihjeitä</a></span></dt>
+            </dl>
+         </div>
+         <p>OmegaT:n oletuskielentarkistin perustuu Apache OpenOfficessa, LibreOfficessa, Firefoxissa ja Thunderbirdissä käytettyyn kielentarkistimeen.
+            Näin ollen se voi käyttää näiden sovellusten monia vapaita oikeinkirjoitussanastoja.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5696"></a>1. Oikeinkirjoitussanastojen asentaminen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ennen kuin kielentarkistustoimintoa voi käyttää, on asennettava yksi tai useampia kohdekielen sanastoja. Näin asennat oikeinkirjoitussanastoja:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Avaa tiedostonhallinnassa sopiva sijainti ja luo sinne uusi kansio, jonne tallennat oikeinkirjoitussanastoja. Alla olevassa
+                        esimerkissä käytetään sijaintia D:/Translations/spellchekers.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Avaa OmegaT. Valitse <span class="guimenuitem">Valinnat &gt; Oikeinkirjoituksen tarkistus</span> ja napsauta Sanakirjojen kansio -kentän kohtaa <span class="guibutton">Valitse</span>. Etsi juuri luomasi sanakirjojen kansio ja valitse se.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Tuo tähän kansioon sanakirjatiedostot, joita haluat käyttää. Voit tehdä tämän kahdella tavalla. Voit käyttää tiedostonhallintaohjelmaa
+                        ja kopioida muualla olevat tiedostot uuteen kansioon, tai käyttää OmegaT:n <span class="bold"><strong>Asenna uusi sanakirja</strong></span> -toimintoa. Toiminto laatii listan käytettävistä sanakirjoista, ja voit valita niistä haluamasi. Huomioi, että tarvitset
+                        internetyhteyden käyttääksesi asennustoimintoa. Valittujen kielten asentaminen voi kestää jonkin aikaa, mutta näet ne lopulta
+                        kielentarkistinikkunassa.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Jos sinulla jo on sopivia sanakirjatiedostoja (esim. Apache OpenOfficen, LibreOfficen, Firefoxin tai Thunderbirdin osana),
+               ne kannattaa kopioida ne käsin sanakirjakansioon. Sanakirjojen haku netistä on kuitenkin helpompaa. Käytä tällöin kenttää
+               <span class="bold"><strong>Online-sanakirjojen URL-osoite</strong></span>:
+            </p>
+            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Kuva C.1. Oikeinkirjoituksen tarkistuksen asetukset</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckerSetup_25.png" alt="Oikeinkirjoituksen tarkistuksen asetukset"></div>
+               </div>
+            </div><br class="figure-break"><p>Napsauta kenttää <span class="guibutton">Asenna uusi sanakirja</span>, niin sanakirjan asennusikkuna avautuu. Ikkunassa voit valita ne sanakirjat, jotka haluat asentaa.
+            </p>
+            <p>Tiedostojen nimien ja kohdekielen kielikoodin on oltava yhtäläiset. (Kielikoodi on asetettu kohdassa <span class="guimenu">Projekti &gt; Ominaisuudet</span>.) Jos kohdekielenäsi on esimerkiksi ES-MX (Meksikon espanja), sanakirjatiedostojen nimien on oltava ex_MX.dic ja es_MX.aff.
+               Jos käytössäsi on vain perusmuotoinen espanjan sanakirja, voit tehdä kopiot sen tiedostoista es_es.dic ja es_es.aff ja nimetä
+               ne uudelleen tiedostoiksi es_MX.dic ja es_MX.aff. Näin saat käyttöön espanjan oikeinkirjoitussanaston. Tällöin oikeinkirjoitus
+               toki tarkistetaan Espanjan espanjan (kastilian), ei Meksikon espanjan mukaisesti.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5745"></a>2. Oikeinkirjoitussanastojen käyttö
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Sinun ei tarvitse erikseen määritellä OmegaT:tä käyttämään tiettyä oikeinkirjoitussanastoa. OmegaT käyttää automaattisesti
+               projektin kielikoodin mukaista sanakirjaa. Tarkista silti, että kielikoodit ovat täsmälleen samanlaiset. Esimerkiksi sanakirja,
+               jonka tunnus on FR-FR, ei toimi, kun kohdekieleksi on asetettu pelkkä FR. Nimeä sanakirjatiedostot uudelleen tai muuta projektin
+               kieliasetuksia tarvittaessa.
+            </p>
+            <p>Ota oikeinkirjoituksen tarkistuksen käyttöön kohdassa <span class="guimenuitem">Valinnat &gt; Oikeinkirjoituksen tarkistus </span> ja laita <span class="guilabel">Tarkista oikeinkirjoitus automaattisesti</span> -ruutuun rasti (ks. yllä).
+            </p>
+            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Kuva C.2. Oikeinkirjoituksen tarkistuksen käyttö</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Oikeinkirjoituksen tarkistuksen käyttö"></div>
+               </div>
+            </div><br class="figure-break"><p>Napsauta alleviivattua sanaa hiiren kakkospainikkeella (yllä olevassa kuvassa sana Artund) ja valitse oikea korjaus pudotusvalikosta
+               (esimerkissä Art und). Voit myös ohjastaa oikeinkirjoituksen tarkistuksen ohittamaan kaikki väärin kirjoitetun sanan esiintymät
+               tai lisäämään sen sanakirjaan.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints"></a>3. Vihjeitä
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Jos oikeinkirjoituksen tarkistus ei toimi, tarkista, että olet rastittanut <span class="guilabel">Tarkista oikeinkirjoitus automaattisesti</span> -ruudun (kohdassa <span class="guisubmenu">Valinnat &gt; Oikeinkirjoituksen tarkistus…</span>)
+            </p>
+            <p>Tarkista myös, että projektin kohdekielen kielikoodi on sama kuin käytettävän sanakirjan kielikoodi. Oikeinkirjoituksen tarkistus
+               tunnistaa käytettävän sanakirjan kohdekielen kielikoodin perusteella. Jos kohdekielenä on brasilianportugali (PT_BR), sanakirjojen
+               alikansiossa on oltava kaksi samannimistä sanakirjatiedostoa, <span class="emphasis"><em>pt_br.aff</em></span> ja <span class="emphasis"><em>pt_br.dic</em></span>.
+            </p>
+            <p>Jos olet jo kääntänyt suuren määrän tekstiä, kun huomaat että projektin kohdekielen kielikoodi ei vastaa oikeinkirjoituksen
+               tarkistuksen kielikoodia (olet esimerkiksi valinnut kohdekieleksi pt_BR, mutta pt_BR-sanakirjoja ei ole), sinun kannattaa
+               yksinkertaisesti kopioida kaksi sopivaa tiedostoa ja nimetä ne uudelleen (esim. tiedostot <span class="emphasis"><em>pt_PT.aff</em></span> ja <span class="emphasis"><em>pt_PT.dic</em></span> muotoon <span class="emphasis"><em>pt_BR.aff</em></span> ja <span class="emphasis"><em>pt_BR.dic</em></span>). Järkevämpää on kuitenkin pitää pieni tauko ja ladata oikeinkirjoituksen tarkistuksen vaatimat oikeat sanakirjaversiot.
+            </p>
+            <p>Huomaa, että <code class="filename">Poista</code> poistaa kaikki valitut sanakirjat fyysisesti koneelta. Jos jokin toinen sovellus käyttää samoja tiedostoja, ne katoavat myös
+               tästä sovelluksesta. Jos sinun on syystä tai toisesta poistettava tai uudelleennimettävä sanakirjoja usein, kannattaa kopioida
+               kyseiset tiedostot toiseen kansioon, jota vain OmegaT käyttää.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.glossaries.html">Edellinen</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.regexp.html">Seuraava</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Liite B. Sanastot&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Alkuun</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Liite D. Säännölliset lausekkeet</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

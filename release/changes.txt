@@ -82,7 +82,7 @@
   1 Bug fix
   9 Localisation updates
 ----------------------------------------------------------------------
-5.0.0 vs 4.3.1
+5.0.0 vs 4.3.2
 
   Implemented requests:
 
@@ -111,6 +111,22 @@
   - Russian localisation updated to 5.0.0 (UI)
   - Simplified Chinese localisation updated to 5.0.0 (UI, scripts)
   - Ukrainian localisation updated to 5.0.0 (UI, Instant Start, scripts, readme)
+
+----------------------------------------------------------------------
+ OmegaT 4.3.2 (2020-01-26)
+----------------------------------------------------------------------
+  0 Enhancements
+  0 Bug fixes
+  2 Localisation updates
+----------------------------------------------------------------------
+4.3.2 vs 4.3.1
+
+  Localisation updates
+
+  - Finnish localisation added at 4.3.2 (UI, Instant Start, scripts, readme,
+    documentation)
+  - Simplified Chinese localisation updated to 4.3.2 (UI, Instant Start,
+    scripts, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 4.3.1 (2019-11-04)

@@ -39,7 +39,6 @@ Source: "readme_da.txt"; DestDir: "{app}"; Flags: isreadme; Languages: da
 Source: "readme_de.txt"; DestDir: "{app}"; Flags: isreadme; Languages: de
 Source: "readme_es.txt"; DestDir: "{app}"; Flags: isreadme; Languages: es
 Source: "readme_eu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: eu
-Source: "readme_fi.txt"; DestDir: "{app}"; Flags: isreadme; Languages: fi
 Source: "readme_fr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: fr
 Source: "readme_gl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: gl
 Source: "readme_hr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hr

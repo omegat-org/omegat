@@ -1,4 +1,20 @@
 ----------------------------------------------------------------------
+ OmegaT 4.3.2 (2020-01-26)
+----------------------------------------------------------------------
+  0 Enhancements
+  0 Bug fixes
+  2 Localisation updates
+----------------------------------------------------------------------
+4.3.2 vs 4.3.1
+
+  Localisation updates
+
+  - Finnish localisation added at 4.3.2 (UI, Instant Start, scripts, readme,
+    documentation)
+  - Simplified Chinese localisation updated to 4.3.2 (UI, Instant Start,
+    scripts, readme, documentation)
+
+----------------------------------------------------------------------
  OmegaT 4.3.1 (2019-11-04)
 ----------------------------------------------------------------------
   1 Enhancement

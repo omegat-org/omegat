@@ -2,7 +2,7 @@
  OmegaT 5.2.0 (2020-01-26)
 ----------------------------------------------------------------------
   3 Enhancements
-  6 Bug fixes
+  5 Bug fixes
   7 Localisation updates
 ----------------------------------------------------------------------
 5.2.0 vs 5.1.0
@@ -19,9 +19,6 @@
   https://sourceforge.net/p/omegat/feature-requests/1482/
 
   Bug fixes:
-
-  - Context menu not poping-up in repeated segments
-  https://sourceforge.net/p/omegat/bugs/917
 
   - LanguageTool rule settings not persisted correctly
   https://sourceforge.net/p/omegat/bugs/960/
@@ -116,10 +113,15 @@
  OmegaT 4.3.2 (2020-01-26)
 ----------------------------------------------------------------------
   0 Enhancements
-  0 Bug fixes
+  1 Bug fix
   2 Localisation updates
 ----------------------------------------------------------------------
 4.3.2 vs 4.3.1
+
+  Bug fixes:
+
+  - Context menu not popping up in repeated segments
+  https://sourceforge.net/p/omegat/bugs/917/
 
   Localisation updates
 

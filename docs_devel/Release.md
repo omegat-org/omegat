@@ -142,9 +142,9 @@ Then log onto Bintray and publish the release.
 ## 13. Announce to News, user group
 
 - [OmegaT News](https://sourceforge.net/p/omegat/news/)
-  - [Example](https://sourceforge.net/p/omegat/news/2019/03/omegat-latest-version-415-update-4-released/)
+  - [Example](https://sourceforge.net/p/omegat/news/2019/11/omegat-latest-version-510-released/)
 - [User Group](https://omegat.org/support)
-  - [Example](https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/43871)
+  - [Example](https://sourceforge.net/p/omegat/mailman/omegat-users/thread/CAHvKJZsm4ZSOmvCOpfbtss0z9uo0z7q--bDowRkyAQ5e2zNJJg%40.../#msg36855627)
 
 
 ## 14. Cleanup

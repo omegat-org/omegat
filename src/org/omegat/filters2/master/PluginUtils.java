@@ -281,15 +281,11 @@ public final class PluginUtils {
             String[] classes = props.getProperty(key).split("\\s+");
             if (key.equals("plugin")) {
                 for (String clazz : classes) {
-                    if (loadClass(clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props));
-                    }
+                    loadClass(clazz, classLoader);
                 }
             } else {
                 for (String clazz : classes) {
-                    if (loadClassOld(key, clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props));
-                    }
+                    loadClassOld(key, clazz, classLoader);
                 }
             }
         }

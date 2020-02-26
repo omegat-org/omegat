@@ -30,6 +30,7 @@ import org.omegat.util.OStrings;
 
 /**
  * @author Aaron Madlon-Kay
+ * @author Briac Pilpre
  */
 @SuppressWarnings("serial")
 public class PluginsPreferencesPanel extends JPanel {
@@ -46,6 +47,7 @@ public class PluginsPreferencesPanel extends JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         panelInfo = new javax.swing.JPanel();
         messageLabel = new javax.swing.JLabel();
@@ -71,19 +73,29 @@ public class PluginsPreferencesPanel extends JPanel {
 
         add(panelInfo);
 
-        panelPluginsInfo.setLayout(new javax.swing.BoxLayout(panelPluginsInfo, javax.swing.BoxLayout.PAGE_AXIS));
+        panelPluginsInfo.setLayout(new java.awt.GridBagLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(labelTableTitle, OStrings.getString("PREFS_PLUGINS_LIST")); // NOI18N
-        panelPluginsInfo.add(labelTableTitle);
+        labelTableTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
+        panelPluginsInfo.add(labelTableTitle, gridBagConstraints);
 
         tablePluginsInfo.setAutoCreateRowSorter(true);
         tablePluginsInfo.setModel(new PluginInfoTableModel());
-        tablePluginsInfo.setToolTipText("");
         tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_CLASS).setPreferredWidth(100);
         tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
         scrollTable.setViewportView(tablePluginsInfo);
 
-        panelPluginsInfo.add(scrollTable);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPluginsInfo.add(scrollTable, gridBagConstraints);
 
         add(panelPluginsInfo);
     }// </editor-fold>//GEN-END:initComponents

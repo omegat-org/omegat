@@ -25,6 +25,7 @@
 
 package org.omegat.core.data;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -73,15 +74,15 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
     public String expandVariables(ProjectProperties props) {
         String localTemplate = this.template;
         localTemplate = localTemplate.replace(PROJECT_NAME, props.getProjectName());
-        localTemplate = localTemplate.replace(PROJECT_ROOT, props.getProjectRoot());
-        localTemplate = localTemplate.replace(SOURCE_ROOT, props.getSourceRoot());
-        localTemplate = localTemplate.replace(TARGET_ROOT, props.getTargetRoot());
-        localTemplate = localTemplate.replace(GLOSSARY_ROOT, props.getGlossaryRoot());
-        localTemplate = localTemplate.replace(WRITABLE_GLOSSARY_FILE, props.getWriteableGlossary());
-        localTemplate = localTemplate.replace(TM_ROOT, props.getTMRoot());
-        localTemplate = localTemplate.replace(TM_AUTO_ROOT, props.getTMAutoRoot());
-        localTemplate = localTemplate.replace(DICT_ROOT, props.getDictRoot());
-        localTemplate = localTemplate.replace(TM_OTHER_LANG_ROOT, props.getTMOtherLangRoot());
+        localTemplate = localTemplate.replace(PROJECT_ROOT, fixSeparatorChar(props.getProjectRoot()));
+        localTemplate = localTemplate.replace(SOURCE_ROOT, fixSeparatorChar(props.getSourceRoot()));
+        localTemplate = localTemplate.replace(TARGET_ROOT, fixSeparatorChar(props.getTargetRoot()));
+        localTemplate = localTemplate.replace(GLOSSARY_ROOT, fixSeparatorChar(props.getGlossaryRoot()));
+        localTemplate = localTemplate.replace(WRITABLE_GLOSSARY_FILE, fixSeparatorChar(props.getWriteableGlossary()));
+        localTemplate = localTemplate.replace(TM_ROOT, fixSeparatorChar(props.getTMRoot()));
+        localTemplate = localTemplate.replace(TM_AUTO_ROOT, fixSeparatorChar(props.getTMAutoRoot()));
+        localTemplate = localTemplate.replace(DICT_ROOT, fixSeparatorChar(props.getDictRoot()));
+        localTemplate = localTemplate.replace(TM_OTHER_LANG_ROOT, fixSeparatorChar(props.getTMOtherLangRoot()));
         localTemplate = localTemplate.replace(SOURCE_LANGUAGE, props.getSourceLanguage().getLanguage());
         localTemplate = localTemplate.replace(TARGET_LANGUAGE, props.getTargetLanguage().getLanguage());
         for (Entry<String, String> e : System.getenv().entrySet()) {
@@ -95,6 +96,10 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
         }
 
         return localTemplate;
+    }
+
+    public static String fixSeparatorChar(String path) {
+        return path.replace('/', File.separatorChar);
     }
 
     private static String fixEnvarName(String varname) {

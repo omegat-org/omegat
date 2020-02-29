@@ -35,6 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 
 /**
@@ -145,7 +146,7 @@ public abstract class VarExpansion<Param> {
             numHint = filePath.equals("") ? OStrings.getString("MATCHES_THIS_PROJECT") : "";
             numHint += " " + StringUtil.format(OStrings.getString("MATCHES_MULTI_FILE_HINT"), filePaths.length - 1);
         }
-        localTemplate = localTemplate.replace(VAR_FILE_PATH, filePath + numHint);
+        localTemplate = localTemplate.replace(VAR_FILE_PATH, CommandVarExpansion.fixSeparatorChar(filePath + numHint));
         try {
             filePath = Paths.get(baseDir).relativize(Paths.get(filePath)).toString();
         } catch (IllegalArgumentException ex) {

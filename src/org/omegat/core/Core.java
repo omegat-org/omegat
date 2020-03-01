@@ -246,6 +246,8 @@ public final class Core {
         Core.registerMarker(new BidiMarkerFactory.RLMMarker());
         Core.registerMarker(new BidiMarkerFactory.LRMMarker());
         Core.registerMarker(new BidiMarkerFactory.PDFMarker());
+        Core.registerMarker(new BidiMarkerFactory.RLEMarker());
+        Core.registerMarker(new BidiMarkerFactory.LREMarker());
         Core.registerMarker(new BidiMarkerFactory.LROMarker());
         Core.registerMarker(new BidiMarkerFactory.RLOMarker());
         Core.registerMarker(new ReplaceMarker());

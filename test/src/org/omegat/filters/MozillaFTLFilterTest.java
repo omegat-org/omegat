@@ -32,17 +32,17 @@ import org.omegat.filters2.text.mozftl.MozillaFTLFilter;
 public class MozillaFTLFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        parse(new MozillaFTLFilter(), "test/data/filters/MozillaFTL/file-MozillaFTLFilter.ftl");
+        parse(new MozillaFTLFilter(), "test/data/filters/MozillaFTL/MozillaFTLFilter.ftl");
     }
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new MozillaFTLFilter(), "test/data/filters/MozillaFTL/file-MozillaFTLFilter.ftl");
+        translateText(new MozillaFTLFilter(), "test/data/filters/MozillaFTL/MozillaFTLFilter.ftl");
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/MozillaFTL/file-MozillaFTLFilter.ftl";
+        String f = "test/data/filters/MozillaFTL/MozillaFTLFilter.ftl";
         IProject.FileInfo fi = loadSourceFiles(new MozillaFTLFilter(), f);
 
         checkMultiStart(fi, f);

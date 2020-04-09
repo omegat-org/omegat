@@ -34,6 +34,8 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
@@ -75,7 +77,7 @@ public final class PluginUtils {
     };
 
     protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<Class<?>>();
-    public static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
+    private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
     /** Private constructor to disallow creation */
     private PluginUtils() {
@@ -390,5 +392,9 @@ public final class PluginUtils {
         }
 
         return loadOk;
+    }
+
+    public static Collection<PluginInformation> getPluginInformations() {
+        return Collections.unmodifiableSet(PLUGIN_INFORMATIONS);
     }
 }

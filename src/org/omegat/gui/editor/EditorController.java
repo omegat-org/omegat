@@ -1216,7 +1216,7 @@ public class EditorController implements IEditor {
         }
 
         m_docSegList[displayedEntryIndex].createSegmentElement(false,
-                Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste));
+                Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste), defaultTranslation);
 
         // find all identical sources and redraw them
         for (int i = 0; i < m_docSegList.length; i++) {

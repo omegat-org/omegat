@@ -30,6 +30,7 @@ import org.omegat.util.OStrings;
 
 /**
  * @author Aaron Madlon-Kay
+ * @author Briac Pilpre
  */
 @SuppressWarnings("serial")
 public class PluginsPreferencesPanel extends JPanel {
@@ -46,10 +47,16 @@ public class PluginsPreferencesPanel extends JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        panelInfo = new javax.swing.JPanel();
         messageLabel = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         browsePluginsButton = new javax.swing.JButton();
+        panelPluginsInfo = new javax.swing.JPanel();
+        labelTableTitle = new javax.swing.JLabel();
+        scrollTable = new javax.swing.JScrollPane();
+        tablePluginsInfo = new javax.swing.JTable();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -57,17 +64,50 @@ public class PluginsPreferencesPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(messageLabel, OStrings.getString("PREFS_PLUGINS_AVAILABLE_ONLINE")); // NOI18N
         messageLabel.setAlignmentY(0.0F);
-        add(messageLabel);
-        add(filler1);
+        panelInfo.add(messageLabel);
+        panelInfo.add(filler1);
 
         org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
         browsePluginsButton.setAlignmentY(0.0F);
-        add(browsePluginsButton);
+        panelInfo.add(browsePluginsButton);
+
+        add(panelInfo);
+
+        panelPluginsInfo.setLayout(new java.awt.GridBagLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(labelTableTitle, OStrings.getString("PREFS_PLUGINS_LIST")); // NOI18N
+        labelTableTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
+        panelPluginsInfo.add(labelTableTitle, gridBagConstraints);
+
+        tablePluginsInfo.setAutoCreateRowSorter(true);
+        tablePluginsInfo.setModel(new PluginInfoTableModel());
+        tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_CLASS).setPreferredWidth(100);
+        tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
+        scrollTable.setViewportView(tablePluginsInfo);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        panelPluginsInfo.add(scrollTable, gridBagConstraints);
+
+        add(panelPluginsInfo);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton browsePluginsButton;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JLabel labelTableTitle;
     private javax.swing.JLabel messageLabel;
+    private javax.swing.JPanel panelInfo;
+    private javax.swing.JPanel panelPluginsInfo;
+    private javax.swing.JScrollPane scrollTable;
+    private javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

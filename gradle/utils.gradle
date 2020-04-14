@@ -58,11 +58,11 @@ ext {
 
     gitRemote = {
         def branch = gitBranch()
-        def remote = execGetOutput("git config branch.${branch}.remote")
+        def remote = execGetOutput("git config branch.${branch}.pushRemote")
         if (!remote.empty) {
             remote
         } else {
-            remote = execGetOutput("git config branch.${branch}.pushRemote")
+            remote = execGetOutput("git config branch.${branch}.remote")
         }
         if (!remote.empty) {
             remote

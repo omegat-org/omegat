@@ -59,7 +59,7 @@ public class MozillaFTLFilter extends AbstractFilter {
     // But, it also can be of type: .tooltiptext =
     // There always is something, then dot, then the key + space + = and
     // Nothing or space + value. For this reason, the last group is with * (0 or n times)
-    protected static final Pattern ATTRIBUTES = Pattern.compile("[ ]+\\.(.+) =(.*)");
+    protected static final Pattern ATTRIBUTES = Pattern.compile(" +\\.([^ ]+) =(.*)");
 
     /**
      * If true, will remove non-translated segments in the target files

@@ -213,11 +213,12 @@ public class MozillaFTLFilter extends AbstractFilter {
                         // outfile.write(lbpr.getLinebreak());
                         continue;
                     }
-                } else
+                } else {
                     key_attr = "";
-            } else
+                }
+            } else {
                 key_attr = "";
-
+            }
             if (entryAlignCallback != null) {
                 align.put(key, value);
             } else if (entryParseCallback != null) {

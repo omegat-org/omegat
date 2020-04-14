@@ -47,25 +47,21 @@ public class MozillaFTLFilterTest extends TestFilterBase {
 
         checkMultiStart(fi, f);
         checkMulti("Sync", "-sync-brand-short-name", null, null, null, null);
-        checkMulti("See <a data-l10n-name=\"logging\">HTTP Logging</a>\n" +
-"    for instructions on how to use this tool.", "log-tutorial", null, null, null, null);
-        checkMulti("When using Group Policy, this policy can only be set at the computer level.", "gpo-machine-only.title", null, null, null, "# 'gpo-machine-only' policies are related to the Group Policy features");
-        checkMulti("{ $total ->\n" +
-"        [one] { $total } star\n" +
-"       *[other] { $total } stars\n" +
-"    }","cfr-doorhanger-extension-rating.tooltiptext", null, null, null, "# Variables:\n" +
-"#   $total (Number) - The rating of the add-on from 1 to 5");
-        checkMulti("{ $total ->\n" +
-"      [one] { $total } user\n" +
-"     *[other] { $total } users\n" +
-"  }", "cfr-doorhanger-extension-total-users", null, null, null, "# Variables:\n" +
-"#   $total (Number) - The total number of users using the add-on");
-        checkMulti("{ PLATFORM() ->\n" +
-"        [macos] Show in Finder\n" +
-"        [windows] Open Folder\n" +
-"       *[other] Open Directory\n" +
-"    }", "profiles-opendir", null, null, null, null);
+        checkMulti(
+                "See <a data-l10n-name=\"logging\">HTTP Logging</a>\n    for instructions on how to use this tool.",
+                "log-tutorial", null, null, null, null);
+        checkMulti("When using Group Policy, this policy can only be set at the computer level.",
+                "gpo-machine-only.title", null, null, null,
+                "# 'gpo-machine-only' policies are related to the Group Policy features");
+        checkMulti("{ $total ->\n        [one] { $total } star\n       *[other] { $total } stars\n    }",
+                "cfr-doorhanger-extension-rating.tooltiptext", null, null, null,
+                "# Variables:\n" + "#   $total (Number) - The rating of the add-on from 1 to 5");
+        checkMulti("{ $total ->\n      [one] { $total } user\n     *[other] { $total } users\n  }",
+                "cfr-doorhanger-extension-total-users", null, null, null,
+                "# Variables:\n" + "#   $total (Number) - The total number of users using the add-on");
+        checkMulti(
+                "{ PLATFORM() ->\n        [macos] Show in Finder\n        [windows] Open Folder\n       *[other] Open Directory\n    }",
+                "profiles-opendir", null, null, null, null);
         checkMultiEnd();
     }
 }
-

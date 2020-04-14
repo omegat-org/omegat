@@ -58,7 +58,8 @@ public class MozillaFTLFilter extends AbstractFilter {
     // For the entries with attributes. Example: .title = When using
     // But, it also can be of type: .tooltiptext =
     // There always is something, then dot, then the key + space + = and
-    // Nothing or space + value. For this reason, the last group is with * (0 or n times)
+    // Nothing or space + value. For this reason, the last group is with * (0 or
+    // n times)
     protected static final Pattern ATTRIBUTES = Pattern.compile(" +\\.([^ ]+) =(.*)");
 
     /**
@@ -66,7 +67,6 @@ public class MozillaFTLFilter extends AbstractFilter {
      */
     private boolean removeStringsUntranslated = false;
 
-    
     public String getFileFormatName() {
         return OStrings.getString("MOZFTL_FILTER_NAME");
     }
@@ -80,7 +80,8 @@ public class MozillaFTLFilter extends AbstractFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] {new Instance("*.ftl", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
+        return new Instance[] {
+                new Instance("*.ftl", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 
     /**
@@ -102,21 +103,22 @@ public class MozillaFTLFilter extends AbstractFilter {
      * Doing the processing of the file...
      */
     @Override
-    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc) throws IOException {
+    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc)
+            throws IOException {
 
         // Parameter in the options of filter to customize the target file
         removeStringsUntranslated = processOptions != null
                 && "true".equalsIgnoreCase(processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED));
 
         String str;
-	String comments = null;
+        String comments = null;
         int identation = 1;
         String key = null;
         String k = null;
         String key_attr = "";
         String value = null;
         boolean multiline = false;
-        
+
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader);
         str = lbpr.readLine();
         while (str != null) {
@@ -126,26 +128,25 @@ public class MozillaFTLFilter extends AbstractFilter {
             if (trimmed.isEmpty()) {
                 outfile.write(str);
                 outfile.write(lbpr.getLinebreak());
-		// Delete the comments
-		comments = null;
+                // Delete the comments
+                comments = null;
                 str = lbpr.readLine();
                 continue;
             }
 
-	    // skipping comments
-	    int firstCp = trimmed.codePointAt(0);
-	    if (firstCp == '#') {
-	        outfile.write(str);
-	        outfile.write(lbpr.getLinebreak());
-	        // Save the comments
-	        comments = (comments == null ? str : comments + "\n" + str);
+            // skipping comments
+            int firstCp = trimmed.codePointAt(0);
+            if (firstCp == '#') {
+                outfile.write(str);
+                outfile.write(lbpr.getLinebreak());
+                // Save the comments
+                comments = (comments == null ? str : comments + "\n" + str);
                 str = lbpr.readLine();
-	        continue;
-	    }
+                continue;
+            }
 
             // Variable to check if a segment is translated
             boolean translatedSegment = true;
-
 
             // key=value pairs
             int equalsPos = str.indexOf('=');
@@ -178,9 +179,9 @@ public class MozillaFTLFilter extends AbstractFilter {
                 } else {
                     identation = (identation < ide ? identation : ide);
                 }
-            // writing out everything before = (and = itself)
+                // writing out everything before = (and = itself)
             } else {
-                //outfile.write(str.substring(0, afterEqualsPos));
+                // outfile.write(str.substring(0, afterEqualsPos));
                 if (k == null) {
                     k = "";
                 } else {
@@ -196,8 +197,8 @@ public class MozillaFTLFilter extends AbstractFilter {
                 value = aux;
             }
             if (!multiline) {
-                key = (Objects.equals(key,key_attr) ? key : key_attr + key);
-            }            
+                key = (Objects.equals(key, key_attr) ? key : key_attr + key);
+            }
             str = lbpr.readLine();
             if (str != null && !str.isEmpty()) {
                 int cp = str.codePointAt(0);
@@ -206,17 +207,15 @@ public class MozillaFTLFilter extends AbstractFilter {
                     continue;
                 }
                 if (cp == ' ') {
-                    key_attr = (Objects.equals(key_attr,"") ? key : key_attr);
+                    key_attr = (Objects.equals(key_attr, "") ? key : key_attr);
                     if (value.isEmpty()) {
                         value = null;
-                        //outfile.write(lbpr.getLinebreak());
+                        // outfile.write(lbpr.getLinebreak());
                         continue;
                     }
-                }
-                else
+                } else
                     key_attr = "";
-            }
-            else
+            } else
                 key_attr = "";
 
             if (entryAlignCallback != null) {
@@ -247,7 +246,8 @@ public class MozillaFTLFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, org.omegat.filters2.FilterContext fc) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile,
+            org.omegat.filters2.FilterContext fc) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 

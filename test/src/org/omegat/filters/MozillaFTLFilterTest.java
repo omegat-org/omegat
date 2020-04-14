@@ -55,10 +55,10 @@ public class MozillaFTLFilterTest extends TestFilterBase {
                 "# 'gpo-machine-only' policies are related to the Group Policy features");
         checkMulti("{ $total ->\n        [one] { $total } star\n       *[other] { $total } stars\n    }",
                 "cfr-doorhanger-extension-rating.tooltiptext", null, null, null,
-                "# Variables:\n" + "#   $total (Number) - The rating of the add-on from 1 to 5");
+                "# Variables:\n#   $total (Number) - The rating of the add-on from 1 to 5");
         checkMulti("{ $total ->\n      [one] { $total } user\n     *[other] { $total } users\n  }",
                 "cfr-doorhanger-extension-total-users", null, null, null,
-                "# Variables:\n" + "#   $total (Number) - The total number of users using the add-on");
+                "# Variables:\n#   $total (Number) - The total number of users using the add-on");
         checkMulti(
                 "{ PLATFORM() ->\n        [macos] Show in Finder\n        [windows] Open Folder\n       *[other] Open Directory\n    }",
                 "profiles-opendir", null, null, null, null);

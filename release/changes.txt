@@ -1,4 +1,33 @@
 ----------------------------------------------------------------------
+ OmegaT 5.3.0
+----------------------------------------------------------------------
+  2 Enhancements
+  3 Bug fixes
+  0 Localisation updates
+----------------------------------------------------------------------
+5.3.0 vs 5.2.0
+
+  Implemented requests:
+
+  - Support reading metadata from plugins and display in UI
+  https://sourceforge.net/p/omegat/feature-requests/1434/
+
+  - Mozilla .ftl files filter
+  https://sourceforge.net/p/omegat/feature-requests/1479/
+
+  Bug fixes:
+
+  - Wrong directory separator character used in external command
+  placeholders on Windows
+  https://sourceforge.net/p/omegat/bugs/984/
+
+  - RLE and LRE control characters not visible in editor
+  https://sourceforge.net/p/omegat/bugs/988/
+
+  - "Use as default translation" does not work
+  https://sourceforge.net/p/omegat/bugs/987/
+
+----------------------------------------------------------------------
  OmegaT 5.2.0 (2020-01-26)
 ----------------------------------------------------------------------
   3 Enhancements

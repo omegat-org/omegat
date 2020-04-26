@@ -387,7 +387,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             if (thebest.scores[0].score >= percentage) {
                 SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
                 TMXEntry te = Core.getProject().getTranslationInfo(currentEntry);
-                if (!te.isTranslated()) {
+                if (te != null && !te.isTranslated()) {
                     String prefix = "";
 
                     if (!Preferences.getPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT).isEmpty()) {

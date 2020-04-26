@@ -214,9 +214,12 @@
     <guimenuitem>Ctrl+R</guimenuitem> to replace the target field with the match or use
     <guimenuitem>Ctrl+I </guimenuitem> to insert it at the cursor position.</para>
 
-    <para>The matching percentage is roughly equivalent to taking the number
-    of common words in the matched and the matching segment and dividing by
-    the number of words in the longer of the two. The selected fuzzy match is
+    <para>three matching percentages are in order: the percentage calculated with
+    stemming and ignoring tags and numbers (generally the highest), the percentage
+    calculated without stemming and still ignoring tags and numbers (generally slightly
+    lower) and the percentage calculated with the full text, including tags and numbers
+    (generally the lowest).</para>
+    <para>The selected fuzzy match is
     highlighted in bold, words that are missing in the segment you are
     translating are colored blue and words adjacent to the missing parts
     green. In the above example the source segment is <emphasis role="bold">Context menu command</emphasis>. The top match is 100%,

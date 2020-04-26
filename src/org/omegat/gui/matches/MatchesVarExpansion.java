@@ -130,7 +130,9 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             if (diffPos != -1 && ste != null) {
                 Render diffRender = DiffDriver.render(match.source, ste.getSrcText(), true);
                 r.diffInfo.put(diffPos, diffRender.formatting);
-                r.text = r.text.replace(VAR_DIFF, diffRender.text);
+                if (diffRender.text != null) {
+                    r.text = r.text.replace(VAR_DIFF, diffRender.text);
+                }
             }
         }
     };
@@ -142,7 +144,9 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             if (diffPos != -1 && ste != null) {
                 Render diffRender = DiffDriver.render(ste.getSrcText(), match.source, true);
                 r.diffInfo.put(diffPos, diffRender.formatting);
-                r.text = r.text.replace(VAR_DIFF_REVERSED, diffRender.text);
+                if (diffRender.text != null) {
+                    r.text = r.text.replace(VAR_DIFF_REVERSED, diffRender.text);
+                }
             }
         }
     };

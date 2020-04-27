@@ -230,6 +230,17 @@
 
     <para>It is possible to modify the sort order of the three matches but not
     the percentage which is used to select the fize fuzzy matches.</para>
+    
+    <para>The selected fuzzy match is highlighted in bold, words that are
+    missing in the segment you are translating are colored blue and words
+    adjacent to the missing parts green. In the above example the source segment
+    is <emphasis role="bold">Context menu command</emphasis>. The top match is
+    100%, because all words match. So do the next two matches, and the match #4
+    is similar, but different. The line with the matching percentage also
+    includes the name of the translation memory containing the match. If there's
+    no file name displayed, the source is the internal project translation
+    memory. Orphan segments (the match #2) describe segments in the default
+    project translation memory that have no corresponding source segment.</para>
   </section>
 
   <section>

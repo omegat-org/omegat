@@ -457,6 +457,35 @@ installMacDist {
     }
 }
 
+def hunspellJar = configurations.runtimeClasspath.fileCollection {
+    it.name == 'hunspell-native-libs'
+}.singleFile
+
+task hunspellJarSignedContents(type: Sync) {
+    onlyIf {
+        // Set this in e.g. local.properties
+        condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
+    }
+    from zipTree(hunspellJar)
+    destinationDir = file("$buildDir/hunspell")
+    doLast {
+        def jnilibs = fileTree(dir: destinationDir, include: '**/*.jnilib').files
+        exec {
+            commandLine('codesign', '--deep', '--force',
+                        '--sign', project.property('macCodesignIdentity'),
+                        '--timestamp',
+                        '--options', 'runtime',
+                        '--entitlements', file('release/mac-specific/java.entitlements'),
+                        *jnilibs.toList())
+        }
+    }
+}
+
+task hunspellSignedJar(type: Jar) {
+    from hunspellJarSignedContents.outputs
+    archiveFileName = hunspellJar.name
+}
+
 task installMacSignedDist(type: Sync) {
     description = 'Build the signed Mac distribution. Requires an Apple Developer Account.'
     onlyIf {
@@ -464,6 +493,10 @@ task installMacSignedDist(type: Sync) {
         condition(project.hasProperty('macCodesignIdentity'), 'Code signing property not set')
     }
     with distributions.mac.contents
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    from(hunspellSignedJar.outputs) {
+        into 'OmegaT.app/Contents/Java/lib'
+    }
     destinationDir = file("${buildDir}/install/${applicationName}-macSigned")
     doFirst {
         delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"

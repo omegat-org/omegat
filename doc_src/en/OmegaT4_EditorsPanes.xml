@@ -214,21 +214,22 @@
     <guimenuitem>Ctrl+R</guimenuitem> to replace the target field with the match or use
     <guimenuitem>Ctrl+I </guimenuitem> to insert it at the cursor position.</para>
 
-    <para>three matching percentages are in order: the percentage calculated with
-    stemming and ignoring tags and numbers (generally the highest), the percentage
-    calculated without stemming and still ignoring tags and numbers (generally slightly
-    lower) and the percentage calculated with the full text, including tags and numbers
-    (generally the lowest).</para>
-    <para>The selected fuzzy match is
-    highlighted in bold, words that are missing in the segment you are
-    translating are colored blue and words adjacent to the missing parts
-    green. In the above example the source segment is <emphasis role="bold">Context menu command</emphasis>. The top match is 100%,
-    because all words match. So do the next two matches, and the match #4 is
-    similar, but different. The line with the matching percentage also
-    includes the name of the translation memory containing the match. If there's no file name displayed,
-    the source is the internal project translation memory. Orphan
-    segments (the match #2) describe segments in the default project
-    translation memory that have no corresponding source segment.</para>
+    <para>The three matching percentages are in the following order:
+    <itemizedlist>
+      <listitem>
+	the percentage calculated with stemming<footnote><para>See <link xlink:href="https://en.wikipedia.org/wiki/Stemming">https://en.wikipedia.org/wiki/Stemming</link></para></footnote>
+	and ignoring tags and numbers (generally the highest)</listitem>>
+      <listitem>
+	the percentage calculated without stemming and still ignoring tags and
+	numbers (generally slightly lower)</listitem>>
+      <listitem>
+	the percentage calculated with the full text, including tags and numbers
+	(generally the lowest)</listitem>>
+    </itemizedlist>
+    </para>
+
+    <para>It is possible to modify the sort order of the three matches but not
+    the percentage which is used to select the fize fuzzy matches.</para>
   </section>
 
   <section>

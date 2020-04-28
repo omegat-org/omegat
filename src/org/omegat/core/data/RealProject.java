@@ -1228,6 +1228,14 @@ public class RealProject implements IProject {
                 prepare.source = ste.getSrcText();
                 // project with default translations
                 if (config.isSupportDefaultTranslations()) {
+                    // bug#969 - Alternative translations were not taken into account
+                    // if no default translation is set.
+                    TMXEntry en = projectTMX.getMultipleTranslation(ste.getKey());
+                    if (en != null) {
+                        prepare.translation = ste.getSourceTranslation();
+                        projectTMX.setTranslation(ste, en, false);
+                        continue;
+                    }
                     // can we import as default translation ?
                     TMXEntry enDefault = projectTMX.getDefaultTranslation(ste.getSrcText());
                     if (enDefault == null) {

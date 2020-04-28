@@ -13,6 +13,7 @@
                2015 Aaron Madlon-Kay
                2017-2018 Didier Briel
                2019 Thomas Cordonnier
+               2020 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -1275,7 +1276,8 @@ public class RealProject implements IProject {
                 return;
             }
             // create new translation memories map
-            Map<String, ExternalTMX> newTransMemories = new TreeMap<>(transMemories);
+            Map<String, ExternalTMX> newTransMemories = new TreeMap<>(new FileUtil.TmFileComparator());
+            newTransMemories.putAll(transMemories);
             if (file.exists()) {
                 try {
                     ExternalTMX newTMX = ExternalTMFactory.load(file);

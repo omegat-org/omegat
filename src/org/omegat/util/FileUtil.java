@@ -8,6 +8,7 @@
                2012 Alex Buloichik, Didier Briel
                2014 Alex Buloichik, Aaron Madlon-Kay
                2015-2016 Aaron Madlon-Kay
+               2020 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -61,6 +62,7 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.omegat.core.Core;
 
 /**
  * Files processing utilities.
@@ -558,5 +560,43 @@ public final class FileUtil {
             }
         }
         return working;
+    }
+
+    /**
+     * Comparator to sort the tm/ folder alphabetically, but always put tm/enforce
+     * and tm/auto results before other similar % matches.
+     */
+    public static class TmFileComparator implements Comparator<String> {
+        String autoPrefix = OConsts.AUTO_TM + "/";
+        String enforcePrefix = OConsts.AUTO_ENFORCE_TM + "/";
+
+        @Override
+        public int compare(String n1, String n2) {
+            String r1, r2;
+            try {
+                File tmRoot = Core.getProject().getProjectProperties().getTmDir().getAsFile();
+                r1 = FileUtil.computeRelativePath(tmRoot, new File(n1));
+                r2 = FileUtil.computeRelativePath(tmRoot, new File(n2));
+            } catch (IOException e) {
+                return n1.compareTo(n2);
+            }
+            int c;
+            if (r1.startsWith(enforcePrefix) && r2.startsWith(enforcePrefix)) {
+                c = n1.compareTo(n2);
+            } else if (r1.startsWith(enforcePrefix)) {
+                c = -1;
+            } else if (r2.startsWith(enforcePrefix)) {
+                c = 1;
+            } else if (r1.startsWith(autoPrefix) && r2.startsWith(autoPrefix)) {
+                c = n1.compareTo(n2);
+            } else if (r1.startsWith(autoPrefix)) {
+                c = -1;
+            } else if (r2.startsWith(autoPrefix)) {
+                c = 1;
+            } else {
+                c = n1.compareTo(n2);
+            }
+            return c;
+        }
     }
 }

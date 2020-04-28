@@ -5,6 +5,7 @@
 
  Copyright (C) 2014 Alex Buloichik, Didier Briel
                2019 Aaron Madlon-Kay
+               2020 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -91,16 +92,12 @@ public class ImportFromAutoTMX {
                         // TMX entry is an alternative translation that does not match this STE.
                         continue;
                     }
-                    if (isEnforcedTMX) {
+                    if (isEnforcedTMX && (!existTranslation.isTranslated()
+                            || existTranslation.linked != TMXEntry.ExternalLinked.xENFORCED)) {
+                        // If there's no translation or if the existing translation doesn't
+                        // come from an enforced TM.
                         setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xENFORCED);
-                    } else if (existTranslation.isTranslated()) { // default translation already exist
-                        if (existTranslation.linked == TMXEntry.ExternalLinked.xAUTO
-                                && !Objects.equals(existTranslation.translation, e.translation)) {
-                            // translation already from auto and really changed or translation comes
-                            // from the enforce folder
-                            setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
-                        }
-                    } else {
+                    } else if (!existTranslation.isTranslated()) {
                         // default translation not exist - use from auto tmx
                         setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
                     }

@@ -63,4 +63,9 @@ public class SpellCheckerJMySpell implements ISpellCheckerProvider {
 
     public void learnWord(String word) {
     }
+
+    @Override
+    public boolean isLanguageSupported(String language) {
+        return true;
+    }
 }

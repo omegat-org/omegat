@@ -6,6 +6,7 @@
  Copyright (C) 2007 Zoltan Bartko, Alex Buloichik
                2009 Didier Briel
                2015 Aaron Madlon-Kay
+               2020 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -52,6 +53,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -67,6 +69,7 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Briac Pilpre
  */
 public class SpellChecker implements ISpellChecker {
 
@@ -148,8 +151,21 @@ public class SpellChecker implements ISpellChecker {
     }
 
     private static Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
-        // initialize the spell checker - get the data from the preferences
+        
+        // Try to use a custom spell checker if one is available.
+        for (Class<?> customSpellChecker : PluginUtils.getSpellCheckClasses()) {
+            try {
+                ISpellCheckerProvider spellChecker = (ISpellCheckerProvider) customSpellChecker.newInstance();
+                if (spellChecker.isLanguageSupported(language)) {
+                    return Optional.of(spellChecker);
+                }
+            } catch (Exception e) {
+                Log.log("Error when trying to load the custom spell checker '" + customSpellChecker + "' for language '"
+                        + language + "'.");
+            }
+        }
 
+        // initialize the spell checker - get the data from the preferences
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 DEFAULT_DICTIONARY_DIR.getPath());
 

@@ -77,4 +77,9 @@ public class SpellCheckerLangToolHunspell implements ISpellCheckerProvider {
         dict.destroy();
         Hunspell.getInstance().destroyDictionary(dictBasename);
     }
+
+    @Override
+    public boolean isLanguageSupported(String language) {
+        return true;
+    }
 }

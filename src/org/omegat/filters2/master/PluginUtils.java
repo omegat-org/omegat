@@ -73,7 +73,7 @@ public final class PluginUtils {
     public static final String PLUGINS_LIST_FILE = "Plugins.properties";
 
     enum PluginType {
-        FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, UNKNOWN
+        FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, SPELLCHECK, UNKNOWN
     };
 
     protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<Class<?>>();
@@ -155,6 +155,10 @@ public final class PluginUtils {
 
     public static List<Class<?>> getTokenizerClasses() {
         return TOKENIZER_CLASSES;
+    }
+
+    public static List<Class<?>> getSpellCheckClasses() {
+        return SPELLCHECK_CLASSES;
     }
 
     public static Class<?> getTokenizerClassForLanguage(Language lang) {
@@ -242,6 +246,8 @@ public final class PluginUtils {
     protected static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
 
     protected static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
+
+    protected static final List<Class<?>> SPELLCHECK_CLASSES = new ArrayList<>();
 
     protected static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
 
@@ -376,6 +382,10 @@ public final class PluginUtils {
             break;
         case MACHINETRANSLATOR:
             MACHINE_TRANSLATION_CLASSES.add(classLoader.loadClass(key));
+            Log.logInfoRB("PLUGIN_LOAD_OK", key);
+            break;
+        case SPELLCHECK:
+            SPELLCHECK_CLASSES.add(classLoader.loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case BASE:

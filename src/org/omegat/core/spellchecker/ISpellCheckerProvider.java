@@ -54,4 +54,8 @@ public interface ISpellCheckerProvider {
      * Destroy checker.
      */
     void destroy();
+
+    /** Is the target language supported by this spellchecker */
+    boolean isLanguageSupported(String language);
+
 }

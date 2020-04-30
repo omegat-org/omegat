@@ -27,23 +27,56 @@ package org.omegat.core.spellchecker;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.CharacterCodingException;
+import java.util.Collections;
 import java.util.List;
 
 import org.languagetool.rules.spelling.hunspell.DumontsHunspellDictionary;
 import org.languagetool.rules.spelling.hunspell.HunspellDictionary;
+import org.languagetool.rules.spelling.hunspell.Hunspell;
+import org.omegat.util.Log;
+import org.omegat.util.OConsts;
+import org.omegat.util.Preferences;
 
 /**
  * A thin wrapper around the LanguageTool Hunspell implementation (which itself
  * wraps native libs)
  *
  * @author Aaron Madlon-Kay
+ * @author Briac Pilpre
  */
 public class SpellCheckerLangToolHunspell implements ISpellCheckerProvider {
+    private String dictBasename;
+    private HunspellDictionary dict;
 
-    private final HunspellDictionary dict;
+    @Override
+    public void init(String language) throws SpellCheckerException {
+        // check that the dict exists
+        String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
+                SpellChecker.DEFAULT_DICTIONARY_DIR.getPath());
 
-    public SpellCheckerLangToolHunspell(File dictName, File affixName) {
+        File dictBasename = new File(dictionaryDir, language);
+        File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
+        File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
+
         this.dict = new DumontsHunspellDictionary(dictName.toPath(), affixName.toPath());
+        if (!SpellChecker.isValidFile(affixName) || !SpellChecker.isValidFile(dictionaryName)) {
+            // If we still don't have a dictionary then return
+            throw new SpellCheckerException("No dictionary found at " + affixName + " or " + dictionaryName);
+        }
+
+        this.dictBasename = dictBasename.getPath();
+        try {
+            this.dict = Hunspell.getInstance().getDictionary(this.dictBasename);
+        } catch (UnsatisfiedLinkError | UnsupportedOperationException | IOException e) {
+            throw new SpellCheckerException("Error loading hunspell dictionary", e);
+        }
+
+        Log.log("Initialized LanguageTool Hunspell spell checker for language '" + language + "' dictionary "
+                + dictBasename);
     }
 
     @Override

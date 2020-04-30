@@ -6,6 +6,7 @@
  Copyright (C) 2007 Zoltan Bartko, Alex Buloichik
                2009 Didier Briel
                2015 Aaron Madlon-Kay
+               2020 Briac Pilpre
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -47,11 +48,14 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 import org.languagetool.JLanguageTool;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -67,6 +71,7 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Briac Pilpre
  */
 public class SpellChecker implements ISpellChecker {
 
@@ -99,6 +104,18 @@ public class SpellChecker implements ISpellChecker {
 
     /** Creates a new instance of SpellChecker */
     public SpellChecker() {
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+
+            @Override
+            public void onApplicationStartup() {
+                Core.registerSpellCheckClass(SpellCheckerLangToolHunspell.class);
+                Core.registerSpellCheckClass(SpellCheckerJMySpell.class);
+            }
+
+            @Override
+            public void onApplicationShutdown() {
+            }
+        });
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 switch (eventType) {
@@ -149,10 +166,10 @@ public class SpellChecker implements ISpellChecker {
 
     private static Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
         // initialize the spell checker - get the data from the preferences
-
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 DEFAULT_DICTIONARY_DIR.getPath());
 
+        File dictBasename = new File(dictionaryDir, language);
         File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 
@@ -160,7 +177,6 @@ public class SpellChecker implements ISpellChecker {
             // Try installing from bundled resources
             installBundledDictionary(dictionaryDir, language);
         }
-
         if (!dictionaryName.exists()) {
             // Try installing from LanguageTool bundled resources
             installLTBundledDictionary(dictionaryDir, language);
@@ -171,27 +187,23 @@ public class SpellChecker implements ISpellChecker {
             return Optional.empty();
         }
 
-        try {
-            ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictionaryName, affixName);
-            Log.log("Initialized LanguageTool Hunspell spell checker for language '" + language
-                    + "' dictionary " + dictionaryName);
-            return Optional.of(result);
-        } catch (Throwable ex) {
-            Log.log("Error loading hunspell: " + ex.getMessage());
-        }
-        try {
-            ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName.getPath(),
-                    affixName.getPath());
-            Log.log("Initialized JMySpell spell checker for language '" + language + "' dictionary "
-                    + dictionaryName);
-            return Optional.of(result);
-        } catch (Exception ex) {
-            Log.log("Error loading jmyspell: " + ex.getMessage());
+        // Try to use a custom spell checker if one is available.
+        for (Class<?> customSpellChecker : PluginUtils.getSpellCheckClasses()) {
+            try {
+                ISpellCheckerProvider spellChecker = (ISpellCheckerProvider) customSpellChecker.getDeclaredConstructor().newInstance();
+                spellChecker.init(language);
+                return Optional.of(spellChecker);
+            } catch (SpellCheckerException e) {
+                Log.log("Spell checker " + customSpellChecker + " doesn't support language " + language + ": " + e.getMessage());
+            } catch (Exception e) {
+                Log.log("Error when trying to load the custom spell checker '" + customSpellChecker + "' for language '"
+                        + language + "'.");
+            }
         }
         return Optional.empty();
     }
 
-    private static boolean isValidFile(File file) {
+    protected static boolean isValidFile(File file) {
         try {
             if (!file.exists()) {
                 return false;
@@ -418,7 +430,8 @@ public class SpellChecker implements ISpellChecker {
     }
 
     /**
-     * Normalize the orthography of the word by replacing alternative characters with "canonical" ones.
+     * Normalize the orthography of the word by replacing
+     * alternative characters with "canonical" ones.
      */
     private static String normalize(String word) {
         // U+2019 RIGHT SINGLE QUOTATION MARK to U+0027 APOSTROPHE

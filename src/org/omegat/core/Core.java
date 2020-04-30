@@ -39,6 +39,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.core.spellchecker.ISpellCheckerProvider;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
@@ -321,6 +322,10 @@ public final class Core {
 
     public static void registerTokenizerClass(Class<? extends ITokenizer> clazz) {
         PluginUtils.getTokenizerClasses().add(clazz);
+    }
+
+    public static void registerSpellCheckClass(Class<? extends ISpellCheckerProvider> clazz) {
+        PluginUtils.getSpellCheckClasses().add(clazz);
     }
 
     /**

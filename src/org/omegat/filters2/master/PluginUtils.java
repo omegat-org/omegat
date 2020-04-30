@@ -112,6 +112,9 @@ public final class PluginUtils {
         THEME("theme"),
         /** Misc plugins, such as GUI extension like web browser spport. */
         MISCELLANEOUS("miscellaneous"),
+
+        SPELLCHECK("spellcheck"),
+
         /** When plugin does not defined any of above. */
         UNKNOWN("Undefined");
 
@@ -339,6 +342,10 @@ public final class PluginUtils {
         return TOKENIZER_CLASSES;
     }
 
+    public static List<Class<?>> getSpellCheckClasses() {
+        return SPELLCHECK_CLASSES;
+    }
+
     public static Class<?> getTokenizerClassForLanguage(Language lang) {
         if (lang == null) {
             return DefaultTokenizer.class;
@@ -431,6 +438,8 @@ public final class PluginUtils {
     private static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
+
+    private static final List<Class<?>> SPELLCHECK_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
 

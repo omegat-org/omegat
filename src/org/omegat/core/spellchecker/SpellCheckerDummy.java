@@ -4,6 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2020 Briac Pilpre
+               Home page: http://www.omegat.org/
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,19 +35,29 @@ import java.util.List;
  * dictionary not exist.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Briac Pilpre
  */
 public class SpellCheckerDummy implements ISpellCheckerProvider {
+
+    @Override
+    public void init(String language) throws SpellCheckerException {
+    }
+
+    @Override
     public void destroy() {
     }
 
+    @Override
     public boolean isCorrect(String word) {
         return true;
     }
 
+    @Override
     public List<String> suggest(String word) {
         return Collections.emptyList();
     }
 
+    @Override
     public void learnWord(String word) {
     }
 }

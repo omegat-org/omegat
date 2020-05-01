@@ -123,6 +123,10 @@ public class RepositoriesMappingController {
         modelRepo = new AbstractTableModel() {
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
+                if (rowIndex >= listRepo.size()) {
+                    return null;
+                }
+
                 RowRepo r = listRepo.get(rowIndex);
                 switch (columnIndex) {
                 case 0:
@@ -192,6 +196,10 @@ public class RepositoriesMappingController {
 
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
+                if (rowIndex >= listMapping.size()) {
+                    return null;
+                }
+
                 RowMapping r = listMapping.get(rowIndex);
                 switch (columnIndex) {
                 case 0:

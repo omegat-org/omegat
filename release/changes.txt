@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   2 Enhancements
   3 Bug fixes
-  0 Localisation updates
+  1 Localisation updates
 ----------------------------------------------------------------------
 5.3.0 vs 5.2.0
 
@@ -26,6 +26,10 @@
 
   - "Use as default translation" does not work
   https://sourceforge.net/p/omegat/bugs/987/
+
+  Localisation Updates:
+
+  - Ukrainian localisation updated to 5.2.0 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 5.2.0 (2020-01-26)

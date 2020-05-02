@@ -25,6 +25,7 @@
 
 package org.omegat.core.team2;
 
+import org.omegat.core.team2.impl.FileRepository;
 import org.omegat.core.team2.impl.GITRemoteRepository2;
 import org.omegat.core.team2.impl.HTTPRemoteRepository;
 import org.omegat.core.team2.impl.SVNRemoteRepository2;
@@ -46,6 +47,8 @@ public final class RemoteRepositoryFactory {
             return new GITRemoteRepository2();
         } else if ("http".equals(type)) {
             return new HTTPRemoteRepository();
+        } else if ("file".equals(type)) {
+            return new FileRepository();
         } else {
             throw new RuntimeException("Unknown repository type: " + type);
         }

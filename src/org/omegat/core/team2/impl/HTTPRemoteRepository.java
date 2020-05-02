@@ -124,12 +124,15 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
 
     @Override
     public void addForCommit(String path) throws Exception {
-        throw new RuntimeException("Not supported");
+        Log.logDebug(LOGGER,
+                String.format("Cannot add files for commit for HTTP repositories. Skipping \"%s\".", path));
     }
 
     @Override
     public String commit(String[] onVersions, String comment) throws Exception {
-        throw new RuntimeException("Not supported");
+        Log.logDebug(LOGGER, "Commit not supported for HTTP repositories.");
+
+        return null;
     }
 
     /**

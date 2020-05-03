@@ -57,8 +57,7 @@ public class XMLTag extends Tag {
         StringBuilder buf = new StringBuilder();
 
         boolean isRtl = EditorUtils.isRTL(targetLanguage.getLanguageCode());
-        boolean differentDir = isRtl != EditorUtils
-                .isRTL(Core.getProject().getProjectProperties().getSourceLanguage().getLanguageCode());
+        boolean differentDir = isDifferentDirection(isRtl);
         boolean isSpecialDocxTagLTR = isSpecialDocxBidiTag(false);
         boolean isSpecialDocxTagRTL = isSpecialDocxBidiTag(true);
 
@@ -128,6 +127,16 @@ public class XMLTag extends Tag {
         buf.append(">");
 
         return buf.toString();
+    }
+
+    private boolean isDifferentDirection(boolean isRtl) {
+        Language sourceLanguage = Core.getProject().getProjectProperties().getSourceLanguage();
+
+        if (sourceLanguage == null) {
+            return false;
+        }
+
+        return isRtl != EditorUtils.isRTL(sourceLanguage.getLanguageCode());
     }
 
     private boolean isSpecialDocxBidiTag(boolean complex) {

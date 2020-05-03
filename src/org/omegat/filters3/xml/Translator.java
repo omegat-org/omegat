@@ -121,4 +121,6 @@ interface Translator {
     boolean isInIgnored();
 
     Language getTargetLanguage();
+
+    Language getSourceLanguage();
 }

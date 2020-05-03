@@ -27,7 +27,6 @@
 
 package org.omegat.filters3.xml;
 
-import org.omegat.core.Core;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Tag;
 import org.omegat.util.Language;
@@ -40,13 +39,16 @@ import org.omegat.util.Language;
  * @author Briac Pilpre
  */
 public class XMLTag extends Tag {
+    private Language sourceLanguage;
+    private Language targetLanguage;
+
     /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, String shortcut, Type type, org.xml.sax.Attributes attributes, Language targetLanguage) {
+    public XMLTag(String tag, String shortcut, Type type, org.xml.sax.Attributes attributes, Translator translator) {
         super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
-        this.targetLanguage = targetLanguage;
+        this.sourceLanguage = translator.getSourceLanguage();
+        this.targetLanguage = translator.getTargetLanguage();
     }
 
-    private Language targetLanguage;
     /**
      * Returns the tag in its original form as it was in original document. E.g.
      * for &lt;strong&gt; tag should return &lt;strong&gt;.
@@ -129,8 +131,6 @@ public class XMLTag extends Tag {
     }
 
     private boolean isDifferentDirection(boolean isRtl) {
-        Language sourceLanguage = Core.getProject().getProjectProperties().getSourceLanguage();
-
         if (sourceLanguage == null) {
             return false;
         }

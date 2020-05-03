@@ -469,7 +469,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             }
         }
         if (xmltag == null) {
-            xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator.getTargetLanguage());
+            xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator);
             xmlTagName.push(xmltag.getTag());
             xmlTagAttributes.push(xmltag.getAttributes());
         }
@@ -501,7 +501,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
         if (xmltag == null) {
             xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes,
-                    this.translator.getTargetLanguage());
+                    this.translator);
             xmlTagName.push(xmltag.getTag());
             xmlTagAttributes.push(xmltag.getAttributes());
         }
@@ -520,7 +520,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             }
             ((XMLTag) currEntry().get(len - 1)).setType(Tag.Type.ALONE);
         } else {
-            XMLTag xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.END, null, this.translator.getTargetLanguage());
+            XMLTag xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.END, null, this.translator);
             if (xmltag.getTag().equals(xmlTagName.lastElement())) {
                 xmlTagName.pop();
                 xmltag.setStartAttributes(xmlTagAttributes.pop()); // Restore attributes

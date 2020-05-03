@@ -154,6 +154,20 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     public Language getTargetLanguage() {
         return targetLanguage;
     }
+
+    /**
+     * Source language of the project
+     */
+    private Language sourceLanguage;
+
+    /**
+     * @return The source language of the project
+     */
+    @Override
+    public Language getSourceLanguage() {
+        return sourceLanguage;
+    }
+
     /** Processes an XML file. */
     @Override
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
@@ -161,6 +175,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         try (BufferedReader inReader = createReader(inFile, fc.getInEncoding())) {
             inEncodingLastParsedFile = this.encoding;
             targetLanguage = fc.getTargetLang();
+            sourceLanguage = fc.getSourceLang();
             InputSource source = new InputSource(inReader);
             source.setSystemId(inFile.toURI().toString());
             SAXParser parser = parserFactory.newSAXParser();

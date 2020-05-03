@@ -1,9 +1,9 @@
 ----------------------------------------------------------------------
  OmegaT 5.3.0
 ----------------------------------------------------------------------
-  2 Enhancements
-  3 Bug fixes
-  0 Localisation updates
+  4 Enhancements
+  4 Bug fixes
+  1 Localisation update
 ----------------------------------------------------------------------
 5.3.0 vs 5.2.0
 
@@ -11,6 +11,12 @@
 
   - Support reading metadata from plugins and display in UI
   https://sourceforge.net/p/omegat/feature-requests/1434/
+
+  - Add a "file" type to repository type
+  https://sourceforge.net/p/omegat/feature-requests/1446/
+
+  - Configurable Fuzzy Matches Threshold
+  https://sourceforge.net/p/omegat/feature-requests/1450/
 
   - Mozilla .ftl files filter
   https://sourceforge.net/p/omegat/feature-requests/1479/
@@ -26,6 +32,13 @@
 
   - "Use as default translation" does not work
   https://sourceforge.net/p/omegat/bugs/987/
+
+  - Deleting repository mappings under Java 11
+  https://sourceforge.net/p/omegat/bugs/990/
+
+  Localisation Updates:
+
+  - Ukrainian localisation updated to 5.2.0 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 5.2.0 (2020-01-26)

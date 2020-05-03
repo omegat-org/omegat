@@ -58,29 +58,6 @@ public final class EditorUtils {
     }
 
     /**
-     * Check if language is Right-To-Left oriented.
-     *
-     * @param language
-     *            ISO-639-2 language code
-     * @return true if language is RTL
-     */
-    public static boolean isRTL(final String language) {
-        return "ar".equalsIgnoreCase(language) || "iw".equalsIgnoreCase(language)
-                || "he".equalsIgnoreCase(language) || "fa".equalsIgnoreCase(language)
-                || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
-                || "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
-    }
-
-    /**
-     * Check if locale is Right-To-Left oriented.
-     * @return true if locale is Right-To-Left oriented.
-     */
-    public static boolean localeIsRTL() {
-        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
-        return EditorUtils.isRTL(language);
-    }
-
-    /**
      * Determines the start of a word for the given model location. This method
      * skips direction char.
      *

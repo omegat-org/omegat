@@ -753,4 +753,27 @@ public class Language implements Comparable<Object> {
     public boolean isSameCountryLanguage(String target) {
         return isSameCountryLanguage(new Language(target));
     }
+
+    /**
+     * Check if locale is Right-To-Left oriented.
+     * @return true if locale is Right-To-Left oriented.
+     */
+    public static boolean localeIsRTL() {
+        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
+        return isRTL(language);
+    }
+
+    /**
+     * Check if language is Right-To-Left oriented.
+     *
+     * @param language
+     *            ISO-639-2 language code
+     * @return true if language is RTL
+     */
+    public static boolean isRTL(final String language) {
+        return "ar".equalsIgnoreCase(language) || "iw".equalsIgnoreCase(language)
+                || "he".equalsIgnoreCase(language) || "fa".equalsIgnoreCase(language)
+                || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
+                || "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
+    }
 }

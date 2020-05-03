@@ -496,7 +496,7 @@ public class SegmentBuilder {
     private void addOtherLanguagePart(String text, Language language)
             throws BadLocationException {
         int prevOffset = offset;
-        boolean rtl = EditorUtils.isRTL(language.getLanguageCode());
+        boolean rtl = Language.isRTL(language.getLanguageCode());
         insertDirectionEmbedding(false);
         AttributeSet normal = attrs(true, false, false, false);
         insert(language.getLanguage() + ": ", normal);
@@ -544,7 +544,7 @@ public class SegmentBuilder {
         }
 
         int prevOffset = offset;
-        boolean rtl = EditorUtils.localeIsRTL();
+        boolean rtl = Language.localeIsRTL();
         insertDirectionEmbedding(rtl);
         AttributeSet attrs = settings.getModificationInfoAttributeSet();
         insert(text, attrs);
@@ -579,7 +579,7 @@ public class SegmentBuilder {
         insertDirectionMarker(rtl);
 
         //the marker itself is in user language
-        insertDirectionEmbedding(EditorUtils.localeIsRTL());
+        insertDirectionEmbedding(Language.localeIsRTL());
         AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
         insert(createSegmentMarkText(), attrSegmentMark);
         insertDirectionEndEmbedding();

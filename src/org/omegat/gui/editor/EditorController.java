@@ -573,10 +573,10 @@ public class EditorController implements IEditor {
         String sourceLang = Core.getProject().getProjectProperties().getSourceLanguage().getLanguageCode();
         String targetLang = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
 
-        sourceLangIsRTL = EditorUtils.isRTL(sourceLang);
-        targetLangIsRTL = EditorUtils.isRTL(targetLang);
+        sourceLangIsRTL = Language.isRTL(sourceLang);
+        targetLangIsRTL = Language.isRTL(targetLang);
 
-        if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != EditorUtils.localeIsRTL()) {
+        if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != Language.localeIsRTL()) {
             currentOrientation = Document3.ORIENTATION.DIFFER;
         } else {
             if (sourceLangIsRTL) {
@@ -623,7 +623,7 @@ public class EditorController implements IEditor {
             newOrientation = Document3.ORIENTATION.ALL_RTL;
             break;
         case ALL_RTL:
-            if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != EditorUtils.localeIsRTL()) {
+            if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != Language.localeIsRTL()) {
                 newOrientation = Document3.ORIENTATION.DIFFER;
             } else {
                 newOrientation = Document3.ORIENTATION.ALL_LTR;
@@ -726,11 +726,11 @@ public class EditorController implements IEditor {
         }
 
         // check if RTL support required for document
-        boolean hasRTL = sourceLangIsRTL || targetLangIsRTL || EditorUtils.localeIsRTL()
+        boolean hasRTL = sourceLangIsRTL || targetLangIsRTL || Language.localeIsRTL()
                 || currentOrientation != Document3.ORIENTATION.ALL_LTR;
         Map<Language, ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
         for (Map.Entry<Language, ProjectTMX> entry : otherLanguageTMs.entrySet()) {
-            hasRTL = hasRTL || EditorUtils.isRTL(entry.getKey().getLanguageCode().toLowerCase(Locale.ENGLISH));
+            hasRTL = hasRTL || Language.isRTL(entry.getKey().getLanguageCode().toLowerCase(Locale.ENGLISH));
         }
 
         Document3 doc = new Document3(this);
@@ -1908,7 +1908,7 @@ public class EditorController implements IEditor {
             String language = detectInstantStartLanguage();
             introPane = new JTextPane();
             introPane
-                    .setComponentOrientation(EditorUtils.isRTL(language) ? ComponentOrientation.RIGHT_TO_LEFT
+                    .setComponentOrientation(Language.isRTL(language) ? ComponentOrientation.RIGHT_TO_LEFT
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
             DragTargetOverlay.apply(introPane, dropInfo);

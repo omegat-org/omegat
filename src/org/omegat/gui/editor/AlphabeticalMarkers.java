@@ -47,6 +47,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
+import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -78,7 +79,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
         this.scrollPane = scrollPane;
         String sourceLang = Core.getProject().getProjectProperties()
                 .getSourceLanguage().getLanguageCode();
-        this.sourceLangIsRTL = EditorUtils.isRTL(sourceLang);
+        this.sourceLangIsRTL = Language.isRTL(sourceLang);
         this.colorScheme = createColorScheme(scrollPane.getViewport().getView().getBackground());
     }
 

@@ -33,6 +33,7 @@ import java.util.List;
  * Instance loaded on each new project open.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Briac Pilpre
  */
 public interface ISpellCheckerProvider {
     /**
@@ -51,11 +52,13 @@ public interface ISpellCheckerProvider {
     void learnWord(String word);
 
     /**
+     * Initialize checker.
+     * @throws SpellCheckerException if the spell checker can't be initialized for this language.
+     */
+    void init(String language) throws SpellCheckerException;
+
+    /**
      * Destroy checker.
      */
     void destroy();
-
-    /** Is the target language supported by this spellchecker */
-    boolean isLanguageSupported(String language);
-
 }

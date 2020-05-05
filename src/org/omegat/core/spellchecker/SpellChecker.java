@@ -51,6 +51,7 @@ import org.languagetool.JLanguageTool;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.filters2.master.PluginUtils;
@@ -102,6 +103,18 @@ public class SpellChecker implements ISpellChecker {
 
     /** Creates a new instance of SpellChecker */
     public SpellChecker() {
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+
+            @Override
+            public void onApplicationStartup() {
+                Core.registerSpellCheckClass(SpellCheckerLangToolHunspell.class);
+                Core.registerSpellCheckClass(SpellCheckerJMySpell.class);
+            }
+
+            @Override
+            public void onApplicationShutdown() {
+            }
+        });
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 switch (eventType) {
@@ -151,64 +164,38 @@ public class SpellChecker implements ISpellChecker {
     }
 
     private static Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
-        
-        // Try to use a custom spell checker if one is available.
-        for (Class<?> customSpellChecker : PluginUtils.getSpellCheckClasses()) {
-            try {
-                ISpellCheckerProvider spellChecker = (ISpellCheckerProvider) customSpellChecker.newInstance();
-                if (spellChecker.isLanguageSupported(language)) {
-                    return Optional.of(spellChecker);
-                }
-            } catch (Exception e) {
-                Log.log("Error when trying to load the custom spell checker '" + customSpellChecker + "' for language '"
-                        + language + "'.");
-            }
-        }
-
         // initialize the spell checker - get the data from the preferences
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 DEFAULT_DICTIONARY_DIR.getPath());
-
-        File dictBasename = new File(dictionaryDir, language);
-        File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 
         if (!dictionaryName.exists()) {
             // Try installing from bundled resources
             installBundledDictionary(dictionaryDir, language);
         }
-
         if (!dictionaryName.exists()) {
             // Try installing from LanguageTool bundled resources
             installLTBundledDictionary(dictionaryDir, language);
         }
 
-        if (!isValidFile(affixName) || !isValidFile(dictionaryName)) {
-            // If we still don't have a dictionary then return
-            return Optional.empty();
-        }
-
-        try {
-            ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictBasename.getPath());
-            Log.log("Initialized LanguageTool Hunspell spell checker for language '" + language
-                    + "' dictionary " + dictionaryName);
-            return Optional.of(result);
-        } catch (Throwable ex) {
-            Log.log("Error loading hunspell: " + ex.getMessage());
-        }
-        try {
-            ISpellCheckerProvider result = new SpellCheckerJMySpell(dictionaryName.getPath(),
-                    affixName.getPath());
-            Log.log("Initialized JMySpell spell checker for language '" + language + "' dictionary "
-                    + dictionaryName);
-            return Optional.of(result);
-        } catch (Exception ex) {
-            Log.log("Error loading jmyspell: " + ex.getMessage());
+        // Try to use a custom spell checker if one is available.
+        for (Class<?> customSpellChecker : PluginUtils.getSpellCheckClasses()) {
+            Log.log("Trying spell checker " + customSpellChecker + " for language " + language);
+            try {
+                ISpellCheckerProvider spellChecker = (ISpellCheckerProvider) customSpellChecker.getDeclaredConstructor().newInstance();
+                spellChecker.init(language);
+                return Optional.of(spellChecker);
+            } catch (SpellCheckerException e) {
+                Log.log("Spell checker " + customSpellChecker + " doesn't support language " + language + ": " + e.getMessage());
+            } catch (Exception e) {
+                Log.log("Error when trying to load the custom spell checker '" + customSpellChecker + "' for language '"
+                        + language + "'.");
+            }
         }
         return Optional.empty();
     }
 
-    private static boolean isValidFile(File file) {
+    protected static boolean isValidFile(File file) {
         try {
             if (!file.exists()) {
                 return false;

@@ -26,10 +26,14 @@
 package org.omegat.core.spellchecker;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
 import org.dts.spell.dictionary.SpellDictionary;
+import org.omegat.util.Log;
+import org.omegat.util.OConsts;
+import org.omegat.util.Preferences;
 
 /**
  * JMySpell spell checker implementation.
@@ -37,35 +41,48 @@ import org.dts.spell.dictionary.SpellDictionary;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SpellCheckerJMySpell implements ISpellCheckerProvider {
-    /** Local logger. */
-
     private org.dts.spell.SpellChecker jmyspell;
 
-    public SpellCheckerJMySpell(String dictionaryName, String affixName) throws Exception {
+    @Override
+    public void init(String language) throws SpellCheckerException {
+        String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
+                SpellChecker.DEFAULT_DICTIONARY_DIR.getPath());
 
-        SpellDictionary dict = new OpenOfficeSpellDictionary(new File(dictionaryName), new File(affixName),
-                false);
-        jmyspell = new org.dts.spell.SpellChecker(dict);
-        jmyspell.setCaseSensitive(false);
+        File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
+        File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
+
+        if (!SpellChecker.isValidFile(affixName) || !SpellChecker.isValidFile(dictionaryName)) {
+            throw new SpellCheckerException("No dictionary found at " + affixName + " or " + dictionaryName);
+        }
+
+        try {
+            SpellDictionary dict = new OpenOfficeSpellDictionary(dictionaryName, affixName, false);
+            jmyspell = new org.dts.spell.SpellChecker(dict);
+            jmyspell.setCaseSensitive(false);
+        } catch (IOException e) {
+            throw new SpellCheckerException("Error loading jmyspell dictionary", e);
+        }
+        
+        Log.log("Initialized jMySpell spell checker for language '" + language + "' dictionary "
+                + dictionaryName);
     }
 
+    @Override
     public void destroy() {
         jmyspell = null;
     }
 
+    @Override
     public boolean isCorrect(String word) {
         return jmyspell.isCorrect(word);
     }
 
+    @Override
     public List<String> suggest(String word) {
         return jmyspell.getDictionary().getSuggestions(word, 20);
     }
 
-    public void learnWord(String word) {
-    }
-
     @Override
-    public boolean isLanguageSupported(String language) {
-        return true;
+    public void learnWord(String word) {
     }
 }

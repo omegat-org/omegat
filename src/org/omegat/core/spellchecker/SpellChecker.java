@@ -180,7 +180,6 @@ public class SpellChecker implements ISpellChecker {
 
         // Try to use a custom spell checker if one is available.
         for (Class<?> customSpellChecker : PluginUtils.getSpellCheckClasses()) {
-            Log.log("Trying spell checker " + customSpellChecker + " for language " + language);
             try {
                 ISpellCheckerProvider spellChecker = (ISpellCheckerProvider) customSpellChecker.getDeclaredConstructor().newInstance();
                 spellChecker.init(language);

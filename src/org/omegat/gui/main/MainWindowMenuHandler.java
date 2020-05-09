@@ -214,6 +214,31 @@ public final class MainWindowMenuHandler {
     }
 
     /**
+     * Commit the current translated document.
+     */
+    public void projectCommitSingleTargetFileActionPerformed() {
+        String midName = Core.getEditor().getCurrentFile();
+        if (StringUtil.isEmpty(midName)) {
+            return;
+        }
+
+        if (!checkTags()) {
+            return;
+        }
+
+        String sourcePattern = Pattern.quote(midName);
+        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
+            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags(sourcePattern);
+            if (!stes.isEmpty()) {
+                Core.getIssues().showForFiles(midName, OStrings.getString("TF_MESSAGE_COMPILE"));
+                return;
+            }
+        }
+
+        ProjectUICommands.projectCompileAndCommit(sourcePattern);
+    }
+
+    /**
      * Commit source files
      */
     public void projectCommitSourceFilesActionPerformed() {

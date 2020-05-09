@@ -850,6 +850,10 @@ public final class ProjectUICommands {
     }
 
     public static void projectCompileAndCommit() {
+        projectCompileAndCommit(".*");
+    }
+
+    public static void projectCompileAndCommit(String pattern) {
         UIThreadsUtil.mustBeSwingThread();
 
         if (!Core.getProject().isProjectLoaded()) {
@@ -864,7 +868,7 @@ public final class ProjectUICommands {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(true);
                     try {
-                        Core.getProject().compileProjectAndCommit(".*", true, true);
+                        Core.getProject().compileProjectAndCommit(pattern, true, true);
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }

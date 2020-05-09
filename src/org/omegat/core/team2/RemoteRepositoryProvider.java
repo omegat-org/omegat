@@ -156,9 +156,9 @@ public class RemoteRepositoryProvider {
     protected Mapping oneMapping(String path) {
         List<Mapping> mappings = getMappings(path);
         if (mappings.size() > 1) {
-            throw new RuntimeException("Multiple mappings for file '"+path+"'");
+            throw new RuntimeException("Multiple mappings for file '" + path + "'");
         } else if (mappings.isEmpty()) {
-            throw new RuntimeException("There is no mapping for file '"+path+"'");
+            throw new RuntimeException("There is no mapping for file '" + path + "'");
         }
 
         return mappings.get(0);

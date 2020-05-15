@@ -64,7 +64,7 @@ public class XMLTag extends Tag {
 
         // Skip special (i/b/sz) tags for target language to keep only those from the source language
         // (e.g don't include <w:bCs/> from the LTR source in the RTL target.)
-        if (differentDir && (isRtl && isSpecialDocxTagRTL) || (!isRtl && isSpecialDocxTagLTR)) {
+        if (differentDir && ((isRtl && isSpecialDocxTagRTL) || (!isRtl && isSpecialDocxTagLTR))) {
             return "";
         }
 

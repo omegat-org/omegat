@@ -421,11 +421,15 @@ public final class WikiGet {
     public static class ResponseError extends IOException {
         public final int code;
         public final String message;
+        public final String body;
 
         public ResponseError(HttpURLConnection conn) throws IOException {
             super(conn.getResponseCode() + ": " + conn.getResponseMessage());
             code = conn.getResponseCode();
             message = conn.getResponseMessage();
+            try (InputStream in = conn.getErrorStream()) {
+                body = IOUtils.toString(in, StandardCharsets.UTF_8.name());
+            }
         }
     }
 }

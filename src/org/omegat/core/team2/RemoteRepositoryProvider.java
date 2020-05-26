@@ -63,6 +63,9 @@ public class RemoteRepositoryProvider {
     public static final String REPO_GIT_SUBDIR = ".git/";
     public static final String REPO_SVN_SUBDIR = ".svn/";
 
+    // Experimental: a local file has always only one mapping (the 'deepest' match)
+    private final static boolean KEEP_SINGLE_MAPPING = true;
+
     final File projectRoot;
     final ProjectTeamSettings teamSettings;
     final List<RepositoryDefinition> repositoriesDefinitions;
@@ -143,6 +146,14 @@ public class RemoteRepositoryProvider {
             for (RepositoryMapping repoMapping : rd.getMapping()) {
                 Mapping m = new Mapping(path, repositories.get(i), rd, repoMapping, forceExcludes);
                 if (m.matches()) {
+                    if (KEEP_SINGLE_MAPPING && !result.isEmpty()) {
+                        Mapping oldMapping = result.get(0);
+                        String oldRemote = oldMapping.repoMapping.getRepository();
+                        if (withoutLeadingSlash(m.repoMapping.getRepository()).contains(withoutLeadingSlash(oldRemote))) {
+                            Log.log("Remove shallower mapping \"" + oldRemote + "\" for \"" + path + "\"");
+                            result.remove(0);
+                        }
+                    }
                     result.add(m);
                 }
             }

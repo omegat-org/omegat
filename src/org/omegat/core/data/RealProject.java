@@ -251,6 +251,27 @@ public class RealProject implements IProject {
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);
+
+            // Copy segmentation and filters configuration to remote, if needed
+            if (config.hasRepositories()) {
+                RemoteRepositoryProvider remoteRepositoryProvider = new RemoteRepositoryProvider(
+                        config.getProjectRootDir(), config.getRepositories());
+                try {
+                    Core.getMainWindow().showStatusMessageRB("TF_COMMIT_START");
+                    String internalDir = config.getProjectInternalRelative();
+                    // TODO
+                    // - Is a rebase necessary?
+                    remoteRepositoryProvider.copyFilesFromProjectToRepos(internalDir + SRX.CONF_SENTSEG, null);
+                    remoteRepositoryProvider.copyFilesFromProjectToRepos(internalDir + FilterMaster.FILE_FILTERS, null);
+                    remoteRepositoryProvider.commitFiles(internalDir, "Commit project internal files");
+                    Core.getMainWindow().showStatusMessageRB("TF_COMMIT_DONE");
+                } catch (Exception e) {
+                    Log.logErrorRB("TF_COMMIT_ERROR");
+                    Log.log(e);
+                    throw new IOException(OStrings.getString("TF_COMMIT_ERROR") + "\n" + e.getMessage(), e);
+                }
+            }
+
         } finally {
             lockProject();
         }
@@ -1903,8 +1924,16 @@ public class RealProject implements IProject {
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_START");
                 remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getSourceDir().getUnderRoot(), null);
-                remoteRepositoryProvider.commitFiles(config.getSourceDir().getUnderRoot(), "Commit source files");
+
+                String srcRoot = config.getSourceRoot();
+                String sourceUnderRoot = config.getSourceDir().getUnderRoot();
+
+                List<String> pathList = FileUtil.buildRelativeFilesList(new File(srcRoot), Collections.emptyList(),
+                        config.getSourceRootExcludes());
+                for (String midName : pathList) {
+                    remoteRepositoryProvider.copyFilesFromProjectToRepos(sourceUnderRoot + midName, null);
+                }
+                remoteRepositoryProvider.commitFiles(sourceUnderRoot, "Commit source files");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_DONE");
             } catch (Exception e) {
                 Log.logErrorRB("TF_COMMIT_ERROR");

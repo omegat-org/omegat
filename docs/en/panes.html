@@ -38,13 +38,13 @@
             <dl class="toc">
                <dt><span class="section"><a href="panes.html#editor.pane">1. Editor</a></span></dt>
                <dt><span class="section"><a href="panes.html#d0e4352">2. Fuzzy Matches</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4379">3. Glossary</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4392">4. Dictionary</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4399">5. Machine Translation</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4407">6. Multiple Translations</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4417">7. Notes</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4428">8. Comments</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4433">9. Status bar</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4400">3. Glossary</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4413">4. Dictionary</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4420">5. Machine Translation</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4428">6. Multiple Translations</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4438">7. Notes</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4449">8. Comments</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4454">9. Status bar</a></span></dt>
             </dl>
          </div>
          <p>The main window consists of several panes, the main menu and a status
@@ -210,17 +210,44 @@
                    <span class="guimenuitem">Ctrl+R</span> to replace the target field with the match or use
                    <span class="guimenuitem">Ctrl+I </span> to insert it at the cursor position.
             </p>
-            <p>The matching percentage is roughly equivalent to taking the number
-                   of common words in the matched and the matching segment and dividing by
-                   the number of words in the longer of the two. The selected fuzzy match is
-                   highlighted in bold, words that are missing in the segment you are
-                   translating are colored blue and words adjacent to the missing parts
-                   green. In the above example the source segment is <span class="bold"><strong>Context menu command</strong></span>. The top match is 100%,
-                   because all words match. So do the next two matches, and the match #4 is
-                   similar, but different. The line with the matching percentage also
-                   includes the name of the translation memory containing the match. If there's no file name displayed,
-                   the source is the internal project translation memory. Orphan
-                   segments (the match #2) describe segments in the default project
+            <p>The three matching percentages are in the following order:
+                   
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>the percentage calculated with stemming<a href="#ftn.d0e4380" class="footnote" name="d0e4380"><sup class="footnote">[1]</sup></a> and ignoring tags and numbers (generally the
+                        		  highest)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>the percentage calculated without stemming and still ignoring
+                        		  tags and numbers (generally slightly lower)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>the percentage calculated with the full text, including tags and
+                        		  numbers (generally the lowest)
+                        		  
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                   
+            </p>
+            <p>It is possible to modify the sort order of the three percentages but
+                   not which is used to select the fuzzy matches.
+            </p>
+            <p>The selected fuzzy match is highlighted in bold, words that are
+                   missing in the segment you are translating are colored blue and words
+                   adjacent to the missing parts green. In the above example the source segment
+                   is <span class="bold"><strong>Context menu command</strong></span>. The top match is
+                   100%, because all words match. So do the next two matches, and the match #4
+                   is similar, but different. The line with the matching percentage also
+                   includes the name of the translation memory containing the match. If there's
+                   no file name displayed, the source is the internal project translation
+                   memory. Orphan segments (match #2) describe segments in the default project
                    translation memory that have no corresponding source segment.
             </p>
          </div>
@@ -228,7 +255,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4379"></a>3.&nbsp;Glossary
+                     <h2 class="title" style="clear: both"><a name="d0e4400"></a>3.&nbsp;Glossary
                      </h2>
                   </div>
                </div>
@@ -254,7 +281,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4392"></a>4.&nbsp;Dictionary
+                     <h2 class="title" style="clear: both"><a name="d0e4413"></a>4.&nbsp;Dictionary
                      </h2>
                   </div>
                </div>
@@ -267,7 +294,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4399"></a>5.&nbsp;Machine Translation
+                     <h2 class="title" style="clear: both"><a name="d0e4420"></a>5.&nbsp;Machine Translation
                      </h2>
                   </div>
                </div>
@@ -282,7 +309,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4407"></a>6.&nbsp;Multiple Translations
+                     <h2 class="title" style="clear: both"><a name="d0e4428"></a>6.&nbsp;Multiple Translations
                      </h2>
                   </div>
                </div>
@@ -300,7 +327,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4417"></a>7.&nbsp;Notes
+                     <h2 class="title" style="clear: both"><a name="d0e4438"></a>7.&nbsp;Notes
                      </h2>
                   </div>
                </div>
@@ -317,7 +344,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4428"></a>8.&nbsp;Comments
+                     <h2 class="title" style="clear: both"><a name="d0e4449"></a>8.&nbsp;Comments
                      </h2>
                   </div>
                </div>
@@ -333,7 +360,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4433"></a>9.&nbsp;Status bar
+                     <h2 class="title" style="clear: both"><a name="d0e4454"></a>9.&nbsp;Status bar
                      </h2>
                   </div>
                </div>
@@ -347,7 +374,7 @@
                    the translation (numbers in the left hand column refer to the figure
                    above):
             </p>
-            <div class="table"><a name="d0e4440"></a><p class="title"><b>Table&nbsp;4.2.&nbsp;Main Window - counters</b></p>
+            <div class="table"><a name="d0e4461"></a><p class="title"><b>Table&nbsp;4.2.&nbsp;Main Window - counters</b></p>
                <div class="table-contents">
                   <table class="table" summary="Main Window - counters" border="1">
                      <colgroup>
@@ -387,6 +414,11 @@
                    to the total or second number. The project in the example is evidently
                    finished, as all the unique segments have been translated.
             </p>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e4380" class="footnote">
+               <p><a href="#d0e4380" class="para"><sup class="para">[1] </sup></a>See <a class="ulink" href="https://en.wikipedia.org/wiki/Stemming" target="_top">https://en.wikipedia.org/wiki/Stemming</a></p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

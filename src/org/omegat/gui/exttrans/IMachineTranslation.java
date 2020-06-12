@@ -27,7 +27,9 @@
 package org.omegat.gui.exttrans;
 
 import java.awt.Window;
+import java.util.List;
 
+import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.Language;
 
 /**
@@ -66,6 +68,19 @@ public interface IMachineTranslation {
      * @return translated text, or null if translation impossible
      */
     String getTranslation(Language sLang, Language tLang, String text) throws Exception;
+
+    /**
+     * Alternative translate for engines utilizing glossaries.
+     * @param sLang source language
+     * @param tLang target language
+     * @param text text for translation
+     * @param glossaryTerms list of glossary terms relevant to source text
+     * @return translated text or null if translation impossible
+     */
+    default String getTranslation(Language sLang, Language tLang, String text, List<GlossaryEntry> glossaryTerms)
+            throws Exception {
+        return getTranslation(sLang, tLang, text);
+    }
 
     /**
      * Get cached translation. Returns null if translation not present.

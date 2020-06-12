@@ -30,6 +30,7 @@
 package org.omegat.core.machinetranslators;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
+import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -37,8 +38,13 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.WikiGet;
 
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 import java.awt.Window;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -59,7 +65,9 @@ public class YandexCloudTranslate extends BaseTranslate {
 
     private static final String PROPERTY_OAUTH_TOKEN = "yandex.cloud.oauth-token";
     private static final String PROPERTY_FOLDER_ID = "yandex.cloud.folder-id";
+    private static final String PROPERTY_USE_GLOSSARY = "yandex.cloud.use-glossary";
 
+    private static final int MAX_GLOSSARY_TERMS = 50;
     private static final int MAX_TEXT_LENGTH = 10000;
     private static final int IAM_TOKEN_TTL_SECONDS = 3600; // Recommended value
 
@@ -81,39 +89,11 @@ public class YandexCloudTranslate extends BaseTranslate {
     }
 
     @Override
-    public void showConfigurationUI(Window parent) {
+    public String getTranslation(Language sLang, Language tLang, String text, List<GlossaryEntry> glossaryTerms) {
+        if (!enabled) {
+            return null;
+        }
 
-        MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
-            @Override
-            protected void onConfirm() {
-                boolean temporary = panel.temporaryCheckBox.isSelected();
-
-                String folderId = panel.valueField1.getText().trim();
-                setCredential(PROPERTY_FOLDER_ID, folderId, temporary);
-
-                String oAuthToken = panel.valueField2.getText().trim();
-                setCredential(PROPERTY_OAUTH_TOKEN, oAuthToken, temporary);
-            }
-        };
-
-        dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_LABEL"));
-        dialog.panel.valueField1.setText(getCredential(PROPERTY_FOLDER_ID));
-
-        dialog.panel.valueLabel2.setText(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_OAUTH_TOKEN_LABEL"));
-        dialog.panel.valueField2.setText(getCredential(PROPERTY_OAUTH_TOKEN));
-
-        dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_OAUTH_TOKEN));
-
-        dialog.show();
-    }
-
-    @Override
-    protected String getPreferenceName() {
-        return Preferences.ALLOW_YANDEX_CLOUD_TRANSLATE;
-    }
-
-    @Override
-    protected String translate(Language sLang, Language tLang, String text) {
         String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
         String prev = getFromCache(sLang, tLang, trText);
         if (prev != null) {
@@ -141,6 +121,7 @@ public class YandexCloudTranslate extends BaseTranslate {
                 .append("\"targetLanguageCode\":\"").append(tLang.getLanguageCode().toLowerCase()).append("\",")
                 .append("\"format\": \"HTML\",") // HTML format keeps OmegaT tags intact
                 .append("\"folderId\": \"").append(folderId).append("\",")
+                .append(getGlossaryConfigPart(glossaryTerms))
                 .append("\"texts\": [").append(JsonParser.quote(trText)).append("]}");
 
         Map<String, String> headers = new TreeMap<>();
@@ -168,6 +149,59 @@ public class YandexCloudTranslate extends BaseTranslate {
         tr = cleanSpacesAroundTags(tr, trText);
         putToCache(sLang, tLang, trText, tr);
         return tr;
+    }
+
+    @Override
+    public void showConfigurationUI(Window parent) {
+
+        JPanel extraPanel = new JPanel();
+        extraPanel.setAlignmentX(JComponent.LEFT_ALIGNMENT);
+        extraPanel.setLayout(new BoxLayout(extraPanel, BoxLayout.X_AXIS));
+        extraPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
+        JCheckBox glossaryCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_GLOSSARY_CHECKBOX"));
+        extraPanel.add(glossaryCheckBox);
+
+        MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
+            @Override
+            protected void onConfirm() {
+                boolean temporary = panel.temporaryCheckBox.isSelected();
+
+                String folderId = panel.valueField1.getText().trim();
+                setCredential(PROPERTY_FOLDER_ID, folderId, temporary);
+
+                String oAuthToken = panel.valueField2.getText().trim();
+                setCredential(PROPERTY_OAUTH_TOKEN, oAuthToken, temporary);
+
+                Preferences.setPreference(PROPERTY_USE_GLOSSARY, glossaryCheckBox.isSelected());
+            }
+        };
+
+        dialog.panel.itemsPanel.add(extraPanel);
+
+        dialog.panel.valueLabel1.setText(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_LABEL"));
+        dialog.panel.valueField1.setText(getCredential(PROPERTY_FOLDER_ID));
+
+        dialog.panel.valueLabel2.setText(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_OAUTH_TOKEN_LABEL"));
+        dialog.panel.valueField2.setText(getCredential(PROPERTY_OAUTH_TOKEN));
+
+        dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_OAUTH_TOKEN));
+
+        glossaryCheckBox.setSelected(Preferences.isPreferenceDefault(PROPERTY_USE_GLOSSARY, false));
+
+        dialog.show();
+    }
+
+    @Override
+    protected String getPreferenceName() {
+        return Preferences.ALLOW_YANDEX_CLOUD_TRANSLATE;
+    }
+
+    /**
+     * Dummy method required by base abstract class
+     */
+    @Override
+    protected String translate(Language sLang, Language tLang, String text) {
+        return null;
     }
 
     @SuppressWarnings("unchecked")
@@ -229,5 +263,34 @@ public class YandexCloudTranslate extends BaseTranslate {
             }
         }
         return cachedIAMToken;
+    }
+
+    private String getGlossaryConfigPart(List<GlossaryEntry> glossaryTerms) {
+
+        if (!Preferences.isPreference(PROPERTY_USE_GLOSSARY) || glossaryTerms.isEmpty()) {
+            return "";
+        }
+
+        if (glossaryTerms.size() > MAX_GLOSSARY_TERMS) {
+            glossaryTerms = glossaryTerms.subList(0, MAX_GLOSSARY_TERMS);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("\"glossaryConfig\":{\"glossaryData\":{\"glossaryPairs\":[");
+
+        Iterator<GlossaryEntry> iterator = glossaryTerms.iterator();
+        while (iterator.hasNext()) {
+            GlossaryEntry e = iterator.next();
+            sb.append("{\"sourceText\":")
+                .append(JsonParser.quote(e.getSrcText()))
+                .append(",\"translatedText\":")
+                .append(JsonParser.quote(e.getLocText()))
+                .append("}");
+            if (iterator.hasNext()) {
+                sb.append(",");
+            }
+        }
+        sb.append("]}},");
+        return sb.toString();
     }
 }

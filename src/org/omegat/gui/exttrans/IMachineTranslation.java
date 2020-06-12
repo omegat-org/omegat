@@ -28,6 +28,7 @@ package org.omegat.gui.exttrans;
 
 import java.awt.Window;
 
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Language;
 
 /**
@@ -65,7 +66,7 @@ public interface IMachineTranslation {
      *            text for translation
      * @return translated text, or null if translation impossible
      */
-    String getTranslation(Language sLang, Language tLang, String text) throws Exception;
+    String getTranslation(Language sLang, Language tLang, SourceTextEntry ste) throws Exception;
 
     /**
      * Get cached translation. Returns null if translation not present.

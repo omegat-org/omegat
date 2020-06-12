@@ -193,7 +193,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                     }
                 }
             }
-            return translator.getTranslation(source, target, src);
+            return translator.getTranslation(source, target, currentlyProcessedEntry);
         }
     }
 

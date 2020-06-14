@@ -32,6 +32,7 @@ package org.omegat.gui.exttrans;
 import java.awt.Dimension;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.JMenuItem;
@@ -45,6 +46,7 @@ import org.omegat.core.machinetranslators.MachineTranslators;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
+import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.preferences.PreferencesWindowController;
@@ -193,7 +195,12 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                     }
                 }
             }
-            return translator.getTranslation(source, target, currentlyProcessedEntry);
+            if (translator.isUsingGlossary()) {
+                List<GlossaryEntry> glossaryTerms = Core.getGlossaryManager().searchSourceMatches(currentlyProcessedEntry);
+                return translator.getTranslation(source, target, src, glossaryTerms);
+            } else {
+                return translator.getTranslation(source, target, src);
+            }
         }
     }
 

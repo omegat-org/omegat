@@ -28,6 +28,7 @@ package org.omegat.core.machinetranslators;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 
@@ -36,6 +37,7 @@ import javax.swing.JCheckBoxMenuItem;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.exttrans.IMachineTranslation;
+import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.CredentialsManager;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
@@ -86,7 +88,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
     }
 
     @Override
-    public String getTranslation(Language sLang, Language tLang, SourceTextEntry text) throws Exception {
+    public String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
             return translate(sLang, tLang, text);
         } else {
@@ -106,10 +108,6 @@ public abstract class BaseTranslate implements IMachineTranslation {
     protected abstract String getPreferenceName();
 
     protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
-
-    protected String translate(Language sLang, Language tLang, SourceTextEntry ste) throws Exception {
-        return translate(sLang, tLang, ste.getSrcText());
-    }
 
     /**
      * Attempt to clean spaces added around tags by machine translators. Do it by comparing spaces between the source

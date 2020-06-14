@@ -30,6 +30,7 @@
 package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -129,7 +130,14 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         UIThreadsUtil.mustBeSwingThread();
 
         clear();
-        List<GlossaryEntry> glossaryTerms = Core.getGlossaryManager().searchSourceMatches(newEntry);
+
+        List<GlossaryEntry> glossaryTerms;
+        if (force) {
+            glossaryTerms = Core.getGlossaryManager().searchSourceMatches(newEntry);
+        } else {
+            glossaryTerms = Collections.emptyList();
+        }
+
         for (IMachineTranslation mt : MachineTranslators.getMachineTranslators()) {
             if (mt.isEnabled()) {
                 new FindThread(mt, newEntry, glossaryTerms, force).start();

@@ -28,16 +28,13 @@ package org.omegat.core.machinetranslators;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 
 import javax.swing.JCheckBoxMenuItem;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.exttrans.IMachineTranslation;
-import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.CredentialsManager;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;

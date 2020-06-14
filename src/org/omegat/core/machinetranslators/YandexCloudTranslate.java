@@ -89,11 +89,6 @@ public class YandexCloudTranslate extends BaseTranslate {
     }
 
     @Override
-    public boolean isUsingGlossary() {
-        return true;
-    }
-
-    @Override
     public String getTranslation(Language sLang, Language tLang, String text, List<GlossaryEntry> glossaryTerms) {
         if (!enabled) {
             return null;

@@ -78,8 +78,8 @@ public interface IMachineTranslation {
      * @return translated text or null if translation impossible
      */
     default String getTranslation(Language sLang, Language tLang, String text, List<GlossaryEntry> glossaryTerms)
-            throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
+            throws Exception {
+        return getTranslation(sLang, tLang, text);
     }
 
     /**
@@ -109,12 +109,5 @@ public interface IMachineTranslation {
      * Invoke the configuration UI of this MT provider.
      */
     default void showConfigurationUI(Window parent) {
-    }
-
-    /**
-     * Indicates that the MT provider accept user glossary terms.
-     */
-    default boolean isUsingGlossary() {
-        return false;
     }
 }

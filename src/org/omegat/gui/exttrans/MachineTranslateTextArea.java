@@ -30,7 +30,6 @@
 package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -130,17 +129,9 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         UIThreadsUtil.mustBeSwingThread();
 
         clear();
-
-        List<GlossaryEntry> glossaryTerms;
-        if (force) {
-            glossaryTerms = Core.getGlossaryManager().searchSourceMatches(newEntry);
-        } else {
-            glossaryTerms = Collections.emptyList();
-        }
-
         for (IMachineTranslation mt : MachineTranslators.getMachineTranslators()) {
             if (mt.isEnabled()) {
-                new FindThread(mt, newEntry, glossaryTerms, force).start();
+                new FindThread(mt, newEntry, force).start();
             }
         }
     }
@@ -165,15 +156,12 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     protected class FindThread extends EntryInfoSearchThread<MachineTranslationInfo> {
         private final IMachineTranslation translator;
         private final String src;
-        private final List<GlossaryEntry> glossaryTerms;
         private final boolean force;
 
-        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry,
-                List<GlossaryEntry> glossaryTerms, boolean force) {
+        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry, boolean force) {
             super(MachineTranslateTextArea.this, newEntry);
             this.translator = translator;
             src = newEntry.getSrcText();
-            this.glossaryTerms = glossaryTerms;
             this.force = force;
         }
 
@@ -206,6 +194,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                     }
                 }
             }
+            List<GlossaryEntry> glossaryTerms = Core.getGlossaryManager().searchSourceMatches(currentlyProcessedEntry);
             return translator.getTranslation(source, target, src, glossaryTerms);
         }
     }

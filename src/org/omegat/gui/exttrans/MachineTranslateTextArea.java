@@ -32,8 +32,9 @@ package org.omegat.gui.exttrans;
 import java.awt.Dimension;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -90,11 +91,18 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
         for (Class<?> mtc : PluginUtils.getMachineTranslationClasses()) {
             try {
-                MachineTranslators.add((IMachineTranslation) mtc.getDeclaredConstructor().newInstance());
+                IMachineTranslation mt = (IMachineTranslation) mtc.getDeclaredConstructor().newInstance();
+                mt.setGlossarySupplier(this::getGlossaryMap);
+                MachineTranslators.add(mt);
             } catch (Exception ex) {
                 Log.log(ex);
             }
         }
+    }
+
+    Map<String, String> getGlossaryMap() {
+        return Core.getGlossaryManager().searchSourceMatches(currentlyProcessedEntry).stream()
+                .collect(Collectors.toMap(GlossaryEntry::getSrcText, GlossaryEntry::getLocText));
     }
 
     /** Cycle getDisplayedTranslation **/
@@ -194,8 +202,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                     }
                 }
             }
-            List<GlossaryEntry> glossaryTerms = Core.getGlossaryManager().searchSourceMatches(currentlyProcessedEntry);
-            return translator.getTranslation(source, target, src, glossaryTerms);
+            return translator.getTranslation(source, target, src);
         }
     }
 

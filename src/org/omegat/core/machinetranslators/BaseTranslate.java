@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import javax.swing.JCheckBoxMenuItem;
 
 import org.omegat.core.Core;
+import org.omegat.gui.exttrans.IMTGlossarySupplier;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.util.CredentialsManager;
 import org.omegat.util.Language;
@@ -50,6 +51,7 @@ import org.openide.awt.Mnemonics;
 public abstract class BaseTranslate implements IMachineTranslation {
 
     protected boolean enabled;
+    protected IMTGlossarySupplier glossarySupplier;
 
     /**
      * Machine translation implementation can use this cache for skip requests twice. Cache will not be
@@ -82,6 +84,11 @@ public abstract class BaseTranslate implements IMachineTranslation {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
         Preferences.setPreference(getPreferenceName(), enabled);
+    }
+
+    @Override
+    public void setGlossarySupplier(IMTGlossarySupplier glossarySupplier) {
+    	this.glossarySupplier = glossarySupplier;
     }
 
     @Override

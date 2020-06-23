@@ -29,25 +29,26 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.awt.Window;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
 import org.omegat.gui.exttrans.MTConfigDialog;
-import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.WikiGet;
-
-import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import java.awt.Window;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 
 /**
@@ -89,7 +90,7 @@ public class YandexCloudTranslate extends BaseTranslate {
     }
 
     @Override
-    public String getTranslation(Language sLang, Language tLang, String text, List<GlossaryEntry> glossaryTerms) {
+    public String translate(Language sLang, Language tLang, String text) {
         if (!enabled) {
             return null;
         }
@@ -115,14 +116,20 @@ public class YandexCloudTranslate extends BaseTranslate {
             return IAMErrorMessage;
         }
 
-        StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append("{")
+        StringBuilder requestBuilder = new StringBuilder("{")
                 .append("\"sourceLanguageCode\":\"").append(sLang.getLanguageCode().toLowerCase()).append("\",")
                 .append("\"targetLanguageCode\":\"").append(tLang.getLanguageCode().toLowerCase()).append("\",")
                 .append("\"format\": \"HTML\",") // HTML format keeps OmegaT tags intact
-                .append("\"folderId\": \"").append(folderId).append("\",")
-                .append(getGlossaryConfigPart(glossaryTerms))
-                .append("\"texts\": [").append(JsonParser.quote(trText)).append("]}");
+                .append("\"folderId\": \"").append(folderId).append("\",");
+
+        if (!Preferences.isPreference(PROPERTY_USE_GLOSSARY) && glossarySupplier != null) {
+            Map<String, String> glossaryTerms = glossarySupplier.get();
+            if (!glossaryTerms.isEmpty()) {
+                requestBuilder.append(getGlossaryConfigPart(glossaryTerms));
+            }
+        }
+
+        requestBuilder.append("\"texts\": [").append(JsonParser.quote(trText)).append("]}");
 
         Map<String, String> headers = new TreeMap<>();
         headers.put("Authorization", "Bearer " + IAMToken);
@@ -196,14 +203,6 @@ public class YandexCloudTranslate extends BaseTranslate {
         return Preferences.ALLOW_YANDEX_CLOUD_TRANSLATE;
     }
 
-    /**
-     * Dummy method required by base abstract class
-     */
-    @Override
-    protected String translate(Language sLang, Language tLang, String text) {
-        return null;
-    }
-
     @SuppressWarnings("unchecked")
     private String extractErrorMessage(final String json) {
         Map<String, Object> rootNode;
@@ -265,32 +264,17 @@ public class YandexCloudTranslate extends BaseTranslate {
         return cachedIAMToken;
     }
 
-    private String getGlossaryConfigPart(List<GlossaryEntry> glossaryTerms) {
+    private String getGlossaryConfigPart(Map<String, String> glossaryTerms) {
+        StringBuilder sb = new StringBuilder("\"glossaryConfig\":{\"glossaryData\":{\"glossaryPairs\":[");
 
-        if (!Preferences.isPreference(PROPERTY_USE_GLOSSARY) || glossaryTerms.isEmpty()) {
-            return "";
-        }
+        String termsJson = glossaryTerms.entrySet().stream().limit(MAX_GLOSSARY_TERMS)
+                .map(e -> buildOneGlossaryJson(e.getKey(), e.getValue())).collect(Collectors.joining(","));
 
-        if (glossaryTerms.size() > MAX_GLOSSARY_TERMS) {
-            glossaryTerms = glossaryTerms.subList(0, MAX_GLOSSARY_TERMS);
-        }
+        return sb.append(termsJson).append("]}},").toString();
+    }
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("\"glossaryConfig\":{\"glossaryData\":{\"glossaryPairs\":[");
-
-        Iterator<GlossaryEntry> iterator = glossaryTerms.iterator();
-        while (iterator.hasNext()) {
-            GlossaryEntry e = iterator.next();
-            sb.append("{\"sourceText\":")
-                .append(JsonParser.quote(e.getSrcText()))
-                .append(",\"translatedText\":")
-                .append(JsonParser.quote(e.getLocText()))
-                .append("}");
-            if (iterator.hasNext()) {
-                sb.append(",");
-            }
-        }
-        sb.append("]}},");
-        return sb.toString();
+    private String buildOneGlossaryJson(String sourceText, String targetText) {
+        return new StringBuilder("{\"sourceText\":").append(JsonParser.quote(sourceText))
+                .append(",\"translatedText\":").append(JsonParser.quote(targetText)).append("}").toString();
     }
 }

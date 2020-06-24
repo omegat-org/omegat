@@ -28,6 +28,7 @@ package org.omegat.gui.scripting;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -80,9 +81,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             applicationStartupEventScriptsExecuted = true;
             addEventScripts(EventType.APPLICATION_STARTUP);
             ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.APPLICATION_STARTUP);
-            for (ScriptItem si : scripts) {
-                m_scriptingWindow.executeScriptFile(si);
-            }
+            m_scriptingWindow.executeScriptFiles(scripts, Collections.emptyMap());
             scripts.clear();
         }
     }
@@ -141,9 +140,8 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             public void onNewFile(String activeFileName) {
                 HashMap<String, Object> binding = new HashMap<String, Object>();
                 binding.put("activeFileName", activeFileName);
-                for (ScriptItem si : m_eventsScript.get(EventType.NEW_FILE)) {
-                    m_scriptingWindow.executeScriptFile(si, binding);
-                }
+
+                m_scriptingWindow.executeScriptFiles(m_eventsScript.get(EventType.NEW_FILE), binding);
             }
 
             @Override
@@ -151,9 +149,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 HashMap<String, Object> binding = new HashMap<String, Object>();
                 binding.put("newEntry", newEntry);
 
-                for (ScriptItem si : m_eventsScript.get(EventType.ENTRY_ACTIVATED)) {
-                    m_scriptingWindow.executeScriptFile(si, binding);
-                }
+                m_scriptingWindow.executeScriptFiles(m_eventsScript.get(EventType.ENTRY_ACTIVATED), binding);
             }
         };
 
@@ -173,11 +169,9 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 HashMap<String, Object> binding = new HashMap<String, Object>();
                 binding.put("eventType", eventType);
-
-                for (ScriptItem si : m_eventsScript.get(EventType.PROJECT_CHANGED)) {
-                    m_scriptingWindow.executeScriptFile(si, binding);
-                }
-            }
+                ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.PROJECT_CHANGED);
+                m_scriptingWindow.executeScriptFiles(scripts, binding);
+           }
         };
         CoreEvents.registerProjectChangeListener(m_projectEventListener);
     }
@@ -187,24 +181,24 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             CoreEvents.unregisterApplicationEventListener(m_applicationEventListener);
         }
 
-        // APPLICATION_STARTUP is not working because it is registered too late.
-        // addEventScripts(EventType.APPLICATION_STARTUP);
         addEventScripts(EventType.APPLICATION_SHUTDOWN);
 
         m_applicationEventListener = new IApplicationEventListener() {
-
             @Override
             public void onApplicationStartup() {
-//              for (ScriptItem si : m_eventsScript.get(EventType.APPLICATION_STARTUP)) {
-//                  m_scriptingWindow.executeScriptFile(si, true);
-//              }
+                // APPLICATION_STARTUP is not working because it is registered too late.
+                // The scripts are launched during
+                // org.omegat.gui.scripting.ScriptsMonitor.start(File)
             }
 
             @Override
             public void onApplicationShutdown() {
-                for (ScriptItem si : m_eventsScript.get(EventType.APPLICATION_SHUTDOWN)) {
-                    m_scriptingWindow.executeScriptFile(si);
-                }
+            	// FIXME APPLICATION_SHUTDOWN scripts are not reliably
+            	// executed, as the application may exit before they are
+            	// finished executing.
+                ArrayList<ScriptItem> scriptItems = m_eventsScript.get(EventType.APPLICATION_SHUTDOWN);
+                m_scriptingWindow.executeScriptFiles(scriptItems,
+                        new HashMap<String, Object>());
             }
         };
 
@@ -224,9 +218,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 HashMap<String, Object> binding = new HashMap<String, Object>();
                 binding.put("newWord", newWord);
 
-                for (ScriptItem si : m_eventsScript.get(EventType.NEW_WORD)) {
-                    m_scriptingWindow.executeScriptFile(si, binding);
-                }
+                m_scriptingWindow.executeScriptFiles(m_eventsScript.get(EventType.NEW_WORD), binding);
             }
         };
 
@@ -244,7 +236,10 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         // Avoid executing scripts that may be deleted during the directory change.
         eventScripts.clear();
 
-        for (File script : entryActivatedDir.listFiles(FILTER)) {
+        File[] listFiles = entryActivatedDir.listFiles(FILTER);
+        // Sort the script files to guarantee the same execution order
+        Arrays.sort(listFiles);
+        for (File script : listFiles) {
             ScriptItem scriptItem = new ScriptItem(script);
             if (!eventScripts.contains(scriptItem)) {
                 eventScripts.add(scriptItem);

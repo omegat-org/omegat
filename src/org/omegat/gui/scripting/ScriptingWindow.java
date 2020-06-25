@@ -690,7 +690,7 @@ public class ScriptingWindow {
     }
 
     public void cancelScriptQueue() {
-    	cancelScriptQueue();
+    	cancelCurrentScript();
     	queuedWorkers.clear();
     }
     

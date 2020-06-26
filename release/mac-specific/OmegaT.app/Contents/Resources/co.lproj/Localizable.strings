@@ -1,0 +1,7 @@
+"JRELoadError" = "Impussibule di caricà l’ambiente d’esecuzione Java.";
+"JRExLoadError" = "Impussibule di caricà l’ambiente d’esecuzione Java %d.";
+"JRExLoadFullError" = "St’appiecazione richiede chì Java %d o più recente sia installatu nant’à l’urdinatore. Ci vole à scaricà è installà l’ultima versione di Java à partesi da www.java.com è pruvà torna.";
+"JDKxLoadFullError" = "St’appiecazione richiede chì u JDK per Java %d o più recente sia installatu nant’à l’urdinatore. Ci vole à scaricà è installà l’ultima versione di u JDK per Java à partesi da Oracle.com è pruvà torna.";
+"MainClassNameRequired" = "U nome principale di classa hè richiestu.";
+"JavaDirectoryNotFound" = "Impussibule d’enumerà u cuntenutu di u cartulare Java.";
+"BundlePathContainsColon" = "Ùn pò micca avvià à partesi d’un cartulare chì cuntene un \"/\" in u so nome.";

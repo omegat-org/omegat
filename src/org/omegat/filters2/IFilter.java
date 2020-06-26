@@ -152,6 +152,7 @@ public interface IFilter {
 
     /**
      * Align source and translated files.
+     * NB: this is not used for Tools->align files..., but for aligning in console mode
      *
      * @param inFile
      *            source file

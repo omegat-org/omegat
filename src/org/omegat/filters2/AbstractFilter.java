@@ -547,9 +547,12 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /**
-     * Method can be overrided for return true. It means what two-pass parsing and translating will be
-     * processed and prev/next segments will be linked.
-     */
+     * Method can be overridden to return true, in case you want previous and next segment to be included in the search
+     * for a translation, when alternative translations are provided by the user. (normally, only the filename is used)
+     *
+     * Technically it means that parsing happens in two passes and prev/next segments will be linked, so it comes with
+     * a cost
+     **/
     protected boolean requirePrevNextFields() {
         return false;
     }

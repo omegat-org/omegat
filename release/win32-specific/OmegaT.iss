@@ -34,6 +34,7 @@ Source: "readme.txt"; DestDir: "{app}"; Flags: isreadme;
 Source: "readme_ar.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ar
 Source: "readme_ca.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ca
 Source: "readme_cs.txt"; DestDir: "{app}"; Flags: isreadme; Languages: cs
+Source: "readme_co.txt"; DestDir: "{app}"; Flags: isreadme; Languages: co
 ;Source: "readme_cy.txt"; DestDir: "{app}"; Flags: isreadme; Languages: cy
 Source: "readme_da.txt"; DestDir: "{app}"; Flags: isreadme; Languages: da
 Source: "readme_de.txt"; DestDir: "{app}"; Flags: isreadme; Languages: de
@@ -94,6 +95,7 @@ Name: "eu"; MessagesFile: "compiler:Languages\Basque.isl"
 Name: "pt_BR"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 Name: "ca"; MessagesFile: "compiler:Languages\Catalan.isl"
 Name: "cs"; MessagesFile: "compiler:Languages\Czech.isl"
+Name: "co"; MessagesFile: "compiler:Languages\Corsican.isl"
 Name: "da"; MessagesFile: "compiler:Languages\Danish.isl"
 Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "fi"; MessagesFile: "compiler:Languages\Finnish.isl"

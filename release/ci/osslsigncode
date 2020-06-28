@@ -12,4 +12,8 @@ bindpaths() {
     done
 }
 
-exec docker run --rm -i -v "$PWD":/work $(bindpaths "$@") omegatorg/osslsigncode $(relpaths "$@")
+exec docker run --rm -i \
+    -v "$PWD":/work $(bindpaths "$@") \
+    --entrypoint osslsigncode \
+    amake/innosetup:innosetup6 \
+    $(relpaths "$@")

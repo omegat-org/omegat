@@ -115,7 +115,7 @@ public class ProtectedPart {
         if (original == null) {
             return null;
         }
-        List<ProtectedPart> result = new ArrayList<ProtectedPart>();
+        List<ProtectedPart> result = new ArrayList<>();
         for (ProtectedPart o : original) {
             if (text.contains(o.textInSourceSegment)) {
                 result.add(o);

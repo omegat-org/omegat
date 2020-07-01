@@ -25,10 +25,6 @@
 
 package org.omegat.filters;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
@@ -77,8 +73,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
+import static org.junit.Assert.*;
+
 /**
- * Base class for test filter parsing.
+ * Base class for testing filter parsing.
  *
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
@@ -101,6 +99,17 @@ public abstract class TestFilterBase extends TestCore {
         outFile.getParentFile().mkdirs();
     }
 
+    /**
+     * Helper function for testing the parseFile method of a given filter without options;
+     * returns a list of source segments that the
+     * filter-under-test finds in the given file and returns to the IParseCallback.addEntry method.
+     * NB: Id, comments, fuzzyness, path, properties etc is all ignored.
+     *
+     * @param filter the filter to test
+     * @param filename the file to use as input for the filter
+     * @return list of source segments
+     * @throws Exception when the filter throws an exception on parseFile.
+     */
     protected List<String> parse(AbstractFilter filter, String filename) throws Exception {
         final List<String> result = new ArrayList<String>();
 
@@ -131,6 +140,18 @@ public abstract class TestFilterBase extends TestCore {
         return result;
     }
 
+    /**
+     * Helper function for testing the parseFile method of a given filter using some options;
+     * returns a list of source segments that
+     * the filter-under-test finds in the given file and returns to the IParseCallback.addEntry method.
+     * NB: Id, comments, fuzzyness, path, properties etc is all ignored.
+     *
+     * @param filter the filter to test
+     * @param filename the file to use as input for the filter
+     * @param options the filter options/config to use
+     * @return list of source segments
+     * @throws Exception when the filter throws an exception on parseFile.
+     */
     protected List<String> parse(AbstractFilter filter, String filename, Map<String, String> options)
             throws Exception {
         final List<String> result = new ArrayList<String>();
@@ -162,6 +183,21 @@ public abstract class TestFilterBase extends TestCore {
         return result;
     }
 
+    /**
+     * Helper function for testing the parseFile method of a given filter without options.
+     * The given 'result' map is filled with
+     * key=source, value=translation as the filter-under-test finds in the given file and returns to the
+     * IParseCallback.addEntry method, if the translation is not fuzzy.
+     * The given legacyTMX map is filled too, but also including fuzzy translations,
+     * where <code>key=[&lt;fuzzyMark&gt;] source</code>
+     * NB: Id, comments, path, properties etc is all ignored.
+     *
+     * @param filter the filter to test
+     * @param filename the file to use as input for the filter
+     * @param result a map to fill by the filter with key=source, value=translation
+     * @param legacyTMX a map to fill by the filter with key=source or key=[&lt;fuzzyMark&gt;] source, value=translation
+     * @throws Exception when the filter throws an exception on parseFile.
+     */
     protected void parse2(final AbstractFilter filter, final String filename,
             final Map<String, String> result, final Map<String, String> legacyTMX) throws Exception {
 
@@ -199,9 +235,19 @@ public abstract class TestFilterBase extends TestCore {
         });
     }
 
+    /**
+     * Helper function for testing the parseFile method of a given filter using some options;
+     * returns a list of ParsedEntry with the
+     * attributes that the filter-under-test finds in the given file and returns to the IParseCallback.addEntry method.
+     * @param filter the filter to test
+     * @param filename the file to use as input for the filter
+     * @param options the filter options/config to use
+     * @return list of found information
+     * @throws Exception when the filter throws an exception on parseFile.
+     */
     protected List<ParsedEntry> parse3(AbstractFilter filter, String filename, Map<String, String> options)
             throws Exception {
-        final List<ParsedEntry> result = new ArrayList<ParsedEntry>();
+        final List<ParsedEntry> result = new ArrayList<>();
 
         filter.parseFile(new File(filename), options, context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
@@ -238,10 +284,25 @@ public abstract class TestFilterBase extends TestCore {
         return result;
     }
 
+    /**
+     * Helper function for testing the translateFile method of a filter. Translation equals the source.
+     * Translation is written to {@link #outFile}.
+     * @param filter the filter to test
+     * @param filename the file to use as input for the filter
+     * @throws Exception when the filter throws an exception
+     */
     protected void translate(AbstractFilter filter, String filename) throws Exception {
         translate(filter, filename, Collections.emptyMap());
     }
 
+    /**
+     * Helper function for testing the translateFile method of a filter. Translation equals the source.
+     * Translation is written to {@link #outFile}.
+     * @param filter the filter to test
+     * @param filename the file to use as input for the filter
+     * @param config the filter options/config to use
+     * @throws Exception when the filter throws an exception
+     */
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
         filter.translateFile(new File(filename), outFile, config, context,
                 new ITranslateCallback() {
@@ -267,14 +328,39 @@ public abstract class TestFilterBase extends TestCore {
         filter.alignFile(inFile, outFile, Collections.emptyMap(), context, callback);
     }
 
+    /**
+     * Asserts if the filter translateFile method produces a binary identical file from the given file, when no
+     * filter options/config given.
+     *
+     * @param filter The filter to test
+     * @param filename the file to translate during the test
+     * @throws Exception when the filter throws an exception.
+     */
     protected void translateText(AbstractFilter filter, String filename) throws Exception {
         translateText(filter, filename, Collections.emptyMap());
     }
+    /**
+     * Asserts if the filter translateFile method produces a binary identical file from the given file under the given
+     * filter options/config.
+     * @param filter The filter to test
+     * @param filename the file to translate during the test
+     * @param config  the filter options/config
+     * @throws Exception when the filter throws an exception.
+     */
+
     protected void translateText(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
         translate(filter, filename, config);
         compareBinary(new File(filename), outFile);
     }
 
+    /**
+     * Tests if the filter translateFile method produces an identical XML file from the given file, when no
+     * filter options/config given.
+     *
+     * @param filter The filter to test
+     * @param filename the file to translate during the test
+     * @throws Exception when the filter throws an exception.
+     */
     protected void translateXML(AbstractFilter filter, String filename) throws Exception {
         translate(filter, filename);
         compareXML(new File(filename), outFile);
@@ -389,7 +475,7 @@ public abstract class TestFilterBase extends TestCore {
         assertEquals(props.length, actual.length);
         for (int i = 0; i < actual.length; i += 2) {
             int keyIndex = expected.indexOf(actual[i]);
-            assertFalse(keyIndex == -1);
+            assertNotEquals(keyIndex, -1);
             int valIndex = expected.indexOf(actual[i + 1]);
             assertEquals(keyIndex + 1, valIndex);
         }

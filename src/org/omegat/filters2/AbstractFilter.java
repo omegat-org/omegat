@@ -600,6 +600,9 @@ public abstract class AbstractFilter implements IFilter {
      * <li>Instruct OmegaT what source strings are translatable.
      * <li>Get the translation of each source string.
      * </ul>
+     * NB: this method doesn't use ID's or path or protectedParts. If your file format has ID's, paths or
+     * protectedParts, then call {@link #entryParseCallback}.addEntry or
+     * {@link #entryTranslateCallback}.getTranslation instead.
      *
      * @param entry
      *            Translatable source string

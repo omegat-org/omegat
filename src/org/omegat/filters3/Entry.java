@@ -456,8 +456,6 @@ public class Entry {
      *            Whether tags of this entry can be aggregated.
      * @param xmlDialect
      *            dialect for processing shortcuts
-     * @param shortcutDetails
-     *            shortcuts details
      */
     public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect, List<ProtectedPart> protectedParts) {
         if (tagsAggregation != this.tagsAggregationEnabled) {

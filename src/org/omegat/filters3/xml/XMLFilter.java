@@ -96,8 +96,6 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      *
      * @param inFile
      *            The source file.
-     * @param outEncoding
-     *            Encoding of the source file, if the filter supports it. Otherwise null.
      * @return The reader of the source file.
      *
      * @throws UnsupportedEncodingException

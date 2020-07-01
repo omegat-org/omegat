@@ -367,8 +367,8 @@ public final class TagUtil {
     }
 
     /**
-     * Find some protected parts defined in Tag Validation Options dialog: printf variables, java
-     * MessageFormat patterns, user defined cusom tags.
+     * Find some protected parts according to the given regular expression. E.g. printf variables, java
+     * MessageFormat patterns, user defined custom tags.
      *
      * These protected parts shouldn't affect statistic but just be displayed in gray in editor and take part
      * in tag validation.
@@ -377,7 +377,7 @@ public final class TagUtil {
             Pattern protectedPartsPatterns, List<ProtectedPart> protectedParts) {
         List<ProtectedPart> result;
         if (protectedParts != null) {
-            // Remove already define protected parts first for prevent intersection
+            // Remove already defined protected parts first to prevent intersection
             for (ProtectedPart pp : protectedParts) {
                 source = source.replace(pp.getTextInSourceSegment(), StaticUtils.TAG_REPLACEMENT);
             }

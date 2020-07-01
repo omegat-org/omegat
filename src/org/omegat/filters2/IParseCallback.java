@@ -54,7 +54,7 @@ public interface IParseCallback {
      *            path of segment
      * @param filter
      *            filter which produces entry
-     * @param protectedParts
+     * @param protectedParts (since 3.0.6)
      *            protected parts
      */
     void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
@@ -68,7 +68,7 @@ public interface IParseCallback {
             IFilter filter, List<ProtectedPart> protectedParts);
 
     /**
-     * Old call without path, for compatibility
+     * Old call without path, for compatibility with OmegaT < 2.5.0
      */
     void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
             IFilter filter);

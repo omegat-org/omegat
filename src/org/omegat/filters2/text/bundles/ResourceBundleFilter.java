@@ -235,13 +235,8 @@ public class ResourceBundleFilter extends AbstractFilter {
      *
      * @param text
      *            Text to convert.
-     * @param key
-     *            Whether it's a key of the key-value pair (' ', ':', '=' MUST
-     *            be escaped in a key and MAY be escaped in value, but we don't
-     *            escape these).
-     * @param encodingAscii
-     *            If false, keep the text in the source encoding (if assume what
-     *            it is UTF-8, what is the another supported encoding)
+     * @param mode Is the string part of a key, a value or a comment?
+     * @return The ascii string
      */
     private String toAscii(String text, EscapeMode mode) {
         CharsetEncoder charsetEncoder = Charset.forName(targetEncoding).newEncoder();
@@ -353,8 +348,8 @@ public class ResourceBundleFilter extends AbstractFilter {
         // panel
         String comments = null;
 
-        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
-        try {
+        // fix for bug 1462566
+        try (LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader)) {
             while ((raw = lbpr.readLine()) != null) {
 
                 String trimmed = raw.trim();
@@ -468,8 +463,6 @@ public class ResourceBundleFilter extends AbstractFilter {
                     }
                 }
             }
-        } finally {
-            lbpr.close();
         }
     }
 
@@ -527,8 +520,8 @@ public class ResourceBundleFilter extends AbstractFilter {
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile,
             org.omegat.filters2.FilterContext fc) throws Exception {
-        Map<String, String> source = new HashMap<String, String>();
-        Map<String, String> translated = new HashMap<String, String>();
+        Map<String, String> source = new HashMap<>();
+        Map<String, String> translated = new HashMap<>();
 
         align = source;
         processFile(sourceFile, new NullBufferedWriter(), fc);

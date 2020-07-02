@@ -29,9 +29,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -94,7 +92,7 @@ public class TagIssue implements IIssue {
     public String getDescription() {
         Map<TagError, Long> freq = Stream.of(report.srcErrors, report.transErrors).flatMap(m -> m.values().stream())
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        return "<html>" + freq.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).map(e -> {
+        return "<html>" + freq.entrySet().stream().sorted(Map.Entry.comparingByKey()).map(e -> {
             TagError error = e.getKey();
             String message = ErrorReport.localizedTagError(e.getKey());
             String html = colorizeByHTML(message, error);
@@ -155,7 +153,7 @@ public class TagIssue implements IIssue {
             JMenuItem doFix = new JMenuItem();
             org.openide.awt.Mnemonics.setLocalizedText(doFix, OStrings.getString("ISSUES_TAGS_BUTTON_APPLY_FIX"));
             doFix.addActionListener(getFixActionListener(fixText));
-            return Arrays.asList(doFix);
+            return Collections.singletonList(doFix);
         }
     }
 

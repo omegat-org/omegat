@@ -30,7 +30,7 @@ import java.util.List;
 import org.omegat.core.data.SourceTextEntry;
 
 /**
- * Interface for calculate marks in editor.
+ * Interface to calculate marks in editor.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -41,9 +41,14 @@ public interface IMarker {
      * Method will be called NOT in Swing thread.
      * <p>
      * Note to implementers: Both <code>sourceText</code> and <code>translationText</code> might be null!
-     *
+
+     * @param ste
+     * @param sourceText might be null!
+     * @param translationText might be null!
+     * @param isActive is this an active segment in the document?
      * @return null if nothing changed, or list of new marks. Empty list must be returned if marks shouldn't
      *         be displayed
+     * @throws Exception
      */
     List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception;

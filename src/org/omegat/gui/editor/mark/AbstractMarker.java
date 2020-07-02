@@ -39,8 +39,8 @@ import org.omegat.core.data.SourceTextEntry;
 
 /**
  * Abstract marker class that marks source and target text according to some
- * 'pattern' and paints them accoriding to some 'PAINTER' and 'ATTRIBUTES' (all
- * of they defined by implementing classes)
+ * 'pattern' and paints them according to some 'PAINTER' and 'ATTRIBUTES' (all
+ * of them defined by implementing classes)
  *
  * @author Martin Fleurke
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -76,7 +76,7 @@ public abstract class AbstractMarker implements IMarker {
             return null;
         }
 
-        List<Mark> r = new ArrayList<Mark>();
+        List<Mark> r = new ArrayList<>();
         Matcher match;
         if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) { // TODO
             initDrawers(true, isActive);

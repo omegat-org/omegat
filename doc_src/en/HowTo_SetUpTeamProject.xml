@@ -225,9 +225,9 @@
 
         <listitem>
           <para>Add patterns using wildcards (Apache Ant style): *, ?,
-          **</para>
+          **. Separate different patterns with a semicolon.</para>
 
-          <para>Example: <userinput>**/.ini/**</userinput></para>
+          <para>Example: <userinput>**/excludedfolder/**;*.txt</userinput> excludes files that have /excludedfolder/ in the path, and files with .txt extension.</para>
         </listitem>
       </varlistentry>
 
@@ -238,10 +238,10 @@
           <para>As above.</para>
 
           <para>Example: <userinput>**/*.docx</userinput> to add all .docx
-          files, wherever they are located in the project.</para>
+          files, wherever they are located in the project, even in excluded folders</para>
 
-          <para>The inclusion rules take priority over the exclusion
-          rules.</para>
+          <para>By default, all files that are not excluded are included. You only need to specify this to
+              override some exclusions.</para>
         </listitem>
       </varlistentry>
     </variablelist>

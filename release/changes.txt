@@ -1,12 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 5.4.0
 ----------------------------------------------------------------------
-  0 Enhancements
+  1 Enhancements
   0 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
 
+  Implemented requests:
+  - Sync file deletions from repository to project
+  https://sourceforge.net/p/omegat/feature-requests/1499/
 
 ----------------------------------------------------------------------
  OmegaT 5.3.0 (2020-08-03)

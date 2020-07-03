@@ -66,8 +66,7 @@
 
   <para><emphasis role="bold">Deleting source files</emphasis></para>
 
-  <para>Files must be deleted first by the project manager, and then
-  locally.</para>
+  <para>Files must be deleted by the project manager.</para>
 
   <para><emphasis role="bold">Changing segmentation rules or file
   filters</emphasis></para>

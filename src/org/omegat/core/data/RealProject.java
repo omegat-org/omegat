@@ -226,8 +226,7 @@ public class RealProject implements IProject {
         config = props;
         if (config.getRepositories() != null && !Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
             try {
-                remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(),
-                        config.getRepositories());
+                remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories(), config);
             } catch (Exception ex) {
                 // TODO
                 throw new RuntimeException(ex);
@@ -340,19 +339,12 @@ public class RealProject implements IProject {
                 try {
                     tmxPrepared = null;
                     glossaryPrepared = null;
-
-                    remoteRepositoryProvider.switchAllToLatest();
+                    remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
                 } catch (IRemoteRepository2.NetworkException e) {
                     Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause());
                     setOfflineMode();
                 }
-
-                remoteRepositoryProvider.copyFilesFromRepoToProject("", '/' + RemoteRepositoryProvider.REPO_SUBDIR,
-                        '/' + RemoteRepositoryProvider.REPO_GIT_SUBDIR, '/' + RemoteRepositoryProvider.REPO_SVN_SUBDIR,
-                        '/' + OConsts.FILE_PROJECT,
-                        '/' + config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION,
-                        '/' + config.getWritableGlossaryFile().getUnderRoot(),
-                        '/' + config.getTargetDir().getUnderRoot());
+                remoteRepositoryProvider.copyFilesFromRepoToProject("");
 
                 // After adding filters.xml and segmentation.conf, we must reload them again
                 config.loadProjectFilters();
@@ -664,7 +656,7 @@ public class RealProject implements IProject {
             // commit translations
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
-                remoteRepositoryProvider.switchAllToLatest();
+                remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
                 remoteRepositoryProvider.copyFilesFromProjectToRepo(config.getTargetDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
@@ -1900,7 +1892,7 @@ public class RealProject implements IProject {
         if (isRemoteProject() && config.getSourceDir().isUnderRoot())  {
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_START");
-                remoteRepositoryProvider.switchAllToLatest();
+                remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
                 remoteRepositoryProvider.copyFilesFromProjectToRepo(config.getSourceDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getSourceDir().getUnderRoot(), "Commit source files");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_DONE");

@@ -120,7 +120,7 @@ public final class TestTeamIntegrationChild {
             TestCoreInitializer.initEditor(editor);
 
             ProjectProperties config = TestTeamIntegration.createConfig(repo, new File(dir));
-            new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories());
+            new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories(), config);
 
             // load project
             ProjectProperties projectProperties = ProjectFileStorage.loadProjectProperties(new File(dir));

@@ -67,10 +67,14 @@ public interface IRemoteRepository2 {
     void addForCommit(String path) throws Exception;
 
     /**
+     * Return directory where this repo is in.
+     * @return The firectory, e.g. /path/to/omegatdir/.repositories/https_site.com_myproject.git
+     */
+    File getLocalDirectory();
+
+    /**
      * Commit to repository after specified version, or after any version if 'null' specified.
      *
-     * @param path
-     *            path for commit
      * @param onVersions
      *            if version defined, then commit must be just after this version. Otherwise(if remote repository was
      *            updated after rebase), commit shouldn't be processed and should return null. If version is null, then

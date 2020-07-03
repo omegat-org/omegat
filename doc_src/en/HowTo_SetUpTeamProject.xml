@@ -96,8 +96,7 @@
     SVN or Git client.</para>
 
     <para>To <emphasis role="bold">delete files</emphasis>, use an SVN or Git
-    client. These files won't be deleted automatically on the translator's
-    side: you must ask them to delete the files manually.</para>
+    client.</para>
 
     <para>Note that only two files are modified by OmegaT during
     translation:</para>

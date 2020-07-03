@@ -129,6 +129,11 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     @Override
+    public File getLocalDirectory() {
+        return baseDirectory;
+    }
+
+    @Override
     public String commit(String[] onVersions, String comment) throws Exception {
         Log.logDebug(LOGGER, "Commit not supported for HTTP repositories.");
 

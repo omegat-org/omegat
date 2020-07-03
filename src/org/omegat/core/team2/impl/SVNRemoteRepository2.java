@@ -134,6 +134,11 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
+    public File getLocalDirectory() {
+        return baseDirectory;
+    }
+
+    @Override
     public String commit(String[] onVersions, String comment) throws Exception {
         Log.logInfoRB("SVN_START", "commit");
         File[] forCommit = new File[]{baseDirectory};

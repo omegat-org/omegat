@@ -226,6 +226,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
+    public File getLocalDirectory() {
+        return localDirectory;
+    }
+
+    @Override
     public String commit(String[] onVersions, String comment) throws Exception {
         if (onVersions != null) {
             // check versions

@@ -52,6 +52,14 @@ public class TagValidationTest {
         assertTrue(report.srcErrors.isEmpty());
         assertTrue(report.transErrors.isEmpty());
 
+        // No errors, html 'input' element (<i1>) is not a start tag, but single.
+        String[] srcTags1 = {"<s0>", "<i1>", "</s0>"};
+        String[] locTags1 = {"<s0>", "<i1>", "</s0>"};
+        report = new ErrorReport();
+        TagValidation.inspectOrderedTags(getList(srcTags1), getList(locTags1), false, report);
+        assertTrue(report.srcErrors.isEmpty());
+        assertTrue(report.transErrors.isEmpty());
+
         // Missing </g0>
         String[] srcTags2 = {"<g0>", "<g1>", "</g1>", "</g0>"};
         String[] locTags2 = {"<g0>", "<g1>", "</g1>"};

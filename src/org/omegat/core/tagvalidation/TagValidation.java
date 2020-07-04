@@ -221,7 +221,14 @@ public final class TagValidation {
             // Build stack of tags to check well-formedness.
             switch (tag.getType()) {
             case START:
-                tagStack.push(tag);
+                String endTag =  tag.getPairedTag();
+                if (TagUtil.containsTag(srcTags, endTag)) {
+                    tagStack.push(tag);
+                }
+                // else:
+                //source text doesn't have an end-tag for this tag, so probably the type is 'SINGLE' and not START.
+                // E.g. html2 filter produces <i0> for <input> instead of <i0/> and <br0> instead of <br0/>
+                //Ignore tag.
                 break;
             case END:
                 if (!tagStack.isEmpty() && tagStack.peek().getName().equals(tag.getName())) {

@@ -53,8 +53,8 @@ public final class TagValidation {
 
         Pattern pattern = PatternConsts.SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
 
-        List<Tag> srcTags = new ArrayList<Tag>();
-        List<Tag> locTags = new ArrayList<Tag>();
+        List<Tag> srcTags = new ArrayList<>();
+        List<Tag> locTags = new ArrayList<>();
         Matcher javaMessageFormatMatcher = pattern.matcher(report.source);
         while (javaMessageFormatMatcher.find()) {
             srcTags.add(new Tag(javaMessageFormatMatcher.start(), javaMessageFormatMatcher.group(0)));
@@ -97,19 +97,19 @@ public final class TagValidation {
 
     public static Map<String, Tag> extractPrintfVars(Pattern printfPattern, String translation) {
         Matcher printfMatcher = printfPattern.matcher(translation);
-        Map<String, Tag> nameMapping = new HashMap<String, Tag>();
+        Map<String, Tag> nameMapping = new HashMap<>();
         int index = 1;
         while (printfMatcher.find()) {
             String printfVariable = printfMatcher.group(0);
             String argumentswapspecifier = printfMatcher.group(1);
             if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
                 String normalized = "" + argumentswapspecifier.substring(0, argumentswapspecifier.length() - 1)
-                        + printfVariable.substring(printfVariable.length() - 1, printfVariable.length());
+                        + printfVariable.substring(printfVariable.length() - 1);
                 nameMapping.put(normalized, new Tag(printfMatcher.start(), printfVariable));
 
             } else {
                 String normalized = "" + index
-                        + printfVariable.substring(printfVariable.length() - 1, printfVariable.length());
+                        + printfVariable.substring(printfVariable.length() - 1);
                 nameMapping.put(normalized, new Tag(printfMatcher.start(), printfVariable));
                 index++;
             }
@@ -203,8 +203,8 @@ public final class TagValidation {
 
         // Check translation tags.
 
-        List<Tag> expectedTags = new ArrayList<Tag>(srcTags);
-        Stack<Tag> tagStack = new Stack<Tag>();
+        List<Tag> expectedTags = new ArrayList<>(srcTags);
+        Stack<Tag> tagStack = new Stack<>();
         for (Tag tag : locTags) {
             // Make sure tag exists in source.
             if (!TagUtil.containsTag(srcTags, tag.tag)) {
@@ -279,8 +279,8 @@ public final class TagValidation {
     }
 
     private static List<Tag> getCommonTags(List<Tag> orig, List<Tag> compare) {
-        List<Tag> result = new ArrayList<Tag>();
-        List<Tag> uninspected = new ArrayList<Tag>(compare);
+        List<Tag> result = new ArrayList<>();
+        List<Tag> uninspected = new ArrayList<>(compare);
         for (Tag oTag : orig) {
             for (Tag cTag : uninspected) {
                 if (oTag.tag.equals(cTag.tag)) {

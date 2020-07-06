@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>Вигляд</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Позначати перекладені сегменти</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець, перекладені сегменти будуть позначатися жовтим.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Позначати неперекладені сегменти</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець, неперекладені сегменти будуть позначатися фіолетовим.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Позначати межі абзаців</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець, то межі між абзацами документу для перекладу будуть візуально виділені.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Показувати текст оригіналу в перекладених сегментах</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець, текст сегментів для перекладу буде відображатися та підсвічуватися зеленим кольором. Якщо прапорець не стоїть, оригінали неактивних сегментів не відображатимуться.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Позначати неунікальні сегменти</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець, всі неунікальні сегменти (повтори) будуть позначені сірим кольором.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Позначати сегменти з примітками</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець, сегменти із примітками будуть позначатися блакитним. Ця позначка має приорітет над <guimenuitem>Позначати перекладені сегменти</guimenuitem> та <guimenuitem>Позначати неперекладені сегменти</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Позначати нерозривні пробіли</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець, нерозривні пробіли будуть відображатися на сірому тлі.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Позначити пробіли</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець, пробіли будуть відображатися із маленькою крапкою.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Позначати керівні символи керування напрямком письма</term>
+
+      <listitem>
+        <para>Цей параметр показує <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">символи керування напрямком тексту</ulink></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Позначати автоматично заповнені сегменти</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець, то тло сегментів, переклад для яких автоматично заповнюється (наприклад, у файлах TMX із теки <filename>/tm/auto</filename>), буде кольоровим. Зверніть увагу, що для цого параметр <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Зберігати статус автоматичного заповнення</guimenuitem></link> має бути активним. Звичайні переклади, що вставляються з теки auto, будуть помаранчевого кольору. Інші переклади, що мають додаткові характеристики, прописані у TMX, можуть відображатися у інших кольорах. Технічні деталі можна знайти у <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Запиті щодо нової функціональності</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Примусове використання резервного шрифту</term>
+
+      <listitem>
+        <para>Виберіть цей параметр, якщо <application>OmegaT</application> не відображає правильно певні символи (навіть якщо ці символи є у шрифтах, що встановлені на комп'ютері). Зверніть увагу: під Windows ця функція OmegaT може конфліктувати з системним механізмом використання резервних шрифтів, що може призводити до небажаних замін. Саме тому вона відключена у стандартних налаштуваннях.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Інформація про зміни</term>
+
+      <listitem>
+        <para>Якщо вибрати <guimenuitem>Показувати для поточного сегменту</guimenuitem>, то для нього буде відображений час та автор останньої зміни. Якщо вибрати <guimenuitem>Показувати для всіх сегментів</guimenuitem>, ця інформація буде відображена для всіх сегментів. <guimenuitem>Не показувати</guimenuitem> вимикає цю опцію.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

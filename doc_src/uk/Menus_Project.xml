@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.project">
+  <title>Проєкт</title>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Новий...</guimenuitem></term>
+
+      <listitem>
+        <para>Створити та відкрити новий проєкт.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><guimenuitem>Стягнути командний проєкт...</guimenuitem></term>
+
+      <listitem>
+        <para>Створити локальну копію віддаленого проєкту OmegaT. Див. <link linkend="howto.useteamproject">Як використовувати командні проєкти</link> для детальнішої інформації.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Відкрити...</term>
+
+      <listitem>
+        <para>Відкрити попередньо створений проєкт.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Відкрити недавній проєкт</term>
+
+      <listitem>
+        <para>Отримати доступ до десяти останніх проєктів. Якщо ви оберете один з них, поточний проєкт збережеться, закриється, і OmegaT відкриє вибраний проєкт.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Скопіювати документи до теки з файлами для перекладу...</term>
+
+      <listitem>
+        <para>Скопіювати вибрані файли у теку <filename>source</filename> та перезавантажити проєкт, щоб завантажити ці файли проєкту.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Стягнути сторінку MediaWiki...</term>
+
+      <listitem>
+        <para>Щоб перекласти сторінку Вікіпедії, наприклад:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Перейдіть на вкладку <guilabel>Редагувати</guilabel> сторінки Вікіпедії.</para>
+          </listitem>
+
+          <listitem>
+            <para>Скопіюйте URL цієї сторінки (він має закінчуватися на <guilabel>action=edit</guilabel>) та вставте його у <application>OmegaT</application>.</para>
+          </listitem>
+        </orderedlist>
+
+        <para>Коли ви завершите переклад, то щоб імпортувати його назад у Вікіпедію:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Відкрийте файл <filename>.UTF8</filename>, що буде згенеровано у теці <filename>/target</filename>.</para>
+          </listitem>
+
+          <listitem>
+            <para>Скопіюйте текст і вставте перекладену версію на сторінку Вікіпедії.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Перезавантажити проєкт</term>
+
+      <listitem>
+        <para>Перезавантажити проєкт, щоб включити в нього зміни, що були зроблені у файлах для перекладу та налаштуваннях проєкту.</para>
+
+        <para>Нові файли памʼяті перекладів, що були додані до теки <filename>/tm</filename>, стають доступні відразу, без перезавантаження. Достатньо перейти від одного сегмента до іншого.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Закрити</term>
+
+      <listitem>
+        <para>Зберегти переклад і закрити проєкт.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Зберегти</term>
+
+      <listitem>
+        <para>Зберегти внутрішню памʼять перекладів на жорсткий диск. OmegaT автоматично зберігає переклад кожні 3 хвилини, а також коли ви закриваєте проєкт або виходите з програми.</para>
+
+        <para>Інтервал між збереженнями можна змінити у діалозі <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Налаштування</guimenuitem> <guimenuitem>Параметри</guimenuitem> <guimenuitem>Збереження та вивід</guimenuitem> </menuchoice></link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Зафіксувати файли для перекладу</term>
+
+      <listitem>
+        <para>Завантажити на сховище файли із теки <filename>source</filename>, що локально додавали або змінювали.</para>
+
+        <para>Ця функція має сенс лише для командних проєктів.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Зафіксувати перекладені файли</term>
+
+      <listitem>
+        <para>Завантажити на сховище локально створені файли з теки <filename>target</filename>.</para>
+
+        <para>Ця функція має сенс лише для командних проєктів.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Створити перекладені документи</term>
+
+      <listitem>
+        <para>Створити перекладені документи на основі вашого перекладу. Створені документи будуть розташовані в теці <filename>target</filename>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Створити перекладений поточний документ</term>
+
+      <listitem>
+        <para>Створити перекладений документ із активного файлу.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Відкрити проєкт MED...</term>
+
+      <listitem>
+        <para>Відкрити пакет проєкту у форматі MED. Цей формат визначений Генеральним директоратом Європейського союзу з питань перекладу.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Створити проєкт MED...</term>
+
+      <listitem>
+        <para>Перетворити активний проєкт у проєкт MED.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Властивості...</term>
+
+      <listitem>
+        <para>Відкрити діалог <link linkend="dialogs.projectproperties">Властивості проєкту</link>, щоб змінити мови проєкту та розташування тек.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Файли проєкту...</term>
+
+      <listitem>
+        <para>Відкрити вікно <link linkend="windows.projectfiles">Файли проєкту</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Відкрити вміст проєкту</term>
+
+      <listitem>
+        <para>Отримати доступ до тек проєкту.</para>
+
+        <para>Наприклад, є окремі пункти меню, що відкривають теки з документами для перекладу, перекладеними документами, та глосарієм, відкритого для редагування. Документи будуть відкриті у стандартній програмі операційної системи. Якщо документи недоступні, пункт меню буде позначено сірим кольором.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вийти</term>
+
+      <listitem>
+        <para>Зберегти проєкт та вийти з <application>OmegaT</application>. Якщо ви ще не зберігали проєкт, перед виходом ви вручну підтверджуєте, що хочете вийти.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

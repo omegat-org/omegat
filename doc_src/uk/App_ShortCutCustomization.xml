@@ -1,0 +1,1137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.shortcut.custom">
+  <title>Налаштування комбінацій клавіш</title>
+
+  <section id="ch04.shortcuts.customization">
+    <title>Налаштування комбінацій клавіш</title>
+
+    <para>Для більшості пунктів головного меню можна налаштувати комбінації клавіш. Ви можете змінити вже наявні комбінації та додати нові, поклавши файл із комбінаціями в теку налаштувань <application>OmegaT</application> (меню <menuchoice> <guimenuitem>Налаштування</guimenuitem> <guimenuitem>Відкрити теку з налаштуваннями</guimenuitem> </menuchoice>).</para>
+
+    <para>Файл визначення комбінацій клавіш повинен мати назву <filename>MainMenuShortcuts.properties</filename> і містити лише одну комбінацію на рядок. Допустимо використовувати порожні рядки та коментарі, які починаються з «//». Текст в рядку після «//» ігнорується.</para>
+
+    <para>Щоб нові комбінації набули чинності, після змін у файлі <filename>MainMenuShortcuts.properties</filename> необхідно перезавантажити <application>OmegaT</application>.</para>
+
+    <para>Синтаксис комбінацій клавіш виглядає так: <code>&lt;код пункту меню&gt;=&lt;комбінація клавіш&gt;</code>, де <emphasis>&lt;код пункту меню&gt;</emphasis> - це код із таблиці, вказаної нижче, а <emphasis>&lt;комбінація клавіш&gt;</emphasis> - це комбінація клавіш, встановлена користувачем<footnote>
+        <para>Повний синтаксис комбінацій клавіш описано в документації Java 1.6 від Oracle (внизу сторінки): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
+      </footnote>.</para>
+
+    <para>&lt;комбінація клавіш&gt; складається з таких елементів: 0 чи більше елементів <code>&lt;модифікатор&gt;</code> потім 0 чи 1 <code>&lt;подія&gt;</code> за ним 1 <code>&lt;клавіша&gt;</code>, де:<itemizedlist>
+        <listitem>
+          <para><code>&lt;модифікатор&gt;</code> приймає значення: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
+              <para>На системах Mac модифікатор <emphasis>meta</emphasis> використовується для позначення кнопки <emphasis>command</emphasis> </para>
+            </footnote>, <emphasis>alt</emphasis>,
+          <emphasis>altGraph</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><code>&lt;подія&gt;</code> має значення: <emphasis>typed</emphasis> (введений символ - натиснута і відпущена клавіша), <emphasis>pressed</emphasis> (натиснута клавіша), <emphasis>released</emphasis> (відпущена клавіша)</para>
+        </listitem>
+
+        <listitem>
+          <para>та <code>&lt;клавіша&gt;</code> приймає значення будь-якої клавіші на вашій клавіатурі<footnote>
+              <para>Можливі події для клавіш перераховані в документації Java 1.6 від Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Опис Java 1.6 keyEvents</ulink></para>
+            </footnote>.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>Наприклад, в стандартних комбінаціях OmegaT<footnote>
+        <para>Стандартні комбінації OmegaT доступні на Sourceforge: <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Типові комбінації OmegaT</ulink></para>
+
+        <para>Стандартні комбінації OmegaT для Mac також доступні на Sourceforge, в них замість «ctrl» використовується «meta»: <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Стандартні комбінації OmegaT для Mac</ulink></para>
+      </footnote>можна знайти:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><code>projectOpenMenuItem=ctrl O</code></para>
+      </listitem>
+
+      <listitem>
+        <para><code>editCreateGlossaryEntryMenuItem=ctrl shift G</code></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Перша комбінація використовується для <guimenuitem>відкриття проєкту</guimenuitem>, друга - для <guimenuitem>створення запису до глосарія</guimenuitem>.</para>
+
+    <para>Якщо ви бажаєте використовувати <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> для відкриття проєкту, змініть у вашому <filename>MainMenuShortcuts.properties</filename> значення на таке:<code>
+    </code></para>
+
+    <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
+
+    <para>Якщо ви використовуєте Mac та бажаєте додати комбінацію клавіш <keycombo> <keycap>Shift</keycap> <keycap>Command</keycap> <keycap>S</keycap> </keycombo> до пункту <menuchoice> <guimenu>Інструменти</guimenu> <guimenuitem>Статистика</guimenuitem> </menuchoice>, додайте такий рядок до вашого <filename>MainMenuShortcuts.properties</filename>:<code/></para>
+
+    <para><code> toolsShowStatisticsStandardMenuItem=shift meta
+    S</code></para>
+
+    <para>Збережіть файл та перезапустіть <application>OmegaT</application>. Ваша нова комбінація клавіш повинна зʼявитися поруч зі зміненим пунктом меню. Якщо вони не конфліктують із системними комбінаціями, то вони будуть доступні в OmegaT.</para>
+  </section>
+
+  <section id="ch04.shortcuts.ProjectMenu">
+    <title>Меню «Проєкт»</title>
+
+    <table>
+      <title>Меню «Проєкт»</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Пункт меню</entry>
+
+            <entry>Стандартна комбінація клавіш</entry>
+
+            <entry>Код пункту меню</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Новий...</entry>
+
+            <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>projectNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Стягнути командний проєкт...</entry>
+
+            <entry/>
+
+            <entry>projectTeamNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити...</entry>
+
+            <entry><keycap>Ctrl+O</keycap></entry>
+
+            <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити недавній проєкт</entry>
+
+            <entry/>
+
+            <entry>projectOpenRecentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Скопіювати документи до теки з файлами для перекладу...</entry>
+
+            <entry/>
+
+            <entry>projectImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Стягнути сторінку MediaWiki...</entry>
+
+            <entry/>
+
+            <entry>projectWikiImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Перезавантажити проєкт</entry>
+
+            <entry><keycap>F5</keycap></entry>
+
+            <entry>projectReloadMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Закрити</entry>
+
+            <entry><keycap>Ctrl+Shift+W</keycap></entry>
+
+            <entry>projectCloseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Зберегти</entry>
+
+            <entry><keycap>Ctrl+S</keycap></entry>
+
+            <entry>projectSaveMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Створити перекладені документи</entry>
+
+            <entry><keycap>Ctrl+D</keycap></entry>
+
+            <entry>projectCompileMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Створити перекладений поточний документ</entry>
+
+            <entry><keycap>Ctrl+Shift+D</keycap></entry>
+
+            <entry>projectSingleCompileMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Властивості...</entry>
+
+            <entry><keycap>Ctrl+E</keycap></entry>
+
+            <entry>projectEditMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Файли проєкту...</entry>
+
+            <entry><keycap>Ctrl+L</keycap></entry>
+
+            <entry>viewFileListMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити вміст проєкту/Кореневу теку проєкту</entry>
+
+            <entry/>
+
+            <entry>projectAccessRootMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити вміст проєкту/Теку зі словниками</entry>
+
+            <entry/>
+
+            <entry>projectAccessDictionaryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити вміст проєкту/Теку з глосаріями</entry>
+
+            <entry/>
+
+            <entry>projectAccessGlossaryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити вміст проєкту/Теку з файлами для перекладу</entry>
+
+            <entry/>
+
+            <entry>projectAccessSourceMenuItem </entry>
+          </row>
+
+          <row>
+            <entry>Відкрити вміст проєкту/Теку з перекладеними файлами</entry>
+
+            <entry/>
+
+            <entry>projectAccessTargetMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити вміст проєкту/Поточний документ для перекладу</entry>
+
+            <entry/>
+
+            <entry>projectAccessCurrentSourceDocumentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити вміст проєкту/Поточний перекладений документ</entry>
+
+            <entry/>
+
+            <entry>projectAccessCurrentTargetDocumentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити вміст проєкту/Глосарій для запису</entry>
+
+            <entry/>
+
+            <entry>projectAccessWriteableGlossaryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вийти</entry>
+
+            <entry><keycap>Ctrl+Q</keycap></entry>
+
+            <entry>projectExitMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.EditMenu">
+    <title>Меню «Редагування»</title>
+
+    <table>
+      <title>Меню «Редагування»</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Пункт меню</entry>
+
+            <entry>Стандартна комбінація клавіш</entry>
+
+            <entry>Код пункту меню</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Скасувати останню дію</entry>
+
+            <entry><keycap>Ctrl+Z</keycap></entry>
+
+            <entry>editUndoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Повторити останню дію</entry>
+
+            <entry><keycap>Ctrl+Y</keycap></entry>
+
+            <entry>editRedoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Замінити збігом або вибраним текстом</entry>
+
+            <entry><keycap>Ctrl+R</keycap></entry>
+
+            <entry>editOverwriteTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вставити збіг або вибраний текст</entry>
+
+            <entry><keycap>Ctrl+I</keycap></entry>
+
+            <entry>editInsertTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Замінити машинним перекладом</entry>
+
+            <entry><keycap>Ctrl+M</keycap></entry>
+
+            <entry>editOverwriteMachineTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Замінити текстом оригіналу</entry>
+
+            <entry><keycap>Ctrl+Shift+R</keycap></entry>
+
+            <entry>editOverwriteSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вставити текст оригіналу</entry>
+
+            <entry><keycap>Ctrl+Shift+I</keycap></entry>
+
+            <entry>editInsertSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вставити всі пропущені теґи</entry>
+
+            <entry><keycap>Ctrl+Shift+T</keycap></entry>
+
+            <entry>editTagPainterMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вставити наступний пропущений теґ</entry>
+
+            <entry><keycap>Ctrl+T</keycap></entry>
+
+            <entry>editTagNextMissedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Експортувати вибраний текст</entry>
+
+            <entry><keycap>Ctrl+Shift+C</keycap></entry>
+
+            <entry>editExportSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Створити запис у глосарії</entry>
+
+            <entry><keycap>Ctrl+Shift+G</keycap></entry>
+
+            <entry>editCreateGlossaryEntryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Шукати в проєкті...</entry>
+
+            <entry><keycap>Ctrl+F</keycap></entry>
+
+            <entry>editFindInProjectMenuItem</entry>
+          </row>
+
+          <row>
+            <entry/>
+
+            <entry><keycap>Ctrl+Shift+F</keycap></entry>
+
+            <entry>findInProjectReuseLastWindow</entry>
+          </row>
+
+          <row>
+            <entry>Знайти та замінити...</entry>
+
+            <entry><keycap>Ctrl+K</keycap></entry>
+
+            <entry>editReplaceInProjectMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Змінити регістр/Усе в нижньому регістрі</entry>
+
+            <entry/>
+
+            <entry>lowerCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Змінити регістр/Усе у верхньому регістрі</entry>
+
+            <entry/>
+
+            <entry>upperCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Змінити регістр/Кожне слово з великої літери</entry>
+
+            <entry/>
+
+            <entry>titleCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Змінити регістр/Перше слово з великої літери</entry>
+
+            <entry/>
+
+            <entry>sentenceCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Змінити регістр/Циклічна зміна регістра</entry>
+
+            <entry><keycap>Shift+F3</keycap></entry>
+
+            <entry>cycleSwitchCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вибрати попередній збіг</entry>
+
+            <entry><keycap>Ctrl+↑</keycap></entry>
+
+            <entry>editSelectFuzzyPrevMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вибрати наступний збіг</entry>
+
+            <entry><keycap>Ctrl+↓</keycap></entry>
+
+            <entry>editSelectFuzzyNextMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вибрати збіг № 1</entry>
+
+            <entry><keycap>Ctrl+1</keycap></entry>
+
+            <entry>editSelectFuzzy1MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вибрати збіг № 2</entry>
+
+            <entry><keycap>Ctrl+2</keycap></entry>
+
+            <entry>editSelectFuzzy2MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вибрати збіг № 3</entry>
+
+            <entry><keycap>Ctrl+3</keycap></entry>
+
+            <entry>editSelectFuzzy3MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вибрати збіг № 4</entry>
+
+            <entry><keycap>Ctrl+4</keycap></entry>
+
+            <entry>editSelectFuzzy4MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вибрати збіг № 5</entry>
+
+            <entry><keycap>Ctrl+5</keycap></entry>
+
+            <entry>editSelectFuzzy5MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Використовувати як типовий переклад</entry>
+
+            <entry/>
+
+            <entry>editMultipleDefault</entry>
+          </row>
+
+          <row>
+            <entry>Створити варіант перекладу</entry>
+
+            <entry/>
+
+            <entry>editMultipleAlternate</entry>
+          </row>
+
+          <row>
+            <entry>Вилучити переклад</entry>
+
+            <entry/>
+
+            <entry>editRegisterUntranslatedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Зробити переклад порожнім</entry>
+
+            <entry/>
+
+            <entry>editRegisterEmptyMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Зареєструвати переклад, ідентичний оригіналові</entry>
+
+            <entry><keycap>Ctrl+Shift+S</keycap></entry>
+
+            <entry>editRegisterIdenticalMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.GoToMenu">
+    <title>Меню «Перехід»</title>
+
+    <table>
+      <title>Меню «Перехід»</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Пункт меню</entry>
+
+            <entry>Стандартна комбінація клавіш</entry>
+
+            <entry>Код пункту меню</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>До наступного неперекладеного сегмента</entry>
+
+            <entry><keycap>Ctrl+U</keycap></entry>
+
+            <entry>gotoNextUntranslatedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>До наступного перекладеного сегмента</entry>
+
+            <entry><keycap>Ctrl+Shift+U</keycap></entry>
+
+            <entry>gotoNextTranslatedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>До наступного сегмента</entry>
+
+            <entry><keycap>Ctrl+N</keycap> or <keycap>Enter</keycap> or
+            <keycap>Tab</keycap></entry>
+
+            <entry>gotoNextSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>До попереднього сегмента</entry>
+
+            <entry><keycap>Ctrl+P</keycap> чи <keycap>Ctrl+Enter</keycap> чи <keycap>Ctrl+Tab</keycap></entry>
+
+            <entry>gotoPreviousSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>До сегмента за номером...</entry>
+
+            <entry><keycap>Ctrl+J</keycap></entry>
+
+            <entry>gotoSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>До наступної примітки</entry>
+
+            <entry/>
+
+            <entry>gotoNextNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>До попередньої примітки</entry>
+
+            <entry/>
+
+            <entry>gotoPreviousNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>До наступного унікального сегмента</entry>
+
+            <entry><keycap>Ctrl+Shift+Q</keycap></entry>
+
+            <entry>gotoNextUniqueMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>До сегмента, з якого взято активний збіг</entry>
+
+            <entry><keycap>Ctrl+Shift+M</keycap></entry>
+
+            <entry>gotoMatchSourceSegment</entry>
+          </row>
+
+          <row>
+            <entry>До наступного сегмента з відвіданих</entry>
+
+            <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>До попереднього сегмента з відвіданих</entry>
+
+            <entry><keycap>Ctrl+Shift+P</keycap></entry>
+
+            <entry>gotoHistoryBackMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ViewMenu">
+    <title>Меню «Вигляд»</title>
+
+    <table>
+      <title>Меню «Вигляд»</title>
+
+       <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Пункт меню</entry>
+
+            <entry>Стандартна комбінація клавіш</entry>
+
+            <entry>Код пункту меню</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Позначати перекладені сегменти</entry>
+
+            <entry/>
+
+            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Позначати неперекладені сегменти</entry>
+
+            <entry/>
+
+            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Показувати текст оригіналу в перекладених сегментах</entry>
+
+            <entry/>
+
+            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Позначати неунікальні сегменти</entry>
+
+            <entry/>
+
+            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Позначати сегменти з примітками</entry>
+
+            <entry/>
+
+            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Позначати нерозривні пробіли</entry>
+
+            <entry/>
+
+            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Позначити пробіли</entry>
+
+            <entry/>
+
+            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Позначати керівні символи керування напрямком письма</entry>
+
+            <entry/>
+
+            <entry>viewMarkBidiCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Позначати автоматично заповнені сегменти</entry>
+
+            <entry/>
+
+            <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Інформація про зміни/Не показувати</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Інформація про зміни/Показувати для поточного сегменту</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Інформація про зміни/Показувати для всіх сегментів</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ToolsMenu">
+    <title>Меню «Інструменти»</title>
+
+    <table>
+      <title>Меню «Інструменти»</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Пункт меню</entry>
+
+            <entry>Стандартна комбінація клавіш</entry>
+
+            <entry>Код пункту меню</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Перевірка теґів</entry>
+
+            <entry><keycap>Ctrl+Shift+V</keycap></entry>
+
+            <entry>toolsValidateTagsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Перевірка теґів у поточному документі</entry>
+
+            <entry/>
+
+            <entry>toolsSingleValidateTagsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Статистика</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsStandardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Статистика збігів</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsMatchesMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Статистика збігів у файлах</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsMatchesPerFileMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.OptionsMenu">
+    <title>Меню «Налаштування»</title>
+
+    <table>
+      <title>Меню «Налаштування»</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Пункт меню</entry>
+
+            <entry>Стандартна комбінація клавіш</entry>
+
+            <entry>Код пункту меню</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Використовувати TAB для переходу до наступного сегмента</entry>
+
+            <entry/>
+
+            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Завжди підтверджувати вихід</entry>
+
+            <entry/>
+
+            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Глосарій/Показувати опис контексту для глосаріїв TBX</entry>
+
+            <entry/>
+
+            <entry>optionsGlossaryTBXDisplayContextCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Використати терміни, вжиті окремо у тексті оригіналу</entry>
+
+            <entry/>
+
+            <entry>optionsGlossaryExactMatchCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Глосарій/Шукати терміни у глосарії за основами слів</entry>
+
+            <entry/>
+
+            <entry>optionsGlossaryStemmingCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Підказки перекладу/Увімкнути підказки перекладу</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsEnableMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Автодоповнення/Автоматично показувати відповідні пропозиції</entry>
+
+            <entry/>
+
+            <entry>optionsAutoCompleteShowAutomaticallyItem</entry>
+          </row>
+
+          <row>
+            <entry>Автодоповнення/Глосарій...</entry>
+
+            <entry/>
+
+            <entry>optionsAutoCompleteGlossaryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Автодоповнення/Авто-текст...</entry>
+
+            <entry/>
+
+            <entry>optionsAutoCompleteAutoTextMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Автодоповнення/Таблиця символів...</entry>
+
+            <entry/>
+
+            <entry>optionsAutoCompleteCharTableMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Шрифт…</entry>
+
+            <entry/>
+
+            <entry>optionsFontSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Налаштування кольорів...</entry>
+
+            <entry/>
+
+            <entry>optionsColorsSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Фільтри файлів...</entry>
+
+            <entry/>
+
+            <entry>optionsSetupFileFiltersMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Сегментація...</entry>
+
+            <entry/>
+
+            <entry>optionsSentsegMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Перевірка правопису…</entry>
+
+            <entry/>
+
+            <entry>optionsSpellCheckMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Поведінка редактора…</entry>
+
+            <entry/>
+
+            <entry>optionsWorkflowMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Обробка теґів...</entry>
+
+            <entry/>
+
+            <entry>optionsTagValidationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Командна робота...</entry>
+
+            <entry/>
+
+            <entry>optionsTeamMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Зовнішні ТМХ…</entry>
+
+            <entry/>
+
+            <entry>optionsExtTMXMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Вигляд...</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Збереження та вивід...</entry>
+
+            <entry/>
+
+            <entry>optionsSaveOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Авторизація на проксі-сервері...</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuLoginItem</entry>
+          </row>
+
+          <row>
+            <entry>Відновити вигляд головного вікна</entry>
+
+            <entry/>
+
+            <entry>optionsRestoreGUIMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Відкрити теку з налаштуваннями</entry>
+
+            <entry/>
+
+            <entry>optionsAccessConfigDirMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.HelpMenu">
+    <title>Меню «Довідка»</title>
+
+    <table>
+      <title>Меню «Довідка»</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Пункт меню</entry>
+
+            <entry>Стандартна комбінація клавіш</entry>
+
+            <entry>Код пункту меню</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Посібник користувача...</entry>
+
+            <entry><keycap>F1</keycap></entry>
+
+            <entry>helpContentsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Про програму…</entry>
+
+            <entry/>
+
+            <entry>helpAboutMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Останні зміни...</entry>
+
+            <entry/>
+
+            <entry>helpLastChangesMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Журнал...</entry>
+
+            <entry/>
+
+            <entry>helpLogMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</appendix>

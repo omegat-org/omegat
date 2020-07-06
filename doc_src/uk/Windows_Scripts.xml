@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.scripts">
+  <title>Скрипти</title>
+
+  <para>Це вікно доступне через головне меню <menuchoice> <guimenuitem>Інструменти</guimenuitem>-<guimenuitem>Скрипти...</guimenuitem> </menuchoice></para>
+
+  <section>
+    <title>Використання</title>
+
+    <para>Вікно скриптів дозволяє завантажити скрипт у текстове поле та застосувати його до поточного проєкту. Для того, щоб скористатися певною скриптовою функцією потрібно:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Завантажити скрипт до редактора, обравши його ім'я на панелі ліворуч.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Натиснути правою кнопкою миші на один з пунктів внизу (цифри від <guilabel>&lt;1&gt;</guilabel> до <guilabel>&lt;12&gt;</guilabel>) та вибрати <guilabel>Додати скрипт</guilabel>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Запустити потрібний скрипт можна натиснувши лівою кнопкою миші на відповідну цифру. Ви також можете запустити його з головного меню, використовуючи відповідний пункт меню <guisubmenu>Інструменти</guisubmenu> або натиснувши<keycap> Ctrl+Alt+F#</keycap> (де # - це цифра від 1 до 12).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Типово скрипти зберігаються у теці <filename>scripts</filename>, розміщеній у теці програми OmegaT (там де лежить <filename>OmegaT.jar</filename>).</para>
+
+    <para>Якщо ви додасте туди нові файли, вони з'являться у списку доступних у вікні <guilabel>Скрипти</guilabel>.</para>
+
+    <para>Деякі додаткові скрипти можна знайти тут: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink></para>
+  </section>
+
+  <section>
+    <title>Скриптові мови</title>
+
+    <para>Підтримуються такі скриптові мови:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): динамічна мова для віртуальної машини Java. Вона поєднує потужність Java зі зручністю та виразністю, яка притаманна таким мовам як Python, Ruby чи Smalltalk.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (іноді скорочують як JS, не плутати з Java): прототипно-орієнтована мова з динамічною, слабкою типізацією та функціями як обʼєктами першого класу. Це мультипарадигмова мова, яка підтримує обʼєктно-орієнтований, імперативний та функціональний стилі програмування. Це мова таких популярних продуктів як Firefox, нею часто та охоче користуються для open-source проєктів.</para>
+        </listitem>
+      </itemizedlist>Всі мови мають доступ до об'єктної моделі OmegaT, де проєкт є головним об'єктом. Нижче наведений приклад коду на Groovy зчитує всі сегменти в усіх файлах поточного проєкту, і, якщо у них наявний переклад, друкує оригінал та переклад сегмента:</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
+  </section>
+</section>

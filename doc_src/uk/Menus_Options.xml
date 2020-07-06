@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>Налаштування</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Параметри...</term>
+
+      <listitem>
+        <para>Відкрити діалог <link linkend="dialogs.preferences">Параметри</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Машинний переклад</term>
+
+      <listitem>
+        <para>Дозволяє вмикати та вимикати інструменти машинного перекладу.</para>
+
+        <para>Якщо обрано кілька рушіїв машинного перекладу, то за допомогою <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> можна перемикатися між ними та вставляти останнє з обраних.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Глосарій</term>
+
+      <listitem>
+        <para>Виберіть <guimenuitem>Пошук термінології TaaS</guimenuitem>, щоб увімкнути пошук.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Словник</term>
+
+      <listitem>
+        <para>Поставте прапорець <guimenuitem>Шукати записи у словнику з використанням нечітких збігів</guimenuitem>, якщо ви хочете, щоб словники показували однокореневі слова.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Автодоповнення</term>
+
+      <listitem>
+        <para>Якщо поставити прапорець <guimenuitem>Автоматично показувати відповідні пропозиції</guimenuitem>, то автодоповнення буде показуватися автоматично з першої літери збігу чи &quot;&lt;&quot; у випадку теґів.</para>
+
+        <para>Оберіть <guimenuitem>Доповнення зі збереженого</guimenuitem>, щоб показувати у пропозиціях автодоповнення всі слова, що починаються із введених букв.</para>
+
+        <para>Оберіть <guimenuitem>Прогнозовані доповнення зі збереженого</guimenuitem>, щоб показувати у пропозиціях автодоповнення слова, що часто йдуть після попередніх слів.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Фільтри файлів...</term>
+
+      <listitem>
+        <para>Відкрити розділ <link linkend="dialogs.preferences.filefilters">Фільтри файлів</link> у діалозі Параметри.</para>
+
+        <para>Ці налаштування діють для всіх проєктів.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Сегментація...</term>
+
+      <listitem>
+        <para>Відкрити розділ <link linkend="dialogs.preferences.segmentationsetup">Налаштування сегментації</link> у діалозі Параметри.</para>
+
+        <para>Ці налаштування діють для всіх проєктів.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Область редагування...</term>
+
+      <listitem>
+        <para>Відкрити розділ <link linkend="dialogs.preferences.editor">Область редагування</link> у діалозі Параметри.</para>
+
+        <para>Ці налаштування діють для всіх проєктів.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Відкрити теку з налаштуваннями</term>
+
+      <listitem>
+        <para>Відкрити теку, у якій зберігаються файли налаштувань OmegaT. Конкретне місце залежить від операційної системи.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

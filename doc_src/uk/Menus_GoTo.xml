@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Перехід</title>
+
+  <para>Це меню активне лише коли відкритий проєкт.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>До наступного неперекладеного сегмента</term>
+
+      <listitem>
+        <para>Перейти до наступного сегмента, якому немає відповідника у памʼяті перекладів.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>До наступного перекладеного сегмента</term>
+
+      <listitem>
+        <para>Перейти до наступного перекладеного сегмента, пропустивши перекладені.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>До наступного сегмента</term>
+
+      <listitem>
+        <para>Перейти до наступного сегмента. Якщо поточний сегмент останній у файлі, переходить до першого сегмента у наступному файлі.</para>
+
+        <para>Зверніть увагу: <keycap>Enter</keycap> буде альтернативною комбінацією клавіш, якщо опція <link linkend="dialogs.preferences.general.usetabtoadvance">Використовувати TAB для переходу до наступного сегмента</link> вимкнута.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>До попереднього сегмента</term>
+
+      <listitem>
+        <para>Перейти до попереднього сегмента. Якщо поточний сегмент перший у файлі, переходить до останнього сегмента у попередньому файлі.</para>
+
+        <para>Зверніть увагу: <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> буде альтернативною комбінацією клавіш, якщо опція <link linkend="dialogs.preferences.general.usetabtoadvance">Використовувати TAB для переходу до наступного сегмента</link> вимкнута.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>До сегмента за номером...</term>
+
+      <listitem>
+        <para>Відкрити один із видимих сегментів, ввівши букву, яка виведеться поряд з ним, або відкрити сегмент за його глобальним номером, ввівши число та натиснувши Enter.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>До наступної примітки</term>
+
+      <listitem>
+        <para>Відкрити наступний сегмент з тих, до яких є примітки.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>До попередньої примітки</term>
+
+      <listitem>
+        <para>Відкрити попередній сегмент з примітками.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>До сегмента, з якого взято активний збіг</term>
+
+      <listitem>
+        <para>Перейти до сегмента, що відповідає виділеному збігу у панелі <guilabel>Нечіткі збіги</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>До наступного сегмента з відвіданих</term>
+
+      <listitem>
+        <para><application>OmegaT</application> запам'ятовує порядок відвідування сегментів. Цією командою ви можете перейти до сегмента, який ви перед цим залишили командою <guimenuitem>До попереднього сегмента з відвіданих</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>До попереднього сегмента з відвіданих</term>
+
+      <listitem>
+        <para>Цією командою ви можете пересуватися назад в історії відвідування сегментів. Рухатися в протилежному напрямку можна за допомогою команди <guimenuitem>До наступного сегмента з відвіданих</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

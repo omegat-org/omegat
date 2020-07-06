@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<book lang="uk">
+  <bookinfo>
+    <title>OmegaT 4.2 - Посібник користувача</title>
+
+    <author>
+      <firstname>Команда OmegaT</firstname>
+    </author>
+
+    <pubdate/>
+
+    <abstract>
+      <para>Цей документ — офіційний посібник користувача по OmegaT, вільної системи автоматизованого перекладу. Цей документ також містить інструкцію зі встановлення.</para>
+    </abstract>
+  </bookinfo>
+
+  <xi:include href="InstallingAndRunning.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT4_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT4_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT4_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT4_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT4_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<!--   <xi:include href="OmegaT4_Troubleshooting.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
+
+  <xi:include href="App_Dictionaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_Glossaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+   <xi:include href="App_Spellchecker.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_ShortCutCustomization.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</book>

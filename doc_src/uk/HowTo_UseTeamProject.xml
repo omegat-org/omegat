@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>Командні проєкти</title>
+
+  <para>Щоб працювати з командним проєктом, спершу треба <link linkend="howto.setupteamproject">створити його на сервері</link>.</para>
+
+  <para>Щоб вперше відкрити командний проєкт, слідуйте інструкціям вашого проєктного менеджера.</para>
+
+  <para>Після відкриття працюйте з командним проєктом так само, як зі звичайним, але зверніть увагу на такі моменти:</para>
+
+  <para><emphasis role="bold">Автоматичне збереження</emphasis></para>
+
+  <para>Раз у 3 хвилини (за типових налаштувань) локальний проєкт синхронізується з віддаленим репозиторієм. Таким чином менеджер проєкту та інші перекладачі зможуть бачити та користуватися перекладами, що були додані за цей час.</para>
+
+  <para>Інтервал між збереженнями можна змінити у діалозі <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Налаштування</guimenuitem> <guimenuitem>Параметри</guimenuitem> <guimenuitem>Збереження та вивід</guimenuitem> </menuchoice></link>.</para>
+
+  <para><emphasis role="bold">Синхронізовані файли</emphasis></para>
+
+  <para>Щоразу як проєкт автоматично зберігається, а також коли він відкривається, закривається чи перезавантажується, тільки два файла справді синхронізуються в обидві сторони:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Всі інші файли замінюються версіями з віддаленого репозиторія.</para>
+
+  <para><emphasis role="bold">Додавання файлів для перекладу</emphasis></para>
+
+  <para>Щоб додати файл для перекладу:</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>скопіюйте файли до теки <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>використайте <menuchoice> <guimenuitem>Проєкт</guimenuitem> <guimenuitem>Зафіксувати файли для перекладу</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>Хоча локальні файли для перекладу можна вільно модифікувати, якщо не провести фіксацію до того, як проєкт збережеться автоматично чи ви його перезавантажите чи закриєте, всі зміни втратяться.</para>
+
+  <para><emphasis role="bold">Видалення файлів для перекладу</emphasis></para>
+
+  <para>Файли має спочатку видалити проєктний менеджер, тільки тоді можна видаляти локальні копії.</para>
+
+  <para><emphasis role="bold">Зміна правил сегментації та фільтрів файлів</emphasis></para>
+
+  <para>Параметри проєкту має змінювати виключно менеджер проєкту.</para>
+
+  <para><emphasis role="bold">Робота без синхронізації</emphasis></para>
+
+  <para>Командний проєкт можна відкрити і перекладати без підключення до сервера. Всі зміни будуть синхронізовані, як тільки з'єднання відновиться.</para>
+
+  <para>Щоб працювати без синхронізації:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Від'єднайтесь від мережі перед відкриттям проєкту</para>
+    </listitem>
+
+    <listitem>
+      <para>або ж відкрийте проєкт з командного рядка, використовуючи опцію <command>--no-team</command>.</para>
+    </listitem>
+  </itemizedlist>
+</section>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.setupteamproject">
+  <title>Налаштування командного проєкту</title>
+
+  <para>Налаштування командного проєкту вимагає деяких знань про роботу серверів та систем керування версіями файлів SVN або Git. Найкраще виконати його зможе менеджер проєкту або інженер з локалізації.</para>
+
+  <para>Оскільки в інтернеті легко знайти купу інформації про SVN та Git, тут ми розповімо лише про те, як з ними працює OmegaT.</para>
+
+  <section>
+    <title>Крок 1: Створіть порожній проєкт на сервері</title>
+
+    <para><emphasis role="bold">Створення порожнього проєкту на сервері</emphasis></para>
+
+    <orderedlist>
+      <listitem>
+        <para>Створіть репозиторій SVN або Git на сервері, який буде доступним перекладачам.</para>
+      </listitem>
+
+      <listitem>
+        <para>Створіть локальну копію цього репозиторію (команди <command>checkout</command> для SVN, <command>clone</command> для Git).</para>
+      </listitem>
+
+      <listitem>
+        <para>Створіть новий, порожній проєкт OmegaT у локальному репозиторії. Зробити це можна двома шляхами:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><menuchoice>
+                <guimenuitem>Проєкт</guimenuitem> <guimenuitem>Новий...</guimenuitem>
+              </menuchoice></para>
+          </listitem>
+
+          <listitem>
+            <para>в командному рядку: <command>java -jar OmegaT.jar team init [lang1] [lang2]</command></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para>Додайте новий проєкт OmegaT до системи керування версіями (<command>add</command> у SVN та Git)</para>
+
+        <para>Зауважте: якщо проєкт був створений через командний рядок у кроці 3, цей крок виконанується програмою автоматично.</para>
+      </listitem>
+
+      <listitem>
+        <para>Опублікуйте новий проєкт OmegaT на сервері (<command>commit</command> для SVN, і <command>commit</command> , а потім <command>push</command> для Git).</para>
+      </listitem>
+    </orderedlist>
+
+    <para><emphasis role="bold">Особливі параметри</emphasis></para>
+
+    <para>Якщо проєкт використовує особливі фільтри та параметри сегментації, обидва файли <filename>filters.xml</filename> та <filename>segmentation.conf</filename> треба додати до системи керування версіями та розмістити на сервері.</para>
+  </section>
+
+  <section>
+    <title>Крок 2: Додайте файли для перекладу та інші ресурси</title>
+
+    <para>Використовуйте клієнт SVN або Git, щоб додати файли для перекладу.</para>
+
+    <para>Це можна зробити і в самій OmegaT:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>скопіюйте файли до теки <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>використайте <menuchoice> <guimenuitem>Проєкт</guimenuitem> <guimenuitem>Зафіксувати файли для перекладу</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>
+
+    <para>Щоб додати інші ресурси (словники, пам'яті TMX чи глосарії), використайте SVN або клієнт Git.</para>
+
+    <para>Щоб <emphasis role="bold">видалити файли</emphasis>, скористайтеся клієнтом SVN або Git. Ці файли не будуть видалені автоматично на боці перекладачів: доведеться попросити їх видалити файли вручну.</para>
+
+    <para>Зауважте, що під час перекладу на стороні перекладачів змін зазнають лише два файли OmegaT:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><filename>omegat/project_save.tmx</filename></para>
+      </listitem>
+
+      <listitem>
+        <para><filename>glossary/glossary.txt</filename></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Всі інші файли доступні лише для читання. Якщо перекладач спробує щось у них змінити, при наступному відкритті, закритті, перезавантаженні чи збереженні проєкту вони повернуться до попереднього стану.</para>
+  </section>
+
+  <section>
+    <title>Крок 3: Надіслати запрошення перекладачеві</title>
+
+    <para>Коли проєкт налаштовано на сервері, менеджер проєкту може запросити перекладача до роботи у ньому одним із двох способів:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>надіслати URL проєкту і попросити перекладача створити локальну копію через меню <menuchoice> <guimenuitem>Проєкт</guimenuitem> <guimenuitem>Стягнути командний проєкт</para>
+      </listitem>
+
+      <listitem>
+        <para>надіслати файл <filename>omegat.project</filename>, що містить посилання на репозиторій, і попросити перекладача скопіювати його у теку, яку він обрав для даного проєкту, та відкрити її в OmegaT.</para>
+
+        <para>Посилання виглядатиме так (приклад для репозиторію Git):</para>
+
+        <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+      </listitem>
+    </itemizedlist>
+
+    <para>В обох випадках менеджер проєкту повинен надіслати перекладачу ID та пароль для доступу до репозиторію.</para>
+
+    <para><emphasis role="bold">Перевірка статистики</emphasis></para>
+
+    <para>Менеджер проєкту має перевірити, що статистика на боці сервера та перекладача співпадає.</para>
+
+    <para>Якщо є якісь відмінності, перевірте, чи файли <filename>filters.xml</filename> та <filename>segmentation.conf</filename> включені до системи керування версіями.</para>
+  </section>
+
+  <section>
+    <title>Особливий випадок: мінімальна участь</title>
+
+    <para>Описане вище стосується звичайних випадків, коли менеджер проєкту хоче повністю контролювати проєкт, та де файли та статистика на боці перекладача та сервера ідентичні.</para>
+
+    <para>Командні проєкти OmegaT можна також налаштовувати іншим способом, так, щоб перекладачі користувалися спільною пам'яттю перекладів (файлом project_save.tmx), але не мали доступу до файлів оригіналу, які перекладають інші учасники проєкту.</para>
+
+    <para>У такому випадку процедура створення проєкту буде така ж за вийнятком того, що менеджер проєкту не додаватиме файли до теки source.</para>
+  </section>
+
+  <section id="howto.setupteamproject.mappingparameters">
+    <title>Параметри прив'язки</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>тип репозиторію</term>
+
+        <listitem>
+          <para>http (також https), svn або git</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>url репозиторію</term>
+
+        <listitem>
+          <para>Віддалене розташування файлів для перекладу.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>локальна прив'язка</term>
+
+        <listitem>
+          <para>Ім'я локальної теки або файлу, що співвідноситься з коренем проєкту OmegaT.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>репозиторій прив'язки</term>
+
+        <listitem>
+          <para>Ім'я віддаленої теки чи файлу, що співвідноситься з url репозиторію.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>виключає</term>
+
+        <listitem>
+          <para>Додайте паттерни, застосовуючи wildcards (стиль Apache Ant): *, ?, **. Відділяйте паттерни один від одного крапкою з комою.</para>
+
+          <para>Приклад: <userinput>**/excludedfolder/**;*.txt</userinput> виключає файли, що мають компонент /excludedfolder/ у шляху, та файл з розширенням .txt.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>включає</term>
+
+        <listitem>
+          <para>Як зазначено вище.</para>
+
+          <para>Приклад: <userinput>**/*.docx</userinput> додає всі файли .docx, де б вони не були розміщені у проєкті, навіть у папках, котрі підпадають під виключення.</para>
+
+          <para>За стандартними налаштуваннями всі файли, що не виключаються, включатимуться. Вказувати ці параметри потрібно лише щоб обійти деякі виключення.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Приклади прив'язки</title>
+
+    <para><programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Весь вміст <filename>https://repo_for_OmegaT_team_project</filename> прив'язаний до локального проєкту OmegaT </para>
+
+    <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+
+    <para>Весь вміст <filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> прив'язаний до локального проєкту OmegaT.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>Віддалений файл <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> прив'язаний до локального файлу <filename>source/Bundle.properties</filename>.</para>
+
+    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+            &lt;/repository&gt;</programlisting></para>
+
+    <para>Віддалений файл <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> прив'язаний до локального <filename>source/readme_tr.txt</filename>.</para>
+
+    <para>Це дозволяє перейменувати файл для перекладу.</para>
+  </section>
+</section>

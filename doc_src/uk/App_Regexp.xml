@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.regexp">
+  <title>Регулярні вирази</title>
+
+  <para>Для пошуку чи налаштування правил сегментації в OmegaT використовуються регулярні вирази Java. Щоб дізнатися про них більше, дивіться <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">документацію регулярних виразів Java</ulink>. Нижче перелічені кілька важливих конструкцій.</para>
+
+  <note>
+    <para>Цей розділ призначений для досвідчених користувачів OmegaT, яким треба визначити свої варіанти правил сегментації чи шукати в тексті складні конструкції.</para>
+  </note>
+
+  <table>
+    <title>Регулярні вирази - прапорці</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>(?i)</entry>
+
+          <entry>Вмикає пошук без врахування регістру літер (типово шаблон враховує регістр).</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярні вирази - символи</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>x</entry>
+
+          <entry>Символ x, за винятком...</entry>
+        </row>
+
+        <row>
+          <entry>\uhhhh</entry>
+
+          <entry>Символ із шістнадцятковим значенням 0xhhhh</entry>
+        </row>
+
+        <row>
+          <entry>\t</entry>
+
+          <entry>Символ табуляції ('\u0009')</entry>
+        </row>
+
+        <row>
+          <entry>\n</entry>
+
+          <entry>Символ нового рядка ('\u000A')</entry>
+        </row>
+
+        <row>
+          <entry>\r</entry>
+
+          <entry>Символ повернення каретки ('\u000D')</entry>
+        </row>
+
+        <row>
+          <entry>\f</entry>
+
+          <entry>Символ зміни сторінки ('\u000C')</entry>
+        </row>
+
+        <row>
+          <entry>\a</entry>
+
+          <entry>Символ звукового сигналу ('\u0007')</entry>
+        </row>
+
+        <row>
+          <entry>\e</entry>
+
+          <entry>Символ Esc ('\u001B')</entry>
+        </row>
+
+        <row>
+          <entry>\cx</entry>
+
+          <entry>Контрольний символ, що відповідає x</entry>
+        </row>
+
+        <row>
+          <entry>\0n</entry>
+
+          <entry>Символ із вісімковим значенням 0n (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0nn</entry>
+
+          <entry>Символ із вісімковим значенням 0nn (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0mnn</entry>
+
+          <entry>Символ із вісімковим значенням 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\xhh</entry>
+
+          <entry>Символ із шістнадцятковим значенням 0xhh</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярні вирази - екранування</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\</entry>
+
+          <entry>Нічого не спіймає, але екранує наступний символ. Це потрібно, якщо вам треба ввести якийсь метасимвол - !$()*+.&lt;&gt;?[\]^{|} - уникаючи його інтерпретації як спеціального.</entry>
+        </row>
+
+        <row>
+          <entry>\\</entry>
+
+          <entry>Наприклад, цей вираз зловить символ \.</entry>
+        </row>
+
+        <row>
+          <entry>\Q</entry>
+
+          <entry>Нічого не спіймає, але екранує всі символи до \E</entry>
+        </row>
+
+        <row>
+          <entry>\E</entry>
+
+          <entry>Нічого не спіймає, але закінчує блок екранованих символів, що розпочався із \Q</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярні вирази - Класи символів для блоків та категорій Юнікоду</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\p{InGreek}</entry>
+
+          <entry>Символ із грецького блоку (простий <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">блок</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Lu}</entry>
+
+          <entry>Велику літеру (проста <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">категорія</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Sc}</entry>
+
+          <entry>Символ валюти</entry>
+        </row>
+
+        <row>
+          <entry>\P{InGreek}</entry>
+
+          <entry>Будь-який символ, окрім як із грецького блоку (заперечення)</entry>
+        </row>
+
+        <row>
+          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
+
+          <entry>Будь-яку літеру, окрім великих (виключення)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярні вирази - класи символів</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>[abc]</entry>
+
+          <entry>a, b, або c (простий клас)</entry>
+        </row>
+
+        <row>
+          <entry>[^abc]</entry>
+
+          <entry>Будь-який символ, окрім a, b, чи c (заперечення)</entry>
+        </row>
+
+        <row>
+          <entry>[a-zA-Z]</entry>
+
+          <entry>Від a до z чи від A до Z, включно (діапазон)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярні вирази - попередньо визначені класи символів</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>.</entry>
+
+          <entry>Будь-який символ, окрім символів кінця рядка.</entry>
+        </row>
+
+        <row>
+          <entry>\d</entry>
+
+          <entry>Цифру: [0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\D</entry>
+
+          <entry>Не цифру: [^0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\s</entry>
+
+          <entry>Пробільний символ: [ \t\n\x0B\f\r]</entry>
+        </row>
+
+        <row>
+          <entry>\S</entry>
+
+          <entry>Непробільний символ: [^\s]</entry>
+        </row>
+
+        <row>
+          <entry>\w</entry>
+
+          <entry>Символ, який &quot;може бути частиною слова&quot;: [a-zA-Z_0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\W</entry>
+
+          <entry>Символ, який &quot;не може бути частиною слова&quot;: [^\w]</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярні вирази - межі</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>^</entry>
+
+          <entry>Початок рядка</entry>
+        </row>
+
+        <row>
+          <entry>$</entry>
+
+          <entry>Кінець рядка</entry>
+        </row>
+
+        <row>
+          <entry>\b</entry>
+
+          <entry>Межу &quot;слова&quot;</entry>
+        </row>
+
+        <row>
+          <entry>\B</entry>
+
+          <entry>Не межу &quot;слова&quot;</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярні вирази - жадібні квантифікатори</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>?</emphasis></entry>
+
+          <entry>X, один раз або жодного</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*</emphasis></entry>
+
+          <entry>X, нуль чи більше разів</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+</emphasis></entry>
+
+          <entry>X, один чи більше разів</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>жадібні квантифікатори ловлять максимальну можливу кількість елементів. Наприклад, <emphasis>a+</emphasis> зловить aaa у <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Регулярні вирази - ліниві (нежадібні) квантифікатори</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X??</entry>
+
+          <entry>X, один раз або жодного</entry>
+        </row>
+
+        <row>
+          <entry>X*?</entry>
+
+          <entry>X, нуль чи більше разів</entry>
+        </row>
+
+        <row>
+          <entry>X+?</entry>
+
+          <entry>X, один чи більше разів</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>ліниві квантифікатори ловлять мінімальну можливу кількість елементів. Наприклад, <emphasis>a+?</emphasis> зловить першу літеру <emphasis>a</emphasis> у <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Регулярні вирази - логічні оператори</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Вираз</entry>
+
+          <entry align="left">... спіймає</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>XY</entry>
+
+          <entry>X за яким іде Y</entry>
+        </row>
+
+        <row>
+          <entry>X|Y</entry>
+
+          <entry>X чи Y</entry>
+        </row>
+
+        <row>
+          <entry>(XY)</entry>
+
+          <entry>XY як одну групу</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="regex.tools.and.examples.of.use">
+    <title>Інструменти для роботи з регулярними виразами та приклади використання</title>
+
+    <para>Існує багато інтерактивних інструментів для розробки та тестування регулярних виразів. Загалом вони працюють за такою схемою: регулярний вираз (запис зверху) аналізує текст (текстове поле посередині) і видає результати у нижньому текстовому полі. (Приклад із Regular Expression Tester)</para>
+
+    <figure id="regerx.tester">
+      <title>Regex Tester</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/RegexTester.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/RegexTester.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para><ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> доступний для Windows, Linux, FreeBSD як окрема програма. Він працює в цілому так само як на попередньому прикладі.</para>
+
+    <para>Непогана підбірка прикладів використання регулярних виразів є у самій <application>OmegaT</application> (дивись Налаштування &gt; Сегментація). Перелік регулярних виразів, які можуть бути корисні для пошуку у памʼяті перекладів:</para>
+
+    <table>
+      <title>Регулярні вирази - приклади регулярних виразів у перекладах</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Регулярний вираз</entry>
+
+            <entry>спіймає:</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+
+            <entry>повтори слів</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+
+            <entry>кому чи крапку, після якої через пробіл іде ще одна кома чи крапка</entry>
+          </row>
+
+          <row>
+            <entry>\. \s+$</entry>
+
+            <entry>пробіли після крапки у кінці рядка</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+
+            <entry>В англійській мові слова, що починаються на голосні, як правило мають перед собою артикль &quot;an&quot;, а не &quot;a&quot;</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+
+            <entry>В англійській мові: те саме, але для приголосних (&quot;a&quot;, а не &quot;an&quot;)</entry>
+          </row>
+
+          <row>
+            <entry>\s{2,}</entry>
+
+            <entry>більш ніж один пробіл</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+
+            <entry>Крапку, після якої іде велика літера - можливо, пропущений пробіл між крапкою та новим реченням</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>пошук цілого слова “is”, але не “this” чи “isn't” тощо.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</appendix>

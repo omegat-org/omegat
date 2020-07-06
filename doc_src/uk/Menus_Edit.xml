@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>Редагування</title>
+
+  <para>Це меню активне лише коли відкритий проєкт.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Скасувати останню дію</guimenuitem></term>
+
+      <listitem>
+        <para>Відновлює стан документу перед виконанням останньої дії. Функція працює лише в межах активного сегмента. Перехід до іншого сегмента обнуляє історію змін.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Повторити останню дію</term>
+
+      <listitem>
+        <para>Відновлює статус перед тим як останню дію було відмінено. Функція працює лише в межах активного сегмента. Перехід до іншого сегмента обнуляє історію змін.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Замінити збігом або вибраним текстом</term>
+
+      <listitem>
+        <para>Замінює увесь сегмент перекладу вибраним нечітким збігом (початково обраний перший збіг).</para>
+
+        <para>Якщо виділити частину нечіткого збігу і вибрати відповідний пункт контекстного меню, яке з'явиться при натисканні правою клавішою миші, це виділення замінить увесь сегмент перекладу.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вставити збіг або вибраний текст</term>
+
+      <listitem>
+        <para>Вставляє вибраний збіг на місці курсора або виділеної частини перекладеного сегмента.</para>
+
+        <para>Тут також можна виділити частину тексту збігу, щоб вставилася саме вона.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Замінити машинним перекладом</term>
+
+      <listitem>
+        <para>Замінює сегмент перекладу пропозицією машинного перекладу від обраного рушія. Якщо машинний переклад не був активований (в меню <menuchoice><guimenu>Налаштування</guimenu> <guimenuitem>Машинний переклад</guimenuitem></menuchoice>), то нічого не станеться.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Замінити текстом оригіналу</term>
+
+      <listitem>
+        <para>Замінює весь сегмент перекладу текстом оригіналу.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вставити текст оригіналу</term>
+
+      <listitem>
+        <para>Вставляє оригінал на місце курсора.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вставити всі пропущені теґи</term>
+
+      <listitem>
+        <para>Вставляє теґи оригіналу (якщо їх немає) на місце курсора.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вставити наступний пропущений теґ</term>
+
+      <listitem>
+        <para>Вставляє на місце курсора лише один теґ (серед випущених).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Експортувати вибраний текст</term>
+
+      <listitem>
+        <para>Експортує виділений текст до текстового файлу для обробки. Якщо текст не був вибраний, в цей файл запишеться поточний сегмент оригіналу. Коли користувач виходить з <application>OmegaT</application>, цей файл не стирається, імітуючи поведінку буферу обміну. Експортований вміст копіюється до файлу <filename>selection.txt</filename>, розташованого в теці з налаштуваннями.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Створити запис у глосарії</term>
+
+      <listitem>
+        <para>Дозволяє користувачу створювати записи в стандартному файлі глосарія.</para>
+
+        <para>Якщо виділити текст (чи переклад, чи оригінал), а потім натиснути <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, текст буде автоматично додано в поле <guilabel>Термін мовою оригіналу</guilabel>.</para>
+
+        <para>Те ж саме стосується полів<guimenuitem>Переклад терміна</guimenuitem> та <guimenuitem>Коментар</guimenuitem>, якщо ви виділили інший шматок тексту та знову натиснули <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Шукати в проєкті...</term>
+
+      <listitem>
+        <para>Відкриває нове <link linkend="windows.textsearch">Вікно пошуку</link>.</para>
+
+        <para>Якщо виділити текст (чи переклад, чи оригінал), а потім натиснути <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, відкриється вікно пошуку і текст буде автоматично вставлено в поле <guilabel>Шукати</guilabel>.</para>
+
+        <para>Якщо потрібно повернутися до попереднього пошуку (замість того, щоб починати новий), натисність <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Знайти та замінити...</term>
+
+      <listitem>
+        <para>Відкриває нове вікно <link linkend="windows.textreplace">Знайти та замінити</link>.</para>
+
+        <para>Якщо виділити текст (чи переклад, чи оригінал), а потім натиснути  <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, він автоматично вставиться в поле <guilabel>Шукати</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Шукати в словниках</term>
+
+      <listitem>
+        <para>Якщо не вмикати <link linkend="dialogs.preferences.dictionary">автоматичний пошук по словниках</link>, то шукати виділене слово по словниках можна цією функцією.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Змінити регістр</term>
+
+      <listitem>
+        <para>Зміна регістру виділеного тексту в сегменті перекладу певним чином: на нижній регістр, верхній регістр, кожне слово з великої чи перше слово з великої літери. Використовуйте <keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> для циклічного перебирання серед чотирьох варіантів. Якщо не виділений ніякий текст, <application>OmegaT</application> автоматично виділить слово, яке знаходиться праворуч від курсора.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вибрати збіг</term>
+
+      <listitem>
+        <para>Виберіть попередній, наступний або ж один з подальших нечітких збігів, щоб замінити ним сегмент або вставити його.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Використовувати як типовий переклад</term>
+
+      <listitem>
+        <para>Якщо є кілька альтернативних варіантів перекладу активного сегмента, можна позначити обраний стандартним перекладом. Якщо варіант перекладу лише один, ця опція буде неактивною.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Створити варіант перекладу</term>
+
+      <listitem>
+        <para>Один і той же сегмент може залежно від контексту перекладатися по-різному. Якщо вставлений переклад не підходить для даного контексту, виберіть цю опцію та введіть варіант перекладу.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вилучити переклад</term>
+
+      <listitem>
+        <para>Видаляє переклад. Сегмент стає неперекладеним.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Зробити переклад порожнім</term>
+
+      <listitem>
+        <para>Визначає переклад як порожній. У документі перекладу на місці цього сегмента не буде нічого. В області редагування переклад буде позначено як &lt;ПОРОЖНІЙ ПЕРЕКЛАД&gt;</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Зареєструвати переклад, ідентичний оригіналові</term>
+
+      <listitem>
+        <para>Використовуйте цю команду, щоб закріпити за цим сегментом переклад ідентичний оригіналові, навіть якщо опція <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Дозволити, щоб оригінал і переклад були однаковими</guilabel></link> не відмічена прапорцем.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

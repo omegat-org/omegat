@@ -42,7 +42,7 @@
   Localisation Updates:
 
   - Corsican localisation added at 5.3.0 (UI, scripts, readme)
-  - Ukrainian localisation updated to 5.2.0 (UI, readme)
+  - Ukrainian localisation updated to 5.2.0 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 5.2.0 (2020-01-26)

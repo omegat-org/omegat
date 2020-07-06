@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.textreplace">
+  <title>Заміна тексту</title>
+
+  <para>Відкрийте вікно Знайти і замінити, натиснувши <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, та надрукуйте слово чи вираз, які ви хочете замінити, у полі <emphasis>Шукати</emphasis>.</para>
+
+  <para>Тоді натисніть кнопку <emphasis>Шукати</emphasis>, щоб показати всі місця, де вони зустрічаються.</para>
+
+  <para>Введіть нове слово чи фразу у поле <emphasis>Замінити на:</emphasis> (регулярні вирази не підтримуються), тоді оберіть один з варіантів:<itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Замінити все</emphasis> - проводить заміну для всіх місць (перед тим вказуючи їх кількість).</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Замінити</emphasis> - заміняє кожне місце окремо, з використанням кнопок у <emphasis role="bold">заголовку вікна редагування</emphasis>. Натискайте <emphasis>Замінити та перейти далі</emphasis> чи <emphasis>Пропустити</emphasis>, і закінчуйте сесію за допомогою кнопки <emphasis>Закінчити</emphasis>.</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Закрити</emphasis> - закриває вікно без змін.</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section>
+    <title>Параметри пошуку</title>
+
+    <para>Параметри пошуку такі ж, як і у розділі <link linkend="windows.textsearch">Вікно пошуку</link>.</para>
+
+    <para>Окрім одного, прапорець <emphasis role="bold">Неперекладене</emphasis> дає можливість шукати та заміняти також і в неперекладених сегментах.</para>
+
+    <para>Щоб таке було можливим OmegaT тимчасово в памʼяті скопіює текст оригіналу в переклад перед операцією. Якщо до якогось із сегментів не буде застосовано заміну, він &quot;очиститься&quot;, тобто залишиться неперекладеним після завершення сесії заміни.</para>
+  </section>
+</section>

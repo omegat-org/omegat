@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.help">
+  <title>Довідка</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Посібник користувача...</term>
+
+      <listitem>
+        <para>Відкрити цей посібник у стандартному браузері.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Про програму…</term>
+
+      <listitem>
+        <para>Показати копірайт, список учасників проєкту та інформацію про ліцензії.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Останні зміни...</term>
+
+      <listitem>
+        <para>Показати список нових функцій, покращень та виправлених помилок для кожного реліза.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Журнал...</term>
+
+      <listitem>
+        <para>Показати поточний файл журналу. У заголовку цього діалогу можна побачити ім'я файлу, в який ведеться запис. Це може бути корисно, якщо ви запускаєте кілька OmegaT паралельно.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Перевірка оновлень...</term>
+
+      <listitem>
+        <para>Перевірити, чи вийшла новіша версія <application>OmegaT</application>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

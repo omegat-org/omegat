@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>Інструменти</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Пошук помилок...</term>
+
+      <listitem>
+        <para>Перевірка якості, що проводить автоматичний аналіз та показує результат в окремому вікні.</para>
+
+        <para>Перевірка проводиться на такі чотири типи помилок:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>пропущені та пересунуті теґи, зокрема <link linkend="dialogs.preferences.tagprocessing">користувацькі теґи</link>. Параметр <guilabel>Проблеми з теґами</guilabel> обраний завжди.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Проблеми з правописом</guilabel> (необов'язковий). Працює лише коли встановлені словники перевірки правопису.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Проблеми термінології</guilabel> (необов'язковий).</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Проблеми, знайдені LanguageTool</guilabel> (необов'язковий).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Вікно результатів має вигляд таблиці:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>натисніть двічі на рядок, щоб відкрити відповідний сегмент у вікні редагування,</para>
+          </listitem>
+
+          <listitem>
+            <para>натисніть на заголовок колонки, щоб змінити порядок сортування для цієї колонки,</para>
+          </listitem>
+
+          <listitem>
+            <para>виберіть, чи наведіть мишку на рядок, щоб у останній колонці з'явилася іконка із контекстним меню, що дозволяє виправити чи ігнорувати помилку.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пошук помилок у поточному документі</term>
+
+      <listitem>
+        <para>Як і попередній пункт, але перевіряє лише документ, який зараз відкрито у вікні редагування.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Статистика</term>
+
+      <listitem>
+        <para>Відкрити окреме вікно із статистикою проєкту в цілому та по окремих файлах проєкту.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Статистика збігів</term>
+
+      <listitem>
+        <para>Показати статистику збігів для проєкту: кількість повторів, повних збігів, нечітких збігів та унікальних сегментів. Також вікно містить ці самі дані, перераховані на кількість слів та символів.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Статистика збігів у файлах</term>
+
+      <listitem>
+        <para>Показати статистику збігів для кожного з файлів проєкту: кількість повторів, повних збігів, нечітких збігів та унікальних сегментів. Також вікно містить ці самі дані, перераховані на кількість слів та символів.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вирівнювання файлів...</term>
+
+      <listitem>
+        <para>Оберіть два файли для вирівнювання (оригінал та переклад) і натисніть OK, щоб відкрити <link linkend="windows.aligner">вікно <guilabel>Вирівнювання файлів</guilabel></link>.</para>
+
+        <para>Доступні формати файлів можна подивитися у <menuchoice> <guimenuitem>Проєкт</guimenuitem> <guimenuitem>Властивості</guimenuitem> <guimenuitem>Фільтри файлів</guimenuitem> </menuchoice>.</para>
+
+        <para>Оригінал та переклад можуть бути у різних форматах. Наприклад, файл <filename>.docx</filename> можна вирівнювати із файлом <filename>.pdf</filename>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Скрипти...</term>
+
+      <listitem>
+        <para>Відкриває <link linkend="windows.scripts">вікно <guilabel>Скрипти</guilabel></link>, де можна вказати теку для скриптів, писати власні скрипти, запускати їх чи прив'язувати до комбінації клавіш.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - (ім'я скрипта)</term>
+
+      <listitem>
+        <para>Запускає скрипти, що були прив'язані до числа.</para>
+
+        <para>Щоб прив'язати скрипт до числа, необхідно:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Відкрити вікно Скрипти</para>
+          </listitem>
+
+          <listitem>
+            <para>Вибрати потрібний скрипт зі списку ліворуч</para>
+          </listitem>
+
+          <listitem>
+            <para>Внизу вікна натисніть правою кнопкою миші на вільне число та виберіть <guilabel>Додати скрипт</guilabel>.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(команди для зовнішнього пошуку)</term>
+
+      <listitem>
+        <para>Якщо у <link linkend="dialogs.preferences.externalsearch">Параметрах</link> були визначені команди для зовнішнього пошуку, вони будуть доступні тут.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

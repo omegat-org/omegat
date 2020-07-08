@@ -13,11 +13,11 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Так: </emphasis>завантажте &lt;e1&gt;OmegaT_4.n.n_Windows_without_JRE.exe&lt;/e1&gt;.</para>
+          <para><emphasis role="bold">Так: </emphasis>завантажте <filename>OmegaT_4.n.n_Windows_without_JRE.exe</filename>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Ні / Я не знаю:</emphasis> завантажте&lt;e1&gt; OmegaT_4.n.n_Windows.exe.&lt;/e1&gt;</para>
+          <para><emphasis role="bold">Ні / Я не знаю:</emphasis> завантажте <filename>OmegaT_4.n.n_Windows.exe</filename>.</para>
 
           <para>Цей пакет містить у собі Oracle Java Runtime Environment. Ця JRE не конфліктуватиме із іншими реалізаціями Java, які можуть бути встановлені у вашій системі.</para>
         </listitem>
@@ -98,7 +98,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Так:</emphasis> завантажте &lt;e1&gt;OmegaT_4.n.n_Without_JRE.zip&lt;/e1&gt;.</para>
+          <para><emphasis role="bold">Так:</emphasis> завантажте <filename>OmegaT_4.n.n_Without_JRE.zip</filename>.</para>
         </listitem>
 
         <listitem>

@@ -74,7 +74,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Перевірте, чи розташовані файли словників в правильній теці (чи підтеці). Для цього зайдіть у <menuchoice><guimenu>Проєкт</guimenu> <guimenuitem>Властивості</guimenuitem> <shortcut><keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap></keycombo></shortcut></menuchoice>.</para>
+        <para>Перевірте, чи розташовані файли словників в правильній теці (чи підтеці). Для цього зайдіть у <menuchoice><guimenu>Проєкт</guimenu> <guimenuitem>Властивості</guimenuitem> (<shortcut><keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap></keycombo></shortcut>)</menuchoice>.</para>
       </listitem>
     </itemizedlist>
 

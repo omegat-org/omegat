@@ -66,7 +66,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Якщо файл не з’являється в <guilabel>області редагування</guilabel>, то, можливо, цей формат не підтримується OmegaT. Перелік файлів, які підтримуються в OmegaT, можна переглянути у розділі <menuchoice><guimenuitem>Фільтр файлів</guimenuitem></menuchoice> (меню <menuchoice><guimenuitem>Налаштування</guimenuitem><guimenuitem>Параметри...</guimenuitem></menuchoice>).</para>
+        <para>Якщо файл не з’являється в <guilabel>області редагування</guilabel>, то, можливо, цей формат не підтримується OmegaT. Перелік файлів, які підтримуються в OmegaT, можна переглянути у <menuchoice><guimenuitem>Налаштування</guimenuitem><guimenuitem>Параметри...</guimenuitem><guimenuitem>Фільтри файлів</guimenuitem></menuchoice>.</para>
       </listitem>
     </itemizedlist>
 

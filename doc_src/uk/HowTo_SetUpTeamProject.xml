@@ -96,11 +96,11 @@
 
     <itemizedlist>
       <listitem>
-        <para>надіслати URL проєкту і попросити перекладача створити локальну копію через меню <menuchoice> <guimenuitem>Проєкт</guimenuitem> <guimenuitem>Стягнути командний проєкт</para>
+        <para>Надіслати URL проєкту і попросити перекладача створити локальну копію через меню <menuchoice><guimenuitem>Проєкт</guimenuitem> <guimenuitem>Стягнути командний проєкт</guimenuitem></menuchoice>.</para>
       </listitem>
 
       <listitem>
-        <para>надіслати файл <filename>omegat.project</filename>, що містить посилання на репозиторій, і попросити перекладача скопіювати його у теку, яку він обрав для даного проєкту, та відкрити її в OmegaT.</para>
+        <para>Надіслати файл <filename>omegat.project</filename>, що містить посилання на репозиторій, і попросити перекладача скопіювати його у теку, яку він обрав для даного проєкту, та відкрити її в OmegaT.</para>
 
         <para>Посилання виглядатиме так (приклад для репозиторію Git):</para>
 

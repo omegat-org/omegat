@@ -1,0 +1,827 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Розділ 6. Практичні рекомендації</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - Посібник користувача">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - Посібник користувача">
+      <link rel="prev" href="project.folder.html" title="Розділ 5. Тека проєкту">
+      <link rel="next" href="appendix.dictionaries.html" title="Додаток A. Словники">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Розділ 6. Практичні рекомендації</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="project.folder.html">назад</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.dictionaries.html">далі</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="howtos"></a>Розділ 6. Практичні рекомендації
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="howtos.html#howto.setupteamproject">1. Налаштування командного проєкту</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="howtos.html#d0e4741">1.1. Крок 1: Створіть порожній проєкт на сервері</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4807">1.2. Крок 2: Додайте файли для перекладу та інші ресурси</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4848">1.3. Крок 3: Надіслати запрошення перекладачеві</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4888">1.4. Особливий випадок: мінімальна участь</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#howto.setupteamproject.mappingparameters">1.5. Параметри прив'язки</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4949">1.6. Приклади прив'язки</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="howtos.html#howto.useteamproject">2. Командні проєкти</a></span></dt>
+               <dt><span class="section"><a href="howtos.html#howto.reusetm">3. Використання вже наявної памʼяті перекладів</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="howtos.html#d0e5141">3.1. Імпортування та експортування памʼяті перекладів</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5152">3.2. Створення памʼяті перекладів для окремих документів</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5196">3.3. Спільна памʼять перекладів</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5203">3.4. Використання TMX з альтернативною мовою</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="howtos.html#howto.preventdataloss">4. Захист від втрати даних</a></span></dt>
+               <dt><span class="section"><a href="howtos.html#howto.translatepdf">5. Переклад файлів PDF</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="howtos.html#other.file.formats">5.1. Інші формати файлів</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="howtos.html#howto.managerighttoleft">6. Підтримка мов з письмом справа наліво</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="howtos.html#d0e5424">6.1. Різні напрямки письма в одному сегменті</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5432">6.2. Теґи <span class="application">OmegaT</span> у сегментах, написаних справа наліво</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5442">6.3. Створення перекладених документів з напрямком письма справа наліво</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.setupteamproject"></a>1. Налаштування командного проєкту
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Налаштування командного проєкту вимагає деяких знань про роботу серверів та систем керування версіями файлів SVN або Git.
+               Найкраще виконати його зможе менеджер проєкту або інженер з локалізації.
+            </p>
+            <p>Оскільки в інтернеті легко знайти купу інформації про SVN та Git, тут ми розповімо лише про те, як з ними працює OmegaT.</p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4741"></a>1.1. Крок 1: Створіть порожній проєкт на сервері
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="bold"><strong>Створення порожнього проєкту на сервері</strong></span></p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Створіть репозиторій SVN або Git на сервері, який буде доступним перекладачам.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Створіть локальну копію цього репозиторію (команди <span class="command"><strong>checkout</strong></span> для SVN, <span class="command"><strong>clone</strong></span> для Git).
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Створіть новий, порожній проєкт OmegaT у локальному репозиторії. Зробити це можна двома шляхами:</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p><span class="guimenuitem">Проєкт</span> → <span class="guimenuitem">Новий...</span></p>
+                              </li>
+                              <li class="listitem">
+                                 <p>в командному рядку: <span class="command"><strong>java -jar OmegaT.jar team init [lang1] [lang2]</strong></span></p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                     <li class="listitem">
+                        <p>Додайте новий проєкт OmegaT до системи керування версіями (<span class="command"><strong>add</strong></span> у SVN та Git)
+                        </p>
+                        <p>Зауважте: якщо проєкт був створений через командний рядок у кроці 3, цей крок виконанується програмою автоматично.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Опублікуйте новий проєкт OmegaT на сервері (<span class="command"><strong>commit</strong></span> для SVN, і <span class="command"><strong>commit</strong></span> , а потім <span class="command"><strong>push</strong></span> для Git).
+                        </p>
+                     </li>
+                  </ol>
+               </div>
+               <p><span class="bold"><strong>Особливі параметри</strong></span></p>
+               <p>Якщо проєкт використовує особливі фільтри та параметри сегментації, обидва файли <code class="filename">filters.xml</code> та <code class="filename">segmentation.conf</code> треба додати до системи керування версіями та розмістити на сервері.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4807"></a>1.2. Крок 2: Додайте файли для перекладу та інші ресурси
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Використовуйте клієнт SVN або Git, щоб додати файли для перекладу.</p>
+               <p>Це можна зробити і в самій OmegaT:</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>скопіюйте файли до теки <code class="filename">/source</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>використайте <span class="guimenuitem">Проєкт</span> → <span class="guimenuitem">Зафіксувати файли для перекладу</span></p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Щоб додати інші ресурси (словники, пам'яті TMX чи глосарії), використайте SVN або клієнт Git.</p>
+               <p>Щоб <span class="bold"><strong>видалити файли</strong></span>, скористайтеся клієнтом SVN або Git. Ці файли не будуть видалені автоматично на боці перекладачів: доведеться попросити їх
+                  видалити файли вручну.
+               </p>
+               <p>Зауважте, що під час перекладу на стороні перекладачів змін зазнають лише два файли OmegaT:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="filename">omegat/project_save.tmx</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="filename">glossary/glossary.txt</code></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Всі інші файли доступні лише для читання. Якщо перекладач спробує щось у них змінити, при наступному відкритті, закритті,
+                  перезавантаженні чи збереженні проєкту вони повернуться до попереднього стану.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4848"></a>1.3. Крок 3: Надіслати запрошення перекладачеві
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Коли проєкт налаштовано на сервері, менеджер проєкту може запросити перекладача до роботи у ньому одним із двох способів:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Надіслати URL проєкту і попросити перекладача створити локальну копію через меню <span class="guimenuitem">Проєкт</span> → <span class="guimenuitem">Стягнути командний проєкт</span>.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Надіслати файл <code class="filename">omegat.project</code>, що містить посилання на репозиторій, і попросити перекладача скопіювати його у теку, яку він обрав для даного проєкту, та
+                           відкрити її в OmegaT.
+                        </p>
+                        <p>Посилання виглядатиме так (приклад для репозиторію Git):</p><pre class="programlisting">&lt;repositories&gt;
+ &lt;repository type="git" url="https://repo_for_OmegaT_team_project.git"&gt;
+  &lt;mapping local="" repository=""/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</pre></li>
+                  </ul>
+               </div>
+               <p>В обох випадках менеджер проєкту повинен надіслати перекладачу ID та пароль для доступу до репозиторію.</p>
+               <p><span class="bold"><strong>Перевірка статистики</strong></span></p>
+               <p>Менеджер проєкту має перевірити, що статистика на боці сервера та перекладача співпадає.</p>
+               <p>Якщо є якісь відмінності, перевірте, чи файли <code class="filename">filters.xml</code> та <code class="filename">segmentation.conf</code> включені до системи керування версіями.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4888"></a>1.4. Особливий випадок: мінімальна участь
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Описане вище стосується звичайних випадків, коли менеджер проєкту хоче повністю контролювати проєкт, та де файли та статистика
+                  на боці перекладача та сервера ідентичні.
+               </p>
+               <p>Командні проєкти OmegaT можна також налаштовувати іншим способом, так, щоб перекладачі користувалися спільною пам'яттю перекладів
+                  (файлом project_save.tmx), але не мали доступу до файлів оригіналу, які перекладають інші учасники проєкту.
+               </p>
+               <p>У такому випадку процедура створення проєкту буде така ж за вийнятком того, що менеджер проєкту не додаватиме файли до теки
+                  source.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="howto.setupteamproject.mappingparameters"></a>1.5. Параметри прив'язки
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term">тип репозиторію</span></dt>
+                     <dd>
+                        <p>http (також https), svn або git</p>
+                     </dd>
+                     <dt><span class="term">url репозиторію</span></dt>
+                     <dd>
+                        <p>Віддалене розташування файлів для перекладу.</p>
+                     </dd>
+                     <dt><span class="term">локальна прив'язка</span></dt>
+                     <dd>
+                        <p>Ім'я локальної теки або файлу, що співвідноситься з коренем проєкту OmegaT.</p>
+                     </dd>
+                     <dt><span class="term">репозиторій прив'язки</span></dt>
+                     <dd>
+                        <p>Ім'я віддаленої теки чи файлу, що співвідноситься з url репозиторію.</p>
+                     </dd>
+                     <dt><span class="term">виключає</span></dt>
+                     <dd>
+                        <p>Додайте паттерни, застосовуючи wildcards (стиль Apache Ant): *, ?, **. Відділяйте паттерни один від одного крапкою з комою.</p>
+                        <p>Приклад: <strong class="userinput"><code>**/excludedfolder/**;*.txt</code></strong> виключає файли, що мають компонент /excludedfolder/ у шляху, та файл з розширенням .txt.
+                        </p>
+                     </dd>
+                     <dt><span class="term">включає</span></dt>
+                     <dd>
+                        <p>Як зазначено вище.</p>
+                        <p>Приклад: <strong class="userinput"><code>**/*.docx</code></strong> додає всі файли .docx, де б вони не були розміщені у проєкті, навіть у папках, котрі підпадають під виключення.
+                        </p>
+                        <p>За стандартними налаштуваннями всі файли, що не виключаються, включатимуться. Вказувати ці параметри потрібно лише щоб обійти
+                           деякі виключення.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4949"></a>1.6. Приклади прив'язки
+                        </h3>
+                     </div>
+                  </div>
+               </div><pre class="programlisting">&lt;repositories&gt;
+ &lt;repository type="svn" url="https://repo_for_OmegaT_team_project"&gt;
+  &lt;mapping local="" repository=""/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</pre><p>Весь вміст <code class="filename">https://repo_for_OmegaT_team_project</code> прив'язаний до локального проєкту OmegaT 
+               </p><pre class="programlisting">&lt;repositories&gt;
+ &lt;repository type="svn" url="https://repo_for_All_OmegaT_team_projects"&gt;
+  &lt;mapping local="" repository="En-US_DE_project"/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</pre><p>Весь вміст <code class="filename">https://repo_for_All_OmegaT_team_projects/En-US_DE_project</code> прив'язаний до локального проєкту OmegaT.
+               </p><pre class="programlisting">&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+            &lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
+            &lt;/repository&gt;</pre><p>Віддалений файл <code class="filename">https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</code> прив'язаний до локального файлу <code class="filename">source/Bundle.properties</code>.
+               </p><pre class="programlisting">&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+            &lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
+               &lt;mapping local="source/readme_tr.txt" repository="release/readme.txt"/&gt;
+            &lt;/repository&gt;</pre><p>Віддалений файл <code class="filename">https://github.com/omegat-org/omegat/raw/master/release/readme.txt</code> прив'язаний до локального <code class="filename">source/readme_tr.txt</code>.
+               </p>
+               <p>Це дозволяє перейменувати файл для перекладу.</p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.useteamproject"></a>2. Командні проєкти
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Щоб працювати з командним проєктом, спершу треба <a class="link" href="howtos.html#howto.setupteamproject" title="1. Налаштування командного проєкту">створити його на сервері</a>.
+            </p>
+            <p>Щоб вперше відкрити командний проєкт, слідуйте інструкціям вашого проєктного менеджера.</p>
+            <p>Після відкриття працюйте з командним проєктом так само, як зі звичайним, але зверніть увагу на такі моменти:</p>
+            <p><span class="bold"><strong>Автоматичне збереження</strong></span></p>
+            <p>Раз у 3 хвилини (за типових налаштувань) локальний проєкт синхронізується з віддаленим репозиторієм. Таким чином менеджер
+               проєкту та інші перекладачі зможуть бачити та користуватися перекладами, що були додані за цей час.
+            </p>
+            <p>Інтервал між збереженнями можна змінити у діалозі <a class="link" href="windows.and.dialogs.html#dialogs.preferences.savingandoutput" title="7.17. Збереження та вивід"><span class="guimenuitem">Налаштування</span> → <span class="guimenuitem">Параметри</span> → <span class="guimenuitem">Збереження та вивід</span></a>.
+            </p>
+            <p><span class="bold"><strong>Синхронізовані файли</strong></span></p>
+            <p>Щоразу як проєкт автоматично зберігається, а також коли він відкривається, закривається чи перезавантажується, тільки два
+               файла справді синхронізуються в обидві сторони:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="filename">omegat/project_save.tmx</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="filename">glossary/glossary.txt</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>Всі інші файли замінюються версіями з віддаленого репозиторія.</p>
+            <p><span class="bold"><strong>Додавання файлів для перекладу</strong></span></p>
+            <p>Щоб додати файл для перекладу:</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>скопіюйте файли до теки <code class="filename">/source</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>використайте <span class="guimenuitem">Проєкт</span> → <span class="guimenuitem">Зафіксувати файли для перекладу</span></p>
+                  </li>
+               </ol>
+            </div>
+            <p>Хоча локальні файли для перекладу можна вільно модифікувати, якщо не провести фіксацію до того, як проєкт збережеться автоматично
+               чи ви його перезавантажите чи закриєте, всі зміни втратяться.
+            </p>
+            <p><span class="bold"><strong>Видалення файлів для перекладу</strong></span></p>
+            <p>Файли має спочатку видалити проєктний менеджер, тільки тоді можна видаляти локальні копії.</p>
+            <p><span class="bold"><strong>Зміна правил сегментації та фільтрів файлів</strong></span></p>
+            <p>Параметри проєкту має змінювати виключно менеджер проєкту.</p>
+            <p><span class="bold"><strong>Робота без синхронізації</strong></span></p>
+            <p>Командний проєкт можна відкрити і перекладати без підключення до сервера. Всі зміни будуть синхронізовані, як тільки з'єднання
+               відновиться.
+            </p>
+            <p>Щоб працювати без синхронізації:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Від'єднайтесь від мережі перед відкриттям проєкту</p>
+                  </li>
+                  <li class="listitem">
+                     <p>або ж відкрийте проєкт з командного рядка, використовуючи опцію <span class="command"><strong>--no-team</strong></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.reusetm"></a>3. Використання вже наявної памʼяті перекладів
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>При створенні проєкту його пам'ять перекладів (<code class="filename">project_save.tmx</code>) пуста. Вона поступово наповнюється в процесі перекладу. Щоб прискорити процес, можна скористатися вже наявними перекладами.
+               Якщо певне речення вже було перекладене, причому правильно, нема необхідності перекладати його ще раз. Памʼять перекладів
+               також може містити допоміжні переклади, наприклад, багатомовні версії законодавчої документації Європейського Союзу.
+            </p>
+            <p>Коли ви створюєте перекладені документи у проєкті <span class="application">OmegaT</span>, у головній теці проєкту <span class="application">OmegaT</span> також буде створено три файли памʼяті перекладів. Ці три файли tmx (<code class="filename">-omegat.tmx</code>, <code class="filename">-level1.tmx</code> та <code class="filename">-level2.tmx</code>) можуть слугувати "експортом памʼяті перекладів", тобто експортом вашого поточного проєкту у двомовній формі.
+            </p>
+            <p>Якщо ви захочете скористатися вашою памʼяттю перекладів з попереднього проєкту (наприклад, у випадку, якщо новий проєкт схожий
+               за змістом до попереднього або ж використовує ту ж термінологію), ви можете використати ці файли як "імпортовану памʼять перекладів",
+               тобто, додати їх до вашого нового проєкту. У цьому випадку розмістіть памʼяті перекладів, яку ви хочете використати, у теці
+               <span class="emphasis"><em>/tm</em></span> або <span class="emphasis"><em>/tm/auto</em></span> вашого нового проєкту: у першому випадку ви отримуватимете підказки з ваших памʼятей перекладів у вікні Нечіткі збіги, у
+               другому - збіги будуть автоматично вставлятися із памʼятей перекладів у відповідні сегменти в області редагування.
+            </p>
+            <p>Типово тека /tm розміщена в кореневій теці проєкту (наприклад, <span class="emphasis"><em>/MyProject/tm</em></span>), однак за бажанням її можна розмістити в іншій теці у діалозі Властивості проєкту. Це зручно, якщо ви часто використовуєте
+               памʼяті перекладів з попередніх проєктів, наприклад, тому що вони мають ту ж тему або того ж замовника, з яким ви працювали
+               раніше. У цьому випадку порядок дій має бути таким:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Створіть теку ("тека репозиторію") у зручному місці вашого жорсткого диску. У ній ви можете розміщувати памʼяті перекладів
+                        певного замовника чи певної тематики.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Коли ви закінчили проєкт, скопіюйте один із трьох файлів для "експорту" памʼяті перекладів з кореневої теки проєкту до цієї
+                        теки репозиторію.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Починаючи новий проєкт для того ж замовника або з тієї ж тематики, зайдіть у <span class="guimenuitem">Проєкт &gt; Властивості</span> та оберіть у діалозі редагування властивостей проєкту цю теку репозиторію як теку для файлів памʼяті перекладів.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Зауважте, що всі файли tmx у теці /tm зчитуються програмою кожен раз, коли ви відкриваєте проєкт, тож не варто додавати до
+               проєкту всі пам'яті перекладів, що у вас є - це уповільнить роботу OmegaT. Доцільно використовувати лише ті пам'яті, які справді
+               допоможуть вам при перекладі. Можна навіть видалити ті з них, зміст яких ви вже використали для наповнення файлу <code class="filename">project-save.tmx</code>, і вони більше не потрібні.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5141"></a>3.1. Імпортування та експортування памʼяті перекладів
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>OmegaT підтримує імпортовані версії tmx 1.1-1.4b (як 1-го, так і 2-го рівня). Це дозволяє OmegaT читати памʼяті перекладів,
+                  створені за допомогою інших САТ-інструментів. Однак, OmegaT не має повної підтримки tmx файлів 2-го рівня (які зберігають
+                  не лише переклад, а й форматування). Файли tmx 2-го рівня будуть імпортуватися, і їх текстове наповлення буде відображуватись
+                  в OmegaT, однак, якість нечітких збігів буде дещо нижчою.
+               </p>
+               <p>Завантажуючи файли памʼяті перекладів (tmx), OmegaT слідує дуже чіткій процедурі. Якщо у такому файлі буде знайдено помилку,
+                  OmegaT вкаже місце, де була виявлена помилка.
+               </p>
+               <p>Відомо, що деякі САТ-інструменти за певних умов створюють несправні файли tmx. Якщо ви хочете використовувати такі файли як
+                  допоміжні в OmegaT, помилки у таких файлах потрібно усунути, інкаше OmegaT буде видавати повідомлення про помилку і не зможе
+                  завантажити їх. Зазвичай виправлення таких помилок - це нескладні операції, і в повідомленні про помилку OmegaT буде вся необхідна
+                  інформація. Якщо вам потрібна допомога з такими файлами, можна звернутися за порадою до групи користувачів.
+               </p>
+               <p>OmegaT експортує файли 1.4 TMX (як 1-го, так і 2-го рівня). Експорт рівня 2 не повністю співпадає зі стандартним експортом
+                  такого рівня, але достатньо близький, щоб згенерувати правильні збіги в інших САТ-інструментах, котрі підтримують TMX 2-го
+                  рівня. Якщо вам потрібна лише текстова інформація (а не форматування), використовуйте файл 1-го рівня, який був створений
+                  в OmegaT.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5152"></a>3.2. Створення памʼяті перекладів для окремих документів
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Якщо перекладачам треба обмінюватися TMX, але тільки для певних файлів, то звичний шлях через <code class="filename">Ім'яПроєкту-omegat.tmx</code> не спрацює. Можна зробити це різними способами, але ось цей достатньо простий і не несе загрози втрати даних.
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Створіть новий проєкт для потрібної пари мов. Назвіть його відповідно до мети (майте на увазі, що кінцева TMX буде містити
+                           ім'я проєкту).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Скопіюйте потрібні документи в підтеку source.</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Скопіюйте памʼять перекладів, що містить потрібні переклади, у підтеку <code class="filename">tm/auto</code> нового проєкту.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Відкрийте проєкт. Перевірте його на помилки теґів <span class="keycap"><strong>Ctrl+T</strong></span> та неперекладені сегменти <span class="keycap"><strong>Ctrl+U</strong></span>. Щоб ще раз переконатися, що все йде добре, згенеруйте перекладені документи <span class="keycap"><strong>Ctrl+D</strong></span> та перевірте їх.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Після цього закрийте проєкт. У головній теці проєкту тепер будуть файли TMX з перекладом для потрібної мовної пари і лише
+                           для тих файлів, які ви скопіювали в підтеку source. Скопіюйте їх в надійне місце.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Видаліть цей допоміжний проєкт.</p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5196"></a>3.3. Спільна памʼять перекладів
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Для команди перекладачів може бути зручніше користуватися спільною памʼяттю перекладів, а не пересилати постійно локальні
+                  копії.
+               </p>
+               <p>У OmegaT є опенсорсні інтерфейси до двох популярних систем керування версіями: SVN та Git. OmegaT використовує їх для контролю
+                  всіх файлів у теці проєкту: як файлів памʼяті перекладів, так і файлів оригіналу чи налаштувань проєкту. див. розділ
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5203"></a>3.4. Використання TMX з альтернативною мовою
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Може бути так, що у вас є переклад проєкту з голандської на англійську, а вам потрібен ще переклад китайською мовою. Перекладач
+                  не розуміє голандську, зате прекрасно знає англійську. У цьому випадку перекладацька пам'ять NL-EN може послужити проміжним
+                  засобом для створення перекладу NL-ZH.
+               </p>
+               <p>Цього можна досягнути, якщо скопіювати існуючу памʼять перекладів у підтеку tm/tmx2source/ та перейменувати її в ZH_CN.tmx,
+                  що визначає її мову перекладу. Таким чином перекладачу для оригінальних сегментів голандською будуть показуватись англійські
+                  переклади, і він зможе використати їх для створення китайського перекладу.
+               </p>
+               <p><span class="bold"><strong>Зверніть увагу:</strong></span> перекладацьку пам'ять треба перейменувати в XX_YY.tmx, де XX_YY - це код мови перекладу. У попередньому прикладі ZH_CN.tmx.
+                  Мова оригіналу в проєкті та в TMX має бути однаковою. У прикладі - NL. Зверніть увагу, що для кожної пари мов можна створити
+                  тільки одну таку памʼять перекладів, тому якщо у вас їх кілька, їх треба буде об'єднати в один файл XX_YY.tmx.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.preventdataloss"></a>4. Захист від втрати даних
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT</span> - надійна програма. Але все ж і при роботі з <span class="application">OmegaT</span>, як із будь-якою іншою програмою, варто перестрахуватися. Під час перекладу <span class="application">OmegaT</span> зберігає результати роботи у памʼять перекладів <code class="literal">project_save.tmx</code>, що розташована у підтеці проєкту <code class="literal">/omegat</code>.
+            </p>
+            <p>Крім цього, щоразу як проєкт відкривається чи закривається, OmegaT створює в тій самій теці резервні копії цього файлу зі
+               структурою назви project_save.tmx.YYYYMMDDHHNN.bak. YYYY - це рік, MM - це місяць, DD - день, а HH та NN - години та хвилини,
+               коли ця копія памʼяті перекладів була востаннє збережена.
+            </p>
+            <p>Якщо вам здається, що ви втратили якийсь шматок роботи, ви можете скористатися такою процедурою:</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>закрийте проєкт</p>
+                  </li>
+                  <li class="listitem">
+                     <p>перейменуйте <code class="filename">project_save.tmx</code> (наприклад, у <code class="filename">project_save.tmx.temporary</code>)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>оберіть резервну копію памʼяті перекладів, яка найбільш вірогідно містить потрібні дані</p>
+                  </li>
+                  <li class="listitem">
+                     <p>перейменуйте її в <code class="literal">project_save.tmx</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>відкрийте проєкт</p>
+                  </li>
+               </ol>
+            </div>
+            <p>Щоб уникнути втрати важливих даних:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Робіть регулярні копії /omegat/project_save.tmx на резервні носії, наприклад, у хмарне сховище.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Поки ви ще не відчуваєте себе абсолютно впевнено у роботі з <span class="application">OmegaT</span>, періодично генеруйте перекладені файли та перевіряйте, що в них міститься правильна версія вашого перекладу.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Будьте особливо обережні, якщо вам раптом треба внести зміни до файлів у теці <code class="literal">/source</code> посеред роботи над проєктом. Якщо змінити оригінальний файл після того, як ви вже почали переклад, може виявитись так, що
+                        <span class="application">OmegaT</span> не знайде оригінали для вже перекладених сегментів.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Користуйтеся довідкою. Якщо у вас виникли проблеми, обов'язково звертайтеся в <a class="ulink" href="https://omegat.org/support" target="_top">групу користувачів <span class="application">OmegaT</span></a>. Пишіть тою мовою, якою вам зручно. Вас зрозуміють.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.translatepdf"></a>5. Переклад файлів PDF
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Файли PDF особливі. В них є інформація про форматування, але <span class="application">OmegaT</span> не може використати її для створення перекладених документів. Таким чином, файли PDF опрацьовуються як прості текстові файли,
+               і перекладені документи також генеруються як прості текстові файли.
+            </p>
+            <p>Якщо вам у вашому перекладі треба відтворити форматування (та інші елементи документа, наприклад, картинки) то є три способи,
+               які можна спробувати:
+            </p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>Використайте стандартний фільтр <span class="application">OmegaT</span> для PDF, перекладіть документ, створіть перекладений документ (текстовий файл) та додайте всі необхідні елементи та форматування
+                        вручну.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Використайте фільтр Iceni Infix. Див <a class="ulink" href="https://omegat.org/howtos/iceni_infix.html" target="_top">Howto - Translating PDF files with Iceni Infix and OmegaT</a>.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Імпортуйте файл для перекладу в <a class="ulink" href="https://www.libreoffice.org/discover/draw/" target="_top">LibreOffice Draw</a>, збережіть його як ODG, перекладіть, згенеруйте перекладений документ і експортуйте його в PDF.
+                     </p>
+                  </li>
+               </ol>
+            </div>
+            <p><span class="bold"><strong>Зверніть увагу:</strong></span> Це все стосується лише PDF файлів, в яких є шар тексту. Якщо ж у вас файл PDF, що складається зі сканованих сторінок (так
+               звані "мертві PDF"), вам для початку треба використати програму для розпізнавання тексту (OCR, optical character recognition),
+               щоб отримати текст та перетворити його на формат, з яким OmegaT зможе працювати.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="other.file.formats"></a>5.1. Інші формати файлів
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Інші чисто текстові чи форматовані формати файлів також можуть бути оброблені OmegaT.</p>
+               <p>Для перетворення файлів у формати, що підтримуються OmegaT, можна також використовувати спеціалізовані програми. Перекладені
+                  файли згодом можна буде перетворити в оригінальний формат. Наприклад, якщо у вас застаріла версія Microsoft Word, що не працює
+                  із ODT, можна провести таку послідовність операцій, щоб отримати перекладений DOC:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>імпортуйте файл в програму для роботи з ODF</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>збережіть файл у форматі ODT</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>перекладіть його та згенеруйте перекладений файл ODT</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>завантажте його у програму для роботи з ODF</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>збережіть файл як DOC</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Якість форматування у перекладеному файлі буде залежати від якості перетворення форматів файлів. Перед тим як починати ці
+                  танці з перетвореннями, перевірте, що ви спробували всі можливі варіанти. Перевірте <a class="ulink" href="http://www.omegat.org" target="_top">головну сторінку OmegaT</a>, там є актуальний перелік доступних допоміжних інструментів.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="howto.managerighttoleft"></a>6. Підтримка мов з письмом справа наліво
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Вирівнювання сегментів оригіналу та перекладених сегментів залежить від мовної пари проєкту. Без спеціальних налаштувань для
+               мов з письмом зліва направо використовується ліве вирівнювання, а для мов з письмом справа наліво - праве вирівнювання. Перемикатися
+               між варіантами вирівнювання можна клавіатурною комбінацією <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> (зверніть увагу, що це буква O, а не нуль). Клавіатурна комбінація <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> перемикає між трьома типами вирівнювання:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>стандартне вирівнювання, яке залежить від мови сегмента</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>ліве вирівнювання</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>праве вирівнювання</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Використання у <span class="application">OmegaT</span> режиму справа наліво не впливає на відображення перекладених документів, створених <span class="application">OmegaT</span>. Їхній вигляд треба буде змінити за допомогою відповідної програми (наприклад, Microsoft Word). Див. посібник користувача
+               до цієї програми для більш детальної інформації. Клавіатурна комбінація <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> змінює і відображення тексту і систему його введення в <span class="application">OmegaT</span>. Цю комбінацію можна використовувати у трьох областях: редагування, нечітких збігів та глосарія. Достатньо натиснути на необхідну
+               область і перемикнути тип вирівнювання. Також її можна використати у всіх полях введення тексту в <span class="application">OmegaT</span>: у вікні пошуку, при визначенні правил сегментації тощо.
+            </p>
+            <p>Для користувачів Mac OS X: зверніть увагу, що треба користуватися саме <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> а <span class="bold"><strong>не</strong></span> cmd+Ctrl+O.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5424"></a>6.1. Різні напрямки письма в одному сегменті
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Якщо у вас весь текст має визначений напрямок письма, тоді все просто. Але частенько треба додати текст зліва направо до тексту
+                  справа наліво. Наприклад, якщо це теґи OmegaT, назви продуктів, які треба залишити у первісному вигляді, змінні в спеціалізованих
+                  файлах локалізації та числа. У такому випадку доведеться перемикатися між двома типами вирівнювання, щоб такий двонаправлений
+                  текст відображався коректно. Зауважте, що коли <span class="application">OmegaT</span> знаходиться у режимі справа наліво, то і оригінал, і переклад будуть показуватися у режимі справа наліво. Тобто якщо мова
+                  оригіналу має систему письма зліва направо, а мова перекладу - справа наліво, чи навпаки, вам доведеться постійно перемикатися
+                  між режимами справа наліво та зліва направо, щоб було зручно як переглядати оригінал, так і вводити переклад.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5432"></a>6.2. Теґи <span class="application">OmegaT</span> у сегментах, написаних справа наліво
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Як вже згадувалось раніше, теґи OmegaT - це стрічки, написані зліва направо. Під час перекладу між мовами з різними напрямками
+                  письма, щоб правильно прочитати теґи в оригінальних сегментах та щоб правильно вставити їх в переклад, можливо, треба буде
+                  безліч разів переключатися між режимами.
+               </p>
+               <p>Тому, якщо це можливо, дуже бажано перед перекладом прибрати з документа все форматування, щоб під час перекладу мати справу
+                  з якомога меншою кількістю теґів. Дотримуйтесь таких рекомендацій по роботі з теґами: частіше перевіряйте теґи (Інструменти
+                  &gt; Пошук помилок) та періодично генеруйте перекладені документи, щоб раніше помічати проблеми, якщо вони виникнуть. Підказка:
+                  якщо перекласти чисто текстовий документ і після завершення додати форматування вручну у відповідній програмі, можна значно
+                  зекономити ваші зусилля та час на більш пізніх стадіях роботи.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5442"></a>6.3. Створення перекладених документів з напрямком письма справа наліво
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Напрямок письма у перекладеному документі буде такий самий як і в оригіналі. Якщо напрямок письма в оригінальному документі
+                  - зліва направо, його треба вручну змінити на справа наліво у програмі для перегляду документів. Кожен з форматів має свої
+                  засоби роботи з напрямком письма. Див. посібники користувача до відповідних програм для більш детальної інформації.
+               </p>
+               <p>Але для файлів формату .docx OmegaT робить такі автоматичні зміни:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">Абзаци, розділи і таблички мають змішаний напрямок письма</li>
+                     <li class="listitem">Текстові елементи вводяться справа наліво</li>
+                  </ul>
+               </div>
+               <p>Щоб не міняти напрямок письма щоразу, коли перекладені файли перегенеровуються, можна схитрувати та змінити напрямок письма
+                  в оригінальних файлах на потрібний для файлів перекладу. Наприклад, таке спрацює для файлів ODF.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="project.folder.html">назад</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.dictionaries.html">далі</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Розділ 5. Тека проєкту&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Початок</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Додаток A. Словники</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -44,17 +44,17 @@
                      <dt><span class="section"><a href="howtos.html#d0e4846">1.3. Step 3: Send an invitation to the translator</a></span></dt>
                      <dt><span class="section"><a href="howtos.html#d0e4886">1.4. Special case: minimal sharing</a></span></dt>
                      <dt><span class="section"><a href="howtos.html#howto.setupteamproject.mappingparameters">1.5. Mapping parameters</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e4946">1.6. Example mappings</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4947">1.6. Example mappings</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="howtos.html#howto.useteamproject">2. Use a Team Project</a></span></dt>
                <dt><span class="section"><a href="howtos.html#howto.reusetm">3. Reuse Translation Memories</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="howtos.html#d0e5139">3.1. Importing and exporting translation memories</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5150">3.2. Creating a translation memory for selected documents</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5194">3.3. Sharing translation memories</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5201">3.4. Using TMX with alternative language</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5140">3.1. Importing and exporting translation memories</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5151">3.2. Creating a translation memory for selected documents</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5195">3.3. Sharing translation memories</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5202">3.4. Using TMX with alternative language</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="howtos.html#howto.preventdataloss">4. Prevent data loss</a></span></dt>
@@ -67,9 +67,9 @@
                <dt><span class="section"><a href="howtos.html#howto.managerighttoleft">6. Manage Right-To-Left languages</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="howtos.html#d0e5422">6.1. Mixing RTL and LTR strings in segments</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5430">6.2. <span class="application">OmegaT</span> tags in RTL segments</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5439">6.3. Creating translated RTL documents</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5423">6.1. Mixing RTL and LTR strings in segments</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5431">6.2. <span class="application">OmegaT</span> tags in RTL segments</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5440">6.3. Creating translated RTL documents</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -306,18 +306,19 @@
                      <dt><span class="term">excludes</span></dt>
                      <dd>
                         <p>Add patterns using wildcards (Apache Ant style): *, ?,
-                                     **
+                                     **. Separate different patterns with a semicolon.
                         </p>
-                        <p>Example: <strong class="userinput"><code>**/.ini/**</code></strong></p>
+                        <p>Example: <strong class="userinput"><code>**/excludedfolder/**;*.txt</code></strong> excludes files that have /excludedfolder/ in the path, and files with .txt extension.
+                        </p>
                      </dd>
                      <dt><span class="term">includes</span></dt>
                      <dd>
                         <p>As above.</p>
                         <p>Example: <strong class="userinput"><code>**/*.docx</code></strong> to add all .docx
-                                     files, wherever they are located in the project.
+                                     files, wherever they are located in the project, even in excluded folders
                         </p>
-                        <p>The inclusion rules take priority over the exclusion
-                                     rules.
+                        <p>By default, all files that are not excluded are included. You only need to specify this to
+                                         override some exclusions.
                         </p>
                      </dd>
                   </dl>
@@ -327,7 +328,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4946"></a>1.6.&nbsp;Example mappings
+                        <h3 class="title"><a name="d0e4947"></a>1.6.&nbsp;Example mappings
                         </h3>
                      </div>
                   </div>
@@ -531,7 +532,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5139"></a>3.1.&nbsp;Importing and exporting translation memories
+                        <h3 class="title"><a name="d0e5140"></a>3.1.&nbsp;Importing and exporting translation memories
                         </h3>
                      </div>
                   </div>
@@ -568,7 +569,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5150"></a>3.2.&nbsp;Creating a translation memory for selected documents
+                        <h3 class="title"><a name="d0e5151"></a>3.2.&nbsp;Creating a translation memory for selected documents
                         </h3>
                      </div>
                   </div>
@@ -646,7 +647,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5194"></a>3.3.&nbsp;Sharing translation memories
+                        <h3 class="title"><a name="d0e5195"></a>3.3.&nbsp;Sharing translation memories
                         </h3>
                      </div>
                   </div>
@@ -666,7 +667,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5201"></a>3.4.&nbsp;Using TMX with alternative language
+                        <h3 class="title"><a name="d0e5202"></a>3.4.&nbsp;Using TMX with alternative language
                         </h3>
                      </div>
                   </div>
@@ -939,7 +940,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5422"></a>6.1.&nbsp;Mixing RTL and LTR strings in segments
+                        <h3 class="title"><a name="d0e5423"></a>6.1.&nbsp;Mixing RTL and LTR strings in segments
                         </h3>
                      </div>
                   </div>
@@ -962,7 +963,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5430"></a>6.2.&nbsp;<span class="application">OmegaT</span> tags in RTL segments
+                        <h3 class="title"><a name="d0e5431"></a>6.2.&nbsp;<span class="application">OmegaT</span> tags in RTL segments
                         </h3>
                      </div>
                   </div>
@@ -987,7 +988,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5439"></a>6.3.&nbsp;Creating translated RTL documents
+                        <h3 class="title"><a name="d0e5440"></a>6.3.&nbsp;Creating translated RTL documents
                         </h3>
                      </div>
                   </div>

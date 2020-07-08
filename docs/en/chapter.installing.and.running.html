@@ -1033,11 +1033,14 @@
                                  </li>
                                  <li class="listitem">
                                     <p><code class="literal">--mode=console-align</code></p>
-                                    <p>In this mode, OmegaT will align the Java properties files
+                                    <p>In this mode, OmegaT will align files
                                                        found in the <code class="filename">/source/</code> folder of the project
-                                                       to the contents found at the specified location. The resulting
+                                                       with the contents found at the specified location. The resulting
                                                        TMX is stored in the <code class="filename">/omegat/</code> folder under
-                                                       the name <code class="filename">align.tmx</code>.
+                                                       the name <code class="filename">align.tmx</code>. Which files are used for alignment depends on if the file
+                                                         filter supports it. Some supported filters: ILIAS Language File, Java(TM) Resource Bundles,
+                                                         Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles,
+                                                         Windows Resources
                                     </p>
                                     <p>Additional parameter is required in this case,
                                                        specifying the location of the target data:

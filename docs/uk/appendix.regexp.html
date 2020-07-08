@@ -1,0 +1,506 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Додаток D. Регулярні вирази</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - Посібник користувача">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - Посібник користувача">
+      <link rel="prev" href="appendix.spellchecker.html" title="Додаток C. Перевірка правопису">
+      <link rel="next" href="appendix.shortcut.custom.html" title="Додаток E. Налаштування комбінацій клавіш">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Додаток D. Регулярні вирази</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.spellchecker.html">назад</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.shortcut.custom.html">далі</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.regexp"></a>Додаток D. Регулярні вирази
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.regexp.html#regex.tools.and.examples.of.use">1. Інструменти для роботи з регулярними виразами та приклади використання</a></span></dt>
+            </dl>
+         </div>
+         <p>Для пошуку чи налаштування правил сегментації в OmegaT використовуються регулярні вирази Java. Щоб дізнатися про них більше,
+            дивіться <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">документацію регулярних виразів Java</a>. Нижче перелічені кілька важливих конструкцій.
+         </p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Примітка</h3>
+            <p>Цей розділ призначений для досвідчених користувачів OmegaT, яким треба визначити свої варіанти правил сегментації чи шукати
+               в тексті складні конструкції.
+            </p>
+         </div>
+         <div class="table"><a name="d0e5872"></a><p class="title"><b>Таблиця D.1. Регулярні вирази - прапорці</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - прапорці" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">(?i)</td>
+                        <td align="left">Вмикає пошук без врахування регістру літер (типово шаблон враховує регістр).</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5889"></a><p class="title"><b>Таблиця D.2. Регулярні вирази - символи</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - символи" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">x</td>
+                        <td align="left">Символ x, за винятком...</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\uhhhh</td>
+                        <td align="left">Символ із шістнадцятковим значенням 0xhhhh</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\t</td>
+                        <td align="left">Символ табуляції ('\u0009')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\n</td>
+                        <td align="left">Символ нового рядка ('\u000A')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\r</td>
+                        <td align="left">Символ повернення каретки ('\u000D')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\f</td>
+                        <td align="left">Символ зміни сторінки ('\u000C')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\a</td>
+                        <td align="left">Символ звукового сигналу ('\u0007')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\e</td>
+                        <td align="left">Символ Esc ('\u001B')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\cx</td>
+                        <td align="left">Контрольний символ, що відповідає x</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0n</td>
+                        <td align="left">Символ із вісімковим значенням 0n (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0nn</td>
+                        <td align="left">Символ із вісімковим значенням 0nn (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0mnn</td>
+                        <td align="left">Символ із вісімковим значенням 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\xhh</td>
+                        <td align="left">Символ із шістнадцятковим значенням 0xhh</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5966"></a><p class="title"><b>Таблиця D.3. Регулярні вирази - екранування</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - екранування" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\</td>
+                        <td align="left">Нічого не спіймає, але екранує наступний символ. Це потрібно, якщо вам треба ввести якийсь метасимвол - !$()*+.&lt;&gt;?[\]^{|}
+                           - уникаючи його інтерпретації як спеціального.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\\</td>
+                        <td align="left">Наприклад, цей вираз зловить символ \.</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\Q</td>
+                        <td align="left">Нічого не спіймає, але екранує всі символи до \E</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\E</td>
+                        <td align="left">Нічого не спіймає, але закінчує блок екранованих символів, що розпочався із \Q</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e5998"></a><p class="title"><b>Таблиця D.4. Регулярні вирази - Класи символів для блоків та категорій Юнікоду</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - Класи символів для блоків та категорій Юнікоду" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\p{InGreek}</td>
+                        <td align="left">Символ із грецького блоку (простий <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">блок</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Lu}</td>
+                        <td align="left">Велику літеру (проста <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">категорія</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Sc}</td>
+                        <td align="left">Символ валюти</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\P{InGreek}</td>
+                        <td align="left">Будь-який символ, окрім як із грецького блоку (заперечення)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td align="left">Будь-яку літеру, окрім великих (виключення)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6041"></a><p class="title"><b>Таблиця D.5. Регулярні вирази - класи символів</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - класи символів" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">[abc]</td>
+                        <td align="left">a, b, або c (простий клас)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[^abc]</td>
+                        <td align="left">Будь-який символ, окрім a, b, чи c (заперечення)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[a-zA-Z]</td>
+                        <td align="left">Від a до z чи від A до Z, включно (діапазон)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6068"></a><p class="title"><b>Таблиця D.6. Регулярні вирази - попередньо визначені класи символів</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - попередньо визначені класи символів" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">.</td>
+                        <td align="left">Будь-який символ, окрім символів кінця рядка.</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\d</td>
+                        <td align="left">Цифру: [0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\D</td>
+                        <td align="left">Не цифру: [^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\s</td>
+                        <td align="left">Пробільний символ: [ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\S</td>
+                        <td align="left">Непробільний символ: [^\s]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\w</td>
+                        <td align="left">Символ, який "може бути частиною слова": [a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\W</td>
+                        <td align="left">Символ, який "не може бути частиною слова": [^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6115"></a><p class="title"><b>Таблиця D.7. Регулярні вирази - межі</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - межі" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">^</td>
+                        <td align="left">Початок рядка</td>
+                     </tr>
+                     <tr>
+                        <td align="left">$</td>
+                        <td align="left">Кінець рядка</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\b</td>
+                        <td align="left">Межу "слова"</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\B</td>
+                        <td align="left">Не межу "слова"</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6147"></a><p class="title"><b>Таблиця D.8. Регулярні вирази - жадібні квантифікатори</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - жадібні квантифікатори" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
+                        <td align="left">X, один раз або жодного</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
+                        <td align="left">X, нуль чи більше разів</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
+                        <td align="left">X, один чи більше разів</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Примітка</h3>
+            <p>жадібні квантифікатори ловлять максимальну можливу кількість елементів. Наприклад, <span class="emphasis"><em>a+</em></span> зловить aaa у <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e6188"></a><p class="title"><b>Таблиця D.9. Регулярні вирази - ліниві (нежадібні) квантифікатори</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - ліниві (нежадібні) квантифікатори" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X??</td>
+                        <td align="left">X, один раз або жодного</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X*?</td>
+                        <td align="left">X, нуль чи більше разів</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X+?</td>
+                        <td align="left">X, один чи більше разів</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Примітка</h3>
+            <p>ліниві квантифікатори ловлять мінімальну можливу кількість елементів. Наприклад, <span class="emphasis"><em>a+?</em></span> зловить першу літеру <span class="emphasis"><em>a</em></span> у <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e6226"></a><p class="title"><b>Таблиця D.10. Регулярні вирази - логічні оператори</b></p>
+            <div class="table-contents">
+               <table class="table" summary="Регулярні вирази - логічні оператори" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Вираз</th>
+                        <th align="left">... спіймає</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">XY</td>
+                        <td align="left">X за яким іде Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X|Y</td>
+                        <td align="left">X чи Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">(XY)</td>
+                        <td align="left">XY як одну групу</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. Інструменти для роботи з регулярними виразами та приклади використання
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Існує багато інтерактивних інструментів для розробки та тестування регулярних виразів. Загалом вони працюють за такою схемою:
+               регулярний вираз (запис зверху) аналізує текст (текстове поле посередині) і видає результати у нижньому текстовому полі. (Приклад
+               із Regular Expression Tester)
+            </p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Рисунок D.1. Regex Tester</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Regex Tester"></div>
+               </div>
+            </div><br class="figure-break"><p><a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a> доступний для Windows, Linux, FreeBSD як окрема програма. Він працює в цілому так само як на попередньому прикладі.
+            </p>
+            <p>Непогана підбірка прикладів використання регулярних виразів є у самій <span class="application">OmegaT</span> (дивись Налаштування &gt; Сегментація). Перелік регулярних виразів, які можуть бути корисні для пошуку у памʼяті перекладів:
+            </p>
+            <div class="table"><a name="d0e6275"></a><p class="title"><b>Таблиця D.11. Регулярні вирази - приклади регулярних виразів у перекладах</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="Регулярні вирази - приклади регулярних виразів у перекладах" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Регулярний вираз</th>
+                           <th align="left">спіймає:</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">(\b\w+\b)\s\1\b</td>
+                           <td align="left">повтори слів</td>
+                        </tr>
+                        <tr>
+                           <td align="left">[\.,]\s*[\.,]+</td>
+                           <td align="left">кому чи крапку, після якої через пробіл іде ще одна кома чи крапка</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\. \s+$</td>
+                           <td align="left">пробіли після крапки у кінці рядка</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+a\s+[aeiou]</td>
+                           <td align="left">В англійській мові слова, що починаються на голосні, як правило мають перед собою артикль "an", а не "a"</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+an\s+[^aeiou]</td>
+                           <td align="left">В англійській мові: те саме, але для приголосних ("a", а не "an")</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s{2,}</td>
+                           <td align="left">більш ніж один пробіл</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\.[A-Z]</td>
+                           <td align="left">Крапку, після якої іде велика літера - можливо, пропущений пробіл між крапкою та новим реченням</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\bis\b</td>
+                           <td align="left">пошук цілого слова “is”, але не “this” чи “isn't” тощо.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.spellchecker.html">назад</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.shortcut.custom.html">далі</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Додаток C. Перевірка правопису&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Початок</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Додаток E. Налаштування комбінацій клавіш</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

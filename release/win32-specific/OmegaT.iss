@@ -178,9 +178,12 @@ begin
 
     LoadStringFromFile(ExpandConstant('{app}\OmegaT.l4J.ini'), IniFileAnsi);
     IniFileUnicode := String(IniFileAnsi)
-    StringChangeEx(IniFileUnicode, '#-Duser.language=en', '-Duser.language=' + InstallLanguage, True);
+    StringChangeEx(IniFileUnicode, '-Duser.language=', '#-Duser.language=', True);
+    StringChangeEx(IniFileUnicode, '-Duser.country=', '#-Duser.country=', True);
+    IniFileUnicode := IniFileUnicode + #13#10 + '-Duser.language=' + InstallLanguage;
     if Length(InstallCountry) > 0 then
-      StringChangeEx(IniFileUnicode, '#-Duser.country=GB', '-Duser.country=' + InstallCountry, True);
+      IniFileUnicode := IniFileUnicode + #13#10 + '-Duser.country=' + InstallCountry;
+
     IniFileAnsi := AnsiString(IniFileUnicode)
     SaveStringToFile(ExpandConstant('{app}\OmegaT.l4J.ini'), IniFileAnsi, false);
   end

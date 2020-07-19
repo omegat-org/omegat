@@ -40,13 +40,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -567,7 +572,10 @@ public class ScriptingWindow {
     }
 
     public void executeScript(String scriptString, ScriptItem scriptItem) {
-        executeScript(scriptString, scriptItem, Collections.emptyMap());
+    	cancelScriptQueue();
+        ScriptWorker worker = createScriptWorker(scriptString, scriptItem, Collections.emptyMap());
+        currentScriptWorker = worker;
+        worker.execute();
     }
 
     public void executeScriptFile(ScriptItem scriptItem) {
@@ -575,9 +583,12 @@ public class ScriptingWindow {
     }
 
     public void executeScriptFile(ScriptItem scriptItem, Map<String, Object> additionalBindings) {
+    	cancelScriptQueue();
         try {
             String scriptString = scriptItem.getText();
-            executeScript(scriptString, scriptItem, additionalBindings);
+            ScriptWorker worker = createScriptWorker(scriptString, scriptItem, additionalBindings);
+            currentScriptWorker = worker;
+            worker.execute();
         } catch (IOException e) {
             // TODO: Do we really want to handle the exception here, like this?
             // This method can be called in instances when the Scripting Window
@@ -586,8 +597,56 @@ public class ScriptingWindow {
             logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_LOAD_ERROR"), scriptItem.getFile()), e);
         }
     }
+    
 
-    public void executeScript(String scriptString, ScriptItem scriptItem, Map<String, Object> additionalBindings) {
+    /** Execute scripts sequentially to make sure they don't interrupt each other. */
+    public void executeScriptFiles(final ArrayList<ScriptItem> scriptItems, final Map<String, Object> bindings) {
+        for (ScriptItem scriptItem : scriptItems) {
+            try {
+                String scriptString = scriptItem.getText();
+                queuedWorkers.add(createScriptWorker(scriptString, scriptItem, bindings));
+            } catch (IOException e) {
+                // TODO: Do we really want to handle the exception here, like this?
+                // This method can be called in instances when the Scripting Window
+                // is not visible, so it might make more sense to let the caller
+                // handle the exception.
+                logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_LOAD_ERROR"), scriptItem.getFile()), e);
+            };
+        }
+
+        executeScriptWorkers();
+    }
+
+    private void executeScriptWorkers() {
+        final ScriptWorker scriptWorker = queuedWorkers.poll();
+
+        if (scriptWorker == null) {
+            return;
+        }
+
+        PropertyChangeListener propertyChangeListener = new PropertyChangeListener()
+        {
+            @Override
+            public void propertyChange(PropertyChangeEvent event)
+            {
+                if (! "state".equals(event.getPropertyName()))
+                {
+                    return;
+                }
+
+                if (SwingWorker.StateValue.DONE == event.getNewValue()) 
+                {
+                    scriptWorker.removePropertyChangeListener(this);
+                    executeScriptWorkers();
+                }
+            }
+        };
+        scriptWorker.addPropertyChangeListener(propertyChangeListener);
+        currentScriptWorker = scriptWorker;
+        scriptWorker.execute();
+    }
+
+    public ScriptWorker createScriptWorker(String scriptString, ScriptItem scriptItem, Map<String, Object> additionalBindings) {
 
         if (!scriptString.endsWith("\n")) {
             scriptString += "\n";
@@ -611,11 +670,7 @@ public class ScriptingWindow {
             }
         });
 
-        cancelCurrentScript();
-
-        scriptWorker = new ScriptWorker(scriptString, scriptItem, bindings);
-        scriptWorker.execute();
-
+        return new ScriptWorker(scriptString, scriptItem, bindings);
     }
 
     /**
@@ -628,12 +683,17 @@ public class ScriptingWindow {
      * @see <a href="http://stackoverflow.com/a/24875881/448068">StackOverflow
      *      answer about interrupting scripts</a>
      */
-    private void cancelCurrentScript() {
-        if (scriptWorker != null) {
-            scriptWorker.cancel(true);
+    public void cancelCurrentScript() {
+        if (currentScriptWorker != null) {
+            currentScriptWorker.cancel(true);
         }
     }
 
+    public void cancelScriptQueue() {
+    	cancelCurrentScript();
+    	queuedWorkers.clear();
+    }
+    
     private void logResult(String s, Throwable t) {
         logResultToWindow(s + "\n" + t.getMessage(), true);
         LOGGER.log(Level.SEVERE, s, t);
@@ -1022,7 +1082,8 @@ public class ScriptingWindow {
     private JButton m_btnCancelScript;
     private JMenuBar mb;
 
-    private ScriptWorker scriptWorker;
+    private ScriptWorker currentScriptWorker;
+    private Queue<ScriptWorker> queuedWorkers = new LinkedList<>();
 
     protected ScriptsMonitor monitor;
 

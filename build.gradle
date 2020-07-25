@@ -608,17 +608,19 @@ ext.getInnoSetupCustomMessages = {
     // Don't include languages that InnoSetup doesn't have strings for
     def blacklist = ['cy', 'ia']
     // Sort files to ensure English comes first, to set fallback
-    def iniFiles = fileTree(dir: 'release/win32-specific', include: 'CustomMessages*.ini').sort()
-    iniFiles.collect { file ->
-        def match = file.name =~ /CustomMessages_?([^\.]*).ini/
-        if (match) {
-            def capture = match.group(1)
-            def lang = capture.empty ? 'en' : capture
-            if (!blacklist.contains(lang)) {
-                file.text.replaceAll(/(?m)^([^=]+)/) { "$lang.${it[0]}" }
+    fileTree(dir: 'release/win32-specific', include: 'CustomMessages*.ini')
+        .sort()
+        .collect { file ->
+            def match = file.name =~ /CustomMessages_?([^\.]*).ini/
+            if (match) {
+                def capture = match.group(1)
+                def lang = capture.empty ? 'en' : capture
+                if (!blacklist.contains(lang)) {
+                    file.text.replaceAll(/(?m)^([^=]+)/) { "$lang.${it[0]}" }
+                }
             }
-        }
-    }.findAll().join(System.lineSeparator())
+        }.findAll()
+        .join(System.lineSeparator())
 }
 
 task win {

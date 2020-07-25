@@ -2,7 +2,7 @@
  OmegaT 5.3.0
 ----------------------------------------------------------------------
   4 Enhancements
-  5 Bug fixes
+  6 Bug fixes
   2 Localisation updates
 ----------------------------------------------------------------------
 5.3.0 vs 5.2.0
@@ -35,6 +35,9 @@
 
   - Deleting repository mappings under Java 11
   https://sourceforge.net/p/omegat/bugs/990/
+
+  - Missing custom messages in installer fall back to wrong language
+  https://sourceforge.net/p/omegat/bugs/997/
 
   - Tag validation false positives for some tags from html2 filter
   https://sourceforge.net/p/omegat/bugs/1001/

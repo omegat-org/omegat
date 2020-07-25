@@ -572,7 +572,7 @@ public class ScriptingWindow {
     }
 
     public void executeScript(String scriptString, ScriptItem scriptItem) {
-    	cancelScriptQueue();
+        cancelScriptQueue();
         ScriptWorker worker = createScriptWorker(scriptString, scriptItem, Collections.emptyMap());
         currentScriptWorker = worker;
         worker.execute();
@@ -583,7 +583,7 @@ public class ScriptingWindow {
     }
 
     public void executeScriptFile(ScriptItem scriptItem, Map<String, Object> additionalBindings) {
-    	cancelScriptQueue();
+        cancelScriptQueue();
         try {
             String scriptString = scriptItem.getText();
             ScriptWorker worker = createScriptWorker(scriptString, scriptItem, additionalBindings);
@@ -597,7 +597,7 @@ public class ScriptingWindow {
             logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_LOAD_ERROR"), scriptItem.getFile()), e);
         }
     }
-    
+
 
     /** Execute scripts sequentially to make sure they don't interrupt each other. */
     public void executeScriptFiles(final ArrayList<ScriptItem> scriptItems, final Map<String, Object> bindings) {
@@ -624,18 +624,14 @@ public class ScriptingWindow {
             return;
         }
 
-        PropertyChangeListener propertyChangeListener = new PropertyChangeListener()
-        {
+        PropertyChangeListener propertyChangeListener = new PropertyChangeListener() {
             @Override
-            public void propertyChange(PropertyChangeEvent event)
-            {
-                if (! "state".equals(event.getPropertyName()))
-                {
+            public void propertyChange(PropertyChangeEvent event) {
+                if (!"state".equals(event.getPropertyName())) {
                     return;
                 }
 
-                if (SwingWorker.StateValue.DONE == event.getNewValue()) 
-                {
+                if (SwingWorker.StateValue.DONE == event.getNewValue()) {
                     scriptWorker.removePropertyChangeListener(this);
                     executeScriptWorkers();
                 }
@@ -690,10 +686,10 @@ public class ScriptingWindow {
     }
 
     public void cancelScriptQueue() {
-    	cancelCurrentScript();
-    	queuedWorkers.clear();
+        cancelCurrentScript();
+        queuedWorkers.clear();
     }
-    
+
     private void logResult(String s, Throwable t) {
         logResultToWindow(s + "\n" + t.getMessage(), true);
         LOGGER.log(Level.SEVERE, s, t);

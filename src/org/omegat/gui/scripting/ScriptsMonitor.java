@@ -193,9 +193,9 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
             @Override
             public void onApplicationShutdown() {
-            	// FIXME APPLICATION_SHUTDOWN scripts are not reliably
-            	// executed, as the application may exit before they are
-            	// finished executing.
+                // FIXME APPLICATION_SHUTDOWN scripts are not reliably
+                // executed, as the application may exit before they are
+                // finished executing.
                 ArrayList<ScriptItem> scriptItems = m_eventsScript.get(EventType.APPLICATION_SHUTDOWN);
                 m_scriptingWindow.executeScriptFiles(scriptItems,
                         new HashMap<String, Object>());

@@ -171,9 +171,9 @@
         <term>uitsluiten</term>
 
         <listitem>
-          <para>Voeg patronen toe met jokertekens (stijl van Apache Ant): *, ?, **</para>
+          <para>Voeg patronen toe met jokertekens (stijl van Apache Ant): *, ?, **. Verschillende patronen scheiden door puntkomma.</para>
 
-          <para>Voorbeeld: <userinput>**/.ini/**</userinput></para>
+          <para>Voorbeeld: <userinput>**/excludedfolder/**;*.txt</userinput> sluit bestanden die /excludedfolder/ in het pad hebben staan, en bestanden met de extensie .txt, uit.</para>
         </listitem>
       </varlistentry>
 
@@ -183,9 +183,9 @@
         <listitem>
           <para>Zoals boven.</para>
 
-          <para>Voorbeeld: <userinput>**/*.docx</userinput> om alle bestanden .docx toe te voegen, waar zij ook zijn geplaatst binnen het project.</para>
+          <para>Voorbeeld: <userinput>**/*.docx</userinput> om alle bestanden .docx toe te voegen, waar zij ook maar in het project zijn geplaatst, zelfs in de uitgesloten mappen</para>
 
-          <para>De regels voor opnemen hebben prioriteit boven de regels voor uitsluiten.</para>
+          <para>Standaard worden alle bestanden, die niet zijn uitgesloten, opgenomen. U hoeft alleen dit te specificeren om enkele uitsluitingen te overschrijven.</para>
         </listitem>
       </varlistentry>
     </variablelist>

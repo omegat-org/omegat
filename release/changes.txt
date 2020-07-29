@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   4 Enhancements
   6 Bug fixes
-  2 Localisation updates
+  3 Localisation updates
 ----------------------------------------------------------------------
 5.3.0 vs 5.2.0
 
@@ -22,6 +22,9 @@
   https://sourceforge.net/p/omegat/feature-requests/1479/
 
   Bug fixes:
+
+  - application_startup event could fail to execute scripts
+  https://sourceforge.net/p/omegat/bugs/860
 
   - Wrong directory separator character used in external command
   placeholders on Windows
@@ -45,6 +48,7 @@
   Localisation Updates:
 
   - Corsican localisation added at 5.3.0 (UI, scripts, readme)
+  - Dutch localisation updated to 5.3.0 (UI, documentation)
   - Ukrainian localisation updated to 5.2.0 (UI, readme, documentation)
 
 ----------------------------------------------------------------------

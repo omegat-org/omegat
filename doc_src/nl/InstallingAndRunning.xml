@@ -498,7 +498,7 @@
               <listitem>
                 <para><literal>--mode=console-align</literal></para>
 
-                <para>In deze modus zal OmegaT het bestand met de Java-eigenschappen die zijn gevonden in de map <filename>/source/</filename> van het project vergelijken met de inhoud op de opgegeven locatie. De resulterende TMX wordt opgeslagen in de map <filename>/omegat/</filename> onder de naam <filename>align.tmx</filename>.</para>
+                <para>In deze modus zal OmegaT bestanden, gevonden in de map <filename>/source/</filename> van het project, vergelijken met de inhoud op de opgegeven locatie. De resulterende TMX wordt opgeslagen in de map <filename>/omegat/</filename> onder de naam <filename>align.tmx</filename>. Welke bestanden worden gebruikt voor vergelijken is afhankelijk van het bestandsfilter dat het ondersteunt. Enkele ondersteunde filters: ILIAS Language File, Java(TM) Resource Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles, Windows Resources</para>
 
                 <para>Een aanvullende parameter, die de locatie van de doelgegevens specificeert, is in dit geval vereist:</para>
 

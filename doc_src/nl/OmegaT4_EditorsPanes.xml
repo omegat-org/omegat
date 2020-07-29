@@ -130,7 +130,24 @@
 
     <para>Als u doorgaat naar het volgende segment wordt de eerste overeenkomst (die met het hoogste percentage van overeenkomst) automatisch geselecteerd. U kunt een andere overeenkomst selecteren door te drukken op  <guimenuitem>Ctrl+2, 3, 4, of 5</guimenuitem>. Uiteraard zal het drukken op <keycombo><keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> geen effect hebben als er geen overeenkomst #5 is. Gebruik <guimenuitem>Ctrl+R</guimenuitem> om het doelveld te vervangen door die overeenkomst of <guimenuitem>Ctrl+I</guimenuitem> om die in te voegen op de cursorpositie, om de geselecteerde overeenkomst in uw vertaling te gebruiken.</para>
 
-    <para>Het percentage voor de overeenkomst is ruwweg het equivalent van het aantal meest voorkomende woorden in het vergeleken en het overeenkomende segment, gedeeld door het aantal woorden in de langste van de twee. De geselecteerde overeenkomst zal worden geaccentueerd in vet, woorden die ontbreken in het segment dat u vertaald zullen blauw gekleurd zijn en woorden die aansluiten aan ontbrekende gedeelten zullen groen zijn. In het bovenstaande voorbeeld is het bronsegment <emphasis role="bold">Context menu command</emphasis>. De bovenste overeenkomst is 100%, omdat alle woorden overeenkomen. Hetzelfde geldt voor de twee volgende overeenkomsten en de overeenkomst #4 is soortgelijk, maar verschilt. De regel met het percentage van overeenkomst bevat ook de naam van het vertaalgeheugen dat de overeenkomst bevat. Indien er geen naam vermeld is, is de bron het interne vertaalgeheugen van het project. Wezen-segmenten (de overeenkomst #2) beschrijven segmenten in het standaard vertaalgeheugen van het project die geen overeenkomend bronsegment hebben.</para>
+    <para>De drie percentages voor overeenkomsten staan in de volgende volgorde:<itemizedlist>
+      <listitem>
+		  <para>het percentage dat is berekend met stemming<footnote>
+		  <para>Bekijk <ulink url="https://en.wikipedia.org/wiki/Stemming">https://en.wikipedia.org/wiki/Stemming</ulink></para>
+		  </footnote>en negeren van tags en getallen (in het algemeen het hoogste)</para>
+	  </listitem>
+      <listitem>
+		  <para>het percentage dat is berekend zonder stemming en nog steeds tags en getallen negeert (in het algemeen iets lager)</para>
+	  </listitem>
+      <listitem>
+		  <para>het percentage dat is berekend over de volledige tekst, inclusief tags en getallen (in het algemeen het laagste)</para>
+	  </listitem>
+    </itemizedlist>
+    </para>
+
+    <para>Het is mogelijk de sorteervolgorde van de drie percentages aan te passen, maar niet welke zal worden gebruikt voor het selecteren van de fuzzy overeenkomsten.</para>
+
+    <para>De geselecteerde overeenkomst zal worden geaccentueerd in vet, woorden die ontbreken in het segment dat u vertaald zullen blauw gekleurd zijn en woorden die aansluiten aan ontbrekende gedeelten zullen groen zijn. In het bovenstaande voorbeeld is het bronsegment <emphasis role="bold">Context menu command</emphasis>. De bovenste overeenkomst is 100%, omdat alle woorden overeenkomen. Hetzelfde geldt voor de twee volgende overeenkomsten en de overeenkomst #4 is soortgelijk, maar verschilt. De regel met het percentage van overeenkomst bevat ook de naam van het vertaalgeheugen dat de overeenkomst bevat. Indien er geen naam vermeld is, is de bron het interne vertaalgeheugen van het project. Wezen-segmenten (overeenkomst #2) beschrijven segmenten in het standaard vertaalgeheugen van het project die geen overeenkomend bronsegment hebben.</para>
   </section>
 
   <section>

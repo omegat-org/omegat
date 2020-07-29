@@ -8,34 +8,34 @@
 
     <para>Для більшості пунктів головного меню можна налаштувати комбінації клавіш. Ви можете змінити вже наявні комбінації та додати нові, поклавши файл із комбінаціями в теку налаштувань <application>OmegaT</application> (меню <menuchoice> <guimenuitem>Налаштування</guimenuitem> <guimenuitem>Відкрити теку з налаштуваннями</guimenuitem> </menuchoice>).</para>
 
-    <para>Файл визначення комбінацій клавіш повинен мати назву <filename>MainMenuShortcuts.properties</filename> і містити лише одну комбінацію на рядок. Допустимо використовувати порожні рядки та коментарі, які починаються з «//». Текст в рядку після «//» ігнорується.</para>
+    <para>Файл визначення комбінацій клавіш повинен мати назву <filename>MainMenuShortcuts.properties</filename> і містити лише одну комбінацію на рядок. Допустимо використовувати порожні рядки та коментарі, які починаються з «//». Текст у рядку після «//» ігнорується.</para>
 
     <para>Щоб нові комбінації набули чинності, після змін у файлі <filename>MainMenuShortcuts.properties</filename> необхідно перезавантажити <application>OmegaT</application>.</para>
 
-    <para>Синтаксис комбінацій клавіш виглядає так: <code>&lt;код пункту меню&gt;=&lt;комбінація клавіш&gt;</code>, де <emphasis>&lt;код пункту меню&gt;</emphasis> - це код із таблиці, вказаної нижче, а <emphasis>&lt;комбінація клавіш&gt;</emphasis> - це комбінація клавіш, встановлена користувачем<footnote>
+    <para>Синтаксис комбінацій клавіш виглядає так: <code>&lt;код пункту меню&gt;=&lt;комбінація клавіш&gt;</code>, де <emphasis>&lt;код пункту меню&gt;</emphasis> — це код із таблиці, вказаної нижче, а <emphasis>&lt;комбінація клавіш&gt;</emphasis> — це комбінація клавіш, встановлена користувачем<footnote>
         <para>Повний синтаксис комбінацій клавіш описано в документації Java 1.6 від Oracle (внизу сторінки): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
       </footnote>.</para>
 
     <para>&lt;комбінація клавіш&gt; складається з таких елементів: 0 чи більше елементів <code>&lt;модифікатор&gt;</code> потім 0 чи 1 <code>&lt;подія&gt;</code> за ним 1 <code>&lt;клавіша&gt;</code>, де:<itemizedlist>
         <listitem>
-          <para><code>&lt;модифікатор&gt;</code> приймає значення: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
+          <para><code>&lt;модифікатором&gt;</code> можуть виступати: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
               <para>На системах Mac модифікатор <emphasis>meta</emphasis> використовується для позначення кнопки <emphasis>command</emphasis> </para>
             </footnote>, <emphasis>alt</emphasis>,
           <emphasis>altGraph</emphasis></para>
         </listitem>
 
         <listitem>
-          <para><code>&lt;подія&gt;</code> має значення: <emphasis>typed</emphasis> (введений символ - натиснута і відпущена клавіша), <emphasis>pressed</emphasis> (натиснута клавіша), <emphasis>released</emphasis> (відпущена клавіша)</para>
+          <para><code>&lt;подія&gt;</code> має значення: <emphasis>typed</emphasis> (введений символ — натиснута і відпущена клавіша), <emphasis>pressed</emphasis> (натиснута клавіша), <emphasis>released</emphasis> (відпущена клавіша)</para>
         </listitem>
 
         <listitem>
-          <para>та <code>&lt;клавіша&gt;</code> приймає значення будь-якої клавіші на вашій клавіатурі<footnote>
+          <para>та <code>&lt;клавішою&gt;</code> може стати будь-яка клавіша на вашій клавіатурі<footnote>
               <para>Можливі події для клавіш перераховані в документації Java 1.6 від Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Опис Java 1.6 keyEvents</ulink></para>
             </footnote>.</para>
         </listitem>
       </itemizedlist></para>
 
-    <para>Наприклад, в стандартних комбінаціях OmegaT<footnote>
+    <para>Наприклад, в стандартних комбінаціях OmegaT <footnote>
         <para>Стандартні комбінації OmegaT доступні на Sourceforge: <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Типові комбінації OmegaT</ulink></para>
 
         <para>Стандартні комбінації OmegaT для Mac також доступні на Sourceforge, в них замість «ctrl» використовується «meta»: <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Стандартні комбінації OmegaT для Mac</ulink></para>
@@ -51,19 +51,19 @@
       </listitem>
     </itemizedlist>
 
-    <para>Перша комбінація використовується для <guimenuitem>відкриття проєкту</guimenuitem>, друга - для <guimenuitem>створення запису до глосарія</guimenuitem>.</para>
+    <para>Перша комбінація використовується для <guimenuitem>відкриття проєкту</guimenuitem>, друга — для <guimenuitem>створення запису до глосарія</guimenuitem>.</para>
 
-    <para>Якщо ви бажаєте використовувати <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> для відкриття проєкту, змініть у вашому <filename>MainMenuShortcuts.properties</filename> значення на таке:<code>
+    <para>Якщо ви хочете використовувати <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> для відкриття проєкту, змініть у вашому <filename>MainMenuShortcuts.properties</filename> значення на таке:<code>
     </code></para>
 
     <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
 
-    <para>Якщо ви використовуєте Mac та бажаєте додати комбінацію клавіш <keycombo> <keycap>Shift</keycap> <keycap>Command</keycap> <keycap>S</keycap> </keycombo> до пункту <menuchoice> <guimenu>Інструменти</guimenu> <guimenuitem>Статистика</guimenuitem> </menuchoice>, додайте такий рядок до вашого <filename>MainMenuShortcuts.properties</filename>:<code/></para>
+    <para>Якщо ви використовуєте Mac та хочете додати комбінацію клавіш <keycombo> <keycap>Shift</keycap> <keycap>Command</keycap> <keycap>S</keycap> </keycombo> до пункту <menuchoice> <guimenu>Інструменти</guimenu> <guimenuitem>Статистика</guimenuitem> </menuchoice>, додайте такий рядок до вашого <filename>MainMenuShortcuts.properties</filename>:<code/></para>
 
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>
 
-    <para>Збережіть файл та перезапустіть <application>OmegaT</application>. Ваша нова комбінація клавіш повинна зʼявитися поруч зі зміненим пунктом меню. Якщо вони не конфліктують із системними комбінаціями, то вони будуть доступні в OmegaT.</para>
+    <para>Збережіть файл та перезапустіть <application>OmegaT</application>. Ваша нова комбінація клавіш повинна з’явитися поруч зі зміненим пунктом меню. Якщо вони не конфліктують із системними комбінаціями, то вони будуть доступні в OmegaT.</para>
   </section>
 
   <section id="ch04.shortcuts.ProjectMenu">
@@ -744,7 +744,7 @@
           </row>
 
           <row>
-            <entry>Позначати керівні символи керування напрямком письма</entry>
+            <entry>Позначати символи керування напрямком письма</entry>
 
             <entry/>
 

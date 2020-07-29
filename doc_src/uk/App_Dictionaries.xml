@@ -10,7 +10,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Знайти необхідну мовну пару, наприклад, за <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">посиланнями на словники</ulink> від OmegaT Wiki.</para>
+        <para>Знайти відповідну мовну пару, наприклад, за <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">посиланнями на словники</ulink> від OmegaT Wiki.</para>
       </listitem>
     </itemizedlist>
 
@@ -22,7 +22,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Розпакувати вміст файлу до теки проєкту «Dictionary», використовуючи утиліту untar (чи її еквівалент, на кшталт <filename>winrar</filename> для Windows) . Там має бути три файли з розширеннями <emphasis>dz, idx</emphasis> та <emphasis>ifo</emphasis>.</para>
+        <para>Розпакувати вміст файлу до теки проєкту «Dictionary», використовуючи утиліту untar (чи її еквівалент, на кшталт <filename>winrar</filename> у Windows) . Там має бути три файли з розширеннями <emphasis>dz, idx</emphasis> та <emphasis>ifo</emphasis>.</para>
       </listitem>
     </itemizedlist>
 
@@ -30,7 +30,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Webster's Revised Unabridged Dictionary (1913)</para>
+        <para>Webster’s Revised Unabridged Dictionary (1913)</para>
       </listitem>
     </itemizedlist>
 
@@ -52,10 +52,10 @@
       </listitem>
     </itemizedlist>
 
-    <para>Ці словники видані під ліцензією GPL, однак, є і такі, які не прив'язані до жодних ліцензій, тобто, вони &quot;Вільні для використання&quot;. Нижче зображено, як працює словник Мерріама-Вебстера (10-видання):</para>
+    <para>Ці словники видані під ліцензією GPL, однак, є і такі, які не прив’язані до жодних ліцензій, тобто, вони «Вільні для використання». Нижче зображено, як працює словник Мерріама-Вебстера (10-видання):</para>
 
     <figure id="Dict.Merriam.Webster">
-      <title>Словник Мерріама-Вебстера - використання</title>
+      <title>Словник Мерріама-Вебстера — використання</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -74,13 +74,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>Перевірте, чи розташовані файли словників в правильній теці (чи підтеці). Для цього зайдіть у <menuchoice><guimenu>Проєкт</guimenu> <guimenuitem>Властивості</guimenuitem> (<shortcut><keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap></keycombo></shortcut>)</menuchoice>.</para>
+        <para>Перевірте, чи розташовані файли словників у правильній теці (чи підтеці). Для цього зайдіть у <menuchoice><guimenu>Проєкт</guimenu> <guimenuitem>Властивості</guimenuitem> (<shortcut><keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap></keycombo></shortcut>)</menuchoice>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Чи містить тека три файли з однаковою назвою та різним розширенням? Якщо там лише один файл, перевірте його розширення. Якщо це <emphasis>tar.bz</emphasis>, то це архів - ви забули його розпакувати.</para>
+        <para>Чи містить тека три файли з однаковою назвою та різним розширенням? Якщо там лише один файл, перевірте його розширення. Якщо це <emphasis>tar.bz</emphasis>, то це архів — ви забули його розпакувати.</para>
       </listitem>
     </itemizedlist>
   </section>

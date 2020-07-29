@@ -21,11 +21,11 @@
 
   <itemizedlist>
     <listitem>
-      <para><filename>omegat/project_save.tmx</filename></para>
+      <para><filename>./omegat/project_save.tmx</filename></para>
     </listitem>
 
     <listitem>
-      <para><filename>glossary/glossary.txt</filename></para>
+      <para><filename>./glossary/glossary.txt</filename></para>
     </listitem>
   </itemizedlist>
 
@@ -37,11 +37,11 @@
 
   <para><orderedlist>
       <listitem>
-        <para>скопіюйте файли до теки <filename>/source</filename></para>
+        <para>скопіюйте файли до теки <filename>./source</filename></para>
       </listitem>
 
       <listitem>
-        <para>використайте <menuchoice> <guimenuitem>Проєкт</guimenuitem> <guimenuitem>Зафіксувати файли для перекладу</guimenuitem> </menuchoice></para>
+        <para>натисніть <menuchoice> <guimenuitem>Проєкт</guimenuitem> <guimenuitem>Зафіксувати файли для перекладу</guimenuitem> </menuchoice></para>
       </listitem>
     </orderedlist>Хоча локальні файли для перекладу можна вільно модифікувати, якщо не провести фіксацію до того, як проєкт збережеться автоматично чи ви його перезавантажите чи закриєте, всі зміни втратяться.</para>
 
@@ -55,13 +55,13 @@
 
   <para><emphasis role="bold">Робота без синхронізації</emphasis></para>
 
-  <para>Командний проєкт можна відкрити і перекладати без підключення до сервера. Всі зміни будуть синхронізовані, як тільки з'єднання відновиться.</para>
+  <para>Командний проєкт можна відкрити і перекладати без підключення до сервера. Всі зміни будуть синхронізовані, як тільки з’єднання відновиться.</para>
 
   <para>Щоб працювати без синхронізації:</para>
 
   <itemizedlist>
     <listitem>
-      <para>Від'єднайтесь від мережі перед відкриттям проєкту</para>
+      <para>Від’єднайтесь від мережі перед відкриттям проєкту</para>
     </listitem>
 
     <listitem>

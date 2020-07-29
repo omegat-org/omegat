@@ -22,7 +22,7 @@
           </listitem>
 
           <listitem>
-            <para>terminologiaongelmat) (valinnainen</para>
+            <para><guilabel>Terminologiaongelmat</guilabel> (valinnainen).</para>
           </listitem>
 
           <listitem>
@@ -86,7 +86,7 @@
       <listitem>
         <para>Valitse kaksi kohdistettavaa tiedostoa (lähdetiedosto ja sen käännös) ja napsauta OK, niin <link linkend="windows.aligner"><guilabel>Kohdistus</guilabel>-ikkuna</link> avautuu.</para>
 
-        <para>Löydät tuettujen tiedostomuotojen luettelon kohdasta <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Ominaisuudet</guimenuitem> <guimenuitem>Tiedostosuodattimet</guimenuitem></menuchoice>.</para>
+        <para>Löydät tuettujen tiedostomuotojen luettelon kohdasta <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Ominaisuudet</guimenuitem> <guimenuitem>Tiedostosuodattimet</guimenuitem> </menuchoice>.</para>
 
         <para>Lähde- ja kohdetiedostojen tiedostomuotojen ei tarvitse olla samat (voit esim. kohdistaa <filename>.docx</filename>-tiedoston ja <filename>.pdf</filename>-tiedoston).</para>
       </listitem>

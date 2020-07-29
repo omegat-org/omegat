@@ -130,7 +130,24 @@
 
     <para>Kun siirryt seuravaan segmenttiin, OmegaT valitsee automaattisesti osumaruudun ensimmäisen (siis prosentuaalisesti parhaiten vastaavan) sumean osuman. Voit valita jonkin toisen sumean osuman näppäinyhdistelmällä <guimenuitem>Ctrl+2, 3, 4 tai 5</guimenuitem>. Näppäinyhdistelmä <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> ei tietenkään johda mihinkään, jos viidettä osumaa ei ole. Näppäinyhdistelmä <guimenuitem>Ctrl+R</guimenuitem> korvaa kaiken kohdekentän tekstin valitulla osumalla, ja <guimenuitem>Ctrl+I</guimenuitem> lisää osuman kohdistimen kohdalle.</para>
 
-    <para>Osuman prosentuaalinen vastaavuus on suurin piirtein sama kuin käännettävän segmentin ja osumesegmentin yhteisten sanojen lukumäärä jaettuna näistä pidemmän segmentin sanamäärällä. Valitun sumean osuman teksti on lihavoitu, sanat, joita ei ole käännettävässä segmentissä, ovat vihreitä, ja puuttuvien osien vieressä olevat sanat ovat vihreitä. Äskeisessä esimerkissä lähdesegmentti on <emphasis role="bold">Context menu command</emphasis>. Ylin osuma on sataprosenttinen, sillä kaikki osuman sanat vastaavat käännettävänä olevan segmentin sanoja. Myös kaksi seuraavaa osumaa ovat sataprosenttisia, ja osuma nr 4 on samankaltainen, mutta erilainen. Samalla rivillä, jossa on osumaprosentti, on myös osuman sisältävän käännösmuistin nimi. Jos käännösmuistin nimeä ei näy, osuma on peräisin projektin sisäisestä käännösmuistista. Orposegmentit (osuma nro 2) ovat projektin sisäisessä käännösmuistissa olevia segmenttejä, joilla ei ole vastaavaa lähdekielistä segmenttiä.</para>
+    <para>Vastaavuusprosentit ovat seuraavassa järjestyksessä:<itemizedlist>
+      <listitem>
+		  <para>vartalonmuodostuksen avulla laskettu vastaavuus<footnote>
+		  <para>Lisätietoja: <ulink url="https://en.wikipedia.org/wiki/Stemming">https://en.wikipedia.org/wiki/Stemming</ulink></para>
+		  </footnote>ilman tägejä ja numeroita (yleensä alhaisin luku)</para>
+	  </listitem>
+      <listitem>
+		  <para>ilman vartalonmuodostusta laskettu vastaavuus, edelleen ilman tägejä ja numeroita (yleensä hieman edellistä alhaisempi luku)</para>
+	  </listitem>
+      <listitem>
+		  <para>kokotekstin (sis. tägit ja numerot) perusteella laskettu vastaavuus (yleensä alhaisin luku)</para>
+	  </listitem>
+    </itemizedlist>
+    </para>
+
+    <para>Vastaavuusprosenttien järjestystä voi muuttaa, mutta sumeat osumat valitaan aina samalla tavalla.</para>
+
+    <para>Valitun sumean osuman teksti on lihavoitu, sanat, joita ei ole käännettävässä segmentissä, ovat vihreitä, ja puuttuvien osien vieressä olevat sanat ovat vihreitä. Äskeisessä esimerkissä lähdesegmentti on <emphasis role="bold">Context menu command</emphasis>. Ylin osuma on sataprosenttinen, sillä kaikki osuman sanat vastaavat käännettävänä olevan segmentin sanoja. Myös kaksi seuraavaa osumaa ovat sataprosenttisia, ja osuma nr 4 on samankaltainen, mutta erilainen. Samalla rivillä, jossa on osumaprosentti, on myös osuman sisältävän käännösmuistin nimi. Jos käännösmuistin nimeä ei näy, osuma on peräisin projektin sisäisestä käännösmuistista. Orposegmentit (osuma nro 2) ovat projektin sisäisessä käännösmuistissa olevia segmenttejä, joita vastaavia lähdekielisiä segmenttejä ei ole.</para>
   </section>
 
   <section>

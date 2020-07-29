@@ -167,7 +167,7 @@
           </listitem>
 
           <listitem>
-            <para>Napsauta ensin ikonipainiketta, sitten <guibutton>Browse…</guibutton> ja siirry <application>OmegaT</application>-sovelluskansion <filename>/images</filename>-alikansioon. Valitse &lt;f2&gt;OmegaT.png&lt;/f2&gt;-ikoni. GNOME ei välttämättä pysty näyttämään käytettävissä olevia ikonitiedostoja, sillä se odottaa ikonitiedostojen olevan SVG-tiedostoja. Jos kuitenkin valitset tämän kansion, tiedostojen pitäisi tulla näkyviin ja voit valita <filename>OmegaT-png</filename>-tiedoston ohjelman ikoniksi.</para>
+            <para>Napsauta ensin ikonipainiketta, sitten <guibutton>Browse…</guibutton> ja siirry <application>OmegaT</application>-sovelluskansion <filename>/images</filename>-alikansioon. Valitse <filename>OmegaT.png</filename>-ikoni. GNOME ei välttämättä pysty näyttämään käytettävissä olevia ikonitiedostoja, sillä se odottaa ikonitiedostojen olevan SVG-tiedostoja. Jos kuitenkin valitset tämän kansion, tiedostojen pitäisi tulla näkyviin ja voit valita <filename>OmegaT-png</filename>-tiedoston ohjelman ikoniksi.</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -497,7 +497,7 @@
               <listitem>
                 <para><literal>--mode=console-align</literal></para>
 
-                <para>Tässä tilassa OmegaT kohdistaa projektin <filename>/source/</filename>-kansiossa olevat Java-ominaisuuksien tiedostot määritetyssä sijainnissa olevaan sisältöön. Tästä saatava TMX-tiedosto tallentuu <filename>/omegat/</filename>-kansioon nimellä <filename>align.tmx</filename>.</para>
+                <para>Tässä tilassa OmegaT kohdistaa projektin <filename>/source/</filename>-kansiossa olevat tiedostot ja annetussa sijainnissa olevan sisällön. Tästä saatava TMX-tiedosto tallentuu <filename>/omegat/</filename>-kansioon nimellä <filename>align.tmx</filename>. Se, mitä tiedostoja kohdennus käyttää, riippuu siitä, tuetaanko niiden tiedostosuodatinta. Joitakin tuettuja suodattimia: ILIAS Language File, Java(TM) Resource Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles, Windows Resources</para>
 
                 <para>Tässä tapauksessa tarvitaan yksi lisäparametri, joka määrittelee kohdedatan sijainnin:</para>
 

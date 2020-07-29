@@ -42,7 +42,7 @@
       <term>Automaattinen täydennys</term>
 
       <listitem>
-        <para>Jos ruutu &lt;e0&gt;Näytä sopivia ehdotuksia automaattisesti&lt;/e0&gt; on rastitettu, automaattinen täydennys tulee automaattisesti käyttöön, kun käännetyn sanaston termin ensimmäinen kirjain tai (tägin tapauksessa) &quot;&lt;&quot; kirjoitetaan.</para>
+        <para>Jos ruutu <guimenuitem>Näytä sopivia ehdotuksia automaattisesti</guimenuitem> on rastitettu, automaattinen täydennys tulee automaattisesti käyttöön, kun käännetyn sanaston termin ensimmäinen kirjain tai (tägin tapauksessa) &quot;&lt;&quot; kirjoitetaan.</para>
 
         <para>Rastita <guimenuitem>Syöttöhistoriaan perustuva täydennys</guimenuitem>, niin saat näkyviin ehdotettuja sanoja heti, kun kirjoitat sanan alkukirjaimen.</para>
 

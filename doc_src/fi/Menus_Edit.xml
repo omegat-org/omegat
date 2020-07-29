@@ -96,7 +96,7 @@
       <listitem>
         <para>Tämä valinta antaa käyttäjän luoda uuden termin oletuksena olevaan sanastotiedostoon.</para>
 
-        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap></keycombo>, näytölle avautuu sanastoruutu ja valintasi siirtyy sanastoruudun kenttään Lähdekielinen termi.</para>
+        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap></keycombo>, näytölle avautuu sanastoruutu ja valintasi siirtyy sanastoruudun kenttään <guilabel>Lähdekielinen termi</guilabel>.</para>
 
         <para>Voit täyttää kentät <guimenuitem>Kohdekielinen termi</guimenuitem> ja <guimenuitem>Kommentti</guimenuitem> samalla tavalla: valitse uusi tekstinpätkä ja paina näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>G</keycap></keycombo>.</para>
       </listitem>
@@ -108,7 +108,7 @@
       <listitem>
         <para>Uusi <link linkend="windows.textsearch">Hakuikkuna</link> avautuu.</para>
 
-        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää, näytölle avautuu hakuikkuna ja valintasi siirtyy hakuikkunan kenttään Etsittävä teksti:</para>
+        <para>Jos valitset ensin pätkän tekstiä (mistä tahansa ruudusta) ja painat sitten näppäinyhdistelmää <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, näytölle avautuu hakuikkuna ja valintasi siirtyy hakuikkunan kenttään <guilabel>Etsittävä teksti:</guilabel>.</para>
 
         <para>Näppäinyhdistelmä <keycombo> <keycap>Ctrl</keycap> <keycap>vaihto</keycap> <keycap>F</keycap> </keycombo>näyttää viimeksi avatun hakuikkunan (eikä siis avaa uutta hakuikkunaa).</para>
       </listitem>

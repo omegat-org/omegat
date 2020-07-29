@@ -173,9 +173,9 @@ tai</para>
         <term>excludes</term>
 
         <listitem>
-          <para>Lisää kuvioita yleismerkkien avulla (Apache Ant -tyyliin): *, ?, **</para>
+          <para>Lisää kuvioita yleismerkkien avulla (Apache Ant -tyyliin): *, ?, ** Erota eri kuviot puolipilkulla.</para>
 
-          <para>Esimerkki: <userinput>**/.ini/**</userinput></para>
+          <para>Esimerkki: <userinput>**/pois-jätettävä-kansio/**;*.txt</userinput> ei huomioi tiedostoja, joiden polkunimessä on /pois-jätettävä-kansio/ eikä tiedostoja, joiden tunniste on .txt.</para>
         </listitem>
       </varlistentry>
 
@@ -185,9 +185,9 @@ tai</para>
         <listitem>
           <para>Kuten yllä</para>
 
-          <para>Esimerkki: <userinput>**/*.docx</userinput> lisää kaikki .docx-tiedosto, missä päin projektia ne sitten sijaitsevatkaan</para>
+          <para>Esimerkki: <userinput>**/*.docx</userinput> lisää kaikki .docx tiedostot riippumatta siitä, missä osassa projektia ne ovat. Tiedostot siis lisätään, vaikka ne olisivat huomiotta jätettävissä kansioissa.</para>
 
-          <para>Mukaan lukien -säännöt ovat korkeammalle priorisoituja kuin pois lukien -säännöt.</para>
+          <para>Oletusasetuksena on, että kaikki tiedostot huomioidaan, ellei niitä ole erikseen määritelty poisjätettäviksi. Sinun tarvitsee vain määritellä tämä kohta, niin pääset ohittamaan tietyt poisjätöt.</para>
         </listitem>
       </varlistentry>
     </variablelist>

@@ -130,7 +130,24 @@
 
     <para>Quando ci si sposta a un segmento successivo, nella finestra “Concordanze parziali (fuzzy)” verrà automaticamente selezionata la prima concordanza parziale (ovvero quella con la percentuale di concordanza più alta). Si può selezionare un'altra corrispondenza tramite la combinazione di tasti <guimenuitem>Ctrl+2, 3, 4 o 5</guimenuitem>. Se non dovesse esistere una corrispondenza #5, ovviamente la combinazione <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> non sortirà alcun effetto. Per utilizzare la concordanza selezionata all'interno della traduzione, premere <guimenuitem>Ctrl+R</guimenuitem> per sostituire il testo del campo di modifica oppure <guimenuitem>Ctrl+I </guimenuitem> se lo si vuole inserire alla posizione del cursore.</para>
 
-    <para>La percentuale di concordanza equivale approssimativamente al numero di parole comuni nel segmento di origine e quello concordante, diviso per il numero di parole contenute nel più lungo dei due. La concordanza parziale selezionata è evidenziata in grassetto, le parole che non appaiono nel segmento che si sta traducendo sono segnalate in blu e quelle adiacenti alle parti mancanti in verde. Nell'esempio sopra citato, il segmento di origine è <emphasis role="bold">Context menu command</emphasis>. La prima concordanza è 100%, perché tutte le parole corrispondono. Questo vale anche per le due concordanze successive, mentre per la #4 no, poiché è simile ma non uguale. La riga con la percentuale di concordanza include anche il nome della memoria di traduzione che la contiene. Se non viene visualizzato alcun nome di file, l'origine è la memoria di traduzione interna del progetto. I segmenti orfani (la concordanza #2) indicano i segmenti della memoria di traduzione predefinita del progetto che non presentano corrispondenza nel segmento di origine.</para>
+    <para>Le tre percentuali della concordanza sono posizionate nell'ordine che segue:<itemizedlist>
+      <listitem>
+		  <para>la percentuale calcolata con l'elaborazione della radice (stemming)<footnote>
+		  <para>Si veda <ulink url="https://en.wikipedia.org/wiki/Stemming">https://en.wikipedia.org/wiki/Stemming</ulink> (in inglese)</para>
+		  </footnote>e non considerando i tag e i numeri (in genere la più alta)</para>
+	  </listitem>
+      <listitem>
+		  <para>la percentuale calcolata senza l'analisi della radice ma ancora ignorando i tag e i numeri (in genere leggermente più bassa)</para>
+	  </listitem>
+      <listitem>
+		  <para>la percentuale calcolata col testo completo, incluso i tag e i numeri (in genere la più bassa)</para>
+	  </listitem>
+    </itemizedlist>
+    </para>
+
+    <para>È possibile cambiare l'ordine delle tre percentuali ma non quello utilizzato per selezionare le concordanze parziali.</para>
+
+    <para>La concordanza parziale selezionata è evidenziata in grassetto, le parole che non appaiono nel segmento che si sta traducendo sono segnalate in blu e quelle adiacenti alle parti mancanti in verde. Nell'esempio sopra citato, il segmento di origine è <emphasis role="bold">Context menu command</emphasis>. La prima concordanza è 100%, perché tutte le parole corrispondono. Questo vale anche per le due concordanze successive, mentre per la #4 no, poiché è simile ma non uguale. La riga con la percentuale di concordanza include anche il nome della memoria di traduzione che la contiene. Se non viene visualizzato alcun nome di file, l'origine è la memoria di traduzione interna del progetto. I segmenti orfani (concordanza #2) indicano i segmenti della memoria di traduzione predefinita del progetto che non presentano corrispondenza nel segmento di origine.</para>
   </section>
 
   <section>

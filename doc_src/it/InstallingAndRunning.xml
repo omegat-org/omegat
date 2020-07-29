@@ -498,7 +498,7 @@
               <listitem>
                 <para><literal>--mode=console-align</literal></para>
 
-                <para>In questa modalità, OmegaT allineerà i file delle proprietà Java trovati nella cartella <filename>/source/</filename> del progetto al contenuto presente nella posizione specificata. La TMX prodotta viene memorizzata nella cartella <filename>/omegat/</filename> con il nome <filename>align.tmx</filename>.</para>
+                <para>In questa modalità, OmegaT allineerà i file trovati nella cartella <filename>/source/</filename> del progetto al contenuto presente nella posizione specificata. La TMX prodotta viene memorizzata nella cartella <filename>/omegat/</filename> con il nome <filename>align.tmx</filename>. Il supporto del filtro dei file determina quali file verranno utilizzati per l'allineamento. Alcuni tipi di filtri supportati: File di lingua ILIAS, Java(TM) Resource Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, Sottotitoli SubRip, Windows Resources</para>
 
                 <para>In questo caso è richiesto un parametro aggiuntivo, per specificare la posizione dei dati di arrivo:</para>
 

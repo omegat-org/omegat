@@ -171,9 +171,9 @@
         <term>esclude</term>
 
         <listitem>
-          <para>Aggiunge modelli utilizzando caratteri jolly (in stile Apache Ant): *, ?, **</para>
+          <para>Aggiunge modelli utilizzando caratteri jolly (in stile Apache Ant): *, ?, **. Modelli differenti separati da punto e virgola.</para>
 
-          <para>Esempio: <userinput>**/.ini/**</userinput></para>
+          <para>Esempio: <userinput>**/excludedfolder/**;*.txt</userinput> esclude i file che contengono /excludedfolder/ nel percorso e i file con estensione .txt.</para>
         </listitem>
       </varlistentry>
 
@@ -183,9 +183,9 @@
         <listitem>
           <para>Come sopra.</para>
 
-          <para>Esempio: <userinput>**/*.odt</userinput> per aggiungere tutti i file .odt, in qualsiasi punto siano essi dislocati nel progetto.</para>
+          <para>Esempio: <userinput>**/*.odt</userinput> per aggiungere tutti i file .odt, in qualsiasi punto siano essi dislocati nel progetto, anche nelle cartelle escluse</para>
 
-          <para>Le regole di inclusione hanno priorità sulle regole di esclusione.</para>
+          <para>Per impostazione predefinita vengono inclusi tutti i file che non sono esclusi. Al fine di non considerare determinate esclusioni, è necessario solamente specificare questa opzione.</para>
         </listitem>
       </varlistentry>
     </variablelist>

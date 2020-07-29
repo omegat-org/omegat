@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2019.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2020.
 
 
 Qu'est-ce qu'OmegaT ?
@@ -47,11 +47,11 @@ Installation d'OmegaT (Linux)
 
 Placez l'archive dans n'importe quel dossier approprié et décompactez-la. OmegaT est alors prêt à être exécuté.
 
-Vous pouvez cependant bénéficier d'une installation plus orthodoxe et plus conviviale en utilisant le script d'installation (linux-install.sh). Pour l'utiliser, ouvrez une fenêtre de terminal (console), passez dans le dossier contenant OmegaT.jar et le script linux-install.sh et exécuter le script avec ./linux-install.sh.
+Vous pouvez cependant bénéficier d'une installation plus orthodoxe et plus conviviale en utilisant le script d'installation (linux-install.sh). Pour utiliser ce script, ouvrez un fenêtre de terminal (console), passez dans le dossier contenant OmegaT.jar et le script linux-install.sh et exécuter le script avec ./linux-install.sh.
 
 
 
-Installation d'OmegaT (Solaris, FreeBSD, ...)
+Installation d'OmegaT (Solaris, FreeBSD, etc.)
 =========================================
 
 Placez l'archive dans n'importe quel dossier approprié et décompactez-la. OmegaT est alors prêt à être exécuté.
@@ -65,7 +65,7 @@ Si vous disposez déjà de Java, l'une des façons d'installer OmegaT est d'util
 
 Pour ce faire, téléchargez le fichier suivant et exécutez-le :
 
-   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+  https://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
 Il installera l'environnement approprié pour votre ordinateur et l'application elle-même lors de la première exécution. Il ne sera pas nécessaire d'être en ligne pour les lancements suivants.
 
@@ -96,19 +96,19 @@ Exécution d'OmegaT (Linux)
 
 Si vous avez utilisé le script linux-install.sh, vous devriez pouvoir exécuter OmegaT avec :
 
-  Alt+F2
+    Alt+F2
 
 suivi de :
 
-  omegat
+    omegat
 
 Pour pouvoir exécuter OmegaT de façon plus conviviale, vous pouvez utiliser le script Kaptain fourni (omegat.kaptn). Pour l'utiliser, vous devez tout d'abord installer Kaptain. Vous pouvez ensuite lancer le script d'exécution Kaptain avec :
 
-  Alt+F2
+    Alt+F2
 
 suivi de :
 
-  omegat.kaptn
+    omegat.kaptn
 
 
 
@@ -117,12 +117,11 @@ Exécution d'OmegaT depuis la ligne de commande (tous systèmes)
 
 La commande permettant d'exécuter OmegaT est :
 
-cd <dossier dans lequel le fichier OmegaT.jar est situé>
+    cd <dossier dans lequel le fichier OmegaT.jar est situé>
 
-<nom et chemin du fichier exécutable Java> -jar OmegaT.jar
+    <nom et chemin du fichier exécutable Java> -jar OmegaT.jar
 
-(Le fichier exécutable Java est le fichier java sous Linux et java.exe sous Windows.
-Si Java est installé au niveau système et est inclus dans le chemin, il n'est pas nécessaire d'entrer le chemin complet.)
+(Le fichier exécutable Java est le fichier java sous Linux et java.exe sous Windows.  Si Java est installé au niveau système et est inclus dans le chemin, il n'est pas nécessaire d'entrer le chemin complet.)
 
 
 
@@ -136,31 +135,32 @@ Aaron Madlon-Kay est le responsable du projet OmegaT.
 Équipe actuelle :
 (ordre alphabétique)
 
-  Vincent Bidaux (responsable documentation)
-  Marco Cevoli (gestionnaire de la communauté Telegram)
-  Jean-Christophe Helary (gestionnaire de la communauté Twitter) 
-  Kos Ivantsof (responsable de la localisation)
-  Concepción Martin (gestionnaire de communauté Facebook)
-  Briac Pilpré (webmestre)
-  Lucie Vecerova (gestionnaire de communauté Facebook)
+- Vincent Bidaux (responsable de la documentation)
+- Marco Cevoli (gestionnaire de la communauté Telegram)
+- Jean-Christophe Helary (gestionnaire de la communauté Twitter)
+- Kos Ivantsof (responsable de la localisation)
+- Concepción Martin (gestionnaire de la communauté Facebook)
+- Briac Pilpré (webmestre)
+- Lucie Vecerova (gestionnaire de la communauté Facebook)
 
 Les contributions au code sont documentées dans /docs/contributors.txt.
 
 Les personnes qui ont contribué incluent :
 (ordre alphabétique)
 
-  Anthony Baldwin (responsable de la localisation)
-  Didier Briel (responsable du projet OmegaT)
-  Alex Buloichik (développeur principal)
-  Sabine Cretella
-  Dmitri Gabinski
-  Jean-Christophe Helary (gestionnaire du groupe d'assistance, responsable de la localisation)
-  Maxym Mykhalchuk (développeur principal)
-  Samuel Murray
-  Henry Pijffers (responsable des versions)
-  Marc Prior (coordinateur du projet, webmestre)
-  Vito Smolej (responsable documentation)
-  ainsi que beaucoup d'autres personnes.
+- Anthony Baldwin (responsable de la localisation)
+- Didier Briel (responsable du projet)
+- Alex Buloichik (développeur principal)
+- Sabine Cretella
+- Dmitri Gabinski
+- Jean-Christophe Helary ((gestionnaire du groupe d'assistance, responsable de la localisation)
+- Maxym Mykhalchuk (développeur principal)
+- Samuel Murray
+- Henry Pijffers (responsable des versions)
+- Marc Prior (coordinateur du projet, webmestre)
+- Vito Smolej (responsable de la documentation)
+
+ainsi que beaucoup d'autres personnes.
 
 (Si vous pensez avoir contribué à OmegaT de manière significative et si votre nom ne se trouve pas sur cette liste, n'hésitez pas à nous contacter.)
 
@@ -171,16 +171,16 @@ Liens utiles
 
 Les informations les plus récentes au sujet d'OmegaT sont à :
 
-   http://www.omegat.org/
+  https://omegat.org/
 
-Aide utilisateur sur le groupe Yahoo. Vous pouvez y consulter les archives sans vous inscrire au groupe :
+Ressources pour les utilisateurs :
 
-   https://omegat.org/support
+  https://omegat.org/support
 
 Demandes d'améliorations (en anglais), sur le site de SourceForge :
 
-   https://sourceforge.net/p/omegat/feature-requests/
+  https://sourceforge.net/p/omegat/feature-requests/
 
 Rapports de bogues (en anglais), sur le site de SourceForge :
 
-   https://sourceforge.net/p/omegat/bugs/
+  https://sourceforge.net/p/omegat/bugs/

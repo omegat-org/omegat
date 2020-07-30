@@ -112,7 +112,7 @@
 
     <para>上述片段其中之一是当前片段。该片段分为两部分显示。上半部分以原文语言显示，为带绿色背景色的粗体字符；下半部分是编辑区域，以一个标记结尾：标记格式为 <literal>&lt;片段 nnnn&gt;</literal>，其中 nnnn 是此片段在项目中的编号。以上半部分为参照，并用你的翻译替换或修改编辑区域的内容。</para>
 
-    <para>注意：片段非独特时片段标记会显示 <literal>&lt;片段 nnnn +yy 条&gt;。在这种情况下，yy 是此片段在项目中其余地方出现的次数。</literal></para>
+    <para>注意：片段非独特时片段标记会显示 <literal>&lt;片段 nnnn + yy 条&gt;。在这种情况下，yy 是此片段在项目中其余地方出现的次数。</literal></para>
 
     <para>根据首选的编辑行为，未译片段的编辑区域可能为空、包含原文文本、或包含与此待译字符串最相似的字符串的翻译。当您移动前往另一个片段时，此译文会进行验证并保存。如果您想要让译文与原文相同，只需删除编辑区域中的所有文本将其清空（用 <keycap>Ctrl+A</keycap> 全选再用 <keycap>Del</keycap> 删除）。OmegaT 能保存与原文完全相同的译文。这对于包含商标、名称或其他专有名词、或无需翻译的第三方语言片段的文档非常有用。更多细节请参阅<emphasis>翻译编辑</emphasis>。</para>
 
@@ -130,7 +130,24 @@
 
     <para>当您移动至下一片段时，将自动选择第一个模糊匹配（拥有最佳匹配度百分比的那个）。您可以通过按下 <guimenuitem>Ctrl+2、3、4、或 5</guimenuitem> 来选择其他匹配项。显然，如果没有第五个匹配，按下 <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo>就不会有效果。要在译文中使用选定的匹配项，用 <guimenuitem>Ctrl+R</guimenuitem> 来将译文区域替换为匹配内容，或用 <guimenuitem>Ctrl+I </guimenuitem> 来将其插入到光标位置处。</para>
 
-    <para>匹配度百分比大致上等于匹配和被匹配片段中的公共单词数除以二者中较长那条的单词数。选定的模糊匹配以粗体突出形式，在正翻译的字段中缺失的单词显示为蓝色而与缺失部分相邻的单词为绿色。在上面的例子中，原文片段是 <emphasis role="bold">Context menu command</emphasis>。最顶上的匹配项是 100%，因为所有单词都匹配上了。接下来的两个匹配项亦是如此，而第四个匹配项相似但有所不同。显示匹配度百分比的哪一行还包括有包含此匹配项的那个翻译记忆库的名称。如果没有显示文件名，那么其来源是内部项目翻译记忆库。孤立片段（第二个匹配项）说明片段存在于默认项目翻译记忆库中但没有相对应的原文片段。</para>
+    <para>这三个匹配度百分比按照以下顺序排列：<itemizedlist>
+      <listitem>
+		  <para>用词干分析<footnote>
+		  <para>参见 <ulink url="https://en.wikipedia.org/wiki/Stemming">https://en.wikipedia.org/wiki/Stemming</ulink></para>
+		  </footnote>并忽略标签和数字来计算所得到的百分比（通常是数值最高的）</para>
+	  </listitem>
+      <listitem>
+		  <para>不使用词干分析但仍然忽略标签和数字（通常略低）</para>
+	  </listitem>
+      <listitem>
+		  <para>用包括标签和数字在内的全文进行计算得到的百分比（通常是最低的）</para>
+	  </listitem>
+    </itemizedlist>
+    </para>
+
+    <para>可以修改三个百分比的排列顺序，但不能用于选择模糊匹配。</para>
+
+    <para>所选定的模糊匹配以粗体突出显示，在正翻译的片段中缺失的单词显示为蓝色而与缺失部分相邻的单词为绿色。在上面的例子中，原文片段是 <emphasis role="bold">Context menu command</emphasis>。最顶上的匹配项是 100%，因为所有单词都匹配上了。接下来的两个匹配项亦是如此，而第四个匹配项相似但有所不同。显示匹配度百分比的那一行还包括有包含此匹配项的那个翻译记忆库的名称。如果没有显示文件名，那么其来源是内部项目翻译记忆库。孤立片段（第二个匹配项）说明片段存在于默认项目翻译记忆库中但没有相对应的原文片段。</para>
   </section>
 
   <section>

@@ -498,7 +498,7 @@
               <listitem>
                 <para><literal>--mode=console-align</literal></para>
 
-                <para>在此模式下，OmegaT 会将出现在项目的 <filename>/source/</filename> 目录中的 Java 属性文件与在指定位置出现的内容对齐。生成的 TMX 存放在 <filename>/omegat/</filename> 文件夹下，名称为 <filename>align.tmx</filename>。</para>
+                <para>在此模式下，OmegaT 会将出现在项目的 <filename>/source/</filename> 目录中的文件与在指定位置出现的内容对齐。生成的 TMX 存放在 <filename>/omegat/</filename> 文件夹下，名称为 <filename>align.tmx</filename>。哪些文件会用来进行对齐取决于文件过滤器是否支持它。一些已支持的过滤器有：ILIAS 语言文件、Java(TM) 资源包、键=值文本、Magento CE 语言环境 CSV、MoodlePHP、Mozilla DTD、Mozilla FTL、PO、RC、SubRip 字幕、Windows 资源</para>
 
                 <para>这种情况下需要额外的参数，用以指定译文数据的位置：</para>
 

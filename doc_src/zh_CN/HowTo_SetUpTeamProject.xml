@@ -171,9 +171,9 @@
         <term>排除（excludes）</term>
 
         <listitem>
-          <para>使用通配符（Apache Ant 风格）添加模式：*、?、**</para>
+          <para>用通配符（*、?、**，Apache Ant 风格）来添加模式。不同模式之间用分号分隔。</para>
 
-          <para>例如：<userinput>**/.ini/**</userinput></para>
+          <para>例：<userinput>**/excludedfolder/**;*.txt</userinput> 会排除路径中包含有 /excludedfolder/ 的文件，以及扩展名为 .txt 的文件。</para>
         </listitem>
       </varlistentry>
 
@@ -183,9 +183,9 @@
         <listitem>
           <para>同上。</para>
 
-          <para>例如：<userinput>**/*.docx</userinput> 添加所有 .docx 文件，无论它们位于项目中何处。</para>
+          <para>例如：<userinput>**/*.docx</userinput> 会添加所有 .docx 文件，无论它们位于项目中何处，哪怕是在排除文件夹中。</para>
 
-          <para>包含规则优先于排除规则。</para>
+          <para>默认情况下，所有未被排除的文件都会被包含。所以只在要否决某些排除项的时候才需要指定本项内容。</para>
         </listitem>
       </varlistentry>
     </variablelist>

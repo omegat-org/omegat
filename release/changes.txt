@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   4 Enhancements
   7 Bug fixes
-  8 Localisation updates
+  9 Localisation updates
 ----------------------------------------------------------------------
 5.3.0 vs 5.2.0
 
@@ -54,6 +54,7 @@
   - Italian localisation updated to 5.3.0 (UI, documentation)
   - Russian localisation updated to 5.3.0 (UI, documentation)
   - Simplified Chinese localisation updated to 5.3.0 (UI, documentation)
+  - Spanish localisation updated to 5.3.0 (UI, readme)
   - Ukrainian localisation updated to 5.3.0 (UI, readme, documentation)
 
 ----------------------------------------------------------------------

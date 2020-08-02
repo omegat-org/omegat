@@ -566,8 +566,8 @@ public final class FileUtil {
      * and tm/auto results before other similar % matches.
      */
     public static class TmFileComparator implements Comparator<String> {
-        private static final String autoPrefix = OConsts.AUTO_TM + "/";
-        private static final String enforcePrefix = OConsts.AUTO_ENFORCE_TM + "/";
+        private static final String AUTO_PREFIX = OConsts.AUTO_TM + "/";
+        private static final String ENFORCE_PREFIX = OConsts.AUTO_ENFORCE_TM + "/";
 
         public TmFileComparator(File tmRoot) {
             this.tmRoot = tmRoot;
@@ -585,17 +585,17 @@ public final class FileUtil {
                 return n1.compareTo(n2);
             }
             int c;
-            if (r1.startsWith(enforcePrefix) && r2.startsWith(enforcePrefix)) {
+            if (r1.startsWith(ENFORCE_PREFIX) && r2.startsWith(ENFORCE_PREFIX)) {
                 c = n1.compareTo(n2);
-            } else if (r1.startsWith(enforcePrefix)) {
+            } else if (r1.startsWith(ENFORCE_PREFIX)) {
                 c = -1;
-            } else if (r2.startsWith(enforcePrefix)) {
+            } else if (r2.startsWith(ENFORCE_PREFIX)) {
                 c = 1;
-            } else if (r1.startsWith(autoPrefix) && r2.startsWith(autoPrefix)) {
+            } else if (r1.startsWith(AUTO_PREFIX) && r2.startsWith(AUTO_PREFIX)) {
                 c = n1.compareTo(n2);
-            } else if (r1.startsWith(autoPrefix)) {
+            } else if (r1.startsWith(AUTO_PREFIX)) {
                 c = -1;
-            } else if (r2.startsWith(autoPrefix)) {
+            } else if (r2.startsWith(AUTO_PREFIX)) {
                 c = 1;
             } else {
                 c = n1.compareTo(n2);

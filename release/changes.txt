@@ -2,7 +2,7 @@
  OmegaT 5.3.0
 ----------------------------------------------------------------------
   4 Enhancements
-  7 Bug fixes
+  8 Bug fixes
   10 Localisation updates
 ----------------------------------------------------------------------
 5.3.0 vs 5.2.0
@@ -25,6 +25,10 @@
 
   - application_startup event could fail to execute scripts
   https://sourceforge.net/p/omegat/bugs/860
+
+  - Alternative translations are not taken into account if no default
+  translation is set
+  https://sourceforge.net/p/omegat/bugs/969/
 
   - Wrong directory separator character used in external command
   placeholders on Windows

@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.3.0
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   9 Bug fixes
   10 Localisation updates
 ----------------------------------------------------------------------
 5.3.0 vs 5.2.0
 
   Implemented requests:
+
+  - Display concordance hits from auto/enforce TMX files first
+  https://sourceforge.net/p/omegat/feature-requests/1283/
 
   - Support reading metadata from plugins and display in UI
   https://sourceforge.net/p/omegat/feature-requests/1434/

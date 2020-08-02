@@ -38,13 +38,13 @@
             <dl class="toc">
                <dt><span class="section"><a href="panes.html#editor.pane">1. 编辑器</a></span></dt>
                <dt><span class="section"><a href="panes.html#d0e4356">2. 模糊匹配</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4383">3. 词汇表</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4396">4. 词典</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4404">5. 机器翻译</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4412">6. 多重译文</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4423">7. 备注</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4434">8. 注释</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4439">9. 状态栏</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4404">3. 词汇表</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4417">4. 词典</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4425">5. 机器翻译</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4433">6. 多重译文</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4444">7. 备注</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4455">8. 注释</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4460">9. 状态栏</a></span></dt>
             </dl>
          </div>
          <p>主窗口由若干窗格、主菜单和状态栏组成。您可以改变任何一个窗格的位置，甚至可以通过点击窗格的名称并拖动将其分离成独立的窗口。根据窗格的状态，其右上角会显示不同的符号：</p>
@@ -115,7 +115,7 @@
             <p>在此输入和编辑翻译。编辑器窗格显示部分翻译的文档的文本：已翻译的文本会显示译文，同时未翻译的文本以原始语言显示。所显示的文本被划分为片段，您可以在文档中滚动并双击任何一个片段将其打开并进行编辑。在上述情况下，已翻译的片段以黄色显示。</p>
             <p>上述片段其中之一是当前片段。该片段分为两部分显示。上半部分以原文语言显示，为带绿色背景色的粗体字符；下半部分是编辑区域，以一个标记结尾：标记格式为 <code class="literal">&lt;片段 nnnn&gt;</code>，其中 nnnn 是此片段在项目中的编号。以上半部分为参照，并用你的翻译替换或修改编辑区域的内容。
             </p>
-            <p>注意：片段非独特时片段标记会显示 <code class="literal">&lt;片段 nnnn&nbsp;+yy&nbsp;条&gt;。在这种情况下，yy 是此片段在项目中其余地方出现的次数。</code></p>
+            <p>注意：片段非独特时片段标记会显示 <code class="literal">&lt;片段 nnnn + yy 条&gt;。在这种情况下，yy 是此片段在项目中其余地方出现的次数。</code></p>
             <p>根据首选的编辑行为，未译片段的编辑区域可能为空、包含原文文本、或包含与此待译字符串最相似的字符串的翻译。当您移动前往另一个片段时，此译文会进行验证并保存。如果您想要让译文与原文相同，只需删除编辑区域中的所有文本将其清空（用 <span class="keycap"><strong>Ctrl+A</strong></span> 全选再用 <span class="keycap"><strong>Del</strong></span> 删除）。OmegaT 能保存与原文完全相同的译文。这对于包含商标、名称或其他专有名词、或无需翻译的第三方语言片段的文档非常有用。更多细节请参阅<span class="emphasis"><em>翻译编辑</em></span>。
             </p>
             <p>如果在编辑器窗格上右键单击，会打开一个弹出菜单，其中提供了<span class="bold"><strong>剪切、复制、粘贴</strong></span>（即<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>X</strong></span>、<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span> 和 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>V</strong></span>的功能)、<span class="bold"><strong>转到片段</strong></span>和<span class="bold"><strong>添加词汇表条目</strong></span>功能。另外，如果是在打开的片段上右键单击，还会提供与<span class="bold"><strong>替代译文</strong></span>有关的其他选项，例如，跳转到非独特片段的另一个实例。
@@ -136,14 +136,33 @@
             <p>匹配查看器中显示了翻译记忆库中最相似的片段，来源既包括随着您对项目的翻译而实时创建的内部项目翻译记忆库，也包括来自于您的过往工作或从客户或翻译代理那里得到的辅助翻译记忆库。</p>
             <p>当您移动至下一片段时，将自动选择第一个模糊匹配（拥有最佳匹配度百分比的那个）。您可以通过按下 <span class="guimenuitem">Ctrl+2、3、4、或 5</span> 来选择其他匹配项。显然，如果没有第五个匹配，按下 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>5</strong></span>就不会有效果。要在译文中使用选定的匹配项，用 <span class="guimenuitem">Ctrl+R</span> 来将译文区域替换为匹配内容，或用 <span class="guimenuitem">Ctrl+I </span> 来将其插入到光标位置处。
             </p>
-            <p>匹配度百分比大致上等于匹配和被匹配片段中的公共单词数除以二者中较长那条的单词数。选定的模糊匹配以粗体突出形式，在正翻译的字段中缺失的单词显示为蓝色而与缺失部分相邻的单词为绿色。在上面的例子中，原文片段是 <span class="bold"><strong>Context menu command</strong></span>。最顶上的匹配项是 100%，因为所有单词都匹配上了。接下来的两个匹配项亦是如此，而第四个匹配项相似但有所不同。显示匹配度百分比的哪一行还包括有包含此匹配项的那个翻译记忆库的名称。如果没有显示文件名，那么其来源是内部项目翻译记忆库。孤立片段（第二个匹配项）说明片段存在于默认项目翻译记忆库中但没有相对应的原文片段。
+            <p>这三个匹配度百分比按照以下顺序排列：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>用词干分析<a href="#ftn.d0e4384" class="footnote" name="d0e4384"><sup class="footnote">[1]</sup></a>并忽略标签和数字来计算所得到的百分比（通常是数值最高的）
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>不使用词干分析但仍然忽略标签和数字（通常略低）</p>
+                  </li>
+                  <li class="listitem">
+                     <p>用包括标签和数字在内的全文进行计算得到的百分比（通常是最低的）</p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                   
+            </p>
+            <p>可以修改三个百分比的排列顺序，但不能用于选择模糊匹配。</p>
+            <p>所选定的模糊匹配以粗体突出显示，在正翻译的片段中缺失的单词显示为蓝色而与缺失部分相邻的单词为绿色。在上面的例子中，原文片段是 <span class="bold"><strong>Context menu command</strong></span>。最顶上的匹配项是 100%，因为所有单词都匹配上了。接下来的两个匹配项亦是如此，而第四个匹配项相似但有所不同。显示匹配度百分比的那一行还包括有包含此匹配项的那个翻译记忆库的名称。如果没有显示文件名，那么其来源是内部项目翻译记忆库。孤立片段（第二个匹配项）说明片段存在于默认项目翻译记忆库中但没有相对应的原文片段。
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4383"></a>3.&nbsp;词汇表
+                     <h2 class="title" style="clear: both"><a name="d0e4404"></a>3.&nbsp;词汇表
                      </h2>
                   </div>
                </div>
@@ -157,7 +176,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4396"></a>4.&nbsp;词典
+                     <h2 class="title" style="clear: both"><a name="d0e4417"></a>4.&nbsp;词典
                      </h2>
                   </div>
                </div>
@@ -169,7 +188,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4404"></a>5.&nbsp;机器翻译
+                     <h2 class="title" style="clear: both"><a name="d0e4425"></a>5.&nbsp;机器翻译
                      </h2>
                   </div>
                </div>
@@ -181,7 +200,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4412"></a>6.&nbsp;多重译文
+                     <h2 class="title" style="clear: both"><a name="d0e4433"></a>6.&nbsp;多重译文
                      </h2>
                   </div>
                </div>
@@ -193,7 +212,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4423"></a>7.&nbsp;备注
+                     <h2 class="title" style="clear: both"><a name="d0e4444"></a>7.&nbsp;备注
                      </h2>
                   </div>
                </div>
@@ -205,7 +224,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4434"></a>8.&nbsp;注释
+                     <h2 class="title" style="clear: both"><a name="d0e4455"></a>8.&nbsp;注释
                      </h2>
                   </div>
                </div>
@@ -216,14 +235,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4439"></a>9.&nbsp;状态栏
+                     <h2 class="title" style="clear: both"><a name="d0e4460"></a>9.&nbsp;状态栏
                      </h2>
                   </div>
                </div>
             </div>
             <p>状态栏在主窗口的底部显示有关工作流的信息。该栏为用户提供了关于正在进行的特定操作的反馈。它还显示着针对当前片段的模糊匹配和词汇表匹配的数量。</p>
             <p>右下角的计数跟踪着翻译的进度（左栏的数字指的是上图）：</p>
-            <div class="table"><a name="d0e4446"></a><p class="title"><b>表&nbsp;4.2.&nbsp;主窗口 - 计数</b></p>
+            <div class="table"><a name="d0e4467"></a><p class="title"><b>表&nbsp;4.2.&nbsp;主窗口 - 计数</b></p>
                <div class="table-contents">
                   <table class="table" summary="主窗口 - 计数" border="1">
                      <colgroup>
@@ -251,6 +270,11 @@
                   </table>
                </div>
             </div><br class="table-break"><p>实际使用的角度看，最重要的是第二对数字：它说明了目前您相对于总量（第二个数字）已经完成了多少。示例中的项目显然已经完成，因为全部独特片段均已翻译。</p>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e4384" class="footnote">
+               <p><a href="#d0e4384" class="para"><sup class="para">[1] </sup></a>参见 <a class="ulink" href="https://en.wikipedia.org/wiki/Stemming" target="_top">https://en.wikipedia.org/wiki/Stemming</a></p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

@@ -38,13 +38,13 @@
             <dl class="toc">
                <dt><span class="section"><a href="panes.html#editor.pane">1. venster Bewerken</a></span></dt>
                <dt><span class="section"><a href="panes.html#d0e4343">2. Fuzzy overeenkomsten</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4370">3. Woordenlijst</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4383">4. Woordenboek</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4390">5. Machinevertaling</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4398">6. Meerdere vertalingen</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4408">7. Notities</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4419">8. Opmerkingen</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4424">9. Statusbalk</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4391">3. Woordenlijst</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4404">4. Woordenboek</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4411">5. Machinevertaling</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4419">6. Meerdere vertalingen</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4429">7. Notities</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4440">8. Opmerkingen</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4445">9. Statusbalk</a></span></dt>
             </dl>
          </div>
          <p>Het hoofdvenster bestaat uit verschillende vensters, het hoofdmenu en een statusbalk. U kunt de positie van elk venster wijzigen
@@ -164,13 +164,33 @@
             <p>Als u doorgaat naar het volgende segment wordt de eerste overeenkomst (die met het hoogste percentage van overeenkomst) automatisch
                geselecteerd. U kunt een andere overeenkomst selecteren door te drukken op  <span class="guimenuitem">Ctrl+2, 3, 4, of 5</span>. Uiteraard zal het drukken op <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>5</strong></span> geen effect hebben als er geen overeenkomst #5 is. Gebruik <span class="guimenuitem">Ctrl+R</span> om het doelveld te vervangen door die overeenkomst of <span class="guimenuitem">Ctrl+I</span> om die in te voegen op de cursorpositie, om de geselecteerde overeenkomst in uw vertaling te gebruiken.
             </p>
-            <p>Het percentage voor de overeenkomst is ruwweg het equivalent van het aantal meest voorkomende woorden in het vergeleken en
-               het overeenkomende segment, gedeeld door het aantal woorden in de langste van de twee. De geselecteerde overeenkomst zal worden
-               geaccentueerd in vet, woorden die ontbreken in het segment dat u vertaald zullen blauw gekleurd zijn en woorden die aansluiten
-               aan ontbrekende gedeelten zullen groen zijn. In het bovenstaande voorbeeld is het bronsegment <span class="bold"><strong>Context menu command</strong></span>. De bovenste overeenkomst is 100%, omdat alle woorden overeenkomen. Hetzelfde geldt voor de twee volgende overeenkomsten
+            <p>De drie percentages voor overeenkomsten staan in de volgende volgorde:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>het percentage dat is berekend met stemming<a href="#ftn.d0e4371" class="footnote" name="d0e4371"><sup class="footnote">[1]</sup></a>en negeren van tags en getallen (in het algemeen het hoogste)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>het percentage dat is berekend zonder stemming en nog steeds tags en getallen negeert (in het algemeen iets lager)</p>
+                  </li>
+                  <li class="listitem">
+                     <p>het percentage dat is berekend over de volledige tekst, inclusief tags en getallen (in het algemeen het laagste)</p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                   
+            </p>
+            <p>Het is mogelijk de sorteervolgorde van de drie percentages aan te passen, maar niet welke zal worden gebruikt voor het selecteren
+               van de fuzzy overeenkomsten.
+            </p>
+            <p>De geselecteerde overeenkomst zal worden geaccentueerd in vet, woorden die ontbreken in het segment dat u vertaald zullen
+               blauw gekleurd zijn en woorden die aansluiten aan ontbrekende gedeelten zullen groen zijn. In het bovenstaande voorbeeld is
+               het bronsegment <span class="bold"><strong>Context menu command</strong></span>. De bovenste overeenkomst is 100%, omdat alle woorden overeenkomen. Hetzelfde geldt voor de twee volgende overeenkomsten
                en de overeenkomst #4 is soortgelijk, maar verschilt. De regel met het percentage van overeenkomst bevat ook de naam van het
                vertaalgeheugen dat de overeenkomst bevat. Indien er geen naam vermeld is, is de bron het interne vertaalgeheugen van het
-               project. Wezen-segmenten (de overeenkomst #2) beschrijven segmenten in het standaard vertaalgeheugen van het project die geen
+               project. Wezen-segmenten (overeenkomst #2) beschrijven segmenten in het standaard vertaalgeheugen van het project die geen
                overeenkomend bronsegment hebben.
             </p>
          </div>
@@ -178,7 +198,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4370"></a>3. Woordenlijst
+                     <h2 class="title" style="clear: both"><a name="d0e4391"></a>3. Woordenlijst
                      </h2>
                   </div>
                </div>
@@ -198,7 +218,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4383"></a>4. Woordenboek
+                     <h2 class="title" style="clear: both"><a name="d0e4404"></a>4. Woordenboek
                      </h2>
                   </div>
                </div>
@@ -210,7 +230,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4390"></a>5. Machinevertaling
+                     <h2 class="title" style="clear: both"><a name="d0e4411"></a>5. Machinevertaling
                      </h2>
                   </div>
                </div>
@@ -223,7 +243,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4398"></a>6. Meerdere vertalingen
+                     <h2 class="title" style="clear: both"><a name="d0e4419"></a>6. Meerdere vertalingen
                      </h2>
                   </div>
                </div>
@@ -237,7 +257,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4408"></a>7. Notities
+                     <h2 class="title" style="clear: both"><a name="d0e4429"></a>7. Notities
                      </h2>
                   </div>
                </div>
@@ -251,7 +271,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4419"></a>8. Opmerkingen
+                     <h2 class="title" style="clear: both"><a name="d0e4440"></a>8. Opmerkingen
                      </h2>
                   </div>
                </div>
@@ -265,7 +285,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4424"></a>9. Statusbalk
+                     <h2 class="title" style="clear: both"><a name="d0e4445"></a>9. Statusbalk
                      </h2>
                   </div>
                </div>
@@ -277,7 +297,7 @@
             <p>De tellers in de rechter benedenhoek houden de voortgang van de vertaling bij (getallen in de linkerkolom verwijzen naar de
                afbeelding hierboven):
             </p>
-            <div class="table"><a name="d0e4431"></a><p class="title"><b>Tabel 4.2. Hoofdvenster - tellers</b></p>
+            <div class="table"><a name="d0e4452"></a><p class="title"><b>Tabel 4.2. Hoofdvenster - tellers</b></p>
                <div class="table-contents">
                   <table class="table" summary="Hoofdvenster - tellers" border="1">
                      <colgroup>
@@ -308,6 +328,11 @@
                hebt gedaan, in relatie tot het totaal van het tweede getal. Het project in het voorbeeld is zeker voltooid, omdat alle unieke
                segmenten zijn vertaald.
             </p>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e4371" class="footnote">
+               <p><a href="#d0e4371" class="para"><sup class="para">[1] </sup></a>Bekijk <a class="ulink" href="https://en.wikipedia.org/wiki/Stemming" target="_top">https://en.wikipedia.org/wiki/Stemming</a></p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

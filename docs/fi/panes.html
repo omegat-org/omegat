@@ -37,14 +37,14 @@
          <div class="toc">
             <dl class="toc">
                <dt><span class="section"><a href="panes.html#editor.pane">1. Editori</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4319">2. Sumeat osumat</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4346">3. Sanasto</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4359">4. Sanakirja</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4367">5. Konekäännös</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4375">6. Useita käännöksiä</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4386">7. Muistiinpanot</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4397">8. Kommentit</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4402">9. Tilarivi</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4339">2. Sumeat osumat</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4387">3. Sanasto</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4400">4. Sanakirja</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4408">5. Konekäännös</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4416">6. Useita käännöksiä</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4427">7. Muistiinpanot</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4438">8. Kommentit</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4443">9. Tilarivi</a></span></dt>
             </dl>
          </div>
          <p>OmegaT:n pääikkuna on useita ruutuja, päävalikko ja tilarivi. Napsauttamalla ja vetämällä ruudun nimeä voit vaihtaa kaikkien
@@ -56,7 +56,7 @@
             <p>Jos et näe kaikkia (avattuja tai kutistettuja) ruutuja, valitse valikon kohta <span class="guisubmenu">Valinnat &gt; Palauta pääikkuna</span>. Tällöin ruudut palautuvat asennuksen aikana määriteltyyn tilaan.
             </p>
          </div>
-         <div class="table"><a name="d0e4154"></a><p class="title"><b>Taulu 4.1. Ruutujen vimpaimet</b></p>
+         <div class="table"><a name="d0e4174"></a><p class="title"><b>Taulu 4.1. Ruutujen vimpaimet</b></p>
             <div class="table-contents">
                <table class="table" summary="Ruutujen vimpaimet" border="1">
                   <colgroup>
@@ -148,7 +148,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4319"></a>2. Sumeat osumat
+                     <h2 class="title" style="clear: both"><a name="d0e4339"></a>2. Sumeat osumat
                      </h2>
                   </div>
                </div>
@@ -160,21 +160,38 @@
             <p>Kun siirryt seuravaan segmenttiin, OmegaT valitsee automaattisesti osumaruudun ensimmäisen (siis prosentuaalisesti parhaiten
                vastaavan) sumean osuman. Voit valita jonkin toisen sumean osuman näppäinyhdistelmällä <span class="guimenuitem">Ctrl+2, 3, 4 tai 5</span>. Näppäinyhdistelmä <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>5</strong></span> ei tietenkään johda mihinkään, jos viidettä osumaa ei ole. Näppäinyhdistelmä <span class="guimenuitem">Ctrl+R</span> korvaa kaiken kohdekentän tekstin valitulla osumalla, ja <span class="guimenuitem">Ctrl+I</span> lisää osuman kohdistimen kohdalle.
             </p>
-            <p>Osuman prosentuaalinen vastaavuus on suurin piirtein sama kuin käännettävän segmentin ja osumesegmentin yhteisten sanojen
-               lukumäärä jaettuna näistä pidemmän segmentin sanamäärällä. Valitun sumean osuman teksti on lihavoitu, sanat, joita ei ole
-               käännettävässä segmentissä, ovat vihreitä, ja puuttuvien osien vieressä olevat sanat ovat vihreitä. Äskeisessä esimerkissä
-               lähdesegmentti on <span class="bold"><strong>Context menu command</strong></span>. Ylin osuma on sataprosenttinen, sillä kaikki osuman sanat vastaavat käännettävänä olevan segmentin sanoja. Myös kaksi seuraavaa
+            <p>Vastaavuusprosentit ovat seuraavassa järjestyksessä:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>vartalonmuodostuksen avulla laskettu vastaavuus<a href="#ftn.d0e4367" class="footnote" name="d0e4367"><sup class="footnote">[1]</sup></a>ilman tägejä ja numeroita (yleensä alhaisin luku)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>ilman vartalonmuodostusta laskettu vastaavuus, edelleen ilman tägejä ja numeroita (yleensä hieman edellistä alhaisempi luku)</p>
+                  </li>
+                  <li class="listitem">
+                     <p>kokotekstin (sis. tägit ja numerot) perusteella laskettu vastaavuus (yleensä alhaisin luku)</p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                   
+            </p>
+            <p>Vastaavuusprosenttien järjestystä voi muuttaa, mutta sumeat osumat valitaan aina samalla tavalla.</p>
+            <p>Valitun sumean osuman teksti on lihavoitu, sanat, joita ei ole käännettävässä segmentissä, ovat vihreitä, ja puuttuvien osien
+               vieressä olevat sanat ovat vihreitä. Äskeisessä esimerkissä lähdesegmentti on <span class="bold"><strong>Context menu command</strong></span>. Ylin osuma on sataprosenttinen, sillä kaikki osuman sanat vastaavat käännettävänä olevan segmentin sanoja. Myös kaksi seuraavaa
                osumaa ovat sataprosenttisia, ja osuma nr 4 on samankaltainen, mutta erilainen. Samalla rivillä, jossa on osumaprosentti,
                on myös osuman sisältävän käännösmuistin nimi. Jos käännösmuistin nimeä ei näy, osuma on peräisin projektin sisäisestä käännösmuistista.
-               Orposegmentit (osuma nro 2) ovat projektin sisäisessä käännösmuistissa olevia segmenttejä, joilla ei ole vastaavaa lähdekielistä
-               segmenttiä.
+               Orposegmentit (osuma nro 2) ovat projektin sisäisessä käännösmuistissa olevia segmenttejä, joita vastaavia lähdekielisiä segmenttejä
+               ei ole.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4346"></a>3. Sanasto
+                     <h2 class="title" style="clear: both"><a name="d0e4387"></a>3. Sanasto
                      </h2>
                   </div>
                </div>
@@ -192,7 +209,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4359"></a>4. Sanakirja
+                     <h2 class="title" style="clear: both"><a name="d0e4400"></a>4. Sanakirja
                      </h2>
                   </div>
                </div>
@@ -205,7 +222,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4367"></a>5. Konekäännös
+                     <h2 class="title" style="clear: both"><a name="d0e4408"></a>5. Konekäännös
                      </h2>
                   </div>
                </div>
@@ -217,7 +234,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4375"></a>6. Useita käännöksiä
+                     <h2 class="title" style="clear: both"><a name="d0e4416"></a>6. Useita käännöksiä
                      </h2>
                   </div>
                </div>
@@ -231,7 +248,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4386"></a>7. Muistiinpanot
+                     <h2 class="title" style="clear: both"><a name="d0e4427"></a>7. Muistiinpanot
                      </h2>
                   </div>
                </div>
@@ -244,7 +261,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4397"></a>8. Kommentit
+                     <h2 class="title" style="clear: both"><a name="d0e4438"></a>8. Kommentit
                      </h2>
                   </div>
                </div>
@@ -258,7 +275,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4402"></a>9. Tilarivi
+                     <h2 class="title" style="clear: both"><a name="d0e4443"></a>9. Tilarivi
                      </h2>
                   </div>
                </div>
@@ -268,7 +285,7 @@
                määrä.
             </p>
             <p>Oikeassa alanurkassa olevat laskurit näyttävät käännöksen edistymisen (vasemman sarakkeen numerot viittaavat tilarivin numeroihin):</p>
-            <div class="table"><a name="d0e4409"></a><p class="title"><b>Taulu 4.2. Pääikkunan laskurit</b></p>
+            <div class="table"><a name="d0e4450"></a><p class="title"><b>Taulu 4.2. Pääikkunan laskurit</b></p>
                <div class="table-contents">
                   <table class="table" summary="Pääikkunan laskurit" border="1">
                      <colgroup>
@@ -299,6 +316,11 @@
                kuinka paljon käännettävää on yhteensä. On selvää, että esimerkin projekti on valmistunut, sillä kaikki uniikit segmentit
                on käännetty.
             </p>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e4367" class="footnote">
+               <p><a href="#d0e4367" class="para"><sup class="para">[1] </sup></a>Lisätietoja: <a class="ulink" href="https://en.wikipedia.org/wiki/Stemming" target="_top">https://en.wikipedia.org/wiki/Stemming</a></p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

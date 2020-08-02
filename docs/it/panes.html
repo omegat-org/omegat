@@ -38,13 +38,13 @@
             <dl class="toc">
                <dt><span class="section"><a href="panes.html#editor.pane">1. Editor</a></span></dt>
                <dt><span class="section"><a href="panes.html#d0e4352">2. Concordanze parziali (fuzzy)</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4379">3. Glossario</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4392">4. Dizionario</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4399">5. Traduzione automatica</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4407">6. Traduzioni multiple</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4417">7. Note</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4428">8. Commenti</a></span></dt>
-               <dt><span class="section"><a href="panes.html#d0e4433">9. Barra di stato</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4401">3. Glossario</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4414">4. Dizionario</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4421">5. Traduzione automatica</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4429">6. Traduzioni multiple</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4439">7. Note</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4450">8. Commenti</a></span></dt>
+               <dt><span class="section"><a href="panes.html#d0e4455">9. Barra di stato</a></span></dt>
             </dl>
          </div>
          <p>La finestra principale di OmegaT è composta da varie finestre, dalla barra dei menu e dalla barra di stato. Si può intervenire
@@ -169,21 +169,39 @@
                la prima concordanza parziale (ovvero quella con la percentuale di concordanza più alta). Si può selezionare un'altra corrispondenza
                tramite la combinazione di tasti <span class="guimenuitem">Ctrl+2, 3, 4 o 5</span>. Se non dovesse esistere una corrispondenza #5, ovviamente la combinazione <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>5</strong></span> non sortirà alcun effetto. Per utilizzare la concordanza selezionata all'interno della traduzione, premere <span class="guimenuitem">Ctrl+R</span> per sostituire il testo del campo di modifica oppure <span class="guimenuitem">Ctrl+I </span> se lo si vuole inserire alla posizione del cursore.
             </p>
-            <p>La percentuale di concordanza equivale approssimativamente al numero di parole comuni nel segmento di origine e quello concordante,
-               diviso per il numero di parole contenute nel più lungo dei due. La concordanza parziale selezionata è evidenziata in grassetto,
-               le parole che non appaiono nel segmento che si sta traducendo sono segnalate in blu e quelle adiacenti alle parti mancanti
-               in verde. Nell'esempio sopra citato, il segmento di origine è <span class="bold"><strong>Context menu command</strong></span>. La prima concordanza è 100%, perché tutte le parole corrispondono. Questo vale anche per le due concordanze successive,
+            <p>Le tre percentuali della concordanza sono posizionate nell'ordine che segue:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>la percentuale calcolata con l'elaborazione della radice (stemming)<a href="#ftn.d0e4380" class="footnote" name="d0e4380"><sup class="footnote">[1]</sup></a>e non considerando i tag e i numeri (in genere la più alta)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>la percentuale calcolata senza l'analisi della radice ma ancora ignorando i tag e i numeri (in genere leggermente più bassa)</p>
+                  </li>
+                  <li class="listitem">
+                     <p>la percentuale calcolata col testo completo, incluso i tag e i numeri (in genere la più bassa)</p>
+                  </li>
+               </ul>
+            </div>
+            <p>
+                   
+            </p>
+            <p>È possibile cambiare l'ordine delle tre percentuali ma non quello utilizzato per selezionare le concordanze parziali.</p>
+            <p>La concordanza parziale selezionata è evidenziata in grassetto, le parole che non appaiono nel segmento che si sta traducendo
+               sono segnalate in blu e quelle adiacenti alle parti mancanti in verde. Nell'esempio sopra citato, il segmento di origine è
+               <span class="bold"><strong>Context menu command</strong></span>. La prima concordanza è 100%, perché tutte le parole corrispondono. Questo vale anche per le due concordanze successive,
                mentre per la #4 no, poiché è simile ma non uguale. La riga con la percentuale di concordanza include anche il nome della
                memoria di traduzione che la contiene. Se non viene visualizzato alcun nome di file, l'origine è la memoria di traduzione
-               interna del progetto. I segmenti orfani (la concordanza #2) indicano i segmenti della memoria di traduzione predefinita del
-               progetto che non presentano corrispondenza nel segmento di origine.
+               interna del progetto. I segmenti orfani (concordanza #2) indicano i segmenti della memoria di traduzione predefinita del progetto
+               che non presentano corrispondenza nel segmento di origine.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4379"></a>3.&nbsp;Glossario
+                     <h2 class="title" style="clear: both"><a name="d0e4401"></a>3.&nbsp;Glossario
                      </h2>
                   </div>
                </div>
@@ -203,7 +221,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4392"></a>4.&nbsp;Dizionario
+                     <h2 class="title" style="clear: both"><a name="d0e4414"></a>4.&nbsp;Dizionario
                      </h2>
                   </div>
                </div>
@@ -215,7 +233,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4399"></a>5.&nbsp;Traduzione automatica
+                     <h2 class="title" style="clear: both"><a name="d0e4421"></a>5.&nbsp;Traduzione automatica
                      </h2>
                   </div>
                </div>
@@ -228,7 +246,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4407"></a>6.&nbsp;Traduzioni multiple
+                     <h2 class="title" style="clear: both"><a name="d0e4429"></a>6.&nbsp;Traduzioni multiple
                      </h2>
                   </div>
                </div>
@@ -242,7 +260,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4417"></a>7.&nbsp;Note
+                     <h2 class="title" style="clear: both"><a name="d0e4439"></a>7.&nbsp;Note
                      </h2>
                   </div>
                </div>
@@ -256,7 +274,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4428"></a>8.&nbsp;Commenti
+                     <h2 class="title" style="clear: both"><a name="d0e4450"></a>8.&nbsp;Commenti
                      </h2>
                   </div>
                </div>
@@ -270,7 +288,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4433"></a>9.&nbsp;Barra di stato
+                     <h2 class="title" style="clear: both"><a name="d0e4455"></a>9.&nbsp;Barra di stato
                      </h2>
                   </div>
                </div>
@@ -282,7 +300,7 @@
             <p>I contatori nella parte inferiore destra della finestra tengono traccia dell'avanzamento della traduzione (i numeri nella
                colonna sinistra si riferiscono alla figura sopra riportata):
             </p>
-            <div class="table"><a name="d0e4440"></a><p class="title"><b>Tabella&nbsp;4.2.&nbsp;Finestra principale - contatori</b></p>
+            <div class="table"><a name="d0e4462"></a><p class="title"><b>Tabella&nbsp;4.2.&nbsp;Finestra principale - contatori</b></p>
                <div class="table-contents">
                   <table class="table" summary="Finestra principale - contatori" border="1">
                      <colgroup>
@@ -313,6 +331,12 @@
                al totale, o secondo numero. Il progetto, nell'esempio, è evidentemente terminato, dato che tutti i segmenti univoci sono
                stati tradotti.
             </p>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e4380" class="footnote">
+               <p><a href="#d0e4380" class="para"><sup class="para">[1] </sup></a>Si veda <a class="ulink" href="https://en.wikipedia.org/wiki/Stemming" target="_top">https://en.wikipedia.org/wiki/Stemming</a> (in inglese)
+               </p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

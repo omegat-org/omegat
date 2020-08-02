@@ -5,8 +5,8 @@
       <title>Додаток E. Налаштування комбінацій клавіш</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-      <link rel="home" href="index.html" title="OmegaT 4.2 - Посібник користувача">
-      <link rel="up" href="index.html" title="OmegaT 4.2 - Посібник користувача">
+      <link rel="home" href="index.html" title="OmegaT 4.2 — Посібник користувача">
+      <link rel="up" href="index.html" title="OmegaT 4.2 — Посібник користувача">
       <link rel="prev" href="appendix.regexp.html" title="Додаток D. Регулярні вирази">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -58,31 +58,31 @@
                нові, поклавши файл із комбінаціями в теку налаштувань <span class="application">OmegaT</span> (меню <span class="guimenuitem">Налаштування</span> → <span class="guimenuitem">Відкрити теку з налаштуваннями</span>).
             </p>
             <p>Файл визначення комбінацій клавіш повинен мати назву <code class="filename">MainMenuShortcuts.properties</code> і містити лише одну комбінацію на рядок. Допустимо використовувати порожні рядки та коментарі, які починаються з «//». Текст
-               в рядку після «//» ігнорується.
+               у рядку після «//» ігнорується.
             </p>
             <p>Щоб нові комбінації набули чинності, після змін у файлі <code class="filename">MainMenuShortcuts.properties</code> необхідно перезавантажити <span class="application">OmegaT</span>.
             </p>
-            <p>Синтаксис комбінацій клавіш виглядає так: <code class="code">&lt;код пункту меню&gt;=&lt;комбінація клавіш&gt;</code>, де <span class="emphasis"><em>&lt;код пункту меню&gt;</em></span> - це код із таблиці, вказаної нижче, а <span class="emphasis"><em>&lt;комбінація клавіш&gt;</em></span> - це комбінація клавіш, встановлена користувачем<a href="#ftn.d0e6368" class="footnote" name="d0e6368"><sup class="footnote">[3]</sup></a>.
+            <p>Синтаксис комбінацій клавіш виглядає так: <code class="code">&lt;код пункту меню&gt;=&lt;комбінація клавіш&gt;</code>, де <span class="emphasis"><em>&lt;код пункту меню&gt;</em></span> — це код із таблиці, вказаної нижче, а <span class="emphasis"><em>&lt;комбінація клавіш&gt;</em></span> — це комбінація клавіш, встановлена користувачем<a href="#ftn.d0e6368" class="footnote" name="d0e6368"><sup class="footnote">[3]</sup></a>.
             </p>
             <p>&lt;комбінація клавіш&gt; складається з таких елементів: 0 чи більше елементів <code class="code">&lt;модифікатор&gt;</code> потім 0 чи 1 <code class="code">&lt;подія&gt;</code> за ним 1 <code class="code">&lt;клавіша&gt;</code>, де:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="code">&lt;модифікатор&gt;</code> приймає значення: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e6402" class="footnote" name="d0e6402"><sup class="footnote">[4]</sup></a>, <span class="emphasis"><em>alt</em></span>,
+                     <p><code class="code">&lt;модифікатором&gt;</code> можуть виступати: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e6402" class="footnote" name="d0e6402"><sup class="footnote">[4]</sup></a>, <span class="emphasis"><em>alt</em></span>,
                                   <span class="emphasis"><em>altGraph</em></span></p>
                   </li>
                   <li class="listitem">
-                     <p><code class="code">&lt;подія&gt;</code> має значення: <span class="emphasis"><em>typed</em></span> (введений символ - натиснута і відпущена клавіша), <span class="emphasis"><em>pressed</em></span> (натиснута клавіша), <span class="emphasis"><em>released</em></span> (відпущена клавіша)
+                     <p><code class="code">&lt;подія&gt;</code> має значення: <span class="emphasis"><em>typed</em></span> (введений символ — натиснута і відпущена клавіша), <span class="emphasis"><em>pressed</em></span> (натиснута клавіша), <span class="emphasis"><em>released</em></span> (відпущена клавіша)
                      </p>
                   </li>
                   <li class="listitem">
-                     <p>та <code class="code">&lt;клавіша&gt;</code> приймає значення будь-якої клавіші на вашій клавіатурі<a href="#ftn.d0e6437" class="footnote" name="d0e6437"><sup class="footnote">[5]</sup></a>.
+                     <p>та <code class="code">&lt;клавішою&gt;</code> може стати будь-яка клавіша на вашій клавіатурі<a href="#ftn.d0e6437" class="footnote" name="d0e6437"><sup class="footnote">[5]</sup></a>.
                      </p>
                   </li>
                </ul>
             </div>
-            <p>Наприклад, в стандартних комбінаціях OmegaT<a href="#ftn.d0e6445" class="footnote" name="d0e6445"><sup class="footnote">[6]</sup></a>можна знайти:
+            <p>Наприклад, в стандартних комбінаціях OmegaT <a href="#ftn.d0e6445" class="footnote" name="d0e6445"><sup class="footnote">[6]</sup></a>можна знайти:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -94,16 +94,16 @@
                   </li>
                </ul>
             </div>
-            <p>Перша комбінація використовується для <span class="guimenuitem">відкриття проєкту</span>, друга - для <span class="guimenuitem">створення запису до глосарія</span>.
+            <p>Перша комбінація використовується для <span class="guimenuitem">відкриття проєкту</span>, друга — для <span class="guimenuitem">створення запису до глосарія</span>.
             </p>
-            <p>Якщо ви бажаєте використовувати <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> для відкриття проєкту, змініть у вашому <code class="filename">MainMenuShortcuts.properties</code> значення на таке:<code class="code">
+            <p>Якщо ви хочете використовувати <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> для відкриття проєкту, змініть у вашому <code class="filename">MainMenuShortcuts.properties</code> значення на таке:<code class="code">
                       </code></p>
             <p><code class="code">projectOpenMenuItem=shift ctrl O</code>.
             </p>
-            <p>Якщо ви використовуєте Mac та бажаєте додати комбінацію клавіш <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> до пункту <span class="guimenu">Інструменти</span> → <span class="guimenuitem">Статистика</span>, додайте такий рядок до вашого <code class="filename">MainMenuShortcuts.properties</code>:<code class="code"></code></p>
+            <p>Якщо ви використовуєте Mac та хочете додати комбінацію клавіш <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> до пункту <span class="guimenu">Інструменти</span> → <span class="guimenuitem">Статистика</span>, додайте такий рядок до вашого <code class="filename">MainMenuShortcuts.properties</code>:<code class="code"></code></p>
             <p><code class="code"> toolsShowStatisticsStandardMenuItem=shift meta
                       S</code></p>
-            <p>Збережіть файл та перезапустіть <span class="application">OmegaT</span>. Ваша нова комбінація клавіш повинна зʼявитися поруч зі зміненим пунктом меню. Якщо вони не конфліктують із системними комбінаціями,
+            <p>Збережіть файл та перезапустіть <span class="application">OmegaT</span>. Ваша нова комбінація клавіш повинна з’явитися поруч зі зміненим пунктом меню. Якщо вони не конфліктують із системними комбінаціями,
                то вони будуть доступні в OmegaT.
             </p>
          </div>
@@ -576,7 +576,7 @@
                            <td align="left">viewMarkWhitespaceCheckBoxMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Позначати керівні символи керування напрямком письма</td>
+                           <td align="left">Позначати символи керування напрямком письма</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">viewMarkBidiCheckBoxMenuItem</td>
                         </tr>

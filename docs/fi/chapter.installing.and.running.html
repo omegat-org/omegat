@@ -68,7 +68,7 @@
                <dt><span class="section"><a href="chapter.installing.and.running.html#other.systems">4. Muut järjestelmät</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#d0e456">4.1. Oikeanlaisen paketin lataaminen</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#d0e459">4.1. Oikeanlaisen paketin lataaminen</a></span></dt>
                      <dt><span class="section"><a href="chapter.installing.and.running.html#OmegaT.installation.other">4.2. <span class="application">OmegaT</span>:n asentaminen</a></span></dt>
                      <dt><span class="section"><a href="chapter.installing.and.running.html#installing.convenient.shortcuts">4.3. Käytännöllisten oikoteiden luominen</a></span></dt>
                      <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.other">4.4. <span class="application">OmegaT</span>-ohjelman ajaminen</a></span></dt>
@@ -76,7 +76,7 @@
                </dd>
                <dt><span class="section"><a href="chapter.installing.and.running.html#drag.and.drop">5. Vedä ja pudota</a></span></dt>
                <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">6. Java Web Startin käyttö</a></span></dt>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e593">7. OmegaT:n käynnistäminen komentoriviltä</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e596">7. OmegaT:n käynnistäminen komentoriviltä</a></span></dt>
                <dd>
                   <dl>
                      <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">7.1. Komentoikkunan avaaminen</a></span></dt>
@@ -330,9 +330,8 @@
                            </p>
                         </li>
                         <li class="listitem">
-                           <p>Napsauta ensin ikonipainiketta, sitten <span class="guibutton">Browse…</span> ja siirry <span class="application">OmegaT</span>-sovelluskansion <code class="filename">/images</code>-alikansioon. Valitse &lt;f2&gt;OmegaT.png&lt;/f2&gt;-ikoni. GNOME ei välttämättä pysty näyttämään käytettävissä olevia ikonitiedostoja,
-                              sillä se odottaa ikonitiedostojen olevan SVG-tiedostoja. Jos kuitenkin valitset tämän kansion, tiedostojen pitäisi tulla näkyviin
-                              ja voit valita <code class="filename">OmegaT-png</code>-tiedoston ohjelman ikoniksi.
+                           <p>Napsauta ensin ikonipainiketta, sitten <span class="guibutton">Browse…</span> ja siirry <span class="application">OmegaT</span>-sovelluskansion <code class="filename">/images</code>-alikansioon. Valitse <code class="filename">OmegaT.png</code>-ikoni. GNOME ei välttämättä pysty näyttämään käytettävissä olevia ikonitiedostoja, sillä se odottaa ikonitiedostojen olevan
+                              SVG-tiedostoja. Jos kuitenkin valitset tämän kansion, tiedostojen pitäisi tulla näkyviin ja voit valita <code class="filename">OmegaT-png</code>-tiedoston ohjelman ikoniksi.
                            </p>
                         </li>
                      </ul>
@@ -453,7 +452,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e456"></a>4.1. Oikeanlaisen paketin lataaminen
+                        <h3 class="title"><a name="d0e459"></a>4.1. Oikeanlaisen paketin lataaminen
                         </h3>
                      </div>
                   </div>
@@ -565,7 +564,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e593"></a>7. OmegaT:n käynnistäminen komentoriviltä
+                     <h2 class="title" style="clear: both"><a name="d0e596"></a>7. OmegaT:n käynnistäminen komentoriviltä
                      </h2>
                   </div>
                </div>
@@ -773,8 +772,9 @@
                                  </li>
                                  <li class="listitem">
                                     <p><code class="literal">--mode=console-align</code></p>
-                                    <p>Tässä tilassa OmegaT kohdistaa projektin <code class="filename">/source/</code>-kansiossa olevat Java-ominaisuuksien tiedostot määritetyssä sijainnissa olevaan sisältöön. Tästä saatava TMX-tiedosto tallentuu
-                                       <code class="filename">/omegat/</code>-kansioon nimellä <code class="filename">align.tmx</code>.
+                                    <p>Tässä tilassa OmegaT kohdistaa projektin <code class="filename">/source/</code>-kansiossa olevat tiedostot ja annetussa sijainnissa olevan sisällön. Tästä saatava TMX-tiedosto tallentuu <code class="filename">/omegat/</code>-kansioon nimellä <code class="filename">align.tmx</code>. Se, mitä tiedostoja kohdennus käyttää, riippuu siitä, tuetaanko niiden tiedostosuodatinta. Joitakin tuettuja suodattimia:
+                                       ILIAS Language File, Java(TM) Resource Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL,
+                                       PO, RC, SubRip Subtitles, Windows Resources
                                     </p>
                                     <p>Tässä tapauksessa tarvitaan yksi lisäparametri, joka määrittelee kohdedatan sijainnin:</p>
                                     <p><code class="literal">--alignDir=<em class="parameter"><code>&lt;käännettyjen tiedostojen sijainti&gt;</code></em></code></p>

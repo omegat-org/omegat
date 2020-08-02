@@ -5,8 +5,8 @@
       <title>Розділ 5. Тека проєкту</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-      <link rel="home" href="index.html" title="OmegaT 4.2 - Посібник користувача">
-      <link rel="up" href="index.html" title="OmegaT 4.2 - Посібник користувача">
+      <link rel="home" href="index.html" title="OmegaT 4.2 — Посібник користувача">
+      <link rel="up" href="index.html" title="OmegaT 4.2 — Посібник користувача">
       <link rel="prev" href="panes.html" title="Розділ 4. Області вікна">
       <link rel="next" href="howtos.html" title="Розділ 6. Практичні рекомендації">
    </head>
@@ -36,121 +36,120 @@
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="project.folder.html#d0e4497">1. source</a></span></dt>
-               <dt><span class="section"><a href="project.folder.html#d0e4502">2. target</a></span></dt>
-               <dt><span class="section"><a href="project.folder.html#d0e4525">3. tm</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4496">1. ./source</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4501">2. ./target</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4524">3. ./tm</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="project.folder.html#d0e4553">3.1. tm/auto</a></span></dt>
-                     <dt><span class="section"><a href="project.folder.html#d0e4580">3.2. tm/enforce</a></span></dt>
-                     <dt><span class="section"><a href="project.folder.html#d0e4620">3.3. tm/mt</a></span></dt>
-                     <dt><span class="section"><a href="project.folder.html#d0e4628">3.4. tm/penalty-xxx</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4552">3.1. ./tm/auto</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4579">3.2. tm/enforce</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4619">3.3. ./tm/mt</a></span></dt>
+                     <dt><span class="section"><a href="project.folder.html#d0e4627">3.4. ./tm/penalty-xxx</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="project.folder.html#d0e4639">4. dictionary</a></span></dt>
-               <dt><span class="section"><a href="project.folder.html#d0e4647">5. glossary</a></span></dt>
-               <dt><span class="section"><a href="project.folder.html#folder.omegat">6. omegat</a></span></dt>
-               <dt><span class="section"><a href="project.folder.html#d0e4714">7. omegat.project</a></span></dt>
-               <dt><span class="section"><a href="project.folder.html#d0e4722">8. .repositories</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4638">4. ./dictionary</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4646">5. ./glossary</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#folder.omegat">6. ./omegat</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4713">7. omegat.project</a></span></dt>
+               <dt><span class="section"><a href="project.folder.html#d0e4721">8. ./.repositories</a></span></dt>
             </dl>
          </div>
-         <p>Проєкт OmegaT - це тека з визначеною структорою файлів і підтек.</p>
+         <p>Проєкт OmegaT — це тека з визначеною структорою файлів і підтек.</p>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4497"></a>1. source
+                     <h2 class="title" style="clear: both"><a name="d0e4496"></a>1. ./source
                      </h2>
                   </div>
                </div>
             </div>
             <p>Підтека оригіналу містить файли для перекладу. Додавати сюди файли можна і після початку роботи з проєктом. Зверніть увагу,
-               що ви можете структурувати підтеку оригіналу за своїм смаком. Якщо файли для перекладу розміщені у хитромудро вкладених теках,
-               просто скопіюйте їх як є - однією головною текою. OmegaT автоматично відтворить потрібну структуру в теці з перекладеними
-               файлами.
+               що ви можете структурувати підтеку оригіналу за своїм смаком. Якщо файли для перекладу входять до ієрархічної структури (як
+               у вебсайті), просто визначіть головну підтеку. OmegaT залишить вміст файлів і при цьому не порушить ієрархічну структуру.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4502"></a>2. target
+                     <h2 class="title" style="clear: both"><a name="d0e4501"></a>2. ./target
                      </h2>
                   </div>
                </div>
             </div>
-            <p>У момент початку роботи ця підтека порожня. Щоб у ній з'явилися перекладені файли, запустіть команду <span class="guimenu">Проєкт</span> → <span class="guimenuitem">Створити перекладені документи</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>). Відповідники файлів з теки <code class="filename">source</code>, як перекладені так і неперекладені, будуть створені тут, упорядковані як в підтеці оригіналу. Вміст підтеки перекладу буде
-               відповідати поточному стану проєктної пам'яті перекладів, яка зберігається в файлі <span class="bold"><strong>/omegat/project_save.tmx</strong></span>. Неперекладені сегменти залишаться мовою оригіналу.
+            <p>У момент початку роботи ця підтека порожня. Щоб у ній з’явилися перекладені файли, запустіть команду <span class="guimenu">Проєкт</span> → <span class="guimenuitem">Створити перекладені документи</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>). Відповідники файлів з теки <code class="filename">./source</code>, як перекладені так і неперекладені, будуть створені тут, упорядковані як у підтеці оригіналу. Вміст підтеки перекладу буде
+               відповідати поточному стану проєктної пам’яті перекладів, яка зберігається у файлі <span class="bold"><strong>./omegat/project_save.tmx</strong></span>. Неперекладені сегменти залишаться мовою оригіналу.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4525"></a>3. tm
+                     <h2 class="title" style="clear: both"><a name="d0e4524"></a>3. ./tm
                      </h2>
                   </div>
                </div>
             </div>
-            <p>У теці /tm/ може знаходитися скільки завгодно допоміжних файлів пам'яті перекладів, тобто файлів tmx. Ці файли можуть бути
-               у одному з трьох форматів: перший рівень - лише текст, другий рівень - зі збереженою інформацією про форматування, внутрішній
-               формат OmegaT. Зверніть увагу, що інші CAT-інструменти зазвичай можуть експортувати пам'ять перекладів у перших двох форматах.
-               Але, безумовно, найкраще буде використовувати файли TMX, специфічні для OmegaT, оскільки в них для сегментів зберігається
-               вбудоване системне форматування.
+            <p>У теці /tm/ може знаходитися скільки завгодно допоміжних файлів пам’яті перекладів, тобто файлів tmx. Ці файли можуть бути
+               трьох варіантів: перший — лише текст, другий — зі збереженою інформацією про форматування, третій — внутрішній формат OmegaT.
+               Зверніть увагу, що інші CAT-інструменти зазвичай можуть експортувати пам’ять перекладів у перших двох форматах. Але, безумовно,
+               найкраще буде використовувати файли TMX, що орієнтовані саме на OmegaT, оскільки в них для сегментів зберігається вбудоване
+               системне форматування.
             </p>
-            <p>Вміст пам'яті перекладів у підтеці tm необхідний для пошуку варіантів перекладу. Кожен серед перекладених і збережених у цих
-               файлах текстів може з'явитися серед часткових збігів, якщо він достатньо подібний на той текст, що перекладається зараз.
+            <p>Вміст пам’яті перекладів у підтеці ./tm необхідний для пошуку варіантів перекладу. Кожен серед перекладених і збережених у
+               цих файлах текстів може з’явитися серед часткових збігів, якщо він достатньо подібний на той текст, що перекладається зараз.
             </p>
-            <p>Якщо сегмент оригіналу у вторинній пам'яті перекладів є ідентичним до тексту, який перекладається, OmegaT діє так, як вказано
-               у діалоговому вікні <span class="guimenu">Налаштування</span> → <span class="guimenuitem">Область редагування...</span>. Наприклад, переклад з вторинної пам'яті перекладів може вставлятися з позначкою <span class="emphasis"><em>[нечіткий збіг]</em></span>. Завдяки цьому перекладач зможе легко виявити такі сегменти і перевірити їх<span class="guimenu">.</span></p>
-            <p>Буває так, що у пам'яті перекладів з підтеки <code class="filename">tm</code>, знаходяться сегменти, у яких оригінал ідентичний, а переклади різні. Файли TMX читаються відповідно до того, як вони посортовані:
-               за назвою файлу\b і за порядком сегментів у TMX. Останній серед сегментів з ідентичним текстом оригіналу буде більш пріоритетним
+            <p>Якщо сегмент оригіналу в одному з допоміжних файлів пам’яті перекладів є ідентичним до тексту, який перекладається, OmegaT
+               діє так, як вказано у діалоговому вікні <span class="guimenu">Налаштування</span> → <span class="guimenuitem">Область редагування...</span>. Наприклад, переклад з допоміжної пам’яті перекладів може вставлятися з позначкою <span class="emphasis"><em>[нечіткий збіг]</em></span>. Завдяки цьому перекладач зможе легко виявити такі сегменти і перевірити їх<span class="guimenu">.</span></p>
+            <p>Буває так, що в пам’яті перекладів з підтеки <code class="filename">./tm</code> знаходяться сегменти, у яких оригінал ідентичний, а переклади різні. Файли TMX читаються відповідно до того, як вони посортовані:
+               за назвою файлу і за порядком сегментів у файлі TMX. Останній серед сегментів з ідентичним текстом оригіналу буде більш пріоритетним
                (звичайно, набагато краще взагалі уникати таких ситуацій).
             </p>
-            <p>Зверніть увагу, що файли TMX у теці tm можна тримати заархівованими у форматі gzip.</p>
+            <p>Зверніть увагу, що файли TMX у теці ./tm можна тримати заархівованими у форматі gzip.</p>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4553"></a>3.1. tm/auto
+                        <h3 class="title"><a name="d0e4552"></a>3.1. ./tm/auto
                         </h3>
                      </div>
                   </div>
                </div>
-               <p>Якщо одразу зрозуміло, що переклад, вказаний у файлі (або файлах) пам'яті перекладів, - правильний, його можна перемістити
-                  у теку <span class="bold"><strong> tm/auto</strong></span> і уникнути необхідності підтвердження значної кількості збігів з позначкою <span class="emphasis"><em>[нечіткий збіг]</em></span>.
+               <p>Якщо одразу зрозуміло, що переклад, вказаний у файлі (або файлах) пам’яті перекладів, — правильний, його можна перемістити
+                  у теку<span class="bold"><strong> ./tm/auto</strong></span> і уникнути необхідності підтвердження значної кількості збігів з позначкою <span class="emphasis"><em>[нечіткий збіг]</em></span>.
                </p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
-                        <p>Помістіть файл TMX у /tm/auto.</p>
+                        <p>Помістіть файл TMX у теку ./tm/auto.</p>
                      </li>
                      <li class="listitem">
                         <p>Відкрийте проєкт. Зміни відображаються на екрані.</p>
                      </li>
                      <li class="listitem">
-                        <p>Внесіть незначні зміни у будь-якій частині проєкту. Таким чином зміниться файл <code class="filename">project_save.tmx</code> (через додавання одиниць перекладу з автоматично створеного TMX)
+                        <p>Внесіть незначні зміни у будь-якій частині проєкту. Таким чином зміниться файл <code class="filename">project_save.tmx</code> (через додавання одиниць перекладу з автоматично створеного файлу TMX)
                         </p>
                      </li>
                   </ol>
                </div>
-               <p>Примітка: якщо файл TMX прибрати з /tm/auto до виконання кроку 3, не буде створено ніяких додаткових одиниць перекладу.</p>
+               <p>Примітка: якщо файл TMX прибрати з ./tm/auto до виконання кроку 3, не буде створено жодних додаткових одиниць перекладу.</p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4580"></a>3.2. tm/enforce
+                        <h3 class="title"><a name="d0e4579"></a>3.2. tm/enforce
                         </h3>
                      </div>
                   </div>
                </div>
-               <p>Якщо ви впевнені, що файл TMX більш точний ніж <code class="filename">project_save.tmx</code> від OmegaT, помістіть цей TMX у /tm/enforce, щоб вже існуючі переклади були автоматично переписані.
+               <p>Якщо ви впевнені, що файл TMX більш точний ніж <code class="filename">project_save.tmx</code> від OmegaT, помістіть цей TMX у ./tm/enforce, щоб вже наявні переклади були автоматично переписані.
                </p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
-                        <p>Помістіть файл TMX у /tm/enforce.</p>
+                        <p>Помістіть файл TMX у ./tm/enforce.</p>
                      </li>
                      <li class="listitem">
                         <p>Відкрийте проєкт. Зміни відображаються на екрані.</p>
@@ -160,15 +159,15 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>Визначтесь, наскільки стійкими будуть переглянуті сегменти:</p>
+                        <p>Визначтесь, наскільки стійкими будуть автоматично застосовані сегменти:</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
-                                 <p>Якщо для них <span class="emphasis"><em>необов'язково</em></span> залишатися стійкими до змін, видаліть TMX з /tm/enforce.
+                                 <p>Якщо їм <span class="emphasis"><em>необов’язково</em></span> залишатися стійкими до змін, видаліть TMX з /tm/enforce.
                                  </p>
                               </li>
                               <li class="listitem">
-                                 <p>Якщо для них <span class="emphasis"><em>обов'язково</em></span> залишатися стійкими до змін, залиште TMX у /tm/enforce.
+                                 <p>Якщо їм <span class="emphasis"><em>обов’язково</em></span> залишатися стійкими до змін, залиште TMX у /tm/enforce.
                                  </p>
                               </li>
                            </ul>
@@ -176,18 +175,18 @@
                      </li>
                   </ol>
                </div>
-               <p>Примітка: якщо файл TMX видалити з /tm/enforce до виконання кроку 3, переглянуті зміни взагалі не збережуться.</p>
+               <p>Примітка: якщо файл TMX видалити з ./tm/enforce до виконання кроку 3, автоматично застосовані зміни взагалі не збережуться.</p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4620"></a>3.3. tm/mt
+                        <h3 class="title"><a name="d0e4619"></a>3.3. ./tm/mt
                         </h3>
                      </div>
                   </div>
                </div>
-               <p>Коли збіг вставлено з файлу TMX, який знаходиться у теці <code class="filename">mt</code>, фон активного сегменту у Вікні редагування змінюється на червоний. Фон відновить свій звичайний колір, коли ви підтвердите
+               <p>Коли збіг вставлено з файлу TMX, який знаходиться у теці <code class="filename">./mt</code>, фон активного сегменту в Області редагування змінюється на червоний. Фон відновить свій звичайний колір, коли ви підтвердите
                   цей сегмент.
                </p>
             </div>
@@ -195,15 +194,15 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4628"></a>3.4. tm/penalty-xxx
+                        <h3 class="title"><a name="d0e4627"></a>3.4. ./tm/penalty-xxx
                         </h3>
                      </div>
                   </div>
                </div>
-               <p>Інколи корисно відокремити високоякісні файли пам'яті перекладу від тих, які менш надійні: через відмінність у тематиці, особливі
-                  умови, виставлені клієнтом чи просто за результатами перевірки. Для файлів пам'яті перекладу в теках з назвами <code class="filename">penalty-xxx</code> (де xxx - це цифри від 0 до 100), збіги будуть оцінюватися нижче, відповідно до назви теки: наприклад, 100%-й збіг у будь-якій
-                  пам'яті перекладу, якщо його розмістити у теці <code class="filename">penalty-30</code>, буде мати оцінку 70%. Штрафуються всі три відсоткові рівні збігів: збіги в 75, 80, 90 відсотків будуть у цьому випадку знижені
-                  відповідно до 45, 50, 60 відсотків.
+               <p>Інколи корисно відокремити високоякісні файли пам’яті перекладу від менш надійних: через відмінність у тематиці, особливі
+                  умови, виставлені клієнтом, чи просто за результатами перевірки тощо. Для файлів пам’яті перекладу в теках з назвами <code class="filename">penalty-xxx</code> (де xxx — це цифри від 0 до 100) збіги будуть оцінюватися нижче, відповідно до назви теки: наприклад, 100%-й збіг у будь-якій
+                  пам’яті перекладу, якщо його розмістити у теці <code class="filename">penalty-30</code>, буде мати оцінку 70%. Знижується оцінка всіх трьох відсоткових рівнів збігів: збіги в 75, 80, 90 відсотків будуть у цьому
+                  випадку знижені відповідно до 45, 50, 60 відсотків.
                </p>
             </div>
          </div>
@@ -211,40 +210,40 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4639"></a>4. dictionary
+                     <h2 class="title" style="clear: both"><a name="d0e4638"></a>4. ./dictionary
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Сюди треба класти словники. Див. <a class="link" href="appendix.dictionaries.html" title="Додаток A. Словники">Словники</a> для більш детальної інформації.
+            <p>У момент початку роботи ця тека порожня. Сюди треба додавати словники. Див. <a class="link" href="appendix.dictionaries.html" title="Додаток A. Словники">Словники</a> для більш детальної інформації.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4647"></a>5. glossary
+                     <h2 class="title" style="clear: both"><a name="d0e4646"></a>5. ./glossary
                      </h2>
                   </div>
                </div>
             </div>
-            <p>У момент початку роботи ця тека порожня. Сюди треба класти глосарії. Також тут автоматично створиться файл основного глосарію,
-               якщо ви будете використовувати функцію "додати до глосарію". Див. <a class="link" href="appendix.glossaries.html" title="Додаток B. Глосарії">Глосарії</a> для більш детальної інформації.
+            <p>У момент початку роботи ця тека порожня. Сюди треба додавати глосарії. Також тут автоматично створиться файл основного глосарія,
+               якщо ви будете використовувати функцію «додати до глосарія». Див. <a class="link" href="appendix.glossaries.html" title="Додаток B. Глосарії">Глосарії</a> для більш детальної інформації.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="folder.omegat"></a>6. omegat
+                     <h2 class="title" style="clear: both"><a name="folder.omegat"></a>6. ./omegat
                      </h2>
                   </div>
                </div>
             </div>
-            <p>У підтеці <span class="bold"><strong>omegat</strong></span> знаходиться як мінімум один файл, хоча їх може бути кілька. Найважливіший файл у підтеці - <code class="filename">project_save.tmx, </code> робоча пам'ять перекладу для проєкту. Резервна копія цього файлу (у форматі bak) поступово додається до підтеки: на початку
-               сеансу, наприкінці і в ході перекладу.
+            <p>У підтеці <span class="bold"><strong>./omegat</strong></span> знаходиться як мінімум один файл, хоча їх може бути кілька. Найважливіший файл у підтеці — <code class="filename">project_save.tmx </code>. Це робоча пам’ять перекладу для проєкту. Резервна копія цього файлу (у форматі bak) поступово додається до підтеки: на початку
+               роботи над перекладом, наприкінці та в ході перекладу.
             </p>
-            <p>Під час перекладу можуть бути створені наступні додаткові файли у цій підтеці</p>
+            <p>Під час перекладу можуть бути створені додаткові файли у цій підтеці, а саме:</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt><span class="term">stats.txt</span></dt>
@@ -254,12 +253,12 @@
                   <dt><span class="term">ignored_words.txt., </span><span class="term">learned_words.txt</span></dt>
                   <dd>
                      <p>створюються і використовуються Перевікою правопису. Якщо ви хочете, щоб Перевірка правопису проігнорувала / прийняла попередньо
-                        відібрані вами слова, вам необхідно просто скопіювати два відповідні файли у підтеку вашого поточного проєкту в <code class="filename">omegat</code>.
+                        відібрані вами слова, вам необхідно просто скопіювати два відповідні файли у підтеку <code class="filename">./omegat</code> вашого поточного проєкту.
                      </p>
                   </dd>
                   <dt><span class="term">project_stats_match.txt</span></dt>
                   <dd>
-                     <p>тут знаходиться остання статистика збігів у проєкті, згенерована у <span class="guimenuitem">Інструменти &gt; Статистика збігів</span></p>
+                     <p>тут знаходиться остання статистика збігів у проєкті, згенерована в <span class="guimenuitem">Інструменти &gt; Статистика збігів</span></p>
                   </dd>
                   <dt><span class="term">segmentation.conf</span></dt>
                   <dd>
@@ -280,7 +279,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4714"></a>7. omegat.project
+                     <h2 class="title" style="clear: both"><a name="d0e4713"></a>7. omegat.project
                      </h2>
                   </div>
                </div>
@@ -292,14 +291,16 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4722"></a>8. .repositories
+                     <h2 class="title" style="clear: both"><a name="d0e4721"></a>8. ./.repositories
                      </h2>
                   </div>
                </div>
             </div>
             <p>В командному проєкті саме в цій теці зберігається робоча директорія системи контролю версій.</p>
-            <p>Якщо ви хочете змінити віддалені файли, міняйте їх тут, та синхронізуйте зміни за допомогою відповідного клієнта (Git чи SVN).</p>
-            <p>У деяких операційних системах ця тека буде прихована. Використайте опцію "Показати приховані файли", щоб доступитися до неї.</p>
+            <p>Якщо ви хочете змінити віддалені файли (наприклад, видалити файл), міняйте їх тут та синхронізуйте зміни за допомогою відповідного
+               клієнта (Git чи SVN).
+            </p>
+            <p>У деяких операційних системах ця тека буде прихована. Використайте опцію «Показати приховані файли», щоб вона була видимою.</p>
          </div>
       </div>
       <div class="navfooter">

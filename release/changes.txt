@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.3.0
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   9 Bug fixes
   10 Localisation updates
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Mozilla .ftl files filter
   https://sourceforge.net/p/omegat/feature-requests/1479/
+
+  - Support Yandex.Cloud machine translation
+  https://sourceforge.net/p/omegat/feature-requests/1494/
 
   Bug fixes:
 

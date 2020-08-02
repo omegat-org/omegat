@@ -143,7 +143,7 @@
  OmegaT 5.0.0 (2019-10-01)
 ----------------------------------------------------------------------
   3 Enhancements
-  1 Bug fix
+  2 Bug fixes
   9 Localisation updates
 ----------------------------------------------------------------------
 5.0.0 vs 4.3.2
@@ -160,6 +160,10 @@
   https://sourceforge.net/p/omegat/feature-requests/1455/
 
   Bug fixes:
+
+  - XML DTD declaration is replaced with DTD file content in translated
+  document
+  https://sourceforge.net/p/omegat/bugs/636/
 
   - Regex search-and-replace results are incorrect for some replacements
   https://sourceforge.net/p/omegat/bugs/955/

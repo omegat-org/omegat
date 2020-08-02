@@ -1284,7 +1284,7 @@ public class RealProject implements IProject {
                 return;
             }
             // create new translation memories map
-            Map<String, ExternalTMX> newTransMemories = new TreeMap<>(new FileUtil.TmFileComparator());
+            Map<String, ExternalTMX> newTransMemories = new TreeMap<>(new FileUtil.TmFileComparator(config.getTmDir().getAsFile()));
             newTransMemories.putAll(transMemories);
             if (file.exists()) {
                 try {

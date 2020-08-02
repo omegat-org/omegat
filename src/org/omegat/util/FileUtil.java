@@ -62,7 +62,6 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.omegat.core.Core;
 
 /**
  * Files processing utilities.
@@ -112,7 +111,7 @@ public final class FileUtil {
 
     /**
      * Create file backup with datetime suffix.
-     * 
+     *
      * @return Backup file
      */
     public static File backupFile(File original) throws IOException {
@@ -176,9 +175,9 @@ public final class FileUtil {
 
     /**
      * Read a file to determine its end-of-line character(s).
-     * 
+     *
      * If neither '\n' nor '\r' are present in the file then it will return null.
-     * 
+     *
      * @param file
      * @param charset
      * @return The EOL character(s) as a string, or null if not detectable
@@ -567,14 +566,19 @@ public final class FileUtil {
      * and tm/auto results before other similar % matches.
      */
     public static class TmFileComparator implements Comparator<String> {
-        String autoPrefix = OConsts.AUTO_TM + "/";
-        String enforcePrefix = OConsts.AUTO_ENFORCE_TM + "/";
+        private static final String autoPrefix = OConsts.AUTO_TM + "/";
+        private static final String enforcePrefix = OConsts.AUTO_ENFORCE_TM + "/";
+
+        public TmFileComparator(File tmRoot) {
+            this.tmRoot = tmRoot;
+        }
+
+        private final File tmRoot;
 
         @Override
         public int compare(String n1, String n2) {
             String r1, r2;
             try {
-                File tmRoot = Core.getProject().getProjectProperties().getTmDir().getAsFile();
                 r1 = FileUtil.computeRelativePath(tmRoot, new File(n1));
                 r2 = FileUtil.computeRelativePath(tmRoot, new File(n2));
             } catch (IOException e) {

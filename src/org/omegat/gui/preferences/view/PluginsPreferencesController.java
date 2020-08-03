@@ -33,6 +33,7 @@ import javax.swing.JOptionPane;
 
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.TableColumnSizer;
 
 /**
  * @author Aaron Madlon-Kay
@@ -58,6 +59,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new PluginsPreferencesPanel();
+        TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
         panel.browsePluginsButton.addActionListener(e -> {
             try {
                 Desktop.getDesktop().browse(URI.create(PLUGINS_WIKI_URL));

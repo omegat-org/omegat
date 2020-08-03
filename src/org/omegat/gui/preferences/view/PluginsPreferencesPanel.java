@@ -108,6 +108,6 @@ public class PluginsPreferencesPanel extends JPanel {
     private javax.swing.JPanel panelInfo;
     private javax.swing.JPanel panelPluginsInfo;
     private javax.swing.JScrollPane scrollTable;
-    private javax.swing.JTable tablePluginsInfo;
+    javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

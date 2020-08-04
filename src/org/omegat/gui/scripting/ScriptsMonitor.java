@@ -81,7 +81,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             applicationStartupEventScriptsExecuted = true;
             addEventScripts(EventType.APPLICATION_STARTUP);
             ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.APPLICATION_STARTUP);
-            m_scriptingWindow.executeScriptFiles(scripts, Collections.emptyMap());
+            m_scriptingWindow.executeScripts(scripts, Collections.emptyMap());
             scripts.clear();
         }
     }
@@ -141,7 +141,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 HashMap<String, Object> binding = new HashMap<String, Object>();
                 binding.put("activeFileName", activeFileName);
 
-                m_scriptingWindow.executeScriptFiles(m_eventsScript.get(EventType.NEW_FILE), binding);
+                m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_FILE), binding);
             }
 
             @Override
@@ -149,7 +149,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 HashMap<String, Object> binding = new HashMap<String, Object>();
                 binding.put("newEntry", newEntry);
 
-                m_scriptingWindow.executeScriptFiles(m_eventsScript.get(EventType.ENTRY_ACTIVATED), binding);
+                m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.ENTRY_ACTIVATED), binding);
             }
         };
 
@@ -170,7 +170,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 HashMap<String, Object> binding = new HashMap<String, Object>();
                 binding.put("eventType", eventType);
                 ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.PROJECT_CHANGED);
-                m_scriptingWindow.executeScriptFiles(scripts, binding);
+                m_scriptingWindow.executeScripts(scripts, binding);
            }
         };
         CoreEvents.registerProjectChangeListener(m_projectEventListener);
@@ -197,7 +197,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 // executed, as the application may exit before they are
                 // finished executing.
                 ArrayList<ScriptItem> scriptItems = m_eventsScript.get(EventType.APPLICATION_SHUTDOWN);
-                m_scriptingWindow.executeScriptFiles(scriptItems,
+                m_scriptingWindow.executeScripts(scriptItems,
                         new HashMap<String, Object>());
             }
         };
@@ -218,7 +218,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 HashMap<String, Object> binding = new HashMap<String, Object>();
                 binding.put("newWord", newWord);
 
-                m_scriptingWindow.executeScriptFiles(m_eventsScript.get(EventType.NEW_WORD), binding);
+                m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_WORD), binding);
             }
         };
 

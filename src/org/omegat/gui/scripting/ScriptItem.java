@@ -40,6 +40,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.MissingResourceException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.regex.MatchResult;
@@ -58,10 +59,17 @@ import org.omegat.util.LinebreakPreservingReader;
  */
 public class ScriptItem implements Comparable<ScriptItem> {
 
+    protected static final String EDITOR_SCRIPT = "<editor script>";
     private static final String PROPERTIES = "properties/";
 
+    public ScriptItem(String scriptSource) {
+        mSource = Optional.of(scriptSource);
+        mFile = Optional.empty();
+    }
+    
     public ScriptItem(File scriptFile) {
-        mFile = scriptFile;
+        mFile = Optional.of(scriptFile);
+        mSource = Optional.empty();
 
         if (mFile == null) {
             return;
@@ -119,8 +127,8 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     public String getScriptName() {
-        if (mScriptName == null) {
-            String name = mFile.getName();
+        if (mScriptName == null && mFile.isPresent()) {
+            String name = mFile.get().getName();
             if (mRes != null) {
                 try {
                     name = mRes.getString("name");
@@ -132,8 +140,16 @@ public class ScriptItem implements Comparable<ScriptItem> {
         return mScriptName;
     }
 
+    public String getFileName() {
+        if (mFile.isPresent()) {
+            return mFile.get().getName();
+        }
+
+        return EDITOR_SCRIPT;
+    }
+    
     public File getFile() {
-        return mFile;
+        return mFile.orElse(null);
     }
 
     public String getDescription() {
@@ -157,8 +173,16 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     public String getText() throws FileNotFoundException, IOException {
+        if (!mFile.isPresent() && !mSource.isPresent()) {
+            throw new IOException("Cannot run a script item without source.");
+        }
+
+        if (mSource.isPresent()) {
+            return mSource.get();
+        }
+
         StringBuilder sb = new StringBuilder();
-        try (LinebreakPreservingReader lpin = getUTF8LinebreakPreservingReader(mFile)) {
+        try (LinebreakPreservingReader lpin = getUTF8LinebreakPreservingReader(mFile.get())) {
             String s = lpin.readLine();
             if (s != null) {
                 startsWithBOM = s.startsWith(BOM);
@@ -188,12 +212,16 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     public void setText(String text) throws UnsupportedEncodingException, IOException {
+        if (! mSource.isPresent()) {
+            throw new IOException("Cannot save inline script source.");
+        }
+
         text = text.replaceAll("\n", lineBreak);
         if (startsWithBOM) {
             text = BOM + text;
         }
 
-        FileUtils.writeStringToFile(mFile, text, StandardCharsets.UTF_8);
+        FileUtils.writeStringToFile(mFile.get(), text, StandardCharsets.UTF_8);
     }
 
     @Override
@@ -210,7 +238,14 @@ public class ScriptItem implements Comparable<ScriptItem> {
     private boolean startsWithBOM = false;
     private String lineBreak = System.lineSeparator();
 
-    private File mFile = null;
+    /** File containing the sources of the script. */
+    private final Optional<File> mFile;
+
+    /** If no file is present, the source is provided in this field (it is assumed to be in the 
+     * language ScriptRunner.DEFAULT_SCRIPT (Groovy).
+     */
+    private final Optional<String> mSource;
+
     private String mScriptName = null;
     private String mDescription = null;
     private ResourceBundle mRes = null;

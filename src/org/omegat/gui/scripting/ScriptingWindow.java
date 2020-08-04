@@ -44,11 +44,12 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
@@ -237,7 +238,7 @@ public class ScriptingWindow {
     }
 
     private void setQuickScriptMenu(ScriptItem scriptItem, int index) {
-        m_quickScripts[index] = scriptItem.getFile().getName();
+        m_quickScripts[index] = scriptItem.getFileName();
 
         removeAllQuickScriptActionListenersFrom(m_quickMenus[index]);
         m_quickMenus[index].addActionListener(new QuickScriptActionListener(index));
@@ -289,7 +290,7 @@ public class ScriptingWindow {
         logResult(StringUtil.format(OStrings.getString("SCW_QUICK_RUN"), (index + 1)));
         ScriptItem scriptFile = new ScriptItem(new File(m_scriptsDirectory, m_quickScripts[index]));
 
-        executeScriptFile(scriptFile);
+        executeScript(scriptFile);
     }
 
     private void addRunShortcutToOmegaT() {
@@ -333,7 +334,7 @@ public class ScriptingWindow {
                 ListModel<ScriptItem> lm = m_scriptList.getModel();
                 int index = m_scriptList.locationToIndex(e.getPoint());
                 if (index > -1) {
-                    m_scriptList.setToolTipText(lm.getElementAt(index).getFile().getName());
+                    m_scriptList.setToolTipText(lm.getElementAt(index).getFileName());
                 }
             }
 
@@ -402,7 +403,7 @@ public class ScriptingWindow {
 
         public void updateQuickScript(ScriptItem scriptItem) {
             Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey,
-                    scriptItem.getFile().getName());
+                    scriptItem.getFileName());
             m_quickScriptButtons[index].setToolTipText(scriptItem.getToolTip());
             m_quickScriptButtons[index].setText("<" + scriptKey + ">");
 
@@ -506,33 +507,36 @@ public class ScriptingWindow {
     private void runScript() {
         m_txtResult.setText("");
 
-        if (m_currentScriptItem == null) {
-            logResult(OStrings.getString("SCW_NO_SCRIPT_SELECTED"));
-            return;
-        }
-
-        String scriptSource = "<EDITOR>";
-        if (m_currentScriptItem.getFile() != null) {
+        // Execute a script with a corresponding source file. If the source has
+        // changed, we use the text area as source code, but still consider the
+        // script file as the "base" (for determining the engine to use and to
+        // fetch the localized resources).
+        if (m_currentScriptItem != null && m_currentScriptItem.getFile() != null) {
             if (!m_currentScriptItem.getFile().canRead()) {
                 logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
                 return;
             }
-            scriptSource = m_currentScriptItem.getFile().getAbsolutePath();
-        }
 
-        String scriptString = m_txtScriptEditor.getTextArea().getText();
-        if (scriptString.trim().isEmpty()) {
-            try {
-                scriptString = m_currentScriptItem.getText();
-                m_txtScriptEditor.getTextArea().setText(scriptString);
-            } catch (IOException e) {
-                e.printStackTrace();
+            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"),
+                    m_currentScriptItem.getFile().getAbsolutePath()));
+
+            String scriptString = m_txtScriptEditor.getTextArea().getText();
+            if (scriptString.trim().isEmpty()) {
+                try {
+                    scriptString = m_currentScriptItem.getText();
+                    m_txtScriptEditor.getTextArea().setText(scriptString);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+
+            executeScript(m_currentScriptItem);
+        } else {
+            // No file is found for this script, it is executed as standalone.
+            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), ScriptItem.EDITOR_SCRIPT));
+            executeScript(new ScriptItem(m_txtScriptEditor.getTextArea().getText()));
         }
 
-        logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), scriptSource));
-
-        executeScript(scriptString, m_currentScriptItem);
     }
 
     private class ScriptWorker extends SwingWorker<String, Void> {
@@ -571,50 +575,59 @@ public class ScriptingWindow {
         }
     }
 
-    public void executeScript(String scriptString, ScriptItem scriptItem) {
-        cancelScriptQueue();
-        ScriptWorker worker = createScriptWorker(scriptString, scriptItem, Collections.emptyMap());
-        currentScriptWorker = worker;
-        worker.execute();
+    public void executeScript(ScriptItem scriptItem) {
+        executeScript(scriptItem, Collections.emptyMap());
     }
 
-    public void executeScriptFile(ScriptItem scriptItem) {
-        executeScriptFile(scriptItem, Collections.emptyMap());
+    public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings) {
+        executeScript(scriptItem, bindings, true);
     }
 
-    public void executeScriptFile(ScriptItem scriptItem, Map<String, Object> additionalBindings) {
-        cancelScriptQueue();
-        try {
-            String scriptString = scriptItem.getText();
-            ScriptWorker worker = createScriptWorker(scriptString, scriptItem, additionalBindings);
-            currentScriptWorker = worker;
-            worker.execute();
-        } catch (IOException e) {
-            // TODO: Do we really want to handle the exception here, like this?
-            // This method can be called in instances when the Scripting Window
-            // is not visible, so it might make more sense to let the caller
-            // handle the exception.
-            logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_LOAD_ERROR"), scriptItem.getFile()), e);
+    public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings, boolean cancelQueue) {
+        executeScripts(Arrays.asList(scriptItem), bindings, cancelQueue);
+    }
+
+    /**
+     * Execute scripts sequentially to make sure they don't interrupt each
+     * other.
+     * 
+     * @param scriptItems
+     *            List of script to execute.
+     * @param bindings
+     *            Additional bindings to pass to the executed script.
+     * @param cancelQueue
+     *            If true, the run queue is cleared before running the scripts.
+     */
+    public void executeScripts(final List<ScriptItem> scriptItems, final Map<String, Object> bindings,
+            boolean cancelQueue) {
+        if (cancelQueue) {
+            cancelScriptQueue();
         }
-    }
 
-
-    /** Execute scripts sequentially to make sure they don't interrupt each other. */
-    public void executeScriptFiles(final ArrayList<ScriptItem> scriptItems, final Map<String, Object> bindings) {
         for (ScriptItem scriptItem : scriptItems) {
             try {
                 String scriptString = scriptItem.getText();
                 queuedWorkers.add(createScriptWorker(scriptString, scriptItem, bindings));
             } catch (IOException e) {
-                // TODO: Do we really want to handle the exception here, like this?
-                // This method can be called in instances when the Scripting Window
-                // is not visible, so it might make more sense to let the caller
-                // handle the exception.
-                logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_LOAD_ERROR"), scriptItem.getFile()), e);
-            };
+                // TODO: Do we really want to handle the exception here, like
+                // this?
+                // This method can be called in instances when the Scripting
+                // Window is not visible, so it might make more sense to let the
+                // caller handle the exception.
+                logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_LOAD_ERROR"),
+                        scriptItem.getFileName()), e);
+            }
         }
 
         executeScriptWorkers();
+    }
+
+    public void executeScripts(final List<ScriptItem> scriptItems) {
+        executeScripts(scriptItems, Collections.emptyMap());
+    }
+
+    public void executeScripts(final List<ScriptItem> scriptItems, final Map<String, Object> bindings) {
+        executeScripts(scriptItems, bindings, false);
     }
 
     private void executeScriptWorkers() {
@@ -779,7 +792,7 @@ public class ScriptingWindow {
         try {
             m_txtScriptEditor
                     .setHighlighting(FilenameUtils
-                            .getExtension(m_currentScriptItem.getFile().getName().toLowerCase(Locale.ENGLISH)));
+                            .getExtension(m_currentScriptItem.getFileName().toLowerCase(Locale.ENGLISH)));
             m_txtScriptEditor.getTextArea().setText(m_currentScriptItem.getText());
             m_txtScriptEditor.getTextArea().setCaretPosition(0);
         } catch (IOException ex) {
@@ -817,6 +830,7 @@ public class ScriptingWindow {
     private class NewScriptAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             m_currentScriptItem = null;
+            m_scriptList.clearSelection();
             // TODO Check if the current script needs saving before clearing the
             // editor.
             m_txtScriptEditor.getTextArea().setText("");
@@ -828,10 +842,6 @@ public class ScriptingWindow {
 
     private class RunScriptAction  implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
-            if (m_currentScriptItem == null) {
-                m_currentScriptItem = new ScriptItem(null);
-            }
             runScript();
         }
     }
@@ -1026,7 +1036,7 @@ public class ScriptingWindow {
 
                 if (si != null) {
                     Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey(i),
-                            si.getFile().getName());
+                            si.getFileName());
                     new QuickScriptUpdater(i).updateQuickScript(si);
                     updateQuickScripts();
                 }

@@ -119,7 +119,7 @@ public final class ScriptRunner {
         bindings.put(VAR_RESOURCES, item.getResourceBundle());
         String extension = DEFAULT_SCRIPT;
         if (item.getFile() != null) {
-            extension = FilenameUtils.getExtension(item.getFile().getName());
+            extension = FilenameUtils.getExtension(item.getFileName());
         }
         ScriptEngine engine = MANAGER.getEngineByExtension(extension);
         if (engine == null) {

@@ -66,7 +66,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
         mSource = Optional.of(scriptSource);
         mFile = Optional.empty();
     }
-    
+
     public ScriptItem(File scriptFile) {
         mFile = Optional.of(scriptFile);
         mSource = Optional.empty();
@@ -147,7 +147,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
 
         return EDITOR_SCRIPT;
     }
-    
+
     public File getFile() {
         return mFile.orElse(null);
     }
@@ -241,7 +241,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
     /** File containing the sources of the script. */
     private final Optional<File> mFile;
 
-    /** If no file is present, the source is provided in this field (it is assumed to be in the 
+    /** If no file is present, the source is provided in this field (it is assumed to be in the
      * language ScriptRunner.DEFAULT_SCRIPT (Groovy).
      */
     private final Optional<String> mSource;

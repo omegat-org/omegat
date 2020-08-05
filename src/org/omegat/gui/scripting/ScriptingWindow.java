@@ -590,7 +590,7 @@ public class ScriptingWindow {
     /**
      * Execute scripts sequentially to make sure they don't interrupt each
      * other.
-     * 
+     *
      * @param scriptItems
      *            List of script to execute.
      * @param bindings

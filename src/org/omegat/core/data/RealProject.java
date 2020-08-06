@@ -344,7 +344,7 @@ public class RealProject implements IProject {
                     Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause());
                     setOfflineMode();
                 }
-                remoteRepositoryProvider.copyFilesFromRepoToProject("");
+                remoteRepositoryProvider.copyFilesFromReposToProject("");
 
                 // After adding filters.xml and segmentation.conf, we must reload them again
                 config.loadProjectFilters();
@@ -657,7 +657,7 @@ public class RealProject implements IProject {
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
                 remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
-                remoteRepositoryProvider.copyFilesFromProjectToRepo(config.getTargetDir().getUnderRoot(), null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
@@ -1893,7 +1893,7 @@ public class RealProject implements IProject {
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_START");
                 remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
-                remoteRepositoryProvider.copyFilesFromProjectToRepo(config.getSourceDir().getUnderRoot(), null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getSourceDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getSourceDir().getUnderRoot(), "Commit source files");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_DONE");
             } catch (Exception e) {

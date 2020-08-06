@@ -255,7 +255,7 @@ public class RemoteRepositoryProvider {
      * @param localPath
      *            directory name or file name
      */
-    public void copyFilesFromRepoToProject(String localPath) throws Exception {
+    public void copyFilesFromReposToProject(String localPath) throws Exception {
         String[] myForceExcludes = "".equals(localPath) ? forceExcludes : new String[]{};
         for (Mapping m : getMappings(localPath, myForceExcludes)) {
             m.copyFromRepoToProject();
@@ -271,7 +271,7 @@ public class RemoteRepositoryProvider {
      *            not null if EOL conversion required. EOL will be converted to repository-specific for
      *            existing files, and to platform-specific for new files
      */
-    public void copyFilesFromProjectToRepo(String localPath, String eolConversionCharset) throws Exception {
+    public void copyFilesFromProjectToRepos(String localPath, String eolConversionCharset) throws Exception {
         for (Mapping m : getMappings(localPath)) {
             m.copyFromProjectToRepo(eolConversionCharset);
         }

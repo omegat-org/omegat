@@ -209,7 +209,7 @@ public final class RebaseAndCommit {
         } else if (fileChangedLocally) {
             // new file already saved - need to commit
             String comment = rebaser.getCommentForCommit();
-            provider.copyFilesFromProjectToRepo(path, rebaser.getFileCharset(localFile));
+            provider.copyFilesFromProjectToRepos(path, rebaser.getFileCharset(localFile));
             String newVersion = provider.commitFileAfterVersion(path, comment, headVersion, null);
             if (newVersion != null) {
                 // file was committed good
@@ -227,7 +227,7 @@ public final class RebaseAndCommit {
             // there was no changes
             return null;
         }
-        provider.copyFilesFromProjectToRepo(prep.path, prep.charset);
+        provider.copyFilesFromProjectToRepos(prep.path, prep.charset);
         String newVersion = provider.commitFileAfterVersion(prep.path, prep.commitComment, prep.versionHead,
                 possibleHeadVersion);
         if (newVersion != null) {

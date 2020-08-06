@@ -341,7 +341,7 @@ public final class ProjectUICommands {
                 for (String file : new String[] { OConsts.FILE_PROJECT,
                         OConsts.DEFAULT_INTERNAL + '/' + FilterMaster.FILE_FILTERS,
                         OConsts.DEFAULT_INTERNAL + '/' + SRX.CONF_SENTSEG }) {
-                    remoteRepositoryProvider.copyFilesFromRepoToProject(file);
+                    remoteRepositoryProvider.copyFilesFromReposToProject(file);
                 }
 
                 ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRoot);
@@ -485,7 +485,7 @@ public final class ProjectUICommands {
                                 remoteRepositoryProvider.switchToVersionAndPropagateDeletes(OConsts.FILE_PROJECT, null);
                                 restoreOnFail = FileUtil.backupFile(projectFile);
                                 // Overwrite omegat.project
-                                remoteRepositoryProvider.copyFilesFromRepoToProject(OConsts.FILE_PROJECT);
+                                remoteRepositoryProvider.copyFilesFromReposToProject(OConsts.FILE_PROJECT);
                                 // Reload project properties
                                 props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
                                 if (props.getRepositories() == null) { // We have a 3.6 style project,

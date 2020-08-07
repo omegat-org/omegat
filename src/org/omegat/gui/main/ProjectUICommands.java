@@ -325,7 +325,7 @@ public final class ProjectUICommands {
 
                 // retrieve omegat.project
                 projectRoot = dir;
-                List<RepositoryDefinition> repos = new ArrayList<RepositoryDefinition>();
+                List<RepositoryDefinition> repos = new ArrayList<>();
                 RepositoryDefinition repo = new RepositoryDefinition();
                 repos.add(repo);
                 repo.setType(dialog.getRepoType());
@@ -589,7 +589,7 @@ public final class ProjectUICommands {
         final ProjectProperties props = Core.getProject().getProjectProperties();
 
         new SwingWorker<Void, Void>() {
-            int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
+            final int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
             protected Void doInBackground() throws Exception {
                 IMainWindow mainWindow = Core.getMainWindow();
@@ -740,7 +740,7 @@ public final class ProjectUICommands {
         }
 
         new SwingWorker<Void, Void>() {
-            int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
+            final int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
             protected Void doInBackground() throws Exception {
                 Core.executeExclusively(true, () -> {
@@ -996,7 +996,7 @@ public final class ProjectUICommands {
         public boolean isCanceled() {
             return isCanceled;
         }
-    };
+    }
 
     /**
      * Imports the file/files/folder into project's source files.
@@ -1020,7 +1020,7 @@ public final class ProjectUICommands {
     public static void doWikiImport() {
         String remoteUrl = JOptionPane.showInputDialog(Core.getMainWindow().getApplicationFrame(),
                 OStrings.getString("TF_WIKI_IMPORT_PROMPT"),
-                OStrings.getString("TF_WIKI_IMPORT_TITLE"), JOptionPane.OK_CANCEL_OPTION);
+                OStrings.getString("TF_WIKI_IMPORT_TITLE"), JOptionPane.WARNING_MESSAGE);
         String projectsource = Core.getProject().getProjectProperties().getSourceRoot();
         if (remoteUrl == null || remoteUrl.trim().isEmpty()) {
             // [1762625] Only try to get MediaWiki page if a string has been entered

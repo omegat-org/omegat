@@ -31,11 +31,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runners.Parameterized;
 import org.omegat.core.data.ProjectProperties;
 
 import gen.core.project.RepositoryDefinition;
@@ -43,7 +45,10 @@ import gen.core.project.RepositoryMapping;
 
 public class RemoteRepositoryProviderTest {
     String V;
-    String VR;
+    String VR, VR2;
+
+    String repoUrlDir = "url";
+    String repoUrlDir2 = "otherurl";
 
     List<RepositoryDefinition> repos;
     List<String> files;
@@ -53,583 +58,233 @@ public class RemoteRepositoryProviderTest {
     List<String> copyTo = new ArrayList<>();
     int copyCheckedIndex;
 
+    // User can write mapping with or without leading and trailing directory separators.
+    // Lets test these variants, and test mappings to different levels of subdirectories
+    @Parameterized.Parameters(name= "{index}: remote subdir={0}, local path prefix={1}, remote path prefix={2}, local path postfix={3}, remote path postfix={4}")
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][] {
+                { "", "", "", "", ""}, { "", "/", "", "", "" }, { "", "", "/", "", "" }, { "", "", "", "/", "" }, { "", "", "", "", "/" }, { "remoteSubdir/", "", "", "", "" }, { "sub/subsub/","/", "", "", "" }, { "sub/subsub/", "", "/", "", "" }
+        });
+    }
+    String remoteSubdir;
+    String localMappingPrefix, remoteMappingPrefix, localMappingPostfix, remoteMappingPostfix;
+
+    public RemoteRepositoryProviderTest(String subdir, String localMappingPrefix, String remoteMappingPrefix, String localMappingPostfix, String remoteMappingPostfix) {
+        this.remoteSubdir= subdir;
+        this.localMappingPrefix = localMappingPrefix;
+        this.remoteMappingPrefix= remoteMappingPrefix;
+        this.localMappingPostfix = localMappingPostfix;
+        this.remoteMappingPostfix = remoteMappingPostfix;
+    }
+
+    void createRemoteRepoFiles() throws IOException {
+        createFile(VR + remoteSubdir + "omegat.project");
+        createFile(VR + remoteSubdir + ".git/gitstuff");
+        createFile(VR + remoteSubdir + "source/file1.txt");
+        createFile(VR + remoteSubdir + "source/file1.txt.bak");
+        createFile(VR + remoteSubdir + "source/subdir/file2.txt");
+        createFile(VR + remoteSubdir + "source/subdir/file2.txt.bak");
+        createFile(VR + remoteSubdir + "source/subdir/3.jpg");
+        createFile(VR + remoteSubdir + "source/subdir/4.png");
+        createFile(VR + remoteSubdir + "source/asubdir/subdir/3.jpg");
+        createFile(VR + remoteSubdir + "source/3.jpg");
+        createFile(VR + remoteSubdir + "source/4.png");
+        createFile(VR + remoteSubdir + "omegat/project_save.tmx");
+        createFile(VR + remoteSubdir + "glossary/sub/myglossary.txt");
+        createFile(VR2 + "otherprojectfile.txt");
+    }
+
+    void createLocalRepoFiles() throws IOException {
+        createFile(V + "omegat.project");
+        createFile(V + "source/file1.txt");
+        createFile(V + "source/file1.txt.bak");
+        createFile(V + "source/subdir/file2.txt");
+        createFile(V + "source/subdir/file2.txt.bak");
+        createFile(V + "source/subdir/3.jpg");
+        createFile(V + "source/subdir/4.png");
+        createFile(V + "source/asubdir/subdir/3.jpg");
+        createFile(V + "source/3.jpg");
+        createFile(V + "source/4.png");
+        createFile(V + "source/otherproject/file.txt");
+        createFile(V + "omegat/project_save.tmx");
+        createFile(V + "glossary/sub/myglossary.txt");
+    }
+
+    void map_normalRemoteRepoAndExtraRemoteRepoWithExcludesWithDirectorySeparatorPrefix() {
+        addRepo(localMappingPrefix+""+localMappingPostfix, repoUrlDir, remoteMappingPrefix+remoteSubdir+remoteMappingPostfix, "**/*.bak", "/*.png", "/subdir/3.jpg");
+        addRepo(localMappingPrefix+"source/otherproject", repoUrlDir2, remoteMappingPrefix+""+remoteMappingPostfix, "**/*.bak", "/*.png", "/subdir/3.jpg");
+    }
+
+    void map_normalRemoteRepoAndExtraremoteRepoWithExcludesWithoutDirectorySeparatorPrefix() {
+        addRepo(localMappingPrefix+""+localMappingPostfix, repoUrlDir, remoteMappingPrefix+remoteSubdir+remoteMappingPostfix, "**/*.bak", "*.png", "subdir/3.jpg");
+        addRepo(localMappingPrefix+"source/otherproject"+localMappingPostfix, repoUrlDir2, remoteMappingPrefix+""+remoteMappingPostfix, "**/*.bak", "*.png", "subdir/3.jpg");
+    }
+
+    void map_SingleFileRemoteRepo() {
+        addRepo(localMappingPrefix+"source/otherproject/file.txt"+localMappingPostfix, repoUrlDir2, remoteMappingPrefix+"otherprojectfile.txt"+remoteMappingPostfix);
+    }
+
+    @Test
+    public void testCopyFileFromReposToProject() throws Exception {
+        //test normal case when OmegaT downloads team project and only a few project files are copied (one at a time)
+        //omegat.project (forceExcludes) should not be filtered in this case!
+        createRemoteRepoFiles();
+        map_normalRemoteRepoAndExtraremoteRepoWithExcludesWithoutDirectorySeparatorPrefix();
+        provider.copyFilesFromReposToProject("omegat.project");
+        checkCopy(VR + remoteSubdir+"omegat.project", V + "omegat.project");
+        checkCopyEnd();
+    }
+
+    @Test
+    public void testCopyAllFromReposToProjectWithExcludes() throws Exception {
+        //test normal case when OmegaT syncs team project
+        //'**/*.bak' == all .bak, '*.png' == all png, 'subdir/3.jpg' == '*/subdir/3.jpg' filtered.
+        //When localPath="", then also forceExludes active!
+        createRemoteRepoFiles();
+        map_normalRemoteRepoAndExtraremoteRepoWithExcludesWithoutDirectorySeparatorPrefix();
+        provider.copyFilesFromReposToProject("");
+        checkCopy(VR + remoteSubdir + "glossary/sub/myglossary.txt", V + "glossary/sub/myglossary.txt");
+        checkCopy(VR + remoteSubdir + "source/3.jpg", V + "source/3.jpg");
+        checkCopy(VR + remoteSubdir + "source/file1.txt", V + "source/file1.txt");
+        checkCopy(VR + remoteSubdir + "source/subdir/file2.txt", V + "source/subdir/file2.txt");
+        checkCopy(VR2 + "otherprojectfile.txt", V + "source/otherproject/otherprojectfile.txt");
+        checkCopyEnd();
+    }
+
+    @Test
+    public void testCopyAllFromReposToProjectWithSExcludes() throws Exception {
+        //test normal case when OmegaT syncs team project
+        //'**/*.bak' == all .bak, '/*.png' == first level png, '/subdir/3.jpg' == '/subdir/3.jpg' filtered.
+        //When localPath="", then also forceExludes active!
+        createRemoteRepoFiles();
+        map_normalRemoteRepoAndExtraRemoteRepoWithExcludesWithDirectorySeparatorPrefix();
+        provider.copyFilesFromReposToProject("");
+        checkCopy(VR + remoteSubdir + "glossary/sub/myglossary.txt", V + "glossary/sub/myglossary.txt");
+        checkCopy(VR + remoteSubdir + "source/3.jpg", V + "source/3.jpg");
+        checkCopy(VR + remoteSubdir + "source/4.png", V + "source/4.png");
+        checkCopy(VR + remoteSubdir + "source/asubdir/subdir/3.jpg", V + "source/asubdir/subdir/3.jpg");
+        checkCopy(VR + remoteSubdir + "source/file1.txt", V + "source/file1.txt");
+        checkCopy(VR + remoteSubdir + "source/subdir/3.jpg", V + "source/subdir/3.jpg"); //not filtered since /source is not matched
+        checkCopy(VR + remoteSubdir + "source/subdir/4.png", V + "source/subdir/4.png");
+        checkCopy(VR + remoteSubdir + "source/subdir/file2.txt", V + "source/subdir/file2.txt");
+        checkCopy(VR2 + "otherprojectfile.txt", V + "source/otherproject/otherprojectfile.txt");
+        checkCopyEnd();
+    }
+
+    @Test
+    public void testCopyRenamedFileFromRepoToProject() throws Exception {
+        createLocalRepoFiles();
+        map_SingleFileRemoteRepo();
+        provider.copyFilesFromReposToProject("");
+        checkCopy(VR2 + "otherprojectfile.txt", V + "source/otherproject/file.txt");
+        checkCopyEnd();
+    }
+
+    //usages of copyFilesFromProjectToRepos in OmegaT:
+    //example1: compileProjectAndCommit: copy target files to project; can be null if target outside project root, but in that case the option to commit is disabled.
+    //example2: commitSourceFiles: copy source files to project; can be null if sources outside project root, but in that case the option to commit is disabled.
+    //example3: project_save.tmx (rebase and commit project)+ EOL conversion
+    //example4: project_save.tmx or glossaries (commitPrepared)
+    //example5: IntegrationTest preparing remote repo: omegat.project and omegat/project_save.tmx
+
+    @Test
+    public void testCopyDirFromProjectToReposWithExcludes() throws Exception {
+        createLocalRepoFiles();
+        map_normalRemoteRepoAndExtraremoteRepoWithExcludesWithoutDirectorySeparatorPrefix();
+        provider.copyFilesFromProjectToRepos("source", null);
+        checkCopy(V + "source/3.jpg", VR + remoteSubdir+"source/3.jpg");
+        checkCopy(V + "source/file1.txt", VR + remoteSubdir+"source/file1.txt");
+        //since source/otherproject/file.txt matches both mappings, it is copied to both projects!
+        checkCopy(V + "source/otherproject/file.txt", VR + remoteSubdir + "source/otherproject/file.txt");
+        checkCopy(V + "source/subdir/file2.txt", VR + remoteSubdir+"source/subdir/file2.txt");
+        checkCopy(V + "source/otherproject/file.txt", VR2 + "file.txt");
+        checkCopyEnd();
+    }
+
+    @Test
+    public void testCopyDirFromProjectToReposWithExcludesWithDirectorySeparatorPrefix() throws Exception {
+        createLocalRepoFiles();
+        map_normalRemoteRepoAndExtraRemoteRepoWithExcludesWithDirectorySeparatorPrefix();
+        provider.copyFilesFromProjectToRepos("source", null);
+        checkCopy(V + "source/3.jpg", VR + remoteSubdir+"source/3.jpg");
+        checkCopy(V + "source/4.png", VR + remoteSubdir + "source/4.png");
+        checkCopy(V + "source/asubdir/subdir/3.jpg", VR + remoteSubdir + "source/asubdir/subdir/3.jpg");
+        checkCopy(V + "source/file1.txt", VR + remoteSubdir+"source/file1.txt");
+        //since source/otherproject/file.txt matches both mappings, it is copied to both projects!
+        checkCopy(V + "source/otherproject/file.txt", VR + remoteSubdir + "source/otherproject/file.txt");
+        checkCopy(V + "source/subdir/3.jpg", VR + remoteSubdir + "source/subdir/3.jpg"); //not filtered since /source is not matched
+        checkCopy(V + "source/subdir/4.png", VR + remoteSubdir + "source/subdir/4.png");
+        checkCopy(V + "source/subdir/file2.txt", VR + remoteSubdir+"source/subdir/file2.txt");
+        checkCopy(V + "source/otherproject/file.txt", VR2 + "file.txt");
+        checkCopyEnd();
+    }
+
+    @Test
+    public void testCopyFileFromProjectToRepos() throws Exception {
+        createLocalRepoFiles();
+        map_normalRemoteRepoAndExtraremoteRepoWithExcludesWithoutDirectorySeparatorPrefix();
+        provider.copyFilesFromProjectToRepos("omegat.project", null);
+        checkCopy(V + "omegat.project", VR + remoteSubdir+"omegat.project");
+        checkCopyEnd();
+    }
+
+    @Test
+    public void testCopySubFileFromProjectToRepos() throws Exception {
+        createLocalRepoFiles();
+        map_normalRemoteRepoAndExtraremoteRepoWithExcludesWithoutDirectorySeparatorPrefix();
+        provider.copyFilesFromProjectToRepos("omegat/project_save.tmx", null);
+        checkCopy(V + "omegat/project_save.tmx", VR + remoteSubdir+"omegat/project_save.tmx");
+        checkCopyEnd();
+    }
+
+    @Test
+    public void testCopyRenamedFileFromProjectToRepos() throws Exception {
+        createLocalRepoFiles();
+        map_SingleFileRemoteRepo();
+        provider.copyFilesFromProjectToRepos("", null);
+        checkCopy(V + "source/otherproject/file.txt", VR2 + "otherprojectfile.txt");
+        checkCopyEnd();
+    }
+
     @Before
     public final void setUp() throws Exception {
         File dir = new File("build/testdata/repotest");
         FileUtils.deleteDirectory(dir);
         dir.mkdirs();
         V = dir.getAbsolutePath() + "/";
-        VR = dir.getAbsolutePath() + "/.repositories/url/";
+        VR = dir.getAbsolutePath() + "/.repositories/"+repoUrlDir+"/";
+        VR2 = dir.getAbsolutePath() + "/.repositories/"+repoUrlDir2+"/"; //every repository, whether file, http, git or svn, gets its own directory.
 
         repos = new ArrayList<>();
-        provider = new VirtualRemoteRepositoryProvider(repos);
+        provider = new VirtualRemoteRepositoryProvider(repos, new ProjectProperties(new File(V)));
         files = new ArrayList<>();
     }
 
-    void filesLocal() throws IOException {
-        addFile(V + "dir/localfile");
-        addFile(V + "dir/local/1.txt");
-        addFile(V + "dir/local/1.txt.bak");
-        addFile(V + "dir/local/1.jpg");
-        addFile(V + "dir/local/2.xml");
-        addFile(V + "dir/local/subdir/3.png");
-        addFile(V + "otherdir/local/4.file");
-    }
-
-    void filesRemote() throws IOException {
-        addFile(VR + "remotefile");
-        addFile(VR + "remote/1.txt");
-        addFile(VR + "remote/1.txt.bak");
-        addFile(VR + "remote/1.jpg");
-        addFile(VR + "remote/2.xml");
-        addFile(VR + "remote/subdir/3.png");
-        addFile(VR + "otherremote/4.file");
-    }
-
-    void mapping1() {
-        addRepo("dir/localfile", "remotefile");
-        // bak should be excluded, but png - no
-        addRepo("dir/local/", "remote/", "/*.bak", "/*.png", "/1.jpg");
-    }
-
-    void mapping1a() {
-        addRepo("/dir/localfile", "/remotefile");
-        // bak should be excluded, but png - no
-        addRepo("/dir/local", "/remote", "*.bak", "*.png", "1.jpg");
-    }
-
-    void mapping2() {
-        addRepo("", "", "**/*.bak", "/*.png", "/dir/local/1.jpg", "/remote/1.jpg");
-    }
-
-    void mapping2a() {
-        addRepo("/", "/", "**/*.bak", "*.png", "dir/local/1.jpg", "remote/1.jpg");
-    }
-
-    void mapping3() {
-        addRepo("dir/", "", "**/*.bak", "/*.png", "/local/1.jpg", "/remote/1.jpg");
-    }
-
-    void mapping3a() {
-        addRepo("/dir", "/", "**/*.bak", "*.png", "local/1.jpg/", "remote/1.jpg/");
-    }
-
-    void mapping4() {
-        addRepo("", "remote/", "**/*.bak", "/*.png", "/dir/local/1.jpg", "/1.jpg");
-    }
-
-    void mapping4a() {
-        addRepo("/", "/remote", "**/*.bak", "*.png", "dir/local/1.jpg", "1.jpg");
-    }
-
-    @Test
-    public void testNames() throws Exception {
-        provider.copyFilesFromReposToProject("/dir");
-        provider.copyFilesFromReposToProject("dir/");
-        provider.copyFilesFromReposToProject("file");
-        provider.copyFilesFromProjectToRepos("/dir", null);
-        provider.copyFilesFromProjectToRepos("dir/", null);
-        provider.copyFilesFromProjectToRepos("file", null);
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject11() throws Exception {
-        filesRemote();
-        mapping1();
-        provider.copyFilesFromReposToProject("dir/localfile");
-        checkCopy(VR + "remotefile", V + "dir/localfile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject11a() throws Exception {
-        filesRemote();
-        mapping1a();
-        provider.copyFilesFromReposToProject("/dir/localfile");
-        checkCopy(VR + "remotefile", V + "dir/localfile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject12() throws Exception {
-        filesRemote();
-        mapping1();
-        provider.copyFilesFromReposToProject("dir/local/1.txt");
-        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject12a() throws Exception {
-        filesRemote();
-        mapping1a();
-        provider.copyFilesFromReposToProject("/dir/local/1.txt");
-        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject13() throws Exception {
-        filesRemote();
-        mapping1();
-        provider.copyFilesFromReposToProject("dir/");
-        checkCopy(VR + "remotefile", V + "dir/localfile");
-        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
-        checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject13a() throws Exception {
-        filesRemote();
-        mapping1a();
-        provider.copyFilesFromReposToProject("/dir");
-        checkCopy(VR + "remotefile", V + "dir/localfile");
-        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
-        // Unlike 13, this time *.png on all levels is excluded
-        // checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject14() throws Exception {
-        filesRemote();
-        mapping1();
-        provider.copyFilesFromReposToProject("dir/local/subdir/");
-        checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject14a() throws Exception {
-        filesRemote();
-        mapping1a();
-        provider.copyFilesFromReposToProject("/dir/local/subdir");
-        // Unlike 14, this time *.png on all levels is excluded
-        // checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject15() throws Exception {
-        filesRemote();
-        mapping1();
-        provider.copyFilesFromReposToProject("dir/lo");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject15a() throws Exception {
-        filesRemote();
-        mapping1a();
-        provider.copyFilesFromReposToProject("/dir/lo/");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject16() throws Exception {
-        filesRemote();
-        mapping1();
-        provider.copyFilesFromReposToProject("dir/lo/");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject16a() throws Exception {
-        filesRemote();
-        mapping1a();
-        provider.copyFilesFromReposToProject("/dir/lo");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject17() throws Exception {
-        filesRemote();
-        mapping1();
-        provider.copyFilesFromReposToProject("");
-        checkCopy(VR + "remotefile", V + "dir/localfile");
-        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
-        checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject17a() throws Exception {
-        filesRemote();
-        mapping1a();
-        provider.copyFilesFromReposToProject("/");
-        checkCopy(VR + "remotefile", V + "dir/localfile");
-        checkCopy(VR + "remote/1.txt", V + "dir/local/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "dir/local/2.xml");
-        // Unlike 14, this time *.png on all levels is excluded
-        // checkCopy(VR + "remote/subdir/3.png", V + "dir/local/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject21() throws Exception {
-        filesRemote();
-        mapping2();
-        provider.copyFilesFromReposToProject("");
-        checkCopy(VR + "otherremote/4.file", V + "otherremote/4.file");
-        checkCopy(VR + "remote/1.txt", V + "remote/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "remote/2.xml");
-        checkCopy(VR + "remote/subdir/3.png", V + "remote/subdir/3.png");
-        checkCopy(VR + "remotefile", V + "remotefile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject21a() throws Exception {
-        filesRemote();
-        mapping2a();
-        provider.copyFilesFromReposToProject("/");
-        checkCopy(VR + "otherremote/4.file", V + "otherremote/4.file");
-        checkCopy(VR + "remote/1.txt", V + "remote/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "remote/2.xml");
-        // Unlike 21, this time *.png on all levels is excluded
-        // checkCopy(VR + "remote/subdir/3.png", V + "remote/subdir/3.png");
-        checkCopy(VR + "remotefile", V + "remotefile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject22() throws Exception {
-        filesRemote();
-        mapping2();
-        provider.copyFilesFromReposToProject("otherremote/4.file");
-        checkCopy(VR + "otherremote/4.file", V + "otherremote/4.file");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject22a() throws Exception {
-        filesRemote();
-        mapping2a();
-        provider.copyFilesFromReposToProject("/otherremote/4.file/");
-        checkCopy(VR + "otherremote/4.file", V + "otherremote/4.file");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject31() throws Exception {
-        filesRemote();
-        mapping3();
-        provider.copyFilesFromReposToProject("");
-        checkCopy(VR + "otherremote/4.file", V + "dir/otherremote/4.file");
-        checkCopy(VR + "remote/1.txt", V + "dir/remote/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "dir/remote/2.xml");
-        checkCopy(VR + "remote/subdir/3.png", V + "dir/remote/subdir/3.png");
-        checkCopy(VR + "remotefile", V + "dir/remotefile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject31a() throws Exception {
-        filesRemote();
-        mapping3a();
-        provider.copyFilesFromReposToProject("");
-        checkCopy(VR + "otherremote/4.file", V + "dir/otherremote/4.file");
-        checkCopy(VR + "remote/1.txt", V + "dir/remote/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "dir/remote/2.xml");
-        // checkCopy(VR + "remote/subdir/3.png", V + "dir/remote/subdir/3.png");
-        checkCopy(VR + "remotefile", V + "dir/remotefile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject41() throws Exception {
-        filesRemote();
-        mapping4();
-        provider.copyFilesFromReposToProject("");
-        checkCopy(VR + "remote/1.txt", V + "1.txt");
-        checkCopy(VR + "remote/2.xml", V + "2.xml");
-        checkCopy(VR + "remote/subdir/3.png", V + "subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject41a() throws Exception {
-        filesRemote();
-        mapping4a();
-        provider.copyFilesFromReposToProject("/");
-        checkCopy(VR + "remote/1.txt", V + "1.txt");
-        checkCopy(VR + "remote/2.xml", V + "2.xml");
-        // checkCopy(VR + "remote/subdir/3.png", V + "subdir/3.png");
-        checkCopyEnd();
-    }
-
-/**    @Test
-    public void testCopyFilesFromRepoToProject51() throws Exception {
-        filesRemote();
-        mapping4();
-        provider.copyFilesFromReposToProject("", "/1.txt");
-        checkCopy(VR + "remote/2.xml", V + "2.xml");
-        checkCopy(VR + "remote/subdir/3.png", V + "subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromRepoToProject51a() throws Exception {
-        filesRemote();
-        mapping4a();
-        provider.copyFilesFromReposToProject("/", "1.txt/");
-        checkCopy(VR + "remote/2.xml", V + "2.xml");
-        // checkCopy(VR + "remote/subdir/3.png", V + "subdir/3.png");
-        checkCopyEnd();
-    }
-*/
-
-    
-    @Test
-    public void testCopyFilesFromProjectToRepo11() throws Exception {
-        filesLocal();
-        mapping1();
-        provider.copyFilesFromProjectToRepos("dir/localfile", null);
-        checkCopy(V + "dir/localfile", VR + "remotefile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo11a() throws Exception {
-        filesLocal();
-        mapping1a();
-        provider.copyFilesFromProjectToRepos("/dir/localfile/", null);
-        checkCopy(V + "dir/localfile", VR + "remotefile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo12() throws Exception {
-        filesLocal();
-        mapping1();
-        provider.copyFilesFromProjectToRepos("dir/local/1.txt", null);
-        checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo12a() throws Exception {
-        filesLocal();
-        mapping1a();
-        provider.copyFilesFromProjectToRepos("/dir/local/1.txt/", null);
-        checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo13() throws Exception {
-        filesLocal();
-        mapping1();
-        provider.copyFilesFromProjectToRepos("dir/", null);
-        checkCopy(V + "dir/localfile", VR + "remotefile");
-        checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "remote/2.xml");
-        checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo13a() throws Exception {
-        filesLocal();
-        mapping1a();
-        provider.copyFilesFromProjectToRepos("/dir", null);
-        checkCopy(V + "dir/localfile", VR + "remotefile");
-        checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "remote/2.xml");
-        // checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo14() throws Exception {
-        filesLocal();
-        mapping1();
-        provider.copyFilesFromProjectToRepos("dir/local/subdir/", null);
-        checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo14a() throws Exception {
-        filesLocal();
-        mapping1a();
-        provider.copyFilesFromProjectToRepos("/dir/local/subdir", null);
-        // checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo15() throws Exception {
-        filesLocal();
-        mapping1();
-        provider.copyFilesFromProjectToRepos("dir/lo", null);
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo15a() throws Exception {
-        filesLocal();
-        mapping1a();
-        provider.copyFilesFromProjectToRepos("/dir/lo/", null);
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo16() throws Exception {
-        filesLocal();
-        mapping1();
-        provider.copyFilesFromProjectToRepos("dir/lo/", null);
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo16a() throws Exception {
-        filesLocal();
-        mapping1a();
-        provider.copyFilesFromProjectToRepos("/dir/lo", null);
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo17() throws Exception {
-        filesLocal();
-        mapping1();
-        provider.copyFilesFromProjectToRepos("", null);
-        checkCopy(V + "dir/localfile", VR + "remotefile");
-        checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "remote/2.xml");
-        checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo17a() throws Exception {
-        filesLocal();
-        mapping1a();
-        provider.copyFilesFromProjectToRepos("/", null);
-        checkCopy(V + "dir/localfile", VR + "remotefile");
-        checkCopy(V + "dir/local/1.txt", VR + "remote/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "remote/2.xml");
-        // checkCopy(V + "dir/local/subdir/3.png", VR + "remote/subdir/3.png");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo21() throws Exception {
-        filesLocal();
-        mapping2();
-        provider.copyFilesFromProjectToRepos("", null);
-        checkCopy(V + "dir/local/1.txt", VR + "dir/local/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "dir/local/2.xml");
-        checkCopy(V + "dir/local/subdir/3.png", VR + "dir/local/subdir/3.png");
-        checkCopy(V + "dir/localfile", VR + "dir/localfile");
-        checkCopy(V + "otherdir/local/4.file", VR + "otherdir/local/4.file");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo21a() throws Exception {
-        filesLocal();
-        mapping2a();
-        provider.copyFilesFromProjectToRepos("/", null);
-        checkCopy(V + "dir/local/1.txt", VR + "dir/local/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "dir/local/2.xml");
-        //checkCopy(V + "dir/local/subdir/3.png", VR + "dir/local/subdir/3.png");
-        checkCopy(V + "dir/localfile", VR + "dir/localfile");
-        checkCopy(V + "otherdir/local/4.file", VR + "otherdir/local/4.file");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo22() throws Exception {
-        filesLocal();
-        mapping2();
-        provider.copyFilesFromProjectToRepos("dir/localfile", null);
-        checkCopy(V + "dir/localfile", VR + "dir/localfile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo22a() throws Exception {
-        filesLocal();
-        mapping2a();
-        provider.copyFilesFromProjectToRepos("/dir/localfile/", null);
-        checkCopy(V + "dir/localfile", VR + "dir/localfile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo31() throws Exception {
-        filesLocal();
-        mapping3();
-        provider.copyFilesFromProjectToRepos("", null);
-        checkCopy(V + "dir/local/1.txt", VR + "local/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "local/2.xml");
-        checkCopy(V + "dir/local/subdir/3.png", VR + "local/subdir/3.png");
-        checkCopy(V + "dir/localfile", VR + "localfile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo31a() throws Exception {
-        filesLocal();
-        mapping3a();
-        provider.copyFilesFromProjectToRepos("/", null);
-        checkCopy(V + "dir/local/1.txt", VR + "local/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "local/2.xml");
-        // checkCopy(V + "dir/local/subdir/3.png", VR + "local/subdir/3.png");
-        checkCopy(V + "dir/localfile", VR + "localfile");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo41() throws Exception {
-        filesLocal();
-        mapping4();
-        provider.copyFilesFromProjectToRepos("", null);
-        checkCopy(V + "dir/local/1.txt", VR + "remote/dir/local/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "remote/dir/local/2.xml");
-        checkCopy(V + "dir/local/subdir/3.png", VR + "remote/dir/local/subdir/3.png");
-        checkCopy(V + "dir/localfile", VR + "remote/dir/localfile");
-        checkCopy(V + "otherdir/local/4.file", VR + "remote/otherdir/local/4.file");
-        checkCopyEnd();
-    }
-
-    @Test
-    public void testCopyFilesFromProjectToRepo41a() throws Exception {
-        filesLocal();
-        mapping4a();
-        provider.copyFilesFromProjectToRepos("/", null);
-        checkCopy(V + "dir/local/1.txt", VR + "remote/dir/local/1.txt");
-        checkCopy(V + "dir/local/2.xml", VR + "remote/dir/local/2.xml");
-        // checkCopy(V + "dir/local/subdir/3.png", VR + "remote/dir/local/subdir/3.png");
-        checkCopy(V + "dir/localfile", VR + "remote/dir/localfile");
-        checkCopy(V + "otherdir/local/4.file", VR + "remote/otherdir/local/4.file");
-        checkCopyEnd();
-    }
-
-    void addRepo(String localPath, String repoPath, String... excludes) {
+    void addRepo(String localPath, String repoUrlDir, String repoPath, String... excludes) {
         RepositoryMapping m = new RepositoryMapping();
         m.setLocal(localPath);
         m.setRepository(repoPath);
         m.getExcludes().addAll(Arrays.asList(excludes));
         RepositoryDefinition def = new RepositoryDefinition();
-        def.setUrl("url");
+        def.setUrl(repoUrlDir);
         def.getMapping().add(m);
         repos.add(def);
         provider.repositories.add(null);
     }
 
-    void addFile(String path) throws IOException {
+    void createFile(String path) throws IOException {
         File f = new File(path);
         f.getParentFile().mkdirs();
         f.createNewFile();
     }
 
+    /**
+     * Asserts if the given from -> to files are present on index copyCheckedIndex in the copy-lists that were filled by
+     * our VirtualRemoteRepositoryProvider (so we're asserting if the copy-commands are called, not if the actual copy
+     * has been performed, but that is almost the same.) and increases the index afterwards.
+     * @param from full path/filename of source file
+     * @param to full path/filename of target file
+     */
     void checkCopy(String from, String to) {
         assertEquals("Wrong copy file from2", from.replace('\\', '/'),
                 copyFrom.get(copyCheckedIndex).replace('\\', '/'));
@@ -638,14 +293,21 @@ public class RemoteRepositoryProviderTest {
         copyCheckedIndex++;
     }
 
+    /**
+     * Asserts that there are no other files copied than the ones that we tested with checkCopy().
+     */
     void checkCopyEnd() {
         assertEquals("Wrong copy list", copyCheckedIndex, copyFrom.size());
     }
 
+    /**
+     * Adapted RemoteRepositoryProvider that doesn't really copy files, but tracks copy commands in a list that can be
+     * used for testing which files are copied.
+     */
     public class VirtualRemoteRepositoryProvider extends RemoteRepositoryProvider {
-        public VirtualRemoteRepositoryProvider(List<RepositoryDefinition> repositoriesDefinitions)
+        public VirtualRemoteRepositoryProvider(List<RepositoryDefinition> repositoriesDefinitions, ProjectProperties projectProperties)
                 throws Exception {
-            super(new File(V), repositoriesDefinitions);
+            super(new File(V), repositoriesDefinitions, projectProperties);
         }
 
         @Override

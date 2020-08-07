@@ -171,14 +171,14 @@ public class RemoteRepositoryProvider {
         return !getMappings(path).isEmpty();
     }
 
-    public void cleanPrepared() throws Exception {
+    public void cleanPrepared() throws IOException {
         FileUtils.deleteDirectory(new File(projectRoot, REPO_PREPARE_SUBDIR));
     }
 
     /**
      * Saves file into 'prepared' dir.
      */
-    public File toPrepared(File inFile) throws Exception {
+    public File toPrepared(File inFile) throws IOException {
         File dir = new File(projectRoot, REPO_PREPARE_SUBDIR);
         dir.mkdirs();
         File out = File.createTempFile("prepared", "", dir);
@@ -255,7 +255,7 @@ public class RemoteRepositoryProvider {
      * @param localPath
      *            directory name or file name
      */
-    public void copyFilesFromReposToProject(String localPath) throws Exception {
+    public void copyFilesFromReposToProject(String localPath) throws IOException {
         String[] myForceExcludes = "".equals(localPath) ? forceExcludes : new String[]{};
         for (Mapping m : getMappings(localPath, myForceExcludes)) {
             m.copyFromRepoToProject();
@@ -425,7 +425,7 @@ public class RemoteRepositoryProvider {
             return filterPrefix != null;
         }
 
-        public void copyFromRepoToProject() throws Exception {
+        public void copyFromRepoToProject() throws IOException {
             if (!matches()) {
                 throw new RuntimeException("Doesn't matched");
             }
@@ -491,7 +491,7 @@ public class RemoteRepositoryProvider {
          *         start and end</em>
          */
         protected List<String> copy(File from, File to, String prefix, List<String> includes,
-                List<String> excludes, String eolConversionCharset) throws Exception {
+                List<String> excludes, String eolConversionCharset) throws IOException {
             prefix = withSlashes(prefix);
             List<String> relativeFiles = FileUtil.buildRelativeFilesList(from, includes, excludes);
             List<String> copied = new ArrayList<>();

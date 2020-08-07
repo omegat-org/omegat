@@ -61,9 +61,9 @@ public class RemoteRepositoryProviderTest {
         V = dir.getAbsolutePath() + "/";
         VR = dir.getAbsolutePath() + "/.repositories/url/";
 
-        repos = new ArrayList<RepositoryDefinition>();
+        repos = new ArrayList<>();
         provider = new VirtualRemoteRepositoryProvider(repos);
-        files = new ArrayList<String>();
+        files = new ArrayList<>();
     }
 
     void filesLocal() throws IOException {

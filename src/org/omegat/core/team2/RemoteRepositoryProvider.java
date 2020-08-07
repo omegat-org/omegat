@@ -66,7 +66,7 @@ public class RemoteRepositoryProvider {
     final File projectRoot;
     final ProjectTeamSettings teamSettings;
     final List<RepositoryDefinition> repositoriesDefinitions;
-    final List<IRemoteRepository2> repositories = new ArrayList<IRemoteRepository2>();
+    final List<IRemoteRepository2> repositories = new ArrayList<>();
     /**
      * exclude some path like .git, .svn, project_save.tmx and glossary.txt when copying files from repo to project.
      */
@@ -106,7 +106,7 @@ public class RemoteRepositoryProvider {
      * Check repository definitions in the project. TODO: define messages for user
      */
     protected void checkDefinitions() {
-        Set<String> dirs = new TreeSet<String>();
+        Set<String> dirs = new TreeSet<>();
         for (RepositoryDefinition r : repositoriesDefinitions) {
             if (StringUtil.isEmpty(r.getUrl())) {
                 throw new RuntimeException("There is no repository url");
@@ -137,7 +137,7 @@ public class RemoteRepositoryProvider {
      * Find mappings for specified path.
      */
     protected List<Mapping> getMappings(String path, String... forceExcludes) {
-        List<Mapping> result = new ArrayList<Mapping>();
+        List<Mapping> result = new ArrayList<>();
         for (int i = 0; i < repositoriesDefinitions.size(); i++) {
             RepositoryDefinition rd = repositoriesDefinitions.get(i);
             for (RepositoryMapping repoMapping : rd.getMapping()) {
@@ -238,7 +238,7 @@ public class RemoteRepositoryProvider {
      * Commit set of files without rebase - just local version. Used for target/*, etc.
      */
     public void commitFiles(String path, String commentText) throws Exception {
-        Map<String, IRemoteRepository2> repos = new TreeMap<String, IRemoteRepository2>();
+        Map<String, IRemoteRepository2> repos = new TreeMap<>();
         // collect repositories one for one mapping
         for (Mapping m : getMappings(path)) {
             repos.put(m.repoDefinition.getUrl(), m.repo);
@@ -376,7 +376,7 @@ public class RemoteRepositoryProvider {
             this.repoDefinition = repoDefinition;
             this.repoMapping = repoMapping;
             this.forceExcludes = new ArrayList<>();
-            /**
+            /*
              * Find common part - it should be one of path or local. If path and local have only common begin,
              * they will not be mapped. I.e. path=source/ and local=source/one - it's okay, path=source/one/
              * and local=source/ - also okay, but path=source/one/ and local=source/two - wrong.
@@ -494,7 +494,7 @@ public class RemoteRepositoryProvider {
                 List<String> excludes, String eolConversionCharset) throws Exception {
             prefix = withSlashes(prefix);
             List<String> relativeFiles = FileUtil.buildRelativeFilesList(from, includes, excludes);
-            List<String> copied = new ArrayList<String>();
+            List<String> copied = new ArrayList<>();
             for (String rf : relativeFiles) {
                 rf = withSlashes(rf);
                 if (rf.startsWith("/.repositories/")) {

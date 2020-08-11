@@ -112,7 +112,7 @@ import gen.core.filters.Filters;
  * All components can read all data directly without synchronization. All synchronization implemented inside
  * RealProject.
  *
- * Since team sync is long operation, autosaving was splitted into 3 phrases: get remote data in background, then rebase
+ * Since team sync is long operation, auto-saving was split into 3 phrases: get remote data in background, then rebase
  * during segment deactivation, then commit in background.
  *
  * @author Keith Godfrey
@@ -133,7 +133,7 @@ public class RealProject implements IProject {
 
     enum PreparedStatus {
         NONE, PREPARED, PREPARED2, REBASED
-    };
+    }
 
     /**
      * Status required for execute prepare/rebase/commit in the correct order.
@@ -151,7 +151,7 @@ public class RealProject implements IProject {
     private boolean modified;
 
     /** List of all segments in project. */
-    protected List<SourceTextEntry> allProjectEntries = new ArrayList<SourceTextEntry>(4096);
+    protected List<SourceTextEntry> allProjectEntries = new ArrayList<>(4096);
 
     protected ImportFromAutoTMX importHandler;
 
@@ -177,12 +177,12 @@ public class RealProject implements IProject {
      * This map recreated each time when files changed. So, you can free use it without thinking about
      * synchronization.
      */
-    private Map<String, ExternalTMX> transMemories = new TreeMap<String, ExternalTMX>();
+    private Map<String, ExternalTMX> transMemories = new TreeMap<>();
 
     /**
      * Storage for all translation memories of translations to other languages.
      */
-    private Map<Language, ProjectTMX> otherTargetLangTMs = new TreeMap<Language, ProjectTMX>();
+    private Map<Language, ProjectTMX> otherTargetLangTMs = new TreeMap<>();
 
     protected ProjectTMX projectTMX;
 
@@ -192,11 +192,11 @@ public class RealProject implements IProject {
     private boolean loaded = false;
 
     // Sets of exist entries for check orphaned
-    private Set<String> existSource = new HashSet<String>();
-    private Set<EntryKey> existKeys = new HashSet<EntryKey>();
+    private Set<String> existSource = new HashSet<>();
+    private Set<EntryKey> existKeys = new HashSet<>();
 
     /** Segments count in project files. */
-    protected List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
+    protected List<FileInfo> projectFilesList = new ArrayList<>();
 
     /** This instance returned if translation not exist. */
     private static final TMXEntry EMPTY_TRANSLATION;
@@ -206,13 +206,13 @@ public class RealProject implements IProject {
         EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
     }
 
-    private boolean allowTranslationEqualToSource = Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
+    private final boolean allowTranslationEqualToSource = Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
 
     /**
      * A list of external processes. Allows previously-started, hung or long-running processes to be
      * forcibly terminated when compiling the project anew or when closing the project.
      */
-    private Stack<Process> processCache = new Stack<Process>();
+    private final Stack<Process> processCache = new Stack<>();
 
     /**
      * Create new project instance. It required to call {@link #createProject()}
@@ -306,7 +306,7 @@ public class RealProject implements IProject {
             // clear status message
             Core.getMainWindow().showStatusMessageRB(null);
         } catch (Exception e) {
-            // trouble in tinsletown...
+            // trouble in Tinseltown...
             Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
         }
@@ -997,7 +997,7 @@ public class RealProject implements IProject {
                                 if (file.exists()) {
                                     baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
                                 } else {
-                                    baseGlossaryEntries = new ArrayList<GlossaryEntry>();
+                                    baseGlossaryEntries = new ArrayList<>();
                                 }
                             }
 
@@ -1006,16 +1006,16 @@ public class RealProject implements IProject {
                                 if (file.exists()) {
                                     headGlossaryEntries = GlossaryReaderTSV.read(file, true);
                                 } else {
-                                    headGlossaryEntries = new ArrayList<GlossaryEntry>();
+                                    headGlossaryEntries = new ArrayList<>();
                                 }
                             }
 
                             @Override
                             public void rebaseAndSave(File out) throws Exception {
-                                List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<GlossaryEntry>(
+                                List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<>(
                                         glossaryEntries);
                                 deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
-                                List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<GlossaryEntry>(
+                                List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<>(
                                         baseGlossaryEntries);
                                 deltaRemovedGlossaryLocal.removeAll(glossaryEntries);
                                 headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
@@ -1168,7 +1168,7 @@ public class RealProject implements IProject {
     }
 
     protected void findNonUniqueSegments() {
-        Map<String, SourceTextEntry> exists = new HashMap<String, SourceTextEntry>(16384);
+        Map<String, SourceTextEntry> exists = new HashMap<>(16384);
 
         for (FileInfo fi : projectFilesList) {
             for (int i = 0; i < fi.entries.size(); i++) {
@@ -1181,7 +1181,7 @@ public class RealProject implements IProject {
                 } else {
                     // Note duplicate of already-seen STE
                     if (prevSte.duplicates == null) {
-                        prevSte.duplicates = new ArrayList<SourceTextEntry>();
+                        prevSte.duplicates = new ArrayList<>();
                     }
                     prevSte.duplicates.add(ste);
                     ste.firstInstance = prevSte;
@@ -1204,7 +1204,7 @@ public class RealProject implements IProject {
     void importTranslationsFromSources() {
         // which default translations we added - allow to add alternatives
         // except the same translation
-        Map<String, String> allowToImport = new HashMap<String, String>();
+        Map<String, String> allowToImport = new HashMap<>();
 
         for (FileInfo fi : projectFilesList) {
             for (int i = 0; i < fi.entries.size(); i++) {
@@ -1219,10 +1219,10 @@ public class RealProject implements IProject {
                 PrepareTMXEntry prepare = new PrepareTMXEntry();
                 prepare.source = ste.getSrcText();
                 // project with default translations
+                TMXEntry en = projectTMX.getMultipleTranslation(ste.getKey());
                 if (config.isSupportDefaultTranslations()) {
                     // bug#969 - Alternative translations were not taken into account
                     // if no default translation is set.
-                    TMXEntry en = projectTMX.getMultipleTranslation(ste.getKey());
                     if (en != null) {
                         prepare.translation = ste.getSourceTranslation();
                         projectTMX.setTranslation(ste, en, false);
@@ -1249,7 +1249,6 @@ public class RealProject implements IProject {
                     }
                 } else { // project without default translations
                     // can we import as alternative translation ?
-                    TMXEntry en = projectTMX.getMultipleTranslation(ste.getKey());
                     if (en == null) {
                         // not exist yet - yes, we can
                         prepare.translation = ste.getSourceTranslation();
@@ -1264,7 +1263,7 @@ public class RealProject implements IProject {
      * Locates and loads external TMX files with legacy translations. Uses directory monitor for check file
      * updates.
      */
-    private void loadTM() throws IOException {
+    private void loadTM()  {
         File tmRoot = new File(config.getTMRoot());
         tmMonitor = new DirectoryMonitor(tmRoot, file -> {
             if (!ExternalTMFactory.isSupported(file)) {
@@ -1310,7 +1309,7 @@ public class RealProject implements IProject {
      * Locates and loads external TMX files with legacy translations. Uses directory monitor for check file
      * updates.
      */
-    private void loadOtherLanguages() throws IOException {
+    private void loadOtherLanguages() {
         File tmOtherLanguagesRoot = new File(config.getTMOtherLangRoot());
         tmOtherLanguagesMonitor = new DirectoryMonitor(tmOtherLanguagesRoot, file -> {
             String name = file.getName();
@@ -1492,7 +1491,7 @@ public class RealProject implements IProject {
 
         projectTMX.setTranslation(entry, newTrEntry, defaultTranslation);
 
-        /**
+        /*
          * Calculate how to statistics should be changed.
          */
         int diff = prevTrEntry.translation == null ? 0 : -1;
@@ -1765,7 +1764,7 @@ public class RealProject implements IProject {
                 existKeys.add(srcTextEntry.getKey());
             }
         }
-    };
+    }
 
     private class TranslateFilesCallback extends TranslateEntry {
         private String currentFile;
@@ -1797,7 +1796,7 @@ public class RealProject implements IProject {
             }
             return tr != null ? tr.translation : null;
         }
-    };
+    }
 
     static class AlignFilesCallback implements IAlignCallback {
         AlignFilesCallback(ProjectProperties props) {
@@ -1805,7 +1804,7 @@ public class RealProject implements IProject {
             this.config = props;
         }
 
-        Map<String, TMXEntry> data = new HashMap<String, TMXEntry>();
+        Map<String, TMXEntry> data = new HashMap<>();
         private ProjectProperties config;
 
         @Override

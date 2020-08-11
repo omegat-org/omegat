@@ -488,6 +488,13 @@ public final class ProjectUICommands {
                                 remoteRepositoryProvider.copyFilesFromReposToProject(OConsts.FILE_PROJECT);
                                 // Reload project properties
                                 props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
+                                /*
+                                 * If an OmegaT3.6 remote project is opened, then it is converted to a project with mappings.
+                                 * The mappings are 'local' only; the original 3.6 project is not altered.
+                                 * Every time we reopen the project, and we copy omegat.project from the remote project,
+                                 * we lose the mappings. We need to restore them and save the updated omegat.properties
+                                 * to disk.
+                                 */
                                 if (props.getRepositories() == null) { // We have a 3.6 style project,
                                     props.setRepositories(repos);      // so we restore the mapping we just lost
                                     needToSaveProperties = true;

@@ -601,7 +601,7 @@ public class ProjectProperties {
         }
 
         /**
-         * Returns path under project root with '/' at the end for directories, or null if directory outside
+         * Returns path relative to project root with '/' at the end for directories, or null if directory outside
          * of project.
          */
         public String getUnderRoot() {

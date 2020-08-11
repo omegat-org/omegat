@@ -116,7 +116,7 @@ public class RemoteRepositoryProvider {
             }
             for (RepositoryMapping m : r.getMapping()) {
                 if (m.getLocal() == null || m.getRepository() == null) {
-                    throw new RuntimeException("Wrong mapping");
+                    throw new RuntimeException("Invalid mapping: local and/or remote is not set.");
                 }
             }
         }
@@ -156,9 +156,9 @@ public class RemoteRepositoryProvider {
     protected Mapping oneMapping(String path) {
         List<Mapping> mappings = getMappings(path);
         if (mappings.size() > 1) {
-            throw new RuntimeException("Multiple mapping for file");
+            throw new RuntimeException("Multiple mappings for file '"+path+"'");
         } else if (mappings.isEmpty()) {
-            throw new RuntimeException("There is no mapping for file");
+            throw new RuntimeException("There is no mapping for file '"+path+"'");
         }
 
         return mappings.get(0);

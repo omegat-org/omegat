@@ -65,8 +65,9 @@ public class NewProjectFileChooser extends OmegaTFileChooser {
         File dir = getSelectedFile();
         if (dir.isDirectory()) {
             File[] files = dir.listFiles();
-            if (files.length > 0) {
-                // must select non-existing name or empty dir for project
+            if (files.length > 1 || (files.length == 1 && !files[0].isHidden())) {
+                // must select non-existing name or empty dir for project, or an empty repository folder
+                // (that contains e.g. '.git' or '.svn' directory) so this can be used to initialize a new team project.
                 JOptionPane.showMessageDialog(this, OStrings.getString("NDC_SELECT_NEW_OR_EMPTY"),
                     OStrings.getString("NDC_SELECT_UNIQUE_TITLE"), JOptionPane.ERROR_MESSAGE);
                 return;

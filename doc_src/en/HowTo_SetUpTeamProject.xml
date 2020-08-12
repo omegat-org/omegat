@@ -329,13 +329,17 @@
     This feature is intended for gathering source files, but you're not restricted to source files.</para>
   </section>
   <section>
-    <title>Note about OmegaT 3.6 team projects</title>
-    <para>In OmegaT 3.6, team projects didn't use mappings. you can still use those projects, and they will be
-      converted locally to a project with mappings.
+    <title>Note about omegat.project and mappings</title>
+    <para>When you create a new project and commit that to a repository, the <filename>omegat.project</filename> file
+        doesn't contain any mapping.
+        When you download the project, the project is converted to a team project locally and a default mapping is added.
     </para>
-    <para>Note that the remote omegat.project file is not changed automatically and still doesn't contain the mappings.
-      Although the <filename>omegat.project</filename> file is copied from the remote project on loading the
-      project, the local mappings are restored every time.</para>
+    <para>Note that the omegat.project file in the repository is not changed automatically and still doesn't contain
+        the mappings. When you load a project, all changes in the repository are copied to the local project, including
+        the <filename>omegat.project</filename> file with project settings. If the file doesn't contain mappings, the
+        existing local mappings are re-applied, and only those. All other local changes to the project are reverted.
+      If the file does contain mappings, then local changes to mappings are lost.
+    </para>
   </section>
 
 </section>

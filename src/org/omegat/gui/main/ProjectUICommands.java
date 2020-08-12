@@ -345,7 +345,7 @@ public final class ProjectUICommands {
                 }
 
                 ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRoot);
-                if (props.getRepositories() == null) { // We assume it's a 3.6 style project with no repository mapping,
+                if (props.getRepositories() == null) { // We assume it's a project with no repository mapping,
                     props.setRepositories(repos);      // so we add root repository mapping
                 }
                 // We write in all cases, because we might have added default excludes, for instance

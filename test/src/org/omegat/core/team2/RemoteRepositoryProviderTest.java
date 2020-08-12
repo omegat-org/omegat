@@ -37,12 +37,14 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.omegat.core.data.ProjectProperties;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
 
+@RunWith(Parameterized.class)
 public class RemoteRepositoryProviderTest {
     String V;
     String VR, VR2;

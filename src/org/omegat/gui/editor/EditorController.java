@@ -1187,6 +1187,7 @@ public class EditorController implements IEditor {
         }
 
         boolean defaultTranslation = sb.isDefaultTranslation();
+        boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
@@ -1194,7 +1195,7 @@ public class EditorController implements IEditor {
         if (!isNewAltTrans && !translationChanged && noteChanged) {
             // Only note was changed, and we are not making a new alt translation.
             Core.getProject().setNote(entry, oldTE, newen.note);
-        } else if (translationChanged || noteChanged) {
+        } else if (isNewDefaultTrans || translationChanged || noteChanged) {
             while (true) {
                 // iterate before optimistic locking will be resolved
                 try {
@@ -1232,7 +1233,7 @@ public class EditorController implements IEditor {
             if (builder.ste.getSrcText().equals(entry.getSrcText())) {
                 // the same source text - need to update
                 builder.createSegmentElement(false,
-                        Core.getProject().getTranslationInfo(builder.ste));
+                        Core.getProject().getTranslationInfo(builder.ste), !defaultTranslation);
                 // then add new marks
                 markerController.reprocessImmediately(builder);
             }

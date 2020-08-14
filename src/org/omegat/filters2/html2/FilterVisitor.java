@@ -584,7 +584,7 @@ public class FilterVisitor extends NodeVisitor {
         String compressed = uncompressed;
         String spacePrefix = "";
         String spacePostfix = "";
-        int size = uncompressed.length();
+
         // We're compressing the space if this paragraph wasn't inside <PRE> tag
         // But if the translator does not translate the paragraph,
         // then we write out the uncompressed version,
@@ -595,23 +595,8 @@ public class FilterVisitor extends NodeVisitor {
         // (This changes the layout, therefore it is an option)
         if (!preformatting) {
 
-            for (int cp, i = 0; i < size; i += Character.charCount(cp)) {
-                cp = uncompressed.codePointAt(i);
-                if (!Character.isWhitespace(cp)) {
-                    spacePrefix = i == 0 ? "" : uncompressed.substring(0,
-                            options.getCompressWhitespace() ? Math.min(i, uncompressed.offsetByCodePoints(i, 1)) : i);
-                    break;
-                }
-            }
-            for (int cp, i = size; i > 0; i -= Character.charCount(cp)) {
-                cp = uncompressed.codePointBefore(i);
-                if (!Character.isWhitespace(cp)) {
-                    spacePostfix = i == size ? ""
-                            : uncompressed.substring(i, options.getCompressWhitespace()
-                                    ? Math.min(uncompressed.offsetByCodePoints(i, 1), size) : size);
-                    break;
-                }
-            }
+            spacePrefix = HTMLUtils.getSpacePrefix(uncompressed, options.getCompressWhitespace());
+            spacePostfix = HTMLUtils.getSpacePostfix(uncompressed, options.getCompressWhitespace());
 
             if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
                 compressed = StringUtil.compressSpaces(uncompressed);

@@ -2,7 +2,7 @@
  OmegaT 5.4.0
 ----------------------------------------------------------------------
   1 Enhancements
-  1 Bug fixes
+  2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
@@ -16,6 +16,9 @@
 
   - cannot create new (teamp) project in empty repository
   https://sourceforge.net/p/omegat/bugs/1005/
+
+  - leading whitespace not trimmed in html filter when compressing whitespace
+  https://sourceforge.net/p/omegat/bugs/1006/
 
 ----------------------------------------------------------------------
  OmegaT 5.3.0 (2020-08-03)

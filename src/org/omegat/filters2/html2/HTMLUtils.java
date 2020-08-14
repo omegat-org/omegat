@@ -423,4 +423,29 @@ public final class HTMLUtils {
         }
         return contents;
     }
+
+    static String getSpacePrefix(String input, boolean compressWhitespace) {
+        int size = input.length();
+        for (int cp, i = 0; i < size; i += Character.charCount(cp)) {
+            cp = input.codePointAt(i);
+            if (!Character.isWhitespace(cp)) {
+                return input.substring(0,
+                        compressWhitespace ? Math.min(i, input.offsetByCodePoints(0, 1)) : i);
+            }
+        }
+        return "";
+    }
+
+    static String getSpacePostfix(String input, boolean compressWhitespace) {
+        int size = input.length();
+        for (int cp, i = size; i > 0; i -= Character.charCount(cp)) {
+            cp = input.codePointBefore(i);
+            if (!Character.isWhitespace(cp)) {
+                return i == size ? ""
+                        : input.substring(i, compressWhitespace
+                        ? Math.min(input.offsetByCodePoints(i, 1), size) : size);
+            }
+        }
+        return "";
+    }
 }

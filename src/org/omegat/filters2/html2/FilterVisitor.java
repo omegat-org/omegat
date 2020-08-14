@@ -290,6 +290,8 @@ public class FilterVisitor extends NodeVisitor {
 
             text = true;
             firstcall = false;
+        } else if (preformatting) {
+            text = true;
         }
 
         if (text) {
@@ -750,7 +752,7 @@ public class FilterVisitor extends NodeVisitor {
      * Whitespace text is simply added to the queue.
      */
     private void queueTranslatable(Text txt) {
-        if (!txt.toHtml().trim().isEmpty()) {
+        if (!txt.toHtml().trim().isEmpty() || preformatting) {
             translatable.addAll(afters);
             afters.clear();
             translatable.add(txt);

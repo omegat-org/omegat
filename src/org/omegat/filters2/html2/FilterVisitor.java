@@ -613,6 +613,9 @@ public class FilterVisitor extends NodeVisitor {
         // writing out uncompressed
         if (compressed.equals(translation) && !options.getCompressWhitespace()) {
             translation = uncompressed;
+            //uncompressed contains pre/postfix whitespace, so do not add that extra!
+            spacePrefix = "";
+            spacePostfix = "";
         }
 
         // converting & < and > into &amp; &lt; and &gt; respectively

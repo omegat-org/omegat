@@ -312,6 +312,8 @@ public class FilterVisitor extends NodeVisitor {
         recurse = true;
         if (text) {
             endup();
+        } else {
+            flushbefors();
         }
         if (!options.getRemoveComments()) {
             writeout(remark.toHtml());

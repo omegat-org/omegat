@@ -77,10 +77,6 @@ public class StatsResult {
 		return hotStat;
 	}
 	
-	public IProject getProject() {
-		return project;
-	}
-
 	public StatCount getTotal() {
 		return total;
 	}

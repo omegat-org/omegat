@@ -29,13 +29,16 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.html2.HTMLFilter2;
+import org.omegat.filters2.html2.HTMLOptions;
 import org.omegat.filters2.html2.HTMLUtils;
 import org.omegat.util.Language;
 
@@ -104,4 +107,17 @@ public class HTMLFilter2Test extends TestFilterBase {
         // Should decode &apos; (was missing for some reason)
         assertEquals("foo 'bar'", HTMLUtils.entitiesToChars("foo &apos;bar&apos;"));
     }
+
+    @Test
+    public void testLayout() throws Exception {
+        translateText(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2-layout.html");
+    }
+    @Test
+    public void testLayoutTrimWhitespace() throws Exception {
+        Map<String, String> config = new HashMap<>();
+        config.put(HTMLOptions.OPTION_COMPRESS_WHITESPACE, "true");
+        translate(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2-layout.html", config);
+        compareBinary(new File("test/data/filters/html/file-HTMLFilter2-layout-compressed.html"), outFile);
+    }
+
 }

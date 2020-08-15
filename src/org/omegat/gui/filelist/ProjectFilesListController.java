@@ -780,7 +780,7 @@ public class ProjectFilesListController {
                 case 1:
                     return stat.numberOfUniqueSegments;
                 case 2:
-                    return stat.numberofTranslatedSegments;
+                    return stat.numberOfTranslatedSegments;
                 default:
                     throw new IllegalArgumentException();
                 }

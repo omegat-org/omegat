@@ -3,7 +3,9 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008 Alex Buloichik
+ Copyright (C) 2009 Alex Buloichik
+               2010 Didier Briel
+               2020 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,17 +27,14 @@
 
 package org.omegat.core.statistics;
 
-import java.util.HashMap;
-import java.util.Map;
+public class FileData {
+    public String filename;
+    public StatCount total, unique, remaining, remainingUnique;
 
-/**
- * Class for store some statistic data.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public class StatisticsInfo {
-    public int numberOfTranslatedSegments;
-    public int numberOfUniqueSegments;
-    public int numberOfSegmentsTotal;
-    public Map<String, Integer> uniqueCountsByFile = new HashMap<>();
+    public FileData() {
+        total = new StatCount();
+        unique = new StatCount();
+        remaining = new StatCount();
+        remainingUnique = new StatCount();
+    }
 }

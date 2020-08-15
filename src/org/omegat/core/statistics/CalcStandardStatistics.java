@@ -7,6 +7,7 @@
                2010 Arno Peters
                2013-2014 Alex Buloichik
                2015 Aaron Madlon-Kay
+               2020 Vladimir Bychkov
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -39,16 +40,12 @@ import java.util.Set;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsPanel;
 import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
-import org.omegat.util.gui.TextUtil;
 
 /**
  * Thread for calculate standard statistics.
@@ -66,35 +63,6 @@ import org.omegat.util.gui.TextUtil;
  * @author Aaron Madlon-Kay
  */
 public class CalcStandardStatistics extends LongProcessThread {
-    private static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
-            OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
-            OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files") };
-
-    private static final String[] HT_ROWS = { OStrings.getString("CT_STATS_Total"),
-            OStrings.getString("CT_STATS_Remaining"), OStrings.getString("CT_STATS_Unique"),
-            OStrings.getString("CT_STATS_Unique_Remaining") };
-    private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
-
-    private static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
-            OStrings.getString("CT_STATS_FILE_Total_Segments"),
-            OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
-            OStrings.getString("CT_STATS_FILE_Unique_Segments"),
-            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Segments"),
-            OStrings.getString("CT_STATS_FILE_Total_Words"),
-            OStrings.getString("CT_STATS_FILE_Remaining_Words"),
-            OStrings.getString("CT_STATS_FILE_Unique_Words"),
-            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Words"),
-            OStrings.getString("CT_STATS_FILE_Total_Characters_NOSP"),
-            OStrings.getString("CT_STATS_FILE_Remaining_Characters_NOSP"),
-            OStrings.getString("CT_STATS_FILE_Unique_Characters_NOSP"),
-            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters_NOSP"),
-            OStrings.getString("CT_STATS_FILE_Total_Characters"),
-            OStrings.getString("CT_STATS_FILE_Remaining_Characters"),
-            OStrings.getString("CT_STATS_FILE_Unique_Characters"),
-            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters"), };
-
-    private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true,
-            true, true, true, true, true, true, true, true, true, };
 
     private final StatisticsPanel callback;
 
@@ -105,8 +73,10 @@ public class CalcStandardStatistics extends LongProcessThread {
     @Override
     public void run() {
         IProject p = Core.getProject();
-        String result = buildProjectStats(p, null, callback);
-        callback.setTextData(result);
+        StatsResult result = buildProjectStats(p);
+        callback.setProjectTableData(StatsResult.HT_HEADERS, result.getHeaderTable());
+        callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable(p.getProjectProperties()));
+        callback.setTextData(result.getTextData(p.getProjectProperties()));
         callback.finishData();
 
         String internalDir = p.getProjectProperties().getProjectInternal();
@@ -121,13 +91,8 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         // now dump file based word counts to disk
         String fn = internalDir + OConsts.STATS_FILENAME;
-        Statistics.writeStat(fn, result);
+        Statistics.writeStat(fn, result.toString());
         callback.setDataFile(fn);
-    }
-
-    /** Convenience method */
-    public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat) {
-        return buildProjectStats(project, hotStat, null);
     }
 
     /**
@@ -135,8 +100,7 @@ public class CalcStandardStatistics extends LongProcessThread {
      * character count of the project, the total number of unique segments, plus
      * the details for each file.
      */
-    public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat,
-            final StatisticsPanel callback) {
+    public static StatsResult buildProjectStats(final IProject project) {
 
         StatCount total = new StatCount();
         StatCount remaining = new StatCount();
@@ -226,90 +190,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             remaining.addFiles(fileRemaining);
         }
 
-        StringBuilder result = new StringBuilder();
-
-        result.append(OStrings.getString("CT_STATS_Project_Statistics"));
-        result.append("\n\n");
-
-        String[][] headerTable = calcHeaderTable(new StatCount[] { total, remaining, unique, remainingUnique });
-        if (callback != null) {
-            callback.setProjectTableData(HT_HEADERS, headerTable);
-        }
-        result.append(TextUtil.showTextTable(HT_HEADERS, headerTable, HT_ALIGN));
-        result.append("\n\n");
-
-        // STATISTICS BY FILE
-        result.append(OStrings.getString("CT_STATS_FILE_Statistics"));
-        result.append("\n\n");
-        String[][] filesTable = calcFilesTable(project.getProjectProperties(), counts);
-        if (callback != null) {
-            callback.setFilesTableData(FT_HEADERS, filesTable);
-        }
-        result.append(TextUtil.showTextTable(FT_HEADERS, filesTable, FT_ALIGN));
-
-        if (hotStat != null) {
-            hotStat.numberOfSegmentsTotal = total.segments;
-            hotStat.numberofTranslatedSegments = translated.size();
-            hotStat.numberOfUniqueSegments = unique.segments;
-            hotStat.uniqueCountsByFile.clear();
-            for (FileData fd : counts) {
-                hotStat.uniqueCountsByFile.put(fd.filename, fd.unique.segments);
-            }
-        }
-
-        return result.toString();
-    }
-
-    protected static String[][] calcHeaderTable(final StatCount[] result) {
-        String[][] table = new String[result.length][6];
-
-        for (int i = 0; i < result.length; i++) {
-            table[i][0] = HT_ROWS[i];
-            table[i][1] = Integer.toString(result[i].segments);
-            table[i][2] = Integer.toString(result[i].words);
-            table[i][3] = Integer.toString(result[i].charsWithoutSpaces);
-            table[i][4] = Integer.toString(result[i].charsWithSpaces);
-            table[i][5] = Integer.toString(result[i].files);
-        }
-        return table;
-    }
-
-    protected static String[][] calcFilesTable(final ProjectProperties config, final List<FileData> counts) {
-        String[][] table = new String[counts.size()][17];
-
-        int r = 0;
-        for (FileData numbers : counts) {
-            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, config.getSourceRoot());
-            table[r][1] = Integer.toString(numbers.total.segments);
-            table[r][2] = Integer.toString(numbers.remaining.segments);
-            table[r][3] = Integer.toString(numbers.unique.segments);
-            table[r][4] = Integer.toString(numbers.remainingUnique.segments);
-            table[r][5] = Integer.toString(numbers.total.words);
-            table[r][6] = Integer.toString(numbers.remaining.words);
-            table[r][7] = Integer.toString(numbers.unique.words);
-            table[r][8] = Integer.toString(numbers.remainingUnique.words);
-            table[r][9] = Integer.toString(numbers.total.charsWithoutSpaces);
-            table[r][10] = Integer.toString(numbers.remaining.charsWithoutSpaces);
-            table[r][11] = Integer.toString(numbers.unique.charsWithoutSpaces);
-            table[r][12] = Integer.toString(numbers.remainingUnique.charsWithoutSpaces);
-            table[r][13] = Integer.toString(numbers.total.charsWithSpaces);
-            table[r][14] = Integer.toString(numbers.remaining.charsWithSpaces);
-            table[r][15] = Integer.toString(numbers.unique.charsWithSpaces);
-            table[r][16] = Integer.toString(numbers.remainingUnique.charsWithSpaces);
-            r++;
-        }
-        return table;
-    }
-
-    public static class FileData {
-        public String filename;
-        public StatCount total, unique, remaining, remainingUnique;
-
-        public FileData() {
-            total = new StatCount();
-            unique = new StatCount();
-            remaining = new StatCount();
-            remainingUnique = new StatCount();
-        }
+        assert (total.segments - remaining.segments == translated.size());
+        return new StatsResult(total, remaining, unique, remainingUnique, counts);
     }
 }

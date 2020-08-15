@@ -73,6 +73,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
@@ -372,9 +373,10 @@ public class RealProject implements IProject {
             loadOtherLanguages();
 
             // build word count
-            String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
+            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+            stat.updateStatisticsInfo(hotStat);
             String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat);
+            Statistics.writeStat(fn, stat.getTextData(config));
 
             loaded = true;
 
@@ -790,9 +792,10 @@ public class RealProject implements IProject {
                 LastSegmentManager.saveLastSegment();
 
                 // update statistics
-                String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
+                StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+                stat.updateStatisticsInfo(hotStat);
                 String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-                Statistics.writeStat(fn, stat);
+                Statistics.writeStat(fn, stat.getTextData(config));
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }
@@ -1496,8 +1499,8 @@ public class RealProject implements IProject {
          */
         int diff = prevTrEntry.translation == null ? 0 : -1;
         diff += trans.translation == null ? 0 : +1;
-        hotStat.numberofTranslatedSegments = Math.max(0,
-                Math.min(hotStat.numberOfUniqueSegments, hotStat.numberofTranslatedSegments + diff));
+        hotStat.numberOfTranslatedSegments = Math.max(0,
+                Math.min(hotStat.numberOfUniqueSegments, hotStat.numberOfTranslatedSegments + diff));
     }
 
     @Override

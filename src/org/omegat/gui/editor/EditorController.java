@@ -1024,7 +1024,7 @@ public class EditorController implements IEditor {
         if (progressMode == MainWindowUI.StatusBarMode.DEFAULT) {
             StringBuilder pMsg = new StringBuilder(1024).append(" ");
             pMsg.append(translatedInFile).append("/").append(fi.entries.size()).append(" (")
-                    .append(stat.numberofTranslatedSegments).append("/").append(stat.numberOfUniqueSegments)
+                    .append(stat.numberOfTranslatedSegments).append("/").append(stat.numberOfUniqueSegments)
                     .append(", ").append(stat.numberOfSegmentsTotal).append(") ");
             mw.showProgressMessage(pMsg.toString());
         } else {
@@ -1039,9 +1039,9 @@ public class EditorController implements IEditor {
             String message = StringUtil.format(OStrings.getString("MW_PROGRESS_DEFAULT_PERCENTAGE"),
                     (translatedUniqueInFile == 0) ? "0%" : nfPer.format((double) translatedUniqueInFile / uniqueInFile),
                     uniqueInFile - translatedUniqueInFile,
-                    (stat.numberofTranslatedSegments == 0) ? "0%"
-                            : nfPer.format((double) stat.numberofTranslatedSegments / stat.numberOfUniqueSegments),
-                    stat.numberOfUniqueSegments - stat.numberofTranslatedSegments, stat.numberOfSegmentsTotal);
+                    (stat.numberOfTranslatedSegments == 0) ? "0%"
+                            : nfPer.format((double) stat.numberOfTranslatedSegments / stat.numberOfUniqueSegments),
+                    stat.numberOfUniqueSegments - stat.numberOfTranslatedSegments, stat.numberOfSegmentsTotal);
 
             mw.showProgressMessage(message);
         }

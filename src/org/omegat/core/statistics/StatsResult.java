@@ -65,7 +65,7 @@ public class StatsResult {
 		this.counts = counts;
 	}
 
-	public StatisticsInfo toStatisticsInfo() {
+	public StatisticsInfo getStatisticsInfo() {
 		StatisticsInfo hotStat = new StatisticsInfo();
 		hotStat.numberOfSegmentsTotal = total.segments;
 		hotStat.numberofTranslatedSegments = translated.size();

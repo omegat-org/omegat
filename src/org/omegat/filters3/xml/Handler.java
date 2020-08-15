@@ -637,6 +637,15 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             // untranslated is written out uncompressed
             if (compressed.equals(translation)) {
                 translation = src;
+            } else if (lead instanceof XMLTag) {
+                String tag = ((XMLTag) lead).getTag();
+                for (int i = 0; i < ((XMLTag) lead).getAttributes().size(); i++) {
+                    Attribute attr = ((XMLTag) lead).getAttributes().get(i);
+                    if (dialect.getTranslationStatusAttributes().containsPair(tag, attr.getName())
+                            && dialect.getTranslationStatusTransitions().containsKey(attr.getValue())) {
+                        attr.setValue(dialect.getTranslationStatusTransitions().get(attr.getValue()));
+                    }
+                }
             }
         }
 

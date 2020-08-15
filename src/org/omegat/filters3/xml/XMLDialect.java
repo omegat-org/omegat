@@ -101,6 +101,14 @@ public interface XMLDialect {
     MultiMap<String, String> getTranslatableTagAttributes();
 
     /**
+     * Returns the multimap of translation status attribute of each tag.
+     * <p>
+     * Each entry should map from a String to a set of Strings.
+     */
+    MultiMap<String, String> getTranslationStatusAttributes();
+    Map<String, String> getTranslationStatusTransitions();
+
+    /**
      * Returns for a given attribute of a given tag if the attribute should be
      * translated with the given other attributes present. If the tagAttribute
      * is returned by getTranslatable(Tag)Attributes(), this function is called

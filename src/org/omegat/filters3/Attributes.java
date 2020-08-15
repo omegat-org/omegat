@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A list of Tag's attritutes.
+ * A list of Tag's attributes.
  *
  * @author Maxym Mykhalchuk
  */

@@ -286,7 +286,7 @@ public class DefaultXMLDialect implements XMLDialect {
     }
 
     /**
-     * For a given tag, return wether the content of this tag should be
+     * For a given tag, return whether the content of this tag should be
      * translated, depending on the content of one attribute and the presence or
      * absence of other attributes. For instance, in the ResX filter, tags
      * should not be translated when they contain the attribute "type", or when
@@ -309,7 +309,7 @@ public class DefaultXMLDialect implements XMLDialect {
     }
 
     /**
-     * For a given tag, return wether the content of this tag should be
+     * For a given tag, return whether the content of this tag should be
      * translated, depending on the content of one attribute and the presence or
      * absence of other attributes. For instance, in the Typo3 filter, tags
      * should be translated when the attribute locazible="1". Contrary to
@@ -328,7 +328,7 @@ public class DefaultXMLDialect implements XMLDialect {
     }
 
     /**
-     * For a given tag, return wether the content of this tag is a paragraph
+     * For a given tag, return whether the content of this tag is a paragraph
      * tag, depending on the content of one attribute (and/or the presence or
      * absence of other attributes). For instance, in the XLIFF filter, the
      * &lt;mark&gt; tag should start a new paragraph when the attribute "mtype"
@@ -346,7 +346,7 @@ public class DefaultXMLDialect implements XMLDialect {
     }
 
     /**
-     * For a given tag, return wether the content of this tag is a preformat
+     * For a given tag, return whether the content of this tag is a preformat
      * tag, depending on the content of one attribute (and/or the presence or
      * absence of other attributes). For instance, in the XLIFF filter, the
      * &lt;mark&gt; tag should be a preformat tag when the attribute "mtype"
@@ -420,7 +420,7 @@ public class DefaultXMLDialect implements XMLDialect {
     }
 
     /**
-     * The parameter setting wether closing tags should be used
+     * The parameter setting whether closing tags should be used
      */
     private boolean closingTagRequired = false;
 
@@ -428,7 +428,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * Sets closingTag to <code>true</code> or <code>false</code>
      *
      * @param onOff
-     *            The parameter setting wether closing tags should be used or
+     *            The parameter setting whether closing tags should be used or
      *            not for empty tags.
      */
     @Override

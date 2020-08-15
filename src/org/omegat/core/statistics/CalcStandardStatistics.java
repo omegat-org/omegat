@@ -190,7 +190,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             remaining.addFiles(fileRemaining);
         }
 
-        return new StatsResult(project, total, remaining, unique, remainingUnique, translated, counts);
+        return new StatsResult(project, total, remaining, unique, remainingUnique, counts);
     }
 
     public static class FileData {

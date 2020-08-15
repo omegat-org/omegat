@@ -1,7 +1,6 @@
 package org.omegat.core.statistics;
 
 import java.util.List;
-import java.util.Set;
 
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
@@ -48,12 +47,11 @@ public class StatsResult {
     private StatCount unique = new StatCount();
     private StatCount remainingUnique = new StatCount();
     
-    private Set<String> translated;
     private List<FileData> counts;
     
 	public StatsResult(IProject project,
 			StatCount total, StatCount remaining, StatCount unique, StatCount remainingUnique,
-			Set<String> translated, List<FileData> counts) {
+			List<FileData> counts) {
 		this.project = project;
 		
 		this.total = total;
@@ -61,14 +59,13 @@ public class StatsResult {
 		this.unique = unique;
 		this.remainingUnique = remainingUnique;
 		
-		this.translated = translated;
 		this.counts = counts;
 	}
 
 	public StatisticsInfo getStatisticsInfo() {
 		StatisticsInfo hotStat = new StatisticsInfo();
 		hotStat.numberOfSegmentsTotal = total.segments;
-		hotStat.numberofTranslatedSegments = translated.size();
+		hotStat.numberofTranslatedSegments = total.segments - remaining.segments;
 		hotStat.numberOfUniqueSegments = unique.segments;
 		hotStat.uniqueCountsByFile.clear();
 		for (FileData fd : counts) {
@@ -91,10 +88,6 @@ public class StatsResult {
 
 	public StatCount getRemainingUnique() {
 		return remainingUnique;
-	}
-
-	public Set<String> getTranslated() {
-		return translated;
 	}
 
 	public List<FileData> getCounts() {

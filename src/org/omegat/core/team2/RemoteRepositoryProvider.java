@@ -63,9 +63,6 @@ public class RemoteRepositoryProvider {
     public static final String REPO_GIT_SUBDIR = ".git/";
     public static final String REPO_SVN_SUBDIR = ".svn/";
 
-    // Experimental: a local file has always only one mapping (the 'deepest' match)
-    private final static boolean KEEP_SINGLE_MAPPING = true;
-
     final File projectRoot;
     final ProjectTeamSettings teamSettings;
     final List<RepositoryDefinition> repositoriesDefinitions;
@@ -139,17 +136,17 @@ public class RemoteRepositoryProvider {
     /**
      * Find mappings for specified path.
      */
-    protected List<Mapping> getMappings(String path, String... forceExcludes) {
+    protected List<Mapping> getMappings(String path, boolean keepSingleMapping, String... forceExcludes) {
         List<Mapping> result = new ArrayList<>();
         for (int i = 0; i < repositoriesDefinitions.size(); i++) {
             RepositoryDefinition rd = repositoriesDefinitions.get(i);
             for (RepositoryMapping repoMapping : rd.getMapping()) {
                 Mapping m = new Mapping(path, repositories.get(i), rd, repoMapping, forceExcludes);
                 if (m.matches()) {
-                    if (KEEP_SINGLE_MAPPING && !result.isEmpty()) {
+                    if (keepSingleMapping && !result.isEmpty()) {
                         Mapping oldMapping = result.get(0);
                         String oldRemote = oldMapping.repoMapping.getRepository();
-                        if (withoutLeadingSlash(m.repoMapping.getRepository()).contains(withoutLeadingSlash(oldRemote))) {
+                        if (!path.isEmpty() && withoutLeadingSlash(m.repoMapping.getRepository()).contains(withoutLeadingSlash(oldRemote))) {
                             Log.log("Remove shallower mapping \"" + oldRemote + "\" for \"" + path + "\"");
                             result.remove(0);
                         }
@@ -159,6 +156,10 @@ public class RemoteRepositoryProvider {
             }
         }
         return result;
+    }
+
+    protected List<Mapping> getMappings(String path, String... forceExcludes) {
+        return getMappings(path, true, forceExcludes);
     }
 
     /**
@@ -258,7 +259,7 @@ public class RemoteRepositoryProvider {
     public void commitFiles(String path, String commentText) throws Exception {
         Map<String, IRemoteRepository2> repos = new TreeMap<>();
         // collect repositories one for one mapping
-        for (Mapping m : getMappings(path)) {
+        for (Mapping m : getMappings(path, false)) {
             repos.put(m.repoDefinition.getUrl(), m.repo);
         }
         // commit only unique repositories

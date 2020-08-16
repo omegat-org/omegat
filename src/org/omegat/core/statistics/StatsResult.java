@@ -2,7 +2,6 @@ package org.omegat.core.statistics;
 
 import java.util.List;
 
-import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.statistics.CalcStandardStatistics.FileData;
 import org.omegat.util.OStrings;
@@ -10,7 +9,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;
 
 public class StatsResult {
-	public static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
+    public static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files") };
 
@@ -18,14 +17,12 @@ public class StatsResult {
             OStrings.getString("CT_STATS_Remaining"), OStrings.getString("CT_STATS_Unique"),
             OStrings.getString("CT_STATS_Unique_Remaining") };
     private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
-    
+
     public static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
-            OStrings.getString("CT_STATS_FILE_Total_Segments"),
-            OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
+            OStrings.getString("CT_STATS_FILE_Total_Segments"), OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Remaining_Segments"),
-            OStrings.getString("CT_STATS_FILE_Total_Words"),
-            OStrings.getString("CT_STATS_FILE_Remaining_Words"),
+            OStrings.getString("CT_STATS_FILE_Total_Words"), OStrings.getString("CT_STATS_FILE_Remaining_Words"),
             OStrings.getString("CT_STATS_FILE_Unique_Words"),
             OStrings.getString("CT_STATS_FILE_Unique_Remaining_Words"),
             OStrings.getString("CT_STATS_FILE_Total_Characters_NOSP"),
@@ -37,65 +34,60 @@ public class StatsResult {
             OStrings.getString("CT_STATS_FILE_Unique_Characters"),
             OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters"), };
 
-    private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true,
-            true, true, true, true, true, true, true, true, true, };
-	
-    private IProject project;
-    
+    private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, };
+
     private StatCount total = new StatCount();
     private StatCount remaining = new StatCount();
     private StatCount unique = new StatCount();
     private StatCount remainingUnique = new StatCount();
-    
+
     private List<FileData> counts;
-    
-	public StatsResult(IProject project,
-			StatCount total, StatCount remaining, StatCount unique, StatCount remainingUnique,
-			List<FileData> counts) {
-		this.project = project;
-		
-		this.total = total;
-		this.remaining = remaining;
-		this.unique = unique;
-		this.remainingUnique = remainingUnique;
-		
-		this.counts = counts;
-	}
 
-	public StatisticsInfo getStatisticsInfo() {
-		StatisticsInfo hotStat = new StatisticsInfo();
-		hotStat.numberOfSegmentsTotal = total.segments;
-		hotStat.numberofTranslatedSegments = total.segments - remaining.segments;
-		hotStat.numberOfUniqueSegments = unique.segments;
-		hotStat.uniqueCountsByFile.clear();
-		for (FileData fd : counts) {
-			hotStat.uniqueCountsByFile.put(fd.filename, fd.unique.segments);
-		}
-		return hotStat;
-	}
-	
-	public StatCount getTotal() {
-		return total;
-	}
+    public StatsResult(StatCount total, StatCount remaining, StatCount unique, StatCount remainingUnique,
+            List<FileData> counts) {
+        this.total = total;
+        this.remaining = remaining;
+        this.unique = unique;
+        this.remainingUnique = remainingUnique;
 
-	public StatCount getRemaining() {
-		return remaining;
-	}
+        this.counts = counts;
+    }
 
-	public StatCount getUnique() {
-		return unique;
-	}
+    public StatisticsInfo getStatisticsInfo() {
+        StatisticsInfo hotStat = new StatisticsInfo();
+        hotStat.numberOfSegmentsTotal = total.segments;
+        hotStat.numberOfTranslatedSegments = total.segments - remaining.segments;
+        hotStat.numberOfUniqueSegments = unique.segments;
+        hotStat.uniqueCountsByFile.clear();
+        for (FileData fd : counts) {
+            hotStat.uniqueCountsByFile.put(fd.filename, fd.unique.segments);
+        }
+        return hotStat;
+    }
 
-	public StatCount getRemainingUnique() {
-		return remainingUnique;
-	}
+    public StatCount getTotal() {
+        return total;
+    }
 
-	public List<FileData> getCounts() {
-		return counts;
-	}
+    public StatCount getRemaining() {
+        return remaining;
+    }
 
-	public String getTextData() {
-		StringBuilder result = new StringBuilder();
+    public StatCount getUnique() {
+        return unique;
+    }
+
+    public StatCount getRemainingUnique() {
+        return remainingUnique;
+    }
+
+    public List<FileData> getCounts() {
+        return counts;
+    }
+
+    public String getTextData(final ProjectProperties config) {
+        StringBuilder result = new StringBuilder();
 
         result.append(OStrings.getString("CT_STATS_Project_Statistics"));
         result.append("\n\n");
@@ -106,12 +98,12 @@ public class StatsResult {
         // STATISTICS BY FILE
         result.append(OStrings.getString("CT_STATS_FILE_Statistics"));
         result.append("\n\n");
-        result.append(TextUtil.showTextTable(FT_HEADERS, getFilesTable(), FT_ALIGN));
+        result.append(TextUtil.showTextTable(FT_HEADERS, getFilesTable(config), FT_ALIGN));
         return result.toString();
-	}
-	
-	public String[][] getHeaderTable() {
-		StatCount[] result = new StatCount[] { total, remaining, unique, remainingUnique };
+    }
+
+    public String[][] getHeaderTable() {
+        StatCount[] result = new StatCount[] { total, remaining, unique, remainingUnique };
         String[][] table = new String[result.length][6];
 
         for (int i = 0; i < result.length; i++) {
@@ -124,9 +116,8 @@ public class StatsResult {
         }
         return table;
     }
-	
-	public String[][] getFilesTable() {
-		final ProjectProperties config = project.getProjectProperties();
+
+    public String[][] getFilesTable(final ProjectProperties config) {
         String[][] table = new String[counts.size()][17];
 
         int r = 0;

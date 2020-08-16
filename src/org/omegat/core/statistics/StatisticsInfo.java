@@ -34,7 +34,7 @@ import java.util.Map;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class StatisticsInfo {
-    public int numberofTranslatedSegments;
+    public int numberOfTranslatedSegments;
     public int numberOfUniqueSegments;
     public int numberOfSegmentsTotal;
     public Map<String, Integer> uniqueCountsByFile = new HashMap<>();

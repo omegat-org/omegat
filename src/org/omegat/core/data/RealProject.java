@@ -376,7 +376,7 @@ public class RealProject implements IProject {
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             hotStat = stat.getStatisticsInfo();
             String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData());
+            Statistics.writeStat(fn, stat.getTextData(this.getProjectProperties()));
 
             loaded = true;
 
@@ -795,7 +795,7 @@ public class RealProject implements IProject {
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
                 hotStat = stat.getStatisticsInfo();
                 String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-                Statistics.writeStat(fn, stat.getTextData());
+                Statistics.writeStat(fn, stat.getTextData(this.getProjectProperties()));
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }
@@ -1499,8 +1499,8 @@ public class RealProject implements IProject {
          */
         int diff = prevTrEntry.translation == null ? 0 : -1;
         diff += trans.translation == null ? 0 : +1;
-        hotStat.numberofTranslatedSegments = Math.max(0,
-                Math.min(hotStat.numberOfUniqueSegments, hotStat.numberofTranslatedSegments + diff));
+        hotStat.numberOfTranslatedSegments = Math.max(0,
+                Math.min(hotStat.numberOfUniqueSegments, hotStat.numberOfTranslatedSegments + diff));
     }
 
     @Override

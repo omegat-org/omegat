@@ -75,8 +75,8 @@ public class CalcStandardStatistics extends LongProcessThread {
         IProject p = Core.getProject();
         StatsResult result = buildProjectStats(p);
         callback.setProjectTableData(StatsResult.HT_HEADERS, result.getHeaderTable());
-        callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable());
-        callback.setTextData(result.getTextData());
+        callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable(p.getProjectProperties()));
+        callback.setTextData(result.getTextData(p.getProjectProperties()));
         callback.finishData();
 
         String internalDir = p.getProjectProperties().getProjectInternal();
@@ -190,7 +190,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             remaining.addFiles(fileRemaining);
         }
 
-        return new StatsResult(project, total, remaining, unique, remainingUnique, counts);
+        return new StatsResult(total, remaining, unique, remainingUnique, counts);
     }
 
     public static class FileData {

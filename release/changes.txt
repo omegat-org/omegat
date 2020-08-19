@@ -2,7 +2,7 @@
  OmegaT 5.4.0
 ----------------------------------------------------------------------
   1 Enhancements
-  3 Bug fixes
+  4 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
@@ -24,6 +24,9 @@
   - without compression, leading and trailing whitespace is duplicated
   - whitespace before comment moves to after comment
   https://sourceforge.net/p/omegat/bugs/1007/
+
+  - Branding doesn't show in About dialog
+  https://sourceforge.net/p/omegat/bugs/1011/
 
 ----------------------------------------------------------------------
  OmegaT 5.3.0 (2020-08-03)

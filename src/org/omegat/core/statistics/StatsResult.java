@@ -3,7 +3,6 @@ package org.omegat.core.statistics;
 import java.util.List;
 
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.statistics.CalcStandardStatistics.FileData;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;

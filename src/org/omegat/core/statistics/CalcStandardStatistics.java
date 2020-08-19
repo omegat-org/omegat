@@ -192,16 +192,4 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         return new StatsResult(total, remaining, unique, remainingUnique, counts);
     }
-
-    public static class FileData {
-        public String filename;
-        public StatCount total, unique, remaining, remainingUnique;
-
-        public FileData() {
-            total = new StatCount();
-            unique = new StatCount();
-            remaining = new StatCount();
-            remainingUnique = new StatCount();
-        }
-    }
 }

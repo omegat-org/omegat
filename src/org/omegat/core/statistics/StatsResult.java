@@ -54,8 +54,7 @@ public class StatsResult {
         this.counts = counts;
     }
 
-    public StatisticsInfo getStatisticsInfo() {
-        StatisticsInfo hotStat = new StatisticsInfo();
+    public void updateStatisticsInfo(StatisticsInfo hotStat) {
         hotStat.numberOfSegmentsTotal = total.segments;
         hotStat.numberOfTranslatedSegments = total.segments - remaining.segments;
         hotStat.numberOfUniqueSegments = unique.segments;
@@ -63,7 +62,6 @@ public class StatsResult {
         for (FileData fd : counts) {
             hotStat.uniqueCountsByFile.put(fd.filename, fd.unique.segments);
         }
-        return hotStat;
     }
 
     public StatCount getTotal() {

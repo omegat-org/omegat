@@ -156,7 +156,7 @@ public class RealProject implements IProject {
 
     protected ImportFromAutoTMX importHandler;
 
-    private StatisticsInfo hotStat = new StatisticsInfo();
+    private final StatisticsInfo hotStat = new StatisticsInfo();
 
     private final ITokenizer sourceTokenizer, targetTokenizer;
 
@@ -374,7 +374,7 @@ public class RealProject implements IProject {
 
             // build word count
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
-            hotStat = stat.getStatisticsInfo();
+            stat.updateStatisticsInfo(hotStat);
             String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat.getTextData(config));
 
@@ -793,7 +793,7 @@ public class RealProject implements IProject {
 
                 // update statistics
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
-                hotStat = stat.getStatisticsInfo();
+                stat.updateStatisticsInfo(hotStat);
                 String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
                 Statistics.writeStat(fn, stat.getTextData(config));
             } finally {

@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 5.4.0
 ----------------------------------------------------------------------
-  1 Enhancements
-  4 Bug fixes
+  2 Enhancements
+  3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
@@ -11,6 +11,9 @@
 
   - Sync file deletions from repository to project
   https://sourceforge.net/p/omegat/feature-requests/1499/
+
+  - Show branding in About dialog
+  https://sourceforge.net/p/omegat/feature-requests/1511/
 
   Bug fixes:
 
@@ -24,9 +27,6 @@
   - without compression, leading and trailing whitespace is duplicated
   - whitespace before comment moves to after comment
   https://sourceforge.net/p/omegat/bugs/1007/
-
-  - Branding doesn't show in About dialog
-  https://sourceforge.net/p/omegat/bugs/1011/
 
 ----------------------------------------------------------------------
  OmegaT 5.3.0 (2020-08-03)

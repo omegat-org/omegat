@@ -376,7 +376,7 @@ public class RealProject implements IProject {
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             hotStat = stat.getStatisticsInfo();
             String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData(this.getProjectProperties()));
+            Statistics.writeStat(fn, stat.getTextData(config));
 
             loaded = true;
 
@@ -795,7 +795,7 @@ public class RealProject implements IProject {
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
                 hotStat = stat.getStatisticsInfo();
                 String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-                Statistics.writeStat(fn, stat.getTextData(this.getProjectProperties()));
+                Statistics.writeStat(fn, stat.getTextData(config));
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }

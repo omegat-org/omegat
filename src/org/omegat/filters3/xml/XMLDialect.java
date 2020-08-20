@@ -290,4 +290,9 @@ public interface XMLDialect {
      */
     void setForceSpacePreserving(boolean onOff);
 
+    /**
+     * Implement general purpose function to handle XML tag/attributes when necessary.
+     * @param tag
+     */
+    void handleXmlTag(XMLTag tag, boolean translated);
 }

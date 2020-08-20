@@ -48,6 +48,8 @@ import org.omegat.core.statistics.StatCount;
 import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters3.Tag;
+import org.omegat.filters3.xml.XMLTag;
 import org.omegat.filters3.xml.xliff.XLIFFDialect;
 import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.filters3.xml.xliff.XLIFFOptions;
@@ -287,4 +289,77 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMulti("tr2=test2", null, null, "tr1=This is test", "", "bar\nbazinga\nbaz");
         checkMultiEnd();
     }
+
+    @Test
+    public void testHandleXMLTag() throws Exception {
+        org.xml.sax.Attributes attributes = new org.xml.sax.Attributes() {
+            @Override
+            public int getLength() {
+                return 1;
+            }
+            @Override
+            public String getURI(int i) {
+                return null;
+            }
+            @Override
+            public String getLocalName(int i) {
+                return "state";
+            }
+            @Override
+            public String getQName(int i) {
+                return "state";
+            }
+            @Override
+            public String getType(int i) {
+                return null;
+            }
+            @Override
+            public String getValue(int i) {
+                return "needs-translation";
+            }
+            @Override
+            public int getIndex(String s, String s1) {
+                return 1;
+            }
+            @Override
+            public int getIndex(String s) {
+                return 1;
+            }
+            @Override
+            public String getType(String s, String s1) {
+                return getType(0);
+            }
+            @Override
+            public String getType(String s) {
+                return getType(0);
+            }
+            @Override
+            public String getValue(String s, String s1) {
+                return getValue(0);
+            }
+            @Override
+            public String getValue(String s) {
+                return "needs-translation";
+            }
+        };
+        XMLTag tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
+        XLIFFDialect dialect = (XLIFFDialect) filter.getDialect();
+        XLIFFOptions options = new XLIFFOptions(new TreeMap<String, String>());
+        //
+        // translated
+        dialect.defineDialect(options);
+        dialect.handleXMLTag(tag, false);
+        assertEquals("needs-translation", tag.getAttribute("state"));
+        //
+        // untranslated
+        dialect.handleXMLTag(tag, true);
+        assertEquals("translated", tag.getAttribute("state"));
+        //
+        // CHANGE TO REVIEW true
+        options.setStateToReview(true);
+        dialect.defineDialect(options);
+        tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
+        dialect.handleXMLTag(tag, true);
+        assertEquals("needs-review-translation", tag.getAttribute("state"));
+   }
 }

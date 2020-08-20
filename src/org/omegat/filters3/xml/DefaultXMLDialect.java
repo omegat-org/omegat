@@ -486,6 +486,14 @@ public class DefaultXMLDialect implements XMLDialect {
      * {@inheritDoc}
      */
     @Override
+    public void handleXMLTag(XMLTag tag, boolean translated) {
+        return;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String constructShortcuts(List<Element> elements, List<ProtectedPart> protectedParts) {
         protectedParts.clear();
         StringBuilder r = new StringBuilder();

@@ -7,6 +7,7 @@
                2007-2012 Didier Briel
                2013 Didier Briel, Piotr Kulik
                2014 Didier Briel, Aaron Madlon-Kay, Piotr Kulik
+               2020 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -45,6 +46,7 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Didier Briel
  * @author Piotr Kulik
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
 public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
@@ -67,6 +69,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         prevAndNextRB.setSelected(options.getAltTransIDType() == ID_TYPE.CONTEXT);
         transIDRB.setSelected(options.getAltTransIDType() == ID_TYPE.ELEMENT_ID);
         transResnameRB.setSelected(options.getAltTransIDType() == ID_TYPE.RESNAME_ATTR);
+        changeToNeedsReviewCB.setSelected(options.getChangeStateToNeedsReviewTranslation());
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
@@ -116,6 +119,8 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         forceshortcut2fCB = new javax.swing.JCheckBox();
         ignoreTypeForPhTagsCB = new javax.swing.JCheckBox();
         ignoreTypeForBptTagsCB = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+        changeToNeedsReviewCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("XLIFF_OPTIONS_TITLE")); // NOI18N
         setResizable(false);
@@ -191,16 +196,24 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(ignoreTypeForBptTagsCB, OStrings.getString("XLIFF_OPTIONS_IGNORE4BPT")); // NOI18N
         jPanel1.add(ignoreTypeForBptTagsCB);
 
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, bundle.getString("XLIFF_OPTIONS_STATE")); // NOI18N
+        jPanel1.add(jLabel5);
+
+        org.openide.awt.Mnemonics.setLocalizedText(changeToNeedsReviewCB, bundle.getString("XLIFF_OPTION_CHANGE_TARGET_STATE_NEEDS_REVIEW_T9N")); // NOI18N
+        jPanel1.add(changeToNeedsReviewCB);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         options.set26Compatibility(compatibility26CB.isSelected());
         options.setForceShortcutToF(forceshortcut2fCB.isSelected());
         options.setIgnoreTypeForPhTags(ignoreTypeForPhTagsCB.isSelected());
         options.setIgnoreTypeForBptTags(ignoreTypeForBptTagsCB.isSelected());
+        options.setStateToReview(changeToNeedsReviewCB.isSelected());
         if (prevAndNextRB.isSelected()) {
             options.setAltTransIDType(ID_TYPE.CONTEXT);
         } else if (transIDRB.isSelected()) {
@@ -210,9 +223,9 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         }
 
         doClose(RET_OK);
-    }// GEN-LAST:event_okButtonActionPerformed
+    }//GEN-LAST:event_okButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         doClose(RET_CANCEL);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -231,6 +244,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JCheckBox changeToNeedsReviewCB;
     private javax.swing.JCheckBox compatibility26CB;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JCheckBox forceshortcut2fCB;
@@ -240,6 +254,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton okButton;

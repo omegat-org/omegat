@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.4.0
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   4 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,10 @@
 
   - Show branding in About dialog
   https://sourceforge.net/p/omegat/feature-requests/1511/
+
+  - XLIFF: update target tag's state attribute according to
+    translation status
+  https://sourceforge.net/p/omegat/feature-requests/1506/
 
   Bug fixes:
 

@@ -33,11 +33,13 @@ import java.util.List;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.statistics.StatisticsSettings;
+import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 import org.omegat.filters3.xml.XMLContentBasedTag;
+import org.omegat.filters3.xml.XMLTag;
 import org.omegat.filters3.xml.XMLText;
 import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.InlineTagHandler;
@@ -59,6 +61,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
     private boolean ignoreTypeForPhTags;
     private boolean ignoreTypeForBptTags;
+    private boolean changeStateToNeedsReviewTranslation;
     /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
@@ -97,6 +100,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
             ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
             ignoreTypeForBptTags = options.getIgnoreTypeForBptTags();
             altTransIDType = options.getAltTransIDType();
+            changeStateToNeedsReviewTranslation = options.getChangeStateToNeedsReviewTranslation();
         }
 
     }
@@ -158,6 +162,31 @@ public class XLIFFDialect extends DefaultXMLDialect {
     @Override
     public Boolean validateContentBasedTag(String tag, Attributes atts) {
         return "mrk".equals(tag) && atts != null && "protected".equals(atts.getValueByName("mtype"));
+    }
+
+    /**
+     * Handle &lt;target state="..."&gt; attribute according to filter settings.
+     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1506/">RFE #1506</a>
+     * @param tag XML tag to be processed.
+     * @param translated is the value considered translated?
+     */
+    @Override
+    public void handleXMLTag(XMLTag tag, boolean translated) {
+        if (!"target".equals(tag.getTag())) {
+            return;
+        }
+        Attribute attr = tag.getAttributeObject("state");
+        if (attr == null) {
+            return;
+        }
+        String state = attr.getValue();
+        String nextTranslatedState = changeStateToNeedsReviewTranslation ? "needs-review-translation" : "translated";
+        if (translated && "needs-translation".equals(state)) {
+            attr.setValue(nextTranslatedState);
+        } else if ("new".equals(state)) {
+            String next = translated ? nextTranslatedState : "needs-translation";
+            attr.setValue(next);
+        }
     }
 
     @Override

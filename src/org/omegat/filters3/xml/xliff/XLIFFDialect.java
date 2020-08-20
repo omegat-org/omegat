@@ -33,11 +33,13 @@ import java.util.List;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.statistics.StatisticsSettings;
+import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 import org.omegat.filters3.xml.XMLContentBasedTag;
+import org.omegat.filters3.xml.XMLTag;
 import org.omegat.filters3.xml.XMLText;
 import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.InlineTagHandler;
@@ -158,6 +160,27 @@ public class XLIFFDialect extends DefaultXMLDialect {
     @Override
     public Boolean validateContentBasedTag(String tag, Attributes atts) {
         return "mrk".equals(tag) && atts != null && "protected".equals(atts.getValueByName("mtype"));
+    }
+
+    /**
+     * When translation is different from src, transit <target state="needs-translated"> attr
+     * to <target state="translated"> value.
+     * https://sourceforge.net/p/omegat/feature-requests/1506/
+     * @param tag XML tag to be processed.
+     * @param translated is a value considered as translated?
+     */
+    @Override
+    public void handleXmlTag(XMLTag tag, boolean translated) {
+        if (!translated) {
+            return;
+        }
+        for (int i = 0; i < tag.getAttributes().size(); i++) {
+            Attribute attr = tag.getAttributes().get(i);
+            if (tag.getTag().equals("target") && attr.getName().equals("state")
+                    && attr.getValue().equals("needs-translation")) {
+                attr.setValue("translated");
+            }
+        }
     }
 
     @Override

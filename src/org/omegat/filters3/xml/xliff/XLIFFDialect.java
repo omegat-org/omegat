@@ -29,9 +29,7 @@
 
 package org.omegat.filters3.xml.xliff;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.statistics.StatisticsSettings;
@@ -43,7 +41,6 @@ import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLText;
 import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.InlineTagHandler;
-import org.omegat.util.MultiMap;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -66,11 +63,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
     protected ID_TYPE altTransIDType;
-    private MultiMap<String, String> statustagattribute = new MultiMap<>();
-    private Map<String, String> statusTransitions = new HashMap<>();
 
     public XLIFFDialect() {
-        setTranslatinStatusAttributes();
     }
 
     /**
@@ -105,21 +99,6 @@ public class XLIFFDialect extends DefaultXMLDialect {
             altTransIDType = options.getAltTransIDType();
         }
 
-    }
-
-    private void setTranslatinStatusAttributes() {
-        statustagattribute.put("target", "state");
-        statusTransitions.put("needs-translation", "translated");
-    }
-
-    @Override
-    public MultiMap<String, String> getTranslationStatusAttributes() {
-        return statustagattribute;
-    }
-
-    @Override
-    public Map<String, String> getTranslationStatusTransitions() {
-        return statusTransitions;
     }
 
     /**

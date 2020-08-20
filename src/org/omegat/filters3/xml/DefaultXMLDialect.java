@@ -110,9 +110,7 @@ public class DefaultXMLDialect implements XMLDialect {
 
     /** The set of defined paragraph tags. */
     private MultiMap<String, String> translatableTagAttributes = new MultiMap<String, String>();
-    /** The set of defined translation status tags */
-    private MultiMap<String, String> translationStatusAttributes = new MultiMap<>();
-    private Map<String, String> translationStatusTransition = new HashMap<>();
+
     /** Defines translatable attribute of a tag. */
     public void defineTranslatableTagAttribute(String tag, String attribute) {
         translatableTagAttributes.put(tag, attribute);
@@ -272,16 +270,6 @@ public class DefaultXMLDialect implements XMLDialect {
     @Override
     public MultiMap<String, String> getTranslatableTagAttributes() {
         return translatableTagAttributes;
-    }
-
-    @Override
-    public MultiMap<String, String> getTranslationStatusAttributes() {
-        return translationStatusAttributes;
-    }
-
-    @Override
-    public Map<String, String> getTranslationStatusTransitions() {
-        return translationStatusTransition;
     }
 
     /**

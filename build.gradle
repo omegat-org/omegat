@@ -184,6 +184,9 @@ dependencies {
 
         // Moses MT connector
         implementation 'org.apache.xmlrpc:xmlrpc-client:3.1.3'
+
+        // LookAndFeel
+        implementation 'com.formdev:flatlaf:0.40'
     }
 
     // Test dependencies

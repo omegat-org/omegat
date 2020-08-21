@@ -81,6 +81,8 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
@@ -283,7 +285,22 @@ public final class Main {
             // Contributed by Masaki Katakai (SF: katakai)
             UIManager.getInstalledLookAndFeels();
 
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            String lafName = Preferences.getPreferenceDefault(Preferences.LOOK_AND_FEEL_SELECTION,
+                    Preferences.LOOK_AND_FEEL_SELECTION_DEFAULT);
+            try {
+                if (lafName.equals("system")) {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } else if (lafName.equals("light")) {
+                    UIManager.setLookAndFeel(new FlatLightLaf());
+                } else if (lafName.equals("dark")) {
+                    UIManager.setLookAndFeel(new FlatDarculaLaf());
+                } else {  // fallback to default
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                }
+            } catch( Exception ex ) {
+                System.err.println( "Failed to initialize LaF" );
+            }
+
 
             System.setProperty("swing.aatext", "true");
 

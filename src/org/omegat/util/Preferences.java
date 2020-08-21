@@ -501,6 +501,10 @@ public final class Preferences {
     public static final String VERSION_CHECK_AUTOMATIC = "automatically_check_version";
     public static final boolean VERSION_CHECK_AUTOMATIC_DEFAULT = true;
 
+    /** LookAndFeel Configuration */
+    public static final String LOOK_AND_FEEL_SELECTION = "lookandfeel_selection_name";
+    public static final String LOOK_AND_FEEL_SELECTION_DEFAULT = "system";
+
     /** Private constructor, because this file is singleton */
     private Preferences() {
     }

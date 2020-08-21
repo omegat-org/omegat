@@ -123,11 +123,11 @@ public class AboutDialog extends JDialog {
 
     private String getVersionString() {
         if (!StringUtil.isEmpty(OStrings.UPDATE) && !OStrings.UPDATE.equals("0")) {
-            return StringUtil.format(OStrings.getString("ABOUTDIALOG_VERSION_UPDATE_REVISION"),
-                    OStrings.VERSION, OStrings.UPDATE, OStrings.REVISION);
+            return StringUtil.format(OStrings.getString("ABOUTDIALOG_BRAND_VERSION_UPDATE_REVISION"),
+                    OStrings.getApplicationDisplayName(),OStrings.VERSION, OStrings.UPDATE, OStrings.REVISION);
         } else {
-            return StringUtil.format(OStrings.getString("ABOUTDIALOG_VERSION_REVISION"),
-                    OStrings.VERSION, OStrings.REVISION);
+            return StringUtil.format(OStrings.getString("ABOUTDIALOG_BRAND_VERSION_REVISION"),
+                    OStrings.getApplicationDisplayName(), OStrings.VERSION, OStrings.REVISION);
         }
     }
 
@@ -180,7 +180,7 @@ public class AboutDialog extends JDialog {
         getContentPane().setLayout(new java.awt.BorderLayout(5, 5));
 
         versionLabel.setIcon(new ImageIcon(ResourcesUtil.APP_ICON_32X32));
-        org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_VERSION_REVISION")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_BRAND_VERSION_REVISION")); // NOI18N
         versionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         getContentPane().add(versionLabel, java.awt.BorderLayout.NORTH);
 

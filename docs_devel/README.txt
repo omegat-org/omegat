@@ -7,8 +7,7 @@ main tests. Tasks skipped due to missing requirements will be noted in the
 output.
 
 OmegaT will run on the latest Java, but is required to be compatible with Java
-1.8. Further, JREs other than Oracle's are not officially supported. You are
-thus recommended to build with Oracle JDK 1.8.
+1.8.
 
 Eclipse and NetBeans are recommended IDEs for working with OmegaT source
 code. NetBeans is required to modify *.form-based GUI layouts (install the

@@ -1117,7 +1117,9 @@
   <section id="dialogs.preferences.tagprocessing">
     <title>Tag Processing</title>
 
-    <para>When translating software-related files, you can configure the Tag Validator options to also check programming (%...) variables. You can also define various options relating to tag validation and define custom tags.</para>
+    <para>When translating software-related files, you can configure the Tag Validator options to also check programming (%...) variables or placeholders ({0}), if the file filter doesn't do it out of the box already. The PO filter already handles %.. and Java™ Resource Bundle filter already handles {#} tags, so you only need this for other file types.</para>
+
+    <para>You can also define various options relating to tag validation and define custom tags.</para>
 
     <para>For example, if you enter <userinput>\d+</userinput> into the <guilabel>Regular expression for custom tags</guilabel> field, all numbers will be considered as tags, enabling you to check that numbers have not been changed by mistake during translation.</para>
 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.4.0
 ----------------------------------------------------------------------
-  1 Enhancements
+  2 Enhancements
   3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Sync file deletions from repository to project
   https://sourceforge.net/p/omegat/feature-requests/1499/
+
+  - Show branding in About dialog
+  https://sourceforge.net/p/omegat/feature-requests/1511/
 
   Bug fixes:
 

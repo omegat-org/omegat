@@ -585,7 +585,7 @@ public class PoFilter extends AbstractFilter {
         }
     }
 
-    protected void align(int pair) {
+    protected void parseOrAlign(int pair) {
         String pathSuffix;
         String s;
         String c = "";
@@ -613,7 +613,7 @@ public class PoFilter extends AbstractFilter {
         if (c.length() == 0) {
             c = null;
         }
-        align(s, t, c, pathSuffix);
+        parseOrAlign(s, t, c, pathSuffix);
     }
 
     /**
@@ -625,7 +625,7 @@ public class PoFilter extends AbstractFilter {
      *            suffix for path to distinguish plural forms. It will be empty for first one, and [1],[2],...
      *            for next
      */
-    protected void align(String source, String translation, String comments, String pathSuffix) {
+    protected void parseOrAlign(String source, String translation, String comments, String pathSuffix) {
         if (translation.isEmpty()) {
             translation = null;
         }
@@ -654,7 +654,7 @@ public class PoFilter extends AbstractFilter {
         }
     }
 
-    protected void alignHeader(String header, FilterContext fc) {
+    protected void parseHeader(String header, FilterContext fc) {
         if (entryParseCallback != null && !skipHeader) {
             header = unescape(autoFillInPluralStatement(header, fc));
             List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(header,
@@ -698,7 +698,7 @@ public class PoFilter extends AbstractFilter {
                     // Header is always written
                     out.write("msgstr " + getTranslation(null, targets[0], false, true, fc, 0) + "\n");
                 } else {
-                    alignHeader(targets[0].toString(), fc);
+                    parseHeader(targets[0].toString(), fc);
                 }
             }
             fuzzy = false;
@@ -716,7 +716,7 @@ public class PoFilter extends AbstractFilter {
                                 + "\n");
                     }
                 } else {
-                    align(0);
+                    parseOrAlign(0);
                 }
             } else {
                 // plurals
@@ -727,9 +727,9 @@ public class PoFilter extends AbstractFilter {
                                 + "\n");
                     }
                 } else {
-                    align(0);
+                    parseOrAlign(0);
                     for (int i = 1; i < plurals; i++) {
-                        align(i);
+                        parseOrAlign(i);
                     }
                 }
             }

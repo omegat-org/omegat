@@ -170,7 +170,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
      * @param translated is a value considered as translated?
      */
     @Override
-    public void handleXmlTag(XMLTag tag, boolean translated) {
+    public void handleXMLTag(XMLTag tag, boolean translated) {
         if (!translated) {
             return;
         }

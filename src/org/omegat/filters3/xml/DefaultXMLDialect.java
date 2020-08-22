@@ -486,7 +486,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * {@inheritDoc}
      */
     @Override
-    public void handleXmlTag(XMLTag tag, boolean translated) {
+    public void handleXMLTag(XMLTag tag, boolean translated) {
         return;
     }
 

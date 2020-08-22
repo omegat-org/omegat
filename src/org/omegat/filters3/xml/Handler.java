@@ -642,7 +642,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             }
         }
         if (lead instanceof XMLTag) {
-            dialect.handleXmlTag((XMLTag) lead, isTranslated);
+            dialect.handleXMLTag((XMLTag) lead, isTranslated);
         }
 
         currEntry().setTranslation(translation, dialect, new ArrayList<ProtectedPart>());

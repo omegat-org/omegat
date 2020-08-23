@@ -70,9 +70,9 @@ import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
+import org.omegat.util.gui.UIDesignManager;
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
@@ -295,7 +295,7 @@ public class EditorTextArea3 extends JEditorPane {
                     isInActiveTranslation(pos), sb);
         }
 
-        DockingUI.removeUnusedMenuSeparators(popup);
+        UIDesignManager.removeUnusedMenuSeparators(popup);
 
         return popup;
     }

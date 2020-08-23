@@ -65,8 +65,8 @@ import org.omegat.util.FileUtil;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.UIDesignManager;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -115,6 +115,8 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     /** Creates new form MainWindow */
     public MainWindow() {
+        UIDesignManager.initialize();
+
         menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
 
         setJMenuBar(menu.initComponents());
@@ -156,7 +158,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             public void onApplicationStartup() {
                 MainWindowUI.initializeScreenLayout(MainWindow.this);
 
-                DockingUI.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
+                UIDesignManager.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
             }
 
             public void onApplicationShutdown() {

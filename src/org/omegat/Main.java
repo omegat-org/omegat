@@ -278,19 +278,12 @@ public final class Main {
         }
 
         try {
-            // Workaround for JDK bug 6389282 (OmegaT bug bug 1555809)
-            // it should be called before setLookAndFeel() for GTK LookandFeel
-            // Contributed by Masaki Katakai (SF: katakai)
-            UIManager.getInstalledLookAndFeels();
-
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-            System.setProperty("swing.aatext", "true");
-
         } catch (Exception e) {
             // do nothing
-            Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");
         }
+
+        System.setProperty("swing.aatext", "true");
 
         try {
             Core.initializeGUI(PARAMS);

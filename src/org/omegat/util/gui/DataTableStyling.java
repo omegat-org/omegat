@@ -39,6 +39,7 @@ import javax.swing.JTable;
 import javax.swing.JTextPane;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
@@ -60,12 +61,12 @@ public final class DataTableStyling {
     private DataTableStyling() {
     }
 
-    public static final Color COLOR_STANDARD_FG = Color.BLACK;
-    public static final Color COLOR_STANDARD_BG = Color.WHITE;
-    public static final Color COLOR_SELECTION_FG = Color.WHITE;
-    public static final Color COLOR_SELECTION_BG = new Color(0x2F77DA);
-    public static final Color COLOR_ALTERNATING_HILITE = new Color(245, 245, 245);
-    public static final Border TABLE_FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
+    public static final Color COLOR_STANDARD_FG = UIManager.getColor("TextArea.foreground");
+    public static final Color COLOR_STANDARD_BG = UIManager.getColor("TextArea.background");
+    public static final Color COLOR_SELECTION_FG = UIManager.getColor("TextArea.selectionForeground");
+    public static final Color COLOR_SELECTION_BG = UIManager.getColor("TextArea.selectionBackground");
+    public static final Color COLOR_ALTERNATING_HILITE = UIManager.getColor("TextArea.inactiveBackground");
+    public static final Border TABLE_FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, UIManager.getColor("TextArea.border"));
     public static final Border TABLE_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
 
     public static final DecimalFormat NUMBER_FORMAT = new DecimalFormat(",##0");

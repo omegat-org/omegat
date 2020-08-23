@@ -29,6 +29,7 @@
 
 package org.omegat;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,6 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
 
@@ -80,6 +82,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
+import org.omegat.util.gui.ResourcesUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -251,6 +254,24 @@ public final class Main {
         }
     }
 
+    private static void initColorScheme() {
+        String scheme = isDarkTheme() ? "dark" : "light";
+        Properties colors = ResourcesUtil.getBundleColorProperties(scheme);
+        colors.forEach((k, v) -> {
+            int colorCode = Integer.parseInt(v.toString(), 16);
+            UIManager.put(k.toString(), new Color(colorCode));
+        });
+    }
+
+    /**
+     * Huristic detection of dark theme.
+     * @return true is dark theme, otehrwise it seems light theme.
+     */
+    private static boolean isDarkTheme() {
+        Color bg = UIManager.getColor("TextArea.background");
+        return bg.getRed() <= 0xa0 || bg.getBlue() <= 0xa0 || bg.getGreen() <= 0xa0;
+    }
+
     /**
      * Execute standard GUI.
      */
@@ -284,6 +305,7 @@ public final class Main {
             UIManager.getInstalledLookAndFeels();
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            initColorScheme();
 
             System.setProperty("swing.aatext", "true");
 

@@ -38,6 +38,7 @@ import org.omegat.core.Core;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.util.Token;
+import org.omegat.util.gui.MenuItemPager;
 
 /**
  * Popup for TransTips processing.
@@ -64,6 +65,7 @@ public class TransTipsPopup implements IPopupMenuConstructor {
         if (mousepos < startSource || mousepos > startSource + len) {
             return;
         }
+        MenuItemPager pager = new MenuItemPager(menu);
         Set<String> added = new HashSet<>();
         for (GlossaryEntry ge : GlossaryTextArea.nowEntries) {
             for (Token[] toks : Core.getGlossaryManager().searchSourceMatchTokens(sb.getSourceTextEntry(), ge)) {
@@ -74,7 +76,7 @@ public class TransTipsPopup implements IPopupMenuConstructor {
                         // Create the MenuItems
                         for (String s : ge.getLocTerms(true)) {
                             if (!added.contains(s)) {
-                                JMenuItem it = menu.add(s);
+                                JMenuItem it = pager.add(new JMenuItem(s));
                                 it.addActionListener(e -> Core.getEditor().insertText(s));
                                 added.add(s);
                             }

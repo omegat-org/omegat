@@ -28,7 +28,9 @@ package org.omegat.util.gui;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Properties;
 
 /**
  * Utils for load resources from classpath.
@@ -64,11 +66,26 @@ public final class ResourcesUtil {
     /**
      * Load icon from classpath.
      *
-     * @param iconName
+     * @param imageIcon
      *            icon file name
      * @return icon instance
      */
     public static Image getBundledImage(String imageName) {
         return getImage(RESOURCES + imageName);
+    }
+
+    /**
+     * Load default color scheme from classpath.
+     */
+    public static Properties getBundleColorProperties(final String style) {
+        String resourcePath = "/org/omegat/" + "ColorScheme_" + style + ".properties";
+        Properties properties = new Properties();
+        try {
+            InputStream is = ResourcesUtil.class.getResourceAsStream(resourcePath);
+            properties.load(is);
+        } catch (Exception e) {
+            return null;
+        }
+        return properties;
     }
 }

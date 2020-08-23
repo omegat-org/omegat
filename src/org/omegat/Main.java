@@ -29,6 +29,7 @@
 
 package org.omegat;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,6 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
 
@@ -80,6 +82,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
+import org.omegat.util.gui.ResourcesUtil;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -253,6 +256,14 @@ public final class Main {
         }
     }
 
+    private static void initColorScheme(final String scheme) {
+        Properties colors = ResourcesUtil.getBundleColorProperties(scheme);
+        colors.forEach((k, v) -> {
+            int colorCode = Integer.parseInt(v.toString(), 16);
+            UIManager.put(k.toString(), new Color(colorCode));
+        });
+    }
+
     /**
      * Execute standard GUI.
      */
@@ -290,12 +301,16 @@ public final class Main {
             try {
                 if (lafName.equals("system")) {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    initColorScheme("system");
                 } else if (lafName.equals("light")) {
                     UIManager.setLookAndFeel(new FlatLightLaf());
+                    initColorScheme("light");
                 } else if (lafName.equals("dark")) {
                     UIManager.setLookAndFeel(new FlatDarculaLaf());
+                    initColorScheme("dark");
                 } else {  // fallback to default
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    initColorScheme("system");
                 }
             } catch( Exception ex ) {
                 System.err.println( "Failed to initialize LaF" );

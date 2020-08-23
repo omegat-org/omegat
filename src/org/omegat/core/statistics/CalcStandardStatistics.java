@@ -30,12 +30,15 @@
 package org.omegat.core.statistics;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -46,6 +49,7 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsPanel;
 import org.omegat.util.OConsts;
+import org.omegat.util.StreamUtil;
 
 /**
  * Thread for calculate standard statistics.
@@ -95,6 +99,22 @@ public class CalcStandardStatistics extends LongProcessThread {
         callback.setDataFile(fn);
     }
 
+    private static void processEntry(final Map.Entry<String, SourceTextEntry> en, final StatCount unique,
+            final Set<String> filesUnique, final Set<String> translated, final StatCount remainingUnique,
+            final Set<String> filesRemainingUnique) {
+        /* Number of words and chars calculated without all tags and protected parts. */
+        StatCount count = new StatCount(en.getValue());
+
+        // add to unique
+        unique.add(count);
+        filesUnique.add(en.getValue().getKey().file);
+        // add to unique remaining
+        if (!translated.contains(en.getKey())) {
+            remainingUnique.add(count);
+            filesRemainingUnique.add(en.getValue().getKey().file);
+        }
+    }
+
     /**
      * Builds a file with statistic info about the project. The total word &
      * character count of the project, the total number of unique segments, plus
@@ -123,74 +143,71 @@ public class CalcStandardStatistics extends LongProcessThread {
                 translated.add(src);
             }
         }
-        Set<String> filesUnique = new HashSet<String>();
-        Set<String> filesRemainingUnique = new HashSet<String>();
-        for (Map.Entry<String, SourceTextEntry> en : uniqueSegment.entrySet()) {
-            /* Number of words and chars calculated without all tags and protected parts. */
-            StatCount count = new StatCount(en.getValue());
-
-            // add to unique
-            unique.add(count);
-            filesUnique.add(en.getValue().getKey().file);
-            // add to unique remaining
-            if (!translated.contains(en.getKey())) {
-                remainingUnique.add(count);
-                filesRemainingUnique.add(en.getValue().getKey().file);
-            }
-        }
+        Set<String> filesUnique = new CopyOnWriteArraySet<>();
+        Set<String> filesRemainingUnique = new CopyOnWriteArraySet<>();
+        uniqueSegment.entrySet().parallelStream().forEach(en -> processEntry(en, unique, filesUnique, translated, remainingUnique, filesRemainingUnique));
         unique.addFiles(filesUnique.size());
         remainingUnique.addFiles(filesRemainingUnique.size());
 
-        List<FileData> counts = new ArrayList<FileData>();
-        Map<String, Boolean> firstSeenUniqueSegment = new HashMap<String, Boolean>();
-        for (FileInfo file : project.getProjectFiles()) {
-            FileData numbers = new FileData();
-            numbers.filename = file.filePath;
-            counts.add(numbers);
-            int fileTotal = 0;
-            int fileRemaining = 0;
-            for (SourceTextEntry ste : file.entries) {
-                String src = ste.getSrcText();
-                for (ProtectedPart pp : ste.getProtectedParts()) {
-                    src = src.replace(pp.getTextInSourceSegment(), pp.getReplacementUniquenessCalculation());
-                }
-
-                /* Number of words and chars calculated without all tags and protected parts. */
-                StatCount count = new StatCount(ste);
-
-                // add to total
-                total.add(count);
-                fileTotal = 1;
-
-                // add to remaining
-                TMXEntry tr = project.getTranslationInfo(ste);
-                if (!tr.isTranslated()) {
-                    remaining.add(count);
-                    fileRemaining = 1;
-                }
-
-                // add to file's info
-                numbers.total.add(count);
-
-                Boolean firstSeen = firstSeenUniqueSegment.get(src);
-                if (firstSeen == null) {
-                    firstSeenUniqueSegment.put(src, false);
-                    numbers.unique.add(count);
-
-                    if (!tr.isTranslated()) {
-                        numbers.remainingUnique.add(count);
-                    }
-                }
-
-                if (!tr.isTranslated()) {
-                    numbers.remaining.add(count);
-                }
-            }
-            total.addFiles(fileTotal);
-            remaining.addFiles(fileRemaining);
-        }
-
+        List<FileData> counts = new CopyOnWriteArrayList<>();
+        Map<String, Boolean> firstSeenUniqueSegment = new ConcurrentHashMap<String, Boolean>();
+        project.getProjectFiles().parallelStream().forEach(
+                file -> processFile(file, counts, total, remaining, firstSeenUniqueSegment, project));
+        counts.sort(new Comparator<FileData>() {
+            Comparator<String> stringComparator = StreamUtil.comparatorByList(project.getSourceFilesOrder());
+            @Override
+            public int compare(FileData fd1, FileData fd2) {
+                return stringComparator.compare(fd1.filename, fd2.filename);
+            }});
         assert (total.segments - remaining.segments == translated.size());
         return new StatsResult(total, remaining, unique, remainingUnique, counts);
+    }
+    
+    private static void processFile(final FileInfo file, final List<FileData> counts, final StatCount total,
+            final StatCount remaining, final Map<String, Boolean> firstSeenUniqueSegment, final IProject project) {
+        FileData numbers = new FileData();
+        numbers.filename = file.filePath;
+        counts.add(numbers);
+        int fileTotal = 0;
+        int fileRemaining = 0;
+        for (SourceTextEntry ste : file.entries) {
+            String src = ste.getSrcText();
+            for (ProtectedPart pp : ste.getProtectedParts()) {
+                src = src.replace(pp.getTextInSourceSegment(), pp.getReplacementUniquenessCalculation());
+            }
+
+            /* Number of words and chars calculated without all tags and protected parts. */
+            StatCount count = new StatCount(ste);
+
+            // add to total
+            total.add(count);
+            fileTotal = 1;
+
+            // add to remaining
+            TMXEntry tr = project.getTranslationInfo(ste);
+            if (!tr.isTranslated()) {
+                remaining.add(count);
+                fileRemaining = 1;
+            }
+
+            // add to file's info
+            numbers.total.add(count);
+
+            Boolean firstSeen = firstSeenUniqueSegment.get(src);
+            if (firstSeen == null) {
+                firstSeenUniqueSegment.put(src, false);
+                numbers.unique.add(count);
+
+                if (!tr.isTranslated()) {
+                    numbers.remainingUnique.add(count);
+                }
+            }
+
+            if (!tr.isTranslated()) {
+                numbers.remaining.add(count);
+            }
+        }
+        total.addFiles(fileTotal);
+        remaining.addFiles(fileRemaining);
     }
 }

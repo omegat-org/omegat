@@ -29,6 +29,7 @@
 
 package org.omegat;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
@@ -252,6 +253,15 @@ public final class Main {
     }
 
     /**
+     * Huristic detection of dark theme.
+     * @return true is dark theme, otehrwise it seems light theme.
+     */
+    private static boolean isDarkTheme() {
+        Color bg = UIManager.getColor("TextArea.background");
+        return bg.getRed() <= 0xa0 || bg.getBlue() <= 0xa0 || bg.getGreen() <= 0xa0;
+    }
+
+    /**
      * Execute standard GUI.
      */
     protected static int runGUI() {
@@ -284,6 +294,11 @@ public final class Main {
             UIManager.getInstalledLookAndFeels();
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            if (!isDarkTheme()) {
+                // Override System LAF with custom color. It uses for project
+                // files selection dialog.
+                UIManager.put("TextArea.inactiveBackground", new Color(0xf5f5f5));
+            }
 
             System.setProperty("swing.aatext", "true");
 

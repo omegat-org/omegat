@@ -256,6 +256,15 @@ public final class Main {
         }
     }
 
+    /**
+     * Huristic detection of dark theme.
+     * @return true is dark theme, otehrwise it seems light theme.
+     */
+    private static boolean isDarkTheme() {
+        Color bg = UIManager.getColor("TextArea.background");
+        return bg.getRed() <= 0xa0 || bg.getBlue() <= 0xa0 || bg.getGreen() <= 0xa0;
+    }
+
     private static void initColorScheme(final String scheme) {
         Properties colors = ResourcesUtil.getBundleColorProperties(scheme);
         colors.forEach((k, v) -> {
@@ -300,8 +309,13 @@ public final class Main {
                     Preferences.LOOK_AND_FEEL_SELECTION_DEFAULT);
             try {
                 if (lafName.equals("system")) {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    initColorScheme("system");
+                    String systemLafClassName = UIManager.getSystemLookAndFeelClassName();
+                    UIManager.setLookAndFeel(systemLafClassName);
+                    if (isDarkTheme()) {
+                        initColorScheme("dark");
+                    } else {
+                        initColorScheme("system");
+                    }
                 } else if (lafName.equals("light")) {
                     UIManager.setLookAndFeel(new FlatLightLaf());
                     initColorScheme("light");

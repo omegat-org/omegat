@@ -56,8 +56,8 @@ public final class Styles {
     }
 
     public enum EditorColor {
-        COLOR_BACKGROUND(UIManager.getColor("TextPane.background")), // Also used for EditorPane.background
-        COLOR_FOREGROUND(UIManager.getColor("TextPane.foreground")),
+        COLOR_BACKGROUND(UIManager.getColor("TextArea.background")), // Also used for EditorPane.background
+        COLOR_FOREGROUND(UIManager.getColor("TextArea.foreground")),
 
         COLOR_ACTIVE_SOURCE(UIManager.getColor("OmegaT.ActiveSource")),
         COLOR_ACTIVE_SOURCE_FG((Color) null),

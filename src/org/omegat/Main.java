@@ -256,6 +256,14 @@ public final class Main {
         }
     }
 
+    private static void initColorScheme(final String scheme) {
+        Properties colors = ResourcesUtil.getBundleColorProperties(scheme);
+        colors.forEach((k, v) -> {
+            int colorCode = Integer.parseInt(v.toString(), 16);
+            UIManager.put(k.toString(), new Color(colorCode));
+        });
+    }
+
     /**
      * Huristic detection of dark theme.
      * @return true is dark theme, otehrwise it seems light theme.
@@ -263,14 +271,6 @@ public final class Main {
     private static boolean isDarkTheme() {
         Color bg = UIManager.getColor("TextArea.background");
         return bg.getRed() <= 0xa0 || bg.getBlue() <= 0xa0 || bg.getGreen() <= 0xa0;
-    }
-
-    private static void initColorScheme(final String scheme) {
-        Properties colors = ResourcesUtil.getBundleColorProperties(scheme);
-        colors.forEach((k, v) -> {
-            int colorCode = Integer.parseInt(v.toString(), 16);
-            UIManager.put(k.toString(), new Color(colorCode));
-        });
     }
 
     /**
@@ -307,29 +307,24 @@ public final class Main {
 
             String lafName = Preferences.getPreferenceDefault(Preferences.LOOK_AND_FEEL_SELECTION,
                     Preferences.LOOK_AND_FEEL_SELECTION_DEFAULT);
-            try {
-                if (lafName.equals("system")) {
-                    String systemLafClassName = UIManager.getSystemLookAndFeelClassName();
-                    UIManager.setLookAndFeel(systemLafClassName);
-                    if (isDarkTheme()) {
-                        initColorScheme("dark");
-                    } else {
-                        initColorScheme("system");
-                    }
-                } else if (lafName.equals("light")) {
-                    UIManager.setLookAndFeel(new FlatLightLaf());
-                    initColorScheme("light");
-                } else if (lafName.equals("dark")) {
-                    UIManager.setLookAndFeel(new FlatDarculaLaf());
+            if (lafName.equals("system")) {
+                String systemLafClassName = UIManager.getSystemLookAndFeelClassName();
+                UIManager.setLookAndFeel(systemLafClassName);
+                if (isDarkTheme()) {
                     initColorScheme("dark");
-                } else {  // fallback to default
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    initColorScheme("system");
+                } else {
+                    initColorScheme("light");
                 }
-            } catch( Exception ex ) {
-                System.err.println( "Failed to initialize LaF" );
+            } else if (lafName.equals("light")) {
+                UIManager.setLookAndFeel(new FlatLightLaf());
+                initColorScheme("light");
+            } else if (lafName.equals("dark")) {
+                UIManager.setLookAndFeel(new FlatDarculaLaf());
+                initColorScheme("dark");
+            } else {  // fallback to default
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                initColorScheme("light");
             }
-
 
             System.setProperty("swing.aatext", "true");
 

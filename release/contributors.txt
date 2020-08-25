@@ -4,6 +4,7 @@ Volker Berlin
 Didier Briel
 Kim Bruning
 Alex Buloichik
+Vladimir Bychkov
 Sandra Jean Chua
 Thomas Cordonnier
 Martin Dufour

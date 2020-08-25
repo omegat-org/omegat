@@ -313,6 +313,9 @@ public final class Main {
                 if (isDarkTheme()) {
                     initColorScheme("dark");
                 } else {
+                    // Override System LAF with custom color. It uses for project
+                    // files selection dialog.
+                    UIManager.put("TextArea.inactiveBackground", new Color(0xf5f5f5));
                     initColorScheme("light");
                 }
             } else if (lafName.equals("light")) {

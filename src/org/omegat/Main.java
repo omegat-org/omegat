@@ -29,7 +29,6 @@
 
 package org.omegat;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,13 +43,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
@@ -81,11 +78,9 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
+import org.omegat.util.gui.LookAndFeelHelper;
 import org.omegat.util.gui.OSXIntegration;
-import org.omegat.util.gui.ResourcesUtil;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
@@ -256,35 +251,6 @@ public final class Main {
         }
     }
 
-    private static void initColorScheme(final String scheme) {
-        Properties colors = ResourcesUtil.getBundleColorProperties(scheme);
-        colors.forEach((k, v) -> {
-            if (v.toString().length() == 6) {
-                UIManager.put(k.toString(), new Color(Integer.parseInt(v.toString(), 16)));  // int(rgb)
-            } else if (v.toString().length() == 8) {
-                UIManager.put(k.toString(), new Color(Integer.parseInt(v.toString(), 16), true));  // hasAlpha
-            }
-        });
-        // Override System LAF with custom color. It uses for project
-        // files selection dialog.
-        if (scheme.equals("light")) {
-            UIManager.put("OmegaT.AlternatingHilite",
-                    UIManager.getColor("TextArea.background").darker());
-        } else {
-            UIManager.put("OmegaT.AlternatingHilite",
-                    UIManager.getColor("TextArea.background").brighter());
-        }
-    }
-
-    /**
-     * Huristic detection of dark theme.
-     * @return true is dark theme, otehrwise it seems light theme.
-     */
-    private static boolean isDarkTheme() {
-        Color bg = UIManager.getColor("TextArea.background");
-        return bg.getRed() <= 0xa0 || bg.getBlue() <= 0xa0 || bg.getGreen() <= 0xa0;
-    }
-
     /**
      * Execute standard GUI.
      */
@@ -311,39 +277,8 @@ public final class Main {
             // do nothing
         }
 
-        try {
-            // Workaround for JDK bug 6389282 (OmegaT bug bug 1555809)
-            // it should be called before setLookAndFeel() for GTK LookandFeel
-            // Contributed by Masaki Katakai (SF: katakai)
-            UIManager.getInstalledLookAndFeels();
-
-            String lafName = Preferences.getPreferenceDefault(Preferences.LOOK_AND_FEEL_SELECTION,
-                    Preferences.LOOK_AND_FEEL_SELECTION_DEFAULT);
-            if (lafName.equals("system")) {
-                String systemLafClassName = UIManager.getSystemLookAndFeelClassName();
-                UIManager.setLookAndFeel(systemLafClassName);
-                if (isDarkTheme()) {
-                    initColorScheme("dark");
-                } else {
-                    initColorScheme("light");
-                }
-            } else if (lafName.equals("light")) {
-                UIManager.setLookAndFeel(new FlatLightLaf());
-                initColorScheme("light");
-            } else if (lafName.equals("dark")) {
-                UIManager.setLookAndFeel(new FlatDarculaLaf());
-                initColorScheme("dark");
-            } else {  // fallback to default
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                initColorScheme("light");
-            }
-
-            System.setProperty("swing.aatext", "true");
-
-        } catch (Exception e) {
-            // do nothing
-            Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");
-        }
+        LookAndFeelHelper.setDefaultLaf();
+        System.setProperty("swing.aatext", "true");
 
         try {
             Core.initializeGUI(PARAMS);

@@ -259,9 +259,21 @@ public final class Main {
     private static void initColorScheme(final String scheme) {
         Properties colors = ResourcesUtil.getBundleColorProperties(scheme);
         colors.forEach((k, v) -> {
-            int colorCode = Integer.parseInt(v.toString(), 16);
-            UIManager.put(k.toString(), new Color(colorCode));
+            if (v.toString().length() == 6) {
+                UIManager.put(k.toString(), new Color(Integer.parseInt(v.toString(), 16)));  // int(rgb)
+            } else if (v.toString().length() == 8) {
+                UIManager.put(k.toString(), new Color(Integer.parseInt(v.toString(), 16), true));  // hasAlpha
+            }
         });
+        // Override System LAF with custom color. It uses for project
+        // files selection dialog.
+        if (scheme.equals("light")) {
+            UIManager.put("OmegaT.AlternatingHilite",
+                    UIManager.getColor("TextArea.background").darker());
+        } else {
+            UIManager.put("OmegaT.AlternatingHilite",
+                    UIManager.getColor("TextArea.background").brighter());
+        }
     }
 
     /**
@@ -313,9 +325,6 @@ public final class Main {
                 if (isDarkTheme()) {
                     initColorScheme("dark");
                 } else {
-                    // Override System LAF with custom color. It uses for project
-                    // files selection dialog.
-                    UIManager.put("TextArea.inactiveBackground", new Color(0xf5f5f5));
                     initColorScheme("light");
                 }
             } else if (lafName.equals("light")) {

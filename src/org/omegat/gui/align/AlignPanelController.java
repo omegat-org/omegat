@@ -74,6 +74,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.TransferHandler;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -1109,8 +1110,8 @@ public class AlignPanelController {
         }
     }
 
-    static final Border FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
-
+    static final Border FOCUS_BORDER = new MatteBorder(1, 1, 1, 1,
+            UIManager.getColor("OmegaT.FocusBorder"));
     // See: http://esus.com/creating-a-jtable-with-multiline-cells/
     class MultilineCellRenderer implements TableCellRenderer {
         private final JTextPane textArea = new JTextPane();

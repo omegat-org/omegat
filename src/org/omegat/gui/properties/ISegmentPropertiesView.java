@@ -25,7 +25,6 @@
 
 package org.omegat.gui.properties;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -34,6 +33,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -69,7 +69,7 @@ public interface ISegmentPropertiesView {
     };
 
     String PROPERTY_TRANSLATION_KEY = "SEGPROP_KEY_";
-    Border FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, new Color(0x76AFE8));
+    Border FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, UIManager.getColor("OmegaT.FocusBorder"));
     Border MARGIN_BORDER = new EmptyBorder(1, 5, 1, 5);
     Border FOCUS_COMPOUND_BORDER = new CompoundBorder(MARGIN_BORDER, FOCUS_BORDER);
 

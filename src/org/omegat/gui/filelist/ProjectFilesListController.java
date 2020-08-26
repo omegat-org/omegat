@@ -73,6 +73,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
@@ -880,8 +881,8 @@ public class ProjectFilesListController {
         }
     }
 
-    private static final Color COLOR_SPECIAL_FG = Color.BLACK;
-    private static final Color COLOR_SPECIAL_BG = new Color(0xC8DDF2);
+    private static final Color COLOR_SPECIAL_FG = UIManager.getColor("OmegaT.SpecialForeground");
+    private static final Color COLOR_SPECIAL_BG = UIManager.getColor("OmegaT.SpecialBackground");
 
     /**
      * Render for table cells.

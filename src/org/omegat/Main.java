@@ -29,7 +29,6 @@
 
 package org.omegat;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,7 +48,6 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
@@ -80,6 +78,7 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
+import org.omegat.util.gui.LookAndFeelHelper;
 import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -253,15 +252,6 @@ public final class Main {
     }
 
     /**
-     * Huristic detection of dark theme.
-     * @return true is dark theme, otehrwise it seems light theme.
-     */
-    private static boolean isDarkTheme() {
-        Color bg = UIManager.getColor("TextArea.background");
-        return bg.getRed() <= 0xa0 || bg.getBlue() <= 0xa0 || bg.getGreen() <= 0xa0;
-    }
-
-    /**
      * Execute standard GUI.
      */
     protected static int runGUI() {
@@ -287,25 +277,8 @@ public final class Main {
             // do nothing
         }
 
-        try {
-            // Workaround for JDK bug 6389282 (OmegaT bug bug 1555809)
-            // it should be called before setLookAndFeel() for GTK LookandFeel
-            // Contributed by Masaki Katakai (SF: katakai)
-            UIManager.getInstalledLookAndFeels();
-
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            if (!isDarkTheme()) {
-                // Override System LAF with custom color. It uses for project
-                // files selection dialog.
-                UIManager.put("TextArea.inactiveBackground", new Color(0xf5f5f5));
-            }
-
-            System.setProperty("swing.aatext", "true");
-
-        } catch (Exception e) {
-            // do nothing
-            Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");
-        }
+        LookAndFeelHelper.setDefaultLaf();
+        System.setProperty("swing.aatext", "true");
 
         try {
             Core.initializeGUI(PARAMS);

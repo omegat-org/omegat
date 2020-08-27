@@ -103,6 +103,8 @@ public class LookAndFeelHelper {
                 UIManager.put("OmegaT.AlternatingHilite",
                         UIManager.getColor("TextArea.background").darker());  // NOI18N
             }
+            UIManager.put("OmegaT.SpecialForeground", Color.BLACK);
+            UIManager.put("OmegaT.SpecialBackground", new Color(0xC8DDF2));
         } catch (Exception e) {
             // do nothing
             Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");

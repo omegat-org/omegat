@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2015 Aaron Madlon-Kay
+ Copyright (C) 2020 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -35,6 +35,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
+
 
 /**
  * Helper to initialize LaF.
@@ -140,6 +141,8 @@ public class LookAndFeelHelper {
                 UIManager.put("OmegaT.AlternatingHilite",
                         UIManager.getColor("TextArea.background").darker());  // NOI18N
             }
+            UIManager.put("OmegaT.SpecialForeground", Color.BLACK);
+            UIManager.put("OmegaT.SpecialBackground", new Color(0xC8DDF2));
         } catch (Exception e) {
             // do nothing
             Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");

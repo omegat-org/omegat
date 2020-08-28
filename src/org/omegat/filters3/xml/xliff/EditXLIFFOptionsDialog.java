@@ -219,7 +219,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         options.setForceShortcutToF(forceshortcut2fCB.isSelected());
         options.setIgnoreTypeForPhTags(ignoreTypeForPhTagsCB.isSelected());
         options.setIgnoreTypeForBptTags(ignoreTypeForBptTagsCB.isSelected());
-        options.setOptionStateKeepNeeds(keepNeedsTranslationUntranslatedCB.isSelected());
+        options.setStateKeepNeeds(keepNeedsTranslationUntranslatedCB.isSelected());
         options.setStateToReview(changeToNeedsReviewCB.isSelected());
         if (prevAndNextRB.isSelected()) {
             options.setAltTransIDType(ID_TYPE.CONTEXT);

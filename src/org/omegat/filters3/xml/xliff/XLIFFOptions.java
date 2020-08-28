@@ -175,7 +175,7 @@ public class XLIFFOptions extends AbstractOptions {
     /**
      * Set behavior flag whether keeping state="needs-translation" when untranslated.
      */
-    public void setOptionStateKeepNeeds(boolean stateKeepNeeds) {
+    public void setStateKeepNeeds(final boolean stateKeepNeeds) {
         setBoolean(OPTION_STATE_KEEP_NEEDS, stateKeepNeeds);
     }
 
@@ -189,7 +189,7 @@ public class XLIFFOptions extends AbstractOptions {
     /**
      * Set behavior flag whether change to state="needs-review-translation" instead of "translated"
      */
-    public void setStateToReview(boolean stateToReview) {
+    public void setStateToReview(final boolean stateToReview) {
         setBoolean(OPTION_STATE_CHANGE_REVIEW, stateToReview);
     }
 

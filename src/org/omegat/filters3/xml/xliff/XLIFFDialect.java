@@ -61,6 +61,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
     private boolean ignoreTypeForPhTags;
     private boolean ignoreTypeForBptTags;
+    private boolean keepNeedsTranslation;
+    private boolean changeToReview;
     /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
@@ -99,6 +101,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
             ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
             ignoreTypeForBptTags = options.getIgnoreTypeForBptTags();
             altTransIDType = options.getAltTransIDType();
+            keepNeedsTranslation = options.getStateKeepNeeds();
+            changeToReview = options.getStateToReview();
         }
 
     }
@@ -171,14 +175,34 @@ public class XLIFFDialect extends DefaultXMLDialect {
      */
     @Override
     public void handleXMLTag(XMLTag tag, boolean translated) {
-        if (!translated) {
-            return;
-        }
         for (int i = 0; i < tag.getAttributes().size(); i++) {
             Attribute attr = tag.getAttributes().get(i);
-            if (tag.getTag().equals("target") && attr.getName().equals("state")
-                    && attr.getValue().equals("needs-translation")) {
-                attr.setValue("translated");
+            if (tag.getTag().equals("target") && attr.getName().equals("state")) {
+                String current = attr.getValue();
+                if ("needs-translation".equals(current)) {
+                    if (!keepNeedsTranslation || translated) {
+                        if (changeToReview) {
+                            attr.setValue("needs-review-translation");
+                        } else {
+                            attr.setValue("translated");
+                        }
+                    } else {
+                        // do nothing
+                    }
+                } else if ("new".equals(current)) {
+                    if (!keepNeedsTranslation || translated) {
+                        if (changeToReview) {
+                            attr.setValue("needs-review-translation");
+                        } else {
+                            attr.setValue("translated");
+                        }
+                    } else {
+                        attr.setValue("needs-translation");
+                    }
+                } else {
+                    // do nothing
+                }
+                break;
             }
         }
     }

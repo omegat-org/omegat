@@ -292,8 +292,6 @@ public class XLIFFFilterTest extends TestFilterBase {
 
     @Test
     public void testHandleXMLTag() throws Exception {
-        XLIFFDialect dialect = (XLIFFDialect) filter.getDialect();
-        dialect.defineDialect(new XLIFFOptions(new TreeMap<String, String>()));
         org.xml.sax.Attributes attributes = new org.xml.sax.Attributes() {
             @Override
             public int getLength() {
@@ -345,9 +343,29 @@ public class XLIFFFilterTest extends TestFilterBase {
             }
         };
         XMLTag tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
+        XLIFFDialect dialect = (XLIFFDialect) filter.getDialect();
+        XLIFFOptions options =new XLIFFOptions(new TreeMap<String, String>());
+        //
+        // OPTION_STATE_NEEDS_KEEP true
+        options.setStateKeepNeeds(true);
+        dialect.defineDialect(options);
         dialect.handleXMLTag(tag, false);
-        assertEquals(tag.getAttribute("state"), "needs-translation");
+        assertEquals("needs-translation", tag.getAttribute("state"));
         dialect.handleXMLTag(tag, true);
-        assertEquals(tag.getAttribute("state"), "translated");
-    }
+        assertEquals("translated", tag.getAttribute("state"));
+        //
+        // OPTION_STATE_NEEDS_KEEP false
+        options.setStateKeepNeeds(false);
+        dialect.defineDialect(options);
+        tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
+        dialect.handleXMLTag(tag, false);
+        assertEquals("translated", tag.getAttribute("state"));
+        //
+        // CHANGE TO REVIEW true
+        options.setStateToReview(true);
+        dialect.defineDialect(options);
+        tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
+        dialect.handleXMLTag(tag, true);
+        assertEquals("needs-review-translation", tag.getAttribute("state"));
+   }
 }

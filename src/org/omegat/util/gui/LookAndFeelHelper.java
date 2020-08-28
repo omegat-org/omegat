@@ -45,10 +45,7 @@ public class LookAndFeelHelper {
      *     and re-licensed into GPL3.
      * @return true when dark theme, otherwise false.
      */
-    public static boolean isDarkTheme() {
-        if(isDark != null) {
-            return isDark;
-        }
+    private static boolean isDarkTheme() {
         // Based on tests with different LAFs and color combinations, a light
         // theme can be reliably detected by observing the brightness value of
         // the HSB Values of Table.background and Table.foreground

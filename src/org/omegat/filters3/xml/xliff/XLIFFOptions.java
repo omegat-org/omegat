@@ -55,6 +55,8 @@ public class XLIFFOptions extends AbstractOptions {
     private static final String OPTION_FORCE_SHORTCUT_2_F = "forceshortcut2f";
     private static final String OPTION_IGNORE_TYPE_4_PH_TAGS = "ignoretype4phtags";
     private static final String OPTION_IGNORE_TYPE_4_BPT_TAGS = "ignoretype4bpttags";
+    private static final String OPTION_STATE_KEEP_NEEDS = "statekeepneeds";
+    private static final String OPTION_STATE_CHANGE_REVIEW = "statechangereview";
     @Deprecated
     private static final String OPTION_ALT_TRANS_ID = "alttransid";
     private static final String OPTION_ALT_TRANS_ID_TYPE = "alttransidtype";
@@ -161,6 +163,34 @@ public class XLIFFOptions extends AbstractOptions {
      */
     public void setAltTransIDType(ID_TYPE idType) {
         setEnum(OPTION_ALT_TRANS_ID_TYPE, idType);
+    }
+
+    /**
+     * Return whether keeping state="needs-translation" when untranslated.
+     */
+    public boolean getStateKeepNeeds() {
+        return getBoolean(OPTION_STATE_KEEP_NEEDS, false);
+    }
+
+    /**
+     * Set behavior flag whether keeping state="needs-translation" when untranslated.
+     */
+    public void setOptionStateKeepNeeds(boolean stateKeepNeeds) {
+        setBoolean(OPTION_STATE_KEEP_NEEDS, stateKeepNeeds);
+    }
+
+    /**
+     * Return whether transit to state="needs-review-translation" instead of "translated"
+     */
+    public boolean getStateToReview(){
+        return getBoolean(OPTION_STATE_CHANGE_REVIEW, false);
+    }
+
+    /**
+     * Set behavior flag whether change to state="needs-review-translation" instead of "translated"
+     */
+    public void setStateToReview(boolean stateToReview) {
+        setBoolean(OPTION_STATE_CHANGE_REVIEW, stateToReview);
     }
 
 }

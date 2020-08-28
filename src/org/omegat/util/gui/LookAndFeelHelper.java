@@ -74,8 +74,7 @@ public class LookAndFeelHelper {
                 background.getGreen(),
                 background.getBlue(),
                 null)[2];
-        isDark = background_brightness < foreground_brightness;
-        return isDark;
+        return background_brightness < foreground_brightness;
     }
 
     /**

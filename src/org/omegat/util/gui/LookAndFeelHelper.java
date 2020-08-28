@@ -35,9 +35,6 @@ import org.omegat.util.Log;
  */
 public class LookAndFeelHelper {
 
-    /** is LaF theme dark? */
-    private static Boolean isDark = null;
-
     /**
      * Heuristic detection of dark theme.
      * <p>

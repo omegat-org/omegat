@@ -39,7 +39,6 @@ public class LookAndFeelHelper {
      * Heuristic detection of dark theme.
      * <p>
      *     isDarkTheme method derived from NetBeans licensed by Apache-2.0
-     *     and re-licensed into GPL3.
      * @return true when dark theme, otherwise false.
      */
     private static boolean isDarkTheme() {

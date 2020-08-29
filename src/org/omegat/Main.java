@@ -78,7 +78,7 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
-import org.omegat.util.gui.LookAndFeelHelper;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -277,7 +277,7 @@ public final class Main {
             // do nothing
         }
 
-        LookAndFeelHelper.setDefaultColors();
+        DockingUI.setDefaultColors();
         System.setProperty("swing.aatext", "true");
 
         try {

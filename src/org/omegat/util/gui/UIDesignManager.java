@@ -57,7 +57,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
 
 /**
- * Docking UI support.
+ * UI Design Manager.
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -69,15 +69,17 @@ import com.vlsolutions.swing.docking.ui.DockingUISettings;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
-public final class DockingUI {
+public final class UIDesignManager {
 
-    private DockingUI() {
+    private UIDesignManager() {
     }
 
     /**
      * Initialize docking subsystem.
      */
     public static void initialize() {
+        setDefaultColors();
+
         // Install VLDocking defaults
         DockingUISettings.getInstance().installUI();
         DockableContainerFactory.setFactory(new CustomContainerFactory());
@@ -471,7 +473,7 @@ public final class DockingUI {
     /**
      * Set application colors
      */
-    public static void setDefaultColors() {
+    private static void setDefaultColors() {
         if (isDarkTheme()) {
             UIManager.put("OmegaT.AlternatingHilite",
                     UIManager.getColor("TextArea.background").brighter());  // NOI18N
@@ -482,4 +484,5 @@ public final class DockingUI {
         UIManager.put("OmegaT.SpecialForeground", Color.BLACK);
         UIManager.put("OmegaT.SpecialBackground", new Color(0xC8DDF2));
     }
+
 }

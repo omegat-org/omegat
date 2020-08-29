@@ -48,6 +48,7 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
@@ -78,7 +79,6 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -277,7 +277,12 @@ public final class Main {
             // do nothing
         }
 
-        DockingUI.setDefaultColors();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            // do nothing
+        }
+
         System.setProperty("swing.aatext", "true");
 
         try {

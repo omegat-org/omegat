@@ -59,8 +59,8 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.UIDesignManager;
 import org.openide.awt.Mnemonics;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -104,8 +104,6 @@ public final class MainWindowUI {
      * Create docking desktop panel.
      */
     public static DockingDesktop initDocking(final MainWindow mainWindow) {
-        DockingUI.initialize();
-
         mainWindow.desktop = new DockingDesktop();
         mainWindow.desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener() {
             public void dockableStateWillChange(DockableStateWillChangeEvent event) {
@@ -272,7 +270,7 @@ public final class MainWindowUI {
         // Ensure any "closed" Dockables are visible. These can be newly added
         // panes not included in an older layout file, or e.g. panes installed by
         // plugins.
-        DockingUI.ensureDockablesVisible(mainWindow.desktop);
+        UIDesignManager.ensureDockablesVisible(mainWindow.desktop);
     }
 
     /**

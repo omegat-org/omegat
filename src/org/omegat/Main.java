@@ -277,7 +277,7 @@ public final class Main {
             // do nothing
         }
 
-        LookAndFeelHelper.setDefaultLaf();
+        LookAndFeelHelper.setDefaultColors();
         System.setProperty("swing.aatext", "true");
 
         try {

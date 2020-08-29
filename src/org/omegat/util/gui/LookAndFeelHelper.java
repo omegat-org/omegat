@@ -28,8 +28,6 @@ package org.omegat.util.gui;
 import javax.swing.UIManager;
 import java.awt.Color;
 
-import org.omegat.util.Log;
-
 /**
  * Helper to initialize LaF.
  */
@@ -78,28 +76,17 @@ public class LookAndFeelHelper {
     }
 
     /**
-     * Set LookAndFeel default and load application colors
+     * Set application colors
      */
-    public static void setDefaultLaf() {
-        // Workaround for JDK bug 6389282 (OmegaT bug bug 1555809)
-        // it should be called before setLookAndFeel() for GTK LookandFeel
-        // Contributed by Masaki Katakai (SF: katakai)
-        UIManager.getInstalledLookAndFeels();
-
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            if (isDarkTheme()) {
-                UIManager.put("OmegaT.AlternatingHilite",
-                        UIManager.getColor("TextArea.background").brighter());  // NOI18N
-            } else {
-                UIManager.put("OmegaT.AlternatingHilite",
-                        UIManager.getColor("TextArea.background").darker());  // NOI18N
-            }
-            UIManager.put("OmegaT.SpecialForeground", Color.BLACK);
-            UIManager.put("OmegaT.SpecialBackground", new Color(0xC8DDF2));
-        } catch (Exception e) {
-            // do nothing
-            Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");
+    public static void setDefaultColors() {
+        if (isDarkTheme()) {
+            UIManager.put("OmegaT.AlternatingHilite",
+                    UIManager.getColor("TextArea.background").brighter());  // NOI18N
+        } else {
+            UIManager.put("OmegaT.AlternatingHilite",
+                    UIManager.getColor("TextArea.background").darker());  // NOI18N
         }
+        UIManager.put("OmegaT.SpecialForeground", Color.BLACK);
+        UIManager.put("OmegaT.SpecialBackground", new Color(0xC8DDF2));
     }
 }

@@ -36,6 +36,8 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.Objects;
+import java.util.Properties;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
@@ -46,6 +48,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.plaf.ColorUIResource;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 
@@ -55,6 +59,7 @@ import com.vlsolutions.swing.docking.DockableContainerFactory;
 import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
+import org.omegat.util.Preferences;
 
 /**
  * Docking UI support.
@@ -424,5 +429,100 @@ public final class DockingUI {
             c = c.getParent(); // find dockable desktop
         }
         return (DockingDesktop) c;
+    }
+
+    /**
+     * Heuristic detection of dark theme.
+     * <p>
+     *     isDarkTheme method derived from NetBeans licensed by Apache-2.0
+     * @return true when dark theme, otherwise false.
+     */
+    private static boolean isDarkTheme() {
+        // Based on tests with different LAFs and color combinations, a light
+        // theme can be reliably detected by observing the brightness value of
+        // the HSB Values of Table.background and Table.foreground
+        //
+        // Results from the test (Theme / Foreground / Background)
+        // Gtk - Numix (light) / 0.2 / 0.97
+        // Gtk - BlackMATE (dark) / 1.0 / 0.24
+        // Gtk - Clearlooks (light) / 0.1 / 1.0
+        // Gtk - ContrastHighInverse (dark) / 1.0 / 0.0
+        // Gtk - DustSand (light) / 0.19 / 1.0
+        // Gtk - TraditionalOkTest (light) / 0.0 / 0.74
+        // Gtk - Menta (light) / 0.17 / 0.96
+        // DarkNimbus (dark) / 0.9 / 0.19
+        // DarkMetal (dark) / 0.87 / 0.19
+        // CDE (light) / 0.0 / 0.76
+        // Nimbus (light) / 0.0 / 1.0
+        // Metall (light) / 0.2 / 1.0
+        // Windows (light) / 0.0 / 1.0
+        // Windows Classic (light) / 0.0 / 1.0
+        // Windows HighContrast Black (dark) / 1.0 / 0
+        Color foreground = UIManager.getColor("Table.foreground");
+        Color background = UIManager.getColor("Table.background");
+        float foreground_brightness = Color.RGBtoHSB(
+                foreground.getRed(),
+                foreground.getGreen(),
+                foreground.getBlue(),
+                null)[2];
+        float background_brightness = Color.RGBtoHSB(
+                background.getRed(),
+                background.getGreen(),
+                background.getBlue(),
+                null)[2];
+        return background_brightness < foreground_brightness;
+    }
+
+    private static void loadColors(Properties colors) {
+        colors.forEach((k, v) -> {
+            if (v.toString().length() <= 6) {
+                UIManager.put(k.toString(), new Color(Integer.parseInt(v.toString(), 16)));  // int(rgb)
+            } else {
+                long val = Long.parseLong(v.toString(), 16);
+                int a = (int)(val & 0xFF);
+                int b = (int)(val >> 8 & 0xFF);
+                int g = (int)(val >> 16 & 0xFF);
+                int r = (int)(val >> 24 & 0xFF);
+                UIManager.put(k.toString(), new Color(r, g, b, a));  // hasAlpha
+            }
+        });
+    }
+
+    /**
+     * Set LookAndFeel default and load application colors
+     */
+    public static void setApplicationLaf() {
+        String lafName = Preferences.getPreferenceDefault(Preferences.LOOK_AND_FEEL_SELECTION,
+                Preferences.LOOK_AND_FEEL_SELECTION_DEFAULT);
+        try {
+            switch (lafName) {
+                case "light":
+                    UIManager.setLookAndFeel(new FlatLightLaf());
+                    break;
+                case "dark":
+                    UIManager.setLookAndFeel(new FlatDarculaLaf());
+                    break;
+                default:
+                    // use system laf
+                    break;
+            }
+        } catch (Exception e) {
+            // do nothing
+        }
+    }
+
+    /**
+     * Set application colors
+     */
+    public static void setDefaultColors() {
+        if (isDarkTheme()) {
+            loadColors(Objects.requireNonNull(ResourcesUtil.getBundleColorProperties("dark")));
+            UIManager.put("OmegaT.AlternatingHilite",
+                    UIManager.getColor("TextArea.background").brighter());  // NOI18N
+        } else {
+            loadColors(Objects.requireNonNull(ResourcesUtil.getBundleColorProperties("light")));
+            UIManager.put("OmegaT.AlternatingHilite",
+                    UIManager.getColor("TextArea.background").darker());  // NOI18N
+        }
     }
 }

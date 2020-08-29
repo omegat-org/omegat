@@ -168,7 +168,7 @@ public class XLIFFOptions extends AbstractOptions {
     /**
      * Return whether keeping state="needs-translation" when untranslated.
      */
-    public boolean getStateKeepNeeds() {
+    public boolean getKeepStateNeedsTranslation() {
         return getBoolean(OPTION_STATE_KEEP_NEEDS, false);
     }
 
@@ -182,7 +182,7 @@ public class XLIFFOptions extends AbstractOptions {
     /**
      * Return whether transit to state="needs-review-translation" instead of "translated"
      */
-    public boolean getStateToReview(){
+    public boolean getChangeStateToNeedsReviewTranslation(){
         return getBoolean(OPTION_STATE_CHANGE_REVIEW, false);
     }
 

@@ -61,8 +61,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
     private boolean ignoreTypeForPhTags;
     private boolean ignoreTypeForBptTags;
-    private boolean keepNeedsTranslation;
-    private boolean changeToReview;
+    private boolean keepStateNeedsTranslation;
+    private boolean changeStateToNeedsReviewTranslation;
     /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
@@ -101,8 +101,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
             ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
             ignoreTypeForBptTags = options.getIgnoreTypeForBptTags();
             altTransIDType = options.getAltTransIDType();
-            keepNeedsTranslation = options.getStateKeepNeeds();
-            changeToReview = options.getStateToReview();
+            keepStateNeedsTranslation = options.getKeepStateNeedsTranslation();
+            changeStateToNeedsReviewTranslation = options.getChangeStateToNeedsReviewTranslation();
         }
 
     }
@@ -167,11 +167,12 @@ public class XLIFFDialect extends DefaultXMLDialect {
     }
 
     /**
-     * When translation is different from src, transit <target state="needs-translated"> attr
-     * to <target state="translated"> value.
-     * https://sourceforge.net/p/omegat/feature-requests/1506/
+     * Handle &lt;target state="needs-translated"&gt; attribute according to
+     * option settings. In default, change to &lt;target state="translated"&gt;.
+     * It also handle it when source has state="new" to "translated" or "needs-translation".
+     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1506/">RFE #1506</a>
      * @param tag XML tag to be processed.
-     * @param translated is a value considered as translated?
+     * @param translated is the value considered translated?
      */
     @Override
     public void handleXMLTag(XMLTag tag, boolean translated) {
@@ -180,8 +181,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
             if (tag.getTag().equals("target") && attr.getName().equals("state")) {
                 String current = attr.getValue();
                 if ("needs-translation".equals(current)) {
-                    if (!keepNeedsTranslation || translated) {
-                        if (changeToReview) {
+                    if (!keepStateNeedsTranslation || translated) {
+                        if (changeStateToNeedsReviewTranslation) {
                             attr.setValue("needs-review-translation");
                         } else {
                             attr.setValue("translated");
@@ -190,8 +191,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
                         // do nothing
                     }
                 } else if ("new".equals(current)) {
-                    if (!keepNeedsTranslation || translated) {
-                        if (changeToReview) {
+                    if (!keepStateNeedsTranslation || translated) {
+                        if (changeStateToNeedsReviewTranslation) {
                             attr.setValue("needs-review-translation");
                         } else {
                             attr.setValue("translated");

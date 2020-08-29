@@ -202,10 +202,10 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, bundle.getString("XLIFF_OPTIONS_STATE")); // NOI18N
         jPanel1.add(jLabel5);
 
-        org.openide.awt.Mnemonics.setLocalizedText(keepNeedsTranslationUntranslatedCB, bundle.getString("XLIFF_OPTIONS_STATE_KEEP_UNTRANSLATED")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(keepNeedsTranslationUntranslatedCB, bundle.getString("XLIFF_OPTION_KEEP_TARGET_STATE_NEEDS_T9N")); // NOI18N
         jPanel1.add(keepNeedsTranslationUntranslatedCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(changeToNeedsReviewCB, bundle.getString("XLIFF_OPTIONS_STATE_CHANGETO_REVIEW")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(changeToNeedsReviewCB, bundle.getString("XLIFF_OPTION_CHANGE_TARGET_STATE_NEEDS_REVIEW_T9N")); // NOI18N
         jPanel1.add(changeToNeedsReviewCB);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -233,7 +233,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
         doClose(RET_CANCEL);
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }// GEN-LAST:event_cancelButtonActionPerformed
 
     /** Closes the dialog */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog

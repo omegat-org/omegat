@@ -92,7 +92,7 @@ public final class Styles {
         COLOR_LANGUAGE_TOOLS(UIManager.getColor("OmegaT.LanguageTools")),
         COLOR_TRANSTIPS(UIManager.getColor("OmegaT.TransTips")),
         COLOR_SPELLCHECK(UIManager.getColor("OmegaT.SpellCheck")),
-        COLOR_TERMINOLOGY(Color.ORANGE),
+        COLOR_TERMINOLOGY(UIManager.getColor("OmegaT.Terminology")),
         COLOR_MATCHES_CHANGED(UIManager.getColor("OmegaT.MatchesChanged")),
         COLOR_MATCHES_UNCHANGED(UIManager.getColor("OmegaT.MatchesUnchanged")),
         COLOR_MATCHES_DEL_ACTIVE((Color) null),

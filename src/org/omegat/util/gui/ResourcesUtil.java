@@ -43,6 +43,7 @@ public final class ResourcesUtil {
     private ResourcesUtil() {
     }
 
+    private static final String APPROOT = "/org/omegat/";
     private static final String RESOURCES = "/org/omegat/gui/resources/";
 
     /**
@@ -66,7 +67,7 @@ public final class ResourcesUtil {
     /**
      * Load icon from classpath.
      *
-     * @param imageIcon
+     * @param imageName
      *            icon file name
      * @return icon instance
      */
@@ -75,13 +76,15 @@ public final class ResourcesUtil {
     }
 
     /**
-     * Load default color scheme from classpath.
+     * Load default colors scheme for LAF theme.
+     *
+     * @param style a style name, should be 'light' or 'dark'
+     * @return Properties object loaded when succeeded, otherwise null
      */
     public static Properties getBundleColorProperties(final String style) {
-        String resourcePath = "/org/omegat/" + "ColorScheme_" + style + ".properties";
+        String resourcePath = APPROOT + "ColorScheme_" + style + ".properties";
         Properties properties = new Properties();
-        try {
-            InputStream is = ResourcesUtil.class.getResourceAsStream(resourcePath);
+        try (InputStream is = ResourcesUtil.class.getResourceAsStream(resourcePath)) {
             properties.load(is);
         } catch (Exception e) {
             return null;

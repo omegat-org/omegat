@@ -150,12 +150,11 @@ Then log onto Bintray and publish the release.
 ## 14. Cleanup
 
 - Bump version in `Version.properties`, `changes.txt`
-- Move old versions in SourceForge Files into `OldFiles/Releases`
-  - Leave one previous version just in case
-- If promoting from Latest to Standard, move the old Standard versions to Legacy
 - Set fixed bug tickets and implemented RFEs to `closed-fixed`
 - Update ticket milestones if necessary
 
+Note: Don't "clean up" old releases by moving them out of the way. It's
+important that distfile URLs remain stable.
 
 ## 15. Push new version for version check
 

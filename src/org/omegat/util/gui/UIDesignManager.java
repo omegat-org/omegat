@@ -474,15 +474,15 @@ public final class UIDesignManager {
      * Set application colors
      */
     private static void setDefaultColors() {
+        Color hilite;
         if (isDarkTheme()) {
-            UIManager.put("OmegaT.AlternatingHilite",
-                    UIManager.getColor("TextArea.background").brighter());  // NOI18N
+            hilite = UIManager.getColor("TextArea.background").brighter();  // NOI18N
         } else {
-            UIManager.put("OmegaT.AlternatingHilite",
-                    UIManager.getColor("TextArea.background").darker());  // NOI18N
+            hilite = UIManager.getColor("TextArea.background").darker();  // NOI18N
         }
-        UIManager.put("OmegaT.SpecialForeground", Color.BLACK);
-        UIManager.put("OmegaT.SpecialBackground", new Color(0xC8DDF2));
+        UIManager.put("OmegaT.alternatingHilite", hilite);
+        UIManager.put("OmegaT.specialForeground", Color.BLACK);
+        UIManager.put("OmegaT.specialBackground", new Color(0xC8DDF2));
     }
 
 }

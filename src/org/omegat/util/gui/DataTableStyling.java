@@ -65,7 +65,7 @@ public final class DataTableStyling {
     public static final Color COLOR_STANDARD_BG = UIManager.getColor("TextArea.background");
     public static final Color COLOR_SELECTION_FG = UIManager.getColor("TextArea.selectionForeground");
     public static final Color COLOR_SELECTION_BG = UIManager.getColor("TextArea.selectionBackground");
-    public static final Color COLOR_ALTERNATING_HILITE = UIManager.getColor("OmegaT.AlternatingHilite");
+    public static final Color COLOR_ALTERNATING_HILITE = UIManager.getColor("OmegaT.alternatingHilite");
     public static final Border TABLE_FOCUS_BORDER = new MatteBorder(1, 1, 1, 1, UIManager.getColor("TextArea.border"));
     public static final Border TABLE_NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
 

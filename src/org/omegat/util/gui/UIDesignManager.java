@@ -478,7 +478,8 @@ public final class UIDesignManager {
         if (isDarkTheme()) {
             hilite = UIManager.getColor("TextArea.background").brighter();  // NOI18N
         } else {
-            hilite = UIManager.getColor("TextArea.background").darker();  // NOI18N
+            Color bg = UIManager.getColor("TextArea.background").darker();  // NOI18N
+            hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
         }
         UIManager.put("OmegaT.alternatingHilite", hilite);
         UIManager.put("OmegaT.specialForeground", Color.BLACK);

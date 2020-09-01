@@ -212,7 +212,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
     }
 
     public void setText(String text) throws UnsupportedEncodingException, IOException {
-        if (! mSource.isPresent() && !mFile.isPresent()) {
+        if (!mSource.isPresent() && !mFile.isPresent()) {
             throw new IOException("Cannot save inline script source.");
         }
 

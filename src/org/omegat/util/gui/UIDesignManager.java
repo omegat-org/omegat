@@ -492,11 +492,18 @@ public final class UIDesignManager {
      * Load application default colors
      */
     private static void loadDefaultColors() {
+        Color hilite;
         if (isDarkTheme()) {
             loadColors(Objects.requireNonNull(ResourcesUtil.getBundleColorProperties("dark")));
+            hilite = UIManager.getColor("TextArea.background").brighter();  // NOI18N
         } else {
             loadColors(Objects.requireNonNull(ResourcesUtil.getBundleColorProperties("light")));
+            Color bg = UIManager.getColor("TextArea.background").darker();  // NOI18N
+            hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
         }
+        UIManager.put("OmegaT.alternatingHilite", hilite);
+        UIManager.put("OmegaT.specialForeground", Color.BLACK);
+        UIManager.put("OmegaT.specialBackground", new Color(0xC8DDF2));
     }
 
 }

@@ -384,12 +384,6 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB(null);
 
             setProjectModified(false);
-        } catch (Exception e) {
-            Log.logErrorRB(e, "TF_LOAD_ERROR");
-            Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR");
-            if (!loaded) {
-                unlockProject();
-            }
         } catch (OutOfMemoryError oome) {
             // Fix for bug 1571944 @author Henry Pijffers
             // (henry.pijffers@saxnot.com)
@@ -410,6 +404,12 @@ public class RealProject implements IProject {
             Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
             // Just quit, we can't help it anyway
             System.exit(0);
+        } catch (Throwable e) {
+            Log.logErrorRB(e, "TF_LOAD_ERROR");
+            Core.getMainWindow().displayErrorRB(e, "TF_LOAD_ERROR");
+            if (!loaded) {
+                unlockProject();
+            }
         }
 
         Log.logInfoRB("LOG_DATAENGINE_LOAD_END");

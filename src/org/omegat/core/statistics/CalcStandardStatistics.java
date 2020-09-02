@@ -190,7 +190,6 @@ public class CalcStandardStatistics extends LongProcessThread {
             remaining.addFiles(fileRemaining);
         }
 
-        assert (total.segments - remaining.segments == translated.size());
-        return new StatsResult(total, remaining, unique, remainingUnique, counts);
+        return new StatsResult(total, remaining, unique, remainingUnique, translated, counts);
     }
 }

@@ -29,7 +29,9 @@
 
 package org.omegat.filters3.xml.xliff;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.statistics.StatisticsSettings;
@@ -43,6 +45,7 @@ import org.omegat.filters3.xml.XMLTag;
 import org.omegat.filters3.xml.XMLText;
 import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.InlineTagHandler;
+import org.omegat.util.MultiMap;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -61,8 +64,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
     private boolean ignoreTypeForPhTags;
     private boolean ignoreTypeForBptTags;
-    private boolean keepStateNeedsTranslation;
-    private boolean changeStateToNeedsReviewTranslation;
+    private MultiMap<String, String> handleTagAttribute = new MultiMap<>();
+    private Map<String, String> translationStatusAttributes = new HashMap<>();
     /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
@@ -76,7 +79,6 @@ public class XLIFFDialect extends DefaultXMLDialect {
      * options are not known at that step.
      */
     public void defineDialect(XLIFFOptions options) {
-
         defineParagraphTags(new String[] { "source", "target", });
 
         defineOutOfTurnTags(new String[] { "sub", });
@@ -97,12 +99,21 @@ public class XLIFFDialect extends DefaultXMLDialect {
             defineContentBasedTag("ph", Tag.Type.ALONE);
             // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
 
+            handleTagAttribute.put("target", "state");
+
             forceShortCutToF = options.getForceShortcutToF();
             ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
             ignoreTypeForBptTags = options.getIgnoreTypeForBptTags();
             altTransIDType = options.getAltTransIDType();
-            keepStateNeedsTranslation = options.getKeepStateNeedsTranslation();
-            changeStateToNeedsReviewTranslation = options.getChangeStateToNeedsReviewTranslation();
+
+            if (options.getChangeStateToNeedsReviewTranslation()) {
+                translationStatusAttributes.put("needs-translation", "needs-review-translation");
+                translationStatusAttributes.put("new", "needs-review-translation");
+            } else {
+                translationStatusAttributes.put("needs-translation", "translated");
+                translationStatusAttributes.put("new", "translated");
+                translationStatusAttributes.put("needs-review-translation", "translated");
+            }
         }
 
     }
@@ -172,38 +183,15 @@ public class XLIFFDialect extends DefaultXMLDialect {
      * It also handle it when source has state="new" to "translated" or "needs-translation".
      * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1506/">RFE #1506</a>
      * @param tag XML tag to be processed.
-     * @param translated is the value considered translated?
      */
     @Override
-    public void handleXMLTag(XMLTag tag, boolean translated) {
+    public void handleXMLTag(XMLTag tag) {
         for (int i = 0; i < tag.getAttributes().size(); i++) {
             Attribute attr = tag.getAttributes().get(i);
-            if (tag.getTag().equals("target") && attr.getName().equals("state")) {
-                String current = attr.getValue();
-                if ("needs-translation".equals(current)) {
-                    if (!keepStateNeedsTranslation || translated) {
-                        if (changeStateToNeedsReviewTranslation) {
-                            attr.setValue("needs-review-translation");
-                        } else {
-                            attr.setValue("translated");
-                        }
-                    } else {
-                        // do nothing
-                    }
-                } else if ("new".equals(current)) {
-                    if (!keepStateNeedsTranslation || translated) {
-                        if (changeStateToNeedsReviewTranslation) {
-                            attr.setValue("needs-review-translation");
-                        } else {
-                            attr.setValue("translated");
-                        }
-                    } else {
-                        attr.setValue("needs-translation");
-                    }
-                } else {
-                    // do nothing
+            if (handleTagAttribute.containsPair(tag.getTag(), attr.getName())) {
+                if (translationStatusAttributes.containsKey(attr.getValue())) {
+                    attr.setValue(translationStatusAttributes.get(attr.getValue()));
                 }
-                break;
             }
         }
     }

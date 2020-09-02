@@ -346,26 +346,18 @@ public class XLIFFFilterTest extends TestFilterBase {
         XLIFFDialect dialect = (XLIFFDialect) filter.getDialect();
         XLIFFOptions options =new XLIFFOptions(new TreeMap<String, String>());
         //
-        // OPTION_STATE_NEEDS_KEEP true
-        options.setStateKeepNeeds(true);
-        dialect.defineDialect(options);
-        dialect.handleXMLTag(tag, false);
-        assertEquals("needs-translation", tag.getAttribute("state"));
-        dialect.handleXMLTag(tag, true);
-        assertEquals("translated", tag.getAttribute("state"));
-        //
-        // OPTION_STATE_NEEDS_KEEP false
-        options.setStateKeepNeeds(false);
+        // CHANGE TO REVIEW false
+        options.setStateToReview(false);
         dialect.defineDialect(options);
         tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
-        dialect.handleXMLTag(tag, false);
+        dialect.handleXMLTag(tag);
         assertEquals("translated", tag.getAttribute("state"));
         //
         // CHANGE TO REVIEW true
         options.setStateToReview(true);
         dialect.defineDialect(options);
         tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
-        dialect.handleXMLTag(tag, true);
+        dialect.handleXMLTag(tag);
         assertEquals("needs-review-translation", tag.getAttribute("state"));
    }
 }

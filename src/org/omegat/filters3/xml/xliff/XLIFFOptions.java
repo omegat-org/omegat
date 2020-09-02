@@ -55,7 +55,6 @@ public class XLIFFOptions extends AbstractOptions {
     private static final String OPTION_FORCE_SHORTCUT_2_F = "forceshortcut2f";
     private static final String OPTION_IGNORE_TYPE_4_PH_TAGS = "ignoretype4phtags";
     private static final String OPTION_IGNORE_TYPE_4_BPT_TAGS = "ignoretype4bpttags";
-    private static final String OPTION_KEEP_TARGET_STATE_NEEDS_T9N = "keeptargetstateneedstranslation";
     private static final String OPTION_CHANGE_TARGET_STATE_NEEDS_REVIEW_T9N = "changetargetstateneedsreviewtranslation";
     @Deprecated
     private static final String OPTION_ALT_TRANS_ID = "alttransid";
@@ -163,20 +162,6 @@ public class XLIFFOptions extends AbstractOptions {
      */
     public void setAltTransIDType(ID_TYPE idType) {
         setEnum(OPTION_ALT_TRANS_ID_TYPE, idType);
-    }
-
-    /**
-     * Return whether keeping state="needs-translation" when untranslated.
-     */
-    public boolean getKeepStateNeedsTranslation() {
-        return getBoolean(OPTION_KEEP_TARGET_STATE_NEEDS_T9N, false);
-    }
-
-    /**
-     * Set behavior flag whether keeping state="needs-translation" when untranslated.
-     */
-    public void setStateKeepNeeds(final boolean stateKeepNeeds) {
-        setBoolean(OPTION_KEEP_TARGET_STATE_NEEDS_T9N, stateKeepNeeds);
     }
 
     /**

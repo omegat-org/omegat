@@ -294,5 +294,5 @@ public interface XMLDialect {
      * Implement general purpose function to handle XML tag/attributes when necessary.
      * @param tag
      */
-    void handleXMLTag(XMLTag tag, boolean translated);
+    void handleXMLTag(XMLTag tag);
 }

@@ -69,7 +69,6 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         prevAndNextRB.setSelected(options.getAltTransIDType() == ID_TYPE.CONTEXT);
         transIDRB.setSelected(options.getAltTransIDType() == ID_TYPE.ELEMENT_ID);
         transResnameRB.setSelected(options.getAltTransIDType() == ID_TYPE.RESNAME_ATTR);
-        keepNeedsTranslationUntranslatedCB.setSelected(options.getKeepStateNeedsTranslation());
         changeToNeedsReviewCB.setSelected(options.getChangeStateToNeedsReviewTranslation());
 
         StaticUIUtils.setEscapeAction(this, new AbstractAction() {
@@ -121,7 +120,6 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         ignoreTypeForPhTagsCB = new javax.swing.JCheckBox();
         ignoreTypeForBptTagsCB = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
-        keepNeedsTranslationUntranslatedCB = new javax.swing.JCheckBox();
         changeToNeedsReviewCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("XLIFF_OPTIONS_TITLE")); // NOI18N
@@ -202,9 +200,6 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, bundle.getString("XLIFF_OPTIONS_STATE")); // NOI18N
         jPanel1.add(jLabel5);
 
-        org.openide.awt.Mnemonics.setLocalizedText(keepNeedsTranslationUntranslatedCB, bundle.getString("XLIFF_OPTION_KEEP_TARGET_STATE_NEEDS_T9N")); // NOI18N
-        jPanel1.add(keepNeedsTranslationUntranslatedCB);
-
         org.openide.awt.Mnemonics.setLocalizedText(changeToNeedsReviewCB, bundle.getString("XLIFF_OPTION_CHANGE_TARGET_STATE_NEEDS_REVIEW_T9N")); // NOI18N
         jPanel1.add(changeToNeedsReviewCB);
 
@@ -218,7 +213,6 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         options.setForceShortcutToF(forceshortcut2fCB.isSelected());
         options.setIgnoreTypeForPhTags(ignoreTypeForPhTagsCB.isSelected());
         options.setIgnoreTypeForBptTags(ignoreTypeForBptTagsCB.isSelected());
-        options.setStateKeepNeeds(keepNeedsTranslationUntranslatedCB.isSelected());
         options.setStateToReview(changeToNeedsReviewCB.isSelected());
         if (prevAndNextRB.isSelected()) {
             options.setAltTransIDType(ID_TYPE.CONTEXT);
@@ -263,7 +257,6 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JCheckBox keepNeedsTranslationUntranslatedCB;
     private javax.swing.JButton okButton;
     private javax.swing.JRadioButton prevAndNextRB;
     private javax.swing.JRadioButton transIDRB;

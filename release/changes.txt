@@ -17,15 +17,13 @@
 
   Bug fixes:
 
-  - cannot create new (teamp) project in empty repository
+  - Cannot create new team project in bare repository
   https://sourceforge.net/p/omegat/bugs/1005/
 
-  - leading whitespace not trimmed in html filter when compressing whitespace
+  - Leading whitespace not trimmed in HTML filter
   https://sourceforge.net/p/omegat/bugs/1006/
 
-  - "<pre>    </pre> is compressed
-  - without compression, leading and trailing whitespace is duplicated
-  - whitespace before comment moves to after comment
+  - HTML filter whitespace handling errors
   https://sourceforge.net/p/omegat/bugs/1007/
 
   - Project Files table does not respect LAF colors

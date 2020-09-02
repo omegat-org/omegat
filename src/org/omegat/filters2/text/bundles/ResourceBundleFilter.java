@@ -272,7 +272,7 @@ public class ResourceBundleFilter extends AbstractFilter {
                     while (code.codePointCount(0, code.length()) < 4) {
                         code = '0' + code;
                     }
-                    result.append("\\u" + code);
+                    result.append("\\u").append(code);
                 }
             }
         }

@@ -28,6 +28,7 @@ package org.omegat.util.gui;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
@@ -43,7 +44,7 @@ public final class ResourcesUtil {
     private ResourcesUtil() {
     }
 
-    private static final String APPROOT = "/org/omegat/";
+    private static final String APP_ROOT = "/org/omegat/";
     private static final String RESOURCES = "/org/omegat/gui/resources/";
 
     /**
@@ -81,13 +82,11 @@ public final class ResourcesUtil {
      * @param style a style name, should be 'light' or 'dark'
      * @return Properties object loaded when succeeded, otherwise null
      */
-    public static Properties getBundleColorProperties(final String style) {
-        String resourcePath = APPROOT + "ColorScheme_" + style + ".properties";
+    public static Properties getBundleColorProperties(final String style) throws IOException {
+        String resourcePath = APP_ROOT + "ColorScheme_" + style + ".properties";
         Properties properties = new Properties();
         try (InputStream is = ResourcesUtil.class.getResourceAsStream(resourcePath)) {
             properties.load(is);
-        } catch (Exception e) {
-            return null;
         }
         return properties;
     }

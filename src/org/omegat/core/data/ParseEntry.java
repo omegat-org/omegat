@@ -69,7 +69,7 @@ public abstract class ParseEntry implements IParseCallback {
     }
 
     protected void fileFinished() {
-        /**
+        /*
          * Flush queue.
          */
         for (ParseEntryQueueItem item : parseQueue) {
@@ -77,7 +77,7 @@ public abstract class ParseEntry implements IParseCallback {
                     item.segmentTranslationFuzzy, item.props, item.prevSegment, item.nextSegment, item.path);
         }
 
-        /**
+        /*
          * Clear queue for next file.
          */
         parseQueue.clear();
@@ -119,7 +119,12 @@ public abstract class ParseEntry implements IParseCallback {
      *            but it is added to the generated 'reference' TMX, a special TMX that is used as extra
      *            reference during translation.
      * @param props
-     *            a staggered array of non-uniquely-identifying key=value properties (metadata) for the entry
+     *            a staggered array of non-uniquely-identifying key=value properties (metadata) for the entry.
+     *            If property is org.omegat.core.data.SegmentProperties.REFERENCE, the entire segment is added only to
+     *            the generated 'reference' TMX, a special TMX that is used as extra reference during translation.
+     *            The segment is not added to the list of translatable segments.
+     *            Property can also be org.omegat.core.data.SegmentProperties.COMMENT, which shown in the comment panel.
+     *            Other properties are possible, but have no special meaning in OmegaT.
      * @param path
      *            path of entry in file
      * @param filter
@@ -199,7 +204,7 @@ public abstract class ParseEntry implements IParseCallback {
     /**
      * This method is called by filters to add new entry in OmegaT after read it from source file.
      * <p>
-     * Old call without path, for compatibility.
+     * Old call without path, for compatibility. Comment is converted to a property.
      *
      * @param id
      *            ID of entry, if format supports it
@@ -260,8 +265,8 @@ public abstract class ParseEntry implements IParseCallback {
      * @param segmentTranslationFuzzy
      *            fuzzy flag of translation of the source string, if format
      *            supports it
-     * @param comment
-     *            entry's comment, if format supports it
+     * @param props
+     *            entry's properties, like comments, if format supports it
      * @param prevSegment
      *            previous segment's text
      * @param nextSegment
@@ -284,7 +289,7 @@ public abstract class ParseEntry implements IParseCallback {
             boolean removeSpaces) {
         String r = src;
 
-        /**
+        /*
          * AB: we need to find begin/end spaces first, then replace \r,\n chars.
          * Since \r,\n are spaces, we will not need to store spaces in buffer,
          * but we can just remember spaces count at the begin and at the end,

@@ -104,8 +104,6 @@ public class SourceTextEntry {
      *            optional entry metadata
      * @param sourceTranslation
      *            translation from source file
-     * @param shortcuts
-     *            tags shortcuts
      */
     public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts, boolean paragraphStart) {
         this.key = key;

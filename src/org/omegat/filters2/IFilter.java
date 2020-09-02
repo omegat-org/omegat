@@ -209,7 +209,9 @@ public interface IFilter {
     String getInEncodingLastParsedFile();
 
     /**
-     * Indicates whether the filter is bilingual. Bilingual filters will supply both source strings and
+     * Indicates whether the filter is bilingual, and thus can be used as external TM
+     * (i.e. files can be added to the /tm/ folder of an OmegaT project).
+     * Bilingual filters will supply both source strings and
      * translation strings to {@link IParseCallback}.addEntry().
      *
      * @return <code>true</code> if the filter is bilingual

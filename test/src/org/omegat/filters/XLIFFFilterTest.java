@@ -344,20 +344,22 @@ public class XLIFFFilterTest extends TestFilterBase {
         };
         XMLTag tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
         XLIFFDialect dialect = (XLIFFDialect) filter.getDialect();
-        XLIFFOptions options =new XLIFFOptions(new TreeMap<String, String>());
+        XLIFFOptions options = new XLIFFOptions(new TreeMap<String, String>());
         //
-        // CHANGE TO REVIEW false
-        options.setStateToReview(false);
+        // translated
         dialect.defineDialect(options);
-        tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
-        dialect.handleXMLTag(tag);
+        dialect.handleXMLTag(tag, false);
+        assertEquals("needs-translation", tag.getAttribute("state"));
+        //
+        // untranslated
+        dialect.handleXMLTag(tag, true);
         assertEquals("translated", tag.getAttribute("state"));
         //
         // CHANGE TO REVIEW true
         options.setStateToReview(true);
         dialect.defineDialect(options);
         tag = new XMLTag("target", null, Tag.Type.BEGIN, attributes, filter);
-        dialect.handleXMLTag(tag);
+        dialect.handleXMLTag(tag, true);
         assertEquals("needs-review-translation", tag.getAttribute("state"));
    }
 }

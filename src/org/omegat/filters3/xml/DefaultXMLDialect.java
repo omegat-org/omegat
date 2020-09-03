@@ -55,7 +55,7 @@ import org.xml.sax.InputSource;
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public abstract class DefaultXMLDialect implements XMLDialect {
+public class DefaultXMLDialect implements XMLDialect {
     /** The set of defined paragraph tags. */
     private Set<String> paragraphTags = new HashSet<String>();
 
@@ -486,7 +486,7 @@ public abstract class DefaultXMLDialect implements XMLDialect {
      * {@inheritDoc}
      */
     @Override
-    public void handleXMLTag(XMLTag tag) {
+    public void handleXMLTag(XMLTag tag, boolean translated) {
         return;
     }
 

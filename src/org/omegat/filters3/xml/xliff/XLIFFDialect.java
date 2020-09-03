@@ -29,9 +29,7 @@
 
 package org.omegat.filters3.xml.xliff;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.statistics.StatisticsSettings;
@@ -45,7 +43,6 @@ import org.omegat.filters3.xml.XMLTag;
 import org.omegat.filters3.xml.XMLText;
 import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.InlineTagHandler;
-import org.omegat.util.MultiMap;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -64,8 +61,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
     private boolean ignoreTypeForPhTags;
     private boolean ignoreTypeForBptTags;
-    private final MultiMap<String, String> handleTagAttribute = new MultiMap<>();
-    private final Map<String, String> translationStatusAttributes = new HashMap<>();
+    private boolean changeStateToNeedsReviewTranslation;
     /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
@@ -79,6 +75,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
      * options are not known at that step.
      */
     public void defineDialect(XLIFFOptions options) {
+
         defineParagraphTags(new String[] { "source", "target", });
 
         defineOutOfTurnTags(new String[] { "sub", });
@@ -99,21 +96,11 @@ public class XLIFFDialect extends DefaultXMLDialect {
             defineContentBasedTag("ph", Tag.Type.ALONE);
             // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
 
-            handleTagAttribute.put("target", "state");
-
             forceShortCutToF = options.getForceShortcutToF();
             ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
             ignoreTypeForBptTags = options.getIgnoreTypeForBptTags();
             altTransIDType = options.getAltTransIDType();
-
-            if (options.getChangeStateToNeedsReviewTranslation()) {
-                translationStatusAttributes.put("needs-translation", "needs-review-translation");
-                translationStatusAttributes.put("new", "needs-review-translation");
-            } else {
-                translationStatusAttributes.put("needs-translation", "translated");
-                translationStatusAttributes.put("new", "translated");
-                translationStatusAttributes.put("needs-review-translation", "translated");
-            }
+            changeStateToNeedsReviewTranslation = options.getChangeStateToNeedsReviewTranslation();
         }
 
     }
@@ -178,21 +165,27 @@ public class XLIFFDialect extends DefaultXMLDialect {
     }
 
     /**
-     * Handle &lt;target state="needs-translated"&gt; and state="new" attribute value
-     * according to option settings. In default, change to &lt;target state="translated"&gt;.
-     * It will change to "needs-review-translation" when user configure it in XLIFF options.
+     * Handle &lt;target state="..."&gt; attribute according to filter settings.
      * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1506/">RFE #1506</a>
      * @param tag XML tag to be processed.
+     * @param translated is the value considered translated?
      */
     @Override
-    public void handleXMLTag(final XMLTag tag) {
-        for (int i = 0; i < tag.getAttributes().size(); i++) {
-            Attribute attr = tag.getAttributes().get(i);
-            if (handleTagAttribute.containsPair(tag.getTag(), attr.getName())) {
-                if (translationStatusAttributes.containsKey(attr.getValue())) {
-                    attr.setValue(translationStatusAttributes.get(attr.getValue()));
-                }
-            }
+    public void handleXMLTag(XMLTag tag, boolean translated) {
+        if (!"target".equals(tag.getTag())) {
+            return;
+        }
+        Attribute attr = tag.getAttributeObject("state");
+        if (attr == null) {
+            return;
+        }
+        String state = attr.getValue();
+        String nextTranslatedState = changeStateToNeedsReviewTranslation ? "needs-review-translation" : "translated";
+        if (translated && "needs-translation".equals(state)) {
+            attr.setValue(nextTranslatedState);
+        } else if ("new".equals(state)) {
+            String next = translated ? nextTranslatedState : "needs-translation";
+            attr.setValue(next);
         }
     }
 

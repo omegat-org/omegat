@@ -614,6 +614,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             return;
         }
 
+        boolean isTranslated = true;
         List<ProtectedPart> shortcutDetails = new ArrayList<ProtectedPart>();
         boolean tagsAggregation = isTagsAggregationEnabled();
         String src = currEntry().sourceToShortcut(tagsAggregation, dialect, shortcutDetails);
@@ -637,10 +638,11 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             // untranslated is written out uncompressed
             if (compressed.equals(translation)) {
                 translation = src;
+                isTranslated = false;
             }
         }
         if (lead instanceof XMLTag) {
-            dialect.handleXMLTag((XMLTag) lead);
+            dialect.handleXMLTag((XMLTag) lead, isTranslated);
         }
 
         currEntry().setTranslation(translation, dialect, new ArrayList<ProtectedPart>());

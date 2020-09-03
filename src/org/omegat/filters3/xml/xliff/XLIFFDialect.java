@@ -64,8 +64,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
     private boolean ignoreTypeForPhTags;
     private boolean ignoreTypeForBptTags;
-    private MultiMap<String, String> handleTagAttribute = new MultiMap<>();
-    private Map<String, String> translationStatusAttributes = new HashMap<>();
+    private final MultiMap<String, String> handleTagAttribute = new MultiMap<>();
+    private final Map<String, String> translationStatusAttributes = new HashMap<>();
     /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
@@ -178,14 +178,14 @@ public class XLIFFDialect extends DefaultXMLDialect {
     }
 
     /**
-     * Handle &lt;target state="needs-translated"&gt; attribute according to
-     * option settings. In default, change to &lt;target state="translated"&gt;.
-     * It also handle it when source has state="new" to "translated" or "needs-translation".
+     * Handle &lt;target state="needs-translated"&gt; and state="new" attribute value
+     * according to option settings. In default, change to &lt;target state="translated"&gt;.
+     * It will change to "needs-review-translation" when user configure it in XLIFF options.
      * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1506/">RFE #1506</a>
      * @param tag XML tag to be processed.
      */
     @Override
-    public void handleXMLTag(XMLTag tag) {
+    public void handleXMLTag(final XMLTag tag) {
         for (int i = 0; i < tag.getAttributes().size(); i++) {
             Attribute attr = tag.getAttributes().get(i);
             if (handleTagAttribute.containsPair(tag.getTag(), attr.getName())) {

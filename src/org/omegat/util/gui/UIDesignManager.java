@@ -509,8 +509,6 @@ public final class UIDesignManager {
             hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
         }
         UIManager.put("OmegaT.alternatingHilite", hilite);
-        UIManager.put("OmegaT.specialForeground", Color.BLACK);
-        UIManager.put("OmegaT.specialBackground", new Color(0xC8DDF2));
     }
 
 }

@@ -142,8 +142,7 @@ public final class StaticUtils {
     private static String installDir = null;
 
     /**
-     * Returns OmegaT installation directory. The code uses this method to look
-     * up for OmegaT documentation.
+     * Returns OmegaT installation directory.
      */
     public static String installDir() {
         if (installDir == null) {

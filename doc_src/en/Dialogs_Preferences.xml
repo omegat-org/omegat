@@ -1322,7 +1322,8 @@
   <section>
     <title>Plugins</title>
 
-    <para>Gives access to the list of plugins available. Plugins are installed in the <filename>/plugins</filename> folder.</para>
+    <para>Gives access to the list of plugins available. Plugins are installed in the <filename>/plugins</filename>
+      folder under the OmegaT installation folder or the platform-specific OmegaT user preferences folder.</para>
   </section>
 
   <section>

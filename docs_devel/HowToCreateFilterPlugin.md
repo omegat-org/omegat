@@ -5,7 +5,7 @@ This manual describes how to write a file filter plugin for OmegaT. Assumed is k
 
 # What is a file filter plugin
 OmegaT can be extended with plugins. 
-A plugin is just a `.jar` file, which is stored in `OMEGAT_INSTALLATION/plugins/` dir or `~/.omegat/plugins/`. 
+A plugin is just a `.jar` file, which is stored in `OMEGAT_INSTALLATION/plugins/` dir or `OMEGAT_USERPEFERENCES/plugins/` (see `StaticUtils.getConfigDir()` for details)
 If a plugin needs to use additional jars, they can be placed in the same directory.
 
 One type of plugin is the file filter plugin.

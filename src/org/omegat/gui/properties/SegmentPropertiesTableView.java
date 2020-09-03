@@ -381,9 +381,6 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
                 }
             }
             setFont(table.getFont());
-            if (value==null) { //some filter passed null as value of a property. Should not happen, but let's not cause a NPE on this.
-                value="";
-            }
             setText(value.toString());
             return this;
         }

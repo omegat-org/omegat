@@ -208,7 +208,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         options.set26Compatibility(compatibility26CB.isSelected());
         options.setForceShortcutToF(forceshortcut2fCB.isSelected());
         options.setIgnoreTypeForPhTags(ignoreTypeForPhTagsCB.isSelected());
@@ -223,11 +223,11 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         }
 
         doClose(RET_OK);
-    }// GEN-LAST:event_okButtonActionPerformed
+    }//GEN-LAST:event_okButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         doClose(RET_CANCEL);
-    }// GEN-LAST:event_cancelButtonActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /** Closes the dialog */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog

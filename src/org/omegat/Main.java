@@ -277,12 +277,6 @@ public final class Main {
             // do nothing
         }
 
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            // do nothing
-        }
-
         System.setProperty("swing.aatext", "true");
 
         try {

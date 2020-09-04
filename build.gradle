@@ -184,6 +184,12 @@ dependencies {
 
         // Moses MT connector
         implementation 'org.apache.xmlrpc:xmlrpc-client:3.1.3'
+
+        // LookAndFeel
+        implementation 'com.formdev:flatlaf:0.40'
+
+        // Java Native Access(JNA) library
+        implementation 'net.java.dev.jna:jna-platform:5.6.0'
     }
 
     // Test dependencies

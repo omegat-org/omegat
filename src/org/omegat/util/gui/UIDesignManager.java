@@ -49,6 +49,9 @@ import javax.swing.plaf.ColorUIResource;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.WinReg;
 import com.vlsolutions.swing.docking.AutoHidePolicy;
 import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
 import com.vlsolutions.swing.docking.DockableContainerFactory;
@@ -78,6 +81,7 @@ public final class UIDesignManager {
      * Initialize docking subsystem.
      */
     public static void initialize() {
+        setDefaultLookAndFeel();
         setDefaultColors();
 
         // Install VLDocking defaults
@@ -367,6 +371,14 @@ public final class UIDesignManager {
                 && System.getProperty("os.version").matches("6\\.[23]|10\\..*");
     }
 
+    // This check if Windows personalize preference is Dark or not.
+    private static boolean isWindowsThemeDark() {
+        return System.getProperty("os.name").startsWith("Windows") &&
+                (0 == Advapi32Util.registryGetIntValue(WinReg.HKEY_CURRENT_USER,
+                        "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                        "AppsUseLightTheme"));
+    }
+
     /**
      * Load icon from classpath.
      *
@@ -468,6 +480,18 @@ public final class UIDesignManager {
                 background.getBlue(),
                 null)[2];
         return background_brightness < foreground_brightness;
+    }
+
+    private static void setDefaultLookAndFeel() {
+        try {
+            if (isWindowsThemeDark()) {
+                UIManager.setLookAndFeel(new FlatDarkLaf());
+            } else {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            }
+        } catch (Exception e) {
+            // do nothing
+        }
     }
 
     /**

@@ -477,6 +477,12 @@ public final class UIDesignManager {
         Color hilite;
         if (isDarkTheme()) {
             hilite = UIManager.getColor("TextArea.background").brighter();  // NOI18N
+            // Hack for JDK GTKLookAndFeel bug.
+            // TextPane.background is always white but should be a text_background of GTK.
+            // List.background is as same color as text_background.
+            if (Platform.isLinux() && Color.WHITE.equals(UIManager.getColor("TextPane.background"))) {
+                UIManager.put("TextPane.background", UIManager.getColor("List.background"));
+            }
         } else {
             Color bg = UIManager.getColor("TextArea.background").darker();  // NOI18N
             hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);

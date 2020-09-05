@@ -2,7 +2,7 @@
  OmegaT 5.4.0
 ----------------------------------------------------------------------
   3 Enhancements
-  4 Bug fixes
+  5 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
@@ -29,6 +29,9 @@
 
   - HTML filter whitespace handling errors
   https://sourceforge.net/p/omegat/bugs/1007/
+
+  - Wrong background color in dark mode on Linux Mint
+  https://sourceforge.net/p/omegat/bugs/1013/
 
   - Project Files table does not respect LAF colors
   https://sourceforge.net/p/omegat/bugs/1016/

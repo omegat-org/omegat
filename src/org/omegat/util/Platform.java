@@ -86,6 +86,14 @@ public final class Platform {
     }
 
     /**
+     * Returns true if running on Linux
+     */
+    public static boolean isLinux() {
+        OsType os = getOsType();
+        return os == OsType.LINUX32 || os == OsType.LINUX64;
+    }
+
+    /**
      * Returns true if the JVM (NOT the OS) is 64-bit
      */
     public static boolean is64Bit() {

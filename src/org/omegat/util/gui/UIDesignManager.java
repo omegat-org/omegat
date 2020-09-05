@@ -480,7 +480,7 @@ public final class UIDesignManager {
             // Hack for JDK GTKLookAndFeel bug.
             // TextPane.background is always white but should be a text_background of GTK.
             // List.background is as same color as text_background.
-            if (Platform.isLinux()) {
+            if (Platform.isLinux() && Color.WHITE.equals(UIManager.getColor("TextPane.background"))) {
                 UIManager.put("TextPane.background", UIManager.getColor("List.background"));
             }
         } else {

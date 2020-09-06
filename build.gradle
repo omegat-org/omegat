@@ -404,9 +404,7 @@ distributions {
                 into 'source/doc_src'
             }
             from('src') {
-                include 'org/omegat/Bundle.properties',
-                        'org/omegat/ColorScheme_light.properties',
-                        'org/omegat/ColorScheme_dark.properties'
+                include 'org/omegat/Bundle.properties'
                 into 'source/src'
             }
             from('release') {

@@ -59,55 +59,55 @@ public final class Styles {
         COLOR_BACKGROUND(UIManager.getColor("TextPane.background")), // Also used for EditorPane.background
         COLOR_FOREGROUND(UIManager.getColor("TextPane.foreground")),
 
-        COLOR_ACTIVE_SOURCE("#c0ffc0"),
+        COLOR_ACTIVE_SOURCE(UIManager.getColor("OmegaT.activeSource")),
         COLOR_ACTIVE_SOURCE_FG((Color) null),
         COLOR_ACTIVE_TARGET((Color) null),
         COLOR_ACTIVE_TARGET_FG((Color) null),
         COLOR_SEGMENT_MARKER_FG((Color) null),
         COLOR_SEGMENT_MARKER_BG((Color) null),
-        COLOR_SOURCE("#c0ffc0"),
+        COLOR_SOURCE(UIManager.getColor("OmegaT.source")),
         COLOR_SOURCE_FG((Color) null),
-        COLOR_NOTED("#c0ffff"),
+        COLOR_NOTED(UIManager.getColor("OmegaT.noted")),
         COLOR_NOTED_FG((Color) null),
-        COLOR_UNTRANSLATED("#c0c0ff"),
+        COLOR_UNTRANSLATED(UIManager.getColor("OmegaT.untranslated")),
         COLOR_UNTRANSLATED_FG((Color) null),
-        COLOR_TRANSLATED("#ffff99"),
+        COLOR_TRANSLATED(UIManager.getColor("OmegaT.translated")),
         COLOR_TRANSLATED_FG((Color) null),
-        COLOR_NON_UNIQUE("#808080"),
+        COLOR_NON_UNIQUE(UIManager.getColor("OmegaT.nonUnique")),
         COLOR_NON_UNIQUE_BG((Color) null),
         COLOR_MOD_INFO((Color) null),
         COLOR_MOD_INFO_FG((Color) null),
-        COLOR_PLACEHOLDER("#969696"),
-        COLOR_REMOVETEXT_TARGET("#ff0000"),
-        COLOR_NBSP("#c8c8c8"),
-        COLOR_WHITESPACE("#808080"),
-        COLOR_BIDIMARKERS("#c80000"),
-        COLOR_PARAGRAPH_START("#aeaeae"),
-        COLOR_MARK_COMES_FROM_TM("#fa8072"), // Salmon red
-        COLOR_MARK_COMES_FROM_TM_XICE("#af76df"), // Purple
-        COLOR_MARK_COMES_FROM_TM_X100PC("#ff9408"), // Dark Orange
-        COLOR_MARK_COMES_FROM_TM_XAUTO("#ffd596"), // Orange
-        COLOR_MARK_COMES_FROM_TM_XENFORCED("#ffccff"), // Pink
-        COLOR_REPLACE("#0000ff"), // Blue
-        COLOR_LANGUAGE_TOOLS("#0000ff"),
-        COLOR_TRANSTIPS("#0000ff"),
-        COLOR_SPELLCHECK("#ff0000"),
-        COLOR_TERMINOLOGY(Color.ORANGE),
-        COLOR_MATCHES_CHANGED("#0000ff"),
-        COLOR_MATCHES_UNCHANGED("#00ff00"),
+        COLOR_PLACEHOLDER(UIManager.getColor("OmegaT.placeholder")),
+        COLOR_REMOVETEXT_TARGET(UIManager.getColor("OmegaT.removeTextTarget")),
+        COLOR_NBSP(UIManager.getColor("OmegaT.nbsp")),
+        COLOR_WHITESPACE(UIManager.getColor("OmegaT.whiteSpace")),
+        COLOR_BIDIMARKERS(UIManager.getColor("OmegaT.bidiMarkers")),
+        COLOR_PARAGRAPH_START(UIManager.getColor("OmegaT.paragraphStart")),
+        COLOR_MARK_COMES_FROM_TM(UIManager.getColor("OmegaT.markComesFromTm")),
+        COLOR_MARK_COMES_FROM_TM_XICE(UIManager.getColor("OmegaT.markComesFromTmXice")),
+        COLOR_MARK_COMES_FROM_TM_X100PC(UIManager.getColor("OmegaT.markComesFromTmX100pc")),
+        COLOR_MARK_COMES_FROM_TM_XAUTO(UIManager.getColor("OmegaT.markComesFromTmXauto")),
+        COLOR_MARK_COMES_FROM_TM_XENFORCED(UIManager.getColor("OmegaT.markComesFromTmXenforced")),
+        COLOR_REPLACE(UIManager.getColor("OmegaT.replace")),
+        COLOR_LANGUAGE_TOOLS(UIManager.getColor("OmegaT.languageTools")),
+        COLOR_TRANSTIPS(UIManager.getColor("OmegaT.transTips")),
+        COLOR_SPELLCHECK(UIManager.getColor("OmegaT.spellCheck")),
+        COLOR_TERMINOLOGY(UIManager.getColor("OmegaT.terminology")),
+        COLOR_MATCHES_CHANGED(UIManager.getColor("OmegaT.matchesChanged")),
+        COLOR_MATCHES_UNCHANGED(UIManager.getColor("OmegaT.matchesUnchanged")),
         COLOR_MATCHES_DEL_ACTIVE((Color) null),
         COLOR_MATCHES_DEL_INACTIVE((Color) null),
-        COLOR_MATCHES_INS_ACTIVE("#0000ff"),
-        COLOR_MATCHES_INS_INACTIVE("#808080"), // Color.gray
-        COLOR_HYPERLINK("#0000ff"), // Blue
-        COLOR_SEARCH_FOUND_MARK(Color.BLUE),
-        COLOR_SEARCH_REPLACE_MARK("#ff9900"), // Dark orange
-        COLOR_NOTIFICATION_MIN("#fff2d4"), // Light orange
-        COLOR_NOTIFICATION_MAX("#ff9900"), // Dark orange
-        COLOR_ALIGNER_ACCEPTED("#15bb45"), // Green
-        COLOR_ALIGNER_NEEDSREVIEW(Color.RED),
-        COLOR_ALIGNER_HIGHLIGHT(Color.YELLOW),
-        COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT("#c8c8c8"); // Gray
+        COLOR_MATCHES_INS_ACTIVE(UIManager.getColor("OmegaT.matchesInsActive")),
+        COLOR_MATCHES_INS_INACTIVE(UIManager.getColor("OmegaT.matchesInsInactive")),
+        COLOR_HYPERLINK(UIManager.getColor("OmegaT.hyperlink")),
+        COLOR_SEARCH_FOUND_MARK(UIManager.getColor("OmegaT.searchFoundMark")),
+        COLOR_SEARCH_REPLACE_MARK(UIManager.getColor("OmegaT.searchReplaceMark")),
+        COLOR_NOTIFICATION_MIN(UIManager.getColor("OmegaT.notificationMin")),
+        COLOR_NOTIFICATION_MAX(UIManager.getColor("OmegaT.notificationMax")),
+        COLOR_ALIGNER_ACCEPTED(UIManager.getColor("OmegaT.alignerAccepted")),
+        COLOR_ALIGNER_NEEDSREVIEW(UIManager.getColor("OmegaT.alignerNeedsReview")),
+        COLOR_ALIGNER_HIGHLIGHT(UIManager.getColor("OmegaT.alignerHighlight")),
+        COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT(UIManager.getColor("OmegaT.alignerTableRowHighlight"));
 
         private static final String DEFAULT_COLOR = "__DEFAULT__";
         private Color color;

@@ -82,6 +82,7 @@ import javax.swing.JScrollBar;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -562,7 +563,7 @@ public class PreferencesWindowController implements FurtherActionListener {
             setTreeVisible(root, false);
         }
         if (results.isEmpty()) {
-            innerPanel.searchTextField.setForeground(Color.RED);
+            innerPanel.searchTextField.setForeground(UIManager.getColor("OmegaT.searchFieldErrorText"));
             if (filterTree) {
                 ((DefaultTreeModel) innerPanel.availablePrefsTree.getModel()).reload();
             }
@@ -583,7 +584,7 @@ public class PreferencesWindowController implements FurtherActionListener {
                 ((JComponent) topResult.comp).scrollRectToVisible(topResult.comp.getBounds());
                 overlay.setHighlightComponent(topResult.comp);
             }
-            innerPanel.searchTextField.setForeground(Color.BLACK);
+            innerPanel.searchTextField.setForeground(UIManager.getColor("TextField.foreground"));
         }
     }
 
@@ -823,8 +824,8 @@ public class PreferencesWindowController implements FurtherActionListener {
     @SuppressWarnings("serial")
     static class HighlightablePanel extends JPanel {
 
-        private static final Color SHADOW_COLOR = new Color(128, 128, 128, 128);
-        private static final Color STROKE_COLOR = new Color(238, 210, 00, 128);
+        private static final Color SHADOW_COLOR = UIManager.getColor("OmegaT.searchDimmedBackground");
+        private static final Color STROKE_COLOR = UIManager.getColor("OmegaT.searchResultBorder");
         private static final int STROKE = 2;
         private static final BasicStroke STROKE_OBJ = new BasicStroke(STROKE);
         private final transient ComponentListener compListener;

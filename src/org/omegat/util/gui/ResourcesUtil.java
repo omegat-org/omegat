@@ -28,7 +28,10 @@ package org.omegat.util.gui;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Properties;
 
 /**
  * Utils for load resources from classpath.
@@ -41,6 +44,7 @@ public final class ResourcesUtil {
     private ResourcesUtil() {
     }
 
+    private static final String APP_ROOT = "/org/omegat/";
     private static final String RESOURCES = "/org/omegat/gui/resources/";
 
     /**
@@ -64,11 +68,26 @@ public final class ResourcesUtil {
     /**
      * Load icon from classpath.
      *
-     * @param iconName
+     * @param imageName
      *            icon file name
      * @return icon instance
      */
     public static Image getBundledImage(String imageName) {
         return getImage(RESOURCES + imageName);
+    }
+
+    /**
+     * Load default colors scheme for LAF theme.
+     *
+     * @param style a style name, should be 'light' or 'dark'
+     * @return Properties object loaded when succeeded, otherwise null
+     */
+    public static Properties getBundleColorProperties(final String style) throws IOException {
+        String resourcePath = APP_ROOT + "ColorScheme_" + style + ".properties";
+        Properties properties = new Properties();
+        try (InputStream is = ResourcesUtil.class.getResourceAsStream(resourcePath)) {
+            properties.load(is);
+        }
+        return properties;
     }
 }

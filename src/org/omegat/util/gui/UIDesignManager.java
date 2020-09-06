@@ -36,6 +36,7 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
@@ -77,8 +78,9 @@ public final class UIDesignManager {
     /**
      * Initialize docking subsystem.
      */
-    public static void initialize() {
-        setDefaultColors();
+    public static void initialize() throws IOException {
+        // load colors defaults
+        loadDefaultColors();
 
         // Install VLDocking defaults
         DockingUISettings.getInstance().installUI();
@@ -470,12 +472,38 @@ public final class UIDesignManager {
         return background_brightness < foreground_brightness;
     }
 
+    private static void loadColors(final String scheme) throws IOException {
+        ResourcesUtil.getBundleColorProperties(scheme).forEach((k, v) -> {
+            if (v.toString().charAt(0) != '#') {
+                throw new RuntimeException("Invalid color value for key " + k + ": " + v);
+            }
+            try {
+                String hex = v.toString().substring(1);
+                Color color;
+                if (hex.length() <= 6) {
+                    color = new Color(Integer.parseInt(hex, 16)); // int(rgb)
+                } else {
+                    long val = Long.parseLong(hex, 16);
+                    int a = (int) (val & 0xFF);
+                    int b = (int) (val >> 8 & 0xFF);
+                    int g = (int) (val >> 16 & 0xFF);
+                    int r = (int) (val >> 24 & 0xFF);
+                    color = new Color(r, g, b, a); // hasAlpha
+                }
+                UIManager.put(k.toString(), color);
+            } catch (NumberFormatException ex) {
+                throw new RuntimeException("Invalid color value for key '" + k + "': " + v, ex);
+            }
+        });
+    }
+
     /**
-     * Set application colors
+     * Load application default colors
      */
-    private static void setDefaultColors() {
+    private static void loadDefaultColors() throws IOException {
         Color hilite;
         if (isDarkTheme()) {
+            loadColors("dark");
             hilite = UIManager.getColor("TextArea.background").brighter();  // NOI18N
             // Hack for JDK GTKLookAndFeel bug.
             // TextPane.background is always white but should be a text_background of GTK.
@@ -484,12 +512,11 @@ public final class UIDesignManager {
                 UIManager.put("TextPane.background", UIManager.getColor("List.background"));
             }
         } else {
+            loadColors("light");
             Color bg = UIManager.getColor("TextArea.background").darker();  // NOI18N
             hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
         }
         UIManager.put("OmegaT.alternatingHilite", hilite);
-        UIManager.put("OmegaT.specialForeground", Color.BLACK);
-        UIManager.put("OmegaT.specialBackground", new Color(0xC8DDF2));
     }
 
 }

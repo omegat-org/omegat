@@ -881,8 +881,8 @@ public class ProjectFilesListController {
         }
     }
 
-    private static final Color COLOR_SPECIAL_FG = UIManager.getColor("OmegaT.specialForeground");
-    private static final Color COLOR_SPECIAL_BG = UIManager.getColor("OmegaT.specialBackground");
+    private static final Color COLOR_SPECIAL_FG = UIManager.getColor("OmegaT.projectFilesCurrentFileForeground");
+    private static final Color COLOR_SPECIAL_BG = UIManager.getColor("OmegaT.projectFilesCurrentFileBackground");
 
     /**
      * Render for table cells.

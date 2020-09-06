@@ -474,15 +474,25 @@ public final class UIDesignManager {
 
     private static void loadColors(final String scheme) throws IOException {
         ResourcesUtil.getBundleColorProperties(scheme).forEach((k, v) -> {
-            if (v.toString().length() <= 6) {
-                UIManager.put(k.toString(), new Color(Integer.parseInt(v.toString(), 16)));  // int(rgb)
-            } else {
-                long val = Long.parseLong(v.toString(), 16);
-                int a = (int)(val & 0xFF);
-                int b = (int)(val >> 8 & 0xFF);
-                int g = (int)(val >> 16 & 0xFF);
-                int r = (int)(val >> 24 & 0xFF);
-                UIManager.put(k.toString(), new Color(r, g, b, a));  // hasAlpha
+            if (v.toString().charAt(0) != '#') {
+                throw new RuntimeException("Invalid color value for key " + k + ": " + v);
+            }
+            try {
+                String hex = v.toString().substring(1);
+                Color color;
+                if (hex.length() <= 6) {
+                    color = new Color(Integer.parseInt(hex, 16)); // int(rgb)
+                } else {
+                    long val = Long.parseLong(hex, 16);
+                    int a = (int) (val & 0xFF);
+                    int b = (int) (val >> 8 & 0xFF);
+                    int g = (int) (val >> 16 & 0xFF);
+                    int r = (int) (val >> 24 & 0xFF);
+                    color = new Color(r, g, b, a); // hasAlpha
+                }
+                UIManager.put(k.toString(), color);
+            } catch (NumberFormatException ex) {
+                throw new RuntimeException("Invalid color value for key '" + k + "': " + v, ex);
             }
         });
     }

@@ -83,7 +83,7 @@ public final class Styles {
         COLOR_WHITESPACE(UIManager.getColor("OmegaT.whiteSpace")),
         COLOR_BIDIMARKERS(UIManager.getColor("OmegaT.bidiMarkers")),
         COLOR_PARAGRAPH_START(UIManager.getColor("OmegaT.paragraphStart")),
-        COLOR_MARK_COMES_FROM_TM(UIManager.getColor("OmegaT.markComesFromTM")),
+        COLOR_MARK_COMES_FROM_TM(UIManager.getColor("OmegaT.markComesFromTm")),
         COLOR_MARK_COMES_FROM_TM_XICE(UIManager.getColor("OmegaT.markComesFromTmXice")),
         COLOR_MARK_COMES_FROM_TM_X100PC(UIManager.getColor("OmegaT.markComesFromTmX100pc")),
         COLOR_MARK_COMES_FROM_TM_XAUTO(UIManager.getColor("OmegaT.markComesFromTmXauto")),

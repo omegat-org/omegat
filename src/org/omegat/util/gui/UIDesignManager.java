@@ -37,9 +37,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
@@ -74,7 +71,6 @@ import com.vlsolutions.swing.docking.ui.DockingUISettings;
  * @author Aaron Madlon-Kay
  */
 public final class UIDesignManager {
-    private static final Logger LOGGER = Logger.getLogger(UIDesignManager.class.getName());
 
     private UIDesignManager() {
     }
@@ -82,7 +78,7 @@ public final class UIDesignManager {
     /**
      * Initialize docking subsystem.
      */
-    public static void initialize() {
+    public static void initialize() throws IOException {
         // load colors defaults
         loadDefaultColors();
 
@@ -476,29 +472,25 @@ public final class UIDesignManager {
         return background_brightness < foreground_brightness;
     }
 
-    private static void loadColors(final String scheme) {
-        try {
-            ResourcesUtil.getBundleColorProperties(scheme).forEach((k, v) -> {
-                if (v.toString().length() <= 6) {
-                    UIManager.put(k.toString(), new Color(Integer.parseInt(v.toString(), 16)));  // int(rgb)
-                } else {
-                    long val = Long.parseLong(v.toString(), 16);
-                    int a = (int)(val & 0xFF);
-                    int b = (int)(val >> 8 & 0xFF);
-                    int g = (int)(val >> 16 & 0xFF);
-                    int r = (int)(val >> 24 & 0xFF);
-                    UIManager.put(k.toString(), new Color(r, g, b, a));  // hasAlpha
-                }
-            });
-        } catch (IOException e) {
-            LOGGER.warning("Cannot load color style defaults.");
-        }
+    private static void loadColors(final String scheme) throws IOException {
+        ResourcesUtil.getBundleColorProperties(scheme).forEach((k, v) -> {
+            if (v.toString().length() <= 6) {
+                UIManager.put(k.toString(), new Color(Integer.parseInt(v.toString(), 16)));  // int(rgb)
+            } else {
+                long val = Long.parseLong(v.toString(), 16);
+                int a = (int)(val & 0xFF);
+                int b = (int)(val >> 8 & 0xFF);
+                int g = (int)(val >> 16 & 0xFF);
+                int r = (int)(val >> 24 & 0xFF);
+                UIManager.put(k.toString(), new Color(r, g, b, a));  // hasAlpha
+            }
+        });
     }
 
     /**
      * Load application default colors
      */
-    private static void loadDefaultColors() {
+    private static void loadDefaultColors() throws IOException {
         Color hilite;
         if (isDarkTheme()) {
             loadColors("dark");

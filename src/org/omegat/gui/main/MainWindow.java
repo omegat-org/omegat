@@ -41,6 +41,7 @@ import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -114,7 +115,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     protected DockingDesktop desktop;
 
     /** Creates new form MainWindow */
-    public MainWindow() {
+    public MainWindow() throws IOException {
         UIDesignManager.initialize();
 
         menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));

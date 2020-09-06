@@ -584,7 +584,7 @@ public class PreferencesWindowController implements FurtherActionListener {
                 ((JComponent) topResult.comp).scrollRectToVisible(topResult.comp.getBounds());
                 overlay.setHighlightComponent(topResult.comp);
             }
-            innerPanel.searchTextField.setForeground(UIManager.getColor("OmegaT.searchFieldText"));
+            innerPanel.searchTextField.setForeground(UIManager.getColor("TextField.foreground"));
         }
     }
 

@@ -824,8 +824,8 @@ public class PreferencesWindowController implements FurtherActionListener {
     @SuppressWarnings("serial")
     static class HighlightablePanel extends JPanel {
 
-        private static final Color SHADOW_COLOR = UIManager.getColor("OmegaT.shadow");
-        private static final Color STROKE_COLOR = UIManager.getColor("OmegaT.stroke");
+        private static final Color SHADOW_COLOR = UIManager.getColor("OmegaT.searchDimmedBackground");
+        private static final Color STROKE_COLOR = UIManager.getColor("OmegaT.searchResultBorder");
         private static final int STROKE = 2;
         private static final BasicStroke STROKE_OBJ = new BasicStroke(STROKE);
         private final transient ComponentListener compListener;

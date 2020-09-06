@@ -563,7 +563,7 @@ public class PreferencesWindowController implements FurtherActionListener {
             setTreeVisible(root, false);
         }
         if (results.isEmpty()) {
-            innerPanel.searchTextField.setForeground(UIManager.getColor("OmegaT.searchTextField"));
+            innerPanel.searchTextField.setForeground(UIManager.getColor("OmegaT.searchFieldErrorText"));
             if (filterTree) {
                 ((DefaultTreeModel) innerPanel.availablePrefsTree.getModel()).reload();
             }
@@ -584,7 +584,7 @@ public class PreferencesWindowController implements FurtherActionListener {
                 ((JComponent) topResult.comp).scrollRectToVisible(topResult.comp.getBounds());
                 overlay.setHighlightComponent(topResult.comp);
             }
-            innerPanel.searchTextField.setForeground(UIManager.getColor("OmegaT.searchTextFieldText"));
+            innerPanel.searchTextField.setForeground(UIManager.getColor("OmegaT.searchFieldText"));
         }
     }
 

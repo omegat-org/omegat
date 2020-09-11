@@ -269,7 +269,7 @@ public class Searcher {
     }
 
     /**
-     * Queue found string. Removes duplicate segments (by Henry Pijffers) except if m_allResults = true
+     * Queue found string. Removes duplicate segments (by Henry Pijffers) except if allResults = true
      */
     private void foundString(int entryNum, String intro, String src, String target, String note,
             SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches) {
@@ -278,37 +278,43 @@ public class Searcher {
         }
 
         String key = src + target;
-        // entries from project memory
+
         if (entryNum >= ENTRY_ORIGIN_PROJECT_MEMORY) {
-            if (!m_entryMap.containsKey(key) || searchExpression.allResults) {
-                // HP, duplicate entry prevention
-                // entries are referenced at offset 1 but stored at offset 0
-                String file = searchExpression.fileNames ? getFileForEntry(entryNum + 1) : null;
-                addEntry(entryNum + 1, file, (entryNum + 1) + "> ", src, target,
-                        note, srcMatches, targetMatches, noteMatches);
-                if (!searchExpression.allResults) { // If we filter results
-                    m_entryMap.put(key, 0); // HP
-                }
-            } else {
-                m_entryMap.put(key, m_entryMap.get(key) + 1);
-            }
+            addProjectMemoryEntry(entryNum, src, target, note, srcMatches, targetMatches, noteMatches, key);
         } else if (entryNum == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
-        // entries from translation memory
-            if (!m_tmxMap.containsKey(key) || searchExpression.allResults) {
-                addEntry(entryNum, intro, null, src, target, note,
-                        srcMatches, targetMatches, noteMatches);
-                if (!searchExpression.allResults) {
-                    // first occurrence
-                    m_tmxMap.put(key, 0);
-                }
-            } else {
-                // next occurrence
-                m_tmxMap.put(key, m_tmxMap.get(key) + 1);
-            }
+            addTranslationMemoryEntry(entryNum, intro, src, target, note, srcMatches, targetMatches, noteMatches, key);
         } else {
-        // all other entries
             addEntry(entryNum, intro, null, src, target, note,
                     srcMatches, targetMatches, noteMatches);
+        }
+    }
+
+    private void addTranslationMemoryEntry(int entryNum, String intro, String src, String target, String note, SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, String key) {
+        if (!m_tmxMap.containsKey(key) || searchExpression.allResults) {
+            addEntry(entryNum, intro, null, src, target, note,
+                    srcMatches, targetMatches, noteMatches);
+            if (!searchExpression.allResults) {
+                // first occurrence
+                m_tmxMap.put(key, 0);
+            }
+        } else {
+            // next occurrence
+            m_tmxMap.put(key, m_tmxMap.get(key) + 1);
+        }
+    }
+
+    private void addProjectMemoryEntry(int entryNum, String src, String target, String note, SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, String key) {
+        if (!m_entryMap.containsKey(key) || searchExpression.allResults) {
+            // HP, duplicate entry prevention
+            // entries are referenced at offset 1 but stored at offset 0
+            String file = searchExpression.fileNames ? getFileForEntry(entryNum + 1) : null;
+            addEntry(entryNum + 1, file, (entryNum + 1) + "> ", src, target,
+                    note, srcMatches, targetMatches, noteMatches);
+            if (!searchExpression.allResults) { // If we filter results
+                m_entryMap.put(key, 0); // HP
+            }
+        } else {
+            m_entryMap.put(key, m_entryMap.get(key) + 1);
         }
     }
 

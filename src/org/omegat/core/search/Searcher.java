@@ -632,6 +632,7 @@ public class Searcher {
     }
 
     public boolean searchProperties(String[]  properties) {
+        if (properties == null) return false;
         for (int i=1; i<= properties.length; i=i+2) {
             if (searchString(properties[i], true)) {
                 return true;

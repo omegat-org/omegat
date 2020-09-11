@@ -48,16 +48,18 @@ public class SearchResultEntry {
      *            Note text of the corresponding entry within a project
      */
     public SearchResultEntry(int num, String preamble, String srcPrefix, String src, String target,
-            String note, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch) {
+            String note, String properties, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch, SearchMatch[] propertiesMatch) {
         m_num = num;
         m_preamble = preamble;
         m_srcPrefix = srcPrefix;
         m_src = src;
         m_target = target;
         m_note = note;
+        m_properties = properties;
         m_srcMatch = srcMatch;
         m_targetMatch = targetMatch;
         m_noteMatch = noteMatch;
+        m_propertiesMatch = propertiesMatch;
     }
 
     /**
@@ -95,6 +97,10 @@ public class SearchResultEntry {
         return (m_note);
     }
 
+    public String getProperties() {
+        return m_properties;
+    }
+
     public String getSrcPrefix() {
         return m_srcPrefix;
     }
@@ -111,13 +117,20 @@ public class SearchResultEntry {
         return m_noteMatch;
     }
 
+    public SearchMatch[] getPropertiesMatch() {
+        return m_propertiesMatch;
+    }
+
+
     private int m_num;
     private String m_preamble;
     private String m_srcPrefix;
     private String m_src;
     private String m_target;
     private String m_note;
+    private String m_properties;
     private SearchMatch[] m_srcMatch;
     private SearchMatch[] m_targetMatch;
     private SearchMatch[] m_noteMatch;
+    private SearchMatch[] m_propertiesMatch;
 }

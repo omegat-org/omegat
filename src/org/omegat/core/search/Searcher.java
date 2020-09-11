@@ -262,9 +262,9 @@ public class Searcher {
     // internal functions
 
     private void addEntry(int num, String preamble, String srcPrefix, String src, String target,
-            String note, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch) {
+            String note, String properties, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch, SearchMatch[] propertiesMatch) {
         SearchResultEntry entry = new SearchResultEntry(num, preamble, srcPrefix,
-                src, target, note, srcMatch, targetMatch, noteMatch);
+                src, target, note, properties, srcMatch, targetMatch, noteMatch, propertiesMatch);
         m_searchResults.add(entry);
         m_numFinds++;
     }
@@ -272,8 +272,8 @@ public class Searcher {
     /**
      * Queue found string. Removes duplicate segments (by Henry Pijffers) except if allResults = true
      */
-    private void foundString(int entryNum, String intro, String src, String target, String note,
-            SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches) {
+    private void foundString(int entryNum, String intro, String src, String target, String note, String properties,
+            SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertiesMatches) {
         if (m_numFinds >= searchExpression.numberOfResults) {
             return;
         }
@@ -281,19 +281,20 @@ public class Searcher {
         String key = src + target;
 
         if (entryNum >= ENTRY_ORIGIN_PROJECT_MEMORY) {
-            addProjectMemoryEntry(entryNum, src, target, note, srcMatches, targetMatches, noteMatches, key);
+            addProjectMemoryEntry(entryNum, src, target, note, properties, srcMatches, targetMatches, noteMatches, propertiesMatches, key);
         } else if (entryNum == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
-            addTranslationMemoryEntry(entryNum, intro, src, target, note, srcMatches, targetMatches, noteMatches, key);
+            addTranslationMemoryEntry(entryNum, intro, src, target, note, properties, srcMatches, targetMatches, noteMatches, propertiesMatches, key);
         } else {
-            addEntry(entryNum, intro, null, src, target, note,
-                    srcMatches, targetMatches, noteMatches);
+            addEntry(entryNum, intro, null, src, target, note, properties,
+                    srcMatches, targetMatches, noteMatches, propertiesMatches);
         }
     }
 
-    private void addTranslationMemoryEntry(int entryNum, String intro, String src, String target, String note, SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, String key) {
+    private void addTranslationMemoryEntry(int entryNum, String intro, String src, String target, String note, String properties,
+                                           SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertiesMatches, String key) {
         if (!m_tmxMap.containsKey(key) || searchExpression.allResults) {
-            addEntry(entryNum, intro, null, src, target, note,
-                    srcMatches, targetMatches, noteMatches);
+            addEntry(entryNum, intro, null, src, target, note, properties,
+                    srcMatches, targetMatches, noteMatches, propertiesMatches);
             if (!searchExpression.allResults) {
                 // first occurrence
                 m_tmxMap.put(key, 0);
@@ -304,13 +305,14 @@ public class Searcher {
         }
     }
 
-    private void addProjectMemoryEntry(int entryNum, String src, String target, String note, SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, String key) {
+    private void addProjectMemoryEntry(int entryNum, String src, String target, String note, String properties,
+                                       SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertiesMatches, String key) {
         if (!m_entryMap.containsKey(key) || searchExpression.allResults) {
             // HP, duplicate entry prevention
             // entries are referenced at offset 1 but stored at offset 0
             String file = searchExpression.fileNames ? getFileForEntry(entryNum + 1) : null;
             addEntry(entryNum + 1, file, (entryNum + 1) + "> ", src, target,
-                    note, srcMatches, targetMatches, noteMatches);
+                    note, properties, srcMatches, targetMatches, noteMatches, propertiesMatches);
             if (!searchExpression.allResults) { // If we filter results
                 m_entryMap.put(key, 0); // HP
             }
@@ -504,6 +506,7 @@ public class Searcher {
         SearchMatch[] srcOrTargetMatches = null;
         SearchMatch[] noteMatches = null;
         SearchMatch[] propertiesMatches = null;
+        String firstMatchedProperty = null;
 
         switch (searchExpression.mode) {
         case SEARCH:
@@ -534,8 +537,15 @@ public class Searcher {
             if (searchExpression.searchNotes && searchString(note)) {
                 noteMatches = foundMatches.toArray(new SearchMatch[0]);
             }
-            if (searchExpression.searchComments && searchProperties(properties)) {
-                propertiesMatches = foundMatches.toArray(new SearchMatch[0]);
+            if (searchExpression.searchComments && properties != null) {
+                searchProperties(properties);
+                for (int i=1; i<= properties.length; i=i+2) {
+                    if (searchString(properties[i], true)) {
+                        propertiesMatches = foundMatches.toArray(new SearchMatch[0]);
+                        firstMatchedProperty = properties[i];
+                        break;
+                    }
+                }
             }
             break;
         case REPLACE:
@@ -559,8 +569,8 @@ public class Searcher {
                 && (!searchExpression.searchDateAfter
                         || entry != null && entry.changeDate != 0 && entry.changeDate > searchExpression.dateAfter)) {
             // found
-            foundString(entryNum, intro, srcText, locText, note,
-                    srcMatches, targetMatches, noteMatches);
+            foundString(entryNum, intro, srcText, locText, note, firstMatchedProperty,
+                    srcMatches, targetMatches, noteMatches, propertiesMatches);
         }
     }
 
@@ -815,7 +825,7 @@ public class Searcher {
         if (searchString(seg)) {
             SearchMatch[] matches = foundMatches.toArray(new SearchMatch[0]);
             // found a match - do something about it
-            foundString(ENTRY_ORIGIN_TEXT, filename, seg, null, null, matches, null, null);
+            foundString(ENTRY_ORIGIN_TEXT, filename, seg, null, null, null, matches, null, null, null);
         }
     }
 

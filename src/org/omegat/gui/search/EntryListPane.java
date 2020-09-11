@@ -283,8 +283,8 @@ class EntryListPane extends JTextPane {
 
             for (SearchResultEntry e : entries) {
                 addEntry(stringBuf, e.getEntryNum(), e.getPreamble(), e.getSrcPrefix(), e.getSrcText(),
-                        e.getTranslation(), e.getNote(), e.getSrcMatch(), e.getTargetMatch(), e.getNoteMatch(),
-                        isReplace);
+                        e.getTranslation(), e.getNote(), e.getProperties(), e.getSrcMatch(), e.getTargetMatch(), e.getNoteMatch(),
+                        e.getPropertiesMatch(), isReplace);
             }
 
             Document doc = getDocument();
@@ -302,13 +302,13 @@ class EntryListPane extends JTextPane {
 
         // add entry text - remember what its number is and where it ends
         public void addEntry(StringBuilder stringBuf, int num, String preamble, String srcPrefix,
-                String src, String loc, String note, SearchMatch[] srcMatches,
-                SearchMatch[] targetMatches, SearchMatch[] noteMatches, boolean isReplace) {
+                String src, String loc, String note, String properties, SearchMatch[] srcMatches,
+                SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertiesMatches, boolean isReplace) {
             if (stringBuf.length() > 0) {
                 stringBuf.append(ENTRY_SEPARATOR);
             }
             if (preamble != null && !preamble.equals("")) {
-                stringBuf.append(preamble + "\n");
+                stringBuf.append(preamble).append("\n");
             }
             if (src != null && !src.equals("")) {
                 stringBuf.append("-- ");
@@ -370,6 +370,18 @@ class EntryListPane extends JTextPane {
                     }
                 }
                 stringBuf.append(note);
+                stringBuf.append('\n');
+            }
+
+            if (properties != null && !properties.equals("")) {
+                stringBuf.append("# ");
+                if (propertiesMatches != null) {
+                    for (SearchMatch m : propertiesMatches) {
+                        m.move(stringBuf.length());
+                        matches.add(m);
+                    }
+                }
+                stringBuf.append(properties);
                 stringBuf.append('\n');
             }
 

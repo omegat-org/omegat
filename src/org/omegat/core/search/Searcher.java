@@ -248,6 +248,7 @@ public class Searcher {
 
         m_author = Pattern.compile(author, flags).matcher("");
 
+
         if (searchExpression.rootDir == null) {
             // if no search directory specified, then we are
             // searching current project only
@@ -322,14 +323,14 @@ public class Searcher {
         // reset the number of search hits
         m_numFinds = 0;
 
-        if (searchMemory_maxResultsReached()) return;
-
-        if (searchExternalTM_maxResultsReached()) return;
-
-        if (searchGlossary_maxResultsReached()) return;
+        try {
+            searchMemory();
+            searchExternalTM();
+            searchGlossary();
+        } catch (SearchLimitReachedException ignore) {}
     }
 
-    private boolean searchGlossary_maxResultsReached() {
+    private void searchGlossary() throws SearchLimitReachedException {
         // search the glossary, if requested
         if (searchExpression.glossary) {
             String intro = OStrings.getString("SW_GLOSSARY_RESULT");
@@ -338,15 +339,14 @@ public class Searcher {
                 checkEntry(en.getSrcText(), en.getLocText(), null, null, null, ENTRY_ORIGIN_GLOSSARY, intro);
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= searchExpression.numberOfResults) {
-                    return true;
+                    throw new SearchLimitReachedException();
                 }
                 checkStop.checkInterrupted();
             }
         }
-        return false;
     }
 
-    private boolean searchExternalTM_maxResultsReached() {
+    private void searchExternalTM() throws SearchLimitReachedException {
         // search the TM, if requested
         if (searchExpression.tm) {
             // Search TM entries, unless we search for date or author.
@@ -355,27 +355,20 @@ public class Searcher {
             if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
                     final String fileTM = tmEn.getKey();
-                    if (searchEntries_maxResultsReached(tmEn.getValue().getEntries(), fileTM)) {
-                        return true;
-                    }
+                    searchEntries(tmEn.getValue().getEntries(), fileTM);
                     checkStop.checkInterrupted();
                 }
                 for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
-                    if (searchEntriesAlternative_maxResultsReached(tmEn.getValue().getDefaults(), langTM.getLanguage())) {
-                        return true;
-                    }
-                    if (searchEntriesAlternative_maxResultsReached(tmEn.getValue().getAlternatives(), langTM.getLanguage())) {
-                        return true;
-                    }
+                    searchEntriesAlternative(tmEn.getValue().getDefaults(), langTM.getLanguage());
+                    searchEntriesAlternative(tmEn.getValue().getAlternatives(), langTM.getLanguage());
                     checkStop.checkInterrupted();
                 }
             }
         }
-        return false;
     }
 
-    private boolean searchMemory_maxResultsReached() {
+    private void searchMemory() throws SearchLimitReachedException {
         // search the Memory, if requested
         if (searchExpression.memory) {
             // search through all project entries
@@ -383,7 +376,7 @@ public class Searcher {
             for (int i = 0; i < allEntries.size(); i++) {
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= searchExpression.numberOfResults) {
-                    return true;
+                    throw new SearchLimitReachedException();
                 }
                 // get the source and translation of the next entry
                 SourceTextEntry ste = allEntries.get(i);
@@ -426,7 +419,6 @@ public class Searcher {
                 });
             }
         }
-        return false;
     }
 
     private String getFileForEntry(int i) {
@@ -448,14 +440,13 @@ public class Searcher {
      *
      * @param tmEn collection of TMX Entries to check.
      * @param tmxID identifier of the TMX. E.g. the filename or language code
-     * @return true when finished and all entries checked,
-     *         false when search has stopped before all entries have been checked.
+     * @throws SearchLimitReachedException when nr of found matches exceeds requested nr of results
      */
-    private boolean searchEntries_maxResultsReached(Collection<PrepareTMXEntry> tmEn, final String tmxID) {
+    private void searchEntries(Collection<PrepareTMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
         for (PrepareTMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= searchExpression.numberOfResults) {
-                return true;
+                throw new SearchLimitReachedException();
             }
 
             // for alternative translations:
@@ -467,14 +458,13 @@ public class Searcher {
 
             checkStop.checkInterrupted();
         }
-        return false;
     }
 
-    private boolean searchEntriesAlternative_maxResultsReached(Collection<TMXEntry> tmEn, final String tmxID) {
+    private void searchEntriesAlternative(Collection<TMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
         for (TMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= searchExpression.numberOfResults) {
-                return true;
+                throw new SearchLimitReachedException();
             }
 
             // for alternative translations:
@@ -486,7 +476,6 @@ public class Searcher {
 
             checkStop.checkInterrupted();
         }
-        return false;
     }
 
     /**
@@ -826,5 +815,9 @@ public class Searcher {
             // found a match - do something about it
             foundString(ENTRY_ORIGIN_TEXT, filename, seg, null, null, matches, null, null);
         }
+    }
+
+    private static class SearchLimitReachedException extends Exception {
+
     }
 }

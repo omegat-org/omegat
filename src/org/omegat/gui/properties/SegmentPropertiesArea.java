@@ -26,11 +26,8 @@
 package org.omegat.gui.properties;
 
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.IllegalComponentStateException;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -62,7 +59,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
@@ -96,7 +92,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_ISALT = "isAlt";
     private static final String KEY_LINKED = "linked";
 
-    final List<String> properties = new ArrayList<String>();
+    final List<String> properties = new ArrayList<>();
 
     final DockableScrollPane scrollPane;
 
@@ -121,20 +117,12 @@ public class SegmentPropertiesArea implements IPaneMenu {
                 doNotify(getKeysToNotify());
             }
         });
-        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
-            @Override
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
-                    setProperties(null);
-                }
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
+                setProperties(null);
             }
         });
-        CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
-            @Override
-            public void onFontChanged(Font newFont) {
-                viewImpl.getViewComponent().setFont(newFont);
-            }
-        });
+        CoreEvents.registerFontChangedEventListener(newFont -> viewImpl.getViewComponent().setFont(newFont));
 
         scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
         scrollPane.setBackground(Styles.EditorColor.COLOR_BACKGROUND.getColor());
@@ -204,8 +192,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         // populateGlobalContextMenuOptions(menu);
         try {
             menu.show(scrollPane, p.x, p.y);
-        } catch (IllegalComponentStateException ignore) {
-            ignore.printStackTrace();
+        } catch (IllegalComponentStateException e) {
+            e.printStackTrace();
         }
     }
 
@@ -228,12 +216,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
                 displayKey);
         final JMenuItem notifyOnItem = new JCheckBoxMenuItem(label);
         notifyOnItem.setSelected(getKeysToNotify().contains(key));
-        notifyOnItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setKeyToNotify(key, notifyOnItem.isSelected());
-            }
-        });
+        notifyOnItem.addActionListener(e -> setKeyToNotify(key, notifyOnItem.isSelected()));
         contextMenu.add(notifyOnItem);
     }
 
@@ -241,20 +224,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
     public void populatePaneMenu(JPopupMenu contextMenu) {
         JMenuItem tableModeItem = new JCheckBoxMenuItem(OStrings.getString("SEGPROP_CONTEXTMENU_TABLE_MODE"));
         tableModeItem.setSelected(viewImpl.getClass().equals(SegmentPropertiesTableView.class));
-        tableModeItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toggleMode(SegmentPropertiesTableView.class);
-            }
-        });
+        tableModeItem.addActionListener(e -> toggleMode(SegmentPropertiesTableView.class));
         JMenuItem listModeItem = new JCheckBoxMenuItem(OStrings.getString("SEGPROP_CONTEXTMENU_LIST_MODE"));
         listModeItem.setSelected(viewImpl.getClass().equals(SegmentPropertiesListView.class));
-        listModeItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toggleMode(SegmentPropertiesListView.class);
-            }
-        });
+        listModeItem.addActionListener(e -> toggleMode(SegmentPropertiesListView.class));
         ButtonGroup group = new ButtonGroup();
         group.add(tableModeItem);
         group.add(listModeItem);
@@ -264,13 +237,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
         final JMenuItem toggleKeyTranslationItem = new JCheckBoxMenuItem(
                 OStrings.getString("SEGPROP_CONTEXTMENU_RAW_KEYS"));
         toggleKeyTranslationItem.setSelected(Preferences.isPreference(Preferences.SEGPROPS_SHOW_RAW_KEYS));
-        toggleKeyTranslationItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Preferences.setPreference(Preferences.SEGPROPS_SHOW_RAW_KEYS,
-                        toggleKeyTranslationItem.isSelected());
-                viewImpl.update();
-            }
+        toggleKeyTranslationItem.addActionListener(e -> {
+            Preferences.setPreference(Preferences.SEGPROPS_SHOW_RAW_KEYS,
+                    toggleKeyTranslationItem.isSelected());
+            viewImpl.update();
         });
         contextMenu.add(toggleKeyTranslationItem);
     }
@@ -285,18 +255,18 @@ public class SegmentPropertiesArea implements IPaneMenu {
     }
 
     private void setKeyToNotify(String key, boolean enabled) {
-        List<String> currentKeys = new ArrayList<String>(getKeysToNotify());
+        List<String> currentKeys = new ArrayList<>(getKeysToNotify());
         if (enabled && !currentKeys.contains(key)) {
             currentKeys.add(key);
         }
-        if (!enabled && currentKeys.contains(key)) {
+        if (!enabled) {
             currentKeys.remove(key);
         }
         Preferences.setPreference(Preferences.SEGPROPS_NOTIFY_PROPS, StringUtils.join(currentKeys, ", "));
     }
 
     private void doNotify(List<String> keys) {
-        final List<Integer> notify = new ArrayList<Integer>();
+        final List<Integer> notify = new ArrayList<>();
         for (int i = 0; i < properties.size(); i += 2) {
             String prop = properties.get(i);
             if (keys.contains(prop)) {
@@ -308,12 +278,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         }
         Collections.sort(notify);
         scrollPane.notify(true);
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                viewImpl.notifyUser(notify);
-            }
-        });
+        SwingUtilities.invokeLater(() -> viewImpl.notifyUser(notify));
     }
 
     private void setProperty(String key, String value) {
@@ -332,9 +297,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private void setProperties(SourceTextEntry ste) {
         properties.clear();
         if (ste != null) {
-            for (String s : ste.getRawProperties()) {
-                properties.add(s);
-            }
+            Collections.addAll(properties, ste.getRawProperties());
             if (ste.getDuplicate() != DUPLICATE.NONE) {
                 setProperty(KEY_ISDUP, ste.getDuplicate());
             }

@@ -322,6 +322,60 @@ public class Searcher {
         // reset the number of search hits
         m_numFinds = 0;
 
+        if (searchMemory_maxResultsReached()) return;
+
+        if (searchExternalTM_maxResultsReached()) return;
+
+        if (searchGlossary_maxResultsReached()) return;
+    }
+
+    private boolean searchGlossary_maxResultsReached() {
+        // search the glossary, if requested
+        if (searchExpression.glossary) {
+            String intro = OStrings.getString("SW_GLOSSARY_RESULT");
+            List<GlossaryEntry> entries = Core.getGlossaryManager().getLocalEntries();
+            for (GlossaryEntry en : entries) {
+                checkEntry(en.getSrcText(), en.getLocText(), null, null, null, ENTRY_ORIGIN_GLOSSARY, intro);
+                // stop searching if the max. nr of hits has been reached
+                if (m_numFinds >= searchExpression.numberOfResults) {
+                    return true;
+                }
+                checkStop.checkInterrupted();
+            }
+        }
+        return false;
+    }
+
+    private boolean searchExternalTM_maxResultsReached() {
+        // search the TM, if requested
+        if (searchExpression.tm) {
+            // Search TM entries, unless we search for date or author.
+            // They are not loaded from external TM, so skip the search in
+            // that case.
+            if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
+                for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
+                    final String fileTM = tmEn.getKey();
+                    if (searchEntries_maxResultsReached(tmEn.getValue().getEntries(), fileTM)) {
+                        return true;
+                    }
+                    checkStop.checkInterrupted();
+                }
+                for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
+                    final Language langTM = tmEn.getKey();
+                    if (searchEntriesAlternative_maxResultsReached(tmEn.getValue().getDefaults(), langTM.getLanguage())) {
+                        return true;
+                    }
+                    if (searchEntriesAlternative_maxResultsReached(tmEn.getValue().getAlternatives(), langTM.getLanguage())) {
+                        return true;
+                    }
+                    checkStop.checkInterrupted();
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean searchMemory_maxResultsReached() {
         // search the Memory, if requested
         if (searchExpression.memory) {
             // search through all project entries
@@ -329,7 +383,7 @@ public class Searcher {
             for (int i = 0; i < allEntries.size(); i++) {
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= searchExpression.numberOfResults) {
-                    return;
+                    return true;
                 }
                 // get the source and translation of the next entry
                 SourceTextEntry ste = allEntries.get(i);
@@ -372,46 +426,7 @@ public class Searcher {
                 });
             }
         }
-
-        // search the TM, if requested
-        if (searchExpression.tm) {
-            // Search TM entries, unless we search for date or author.
-            // They are not loaded from external TM, so skip the search in
-            // that case.
-            if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
-                for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
-                    final String fileTM = tmEn.getKey();
-                    if (!searchEntries(tmEn.getValue().getEntries(), fileTM)) {
-                        return;
-                    }
-                    checkStop.checkInterrupted();
-                }
-                for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
-                    final Language langTM = tmEn.getKey();
-                    if (!searchEntriesAlternative(tmEn.getValue().getDefaults(), langTM.getLanguage())) {
-                        return;
-                    }
-                    if (!searchEntriesAlternative(tmEn.getValue().getAlternatives(), langTM.getLanguage())) {
-                        return;
-                    }
-                    checkStop.checkInterrupted();
-                }
-            }
-        }
-
-        // search the glossary, if requested
-        if (searchExpression.glossary) {
-            String intro = OStrings.getString("SW_GLOSSARY_RESULT");
-            List<GlossaryEntry> entries = Core.getGlossaryManager().getLocalEntries();
-            for (GlossaryEntry en : entries) {
-                checkEntry(en.getSrcText(), en.getLocText(), null, null, null, ENTRY_ORIGIN_GLOSSARY, intro);
-                // stop searching if the max. nr of hits has been reached
-                if (m_numFinds >= searchExpression.numberOfResults) {
-                    return;
-                }
-                checkStop.checkInterrupted();
-            }
-        }
+        return false;
     }
 
     private String getFileForEntry(int i) {
@@ -436,11 +451,11 @@ public class Searcher {
      * @return true when finished and all entries checked,
      *         false when search has stopped before all entries have been checked.
      */
-    private boolean searchEntries(Collection<PrepareTMXEntry> tmEn, final String tmxID) {
+    private boolean searchEntries_maxResultsReached(Collection<PrepareTMXEntry> tmEn, final String tmxID) {
         for (PrepareTMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= searchExpression.numberOfResults) {
-                return false;
+                return true;
             }
 
             // for alternative translations:
@@ -452,14 +467,14 @@ public class Searcher {
 
             checkStop.checkInterrupted();
         }
-        return true;
+        return false;
     }
 
-    private boolean searchEntriesAlternative(Collection<TMXEntry> tmEn, final String tmxID) {
+    private boolean searchEntriesAlternative_maxResultsReached(Collection<TMXEntry> tmEn, final String tmxID) {
         for (TMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= searchExpression.numberOfResults) {
-                return false;
+                return true;
             }
 
             // for alternative translations:
@@ -471,7 +486,7 @@ public class Searcher {
 
             checkStop.checkInterrupted();
         }
-        return true;
+        return false;
     }
 
     /**

@@ -389,7 +389,7 @@ public class Searcher {
                 SourceTextEntry ste = allEntries.get(i);
                 TMXEntry te = m_project.getTranslationInfo(ste);
 
-                checkEntry(ste.getSrcText(), te.translation, te.note, ste.getComment(), te, i, null);
+                checkEntry(ste.getSrcText(), te.translation, te.note, ste.getRawProperties(), te, i, null);
                 checkStop.checkInterrupted();
             }
 
@@ -498,8 +498,8 @@ public class Searcher {
      *            translation text
      * @param note
      *            note text
-     * @param comment
-     *            comment text
+     * @param properties
+     *            properties
      * @param entry
      *            entry. Null for external tmx entries (so we can only search for source and translation in external
      *            tmx)
@@ -509,12 +509,12 @@ public class Searcher {
      *            file
      */
     protected void checkEntry(String srcText, String locText, String note,
-            String comment, TMXEntry entry, int entryNum, String intro) {
+            String[] properties, TMXEntry entry, int entryNum, String intro) {
         SearchMatch[] srcMatches = null;
         SearchMatch[] targetMatches = null;
         SearchMatch[] srcOrTargetMatches = null;
         SearchMatch[] noteMatches = null;
-        SearchMatch[] commentMatches = null;
+        SearchMatch[] propertiesMatches = null;
 
         switch (searchExpression.mode) {
         case SEARCH:
@@ -545,8 +545,8 @@ public class Searcher {
             if (searchExpression.searchNotes && searchString(note)) {
                 noteMatches = foundMatches.toArray(new SearchMatch[0]);
             }
-            if (searchExpression.searchComments && searchString(comment)) {
-                commentMatches = foundMatches.toArray(new SearchMatch[0]);
+            if (searchExpression.searchComments && searchProperties(properties)) {
+                propertiesMatches = foundMatches.toArray(new SearchMatch[0]);
             }
             break;
         case REPLACE:
@@ -563,7 +563,7 @@ public class Searcher {
         }
         // if the search expression is satisfied, report the hit
         if ((srcMatches != null || targetMatches != null || srcOrTargetMatches != null || noteMatches != null
-                || commentMatches != null)
+                || propertiesMatches != null)
                 && (!searchExpression.searchAuthor || searchAuthor(entry))
                 && (!searchExpression.searchDateBefore
                         || entry != null && entry.changeDate != 0 && entry.changeDate < searchExpression.dateBefore)
@@ -640,6 +640,15 @@ public class Searcher {
      */
     public boolean searchString(String origText) {
         return searchString(origText, true);
+    }
+
+    public boolean searchProperties(String[]  properties) {
+        for (int i=1; i<= properties.length; i=i+2) {
+            if (searchString(properties[i], true)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

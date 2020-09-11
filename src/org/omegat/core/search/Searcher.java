@@ -817,6 +817,7 @@ public class Searcher {
         }
     }
 
+    @SuppressWarnings("serial")
     private static class SearchLimitReachedException extends Exception {
 
     }

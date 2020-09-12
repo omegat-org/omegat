@@ -262,9 +262,9 @@ public class Searcher {
     // internal functions
 
     private void addEntry(int num, String preamble, String srcPrefix, String src, String target,
-            String note, String properties, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch, SearchMatch[] propertiesMatch) {
+            String note, String property, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch, SearchMatch[] propertyMatch) {
         SearchResultEntry entry = new SearchResultEntry(num, preamble, srcPrefix,
-                src, target, note, properties, srcMatch, targetMatch, noteMatch, propertiesMatch);
+                src, target, note, property, srcMatch, targetMatch, noteMatch, propertyMatch);
         m_searchResults.add(entry);
         m_numFinds++;
     }
@@ -272,8 +272,8 @@ public class Searcher {
     /**
      * Queue found string. Removes duplicate segments (by Henry Pijffers) except if allResults = true
      */
-    private void foundString(int entryNum, String intro, String src, String target, String note, String properties,
-            SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertiesMatches) {
+    private void foundString(int entryNum, String intro, String src, String target, String note, String property,
+            SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches) {
         if (m_numFinds >= searchExpression.numberOfResults) {
             return;
         }
@@ -281,20 +281,20 @@ public class Searcher {
         String key = src + target;
 
         if (entryNum >= ENTRY_ORIGIN_PROJECT_MEMORY) {
-            addProjectMemoryEntry(entryNum, src, target, note, properties, srcMatches, targetMatches, noteMatches, propertiesMatches, key);
+            addProjectMemoryEntry(entryNum, src, target, note, property, srcMatches, targetMatches, noteMatches, propertyMatches, key);
         } else if (entryNum == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
-            addTranslationMemoryEntry(entryNum, intro, src, target, note, properties, srcMatches, targetMatches, noteMatches, propertiesMatches, key);
+            addTranslationMemoryEntry(entryNum, intro, src, target, note, property, srcMatches, targetMatches, noteMatches, propertyMatches, key);
         } else {
-            addEntry(entryNum, intro, null, src, target, note, properties,
-                    srcMatches, targetMatches, noteMatches, propertiesMatches);
+            addEntry(entryNum, intro, null, src, target, note, property,
+                    srcMatches, targetMatches, noteMatches, propertyMatches);
         }
     }
 
-    private void addTranslationMemoryEntry(int entryNum, String intro, String src, String target, String note, String properties,
-                                           SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertiesMatches, String key) {
+    private void addTranslationMemoryEntry(int entryNum, String intro, String src, String target, String note, String property,
+                                           SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches, String key) {
         if (!m_tmxMap.containsKey(key) || searchExpression.allResults) {
-            addEntry(entryNum, intro, null, src, target, note, properties,
-                    srcMatches, targetMatches, noteMatches, propertiesMatches);
+            addEntry(entryNum, intro, null, src, target, note, property,
+                    srcMatches, targetMatches, noteMatches, propertyMatches);
             if (!searchExpression.allResults) {
                 // first occurrence
                 m_tmxMap.put(key, 0);
@@ -305,14 +305,14 @@ public class Searcher {
         }
     }
 
-    private void addProjectMemoryEntry(int entryNum, String src, String target, String note, String properties,
-                                       SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertiesMatches, String key) {
+    private void addProjectMemoryEntry(int entryNum, String src, String target, String note, String property,
+                                       SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches, String key) {
         if (!m_entryMap.containsKey(key) || searchExpression.allResults) {
             // HP, duplicate entry prevention
             // entries are referenced at offset 1 but stored at offset 0
             String file = searchExpression.fileNames ? getFileForEntry(entryNum + 1) : null;
             addEntry(entryNum + 1, file, (entryNum + 1) + "> ", src, target,
-                    note, properties, srcMatches, targetMatches, noteMatches, propertiesMatches);
+                    note, property, srcMatches, targetMatches, noteMatches, propertyMatches);
             if (!searchExpression.allResults) { // If we filter results
                 m_entryMap.put(key, 0); // HP
             }
@@ -505,7 +505,7 @@ public class Searcher {
         SearchMatch[] targetMatches = null;
         SearchMatch[] srcOrTargetMatches = null;
         SearchMatch[] noteMatches = null;
-        SearchMatch[] propertiesMatches = null;
+        SearchMatch[] propertyMatches = null;
         String firstMatchedProperty = null;
 
         switch (searchExpression.mode) {
@@ -538,10 +538,9 @@ public class Searcher {
                 noteMatches = foundMatches.toArray(new SearchMatch[0]);
             }
             if (searchExpression.searchComments && properties != null) {
-                searchProperties(properties);
-                for (int i=1; i<= properties.length; i=i+2) {
+                for (int i=1; i<= properties.length; i=i+2) { // loop over values only, not keys.
                     if (searchString(properties[i], true)) {
-                        propertiesMatches = foundMatches.toArray(new SearchMatch[0]);
+                        propertyMatches = foundMatches.toArray(new SearchMatch[0]);
                         firstMatchedProperty = properties[i];
                         break;
                     }
@@ -562,7 +561,7 @@ public class Searcher {
         }
         // if the search expression is satisfied, report the hit
         if ((srcMatches != null || targetMatches != null || srcOrTargetMatches != null || noteMatches != null
-                || propertiesMatches != null)
+                || propertyMatches != null)
                 && (!searchExpression.searchAuthor || searchAuthor(entry))
                 && (!searchExpression.searchDateBefore
                         || entry != null && entry.changeDate != 0 && entry.changeDate < searchExpression.dateBefore)
@@ -570,7 +569,7 @@ public class Searcher {
                         || entry != null && entry.changeDate != 0 && entry.changeDate > searchExpression.dateAfter)) {
             // found
             foundString(entryNum, intro, srcText, locText, note, firstMatchedProperty,
-                    srcMatches, targetMatches, noteMatches, propertiesMatches);
+                    srcMatches, targetMatches, noteMatches, propertyMatches);
         }
     }
 
@@ -641,23 +640,14 @@ public class Searcher {
         return searchString(origText, true);
     }
 
-    public boolean searchProperties(String[]  properties) {
-        if (properties == null) return false;
-        for (int i=1; i<= properties.length; i=i+2) {
-            if (searchString(properties[i], true)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /**
      * Looks for an occurrence of the search string(s) in the supplied text string.
+     * IF matches are found, they are added to this.foundMatches.
      *
      * @param origText
      *            The text string to search in
      * @param collapseResults
-     *            True if the adjacent results should be collapsed.
+     *            True if the adjacent results should be collapsed. This can happen on search, but not on replace.
      *
      * @return True if the text string contains all search strings
      */

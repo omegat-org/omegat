@@ -122,7 +122,7 @@ dependencies {
         implementation 'net.loomchild:maligna:3.0.0'
 
         // Dictionary
-        implementation 'org.dict.zip:dictzip-lib:0.8.2'
+        implementation 'org.dict.zip:dictzip-lib:0.9.1'
         implementation 'com.github.takawitter:trie4j:0.9.8'
 
         // Encoding dectection

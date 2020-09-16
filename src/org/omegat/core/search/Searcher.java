@@ -673,6 +673,7 @@ public class Searcher {
             // original. If so, then we give up on highlighting this hit
             // because the offsets and length will not match. We still return
             // true so the hit will still be recorded.
+            //noinspection StringEquality
             if (text != origText && text.length() != origText.length()) {
                 continue;
             }

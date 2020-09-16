@@ -427,7 +427,7 @@ public class RemoteRepositoryProvider {
 
         public void copyFromRepoToProject() throws IOException {
             if (!matches()) {
-                throw new RuntimeException("Doesn't matched");
+                throw new RuntimeException("Path doesn't match with mapping");
             }
             // Remove leading slashes on child args to avoid doing `new
             // File("foo", "/")` which treats the "/" as an actual child element
@@ -451,7 +451,7 @@ public class RemoteRepositoryProvider {
 
         public void copyFromProjectToRepo(String eolConversionCharset) throws Exception {
             if (!matches()) {
-                throw new RuntimeException("Doesn't matched");
+                throw new RuntimeException("Path doesn't match with mapping");
             }
             // Remove leading slashes on child args to avoid doing `new
             // File("foo", "/")` which treats the "/" as an actual child element
@@ -469,7 +469,7 @@ public class RemoteRepositoryProvider {
                 // file mapping
                 if (!filterPrefix.equals("/")) {
                     throw new RuntimeException(
-                            "Filter prefix should have been / for file mapping, but was " + filterPrefix);
+                            "Filter prefix should have been '/' for file mapping, but was '" + filterPrefix + "'");
                 }
                 copyFile(from, to, eolConversionCharset);
                 addForCommit(repo, withoutSlashes(repoMapping.getRepository()));
@@ -523,7 +523,7 @@ public class RemoteRepositoryProvider {
          */
         private List<String> getMappedFiles() throws IOException {
             if (!matches()) {
-                throw new RuntimeException("Doesn't match");
+                throw new RuntimeException("Path doesn't match with mapping");
             }
             // Remove leading slashes on child args to avoid doing `new
             // File("foo", "/")` which treats the "/" as an actual child element

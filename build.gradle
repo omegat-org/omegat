@@ -128,7 +128,7 @@ dependencies {
         implementation 'com.github.takawitter:trie4j:0.9.8'
 
         // Encoding dectection
-        implementation 'com.github.albfernandez:juniversalchardet:2.3.0'
+        implementation 'com.github.albfernandez:juniversalchardet:2.3.2'
 
         // Legacy projects re-hosted on GitHub + Bintray
         implementation 'org.omegat:vldocking:3.0.5'

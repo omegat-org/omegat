@@ -116,7 +116,7 @@ dependencies {
         implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
 
         // PDF Filter
-        implementation 'org.apache.pdfbox:pdfbox:2.0.18'
+        implementation 'org.apache.pdfbox:pdfbox:2.0.21'
 
         // Aligner
         implementation 'net.loomchild:maligna:3.0.0'

@@ -104,9 +104,7 @@ dependencies {
     if (providedLibsDir.directory) {
         compile fileTree(dir: providedLibsDir, include: '**/*.jar')
     } else {
-        // Do not upgrade to commons-io 2.6 due to
-        // https://issues.apache.org/jira/browse/IO-554
-        implementation 'commons-io:commons-io:2.5'
+        implementation 'commons-io:commons-io:2.7'
         implementation 'commons-lang:commons-lang:2.6'
         implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 

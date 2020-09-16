@@ -6,7 +6,7 @@ plugins {
     id 'maven-publish'
     id 'eclipse'
     id 'checkstyle'
-    id "com.github.spotbugs" version '3.0.0'
+    id 'com.github.spotbugs' version '4.5.0'
     id 'de.gliderpilot.jnlp' version '1.2.6'
     id 'com.jfrog.bintray' version '1.8.4'
     id 'org.hidetake.ssh' version '2.10.1'
@@ -869,13 +869,10 @@ spotbugs {
     reportLevel = 'high'
 }
 
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
+spotbugsMain {
     reports {
-        xml {
-            enabled envIsCi
-            withMessages true
-        }
-        html.enabled !envIsCi
+        xml.enabled = envIsCi
+        html.enabled = !envIsCi
     }
 }
 

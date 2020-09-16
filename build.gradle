@@ -8,7 +8,7 @@ plugins {
     id 'checkstyle'
     id 'com.github.spotbugs' version '4.5.0'
     id 'de.gliderpilot.jnlp' version '1.2.6'
-    id 'com.jfrog.bintray' version '1.8.4'
+    id 'com.jfrog.bintray' version '1.8.5'
     id 'org.hidetake.ssh' version '2.10.1'
     id 'com.diffplug.spotless' version '5.5.1'
     id 'com.github.ben-manes.versions' version '0.27.0'

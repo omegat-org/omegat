@@ -129,6 +129,12 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     @Override
+    public void addForDeletion(String path) throws Exception {
+        Log.logDebug(LOGGER,
+                String.format("Cannot add files for deletion for HTTP repositories. Skipping \"%s\".", path));
+    }
+
+    @Override
     public File getLocalDirectory() {
         return baseDirectory;
     }

@@ -67,6 +67,17 @@ public interface IRemoteRepository2 {
     void addForCommit(String path) throws Exception;
 
     /**
+     * remove the specified file in preparation for commit (e.g.
+     * <code>git rm</code>, <code>svn delete</code>).
+     *
+     * @param path
+     *            The relative path of the item from the root of the repo
+     *            (should not start with a <code>/</code>)
+     * @throws Exception
+     */
+    void addForDeletion(String path) throws Exception;
+
+    /**
      * Return directory where this repo is in.
      * @return The firectory, e.g. /path/to/omegatdir/.repositories/https_site.com_myproject.git
      */

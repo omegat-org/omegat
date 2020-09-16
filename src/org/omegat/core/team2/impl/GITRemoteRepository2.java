@@ -226,6 +226,18 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
+    public void addForDeletion(String path) throws Exception {
+        Log.logInfoRB("GIT_START", "addForDelete");
+        try (Git git = new Git(repository)) {
+            git.rm().addFilepattern(path).call();
+            Log.logInfoRB("GIT_FINISH", "addForDelete");
+        } catch (Exception ex) {
+            Log.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
+            throw ex;
+        }
+    }
+
+    @Override
     public File getLocalDirectory() {
         return localDirectory;
     }

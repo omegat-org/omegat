@@ -28,9 +28,7 @@ package org.omegat.core.team2.impl;
 
 import java.io.File;
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.xml.namespace.QName;
@@ -66,7 +64,6 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     RepositoryDefinition config;
     File baseDirectory;
     SVNClientManager ourClientManager;
-    List<File> filesForCommit = new ArrayList<File>();
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
@@ -105,7 +102,6 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public void switchToVersion(String version) throws Exception {
         Log.logInfoRB("SVN_START", "checkout to " + version);
-        filesForCommit.clear();
 
         SVNURL url = SVNURL.parseURIEncoded(SVNEncodingUtil.autoURIEncode(config.getUrl()));
         SVNRevision toRev;
@@ -129,8 +125,13 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public void addForCommit(String path) throws Exception {
         File f = new File(baseDirectory, path);
-        filesForCommit.add(f);
         ourClientManager.getWCClient().doAdd(f, true, false, true, SVNDepth.EMPTY, false, true);
+    }
+
+    @Override
+    public void addForDeletion(String path) throws Exception {
+        File f = new File(baseDirectory, path);
+        ourClientManager.getWCClient().doDelete(f, true, false);
     }
 
     @Override
@@ -142,7 +143,6 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     public String commit(String[] onVersions, String comment) throws Exception {
         Log.logInfoRB("SVN_START", "commit");
         File[] forCommit = new File[]{baseDirectory};
-        filesForCommit.clear();
 
         try {
             SVNCommitInfo info = ourClientManager.getCommitClient().doCommit(forCommit, false, comment, null,

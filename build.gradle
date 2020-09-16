@@ -186,7 +186,7 @@ dependencies {
 
     // Test dependencies
     testImplementation 'junit:junit:4.13'
-    testImplementation 'org.xmlunit:xmlunit-legacy:2.6.3'
+    testImplementation 'org.xmlunit:xmlunit-legacy:2.7.0'
     testImplementation("org.languagetool:languagetool-server:${languageToolVersion}") {
         exclude group: 'org.slf4j'
     }

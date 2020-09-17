@@ -133,11 +133,12 @@ If you used stubs or copied OmegaT `.java` files to your project, you can exclud
                             <addClasspath>true</addClasspath>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <!-- gives Implementation-Title: $project.name
-                                       Implementation-Version: /4project.version
+                                       Implementation-Version: $project.version
                                       [Implementation-Vendor: $project.organization.name]
                             -->
                         </manifest>
                         <manifestEntries>
+                            <OmegaT-Plugin>true</OmegaT-Plugin>
                             <Plugin-Description>I describe my plugin here. This plugin does amazing things™</Plugin-Description>
                         </manifestEntries>
                         <manifestSection>

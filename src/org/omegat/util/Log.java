@@ -246,9 +246,9 @@ public final class Log {
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
      */
-    public static void logInfoRB(String id, Object... parameters) {
+    public static void logInfoRB(String key, Object... parameters) {
         if (LOGGER.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, id);
+            LogRecord rec = new LogRecord(Level.INFO, key);
             rec.setResourceBundle(OStrings.getResourceBundle());
             rec.setParameters(parameters);
             rec.setLoggerName(LOGGER.getName());

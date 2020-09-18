@@ -75,16 +75,31 @@ If the plugin cannot be loaded, it can send some error message which will be dis
     Core.pluginLoadingError(“Some message”);
 Since the plugin is likely to use some OmegaT classes, which can be changed in a future OmegaT version, 
 we recommend separating plugin initialization class and plugin implementation class. 
-Also, it will be better to do not use any other classes (except Core and CoreEvents) in import declarations of the 
-plugin initialization class. In this case, the plugin initialization class can catch loading errors and send error message. 
-Usually, the loadPlugin() method should look like:
+Also, it will be better to do not use any other classes (except `Core` and `CoreEvents`) in import declarations of the 
+plugin initialization class, so that it can catch loading errors and send a clear error message.
+
+You can check if required classes and methods exist, or check the OmegaT version number.
+
+Below, you see an example that checks for existence of VersionChecker class (doesn't exist in OmegaT3)
+and next checks the version number.
 
     public static void loadPlugins() {
         try {
-            ... analyze OmegaT version …
-            if (supportedVersion) {
-                ... register classes and events ...
+            //analyze OmegaT version:
+            String requiredVersion = "5.4.0";
+            String requiredUpdate = "0";
+            try {
+                Class<?> clazz = Class.forName("org.omegat.util.VersionChecker");
+                Method compareVersions = clazz.getMethod("compareVersions", String.class, String.class, String.class, String.class);
+                if ((int)compareVersions.invoke(clazz, OStrings.VERSION, OStrings.UPDATE, requiredVersion, requiredUpdate) < 0) {
+                    Core.pluginLoadingError("Plugin … cannot be loaded because OmegaT Version "+OStrings.VERSION+" is lower than required version "+requiredVersion);
+                    return;
+                }
+            } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                Core.pluginLoadingError("Plugin … cannot be loaded because this OmegaT version is not supported");
+                return;
             }
+            … register classes and events …
         } catch(Throwable ex) {
             Core.pluginLoadingError(“Plugin … cannot be loaded because this version of OmegaT is not supported”);
         }

@@ -79,7 +79,7 @@ public interface IRemoteRepository2 {
 
     /**
      * Return directory where this repo is in.
-     * @return The firectory, e.g. /path/to/omegatdir/.repositories/https_site.com_myproject.git
+     * @return The directory, e.g. /path/to/omegatdir/.repositories/https_site.com_myproject.git
      */
     File getLocalDirectory();
 

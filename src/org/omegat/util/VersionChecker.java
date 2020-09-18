@@ -130,6 +130,15 @@ public final class VersionChecker {
         return OStrings.getSimpleVersion(mProps.getProperty("version"), mProps.getProperty("update"));
     }
 
+    /**
+     * Compares OmegaT version numbers.
+     * @param version1 e.g. "5.4.0"
+     * @param update1 e.g. "0"
+     * @param version2 e.g. "3.0.6"
+     * @param update2  "1"
+     * @return the value 0 if version1 update1 == version2 update2; a value less than 0 if version1 update1 < version2 update2;
+     *         and a value greater than 0 if version1 update1 > version2 update2
+     */
     public static int compareVersions(String version1, String update1, String version2, String update2) {
         return compare(getVersionNumbers(version1, update1), getVersionNumbers(version2, update2));
     }

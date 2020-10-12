@@ -301,6 +301,8 @@ public final class ProjectUICommands {
         }
         new SwingWorker<Void, Void>() {
             File projectRoot;
+            IMainWindow mainWindow;
+            Cursor oldCursor;
             protected Void doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB(null);
 
@@ -317,9 +319,9 @@ public final class ProjectUICommands {
                     return null;
                 }
 
-                IMainWindow mainWindow = Core.getMainWindow();
+                mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
-                Cursor oldCursor = mainWindow.getCursor();
+                oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
                 Core.getMainWindow().showStatusMessageRB("CT_DOWNLOADING_PROJECT");
 
@@ -367,6 +369,7 @@ public final class ProjectUICommands {
 //                projectOpen(localDirectory);
 
                 mainWindow.setCursor(oldCursor);
+                oldCursor=null;
                 return null;
             }
             @Override
@@ -385,6 +388,7 @@ public final class ProjectUICommands {
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_DOWNLOAD_TEAM_PROJECT");
+                    if (oldCursor != null) mainWindow.setCursor(oldCursor);
                 }
             }
         }.execute();

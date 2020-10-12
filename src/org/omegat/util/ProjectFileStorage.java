@@ -118,7 +118,7 @@ public final class ProjectFileStorage {
      */
     public static ProjectProperties loadPropertiesFile(File projectDir, File projectFile) throws Exception {
         if (!projectFile.isFile()) {
-            throw new IllegalArgumentException("Project file was not a file");
+            throw new IllegalArgumentException("Project file "+projectFile+" was not a file");
         }
         Omegat om = parseProjectFile(projectFile);
         return loadPropertiesFile(projectDir, om);

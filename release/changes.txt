@@ -39,6 +39,9 @@
   - Project Files table does not respect LAF colors
   https://sourceforge.net/p/omegat/bugs/1016/
 
+  - Team project that uses a mapping to a remote sub directory silently fails to commit local changes
+  https://sourceforge.net/p/omegat/bugs/1019/
+
 ----------------------------------------------------------------------
  OmegaT 5.3.0 (2020-08-03)
 ----------------------------------------------------------------------

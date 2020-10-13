@@ -439,6 +439,9 @@ public class RemoteRepositoryProvider {
                 List<String> excludes = new ArrayList<>(repoMapping.getExcludes());
                 excludes.addAll(forceExcludes);
                 copy(from, to, filterPrefix, repoMapping.getIncludes(), excludes, null);
+            } else if (!from.exists()) {
+                //e.g. you opened an omegat.properties to download a team project, but it refers to a remote repo location that doesn't exist.
+                throw new RuntimeException("Location '"+withoutLeadingSlash(repoMapping.getRepository())+"' does not exist in repository "+repoDefinition.getUrl());
             } else {
                 // file mapping
                 if (!filterPrefix.equals("/")) {
@@ -462,8 +465,9 @@ public class RemoteRepositoryProvider {
                 // directory mapping or full mapping
                 List<String> files = copy(from, to, filterPrefix, repoMapping.getIncludes(), repoMapping.getExcludes(),
                         eolConversionCharset);
+                String repoSubdir = withoutLeadingSlash(repoMapping.getRepository());
                 for (String f : files) {
-                    addForCommit(repo, withoutSlashes(f));
+                    addForCommit(repo, repoSubdir + withoutSlashes(f));
                 }
             } else {
                 // file mapping

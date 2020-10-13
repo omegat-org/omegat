@@ -175,7 +175,6 @@ public class RemoteRepositoryProviderTest {
 
     @Test
     public void testCopyRenamedFileFromRepoToProject() throws Exception {
-        createLocalRepoFiles();
         createRemoteRepoFiles();
         map_SingleFileRemoteRepo();
         provider.copyFilesFromReposToProject("");

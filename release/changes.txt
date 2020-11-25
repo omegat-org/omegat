@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.4.0
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   5 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -21,6 +21,9 @@
 
   - Externalize default color definitions
   https://sourceforge.net/p/omegat/feature-requests/1514/
+
+  - Remove discontinued Yandex.Translate MT connector
+  https://sourceforge.net/p/omegat/feature-requests/1522/
 
   Bug fixes:
 

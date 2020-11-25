@@ -185,7 +185,6 @@ public final class Preferences {
     public static final String ALLOW_MYMEMORY_HUMAN_TRANSLATE = "allow_mymemory_human_translate";
     public static final String ALLOW_MYMEMORY_MACHINE_TRANSLATE = "allow_mymemory_machine_translate";
 
-    public static final String ALLOW_YANDEX_TRANSLATE = "allow_yandex_translate";
     public static final String ALLOW_YANDEX_CLOUD_TRANSLATE = "allow_yandex_cloud_translate";
 
     public static final String ALLOW_MOSES_TRANSLATE = "allow_moses_translate";
@@ -207,7 +206,7 @@ public final class Preferences {
     public static final String MARK_BIDI = "mark_bidi";
     /** Do aggressive font fallback */
     public static final String FONT_FALLBACK = "font_fallback";
-    
+
     /** Mark paragraphs starts */
     public static final String MARK_PARA_DELIMITATIONS = "mark_para_delimitation";
     public static final String MARK_PARA_TEXT = "mark_para_delimitation_text";

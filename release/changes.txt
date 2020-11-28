@@ -2,7 +2,7 @@
  OmegaT 5.4.0
 ----------------------------------------------------------------------
   5 Enhancements
-  5 Bug fixes
+  6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
@@ -44,6 +44,9 @@
 
   - Team project that uses a mapping to a remote sub directory silently fails to commit local changes
   https://sourceforge.net/p/omegat/bugs/1019/
+
+  - Status label too small on HiDPI screens
+  https://sourceforge.net/p/omegat/bugs/1026/
 
 ----------------------------------------------------------------------
  OmegaT 5.3.0 (2020-08-03)

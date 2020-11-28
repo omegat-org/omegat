@@ -191,7 +191,12 @@ public final class MainWindowUI {
         mainWindow.lengthLabel = new JLabel();
         mainWindow.lockInsertLabel = new JLabel();
 
-        mainWindow.statusLabel.setFont(mainWindow.statusLabel.getFont().deriveFont(11f));
+        // Derive small label point size relative to default size; don't hard-code a
+        // point size because it will be wrong for e.g. HiDPI cases.
+        // Factor of 0.85 is based on old assumptions of 13pt default and 11pt small.
+        Font defaultFont = mainWindow.statusLabel.getFont();
+        float smallFontSize = defaultFont.getSize() * 0.85f;
+        mainWindow.statusLabel.setFont(defaultFont.deriveFont(smallFontSize));
 
         Border border = UIManager.getBorder("OmegaTStatusArea.border");
 

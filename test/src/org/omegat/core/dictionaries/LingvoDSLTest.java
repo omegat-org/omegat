@@ -48,6 +48,7 @@ public class LingvoDSLTest {
 
     private static final Language ENGLISH = new Language(Locale.ENGLISH);
     private static final File TEST_DICT = new File("test/data/dicts-lingvo/test.dsl");
+    private static final File TEST_DICT_DZ = new File("test/data/dicts-lingvo-dz/test.dsl.dz");
 
     @Test
     public void testReadFileDict() throws Exception {
@@ -81,5 +82,14 @@ public class LingvoDSLTest {
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
         assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadFileDictDz() throws Exception {
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT_DZ, ENGLISH);
+        assertEquals(6, dict.data.size());
+        String word = "space";
+        List<Entry<String, String>> data = dict.data.lookUp(word);
+        assertNotNull(data);
     }
 }

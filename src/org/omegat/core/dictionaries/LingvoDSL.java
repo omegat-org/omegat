@@ -71,7 +71,7 @@ public class LingvoDSL implements IDictionaryFactory {
     }
 
     static class LingvoDSLDict implements IDictionary {
-        private final DictionaryData<String> data;
+        protected final DictionaryData<String> data;
         private final String dataFile;
 
         LingvoDSLDict(File file, Language language) throws Exception {
@@ -79,11 +79,11 @@ public class LingvoDSL implements IDictionaryFactory {
             data = new DictionaryData<>(language);
             if (dataFile.endsWith(".dz")) {
                 try (InputStreamReader reader = new InputStreamReader(new GZIPInputStream(new FileInputStream(file),
-                        8192), StandardCharsets.UTF_16LE)) {
+                        8192), StandardCharsets.UTF_16)) {
                     loadData((new BufferedReader(reader)).lines());
                 }
             } else {
-                loadData(Files.lines(file.toPath(), StandardCharsets.UTF_16LE));
+                loadData(Files.lines(file.toPath(), StandardCharsets.UTF_16));
             }
         }
 

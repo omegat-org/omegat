@@ -538,7 +538,7 @@ public class Searcher {
                 noteMatches = foundMatches.toArray(new SearchMatch[0]);
             }
             if (searchExpression.searchComments && properties != null) {
-                for (int i=1; i<= properties.length; i=i+2) { // loop over values only, not keys.
+                for (int i = 1; i <= properties.length; i = i + 2) { // loop over values only, not keys.
                     if (searchString(properties[i], true)) {
                         propertyMatches = foundMatches.toArray(new SearchMatch[0]);
                         firstMatchedProperty = properties[i];

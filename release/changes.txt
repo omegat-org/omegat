@@ -25,6 +25,9 @@
   - Remove discontinued Yandex.Translate MT connector
   https://sourceforge.net/p/omegat/feature-requests/1522/
 
+  - Show comment/property value when search result comes from comment or other property
+  https://sourceforge.net/p/omegat/feature-requests/1054/
+
   Bug fixes:
 
   - Cannot create new team project in bare repository

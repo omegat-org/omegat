@@ -473,6 +473,9 @@ public class RemoteRepositoryProvider {
                 List<String> files = copy(from, to, filterPrefix, repoMapping.getIncludes(), repoMapping.getExcludes(),
                         eolConversionCharset);
                 String repoSubdir = withoutLeadingSlash(repoMapping.getRepository());
+                if (!"".equals(repoSubdir)) {
+                    repoSubdir = withTrailingSlash(repoSubdir);
+                }
                 for (String f : files) {
                     addForCommit(repo, repoSubdir + withoutSlashes(f));
                 }

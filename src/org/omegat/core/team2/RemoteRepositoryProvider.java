@@ -197,21 +197,24 @@ public class RemoteRepositoryProvider {
         List<Exception> errors = new ArrayList<>();
 
         createFileListSnapshotIfNotExists("");
-        for (IRemoteRepository2 r : repositories) {
-            try {
-                r.switchToVersion(null);
-            } catch (NetworkException e) {
-                throw e;
-            } catch (Exception e) {
-                errors.add(e);
-                Log.logErrorRB("TEAM_UPDATE_REPO_ERROR", e.getMessage());
+        try {
+            for (IRemoteRepository2 r : repositories) {
+                try {
+                    r.switchToVersion(null);
+                } catch (NetworkException e) {
+                    throw e;
+                } catch (Exception e) {
+                    errors.add(e);
+                    Log.logErrorRB("TEAM_UPDATE_REPO_ERROR", e.getMessage());
+                }
             }
-        }
 
-        if (!errors.isEmpty()) {
-            throw errors.get(0);
+            if (!errors.isEmpty()) {
+                throw errors.get(0);
+            }
+        } finally {
+            propagateDeletes();
         }
-        propagateDeletes();
     }
 
     /**
@@ -222,8 +225,12 @@ public class RemoteRepositoryProvider {
      */
     public File switchToVersionAndPropagateDeletes(String filePath, String version) throws Exception {
         createFileListSnapshotIfNotExists(filePath);
-        File remote = oneMapping(filePath).switchToVersion(version);
-        propagateDeletes();
+        File remote;
+        try {
+            remote = oneMapping(filePath).switchToVersion(version);
+        } finally {
+            propagateDeletes();
+        }
         return remote;
     }
 

@@ -35,6 +35,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
@@ -110,6 +111,8 @@ public class StarDict implements IDictionaryFactory {
         private final String dataFile;
 
         protected final DictionaryData<Entry> data;
+
+        private RandomAccessFile dictFile;
 
         /**
          * @param ifoFile
@@ -247,16 +250,17 @@ public class StarDict implements IDictionaryFactory {
          */
         private String readDictArticleText(int start, int len) {
             String result = null;
-            try (FileInputStream in = new FileInputStream(dataFile)) {
-                byte[] data = new byte[len];
-                long moved = in.skip(start);
-                if (moved < start) {
-                    long moved2 = in.skip(start - moved);
-                    if (moved2 < start - moved) {
-                        throw new IOException("Cannot seek dictionary.");
-                    }
+            if(dictFile == null){
+                try {
+                    dictFile = new RandomAccessFile(new File(dataFile), "r");
+                } catch (FileNotFoundException e){
+                    System.err.println(e.getMessage());
                 }
-                int readLen = in.read(data);
+            }
+            try {
+                byte[] data = new byte[len];
+                dictFile.seek(start);
+                int readLen = dictFile.read(data);
                 result = new String(data, 0, readLen, StandardCharsets.UTF_8);
             } catch (IOException e) {
                 System.err.println(e.getMessage());

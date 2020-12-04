@@ -26,6 +26,7 @@
 
 package org.omegat.core.dictionaries;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ import java.util.List;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
-public interface IDictionary {
+public interface IDictionary extends AutoCloseable {
 
     /**
      * Read article's text.
@@ -78,4 +79,9 @@ public interface IDictionary {
         // Default implementation for backwards compatibility
         return readArticles(word);
     }
+
+    /**
+     * Dispose IDictionary. Default is no action.
+     */
+    default void close() throws IOException {}
 }

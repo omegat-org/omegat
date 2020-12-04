@@ -104,7 +104,16 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
     public void stop() {
         monitor.fin();
         synchronized (this) {
+            dictionaries.values().forEach(this::closeDict);
             dictionaries.clear();
+        }
+    }
+
+    private void closeDict(IDictionary dict) {
+        try {
+            dict.close();
+        } catch (Exception e) {
+            Log.log(e);
         }
     }
 
@@ -113,6 +122,10 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
      */
     public void fileChanged(File file) {
         synchronized (dictionaries) {
+            IDictionary dict = dictionaries.get(file.getPath());
+            if (dict != null) {
+                closeDict(dict);
+            }
             dictionaries.remove(file.getPath());
         }
         if (!file.exists()) {

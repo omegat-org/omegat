@@ -37,7 +37,7 @@ import java.util.Map.Entry;
 
 import org.junit.Test;
 import org.omegat.core.TestCore;
-import org.omegat.core.dictionaries.StarDict.StarDictDict;
+import org.omegat.core.dictionaries.StarDict.StarDictBaseDict;
 import org.omegat.util.Language;
 
 /**
@@ -53,12 +53,12 @@ public class StarDictTest extends TestCore {
 
     @Test
     public void testReadFileDict() throws Exception {
-        StarDictDict dict = (StarDictDict) new StarDict().loadDict(new File("test/data/dicts/latin-francais.ifo"),
+        StarDictBaseDict dict = (StarDictBaseDict) new StarDict().loadDict(new File("test/data/dicts/latin-francais.ifo"),
                 FRENCH);
         assertEquals(11964, dict.data.size());
 
         String word = "testudo";
-        List<Entry<String, StarDictDict.Entry>> data = dict.data.lookUp(word);
+        List<Entry<String, StarDict.Entry>> data = dict.data.lookUp(word);
         assertEquals(1, data.size());
 
         List<DictionaryEntry> result = dict.readArticles(word);
@@ -85,12 +85,12 @@ public class StarDictTest extends TestCore {
 
     @Test
     public void testReadZipDict() throws Exception {
-        StarDictDict dict = (StarDictDict) new StarDict()
+        StarDictBaseDict dict = (StarDictBaseDict) new StarDict()
                 .loadDict(new File("test/data/dicts-zipped/latin-francais.ifo"), FRENCH);
         assertEquals(11964, dict.data.size());
 
         String word = "testudo";
-        List<Entry<String, StarDictDict.Entry>> data = dict.data.lookUp(word);
+        List<Entry<String, StarDict.Entry>> data = dict.data.lookUp(word);
         assertEquals(1, data.size());
         List<DictionaryEntry> result = dict.readArticles(word);
         assertEquals(1, result.size());

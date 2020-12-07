@@ -87,7 +87,7 @@ public class LingvoDSL implements IDictionaryFactory {
             }
         }
 
-        private void loadData(Stream<String>stream) {
+        private void loadData(Stream<String> stream) {
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
             stream.filter(line -> !line.isEmpty() && !line.startsWith("#"))

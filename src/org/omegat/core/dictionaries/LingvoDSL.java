@@ -78,9 +78,11 @@ public class LingvoDSL implements IDictionaryFactory {
             dataFile = file.getPath();
             data = new DictionaryData<>(language);
             if (dataFile.endsWith(".dz")) {
-                try (InputStreamReader reader = new InputStreamReader(new GZIPInputStream(new FileInputStream(file),
-                        8192), StandardCharsets.UTF_16)) {
-                    loadData((new BufferedReader(reader)).lines());
+                try (FileInputStream fis = new FileInputStream(file);
+                        GZIPInputStream gis = new GZIPInputStream(fis, 8192);
+                        InputStreamReader isr = new InputStreamReader(gis,  StandardCharsets.UTF_16);
+                        BufferedReader reader = new BufferedReader(isr)) {
+                    loadData(reader.lines());
                 }
             } else {
                 loadData(Files.lines(file.toPath(), StandardCharsets.UTF_16));

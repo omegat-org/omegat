@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.4.0
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -27,6 +27,9 @@
 
   - Show comment/property value when search result comes from comment or other property
   https://sourceforge.net/p/omegat/feature-requests/1054/
+
+  - Allow dictionary LingoDSL format with DictZip compression
+  https://sourceforge.net/p/omegat/feature-requests/1528/
 
   Bug fixes:
 

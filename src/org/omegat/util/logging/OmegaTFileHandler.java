@@ -126,6 +126,7 @@ public class OmegaTFileHandler extends StreamHandler {
 
     @Override
     public synchronized void close() throws SecurityException {
+        super.close();
         try {
             lockStream.close();
             lockFile.delete();

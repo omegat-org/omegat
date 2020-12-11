@@ -1,0 +1,7 @@
+"JRELoadError" = "Java Çalışma Zamanı Ortamı yüklenemedi.";
+"JRExLoadError" = "Java %d Çalışma Zamanı Ortamı yüklenemedi.";
+"JRExLoadFullError" = "Bu uygulama için bilgisayarınızda Java %d ya da üzeri yüklü olmalıdır. Lütfen www.java.com adresinden en son Java sürümünü indirip yükleyin ve tekrar deneyin.";
+"JDKxLoadFullError" = "Bu uygulama için bilgisayarınızda Java JDK %d ya da üzeri yüklü olmalıdır. Lütfen www.oracle.com adresinden en son Java JDK sürümünü indirip yükleyin ve tekrar deneyin.";
+"MainClassNameRequired" = "Ana sınıf adı gerekli.";
+"JavaDirectoryNotFound" = "Java klasörü içeriği listelenemiyor.";
+"BundlePathContainsColon" = "Adında \"/\" bulunan bir klasörden başlatma yapılamıyor.";

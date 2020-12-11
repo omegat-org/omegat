@@ -93,10 +93,7 @@ public class LingvoDSL implements IDictionaryFactory {
         }
 
         private void readDslFile(BOMInputStream bis) throws IOException {
-            Charset charset = StandardCharsets.UTF_16;
-            if (bis.hasBOM()) {
-                charset = StandardCharsets.UTF_8;
-            }
+            Charset charset = bis.hasBOM() ? StandardCharsets.UTF_8 : StandardCharsets.UTF_16;
             try (InputStreamReader isr = new InputStreamReader(bis, charset);
                  BufferedReader reader = new BufferedReader(isr)) {
                 loadData(reader.lines());

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>ツール</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>品質チェック...</term>
+
+      <listitem>
+        <para>すべての自動チェックを一度に実行し、結果をウィンドウに表示する品質保証ツール。</para>
+
+        <para>次の4種類の問題が検出されます。</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><link linkend="dialogs.preferences.tagprocessing">カスタムタグ</link>を含めて欠落したタグまたは置換されたタグ。[<guilabel>タグの問題</guilabel>]オプションは常に選択されています。</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>[スペルチェックの問題]</guilabel>(オプション)。スペルチェック辞書がインストールされている場合にのみ機能します。</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>用語の問題</guilabel>(オプション)</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>LanguageTool問題</guilabel>(オプション)。</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>結果ウィンドウは、次の表の形式で表示されます。</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>行をダブルクリックすると、対応するセグメントがエディタペインでアクティブになります。</para>
+          </listitem>
+
+          <listitem>
+            <para>列ヘッダーをクリックすると、列のソート順が変更されます。</para>
+          </listitem>
+
+          <listitem>
+            <para>行の上でマウスを選択または移動すると、最後の列にポップアップメニューアイコンが表示され、エラーを修正または無視するためのアクションが示されます。</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>現在のドキュメントの品質をチェック</term>
+
+      <listitem>
+        <para>上記と同様。ただし、エディタペインに現在表示されているドキュメントのみ。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>翻訳状況</term>
+
+      <listitem>
+        <para>新しいウィンドウに、プロジェクトの翻訳状況を表示します。これには、プロジェクト全体の翻訳状況と、ファイルごとの翻訳状況が含まれます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>参考訳文の一致率</term>
+
+      <listitem>
+        <para>プロジェクトにおける参考訳文の一致率を表示します。これは繰り返し、完全に一致、部分的に一致、一致しないといった基準で分類されており、それぞれについて分節数、単語数、文字数を集計しています。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>参考訳文の一致率（ファイル別）</term>
+
+      <listitem>
+        <para>プロジェクトにおける参考訳文の一致率をファイル別に表示します。これは繰り返し、完全に一致、部分的に一致、一致しないといった基準で分類されており、それぞれについて分節数、単語数、文字数を集計しています。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>整合ツール...</term>
+
+      <listitem>
+        <para>整合する2つのファイル(ソースファイルとその変換)を選択し、[OK]をクリックして、<link linkend="windows.aligner"><guilabel>[整合ツール]</guilabel>ウィンドウ</link>を開きます。</para>
+
+        <para>サポートされているファイル形式は、<menuchoice><guimenuitem>[プロジェクト]</guimenuitem><guimenuitem>[プロパティ]</guimenuitem><guimenuitem>[ファイルフィルタ]</guimenuitem></menuchoice>に一覧表示されているファイル形式です。</para>
+
+        <para>ソースファイルとターゲットファイルの形式は異なる場合があります(たとえば、<filename>.docx</filename>ファイルは<filename>.pdf</filename>ファイルと整合できます)。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>スクリプト...</term>
+
+      <listitem>
+        <para><link linkend="windows.scripts"><guilabel>スクリプト</guilabel>ウィンドウ</link>を表示します。このウィンドウ上で、スクリプトフォルダーの指定、スクリプトの編集や実行、ショートカットへの関連付けを行えます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - （スクリプト名）</term>
+
+      <listitem>
+        <para>番号に関連付けられているスクリプトを起動します。</para>
+
+        <para>スクリプトを番号に関連付ける手順は、次のとおりです:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>スクリプトウィンドウを開く</para>
+          </listitem>
+
+          <listitem>
+            <para>左側のリストから目的のスクリプトを選択します。</para>
+          </listitem>
+
+          <listitem>
+            <para>ウィンドウの下部で、空き番号を右クリックし、[<guilabel>スクリプトの追加</guilabel>]を選択します。</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(外部検索コマンド)</term>
+
+      <listitem>
+        <para>外部検索を実行するコマンドが<link linkend="dialogs.preferences.externalsearch">[環境設定]</link>で定義されている場合は、ここに一覧表示され、アクセスできます。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

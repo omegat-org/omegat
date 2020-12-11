@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.help">
+  <title>ヘルプ</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>取扱説明書...</term>
+
+      <listitem>
+        <para>この取扱説明書をデフォルトのブラウザで開きます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>OmegaT について...</term>
+
+      <listitem>
+        <para>著作権やクレジット、ライセンス情報を表示します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>最近の更新履歴...</term>
+
+      <listitem>
+        <para>各リリースごとに、新機能や改善、バグ修正などの情報を一覧で表示します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>ログ...</term>
+
+      <listitem>
+        <para>現在のログファイルを表示します。ダイアログのタイトルには、現在使用中のログファイル名（名称は同時に実行中の OmegaT のインスタンス数によって変わります）が表示されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>更新の確認...</term>
+
+      <listitem>
+        <para>より新しいバージョンの<application>OmegaT</application>がリリースされたかどうかを確認します。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

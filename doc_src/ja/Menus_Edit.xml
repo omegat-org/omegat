@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>編集</title>
+
+  <para>このメニューにエントリが表示されるのは、プロジェクトが開いている場合だけです。</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>取り消す</guimenuitem></term>
+
+      <listitem>
+        <para>直前の編集が行われる前の状態に戻します。分節の編集が確定された後の場合は、機能しません。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>やり直す</term>
+
+      <listitem>
+        <para>直前の編集が取り消される前の状態に戻します。分節の編集が確定された後の場合は、機能しません。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>参考訳文または選択範囲によって置換</term>
+
+      <listitem>
+        <para>現在の訳文分節の全体を、選択されている参考訳文で置き換えます（デフォルトでは最初の参考訳文が選択されています）。</para>
+
+        <para>参考訳文のテキストの一部を選択した状態であれば、選択範囲のみが訳文分節の全体を置き換えます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>参考訳文または選択範囲を挿入</term>
+
+      <listitem>
+        <para>現在のカーソル位置に、選択されている参考訳文を挿入します。もし訳文の一部を選択した状態であれば、その部分を上書きします。</para>
+
+        <para>参考訳文のテキストの一部を選択した状態であれば、選択範囲のみをカーソル位置に挿入します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>機械翻訳に置換</term>
+
+      <listitem>
+        <para>訳文分節を選択した機械翻訳サービスによる翻訳内容に置換します。機械翻訳サービスが有効になっていない場合は、何も行いません（メニューの<menuchoice><guimenu>［設定］</guimenu>→<guimenuitem>［機械翻訳］</guimenuitem></menuchoice>を確認してください）。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>原文に置換</term>
+
+      <listitem>
+        <para>現在の訳文分節を、原文の内容に置換します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>原文を挿入</term>
+
+      <listitem>
+        <para>現在の訳文分節のカーソル位置に、原文の内容を挿入します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>未使用の原文のタグを挿入</term>
+
+      <listitem>
+        <para>現在の訳文分節のカーソル位置に、訳文に未使用の原文のタグを挿入します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>次の未使用のタグを挿入</term>
+
+      <listitem>
+        <para>現在の訳文分節のカーソル位置に、訳文に未使用の原文のタグを 1 つだけ挿入します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>選択領域を出力</term>
+
+      <listitem>
+        <para>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。<application>OmegaT</application> を閉じるとき、このファイルは空の状態ではなく、通常のクリップボードと同じように機能します。出力された内容は、個人設定フォルダーの <filename>selection.txt</filename> というファイルにコピーされます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>用語の追加</term>
+
+      <listitem>
+        <para>デフォルトの用語集ファイルに項目を追加します。</para>
+
+        <para>任意のウィンドウでテキストを選択してから<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>を押すと、そのテキストが<guilabel>原文の用語</guilabel>領域に自動で設定されます。</para>
+
+        <para>新しい選択が行われ、再度<keycombo><keycap>[Ctrl]</keycap><keycap>[Shift]</keycap><keycap>[G]</keycap></keycombo>が押された場合に、<guimenuitem>[訳語]</guimenuitem>および<guimenuitem>[コメント]</guimenuitem>フィールドにも適用されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>プロジェクトを検索...</term>
+
+      <listitem>
+        <para>［<link linkend="windows.textsearch">検索</link>］ウィンドウを新しく開きます。</para>
+
+        <para>任意のウィンドウでテキストを選択してから<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>を押すと、そのテキストが<guilabel>検索文字列</guilabel>領域に自動で設定されます。</para>
+
+        <para><keycombo><keycap>[Ctrl]</keycap><keycap>[Shift]</keycap><keycap>[F]</keycap></keycombo>を押すと、(新しい検索ウィンドウを開く代わりに)最後に開いた検索ウィンドウが表示されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>検索と置換...</term>
+
+      <listitem>
+        <para>［<link linkend="windows.textreplace">検索と置換</link>］ウィンドウを新しく開きます。</para>
+
+        <para>任意のウィンドウでテキストを選択してから<keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>を押すと、そのテキストが<guilabel>検索文字列</guilabel> 領域に自動で設定されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>辞書を検索</term>
+
+      <listitem>
+        <para><link linkend="dialogs.preferences.dictionary">辞書内のセグメント・テキストを自動的に検索</link>が無効になっている場合は、選択した単語を辞書内で検索できます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>大/小文字設定</term>
+
+      <listitem>
+        <para>訳文分節中の選択したテキストに対し、ケースを変更します（すべて小文字に、文章の先頭を大文字に、各単語の先頭を大文字に、またはすべて大文字に）。<keycombo><keycap>[Shift]</keycap><keycap>[F3]</keycap></keycombo>を使用して、4つの選択肢を順番に切り替えます。テキストを何も選択していない場合、<application>OmegaT</application> はカーソル右にある単語をその場で選択して実行します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>参考訳文を選択</term>
+
+      <listitem>
+        <para>参考訳文ウィンドウに表示された N 番目の参考訳文を選択します。選択された参考訳文は、現在の分節に対して置換または挿入できます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>基本訳文として使用</term>
+
+      <listitem>
+        <para>現在の原文分節に対して複数の対訳が存在し、かつ現在の訳文分節が既定値ではない場合に、現在の訳文分節を既定値に設定します。現在の原文分節に対して１つの対訳しか存在しない場合は、この項目はグレーアウトして選択できません。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>例外訳文を登録</term>
+
+      <listitem>
+        <para>同じ内容の原文分節が複数存在し、それぞれの文脈に応じて異なる対訳が必要になることがあります。このメニュー項目を選ぶと、その訳文は現在の分節固有のものになります。同じ内容の他の原文分節には影響を与えません。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>訳文を削除</term>
+
+      <listitem>
+        <para>訳文を削除し、分節を未翻訳の状態にします。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>訳文を&lt;空訳文&gt;にする</term>
+
+      <listitem>
+        <para>訳文を空の状態と定義します。訳文ファイルを生成した場合、該当する分節には何も出力されません。編集ウィンドウ上では &lt;空訳文&gt; と表示されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>原文と同一訳文を登録</term>
+
+      <listitem>
+        <para>原文と同じ訳文を登録できます。<link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>［原文と同じ訳文を許可］</guilabel></link>にチェックが入っていない場合でも、有効です。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.scripts">
+  <title>スクリプト</title>
+
+  <para>このウィンドウにアクセスするには、[<menuchoice><guimenuitem>ツール</guimenuitem><guimenuitem>スクリプト...</guimenuitem></menuchoice>]を選択します。</para>
+
+  <section>
+    <title>使い方</title>
+
+    <para>スクリプト ウィンドウ上では、既存のスクリプトをテキスト欄に読み込んだり、いま開いているプロジェクトに対して実行できます。スクリプトをカスタマイズする手順は、次の通りです：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>左側のスクリプト一覧から目的のスクリプト名をクリックして、編集ウィンドウに読み込みます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>下部にある<guilabel>「1」</guilabel>から<guilabel>「12」</guilabel>のどれかのボタンの上で右クリックし、<guilabel>［スクリプトを設定］</guilabel>を選びます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>数値ボタンを左クリックすると、そこに設定されているスクリプトを実行できます。また<guisubmenu>［ツール］</guisubmenu>メニューからスクリプトを選んだり、割り当てられたショートカットキー <keycap>Ctrl+Alt+F#</keycap>（# は 1 から 12）を使うことで、スクリプトを実行できます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>デフォルトでは、スクリプトファイルは<filename>「scripts」</filename>フォルダーに格納されています。このフォルダーは、OmegaT のインストール先フォルダー（<filename>OmegaT.jar </filename>ファイルを含む）の配下にあります。</para>
+
+    <para>このフォルダーに新しいスクリプトファイルを追加すると、<guilabel>スクリプト</guilabel> ウィンドウの一覧に表示されます。</para>
+
+    <para>追加できるスクリプトがいくつか <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink> にあります。</para>
+  </section>
+
+  <section>
+    <title>スクリプト言語</title>
+
+    <para>以下のスクリプト言語は、最初から使える状態になっています：</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis>（http://groovy.codehaus.org）：Java 仮想マシン向けの動的言語です。構文的に Java との互換性を最大限に保った上で、さらに Python や Ruby、Smalltalk に触発された強力な拡張機能を持ちます。</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis>（JS と略すこともあり、Java とは無関係）：プロトタイプ ベースのスクリプト言語です。動的で、弱い型付け、ファーストクラス関数などの特徴を持ちます。オブジェクト指向、命令型、および関数型プログラミングのスタイルをサポートする、マルチパラダイム言語です。Firefox のような人気のあるプログラムで利用されていることから、とりわけオープンソースの分野で普及し好まれています。</para>
+        </listitem>
+      </itemizedlist>すべての言語から、プロジェクトを先頭のオブジェクトとする OmegaT のオブジェクトモデルにアクセスできます。次に示すコードスニペットは、現在のプロジェクトから全ファイルの全分節を走査する groovy スクリプトです。このスクリプトは、もし訳文が存在していれば、その分節の原文と訳文を出力します：</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currsegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currsegment.getSrcText();
+                target = project.getTranslationInfo(currsegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }
+        }
+    }</programlisting>
+  </section>
+</section>

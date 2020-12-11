@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>移動</title>
+
+  <para>このメニューにエントリが表示されるのは、プロジェクトが開いている場合だけです。</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>次の未翻訳分節</term>
+
+      <listitem>
+        <para>プロジェクトの翻訳メモリにまだ存在していない（未翻訳の）次の分節に移動します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>次の翻訳済み分節</term>
+
+      <listitem>
+        <para>未翻訳分節を飛ばして、次の翻訳済み分節に移動します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>次の分節</term>
+
+      <listitem>
+        <para>次の分節に移動します。現在の分節がファイル末尾である場合は、次のファイルの最初の分節へ移動します。</para>
+
+        <para>注:<keycap>[Enter]</keycap>は、<link linkend="dialogs.preferences.general.usetabtoadvance">[Tab]を使用して進む</link>オプションが選択されていない場合の代替ショートカットです。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>前の分節</term>
+
+      <listitem>
+        <para>一つ前の分節に移動します。現在の分節がファイル先頭である場合は、前のファイルの末尾の分節へ移動します。</para>
+
+        <para>注:<keycombo><keycap>[Ctrl]</keycap><keycap>[Enter]</keycap></keycombo>は、<link linkend="dialogs.preferences.general.usetabtoadvance">[Tabを使用して進む]</link>オプションが選択されていない場合の代替ショートカットです。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>分節番号を指定...</term>
+
+      <listitem>
+        <para>分節を英文字で呼び出すか、または分節番号を入力すれば、対応する分節が開きます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>次のメモ</term>
+
+      <listitem>
+        <para>メモが添付された次の分節を開きます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>前のメモ</term>
+
+      <listitem>
+        <para>メモが添付された前の分節を開きます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>選択中の参考訳文の元分節</term>
+
+      <listitem>
+        <para><guilabel>参考訳文</guilabel>ウィンドウ内で選択されている参考訳文に対応する分節へ移動します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>分節の選択履歴を進む</term>
+
+      <listitem>
+        <para><application>OmegaT</application> は分節を選択した履歴を記憶しています。このコマンドを実行すると、<guimenuitem>［分節の選択履歴を戻る］</guimenuitem>コマンドによって移動した履歴をたどり、戻る前に選択していた分節へ移動できます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>分節の選択履歴を戻る</term>
+
+      <listitem>
+        <para>１つ前に選択していた分節へ戻ることができます。後で現在の分節に復帰するには、上にある<guimenuitem>［分節の選択履歴を進む］</guimenuitem>コマンドを使います。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

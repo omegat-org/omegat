@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.project">
+  <title>プロジェクト</title>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>新規作成...</guimenuitem></term>
+
+      <listitem>
+        <para>新しいプロジェクトを作成し、開きます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><guimenuitem>チームプロジェクトをダウンロード...</guimenuitem></term>
+
+      <listitem>
+        <para>リモートの OmegaT プロジェクトのローカルコピーを作成します。詳細については、<link linkend="howto.useteamproject">チームプロジェクトの使用方法</link>を参照してください。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>開く...</term>
+
+      <listitem>
+        <para>すでに作成したプロジェクトを開きます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>最近使用したプロジェクト</term>
+
+      <listitem>
+        <para>最後に編集した10個のプロジェクトにアクセスできます。選択肢のいずれかをクリックすると、現在のプロジェクトを保存して閉じ、選択したプロジェクトを開きます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>原文ファイルを追加...</term>
+
+      <listitem>
+        <para>選択したファイルをプロジェクトの <filename>source</filename> フォルダーにコピーし、その新しいファイルを読み込むために、プロジェクトを再読み込みします。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>MediaWiki から原文ファイルを追加...</term>
+
+      <listitem>
+        <para>ウィキペディアのページの内容を翻訳するには(例えば):</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Wikipediaページの<guilabel>[編集]</guilabel>タブをクリックします。</para>
+          </listitem>
+
+          <listitem>
+            <para>ページのURL(<guilabel>action=edit</guilabel>で終わる)をコピーし、<application>OmegaT</application>に貼り付けます。</para>
+          </listitem>
+        </orderedlist>
+
+        <para>翻訳が終わったら、Wikipediaにインポートするには:</para>
+
+        <orderedlist>
+          <listitem>
+            <para><filename>/target</filename>フォルダに生成された<filename>.UTF8</filename>ファイルを開きます。</para>
+          </listitem>
+
+          <listitem>
+            <para>テキストをコピーして、Wikipediaページの翻訳バージョンに貼り付けます。</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>再読み込み</term>
+
+      <listitem>
+        <para>プロジェクトを再ロードして、ソースファイルとプロジェクト設定の外部変更を反映します。</para>
+
+        <para>翻訳中に<filename>/tm</filename>フォルダに保存された新しい翻訳メモリは、カーソルセグメント間を移動するとすぐに自動的にロードされます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>閉じる</term>
+
+      <listitem>
+        <para>それまでの翻訳内容を保存し、プロジェクトを閉じます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>保存</term>
+
+      <listitem>
+        <para>内部翻訳メモリをハードディスクに保存します。OmegaT はデフォルトで 3分ごとに翻訳を自動保存します。プロジェクトを閉じる時や、OmegaT の終了時も同様です。</para>
+
+        <para>3分の間隔は、<link linkend="dialogs.preferences.savingandoutput"><menuchoice><guimenuitem>[設定]</guimenuitem><guimenuitem>[環境設定]</guimenuitem><guimenuitem>[保存と訳文ファイル生成]</guimenuitem></menuchoice></link>で変更できます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term> 原文ファイルをコミット</term>
+
+      <listitem>
+        <para><filename>source</filename>ディレクトリでローカルに追加または変更されたファイルをリポジトリにアップロードします。</para>
+
+        <para>この機能は、チームプロジェクトに固有です。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>訳文ファイルをコミット</term>
+
+      <listitem>
+        <para><filename>target</filename>ディレクトリで、ローカルに作成されたファイルをリポジトリにアップロードします。</para>
+
+        <para>この機能は、チームプロジェクトに固有です。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>訳文ファイルを生成</term>
+
+      <listitem>
+        <para>翻訳に基づいて訳文ファイルを作成します。訳文ファイルは、<filename>target</filename> フォルダーに保存されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>現在の訳文ファイルのみ生成</term>
+
+      <listitem>
+        <para>翻訳中の現在の文書に対応する訳文ファイルを生成します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>MED プロジェクトを開く...</term>
+
+      <listitem>
+        <para>EU翻訳総局によって定義されたMED形式のプロジェクトパッケージを開きます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>MEDプロジェクトを作成...</term>
+
+      <listitem>
+        <para>現在のプロジェクトをMEDパッケージに変換します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>プロジェクト設定...</term>
+
+      <listitem>
+        <para>プロジェクトの言語や使用フォルダーを変更するため<link linkend="dialogs.projectproperties">プロジェクト設定</link>ダイアログを表示します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>翻訳対象ファイル一覧...</term>
+
+      <listitem>
+        <para><link linkend="windows.projectfiles">[翻訳対象ファイル一覧]ウィンドウ</link>を開きます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>プロジェクト構成物へのアクセス</term>
+
+      <listitem>
+        <para>プロジェクトフォルダーにアクセスできます。</para>
+
+        <para>また、メニュー項目から、作業中の原文ファイル、訳文ファイル、および書き込み可能な用語集を直接開くことができます。これらのファイルは、OS において選択されたプログラムによって開かれます。対応する文書がない場合は、メニュー項目がグレーアウトされます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>終了</term>
+
+      <listitem>
+        <para>プロジェクトを保存し <application>OmegaT</application> を終了します。まだ一度も手動で保存していなかった場合は、本当に閉じてもよいかどうか確認メッセージが表示されます。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

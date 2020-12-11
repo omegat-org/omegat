@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title>整合ツール</title>
+
+  <para>整合ツールでは、翻訳済みの単一言語の文書から二か国語の翻訳メモリを作成します。</para>
+
+  <para>このウィンドウにアクセスするには、<menuchoice><guimenuitem>[ツール]</guimenuitem><guimenuitem>[整合ツール...]</guimenuitem></menuchoice>を選択します。</para>
+
+  <section>
+    <title>手順1:整合パラメータを調整する</title>
+
+    <para>整合が改善できるように見える場合は、パラメータを変更してみてください。ほとんどの場合、<guilabel>平均スコア</guilabel>が低いほど整合が良好になります。</para>
+
+    <para><guilabel>Heapwise</guilabel>モードでは、テキストはグローバルに評価されます。<guilabel>Parsewise</guilabel>モードでは、セグメントごとに評価されます。</para>
+
+    <para>Key=Value テキストを整合するには、<guilabel>ID比較</guilabel>モードを使用します。これは、2つのファイルのキーの順序が同じでない場合や、2つのファイルに同じ量の情報が含まれていない場合でも機能します。このオプションは、選択した両方のファイルがKey=Valueファイルとして認識される場合にのみ表示されます。</para>
+
+    <para><guilabel>Viterbi</guilabel>および<guilabel>Forward-Backward</guilabel>アルゴリズムは、2つの異なる計算方法です。最良の結果が得られるものを選択します。</para>
+
+    <para>[<guibutton>続行</guibutton>]をクリックして、次の手順に進みます。</para>
+  </section>
+
+  <section>
+    <title>手順2: 手動で修正</title>
+
+    <para>自動処理の後、2つのファイルの整合は、通常、手動で修正する必要があります。</para>
+
+    <para>翻訳単位は、最後の2列のセルにあります。</para>
+
+    <para>2つのセグメントを同じ線上に整合するには:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>最初のセグメントを選択します。</para>
+      </listitem>
+
+      <listitem>
+        <para>スペースバー(<menuchoice><guimenuitem>[編集]</guimenuitem><guimenuitem>[ピンポイント整合を開始]</guimenuitem></menuchoice>のショートカット)を押します。</para>
+      </listitem>
+
+      <listitem>
+        <para>最初のセグメントに対応する直線移動のもう一方の列をクリックします。</para>
+      </listitem>
+    </orderedlist>
+
+    <para>これらの操作をいくつか行った後、[<menuchoice><guimenuitem>編集</guimenuitem><guimenuitem>再整合保留中</guimenuitem></menuchoice>]を選択して、他のセグメントの整合を更新します。</para>
+
+    <para>1つまたは複数のセグメントの位置を個別に変更するには、セグメントを選択し、<userinput>U</userinput>(<guilabel>上へ移動</guilabel>)または<userinput>D</userinput>(<guilabel>下へ移動</guilabel>)を押します。</para>
+
+    <para>翻訳メモリの作成時には、最初の列で[<guilabel>保持</guilabel>]ボックスがオンになっている行だけが含まれます。</para>
+
+    <para>2つの列が十分に整合したら、<guibutton>[TMXを保存...]</guibutton>をクリックして翻訳メモリを作成します。</para>
+  </section>
+</section>

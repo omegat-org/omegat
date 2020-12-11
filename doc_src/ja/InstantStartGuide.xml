@@ -66,7 +66,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>ファイルが<guilabel>編集</guilabel>ウィンドウに読み込まれない場合は、OmegaT が原文ファイルのファイル形式に対応していないのかもしれません。「<link linkend="chapter.file.filters">ファイルフィルター</link>」の、OmegaT が対応しているファイル形式の一覧を確認してみてください。</para>
+        <para>ファイルが<guilabel>編集</guilabel>ウィンドウに読み込まれない場合は、OmegaT が原文ファイルのファイル形式に対応していないのかもしれません。<menuchoice><guimenuitem>設定</guimenuitem><guimenuitem>環境設定.</guimenuitem><guimenuitem>ファイルフィルター</guimenuitem></menuchoice>で、OmegaT が対応しているファイル形式の一覧を確認してください。</para>
       </listitem>
     </itemizedlist>
 
@@ -102,7 +102,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>もっと総合的な手引きをお探しの場合は、OmegaT のウェブサイトにある <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for beginners</ulink>（英語）を参照してください。OmegaT に関するどんなことでも、困った場合は、<ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT ユーザーグループ</ulink>に気軽に参加してください（日本語可）。</para>
+        <para>もっと総合的な手引きをお探しの場合は、OmegaT のウェブサイトにある <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for beginners</ulink>（英語）を参照してください。OmegaT に関するどんなことでも、困った場合は、<ulink url="https://omegat.org/support">OmegaT ユーザーグループ</ulink>に気軽に参加してください（日本語可）。</para>
       </listitem>
     </itemizedlist>
   </section>

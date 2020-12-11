@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>チームプロジェクトを使用する</title>
+
+  <para>OmegaTチームプロジェクトは、最初にサーバー上に<link linkend="howto.setupteamproject">セットアップ</link>する必要があります。</para>
+
+  <para>チームプロジェクトを初めて使用する場合は、プロジェクトマネージャの指示に従ってください。</para>
+
+  <para>プロジェクトを開くと、次の点を除いて、チームではないプロジェクトと同様に翻訳をします。</para>
+
+  <para><emphasis role="bold">自動保存</emphasis></para>
+
+  <para>3分ごとに(デフォルトで)、ローカルプロジェクトはリモートリポジトリと同期され、プロジェクトマネージャや他の翻訳者はその期間中に追加された翻訳を表示して使用できます。</para>
+
+  <para>3分の間隔は、<link linkend="dialogs.preferences.savingandoutput"><menuchoice><guimenuitem>[設定]</guimenuitem><guimenuitem>[環境設定]</guimenuitem><guimenuitem>[保存と訳文ファイル生成]</guimenuitem></menuchoice></link>で変更できます。</para>
+
+  <para><emphasis role="bold">同期ファイル</emphasis></para>
+
+  <para>プロジェクトが自動的に保存されると同時に、2つのファイルのみが実際に同期されます。プロジェクトを開いたとき、閉じたとき、再ロードされたときも同様に同期されます。</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>他のすべてのファイルは、リモートリポジトリ内のファイルに置き換えられます。</para>
+
+  <para><emphasis role="bold">新しいソースファイルの追加</emphasis></para>
+
+  <para>新しいソースファイルを追加するには</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>ファイルを<filename>/source</filename>フォルダにコピーします。</para>
+      </listitem>
+
+      <listitem>
+        <para> <menuchoice> <guimenuitem>プロジェクト</guimenuitem> <guimenuitem>原文ファイルをコミット</guimenuitem> </menuchoice>を使用します</para>
+      </listitem>
+    </orderedlist>既存のソースファイルは変更できますが、コミット操作は、自動保存の前、およびプロジェクトを再ロードまたは閉じる前に実行する必要があります。</para>
+
+  <para><emphasis role="bold">ソースファイルの削除</emphasis></para>
+
+  <para>ファイルは、プロジェクトマネージャが削除する必要があります。</para>
+
+  <para><emphasis role="bold">分節化規則またはファイルフィルタの変更</emphasis></para>
+
+  <para>プロジェクトパラメータは、プロジェクトマネージャが変更する必要があります。</para>
+
+  <para><emphasis role="bold">オフラインでの作業</emphasis></para>
+
+  <para>チームプロジェクトは、オフラインで開いて翻訳できます。すべての変更は、次に接続が使用可能になったときに同期されます。</para>
+
+  <para>オフラインで作業するには：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>プロジェクトを開く前にネットワークから切断します。</para>
+    </listitem>
+
+    <listitem>
+      <para>または、コマンドラインで<command>--no-team</command>オプションを使用してプロジェクトを開きます。</para>
+    </listitem>
+  </itemizedlist>
+</section>

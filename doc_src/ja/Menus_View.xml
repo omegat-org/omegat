@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>表示</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>翻訳済み分節を色づけ</term>
+
+      <listitem>
+        <para>チェックがある場合、翻訳済みの分節が黄色でハイライト表示されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>未翻訳分節を色づけ</term>
+
+      <listitem>
+        <para>チェックがある場合、未翻訳の分節が紫色でハイライト表示されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>段落区切りをマーク</term>
+
+      <listitem>
+        <para>このチェックボックスをオンにすると、元の文書の段落間の区切りが視覚的に示されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>原文を表示</term>
+
+      <listitem>
+        <para>チェックがある場合、各分節に対応した原文が緑色にハイライト表示されます。チェックがない場合、原文の分節は表示されません。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>繰り返しのある分節を色づけ</term>
+
+      <listitem>
+        <para>チェックがある場合、繰り返しのある分節が淡い灰色の文字色で表示されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>メモ付き分節を色付け</term>
+
+      <listitem>
+        <para>チェックがある場合、メモ付きの分節が水色でハイライト表示されます。この色付けは、<guimenuitem>［翻訳済み分節を色づけ］</guimenuitem>や<guimenuitem>［未翻訳分節を色づけ］</guimenuitem>よりも優先度が上です。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>ノーブレークスペースを色付け</term>
+
+      <listitem>
+        <para>チェックがある場合、ノーブレークスペース（自動改行しないスペース文字）が灰色の背景色で表示されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>空白文字を色付け</term>
+
+      <listitem>
+        <para>チェックがある場合、スペース文字が小さな点で表示されます。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>双方向アルゴリズム制御文字を色付け</term>
+
+      <listitem>
+        <para>チェックがある場合、<ulink url="http://www.w3.org/International/questions/qa-bidi-controls">双方向アルゴリズム制御文字</ulink>を表示します。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>auto フォルダー由来の分節を色付け</term>
+
+      <listitem>
+        <para>チェックがある場合、（たとえば <filename>/tm/auto</filename> フォルダー内の TMX ファイルから）自動挿入された全分節の背景を色付けします。色付けは、<link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>［auto フォルダー由来の翻訳かどうかを記録する］</guimenuitem></link>にチェックが入っている場合に限り、有効です。auto フォルダーから挿入された通常の翻訳は、オレンジ色で表示されます。それ以外の翻訳は、TMX の種類に応じた異なる色で表示されます。技術的な詳細は、<ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">機能改善リクエスト</ulink>を参照してください。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>代替フォントを積極的に使用</term>
+
+      <listitem>
+        <para><application>OmegaT</application> が一部の絵文字を正しく表示しない場合、このオプションにチェックを入れます（該当する絵文字を含む字体がコンピュータにインストールされている場合に有効）。注意：Windows では、この手動による代替フォント機能が標準の代替フォント機能と衝突し、望ましくない字体に置き換わることがあるようです。そのため、デフォルトではチェックが外されています。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>更新情報を表示</term>
+
+      <listitem>
+        <para>更新情報の表示に関するオプション設定です。<guimenuitem>［現在の分節で表示］</guimenuitem>を選ぶと、現在の分節を最後に更新した作業者と更新日時の情報を表示します。<guimenuitem>［すべての分節で表示」</guimenuitem>を選ぶと、すべての分節について同様の情報を表示します。<guimenuitem>［表示しない」</guimenuitem>を選ぶと、何も表示しません。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

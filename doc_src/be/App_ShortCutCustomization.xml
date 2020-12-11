@@ -4,11 +4,9 @@
   <title>Наладка спалучэньняў клявішаў</title>
 
   <section id="ch04.shortcuts.customization">
-    <title><indexterm class="singular">
-        <primary>Спалучэньні клявішаў</primary> <secondary>Наладка</secondary>
-      </indexterm>Наладка спалучэньняў клявішаў</title>
+    <title>Наладка спалучэньняў клявішаў</title>
 
-    <para>Для большасьці пунктаў галоўнага мэню можа прызначыць спалучэньні клявішаў. Каб зьмяніць ужо прызначаныя спалучэньні або дадаваць новыя, трэба іх запісаць у файл вызначэньня спалучэньняў клявішаў у каталёгу наладаў OmegaT (гл. <link linkend="user.files">Месцазнаходжаньне файлаў карыстальніка</link>).</para>
+    <para>Для большасьці пунктаў галоўнага мэню можа прызначыць спалучэньні клявішаў. Каб зьмяніць ужо прызначаныя спалучэньні або дадаваць новыя, трэба іх запісаць у файл вызначэньня спалучэньняў клявішаў у каталёгу наладаў <application>OmegaT</application> (праз мэню <menuchoice> <guimenuitem>Налады</guimenuitem> <guimenuitem>Доступ да каталёга канфігурацыі</guimenuitem> </menuchoice>).</para>
 
     <para>Файл вызначэньняў спалучэньняў клявішаў павінен мець назву <filename>MainMenuShortcuts.properties</filename> і ўтрымліваць не больш аднаго вызначэньня спалучэньня клявішаў у радку. Дапускаюцца пустыя радкі, а таксама радкі каментарыяў, якія мусяць пачынацца з “//”. Усё, што пасьля “//”, будзе ігнаравацца.</para>
 
@@ -670,11 +668,7 @@
     <table>
       <title>Мэню “Выгляд”</title>
 
-      <indexterm class="singular">
-        <primary>Наладка спалучэньняў клявішаў</primary> <secondary>Мэню “Выгляд”</secondary>
-      </indexterm>
-
-      <tgroup cols="3" colsep="1">
+       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>

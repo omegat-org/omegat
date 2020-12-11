@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.project">
+  <title>Праект</title>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Стварыць праект…</guimenuitem></term>
+
+      <listitem>
+        <para>Ствараецца і адчыняецца новы праект.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><guimenuitem>Спампаваць камандны праект…</guimenuitem></term>
+
+      <listitem>
+        <para>Ствараецца лякальная копія аддаленага праекта OmegaT. Падрабязнасьці гл. у разьдзеле <link linkend="howto.useteamproject">“Ужываньне камандных праектаў”</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Адчыніць праект…</term>
+
+      <listitem>
+        <para>Адчыняецца раней створаны праект.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Адчыніць нядаўні праект</term>
+
+      <listitem>
+        <para>Адкрываецца доступ да дзесяці апошніх праектаў. Пры націсканьні на адным зь іх бягучы праект будзе захаваны і зачынены, пасьля гэтага адчыніцца іншы праект.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Імпартаваць зыходныя файлы…</term>
+
+      <listitem>
+        <para>Зыходныя файлы капіююцца ў каталёг <filename>source</filename>, праект перагружаецца для загрузкі новых файлаў.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Спампаваць старонку MediaWiki…</term>
+
+      <listitem>
+        <para>Каб перакласьці, напрыклад, зьмесьціва старонкі ў Вікіпэдыі:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Націсьнеце на ўкладцы <guilabel>Рэдагаваць</guilabel> на старонцы Вікіпэдыі.</para>
+          </listitem>
+
+          <listitem>
+            <para>Скапіюйце URL-адрас старонкі (з канчаткам <guilabel>action=edit</guilabel>) і ўстаўце яго ў <application>OmegaT</application>.</para>
+          </listitem>
+        </orderedlist>
+
+        <para>Пасьля завяршэньня перакладу, зрабеце наступнае, каб унесьці яго ў Вікіпэдыю:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Адчынеце файл <filename>.UTF8</filename>, які створаны ў каталёгу <filename>/target</filename>.</para>
+          </listitem>
+
+          <listitem>
+            <para>Скапіюйце тэкст і ўстаўце яго ў перакладзеную вэрсію старонкі Вікіпэдыі.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Перазагрузіць</term>
+
+      <listitem>
+        <para>Праект перагружаецца, каб улічыць зьмены, зробленыя ў зыходных файлах і парамэтрах праекта.</para>
+
+        <para>Новыя файлы памяці перакладаў, якія зьяўляюцца ў каталёгу <filename>/tm</filename>, падчас перакладаньня падгружаюцца аўтаматычна пры пераходзе курсора з сэгмэнта ў сэгмэнт.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Зачыніць</term>
+
+      <listitem>
+        <para>Пераклад захоўваецца, праект зачыняецца.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Захаваць</term>
+
+      <listitem>
+        <para>Унутраная памяць перакладаў захоўваецца на жорсткі дыск. OmegaT аўтаматычна захоўвае пераклады кожныя 3 хвіліны, а таксама пры закрыцьці праекта або выхадзе за праграмы.</para>
+
+        <para>Інтэрвал у 3 хвіліны можна зьмяніць праз <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Налады</guimenuitem> <guimenuitem>Налады</guimenuitem> <guimenuitem>Захаваньне і вывад</guimenuitem> </menuchoice></link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Фіксацыя зыходных файлаў</term>
+
+      <listitem>
+        <para>У рэпазыторый запампоўваюцца файлы, даданыя ці лякальна зьмененыя ў каталёгу <filename>source</filename>.</para>
+
+        <para>Гэтыя функцыя — толькі для камандных праектаў.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Фіксацыя файлаў перакладаў</term>
+
+      <listitem>
+        <para>У рэпазыторый запампоўваюцца файлы, створаныя лякальна ў каталёгу <filename>target</filename>.</para>
+
+        <para>Гэтыя функцыя — толькі для камандных праектаў.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Адкампіляваць праект</term>
+
+      <listitem>
+        <para>На аснове зробленага перакладу ствараюцца дакумэнты зь перакладамі. Створаныя дакумэнты перакладаў знаходзяцца ў каталёгу <filename>target</filename>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Скампіляваць пераклад для гэтага дакумэнта</term>
+
+      <listitem>
+        <para>Ствараецца файл зь перакладам для бягучага перакладанага дакумэнта.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Адчыніць праект MED…</term>
+
+      <listitem>
+        <para>Адчыняецца пакет праекта ў фармаце MED, вызначаным генэральным дырэктаратам ЕС у перакладзе.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Стварыць праект MED…</term>
+
+      <listitem>
+        <para>Бягучы праект пераўтвараецца ў пакет MED.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Уласьцівасьці…</term>
+
+      <listitem>
+        <para>Паказваецца дыялёг <link linkend="dialogs.projectproperties">уласьцівасьцяў праекта</link>, празь які можна зьмяніць мовы праекта і месцазнаходжаньні каталёгаў.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Файлы праекта…</term>
+
+      <listitem>
+        <para>Адчыняецца <link linkend="windows.projectfiles">вакно з файламі праекта</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Доступ да зьмесьціва праекта</term>
+
+      <listitem>
+        <para>Адкрываецца доступ да каталёгаў праекта.</para>
+
+        <para>У дадатак да гэтага два пункты мэню дазваляюць непасрэдна адчыняць бягучыя дакумэнты арыгінала і перакладу і глясар, у які робіцца запіс. Дакумэнты адчыняюцца ў праграме, якую выбірае апэрацыйная сыстэма. Калі дакумэнтаў няма, адпаведны пункт паказваецца шэрым колерам.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Выхад</term>
+
+      <listitem>
+        <para>Захаваньне праекта і выхад з <application>OmegaT</application>. Калі праект яшчэ не захаваны, зьяўляецца запыт на пацьвярджэньне выхаду.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.translatepdf">
+  <title>Перакладаньне файлаў PDF</title>
+
+<para>Файлы PDF — гэта асобны выпадак. Яны зьмяшчаюць Інфармацыю пра фарматаваньне, але <application>OmegaT</application> ня можа ўжыць гэтую інфармацыю, каб скампіляваць файлы перакладаў. Такім чынам, файлы PDF апрацоўваюцца як файлы нефарматаванага тэксту, і на выхадзе атрымліваюцца файлы нефарматаванага тэксту.</para>
+  <para>Калі трэба аднавіць фарматаваньне тэксту ў перакладзе (а таксама іншыя элемэнты, напрыклад, малюнкі), ёсьць тры варыянты, якія можна паспрабаваць:</para>
+  <orderedlist>
+    <listitem>
+      <para>Скарыстацца з фільтра па змаўчаньні <application>OmegaT</application> (увод PDF), перакласьці, скампіляваць файл перакладу (атрымаецца файл нефарматаванага тэксту), дадаць адпаведнае фарматаваньне і элемэнты ўручную.</para>
+    </listitem>
+    <listitem>
+      <para>Скарыстацца зь фільтра Iceni Infix. Гл. <ulink url="https://omegat.org/howtos/iceni_infix.html">Howto - Translating PDF files with Iceni Infix and OmegaT</ulink>.</para>
+    </listitem>
+    <listitem>
+      <para>Імпартаваць зыходны файл у <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>, захаваць яго як файл ODG, перакласьці, экспартаваць у PDF пры неабходнасьці.</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">Заўвага:</emphasis> гэтая інфармацыя тычыцца толькі файлаў PDF з тэкставым слоем. Калі файл PDF створаны з адсканаваных старонак, спатрэбіцца скарыстацца з праграмы аптычнага распазнаваньня сымбаляў, каб распазнаць тэкст і пераўтварыць яго ў фармат файла, які OmegaT можа апрацаваць.</para>
+
+
+
+  <section id="other.file.formats">
+    <title>Іншыя фарматы файлаў</title>
+
+    <para>У OmegaT могуць апрацоўвацца іншыя фарматы файлаў нефарматаванага або фарматаванага тэксту.</para>
+
+    <para>Для пераўтварэньня файлаў у падтрыманыя фарматы можна скарыстацца са зьнешніх інструмэнтаў. Перакладзеныя файлы затым спатрэбіцца пераўтварыць назад у арыгінальны фармат. Напрыклад, калі ў вас састарэлая вэрсія Microsoft Word, якая не падтрымлівае фармат ODT, вось што можна зрабіць з файламі Word з пашырэньнем DOC:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>імпартаваць файл у Apache OpenOffice/LibreOffice Writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>захаваць файл у фармат ODT:</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>перакласьці яго, атрымаць пераклад у ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>загрузіць файл перакладу ў Apache OpenOffice/LibreOffice Writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>захаваць файл у фармаце DOC</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Якасьць фарматаваньня перакладзенага файла будзе залежаць ад якасьці пераўтварэньня туды і назад. Перш чым ужываць падобныя пераўтварэньні, абавязкова праверце ўсе варыянты. Актуальны пералік дапаможных сродкаў для перакладу гл. на <ulink url="http://www.omegat.org">вэб-старонцы OmegaT</ulink>.</para>
+</section>
+</section>

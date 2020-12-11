@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.setupteamproject">
+  <title>Стварыць камандны праект</title>
+
+  <para>Арганізацыя каманднага праекта патрабуе пэўнага досьведу працы з сэрвэрамі і сыстэмамі кіраваньня вэрсіямі SVN або Git. Такім чынам, гэта павінна ажыцьцяўляцца мэнэджарам праекта, кіраўніком праекта або інжынерам у лякалізацыі.</para>
+
+  <para>Паколькі зьвесткі аб SVN і Git можна лёгка знайсьці, тут мы не будзем апісваць, як яны працуюць, але толькі тое, як зь імі працуе OmegaT.</para>
+
+  <section>
+    <title>Этап 1. Стварэньне пустога праекта на сэрвэры</title>
+
+    <para><emphasis role="bold">Стварэньне пустога праекта на сэрвэры</emphasis></para>
+
+    <orderedlist>
+      <listitem>
+        <para>Стварыць рэпазыторый SVN або Git на сэрвэры, які будзе даступным перакладчыкам.</para>
+      </listitem>
+
+      <listitem>
+        <para>Стварыць лякальную копію рэпазыторыя (каманда <command>check out</command> у SVN, <command>clone</command> у Git).</para>
+      </listitem>
+
+      <listitem>
+        <para>Стварыць новы пусты праект OmegaT у лякальным рэпазыторыі. Гэта можна зрабіць адным з двух спосабаў:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><menuchoice>
+                <guimenuitem>Праект</guimenuitem> <guimenuitem>Стварыць праект…</guimenuitem>
+              </menuchoice></para>
+          </listitem>
+
+          <listitem>
+            <para>у камандным радку: <command>java -jar OmegaT.jar team init [lang1] [lang2]</command></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para>Дадаць новы праект OmegaT у сыстэму кіраваньня вэрсіямі (каманда <command>add</command> у SVN і Git)</para>
+
+        <para>Заўвага: калі праект быў створаны праз камандны радок на этапе 3, гэта ўжо зроблена праграмай.</para>
+      </listitem>
+
+      <listitem>
+        <para>Апублікаваць новы праект OmegaT на сэрвэры (каманда <command>commit</command> у SVN, <command>commit</command> і потым <command>push</command> у Git).</para>
+      </listitem>
+    </orderedlist>
+
+    <para><emphasis role="bold">Адмысловыя парамэтры</emphasis></para>
+
+    <para>Калі ў праекце ўжываюцца адмысловыя парамэтры фільтраў і сэгмэнтаваньня, абавязкова трэба дадаць у сыстэму кіраваньня вэрсіямі і апублікаваць на сэрвэры файлы <filename>filters.xml</filename> і <filename>segmentation.conf</filename>.</para>
+  </section>
+
+  <section>
+    <title>Этап 2. Дадаць файлы да перакладу і іншыя рэсурсы</title>
+
+    <para>Ужывайце кліент SVN ці Git, каб дадаць файлы да перакладу.</para>
+
+    <para>Гэта таксама можна зрабіць у OmegaT:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>скапіяваць файлы ў каталёг <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>ужыць каманду мэню <menuchoice> <guimenuitem>Праект</guimenuitem> <guimenuitem>Фіксацыя зыходных файлаў</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>
+
+    <para>Каб дадаць іншыя рэсурсы (слоўнікі, памяць перакладаў, глясары), карыстайцеся кліентам SVN ці Git.</para>
+
+    <para>Каб <emphasis role="bold">выдаляць файлы</emphasis>, карыстайцеся кліентам SVN ці Git.</para>
+
+    <para>Памятайце, што ёсьць толькі два файлы, якія OmegaT зьмяняе пры перакладзе:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><filename>omegat/project_save.tmx</filename></para>
+      </listitem>
+
+      <listitem>
+        <para><filename>glossary/glossary.txt</filename></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Усе астатнія файлы — у рэжыме «толькі чытаньне». Калі перакладчык паспрабуе зьмяніць іх, яны вернуцца ў зыходны стан кожны раз, калі праект будзе адчынены, зачынены, захаваны або перазагружаны.</para>
+  </section>
+
+  <section>
+    <title>Этап 3. Адправіць запрашэньне перакладчыку</title>
+
+    <para>Калі праект створаны на сэрвэры, кіраўнік праекта можа запрасіць перакладчыка да працы над ім адным з наступных спосабаў:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>адправіць URL-адрас праекта, каб перакладчык стварыў лякальную копію праз мэню <menuchoice> <guimenuitem>Праект</guimenuitem> <guimenuitem>Спампаваць камандны праект</guimenuitem> </menuchoice>.</para>
+      </listitem>
+
+      <listitem>
+        <para>адправіць файл <filename>omegat.project</filename>, які зьмяшчае URL-адрас праекта, каб перакладчык скапіяваў яго ў адпаведную дырэкторыю і адчыніў у OmegaT.</para>
+
+        <para>URL-спасылка пазначаецца наступным чынам (у гэтым прыкладзе — для рэпазыторыя Git):</para>
+
+        <programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;git&quot; url=&quot;https://рэпазыторый_праекта_OmegaT.git&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting>
+      </listitem>
+    </itemizedlist>
+
+    <para>У абодвух выпадках кіраўнік праекта павінен адправіць перакладчыку ідэнтыфікатар і пароль для доступу да рэпазыторыя.</para>
+
+    <para><emphasis role="bold">Праверка статыстычных даніх</emphasis></para>
+
+    <para>Кіраўнік праекта павінен разам з перакладчыкам праверыць ідэнтычнасьць статыстычных даніх на абодвух баках (на сэрвэры і ў перакладчыка).</para>
+
+    <para>У выпадку разыходжаньняў трэба праверыць, ці ўключаныя ў сыстэму кіраваньня вэрсіямі файлы <filename>filters.xml</filename> і <filename>segmentation.conf</filename>.</para>
+  </section>
+
+  <section>
+    <title>Асаблівы выпадак: мінімальнае абагульваньне</title>
+
+    <para>Пазначаны працэс — для звычайных выпадкаў, калі кіраўнік праекта хоча мець поўны кантроль над праектам, а файлы (і статыстычныя данія) ідэнтычныя на абодвух баках (на сэрвэры і ў перакладчыка).</para>
+
+    <para>Камандныя праекты OmegaT могуць быць арганізаваныя і іншым спосабам, калі некалькі перакладчыкаў маюць сумесны доступ да файла project_save.tmx, але не да (усіх) (зыходных) файлаў.</para>
+
+    <para>У такім выпадку працэдура тая самая, але кіраўнік праекта не дадае (усе) файлы ў праект з кіраваньнем вэрсіямі. Замест гэтага перакладчыкі самастойна капіююць файлы або вызначаюць адпаведнасьці для сынхранізацыі файлаў з іншымі сховішчамі.</para>
+
+      <para>Вызначэньне адпаведнасьцяў робіцца шляхам рэдагаваньня файла <filename>omegat.project</filename> або праз графічны інтэрфэйс: <menuchoice> <guimenuitem>Праект</guimenuitem> → <guimenuitem>Уласьцівасьці</guimenuitem> → <guimenuitem>Вызначэньне адпаведнасьці рэпазыторыяў</guimenuitem> </menuchoice>
+      </para>
+  </section>
+
+  <section id="howto.setupteamproject.mappingparameters">
+    <title>Парамэтры вызначэньня адпаведнасьці</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>repository type (тып рэпазыторыя)</term>
+
+        <listitem>
+          <para>Гэта можа быць http (у тым ліку https), svn, git або file.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>repository url (url-адрас рэпазыторыя:)</term>
+
+        <listitem>
+          <para>Аддаленае месцазнаходжаньне або каталёг файлаў да перакладу.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>mapping local (лякальнае вызначэньне адпаведнасьці)</term>
+
+        <listitem>
+          <para>Назва лякальнага каталёга або файла адносна кораня праекта OmegaT.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>mapping repository (вызначэньне адпаведнасьці ў рэпазыторыі)</term>
+
+        <listitem>
+          <para>Назва аддаленага каталёга або файла адносна URL-адраса рэпазыторыя.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>excludes (выключае)</term>
+
+        <listitem>
+          <para>Дадаць шаблёны са знакамі падстаноўкі (у стылі Apache Ant): *, ?, **. Калі трэба некалькі шаблёнаў, адасобліваць іх кропкай з коскай.</para>
+
+          <para>Прыклад: <userinput>**/excludedfolder/**;*.txt</userinput> выключае файлы з /excludedfolder/ у шляху і файлы з пашырэньнем назвы .txt.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>includes (уключае)</term>
+
+        <listitem>
+          <para>Гл. вышэй.</para>
+
+          <para>Прыклад: <userinput>**/*.docx</userinput>, каб дадаць усе файлы .docx у межах праекта, нават з каталёгаў, якія выключаныя.</para>
+
+          <para>Па змаўчаньні ўключаюцца ўсе файлы, якія не выключаныя. Гэты парамэтар ужываецца толькі ў выпадку, калі трэба перавызначыць выключэньні.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Прыклады вызначэньняў адпаведнасьці</title>
+
+    <para>Вызначэньне адпаведнасьцяў для праекта па змаўчаньні:<programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://рэпазыторый_каманднага_праекта_OmegaT&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Усё зьмесьціва з <filename>https://рэпазыторый_каманднага_праекта_OmegaT</filename> супастаўляецца з лякальным праектам OmegaT.</para>
+
+    <para>Вызначэньне адпаведнасьцяў для праектаў у падкаталёгу рэпазыторыя:<programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://рэпазыторый_усіх_камандных_праектаў_OmegaT&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Усё зьмесьціва з <filename>https://рэпазыторый_усіх_камандных_праектаў_OmegaT/En-US_DE_project</filename> супастаўляецца з лякальным праектам OmegaT.</para>
+
+    <para>Вызначэньне адпаведнасьцяў для дадатковых зыходных файлаў з аддаленага рэпазыторыя з фільтрамі:<programlisting>
+&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://рэпазыторый_усіх_зыходных_файлаў_камандных_праектаў_OmegaT&quot;&gt;
+  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+   &lt;includes&gt;readme.bak&lt;/includes&gt;
+  &lt;/mapping&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Усё зьмесьціва з <filename>https://рэпазыторый_усіх_зыходных_файлаў_камандных_праектаў_OmegaT</filename> супастаўляецца з лякальным каталёгам зыходных файлаў праекта OmegaT.</para>
+
+    <para><programlisting>Вызначэньне адпаведнасьцяў для дадатковых зыходных файлаў з Інтэрнэта: &lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+    <para>Аддалены файл <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> супастаўляецца з лякальным файлам <filename>source/Bundle.properties</filename>.</para>
+
+    <para>Вызначэньне адпаведнасьцяў зь перайменаваньнем:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+    <para>Аддалены файл <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> супастаўляецца з лякальным файлам <filename>source/readme_tr.txt</filename>.</para>
+
+    <para>Гэта забясьпечвае магчымасьць перайменаваньня файла да перакладу.</para>
+
+    <para>Вызначэньне адпаведнасьцяў для лякальных файлаў:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
+ &lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
+ &lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+    <para>Лякальны файл <filename>/home/me/myfiles/my/file.txt</filename> супастаўляецца зь лякальным файлам <filename>source/file.txt</filename>, а <filename>/home/me/myfiles/some/file.txt</filename> супастаўляецца з <filename>source/file2.txt</filename>.</para>
+
+    <para>Папярэджаньне: калі файл не існуе, праект не загрузіцца.</para>
+    <para>Можна дадаць колькі заўгодна вызначэньняў адпаведнасьцяў, але толькі ў кантэксьце каманднага праекта, г. з., праекта з вызначэньнямі адпаведнасьцяў, уключанымі ў файл omegat.project. Гэтая функцыя прызначаная для збору зыходных файлаў у адзін праект, але не абмежаваная толькі зыходнымі файламі.</para>
+  </section>
+  <section>
+    <title>Заўвага аб файле omegat.project і вызначэньнях адпаведнасьцяў</title>
+    <para>Пры стварэньні новага праекта і фіксацыі ў рэпазыторыі файл <filename>omegat.project</filename> не ўтрымлівае вызначэньняў. Пры спампаваньні праекта ён лякальна пераўтвараецца ў камандны праект з даданьнем вызначэньняў па змаўчаньні.</para>
+    <para>Заўважце, што аўтаматычныя зьмены не адбываюцца ў файле omegat.project у рэпазыторыі, ён і надалей ня ўтрымлівае вызначэньняў адпаведнасьцяў. Пры загрузцы праекта ўсе зьмены ў рэпазыторыі капіююцца ў лякальны праект, уключна з файлам <filename>omegat.project</filename> з парамэтрамі праекта. Калі файл ня ўтрымлівае вызначэньняў адпаведнасьцяў, зноў ужываюцца існыя лякальныя вызначэньні, і толькі яны. Усе іншыя лякальныя зьмены ў праекце адрынаюцца. Калі ж файл утрымлівае вызначэньні, лякальныя зьмены ў вызначэньнях губляюцца.</para>
+  </section>
+
+</section>

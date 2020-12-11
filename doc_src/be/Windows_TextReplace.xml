@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="windows.textreplace">
+  <title>Замена тэксту</title>
+
+  <para>Адчынеце вакно пошуку і замены, націснуўшы <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, і ўвядзеце слова або выраз, які трэба замяніць, у полі <emphasis>Знайсьці</emphasis>.</para>
+
+  <para>Затым клікнеце па кнопцы <emphasis>Пошук</emphasis>, каб пабачыць усе адпаведнікі.</para>
+
+  <para>Увядзеце новае слова або фразу (падтрымкі рэгулярных выразаў няма) у полі <emphasis>“Замяніць на”</emphasis>, затым клікнеце па адным з наступных варыянтаў:<itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Замяніць усё:</emphasis> замена робіцца ва ўсіх уваходжаньнях (пасьля паказу вакна пацьвярджэньня, у якім будзе бачнай колькасьць уваходжаньняў).</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Замяніць:</emphasis> замена робіцца па аднаму, пасьля націсканьня кнопак у <emphasis role="bold">загалоўку панэлі рэдагаваньня</emphasis>. Клікайце <emphasis>“Замяніць наступнае”</emphasis> або <emphasis>“Прапусьціць”</emphasis>, затым, каб скончыць працэс, <emphasis>“Гатова”</emphasis>.</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Зачыніць:</emphasis> зачыніць акно, ня робячы нейкіх зьменаў.</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section>
+    <title>Парамэтры пошуку</title>
+
+    <para>Парамэтры пошуку падобныя тым, што паказваюцца ў <link linkend="windows.textsearch">вакне пошуку</link>.</para>
+
+    <para>Адно толькі выключэньне: пазначце <emphasis role="bold">“Неперакладзеныя”</emphasis>, каб пошук адбываўся таксама і ў яшчэ не перакладзеных сэгмэнтах.</para>
+
+    <para>Каб гэта было магчымым (хаця пошук і замена працуе толькі для памяці), OmegaT скапіюе зыходны тэкст арыгінала ў пераклад перад апэрацыяй замены. Калі для сэгмэнта ня вызначаны тэкст замены, пераклад у сэгмэньце будзе выдалены, г. зн., сэгмэнт застанецца неперакладзеным.</para>
+  </section>
+</section>

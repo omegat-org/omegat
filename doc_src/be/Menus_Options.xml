@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>Налады</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Налады…</term>
+
+      <listitem>
+        <para>Адчыняецца дыялёг <link linkend="dialogs.preferences">наладаў</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Машынны пераклад</term>
+
+      <listitem>
+        <para>Дазваляе ўключаць/выключаць даступныя інструмэнты машыннага перакладу.</para>
+
+        <para>Калі выбраныя некалькі сэрвісаў машыннага перакладу, спалучэньне клявішаў <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> таксама ўжываецца для пераключэньня паміж імі і ўстаўкі выніку ад апошняга выбранага сэрвісу.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Глясар</term>
+
+      <listitem>
+        <para>Выберыце <guimenuitem>Пошук тэрмінаў у Taas</guimenuitem>, каб уключыць гэты пошук.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Слоўнік</term>
+
+      <listitem>
+        <para>Уключэце опцыю <guimenuitem>Ужываць падбор недакладных супадзеньняў для пошуку ў слоўніках</guimenuitem>, калі хочаце, каб у вакне слоўнікаў паказваліся аднакарэнныя словы.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Аўтазавяршэньне</term>
+
+      <listitem>
+        <para>Калі пазначана <guimenuitem>Аўтаматычна паказваць адпаведныя прапановы</guimenuitem>, мэню аўтазавяршэньня зьяўляецца аўтаматычна пасьля набору першай літары запіса глясара або сымбаля “&lt;” у выпадку тэгаў.</para>
+
+        <para>Пазначце <guimenuitem>Запамінаць прапановы завяршэньня</guimenuitem>, каб пры ўводзе першых некалькіх літараў паказваліся прапановы завяршэньня словаў.</para>
+
+        <para>Пазначце <guimenuitem>Запамінаць прадказаньні словаў</guimenuitem>, каб пасьля ўводу нейкага слова паказваліся словы, якія часта сустракаюцца пасьля яго.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Файлавыя фільтры…</term>
+
+      <listitem>
+        <para>Адчыняецца дыялёг наладкі <link linkend="dialogs.preferences.filefilters">файлавых фільтраў</link> у дыялёгу наладаў.</para>
+
+        <para>Гэтыя налады ўжываюцца на ўзроўні OmegaT да ўсіх праектаў.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Сэгмэнтаваньне…</term>
+
+      <listitem>
+        <para>Адчыняецца дыялёг <link linkend="dialogs.preferences.segmentationsetup">наладкі сэгмэнтаваньня</link> ў дыялёгу наладаў.</para>
+
+        <para>Гэтыя налады ўжываюцца на ўзроўні OmegaT да ўсіх праектаў.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Акно рэдагаваньня…</term>
+
+      <listitem>
+        <para>Адчыняецца дыялёг <link linkend="dialogs.preferences.editor">наладкі акна рэдагаваньня</link> ў дыялёгу наладаў.</para>
+
+        <para>Гэтыя налады ўжываюцца на ўзроўні OmegaT да ўсіх праектаў.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Доступ да каталёга канфігурацыі</term>
+
+      <listitem>
+        <para>Адчыняецца лякальны каталёг, дзе захоўваюцца канфігурацыйныя файлы OmegaT (залежыць ад апэрацыйнай сыстэмы).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

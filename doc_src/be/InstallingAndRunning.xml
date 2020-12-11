@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.installing.and.running">
-  <title>Усталёўка і запуск <application>OmegaT</application></title>
+  <title>Усталяваньне і запуск <application>OmegaT</application></title>
 
   <section>
-    <title id="Windows.users">Карыстальнікі Windows<indexterm class="singular">
-        <primary>Усталёўка OmegaT</primary> <secondary>Windows</secondary>
-      </indexterm></title>
+    <title id="Windows.users">Карыстальнікі Windows</title>
 
     <section>
       <title id="which.package.to.download.windows">Спампаваньне пакета</title>
 
-      <para>Ці ёсьць у вас рэалізацыя Java, сумяшчальная з Java 1.6 JRE ад Oracle?</para>
+      <para>Ці ёсьць у вас рэалізацыя Java, сумяшчальная з Java 8 JRE ад Oracle?</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Так: </emphasis>спампаваць <emphasis>OmegaT_3.n.n_Windows_without_JRE.exe</emphasis>.</para>
+          <para><emphasis role="bold">Так: </emphasis>спампаваць <filename>OmegaT_4.n.n_Windows_without_JRE.exe</filename>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Не / ня ведаю:</emphasis> спампаваць<emphasis> OmegaT_3.n.n_Windows.exe.</emphasis></para>
+          <para><emphasis role="bold">Не / ня ведаю:</emphasis> спампаваць <filename>OmegaT_4.n.n_Windows.exe</filename>.</para>
 
           <para>Гэты пакет пастаўляецца з асяродкам выкананьня Java ад Oracle. Гэты JRE ня будзе замінаць іншым рэалізацыям Java, якія могуць быць усталяванымі ў вашай сыстэме.</para>
         </listitem>
@@ -31,38 +29,32 @@
 
       <para>Каб усталяваць <application> OmegaT</application>, двойчы клікнеце па спампаваным праграмным файле.</para>
 
-      <para>На пачатку ўсталяваньня вы зможаце выбраць мову, які будзе выкарыстоўвацца падчас усталяваньня. У наступным акне можна пазначыць, што абраная мова будзе выкарыстоўвацца ў OmegaT. Калі зрабіць гэтую пазнаку, файл OmegaT.l4J.ini будзе зьменены, каб выкарыстоўваць абраную мову (гл. наступны разьдзел). Пазьней, пасьля прыняцьця ўмоваў ліцэнзійнай дамовы, праграма ўсталёўкі спытае вас, ці стварыць каталёг у <emphasis>мэню “Пуск”</emphasis>, і ці стварыць цэтлік на працоўным стале і ў панэлі хуткага запуску — гэтыя цэтлікі можна стварыць і пазьней, перацягнуўшы <emphasis><application>OmegaT</application>.exe</emphasis> на працоўны стол або ў мэню “Пуск”, каб стварыць лучыва адтуль. На наступным экране будзе запрапанавана азнаёміцца з файлам readme і пералікам зьменаў для ўсталяванай вэрсіі.</para>
+      <para>На пачатку ўсталяваньня вы зможаце выбраць мову, які будзе выкарыстоўвацца падчас усталяваньня. У наступным акне можна пазначыць, што абраная мова будзе выкарыстоўвацца ў OmegaT. Калі зрабіць гэтую пазнаку, файл <filename>OmegaT.l4J.ini</filename> будзе зьменены, каб выкарыстоўваць абраную мову (гл. наступны разьдзел). Пазьней, пасьля прыняцьця ўмоваў ліцэнзійнай дамовы, праграма ўсталёўкі спытае вас, ці стварыць каталёг у мэню <emphasis>“Пуск”</emphasis>, і ці стварыць цэтлік на працоўным стале і ў панэлі хуткага запуску — гэтыя цэтлікі можна стварыць і пазьней, перацягнуўшы <filename>OmegaT.exe</filename> на працоўны стол або ў мэню “Пуск”, каб стварыць лучыва адтуль. На наступным экране будзе запрапанавана азнаёміцца з файлам readme і пералікам зьменаў для ўсталяванай вэрсіі.</para>
     </section>
 
     <section id="running.OmegaT.Windows">
-      <title>Запуск <application>OmegaT<indexterm class="singular">
-          <primary>Запуск OmegaT</primary> <secondary>Windows</secondary>
-        </indexterm></application></title>
+      <title>Запуск <application>OmegaT</application></title>
 
-      <para>Пасьля ўсталёўкі <application>OmegaT</application>, запускаць праграму можна, клікнуўшы непасрэдна па файле <emphasis><application>OmegaT</application>.jar </emphasis>, або з каманднага радка.</para>
+      <para>Пасьля ўсталяваньня <application>OmegaT</application>, запускаць праграму можна, клікнуўшы непасрэдна па файле <filename>OmegaT.jar </filename>, або з каманднага радка.</para>
 
-      <para>Найпрасьцейшым спосабам запуску OmegaT, аднак, зьяўляецца выкананьне праграмнага файла <emphasis> <application>OmegaT</application>.exe</emphasis>. <indexterm class="singular">
-          <primary>Запуск OmegaT</primary> <secondary>Windows</secondary> <tertiary>Файл INI</tertiary>
-        </indexterm>Парамэтры запуску праграмы ў гэтым выпадку будуць чытацца з файла <emphasis><application>OmegaT</application>.l4J.ini</emphasis>, які знаходзіцца ў тым жа каталёгу, што і выканальны файл EXE, і які можна рэдагаваць у адпаведнасьці са сваімі патрэбамі. У наступным прыкладзе файла INI рэзэрвуецца 1 Гб памяці, мовай інтэрфэйса карыстальніка вызначаецца француская, а краінай — Канада:</para>
+      <para>Найпрасьцейшым спосабам запуску OmegaT, аднак, зьяўляецца выкананьне праграмнага файла <filename>OmegaT.exe</filename>. Парамэтры запуску праграмы ў гэтым выпадку будуць чытацца з файла <filename>OmegaT.l4J.ini</filename>, які знаходзіцца ў тым жа каталёгу, што і выканальны файл EXE, і які можна рэдагаваць у адпаведнасьці са сваімі патрэбамі. У наступным прыкладзе файла INI рэзэрвуецца 1 Гб памяці, мовай інтэрфэйса карыстальніка вызначаецца француская, а краінай — Канада:</para>
 
-      <literallayout><code># OmegaT.exe runtime configuration
+      <programlisting># OmegaT.exe runtime configuration
 # To use a parameter, remove the '#' before the '-'
 # Memory
 -Xmx1024M
 # Language
 -Duser.language=FR
 # Country
--Duser.country=CA </code></literallayout>
+-Duser.country=CA</programlisting>
 
       <para>Парада: калі OmegaT працуе павольна ў сэансах аддаленага працоўнага стала пад Windows, можна выкарыстоўваць наступны парамэтар:</para>
 
-      <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
+      <programlisting>-Dsun.java2d.noddraw=false</programlisting>
     </section>
 
     <section>
-      <title>Абнаўленьне OmegaT<indexterm class="singular">
-          <primary>Абнаўленьне OmegaT</primary> <secondary>Windows</secondary>
-        </indexterm></title>
+      <title>Абнаўленьне OmegaT</title>
 
       <para><emphasis>Гэтая інфармацыя тычыцца толькі “традыцыйных” для Windows вэрсіяў OmegaT. Яна ня тычыцца вэрсіяў Web Start, якія абнаўляюцца аўтаматычна, і крос-плятформенных вэрсіяў, усталяваных пад Windows.</emphasis></para>
 
@@ -70,7 +62,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Усталяваць паўзьверх існай усталёўкі. </emphasis>Для гэтага, проста вызначце для ўсталёўкі новай вэрсіі той самы каталёг, у якім знаходзіцца існая. Папярэдняя вэрсія OmegaT будзе перапісаная, але ўсё налады зь яе захаваюцца. Гэта ўключае ў сябе налады, вызначаныя праз самую OmegaT, зьмены ў файле <filename>OmegaT.l4J.ini</filename>, а таксама ў сцэнары запуску (у файле .bat), калі ён ужываецца.</para>
+          <para><emphasis role="bold">Усталяваць паўзьверх існай усталёўкі.</emphasis>Для гэтага проста вызначце для ўсталяваньня новай вэрсіі той самы каталёг, у якім знаходзіцца існая. Папярэдняя вэрсія OmegaT будзе перапісаная, але ўсё налады зь яе захаваюцца. Гэта ўключае ў сябе налады, вызначаныя праз самую OmegaT, зьмены ў файле <filename>OmegaT.l4J.ini</filename>, а таксама ў сцэнары запуску (у файле <filename>.bat</filename>), калі ён ужываецца.</para>
         </listitem>
       </itemizedlist>
 
@@ -78,11 +70,11 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Усталяваць у новы каталёг </emphasis>Гэта дазволіць захаваць дзьве вэрсіі разам, што можа быць жаданым варыянтам для тых, хто хоча мець пераходны пэрыяд для азнаямленьня з новай вэрсіяй. Пры гэтым мэтадзе таксама можна будзе выкарыстоўваць парамэтры і налады, зробленыя праз OmegaT. Аднак у падобным выпадку:</para>
+          <para><emphasis role="bold">Усталяваньне ў новы каталёг.</emphasis> Гэта дазволіць захаваць дзьве вэрсіі разам, што можа быць жаданым варыянтам для тых, хто хоча мець пераходны пэрыяд для азнаямленьня з новай вэрсіяй. Пры гэтым мэтадзе таксама можна будзе выкарыстоўваць парамэтры і налады, зробленыя праз OmegaT. Аднак у падобным выпадку:</para>
 
           <itemizedlist>
             <listitem>
-              <para>Калі ў файл <filename>OmegaT.l4J.ini</filename> або ў файл .bat былі ўнесеныя зьмены, гэтыя файлы трэба скапіяваць у каталёг з новай вэрсіяй.</para>
+              <para>Калі ў файл <filename>OmegaT.l4J.ini</filename> або ў файл .bat былі ўнесеныя зьмены, іх трэба скапіяваць у каталёг з новай вэрсіяй.</para>
             </listitem>
           </itemizedlist>
 
@@ -97,22 +89,20 @@
   </section>
 
   <section id="Linux.Intel.users">
-    <title>Карыстальнікі Linux (Intel)<indexterm class="singular">
-        <primary>Усталёўка OmegaT</primary> <secondary>Linux</secondary>
-      </indexterm></title>
+    <title>Карыстальнікі Linux (Intel)</title>
 
     <section id="which.package.to.download.Linux">
       <title>Спампаваньне патрэбнага пакета</title>
 
-      <para>Ці ёсьць у вас рэалізацыя Java, сумяшчальная з Java 1.6 JRE ад Oracle?</para>
+      <para>Ці ёсьць у вас рэалізацыя Java, сумяшчальная з Java 8 JRE ад Oracle?</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Так: </emphasis>спампаваць <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Так: </emphasis>спампаваць <filename>OmegaT_4.n.n_Without_JRE.zip</filename>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Не / ня ведаю:</emphasis> спампаваць <emphasis>OmegaT_3.n.n_Linux.tar.bz2.</emphasis></para>
+          <para><emphasis role="bold">Не / ня ведаю:</emphasis> спампаваць <filename>OmegaT_4.n.n_Linux.tar.bz2.</filename></para>
 
           <para>Гэты пакет пастаўляецца з асяродкам выкананьня Java ад Oracle. Гэты JRE ня будзе замінаць іншым рэалізацыям Java, якія могуць быць усталяванымі ў вашай сыстэме.</para>
         </listitem>
@@ -122,18 +112,16 @@
     <section id="OmegaT.installation.Linux">
       <title><application>Усталёўка OmegaT</application></title>
 
-      <para>Распакуйце спампаваны файл. Пры гэтым у працоўным каталёгу створыцца каталёг omegat/, у якім будуць знаходзіцца ўсе файлы, неабходныя для запуску <application>OmegaT</application>. Распакаваньне файла <emphasis>.tar.gz</emphasis>:</para>
+      <para>Распакуйце спампаваны файл. Пры гэтым у працоўным каталёгу створыцца каталёг <filename>omegat/</filename>, у якім будуць знаходзіцца ўсе файлы, неабходныя для запуску <application>OmegaT</application>. Распакаваньне файла <filename>.tar.gz</filename>:</para>
 
-      <para><emphasis>$ tar xf спампаваны_файл.tar.gz</emphasis></para>
+      <programlisting>$ tar xf спампаваны_файл.tar.gz</programlisting>
     </section>
 
     <section id="adding.OmegaT.to.your.menus.or.panels">
       <title>Даданьне <application>OmegaT</application> да мэню (KDE) або панэляў (Gnome)</title>
 
       <section id="KDE.users">
-        <title>Карыстальнікі KDE 4<indexterm class="singular">
-            <primary>Наладка OmegaT</primary> <secondary>Linux</secondary>
-          </indexterm></title>
+        <title>Карыстальнікі KDE 4</title>
 
         <para>Дадаць <application>OmegaT</application> да мэню можна наступным чынам:</para>
 
@@ -155,7 +143,7 @@
           </listitem>
 
           <listitem>
-            <para>Other Icons - Browse, і перайдзеце ў падкаталёг /images у каталёгу праграмы <application>OmegaT</application>. Выберыце абразок <application>OmegaT</application>.png.</para>
+            <para>Іншыя абразкі — націсьнеце на «Browse», і перайдзеце ў падкаталёг <filename>/images</filename> у каталёгу праграмы <application>OmegaT</application>. Выберыце абразок <filename>OmegaT.png</filename>.</para>
           </listitem>
 
           <listitem>
@@ -179,151 +167,133 @@
           </listitem>
 
           <listitem>
-            <para>Клікнеце па кнопцы абразка, затым націсьнеце <emphasis>Browse…</emphasis> і перайдзеце ў падкаталёг /images у каталёгу праграмы <application>OmegaT</application>. Выберыце абразок <emphasis><application>OmegaT</application>.png</emphasis>. GNOME можа не паказваць файлы абразкоў у даступных фарматах і на першы погляд чакаць файл SVG, але калі абраны каталёг, павінны зьявіцца файлы і можна будзе выбраць <application>OmegaT</application>.png.</para>
+            <para>Клікнеце па кнопцы абразка, затым націсьнеце <guibutton>Browse…</guibutton> і перайдзеце ў падкаталёг <filename>/images</filename> у каталёгу праграмы <application>OmegaT</application>. Выберыце абразок <filename>OmegaT.png</filename>. GNOME можа не паказваць файлы абразкоў у даступных фарматах і на першы погляд чакаць файл SVG, але калі абраны каталёг, павінны зьявіцца файлы і можна будзе выбраць <filename>OmegaT.png</filename>.</para>
           </listitem>
         </itemizedlist>
       </section>
     </section>
 
     <section id="running.OmegaT.Linux">
-      <title>Запуск <application>OmegaT<indexterm class="singular">
-          <primary>Запуск OmegaT</primary> <secondary>Linux</secondary>
-        </indexterm></application></title>
+      <title>Запуск <application>OmegaT</application></title>
 
-      <para>OmegaT можна запускаць з каманднага радка з дапамогай сцэнара, які ўключае парамэтры запуску, або клікаючы непасрэдна па файле <emphasis><application> OmegaT</application>.jar</emphasis>. Мэтады адрозьніваюцца ў залежнасьці ад дыстрыбутыва. Пераканайцеся ў правільнасьці налады <emphasis>PATH </emphasis> і ў тым, што файлы .<emphasis>jar</emphasis> належным чынам асацыяваныя з запускальнікам Java. Азнаёмцеся з дадатковымі зьвесткамі ў падразьдзеле “Запуск з каманднага радка” ніжэй.</para>
+      <para>OmegaT можна запускаць з каманднага радка з дапамогай сцэнара, які ўключае парамэтры запуску, або клікаючы непасрэдна па файле <filename>OmegaT.jar</filename>. Мэтады адрозьніваюцца ў залежнасьці ад дыстрыбутыва. Пераканайцеся ў правільнасьці парамэтра <varname>PATH</varname> і ў тым, што файлы <filename>.jar</filename> належным чынам асацыяваныя з запускальнікам Java. Азнаёмцеся з дадатковымі зьвесткамі ў падразьдзеле “Запуск з каманднага радка” ніжэй.</para>
     </section>
   </section>
 
   <section id="MAC.OSX.users">
-    <title>Карыстальнік Mac OS X<indexterm class="singular">
-        <primary>Усталёўка OmegaT</primary> <secondary>OS X</secondary>
-      </indexterm></title>
+    <title>Карыстальнікі macOS</title>
 
     <section id="which.package.to.download.OSX">
       <title>Спампаваньне пакета</title>
 
       <para><application>OmegaT</application> утрымлівае асяродак выкананьня Java (JRE) вэрсіі 1.8</para>
 
-      <para>Спампаваць <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
+      <para>Спампаваць <filename>OmegaT_4.n.n_Mac.zip</filename>.</para>
     </section>
 
     <section id="OmegaT.installation.OSX">
-      <title><application>Усталёўка OmegaT</application></title>
+      <title>Усталяваньне <application>OmegaT</application></title>
 
-      <para>Двойчы націсьнеце <emphasis>OmegaT_3.n.n_Mac.zip</emphasis> для распакаваньня. Пры гэтым створыцца каталёг з назвай <emphasis><application>OmegaT</application></emphasis>. Каталёг зьмяшчае 2 файла: index.html і <emphasis><application>OmegaT</application>.app</emphasis>. Скапіюйце каталёг у прыдатны каталёг (напрыклад, Application). Зрабіўшы гэта, можна выдаліць файл <emphasis>OmegaT_3.n.n_Mac.zip</emphasis>, бо ён больш не патрэбны.</para>
+      <para>Двойчы націсьнеце <filename>OmegaT_4.n.n_Mac.zip</filename> для распакаваньня. Пры гэтым створыцца каталёг з назвай <filename>OmegaT</filename>. У каталёгу будуць 2 файлы: <filename>index.html</filename> і <filename>OmegaT.app</filename>. Скапіюйце каталёг у прыдатны каталёг (напрыклад, Application). Зрабіўшы гэта, можна выдаліць файл <filename>OmegaT_4.n.n_Mac.zip</filename>, бо ён больш не патрэбны.</para>
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
       <title>Даданьне <application>OmegaT</application> да Dock</title>
 
-      <para>Перацягнеце і пакіньце <emphasis><application>OmegaT</application>.app</emphasis> на Dock.</para>
+      <para>Перацягнеце і пакіньце <filename>OmegaT.app</filename> на Dock.</para>
     </section>
 
     <section id="running.OmegaT.OSX">
-      <title>Запуск <application>OmegaT<indexterm class="singular">
-          <primary>Запуск OmegaT</primary> <secondary>OS X</secondary>
-        </indexterm></application></title>
+      <title>Запуск <application>OmegaT</application></title>
 
-      <para>Двойчы клікнеце па <emphasis> <application>OmegaT</application>.app</emphasis> або клікнеце па ягоным месцы ў Dock.</para>
+      <para>Двойчы клікнеце па <filename>OmegaT.app</filename> або клікнеце па ягоным месцы ў Dock.</para>
 
-      <para>Парамэтры запуску OmegaT можна зьмяніць шляхам рэдагаваньня <emphasis>Properties</emphasis> або файла <emphasis>Configuration.properties</emphasis> у пакеце.</para>
+      <para>Парамэтры запуску OmegaT можна зьмяніць шляхам рэдагаваньня <emphasis>Properties</emphasis> або файла <filename>Configuration.properties</filename> у пакеце.</para>
 
-      <para>Каб атрымаць доступ да файла <application><emphasis>Configuration.properties</emphasis></application>, клікнеце правай кнопкай мышкі па <emphasis><application>OmegaT</application>.app</emphasis> і выберыце “Show Package Contents”, затым адчынеце файл у Contents/Resources, клікнуўшы правай кнопкай па ім і выбраўшы патрэбны тэкставы рэдактар. Можна таксама ўвесьці “cd” проста там з каманднага радку і адчыніць <application><emphasis>Configuration.properties</emphasis> у кансольным тэкставым рэдактары тыпу emacs ці vi</application>.<indexterm class="singular">
-          <primary>Наладка OmegaT</primary> <secondary>OS X</secondary> <tertiary>Парамэтры запуску</tertiary>
-        </indexterm></para>
+      <para>Каб атрымаць доступ да файла <filename>Configuration.properties</filename>, клікнеце правай кнопкай мышкі па <filename>OmegaT.app</filename> і выберыце “Show Package Contents”, затым адчынеце файл у <filename>Contents/Resources</filename>, клікнуўшы правай кнопкай па ім і выбраўшы патрэбны тэкставы рэдактар. Можна таксама ўвесьці “<command>cd</command>” проста там з каманднага радку і адчыніць <filename>Configuration.properties</filename> у кансольным тэкставым рэдактары тыпу emacs ці vi.</para>
 
-      <para>Парамэтры зьмяняюцца шляхам рэдагаваньня <emphasis>Configuration.properties</emphasis>. Калі пэўны парамэтар папярэдне вызначаны, дастаткова проста выдаліць сымбаль # перад ім. Напрыклад, пры <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (без #) <application>OmegaT</application> запускаецца з інтэрфэйсам на японскай мове.</para>
+      <para>Парамэтры зьмяняюцца шляхам рэдагаваньня <filename>Configuration.properties</filename>. Калі пэўны парамэтар папярэдне вызначаны, дастаткова проста выдаліць сымбаль <literal>#</literal> перад ім. Напрыклад, пры <literal>user.language=ja</literal> (без <literal>#</literal>) <application>OmegaT</application> запускаецца з інтэрфэйсам на японскай мове.</para>
 
-      <para>Для зьмяненьня даступнага аб’ёму памяці сьлед адрэдагаваць файл <emphasis>OmegaT.app/Contents/Info.plist</emphasis> і зьмяніць зьмесьціва &lt;string&gt;-Xmx1024M&lt;/string&gt;. Наперад, у выпадку &lt;string&gt;-Xmx2048M&lt;/string&gt; пры запуску OmegaT будзе выдзелена 2 Гб памяці.</para>
+      <para>Для зьмяненьня даступнага аб’ёму памяці сьлед адрэдагаваць файл <emphasis>OmegaT.app/Contents/Info.plist</emphasis> і раскамэнтаваць радок <literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt; --&gt;</literal> (г. зн. выдаліць <literal>&lt;!--</literal> і <literal>--&gt;</literal>). Пасьля гэтага пры запуску OmegaT будзе выдзяляцца 6 Гб памяць. Можна зьмяніць <literal>6g</literal> на патрэбны аб’ём.</para>
 
-      <para>Для запуску некалькіх асобнікаў <emphasis><application>OmegaT</application>.app</emphasis> клікнеце двойчы па файле <emphasis>OmegaT.sh</emphasis> у <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+      <para>Для запуску некалькіх асобнікаў <filename>OmegaT.app</filename> клікнеце двойчы па файле <emphasis>OmegaT</emphasis> у <filename>OmegaT.app/Contents/MacOS/</filename>.</para>
 
-      <para>Ужывайце файл <emphasis><application>OmegaT</application>.jar</emphasis> у <emphasis><application>OmegaT</application>.app/Contents/MacOS/Java/</emphasis> для запуску <application>OmegaT</application> з каманднага радка. Азнаёмцеся з дадатковымі зьвесткамі ў падразьдзеле “Запуск з каманднага радка” ніжэй.</para>
+      <para>Ужывайце файл <filename>OmegaT.jar</filename> у <filename>OmegaT.app/Contents/MacOS/Java/</filename> для запуску <application>OmegaT</application> з каманднага радка. Азнаёмцеся з дадатковымі зьвесткамі ў падразьдзеле “Запуск з каманднага радка” ніжэй.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
-      <title>Дадатковыя магчымасьці ў Mac OS X</title>
+      <title>Дадатковыя магчымасьці macOS</title>
 
-      <para>Да <emphasis><application>OmegaT</application>.app</emphasis> можна мець доступ з Mac OS X Services. Тады можна вылучыць слова дзесьці ў <application>OmegaT</application> і праз Services пашукаць гэтае слова, напрыклад, у Spotlight або Google. Можна таксама скарыстацца з AppleScript або Automator для стварэньня сэрвісаў або сцэнароў у мэтах аўтаматызацыі частых задачаў.</para>
+      <para>Для <filename>OmegaT.app</filename> можна скарыстацца з сэрвісаў macOS. Можна вылучыць слова дзесьці ў <application>OmegaT</application> і праз Services пашукаць гэтае слова, напрыклад, у Spotlight або Google. Можна таксама скарыстацца з AppleScript або Automator для стварэньня сэрвісаў або сцэнароў у мэтах аўтаматызацыі частых задачаў.</para>
     </section>
   </section>
 
   <section id="other.systems">
-    <title>Іншыя сыстэмы<indexterm class="singular">
-        <primary>Усталёўка OmegaT</primary> <secondary>Іншыя сыстэмы</secondary>
-      </indexterm></title>
+    <title>Іншыя сыстэмы</title>
 
-    <para>Гэтая інфармацыя датычная такіх сыстэмаў як Solaris SPARC/x86/x64, Linux x64/PowerPC, Windows x64</para>
+    <para>Гэтая інфармацыя датычная такіх сыстэмаў як Solaris SPARC/x86/x64, Linux x64/PowerPC, Windows x64.</para>
 
     <section>
       <title id="which.package.to.download.other">Спампаваньне патрэбнага пакета</title>
 
       <para><application>OmegaT</application> даступныя ў камплекце з Oracle Java JRE для Linux (Intel x86) і плятформаў Windows. Карыстальнікі іншых плятформаў (Linux, PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 і інш.) мусяць мець сумяшчальны асяродак выкананьня Java JRE у сваёй сыстэме, каб карыстацца <application>OmegaT</application>.</para>
 
-      <para>Ці ёсьць у вас рэалізацыя Java, сумяшчальная з Java 1.6 JRE ад Oracle?</para>
+      <para>Ці ёсьць у вас рэалізацыя Java, сумяшчальная з Java 8 JRE ад Oracle?</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Так:</emphasis> спампаваць <emphasis>OmegaT_3.n.n_Windows_without_JRE.</emphasis>zip. Гэты пакет можа быць выкарыстаны на любой плятформе, дзе ўсталяваны асяродак выкананьня, сумяшчальны з Java 1.6 JRE.</para>
+          <para><emphasis role="bold">Так: </emphasis>спампаваць <filename>OmegaT_4.n.n_Windows_without_JRE.exe</filename>. Гэты пакет можа быць выкарыстаны на любой плятформе, дзе ўсталяваны асяродак выкананьня, сумяшчальны з Java 1.6 JRE.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Ня ведаю:</emphasis> адчынеце тэрмінал і ўвядзеце “java -version”. Калі ў адказ атрымаеце нешта кшталту “каманда ня знойдзена” або аналягічнае паведамленьне, цалкам верагодна, што ў вашай сыстэме няма ўсталяванага асяродка выкананьня Java.</para>
+          <para><emphasis role="bold">Ня ведаю:</emphasis> адчынеце тэрмінал і ўвядзеце “<command>java -version</command>”. Калі ў адказ атрымаеце нешта кшталту “каманда ня знойдзена” або аналягічнае паведамленьне, цалкам верагодна, што ў вашай сыстэме няма ўсталяванага асяродка выкананьня Java.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Не:</emphasis> атрымайце Java JRE для сыстэмы (гл. ніжэй) і спампуйце <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Не:</emphasis> атрымайце Java JRE для сыстэмы (гл. ніжэй) і спампуйце <filename>OmegaT_4.n.n_Without_JRE.zip</filename>.</para>
 
-          <para>Oracle прадстаўляе асяродкі выкананьня Java для Solaris SPARC/x86 (Java 1.6) і для Linux x64, Solaris x64, Windows x64 (Java 1.6) з <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink></para>
+          <para>Oracle прадстаўляе асяродкі выкананьня Java для Solaris SPARC/x86 (Java 8) і для Linux x64, Solaris x64, Windows x64 (Java 8) з <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html"/>.</para>
 
-          <para>IBM прадстаўляе JRE для Linux PowerPC з <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html">http://www.ibm.com/developerworks/java/jdk/linux/download.htm</ulink></para>
+          <para>IBM прадстаўляе JRE для Linux PowerPC з <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html"/>.</para>
 
-          <para>Выконвайце інструкцыі па ўсталёўцы патрэбнага пакета.</para>
+          <para>Выконвайце інструкцыі па ўсталяваньні патрэбнага пакета.</para>
         </listitem>
       </itemizedlist>
     </section>
 
     <section id="OmegaT.installation.other">
-      <title><application>Усталёўка OmegaT</application><indexterm class="singular">
-          <primary>Усталёўка OmegaT</primary> <secondary>Іншыя сыстэмы</secondary>
-        </indexterm></title>
+      <title>Усталяваньне <application>OmegaT</application></title>
 
-      <para>Каб усталяваць <application>OmegaT</application>, проста распакуйце файл <emphasis role="bold"> OmegaT_3.n.n_Without_JRE.zip </emphasis>. У выніку будзе створаны каталёг <emphasis>./OmegaT_3.n.n_Without_JRE/</emphasis> у працоўным каталёгу з усімі файламі, патрэбнымі для працы <application>OmegaT</application>.</para>
+      <para>Каб усталяваць <application>OmegaT</application>, проста распакуйце файл <filename>OmegaT_4.n.n_Without_JRE.zip</filename>. У выніку будзе створаны каталёг <filename>./OmegaT_4.n.n_Without_JRE/</filename> у працоўным каталёгу з усімі файламі, патрэбнымі для працы <application>OmegaT</application>.</para>
     </section>
 
     <section id="installing.convenient.shortcuts">
-      <title>Усталёўка зручных цэтлікаў</title>
+      <title>Усталяваньне зручных цэтлікаў</title>
 
       <para>Кіруйцеся інструкцыямі да вашай сыстэмы, каб усталяваць цэтлікі <application>OmegaT</application> у зручных месцах.</para>
     </section>
 
     <section id="running.OmegaT.other">
-      <title>Запуск <application>OmegaT<indexterm class="singular">
-          <primary>Запуск OmegaT</primary> <secondary> Іншыя сыстэмы</secondary>
-        </indexterm></application></title>
+      <title>Запуск <application>OmegaT</application></title>
 
-      <para>Пасьля ўсталяваньня <application>OmegaT</application> праграму можна запускаць з каманднага радка з дапамогай сцэнара, які ўключае парамэтры запуску, або клікаючы непасрэдна па файле <emphasis><application>OmegaT</application>.jar</emphasis>. Мэтады адрозьніваюцца ў залежнасьці ад дыстрыбутыва. Пераканайцеся ў правільнасьці налады <emphasis>PATH </emphasis> і ў тым, што файлы .<emphasis>jar</emphasis> належным чынам асацыяваныя з запускальнікам Java. Азнаёмцеся з дадатковымі зьвесткамі ў падразьдзеле “Запуск з каманднага радка” ніжэй.</para>
+      <para>Пасьля ўсталяваньня <application>OmegaT</application> праграму можна запускаць з каманднага радка з дапамогай сцэнара, які ўключае парамэтры запуску, або клікаючы непасрэдна па файле <filename>OmegaT.jar</filename>. Мэтады адрозьніваюцца ў залежнасьці ад дыстрыбутыва. Пераканайцеся ў правільнасьці парамэтра <varname>PATH</varname> і ў тым, што файлы <filename>.jar</filename> належным чынам асацыяваныя з запускальнікам Java. Азнаёмцеся з дадатковымі зьвесткамі ў падразьдзеле “Запуск з каманднага радка” ніжэй.</para>
     </section>
   </section>
 
   <section id="drag.and.drop">
-    <title>Перацягваньне<indexterm class="singular">
-        <primary>Запуск OmegaT</primary> <secondary>Перацягваньне</secondary>
-      </indexterm></title>
+    <title>Перацягваньне</title>
 
     <para>У большасьці сыстэмаў адчыніць праект можна, перацягнуўшы файл <filename>omegat.project</filename> на абразок OmegaT на працоўным стале. Можа таксама быць магчымым адчыніць праект OmegaT, двойчы клікнуўшы па файле <filename>omegat.project</filename>.</para>
   </section>
 
   <section id="using.Java.Web.Start">
-    <title>Выкарыстаньне Java Web Start<indexterm class="singular">
-        <primary>Запуск OmegaT</primary> <secondary>Выкарыстаньне Java Web Start</secondary>
-      </indexterm></title>
+    <title>Выкарыстаньне Java Web Start</title>
 
-    <para>Тэхналёгія Java Web Start (частка Java пачынаючы ад вэрсіі 1.6) можа ўжывацца для разгортваньня аўтаномных праграмаў Java праз адзін клік па сетцы. Java Web Start забясьпечвае разгортваньне апошняй вэрсіі праграмы і выкарыстаньне належнай вэрсіі асяродка выкананьня Java (JRE). Для першага запуску OmegaT праз Java Web Start увядзеце ў браўзэры наступны URL:</para>
+    <para>Тэхналёгія Java Web Start (частка Java ад вэрсіі 8) можа ўжывацца для разгортваньня аўтаномных праграмаў Java праз адзін клік па сетцы. Java Web Start забясьпечвае разгортваньне апошняй вэрсіі праграмы і выкарыстаньне належнай вэрсіі асяродка выкананьня Java (JRE). Для першага запуску OmegaT праз Java Web Start увядзеце ў браўзэры наступны URL:</para>
 
-    <para><emphasis>https://omegat.sourceforge.io/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+    <para><ulink url="https://omegat.sourceforge.io/webstart/OmegaT.jnlp"/></para>
 
-    <para>Спампуйце файл <emphasis><application>OmegaT</application>.jnlp</emphasis>, затым клікнеце па ім. Падчас усталёўкі, у залежнасьці ад апэрацыйнай сыстэмы, вы можаце атрымаць некалькі папярэджаньняў бясьпекі. Дазволы, якія вы даяце гэтай вэрсіі (што можа быць пазначанае як “неабмежаваны доступ да кампутара”), зьяўляюцца такімі ж самымі, што і дазволы, якія даюцца лякальнай вэрсіі, усталяванай паводле працэдуры, апісанай далей, г. зн., яны дазваляюць доступ да жорсткага дыска кампутара. Калі зноў клікнуць па <emphasis><application>OmegaT.jnlp</application></emphasis>, будуць правераныя абнаўленьні, пры наяўнасьці яны будуць усталяваныя, а пасьля гэтага запусьціцца <application>OmegaT</application>. Пасьля першапачатковай усталёўкі можна, вядома, выкарыстоўваць <emphasis><application>OmegaT</application>.jnlp</emphasis> таксама і без злучэньня з Інтэрнэтам.</para>
+    <para>Спампуйце файл <filename>OmegaT.jnlp</filename>, затым клікнеце па ім. Падчас усталёўкі, у залежнасьці ад апэрацыйнай сыстэмы, вы можаце атрымаць некалькі папярэджаньняў бясьпекі. Дазволы, якія вы даяце гэтай вэрсіі (што можа быць пазначанае як “неабмежаваны доступ да кампутара”), зьяўляюцца такімі ж самымі, што і дазволы, якія даюцца лякальнай вэрсіі, усталяванай паводле працэдуры, апісанай далей, г. зн., яны дазваляюць доступ да жорсткага дыска кампутара. Калі зноў націснуць па <filename>OmegaT.jnlp</filename>, будуць правераныя абнаўленьні OmegaT, пры наяўнасьці яны будуць усталяваныя, а пасьля гэтага запусьціцца <application>OmegaT</application>. Пасьля першапачатковага ўсталяваньня можна, вядома, выкарыстоўваць <filename>OmegaT.jnlp</filename> таксама і без злучэньня з Інтэрнэтам.</para>
 
     <para><emphasis role="bold">Прыватнасьць</emphasis>: <application>OmegaT</application> Java Web Start не захоўвае якую-небудзь інфармацыю па-за межамі кампутара, на якім праграма запускаецца. Праграма працуе толькі на вашым кампутары. Вашыя дакумэнты і файлы памяць перакладаў застаюцца на вашым кампутары, а <application>праект OmegaT</application> ня будзе мець доступ да вашай працы або інфармацыі.</para>
 
@@ -331,57 +301,50 @@
   </section>
 
   <section>
-    <title>Запуск OmegaT з каманднага радка<indexterm class="singular">
-        <primary>Запуск OmegaT</primary> <secondary>Запуск з каманднага радка</secondary>
-      </indexterm></title>
+    <title>Запуск OmegaT з каманднага радка</title>
 
     <para>Запуск <application>OmegaT</application> з каманднага радка звычайна не патрабуецца. Аднак праз запуск з каманднага радка карыстальнік мае магчымасьць кантраляваць і зьмяняць паводзіны праграмы. Запускаць <application>OmegaT</application> з каманднага радка можна праз два шляхі.</para>
 
     <section id="method1.opening.commandline.window">
       <title>Адчыніць акно каманднага радка</title>
 
-      <para>Акно каманднага радка таксама называецца акном тэрмінала. У Windows гэта завецца акном MS-DOS і даступнае праз мэню “Пуск”, у праграмах, праз элемэнт “MS-DOS”. У Mac OS X эквівалентам зьяўляецца праграма Terminal, якая знаходзіцца ў Applications → Utilities.</para>
+      <para>Акно каманднага радка таксама называецца акном тэрмінала. У Windows гэта завецца акном MS-DOS і даступнае праз мэню “Пуск”, у праграмах, праз элемэнт “MS-DOS”. У Mac OS X эквівалентам зьяўляецца праграма Terminal, якая знаходзіцца ў <filename>Applications / Utilities</filename>.</para>
 
       <para>Каб запусьціць <application>OmegaT</application>, звычайна дастаткова ўвесьці дзьве каманды: Першая:</para>
 
-      <para><emphasis> <literal>cd {каталёг}</literal> </emphasis></para>
+      <programlisting>cd <parameter>каталёг</parameter></programlisting>
 
-      <para>дзе <emphasis> {каталёг}</emphasis> — назва каталёга, з поўным шляхам да яго, у які знаходзяцца праграма <application>OmegaT</application> — канкрэтна файл <emphasis><application>OmegaT</application>.jar</emphasis>. На практыцы, гэтая каманда будзе, такім чынам, будзе прыкладна такой:</para>
+      <para>дзе <parameter>{каталёг}</parameter> — назва каталёга, з поўным шляхам да яго, у які знаходзяцца праграма <application>OmegaT</application> — канкрэтна файл <filename>OmegaT.jar</filename>. На практыцы, гэтая каманда будзе, такім чынам, будзе прыкладна такой:</para>
 
       <para>У Windows</para>
 
-      <para><emphasis> <literal>cd C:\Program
-      Files\<application>OmegaT</application></literal> </emphasis></para>
+      <programlisting>cd C:\Program Files\OmegaT</programlisting>
 
-      <para>У Mac OS X</para>
+      <para>У macOS</para>
 
-      <para><literal> <literal>cd &lt;месцазнаходжаньне <application>OmegaT</application>.app&gt;/<application>OmegaT</application>.app/Contents/Resources/Java/</literal>
-      </literal></para>
+      <programlisting>cd <parameter>&lt;месцазнаходжаньне OmegaT.app&gt;</parameter>/OmegaT.app/Contents/Resources/Java/</programlisting>
 
       <para>У Linux</para>
 
-      <para><literal>cd /usr/local/omegat</literal></para>
+      <programlisting>cd /usr/local/omegat</programlisting>
 
       <para>Гэтая каманда зьмяняе бягучы каталёг на каталёг, які зьмяшчае выканальны файл <application>OmegaT</application>. Другая каманда — тая, што ўласна запускае <application>OmegaT</application>. Вось ейны найпрасьцейшы варыянт:</para>
 
-      <para><literal>java -jar
-      <application>OmegaT</application>.jar</literal></para>
+      <programlisting>java -jar OmegaT.jar</programlisting>
 
-      <para>Зважайце на рэгістар літараў — за выключэньнем Windows праграма не запусьціцца, калі ўвесьці <emphasis>omegat</emphasis> замест <emphasis>OmegaT </emphasis>!</para>
+      <para>Зважайце на рэгістар літараў — за выключэньнем Windows праграма не запусьціцца, калі ўвесьці <literal>omegat</literal> замест <literal>OmegaT</literal>!</para>
 
       <para>Гэты мэтад асабліва карысны для выяўленыя прычын праблемаў: калі ўзьнікае памылка падчас выкарыстаньня праграмы, паведамленьне пра памылку ў акне тэрмінала можа ўтрымліваць карысную інфармацыю пра прычыну памылкі.</para>
 
-      <para>Апісаны спосаб не асабліва практычны для рэгулярнага запуску праграмы. З гэтай прычыны дзьве каманды, апісаныя вышэй, аб’яднаныя ў адным файле (“сцэнар” або, у Windows, “пакетны файл .bat”).</para>
+      <para>Апісаны спосаб не асабліва практычны для рэгулярнага запуску праграмы. З гэтай прычыны дзьве каманды, апісаныя вышэй, аб’яднаныя ў адным файле (“сцэнар” або, у Windows, “пакетны файл <filename>.bat</filename>”).</para>
 
       <para>Пры запуску гэтага файла каманды ўнутры яго выконваюцца аўтаматычна. Такім чынам, каб унесьці зьмены ў каманду запуску, дастаткова зьмяніць файл.</para>
     </section>
 
     <section id="launch.command.arguments">
-      <title>Аргумэнты каманды запуску<indexterm class="singular">
-          <primary>Запуск OmegaT</primary> <secondary>Аргумэнты сцэнара запуску</secondary>
-        </indexterm></title>
+      <title>Аргумэнты каманды запуску</title>
 
-      <para>Асноўная каманда ўжо згадвалася вышэй. Магчымыя зьмены ў гэтай камандзе ўключаць даданьне “аргумэнтаў” да яе. Аргумэнты дадаюцца пасьля пачатковага <emphasis>“java”</emphasis> і перад <emphasis>“-jar <application>OmegaT</application>.jar”</emphasis>. Заўважце, што ў Windows парамэтры запуску можна зьмяніць шляхам рэдагаваньня файла <filename>OmegaT.l4J.ini</filename>. На іншых плятформах для гэтага можна зьмяніць сцэнар запуску (напрыклад, <filename>Configuration.properties</filename> у Mac, <filename>OmegaT</filename> у Linux).</para>
+      <para>Асноўная каманда ўжо згадвалася вышэй. Магчымыя зьмены ў гэтай камандзе ўключаць даданьне “аргумэнтаў” да яе. Аргумэнты дадаюцца пасьля пачатковага “<command>java</command>” і перад “<literal>-jar OmegaT.jar</literal>”. Заўважце, што ў Windows парамэтры запуску можна зьмяніць шляхам рэдагаваньня файла <filename>OmegaT.l4J.ini</filename>. На іншых плятформах для гэтага можна зьмяніць сцэнар запуску (напрыклад, <filename>Configuration.properties</filename> у Mac, <filename>OmegaT</filename> у Linux).</para>
 
       <para>Ніжэй паданы пералік магчымых аргумэнтаў. Дасьведчаныя карыстальнікі могуць атрымаць больш зьвестак аб аргумэнтах, увёўшы <emphasis>man java</emphasis> у вакне тэрмінала.</para>
 
@@ -389,14 +352,11 @@
         <listitem>
           <para><emphasis role="bold">Мова інтэрфэйса карыстальніка</emphasis></para>
 
-          <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
-              <primary>Запуск OmegaT</primary> <secondary>Аргумэнты сцэнара запуску</secondary> <tertiary>Мова інтэрфэйса карыстальніка OmegaT</tertiary>
-            </indexterm> Звычайна, г. зн. пры запуску <application>OmegaT</application> без аргумэнтаў, праграма сьпярша вызначае мову апэрацыйнай сыстэмы карыстальніка. Калі ёсьць пераклад на мову інтэрфэйса карыстальніка, <application>OmegaT</application> ужывае яе. Г. зн., калі апэрацыйная сыстэма на расейскай і <application>OmegaT</application> лякалізаваная на расейскую, <application>OmegaT</application> будзе паказвацца на расейскай (інтэрфэйс, мэню і да г. п.). Калі лякалізацыі на мову сыстэмы карыстальніка няма, <application>OmegaT</application> паказваецца на англійскай. Гэта — стандартна.</para>
+          <para><emphasis role="bold"><literal>-Duser.language=<parameter>XX</parameter></literal></emphasis> Звычайна, г. зн. пры запуску <application>OmegaT</application> без аргумэнтаў, праграма сьпярша вызначае мову апэрацыйнай сыстэмы карыстальніка. Калі ёсьць пераклад на мову інтэрфэйса карыстальніка, <application>OmegaT</application> ужывае яе. Г. зн., калі апэрацыйная сыстэма на расейскай і <application>OmegaT</application> лякалізаваная на расейскую, <application>OmegaT</application> будзе паказвацца на расейскай (інтэрфэйс, мэню і да г. п.). Калі лякалізацыі на мову сыстэмы карыстальніка няма, <application>OmegaT</application> паказваецца на англійскай. Гэта — стандартна.</para>
 
-          <para>Ужываньне аргумэнта <emphasis>“-Duser.language=XX”</emphasis> дазваляе задаваць пэўную мову для <application>OmegaT</application>, а не аўтаматычна выбіраць мову апэрацыйнай сыстэмы карыстальніка. “XX” у каманьдзе — гэта двузначны код жаданай мовы. Для запуску <application>OmegaT</application> з францускім інтэрфэйсам (напрыклад, на расейскай апэрацыйнай сыстэмы) каманда павінна быць наступнай:</para>
+          <para>Ужываньне аргумэнта “<literal>-Duser.language=<parameter>XX</parameter></literal>” дазваляе задаваць пэўную мову для <application>OmegaT</application>, а не аўтаматычна выбіраць мову апэрацыйнай сыстэмы карыстальніка. “<parameter>XX</parameter>” у каманьдзе — гэта двузначны код жаданай мовы. Для запуску <application>OmegaT</application> з францускім інтэрфэйсам (напрыклад, на расейскай апэрацыйнай сыстэмы) каманда павінна быць наступнай:</para>
 
-          <para><literal>java -Duser.language=fr -jar
-          <application>OmegaT</application>.jar</literal></para>
+          <programlisting>java -Duser.language=fr -jar OmegaT.jar</programlisting>
         </listitem>
       </itemizedlist>
 
@@ -404,9 +364,7 @@
         <listitem>
           <para><emphasis role="bold">Краіна карыстальніка</emphasis></para>
 
-          <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm class="singular">
-              <primary>Запуск OmegaT</primary> <secondary>Аргумэнты сцэнара запуску</secondary> <tertiary>Краіна карыстальніка</tertiary>
-            </indexterm> Разам з мовай можна задаць і пэўную краіну, напрыклад CN (КНР) або TW (Тайвань) для кітайскай. Для паказу дапаможніка для хуткага старту на патрэбным варыяньце мовы павінны быць пазначаныя і мова, і краіна. Гэта неабходна нават пры наяўнасьці толькі адной камбінацыі, напрыклад, pt_BR у выпадку партугальскай (Бразылія).</para>
+          <para><emphasis role="bold">-Duser.country=<parameter>XX</parameter></emphasis> Разам з мовай можна задаць і пэўную краіну, напрыклад <literal>CN</literal> (КНР) або <literal>TW</literal> (Тайвань) для кітайскай. Для паказу дапаможніка для хуткага старту на патрэбным варыяньце мовы павінны быць пазначаныя і мова, і краіна. Гэта неабходна нават пры наяўнасьці толькі адной камбінацыі, напрыклад, <literal>pt_BR</literal> у выпадку партугальскай (Бразылія).</para>
         </listitem>
       </itemizedlist>
 
@@ -414,74 +372,55 @@
         <listitem>
           <para><emphasis role="bold">Выдзяленьне памяці</emphasis></para>
 
-          <para><emphasis role="bold">-XmxZZM </emphasis><indexterm class="singular">
-              <primary>Запуск OmegaT</primary> <secondary>Аргумэнты сцэнара запуску</secondary> <tertiary>Выдзяленьне памяці</tertiary>
-            </indexterm>Гэтая каманда выдзяляе больш памяці для <application>OmegaT</application>. Па змаўчаньні выдзяляецца 512 Мб, таму няма сэнсу задаваць менш гэтага ліку. “ZZ” — гэта аб’ём выдзеленай памяці ў мэгабайтах. Каманда для запуску <application>OmegaT</application> з выдзяленьнем 1024 Мб (1 гігабайт) памяці выглядае наступным чынам:</para>
+          <para><emphasis role="bold"><literal>-Xmx<parameter>??M</parameter></literal></emphasis> Гэтая каманда выдзяляе больш памяці для <application>OmegaT</application>. Па змаўчаньні выдзяляецца 1024 Мб, таму няма сэнсу задаваць менш гэтага ліку. “<parameter>??</parameter>” — аб’ём выдзеленай памяці ў мэгабайтах. Каманда для запуску <application>OmegaT</application> з выдзяленьнем 2024 Мб (2 гігабайтаў) памяці выглядае наступным чынам:</para>
 
-          <para><literal>java -Xmx1024M -jar
-          <application>OmegaT</application>.jar</literal></para>
+          <programlisting>java -Xmx2048M -jar OmegaT.jar</programlisting>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">IP-адрас проксі-сэрвэра</emphasis></para>
 
-          <para><emphasis role="bold"><emphasis role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm class="singular">
-              <primary>Запуск OmegaT</primary> <secondary>Аргумэнты сцэнара запуску</secondary> <tertiary>IP-адрас проксі-сэрвэра</tertiary>
-            </indexterm></emphasis> IP-адрас проксі-сэрвэра ў выпадку яго выкарыстаньня ў сыстэме.</para>
+          <para><emphasis role="bold"><literal>-Dhttp.proxyHost=<parameter>nnn.nnn.nnn.nnn</parameter></literal></emphasis> IP-адрас проксі-сэрвэра ў выпадку яго выкарыстаньня ў сыстэме.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">Нумар порта проксі-сэрвэра</emphasis></para>
 
-          <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis> <indexterm class="singular">
-              <primary>Запуск OmegaT</primary> <secondary>Аргумэнты сцэнара запуску</secondary> <tertiary>Нумар порта проксі-сэрвэра</tertiary>
-            </indexterm> Нумар порта, які ўжываецца сыстэмай для доступу да проксі-сэрвэра.</para>
+          <para><emphasis role="bold"><literal>-Dhttp.proxyPort=<parameter>NNNN</parameter></literal></emphasis> Нумар порта, які ўжываецца сыстэмай для доступу да проксі-сэрвэра.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Google Translate V2 </emphasis></para>
+          <para><emphasis role="bold">Google Translate V2</emphasis></para>
 
-          <para><emphasis role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </emphasis><emphasis role="bold"><indexterm class="singular">
-              <primary>Запуск OmegaT</primary> <secondary>Аргумэнты сцэнара запуску</secondary> <tertiary>Google Translate V2</tertiary>
-            </indexterm></emphasis> Калі вы маеце ўліковы для карыстаньня сэрвісамі Google Translate, тут уводзіцца ключ Google API. Даўжыня ключа павінна быць 38 сымбаляў.</para>
+          <para><emphasis role="bold"><literal>-Dgoogle.api.key=<parameter>A123456789B123456789C123456789D12345678</parameter></literal></emphasis> Калі вы маеце ўліковы для карыстаньня сэрвісамі Google Translate, тут уводзіцца ключ Google API. Даўжыня ключа павінна быць 38 сымбаляў.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Microsoft
-          Translator</emphasis><indexterm class="singular">
-              <primary>Запуск OmegaT</primary> <secondary>Аргумэнты сцэнара запуску</secondary> <tertiary>Microsoft Translator</tertiary>
-            </indexterm></para>
+          <para><emphasis role="bold">Microsoft Translator</emphasis></para>
 
           <para>Трэба мець бясплатны ўліковы запіс Microsoft. Спатрэбіцца ўвайсьці ў сыстэму на <ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink> і карыстацца сэрвісам перакладу. Заўважце, што за аб’ём да 2 млн. сымбаляў за месяц плата не спаганяецца. Патрабуюцца два элемэнты, якія можна знайсьці на сваёй <ulink url="https://datamarket.azure.com/account">старонцы профілю</ulink>, а менавіта першасны ключ уліковага запісу (Primary account key) і ідэнтыфікатар кліента (Customer-ID):</para>
 
-          <para><emphasis role="bold">-Dmicrosoft.api.client_id=</emphasis><emphasis role="bold">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</emphasis></para>
+          <programlisting>-Dmicrosoft.api.client_id=<parameter>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</parameter></programlisting>
 
-          <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
+          <programlisting>-Dmicrosoft.api.client_secret=<parameter>XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</parameter></programlisting>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Yandex Translate</emphasis><indexterm class="singular">
-              <primary>Запуск OmegaT</primary> <secondary>Аргумэнты сцэнара запуску</secondary> <tertiary>Yandex Translate</tertiary>
-            </indexterm></para>
+          <para><emphasis role="bold">Yandex Translate</emphasis></para>
 
           <para>Трэба мець бясплатны ўліковы запіс на Яндэксе. Ён спатрэбіцца, каб атрымаць і ўжываць ключ да Yandex Translate API. Атрымаць ключ API можна праз <ulink url="http://api.yandex.com/key/form.xml?service=trnsl">форму запыту ключа API</ulink>, а пабачыць — на <ulink url="http://api.yandex.com/key/keyslist.xml">старонцы ключоў</ulink>.</para>
 
-          <para><emphasis role="bold">-Dyandex.api.key=</emphasis><emphasis role="bold">trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</emphasis></para>
+          <programlisting>-Dyandex.api.key=<parameter>trnsl.1.1.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</parameter></programlisting>
         </listitem>
       </itemizedlist>
 
       <para>Аргумэнтаў можа быць некалькі: для запуску <application>OmegaT</application> з парамэтрамі, пазначанымі ва ўсіх прыкладах, згаданых вышэй, каманда будзе наступнай:</para>
 
-      <para><literal>java -Dswing.aatext=true -Duser.language=pt
-      -Duser.country=BR -Xmx1024M <application>-Dhttp.proxyHost=192.168.1.1
-      -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
-      -OmegaT</application>.jar</literal></para>
+      <programlisting>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx2048M -Dhttp.proxyHost=192.168.1.1 -Dhttp.proxyport=3128 -jar -OmegaT.jar</programlisting>
     </section>
 
     <section id="omegat.command.arguments">
-      <title>OmegaT у рэжыме каманднага радка<indexterm class="singular">
-          <primary>Запуск OmegaT</primary> <secondary>Рэжым каманднага радка</secondary>
-        </indexterm></title>
+      <title>OmegaT у рэжыме каманднага радка</title>
 
       <para>Кансольны рэжым — гэта магчымасьць ужываць OmegaT як інструмэнт перакладу ў розных сцэнарох. У кансольным рэжыме графічны інтэрфэйс карыстальніка не загружаецца (і праца ажыцьцяўляецца толькі ў кансолі), а паданы праект апрацоўваецца ў адпаведнасьці з камандай.</para>
 
@@ -498,7 +437,7 @@
           </listitem>
 
           <listitem>
-            <para>Калі запусьціць <application>OmegaT</application> звычайным шляхам немагчыма (няма графічнага асяродзьдзя): скапіяваць файлы наладаў ад іншай усталёўкі <application>OmegaT</application> на іншым кампутары ў зададзены каталёг. Месцазнаходжаньне ня важнае, бо яго можна дадаць да каманды ў кансолі. Адпаведныя файлы — гэта <literal>filters.conf</literal> і <literal>segmentation.conf</literal>, якія знаходзяцца ў хатнім каталёгу карыстальніка (напрыклад, <literal>C:\Documents and Settings\%Карыстальнік%\<application>OmegaT</application></literal> у Windows, <literal>%карыстальнік%/.omegat/</literal> у Linux)</para>
+            <para>Калі запусьціць <application>OmegaT</application> звычайным шляхам немагчыма (няма графічнага асяродзьдзя): скапіяваць файлы наладаў ад іншай усталёўкі <application>OmegaT</application> на іншым кампутары ў вызначаны каталёг. Месцазнаходжаньне ня важнае, бо яго можна дадаць да каманды ў кансолі. Адпаведныя файлы — гэта <filename>filters.conf</filename> і <filename>segmentation.conf</filename>, якія знаходзяцца ў хатнім каталёгу карыстальніка (напрыклад, <filename>C:\Documents and Settings\<parameter>Карыстальнік</parameter>\OmegaT</filename> у Windows, <filename>~/.omegat/</filename> у Linux)</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -506,48 +445,43 @@
       <section id="starting.in.console.mode">
         <title>Запуск у кансольным рэжыме</title>
 
-        <para>Для запуску <application>OmegaT</application> у кансольным рэжыме трэба камандай перадаць пэўныя дадатковыя парамэтры. Найважнейшыя зь іх — <literal>&lt;каталёг-праекта&gt;</literal> і, калі неабходна, <literal> --config-dir=&lt;каталёг-канфігурацыі&gt;. </literal>Прыклад:</para>
+        <para>Для запуску <application>OmegaT</application> у кансольным рэжыме трэба камандай перадаць пэўныя дадатковыя парамэтры. Найважнейшыя зь іх — <literal>/шлях/да/каталёга/праекта</literal> і, калі неабходна, <literal>--config-dir=<parameter>/шлях/да/каталёга/файлаў/канфігурацыі/</parameter></literal>. Прыклад:</para>
 
-        <para><literal>java -jar <application>OmegaT</application>.jar /шлях/да/праекта \</literal></para>
+        <programlisting>java -jar OmegaT.jar <parameter>/шлях/да/праекта</parameter> \
+    --config-dir=<parameter>/шлях/да/канфігурацыйных-файлаў/</parameter> \
+    --config-file=<parameter>/шлях/да/канфігурацыйнага-файла/</parameter> \
+    --mode=<parameter>console-translate|console-createpseudotranslatetmx|console-align</parameter> \
+    --source-pattern=<parameter>regexp</parameter></programlisting>
 
-        <para><literal>--config-dir=/шлях/да/канфігурацыйных-файлаў/ \</literal></para>
-
-        <para><literal>--config-file=/шлях/да/канфігурацыйнага-файла/ \</literal></para>
-
-        <para><literal>
-        --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
-
-        <para><literal> --source-pattern={regexp}</literal></para>
-
-        <para>Заўважце, што перад усімі парамэтрамі ставіцца падвойны дэфіс --.</para>
+        <para>Заўважце, што перад усімі парамэтрамі ставіцца падвойны дэфіс <literal>--</literal>.</para>
 
         <para><emphasis role="bold">Тлумачэньне:</emphasis></para>
 
         <itemizedlist>
           <listitem>
-            <para><literal>&lt;каталёг-праекта&gt;</literal> паказвае <application>OmegaT</application>, дзе знаходзіцца праект перакладу. Калі задаць, <application>OmegaT</application> запусьціцца ў кансольным рэжыме і зробіць пераклад пазначанага праекта.</para>
+            <para><literal>/шлях/да/каталёга/праекта</literal> паказвае <application>OmegaT</application>, дзе знаходзіцца праект перакладу. Калі задаць, <application>OmegaT</application> запусьціцца ў кансольным рэжыме і зробіць пераклад пазначанага праекта.</para>
           </listitem>
         </itemizedlist>
 
         <itemizedlist>
           <listitem>
-            <para><literal>--config-dir=&lt;канфігурацыйны-каталёг&gt;</literal> паказвае <application>OmegaT</application>, у якім каталёгу захаваныя канфігурацыйныя файлы. Калі гэты парамэтар ня вызначаны, <application>OmegaT</application> зьвяртаецца да значэньняў па змаўчаньні (каталёг <application>OmegaT</application> у каталёгу карыстальніка або, калі недаступны, бягучы працоўны каталёг). Памятайце пра падвойны дэфіс --</para>
+            <para><literal>--config-dir=<parameter>/шлях/да/файлаў-канфігурацыі/</parameter></literal> паказвае <application>OmegaT</application>, у якім каталёгу захаваныя канфігурацыйныя файлы. Калі гэты парамэтар ня вызначаны, <application>OmegaT</application> зьвяртаецца да значэньняў па змаўчаньні (каталёг <application>OmegaT</application> у каталёгу карыстальніка або, калі недаступны, бягучы працоўны каталёг). Памятайце, што трэба ўжываць падвойны злучок <literal>--</literal>.</para>
           </listitem>
 
           <listitem>
-            <para><literal>--config-file=&lt;канфігурацыйны-файл&gt;</literal> паказвае <application>OmegaT</application>, які канфігурацыйны файл трэба ўжываць.</para>
+            <para><literal>--config-dir=<parameter>/шлях/да/файла-канфігурацыі/</parameter></literal> паказвае <application>OmegaT</application>, які канфігурацыйны файл трэба ўжываць.</para>
           </listitem>
         </itemizedlist>
 
         <itemizedlist>
           <listitem>
-            <para><emphasis><literal>--mode</literal>=...-</emphasis> <application>OmegaT</application> запускаецца ў кансольным рэжыме для аўтаматычнага выкананьня адной з наступных задачаў.</para>
+            <para><emphasis><literal>--mode=<parameter>...</parameter></literal></emphasis> <application>OmegaT</application> запускаецца ў кансольным рэжыме для аўтаматычнага выкананьня адной з наступных задачаў.</para>
 
             <itemizedlist>
               <listitem>
                 <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
-                <para>У гэтым рэжыме OmegaT спрабуе зрабіць пераклад файлаў у /source/ з дапамогай даступных файлаў памяці перакладаў. Гэта карысна для запуску OmegaT на сэрвэры з аўтаматычным прадстаўленьнем файлаў TMX.</para>
+                <para>У гэтым рэжыме OmegaT спрабуе зрабіць пераклад файлаў у <filename>/source/</filename> з дапамогай даступных файлаў памяці перакладаў. Гэта карысна для запуску OmegaT на сэрвэры з аўтаматычным прадстаўленьнем файлаў TMX.</para>
               </listitem>
 
               <listitem>
@@ -555,8 +489,8 @@
 
                 <para>У гэтым рэжыме OmegaT стварае файл TMX для ўсяго праекта на базе толькі зыходных файлаў. Можна вызначыць файл TMX, які будзе створаны</para>
 
-                <para><literal>--pseudotranslatetmx=allsegments.tmx
-                --pseudotranslatetype=[equal|empty]</literal></para>
+                <para><literal>--pseudotranslatetmx=<parameter>allsegments.tmx</parameter>
+                --pseudotranslatetype=<parameter>equal|empty</parameter></literal></para>
 
                 <para>Аргумэнт <emphasis>pseudotranslatetype</emphasis> вызначае, ці будуць пераклады ў файле пакінутыя пустымі, або ў іх будзе запісаны зыходны тэкст.</para>
               </listitem>
@@ -564,27 +498,27 @@
               <listitem>
                 <para><literal>--mode=console-align</literal></para>
 
-                <para>У гэтым рэжыме OmegaT зробіць выраўноўваньне файлаў уласьцівасьцяў Java у каталёгу <literal>/source/</literal> праекта са зьмесьцівам вызначанага каталёга. Выніковы файл TMX будзе захаваны ў каталёгу <filename>/omegat/</filename> пад назвай <filename>align.tmx</filename>.</para>
+                <para>У гэтым рэжыме OmegaT зробіць выраўноўваньне файлаў уласьцівасьцяў Java у каталёгу <filename>/source/</filename> праекта са зьмесьцівам вызначанага каталёга. Выніковы файл TMX будзе захаваны ў каталёгу <filename>/omegat/</filename> пад назвай <filename>align.tmx</filename>. Якія канкрэтна файлы будуць узятыя для выраўноўваньня, залежыць ад таго, ці падтрымліваюцца яны файлавым фільтрам. Прыклады падтрыманых фарматаў: моўны файл ILIAS, рэсурсы Java(TM), тэкст тыпу ключ=значэньне, лякалізацыйныя файлы CSV Magento CE, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, субтытры SubRip, рэсурсы Windows</para>
 
                 <para>У гэтым выпадку патрабуецца вызначыць дадатковы парамэтар месцазнаходжаньня даніх перакладаў:</para>
 
-                <para><literal>--alignDir={месцазнаходжаньне файлаў перакладаў}</literal></para>
+                <para><literal>--alignDir=<parameter>&lt;месцазнаходжаньне файлаў перакладаў&gt;</parameter></literal></para>
 
-                <para><filename>alignDir</filename> мусіць утрымліваць пераклад на мову перакладу праекта. Напрыклад, калі праект — EN→FR, alignDir мусіць утрымліваць файл уласьцівасьцяў з канчаткам назвы _fr. Выніковы файл TMX будзе захаваны ў каталёгу <literal>/omegat/</literal> пад назвай <filename>align.tmx</filename>.</para>
+                <para><filename>alignDir</filename> мусіць утрымліваць пераклад на мову перакладу праекта. Напрыклад, калі праект — EN→FR, <filename>alignDir</filename> мусіць утрымліваць файл уласьцівасьцяў з канчаткам назвы <literal>_fr</literal>. Выніковы файл TMX будзе захаваны ў каталёгу <filename>/omegat/</filename> пад назвай <filename>align.tmx</filename>.</para>
               </listitem>
             </itemizedlist>
           </listitem>
 
           <listitem>
-            <para><literal>--source-pattern={regexp} </literal></para>
+            <para><literal>--source-pattern=<parameter>regexp</parameter></literal></para>
 
             <para>Калі ўжываецца рэжым, гэты парамэтар вызначае, якія файлы будуць апрацоўвацца аўтаматычна. Калі парамэтра няма, будуць апрацоўвацца ўсе файлы. Вось тыповы прыклад абмежаваньня выбару:</para>
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+                <para><literal>.*\.html</literal></para>
 
-                <para>Будуць перакладзеныя ўсе файлы HTML — заўважце, што кропку, якая звычайна наяўная ў *.html, трэба экранаваць (\.), як гэта патрабуецца правіламі рэгулярных выразаў</para>
+                <para>Будуць перакладзеныя ўсе файлы HTML — заўважце, што кропку, якая звычайна наяўная ў <literal>*.html</literal>, трэба экранаваць (<literal>\.</literal>), як гэта патрабуецца правіламі рэгулярных выразаў</para>
               </listitem>
 
               <listitem>
@@ -596,39 +530,13 @@
               <listitem>
                 <para><literal>dir-10\\test\.html</literal></para>
 
-                <para>Будзе апрацаваны толькі файл test.html у каталёгу dir-10. Заўважце, што і сымбаль зваротнай косай рысы патрабуе экранаваньня.</para>
+                <para>Будзе апрацаваны толькі файл <filename>test.html</filename> у каталёгу <filename>dir-10</filename>. Заўважце, што і сымбаль зваротнай косай рысы патрабуе экранаваньня.</para>
               </listitem>
             </itemizedlist>
           </listitem>
 
           <listitem>
-            <para><literal>--output-tag-validation-={regexp} </literal></para>
-
-            <para>Калі ўжываецца рэжым, гэты парамэтар вызначае, якія файлы будуць апрацоўвацца аўтаматычна. Калі парамэтра няма, будуць апрацоўвацца ўсе файлы. Вось тыповы прыклад абмежаваньня выбару:</para>
-
-            <itemizedlist>
-              <listitem>
-                <para><emphasis><literal>.*\.html</literal></emphasis></para>
-
-                <para>Будуць перакладзеныя ўсе файлы HTML — заўважце, што кропку, якая звычайна наяўная ў *.html, трэба экранаваць (\.), як гэта патрабуецца правіламі рэгулярных выразаў</para>
-              </listitem>
-
-              <listitem>
-                <para><literal>test\.html</literal></para>
-
-                <para>Будзе перакладзены толькі файл test.html у каранёвым каталёгу з зыходнымі файламі. Файлы з назвай test.html у іншых каталёгах будуць праігнараваныя.</para>
-              </listitem>
-
-              <listitem>
-                <para><literal>dir-10\\test\.html</literal></para>
-
-                <para>Будзе апрацаваны толькі файл test.html у каталёгу dir-10. Заўважце, што і сымбаль зваротнай косай рысы патрабуе экранаваньня.</para>
-              </listitem>
-            </itemizedlist>
-          </listitem>
-
-          <listitem>
-            <para><literal>--tag-validation=[abort|warn]</literal><parameter> назваВыніковагаФайла</parameter></para>
+            <para><literal>--tag-validation=<parameter>abort|warn</parameter></literal> <parameter>назваВыніковагаФайла</parameter></para>
 
             <para>Гэты парамэтар дазваляе праверку тэгаў у пакетным рэжыме. Калі выбраць <literal>abort</literal>, праверка тэгаў спыніцца на першым несапраўдным сэгмэньце. Калі выбраць <literal>warn</literal>, праверка тэгаў пройдзе для ўсіх сэгмэнтаў, а выніковыя папярэджаньні пра сэгмэнты зь несапраўдным тэгамі будуць запісаныя ў пазначаны файл.</para>
           </listitem>
@@ -642,7 +550,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><literal>--disable-project-locking</literal> дазваляе (пад Windows) адчыняць адзін праект у некалькіх асобніках OmegaT. Па змаўчаньні пад Windows файл <literal>omegat.project</literal> блякуецца, і пры спробе адчыніць праект, ужо адчынены ў іншым асобніку OmegaT, выдаецца паведамленьне пра памылку. Гэты парамэтар адключае блякаваньне.</para>
+            <para><literal>--disable-project-locking</literal> дазваляе (пад Windows) адчыняць адзін праект у некалькіх асобніках OmegaT. Па змаўчаньні пад Windows файл <filename>omegat.project</filename> блякуецца, і пры спробе адчыніць праект, ужо адчынены ў іншым асобніку OmegaT, выдаецца паведамленьне пра памылку. Гэты парамэтар адключае блякаваньне.</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -650,30 +558,28 @@
       <section id="console.mode.option.quiet">
         <title>Парамэтар “ціхага” рэжыму</title>
 
-        <para>Дадатковы парамэтар, прызначаны для кансольнага рэжыму: <literal>--quiet.</literal> У “ціхім” рэжыме на экран выводзіцца менш інфармацыі. Паведамленьні, якія звычайна зьяўляюцца на панэлі стану, не паказваюцца.</para>
+        <para>Дадатковы камандны парамэтар адмыслова для кансольнага рэжыму: <literal>--quiet</literal>. У “ціхім” рэжыме на экран выводзіцца меней інфармацыі. Паведамленьні, якія звычайна зьяўляюцца на панэлі стану, не паказваюцца.</para>
 
-        <para>Ужываньне: <literal>java -jar <application>OmegaT</application>.jar /шлях/да/праекта --mode=console-translate --quiet</literal></para>
-      </section>
-
-      <section id="console.mode.option.validatetags">
-        <title>Парамэтар праверкі тэгаў</title>
-
-        <para>Яшчэ адзін дадатковы парамэтар для кансольнага рэжыму: <literal>--tag-validation=[abort|warn].</literal> Калі гэты парамэтар дадазены, перад перакладам/выраўноўваньнем выконваецца праверка тэгаў. Калі значэньне — <literal>“abort”</literal>, то пры наяўнасьці памылак тэгаў яны выводзяцца, а праграма спыняецца. Калі значэньне — <literal>“warn”</literal>, то памылкі выводзяцца, але OmegaT працягвае працу.</para>
-
-        <para>Ужываньне: <literal>java -jar <application>OmegaT</application>.jar /шлях/да/праекта --mode=console-translate --tag-validation=abort</literal></para>
+        <para>Ужываньне: <literal>java -jar OmegaT.jar /шлях/да/праекта --mode=console-translate --quiet</literal></para>
       </section>
     </section>
   </section>
 
   <section id="building.OmegaT.from.source">
-    <title>Зборка <application>OmegaT</application> з зыходных тэкстаў<indexterm class="singular">
-        <primary>Запуск OmegaT</primary> <secondary>Зборка OmegaT з зыходных тэкстаў</secondary>
-      </indexterm></title>
+    <title>Зборка <application>OmegaT</application> з зыходных тэкстаў</title>
 
-    <para>Для зборкі сваёй вэрсіі OmegaT спатрэбіцца праграма ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>). Распакуйце файл <emphasis>OmegaT_3.n.n_Source.zip</emphasis> і ўвайдзеце ў каталёг OmegaT_3.n.n_Source або ў каталёг <emphasis>./omegat/</emphasis> кода, атрыманага з SVN. У каталёгу мусіць быць файл build.xml. Затым, у камандным радку надрукуйце:</para>
+    <para>Зыходныя тэксты для бягучай вэрсіі можна атрымаць з дапамогай Git-кліента з рэпазыторыя <ulink url="https://git.code.sf.net/p/omegat/code"/> або непасрэдна з <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tarball?path=">SourceForge</ulink>.</para>
 
-    <para><literal>$ ant jar release</literal></para>
+    <para>Спампаваўшы код, адкрыйце камандны радок у каталёгу з зыходным кодам і ўвядзеце:</para>
 
-    <para>Пасьля гэтага ў каталёгу ./dist/ створыцца поўны дыстрыбутыў <application>OmegaT</application> з усімі файламі, неабходнымі для працы <application>OmegaT</application>.</para>
+    <programlisting>gradlew assembleDist</programlisting>
+
+    <para>Пасьля гэтага ў каталёгу <filename>./build/distributions</filename> створыцца поўны дыстрыбутыў OmegaT з усімі файламі, неабходнымі для працы <application>OmegaT</application>.</para>
+
+    <para>Праграму таксама можна будзе запусьціць наступнай камандай:</para>
+
+    <programlisting>gradlew run</programlisting>
+
+    <para>Падрабязныя інструкцыі аб зборцы — у файле <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">readme</ulink> docs_devel.</para>
   </section>
 </chapter>

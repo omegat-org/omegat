@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>Ужываньне камандных праектаў</title>
+
+  <para>Камандныя праекты OmegaT спачатку трэба <link linkend="howto.setupteamproject">арганізаваць</link> на сэрвэры.</para>
+
+  <para>Пры першым ужываньні каманднага праекта выконвайце інструкцыі ад кіраўніка праекта.</para>
+
+  <para>Пасьля таго, як праект адчынены, пераклад робіцца дакладна так, як і для некаманднага праекта, за выключэньнем наступнага.</para>
+
+  <para><emphasis role="bold">Аўтаматычнае захаваньне</emphasis></para>
+
+  <para>Кожныя 3 хвіліны (па змаўчаньні) лякальны праект сынхранізуецца з аддаленым рэпазыторыем, каб кіраўнік праекта і іншыя перакладчыкі маглі бачыць і выкарыстоўваць зробленыя за гэты час пераклады.</para>
+
+  <para>Інтэрвал у 3 хвіліны можна зьмяніць праз <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Налады</guimenuitem> <guimenuitem>Налады</guimenuitem> <guimenuitem>Захаваньне і вывад</guimenuitem> </menuchoice></link>.</para>
+
+  <para><emphasis role="bold">Файлы, якія сынхранізуюцца</emphasis></para>
+
+  <para>Пры аўтаматычным захаваньні, адкрыцьці, закрыцьці і перазагрузцы праекта фактычна сынхранізуюцца толькі два файлы:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Усе астатнія файлы замяняюцца файламі з аддаленага рэпазыторыя.</para>
+
+  <para><emphasis role="bold">Даданьне новых зыходных файлаў</emphasis></para>
+
+  <para>Каб дадаць новы зыходны файл:</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>скапіяваць файлы ў каталёг <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>ужыць каманду мэню <menuchoice> <guimenuitem>Праект</guimenuitem> <guimenuitem>Фіксацыя зыходных файлаў</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>Можна зьмяніць існыя зыходныя файлы, але тады трэба зафіксаваць іх да аўтаматычнага захаваньня і да перазагрузкі або закрыцьця праекта.</para>
+
+  <para><emphasis role="bold">Выдаленьне зыходных файлаў</emphasis></para>
+
+  <para>Файлы спачатку павінны быць выдаленыя кіраўніком праекта.</para>
+
+  <para><emphasis role="bold">Зьмяненьне правілаў сэгмэнтаваньня або файлавых фільтраў</emphasis></para>
+
+  <para>Парамэтры праекта зьмяняе кіраўнік праекта.</para>
+
+  <para><emphasis role="bold">Праца ў аўтаномным рэжыме</emphasis></para>
+
+  <para>Камандны праект можна адчыніць для перакладу ў аўтаномным рэжыме. Усе зьмены будуць сынхранізаваныя пры наступным злучэньні.</para>
+
+  <para>Для працы ў аўтаномным рэжыме:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Адлучэцеся ад сеткі перад адкрыцьцём праекта,</para>
+    </listitem>
+
+    <listitem>
+      <para>аб адчынеце праект праз камандны радок з парамэтрам <command>--no-team</command>.</para>
+    </listitem>
+  </itemizedlist>
+</section>

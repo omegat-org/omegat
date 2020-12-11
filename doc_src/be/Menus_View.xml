@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>Выгляд</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Пазначаць перакладзеныя сэгмэнты</term>
+
+      <listitem>
+        <para>Калі пазначана, перакладзеныя сэгмэнты будуць вылучацца жоўтым колерам.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пазначаць неперакладзеныя сэгмэнты</term>
+
+      <listitem>
+        <para>Калі пазначана, неперакладзеныя сэгмэнты будуць вылучацца фіялетавым колерам.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пазначаць межы абзацаў</term>
+
+      <listitem>
+        <para>Калі пазначана, на экране будуць бачныя разьдзяляльнікі абзацаў у зыходным дакумэньце.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Паказваць зыходныя сэгмэнты</term>
+
+      <listitem>
+        <para>Калі пазначана, зыходныя сэгмэнты будуць бачнымі і будуць вылучацца зялёным колерам. Калі не пазначана, зыходныя сэгмэнты ня будуць бачнымі.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пазначаць неўнікальныя сэгмэнты</term>
+
+      <listitem>
+        <para>Калі пазначана, неўнікальныя сэгмэнты будуць вылучацца бледна-шэрым колерам.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пазначаць сэгмэнты з зацемкамі</term>
+
+      <listitem>
+        <para>Калі пазначана, сэгмэнты з зацемкамі будуць вылучацца блакітным колерам. Гэтая вылучэньне мае прыярытэт над <guimenuitem>вылучэньнем перакладзеных сэгмэнтаў</guimenuitem> і <guimenuitem>вылучэньнем неперакладзеных сэгмэнтаў</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пазначаць неразрыўныя прабелы</term>
+
+      <listitem>
+        <para>Калі пазначана, неразрыўныя прабелы будуць паказвацца з шэрым тлом.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пазначаць прабельныя сымбалі</term>
+
+      <listitem>
+        <para>Калі пазначана, прабельныя сымбалі будуць паказвацца з кропачкай.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Паказваць сымбалі кіраваньня напрамкам тэксту</term>
+
+      <listitem>
+        <para>Гэтая опцыя дазваляе бачыць <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">сымбалі кіраваньня напрамкам тэксту</ulink></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пазначаць аўтаматычна запоўненыя сэгмэнты</term>
+
+      <listitem>
+        <para>Калі пазначана, тло ўсіх сэгмэнтаў, у якіх пераклад быў атрыманы ў выніку аўтаматычнага запаўненьня (напрыклад, з файлаў TMX у каталёгу <filename>/tm/auto</filename>), будзе каляровым. Вылучэньне колерам захоўваецца, пакуль пазначана опцыя <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>“Захоўваць стан аўтаматычна запоўненых”</guimenuitem></link> (гл. Налады → Акно рэдагаваньня). Звычайныя пераклады, устаўленыя з каталёга auto, вылучаюцца памаранчавым колерам. Іншыя пераклады, асабліва ідэнтыфікаваныя ў TMX, могуць вылучацца іншымі колерамі. Тэхнічныя дэталі гл. у наступным <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">запыце ўдасканаленьня</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Агрэсыўная замена шрыфтоў на альтэрнатыўныя</term>
+
+      <listitem>
+        <para>Пазначце гэтую вопцыю, калі <application>OmegaT</application> не паказвае пэўныя сымбалі належным чынам (нават калі ў сыстэме ўсталяваныя шрыфты, якія ўтрымліваюць патрэбныя сымбалі). Заўвага: выглядае, што ў Windows падобная ручная падстаноўка шрыфтоў можа ўмешвацца ў стандартную падстаноўку шрыфтоў, і ў выніку адбываецца непажаданая падстаноўка. З гэтай прычыны гэтая опцыя адключаная па змаўчаньні.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Інфармацыя пра зьмены</term>
+
+      <listitem>
+        <para>Пасьля ўключэньня вопцыі паказу інфармацыі пра зьмены для <guimenuitem>бягучага сэгмэнта</guimenuitem> будуць бачнымі час і аўтар апошняй зьмены бягучага сэгмэнта. Калі яе ўключыць для <guimenuitem>ўсіх сэгмэнтаў</guimenuitem>, інфармацыя паказваецца для ўсіх сэгмэнтаў, а калі выбраць <guimenuitem>Нічога не паказваць</guimenuitem>, опцыя адключаецца.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.help">
+  <title>Даведка</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Дапаможнік карыстальніка…</term>
+
+      <listitem>
+        <para>Адчыняецца гэты дапаможнік у браўзэры па змаўчаньні.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пра праграму…</term>
+
+      <listitem>
+        <para>Паказ зьвестак пра аўтарскае права, падзякі і ліцэнзію.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Апошнія зьмены…</term>
+
+      <listitem>
+        <para>Паказваецца пералік новых функцыяў, удасканаленьняў і выпраўленьняў памылак для апошняга выпуску.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Часопіс…</term>
+
+      <listitem>
+        <para>Паказваецца бягучы файл часопіса. Загаловак акна адлюстроўвае файл, які фактычна выкарыстоўваецца (гэта залежыць ад таго, колькі асобнікаў OmegaT працуюць адначасова).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Праверка абнаўленьняў…</term>
+
+      <listitem>
+        <para>Выконваецца праверка наяўнасьці навейшай вэрсіі <application>OmegaT</application>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

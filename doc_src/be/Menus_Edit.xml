@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>Праўка</title>
+
+  <para>Элемэнты ў гэтым мэню зьяўляюцца толькі, калі адчынены праект.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Адмяніць</guimenuitem></term>
+
+      <listitem>
+        <para>Аднаўляецца стан перад апошнім выкананым дзеяньнем. Каманда не працуе, калі зьменены сэгмэнт быў пацьверджаны.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вярнуць</term>
+
+      <listitem>
+        <para>Аднаўляецца стан перад касаваньнем апошняга дзеяньня праўкі. Каманда не працуе, калі зьменены сэгмэнт быў пацьверджаны.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Замяніць пераклад на супадзеньне або вылучэньне</term>
+
+      <listitem>
+        <para>Увесь сэгмэнт перакладу замяняецца на выбранае недакладнае супадзеньне (па змаўчаньні выбіраецца першае супадзеньне).</para>
+
+        <para>Калі ў недакладным супадзеньні вылучана пэўная частка тэксту, толькі гэтае вылучэньне замяняе ўвесь сэгмэнт перакладу.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Уставіць супадзеньне або вылучэньне</term>
+
+      <listitem>
+        <para>Вылучанае недакладнае супадзеньне ўстаўляецца ў пазыцыю курсора. Калі ў сэгмэньце перакладу вылучаная частка, пры гэтым замяняецца вылучэньне.</para>
+
+        <para>Калі пэўная частка тэксту вылучаная ў недакладным супадзеньні, толькі гэтае вылучэньне ўстаўляецца ў пазыцыю курсора.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Замяніць на машынны пераклад</term>
+
+      <listitem>
+        <para>Зьмесьціва сэгмэнта перакладу замяняецца перакладам ад сэрвісу машыннага перакладу. Калі сэрвіс машыннага перакладу не актываваны (мэню <menuchoice> <guimenu>Налады</guimenu> → <guimenuitem>Машынны пераклад</guimenuitem> </menuchoice>), не адбываецца нічога.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Аднавіць зыходны тэкст</term>
+
+      <listitem>
+        <para>Увесь сэгмэнт перакладу замяняецца на зыходны тэкст.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Уставіць зыходны тэкст</term>
+
+      <listitem>
+        <para>Зыходны тэкст устаўляецца ў пазыцыю курсор.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Уставіць адсутныя тэгі зыходнага тэксту</term>
+
+      <listitem>
+        <para>Тэгі з зыходнага тэксту (калі іх няма ў перакладзе) устаўляюцца ў пазыцыю курсора.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Уставіць наступны адсутны тэг</term>
+
+      <listitem>
+        <para>У пазыцыю курсора ўстаўляецца толькі адзін тэг (з адсутных).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Экспартаваць вылучанае</term>
+
+      <listitem>
+        <para>Бягучае вылучэньне экспартуецца ў тэкставы файл для апрацоўкі. Калі частка тэксту ня вылучаная, у файл выгружаецца ўвесь бягучы сэгмэнт. Калі карыстальнік выходзіць з <application>OmegaT</application>, гэты файл не спусташаецца, каб імітаваць звычайныя паводзіны буфэра абмену. Экспартаванае зьмесьціва капіюецца ў файл <filename>selection.txt</filename> у каталёгу наладаў карыстальніка.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Стварыць запіс глясара</term>
+
+      <listitem>
+        <para>Дазваляе карыстальніку стварыць запіс у файле глясара, ужываным па змаўчаньні.</para>
+
+        <para>Калі вылучыць радок тэксту (у якой заўгодна панэлі) перад націсканьнем <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, тэкст будзе ўстаўлены па змаўчаньні ў поле <guilabel>Зыходны тэрмін</guilabel>.</para>
+
+        <para>Падобнае будзе адбывацца і ў палёх <guimenuitem>Пераклад тэрміна</guimenuitem> і <guimenuitem>Камэнтар</guimenuitem>, калі зноў вылучыць тэкст і зноў націснуць <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пошук у праекце…</term>
+
+      <listitem>
+        <para>Адчыняецца новае <link linkend="windows.textsearch">вакно пошуку</link>.</para>
+
+        <para>Калі вылучыць радок тэксту (у якой заўгодна панэлі) перад націсканьнем <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, тэкст будзе ўстаўлены па змаўчаньні ў поле <guilabel>Знайсьці</guilabel>.</para>
+
+        <para>Пры націсканьні <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo> зьяўляецца апошняе раней адчыненае вакно пошуку (а ня новае).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пошук і замена…</term>
+
+      <listitem>
+        <para>Адчыняецца новае <link linkend="windows.textreplace">вакно пошуку і замены</link>.</para>
+
+        <para>Калі вылучыць радок тэксту (у якой заўгодна панэлі) перад націсканьнем <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, тэкст будзе ўстаўлены па змаўчаньні ў поле <guilabel>Знайсьці</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Пошук у слоўніках</term>
+
+      <listitem>
+        <para>Калі адключаны <link linkend="dialogs.preferences.dictionary">аўтаматычны пошук у слоўніках</link>, гэта функцыя дазваляе рабіць пошук вылучанага слова ў слоўніках.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Зьмяніць рэгістар на</term>
+
+      <listitem>
+        <para>Рэгістар вылучанага тэксту ў сэгмэньце перакладу зьмяняецца на выбраны варыянт (“Усе малыя”, “Усе вялікія”, “Як у загалоўках”, “Як у сказах”). Каб пераключацца паміж гэтымі варыянтамі, націскайце <keycombo><keycap>Shift</keycap> + <keycap>F3</keycap></keycombo>. Калі тэкст ня вылучаны, <application>OmegaT</application> вылучае слова, якое ўтрымлівае літару непасрэдна справа ад курсора.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Выбраць супадзеньне</term>
+
+      <listitem>
+        <para>Выбар недакладнага супадзеньня № N на панэлі недакладных супадзеньняў для замены на яго перакладу або ўстаўкі яго ў сэгмэнт.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Выкарыстоўваць як пераклад па змаўчаньні</term>
+
+      <listitem>
+        <para>Калі для актыўнага сэгмэнта ёсьць альтэрнатыўныя пераклады, можна пазначыць вылучаны варыянт як пераклад па змаўчаньні. Калі ёсьць толькі адзін пераклад, гэты пункт мэню будзе шэрым.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Стварыць альтэрнатыўны пераклад</term>
+
+      <listitem>
+        <para>Аднолькавыя сэгмэнты ў залежнасьці ад кантэксту могуць мець розныя пераклады. Вылучыць гэты пункт мэню, калі бягучы пераклад не пасуе, і стварыць альтэрнатыўны пераклад.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Выдаліць пераклад</term>
+
+      <listitem>
+        <para>Пераклад выдаляецца, а сэгмэнт становіцца неперакладзеным.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Задаць пусты пераклад</term>
+
+      <listitem>
+        <para>Пераклад вызначаецца як пусты. У дакумэньце перакладу на месцы гэтага сэгмэнта не зьявіцца нічога. У вакне рэдагаваньня пераклад паказваецца як &lt;ПУСТЫ&gt;</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Зарэгістраваць ідэнтычны пераклад</term>
+
+      <listitem>
+        <para>Гэтая каманда ўжываецца ў мэтах рэгістрацыі тэксту перакладу тоесным зыходнаму тэксту, нават калі не пазначана <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>“Дазволіць супадзеньне крыніцы і перакладу”</guilabel></link>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

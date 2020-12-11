@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Пераход</title>
+
+  <para>Элемэнты ў гэтым мэню зьяўляюцца толькі, калі адчынены праект.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Наступны неперакладзены сэгмэнт</term>
+
+      <listitem>
+        <para>Пераход да наступнага сэгмэнта, які ня мае эквіваленту ў памяці перакладаў.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Наступны перакладзены сэгмэнт</term>
+
+      <listitem>
+        <para>Пераход да наступнага ўжо перакладзенага сэгмэнта з ігнараваньнем неперакладзеных сэгмэнтаў.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Наступны сэгмэнт</term>
+
+      <listitem>
+        <para>Пераход да наступнага сэгмэнта. Калі бягучы сэгмэнт — апошні ў файле, адбываецца пераход да першага сэгмэнта наступнага файла.</para>
+
+        <para>Заўвага: клявіша <keycap>Enter</keycap> зьяўляецца альтэрнатыўным варыянтам, калі ня выбраны варыянт <link linkend="dialogs.preferences.general.usetabtoadvance">Выкарыстоўваць TAB для пераходу далей</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Папярэдні сэгмэнт</term>
+
+      <listitem>
+        <para>Пераход да папярэдняга сэгмэнта. Калі бягучы сэгмэнт — першы ў файле, адбываецца пераход да апошняга сэгмэнта папярэдняга файла.</para>
+
+        <para>Заўвага: спалучэньне клявішаў <keycombo><keycap>Ctrl</keycap> + <keycap>Enter</keycap></keycombo> зьяўляецца альтэрнатыўным варыянтам, калі ня выбраны варыянт <link linkend="dialogs.preferences.general.usetabtoadvance">Выкарыстоўваць TAB для пераходу далей</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Сэгмэнт нумар…</term>
+
+      <listitem>
+        <para>Пераход да сэгмэнта, чый нумар або літара-скарот уведзены.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Наступная зацемка</term>
+
+      <listitem>
+        <para>Пераход да наступнага сэгмэнта, да якога прымацаваная зацемка.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Папярэдняя зацемка</term>
+
+      <listitem>
+        <para>Пераход да папярэдняга сэгмэнта, да якога прымацаваная зацемка.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Крыніца выбранага супадзеньня</term>
+
+      <listitem>
+        <para>Пераход да сэгмэнта, які адпавядае бягучаму вылучанаму супадзеньню на панэлі <guilabel>недакладных супадзеньняў</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Наперад у гісторыі…</term>
+
+      <listitem>
+        <para><application>OmegaT</application> запамінае апрацаваныя сэгмэнты. Гэтая каманда дазваляе вярнуцца да сэгмэнта, як папярэдне быў пакінуты камандай <guimenuitem>Назад у гісторыі…</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Назад у гісторыі…</term>
+
+      <listitem>
+        <para>Гэтая каманда дазваляе адступіць назад на адзін сэгмэнт назад за раз, каб затым вярнуцца да бягучага сэгмэнта з дапамогай каманды <guimenuitem>Наперад у гісторыі…</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>Сэрвіс</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Праверка на наяўнасьць праблемаў…</term>
+
+      <listitem>
+        <para>Інструмэнт, які аўтаматычна выконвае праверку якасьці тэксту за адзін праход з вывадам вынікаў у вакно.</para>
+
+        <para>Выяўляюцца чатыры тыпы праблемаў:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>адсутныя або зрушаныя тэгі, у тым ліку <link linkend="dialogs.preferences.tagprocessing">карыстальніцкія тэгі</link>. Праверка <guilabel>памылак тэгаў</guilabel> уключаная заўсёды.</para>
+          </listitem>
+
+          <listitem>
+            <para>Праверка <guilabel>памылак правапісу</guilabel> (можна адключыць). Працуе толькі пры ўмове ўсталяваньня адпаведнага слоўніка.</para>
+          </listitem>
+
+          <listitem>
+            <para>Праверка <guilabel>памылак тэрмінаў</guilabel> (можна адключыць).</para>
+          </listitem>
+
+          <listitem>
+            <para>Праверка <guilabel>памылак граматыкі (LanguageTool)</guilabel> (можна адключыць).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Вынікі паказваюцца ў вакне як табліца, у якой:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>пры падвойным кліку на радку адбываецца пераход у адпаведны сэгмэнт у вакне рэдагаваньня;</para>
+          </listitem>
+
+          <listitem>
+            <para>пры кліку на загалоўку слупка змяняецца парадак сартаваньня ў слупку;</para>
+          </listitem>
+
+          <listitem>
+            <para>пры выбары радка або навядзеньні мышкі на яго ў апошнім слупку зьяўляецца выпадное мэню з прапановамі аб выпраўленьні або ігнараваньні памылкі.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Праверка на наяўнасьць праблемаў для гэтага дакумэнта</term>
+
+      <listitem>
+        <para>Усё тое самае, што і вышэй, але толькі для бягучага дакумэнта ў вакне рэдагаваньня.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Статыстыка</term>
+
+      <listitem>
+        <para>Вывад новага вакна са статыстыкай праекта, г. зн., з сумарнымі паказчыкамі для праекта і для кожнага файла праекта.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Статыстыка супадзеньняў</term>
+
+      <listitem>
+        <para>Паказ статыстыкі супадзеньняў для праекта: колькасьць паўтораў, дакладных супадзеньняў, недакладных супадзеньняў і адсутнасьці супадзеньняў для сэгмэнтаў, словаў і ў сымбалях.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Статыстыка супадзеньняў па файлах</term>
+
+      <listitem>
+        <para>Паказ статыстыкі супадзеньняў для кожнага файла праекта: колькасьць паўтораў, дакладных супадзеньняў, недакладных супадзеньняў і адсутнасьці супадзеньняў для сэгмэнтаў, словаў і ў сымбалях.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Выраўнаваць файлы…</term>
+
+      <listitem>
+        <para>Выбраць два файлы для выраўноўваньня (арыгінал і пераклад), націснуць “OK”, каб адчыніць акно <link linkend="windows.aligner"><guilabel>выраўнованьня</guilabel></link>.</para>
+
+        <para>Падтрымліваюцца файлы ў фарматах, якія можна пабачыць праз мэню <menuchoice> <guimenuitem>Праект</guimenuitem> → <guimenuitem>Уласьцівасьці…</guimenuitem> → <guimenuitem>Файлавыя фільтры</guimenuitem> </menuchoice>.</para>
+
+        <para>Файлы арыгінала і перакладу могуць быць у розных фарматах (напрыклад, файл у фармаце <filename>DOCX</filename> можна выраўнаваць з файлам <filename>PDF</filename>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Сцэнары…</term>
+
+      <listitem>
+        <para>Вывад <link linkend="windows.scripts">акна <guilabel>сцэнароў</guilabel></link>, дзе можна задаць месцазнаходжаньне сцэнароў, іх запісваць, выконваць і прывязваць да спалучэньняў клявішаў.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n — (назва сцэнара)</term>
+
+      <listitem>
+        <para>Запуск сцэнароў, прывязаных да нумароў.</para>
+
+        <para>Каб прывязаць сцэнар да нумара:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>адкрыйце вакно сцэнароў;</para>
+          </listitem>
+
+          <listitem>
+            <para>выберыце патрэбны сцэнар у сьпісе леваруч;</para>
+          </listitem>
+
+          <listitem>
+            <para>У ніжняй частцы вакна клікнеце па незанятым нумары і выберыце <guilabel>”Дадаць сцэнар”</guilabel>.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(каманды пошуку па-за праектам)</term>
+
+      <listitem>
+        <para>Калі ў <link linkend="dialogs.preferences.externalsearch">наладах</link> вызначаныя каманды пошуку па-за праектам, тут іх можна пабачыць і выканаць.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

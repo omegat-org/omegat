@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.4.0
 ----------------------------------------------------------------------
-  6 Enhancements
+  7 Enhancements
   6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -30,6 +30,9 @@
 
   - Allow dictionary LingoDSL format with DictZip compression
   https://sourceforge.net/p/omegat/feature-requests/1528/
+
+  - Support LingoDSL dictionaries with UTF-8 encoding
+  https://sourceforge.net/p/omegat/feature-requests/1530/
 
   Bug fixes:
 

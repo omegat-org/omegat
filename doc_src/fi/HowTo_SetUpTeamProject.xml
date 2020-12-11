@@ -72,7 +72,7 @@
 
     <para>Lisää muita resursseja (sanakirjoja, TMX-tiedostoja tai sanastoja) SVN- tai Git-asiakasohjelmassa.</para>
 
-    <para><emphasis role="bold">Poista tiedostot</emphasis> SVN- tai Git-asiakasohjelmassa. Nämä tiedostot eivät poistu automaattisesti myös kääntäjältä, vaan sinun on pyydettävä häntä poistamaan tiedostot käsin.</para>
+    <para><emphasis role="bold">Poista tiedostot</emphasis> SVN- tai Git-asiakasohjelmassa.</para>
 
     <para>Huomaa, että käännöstyön aikana OmegaT muokkaa vain näiden kahden tiedoston sisältöä:</para>
 
@@ -107,7 +107,7 @@ tai</para>
         <para>Viite URL-osoitteseen (tässä esimerkissä Git-tietovarastoon) määritetään alla olevalla tavalla:</para>
 
         <programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
+ &lt;repository type=&quot;git&quot; url=&quot;https://OmegaT-ryhmaeprojektin_tietovarasto.git&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
  &lt;/repository&gt;
 &lt;/repositories&gt;</programlisting>
@@ -128,9 +128,12 @@ tai</para>
 
     <para>Yllä kuvataan tavallinen ryhmäprojekti, jossa projekti on täysin projektipäällikön valvonnassa ja jossa tiedostot (ja tilastot) ovat identtiset molemmissa päissä (sekä palvelimen että kääntäjän puolella).</para>
 
-    <para>OmegaT-ryhmäprojektit voidaan määrittää myös toisin, jolloin kaikki kääntäjät jakavat yhteisen project_save.tmx-tiedoston, mutta eivät yhteisiä lähdetiedostoja.</para>
+    <para>OmegaT-ryhmäprojektin voi luoda myös siten, että samaa project_save.tmx-tiedostoa käyttää useampi kääntäjä, mutta kääntäjillä ei ole pääsyä (kaikkiin) samoihin (lähdekielisiin) tiedostoihin.</para>
 
-    <para>Tässä tapauksessa projekti luodaan samaan tapaan, mutta projektipäällikkö ei lisää tiedostoja /source-kansioon.</para>
+    <para>Tällainen versiohallintaan perustuva ryhmäprojekti luodaan samaan tapaan kuin tavallinenkin ryhmäprojekti, mutta projektipäällikkö ei lisää versiohallintaprojektiin (kaikkia) tiedostoja. Kääntäjät joko kopioivat tarvittavat tiedostot itse tai yhdistävät projektin paikalliset kansiot projektin etävarastoihin synkronoidakseen eri sijainneissa olevat tiedostot.</para>
+
+      <para>Kansiot yhdistetään joko muokkaamalla <filename>omegat.project</filename>-tiedostoa tai valitsemalla käyttöliittymästä <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Ominaisuudet</guimenuitem> <guimenuitem>Projektivarastojen määritys…</guimenuitem> </menuchoice>
+      </para>
   </section>
 
   <section id="howto.setupteamproject.mappingparameters">
@@ -141,7 +144,7 @@ tai</para>
         <term>repository type</term>
 
         <listitem>
-          <para>Tämä voi olla joko http (https), svn tai git.</para>
+          <para>Parametrin muoto voi olla http (tai https), svn, git tai tiedosto.</para>
         </listitem>
       </varlistentry>
 
@@ -149,7 +152,7 @@ tai</para>
         <term>repository url</term>
 
         <listitem>
-          <para>Käännettävien tiedostojen etäsijainti</para>
+          <para>Käännettävien tiedostojen etäsijainti tai hakemisto</para>
         </listitem>
       </varlistentry>
 
@@ -196,35 +199,62 @@ tai</para>
   <section>
     <title>Yhdistämisesimerkkejä</title>
 
-    <para><programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
+    <para>Projektikansioiden oletusmuotoinen yhdistäminen:<programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://OmegaT-ryhmaeprojektin_tietovarasto&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
  &lt;/repository&gt;
 &lt;/repositories&gt;</programlisting></para>
 
-    <para>Kaikki sijainnin <filename>https://repo_for_OmegaT_team_project</filename> sisällöt yhdistetään paikalliseen OmegaT-projektiin.</para>
+    <para>Kaikki sijainnin <filename>https://OmegaT-ryhmaeprojektin_varasto</filename> sisällöt yhdistetään paikalliseen OmegaT-projektiin.</para>
 
-    <programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+    <para>Paikallisen projektin yhdistäminen etävaraston alikansioon:<programlisting>&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://kaikkien_OmegaT-ryhmaeprojektien_tietovarasto&quot;&gt;
+  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE-projekti&quot;/&gt;
  &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
+&lt;/repositories&gt;</programlisting></para>
 
-    <para>Kaikki sijainnin <filename>&gt;https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> sisällöt yhdistetään paikalliseen OmegaT-projektiin.</para>
+    <para>Kaikki sijainnin <filename>&gt;https://kaikkien_OmegaT-ryhmaeprojektien_tietovarasto/En-US_DE_projekti</filename> sisällöt yhdistetään paikalliseen OmegaT-projektiin.</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>Paikallisten kansioiden yhdistäminen etäkansioiden tiedostoihin, jotka sopivat tiettyyn suodattimeen:<programlisting>
+&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://OmegaT-ryhmaeprojektin_kaikkien_laehteiden_tietovarasto&quot;&gt;
+  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+   &lt;includes&gt;readme.bak&lt;/includes&gt;
+  &lt;/mapping&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Tässä esimerkissä kaikki sijainnin <filename>https://OmegaT-ryhmaeprojektin_kaikkien_laehteiden_tietovarasto</filename> sisällöt yhdistetään paikalliseen OmegaT-projektikansioon, ja kaikki muut *.bak-tiedostot jätetään pois (excludes) paitsi readme.bak, joka sisällytetään (includes) synkronoitaviin tiedostoihin.</para>
+
+    <para><programlisting>Yhdistäminen muihin internetistä löytyviin tiedostoihin: &lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>Etätiedosto<filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> yhdistetään paikalliseen <filename>source/Bundle.properties</filename>-tiedostoon.</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>Yhdistäminen ja uudelleen nimeäminen:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>Etätiedosto <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> yhdistetään paikalliseen <filename>source/readme_tr.txt</filename>-tiedostoon.</para>
 
-    <para>Tällöin on mahdollista nimetä käännettävä tiedosto uudelleen.</para>
+    <para>Näin voit nimetä käännettävän tiedosto uudelleen.</para>
+
+    <para>Paikallisten tiedostojen yhdistäminen:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/koti/minae/omat_tiedostoni&quot;&gt;
+ &lt;mapping local=&quot;laehde/tiedosto.txt&quot; repository=&quot;minun/tiedosto.txt&quot;/&gt;
+ &lt;mapping local=&quot;laehde/tiedosto2.txt&quot; repository=&quot;joku/tiedosto.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+    <para>Paikallinen tiedosto <filename>/koti/minae/omat_tiedostoni/minun/tiedosto.txt</filename> yhdistetään paikalliseen tiedostoon <filename>laehde/tiedosto.txt</filename>, ja <filename>/koti/minae/omat_tiedostoni/joku/tiedosto.txt</filename> yhdistetään paikalliseen tiedostoon <filename>laehde/tiedosto2.txt</filename>.</para>
+
+    <para>Varoitus: Jos tiedostoa ei ole, projektin lataaminen ei onnistu.</para>
+    <para>Voit yhdistää niin monta sijaintia kuin haluat, mutta vain, kun kyseessä on ryhmäprojekti. Tämä tarkoittaa, että jossakin yhdistämisparametrissa käytetään tiedostoa omegat.project. Tämä ominaisuus on tarkoitettu kokoamaan lähdetiedostoja, mutta yhdistämistä voi käyttää muihinkin tiedostoihin.</para>
   </section>
+  <section>
+    <title>Huomaa tämä omegat.project-tiedostosta ja yhdistämisistä:</title>
+    <para>Kun luot uuden projektin ja lähetät sen tietovarastoon, tiedosto <filename>omegat.project</filename> ei sisällä yhdistämismäärityksiä. Kun lataat projektin koneellesi, ohjelma muuttaa projektin paikalliseksi ryhmäprojektiksi ja lisää siihen oletusmuotoiset yhdistämisparametrit.</para>
+    <para>Huomaa, että tietovaraston omegat.project-tiedosto ei muutu automaattisesti eivätkä yhdistämismääritykset edelleenkään sisälly siihen. Kun lataat projektin koneellesi, kaikki tietovarastossa tapahtuneet muutokset, mukaan lukien <filename>omegat.project</filename>-tiedosto projektiasetuksineen, kopioidaan paikalliseen projektiin. Jos tiedostossa ei ole yhdistämismäärityksiä, käyttöön otetaan vain ja ainoastaan olemassa olevat paikalliset yhdistämismääritykset. Kaikki muut projektiin tehdyt paikalliset muutokset palautuvat oletuksiksi. Jos tiedostossa on yhdistämismäärityksiä, paikallisesti tehdyt muutokset häviävät.</para>
+  </section>
+
 </section>

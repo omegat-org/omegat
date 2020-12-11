@@ -63,6 +63,7 @@
   - Catalan localisation updated to 5.4.0 (UI, Instant Start, readme, scripts)
   - Corsican localisation updated to 5.4.0 (UI)
   - Dutch localisation updated to 5.4.0 (UI, scripts, documentation)
+  - Finnish localisation updated to 5.4.0 (UI, documentation)
   - Simplified Chinese localisation updated to 5.4.0 (UI, documentation)
   - Turkish localisation updated to 5.4.0 (UI, Instant Start, readme, scripts)
   - Ukrainian localisation updated to 5.4.0 (UI)

@@ -904,7 +904,9 @@
   <section id="dialogs.preferences.tagprocessing">
     <title>Tägien käsittely</title>
 
-    <para>Kun käännät ohjelmistoon liittyviä tiedostoja, voit määrittää tägien tarkistuksen tarkistamaan myös ohjelmointimuuttujat (%…). Voit myös tehdä erilaisia tägien tarkistukseen liittyviä valintoja ja määritellä mukautettuja tägejä.</para>
+    <para>Kun olet kääntämässä ohjelmistotiedostoja, voit määrittää tägien tarkistuksen asetukset tarkistamaan myös ohjelmointimuuttujat (%…) tai paikkamerkit ({0}). Jotkin tiedostosuodattimet tarkistavat ne automaattisesti – esimerkiksi PO-suodatin osaa käsitellä %...-merkkejä ja Java™ Resource Bundle -suodatin käsittelee {#}-tägejä, joten tarvitset tätä ominaisuutta käsitellessäsi muita tiedostoja.</para>
+
+    <para>Voit myös tehdä erilaisia tägien tarkistukseen liittyviä valintoja ja määritellä mukautettuja tägejä.</para>
 
     <para>Jos esimerkiksi kirjoitat lausekkeen <userinput>\d+</userinput> <guilabel>Mukautetut tägit säännöllisinä lausekkeina</guilabel> -kenttään, tägien tarkistus käsittelee kaikkia numeroita tägeinä. Tällöin voit tarkistaa, että lähde- ja kohdesegmentin numerot ovat pysyneet samoina.</para>
 
@@ -1094,7 +1096,7 @@
   <section>
     <title>Liitännäiset</title>
 
-    <para>Antaa pääsyn saatavilla olevien liitännäisten listaan. Liitännäiset asennetaan <filename>/plugins</filename>-kansioon.</para>
+    <para>Antaa pääsyn saatavilla olevien liitännäisten listaan. Liitännäiset asennetaan <filename>/plugins</filename>-kansioon, joka löytyy joko OmegaT:n asennuskansiosta tai käyttöjärjestelmän mukaisesta käyttäjän asetusten kansiosta.</para>
   </section>
 
   <section>

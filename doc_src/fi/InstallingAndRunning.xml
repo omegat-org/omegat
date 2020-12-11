@@ -567,7 +567,7 @@
   <section id="building.OmegaT.from.source">
     <title><application>OmegaT</application>:n rakentaminen lähdekoodista</title>
 
-    <para>Voit noutaa nykyisen version lähteet SVN-asiakasohjelmalla pakettivarastosta <ulink url="svn://svn.code.sf.net/p/omegat/svn/trunk"/> tai suoraan <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tarball?path=/trunk">Sourceforgesta</ulink>.</para>
+    <para>Löydät nykyisen version lähteet joko tietovarastosta Git-asiakkaan avulla <ulink url="https://git.code.sf.net/p/omegat/code"/> tai suoraan <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tarball?path=">SourceForgesta</ulink>.</para>
 
     <para>Kun olet ladannut lähdekoodin, avaa lähdekansio komentorivillä ja kirjoita</para>
 

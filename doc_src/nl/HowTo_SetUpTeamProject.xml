@@ -72,7 +72,7 @@
 
     <para>Gebruik een cliënt voor SVN of Git om andere bronnen (woordenboeken, TMX-en of woordenlijsten) toe te voegen.</para>
 
-    <para>Gebruik een cliënt voor SVN of Git om <emphasis role="bold">bestanden te verwijderen</emphasis>. Deze bestanden zullen niet automatisch worden verwijderd aan de zijde van de vertaler: u zult ze moeten vragen om de bestanden handmatig te verwijderen.</para>
+    <para>Gebruik een cliënt voor SVN of Git om <emphasis role="bold">bestanden te verwijderen</emphasis>.</para>
 
     <para>Onthoud dat slechts twee bestanden worden aangepast door OmegaT tijdens het vertalen:</para>
 
@@ -126,20 +126,23 @@
 
     <para>Het proces hierboven beschrijft de normale gevallen, waar de projectbeheerder volledige controle wil hebben over het project en waar de bestanden (en de statistieken) identiek zijn aan beide zijden (aan de zijde van de server en aan de zijde van de vertaler).</para>
 
-    <para>Teamprojecten voor OmegaT kunnen ook op een andere manier worden ingesteld, waarbij verschillende vertalers het bestand project_save.tmx delen, maar niet de bronbestanden.</para>
+    <para>Teamprojecten voor OmegaT kunnen ook op een andere manier worden ingesteld, waarbij verschillende vertalers het bestand project_save.tmx delen, maar niet (alle) de (bron)bestanden.</para>
 
-    <para>In dit geval is de procedure hetzelfde, maar voegt de projectbeheerder de bestanden niet toe aan de map /source.</para>
+    <para>In dit geval is de procedure hetzelfde, maar voegt de projectbeheerder niet (alle) bestanden toe aan het project met versie-controle. In plaats daarvan kopiëren de vertalers de bestanden zelf, of voegen verwijzingen toe om de bestanden van andere locaties te synchroniseren.</para>
+
+      <para>De verwijzingen kunnen worden toegevoegd door <filename>omegat.project</filename> te bewerken of via de UI: <menuchoice> <guimenuitem>Project</guimenuitem> <guimenuitem>Eigenschappen</guimenuitem> <guimenuitem>Mappen in opslagplaats</guimenuitem> </menuchoice>
+      </para>
   </section>
 
   <section id="howto.setupteamproject.mappingparameters">
-    <title>Parameters voor rotutes naar mappen</title>
+    <title>Parameters voor routes naar mappen</title>
 
     <variablelist>
       <varlistentry>
         <term>type opslagplaats </term>
 
         <listitem>
-          <para>Dit kan zijn: http (inclusief https), svn of git.</para>
+          <para>Dit kan zijn: http (inclusief https), svn, git of bestand.</para>
         </listitem>
       </varlistentry>
 
@@ -147,7 +150,7 @@
         <term>url voor opslagplaats</term>
 
         <listitem>
-          <para>Locatie op afstand van de te vertalen bestanden.</para>
+          <para>Locatie op afstand of map van de te vertalen bestanden.</para>
         </listitem>
       </varlistentry>
 
@@ -194,7 +197,7 @@
   <section>
     <title>Voorbeeld routes naar mappen</title>
 
-    <para><programlisting>&lt;repositories&gt;
+    <para>Standaard mappen voor project:<programlisting>&lt;repositories&gt;
  &lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_OmegaT_teamproject&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
  &lt;/repository&gt;
@@ -202,27 +205,54 @@
 
     <para>Alle inhoud van <filename>https://opslag_voor_OmegaT_teamproject</filename> volgt de route naar het lokale project van OmegaT</para>
 
-    <programlisting>&lt;repositories&gt;
+    <para>Mappen voor projecten in een submap van de opslagplaats:<programlisting>&lt;repositories&gt;
  &lt;repository type=&quot;svn&quot; url=&quot;https://opslag_voor_alle_OmegaT_teamprojecten&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
  &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
+&lt;/repositories&gt;</programlisting></para>
 
     <para>Alle inhoud van <filename>https://opslag_voor_alle_OmegaT_teamprojecten/En-US_DE_project</filename> volgt de route naar het lokale project van OmegaT.</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>Mappen voor aanvullende bronnen uit de opslagplaats op afstand, met filters:<programlisting>
+&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://opslagplaats_voor_alle_OmegaT_team_project_bronnen&quot;&gt;
+  &lt;mapping local=&quot;source/submap&quot; repository=&quot;&quot;&gt;
+   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+   &lt;includes&gt;readme.bak&lt;/includes&gt;
+  &lt;/mapping&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Alle inhoud van <filename>https://opslagplaats_voor_alle_OmegaT_team_project_bronnen</filename> worden doorverwezen naar de lokale OmegaT project bronmap, behalve alle *.bak-bestanden, uitgezonderd readme.bak.</para>
+
+    <para><programlisting>Mappen voor extra bronbestanden vanaf het web: &lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>Het bestand op afstand <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> volgt de route naar het lokale bestand <filename>source/Bundle.properties</filename>.</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>Mappen met hernoemen:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>Het bestand op afstand <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> volgt de route naar het lokale bestand <filename>source/readme_tr.txt</filename>.</para>
 
     <para>Dit maakt het mogelijk het te vertalen bestand te hernoemen.</para>
+
+    <para>Lokaal bestand mappen:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
+ &lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
+ &lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+    <para>Het lokale bestand <filename>/home/me/myfiles/my/file.txt</filename> wordt verwezen naar het lokale bestand <filename>source/file.txt</filename> en <filename>/home/me/myfiles/some/file.txt</filename> wordt doorverwezen naar het lokale bestand <filename>source/file2.txt</filename>.</para>
+
+    <para>Waarschuwing: als een bestand niet bestaat, zal het project niet laden.</para>
+    <para>U mag net zoveel doorverwijzingen maken als u wilt, maar alleen in de context van een teamproject, d.i. één van de doorverwijzingen bevat omegat.project. Deze mogelijkheid is bedoeld voor het verzamelen van bronbestanden, maar u bent niet beperkt tot bronbestanden.</para>
   </section>
+  <section>
+    <title>Opmerking over omegat.project en doorverwijzingen</title>
+    <para>Wanneer u een nieuw project maakt en indient in een opslagplaats, bevat het bestand <filename>omegat.project</filename> geen doorverwijzingen. Wanneer u het project download, wordt het project lokaal geconverteerd naar een teamproject en worden standaard doorverwijzingen toegevoegd.</para>
+    <para>Onthoud dat het bestand omegat.project in de opslagplaats niet automatisch wordt gewijzigd en nog steeds de doorverwijzingen niet bevat. Wanneer u een project laadt, worden alle wijzigingen in de opslagplaats gekopieerd naar het lokale project, inclusief het bestand <filename>omegat.project</filename> met de projectinstellingen. Als het bestand doorverwijzingen bevat, worden de bestaande lokale doorverwijzingen opnieuw toegepast, maar alleen die. Alle andere lokale wijzigingen aan het project worden teruggedraaid. Als het bestand doorverwijzingen bevat, gaan de lokale wijzigingen van doorverwijzingen verloren.</para>
+  </section>
+
 </section>

@@ -904,7 +904,9 @@
   <section id="dialogs.preferences.tagprocessing">
     <title>Tag verwerken</title>
 
-    <para>Bij het vertalen van aan software gerelateerde bestanden kunt u de opties voor Tags valideren configureren om ook (%…) variabelen voor programmeren te controleren. U kunt verscheidene opties definiëren die zijn gerelateerd aan het valideren van tags en om aangepaste tags te definiëren.</para>
+    <para>When translating software-related files, you can configure the Tag Validator options to also check programming (%...) variables or placeholders ({0}), if the file filter doesn't do it out of the box already. Het PO-filter behandelt al %.. en Java™ Resource Bundle-filter behandelt al tags {#}, dus heeft u dit alleen nodig voor andere bestandstypen.</para>
+
+    <para>U kunt verscheidene opties definiëren die zijn gerelateerd aan het valideren van tags en om aangepaste tags te definiëren.</para>
 
     <para>Als u bijvoorbeeld <userinput>\d+</userinput> invoert in het veld <guilabel>Reguliere uitdrukking voor aangepaste tags</guilabel>, zullen alle getallen worden beschouwd als tags, wat u in staat stelt te controleren of getallen niet per ongeluk zijn gewijzigd tijdens het vertalen.</para>
 
@@ -1094,7 +1096,7 @@
   <section>
     <title>Plug-ins</title>
 
-    <para>Geeft toegang topt de lijst met beschikbare plug-ins. Plug-ins worden geïnstalleerd in de map <filename>/plugins</filename>.</para>
+    <para>Geeft toegang topt de lijst met beschikbare plug-ins. Plug-ins worden geïnstalleerd in de map <filename>/plugins</filename>  onder de OmegaT installatiemap of de platform-specifieke map voor voorkeuren van gebruikers voor OmegaT.</para>
   </section>
 
   <section>

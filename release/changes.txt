@@ -60,6 +60,7 @@
   Localisation Updates:
 
   - Belarusian localisation updated to 5.4.0 (UI, scripts, readme, documentation)
+  - Catalan localisation updated to 5.4.0 (UI, Instant Start, readme, scripts)
 
 ----------------------------------------------------------------------
  OmegaT 5.3.0 (2020-08-03)

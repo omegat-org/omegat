@@ -904,7 +904,9 @@
   <section id="dialogs.preferences.tagprocessing">
     <title>标签处理</title>
 
-    <para>当翻译软件相关的文件时，可以配置标签检验器选项来检查编程（%...）变量。您还可以定义与标签验证相关的各种选项并定义自定义标签。</para>
+    <para>当翻译软件相关的文件时，如果文件过滤器并不是开箱即用状态，则可以配置标签检验器选项来检查编程变量（%...）或占位符（{0}）。PO 过滤器已经可以处理 %..，而 Java™ 资源包过滤器已经能处理 {#} 标签，因此你只需要对其他文件类型进行此操作。</para>
+
+    <para>你还可以定义和标签验证相关的各种选项，并可以定义自定义标签。</para>
 
     <para>例如，如果你在<guilabel>表示自定义标签的正则表达式</guilabel>字段中输入了 <userinput>\d+</userinput>，所有数字都会被视为标签，让你可以检查确认数字在翻译过程中未被错误地更改。</para>
 
@@ -1094,7 +1096,7 @@
   <section>
     <title>插件</title>
 
-    <para>可以访问可用插件列表。插件安装在 <filename>/plugins</filename> 文件夹中。</para>
+    <para>可以访问可用插件列表。插件安装在 OmegaT 安装文件夹或平台特定的 OmegaT 用户首选项文件夹下的 <filename>/plugins</filename> 文件夹中。</para>
   </section>
 
   <section>

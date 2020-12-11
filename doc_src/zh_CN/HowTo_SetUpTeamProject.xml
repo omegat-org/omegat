@@ -72,7 +72,7 @@
 
     <para>要添加其他资源（词典、TMX、或词汇表），请使用 SVN 或 Git 客户端。</para>
 
-    <para>要<emphasis role="bold">删除文件</emphasis>，请使用 SVN 或 Git 客户端。这些文件在译者侧不会自动删除：你必须让他们手工删除文件。</para>
+    <para>要<emphasis role="bold">删除文件</emphasis>，请使用 SVN 或 Git 客户端。</para>
 
     <para>请注意，在翻译期间，OmegaT 只修改两个文件：</para>
 
@@ -126,9 +126,12 @@
 
     <para>上面的流程是通常的情况，其中项目经理希望完全控制项目，文件（与统计数据）在两侧（服务器侧与译者侧）是一样的。</para>
 
-    <para>OmegaT 团队项目也可以以不同的方式建立，其中多个译者共享 project_save.tmx 文件但不共享原文文件。</para>
+    <para>OmegaT 团队项目也可以以不同的方式建立，其中多个译者共享 project_save.tmx 文件但不共享（全部）（原文）文件。</para>
 
-    <para>在这种情况下，流程是一样的，但项目经理不往 /source 文件夹中添加文件。</para>
+    <para>在这种情况下，流程是一样的，但项目经理并不会将（所有）文件添加到版本控制的项目中。而是由译者自行复制文件，或者添加映射来从其他位置同步文件。</para>
+
+      <para>可以通过编辑 <filename>omegat.project</filename> 或者通过用户界面上的<menuchoice><guimenuitem>项目</guimenuitem><guimenuitem>属性</guimenuitem><guimenuitem>存储库映射</guimenuitem></menuchoice>来添加映射。
+      </para>
   </section>
 
   <section id="howto.setupteamproject.mappingparameters">
@@ -139,7 +142,7 @@
         <term>存储库类型（repository type）</term>
 
         <listitem>
-          <para>这可以是 http（包括 https）、svn 或 git。</para>
+          <para>这可以是 http（包括 https）、svn、git 或文件。</para>
         </listitem>
       </varlistentry>
 
@@ -147,7 +150,7 @@
         <term>存储库网址（repository url）</term>
 
         <listitem>
-          <para>要翻译的文件的远程位置</para>
+          <para>要翻译的文件的远程位置或目录</para>
         </listitem>
       </varlistentry>
 
@@ -194,7 +197,7 @@
   <section>
     <title>示例映射</title>
 
-    <para><programlisting>&lt;repositories&gt;
+    <para>默认项目映射：<programlisting>&lt;repositories&gt;
  &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
  &lt;/repository&gt;
@@ -202,27 +205,54 @@
 
     <para><filename>https://repo_for_OmegaT_team_project</filename> 的所有内容映射到本地 OmegaT 项目</para>
 
-    <programlisting>&lt;repositories&gt;
+    <para>在存储库的子目录中映射项目：<programlisting>&lt;repositories&gt;
  &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
  &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
+&lt;/repositories&gt;</programlisting></para>
 
     <para><filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> 的所有内容映射到本地 OmegaT 项目。</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>用过滤器从远程存储库映射其他资源：<programlisting>
+&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
+  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+   &lt;includes&gt;readme.bak&lt;/includes&gt;
+  &lt;/mapping&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para><filename>https://repo_for_All_OmegaT_team_project_sources</filename> 的所有内容都映射到本地 OmegaT 项目的原文文件夹，除了 readme.bak 之外的 *.bak 文件则排除在外。</para>
+
+    <para><programlisting>从网站映射其他原文文件：&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>远程文件 <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> 映射到本地文件 <filename>source/Bundle.properties</filename>。</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>带重命名的映射：<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>远程文件 <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> 映射到本地文件 <filename>source/readme_tr.txt</filename>。</para>
 
     <para>这让重命名要翻译的文件成为可能。</para>
+
+    <para>本地文件映射：<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
+ &lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
+ &lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+    <para>本地文件 <filename>/home/me/myfiles/my/file.txt</filename> 映射成本地文件 <filename>source/file.txt</filename>，<filename>/home/me/myfiles/some/file.txt</filename> 映射成本地文件 <filename>source/file2.txt</filename>。</para>
+
+    <para>警告：如果文件不存在，则不会加载项目。</para>
+    <para>你可以根据需要添加任意数量的映射，但是只能在团队项目的上下文环境中添加，即，其中必须有一个映射包含 omegat.project。此功能旨在汇集原文文件，但并不限制你将它用于原文文件之外。</para>
   </section>
+  <section>
+    <title>关于 omegat.project 和映射的说明</title>
+    <para>创建新项目并提交到存储库时，<filename>omegat.project</filename> 文件并不包含任何映射。当你下载项目时，项目会在本地被转换为团队项目并且会添加默认映射。</para>
+    <para>要注意，存储库中的 omegat.project 文件并不会自动更改，因此依然不包含任何映射。当你加载项目时，存储库中的所有更改都会被复制到本地项目中，包括带有项目设置的 <filename>omegat.project</filename> 文件。如果此文件不包含映射，则会重新应用现存的本地映射，且只会应用这些映射。对项目所做的其他本地更改都会被回退还原。如果文件包含映射，则本地对映射进行的更改都会丢失。</para>
+  </section>
+
 </section>

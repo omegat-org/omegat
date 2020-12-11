@@ -47,7 +47,7 @@
 
   <para><emphasis role="bold">删除原文文件</emphasis></para>
 
-  <para>必须先由项目经理删除文件，然后在本地删除。</para>
+  <para>文件必须由项目管理器删除。</para>
 
   <para><emphasis role="bold">更改片段分割规则或文件过滤器</emphasis></para>
 

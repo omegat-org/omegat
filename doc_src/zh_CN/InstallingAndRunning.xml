@@ -569,7 +569,7 @@
   <section id="building.OmegaT.from.source">
     <title>从源代码构建 <application>OmegaT</application></title>
 
-    <para>当前版本的源码可以用 SVN 客户端从存储库 <ulink url="svn://svn.code.sf.net/p/omegat/svn/trunk"/> 获取，或直接 <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tarball?path=/trunk">SourceForge</ulink> 上获取。</para>
+    <para>当前版本的源码可以用 Git 客户端从存储库 <ulink url="https://git.code.sf.net/p/omegat/code"/> 获取，或直接在 <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tarball?path=">SourceForge</ulink> 上获取。</para>
 
     <para>一旦下载了代码，在源代码文件夹中打开命令行并输入：</para>
 

@@ -29,9 +29,9 @@ package org.omegat.core.dictionaries;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.io.input.BOMInputStream;
 import org.omegat.util.Language;
 
 /**
@@ -78,17 +79,34 @@ public class LingvoDSL implements IDictionaryFactory {
             data = new DictionaryData<>(language);
             if (dataFile.endsWith(".dz")) {
                 try (FileInputStream fis = new FileInputStream(file);
-                        GZIPInputStream gis = new GZIPInputStream(fis, 8192);
-                        InputStreamReader isr = new InputStreamReader(gis,  StandardCharsets.UTF_16);
-                        BufferedReader reader = new BufferedReader(isr)) {
-                    loadData(reader.lines());
+                     GZIPInputStream gis = new GZIPInputStream(fis, 8192);
+                     BOMInputStream bis = new BOMInputStream(gis)) {
+                    readDslFile(bis);
                 }
             } else {
-                loadData(Files.lines(file.toPath(), StandardCharsets.UTF_16));
+                try (FileInputStream fis = new FileInputStream(file);
+                     BOMInputStream bis = new BOMInputStream(fis)) {
+                    readDslFile(bis);
+                }
             }
         }
 
-        private void loadData(Stream<String> stream) {
+        private void readDslFile(BOMInputStream bis) throws IOException {
+            if (bis.hasBOM()) {
+                try (InputStreamReader isr = new InputStreamReader(bis, StandardCharsets.UTF_8);
+                     BufferedReader reader = new BufferedReader(isr)) {
+                    loadData(reader);
+                }
+            } else {
+                try (InputStreamReader isr = new InputStreamReader(bis, StandardCharsets.UTF_16);
+                     BufferedReader reader = new BufferedReader(isr)) {
+                    loadData(reader);
+                }
+            }
+        }
+
+        private void loadData(final BufferedReader reader) {
+            Stream<String> stream = reader.lines();
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
             stream.filter(line -> !line.isEmpty() && !line.startsWith("#"))

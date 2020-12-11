@@ -141,30 +141,31 @@ OmegaT была создана Китом Годфри.
 Текущий состав команды:
 (в алфавитном порядке)
 
-- Vincent Bidaux (documentation manager)
-- Marco Cevoli (Telegram community manager)
-- Jean-Christophe Helary (Twitter community manager)
-- Kos Ivantsof (localisation manager)
-- Concepción Martin (Facebook community manager)
-- Briac Pilpré (webmaster)
-- Lucie Vecerova (Facebook community manager)
+- Винсент Бидау (координатор создания и ведения документации);
+- Люси Вечерова (менеджер группы Facebook);
+- Кос Иванцов (менеджер по локализации);
+- Консепсьон Мартин (менеджер группы Facebook);
+- Бриак Пильпре (вебмастер);
+- Жан-Кристоф Хелари (координатор учетной записи в Twitter);
+- Марко Чеволи (координатор группы в Telegram).
 
 Участники, внесшие вклад в развитие программного кода, указаны в файле
 /docs/contributors.txt.
 
 Прежние участники проекта:
 
-- Anthony Baldwin (localisation manager)
-- Didier Briel (project manager)
-- Alex Buloichik (lead developer)
-- Sabine Cretella
-- Dmitri Gabinski
-- Jean-Christophe Helary (support group owner, localisation manager)
-- Maxym Mykhalchuk (lead developer)
-- Samuel Murray
-- Henry Pijffers (release manager)
-- Marc Prior (project co-ordinator, webmaster)
-- Vito Smolej (documentation manager)
+- Энтони Болдвин (менеджер по локализации);
+- Дидье Брейль (менеджер проекта);
+- Алекс Булойчик (ведущий разработчик);
+- Дмитрий Габинский;
+- Сабин Кретелла;
+- Максим Михальчук (ведущий разработчик);
+- Сэмюел Мюррей;
+- Генри Пийфферс (менеджер выпусков);
+- Марк Прайор (координатор проекта, вебмастер);
+- Вито Смолей (менеджер по документации);
+- Жан-Кристоф Хелари (владелец группы поддержки пользователей, менеджер локализации).
+
 
 и многие, многие другие прекрасные люди.
 
@@ -179,7 +180,7 @@ OmegaT была создана Китом Годфри.
 
   https://omegat.org/
 
-User support resources:
+Поддержка пользователей:
 
   https://omegat.org/support
 

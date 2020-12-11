@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   7 Enhancements
   6 Bug fixes
-  9 Localisation updates
+  10 Localisation updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
 
@@ -65,6 +65,7 @@
   - Dutch localisation updated to 5.4.0 (UI, scripts, documentation)
   - Finnish localisation updated to 5.4.0 (UI, documentation)
   - Japanese localisation updated to 5.4.0 (UI, scripts, readme, documentation)
+  - Russian localisation updated to 5.4.0 (UI, scripts, readme)
   - Simplified Chinese localisation updated to 5.4.0 (UI, documentation)
   - Turkish localisation updated to 5.4.0 (UI, Instant Start, readme, scripts)
   - Ukrainian localisation updated to 5.4.0 (UI)

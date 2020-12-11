@@ -29,9 +29,11 @@ package org.omegat.core.dictionaries;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -39,6 +41,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.io.input.BOMInputStream;
 import org.omegat.util.Language;
 
 /**
@@ -74,17 +77,22 @@ public class LingvoDSL implements IDictionaryFactory {
         protected final DictionaryData<String> data;
 
         LingvoDSLDict(File file, Language language) throws Exception {
-            String dataFile = file.getPath();
             data = new DictionaryData<>(language);
-            if (dataFile.endsWith(".dz")) {
-                try (FileInputStream fis = new FileInputStream(file);
-                        GZIPInputStream gis = new GZIPInputStream(fis, 8192);
-                        InputStreamReader isr = new InputStreamReader(gis,  StandardCharsets.UTF_16);
-                        BufferedReader reader = new BufferedReader(isr)) {
-                    loadData(reader.lines());
+            readDslFile(file);
+        }
+
+        private void readDslFile(File file) throws IOException {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                // Un-gzip if necessary
+                InputStream is = file.getName().endsWith(".dz") ? new GZIPInputStream(fis, 8192) : fis;
+                try (BOMInputStream bis = new BOMInputStream(is)) {
+                    // Detect charset
+                    Charset charset = bis.hasBOM() ? StandardCharsets.UTF_8 : StandardCharsets.UTF_16;
+                    try (InputStreamReader isr = new InputStreamReader(bis, charset);
+                            BufferedReader reader = new BufferedReader(isr)) {
+                        loadData(reader.lines());
+                    }
                 }
-            } else {
-                loadData(Files.lines(file.toPath(), StandardCharsets.UTF_16));
             }
         }
 

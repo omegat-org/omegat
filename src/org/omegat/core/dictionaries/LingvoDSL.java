@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Locale;
@@ -92,21 +93,17 @@ public class LingvoDSL implements IDictionaryFactory {
         }
 
         private void readDslFile(BOMInputStream bis) throws IOException {
+            Charset charset = StandardCharsets.UTF_16;
             if (bis.hasBOM()) {
-                try (InputStreamReader isr = new InputStreamReader(bis, StandardCharsets.UTF_8);
-                     BufferedReader reader = new BufferedReader(isr)) {
-                    loadData(reader);
-                }
-            } else {
-                try (InputStreamReader isr = new InputStreamReader(bis, StandardCharsets.UTF_16);
-                     BufferedReader reader = new BufferedReader(isr)) {
-                    loadData(reader);
-                }
+                charset = StandardCharsets.UTF_8;
+            }
+            try (InputStreamReader isr = new InputStreamReader(bis, charset);
+                 BufferedReader reader = new BufferedReader(isr)) {
+                loadData(reader.lines());
             }
         }
 
-        private void loadData(final BufferedReader reader) {
-            Stream<String> stream = reader.lines();
+        private void loadData(Stream<String> stream) {
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
             stream.filter(line -> !line.isEmpty() && !line.startsWith("#"))

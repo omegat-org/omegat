@@ -101,6 +101,7 @@ public class OmegaTFileHandler extends StreamHandler {
     /**
      * Open log file and lock.
      */
+    @SuppressWarnings("resource")
     private void openFiles(final File dir) throws IOException {
         dir.mkdirs();
         for (int instanceIndex = 0; instanceIndex < 100; instanceIndex++) {

@@ -53,6 +53,7 @@ public class XHTMLFilterTest extends TestFilterBase {
         // *really* slow.
         // See http://stackoverflow.com/a/9398602
         EntityResolver er = new EntityResolver() {
+            @SuppressWarnings("resource")
             @Override
             public InputSource resolveEntity(String publicId, String systemId)
                     throws SAXException, IOException {

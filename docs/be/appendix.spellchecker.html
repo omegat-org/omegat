@@ -1,0 +1,167 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;C.&nbsp;Модуль праверкі правапісу</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+      <link rel="home" href="index.html" title="OmegaT 4.2 — Дапаможнік карыстальніка">
+      <link rel="up" href="index.html" title="OmegaT 4.2 — Дапаможнік карыстальніка">
+      <link rel="prev" href="appendix.glossaries.html" title="Appendix&nbsp;B.&nbsp;Глясары">
+      <link rel="next" href="appendix.regexp.html" title="Appendix&nbsp;D.&nbsp;Рэгулярныя выразы">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;C.&nbsp;Модуль праверкі правапісу</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.glossaries.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.regexp.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.spellchecker"></a>Appendix&nbsp;C.&nbsp;Модуль праверкі правапісу
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.spellchecker.html#d0e5829">1. Усталёўка слоўнікаў для праверкі правапісу</a></span></dt>
+               <dt><span class="section"><a href="appendix.spellchecker.html#d0e5878">2. Ужываньне слоўнікаў для праверкі правапісу</a></span></dt>
+               <dt><span class="section"><a href="appendix.spellchecker.html#hints">3. Парады</a></span></dt>
+            </dl>
+         </div>
+         <p>OmegaT мае ўбудаваную праверку правапісу на аснове модуля, які ўжываецца ў такіх праграмах як Apache OpenOffice, LibreOffice,
+            Firefox і Thunderbird. Гэта дае магчымасьць скарыстацца зь вялікай колькасьці слоўнікаў, даступных для гэтых праграмаў.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5829"></a>1.&nbsp;Усталёўка слоўнікаў для праверкі правапісу
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Каб скарыстацца з функцыі праверкі правапісу трэба ўсталяваць адпаведныя слоўнікі для мовы перакладу. Каб усталяваць слоўнікі
+               для праверкі правапісу, выканайце наступнае:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>У файлавым мэнэджары стварэце новы каталёг у прыдатным месцы для захоўваньня слоўнікаў (у прыкладзе ніжэй гэта D:\Translations\spellcheckers).</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>У OmegaT выберыце <span class="guimenuitem">“Налады → Праверка правапісу”</span>, затым націсьнеце кнопку <span class="guibutton">“Выбраць”</span> побач з полем каталёгу слоўнікаў. Перайдзеце да створанага каталёга слоўнікаў і абярэце яго.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>У гэтым каталёгу ўсталюйце файлы слоўнікаў. Ёсьць два спосабы зрабіць гэта. Можна скапіяваць файлы ўручную, напрыклад, зь
+                        іншага месца ў сыстэме, з дапамогай файлавага мэнэджара, або скарыстацца з функцыі OmegaT <span class="bold"><strong>“Усталяваць новы слоўнік”</strong></span>, каб атрымаць сьпіс даступных слоўнікаў, зь якога можна зрабіць адпаведны выбар. Заўважце, што для працы функцыі ўсталёўкі
+                        патрабуецца Інтэрнэт-злучэньне. Абраныя мовы затым будуць усталяваныя і зьявяцца ў сьпісе ў акне наладкі праверкі правапісу
+                        (на гэта спатрэбіцца пэўны час).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Капіяваньне ўручную мае сэнс, калі ў сыстэме ўжо ёсьць патрэбныя слоўнікі, напрыклад, у складзе праграмаў тыпу Apache OpenOffice,
+               LibreOffice, Firefox або Thunderbird. Прасьцей, аднак, спампаваць слоўнікі з Інтэрнэта, скарыстаўшыся з поля <span class="bold"><strong>“Адрас слоўнікаў у Інтэрнэце”</strong></span>:
+            </p>
+            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figure&nbsp;C.1.&nbsp;Наладка праверкі правапісу</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckerSetup_25.png" alt="Наладка праверкі правапісу"></div>
+               </div>
+            </div><br class="figure-break"><p>Пасьля націску на кнопку <span class="guibutton">“Усталяваць новы слоўнік”</span> зьявіцца вакно ўсталёўкі слоўнікаў, у якім можна выбраць слоўнікі да ўсталёўкі.
+            </p>
+            <p>Назвы файлаў павінны адпавядаць коду мовы перакладу, вызначанаму ва ўласьцівасьцях праекта (мэню <span class="guimenu">“Праект → Уласьцівасьці”</span>). Напрыклад, калі мовай перакладу вызначана ES-MX (мэксыканская гішпанская), назвы файлаў слоўніка павінныя быць es_MX.dic
+               і es_MX.aff. Калі вы маеце толькі слоўнік для стандартнай гішпанскай з назвамі файлаў es_es.dic і es_es.aff, напрыклад, гэтыя
+               файлы можна скапіяваць у es_MX.dic і es_MX.aff, і праверка правапісу будзе працаваць. Пры гэтым, зразумела, памылкі будуць
+               выяўляцца ў адпаведнасьці з правіламі стандартнай (кастыльскай), а не мэксыканскай гішпанскай.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5878"></a>2.&nbsp;Ужываньне слоўнікаў для праверкі правапісу
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Няма неабходнасьці ўказваць OmegaT выкарыстоўваць канкрэтны слоўнік для праверкі правапісу; праграма будзе выкарыстоўваць
+               слоўнік для адпаведнай мовы, зыходзячы з кодаў моваў праекта. Аднак трэба пільнаваць, каб коды моваў дакладна супадалі: слоўнік
+               для мовы FR-FR ня будзе працаваць для мовы FR, напрыклад. Пры неабходнасьці зьмянеце назвы файлаў слоўнікаў або налады моваў
+               праекта.
+            </p>
+            <p>Каб уключыць праверку правапісу, абярэце <span class="guimenuitem">“Налады → Праверка правапісу”</span> і пастаўце пазнаку <span class="guilabel">“Аўтаматычная праверка правапісу ў тэксьце”</span> (гл. вышэй)
+            </p>
+            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figure&nbsp;C.2.&nbsp;Выкарыстаньне праверкі правапісу</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Выкарыстаньне праверкі правапісу"></div>
+               </div>
+            </div><br class="figure-break"><p>Калі клікнуць правай кнопкай мышкі на падкрэсьленым слове (“Artund” на малюнку вышэй), адкрываецца выпаднае мэню са сьпісам
+               прапановаў выпраўленьня (“Art und”). Можна таксама ўказаць модулю праверкі правапісу ігнараваць усе ўваходжаньні пэўнага няправільна
+               напісанага слова або дадаць яго ў слоўнік.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints"></a>3.&nbsp;Парады
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Калі праверка правапісу не працуе, спачатку пераканайцеся, што пазначаны пункт <span class="guilabel">“Аўтаматычная праверка правапісу ў тэксьце”</span> у дыялёгу праверкі правапісу (<span class="guisubmenu">“Налады → Праверка правапісу…”)</span>.
+            </p>
+            <p>Таксама праверце, ці адпавядае код мовы перакладу праекта даступным слоўнікам для праверкі правапісу (гл. у акне наладкі).
+               Праверка правапісу адбываецца на падставе коду мовы перакладу: калі мовай перакладу зьяўляецца бразыльская партугальская (pt_BR),
+               падкаталёг слоўнікаў павінны ўтрымліваць два файлы слоўніка з назвамі <span class="emphasis"><em> pt_br.aff </em></span> і <span class="emphasis"><em> pt_br.dic </em></span>.
+            </p>
+            <p>Калі пасьля перакладу значнай часткі тэксту вы зразумелі, што мова перакладу праекта не адпавядае мове слоўніка праверкі правапісу,(pt_BR
+               вызначана як мова перакладу, але няма слоўнікаў для pt_BR, напрыклад), можна проста скапіяваць два адпаведныя файлы і перайменаваць
+               іх (напрыклад, <span class="emphasis"><em> pt_PT.aff </em></span> і <span class="emphasis"><em>pt_PT.dic</em></span> — у <span class="emphasis"><em>pt_BR.aff </em></span> і <span class="emphasis"><em>pt_BR.dic</em></span> адпаведна). Вядома, значна лепей зрабіць кароткі перапынак і спампаваць правільныя вэрсіі слоўнікаў.
+            </p>
+            <p>Памятайце, што праз кнопку <code class="filename">“Выдаліць”</code> абраныя слоўнікі выдаляюцца фізычна. Калі яны выкарыстоўваюцца іншай праграмай у сыстэме, то яны зьнікнуць і з гэтай праграмы.
+               Калі па якой-небудзь прычыне вам трэба рабіць гэта час ад часу, можа мець сэнс капіяваньне патрэбных файлаў у адмысловы каталёг,
+               зарэзэрваваны толькі для выкарыстаньня OmegaT.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.glossaries.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.regexp.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;B.&nbsp;Глясары&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;Рэгулярныя выразы</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

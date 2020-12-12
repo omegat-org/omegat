@@ -90,14 +90,14 @@
                      <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.externalsearch">7.11. External Search</a></span></dt>
                      <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.editor">7.12. Editor</a></span></dt>
                      <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.tagprocessing">7.13. Tag Processing</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3988">7.14. Team</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3998">7.15. TM Matches</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4101">7.16. View</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3990">7.14. Team</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4000">7.15. TM Matches</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4103">7.16. View</a></span></dt>
                      <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.savingandoutput">7.17. Saving and Output</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4150">7.18. Proxy Login</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4155">7.19. Secure store</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4160">7.20. Plugins</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4168">7.21. Updates</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4152">7.18. Proxy Login</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4157">7.19. Secure store</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4162">7.20. Plugins</a></span></dt>
+                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4170">7.21. Updates</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -2194,9 +2194,11 @@
                      </div>
                   </div>
                </div>
-               <p>When translating software-related files, you can configure the Tag Validator options to also check programming (%...) variables.
-                  You can also define various options relating to tag validation and define custom tags.
+               <p>When translating software-related files, you can configure the Tag Validator options to also check programming (%...) variables
+                  or placeholders ({0}), if the file filter doesn't do it out of the box already. The PO filter already handles %.. and Java™
+                  Resource Bundle filter already handles {#} tags, so you only need this for other file types.
                </p>
+               <p>You can also define various options relating to tag validation and define custom tags.</p>
                <p>For example, if you enter <strong class="userinput"><code>\d+</code></strong> into the <span class="guilabel">Regular expression for custom tags</span> field, all numbers will be considered as tags, enabling you to check that numbers have not been changed by mistake during
                   translation.
                </p>
@@ -2209,7 +2211,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3988"></a>7.14.&nbsp;Team
+                        <h3 class="title"><a name="d0e3990"></a>7.14.&nbsp;Team
                         </h3>
                      </div>
                   </div>
@@ -2221,7 +2223,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="d0e3993"></a>7.14.1.&nbsp;Repository Credentials
+                           <h4 class="title"><a name="d0e3995"></a>7.14.1.&nbsp;Repository Credentials
                            </h4>
                         </div>
                      </div>
@@ -2235,7 +2237,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3998"></a>7.15.&nbsp;TM Matches
+                        <h3 class="title"><a name="d0e4000"></a>7.15.&nbsp;TM Matches
                         </h3>
                      </div>
                   </div>
@@ -2260,7 +2262,7 @@
                         <p>Change how fuzzy matches are displayed, through the use of
                                      pre-configured variables:
                         </p>
-                        <div class="table"><a name="d0e4028"></a><p class="title"><b>Table&nbsp;3.1.&nbsp;Match pane setup</b></p>
+                        <div class="table"><a name="d0e4030"></a><p class="title"><b>Table&nbsp;3.1.&nbsp;Match pane setup</b></p>
                            <div class="table-contents">
                               <table class="table" summary="Match pane setup" border="1">
                                  <colgroup>
@@ -2328,7 +2330,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4101"></a>7.16.&nbsp;View
+                        <h3 class="title"><a name="d0e4103"></a>7.16.&nbsp;View
                         </h3>
                      </div>
                   </div>
@@ -2392,7 +2394,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4150"></a>7.18.&nbsp;Proxy Login
+                        <h3 class="title"><a name="d0e4152"></a>7.18.&nbsp;Proxy Login
                         </h3>
                      </div>
                   </div>
@@ -2405,7 +2407,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4155"></a>7.19.&nbsp;Secure store
+                        <h3 class="title"><a name="d0e4157"></a>7.19.&nbsp;Secure store
                         </h3>
                      </div>
                   </div>
@@ -2419,19 +2421,20 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4160"></a>7.20.&nbsp;Plugins
+                        <h3 class="title"><a name="d0e4162"></a>7.20.&nbsp;Plugins
                         </h3>
                      </div>
                   </div>
                </div>
-               <p>Gives access to the list of plugins available. Plugins are installed in the <code class="filename">/plugins</code> folder.
+               <p>Gives access to the list of plugins available. Plugins are installed in the <code class="filename">/plugins</code>
+                        folder under the OmegaT installation folder or the platform-specific OmegaT user preferences folder.
                </p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4168"></a>7.21.&nbsp;Updates
+                        <h3 class="title"><a name="d0e4170"></a>7.21.&nbsp;Updates
                         </h3>
                      </div>
                   </div>

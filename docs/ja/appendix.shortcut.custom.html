@@ -2,25 +2,24 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>付録H ショートカットのカスタマイズ</title>
+      <title>付録E ショートカットのカスタマイズ</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-      <link rel="home" href="index.html" title="OmegaT 3.1 - 取扱説明書">
-      <link rel="up" href="index.html" title="OmegaT 3.1 - 取扱説明書">
-      <link rel="prev" href="appendix.website.html" title="付録G ウェブ上の OmegaT 情報">
-      <link rel="next" href="appendix.legal.notices.html" title="付録I 法律上の表示">
+      <link rel="home" href="index.html" title="OmegaT 4.2 - 取扱説明書">
+      <link rel="up" href="index.html" title="OmegaT 4.2 - 取扱説明書">
+      <link rel="prev" href="appendix.regexp.html" title="付録D 正規表現">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">付録H ショートカットのカスタマイズ</th>
+               <th colspan="3" align="center">付録E ショートカットのカスタマイズ</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="appendix.website.html">戻る</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="appendix.regexp.html">戻る</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">次へ</a></td>
+               <td width="20%" align="right">&nbsp;</td>
             </tr>
          </table>
          <hr>
@@ -29,7 +28,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.shortcut.custom"></a>付録H ショートカットのカスタマイズ
+                  <h1 class="title"><a name="appendix.shortcut.custom"></a>付録E ショートカットのカスタマイズ
                   </h1>
                </div>
             </div>
@@ -50,35 +49,34 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e11534"></a>ショートカットのカスタマイズ
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. ショートカットのカスタマイズ
                      </h2>
                   </div>
                </div>
             </div>
-            <p>メインメニューに表示されるほとんどの項目には、新しいショートカットを割り当てることができます。OmegaT の個人設定フォルダー（詳しくは<a class="link" href="chapter.files.and.folders.html#user.files" title="2. 個人設定ファイル">個人設定ファイル</a>を参照のこと）にショートカット定義ファイルを配置することによって、既存のショートカットを変更したり、新しいショートカットを追加することができるようになります。
+            <p>メインメニューに表示されるほとんどの項目には、新しいショートカットを割り当てることができます。ショートカット定義ファイルを<span class="application">OmegaT</span>環境設定フォルダ(メニューから<span class="guimenuitem">設定</span> → <span class="guimenuitem">設定フォルダー</span>でアクセス可能)に置くと、すでに割り当てられているショートカットを変更したり、新しいショートカットを追加したりできます。
             </p>
             <p>ショートカット定義ファイルには必ず <code class="filename">MainMenuShortcuts.properties</code> という名前を付け、ショートカット定義を少なくとも一行は記述しておく必要があります。空行も含めることができます。また「//」で始まる行はコメント行として扱われます。「//」から行末までは、すべて無視されます。
             </p>
             <p><code class="filename">MainMenuShortcuts.properties</code> ファイルを修正した場合は、新しいショートカット設定を反映させるために、忘れず <span class="application">OmegaT</span> を再起動してください。
             </p>
-            <p>ショートカット定義構文は、次の通りです：<code class="code">&lt;メニュー項目コード&gt;=&lt;ショートカット&gt;</code>。<span class="emphasis"><em>&lt;メニュー項目コード&gt;</em></span> の値は、後述する表を参照してください。<span class="emphasis"><em>&lt;ショートカット&gt;</em></span> には割り当てたいキーの組み合わせを指定します<a href="#ftn.d0e11568" class="footnote" name="d0e11568"><sup class="footnote">[2]</sup></a></p>
+            <p>ショートカット定義構文は、次の通りです：<code class="code">&lt;メニュー項目コード&gt;=&lt;ショートカット&gt;</code>。<span class="emphasis"><em>&lt;メニュー項目コード&gt;</em></span> の値は、後述する表を参照してください。<span class="emphasis"><em>&lt;ショートカット&gt;</em></span> には割り当てたいキーの組み合わせを指定します<a href="#ftn.d0e6372" class="footnote" name="d0e6372"><sup class="footnote">[3]</sup></a></p>
             <p>&lt;ショートカット&gt; は次の形式に従います：０個以上の <code class="code">&lt;修飾子&gt;</code>、続いて０個または１個の <code class="code">&lt;イベント&gt;</code>、続いて１個の <code class="code">&lt;キー&gt;</code>。ただし：
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="code">&lt;修飾子&gt;</code> は次の値を取ります：<span class="emphasis"><em>shift</em></span>、<span class="emphasis"><em>control</em></span>、<span class="emphasis"><em>ctrl</em></span>、<span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11601" class="footnote" name="d0e11601"><sup class="footnote">[3]</sup></a>、<span class="emphasis"><em>alt</em></span>、<span class="emphasis"><em>altGraph</em></span></p>
+                     <p><code class="code">&lt;修飾子&gt;</code> は次の値を取ります：<span class="emphasis"><em>shift</em></span>、<span class="emphasis"><em>control</em></span>、<span class="emphasis"><em>ctrl</em></span>、<span class="emphasis"><em>meta</em></span><a href="#ftn.d0e6405" class="footnote" name="d0e6405"><sup class="footnote">[4]</sup></a>、<span class="emphasis"><em>alt</em></span>、<span class="emphasis"><em>altGraph</em></span></p>
                   </li>
                   <li class="listitem">
                      <p><code class="code">&lt;イベント&gt;</code> は次の値を取ります：<span class="emphasis"><em>typed</em></span>、<span class="emphasis"><em>pressed</em></span>、<span class="emphasis"><em>released</em></span></p>
                   </li>
                   <li class="listitem">
-                     <p>そして <code class="code">&lt;キー&gt;</code> には、キーボード上で利用可能な任意のキーを指定できます<a href="#ftn.d0e11635" class="footnote" name="d0e11635"><sup class="footnote">[4]</sup></a>。
-                     </p>
+                     <p>そして <code class="code">&lt;キー&gt;</code> には、キーボード上で利用可能な任意のキーを指定できます<a href="#ftn.d0e6439" class="footnote" name="d0e6439"><sup class="footnote">[5]</sup></a></p>
                   </li>
                </ul>
             </div>
-            <p>例として、OmegaT のデフォルトのショートカット<a href="#ftn.d0e11643" class="footnote" name="d0e11643"><sup class="footnote">[5]</sup></a>は次のようになっています：
+            <p>例として、OmegaT のデフォルトのショートカット<a href="#ftn.d0e6446" class="footnote" name="d0e6446"><sup class="footnote">[6]</sup></a>は次のようになっています：
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -110,7 +108,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11719"></a><p class="title"><b>表H.1 プロジェクトメニュー</b></p>
+            <div class="table"><a name="d0e6522"></a><p class="title"><b>表E.1 プロジェクトメニュー</b></p>
                <div class="table-contents">
                   <table class="table" summary="プロジェクトメニュー" border="1">
                      <colgroup>
@@ -128,8 +126,13 @@
                      <tbody>
                         <tr>
                            <td align="left">新規作成...</td>
-                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+N</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+N</strong></span></td>
                            <td align="left">projectNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">チームプロジェクトをダウンロード</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectTeamNewMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">開く...</td>
@@ -137,9 +140,9 @@
                            <td align="left">projectOpenMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">チームプロジェクトをダウンロード</td>
+                           <td align="left">最近使用したプロジェクト</td>
                            <td align="left">&nbsp;</td>
-                           <td align="left">projectTeamNewMenuItem</td>
+                           <td align="left">projectOpenRecentMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">原文ファイルを追加...</td>
@@ -173,7 +176,7 @@
                         </tr>
                         <tr>
                            <td align="left">現在の訳文ファイルのみ生成</td>
-                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+D</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+D</strong></span></td>
                            <td align="left">projectSingleCompileMenuItem</td>
                         </tr>
                         <tr>
@@ -183,8 +186,48 @@
                         </tr>
                         <tr>
                            <td align="left">翻訳対象ファイル一覧...</td>
-                           <td align="left">&nbsp;</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+L</strong></span></td>
                            <td align="left">viewFileListMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">プロジェクト構成物/ルートフォルダにアクセス</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessRootMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">プロジェクト構成物/辞書にアクセス</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessDictionaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">プロジェクト構成物/用語集にアクセス</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessGlossaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">プロジェクト構成物/原文にアクセス</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessSourceMenuItem&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td align="left">プロジェクト構成物/訳文にアクセス</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessTargetMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">プロジェクト構成物/現在作業中の原文ファイルにアクセス</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessCurrentSourceDocumentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">プロジェクト構成物/現在作業中の訳文ファイルへアクセス</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessCurrentTargetDocumentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">プロジェクト構成物/更新可能な用語集にアクセス</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectAccessWriteableGlossaryMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">終了</td>
@@ -204,7 +247,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11834"></a><p class="title"><b>表H.2 編集メニュー</b></p>
+            <div class="table"><a name="d0e6693"></a><p class="title"><b>表E.2 編集メニュー</b></p>
                <div class="table-contents">
                   <table class="table" summary="編集メニュー" border="1">
                      <colgroup>
@@ -231,12 +274,12 @@
                            <td align="left">editRedoMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">参考訳文に置換</td>
+                           <td align="left">参考訳文または選択範囲によって置換</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+R</strong></span></td>
                            <td align="left">editOverwriteTranslationMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">参考訳文を挿入</td>
+                           <td align="left">参考訳文または選択範囲を挿入</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+I</strong></span></td>
                            <td align="left">editInsertTranslationMenuItem</td>
                         </tr>
@@ -247,17 +290,17 @@
                         </tr>
                         <tr>
                            <td align="left">原文に置換</td>
-                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+R</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+R</strong></span></td>
                            <td align="left">editOverwriteSourceMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">原文を挿入</td>
-                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+I</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+I</strong></span></td>
                            <td align="left">editInsertSourceMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">原文のタグを挿入</td>
-                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+T</strong></span></td>
+                           <td align="left">未使用の原文のタグを挿入</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+T</strong></span></td>
                            <td align="left">editTagPainterMenuItem</td>
                         </tr>
                         <tr>
@@ -267,12 +310,12 @@
                         </tr>
                         <tr>
                            <td align="left">選択領域を出力</td>
-                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+C</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+C</strong></span></td>
                            <td align="left">editExportSelectionMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">用語の追加</td>
-                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+G</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+G</strong></span></td>
                            <td align="left">editCreateGlossaryEntryMenuItem</td>
                         </tr>
                         <tr>
@@ -281,44 +324,14 @@
                            <td align="left">editFindInProjectMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">&nbsp;</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+F</strong></span></td>
+                           <td align="left">findInProjectReuseLastWindow</td>
+                        </tr>
+                        <tr>
                            <td align="left">検索と置換...</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+K</strong></span></td>
                            <td align="left">editReplaceInProjectMenuItem</td>
-                        </tr>
-                        <tr>
-                           <td align="left">前の参考訳文を選択</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+↑</strong></span></td>
-                           <td align="left">editSelectFuzzyPrevMenuItem</td>
-                        </tr>
-                        <tr>
-                           <td align="left">次の参考訳文を選択</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+↓</strong></span></td>
-                           <td align="left">editSelectFuzzyNextMenuItem</td>
-                        </tr>
-                        <tr>
-                           <td align="left">参考訳文 1 を選択</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+1</strong></span></td>
-                           <td align="left">editSelectFuzzy1MenuItem</td>
-                        </tr>
-                        <tr>
-                           <td align="left">参考訳文 2 を選択</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+2</strong></span></td>
-                           <td align="left">editSelectFuzzy2MenuItem</td>
-                        </tr>
-                        <tr>
-                           <td align="left">参考訳文 3 を選択</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+3</strong></span></td>
-                           <td align="left">editSelectFuzzy3MenuItem</td>
-                        </tr>
-                        <tr>
-                           <td align="left">参考訳文 4 を選択</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+4</strong></span></td>
-                           <td align="left">editSelectFuzzy4MenuItem</td>
-                        </tr>
-                        <tr>
-                           <td align="left">参考訳文 5 を選択</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+5</strong></span></td>
-                           <td align="left">editSelectFuzzy5MenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">大/小文字設定→すべて小文字に</td>
@@ -336,9 +349,49 @@
                            <td align="left">titleCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">上記を順に切り替え...</td>
+                           <td align="left">大文字/小文字の切り替え</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">sentenceCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">大/小文字の切り替え / 循環</td>
                            <td align="left"><span class="keycap"><strong>Shift+F3</strong></span></td>
                            <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">前の参考訳文を選択</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+↑</strong></span></td>
+                           <td align="left">editSelectFuzzyPrevMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">次の参考訳文を選択</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+↓</strong></span></td>
+                           <td align="left">editSelectFuzzyNextMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">一致#1を選択</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+1</strong></span></td>
+                           <td align="left">editSelectFuzzy1MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">一致#2を選択</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+2</strong></span></td>
+                           <td align="left">editSelectFuzzy2MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">一致#3を選択</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+3</strong></span></td>
+                           <td align="left">editSelectFuzzy3MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">一致#4を選択</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+4</strong></span></td>
+                           <td align="left">editSelectFuzzy4MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">一致#5を選択</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+5</strong></span></td>
+                           <td align="left">editSelectFuzzy5MenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">基本訳文として使用</td>
@@ -351,8 +404,18 @@
                            <td align="left">editMultipleAlternate</td>
                         </tr>
                         <tr>
-                           <td align="left">原文と同一訳文を登録</td>
+                           <td align="left">訳文を削除</td>
                            <td align="left">&nbsp;</td>
+                           <td align="left">editRegisterUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">訳文を&lt;空訳文&gt;にする</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editRegisterEmptyMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">原文と同一訳文を登録</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+S</strong></span></td>
                            <td align="left">editRegisterIdenticalMenuItem</td>
                         </tr>
                      </tbody>
@@ -368,7 +431,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e12057"></a><p class="title"><b>表H.3 移動メニュー</b></p>
+            <div class="table"><a name="d0e6943"></a><p class="title"><b>表E.3 移動メニュー</b></p>
                <div class="table-contents">
                   <table class="table" summary="移動メニュー" border="1">
                      <colgroup>
@@ -391,7 +454,7 @@
                         </tr>
                         <tr>
                            <td align="left">次の翻訳済み分節</td>
-                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+U</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+U</strong></span></td>
                            <td align="left">gotoNextTranslatedMenuItem</td>
                         </tr>
                         <tr>
@@ -420,6 +483,16 @@
                            <td align="left">gotoPreviousNoteMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">次の繰り返しを除いた分節</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+Q</strong></span></td>
+                           <td align="left">gotoNextUniqueMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">選択中の参考訳文の元分節</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+M</strong></span></td>
+                           <td align="left">gotoMatchSourceSegment</td>
+                        </tr>
+                        <tr>
                            <td align="left">分節の選択履歴を進む</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+Shift+N</strong></span></td>
                            <td align="left">gotoHistoryForwardMenuItem</td>
@@ -442,8 +515,9 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e12156"></a><p class="title"><b>表H.4 表示メニュー</b></p>
-               <div class="table-contents"><a class="indexterm" name="d0e12159"></a><table class="table" summary="表示メニュー" border="1">
+            <div class="table"><a name="d0e7058"></a><p class="title"><b>表E.4 表示メニュー</b></p>
+               <div class="table-contents">
+                  <table class="table" summary="表示メニュー" border="1">
                      <colgroup>
                         <col align="left" class="1">
                         <col align="left" class="2">
@@ -498,6 +572,11 @@
                            <td align="left">viewMarkBidiCheckBoxMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">auto フォルダー由来の分節を色付け</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkAutoPopulatedCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
                            <td align="left">更新情報を表示 / 表示しない</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
@@ -525,7 +604,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e12246"></a><p class="title"><b>表H.5 ツールメニュー</b></p>
+            <div class="table"><a name="d0e7149"></a><p class="title"><b>表E.5 ツールメニュー</b></p>
                <div class="table-contents">
                   <table class="table" summary="ツールメニュー" border="1">
                      <colgroup>
@@ -543,7 +622,7 @@
                      <tbody>
                         <tr>
                            <td align="left">タグ検証</td>
-                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+V</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+V</strong></span></td>
                            <td align="left">toolsValidateTagsMenuItem</td>
                         </tr>
                         <tr>
@@ -579,7 +658,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e12297"></a><p class="title"><b>表H.6 設定メニュー</b></p>
+            <div class="table"><a name="d0e7200"></a><p class="title"><b>表E.6 設定メニュー</b></p>
                <div class="table-contents">
                   <table class="table" summary="設定メニュー" border="1">
                      <colgroup>
@@ -606,9 +685,19 @@
                            <td align="left">optionsAlwaysConfirmQuitCheckBoxMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">機械翻訳</td>
+                           <td align="left">用語集/TBX 用語集の説明文を表示</td>
                            <td align="left">&nbsp;</td>
+                           <td align="left">optionsGlossaryTBXDisplayContextCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">原文中で単語が離れている用語を表示</td>
                            <td align="left">&nbsp;</td>
+                           <td align="left">optionsGlossaryExactMatchCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">用語集/用語にステミング（語幹処理）を適用</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsGlossaryStemmingCheckBoxMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">用語ヒント / 用語ヒントを有効化</td>
@@ -616,9 +705,9 @@
                            <td align="left">optionsTransTipsEnableMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">用語ヒント / 完全一致</td>
+                           <td align="left">自動補完/関連性の強い補完候補を自動的に表示する</td>
                            <td align="left">&nbsp;</td>
-                           <td align="left">optionsTransTipsExactMatchMenuItem</td>
+                           <td align="left">optionsAutoCompleteShowAutomaticallyItem</td>
                         </tr>
                         <tr>
                            <td align="left">入力補完→用語集...</td>
@@ -641,6 +730,11 @@
                            <td align="left">optionsFontSelectionMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">配色のカスタマイズ...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsColorsSelectionMenuItem</td>
+                        </tr>
+                        <tr>
                            <td align="left">ファイルフィルター...</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">optionsSetupFileFiltersMenuItem</td>
@@ -661,7 +755,7 @@
                            <td align="left">optionsWorkflowMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">タグ検証...</td>
+                           <td align="left">タグ処理...</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">optionsTagValidationMenuItem</td>
                         </tr>
@@ -695,6 +789,11 @@
                            <td align="left">&nbsp;</td>
                            <td align="left">optionsRestoreGUIMenuItem</td>
                         </tr>
+                        <tr>
+                           <td align="left">設定フォルダにアクセス</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAccessConfigDirMenuItem</td>
+                        </tr>
                      </tbody>
                   </table>
                </div>
@@ -708,7 +807,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e12435"></a><p class="title"><b>表H.7 ヘルプメニュー</b></p>
+            <div class="table"><a name="d0e7363"></a><p class="title"><b>表E.7 ヘルプメニュー</b></p>
                <div class="table-contents">
                   <table class="table" summary="ヘルプメニュー" border="1">
                      <colgroup>
@@ -749,19 +848,19 @@
                </div>
             </div><br class="table-break"></div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e11568" class="footnote">
-               <p><a href="#d0e11568" class="para"><sup class="para">[2] </sup></a>キーストローク（ショートカット）の完全な構文定義は、Oracle による次の Java 1.6 技術文書（ページの最後）を参照してください：<a class="ulink" href="http://docs.oracle.com/javase/jp/6/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 keystrokes shortcuts</a></p>
+            <div id="ftn.d0e6372" class="footnote">
+               <p><a href="#d0e6372" class="para"><sup class="para">[3] </sup></a>キーストローク（ショートカット）の完全な構文定義は、Oracle による次の Java 1.6 技術文書（ページの最後）を参照してください：<a class="ulink" href="http://docs.oracle.com/javase/jp/6/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 keystrokes shortcuts</a></p>
             </div>
-            <div id="ftn.d0e11601" class="footnote">
-               <p><a href="#d0e11601" class="para"><sup class="para">[3] </sup></a>Mac では、修飾子 <span class="emphasis"><em>meta</em></span> の代わりに <span class="emphasis"><em>command</em></span> キーを指定します。
+            <div id="ftn.d0e6405" class="footnote">
+               <p><a href="#d0e6405" class="para"><sup class="para">[4] </sup></a>Mac では、修飾子 <span class="emphasis"><em>meta</em></span> の代わりに <span class="emphasis"><em>command</em></span> キーを指定します。
                </p>
             </div>
-            <div id="ftn.d0e11635" class="footnote">
-               <p><a href="#d0e11635" class="para"><sup class="para">[4] </sup></a>利用できるキーイベント（キー）の一覧は、Oracle による次の Java 1.6 技術文書を参照してください：<a class="ulink" href="http://docs.oracle.com/javase/jp/6/api/java/awt/event/KeyEvent.html" target="_top">Java 1.6 keyEvents description</a></p>
+            <div id="ftn.d0e6439" class="footnote">
+               <p><a href="#d0e6439" class="para"><sup class="para">[5] </sup></a>利用できるキーイベント（キー）の一覧は、Oracle による次の Java 1.6 技術文書を参照してください：<a class="ulink" href="http://docs.oracle.com/javase/jp/6/api/java/awt/event/KeyEvent.html" target="_top">Java 1.6 keyEvents description</a></p>
             </div>
-            <div id="ftn.d0e11643" class="footnote">
-               <p><a href="#d0e11643" class="para"><sup class="para">[5] </sup></a>デフォルトの OmegaT のショートカット定義ファイルは Sourceforge から入手できます：<a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">デフォルトの OmegaT ショートカット</a></p>
-               <p>Mac 向けのデフォルトの OmegaT のショートカット定義ファイルも Sourceforge から入手できます。それらはすべて「ctrl」の代わりに「meta」を使用しています：<a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">デフォルトの Mac 向け OmegaT ショートカット</a></p>
+            <div id="ftn.d0e6446" class="footnote">
+               <p><a href="#d0e6446" class="para"><sup class="para">[6] </sup></a>デフォルトの OmegaT のショートカット定義ファイルは Sourceforge から入手できます：<a class="ulink" href="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">デフォルトの OmegaT ショートカット</a></p>
+               <p>Mac 向けのデフォルトの OmegaT のショートカット定義ファイルも Sourceforge から入手できます。それらはすべて「ctrl」の代わりに「meta」を使用しています：<a class="ulink" href="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">デフォルトの Mac 向け OmegaT ショートカット</a></p>
             </div>
          </div>
       </div>
@@ -769,16 +868,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="appendix.website.html">戻る</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="appendix.regexp.html">戻る</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">次へ</a></td>
+               <td width="40%" align="right">&nbsp;</td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">付録G ウェブ上の <span class="application">OmegaT</span> 情報&nbsp;
-               </td>
+               <td width="40%" align="left" valign="top">付録D 正規表現&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;付録I 法律上の表示</td>
+               <td width="40%" align="right" valign="top">&nbsp;</td>
             </tr>
          </table>
       </div>

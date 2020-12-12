@@ -39,22 +39,23 @@
                <dt><span class="section"><a href="howtos.html#howto.setupteamproject">1. Set up a Team Project</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="howtos.html#d0e4738">1.1. Step 1: Create an empty project on a server</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e4804">1.2. Step 2: Add files to translate and other resources</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e4846">1.3. Step 3: Send an invitation to the translator</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e4886">1.4. Special case: minimal sharing</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4740">1.1. Step 1: Create an empty project on a server</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4806">1.2. Step 2: Add files to translate and other resources</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4848">1.3. Step 3: Send an invitation to the translator</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4888">1.4. Special case: minimal sharing</a></span></dt>
                      <dt><span class="section"><a href="howtos.html#howto.setupteamproject.mappingparameters">1.5. Mapping parameters</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e4947">1.6. Example mappings</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e4962">1.6. Example mappings</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5039">1.7. Note about omegat.project and mappings</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="howtos.html#howto.useteamproject">2. Use a Team Project</a></span></dt>
                <dt><span class="section"><a href="howtos.html#howto.reusetm">3. Reuse Translation Memories</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="howtos.html#d0e5140">3.1. Importing and exporting translation memories</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5151">3.2. Creating a translation memory for selected documents</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5195">3.3. Sharing translation memories</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5202">3.4. Using TMX with alternative language</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5203">3.1. Importing and exporting translation memories</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5214">3.2. Creating a translation memory for selected documents</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5258">3.3. Sharing translation memories</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5265">3.4. Using TMX with alternative language</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="howtos.html#howto.preventdataloss">4. Prevent data loss</a></span></dt>
@@ -67,9 +68,9 @@
                <dt><span class="section"><a href="howtos.html#howto.managerighttoleft">6. Manage Right-To-Left languages</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="howtos.html#d0e5423">6.1. Mixing RTL and LTR strings in segments</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5431">6.2. <span class="application">OmegaT</span> tags in RTL segments</a></span></dt>
-                     <dt><span class="section"><a href="howtos.html#d0e5440">6.3. Creating translated RTL documents</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5486">6.1. Mixing RTL and LTR strings in segments</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5494">6.2. <span class="application">OmegaT</span> tags in RTL segments</a></span></dt>
+                     <dt><span class="section"><a href="howtos.html#d0e5503">6.3. Creating translated RTL documents</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -95,7 +96,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4738"></a>1.1.&nbsp;Step 1: Create an empty project on a server
+                        <h3 class="title"><a name="d0e4740"></a>1.1.&nbsp;Step 1: Create an empty project on a server
                         </h3>
                      </div>
                   </div>
@@ -157,7 +158,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4804"></a>1.2.&nbsp;Step 2: Add files to translate and other resources
+                        <h3 class="title"><a name="d0e4806"></a>1.2.&nbsp;Step 2: Add files to translate and other resources
                         </h3>
                      </div>
                   </div>
@@ -179,8 +180,7 @@
                       SVN or Git client.
                </p>
                <p>To <span class="bold"><strong>delete files</strong></span>, use an SVN or Git
-                      client. These files won't be deleted automatically on the translator's
-                      side: you must ask them to delete the files manually.
+                      client.
                </p>
                <p>Note that only two files are modified by OmegaT during
                       translation:
@@ -204,7 +204,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4846"></a>1.3.&nbsp;Step 3: Send an invitation to the translator
+                        <h3 class="title"><a name="d0e4848"></a>1.3.&nbsp;Step 3: Send an invitation to the translator
                         </h3>
                      </div>
                   </div>
@@ -252,7 +252,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4886"></a>1.4.&nbsp;Special case: minimal sharing
+                        <h3 class="title"><a name="d0e4888"></a>1.4.&nbsp;Special case: minimal sharing
                         </h3>
                      </div>
                   </div>
@@ -263,11 +263,17 @@
                       side).
                </p>
                <p>OmegaT team projects can also be set up in a different way, where
-                      several translators share the project_save.tmx file but not the source
+                      several translators share the project_save.tmx file but not (all of) the (source)
                       files.
                </p>
                <p>In this case, the procedure is the same, but the project manager
-                      does not add files to the /source folder.
+                      does not add (all) files to version-controlled project. Instead, the translators copy the files themselves,
+                          or add mappings to synchronize files from other locations.
+                      
+               </p>
+               <p>The mappings can be added by editing <code class="filename">omegat.project</code> or via the UI:
+                            <span class="guimenuitem">Project</span> → <span class="guimenuitem">Properties</span> → <span class="guimenuitem">Repository Mapping</span>
+                        
                </p>
             </div>
             <div class="section">
@@ -283,13 +289,11 @@
                   <dl class="variablelist">
                      <dt><span class="term">repository type</span></dt>
                      <dd>
-                        <p>This can be either http (which includes https), svn or
-                                     git.
-                        </p>
+                        <p>This can be either http (which includes https), svn, git or file.</p>
                      </dd>
                      <dt><span class="term">repository url</span></dt>
                      <dd>
-                        <p>Remote location of the files to translate.</p>
+                        <p>Remote location or directory of the files to translate.</p>
                      </dd>
                      <dt><span class="term">mapping local</span></dt>
                      <dd>
@@ -328,39 +332,89 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4947"></a>1.6.&nbsp;Example mappings
+                        <h3 class="title"><a name="d0e4962"></a>1.6.&nbsp;Example mappings
                         </h3>
                      </div>
                   </div>
-               </div><pre class="programlisting">&lt;repositories&gt;
+               </div>
+               <p>Default project mapping: </p><pre class="programlisting">&lt;repositories&gt;
  &lt;repository type="svn" url="https://repo_for_OmegaT_team_project"&gt;
   &lt;mapping local="" repository=""/&gt;
  &lt;/repository&gt;
 &lt;/repositories&gt;</pre><p>All the contents of
                       <code class="filename">https://repo_for_OmegaT_team_project</code> are mapped to
                       the local OmegaT project
-               </p><pre class="programlisting">&lt;repositories&gt;
+               </p>
+               <p>Mapping for projects in a subdirectory of the repository: </p><pre class="programlisting">&lt;repositories&gt;
  &lt;repository type="svn" url="https://repo_for_All_OmegaT_team_projects"&gt;
   &lt;mapping local="" repository="En-US_DE_project"/&gt;
  &lt;/repository&gt;
 &lt;/repositories&gt;</pre><p>All the contents of
                       <code class="filename">https://repo_for_All_OmegaT_team_projects/En-US_DE_project</code>
                       are mapped to the local OmegaT project.
-               </p><pre class="programlisting">&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
-            &lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
-            &lt;/repository&gt;</pre><p>The remote file
+               </p>
+               <p>Mapping for additional sources from remote repository, with filters: </p><pre class="programlisting">
+&lt;repositories&gt;
+ &lt;repository type="svn" url="https://repo_for_All_OmegaT_team_project_sources"&gt;
+  &lt;mapping local="source/subdir" repository=""&gt;
+   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+   &lt;includes&gt;readme.bak&lt;/includes&gt;
+  &lt;/mapping&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</pre><p>All the contents of
+                        <code class="filename">https://repo_for_All_OmegaT_team_project_sources</code>
+                        are mapped to the local OmegaT project source folder, except all *.bak files but readme.bak.
+                      
+               </p><pre class="programlisting">Mapping for extra source files from the web: &lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+ &lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
+&lt;/repository&gt;</pre><p>The remote file
                       <code class="filename">https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</code>
                       is mapped to the local file
                       <code class="filename">source/Bundle.properties</code>.
-               </p><pre class="programlisting">&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
-            &lt;mapping local="source/Bundle.properties" repository="src/org/omegat/Bundle.properties"/&gt;
-               &lt;mapping local="source/readme_tr.txt" repository="release/readme.txt"/&gt;
-            &lt;/repository&gt;</pre><p>The remote file
+               </p>
+               <p>Mapping with renaming: </p><pre class="programlisting">&lt;repository type="http" url="https://github.com/omegat-org/omegat/raw/master/"&gt;
+ &lt;mapping local="source/readme_tr.txt" repository="release/readme.txt"/&gt;
+&lt;/repository&gt;</pre><p>The remote file
                       <code class="filename">https://github.com/omegat-org/omegat/raw/master/release/readme.txt</code>
                       is mapped to the local file
                       <code class="filename">source/readme_tr.txt</code>.
                </p>
                <p>This makes it possible to rename the file to be translated.</p>
+               <p>Local file mapping: </p><pre class="programlisting">&lt;repository type="file" url="/home/me/myfiles"&gt;
+ &lt;mapping local="source/file.txt" repository="my/file.txt"/&gt;
+ &lt;mapping local="source/file2.txt" repository="some/file.txt"/&gt;
+&lt;/repository&gt;</pre><p>The local file
+                          <code class="filename">/home/me/myfiles/my/file.txt</code>
+                          is mapped to the local file
+                          <code class="filename">source/file.txt</code> and <code class="filename">/home/me/myfiles/some/file.txt</code> is mapped to the local file <code class="filename">source/file2.txt</code>.
+                      
+               </p>
+               <p>Warning: if a file does not exist, the project won't load.</p>
+               <p>You can add as many mappings as you want, but only in the context of a team project, i.e. one of the mappings includes omegat.project.
+                      This feature is intended for gathering source files, but you're not restricted to source files.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5039"></a>1.7.&nbsp;Note about omegat.project and mappings
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>When you create a new project and commit that to a repository, the <code class="filename">omegat.project</code> file
+                          doesn't contain any mapping.
+                          When you download the project, the project is converted to a team project locally and a default mapping is added.
+                      
+               </p>
+               <p>Note that the omegat.project file in the repository is not changed automatically and still doesn't contain
+                          the mappings. When you load a project, all changes in the repository are copied to the local project, including
+                          the <code class="filename">omegat.project</code> file with project settings. If the file doesn't contain mappings, the
+                          existing local mappings are re-applied, and only those. All other local changes to the project are reverted.
+                        If the file does contain mappings, then local changes to mappings are lost.
+                      
+               </p>
             </div>
          </div>
          <div class="section">
@@ -423,9 +477,7 @@
                  project is reloaded or closed.
             </p>
             <p><span class="bold"><strong>Deleting source files</strong></span></p>
-            <p>Files must be deleted first by the project manager, and then
-                 locally.
-            </p>
+            <p>Files must be deleted by the project manager.</p>
             <p><span class="bold"><strong>Changing segmentation rules or file
                        filters</strong></span></p>
             <p>Project parameters must be changed by the project manager.</p>
@@ -532,7 +584,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5140"></a>3.1.&nbsp;Importing and exporting translation memories
+                        <h3 class="title"><a name="d0e5203"></a>3.1.&nbsp;Importing and exporting translation memories
                         </h3>
                      </div>
                   </div>
@@ -569,7 +621,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5151"></a>3.2.&nbsp;Creating a translation memory for selected documents
+                        <h3 class="title"><a name="d0e5214"></a>3.2.&nbsp;Creating a translation memory for selected documents
                         </h3>
                      </div>
                   </div>
@@ -647,7 +699,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5195"></a>3.3.&nbsp;Sharing translation memories
+                        <h3 class="title"><a name="d0e5258"></a>3.3.&nbsp;Sharing translation memories
                         </h3>
                      </div>
                   </div>
@@ -667,7 +719,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5202"></a>3.4.&nbsp;Using TMX with alternative language
+                        <h3 class="title"><a name="d0e5265"></a>3.4.&nbsp;Using TMX with alternative language
                         </h3>
                      </div>
                   </div>
@@ -940,7 +992,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5423"></a>6.1.&nbsp;Mixing RTL and LTR strings in segments
+                        <h3 class="title"><a name="d0e5486"></a>6.1.&nbsp;Mixing RTL and LTR strings in segments
                         </h3>
                      </div>
                   </div>
@@ -963,7 +1015,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5431"></a>6.2.&nbsp;<span class="application">OmegaT</span> tags in RTL segments
+                        <h3 class="title"><a name="d0e5494"></a>6.2.&nbsp;<span class="application">OmegaT</span> tags in RTL segments
                         </h3>
                      </div>
                   </div>
@@ -988,7 +1040,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5440"></a>6.3.&nbsp;Creating translated RTL documents
+                        <h3 class="title"><a name="d0e5503"></a>6.3.&nbsp;Creating translated RTL documents
                         </h3>
                      </div>
                   </div>

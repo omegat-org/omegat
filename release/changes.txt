@@ -2,7 +2,7 @@
  OmegaT 5.4.0 (2020-12-12)
 ----------------------------------------------------------------------
   7 Enhancements
-  6 Bug fixes
+  8 Bug fixes
   10 Localisation updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
@@ -44,6 +44,9 @@
 
   - HTML filter whitespace handling errors
   https://sourceforge.net/p/omegat/bugs/1007/
+
+  - Too many glossary hits on right click lead to them displayed off screen
+  https://sourceforge.net/p/omegat/bugs/1009/
 
   - Wrong background color in dark mode on Linux Mint
   https://sourceforge.net/p/omegat/bugs/1013/

@@ -77,7 +77,7 @@
  OmegaT 5.3.0 (2020-08-03)
 ----------------------------------------------------------------------
   6 Enhancements
-  9 Bug fixes
+  10 Bug fixes
   10 Localisation updates
 ----------------------------------------------------------------------
 5.3.0 vs 5.2.0
@@ -105,7 +105,10 @@
   Bug fixes:
 
   - application_startup event could fail to execute scripts
-  https://sourceforge.net/p/omegat/bugs/860
+  https://sourceforge.net/p/omegat/bugs/860/
+
+  - UI language selected during update on Windows not taking effect
+  https://sourceforge.net/p/omegat/bugs/904/
 
   - Fix wrong translated word from 'Term' in `Bundle_ko.properties`
   https://sourceforge.net/p/omegat/bugs/939/

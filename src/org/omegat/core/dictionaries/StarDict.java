@@ -159,6 +159,14 @@ public class StarDict implements IDictionaryFactory {
                 throw new FileNotFoundException("No .dict.dz or .dict files were found for " + dictName);
             }
 
+            if (dictType == DictType.DICTFILE) {
+                try {
+                    dictFile = new RandomAccessFile(new File(dataFile), "r");
+                } catch (FileNotFoundException e) {
+                    throw new FileNotFoundException("No .dict files were found for " + dictName);
+                }
+            }
+
             try {
                 data = loadData(getFile(".idx.gz", ".idx").get());
             } catch (NoSuchElementException ex) {
@@ -199,6 +207,17 @@ public class StarDict implements IDictionaryFactory {
             is.close();
             newData.done();
             return newData;
+        }
+
+        @Override
+        public void dispose() {
+            if (dictFile != null) {
+                try {
+                    dictFile.close();
+                } catch (IOException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
         }
 
         @Override
@@ -250,13 +269,6 @@ public class StarDict implements IDictionaryFactory {
          */
         private String readDictArticleText(int start, int len) {
             String result = null;
-            if(dictFile == null){
-                try {
-                    dictFile = new RandomAccessFile(new File(dataFile), "r");
-                } catch (FileNotFoundException e){
-                    System.err.println(e.getMessage());
-                }
-            }
             try {
                 byte[] data = new byte[len];
                 dictFile.seek(start);

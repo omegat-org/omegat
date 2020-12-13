@@ -78,4 +78,9 @@ public interface IDictionary {
         // Default implementation for backwards compatibility
         return readArticles(word);
     }
+
+    /**
+     * Dispose IDictionary. Default is no action.
+     */
+    default void dispose() {}
 }

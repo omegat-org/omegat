@@ -26,6 +26,7 @@
 
 package org.omegat.core.dictionaries;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -82,5 +83,5 @@ public interface IDictionary {
     /**
      * Dispose IDictionary. Default is no action.
      */
-    default void dispose() {}
+    default void dispose() throws IOException {}
 }

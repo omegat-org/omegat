@@ -109,6 +109,7 @@ public class StarDict implements IDictionaryFactory {
         private final String dictName;
         private final DictType dictType;
         private final RandomAccessFile dataFile;
+        private final DictZipInputStream din;
 
         protected final DictionaryData<Entry> data;
 
@@ -154,6 +155,11 @@ public class StarDict implements IDictionaryFactory {
                 File file = getFile(".dict.dz", ".dict").get();
                 dictType = file.getName().endsWith(".dz") ? DictType.DICTZIP : DictType.DICTFILE;
                 dataFile = new RandomAccessFile(file, "r");
+                if (dictType == DictType.DICTZIP) {
+                    din = new DictZipInputStream(new RandomAccessInputStream(dataFile));
+                } else {
+                    din = null;
+                }
             } catch (NoSuchElementException | FileNotFoundException ex) {
                 throw new FileNotFoundException("No .dict.dz or .dict files were found for " + dictName);
             }
@@ -202,6 +208,9 @@ public class StarDict implements IDictionaryFactory {
 
         @Override
         public void dispose() throws IOException {
+            if (dictType == DictType.DICTZIP) {
+                din.close();
+            }
             dataFile.close();
         }
 
@@ -278,9 +287,6 @@ public class StarDict implements IDictionaryFactory {
         private String readDictZipArticleText(int start, int len) {
             String result = null;
             try {
-                // We explicitly *do not* want to close the underlying dataFile so we *do not*
-                // use try-with-resources here.
-                DictZipInputStream din = new DictZipInputStream(new RandomAccessInputStream(dataFile));
                 din.seek(start);
                 byte[] data = new byte[len];
                 din.readFully(data);

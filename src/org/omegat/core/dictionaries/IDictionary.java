@@ -52,7 +52,7 @@ import java.util.List;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
-public interface IDictionary {
+public interface IDictionary extends AutoCloseable {
 
     /**
      * Read article's text.
@@ -83,5 +83,5 @@ public interface IDictionary {
     /**
      * Dispose IDictionary. Default is no action.
      */
-    default void dispose() throws IOException {}
+    default void close() throws IOException {}
 }

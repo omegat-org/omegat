@@ -111,8 +111,8 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
 
     private void closeDict(IDictionary dict) {
         try {
-            dict.dispose();
-        } catch (IOException e) {
+            dict.close();
+        } catch (Exception e) {
             Log.log(e);
         }
     }

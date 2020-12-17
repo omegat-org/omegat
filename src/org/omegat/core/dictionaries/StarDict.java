@@ -5,6 +5,7 @@
 
  Copyright (C) 2009 Alex Buloichik
                2015-2016 Hiroshi Miura, Aaron Madlon-Kay
+               2020 Suguru Oho, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -70,6 +71,7 @@ import org.omegat.util.Log;
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Hiroshi Miura
  * @author Aaron Madlon-Kay
+ * @author Suguru Oho
  */
 public class StarDict implements IDictionaryFactory {
 

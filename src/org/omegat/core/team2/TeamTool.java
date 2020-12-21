@@ -73,8 +73,6 @@ public final class TeamTool {
      *            Source language
      * @param trgLang
      *            Target language
-     * @param showGui
-     *            If true, show the Project Properties dialog
      * @throws Exception
      *             If specified dir is not a directory, is not writeable, etc.
      */

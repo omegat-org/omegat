@@ -255,7 +255,7 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
-        // MacOSX-specific - they must be setted BEFORE any GUI calls
+        // MacOSX-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();
         }

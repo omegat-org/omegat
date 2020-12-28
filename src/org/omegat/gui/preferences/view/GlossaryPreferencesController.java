@@ -25,13 +25,15 @@
 
 package org.omegat.gui.preferences.view;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 
+import org.omegat.gui.glossary.GlossaryRenderers;
 import org.omegat.gui.glossary.IGlossaryRenderer;
-import org.omegat.core.Core;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.DelegatingComboBoxRenderer;
 
 /**
  * @author Aaron Madlon-Kay
@@ -56,6 +58,13 @@ public class GlossaryPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new GlossaryPreferencesPanel();
+        panel.cbGlossaryLayout.setModel(new DefaultComboBoxModel<>(GlossaryRenderers.getAll().toArray(new IGlossaryRenderer[0])));
+        panel.cbGlossaryLayout.setRenderer(new DelegatingComboBoxRenderer<IGlossaryRenderer, String>() {
+            @Override
+            protected String getDisplayText(IGlossaryRenderer value) {
+                return value.getName();
+            }
+        });
     }
 
     @Override
@@ -69,8 +78,7 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         panel.replaceHitsCheckBox.setSelected(Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT));
         panel.requireSimilarCaseCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE,
                 Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT));
-        panel.cbGlossaryLayout.setSelectedItem(Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT,
-                "Default"));
+        panel.cbGlossaryLayout.setSelectedItem(GlossaryRenderers.getPreferredGlossaryRenderer());
     }
 
     @Override
@@ -90,7 +98,6 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.GLOSSARY_STEMMING, panel.useStemmingCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT, panel.replaceHitsCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE, panel.requireSimilarCaseCheckBox.isSelected());
-        Preferences.setPreference(Preferences.GLOSSARY_LAYOUT, ((IGlossaryRenderer) panel.cbGlossaryLayout.getSelectedItem()).getId());
-        Core.getGlossary().setLocalRenderer((IGlossaryRenderer) panel.cbGlossaryLayout.getSelectedItem());
+        GlossaryRenderers.setPreferredGlossaryRenderer((IGlossaryRenderer) panel.cbGlossaryLayout.getSelectedItem());
     }
 }

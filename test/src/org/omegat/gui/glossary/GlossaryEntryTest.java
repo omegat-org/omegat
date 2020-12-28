@@ -78,11 +78,11 @@ public class GlossaryEntryTest extends TestCore {
         String coloredEmptyComment = "<font color=#cc00cc></font>";
 
         GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "", false, null);
-        assertEquals("<html><p>" + coloredSource + " = " + coloredTarget 
+        assertEquals("<html><p>" + coloredSource + " = " + coloredTarget
                 + coloredEmptyComment + "</p></html>", renderer.renderToHtml(ge));
 
         ge = new GlossaryEntry("source1", "translation1", "", true, null);
-        assertEquals("<html><p>" + coloredSource + " = <b>" + coloredTarget + "</b>" 
+        assertEquals("<html><p>" + coloredSource + " = <b>" + coloredTarget + "</b>"
                 + coloredEmptyComment + "</p></html>", renderer.renderToHtml(ge));
     }
 

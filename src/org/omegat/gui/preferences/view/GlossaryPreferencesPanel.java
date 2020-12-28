@@ -58,6 +58,8 @@ public class GlossaryPreferencesPanel extends JPanel {
         jPanel1 = new javax.swing.JPanel();
         cbGlossaryLayoutLabel = new javax.swing.JLabel();
         cbGlossaryLayout = new javax.swing.JComboBox<>();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        mergeAlternateDefinitionsCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -88,6 +90,10 @@ public class GlossaryPreferencesPanel extends JPanel {
         jPanel1.add(cbGlossaryLayout, java.awt.BorderLayout.CENTER);
 
         add(jPanel1);
+        add(filler2);
+
+        org.openide.awt.Mnemonics.setLocalizedText(mergeAlternateDefinitionsCheckBox, OStrings.getString("PREFS_GLOSSARY_MERGE_ALTERNATE_DEFINITIONS")); // NOI18N
+        add(mergeAlternateDefinitionsCheckBox);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -95,7 +101,9 @@ public class GlossaryPreferencesPanel extends JPanel {
     private javax.swing.JLabel cbGlossaryLayoutLabel;
     javax.swing.JCheckBox displayContextCheckBox;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
     private javax.swing.JPanel jPanel1;
+    javax.swing.JCheckBox mergeAlternateDefinitionsCheckBox;
     javax.swing.JCheckBox replaceHitsCheckBox;
     javax.swing.JCheckBox requireSimilarCaseCheckBox;
     javax.swing.JCheckBox useSeparateTermsCheckBox;

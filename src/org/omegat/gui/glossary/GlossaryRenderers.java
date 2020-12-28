@@ -57,17 +57,25 @@ public class GlossaryRenderers {
         GLOSSARY_RENDERERS.add(renderer);
     }
 
+    private static IGlossaryRenderer preferred = null;
+
     public static void setPreferredGlossaryRenderer(IGlossaryRenderer renderer) {
         Preferences.setPreference(Preferences.GLOSSARY_LAYOUT, renderer.getId());
+        preferred = renderer;
     }
 
     public static IGlossaryRenderer getPreferredGlossaryRenderer() {
-        String preferredId = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, DEFAULT_RENDERER.getId());
-        for (IGlossaryRenderer renderer : GLOSSARY_RENDERERS) {
-            if (renderer.getId().equals(preferredId)) {
-                return renderer;
+        if (preferred == null) {
+            String preferredId = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, DEFAULT_RENDERER.getId());
+            for (IGlossaryRenderer renderer : GLOSSARY_RENDERERS) {
+                if (renderer.getId().equals(preferredId)) {
+                    preferred = renderer;
+                }
+            }
+            if (preferred == null) {
+                preferred = DEFAULT_RENDERER;
             }
         }
-        return DEFAULT_RENDERER;
+        return preferred;
     }
 }

@@ -33,14 +33,17 @@ import org.omegat.util.gui.TooltipAttribute;
 
 public class DefaultGlossaryRenderer implements IGlossaryRenderer {
 
+    @Override
     public String getName() {
         return OStrings.getString("GLOSSARY_RENDERER_DEFAULT");
     }
 
+    @Override
     public String getId() {
         return getClass().getCanonicalName();
     }
 
+    @Override
     public void render(GlossaryEntry entry, IRenderTarget<?> trg) {
         trg.append(entry.getSrcText(), SOURCE_ATTRIBUTES);
         trg.append(" = ");

@@ -131,10 +131,10 @@ public interface IGlossaryRenderer {
 
     // --------------- Identification methods -----------------
 
-    /** Name to be displayed in the drop box. Can be language-dependant **/
+    /** Name to be displayed in the drop box. Can be language-dependent **/
     String getName();
 
-    /** String to be stored in config file. Must be language-independant, and unique **/
+    /** String to be stored in config file. Must be language-independent, and unique **/
     String getId();
 
     // --------------- Rendering methods -----------------

@@ -78,14 +78,15 @@
       </AuxValues>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
+
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
-          <Property name="axis" type="int" value="3"/>
+        <Property name="axis" type="int" value="3"/>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-               <ResourceString bundle="org/omegat/Bundle.properties" key="PREFS_GLOSSARY_LAYOUT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="org/omegat/Bundle.properties" key="PREFS_GLOSSARY_LAYOUT" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>
@@ -107,7 +108,7 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="cbGlossaryLayout">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;IGlossaryRenderer&gt;"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
           </AuxValues>
         </Component>

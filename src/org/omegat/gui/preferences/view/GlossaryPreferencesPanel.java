@@ -26,13 +26,9 @@
 package org.omegat.gui.preferences.view;
 
 import javax.swing.JPanel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 
-import org.omegat.core.Core;
-import org.omegat.util.OStrings;
 import org.omegat.gui.glossary.IGlossaryRenderer;
-import org.omegat.util.gui.DelegatingComboBoxRenderer;
+import org.omegat.util.OStrings;
 
 
 /**
@@ -59,11 +55,11 @@ public class GlossaryPreferencesPanel extends JPanel {
         useStemmingCheckBox = new javax.swing.JCheckBox();
         replaceHitsCheckBox = new javax.swing.JCheckBox();
         requireSimilarCaseCheckBox = new javax.swing.JCheckBox();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cbGlossaryLayout = new javax.swing.JComboBox<>();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
+        cbGlossaryLayout = new javax.swing.JComboBox<>();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -84,19 +80,12 @@ public class GlossaryPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(requireSimilarCaseCheckBox, OStrings.getString("PREFS_GLOSSARY_REQUIRE_SIMILAR_CASE")); // NOI18N
         add(requireSimilarCaseCheckBox);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("PREFS_GLOSSARY_LAYOUT"));
-        jPanel1.add(jLabel1);
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
-        cbGlossaryLayout.setModel(new DefaultComboBoxModel<IGlossaryRenderer>(Core.getGlossaryRenderers().toArray(new IGlossaryRenderer[0])));
-        cbGlossaryLayout.setRenderer(new DelegatingComboBoxRenderer<IGlossaryRenderer,String>() {
-            @Override
-            protected String getDisplayText(IGlossaryRenderer value) {
-                return value.getName();
-            }
-        });
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("PREFS_GLOSSARY_LAYOUT")); // NOI18N
+        jPanel1.add(jLabel1);
         jPanel1.add(filler2);
         jPanel1.add(cbGlossaryLayout);
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.X_AXIS));
 
         add(jPanel1);
         add(filler1);

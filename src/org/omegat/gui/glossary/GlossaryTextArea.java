@@ -177,16 +177,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         JTextPaneLinkifier.linkify(this);
     }
 
-    /** Creates renderer according to value saved in preferences **/
-    public void setLocalRenderer(IGlossaryRenderer preference) {
-        entryRenderer = preference;
-    }
-
-    @Override
-    public IGlossaryRenderer getLocalRenderer() {
-        return entryRenderer;
-    }
-
     @Override
     protected void onProjectOpen() {
         clear();

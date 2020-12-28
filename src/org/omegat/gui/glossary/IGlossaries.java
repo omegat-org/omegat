@@ -32,8 +32,4 @@ public interface IGlossaries {
     List<GlossaryEntry> getDisplayedEntries();
 
     void showCreateGlossaryEntryDialog(Frame parent);
-
-    void setLocalRenderer(IGlossaryRenderer preference);
-
-    IGlossaryRenderer getLocalRenderer();
 }

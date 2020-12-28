@@ -353,15 +353,6 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             @Override
             public void showCreateGlossaryEntryDialog(Frame parent) {
             }
-
-            @Override
-            public IGlossaryRenderer getLocalRenderer() {
-                return null;
-            }
-
-            @Override
-            public void setLocalRenderer(IGlossaryRenderer preference) {
-            }
         });
         currentEntries.clear();
     }

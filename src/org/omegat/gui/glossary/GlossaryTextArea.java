@@ -165,6 +165,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
 
         ToolTipManager.sharedInstance().registerComponent(this);
+
         JTextPaneLinkifier.linkify(this);
     }
 

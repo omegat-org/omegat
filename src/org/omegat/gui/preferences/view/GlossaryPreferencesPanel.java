@@ -30,7 +30,6 @@ import javax.swing.JPanel;
 import org.omegat.gui.glossary.IGlossaryRenderer;
 import org.omegat.util.OStrings;
 
-
 /**
  * @author Aaron Madlon-Kay
  */

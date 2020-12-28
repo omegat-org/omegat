@@ -119,8 +119,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
     private final DockableScrollPane scrollPane;
 
-    private transient IGlossaryRenderer entryRenderer = new DefaultGlossaryRenderer();
-
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea(IMainWindow mw) {
         super(true);
@@ -167,13 +165,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
 
         ToolTipManager.sharedInstance().registerComponent(this);
-        String preference = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT,
-             entryRenderer.getId());
-        for (IGlossaryRenderer r: Core.getGlossaryRenderers()) {
-            if (r.getId().equals(preference)) {
-                entryRenderer = r;
-            }
-        }
         JTextPaneLinkifier.linkify(this);
     }
 
@@ -236,6 +227,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
             Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
 
+        IGlossaryRenderer entryRenderer = GlossaryRenderers.getPreferredGlossaryRenderer();
         for (GlossaryEntry entry : entries) {
             entryRenderer.render(entry, getStyledDocument());
         }

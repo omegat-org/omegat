@@ -38,7 +38,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
-import org.omegat.util.Preferences;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
@@ -67,7 +66,7 @@ public class TransTipsMarker implements IMarker {
 
         List<Mark> marks = new ArrayList<Mark>();
 
-        IGlossaryRenderer entryRenderer = Core.getGlossary().getLocalRenderer();
+        IGlossaryRenderer entryRenderer = GlossaryRenderers.getPreferredGlossaryRenderer();
         for (GlossaryEntry ent : glossaryEntries) {
             String tooltip = entryRenderer.renderToHtml(ent);
             List<Token[]> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);

@@ -73,59 +73,45 @@ public class GlossaryEntryTest extends TestCore {
 
     @Test
     public void testToStyledString() {
-        String coloredSource = "<font color=#0000ff>source1</font>";
-        String coloredTarget = "<font color=#00b200>translation1</font>";
-        String coloredEmptyComment = "<font color=#cc00cc></font>";
-
         GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "", false, null);
-        assertEquals("<html><p>" + coloredSource + " = " + coloredTarget
-                + coloredEmptyComment + "</p></html>", renderer.renderToHtml(ge));
+        assertEquals("<html><p>source1 = translation1</p></html>", renderer.renderToHtml(ge));
 
         ge = new GlossaryEntry("source1", "translation1", "", true, null);
-        assertEquals("<html><p>" + coloredSource + " = <b>" + coloredTarget + "</b>"
-                + coloredEmptyComment + "</p></html>", renderer.renderToHtml(ge));
+        assertEquals("<html><p>source1 = <b>translation1</b></p></html>", renderer.renderToHtml(ge));
     }
 
     @Test
     public void testToStyledStringMultipleTranslations() {
         GlossaryEntry ge = new GlossaryEntry("source1", new String[] {"translation1", "translation2"},
                 new String[] { "", "" }, new boolean[] { false, false }, new String[] { null, null });
-        assertEquals("<html><p><font color=#0000ff>source1</font> = "
-		        + "<font color=#00b200>translation1</font>, <font color=#00b200>translation2</font>"
-		        + "<font color=#cc00cc></font></p></html>", renderer.renderToHtml(ge));
+        assertEquals("<html><p>source1 = translation1, translation2</p></html>", renderer.renderToHtml(ge));
 
         ge = new GlossaryEntry("source1", new String[] { "translation1", "translation2" }, new String[] { "", "" },
                 new boolean[] { false, true }, new String[] { null, null });
-        assertEquals("<html><p><font color=#0000ff>source1</font> = "
-		        + "<font color=#00b200>translation1</font>, <b><font color=#00b200>translation2</font></b>"
-		        + "<font color=#cc00cc></font></p></html>", renderer.renderToHtml(ge));
+        assertEquals("<html><p>source1 = translation1, <b>translation2</b></p></html>",
+                renderer.renderToHtml(ge));
     }
 
     @Test
     public void testToStyledStringWithComment() {
         GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "comment1", false, null);
-        assertEquals("<html><p><font color=#0000ff>source1</font> = "
-		        + "<font color=#00b200>translation1</font>"
-		        + "<font color=#cc00cc><br>1. comment1</font></p></html>", renderer.renderToHtml(ge));
+        assertEquals("<html><p>source1 = translation1<br>1. comment1</p></html>", renderer.renderToHtml(ge));
 
         ge = new GlossaryEntry("source1", "translation1", "comment1", true, null);
-        assertEquals("<html><p><font color=#0000ff>source1</font> = "
-		        + "<b><font color=#00b200>translation1</font></b>"
-		        + "<font color=#cc00cc><br>1. comment1</font></p></html>", renderer.renderToHtml(ge));
+        assertEquals("<html><p>source1 = <b>translation1</b><br>1. comment1</p></html>",
+                renderer.renderToHtml(ge));
     }
 
     @Test
     public void testToStyledStringMultipleComments() {
         GlossaryEntry ge = new GlossaryEntry("source1", new String[] {"translation1", "translation2"},
                 new String[] { "comment1", "comment2" }, new boolean[] { false, false }, new String[] { null, null });
-        assertEquals("<html><p><font color=#0000ff>source1</font> = "
-		        + "<font color=#00b200>translation1</font>, <font color=#00b200>translation2</font>"
-		        + "<font color=#cc00cc><br>1. comment1<br>2. comment2</font></p></html>", renderer.renderToHtml(ge));
+        assertEquals("<html><p>source1 = translation1, translation2<br>1. comment1<br>2. comment2</p></html>",
+                renderer.renderToHtml(ge));
 
         ge = new GlossaryEntry("source1", new String[] { "translation1", "translation2" },
                 new String[] { "comment1", "comment2" }, new boolean[] { true, false }, new String[] { null, null });
-        assertEquals("<html><p><font color=#0000ff>source1</font> = "
-		        + "<b><font color=#00b200>translation1</font></b>, <font color=#00b200>translation2</font>"
-		        + "<font color=#cc00cc><br>1. comment1<br>2. comment2</font></p></html>", renderer.renderToHtml(ge));
+        assertEquals("<html><p>source1 = <b>translation1</b>, translation2<br>1. comment1<br>2. comment2</p></html>",
+                renderer.renderToHtml(ge));
     }
 }

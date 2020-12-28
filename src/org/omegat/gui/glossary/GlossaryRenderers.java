@@ -39,9 +39,10 @@ import org.omegat.util.Preferences;
  *
  */
 public class GlossaryRenderers {
+    public static final IGlossaryRenderer DEFAULT_RENDERER = new DefaultGlossaryRenderer();
     private static final List<IGlossaryRenderer> GLOSSARY_RENDERERS = new ArrayList<>();
     static {
-        addGlossaryRenderer(new DefaultGlossaryRenderer());
+        addGlossaryRenderer(DEFAULT_RENDERER);
         addGlossaryRenderer(new DictionaryGlossaryRenderer());
     }
 
@@ -61,18 +62,12 @@ public class GlossaryRenderers {
     }
 
     public static IGlossaryRenderer getPreferredGlossaryRenderer() {
-        String preferredId = Preferences.getPreference(Preferences.GLOSSARY_LAYOUT);
+        String preferredId = Preferences.getPreferenceDefault(Preferences.GLOSSARY_LAYOUT, DEFAULT_RENDERER.getId());
         for (IGlossaryRenderer renderer : GLOSSARY_RENDERERS) {
             if (renderer.getId().equals(preferredId)) {
                 return renderer;
             }
         }
-        // Preferred renderer not found
-        IGlossaryRenderer renderer = new DefaultGlossaryRenderer();
-        if (preferredId.isEmpty()) {
-            // Preferred renderer was not set
-            setPreferredGlossaryRenderer(renderer);
-        }
-        return renderer;
+        return DEFAULT_RENDERER;
     }
 }

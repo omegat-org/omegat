@@ -88,7 +88,7 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         panel.useStemmingCheckBox.setSelected(Preferences.GLOSSARY_STEMMING_DEFAULT);
         panel.replaceHitsCheckBox.setSelected(false);
         panel.requireSimilarCaseCheckBox.setSelected(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT);
-        panel.cbGlossaryLayout.setSelectedItem("Default");
+        panel.cbGlossaryLayout.setSelectedItem(GlossaryRenderers.DEFAULT_RENDERER);
     }
 
     @Override

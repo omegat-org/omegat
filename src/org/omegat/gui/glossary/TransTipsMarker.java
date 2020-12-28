@@ -66,9 +66,9 @@ public class TransTipsMarker implements IMarker {
 
         List<Mark> marks = new ArrayList<Mark>();
 
-        IGlossaryRenderer entryRenderer = GlossaryRenderers.getPreferredGlossaryRenderer();
+        IGlossaryRenderer renderer = GlossaryRenderers.getPreferredGlossaryRenderer();
         for (GlossaryEntry ent : glossaryEntries) {
-            String tooltip = entryRenderer.renderToHtml(ent);
+            String tooltip = renderer.renderToHtml(ent);
             List<Token[]> tokens = Core.getGlossaryManager().searchSourceMatchTokens(ste, ent);
             marks.addAll(getMarksForTokens(tokens, ste.getSrcText(), tooltip));
         }

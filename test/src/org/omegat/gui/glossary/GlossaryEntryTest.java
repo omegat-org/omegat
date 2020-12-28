@@ -37,7 +37,7 @@ import org.omegat.core.TestCore;
  */
 public class GlossaryEntryTest extends TestCore {
 
-    private final DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer(true);
+    private final DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer();
 
     @Test
     public void testRead() throws Exception {

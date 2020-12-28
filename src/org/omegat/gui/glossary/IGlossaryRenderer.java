@@ -139,8 +139,6 @@ public interface IGlossaryRenderer {
 
     // --------------- Rendering methods -----------------
 
-    boolean wantsMerge();
-
     void render(GlossaryEntry entry, IRenderTarget<?> trg);
 
     default void render(GlossaryEntry entry, StyledDocument doc) {

@@ -38,30 +38,18 @@ public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
      * Register plugin into OmegaT.
      */
     public static void loadPlugins() {
-        Core.registerGlossaryRenderer(new DictionaryGlossaryRenderer(true));
-        Core.registerGlossaryRenderer(new DictionaryGlossaryRenderer(false));
+        Core.registerGlossaryRenderer(new DictionaryGlossaryRenderer());
     }
 
     public static void unloadPlugins() {
     }
 
-    private boolean wantsMerge;
-
-    public DictionaryGlossaryRenderer(boolean wantsMerge) {
-        this.wantsMerge = wantsMerge;
-    }
-
-    public boolean wantsMerge() {
-        return wantsMerge;
-    }
-
     public String getName() {
-        return OStrings.getString("GLOSSARY_RENDERER_DICTIONARY") + " (" 
-            + OStrings.getString(wantsMerge ? "GLOSSARY_RENDERER_WITH_MERGE" : "GLOSSARY_RENDERER_NO_MERGE") + ")";
+        return OStrings.getString("GLOSSARY_RENDERER_DICTIONARY");
     }
 
     public String getId() {
-        return "org.omegat.gui.glossary.DictionaryGlossaryRenderer(" + wantsMerge + ")";
+        return "org.omegat.gui.glossary.DictionaryGlossaryRenderer";
     }
 
     public void render(GlossaryEntry entry, IRenderTarget<?> trg) {

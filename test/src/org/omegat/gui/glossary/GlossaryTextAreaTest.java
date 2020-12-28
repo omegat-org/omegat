@@ -67,7 +67,7 @@ public class GlossaryTextAreaTest extends TestCore {
             }
         });
         // Make sure representations of both entries are rendered
-        DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer(true);
+        DefaultGlossaryRenderer renderer = new DefaultGlossaryRenderer();
         StyledDocument doc = new DefaultStyledDocument();
         renderer.render(entries.get(0), doc);
         renderer.render(entries.get(1), doc);

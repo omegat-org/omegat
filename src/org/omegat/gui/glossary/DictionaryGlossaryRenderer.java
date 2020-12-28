@@ -38,7 +38,7 @@ public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
     }
 
     public String getId() {
-        return "org.omegat.gui.glossary.DictionaryGlossaryRenderer";
+        return getClass().getCanonicalName();
     }
 
     public void render(GlossaryEntry entry, IRenderTarget<?> trg) {

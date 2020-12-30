@@ -89,7 +89,7 @@ public class GITUserPassDialog extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
 
         setTitle(OStrings.getString("TEAM_USERPASS_TITLE")); // NOI18N
-        setMinimumSize(new java.awt.Dimension(250, 200));
+        setMinimumSize(new java.awt.Dimension(450, 200));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

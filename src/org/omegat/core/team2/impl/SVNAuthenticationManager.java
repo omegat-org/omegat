@@ -172,14 +172,14 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
                 throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
             }
         }
-        return ask(kind, url, OStrings.getString("TEAM_USERPASS_FIRST"));
+        return ask(kind, url, OStrings.getString("TEAM_USERPASS_FIRST", url.getPath()));
     }
 
     public SVNAuthentication getNextAuthentication(String kind, String realm, SVNURL url) throws SVNException {
         if (predefinedUser != null && predefinedPass != null) {
             throw new KnownException("TEAM_PREDEFINED_CREDENTIALS_ERROR");
         }
-        return ask(kind, url, OStrings.getString("TEAM_USERPASS_WRONG"));
+        return ask(kind, url, OStrings.getString("TEAM_USERPASS_WRONG", url.getPath()));
     };
 
     @Override

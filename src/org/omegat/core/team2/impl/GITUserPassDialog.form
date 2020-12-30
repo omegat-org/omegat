@@ -6,7 +6,7 @@
       <ResourceString bundle="org/omegat/Bundle.properties" key="TEAM_USERPASS_TITLE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[250, 200]"/>
+      <Dimension value="[450, 200]"/>
     </Property>
   </Properties>
   <SyntheticProperties>

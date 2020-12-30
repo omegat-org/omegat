@@ -310,7 +310,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
         GITUserPassDialog userPassDialog = new GITUserPassDialog(Core.getMainWindow().getApplicationFrame());
         userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         userPassDialog.descriptionTextArea.setText(OStrings
-                .getString(credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
+                .getString(credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG", uri.getHumanishName()));
         // if username is already available in uri, then we will not be asked for an username, so we cannot
         // change it.
         if (uri.getUser() != null && !"".equals(uri.getUser())) {

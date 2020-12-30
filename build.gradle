@@ -3,6 +3,7 @@ import org.apache.tools.ant.filters.FixCrLfFilter
 
 plugins {
     id 'application'
+    id 'java-library'
     id 'maven-publish'
     id 'eclipse'
     id 'checkstyle'
@@ -106,12 +107,13 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.7'
         implementation 'commons-lang:commons-lang:2.6'
+        api 'org.slf4j:slf4j-api:1.7.25'
         implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 
         // macOS integration
         implementation 'org.madlonkay:desktopsupport:0.3.0'
 
-        implementation 'javax.xml.bind:jaxb-api:2.3.1'
+        api 'javax.xml.bind:jaxb-api:2.3.1'
         implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
         implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
 
@@ -129,7 +131,7 @@ dependencies {
         implementation 'com.github.albfernandez:juniversalchardet:2.3.2'
 
         // Legacy projects re-hosted on GitHub + Bintray
-        implementation 'org.omegat:vldocking:3.0.5'
+        api 'org.omegat:vldocking:3.0.5'
         implementation 'org.omegat:htmlparser:1.5'
         implementation 'org.omegat:gnudiff4j:1.15'
         implementation 'org.omegat:lib-mnemonics:1.0'

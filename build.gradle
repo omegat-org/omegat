@@ -106,6 +106,7 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.7'
         implementation 'commons-lang:commons-lang:2.6'
+        compile 'org.slf4j:slf4j-api:1.7.25'
         implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 
         // macOS integration
@@ -129,7 +130,7 @@ dependencies {
         implementation 'com.github.albfernandez:juniversalchardet:2.3.2'
 
         // Legacy projects re-hosted on GitHub + Bintray
-        implementation 'org.omegat:vldocking:3.0.5'
+        compile 'org.omegat:vldocking:3.0.5'
         implementation 'org.omegat:htmlparser:1.5'
         implementation 'org.omegat:gnudiff4j:1.15'
         implementation 'org.omegat:lib-mnemonics:1.0'

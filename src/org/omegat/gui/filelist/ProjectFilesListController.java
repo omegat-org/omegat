@@ -34,7 +34,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
@@ -108,6 +107,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DataTableStyling;
+import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
 import org.omegat.util.gui.OSXIntegration;
@@ -400,7 +400,7 @@ public class ProjectFilesListController {
             }
             stream.forEach(f -> {
                 try {
-                    Desktop.getDesktop().open(f);
+                    DesktopWrapper.open(f);
                 } catch (IOException ex) {
                     Log.log(ex);
                 }

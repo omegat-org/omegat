@@ -25,7 +25,6 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.Desktop;
 import java.awt.Window;
 import java.net.URI;
 
@@ -38,6 +37,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.VersionChecker;
+import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.StaticUIUtils;
 
 public class VersionCheckDialog {
@@ -91,7 +91,7 @@ public class VersionCheckDialog {
                 panel.autoCheckCheckBox.isSelected()));
         panel.goToDownloadsButton.addActionListener(e -> {
             try {
-                Desktop.getDesktop().browse(URI.create(DOWNLOAD_URL));
+                DesktopWrapper.browse(URI.create(DOWNLOAD_URL));
                 StaticUIUtils.closeWindowByEvent(dialog);
             } catch (Exception ex) {
                 Log.log(ex);

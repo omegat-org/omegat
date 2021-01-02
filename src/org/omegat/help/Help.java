@@ -29,7 +29,6 @@
 
 package org.omegat.help;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,6 +43,7 @@ import java.util.Random;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.DesktopWrapper;
 
 /**
  * A utility class for accessing bundled local or online documentation.
@@ -73,7 +73,7 @@ public final class Help {
 
     public static void showJavadoc() throws IOException {
         URI uri = URI.create(ONLINE_JAVADOC_URL);
-        Desktop.getDesktop().browse(uri);
+        DesktopWrapper.browse(uri);
     }
 
     /**
@@ -87,7 +87,7 @@ public final class Help {
         if (uri == null) {
             uri = URI.create(ONLINE_HELP_URL);
         }
-        Desktop.getDesktop().browse(uri);
+        DesktopWrapper.browse(uri);
     }
 
     public static URI getHelpFileURI(String filename) {

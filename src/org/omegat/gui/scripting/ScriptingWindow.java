@@ -29,7 +29,6 @@ package org.omegat.gui.scripting;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -99,6 +98,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
@@ -902,7 +902,7 @@ public class ScriptingWindow {
                 return;
             }
             try {
-                Desktop.getDesktop().open(m_scriptsDirectory);
+                DesktopWrapper.open(m_scriptsDirectory);
             } catch (Exception ex) {
                 Log.logErrorRB(ex, "RPF_ERROR");
                 Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");

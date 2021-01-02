@@ -37,7 +37,6 @@
 package org.omegat.gui.main;
 
 import java.awt.Component;
-import java.awt.Desktop;
 import java.awt.KeyboardFocusManager;
 import java.io.File;
 import java.util.List;
@@ -87,6 +86,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
+import org.omegat.util.gui.DesktopWrapper;
 
 /**
  * Handler for main menu items.
@@ -361,7 +361,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         try {
-            Desktop.getDesktop().open(path);
+            DesktopWrapper.open(path);
         } catch (Exception ex) {
             Log.logErrorRB(ex, "RPF_ERROR");
             Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");

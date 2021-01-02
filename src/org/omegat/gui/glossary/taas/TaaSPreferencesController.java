@@ -26,7 +26,6 @@
 
 package org.omegat.gui.glossary.taas;
 
-import java.awt.Desktop;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +42,7 @@ import org.omegat.gui.preferences.IPreferencesController;
 import org.omegat.gui.preferences.view.GlossaryPreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.DesktopWrapper;
 
 /**
  * @author Aaron Madlon-Kay
@@ -71,7 +71,7 @@ public class TaaSPreferencesController extends BasePreferencesController {
         panel = new TaaSPreferencesPanel();
         panel.getKeyButton.addActionListener(e -> {
             try {
-                Desktop.getDesktop().browse(URI.create(TAAS_KEY_URL));
+                DesktopWrapper.browse(URI.create(TAAS_KEY_URL));
             } catch (Exception ex) {
                 JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(),
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);

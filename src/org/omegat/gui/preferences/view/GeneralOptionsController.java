@@ -25,7 +25,6 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.awt.Desktop;
 import java.io.File;
 
 import javax.swing.JComponent;
@@ -36,6 +35,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.DesktopWrapper;
 
 /**
  * @author Aaron Madlon-Kay
@@ -74,7 +74,7 @@ public class GeneralOptionsController extends BasePreferencesController {
             return;
         }
         try {
-            Desktop.getDesktop().open(path);
+            DesktopWrapper.open(path);
         } catch (Exception ex) {
             Log.logErrorRB(ex, "RPF_ERROR");
             Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");

@@ -25,7 +25,6 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.awt.Desktop;
 import java.net.URI;
 
 import javax.swing.JComponent;
@@ -33,6 +32,7 @@ import javax.swing.JOptionPane;
 
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 
 /**
@@ -62,7 +62,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
         panel.browsePluginsButton.addActionListener(e -> {
             try {
-                Desktop.getDesktop().browse(URI.create(PLUGINS_WIKI_URL));
+                DesktopWrapper.browse(URI.create(PLUGINS_WIKI_URL));
             } catch (Exception ex) {
                 JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(),
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);

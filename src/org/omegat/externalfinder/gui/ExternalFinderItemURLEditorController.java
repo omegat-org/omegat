@@ -26,7 +26,6 @@
 package org.omegat.externalfinder.gui;
 
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Window;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +41,7 @@ import org.omegat.externalfinder.item.ExternalFinderItem;
 import org.omegat.externalfinder.item.ExternalFinderItemURL;
 import org.omegat.externalfinder.item.ExternalFinderValidationException;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -130,7 +130,7 @@ public class ExternalFinderItemURLEditorController {
 
         panel.testButton.addActionListener(e -> {
             try {
-                Desktop.getDesktop().browse(builder.generateSampleURL());
+                DesktopWrapper.browse(builder.generateSampleURL());
             } catch (Exception ex) {
                 Logger.getLogger(ExternalFinderItemURLEditorController.class.getName()).log(Level.SEVERE,
                         null, ex);

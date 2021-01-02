@@ -25,7 +25,6 @@
 package org.omegat.util.gui;
 
 import java.awt.Cursor;
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -256,7 +255,7 @@ public final class JTextPaneLinkifier {
                 @Override
                 public void execute() {
                     try {
-                        Desktop.getDesktop().browse(target);
+                        DesktopWrapper.browse(target);
                     } catch (Exception e) {
                         JOptionPane.showConfirmDialog(null, e.getLocalizedMessage(),
                                 OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);

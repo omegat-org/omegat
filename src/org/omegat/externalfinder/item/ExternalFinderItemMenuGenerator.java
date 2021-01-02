@@ -25,7 +25,6 @@
 
 package org.omegat.externalfinder.item;
 
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -42,6 +41,7 @@ import org.omegat.externalfinder.ExternalFinder;
 import org.omegat.externalfinder.item.ExternalFinderItem.SCOPE;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.DesktopWrapper;
 import org.openide.awt.Mnemonics;
 
 public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuGenerator {
@@ -118,7 +118,7 @@ public class ExternalFinderItemMenuGenerator implements IExternalFinderItemMenuG
                     }
 
                     try {
-                        Desktop.getDesktop().browse(url.generateURL(targetWords));
+                        DesktopWrapper.browse(url.generateURL(targetWords));
                     } catch (Exception ex) {
                         Logger.getLogger(ExternalFinderItemMenuGenerator.class.getName()).log(Level.SEVERE,
                                 null, ex);

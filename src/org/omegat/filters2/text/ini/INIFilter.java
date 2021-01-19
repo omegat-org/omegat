@@ -97,6 +97,7 @@ public class INIFilter extends AbstractFilter {
 
         while ((str = lbpr.readLine()) != null) {
             String trimmed = str.trim();
+            boolean hasQuote = false;
 
             // skipping empty strings and comments
             if (trimmed.isEmpty() || trimmed.codePointAt(0) == '#' || trimmed.codePointAt(0) == ';') {
@@ -138,6 +139,11 @@ public class INIFilter extends AbstractFilter {
             String value = str.substring(afterEqualsPos);
 
             value = leftTrim(value);
+            if (value.startsWith("\"") && value.endsWith("\"")) {
+                value = value.substring(value.offsetByCodePoints(0, 1),
+                        value.offsetByCodePoints(value.length(), -1));
+                hasQuote = true;
+            }
 
             if (entryAlignCallback != null) {
                 align.put(key, value);
@@ -148,7 +154,13 @@ public class INIFilter extends AbstractFilter {
                 if (trans == null) {
                     trans = value;
                 }
+                if (hasQuote) {
+                    outfile.write('"');
+                }
                 outfile.write(trans);
+                if (hasQuote) {
+                    outfile.write('"');
+                }
 
                 // outfile.write("\n");
                 outfile.write(lbpr.getLinebreak()); // fix for bug 1462566

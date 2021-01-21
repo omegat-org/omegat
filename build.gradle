@@ -3,6 +3,7 @@ import org.apache.tools.ant.filters.FixCrLfFilter
 
 plugins {
     id 'application'
+    id 'java-library'
     id 'maven-publish'
     id 'eclipse'
     id 'checkstyle'
@@ -106,7 +107,7 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.7'
         implementation 'commons-lang:commons-lang:2.6'
-        compile 'org.slf4j:slf4j-api:1.7.25'
+        api 'org.slf4j:slf4j-api:1.7.25'
         implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 
         // macOS integration

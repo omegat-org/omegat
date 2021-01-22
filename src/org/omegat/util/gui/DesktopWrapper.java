@@ -36,9 +36,8 @@ import java.net.URI;
 /**
  * Wrapper class for java.awt.Desktop with `xdg-open` path on Linux platform.
  */
-public class DesktopWrapper {
+public final class DesktopWrapper {
 
-    private final static Desktop awtDesktop = Desktop.getDesktop();
     private final static boolean useXDGOpen;
 
     static {
@@ -57,7 +56,7 @@ public class DesktopWrapper {
         if (useXDGOpen) {
             xdgOpen(uri.toString());
         } else {
-            awtDesktop.browse(uri);
+            Desktop.getDesktop().browse(uri);
         }
     }
 
@@ -65,7 +64,7 @@ public class DesktopWrapper {
         if (useXDGOpen) {
             xdgOpen(file.getPath());
         } else {
-            awtDesktop.open(file);
+            Desktop.getDesktop().open(file);
         }
     }
 

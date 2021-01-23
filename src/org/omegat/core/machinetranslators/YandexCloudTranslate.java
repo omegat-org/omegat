@@ -66,6 +66,7 @@ public class YandexCloudTranslate extends BaseTranslate {
     private static final String PROPERTY_OAUTH_TOKEN = "yandex.cloud.oauth-token";
     private static final String PROPERTY_FOLDER_ID = "yandex.cloud.folder-id";
     private static final String PROPERTY_USE_GLOSSARY = "yandex.cloud.use-glossary";
+    private static final String PROPERTY_KEEP_TAGS = "yandex.cloud.keep-tags";
 
     private static final int MAX_GLOSSARY_TERMS = 50;
     private static final int MAX_TEXT_LENGTH = 10000;
@@ -118,8 +119,11 @@ public class YandexCloudTranslate extends BaseTranslate {
         StringBuilder requestBuilder = new StringBuilder("{")
                 .append("\"sourceLanguageCode\":\"").append(sLang.getLanguageCode().toLowerCase()).append("\",")
                 .append("\"targetLanguageCode\":\"").append(tLang.getLanguageCode().toLowerCase()).append("\",")
-                .append("\"format\": \"HTML\",") // HTML format keeps OmegaT tags intact
                 .append("\"folderId\": \"").append(folderId).append("\",");
+
+        if (Preferences.isPreference(PROPERTY_KEEP_TAGS)) {
+            requestBuilder.append("\"format\": \"HTML\",");
+        }
 
         if (Preferences.isPreference(PROPERTY_USE_GLOSSARY)) {
             Map<String, String> glossaryTerms = glossarySupplier.get();
@@ -162,10 +166,12 @@ public class YandexCloudTranslate extends BaseTranslate {
 
         JPanel extraPanel = new JPanel();
         extraPanel.setAlignmentX(JComponent.LEFT_ALIGNMENT);
-        extraPanel.setLayout(new BoxLayout(extraPanel, BoxLayout.X_AXIS));
+        extraPanel.setLayout(new BoxLayout(extraPanel, BoxLayout.Y_AXIS));
         extraPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
         JCheckBox glossaryCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_GLOSSARY_CHECKBOX"));
         extraPanel.add(glossaryCheckBox);
+        JCheckBox keepTagsCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_KEEP_TAGS_CHECKBOX"));
+        extraPanel.add(keepTagsCheckBox);
 
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
             @Override
@@ -179,6 +185,7 @@ public class YandexCloudTranslate extends BaseTranslate {
                 setCredential(PROPERTY_OAUTH_TOKEN, oAuthToken, temporary);
 
                 Preferences.setPreference(PROPERTY_USE_GLOSSARY, glossaryCheckBox.isSelected());
+                Preferences.setPreference(PROPERTY_KEEP_TAGS, keepTagsCheckBox.isSelected());
             }
         };
 
@@ -193,6 +200,7 @@ public class YandexCloudTranslate extends BaseTranslate {
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_OAUTH_TOKEN));
 
         glossaryCheckBox.setSelected(Preferences.isPreferenceDefault(PROPERTY_USE_GLOSSARY, false));
+        keepTagsCheckBox.setSelected(Preferences.isPreferenceDefault(PROPERTY_KEEP_TAGS, true));
 
         dialog.show();
     }

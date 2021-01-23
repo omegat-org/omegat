@@ -39,12 +39,10 @@ public class PluginInfoTableModel extends DefaultTableModel {
     private static final long serialVersionUID = 5345248154613009632L;
 
     protected static final int COLUMN_NAME = 0;
-    protected static final int COLUMN_CLASS = 1;
-    protected static final int COLUMN_VERSION = 2;
-    protected static final int COLUMN_AUTHOR = 3;
-    protected static final int COLUMN_DESCRIPTION = 4;
+    protected static final int COLUMN_VERSION = 1;
+    protected static final int COLUMN_AUTHOR = 2;
 
-    private static final String[] COLUMN_NAMES = { "NAME", "CLASS", "VERSION", "AUTHOR", "DESCRIPTION" };
+    private static final String[] COLUMN_NAMES = { "NAME", "VERSION", "AUTHOR" };
 
     private final List<PluginInformation> listPlugins = new ArrayList<>();
 
@@ -85,9 +83,6 @@ public class PluginInfoTableModel extends DefaultTableModel {
         Object returnValue = null;
 
         switch (columnIndex) {
-        case COLUMN_CLASS:
-            returnValue = plugin.getClassName();
-            break;
         case COLUMN_NAME:
             returnValue = plugin.getName();
             break;
@@ -96,9 +91,6 @@ public class PluginInfoTableModel extends DefaultTableModel {
             break;
         case COLUMN_AUTHOR:
             returnValue = plugin.getAuthor();
-            break;
-        case COLUMN_DESCRIPTION:
-            returnValue = plugin.getDescription();
             break;
         default:
             throw new IllegalArgumentException("Invalid column index");

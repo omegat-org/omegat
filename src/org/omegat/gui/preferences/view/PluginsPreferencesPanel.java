@@ -47,16 +47,19 @@ public class PluginsPreferencesPanel extends JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         panelInfo = new javax.swing.JPanel();
         messageLabel = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         browsePluginsButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         panelPluginsInfo = new javax.swing.JPanel();
         labelTableTitle = new javax.swing.JLabel();
         scrollTable = new javax.swing.JScrollPane();
         tablePluginsInfo = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -73,36 +76,48 @@ public class PluginsPreferencesPanel extends JPanel {
 
         add(panelInfo);
 
-        panelPluginsInfo.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        panelPluginsInfo.setPreferredSize(new java.awt.Dimension(252, 426));
+        panelPluginsInfo.setLayout(new javax.swing.BoxLayout(panelPluginsInfo, javax.swing.BoxLayout.PAGE_AXIS));
 
         org.openide.awt.Mnemonics.setLocalizedText(labelTableTitle, OStrings.getString("PREFS_PLUGINS_LIST")); // NOI18N
         labelTableTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
-        panelPluginsInfo.add(labelTableTitle, gridBagConstraints);
+        panelPluginsInfo.add(labelTableTitle);
 
         tablePluginsInfo.setAutoCreateRowSorter(true);
         tablePluginsInfo.setModel(new PluginInfoTableModel());
-        tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_CLASS).setPreferredWidth(100);
         tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
         scrollTable.setViewportView(tablePluginsInfo);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        panelPluginsInfo.add(scrollTable, gridBagConstraints);
+        panelPluginsInfo.add(scrollTable);
 
-        add(panelPluginsInfo);
+        jPanel1.add(panelPluginsInfo);
+
+        jPanel2.setMinimumSize(new java.awt.Dimension(102, 47));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(262, 100));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setPreferredSize(new java.awt.Dimension(252, 80));
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel2.add(jScrollPane1);
+
+        jPanel1.add(jPanel2);
+
+        add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton browsePluginsButton;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelTableTitle;
     private javax.swing.JLabel messageLabel;
     private javax.swing.JPanel panelInfo;

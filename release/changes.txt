@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.5.0
 ----------------------------------------------------------------------
-  6 Enhancements
+  7 Enhancements
   1 Bug fix
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -31,6 +31,9 @@
 
   - Add repository name to credentials dialog in team projects
   https://sourceforge.net/p/omegat/feature-requests/1539/
+
+  - Add plain text translation option to Yandex.Cloud
+  https://sourceforge.net/p/omegat/feature-requests/1550/
 
 ----------------------------------------------------------------------
  OmegaT 5.4.1 (2020-12-15)

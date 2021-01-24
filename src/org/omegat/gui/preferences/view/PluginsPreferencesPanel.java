@@ -146,7 +146,7 @@ public class PluginsPreferencesPanel extends JPanel {
     javax.swing.JButton browsePluginsButton;
     private javax.swing.Box.Filler filler1;
     javax.swing.JTextField filterTextField;
-    private javax.swing.JButton installFromDiskButton;
+    javax.swing.JButton installFromDiskButton;
     private javax.swing.JSplitPane installPlugins;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

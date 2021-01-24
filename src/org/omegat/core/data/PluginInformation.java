@@ -25,8 +25,6 @@
 
 package org.omegat.core.data;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
@@ -165,7 +163,6 @@ public class PluginInformation implements Comparable<PluginInformation> {
         if (getClass() != obj.getClass())
             return false;
         PluginInformation other = (PluginInformation) obj;
-
         if (author == null) {
             if (other.author != null)
                 return false;
@@ -190,8 +187,8 @@ public class PluginInformation implements Comparable<PluginInformation> {
     }
 
     @Override
-    public int compareTo(@NotNull PluginInformation pluginInformation) {
-        int score = 0;
+    public int compareTo(PluginInformation pluginInformation) {
+        int score;
         if (this == pluginInformation || className.equals(pluginInformation.getClass().getName())) {
             return version.compareTo(pluginInformation.getVersion());
         }

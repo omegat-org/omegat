@@ -72,11 +72,10 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private Map<String, String> installConfig = new HashMap<>();
 
     @Override
-    public JComponent getGui() {
+    public final JComponent getGui() {
         if (panel == null) {
             initGui();
             initFromPrefs();
-
         }
         return panel;
     }
@@ -114,7 +113,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         }
     }
 
-    void selectRowAction(ListSelectionEvent evt) {
+    final void selectRowAction(ListSelectionEvent evt) {
         int rowIndex = panel.tablePluginsInfo.convertRowIndexToModel(panel.tablePluginsInfo.getSelectedRow());
         if (rowIndex == -1) {
             panel.pluginDetails.setText("");
@@ -132,10 +131,16 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private String formatDetailText(PluginInformation info) {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ").append(info.getName()).append("\n");
-        if (info.getCategory() != null) sb.append("Category: ").append(info.getCategory()).append("\n");
-        if (info.getVersion() != null) sb.append("Version: ").append(info.getVersion()).append("\n");
+        if (info.getCategory() != null) {
+            sb.append("Category: ").append(info.getCategory()).append("\n");
+        }
+        if (info.getVersion() != null) {
+            sb.append("Version: ").append(info.getVersion()).append("\n");
+        }
         sb.append("ClassName: ").append(info.getClassName()).append("\n\n");
-        if (info.getDescription() != null) sb.append(info.getDescription()).append("\n");
+        if (info.getDescription() != null) {
+            sb.append(info.getDescription()).append("\n");
+        }
         sb.append("\n");
         return sb.toString();
     }
@@ -206,7 +211,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             URLClassLoader pluginsClassLoader = new URLClassLoader(urls,
                     PluginsPreferencesController.class.getClassLoader());
             for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
-                    .hasMoreElements(); ) {
+                    .hasMoreElements();) {
                 URL mu = mlist.nextElement();
                 try (InputStream in = mu.openStream()) {
                     Manifest m = new Manifest(in);

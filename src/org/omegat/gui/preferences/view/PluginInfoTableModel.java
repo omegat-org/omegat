@@ -64,32 +64,32 @@ public class PluginInfoTableModel extends DefaultTableModel {
     }
 
     @Override
-    public Class<?> getColumnClass(int columnIndex) {
+    public final Class<?> getColumnClass(int columnIndex) {
         return String.class;
     }
 
     @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
+    public final boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
 
     @Override
-    public int getColumnCount() {
+    public final int getColumnCount() {
         return COLUMN_NAMES.length;
     }
 
     @Override
-    public int getRowCount() {
+    public final int getRowCount() {
         return listPlugins == null ? 0 : listPlugins.size();
     }
 
     @Override
-    public String getColumnName(int column) {
+    public final String getColumnName(int column) {
         return OStrings.getString("PREFS_PLUGINS_COL_" + COLUMN_NAMES[column]);
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public final Object getValueAt(int rowIndex, int columnIndex) {
         PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
         Object returnValue;
 

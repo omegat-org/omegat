@@ -25,9 +25,10 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -41,15 +42,25 @@ public class PluginInfoTableModel extends DefaultTableModel {
     protected static final int COLUMN_NAME = 0;
     protected static final int COLUMN_VERSION = 1;
     protected static final int COLUMN_AUTHOR = 2;
+    protected static final int COLUMN_CATEGORY = 3;
 
-    private static final String[] COLUMN_NAMES = { "NAME", "VERSION", "AUTHOR" };
+    private static final String[] COLUMN_NAMES = { "NAME", "VERSION", "AUTHOR", "CATEGORY" };
 
-    private final List<PluginInformation> listPlugins = new ArrayList<>();
+    private final Map<String, PluginInformation> listPlugins = new TreeMap<>();
 
     public PluginInfoTableModel() {
         PluginUtils.getPluginInformations().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
-                .forEach(info -> listPlugins.add(info));
+                .filter(info -> !existInListPlugins(info))
+                .forEach(info -> listPlugins.put(getPluginInformationKey(info), info));
+    }
+
+    private String getPluginInformationKey(PluginInformation info) {
+        return info.getName() + info.getAuthor() + info.getVersion();
+    }
+
+    private boolean existInListPlugins(PluginInformation info) {
+        return listPlugins.containsKey(getPluginInformationKey(info));
     }
 
     @Override
@@ -79,8 +90,8 @@ public class PluginInfoTableModel extends DefaultTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        PluginInformation plugin = listPlugins.get(rowIndex);
-        Object returnValue = null;
+        PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
+        Object returnValue;
 
         switch (columnIndex) {
         case COLUMN_NAME:
@@ -91,6 +102,9 @@ public class PluginInfoTableModel extends DefaultTableModel {
             break;
         case COLUMN_AUTHOR:
             returnValue = plugin.getAuthor();
+            break;
+        case COLUMN_CATEGORY:
+            returnValue = plugin.getCategory();
             break;
         default:
             throw new IllegalArgumentException("Invalid column index");

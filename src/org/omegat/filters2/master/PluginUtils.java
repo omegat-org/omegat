@@ -284,14 +284,13 @@ public final class PluginUtils {
             if (key.equals("plugin")) {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props));
+                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key));
                     };
-
                 }
             } else {
                 for (String clazz : classes) {
                     if (loadClassOld(key, clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props));
+                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key));
                     }
                 }
             }

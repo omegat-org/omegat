@@ -48,81 +48,117 @@ public class PluginsPreferencesPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelInfo = new javax.swing.JPanel();
+        pluginsInfoTab = new javax.swing.JTabbedPane();
+        installPlugins = new javax.swing.JSplitPane();
+        panelPluginsInfo = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        filterTextField = new javax.swing.JTextField();
+        scrollTable = new javax.swing.JScrollPane();
+        tablePluginsInfo = new javax.swing.JTable();
+        panelPluginDetails = new javax.swing.JPanel();
+        scrollText = new javax.swing.JScrollPane();
+        pluginDetails = new javax.swing.JTextArea();
+        availablePluginsInfo = new javax.swing.JPanel();
+        pluginWikiInfo = new javax.swing.JPanel();
         messageLabel = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
         browsePluginsButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        panelPluginsInfo = new javax.swing.JPanel();
-        labelTableTitle = new javax.swing.JLabel();
-        scrollTable = new javax.swing.JScrollPane();
-        tablePluginsInfo = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        operationPanel = new javax.swing.JPanel();
+        installFromDiskButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(messageLabel, OStrings.getString("PREFS_PLUGINS_AVAILABLE_ONLINE")); // NOI18N
-        messageLabel.setAlignmentY(0.0F);
-        panelInfo.add(messageLabel);
-        panelInfo.add(filler1);
-
-        org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
-        browsePluginsButton.setAlignmentY(0.0F);
-        panelInfo.add(browsePluginsButton);
-
-        add(panelInfo);
-
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
-
         panelPluginsInfo.setPreferredSize(new java.awt.Dimension(252, 426));
         panelPluginsInfo.setLayout(new javax.swing.BoxLayout(panelPluginsInfo, javax.swing.BoxLayout.PAGE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(labelTableTitle, OStrings.getString("PREFS_PLUGINS_LIST")); // NOI18N
-        labelTableTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        panelPluginsInfo.add(labelTableTitle);
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "Filter name:");
+        jPanel1.add(jLabel1);
+
+        filterTextField.setToolTipText("filter by name");
+        jPanel1.add(filterTextField);
+
+        panelPluginsInfo.add(jPanel1);
 
         tablePluginsInfo.setAutoCreateRowSorter(true);
         tablePluginsInfo.setModel(new PluginInfoTableModel());
+        tablePluginsInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
         scrollTable.setViewportView(tablePluginsInfo);
 
         panelPluginsInfo.add(scrollTable);
 
-        jPanel1.add(panelPluginsInfo);
+        installPlugins.setLeftComponent(panelPluginsInfo);
 
-        jPanel2.setMinimumSize(new java.awt.Dimension(102, 47));
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.PAGE_AXIS));
+        panelPluginDetails.setMinimumSize(new java.awt.Dimension(102, 47));
+        panelPluginDetails.setLayout(new javax.swing.BoxLayout(panelPluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(262, 100));
+        scrollText.setPreferredSize(new java.awt.Dimension(262, 100));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setPreferredSize(new java.awt.Dimension(252, 80));
-        jScrollPane1.setViewportView(jTextArea1);
+        pluginDetails.setEditable(false);
+        pluginDetails.setColumns(20);
+        pluginDetails.setLineWrap(true);
+        pluginDetails.setRows(5);
+        pluginDetails.setFocusable(false);
+        pluginDetails.setPreferredSize(new java.awt.Dimension(252, 80));
+        scrollText.setViewportView(pluginDetails);
 
-        jPanel2.add(jScrollPane1);
+        panelPluginDetails.add(scrollText);
 
-        jPanel1.add(jPanel2);
+        installPlugins.setRightComponent(panelPluginDetails);
 
-        add(jPanel1);
+        pluginsInfoTab.addTab("Installed plugins", installPlugins);
+
+        availablePluginsInfo.setLayout(new java.awt.BorderLayout());
+
+        pluginWikiInfo.setLayout(new javax.swing.BoxLayout(pluginWikiInfo, javax.swing.BoxLayout.PAGE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(messageLabel, OStrings.getString("PREFS_PLUGINS_AVAILABLE_ONLINE")); // NOI18N
+        messageLabel.setAlignmentY(0.0F);
+        pluginWikiInfo.add(messageLabel);
+        pluginWikiInfo.add(filler1);
+
+        org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
+        browsePluginsButton.setAlignmentY(0.0F);
+        pluginWikiInfo.add(browsePluginsButton);
+
+        availablePluginsInfo.add(pluginWikiInfo, java.awt.BorderLayout.CENTER);
+
+        pluginsInfoTab.addTab("Available plugins", availablePluginsInfo);
+
+        add(pluginsInfoTab);
+        pluginsInfoTab.getAccessibleContext().setAccessibleName("plugins information");
+
+        operationPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, "Install from Disk");
+        operationPanel.add(installFromDiskButton);
+
+        add(operationPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel availablePluginsInfo;
     javax.swing.JButton browsePluginsButton;
     private javax.swing.Box.Filler filler1;
+    javax.swing.JTextField filterTextField;
+    private javax.swing.JButton installFromDiskButton;
+    private javax.swing.JSplitPane installPlugins;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel labelTableTitle;
     private javax.swing.JLabel messageLabel;
-    private javax.swing.JPanel panelInfo;
+    private javax.swing.JPanel operationPanel;
+    private javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
+    javax.swing.JTextArea pluginDetails;
+    private javax.swing.JPanel pluginWikiInfo;
+    private javax.swing.JTabbedPane pluginsInfoTab;
     private javax.swing.JScrollPane scrollTable;
+    private javax.swing.JScrollPane scrollText;
     javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

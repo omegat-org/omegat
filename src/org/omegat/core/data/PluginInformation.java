@@ -25,15 +25,18 @@
 
 package org.omegat.core.data;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-public class PluginInformation {
+public class PluginInformation implements Comparable<PluginInformation> {
     private static final String PLUGIN_NAME = "Plugin-Name";
     private static final String PLUGIN_VERSION = "Plugin-Version";
     private static final String PLUGIN_AUTHOR = "Plugin-Author";
     private static final String PLUGIN_DESCRIPTION = "Plugin-Description";
+    private static final String PLUGIN_CATEGORY = "Plugin-Category";
 
     private static final String IMPLEMENTATION_VENDOR = "Implementation-Vendor";
     private static final String IMPLEMENTATION_TITLE = "Implementation-Title";
@@ -47,6 +50,7 @@ public class PluginInformation {
     private final String version;
     private final String author;
     private final String description;
+    private final String category;
 
     public PluginInformation(String className, Manifest manifest) {
         this.className = className;
@@ -55,14 +59,20 @@ public class PluginInformation {
         version = findVersion(manifest);
         author = findAuthor(manifest);
         description = attrs.getValue(PLUGIN_DESCRIPTION);
+        category = attrs.getValue(PLUGIN_CATEGORY);
     }
 
-    public PluginInformation(String className, Properties props) {
+    public PluginInformation(String className, Properties props, final String key) {
         this.className = className;
-        name = null;
+        name = className.substring(className.lastIndexOf(".") + 1);
         version = null;
         author = null;
         description = null;
+        if ("plugin".equals(key)) {
+            category = "bundle";
+        } else {
+            category = key.toLowerCase();
+        }
     }
 
     private String findName(Manifest m) {
@@ -74,7 +84,8 @@ public class PluginInformation {
         } else if (attrs.getValue(IMPLEMENTATION_TITLE) != null) {
             return attrs.getValue(IMPLEMENTATION_TITLE);
         }
-        return null;
+        // fallback to className
+        return className.substring(className.lastIndexOf(".") + 1);
     }
 
     private String findVersion(Manifest m) {
@@ -121,6 +132,10 @@ public class PluginInformation {
         return author;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -150,6 +165,7 @@ public class PluginInformation {
         if (getClass() != obj.getClass())
             return false;
         PluginInformation other = (PluginInformation) obj;
+
         if (author == null) {
             if (other.author != null)
                 return false;
@@ -173,4 +189,55 @@ public class PluginInformation {
         return true;
     }
 
+    @Override
+    public int compareTo(@NotNull PluginInformation pluginInformation) {
+        int score = 0;
+        if (this == pluginInformation || className.equals(pluginInformation.getClass().getName())) {
+            return version.compareTo(pluginInformation.getVersion());
+        }
+        if (pluginInformation.category != null) {
+            if (category == null) {
+                if ("bundle".equals(pluginInformation.category)) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            } else {
+                score = category.compareTo(pluginInformation.getCategory());
+                if (score != 0) {
+                    return score;
+                }
+            }
+        }
+        if (pluginInformation.getAuthor() != null) {
+            if (author == null) {
+                return -1;
+            } else {
+                score = author.compareTo(pluginInformation.getAuthor());
+                if (score != 0) {
+                    return score;
+                }
+            }
+        }
+        score = className.compareTo(pluginInformation.getClassName());
+        if (score !=0) {
+            return score;
+        }
+        if (pluginInformation.getName() != null) {
+            if (name == null) {
+                return -1;
+            }
+            score = name.compareTo(pluginInformation.getName());
+            if (score != 0) {
+                return score;
+            }
+        }
+        if (pluginInformation.getVersion() != null) {
+            if (version == null) {
+                return -1;
+            }
+            return version.compareTo(pluginInformation.getVersion());
+        }
+        return 0;
+    }
 }

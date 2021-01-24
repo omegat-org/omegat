@@ -29,7 +29,14 @@ import java.net.URI;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.TableRowSorter;
 
+import org.omegat.core.data.PluginInformation;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DesktopWrapper;
@@ -42,14 +49,79 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
     private PluginsPreferencesPanel panel;
+    private TableRowSorter<PluginInfoTableModel> sorter;
 
     @Override
     public JComponent getGui() {
         if (panel == null) {
             initGui();
             initFromPrefs();
+            PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
+            sorter = new TableRowSorter<>(model);
+            panel.tablePluginsInfo.setRowSorter(sorter);
+            panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
+            panel.filterTextField.getDocument().addDocumentListener(new FilterDocumentListener());
         }
         return panel;
+    }
+
+    class FilterDocumentListener implements DocumentListener {
+        void setFilterTextAction() {
+            String filterText = panel.filterTextField.getText();
+            if ("".equals(filterText) || filterText == null) {
+                sorter.setRowFilter(null);
+                panel.tablePluginsInfo.doLayout();
+                return;
+            }
+            RowFilter<PluginInfoTableModel, Object> rf;
+            try {
+                rf = RowFilter.regexFilter(filterText, PluginInfoTableModel.COLUMN_NAME);
+            } catch (java.util.regex.PatternSyntaxException e) {
+                return;
+            }
+            sorter.setRowFilter(rf);
+        }
+
+        @Override
+        public void insertUpdate(DocumentEvent documentEvent) {
+            setFilterTextAction();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent documentEvent) {
+            setFilterTextAction();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent documentEvent) {
+            setFilterTextAction();
+        }
+    }
+
+    void selectRowAction(ListSelectionEvent evt) {
+        int rowIndex = panel.tablePluginsInfo.convertRowIndexToModel(panel.tablePluginsInfo.getSelectedRow());
+        if (rowIndex == -1) {
+            panel.pluginDetails.setText("");
+        } else {
+            PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
+            String name = (String) model.getValueAt(rowIndex, PluginInfoTableModel.COLUMN_NAME);
+            StringBuilder sb = new StringBuilder();
+            PluginUtils.getPluginInformations().stream()
+                    .filter(info -> info.getName().equals(name))
+                    .forEach(info -> sb.append(formatDetailText(info)));
+            panel.pluginDetails.setText(sb.toString());
+        }
+    }
+
+    private String formatDetailText(PluginInformation info) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ").append(info.getName()).append("\n");
+        if (info.getCategory() != null) sb.append("Category: ").append(info.getCategory()).append("\n");
+        if (info.getVersion() != null) sb.append("Version: ").append(info.getVersion()).append("\n");
+        sb.append("ClassName: ").append(info.getClassName()).append("\n\n");
+        if (info.getDescription() != null) sb.append(info.getDescription()).append("\n");
+        sb.append("\n");
+        return sb.toString();
     }
 
     @Override

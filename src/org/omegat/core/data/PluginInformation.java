@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2020 Briac Pilpre
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -35,6 +36,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private static final String PLUGIN_AUTHOR = "Plugin-Author";
     private static final String PLUGIN_DESCRIPTION = "Plugin-Description";
     private static final String PLUGIN_CATEGORY = "Plugin-Category";
+    private static final String PLUGIN_LINK = "Plugin-Link";
 
     private static final String IMPLEMENTATION_VENDOR = "Implementation-Vendor";
     private static final String IMPLEMENTATION_TITLE = "Implementation-Title";
@@ -49,6 +51,8 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private final String author;
     private final String description;
     private final String category;
+    private final String link;
+    private final String builtBy;
 
     public PluginInformation(String className, Manifest manifest) {
         this.className = className;
@@ -58,6 +62,8 @@ public class PluginInformation implements Comparable<PluginInformation> {
         author = findAuthor(manifest);
         description = attrs.getValue(PLUGIN_DESCRIPTION);
         category = attrs.getValue(PLUGIN_CATEGORY);
+        link = attrs.getValue(PLUGIN_LINK);
+        builtBy = attrs.getValue(BUILT_BY);
     }
 
     public PluginInformation(String className, Properties props, final String key) {
@@ -71,6 +77,8 @@ public class PluginInformation implements Comparable<PluginInformation> {
         } else {
             category = key.toLowerCase();
         }
+        link = null;
+        builtBy = null;
     }
 
     private String findName(Manifest m) {
@@ -110,32 +118,40 @@ public class PluginInformation implements Comparable<PluginInformation> {
         return null;
     }
 
-    public String getClassName() {
+    public final String getClassName() {
         return className;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public String getVersion() {
+    public final String getVersion() {
         return version;
     }
 
-    public String getDescription() {
+    public final String getDescription() {
         return description;
     }
 
-    public String getAuthor() {
+    public final String getAuthor() {
         return author;
     }
 
-    public String getCategory() {
+    public final String getCategory() {
         return category;
     }
 
+    public final String getLink() {
+        return link;
+    }
+
+    public final String getBuiltBy() {
+        return builtBy;
+    }
+
     @Override
-    public String toString() {
+    public final String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("PluginInformation [className=").append(className).append(", name=").append(name)
                 .append(", version=").append(version).append(", author=").append(author).append(", description=")
@@ -144,7 +160,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((author == null) ? 0 : author.hashCode());
@@ -155,39 +171,47 @@ public class PluginInformation implements Comparable<PluginInformation> {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public final boolean equals(Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         PluginInformation other = (PluginInformation) obj;
         if (author == null) {
-            if (other.author != null)
+            if (other.author != null) {
                 return false;
-        } else if (!author.equals(other.author))
+            }
+        } else if (!author.equals(other.author)) {
             return false;
+        }
         if (className == null) {
-            if (other.className != null)
+            if (other.className != null) {
                 return false;
-        } else if (!className.equals(other.className))
+            }
+        } else if (!className.equals(other.className)) {
             return false;
+        }
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (version == null) {
-            if (other.version != null)
-                return false;
-        } else if (!version.equals(other.version))
-            return false;
-        return true;
+            return other.version == null;
+        } else {
+            return version.equals(other.version);
+        }
     }
 
     @Override
-    public int compareTo(PluginInformation pluginInformation) {
+    public final int compareTo(PluginInformation pluginInformation) {
         int score;
         if (this == pluginInformation || className.equals(pluginInformation.getClass().getName())) {
             return version.compareTo(pluginInformation.getVersion());

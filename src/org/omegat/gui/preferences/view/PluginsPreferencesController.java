@@ -131,6 +131,12 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private String formatDetailText(PluginInformation info) {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ").append(info.getName()).append("\n");
+        sb.append("Author: ");
+        if (info.getAuthor() != null) {
+            sb.append(info.getAuthor()).append("\n");
+        } else {
+            sb.append("Unknown\n");
+        }
         if (info.getCategory() != null) {
             sb.append("Category: ").append(info.getCategory()).append("\n");
         }
@@ -138,6 +144,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
             sb.append("Version: ").append(info.getVersion()).append("\n");
         }
         sb.append("ClassName: ").append(info.getClassName()).append("\n\n");
+        if (info.getLink() != null) {
+            sb.append("Link: ").append(info.getLink()).append("\n");
+        }
         if (info.getDescription() != null) {
             sb.append(info.getDescription()).append("\n");
         }

@@ -45,7 +45,7 @@ public class PluginInstallerDialogController {
         this.config = config;
     }
 
-    public void show(java.awt.Frame parent) {
+    public final void show(java.awt.Frame parent) {
         PluginInstallerDialog pluginInstallerDialog = new PluginInstallerDialog(parent, true);
         String sb = pluginInformations.stream().map(this::formatDetailText).collect(Collectors.joining());
         pluginInstallerDialog.pluginInformationsTextArea.setText(sb);

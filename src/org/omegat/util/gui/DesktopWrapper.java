@@ -44,7 +44,7 @@ public final class DesktopWrapper {
         boolean hasXDGOpen = false;
         if (Platform.isLinux()) {
             try {
-                hasXDGOpen = xdgOpen("--help");
+                hasXDGOpen = xdgOpen("--help", true);
             } catch (IOException ex) {
                 // Do nothing
             }
@@ -54,7 +54,7 @@ public final class DesktopWrapper {
 
     public static void browse(URI uri) throws IOException {
         if (useXDGOpen) {
-            xdgOpen(uri.toString());
+            xdgOpen(uri.toString(), false);
         } else {
             Desktop.getDesktop().browse(uri);
         }
@@ -62,24 +62,27 @@ public final class DesktopWrapper {
 
     public static void open(File file) throws IOException {
         if (useXDGOpen) {
-            xdgOpen(file.getPath());
+            xdgOpen(file.getPath(), false);
         } else {
             Desktop.getDesktop().open(file);
         }
     }
 
-    private static boolean xdgOpen(String s) throws IOException {
+    private static boolean xdgOpen(String s, boolean doWait) throws IOException {
         File devNull = new File("/dev/null");
         ProcessBuilder pb = new ProcessBuilder("xdg-open", s);
         pb.redirectOutput(devNull);
         pb.redirectError(devNull);
         Process p = pb.start();
 
-        try {
-            return p.waitFor() == 0;
-        } catch (InterruptedException ex) {
-            return false;
+        if (doWait) {
+            try {
+                return p.waitFor() == 0;
+            } catch (InterruptedException ex) {
+                return false;
+            }
         }
+        return false; // Not really used
     }
 
     private DesktopWrapper() {

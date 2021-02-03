@@ -16,7 +16,8 @@
       <term><guimenuitem>Download Team Project...</guimenuitem></term>
 
       <listitem>
-        <para>Creates a local copy of a remote OmegaT project. See <link linkend="howto.useteamproject">How to use a team project</link> for
+        <para>Creates a local copy of a remote OmegaT project. See <link
+        linkend="howto.useteamproject">Use a team project</link> for
         details.</para>
       </listitem>
     </varlistentry>
@@ -186,8 +187,8 @@
       <term>Project Files...</term>
 
       <listitem>
-        <para>Opens the <link linkend="windows.projectfiles">Project files
-        window</link>.</para>
+        <para>Opens the <link linkend="windows.projectfiles">Project
+        files</link> window.</para>
       </listitem>
     </varlistentry>
 

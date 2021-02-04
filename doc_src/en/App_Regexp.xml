@@ -5,7 +5,7 @@
 
   <para>The regular expressions (or regex for short) used in searches and
   segmentation rules are those supported by Java. Should you need more
-  specific information, consult the <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">Java
+  specific information, consult the <ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java
   Regex documentation</ulink>. See additional references and examples
   below.</para>
 

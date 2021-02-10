@@ -2,7 +2,7 @@
  OmegaT 5.5.0
 ----------------------------------------------------------------------
   7 Enhancements
-  1 Bug fix
+  2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.5.0 vs 5.4.1
@@ -11,6 +11,9 @@
 
   - External opening/browsing not supported on some Linux environments
   https://sourceforge.net/p/omegat/bugs/999/
+
+  - project_stats.txt overwritten with garbage when opening Statistics window
+  https://sourceforge.net/p/omegat/bugs/1035/
 
   Implemented requests:
 

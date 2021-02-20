@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.5.0
 ----------------------------------------------------------------------
-  8 Enhancements
+  9 Enhancements
   2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -37,6 +37,9 @@
 
   - Add plain text translation option to Yandex.Cloud
   https://sourceforge.net/p/omegat/feature-requests/1550/
+
+  - INI Filter: extract continuation lines for multi-line values
+  https://sourceforge.net/p/omegat/feature-requests/1554/
 
   - Add rudimentary support for dir attribute modification in HTML
   https://sourceforge.net/p/omegat/feature-requests/1556/

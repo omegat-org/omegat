@@ -50,6 +50,9 @@ public class INIFilterTest extends TestFilterBase {
         checkMulti("Value", "Section/ID", null, null, null, null);
         checkMulti("Value2", "Section/ID2", null, null, null, null);
         checkMulti("Value3", "Section/ID3", null, null, null, null);
+        checkMulti("Value4", "Section/ID4", null, null, null, null);
+        checkMulti("Continued Value4", "Section/[$$UnNamee_0_]", null, null, null, null);
+        checkMulti("Value5", "Section/ID5", null, null, null, null);
         checkMultiEnd();
     }
 }

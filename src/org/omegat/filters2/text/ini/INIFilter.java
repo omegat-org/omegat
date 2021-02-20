@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009-2010 Alex Buloichik
                2011 Alex Buloichik, Didier Briel
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -51,6 +52,7 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  */
 public class INIFilter extends AbstractFilter {
+    private static String unnamed_format = "[$$UnNamee_%d_]"; // general key cannot be [..]
     protected Map<String, String> align;
 
     public String getFileFormatName() {
@@ -94,8 +96,11 @@ public class INIFilter extends AbstractFilter {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         String group = null;
+        int unnamed_counter = 0;
 
         while ((str = lbpr.readLine()) != null) {
+            String key;
+            String value;
             String trimmed = str.trim();
             boolean hasQuote = false;
 
@@ -111,34 +116,41 @@ public class INIFilter extends AbstractFilter {
                 // group name
                 group = trimmed.substring(trimmed.offsetByCodePoints(0, 1),
                         trimmed.offsetByCodePoints(trimmed.length(), -1));
-            }
+                int equalsPos = str.offsetByCodePoints(str.length(), -1);
+                int afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
+                outfile.write(str.substring(0, afterEqualsPos));
+                key = group + '/' + str.substring(0, equalsPos).trim();
+                value = str.substring(afterEqualsPos);
+            } else {
+                // key=value pairs
+                int equalsPos = str.indexOf('=');
 
-            // key=value pairs
-            int equalsPos = str.indexOf('=');
+                // if there's no separator, assume it's an unnamed key with a value
+                if (equalsPos == -1) {
+                    key = (group != null ? group + '/' : "") + String.format(unnamed_format, unnamed_counter);
+                    value = str;
+                    // nothing to output for key
+                } else {
+                    // advance if there're spaces after =
+                    while (str.codePointCount(equalsPos, str.length()) > 1) {
+                        int nextOffset = str.offsetByCodePoints(equalsPos, 1);
+                        if (str.codePointAt(nextOffset) != ' ') {
+                            break;
+                        }
+                        equalsPos = nextOffset;
+                    }
 
-            // if there's no separator, assume it's a key w/o a value
-            if (equalsPos == -1) {
-                equalsPos = str.offsetByCodePoints(str.length(), -1);
-            }
+                    int afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
 
-            // advance if there're spaces after =
-            while (str.codePointCount(equalsPos, str.length()) > 1) {
-                int nextOffset = str.offsetByCodePoints(equalsPos, 1);
-                if (str.codePointAt(nextOffset) != ' ') {
-                    break;
+                    // writing out everything before = (and = itself)
+                    outfile.write(str.substring(0, afterEqualsPos));
+
+                    key = (group != null ? group + '/' : "") + str.substring(0, equalsPos).trim();
+                    value = str.substring(afterEqualsPos);
                 }
-                equalsPos = nextOffset;
             }
-
-            int afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
-
-            // writing out everything before = (and = itself)
-            outfile.write(str.substring(0, afterEqualsPos));
-
-            String key = (group != null ? group + '/' : "") + str.substring(0, equalsPos).trim();
-            String value = str.substring(afterEqualsPos);
-
             value = leftTrim(value);
+
             if (value.startsWith("\"") && value.endsWith("\"")) {
                 value = value.substring(value.offsetByCodePoints(0, 1),
                         value.offsetByCodePoints(value.length(), -1));

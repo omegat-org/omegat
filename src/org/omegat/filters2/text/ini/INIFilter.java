@@ -101,6 +101,8 @@ public class INIFilter extends AbstractFilter {
         while ((str = lbpr.readLine()) != null) {
             String key;
             String value;
+            int equalsPos;
+            int afterEqualsPos;
             String trimmed = str.trim();
             boolean hasQuote = false;
 
@@ -112,45 +114,51 @@ public class INIFilter extends AbstractFilter {
                 continue;
             }
 
+            // retrieve section as group name
             if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
-                // group name
                 group = trimmed.substring(trimmed.offsetByCodePoints(0, 1),
                         trimmed.offsetByCodePoints(trimmed.length(), -1));
-                int equalsPos = str.offsetByCodePoints(str.length(), -1);
-                int afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
-                outfile.write(str.substring(0, afterEqualsPos));
-                key = group + '/' + str.substring(0, equalsPos).trim();
-                value = str.substring(afterEqualsPos);
-            } else {
-                // key=value pairs
-                int equalsPos = str.indexOf('=');
-
-                // if there's no separator, assume it's an unnamed key with a value
-                if (equalsPos == -1) {
-                    key = (group != null ? group + '/' : "") + String.format(unnamed_format, unnamed_counter);
-                    value = str;
-                    // nothing to output for key
-                } else {
-                    // advance if there're spaces after =
-                    while (str.codePointCount(equalsPos, str.length()) > 1) {
-                        int nextOffset = str.offsetByCodePoints(equalsPos, 1);
-                        if (str.codePointAt(nextOffset) != ' ') {
-                            break;
-                        }
-                        equalsPos = nextOffset;
-                    }
-
-                    int afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
-
-                    // writing out everything before = (and = itself)
-                    outfile.write(str.substring(0, afterEqualsPos));
-
-                    key = (group != null ? group + '/' : "") + str.substring(0, equalsPos).trim();
-                    value = str.substring(afterEqualsPos);
-                }
+                outfile.write(str);
+                continue;
             }
-            value = leftTrim(value);
 
+            // key=value pairs
+            equalsPos = str.indexOf('=');
+
+            // if there's no separator, assume it's an unnamed key with a value
+            // It may be a continuous line, so allow translate.
+            if (equalsPos == -1) {
+                // produce virtual key
+                key = (group != null ? group + '/' : "") + String.format(unnamed_format, unnamed_counter);
+                unnamed_counter++;
+                value = str;
+                while (str.codePointCount(0, str.length()) > 1) {
+                    int nextOffset = str.offsetByCodePoints(equalsPos, 1);
+                    if (str.codePointAt(nextOffset) == ' ') {
+
+                    }
+                }
+                // nothing to output
+            } else {
+                // advance if there're spaces after =
+                while (str.codePointCount(equalsPos, str.length()) > 1) {
+                    int nextOffset = str.offsetByCodePoints(equalsPos, 1);
+                    if (str.codePointAt(nextOffset) != ' ') {
+                        break;
+                    }
+                    equalsPos = nextOffset;
+                }
+
+                afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
+
+                // writing out everything before = (and = itself)
+                outfile.write(str.substring(0, afterEqualsPos));
+
+                key = (group != null ? group + '/' : "") + str.substring(0, equalsPos).trim();
+                value = str.substring(afterEqualsPos);
+            }
+
+            value = leftTrim(value);
             if (value.startsWith("\"") && value.endsWith("\"")) {
                 value = value.substring(value.offsetByCodePoints(0, 1),
                         value.offsetByCodePoints(value.length(), -1));

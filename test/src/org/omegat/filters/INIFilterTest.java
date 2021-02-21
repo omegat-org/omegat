@@ -53,6 +53,7 @@ public class INIFilterTest extends TestFilterBase {
         checkMulti("Value4", "Section/ID4", null, null, null, null);
         checkMulti("Continued Value4", "Section/[$$UnNamee_0_]", null, null, null, null);
         checkMulti("Value5", "Section/ID5", null, null, null, null);
+        checkMulti("Continued Value5 start with space", "Section/[$$UnNamee_1_]", null, null, null, null);
         checkMultiEnd();
     }
 }

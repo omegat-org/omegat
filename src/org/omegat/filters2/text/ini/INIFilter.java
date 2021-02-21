@@ -119,6 +119,7 @@ public class INIFilter extends AbstractFilter {
                 group = trimmed.substring(trimmed.offsetByCodePoints(0, 1),
                         trimmed.offsetByCodePoints(trimmed.length(), -1));
                 outfile.write(str);
+                outfile.write(lbpr.getLinebreak());
                 continue;
             }
 
@@ -131,8 +132,14 @@ public class INIFilter extends AbstractFilter {
                 // produce virtual key
                 key = (group != null ? group + '/' : "") + String.format(unnamed_format, unnamed_counter);
                 unnamed_counter++;
-                value = str;
-                // nothing to output
+                // advance if there are spaces before contents
+                afterEqualsPos = 0;
+                while (str.codePointCount(afterEqualsPos, str.length()) > 1) {
+                    if (str.codePointAt(afterEqualsPos) != ' ') {
+                        break;
+                    }
+                    afterEqualsPos = str.offsetByCodePoints(afterEqualsPos, 1);
+                }
             } else {
                 // advance if there're spaces after =
                 while (str.codePointCount(equalsPos, str.length()) > 1) {
@@ -142,16 +149,12 @@ public class INIFilter extends AbstractFilter {
                     }
                     equalsPos = nextOffset;
                 }
-
-                afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
-
-                // writing out everything before = (and = itself)
-                outfile.write(str.substring(0, afterEqualsPos));
-
                 key = (group != null ? group + '/' : "") + str.substring(0, equalsPos).trim();
-                value = str.substring(afterEqualsPos);
+                afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
             }
-
+            // writing out everything before = (and = itself), or spaces before text in continuous line.
+            outfile.write(str.substring(0, afterEqualsPos));
+            value = str.substring(afterEqualsPos);
             value = leftTrim(value);
             if (value.startsWith("\"") && value.endsWith("\"")) {
                 value = value.substring(value.offsetByCodePoints(0, 1),

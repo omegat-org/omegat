@@ -132,12 +132,6 @@ public class INIFilter extends AbstractFilter {
                 key = (group != null ? group + '/' : "") + String.format(unnamed_format, unnamed_counter);
                 unnamed_counter++;
                 value = str;
-                while (str.codePointCount(0, str.length()) > 1) {
-                    int nextOffset = str.offsetByCodePoints(equalsPos, 1);
-                    if (str.codePointAt(nextOffset) == ' ') {
-
-                    }
-                }
                 // nothing to output
             } else {
                 // advance if there're spaces after =

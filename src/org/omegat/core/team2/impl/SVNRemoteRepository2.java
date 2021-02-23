@@ -28,7 +28,9 @@ package org.omegat.core.team2.impl;
 
 import java.io.File;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.xml.namespace.QName;
@@ -36,12 +38,7 @@ import javax.xml.namespace.QName;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
-import org.tmatesoft.svn.core.SVNAuthenticationException;
-import org.tmatesoft.svn.core.SVNCommitInfo;
-import org.tmatesoft.svn.core.SVNDepth;
-import org.tmatesoft.svn.core.SVNErrorCode;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.*;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.util.SVNEncodingUtil;
 import org.tmatesoft.svn.core.wc.ISVNOptions;
@@ -57,6 +54,7 @@ import gen.core.project.RepositoryDefinition;
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Martin Fleurke
  */
 public class SVNRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = Logger.getLogger(SVNRemoteRepository2.class.getName());
@@ -64,11 +62,13 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     RepositoryDefinition config;
     File baseDirectory;
     SVNClientManager ourClientManager;
+    ProjectTeamSettings projectTeamSettings;
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
         config = repo;
         baseDirectory = dir;
+        projectTeamSettings = teamSettings;
 
         String predefinedUser = repo.getOtherAttributes().get(new QName("svnUsername"));
         String predefinedPass = repo.getOtherAttributes().get(new QName("svnPassword"));
@@ -137,6 +137,65 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public File getLocalDirectory() {
         return baseDirectory;
+    }
+
+    @Override
+    public String[] getRecentlyDeletedFiles() throws Exception {
+        final ArrayList<String> deleted = new ArrayList<>();
+
+        final SVNInfo info = ourClientManager.getWCClient().doInfo(baseDirectory, SVNRevision.HEAD);
+        SVNRevision currentRevision = info.getRevision();
+
+        String settingKey = "lastDeleteCheckForName"+baseDirectory.getName();
+        String sinceRevisionString = projectTeamSettings.get(settingKey);
+        SVNRevision sinceRevision;
+        if (sinceRevisionString==null) {
+            sinceRevision = currentRevision;
+        } else {
+            sinceRevision = SVNRevision.parse(sinceRevisionString);
+        }
+
+        final String repoPath = info.getPath();
+        try {
+            ourClientManager.getLogClient().doLog(new File[] { baseDirectory },
+                    sinceRevision,
+                    currentRevision,
+                    false,
+                    true, //to get the list of files changed/deleted
+                    1000000,
+                    new ISVNLogEntryHandler() {
+                public void handleLogEntry(SVNLogEntry en) throws SVNException {
+                    if (en.getRevision() == sinceRevision.getNumber()) {
+                        return;
+                    }
+                    Map<String, SVNLogEntryPath> changedPaths = en.getChangedPaths();
+                    for (Map.Entry<String, SVNLogEntryPath> entry : changedPaths.entrySet()) {
+                        SVNLogEntryPath path = entry.getValue();
+
+                        String filePath = path.getPath(); //eg /remotedir/my/file; repoPath = remotedir. To strip /remotedir/, add 2 for the slashes. But if remoteDir is empty, then only 1 slash to be removed.
+                        if ("".equals(repoPath)) {
+                            filePath = filePath.substring(1);
+                        } else {
+                            filePath = filePath.substring(repoPath.length()+2);
+                        }
+                        filePath = filePath.replace('/', File.separatorChar); //filepath is always using '/', but on windows we want to return path with backslashes
+
+                        if (path.getType() == 'D') {
+                            deleted.add(filePath);
+                        } else if (path.getType() == 'A') {
+                            deleted.remove(filePath); //added after it has been deleted. Don't delete any more!
+                        }
+                    }
+                }}
+                );
+        } catch (SVNException e) {
+            e.printStackTrace();
+        }
+
+        projectTeamSettings.set(settingKey, Long.toString(currentRevision.getNumber()));
+
+        String[] result = new String[deleted.size()];
+        return deleted.toArray(result);
     }
 
     @Override

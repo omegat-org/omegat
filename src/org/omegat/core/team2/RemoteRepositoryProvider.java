@@ -539,6 +539,10 @@ public class RemoteRepositoryProvider {
             if (!matches()) {
                 throw new RuntimeException("Path doesn't match with mapping");
             }
+            if ("svn".equals(repoDefinition.getType())) {
+                //workaround for bug 1036
+                return new ArrayList<>();
+            }
             // Remove leading slashes on child args to avoid doing `new
             // File("foo", "/")` which treats the "/" as an actual child element
             // name and prevents proper slash normalization later on.

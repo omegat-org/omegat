@@ -66,14 +66,14 @@ public final class RebaseAndCommit {
         currentBaseVersion = savedVersion;
         Log.logDebug(LOGGER, "Retrieve BASE(" + currentBaseVersion + ") version of '" + path + "'");
         // retrieve BASE version
-        File baseFile = provider.switchToVersionAndPropagateDeletes(path, currentBaseVersion);
+        File baseFile = provider.switchToVersion(path, currentBaseVersion);
         // save it to prepared dir
         r.versionBase = currentBaseVersion;
         r.fileBase = provider.toPrepared(baseFile);
 
         Log.logDebug(LOGGER, "Retrieve HEAD version of '" + path + "'");
         // retrieve HEAD version
-        File headFile = provider.switchToVersionAndPropagateDeletes(path, null);
+        File headFile = provider.switchToVersion(path, null);
         // get version id
         String headVersion = provider.getVersion(path);
         // save it to prepared dir
@@ -97,7 +97,7 @@ public final class RebaseAndCommit {
             currentBaseVersion = savedVersion;
         } else {
             // version wasn't stored - assume latest. TODO Probably need to ask ?
-            provider.switchToVersionAndPropagateDeletes(path, null);
+            provider.switchToVersion(path, null);
             currentBaseVersion = provider.getVersion(path);
         }
         final File localFile = new File(projectDir, path);
@@ -108,7 +108,7 @@ public final class RebaseAndCommit {
                 baseRepoFile = prep.fileBase;
             }
             if (baseRepoFile == null) {
-                baseRepoFile = provider.switchToVersionAndPropagateDeletes(path, currentBaseVersion);
+                baseRepoFile = provider.switchToVersion(path, currentBaseVersion);
             }
             if (!localFile.exists()) {
                 // there is no local file - just use remote
@@ -133,7 +133,7 @@ public final class RebaseAndCommit {
             headRepoFile = prep.fileHead;
         }
         if (headVersion == null) {
-            headRepoFile = provider.switchToVersionAndPropagateDeletes(path, null);
+            headRepoFile = provider.switchToVersion(path, null);
             headVersion = provider.getVersion(path);
         }
         final boolean fileChangedRemotely;

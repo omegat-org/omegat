@@ -43,6 +43,7 @@ import org.omegat.core.data.ProjectProperties;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
+import org.omegat.core.team2.impl.FileRepository;
 
 @RunWith(Parameterized.class)
 public class RemoteRepositoryProviderTest {
@@ -271,7 +272,7 @@ public class RemoteRepositoryProviderTest {
         def.setUrl(repoUrlDir);
         def.getMapping().add(m);
         repos.add(def);
-        provider.repositories.add(null);
+        provider.repositories.add(new FileRepository());
     }
 
     void createFile(String path) throws IOException {

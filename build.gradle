@@ -869,8 +869,8 @@ spotbugs {
     reportLevel = 'high'
 }
 
-spotbugsMain {
-    reports {
+tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
+    it.reports {
         xml.enabled = envIsCi
         html.enabled = !envIsCi
     }

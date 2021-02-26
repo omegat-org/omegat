@@ -192,6 +192,7 @@ public class FilterVisitor extends NodeVisitor {
             // Translate attributes of tags if they are not null.
             maybeTranslateAttribute(tag, "abbr");
             maybeTranslateAttribute(tag, "alt");
+            maybeTranslateAttribute(tag, "dir");
             if (options.getTranslateHref()) {
                 maybeTranslateAttribute(tag, "href");
             }

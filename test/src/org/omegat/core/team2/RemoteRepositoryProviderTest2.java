@@ -28,6 +28,7 @@ package org.omegat.core.team2;
 import org.junit.Test;
 
 import java.io.*;
+import java.nio.file.Files;
 
 import static org.junit.Assert.*;
 
@@ -36,17 +37,18 @@ public class RemoteRepositoryProviderTest2 {
 
     @Test
     public void testRelativeRemoteToAbsoluteLocal() {
-        assertEquals(new File("/home/project/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File("/home/project"), "/", "/"));
-        assertEquals(new File("/home/project/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File("/home/project"), "", ""));
-        assertEquals(new File("/home/project/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File("/home/project"), "", "/"));
-        assertEquals(new File("/home/project/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File("/home/project"), "/", ""));
+        String base = System.getProperty("java.io.tmpdir") + File.separator;
+        assertEquals(new File(base + "file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "/", "/"));
+        assertEquals(new File(base + "file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "", ""));
+        assertEquals(new File(base + "file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "", "/"));
+        assertEquals(new File(base + "file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "/", ""));
 
-        assertEquals(new File("/home/project/source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File("/home/project"), "somedir", "source"));
-        assertEquals(new File("/home/project/source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File("/home/project"), "somedir", "source/"));
-        assertEquals(new File("/home/project/source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File("/home/project"), "somedir/", "source"));
-        assertEquals(new File("/home/project/source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File("/home/project"), "/somedir/", "source"));
+        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir", "source"));
+        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir", "source/"));
+        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir/", "source"));
+        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/somedir/", "source"));
 
-        assertEquals(new File("/home/project/source/somedir/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File("/home/project"), "/", "/source"));
+        assertEquals(new File(base + "source/somedir/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/", "/source"));
 
     }
 
@@ -55,5 +57,25 @@ public class RemoteRepositoryProviderTest2 {
         assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("/aa/"));
         assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("aa"));
         assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("aa/"));
+        assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("/aa"));
+        assertEquals("a/b/c/d", RemoteRepositoryProvider.withoutSlashes("/a/b/c/d/"));
+    }
+
+    @Test
+    public void testWithSlashes() {
+        assertEquals("/aa/", RemoteRepositoryProvider.withSlashes("/aa/"));
+        assertEquals("/aa/", RemoteRepositoryProvider.withSlashes("aa"));
+        assertEquals("/aa/", RemoteRepositoryProvider.withSlashes("aa/"));
+        assertEquals("/aa/", RemoteRepositoryProvider.withSlashes("/aa"));
+        assertEquals("/a/b/c/d/", RemoteRepositoryProvider.withSlashes("a/b/c/d"));
+    }
+
+    @Test
+    public void testWithLeadingSlash() {
+        assertEquals("/aa/", RemoteRepositoryProvider.withLeadingSlash("/aa/"));
+        assertEquals("/aa", RemoteRepositoryProvider.withLeadingSlash("aa"));
+        assertEquals("/aa/", RemoteRepositoryProvider.withLeadingSlash("aa/"));
+        assertEquals("/aa", RemoteRepositoryProvider.withLeadingSlash("/aa"));
+        assertEquals("/a/b/c/d", RemoteRepositoryProvider.withLeadingSlash("a/b/c/d"));
     }
 }

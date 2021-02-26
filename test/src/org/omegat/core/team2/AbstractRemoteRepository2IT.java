@@ -33,7 +33,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -122,9 +121,7 @@ public abstract class AbstractRemoteRepository2IT {
 		rr2.addForDeletion(toRr2Notation(newFile3));
 		rr2.commit(null, "test delete");
 
-		FileWriter myWriter = new FileWriter(new File(localCheckoutDir, newFile3));
-		myWriter.write("Files in Java might be tricky, but it is fun enough!");
-		myWriter.close();
+		FileUtils.writeStringToFile(new File(localCheckoutDir, newFile3), "Files in Java might be tricky, but it is fun enough!", "UTF-8");
 		rr2.addForCommit(toRr2Notation(newFile3));
 		rr2.commit(null, "test add deleted file");
 
@@ -139,9 +136,8 @@ public abstract class AbstractRemoteRepository2IT {
 	protected String createFile(File basedir) throws IOException {
 		Random random = new Random();
 		String newFile = "file"+random.nextInt();
-		FileWriter myWriter = new FileWriter(new File(basedir, newFile));
-		myWriter.write("Files in Java might be tricky, but it is fun enough!");
-		myWriter.close();
+		File f = new File(basedir, newFile);
+		FileUtils.writeStringToFile(f, "Files in Java might be tricky, but it is fun enough!", "UTF-8");
 		return newFile;
 	}
 
@@ -183,9 +179,8 @@ public abstract class AbstractRemoteRepository2IT {
 		String newFile = subdir + File.separator + "fileinsubdir";
 		Path path = Paths.get(basedir.getAbsolutePath() + File.separator + subdir);
 		Files.createDirectories(path);
-		FileWriter myWriter2 = new FileWriter(new File(basedir, newFile));
-		myWriter2.write("This file is in a dir");
-		myWriter2.close();
+		File f = new File(basedir, newFile);
+		FileUtils.writeStringToFile(f, "This file is in a dir", "UTF-8");
 		return newFile;
 	}
 

@@ -52,7 +52,6 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  */
 public class INIFilter extends AbstractFilter {
-    private static String unnamed_format = "[$$UnNamee_%d_]"; // general key cannot be [..]
     protected Map<String, String> align;
 
     public String getFileFormatName() {
@@ -88,6 +87,15 @@ public class INIFilter extends AbstractFilter {
         return s.substring(i, s.length());
     }
 
+    private String buildKey(String group, int counter) {
+        StringBuilder sb = new StringBuilder();
+        if (group != null) {
+            sb.append(group).append('/');
+        }
+        sb.append("[$$UnNamee_").append(counter).append("_]");
+        return sb.toString();
+    }
+
     /**
      * Doing the processing of the file...
      */
@@ -96,7 +104,7 @@ public class INIFilter extends AbstractFilter {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         String group = null;
-        int unnamed_counter = 0;
+        int unnamedCounter = 0;
 
         while ((str = lbpr.readLine()) != null) {
             String key;
@@ -130,8 +138,8 @@ public class INIFilter extends AbstractFilter {
             // It may be a continuous line, so allow translate.
             if (equalsPos == -1) {
                 // produce virtual key
-                key = (group != null ? group + '/' : "") + String.format(unnamed_format, unnamed_counter);
-                unnamed_counter++;
+                key = buildKey(group, unnamedCounter);
+                unnamedCounter++;
                 // advance if there are spaces before contents
                 afterEqualsPos = 0;
                 while (str.codePointCount(afterEqualsPos, str.length()) > 1) {

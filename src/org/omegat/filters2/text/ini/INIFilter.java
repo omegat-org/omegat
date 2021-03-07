@@ -87,12 +87,16 @@ public class INIFilter extends AbstractFilter {
         return s.substring(i, s.length());
     }
 
-    private String buildKey(String group, int counter) {
+    private String buildKey(String group, String key, int counter) {
         StringBuilder sb = new StringBuilder();
         if (group != null) {
             sb.append(group).append('/');
         }
-        sb.append("#").append(counter).append("#");
+        if (key != null) {
+            sb.append(key.trim());
+        } else {
+            sb.append("#").append(counter).append("#");
+        }
         return sb.toString();
     }
 
@@ -104,7 +108,7 @@ public class INIFilter extends AbstractFilter {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         String group = null;
-        int unnamedCounter = 0;
+        int contlines = 0;
 
         while ((str = lbpr.readLine()) != null) {
             String key;
@@ -138,8 +142,7 @@ public class INIFilter extends AbstractFilter {
             // It may be a continuous line, so allow translate.
             if (equalsPos == -1) {
                 // produce virtual key
-                key = buildKey(group, unnamedCounter);
-                unnamedCounter++;
+                key = buildKey(group, null, contlines++);
                 // advance if there are spaces before contents
                 afterEqualsPos = 0;
                 while (str.codePointCount(afterEqualsPos, str.length()) > 1) {
@@ -157,7 +160,7 @@ public class INIFilter extends AbstractFilter {
                     }
                     equalsPos = nextOffset;
                 }
-                key = (group != null ? group + '/' : "") + str.substring(0, equalsPos).trim();
+                key = buildKey(group, str.substring(0, equalsPos), 0);
                 afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
             }
             // writing out everything before = (and = itself), or spaces before text in continuous line.

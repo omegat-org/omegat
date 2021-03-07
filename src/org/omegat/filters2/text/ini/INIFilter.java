@@ -92,7 +92,7 @@ public class INIFilter extends AbstractFilter {
         if (group != null) {
             sb.append(group).append('/');
         }
-        sb.append("[$$UnNamee_").append(counter).append("_]");
+        sb.append("#").append(counter).append("#");
         return sb.toString();
     }
 

@@ -54,6 +54,7 @@ import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.dialogs.PluginInstallerDialogController;
+import org.omegat.gui.plugin.PluginDetailsPane;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -69,6 +70,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
     private PluginsPreferencesPanel panel;
     private TableRowSorter<PluginInfoTableModel> sorter;
+    private PluginDetailsPane pluginDetailsPane;
     private Map<String, String> installConfig = new HashMap<>();
 
     @Override
@@ -116,7 +118,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
     final void selectRowAction(ListSelectionEvent evt) {
         int rowIndex = panel.tablePluginsInfo.convertRowIndexToModel(panel.tablePluginsInfo.getSelectedRow());
         if (rowIndex == -1) {
-            panel.pluginDetails.setText("");
+            pluginDetailsPane.setText("");
         } else {
             PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
             String name = (String) model.getValueAt(rowIndex, PluginInfoTableModel.COLUMN_NAME);
@@ -124,33 +126,32 @@ public class PluginsPreferencesController extends BasePreferencesController {
             PluginUtils.getPluginInformations().stream()
                     .filter(info -> info.getName().equals(name))
                     .forEach(info -> sb.append(formatDetailText(info)));
-            panel.pluginDetails.setText(sb.toString());
+            pluginDetailsPane.setText(sb.toString());
         }
     }
 
     private String formatDetailText(PluginInformation info) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Name: ").append(info.getName()).append("\n");
-        sb.append("Author: ");
+        sb.append("<h2>").append(info.getName()).append("</h2>\n");
+        sb.append("<h4>Author: ");
         if (info.getAuthor() != null) {
             sb.append(info.getAuthor()).append("\n");
         } else {
             sb.append("Unknown\n");
         }
+        sb.append("</h4>\n");
         if (info.getCategory() != null) {
-            sb.append("Category: ").append(info.getCategory()).append("\n");
+            sb.append("<h4>Category: ").append(info.getCategory()).append("</h4>\n");
         }
         if (info.getVersion() != null) {
-            sb.append("Version: ").append(info.getVersion()).append("\n");
-        }
-        sb.append("ClassName: ").append(info.getClassName()).append("\n\n");
-        if (info.getLink() != null) {
-            sb.append("Link: ").append(info.getLink()).append("\n");
+            sb.append("<h4>Version: ").append(info.getVersion()).append("</h4><br/>\n");
         }
         if (info.getDescription() != null) {
-            sb.append(info.getDescription()).append("\n");
+            sb.append("<p>").append(info.getDescription()).append("</p>\n");
         }
-        sb.append("\n");
+        if (info.getLink() != null) {
+            sb.append("<br/><br/><div><a href=\"").append(info.getLink()).append("\">Plugin homepage</a></div>");
+        }
         return sb.toString();
     }
 
@@ -161,6 +162,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new PluginsPreferencesPanel();
+        pluginDetailsPane = new PluginDetailsPane();
+        panel.panelPluginDetails.add(pluginDetailsPane);
         TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
         panel.browsePluginsButton.addActionListener(e -> {
             try {

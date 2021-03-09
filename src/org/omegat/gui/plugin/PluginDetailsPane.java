@@ -31,9 +31,9 @@ import org.omegat.util.OStrings;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.StaticUIUtils;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.html.HTMLDocument;
-import java.io.IOException;
 import java.net.URI;
 
 /**
@@ -41,8 +41,8 @@ import java.net.URI;
  *
  * @author Hiroshi Miura
  */
-@SuppressWarnings("serial")
 public class PluginDetailsPane extends EntryInfoPane<PluginInformation> {
+    private static final long serialVersionUID = 7345812965508717972L;
 
     private static final String EXPLANATION = OStrings.getString("PREFS_PLUGINS_DETAILS_explanation");
 
@@ -54,12 +54,13 @@ public class PluginDetailsPane extends EntryInfoPane<PluginInformation> {
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
         setText(EXPLANATION);
-        addHyperlinkListener(hle -> {
-            if (HyperlinkEvent.EventType.ACTIVATED.equals(hle.getEventType())) {
+        addHyperlinkListener(e -> {
+            if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
                 try {
-                    DesktopWrapper.browse(URI.create(hle.getURL().toString()));
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    DesktopWrapper.browse(URI.create(e.getURL().toString()));
+                } catch (Exception ex) {
+                    JOptionPane.showConfirmDialog(this, ex.getLocalizedMessage(),
+                            OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

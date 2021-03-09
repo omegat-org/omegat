@@ -35,6 +35,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Map;
 import java.util.Set;
 import java.util.jar.Manifest;
@@ -123,9 +124,12 @@ public class PluginsPreferencesController extends BasePreferencesController {
             PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
             String name = (String) model.getValueAt(rowIndex, PluginInfoTableModel.COLUMN_NAME);
             StringBuilder sb = new StringBuilder();
-            PluginUtils.getPluginInformations().stream()
+            Optional<PluginInformation> pluginInformation = PluginUtils.getPluginInformations().stream()
                     .filter(info -> info.getName().equals(name))
-                    .forEach(info -> sb.append(formatDetailText(info)));
+                    .findFirst();
+            if (pluginInformation.isPresent()) {
+                sb.append(formatDetailText(pluginInformation.get()));
+            }
             pluginDetailsPane.setText(sb.toString());
         }
     }
@@ -135,22 +139,22 @@ public class PluginsPreferencesController extends BasePreferencesController {
         sb.append("<h2>").append(info.getName()).append("</h2>\n");
         sb.append("<h4>Author: ");
         if (info.getAuthor() != null) {
-            sb.append(info.getAuthor()).append("\n");
+            sb.append(info.getAuthor()).append("<br/>\n");
         } else {
-            sb.append("Unknown\n");
+            sb.append("Unknown<br/>\n");
         }
-        sb.append("</h4>\n");
         if (info.getCategory() != null) {
-            sb.append("<h4>Category: ").append(info.getCategory()).append("</h4>\n");
+            sb.append("Category: ").append(info.getCategory()).append("<br/>\n");
         }
         if (info.getVersion() != null) {
-            sb.append("<h4>Version: ").append(info.getVersion()).append("</h4><br/>\n");
+            sb.append("Version: ").append(info.getVersion()).append("<br/>\n");
         }
+        sb.append("</h4>\n");
         if (info.getDescription() != null) {
             sb.append("<p>").append(info.getDescription()).append("</p>\n");
         }
         if (info.getLink() != null) {
-            sb.append("<br/><br/><div><a href=\"").append(info.getLink()).append("\">Plugin homepage</a></div>");
+            sb.append("<br/><div><a href=\"").append(info.getLink()).append("\">Plugin homepage</a></div>");
         }
         return sb.toString();
     }

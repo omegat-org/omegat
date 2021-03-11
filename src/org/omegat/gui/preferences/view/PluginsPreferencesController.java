@@ -25,30 +25,6 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.Map;
-import java.util.Set;
-import java.util.jar.Manifest;
-
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.RowFilter;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.table.TableRowSorter;
-
 import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
@@ -59,9 +35,23 @@ import org.omegat.gui.plugin.PluginDetailsPane;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.TableRowSorter;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.*;
+import java.util.jar.Manifest;
 
 /**
  * @author Aaron Madlon-Kay
@@ -72,7 +62,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private PluginsPreferencesPanel panel;
     private TableRowSorter<PluginInfoTableModel> sorter;
     private PluginDetailsPane pluginDetailsPane;
-    private Map<String, String> installConfig = new HashMap<>();
+    private final Map<String, String> installConfig = new HashMap<>();
 
     @Override
     public final JComponent getGui() {
@@ -127,9 +117,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             Optional<PluginInformation> pluginInformation = PluginUtils.getPluginInformations().stream()
                     .filter(info -> info.getName().equals(name))
                     .findFirst();
-            if (pluginInformation.isPresent()) {
-                sb.append(formatDetailText(pluginInformation.get()));
-            }
+            pluginInformation.ifPresent(information -> sb.append(formatDetailText(information)));
             pluginDetailsPane.setText(sb.toString());
         }
     }

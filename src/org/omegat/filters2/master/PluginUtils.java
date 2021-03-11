@@ -26,28 +26,6 @@
 
 package org.omegat.filters2.master;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-import java.util.Set;
-import java.util.jar.Attributes;
-import java.util.jar.Manifest;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
@@ -55,12 +33,21 @@ import org.omegat.core.data.PluginInformation;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.Tokenizer;
-import org.omegat.util.FileUtil;
-import org.omegat.util.Language;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
-import org.omegat.util.StringUtil;
+import org.omegat.util.*;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Static utilities for OmegaT filter plugins.
@@ -72,8 +59,26 @@ public final class PluginUtils {
 
     public static final String PLUGINS_LIST_FILE = "Plugins.properties";
 
-    enum PluginType {
-        FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, UNKNOWN
+    public enum PluginType {
+        FILTER("filter"),
+        TOKENIZER("tokenizer"),
+        MARKER("marker"),
+        MACHINETRANSLATOR("machinetranslator"),
+        BASE("base"),
+        GLOSSARY("glossary"),
+        DICTIONARY("dictionary"),
+	MISCELLANEOUS("miscellaneous"),
+        UNKNOWN("unknown");
+
+        private String typeValue;
+
+        PluginType(String type) {
+            this.typeValue = type;
+        }
+
+        public String getTypeValue() {
+            return typeValue;
+        }
     };
 
     protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<Class<?>>();
@@ -186,7 +191,7 @@ public final class PluginUtils {
             return false;
         }
         Tokenizer ann = c.getAnnotation(Tokenizer.class);
-        return ann == null ? false : ann.isDefault();
+        return ann != null && ann.isDefault();
     }
 
     private static Class<?> searchForTokenizer(String lang) {

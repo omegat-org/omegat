@@ -26,6 +26,10 @@
 
 package org.omegat.core.data;
 
+import org.omegat.filters2.master.PluginUtils;
+
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
@@ -61,9 +65,9 @@ public class PluginInformation implements Comparable<PluginInformation> {
         version = findVersion(manifest);
         author = findAuthor(manifest);
         description = attrs.getValue(PLUGIN_DESCRIPTION);
-        category = attrs.getValue(PLUGIN_CATEGORY);
         link = attrs.getValue(PLUGIN_LINK);
         builtBy = attrs.getValue(BUILT_BY);
+        category = categoryName(attrs.getValue(PLUGIN_CATEGORY));
     }
 
     public PluginInformation(String className, Properties props, final String key) {
@@ -72,13 +76,18 @@ public class PluginInformation implements Comparable<PluginInformation> {
         version = null;
         author = null;
         description = null;
-        if ("plugin".equals(key)) {
-            category = "bundle";
-        } else {
-            category = key.toLowerCase();
-        }
+        category = categoryName(key);
         link = null;
         builtBy = null;
+    }
+
+    private String categoryName(final String key) {
+        Optional<PluginUtils.PluginType> type = Arrays.stream(PluginUtils.PluginType.values()).filter(v ->
+                v.getTypeValue().equals(key)).findFirst();
+        if (type.isPresent()) {
+            return type.get().getTypeValue();
+        }
+        return PluginUtils.PluginType.UNKNOWN.getTypeValue();
     }
 
     private String findName(Manifest m) {

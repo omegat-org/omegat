@@ -25,26 +25,24 @@
 
 package org.omegat.gui.preferences.view;
 
+import org.omegat.core.data.PluginInformation;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.OStrings;
+
+import javax.swing.table.DefaultTableModel;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
 
-import javax.swing.table.DefaultTableModel;
-
-import org.omegat.core.data.PluginInformation;
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.util.OStrings;
-
 public class PluginInfoTableModel extends DefaultTableModel {
     private static final long serialVersionUID = 5345248154613009632L;
 
-    protected static final int COLUMN_NAME = 0;
-    protected static final int COLUMN_VERSION = 1;
-    protected static final int COLUMN_AUTHOR = 2;
-    protected static final int COLUMN_CATEGORY = 3;
+    protected static final int COLUMN_CATEGORY = 0;
+    protected static final int COLUMN_NAME = 1;
+    protected static final int COLUMN_VERSION = 2;
 
-    private static final String[] COLUMN_NAMES = { "NAME", "VERSION", "AUTHOR", "CATEGORY" };
+    private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION" };
 
     private final Map<String, PluginInformation> listPlugins = new TreeMap<>();
 
@@ -99,9 +97,6 @@ public class PluginInfoTableModel extends DefaultTableModel {
             break;
         case COLUMN_VERSION:
             returnValue = plugin.getVersion();
-            break;
-        case COLUMN_AUTHOR:
-            returnValue = plugin.getAuthor();
             break;
         case COLUMN_CATEGORY:
             returnValue = plugin.getCategory();

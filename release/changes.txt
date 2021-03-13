@@ -38,6 +38,9 @@
   - Add plain text translation option to Yandex.Cloud
   https://sourceforge.net/p/omegat/feature-requests/1550/
 
+  - Simple support for dir attribute modification in HTML
+  https://sourceforge.net/p/omegat/feature-requests/1556/
+
 ----------------------------------------------------------------------
  OmegaT 5.4.1 (2020-12-15)
 ----------------------------------------------------------------------

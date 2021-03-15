@@ -31,9 +31,9 @@ jwsCodebase=
 # URL for timestamp. See: https://ant.apache.org/manual/Tasks/signjar.html
 #jwsTsaurl=
 
-## Bintray publishing
-bintrayUser=
-bintrayKey=
+## OSSRH/sonatype publishing
+sonatypeUsername=
+sonatypePassword=
 
 ## SourceForge web
 sourceforgeWebUser=

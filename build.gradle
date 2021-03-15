@@ -5,14 +5,15 @@ plugins {
     id 'application'
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
     id 'eclipse'
     id 'checkstyle'
     id 'com.github.spotbugs' version '4.5.0'
     id 'de.gliderpilot.jnlp' version '1.2.6'
-    id 'com.jfrog.bintray' version '1.8.5'
     id 'org.hidetake.ssh' version '2.10.1'
     id 'com.diffplug.spotless' version '5.5.1'
     id 'com.github.ben-manes.versions' version '0.33.0'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.0.0'
 }
 
 apply from: 'gradle/utils.gradle'
@@ -40,6 +41,8 @@ sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
+
+def isRelease = true
 
 sourceSets {
     main {
@@ -1014,43 +1017,82 @@ task testIntegration(type: JavaExec) {
     systemProperties = System.properties
 }
 
-task sourceJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier = 'sources'
-}
-
-task javadocJar(type: Jar) {
-    from javadoc.outputs
-    classifier = 'javadoc'
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')
 
 publishing {
     publications {
-        bintray(MavenPublication) {
+        mavenJava(MavenPublication) {
+            from(components.java)
             groupId 'org.omegat'
             artifactId 'omegat'
             version mavenStyleVersion
-            from components.java
-            artifact sourceJar
-            artifact javadocJar
+            pom {
+                name = "omegat"
+                description = "OmegaT - the free translation memory tool"
+                url = "https://sourceforge.net/p/omegat"
+                licenses {
+                    license {
+                        name = "The GNU General Public License, Version 3.0"
+                        url = "https://www.gnu.org/licenses/licenses/gpl-3.0.html"
+                        distribution = "repo"
+                    }
+                }
+                developers {
+                    developer {
+                        name = "OmegaT team"
+                        id = "omegat"
+                        email = "developer@omegat.org"
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://git.code.sf.net/p/omegat/code"
+                    developerConnection = "scm:git:git://git.code.sf.net/p/omegat/code.git"
+                    url = "https://sourceforge.net/projects/omegat/"
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/omegat-org/omegat"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
         }
     }
 }
 
-bintray {
-    user = findProperty('bintrayUser')
-    key = findProperty('bintrayKey')
-    pkg {
-        repo = 'maven'
-        name = 'OmegaT'
-        userOrg = 'omegat-org'
-        version {
-            name = mavenStyleVersion
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            username = project.hasProperty('sonatypeUsername') ? project.property('sonatypeUsername') : System.getenv('SONATYPE_USER')
+            password = project.hasProperty('sonatypePassword') ? project.property('sonatypePassword') : System.getenv('SONATYPE_PASS')
         }
     }
-    publications = ['bintray']
+}
+
+signing {
+    def signingKey = findProperty("signingKey")
+    def signingPassword = findProperty("signingPassword")
+    if (signingKey) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+    } else {
+        useGpgCmd()
+    }
+    sign publishing.publications.mavenJava
+}
+tasks.withType(Sign) {
+    def hasKey = project.hasProperty("signingKey") || project.hasProperty("signing.gnupg.keyName")
+    onlyIf { isRelease & hasKey }
 }
 
 remotes {

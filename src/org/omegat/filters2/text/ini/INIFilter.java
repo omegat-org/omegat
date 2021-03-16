@@ -87,16 +87,24 @@ public class INIFilter extends AbstractFilter {
         return s.substring(i, s.length());
     }
 
-    private String buildKey(String group, String key, int counter) {
+    private String buildId(String group, String key) {
+        StringBuilder sb = new StringBuilder();
+        if (group != null) {
+            sb.append(group).append('/');
+        }
+        sb.append(key.trim());
+        return sb.toString();
+    }
+
+    private String buildVirtualId(String group, String key, int counter) {
         StringBuilder sb = new StringBuilder();
         if (group != null) {
             sb.append(group).append('/');
         }
         if (key != null) {
             sb.append(key.trim());
-        } else {
-            sb.append("#").append(counter).append("#");
         }
+        sb.append("/#").append(counter);
         return sb.toString();
     }
 
@@ -108,10 +116,13 @@ public class INIFilter extends AbstractFilter {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         String group = null;
+        String key = null;
+        int line = 0;
         int contlines = 0;
 
         while ((str = lbpr.readLine()) != null) {
-            String key;
+            line++;
+            String omegatId;
             String value;
             int equalsPos;
             int afterEqualsPos;
@@ -123,6 +134,8 @@ public class INIFilter extends AbstractFilter {
                 // outfile.write(str+"\n");
                 outfile.write(str);
                 outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
+                contlines = 0;
+                key = null;
                 continue;
             }
 
@@ -132,6 +145,8 @@ public class INIFilter extends AbstractFilter {
                         trimmed.offsetByCodePoints(trimmed.length(), -1));
                 outfile.write(str);
                 outfile.write(lbpr.getLinebreak());
+                contlines = 0;
+                key = null;
                 continue;
             }
 
@@ -141,8 +156,15 @@ public class INIFilter extends AbstractFilter {
             // if there's no separator, assume it's an unnamed key with a value
             // It may be a continuous line, so allow translate.
             if (equalsPos == -1) {
-                // produce virtual key
-                key = buildKey(group, null, contlines++);
+                if (key == null) {
+                    // In a malformed file there might not be a key, in which
+                    // case we use the line number.
+                    omegatId = buildId(group, "#L" + line);
+                } else {
+                    // For a continuation line, build a virtual key under the
+                    // existing current key
+                    omegatId = buildVirtualId(group, key, ++contlines);
+                }
                 // advance if there are spaces before contents
                 afterEqualsPos = 0;
                 while (str.codePointCount(afterEqualsPos, str.length()) > 1) {
@@ -160,8 +182,10 @@ public class INIFilter extends AbstractFilter {
                     }
                     equalsPos = nextOffset;
                 }
-                key = buildKey(group, str.substring(0, equalsPos), 0);
+                key = str.substring(0, equalsPos);
+                omegatId = buildId(group, key);
                 afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
+                contlines = 0;
             }
             // writing out everything before = (and = itself), or spaces before text in continuous line.
             outfile.write(str.substring(0, afterEqualsPos));
@@ -174,11 +198,11 @@ public class INIFilter extends AbstractFilter {
             }
 
             if (entryAlignCallback != null) {
-                align.put(key, value);
+                align.put(omegatId, value);
             } else if (entryParseCallback != null) {
-                entryParseCallback.addEntry(key, value, null, false, null, null, this, null);
+                entryParseCallback.addEntry(omegatId, value, null, false, null, null, this, null);
             } else if (entryTranslateCallback != null) {
-                String trans = entryTranslateCallback.getTranslation(key, value, null);
+                String trans = entryTranslateCallback.getTranslation(omegatId, value, null);
                 if (trans == null) {
                     trans = value;
                 }

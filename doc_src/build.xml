@@ -174,7 +174,7 @@
             <arg value="generate.toc=book toc,title,figure,table chapter toc appendix toc" />
             <arg value="generate.index=1" />
             <arg value="root.filename=index_" />
-            <arg value="html.stylesheet=OmegaT.css" />
+            <arg value="html.stylesheet=OmegaT_webhelp.css" />
             <arg value="saxon.character.representation=native;decimal"/>
             <classpath>
                 <pathelement location="${saxon}" />
@@ -187,7 +187,7 @@
 
     <target name="css">
       <copy file="OmegaT.css"
-            tofile="../docs/${language}/OmegaT.css" />
+            tofile="../docs/${language}/OmegaT_webhelp.css" />
     </target>
 
 
@@ -298,6 +298,7 @@
             <arg line="-p --navigation-background-color #FDFDFD"/>
             <arg line="-p --field-background-color #FDFDFD"/>
             <arg line="-p --panel-background-color #FDFDFD"/>
+            <arg line="-p local-jquery yes"/>
             <arg value="-toc"/>
             <arg value="${language}/xhtml5/toc.xml"/>
             <arg value="-index"/>
@@ -305,6 +306,7 @@
             <arg value="../docs/${language}"/>
             <arg line="${prop.dist.contents}"/>
         </java>
+        <delete file="${language}/xhtml5/index_.html"/>
     </target>
 
     <target name="html5" depends="pictures,xhtml5-chunk,css,whc" />

@@ -83,9 +83,9 @@ public class PluginsPreferencesPanel extends JPanel {
         panelPluginsInfo.add(jPanel1);
 
         tablePluginsInfo.setAutoCreateRowSorter(true);
-        tablePluginsInfo.setModel(new PluginInfoTableModel());
+        tablePluginsInfo.setModel(new LocalPluginInfoTableModel());
         tablePluginsInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
+        tablePluginsInfo.getColumnModel().getColumn(LocalPluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
         scrollTable.setViewportView(tablePluginsInfo);
 
         panelPluginsInfo.add(scrollTable);

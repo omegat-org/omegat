@@ -60,7 +60,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
     private PluginsPreferencesPanel panel;
-    private TableRowSorter<PluginInfoTableModel> sorter;
+    private TableRowSorter<LocalPluginInfoTableModel> sorter;
     private PluginDetailsPane pluginDetailsPane;
     private final Map<String, String> installConfig = new HashMap<>();
 
@@ -81,9 +81,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 panel.tablePluginsInfo.doLayout();
                 return;
             }
-            RowFilter<PluginInfoTableModel, Object> rf;
+            RowFilter<LocalPluginInfoTableModel, Object> rf;
             try {
-                rf = RowFilter.regexFilter(filterText, PluginInfoTableModel.COLUMN_NAME);
+                rf = RowFilter.regexFilter(filterText, LocalPluginInfoTableModel.COLUMN_NAME);
             } catch (java.util.regex.PatternSyntaxException e) {
                 return;
             }
@@ -111,8 +111,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
         if (rowIndex == -1) {
             pluginDetailsPane.setText("");
         } else {
-            PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
-            String name = (String) model.getValueAt(rowIndex, PluginInfoTableModel.COLUMN_NAME);
+            LocalPluginInfoTableModel model = (LocalPluginInfoTableModel) panel.tablePluginsInfo.getModel();
+            String name = (String) model.getValueAt(rowIndex, LocalPluginInfoTableModel.COLUMN_NAME);
             StringBuilder sb = new StringBuilder();
             Optional<PluginInformation> pluginInformation = PluginUtils.getPluginInformations().stream()
                     .filter(info -> info.getName().equals(name))
@@ -165,7 +165,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
         });
-        PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
+        LocalPluginInfoTableModel model = (LocalPluginInfoTableModel) panel.tablePluginsInfo.getModel();
         sorter = new TableRowSorter<>(model);
         panel.tablePluginsInfo.setRowSorter(sorter);
         panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);

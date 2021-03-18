@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
 
-public class PluginInfoTableModel extends DefaultTableModel {
+public class LocalPluginInfoTableModel extends DefaultTableModel {
     private static final long serialVersionUID = 5345248154613009632L;
 
     protected static final int COLUMN_CATEGORY = 0;
@@ -46,7 +46,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
 
     private final Map<String, PluginInformation> listPlugins = new TreeMap<>();
 
-    public PluginInfoTableModel() {
+    public LocalPluginInfoTableModel() {
         PluginUtils.getPluginInformations().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
                 .filter(info -> !existInListPlugins(info))

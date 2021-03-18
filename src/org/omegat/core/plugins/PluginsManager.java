@@ -32,11 +32,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.jar.Manifest;
 
@@ -59,6 +61,8 @@ public class PluginsManager {
      * Plugin list download URL.
      */
     private static final String LIST_URL = "https://raw.githubusercontent.com/miurahr/omegat-plugins/main/plugins.MF";
+    private Map<String, PluginInformation> availablePlugins = null;
+    private Map<String, PluginInformation> installedPlugins = null;
 
     public PluginsManager() {
     }
@@ -174,16 +178,34 @@ public class PluginsManager {
      * Return installed plugins.
      * @return Set of PluginInformation
      */
-    public static Collection<PluginInformation> getInstalledPluginInformation() {
-        return PluginUtils.getPluginInformations();
+    public Map<String, PluginInformation> getInstalledPluginInformation() {
+        if (installedPlugins == null) {
+            installedPlugins = new TreeMap<>();
+            PluginUtils.getPluginInformations().stream()
+                    .sorted(Comparator.comparing(PluginInformation::getClassName))
+                    .filter(info -> !installedPlugins.containsKey(getPluginInformationKey(info)))
+                    .forEach(info -> installedPlugins.put(getPluginInformationKey(info), info));
+        }
+        return installedPlugins;
     }
 
-    /**
+   /**
      * Return known available plugins.
      * It can has plugins that has already installed.
-     * @return Set of PluginInformation
+     * @return Map of PluginInformation
      */
-    public static Collection<PluginInformation> getAvailablePluginInformation() {
-        return getPluginsList();
+     public Map<String, PluginInformation> getAvailablePluginInformation() {
+        if (availablePlugins == null) {
+            availablePlugins = new TreeMap<>();
+            getPluginsList().stream()
+                    .sorted(Comparator.comparing(PluginInformation::getClassName))
+                    .filter(info -> !availablePlugins.containsKey(getPluginInformationKey(info)))
+                    .forEach(info -> availablePlugins.put(getPluginInformationKey(info), info));
+        }
+        return availablePlugins;
+    }
+
+    private String getPluginInformationKey(PluginInformation info) {
+        return info.getName() + info.getAuthor() + info.getVersion();
     }
 }

@@ -32,12 +32,13 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
+import java.util.Vector;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.Core;
@@ -82,13 +83,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             localPluginDetailsPane.setText("");
         } else {
             LocalPluginInfoTableModel model = (LocalPluginInfoTableModel) panel.tablePluginsInfo.getModel();
-            String name = (String) model.getValueAt(rowIndex, LocalPluginInfoTableModel.COLUMN_NAME);
-            StringBuilder sb = new StringBuilder();
-            Optional<PluginInformation> pluginInformation = PluginsManager.getInstalledPluginInformation().stream()
-                    .filter(info -> info.getName().equals(name))
-                    .findFirst();
-            pluginInformation.ifPresent(information -> sb.append(pluginsManager.formatDetailText(information)));
-            localPluginDetailsPane.setText(sb.toString());
+            localPluginDetailsPane.setText(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
         }
     }
 
@@ -99,19 +94,21 @@ public class PluginsPreferencesController extends BasePreferencesController {
             remotePluginDetailsPane.setText("");
         } else {
             RemotePluginInfoTableModel model = (RemotePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
-            String name = (String) model.getValueAt(rowIndex, RemotePluginInfoTableModel.COLUMN_NAME);
-            StringBuilder sb = new StringBuilder();
-            Optional<PluginInformation> pluginInformation = PluginsManager.getAvailablePluginInformation().stream()
-                    .filter(info -> info.getName().equals(name))
-                    .findFirst();
-            pluginInformation.ifPresent(information -> sb.append(pluginsManager.formatDetailText(information)));
-            remotePluginDetailsPane.setText(sb.toString());
+            remotePluginDetailsPane.setText(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
         }
     }
 
     @Override
     public String toString() {
         return OStrings.getString("PREFS_TITLE_PLUGINS");
+    }
+
+    static LocalPluginInfoTableModel getInstalledPluginInfoTableModel() {
+        return new LocalPluginInfoTableModel();
+    }
+
+    static RemotePluginInfoTableModel getAvailablePluginInfoTableModel() {
+        return new RemotePluginInfoTableModel();
     }
 
     private void initGui() {
@@ -182,5 +179,141 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     @Override
     public void persist() {
+    }
+
+    static class LocalPluginInfoTableModel extends DefaultTableModel {
+        private static final long serialVersionUID = 5345248154613009632L;
+        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION" };
+        private final PluginsManager pluginsManager;
+        private final Map<String, PluginInformation> listPlugins;;
+
+        public static final int COLUMN_CATEGORY = 0;
+        public static final int COLUMN_NAME = 1;
+        public static final int COLUMN_VERSION = 2;
+
+        public LocalPluginInfoTableModel() {
+            pluginsManager = new PluginsManager();
+            listPlugins = pluginsManager.getInstalledPluginInformation();
+        }
+
+        public final PluginInformation getValueAt(int rowIndex) {
+            return new Vector<>(listPlugins.values()).get(rowIndex);
+        }
+
+        @Override
+        public final Class<?> getColumnClass(int columnIndex) {
+            return String.class;
+        }
+
+        @Override
+        public final boolean isCellEditable(int rowIndex, int columnIndex) {
+            return false;
+        }
+
+        @Override
+        public final int getColumnCount() {
+            return COLUMN_NAMES.length;
+        }
+
+        @Override
+        public final int getRowCount() {
+            return listPlugins == null ? 0 : listPlugins.size();
+        }
+
+        @Override
+        public final String getColumnName(int column) {
+            return OStrings.getString("PREFS_PLUGINS_COL_" + COLUMN_NAMES[column]);
+        }
+
+        @Override
+        public final Object getValueAt(int rowIndex, int columnIndex) {
+            PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
+            Object returnValue;
+
+            switch (columnIndex) {
+            case COLUMN_NAME:
+                returnValue = plugin.getName();
+                break;
+            case COLUMN_VERSION:
+                returnValue = plugin.getVersion();
+                break;
+            case COLUMN_CATEGORY:
+                returnValue = plugin.getCategory();
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid column index");
+            }
+
+            return returnValue;
+        }
+    }
+
+    static class RemotePluginInfoTableModel extends DefaultTableModel {
+        private static final long serialVersionUID = 52734789123814035L;
+        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION" };
+        private final Map<String, PluginInformation> listPlugins;
+        private final PluginsManager pluginsManager;
+
+        public static final int COLUMN_CATEGORY = 0;
+        public static final int COLUMN_NAME = 1;
+        public static final int COLUMN_VERSION = 2;
+
+        public RemotePluginInfoTableModel() {
+            pluginsManager = new PluginsManager();
+            listPlugins = pluginsManager.getAvailablePluginInformation();
+        }
+
+        public final PluginInformation getValueAt(int rowIndex) {
+            return new Vector<>(listPlugins.values()).get(rowIndex);
+
+        }
+
+        @Override
+        public final Class<?> getColumnClass(int columnIndex) {
+            return String.class;
+        }
+
+        @Override
+        public final boolean isCellEditable(int rowIndex, int columnIndex) {
+            return false;
+        }
+
+        @Override
+        public final int getColumnCount() {
+            return COLUMN_NAMES.length;
+        }
+
+        @Override
+        public final int getRowCount() {
+            return listPlugins == null ? 0 : listPlugins.size();
+        }
+
+        @Override
+        public final String getColumnName(int column) {
+            return OStrings.getString("PREFS_PLUGINS_COL_" + COLUMN_NAMES[column]);
+        }
+
+        @Override
+        public final Object getValueAt(int rowIndex, int columnIndex) {
+            PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
+            Object returnValue;
+
+            switch (columnIndex) {
+            case COLUMN_NAME:
+                returnValue = plugin.getName();
+                break;
+            case COLUMN_VERSION:
+                returnValue = plugin.getVersion();
+                break;
+            case COLUMN_CATEGORY:
+                returnValue = plugin.getCategory();
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid column index");
+            }
+
+            return returnValue;
+        }
+
     }
 }

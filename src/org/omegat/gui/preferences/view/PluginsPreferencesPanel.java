@@ -73,9 +73,8 @@ public class PluginsPreferencesPanel extends JPanel {
         panelPluginsInfo.setLayout(new javax.swing.BoxLayout(panelPluginsInfo, javax.swing.BoxLayout.PAGE_AXIS));
 
         tablePluginsInfo.setAutoCreateRowSorter(true);
-        tablePluginsInfo.setModel(new LocalPluginInfoTableModel());
+        tablePluginsInfo.setModel(PluginsPreferencesController.getInstalledPluginInfoTableModel());
         tablePluginsInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablePluginsInfo.getColumnModel().getColumn(LocalPluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
         scrollTable.setViewportView(tablePluginsInfo);
 
         panelPluginsInfo.add(scrollTable);
@@ -92,9 +91,8 @@ public class PluginsPreferencesPanel extends JPanel {
         panelAvalablePluginsInfo.setLayout(new javax.swing.BoxLayout(panelAvalablePluginsInfo, javax.swing.BoxLayout.LINE_AXIS));
 
         tableAvailablePluginsInfo.setAutoCreateRowSorter(true);
-        tableAvailablePluginsInfo.setModel(new RemotePluginInfoTableModel());
+        tableAvailablePluginsInfo.setModel(PluginsPreferencesController.getAvailablePluginInfoTableModel());
         tableAvailablePluginsInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tableAvailablePluginsInfo.getColumnModel().getColumn(RemotePluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
         jScrollPane1.setViewportView(tableAvailablePluginsInfo);
 
         panelAvalablePluginsInfo.add(jScrollPane1);

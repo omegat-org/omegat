@@ -25,15 +25,15 @@
 
 package org.omegat.gui.preferences.view;
 
-import org.omegat.core.data.PluginInformation;
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.util.OStrings;
-
-import javax.swing.table.DefaultTableModel;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
+import org.omegat.core.data.PluginInformation;
+import org.omegat.core.plugins.PluginsManager;
+import org.omegat.util.OStrings;
 
 public class LocalPluginInfoTableModel extends DefaultTableModel {
     private static final long serialVersionUID = 5345248154613009632L;
@@ -47,7 +47,7 @@ public class LocalPluginInfoTableModel extends DefaultTableModel {
     private final Map<String, PluginInformation> listPlugins = new TreeMap<>();
 
     public LocalPluginInfoTableModel() {
-        PluginUtils.getPluginInformations().stream()
+        PluginsManager.getInstalledPluginInformation().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
                 .filter(info -> !existInListPlugins(info))
                 .forEach(info -> listPlugins.put(getPluginInformationKey(info), info));

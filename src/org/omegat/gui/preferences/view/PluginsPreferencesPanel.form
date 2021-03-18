@@ -165,13 +165,14 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="tableAvailablePluginsInfo">
                       <Properties>
+                        <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="new RemotePluginInfoTableModel()" type="code"/>
                         </Property>
                         <Property name="selectionMode" type="int" value="0"/>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablePluginsInfo.getColumnModel().getColumn(RemotePluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableAvailablePluginsInfo.getColumnModel().getColumn(RemotePluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
                       </AuxValues>
                     </Component>

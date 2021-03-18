@@ -25,9 +25,9 @@
 
 package org.omegat.gui.preferences.view;
 
-import org.omegat.util.OStrings;
+import javax.swing.JPanel;
 
-import javax.swing.*;
+import org.omegat.util.OStrings;
 
 /**
  * @author Aaron Madlon-Kay
@@ -91,9 +91,10 @@ public class PluginsPreferencesPanel extends JPanel {
         panelAvalablePluginsInfo.setPreferredSize(new java.awt.Dimension(252, 100));
         panelAvalablePluginsInfo.setLayout(new javax.swing.BoxLayout(panelAvalablePluginsInfo, javax.swing.BoxLayout.LINE_AXIS));
 
+        tableAvailablePluginsInfo.setAutoCreateRowSorter(true);
         tableAvailablePluginsInfo.setModel(new RemotePluginInfoTableModel());
         tableAvailablePluginsInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablePluginsInfo.getColumnModel().getColumn(RemotePluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
+        tableAvailablePluginsInfo.getColumnModel().getColumn(RemotePluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
         jScrollPane1.setViewportView(tableAvailablePluginsInfo);
 
         panelAvalablePluginsInfo.add(jScrollPane1);

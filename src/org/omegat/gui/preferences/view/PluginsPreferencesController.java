@@ -26,23 +26,6 @@
 
 package org.omegat.gui.preferences.view;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.PluginInformation;
-import org.omegat.core.plugins.PluginsManager;
-import org.omegat.gui.dialogs.ChoosePluginFile;
-import org.omegat.gui.dialogs.PluginInstallerDialogController;
-import org.omegat.gui.plugin.PluginDetailsPane;
-import org.omegat.gui.preferences.BasePreferencesController;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.gui.DesktopWrapper;
-import org.omegat.util.gui.TableColumnSizer;
-
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.table.TableRowSorter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -51,6 +34,22 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.TableRowSorter;
+
+import org.omegat.core.Core;
+import org.omegat.core.data.PluginInformation;
+import org.omegat.core.plugins.PluginsManager;
+import org.omegat.gui.dialogs.ChoosePluginFile;
+import org.omegat.gui.dialogs.PluginInstallerDialogController;
+import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.gui.DesktopWrapper;
+import org.omegat.util.gui.TableColumnSizer;
 
 
 /**
@@ -85,7 +84,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             LocalPluginInfoTableModel model = (LocalPluginInfoTableModel) panel.tablePluginsInfo.getModel();
             String name = (String) model.getValueAt(rowIndex, LocalPluginInfoTableModel.COLUMN_NAME);
             StringBuilder sb = new StringBuilder();
-            Optional<PluginInformation> pluginInformation = pluginsManager.getInstalledPluginInformation().stream()
+            Optional<PluginInformation> pluginInformation = PluginsManager.getInstalledPluginInformation().stream()
                     .filter(info -> info.getName().equals(name))
                     .findFirst();
             pluginInformation.ifPresent(information -> sb.append(pluginsManager.formatDetailText(information)));
@@ -102,7 +101,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             RemotePluginInfoTableModel model = (RemotePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
             String name = (String) model.getValueAt(rowIndex, RemotePluginInfoTableModel.COLUMN_NAME);
             StringBuilder sb = new StringBuilder();
-            Optional<PluginInformation> pluginInformation = pluginsManager.getAvailablePluginInformation().stream()
+            Optional<PluginInformation> pluginInformation = PluginsManager.getAvailablePluginInformation().stream()
                     .filter(info -> info.getName().equals(name))
                     .findFirst();
             pluginInformation.ifPresent(information -> sb.append(pluginsManager.formatDetailText(information)));
@@ -159,7 +158,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 pluginJarFile = pluginFile;
             }
             // check manifest
-            Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile);
+            Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile, false);
             new PluginInstallerDialogController(pluginInfo,
                     installConfig).show(Core.getMainWindow().getApplicationFrame());
             boolean result = Boolean.parseBoolean(installConfig.get(PluginInstallerDialogController.DO_INSTALL_KEY));

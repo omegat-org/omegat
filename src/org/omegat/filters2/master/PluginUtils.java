@@ -26,15 +26,6 @@
 
 package org.omegat.filters2.master;
 
-
-import org.omegat.CLIParameters;
-import org.omegat.core.Core;
-import org.omegat.core.data.PluginInformation;
-import org.omegat.tokenizer.DefaultTokenizer;
-import org.omegat.tokenizer.ITokenizer;
-import org.omegat.tokenizer.Tokenizer;
-import org.omegat.util.*;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -48,6 +39,19 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.omegat.CLIParameters;
+import org.omegat.core.Core;
+import org.omegat.core.data.PluginInformation;
+import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.tokenizer.ITokenizer;
+import org.omegat.tokenizer.Tokenizer;
+import org.omegat.util.FileUtil;
+import org.omegat.util.Language;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Static utilities for OmegaT filter plugins.

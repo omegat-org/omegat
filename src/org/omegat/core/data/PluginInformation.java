@@ -26,13 +26,13 @@
 
 package org.omegat.core.data;
 
-import org.omegat.filters2.master.PluginUtils;
-
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
+
+import org.omegat.filters2.master.PluginUtils;
 
 public class PluginInformation implements Comparable<PluginInformation> {
     private static final String PLUGIN_NAME = "Plugin-Name";

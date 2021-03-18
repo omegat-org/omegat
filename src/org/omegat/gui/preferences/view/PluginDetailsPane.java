@@ -23,18 +23,18 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.plugin;
+package org.omegat.gui.preferences.view;
+
+import java.net.URI;
+import javax.swing.JOptionPane;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.text.html.HTMLDocument;
 
 import org.omegat.core.data.PluginInformation;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.StaticUIUtils;
-
-import javax.swing.JOptionPane;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.text.html.HTMLDocument;
-import java.net.URI;
 
 /**
  * Data pane to show plugin details in formatted text.

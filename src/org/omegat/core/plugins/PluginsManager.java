@@ -25,13 +25,6 @@
 
 package org.omegat.core.plugins;
 
-import org.apache.commons.io.FileUtils;
-import org.omegat.core.data.PluginInformation;
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.preferences.view.PluginsPreferencesController;
-import org.omegat.util.Log;
-import org.omegat.util.StaticUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +35,13 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.jar.Manifest;
+
+import org.apache.commons.io.FileUtils;
+import org.omegat.core.data.PluginInformation;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.preferences.view.PluginsPreferencesController;
+import org.omegat.util.Log;
+import org.omegat.util.StaticUtils;
 
 public class PluginsManager {
 
@@ -107,12 +107,12 @@ public class PluginsManager {
         return sb.toString();
     }
 
-    public Collection<PluginInformation> getInstalledPluginInformation() {
+    public static Collection<PluginInformation> getInstalledPluginInformation() {
         return PluginUtils.getPluginInformations();
     }
 
-    public Collection<PluginInformation> getAvailablePluginInformation() {
-        return PluginUtils.getPluginInformations();
+    public static Collection<PluginInformation> getAvailablePluginInformation() {
+        return PluginsListDownloader.getPluginsList();
     }
 
 }

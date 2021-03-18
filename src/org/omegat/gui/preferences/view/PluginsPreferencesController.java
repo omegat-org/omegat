@@ -40,7 +40,9 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableRowSorter;
 import java.io.File;
@@ -49,7 +51,13 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.jar.Manifest;
 
 /**

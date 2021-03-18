@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,7 +29,7 @@ package org.omegat.gui.preferences.view;
 import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.core.plugins.PluginsManager;
 import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.dialogs.PluginInstallerDialogController;
 import org.omegat.gui.plugin.PluginDetailsPane;
@@ -40,8 +41,6 @@ import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableRowSorter;
 import java.io.File;
@@ -59,9 +58,12 @@ import java.util.jar.Manifest;
 public class PluginsPreferencesController extends BasePreferencesController {
 
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
+    private PluginsManager pluginsManager = new PluginsManager();
     private PluginsPreferencesPanel panel;
     private TableRowSorter<LocalPluginInfoTableModel> sorter;
-    private PluginDetailsPane pluginDetailsPane;
+    private TableRowSorter<RemotePluginInfoTableModel> availableSorter;
+    private PluginDetailsPane localPluginDetailsPane;
+    private PluginDetailsPane remotePluginDetailsPane;
     private final Map<String, String> installConfig = new HashMap<>();
 
     @Override
@@ -73,52 +75,36 @@ public class PluginsPreferencesController extends BasePreferencesController {
         return panel;
     }
 
-    class FilterDocumentListener implements DocumentListener {
-        void setFilterTextAction() {
-            String filterText = panel.filterTextField.getText();
-            if ("".equals(filterText) || filterText == null) {
-                sorter.setRowFilter(null);
-                panel.tablePluginsInfo.doLayout();
-                return;
-            }
-            RowFilter<LocalPluginInfoTableModel, Object> rf;
-            try {
-                rf = RowFilter.regexFilter(filterText, LocalPluginInfoTableModel.COLUMN_NAME);
-            } catch (java.util.regex.PatternSyntaxException e) {
-                return;
-            }
-            sorter.setRowFilter(rf);
-        }
-
-        @Override
-        public void insertUpdate(DocumentEvent documentEvent) {
-            setFilterTextAction();
-        }
-
-        @Override
-        public void removeUpdate(DocumentEvent documentEvent) {
-            setFilterTextAction();
-        }
-
-        @Override
-        public void changedUpdate(DocumentEvent documentEvent) {
-            setFilterTextAction();
-        }
-    }
-
     final void selectRowAction(ListSelectionEvent evt) {
         int rowIndex = panel.tablePluginsInfo.convertRowIndexToModel(panel.tablePluginsInfo.getSelectedRow());
         if (rowIndex == -1) {
-            pluginDetailsPane.setText("");
+            localPluginDetailsPane.setText("");
         } else {
             LocalPluginInfoTableModel model = (LocalPluginInfoTableModel) panel.tablePluginsInfo.getModel();
             String name = (String) model.getValueAt(rowIndex, LocalPluginInfoTableModel.COLUMN_NAME);
             StringBuilder sb = new StringBuilder();
-            Optional<PluginInformation> pluginInformation = PluginUtils.getPluginInformations().stream()
+            Optional<PluginInformation> pluginInformation = pluginsManager.getInstalledPluginInformation().stream()
                     .filter(info -> info.getName().equals(name))
                     .findFirst();
             pluginInformation.ifPresent(information -> sb.append(formatDetailText(information)));
-            pluginDetailsPane.setText(sb.toString());
+            localPluginDetailsPane.setText(sb.toString());
+        }
+    }
+
+    final void selectRowActionRemote(ListSelectionEvent evt) {
+        int rowIndex = panel.tableAvailablePluginsInfo.convertRowIndexToModel(
+                panel.tableAvailablePluginsInfo.getSelectedRow());
+        if (rowIndex == -1) {
+            remotePluginDetailsPane.setText("");
+        } else {
+            RemotePluginInfoTableModel model = (RemotePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
+            String name = (String) model.getValueAt(rowIndex, RemotePluginInfoTableModel.COLUMN_NAME);
+            StringBuilder sb = new StringBuilder();
+            Optional<PluginInformation> pluginInformation = pluginsManager.getAvailablePluginInformation().stream()
+                    .filter(info -> info.getName().equals(name))
+                    .findFirst();
+            pluginInformation.ifPresent(information -> sb.append(formatDetailText(information)));
+            remotePluginDetailsPane.setText(sb.toString());
         }
     }
 
@@ -154,9 +140,12 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new PluginsPreferencesPanel();
-        pluginDetailsPane = new PluginDetailsPane();
-        panel.panelPluginDetails.add(pluginDetailsPane);
+        localPluginDetailsPane = new PluginDetailsPane();
+        remotePluginDetailsPane = new PluginDetailsPane();
+        panel.panelPluginDetails.add(localPluginDetailsPane);
         TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
+        panel.panelAvailablePluginDetails.add(remotePluginDetailsPane);
+        TableColumnSizer.autoSize(panel.tableAvailablePluginsInfo, 0, true);
         panel.browsePluginsButton.addActionListener(e -> {
             try {
                 DesktopWrapper.browse(URI.create(PLUGINS_WIKI_URL));
@@ -166,10 +155,15 @@ public class PluginsPreferencesController extends BasePreferencesController {
             }
         });
         LocalPluginInfoTableModel model = (LocalPluginInfoTableModel) panel.tablePluginsInfo.getModel();
+        RemotePluginInfoTableModel availableModel = (RemotePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
         sorter = new TableRowSorter<>(model);
+        availableSorter = new TableRowSorter<>(availableModel);
         panel.tablePluginsInfo.setRowSorter(sorter);
+        panel.tableAvailablePluginsInfo.setRowSorter(availableSorter);
+
         panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
-        panel.filterTextField.getDocument().addDocumentListener(new FilterDocumentListener());
+        panel.tableAvailablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowActionRemote);
+
         panel.installFromDiskButton.addActionListener(e -> {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
             int choosePluginFileResult = choosePluginFile.showOpenDialog(Core.getMainWindow().getApplicationFrame());

@@ -25,8 +25,9 @@
 
 package org.omegat.gui.preferences.view;
 
-import javax.swing.JPanel;
 import org.omegat.util.OStrings;
+
+import javax.swing.*;
 
 /**
  * @author Aaron Madlon-Kay
@@ -51,18 +52,17 @@ public class PluginsPreferencesPanel extends JPanel {
         pluginsInfoTab = new javax.swing.JTabbedPane();
         installPlugins = new javax.swing.JSplitPane();
         panelPluginsInfo = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        filterTextField = new javax.swing.JTextField();
         scrollTable = new javax.swing.JScrollPane();
         tablePluginsInfo = new javax.swing.JTable();
         panelPluginDetails = new javax.swing.JPanel();
-        availablePluginsInfo = new javax.swing.JPanel();
-        pluginWikiInfo = new javax.swing.JPanel();
-        messageLabel = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
-        browsePluginsButton = new javax.swing.JButton();
+        availablePlugins = new javax.swing.JSplitPane();
+        panelAvalablePluginsInfo = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableAvailablePluginsInfo = new javax.swing.JTable();
+        panelAvailablePluginDetails = new javax.swing.JPanel();
         operationPanel = new javax.swing.JPanel();
+        messageLabel = new javax.swing.JLabel();
+        browsePluginsButton = new javax.swing.JButton();
         installFromDiskButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -71,16 +71,6 @@ public class PluginsPreferencesPanel extends JPanel {
 
         panelPluginsInfo.setPreferredSize(new java.awt.Dimension(252, 426));
         panelPluginsInfo.setLayout(new javax.swing.BoxLayout(panelPluginsInfo, javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "Filter name:");
-        jPanel1.add(jLabel1);
-
-        filterTextField.setToolTipText("filter by name");
-        jPanel1.add(filterTextField);
-
-        panelPluginsInfo.add(jPanel1);
 
         tablePluginsInfo.setAutoCreateRowSorter(true);
         tablePluginsInfo.setModel(new LocalPluginInfoTableModel());
@@ -98,27 +88,35 @@ public class PluginsPreferencesPanel extends JPanel {
 
         pluginsInfoTab.addTab("Installed plugins", installPlugins);
 
-        availablePluginsInfo.setLayout(new java.awt.BorderLayout());
+        panelAvalablePluginsInfo.setPreferredSize(new java.awt.Dimension(252, 100));
+        panelAvalablePluginsInfo.setLayout(new javax.swing.BoxLayout(panelAvalablePluginsInfo, javax.swing.BoxLayout.LINE_AXIS));
 
-        pluginWikiInfo.setLayout(new javax.swing.BoxLayout(pluginWikiInfo, javax.swing.BoxLayout.PAGE_AXIS));
+        tableAvailablePluginsInfo.setModel(new RemotePluginInfoTableModel());
+        tableAvailablePluginsInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablePluginsInfo.getColumnModel().getColumn(RemotePluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
+        jScrollPane1.setViewportView(tableAvailablePluginsInfo);
 
-        org.openide.awt.Mnemonics.setLocalizedText(messageLabel, OStrings.getString("PREFS_PLUGINS_AVAILABLE_ONLINE")); // NOI18N
-        messageLabel.setAlignmentY(0.0F);
-        pluginWikiInfo.add(messageLabel);
-        pluginWikiInfo.add(filler1);
+        panelAvalablePluginsInfo.add(jScrollPane1);
 
-        org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
-        browsePluginsButton.setAlignmentY(0.0F);
-        pluginWikiInfo.add(browsePluginsButton);
+        availablePlugins.setLeftComponent(panelAvalablePluginsInfo);
 
-        availablePluginsInfo.add(pluginWikiInfo, java.awt.BorderLayout.CENTER);
+        panelAvailablePluginDetails.setLayout(new javax.swing.BoxLayout(panelAvailablePluginDetails, javax.swing.BoxLayout.LINE_AXIS));
+        availablePlugins.setRightComponent(panelAvailablePluginDetails);
 
-        pluginsInfoTab.addTab("Available plugins", availablePluginsInfo);
+        pluginsInfoTab.addTab("Available plugins", availablePlugins);
 
         add(pluginsInfoTab);
         pluginsInfoTab.getAccessibleContext().setAccessibleName("plugins information");
 
         operationPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        org.openide.awt.Mnemonics.setLocalizedText(messageLabel, OStrings.getString("PREFS_PLUGINS_AVAILABLE_ONLINE")); // NOI18N
+        messageLabel.setAlignmentY(0.0F);
+        operationPanel.add(messageLabel);
+
+        org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
+        browsePluginsButton.setAlignmentY(0.0F);
+        operationPanel.add(browsePluginsButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, "Install from Disk");
         operationPanel.add(installFromDiskButton);
@@ -127,21 +125,20 @@ public class PluginsPreferencesPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel availablePluginsInfo;
+    private javax.swing.JSplitPane availablePlugins;
     javax.swing.JButton browsePluginsButton;
-    private javax.swing.Box.Filler filler1;
-    javax.swing.JTextField filterTextField;
     javax.swing.JButton installFromDiskButton;
     private javax.swing.JSplitPane installPlugins;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel messageLabel;
     private javax.swing.JPanel operationPanel;
+    javax.swing.JPanel panelAvailablePluginDetails;
+    private javax.swing.JPanel panelAvalablePluginsInfo;
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
-    private javax.swing.JPanel pluginWikiInfo;
     private javax.swing.JTabbedPane pluginsInfoTab;
     private javax.swing.JScrollPane scrollTable;
+    javax.swing.JTable tableAvailablePluginsInfo;
     javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

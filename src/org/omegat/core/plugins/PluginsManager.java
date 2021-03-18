@@ -25,15 +25,19 @@
 
 package org.omegat.core.plugins;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.jar.Manifest;
 
 import org.apache.commons.io.FileUtils;
@@ -42,12 +46,66 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.WikiGet;
 
+/**
+ * Plugin information and installation mamanger.
+ *
+ * @author Hiroshi Miura
+ */
 public class PluginsManager {
+
+    /**
+     * Plugin list download URL.
+     */
+    private static final String LIST_URL = "https://raw.githubusercontent.com/miurahr/omegat-plugins/main/plugins.MF";
 
     public PluginsManager() {
     }
 
+    /**
+     * Download plugin list from github repository.
+     * @return set of PluginInformation
+     */
+    private static Set<PluginInformation> getPluginsList() {
+        Set<PluginInformation> pluginInfo = new TreeSet<>();
+        String raw_value;
+        try {
+            raw_value = WikiGet.getURL(LIST_URL);
+            Scanner scanner = new Scanner(raw_value);
+            StringBuilder sb = new StringBuilder();
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (!line.equals("")) {
+                    sb.append(line).append("\n");
+                } else {
+                    try {
+                        Manifest m = new Manifest(new ByteArrayInputStream(sb.toString().getBytes(StandardCharsets.UTF_8)));
+                        String pluginClasses = m.getMainAttributes().getValue("OmegaT-Plugins");
+                        for (String clazz : pluginClasses.split("\\s+")) {
+                            if (clazz.trim().isEmpty()) {
+                                continue;
+                            }
+                            pluginInfo.add(new PluginInformation(clazz, m, false));
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    sb = new StringBuilder();
+                }
+            }
+            scanner.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return pluginInfo;
+    }
+
+    /**
+     * Install specified plugin jar file.
+     * @param pluginJarFile plugin jar.
+     * @throws IOException when I/O error happened.
+     */
     public void installPlugin(File pluginJarFile) throws IOException {
         File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
         FileUtils.copyFileToDirectory(pluginJarFile, homePluginsDir, true);
@@ -82,6 +140,11 @@ public class PluginsManager {
         return pluginInfo;
     }
 
+    /**
+     * Format plugin information for details pane of UI.
+     * @param info PluginInformation to show
+     * @return HTML text
+     */
     public String formatDetailText(PluginInformation info) {
         StringBuilder sb = new StringBuilder();
         sb.append("<h2>").append(info.getName()).append("</h2>\n");
@@ -107,12 +170,20 @@ public class PluginsManager {
         return sb.toString();
     }
 
+    /**
+     * Return installed plugins.
+     * @return Set of PluginInformation
+     */
     public static Collection<PluginInformation> getInstalledPluginInformation() {
         return PluginUtils.getPluginInformations();
     }
 
+    /**
+     * Return known available plugins.
+     * It can has plugins that has already installed.
+     * @return Set of PluginInformation
+     */
     public static Collection<PluginInformation> getAvailablePluginInformation() {
-        return PluginsListDownloader.getPluginsList();
+        return getPluginsList();
     }
-
 }

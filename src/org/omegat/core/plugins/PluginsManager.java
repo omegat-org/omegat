@@ -53,7 +53,7 @@ public class PluginsManager {
         FileUtils.copyFileToDirectory(pluginJarFile, homePluginsDir, true);
     }
 
-    public Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) {
+    public Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile, boolean installed) {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         try {
             URL[] urls = new URL[1];
@@ -71,7 +71,7 @@ public class PluginsManager {
                             if (clazz.trim().isEmpty()) {
                                 continue;
                             }
-                            pluginInfo.add(new PluginInformation(clazz, m));
+                            pluginInfo.add(new PluginInformation(clazz, m, installed));
                         }
                     }
                 }

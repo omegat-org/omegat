@@ -57,8 +57,9 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private final String category;
     private final String link;
     private final String builtBy;
+    private boolean installed;
 
-    public PluginInformation(String className, Manifest manifest) {
+    public PluginInformation(String className, Manifest manifest, boolean installed) {
         this.className = className;
         Attributes attrs = manifest.getMainAttributes();
         name = findName(manifest);
@@ -68,9 +69,10 @@ public class PluginInformation implements Comparable<PluginInformation> {
         link = attrs.getValue(PLUGIN_LINK);
         builtBy = attrs.getValue(BUILT_BY);
         category = categoryName(attrs.getValue(PLUGIN_CATEGORY));
+        this.installed = installed;
     }
 
-    public PluginInformation(String className, Properties props, final String key) {
+    public PluginInformation(String className, Properties props, final String key, boolean installed) {
         this.className = className;
         name = className.substring(className.lastIndexOf(".") + 1);
         version = null;
@@ -79,6 +81,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         category = categoryName(key);
         link = null;
         builtBy = null;
+        this.installed = installed;
     }
 
     private String categoryName(final String key) {

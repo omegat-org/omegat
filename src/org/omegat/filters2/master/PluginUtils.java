@@ -274,7 +274,7 @@ public final class PluginUtils {
                     continue;
                 }
                 if (loadClass(clazz, classLoader)) {
-                    PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, m));
+                    PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, m, true));
                 }
             }
         }
@@ -289,13 +289,13 @@ public final class PluginUtils {
             if (key.equals("plugin")) {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key));
+                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, true));
                     };
                 }
             } else {
                 for (String clazz : classes) {
                     if (loadClassOld(key, clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key));
+                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, true));
                     }
                 }
             }
@@ -356,7 +356,7 @@ public final class PluginUtils {
                 continue;
             }
             if (loadClassOld(sType, key, classLoader)) {
-                PLUGIN_INFORMATIONS.add(new PluginInformation(key, m));
+                PLUGIN_INFORMATIONS.add(new PluginInformation(key, m, true));
             }
         }
     }

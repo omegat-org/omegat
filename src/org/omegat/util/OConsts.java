@@ -114,6 +114,7 @@ public final class OConsts {
     public static final String EXT_TSV_DEF = ".tab";
     public static final String EXT_TSV_UTF8 = ".utf8";
     public static final String EXT_TSV_TXT = ".txt";
+    public static final String EXT_TSV_TSV = ".tsv";
     public static final String EXT_CSV_UTF8 = ".csv";
     public static final String EXT_TBX = ".tbx";
 

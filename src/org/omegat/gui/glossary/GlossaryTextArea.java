@@ -155,7 +155,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
                     String name = pathname.getName().toLowerCase(Locale.ENGLISH);
                     return name.endsWith(OConsts.EXT_CSV_UTF8) || name.endsWith(OConsts.EXT_TBX)
                             || name.endsWith(OConsts.EXT_TSV_DEF) || name.endsWith(OConsts.EXT_TSV_TXT)
-                            || name.endsWith(OConsts.EXT_TSV_UTF8);
+                            || name.endsWith(OConsts.EXT_TSV_UTF8) || name.endsWith(OConsts.EXT_TSV_TSV);
                 }
                 @Override
                 public Component getComponentToOverlay() {

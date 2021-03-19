@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.5.0
 ----------------------------------------------------------------------
-  8 Enhancements
+  9 Enhancements
   2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -40,6 +40,9 @@
 
   - Simple support for dir attribute modification in HTML
   https://sourceforge.net/p/omegat/feature-requests/1556/
+
+  - Support for glossaries with a .tsv extension
+  https://sourceforge.net/p/omegat/feature-requests/1557/
 
 ----------------------------------------------------------------------
  OmegaT 5.4.1 (2020-12-15)

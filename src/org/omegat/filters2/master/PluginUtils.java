@@ -80,8 +80,8 @@ public final class PluginUtils {
         BASE("base"),
         GLOSSARY("glossary"),
         DICTIONARY("dictionary"),
-	MISCELLANEOUS("miscellaneous"),
-        UNKNOWN("unknown");
+        MISCELLANEOUS("miscellaneous"),
+        UNKNOWN("Undefined");
 
         private String typeValue;
 

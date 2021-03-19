@@ -41,6 +41,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private static final String PLUGIN_DESCRIPTION = "Plugin-Description";
     private static final String PLUGIN_CATEGORY = "Plugin-Category";
     private static final String PLUGIN_LINK = "Plugin-Link";
+    private static final String PLUGIN_TYPE = "OmegaT-Plugin";
 
     private static final String IMPLEMENTATION_VENDOR = "Implementation-Vendor";
     private static final String IMPLEMENTATION_TITLE = "Implementation-Title";
@@ -59,16 +60,20 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private final String builtBy;
     private boolean installed;
 
-    public PluginInformation(String className, Manifest manifest, boolean installed) {
+    public PluginInformation(final String className, final Manifest manifest, final boolean installed) {
         this.className = className;
-        Attributes attrs = manifest.getMainAttributes();
-        name = findName(manifest);
-        version = findVersion(manifest);
-        author = findAuthor(manifest);
+        Attributes mainAttrs = manifest.getMainAttributes();
+        Attributes attrs = manifest.getEntries().get(className);
+        if (attrs == null) {
+            attrs = manifest.getMainAttributes();
+        }
+        name = findName(attrs);
+        version = findVersion(attrs, mainAttrs);
+        author = findAuthor(mainAttrs);
         description = attrs.getValue(PLUGIN_DESCRIPTION);
         link = attrs.getValue(PLUGIN_LINK);
         builtBy = attrs.getValue(BUILT_BY);
-        category = categoryName(attrs.getValue(PLUGIN_CATEGORY));
+        category = categoryName(attrs.getValue(PLUGIN_CATEGORY), attrs.getValue(PLUGIN_TYPE));
         this.installed = installed;
     }
 
@@ -78,13 +83,14 @@ public class PluginInformation implements Comparable<PluginInformation> {
         version = null;
         author = null;
         description = null;
-        category = categoryName(key);
+        category = categoryName(key, null);
         link = null;
         builtBy = null;
         this.installed = installed;
     }
 
-    private String categoryName(final String key) {
+    private String categoryName(final String key1, final String key2) {
+        String key = key1 != null ? key1 : key2;
         Optional<PluginUtils.PluginType> type = Arrays.stream(PluginUtils.PluginType.values()).filter(v ->
                 v.getTypeValue().equals(key)).findFirst();
         if (type.isPresent()) {
@@ -93,8 +99,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         return PluginUtils.PluginType.UNKNOWN.getTypeValue();
     }
 
-    private String findName(Manifest m) {
-        Attributes attrs = m.getMainAttributes();
+    private String findName(Attributes attrs) {
         if (attrs.getValue(PLUGIN_NAME) != null) {
             return attrs.getValue(PLUGIN_NAME);
         } else if (attrs.getValue(BUNDLE_NAME) != null) {
@@ -106,21 +111,27 @@ public class PluginInformation implements Comparable<PluginInformation> {
         return className.substring(className.lastIndexOf(".") + 1);
     }
 
-    private String findVersion(Manifest m) {
-        Attributes attrs = m.getMainAttributes();
+    private String findVersion(Attributes attrs, Attributes mainAttrs) {
         if (attrs.getValue(PLUGIN_VERSION) != null) {
             return attrs.getValue(PLUGIN_VERSION);
         } else if (attrs.getValue(BUNDLE_VERSION) != null) {
             return attrs.getValue(BUNDLE_VERSION);
         } else if (attrs.getValue(IMPLEMENTATION_VERSION) != null) {
             return attrs.getValue(IMPLEMENTATION_VERSION);
+        } else if (mainAttrs.getValue(PLUGIN_VERSION) != null) {
+            return mainAttrs.getValue(PLUGIN_VERSION);
+        } else if (mainAttrs.getValue(BUNDLE_VERSION) != null) {
+            return mainAttrs.getValue(BUNDLE_VERSION);
+        } else if (mainAttrs.getValue(IMPLEMENTATION_VERSION) != null) {
+            return mainAttrs.getValue(IMPLEMENTATION_VERSION);
         }
-        return null;
+        return "unknown";
     }
 
-    private String findAuthor(Manifest m) {
-        Attributes attrs = m.getMainAttributes();
-        if (attrs.getValue(PLUGIN_AUTHOR) != null) {
+    private String findAuthor(Attributes attrs) {
+        if ("org.omegat.Main".equals(attrs.getValue("Main-Class"))) {
+            return "OmegaT team";
+        } else if (attrs.getValue(PLUGIN_AUTHOR) != null) {
             return attrs.getValue(PLUGIN_AUTHOR);
         } else if (attrs.getValue(IMPLEMENTATION_VENDOR) != null) {
             return attrs.getValue(IMPLEMENTATION_VENDOR);

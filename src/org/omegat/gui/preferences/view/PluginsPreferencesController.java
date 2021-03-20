@@ -157,7 +157,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 pluginJarFile = pluginFile;
             }
             // check manifest
-            Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile, false);
+            Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile, false, false);
             new PluginInstallerDialogController(pluginInfo,
                     installConfig).show(Core.getMainWindow().getApplicationFrame());
             boolean result = Boolean.parseBoolean(installConfig.get(PluginInstallerDialogController.DO_INSTALL_KEY));
@@ -185,13 +185,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     static class InstalledPluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 5345248154613009632L;
-        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION", "REMOVE"};
+        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION", "BUNDLED"};
         private final Map<String, PluginInformation> listPlugins;;
 
         public static final int COLUMN_CATEGORY = 0;
         public static final int COLUMN_NAME = 1;
         public static final int COLUMN_VERSION = 2;
-        public static final int COLUMN_REMOVE = 3;
+        public static final int COLUMN_BUNDLED = 3;
 
         public InstalledPluginInfoTableModel() {
             PluginsManager pluginsManager = new PluginsManager();
@@ -202,21 +202,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
             return new Vector<>(listPlugins.values()).get(rowIndex);
         }
 
-        public void setValueAt(Object value, int rowIndex, int columnIndex) {
-            if (columnIndex == 4) {
-                PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
-                if ((boolean) value) {
-                    plugin.setAction(PluginInformation.Action.REMOVE);
-                } else {
-                    plugin.setAction(PluginInformation.Action.NONE);
-                }
-                fireTableCellUpdated(rowIndex, columnIndex);
-            }
-        }
-
         @Override
         public final Class<?> getColumnClass(int columnIndex) {
-            if (columnIndex < COLUMN_REMOVE) {
+            if (columnIndex < COLUMN_BUNDLED) {
                 return String.class;
             } else {
                 return Boolean.class;
@@ -225,11 +213,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         @Override
         public final boolean isCellEditable(int rowIndex, int columnIndex) {
-            if (columnIndex < COLUMN_REMOVE) {
-                return false;
-            } else {
-                return true;
-            }
+            return false;
         }
 
         @Override
@@ -262,27 +246,25 @@ public class PluginsPreferencesController extends BasePreferencesController {
             case COLUMN_CATEGORY:
                 returnValue = plugin.getCategory();
                 break;
-            case COLUMN_REMOVE:
-                returnValue = (PluginInformation.Action.REMOVE == plugin.getAction());
+            case COLUMN_BUNDLED:
+                returnValue = plugin.isBundled();
                 break;
             default:
                 throw new IllegalArgumentException("Invalid column index");
             }
-
             return returnValue;
         }
     }
 
     static class AvailablePluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 52734789123814035L;
-        private static final String[] COLUMN_NAMES = { "STAT", "CATEGORY", "NAME", "VERSION", "INSTALL" };
+        private static final String[] COLUMN_NAMES = { "STAT", "CATEGORY", "NAME", "VERSION" };
         private final Map<String, PluginInformation> listPlugins;
 
         public static final int COLUMN_STAT = 0;
         public static final int COLUMN_CATEGORY = 1;
         public static final int COLUMN_NAME = 2;
         public static final int COLUMN_VERSION = 3;
-        public static final int COLUMN_INSTALL = 4;
 
         public AvailablePluginInfoTableModel() {
             PluginsManager pluginsManager = new PluginsManager();
@@ -294,34 +276,14 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         }
 
-        public void setValueAt(Object value, int rowIndex, int columnIndex) {
-            if (columnIndex == 4) {
-                PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
-                if ((boolean) value) {
-                    plugin.setAction(PluginInformation.Action.INSTALL);
-                } else {
-                    plugin.setAction(PluginInformation.Action.NONE);
-                }
-                fireTableCellUpdated(rowIndex, columnIndex);
-            }
-        }
-
         @Override
         public final Class<?> getColumnClass(int columnIndex) {
-            if (columnIndex < COLUMN_INSTALL) {
-                return String.class;
-            } else {
-                return Boolean.class;
-            }
+            return String.class;
         }
 
         @Override
         public final boolean isCellEditable(int rowIndex, int columnIndex) {
-            if (columnIndex < COLUMN_INSTALL) {
-                return false;
-            } else {
-                return true;
-            }
+            return false;
         }
 
         @Override
@@ -354,14 +316,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
             case COLUMN_CATEGORY:
                 returnValue = plugin.getCategory();
                 break;
-            case COLUMN_INSTALL:
-                returnValue = (PluginInformation.Action.INSTALL == plugin.getAction());
-                break;
             case COLUMN_STAT:
-                if (plugin.getInstalled()) {
-                    returnValue = "I";
+                if (plugin.getStatus() == PluginInformation.STATUS.INSTALLED) {
+                    returnValue = "I ";
+                } else if (plugin.getStatus() == PluginInformation.STATUS.UPGRADABLE){
+                    returnValue = "IU";
                 } else {
-                    returnValue = " ";
+                    returnValue = "  ";
                 }
                 break;
             default:

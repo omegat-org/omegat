@@ -53,7 +53,15 @@ public class PluginInformation implements Comparable<PluginInformation> {
     public enum Action {
         NONE,
         REMOVE,
-        INSTALL
+        INSTALL,
+        UPGRADE
+    }
+
+    public enum STATUS {
+        INSTALLED,
+        BUNDLED,
+        UPGRADABLE,
+        UNINSTALLED
     }
 
     private final String className;
@@ -63,11 +71,10 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private final String description;
     private final String category;
     private final String link;
-    private final String builtBy;
-    private boolean installed;
+    private STATUS status;
     private Action action;
 
-    public PluginInformation(final String className, final Manifest manifest, final boolean installed) {
+    public PluginInformation(final String className, final Manifest manifest, final STATUS status) {
         this.className = className;
         Attributes mainAttrs = manifest.getMainAttributes();
         Attributes attrs = manifest.getEntries().get(className);
@@ -79,13 +86,12 @@ public class PluginInformation implements Comparable<PluginInformation> {
         author = findAuthor(mainAttrs);
         description = attrs.getValue(PLUGIN_DESCRIPTION);
         link = attrs.getValue(PLUGIN_LINK);
-        builtBy = attrs.getValue(BUILT_BY);
         category = categoryName(attrs.getValue(PLUGIN_CATEGORY), attrs.getValue(PLUGIN_TYPE));
-        this.installed = installed;
         action = Action.NONE;
+        this.status = status;
     }
 
-    public PluginInformation(String className, Properties props, final String key, boolean installed) {
+    public PluginInformation(String className, Properties props, final String key, STATUS status) {
         this.className = className;
         name = className.substring(className.lastIndexOf(".") + 1);
         version = null;
@@ -93,9 +99,8 @@ public class PluginInformation implements Comparable<PluginInformation> {
         description = null;
         category = categoryName(key, null);
         link = null;
-        builtBy = null;
-        this.installed = installed;
         action = Action.NONE;
+        this.status = status;
     }
 
     private String categoryName(final String key1, final String key2) {
@@ -182,16 +187,24 @@ public class PluginInformation implements Comparable<PluginInformation> {
         return link;
     }
 
-    public final String getBuiltBy() {
-        return builtBy;
+    public final boolean isBundled() {
+        return status == STATUS.BUNDLED;
     }
 
-    public final boolean getInstalled() {
-        return installed;
+    public final boolean isInstalled() {
+        return status == STATUS.INSTALLED || status == STATUS.BUNDLED;
     }
 
-    public final void setAction(Action action) {
-        this.action = action;
+    public final STATUS getStatus() {
+        return status;
+    }
+
+    public final void setStatus(STATUS s) {
+        status = s;
+    }
+
+    public final void setAction(Action a) {
+        action = a;
     }
 
     @Override

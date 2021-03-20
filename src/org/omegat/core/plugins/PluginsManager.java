@@ -90,7 +90,7 @@ public class PluginsManager {
                             if (clazz.trim().isEmpty()) {
                                 continue;
                             }
-                            pluginInfo.add(new PluginInformation(clazz, m, false));
+                            pluginInfo.add(new PluginInformation(clazz, m, PluginInformation.STATUS.UNINSTALLED));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -115,7 +115,7 @@ public class PluginsManager {
         FileUtils.copyFileToDirectory(pluginJarFile, homePluginsDir, true);
     }
 
-    public Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile, boolean installed) {
+    public Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile, boolean bundle, boolean installed) {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         try {
             URL[] urls = new URL[1];
@@ -133,7 +133,13 @@ public class PluginsManager {
                             if (clazz.trim().isEmpty()) {
                                 continue;
                             }
-                            pluginInfo.add(new PluginInformation(clazz, m, installed));
+                            if (bundle) {
+                                pluginInfo.add(new PluginInformation(clazz, m, PluginInformation.STATUS.BUNDLED));
+                            } else if (installed) {
+                                pluginInfo.add(new PluginInformation(clazz, m, PluginInformation.STATUS.INSTALLED));
+                            } else {
+                                pluginInfo.add(new PluginInformation(clazz, m, PluginInformation.STATUS.UNINSTALLED));
+                            }
                         }
                     }
                 }

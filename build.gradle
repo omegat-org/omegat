@@ -944,7 +944,7 @@ manualIndexXmls.each { xml ->
         doLast {
             exec {
                 workingDir = 'doc_src'
-                commandLine './docgen', "-Dlanguage=${lang}", 'chunk'
+                commandLine './docgen', "-Dlanguage=${lang}", 'html5'
             }
             delete file("doc_src/${lang}/index.xml")
         }

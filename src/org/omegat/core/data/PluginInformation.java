@@ -50,6 +50,12 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private static final String BUNDLE_NAME = "Bundle-Name";
     private static final String BUILT_BY = "Built-By";
 
+    public enum Action {
+        NONE,
+        REMOVE,
+        INSTALL
+    }
+
     private final String className;
     private final String name;
     private final String version;
@@ -59,6 +65,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private final String link;
     private final String builtBy;
     private boolean installed;
+    private Action action;
 
     public PluginInformation(final String className, final Manifest manifest, final boolean installed) {
         this.className = className;
@@ -75,6 +82,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         builtBy = attrs.getValue(BUILT_BY);
         category = categoryName(attrs.getValue(PLUGIN_CATEGORY), attrs.getValue(PLUGIN_TYPE));
         this.installed = installed;
+        action = Action.NONE;
     }
 
     public PluginInformation(String className, Properties props, final String key, boolean installed) {
@@ -87,6 +95,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         link = null;
         builtBy = null;
         this.installed = installed;
+        action = Action.NONE;
     }
 
     private String categoryName(final String key1, final String key2) {
@@ -161,6 +170,10 @@ public class PluginInformation implements Comparable<PluginInformation> {
         return author;
     }
 
+    public final Enum<Action> getAction() {
+        return action;
+    }
+
     public final String getCategory() {
         return category;
     }
@@ -171,6 +184,14 @@ public class PluginInformation implements Comparable<PluginInformation> {
 
     public final String getBuiltBy() {
         return builtBy;
+    }
+
+    public final boolean getInstalled() {
+        return installed;
+    }
+
+    public final void setAction(Action action) {
+        this.action = action;
     }
 
     @Override

@@ -60,10 +60,10 @@ import org.omegat.util.gui.TableColumnSizer;
 public class PluginsPreferencesController extends BasePreferencesController {
 
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
-    private PluginsManager pluginsManager = new PluginsManager();
+    private final PluginsManager pluginsManager = new PluginsManager();
     private PluginsPreferencesPanel panel;
-    private TableRowSorter<LocalPluginInfoTableModel> sorter;
-    private TableRowSorter<RemotePluginInfoTableModel> availableSorter;
+    private TableRowSorter<InstalledPluginInfoTableModel> sorter;
+    private TableRowSorter<AvailablePluginInfoTableModel> availableSorter;
     private PluginDetailsPane localPluginDetailsPane;
     private PluginDetailsPane remotePluginDetailsPane;
     private final Map<String, String> installConfig = new HashMap<>();
@@ -82,7 +82,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         if (rowIndex == -1) {
             localPluginDetailsPane.setText("");
         } else {
-            LocalPluginInfoTableModel model = (LocalPluginInfoTableModel) panel.tablePluginsInfo.getModel();
+            InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
             localPluginDetailsPane.setText(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
         }
     }
@@ -93,7 +93,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         if (rowIndex == -1) {
             remotePluginDetailsPane.setText("");
         } else {
-            RemotePluginInfoTableModel model = (RemotePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
+            AvailablePluginInfoTableModel model = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
             remotePluginDetailsPane.setText(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
         }
     }
@@ -103,12 +103,12 @@ public class PluginsPreferencesController extends BasePreferencesController {
         return OStrings.getString("PREFS_TITLE_PLUGINS");
     }
 
-    static LocalPluginInfoTableModel getInstalledPluginInfoTableModel() {
-        return new LocalPluginInfoTableModel();
+    static InstalledPluginInfoTableModel getInstalledPluginInfoTableModel() {
+        return new InstalledPluginInfoTableModel();
     }
 
-    static RemotePluginInfoTableModel getAvailablePluginInfoTableModel() {
-        return new RemotePluginInfoTableModel();
+    static AvailablePluginInfoTableModel getAvailablePluginInfoTableModel() {
+        return new AvailablePluginInfoTableModel();
     }
 
     private void initGui() {
@@ -127,8 +127,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
         });
-        LocalPluginInfoTableModel model = (LocalPluginInfoTableModel) panel.tablePluginsInfo.getModel();
-        RemotePluginInfoTableModel availableModel = (RemotePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
+        InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
+        AvailablePluginInfoTableModel availableModel = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
         sorter = new TableRowSorter<>(model);
         availableSorter = new TableRowSorter<>(availableModel);
         panel.tablePluginsInfo.setRowSorter(sorter);
@@ -136,6 +136,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
         panel.tableAvailablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowActionRemote);
+        panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
+        panel.tableAvailablePluginsInfo.setPreferredScrollableViewportSize(panel.tableAvailablePluginsInfo.getPreferredSize());
 
         panel.installFromDiskButton.addActionListener(e -> {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
@@ -181,18 +183,18 @@ public class PluginsPreferencesController extends BasePreferencesController {
     public void persist() {
     }
 
-    static class LocalPluginInfoTableModel extends DefaultTableModel {
+    static class InstalledPluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 5345248154613009632L;
-        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION" };
-        private final PluginsManager pluginsManager;
+        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION", "REMOVE"};
         private final Map<String, PluginInformation> listPlugins;;
 
         public static final int COLUMN_CATEGORY = 0;
         public static final int COLUMN_NAME = 1;
         public static final int COLUMN_VERSION = 2;
+        public static final int COLUMN_REMOVE = 3;
 
-        public LocalPluginInfoTableModel() {
-            pluginsManager = new PluginsManager();
+        public InstalledPluginInfoTableModel() {
+            PluginsManager pluginsManager = new PluginsManager();
             listPlugins = pluginsManager.getInstalledPluginInformation();
         }
 
@@ -200,14 +202,34 @@ public class PluginsPreferencesController extends BasePreferencesController {
             return new Vector<>(listPlugins.values()).get(rowIndex);
         }
 
+        public void setValueAt(Object value, int rowIndex, int columnIndex) {
+            if (columnIndex == 4) {
+                PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
+                if ((boolean) value) {
+                    plugin.setAction(PluginInformation.Action.REMOVE);
+                } else {
+                    plugin.setAction(PluginInformation.Action.NONE);
+                }
+                fireTableCellUpdated(rowIndex, columnIndex);
+            }
+        }
+
         @Override
         public final Class<?> getColumnClass(int columnIndex) {
-            return String.class;
+            if (columnIndex < COLUMN_REMOVE) {
+                return String.class;
+            } else {
+                return Boolean.class;
+            }
         }
 
         @Override
         public final boolean isCellEditable(int rowIndex, int columnIndex) {
-            return false;
+            if (columnIndex < COLUMN_REMOVE) {
+                return false;
+            } else {
+                return true;
+            }
         }
 
         @Override
@@ -239,6 +261,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 break;
             case COLUMN_CATEGORY:
                 returnValue = plugin.getCategory();
+                break;
+            case COLUMN_REMOVE:
+                returnValue = (PluginInformation.Action.REMOVE == plugin.getAction());
                 break;
             default:
                 throw new IllegalArgumentException("Invalid column index");
@@ -248,18 +273,19 @@ public class PluginsPreferencesController extends BasePreferencesController {
         }
     }
 
-    static class RemotePluginInfoTableModel extends DefaultTableModel {
+    static class AvailablePluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 52734789123814035L;
-        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION" };
+        private static final String[] COLUMN_NAMES = { "STAT", "CATEGORY", "NAME", "VERSION", "INSTALL" };
         private final Map<String, PluginInformation> listPlugins;
-        private final PluginsManager pluginsManager;
 
-        public static final int COLUMN_CATEGORY = 0;
-        public static final int COLUMN_NAME = 1;
-        public static final int COLUMN_VERSION = 2;
+        public static final int COLUMN_STAT = 0;
+        public static final int COLUMN_CATEGORY = 1;
+        public static final int COLUMN_NAME = 2;
+        public static final int COLUMN_VERSION = 3;
+        public static final int COLUMN_INSTALL = 4;
 
-        public RemotePluginInfoTableModel() {
-            pluginsManager = new PluginsManager();
+        public AvailablePluginInfoTableModel() {
+            PluginsManager pluginsManager = new PluginsManager();
             listPlugins = pluginsManager.getAvailablePluginInformation();
         }
 
@@ -268,14 +294,34 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         }
 
+        public void setValueAt(Object value, int rowIndex, int columnIndex) {
+            if (columnIndex == 4) {
+                PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
+                if ((boolean) value) {
+                    plugin.setAction(PluginInformation.Action.INSTALL);
+                } else {
+                    plugin.setAction(PluginInformation.Action.NONE);
+                }
+                fireTableCellUpdated(rowIndex, columnIndex);
+            }
+        }
+
         @Override
         public final Class<?> getColumnClass(int columnIndex) {
-            return String.class;
+            if (columnIndex < COLUMN_INSTALL) {
+                return String.class;
+            } else {
+                return Boolean.class;
+            }
         }
 
         @Override
         public final boolean isCellEditable(int rowIndex, int columnIndex) {
-            return false;
+            if (columnIndex < COLUMN_INSTALL) {
+                return false;
+            } else {
+                return true;
+            }
         }
 
         @Override
@@ -307,6 +353,16 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 break;
             case COLUMN_CATEGORY:
                 returnValue = plugin.getCategory();
+                break;
+            case COLUMN_INSTALL:
+                returnValue = (PluginInformation.Action.INSTALL == plugin.getAction());
+                break;
+            case COLUMN_STAT:
+                if (plugin.getInstalled()) {
+                    returnValue = "I";
+                } else {
+                    returnValue = " ";
+                }
                 break;
             default:
                 throw new IllegalArgumentException("Invalid column index");

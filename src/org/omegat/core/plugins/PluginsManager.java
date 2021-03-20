@@ -51,7 +51,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.WikiGet;
 
 /**
- * Plugin information and installation mamanger.
+ * Plugin information and installation manager.
  *
  * @author Hiroshi Miura
  */

@@ -185,13 +185,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     static class InstalledPluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 5345248154613009632L;
-        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION", "BUNDLED"};
+        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION", "THIRDPARTY"};
         private final Map<String, PluginInformation> listPlugins;;
 
         public static final int COLUMN_CATEGORY = 0;
         public static final int COLUMN_NAME = 1;
         public static final int COLUMN_VERSION = 2;
-        public static final int COLUMN_BUNDLED = 3;
+        public static final int COLUMN_THIRDPARTY = 3;
 
         public InstalledPluginInfoTableModel() {
             PluginsManager pluginsManager = new PluginsManager();
@@ -204,7 +204,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         @Override
         public final Class<?> getColumnClass(int columnIndex) {
-            if (columnIndex < COLUMN_BUNDLED) {
+            if (columnIndex < COLUMN_THIRDPARTY) {
                 return String.class;
             } else {
                 return Boolean.class;
@@ -246,8 +246,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
             case COLUMN_CATEGORY:
                 returnValue = plugin.getCategory();
                 break;
-            case COLUMN_BUNDLED:
-                returnValue = plugin.isBundled();
+            case COLUMN_THIRDPARTY:
+                returnValue = !plugin.isBundled();
                 break;
             default:
                 throw new IllegalArgumentException("Invalid column index");
@@ -318,9 +318,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 break;
             case COLUMN_STAT:
                 if (plugin.getStatus() == PluginInformation.STATUS.INSTALLED) {
-                    returnValue = "I ";
+                    returnValue = "Installed";
                 } else if (plugin.getStatus() == PluginInformation.STATUS.UPGRADABLE){
-                    returnValue = "IU";
+                    returnValue = "Upgradable";
                 } else {
                     returnValue = "  ";
                 }

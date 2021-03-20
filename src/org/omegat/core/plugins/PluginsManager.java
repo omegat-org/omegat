@@ -62,9 +62,14 @@ public class PluginsManager {
      */
     private static final String LIST_URL = "https://raw.githubusercontent.com/miurahr/omegat-plugins/main/plugins.MF";
     private Map<String, PluginInformation> availablePlugins = null;
-    private Map<String, PluginInformation> installedPlugins = null;
+    private Map<String, PluginInformation> installedPlugins;
 
     public PluginsManager() {
+        installedPlugins = new TreeMap<>();
+        PluginUtils.getPluginInformations().stream()
+                .sorted(Comparator.comparing(PluginInformation::getClassName))
+                .filter(info -> !installedPlugins.containsKey(getPluginInformationKey(info)))
+                .forEach(info -> installedPlugins.put(getPluginInformationKey(info), info));
     }
 
     /**
@@ -185,13 +190,6 @@ public class PluginsManager {
      * @return Set of PluginInformation
      */
     public Map<String, PluginInformation> getInstalledPluginInformation() {
-        if (installedPlugins == null) {
-            installedPlugins = new TreeMap<>();
-            PluginUtils.getPluginInformations().stream()
-                    .sorted(Comparator.comparing(PluginInformation::getClassName))
-                    .filter(info -> !installedPlugins.containsKey(getPluginInformationKey(info)))
-                    .forEach(info -> installedPlugins.put(getPluginInformationKey(info), info));
-        }
         return installedPlugins;
     }
 
@@ -205,13 +203,25 @@ public class PluginsManager {
             availablePlugins = new TreeMap<>();
             getPluginsList().stream()
                     .sorted(Comparator.comparing(PluginInformation::getClassName))
-                    .filter(info -> !availablePlugins.containsKey(getPluginInformationKey(info)))
-                    .forEach(info -> availablePlugins.put(getPluginInformationKey(info), info));
+                    .forEach(info -> {
+                        String key = getPluginInformationKey(info);
+                        if (installedPlugins.get(key) != null) {
+                            PluginInformation installed = installedPlugins.get(key);
+                            if (info.compareTo(installed) > 0) {
+                                info.setStatus(PluginInformation.STATUS.UPGRADABLE);
+                            } else {
+                                info.setStatus(PluginInformation.STATUS.INSTALLED);
+                            }
+                        } else {
+                            info.setStatus(PluginInformation.STATUS.UNINSTALLED);
+                        }
+                        availablePlugins.put(key, info);
+                    });
         }
         return availablePlugins;
     }
 
     private String getPluginInformationKey(PluginInformation info) {
-        return info.getName() + info.getAuthor() + info.getVersion();
+        return info.getName() + info.getAuthor();
     }
 }

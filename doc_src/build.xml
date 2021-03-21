@@ -119,38 +119,6 @@
         <equals arg1="${language}" arg2="en"/>
     </condition>
 
-    <target name="chunk" depends="include">
-        <java dir="."
-              fork="true"
-              failonerror="true"
-              maxmemory="128m"
-              classname="com.icl.saxon.StyleSheet" >
-            <arg value="${language}/index.xml" />
-            <arg value="${dbk}/html/chunk.xsl" />
-            <arg value="use.id.as.filename=1" />
-            <arg value="base.dir=../docs/${language}/" />
-            <arg value="chunk.section.depth=0" />
-            <arg value="chunk.first.sections=0" />
-            <arg value="chunker.output.encoding=UTF-8" />
-            <arg value="chunker.output.indent=yes" />
-            <arg value="use.extensions=1" />
-            <arg value="chapter.autolabel=1" />
-            <arg value="section.autolabel=1" />
-            <arg value="tablecolumns.extension=0" />
-            <arg value="toc.max.depth=2" />
-            <arg value="generate.toc=book toc,title,figure,table chapter toc appendix toc" />
-            <arg value="generate.index=1" />
-            <arg value="html.stylesheet=OmegaT.css" />
-            <arg value="saxon.character.representation=native;decimal"/>
-            <classpath>
-                <pathelement location="${saxon}" />
-                <pathelement path="${saxon}" />
-            </classpath>
-        </java>
-        <copy file="${language}/${version.properties.filename}"
-              tofile="../docs/${language}/${version.properties.filename}" />
-    </target>
-
     <target name="xhtml5-chunk" depends="include">
         <java dir="."
               fork="true"
@@ -226,8 +194,6 @@
             <fileset dir="${language}/images" />
         </copy>
     </target>
-
-    <target name="html" depends="pictures,chunk,instant-start" />
 
     <target name="whc-toc" depends="xhtml5-chunk">
         <java dir="."

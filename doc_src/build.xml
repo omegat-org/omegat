@@ -194,7 +194,7 @@
         </copy>
     </target>
 
-    <target name="whc-toc">
+    <target name="whc-toc" depends="xhtml5-chunk">
         <java dir="."
               fork="true"
               failonerror="true"
@@ -212,7 +212,7 @@
         </java>
     </target>
 
-    <target name="whc-index">
+    <target name="whc-index" depends="xhtml5-chunk">
         <java dir="."
               fork="true"
               failonerror="true"
@@ -275,7 +275,7 @@
         <delete file="${language}/xhtml5/index_.html"/>
     </target>
 
-    <target name="html5" depends="pictures,xhtml5-chunk,css,whc" />
+    <target name="html5" depends="pictures,css,whc" />
 
     <target name="javahelp" depends="include"> <!-- Not yet operationnal -->
         <java dir="."

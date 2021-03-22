@@ -64,8 +64,8 @@ public class PluginsManager {
     private Map<String, PluginInformation> availablePlugins = null;
     private Map<String, PluginInformation> installedPlugins;
 
-    public static File pluginsDir = new File(StaticUtils.installDir(), "plugins");
-    public static File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
+    public static final File pluginsDir = new File(StaticUtils.installDir(), "plugins");
+    public static final File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
 
     public enum PluginType {
         FILTER("filter"),

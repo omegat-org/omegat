@@ -47,7 +47,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.WikiGet;
+import org.omegat.util.net.HttpConnectionUtils;
 
 
 /**
@@ -139,8 +139,8 @@ public class YandexCloudTranslate extends BaseTranslate {
 
         String response;
         try {
-            response = WikiGet.postJSON(TRANSLATE_URL, requestBuilder.toString(), headers);
-        } catch (WikiGet.ResponseError e) {
+            response = HttpConnectionUtils.postJSON(TRANSLATE_URL, requestBuilder.toString(), headers);
+        } catch (HttpConnectionUtils.ResponseError e) {
             String errorMessage = extractErrorMessage(e.body);
             if (errorMessage == null) {
                 errorMessage = OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
@@ -245,8 +245,8 @@ public class YandexCloudTranslate extends BaseTranslate {
             Map<String, Object> rootNode;
 
             try {
-                response = WikiGet.postJSON(IAM_TOKEN_URL, request, null);
-            } catch (WikiGet.ResponseError e) {
+                response = HttpConnectionUtils.postJSON(IAM_TOKEN_URL, request, null);
+            } catch (HttpConnectionUtils.ResponseError e) {
                 // Try to extract error message from the error body
                 IAMErrorMessage = extractErrorMessage(e.body);
                 if (IAMErrorMessage == null) {

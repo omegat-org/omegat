@@ -64,7 +64,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.WikiGet;
+import org.omegat.util.net.HttpConnectionUtils;
 
 /**
  * Plugin information and installation manager.
@@ -139,7 +139,7 @@ public final class PluginsManager {
         Set<PluginInformation> pluginInfo = new TreeSet<>();
         String raw_value;
         try {
-            raw_value = WikiGet.getURL(LIST_URL);
+            raw_value = HttpConnectionUtils.getURL(new URL(LIST_URL));
             Scanner scanner = new Scanner(raw_value);
             StringBuilder sb = new StringBuilder();
             while (scanner.hasNextLine()) {

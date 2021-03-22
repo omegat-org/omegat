@@ -39,9 +39,6 @@ import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +49,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.omegat.util.Platform.OsType;
 
 /**
@@ -441,18 +437,6 @@ public final class StaticUtils {
         while ((globIndex = haystack.indexOf(needle, current)) != -1) {
             haystack.replace(globIndex, globIndex + 1, replacement);
             current = globIndex + replacement.length();
-        }
-    }
-
-    /**
-     * Download a file to memory
-     */
-    public static String downloadFileToString(URL url, int timeout) throws IOException {
-        URLConnection urlConn = url.openConnection();
-        urlConn.setConnectTimeout(timeout);
-        urlConn.setReadTimeout(timeout);
-        try (InputStream in = urlConn.getInputStream()) {
-            return IOUtils.toString(in, StandardCharsets.UTF_8);
         }
     }
 

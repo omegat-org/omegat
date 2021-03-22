@@ -27,12 +27,8 @@
 package org.omegat.core.spellchecker;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +39,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.net.HttpConnectionUtils;
 
 /**
  * Dictionary manager. Spell checking dictionaries' utility functions.
@@ -53,7 +49,6 @@ import org.omegat.util.StaticUtils;
  */
 public class DictionaryManager {
 
-    private static final int TIMEOUT_MS = 10_000;
 
     /** the directory string */
     private final File dir;
@@ -61,7 +56,7 @@ public class DictionaryManager {
     /**
      * Creates a new instance of DictionaryManager.
      *
-     * @param dirName
+     * @param dir
      *            : the directory where the spell checking dictionary files
      *            (*.(aff|dic) are available locally
      */
@@ -208,7 +203,7 @@ public class DictionaryManager {
 
         // download the file
         URL url = new URL(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
-        String htmlfile = StaticUtils.downloadFileToString(url, TIMEOUT_MS);
+        String htmlfile = HttpConnectionUtils.getURL(url);
 
         // build a list of available language codes
         Matcher matcher = PatternConsts.DICTIONARY_ZIP.matcher(htmlfile);
@@ -232,7 +227,7 @@ public class DictionaryManager {
      * @param langCode
      *            : the language code (xx_YY)
      */
-    public void installRemoteDictionary(String langCode) throws MalformedURLException, IOException {
+    public void installRemoteDictionary(String langCode) throws IOException {
         String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) + "/" + langCode + ".zip";
 
         // Dirty hack for the French dictionary. Since it is named
@@ -244,26 +239,7 @@ public class DictionaryManager {
         }
         List<String> expectedFiles = Arrays.asList(langCode + OConsts.SC_AFFIX_EXTENSION,
                 langCode + OConsts.SC_DICTIONARY_EXTENSION);
-
-        URL url = new URL(from);
-        URLConnection conn = url.openConnection();
-        conn.setConnectTimeout(TIMEOUT_MS);
-        conn.setReadTimeout(TIMEOUT_MS);
-        try (InputStream in = conn.getInputStream()) {
-            List<String> extracted = StaticUtils.extractFromZip(in, dir, expectedFiles::contains);
-            if (!expectedFiles.containsAll(extracted)) {
-                throw new FileNotFoundException("Could not extract expected files from zip; expected: "
-                        + expectedFiles + ", extracted: " + extracted);
-            }
-        } catch (IllegalArgumentException ex) {
-            throw new FlakyDownloadException(ex);
-        }
+        HttpConnectionUtils.downloadZipFileAndExtract(new URL(from), dir, expectedFiles);
     }
 
-    @SuppressWarnings("serial")
-    public static class FlakyDownloadException extends RuntimeException {
-        public FlakyDownloadException(Exception cause) {
-            super(cause);
-        }
-    }
 }

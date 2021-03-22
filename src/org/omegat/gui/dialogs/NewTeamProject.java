@@ -39,7 +39,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
-import org.omegat.util.WikiGet;
+import org.omegat.util.net.HttpConnectionUtils;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -206,7 +206,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         }
 
         protected String detectProjectFile() throws Exception {
-            byte[] file = WikiGet.getURLasByteArray(url);
+            byte[] file = HttpConnectionUtils.getURLasByteArray(url);
             ProjectFileStorage.parseProjectFile(file);
             return "project-file";
         }

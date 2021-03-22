@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2020 Briac Pilpre
                2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support

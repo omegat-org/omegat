@@ -26,6 +26,8 @@
 
 package org.omegat.core.data;
 
+import java.io.File;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Properties;
@@ -71,10 +73,11 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private final String description;
     private final String category;
     private final String link;
+    private final URL url;
     private STATUS status;
     private Action action;
 
-    public PluginInformation(final String className, final Manifest manifest, final STATUS status) {
+    public PluginInformation(final String className, final Manifest manifest, final URL mu, final STATUS status) {
         this.className = className;
         Attributes mainAttrs = manifest.getMainAttributes();
         Attributes attrs = manifest.getEntries().get(className);
@@ -87,11 +90,12 @@ public class PluginInformation implements Comparable<PluginInformation> {
         description = attrs.getValue(PLUGIN_DESCRIPTION);
         link = attrs.getValue(PLUGIN_LINK);
         category = categoryName(attrs.getValue(PLUGIN_CATEGORY), attrs.getValue(PLUGIN_TYPE));
+        url = mu;
         action = Action.NONE;
         this.status = status;
     }
 
-    public PluginInformation(String className, Properties props, final String key, STATUS status) {
+    public PluginInformation(String className, Properties props, final String key, final URL mu, final STATUS status) {
         this.className = className;
         name = className.substring(className.lastIndexOf(".") + 1);
         version = null;
@@ -99,6 +103,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         description = null;
         category = categoryName(key, null);
         link = null;
+        url = mu;
         action = Action.NONE;
         this.status = status;
     }
@@ -185,6 +190,10 @@ public class PluginInformation implements Comparable<PluginInformation> {
 
     public final String getLink() {
         return link;
+    }
+
+    public final File getJarFile() {
+        return new File(url.getPath());
     }
 
     public final boolean isBundled() {

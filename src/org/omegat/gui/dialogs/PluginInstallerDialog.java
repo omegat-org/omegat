@@ -51,8 +51,7 @@ public class PluginInstallerDialog extends javax.swing.JDialog {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        pluginInformationsTextArea = new javax.swing.JTextArea();
+        panelPluginDetails = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         cancelButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
@@ -64,15 +63,7 @@ public class PluginInstallerDialog extends javax.swing.JDialog {
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
         jLabel1.setText(bundle.getString("GUI_PLUGIN_INSTALLER_TITLE")); // NOI18N
         jPanel2.add(jLabel1);
-
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(225, 200));
-
-        pluginInformationsTextArea.setColumns(20);
-        pluginInformationsTextArea.setRows(5);
-        pluginInformationsTextArea.setPreferredSize(new java.awt.Dimension(220, 180));
-        jScrollPane1.setViewportView(pluginInformationsTextArea);
-
-        jPanel2.add(jScrollPane1);
+        jPanel2.add(panelPluginDetails);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -136,8 +127,7 @@ public class PluginInstallerDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     javax.swing.JButton okButton;
-    javax.swing.JTextArea pluginInformationsTextArea;
+    javax.swing.JPanel panelPluginDetails;
     // End of variables declaration//GEN-END:variables
 }

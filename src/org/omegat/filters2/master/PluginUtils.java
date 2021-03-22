@@ -131,9 +131,9 @@ public final class PluginUtils {
                     if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
                         // found main manifest - not in development mode
                         foundMain = true;
-                        loadFromManifest(m, pluginsClassLoader, true);
+                        loadFromManifest(m, pluginsClassLoader, null);
                     } else {
-                        loadFromManifest(m, pluginsClassLoader, false);
+                        loadFromManifest(m, pluginsClassLoader, mu);
                     }
                 }
             }
@@ -143,7 +143,7 @@ public final class PluginUtils {
                 if (manifests != null) {
                     for (String mf : manifests.split(File.pathSeparator)) {
                         try (InputStream in = new FileInputStream(mf)) {
-                            loadFromManifest(new Manifest(in), pluginsClassLoader, false);
+                            loadFromManifest(new Manifest(in), pluginsClassLoader, null);
                         }
                     }
                 } else {
@@ -151,7 +151,7 @@ public final class PluginUtils {
                     Properties props = new Properties();
                     try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
                         props.load(fis);
-                        loadFromProperties(props, pluginsClassLoader, true);
+                        loadFromProperties(props, pluginsClassLoader, null);
                     }
                 }
             }
@@ -280,7 +280,7 @@ public final class PluginUtils {
      *            classloader
      * @throws ClassNotFoundException
      */
-    protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader, final boolean bundle)
+    protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader, final URL mu)
             throws ClassNotFoundException {
         String pluginClasses = m.getMainAttributes().getValue("OmegaT-Plugins");
         if (pluginClasses != null) {
@@ -289,39 +289,39 @@ public final class PluginUtils {
                     continue;
                 }
                 if (loadClass(clazz, classLoader)) {
-                    if (bundle) {
-                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, m, PluginInformation.STATUS.BUNDLED));
+                    if (mu == null) {
+                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, m, null, PluginInformation.STATUS.BUNDLED));
                     } else {
-                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, m, PluginInformation.STATUS.INSTALLED));
+                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, m, mu, PluginInformation.STATUS.INSTALLED));
                     }
                 }
             }
         }
 
-        loadFromManifestOld(m, classLoader, bundle);
+        loadFromManifestOld(m, classLoader, mu);
     }
 
-    protected static void loadFromProperties(Properties props, ClassLoader classLoader, final boolean bundle) throws ClassNotFoundException {
+    protected static void loadFromProperties(Properties props, ClassLoader classLoader, final URL mu) throws ClassNotFoundException {
         for (Object o : props.keySet()) {
             String key = o.toString();
             String[] classes = props.getProperty(key).split("\\s+");
             if (key.equals("plugin")) {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {
-                        if (bundle) {
-                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, PluginInformation.STATUS.BUNDLED));
+                        if (mu == null) {
+                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, null, PluginInformation.STATUS.BUNDLED));
                         } else {
-                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, PluginInformation.STATUS.INSTALLED));
+                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, mu, PluginInformation.STATUS.INSTALLED));
                         }
                     };
                 }
             } else {
                 for (String clazz : classes) {
                     if (loadClassOld(key, clazz, classLoader)) {
-                        if (bundle) {
-                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, PluginInformation.STATUS.BUNDLED));
+                        if (mu == null) {
+                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, null, PluginInformation.STATUS.BUNDLED));
                         } else {
-                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key,PluginInformation.STATUS.INSTALLED));
+                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, mu, PluginInformation.STATUS.INSTALLED));
                         }
                     }
                 }
@@ -363,7 +363,7 @@ public final class PluginUtils {
     /**
      * Old-style plugin loading.
      */
-    protected static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader, final boolean bundle)
+    protected static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader, final URL mu)
             throws ClassNotFoundException {
         if (m.getMainAttributes().getValue("OmegaT-Plugin") == null) {
             return;
@@ -383,10 +383,10 @@ public final class PluginUtils {
                 continue;
             }
             if (loadClassOld(sType, key, classLoader)) {
-                if (bundle) {
-                    PLUGIN_INFORMATIONS.add(new PluginInformation(key, m, PluginInformation.STATUS.BUNDLED));
+                if (mu == null) {
+                    PLUGIN_INFORMATIONS.add(new PluginInformation(key, m, null, PluginInformation.STATUS.BUNDLED));
                 } else {
-                    PLUGIN_INFORMATIONS.add(new PluginInformation(key, m, PluginInformation.STATUS.INSTALLED));
+                    PLUGIN_INFORMATIONS.add(new PluginInformation(key, m, mu, PluginInformation.STATUS.INSTALLED));
                 }
             }
         }

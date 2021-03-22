@@ -32,6 +32,7 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JComponent;
@@ -157,8 +158,17 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 pluginJarFile = pluginFile;
             }
             // check manifest
-            Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile, false, false);
-            new PluginInstallerDialogController(pluginInfo,
+            Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile);
+            Optional<PluginInformation> info = pluginInfo.stream().findFirst();
+            if (info.isPresent()) {
+                PluginInformation i = pluginsManager.getInstalledPluginInformation(info.get());
+                if (i != null) {
+                    installConfig.put(PluginInstallerDialogController.UPGRADE_PLUGIN, i.getVersion());
+                }
+            } else {
+                installConfig.put(PluginInstallerDialogController.UPGRADE_PLUGIN, null);
+            }
+            new PluginInstallerDialogController(pluginInfo, pluginsManager,
                     installConfig).show(Core.getMainWindow().getApplicationFrame());
             boolean result = Boolean.parseBoolean(installConfig.get(PluginInstallerDialogController.DO_INSTALL_KEY));
             if (result) {
@@ -195,7 +205,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         public InstalledPluginInfoTableModel() {
             PluginsManager pluginsManager = new PluginsManager();
-            listPlugins = pluginsManager.getInstalledPluginInformation();
+            listPlugins = pluginsManager.getInstalledPlugins();
         }
 
         public final PluginInformation getValueAt(int rowIndex) {

@@ -95,7 +95,7 @@ public class PluginsManager {
                             if (clazz.trim().isEmpty()) {
                                 continue;
                             }
-                            pluginInfo.add(new PluginInformation(clazz, m, PluginInformation.STATUS.UNINSTALLED));
+                            pluginInfo.add(new PluginInformation(clazz, m, null, PluginInformation.STATUS.UNINSTALLED));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -110,6 +110,19 @@ public class PluginsManager {
         return pluginInfo;
     }
 
+    public void uninstallPlugin(PluginInformation info) {
+        File file = info.getJarFile();
+        if (file.exists()) {
+            if (!file.delete()) {
+                Log.log("Failed to remove old plugin jar file.");
+            }
+        }
+    }
+
+    public PluginInformation getInstalledPluginInformation(PluginInformation info) {
+        return installedPlugins.getOrDefault(getPluginInformationKey(info), null);
+    }
+
     /**
      * Install specified plugin jar file.
      * @param pluginJarFile plugin jar.
@@ -117,10 +130,11 @@ public class PluginsManager {
      */
     public void installPlugin(File pluginJarFile) throws IOException {
         File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
-        FileUtils.copyFileToDirectory(pluginJarFile, homePluginsDir, true);
+        Set<PluginInformation> pluginInformations = parsePluginJarFileManifest(pluginJarFile);
+       FileUtils.copyFileToDirectory(pluginJarFile, homePluginsDir, true);
     }
 
-    public Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile, boolean bundle, boolean installed) {
+    public Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         try {
             URL[] urls = new URL[1];
@@ -138,13 +152,7 @@ public class PluginsManager {
                             if (clazz.trim().isEmpty()) {
                                 continue;
                             }
-                            if (bundle) {
-                                pluginInfo.add(new PluginInformation(clazz, m, PluginInformation.STATUS.BUNDLED));
-                            } else if (installed) {
-                                pluginInfo.add(new PluginInformation(clazz, m, PluginInformation.STATUS.INSTALLED));
-                            } else {
-                                pluginInfo.add(new PluginInformation(clazz, m, PluginInformation.STATUS.UNINSTALLED));
-                            }
+                            pluginInfo.add(new PluginInformation(clazz, m, null, PluginInformation.STATUS.UNINSTALLED));
                         }
                     }
                 }
@@ -189,7 +197,7 @@ public class PluginsManager {
      * Return installed plugins.
      * @return Set of PluginInformation
      */
-    public Map<String, PluginInformation> getInstalledPluginInformation() {
+    public Map<String, PluginInformation> getInstalledPlugins() {
         return installedPlugins;
     }
 

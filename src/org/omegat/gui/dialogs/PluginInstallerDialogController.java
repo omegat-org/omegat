@@ -25,11 +25,13 @@
 
 package org.omegat.gui.dialogs;
 
-import org.omegat.core.data.PluginInformation;
-
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.omegat.core.data.PluginInformation;
+import org.omegat.core.plugins.PluginsManager;
+import org.omegat.gui.preferences.view.PluginDetailsPane;
 
 /**
  *
@@ -37,18 +39,29 @@ import java.util.stream.Collectors;
  */
 public class PluginInstallerDialogController {
     private final Set<PluginInformation> pluginInformations;
+    private final PluginsManager pluginsManager;
     private final Map<String, String> config;
     public static final String DO_INSTALL_KEY = "install-plugin";
+    public static final String UPGRADE_PLUGIN = "upgrade-plugin";
 
-    public PluginInstallerDialogController(Set<PluginInformation> pluginInformations, Map<String, String> config) {
+    public PluginInstallerDialogController(Set<PluginInformation> pluginInformations, PluginsManager pluginsManager,
+                                           Map<String, String> config) {
         this.pluginInformations = pluginInformations;
+        this.pluginsManager = pluginsManager;
         this.config = config;
     }
 
     public final void show(java.awt.Frame parent) {
         PluginInstallerDialog pluginInstallerDialog = new PluginInstallerDialog(parent, true);
-        String sb = pluginInformations.stream().map(this::formatDetailText).collect(Collectors.joining());
-        pluginInstallerDialog.pluginInformationsTextArea.setText(sb);
+        PluginDetailsPane pluginDetailsPane = new PluginDetailsPane();
+        StringBuilder sb = new StringBuilder("<h2>Install new plugin file</h2>");
+        sb.append(pluginInformations.stream().map(pluginsManager::formatDetailText).collect(Collectors.joining()));
+        if (config.get(UPGRADE_PLUGIN) != null) {
+            sb.append("<br/>\n Current plugin version is: ").append(config.get(UPGRADE_PLUGIN)).append("<br/>\n");
+        }
+        pluginDetailsPane.setText(sb.toString());
+        pluginInstallerDialog.panelPluginDetails.add(pluginDetailsPane);
+        pluginDetailsPane.setVisible(true);
         pluginInstallerDialog.cancelButton.addActionListener(e -> {
             config.put(DO_INSTALL_KEY, Boolean.toString(false));
             pluginInstallerDialog.dispose();
@@ -58,16 +71,5 @@ public class PluginInstallerDialogController {
             pluginInstallerDialog.dispose();
         });
         pluginInstallerDialog.setVisible(true);
-    }
-
-    private String formatDetailText(PluginInformation info) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Name: ").append(info.getName()).append("\n");
-        if (info.getCategory() != null) sb.append("Category: ").append(info.getCategory()).append("\n");
-        if (info.getVersion() != null) sb.append("Version: ").append(info.getVersion()).append("\n");
-        sb.append("ClassName: ").append(info.getClassName()).append("\n\n");
-        if (info.getDescription() != null) sb.append(info.getDescription()).append("\n");
-        sb.append("\n");
-        return sb.toString();
     }
 }

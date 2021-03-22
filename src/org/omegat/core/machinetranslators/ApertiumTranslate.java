@@ -28,16 +28,16 @@
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
-import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.swing.JCheckBox;
-import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.JsonParser;
@@ -46,7 +46,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.WikiGet;
+import org.omegat.util.HttpConnectionUtils;
 
 /**
  * @author Ibai Lakunza Velasco
@@ -121,7 +121,7 @@ public class ApertiumTranslate extends BaseTranslate {
                 markUnknownVal, sourceLang, targetLang, apiKey);
         String v;
         try {
-            v = WikiGet.getURL(url);
+            v = HttpConnectionUtils.getURL(new URL(url));
         } catch (IOException e) {
             Log.logErrorRB(e, "APERTIUM_CUSTOM_SERVER_NOTFOUND");
             return OStrings.getString("APERTIUM_CUSTOM_SERVER_NOTFOUND");

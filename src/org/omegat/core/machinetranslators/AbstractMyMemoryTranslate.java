@@ -38,7 +38,7 @@ import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
-import org.omegat.util.WikiGet;
+import org.omegat.util.HttpConnectionUtils;
 
 /**
  * @author Ibai Lakunza Velasco
@@ -121,7 +121,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
         // Get the results from MyMemory
         String myMemoryJson = "";
         try {
-            myMemoryJson = WikiGet.get(GT_URL, params, headers);
+            myMemoryJson = HttpConnectionUtils.get(GT_URL, params, headers);
         } catch (IOException e) {
             throw e;
         }

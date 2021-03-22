@@ -49,7 +49,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.WikiGet;
+import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Support of IBM Watson machine translation.
@@ -131,7 +131,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
         String v;
         try {
-            v = WikiGet.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json.toString(), headers);
+            v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json.toString(), headers);
         } catch (IOException e) {
             return e.getLocalizedMessage();
         }

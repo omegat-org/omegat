@@ -43,7 +43,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.WikiGet;
+import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Support of DeepL machine translation.
@@ -108,7 +108,7 @@ public class DeepLTranslate extends BaseTranslate {
 
         String v;
         try {
-            v = WikiGet.get(DEEPL_URL, params, headers, "UTF-8");
+            v = HttpConnectionUtils.get(DEEPL_URL, params, headers, "UTF-8");
         } catch (IOException e) {
             return e.getLocalizedMessage();
         }

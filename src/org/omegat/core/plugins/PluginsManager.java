@@ -78,12 +78,29 @@ public final class PluginsManager {
      * It should be under the omegat.org control.
      */
     private static final String LIST_URL = "https://raw.githubusercontent.com/miurahr/omegat-plugins/main/plugins.MF";
+
     private Map<String, PluginInformation> availablePlugins = null;
     private Map<String, PluginInformation> installedPlugins;
+    private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
+    protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
 
+    /**
+     * Fallback properties file of plugin descriptions.
+     */
+    public static final String PLUGINS_LIST_FILE = "Plugins.properties";
+
+    /**
+     * plugin folder in program instalation folder.
+     */
     public static final File pluginsDir = new File(StaticUtils.installDir(), "plugins");
+    /**
+     * plugin folder for user installation.
+     */
     public static final File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
 
+    /**
+     * Plugin type definitons.
+     */
     public enum PluginType {
         FILTER("filter"),
         TOKENIZER("tokenizer"),
@@ -152,6 +169,11 @@ public final class PluginsManager {
         return pluginInfo;
     }
 
+    /**
+     * Get plugin information installed to system specified by parameter.
+     * @param info PluginInformation to search
+     * @return PluginInformation when found, otherwise return null
+     */
     public PluginInformation getInstalledPluginInformation(PluginInformation info) {
         return installedPlugins.getOrDefault(getPluginInformationKey(info), null);
     }
@@ -169,6 +191,11 @@ public final class PluginsManager {
        FileUtils.copyFileToDirectory(pluginJarFile, homePluginsDir, true);
     }
 
+    /**
+     * Parse Manifest from plugin jar file.
+     * @param pluginJarFile plugin jar file
+     * @return PluginInforamtion
+     */
     public Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         try {
@@ -267,11 +294,6 @@ public final class PluginsManager {
     private String getPluginInformationKey(PluginInformation info) {
         return info.getName() + info.getAuthor();
     }
-
-    public static final String PLUGINS_LIST_FILE = "Plugins.properties";
-
-    protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
-    private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
     /**
      * Loads all plugins from main classloader and from /plugins/ dir. We should

@@ -77,6 +77,7 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.net.HttpConnectionUtils;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
@@ -924,7 +925,7 @@ public final class ProjectUICommands {
         byte[] data;
         try {
             projectDir.mkdirs();
-            data = WikiGet.getURLasByteArray(url);
+            data = HttpConnectionUtils.getURLasByteArray(url);
             FileUtils.writeByteArrayToFile(projectFile, data);
         } catch (Exception ex) {
             Log.logErrorRB(ex, "TEAM_REMOTE_RETRIEVE_ERROR", url);

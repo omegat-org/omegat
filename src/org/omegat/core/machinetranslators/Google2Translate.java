@@ -44,7 +44,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.WikiGet;
+import org.omegat.util.net.HttpConnectionUtils;
 
 /**
  * Support of Google Translate API v.2 machine translation.
@@ -116,7 +116,7 @@ public class Google2Translate extends BaseTranslate {
 
         String v;
         try {
-            v = WikiGet.post(GT_URL, params, headers);
+            v = HttpConnectionUtils.post(GT_URL, params, headers);
         } catch (IOException e) {
             return e.getLocalizedMessage();
         }

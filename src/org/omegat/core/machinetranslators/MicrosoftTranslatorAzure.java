@@ -42,7 +42,7 @@ import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.WikiGet;
+import org.omegat.util.net.HttpConnectionUtils;
 
 /**
  * Support for Microsoft Translator API machine translation.
@@ -93,7 +93,7 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
             } else {
                 try {
                     translation = requestTranslate(langFrom, langTo, text);
-                } catch (WikiGet.ResponseError ex) {
+                } catch (HttpConnectionUtils.ResponseError ex) {
                     if (ex.code == 400) {
                         LOGGER.finer("Re-fetching Microsoft Translator API token due to 400 response");
                         requestToken();
@@ -107,7 +107,7 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
                 putToCache(sLang, tLang, text, translation);
             }
             return translation;
-        } catch (WikiGet.ResponseError ex) {
+        } catch (HttpConnectionUtils.ResponseError ex) {
             return ex.getLocalizedMessage();
         } catch (Exception ex) {
             LOGGER.log(Level.FINE, ex.getLocalizedMessage(), ex);
@@ -141,7 +141,7 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
         headers.put("Ocp-Apim-Subscription-Key", key);
         headers.put("Content-Type", "application/json");
         headers.put("Accept", "application/jwt");
-        accessToken = WikiGet.post(URL_TOKEN, Collections.emptyMap(), headers);
+        accessToken = HttpConnectionUtils.post(URL_TOKEN, Collections.emptyMap(), headers);
     }
 
     private String requestTranslate(String langFrom, String langTo, String text) throws Exception {
@@ -155,7 +155,7 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
             p.put("category", "generalnn");
         }
 
-        String r = WikiGet.get(URL_TRANSLATE, p, null);
+        String r = HttpConnectionUtils.get(URL_TRANSLATE, p, null);
         Matcher m = RE_RESPONSE.matcher(r);
         if (m.matches()) {
             String translatedText = m.group(1);

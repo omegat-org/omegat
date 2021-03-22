@@ -71,7 +71,7 @@ import org.omegat.util.WikiGet;
  *
  * @author Hiroshi Miura
  */
-public class PluginsManager {
+public final class PluginsManager {
 
     /**
      * FIXME: Plugin list download URL.

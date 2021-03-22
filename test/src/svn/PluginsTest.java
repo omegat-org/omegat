@@ -25,9 +25,6 @@
 
 package svn;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.awt.HeadlessException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -37,13 +34,16 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 import org.junit.Test;
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.core.plugins.PluginsManager;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TestPreferencesInitializer;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 public class PluginsTest {
 
-    private static final Path PLUGINS_FILE = Paths.get(StaticUtils.installDir(), PluginUtils.PLUGINS_LIST_FILE);
+    private static final Path PLUGINS_FILE = Paths.get(StaticUtils.installDir(), PluginsManager.PLUGINS_LIST_FILE);
 
     @Test
     public void testPluginsListWhitespace() throws Exception {

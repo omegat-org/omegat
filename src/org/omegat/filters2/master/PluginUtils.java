@@ -52,6 +52,7 @@ import java.util.stream.Stream;
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
+import org.omegat.core.plugins.PluginsManager;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.Tokenizer;
@@ -59,7 +60,6 @@ import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -71,28 +71,6 @@ import org.omegat.util.StringUtil;
 public final class PluginUtils {
 
     public static final String PLUGINS_LIST_FILE = "Plugins.properties";
-
-    public enum PluginType {
-        FILTER("filter"),
-        TOKENIZER("tokenizer"),
-        MARKER("marker"),
-        MACHINETRANSLATOR("machinetranslator"),
-        BASE("base"),
-        GLOSSARY("glossary"),
-        DICTIONARY("dictionary"),
-        MISCELLANEOUS("miscellaneous"),
-        UNKNOWN("Undefined");
-
-        private String typeValue;
-
-        PluginType(String type) {
-            this.typeValue = type;
-        }
-
-        public String getTypeValue() {
-            return typeValue;
-        }
-    };
 
     protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
@@ -107,12 +85,10 @@ public final class PluginUtils {
      * than one jar.
      */
     public static void loadPlugins(final Map<String, String> params) {
-        File pluginsDir = new File(StaticUtils.installDir(), "plugins");
-        File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
         try {
             // list all jars in /plugins/
             FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
-            List<File> fs = Stream.of(pluginsDir, homePluginsDir)
+            List<File> fs = Stream.of(PluginsManager.pluginsDir, PluginsManager.homePluginsDir)
                     .flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
                     .collect(Collectors.toList());
             URL[] urls = new URL[fs.size()];
@@ -394,11 +370,11 @@ public final class PluginUtils {
 
     protected static boolean loadClassOld(String sType, String key, ClassLoader classLoader)
             throws ClassNotFoundException {
-        PluginType pType;
+        PluginsManager.PluginType pType;
         try {
-            pType = PluginType.valueOf(sType.toUpperCase(Locale.ENGLISH));
+            pType = PluginsManager.PluginType.valueOf(sType.toUpperCase(Locale.ENGLISH));
         } catch (Exception ex) {
-            pType = PluginType.UNKNOWN;
+            pType = PluginsManager.PluginType.UNKNOWN;
         }
         boolean loadOk = true;
         switch (pType) {

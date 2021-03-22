@@ -64,6 +64,31 @@ public class PluginsManager {
     private Map<String, PluginInformation> availablePlugins = null;
     private Map<String, PluginInformation> installedPlugins;
 
+    public static File pluginsDir = new File(StaticUtils.installDir(), "plugins");
+    public static File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
+
+    public enum PluginType {
+        FILTER("filter"),
+        TOKENIZER("tokenizer"),
+        MARKER("marker"),
+        MACHINETRANSLATOR("machinetranslator"),
+        BASE("base"),
+        GLOSSARY("glossary"),
+        DICTIONARY("dictionary"),
+        MISCELLANEOUS("miscellaneous"),
+        UNKNOWN("Undefined");
+
+        private String typeValue;
+
+        PluginType(String type) {
+            this.typeValue = type;
+        }
+
+        public String getTypeValue() {
+            return typeValue;
+        }
+    };
+
     public PluginsManager() {
         installedPlugins = new TreeMap<>();
         PluginUtils.getPluginInformations().stream()
@@ -110,15 +135,6 @@ public class PluginsManager {
         return pluginInfo;
     }
 
-    public void uninstallPlugin(PluginInformation info) {
-        File file = info.getJarFile();
-        if (file.exists()) {
-            if (!file.delete()) {
-                Log.log("Failed to remove old plugin jar file.");
-            }
-        }
-    }
-
     public PluginInformation getInstalledPluginInformation(PluginInformation info) {
         return installedPlugins.getOrDefault(getPluginInformationKey(info), null);
     }
@@ -128,9 +144,11 @@ public class PluginsManager {
      * @param pluginJarFile plugin jar.
      * @throws IOException when I/O error happened.
      */
-    public void installPlugin(File pluginJarFile) throws IOException {
-        File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
-        Set<PluginInformation> pluginInformations = parsePluginJarFileManifest(pluginJarFile);
+    public void installPlugin(File pluginJarFile, File upgrade) throws IOException {
+       File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
+       if (upgrade != null) {
+           FileUtils.forceDelete(upgrade);
+       }
        FileUtils.copyFileToDirectory(pluginJarFile, homePluginsDir, true);
     }
 

@@ -160,10 +160,11 @@ public class PluginsPreferencesController extends BasePreferencesController {
             // check manifest
             Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile);
             Optional<PluginInformation> info = pluginInfo.stream().findFirst();
+            PluginInformation currentInfo = null;
             if (info.isPresent()) {
-                PluginInformation i = pluginsManager.getInstalledPluginInformation(info.get());
-                if (i != null) {
-                    installConfig.put(PluginInstallerDialogController.UPGRADE_PLUGIN, i.getVersion());
+                currentInfo = pluginsManager.getInstalledPluginInformation(info.get());
+                if (currentInfo != null) {
+                    installConfig.put(PluginInstallerDialogController.UPGRADE_PLUGIN, currentInfo.getVersion());
                 }
             } else {
                 installConfig.put(PluginInstallerDialogController.UPGRADE_PLUGIN, null);
@@ -173,7 +174,11 @@ public class PluginsPreferencesController extends BasePreferencesController {
             boolean result = Boolean.parseBoolean(installConfig.get(PluginInstallerDialogController.DO_INSTALL_KEY));
             if (result) {
                 try {
-                    pluginsManager.installPlugin(pluginJarFile);
+                    if (currentInfo != null) {
+                        pluginsManager.installPlugin(pluginJarFile, currentInfo.getJarFile());
+                    } else {
+                        pluginsManager.installPlugin(pluginJarFile, null);
+                    }
                 } catch (IOException ex) {
                     Log.log(ex);
                 }

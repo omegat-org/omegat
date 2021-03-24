@@ -5,6 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
                2019 Marc Riera Irigoyen
+               2021 Kevin Brubeck Unhammer
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -52,11 +53,12 @@ import org.omegat.util.WikiGet;
  * @author Didier Briel
  */
 public class ApertiumTranslate extends BaseTranslate {
+    protected static final String PROPERTY_APERTIUM_MARKUNKNOWN = "apertium.server.markunknown";
     protected static final String PROPERTY_APERTIUM_SERVER_CUSTOM = "apertium.server.custom";
     protected static final String PROPERTY_APERTIUM_SERVER_URL = "apertium.server.url";
     protected static final String PROPERTY_APERTIUM_SERVER_KEY = "apertium.server.key";
     protected static final String APERTIUM_SERVER_URL_DEFAULT = "https://www.apertium.org/apy";
-    protected static final String APERTIUM_SERVER_URL_FORMAT = "%s/translate?q=%s&markUnknown=no&langpair=%s|%s&key=%s";
+    protected static final String APERTIUM_SERVER_URL_FORMAT = "%s/translate?q=%s&markUnknown=%s&langpair=%s|%s&key=%s";
     // Specific OmegaT key
     protected static final String APERTIUM_SERVER_KEY_DEFAULT = "bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
 
@@ -113,9 +115,13 @@ public class ApertiumTranslate extends BaseTranslate {
             server = APERTIUM_SERVER_URL_DEFAULT;
             apiKey = APERTIUM_SERVER_KEY_DEFAULT;
         }
+        String markUnknownVal = "no";
+        if(getMarkUnknown()) {
+            markUnknownVal = "yes";
+        }
 
         String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(trText, "UTF-8"),
-                sourceLang, targetLang, apiKey);
+                                   markUnknownVal, sourceLang, targetLang, apiKey);
         String v;
         try {
             v = WikiGet.getURL(url);
@@ -164,6 +170,15 @@ public class ApertiumTranslate extends BaseTranslate {
     }
 
     /**
+     * Get the markUnknown property
+     */
+    private boolean getMarkUnknown() {
+        String value = System.getProperty(PROPERTY_APERTIUM_MARKUNKNOWN,
+                Preferences.getPreference(PROPERTY_APERTIUM_MARKUNKNOWN));
+        return Boolean.parseBoolean(value);
+    }
+
+    /**
      * Whether or not to use a custom Apertium server
      */
     private boolean useCustomServer() {
@@ -189,13 +204,17 @@ public class ApertiumTranslate extends BaseTranslate {
     @Override
     public void showConfigurationUI(Window parent) {
 
+        JCheckBox unkCheckBox = new JCheckBox(OStrings.getString("APERTIUM_MARKUNKNOWN_LABEL"));
         JCheckBox apiCheckBox = new JCheckBox(OStrings.getString("APERTIUM_CUSTOM_SERVER_LABEL"));
+        unkCheckBox.setSelected(getMarkUnknown());
         apiCheckBox.setSelected(useCustomServer());
 
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {
             @Override
             protected void onConfirm() {
                 boolean temporary = panel.temporaryCheckBox.isSelected();
+                System.setProperty(PROPERTY_APERTIUM_MARKUNKNOWN, Boolean.toString(unkCheckBox.isSelected()));
+                Preferences.setPreference(PROPERTY_APERTIUM_MARKUNKNOWN, unkCheckBox.isSelected());
                 System.setProperty(PROPERTY_APERTIUM_SERVER_CUSTOM, Boolean.toString(apiCheckBox.isSelected()));
                 Preferences.setPreference(PROPERTY_APERTIUM_SERVER_CUSTOM, apiCheckBox.isSelected());
                 String server = panel.valueField1.getText().trim();
@@ -247,6 +266,7 @@ public class ApertiumTranslate extends BaseTranslate {
         dialog.panel.valueField1.getDocument().addDocumentListener(toggleOkButton);
 
 
+        dialog.panel.itemsPanel.add(unkCheckBox);
         dialog.panel.itemsPanel.add(apiCheckBox, 1);
         dialog.panel.valueLabel1.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_URL_LABEL"));
         dialog.panel.valueField1.setText(getCustomServerUrl());

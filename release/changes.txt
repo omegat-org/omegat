@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.5.0
 ----------------------------------------------------------------------
-  10 Enhancements
+  11 Enhancements
   3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -50,6 +50,9 @@
 
   - Recognize glossaries with TSV extension
   https://sourceforge.net/p/omegat/feature-requests/1557/
+
+  - Support "mark unknown words" feature in Apertium MT
+  https://sourceforge.net/p/omegat/feature-requests/1563/
 
 ----------------------------------------------------------------------
  OmegaT 5.4.3 (2021-03-27)

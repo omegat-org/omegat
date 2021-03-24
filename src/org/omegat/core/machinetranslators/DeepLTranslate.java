@@ -57,7 +57,7 @@ import org.omegat.util.WikiGet;
  */
 public class DeepLTranslate extends BaseTranslate {
     protected static final String PROPERTY_API_KEY = "deepl.api.key";
-    protected static final String DEEPL_URL = "https://api.deepl.com/v1/translate";
+    protected static final String DEEPL_URL = "https://api.deepl.com/v2/translate";
     protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
     @Override

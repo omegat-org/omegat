@@ -1,4 +1,20 @@
 ----------------------------------------------------------------------
+ OmegaT 5.4.2
+----------------------------------------------------------------------
+  0 Enhancements
+  1 Bug fix
+  0 Localisation updates
+----------------------------------------------------------------------
+5.4.2 vs 5.4.1
+
+  Bug fixes:
+
+  - SVN team project files disappear
+  Fixed by reverting "Sync file deletions from repository to project" (#1499)
+  for SVN repos.
+  https://sourceforge.net/p/omegat/bugs/1036/
+
+----------------------------------------------------------------------
  OmegaT 5.4.1 (2020-12-15)
 ----------------------------------------------------------------------
   0 Enhancements

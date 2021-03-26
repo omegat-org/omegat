@@ -5,7 +5,7 @@
   3 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
-5.5.0 vs 5.4.2
+5.5.0 vs 5.4.3
 
   Bug fixes:
 
@@ -50,6 +50,20 @@
 
   - Recognize glossaries with TSV extension
   https://sourceforge.net/p/omegat/feature-requests/1557/
+
+----------------------------------------------------------------------
+ OmegaT 5.4.3 (2021-03-27)
+----------------------------------------------------------------------
+  0 Enhancements
+  1 Bug fix
+  0 Localisation updates
+----------------------------------------------------------------------
+5.4.3 vs 5.4.2
+
+  Bug fixes:
+
+  - Revert move to DeepL V2 API
+  https://sourceforge.net/p/omegat/bugs/1040/
 
 ----------------------------------------------------------------------
  OmegaT 5.4.2 (2021-03-25)

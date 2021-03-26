@@ -57,7 +57,13 @@ import org.omegat.util.WikiGet;
  */
 public class DeepLTranslate extends BaseTranslate {
     protected static final String PROPERTY_API_KEY = "deepl.api.key";
-    protected static final String DEEPL_URL = "https://api.deepl.com/v2/translate";
+    // DO NOT MOVE TO THE V2 API until it becomes available for CAT tool integration.
+    //
+    // > Version 2 (v2) of the DeepL API is not compatible with CAT tools and is
+    // > not included in DeepL plans for CAT tool users.
+    //
+    // See https://www.deepl.com/docs-api/accessing-the-api/api-versions/
+    protected static final String DEEPL_URL = "https://api.deepl.com/v1/translate";
     protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
     @Override
@@ -149,7 +155,7 @@ public class DeepLTranslate extends BaseTranslate {
             return OStrings.getString("MT_JSON_ERROR");
         }
 
-        // { "translations": [ { "detected_source_language": "DE", "text": "Hello World!" } ] } 
+        // { "translations": [ { "detected_source_language": "DE", "text": "Hello World!" } ] }
         try {
             List<Object> translationsList = (List<Object>) rootNode.get("translations");
             Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);

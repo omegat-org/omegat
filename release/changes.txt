@@ -5,7 +5,7 @@
   2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
-5.5.0 vs 5.4.1
+5.5.0 vs 5.4.2
 
   Bug fixes:
 
@@ -46,6 +46,27 @@
 
   - Recognize glossaries with TSV extension
   https://sourceforge.net/p/omegat/feature-requests/1557/
+
+----------------------------------------------------------------------
+ OmegaT 5.4.2 (2021-03-25)
+----------------------------------------------------------------------
+  1 Enhancement
+  1 Bug fix
+  0 Localisation updates
+----------------------------------------------------------------------
+5.4.2 vs 5.4.1
+
+  Implemented requests:
+
+  - Support DeepL V2 API
+  https://sourceforge.net/p/omegat/feature-requests/1560/
+
+  Bug fixes:
+
+  - SVN team project files disappear
+  Fixed by reverting "Sync file deletions from repository to project" (#1499)
+  for SVN repos.
+  https://sourceforge.net/p/omegat/bugs/1036/
 
 ----------------------------------------------------------------------
  OmegaT 5.4.1 (2020-12-15)

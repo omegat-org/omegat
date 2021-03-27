@@ -77,7 +77,7 @@ public final class PluginsManager {
      * FIXME: Plugin list download URL.
      * It should be under the omegat.org control.
      */
-    private static final String LIST_URL = "https://raw.githubusercontent.com/miurahr/omegat-plugins/main/plugins.MF";
+    private static final String LIST_URL = "https://raw.githubusercontent.com/omegat-org/omegat-plugins/main/plugins.MF";
 
     private Map<String, PluginInformation> availablePlugins = null;
     private Map<String, PluginInformation> installedPlugins;

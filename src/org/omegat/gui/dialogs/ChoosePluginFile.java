@@ -25,14 +25,14 @@
 
 package org.omegat.gui.dialogs;
 
+import java.io.File;
+import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-
-import java.io.File;
-import java.util.Locale;
 
 
 @SuppressWarnings("serial")
@@ -72,6 +72,6 @@ public class ChoosePluginFile extends JFileChooser {
             return false;
         }
         String name = f.getName().toLowerCase(Locale.ENGLISH);
-        return name.endsWith(".jar"); // TODO: support zip; name.endsWith(".zip");
+        return name.endsWith(OConsts.JAR_EXTENSION) || name.endsWith(OConsts.ZIP_EXTENSION);
     }
 }

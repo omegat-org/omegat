@@ -35,6 +35,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,6 +53,8 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.CLIParameters;
@@ -80,7 +83,7 @@ public final class PluginsManager {
     private static final String LIST_URL = "https://raw.githubusercontent.com/omegat-org/omegat-plugins/main/plugins.MF";
 
     private Map<String, PluginInformation> availablePlugins = null;
-    private Map<String, PluginInformation> installedPlugins;
+    private final Map<String, PluginInformation> installedPlugins;
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
     protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
 
@@ -112,16 +115,16 @@ public final class PluginsManager {
         MISCELLANEOUS("miscellaneous"),
         UNKNOWN("Undefined");
 
-        private String typeValue;
+        private final String typeValue;
 
         PluginType(String type) {
-            this.typeValue = type;
+            typeValue = type;
         }
 
         public String getTypeValue() {
             return typeValue;
         }
-    };
+    }
 
     public PluginsManager() {
         installedPlugins = new TreeMap<>();
@@ -296,6 +299,57 @@ public final class PluginsManager {
     }
 
     /**
+     * Unpack plugin file when necessary and copy it.
+     *
+     * This part is rent from IntelliJ-community(Apache 2.0 license).
+     *
+     * @param sourceFile plugin soure file to be installed (jar or zip)
+     * @param targetPath target path to be installed.
+     * @return installed plugin jar file path.
+     * @throws IOException when source file is corrupted.
+     */
+    public static Path unpackPlugin(Path sourceFile, Path targetPath) throws IOException {
+        Path target;
+        if (sourceFile.getFileName().toString().endsWith(".jar")) {
+            target = targetPath.resolve(sourceFile.getFileName());
+            FileUtils.copyFile(sourceFile.toFile(), target.toFile());
+        } else if (sourceFile.getFileName().toString().endsWith(".zip")) {
+            target = targetPath.resolve(pluginDirectoryName(sourceFile));
+            FileUtils.forceDeleteOnExit(target.toFile());
+            try (InputStream inputStream = new FileInputStream(sourceFile.toFile())) {
+                List<String> filter = new ArrayList<>();
+                filter.add(".jar");
+                StaticUtils.extractFromZip(inputStream, target.toFile(), filter::contains);
+            }
+        } else {
+            throw new IOException("Unknown archive type: " + sourceFile.getFileName().toString());
+        }
+        return target;
+    }
+
+    /**
+     * Get root directory name of zip archived plugin file.
+     *
+     * This part is rent from IntelliJ-community(Apache 2.0 license).
+     *
+     * @param zip
+     * @return
+     * @throws IOException
+     */
+    public static String pluginDirectoryName(Path zip) throws IOException {
+        try (ZipFile zipFile = new ZipFile(zip.toFile())) {
+            Enumeration<? extends ZipEntry> entries = zipFile.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry zipEntry = entries.nextElement();
+                String name = zipEntry.getName();
+                int i = name.indexOf('/');
+                if (i > 0) return name.substring(0, i);
+            }
+        }
+        throw new IOException("Corrupted archive: " + zip);
+     }
+
+    /**
      * Loads all plugins from main classloader and from /plugins/ dir. We should
      * load all jars from /plugins/ dir first, because some plugin can use more
      * than one jar.
@@ -343,7 +397,7 @@ public final class PluginsManager {
                     Properties props = new Properties();
                     try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
                         props.load(fis);
-                        loadFromProperties(props, pluginsClassLoader, null);
+                        loadFromProperties(props, pluginsClassLoader);
                     }
                 }
             }
@@ -400,7 +454,7 @@ public final class PluginsManager {
      *            manifest
      * @param classLoader
      *            classloader
-     * @throws ClassNotFoundException
+     * @throws ClassNotFoundException when fails to load class.
      */
     protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader, final URL mu)
             throws ClassNotFoundException {
@@ -423,28 +477,20 @@ public final class PluginsManager {
         loadFromManifestOld(m, classLoader, mu);
     }
 
-    protected static void loadFromProperties(Properties props, ClassLoader classLoader, final URL mu) throws ClassNotFoundException {
+    protected static void loadFromProperties(Properties props, ClassLoader classLoader) throws ClassNotFoundException {
         for (Object o : props.keySet()) {
             String key = o.toString();
             String[] classes = props.getProperty(key).split("\\s+");
             if (key.equals("plugin")) {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {
-                        if (mu == null) {
-                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, null, PluginInformation.STATUS.BUNDLED));
-                        } else {
-                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, mu, PluginInformation.STATUS.INSTALLED));
-                        }
-                    };
+                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, null, PluginInformation.STATUS.BUNDLED));
+                    }
                 }
             } else {
                 for (String clazz : classes) {
                     if (loadClassOld(key, clazz, classLoader)) {
-                        if (mu == null) {
-                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, null, PluginInformation.STATUS.BUNDLED));
-                        } else {
-                            PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, mu, PluginInformation.STATUS.INSTALLED));
-                        }
+                        PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props, key, null, PluginInformation.STATUS.BUNDLED));
                     }
                 }
             }

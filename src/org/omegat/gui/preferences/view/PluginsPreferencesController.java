@@ -28,14 +28,21 @@
 package org.omegat.gui.preferences.view;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.Vector;
+import java.util.function.Predicate;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -50,7 +57,9 @@ import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.dialogs.PluginInstallerDialogController;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -64,8 +73,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
     private final PluginsManager pluginsManager = new PluginsManager();
     private PluginsPreferencesPanel panel;
-    private TableRowSorter<InstalledPluginInfoTableModel> sorter;
-    private TableRowSorter<AvailablePluginInfoTableModel> availableSorter;
     private PluginDetailsPane localPluginDetailsPane;
     private PluginDetailsPane remotePluginDetailsPane;
     private final Map<String, String> installConfig = new HashMap<>();
@@ -96,7 +103,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
             remotePluginDetailsPane.setText("");
         } else {
             AvailablePluginInfoTableModel model = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
-            remotePluginDetailsPane.setText(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
+            StringBuilder detailTextBuilder = new StringBuilder(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
+            remotePluginDetailsPane.setText(detailTextBuilder.toString());
         }
     }
 
@@ -131,8 +139,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
         });
         InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
         AvailablePluginInfoTableModel availableModel = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
-        sorter = new TableRowSorter<>(model);
-        availableSorter = new TableRowSorter<>(availableModel);
+        TableRowSorter<InstalledPluginInfoTableModel> sorter = new TableRowSorter<>(model);
+        TableRowSorter<AvailablePluginInfoTableModel> availableSorter = new TableRowSorter<>(availableModel);
         panel.tablePluginsInfo.setRowSorter(sorter);
         panel.tableAvailablePluginsInfo.setRowSorter(availableSorter);
 
@@ -149,12 +157,25 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 return;
             }
             final File pluginFile = choosePluginFile.getSelectedFile();
-            File pluginJarFile;
+            File pluginJarFile = null;
             if (pluginFile.getName().toLowerCase(Locale.ENGLISH).endsWith(".zip")) {
-                // TODO: support zip
-                // extract zip file into temporary directory and look up *.jar file
-                // and set it to pluginJarFile.
-                return;
+                try {
+                    Path tmp = Files.createTempDirectory("omegat");
+                    try (InputStream in = new FileInputStream(pluginFile)) {
+                        Predicate<String> expected = f -> f.endsWith(OConsts.JAR_EXTENSION);
+                        List<String> extracted = StaticUtils.extractFromZip(in, tmp.toFile(), expected);
+                        if (extracted.size() == 0) {
+                            throw new FileNotFoundException("Could not extract a jar file from zip");
+                        } else {
+                            // FIXME: It handles only a single jar which is found first.
+                            pluginJarFile = new File(tmp.toFile(), extracted.get(0));
+                            extracted.forEach(f -> new File(f).deleteOnExit());
+                        }
+                    }
+                    tmp.toFile().deleteOnExit();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             } else {
                 pluginJarFile = pluginFile;
             }
@@ -202,7 +223,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
     static class InstalledPluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 5345248154613009632L;
         private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION", "THIRDPARTY"};
-        private final Map<String, PluginInformation> listPlugins;;
+        private final Map<String, PluginInformation> listPlugins;
 
         public static final int COLUMN_CATEGORY = 0;
         public static final int COLUMN_NAME = 1;

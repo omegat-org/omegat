@@ -542,10 +542,6 @@ public final class PluginsManager {
             String key = e.getKey();
             Attributes attrs = e.getValue();
             String sType = attrs.getValue("OmegaT-Plugin");
-            if ("true".equals(attrs.getValue("OmegaT-Tokenizer"))) {
-                // TODO remove after release new tokenizers
-                sType = "tokenizer";
-            }
             if (sType == null) {
                 // WebStart signing section, or other section
                 continue;

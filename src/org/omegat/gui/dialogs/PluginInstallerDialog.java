@@ -57,11 +57,19 @@ public class PluginInstallerDialog extends javax.swing.JDialog {
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation(new java.awt.Point(100, 100));
+        setMinimumSize(new java.awt.Dimension(200, 200));
+        setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
+        setPreferredSize(new java.awt.Dimension(300, 300));
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.PAGE_AXIS));
 
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
         jLabel1.setText(bundle.getString("GUI_PLUGIN_INSTALLER_TITLE")); // NOI18N
+        jLabel1.setMinimumSize(new java.awt.Dimension(250, 42));
+        jLabel1.setName(""); // NOI18N
+        jLabel1.setRequestFocusEnabled(false);
         jPanel2.add(jLabel1);
         jPanel2.add(panelPluginDetails);
 

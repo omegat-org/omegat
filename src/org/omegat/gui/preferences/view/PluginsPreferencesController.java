@@ -27,22 +27,9 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 import java.util.Vector;
-import java.util.function.Predicate;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -52,14 +39,11 @@ import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
+import org.omegat.core.plugins.PluginInstaller;
 import org.omegat.core.plugins.PluginsManager;
 import org.omegat.gui.dialogs.ChoosePluginFile;
-import org.omegat.gui.dialogs.PluginInstallerDialogController;
 import org.omegat.gui.preferences.BasePreferencesController;
-import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -75,7 +59,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private PluginsPreferencesPanel panel;
     private PluginDetailsPane localPluginDetailsPane;
     private PluginDetailsPane remotePluginDetailsPane;
-    private final Map<String, String> installConfig = new HashMap<>();
 
     @Override
     public final JComponent getGui() {
@@ -152,58 +135,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.installFromDiskButton.addActionListener(e -> {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
             int choosePluginFileResult = choosePluginFile.showOpenDialog(Core.getMainWindow().getApplicationFrame());
-            if (choosePluginFileResult != JFileChooser.APPROVE_OPTION) {
-                // user press 'Cancel' in dialog
-                return;
-            }
-            final File pluginFile = choosePluginFile.getSelectedFile();
-            File pluginJarFile = null;
-            if (pluginFile.getName().toLowerCase(Locale.ENGLISH).endsWith(".zip")) {
-                try {
-                    Path tmp = Files.createTempDirectory("omegat");
-                    try (InputStream in = new FileInputStream(pluginFile)) {
-                        Predicate<String> expected = f -> f.endsWith(OConsts.JAR_EXTENSION);
-                        List<String> extracted = StaticUtils.extractFromZip(in, tmp.toFile(), expected);
-                        if (extracted.size() == 0) {
-                            throw new FileNotFoundException("Could not extract a jar file from zip");
-                        } else {
-                            // FIXME: It handles only a single jar which is found first.
-                            pluginJarFile = new File(tmp.toFile(), extracted.get(0));
-                            extracted.forEach(f -> new File(f).deleteOnExit());
-                        }
-                    }
-                    tmp.toFile().deleteOnExit();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            } else {
-                pluginJarFile = pluginFile;
-            }
-            // check manifest
-            Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile);
-            Optional<PluginInformation> info = pluginInfo.stream().findFirst();
-            PluginInformation currentInfo = null;
-            if (info.isPresent()) {
-                currentInfo = pluginsManager.getInstalledPluginInformation(info.get());
-                if (currentInfo != null) {
-                    installConfig.put(PluginInstallerDialogController.UPGRADE_PLUGIN, currentInfo.getVersion());
-                }
-            } else {
-                installConfig.put(PluginInstallerDialogController.UPGRADE_PLUGIN, null);
-            }
-            new PluginInstallerDialogController(pluginInfo, pluginsManager,
-                    installConfig).show(Core.getMainWindow().getApplicationFrame());
-            boolean result = Boolean.parseBoolean(installConfig.get(PluginInstallerDialogController.DO_INSTALL_KEY));
-            if (result) {
-                try {
-                    if (currentInfo != null) {
-                        pluginsManager.installPlugin(pluginJarFile, currentInfo.getJarFile());
-                    } else {
-                        pluginsManager.installPlugin(pluginJarFile, null);
-                    }
-                } catch (IOException ex) {
-                    Log.log(ex);
-                }
+            if (choosePluginFileResult == JFileChooser.APPROVE_OPTION) {
+                PluginInstaller.install(pluginsManager, choosePluginFile.getSelectedFile());
             }
         });
     }

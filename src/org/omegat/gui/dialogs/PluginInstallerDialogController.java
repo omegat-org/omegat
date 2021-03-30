@@ -41,8 +41,9 @@ public class PluginInstallerDialogController {
     private final Set<PluginInformation> pluginInformations;
     private final PluginsManager pluginsManager;
     private final Map<String, String> config;
-    public static final String DO_INSTALL_KEY = "install-plugin";
-    public static final String UPGRADE_PLUGIN = "upgrade-plugin";
+    public static final String DO_INSTALL_KEY = "install-plugin-action";
+    public static final String CURRENT_VERSION = "current-plugin-vesrion";
+    public static final String ACTION_NAME = "install-action-name";
 
     public PluginInstallerDialogController(Set<PluginInformation> pluginInformations, PluginsManager pluginsManager,
                                            Map<String, String> config) {
@@ -56,8 +57,8 @@ public class PluginInstallerDialogController {
         PluginDetailsPane pluginDetailsPane = new PluginDetailsPane();
         StringBuilder sb = new StringBuilder("<h2>Install a new plugin</h2>");
         sb.append(pluginInformations.stream().map(pluginsManager::formatDetailText).collect(Collectors.joining()));
-        if (config.get(UPGRADE_PLUGIN) != null) {
-            sb.append("<br/>\n Current plugin version is: ").append(config.get(UPGRADE_PLUGIN)).append("<br/>\n");
+        if (config.get(CURRENT_VERSION) != null) {
+            sb.append("<br/>\n Current plugin version is: ").append(config.get(CURRENT_VERSION)).append("<br/>\n");
         }
         pluginDetailsPane.setText(sb.toString());
         pluginInstallerDialog.panelPluginDetails.add(pluginDetailsPane);
@@ -66,6 +67,7 @@ public class PluginInstallerDialogController {
             config.put(DO_INSTALL_KEY, Boolean.toString(false));
             pluginInstallerDialog.dispose();
         });
+        pluginInstallerDialog.okButton.setText(config.get(ACTION_NAME));
         pluginInstallerDialog.okButton.addActionListener(e -> {
             config.put(DO_INSTALL_KEY, Boolean.toString(true));
             pluginInstallerDialog.dispose();

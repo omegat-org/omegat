@@ -35,7 +35,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -53,10 +52,7 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
-import org.apache.commons.io.FileUtils;
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
@@ -93,7 +89,7 @@ public final class PluginsManager {
     public static final String PLUGINS_LIST_FILE = "Plugins.properties";
 
     /**
-     * plugin folder in program instalation folder.
+     * plugin folder in program installation folder.
      */
     public static final File pluginsDir = new File(StaticUtils.installDir(), "plugins");
     /**
@@ -102,7 +98,7 @@ public final class PluginsManager {
     public static final File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
 
     /**
-     * Plugin type definitons.
+     * Plugin type definitions.
      */
     public enum PluginType {
         FILTER("filter"),
@@ -182,22 +178,9 @@ public final class PluginsManager {
     }
 
     /**
-     * Install specified plugin jar file.
-     * @param pluginJarFile plugin jar.
-     * @throws IOException when I/O error happened.
-     */
-    public void installPlugin(File pluginJarFile, File upgrade) throws IOException {
-       File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
-       if (upgrade != null) {
-           FileUtils.forceDelete(upgrade);
-       }
-       FileUtils.copyFileToDirectory(pluginJarFile, homePluginsDir, true);
-    }
-
-    /**
      * Parse Manifest from plugin jar file.
      * @param pluginJarFile plugin jar file
-     * @return PluginInforamtion
+     * @return PluginInformation
      */
     public Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) {
         Set<PluginInformation> pluginInfo = new HashSet<>();
@@ -297,57 +280,6 @@ public final class PluginsManager {
     private String getPluginInformationKey(PluginInformation info) {
         return info.getName() + info.getAuthor();
     }
-
-    /**
-     * Unpack plugin file when necessary and copy it.
-     *
-     * This part is rent from IntelliJ-community(Apache 2.0 license).
-     *
-     * @param sourceFile plugin soure file to be installed (jar or zip)
-     * @param targetPath target path to be installed.
-     * @return installed plugin jar file path.
-     * @throws IOException when source file is corrupted.
-     */
-    public static Path unpackPlugin(Path sourceFile, Path targetPath) throws IOException {
-        Path target;
-        if (sourceFile.getFileName().toString().endsWith(".jar")) {
-            target = targetPath.resolve(sourceFile.getFileName());
-            FileUtils.copyFile(sourceFile.toFile(), target.toFile());
-        } else if (sourceFile.getFileName().toString().endsWith(".zip")) {
-            target = targetPath.resolve(pluginDirectoryName(sourceFile));
-            FileUtils.forceDeleteOnExit(target.toFile());
-            try (InputStream inputStream = new FileInputStream(sourceFile.toFile())) {
-                List<String> filter = new ArrayList<>();
-                filter.add(".jar");
-                StaticUtils.extractFromZip(inputStream, target.toFile(), filter::contains);
-            }
-        } else {
-            throw new IOException("Unknown archive type: " + sourceFile.getFileName().toString());
-        }
-        return target;
-    }
-
-    /**
-     * Get root directory name of zip archived plugin file.
-     *
-     * This part is rent from IntelliJ-community(Apache 2.0 license).
-     *
-     * @param zip
-     * @return
-     * @throws IOException
-     */
-    public static String pluginDirectoryName(Path zip) throws IOException {
-        try (ZipFile zipFile = new ZipFile(zip.toFile())) {
-            Enumeration<? extends ZipEntry> entries = zipFile.entries();
-            while (entries.hasMoreElements()) {
-                ZipEntry zipEntry = entries.nextElement();
-                String name = zipEntry.getName();
-                int i = name.indexOf('/');
-                if (i > 0) return name.substring(0, i);
-            }
-        }
-        throw new IOException("Corrupted archive: " + zip);
-     }
 
     /**
      * Loads all plugins from main classloader and from /plugins/ dir. We should

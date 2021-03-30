@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.util.Platform.OsType;
+import org.omegat.util.net.HttpConnectionUtils;
 
 /**
  * Static functions taken from CommandThread to reduce file size.
@@ -438,6 +440,17 @@ public final class StaticUtils {
             haystack.replace(globIndex, globIndex + 1, replacement);
             current = globIndex + replacement.length();
         }
+    }
+
+    /**
+     * Download a file to memory.
+     * @Deprecated
+     * This method is replaced to HttpConnectionUtils.getURL(url)
+     * No longer accept timeout.
+     */
+    @Deprecated
+    public static String downloadFileToString(URL url, int timeout) throws IOException {
+        return HttpConnectionUtils.getURL(url);
     }
 
     /**

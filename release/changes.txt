@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   11 Enhancements
   3 Bug fixes
-  0 Localisation updates
+  2 Localisation updates
 ----------------------------------------------------------------------
 5.5.0 vs 5.4.3
 
@@ -53,6 +53,11 @@
 
   - Support "mark unknown words" feature in Apertium MT
   https://sourceforge.net/p/omegat/feature-requests/1563/
+
+  Localisation Updates:
+
+  - Finnish localisation updated to 5.5.0 (UI)
+  - Ukrainian localisation updated to 5.5.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 5.4.3 (2021-03-27)

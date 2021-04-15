@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="panes">
+  <title>Volets</title>
+
+  <para>La fenêtre principale se compose de plusieurs volets, du menu principal et d'une barre d'état. Vous pouvez modifier l'emplacement de n'importe quel volet ou même le détacher dans une fenêtre séparée en cliquant sur le nom du volet et en le faisant glisser. En fonction du statut du volet, des signes différents peuvent être affichés en haut à droite de celui-ci :</para>
+
+  <note>
+    <para>Si vous ne pouvez pas voir tous les volets (s'ils sont ouverts ou réduits), appuyez sur <guisubmenu>Options &gt; Réinitialiser la fenêtre principale</guisubmenu> pour retrouver l'état défini dans l'installation.</para>
+  </note>
+
+  <table>
+    <title>Éléments graphiques des volets</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <tbody>
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Minimize.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Minimize.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>réduit le volet de sorte que seul son nom soit visible en bas de la fenêtre</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Maximize.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Maximize.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>agrandit le volet</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Restore.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Restore.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>restaure la mise en page qui existait avant l'étape d'agrandissement</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Undock.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Undock.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>détache le volet de la fenêtre principale</entry>
+        </row>
+
+        <row>
+          <entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Dock.png" width="60%"/>
+              </imageobject>
+
+              <imageobject role="fo">
+                <imagedata fileref="images/Dock.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+
+          <entry>replace le volet dans la fenêtre principale</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>Les volets peuvent se chevaucher si vous le souhaitez. Lorsque cela est fait, les volets affichent un onglet tout en haut. Faites glisser les séparateurs situés entre les volets pour les redimensionner. Vous pouvez à tout moment aller dans <guimenuitem> Options → Réinitialiser la fenêtre principale</guimenuitem> pour retrouver la disposition d'origine.</para>
+
+  <para>Il est possible de glisser-déplacer des fichiers sur chaque volet, qui réagira en conséquence.<itemizedlist>
+      <listitem>
+        <para>Volet Éditeur : si un fichier projet OmegaT (<filename>omegat.project</filename>) est déposé sur ce volet, le projet correspondant sera ouvert, fermant au préalable un éventuel projet ouvert. Les autres fichiers déposés seront copiés dans le dossier <filename>source</filename>. Cela s'applique également à la fenêtre <link linkend="windows.projectfiles">Fichiers du projet</link>.</para>
+      </listitem>
+
+      <listitem>
+        <para>Volet Correspondances : les fichiers <filename>.tmx</filename> déposés seront copiés dans le dossier <filename>tm</filename>.</para>
+      </listitem>
+
+      <listitem>
+        <para>Volet Glossaires : les fichiers déposés disposant d'extensions connues (<filename>.txt</filename>, <filename>.tab</filename>, etc.) seront copiés dans le dossier <filename>glossary</filename>.</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section id="editor.pane">
+    <title>Éditeur</title>
+
+    <para>Volet dans lequel vous tapez et modifiez votre traduction. Le volet Éditeur affiche le texte du document partiellement traduit : le texte déjà traduit est affiché dans sa traduction tandis que le texte non traduit reste dans sa langue d'origine. Le texte affiché est séparé en segments. Vous pouvez faire défiler le document et double-cliquer sur n'importe quel segment pour l'ouvrir et le modifier. Dans le cas ci-dessus, les segments déjà traduits sont affichés en jaunes.</para>
+
+    <para>Un des segments ci-dessus est le segment en cours. Il s'agit du segment qui est affiché en deux parties. La partie supérieure est dans la langue source, en caractère gras et sur un fond vert tandis que la partie inférieure correspond à la ligne d'édition et se termine par un marqueur : le marqueur est <literal>&lt;segment nnnn&gt;</literal> avec nnnn correspondant au numéro du segment dans le projet. Utilisez la partie supérieure comme référence et remplacez ou modifiez son contenu par votre traduction dans la ligne d'édition.</para>
+
+    <para>Note : lorsque le segment n'est pas unique, le marqueur de segment affiche <literal>&lt;segment nnnn +yy de plus d'infos&gt;. Dans ce cas, yy est le nombre d'autres occurrences de ce segment dans le projet.</literal></para>
+
+    <para>En fonction du comportement que vous avez choisi pour la ligne d'édition, pour un segment non traduit celle-ci peut être : vide, contenir le texte source ou contenir la traduction de la chaîne de caractères la plus proche de celle que vous êtes en train de traduire. Lorsque vous passez au segment suivant, la traduction est validée et sauvegardée. Si vous voulez que la traduction soit identique à la source, il suffit de vider la ligne d'édition en supprimant tout le texte (sélectionnez le texte avec <keycap>Ctrl+A</keycap> et supprimez-le avec <keycap>Suppr</keycap>). OmegaT est capable d'enregistrer les traductions qui sont identiques à la source. Ceci est utile pour les documents qui contiennent des noms de marque, des noms propres, ou des parties qui sont dans une troisième langue et n'ont pas besoin d'être traduites. Voir <emphasis>Options de la ligne d'édition</emphasis> pour plus de détails.</para>
+
+    <para>Si vous effectuez un clic droit dans le volet Editeur, un menu contextuel s'ouvre et propose les options<emphasis role="bold"> Couper, Copier, Coller</emphasis> (soit les mêmes fonctions que les raccourcis <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> et <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) ainsi que les fonctions <emphasis role="bold">Atteindre un segment</emphasis> et <emphasis role="bold">Créer une entrée de glossaire</emphasis>. De plus, lorsque le clic droit se produit sur un segment ouvert, d'autres options concernant les <emphasis role="bold">Traductions alternatives</emphasis> sont proposées, par exemple de se déplacer à une autre instance d'un segment non unique.</para>
+
+    <para>Il est possible de faire glisser du texte depuis un endroit quelconque de la fenêtre principale et de le déposer dans le segment. Le texte provenant de l'extérieur du segment cible est copié, le texte en provenance du segment est déplacé.</para>
+
+    <para>Par défaut, il n'est pas possible de sélectionner des mots dans le segment source à l'aide du clavier plutôt que de la souris. Un appui sur la touche <keycap>F2</keycap> permet de déplacer le curseur dans le segment source (ou à n'importe quel emplacement dans l'éditeur) avec les touches fléchées. Dans ce mode, « <guilabel>Curseur déverrouillé</guilabel> » est affiché en bas du volet. Pour revenir au mode standard « <guilabel>Curseur verrouillé</guilabel>&quot;, appuyez sur<keycap>F2</keycap> à nouveau.</para>
+  </section>
+
+  <section>
+    <title>Correspondances</title>
+
+    <para>Le volet Correspondances affiche les segments les plus proches provenant de la mémoire de traduction interne au projet qui est créée en temps réel au cours de votre traduction et des mémoires de traduction secondaires que vous avez importées depuis vos travaux précédents ou que vous avez reçues de la part de votre client ou de votre agence de traduction.</para>
+
+    <para>Lorsque vous passez au segment suivant, la première correspondance (celle ayant le meilleur pourcentage de correspondance) est sélectionnée automatiquement. Vous pouvez sélectionner une correspondance différente en appuyant sur <guimenuitem>Ctrl+2, 3, 4, ou 5</guimenuitem>. Bien sûr, s'il n'existe pas de correspondance n° 5, appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> n'aura aucun effet. Pour utiliser la correspondance sélectionnée dans votre traduction, appuyez sur <guimenuitem>Ctrl+R</guimenuitem> pour remplacer la ligne d'édition par la correspondance ou appuyez sur <guimenuitem>Ctrl+I</guimenuitem> pour l'insérer à l'emplacement du curseur.</para>
+
+    <para>Les trois pourcentages de correspondances sont dans l'ordre suivant :<itemizedlist>
+      <listitem>
+		  <para>le pourcentage calculé avec lemmatisation<footnote>
+		  <para>Voir <ulink url="https://fr.wikipedia.org/wiki/Racinisation">https://fr.wikipedia.org/wiki/Racinisation</ulink></para>
+		  </footnote>et sans les balises ni les nombres (en général le pourcentage le plus haut)</para>
+	  </listitem>
+      <listitem>
+		  <para>le pourcentage calculé sans lemmatisation, sans balises ni nombres (en général légèrement inférieur)</para>
+	  </listitem>
+      <listitem>
+		  <para>le pourcentage calculé avec le texte complet, y compris les balises et nombres (en général le plus bas)</para>
+	  </listitem>
+    </itemizedlist>
+    </para>
+
+    <para>Il est possible de modifier l'ordre des trois pourcentages, mais pas de modifier celui qui est utilisé pour les correspondances partielles.</para>
+
+    <para>La correspondance sélectionnée est mise en gras, les mots qui sont absents dans le segment que vous traduisez sont en bleu et les mots qui entourent les parties manquantes sont en vert. Dans l'exemple ci-dessus, le segment source est <emphasis role="bold">Context menu command</emphasis>. La meilleure correspondance est de 100 % car tous les mots correspondent. C'est la même chose pour les deux correspondances suivantes. La correspondance n° 4 est proche, mais présente des différences. La ligne contenant le pourcentage de correspondances inclut aussi le nom de la mémoire de traduction qui contient la correspondance. Si aucun nom de fichier n'est affiché, cela signifie que la source est la mémoire de traduction interne au projet. Segments orphelins (la correspondance n° 2) décrit des segments de la mémoire de traduction par défaut du projet qui n'ont pas de segments source correspondants.</para>
+  </section>
+
+  <section>
+    <title>Glossaires</title>
+
+    <para>Le volet Glossaires vous permet d'accéder à votre propre collection d'expressions et de terminologies spécialisées (que vous avez créées et enregistrées dans vos fichiers glossaires). Il montre la traduction des termes présents dans le segment en cours. Le segment source de l'exemple ci-dessous était « <emphasis>Commande de menu contextuel</emphasis> » (comme dans l'exemple du volet Correspondances ci-dessus) et les termes affichés se trouvaient dans les glossaires disponibles (Microsoft's Term collection et le glossaire slovène du groupe d'utilisateurs Linux).</para>
+
+    <para>Si l'option TransTips est activée (<guimenuitem>Options → TransTips</guimenuitem>), un clic droit sur le mot souligné dans le segment source permet d'ouvrir un menu contextuel qui suggère les traductions proposées par votre glossaire. Sélectionner l'une de ces traductions permet de l'insérer à l'endroit où se trouve le curseur dans le segment cible. Il est également possible de surligner votre alternative préférée dans le volet Glossaires et de l'insérer dans le segment cible avec un clic droit sur la sélection.</para>
+  </section>
+
+  <section>
+    <title>Dictionnaires</title>
+
+    <para>Les dictionnaires sont les équivalents électroniques des dictionnaires papier (comme Merriam Webster, Duden, Larousse etc.) que vous pouvez avoir sur votre bureau. Pour plus de détails, voir le chapitre : <link linkend="appendix.dictionaries">Dictionnaires</link></para>
+  </section>
+
+  <section>
+    <title>Traduction automatique</title>
+
+    <para>Le volet Traduction automatique, lorsqu'il est ouvert, contient les suggestions de traduction proposées par les outils de traduction automatique pour le segment en cours. Appuyer sur <keysym>Ctrl+M</keysym> permet de remplacer la traduction du segment en cours par la traduction suggérée.</para>
+  </section>
+
+  <section>
+    <title>Traductions multiples</title>
+
+    <para>Un même segment source peut avoir différentes traductions en fonction du contexte. Si la traduction actuelle du segment ne convient pas, l'utilisateur peut sélectionner <guisubmenu>Edition → Créer une traduction alternative</guisubmenu>. Le segment cible saisi après cette action sera alors considéré comme une traduction alternative pour le segment source. Il est possible de définir l'une des alternatives - la plus probable d'entre elles par exemple - comme traduction par défaut en sélectionnant <guisubmenu>Edition → Utiliser comme traduction par défaut</guisubmenu></para>
+  </section>
+
+  <section>
+    <title>Notes</title>
+
+    <para>Le traducteur peut adjoindre des notes au segment en cours, ce qui lui permet, par exemple, d'y revenir plus tard et de refaire sa traduction, de vérifier que les traductions alternatives sont correctes ou d'interroger ses collègues pour avoir leur avis. Il est possible de se déplacer d'une note à l'autre en cliquant sur <guisubmenu>Atteindre → Note Suivante</guisubmenu> et <guisubmenu>Atteindre → Note Précédente</guisubmenu>.</para>
+  </section>
+
+  <section>
+    <title>Commentaires</title>
+
+    <para>Certains formats de fichiers conçus spécialement pour le travail de traduction (ex. : les fichiers PO) permettent l'ajout de commentaires. De cette façon, le traducteur peut obtenir le contexte entourant le segment à traduire. Dans l'exemple ci-dessous, l'auteur du fichier PO a intégré un avertissement afin que le traducteur vérifie la longueur de la traduction :</para>
+  </section>
+
+  <section>
+    <title>Barre d'état</title>
+
+    <para>La barre d'état affiche les messages relatifs au flux de travail dans le bas de la fenêtre principale. Cette barre donne à l'utilisateur un retour concernant certaines opérations spécifiques en cours. Elle affiche également le nombre de correspondances partielles et de correspondances de glossaire pour le segment en cours.</para>
+
+    <para>Le compteur localisé dans le coin inférieur bas suit la progression de la traduction (les nombres de la colonne de gauche correspondent à l'image ci-dessus) :</para>
+
+    <table>
+      <title>Fenêtre principale - compteurs</title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>Nombre de segments traduits / Nombre total de segments du fichier en cours</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>nombre de segments uniques traduits / nombre total de segments uniques du projet</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>Nombre total de segments du projet (y compris les répétitions)</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>Nombre de caractères source / nombre de caractères cible dans le segment en cours</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>D'un point de vue pratique, le couple de nombres le plus important est le second : il vous dit quelle quantité de travail a déjà été effectuée par rapport au total ou au nombre de segments uniques. Dans l'exemple, le projet est bien sûr finit puisque tous les segments uniques ont été traduits.</para>
+  </section>
+</chapter>

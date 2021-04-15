@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>Outils</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Afficher les erreurs...</term>
+
+      <listitem>
+        <para>Outils d'assurance de qualité qui effectue toutes les vérifications automatiques en une fois et affiche les résultats dans une fenêtre.</para>
+
+        <para>Il détecte quatre types de problèmes :</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>les balises manquantes, mal placées, y compris les <link linkend="dialogs.preferences.tagprocessing">balises personnalisées</link>. L'option <guilabel>Problèmes de balises</guilabel> est toujours sélectionnée.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Erreurs d'orthographe</guilabel> (optionnel) Fonctionne seulement si un dictionnaire orthographique est installé.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Problèmes de terminologie</guilabel> (optionnel).</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Erreurs LanguageTool</guilabel> (optionnel)</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>La fenêtre de résultats est disposée sous forme de table dans laquelle :</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>un double-clic sur une ligne active le segment correspondant dans le volet Éditeur.</para>
+          </listitem>
+
+          <listitem>
+            <para>un clic sur un en-tête de colonne modifie l'ordre de la colonne,</para>
+          </listitem>
+
+          <listitem>
+            <para>sélectionner ou déplacer la souris sur une ligne va afficher une icône à l'extrémité droite de la ligne qui propose un menu déroulant où les actions de correction possibles sont présentées.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Afficher les erreurs pour le document actuel</term>
+
+      <listitem>
+        <para>Comme ci-dessus, mais seulement pour le document actif dans le volet Éditeur.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistiques</term>
+
+      <listitem>
+        <para>Ouvre une nouvelle fenêtre et affiche les statistiques du projet, c.-à-d. les totaux du projet et les totaux de chaque fichier du projet.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistiques des correspondances</term>
+
+      <listitem>
+        <para>Affiche les Statistiques des correspondances du projet : le nombre de répétitions, de correspondances exactes, de correspondances partielles et d'absences de correspondances pour les segments, les mots et les caractères.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistiques des correspondances par fichier</term>
+
+      <listitem>
+        <para>Affiche les Statistiques des correspondances pour chaque fichier du projet : le nombre de répétitions, de correspondances exactes, de correspondances partielles et d'absences de correspondances pour les segments, les mots et les caractères.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Align Files…</term>
+
+      <listitem>
+        <para>Sélectionnez les deux fichiers à aligner (le fichier source et sa traduction) et cliquez sur OK pour ouvrir la <link linkend="windows.aligner">fenêtre <guilabel>Outil d'alignement</guilabel></link>.</para>
+
+        <para>Les formats pris en charge sont ceux qui sont affichés dans <menuchoice><guimenuitem>Projet</guimenuitem> <guimenuitem>Propriétés</guimenuitem> <guimenuitem>Filtres de fichiers</guimenuitem></menuchoice>.</para>
+
+        <para>Les fichiers source et cible peuvent être dans des formats différents, par exemple un fichier <filename>.docx</filename> peut être aligné avec un fichier <filename>.pdf</filename>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Scripts...</term>
+
+      <listitem>
+        <para>Ouvre la <link linkend="windows.scripts">fenêtre de <guilabel>Scripts</guilabel></link> où l'emplacement des scripts peut être spécifié et où des scripts peuvent être exécutés, écrits et associés à un raccourci clavier.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - (nom du script)</term>
+
+      <listitem>
+        <para>Lance les scripts qui ont été associés à un numéro.</para>
+
+        <para>Pour associer un script à un numéro :</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Ouvrez la fenêtre des scripts</para>
+          </listitem>
+
+          <listitem>
+            <para>Sélectionnez le script à associer dans la liste à gauche</para>
+          </listitem>
+
+          <listitem>
+            <para>Faites un clic-droit sur un numéro libre au bas de la fenêtre et choisissez <guilabel>Ajouter le script</guilabel>.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(commandes pour recherches externes)</term>
+
+      <listitem>
+        <para>Si des commandes pour effectuer des recherches externes ont été définies dans les <link linkend="dialogs.preferences.externalsearch">préférences</link>, elles sont listées et accessibles ici.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

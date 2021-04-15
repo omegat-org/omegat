@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2020.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2021.
 
 
 Qu'est-ce qu'OmegaT ?

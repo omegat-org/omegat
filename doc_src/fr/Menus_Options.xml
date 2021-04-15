@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>Options</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Préférences...</term>
+
+      <listitem>
+        <para>Ouvre le dialogue des <link linkend="dialogs.preferences">préférences</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Traduction automatique</term>
+
+      <listitem>
+        <para>Vous permet d'activer/de désactiver les outils de traduction automatique proposés.</para>
+
+        <para>Si plusiers moteurs de traduction sont slélectionnés, <keycombo><keycap>Ctrl</keycap><keycap>M</keycap></keycombo> est également utilisé pour passer de l'un à l'autre et insérer le moteur sélectionné en dernier.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Glossaires</term>
+
+      <listitem>
+        <para>Sélectionner <guimenuitem>Recherche de terminologie TAAS</guimenuitem> pour activer cette recherche.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Dictionnaires</term>
+
+      <listitem>
+        <para>Cocher l'option <guimenuitem>Use Fuzzy Matching for Dictionary Entries</guimenuitem> pour que les dictionnaires affichent les mots qui ont la même racine.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Saisie automatique</term>
+
+      <listitem>
+        <para>Si l'option <guimenuitem>Afficher automatiquement les suggestions pertinentes</guimenuitem> est cochée, la saisie automatique s'ouvre autoamtiquement en tapant les premières lettres de la traduction d'une entrée de glossaire ou un entrant « &lt; » dans le cas des balises.</para>
+
+        <para>Cocher <guimenuitem>History Completion</guimenuitem> pour afficher des suggestions de mots dès que leurs premières lettres sont saisies.</para>
+
+        <para>Cocher <guimenuitem>History Prediction</guimenuitem> pour afficher des suggestions de mots qui viennent habituellement en seconde position d'un couple de mots, dès que le premier mot est saisi.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Filtres de fichiers...</term>
+
+      <listitem>
+        <para>Ouvre l'option <link linkend="dialogs.preferences.filefilters">Filtres de fichiers</link> dans le dialogue des préférences.</para>
+
+        <para>Ces paramètres s'appliquent au niveau global, à tous les projets.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentation...</term>
+
+      <listitem>
+        <para>Ouvre l'option <link linkend="dialogs.preferences.segmentationsetup">Configuration de la segmentation</link> dans le dialogue des préférences.</para>
+
+        <para>Ces paramètres s'appliquent au niveau global, à tous les projets.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Éditeur...</term>
+
+      <listitem>
+        <para>Ouvre l'option <link linkend="dialogs.preferences.editor">Éditeur</link> dans le dialogue des préférences.</para>
+
+        <para>Ces paramètres s'appliquent au niveau global, à tous les projets.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Accéder au dossier de configuration</term>
+
+      <listitem>
+        <para>Ouvre le dossier local où les fichiers de configuration d'OmegaT sont stockées (son emplacement dépend du système d'exploitation).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

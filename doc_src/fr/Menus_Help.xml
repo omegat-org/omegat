@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.help">
+  <title>Aide</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Guide de l'utilisateur...</term>
+
+      <listitem>
+        <para>Ouvre ce manuel dans le navigateur par défaut.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>À propos...</term>
+
+      <listitem>
+        <para>Affiche le copyright, les crédits et les informations sur la licence.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Dernières modifications...</term>
+
+      <listitem>
+        <para>Affiche la liste des nouvelles fonctionnalités, des améliorations et des corrections de bogue pour chaque version.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Journal...</term>
+
+      <listitem>
+        <para>Affiche le fichier journal actuel. Le titre du dialogue reflète le fichier réellement utilisé (qui dépend du nombre d'instances d'OmegaT actuellement en cours d'exécution).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Rechercher des mises à jour...</term>
+
+      <listitem>
+        <para>Vérifie si une version plus récente d'<application>OmegaT</application> est disponible.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.projectfiles">
+  <title>Fichiers du projet</title>
+
+  <para>Cette fenêtre s'affiche automatiquement lorsqu'OmegaT charge un projet et à fois que l'on sélectionne <menuchoice> <guimenuitem>Projet</guimenuitem> <guimenuitem>Fichiers du projet...</guimenuitem> </menuchoice>.</para>
+
+  <para><remark>Note :</remark> il est possible d'empêcher cette fenêtre des Fichiers du projet de s'afficher, en définissant <emphasis>project_files_show_on_load</emphasis> à <emphasis>false</emphasis> dans le fichier <filename>omegat.prefs</filename> (accessible par le menu <menuchoice><guimenuitem>Options</guimenuitem> <guimenuitem>Accéder au dossier de configuration</guimenuitem></menuchoice>).</para>
+
+  <para>Utilisez <guimenuitem>Ctrl+L</guimenuitem> pour ouvrir cette fenêtre et <keycap>Echap</keycap> pour la fermer. La fenêtre <guilabel>Fichiers du projet</guilabel> affiche les informations suivantes :</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>le nombre total de fichiers traduisibles du projet. Il s'agit de tous les fichiers présents dans le dossier /source qui sont écrit dans un format qu'OmegaT est en mesure de traiter. Ce nombre est affiché entre parenthèses, à côté du titre « Fichiers du projet »</para>
+    </listitem>
+
+    <listitem>
+      <para>La liste de tous les fichiers traduisibles du projet. Cliquer sur n'importe lequel de ces fichiers provoquera l'ouverture de celui-ci (dans l'Éditeur, ce qui permet d'effectuer sa traduction).</para>
+
+      <para>Taper un texte quelconque ouvrira un champ de <guilabel>filtrage</guilabel> dans lequel il est possible d'entrer des noms de fichiers partiels. Il est possible de sélectionner un fichier avec les touches fléchées <keycap>Haut</keycap> et <keycap>Bas</keycap> et de l'ouvrir dans l'Éditeur en appuyant sur <keycap>Entrée</keycap></para>
+
+      <para>Note : les noms des fichiers (dans la première colonne) peuvent être triés par ordre alphabétique en cliquant sur l'en-tête. Il est également possible de changer la position d'un nom de fichier, en cliquant dessus et en appuyant sur les boutons <emphasis>Placer/Glisser</emphasis>.</para>
+
+      <para>Effectuer un clic droit sur un nom de fichier ouvre une fenêtre contextuelle qui permet d'ouvrir le fichier source et (s'il existe) le fichier cible.</para>
+    </listitem>
+
+    <listitem>
+      <para>Les entrées de fichier comprennent notamment leur nom, leurs types de filtres de fichier, leur encodage ainsi que le nombre de segments que chaque fichier contient</para>
+    </listitem>
+
+    <listitem>
+      <para>le nombre total de segments, le nombre de segments uniques (présents dans l'ensemble du projet), et le nombre de segments uniques déjà traduits sont affichés dans le bas de la fenêtre</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Le nombre de segments <emphasis role="bold">uniques </emphasis> est calculé en soustrayant les segments doubles à la somme de tous les segments. (La définition du mot « unique » est sensible à la casse : « Run » et « run » sont considérés comme étant deux mots différents)</para>
+
+  <para>La différence entre le « Nombre total de segments » et le « Nombre de segments uniques » donne une idée approximative du nombre de répétitions présentes dans le texte. Veuillez noter cependant que ces chiffres n'indiquent pas si les répétitions sont pertinentes ou non : ils peuvent se rapporter à des phrases relativement longues et répétées un certain nombre de fois (ce qui serait une bonne chose pour vous) ou à un tableau de mots clés (ce qui est moins utile). Le fichier <filename>project_stats.txt</filename> situé dans le dossier omegat de votre projet contient des informations plus détaillées sur les segments. Celles-ci sont séparées par fichier.</para>
+
+  <para>Modifier les règles de segmentation peut avoir pour conséquence la modification du ratio segments/segments uniques. Il est cependant préférable que ceci soit évité une fois la traduction du projet commencée. Pour plus de détails, voir le chapitre : <emphasis>Règles de segmentation</emphasis>.</para>
+
+  <para><emphasis role="bold">Ajouter des fichiers au projet : </emphasis>Il est possible d'ajouter des fichiers source au projet en cliquant sur « <guimenuitem>Importer des fichiers source...</guimenuitem> ». Ceci copie les fichiers sélectionnés dans le dossier <filename>source</filename> et recharge le projet pour importer les nouveaux fichiers. Il est également possible d'ajouter des fichiers source provenant de pages internet (MediaWiki) en cliquant sur « <guimenuitem>Importer depuis MediaWiki</guimenuitem> » et en saisissant l'URL correspondant.</para>
+</section>

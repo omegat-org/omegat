@@ -67,6 +67,7 @@ sourceSets {
 }
 
 repositories {
+    mavenCentral()
     jcenter()
     maven {
         url 'https://dl.bintray.com/omegat-org/maven'
@@ -111,7 +112,7 @@ dependencies {
         implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 
         // macOS integration
-        implementation 'org.madlonkay:desktopsupport:0.3.0'
+        implementation 'org.madlonkay:desktopsupport:0.4.0'
 
         api 'javax.xml.bind:jaxb-api:2.3.1'
         implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'

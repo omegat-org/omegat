@@ -164,7 +164,7 @@ dependencies {
         implementation 'org.tmatesoft.svnkit:svnkit:1.8.14'
 
         // Team project conflict resolution
-        implementation 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
+        implementation 'org.madlonkay:supertmxmerge:2.0.2'
 
         // Credentials encryption
         implementation 'org.jasypt:jasypt:1.9.3'

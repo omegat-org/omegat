@@ -31,9 +31,16 @@ jwsCodebase=
 # URL for timestamp. See: https://ant.apache.org/manual/Tasks/signjar.html
 #jwsTsaurl=
 
-## Bintray publishing
-bintrayUser=
-bintrayKey=
+## Sonatype OSSRH publishing (synced to Maven Central)
+ossrhUser=
+ossrhKey=
+
+## Signing for Maven Central
+# Last 8 characters of full key ID
+signing.keyId=
+signing.password=
+# Exported as e.g. `gpg --export-secret-keys > secring.gpg`
+signing.secretKeyRingFile=
 
 ## SourceForge web
 sourceforgeWebUser=

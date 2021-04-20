@@ -4,11 +4,11 @@ import org.apache.tools.ant.filters.FixCrLfFilter
 plugins {
     id 'application'
     id 'maven-publish'
+    id 'signing'
     id 'eclipse'
     id 'checkstyle'
     id 'com.github.spotbugs' version '4.5.0'
     id 'de.gliderpilot.jnlp' version '1.2.6'
-    id 'com.jfrog.bintray' version '1.8.5'
     id 'org.hidetake.ssh' version '2.10.1'
     id 'com.diffplug.spotless' version '5.5.1'
     id 'com.github.ben-manes.versions' version '0.33.0'
@@ -1023,29 +1023,53 @@ ext.mavenStyleVersion = version.replace('_', '-')
 
 publishing {
     publications {
-        bintray(MavenPublication) {
-            groupId 'org.omegat'
-            artifactId 'omegat'
-            version mavenStyleVersion
-            from components.java
+        mavenJava(MavenPublication) { publication ->
+            groupId = 'org.omegat'
+            artifactId = 'omegat'
+            version = mavenStyleVersion
             artifact sourceJar
             artifact javadocJar
+
+            from components.java
+
+            pom {
+                name = 'OmegaT'
+                description = 'The free translation memory tool'
+                url = 'https://omegat.org'
+                scm {
+                    connection = "scm:git:https://git.code.sf.net/p/omegat/code"
+                    developerConnection = "scm:git:https://git.code.sf.net/p/omegat/code"
+                    url = "https://sourceforge.net/p/omegat/code/"
+                }
+                licenses {
+                    license {
+                        name = 'The GNU General Public License, Version 3.0'
+                        url = 'https://www.gnu.org/licenses/licenses/gpl-3.0.html'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'omegat'
+                        name = 'OmegaT Developers'
+                        email = 'info@omegat.org'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials(PasswordCredentials) {
+                username findProperty('ossrhUsername')
+                password findProperty('ossrhPassword')
+            }
         }
     }
 }
 
-bintray {
-    user = findProperty('bintrayUser')
-    key = findProperty('bintrayKey')
-    pkg {
-        repo = 'maven'
-        name = 'OmegaT'
-        userOrg = 'omegat-org'
-        version {
-            name = mavenStyleVersion
-        }
-    }
-    publications = ['bintray']
+signing {
+    sign publishing.publications.mavenJava
 }
 
 remotes {

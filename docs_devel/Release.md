@@ -130,13 +130,14 @@ and publish the contents to SourceForge Web manually.
 ```
 
 
-## 12. Publish to Bintray
+## 12. Publish to Maven Central
 
 ```sh
-./gradlew bintrayUpload
+./gradlew publish
 ```
 
-Then log onto Bintray and publish the release.
+Then log onto [Sonatype Nexus](https://s01.oss.sonatype.org/) and publish the
+release.
 
 
 ## 13. Announce to News, user group

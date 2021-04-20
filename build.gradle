@@ -66,10 +66,7 @@ sourceSets {
 }
 
 repositories {
-    jcenter()
-    maven {
-        url 'https://dl.bintray.com/omegat-org/maven'
-    }
+    mavenCentral()
 }
 
 task webstartDocsJar(type: Jar) {
@@ -128,7 +125,7 @@ dependencies {
         // Encoding dectection
         implementation 'com.github.albfernandez:juniversalchardet:2.3.2'
 
-        // Legacy projects re-hosted on GitHub + Bintray
+        // Legacy projects re-hosted on Maven Central
         implementation 'org.omegat:vldocking:3.0.5'
         implementation 'org.omegat:htmlparser:1.5'
         implementation 'org.omegat:gnudiff4j:1.15'

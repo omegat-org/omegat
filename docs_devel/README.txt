@@ -84,8 +84,8 @@ Patched forks can be found on GitHub:
     https://github.com/omegat-org
 
 In some cases (especially defunct projects) OmegaT forks are also published for
-general use on Bintray/JCenter:
-    https://bintray.com/omegat-org
+general use on Maven Central:
+    https://search.maven.org/search?q=g:org.omegat*
 
 Dependencies not available for consumption via Maven/Gradle are committed to
 /lib/manual.

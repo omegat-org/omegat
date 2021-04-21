@@ -5,7 +5,7 @@
   3 Bug fixes
   3 Localisation updates
 ----------------------------------------------------------------------
-5.5.0 vs 5.4.3
+5.5.0 vs 5.4.4
 
   Bug fixes:
 
@@ -59,6 +59,20 @@
   - Finnish localisation updated to 5.5.0 (UI)
   - French localisation updated to 5.5.0 (UI, scripts, readme, documentation)
   - Ukrainian localisation updated to 5.5.0 (UI)
+
+----------------------------------------------------------------------
+ OmegaT 5.4.4 (2021-04-21)
+----------------------------------------------------------------------
+  1 Enhancement
+  0 Bug fixes
+  0 Localisation updates
+----------------------------------------------------------------------
+5.4.4 vs 5.4.3
+
+  Implemented requests:
+
+  - Migrate packages from Bintray to Maven Central
+  https://sourceforge.net/p/omegat/feature-requests/1551/
 
 ----------------------------------------------------------------------
  OmegaT 5.4.3 (2021-03-27)

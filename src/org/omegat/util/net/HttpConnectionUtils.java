@@ -74,22 +74,45 @@ public final class HttpConnectionUtils {
     private static final int TIMEOUT_MS = 10_000;
 
     /**
-     * Don't instanciate util class.
+     * Don't instantiate util class.
      */
     private HttpConnectionUtils() {}
 
     /**
-     * Download a file to memory
+     * Get resource from URL with default timeout.
+     * @param url resource URL.
+     * @return string returned from server.
+     * @throws IOException raises when connection is failed.
      */
     public static String getURL(URL url) throws IOException {
+        return getURL(url, TIMEOUT_MS);
+    }
+
+    /**
+     * Download a file to memory.
+     *
+     * @param url resource URL to download
+     * @param timeout timeout to connect and read.
+     * @return returned string
+     * @throws IOException when connection and read method error.
+     */
+    public static String getURL(URL url, int timeout) throws IOException {
         URLConnection urlConn = url.openConnection();
-        urlConn.setConnectTimeout(TIMEOUT_MS);
-        urlConn.setReadTimeout(TIMEOUT_MS);
+        urlConn.setConnectTimeout(timeout);
+        urlConn.setReadTimeout(timeout);
         try (InputStream in = urlConn.getInputStream()) {
             return IOUtils.toString(in, StandardCharsets.UTF_8);
         }
     }
 
+    /**
+     * Download Zip file from remote site and extract it to specified directory.
+     *
+     * @param url URL of zip file resource to download.
+     * @param dir target directory to extract
+     * @param expectedFiles filter extract file names
+     * @throws IOException raises when extraction is failed, maybe flaky download happened.
+     */
     public static void downloadZipFileAndExtract(URL url, File dir, List<String> expectedFiles) throws IOException {
         URLConnection conn = url.openConnection();
         conn.setConnectTimeout(TIMEOUT_MS);
@@ -106,10 +129,10 @@ public final class HttpConnectionUtils {
     }
 
     /**
-     * Downloads a binary file from a URL
+     * Downloads a binary file from a URL.
      * @param jarFileURL HTTP URL of the file to be downloaded
      * @param saveFilePath path of the file
-     * @throws IOException
+     * @throws IOException raise when connection failed.
      */
     public static boolean downloadBinaryFile(final URL jarFileURL, final Map<String, String> headers,
                                              final File saveFilePath)
@@ -149,7 +172,7 @@ public final class HttpConnectionUtils {
      * @param target
      *            String representation of well-formed URL.
      * @return byte array or null if status is not 200 OK
-     * @throws IOException
+     * @throws IOException raise when connection failed.
      */
     public static byte[] getURLasByteArray(String target) throws IOException {
         URL url = new URL(target);
@@ -166,6 +189,11 @@ public final class HttpConnectionUtils {
 
     /**
      * Method call without additional headers for possible calls from plugins.
+     *
+     * @param address URL to post
+     * @param params post parameters in Map
+     * @return result string returned from server.
+     * @throws IOException raises when connection failed.
      */
     public static String post(String address, Map<String, String> params) throws IOException {
         return post(address, params, null);

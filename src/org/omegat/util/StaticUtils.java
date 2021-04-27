@@ -445,12 +445,11 @@ public final class StaticUtils {
     /**
      * Download a file to memory.
      * @Deprecated
-     * This method is replaced to HttpConnectionUtils.getURL(url)
-     * No longer accept timeout.
+     * This method is replaced to HttpConnectionUtils.getURL(url, timeout)
      */
     @Deprecated
     public static String downloadFileToString(URL url, int timeout) throws IOException {
-        return HttpConnectionUtils.getURL(url);
+        return HttpConnectionUtils.getURL(url, timeout);
     }
 
     /**

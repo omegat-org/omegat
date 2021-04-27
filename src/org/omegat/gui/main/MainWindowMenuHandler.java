@@ -46,6 +46,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.text.JTextComponent;
 
+import org.omegat.Main;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
@@ -370,7 +371,21 @@ public final class MainWindowMenuHandler {
 
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
-         // Bug #902: commit the current entry first
+        prepareForExit(() -> System.exit(0));
+    }
+
+    /** Restart OmegaT */
+    public void projectRestartMenuItemActionPerformed() {
+        String projectDir = Core.getProject().isProjectLoaded()
+                ? Core.getProject().getProjectProperties().getProjectRoot()
+                : null;
+        prepareForExit(() -> {
+            Main.restartGUI(projectDir);
+        });
+    }
+
+    protected void prepareForExit(Runnable onCompletion) {
+        // Bug #902: commit the current entry first
         // We do it before checking project status, so that it can eventually change it
         if (Core.getProject().isProjectLoaded()) {
             Core.getEditor().commitAndLeave();
@@ -392,9 +407,9 @@ public final class MainWindowMenuHandler {
 
         SegmentExportImport.flushExportedSegments();
 
-        new SwingWorker<Object, Void>() {
+        new SwingWorker<Void, Void>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 if (Core.getProject().isProjectLoaded()) {
                     // Save the list of learned and ignore words
                     ISpellChecker sc = Core.getSpellChecker();
@@ -425,7 +440,7 @@ public final class MainWindowMenuHandler {
 
                     Preferences.save();
 
-                    System.exit(0);
+                    onCompletion.run();
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

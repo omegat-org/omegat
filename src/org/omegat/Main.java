@@ -34,9 +34,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -205,6 +208,30 @@ public final class Main {
         }
         if (result != 0) {
             System.exit(result);
+        }
+    }
+
+    public static void restartGUI(String projectDir) {
+        Log.log("===         Restart OmegaT           ===");
+        String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
+        // Build command: java -cp ... org.omegat.Main
+        List<String> command = new ArrayList<>();
+        command.add(javaBin);
+        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+        command.addAll(runtimeMxBean.getInputArguments()); // JVM args
+        command.add("-cp");
+        command.add(runtimeMxBean.getClassPath());
+        command.add(Main.class.getName());
+        command.addAll(CLIParameters.unparseArgs(PARAMS));
+        if (projectDir != null) {
+            command.add(projectDir);
+        }
+        ProcessBuilder builder = new ProcessBuilder(command);
+        try {
+            builder.start();
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

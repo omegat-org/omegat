@@ -291,11 +291,13 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
             }
         });
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
+        projectRestartMenuItem = createMenuItem("TF_MENU_FILE_RESTART");
 
         // all except MacOSX
         if (!Platform.isMacOSX()) {
             projectMenu.addSeparator();
             projectMenu.add(projectExitMenuItem);
+            projectMenu.add(projectRestartMenuItem);
         }
 
         editMenu.add(editUndoMenuItem = createMenuItem("TF_MENU_EDIT_UNDO"));
@@ -820,6 +822,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectMedCreateMenuItem;
     JMenuItem projectEditMenuItem;
     JMenuItem projectExitMenuItem;
+    JMenuItem projectRestartMenuItem;
     JMenuItem projectImportMenuItem;
     JMenu projectMenu;
     JMenuItem projectNewMenuItem;

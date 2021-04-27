@@ -34,9 +34,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -45,11 +48,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
-
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.vlsolutions.swing.docking.DockingDesktop;
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
 import org.omegat.convert.ConvertConfigs;
@@ -81,8 +84,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
 
-import com.vlsolutions.swing.docking.DockingDesktop;
-
 /**
  * The main OmegaT class, used to launch the program.
  *
@@ -107,6 +108,9 @@ public final class Main {
     /** Execution command line parameters. */
     protected static final Map<String, String> PARAMS = new TreeMap<>();
 
+    /** JVM parameters. */
+    protected static final List<String> JVMPARAMS = new ArrayList<>();
+
     /** Execution mode. */
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
@@ -121,6 +125,10 @@ public final class Main {
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
         }
+
+        // retrieve JVM parameters.
+        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+        JVMPARAMS.addAll(runtimeMxBean.getInputArguments());
 
         // Workaround for bug #812. Remove this when appropriate; see
         // https://sourceforge.net/p/omegat/bugs/812/
@@ -205,6 +213,35 @@ public final class Main {
         }
         if (result != 0) {
             System.exit(result);
+        }
+    }
+
+    public static void restartGUI(String projectDir) {
+        Log.log("===============================================================");
+        Log.log("===              Restart OmegaT                            ====");
+        Log.log("===============================================================");
+        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        try {
+            final File currentJar;
+            /* Build command: java -cp ... org.omegat.Main */
+            final ArrayList<String> command = new ArrayList<>();
+            command.add(javaBin);
+            command.addAll(JVMPARAMS);
+            command.add("-cp");
+            command.add(ManagementFactory.getRuntimeMXBean().getClassPath());
+            command.add(Main.class.getName());
+            PARAMS.forEach((k, v) -> {
+                if (!k.equals(CLIParameters.PROJECT_DIR)) {
+                    command.add(k + "=" + v);
+                }
+            });
+            command.add(projectDir);
+
+            final ProcessBuilder builder = new ProcessBuilder(command);
+            builder.start();
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

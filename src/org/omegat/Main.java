@@ -235,8 +235,9 @@ public final class Main {
                     command.add(k + "=" + v);
                 }
             });
-            command.add(projectDir);
-
+            if (projectDir != null) {
+                command.add(projectDir);
+            }
             final ProcessBuilder builder = new ProcessBuilder(command);
             builder.start();
             System.exit(0);

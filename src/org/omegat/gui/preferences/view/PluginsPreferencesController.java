@@ -37,6 +37,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.omegat.Main;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.core.plugins.PluginInstaller;
@@ -124,7 +125,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.restartOmegatButton.addActionListener(e -> {
             StaticUIUtils.restartShutdown(panel, true);
         });
-
+        panel.restartOmegatButton.setEnabled(Main.isRestartRequired());
         InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
         AvailablePluginInfoTableModel availableModel = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
         TableRowSorter<InstalledPluginInfoTableModel> sorter = new TableRowSorter<>(model);
@@ -141,7 +142,11 @@ public class PluginsPreferencesController extends BasePreferencesController {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
             int choosePluginFileResult = choosePluginFile.showOpenDialog(Core.getMainWindow().getApplicationFrame());
             if (choosePluginFileResult == JFileChooser.APPROVE_OPTION) {
-                PluginInstaller.install(pluginsManager, choosePluginFile.getSelectedFile());
+                Boolean result = PluginInstaller.install(pluginsManager, choosePluginFile.getSelectedFile());
+                if (result) {
+                    Main.setRestartRequired();
+                    panel.restartOmegatButton.setEnabled(true);
+                }
             }
         });
     }

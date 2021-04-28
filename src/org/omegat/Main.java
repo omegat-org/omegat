@@ -114,6 +114,8 @@ public final class Main {
     /** Execution mode. */
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
+    private static Boolean restartRequired = false;
+
     public static void main(String[] args) {
         if (args.length > 0 && (CLIParameters.HELP_SHORT.equals(args[0])
                 || CLIParameters.HELP.equals(args[0]))) {
@@ -214,6 +216,14 @@ public final class Main {
         if (result != 0) {
             System.exit(result);
         }
+    }
+
+    public static void setRestartRequired() {
+        restartRequired = true;
+    }
+
+    public static Boolean isRestartRequired() {
+        return restartRequired;
     }
 
     public static void restartGUI(String projectDir) {

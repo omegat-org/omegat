@@ -55,7 +55,7 @@ import org.omegat.util.StaticUtils;
  */
 public final class PluginInstaller {
 
-    public static void install(final PluginsManager pluginsManager, final File pluginFile) {
+    public static Boolean install(final PluginsManager pluginsManager, final File pluginFile) {
         try {
             // unpack or copy jar to temporary directory
             Path tmporaryDir = Files.createTempDirectory("omegat");
@@ -90,6 +90,7 @@ public final class PluginInstaller {
                     }
                     File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
                     FileUtils.copyFileToDirectory(pluginJarFile.toFile(), homePluginsDir, true);
+                    return true;
                 } catch (IOException ex) {
                     Log.log(ex);
                 }
@@ -97,6 +98,7 @@ public final class PluginInstaller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     /**

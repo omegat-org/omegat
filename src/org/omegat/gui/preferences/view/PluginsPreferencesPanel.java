@@ -60,9 +60,12 @@ public class PluginsPreferencesPanel extends JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAvailablePluginsInfo = new javax.swing.JTable();
         panelAvailablePluginDetails = new javax.swing.JPanel();
-        operationPanel = new javax.swing.JPanel();
-        messageLabel = new javax.swing.JLabel();
+        otherInfoPanel = new javax.swing.JPanel();
         browsePluginsButton = new javax.swing.JButton();
+        messageLabel = new javax.swing.JLabel();
+        operationPanel = new javax.swing.JPanel();
+        restartOmegatButton = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         installFromDiskButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -104,18 +107,30 @@ public class PluginsPreferencesPanel extends JPanel {
 
         pluginsInfoTab.addTab("Available plugins", availablePlugins);
 
-        add(pluginsInfoTab);
-        pluginsInfoTab.getAccessibleContext().setAccessibleName("plugins information");
-
-        operationPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
+        browsePluginsButton.setAlignmentY(0.0F);
+        otherInfoPanel.add(browsePluginsButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(messageLabel, OStrings.getString("PREFS_PLUGINS_AVAILABLE_ONLINE")); // NOI18N
         messageLabel.setAlignmentY(0.0F);
-        operationPanel.add(messageLabel);
+        otherInfoPanel.add(messageLabel);
 
-        org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
-        browsePluginsButton.setAlignmentY(0.0F);
-        operationPanel.add(browsePluginsButton);
+        pluginsInfoTab.addTab("Other plugin information", otherInfoPanel);
+
+        add(pluginsInfoTab);
+        pluginsInfoTab.getAccessibleContext().setAccessibleName("plugins information");
+
+        operationPanel.setLayout(new javax.swing.BoxLayout(operationPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(restartOmegatButton, "Restart OmegaT");
+        restartOmegatButton.setToolTipText("Restart OmegaT");
+        restartOmegatButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restartOmegatButtonActionPerformed(evt);
+            }
+        });
+        operationPanel.add(restartOmegatButton);
+        operationPanel.add(filler1);
 
         org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, "Install from Disk");
         operationPanel.add(installFromDiskButton);
@@ -123,19 +138,26 @@ public class PluginsPreferencesPanel extends JPanel {
         add(operationPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void restartOmegatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartOmegatButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_restartOmegatButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSplitPane availablePlugins;
     javax.swing.JButton browsePluginsButton;
+    private javax.swing.Box.Filler filler1;
     javax.swing.JButton installFromDiskButton;
     private javax.swing.JSplitPane installPlugins;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel messageLabel;
     private javax.swing.JPanel operationPanel;
+    private javax.swing.JPanel otherInfoPanel;
     javax.swing.JPanel panelAvailablePluginDetails;
     private javax.swing.JPanel panelAvalablePluginsInfo;
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
     private javax.swing.JTabbedPane pluginsInfoTab;
+    javax.swing.JButton restartOmegatButton;
     private javax.swing.JScrollPane scrollTable;
     javax.swing.JTable tableAvailablePluginsInfo;
     javax.swing.JTable tablePluginsInfo;

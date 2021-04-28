@@ -33,17 +33,27 @@ import java.util.Vector;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.omegat.Main;
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.KnownException;
 import org.omegat.core.data.PluginInformation;
+import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.plugins.PluginInstaller;
 import org.omegat.core.plugins.PluginsManager;
+import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.ChoosePluginFile;
+import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -120,6 +130,61 @@ public class PluginsPreferencesController extends BasePreferencesController {
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
         });
+        panel.restartOmegatButton.addActionListener(e -> {
+            if (Core.getProject().isProjectLoaded()) {
+                Core.getEditor().commitAndLeave();
+            }
+            boolean projectModified = false;
+            if (Core.getProject().isProjectLoaded()) {
+                projectModified = Core.getProject().isProjectModified();
+            }
+            // Add Yes/No Warning before OmegaT restart
+            if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
+                if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(panel,
+                        OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
+                        JOptionPane.YES_NO_OPTION)) {
+                    return;
+                }
+            }
+            SegmentExportImport.flushExportedSegments();
+
+            new SwingWorker<Object, Void>() {
+                @Override
+                protected String[] doInBackground() throws Exception {
+                    final String[] projectDir = {null};
+                    if (Core.getProject().isProjectLoaded()) {
+                        // Save the list of learned and ignore words
+                        ISpellChecker sc = Core.getSpellChecker();
+                        sc.saveWordLists();
+                        try {
+                            Core.executeExclusively(true, () -> {
+                                Core.getProject().saveProject(true);
+                                projectDir[0] = Core.getProject().getProjectProperties().getProjectRoot();
+                                ProjectFactory.closeProject();
+                            });
+                        } catch (KnownException ex) {
+                            // hide exception on shutdown
+                        }
+                    }
+                    CoreEvents.fireApplicationShutdown();
+                    PluginUtils.unloadPlugins();
+                    return projectDir;
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        String[] projectDir = (String[]) get();
+                        Preferences.save();
+                        Main.restartGUI(projectDir[0]);
+                    } catch (Exception ex) {
+                        Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                        Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    }
+                }
+            }.execute();
+        });
+
         InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
         AvailablePluginInfoTableModel availableModel = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
         TableRowSorter<InstalledPluginInfoTableModel> sorter = new TableRowSorter<>(model);

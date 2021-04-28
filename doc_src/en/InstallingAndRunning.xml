@@ -269,8 +269,9 @@
       <filename>OmegaT.jar</filename> to launch it directly. Methods differ
       depending on the distribution. Make sure that your <varname>PATH</varname>
       settings are correct and that <filename>.jar</filename> files are properly
-      associated with a Java launcher. Check "Command line launching" below for
-      more information.</para>
+      associated with a Java launcher. Check "<link
+      linkend='commandline.launching' endterm='commandline.launching.title'/>"
+      below for more information.</para>
     </section>
   </section>
 
@@ -342,8 +343,9 @@
 
       <para>Use the <filename>OmegaT.jar</filename> file located in
       <filename>OmegaT.app/Contents/MacOS/Java/</filename> to launch
-      <application>OmegaT</application> from the command line. Check "Command
-      line launching" below for more information.</para>
+      <application>OmegaT</application> from the command line. Check "<link
+      linkend='commandline.launching' endterm='commandline.launching.title'/>"
+      below for more information.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -436,8 +438,9 @@
       <filename>OmegaT.jar</filename> to launch it directly. Methods differ
       depending on the distribution. Make sure that your <varname>PATH</varname>
       settings are correct and that <filename>.jar</filename> files are properly
-      associated with a Java launcher. Check "Command line launching" below for
-      more information.</para>
+      associated with a Java launcher. Check "<link
+      linkend='commandline.launching' endterm='commandline.launching.title'/>"
+      below for more information.</para>
     </section>
   </section>
 
@@ -484,8 +487,9 @@
     arguments (see above), you must use the normal installation.</para>
   </section>
 
-  <section>
-    <title>Starting OmegaT from the command line</title>
+  <section id="commandline.launching">
+    <title id="commandline.launching.title">Starting OmegaT from the command
+    line</title>
 
     <para>Normally, it is not necessary to start
     <application>OmegaT</application> from the command line. However, the

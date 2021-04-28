@@ -119,17 +119,11 @@ An example of how to include OmegaT code to your project in a Maven project, wit
     <dependency>
         <groupId>org.omegat</groupId>
         <artifactId>omegat</artifactId>
-        <version>5.3.0</version>
+        <version>5.4.4</version>
         <scope>provided</scope>
     </dependency>
 The above example goes in your pom.xml file under `<dependencies>`. The `scope` is the magic here.
-NB: the OmegaT dependency is not on Maven Central, but on Bintray. You need to configure maven properly to use it, see 
-[instructions](https://www.jfrog.com/confluence/display/BT/Maven+Repositories#MavenRepositories-ResolvingArtifacts).
-A workaround is to download the `.jar` file and use
-    
-    <scope>system</scope>
-    <systemPath>${basedir}/lib/OmegaT520beta.jar</systemPath>
-And possibly repeat this for 3rd party libraries that OmegaT uses and that you need.
+But if you want to run OmegaT with your plugin under development, then you'd have to temporary remove `<scope>provided</scope>`.
 
 To produce a `.jar` file, you can use the `maven-jar-plugin` as seen below.
 If you used stubs or copied OmegaT `.java` files to your project, you can exclude them from the `.jar` file using the 

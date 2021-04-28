@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.instant.start.guide">
-  <title>Apprendre à utiliser OmegaT en cinq minutes !</title>
+  <title>Apprendre à utiliser OmegaT en cinq minutes !</title>
 
   <section id="create.and.open.new.project">
     <title>Préparation d'un nouveau projet<indexterm class="singular">
@@ -32,7 +32,8 @@
   <section>
     <title>Validation des balises</title>
 
-    <para>Si vos fichiers sources sont des fichiers formatés, par exemple au format Microsoft Word, LibreOffice Writer ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises essentielles sans rapport direct avec le formatage mais qui sont importantes dans les fichiers sources (ainsi que dans les fichiers traduits). Une phrase peut se présenter comme ceci :<mediaobject>
+    <para>Si vos fichiers sources sont des fichiers formatés, par exemple au format Microsoft Word, LibreOffice Writer ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises essentielles sans rapport direct avec le formatage mais qui sont importantes dans les fichiers sources (ainsi que dans les fichiers traduits). Une phrase peut se présenter comme ceci :
+<mediaobject>
       <imageobject role="html">
         <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
       </imageobject>
@@ -42,7 +43,8 @@
     </mediaobject>
     </para>
 
-    <para>OmegaT présenter cette phrase de la manière suivante :<mediaobject>
+    <para>Et OmegaT va la représenter de la manière suivante :
+<mediaobject>
       <imageobject role="html">
         <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
       </imageobject>
@@ -66,7 +68,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Si le chargement d'un fichier source échoue, c'est-à-dire s'il ne s'affiche pas dans le volet <guilabel>Édition</guilabel>, il s'agit vraisemblablement d'un fichier dont le format est incompatible avec OmegaT. Consultez <link linkend="chapter.file.filters">Fichiers et filtres</link> pour obtenir la liste des formats de fichier gérés par OmegaT.</para>
+        <para>Si le chargement d'un fichier source échoue, c'est-à-dire s'il ne s'affiche pas dans le volet <guilabel>Édition</guilabel>, il s'agit vraisemblablement d'un fichier dont le format est incompatible avec OmegaT. Consultez <menuchoice><guimenuitem>Options</guimenuitem><guimenuitem>Préférences...</guimenuitem><guimenuitem>Filtres de fichiers...</guimenuitem></menuchoice> pour obtenir la liste des formats de fichier gérés par OmegaT.</para>
       </listitem>
     </itemizedlist>
 

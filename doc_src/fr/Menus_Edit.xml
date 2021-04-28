@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>Edition</title>
+
+  <para>Ce menu n'est disponible que lorsqu'un projet est ouvert.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Annuler la dernière action</guimenuitem></term>
+
+      <listitem>
+        <para>Restaure le projet pour le rendre tel qu'il était avant la dernière action d'édition effectuée. Cette option ne marche que tant que le segment n'a pas été validé.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Rétablir la dernière action</term>
+
+      <listitem>
+        <para>Restaure le projet pour le rendre tel qu'il était avant que la dernière action d'édition effectuée n'ait été annulée. Cette option ne marche que tant que le segment n'a pas été validé.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Remplacer par la correspondance ou la sélection</term>
+
+      <listitem>
+        <para>Remplace le segment cible complet par la correspondance sélectionnée (par défaut, c'est la première correspondance qui est sélectionnée).</para>
+
+        <para>Si une partie du texte est sélectionnée dans la correspondance partielle, seule cette sélection remplacera l'ensemble du segment cible.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Insérer la correspondance ou la sélection</term>
+
+      <listitem>
+        <para>Insère la correspondance sélectionnée à l'endroit où se trouve le curseur. Si une partie du segment cible a été sélectionnée, cette fonction remplace la partie sélectionnée par la correspondance.</para>
+
+        <para>Si une partie du texte est sélectionnée dans la correspondance partielle, seule cette sélection sera insérée à la position du curseur.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Remplacer par une traduction automatique</term>
+
+      <listitem>
+        <para>Remplace le segment cible par une traduction automatique fournie par le service de traduction automatique que vous avez choisi. Ne produit aucun effet si aucun service de traduction automatique n'a été activé (dans <menuchoice><guimenu>Options</guimenu> <guimenuitem>Traduction automatique</guimenuitem></menuchoice>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Remplacer par la source</term>
+
+      <listitem>
+        <para>Remplace le segment cible complet par la source.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Insérer le texte source</term>
+
+      <listitem>
+        <para>Insère la source à l’endroit où se trouve le curseur.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Insérer les balises source manquantes</term>
+
+      <listitem>
+        <para>Insère les balises source (si elles étaient manquantes) à l'endroit où se trouve le curseur.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Insérer la prochaine balise manquante</term>
+
+      <listitem>
+        <para>N'insère qu'une balise (parmi les manquantes) à l'endroit où se trouve le curseur.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Exporter la sélection</term>
+
+      <listitem>
+        <para>Exporte la sélection en cours vers un fichier texte pour la traiter. Si aucun texte n'a été sélectionné, c'est le segment source en cours qui sera envoyé vers ce fichier. Lorsque vous quittez <application>OmegaT</application>, ce fichier n'est pas vidé, de façon à assurer une cohérence avec le comportement habituel du presse-papier. Le contenu exporté est copié dans le fichier <filename>selection.txt</filename> situé dans le dossier de fichiers des préférences utilisateur.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Créer une entrée de glossaire</term>
+
+      <listitem>
+        <para>Permet à l'utilisateur de créer une entrée dans le fichier glossaire par défaut.</para>
+
+        <para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>G</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Terme source</guilabel>.</para>
+
+        <para>Ceci s'applique également aux champs <guimenuitem>Terme cible</guimenuitem> et <guimenuitem>Commentaire</guimenuitem> si de nouvelles sélections sont faites et si vous appuyez de nouveau sur <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Rechercher dans le projet...</term>
+
+      <listitem>
+        <para>Ouvre une nouvelle fenêtre de <link linkend="windows.textsearch">Recherche textuelle</link>.</para>
+
+        <para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Recherche</guilabel>.</para>
+
+        <para>Un appui sur <keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>F</keycap> </keycombo> affiche la dernière fenêtre de recherche ouverte (au lieu d'en ouvrir une nouvelle).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Rechercher et rem&amp;placer...</term>
+
+      <listitem>
+        <para>Ouvre une nouvelle <link linkend="windows.textreplace">fenêtre de Recherche et remplacement</link>.</para>
+
+        <para>Si vous sélectionnez du texte (dans n'importe quel volet) avant d'appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, le texte sera collé par défaut dans le champ <guilabel>Recherche</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Rechercher dans les dictionnaires</term>
+
+      <listitem>
+        <para>Dans le cas où la <link linkend="dialogs.preferences.dictionary">recherche automatique dans les dictionnaires</link> est désactivée, cette fonction permet de rechercher un mot dans les dictionnaires, après l'avoir sélectionné.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Basculer la casse en</term>
+
+      <listitem>
+        <para>Change la casse du texte sélectionné dans le segment cible en fonction de l'option sélectionnée (Minuscule, Majuscule, 1ère lettre des mots en majuscule ou Phrase). Utilisez <keycombo> <keycap>Maj+</keycap><keycap>F3</keycap> </keycombo> pour passer d'une option à l'autre. Si aucun texte n'est sélectionné, <application>OmegaT</application> sélectionne le mot qui contient la lettre se trouvant immédiatement à la droite du curseur.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Choisir la correspondance</term>
+
+      <listitem>
+        <para>Sélectionne la correspondance précédente, suivante ou nième affichée dans la fenêtre des Correspondances pour vous permettre d'effectuer un remplacement ou une insertion dans le segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Utiliser comme traduction par défaut</term>
+
+      <listitem>
+        <para>S'il existe plusieurs traductions possibles pour le segment en cours, vous pouvez définir la traduction choisie comme étant la traduction par défaut. S'il n'y a qu'une traduction possible, l'entrée sera grisée.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Créer une traduction alternative</term>
+
+      <listitem>
+        <para>Deux segments parfaitement identiques peuvent, en fonction du contexte, avoir deux traductions différentes. Sélectionnez cet élément de menu si la traduction actuelle ne s'applique pas et saisissez la nouvelle traduction</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Supprimer la traduction</term>
+
+      <listitem>
+        <para>Supprime la traduction et définit le segment comme non traduit.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Enregistrer une traduction vide</term>
+
+      <listitem>
+        <para>Définit la traduction comme étant vide. Dans le document cible, rien n'apparaîtra pour ce segment. Dans l'Éditeur, la traduction est affichée sous la forme &lt;VIDE&gt;</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Enregistrer une traduction identique à la source</term>
+
+      <listitem>
+        <para>Utilisez cette commande pour enregistrer une traduction identique à la source, même si <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Autoriser une traduction identique à la source</guilabel></link> n'est pas cochée.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

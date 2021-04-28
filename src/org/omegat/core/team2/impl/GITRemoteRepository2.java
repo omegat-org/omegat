@@ -28,9 +28,7 @@ package org.omegat.core.team2.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -65,6 +63,7 @@ import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
+import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
@@ -91,6 +90,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     protected Repository repository;
 
+    ProjectTeamSettings projectTeamSettings;
+
     static {
         CredentialsProvider.setDefault(new GITCredentialsProvider());
     }
@@ -99,6 +100,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
         repositoryURL = repo.getUrl();
         localDirectory = dir;
+        projectTeamSettings = teamSettings;
 
         String predefinedUser = repo.getOtherAttributes().get(new QName("gitUsername"));
         String predefinedPass = repo.getOtherAttributes().get(new QName("gitPassword"));
@@ -240,6 +242,47 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public File getLocalDirectory() {
         return localDirectory;
+    }
+
+    @Override
+    public String[] getRecentlyDeletedFiles() throws Exception {
+        final ArrayList<String> deleted = new ArrayList<>();
+
+        ObjectId head = repository.getAllRefs().get("HEAD").getObjectId();
+
+        String settingKey = "lastDeleteCheckForName"+localDirectory.getName();
+        String sinceRevisionString = projectTeamSettings.get(settingKey);
+        ObjectId sinceRevision;
+        if (sinceRevisionString==null) {
+            sinceRevision = head;
+        } else {
+            sinceRevision = ObjectId.fromString(sinceRevisionString);
+        }
+
+        Git git = new Git(repository);
+        AbstractTreeIterator startTreeIterator = getTreeIterator(git, sinceRevision);
+        AbstractTreeIterator headTreeIterator = new FileTreeIterator( git.getRepository() );
+        List<DiffEntry> diffEntries = git.diff().setOldTree(startTreeIterator).setNewTree(headTreeIterator).call();
+        for (DiffEntry diffEntry : diffEntries) {
+           if (diffEntry.getChangeType().equals(DiffEntry.ChangeType.DELETE)) {
+                deleted.add(diffEntry.getOldPath().replace('/', File.separatorChar));
+            }
+        }
+
+        projectTeamSettings.set(settingKey, head.getName());
+
+        String[] result = new String[deleted.size()];
+        return deleted.toArray(result);
+    }
+
+    private AbstractTreeIterator getTreeIterator(Git git, ObjectId objectId) throws IOException {
+        try( RevWalk walk = new RevWalk( git.getRepository() ) ) {
+            RevCommit commit = walk.parseCommit( objectId );
+            ObjectId treeId = commit.getTree().getId();
+            try( ObjectReader reader = git.getRepository().newObjectReader() ) {
+                return new CanonicalTreeParser( null, reader, treeId );
+            }
+        }
     }
 
     @Override

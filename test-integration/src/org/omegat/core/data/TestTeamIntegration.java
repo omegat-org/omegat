@@ -264,7 +264,7 @@ public final class TestTeamIntegration {
 
         RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(),
                 config.getRepositories(), config);
-        remote.switchAllToLatestAndPropagateDeletes();
+        remote.switchAllToLatest();
 
         new File(origDir, "omegat").mkdirs();
         File f = new File(origDir, "omegat/project_save.tmx");

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="howto.translatepdf">
+  <title>Traduire un fichier PDF</title>
+
+<para>Les fichiers PDF sont un cas particulier. Ils contiennent des informations de mise en forme du texte qu'<application>OmegaT</application> ne peut pas réutiliser pour créer les fichiers cible. Les fichiers PDF sont donc traités comme des fichiers de texte brut et les fichiers de sortie sont aussi au format texte brut.</para>
+  <para>Pour reproduire la mise en forme du texte et d'autres éléments, par exemple des graphiques, dans votre traduction, suivez une des trois méthodes suivantes :</para>
+  <orderedlist>
+    <listitem>
+      <para>Utilisez le filtre par défaut d'<application>OmegaT</application> (Entrée PDF), traduisez, créez le fichier cible (qui sera au format de fichier texte brut), puis ajoutez manuellement la mise en forme et les éléments.</para>
+    </listitem>
+    <listitem>
+      <para>Utilisez le filtre Iceni Infix. Consultez le <ulink url="https://omegat.org/fr/howtos/iceni_infix">guide pratique relatif à la traduction de fichiers PDF avec Iceni Infix et OmegaT</ulink>.</para>
+    </listitem>
+    <listitem>
+      <para>Importez le fichier source dans <ulink url="https://fr.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>, enregistrez-le sous le format ODG, traduisez-le et puis exportez-le au format PDF si besoin.</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">Note :</emphasis> la méthode ci-dessus convient uniquement aux fichiers PDF qui contiennent une couche de texte. Si votre fichier PDF se compose de pages numérisées, vous devrez utiliser un programme de reconnaissance optique de caractères (ROC ou, en anglais, OCR) pour reconnaître et convertir le texte dans un format pris en charge par OmegaT.</para>
+
+
+
+  <section id="other.file.formats">
+    <title>Autres formats de fichier</title>
+
+    <para>Il est également possible de trouver d'autres fichiers texte brut ou fichiers texte formaté susceptibles d'être pris en charge par OmegaT.</para>
+
+    <para>Des outils externes peuvent être utilisés pour convertir les fichiers dans des formats pris en charge. Les fichiers traduits devront alors être reconvertis dans le format original. Par exemple, si vous possédez une ancienne version de Microsoft Word, qui ne prend pas en charge le format ODT, vous trouverez ici le moyen de permettre aux fichiers Word portant l'extension DOC de faire l'aller-retour :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Importez le fichier dans ODF writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Enregistrez le fichier dans un format ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Traduisez-le dans un fichier ODT cible</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ouvrez le fichier cible dans ODF Writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Enregistrez le fichier en tant que fichier DOC</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>La qualité du formatage du fichier traduit va dépendre de la qualité de la conversion aller-retour. Avant de procéder à une telle conversion, assurez-vous d'avoir testé toutes les options. Vérifiez <ulink url="http://www.omegat.org">la page d'accueil d'OmegaT</ulink> pour obtenir une liste à jour des outils de traduction auxiliaires.</para>
+</section>
+</section>

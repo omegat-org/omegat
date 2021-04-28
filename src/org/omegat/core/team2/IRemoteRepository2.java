@@ -84,6 +84,15 @@ public interface IRemoteRepository2 {
     File getLocalDirectory();
 
     /**
+     * Returns a list of files or directories (empty or not) that have been deleted since the last call to this function,
+     * relative to the repository root that has been checked out.
+     * If this function is called for the first time, it returns the empty list.
+     * @return
+     * @throws Exception
+     */
+    String[] getRecentlyDeletedFiles() throws Exception;
+
+    /**
      * Commit to repository after specified version, or after any version if 'null' specified.
      *
      * @param onVersions

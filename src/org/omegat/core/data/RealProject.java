@@ -340,7 +340,7 @@ public class RealProject implements IProject {
                 try {
                     tmxPrepared = null;
                     glossaryPrepared = null;
-                    remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
+                    remoteRepositoryProvider.switchAllToLatest();
                 } catch (IRemoteRepository2.NetworkException e) {
                     Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause());
                     setOfflineMode();
@@ -658,7 +658,7 @@ public class RealProject implements IProject {
             // commit translations
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
-                remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
+                remoteRepositoryProvider.switchAllToLatest();
                 remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
@@ -1894,7 +1894,7 @@ public class RealProject implements IProject {
         if (isRemoteProject() && config.getSourceDir().isUnderRoot())  {
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_START");
-                remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
+                remoteRepositoryProvider.switchAllToLatest();
                 remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getSourceDir().getUnderRoot(), null);
                 remoteRepositoryProvider.commitFiles(config.getSourceDir().getUnderRoot(), "Commit source files");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_DONE");

@@ -4,30 +4,28 @@
   <title>Personnalisation des raccourcis</title>
 
   <section id="ch04.shortcuts.customization">
-    <title><indexterm class="singular">
-        <primary>Personnalisation</primary> des <secondary>raccourcis</secondary>
-      </indexterm>Personnalisation des raccourcis</title>
+    <title>Personnalisation des raccourcis</title>
 
-    <para>Un nouveau raccourci peut être attribué à la plupart des éléments qui apparaissent dans le menu principal. Vous pouvez modifier les raccourcis déjà attribués et ajouter de nouveaux raccourcis en insérant un fichier de définition de raccourcis dans votre dossier Préférences OmegaT (voir <link linkend="user.files">Emplacement des fichiers utilisateur</link>).</para>
+    <para>Un nouveau raccourci peut être attribué à la plupart des éléments qui apparaissent dans le menu principal. Vous pouvez modifier les raccourcis déjà attribués et ajouter de nouveaux raccourcis en insérant un fichier de définition de raccourcis dans votre dossier Préférences <application>OmegaT</application> (accessible par le menu <menuchoice> <guimenuitem>Options</guimenuitem> <guimenuitem>Accéder au dossier de configuration</guimenuitem></menuchoice>).</para>
 
     <para>Le fichier de définition de raccourcis doit être appelé <filename>MainMenuShortcuts.properties</filename> et doit contenir au maximum une définition de raccourci par ligne. Les lignes vides sont acceptées et les lignes de commentaire doivent commencer par « // ». Tout ce qui se trouve après « // » sera ignoré.</para>
 
     <para>Une fois le fichier <filename>MainMenuShortcuts.properties</filename> modifié, <application>OmegaT</application> doit être redémarré afin de pouvoir prendre en compte les nouveaux raccourcis.</para>
 
-    <para>La syntaxe de la définition d'un raccourci est la suivante : <code>&lt;code de l'élément du menu&gt;=&lt;raccourci&gt;</code>, sachant que <emphasis>&lt;code de l'élément du menu&gt;</emphasis> est un code précis que vous pourrez trouver dans les tableaux ci-dessous et que <emphasis>&lt;raccourci&gt;</emphasis> est une combinaison de touches spécifiée par l'utilisateur<footnote>
-        <para>La syntaxe complète des touches (raccourcis) est définie dans la documentation Java 1.6 éditée par Oracle (bas de la page) : <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
+    <para>La syntaxe de la définition d'un raccourci est la suivante : <code>&lt;code de l'élément du menu&gt;=&lt;raccourci&gt;</code>, sachant que <emphasis>&lt;code de l'élément du menu&gt;</emphasis> est un code précis que vous pourrez trouver dans les tableaux ci-dessous et que <emphasis>&lt;raccourci&gt;</emphasis> est une combinaison de touches spécifiée par l'utilisateur<footnote>
+        <para>La syntaxe complète des touches (raccourcis) est définie dans la documentation Java 1.6 éditée par Oracle (bas de la page) : <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
       </footnote>.</para>
 
-    <para>&lt;raccourci&gt; doit être écrit sous la forme suivante : 0 ou plus <code>&lt;modificateur&gt;</code> suivit par 0 ou 1 <code>&lt;événement&gt;</code> suivit par 1 <code>&lt;touche&gt;</code>, sachant que :<itemizedlist>
+    <para>&lt;raccourci&gt; doit être écrit sous la forme suivante : 0 ou plus <code>&lt;modificateur&gt;</code> suivit par 0 ou 1 <code>&lt;événement&gt;</code> suivit par 1 <code>&lt;touche&gt;</code>, sachant que :<itemizedlist>
         <listitem>
-          <para><code>&lt;modificateur&gt;</code> peut être : <emphasis>shift</emphasis>(Maj), <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis>(méta)<footnote>
+          <para><code>&lt;modificateur&gt;</code> peut être : <emphasis>shift</emphasis>(Maj), <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis>(méta)<footnote>
               <para>Sur Mac, le modificateur <emphasis>meta</emphasis> doit être utilisé pour spécifier la touche <emphasis>commande</emphasis>.</para>
             </footnote>, <emphasis>alt</emphasis>,
           <emphasis>altGraph</emphasis></para>
         </listitem>
 
         <listitem>
-          <para><code>&lt;événement&gt;</code> peut être : <emphasis>typed</emphasis>(saisi), <emphasis>pressed</emphasis>(enfoncé), <emphasis>released</emphasis>(relâché)</para>
+          <para><code>&lt;événement&gt;</code> peut être : <emphasis>typed</emphasis> (saisi), <emphasis>pressed</emphasis> (enfoncé), <emphasis>released</emphasis> (relâché)</para>
         </listitem>
 
         <listitem>
@@ -38,10 +36,10 @@
       </itemizedlist></para>
 
     <para>Par exemple, pour les raccourcis par défaut d'OmegaT<footnote>
-        <para>Les raccourcis par défaut d'OmegaT sont disponibles sur Sourceforge à partir de : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Raccourcis clavier d'OmegaT par défaut</ulink></para>
+        <para>Les raccourcis par défaut d'OmegaT sont disponibles sur Sourceforge à partir de : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Raccourcis clavier d'OmegaT par défaut</ulink></para>
 
-        <para>Les raccourcis par défaut d'OmegaT sur Mac sont également disponibles sur Sourceforge, ils utilisent tous « meta » à la place de « ctrl » : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Raccourcis clavier d'OmegaT par défaut sur Mac</ulink></para>
-      </footnote>, on peut trouver :</para>
+        <para>Les raccourcis par défaut d'OmegaT sur macOS sont également disponibles sur Sourceforge, ils utilisent tous « meta » à la place de « ctrl » : <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Raccourcis clavier d'OmegaT par défaut sur macOS</ulink></para>
+      </footnote>, on peut trouver :</para>
 
     <itemizedlist>
       <listitem>
@@ -55,12 +53,12 @@
 
     <para>Le premier est un raccourci pour <guimenuitem>Ouvrir un projet</guimenuitem>, le second pour <guimenuitem>Créer une Entrée de Glossaire</guimenuitem>.</para>
 
-    <para>Si vous voulez utiliser <keycombo> <keycap>Maj</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> pour ouvrir un projet, modifiez votre <filename>MainMenuShortcuts.properties</filename> de la façon suivante :<code>
+    <para>Si vous voulez utiliser <keycombo> <keycap>Maj</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> pour ouvrir un projet, modifiez votre <filename>MainMenuShortcuts.properties</filename> de la façon suivante :<code>
     </code></para>
 
     <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
 
-    <para>Si vous travaillez sur Mac, pour ajouter un raccourci <keycombo> <keycap>Maj</keycap> <keycap>Commande</keycap> <keycap>S</keycap> </keycombo> correspondant à <menuchoice> <guimenu>Outils</guimenu> <guimenuitem>Statistiques</guimenuitem> </menuchoice>, ajoutez la ligne suivante à votre <filename>MainMenuShortcuts.properties</filename>:<code/></para>
+    <para>Si vous travaillez sur macOS, pour ajouter un raccourci <keycombo> <keycap>Maj</keycap> <keycap>Commande</keycap> <keycap>S</keycap> </keycombo> correspondant à <menuchoice> <guimenu>Outils</guimenu> <guimenuitem>Statistiques</guimenuitem> </menuchoice>, ajoutez la ligne suivante à votre <filename>MainMenuShortcuts.properties</filename>:<code/></para>
 
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>
@@ -529,7 +527,7 @@
           </row>
 
           <row>
-            <entry>Définir traduction vide</entry>
+            <entry>Enregistrer une traduction vide</entry>
 
             <entry/>
 
@@ -670,11 +668,7 @@
     <table>
       <title>Menu Affichage</title>
 
-      <indexterm class="singular">
-        <primary>Personnalisation des raccourcis</primary> <secondary>Menu Affichage</secondary>
-      </indexterm>
-
-      <tgroup cols="3" colsep="1">
+       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>
@@ -861,10 +855,10 @@
   </section>
 
   <section id="ch04.shortcuts.OptionsMenu">
-    <title> Menu Options</title>
+    <title>Menu Options</title>
 
     <table>
-      <title> Menu Options</title>
+      <title>Menu Options</title>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
@@ -981,7 +975,7 @@
           </row>
 
           <row>
-            <entry>Fichiers et filtres...</entry>
+            <entry>Filtres de fichiers...</entry>
 
             <entry/>
 

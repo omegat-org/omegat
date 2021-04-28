@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+"../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
   <title>Project folder</title>
 
@@ -67,9 +67,7 @@
     the translation from the ancillary TM is accepted and prefixed
     with<emphasis> [fuzzy]</emphasis>, so that the translator can review the
     translations at a later stage and check whether the segments tagged this
-    way, have been translated correctly<menuchoice>
-        <guimenu>.</guimenu>
-      </menuchoice></para>
+    way, have been translated correctly.</para>
 
     <para>It may happen, that translation memories, available in the
     <filename>tm</filename> subfolder, contain segments with identical source

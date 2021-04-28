@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>Affichage</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>.Marquer les segments traduits</term>
+
+      <listitem>
+        <para>S'il est coché, les segments déjà traduits seront surlignés en jaune.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marquer les segments non traduits</term>
+
+      <listitem>
+        <para>S'il est coché, les segments non traduits seront surlignés en violet.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marquer les délimitations de &amp;paragraphes</term>
+
+      <listitem>
+        <para>Si coché, les différents paragraphes du document source sont séparés visuellement.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Afficher les segments sources</term>
+
+      <listitem>
+        <para>S'il est coché, les segments source seront affichés et surlignés en vert. Par défaut, les segments source ne sont pas affichés.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marquer les segments non uniques</term>
+
+      <listitem>
+        <para>S'il est coché, les segments non uniques seront écrits en gris clair.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marquer les segments annotés</term>
+
+      <listitem>
+        <para>S'il est coché, les segments annotés seront surlignés en cyan. Ce marquage a la priorité sur <guimenuitem>Marquer les segments traduits</guimenuitem> et <guimenuitem>Marquer les segments non traduits</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marquer les espaces insécables</term>
+
+      <listitem>
+        <para>S'il est coché, les espaces insécables seront signalés par un fond gris.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marquer les caractères d'espacement</term>
+
+      <listitem>
+        <para>S'il est coché, les caractères d'espacement seront affichés avec un petit point.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marquer les caractères de contrôle de bidirectionnalité</term>
+
+      <listitem>
+        <para>Cette option affiche les <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">caractères de contrôle de bidirectionnalité</ulink></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marquer les segments traduits à partir du dossier auto</term>
+
+      <listitem>
+        <para>Si cochée, l'arrière-plan de tous les segments où le segment cible a été rempli automatiquement (à partir des TMX placées dans <filename>/tm/auto</filename>, par exemple) sont affichés en couleur. Les couleurs sont affichées si l'option <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Enregistrer l'état des traductions issues du dossier auto</guimenuitem></link> est cochée. Les traductions habituelles insérées depuis le dossier auto sont affichées en orange. D'autres traductions, identifiées spécifiquement dans la TMX, peuvent être affichées avec différentes couleurs. Pour les détails techniques, consultez la <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">demande d'amélioration</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Utilisation intensive des polices de repli</term>
+
+      <listitem>
+        <para>Cochez cette option si <application>OmegaT</application> n'affiche par certains glyphes correctement (même si les polices contenant les glyphes appropriés sont installées sur votre machine). Note : sous Windows, ce mécanisme manuel de polices de repli peut interférer avec la méthode de repli standard, provoquant ainsi une substitution de polices non souhaitée. Pour cette raison, il est désactivé par défaut.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Informations de modification</term>
+
+      <listitem>
+        <para>Choisir l'option <guimenuitem>Afficher pour le segment actuel</guimenuitem> permettra d'afficher la date et l'auteur de la dernière modification subie par le segment en cours. Choisir l'option <guimenuitem>Afficher pour tous les segments</guimenuitem> permettra d'afficher ces informations pour tous les segments simultanément. Choisir <guimenuitem>Ne rien afficher</guimenuitem> désactive cette option.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>Utiliser un projet en équipe</title>
+
+  <para>Les projets en équipe doivent d'abord être <link linkend="howto.setupteamproject">installés</link> sur un serveur.</para>
+
+  <para>Pour utiliser un projet en équipe pour la première fois, suivez les instructions données par le gestionnaire de projet.</para>
+
+  <para>Une fois le projet ouvert, la traduction se passe de la même manière que pour un projet simple à l'exception des points suivants.</para>
+
+  <para><emphasis role="bold">Sauvegarde automatique</emphasis></para>
+
+  <para>Le projet local est synchronisé par défaut toutes les 3 minutes avec le dépôt distant pour que le gestionnaire du projet et les autres traducteurs puissent voir et utiliser les traductions ajoutées pendant cette période.</para>
+
+  <para>L'intervalle de 3 minutes peut ietre modifié dans <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Options</guimenuitem><guimenuitem>Préférences </guimenuitem> <guimenuitem>Enregistrement et exécution</guimenuitem> </menuchoice></link>.</para>
+
+  <para><emphasis role="bold">Fichiers synchronisés</emphasis></para>
+
+  <para>Quand un projet est sauvegardé automatiquement, mais également quand il est ouvert, fermé et rechargé, seulement deux fichiers sont en fait synchronisés :</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Tous les autres fichiers seront remplacés par les fichiers dans le dépôt distant.</para>
+
+  <para><emphasis role="bold">Ajouter de nouveaux fichiers source</emphasis></para>
+
+  <para>Pour ajouter de nouveaux fichiers source :</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>copier les fichiers dans le dossier <filename>source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>utiliser <menuchoice> <guimenuitem>Projet</guimenuitem> <guimenuitem>Envoyer les fichiers source</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>Les fichiers source existants peuvent être modifiés mais l'ajout au dépôt doit être effectué avant une sauvegarde automatique ou avant que le projet soit rechargé ou fermé.</para>
+
+  <para><emphasis role="bold">Effacer des fichiers source</emphasis></para>
+
+  <para>Les fichiers doivent être effacés par le gestionnaire de projet.</para>
+
+  <para><emphasis role="bold">Modifier les rêgles de segmentation ou les filtres de fichiers</emphasis></para>
+
+  <para>Les paramètres du projet doivent être modifiés par le gestionnaire du projet.</para>
+
+  <para><emphasis role="bold">Travailler hors connexion</emphasis></para>
+
+  <para>Un projet en équipe peut être ouvert et sa traduction peut être effectuée hors connexion. Toutes les modifications seront synchronisées lorsque la connexion sera de nouveau disponible.</para>
+
+  <para>Travailler hors connexion :</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Déconnectez-vous du réseau avant l'ouverture du projet,</para>
+    </listitem>
+
+    <listitem>
+      <para>ou bien ouvrez le projet à la ligne de commande à l'aide de l'option <command>--no-teams</command>.</para>
+    </listitem>
+  </itemizedlist>
+</section>

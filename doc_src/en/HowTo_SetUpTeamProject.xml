@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
 <section id="howto.setupteamproject">
   <title>Set up a Team Project</title>
 
@@ -165,7 +166,7 @@
   </section>
 
   <section>
-    <title>Special case: minimal sharing</title>
+    <title>Special case: selective sharing</title>
 
     <para>The process above describes the usual case, where the project
     manager wants to have full control of the project and where the files (and
@@ -181,12 +182,13 @@
         or add mappings to synchronize files from other locations.
     </para>
 
-      <para>The mappings can be added by editing <filename>omegat.project</filename> or via the UI:
+      <para>The mappings can be added via the UI:
           <menuchoice>
               <guimenuitem>Project</guimenuitem>
               <guimenuitem>Properties</guimenuitem>
               <guimenuitem>Repository Mapping</guimenuitem>
           </menuchoice>
+	  or by editing <filename>omegat.project</filename>.
       </para>
   </section>
 

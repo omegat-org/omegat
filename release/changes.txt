@@ -1,16 +1,23 @@
 ----------------------------------------------------------------------
  OmegaT 5.5.0
 ----------------------------------------------------------------------
-  7 Enhancements
-  1 Bug fix
-  0 Localisation updates
+  11 Enhancements
+  3 Bug fixes
+  3 Localisation updates
 ----------------------------------------------------------------------
-5.5.0 vs 5.4.1
+5.5.0 vs 5.4.4
 
   Bug fixes:
 
   - External opening/browsing not supported on some Linux environments
   https://sourceforge.net/p/omegat/bugs/999/
+
+  - project_stats.txt overwritten with garbage when opening Statistics window
+  https://sourceforge.net/p/omegat/bugs/1035/
+
+  - SVN team project files disappear: File deletions are now correctly handled
+  for SVN repos.
+  https://sourceforge.net/p/omegat/bugs/1036/
 
   Implemented requests:
 
@@ -34,6 +41,73 @@
 
   - Add plain text translation option to Yandex.Cloud
   https://sourceforge.net/p/omegat/feature-requests/1550/
+
+  - INI Filter: extract continuation lines for multi-line values
+  https://sourceforge.net/p/omegat/feature-requests/1554/
+
+  - Add rudimentary support for dir attribute modification in HTML
+  https://sourceforge.net/p/omegat/feature-requests/1556/
+
+  - Recognize glossaries with TSV extension
+  https://sourceforge.net/p/omegat/feature-requests/1557/
+
+  - Support "mark unknown words" feature in Apertium MT
+  https://sourceforge.net/p/omegat/feature-requests/1563/
+
+  Localisation Updates:
+
+  - Finnish localisation updated to 5.5.0 (UI)
+  - French localisation updated to 5.5.0 (UI, scripts, readme, documentation)
+  - Ukrainian localisation updated to 5.5.0 (UI)
+
+----------------------------------------------------------------------
+ OmegaT 5.4.4 (2021-04-21)
+----------------------------------------------------------------------
+  1 Enhancement
+  0 Bug fixes
+  0 Localisation updates
+----------------------------------------------------------------------
+5.4.4 vs 5.4.3
+
+  Implemented requests:
+
+  - Migrate packages from Bintray to Maven Central
+  https://sourceforge.net/p/omegat/feature-requests/1551/
+
+----------------------------------------------------------------------
+ OmegaT 5.4.3 (2021-03-27)
+----------------------------------------------------------------------
+  0 Enhancements
+  1 Bug fix
+  0 Localisation updates
+----------------------------------------------------------------------
+5.4.3 vs 5.4.2
+
+  Bug fixes:
+
+  - Revert move to DeepL V2 API
+  https://sourceforge.net/p/omegat/bugs/1040/
+
+----------------------------------------------------------------------
+ OmegaT 5.4.2 (2021-03-25)
+----------------------------------------------------------------------
+  1 Enhancement
+  1 Bug fix
+  0 Localisation updates
+----------------------------------------------------------------------
+5.4.2 vs 5.4.1
+
+  Implemented requests:
+
+  - Support DeepL V2 API
+  https://sourceforge.net/p/omegat/feature-requests/1560/
+
+  Bug fixes:
+
+  - SVN team project files disappear
+  Fixed by reverting "Sync file deletions from repository to project" (#1499)
+  for SVN repos.
+  https://sourceforge.net/p/omegat/bugs/1036/
 
 ----------------------------------------------------------------------
  OmegaT 5.4.1 (2020-12-15)

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title>Aligner</title>
+
+  <para>Un alignement consiste à créer une mémoire de traduction bilingue à partir de documents monolingues qui ont déjà été traduits.</para>
+
+  <para>Pour accéder à cette fenêtre, sélectionnez <menuchoice> <guimenuitem>Outils</guimenuitem> <guimenuitem>Aligner des fichiers...</guimenuitem> </menuchoice>.</para>
+
+  <section>
+    <title>Étape 1 : ajuster les paramètres d'alignement</title>
+
+    <para>Si l'alignement semble pouvoir être amélioré, essayez de modifier les paramètres. Dans la plupart des cas, plus le <guilabel>Score moyen</guilabel> est bas, mieux l'alignement sera.</para>
+
+    <para>En mode de comparaison <guilabel>Globale</guilabel>, les textes sont évalués dans leur ensemble. En more de comparaison <guilabel>Par segments</guilabel>, ils sont évalués segment par segment. Cette option n'apparaît que quand sa sélection est possible.</para>
+
+    <para>Utilisez le mode de comparaison par <guilabel>ID</guilabel> pour aligner les textes de la forme Clé=Valeur. Ceci fonction même si les clés ne sont pas dans le même ordre dans les deux fichiers, et si même si les fichiers ne contiennent pas le même contenu d'information. Cette option n'apparait que si les deux fichiers sélectionnés sont reconnus comme étant de la forme Clé=Valeur.</para>
+
+    <para>Les algorithmes <guilabel>Viterbi</guilabel> et <guilabel>Avant-Arrière</guilabel> sont deux manières de calcul différentes. Choisissez celui qui fournit les meilleurs résultats.</para>
+
+    <para>CLiquez sur <guibutton>Continuer</guibutton> pour passer à l'étape suivante.</para>
+  </section>
+
+  <section>
+    <title>Étape 2 : apporter des corrections manuelles</title>
+
+    <para>Après le traitement automatique, l'alignement des deux fichiers va en général demander des corrections manuelles.</para>
+
+    <para>Les unités de traductions sont placées dans des cellules des deux dernières colonnes.</para>
+
+    <para>Pour aligner deux segments sur la même ligne :</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Sélectionnez le premier segment.</para>
+      </listitem>
+
+      <listitem>
+        <para>Pressez la barre d'espace (raccourci pour <menuchoice> <guimenuitem>Edit</guimenuitem> <guimenuitem>Démarrer l'alignement précis</guimenuitem> </menuchoice>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Cliquez sur la traduction dans l'autre colonne qui correspond au premier segment.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Après avoir répété cette opération un certain nombre de fois, sélectionnez <menuchoice> <guimenuitem>Modifier</guimenuitem> <guimenuitem>Réaligner les éléments en attente</guimenuitem> </menuchoice> pour mettre à jour l'alignement des autres segments.</para>
+
+    <para>Pour modifier la position d'un ou de plusieurs segments de manière individuelle, sélectionnez le(s) segment(s) et pressez <userinput>U</userinput> (<guilabel>Glisser vers le haut</guilabel>) ou <userinput>D</userinput> (<guilabel>Glisser vers le bas</guilabel>).</para>
+
+    <para>Seules les lignes avec la case <guilabel>Conserver</guilabel> cochée dans la première colonne seront incluses quand la mémoire de traduction sera créée.</para>
+
+    <para>Quand les deux colonnes sont suffisament alignées, cliquez sur <guibutton>Enregistrer la TMX...</guibutton> pour créer la mémoire de traduction résultante.</para>
+  </section>
+</section>

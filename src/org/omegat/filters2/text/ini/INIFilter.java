@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009-2010 Alex Buloichik
                2011 Alex Buloichik, Didier Briel
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -86,6 +87,27 @@ public class INIFilter extends AbstractFilter {
         return s.substring(i, s.length());
     }
 
+    private String buildId(String group, String key) {
+        StringBuilder sb = new StringBuilder();
+        if (group != null) {
+            sb.append(group).append('/');
+        }
+        sb.append(key.trim());
+        return sb.toString();
+    }
+
+    private String buildVirtualId(String group, String key, int counter) {
+        StringBuilder sb = new StringBuilder();
+        if (group != null) {
+            sb.append(group).append('/');
+        }
+        if (key != null) {
+            sb.append(key.trim());
+        }
+        sb.append("/#").append(counter);
+        return sb.toString();
+    }
+
     /**
      * Doing the processing of the file...
      */
@@ -94,8 +116,16 @@ public class INIFilter extends AbstractFilter {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         String group = null;
+        String key = null;
+        int line = 0;
+        int contlines = 0;
 
         while ((str = lbpr.readLine()) != null) {
+            line++;
+            String omegatId;
+            String value;
+            int equalsPos;
+            int afterEqualsPos;
             String trimmed = str.trim();
             boolean hasQuote = false;
 
@@ -104,40 +134,69 @@ public class INIFilter extends AbstractFilter {
                 // outfile.write(str+"\n");
                 outfile.write(str);
                 outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
+                contlines = 0;
+                key = null;
                 continue;
             }
 
+            // retrieve section as group name
             if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
-                // group name
                 group = trimmed.substring(trimmed.offsetByCodePoints(0, 1),
                         trimmed.offsetByCodePoints(trimmed.length(), -1));
+                outfile.write(str);
+                outfile.write(lbpr.getLinebreak());
+                contlines = 0;
+                key = null;
+                continue;
             }
 
             // key=value pairs
-            int equalsPos = str.indexOf('=');
+            equalsPos = str.indexOf('=');
 
-            // if there's no separator, assume it's a key w/o a value
+            // If there's no separator, assume it's a value without a key. If
+            // immediately following a key=value line, treat it as a sub-value.
+            //
+            // We extract each continuation line as a separate value only
+            // because the current implementation of the filter doesn't allow us
+            // to build a complete value.
+            //
+            // TODO: Parse values with continuation lines as a single, multiline
+            // value
             if (equalsPos == -1) {
-                equalsPos = str.offsetByCodePoints(str.length(), -1);
-            }
-
-            // advance if there're spaces after =
-            while (str.codePointCount(equalsPos, str.length()) > 1) {
-                int nextOffset = str.offsetByCodePoints(equalsPos, 1);
-                if (str.codePointAt(nextOffset) != ' ') {
-                    break;
+                if (key == null) {
+                    // In a malformed file there might not be a key, in which
+                    // case we use the line number.
+                    omegatId = buildId(group, "#L" + line);
+                } else {
+                    // For a continuation line, build a virtual key under the
+                    // existing current key
+                    omegatId = buildVirtualId(group, key, ++contlines);
                 }
-                equalsPos = nextOffset;
+                // advance if there are spaces before contents
+                afterEqualsPos = 0;
+                while (str.codePointCount(afterEqualsPos, str.length()) > 1) {
+                    if (str.codePointAt(afterEqualsPos) != ' ') {
+                        break;
+                    }
+                    afterEqualsPos = str.offsetByCodePoints(afterEqualsPos, 1);
+                }
+            } else {
+                // advance if there're spaces after =
+                while (str.codePointCount(equalsPos, str.length()) > 1) {
+                    int nextOffset = str.offsetByCodePoints(equalsPos, 1);
+                    if (str.codePointAt(nextOffset) != ' ') {
+                        break;
+                    }
+                    equalsPos = nextOffset;
+                }
+                key = str.substring(0, equalsPos);
+                omegatId = buildId(group, key);
+                afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
+                contlines = 0;
             }
-
-            int afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
-
-            // writing out everything before = (and = itself)
+            // writing out everything before = (and = itself), or spaces before text in continuous line.
             outfile.write(str.substring(0, afterEqualsPos));
-
-            String key = (group != null ? group + '/' : "") + str.substring(0, equalsPos).trim();
-            String value = str.substring(afterEqualsPos);
-
+            value = str.substring(afterEqualsPos);
             value = leftTrim(value);
             if (value.startsWith("\"") && value.endsWith("\"")) {
                 value = value.substring(value.offsetByCodePoints(0, 1),
@@ -146,11 +205,11 @@ public class INIFilter extends AbstractFilter {
             }
 
             if (entryAlignCallback != null) {
-                align.put(key, value);
+                align.put(omegatId, value);
             } else if (entryParseCallback != null) {
-                entryParseCallback.addEntry(key, value, null, false, null, null, this, null);
+                entryParseCallback.addEntry(omegatId, value, null, false, null, null, this, null);
             } else if (entryTranslateCallback != null) {
-                String trans = entryTranslateCallback.getTranslation(key, value, null);
+                String trans = entryTranslateCallback.getTranslation(omegatId, value, null);
                 if (trans == null) {
                     trans = value;
                 }

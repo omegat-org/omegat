@@ -262,8 +262,8 @@ public final class FileUtil {
      *
      * @param rootDir
      *            root directory
-     * @param filePath
-     *            file path
+     * @param file
+     *            file
      * @return
      */
     public static String computeRelativePath(File rootDir, File file) throws IOException {
@@ -438,7 +438,7 @@ public final class FileUtil {
         return included || !excluded;
     }
 
-    static Pattern[] compileFileMasks(List<String> masks) {
+    public static Pattern[] compileFileMasks(List<String> masks) {
         if (masks == null) {
             return FileUtil.NO_PATTERNS;
         }

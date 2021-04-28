@@ -119,6 +119,11 @@ public class FileRepository implements IRemoteRepository2 {
     }
 
     @Override
+    public String[] getRecentlyDeletedFiles() throws Exception {
+        return new String[0];
+    }
+
+    @Override
     public String commit(String[] onVersions, String comment) throws Exception {
         Log.logDebug(LOGGER, "Commit not supported for File repositories.");
 

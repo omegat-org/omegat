@@ -28,6 +28,7 @@ package org.omegat.core.team2;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -190,48 +191,32 @@ public class RemoteRepositoryProvider {
      * Switch all repositories into latest version. Will continue in the event of an error, unless that error is a
      * {@link NetworkException} in which case it will throw immediately. If any other exceptions occur while updating
      * the repos, the first will be thrown after all repos have been processed.
-     * Since this is the only moment and place where file deletions can be detected and we know the mapping of those files,
-     * the deletion is included in the operation.
      */
-    public void switchAllToLatestAndPropagateDeletes() throws Exception {
+    public void switchAllToLatest() throws Exception {
         List<Exception> errors = new ArrayList<>();
 
-        createFileListSnapshotIfNotExists("");
-        try {
-            for (IRemoteRepository2 r : repositories) {
-                try {
-                    r.switchToVersion(null);
-                } catch (NetworkException e) {
-                    throw e;
-                } catch (Exception e) {
-                    errors.add(e);
-                    Log.logErrorRB("TEAM_UPDATE_REPO_ERROR", e.getMessage());
-                }
+        for (IRemoteRepository2 r : repositories) {
+            try {
+                r.switchToVersion(null);
+            } catch (NetworkException e) {
+                throw e;
+            } catch (Exception e) {
+                errors.add(e);
+                Log.logErrorRB("TEAM_UPDATE_REPO_ERROR", e.getMessage());
             }
+        }
 
-            if (!errors.isEmpty()) {
-                throw errors.get(0);
-            }
-        } finally {
-            propagateDeletes();
+        if (!errors.isEmpty()) {
+           throw errors.get(0);
         }
     }
 
     /**
      * Switch repository that contains path to specified version. If version is null, need to switch to latest
      * version. Returns the path in the remote repository ( /path/to/omegatproject/.repositories/url/filepath
-     * Since this is the only moment and place where file deletions can be detected and we know the mapping of those files,
-     *  the deletion is included in the operation.
      */
-    public File switchToVersionAndPropagateDeletes(String filePath, String version) throws Exception {
-        createFileListSnapshotIfNotExists(filePath);
-        File remote;
-        try {
-            remote = oneMapping(filePath).switchToVersion(version);
-        } finally {
-            propagateDeletes();
-        }
-        return remote;
+    public File switchToVersion(String filePath, String version) throws Exception {
+        return oneMapping(filePath).switchToVersion(version);
     }
 
     /**
@@ -257,7 +242,9 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * Copy all mappings that under specified directory path into project directory.
+     * Copies all files under specified path that are mapped to local directory.
+     * If path is empty (i.e. full project), also file deletions since last copy are propagated, i.e. if remote repo has
+     * file deletions, those files are deleted locally as well.
      *
      * @param localPath
      *            directory name or file name
@@ -266,6 +253,9 @@ public class RemoteRepositoryProvider {
         String[] myForceExcludes = "".equals(localPath) ? forceExcludes : new String[]{};
         for (Mapping m : getMappings(localPath, myForceExcludes)) {
             m.copyFromRepoToProject();
+            if ("".equals(localPath)) {
+                m.propagateDeletes();
+            }
         }
     }
 
@@ -335,35 +325,27 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * For propagating deletes: step 1. Run before updating repositories.
-     * @throws IOException when repository dir not found
+     * Heper function for file deletions. Gives the absolute local path to a file that is to be deleted, based on a
+     * relative file, the project root and the mapping.
+     * @param relativeFile a file relative to repository root, as returned by the IRemoterepository.getRecentlyDeletedFiles
+     * @param projectRoot local project root
+     * @param repoPath mapped path in repo
+     * @param localPath mapped path in local project
+     * @return the file to be deleted locally
      */
-    private void createFileListSnapshotIfNotExists(String path) throws IOException {
-        if (mappingsWithFileListSnapshot != null) {
-            throw new RuntimeException("Cannot store file list snapshot, because there is already a snapshot. This is a bug.");
-            //we're not sure that the same path is used for this mapping, so we cannot rely on an older snapshot.
-        }
-        List<Mapping> mappings = getMappings(path, this.forceExcludes);
-        for (Mapping m : mappings) {
-            m.makeFileListSnapshot();
-        }
-        mappingsWithFileListSnapshot = mappings;
+    static File relativeRemoteToAbsoluteLocal(String relativeFile, File projectRoot, String repoPath, String localPath) {
+        repoPath = withSlashes(repoPath);
+        localPath = withSlashes(localPath);
+
+        Path p = new File(repoPath).toPath();
+        Path rp = new File(withLeadingSlash(relativeFile)).toPath();
+
+        Path newRelativeFile = p.relativize(rp);
+
+        File root = new File(projectRoot, withoutLeadingSlash(localPath));
+        return new File(root, withoutLeadingSlash(newRelativeFile.toString()));
     }
 
-    /**
-     * For propagating deletes: step 2. Run after updating repository. Compares snapshot of repo with current state,
-     * and deletes files in project that have disappeared since last snapshot.
-     * @throws IOException when repository dir not found
-     */
-    private void propagateDeletes() throws IOException {
-        if (mappingsWithFileListSnapshot == null) {
-            throw new RuntimeException("Cannot propagate deletes because file list is not stored. This is a bug.");
-        }
-        for (Mapping m : mappingsWithFileListSnapshot) {
-            m.deleteDeletedFilesSinceLastSnapshot();
-        }
-        mappingsWithFileListSnapshot = null;
-    }
 
     /**
      * Class for mapping by specified local path.
@@ -374,8 +356,6 @@ public class RemoteRepositoryProvider {
         final RepositoryDefinition repoDefinition;
         final RepositoryMapping repoMapping;
         final List<String> forceExcludes;
-
-        List<String> fileListSnapshot;
 
         Mapping(String path, IRemoteRepository2 repo, RepositoryDefinition repoDefinition,
                 RepositoryMapping repoMapping, String... forceExcludes) {
@@ -523,57 +503,37 @@ public class RemoteRepositoryProvider {
         }
 
         /**
-         * For propagating deletions from repo to project. Step 1: track state before doing updates on the repo
-         * @throws IOException when mapped directory cannot be found.
+         * Delete files locally that have been deleted in the remote repository since the last call to this function.
+         * Local checkout must be a full checkout. Don't call this method when doing checkouts of individual files.
          */
-        protected void makeFileListSnapshot() throws IOException {
-            fileListSnapshot = getMappedFiles();
-        }
+        public void propagateDeletes() {
+            try {
+                String[] toDeleteFiles = repo.getRecentlyDeletedFiles();
 
-        /**
-         * Helper function for tracking file deletions.
-         * @return All files in a directory mapping that are not excluded. For file mapping, empty list is returned.
-         * @throws IOException when mapped directory cannot be found.
-         */
-        private List<String> getMappedFiles() throws IOException {
-            if (!matches()) {
-                throw new RuntimeException("Path doesn't match with mapping");
-            }
-            // Remove leading slashes on child args to avoid doing `new
-            // File("foo", "/")` which treats the "/" as an actual child element
-            // name and prevents proper slash normalization later on.
-            File from = new File(getRepositoryDir(repoDefinition), withoutLeadingSlash(repoMapping.getRepository()));
-            if (from.isDirectory()) {
-                // directory mapping
-                List<String> excludes = new ArrayList<>(repoMapping.getExcludes());
-                excludes.addAll(forceExcludes);
-                return FileUtil.buildRelativeFilesList(from, repoMapping.getIncludes(), excludes);
-            } else {
-                // file mapping, no need to track deletions, so return empty.
-                //(also: file mapping can have different filename locally than on remote)
-                return new ArrayList<>();
-            }
-        }
-
-        /**
-         * For propagating deletions from repo to project. Step 2: after doing repo update, compare current state
-         * with stored state from before update, and delete the files from the project that are now missing in the repo.
-         * @throws IOException when mapped directory cannot be found.
-         */
-        public void deleteDeletedFilesSinceLastSnapshot() throws IOException {
-            List<String> newFileListSnapshot = getMappedFiles();
-            List<String> toDeleteFiles = fileListSnapshot;
-            toDeleteFiles.removeAll(newFileListSnapshot);
-
-            File mappingRoot = new File(projectRoot, withoutLeadingSlash(repoMapping.getLocal()));
-            for (String relativeFile:toDeleteFiles) {
-                File deleteFile = new File(mappingRoot, relativeFile);
-                if (!deleteFile.delete()) {
-                    Log.logInfoRB("LOG_ERROR_DELETE_FILE", deleteFile.toString());
+                for (String relativeFile : toDeleteFiles) {
+                    if (FileUtil.checkFileInclude(relativeFile, FileUtil.compileFileMasks(repoMapping.getIncludes()), FileUtil.compileFileMasks(repoMapping.getExcludes()))) {
+                        File fileToDelete = RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal(relativeFile, projectRoot, repoMapping.getRepository(), repoMapping.getLocal());
+                        deleteFile(fileToDelete);
+                    }
                 }
+            } catch (Exception e) {
+                Log.log(e);
             }
+        }
 
-            fileListSnapshot = null;
+        private void deleteFile(File f) {
+            if (!f.exists()) {
+                return;
+            }
+            try {
+                if (f.isFile()) {
+                    f.delete();
+                } else {
+                    FileUtils.deleteDirectory(f);
+                }
+            } catch (Exception e) {
+                Log.logInfoRB("LOG_ERROR_DELETE_FILE", f.toString());
+            }
         }
     }
 }

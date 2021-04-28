@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.glossaries">
   <title>Glossaries</title>
 
-  <para>Glossaries are files created and updated manually for use in
-  <application>OmegaT</application>.</para>
+  <para>Glossaries are terminology files. They can be created and updated
+  manually or imported from other projects.</para>
 
-  <para>If an <application>OmegaT</application> project contains one or more
-  glossaries, any terms in the glossary which are also found in the current
-  segment will be automatically displayed in the Glossary viewer.</para>
+  <para>A given project can have any number of reference glossaries, but only
+  one glossary, the project default glossary, will be directly writable from
+  the OmegaT user interface.</para>
 
-  <para>You define its location and name in the project properties dialog. The
-  extension must be <filename>.txt</filename> or <filename>.utf8</filename>
-  (if not, it will be added). The location of the file must be within the
-  <filename>/glossary</filename> folder, but it can be in a deeper folder
-  (e.g., <filename>glossary/sub/glossary.txt</filename>). The file does not
-  need to exist when setting it, it will be created (if necessary) when adding
-  a glossary entry. If the file already exists, no attempt is done to verify
-  the format or the character set of the file: the new entries will always be
-  in tab-separated format and UTF-8. As the existing content will not be
-  touched, damage to an existing file would be limited.</para>
+  <para>Regardless of the number of glossaries in a project, any term in a
+  segment that has a match in a glossary will be displayed in the Glossary
+  pane.</para>
+
+  <section>
+    <title>Default glossary</title>
+
+    <para>The default writable glossary is located in the the
+    <filename>/glossary</filename> project folder and is called
+    <filename>glossary.txt</filename>.</para>
+
+    <para>Its name and location can be modified in the project properties
+    dialog but its extension must be <filename>.txt</filename> or
+    <filename>.utf8</filename> and its location must be contained in the
+    <filename>/glossary</filename> project folder.</para>
+
+    <para>The file does not need to exist when setting it, it will be created
+    when adding the first glossary entry. If the file already exists, no
+    attempt is done to verify the format or the character set of the file: the
+    new entries will always be in tab-separated format and the file will be
+    saved in UTF-8 encoding.</para>
+  </section>
 
   <section>
     <title>Usage</title>
@@ -27,149 +40,134 @@
     <para>To use an existing glossary, simply place it in the
     <filename>/glossary</filename> folder after creating the project.
     <application>OmegaT</application> automatically detects glossary files in
-    this folder when a project is opened. Terms in the current segment which
-    <application>OmegaT</application> finds in the glossary file(s) are
-    displayed in the Glossary pane:</para>
+    this folder when a project is opened.</para>
 
-    <figure>
-      <title>Glossary pane</title>
+    <para>To add a new term to the writable glossary use
+    <guimenuitem>Edit</guimenuitem> &gt; <guimenuitem>Create Glossary
+    Entry</guimenuitem> (<keycap>Ctrl+Shift+G</keycap>). Newly added terms
+    will be immediately recognized. To add new terms to reference glossaries,
+    edit them in an external text editor. Newly added terms will be recognized
+    as soon as the changes have been saved.</para>
 
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/GlossaryPane_25.png"/>
-        </imageobject>
+    <para>The source term can be a multi-word term.</para>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
+    <para>The glossary function uses stemming to find matches. Deactivate
+    <guimenuitem>Use stemming for glossary entries</guimenuitem> in the OmegaT
+    global preferences to only find exact matches for a term.</para>
 
-    <para>The word before the = sign is the source term, and its translation
-    is (or are) the words after =. The vocabulary entry can have a comment
-    added. The glossary function only finds exact matches with the glossary
-    entry (e.g. does not find inflected forms etc.). New terms can be added
-    manually to the glossary file(s) during translation, for example in a text
-    editor. Newly added terms will not be recognized once the changes in the
-    text file have been saved.</para>
+    <para>The source term is displayed before the " = " sign and the target
+    terms after. Comments are displayed after a number and each on a separate
+    line. Terms from the project writable glossary are displayed in bold face.
+    Terms from the reference glossaries are displayed in normal face.</para>
 
-    <para>The source term does not have to be a single-word item, as the next
-    example shows:</para>
+    <para>To display the <guimenuitem>Autocompletion</guimenuitem> contextual
+    menu for the glossary matches, hit the OS dependant key
+    (<keycap>Escape</keycap> for macOS, <keycap>Ctrl+Space</keycap> for the
+    other platforms).</para>
 
-    <figure>
-      <title>multiple words entries in glossaries - example</title>
-
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
-        </imageobject>
-
-        <imageobject role="fo">
-          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <para>The underlined item &quot;pop-up menu&quot; can be found in the glossary pane
-    as &quot;pojavni menu&quot;. Highlighting it in the Glossary pane and then
-    rightclicking insets at the cursor position in the target
-    segment.<footnote>
-        <para>Note that in the above case, this is just half (or even less) of
-        the story, as the target language (Slovenian) uses declension. So the
-        inserted &quot;pojavni meni&quot; in the nominative form - has to be changed to
-        &quot;pojavnem meniju&quot; , i.e. to the locative. So it is probably faster to
-        type the term correctly right away without bothering with the glossary
-        and its shortcuts.</para>
-      </footnote></para>
+    <para>To underline matching terms in the source part of the segment use
+    <guimenuitem>View</guimenuitem> &gt; <guimenuitem>Mark Glossary
+    Matches</guimenuitem>. Right-click on the underlined term and select a
+    target term to insert it at the cursor location in the target part of the
+    segment.</para>
   </section>
 
   <section>
     <title>File format</title>
 
-    <para>Glossary files are simple plain text files containing three-column,
-    tab-delimited lists with the source and target terms in the first and
-    second columns respectively. The third column can be used for additional
-    information. You can have entries with the target column missing, i.e.
-    just containing the source term and the comment.</para>
+    <para>OmegaT glossary files are simple plain text three-column lists with
+    the source term in the first column, an optional target term in the second
+    column and an optional comment in the third column.</para>
 
-    <para>The encoding of glossaries is determined automatically. Of course,
-    the encoding must be compatible with both the languages contained, so
-    Unicode is recommended.</para>
+    <para>Plain text glossaries can be "tab separated values" (TSV) files or
+    "comma separated values" (CSV) files. A third possible format is the "TBX"
+    (TermBase eXchange) ISO standard.</para>
 
-    <para>Also supported is the CSV format. This format is the same as the tab
-    separated one: source term, target term. Comment fields are separated by a
-    comma ','. Strings can be enclosed by quotes &quot;, which allows having a
-    comma inside a string:</para>
+    <para>The project default writable glossary is always a TSV file saved in
+    UTF-8 encoding.</para>
 
-    <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;c'est un
-    terme, qui contient une virgule&quot;</literal></para>
+    <para>Glossaries are read in an encoding that depends on the file
+    extension:</para>
 
-    <para>In addition to the plain text format, TBX format is also supported as a read-only glossary format. The
-    location of the <filename>.tbx</filename> file must be within the
-    <filename>/glossary</filename> folder, but it can be in a deeper folder
-    (e.g., <filename>glossary/sub/MyGlossary.tbx</filename>).</para>
+    <table xml:id="glossary.extensions">
+      <caption>Format, extensions and expected encoding</caption>
 
-    <para>TBX - Term Base eXchange - is the open, XML-based standard for
-    exchanging structured terminological data, TBX has been approved as an
-    international standard by LISA and ISO. If you have an existing
-    terminology handling system it is quite possible it offers the export of
-    terminology data via TBX format. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft
-    Terminology Collection</ulink> can be downloaded in nearly 100 languages and can serve as
-    a cornerstone IT glossary.</para>
+      <thead>
+        <tr>
+          <td>Format</td>
 
-    <para>Note: the <filename>.tbx</filename> output of MultiTerm seems to not
-    be reliable (November 2013), it is better to use the
-    <filename>.tab</filename> output of MultiTerm instead.</para>
-  </section>
+          <td>Extension</td>
 
-  <section>
-    <title>How to create glossaries</title>
+          <td>Encoding</td>
+        </tr>
+      </thead>
 
-    <para>The project setting allows one to enter a name for a writable
-    glossary file (see beginning of this chapter). Right-click in the glossary
-    pane or press <keycap>Ctrl+Shift+G</keycap> to add a new entry. A dialog
-    opens, allowing you to enter the source term, target term and any comments
-    you may have:</para>
+      <tbody>
+        <tr>
+          <td>TSV</td>
 
-    <mediaobject role="html">
-      <imageobject>
-        <imagedata fileref="images/GlossaryEntry_25.png"/>
-      </imageobject>
+          <td>
+            <filename>.txt</filename>
+          </td>
 
-      <imageobject role="fo">
-        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
-      </imageobject>
-    </mediaobject>
+          <td>UTF-8</td>
+        </tr>
 
-    <para>The contents of glossary files are kept in memory and are loaded
-    when the project is opened or reloaded. Updating a glossary file is thus
-    rather simple: press <keycap>Ctrl+Shift+G</keycap> and enter the new term,
-    its translation and any comments you may have (ensuring you press tab
-    between the fields) and save the file. The contents of the glossary pane
-    will be updated accordingly.</para>
+        <tr>
+          <td>TSV</td>
 
-    <para>The location of the writable glossary file can be set in the
-    <guimenuitem>Project &gt; Properties ... </guimenuitem>dialog. The
-    recognized extensions are <filename>TXT</filename> and
-    <filename>UTF8</filename></para>
+          <td>
+            <filename>.utf8</filename>
+          </td>
 
-    <para><emphasis role="bold">Note: </emphasis>Of course there are other
-    ways and means to create a simple file with tab delimited entries. Nothing
-    speaks against using Notepad++ on Windows, GEdit on Linux for instance or
-    some spreadsheet program for this purpose: any application, that can
-    handle UTF-8 (or UTF-16 LE) and that can show white space (so that you do
-    not miss the required <keycap>TAB</keycap> characters) can be used.</para>
-  </section>
+          <td>UTF-8</td>
+        </tr>
 
-  <section>
-    <title>Priority glossary</title>
+        <tr>
+          <td>TSV</td>
 
-    <para>The results from the priority glossary (by default,
-    glossary/glossary.txt) appear in first places in the Glossary pane and in
-    TransTips.</para>
+          <td>
+            <filename>.tab</filename>
+          </td>
 
-    <para>As entries can mix words from priority and non priority glossaries,
-    the words from the priority glossary are displayed in bold.</para>
+          <td>OS default encoding</td>
+        </tr>
+
+        <tr>
+          <td>TSV</td>
+
+          <td>
+            <filename>.tsv</filename>
+          </td>
+
+          <td>OS default encoding</td>
+        </tr>
+
+        <tr>
+          <td>CSV</td>
+
+          <td>
+            <filename>.csv</filename>
+          </td>
+
+          <td>UTF-8</td>
+        </tr>
+
+        <tr>
+          <td>TBX</td>
+
+          <td>
+            <filename>.tbx</filename>
+          </td>
+
+          <td>UTF-8</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <para>Glossaries must be located in the <filename>/glossary</filename>
+    project folder. Glossaries located in nested folders are also
+    recognized.</para>
   </section>
 
   <section>
@@ -180,7 +178,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>No glossary file found in the &quot;glossary&quot; folder.</para>
+        <para>No glossary file found in the "glossary" folder.</para>
       </listitem>
     </itemizedlist>
 

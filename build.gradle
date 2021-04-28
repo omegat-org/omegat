@@ -3,15 +3,16 @@ import org.apache.tools.ant.filters.FixCrLfFilter
 
 plugins {
     id 'application'
+    id 'java-library'
     id 'maven-publish'
+    id 'signing'
     id 'eclipse'
     id 'checkstyle'
-    id 'com.github.spotbugs' version '4.5.0'
+    id 'com.github.spotbugs' version '4.7.0'
     id 'de.gliderpilot.jnlp' version '1.2.6'
-    id 'com.jfrog.bintray' version '1.8.5'
     id 'org.hidetake.ssh' version '2.10.1'
-    id 'com.diffplug.spotless' version '5.5.1'
-    id 'com.github.ben-manes.versions' version '0.33.0'
+    id 'com.diffplug.spotless' version '5.11.0'
+    id 'com.github.ben-manes.versions' version '0.38.0'
 }
 
 apply from: 'gradle/utils.gradle'
@@ -66,10 +67,7 @@ sourceSets {
 }
 
 repositories {
-    jcenter()
-    maven {
-        url 'https://dl.bintray.com/omegat-org/maven'
-    }
+    mavenCentral()
 }
 
 task webstartDocsJar(type: Jar) {
@@ -106,30 +104,31 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.7'
         implementation 'commons-lang:commons-lang:2.6'
+        api 'org.slf4j:slf4j-api:1.7.25'
         implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 
         // macOS integration
-        implementation 'org.madlonkay:desktopsupport:0.3.0'
+        implementation 'org.madlonkay:desktopsupport:0.4.0'
 
-        implementation 'javax.xml.bind:jaxb-api:2.3.1'
+        api 'javax.xml.bind:jaxb-api:2.3.1'
         implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
         implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
 
         // PDF Filter
-        implementation 'org.apache.pdfbox:pdfbox:2.0.21'
+        implementation 'org.apache.pdfbox:pdfbox:2.0.23'
 
         // Aligner
         implementation 'net.loomchild:maligna:3.0.0'
 
         // Dictionary
-        implementation 'org.dict.zip:dictzip-lib:0.9.1'
+        implementation 'io.github.dictzip:dictzip:0.9.5'
         implementation 'com.github.takawitter:trie4j:0.9.8'
 
         // Encoding dectection
-        implementation 'com.github.albfernandez:juniversalchardet:2.3.2'
+        implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
 
-        // Legacy projects re-hosted on GitHub + Bintray
-        implementation 'org.omegat:vldocking:3.0.5'
+        // Legacy projects re-hosted on Maven Central
+        api 'org.omegat:vldocking:3.0.5'
         implementation 'org.omegat:htmlparser:1.5'
         implementation 'org.omegat:gnudiff4j:1.15'
         implementation 'org.omegat:lib-mnemonics:1.0'
@@ -161,15 +160,17 @@ dependencies {
         implementation 'org.tmatesoft.svnkit:svnkit:1.8.14'
 
         // Team project conflict resolution
-        implementation 'org.madlonkay.supertmxmerge:supertmxmerge:2.0.1'
+        implementation 'org.madlonkay:supertmxmerge:2.0.3'
 
         // Credentials encryption
         implementation 'org.jasypt:jasypt:1.9.3'
 
         // Groovy used for scripts - needed at implementation for GroovyClassLoader modifications
         // Ivy is needed to handle Grape/@Grab dependencies
-        runtimeOnly 'org.codehaus.groovy:groovy-all:3.0.5'
-        runtimeOnly 'org.codehaus.groovy:groovy-dateutil:3.0.5'
+        runtimeOnly('org.codehaus.groovy:groovy-all:3.0.7@pom') {
+            transitive = true
+        }
+        runtimeOnly 'org.codehaus.groovy:groovy-dateutil:3.0.7'
         runtimeOnly 'org.apache.ivy:ivy:2.5.0'
 
         // Script editor
@@ -185,8 +186,8 @@ dependencies {
     }
 
     // Test dependencies
-    testImplementation 'junit:junit:4.13'
-    testImplementation 'org.xmlunit:xmlunit-legacy:2.7.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.xmlunit:xmlunit-legacy:2.8.2'
     testImplementation("org.languagetool:languagetool-server:${languageToolVersion}") {
         exclude group: 'org.slf4j'
     }
@@ -867,8 +868,8 @@ spotbugs {
     reportLevel = 'high'
 }
 
-spotbugsMain {
-    reports {
+tasks.findAll { it.name =~ /^spotbugs.*/ }.each {
+    it.reports {
         xml.enabled = envIsCi
         html.enabled = !envIsCi
     }
@@ -1026,29 +1027,53 @@ ext.mavenStyleVersion = version.replace('_', '-')
 
 publishing {
     publications {
-        bintray(MavenPublication) {
-            groupId 'org.omegat'
-            artifactId 'omegat'
-            version mavenStyleVersion
-            from components.java
+        mavenJava(MavenPublication) { publication ->
+            groupId = 'org.omegat'
+            artifactId = 'omegat'
+            version = mavenStyleVersion
             artifact sourceJar
             artifact javadocJar
+
+            from components.java
+
+            pom {
+                name = 'OmegaT'
+                description = 'The free translation memory tool'
+                url = 'https://omegat.org'
+                scm {
+                    connection = "scm:git:https://git.code.sf.net/p/omegat/code"
+                    developerConnection = "scm:git:https://git.code.sf.net/p/omegat/code"
+                    url = "https://sourceforge.net/p/omegat/code/"
+                }
+                licenses {
+                    license {
+                        name = 'The GNU General Public License, Version 3.0'
+                        url = 'https://www.gnu.org/licenses/licenses/gpl-3.0.html'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'omegat'
+                        name = 'OmegaT Developers'
+                        email = 'info@omegat.org'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials(PasswordCredentials) {
+                username findProperty('ossrhUsername')
+                password findProperty('ossrhPassword')
+            }
         }
     }
 }
 
-bintray {
-    user = findProperty('bintrayUser')
-    key = findProperty('bintrayKey')
-    pkg {
-        repo = 'maven'
-        name = 'OmegaT'
-        userOrg = 'omegat-org'
-        version {
-            name = mavenStyleVersion
-        }
-    }
-    publications = ['bintray']
+signing {
+    sign publishing.publications.mavenJava
 }
 
 remotes {

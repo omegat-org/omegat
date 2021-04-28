@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Atteindre</title>
+
+  <para>Ce menu n'est disponible que lorsqu'un projet est ouvert.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Segment non traduit suivant</term>
+
+      <listitem>
+        <para>Passe au segment suivant non traduit ( = n'ayant pas d'équivalent dans la mémoire de traduction).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segment traduit suivant</term>
+
+      <listitem>
+        <para>Se déplace au prochain segment déjà traduit, ignorant les segments non traduits.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segment suivant</term>
+
+      <listitem>
+        <para>Passe au segment suivant. Si le segment en cours est le dernier segment d'un fichier, on passe au premier segment du fichier suivant.</para>
+
+        <para>Note : La touche <keycap>Entrée</keycap> est un autre raccourci si l'option <link linkend="dialogs.preferences.general.usetabtoadvance">Utiliser la touche TAB pour valider</link> n'est pas sélectionnée.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segment précédent</term>
+
+      <listitem>
+        <para>Revient au segment précédent. Si le segment en cours est le premier segment d'un fichier, on passe au dernier segment du fichier précédent.</para>
+
+        <para>Note : La combinaison <keycombo><keycap>Ctrl</keycap> <keycap>Entrée</keycap> </keycombo>est un autre raccourci si l'option <link linkend="dialogs.preferences.general.usetabtoadvance">Utiliser la touche TAB pour valider</link> n'est pas sélectionnée.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segment numéro...</term>
+
+      <listitem>
+        <para>Le segment s'ouvre lorsque son numéro de segment est saisi ou que son raccourci est entré.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Note suivante</term>
+
+      <listitem>
+        <para>Le segment suivant possédant une note rattachée s'ouvre.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Note précédente</term>
+
+      <listitem>
+        <para>Le segment précédent possédant une note rattachée s'ouvre.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Source de la correspondance sélectionnée</term>
+
+      <listitem>
+        <para>Se déplace au segment qui correspond à la correspondance sélectionnée actuellement dans l'onglet des <guilabel>Correspondances</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segment suivant dans l'historique...</term>
+
+      <listitem>
+        <para><application>OmegaT</application> se souvient des segments déjà parcourus. Cette commande vous permet de retourner au segment que vous aviez auparavant quitté en utilisant la commande<guimenuitem>Segment précédent dans l'historique...</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segment précédent dans l'historique...</term>
+
+      <listitem>
+        <para>Cette commande vous permet de retourner un segment en arrière dans l'historique. Vous pourrez retrouver le segment que vous avez quitté en utilisant la commande <guimenuitem>Segment suivant dans l'historique...</guimenuitem> ci-dessus.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

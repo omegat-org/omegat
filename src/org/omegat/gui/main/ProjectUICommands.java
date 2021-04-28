@@ -340,7 +340,7 @@ public final class ProjectUICommands {
 
                 RemoteRepositoryProvider remoteRepositoryProvider = new RemoteRepositoryProvider(projectRoot,
                         repos);
-                remoteRepositoryProvider.switchAllToLatestAndPropagateDeletes();
+                remoteRepositoryProvider.switchAllToLatest();
                 for (String file : new String[] { OConsts.FILE_PROJECT,
                         OConsts.DEFAULT_INTERNAL + '/' + FilterMaster.FILE_FILTERS,
                         OConsts.DEFAULT_INTERNAL + '/' + SRX.CONF_SENTSEG }) {
@@ -487,7 +487,7 @@ public final class ProjectUICommands {
                             try {
                                 RemoteRepositoryProvider remoteRepositoryProvider = 
                                         new RemoteRepositoryProvider(props.getProjectRootDir(), props.getRepositories(), props);
-                                remoteRepositoryProvider.switchToVersionAndPropagateDeletes(OConsts.FILE_PROJECT, null);
+                                remoteRepositoryProvider.switchToVersion(OConsts.FILE_PROJECT, null);
                                 restoreOnFail = FileUtil.backupFile(projectFile);
                                 // Overwrite omegat.project
                                 remoteRepositoryProvider.copyFilesFromReposToProject(OConsts.FILE_PROJECT);

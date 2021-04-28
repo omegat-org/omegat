@@ -51,21 +51,32 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import javax.swing.text.Caret;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 import javax.swing.undo.UndoManager;
 
+import org.omegat.Main;
+import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.KnownException;
+import org.omegat.core.data.ProjectFactory;
+import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.util.Java8Compat;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -450,5 +461,68 @@ public final class StaticUIUtils {
         };
         comp.getInputMap().put(redo, "REDO");
         comp.getActionMap().put("REDO", redoAction);
+    }
+
+    public static void restartShutdown(Component parent, Boolean restart) {
+        // Bug #902: commit the current entry first
+        // We do it before checking project status, so that it can eventually change it
+        if (Core.getProject().isProjectLoaded()) {
+            Core.getEditor().commitAndLeave();
+        }
+        // RFE 1302358
+        // Add Yes/No Warning before OmegaT quits
+        boolean projectModified = false;
+        if (Core.getProject().isProjectLoaded()) {
+            projectModified = Core.getProject().isProjectModified();
+        }
+        // Add Yes/No Warning before OmegaT restart
+        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(parent,
+                    OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
+                    JOptionPane.YES_NO_OPTION)) {
+                return;
+            }
+        }
+        SegmentExportImport.flushExportedSegments();
+
+        new SwingWorker<Object, Void>() {
+            @Override
+            protected String[] doInBackground() throws Exception {
+                final String[] projectDir = {null};
+                if (Core.getProject().isProjectLoaded()) {
+                    // Save the list of learned and ignore words
+                    ISpellChecker sc = Core.getSpellChecker();
+                    sc.saveWordLists();
+                    try {
+                        Core.executeExclusively(true, () -> {
+                            Core.getProject().saveProject(true);
+                            projectDir[0] = Core.getProject().getProjectProperties().getProjectRoot();
+                            ProjectFactory.closeProject();
+                        });
+                    } catch (KnownException ex) {
+                        // hide exception on shutdown
+                    }
+                }
+                CoreEvents.fireApplicationShutdown();
+                PluginUtils.unloadPlugins();
+                return projectDir;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    String[] projectDir = (String[]) get();
+                    Preferences.save();
+                    if (restart) {
+                        Main.restartGUI(projectDir[0]);
+                    } else {
+                        System.exit(0);
+                    }
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
+            }
+        }.execute();
     }
 }

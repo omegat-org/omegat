@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
   <title>对齐器</title>
 
@@ -12,9 +12,9 @@
 
     <para>如果对齐情况看起来尚可改进，可以试着改变参数。在大多数情况下，<guilabel>平均得分</guilabel>越低，则对齐情况越好。</para>
 
-    <para>在<guilabel>按堆（Heapwise）</guilabel>模式下，文本是整体评估的。在<guilabel>按段（Parsewise）</guilabel>模式下，则逐个片段地评估。</para>
+    <para>在<guilabel>按堆（Heapwise）</guilabel>比较模式下，文本是整体评估的。在<guilabel>按段（Parsewise）</guilabel>比较模式下，则逐个片段地评估。此选项仅当可以进行此选择时才会出现。</para>
 
-    <para>用 <guilabel>ID 比较</guilabel>模式来对齐 键=值 文本。即使两个文件中键的顺序不同或两个文件包含的信息数量不等，这种方式也有效。仅当两个文件都被识别为 键=值 文件时才会出现此选项。</para>
+    <para>用 <guilabel>ID</guilabel> 比较模式来对齐 键=值 文本。即使两个文件中键的顺序不同或两个文件包含的信息数量不等，这种方式也有效。仅当两个文件都被识别为 键=值 文件时才会出现此选项。</para>
 
     <para><guilabel>维特比（Viterbi）</guilabel>和<guilabel>前向-后向（Forward-Backward）</guilabel>算法是两种不同的计算方法。选择能提供最佳结果的那一个。</para>
 

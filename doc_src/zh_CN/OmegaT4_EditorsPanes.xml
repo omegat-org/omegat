@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="panes">
   <title>窗格</title>
 
@@ -116,7 +116,7 @@
 
     <para>根据首选的编辑行为，未译片段的编辑区域可能为空、包含原文文本、或包含与此待译字符串最相似的字符串的翻译。当您移动前往另一个片段时，此译文会进行验证并保存。如果您想要让译文与原文相同，只需删除编辑区域中的所有文本将其清空（用 <keycap>Ctrl+A</keycap> 全选再用 <keycap>Del</keycap> 删除）。OmegaT 能保存与原文完全相同的译文。这对于包含商标、名称或其他专有名词、或无需翻译的第三方语言片段的文档非常有用。更多细节请参阅<emphasis>翻译编辑</emphasis>。</para>
 
-    <para>如果在编辑器窗格上右键单击，会打开一个弹出菜单，其中提供了<emphasis role="bold">剪切、复制、粘贴</emphasis>（即<keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>、<keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> 和 <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>的功能)、<emphasis role="bold">转到片段</emphasis>和<emphasis role="bold">添加词汇表条目</emphasis>功能。另外，如果是在打开的片段上右键单击，还会提供与<emphasis role="bold">替代译文</emphasis>有关的其他选项，例如，跳转到非独特片段的另一个实例。</para>
+    <para>如果在编辑器窗格上右键单击，会打开一个弹出菜单，其中提供了<emphasis role="bold">剪切、复制、粘贴</emphasis>（即<keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>、<keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> 和 <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>的功能)、<emphasis role="bold">转到片段</emphasis>和<emphasis role="bold">添加词条</emphasis>功能。另外，如果是在打开的片段上右键单击，还会提供与<emphasis role="bold">多重译文</emphasis>有关的其他选项，例如，跳转到非独特片段的另一个实例。</para>
 
     <para>可以从主窗口的任何地方拖动文本并将其放到该片段中。从译文片段之外的地方拖来的文本会复制过来，而在片段内部拖来的文本则会移动过来。</para>
 
@@ -173,7 +173,7 @@
   <section>
     <title>多重译文</title>
 
-    <para>一条给定的原文片段可能需要多种不同翻译，具体取决于上下文。如果片段的当前翻译并不合适，用户可以选择<guisubmenu>编辑 → 创建替代译文</guisubmenu>。随后所输入的译文文本会视为此原文片段的一种替代译文。您可以通过选择<guisubmenu>编辑 → 用作默认译文</guisubmenu>将各种替代项之一——例如，其中最可能用到的那条——定义为默认译文</para>
+    <para>一条给定的原文片段可能需要多种不同翻译，具体取决于上下文。如果片段的当前翻译并不合适，用户可以选择<guisubmenu>编辑 → 创建不同译文</guisubmenu>。随后所输入的译文文本会视为此原文片段的一种替代译文。您可以通过选择<guisubmenu>编辑 → 用作默认译文</guisubmenu>将各种替代项之一——例如，其中最可能用到的那条——定义为默认译文</para>
   </section>
 
   <section>

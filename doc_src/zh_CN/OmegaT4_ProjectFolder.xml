@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
   <title>项目文件夹</title>
 
@@ -24,7 +24,7 @@
 
     <para>tm 子文件夹中的翻译记忆库的内容用于为待翻译的文本生成建议。任何已翻译并存储在这些文件中的文本只要与当前正在翻译的文本足够相似就会出现在模糊匹配中。</para>
 
-    <para>如果辅助翻译记忆库中有与待译文本完全相同的原文片段，OmegaT 会按照<menuchoice> <guimenu>选项</guimenu> <guimenuitem>编辑行为...</guimenuitem> </menuchoice>对话框窗口中定义的行为进行操作。例如（如果按默认值），使用来自辅助翻译记忆库的翻译并冠以<emphasis>[模糊]</emphasis>前缀，这样译者可以在后面检查带有此标签的片段是否已正确翻译<menuchoice><guimenu>。</guimenu></menuchoice>。</para>
+    <para>如果辅助翻译记忆库中有与待译文本完全相同的原文片段，OmegaT 会按照<menuchoice> <guimenu>选项</guimenu> <guimenuitem>编辑行为...</guimenuitem> </menuchoice>对话框窗口中定义的行为进行操作。例如（如果按默认值），使用来自辅助翻译记忆库的翻译并冠以<emphasis>[模糊]</emphasis>前缀，这样译者可以在后面检查带有此标签的片段是否已正确翻译。</para>
 
     <para>有可能会出现这种情况：在 <filename>tm</filename> 子文件夹中的翻译记忆库中包含多个原文文本完全相同但译文不同的片段。TMX 文件是按照名称顺序进行读取的，并且对于给定 TMX 文件是逐行读取其中的片段的。因此，对于有着完全相同的原文文本的片段，会采用最后一个（注意：显然，先考虑避免出现这种情况会更有意义)。</para>
 

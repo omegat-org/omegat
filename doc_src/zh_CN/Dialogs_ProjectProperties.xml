@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="dialogs.projectproperties">
   <title>项目属性</title>
 
@@ -23,7 +23,7 @@
         <listitem>
           <para>分割规则设置只影响 <application>OmegaT</application> 处理原文文件的方式。语句级分割是分割原文的主要方式，所以正常情况下应该选中该复选框。</para>
 
-          <para>在一些少见情况下，替代方案，即按段落分割，可能会更好。更改此标志不会影响现有翻译记忆库中的片段。如果您在翻译中途决定从语句翻译切换至段落翻译，项目的内部翻译记忆库不会更改（OmegaT 可能会升级不使用语句分割的旧翻译记忆库，但反之则不然），但 OmegaT 会尝试通过组合现有的句子翻译来创建段落模糊匹配。</para>
+          <para>在一些少见情况下，另一种选择，即按段落分割，可能会更好。更改此标志不会影响现有翻译记忆库中的片段。如果您在翻译中途决定从语句翻译切换至段落翻译，项目的内部翻译记忆库不会更改（OmegaT 可能会升级不使用语句分割的旧翻译记忆库，但反之则不然），但 OmegaT 会尝试通过组合现有的句子翻译来创建段落模糊匹配。</para>
 
           <para>改变分割规则设置可能导致一些已经译好的片段被分拆或者合并。这实际上会让它们回到“未译”状态，因为它们和记录在翻译记忆库中的片段不再匹配，虽然它们的原始翻译依然存在。</para>
         </listitem>
@@ -33,7 +33,7 @@
         <term>自动传播翻译</term>
 
         <listitem>
-          <para>如果原文文档中包含非独特片段，自动传播翻译复选框为用户提供了下面两种自动翻译的可能性：如果勾选，则第一个被翻译的片段将假定为默认翻译，其译文文本在翻译过程中会自动用于后继命中。当然，错译片段之后可以手动用<guimenuitem>创建替代译文</guimenuitem>来纠正。如果未勾选自动传播复选框，则含有替代译文的片段会保持未译状态直到用户决定使用哪种译文。</para>
+          <para>如果原文文档中包含非独特片段，自动传播翻译复选框为用户提供了下面两种自动翻译的可能性：如果勾选，则第一个被翻译的片段将假定为默认翻译，其译文文本在翻译过程中会自动用于后继命中。当然，错译片段之后可以手动用<guimenuitem>创建不同译文</guimenuitem>来纠正。如果未勾选自动传播复选框，则含有替代译文的片段会保持未译状态直到用户决定使用哪种译文。</para>
         </listitem>
       </varlistentry>
 

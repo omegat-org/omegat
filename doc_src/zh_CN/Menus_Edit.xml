@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.edit">
   <title>编辑</title>
 
@@ -7,7 +7,7 @@
 
   <variablelist>
     <varlistentry>
-      <term><guimenuitem>撤销前一操作</guimenuitem></term>
+      <term><guimenuitem>撤消前一操作</guimenuitem></term>
 
       <listitem>
         <para>恢复到执行上一个编辑操作之前的状态。如果修改后的片段已经确认，则该命令不起作用。</para>
@@ -91,7 +91,7 @@
     </varlistentry>
 
     <varlistentry>
-      <term>创建词汇表条目</term>
+      <term>创建词条</term>
 
       <listitem>
         <para>允许用户在默认的词汇表文件中创建条目。</para>
@@ -152,12 +152,12 @@
       <term>用作默认译文</term>
 
       <listitem>
-        <para>如果当前片段有多个替代译文，您可以将所选择的译文标记为默认译文。如果只有一个可用译文，则该条目将为灰色。</para>
+        <para>如果当前片段有多个备选译文，您可以将所选择的译文标记为默认译文。如果只有一个可用译文，则该条目将为灰色。</para>
       </listitem>
     </varlistentry>
 
     <varlistentry>
-      <term>创建替代译文</term>
+      <term>创建不同译文</term>
 
       <listitem>
         <para>一个片段和另一个相同的片段可能会因为上下文而需要不同的译文。如果当前译文不适用，请选择此菜单条目，然后输入替代译文。</para>

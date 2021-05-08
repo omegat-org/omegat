@@ -176,7 +176,7 @@
     <section id="running.OmegaT.Linux">
       <title>运行 <application>OmegaT</application></title>
 
-      <para>你可以从命令行用包含启动选项的脚本启动 OmegaT，或者你可以点击 <filename>OmegaT.jar</filename> 直接启动它。具体方法根据发行版本而有所不同。请确保 <varname>PATH</varname> 设置是正确的，且 <filename>.jar</filename> 已经正确地与 Java 启动器关联。更多信息，参见下面的“命令行启动”。</para>
+      <para>你可以从命令行用包含启动选项的脚本启动 OmegaT，或者你可以点击 <filename>OmegaT.jar</filename> 直接启动它。具体方法根据发行版本而有所不同。请确保 <varname>PATH</varname> 设置是正确的，且 <filename>.jar</filename> 已经正确地与 Java 启动器关联。更多信息，参见下面的“<link linkend="commandline.launching" endterm="commandline.launching.title"/>”。</para>
     </section>
   </section>
 
@@ -218,7 +218,7 @@
 
       <para>要启动多个 <filename>OmegaT.app</filename> 实例，请双击位于 <filename>OmegaT.app/Contents/MacOS/</filename> 中的文件 <emphasis>OmegaT</emphasis>。</para>
 
-      <para>用位于 <filename>OmegaT.app/Contents/MacOS/Java/</filename> 中的 <filename>OmegaT.jar</filename> 文件来从命令行启动 <application>OmegaT</application>。更多信息，请参考下文的“命令行启动”。</para>
+      <para>用位于 <filename>OmegaT.app/Contents/MacOS/Java/</filename> 中的 <filename>OmegaT.jar</filename> 文件来从命令行启动 <application>OmegaT</application>。更多信息，请参考下文的“<link linkend="commandline.launching" endterm="commandline.launching.title"/>”。</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -276,7 +276,7 @@
     <section id="running.OmegaT.other">
       <title>运行 <application>OmegaT</application></title>
 
-      <para>一旦安装好 <application>OmegaT</application>，你可以直接从命令行启动它、可以创建一个包含命令行启动参数的脚本、也可以单击 <filename>OmegaT.jar</filename> 直接启动它。方法随发行版本而不同。要确保 <varname>PATH</varname> 已正确设置、<filename>.jar</filename> 文件已经与 Java 启动器正确关联。更多信息，参见下文的“命令行启动”</para>
+      <para>一旦安装好 <application>OmegaT</application>，你可以直接从命令行启动它、可以创建一个包含命令行启动参数的脚本、也可以单击 <filename>OmegaT.jar</filename> 直接启动它。方法随发行版本而不同。要确保 <varname>PATH</varname> 已正确设置、<filename>.jar</filename> 文件已经与 Java 启动器正确关联。更多信息，参见下文的“<link linkend="commandline.launching" endterm="commandline.launching.title"/>”</para>
     </section>
   </section>
 
@@ -300,8 +300,8 @@
     <para>请注意，如果您需要使用启动命令参数（见上文），就必须使用普通安装。</para>
   </section>
 
-  <section>
-    <title>从命令行启动 OmegaT</title>
+  <section id="commandline.launching">
+    <title id="commandline.launching.title">从命令行启动 OmegaT</title>
 
     <para>通常，没有必要从命令行启动 <application>OmegaT</application>。不过，改用命令行让用户可以控制和修改程序的行为。用命令行启动 <application>OmegaT</application> 有两种方法。</para>
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.textreplace">
+  <title>Textersetzung</title>
+
+  <para>Öffnen Sie das Suchen-und-Ersetzen-Fenster mit <keycombo> <keycap>Strg</keycap> <keycap>K</keycap> </keycombo> und geben Sie das Wort oder den Ausdruck, das/den Sie ersetzen möchten, in das Feld <emphasis>Suche nach</emphasis> ein.</para>
+
+  <para>Klicken Sie dann die Schaltfläche <emphasis>Suchen</emphasis>, um alle entsprechenden Vorkommen anzuzeigen.</para>
+
+  <para>Geben Sie das neue Wort oder die neue Wortgruppe (reguläre Ausdrücke werden nicht unterstützt) in das Feld <emphasis>Ersetzen mit</emphasis> ein und klicken Sie dann auf eine der folgenden Schaltflächen:<itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Alle ersetzen:</emphasis> Führt eine Ersetzung aller Vorkommen durch (nach Anzeige eines Bestätigungsfensters mit der Anzahl der Vorkommen).</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Ersetzen:</emphasis> Führt eine schrittweise Ersetzung mithilfe von Schaltflächen am <emphasis role="bold">oberen Rand des Editorbereichs</emphasis> durch. Klicken Sie auf <emphasis>Nächstes Vorkommen ersetzen</emphasis> oder <emphasis>Überspringen</emphasis> und beenden Sie anschließend die Sitzung mit <emphasis>Beenden</emphasis>.</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Schließen:</emphasis> Schließen Sie das Fenster, ohne etwas zu ändern.</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section>
+    <title>Suchoptionen</title>
+
+    <para>Die Suchoptionen sind nahezu identisch mit den Optionen des Dialogfensters <link linkend="windows.textsearch">Textsuche</link>.</para>
+
+    <para>Mit einer Ausnahme: Aktivieren Sie <emphasis role="bold">Unübersetzt</emphasis>, um Suchen und Ersetzen auch auf Segmente anzuwenden, die noch nicht übersetzt wurden.</para>
+
+    <para>Um dies möglich zu machen (da Suchen und Ersetzen eigentlich nur im Speicher operiert), kopiert OmegaT den Quelltext des Segments in dessen Zieltext, bevor die Ersetzung stattfindet. Wenn für ein bestimmtes Segment keine Ersetzung vorgenommen wird, wird dessen Zieltext &quot;geleert&quot;, soll heißen, das Segment bleibt unübersetzt.</para>
+  </section>
+</section>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Gehe zu</title>
+
+  <para>Dieses Menü zeigt nur Menüpunkte an, wenn ein Projekt geöffnet ist.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Nächstes unübersetztes Segment</term>
+
+      <listitem>
+        <para>Springt zum nächsten Segment, das noch kein äquivalentes Segment im Translation Memory hat.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nächstes übersetztes Segment</term>
+
+      <listitem>
+        <para>Springt zum nächsten bereits übersetzten Segment und ignoriert unübersetzte Segmente.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nächstes Segment</term>
+
+      <listitem>
+        <para>Springt zum nächsten Segment. Wenn das aktuelle Segment das letzte Segment in einer Datei ist, springt es zum ersten Segment der nächsten Datei.</para>
+
+        <para>Hinweis: <keycap>Enter</keycap> kann als alternativer Tastaturkurzbefehl verwendet werden, wenn die Option <link linkend="dialogs.preferences.general.usetabtoadvance">TAB zum Weiterschalten verwenden</link> deaktiviert ist.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vorheriges Segment</term>
+
+      <listitem>
+        <para>Springt zum vorherigen Segment. Wenn das aktuelle Segment das erste Segment in einer Datei ist, springt es zum letzten Segment der vorherigen Datei.</para>
+
+        <para>Hinweis: <keycombo> <keycap>Strg</keycap> <keycap>Enter</keycap> </keycombo> kann als alternativer Tastaturkurzbefehl verwendet werden, wenn die Option <link linkend="dialogs.preferences.general.usetabtoadvance">TAB zum Weiterschalten verwenden</link> deaktiviert ist.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentnummer...</term>
+
+      <listitem>
+        <para>Das Segment wird geöffnet, wenn entweder der Segment-Call-Out oder die Segmentnummer eingegeben wird.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nächste Notiz</term>
+
+      <listitem>
+        <para>Springt zum nächsten Segment, das mit einer Notiz versehen ist.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vorherige Notiz</term>
+
+      <listitem>
+        <para>Springt zum vorherigen Segment, das mit einer Notiz versehen ist.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Quelle des ausgewählten Matches</term>
+
+      <listitem>
+        <para>Springt zum Segment, das dem aktuell ausgewählten Match im <guilabel>Fuzzy-Matches</guilabel>-Bereich entspricht.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vor im Verlauf...</term>
+
+      <listitem>
+        <para><application>OmegaT</application> merkt sich die zuletzt geöffneten Segmente. Mit diesem Befehl können Sie zum Segment vorspringen, das Sie zuvor mit dem Befehl <guimenuitem>Zurück im Verlauf...</guimenuitem> verlassen haben.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Zurück im Verlauf...</term>
+
+      <listitem>
+        <para>Mit diesem Befehl können Sie jeweils ein Segment zurückspringen. Um später zum aktuellen Segment zurückzukehren, verwenden Sie den Befehl <guimenuitem>Vor im Verlauf...</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

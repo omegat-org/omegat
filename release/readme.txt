@@ -188,7 +188,7 @@ Previous contributors include:
 and many, many more very helpful people
 
 (If you think you have significantly contributed to the OmegaT Project but you
-(don't see your name on the lists, feel free to contact us.)
+don't see your name on the lists, feel free to contact us.)
 
 
 

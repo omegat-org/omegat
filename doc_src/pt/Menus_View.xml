@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>Ver</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Marcar segmentos traduzidos</term>
+
+      <listitem>
+        <para>Se marcada, os segmentos traduzidos serão marcados em amarelo.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marcar segmentos não traduzidos</term>
+
+      <listitem>
+        <para>Se marcada, os segmentos não traduzidos serão marcados em violeta.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marcar delimitações de parágrafo</term>
+
+      <listitem>
+        <para>Se marcada, as separações entre parágrafos no documento-fonte são indicadas visualmente.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mostrar segmentos-fonte</term>
+
+      <listitem>
+        <para>Se marcada, os segmentos-fonte serão mostrados e marcados a verde. Se não estiver marcada, os segmentos-fonte não serão mostrados.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marcar segmentos não-únicos</term>
+
+      <listitem>
+        <para>Se marcada, os segmentos não-únicos serão marcados a cinzento pálido.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marcar segmentos com notas</term>
+
+      <listitem>
+        <para>Se marcada, os segmentos com notas serão marcados em ciano. Esta marcação tem prioridade sobre <guimenuitem>Marcar segmentos traduzidos</guimenuitem> e <guimenuitem>Marcar segmentos não traduzidos</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marcar espaços inseparáveis</term>
+
+      <listitem>
+        <para>Se verificado, serão mostrados espaços inseparáveis com um fundo cinzento.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marcar espaços</term>
+
+      <listitem>
+        <para>Se marcada, os espaços brancos serão exibidos com um pequeno ponto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marcar caracteres de controlo do algoritmo bidireccional</term>
+
+      <listitem>
+        <para>Esta opção mostra <ulink url="http://www.w3.org/International/questions/qa-bidi-controls"> caracteres de controlo bidireccional</ulink></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Marcar segmentos povoados automaticamente</term>
+
+      <listitem>
+        <para>Se marcada, o fundo de todos os segmentos onde o segmento-alvo foi auto-povoado (das TMXs colocados em <filename>/tm/auto</filename> por exemplo) são mostrados a cores. As cores são mostradas enquanto a opção <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Gravar o estado de povoamento automático</guimenuitem></link> esteja marcada. As traduções habituais inseridas a partir da pasta auto são mostradas em laranja. Outras traduções, identificadas especificamente na TMX, podem ser mostradas utilizando diferentes cores. Para detalhes técnicos, ver <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Pedidos de melhoramentos</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Garantia agressiva de letra</term>
+
+      <listitem>
+        <para>Marque esta opção caso o <application>OmegaT</application> não mostrar correctamente alguns glifos (mesmo que as letras contendo os glifos relevantes estejam instaladas na sua máquina). Nota: no Windows parece que este mecanismo manual de garantia de letra pode interferir com a garantia de letra padrão, causando uma substituição indesejável da fonte. Por esse motivo, está DESLIGADO por pré-definição.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Informações de modificação</term>
+
+      <listitem>
+        <para>Definir a opção Mostrar modificação para <guimenuitem>Segmento actual</guimenuitem> mostra a hora e o autor da última alteração no segmento actual. Definir para <guimenuitem>Todos os segmentos</guimenuitem> mostra esta informação para todos os segmentos e <guimenuitem>Nenhum</guimenuitem> desliga esta opção.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

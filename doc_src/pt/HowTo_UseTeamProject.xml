@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>Utilizar um projecto de equipa</title>
+
+  <para>Os projectos de equipa OmegaT devem primeiro ser <link linkend="howto.setupteamproject">set up</link> num servidor.</para>
+
+  <para>Para utilizar um projecto de equipa pela primeira vez, seguir o procedimento fornecido pelo gestor do projecto.</para>
+
+  <para>Uma vez o projecto aberto, a tradução procede da mesma forma que para um projecto que não seja de equipa, excepto nos seguintes pontos.</para>
+
+  <para><emphasis role="bold">Gravação automática</emphasis></para>
+
+  <para>A cada 3 minutos (por defeito), o projecto local é sincronizado com o repositório remoto para que o gestor do projecto ou outros tradutores possam ver e utilizar as traduções adicionadas durante esse período.</para>
+
+  <para>O intervalo de 3 minutos pode ser alterado em <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Opções</guimenuitem> <guimenuitem>Preferências</guimenuitem> <guimenuitem>Gravação e saída</guimenuitem> </menuchoice></link>.</para>
+
+  <para><emphasis role="bold">Ficheiros sincronizados</emphasis></para>
+
+  <para>Sempre que o projecto é automaticamente gravado, mas também quando é aberto, fechado e recarregado, apenas dois ficheiros são de facto sincronizados:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Todos os outros ficheiros serão substituídos pelos ficheiros no repositório remoto.</para>
+
+  <para><emphasis role="bold">Acrescentar novos ficheiros-fonte</emphasis></para>
+
+  <para>Para adicionar um novo ficheiro-fonte:</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>copiar os ficheiros para a pasta <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>usar <menuchoice> <guimenuitem>Projecto</guimenuitem> <guimenuitem>Submeter ficheiros-fonte</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>Os ficheiros-fonte existentes podem ser modificados, mas a operação de autorização deve ser realizada antes de uma gravação automática e antes de o projecto ser recarregado ou encerrado.</para>
+
+  <para><emphasis role="bold">Eliminar ficheiros-fonte</emphasis></para>
+
+  <para>Os ficheiros devem ser apagados pelo gestor do projecto.</para>
+
+  <para><emphasis role="bold">Alteração das regras de segmentação ou filtros de ficheiros</emphasis></para>
+
+  <para>Os parâmetros do projecto devem ser alterados pelo gestor do projecto.</para>
+
+  <para><emphasis role="bold">Trabalhar offline</emphasis></para>
+
+  <para>Um projecto de equipa pode ser aberto e traduzido offline. Todas as alterações serão sincronizadas na próxima vez que uma ligação estiver disponível.</para>
+
+  <para>Para trabalhar offline:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Desligue-se da rede antes de abrir o projecto,</para>
+    </listitem>
+
+    <listitem>
+      <para>ou abra o projecto com a linha de comandos usando a opção <command>--no-team</command>.</para>
+    </listitem>
+  </itemizedlist>
+</section>

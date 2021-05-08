@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.help">
+  <title>Ajuda</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Manual do utilizador...</term>
+
+      <listitem>
+        <para>Abre este manual no navegador pré-definido.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Acerca...</term>
+
+      <listitem>
+        <para>Mostra informação sobre direitos de autor, créditos e licenças.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Últimas alterações...</term>
+
+      <listitem>
+        <para>Mostra a lista de novas funcionalidades, melhorias e correcções de erros para cada nova versão.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Diário...</term>
+
+      <listitem>
+        <para>Mostra o ficheiro de diário actual. O título do diálogo reflecte o ficheiro efectivamente utilizado (que depende de quantas instâncias do OmegaT estão a correr em simultâneo).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Procurar actualizações...</term>
+
+      <listitem>
+        <para>Verifica se uma versão mais recente do <application>OmegaT</application> foi lançada.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

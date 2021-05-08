@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   11 Enhancements
   3 Bug fixes
-  6 Localisation updates
+  7 Localisation updates
 ----------------------------------------------------------------------
 5.5.0 vs 5.4.4
 
@@ -60,6 +60,7 @@
   - German localisation updated to 5.5.0 (UI, scripts, readme, documentation)
   - Finnish localisation updated to 5.5.0 (UI)
   - French localisation updated to 5.5.0 (UI, scripts, readme, documentation)
+  - Portuguese localisation updated to 5.5.0 (UI, scripts, readme, documentation)
   - Simplified Chinese localisation updated to 5.5.0 (UI, documentation)
   - Ukrainian localisation updated to 5.5.0 (UI)
 

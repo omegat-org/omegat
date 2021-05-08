@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.project">
+  <title>Projecto</title>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Novo...</guimenuitem></term>
+
+      <listitem>
+        <para>Cria e abre um novo projecto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><guimenuitem>Transferir projecto de equipa...</guimenuitem></term>
+
+      <listitem>
+        <para>Cria uma cópia local de um projecto OmegaT remoto. Ver <link linkend="howto.useteamproject">Utilizar um projecto de equipa</link> para detalhes.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Abrir...</term>
+
+      <listitem>
+        <para>Abre um projecto previamente criado.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Abrir projecto recente</term>
+
+      <listitem>
+        <para>Dá acesso aos dez últimos projectos editados. Clicando num grava o projecto actual, fecha-o e abre o outro projecto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Copiar ficheiros para a pasta-fonte...</term>
+
+      <listitem>
+        <para>Copia os ficheiros seleccionados para a pasta <filename>source</filename> e recarrega o projecto para carregar o novo files.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Transferir página MediaWiki...</term>
+
+      <listitem>
+        <para>Para traduzir o conteúdo de uma página da Wikipedia (por exemplo):</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Clique no separador <guilabel>Editar</guilabel> na página da Wikipedia.</para>
+          </listitem>
+
+          <listitem>
+            <para>Copie o URL da página (terminando com <guilabel>action=edit</guilabel>) e cole-o em <application>OmegaT</application>.</para>
+          </listitem>
+        </orderedlist>
+
+        <para>Quando tiver terminado a sua tradução, importe-a para a Wikipedia:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Abra o ficheiro <filename>.UTF8</filename> gerado na pasta <filename>/target</filename>.</para>
+          </listitem>
+
+          <listitem>
+            <para>Copie o texto e cole-o na versão traduzida da página da Wikipedia.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Recarregar</term>
+
+      <listitem>
+        <para>Recarrega o projecto para ter em conta as alterações externas nos ficheiros-fonte e definições do projecto.</para>
+
+        <para>Novas memórias de tradução colocadas na pasta <filename>/tm</filename> enquanto se traduz são carregadas automaticamente assim que o cursor se move de um segmento para outro.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Fechar</term>
+
+      <listitem>
+        <para>Grava a tradução e fecha o projecto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Gravar</term>
+
+      <listitem>
+        <para>Grava a memória interna de tradução no disco rígido. O OmegaT grava automaticamente as traduções a cada 3 minutos, assim como quando fecha o projecto ou sai do OmegaT.</para>
+
+        <para>O intervalo de 3 minutos pode ser alterado em <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Opções</guimenuitem> <guimenuitem>Preferências</guimenuitem> <guimenuitem>Gravação e saída</guimenuitem> </menuchoice></link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Enviar ficheiros-fonte</term>
+
+      <listitem>
+        <para>Envia para o repositório os ficheiros que foram adicionados ou modificados localmente na pasta <filename>source</filename>.</para>
+
+        <para>Esta função é específica para projectos de equipa.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Enviar ficheiros-alvo</term>
+
+      <listitem>
+        <para>Envia para o repositório os ficheiros que foram criados localmente na pasta <filename>target</filename>.</para>
+
+        <para>Esta função é específica para projectos de equipa.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Criar documentos traduzidos</term>
+
+      <listitem>
+        <para>Cria os documentos-alvo com base na sua tradução. Os documentos-alvo criados estão localizados na pasta <filename>target</filename>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Criar documento traduzido actual</term>
+
+      <listitem>
+        <para>Cria o documento-alvo correspondente ao documento actual em tradução.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Abrir projecto MED...</term>
+
+      <listitem>
+        <para>Abre um pacote de projectos no formato MED definido pela EU Directorate-General for Translation.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Criar projectos MED...</term>
+
+      <listitem>
+        <para>Converte o projecto actual num pacote MED.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Propriedades...</term>
+
+      <listitem>
+        <para>Mostra o diálogo <link linkend="dialogs.projectproperties">Propriedades do projecto</link>, para editar os idiomas do projecto e a localização das pastas.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ficheiros do projecto...</term>
+
+      <listitem>
+        <para>Abre a janela <link linkend="windows.projectfiles">Ficheiros do projecto</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Acesso ao conteúdo do projecto</term>
+
+      <listitem>
+        <para>Dá acesso às pastas do projecto.</para>
+
+        <para>Além disso, duas entradas de menu permitem abrir directamente os documentos fonte e alvo actuais e o glossário editável. Os documentos são abertos pela aplicação escolhida pelo sistema operativo. Se os documentos não estiverem disponíveis, a entrada está a cinzento.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Sair</term>
+
+      <listitem>
+        <para>Grava o projecto e sai do <application>OmegaT</application>. Se ainda não gravou o projecto, isto confirma manualmente se deseja realmente desistir.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

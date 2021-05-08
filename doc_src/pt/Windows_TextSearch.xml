@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.textsearch">
+  <title>Procurar texto</title>
+
+  <para>Abra a janela de procura com <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> e insira a palavra ou frase que deseja procurar na caixa <emphasis>Procurar por</emphasis>.</para>
+
+  <para>Em alternativa, pode seleccionar uma palavra ou frase no painel do editor, no painel de aproximadas ou no painel do glossário e premir <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. A palavra ou frase é inserida na caixa <emphasis>Procurar por</emphasis> automaticamente. Pode ter várias janelas de procura abertas ao mesmo tempo, mas feche-as quando já não forem necessárias para que não desorganizem o seu ambiente de trabalho.</para>
+
+  <para>Clique na seta descendente da caixa <emphasis>Procurar por</emphasis> para aceder às últimas 10 procuras.</para>
+
+  <para>A janela de procura tem os seus próprios menus:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Ficheiro &gt; Pesquisa para selecção (<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>): focar no campo de procura e seleccionar todo o seu conteúdo.</para>
+    </listitem>
+
+    <listitem>
+      <para>Ficheiro &gt; Fechar (<keycombo> <keycap>Ctrl</keycap> <keycap>W</keycap> </keycombo>): fechar a janela de procura (tal como <keycap>Esc</keycap>)</para>
+    </listitem>
+
+    <listitem>
+      <para>Editar &gt; Inserir fonte (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>I</keycap> </keycombo>): inserir segmento-fonte actual.</para>
+    </listitem>
+
+    <listitem>
+      <para>Editar &gt; Substituir por fonte (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>R</keycap> </keycombo>): substituir por segmento-fonte actual.</para>
+    </listitem>
+
+    <listitem>
+      <para>Editar &gt; Criar entrada de glossário (<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>): adicionar um novo item ao glossário.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="using.wild.cards">
+    <title>Utilização de caracteres universais</title>
+
+    <para>Tanto nas procuras exactas como nas procuras por palavras-chave, podem ser utilizados os caracteres universais &quot;*&quot; e &quot;?&quot;. Têm o significado familiar aos utilizadores de Word:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>&quot;*&quot; corresponde a zero ou mais caracteres, desde a posição actual numa dada palavra até ao seu fim. O termo de procura <literal>&quot;run*&quot;</literal> por exemplo, corresponderia a palavras <literal>&quot;run&quot;</literal>, <literal>&quot;runs&quot;</literal> e <literal>&quot;running&quot;</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>&quot;?&quot; corresponde a qualquer carácter único. Por exemplo, <literal>&quot;run?&quot;</literal> corresponderia à palavra <literal>&quot;runs&quot;</literal> e <literal>&quot;runn&quot;</literal> na palavra <literal>&quot;running&quot;</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>As correspondências serão mostradas em azul negrito. Note-se que &quot;*&quot; e &quot;?&quot; têm um significado especial em expressões regulares, pelo que a procura tal como aqui descrita, aplica-se apenas à procura exacta e por palavra-chave (ver abaixo).</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Métodos e opções de procura</title>
+
+    <para>Seleccionar o método usando os botões de opção. Estão disponíveis os seguintes métodos de procura:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>procura exacta</term>
+
+        <listitem>
+          <para>Procure segmentos que contenham a cadeia exacta que especificou. Uma procura exacta procura por uma frase, ou seja, se forem introduzidas várias palavras, estas só são encontradas se ocorrerem exactamente nessa sequência. Procurar por <literal>abrir ficheiro</literal> encontrará assim todas as ocorrências da cadeia <emphasis><literal>abrir ficheiro</literal></emphasis>, mas não <emphasis><literal>ficheiro aberto</literal></emphasis> ou <emphasis><literal>abrir ficheiro de entrada</literal></emphasis>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>procura por palavra-chave</term>
+
+        <listitem>
+          <para>Procure segmentos contendo todas as palavras-chave por si especificadas, em qualquer ordem. Seleccione a procura por palavra-chave para procurar qualquer número de palavras individuais completas, em qualquer ordem. O OmegaT mostra uma lista de todos os segmentos contendo todas as palavras especificadas. As procuras por palavras-chave são semelhantes a uma procura &quot;com todas as palavras&quot; num motor de busca da Internet como o Google (equivalente ao E lógico). Usar a procura por palavra-chave com <emphasis><literal>open file</literal></emphasis> encontrará assim todas as ocorrências de <emphasis><literal>open file</literal>, </emphasis>assim como <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis>, etc.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">expressões regulares</emphasis></term>
+
+        <listitem>
+          <para>A cadeia de procura será tratada como uma expressão regular. A cadeia de procura - [a-zA-Z]+[öäüqwß] - no exemplo acima, por exemplo, procura palavras no segmento-alvo, contendo caracteres questionáveis do teclado alemão. <link linkend="appendix.regexp">Expressões regulares</link> são uma forma poderosa de procurar instâncias de uma cadeia.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Para além de um dos métodos acima referidos, pode seleccionar o seguinte:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold"> sensível a maiúsculas</emphasis>: a procura será efectuada para a cadeia exacta especificada; ou seja, as maiúsculas são comparadas.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Espaço corresponde a nbsp</emphasis>: quando esta opção está marcada, um carácter de espaço colocado na entrada de procura pode corresponder a um carácter de espaço normal ou a um carácter de espaço inseparável (\u00A).</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">na fonte</emphasis>: procurar nos segmentos-fonte</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">nas traduções</emphasis>: procurar nos segmentos-alvo</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">nas notas</emphasis>: procurar em notas dos segmentos</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">nos comentários</emphasis>: procurar nos comentários dos segmentos</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Traduzido ou não traduzido: </emphasis>procurar tanto em segmentos traduzidos como em não traduzidos.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Traduzido</emphasis>: procurar apenas em segmentos traduzidos.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Não traduzido</emphasis>: procurar apenas em segmentos não traduzidos.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Mostrar: todos os segmentos correspondentes</emphasis>: se marcada, todos os segmentos são mostrados um a um, mesmo que estejam presentes várias vezes no mesmo documento ou em documentos diferentes.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Mostrar: nomes de ficheiros</emphasis>: se marcada, o nome do ficheiro onde cada segmento é encontrado é mostrado acima de cada resultado.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Procurar no projecto</emphasis>: marcar <emphasis>Memória</emphasis> para incluir a memória do projecto (ficheiro project_save.tmx) na procura. Marcar <emphasis>TMs</emphasis> para incluir as memórias de tradução localizadas na pasta <filename>tm</filename> na procura. Marcar <emphasis>Glossários</emphasis> para incluir os glossários localizados na pasta <filename>glossary</filename> na procura.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Procurar em ficheiros</emphasis>: procurar num único ficheiro ou numa pasta contendo um conjunto de ficheiros. Ao procurar em ficheiros (por oposição às memórias de tradução), o OmegaT restringe a procura a ficheiros em formatos de ficheiro-fonte. Consequentemente, embora o OmegaT seja bastante capaz de lidar com ficheiros<filename> tmx</filename>, não os inclui na procura Procurar em ficheiros.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Se clicar no botão <guibutton>Opções avançadas</guibutton>, podem ser seleccionados critérios adicionais (autor ou alterador da tradução, data traduzida, excluindo segmentos órfãos, etc.). Quando a opção <emphasis>Insensível a largura total/meia largura</emphasis> está marcada, as procuras por formas de largura total (caracteres CJK) corresponderão a formas de meia largura e vice-versa.</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>Exibição dos resultados da procura</title>
+
+    <para>Ao premir o botão Procurar após inserir uma cadeia no campo de procura, são mostrados todos os segmentos do projecto que incluem a cadeia inserida. Como o <application>OmegaT</application> trata segmentos idênticos como uma única entidade, apenas o primeiro segmento único é mostrado. Os segmentos são mostrados pela ordem em que surgem no projecto. Os segmentos traduzidos são mostrados com o texto original em cima e o texto traduzido em baixo, os segmentos não traduzidos são mostrados apenas como fonte.</para>
+
+    <para>Um duplo clique sobre um segmento abre-o no editor para modificações (um único clique fá-lo quando a opção <emphasis role="bold">Sincronização automática</emphasis> está marcada). Pode então voltar à janela de procura para o próximo segmento encontrado, por exemplo para verificar e, se necessário, corrigir a terminologia.</para>
+
+    <para>Na janela de procura, pode usar atalhos padrão (<keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo>) para se deslocar de um segmento para outro.</para>
+
+    <para>Pode ter várias janelas de procura abertas ao mesmo tempo. Pode ver rapidamente o seu conteúdo ao olhar para o seu título: conterá o termo de procura utilizado.</para>
+  </section>
+
+  <section id="search.filter">
+    <title>Filtrar as entradas no editor de acordo com a procura</title>
+
+    <para>Para uma navegação mais fácil no conjunto de resultados de procura, pode aplicar a procura ao editor. Prima o botão <emphasis role="bold">Filtro</emphasis> no fundo para limitar as entradas mostradas na janela do editor àquelas que correspondem à procura actual. Pode usar a navegação normal para ir, por exemplo, ao próximo segmento (não traduzido) que corresponda aos critérios de procura.</para>
+
+    <para>N.B.:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Uma procura pode ser limitada a 1000 itens, por isso, se procurar numa frase comum, o editor então mostra apenas aquelas 1000 entradas correspondentes, e não todas as entradas que correspondem aos critérios de procura.</para>
+      </listitem>
+
+      <listitem>
+        <para>Um ficheiro pode não ter entradas correspondentes, pelo que se mostrará vazio.</para>
+      </listitem>
+
+      <listitem>
+        <para>Se uma procura remover duplicados, esses duplicados não estarão no editor.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Para remover um filtro, prima o botão <emphasis role="bold">Remover filtro</emphasis>, ou recarregue um projecto.</para>
+  </section>
+</section>

@@ -2,13 +2,15 @@ Vertaling: Dick Groskamp © 2020
 
 
 Wat is OmegaT?
-===============
+
+==============
 
 OmegaT is een vrij en open source multiplatform Computer Assisted Translation-programma met fuzzy overeenkomsten, vertaalgeheugen, zoeken op sleutelwoorden, woordenlijsten en vertalingsuitbreiding in bijgewerkte projecten.
 
 
 
 Informatie over Licentie
+========================
 
 OmegaT is beschikbaar onder de bepalingen van de GNU General Public License zoals die is gepubliceerd door de Free Software Foundation; ofwel versie 3 van die License of (naar uw eigen inzicht) een willekeurige latere versie. U vindt de tekst van de licentie in
 /docs/OmegaT-license.txt.
@@ -19,6 +21,7 @@ in /lib/licenses/Licenses.txt.
 
 
 Vereisten voor installeren van OmegaT
+=====================================
 
 OmegaT vereist dat de Java Runtime Environment (JRE) versie 1.8 of hoger is geïnstalleerd op uw systeem.
 
@@ -28,14 +31,14 @@ om u het probleem van selecteren, verkrijgen en installeren te besparen.
 
 
 Installeren van OmegaT (Windows)
-===========================
+================================
 
 Start het installatieprogramma.
 
 
 
 Installeren van OmegaT (Mac)
-========================
+============================
 
 Pak het OmegaT .zip-archief uit om een map te krijgen die een
 documentatiebestand en de toepassing OmegaT bevat. Verplaats de map naar een toepasselijke locatie, zoals de map Applications.
@@ -43,7 +46,7 @@ documentatiebestand en de toepassing OmegaT bevat. Verplaats de map naar een toe
 
 
 Installeren van OmegaT (Linux)
-=========================
+==============================
 
 Plaats het archief in een geschikte map en pak het uit. OmegaT is dan gereed om te worden opgestart.
 
@@ -53,14 +56,14 @@ install.sh.
 
 
 Installeren van OmegaT (Solaris, FreeBSD, etc.)
-=========================================
+===============================================
 
 Plaats het archief in een geschikte map en pak het uit. OmegaT is dan gereed om te worden opgestart.
 
 
 
 Java Web Start gebruiken voor het installeren van OmegaT (alle platforms)
-===========================================================
+=========================================================================
 
 Als u al Java hebt geïnstalleerd op uw systeem, is één manier om OmegaT te installeren het gebruiken van Java Web Start.
 
@@ -74,7 +77,7 @@ zelf bij de eerste keer dat het wordt uitgevoerd. Latere aanroepen behoeven niet
 
 
 Starten van OmegaT (Windows)
-==========================
+============================
 
 Als u, gedurende de installatie, een snelkoppeling op het bureaublad hebt gemaakt,
 dubbelklik dan op die snelkoppeling.
@@ -89,7 +92,7 @@ maar niet OmegaT.exe, wijzig dan de instellingen zodat de bestandsextensies word
 
 
 Starten van OmegaT (Mac)
-======================
+========================
 
 Dubbelklik op de toepassing OmegaT.
 
@@ -99,7 +102,7 @@ om het vanaf elke locatie te kunnen starten. U kunt het ook starten in het zoekv
 
 
 Starten van OmegaT (Linux)
-========================
+==========================
 
 Indien u linux-install.sh script gebruikte, zou u OmegaT moeten kunnen opstarten met:
 
@@ -120,7 +123,7 @@ en dan:
 
 
 Starten van OmegaT vanaf de opdrachtregel (alle systemen)
-====================================================
+=========================================================
 
 De opdracht om OmegaT te starten is:
 
@@ -134,7 +137,7 @@ hoeft niet het volledige pad te worden ingevoerd.)
 
 
 Bijdragen
-============
+=========
 
 OmegaT is van origine het werk van Keith Godfrey.
 
@@ -176,7 +179,7 @@ maar ziet u uw naam niet op deze lijst, neem dan alstublieft contact met ons op.
 
 
 Nuttige links
-============
+=============
 
 De meest recente informatie over OmegaT is te vinden op:
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
   <title>Projectmap</title>
 
@@ -24,7 +24,7 @@
 
     <para>De inhoud van vertaalgeheugens in de submap tm dienen om suggesties te genereren voor de tekst(en) om te worden vertaald. Elke tekst, reeds vertaald en opgeslagen in deze bestanden, zal tussen de overeenkomsten verschijnen, indien het voldoende overeenkomt met de tekst die momenteel wordt vertaald.</para>
 
-    <para>Indien het bronsegment in één van de aanvullende TM's identiek is aan de tekst die wordt vertaald, gedraagt OmegaT zich zoals gedefinieerd is in het dialoogvenster <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden vooraf gegaan door<emphasis> [fuzzy]</emphasis>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn getagd, juist zijn vertaald<menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+    <para>Indien het bronsegment in één van de aanvullende TM's identiek is aan de tekst die wordt vertaald, gedraagt OmegaT zich zoals gedefinieerd is in het dialoogvenster <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden vooraf gegaan door<emphasis> [fuzzy]</emphasis>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn getagd, juist zijn vertaald.</para>
 
     <para>Het kan gebeuren dat vertaalgeheugens, beschikbaar in de submap <filename>tm</filename>, segmenten met identieke brontekst bevatten, maar afwijkende doelen. TMX-bestanden worden, gesorteerd op hun naam, gelezen en segmenten binnen een bepaald TMX-bestand regel na regel. Het laatste segment met de identieke brontekst zal dus worden gekozen (Opmerking: natuurlijk is het verstandiger om dit in de eerste plaats in zijn geheel te vermijden).</para>
 

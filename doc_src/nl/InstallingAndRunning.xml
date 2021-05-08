@@ -176,7 +176,7 @@
     <section id="running.OmegaT.Linux">
       <title><application>OmegaT</application> uitvoeren</title>
 
-      <para>U kunt OmegaT opstarten vanaf de opdrachtregel met een script dat de opties voor opstarten bevat of u kunt klikken op <filename>OmegaT.jar</filename> om het direct op te starten. Methoden verschillen, afhankelijk van de distributie. Zorg ervoor dat de instellingen van uw <varname>PATH</varname> juist zijn en dat <filename>.jar</filename>-bestanden juist zijn gekoppeld aan een Java-starter. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
+      <para>U kunt OmegaT opstarten vanaf de opdrachtregel met een script dat de opties voor opstarten bevat of u kunt klikken op <filename>OmegaT.jar</filename> om het direct op te starten. Methoden verschillen, afhankelijk van de distributie. Zorg ervoor dat de instellingen van uw <varname>PATH</varname> juist zijn en dat <filename>.jar</filename>-bestanden juist zijn gekoppeld aan een Java-starter. Bekijk &quot;<link linkend="commandline.launching" endterm="commandline.launching.title"/>&quot; hieronder voor meer informatie.</para>
     </section>
   </section>
 
@@ -218,7 +218,7 @@
 
       <para>Als u meerdere instanties van <filename>OmegaT.app</filename> moet uitvoeren, dubbelklik dan op het bestand <emphasis>OmegaT</emphasis> dat zich bevindt in <filename>OmegaT.app/ Contents/MacOS/</filename>.</para>
 
-      <para>Gebruik het bestand <filename>OmegaT.jar</filename> dat zich bevindt in <filename>OmegaT.app/Contents/MacOS/Java/</filename> om <application>OmegaT</application> vanaf de opdrachtregel te starten. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
+      <para>Gebruik het bestand <filename>OmegaT.jar</filename> dat zich bevindt in <filename>OmegaT.app/Contents/MacOS/Java/</filename> om <application>OmegaT</application> vanaf de opdrachtregel te starten. Bekijk &quot;<link linkend="commandline.launching" endterm="commandline.launching.title"/>&quot; hieronder voor meer informatie.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -276,7 +276,7 @@
     <section id="running.OmegaT.other">
       <title><application>OmegaT</application> uitvoeren</title>
 
-      <para>Als <application>OmegaT</application> eenmaal is geïnstalleerd, kunt u het direct vanaf de opdrachtregel starten, u kunt een script maken dat de startparameters voor de opdrachtregel bevat of u kunt op <filename>OmegaT.jar</filename> klikken om het direct uit te voeren. Methoden verschillen, afhankelijk van de distributie. Zorg er voor dat de instellingen van uw <varname>PATH</varname> juist zijn en dat <filename>.jar</filename>-bestanden juist zijn gekoppeld aan een Java-starter. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
+      <para>Als <application>OmegaT</application> eenmaal is geïnstalleerd, kunt u het direct vanaf de opdrachtregel starten, u kunt een script maken dat de startparameters voor de opdrachtregel bevat of u kunt op <filename>OmegaT.jar</filename> klikken om het direct uit te voeren. Methoden verschillen, afhankelijk van de distributie. Zorg er voor dat de instellingen van uw <varname>PATH</varname> juist zijn en dat <filename>.jar</filename>-bestanden juist zijn gekoppeld aan een Java-starter. Bekijk &quot;<link linkend="commandline.launching" endterm="commandline.launching.title"/>&quot; hieronder voor meer informatie.</para>
     </section>
   </section>
 
@@ -300,8 +300,8 @@
     <para>Merk op dat als u argumenten voor het opstarten wilt gebruiken (zie boven), u de normale installatie moet gebruiken.</para>
   </section>
 
-  <section>
-    <title>OmegaT starten vanaf de opdrachtregel</title>
+  <section id="commandline.launching">
+    <title id="commandline.launching.title">OmegaT starten vanaf de opdrachtregel</title>
 
     <para>Normaal gesproken is het niet nodig om <application>OmegaT</application> te starten vanaf de opdrachtregel. Het alternatief van de opdrachtregel stelt echter de gebruiker in staat om het gedrag van het programma te beheren en aan te passen. Er zijn twee manieren om <application>OmegaT</application> te starten met behulp van de opdrachtregel.</para>
 

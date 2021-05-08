@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
   <title>Uitlijnen</title>
 
@@ -12,7 +12,7 @@
 
     <para>Probeer de parameters te wijzigen als het uitlijnen eruit ziet alsof het kan worden verbeterd. In de meeste gevallen geldt: hoe lager de <guilabel>Gemiddelde score</guilabel> is, hoe beter de uitlijning zal zijn.</para>
 
-    <para>In modus <guilabel>Heap-gewijze</guilabel> worden de teksten globaal geëvalueerd. In modus <guilabel>Parse-gewijze</guilabel> worden zij segment na segment geëvalueerd.</para>
+    <para>In modus <guilabel>Heap-gewijze</guilabel> worden de teksten globaal geëvalueerd. In modus <guilabel>Parse-gewijze</guilabel> worden zij segment na segment geëvalueerd. De optie verschijnt alleen als een dergelijke selectie mogelijk is.</para>
 
     <para>Gebruik modus <guilabel>ID vergelijking</guilabel> om teksten met Sleutel=Waarde uit te lijnen. Dit werkt zelfs als de sleutels niet in dezelfde volgorde in de twee bestanden staan en/of als de twee bestanden niet dezelfde hoeveelheid informatie bevatten. Deze optie verschijnt alleen als beide geselecteerde bestanden worden herkend als bestanden met Sleutel=Waarde.</para>
 

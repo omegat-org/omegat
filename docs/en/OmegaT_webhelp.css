@@ -56,7 +56,7 @@ h1 {
     background-color:#FDFDFD;
 
     */
-    font-size:1.33em;
+
     line-height: 1.13;
     margin-top : 0;
     padding-bottom: .3em;
@@ -80,10 +80,11 @@ h1 {
 
 
 h2 {
-    font-size:1.25em;
+    font-size:1.35em;
     line-height: 1.2;
     margin: 0.8em 0;
     padding-top: 1em;
+	border-bottom: 1px solid lightgray;
 }
 
 h3 {
@@ -406,7 +407,7 @@ pre.programlisting {
     text-align:left;
     padding: 1.2em 0.5em 0 1.5em;
 }
-                    
+
 
 /* index page */
 #wh-content .book  div.toc {

@@ -176,7 +176,7 @@
     <section id="running.OmegaT.Linux">
       <title><application>OmegaT</application>-ohjelman ajaminen</title>
 
-      <para>Voit käynnistää OmegaT-ohjelman joko komentoriviltä käyttämällä komentosarjaa määritteineen tai napsauttamalla <filename>OmegaT.jar</filename>-tiedostoa. Käynnistystavat vaihtelevat jakelusta riippuen. Varmista, että <varname>PATH</varname>-asetuksesi ovat oikein ja että <filename>.jar</filename>-tiedostot on liitety oikein Java Launcher -käynnistysohjelmaan. Lisää tietoa löydät alhaalta kohdasta &quot;Käynnistäminen komentoriviltä&quot;.</para>
+      <para>Voit käynnistää OmegaT-ohjelman joko komentoriviltä käyttämällä komentosarjaa määritteineen tai napsauttamalla <filename>OmegaT.jar</filename>-tiedostoa. Käynnistystavat vaihtelevat jakelusta riippuen. Varmista, että <varname>PATH</varname>-asetuksesi ovat oikein ja että <filename>.jar</filename>-tiedostot on liitety oikein Java Launcher -käynnistysohjelmaan. Lisää tietoa löydät alhaalta kohdasta &quot;<link linkend="commandline.launching" endterm="commandline.launching.title"/>&quot;.</para>
     </section>
   </section>
 
@@ -218,7 +218,7 @@
 
       <para>Jos haluat käynnistää useita <filename>OmegaT.app</filename>-esiintymiä, kaksoisnapsauta kansiossa <filename>OmegaT.app/Contents/MacOS/</filename> olevaa <emphasis>OmegaT</emphasis>-tiedostoa.</para>
 
-      <para>Käynnistä <application>OmegaT</application> komentoriviltä käyttämällä kansiossa <filename>OmegaT.app/Contents/MacOS/Java/</filename> olevaa <filename>OmegaT.jar</filename>-tiedostoa. Lisää tietoa löydät alhaalta kohdasta &quot;Käynnistäminen komentoriviltä&quot;.</para>
+      <para>Käynnistä <application>OmegaT</application> komentoriviltä käyttämällä kansiossa <filename>OmegaT.app/Contents/MacOS/Java/</filename> olevaa <filename>OmegaT.jar</filename>-tiedostoa. Lisää tietoa löydät alhaalta kohdasta &quot;<link linkend="commandline.launching" endterm="commandline.launching.title"/>&quot;.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -276,7 +276,7 @@
     <section id="running.OmegaT.other">
       <title><application>OmegaT</application>-ohjelman ajaminen</title>
 
-      <para>Kun <application>OmegaT</application> on asennettu, voit käynnistää ohjelman suoraan komentoriviltä, voit luoda komentoriville komentosarjan määritteineen tai voit avata ohjelman suoraan napsauttamalla <filename>OmegaT.jar</filename>-tiedostoa. Käynnistystavat vaihtelevat jakelusta riippuen. Varmista, että <varname>PATH</varname>-asetuksesi ovat oikein ja että <filename>.jar</filename>-tiedostot on liitety oikein Java Launcher -käynnistysohjelmaan. Lisää tietoa löydät alhaalta kohdasta &quot;Käynnistäminen komentoriviltä&quot;.</para>
+      <para>Kun <application>OmegaT</application> on asennettu, voit käynnistää ohjelman suoraan komentoriviltä, voit luoda komentoriville komentosarjan määritteineen tai voit avata ohjelman suoraan napsauttamalla <filename>OmegaT.jar</filename>-tiedostoa. Käynnistystavat vaihtelevat jakelusta riippuen. Varmista, että <varname>PATH</varname>-asetuksesi ovat oikein ja että <filename>.jar</filename>-tiedostot on liitety oikein Java Launcher -käynnistysohjelmaan. Tarkista alla oleva &quot;&lt;l3/&gt;&quot; saadaksesi lisää tietoa.</para>
     </section>
   </section>
 
@@ -300,8 +300,8 @@
     <para>Mikäli haluat tai sinun on pakko käyttää käynnistyskomennon argumentteja (ks. yllä), huomaa, että sinun on käytettävä tavallista asennustapaa.</para>
   </section>
 
-  <section>
-    <title>OmegaT:n käynnistäminen komentoriviltä</title>
+  <section id="commandline.launching">
+    <title id="commandline.launching.title">OmegaT:n käynnistäminen komentoriviltä</title>
 
     <para>Tavallisesti <application>OmegaT</application>:tä ei tarvitse käynnistää komentoriviltä. Komentorivivaihtoehto antaa kuitenkin käyttäjän ohjata ja muokata ohjelman käyttäytymistä. <application>OmegaT</application>:n voi käynnistää komentoriviltä kahdella tavalla:</para>
 

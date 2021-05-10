@@ -24,11 +24,11 @@
 
     <itemizedlist>
       <listitem>
-        <para>Tuo tähän kansioon sanakirjatiedostot, joita haluat käyttää. Voit tehdä tämän kahdella tavalla. Voit käyttää tiedostonhallintaohjelmaa ja kopioida muualla olevat tiedostot uuteen kansioon, tai käyttää OmegaT:n <emphasis role="bold">Asenna uusi sanakirja</emphasis> -toimintoa. Toiminto laatii listan käytettävistä sanakirjoista, ja voit valita niistä haluamasi. Huomioi, että tarvitset internetyhteyden käyttääksesi asennustoimintoa. Valittujen kielten asentaminen voi kestää jonkin aikaa, mutta näet ne lopulta kielentarkistinikkunassa.</para>
+        <para>Tuo tähän kansioon sanakirjatiedostot, joita haluat käytt Voit tehdä tämän kahdella tavalla. Voit käyttää tiedostonhallintaohjelmaa ja kopioida muualla olevat tiedostot uuteen kansioon, tai käyttää OmegaT:n <emphasis role="bold">Asenna uusi sanakirja</emphasis> -toimintoa. Toiminto laatii listan käytettävistä sanakirjoista, ja voit valita niistä haluamasi. Huomioi, että tarvitset internetyhteyden käyttääksesi asennustoimintoa. Valittujen kielten asentaminen voi kestää jonkin aikaa, mutta näet ne lopulta kielentarkistinikkunassa.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Jos sinulla jo on sopivia sanakirjatiedostoja (esim. Apache OpenOfficen, LibreOfficen, Firefoxin tai Thunderbirdin osana), ne kannattaa kopioida ne käsin sanakirjakansioon. Sanakirjojen haku netistä on kuitenkin helpompaa. Käytä tällöin kenttää <emphasis role="bold">Online-sanakirjojen URL-osoite</emphasis>:</para>
+    <para>Jos sinulla jo on sopivia sanakirjatiedostoja (esim. Apache OpenOfficen, LibreOfficen, Firefoxin tai Thunderbirdin osana), ne kannattaa kopioida käsin sanakirjakansioon. Sanakirjojen haku netistä on kuitenkin helpompaa. Käytä tällöin kenttää <emphasis role="bold">Online-sanakirjojen URL-osoite</emphasis>:</para>
 
     <figure id="spellchecker.setup">
       <title>Oikeinkirjoituksen tarkistuksen asetukset</title>
@@ -52,7 +52,7 @@
   <section>
     <title>Oikeinkirjoitussanastojen käyttö</title>
 
-    <para>Sinun ei tarvitse erikseen määritellä OmegaT:tä käyttämään tiettyä oikeinkirjoitussanastoa. OmegaT käyttää automaattisesti projektin kielikoodin mukaista sanakirjaa. Tarkista silti, että kielikoodit ovat täsmälleen samanlaiset. Esimerkiksi sanakirja, jonka tunnus on FR-FR, ei toimi, kun kohdekieleksi on asetettu pelkkä FR. Nimeä sanakirjatiedostot uudelleen tai muuta projektin kieliasetuksia tarvittaessa.</para>
+    <para>Sinun ei tarvitse erikseen määritellä OmegaT:tä käyttämään tiettyä oikeinkirjoitussanastoa. OmegaT käyttää automaattisesti projektin kielikoodin mukaista sanakirjaa. Tarkista silti, että kielikoodit ovat täsmälleen samanlaiset. Esimerkiksi sanakirja, jonka tunnus on FR-FR, ei toimi, kun kohdekieleksi on asetettu pelkkä FR. Nimeä sanakirjatiedostot uudelleen tai muuta tarvittaessa projektin kieliasetuksia.</para>
 
     <para>Ota oikeinkirjoituksen tarkistuksen käyttöön kohdassa <guimenuitem>Valinnat &gt; Oikeinkirjoituksen tarkistus </guimenuitem> ja laita <guilabel>Tarkista oikeinkirjoitus automaattisesti</guilabel> -ruutuun rasti (ks. yllä).</para>
 

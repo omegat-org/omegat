@@ -62,7 +62,7 @@
   - Finnish localisation updated to 5.5.0 (UI, readme, documentation)
   - French localisation updated to 5.5.0 (UI, scripts, readme, documentation)
   - German localisation updated to 5.5.0 (UI, scripts, readme, documentation)
-  - Morisien localisation added at 5.5.0 (UI, scripts, readme) 
+  - Morisien localisation added at 5.5.0 (UI, scripts, readme, Instant Start) 
   - Portuguese localisation updated to 5.5.0 (UI, scripts, readme, documentation)
   - Russian localisation updated to 5.5.0 (UI, readme)
   - Simplified Chinese localisation updated to 5.5.0 (UI, documentation)

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>Aprann servi OmegaT an zis sink minit!</title>
+
+  <section id="create.and.open.new.project">
+    <title>Prepar enn nouvo proze<indexterm class="singular">
+        <primary>Proze</primary> <secondary>Kree / ouver</secondary>
+      </indexterm></title>
+
+    <para><remark>Not:</remark> Lor Mac, servi tous <keycap>Command</keycap> olie tous <keycap>Control</keycap>.</para>
+
+      <indexterm class="singular">
+        <primary>Meni Proze</primary> <secondary>Nouvo...</secondary>
+      </indexterm>
+
+    <para>Pou koumans servi OmegaT, kree enn proze ki pou kontenir tou ou bann fisie, setadir fisie sours, bann memwar tradiksion, bann gloser ek tradiksion final (fisie sib). Dan meni <guimenu>Proze</guimenu>, swazir <menuchoice><guimenuitem>Nouvo...</guimenuitem></menuchoice> ek met nom ou proze. Pa bliye lanplasman proze-la, parski ou pou bizin aksed sa dosie-la apre.</para>
+
+    <para>Apre ki ou finn nomm ou proze, enn lafnet <guilabel>Kree enn Nouvo Proze</guilabel> pou aparet. Dan lao sa laftnet-la, swazir lang fisie sours ek lang tradiksion, e klik lor <guibutton>OK</guibutton> pou kontigne.</para>
+
+    <para>Ninport ki moman, ou kapav servi sortket <keycap>Ctrl+E</keycap> pou retourn lor bann lezot paramet dan sa lafnet-la.</para>
+
+    <para>Answit, laftnet <guilabel>Bann Fisie Proze</guilabel> pou ouver. Klik lor <guibutton>Kopie bann Fisie ver Dosie Sours...</guibutton> pou swazir ou bann fisie sours. OmegaT pou kopie bann fisie ki ou finn seleksione dan sou-dosie <filename>/source/</filename> dan proze ki finn fek kree la. Enn fwa ki bann fisie sours sarze dan pano <guilabel>Editer</guilabel>, ou kapav ferm lafnet <guilabel>Bann Fisie Proze</guilabel>.</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>Tradir fisie-la</title>
+
+    <para>OmegaT pou montre ou segman par segman pou tradir. Kan ki ou finn tradir enn segman, apiy lor <keycap>Ctrl+U</keycap> pou al lor prosin segman ki pa finn ankor tradir (ouswa <keycap>Ctrl+Shift+U</keycap> pour al lor prosin segman ki finn fini tradi). Ninport ki moman ou oule vizializ ou tradiksion final, apiy lor <keycap>Ctrl+D</keycap> pou kree bann dokiman final dan sou-dosie <filename>/target/</filename> ou dosie proze. Pandan tradiksion, servi bann meni <guimenu>Edit</guimenu> ek <guimenu>Al</guimenu> pou realiz diver fonksion bien pratik.</para>
+  </section>
+
+  <section>
+    <title>Valid ou bann baliz</title>
+
+    <para>Si ou bann fisie sours zot bann fisie formate, par exanp si zot dan format Microsoft Word, LibreOffice Writer ouswa HTML, OmegaT pou konverti formataz-la an bann baliz otour ou text. Souvan, bann dokiman ena ousi bann baliz ki pena okenn rapor avek formataz me ki bien inportan dan fisie sours (ek fisie sib). Enn fraz sours kapav kouma sa:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+
+    <para>OmegaT, toutfwa, pou montre ou fraz-la sa manier-la:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+    
+    <para>Bann baliz dan OmegaT zot gri, donk li fasil pou rekonet zot. Zot proteze, donk ou pa kapav fer okenn modifikasion lor zotmem, me ou kapav siprim zot, ekrir zot manielman ou deplas zot dan ou fraz sib. Toutfwa, si ou finn fer bann erer letan ou finn ekrir bann baliz formataz, kapav ou bann dokiman final par pou ouver. Donk, apiy lor <keycap>Ctrl+Shift+V</keycap> avan ou kree ou bann fisie final, pou chek sipa ou bann baliz korek.</para>
+  </section>
+
+  <section>
+    <title>Kree ou tradiksion final</title>
+
+    <para>Kan ou sir ki pena okenn erer baliz dan ou proze, apiy lor <keycap>Ctrl+D</keycap> pou kree bann fisie sib dan sou-dosie <filename>/target/</filename> dan dosie ou proze.</para>
+  </section>
+
+  <section>
+    <title>Detrwa lot pwin ki ou bizin kone</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Si enn fisie pa pe ouver dan pano <guilabel>Editer</guilabel>, kapav li dan enn format ki pa konpatib avek OmegaT. Get <menuchoice><guimenuitem>Opsion</guimenuitem><guimenuitem>Preferans...</guimenuitem><guimenuitem>Filt Fisie</guimenuitem></menuchoice> pou enn lalis bann format file konpatib avek OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ou kapav kree enn nouvo proze pou sak nouvo travay, ek ou kapav azout enn fisie sours dan enn proze ninport ki moman.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pou chek bann paramet ou proze, apiy lor <keycap>Ctrl+E</keycap> pou ouver lafnet propriyete proze. Pou aksed lalis bann fisie ou proze, apiy lor <keycap>Ctrl+L</keycap> pou ouver lafnet <guilabel>Bann Fisie Proze</guilabel>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Kan ou terminn ou tradiksion, OmegaT export trwa memwar tradiksion <filename>level1</filename>, <filename>level2</filename> ek <filename>omegat</filename> dan dosie ou proze. Bann itilizater lot program tradiksion kapav ouver bann memwar <filename>level1</filename> ek <filename>level2</filename>.  Par kont, zis OmegaT kapav servi memwar <filename>omegat</filename>, ek ou kapav servi sa memwar-la dan ninport ki proze fitir avek OmegaT.  Si ou met sa bann fisie memwar tradiksion la dan sou-dosie <filename>/tm/</filename> ou proze, OmegaT pou otomatikman sey trouv bann segman similer kan ou tradir lezot segman. Apel sa bann segman-la bann &quot;korespondans&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pou azout enn nouvo term dan gloser, apiy lor <keycap>Ctrl+Shift+G</keycap>, ouswa kopie bann gloser existan dan sous-dosie <filename>/glossary/</filename> dan dosie ou proze, ek OmegaT pou rod bann term ladan otomatikman.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Parfwa, li bien itil fer bann resers dan ou text sours ek dan ou tradiksion: servi <keycap>Ctrl+F</keycap> pou fer lafnet <guilabel>Resers Textiel</guilabel> aparet ninport kan.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pou enn introdiksion pli detaye, lir <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for beginners</ulink> (Angle) ki disponib lor sit web OmegaT. Si ou bizin led pou servi OmegaT, ou kapav zwen <ulink url="https://omegat.org/support">group bann itilizater OmegaT</ulink>.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

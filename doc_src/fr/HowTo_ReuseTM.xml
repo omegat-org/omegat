@@ -9,7 +9,7 @@
 
   <para>Si vous désirez réutiliser la mémoire de traduction d'un projet précédent (par ex, parce que le nouveau projet ressemble au projet précédent ou parce qu'il utilise une terminologie qui a déjà été rencontrée), il est possible d'utiliser ces mémoires de traduction en tant « qu'importation des mémoires de traduction », c'est-à-dire de les importer dans votre nouveau projet. Dans ce cas, placez la mémoire de traduction que vous voulez utiliser dans le dossier <emphasis>/tm</emphasis> ou <emphasis>/tm</emphasis>/auto de votre nouveau projet : dans le premier cas, vous obtiendrez des correspondances venant des mémoires de traduction dans le volet Correspondances ; dans le second cas, ces mémoires de traduction seront utilisées pour la prétraduction de votre texte source.</para>
 
-  <para>Par défaut, le dossier /tm est localisé dans le dossier racine du projet (par exemple ...<emphasis>/MonProjet/tm</emphasis>), mais il est toujours possible de choisir un dossier différent dans la boîte de dialogue de propriétés du projet. Cela est utile si vous utilisez régulièrement des mémoires de traduction produites préalablement (parce qu'elles traitent, par exemple, du même sujet ou qu'elles sont destinées au même client). Dans ce cas, la procédure utile serait :</para>
+  <para>Par défaut, le dossier ./tm est localisé dans le dossier racine du projet (par exemple ...<emphasis>/MonProjet/tm</emphasis>), mais il est toujours possible de choisir un dossier différent dans la boîte de dialogue de propriétés du projet. Cela est utile si vous utilisez régulièrement des mémoires de traduction produites préalablement (parce qu'elles traitent, par exemple, du même sujet ou qu'elles sont destinées au même client). Dans ce cas, la procédure utile serait :</para>
 
   <itemizedlist>
     <listitem>
@@ -29,7 +29,7 @@
     </listitem>
   </itemizedlist>
 
-  <para>Remarquez que tous les fichiers TMX localisés dans le dépôt /tm sont analysés lorsque le projet est ouvert. Placer toutes les mémoires de traduction dont vous disposez dans ce dossier risque donc de ralentir OmegaT inutilement. Vous pouvez même supprimer celles dont vous n'avez plus besoin après avoir utilisé leur contenu pour remplir le fichier <filename>project-save.tmx</filename>.</para>
+  <para>Remarquez que tous les fichiers TMX localisés dans le dépôt ./tm sont analysés lorsque le projet est ouvert. Placer toutes les mémoires de traduction dont vous disposez dans ce dossier risque donc de ralentir OmegaT inutilement. Vous pouvez même supprimer celles dont vous n'avez plus besoin après avoir utilisé leur contenu pour remplir le fichier <filename>project-save.tmx</filename>.</para>
 
   <section>
     <title>Importer et exporter des mémoires de traduction</title>

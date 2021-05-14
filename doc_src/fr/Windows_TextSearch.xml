@@ -71,7 +71,7 @@
         <term>recherche par mot clé</term>
 
         <listitem>
-          <para>Recherche les segments contenant tous les mots clés spécifiés, sans tenir compte de l'ordre. Sélectionnez la recherche par mot clé pour rechercher des mots entiers uniques, quel que soit le nombre de fois où ils apparaissent et l'ordre de leur apparition. OmegaT affiche une liste de tous les segments contenant l'ensemble des mots spécifiés. Les recherches par mot clé sont similaires à des recherches sur les moteurs de recherche (comme Google) incluant « tous les mots suivants » (équivalent au « ET » logique). Utiliser la recherche par mot clé avec <emphasis><literal>open file</literal></emphasis> permettra ainsi de trouver toutes les occurrences de la chaîne de caractères <emphasis><literal>open file</literal>,</emphasis> aussi bien que <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis>, etc.</para>
+          <para>Recherche les segments contenant tous les mots-clés spécifiés, sans tenir compte de l'ordre. Sélectionnez la recherche par mot clé pour rechercher des mots entiers uniques, quel que soit le nombre de fois où ils apparaissent et l'ordre de leur apparition. OmegaT affiche une liste de tous les segments contenant l'ensemble des mots spécifiés. Les recherches par mot-clé sont similaires à des recherches sur les moteurs de recherche (comme Google) incluant « tous les mots » (équivalent au « ET » logique). Utiliser la recherche par mot clé avec <emphasis><literal>open file</literal></emphasis> permettra ainsi de trouver toutes les occurrences de la chaîne de caractères <emphasis><literal>open file</literal>,</emphasis> aussi bien que <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis>, etc.</para>
         </listitem>
       </varlistentry>
 
@@ -88,7 +88,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Respecter la casse</emphasis> : la recherche sera effectuée pour la chaîne de caractères exactement spécifiée, c'est à dire que la recherche tient compte de la casse (majuscule, minuscule).</para>
+        <para><emphasis role="bold">Respecter la casse</emphasis> : la recherche sera effectuée pour la chaîne de caractères exactement spécifiée, c'est-à-dire que la recherche tient compte de la casse (majuscule, minuscule).</para>
       </listitem>
 
       <listitem>

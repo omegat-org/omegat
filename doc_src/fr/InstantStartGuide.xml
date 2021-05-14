@@ -20,13 +20,13 @@
 
     <para>Utilisez le raccourci clavier <keycap>Ctrl+E</keycap> si vous avez besoin de revenir aux réglages de cette fenêtre plus tard.</para>
 
-    <para>OmegaT ouvre ensuite la fenêtre <guilabel>Fichiers du projet</guilabel>. Cliquez sur <guibutton>Copier des fichiers dans le dossier source</guibutton> pour sélectionner le fichier source. OmegaT copie le fichier sélectionné dans le dossier <filename>/source</filename> du projet que vous venez de créer. Une fois le fichier source chargé et affiché dans le volet <guilabel>Édition</guilabel>, vous pouvez fermer la fenêtre <guilabel>Fichiers du projet</guilabel>.</para>
+    <para>OmegaT ouvre ensuite la fenêtre <guilabel>Fichiers du projet</guilabel>. Cliquez sur <guibutton>Copier des fichiers dans le dossier source</guibutton> pour sélectionner le fichier source. OmegaT copie le fichier sélectionné dans le dossier <filename>./source</filename> du projet que vous venez de créer. Une fois le fichier source chargé et affiché dans le volet <guilabel>Édition</guilabel>, vous pouvez fermer la fenêtre <guilabel>Fichiers du projet</guilabel>.</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
     <title>Traduction du fichier</title>
 
-    <para>OmegaT vous propose un segment à traduire après l'autre. Utilisez le raccourci clavier <keycap>Ctrl+U</keycap> pour accéder au prochain segment non traduit (ou <keycap>Ctrl+Shift+U</keycap> pour accéder au segment traduit suivant). Si vous souhaitez obtenir un aperçu de votre traduction dans son format final, utilisez le raccourci <keycap>Ctrl+D</keycap> pour générer le document traduit dans le dossier <filename>/target</filename> du projet. Les menus <guimenu>Édition</guimenu> et <guimenu>Atteindre</guimenu> vous donnent accès à diverses fonctions très utiles pendant le travail de traduction.</para>
+    <para>OmegaT vous propose un segment à traduire après l'autre. Utilisez le raccourci clavier <keycap>Ctrl+U</keycap> pour accéder au prochain segment non traduit (ou <keycap>Ctrl+Shift+U</keycap> pour accéder au segment traduit suivant). Si vous souhaitez obtenir un aperçu de votre traduction dans son format final, utilisez le raccourci <keycap>Ctrl+D</keycap> pour générer le document traduit dans le dossier <filename>./target</filename> du projet. Les menus <guimenu>Édition</guimenu> et <guimenu>Atteindre</guimenu> vous donnent accès à diverses fonctions très utiles pendant le travail de traduction.</para>
   </section>
 
   <section>
@@ -60,7 +60,7 @@
   <section>
     <title>Création du fichier traduit</title>
 
-    <para>Après avoir vérifié que votre traduction ne contient pas d'erreur de balises, générez les fichiers cibles (raccourci clavier <keycap>Ctrl+D</keycap>) dans le dossier <filename>/target</filename> du projet.</para>
+    <para>Après avoir vérifié que votre traduction ne contient pas d'erreur de balises, générez les fichiers cibles (raccourci clavier <keycap>Ctrl+D</keycap>) dans le dossier <filename>./target</filename> du projet.</para>
   </section>
 
   <section>
@@ -92,7 +92,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Vous pouvez ajouter un terme au glossaire à l'aide du raccourci clavier <keycap>Ctrl+Shift+G</keycap>, ou copier d'autres glossaires dans le dossier <filename>/glossary</filename> du projet : OmegaT y recherche automatiquement les mots associés au segment actif.</para>
+        <para>Vous pouvez ajouter un terme au glossaire à l'aide du raccourci clavier <keycap>Ctrl+Shift+G</keycap>, ou copier d'autres glossaires dans le dossier <filename>./glossary</filename> du projet : OmegaT y recherche automatiquement les mots associés au segment actif.</para>
       </listitem>
     </itemizedlist>
 

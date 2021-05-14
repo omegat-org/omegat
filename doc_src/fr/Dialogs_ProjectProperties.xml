@@ -59,7 +59,7 @@
         <listitem>
           <para>Les règles de segmentation sont généralement valables pour l'ensemble des projets. Cependant, il est possible que l'utilisateur ait besoin de créer un nouvel ensemble de règles qui s'appliqueront spécifiquement au projet en question. Appuyez sur ce bouton pour ouvrir la boîte de dialogue, cochez la case <guimenuitem>Appliquer les règles de segmentation spécifiques au projet</guimenuitem> puis ajustez les règles de segmentation comme vous le souhaitez. Ce nouvel ensemble de règles sera sauvegardé avec le projet et n'interférera pas avec l'ensemble général de règles de segmentation. Pour supprimer les règles de segmentation spécifiques au projet, décochez la case. Voir le chapitre <link linkend="dialogs.preferences.segmentationsetup">Configuration de la segmentation</link> pour plus d'informations concernant les règles de segmentation.</para>
 
-          <para><emphasis>Astuce :</emphasis> l'ensemble des règles de segmentation spécifiques à un projet est sauvegardé dans le fichier <filename>project/omegat/segmentation.conf.</filename></para>
+          <para><emphasis>Astuce :</emphasis> l'ensemble des règles de segmentation spécifiques à un projet est sauvegardé dans le fichier <filename>./omegat/segmentation.conf.</filename></para>
         </listitem>
       </varlistentry>
 
@@ -69,7 +69,7 @@
         <listitem>
           <para>De manière similaire, l'utilisateur peut créer des filtres de fichiers spécifiques au projet qui seront sauvegardés avec le projet et ne seront donc valables que pour le projet en cours. Pour créer un ensemble de filtres de fichiers spécifiques au projet, cliquez sur le bouton <guibutton>Filtres de fichiers...</guibutton> puis cochez la case <guimenuitem>Appliquer des paramètres de filtres de fichiers spécifiques au projet</guimenuitem> dans la fenêtre qui s'ouvre. Une copie des modifications apportées à la configuration des filtres sera sauvegardée avec le projet. Pour supprimer les filtres de fichiers spécifiques au projet, décochez la case. Remarquez que dans le menu <guimenuitem>Options -&gt; Filtres de fichiers...</guimenuitem>, ce sont les filtres globaux des utilisateurs qui sont modifiés, et pas seulement les filtres du projet. Voir chapitre<link linkend="dialogs.preferences.filefilters"> Filtres de fichiers</link>pour plus d'informations à ce sujet.</para>
 
-          <para><emphasis>Astuce :</emphasis> l'ensemble des filtres de fichiers d'un projet donné est sauvegardé dans le fichier <filename>project/omegat/filters.xml.</filename></para>
+          <para><emphasis>Astuce :</emphasis> l'ensemble des filtres de fichiers d'un projet donné est sauvegardé dans le fichier <filename>./omegat/filters.xml.</filename></para>
         </listitem>
       </varlistentry>
 
@@ -108,7 +108,7 @@
       </listitem>
 
       <listitem>
-        <para>n'est pas copié dans le dossier /target durant le processus de création des fichiers traduits.</para>
+        <para>n'est pas copié dans le dossier ./target durant le processus de création des fichiers traduits.</para>
       </listitem>
     </itemizedlist>
 

@@ -14,7 +14,7 @@
 
     <orderedlist>
       <listitem>
-        <para>Créer un dépot SVN ou Git sur un serveur qui sera accessible aux traducteurs.</para>
+        <para>Créer un dépôt SVN ou Git sur un serveur qui sera accessible aux traducteurs.</para>
       </listitem>
 
       <listitem>
@@ -62,7 +62,7 @@
 
     <orderedlist>
       <listitem>
-        <para>copier les fichiers dans le dossier <filename>source</filename></para>
+        <para>copier les fichiers dans le dossier <filename>./source</filename></para>
       </listitem>
 
       <listitem>

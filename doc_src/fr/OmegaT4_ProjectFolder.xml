@@ -14,7 +14,7 @@
   <section>
     <title>target</title>
 
-    <para>À l'origine, ce sous-dossier est vide. Pour y ajouter du contenu, sélectionnez<menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Projet</guimenu> <guimenuitem>Créer les documents traduits</guimenuitem> </menuchoice>. Les fichiers contenus dans le dossier <filename>source</filename> (qu'ils soient traduits ou non) sont alors produits dans le dossier target (cible) et présentent la même hiérarchie que celle du dossier source. Le contenu du sous-dossier target (cible) montre l'état actuel de la traduction, telle qu'on la trouve dans la mémoire de traduction du projet (qui est sauvegardée dans le fichier<emphasis role="bold">/omegat/project_save.tmx</emphasis> en cours). Les segments non traduits resteront donc dans la langue source.</para>
+    <para>À l'origine, ce sous-dossier est vide. Pour y ajouter du contenu, sélectionnez<menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Projet</guimenu> <guimenuitem>Créer les documents traduits</guimenuitem> </menuchoice>. Les fichiers contenus dans le dossier <filename>source</filename> (qu'ils soient traduits ou non) sont alors produits dans le dossier target (cible) et présentent la même hiérarchie que celle du dossier source. Le contenu du sous-dossier target (cible) montre l'état actuel de la traduction, telle qu'on la trouve dans la mémoire de traduction du projet (qui est sauvegardée dans le fichier<emphasis role="bold">./omegat/project_save.tmx</emphasis> en cours). Les segments non traduits resteront donc dans la langue source.</para>
   </section>
 
   <section>

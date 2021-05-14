@@ -12,9 +12,9 @@
   <section>
     <title>Glossaire par défaut</title>
 
-    <para>Le glossaire modifiable par défaut est situé dans le dossier <filename>/glossary</filename> du projet et est nommé <filename>glossary.txt</filename>.</para>
+    <para>Le glossaire modifiable par défaut est situé dans le dossier <filename>./glossary</filename> du projet et est nommé <filename>glossary.txt</filename>.</para>
 
-    <para>Son nom et son emplacement peuvent être modifiés dans le dialogue des propriétés du projet mais son extension doit être <filename>.txt</filename> ou <filename>.utf8</filename> et il doit être situé à l'intérieur du dossier <filename>glossary</filename> du projet.</para>
+    <para>Son nom et son emplacement peuvent être modifiés dans le dialogue des propriétés du projet mais son extension doit être <filename>.txt</filename> ou <filename>.utf8</filename> et il doit être situé à l'intérieur du dossier <filename>./glossary</filename> du projet.</para>
 
     <para>Il n'est pas nécessaire que le fichier existe au moment de la configuration, il sera créé au moment de l'ajout de la première entrée de glossaire. Si le fichier existe déjà, il n'y a pas de vérification du format ou du jeu caractères du fichier : les nouvelles entrées sont toujours présentées sous format texte séparé par des tabulations et le fichier sera enregistré en encodage UTF-8.</para>
   </section>
@@ -22,7 +22,7 @@
   <section>
     <title>Utilisation</title>
 
-    <para>Pour utiliser un glossaire existant, placez-le simplement dans le dossier <filename>/glossary</filename> après avoir créé le projet. <application>OmegaT</application> détecte automatiquement les fichiers glossaire présents dans ce dossier lorsqu'un projet est ouvert.</para>
+    <para>Pour utiliser un glossaire existant, placez-le simplement dans le dossier <filename>./glossary</filename> après avoir créé le projet. <application>OmegaT</application> détecte automatiquement les fichiers glossaire présents dans ce dossier lorsqu'un projet est ouvert.</para>
 
     <para>Pour ajouter un nouveau terme au glossaire modifiable, utilisez <guimenuitem>Édition</guimenuitem> &gt; <guimenuitem>Créer une entrée de glossaire</guimenuitem> (<keycap>Ctrl+Shift+G</keycap>). Les nouveaux termes seront immédiatement reconnus. Pour ajouter des nouveaux termes aux glossaires de référence, modifiez les dans un éditeur de texte extérieur. Les nouveaux termes seront reconnus dès que les modifications seront enregistrées.</para>
 
@@ -62,7 +62,7 @@
       </tbody>
     </table>
 
-    <para>Les glossares doivent être situés dans le dossier <filename>/glossary</filename> du projet. Les glossaires situés dans des sous-dossiers sont également reconnus.</para>
+    <para>Les glossares doivent être situés dans le dossier <filename>./glossary</filename> du projet. Les glossaires situés dans des sous-dossiers sont également reconnus.</para>
   </section>
 
   <section>

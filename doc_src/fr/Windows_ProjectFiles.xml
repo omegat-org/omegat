@@ -11,7 +11,7 @@
 
   <itemizedlist>
     <listitem>
-      <para>le nombre total de fichiers traduisibles du projet. Il s'agit de tous les fichiers présents dans le dossier /source qui sont écrit dans un format qu'OmegaT est en mesure de traiter. Ce nombre est affiché entre parenthèses, à côté du titre « Fichiers du projet »</para>
+      <para>le nombre total de fichiers traduisibles du projet. Il s'agit de tous les fichiers présents dans le dossier ./source qui sont écrits dans un format qu'OmegaT est en mesure de traiter. Ce nombre est affiché entre parenthèses, à côté du titre « Fichiers du projet »</para>
     </listitem>
 
     <listitem>
@@ -29,7 +29,7 @@
     </listitem>
 
     <listitem>
-      <para>le nombre total de segments, le nombre de segments uniques (présents dans l'ensemble du projet), et le nombre de segments uniques déjà traduits sont affichés dans le bas de la fenêtre</para>
+      <para>le nombre total de segments, le nombre de segments uniques présents dans l'ensemble du projet, et le nombre de segments uniques déjà traduits sont affichés dans le bas de la fenêtre</para>
     </listitem>
   </itemizedlist>
 
@@ -39,5 +39,5 @@
 
   <para>Modifier les règles de segmentation peut avoir pour conséquence la modification du ratio segments/segments uniques. Il est cependant préférable que ceci soit évité une fois la traduction du projet commencée. Pour plus de détails, voir le chapitre : <emphasis>Règles de segmentation</emphasis>.</para>
 
-  <para><emphasis role="bold">Ajouter des fichiers au projet : </emphasis>Il est possible d'ajouter des fichiers source au projet en cliquant sur « <guimenuitem>Importer des fichiers source...</guimenuitem> ». Ceci copie les fichiers sélectionnés dans le dossier <filename>source</filename> et recharge le projet pour importer les nouveaux fichiers. Il est également possible d'ajouter des fichiers source provenant de pages internet (MediaWiki) en cliquant sur « <guimenuitem>Importer depuis MediaWiki</guimenuitem> » et en saisissant l'URL correspondant.</para>
+  <para><emphasis role="bold">Ajouter des fichiers au projet : </emphasis>Il est possible d'ajouter des fichiers source au projet en cliquant sur « <guimenuitem>Importer des fichiers source...</guimenuitem> ». Ceci copie les fichiers sélectionnés dans le dossier <filename>source</filename> et recharge le projet pour importer les nouveaux fichiers. Il est également possible d'ajouter des fichiers source provenant de pages internet, écrits dans MediaWiki, en cliquant sur <guimenuitem>Importer depuis MediaWiki</guimenuitem> et en saisissant l'URL correspondant.</para>
 </section>

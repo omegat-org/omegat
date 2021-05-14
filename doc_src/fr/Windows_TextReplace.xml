@@ -7,7 +7,7 @@
 
   <para>Cliquez ensuite sur le bouton <emphasis>Rechercher</emphasis> pour afficher toutes les occurrences correspondantes.</para>
 
-  <para>Entrez le nouveau mot ou la nouvelle expression (les expressions régulières ne sont pas prises en charge) dans la case <emphasis>Remplacer par</emphasis>, puis cliquez sur l'une des options suivantes :<itemizedlist>
+  <para>Entrez le nouveau mot ou groupe de mots (les expressions régulières ne sont pas prises en charge) dans la case <emphasis>Remplacer par</emphasis>, puis cliquez sur l'une des options suivantes :<itemizedlist>
       <listitem>
         <para><emphasis role="bold">Remplacer tout :</emphasis> effectue le remplacement de toutes les occurrences (après l'affichage d'une fenêtre de confirmation où le nombre d'occurrences est affiché).</para>
       </listitem>

@@ -35,7 +35,7 @@
 
   <itemizedlist>
     <listitem>
-      <para>faites régulièrement des copies du fichier /omegat/project_save.tmx sur des supports de sauvegarde comme des CD ou des DVD.</para>
+      <para>faites régulièrement des copies du fichier ./omegat/project_save.tmx sur des supports de sauvegarde comme des CD ou des DVD.</para>
     </listitem>
 
     <listitem>
@@ -43,7 +43,7 @@
     </listitem>
 
     <listitem>
-      <para>Faites particulièrement attention si vous apportez des modifications aux fichiers du dossier <literal>/source</literal> alors que vous êtes au milieu d'un projet. Si le fichier source est modifié après le début de la traduction, il est possible qu'<application>OmegaT</application> ne parvienne plus à trouver un segment que vous avez déjà traduit.</para>
+      <para>Faites particulièrement attention si vous apportez des modifications aux fichiers du dossier <literal>./source</literal> alors que vous êtes au milieu d'un projet. Si le fichier source est modifié après le début de la traduction, il est possible qu'<application>OmegaT</application> ne parvienne plus à trouver un segment que vous avez déjà traduit.</para>
     </listitem>
   </itemizedlist>
 

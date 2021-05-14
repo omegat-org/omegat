@@ -15,7 +15,7 @@
   segment that has a match in a glossary will be displayed in the Glossary
   pane.</para>
 
-  <section>
+  <section id="glossaries.defaultglossary">
     <title>Default glossary</title>
 
     <para>The default writable glossary is located in the the
@@ -34,7 +34,7 @@
     saved in UTF-8 encoding.</para>
   </section>
 
-  <section>
+  <section id="glossaries.usage">
     <title>Usage</title>
 
     <para>To use an existing glossary, simply place it in the
@@ -72,7 +72,7 @@
     segment.</para>
   </section>
 
-  <section>
+  <section id="glossaries.fileformat">
     <title>File format</title>
 
     <para>OmegaT glossary files are simple plain text three-column lists with
@@ -170,7 +170,7 @@
     recognized.</para>
   </section>
 
-  <section>
+  <section id="glossaries.commonproblems">
     <title>Common glossary problems</title>
 
     <para><emphasis role="bold">Problem: No glossary terms are displayed -

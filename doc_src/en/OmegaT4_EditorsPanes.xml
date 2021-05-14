@@ -124,7 +124,7 @@
       </listitem>
     </itemizedlist></para>
 
-  <section id="editor.pane">
+  <section id="panes.editor">
     <title>Editor</title>
 
     <para>This is where you type and edit your translation. The Editor pane
@@ -194,7 +194,7 @@
     <keycap>F2</keycap> again.</para>
   </section>
 
-  <section>
+  <section id="panes.fuzzymatches">
     <title>Fuzzy Matches</title>
 
     <para>The match viewer shows the most similar segments from translation
@@ -251,7 +251,7 @@
     translation memory that have no corresponding source segment.</para>
   </section>
 
-  <section>
+  <section id="panes.glossary">
     <title>Glossary</title>
 
     <para>The Glossary pane allows you to access your own collection of
@@ -271,7 +271,7 @@
     target by right clicking on the selection.</para>
   </section>
 
-  <section>
+  <section id="panes.dictionary">
     <title>Dictionary</title>
 
     <para>Dictionaries are the electronic equivalents of printed dictionaries
@@ -279,7 +279,7 @@
     desk. See more about them in the chapter on <link linkend="appendix.dictionaries">Dictionaries</link></para>
   </section>
 
-  <section>
+  <section id="panes.machinetranslation">
     <title>Machine Translation</title>
 
     <para>The machine translation pane, when opened, contains the suggestions
@@ -288,7 +288,7 @@
     with the suggested translation.</para>
   </section>
 
-  <section>
+  <section id="panes.multipletranslations">
     <title>Multiple Translations</title>
 
     <para>A given source segment may require several different translations,
@@ -301,7 +301,7 @@
     Translation</guisubmenu></para>
   </section>
 
-  <section>
+  <section id="panes.notes">
     <title>Notes</title>
 
     <para>The translator can add notes to the opened segment, for instance to
@@ -312,7 +312,7 @@
     Note</guisubmenu>.</para>
   </section>
 
-  <section>
+  <section id="panes.comments">
     <title>Comments</title>
 
     <para>Some of the file formats, specialized for translation work, for
@@ -322,7 +322,7 @@
     check the length of the translation:</para>
   </section>
 
-  <section>
+  <section id="panes.statusbar">
     <title>Status bar</title>
 
     <para>The status bar displays work-flow related messages at the bottom of

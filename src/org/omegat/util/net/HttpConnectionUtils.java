@@ -131,7 +131,9 @@ public final class HttpConnectionUtils {
                     byte[] buffer = new byte[BUFFER_SIZE];
                     while ((bytesRead = inputStream.read(buffer)) != -1) {
                         outputStream.write(buffer, 0, bytesRead);
+                        readLength += bytesRead;
                     }
+                    assert(contentLength == readLength);
                 } finally {
                     httpURLConnection.disconnect();
                 }

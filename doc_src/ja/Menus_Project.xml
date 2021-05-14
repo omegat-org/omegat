@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
   <title>プロジェクト</title>
 
@@ -16,7 +16,7 @@
       <term><guimenuitem>チームプロジェクトをダウンロード...</guimenuitem></term>
 
       <listitem>
-        <para>リモートの OmegaT プロジェクトのローカルコピーを作成します。詳細については、<link linkend="howto.useteamproject">チームプロジェクトの使用方法</link>を参照してください。</para>
+        <para>リモートの OmegaT プロジェクトのローカルコピーを作成します。詳細については、<link linkend="howto.useteamproject">チームプロジェクトの使用</link>を参照してください。</para>
       </listitem>
     </varlistentry>
 
@@ -166,7 +166,7 @@
       <term>翻訳対象ファイル一覧...</term>
 
       <listitem>
-        <para><link linkend="windows.projectfiles">[翻訳対象ファイル一覧]ウィンドウ</link>を開きます。</para>
+        <para><link linkend="windows.projectfiles">[翻訳対象ファイル一覧]</link>ウィンドウを開きます。</para>
       </listitem>
     </varlistentry>
 

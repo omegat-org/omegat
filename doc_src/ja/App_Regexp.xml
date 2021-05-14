@@ -3,7 +3,7 @@
 <appendix id="appendix.regexp">
   <title>正規表現</title>
 
-  <para>文字列検索と分節化規則で使用する正規表現は、Java がサポートしているものです。より詳細な情報については <ulink url="http://docs.oracle.com/javase/jp/6/api/java/util/regex/Pattern.html">Java の正規表現に関する技術文書</ulink>を参照してください。以下の構文一覧と使用例も参照してください。</para>
+  <para>文字列検索と分節化規則で使用する正規表現は、Java がサポートしているものです。より詳細な情報については <ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java の正規表現に関する技術文書</ulink>を参照してください。以下の構文一覧と使用例も参照してください。</para>
 
   <note>
     <para>この章は上級者のユーザーを対象にしています。独自の分節化規則を定義したり、こみいった条件での検索を必要とする場合に、参照してください。</para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
   <title>プロジェクトフォルダー</title>
 
@@ -24,7 +24,7 @@
 
     <para>tm フォルダーに配置された翻訳メモリの内容は、参考訳文の候補を探す際に参照されます。これらのファイルに記録された翻訳済みの分節情報は、現在の原文分節とじゅうぶん一致した場合、参考訳文ウィンドウに表示されます。</para>
 
-    <para>また補助的な翻訳メモリの中の原文分節と、翻訳中のテキストとが同一の場合の挙動を、<menuchoice><guimenu>設定</guimenu> <guimenuitem>翻訳入力行...</guimenuitem></menuchoice> ダイアログで設定できます。たとえば、デフォルト設定のままであれば、補助的な翻訳メモリから自動挿入された訳文には、先頭に「<emphasis>[参考]</emphasis>」という接頭辞が付きます。これにより、翻訳者が後から翻訳を見直すときに、その訳文が参考訳文のままなのかどうかを簡単に識別できます<menuchoice><guimenu>。</guimenu></menuchoice></para>
+    <para>また補助的な翻訳メモリの中の原文分節と、翻訳中のテキストとが同一の場合の挙動を、<menuchoice><guimenu>設定</guimenu> <guimenuitem>翻訳入力行...</guimenuitem></menuchoice> ダイアログで設定できます。たとえば、デフォルト設定のままであれば、補助的な翻訳メモリから自動挿入された訳文には、先頭に「<emphasis>[参考]</emphasis>」という接頭辞が付きます。これにより、翻訳者が後から翻訳を見直すときに、その訳文が参考訳文のままなのかどうかを簡単に識別できます。</para>
 
     <para><filename>tm</filename> フォルダーの翻訳メモリに、同一の原文分節が複数存在し、しかもそれぞれの訳文が異なる、という事態はじゅうぶんに起こりえることです。複数の TMX ファイルは、そのファイル名の順番で読み込まれます。また TMX ファイル内の分節は、一行ずつ順次読み込まれます。この場合、原文分節が一致する最後の分節が、優先的に使われることになります（注意：もちろん、そもそもこのような事態が起こらないようにできるなら、それが一番望ましい対応です）。</para>
 

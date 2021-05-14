@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   11 Enhancements
   3 Bug fixes
-  14 Localisation updates
+  15 Localisation updates
 ----------------------------------------------------------------------
 5.5.0 vs 5.4.4
 
@@ -64,6 +64,7 @@
   - Finnish localisation updated to 5.5.0 (UI, readme, documentation)
   - French localisation updated to 5.5.0 (UI, scripts, readme, documentation)
   - German localisation updated to 5.5.0 (UI, scripts, readme, documentation)
+  - Italian localisation updated to 5.5.0 (UI, readme, documentation)
   - Japanese localisation updated to 5.5.0 (UI, documentation)
   - Morisien localisation added at 5.5.0 (UI, scripts, readme, Instant Start) 
   - Portuguese localisation updated to 5.5.0 (UI, scripts, readme, documentation)
@@ -8928,3 +8929,5 @@ Issues
 HTML will sometimes (somehow) cause a string of exceptions to arise and
 eventually freeze the application.
 ----------------------------------------------------------------------
+
+LocalWords:  localisation

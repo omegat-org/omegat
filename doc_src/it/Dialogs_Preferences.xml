@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="dialogs.preferences">
   <title>Preferenze generali</title>
 
@@ -904,7 +904,9 @@
   <section id="dialogs.preferences.tagprocessing">
     <title>Elaborazione dei tag</title>
 
-    <para>Quando si traducono file relativi a software, permette di configurare le opzioni della Convalida dei tag anche per il controllo delle variabili di programmazione (%...). È possibile anche definire varie opzioni relative alla convalida dei tag e impostare tag personalizzati.</para>
+    <para>Quando si traducono file relativi a software, è possibile configurare le opzioni della Convalida dei tag anche per il controllo delle variabili di programmazione (%...) o per i segnaposto ({0}), nel caso in cui il filtro dei file non lo esegua in automatico. Il filtro PO gestisce già %.. e il filtro Java™ Resource Bundle filter gestisce già i tag {#}, tale opzione potrebbe essere necessaria solo per altri tipi di file.</para>
+
+    <para>È possibile anche definire varie opzioni relative alla convalida dei tag e impostare tag personalizzati.</para>
 
     <para>Se, per esempio, si digita <userinput>\d+</userinput> nel campo <guilabel>Espressione regolare per i tag personalizzati</guilabel>, tutti i numeri saranno considerati tag, e ciò permetterà la verifica che i numeri non siano stati modificati per sbaglio durante la traduzione.</para>
 
@@ -1094,7 +1096,7 @@
   <section>
     <title>Plugin</title>
 
-    <para>Permette l'accesso a un elenco di plugin disponibili. I plugin vengono installati nella cartella <filename>/plugins</filename>.</para>
+    <para>Permette l'accesso a un elenco di plugin disponibili. I plugin vengono installti nella cartella <filename>/plugins</filename> che si trova nella cartella di installazione di OmegaT o nella cartella delle preferenze utente di OmegaT di una specifica piattaforma.</para>
   </section>
 
   <section>

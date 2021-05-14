@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
   <title>Allineatore</title>
 
@@ -12,9 +12,9 @@
 
     <para>Se si rende necessario dover migliorare l'allineamento, provare a cambiare i parametri. Nella maggior parte dei casi, più basso è il <guilabel>Punteggio medio</guilabel>, migliore sarà l'allineamento.</para>
 
-    <para>In modalità <guilabel>Heapwise</guilabel>, i testi vengono valutati globalmente. In modalità <guilabel>Parsewise</guilabel>, essi vengono valutati per singolo segmento.</para>
+    <para>In modalità confronto <guilabel>Heapwise</guilabel>, i testi vengono valutati globalmente. In modalità confronto <guilabel>Parsewise</guilabel>, essi vengono valutati per singolo segmento. L'opzione compare solo quando tale selezione è possibile.</para>
 
-    <para>Usare la modalità <guilabel>Confronto ID</guilabel> per allineare i testi Chiave=Valore. Questo sistema funziona anche se le chiavi nei due file non si trovano nello stesso ordine e, o in alternativa, se i due file non contengono la stessa quantità di informazioni. Questa opzione compare solo se i file selezionati sono entrambi riconosciuti come file Chiave=Valore.</para>
+    <para>Usare la modalità confronto <guilabel>ID</guilabel> per allineare i testi Chiave=Valore. Questo sistema funziona anche se le chiavi nei due file non si trovano nello stesso ordine e, o in alternativa, se i due file non contengono la stessa quantità di informazioni. Questa opzione compare solo se i file selezionati sono entrambi riconosciuti come file Chiave=Valore.</para>
 
     <para>Gli algoritmi <guilabel>Viterbi</guilabel> e <guilabel>Forward-Backward</guilabel> sono due metodi di calcolo differenti. Scegliere quello che restituisce i risultati migliori.</para>
 

@@ -197,7 +197,7 @@ Contribucions anteriors:
 i moltes altres persones que han aportat una ajuda inestimable.
 
 (Si creieu que heu contribuït considerablement al projecte OmegaT i el vostre
-nom no apareix en la llista, no dubteu a posar-vos en contacte amb nosaltres.)
+nom no apareix en la llista, no dubteu a posar-vos en contacte amb nosaltres).
 
 
 

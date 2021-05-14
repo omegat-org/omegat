@@ -1,7 +1,7 @@
-Stu ducumentu, ma dinù a prima versione d’OmegaT in lingua corsa, sò stati tradutti da Patriccollu di Santa Maria è Sichè, copyright© 2018-2020.
+Stu ducumentu, ma dinù a prima versione d’OmegaT in lingua corsa, sò stati tradutti da Patriccollu di Santa Maria è Sichè, diritti di copia o copyright© 2020-2021.
 
 
-Cosa hè OmegaT ?
+Cosa hè OmegaT ?
 ================
 
 OmegaT hè un attrezzu di traduzzione assistata da l’urdinatore (TAO in francese è CAT in inglese) - liberu è à « fonte aperta » multi-piattaforma chì cuntene funzioni cum’è currispundenze simile, memoria di traduzzione, ricerca di parolla chjave, glossarii è tandu u travagliu di traduzzione hè più faciule.
@@ -11,7 +11,7 @@ OmegaT hè un attrezzu di traduzzione assistata da l’urdinatore (TAO in france
 Infurmazione di licenza
 =======================
 
-OmegaT hè dispunibule sottu à i termini di a Licenza Publica Generale GNU tale chì publicata da a Free Software Foundation : sia a versione 3 di a licenza, sia (s’è voi preferite) una versione più recente. Pudete fighjà u testu di a licenza in
+OmegaT hè dispunibule sottu à i termini di a Licenza Publica Generale GNU tale chì publicata da a Free Software Foundation : sia a versione 3 di a licenza, sia (s’è voi preferite) una versione più recente. Pudete fighjà u testu di a licenza in
 /docs/OmegaT-license.txt.
 
 OmegaT impiegheghja bibliuteche numerose. A licenza d’ogni bibliuteca hè ammentata in
@@ -63,7 +63,7 @@ Impiegu di Java Web Start per l’installazione d’OmegaT (tutte piattaforme)
 
 S’è Java hè dighjà installatu nant’à u vostru sistema, una manera d’installà OmegaT hè d’impiegà Java Web Start.
 
-Per fà què, scaricate stu schedariu è eseguitelu :
+Per fà què, scaricate stu schedariu è eseguitelu :
 
   https://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
@@ -94,19 +94,19 @@ Pudete fà sguillà OmegaT.app nant’à u vostru Dock o nant’à a barra d’a
 Lanciu d’OmegaT (Linux)
 =======================
 
-S’è vo avete impiegatu u scrittu linux-install.sh, duveriate pudè lancià OmegaT cusì :
+S’è vo avete impiegatu u scrittu linux-install.sh, duveriate pudè lancià OmegaT cusì :
 
     Alt+F2
 
-eppò :
+eppò :
 
     omegat
 
-Per pudè impegà OmegaT d’una manera più faciule, pudete impiegà u scrittu Kaptain pruvistu (omegat.kaptn). Per impiegallu, duvete installà Kaptain in primu locu. È dopu, pudete lancià u scrittu Kaptain cusì :
+Per pudè impegà OmegaT d’una manera più faciule, pudete impiegà u scrittu Kaptain pruvistu (omegat.kaptn). Per impiegallu, duvete installà Kaptain in primu locu. È dopu, pudete lancià u scrittu Kaptain cusì :
 
     Alt+F2
 
-eppò :
+eppò :
 
     omegat.kaptn
 
@@ -115,7 +115,7 @@ eppò :
 Lanciu d’OmegaT da a linea di cumanda (tutti sistemi)
 =====================================================
 
-A cumanda chì permette di lancià OmegaT hè :
+A cumanda chì permette di lancià OmegaT hè :
 
     cd <cartulare induve si trova u schedariu OmegaT.jar>
 
@@ -128,11 +128,11 @@ A cumanda chì permette di lancià OmegaT hè :
 Cuntribuenti
 ============
 
-OmegaT hè l’opera uriginale di Keith Godfrey.
+OmegaT hè l’opera originale di Keith Godfrey.
 
 Aaron Madlon-Kay hè u risponsevule di u prughjettu OmegaT.
 
-A squadra attuale hè :
+A squadra attuale hè :
 (in ordine alfabeticu)
 
 - Vincent Bidaux (risponsevule di a documentazione)
@@ -145,7 +145,7 @@ A squadra attuale hè :
 
 E cuntribuzioni à u codice sò ducumentate in /docs/contributors.txt.
 
-I precedente cuntribuenti includenu :
+I precedente cuntribuenti includenu :
 (in ordine alfabeticu)
 
 - Anthony Baldwin (rispunsevule di a lucalisazione)
@@ -169,18 +169,18 @@ I precedente cuntribuenti includenu :
 Leie ghjuvevule
 ===============
 
-L’infurmazione a più recente apprupositu d’OmegaT si trova à :
+L’infurmazione a più recente apprupositu d’OmegaT si trova à :
 
   https://omegat.org/
 
-E risorse d’assistenza per l’utilizatore :
+E risorse d’assistenza per l’utilizatore :
 
   https://omegat.org/support
 
-E dumande d’amendamentu (in inglese) nant’à u situ SourceForge :
+E dumande d’amendamentu (in inglese) nant’à u situ SourceForge :
 
   https://sourceforge.net/p/omegat/feature-requests/
 
-I raporti di penseru (in inglese) nant’à u situ SourceForge :
+I raporti di penseru (in inglese) nant’à u situ SourceForge :
 
   https://sourceforge.net/p/omegat/bugs/

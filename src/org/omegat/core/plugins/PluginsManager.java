@@ -218,15 +218,11 @@ public final class PluginsManager {
      */
     public String formatDetailText(PluginInformation info) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<h2>").append(info.getName()).append("</h2>\n");
         sb.append("<h4>Author: ");
         if (info.getAuthor() != null) {
             sb.append(info.getAuthor()).append("<br/>\n");
         } else {
             sb.append("Unknown<br/>\n");
-        }
-        if (info.getCategory() != null) {
-            sb.append("Category: ").append(info.getCategory()).append("<br/>\n");
         }
         if (info.getVersion() != null) {
             sb.append("Version: ").append(info.getVersion()).append("<br/>\n");

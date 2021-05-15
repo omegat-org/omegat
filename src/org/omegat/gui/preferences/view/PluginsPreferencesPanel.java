@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import org.omegat.util.OStrings;
 
 /**
+ * @author Hiroshi Miura
  * @author Aaron Madlon-Kay
  * @author Briac Pilpre
  */
@@ -72,6 +73,7 @@ public class PluginsPreferencesPanel extends JPanel {
         setMinimumSize(new java.awt.Dimension(250, 200));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
+        panelPluginsInfo.setMinimumSize(new java.awt.Dimension(150, 23));
         panelPluginsInfo.setPreferredSize(new java.awt.Dimension(252, 426));
         panelPluginsInfo.setLayout(new javax.swing.BoxLayout(panelPluginsInfo, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -84,13 +86,11 @@ public class PluginsPreferencesPanel extends JPanel {
 
         installPlugins.setLeftComponent(panelPluginsInfo);
 
-        panelPluginDetails.setMinimumSize(new java.awt.Dimension(102, 47));
         panelPluginDetails.setLayout(new javax.swing.BoxLayout(panelPluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
         installPlugins.setRightComponent(panelPluginDetails);
 
         pluginsInfoTab.addTab("Installed plugins", installPlugins);
 
-        panelAvalablePluginsInfo.setPreferredSize(new java.awt.Dimension(252, 100));
         panelAvalablePluginsInfo.setLayout(new javax.swing.BoxLayout(panelAvalablePluginsInfo, javax.swing.BoxLayout.LINE_AXIS));
 
         tableAvailablePluginsInfo.setAutoCreateRowSorter(true);
@@ -102,7 +102,7 @@ public class PluginsPreferencesPanel extends JPanel {
 
         availablePlugins.setLeftComponent(panelAvalablePluginsInfo);
 
-        panelAvailablePluginDetails.setLayout(new javax.swing.BoxLayout(panelAvailablePluginDetails, javax.swing.BoxLayout.LINE_AXIS));
+        panelAvailablePluginDetails.setLayout(new javax.swing.BoxLayout(panelAvailablePluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
         availablePlugins.setRightComponent(panelAvailablePluginDetails);
 
         pluginsInfoTab.addTab("Available plugins", availablePlugins);

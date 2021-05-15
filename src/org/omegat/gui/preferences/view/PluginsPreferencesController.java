@@ -61,6 +61,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private PluginsPreferencesPanel panel;
     private PluginDetailsPane localPluginDetailsPane;
     private PluginDetailsPane remotePluginDetailsPane;
+    private PluginDetailHeader localPluginDetailHeader;
+    private PluginDetailHeader remotePluginDetailHeader;
 
     @Override
     public final JComponent getGui() {
@@ -77,6 +79,19 @@ public class PluginsPreferencesController extends BasePreferencesController {
             localPluginDetailsPane.setText("");
         } else {
             InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
+            PluginInformation info = model.getValueAt(rowIndex);
+            localPluginDetailHeader.labelPluginName.setText(info.getName());
+            localPluginDetailHeader.labelCategory.setText(info.getCategory());
+            if (info.getStatus().equals(PluginInformation.STATUS.UPGRADABLE)) {
+                localPluginDetailHeader.installButton.setText("Upgrade");
+                localPluginDetailHeader.installButton.setEnabled(true);
+            } else if (info.getStatus().equals(PluginInformation.STATUS.BUNDLED)) {
+                localPluginDetailHeader.installButton.setText("Bundled");
+                localPluginDetailHeader.installButton.setEnabled(false);
+            } else {
+                localPluginDetailHeader.installButton.setText("");
+                localPluginDetailHeader.installButton.setEnabled(false);
+            }
             localPluginDetailsPane.setText(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
         }
     }
@@ -88,6 +103,19 @@ public class PluginsPreferencesController extends BasePreferencesController {
             remotePluginDetailsPane.setText("");
         } else {
             AvailablePluginInfoTableModel model = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
+            PluginInformation info = model.getValueAt(rowIndex);
+            remotePluginDetailHeader.labelPluginName.setText(info.getName());
+            remotePluginDetailHeader.labelCategory.setText(info.getCategory());
+            if (info.getStatus().equals(PluginInformation.STATUS.UPGRADABLE)) {
+                remotePluginDetailHeader.installButton.setText("Upgrade");
+                remotePluginDetailHeader.installButton.setEnabled(true);
+            } else if (info.getStatus().equals(PluginInformation.STATUS.UNINSTALLED)) {
+                remotePluginDetailHeader.installButton.setText("Install");
+                remotePluginDetailHeader.installButton.setEnabled(true);
+            } else {
+                remotePluginDetailHeader.installButton.setText("");
+                remotePluginDetailHeader.installButton.setEnabled(false);
+            }
             StringBuilder detailTextBuilder = new StringBuilder(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
             remotePluginDetailsPane.setText(detailTextBuilder.toString());
         }
@@ -108,11 +136,16 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new PluginsPreferencesPanel();
+        localPluginDetailHeader = new PluginDetailHeader();
         localPluginDetailsPane = new PluginDetailsPane();
+        remotePluginDetailHeader = new PluginDetailHeader();
         remotePluginDetailsPane = new PluginDetailsPane();
+        panel.panelPluginDetails.add(localPluginDetailHeader);
         panel.panelPluginDetails.add(localPluginDetailsPane);
-        TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
+        panel.panelAvailablePluginDetails.add(remotePluginDetailHeader);
         panel.panelAvailablePluginDetails.add(remotePluginDetailsPane);
+
+        TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
         TableColumnSizer.autoSize(panel.tableAvailablePluginsInfo, 0, true);
         panel.browsePluginsButton.addActionListener(e -> {
             try {

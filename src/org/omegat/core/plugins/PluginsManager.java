@@ -274,7 +274,7 @@ public final class PluginsManager {
     }
 
     private String getPluginInformationKey(PluginInformation info) {
-        return info.getName() + info.getAuthor();
+        return info.getId();
     }
 
     /**

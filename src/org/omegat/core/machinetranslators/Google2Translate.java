@@ -129,7 +129,7 @@ public class Google2Translate extends BaseTranslate {
 
         tr = unescapeHTML(tr);
 
-        tr = cleanSpacesAroundTags(tr, text);
+        tr = cleanSpacesAroundTags(tr, trText);
 
         putToCache(sLang, tLang, trText, tr);
         return tr;

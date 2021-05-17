@@ -605,7 +605,7 @@ installDist.doLast {
 // Read in all our custom messages and massage them for inclusion in the .iss
 ext.getInnoSetupCustomMessages = {
     // Don't include languages that InnoSetup doesn't have strings for
-    def blacklist = ['cy', 'ia']
+    def blacklist = ['cy', 'ia', 'mfe']
     // Sort files to ensure English comes first, to set fallback
     fileTree(dir: 'release/win32-specific', include: 'CustomMessages*.ini')
         .sort()

@@ -2,7 +2,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Apprendre à utiliser OmegaT en cinq minutes !</title>
+      <title>Apprendre à utiliser OmegaT en cinq minutes&nbsp;!</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
    </head>
@@ -11,7 +11,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Apprendre à utiliser OmegaT en cinq minutes !
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Apprendre à utiliser OmegaT en cinq minutes&nbsp;!
                   </h2>
                </div>
             </div>
@@ -32,7 +32,7 @@
             </p>
             <p>Utilisez le raccourci clavier <span class="keycap"><strong>Ctrl+E</strong></span> si vous avez besoin de revenir aux réglages de cette fenêtre plus tard.
             </p>
-            <p>OmegaT ouvre ensuite la fenêtre <span class="guilabel">Fichiers du projet</span>. Cliquez sur <span class="guibutton">Copier des fichiers dans le dossier source</span> pour sélectionner le fichier source. OmegaT copie le fichier sélectionné dans le dossier <code class="filename">/source</code> du projet que vous venez de créer. Une fois le fichier source chargé et affiché dans le volet <span class="guilabel">Édition</span>, vous pouvez fermer la fenêtre <span class="guilabel">Fichiers du projet</span>.
+            <p>OmegaT ouvre ensuite la fenêtre <span class="guilabel">Fichiers du projet</span>. Cliquez sur <span class="guibutton">Copier des fichiers dans le dossier source</span> pour sélectionner le fichier source. OmegaT copie le fichier sélectionné dans le dossier <code class="filename">./source</code> du projet que vous venez de créer. Une fois le fichier source chargé et affiché dans le volet <span class="guilabel">Édition</span>, vous pouvez fermer la fenêtre <span class="guilabel">Fichiers du projet</span>.
             </p>
          </div>
          <div class="section">
@@ -45,7 +45,7 @@
                </div>
             </div>
             <p>OmegaT vous propose un segment à traduire après l'autre. Utilisez le raccourci clavier <span class="keycap"><strong>Ctrl+U</strong></span> pour accéder au prochain segment non traduit (ou <span class="keycap"><strong>Ctrl+Shift+U</strong></span> pour accéder au segment traduit suivant). Si vous souhaitez obtenir un aperçu de votre traduction dans son format final,
-               utilisez le raccourci <span class="keycap"><strong>Ctrl+D</strong></span> pour générer le document traduit dans le dossier <code class="filename">/target</code> du projet. Les menus <span class="guimenu">Édition</span> et <span class="guimenu">Atteindre</span> vous donnent accès à diverses fonctions très utiles pendant le travail de traduction.
+               utilisez le raccourci <span class="keycap"><strong>Ctrl+D</strong></span> pour générer le document traduit dans le dossier <code class="filename">./target</code> du projet. Les menus <span class="guimenu">Édition</span> et <span class="guimenu">Atteindre</span> vous donnent accès à diverses fonctions très utiles pendant le travail de traduction.
             </p>
          </div>
          <div class="section">
@@ -61,12 +61,15 @@
                convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également
                un certain nombre de balises essentielles sans rapport direct avec le formatage mais qui sont importantes dans les fichiers
                sources (ainsi que dans les fichiers traduits). Une phrase peut se présenter comme ceci&nbsp;:
+               
             </p>
             <div class="mediaobject" align="justify"><img src="images/InstantGuide_1.png" align="justify"></div>
             <p>
                
             </p>
-            <p>OmegaT présenter cette phrase de la manière suivante&nbsp;:</p>
+            <p>Et OmegaT va la représenter de la manière suivante&nbsp;:
+               
+            </p>
             <div class="mediaobject" align="justify"><img src="images/InstantGuide_2.png" align="justify"></div>
             <p>
                
@@ -88,7 +91,7 @@
                </div>
             </div>
             <p>Après avoir vérifié que votre traduction ne contient pas d'erreur de balises, générez les fichiers cibles (raccourci clavier
-               <span class="keycap"><strong>Ctrl+D</strong></span>) dans le dossier <code class="filename">/target</code> du projet.
+               <span class="keycap"><strong>Ctrl+D</strong></span>) dans le dossier <code class="filename">./target</code> du projet.
             </p>
          </div>
          <div class="section">
@@ -103,7 +106,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Si le chargement d'un fichier source échoue, c'est-à-dire s'il ne s'affiche pas dans le volet <span class="guilabel">Édition</span>, il s'agit vraisemblablement d'un fichier dont le format est incompatible avec OmegaT. Consultez <a class="link" href="#">Fichiers et filtres</a> pour obtenir la liste des formats de fichier gérés par OmegaT.
+                     <p>Si le chargement d'un fichier source échoue, c'est-à-dire s'il ne s'affiche pas dans le volet <span class="guilabel">Édition</span>, il s'agit vraisemblablement d'un fichier dont le format est incompatible avec OmegaT. Consultez <span class="guimenuitem">Options</span> → <span class="guimenuitem">Préférences...</span> → <span class="guimenuitem">Filtres de fichiers...</span> pour obtenir la liste des formats de fichier gérés par OmegaT.
                      </p>
                   </li>
                </ul>
@@ -137,7 +140,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Vous pouvez ajouter un terme au glossaire à l'aide du raccourci clavier <span class="keycap"><strong>Ctrl+Shift+G</strong></span>, ou copier d'autres glossaires dans le dossier <code class="filename">/glossary</code> du projet&nbsp;: OmegaT y recherche automatiquement les mots associés au segment actif.
+                     <p>Vous pouvez ajouter un terme au glossaire à l'aide du raccourci clavier <span class="keycap"><strong>Ctrl+Shift+G</strong></span>, ou copier d'autres glossaires dans le dossier <code class="filename">./glossary</code> du projet&nbsp;: OmegaT y recherche automatiquement les mots associés au segment actif.
                      </p>
                   </li>
                </ul>

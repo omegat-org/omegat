@@ -1327,7 +1327,7 @@ wh.search_titleList = [
  "Appendix C. Spell checker",
  "Installing and running OmegaT",
  "How To...",
- "OmegaT 4.2 - User&#39;s Guide",
+ "OmegaT 4.3.1 - User&#39;s Guide",
  "Menus",
  "Panes",
  "Project folder",

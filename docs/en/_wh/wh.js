@@ -518,7 +518,7 @@ return this;
 var wh = (function () {
 var toc_entries = [
 ["Installing and running OmegaT\n                     ","chapter.installing.and.running.html",[
-["Windows Users","chapter.installing.and.running.html#d0e17",null],
+["Windows Users","chapter.installing.and.running.html#Windows.users",null],
 ["Linux (Intel) Users","chapter.installing.and.running.html#Linux.Intel.users",null],
 ["macOS Users","chapter.installing.and.running.html#MAC.OSX.users",null],
 ["Other Systems","chapter.installing.and.running.html#other.systems",null],
@@ -546,25 +546,25 @@ var toc_entries = [
 ["General Preferences","windows.and.dialogs.html#dialogs.preferences",null]
 ]],
 ["Panes","panes.html",[
-["Editor","panes.html#editor.pane",null],
-["Fuzzy Matches","panes.html#d0e4360",null],
-["Glossary","panes.html#d0e4408",null],
-["Dictionary","panes.html#d0e4421",null],
-["Machine Translation","panes.html#d0e4428",null],
-["Multiple Translations","panes.html#d0e4436",null],
-["Notes","panes.html#d0e4446",null],
-["Comments","panes.html#d0e4457",null],
-["Status bar","panes.html#d0e4462",null]
+["Editor","panes.html#panes.editor",null],
+["Fuzzy Matches","panes.html#panes.fuzzymatches",null],
+["Glossary","panes.html#panes.glossary",null],
+["Dictionary","panes.html#panes.dictionary",null],
+["Machine Translation","panes.html#panes.machinetranslation",null],
+["Multiple Translations","panes.html#panes.multipletranslations",null],
+["Notes","panes.html#panes.notes",null],
+["Comments","panes.html#panes.comments",null],
+["Status bar","panes.html#panes.statusbar",null]
 ]],
 ["Project folder","project.folder.html",[
-["source","project.folder.html#d0e4502",null],
-["target","project.folder.html#d0e4507",null],
-["tm","project.folder.html#d0e4530",null],
-["dictionary","project.folder.html#d0e4641",null],
-["glossary","project.folder.html#d0e4649",null],
-["omegat","project.folder.html#folder.omegat",null],
-["omegat.project (file)","project.folder.html#d0e4716",null],
-[".repositories","project.folder.html#d0e4724",null]
+["source","project.folder.html#projectfolder.source",null],
+["target","project.folder.html#projectfolder.target",null],
+["tm","project.folder.html#projectfolder.tm",null],
+["dictionary","project.folder.html#projectfolder.dictionary",null],
+["glossary","project.folder.html#projectfolder.glossary",null],
+["omegat","project.folder.html#projectfolder.omegat",null],
+["omegat.project (file)","project.folder.html#projectfolder.omegat.project",null],
+[".repositories","project.folder.html#projectfolder.repositories",null]
 ]],
 ["How To...","howtos.html",[
 ["Set up a Team Project","howtos.html#howto.setupteamproject",null],
@@ -577,15 +577,15 @@ var toc_entries = [
 ["Appendices","appendix.dictionaries.html",[
 ["A. Dictionaries","appendix.dictionaries.html",null],
 ["B. Glossaries","appendix.glossaries.html",[
-["Default glossary","appendix.glossaries.html#d0e5628",null],
-["Usage","appendix.glossaries.html#d0e5652",null],
-["File format","appendix.glossaries.html#d0e5702",null],
-["Common glossary problems","appendix.glossaries.html#d0e5818",null]
+["Default glossary","appendix.glossaries.html#glossaries.defaultglossary",null],
+["Usage","appendix.glossaries.html#glossaries.usage",null],
+["File format","appendix.glossaries.html#glossaries.fileformat",null],
+["Common glossary problems","appendix.glossaries.html#glossaries.commonproblems",null]
 ]],
 ["C. Spell checker","appendix.spellchecker.html",[
-["Installing spelling dictionaries","appendix.spellchecker.html#d0e5868",null],
-["Using spelling dictionaries","appendix.spellchecker.html#d0e5917",null],
-["Hints","appendix.spellchecker.html#hints",null]
+["Installing spelling dictionaries","appendix.spellchecker.html#spellchecker.installingdictionaries",null],
+["Using spelling dictionaries","appendix.spellchecker.html#spellchecker.usingdictionaries",null],
+["Hints","appendix.spellchecker.html#spellchecker.hints",null]
 ]],
 ["D. Regular expressions","appendix.regexp.html",[
 ["Regex tools and examples of use","appendix.regexp.html#regex.tools.and.examples.of.use",null]
@@ -874,7 +874,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-ha2ez51fhn6u-1h7m6mxewxez1";
+var storageId = "-cuizy0qicyu0-1jy0nhu063v6l";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

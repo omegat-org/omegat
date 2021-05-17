@@ -1,5 +1,5 @@
 #wh-content {
-	font-family: sans-serif;
+    font-family: sans-serif;
     font-size: 10pt;
     background-color: #FDFDFD;
     line-height: 1.5;
@@ -45,7 +45,7 @@
 }
 }
 h1, h2, h3, h4, dt {
-	color: #006c6c;
+    color: #006c6c;
 }
 
 h1 {
@@ -118,7 +118,7 @@ h6:first-child {
     font-size: .6rem;
     border: 1px solid black;
     border-radius:4px;
-	background: #ececec;
+    background: #ececec;
     padding-left:.15rem;
     padding-right:.15rem;
     padding-top:.1rem;
@@ -129,12 +129,12 @@ h6:first-child {
 
 /*
 code, .code {
-	color: black;;
-	background: #ffffcc;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #ffff66;
-	vertical-align: baseline;
+    color: black;;
+    background: #ffffcc;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ffff66;
+    vertical-align: baseline;
 }
 */
 p,
@@ -297,20 +297,20 @@ dd {
 
 
 .new {
-	font-size: x-small;
-	color: red;
-	background: yellow;
+    font-size: x-small;
+    color: red;
+    background: yellow;
 }
 
 .updated {
-	font-size: x-small;
-	color: orange;
+    font-size: x-small;
+    color: orange;
 }
 
 .note {
-	font-size: small;
-	color: black;
-	background-color: white;
+    font-size: small;
+    color: black;
+    background-color: white;
     border: 1px solid #808080;
     border-radius:5px;
     margin-bottom:1em;
@@ -322,9 +322,9 @@ dd {
 }
 
 .warning {
-	font-size: small;
-	color: black;
-	background: white;
+    font-size: small;
+    color: black;
+    background: white;
     border: 1px solid #FFA0A0;
     border-radius:5px;
     margin-bottom:1em;
@@ -407,7 +407,7 @@ pre.programlisting {
     text-align:left;
     padding: 1.2em 0.5em 0 1.5em;
 }
-                    
+
 
 /* index page */
 #wh-content .book  div.toc {

@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 5.5.0
+ OmegaT 5.5.0 (2021-05-18)
 ----------------------------------------------------------------------
   11 Enhancements
   3 Bug fixes
@@ -66,7 +66,7 @@
   - German localisation updated to 5.5.0 (UI, scripts, readme, documentation)
   - Italian localisation updated to 5.5.0 (UI, readme, documentation)
   - Japanese localisation updated to 5.5.0 (UI, documentation)
-  - Morisien localisation added at 5.5.0 (UI, scripts, readme, Instant Start) 
+  - Morisien localisation added at 5.5.0 (UI, scripts, readme, Instant Start)
   - Portuguese localisation updated to 5.5.0 (UI, scripts, readme, documentation)
   - Russian localisation updated to 5.5.0 (UI, readme)
   - Simplified Chinese localisation updated to 5.5.0 (UI, documentation)

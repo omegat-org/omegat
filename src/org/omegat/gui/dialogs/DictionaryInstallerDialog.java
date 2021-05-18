@@ -44,7 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 import org.omegat.core.spellchecker.DictionaryManager;
-import org.omegat.util.net.HttpConnectionUtils.FlakyDownloadException;
+import org.omegat.util.HttpConnectionUtils.FlakyDownloadException;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;

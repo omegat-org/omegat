@@ -26,7 +26,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.util.net;
+package org.omegat.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -45,10 +45,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.omegat.util.Log;
-import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
-import org.omegat.util.StringUtil;
 
 
 /**

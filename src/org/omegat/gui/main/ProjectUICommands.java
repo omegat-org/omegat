@@ -77,7 +77,7 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.net.HttpConnectionUtils;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;

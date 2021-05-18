@@ -51,7 +51,6 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.util.Platform.OsType;
-import org.omegat.util.net.HttpConnectionUtils;
 
 /**
  * Static functions taken from CommandThread to reduce file size.

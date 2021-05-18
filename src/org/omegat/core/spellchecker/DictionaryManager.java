@@ -39,7 +39,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
-import org.omegat.util.net.HttpConnectionUtils;
+import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Dictionary manager. Spell checking dictionaries' utility functions.

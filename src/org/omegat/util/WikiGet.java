@@ -38,8 +38,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import org.omegat.util.net.HttpConnectionUtils;
-
 /**
  * Import pages from MediaWiki
  *

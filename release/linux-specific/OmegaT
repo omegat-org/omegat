@@ -13,7 +13,7 @@ OPENJFX_OPTS=
 if [ -n "$OPENJFX_CLASSPATH" ] && [[ "$JAVA_VERSION" =~ ^11\. ]]; then
     OPENJFX_OPTS=(
         "--module-path" "$OPENJFX_CLASSPATH"
-        "--add-modules=javafx.base,javafx.controls,javafx.swing,javafx.web"
+        "--add-modules" "javafx.base,javafx.controls,javafx.swing,javafx.web"
     )
 fi
 

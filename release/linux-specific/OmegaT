@@ -1,15 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # readlink follows any symbolic links to get the real file
-REALOMEGATPATH=`dirname "$(readlink -nf $0)"`
+REAL_OMEGAT_PATH=$(dirname "$(readlink -nf "$0")")
 
 JAVA="java"
-BUNDLED_JAVA="${REALOMEGATPATH}/jre/bin/java"
-[ -f "${BUNDLED_JAVA}" ] && JAVA="${BUNDLED_JAVA}"
+BUNDLED_JAVA="$REAL_OMEGAT_PATH/jre/bin/java"
+[ -f "$BUNDLED_JAVA" ] && JAVA="$BUNDLED_JAVA"
 
-version=$("$JAVA" -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.' '{print $1}')
-if [[ "${OPENJFX_CLASSPATH}" ]] && [[ "${version}" == "11" ]]; then
-  "${JAVA}" --module-path ${OPENJFX_CLASSPATH} --add-modules=javafx.base,javafx.controls,javafx.swing,javafx.web -jar -Xmx1024M "${REALOMEGATPATH}/@JAR_SUBST@" "$@"
-else
-  "${JAVA}" -jar -Xmx1024M "${REALOMEGATPATH}/@JAR_SUBST@" "$@"
+JAVA_VERSION=$("$JAVA" -version 2>&1 | sed -nE 's/.*version "([0-9_.]+)".*/\1/p')
+
+OPENJFX_OPTS=
+if [ -n "$OPENJFX_CLASSPATH" ] && [[ "$JAVA_VERSION" =~ ^11\. ]]; then
+    OPENJFX_OPTS=(
+        "--module-path" "$OPENJFX_CLASSPATH"
+        "--add-modules=javafx.base,javafx.controls,javafx.swing,javafx.web"
+    )
 fi
+
+"$JAVA" "${OPENJFX_OPTS[@]}" -jar -Xmx1024M "$REAL_OMEGAT_PATH/@JAR_SUBST@" "$@"

@@ -46,7 +46,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.net.HttpConnectionUtils;
+import org.omegat.util.HttpConnectionUtils;
 
 /**
  * @author Ibai Lakunza Velasco

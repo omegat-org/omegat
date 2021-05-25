@@ -14,7 +14,7 @@
 
         <itemizedlist>
           <listitem>
-            <para>les balises manquantes, mal placées, y compris les <link linkend="dialogs.preferences.tagprocessing">balises personnalisées</link>. L'option <guilabel>Problèmes de balises</guilabel> est toujours sélectionnée.</para>
+            <para>les balises manquantes ou mal placées, y compris les <link linkend="dialogs.preferences.tagprocessing">balises personnalisées</link>. L'option <guilabel>Problèmes de balises</guilabel> est toujours sélectionnée.</para>
           </listitem>
 
           <listitem>
@@ -38,11 +38,11 @@
           </listitem>
 
           <listitem>
-            <para>un clic sur un en-tête de colonne modifie l'ordre de la colonne,</para>
+            <para>cliquer sur un en-tête de colonne modifie l'ordre de tri de la colonne,</para>
           </listitem>
 
           <listitem>
-            <para>sélectionner ou déplacer la souris sur une ligne va afficher une icône à l'extrémité droite de la ligne qui propose un menu déroulant où les actions de correction possibles sont présentées.</para>
+            <para>sélectionner ou déplacer la souris sur une ligne va afficher une icône à son extrémité droite de la ligne qui propose un menu déroulant où l'on peut choisir de corriger ou d'ignorer les erreurs.</para>
           </listitem>
         </itemizedlist>
       </listitem>
@@ -88,7 +88,7 @@
 
         <para>Les formats pris en charge sont ceux qui sont affichés dans <menuchoice><guimenuitem>Projet</guimenuitem> <guimenuitem>Propriétés</guimenuitem> <guimenuitem>Filtres de fichiers</guimenuitem></menuchoice>.</para>
 
-        <para>Les fichiers source et cible peuvent être dans des formats différents, par exemple un fichier <filename>.docx</filename> peut être aligné avec un fichier <filename>.pdf</filename>.</para>
+        <para>Les fichiers source et cible peuvent être dans des formats différents, (par exemple, un fichier <filename>.docx</filename> peut être aligné avec un fichier <filename>.pdf</filename>).</para>
       </listitem>
     </varlistentry>
 

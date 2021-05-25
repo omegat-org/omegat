@@ -37,7 +37,7 @@
         <term>Récupérer automatiquement les traductions</term>
 
         <listitem>
-          <para>Pour des motifs de confidentialité, vous pouvez ne pas vouloir envoyer tous les segments à l'outil de traduction automatique. En décochant cette option, les traductions automatiques seront récupérées uniquement lors de l'utilisation de <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> (<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo>sur OS X) sur le segment actuel. Vous devez ensuite utiliser <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> une deuxième fois pour insérer la suggestion.</para>
+          <para>Pour des motifs de confidentialité, vous pouvez ne pas vouloir envoyer tous les segments à l'outil de traduction automatique. En décochant cette option, les traductions automatiques seront récupérées uniquement lors de l'utilisation de <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> (<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo>sur macOS) sur le segment actuel. Vous devez ensuite utiliser <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> une deuxième fois pour insérer la suggestion.</para>
         </listitem>
       </varlistentry>
 
@@ -829,7 +829,7 @@
         <term>Exporter le segment dans des fichiers texte</term>
 
         <listitem>
-          <para>Cette fonction d'exportation dans des fichiers texte exporte des données depuis le projet <application>OmegaT</application> en cours dans des fichiers de texte brut. Les données sont exportées lorsque le segment est ouvert. Les fichiers apparaissent dans le sous-dossier /script situé dans le dossier de fichiers utilisateur d'OmegaT et comprennent :</para>
+          <para>Cette fonction d'exportation dans des fichiers texte exporte des données depuis le projet <application>OmegaT</application> en cours dans des fichiers de texte brut. Les données sont exportées lorsque le segment est ouvert. Les fichiers apparaissent dans le sous-dossier ./script situé dans le dossier de fichiers utilisateur d'OmegaT et comprennent :</para>
 
           <itemizedlist>
             <listitem>

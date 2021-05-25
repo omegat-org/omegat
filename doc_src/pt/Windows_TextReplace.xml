@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.textreplace">
+  <title>Substituir texto</title>
+
+  <para>Abra a janela de procura e substituição com <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo> e insira a palavra ou expressão que deseja substituir na caixa <emphasis>Procurar por</emphasis>.</para>
+
+  <para>Depois clique em <emphasis>Procurar</emphasis> para ver todas as ocorrências correspondentes.</para>
+
+  <para>Insira a nova palavra ou frase (as expressões regulares não são suportadas) na caixa <emphasis>Substituir por</emphasis> e clique numa das seguintes opções:<itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Substituir tudo:</emphasis> opera a substituição de todas as ocorrências (após exibir uma janela de confirmação onde é mostrado o número de ocorrências).</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Substituir:</emphasis> opera uma substituição &quot;um por um&quot;, por meio de botões no <emphasis role="bold">cabeçalho do painel do editor</emphasis>. Clique em <emphasis>Substituir seguinte</emphasis> ou <emphasis>Ignorar</emphasis> e termine a sessão de substituição com <emphasis>Terminar</emphasis>.</para>
+      </listitem>
+    </itemizedlist><itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Fechar:</emphasis> fecha a janela sem qualquer alteração.</para>
+      </listitem>
+    </itemizedlist></para>
+
+  <section>
+    <title>Opções de procura</title>
+
+    <para>As opções de procura são semelhantes às mostradas na <link linkend="windows.textsearch">janela de procura</link>.</para>
+
+    <para>Excepto uma: marque <emphasis role="bold">Não traduzidos</emphasis> para operar a procura e substituição também em segmentos que ainda não tenham sido traduzidos.</para>
+
+    <para>Para tornar possível (embora a procura e substituição funcione apenas em memória), o OmegaT copiará o segmento-fonte para o segmento-alvo antes de ocorrer a operação de substituição. Se não for feita qualquer substituição a um determinado segmento, o segmento-alvo será &quot;esvaziado&quot;, ou seja, permanecerá sem tradução.</para>
+  </section>
+</section>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="howto.setupteamproject">
   <title>Määritä ryhmäprojektin asetukset</title>
 
@@ -124,7 +124,7 @@ tai</para>
   </section>
 
   <section>
-    <title>Erityistapaus: Minimimääräinen jako</title>
+    <title>Erityistapaus: Valikoiva jako</title>
 
     <para>Yllä kuvataan tavallinen ryhmäprojekti, jossa projekti on täysin projektipäällikön valvonnassa ja jossa tiedostot (ja tilastot) ovat identtiset molemmissa päissä (sekä palvelimen että kääntäjän puolella).</para>
 
@@ -132,8 +132,7 @@ tai</para>
 
     <para>Tällainen versiohallintaan perustuva ryhmäprojekti luodaan samaan tapaan kuin tavallinenkin ryhmäprojekti, mutta projektipäällikkö ei lisää versiohallintaprojektiin (kaikkia) tiedostoja. Kääntäjät joko kopioivat tarvittavat tiedostot itse tai yhdistävät projektin paikalliset kansiot projektin etävarastoihin synkronoidakseen eri sijainneissa olevat tiedostot.</para>
 
-      <para>Kansiot yhdistetään joko muokkaamalla <filename>omegat.project</filename>-tiedostoa tai valitsemalla käyttöliittymästä <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Ominaisuudet</guimenuitem> <guimenuitem>Projektivarastojen määritys…</guimenuitem> </menuchoice>
-      </para>
+      <para>Kansiot yhdistetään joko valitsemalla käyttöliittymästä <menuchoice> <guimenuitem>Projekti</guimenuitem> <guimenuitem>Ominaisuudet</guimenuitem> <guimenuitem>Projektivarastojen määritys…</guimenuitem> </menuchoice> tai muokkaamalla <filename>omegat.project</filename>-tiedostoa.</para>
   </section>
 
   <section id="howto.setupteamproject.mappingparameters">

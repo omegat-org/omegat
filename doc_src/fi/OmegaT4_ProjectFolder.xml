@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
   <title>Projektikansio</title>
 
@@ -24,7 +24,7 @@
 
     <para>OmegaT etsii (sumeita) käännösosumia alikansiossa tm olevista käännösmuisteista. Mikä tahansa jo käännetty tekstinpätkä, joka on tallennettu TMX-tiedostoon, näkyy sumeiden osumien listalla, kunhan teksti vain vastaa riittävän hyvin käännettävänä olevaa tekstiä.</para>
 
-    <para>Jos jossakin lisäkäännösmuistissa oleva lähdekielinen segmentti on täsmälleen samanlainen kuin käännettävä segmentti, OmegaT toimii kuten valintaikkunassa <menuchoice> <guimenu>Valinnat</guimenu> <guimenuitem>Muokkaustapa…</guimenuitem> </menuchoice>. Esimerkiksi (jos oletuskäytös on valittu) lisäkäännösmuistista tuleva käännös otetaan käyttöön ja merkitään etuliitteellä <emphasis>[fuzzy]</emphasis>, jotta kääntäjä voi myöhemmin tarkastaa käännökset ja tarkistaa, ovatko tällä merkinnällä varustetut käännökset oikein<menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+    <para>Jos jossakin lisäkäännösmuistissa oleva lähdekielinen segmentti on täsmälleen samanlainen kuin käännettävä segmentti, OmegaT toimii kuten valintaikkunassa <menuchoice> <guimenu>Valinnat</guimenu> <guimenuitem>Muokkaustapa…</guimenuitem> </menuchoice>. Esimerkiksi (jos oletuskäytös on valittu) lisäkäännösmuistista tuleva käännös otetaan käyttöön ja merkitään etuliitteellä <emphasis>[fuzzy]</emphasis>, jotta kääntäjä voi myöhemmin tarkastaa käännökset ja tarkistaa, ovatko tällä merkinnällä varustetut käännökset oikein.</para>
 
     <para>Voi olla, että <filename>tm</filename>-alikansion käännösmuisteissa on identtisiä lähdekielisiä segmenttejä, joiden käännökset eroavat toisistaan. TMX-tiedostot luetaan niiden nimien mukaisessa järjestyksessä, ja yhden käännösmuistin segmentit luetaan rivi riviltä. Siksi näkyvillä on viimeinen identtisen lähdekielisen segmentin sisältävä käännösmuistiosuma (on tietysti järkevää pitää huolta siitä, että jo lähtökohtaisesti näin ei pääse käymään).</para>
 

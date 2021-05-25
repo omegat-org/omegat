@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="howto.setupteamproject">
   <title>チームプロジェクトを設定する</title>
 
@@ -122,7 +122,7 @@
   </section>
 
   <section>
-    <title>特殊なケース:最小限の共有</title>
+    <title>特殊なケース:選択的な共有</title>
 
     <para>上記のプロセスでは、プロジェクトマネージャがプロジェクトを完全に制御し、ファイル(および翻訳状況)が両方の側(サーバ側と通訳者側)で同一である通常のケースについて説明しています。</para>
 
@@ -130,8 +130,7 @@
 
     <para>この場合も手順は同じですが、プロジェクトマネージャはプロジェクトに(すべての)ファイルをバージョン管理に追加するわけではありません。代わりに、翻訳者はファイル自体をコピーするか、マッピングを追加して他の場所からファイルを同期します。</para>
 
-      <para>マッピングは、<filename>omegat.project</filename>を編集するか、GUI(<menuchoice><guimenuitem>プロジェクト</guimenuitem><guimenuitem>プロジェクト設定</guimenuitem><guimenuitem>リポジトリマッピング</guimenuitem></menuchoice>)で追加できます。
-      </para>
+      <para>マッピングは、UI: <menuchoice><guimenuitem>プロジェクト</guimenuitem><guimenuitem>プロジェクト設定</guimenuitem><guimenuitem>リポジトリマッピング</guimenuitem></menuchoice>で追加するか、<filename>omegat.project</filename>を直接編集して変更できます。</para>
   </section>
 
   <section id="howto.setupteamproject.mappingparameters">

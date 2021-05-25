@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.options">
+  <title>Optionen</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Einstellungen...</term>
+
+      <listitem>
+        <para>Öffnet das Dialogfenster <link linkend="dialogs.preferences">Einstellungen</link>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Maschinelle Übersetzung</term>
+
+      <listitem>
+        <para>Ermöglicht es Ihnen, einen oder mehrere maschinelle Übersetzungsdienste zu aktivieren/deaktivieren.</para>
+
+        <para>Wenn mehrere Übersetzungsdienste ausgewählt sind, können Sie mit <keycombo> <keycap>Strg</keycap> <keycap>M</keycap> </keycombo> zwischen ihnen umschalten und den zuletzt ausgewählten einfügen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Glossar</term>
+
+      <listitem>
+        <para>Wählen Sie <guimenuitem>TaaS-Terminologie nachschlagen</guimenuitem> aus, um es zu aktivieren.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Wörterbuch</term>
+
+      <listitem>
+        <para>Aktivieren Sie die Option <guimenuitem>Fuzzy-Matching für Wörterbucheinträge benutzen</guimenuitem>, wenn die Wörterbücher Wörter anzeigen sollen, die denselben Wortstamm haben.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Autovervollständigung</term>
+
+      <listitem>
+        <para>Wenn die Option <guimenuitem>Relevante Vorschläge automatisch anzeigen</guimenuitem> aktiviert ist, wird der Auto-Vervollständiger automatisch gestartet, wenn Sie den ersten Buchstaben eines übersetzten Glossareintrags eingeben, oder &quot;&lt;&quot;, um Tags einzufügen.</para>
+
+        <para>Aktivieren Sie <guimenuitem>Verlaufsvervollständigung</guimenuitem>, um Wortvorschläge anzuzeigen, sobald deren Anfangsbuchstaben eingegeben wurden.</para>
+
+        <para>Aktivieren Sie <guimenuitem>Verlaufsvorhersage</guimenuitem>, um Wortvorschläge anzuzeigen, die üblicherweise auf das gerade eingegebene Wort folgen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Dateifilter...</term>
+
+      <listitem>
+        <para>Öffnet die Kategorie <link linkend="dialogs.preferences.filefilters">Dateifilter</link> im Dialogfenster &quot;Einstellungen&quot;.</para>
+
+        <para>Diese Einstellungen sind global; das heißt, sie gelten für alle Projekte.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmentierung...</term>
+
+      <listitem>
+        <para>Öffnet die Kategorie <link linkend="dialogs.preferences.segmentationsetup">Segmentierung einrichten</link> im Dialogfenster &quot;Einstellungen&quot;.</para>
+
+        <para>Diese Einstellungen sind global; das heißt, sie gelten für alle Projekte.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Editor...</term>
+
+      <listitem>
+        <para>Öffnet die Kategorie <link linkend="dialogs.preferences.editor">Editor</link> im Dialogfenster &quot;Einstellungen&quot;.</para>
+
+        <para>Diese Einstellungen sind global; das heißt, sie gelten für alle Projekte.</para>
+
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Konfigurationsordner öffnen</term>
+
+      <listitem>
+        <para>Öffnet das lokale Verzeichnis, in dem die OmegaT-Konfigurationsdateien gespeichert sind (abhängig vom Betriebssystem).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

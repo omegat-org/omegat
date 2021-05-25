@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.projectfiles">
+  <title>Ficheiros do projecto</title>
+
+  <para>Esta janela é mostrada automaticamente quando o OmegaT carrega um projecto e em qualquer altura premindo <menuchoice> <guimenuitem>Projecto</guimenuitem> <guimenuitem>Ficheiros do projecto...</guimenuitem> </menuchoice>.</para>
+
+  <para><remark>Nota:</remark> é possível inibir a exibição da janela ao abrir, definindo <emphasis>project_files_show_on_load</emphasis> para <emphasis>false</emphasis> em <filename>omegat.prefs</filename> ficheiro (acessível por <menuchoice> <guimenuitem>Opções</guimenuitem> <guimenuitem>Aceder à pasta de configurações</guimenuitem> </menuchoice>).</para>
+
+  <para>Use <guimenuitem>Ctrl+L</guimenuitem> para abrir e <keycap>Esc</keycap> para fechar. A janela <guilabel>Ficheiros do projecto</guilabel> mostra a seguinte informação:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>o número total de ficheiros traduzíveis no projecto. Estes são os ficheiros presentes na pasta /source, num formato que o OmegaT é capaz de reconhecer. Este número é apresentado entre parênteses, ao lado do título &quot;Ficheiro de projecto&quot;.</para>
+    </listitem>
+
+    <listitem>
+      <para>a lista de todos os ficheiros traduzíveis no projecto. Clicando em qualquer ficheiro, abri-lo-á para tradução.</para>
+
+      <para>Escrever qualquer texto abrirá um campo <guilabel>Filtro</guilabel> onde partes de nomes de ficheiros podem ser inseridos. Pode seleccionar um ficheiro com as teclas <keycap>Acima</keycap> e <keycap>Abaixo</keycap>, e abri-lo para tradução premindo <keycap>Enter</keycap></para>
+
+      <para>Nota: os nomes dos ficheiros (na primeira coluna) podem ser ordenados por ordem alfabética clicando no cabeçalho. Também é possível alterar a posição de um nome de ficheiro, clicando-o e premindo os botões <emphasis>Mover ...</emphasis>.</para>
+
+      <para>Ao clicar com o botão direito do rato sobre um nome de ficheiro abre um menu que permite abrir o ficheiro-fonte e (se existir) o ficheiro-alvo.</para>
+    </listitem>
+
+    <listitem>
+      <para>As entradas dos ficheiros incluem os seus nomes, tipos de filtros de ficheiros, a sua codificação e o número de segmentos que cada ficheiro contém</para>
+    </listitem>
+
+    <listitem>
+      <para>o número total de segmentos, o número de segmentos únicos em todo o projecto e o número de segmentos únicos já traduzidos são mostrados na parte inferior</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>O conjunto de segmentos <emphasis role="bold">únicos</emphasis> é calculado pegando em todos os segmentos e removendo todos os segmentos duplicados. (A definição de &quot;único&quot; é sensível a maiúsculas e minúsculas: &quot;Correr&quot; e &quot;correr&quot; são tratados como sendo diferentes)</para>
+
+  <para>A diferença entre &quot;Número de segmentos&quot; e &quot;Número de segmentos únicos&quot; fornece uma ideia aproximada do número de repetições no texto. Note-se contudo que os números não indicam quão relevantes são as repetições: podem significar frases relativamente longas repetidas várias vezes (caso em que tem sorte) ou pode descrever uma tabela de palavras-chave (não tanta sorte). O <filename>project_stats.txt</filename> localizado na pasta omegat do seu projecto contém informações mais detalhadas do segmento, repartidas por ficheiro.</para>
+
+  <para>A modificação das regras de segmentação pode ter o efeito de modificar o número de segmentos/segmentos únicos. Isto, no entanto, deve ser evitado em geral uma vez que se tenha iniciado a tradução do projecto. Ver o capítulo <emphasis>Regras de segmentação</emphasis> para mais informações.</para>
+
+  <para><emphasis role="bold">Adicionar ficheiros ao projecto: </emphasis>pode adicionar ficheiros-fonte ao projecto, clicando em &quot;<guimenuitem>Importar ficheiros-fonte...&quot;</guimenuitem>. Isto copia os ficheiros seleccionados para a pasta <filename>source</filename> e recarrega o projecto para importar os novos ficheiros. Pode também adicionar ficheiros fonte de páginas da Internet, escritos em MediaWiki, clicando em<guimenuitem> &quot;Importar de MediaWiki&quot;</guimenuitem> e fornecendo o URL correspondente.</para>
+</section>

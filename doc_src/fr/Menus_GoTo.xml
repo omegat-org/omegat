@@ -10,7 +10,7 @@
       <term>Segment non traduit suivant</term>
 
       <listitem>
-        <para>Passe au segment suivant non traduit ( = n'ayant pas d'équivalent dans la mémoire de traduction).</para>
+        <para>Passe au segment suivant qui n'a pas d'équivalent dans la mémoire de traduction.</para>
       </listitem>
     </varlistentry>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="dialogs.preferences">
   <title>Yleiset asetukset</title>
 
@@ -78,7 +78,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Käytä sanaston termien vartaloita</term>
+        <term>Käytä sanaston termeissä vartaloita</term>
 
         <listitem>
           <para>Rastita tämä kohta, jos haluat, että sanastoruudussa näkyy vartaloltaan samoja sanoja.</para>
@@ -196,7 +196,7 @@
   <section id="dialogs.preferences.filefilters">
     <title>Tiedostosuodattimet</title>
 
-    <para>Tässä kohdassa näkyvät käytössä olevat tiedostosuodattimet. Nykyisen projektin käyttämät suodattimet on lihavoitu. Jos et halua käyttää OmegaT:tä tiettyjen tiedostotyypien kääntämiseen, voit ottaa kyseisen tiedostosuodattimen pois käytöstä poistamalla rastin sen vieressä olevasta ruudusta. Tällöin OmegaT hyppää vastaavien tiedostojen yli projektia ladattaessa ja kopioi ne muuttumattomina kohdekansioon, kun kohdetiedostoja luodaan. Kun haluat ottaa suodattimen uudelleen käyttöön, laita valintaruutuun rasti. Kun napsautat <emphasis role="bold">Oletukset</emphasis>-painiketta, tiedostosuodatinasetukset palautuvat oletusarvoihinsa. Voit muokata käytettäviä tiedostoja ja tiedotosuodattimien koodauksia valitsemalla kyseisen suodattimen ja napsauttamalla <emphasis role="bold">Muokkaa</emphasis>-painiketta.</para>
+    <para>Tässä kohdassa näkyvät käytössä olevat tiedostosuodattimet. Nykyisen projektin käyttämät suodattimet on lihavoitu. Jos et halua käyttää OmegaT:tä tiettyjen tiedostotyypien kääntämiseen, voit ottaa kyseisen tiedostosuodattimen pois käytöstä poistamalla rastin sen vieressä olevasta ruudusta. Tällöin OmegaT hyppää vastaavien tiedostojen yli projektia ladattaessa ja kopioi ne muuttumattomina kohdekansioon, kun kohdetiedostoja luodaan. Kun haluat ottaa suodattimen uudelleen käyttöön, laita valintaruutuun rasti. Kun napsautat <emphasis role="bold">Oletukset</emphasis>-painiketta, tiedostosuodatinasetukset palautuvat oletusarvoihinsa. Voit muokata käytettäviä tiedostoja ja tiedostosuodattimien koodauksia valitsemalla kyseisen suodattimen ja napsauttamalla <emphasis role="bold">Muokkaa</emphasis>-painiketta.</para>
 
     <para>Voit ottaa käyttöön tai poistaa käytöstä seuraavat valinnat:</para>
 

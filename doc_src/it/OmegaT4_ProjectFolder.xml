@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
   <title>Cartella del progetto</title>
 
@@ -24,7 +24,7 @@
 
     <para>Il contenuto delle memorie di traduzione, della sotto-cartella tm, serve per generare i suggerimenti per i segmenti di testo da tradurre. Tutto il testo già tradotto e memorizzato in questi file, se sufficientemente simile al testo che si sta traducendo, apparirà tra le concordanze parziali.</para>
 
-    <para>OmegaT agisce come definito nella finestra di dialogo <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Comportamento di modifica...</guimenuitem> </menuchoice>, se il segmento di origine, in una delle memorie di traduzione secondarie, è identico al testo da tradurre. Per esempio, se le impostazioni predefinite vengono lasciate inalterate, la traduzione della TM secondaria è accettata e marcata col prefisso <emphasis>[fuzzy]</emphasis>, in modo da permettere al traduttore di rivedere le traduzioni in un secondo momento e verificare se i segmenti contrassegnati siano stati tradotti correttamente<menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+    <para>OmegaT agisce come definito nella finestra di dialogo <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Comportamento di modifica...</guimenuitem> </menuchoice>, se il segmento di origine, in una delle memorie di traduzione secondarie, è identico al testo da tradurre. Per esempio, se le impostazioni predefinite vengono lasciate inalterate, la traduzione della TM secondaria è accettata e marcata col prefisso <emphasis>[fuzzy]</emphasis>, in modo da permettere al traduttore di rivedere le traduzioni in un secondo momento e verificare se i segmenti contrassegnati siano stati tradotti correttamente.</para>
 
     <para>Può succedere che le memorie di traduzione contenute nella sotto-cartella <filename>tm</filename>, contengano segmenti con testo di origine identico ma testo di destinazione diverso. I file TMX sono letti ordinati per nome e segmenti all'interno di un file TMX dato riga per riga. L'ultimo segmento con il testo di origine identico verrà considerato prioritario (nota: ha naturalmente più senso evitare, in primo luogo, che questo avvenga).</para>
 

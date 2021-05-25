@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="dialogs.preferences">
   <title>通用首选项</title>
 
@@ -63,7 +63,7 @@
         <term>显示 TBX 词汇表的上下文描述</term>
 
         <listitem>
-          <para>如果为每个词汇表条目所显示的上下文描述不必要或者太长，请取消对此选项的勾选。</para>
+          <para>如果为每个词条所显示的上下文描述并非必要或者太长，请取消对此选项的勾选。</para>
         </listitem>
       </varlistentry>
 
@@ -78,7 +78,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term>对词汇表条目使用词干分析</term>
+        <term>对词条使用词干分析</term>
 
         <listitem>
           <para>如果希望词汇表中显示有着相同词根的词汇，请选择此选项。</para>
@@ -86,10 +86,10 @@
       </varlistentry>
 
       <varlistentry>
-        <term>插入原文文本时替换命中的词汇表条目</term>
+        <term>插入原文文本时替换命中的词条</term>
 
         <listitem>
-          <para>如果同时勾选了此选项与<link linkend="dialogs.preferences.editor.insertthesourcetext"><guilabel>插入原文文本</guilabel></link>选项，当插入原文文本时，所有有着相应词汇表条目的词汇都会被自动翻译。</para>
+          <para>如果同时勾选了此选项与<link linkend="dialogs.preferences.editor.insertthesourcetext"><guilabel>插入原文文本</guilabel></link>选项，当插入原文文本时，所有有着相应词条的词汇都会被自动翻译。</para>
         </listitem>
       </varlistentry>
 
@@ -214,7 +214,7 @@
       </listitem>
 
       <listitem>
-        <para>识别有替代翻译的片段时忽略文件上下文：默认情况下，OmegaT 用原文文件名作为替代翻译的识别信息的一部分。如果勾选了此选项，则不使用原文文件名，而只要其他上下文（上一个/下一个片段或依赖于文件格式的某种片段标识）匹配，替代翻译会在任意文件中生效。</para>
+        <para>识别有替代翻译的片段时忽略文件上下文：默认情况下，OmegaT 用原文文件名作为备选译文的识别信息的一部分。如果勾选了此选项，则不使用原文文件名，而只要其他上下文（上一个/下一个片段或依赖于文件格式的某种片段标识）匹配，备选译文会在任意文件中生效。</para>
       </listitem>
     </itemizedlist>
 
@@ -852,7 +852,7 @@
 
     <variablelist>
       <varlistentry>
-        <term>转到下一个未译片段的功能在有替代译文的片段处也会停下</term>
+        <term>转到下一个未译片段的功能在有多重译文的片段处也会停下</term>
 
         <listitem>
           <para>如果我们想要避免在具有多个可能译文内容的片段上出现错译，选中此复选框会让<emphasis role="bold">转到下一个未译片段</emphasis>在下一个此类片段处停下，无论其是否已被翻译。</para>

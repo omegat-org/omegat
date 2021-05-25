@@ -3,7 +3,7 @@
 <appendix id="appendix.regexp">
   <title>Espressioni regolari</title>
 
-  <para>Le espressioni regolari (regex, in breve) ammesse per le operazioni di ricerca sono quelle riconosciute da Java. Per ulteriori e più specifiche informazioni, consultare la <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">documentazione Java Regex</ulink>. Vedere più avanti per ulteriori riferimenti ed esempi.</para>
+  <para>Le espressioni regolari (regex, in breve) ammesse per le operazioni di ricerca sono quelle riconosciute da Java. Per ulteriori e più specifiche informazioni, consultare la <ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">documentazione Java Regex</ulink>. Vedere più avanti per ulteriori riferimenti ed esempi.</para>
 
   <note>
     <para>Questo capitolo si rivolge agli utenti avanzati, che hanno la necessità di definire le proprie varianti delle regole di segmentazione o costruire combinazioni di ricerca più complesse ed efficaci.</para>

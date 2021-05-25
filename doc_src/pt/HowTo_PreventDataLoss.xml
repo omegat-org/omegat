@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="howto.preventdataloss">
+  <title>Prevenir a perda de dados</title>
+
+  <para><application>OmegaT</application> é uma aplicação robusta. No entanto, deve tomar precauções contra a perda de dados ao utilizar o <application>OmegaT</application>, tal como em qualquer outra aplicação. Quando traduz os seus ficheiros, o <application>OmegaT</application> grava todos os seus progressos na memória de tradução <literal>project_save.tmx</literal> que reside na sub-pasta do projecto <literal>/omegat</literal>.</para>
+
+  <para>O OmegaT também faz o backup da memória de tradução para project_save.tmx.YEARMMDDHHNN.bak na mesma sub-pasta cada vez que um projecto é aberto ou recarregado. ANO é o ano de 4 dígitos, MM é o mês, DD o dia do mês, e HH e NN são as horas e minutos em que a memória de tradução anterior foi guardada.</para>
+
+  <para>Se acredita ter perdido dados de tradução, pode usar o seguinte procedimento para repor o projecto no seu estado mais recente, geralmente não mais velho do que aproximadamente 10 minutos:</para>
+
+  <orderedlist>
+    <listitem>
+      <para>feche o projecto</para>
+    </listitem>
+
+    <listitem>
+      <para>renomeie o actual ficheiro <filename>project_save.tmx</filename> (e.g. para <filename>project_save.tmx.temporary</filename>)</para>
+    </listitem>
+
+    <listitem>
+      <para>seleccione a memória de tradução de reserva que é a mais susceptível de conter os dados que procura</para>
+    </listitem>
+
+    <listitem>
+      <para>renomeie-a para <literal>project_save.tmx</literal></para>
+    </listitem>
+
+    <listitem>
+      <para>abra o projecto</para>
+    </listitem>
+  </orderedlist>
+
+  <para>Para evitar a perda de dados importantes:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Faça cópias regulares do ficheiro /omegat/project_save.tmx para suportes de salvaguarda, tais como CD ou DVD.</para>
+    </listitem>
+
+    <listitem>
+      <para>Até estar familiarizado com o <application>OmegaT</application>, crie ficheiros traduzidos a intervalos regulares e verifique se o ficheiro traduzido contém a última versão da sua tradução.</para>
+    </listitem>
+
+    <listitem>
+      <para>Tenha especial cuidado ao fazer alterações aos ficheiros em <literal>/source</literal> enquanto está no meio de um projecto. Se o ficheiro-fonte for modificado após ter começado a traduzir, o <application>OmegaT</application> poderá não conseguir encontrar um segmento que já tenha traduzido.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Utilize estes textos de ajuda para começar. Se tiver problemas, afixe uma mensagem no grupo de utilizadores do <ulink url="https://omegat.org/support"><application>OmegaT</application></ulink>. Não hesite em publicar no idioma com o qual se sente mais familiarizado.</para>
+    </listitem>
+  </itemizedlist>
+</section>

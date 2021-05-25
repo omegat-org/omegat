@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
   <title>Kohdistaja</title>
 
@@ -12,7 +12,7 @@
 
     <para>Jos näyttää siltä, että kohdistusta voisi parantaa, yritä muuttaa parametrejä. Useimmissa tapauksissa on niin, että mitä alempi <guilabel>Keskiarvotulos</guilabel> on, sitä parempi kohdistuksen lopputulos on.</para>
 
-    <para><guilabel>Kokonaisuutena</guilabel>-tilassa tekstit arvoidaan kokonaisuutena. <guilabel>Segmentti kerrallaan</guilabel>-tilassa tekstit arvioidaan – segmentti kerrallaan.</para>
+    <para><guilabel>Kokonaisuutena</guilabel>-tilassa tekstit arvioidaan kokonaisuutena. <guilabel>Segmentti kerrallaan</guilabel>-tilassa tekstit arvioidaan – yllätys, yllätys – segmentti kerrallaan. Tämä vaihtoehto näkyy vain, kun tällainen valinta on mahdollista tehdä.</para>
 
     <para><guilabel>ID-vertailu</guilabel>-tilassa saat kohdistettua avain–arvo-tekstipareja. Tämä toimii silloinkin, kun tekstit eivät ole samassa järjestyksessä molemmissa tiedostoissa ja/tai jos tiedostoissa on eri määrä sisältöä. Tämä valinta näkyy vain, jos molemmat tiedostot tunnistetaan avain–arvo-tiedostoiksi.</para>
 

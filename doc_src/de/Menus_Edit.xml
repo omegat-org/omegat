@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>Bearbeiten</title>
+
+  <para>Dieses Menü zeigt nur Menüpunkte an, wenn ein Projekt geöffnet ist.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Letzte Aktion rückgängig machen</guimenuitem></term>
+
+      <listitem>
+        <para>Stellt den Zustand wieder her, wie er vor der letzten Bearbeitungsaktion war. Dieser Befehl funktioniert nicht mehr, sobald das geänderte Segment validiert wurde.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Letzte Aktion wiederholen</term>
+
+      <listitem>
+        <para>Stellt den Zustand wieder her, wie er vor dem Rückgängigmachen der letzten Bearbeitungsaktion war. Dieser Befehl funktioniert nicht mehr, sobald das geänderte Segment validiert wurde.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mit Match oder Auswahl ersetzen</term>
+
+      <listitem>
+        <para>Ersetzt den gesamten Zieltext mit dem aktuell ausgewählten Fuzzy Match (standardmäßig ist der erste Match ausgewählt).</para>
+
+        <para>Wenn ein Teil des Textes innerhalb des Fuzzy Matches markiert ist, wird nur diese Auswahl den gesamten Zieltext ersetzen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Match oder Auswahl einfügen</term>
+
+      <listitem>
+        <para>Fügt den aktuell ausgewählten Fuzzy Match an der Position des Textcursors ein. Wenn ein Teil des Zieltextes markiert wurde, wird nur der markierte Teil überschrieben.</para>
+
+        <para>Wenn ein Teil des Textes innerhalb des Fuzzy Matches markiert ist, wird nur diese Auswahl an der Position des Textcursors eingefügt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mit maschineller Übersetzung ersetzen</term>
+
+      <listitem>
+        <para>Ersetzt den Zieltext mit der Übersetzung, die vom ausgewählten maschinellen Übersetzungsdienst bereitgestellt wird. Es wird keine Aktion durchgeführt, wenn kein maschineller Übersetzungsdienst aktiviert wurde (unter <menuchoice> <guimenu>Optionen</guimenu> <guimenuitem>Maschinelle Übersetzung</guimenuitem> </menuchoice>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mit Quelle ersetzen</term>
+
+      <listitem>
+        <para>Ersetzt den gesamten Zieltext mit dem Quelltext.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Quelle einfügen</term>
+
+      <listitem>
+        <para>Fügt den Quelltext an der Position des Textcursors ein.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Fehlende Tags aus Quelle einfügen</term>
+
+      <listitem>
+        <para>Fügt fehlende Tags aus dem Quelltext an der Position des Textcursors ein.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nächstes fehlendes Tag einfügen</term>
+
+      <listitem>
+        <para>Fügt nur eines der fehlenden Tags an der Position des Textcursors ein.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Auswahl exportieren</term>
+
+      <listitem>
+        <para>Exportiert die aktuelle Auswahl in eine Textdatei, damit sie extern verarbeitet werden kann. Wenn kein Text markiert wurde, wird der aktuelle Quelltext in diese Datei geschrieben. Wenn der Benutzer <application>OmegaT</application> beendet, wird diese Datei nicht geleert, was dem üblichen Verhalten einer Zwischenablage entspricht. Die exportierten Inhalte werden in die Datei <filename>selection.txt</filename> kopiert, die sich im Benutzerordner von OmegaT befindet.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Glossareintrag erstellen</term>
+
+      <listitem>
+        <para>Ermöglicht dem Benutzer, einen Eintrag in der beschreibbaren Glossardatei zu erstellen.</para>
+
+        <para>Wenn Sie einen Text (in einem beliebigen Fensterbereich) markieren, bevor Sie <keycombo> <keycap>Strg</keycap> <keycap>Umschalt</keycap> <keycap>G</keycap> </keycombo> drücken, wird der Text standardmäßig in das Feld <guilabel>Quellbegriff</guilabel> eingefügt.</para>
+
+        <para>Dies gilt auch für die Felder <guimenuitem>Zielbegriff</guimenuitem> und <guimenuitem>Kommentar</guimenuitem>, wenn ein neuer Text markiert und erneut <keycombo> <keycap>Strg</keycap> <keycap>Umschalt</keycap> <keycap>G</keycap> </keycombo> gedrückt wird.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Projekt durchsuchen...</term>
+
+      <listitem>
+        <para>Öffnet ein neues <link linkend="windows.textsearch">Suchfenster</link>.</para>
+
+        <para>Wenn Sie einen Text (in einem beliebigen Fensterbereich) markieren, bevor Sie <keycombo> <keycap>Strg</keycap> <keycap>F</keycap> </keycombo> drücken, wird der Text standardmäßig in das Feld <guilabel>Suche nach</guilabel> eingefügt.</para>
+
+        <para>Wenn Sie <keycombo> <keycap>Strg</keycap> <keycap>Umschalt</keycap> <keycap>F</keycap> </keycombo> drücken, wird das bereits geöffnete Suchfenster wieder in den Vordergrund gerückt (statt ein neues Fenster zu öffnen).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Suchen und Ersetzen...</term>
+
+      <listitem>
+        <para>Öffnet ein neues <link linkend="windows.textreplace">Suchen-und-Ersetzen-Fenster</link>.</para>
+
+        <para>Wenn Sie einen Text (in einem beliebigen Fensterbereich) markieren, bevor Sie <keycombo> <keycap>Strg</keycap> <keycap>K</keycap> </keycombo> drücken, wird der Text standardmäßig in das Feld <guilabel>Suche nach</guilabel> eingefügt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Wörterbücher durchsuchen</term>
+
+      <listitem>
+        <para>Wenn die <link linkend="dialogs.preferences.dictionary">automatische Suche in Wörterbüchern</link> deaktiviert ist, können Sie mit diesem Befehl das markierte Wort in den Wörterbüchern suchen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Groß-/Kleinschreibung ändern</term>
+
+      <listitem>
+        <para>Ändert die Groß-/Kleinschreibung des markierten Textes im Zieltext auf die ausgewählte Option (Kleinschreibung, Großschreibung, Titelschreibung oder Satzschreibung). Anmerkung des Übersetzers: Kleinschreibung = alle Buchstaben klein, Großschreibung = alle Buchstaben groß, Titelschreibung = alle Wörter beginnen mit einem Großbuchstaben, Satzschreibung = erster Buchstabe eines Satzes groß, alle anderen Buchstaben des Satzes klein. Benutzen Sie <keycombo> <keycap>Umschalt</keycap> <keycap>F3</keycap> </keycombo>, um zwischen den vier Alternativen durchzuschalten. Wenn kein Text markiert ist, wird <application>OmegaT</application> die Groß-/Kleinschreibung des Wortes ändern, das den Buchstaben rechts neben dem Textcursor enthält.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Match auswählen</term>
+
+      <listitem>
+        <para>Wählt den vorherigen, den nächsten oder den n-ten gefundenen Match im Fuzzy-Matches-Bereich aus, um ihn in das Segment einzufügen oder um das Segment zu ersetzen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Als Standardübersetzung verwenden</term>
+
+      <listitem>
+        <para>Wenn mehrere alternative Übersetzungen für das aktive Segment verfügbar sind, können Sie die ausgewählte Alternative als Standardübersetzung kennzeichnen. Der Menüpunkt ist ausgegraut, wenn nur eine Übersetzung vorhanden ist.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Alternative Übersetzung erstellen</term>
+
+      <listitem>
+        <para>Das ein und dasselbe Segment kann, je nach Kontext, verschiedene Übersetzungen erfordern. Wählen Sie diesen Menüpunkt aus, falls die derzeitige Übersetzung nicht zutrifft, und geben Sie die alternative Übersetzung ein.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Übersetzung entfernen</term>
+
+      <listitem>
+        <para>Löscht die Übersetzung und kennzeichnet das Segment als unübersetzt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Leere Übersetzung setzen</term>
+
+      <listitem>
+        <para>Definiert die Übersetzung als leer. Für dieses Segment wird im Zieldokument nichts angezeigt. Im Editor wird die Übersetzung als &lt;LEER&gt; angezeigt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Als identische Übersetzung kennzeichnen</term>
+
+      <listitem>
+        <para>Verwenden Sie diesen Befehl, um die Übersetzung mit dem Kennzeichen zu versehen, dass sie identisch mit der Quelle ist, sogar wenn die Option <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Übersetzung und Quelle dürfen identisch sein</guilabel></link> deaktiviert ist.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

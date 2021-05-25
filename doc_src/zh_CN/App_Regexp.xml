@@ -3,7 +3,7 @@
 <appendix id="appendix.regexp">
   <title>正则表达式</title>
 
-  <para>在查找功能和片段分割规则中所使用的是 Java 所支持的正则表达式。如果你需要更多详细信息，请参阅 <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">Java 正则表达式文档</ulink>。参见以下的参考和范例。</para>
+  <para>在查找功能和片段分割规则中所使用的是 Java 所支持的正则表达式。如果你需要更多详细信息，请参阅 <ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java 正则表达式文档</ulink>。参见以下的参考和范例。</para>
 
   <note>
     <para>本章内容是为高级用户准备的，用于定义自己的分割规则变体或设计更复杂更强大的关键字查找内容。</para>

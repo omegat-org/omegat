@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="howto.translatepdf">
+  <title>Traduzir um ficheiro PDF</title>
+
+<para>Os ficheiros PDF são um caso especial. Contêm informação de formatação de texto, mas tal informação não pode ser reutilizada pelo <application>OmegaT</application> a fim de criar ficheiros-alvo. Assim, os ficheiros PDF são tratados como ficheiros de texto simples, e os ficheiros de saída são ficheiros de texto simples.</para>
+  <para>Se precisar de reproduzir a formatação do texto (bem como outras coisas como desenhos) na sua tradução, há três maneiras de tentar:</para>
+  <orderedlist>
+    <listitem>
+      <para>Utilizar o filtro padrão (entrada PDF) do <application>OmegaT's</application>, traduzir, criar um ficheiro de destino (será um ficheiro de texto simples), adicionar formatação relevante e itens manualmente.</para>
+    </listitem>
+    <listitem>
+      <para>Utilizar o filtro Iceni Infix. Ver <ulink url="https://omegat.org/howtos/iceni_infix.html">Como traduzir ficheiros PDF com Iceni Infix e OmegaT</ulink>.</para>
+    </listitem>
+    <listitem>
+      <para>Importar o ficheiro fonte para <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>, guardá-lo como um ficheiro ODG, traduzir, exportar para PDF conforme necessário.</para>
+    </listitem>
+  </orderedlist>
+  <para><emphasis role="bold">Nota:</emphasis> a informação acima aplica-se apenas a ficheiros PDF com uma camada de texto. Se tiver um ficheiro PDF feito de páginas digitalizadas (por vezes tais ficheiros são referidos como PDFs 'mortos'), precisa de usar um programa OCR (reconhecimento óptico de caracteres) para reconhecer o texto e convertê-lo para um formato que possa ser tratado pela OmegaT.</para>
+
+
+
+  <section id="other.file.formats">
+    <title>Outros formatos de ficheiro</title>
+
+    <para>Podem também existir outros formatos de texto simples ou de ficheiro de texto formatado adequados para processamento em OmegaT.</para>
+
+    <para>Ferramentas externas podem ser utilizadas para converter ficheiros para formatos suportados. Os ficheiros traduzidos terão então de ser convertidos novamente para o formato original. Por exemplo, se tiver uma versão desactualizada do Microsoft Word, que não lide com o formato ODT, aqui está uma viagem de ida e volta para ficheiros Word com a extensão DOC:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>importar o ficheiro para Writer ODF</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>gravar o ficheiro em formato ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>traduzi-lo para o ficheiro ODT de destino</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>carregar o ficheiro-alvo no gravador ODF</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>gravar o ficheiro como um ficheiro DOC</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>A qualidade da formatação do ficheiro traduzido dependerá da qualidade da conversão de ida e volta. Antes de proceder a tais conversões, não se esqueça de testar todas as opções. Verifique a página inicial do <ulink url="http://www.omegat.org">OmegaT</ulink> para uma lista actualizada de ferramentas auxiliares de tradução.</para>
+</section>
+</section>

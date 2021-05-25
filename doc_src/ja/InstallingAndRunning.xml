@@ -35,9 +35,9 @@
     <section id="running.OmegaT.Windows">
       <title><application>OmegaT</application>の実行</title>
 
-      <para>いったん <application>OmegaT</application> をインストールしたならば、<filename>&gt;OmegaT.jar</filename> をクリックして直接起動することができます。また、コマンドラインから起動することもできます。</para>
+      <para>いったん <application>OmegaT</application> をインストールしたならば、<filename>OmegaT.jar</filename> をクリックして直接起動することができます。また、コマンドラインから起動することもできます。</para>
 
-      <para>しかし、一番簡単なのはプログラム &lt;<filename>OmegaT.exe</filename> を実行することです。この場合の起動時の引数は、OmegaT.exe ファイルと同じ場所にある &lt;<filename>OmegaT.l4J.ini</filename> ファイルから読み込まれます。このファイルを編集することで起動引数を変更できます。以下に示した INI ファイルは、最大で 1GB のメモリを確保し、ユーザー言語として日本語を、国に日本を指定した例です：</para>
+      <para>しかし、一番簡単なのはプログラム <filename>OmegaT.exe</filename> を実行することです。この場合の起動時の引数は、OmegaT.exe ファイルと同じ場所にある <filename>OmegaT.l4J.ini</filename> ファイルから読み込まれます。このファイルを編集することで起動引数を変更できます。以下に示した INI ファイルは、最大で 1GB のメモリを確保し、ユーザー言語として日本語を、国に日本を指定した例です：</para>
 
       <programlisting>#OmegaT.exeランタイム構成
 #パラメータを使用するには、'-'の前にある'#'を削除します。
@@ -176,7 +176,7 @@
     <section id="running.OmegaT.Linux">
       <title><application>OmegaT</application>の実行</title>
 
-      <para>OmegaT の実行は、起動オプションを記述したスクリプトを使ってコマンドラインから可能です。あるいは <filename>OmegaT.jar</filename> をクリックして直接起動することもできます。その方法はディストリビューションによって異なります。<varname>PATH</varname>の設定が正しいことと、<filename>.jar </filename> ファイルが正しく Java に関連づけられていることを確認してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。</para>
+      <para>OmegaT の実行は、起動オプションを記述したスクリプトを使ってコマンドラインから可能です。あるいは <filename>OmegaT.jar</filename> をクリックして直接起動することもできます。その方法はディストリビューションによって異なります。<varname>PATH</varname>の設定が正しいことと、<filename>.jar </filename> ファイルが正しく Java に関連づけられていることを確認してください。詳細については、以下の<link linkend="commandline.launching" endterm="commandline.launching.title"/>を参照してください。</para>
     </section>
   </section>
 
@@ -214,11 +214,11 @@
 
       <para><filename>Configuration.properties</filename> を編集することで、設定を変更できます。定義済みの設定を有効にするには、引数の先頭の <literal>#</literal> 記号を削除してください。たとえば、<literal>user.language=ja</literal>（<literal>#</literal> 記号なし）とすると、<application>&gt;OmegaT</application> は日本語のユーザーインターフェースで起動します。</para>
 
-      <para>使用可能なメモリー量を変更するには、<emphasis>OmegaT.app/Contents/Info.plist</emphasis>ファイルを編集し、<literal>&lt;!--</literal>および<literal>--&gt;</literal>を削除して、行<literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt; --&gt;</literal>のコメントを解除します。これにより、6GBのメモリでOmegaTが起動されます。<literal>6g</literal>を必要な量に変更します。</para>
+      <para>使用可能なメモリー量を変更するには、<emphasis>OmegaT.app/Contents/Info.plist</emphasis>ファイルを編集し、<literal>&lt;!--</literal>および<literal>--&gt;</literal>を削除して、行<literal>&lt;!-- &lt;string&gt;-Xmx6g&lt;/string&gt; --&gt;</literal>のコメントを解除します。これにより、6GBのメモリでOmegaTが起動されます。<literal>6g</literal>を必要な量に変更してください。</para>
 
       <para><filename>OmegaT.app</filename> を複数起動したい場合は、<filename>OmegaT.app/Contents/MacOS/</filename> にある <emphasis>OmegaT</emphasis> ファイルをダブルクリックしてください。</para>
 
-      <para><filename>OmegaT.app/Contents/MacOS/Java/</filename>にある<filename>OmegaT.jar</filename>ファイルを使用して、コマンド行から<application>OmegaT</application>を起動します。詳細は「コマンドラインから OmegaT を起動する」を参照してください。</para>
+      <para><filename>OmegaT.app/Contents/MacOS/Java/</filename>にある<filename>OmegaT.jar</filename>ファイルを使用して、コマンド行から<application>OmegaT</application>を起動します。詳細については、以下の<link linkend="commandline.launching" endterm="commandline.launching.title"/>を参照してください。</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -276,7 +276,7 @@
     <section id="running.OmegaT.other">
       <title><application>OmegaT</application>の実行</title>
 
-      <para><application>OmegaT</application> をインストールした後は、コマンドラインからの直接実行や、起動引数を記述したスクリプトによる実行も可能です。あるいは <filename>OmegaT.jar</filename> をクリックして直接起動することもできます。その方法はディストリビューションによって異なります。<varname>PATH</varname>の設定が正しいことと、<filename>.jar </filename> ファイルが正しく Java に関連づけられていることを確認してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。</para>
+      <para><application>OmegaT</application> をインストールした後は、コマンドラインからの直接実行や、起動引数を記述したスクリプトによる実行も可能です。あるいは <filename>OmegaT.jar</filename> をクリックして直接起動することもできます。その方法はディストリビューションによって異なります。<varname>PATH</varname>の設定が正しいことと、<filename>.jar </filename> ファイルが正しく Java に関連づけられていることを確認してください。詳細については、以下の<link linkend="commandline.launching" endterm="commandline.launching.title"/>を参照してください。</para>
     </section>
   </section>
 
@@ -300,8 +300,8 @@
     <para>もし、起動時に何らかの引数を指定したい場合（上記参照）は、通常のインストールを行う必要がある点に注意してください。</para>
   </section>
 
-  <section>
-    <title>コマンドラインから OmegaT を起動する</title>
+  <section id="commandline.launching">
+    <title id="commandline.launching.title">コマンドラインから OmegaT を起動する</title>
 
     <para>通常は、コマンドラインから <application>OmegaT</application> を起動する必要はありません。しかしコマンドライン起動からだと、ユーザーの好みに応じてプログラムを制御し、その挙動を変えることができます。コマンドラインを使用した <application>OmegaT</application> の起動方法は、大きく２つあります。</para>
 

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.tools">
+  <title>Tools</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Probleme untersuchen...</term>
+
+      <listitem>
+        <para>Ein Tool zur Qualitätssicherung, das alle automatischen Überprüfungen in einem Rutsch durchführt und die Ergebnisse in einem Fenster anzeigt.</para>
+
+        <para>Es werden vier Arten von Problemen erkannt:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Fehlende oder falsch platzierte Tags oder <link linkend="dialogs.preferences.tagprocessing">benutzerdefinierte Tags</link>. Die Option <guilabel>Tag-Probleme</guilabel> ist immer aktiviert.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Rechtschreibungsprobleme</guilabel> (optional). Funktioniert nur, wenn ein Rechtschreibwörterbuch installiert ist.</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>Terminologie-Probleme</guilabel> (optional).</para>
+          </listitem>
+
+          <listitem>
+            <para><guilabel>LanguageTool-Probleme</guilabel> (optional).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Das Ergebnisfenster ist in Form einer Tabelle aufgebaut, in der man Folgendes machen kann:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Doppelklicken Sie auf eine Zeile, um das entsprechende Segment im Editorbereich zu öffnen.</para>
+          </listitem>
+
+          <listitem>
+            <para>Klicken Sie auf eine Spaltenüberschrift, um die Sortierreihenfolge der Spalte zu ändern.</para>
+          </listitem>
+
+          <listitem>
+            <para>Wählen Sie eine Zeile aus oder bewegen Sie den Mauszeiger über eine Zeile, um in der letzten Spalte ein Popup-Menü-Symbol anzuzeigen, das Aktionen zum Beheben oder Ignorieren des Problems enthält.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Probleme im aktuellen Dokument untersuchen</term>
+
+      <listitem>
+        <para>Wie oben, aber nur für das aktuell im Editorbereich geöffnete Dokument.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Statistiken</term>
+
+      <listitem>
+        <para>Öffnet ein neues Fenster und zeigt projektspezifische Statistiken an, also Zählungen unterschiedlichster Art, global und pro Datei.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Match-Statistiken</term>
+
+      <listitem>
+        <para>Zeigt die Match-Statistiken für das Projekt an: die Anzahl der Wiederholungen, exakten Matches, Fuzzy Matches und No-Matches für Segmente, Wörter und Zeichen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Match-Statistiken pro Datei</term>
+
+      <listitem>
+        <para>Zeigt die Match-Statistiken für jede Datei des Projekts an: die Anzahl der Wiederholungen, exakten Matches, Fuzzy Matches und No-Matches für Segmente, Wörter und Zeichen.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Dateien ausrichten...</term>
+
+      <listitem>
+        <para>Wählen Sie zwei Dateien aus (die Quelldatei und ihre Übersetzung), die ausgerichtet werden sollen und klicken Sie auf OK, um das <link linkend="windows.aligner"><guilabel>Ausrichten</guilabel>- Fenster</link> zu öffnen.</para>
+
+        <para>Unterstützte Dateiformate finden Sie unter <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Eigenschaften</guimenuitem> <guimenuitem>Dateifilter</guimenuitem> </menuchoice>.</para>
+
+        <para>Die Quell- und Zieldateien können unterschiedliche Formate haben (z. B. kann eine <filename>.docx</filename>-Datei mit einer <filename>.pdf</filename>-Datei ausgerichtet werden).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Scripting...</term>
+
+      <listitem>
+        <para>Öffnet das <link linkend="windows.scripts"><guilabel>Scripting</guilabel>-Fenster</link>, mit dem der Standort für Skripte festgelegt werden kann und mit dem Skripte geschrieben, ausgeführt und mit einem Tastaturkurzbefehl verknüpft werden können.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>n - (Skriptname)</term>
+
+      <listitem>
+        <para>Startet Skripte, die mit einer Nummer verknüpft wurden.</para>
+
+        <para>So verknüpfen Sie ein Skript mit einer Nummer:</para>
+
+        <orderedlist>
+          <listitem>
+            <para>Öffnen Sie das Scripting-Fenster.</para>
+          </listitem>
+
+          <listitem>
+            <para>Wählen Sie das gewünschte Skript in der Liste auf der linken Seite aus.</para>
+          </listitem>
+
+          <listitem>
+            <para>Machen Sie einen Rechtsklick auf eine freie Nummer im unteren Bereich des Fensters und wählen Sie <guilabel>Skript hinzufügen</guilabel> aus.</para>
+          </listitem>
+        </orderedlist>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>(externe Suchbefehle)</term>
+
+      <listitem>
+        <para>Wenn in den <link linkend="dialogs.preferences.externalsearch">Einstellungen</link> Befehle zum Durchführen externer Suchen definiert wurden, sind sie hier aufgelistet und zugänglich.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

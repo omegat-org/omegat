@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.spellchecker">
+  <title>Verificação ortográfica</title>
+
+  <para>A OmegaT tem um corrector ortográfico incorporado baseado no corrector ortográfico utilizado no Apache OpenOffice, LibreOffice, Firefox e Thunderbird. Consequentemente, é capaz de utilizar a enorme variedade de dicionários ortográficos gratuitos disponíveis para estas aplicações.</para>
+
+  <section>
+    <title>Instalação de dicionários ortográficos</title>
+
+    <para>Antes da função de verificação ortográfica poder ser utilizada, deve ser instalado um dicionário ou dicionários adequados (isto é, para o seu idioma-alvo). Para instalar dicionários ortográficos, siga este procedimento:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>No seu gestor de ficheiros, crie uma nova pasta num local adequado para armazenar dicionários ortográficos (D:\Translations\spellcheckers no exemplo abaixo).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>No OmegaT, seleccione <guimenuitem>Opções &gt; Preferências &gt; Verificação ortográfica</guimenuitem> e clique em <guibutton>Escolher</guibutton> ao lado do campo da pasta de dicionários. Navegue até e seleccione a pasta que criou para dicionários.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Coloque os ficheiros de dicionário que deseja utilizar nesta pasta. Há essencialmente duas maneiras de o fazer. Pode copiar ficheiros manualmente, ou seja, de qualquer outra parte do seu sistema, usando o seu gestor de ficheiros; ou pode usar a função <emphasis role="bold">&quot;Instalar novo dicionário&quot;</emphasis> do OmegaT para fornecer uma lista de dicionários disponíveis para seleccionar. Note-se que a função &quot;Instalar&quot; requer uma ligação à Internet. Os idiomas seleccionados serão então instalados e eventualmente aparecerão na janela de configuração do seu corrector ortográfico (isto pode demorar algum tempo).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>A cópia manual dos ficheiros faz sentido se já tiver ficheiros de dicionário adequados no seu sistema, por exemplo como parte da sua instalação Apache OpenOffice, LibreOffice, Firefox ou Thunderbird. É mais simples, contudo, procurar dicionários online, usando o campo <emphasis role="bold">URL dos dicionários online</emphasis>:</para>
+
+    <figure id="spellchecker.setup">
+      <title>Configuração do corrector ortográfico</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckerSetup_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Clicar em <guibutton>Instalar novo dicionário</guibutton> abrirá a janela do instalador de dicionários, onde poderá seleccionar os dicionários que deseja instalar.</para>
+
+    <para>Os nomes dos ficheiros devem corresponder ao código de idioma do seu idioma alvo, tal como definido no diálogo de propriedades do projecto (<guimenu>Projecto &gt; Propriedades</guimenu>). Por exemplo, se seleccionou ES-MX (espanhol mexicano) como idioma-alvo, os ficheiros de dicionário devem ser nomeados es_MX.dic e es_MX.aff. Se tiver apenas um dicionário padrão de espanhol disponível, com nomes de ficheiro es_es.dic e es_es.aff, por exemplo, pode copiar estes ficheiros e renomeá-los para es_MX.dic e es_MX.aff, e o dicionário ortográfico funcionará. Note-se que isto irá, naturalmente, verificar o padrão (castelhano) e não o espanhol mexicano.</para>
+  </section>
+
+  <section>
+    <title>Utilização de dicionários ortográficos</title>
+
+    <para>Não há necessidade de instruir o OmegaT para utilizar um dicionário ortográfico específico; o OmegaT utilizará o dicionário correcto com base nos códigos linguísticos do seu projecto. Assegure-se, no entanto, que os códigos linguísticos são exactamente os mesmos: um dicionário FR-FR não funcionará com uma definição de objectivos FR, por exemplo. Se necessário, edite os nomes dos ficheiros de dicionário ou altere as definições linguísticas do seu projecto.</para>
+
+    <para>Para activar o corrector ortográfico, seleccione <guimenuitem>Opções &gt; Preferências &gt; Correcção ortográfica</guimenuitem> e marque a caixa <guilabel>Verificar automaticamente a ortografia do texto</guilabel> (ver acima).</para>
+
+    <figure id="spellchecker.in.action">
+      <title>Usar o corrector ortográfico</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckingText.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckingText.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Clicando com o botão direito numa palavra sublinhada (Artund na figura acima) abre uma lista pendente com sugestões para a correcção (Art und). Pode também instruir o corrector ortográfico para ignorar todas as ocorrências da palavra mal soletrada, ou acrescentá-la ao dicionário.</para>
+  </section>
+
+  <section id="hints">
+    <title>Dicas</title>
+
+    <para>Se o corrector ortográfico não estiver a funcionar, certifique-se primeiro de que a caixa <guilabel>&quot;Verificar automaticamente a ortografia do texto&quot;</guilabel> no painel do corrector ortográfico (<guisubmenu>Opções &gt; Preferências &gt; Verificação ortográfica...)</guisubmenu> está marcada.</para>
+
+    <para>Verifique também o código do idioma-alvo do seu projecto em relação aos vocabulários disponíveis na janela de configuração. O corrector ortográfico utiliza o código do idioma-alvo para determinar o idioma a utilizar: se o idioma-alvo for português (pt), a sub-pasta com vocabulário deve conter os dois ficheiros de vocabulário, chamados <emphasis>pt.aff</emphasis> e <emphasis>pt.dic</emphasis>.</para>
+
+    <para>Se já tiver traduzido um grande corpo de texto, e depois perceber que o código do idioma-alvo do projecto não corresponde ao código de idioma do corrector ortográfico (especificou pt como idioma, mas não existem vocabulários pt, por exemplo) pode simplesmente copiar os dois ficheiros correspondentes, renomeá-los (e. g. de <emphasis>pt_PT.aff</emphasis> e <emphasis>pt_PT.dic</emphasis> a <emphasis>pt.aff</emphasis> e <emphasis>pt.dic</emphasis>) e reiniciar o OmegaT. Claro que é muito mais sensato, fazer uma pequena pausa e descarregar as versões correctas do corrector ortográfico.</para>
+
+    <para>Note-se que <filename>Remover</filename> remove fisicamente os vocabulários seleccionados. Se forem utilizados por alguma outra aplicação no seu sistema, também desaparecerão dessa aplicação. Se, por qualquer razão, precisar de o fazer de tempos a tempos, pode fazer sentido copiar os ficheiros envolvidos para uma pasta diferente, reservada apenas para utilização pelo OmegaT.</para>
+  </section>
+</appendix>

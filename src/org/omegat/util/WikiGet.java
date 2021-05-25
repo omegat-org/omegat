@@ -33,10 +33,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-
-import org.omegat.util.net.HttpConnectionUtils;
+import java.util.Map;
 
 /**
  * Import pages from MediaWiki
@@ -73,12 +73,10 @@ public final class WikiGet {
      * Gets mediawiki wiki-code data from remote server. The get strategy is
      * determined by the url format.
      *
-     * @param remoteUrl
-     *            string representation of well-formed URL of wikipage to be
-     *            retrieved
-     * @param projectdir
-     *            string representation of path to the project-dir where the
-     *            file should be saved.
+     * @param remoteUrl  string representation of well-formed URL of wikipage to be
+     *                   retrieved
+     * @param projectdir string representation of path to the project-dir where the
+     *                   file should be saved.
      * @throws IOException
      */
     public static void doWikiGet(String remoteUrl, String projectdir) throws IOException {
@@ -115,8 +113,7 @@ public final class WikiGet {
     /**
      * Print UTF-8 text to stdout (useful for debugging)
      *
-     * @param output
-     *            The UTF-8 format string to be printed.
+     * @param output The UTF-8 format string to be printed.
      */
     public static void printUTF8(String output) {
         try (BufferedWriter out = utf8WriterBuilder(System.out)) {
@@ -131,8 +128,7 @@ public final class WikiGet {
      * Creates new BufferedWriter configured for UTF-8 output and connects it to
      * an OutputStream
      *
-     * @param out
-     *            Outputstream to connect to.
+     * @param out Outputstream to connect to.
      */
     public static BufferedWriter utf8WriterBuilder(OutputStream out) throws Exception {
         return new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8.name()));
@@ -141,12 +137,9 @@ public final class WikiGet {
     /**
      * Save UTF-8 format data to file.
      *
-     * @param dir
-     *            directory to write to.
-     * @param filename
-     *            filename of file to write.
-     * @param output
-     *            UTF-8 format text to write
+     * @param dir      directory to write to.
+     * @param filename filename of file to write.
+     * @param output   UTF-8 format text to write
      */
     public static void saveUTF8(String dir, String filename, String output) {
         // Page name can contain invalid characters, see [1878113]
@@ -160,4 +153,131 @@ public final class WikiGet {
         }
     }
 
+    /**
+     * Obtain UTF-8 format text from remote URL.
+     * @deprecated
+     * This method is moved to HttpConnectionUtils class.
+     *
+     * @param target
+     *            String representation of well-formed URL.
+     * @throws IOException
+     */
+    @Deprecated
+    public static String getURL(String target) throws IOException {
+        return HttpConnectionUtils.getURL(new URL(target));
+    }
+
+    /**
+     * Obtain byte array context from remote URL.
+     * @deprecated
+     * This method is moved to HttpConnectionUtils class.
+     *
+     * @param target
+     *            String representation of well-formed URL.
+     * @return byte array or null if status is not 200 OK
+     * @throws IOException
+     */
+    @Deprecated
+    public static byte[] getURLasByteArray(String target) throws IOException {
+        return HttpConnectionUtils.getURLasByteArray(target);
+    }
+
+    /**
+     * Method call without additional headers for possible calls from plugins.(deprecated)
+     * @deprecated
+     * This method is moved to HttpConnectionUtils class.
+     */
+    @Deprecated
+    public static String post(String address, Map<String, String> params) throws IOException {
+        return HttpConnectionUtils.post(address, params, null);
+    }
+
+    /**
+     * Get data from the remote URL.
+     * @deprecated
+     * This method is moved to HttpConnectionUtils class.
+     *
+     * @param address
+     *            address to post
+     * @param params
+     *            parameters
+     * @param additionalHeaders
+     *            additional headers for request, can be null
+     * @return server output
+     */
+    @Deprecated
+    public static String get(String address, Map<String, String> params,
+            Map<String, String> additionalHeaders) throws IOException {
+        return HttpConnectionUtils.get(address, params, additionalHeaders);
+    }
+
+    /**
+     * Get data from the remote URL.
+     * @deprecated
+     * This method is moved to HttpConnectionUtils class.
+     *
+     * @param address
+     *            address to post
+     * @param params
+     *            parameters
+     * @param additionalHeaders
+     *            additional headers for request, can be null
+     * @param defaultOutputCharset
+     *            default charset used to interpret the response
+     * @return server output
+     */
+    @Deprecated
+    public static String get(String address, Map<String, String> params,
+            Map<String, String> additionalHeaders, String defaultOutputCharset) throws IOException {
+        return HttpConnectionUtils.get(address, params, additionalHeaders, defaultOutputCharset);
+    }
+
+    /**
+     * Post data to the remote URL.
+     * @deprecated
+     * This method is moved to HttpConnectionUtils class.
+     *
+     * @param address
+     *            address to post
+     * @param params
+     *            parameters
+     * @param additionalHeaders
+     *            additional headers for request, can be null
+     * @return Server output
+     */
+    @Deprecated
+    public static String post(String address, Map<String, String> params,
+            Map<String, String> additionalHeaders) throws IOException {
+        return HttpConnectionUtils.post(address, params, additionalHeaders);
+    }
+
+    /**
+     * Post JSON data to the remote URL.
+     * @deprecated
+     * This method is moved to HttpConnectionUtils class.
+     *
+     * @param address
+     *            address to post
+     * @param json
+     *            JSON-encoded data
+     * @param additionalHeaders
+     *            additional headers for request, can be null
+     * @return Server output
+     */
+    @Deprecated
+    public static String postJSON(String address, String json,
+            Map<String, String> additionalHeaders) throws IOException {
+        return HttpConnectionUtils.postJSON(address, json, additionalHeaders);
+    }
+
+    /**
+     * HTTP response error storage.
+     */
+    @SuppressWarnings("serial")
+    @Deprecated
+    public static class ResponseError extends HttpConnectionUtils.ResponseError {
+        public ResponseError(HttpURLConnection conn) throws IOException {
+            super(conn);
+        }
+    }
 }

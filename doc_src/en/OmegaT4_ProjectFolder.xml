@@ -6,7 +6,7 @@
 
   <para>An OmegaT project is a folder containing files and subfolders.</para>
 
-  <section>
+  <section id="projectfolder.source">
     <title>source</title>
 
     <para>The source subfolder contains files to be translated. You can add
@@ -17,7 +17,7 @@
     structure intact.</para>
   </section>
 
-  <section>
+  <section id="projectfolder.target">
     <title>target</title>
 
     <para>This subfolder is initially empty. To add contents to it, select
@@ -42,7 +42,7 @@
     will hereby remain in the source language.</para>
   </section>
 
-  <section>
+  <section id="projectfolder.tm">
     <title>tm</title>
 
     <para>The /tm/ folder can contain any number of ancillary translation
@@ -79,7 +79,7 @@
     <para>Note that the TMX files in the tm folder can be compressed with
     gzip.</para>
 
-    <section>
+    <section id="projectfolder.tmauto">
       <title>tm/auto</title>
 
       <para>If it is clear from the very start, that translations in a given
@@ -107,7 +107,7 @@
       Translation Unit is added.</para>
     </section>
 
-    <section>
+    <section id="projectfolder.tmenforce">
       <title>tm/enforce</title>
 
       <para>If you have no doubt that a TMX is more accurate than the
@@ -150,7 +150,7 @@
       enforcements aren't kept at all.</para>
     </section>
 
-    <section>
+    <section id="projectfolder.tmmt">
       <title>tm/mt</title>
 
       <para>In the editor pane, when a match is inserted from a TMX contained
@@ -159,7 +159,7 @@
       segment is left.</para>
     </section>
 
-    <section>
+    <section id="projectfolder.tmpenalty">
       <title>tm/penalty-xxx</title>
 
       <para>Sometimes, it is useful to distinguish between high-quality
@@ -174,7 +174,7 @@
     </section>
   </section>
 
-  <section>
+  <section id="projectfolder.dictionary">
     <title>dictionary</title>
 
     <para>Initially empty, this folder will contain dictionaries you have
@@ -183,7 +183,7 @@
     subject.</para>
   </section>
 
-  <section>
+  <section id="projectfolder.glossary">
     <title>glossary</title>
 
     <para>This folder is initially empty. It will contain glossaries you will
@@ -192,7 +192,7 @@
     subject.</para>
   </section>
 
-  <section id="folder.omegat">
+  <section id="projectfolder.omegat">
     <title>omegat</title>
 
     <para>The <emphasis role="bold">omegat</emphasis> subfolder contains at
@@ -266,7 +266,7 @@
     </variablelist>
   </section>
 
-  <section>
+  <section id="projectfolder.omegat.project">
     <title>omegat.project (file)</title>
 
     <para>Contains project parameters as defined in the <link
@@ -274,7 +274,7 @@
     dialog.</para>
   </section>
 
-  <section>
+  <section id="projectfolder.repositories">
     <title>.repositories</title>
 
     <para>In a team project, this folder contains a versioned copy of the

@@ -3,7 +3,7 @@
 <appendix id="appendix.regexp">
   <title>Reguliere uitdrukkingen</title>
 
-  <para>De reguliere uitdrukkingen (of afgekort regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">documentatie voor Java Regex</ulink>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.</para>
+  <para>De reguliere uitdrukkingen (of afgekort regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <ulink url="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">documentatie voor Java Regex</ulink>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.</para>
 
   <note>
     <para>Dit hoofdstuk is bedoeld voor gevorderde gebruikers, die hun eigen varianten van segmentatieregels moeten kunnen definiëren of meer complexe en krachtigere zoeksleutels moeten kunnen opdelen.</para>

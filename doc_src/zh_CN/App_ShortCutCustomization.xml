@@ -50,7 +50,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>第一个是<guimenuitem>打开项目</guimenuitem>的快捷键，第二个则是<guimenuitem>创建词汇表条目</guimenuitem>的。</para>
+    <para>第一个是<guimenuitem>打开项目</guimenuitem>的快捷键，第二个则是<guimenuitem>创建词条</guimenuitem>的。</para>
 
     <para>如果要使用<keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>来打开项目，修改 <filename>MainMenuShortcuts.properties</filename> 如下：<code>
     </code></para>
@@ -294,7 +294,7 @@
 
         <tbody>
           <row>
-            <entry>撤销前一操作</entry>
+            <entry>撤消前一操作</entry>
 
             <entry><keycap>Ctrl+Z</keycap></entry>
 
@@ -374,7 +374,7 @@
           </row>
 
           <row>
-            <entry>创建词汇表条目</entry>
+            <entry>创建词条</entry>
 
             <entry><keycap>Ctrl+Shift+G</keycap></entry>
 
@@ -510,7 +510,7 @@
           </row>
 
           <row>
-            <entry>创建替代译文</entry>
+            <entry>创建不同译文</entry>
 
             <entry/>
 
@@ -910,7 +910,7 @@
           </row>
 
           <row>
-            <entry>词汇表/对词汇表条目使用词干分析</entry>
+            <entry>词汇表/对词条使用词干分析</entry>
 
             <entry/>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
   <title>整合ツール</title>
 
@@ -12,9 +12,9 @@
 
     <para>整合が改善できるように見える場合は、パラメータを変更してみてください。ほとんどの場合、<guilabel>平均スコア</guilabel>が低いほど整合が良好になります。</para>
 
-    <para><guilabel>Heapwise</guilabel>モードでは、テキストはグローバルに評価されます。<guilabel>Parsewise</guilabel>モードでは、セグメントごとに評価されます。</para>
+    <para><guilabel>Heapwise</guilabel>比較モードでは、テキストはグローバルに評価されます。<guilabel>Parsewise</guilabel>比較モードでは、セグメントごとに評価されます。このオプションは、このような選択が可能な場合にのみ表示されます。</para>
 
-    <para>Key=Value テキストを整合するには、<guilabel>ID比較</guilabel>モードを使用します。これは、2つのファイルのキーの順序が同じでない場合や、2つのファイルに同じ量の情報が含まれていない場合でも機能します。このオプションは、選択した両方のファイルがKey=Valueファイルとして認識される場合にのみ表示されます。</para>
+    <para>Key=Value テキストを整合するには、<guilabel>ID</guilabel>比較モードを使用します。これは、2つのファイルのキーの順序が同じでない場合や、2つのファイルに同じ量の情報が含まれていない場合でも機能します。このオプションは、選択した両方のファイルがKey=Valueファイルとして認識される場合にのみ表示されます。</para>
 
     <para><guilabel>Viterbi</guilabel>および<guilabel>Forward-Backward</guilabel>アルゴリズムは、2つの異なる計算方法です。最良の結果が得られるものを選択します。</para>
 

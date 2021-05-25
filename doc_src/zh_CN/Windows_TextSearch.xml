@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.textsearch">
   <title>文本查找</title>
 
@@ -29,7 +29,7 @@
     </listitem>
 
     <listitem>
-      <para>编辑 &gt; 创建词汇表条目（<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>）：添加新词汇表条目。</para>
+      <para>编辑 &gt; 创建词条（<keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>）：添加新词条。</para>
     </listitem>
   </itemizedlist>
 

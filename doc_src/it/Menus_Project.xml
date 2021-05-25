@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
   <title>Progetto</title>
 
@@ -16,7 +16,7 @@
       <term><guimenuitem>Scarica il progetto in collaborazione...</guimenuitem></term>
 
       <listitem>
-        <para>Crea una copia locale di un progetto OmegaT remoto. Per i dettagli si veda <link linkend="howto.useteamproject">Come utilizzare un progetto in collaborazione</link>.</para>
+        <para>Crea una copia locale di un progetto OmegaT remoto. Per i dettagli si veda <link linkend="howto.useteamproject">Utilizzare un progetto in collaborazione</link>.</para>
       </listitem>
     </varlistentry>
 
@@ -166,7 +166,7 @@
       <term>File del progetto...</term>
 
       <listitem>
-        <para>Apre la <link linkend="windows.projectfiles">finestra dei file del progetto</link>.</para>
+        <para>Apre la finestra <link linkend="windows.projectfiles">File del progetto</link>.</para>
       </listitem>
     </varlistentry>
 

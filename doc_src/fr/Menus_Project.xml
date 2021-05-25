@@ -48,11 +48,11 @@
       <term>Télécharger une page MediaWiki...</term>
 
       <listitem>
-        <para>Pour traduire le contenu d'une page Wikipedia (par exemple) :</para>
+        <para>Pour traduire le contenu d'une page Wikipédia (par exemple) :</para>
 
         <orderedlist>
           <listitem>
-            <para>Cliquer sur l'onglet <guilabel>Edit</guilabel> de la page Wikipedia.</para>
+            <para>Cliquer sur l'onglet <guilabel>Edit</guilabel> de la page Wikipédia.</para>
           </listitem>
 
           <listitem>
@@ -60,15 +60,15 @@
           </listitem>
         </orderedlist>
 
-        <para>Ensuite, pour intégrer la traduction dans Wikipedia :</para>
+        <para>Ensuite, pour intégrer la traduction dans Wikipédia :</para>
 
         <orderedlist>
           <listitem>
-            <para>Ouvrir le fichier .<filename>UTF8</filename> généré dans <filename>/target</filename></para>
+            <para>Ouvrir le fichier <filename>.UTF8</filename> généré dans <filename>./target</filename></para>
           </listitem>
 
           <listitem>
-            <para>Copier le texte, puis le coller dans la version traduite de la page Wikipedia.</para>
+            <para>Copier le texte, puis le coller dans la version traduite de la page Wikipédia.</para>
           </listitem>
         </orderedlist>
       </listitem>
@@ -126,7 +126,7 @@
       <term>Créer les documents traduits</term>
 
       <listitem>
-        <para>Crée les documents cible sur la base de votre traduction. Les documents cible créés se trouvent dans le dossier <filename>target</filename> (cible).</para>
+        <para>Crée les documents cible sur la base de votre traduction. Les documents cibles créés se trouvent dans le dossier <filename>target</filename> (cible).</para>
       </listitem>
     </varlistentry>
 

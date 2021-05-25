@@ -8,7 +8,7 @@
   consequently able to use the huge range of free spelling dictionaries
   available for these applications.</para>
 
-  <section>
+  <section id="spellchecker.installingdictionaries">
     <title>Installing spelling dictionaries</title>
 
     <para>Before the spell check function can be used, a suitable dictionary
@@ -81,7 +81,7 @@
     standard (Castillian) rather than for Mexican Spanish.</para>
   </section>
 
-  <section>
+  <section id="spellchecker.usingdictionaries">
     <title>Using spelling dictionaries</title>
 
     <para>There is no need to instruct OmegaT to use a particular spelling
@@ -115,7 +115,7 @@
     the mis-spelled word, or add it to the dictionary.</para>
   </section>
 
-  <section id="hints">
+  <section id="spellchecker.hints">
     <title>Hints</title>
 
     <para>If the spell checker is not working, then make sure first that the

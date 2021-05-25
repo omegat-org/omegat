@@ -1,205 +1,378 @@
-<html>
-   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>窗口与对话框</title>
+      <link href="OmegaT_webhelp.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="menus.html" rel="prev" title="菜单" />
+      <link href="panes.html" rel="next" title="窗格" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
    
-      <title>第&nbsp;3&nbsp;章&nbsp;窗口与对话框</title>
-      <link rel="stylesheet" type="text/css" href="OmegaT.css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-      <link rel="home" href="index.html" title="OmegaT 4.2 - 用户指南">
-      <link rel="up" href="index.html" title="OmegaT 4.2 - 用户指南">
-      <link rel="prev" href="menus.html" title="第&nbsp;2&nbsp;章&nbsp;菜单">
-      <link rel="next" href="panes.html" title="第&nbsp;4&nbsp;章&nbsp;窗格">
-   </head>
-   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-      <div class="navheader">
-         <table width="100%" summary="Navigation header">
-            <tr>
-               <th colspan="3" align="center">第&nbsp;3&nbsp;章&nbsp;窗口与对话框</th>
-            </tr>
-            <tr>
-               <td width="20%" align="left"><a accesskey="p" href="menus.html">上一页</a>&nbsp;
-               </td>
-               <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="panes.html">下一页</a></td>
-            </tr>
-         </table>
-         <hr>
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.2 - 用户指南</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
       </div>
-      <div class="chapter">
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">窗口与对话框</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="menus.html">上一页</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="panes.html">下一页</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="windows.and.dialogs">
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="windows.and.dialogs"></a>第&nbsp;3&nbsp;章&nbsp;窗口与对话框
-                  </h1>
+                  <h1 class="title">窗口与对话框</h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl class="toc">
-               <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.projectproperties">1. 项目属性</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2132">1.1. 语言</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2139">1.2. 选项</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2238">1.3. 文件位置</a></span></dt>
-                  </dl>
-               </dd>
-               <dt><span class="section"><a href="windows.and.dialogs.html#windows.projectfiles">2. 项目文件</a></span></dt>
-               <dt><span class="section"><a href="windows.and.dialogs.html#windows.textsearch">3. 文本查找</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#using.wild.cards">3.1. 使用通配符</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#search.methoids">3.2. 查找方法和选项</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#search.result.display">3.3. 查找结果显示</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#search.filter">3.4. 在编辑器中根据查找来过滤条目</a></span></dt>
-                  </dl>
-               </dd>
-               <dt><span class="section"><a href="windows.and.dialogs.html#windows.textreplace">4. 文本替换</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2760">4.1. 查找选项</a></span></dt>
-                  </dl>
-               </dd>
-               <dt><span class="section"><a href="windows.and.dialogs.html#windows.aligner">5. 对齐器</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2788">5.1. 第1步：调整对齐参数</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2821">5.2. 第2步：进行手工修正</a></span></dt>
-                  </dl>
-               </dd>
-               <dt><span class="section"><a href="windows.and.dialogs.html#windows.scripts">6. 脚本</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2889">6.1. 使用</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2938">6.2. 脚本语言</a></span></dt>
-                  </dl>
-               </dd>
-               <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences">7. 通用首选项</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2972">7.1. 通用</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e2988">7.2. 机器翻译</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3031">7.3. 词汇表</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.dictionary">7.4. 词典</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3123">7.5. 外观</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.filefilters">7.6. 文件过滤器</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup">7.7. 分割设置</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3743">7.8. 自动完成</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3771">7.9. 拼写检查器</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3779">7.10. LanguageTool 插件</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.externalsearch">7.11. 外部搜索</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.editor">7.12. 编辑器</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.tagprocessing">7.13. 标签处理</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e3994">7.14. 团队</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4004">7.15. 翻译记忆库匹配</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4107">7.16. 视图</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#dialogs.preferences.savingandoutput">7.17. 保存和输出</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4156">7.18. 代理服务器登录</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4161">7.19. 安全存储</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4166">7.20. 插件</a></span></dt>
-                     <dt><span class="section"><a href="windows.and.dialogs.html#d0e4174">7.21. 更新</a></span></dt>
-                  </dl>
-               </dd>
-            </dl>
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="windows.and.dialogs.html#dialogs.projectproperties">项目属性</a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2138">语言</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2145">选项</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2244">文件位置</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="windows.and.dialogs.html#windows.projectfiles">项目文件</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="windows.and.dialogs.html#windows.textsearch">文本查找</a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#using.wild.cards">使用通配符</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#search.methoids">查找方法和选项</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#search.result.display">查找结果显示</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#search.filter">在编辑器中根据查找来过滤条目</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="windows.and.dialogs.html#windows.textreplace">文本替换</a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2766">查找选项</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="windows.and.dialogs.html#windows.aligner">对齐器</a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2794">第1步：调整对齐参数</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2827">第2步：进行手工修正</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="windows.and.dialogs.html#windows.scripts">脚本</a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2895">使用</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2944">脚本语言</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="windows.and.dialogs.html#dialogs.preferences">通用首选项</a>
+                  </span>
+                  <ul>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2978">通用</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e2994">机器翻译</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e3037">词汇表</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#dialogs.preferences.dictionary">词典</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e3129">外观</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#dialogs.preferences.filefilters">文件过滤器</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup">分割设置</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e3749">自动完成</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e3777">拼写检查器</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e3785">LanguageTool 插件</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#dialogs.preferences.externalsearch">外部搜索</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#dialogs.preferences.editor">编辑器</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#dialogs.preferences.tagprocessing">标签处理</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e4000">团队</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e4010">翻译记忆库匹配</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e4113">视图</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#dialogs.preferences.savingandoutput">保存和输出</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e4162">代理服务器登录</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e4167">安全存储</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e4172">插件</a>
+                        </span>
+                     </li>
+                     <li>
+                        <span class="section">
+                           <a href="windows.and.dialogs.html#d0e4180">更新</a>
+                        </span>
+                     </li>
+                  </ul>
+               </li>
+            </ul>
          </div>
          <p>区别很小：我们将可以维持开启放在编辑器旁边并与之交互的窗口称为“窗口”，而将必须选择参数然后关闭之并刷新翻译活动的窗口称为“对话框”。</p>
-         <div class="section">
+         <section class="section" id="dialogs.projectproperties">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="dialogs.projectproperties"></a>1.&nbsp;项目属性
-                     </h2>
+                     <h2 class="title" style="clear: both">项目属性</h2>
                   </div>
                </div>
             </div>
-            <p>此对话框可以通过选择<span class="guimenuitem">项目</span> → <span class="guimenuitem">属性...</span>来进入
-            </p>
-            <div class="section">
+            <p>此对话框可以通过选择<span class="guimenuitem">项目</span> → <span class="guimenuitem">属性...</span>来进入</p>
+            <section class="section" id="d0e2138">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2132"></a>1.1.&nbsp;语言
-                        </h3>
+                        <h3 class="title">语言</h3>
                      </div>
                   </div>
                </div>
                <p>您可以手动输入或者通过下拉菜单选择原文与译文语言。请记住：更改语言可能会导致当前使用的翻译记忆库变得无用，因为其语言对可能与新语言不匹配。</p>
                <p>会显示所选语言所对应的分词器。</p>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="d0e2145">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2139"></a>1.2.&nbsp;选项
-                        </h3>
+                        <h3 class="title">选项</h3>
                      </div>
                   </div>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">启用语句级别分割</span></dt>
+                     <dt>
+                        <span class="term">启用语句级别分割</span>
+                     </dt>
                      <dd>
-                        <p>分割规则设置只影响 <span class="application">OmegaT</span> 处理原文文件的方式。语句级分割是分割原文的主要方式，所以正常情况下应该选中该复选框。
-                        </p>
-                        <p>在一些少见情况下，替代方案，即按段落分割，可能会更好。更改此标志不会影响现有翻译记忆库中的片段。如果您在翻译中途决定从语句翻译切换至段落翻译，项目的内部翻译记忆库不会更改（OmegaT 可能会升级不使用语句分割的旧翻译记忆库，但反之则不然），但
-                           OmegaT 会尝试通过组合现有的句子翻译来创建段落模糊匹配。
-                        </p>
+                        <p>分割规则设置只影响 <span class="application">OmegaT</span> 处理原文文件的方式。语句级分割是分割原文的主要方式，所以正常情况下应该选中该复选框。</p>
+                        <p>在一些少见情况下，另一种选择，即按段落分割，可能会更好。更改此标志不会影响现有翻译记忆库中的片段。如果您在翻译中途决定从语句翻译切换至段落翻译，项目的内部翻译记忆库不会更改（OmegaT 可能会升级不使用语句分割的旧翻译记忆库，但反之则不然），但 OmegaT 会尝试通过组合现有的句子翻译来创建段落模糊匹配。</p>
                         <p>改变分割规则设置可能导致一些已经译好的片段被分拆或者合并。这实际上会让它们回到“未译”状态，因为它们和记录在翻译记忆库中的片段不再匹配，虽然它们的原始翻译依然存在。</p>
                      </dd>
-                     <dt><span class="term">自动传播翻译</span></dt>
+                     <dt>
+                        <span class="term">自动传播翻译</span>
+                     </dt>
                      <dd>
-                        <p>如果原文文档中包含非独特片段，自动传播翻译复选框为用户提供了下面两种自动翻译的可能性：如果勾选，则第一个被翻译的片段将假定为默认翻译，其译文文本在翻译过程中会自动用于后继命中。当然，错译片段之后可以手动用<span class="guimenuitem">创建替代译文</span>来纠正。如果未勾选自动传播复选框，则含有替代译文的片段会保持未译状态直到用户决定使用哪种译文。
-                        </p>
+                        <p>如果原文文档中包含非独特片段，自动传播翻译复选框为用户提供了下面两种自动翻译的可能性：如果勾选，则第一个被翻译的片段将假定为默认翻译，其译文文本在翻译过程中会自动用于后继命中。当然，错译片段之后可以手动用<span class="guimenuitem">创建不同译文</span>来纠正。如果未勾选自动传播复选框，则含有替代译文的片段会保持未译状态直到用户决定使用哪种译文。</p>
                      </dd>
-                     <dt><span class="term">删除标签</span></dt>
+                     <dt>
+                        <span class="term">删除标签</span>
+                     </dt>
                      <dd>
-                        <p>启用后，将从原文片段中移除所有格式化标签。这在处理内联格式并不真正有用的文本（如 OCRed PDF、转换不良的 .odt 或 .docx 等）时特别有用。正常情况下译文文档应当都能打开，因为只移除了内联标签。不可见的格式信息（即不会在 OmegaT
-                           编辑器中显示为标签的那些）在译文文档中会得已保留。
-                        </p>
+                        <p>启用后，将从原文片段中移除所有格式化标签。这在处理内联格式并不真正有用的文本（如 OCRed PDF、转换不良的 .odt 或 .docx 等）时特别有用。正常情况下译文文档应当都能打开，因为只移除了内联标签。不可见的格式信息（即不会在 OmegaT 编辑器中显示为标签的那些）在译文文档中会得已保留。</p>
                      </dd>
-                     <dt><span class="term">外部后处理命令</span></dt>
+                     <dt>
+                        <span class="term">外部后处理命令</span>
+                     </dt>
                      <dd>
                         <p>此区域允许输入一个在每次使用“创建译文文档”之后都会应用的外部后处理命令（例如，用于重命名文件的脚本）。这个外部命令不能包含“管道”等，因此建议调用一个脚本。</p>
                      </dd>
-                     <dt><span class="term"><span class="guibutton">片段分割...</span></span></dt>
+                     <dt>
+                        <span class="term">
+                           <span class="guibutton">片段分割...</span>
+                        </span>
+                     </dt>
                      <dd>
-                        <p>分割规则通常适用于所有项目。但是，用户可能需要生成一组所讨论项目专用的规则。用此按钮打开对话框，激活<span class="guimenuitem">将分割规则设为项目专用</span>复选框，然后根据需要继续调整分割规则。新的规则集将与项目一起存储，不会干扰到通用的分割规则集。要删除项目专用的分割规则，取消勾选此复选框。更多信息关于分割规则的信息，参见<a class="link" href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup" title="7.7.&nbsp;分割设置">分割设置首选项</a>。
-                        </p>
-                        <p><span class="emphasis"><em>提示：</em></span>给定项目的分割规则集保存为 <code class="filename">project/omegat/segmentation.conf</code>。
-                        </p>
+                        <p>分割规则通常适用于所有项目。但是，用户可能需要生成一组所讨论项目专用的规则。用此按钮打开对话框，激活<span class="guimenuitem">将分割规则设为项目专用</span>复选框，然后根据需要继续调整分割规则。新的规则集将与项目一起存储，不会干扰到通用的分割规则集。要删除项目专用的分割规则，取消勾选此复选框。更多信息关于分割规则的信息，参见<a class="link" href="windows.and.dialogs.html#dialogs.preferences.segmentationsetup" title="分割设置">分割设置首选项</a>。</p>
+                        <p>
+                           <span class="emphasis">
+                              <em>提示：</em>
+                           </span>给定项目的分割规则集保存为 <code class="filename">project/omegat/segmentation.conf</code>。</p>
                      </dd>
-                     <dt><span class="term"><span class="guibutton">文件过滤器...</span></span></dt>
+                     <dt>
+                        <span class="term">
+                           <span class="guibutton">文件过滤器...</span>
+                        </span>
+                     </dt>
                      <dd>
-                        <p>和上述类似，用户可以创建项目专用的文件过滤器，这些过滤器将与项目一起存储，且仅对当前项目有效。要创建项目专用的文件过滤器集合，点击<span class="guibutton">文件过滤器...</span>按钮，然后在打开的窗口中激活<span class="guimenuitem">允许项目专用过滤器</span>复选框。更改后的过滤器配置的副本会随同项目一起存储。要删除项目专用文件过滤器，取消勾选此复选框。请注意，在菜单<span class="guimenuitem">选项-&gt;文件过滤器</span>中，将更改全局用户过滤器，而非项目的过滤器。有关此主题的更多信息，参见<a class="link" href="windows.and.dialogs.html#dialogs.preferences.filefilters" title="7.6.&nbsp;文件过滤器">文件过滤器首选项</a>。
-                        </p>
-                        <p><span class="emphasis"><em>提示：</em></span>给定项目的文件过滤器集保存为 <code class="filename">project/omegat/filters.xml</code>。
-                        </p>
+                        <p>和上述类似，用户可以创建项目专用的文件过滤器，这些过滤器将与项目一起存储，且仅对当前项目有效。要创建项目专用的文件过滤器集合，点击<span class="guibutton">文件过滤器...</span>按钮，然后在打开的窗口中激活<span class="guimenuitem">允许项目专用过滤器</span>复选框。更改后的过滤器配置的副本会随同项目一起存储。要删除项目专用文件过滤器，取消勾选此复选框。请注意，在菜单<span class="guimenuitem">选项-&gt;文件过滤器</span>中，将更改全局用户过滤器，而非项目的过滤器。有关此主题的更多信息，参见<a class="link" href="windows.and.dialogs.html#dialogs.preferences.filefilters" title="文件过滤器">文件过滤器首选项</a>。</p>
+                        <p>
+                           <span class="emphasis">
+                              <em>提示：</em>
+                           </span>给定项目的文件过滤器集保存为 <code class="filename">project/omegat/filters.xml</code>。</p>
                      </dd>
-                     <dt><span class="term">存储库映射...</span></dt>
+                     <dt>
+                        <span class="term">存储库映射...</span>
+                     </dt>
                      <dd>
-                        <p>在处理团队项目时，此窗口允许您定义远程文件夹和本地文件夹之间的映射（示例参见<a class="link" href="howtos.html#howto.setupteamproject.mappingparameters" title="1.5.&nbsp;映射参数">此处</a>）。
-                        </p>
+                        <p>在处理团队项目时，此窗口允许您定义远程文件夹和本地文件夹之间的映射（示例参见<a class="link" href="howtos.html#howto.setupteamproject.mappingparameters" title="映射参数">此处</a>）。</p>
                      </dd>
-                     <dt><span class="term">外部搜索...</span></dt>
+                     <dt>
+                        <span class="term">外部搜索...</span>
+                     </dt>
                      <dd>
                         <p>定义项目专用的外部搜索源。</p>
                      </dd>
                   </dl>
                </div>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="d0e2244">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2238"></a>1.3.&nbsp;文件位置
-                        </h3>
+                        <h3 class="title">文件位置</h3>
                      </div>
                   </div>
                </div>
-               <p>在这里你可以选择不同的子文件夹，例如包含原文文件的子文件夹、译文文件的子文件夹等。如果输入的文件夹名称尚不存在，<span class="application">OmegaT</span> 会创建之。如果你决定修改项目的文件夹，要记住这并不会将现有文件从旧文件夹移动到新位置。
-               </p>
-               <p>点击<span class="guibutton">排除...</span>可定义 <span class="application">OmegaT</span> 要忽略的文件或文件夹。被忽略的文件或文件夹：
-               </p>
+               <p>在这里你可以选择不同的子文件夹，例如包含原文文件的子文件夹、译文文件的子文件夹等。如果输入的文件夹名称尚不存在，<span class="application">OmegaT</span> 会创建之。如果你决定修改项目的文件夹，要记住这并不会将现有文件从旧文件夹移动到新位置。</p>
+               <p>点击<span class="guibutton">排除...</span>可定义 <span class="application">OmegaT</span> 要忽略的文件或文件夹。被忽略的文件或文件夹：</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -213,25 +386,29 @@
                      </li>
                   </ul>
                </div>
-               <p>在排除模式对话框中，可以添加或删除模式，也可以通过选定一行并按 F2 来编辑。可以按 <a class="ulink" href="https://ant.apache.org/manual/dirtasks.html#patterns" target="_top">ant 语法</a>来使用通配符。
-               </p>
-            </div>
-         </div>
-         <div class="section">
+               <p>在排除模式对话框中，可以添加或删除模式，也可以通过选定一行并按 F2 来编辑。可以按 <a class="ulink" href="https://ant.apache.org/manual/dirtasks.html#patterns" target="_top">ant 语法</a>来使用通配符。</p>
+            </section>
+         </section>
+         <section class="section" id="windows.projectfiles">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="windows.projectfiles"></a>2.&nbsp;项目文件
-                     </h2>
+                     <h2 class="title" style="clear: both">项目文件</h2>
                   </div>
                </div>
             </div>
-            <p>当 OmegaT 载入项目时会自动显示此窗口，在任何时候，按下<span class="guimenuitem">项目</span> → <span class="guimenuitem">项目文件...</span>也会显示此窗口。
-            </p>
-            <p><em><span class="remark">注意：</span></em>可以通过在<code class="filename">omegat.prefs</code> 文件（可通过<span class="guimenuitem">选项</span> → <span class="guimenuitem">访问配置文件夹</span>菜单）中将 <span class="emphasis"><em>project_files_show_on_load</em></span> 设置为 <span class="emphasis"><em>false</em></span> 来禁止在打开时显示此窗口。
-            </p>
-            <p>用 <span class="guimenuitem">Ctrl+L</span> 将其打开，用 <span class="keycap"><strong>Esc</strong></span> 将其关闭。<span class="guilabel">项目文件</span>窗口显示以下信息：
-            </p>
+            <p>当 OmegaT 载入项目时会自动显示此窗口，在任何时候，按下<span class="guimenuitem">项目</span> → <span class="guimenuitem">项目文件...</span>也会显示此窗口。</p>
+            <p>
+               <em>
+                  <span class="remark">注意：</span>
+               </em>可以通过在<code class="filename">omegat.prefs</code> 文件（可通过<span class="guimenuitem">选项</span> → <span class="guimenuitem">访问配置文件夹</span>菜单）中将 <span class="emphasis">
+                  <em>project_files_show_on_load</em>
+               </span> 设置为 <span class="emphasis">
+                  <em>false</em>
+               </span> 来禁止在打开时显示此窗口。</p>
+            <p>用 <span class="guimenuitem">Ctrl+L</span> 将其打开，用 <span class="keycap">
+                  <strong>Esc</strong>
+               </span> 将其关闭。<span class="guilabel">项目文件</span>窗口显示以下信息：</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -239,10 +416,16 @@
                   </li>
                   <li class="listitem">
                      <p>项目中所有可翻译文件的列表。点击任何一个文件将打开它进行翻译。</p>
-                     <p>输入任何文本都会打开<span class="guilabel">过滤器</span>字段，其中可以输入文件名片段。可以用<span class="keycap"><strong>上</strong></span>和<span class="keycap"><strong>下</strong></span>方向键来选择文件，并按 <span class="keycap"><strong>Enter</strong></span> 键将其打开进行翻译。
-                     </p>
-                     <p>注意：文件名（第一列）可以通过点击表头来按字母排序。也可以通过点击文件名并按下各个<span class="emphasis"><em>移动</em></span>按钮来改变文件名的位置。
-                     </p>
+                     <p>输入任何文本都会打开<span class="guilabel">过滤器</span>字段，其中可以输入文件名片段。可以用<span class="keycap">
+                           <strong>上</strong>
+                        </span>和<span class="keycap">
+                           <strong>下</strong>
+                        </span>方向键来选择文件，并按 <span class="keycap">
+                           <strong>Enter</strong>
+                        </span> 键将其打开进行翻译。</p>
+                     <p>注意：文件名（第一列）可以通过点击表头来按字母排序。也可以通过点击文件名并按下各个<span class="emphasis">
+                           <em>移动</em>
+                        </span>按钮来改变文件名的位置。</p>
                      <p>右键单击文件名会打开一个弹出窗口，可以打开原文文件和（如果存在）译文文件。</p>
                   </li>
                   <li class="listitem">
@@ -253,62 +436,97 @@
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>独特</strong></span>片段集合是通过将所有片段去除重复片段计算得到的。（“独特”的定义是区分大小写的：“Run"”和“run”视为不同）
-            </p>
-            <p>“片段数”和“独特片段数”之间的差距对文本中的重复情况提供了大致的概念。但是要注意，这些数字上并不能看出重复的相关程度：它们可能意味着有较长的句子重复了很多次（这种情况下你很走运）或者也可能是关键字表格（不太走运）。位于项目的 omegat 文件夹中的
-               <code class="filename">project_stats.txt</code> 内包含有更详细的片段信息，按文件细分。
-            </p>
-            <p>修改分割规则可能会有改变片段/独特片段数量的效果。但是，一旦开始对项目进行翻译后，通常应当避免这么做。更多信息请参阅<span class="emphasis"><em>分割规则</em></span>章节。
-            </p>
-            <p><span class="bold"><strong>向项目中添加文件：</strong></span>你可以通过点击“<span class="guimenuitem">导入原文文件...</span>”按钮来向项目中添加原文文件。这会将所选择的文件复制到 <code class="filename">source</code> 文件夹并重新载入项目以导入新文件。还可以通过点击<span class="guimenuitem">“从 MediaWiki 导入”</span>按钮并提供相应的网址来从用 MediaWiki 编写的网页添加原文文件。
-            </p>
-         </div>
-         <div class="section">
+            <p>
+               <span class="bold">
+                  <strong>独特</strong>
+               </span>片段集合是通过将所有片段去除重复片段计算得到的。（“独特”的定义是区分大小写的：“Run&quot;”和“run”视为不同）</p>
+            <p>“片段数”和“独特片段数”之间的差距对文本中的重复情况提供了大致的概念。但是要注意，这些数字上并不能看出重复的相关程度：它们可能意味着有较长的句子重复了很多次（这种情况下你很走运）或者也可能是关键字表格（不太走运）。位于项目的 omegat 文件夹中的 <code class="filename">project_stats.txt</code> 内包含有更详细的片段信息，按文件细分。</p>
+            <p>修改分割规则可能会有改变片段/独特片段数量的效果。但是，一旦开始对项目进行翻译后，通常应当避免这么做。更多信息请参阅<span class="emphasis">
+                  <em>分割规则</em>
+               </span>章节。</p>
+            <p>
+               <span class="bold">
+                  <strong>向项目中添加文件：</strong>
+               </span>你可以通过点击“<span class="guimenuitem">导入原文文件...</span>”按钮来向项目中添加原文文件。这会将所选择的文件复制到 <code class="filename">source</code> 文件夹并重新载入项目以导入新文件。还可以通过点击<span class="guimenuitem">“从 MediaWiki 导入”</span>按钮并提供相应的网址来从用 MediaWiki 编写的网页添加原文文件。</p>
+         </section>
+         <section class="section" id="windows.textsearch">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="windows.textsearch"></a>3.&nbsp;文本查找
-                     </h2>
+                     <h2 class="title" style="clear: both">文本查找</h2>
                   </div>
                </div>
             </div>
-            <p>用<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>打开查找窗口，把你要查找的单词或短语输入<span class="emphasis"><em>查找</em></span>框。
-            </p>
-            <p>或者，可以在编辑器窗格、模糊匹配窗格或词汇表窗格中选择单词或短语，然后按下<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>。此单词或短语会自动输入到<span class="emphasis"><em>查找</em></span>框中。可以同时打开多个查找窗口，不过不再需要的时候请关掉它们，免得把桌面搞得乱七八糟。
-            </p>
-            <p>点击<span class="emphasis"><em>查找</em></span>框中的下拉箭头可以访问最后 10 个查找条目。
-            </p>
+            <p>用<span class="keycap">
+                  <strong>Ctrl</strong>
+               </span>+<span class="keycap">
+                  <strong>F</strong>
+               </span>打开查找窗口，把你要查找的单词或短语输入<span class="emphasis">
+                  <em>查找</em>
+               </span>框。</p>
+            <p>或者，可以在编辑器窗格、模糊匹配窗格或词汇表窗格中选择单词或短语，然后按下<span class="keycap">
+                  <strong>Ctrl</strong>
+               </span>+<span class="keycap">
+                  <strong>F</strong>
+               </span>。此单词或短语会自动输入到<span class="emphasis">
+                  <em>查找</em>
+               </span>框中。可以同时打开多个查找窗口，不过不再需要的时候请关掉它们，免得把桌面搞得乱七八糟。</p>
+            <p>点击<span class="emphasis">
+                  <em>查找</em>
+               </span>框中的下拉箭头可以访问最后 10 个查找条目。</p>
             <p>查找窗口有它自己的菜单：</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>文件 &gt; 查找转选区（<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>）：焦点重新转到查找字段，并选定其全部内容。
-                     </p>
+                     <p>文件 &gt; 查找转选区（<span class="keycap">
+                           <strong>Ctrl</strong>
+                        </span>+<span class="keycap">
+                           <strong>F</strong>
+                        </span>）：焦点重新转到查找字段，并选定其全部内容。</p>
                   </li>
                   <li class="listitem">
-                     <p>文件 &gt; 关闭（<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>W</strong></span>）：关闭查找窗口（与<span class="keycap"><strong>Esc</strong></span>相同）
-                     </p>
+                     <p>文件 &gt; 关闭（<span class="keycap">
+                           <strong>Ctrl</strong>
+                        </span>+<span class="keycap">
+                           <strong>W</strong>
+                        </span>）：关闭查找窗口（与<span class="keycap">
+                           <strong>Esc</strong>
+                        </span>相同）</p>
                   </li>
                   <li class="listitem">
-                     <p>编辑 &gt; 插入原文（<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>I</strong></span>）插入当前片段的原文。
-                     </p>
+                     <p>编辑 &gt; 插入原文（<span class="keycap">
+                           <strong>Ctrl</strong>
+                        </span>+<span class="keycap">
+                           <strong>Shift</strong>
+                        </span>+<span class="keycap">
+                           <strong>I</strong>
+                        </span>）插入当前片段的原文。</p>
                   </li>
                   <li class="listitem">
-                     <p>编辑 &gt; 替换为原文（<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>R</strong></span>）：替换为当前片段的原文。
-                     </p>
+                     <p>编辑 &gt; 替换为原文（<span class="keycap">
+                           <strong>Ctrl</strong>
+                        </span>+<span class="keycap">
+                           <strong>Shift</strong>
+                        </span>+<span class="keycap">
+                           <strong>R</strong>
+                        </span>）：替换为当前片段的原文。</p>
                   </li>
                   <li class="listitem">
-                     <p>编辑 &gt; 创建词汇表条目（<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>G</strong></span>）：添加新词汇表条目。
-                     </p>
+                     <p>编辑 &gt; 创建词条（<span class="keycap">
+                           <strong>Ctrl</strong>
+                        </span>+<span class="keycap">
+                           <strong>Shift</strong>
+                        </span>+<span class="keycap">
+                           <strong>G</strong>
+                        </span>）：添加新词条。</p>
                   </li>
                </ul>
             </div>
-            <div class="section">
+            <section class="section" id="using.wild.cards">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="using.wild.cards"></a>3.1.&nbsp;使用通配符
-                        </h3>
+                        <h3 class="title">使用通配符</h3>
                      </div>
                   </div>
                </div>
@@ -316,48 +534,75 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>“*”匹配从给定单词的当前位置到结尾的零个或多个字符。例如，查找词<code class="literal">“run*”</code>将匹配单词<code class="literal">“run”</code>、<code class="literal">“runs”</code>和<code class="literal">“running”</code>。
-                        </p>
+                        <p>“*”匹配从给定单词的当前位置到结尾的零个或多个字符。例如，查找词<code class="literal">“run*”</code>将匹配单词<code class="literal">“run”</code>、<code class="literal">“runs”</code>和<code class="literal">“running”</code>。</p>
                      </li>
                   </ul>
                </div>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>“?”匹配任意单个字符。例如，<code class="literal">“run?”</code>将匹配单词<code class="literal">“runs”</code>和单词<code class="literal">“running”</code>中的<code class="literal">“runn”</code>。
-                        </p>
+                        <p>“?”匹配任意单个字符。例如，<code class="literal">“run?”</code>将匹配单词<code class="literal">“runs”</code>和单词<code class="literal">“running”</code>中的<code class="literal">“runn”</code>。</p>
                      </li>
                   </ul>
                </div>
                <p>匹配部分将以蓝色粗体显示。注意“*”和“?”在正则表达式中有特殊含义，因此此处所述的通配符查找仅适用于精确查找和关键字查找（见下文）。</p>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="search.methoids">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="search.methoids"></a>3.2.&nbsp;查找方法和选项
-                        </h3>
+                        <h3 class="title">查找方法和选项</h3>
                      </div>
                   </div>
                </div>
                <p>用单选按钮选择方法。有以下查找方法：</p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">精确查找</span></dt>
+                     <dt>
+                        <span class="term">精确查找</span>
+                     </dt>
                      <dd>
-                        <p>查找包含指定的确切字符串的片段。精确查找以短语方式查找，即，如果输入了多个单词，则只会在完全按此顺序出现时才会被找出来。因此，查找 <code class="literal">open file</code> 会找到字符串 <span class="emphasis"><em><code class="literal">open file</code></em></span> 的所有出现之处，但不会找到 <span class="emphasis"><em><code class="literal">file opened</code></em></span> 或 <span class="emphasis"><em><code class="literal">open input file</code></em></span>。
-                        </p>
+                        <p>查找包含指定的确切字符串的片段。精确查找以短语方式查找，即，如果输入了多个单词，则只会在完全按此顺序出现时才会被找出来。因此，查找 <code class="literal">open file</code> 会找到字符串 <span class="emphasis">
+                              <em>
+                                 <code class="literal">open file</code>
+                              </em>
+                           </span> 的所有出现之处，但不会找到 <span class="emphasis">
+                              <em>
+                                 <code class="literal">file opened</code>
+                              </em>
+                           </span> 或 <span class="emphasis">
+                              <em>
+                                 <code class="literal">open input file</code>
+                              </em>
+                           </span>。</p>
                      </dd>
-                     <dt><span class="term">关键字查找</span></dt>
+                     <dt>
+                        <span class="term">关键字查找</span>
+                     </dt>
                      <dd>
-                        <p>查找以任意顺序包含全部指定关键字的片段。选择关键字查找来以任意顺序查找任意数量的单个完整单词。OmegaT 会显示所有包含全部指定单词的片段的列表。关键字查找类似于诸如 Google 之类因特网搜索引擎的“包含全部关键字”（AND 逻辑）搜索。因此，用
-                           <span class="emphasis"><em><code class="literal">open file</code></em></span> 进行关键字查找会找到字符串 <span class="emphasis"><em><code class="literal">open file</code></em></span>的所有出现之处，也会找到 <span class="emphasis"><em><code class="literal">file opened</code>、<code class="literal">open input file</code>、<code class="literal">file may not be safe to open</code></em></span>等的出现之处。
-                        </p>
+                        <p>查找以任意顺序包含全部指定关键字的片段。选择关键字查找来以任意顺序查找任意数量的单个完整单词。OmegaT 会显示所有包含全部指定单词的片段的列表。关键字查找类似于诸如 Google 之类因特网搜索引擎的“包含全部关键字”（AND 逻辑）搜索。因此，用 <span class="emphasis">
+                              <em>
+                                 <code class="literal">open file</code>
+                              </em>
+                           </span> 进行关键字查找会找到字符串 <span class="emphasis">
+                              <em>
+                                 <code class="literal">open file</code>
+                              </em>
+                           </span>的所有出现之处，也会找到 <span class="emphasis">
+                              <em>
+                                 <code class="literal">file opened</code>、<code class="literal">open input file</code>、<code class="literal">file may not be safe to open</code>
+                              </em>
+                           </span>等的出现之处。</p>
                      </dd>
-                     <dt><span class="term"><span class="bold"><strong>正则表达式</strong></span></span></dt>
+                     <dt>
+                        <span class="term">
+                           <span class="bold">
+                              <strong>正则表达式</strong>
+                           </span>
+                        </span>
+                     </dt>
                      <dd>
-                        <p>查找字符串将被视为正则表达式。例如，在上面的例子中，查找字符串——[a-zA-Z]+[öäüqwß]——会在译文片段中查找包含疑似来自德语键盘的字符的单词。<a class="link" href="appendix.regexp.html" title="附录&nbsp;D.&nbsp;正则表达式">正则表达式</a>是一种强大的查找字符串实例的方法。
-                        </p>
+                        <p>查找字符串将被视为正则表达式。例如，在上面的例子中，查找字符串——[a-zA-Z]+[öäüqwß]——会在译文片段中查找包含疑似来自德语键盘的字符的单词。<a class="link" href="appendix.regexp.html" title="附录 D. 正则表达式">正则表达式</a>是一种强大的查找字符串实例的方法。</p>
                      </dd>
                   </dl>
                </div>
@@ -365,90 +610,129 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><span class="bold"><strong>区分大小写</strong></span>：查找将会对指定字符串进行精确匹配，即，会注意大小写。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>区分大小写</strong>
+                           </span>：查找将会对指定字符串进行精确匹配，即，会注意大小写。</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>空格可匹配不换行空格</strong></span>：勾选此选项时，搜索条目中的空格可以匹配普通的空格字符或不换行空格（\u00A）字符。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>空格可匹配不换行空格</strong>
+                           </span>：勾选此选项时，搜索条目中的空格可以匹配普通的空格字符或不换行空格（\u00A）字符。</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>在原文中：</strong></span>在原文片段中查找
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>在原文中：</strong>
+                           </span>在原文片段中查找</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>在译文中：</strong></span>在译文片段中查找
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>在译文中：</strong>
+                           </span>在译文片段中查找</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>在备注中：</strong></span>在片段的备注中查找
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>在备注中：</strong>
+                           </span>在片段的备注中查找</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>在注释中：</strong></span>在片段的注释中查找
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>在注释中：</strong>
+                           </span>在片段的注释中查找</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>已译或未译：</strong></span>已译和未译片段中都进行查找。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>已译或未译：</strong>
+                           </span>已译和未译片段中都进行查找。</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>已译：</strong></span>只在已译片段中查找。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>已译：</strong>
+                           </span>只在已译片段中查找。</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>未译：</strong></span>只在未译片段中查找。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>未译：</strong>
+                           </span>只在未译片段中查找。</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>显示：所有匹配的片段：</strong></span>如果勾选，所有片段都会一一显示，即使它们在同一文档或不同文档中多次出现。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>显示：所有匹配的片段：</strong>
+                           </span>如果勾选，所有片段都会一一显示，即使它们在同一文档或不同文档中多次出现。</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>显示：文件名：</strong></span>如果勾选，将在每个结果上方显示片段所在的文件名。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>显示：文件名：</strong>
+                           </span>如果勾选，将在每个结果上方显示片段所在的文件名。</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>在项目中查找：</strong></span>：勾选<span class="emphasis"><em>项目记忆库</em></span>以在查找中包含项目记忆库（project_save.tmx file）。勾选<span class="emphasis"><em>翻译记忆库</em></span>以在查找中包含位于 <code class="filename">tm</code> 目录中的翻译记忆库。勾选<span class="emphasis"><em>词汇表</em></span>以在查找中包含位于 <code class="filename">glossary</code> 目录下的词汇表。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>在项目中查找：</strong>
+                           </span>：勾选<span class="emphasis">
+                              <em>项目记忆库</em>
+                           </span>以在查找中包含项目记忆库（project_save.tmx file）。勾选<span class="emphasis">
+                              <em>翻译记忆库</em>
+                           </span>以在查找中包含位于 <code class="filename">tm</code> 目录中的翻译记忆库。勾选<span class="emphasis">
+                              <em>词汇表</em>
+                           </span>以在查找中包含位于 <code class="filename">glossary</code> 目录下的词汇表。</p>
                      </li>
                      <li class="listitem">
-                        <p><span class="bold"><strong>在文件中查找：</strong></span>在单个文件或包含一组文件的文件夹中查找。对文件进行查找（与对翻译记忆库进行查找相对）时，OmegaT 会将查找限制在具有原文文件格式的文件内。因此，尽管 OmegaT 完全有能力处理 <code class="filename"> tmx</code> 文件，但它并不会将其包含在“查找文件”的查找内。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>在文件中查找：</strong>
+                           </span>在单个文件或包含一组文件的文件夹中查找。对文件进行查找（与对翻译记忆库进行查找相对）时，OmegaT 会将查找限制在具有原文文件格式的文件内。因此，尽管 OmegaT 完全有能力处理 <code class="filename"> tmx</code> 文件，但它并不会将其包含在“查找文件”的查找内。</p>
                      </li>
                   </ul>
                </div>
-               <p>如果点击<span class="guibutton">高级选项</span>按钮，就可以选择其他约束条件（翻译的作者或修改者、翻译的日期、排除孤立片段等）。勾选<span class="emphasis"><em>不区分全角/半角字符</em></span>选项后，查找全角形式（CJK 字符）会匹配半角形式，反之亦然。
-               </p>
-            </div>
-            <div class="section">
+               <p>如果点击<span class="guibutton">高级选项</span>按钮，就可以选择其他约束条件（翻译的作者或修改者、翻译的日期、排除孤立片段等）。勾选<span class="emphasis">
+                     <em>不区分全角/半角字符</em>
+                  </span>选项后，查找全角形式（CJK 字符）会匹配半角形式，反之亦然。</p>
+            </section>
+            <section class="section" id="search.result.display">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="search.result.display"></a>3.3.&nbsp;查找结果显示
-                        </h3>
+                        <h3 class="title">查找结果显示</h3>
                      </div>
                   </div>
                </div>
-               <p>在查找字段输入字符串后，点击查找按钮会把项目中所有包含输入字符串的片段显示出来。由于 <span class="application">OmegaT</span> 将完全相同的片段视为单一实体，因此只显示第一个独特片段。片段按在项目中出现的顺序显示。已译片段会以上面显示原文、下面显示译文的形式显示，而未译片段只显示原文。
-               </p>
-               <p>双击某个片段可在编辑器中将其打开以进行修改（勾选<span class="bold"><strong>自动于编辑器同步</strong></span>选项后只需单击即可）。随后可以切回查找窗口处理下一个结果片段，例如进行检查并在必要的情况下更正术语。
-               </p>
-               <p>在查找窗口中，你可以使用标准快捷键（<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span>、<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span>）从一个片段移动至另一个。
-               </p>
+               <p>在查找字段输入字符串后，点击查找按钮会把项目中所有包含输入字符串的片段显示出来。由于 <span class="application">OmegaT</span> 将完全相同的片段视为单一实体，因此只显示第一个独特片段。片段按在项目中出现的顺序显示。已译片段会以上面显示原文、下面显示译文的形式显示，而未译片段只显示原文。</p>
+               <p>双击某个片段可在编辑器中将其打开以进行修改（勾选<span class="bold">
+                     <strong>自动于编辑器同步</strong>
+                  </span>选项后只需单击即可）。随后可以切回查找窗口处理下一个结果片段，例如进行检查并在必要的情况下更正术语。</p>
+               <p>在查找窗口中，你可以使用标准快捷键（<span class="keycap">
+                     <strong>Ctrl</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>、<span class="keycap">
+                     <strong>Ctrl</strong>
+                  </span>+<span class="keycap">
+                     <strong>P</strong>
+                  </span>）从一个片段移动至另一个。</p>
                <p>你可能会同时打开多个查找窗口。可以通过查看其标题来快速确认其内容：标题中会包含所使用的查找词。</p>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="search.filter">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="search.filter"></a>3.4.&nbsp;在编辑器中根据查找来过滤条目
-                        </h3>
+                        <h3 class="title">在编辑器中根据查找来过滤条目</h3>
                      </div>
                   </div>
                </div>
-               <p>为了跟轻松地在查找结果集中导航，可以将查找应用到编辑器上。按下底部的<span class="bold"><strong>过滤器</strong></span>按钮来将编辑器窗口中显示的条目限制为当前查找所匹配的那些。可以用常规的导航操作进行跳转，例如转到下一个符合当前查找约束条件的（未译）片段。
-               </p>
+               <p>为了跟轻松地在查找结果集中导航，可以将查找应用到编辑器上。按下底部的<span class="bold">
+                     <strong>过滤器</strong>
+                  </span>按钮来将编辑器窗口中显示的条目限制为当前查找所匹配的那些。可以用常规的导航操作进行跳转，例如转到下一个符合当前查找约束条件的（未译）片段。</p>
                <p>注意：</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -463,103 +747,115 @@
                      </li>
                   </ul>
                </div>
-               <p>要删除过滤器，请按<span class="bold"><strong>删除过滤器</strong></span>按钮，或重新载入项目。
-               </p>
-            </div>
-         </div>
-         <div class="section">
+               <p>要删除过滤器，请按<span class="bold">
+                     <strong>删除过滤器</strong>
+                  </span>按钮，或重新载入项目。</p>
+            </section>
+         </section>
+         <section class="section" id="windows.textreplace">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="windows.textreplace"></a>4.&nbsp;文本替换
-                     </h2>
+                     <h2 class="title" style="clear: both">文本替换</h2>
                   </div>
                </div>
             </div>
-            <p>用<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span>打开查找并替换窗口，把你要替换掉的单词或表达式输入到<span class="emphasis"><em>查找</em></span>框里。
-            </p>
-            <p>然后点击<span class="emphasis"><em>查找</em></span>按钮来显示所有相应的出现之处。
-            </p>
-            <p>在<span class="emphasis"><em>替换为</em></span>框内输入新的单词或短语（不支持正则表达式），然后点击以下任一选项：
-            </p>
+            <p>用<span class="keycap">
+                  <strong>Ctrl</strong>
+               </span>+<span class="keycap">
+                  <strong>K</strong>
+               </span>打开查找并替换窗口，把你要替换掉的单词或表达式输入到<span class="emphasis">
+                  <em>查找</em>
+               </span>框里。</p>
+            <p>然后点击<span class="emphasis">
+                  <em>查找</em>
+               </span>按钮来显示所有相应的出现之处。</p>
+            <p>在<span class="emphasis">
+                  <em>替换为</em>
+               </span>框内输入新的单词或短语（不支持正则表达式），然后点击以下任一选项：</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>全部替换：</strong></span>对所有出现之处进行操作（在显示出现次数的确认窗口之后）。
-                     </p>
+                     <p>
+                        <span class="bold">
+                           <strong>全部替换：</strong>
+                        </span>对所有出现之处进行操作（在显示出现次数的确认窗口之后）。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>替换：</strong></span>通过<span class="bold"><strong>编辑器窗格头部</strong></span>的按钮“一个接一个”地执行替换。点击<span class="emphasis"><em>替换下一个</em></span>或<span class="emphasis"><em>跳过</em></span>，然后用<span class="emphasis"><em>结束</em></span>终止替换操作。
-                     </p>
+                     <p>
+                        <span class="bold">
+                           <strong>替换：</strong>
+                        </span>通过<span class="bold">
+                           <strong>编辑器窗格头部</strong>
+                        </span>的按钮“一个接一个”地执行替换。点击<span class="emphasis">
+                           <em>替换下一个</em>
+                        </span>或<span class="emphasis">
+                           <em>跳过</em>
+                        </span>，然后用<span class="emphasis">
+                           <em>结束</em>
+                        </span>终止替换操作。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>关闭：</strong></span>关闭窗口，不做任何改变。
-                     </p>
+                     <p>
+                        <span class="bold">
+                           <strong>关闭：</strong>
+                        </span>关闭窗口，不做任何改变。</p>
                   </li>
                </ul>
             </div>
-            <div class="section">
+            <section class="section" id="d0e2766">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2760"></a>4.1.&nbsp;查找选项
-                        </h3>
+                        <h3 class="title">查找选项</h3>
                      </div>
                   </div>
                </div>
-               <p>查找选项与显示在<a class="link" href="windows.and.dialogs.html#windows.textsearch" title="3.&nbsp;文本查找">查找窗口</a>中的那些类似。
-               </p>
-               <p>只有一点不同：勾选<span class="bold"><strong>未译</strong></span>来对尚未翻译的片段同样执行查找与替换。
-               </p>
+               <p>查找选项与显示在<a class="link" href="windows.and.dialogs.html#windows.textsearch" title="文本查找">查找窗口</a>中的那些类似。</p>
+               <p>只有一点不同：勾选<span class="bold">
+                     <strong>未译</strong>
+                  </span>来对尚未翻译的片段同样执行查找与替换。</p>
                <p>为了使其成为可能（查找与替换只对翻译记忆库进行操作），OmegaT 会在进行替换操作之前将原文片段复制到译文片段。如果对于给定片段没有发生替换，译文片段会被“清空”，即，它会维持未译状态。</p>
-            </div>
-         </div>
-         <div class="section">
+            </section>
+         </section>
+         <section class="section" id="windows.aligner">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="windows.aligner"></a>5.&nbsp;对齐器
-                     </h2>
+                     <h2 class="title" style="clear: both">对齐器</h2>
                   </div>
                </div>
             </div>
             <p>执行对齐操作可以从已经翻译过的单语言文档创建双语翻译记忆库。</p>
-            <p>要访问此窗口，请选择<span class="guimenuitem">工具</span> → <span class="guimenuitem">对齐文件...</span>。
-            </p>
-            <div class="section">
+            <p>要访问此窗口，请选择<span class="guimenuitem">工具</span> → <span class="guimenuitem">对齐文件...</span>。</p>
+            <section class="section" id="d0e2794">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2788"></a>5.1.&nbsp;第1步：调整对齐参数
-                        </h3>
+                        <h3 class="title">第1步：调整对齐参数</h3>
                      </div>
                   </div>
                </div>
-               <p>如果对齐情况看起来尚可改进，可以试着改变参数。在大多数情况下，<span class="guilabel">平均得分</span>越低，则对齐情况越好。
-               </p>
-               <p>在<span class="guilabel">按堆（Heapwise）</span>模式下，文本是整体评估的。在<span class="guilabel">按段（Parsewise）</span>模式下，则逐个片段地评估。
-               </p>
-               <p>用 <span class="guilabel">ID 比较</span>模式来对齐 键=值 文本。即使两个文件中键的顺序不同或两个文件包含的信息数量不等，这种方式也有效。仅当两个文件都被识别为 键=值 文件时才会出现此选项。
-               </p>
-               <p><span class="guilabel">维特比（Viterbi）</span>和<span class="guilabel">前向-后向（Forward-Backward）</span>算法是两种不同的计算方法。选择能提供最佳结果的那一个。
-               </p>
-               <p>点击<span class="guibutton">继续</span>进入下一步。
-               </p>
-            </div>
-            <div class="section">
+               <p>如果对齐情况看起来尚可改进，可以试着改变参数。在大多数情况下，<span class="guilabel">平均得分</span>越低，则对齐情况越好。</p>
+               <p>在<span class="guilabel">按堆（Heapwise）</span>比较模式下，文本是整体评估的。在<span class="guilabel">按段（Parsewise）</span>比较模式下，则逐个片段地评估。此选项仅当可以进行此选择时才会出现。</p>
+               <p>用 <span class="guilabel">ID</span> 比较模式来对齐 键=值 文本。即使两个文件中键的顺序不同或两个文件包含的信息数量不等，这种方式也有效。仅当两个文件都被识别为 键=值 文件时才会出现此选项。</p>
+               <p>
+                  <span class="guilabel">维特比（Viterbi）</span>和<span class="guilabel">前向-后向（Forward-Backward）</span>算法是两种不同的计算方法。选择能提供最佳结果的那一个。</p>
+               <p>点击<span class="guibutton">继续</span>进入下一步。</p>
+            </section>
+            <section class="section" id="d0e2827">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2821"></a>5.2.&nbsp;第2步：进行手工修正
-                        </h3>
+                        <h3 class="title">第2步：进行手工修正</h3>
                      </div>
                   </div>
                </div>
@@ -572,41 +868,37 @@
                         <p>选择第一个片段。</p>
                      </li>
                      <li class="listitem">
-                        <p>按空格键（<span class="guimenuitem">编辑</span> → <span class="guimenuitem">开始精确对齐</span>的快捷键）。
-                        </p>
+                        <p>按空格键（<span class="guimenuitem">编辑</span> → <span class="guimenuitem">开始精确对齐</span>的快捷键）。</p>
                      </li>
                      <li class="listitem">
                         <p>点击另一列中与第一个片段相对应的翻译。</p>
                      </li>
                   </ol>
                </div>
-               <p>进行若干次此类操作后，选择<span class="guimenuitem">编辑</span> → <span class="guimenuitem">重新对齐剩余部分</span>来更新其他片段的对齐。
-               </p>
-               <p>要分别修改一个或多个片段的位置，请选择片段后按下 <strong class="userinput"><code>U</code></strong>（<span class="guilabel">上移</span>）或<strong class="userinput"><code>D</code></strong>（<span class="guilabel">下移</span>）。
-               </p>
-               <p>创建翻译记忆库时，只会包含勾选了第一列中的<span class="guilabel">保留</span>框的那些行。
-               </p>
-               <p>两列充分对齐后，点击<span class="guibutton">保存 TMX...</span>来创建生成的翻译记忆库。
-               </p>
-            </div>
-         </div>
-         <div class="section">
+               <p>进行若干次此类操作后，选择<span class="guimenuitem">编辑</span> → <span class="guimenuitem">重新对齐剩余部分</span>来更新其他片段的对齐。</p>
+               <p>要分别修改一个或多个片段的位置，请选择片段后按下 <strong class="userinput">
+                     <code>U</code>
+                  </strong>（<span class="guilabel">上移</span>）或<strong class="userinput">
+                     <code>D</code>
+                  </strong>（<span class="guilabel">下移</span>）。</p>
+               <p>创建翻译记忆库时，只会包含勾选了第一列中的<span class="guilabel">保留</span>框的那些行。</p>
+               <p>两列充分对齐后，点击<span class="guibutton">保存 TMX...</span>来创建生成的翻译记忆库。</p>
+            </section>
+         </section>
+         <section class="section" id="windows.scripts">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="windows.scripts"></a>6.&nbsp;脚本
-                     </h2>
+                     <h2 class="title" style="clear: both">脚本</h2>
                   </div>
                </div>
             </div>
-            <p>此窗口可通过选择<span class="guimenuitem">工具</span> → <span class="guimenuitem">脚本...</span>来进入
-            </p>
-            <div class="section">
+            <p>此窗口可通过选择<span class="guimenuitem">工具</span> → <span class="guimenuitem">脚本...</span>来进入</p>
+            <section class="section" id="d0e2895">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2889"></a>6.1.&nbsp;使用
-                        </h3>
+                        <h3 class="title">使用</h3>
                      </div>
                   </div>
                </div>
@@ -621,31 +913,29 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>右键单击底部面板中的<span class="guilabel">&lt;1&gt;</span>到<span class="guilabel">&lt;12&gt;</span>按钮之一并选择<span class="guilabel">添加脚本</span>。
-                        </p>
+                        <p>右键单击底部面板中的<span class="guilabel">&lt;1&gt;</span>到<span class="guilabel">&lt;12&gt;</span>按钮之一并选择<span class="guilabel">添加脚本</span>。</p>
                      </li>
                   </ul>
                </div>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>当左键点击此数字时，将运行所选脚本。也可以用主菜单中<span class="guisubmenu">工具</span>菜单下的条目或按<span class="keycap"><strong> Ctrl+Alt+F#</strong></span>(# 为 1 到 12）来启动所选的宏。
-                        </p>
+                        <p>当左键点击此数字时，将运行所选脚本。也可以用主菜单中<span class="guisubmenu">工具</span>菜单下的条目或按<span class="keycap">
+                              <strong> Ctrl+Alt+F#</strong>
+                           </span>(# 为 1 到 12）来启动所选的宏。</p>
                      </li>
                   </ul>
                </div>
-               <p>默认状态下，脚本存储在位于 OmegaT 安装文件夹（包含 <code class="filename">OmegaT.jar</code> 文件的文件夹）中的 <code class="filename">scripts</code> 文件夹下。
+               <p>默认状态下，脚本存储在位于 OmegaT 安装文件夹（包含 <code class="filename">OmegaT.jar</code> 文件的文件夹）中的 <code class="filename">scripts</code> 文件夹下。</p>
+               <p>如果在此处添加了新脚本，它们将出现在<span class="guilabel">脚本</span>窗口的可用脚本列表中。</p>
+               <p>这里可以找到一些其他脚本：<a class="ulink" href="https://sourceforge.net/projects/omegatscripts/" target="_top">OmegaT 脚本</a>
                </p>
-               <p>如果在此处添加了新脚本，它们将出现在<span class="guilabel">脚本</span>窗口的可用脚本列表中。
-               </p>
-               <p>这里可以找到一些其他脚本：<a class="ulink" href="https://sourceforge.net/projects/omegatscripts/" target="_top">OmegaT 脚本</a></p>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="d0e2944">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2938"></a>6.2.&nbsp;脚本语言
-                        </h3>
+                        <h3 class="title">脚本语言</h3>
                      </div>
                   </div>
                </div>
@@ -653,20 +943,25 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><span class="bold"><strong>Groovy</strong></span>（http://groovy.codehaus.org）：用于 Java 虚拟机的一种动态语言。它基于 Java 的优势，但又具有受 Python、Ruby 和 Smalltalk 等语言所启发的其他强大功能。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>Groovy</strong>
+                           </span>（http://groovy.codehaus.org）：用于 Java 虚拟机的一种动态语言。它基于 Java 的优势，但又具有受 Python、Ruby 和 Smalltalk 等语言所启发的其他强大功能。</p>
                      </li>
                   </ul>
                </div>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><span class="bold"><strong>JavaScript</strong></span>（有时缩写为 JS，不要与 Java 相混淆）：一种基于原型的脚本语言，它是动态、弱类型的并且具有头等函数。它是多范式语言，支持面向对象、命令式和函数式编程风格。作为诸如 Firefox 等流行软件背后的语言，它是开源领域中参见且首选的编程工具。
-                        </p>
+                        <p>
+                           <span class="bold">
+                              <strong>JavaScript</strong>
+                           </span>（有时缩写为 JS，不要与 Java 相混淆）：一种基于原型的脚本语言，它是动态、弱类型的并且具有头等函数。它是多范式语言，支持面向对象、命令式和函数式编程风格。作为诸如 Firefox 等流行软件背后的语言，它是开源领域中参见且首选的编程工具。</p>
                      </li>
                   </ul>
                </div>
-               <p>所有语言都能访问 OmegaT 的对象模型，其中项目是顶层对象。例如，以下 Groovy 代码片段将扫描当前项目中所有文件内的所有片段，若已存在翻译则打印出片段的原文和译文：</p><pre class="programlisting">    files = project.projectFiles;
+               <p>所有语言都能访问 OmegaT 的对象模型，其中项目是顶层对象。例如，以下 Groovy 代码片段将扫描当前项目中所有文件内的所有片段，若已存在翻译则打印出片段的原文和译文：</p>
+               <pre class="programlisting">    files = project.projectFiles;
     for (i in 0 ..&lt; files.size())
     {
         for (j in 0 ..&lt; files[i].entries.size())
@@ -676,214 +971,249 @@
             {
                 source = currSegment.getSrcText();
                 target = project.getTranslationInfo(currSegment).translation;
-                console.println(source + " &gt;&gt;&gt;&gt; " + target);
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
             }     
         }
-    }</pre></div>
-         </div>
-         <div class="section">
+    }</pre>
+            </section>
+         </section>
+         <section class="section" id="dialogs.preferences">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="dialogs.preferences"></a>7.&nbsp;通用首选项
-                     </h2>
+                     <h2 class="title" style="clear: both">通用首选项</h2>
                   </div>
                </div>
             </div>
-            <p>此对话框可通过选择<span class="guimenuitem">选项</span> → <span class="guimenuitem">首选项...</span>来进入
-            </p>
+            <p>此对话框可通过选择<span class="guimenuitem">选项</span> → <span class="guimenuitem">首选项...</span>来进入</p>
             <p>它允许为所有翻译项目设置参数。</p>
-            <div class="section">
+            <section class="section" id="d0e2978">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2972"></a>7.1.&nbsp;通用
-                        </h3>
+                        <h3 class="title">通用</h3>
                      </div>
                   </div>
                </div>
-               <div class="variablelist"><a name="dialogs.preferences.general.usetabtoadvance"></a><dl class="variablelist">
-                     <dt><span class="term">用 Tab 前进</span></dt>
+               <div class="variablelist" id="dialogs.preferences.general.usetabtoadvance">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">用 Tab 前进</span>
+                     </dt>
                      <dd>
                         <p>将片段验证键设置为 Tab 来代替默认的 Enter。此选项对某些中文、日文或韩文字符输入系统很有用。</p>
                      </dd>
-                     <dt><span class="term">退出前确认</span></dt>
+                     <dt>
+                        <span class="term">退出前确认</span>
+                     </dt>
                      <dd>
                         <p>程序将在关闭前要求确认。</p>
                      </dd>
                   </dl>
                </div>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="d0e2994">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e2988"></a>7.2.&nbsp;机器翻译
-                        </h3>
+                        <h3 class="title">机器翻译</h3>
                      </div>
                   </div>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">自动获取翻译</span></dt>
+                     <dt>
+                        <span class="term">自动获取翻译</span>
+                     </dt>
                      <dd>
-                        <p>出于保密原因，您可能不想将所有片段发送给机器翻译引擎。如果你取消此选项的勾选，则仅当你在当前片段中按下 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span>（OS X 上是<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>M</strong></span>）时才会获取机器翻译。你需要再按一次<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span>以插入建议。
-                        </p>
+                        <p>出于保密原因，您可能不想将所有片段发送给机器翻译引擎。如果你取消此选项的勾选，则仅当你在当前片段中按下 <span class="keycap">
+                              <strong>Ctrl</strong>
+                           </span>+<span class="keycap">
+                              <strong>M</strong>
+                           </span>（OS X 上是<span class="keycap">
+                              <strong>Cmd</strong>
+                           </span>+<span class="keycap">
+                              <strong>M</strong>
+                           </span>）时才会获取机器翻译。你需要再按一次<span class="keycap">
+                              <strong>Ctrl</strong>
+                           </span>+<span class="keycap">
+                              <strong>M</strong>
+                           </span>以插入建议。</p>
                      </dd>
-                     <dt><span class="term">仅限未译片段</span></dt>
+                     <dt>
+                        <span class="term">仅限未译片段</span>
+                     </dt>
                      <dd>
                         <p>勾选此框可使得仅有未翻译的片段会被发送至机器翻译服务。</p>
                      </dd>
                   </dl>
                </div>
-               <p>从列表中选择供应商，如有必要，点击<span class="guibutton">配置</span>来输入供应商提供的详细认证信息。
-               </p>
-               <p><a class="ulink" href="https://sourceforge.net/p/omegat/wiki/Configuring Machine Translation Services" target="_top">此处</a>描述了配置对 Microsoft Translator 和 Google Translate 服务的访问的过程。
-               </p>
-            </div>
-            <div class="section">
+               <p>从列表中选择供应商，如有必要，点击<span class="guibutton">配置</span>来输入供应商提供的详细认证信息。</p>
+               <p>
+                  <a class="ulink" href="https://sourceforge.net/p/omegat/wiki/Configuring Machine Translation Services" target="_top">此处</a>描述了配置对 Microsoft Translator 和 Google Translate 服务的访问的过程。</p>
+            </section>
+            <section class="section" id="d0e3037">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3031"></a>7.3.&nbsp;词汇表
-                        </h3>
+                        <h3 class="title">词汇表</h3>
                      </div>
                   </div>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">显示 TBX 词汇表的上下文描述</span></dt>
+                     <dt>
+                        <span class="term">显示 TBX 词汇表的上下文描述</span>
+                     </dt>
                      <dd>
-                        <p>如果为每个词汇表条目所显示的上下文描述不必要或者太长，请取消对此选项的勾选。</p>
+                        <p>如果为每个词条所显示的上下文描述并非必要或者太长，请取消对此选项的勾选。</p>
                      </dd>
-                     <dt><span class="term">使用分开出现在原文文本中的词条</span></dt>
+                     <dt>
+                        <span class="term">使用分开出现在原文文本中的词条</span>
+                     </dt>
                      <dd>
                         <p>勾选此选项后，对于由一对或一组单词（表达式）所组成的条目，即使其中的单词在原文文本中是分开出现的，词汇表中也会显示此条目。</p>
                         <p>如果词汇表中显示了过多误报，请取消对此选项的勾选。</p>
                      </dd>
-                     <dt><span class="term">对词汇表条目使用词干分析</span></dt>
+                     <dt>
+                        <span class="term">对词条使用词干分析</span>
+                     </dt>
                      <dd>
                         <p>如果希望词汇表中显示有着相同词根的词汇，请选择此选项。</p>
                      </dd>
-                     <dt><span class="term">插入原文文本时替换命中的词汇表条目</span></dt>
+                     <dt>
+                        <span class="term">插入原文文本时替换命中的词条</span>
+                     </dt>
                      <dd>
-                        <p>如果同时勾选了此选项与<a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.insertthesourcetext"><span class="guilabel">插入原文文本</span></a>选项，当插入原文文本时，所有有着相应词汇表条目的词汇都会被自动翻译。
-                        </p>
+                        <p>如果同时勾选了此选项与<a class="link" href="windows.and.dialogs.html#dialogs.preferences.editor.insertthesourcetext">
+                              <span class="guilabel">插入原文文本</span>
+                           </a>选项，当插入原文文本时，所有有着相应词条的词汇都会被自动翻译。</p>
                      </dd>
-                     <dt><span class="term">忽略大小写不同的命中（例如 FOO 和 foo）</span></dt>
+                     <dt>
+                        <span class="term">忽略大小写不同的命中（例如 FOO 和 foo）</span>
+                     </dt>
                      <dd>
                         <p>勾选此选项后，词汇表中只会显示一个条目，即使此词汇在词汇表中存在有多种形式（例如，有和没有字母是大写的）。</p>
                      </dd>
                   </dl>
                </div>
-               <div class="section">
+               <section class="section" id="d0e3077">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="d0e3071"></a>7.3.1.&nbsp;TaaS 术语
-                           </h4>
+                           <h4 class="title">TaaS 术语</h4>
                         </div>
                      </div>
                   </div>
                   <div class="variablelist">
                      <dl class="variablelist">
-                        <dt><span class="term">获取 API 密钥</span></dt>
+                        <dt>
+                           <span class="term">获取 API 密钥</span>
+                        </dt>
                         <dd>
-                           <p>点击此按钮可访问 <a class="ulink" href="https://term.tilde.com/taas" target="_top">TaaS</a> 项目网站并创建用户帐户。
-                           </p>
-                           <p>然后，你可以在页面 <a class="ulink" href="https://term.tilde.com/account/keys/create?system=omegaT" target="_top">https://term.tilde.com/account/keys/create?system=omegaT</a> 上创建访问密钥。
-                           </p>
+                           <p>点击此按钮可访问 <a class="ulink" href="https://term.tilde.com/taas" target="_top">TaaS</a> 项目网站并创建用户帐户。</p>
+                           <p>然后，你可以在页面 <a class="ulink" href="https://term.tilde.com/account/keys/create?system=omegaT" target="_top">https://term.tilde.com/account/keys/create?system=omegaT</a> 上创建访问密钥。</p>
                         </dd>
-                        <dt><span class="term">仅为本次会话保存</span></dt>
+                        <dt>
+                           <span class="term">仅为本次会话保存</span>
+                        </dt>
                         <dd>
                            <p>勾选此选项后，OmegaT 在不同会话之间不会记住访问密钥。</p>
                         </dd>
-                        <dt><span class="term">浏览 TaaS 词库...</span></dt>
+                        <dt>
+                           <span class="term">浏览 TaaS 词库...</span>
+                        </dt>
                         <dd>
                            <p>此按钮让你能够浏览并下载已有的那些针对项目原文语言与译文语言的词库。私有词库显示为粗体。词库将下载为 TBX 词汇表并存放在当前词汇表文件夹中。</p>
                         </dd>
-                        <dt><span class="term">选择 TaaS 术语查询领域...</span></dt>
+                        <dt>
+                           <span class="term">选择 TaaS 术语查询领域...</span>
+                        </dt>
                         <dd>
                            <p>如有必要，你可以选择特定领域以限制发送与接受的数据量。</p>
                         </dd>
                      </dl>
                   </div>
-               </div>
-            </div>
-            <div class="section">
+               </section>
+            </section>
+            <section class="section" id="dialogs.preferences.dictionary">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="dialogs.preferences.dictionary"></a>7.4.&nbsp;词典
-                        </h3>
+                        <h3 class="title">词典</h3>
                      </div>
                   </div>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">自动在词典中查找片段文本</span></dt>
+                     <dt>
+                        <span class="term">自动在词典中查找片段文本</span>
+                     </dt>
                      <dd>
                         <p>清除此选项可停用自动搜索——例如词典过长的情况。</p>
                      </dd>
-                     <dt><span class="term">对词典条目使用模糊匹配</span></dt>
+                     <dt>
+                        <span class="term">对词典条目使用模糊匹配</span>
+                     </dt>
                      <dd>
                         <p>如果希望词典中显示有着相同词根的词汇，请选择此选项。</p>
                      </dd>
                   </dl>
                </div>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="d0e3129">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3123"></a>7.5.&nbsp;外观
-                        </h3>
+                        <h3 class="title">外观</h3>
                      </div>
                   </div>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">恢复主窗口</span></dt>
+                     <dt>
+                        <span class="term">恢复主窗口</span>
+                     </dt>
                      <dd>
                         <p>将 OmegaT 窗口的组件恢复到默认状态。当你分离、移动或隐藏了一个或多个组件后无法恢复到所需的排列时可以使用此功能。更新 OmegaT 后窗格未按预期显示时也可以使用它。</p>
                      </dd>
                   </dl>
                </div>
-               <div class="section">
+               <section class="section" id="d0e3139">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="d0e3133"></a>7.5.1.&nbsp;字体
-                           </h4>
+                           <h4 class="title">字体</h4>
                         </div>
                      </div>
                   </div>
                   <p>显示用于修改文本显示字体的对话框。使用老电脑的用户如果觉得改变窗口大小非常慢可以尝试更改字体。请参阅杂记中的字体设置部分</p>
-               </div>
-               <div class="section">
+               </section>
+               <section class="section" id="d0e3144">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="d0e3138"></a>7.5.2.&nbsp;颜色
-                           </h4>
+                           <h4 class="title">颜色</h4>
                         </div>
                      </div>
                   </div>
                   <p>此页面让您可以为用户界面的各个部分选择不同的颜色。</p>
                   <p>可以用脚本设置预定义主题。随同 OmegaT 有一个叫做 Switch Colour Themes 的脚本提供了一套默认的“深色”主题。</p>
-               </div>
-            </div>
-            <div class="section">
+               </section>
+            </section>
+            <section class="section" id="dialogs.preferences.filefilters">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="dialogs.preferences.filefilters"></a>7.6.&nbsp;文件过滤器
-                        </h3>
+                        <h3 class="title">文件过滤器</h3>
                      </div>
                   </div>
                </div>
-               <p>此对话框列出了可用的文件过滤器。当前项目所使用的过滤器以粗体显示。如果你不想用 OmegaT 翻译某种类型的文件，可以通过对其名称旁边的复选框的勾选来关闭相应的过滤器。然后，OmegaT 在加载项目时会忽略相应的文件，并在创建译文文档时不加修改地将它们复制到译文文件夹。如果你想再次使用此过滤器，只需要勾选相应复选框即可。点击<span class="bold"><strong>默认</strong></span>可以将文件过滤器重置为默认设置。要编辑过滤器所针对的文件和编码，请在列表中选中此过滤器然后点击<span class="bold"><strong>编辑</strong></span>。
-               </p>
+               <p>此对话框列出了可用的文件过滤器。当前项目所使用的过滤器以粗体显示。如果你不想用 OmegaT 翻译某种类型的文件，可以通过对其名称旁边的复选框的勾选来关闭相应的过滤器。然后，OmegaT 在加载项目时会忽略相应的文件，并在创建译文文档时不加修改地将它们复制到译文文件夹。如果你想再次使用此过滤器，只需要勾选相应复选框即可。点击<span class="bold">
+                     <strong>默认</strong>
+                  </span>可以将文件过滤器重置为默认设置。要编辑过滤器所针对的文件和编码，请在列表中选中此过滤器然后点击<span class="bold">
+                     <strong>编辑</strong>
+                  </span>。</p>
                <p>该对话框允许您启用或禁用以下选项：</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -897,45 +1227,62 @@
                         <p>为所有标签保留空格：如果原文文档包含用于控制布局的不可忽略的重要空格，请勾选此选项。</p>
                      </li>
                      <li class="listitem">
-                        <p>识别有替代翻译的片段时忽略文件上下文：默认情况下，OmegaT 用原文文件名作为替代翻译的识别信息的一部分。如果勾选了此选项，则不使用原文文件名，而只要其他上下文（上一个/下一个片段或依赖于文件格式的某种片段标识）匹配，替代翻译会在任意文件中生效。</p>
+                        <p>识别有替代翻译的片段时忽略文件上下文：默认情况下，OmegaT 用原文文件名作为备选译文的识别信息的一部分。如果勾选了此选项，则不使用原文文件名，而只要其他上下文（上一个/下一个片段或依赖于文件格式的某种片段标识）匹配，备选译文会在任意文件中生效。</p>
                      </li>
                   </ul>
                </div>
-               <div class="section">
+               <section class="section" id="filters.options">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="filters.options"></a>7.6.1.&nbsp;过滤器选项
-                           </h4>
+                           <h4 class="title">过滤器选项</h4>
                         </div>
                      </div>
                   </div>
-                  <p>好些过滤器（文本文件、XHTML 文件、HTML 和 XHTML 文件、OpenDocument 文件和 Microsoft Open XML 文件）有一个或多个特定选项。要修改这些选项，在列表中选定此过滤器并点击<span class="bold"><strong>选项</strong></span>。可用选项包括：
+                  <p>好些过滤器（文本文件、XHTML 文件、HTML 和 XHTML 文件、OpenDocument 文件和 Microsoft Open XML 文件）有一个或多个特定选项。要修改这些选项，在列表中选定此过滤器并点击<span class="bold">
+                        <strong>选项</strong>
+                     </span>。可用选项包括：</p>
+                  <p>
+                     <span class="bold">
+                        <strong>文本文件</strong>
+                     </span>
                   </p>
-                  <p><span class="bold"><strong>文本文件</strong></span></p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>在断行、空行处进行段落分割或不分割：</em></span></p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>在断行、空行处进行段落分割或不分割：</em>
+                              </span>
+                           </p>
                            <p>如果激活了语句分割规则，文本会根据此处所选择的选项进行进一步分割。</p>
                         </li>
                      </ul>
                   </div>
-                  <p><span class="bold"><strong>PO 文件</strong></span></p>
+                  <p>
+                     <span class="bold">
+                        <strong>PO 文件</strong>
+                     </span>
+                  </p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>允许译文文件中存在空译文</em></span>：
-                           </p>
-                           <p>如果选择了此选项，当 PO 文件中的某个片段（可能是整个段落）未翻译时，其在译文文件中的翻译将为空。技术上说，在 PO 译文文件中的 <code class="code">msgstr</code> 片段（如果已创建）将保留为空。由于这是 PO 文件的标准行为，因此它在默认情况下是选中的。如果关闭了此选项，原文文本将被复制到译文段落。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>允许译文文件中存在空译文</em>
+                              </span>：</p>
+                           <p>如果选择了此选项，当 PO 文件中的某个片段（可能是整个段落）未翻译时，其在译文文件中的翻译将为空。技术上说，在 PO 译文文件中的 <code class="code">msgstr</code> 片段（如果已创建）将保留为空。由于这是 PO 文件的标准行为，因此它在默认情况下是选中的。如果关闭了此选项，原文文本将被复制到译文段落。</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>跳过 PO 头</em></span></p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>跳过 PO 头</em>
+                              </span>
+                           </p>
                            <p>如果选中此选项，则将跳过 PO 头并保持其不变。</p>
                         </li>
                      </ul>
@@ -943,167 +1290,231 @@
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>自动替换头中的‘nplurals=INTEGER; plural=EXPRESSION;’</em></span></p>
-                           <p><span class="emphasis"><em>此选项允许 OmegaT 覆盖 PO 文件头中的规范，并使用所选译文语言的默认值。</em></span></p>
-                        </li>
-                     </ul>
-                  </div>
-                  <p><span class="bold"><strong>XHTML 文件</strong></span></p>
-                  <div class="itemizedlist">
-                     <ul class="itemizedlist" style="list-style-type: disc; ">
-                        <li class="listitem">
-                           <p><span class="emphasis"><em>翻译以下属性</em></span>：所选属性会作为片段出现在编辑器窗口中。
+                           <p>
+                              <span class="emphasis">
+                                 <em>自动替换头中的‘nplurals=INTEGER; plural=EXPRESSION;’</em>
+                              </span>
+                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>此选项允许 OmegaT 覆盖 PO 文件头中的规范，并使用所选译文语言的默认值。</em>
+                              </span>
                            </p>
                         </li>
                      </ul>
                   </div>
+                  <p>
+                     <span class="bold">
+                        <strong>XHTML 文件</strong>
+                     </span>
+                  </p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>在此处开始新段落</em></span>：对于分割而言，将 &lt;br&gt; HTML 标签视为段落分隔。
-                           </p>
-                        </li>
-                     </ul>
-                  </div>
-                  <div class="itemizedlist">
-                     <ul class="itemizedlist" style="list-style-type: disc; ">
-                        <li class="listitem">
-                           <p><span class="emphasis"><em>忽略匹配以下正则表达式的文本</em></span>：跳过所有匹配此正则表达式的文本。在标签验证器中它会显示为红色。在原文文本中相匹配的文本会显示为斜体。
-                           </p>
-                        </li>
-                     </ul>
-                  </div>
-                  <div class="itemizedlist">
-                     <ul class="itemizedlist" style="list-style-type: disc; ">
-                        <li class="listitem">
-                           <p><span class="emphasis"><em>不翻译带有以下属性键值对的 meta 标签的 content 属性（以逗号分隔）：</em></span>框中的 meta 标签将不进行翻译。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>翻译以下属性</em>
+                              </span>：所选属性会作为片段出现在编辑器窗口中。</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>不翻译带有以下属性键值对的标签的内容（以逗号分隔）</em></span>：如果标签与键值对列表匹配，则其内容会被忽略。
-                           </p>
-                           <p>能够根据属性的值来将某些标签标记为不可翻译在某些时候会很有用。例如，<code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code>。你可以为标签定义要维持不翻译的键值对。对于上面这个例子，这个字段应当包含：<code class="literal">class=hide, translate=no </code>。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>在此处开始新段落</em>
+                              </span>：对于分割而言，将 &lt;br&gt; HTML 标签视为段落分隔。</p>
                         </li>
                      </ul>
                   </div>
-                  <p><span class="bold"><strong>Microsoft Office Open XML 文件</strong></span></p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>
+                              <span class="emphasis">
+                                 <em>忽略匹配以下正则表达式的文本</em>
+                              </span>：跳过所有匹配此正则表达式的文本。在标签验证器中它会显示为红色。在原文文本中相匹配的文本会显示为斜体。</p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>
+                              <span class="emphasis">
+                                 <em>不翻译带有以下属性键值对的 meta 标签的 content 属性（以逗号分隔）：</em>
+                              </span>框中的 meta 标签将不进行翻译。</p>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>
+                              <span class="emphasis">
+                                 <em>不翻译带有以下属性键值对的标签的内容（以逗号分隔）</em>
+                              </span>：如果标签与键值对列表匹配，则其内容会被忽略。</p>
+                           <p>能够根据属性的值来将某些标签标记为不可翻译在某些时候会很有用。例如，<code class="literal">&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</code>。你可以为标签定义要维持不翻译的键值对。对于上面这个例子，这个字段应当包含：<code class="literal">class=hide, translate=no </code>。</p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>
+                     <span class="bold">
+                        <strong>Microsoft Office Open XML 文件</strong>
+                     </span>
+                  </p>
                   <p>您可以选择要翻译的元素。在翻译中它们将显示为单独的片段。</p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="bold"><strong>Word：</strong></span>不可见说明性文本、批注、脚注、尾注、页脚
-                           </p>
+                           <p>
+                              <span class="bold">
+                                 <strong>Word：</strong>
+                              </span>不可见说明性文本、批注、脚注、尾注、页脚</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="bold"><strong>Excel：</strong></span>批注、工作表名称
-                           </p>
+                           <p>
+                              <span class="bold">
+                                 <strong>Excel：</strong>
+                              </span>批注、工作表名称</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="bold"><strong>Power Point</strong></span>：幻灯片批注、幻灯片母版和幻灯片版式
-                           </p>
+                           <p>
+                              <span class="bold">
+                                 <strong>Power Point</strong>
+                              </span>：幻灯片批注、幻灯片母版和幻灯片版式</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="bold"><strong>全局：</strong></span>数据图表、图表、绘图和艺术字
-                           </p>
+                           <p>
+                              <span class="bold">
+                                 <strong>全局：</strong>
+                              </span>数据图表、图表、绘图和艺术字</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="bold"><strong>其他选项：</strong></span></p>
+                           <p>
+                              <span class="bold">
+                                 <strong>其他选项：</strong>
+                              </span>
+                           </p>
                            <div class="itemizedlist">
                               <ul class="itemizedlist" style="list-style-type: circle; ">
                                  <li class="listitem">
-                                    <p><span class="emphasis"><em>聚合标签</em></span>：如果选中，其间没有可翻译文本的多个标签将被聚合成单个标签。
-                                    </p>
+                                    <p>
+                                       <span class="emphasis">
+                                          <em>聚合标签</em>
+                                       </span>：如果选中，其间没有可翻译文本的多个标签将被聚合成单个标签。</p>
                                  </li>
                                  <li class="listitem">
-                                    <p><span class="emphasis"><em>为所有标签保留空格</em></span>：如果选中，会保留“空白字符”（即空格和换行符），即使在文档中并未定义此选项也是如此。
-                                    </p>
+                                    <p>
+                                       <span class="emphasis">
+                                          <em>为所有标签保留空格</em>
+                                       </span>：如果选中，会保留“空白字符”（即空格和换行符），即使在文档中并未定义此选项也是如此。</p>
                                  </li>
                               </ul>
                            </div>
                         </li>
                      </ul>
                   </div>
-                  <p><span class="bold"><strong>HTML 和 XHTML 文件</strong></span></p>
+                  <p>
+                     <span class="bold">
+                        <strong>HTML 和 XHTML 文件</strong>
+                     </span>
+                  </p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>在 HTML 和 XHTML 文件中新增或重写编码声明</em></span>：译文文件通常需要具有与原文文件（无论是显式定义还是隐含）不同的字符集编码。使用此选项，译者可以指定译文文件是否应当包含编码声明。例如，如果文件过滤器指定 UTF8 作为译文文件的编码方案，则勾选本选项将始终确保此信息包含在已译文件中。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>在 HTML 和 XHTML 文件中新增或重写编码声明</em>
+                              </span>：译文文件通常需要具有与原文文件（无论是显式定义还是隐含）不同的字符集编码。使用此选项，译者可以指定译文文件是否应当包含编码声明。例如，如果文件过滤器指定 UTF8 作为译文文件的编码方案，则勾选本选项将始终确保此信息包含在已译文件中。</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>翻译以下属性</em></span>：所选属性会作为片段出现在编辑器窗口中。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>翻译以下属性</em>
+                              </span>：所选属性会作为片段出现在编辑器窗口中。</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>在此处开始新段落</em></span>：对于分割而言，将 &lt;br&gt; HTML 标签视为段落分隔。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>在此处开始新段落</em>
+                              </span>：对于分割而言，将 &lt;br&gt; HTML 标签视为段落分隔。</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>忽略匹配以下正则表达式的文本</em></span>：跳过所有匹配此正则表达式的文本。在标签验证器中它会显示为红色。在原文文本中相匹配的文本会显示为斜体。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>忽略匹配以下正则表达式的文本</em>
+                              </span>：跳过所有匹配此正则表达式的文本。在标签验证器中它会显示为红色。在原文文本中相匹配的文本会显示为斜体。</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>不翻译带有以下属性键值对的 meta 标签的 content 属性（以逗号分隔）：</em></span>框中的 meta 标签将不进行翻译。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>不翻译带有以下属性键值对的 meta 标签的 content 属性（以逗号分隔）：</em>
+                              </span>框中的 meta 标签将不进行翻译。</p>
                         </li>
                      </ul>
                   </div>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p><span class="emphasis"><em>不翻译带有以下属性键值对的标签的内容（以逗号分隔）</em></span>：如果标签与键值对列表匹配，则其内容会被忽略。
-                           </p>
-                           <p>能够根据属性的值来将某些标签标记为不可翻译在某些时候会很有用。例如，<code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code>。你可以为标签定义要维持不翻译的键值对。对于上面这个例子，这个字段应当包含：<code class="literal">class=hide, translate=no </code>。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>不翻译带有以下属性键值对的标签的内容（以逗号分隔）</em>
+                              </span>：如果标签与键值对列表匹配，则其内容会被忽略。</p>
+                           <p>能够根据属性的值来将某些标签标记为不可翻译在某些时候会很有用。例如，<code class="literal">&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</code>。你可以为标签定义要维持不翻译的键值对。对于上面这个例子，这个字段应当包含：<code class="literal">class=hide, translate=no </code>。</p>
                         </li>
                         <li class="listitem">
-                           <p><span class="emphasis"><em>在译文文档中压缩空白字符</em></span>：在译文文档中，多个连续的空白字符会被转换成单个空白字符。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>在译文文档中压缩空白字符</em>
+                              </span>：在译文文档中，多个连续的空白字符会被转换成单个空白字符。</p>
                         </li>
                         <li class="listitem">
-                           <p><span class="emphasis"><em>在译文文档中删除 HTML 注释</em></span>：注释部分（&lt;!-- 和 --&gt; 之间的部分）不会被复制到译文文档中。
-                           </p>
+                           <p>
+                              <span class="emphasis">
+                                 <em>在译文文档中删除 HTML 注释</em>
+                              </span>：注释部分（&lt;!-- 和 --&gt; 之间的部分）不会被复制到译文文档中。</p>
                         </li>
                      </ul>
                   </div>
-                  <p><span class="bold"><strong>开放文件格式（ODF）文件</strong></span></p>
+                  <p>
+                     <span class="bold">
+                        <strong>开放文件格式（ODF）文件</strong>
+                     </span>
+                  </p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
@@ -1112,41 +1523,41 @@
                         </li>
                      </ul>
                   </div>
-               </div>
-               <div class="section">
+               </section>
+               <section class="section" id="edit.filter.dialog">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="edit.filter.dialog"></a>7.6.2.&nbsp;编辑过滤器对话框
-                           </h4>
+                           <h4 class="title">编辑过滤器对话框</h4>
                         </div>
                      </div>
                   </div>
-                  <p>此对话框让您能够指定要由过滤器处理的原文文件的文件名模式、自定义已译文件的文件名和选择用什么编码来加载原文文件和保存翻译。要修改文件过滤器模式，请直接修改字段名或点击<span class="bold"><strong>编辑</strong></span>。要添加新的文件过滤器模式，点击<span class="bold"><strong>添加</strong></span>。添加模式和编辑特定模式使用相同的对话框。该对话框包含一个专门的译文文件名模式编辑器，您可以使用它来自定义输出文件的名称。
-                  </p>
-                  <div class="section">
+                  <p>此对话框让您能够指定要由过滤器处理的原文文件的文件名模式、自定义已译文件的文件名和选择用什么编码来加载原文文件和保存翻译。要修改文件过滤器模式，请直接修改字段名或点击<span class="bold">
+                        <strong>编辑</strong>
+                     </span>。要添加新的文件过滤器模式，点击<span class="bold">
+                        <strong>添加</strong>
+                     </span>。添加模式和编辑特定模式使用相同的对话框。该对话框包含一个专门的译文文件名模式编辑器，您可以使用它来自定义输出文件的名称。</p>
+                  <section class="section" id="source.filetype.and.filename.pattern">
                      <div class="titlepage">
                         <div>
                            <div>
-                              <h5 class="title"><a name="source.filetype.and.filename.pattern"></a>7.6.2.1.&nbsp;原文文件类型、文件名模式
-                              </h5>
+                              <h5 class="title">原文文件类型、文件名模式</h5>
                            </div>
                         </div>
                      </div>
-                     <p>当 OmegaT 在其原文文件夹中遇到文件时，它会尝试根据文件的扩展名选择过滤器。更确切地说，OmegaT 尝试将每个过滤器的原文文件名模式与文件名进行匹配。例如，<code class="literal">*.xhtml </code>模式将会匹配任何扩展名为 <code class="literal">.xhtml</code> 的文件。如果找到了合适的过滤器，则将文件分配给它进行处理。例如，默认情况下，XHTML 过滤器用于处理扩展名为 .xhtml 的文件。您可以更改或添加由每个文件过滤器处理的文件的文件名模式。原文文件名模式使用的通配符类似于<span class="bold"><strong>搜索</strong></span>中所用的。“*”字符匹配零个或多个字符。“?”字符只匹配一个字符。所有其他字符代表其自身。例如，如果您希望文本过滤器处理 readme 文件（<code class="literal">readme、read.me</code> 和 <code class="literal">readme.txt</code>），那么您应该使用模式 <code class="literal">read*</code>。
-                     </p>
-                  </div>
-                  <div class="section">
+                     <p>当 OmegaT 在其原文文件夹中遇到文件时，它会尝试根据文件的扩展名选择过滤器。更确切地说，OmegaT 尝试将每个过滤器的原文文件名模式与文件名进行匹配。例如，<code class="literal">*.xhtml </code>模式将会匹配任何扩展名为 <code class="literal">.xhtml</code> 的文件。如果找到了合适的过滤器，则将文件分配给它进行处理。例如，默认情况下，XHTML 过滤器用于处理扩展名为 .xhtml 的文件。您可以更改或添加由每个文件过滤器处理的文件的文件名模式。原文文件名模式使用的通配符类似于<span class="bold">
+                           <strong>搜索</strong>
+                        </span>中所用的。“*”字符匹配零个或多个字符。“?”字符只匹配一个字符。所有其他字符代表其自身。例如，如果您希望文本过滤器处理 readme 文件（<code class="literal">readme、read.me</code> 和 <code class="literal">readme.txt</code>），那么您应该使用模式 <code class="literal">read*</code>。</p>
+                  </section>
+                  <section class="section" id="source.and.target.files.encoding">
                      <div class="titlepage">
                         <div>
                            <div>
-                              <h5 class="title"><a name="source.and.target.files.encoding"></a>7.6.2.2.&nbsp;原文文件和译文文件编码
-                              </h5>
+                              <h5 class="title">原文文件和译文文件编码</h5>
                            </div>
                         </div>
                      </div>
-                     <p>仅有少量文件格式指定强制编码。未指定编码的文件格式将使用您为其文件扩展名所设置的编码。例如，默认情况下 <code class="literal">.txt</code> 文件会使用操作系统的默认编码加载。你可以更改每个不同的原文文件名模式的原文编码。译文文件也可以用任意编码编码。默认情况下，已译文件的编码与原文文件编码相同。原文与译文的编码字段使用的是包含所有支持的编码的下拉菜单。&lt;自动&gt;则会让 <span class="application">OmegaT</span> 来选择编码。这是它的工作原理：
-                     </p>
+                     <p>仅有少量文件格式指定强制编码。未指定编码的文件格式将使用您为其文件扩展名所设置的编码。例如，默认情况下 <code class="literal">.txt</code> 文件会使用操作系统的默认编码加载。你可以更改每个不同的原文文件名模式的原文编码。译文文件也可以用任意编码编码。默认情况下，已译文件的编码与原文文件编码相同。原文与译文的编码字段使用的是包含所有支持的编码的下拉菜单。&lt;自动&gt;则会让 <span class="application">OmegaT</span> 来选择编码。这是它的工作原理：</p>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
@@ -1168,379 +1579,415 @@
                            </li>
                         </ul>
                      </div>
-                  </div>
-                  <div class="section">
+                  </section>
+                  <section class="section" id="target.name">
                      <div class="titlepage">
                         <div>
                            <div>
-                              <h5 class="title"><a name="target.name"></a>7.6.2.3.&nbsp;译文文件名
-                              </h5>
+                              <h5 class="title">译文文件名</h5>
                            </div>
                         </div>
                      </div>
-                     <p>有时候你可能希望自动重命名所翻译的文件，例如在文件名后添加语言代码。译文文件名模式使用特殊的语法，因此如果要编辑此字段，你必须点击<span class="bold"><strong>编辑...</strong></span>并使用编辑模式对话框。如果要还原为过滤器的默认配置，点击<span class="bold"><strong>恢复默认值</strong></span>。你还可以在文件过滤器对话框的译文文件名模式字段中直接修改名称。编辑模式对话框提供了以下选项：
-                     </p>
+                     <p>有时候你可能希望自动重命名所翻译的文件，例如在文件名后添加语言代码。译文文件名模式使用特殊的语法，因此如果要编辑此字段，你必须点击<span class="bold">
+                           <strong>编辑...</strong>
+                        </span>并使用编辑模式对话框。如果要还原为过滤器的默认配置，点击<span class="bold">
+                           <strong>恢复默认值</strong>
+                        </span>。你还可以在文件过滤器对话框的译文文件名模式字段中直接修改名称。编辑模式对话框提供了以下选项：</p>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
-                              <p>默认值是 <code class="literal">${filename}</code>——带有扩展名的原文文件的完整文件名：在这种情况下，已译文件的文件名和原文文件的文件名相同。
-                              </p>
+                              <p>默认值是 <code class="literal">${filename}</code>——带有扩展名的原文文件的完整文件名：在这种情况下，已译文件的文件名和原文文件的文件名相同。</p>
                            </li>
                         </ul>
                      </div>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
-                              <p><code class="literal">${nameOnly}</code>——允许您只插入原文文件的主文件名，不包括扩展名。
-                              </p>
+                              <p>
+                                 <code class="literal">${nameOnly}</code>——允许您只插入原文文件的主文件名，不包括扩展名。</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${extension} </code>——原始文件的扩展名
-                              </p>
+                              <p>
+                                 <code class="literal">${extension} </code>——原始文件的扩展名</p>
                            </li>
                         </ul>
                      </div>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
-                              <p><code class="literal">${targetLocale}</code>——译文区域设置代码（格式为“xx_YY”）。
-                              </p>
+                              <p>
+                                 <code class="literal">${targetLocale}</code>——译文区域设置代码（格式为“xx_YY”）。</p>
                            </li>
                         </ul>
                      </div>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
-                              <p><code class="literal">${targetLanguage}</code>——译文语言和国家/地区代码（格式为“XX-YY”）。
-                              </p>
+                              <p>
+                                 <code class="literal">${targetLanguage}</code>——译文语言和国家/地区代码（格式为“XX-YY”）。</p>
                            </li>
                         </ul>
                      </div>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
-                              <p><code class="literal">${targetLanguageCode}</code>——译文语言——仅“XX”
-                              </p>
+                              <p>
+                                 <code class="literal">${targetLanguageCode}</code>——译文语言——仅“XX”</p>
                            </li>
                         </ul>
                      </div>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
-                              <p><code class="literal">${targetCountryCode}</code>——译文的国家/地区——仅“YY”
+                              <p>
+                                 <code class="literal">${targetCountryCode}</code>——译文的国家/地区——仅“YY”</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <code class="literal">${timestamp-????}</code>——生成时的系统日期时间，有各种格式</p>
+                              <p>有关“SimpleDateFormat”格式的示例，请参阅 <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">Oracle 文档</a>
                               </p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${timestamp-????}</code>——生成时的系统日期时间，有各种格式
-                              </p>
-                              <p>有关“SimpleDateFormat”格式的示例，请参阅 <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">Oracle 文档</a></p>
+                              <p>
+                                 <code class="literal">${system-os-name}</code>——电脑所使用的操作系统</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${system-os-name}</code>——电脑所使用的操作系统
-                              </p>
+                              <p>
+                                 <code class="literal">${system-user-name}</code>——系统用户名</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${system-user-name}</code>——系统用户名
-                              </p>
+                              <p>
+                                 <code class="literal">${system-host-name}</code>——系统主机名</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${system-host-name}</code>——系统主机名
-                              </p>
+                              <p>
+                                 <code class="literal">${file-source-encoding}</code>——原文文件编码</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${file-source-encoding}</code>——原文文件编码
-                              </p>
+                              <p>
+                                 <code class="literal">${file-target-encoding}</code>——译文文件编码</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${file-target-encoding}</code>——译文文件编码
-                              </p>
-                           </li>
-                           <li class="listitem">
-                              <p><code class="literal">${targetLocaleLCID}</code>——Microsoft 目标区域设置 
-                              </p>
+                              <p>
+                                 <code class="literal">${targetLocaleLCID}</code>——Microsoft 目标区域设置 </p>
                            </li>
                         </ul>
                      </div>
-                     <p>对于变量 ${nameOnly} 和 ${Extension} 还有其他变体可用。如果文件名存在疑义，可以用如下形式的变量名： <code class="literal">${name only</code><span class="emphasis"><em>-扩展数字</em></span>} 和 <code class="literal">${extension</code>-<span class="emphasis"><em>扩展数字} </em></span>。例如，如果原始文件名为 Document.xx.docx，以下变量相应的结果如下：
-                     </p>
+                     <p>对于变量 ${nameOnly} 和 ${Extension} 还有其他变体可用。如果文件名存在疑义，可以用如下形式的变量名： <code class="literal">${name only</code>
+                        <span class="emphasis">
+                           <em>-扩展数字</em>
+                        </span>} 和 <code class="literal">${extension</code>-<span class="emphasis">
+                           <em>扩展数字} </em>
+                        </span>。例如，如果原始文件名为 Document.xx.docx，以下变量相应的结果如下：</p>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
-                              <p><code class="literal">${nameOnly-0}</code> Document
-                              </p>
+                              <p>
+                                 <code class="literal">${nameOnly-0}</code> Document</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${nameOnly-1}</code> Document.xx
-                              </p>
+                              <p>
+                                 <code class="literal">${nameOnly-1}</code> Document.xx</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
-                              </p>
+                              <p>
+                                 <code class="literal">${nameOnly-2}</code> Document.xx.docx</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${extension-0}</code> docx
-                              </p>
+                              <p>
+                                 <code class="literal">${extension-0}</code> docx</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${extension-1}</code> xx.docx
-                              </p>
+                              <p>
+                                 <code class="literal">${extension-1}</code> xx.docx</p>
                            </li>
                            <li class="listitem">
-                              <p><code class="literal">${extension-2}</code> Document.xx.docx
-                              </p>
+                              <p>
+                                 <code class="literal">${extension-2}</code> Document.xx.docx</p>
                            </li>
                         </ul>
                      </div>
-                  </div>
-               </div>
-            </div>
-            <div class="section">
+                  </section>
+               </section>
+            </section>
+            <section class="section" id="dialogs.preferences.segmentationsetup">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="dialogs.preferences.segmentationsetup"></a>7.7.&nbsp;分割设置
-                        </h3>
+                        <h3 class="title">分割设置</h3>
                      </div>
                   </div>
                </div>
-               <p>翻译记忆工具使用称为片段的文本单元。<span class="application">OmegaT</span> 有两种方式来分割文本：按段落或按语句分割（亦称为“基于规则的分割”）。要选择分割的类型，请从主菜单中选择<span class="guimenu">项目</span> → <span class="guimenuitem">属性...</span>，然后勾选或取消勾选所提供的复选框。段落分割在某些情况下是有利的，例如在高度创造性或讲究文体的翻译中，译者可能想要整个改变语句的顺序；然而，对于大多数项目而言，语句分割是首选的选择，因为它能更好地与之前的翻译相匹配。如果选用了语句分割，你可以通过从主菜单中选择<span class="guimenu">选项</span> → <span class="guimenuitem">片段分割...</span>来设置规则。
-               </p>
+               <p>翻译记忆工具使用称为片段的文本单元。<span class="application">OmegaT</span> 有两种方式来分割文本：按段落或按语句分割（亦称为“基于规则的分割”）。要选择分割的类型，请从主菜单中选择<span class="guimenu">项目</span> → <span class="guimenuitem">属性...</span>，然后勾选或取消勾选所提供的复选框。段落分割在某些情况下是有利的，例如在高度创造性或讲究文体的翻译中，译者可能想要整个改变语句的顺序；然而，对于大多数项目而言，语句分割是首选的选择，因为它能更好地与之前的翻译相匹配。如果选用了语句分割，你可以通过从主菜单中选择<span class="guimenu">选项</span> → <span class="guimenuitem">片段分割...</span>来设置规则。</p>
                <p>许多语言都已经有了可靠的分割规则，因此您很可能并不需要参与编写自己的分割规则。另一方面，此功能在特殊情况下会非常有用，可以针对要翻译的文本调整分割规则来提高工作效率。</p>
-               <p><span class="bold"><strong>警告：</strong></span>由于在更改过滤器选项后文本将以不同的方式进行分割，因此您可能需要从头开始翻译。同时，项目的翻译记忆库中之前的那些有效片段会变为孤立片段。如果在项目开启状态下更改分割规则，则必须重新加载项目才能使更改生效。
-               </p>
-               <p><span class="application">OmegaT</span> 使用以下步骤：
-               </p>
+               <p>
+                  <span class="bold">
+                     <strong>警告：</strong>
+                  </span>由于在更改过滤器选项后文本将以不同的方式进行分割，因此您可能需要从头开始翻译。同时，项目的翻译记忆库中之前的那些有效片段会变为孤立片段。如果在项目开启状态下更改分割规则，则必须重新加载项目才能使更改生效。</p>
+               <p>
+                  <span class="application">OmegaT</span> 使用以下步骤：</p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">结构级分割</span></dt>
+                     <dt>
+                        <span class="term">结构级分割</span>
+                     </dt>
                      <dd>
-                        <p><span class="application">OmegaT</span> 首先解析文本以进行结构级分割。在此过程中，只使用原文文件的结构来生成片段。
-                        </p>
+                        <p>
+                           <span class="application">OmegaT</span> 首先解析文本以进行结构级分割。在此过程中，只使用原文文件的结构来生成片段。</p>
                         <p>例如，文本文件可能会在断行、空行处分割，或者完全不分割。包含格式的文件（ODF 文档、HTML 文档等）则在块级（段落）标签上分割。在 XHTML 或 HTML 文件中的可翻译对象属性可以提取为单独的片段。</p>
                      </dd>
-                     <dt><span class="term">语句级分割</span></dt>
+                     <dt>
+                        <span class="term">语句级分割</span>
+                     </dt>
                      <dd>
-                        <p>在将源文件分割为结构单元之后，<span class="application">OmegaT</span> 将进一步把这些块分割为语句。
-                        </p>
+                        <p>在将源文件分割为结构单元之后，<span class="application">OmegaT</span> 将进一步把这些块分割为语句。</p>
                      </dd>
                   </dl>
                </div>
-               <div class="section">
+               <section class="section" id="segmentation.rules">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="segmentation.rules"></a>7.7.1.&nbsp;片段分割规则
-                           </h4>
+                           <h4 class="title">片段分割规则</h4>
                         </div>
                      </div>
                   </div>
-                  <p>分割过程可描绘如下：光标沿着文本移动，每次一个字符。在每个光标位置处，由<span class="bold"><strong>前</strong></span>与<span class="bold"><strong>后</strong></span>模式组成的规则将按给定顺序应用，检查是否有任何<span class="bold"><strong>前</strong></span>模式对于光标左侧的文本有效同时相应的<span class="bold"><strong>后</strong></span>模式也对光标右侧的文本有效。如果规则匹配，则光标会移动而不插入片段分割符（对于例外规则）或者在当前光标位置创建新的片段分割符（对于断句规则）。
-                  </p>
+                  <p>分割过程可描绘如下：光标沿着文本移动，每次一个字符。在每个光标位置处，由<span class="bold">
+                        <strong>前</strong>
+                     </span>与<span class="bold">
+                        <strong>后</strong>
+                     </span>模式组成的规则将按给定顺序应用，检查是否有任何<span class="bold">
+                        <strong>前</strong>
+                     </span>模式对于光标左侧的文本有效同时相应的<span class="bold">
+                        <strong>后</strong>
+                     </span>模式也对光标右侧的文本有效。如果规则匹配，则光标会移动而不插入片段分割符（对于例外规则）或者在当前光标位置创建新的片段分割符（对于断句规则）。</p>
                   <p>这两种规则的行为如下：</p>
                   <div class="variablelist">
                      <dl class="variablelist">
-                        <dt><span class="term">断句规则</span></dt>
+                        <dt>
+                           <span class="term">断句规则</span>
+                        </dt>
                         <dd>
-                           <p>将原文文本分割为片段。例如，“<span class="emphasis"><em>Did it make sense? I was not sure</em></span>.”应当分割为两个片段。要做到这一点，应该有一个断句规则，针对“?”，同时后面要跟着空格和一个首字母大写的单词。要将一条规则定义为断句规则，请勾选断句/例外复选框。
-                           </p>
+                           <p>将原文文本分割为片段。例如，“<span class="emphasis">
+                                 <em>Did it make sense? I was not sure</em>
+                              </span>.”应当分割为两个片段。要做到这一点，应该有一个断句规则，针对“?”，同时后面要跟着空格和一个首字母大写的单词。要将一条规则定义为断句规则，请勾选断句/例外复选框。</p>
                         </dd>
                      </dl>
                   </div>
                   <div class="variablelist">
                      <dl class="variablelist">
-                        <dt><span class="term">例外规则</span></dt>
+                        <dt>
+                           <span class="term">例外规则</span>
+                        </dt>
                         <dd>
-                           <p>指定不应分开的文本部件。尽管其中有个句点，但<span class="emphasis"><em>“Mrs. Dalloway”</em></span>不应当分割为两个片段，因此应当为后面跟着句点的 Mrs（以及 Mr、Dr、prof 等）制定一条例外规则。要将一条规则定义为例外规则，请取消对断句/离外复选框的勾选。
-                           </p>
+                           <p>指定不应分开的文本部件。尽管其中有个句点，但<span class="emphasis">
+                                 <em>“Mrs. Dalloway”</em>
+                              </span>不应当分割为两个片段，因此应当为后面跟着句点的 Mrs（以及 Mr、Dr、prof 等）制定一条例外规则。要将一条规则定义为例外规则，请取消对断句/离外复选框的勾选。</p>
                         </dd>
                      </dl>
                   </div>
                   <p>对于绝大多数欧洲语言和日语来说，预定义的断句规则应当足够了。从灵活性的角度看，您可以考虑为原文语言定义更多例外规则以获取语意更完整也更连贯的片段。</p>
-               </div>
-               <div class="section">
+               </section>
+               <section class="section" id="rules.priority">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="rules.priority"></a>7.7.2.&nbsp;规则的优先级
-                           </h4>
+                           <h4 class="title">规则的优先级</h4>
                         </div>
                      </div>
                   </div>
                   <p>为匹配的语言模式所定义的所有片段分割规则集都是活动的，并按照规给定的优先级顺序应用，因此为特定语言定义的规则优先级应当高于默认的那些。例如，加拿大法语（FR-CA）的规则优先级应当设置为高于法语（FR.*）的规则，并高于默认（.*）的规则。因此，在翻译加拿大法语时，会首先应用加拿大法语规则（如果存在的话），接着是法语规则，最后为缺省规则。</p>
-               </div>
-               <div class="section">
+               </section>
+               <section class="section" id="creating.new.rule">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="creating.new.rule"></a>7.7.3.&nbsp;创建新规则
-                           </h4>
+                           <h4 class="title">创建新规则</h4>
                         </div>
                      </div>
                   </div>
                   <p>通常应避免对分割规则进行重大更改，尤其在完成初稿后，但进行细微修正，例如添加公认的缩写，可能会有好处。</p>
                   <p>要编辑或扩展现有的规则集，只要在顶部的表格中点击它即可。该规则集内的规则将显示在窗口的下半部分。</p>
-                  <p>若要为新的语言模式创建空的规则集，点击对话框上半部分的<span class="bold"><strong>添加</strong></span>。上方表格的底部会出现一个空行（你可能需要向下滚动才能看到它）。将规则集的名称和语言模式更改为相关语言及其代码。语言模式的语法遵循正则表达式的语法规则。如果你的规则集处理的是语言-国家对，我们建议您使用<span class="bold"><strong>上移</strong></span>按钮将其移到顶部。
-                  </p>
-                  <p>添加<span class="bold"><strong>前模式</strong></span>与<span class="bold"><strong>后模式</strong></span>。要检查其语法和适用性，建议使用能直接查看其效果的工具。参见<a class="link" href="appendix.regexp.html" title="附录&nbsp;D.&nbsp;正则表达式">正则表达式</a>。现有的规则永远是个良好的起点。
-                  </p>
-               </div>
-               <div class="section">
+                  <p>若要为新的语言模式创建空的规则集，点击对话框上半部分的<span class="bold">
+                        <strong>添加</strong>
+                     </span>。上方表格的底部会出现一个空行（你可能需要向下滚动才能看到它）。将规则集的名称和语言模式更改为相关语言及其代码。语言模式的语法遵循正则表达式的语法规则。如果你的规则集处理的是语言-国家对，我们建议您使用<span class="bold">
+                        <strong>上移</strong>
+                     </span>按钮将其移到顶部。</p>
+                  <p>添加<span class="bold">
+                        <strong>前模式</strong>
+                     </span>与<span class="bold">
+                        <strong>后模式</strong>
+                     </span>。要检查其语法和适用性，建议使用能直接查看其效果的工具。参见<a class="link" href="appendix.regexp.html" title="附录 D. 正则表达式">正则表达式</a>。现有的规则永远是个良好的起点。</p>
+               </section>
+               <section class="section" id="few.simple.examples">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="few.simple.examples"></a>7.7.4.&nbsp;一些简单的例子
-                           </h4>
+                           <h4 class="title">一些简单的例子</h4>
                         </div>
                      </div>
                   </div>
                   <div class="informaltable">
-                     <table class="informaltable" border="1">
+                     <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                         <colgroup>
-                           <col align="left">
-                           <col align="center">
-                           <col align="center">
-                           <col align="left">
+                           <col style="text-align: left; " />
+                           <col style="text-align: center; " />
+                           <col style="text-align: center; " />
+                           <col style="text-align: left; " />
                         </colgroup>
                         <thead>
                            <tr>
-                              <th align="left">目的</th>
-                              <th align="center">前模式</th>
-                              <th align="center">后模式</th>
-                              <th align="left">备注</th>
+                              <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">目的</th>
+                              <th style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">前模式</th>
+                              <th style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">后模式</th>
+                              <th style="text-align: left; border-bottom: 1px solid ; ">备注</th>
                            </tr>
                         </thead>
                         <tbody>
                            <tr>
-                              <td align="left">在后面跟着空格、Tab 等的句点（“.”）之后开始新片段。</td>
-                              <td align="center">\.</td>
-                              <td align="center">\s</td>
-                              <td align="left">“\.”代表句点字符。“\s”意味着任意空白字符（空格、Tab、分页符等）</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">在后面跟着空格、Tab 等的句点（“.”）之后开始新片段。</td>
+                              <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\.</td>
+                              <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
+                              <td style="text-align: left; border-bottom: 1px solid ; ">“\.”代表句点字符。“\s”意味着任意空白字符（空格、Tab、分页符等）</td>
                            </tr>
                            <tr>
-                              <td align="left">在 Mr. 后不要进行分割</td>
-                              <td align="center">Mr\.</td>
-                              <td align="center">\s</td>
-                              <td align="left">这是一条例外规则，因此此规则的复选框必须取消勾选。</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">在 Mr. 后不要进行分割</td>
+                              <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">Mr\.</td>
+                              <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
+                              <td style="text-align: left; border-bottom: 1px solid ; ">这是一条例外规则，因此此规则的复选框必须取消勾选。</td>
                            </tr>
                            <tr>
-                              <td align="left">在“。”（日文句号）后进行分割</td>
-                              <td align="center">。</td>
-                              <td align="center">&nbsp;</td>
-                              <td align="left">注意<code class="literal">后模式</code>是空的
-                              </td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">在“。”（日文句号）后进行分割</td>
+                              <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">。</td>
+                              <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
+                              <td style="text-align: left; border-bottom: 1px solid ; ">注意<code class="literal">后模式</code>是空的</td>
                            </tr>
                            <tr>
-                              <td align="left">在 M.、Mr.、Mrs.、和 Ms. 之后不要进行分割</td>
-                              <td align="center">Mr??s??\.</td>
-                              <td align="center">\s</td>
-                              <td align="left">例外规则——参见正则表达式中 ? 的用法</td>
+                              <td style="text-align: left; border-right: 1px solid ; ">在 M.、Mr.、Mrs.、和 Ms. 之后不要进行分割</td>
+                              <td style="text-align: center; border-right: 1px solid ; ">Mr??s??\.</td>
+                              <td style="text-align: center; border-right: 1px solid ; ">\s</td>
+                              <td style="text-align: left; ">例外规则——参见正则表达式中 ? 的用法</td>
                            </tr>
                         </tbody>
                      </table>
                   </div>
-               </div>
-            </div>
-            <div class="section">
+               </section>
+            </section>
+            <section class="section" id="d0e3749">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3743"></a>7.8.&nbsp;自动完成
-                        </h3>
+                        <h3 class="title">自动完成</h3>
                      </div>
                   </div>
                </div>
-               <p>点击<span class="guimenuitem">词汇表...</span>来配置自动完成器词汇表视图。
-               </p>
-               <p>点击<span class="guimenuitem">自动文本...</span>来配置自动文本选项以及添加或移除条目。
-               </p>
-               <p>点击<span class="guimenuitem">字符表...</span>来设置字符表自动完成器选项。
-               </p>
-               <p>在译文片段中可通过快捷键 <span class="bold"><strong>Ctrl+空格</strong></span>来启动自动完成器。
-               </p>
-               <p>如果勾选了<span class="bold"><strong>自动显示相关建议</strong></span>选项，自动完成器会在输入已翻译术语表中条目的首字母或输入标签的“&lt;”后自动启动。
-               </p>
-            </div>
-            <div class="section">
+               <p>点击<span class="guimenuitem">词汇表...</span>来配置自动完成器词汇表视图。</p>
+               <p>点击<span class="guimenuitem">自动文本...</span>来配置自动文本选项以及添加或移除条目。</p>
+               <p>点击<span class="guimenuitem">字符表...</span>来设置字符表自动完成器选项。</p>
+               <p>在译文片段中可通过快捷键 <span class="bold">
+                     <strong>Ctrl+空格</strong>
+                  </span>来启动自动完成器。</p>
+               <p>如果勾选了<span class="bold">
+                     <strong>自动显示相关建议</strong>
+                  </span>选项，自动完成器会在输入已翻译术语表中条目的首字母或输入标签的“&lt;”后自动启动。</p>
+            </section>
+            <section class="section" id="d0e3777">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3771"></a>7.9.&nbsp;拼写检查器
-                        </h3>
+                        <h3 class="title">拼写检查器</h3>
                      </div>
                   </div>
                </div>
-               <p>OmegaT 有一个内置的拼写检查器，它基于 Apache OpenOffice、LibreOffice、Firefox 和 Thunderbird 中使用的<a class="link" href="appendix.spellchecker.html" title="附录&nbsp;C.&nbsp;拼写检查">拼写检查器</a>。因此，它可以使用大量可用于这些程序的免费拼写词典。
-               </p>
-            </div>
-            <div class="section">
+               <p>OmegaT 有一个内置的拼写检查器，它基于 Apache OpenOffice、LibreOffice、Firefox 和 Thunderbird 中使用的<a class="link" href="appendix.spellchecker.html" title="附录 C. 拼写检查">拼写检查器</a>。因此，它可以使用大量可用于这些程序的免费拼写词典。</p>
+            </section>
+            <section class="section" id="d0e3785">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3779"></a>7.10.&nbsp;LanguageTool 插件
-                        </h3>
+                        <h3 class="title">LanguageTool 插件</h3>
                      </div>
                   </div>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">服务类型</span></dt>
+                     <dt>
+                        <span class="term">服务类型</span>
+                     </dt>
                      <dd>
                         <p>选择语言检查器的位置。</p>
                         <p>使用本地电脑上与 OmegaT 提供的语言检查器之外的语言检查器让你能够个性化验证规则。</p>
                      </dd>
-                     <dt><span class="term">规则</span></dt>
+                     <dt>
+                        <span class="term">规则</span>
+                     </dt>
                      <dd>
                         <p>是否要勾选这些规则取决于它们与您要翻译的文本的类型是否相关。</p>
                      </dd>
                   </dl>
                </div>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="dialogs.preferences.externalsearch">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="dialogs.preferences.externalsearch"></a>7.11.&nbsp;外部搜索
-                        </h3>
+                        <h3 class="title">外部搜索</h3>
                      </div>
                   </div>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">允许每个项目自有命令</span></dt>
+                     <dt>
+                        <span class="term">允许每个项目自有命令</span>
+                     </dt>
                      <dd>
-                        <p>默认情况下，OmegaT 不会执行项目专有设置（<code class="filename">omegat</code> 文件夹中的 <code class="filename">finder.xml</code> 文件）中所指定的命令，因为它们可能会对机器的安全性产生重大影响。
-                        </p>
+                        <p>默认情况下，OmegaT 不会执行项目专有设置（<code class="filename">omegat</code> 文件夹中的 <code class="filename">finder.xml</code> 文件）中所指定的命令，因为它们可能会对机器的安全性产生重大影响。</p>
                         <p>仅当你明白自己正在做什么且仅针对来自可信来源的项目时才激活此选项。</p>
                      </dd>
-                     <dt><span class="term">上下文菜单优先级：</span></dt>
+                     <dt>
+                        <span class="term">上下文菜单优先级：</span>
+                     </dt>
                      <dd>
                         <p>使您可以更改上下文菜单（右键单击菜单）中的命令的顺序。100 左右的值会让命令显示在顶部，而 900 左右的值会它们显示在底部。</p>
                         <p>你需要重新启动 OmegaT 才能使此更改生效。</p>
                      </dd>
                   </dl>
                </div>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="dialogs.preferences.editor">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="dialogs.preferences.editor"></a>7.12.&nbsp;编辑器
-                        </h3>
+                        <h3 class="title">编辑器</h3>
                      </div>
                   </div>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><a name="dialogs.preferences.editor.insertthesourcetext"></a><span class="term">插入原文文本</span></dt>
+                     <dt id="dialogs.preferences.editor.insertthesourcetext">
+                        <span class="term">插入原文文本</span>
+                     </dt>
                      <dd>
                         <p>你可以将原文文本自动插入编辑区。这对于包含许多商标或其他必须保持不变的专有名词的文本很有用。</p>
                      </dd>
-                     <dt><span class="term">保持片段为空</span></dt>
+                     <dt>
+                        <span class="term">保持片段为空</span>
+                     </dt>
                      <dd>
-                        <p>OmegaT 将把编辑字段留空。该选项允许您直接输入翻译而无需删除原文文本，因此省掉了两次按键（<span class="bold"><strong>Ctrl+A</strong></span> 和 <span class="bold"><strong>Del</strong></span>）。现在还允许译文为空。它们在编辑器中显示为&lt;空&gt;。要创建空译文，在片段中点击右键并选择“<span class="bold"><strong>设置为空译文</strong></span>”。在同一个弹出菜单中的<span class="bold"><strong>移除译文</strong></span>还可以用来删除当前片段的现有译文。通过清除译文片段并按下<span class="guibutton">回车</span>可以实现相同的效果。
-                        </p>
+                        <p>OmegaT 将把编辑字段留空。该选项允许您直接输入翻译而无需删除原文文本，因此省掉了两次按键（<span class="bold">
+                              <strong>Ctrl+A</strong>
+                           </span> 和 <span class="bold">
+                              <strong>Del</strong>
+                           </span>）。现在还允许译文为空。它们在编辑器中显示为&lt;空&gt;。要创建空译文，在片段中点击右键并选择“<span class="bold">
+                              <strong>设置为空译文</strong>
+                           </span>”。在同一个弹出菜单中的<span class="bold">
+                              <strong>移除译文</strong>
+                           </span>还可以用来删除当前片段的现有译文。通过清除译文片段并按下<span class="guibutton">回车</span>可以实现相同的效果。</p>
                      </dd>
-                     <dt><span class="term">插入最佳模糊匹配</span></dt>
+                     <dt>
+                        <span class="term">插入最佳模糊匹配</span>
+                     </dt>
                      <dd>
                         <p>OmegaT 将插入与当前原文最相似的字符串的译文，前提是相似度高于在此对话框中设置的阈值。可以使用前缀（默认为空）来标记通过模糊匹配插入的译文。如果添加了前缀（例如[模糊]），您可以稍后跟踪这些翻译检查它们是否正确。</p>
                      </dd>
@@ -1549,7 +1996,9 @@
                <p>对话框窗口下半部分的复选框用于以下目的：</p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">插入模糊匹配时尝试转换数字</span></dt>
+                     <dt>
+                        <span class="term">插入模糊匹配时尝试转换数字</span>
+                     </dt>
                      <dd>
                         <p>如果勾选了此选项，当手动或自动插入模糊匹配时，OmegaT 会尝试根据原文内容转换模糊匹配中的数字。这里有若干限制：</p>
                         <div class="itemizedlist">
@@ -1570,7 +2019,9 @@
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><a name="dialogs.preferences.editor.allowtranslationtobeequaltosource"></a><span class="term">允许译文与原文相同</span></dt>
+                     <dt id="dialogs.preferences.editor.allowtranslationtobeequaltosource">
+                        <span class="term">允许译文与原文相同</span>
+                     </dt>
                      <dd>
                         <p>要翻译的文档也许包括了一些在译文文档中也要保持原封不动的商标、姓名或其他专有名词。对于只包含此类不可变文本的片段可以采取两种策略。</p>
                         <p>您可以决定完全不翻译这类片段。OmegaT 会将这些片段报告为未译。这是默认的情况。另一种方法是输入与原文相同的译文。OmegaT 可以识别出您已经翻译过了。要允许这一点，请勾选此选项。</p>
@@ -1579,43 +2030,47 @@
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">将片段导出到文本文件</span></dt>
+                     <dt>
+                        <span class="term">将片段导出到文本文件</span>
+                     </dt>
                      <dd>
-                        <p>文本导出功能会从当前 <span class="application">OmegaT</span> 项目导出数据到纯文本文件。当打开片段时其数据会被导出。文件会出现在 OmegaT 用户文件文件夹中的 /script 子文件夹中，包括有：
-                        </p>
+                        <p>文本导出功能会从当前 <span class="application">OmegaT</span> 项目导出数据到纯文本文件。当打开片段时其数据会被导出。文件会出现在 OmegaT 用户文件文件夹中的 /script 子文件夹中，包括有：</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
-                                 <p>当前片段的原文内容（<code class="filename">source.txt</code>）。
-                                 </p>
+                                 <p>当前片段的原文内容（<code class="filename">source.txt</code>）。</p>
                               </li>
                               <li class="listitem">
-                                 <p>当前片段的译文内容（<code class="filename">target.txt</code>）。
-                                 </p>
+                                 <p>当前片段的译文内容（<code class="filename">target.txt</code>）。</p>
                               </li>
                               <li class="listitem">
-                                 <p>用户按下 <span class="keycap"><strong>Ctrl+Shift+C</strong></span> 或选择了<span class="guimenuitem">编辑 &gt;导出所选部分</span>的时候被高亮选定的文本（<code class="filename">selection.txt</code>）。
-                                 </p>
+                                 <p>用户按下 <span class="keycap">
+                                       <strong>Ctrl+Shift+C</strong>
+                                    </span> 或选择了<span class="guimenuitem">编辑 &gt;导出所选部分</span>的时候被高亮选定的文本（<code class="filename">selection.txt</code>）。</p>
                               </li>
                            </ul>
                         </div>
-                        <p>文件的内容在打开新片段（source.txt 和 target.txt）或导出新的所选部分（selection.txt）时会被覆盖。这些文件是无格式的纯文本文件。整个过程可以通过基于 Tck/Tcl 的脚本来操纵控制。关于细节、示例和建议，请参阅<a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">使用 OmegaT 的文本导出功能</a>。
-                        </p>
+                        <p>文件的内容在打开新片段（source.txt 和 target.txt）或导出新的所选部分（selection.txt）时会被覆盖。这些文件是无格式的纯文本文件。整个过程可以通过基于 Tck/Tcl 的脚本来操纵控制。关于细节、示例和建议，请参阅<a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">使用 OmegaT 的文本导出功能</a>。</p>
                      </dd>
                   </dl>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">转到下一个未译片段的功能在有替代译文的片段处也会停下</span></dt>
+                     <dt>
+                        <span class="term">转到下一个未译片段的功能在有多重译文的片段处也会停下</span>
+                     </dt>
                      <dd>
-                        <p>如果我们想要避免在具有多个可能译文内容的片段上出现错译，选中此复选框会让<span class="bold"><strong>转到下一个未译片段</strong></span>在下一个此类片段处停下，无论其是否已被翻译。
-                        </p>
+                        <p>如果我们想要避免在具有多个可能译文内容的片段上出现错译，选中此复选框会让<span class="bold">
+                              <strong>转到下一个未译片段</strong>
+                           </span>在下一个此类片段处停下，无论其是否已被翻译。</p>
                      </dd>
                   </dl>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">允许标签编辑</span></dt>
+                     <dt>
+                        <span class="term">允许标签编辑</span>
+                     </dt>
                      <dd>
                         <p>取消勾选此选项可防止在编辑期间损坏标签（即，部分删除）。在这种情况下，依然可以通过使用 Ctrl + Backspace / Delete 或完整选择（Ctrl + Shift +左/右）标签然后删除它（Delete 或 Ctrl + X）来整个删除标签。</p>
                      </dd>
@@ -1623,174 +2078,202 @@
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">离开片段时验证标签</span></dt>
+                     <dt>
+                        <span class="term">离开片段时验证标签</span>
+                     </dt>
                      <dd>
                         <p>勾选此选项后，在每次离开片段时，会提醒原文和译文片段之间的标签差异。</p>
                      </dd>
                   </dl>
                </div>
-               <div class="variablelist"><a name="dialogs.preferences.editor.saveautopopulatedstatus"></a><dl class="variablelist">
-                     <dt><span class="term">保存自动填充状态</span></dt>
+               <div class="variablelist" id="dialogs.preferences.editor.saveautopopulatedstatus">
+                  <dl class="variablelist">
+                     <dt>
+                        <span class="term">保存自动填充状态</span>
+                     </dt>
                      <dd>
-                        <p>勾选此选项可在 <code class="filename">project_save.tmx</code>文件中记录片段已被自动填充的信息，这样在编辑器中就可以用特定的颜色显示出来（如果在视图菜单中已勾选“标记自动填充片段”选项）
-                        </p>
+                        <p>勾选此选项可在 <code class="filename">project_save.tmx</code>文件中记录片段已被自动填充的信息，这样在编辑器中就可以用特定的颜色显示出来（如果在视图菜单中已勾选“标记自动填充片段”选项）</p>
                      </dd>
                   </dl>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">初始载入片段数量</span></dt>
+                     <dt>
+                        <span class="term">初始载入片段数量</span>
+                     </dt>
                      <dd>
                         <p>默认情况下，编辑器一开始会显示 2,000 个片段，并在上下滚动时渐进式地加载更多片段。如果您的机器很强力，并且/或者如果您不喜欢渐进式加载过程中滚动条的行为，可以提高此数字。</p>
                      </dd>
                   </dl>
                </div>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="dialogs.preferences.tagprocessing">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="dialogs.preferences.tagprocessing"></a>7.13.&nbsp;标签处理
-                        </h3>
+                        <h3 class="title">标签处理</h3>
                      </div>
                   </div>
                </div>
                <p>当翻译软件相关的文件时，如果文件过滤器并不是开箱即用状态，则可以配置标签检验器选项来检查编程变量（%...）或占位符（{0}）。PO 过滤器已经可以处理 %..，而 Java™ 资源包过滤器已经能处理 {#} 标签，因此你只需要对其他文件类型进行此操作。</p>
                <p>你还可以定义和标签验证相关的各种选项，并可以定义自定义标签。</p>
-               <p>例如，如果你在<span class="guilabel">表示自定义标签的正则表达式</span>字段中输入了 <strong class="userinput"><code>\d+</code></strong>，所有数字都会被视为标签，让你可以检查确认数字在翻译过程中未被错误地更改。
-               </p>
-               <p>类似地，输入 <strong class="userinput"><code>&lt;.*?&gt;</code></strong> 可以确保原文文本中的 HTML 标记（例）在翻译过程中维持原封不动。
-               </p>
-               <p>注：可以通过写入 <strong class="userinput"><code>(&lt;.*?&gt;)|(\d+)</code></strong> 来组合这两个指令。
-               </p>
-            </div>
-            <div class="section">
+               <p>例如，如果你在<span class="guilabel">表示自定义标签的正则表达式</span>字段中输入了 <strong class="userinput">
+                     <code>\d+</code>
+                  </strong>，所有数字都会被视为标签，让你可以检查确认数字在翻译过程中未被错误地更改。</p>
+               <p>类似地，输入 <strong class="userinput">
+                     <code>&lt;.*?&gt;</code>
+                  </strong> 可以确保原文文本中的 HTML 标记（例）在翻译过程中维持原封不动。</p>
+               <p>注：可以通过写入 <strong class="userinput">
+                     <code>(&lt;.*?&gt;)|(\d+)</code>
+                  </strong> 来组合这两个指令。</p>
+            </section>
+            <section class="section" id="d0e4000">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3994"></a>7.14.&nbsp;团队
-                        </h3>
+                        <h3 class="title">团队</h3>
                      </div>
                   </div>
                </div>
                <p>在这里输入您的名字，它将附加到您翻译的所有片段中。</p>
-               <div class="section">
+               <section class="section" id="d0e4005">
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="d0e3999"></a>7.14.1.&nbsp;存储库凭据
-                           </h4>
+                           <h4 class="title">存储库凭据</h4>
                         </div>
                      </div>
                   </div>
                   <p>列出了所有在 OmegaT 中存储了登录详细信息的项目。如果您希望 OmegaT 在每次访问此项目时要求输入登录名和密码，请从此列表中删除该项目。</p>
-               </div>
-            </div>
-            <div class="section">
+               </section>
+            </section>
+            <section class="section" id="d0e4010">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4004"></a>7.15.&nbsp;翻译记忆库匹配
-                        </h3>
+                        <h3 class="title">翻译记忆库匹配</h3>
                      </div>
                   </div>
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">模糊匹配排序依据：</span></dt>
+                     <dt>
+                        <span class="term">模糊匹配排序依据：</span>
+                     </dt>
                      <dd>
-                        <p>默认情况下，显示在<span class="guilabel">模糊匹配</span>窗格中的最接近匹配是用词干分析来确定的。
-                        </p>
-                        <p>要得到字面匹配更接近于 100% 的结果，选择<span class="guilabel">全文，包括标签和数字</span>选项。
-                        </p>
+                        <p>默认情况下，显示在<span class="guilabel">模糊匹配</span>窗格中的最接近匹配是用词干分析来确定的。</p>
+                        <p>要得到字面匹配更接近于 100% 的结果，选择<span class="guilabel">全文，包括标签和数字</span>选项。</p>
                      </dd>
-                     <dt><span class="term">显示非 OmegaT 的 TMX 中的标签</span></dt>
+                     <dt>
+                        <span class="term">显示非 OmegaT 的 TMX 中的标签</span>
+                     </dt>
                      <dd>
                         <p>决定如何处理外来 TMX 文件（即并非由 OmegaT 所生成的）中的标签。</p>
                      </dd>
-                     <dt><span class="term">匹配显示模板</span></dt>
+                     <dt>
+                        <span class="term">匹配显示模板</span>
+                     </dt>
                      <dd>
                         <p>通过使用预配置变量来更改模糊匹配的显示方式：</p>
-                        <div class="table"><a name="d0e4034"></a><p class="title"><b>表&nbsp;3.1.&nbsp;匹配窗格设置</b></p>
+                        <div class="table" id="d0e4040">
+                           <div class="table-title">表 1. 匹配窗格设置</div>
                            <div class="table-contents">
-                              <table class="table" summary="匹配窗格设置" border="1">
+                              <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                                  <colgroup>
-                                    <col align="left">
-                                    <col align="left">
+                                    <col style="text-align: left; " />
+                                    <col style="text-align: left; " />
                                  </colgroup>
                                  <tbody>
                                     <tr>
-                                       <td align="left"><code class="literal">${id}</code></td>
-                                       <td align="left">匹配的序号，从 1 到 5 的</td>
-                                    </tr>
-                                    <tr>
-                                       <td align="left"><code class="literal">${sourceText}</code></td>
-                                       <td align="left">匹配的原文文本</td>
-                                    </tr>
-                                    <tr>
-                                       <td align="left"><code class="literal">${targetText}</code></td>
-                                       <td align="left">匹配的译文文本</td>
-                                    </tr>
-                                    <tr>
-                                       <td align="left"><code class="literal">${diff}</code></td>
-                                       <td align="left">显示原文和匹配之间差异的字符串。<span class="emphasis"><em>提示：</em></span>如果你正在翻译的文本已更新，请使用它。
+                                       <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                          <code class="literal">${id}</code>
                                        </td>
+                                       <td style="text-align: left; border-bottom: 1px solid ; ">匹配的序号，从 1 到 5 的</td>
                                     </tr>
                                     <tr>
-                                       <td align="left"><code class="literal">${diffReversed}</code></td>
-                                       <td align="left">与 ${diff} 相同，但差异（要插入和删除的内容）是反向的。</td>
-                                    </tr>
-                                    <tr>
-                                       <td align="left"><code class="literal">${score}</code></td>
-                                       <td align="left">使用<span class="guilabel">词干分析，不考虑标签和数字</span>选项计算得到的百分比。
+                                       <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                          <code class="literal">${sourceText}</code>
                                        </td>
+                                       <td style="text-align: left; border-bottom: 1px solid ; ">匹配的原文文本</td>
                                     </tr>
                                     <tr>
-                                       <td align="left"><code class="literal">${noStemScore}</code></td>
-                                       <td align="left">使用<span class="guilabel">不考虑标签和数字</span>选项计算得到的百分比。
+                                       <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                          <code class="literal">${targetText}</code>
                                        </td>
+                                       <td style="text-align: left; border-bottom: 1px solid ; ">匹配的译文文本</td>
                                     </tr>
                                     <tr>
-                                       <td align="left"><code class="literal">${adjustedScore}</code></td>
-                                       <td align="left">使用<span class="guilabel">全文，包括标签和数字</span>选项计算得到的百分比。
+                                       <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                          <code class="literal">${diff}</code>
                                        </td>
+                                       <td style="text-align: left; border-bottom: 1px solid ; ">显示原文和匹配之间差异的字符串。<span class="emphasis">
+                                             <em>提示：</em>
+                                          </span>如果你正在翻译的文本已更新，请使用它。</td>
                                     </tr>
                                     <tr>
-                                       <td align="left"><code class="literal">${fuzzyFlag}</code></td>
-                                       <td align="left">表示该匹配为模糊匹配（目前仅适用于来自带 #fuzzy 标记的 PO 文件的翻译）</td>
+                                       <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                          <code class="literal">${diffReversed}</code>
+                                       </td>
+                                       <td style="text-align: left; border-bottom: 1px solid ; ">与 ${diff} 相同，但差异（要插入和删除的内容）是反向的。</td>
+                                    </tr>
+                                    <tr>
+                                       <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                          <code class="literal">${score}</code>
+                                       </td>
+                                       <td style="text-align: left; border-bottom: 1px solid ; ">使用<span class="guilabel">词干分析，不考虑标签和数字</span>选项计算得到的百分比。</td>
+                                    </tr>
+                                    <tr>
+                                       <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                          <code class="literal">${noStemScore}</code>
+                                       </td>
+                                       <td style="text-align: left; border-bottom: 1px solid ; ">使用<span class="guilabel">不考虑标签和数字</span>选项计算得到的百分比。</td>
+                                    </tr>
+                                    <tr>
+                                       <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                          <code class="literal">${adjustedScore}</code>
+                                       </td>
+                                       <td style="text-align: left; border-bottom: 1px solid ; ">使用<span class="guilabel">全文，包括标签和数字</span>选项计算得到的百分比。</td>
+                                    </tr>
+                                    <tr>
+                                       <td style="text-align: left; border-right: 1px solid ; ">
+                                          <code class="literal">${fuzzyFlag}</code>
+                                       </td>
+                                       <td style="text-align: left; ">表示该匹配为模糊匹配（目前仅适用于来自带 #fuzzy 标记的 PO 文件的翻译）</td>
                                     </tr>
                                  </tbody>
                               </table>
                            </div>
-                        </div><br class="table-break"></dd>
+                        </div>
+                        <br class="table-break" />
+                     </dd>
                   </dl>
                </div>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="d0e4113">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4107"></a>7.16.&nbsp;视图
-                        </h3>
+                        <h3 class="title">视图</h3>
                      </div>
                   </div>
                </div>
                <p>包含以不同方式显示文本和修订信息的选项。</p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">标记非独特片段时包含首个非独特片段</span></dt>
+                     <dt>
+                        <span class="term">标记非独特片段时包含首个非独特片段</span>
+                     </dt>
                      <dd>
                         <p>勾选此选项可以用灰度显示所有非独特片段（重复）。取消勾选此选项后，除了首次出现外的所有非独特片段都会以灰度显示。</p>
                      </dd>
                   </dl>
                </div>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="dialogs.preferences.savingandoutput">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="dialogs.preferences.savingandoutput"></a>7.17.&nbsp;保存和输出
-                        </h3>
+                        <h3 class="title">保存和输出</h3>
                      </div>
                   </div>
                </div>
@@ -1808,84 +2291,88 @@
                </div>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term">外部后处理命令</span></dt>
+                     <dt>
+                        <span class="term">外部后处理命令</span>
+                     </dt>
                      <dd>
-                        <p>指定在<span class="guimenuitem">创建译文文档</span>命令之后需要执行的命令。
-                        </p>
+                        <p>指定在<span class="guimenuitem">创建译文文档</span>命令之后需要执行的命令。</p>
                         <p>使用此功能的示例之一是自动将译文文档发送到客户的 FTP 服务器上。</p>
                      </dd>
-                     <dt><span class="term">同时允许每个项目自有外部命令</span></dt>
+                     <dt>
+                        <span class="term">同时允许每个项目自有外部命令</span>
+                     </dt>
                      <dd>
-                        <p>默认情况下，OmegaT 不会执行项目专有设置（<code class="filename">omegat.project</code> 文件）中所指定的命令，因为它们可能会对机器的安全性产生重大影响。
-                        </p>
+                        <p>默认情况下，OmegaT 不会执行项目专有设置（<code class="filename">omegat.project</code> 文件）中所指定的命令，因为它们可能会对机器的安全性产生重大影响。</p>
                         <p>仅当你明白自己正在做什么且仅针对来自可信来源的项目时才激活此选项。</p>
                      </dd>
                   </dl>
                </div>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="d0e4162">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4156"></a>7.18.&nbsp;代理服务器登录
-                        </h3>
+                        <h3 class="title">代理服务器登录</h3>
                      </div>
                   </div>
                </div>
                <p>如果 OmegaT 需要使用要身份验证的代理服务器来访问因特网，请在此处输入代理服务器管理员所提供的详细信息。</p>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="d0e4167">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4161"></a>7.19.&nbsp;安全存储
-                        </h3>
+                        <h3 class="title">安全存储</h3>
                      </div>
                   </div>
                </div>
                <p>您可以在此处重新定义用于保护登录详细信息和机器翻译服务访问密钥的主密码。在创建新密码之前，请务必记下所有这些详细信息，因为它们都将被删除，需要重新输入。</p>
-            </div>
-            <div class="section">
+            </section>
+            <section class="section" id="d0e4172">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4166"></a>7.20.&nbsp;插件
-                        </h3>
+                        <h3 class="title">插件</h3>
                      </div>
                   </div>
                </div>
-               <p>可以访问可用插件列表。插件安装在 OmegaT 安装文件夹或平台特定的 OmegaT 用户首选项文件夹下的 <code class="filename">/plugins</code> 文件夹中。
-               </p>
-            </div>
-            <div class="section">
+               <p>可以访问可用插件列表。插件安装在 OmegaT 安装文件夹或平台特定的 OmegaT 用户首选项文件夹下的 <code class="filename">/plugins</code> 文件夹中。</p>
+            </section>
+            <section class="section" id="d0e4180">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4174"></a>7.21.&nbsp;更新
-                        </h3>
+                        <h3 class="title">更新</h3>
                      </div>
                   </div>
                </div>
-               <p>启用 <span class="application">OmegaT</span> 更新的自动通知。
-               </p>
-            </div>
+               <p>启用 <span class="application">OmegaT</span> 更新的自动通知。</p>
+            </section>
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="menus.html">上一页</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="panes.html">下一页</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">菜单 </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">起始页</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> 窗格</td>
+               </tr>
+            </table>
          </div>
-      </div>
-      <div class="navfooter">
-         <hr>
-         <table width="100%" summary="Navigation footer">
-            <tr>
-               <td width="40%" align="left"><a accesskey="p" href="menus.html">上一页</a>&nbsp;
-               </td>
-               <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="panes.html">下一页</a></td>
-            </tr>
-            <tr>
-               <td width="40%" align="left" valign="top">第&nbsp;2&nbsp;章&nbsp;菜单&nbsp;</td>
-               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;第&nbsp;4&nbsp;章&nbsp;窗格</td>
-            </tr>
-         </table>
-      </div>
-   </body>
-</html>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

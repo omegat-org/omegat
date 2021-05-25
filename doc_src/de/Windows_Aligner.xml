@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title>Aligner</title>
+
+  <para>Beim Ausrichten wird aus bereits übersetzten einsprachigen Dokumenten ein zweisprachiges Translation Memory erstellt.</para>
+
+  <para>Um auf dieses Fenster zuzugreifen, wählen Sie <menuchoice> <guimenuitem>Extra</guimenuitem> <guimenuitem>Dateien ausrichten...</guimenuitem> </menuchoice> aus.</para>
+
+  <section>
+    <title>Schritt 1: Ausrichtungsparameter anpassen</title>
+
+    <para>Wenn die Ausrichtung verbesserungswürdig ist, versuchen Sie, die Parameter zu ändern. In den meisten Fällen gilt: Je niedriger die <guilabel>Durchschnittsbewertung</guilabel>, desto besser die Ausrichtung.</para>
+
+    <para>Im <guilabel>Heapwise</guilabel>-Vergleichsmodus werden die Texte global ausgewertet. Im <guilabel>Parsewise</guilabel>-Vergleichsmodus werden die Texte segmentweise ausgewertet. Die Option erscheint nur, wenn eine solche Auswahl möglich ist.</para>
+
+    <para>Verwenden Sie den <guilabel>ID</guilabel>-Vergleichsmodus, um &quot;Schlüssel=Wert&quot;-Texte auszurichten. Dies funktioniert auch dann, wenn die Schlüssel in den beiden Dateien nicht in der gleichen Reihenfolge sind und/oder wenn die beiden Dateien nicht die gleiche Menge an Informationen enthalten. Diese Option erscheint nur, wenn die beiden ausgewählten Dateien als &quot;Schlüssel=Wert&quot;-Dateien erkannt werden.</para>
+
+    <para>Die Algorithmen <guilabel>Viterbi</guilabel> und <guilabel>Forward-Backward</guilabel> sind zwei unterschiedliche Kalkulationsmethoden. Wählen Sie den Algorithmus, der die besten Ergebnisse liefert.</para>
+
+    <para>Klicken Sie auf <guibutton>Weiter</guibutton>, um den nächsten Schritt aufzurufen.</para>
+  </section>
+
+  <section>
+    <title>Schritt 2: Manuelle Korrekturen vornehmen</title>
+
+    <para>Nach dem automatischen Prozess erfordert das Ausrichten von zwei Dateien in der Regel manuelle Korrekturen.</para>
+
+    <para>Die Übersetzungseinheiten befinden sich in den Zellen der beiden letzten Spalten.</para>
+
+    <para>So richten Sie zwei Segmente auf der gleichen Zeile aus:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Wählen Sie das erste Segment aus.</para>
+      </listitem>
+
+      <listitem>
+        <para>Drücken Sie die Leertaste (Tastaturkurzbefehl für <menuchoice> <guimenuitem>Bearbeiten</guimenuitem> <guimenuitem>Punktuelles Ausrichten starten</guimenuitem> </menuchoice>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Klicken Sie in der anderen Spalte auf die Übersetzung, die zum ersten Segment gehört.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Wählen Sie nach mehreren dieser Vorgänge <menuchoice> <guimenuitem>Bearbeiten</guimenuitem> <guimenuitem>Ausstehende neu ausrichten</guimenuitem> </menuchoice> aus, um die Ausrichtung der anderen Segmente zu aktualisieren.</para>
+
+    <para>Um die Position einzelner oder mehrerer Segmente zu ändern, wählen Sie es/sie aus und drücken Sie <userinput>U</userinput> (<guilabel>Hochschieben</guilabel>) oder <userinput>D</userinput> (<guilabel>Runterschieben</guilabel>).</para>
+
+    <para>Es werden nur Zeilen mit aktiviertem <guilabel>Behalten</guilabel>-Kontrollkästchen bei der Erstellung des Translation Memory einbezogen.</para>
+
+    <para>Wenn die beiden Spalten ausreichend ausgerichtet sind, klicken Sie auf <guibutton>TMX speichern...</guibutton>, um das daraus resultierende Translation Memory zu erstellen.</para>
+  </section>
+</section>

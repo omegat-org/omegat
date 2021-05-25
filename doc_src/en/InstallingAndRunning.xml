@@ -4,11 +4,11 @@
 <chapter id="chapter.installing.and.running">
   <title>Installing and running <application>OmegaT</application></title>
 
-  <section>
-    <title id="Windows.users">Windows Users</title>
+  <section id="Windows.users">
+    <title>Windows Users</title>
 
-    <section>
-      <title id="which.package.to.download.windows">Downloading the
+    <section id="which.package.to.download.windows">
+      <title>Downloading the
       package</title>
 
       <para>Do you have a Java implementation compatible with Oracle's Java 8
@@ -365,8 +365,8 @@
     <para>This information applies to systems such as Solaris SPARC/x86/x64,
     Linux x64/PowerPC, Windows x64.</para>
 
-    <section>
-      <title id="which.package.to.download.other">Downloading the right
+    <section id="which.package.to.download.other">
+      <title>Downloading the right
       package</title>
 
       <para><application>OmegaT</application> is available bundled with a
@@ -488,7 +488,7 @@
   </section>
 
   <section id="commandline.launching">
-    <title id="commandline.launching.title">Starting OmegaT from the command
+    <title>Starting OmegaT from the command
     line</title>
 
     <para>Normally, it is not necessary to start

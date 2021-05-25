@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="howto.managerighttoleft">
+  <title>Gerir os idiomas da direita para a esquerda</title>
+
+   <para>A justificação dos segmentos fonte e alvo depende dos idiomas do projecto. Como pré-definição, o alinhamento à esquerda é utilizado para os idiomas da esquerda para a direita (LTR) e o alinhamento à direita para os idiomas da direita para a esquerda (RTL). Pode alternar entre diferentes modos de visualização premindo <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> (esta é a letra O e não o algarismo zero). O atalho <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> tem três estados:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>justificação pré-definida, ou seja, tal como definida pelo idioma</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>justificação à esquerda</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>justificação à direita</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Utilizar o modo RTL no <application>OmegaT</application> não tem qualquer influência sobre o modo de apresentação dos documentos traduzidos criados no <application>OmegaT</application>. O modo de apresentação dos documentos traduzidos deve ser modificado no âmbito da aplicação (como o Microsoft Word) normalmente utilizado para os mostrar ou modificar (consultar os manuais relevantes para mais pormenores). Usando <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> faz com que tanto a entrada de texto como a exibição em <application>OmegaT</application> mudem. Pode ser utilizado separadamente para os três painéis (Editor, Correspondências aproximadas e Glossário), clicando no painel e alternando o modo de visualização. Também pode ser usado em todos os campos de entrada encontrados no <application>OmegaT</application> - na janela de procura, para regras de segmentação, etc.</para>
+
+    <para>Utilizadores Mac OS X, notem: usem <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> e <emphasis role="bold">não</emphasis> cmd+Ctrl+O.</para>
+
+    <section>
+      <title>Mistura de cadeias RTL e LTR em segmentos</title>
+
+      <para>Ao escrever texto puramente RTL, pode ser utilizada a visualização por defeito (LTR). Em muitos casos, contudo, é necessário incorporar texto LTR no texto RTL. Por exemplo, em etiquetas OmegaT, nomes de produtos que devem ser deixados no idioma-fonte LTR, colocar suportes em ficheiros de localização e números em texto. Em casos como estes torna-se necessário mudar para o modo RTL, de modo a que o texto RTL (de facto bidireccional) seja exibido correctamente. Deve-se notar que quando o <application>OmegaT</application> está em modo RTL, tanto a fonte como o alvo são exibidos em modo RTL. Isto significa que se o idioma-fonte for LTR e o idioma-alvo for RTL, ou vice-versa, poderá ser necessário alternar entre os modos RTL e LTR para ver a fonte e entrar facilmente no alvo nos seus respectivos modos.</para>
+    </section>
+
+    <section>
+      <title>Etiquetas <application>OmegaT</application> em segmentos RTL</title>
+
+      <para>Como foi dito acima, as etiquetas OmegaT são cadeias LTR. Ao traduzir entre idiomas RTL e LTR, a leitura correcta das etiquetas a partir da fonte e a sua introdução correcta no destino pode exigir que o tradutor mude entre os modos LTR e RTL inúmeras vezes.</para>
+
+      <para>Se o documento permitir, o tradutor é fortemente encorajado a remover informação de estilo do documento original para que o menor número possível de etiquetas apareça no OmegaT. Siga as indicações dadas em Dicas para a gestão de etiquetas. Validar frequentemente as etiquetas (ver validação de etiquetas) e produzir documentos traduzidos (ver abaixo e Menu) a intervalos regulares para facilitar a captura de quaisquer problemas que surjam. Uma dica: traduzir uma versão em texto simples do texto e acrescentar o estilo necessário na aplicação relevante numa fase posterior pode revelar-se menos incómodo.</para>
+    </section>
+
+    <section>
+      <title>Criação de documentos RTL traduzidos</title>
+
+      <para>Quando o documento traduzido for criado, a sua direcção de visualização será a mesma que a do documento original. Se o documento original era LTR, a direcção de visualização do documento de destino deve ser alterada manualmente para RTL na sua aplicação de visualização. Cada formato de saída tem formas específicas de lidar com a visualização RTL; consulte os manuais da aplicação relevantes para obter detalhes.</para>
+
+      <para>Para ficheiros .docx, uma série de alterações são, contudo, feitas automaticamente:<itemizedlist>
+          <listitem>Parágrafos, secções e tabelas são definidos para bidi</listitem>
+
+          <listitem>As execuções (elementos de texto) são definidas para RTL</listitem>
+        </itemizedlist></para>
+
+      <para>Para evitar alterar os parâmetros de exibição dos ficheiros-alvo cada vez que os ficheiros são abertos, pode ser possível alterar os parâmetros de exibição do ficheiro fonte de modo a que tais parâmetros sejam herdados pelos ficheiros-alvo. Tais modificações são possíveis em ficheiros ODF, por exemplo.</para>
+
+  </section>
+</section>

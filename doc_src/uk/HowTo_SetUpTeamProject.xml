@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="howto.setupteamproject">
   <title>Налаштування командного проєкту</title>
 
@@ -72,7 +72,7 @@
 
     <para>Щоб додати інші ресурси (словники, пам’яті TMX чи глосарії), використайте SVN або клієнт Git.</para>
 
-    <para>Щоб <emphasis role="bold">видалити файли</emphasis>, скористайтеся клієнтом SVN або Git. Ці файли не будуть видалені автоматично на боці перекладачів: доведеться попросити їх видалити файли вручну.</para>
+    <para>Щоб <emphasis role="bold">видалити файли</emphasis>, скористайтеся клієнтом SVN або Git.</para>
 
     <para>Зауважте, що під час перекладу на боці перекладачів змін зазнають лише два файли OmegaT:</para>
 
@@ -122,13 +122,15 @@
   </section>
 
   <section>
-    <title>Особливий випадок: мінімальна участь</title>
+    <title>Особливий випадок: лише частини проєкту є спільними</title>
 
     <para>Описані вище дії стосуються звичайної ситуації, коли менеджер проєкту хоче повністю контролювати проєкт, та коли файли та статистика на боці перекладача та сервера ідентичні.</para>
 
-    <para>Командні проєкти OmegaT можна також налаштовувати іншим способом: так, щоб перекладачі користувалися спільною пам’яттю перекладів (файлом project_save.tmx), але не мали доступу до файлів оригіналу, які перекладають інші учасники проєкту.</para>
+    <para>Командні проєкти OmegaT можна також налаштовувати іншим способом: так, щоб перекладачі користувалися спільною пам’яттю перекладів (файлом project_save.tmx), але не мали доступу до (всіх) файлів оригіналу, які перекладають інші учасники проєкту.</para>
 
-    <para>У такому випадку процедура створення проєкту буде така ж, за вийнятком того, що менеджеру проєкту не потрібно додавати файли до теки source.</para>
+    <para>У такому випадку процедура створення проєкту буде така ж, лише з тією відмінністю, що менеджеру проєкту не потрібно додавати (усі) файли для перекладу. Натомість кожен переклад має свої примірники файлів або змінює прив’язки, щоб отримувати файли з інших ресурсів.</para>
+
+      <para>Прив’язки можна налаштувати у графічному інтерфейсі (<menuchoice> <guimenuitem>Проєкт</guimenuitem> <guimenuitem>Властивості...</guimenuitem> <guimenuitem>Прив’язки сховищ...</guimenuitem> </menuchoice>) або відредагувавши файл <filename>omegat.project</filename>.</para>
   </section>
 
   <section id="howto.setupteamproject.mappingparameters">
@@ -139,7 +141,7 @@
         <term>тип репозиторію</term>
 
         <listitem>
-          <para>http (також https), svn або git</para>
+          <para>http (також https), svn, git або file.</para>
         </listitem>
       </varlistentry>
 
@@ -194,7 +196,7 @@
   <section>
     <title>Приклади прив’язки</title>
 
-    <para><programlisting>&lt;repositories&gt;
+    <para>Типове налаштування прив’язок у проєкті.<programlisting>&lt;repositories&gt;
  &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
  &lt;/repository&gt;
@@ -202,27 +204,55 @@
 
     <para>Весь вміст <filename>https://repo_for_OmegaT_team_project</filename> прив’язаний до локального проєкту OmegaT </para>
 
-    <programlisting>&lt;repositories&gt;
+    <para>Прив’язка для проєктів, які містяться у підтеці сховища:<programlisting>&lt;repositories&gt;
  &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
  &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
+&lt;/repositories&gt;</programlisting></para>
 
     <para>Весь вміст <filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> прив’язаний до локального проєкту OmegaT.</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>Прив’язки для додаткових джерел з віддаленого сховища (з фільтрами):<programlisting>
+&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
+
+  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+   &lt;includes&gt;readme.bak&lt;/includes&gt;
+  &lt;/mapping&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Весь вміст <filename>https://repo_for_All_OmegaT_team_project_sources</filename> прив’язаний до теки source/subdir у локальному проєкті OmegaT, виключаючи всі файли *.bak, окрім файла readme.bak.</para>
+
+    <para><programlisting>Прив’язки для додаткових файлів для перекладу, отриманих за протоколом http: &lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>Віддалений файл <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> прив’язаний до локального файлу <filename>./source/Bundle.properties</filename>.</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>Прив’язки з перейменуванням:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>Віддалений файл <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> прив’язаний до локального <filename>./source/readme_tr.txt</filename>.</para>
 
     <para>Це дозволяє перейменувати файл для перекладу.</para>
+
+    <para>Прив’язки для місцевих файлів:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
+ &lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
+ &lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+    <para>Локальний файл <filename>/home/me/myfiles/my/file.txt</filename> прив’язаний до локального файлу у проєкті <filename>source/file.txt</filename>, а файл <filename>/home/me/myfiles/some/file.txt</filename> — до локального файлу у проєкті <filename>source/file2.txt</filename>.</para>
+
+    <para>Увага: якщо файл, на який посилається прив’язка, не існує, проєкт не завантажиться.</para>
+    <para>Прив’язок може бути довільна кількість, але лише у контексті командного проєкту, тобто у випадку, коли одна з прив’язок включає файл omegat.project. Ця функція призначена для збору файлів для перекладу з кількох можливих джерел, але її можна використовувати не лише для файлів для перекладу.</para>
   </section>
+  <section>
+    <title>Примітка щодо файлу omegat.project та прив’язок</title>
+    <para>Коли ви створюєте проєкт та фіксуєте його у сховищі, файл <filename>omegat.project</filename> не містить жодних прив’язок. Під час стягування такого проєкту в програмі OmegaT відбувається локальна конвертація у командний проєкт і додається типовий набір прив’язок.</para>
+    <para>Зверніть увагу, що зафіксований у сховищі файл omegat.project автоматично не змінюється і прив’язки у нього не додаються. Під час завантаження проєкту усі зміни, які містяться у сховищі, копіюються локально, включаючи і файл <filename>omegat.project</filename>, який містить налаштування проєкту. Якщо цей файл не містить прив’язок, то застосовані будуть лише локальні прив’язки й жодні інші. Усі інші локальні зміни, зроблені в налаштуваннях проєкту, будуть скасовані. Якщо цей файл не містить прив’язок, то локальні зміни у налаштуваннях прив’язок будуть утрачені.</para>
+  </section>
+
 </section>

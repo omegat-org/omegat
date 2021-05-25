@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.edit">
+  <title>Editar</title>
+
+  <para>Este menu só mostra entradas quando um projecto está aberto.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><guimenuitem>Desfazer a última acção</guimenuitem></term>
+
+      <listitem>
+        <para>Restabelece o estado antes de ser tomada a última acção de edição. Este comando não funciona uma vez que o segmento modificado tenha sido validado.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Refazer a última acção</term>
+
+      <listitem>
+        <para>Restaura o estado antes da última acção de edição ter sido cancelada. Este comando não funciona uma vez que o segmento modificado tenha sido validado.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Substituir por correspondência ou selecção</term>
+
+      <listitem>
+        <para>Substitui todo o segmento-alvo pela correspondência aproximada actualmente seleccionada (por pré-definição, a primeira está seleccionada).</para>
+
+        <para>Se alguns textos estiverem seleccionados dentro da correspondência aproximada, só esta selecção substituirá todo o segmento-alvo.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Inserir correspondência ou selecção</term>
+
+      <listitem>
+        <para>Insere a correspondência aproximada actualmente seleccionada na posição do cursor. Se parte do segmento-alvo tiver sido seleccionada, esta função substitui a parte seleccionada.</para>
+
+        <para>Se alguns textos estiverem seleccionados dentro da correspondência aproximada, só esta selecção será inserida na posição do cursor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Substituir com tradução automática</term>
+
+      <listitem>
+        <para>Substitui o segmento-alvo pela tradução, fornecida pelo serviço de tradução automática seleccionado. Nenhuma acção é tomada, se nenhum serviço de tradução automática tiver sido activado (em <menuchoice> <guimenu>Opções</guimenu> <guimenuitem>Tradução automática</guimenuitem> </menuchoice>).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Substituir pela fonte</term>
+
+      <listitem>
+        <para>Substitui todo o segmento-alvo com a fonte.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Inserir fonte</term>
+
+      <listitem>
+        <para>Insere a fonte na posição do cursor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Inserir etiquetas-fonte em falta</term>
+
+      <listitem>
+        <para>Insere as etiquetas da fonte (se estiverem em falta) na posição do cursor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Inserir etiqueta em falta seguinte</term>
+
+      <listitem>
+        <para>Insere apenas uma etiqueta (entre as que faltam) na posição do cursor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Exportar selecção</term>
+
+      <listitem>
+        <para>Exporta a selecção actual para um ficheiro de texto para processamento. Se nenhum texto tiver sido seleccionado, o segmento-fonte actual é escrito neste ficheiro. Quando o utilizador sai do <application>OmegaT</application>, este ficheiro não é esvaziado, de modo a ser consistente com o comportamento habitual da área de transferência. O conteúdo exportado é copiado para o ficheiro <filename>selection.txt</filename> localizado na pasta de ficheiros de preferência do Utilizador.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Criar entrada de glossário</term>
+
+      <listitem>
+        <para>Permite ao utilizador criar uma entrada no ficheiro padrão do glossário.</para>
+
+        <para>Se seleccionar uma cadeia de texto (em qualquer painel) antes de premir <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, o texto será colado por pré-definição no campo <guilabel>Termo-fonte</guilabel>.</para>
+
+        <para>Isto pode aplicar-se também aos campos <guimenuitem>Termo-alvo</guimenuitem> e <guimenuitem>Comentário</guimenuitem> se forem feitas novas selecções e <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo> premido novamente.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Procurar no projecto...</term>
+
+      <listitem>
+        <para>Abre uma nova <link linkend="windows.textsearch">Janela de procura</link>.</para>
+
+        <para>Se seleccionar uma cadeia de texto (em qualquer painel) antes de premir <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, o texto será colado por pré-definição no campo <guilabel>Procurar por</guilabel>.</para>
+
+        <para>Premir <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo> mostra a última janela de procura já aberta (em vez de abrir uma nova).</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Procurar e substituir...</term>
+
+      <listitem>
+        <para>Abre uma nova janela <link linkend="windows.textreplace">Procurar e substituir</link>.</para>
+
+        <para>Se seleccionar uma cadeia de texto (em qualquer painel) antes de premir <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo>, o texto será colado por pré-definição no campo <guilabel>Procurar por</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Procurar nos dicionários</term>
+
+      <listitem>
+        <para>Se <link linkend="dialogs.preferences.dictionary">Procura automática nos dicionários</link> estiver desactivada, esta função permite-lhe procurar a palavra seleccionada nos dicionários.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Mude maiúsculas para</term>
+
+      <listitem>
+        <para>Altera as letras do texto destacado no segmento-alvo para a opção seleccionada (minúsculas, maiúsculas, título ou frase). Use <keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> para percorrer as quatro alternativas. Se não houver texto seleccionado, o <application>OmegaT</application> selecciona a palavra que contém a letra imediatamente à direita do cursor.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Seleccionar a correspondência</term>
+
+      <listitem>
+        <para>Selecciona a correspondência anterior, a seguinte ou a n-ésima aproximada mostrada no painel de correspondências aproximadas para a substituir ou inserir no segmento.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Usar como tradução pré-definida</term>
+
+      <listitem>
+        <para>Se houver várias traduções alternativas disponíveis para o segmento activo, pode rotular a alternativa seleccionada como a tradução pré-definida. A entrada estará a cinzento, se houver apenas uma tradução disponível.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Criar tradução alternativa</term>
+
+      <listitem>
+        <para>O mesmo segmento pode, dependendo do contexto, requerer diferentes traduções. Seleccione este item do menu, se a tradução actual não se aplicar e introduza a tradução alternativa.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Remover tradução</term>
+
+      <listitem>
+        <para>Elimina a tradução e define o segmento como não traduzido.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Definir tradução vazia</term>
+
+      <listitem>
+        <para>Definir a tradução como vazia. No documento de destino, nada aparecerá para este segmento. No Editor, a tradução é mostrada como &lt;EMPTY&gt;</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Registar tradução idêntica</term>
+
+      <listitem>
+        <para>Use este comando para registar a tradução como idêntica à fonte, mesmo que <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Permitir que a tradução seja igual à fonte</guilabel></link> não esteja marcada.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.goto">
+  <title>Ir para</title>
+
+  <para>Este menu só mostra entradas quando um projecto está aberto.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Segmento não traduzido seguinte</term>
+
+      <listitem>
+        <para>Passa para o segmento seguinte que não tem equivalente na memória de tradução.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmento traduzido seguinte</term>
+
+      <listitem>
+        <para>Passa para o próximo segmento já traduzido, ignorando segmentos não traduzidos.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmento seguinte</term>
+
+      <listitem>
+        <para>Avança para o segmento seguinte. Se o segmento actual é o último segmento de um ficheiro, passa para o primeiro segmento do ficheiro seguinte.</para>
+
+        <para>Nota: <keycap>Enter</keycap> é um atalho alternativo se a opção <link linkend="dialogs.preferences.general.usetabtoadvance">Utilizar TAB para avançar</link> não estiver marcada.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmento anterior</term>
+
+      <listitem>
+        <para>Passa para o segmento anterior. Se o segmento actual é o primeiro de um ficheiro, passa para o último segmento do ficheiro anterior.</para>
+
+        <para>Nota: <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> é um atalho alternativo se a opção <link linkend="dialogs.preferences.general.usetabtoadvance">Utilizar TAB para avançar</link> não estiver marcada.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmento número...</term>
+
+      <listitem>
+        <para>O segmento é aberto quando a sua chamada ou número são inseridos.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nota seguinte</term>
+
+      <listitem>
+        <para>O segmento seguinte, com uma nota anexa, será aberto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nota anterior</term>
+
+      <listitem>
+        <para>O segmento anterior com uma nota anexa será aberto.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Fonte da correspondência seleccionada</term>
+
+      <listitem>
+        <para>Passa para o segmento que corresponde à correspondência actual seleccionada no painel <guilabel>Correspondências aproximadas</guilabel>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Avançar no histórico...</term>
+
+      <listitem>
+        <para>O <application>OmegaT</application> lembra-se dos segmentos executados. Com este comando pode dar um passo em frente para o segmento, que anteriormente foi deixado pelo comando <guimenuitem>Recuar no histórico</guimenuitem>....</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Recuar no histórico...</term>
+
+      <listitem>
+        <para>Com este comando pode recuar um segmento de cada vez, para voltar mais tarde ao segmento actual usando <guimenuitem>Avançar no histórico...</guimenuitem>comando abaixo.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="howto.setupteamproject">
   <title>Impostazione di un progetto in collaborazione</title>
 
@@ -72,7 +72,7 @@
 
     <para>Usare un client SVN o Git per aggiungere altre risorse (dizionari, TMX o glossari).</para>
 
-    <para>Se si vogliono <emphasis role="bold">eliminare file</emphasis>, utilizzare un client SVN o Git. I file interessati non saranno eliminati automaticamente dal lato del traduttore: bisognerà richiedere loro di eliminarli manualmente.</para>
+    <para>Se si vogliono <emphasis role="bold">eliminare file</emphasis>, utilizzare un client SVN o Git.</para>
 
     <para>Si noti che, durante il processo di traduzione, vengono modificati da OmegaT solo due file:</para>
 
@@ -122,13 +122,15 @@
   </section>
 
   <section>
-    <title>Caso speciale: condivisione minima</title>
+    <title>Caso speciale: condivisione selettiva</title>
 
     <para>Il processo sopra riportato descrive un caso normale, in cui il responsabile del progetto vuole mantenere il pieno controllo del progetto e in cui i file (e le statistiche) sono identiche in entrambi i lati (lato server e lato traduttore).</para>
 
-    <para>I progetti in collaborazione di OmegaT possono essere configurati anche in modo diverso, in cui traduttori diversi condividono lo stesso file project_save.tmx ma non i file di partenza.</para>
+    <para>I progetti in collaborazione di OmegaT possono essere configurati anche in modo diverso, in cui traduttori diversi condividono lo stesso file project_save.tmx ma non (tutti) i file (di partenza).</para>
 
-    <para>In tal caso, la procedura da seguire è la stessa ma il responsabile del progetto non aggiunge i file alla cartella /source.</para>
+    <para>In tal caso, la procedura da seguire è la stessa ma il responsabile del progetto non aggiunge (tutti) i file al progetto sotto controllo di versione. Al contrario, i traduttori copiano da sé i file o aggiungono mappature per sincronizzare i file che si trovano in altre posizioni.</para>
+
+      <para>Le mappature possono essere aggiunte tramite l'interfaccia utente: <menuchoice> <guimenuitem>Progetto</guimenuitem> <guimenuitem>Proprietà</guimenuitem> <guimenuitem>Mappatura del deposito</guimenuitem> </menuchoice> oppure modificando il file <filename>omegat.project</filename>.</para>
   </section>
 
   <section id="howto.setupteamproject.mappingparameters">
@@ -139,7 +141,7 @@
         <term>Tipo di deposito</term>
 
         <listitem>
-          <para>può essere http (che include https), svn o git.</para>
+          <para>può essere http (che include https), svn, git o file.</para>
         </listitem>
       </varlistentry>
 
@@ -147,7 +149,7 @@
         <term>URL deposito</term>
 
         <listitem>
-          <para>Posizione remota dei file da tradurre.</para>
+          <para>Posizione remota o cartella dei file da tradurre.</para>
         </listitem>
       </varlistentry>
 
@@ -194,7 +196,7 @@
   <section>
     <title>Esempi di mappatura</title>
 
-    <para><programlisting>&lt;repositories&gt;
+    <para>Mappatura del progetto predefinito:<programlisting>&lt;repositories&gt;
  &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
  &lt;/repository&gt;
@@ -202,27 +204,54 @@
 
     <para>Tutti i contenuti di <filename>https://repo_for_OmegaT_team_project</filename> sono mappati al progetto OmegaT locale</para>
 
-    <programlisting>&lt;repositories&gt;
+    <para>Mappatura per progetti in una sotto-cartella del deposito:<programlisting>&lt;repositories&gt;
  &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
   &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
  &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
+&lt;/repositories&gt;</programlisting></para>
 
     <para>Tutti i contenuti di <filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename> sono mappati al progetto OmegaT locale.</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>Mappatura per risorse aggiuntive dal deposito remoto, con filtri:<programlisting>
+&lt;repositories&gt;
+ &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
+  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+   &lt;includes&gt;readme.bak&lt;/includes&gt;
+  &lt;/mapping&gt;
+ &lt;/repository&gt;
+&lt;/repositories&gt;</programlisting></para>
+
+    <para>Tutti i contenuti di <filename>https://repo_for_All_OmegaT_team_project_sources</filename> sono mappati alla cartella &quot;source&quot; del progetto OmegaT locale, ad eccesione di tutti i file *.bak tranne readme.bak.</para>
+
+    <para><programlisting>Mappatura dei file di partenza aggiuntivi dal web: &lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>Il file remoto <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename> è mappato al file locale <filename>source/Bundle.properties</filename>.</para>
 
-    <para><programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
-            &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/&gt;
-               &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
-            &lt;/repository&gt;</programlisting></para>
+    <para>Mappatura con cambio di nome:<programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+ &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
 
     <para>Il file remoto <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename> è mappato al file locale <filename>source/readme_tr.txt</filename>.</para>
 
     <para>Questo rende possibile rinominare il file per la traduzione.</para>
+
+    <para>Mappatura dei file locali:<programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/mieifile&quot;&gt;
+ &lt;mapping local=&quot;source/file.txt&quot; repository=&quot;mio/file.txt&quot;/&gt;
+ &lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;un/file.txt&quot;/&gt;
+&lt;/repository&gt;</programlisting></para>
+
+    <para>Il file locale <filename>/home/me/mieifile/mio/file.txt</filename> è mappato nel file locale <filename>source/file.txt</filename> mentre <filename>/home/me/mieifile/un/file.txt</filename> è mappato nel file locale <filename>source/file2.txt</filename>.</para>
+
+    <para>Attenzione: se un file non esiste il progetto non verrà caricato.</para>
+    <para>È possibile aggiungere tante mappature quante si necessitano, ma solamente nel contesto di un progetto in collaborazione, ossia una delle mappature deve includere omegat.project. Questa funzionalità è pensata per recuperare i file di partenza, ma non si limita ad essi.</para>
   </section>
+  <section>
+    <title>Nota su omegat.project e le mappature</title>
+    <para>Quando si crea un nuovo progetto e lo si invia a un deposito (commit), il file <filename>omegat.project</filename> non contiene alcuna mappatura. Quando si scarica il progetto, questo viene convertito localmente in un progetto in collaborazione ed è aggiunta una mappatura predefinita.</para>
+    <para>Si noti che il file omegat.project all'interno del deposito non viene modificato in automatico e ancora non contiene le mappature. Quando si carica un progetto, tutte le modifiche nel deposito vengono copiate nel progetto locale, incluso il file <filename>omegat.project</filename> unitamente alle impostazioni del progetto. Se il file non contiene mappature, le mappature locali esistenti, e solo queste, vengono riapplicate. Tutte le altre modifiche locali al progetto sono ripristinate. Se il file contiene realmente delle mappature, allora le modifiche locali alle mappature verrano perse.</para>
+  </section>
+
 </section>

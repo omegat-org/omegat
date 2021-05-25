@@ -1,509 +1,580 @@
-<html>
-   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>Appendice D. Espressioni regolari</title>
+      <link href="OmegaT_webhelp.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="appendix.spellchecker.html" rel="prev" title="Appendice C. Correttore ortografico" />
+      <link href="appendix.shortcut.custom.html" rel="next" title="Appendice E. Personalizzazione delle scorciatoie" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
    
-      <title>Appendice&nbsp;D.&nbsp;Espressioni regolari</title>
-      <link rel="stylesheet" type="text/css" href="OmegaT.css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-      <link rel="home" href="index.html" title="OmegaT 4.2- Manuale dell'Utente">
-      <link rel="up" href="index.html" title="OmegaT 4.2- Manuale dell'Utente">
-      <link rel="prev" href="appendix.spellchecker.html" title="Appendice&nbsp;C.&nbsp;Correttore ortografico">
-      <link rel="next" href="appendix.shortcut.custom.html" title="Appendice&nbsp;E.&nbsp;Personalizzazione delle scorciatoie">
-   </head>
-   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-      <div class="navheader">
-         <table width="100%" summary="Navigation header">
-            <tr>
-               <th colspan="3" align="center">Appendice&nbsp;D.&nbsp;Espressioni regolari</th>
-            </tr>
-            <tr>
-               <td width="20%" align="left"><a accesskey="p" href="appendix.spellchecker.html">Indietro</a>&nbsp;
-               </td>
-               <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.shortcut.custom.html">Avanti</a></td>
-            </tr>
-         </table>
-         <hr>
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.2- Manuale dell'Utente</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
       </div>
-      <div class="appendix">
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">Appendice D. Espressioni regolari</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="appendix.spellchecker.html">Indietro</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="appendix.shortcut.custom.html">Avanti</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="appendix" id="appendix.regexp">
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.regexp"></a>Appendice&nbsp;D.&nbsp;Espressioni regolari
-                  </h1>
+                  <h1 class="title">Appendice D. Espressioni regolari</h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl class="toc">
-               <dt><span class="section"><a href="appendix.regexp.html#regex.tools.and.examples.of.use">1. Strumenti per le espressioni regolari ed esempi di utilizzo</a></span></dt>
-            </dl>
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="appendix.regexp.html#regex.tools.and.examples.of.use">Strumenti per le espressioni regolari ed esempi di utilizzo</a>
+                  </span>
+               </li>
+            </ul>
          </div>
-         <p>Le espressioni regolari (regex, in breve) ammesse per le operazioni di ricerca sono quelle riconosciute da Java. Per ulteriori
-            e più specifiche informazioni, consultare la <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">documentazione Java Regex</a>. Vedere più avanti per ulteriori riferimenti ed esempi.
-         </p>
-         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+         <p>Le espressioni regolari (regex, in breve) ammesse per le operazioni di ricerca sono quelle riconosciute da Java. Per ulteriori e più specifiche informazioni, consultare la <a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html" target="_top">documentazione Java Regex</a>. Vedere più avanti per ulteriori riferimenti ed esempi.</p>
+         <div class="note">
             <h3 class="title">Nota</h3>
-            <p>Questo capitolo si rivolge agli utenti avanzati, che hanno la necessità di definire le proprie varianti delle regole di segmentazione
-               o costruire combinazioni di ricerca più complesse ed efficaci.
+            <p>Questo capitolo si rivolge agli utenti avanzati, che hanno la necessità di definire le proprie varianti delle regole di segmentazione o costruire combinazioni di ricerca più complesse ed efficaci.</p>
+         </div>
+         <div class="table" id="d0e5990">
+            <div class="table-title">Tabella D.1. Regex - Flag</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">(?i)</td>
+                        <td style="text-align: left; ">Consente di avviare una ricerca che non consideri le lettere maiuscole e minuscole (per impostazione predefinita, il modello distingue tra maiuscole e minuscole).</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6007">
+            <div class="table-title">Tabella D.2. Regex - Carattere</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">x</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Viene rilevato il carattere corrispondente a x, ma con le seguenti eccezioni...</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\uhhhh</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Viene rilevato il carattere col valore esadecimale 0xhhhh</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\t</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere di tabulazione ('\u0009')</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\n</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere corrispondente a un avanzamento di riga (line feed, LF) ('\u000A')</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\r</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere corrispondente a un ritorno di carrello (carriage-return, CR) ('\u000D')</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\f</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere corrispondente all'inizio di una nuova pagina in una stampa (form feed) ('\u000C')</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\a</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere di controllo bell ('\u0007')</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\e</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere escape ('\u001B')</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\cx</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere di controllo corrispondente a x</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\0n</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere col valore ottale 0n (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\0nn</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere col valore ottale 0nn (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\0mnn</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere col valore ottale 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">\xhh</td>
+                        <td style="text-align: left; ">Carattere col valore esadecimale 0xhh</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6084">
+            <div class="table-title">Tabella D.3. Regex - Citazione</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Nulla, se non il carattere immediatamente successivo. È necessario quando si desidera usare i metacaratteri !$()*+.&lt;&gt;?[\]^{|} in modo che vengano utilizzati come caratteri e non come operatori.</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\\</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Per esempio, questa combinazione corrisponde al carattere della barra rovesciata (“ \ ”).</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\Q</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Nulla, ma indica tutti i caratteri fino a \E</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">\E</td>
+                        <td style="text-align: left; ">Nulla, ma conclude la citazione iniziata da \Q</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6116">
+            <div class="table-title">Tabella D.4. Regex - Classi per blocchi e categorie Unicode</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\p{InGreek}</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Carattere nel blocco greco (<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> blocco</a> semplice)</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\p{Lu}</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Lettera maiuscola (<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> categoria</a> semplice)</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\p{Sc}</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Simbolo di valuta</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\P{InGreek}</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Qualsiasi carattere, eccetto uno nel blocco greco (negazione)</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td style="text-align: left; ">Qualsiasi lettera, eccetto una lettera maiuscola (sottrazione)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6159">
+            <div class="table-title">Tabella D.5. Regex - Classi di carattere</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">[abc]</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">a, b o c (classe semplice)</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">[^abc]</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Qualsiasi carattere, eccetto a, b o c (negazione)</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">[a-zA-Z]</td>
+                        <td style="text-align: left; ">Da &quot;a&quot; a &quot;z&quot; o da &quot;A&quot; a &quot;Z&quot;, inclusi (intervallo)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6186">
+            <div class="table-title">Tabella D.6. Regex - Classi di carattere predefinite</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">.</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Qualsiasi carattere (eccetto i terminatori di riga)</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\d</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Una cifra: [0-9]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\D</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Un carattere non numerico: [^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Un carattere di spazio bianco: [ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\S</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Un carattere che non sia uno spazio bianco: [^\s]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\w</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Un carattere parola: [a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">\W</td>
+                        <td style="text-align: left; ">Un carattere non-parola: [^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6233">
+            <div class="table-title">Tabella D.7. Regex - Rilevatori di limitazione</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">^</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Inizio di una riga</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">$</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Fine di una riga</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\b</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Limite di una parola</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">\B</td>
+                        <td style="text-align: left; ">Limite di una non-parola</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6265">
+            <div class="table-title">Tabella D.8. Regex - Quantificatori di ripetizione</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X<span class="emphasis">
+                              <em>?</em>
+                           </span>
+                        </td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X, una sola volta oppure nessuna</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X<span class="emphasis">
+                              <em>*</em>
+                           </span>
+                        </td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X, zero o più volte</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">X<span class="emphasis">
+                              <em>+</em>
+                           </span>
+                        </td>
+                        <td style="text-align: left; ">X, una o più volte</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="note">
+            <h3 class="title">Nota</h3>
+            <p>i quantificatori di ripetizione rileveranno tutte le ripetizioni possibili. Per esempio, <span class="emphasis">
+                  <em>a+</em>
+               </span> rileverà aaa in <span class="emphasis">
+                  <em>aaabbb</em>
+               </span>
             </p>
          </div>
-         <div class="table"><a name="d0e5869"></a><p class="title"><b>Tabella&nbsp;D.1.&nbsp;Regex - Flag</b></p>
+         <div class="table" id="d0e6306">
+            <div class="table-title">Tabella D.9. Regex - Quantificatori riluttanti (non ripetitivi)</div>
             <div class="table-contents">
-               <table class="table" summary="Regex - Flag" border="1">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                   <colgroup>
-                     <col align="left">
-                     <col>
+                     <col style="text-align: left; " />
+                     <col />
                   </colgroup>
                   <thead>
                      <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr>
-                        <td align="left">(?i)</td>
-                        <td align="left">Consente di avviare una ricerca che non consideri le lettere maiuscole e minuscole (per impostazione predefinita, il modello
-                           distingue tra maiuscole e minuscole).
-                        </td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X??</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X, una sola volta oppure nessuna</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X*?</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X, zero o più volte</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">X+?</td>
+                        <td style="text-align: left; ">X, una o più volte</td>
                      </tr>
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e5886"></a><p class="title"><b>Tabella&nbsp;D.2.&nbsp;Regex - Carattere</b></p>
-            <div class="table-contents">
-               <table class="table" summary="Regex - Carattere" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">x</td>
-                        <td align="left">Viene rilevato il carattere corrispondente a x, ma con le seguenti eccezioni...</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\uhhhh</td>
-                        <td align="left">Viene rilevato il carattere col valore esadecimale 0xhhhh</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\t</td>
-                        <td align="left">Carattere di tabulazione ('\u0009')</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\n</td>
-                        <td align="left">Carattere corrispondente a un avanzamento di riga (line feed, LF) ('\u000A')</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\r</td>
-                        <td align="left">Carattere corrispondente a un ritorno di carrello (carriage-return, CR) ('\u000D')</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\f</td>
-                        <td align="left">Carattere corrispondente all'inizio di una nuova pagina in una stampa (form feed) ('\u000C')</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\a</td>
-                        <td align="left">Carattere di controllo bell ('\u0007')</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\e</td>
-                        <td align="left">Carattere escape ('\u001B')</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\cx</td>
-                        <td align="left">Carattere di controllo corrispondente a x</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\0n</td>
-                        <td align="left">Carattere col valore ottale 0n (0 &lt;= n &lt;= 7)</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\0nn</td>
-                        <td align="left">Carattere col valore ottale 0nn (0 &lt;= n &lt;= 7)</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\0mnn</td>
-                        <td align="left">Carattere col valore ottale 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\xhh</td>
-                        <td align="left">Carattere col valore esadecimale 0xhh</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="table"><a name="d0e5963"></a><p class="title"><b>Tabella&nbsp;D.3.&nbsp;Regex - Citazione</b></p>
-            <div class="table-contents">
-               <table class="table" summary="Regex - Citazione" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">\</td>
-                        <td align="left">Nulla, se non il carattere immediatamente successivo. È necessario quando si desidera usare i metacaratteri !$()*+.&lt;&gt;?[\]^{|}
-                           in modo che vengano utilizzati come caratteri e non come operatori.
-                        </td>
-                     </tr>
-                     <tr>
-                        <td align="left">\\</td>
-                        <td align="left">Per esempio, questa combinazione corrisponde al carattere della barra rovesciata (“ \ ”).</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\Q</td>
-                        <td align="left">Nulla, ma indica tutti i caratteri fino a \E</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\E</td>
-                        <td align="left">Nulla, ma conclude la citazione iniziata da \Q</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="table"><a name="d0e5995"></a><p class="title"><b>Tabella&nbsp;D.4.&nbsp;Regex - Classi per blocchi e categorie Unicode</b></p>
-            <div class="table-contents">
-               <table class="table" summary="Regex - Classi per blocchi e categorie Unicode" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">\p{InGreek}</td>
-                        <td align="left">Carattere nel blocco greco (<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> blocco</a> semplice)
-                        </td>
-                     </tr>
-                     <tr>
-                        <td align="left">\p{Lu}</td>
-                        <td align="left">Lettera maiuscola (<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> categoria</a> semplice)
-                        </td>
-                     </tr>
-                     <tr>
-                        <td align="left">\p{Sc}</td>
-                        <td align="left">Simbolo di valuta</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\P{InGreek}</td>
-                        <td align="left">Qualsiasi carattere, eccetto uno nel blocco greco (negazione)</td>
-                     </tr>
-                     <tr>
-                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
-                        <td align="left">Qualsiasi lettera, eccetto una lettera maiuscola (sottrazione)</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6038"></a><p class="title"><b>Tabella&nbsp;D.5.&nbsp;Regex - Classi di carattere</b></p>
-            <div class="table-contents">
-               <table class="table" summary="Regex - Classi di carattere" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">[abc]</td>
-                        <td align="left">a, b o c (classe semplice)</td>
-                     </tr>
-                     <tr>
-                        <td align="left">[^abc]</td>
-                        <td align="left">Qualsiasi carattere, eccetto a, b o c (negazione)</td>
-                     </tr>
-                     <tr>
-                        <td align="left">[a-zA-Z]</td>
-                        <td align="left">Da "a" a "z" o da "A" a "Z", inclusi (intervallo)</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6065"></a><p class="title"><b>Tabella&nbsp;D.6.&nbsp;Regex - Classi di carattere predefinite</b></p>
-            <div class="table-contents">
-               <table class="table" summary="Regex - Classi di carattere predefinite" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">.</td>
-                        <td align="left">Qualsiasi carattere (eccetto i terminatori di riga)</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\d</td>
-                        <td align="left">Una cifra: [0-9]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\D</td>
-                        <td align="left">Un carattere non numerico: [^0-9]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\s</td>
-                        <td align="left">Un carattere di spazio bianco: [ \t\n\x0B\f\r]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\S</td>
-                        <td align="left">Un carattere che non sia uno spazio bianco: [^\s]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\w</td>
-                        <td align="left">Un carattere parola: [a-zA-Z_0-9]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\W</td>
-                        <td align="left">Un carattere non-parola: [^\w]</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6112"></a><p class="title"><b>Tabella&nbsp;D.7.&nbsp;Regex - Rilevatori di limitazione</b></p>
-            <div class="table-contents">
-               <table class="table" summary="Regex - Rilevatori di limitazione" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">^</td>
-                        <td align="left">Inizio di una riga</td>
-                     </tr>
-                     <tr>
-                        <td align="left">$</td>
-                        <td align="left">Fine di una riga</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\b</td>
-                        <td align="left">Limite di una parola</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\B</td>
-                        <td align="left">Limite di una non-parola</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6144"></a><p class="title"><b>Tabella&nbsp;D.8.&nbsp;Regex - Quantificatori di ripetizione</b></p>
-            <div class="table-contents">
-               <table class="table" summary="Regex - Quantificatori di ripetizione" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
-                        <td align="left">X, una sola volta oppure nessuna</td>
-                     </tr>
-                     <tr>
-                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
-                        <td align="left">X, zero o più volte</td>
-                     </tr>
-                     <tr>
-                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
-                        <td align="left">X, una o più volte</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
-            <h3 class="title">Nota</h3>
-            <p>i quantificatori di ripetizione rileveranno tutte le ripetizioni possibili. Per esempio, <span class="emphasis"><em>a+</em></span> rileverà aaa in <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e6185"></a><p class="title"><b>Tabella&nbsp;D.9.&nbsp;Regex - Quantificatori riluttanti (non ripetitivi)</b></p>
-            <div class="table-contents">
-               <table class="table" summary="Regex - Quantificatori riluttanti (non ripetitivi)" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">X??</td>
-                        <td align="left">X, una sola volta oppure nessuna</td>
-                     </tr>
-                     <tr>
-                        <td align="left">X*?</td>
-                        <td align="left">X, zero o più volte</td>
-                     </tr>
-                     <tr>
-                        <td align="left">X+?</td>
-                        <td align="left">X, una o più volte</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+         <br class="table-break" />
+         <div class="note">
             <h3 class="title">Nota</h3>
-            <p>i quantificatori riluttanti rileveranno il minor numero di ripetizioni possibili. Per esempio, <span class="emphasis"><em>a+?</em></span> rileverà la prima <span class="emphasis"><em>a</em></span> in <span class="emphasis"><em>aaabbb</em></span></p>
+            <p>i quantificatori riluttanti rileveranno il minor numero di ripetizioni possibili. Per esempio, <span class="emphasis">
+                  <em>a+?</em>
+               </span> rileverà la prima <span class="emphasis">
+                  <em>a</em>
+               </span> in <span class="emphasis">
+                  <em>aaabbb</em>
+               </span>
+            </p>
          </div>
-         <div class="table"><a name="d0e6223"></a><p class="title"><b>Tabella&nbsp;D.10.&nbsp;Regex - Operatori logici</b></p>
+         <div class="table" id="d0e6344">
+            <div class="table-title">Tabella D.10. Regex - Operatori logici</div>
             <div class="table-contents">
-               <table class="table" summary="Regex - Operatori logici" border="1">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                   <colgroup>
-                     <col align="left">
-                     <col>
+                     <col style="text-align: left; " />
+                     <col />
                   </colgroup>
                   <thead>
                      <tr>
-                        <th align="left">Il costrutto</th>
-                        <th align="left">...corrisponde al seguente</th>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Il costrutto</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...corrisponde al seguente</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr>
-                        <td align="left">XY</td>
-                        <td align="left">X seguito da Y</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">XY</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X seguito da Y</td>
                      </tr>
                      <tr>
-                        <td align="left">X|Y</td>
-                        <td align="left">X oppure Y</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X|Y</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X oppure Y</td>
                      </tr>
                      <tr>
-                        <td align="left">(XY)</td>
-                        <td align="left">XY come gruppo singolo</td>
+                        <td style="text-align: left; border-right: 1px solid ; ">(XY)</td>
+                        <td style="text-align: left; ">XY come gruppo singolo</td>
                      </tr>
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="section">
+         </div>
+         <br class="table-break" />
+         <section class="section" id="regex.tools.and.examples.of.use">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;Strumenti per le espressioni regolari ed esempi di utilizzo
-                     </h2>
+                     <h2 class="title" style="clear: both">Strumenti per le espressioni regolari ed esempi di utilizzo</h2>
                   </div>
                </div>
             </div>
-            <p>Sono disponibili diversi strumenti interattivi dedicati allo sviluppo e alla verifica delle espressioni regolari. Essi seguono
-               quasi tutti lo stesso schema (vedere sotto l'esempio preso dal Regular Expression Tester): l'espressione regolare (voce in
-               alto) analizza il testo da ricercare (riquadro al centro), restituendo i risultati, mostrati nel riquadro dei risultati.
-            </p>
-            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Figura&nbsp;D.1.&nbsp;Regex Tester</b></p>
+            <p>Sono disponibili diversi strumenti interattivi dedicati allo sviluppo e alla verifica delle espressioni regolari. Essi seguono quasi tutti lo stesso schema (vedere sotto l'esempio preso dal Regular Expression Tester): l'espressione regolare (voce in alto) analizza il testo da ricercare (riquadro al centro), restituendo i risultati, mostrati nel riquadro dei risultati.</p>
+            <div class="figure" id="regerx.tester">
+               <div class="figure-title">Figura D.1. Regex Tester</div>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Regex Tester"></div>
+                  <div class="mediaobject">
+                     <img alt="Regex Tester" src="images/RegexTester.png" />
+                  </div>
                </div>
-            </div><br class="figure-break"><p>Per eseguire verifiche con uno strumento indipendente, nelle versioni per Windows, Linux, Mac e FreeBSD, usare <a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a>. Funziona in modo quasi identico all'esempio di cui sopra.
-            </p>
-            <p>In <span class="application">OmegaT</span> è pure presente una buona raccolta di utili esempi regex (si veda Opzioni &gt; Segmentazione). L'elenco seguente include espressioni
-               che potrebbero risultare utili quando si eseguono ricerche attraverso la memoria di traduzione:
-            </p>
-            <div class="table"><a name="d0e6273"></a><p class="title"><b>Tabella&nbsp;D.11.&nbsp;Regex - Esempi di espressioni regolari nelle traduzioni</b></p>
+            </div>
+            <br class="figure-break" />
+            <p>Per eseguire verifiche con uno strumento indipendente, nelle versioni per Windows, Linux, Mac e FreeBSD, usare <a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a>. Funziona in modo quasi identico all'esempio di cui sopra.</p>
+            <p>In <span class="application">OmegaT</span> è pure presente una buona raccolta di utili esempi regex (si veda Opzioni &gt; Segmentazione). L'elenco seguente include espressioni che potrebbero risultare utili quando si eseguono ricerche attraverso la memoria di traduzione:</p>
+            <div class="table" id="d0e6394">
+               <div class="table-title">Tabella D.11. Regex - Esempi di espressioni regolari nelle traduzioni</div>
                <div class="table-contents">
-                  <table class="table" summary="Regex - Esempi di espressioni regolari nelle traduzioni" border="1">
+                  <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                      <colgroup>
-                        <col align="left">
-                        <col>
+                        <col style="text-align: left; " />
+                        <col />
                      </colgroup>
                      <thead>
                         <tr>
-                           <th align="left">Espressione regolare</th>
-                           <th align="left">Trova il seguente:</th>
+                           <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Espressione regolare</th>
+                           <th style="text-align: left; border-bottom: 1px solid ; ">Trova il seguente:</th>
                         </tr>
                      </thead>
                      <tbody>
                         <tr>
-                           <td align="left">(\b\w+\b)\s\1\b</td>
-                           <td align="left">doppie parole</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">(\b\w+\b)\s\1\b</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">doppie parole</td>
                         </tr>
                         <tr>
-                           <td align="left">[\.,]\s*[\.,]+</td>
-                           <td align="left">virgola o punto, seguiti da spazi e ancora un'altra virgola o punto</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">[\.,]\s*[\.,]+</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">virgola o punto, seguiti da spazi e ancora un'altra virgola o punto</td>
                         </tr>
                         <tr>
-                           <td align="left">\. \s+$</td>
-                           <td align="left">spazi aggiuntivi dopo un punto alla fine di una riga</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\. \s+$</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">spazi aggiuntivi dopo un punto alla fine di una riga</td>
                         </tr>
                         <tr>
-                           <td align="left">\s+a\s+[aeiou]</td>
-                           <td align="left">Inglese:&nbsp;le parole inizianti per vocali devono essere in genere precedute da "an" e non "a"</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\s+a\s+[aeiou]</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">Inglese: le parole inizianti per vocali devono essere in genere precedute da &quot;an&quot; e non &quot;a&quot;</td>
                         </tr>
                         <tr>
-                           <td align="left">\s+an\s+[^aeiou]</td>
-                           <td align="left">Inglese: stesso controllo di cui sopra ma per le consonanti ("a", non "an")</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\s+an\s+[^aeiou]</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">Inglese: stesso controllo di cui sopra ma per le consonanti (&quot;a&quot;, non &quot;an&quot;)</td>
                         </tr>
                         <tr>
-                           <td align="left">\s{2,}</td>
-                           <td align="left">più di uno spazio</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\s{2,}</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">più di uno spazio</td>
                         </tr>
                         <tr>
-                           <td align="left">\.[A-Z]</td>
-                           <td align="left">Punto, seguito da una lettera maiuscola - forse uno spazio mancante tra un punto e l'inizio di una nuova frase?</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\.[A-Z]</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">Punto, seguito da una lettera maiuscola - forse uno spazio mancante tra un punto e l'inizio di una nuova frase?</td>
                         </tr>
                         <tr>
-                           <td align="left">\bis\b</td>
-                           <td align="left">cerca “is”, non “this” o “isn't”, ecc.</td>
+                           <td style="text-align: left; border-right: 1px solid ; ">\bis\b</td>
+                           <td style="text-align: left; ">cerca “is”, non “this” o “isn't”, ecc.</td>
                         </tr>
                      </tbody>
                   </table>
                </div>
-            </div><br class="table-break"></div>
-      </div>
-      <div class="navfooter">
-         <hr>
-         <table width="100%" summary="Navigation footer">
-            <tr>
-               <td width="40%" align="left"><a accesskey="p" href="appendix.spellchecker.html">Indietro</a>&nbsp;
-               </td>
-               <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.shortcut.custom.html">Avanti</a></td>
-            </tr>
-            <tr>
-               <td width="40%" align="left" valign="top">Appendice&nbsp;C.&nbsp;Correttore ortografico&nbsp;</td>
-               <td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Appendice&nbsp;E.&nbsp;Personalizzazione delle scorciatoie</td>
-            </tr>
-         </table>
-      </div>
-   </body>
-</html>
+            </div>
+            <br class="table-break" />
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="appendix.spellchecker.html">Indietro</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="appendix.shortcut.custom.html">Avanti</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">Appendice C. Correttore ortografico </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">Partenza</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> Appendice E. Personalizzazione delle scorciatoie</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

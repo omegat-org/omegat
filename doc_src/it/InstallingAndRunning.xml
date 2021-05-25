@@ -176,7 +176,7 @@
     <section id="running.OmegaT.Linux">
       <title>Avvio di <application>OmegaT</application></title>
 
-      <para>È possibile avviare OmegaT dalla riga di comando con uno script che includa le opzioni di avvio, oppure lo si può avviare direttamente facendo clic su <filename>OmegaT.jar</filename>. I metodi variano in base alla distribuzione. Assicurarsi che le impostazioni del proprio <varname>PERCORSO</varname> siano corrette e i file <filename>.jar</filename> correttamente associati a un avviatore Java. Per ulteriori informazioni consultare la sezione &quot;Avvio da riga di comando&quot; più sotto.</para>
+      <para>È possibile avviare OmegaT dalla riga di comando con uno script che includa le opzioni di avvio, oppure lo si può avviare direttamente facendo clic su <filename>OmegaT.jar</filename>. I metodi variano in base alla distribuzione. Assicurarsi che le impostazioni del proprio <varname>PERCORSO</varname> siano corrette e i file <filename>.jar</filename> correttamente associati a un avviatore Java. Per ulteriori informazioni consultare la sezione &quot;<link linkend="commandline.launching" endterm="commandline.launching.title"/>&quot; più sotto.</para>
     </section>
   </section>
 
@@ -218,7 +218,7 @@
 
       <para>Per avviare più istanze di <filename>OmegaT.app</filename>, fare doppio clic sul file <emphasis>OmegaT</emphasis> che si trova in <filename>OmegaT.app/Contents/MacOS/</filename>.</para>
 
-      <para>Usare il file <filename>OmegaT.jar</filename> che si trova in <filename>OmegaT.app/Contents/MacOS/Java/</filename> per avviare <application>OmegaT</application> dalla riga di comando. Per ulteriori informazioni consultare la sezione &quot;Avvio da riga di comando&quot; più sotto.</para>
+      <para>Usare il file <filename>OmegaT.jar</filename> che si trova in <filename>OmegaT.app/Contents/MacOS/Java/</filename> per avviare <application>OmegaT</application> dalla riga di comando. Per ulteriori informazioni consultare la sezione &quot;<link linkend="commandline.launching" endterm="commandline.launching.title"/>&quot; più sotto.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -276,7 +276,7 @@
     <section id="running.OmegaT.other">
       <title>Avvio di <application>OmegaT</application></title>
 
-      <para>Una volta installato <application>OmegaT</application>, è possibile avviarlo dalla riga di comando, creare uno script che includa i parametri per la riga oppure fare clic su <filename>OmegaT.jar</filename> per avviarlo in modo diretto. I metodi variano in base alla distribuzione. Assicurarsi che le impostazioni del proprio <varname>PERCORSO</varname> siano corrette e i file <filename>.jar</filename> correttamente associati a un avviatore Java. Per ulteriori informazioni consultare la sezione &quot;Avvio da riga di comando&quot; più sotto.</para>
+      <para>Una volta installato <application>OmegaT</application>, è possibile avviarlo dalla riga di comando, creare uno script che includa i parametri per la riga oppure fare clic su <filename>OmegaT.jar</filename> per avviarlo in modo diretto. I metodi variano in base alla distribuzione. Assicurarsi che le impostazioni del proprio <varname>PERCORSO</varname> siano corrette e i file <filename>.jar</filename> correttamente associati a un avviatore Java. Per ulteriori informazioni consultare la sezione &quot;<link linkend="commandline.launching" endterm="commandline.launching.title"/>&quot; più sotto.</para>
     </section>
   </section>
 
@@ -300,8 +300,8 @@
     <para>È da notare che se si necessitano usare argomenti di comando per l'avvio (vedere sopra), si deve utilizzare un'installazione normale.</para>
   </section>
 
-  <section>
-    <title>Avvio di OmegaT da riga di comando</title>
+  <section id="commandline.launching">
+    <title id="commandline.launching.title">Avvio di OmegaT da riga di comando</title>
 
     <para>Non è, in genere, necessario avviare <application>OmegaT</application> da riga di comando. Questa alternativa, tuttavia, consente all'utente di controllare e modificare il comportamento del programma. Esistono due modi per avviare <application>OmegaT</application> dalla riga di comando.</para>
 
@@ -569,7 +569,7 @@
   <section id="building.OmegaT.from.source">
     <title>Costruire un pacchetto <application>OmegaT</application> dai sorgenti</title>
 
-    <para>I file sorgente della versione corrente si possono scaricare con un client SVN dal deposito <ulink url="svn://svn.code.sf.net/p/omegat/svn/trunk"/> o direttamente da <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tarball?path=/trunk">SourceForge</ulink>.</para>
+    <para>I file sorgente della versione corrente si possono scaricare con un client Git dal deposito <ulink url="https://git.code.sf.net/p/omegat/code"/> o direttamente da <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tarball?path=">SourceForge</ulink>.</para>
 
     <para>Una volta scaricato il codice, aprire la riga di comando nella cartella dei file di partenza e digitare:</para>
 

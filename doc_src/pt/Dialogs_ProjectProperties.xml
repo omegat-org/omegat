@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="dialogs.projectproperties">
+  <title>Propriedades do projecto</title>
+
+  <para>Este diálogo está acessível seleccionando <menuchoice> <guimenuitem>Projecto</guimenuitem> <guimenuitem>Propriedades...</guimenuitem> </menuchoice></para>
+
+  <section>
+    <title>Idiomas</title>
+
+    <para>Pode introduzir manualmente os idiomas fonte e alvo ou utilizar os menus pendentes. Tenha em mente que a mudança de idiomas pode tornar inúteis as memórias de tradução actualmente utilizadas, uma vez que o seu par de idiomas pode já não corresponder aos novos idiomas.</para>
+
+    <para>São exibidos os Tokenizers correspondentes aos idiomas seleccionados.</para>
+  </section>
+
+  <section>
+    <title>Opções</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Activar a segmentação ao nível das frases</term>
+
+        <listitem>
+          <para>As definições de segmentação apenas abordam a forma como os ficheiros de origem são tratados pelo <application>OmegaT</application>. A forma predominante de segmentar as fontes é a segmentação ao nível da frase, pelo que esta caixa deve, num caso normal, ser deixada marcada.</para>
+
+          <para>Nalguns casos raros, a alternativa, ou seja, a segmentação por parágrafos, pode ser preferida. A mudança desta bandeira não altera a segmentação das memórias de tradução já existentes. Se decidir mudar de tradução de frase para tradução de parágrafo, a memória de tradução interna do projecto não será alterada (o OmegaT pode actualizar memórias de tradução antigas que não usavam segmentação de frases, mas não vice-versa), mas o OmegaT tentará criar correspondências aproximadas de parágrafo, colando as traduções de frases existentes.</para>
+
+          <para>A alteração das definições de segmentação pode causar a divisão ou união de alguns segmentos já traduzidos. Isto vai efectivamente devolvê-los ao estatuto de &quot;Não traduzido&quot;, uma vez que deixarão de corresponder a segmentos registados na memória do projecto, mesmo que a sua tradução original ainda lá esteja.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Auto-propagação de traduções</term>
+
+        <listitem>
+          <para>No caso de existirem segmentos não únicos nos documentos-fonte, a caixa Propagação automática oferece ao utilizador as duas seguintes possibilidades no que respeita à tradução automática: se marcada, o primeiro segmento traduzido será assumido como a tradução pré-definida e o seu texto de destino será automaticamente utilizado para acertos posteriores durante o processo de tradução. Segmentos mal traduzidos podem ser corrigidos manualmente mais tarde usando <guimenuitem>Criar tradução alternativa</guimenuitem>. Se a caixa Propagação automática não for marcada, os segmentos com traduções alternativas são deixados sem tradução até que o utilizador tenha decidido qual a tradução a utilizar.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Remover etiquetas</term>
+
+        <listitem>
+          <para>Quando activadas, todas as etiquetas de formatação são removidas dos segmentos-fonte. Isto é especialmente útil quando se trata de textos onde a formatação em linha não é realmente útil (por exemplo, PDF OCRed, .odt ou .docx mal convertidos, etc.) Num caso normal, deve ser sempre possível abrir os documentos-alvo, uma vez que apenas as etiquetas em linha são removidas. A formatação não visível (isto é, que não aparece como etiquetas no editor OmegaT) é retida nos documentos-alvo.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Comando externo de pós-processamento</term>
+
+        <listitem>
+          <para>Esta área permite introduzir um comando externo de pós-processamento (por exemplo, um script para renomear ficheiros) que será aplicado cada vez que for utilizado Criar documentos traduzidos. Este comando externo não pode incluir &quot;pipes&quot;, etc., e é por isso que se recomenda utilizar um script.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>Segmentação...</guibutton></term>
+
+        <listitem>
+          <para>As regras de segmentação são geralmente válidas em todos os projectos. O utilizador, contudo, poderá ter de gerar um conjunto de regras, específicas para o projecto em questão. Use este botão para abrir um diálogo, active a caixa <guimenuitem>Regras de segmentação específicas do projecto</guimenuitem> e depois proceda ao ajustamento das regras de segmentação conforme desejado. O novo conjunto de regras será armazenado em conjunto com o projecto e não interferirá com o conjunto geral de regras de segmentação. Para eliminar as regras de segmentação específicas do projecto, desmarque a caixa. Ver as <link linkend="dialogs.preferences.segmentationsetup">preferências de segmentação</link> para mais informação sobre as regras de segmentação.</para>
+
+          <para><emphasis>Dica</emphasis> o conjunto de regras de segmentação para um dado projecto é armazenado como <filename>project/omegat/segmentation.conf.</filename></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>Filtros de ficheiros...</guibutton></term>
+
+        <listitem>
+          <para>De forma semelhante à acima referida, o utilizador pode criar filtros de ficheiro específicos do projecto, que serão armazenados juntamente com o projecto e serão válidos apenas para o projecto actual. Para criar um conjunto específico de filtros de ficheiros, clique em <guibutton>Filtro de ficheiros ... </guibutton> e depois marque a caixa <guimenuitem>Activar filtros específicos do projecto</guimenuitem> na janela que se abre. Uma cópia da configuração alterada dos filtros será armazenada com o projecto. Para eliminar filtros de ficheiros específicos do projecto, desmarque a respectiva caixa. Note-se que no menu <guimenuitem>Opções-&gt; Filtros de ficheiro</guimenuitem>, os filtros globais do utilizador são alterados, não os filtros do projecto. Ver <link linkend="dialogs.preferences.filefilters">Preferências de filtros de ficheiros</link> para mais informações sobre o assunto.</para>
+
+          <para><emphasis>Dica:</emphasis> o conjunto de filtros de ficheiro para um dado projecto é armazenado como <filename>project/omegat/filters.xml.</filename></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Mapeamento do repositório...</term>
+
+        <listitem>
+          <para>Ao trabalhar num projecto de equipa, esta janela permite definir o mapeamento entre pastas remotas e pastas locais (ver exemplos <link linkend="howto.setupteamproject.mappingparameters">aqui</link>).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Procura externa...</term>
+
+        <listitem>
+          <para>Define os recursos de procura externa específicos do projecto.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Localização dos ficheiros</title>
+
+    <para>Aqui pode seleccionar diferentes sub-pastas, por exemplo, a sub-pasta com ficheiros de origem, sub-pasta para ficheiros de destino, etc. Se inserir nomes de pastas que ainda não existem, <application>OmegaT</application> cria-os por si. No caso de decidir modificar as pastas do projecto, tenha em mente que isto não irá mover ficheiros existentes das pastas antigas para o novo local.</para>
+
+    <para>Clique em <guibutton>Exclusões...</guibutton> para definir os ficheiros ou pastas que serão ignorados pelo <application>OmegaT</application>. Um ficheiro ou pasta ignorado:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>não é mostrado no painel do Editor,</para>
+      </listitem>
+
+      <listitem>
+        <para>não é tido em conta nas estatísticas,</para>
+      </listitem>
+
+      <listitem>
+        <para>não é copiado para a pasta /target durante o processo de criação de ficheiros traduzidos.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>No diálogo dos padrões de exclusão, é possível adicionar ou remover um padrão, ou editar um, seleccionando uma linha e premindo F2. É possível utilizar caracteres universais, usando a sintaxe <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">ant</ulink>.</para>
+  </section>
+</section>

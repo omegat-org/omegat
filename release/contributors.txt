@@ -1,6 +1,7 @@
 Lev Abashkin
 Zoltan Bartko
 Volker Berlin
+Stéphane Bonhomme
 Didier Briel
 Kim Bruning
 Alex Buloichik

@@ -37,7 +37,7 @@
 
   <para><orderedlist>
       <listitem>
-        <para>copier les fichiers dans le dossier <filename>source</filename></para>
+        <para>copier les fichiers dans le dossier <filename>./source</filename></para>
       </listitem>
 
       <listitem>

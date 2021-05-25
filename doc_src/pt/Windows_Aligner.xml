@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.aligner">
+  <title>Aligner</title>
+
+  <para>O alinhamento envolve a criação de uma memória de tradução bilingue a partir de documentos monolingues que já foram traduzidos.</para>
+
+  <para>Para aceder a esta janela, seleccionar <menuchoice> <guimenuitem>Ferramentas</guimenuitem> <guimenuitem>Alinhar ficheiros...</guimenuitem> </menuchoice>.</para>
+
+  <section>
+    <title>Passo 1: ajustar os parâmetros de alinhamento</title>
+
+    <para>Se o alinhamento parecer que pode ser melhorado, tente alterar os parâmetros. Na maioria dos casos, quanto menor for a pontuação <guilabel>Média</guilabel>, melhor será o alinhamento.</para>
+
+    <para>Em modo de comparação <guilabel>Global</guilabel>, os textos são avaliados globalmente. Em modo de comparação <guilabel>Por segmento</guilabel>, são avaliados segmento a segmento. A opção só aparece quando tal selecção é possível.</para>
+
+    <para>Use o modo de comparação <guilabel>ID</guilabel> para alinhar textos Key=Value. Isto funciona mesmo que as chaves não estejam na mesma ordem nos dois ficheiros, e/ou se os dois ficheiros não contiverem a mesma quantidade de informação. Esta opção só aparece se ambos os ficheiros seleccionados forem reconhecidos como ficheiros Key=Value.</para>
+
+    <para>Os algoritmos <guilabel>Viterbi</guilabel> e <guilabel>Forward-Backward</guilabel> são dois métodos de cálculo diferentes. Escolher o que oferecer os melhores resultados.</para>
+
+    <para>Clique em <guibutton>Continuar</guibutton> para aceder ao passo seguinte.</para>
+  </section>
+
+  <section>
+    <title>Passo 2: fazer correcções manuais</title>
+
+    <para>Após o processo automático, o alinhamento de dois ficheiros requer geralmente correcções manuais.</para>
+
+    <para>As unidades de tradução estão localizadas em células nas duas últimas colunas.</para>
+
+    <para>Para alinhar dois segmentos na mesma linha:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>Seleccione o primeiro segmento.</para>
+      </listitem>
+
+      <listitem>
+        <para>Prima a barra de espaço (atalho para <menuchoice> <guimenuitem>Editar</guimenuitem> <guimenuitem>Iniciar alinhamento pontual</guimenuitem> </menuchoice>).</para>
+      </listitem>
+
+      <listitem>
+        <para>Clique na outra coluna na tradução correspondente ao primeiro segmento.</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Após várias destas operações, seleccione <menuchoice> <guimenuitem>Editar</guimenuitem> <guimenuitem>Realinhar pendente</guimenuitem> </menuchoice> para actualizar o alinhamento dos outros segmentos.</para>
+
+    <para>Para modificar a posição de um ou mais segmentos individualmente, seleccione o(s) segmento(s) e prima <userinput>C</userinput> (<guilabel>Mover acima</guilabel>) ou<userinput>B</userinput> (<guilabel>Mover abaixo</guilabel>).</para>
+
+    <para>Apenas as linhas com a caixa <guilabel>Manter</guilabel> marcada na primeira coluna serão incluídas quando a memória de tradução for criada.</para>
+
+    <para>Quando as duas colunas estiverem suficientemente alinhadas, clique em <guibutton>Gravar TMX...</guibutton> para criar a memória de tradução resultante.</para>
+  </section>
+</section>

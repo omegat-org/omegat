@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="menus.view">
+  <title>Ansicht</title>
+
+  <variablelist>
+    <varlistentry>
+      <term>Übersetzte Segmente hervorheben</term>
+
+      <listitem>
+        <para>Wenn aktiviert, werden übersetzte Segmente gelb hervorgehoben.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Unübersetzte Segmente hervorheben</term>
+
+      <listitem>
+        <para>Wenn aktiviert, werden unübersetzte Segmente violett hervorgehoben.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Absatzbegrenzungen hervorheben</term>
+
+      <listitem>
+        <para>Wenn aktiviert, werden die Begrenzungen zwischen den Absätzen im Quelldokument visuell kenntlich gemacht.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Quellsegmente anzeigen</term>
+
+      <listitem>
+        <para>Wenn aktiviert, werden Quellsegmente angezeigt und grün hervorgehoben. Wenn deaktiviert, werden Quellsegmente nicht angezeigt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Nicht-einmalige Segmente hervorheben</term>
+
+      <listitem>
+        <para>Wenn aktiviert, werden nicht-einmalige Segmente hellgrau hervorgehoben.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segmente mit Notizen hervorheben</term>
+
+      <listitem>
+        <para>Wenn aktiviert, werden Segmente mit Notizen türkisfarben hervorgehoben. Diese Hervorhebung hat Vorrang vor <guimenuitem>Übersetzte Segmente hervorheben</guimenuitem> und <guimenuitem>Unübersetzte Segmente hervorheben</guimenuitem>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Geschützte Leerzeichen hervorheben</term>
+
+      <listitem>
+        <para>Wenn aktiviert, werden geschützte Leerzeichen mit einem grauen Hintergrund angezeigt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Leerraum hervorheben</term>
+
+      <listitem>
+        <para>Wenn aktiviert, werden Leerräume mit einem kleinen Punkt angezeigt.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>BiDi-Algorithmus-Steuerzeichen hervorheben</term>
+
+      <listitem>
+        <para>Wenn aktiviert, werden <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirektionale Steuerzeichen</ulink> farblich hervorgehoben.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Automatisch ausgefüllte Segmente hervorheben</term>
+
+      <listitem>
+        <para>Wenn aktiviert, wird der Hintergrund aller Segmente, in denen das Zielsegment automatisch ausgefüllt wurde (z. B. von TMX-Dateien, die in <filename>/tm/auto</filename> platziert wurden), farblich hervorgehoben. Die Farben werden nur angezeigt, wenn die Option <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Zustand &quot;automatisch ausgefüllt&quot; speichern</guimenuitem></link> aktiviert ist. Gewöhnliche Übersetzungen, die aus dem Ordner &quot;auto&quot; eingefügt wurden, werden orange hervorgehoben. Andere Übersetzungen, die explizit in der TMX-Datei gekennzeichnet sind, können mit unterschiedlichen Farben dargestellt werden. Technische Einzelheiten finden Sie unter <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Aggressiver Font-Fallback</term>
+
+      <listitem>
+        <para>Aktivieren Sie diese Option, falls <application>OmegaT</application> einige Glyphen nicht korrekt anzeigt (auch wenn die Schriftarten, die die entsprechenden Glyphen enthalten, auf Ihrem Rechner installiert sind). Hinweis: In Windows scheint dieser manuelle Font-Fallback-Mechanismus mit dem Standard-Font-Fallback zu interferieren, was zu einer unerwünschten Font-Substitution führen kann. Aus diesem Grund ist dieser Mechanismus standardmäßig ausgeschaltet.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Modifikationsinfo</term>
+
+      <listitem>
+        <para>Wenn Sie die Modifikationsinfo-Option auf <guimenuitem>Nur für aktives Segment anzeigen</guimenuitem> setzen, werden die Uhrzeit und der Autor der letzten Änderung nur für das aktuell aktive Segment angezeigt. Wenn Sie diese Option auf <guimenuitem>Für alle Segmente anzeigen</guimenuitem> setzen, werden die entsprechenden Informationen für alle Segmente angezeigt, und wenn Sie sie auf <guimenuitem>Keine anzeigen</guimenuitem> setzen, wird diese Option deaktiviert.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
   <title>Проєкт</title>
 
@@ -16,7 +16,7 @@
       <term><guimenuitem>Стягнути командний проєкт...</guimenuitem></term>
 
       <listitem>
-        <para>Створити локальну копію віддаленого проєкту OmegaT. Див. <link linkend="howto.useteamproject">як використовувати командні проєкти</link> для детальнішої інформації.</para>
+        <para>Створити локальну копію віддаленого проєкту OmegaT. Див. розділ <link linkend="howto.useteamproject">«Командні проєкти»</link> для детальнішої інформації.</para>
       </listitem>
     </varlistentry>
 

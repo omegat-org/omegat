@@ -12,7 +12,7 @@ resursseineen käännösprojekteiksi, joita on helppo hallita ja päivittää.
 
 
 Tietoa lisensseistä
-=====================
+===================
 
 OmegaT on lisensoitu GNU General Public Licencen (GNU GPL) eli GNU-hankkeen yleisellä lisenssillä, jonka julkaisija on Free Software Foundation. Lisenssin versionumero on 3 tai (niin halutessasi) sitä uudempi. Löydät koko lisenssitekstin kohdasta
 /docs/OmegaT-license.txt.
@@ -33,14 +33,14 @@ JRE:n valitsemiselta, hankinnalta ja asennukselta.
 
 
 OmegaT:n asentaminen (Windows)
-===========================
+==============================
 
 Käynnistä asennusohjelma.
 
 
 
 OmegaT:n asentaminen (Mac)
-=======================
+==========================
 
 Pura arkisto OmegaT.zip, niin löydät kansion, jossa on dokumentaatiotiedosto
 ja OmegaT-sovellus. Siirrä kansio sopivaan sijaintiin, esimerkiksi
@@ -49,7 +49,7 @@ Apit-kansioon.
 
 
 OmegaT:n asentaminen (Linux)
-=========================
+============================
 
 Siirrä arkisto johonkin sopivaan kansioon ja pura se. OmegaT on valmis
 käynnistettäväksi.
@@ -62,7 +62,7 @@ ovat ja suorita tiedosto komennolla ./linux-install.sh.
 
 
 OmegaT:n asentaminen (Solaris, FreeBSD jne.)
-=========================================
+============================================
 
 Siirrä arkisto johonkin sopivaan kansioon ja pura se. OmegaT on valmis
 käynnistettäväksi.
@@ -70,7 +70,7 @@ käynnistettäväksi.
 
 
 OmegatT:n asentaminen Java Web Startin avulla (kaikki käyttöjärjestelmät)
-===========================================================
+=========================================================================
 
 Jos järjestelmääsi on jo asennettu Java, voit asentaa OmegaT:n Java Web Startin
 avulla.
@@ -85,7 +85,7 @@ sekä koneellesi että ohjelmaa varten. Myöhemmin ohjelmaa ei tarvitse käyttä
 
 
 OmegaT:n käynnistäminen (Windows)
-==========================
+=================================
 
 Jos olet asennuksen yhteydessä luonut työpöydälle ohjelmaikonin,
 kaksoisnapsauta sitä.
@@ -101,7 +101,7 @@ näkyvät.
 
 
 OmegaT:n käynnistäminen (Mac)
-======================
+=============================
 
 Kaksoisnapsauta OmegaT-appia.
 
@@ -112,7 +112,7 @@ myös Spotlightin hakukentästä.
 
 
 OmegaT:n käynnistäminen (Linux)
-========================
+===============================
 
 Jos asensit OmegaT:n linux-install.sh-komentosarjalla, voit luultavimmin
 käynnistää ohjelman komennolla
@@ -137,7 +137,7 @@ ja kirjoittamalla sitten
 
 
 OmegaT:n käynnistäminen komentoriviltä (kaikki käyttöjärjestelmät)
-====================================================
+==================================================================
 
 Komento, joka käynnistää OmegaT:n, on
 
@@ -152,7 +152,7 @@ polulla, koko polkua ei tarvitse kirjoittaa.)
 
 
 Käyttöön antajat
-============
+================
 
 OmegaT:n alkuperäinen kehittäjä on Keith Godfrey.
 
@@ -194,7 +194,7 @@ ei näy listalla, ota meihin yhteyttä.)
 
 
 Hyödyllisiä linkkejä
-============
+====================
 
 Löydät ajankohtaisinta OmegaT-tietoa osoitteesta
 

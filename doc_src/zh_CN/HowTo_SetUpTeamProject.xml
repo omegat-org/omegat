@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="howto.setupteamproject">
   <title>建立团队项目</title>
 
@@ -122,7 +122,7 @@
   </section>
 
   <section>
-    <title>特殊情况：最小化共享</title>
+    <title>特殊情况：选择性共享</title>
 
     <para>上面的流程是通常的情况，其中项目经理希望完全控制项目，文件（与统计数据）在两侧（服务器侧与译者侧）是一样的。</para>
 
@@ -130,8 +130,7 @@
 
     <para>在这种情况下，流程是一样的，但项目经理并不会将（所有）文件添加到版本控制的项目中。而是由译者自行复制文件，或者添加映射来从其他位置同步文件。</para>
 
-      <para>可以通过编辑 <filename>omegat.project</filename> 或者通过用户界面上的<menuchoice><guimenuitem>项目</guimenuitem><guimenuitem>属性</guimenuitem><guimenuitem>存储库映射</guimenuitem></menuchoice>来添加映射。
-      </para>
+      <para>可以通过 UI：<menuchoice> <guimenuitem>项目</guimenuitem> <guimenuitem>属性</guimenuitem> <guimenuitem>存储库映射</guimenuitem> </menuchoice>或通过编辑 <filename>omegat.project</filename> 来添加映射。</para>
   </section>
 
   <section id="howto.setupteamproject.mappingparameters">

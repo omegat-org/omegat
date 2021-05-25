@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="howto.useteamproject">
+  <title>Ein Teamprojekt verwenden</title>
+
+  <para>OmegaT-Teamprojekte müssen zunächst auf einem Server <link linkend="howto.setupteamproject">eingerichtet</link> werden.</para>
+
+  <para>Um ein Teamprojekt zum ersten Mal zu verwenden, folgen Sie den vom Projektleiter bereitgestellten Anweisungen.</para>
+
+  <para>Nachdem das Projekt geöffnet wurde, läuft die Übersetzung wie bei einem Nicht-Teamprojekt ab, mit Ausnahme der folgenden Punkte.</para>
+
+  <para><emphasis role="bold">Automatische Speicherung</emphasis></para>
+
+  <para>Alle 3 Minuten (Standardeinstellung) wird das lokale Projekt mit dem Remote-Repository synchronisiert, so dass der Projektmanager oder ein anderer Übersetzer die neu hinzugefügten Übersetzungen sehen und verwenden kann.</para>
+
+  <para>Das 3-minütige Intervall kann in <link linkend="dialogs.preferences.savingandoutput"><menuchoice> <guimenuitem>Optionen</guimenuitem> <guimenuitem>Einstellungen</guimenuitem> <guimenuitem>Speichern und Ausgabe</guimenuitem> </menuchoice></link> geändert werden.</para>
+
+  <para><emphasis role="bold">Synchronisierte Dateien</emphasis></para>
+
+  <para>Jedes Mal, wenn das Projekt automatisch gespeichert wird, aber auch wenn es geöffnet, geschlossen und neu geladen wird, werden eigentlich nur zwei Dateien synchronisiert:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><filename>omegat/project_save.tmx</filename></para>
+    </listitem>
+
+    <listitem>
+      <para><filename>glossary/glossary.txt</filename></para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Alle anderen Dateien werden mit den Dateien aus dem Remote-Repository ersetzt.</para>
+
+  <para><emphasis role="bold">Neue Quelldateien hinzufügen</emphasis></para>
+
+  <para>So fügen Sie eine neue Quelldatei hinzu:</para>
+
+  <para><orderedlist>
+      <listitem>
+        <para>Kopieren Sie die Dateien in den Ordner <filename>/source</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Verwenden Sie <menuchoice> <guimenuitem>Projekt</guimenuitem> <guimenuitem>Quelldateien committen</guimenuitem> </menuchoice></para>
+      </listitem>
+    </orderedlist>Vorhandene Quelldateien können geändert werden, aber der Commit-Vorgang muss durchgeführt werden, bevor ein automatisches Speichern erfolgt und bevor das Projekt neu geladen oder geschlossen wird.</para>
+
+  <para><emphasis role="bold">Quelldateien löschen</emphasis></para>
+
+  <para>Dateien müssen vom Projektleiter gelöscht werden.</para>
+
+  <para><emphasis role="bold">Segmentierungsregeln oder Dateifilter ändern</emphasis></para>
+
+  <para>Projektparameter müssen vom Projektleiter geändert werden.</para>
+
+  <para><emphasis role="bold">Offline arbeiten</emphasis></para>
+
+  <para>Ein Teamprojekt kann offline geöffnet und übersetzt werden. Alle Änderungen werden synchronisiert, wenn das nächste Mal eine Verbindung verfügbar ist.</para>
+
+  <para>So arbeiten Sie offline:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Trennen Sie die Verbindung zum Netzwerk, bevor Sie das Projekt öffnen,</para>
+    </listitem>
+
+    <listitem>
+      <para>oder öffnen Sie das Projekt über die Befehlszeile mit der Option <command>--no-team</command>.</para>
+    </listitem>
+  </itemizedlist>
+</section>

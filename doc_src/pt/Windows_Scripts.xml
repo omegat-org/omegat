@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.scripts">
+  <title>Scripts</title>
+
+  <para>Esta janela é acessível seleccionando <menuchoice> <guimenuitem>Ferramentas</guimenuitem> <guimenuitem>Scripting...</guimenuitem> </menuchoice></para>
+
+  <section>
+    <title>Uso</title>
+
+    <para>A janela Scripting permite carregar um script existente na área de texto e executá-lo contra o actual projecto aberto. Para personalizar a funcionalidade de scripting, faça o seguinte:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Carregue um script no editor clicando no seu nome na lista no painel do lado esquerdo.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Clique com o botão direito do rato num botão de <guilabel>&lt;1&gt;</guilabel> a <guilabel>&lt;12&gt;</guilabel> no painel inferior e seleccione <guilabel>Adicionar script</guilabel>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Quando clicar com o botão esquerdo do rato sobre o número, o script seleccionado será executado. Pode também iniciar as macros seleccionadas a partir do menu principal utilizando as suas entradas no menu <guisubmenu>Ferramentas</guisubmenu> ou premindo<keycap> Ctrl+Alt+F</keycap> (1 a 12).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Por pré-definição, os scripts são armazenados na pasta <filename>scripts</filename> localizada na pasta de instalação do OmegaT (a pasta que contém o ficheiro <filename>OmegaT.jar</filename>)).</para>
+
+    <para>Se adicionar novos scripts lá, eles aparecerão na lista de scripts disponíveis na janela <guilabel>Scripting</guilabel>.</para>
+
+    <para>Alguns scripts adicionais podem ser encontrados aqui: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink></para>
+  </section>
+
+  <section>
+    <title>Linguagens de scripting</title>
+
+    <para>Foram implementadas as seguintes linguagens de scripting:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): uma linguagem dinâmica para a máquina virtual Java. Baseia-se nos pontos fortes do Java mas tem características de poder adicionais inspiradas por linguagens como Python, Ruby e Smalltalk.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (por vezes abreviado JS, a não confundir com Java): uma linguagem de scripting baseada em protótipos que é dinâmica, pouco dactilografada e com funções de primeira classe. É uma linguagem multi-paradigma, apoiando estilos de programação orientados para objectos, imperativos, e funcionais. Sendo a linguagem por detrás de programas populares como o Firefox, é uma ferramenta de programação familiar e preferida no domínio do código aberto.</para>
+        </listitem>
+      </itemizedlist>Todas as linguagens têm acesso ao modelo de objecto OmegaT, tendo o projecto como objecto de topo. Por exemplo, o seguinte código Groovy analisa todos os segmentos em todos os ficheiros do projecto actual e, se existir uma tradução, imprime a fonte e o alvo do segmento:</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
+  </section>
+</section>

@@ -176,7 +176,7 @@
     <section id="running.OmegaT.Linux">
       <title>Запуск <application>OmegaT</application></title>
 
-      <para>OmegaT можна запустити з командного рядка з використанням скрипта, в який вписані параметри запуску, але ви можете і клікнути на <filename>OmegaT.jar</filename>, щоб запустити його напряму. Способи запуску можуть відрізнятися залежно від дистрибутива. Перевірте, щоб налаштування <varname>PATH</varname> були правильні, та щоб файли <filename>.jar</filename> були правильно прив’язані до запуску через середовище Java. Див. нижче «Запуск з командного рядка» для більш детальних інструкцій.</para>
+      <para>OmegaT можна запустити з командного рядка з використанням скрипта, в який вписані параметри запуску, але ви можете і клікнути на <filename>OmegaT.jar</filename>, щоб запустити його напряму. Способи запуску можуть відрізнятися залежно від дистрибутива. Перевірте, щоб налаштування <varname>PATH</varname> були правильні, та щоб файли <filename>.jar</filename> були правильно прив’язані до запуску через середовище Java. Див. розділ «<link linkend="commandline.launching" endterm="commandline.launching.title"/>» для більш детальних інструкцій.</para>
     </section>
   </section>
 
@@ -218,7 +218,7 @@
 
       <para>Щоб запустити кілька <filename>OmegaT.app</filename> паралельно, клацніть двічі на файл <emphasis>OmegaT</emphasis>, що розташований у теці <filename>OmegaT.app/Contents/MacOS/</filename>.</para>
 
-      <para>Щоб запустити <application>OmegaT</application> з командного рядка використовуйте файл <filename>OmegaT.jar</filename>, що розташований у теці <filename>OmegaT.app/Contents/MacOS/Java/</filename>. Див. нижче «Запуск з командного рядка» для більш детальних інструкцій.</para>
+      <para>Щоб запустити <application>OmegaT</application> з командного рядка використовуйте файл <filename>OmegaT.jar</filename>, що розташований у теці <filename>OmegaT.app/Contents/MacOS/Java/</filename>. Див. розділ «<link linkend="commandline.launching" endterm="commandline.launching.title"/>» для більш детальних інструкцій.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -276,7 +276,7 @@
     <section id="running.OmegaT.other">
       <title>Запуск <application>OmegaT</application></title>
 
-      <para>Після того як <application>OmegaT</application> встановлена, ви можете запустити її з командного рядка, створити скрипт з потрібними параметрами запуску, чи клікнути на <filename>OmegaT.jar</filename>, щоб запустити її безпосередньо. Способи запуску можуть відрізнятися залежно від дистрибутива. Перевірте, щоб налаштування <varname>PATH</varname> були правильні, та щоб файли <filename>.jar</filename> були правильно прив’язані до запуску через середовище Java. Див. нижче «Запуск з командного рядка» для більш детальних інструкцій.</para>
+      <para>Після того як <application>OmegaT</application> встановлена, ви можете запустити її з командного рядка, створити скрипт з потрібними параметрами запуску, чи клікнути на <filename>OmegaT.jar</filename>, щоб запустити її безпосередньо. Способи запуску можуть відрізнятися залежно від дистрибутива. Перевірте, щоб налаштування <varname>PATH</varname> були правильні, та щоб файли <filename>.jar</filename> були правильно прив’язані до запуску через середовище Java. Див. розділ «<link linkend="commandline.launching" endterm="commandline.launching.title"/>» нижче для більш детальних інструкцій.</para>
     </section>
   </section>
 
@@ -300,8 +300,8 @@
     <para>Зверніть увагу, що якщо ви хочете використовувати будь-які аргументи запуску програми (див. вище), версія Java Web Start вам не підійде.</para>
   </section>
 
-  <section>
-    <title>Запуск OmegaT з командного рядка</title>
+  <section id="commandline.launching">
+    <title id="commandline.launching.title">Запуск OmegaT з командного рядка</title>
 
     <para>Зазвичай нема потреби запускати <application>OmegaT</application> з командного рядка. Але можливість запуску програми з командного рядка дозволяє отримати більший контроль над поведінкою програми. Є два способи, як запустити <application>OmegaT</application> з командного рядка.</para>
 
@@ -569,7 +569,7 @@
   <section id="building.OmegaT.from.source">
     <title>Компіляція <application>OmegaT</application></title>
 
-    <para>Код поточної версії можна завантажити за допомогою клієнта SVN із репозиторія <ulink url="svn://svn.code.sf.net/p/omegat/svn/trunk"/> чи напряму з <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tarball?path=/trunk">SourceForge</ulink>.</para>
+    <para>Код поточної версії можна завантажити за допомогою клієнта Git із репозиторія <ulink url="https://git.code.sf.net/p/omegat/code"/> чи напряму з <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tarball?path=">SourceForge</ulink>.</para>
 
     <para>Після завантаження перейдіть у теку коду програми та запустіть команду:</para>
 

@@ -5,7 +5,7 @@
 
   <variablelist>
     <varlistentry>
-      <term>.Marquer les segments traduits</term>
+      <term>Marquer les segments traduits</term>
 
       <listitem>
         <para>S'il est coché, les segments déjà traduits seront surlignés en jaune.</para>

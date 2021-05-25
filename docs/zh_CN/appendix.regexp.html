@@ -1,499 +1,579 @@
-<html>
-   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>附录 D. 正则表达式</title>
+      <link href="OmegaT_webhelp.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="appendix.spellchecker.html" rel="prev" title="附录 C. 拼写检查" />
+      <link href="appendix.shortcut.custom.html" rel="next" title="附录 E. 快捷键自定义" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
    
-      <title>附录&nbsp;D.&nbsp;正则表达式</title>
-      <link rel="stylesheet" type="text/css" href="OmegaT.css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
-      <link rel="home" href="index.html" title="OmegaT 4.2 - 用户指南">
-      <link rel="up" href="index.html" title="OmegaT 4.2 - 用户指南">
-      <link rel="prev" href="appendix.spellchecker.html" title="附录&nbsp;C.&nbsp;拼写检查">
-      <link rel="next" href="appendix.shortcut.custom.html" title="附录&nbsp;E.&nbsp;快捷键自定义">
-   </head>
-   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-      <div class="navheader">
-         <table width="100%" summary="Navigation header">
-            <tr>
-               <th colspan="3" align="center">附录&nbsp;D.&nbsp;正则表达式</th>
-            </tr>
-            <tr>
-               <td width="20%" align="left"><a accesskey="p" href="appendix.spellchecker.html">上一页</a>&nbsp;
-               </td>
-               <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.shortcut.custom.html">下一页</a></td>
-            </tr>
-         </table>
-         <hr>
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 4.2 - 用户指南</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
       </div>
-      <div class="appendix">
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">附录 D. 正则表达式</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="appendix.spellchecker.html">上一页</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="appendix.shortcut.custom.html">下一页</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="appendix" id="appendix.regexp">
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.regexp"></a>附录&nbsp;D.&nbsp;正则表达式
-                  </h1>
+                  <h1 class="title">附录 D. 正则表达式</h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl class="toc">
-               <dt><span class="section"><a href="appendix.regexp.html#regex.tools.and.examples.of.use">1. 正则表达式工具和使用实例</a></span></dt>
-            </dl>
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="appendix.regexp.html#regex.tools.and.examples.of.use">正则表达式工具和使用实例</a>
+                  </span>
+               </li>
+            </ul>
          </div>
-         <p>在查找功能和片段分割规则中所使用的是 Java 所支持的正则表达式。如果你需要更多详细信息，请参阅 <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">Java 正则表达式文档</a>。参见以下的参考和范例。
-         </p>
-         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+         <p>在查找功能和片段分割规则中所使用的是 Java 所支持的正则表达式。如果你需要更多详细信息，请参阅 <a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html" target="_top">Java 正则表达式文档</a>。参见以下的参考和范例。</p>
+         <div class="note">
             <h3 class="title">注意</h3>
             <p>本章内容是为高级用户准备的，用于定义自己的分割规则变体或设计更复杂更强大的关键字查找内容。</p>
          </div>
-         <div class="table"><a name="d0e5935"></a><p class="title"><b>表&nbsp;D.1.&nbsp;正则表达式 - 标志</b></p>
+         <div class="table" id="d0e5992">
+            <div class="table-title">表 D.1. 正则表达式 - 标志</div>
             <div class="table-contents">
-               <table class="table" summary="正则表达式 - 标志" border="1">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                   <colgroup>
-                     <col align="left">
-                     <col>
+                     <col style="text-align: left; " />
+                     <col />
                   </colgroup>
                   <thead>
                      <tr>
-                        <th align="left">结构</th>
-                        <th align="left">……匹配以下内容：</th>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">……匹配以下内容：</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr>
-                        <td align="left">(?i)</td>
-                        <td align="left">启用不区分大小写的匹配（默认情况下，模式区分大小写）。</td>
+                        <td style="text-align: left; border-right: 1px solid ; ">(?i)</td>
+                        <td style="text-align: left; ">启用不区分大小写的匹配（默认情况下，模式区分大小写）。</td>
                      </tr>
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e5952"></a><p class="title"><b>表&nbsp;D.2.&nbsp;正则表达式 - 字符</b></p>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6009">
+            <div class="table-title">表 D.2. 正则表达式 - 字符</div>
             <div class="table-contents">
-               <table class="table" summary="正则表达式 - 字符" border="1">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                   <colgroup>
-                     <col align="left">
-                     <col>
+                     <col style="text-align: left; " />
+                     <col />
                   </colgroup>
                   <thead>
                      <tr>
-                        <th align="left">结构</th>
-                        <th align="left">……匹配以下内容：</th>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">……匹配以下内容：</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr>
-                        <td align="left">x</td>
-                        <td align="left">字符 x，除了以下情况……</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">x</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">字符 x，除了以下情况……</td>
                      </tr>
                      <tr>
-                        <td align="left">\uhhhh</td>
-                        <td align="left">十六进制值为 0xhhhh 的字符</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\uhhhh</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">十六进制值为 0xhhhh 的字符</td>
                      </tr>
                      <tr>
-                        <td align="left">\t</td>
-                        <td align="left">Tab（制表符）（'\u0009'）</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\t</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Tab（制表符）（'\u0009'）</td>
                      </tr>
                      <tr>
-                        <td align="left">\n</td>
-                        <td align="left">新行（换行）（'\u000A'）</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\n</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">新行（换行）（'\u000A'）</td>
                      </tr>
                      <tr>
-                        <td align="left">\r</td>
-                        <td align="left">回车（'\u000D'）</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\r</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">回车（'\u000D'）</td>
                      </tr>
                      <tr>
-                        <td align="left">\f</td>
-                        <td align="left">换页（'\u000C'）</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\f</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">换页（'\u000C'）</td>
                      </tr>
                      <tr>
-                        <td align="left">\a</td>
-                        <td align="left">告警（响铃）（'\u0007'）</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\a</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">告警（响铃）（'\u0007'）</td>
                      </tr>
                      <tr>
-                        <td align="left">\e</td>
-                        <td align="left">Esc（退出）（'\u001B'）</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\e</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">Esc（退出）（'\u001B'）</td>
                      </tr>
                      <tr>
-                        <td align="left">\cx</td>
-                        <td align="left">对应于 x 的控制字符</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\cx</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">对应于 x 的控制字符</td>
                      </tr>
                      <tr>
-                        <td align="left">\0n</td>
-                        <td align="left">八进制值为 0n（0 &lt;= n &lt;= 7）的字符</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\0n</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">八进制值为 0n（0 &lt;= n &lt;= 7）的字符</td>
                      </tr>
                      <tr>
-                        <td align="left">\0nn</td>
-                        <td align="left">八进制值为 0nn（0 &lt;= n &lt;= 7）的字符</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\0nn</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">八进制值为 0nn（0 &lt;= n &lt;= 7）的字符</td>
                      </tr>
                      <tr>
-                        <td align="left">\0mnn</td>
-                        <td align="left">八进制值为 0mnn（0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7）的字符</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\0mnn</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">八进制值为 0mnn（0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7）的字符</td>
                      </tr>
                      <tr>
-                        <td align="left">\xhh</td>
-                        <td align="left">十六进制值为 0xhh 的字符</td>
+                        <td style="text-align: left; border-right: 1px solid ; ">\xhh</td>
+                        <td style="text-align: left; ">十六进制值为 0xhh 的字符</td>
                      </tr>
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6029"></a><p class="title"><b>表&nbsp;D.3.&nbsp;正则表达式 - 转义</b></p>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6086">
+            <div class="table-title">表 D.3. 正则表达式 - 转义</div>
             <div class="table-contents">
-               <table class="table" summary="正则表达式 - 转义" border="1">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                   <colgroup>
-                     <col align="left">
-                     <col>
+                     <col style="text-align: left; " />
+                     <col />
                   </colgroup>
                   <thead>
                      <tr>
-                        <th align="left">结构</th>
-                        <th align="left">...匹配下列内容</th>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...匹配下列内容</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr>
-                        <td align="left">\</td>
-                        <td align="left">不匹配任何内容，但会转义后继的字符。需要输入元字符 !$()*+.&lt;&gt;?[\]^{|} 之一来匹配其自身时就必须这样。</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">不匹配任何内容，但会转义后继的字符。需要输入元字符 !$()*+.&lt;&gt;?[\]^{|} 之一来匹配其自身时就必须这样。</td>
                      </tr>
                      <tr>
-                        <td align="left">\\</td>
-                        <td align="left">比如，这是反斜杠字符</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\\</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">比如，这是反斜杠字符</td>
                      </tr>
                      <tr>
-                        <td align="left">\Q</td>
-                        <td align="left">不匹配任何内容，但转义后继 \E 之前的所有字符</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\Q</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">不匹配任何内容，但转义后继 \E 之前的所有字符</td>
                      </tr>
                      <tr>
-                        <td align="left">\E</td>
-                        <td align="left">不匹配任何内容，但结束由 \Q 开始的转义</td>
+                        <td style="text-align: left; border-right: 1px solid ; ">\E</td>
+                        <td style="text-align: left; ">不匹配任何内容，但结束由 \Q 开始的转义</td>
                      </tr>
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6061"></a><p class="title"><b>表&nbsp;D.4.&nbsp;正则表达式 - Unicode 字区与分类类别</b></p>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6118">
+            <div class="table-title">表 D.4. 正则表达式 - Unicode 字区与分类类别</div>
             <div class="table-contents">
-               <table class="table" summary="正则表达式 - Unicode 字区与分类类别" border="1">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                   <colgroup>
-                     <col align="left">
-                     <col>
+                     <col style="text-align: left; " />
+                     <col />
                   </colgroup>
                   <thead>
                      <tr>
-                        <th align="left">结构</th>
-                        <th align="left">...匹配下列内容</th>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...匹配下列内容</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr>
-                        <td align="left">\p{InGreek}</td>
-                        <td align="left">希腊字母区中的字符（单<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">字区</a>）
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\p{InGreek}</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">希腊字母区中的字符（单<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">字区</a>）</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\p{Lu}</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">大写字母（单<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">分类</a>）</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\p{Sc}</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">货币符号</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\P{InGreek}</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">任何不在希腊字母区中的字符（取反）</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td style="text-align: left; ">除大写字母外的所有字母（减法）</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6161">
+            <div class="table-title">表 D.5. 正则表达式 - 字符类</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...匹配下列内容</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">[abc]</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">a、b 或 c（单类）</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">[^abc]</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">除 a、b 或 c 之外的任何字符（取反）</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">[a-zA-Z]</td>
+                        <td style="text-align: left; ">a 到 z 和 A 到 Z 的字符，包含边界（区间）</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6188">
+            <div class="table-title">表 D.6. 正则表达式 - 预定义字符类</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...匹配下列内容</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">.</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">任意字符（行终止符除外）</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\d</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">数字：[0-9]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\D</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">非数字：[^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">空白字符：[ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\S</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">非空白字符：[^\s]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\w</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">单词字符：[a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">\W</td>
+                        <td style="text-align: left; ">非单词字符：[^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6235">
+            <div class="table-title">表 D.7. 正则表达式 - 边界匹配符</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...匹配下列内容</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">^</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">行首</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">$</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">行尾</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\b</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">单词边界</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">\B</td>
+                        <td style="text-align: left; ">非单词边界</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="table" id="d0e6267">
+            <div class="table-title">表 D.8. 正则表达式 - 贪婪量词</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...匹配下列内容</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X<span class="emphasis">
+                              <em>?</em>
+                           </span>
                         </td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X，出现一次或不出现</td>
                      </tr>
                      <tr>
-                        <td align="left">\p{Lu}</td>
-                        <td align="left">大写字母（单<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">分类</a>）
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X<span class="emphasis">
+                              <em>*</em>
+                           </span>
                         </td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X，出现零次或多次</td>
                      </tr>
                      <tr>
-                        <td align="left">\p{Sc}</td>
-                        <td align="left">货币符号</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\P{InGreek}</td>
-                        <td align="left">任何不在希腊字母区中的字符（取反）</td>
-                     </tr>
-                     <tr>
-                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
-                        <td align="left">除大写字母外的所有字母（减法）</td>
+                        <td style="text-align: left; border-right: 1px solid ; ">X<span class="emphasis">
+                              <em>+</em>
+                           </span>
+                        </td>
+                        <td style="text-align: left; ">X，出现一次或多次</td>
                      </tr>
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6104"></a><p class="title"><b>表&nbsp;D.5.&nbsp;正则表达式 - 字符类</b></p>
-            <div class="table-contents">
-               <table class="table" summary="正则表达式 - 字符类" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">结构</th>
-                        <th align="left">...匹配下列内容</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">[abc]</td>
-                        <td align="left">a、b 或 c（单类）</td>
-                     </tr>
-                     <tr>
-                        <td align="left">[^abc]</td>
-                        <td align="left">除 a、b 或 c 之外的任何字符（取反）</td>
-                     </tr>
-                     <tr>
-                        <td align="left">[a-zA-Z]</td>
-                        <td align="left">a 到 z 和 A 到 Z 的字符，包含边界（区间）</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6131"></a><p class="title"><b>表&nbsp;D.6.&nbsp;正则表达式 - 预定义字符类</b></p>
-            <div class="table-contents">
-               <table class="table" summary="正则表达式 - 预定义字符类" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">结构</th>
-                        <th align="left">...匹配下列内容</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">.</td>
-                        <td align="left">任意字符（行终止符除外）</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\d</td>
-                        <td align="left">数字：[0-9]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\D</td>
-                        <td align="left">非数字：[^0-9]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\s</td>
-                        <td align="left">空白字符：[ \t\n\x0B\f\r]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\S</td>
-                        <td align="left">非空白字符：[^\s]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\w</td>
-                        <td align="left">单词字符：[a-zA-Z_0-9]</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\W</td>
-                        <td align="left">非单词字符：[^\w]</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6178"></a><p class="title"><b>表&nbsp;D.7.&nbsp;正则表达式 - 边界匹配符</b></p>
-            <div class="table-contents">
-               <table class="table" summary="正则表达式 - 边界匹配符" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">结构</th>
-                        <th align="left">...匹配下列内容</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">^</td>
-                        <td align="left">行首</td>
-                     </tr>
-                     <tr>
-                        <td align="left">$</td>
-                        <td align="left">行尾</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\b</td>
-                        <td align="left">单词边界</td>
-                     </tr>
-                     <tr>
-                        <td align="left">\B</td>
-                        <td align="left">非单词边界</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="table"><a name="d0e6210"></a><p class="title"><b>表&nbsp;D.8.&nbsp;正则表达式 - 贪婪量词</b></p>
-            <div class="table-contents">
-               <table class="table" summary="正则表达式 - 贪婪量词" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">结构</th>
-                        <th align="left">...匹配下列内容</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
-                        <td align="left">X，出现一次或不出现</td>
-                     </tr>
-                     <tr>
-                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
-                        <td align="left">X，出现零次或多次</td>
-                     </tr>
-                     <tr>
-                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
-                        <td align="left">X，出现一次或多次</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+         </div>
+         <br class="table-break" />
+         <div class="note">
             <h3 class="title">注意</h3>
-            <p>贪婪量词会尽可能多地匹配。例如，<span class="emphasis"><em>a+</em></span> 会匹配 <span class="emphasis"><em>aaabbb</em></span> 中的 aaa
+            <p>贪婪量词会尽可能多地匹配。例如，<span class="emphasis">
+                  <em>a+</em>
+               </span> 会匹配 <span class="emphasis">
+                  <em>aaabbb</em>
+               </span> 中的 aaa</p>
+         </div>
+         <div class="table" id="d0e6309">
+            <div class="table-title">表 D.9. 正则表达式 - 懒惰（非贪婪）量词</div>
+            <div class="table-contents">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                  <colgroup>
+                     <col style="text-align: left; " />
+                     <col />
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...匹配下列内容</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X??</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X，出现一次或不出现</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X*?</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X，出现零次或多次</td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: left; border-right: 1px solid ; ">X+?</td>
+                        <td style="text-align: left; ">X，出现一次或多次</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <br class="table-break" />
+         <div class="note">
+            <h3 class="title">注意</h3>
+            <p>非贪婪量词会尽可能少地匹配。例如，<span class="emphasis">
+                  <em>a+?</em>
+               </span> 会匹配 <span class="emphasis">
+                  <em>aaabbb</em>
+               </span> 中的第一个 <span class="emphasis">
+                  <em>a</em>
+               </span>
             </p>
          </div>
-         <div class="table"><a name="d0e6252"></a><p class="title"><b>表&nbsp;D.9.&nbsp;正则表达式 - 懒惰（非贪婪）量词</b></p>
+         <div class="table" id="d0e6347">
+            <div class="table-title">表 D.10. 正则表达式 - 逻辑运算符</div>
             <div class="table-contents">
-               <table class="table" summary="正则表达式 - 懒惰（非贪婪）量词" border="1">
+               <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                   <colgroup>
-                     <col align="left">
-                     <col>
+                     <col style="text-align: left; " />
+                     <col />
                   </colgroup>
                   <thead>
                      <tr>
-                        <th align="left">结构</th>
-                        <th align="left">...匹配下列内容</th>
+                        <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">结构</th>
+                        <th style="text-align: left; border-bottom: 1px solid ; ">...匹配下列内容</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr>
-                        <td align="left">X??</td>
-                        <td align="left">X，出现一次或不出现</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">XY</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X 后跟着 Y</td>
                      </tr>
                      <tr>
-                        <td align="left">X*?</td>
-                        <td align="left">X，出现零次或多次</td>
+                        <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">X|Y</td>
+                        <td style="text-align: left; border-bottom: 1px solid ; ">X 或 Y</td>
                      </tr>
                      <tr>
-                        <td align="left">X+?</td>
-                        <td align="left">X，出现一次或多次</td>
+                        <td style="text-align: left; border-right: 1px solid ; ">(XY)</td>
+                        <td style="text-align: left; ">XY 作为整体出现</td>
                      </tr>
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
-            <h3 class="title">注意</h3>
-            <p>非贪婪量词会尽可能少地匹配。例如，<span class="emphasis"><em>a+?</em></span> 会匹配 <span class="emphasis"><em>aaabbb</em></span> 中的第一个 <span class="emphasis"><em>a</em></span></p>
          </div>
-         <div class="table"><a name="d0e6290"></a><p class="title"><b>表&nbsp;D.10.&nbsp;正则表达式 - 逻辑运算符</b></p>
-            <div class="table-contents">
-               <table class="table" summary="正则表达式 - 逻辑运算符" border="1">
-                  <colgroup>
-                     <col align="left">
-                     <col>
-                  </colgroup>
-                  <thead>
-                     <tr>
-                        <th align="left">结构</th>
-                        <th align="left">...匹配下列内容</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td align="left">XY</td>
-                        <td align="left">X 后跟着 Y</td>
-                     </tr>
-                     <tr>
-                        <td align="left">X|Y</td>
-                        <td align="left">X 或 Y</td>
-                     </tr>
-                     <tr>
-                        <td align="left">(XY)</td>
-                        <td align="left">XY 作为整体出现</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </div><br class="table-break"><div class="section">
+         <br class="table-break" />
+         <section class="section" id="regex.tools.and.examples.of.use">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;正则表达式工具和使用实例
-                     </h2>
+                     <h2 class="title" style="clear: both">正则表达式工具和使用实例</h2>
                   </div>
                </div>
             </div>
             <p>有许多交互式工具可用于开发和测试正则表达式。它们大致上遵循相同的模式（见下面的 Regular Expression Tester 示例）：正则表达式（顶上的条目）分析要进行查找的文本（中间的文本框），产生命中，将其显示在结果文本框中。</p>
-            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>图&nbsp;D.1.&nbsp;Regex Tester</b></p>
+            <div class="figure" id="regerx.tester">
+               <div class="figure-title">图 D.1. Regex Tester</div>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Regex Tester"></div>
+                  <div class="mediaobject">
+                     <img alt="Regex Tester" src="images/RegexTester.png" />
+                  </div>
                </div>
-            </div><br class="figure-break"><p>参见 Windows、Linux、FreeBSD 版本的独立工具 <a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a>。这和上面的示例大致上相同。
-            </p>
-            <p>在 <span class="application">OmegaT</span> 本身就可以找到很多很有用的正则表达式案例（参见 选项 &gt; 分割）。以下列出了在翻译记忆库中搜索时可能会用到的表达式：
-            </p>
-            <div class="table"><a name="d0e6340"></a><p class="title"><b>表&nbsp;D.11.&nbsp;正则表达式 - 翻译中用到的正则表达式示例</b></p>
+            </div>
+            <br class="figure-break" />
+            <p>参见 Windows、Linux、FreeBSD 版本的独立工具 <a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a>。这和上面的示例大致上相同。</p>
+            <p>在 <span class="application">OmegaT</span> 本身就可以找到很多很有用的正则表达式案例（参见 选项 &gt; 分割）。以下列出了在翻译记忆库中搜索时可能会用到的表达式：</p>
+            <div class="table" id="d0e6397">
+               <div class="table-title">表 D.11. 正则表达式 - 翻译中用到的正则表达式示例</div>
                <div class="table-contents">
-                  <table class="table" summary="正则表达式 - 翻译中用到的正则表达式示例" border="1">
+                  <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                      <colgroup>
-                        <col align="left">
-                        <col>
+                        <col style="text-align: left; " />
+                        <col />
                      </colgroup>
                      <thead>
                         <tr>
-                           <th align="left">正则表达式</th>
-                           <th align="left">查找以下内容：</th>
+                           <th style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">正则表达式</th>
+                           <th style="text-align: left; border-bottom: 1px solid ; ">查找以下内容：</th>
                         </tr>
                      </thead>
                      <tbody>
                         <tr>
-                           <td align="left">(\b\w+\b)\s\1\b</td>
-                           <td align="left">重复单词</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">(\b\w+\b)\s\1\b</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">重复单词</td>
                         </tr>
                         <tr>
-                           <td align="left">[\.,]\s*[\.,]+</td>
-                           <td align="left">一个逗号或句点后面跟着若干空格然后是另一个逗号或句点</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">[\.,]\s*[\.,]+</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">一个逗号或句点后面跟着若干空格然后是另一个逗号或句点</td>
                         </tr>
                         <tr>
-                           <td align="left">\. \s+$</td>
-                           <td align="left">在行尾位于句点后的额外空格</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\. \s+$</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">在行尾位于句点后的额外空格</td>
                         </tr>
                         <tr>
-                           <td align="left">\s+a\s+[aeiou]</td>
-                           <td align="left">英语：以元音开头的单词前面应当是 “an” 而不是 “a”</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\s+a\s+[aeiou]</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">英语：以元音开头的单词前面应当是 “an” 而不是 “a”</td>
                         </tr>
                         <tr>
-                           <td align="left">\s+an\s+[^aeiou]</td>
-                           <td align="left">英语：检查的内容与上一条一样，但针对辅音（“a” 而非 “an”)</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\s+an\s+[^aeiou]</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">英语：检查的内容与上一条一样，但针对辅音（“a” 而非 “an”)</td>
                         </tr>
                         <tr>
-                           <td align="left">\s{2,}</td>
-                           <td align="left">多个空格</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\s{2,}</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">多个空格</td>
                         </tr>
                         <tr>
-                           <td align="left">\.[A-Z]</td>
-                           <td align="left">句点后面跟着一个大写字母——在句点和下一个句子开头之间是否少了个空格？</td>
+                           <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">\.[A-Z]</td>
+                           <td style="text-align: left; border-bottom: 1px solid ; ">句点后面跟着一个大写字母——在句点和下一个句子开头之间是否少了个空格？</td>
                         </tr>
                         <tr>
-                           <td align="left">\bis\b</td>
-                           <td align="left">查找 “is”，但不匹配 “this” 或 “isn't” 等。</td>
+                           <td style="text-align: left; border-right: 1px solid ; ">\bis\b</td>
+                           <td style="text-align: left; ">查找 “is”，但不匹配 “this” 或 “isn't” 等。</td>
                         </tr>
                      </tbody>
                   </table>
                </div>
-            </div><br class="table-break"></div>
-      </div>
-      <div class="navfooter">
-         <hr>
-         <table width="100%" summary="Navigation footer">
-            <tr>
-               <td width="40%" align="left"><a accesskey="p" href="appendix.spellchecker.html">上一页</a>&nbsp;
-               </td>
-               <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.shortcut.custom.html">下一页</a></td>
-            </tr>
-            <tr>
-               <td width="40%" align="left" valign="top">附录&nbsp;C.&nbsp;拼写检查&nbsp;</td>
-               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;附录&nbsp;E.&nbsp;快捷键自定义</td>
-            </tr>
-         </table>
-      </div>
-   </body>
-</html>
+            </div>
+            <br class="table-break" />
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="appendix.spellchecker.html">上一页</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="appendix.shortcut.custom.html">下一页</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">附录 C. 拼写检查 </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">起始页</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> 附录 E. 快捷键自定义</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

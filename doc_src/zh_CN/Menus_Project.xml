@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
   <title>项目</title>
 
@@ -16,7 +16,7 @@
       <term><guimenuitem>下载团队项目...</guimenuitem></term>
 
       <listitem>
-        <para>创建远程 OmegaT 项目的本地副本。详细信息请参考<link linkend="howto.useteamproject">如何使用团队项目</link>。</para>
+        <para>创建远程 OmegaT 项目的本地副本。详细信息请参考<link linkend="howto.useteamproject">使用团队项目</link>。</para>
       </listitem>
     </varlistentry>
 
@@ -166,7 +166,7 @@
       <term>项目文件...</term>
 
       <listitem>
-        <para>打开<link linkend="windows.projectfiles">项目文件窗口</link>。</para>
+        <para>打开<link linkend="windows.projectfiles">项目文件</link>窗口。</para>
       </listitem>
     </varlistentry>
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.scripts">
+  <title>Skripte</title>
+
+  <para>Dieses Fenster kann über <menuchoice> <guimenuitem>Tools</guimenuitem> <guimenuitem>Scripting...</guimenuitem> </menuchoice> aufgerufen werden.</para>
+
+  <section>
+    <title>Benutzung</title>
+
+    <para>Das Scripting-Fenster ermöglicht es Ihnen, ein existierendes Skript in den Textbereich zu laden und für das aktuell geöffnete Projekt auszuführen. Um das Scripting-Feature anzupassen, gehen Sie wie folgt vor:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Klicken Sie auf den Namen eines Skripts in der Liste im linken Bereich, um es in den Editor zu laden.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Rechtsklicken Sie im unteren Bedienfeld auf eine der Schaltflächen von <guilabel>&lt;1&gt;</guilabel> bis <guilabel>&lt;12&gt;</guilabel> und wählen Sie <guilabel>Skript hinzufügen</guilabel> aus.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Wenn Sie mit der linken Maustaste auf die Nummer klicken, wird das ausgewählte Skript ausgeführt. Sie können die ausgewählten Makros auch über das Hauptmenü starten, indem Sie deren Menüpunkte im <guisubmenu>Tools</guisubmenu>-Menü verwenden oder <keycap>Strg+Alt+F#</keycap> drücken (# ist eine Zahl von 1 bis 12).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Standardmäßig werden Skripte im <filename>scripts</filename>-Ordner gespeichert, der sich im OmegaT-Installationsordner (der Ordner, der die <filename>OmegaT.jar</filename>-Datei enthält) befindet.</para>
+
+    <para>Jedes Skript, das Sie dort einfügen, erscheint in der Skriptliste im <guilabel>Scripting</guilabel>-Fenster.</para>
+
+    <para>Weitere Skripte können Sie hier finden: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink></para>
+  </section>
+
+  <section>
+    <title>Skriptsprachen</title>
+
+    <para>Die folgenden Skriptsprachen wurden implementiert:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): eine dynamische Sprache für die Java Virtual Machine. Sie baut auf den Stärken von Java auf, verfügt aber über zusätzliche Power-Features, die von Sprachen wie Python, Ruby und Smalltalk inspiriert sind.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (manchmal mit JS abgekürzt, nicht zu verwechseln mit Java): eine prototypbasierte Skriptsprache, die dynamisch typisiert ist und über erstklassige Features verfügt. Sie ist eine Multi-Paradigma-Sprache, die objektorientierte, imperative und funktionale Programmierstile unterstützt. JavaScript wird von vielen populären Programmen wie z. B. Firefox verwendet und ist im Open-Source-Bereich ein bekanntes und beliebtes Programmierwerkzeug.</para>
+        </listitem>
+      </itemizedlist>Alle Sprachen haben Zugriff auf das OmegaT-Objektmodell; das Projekt selbst kann über das Objekt namens &quot;project&quot; angesprochen werden. Das folgende Groovy-Code-Snippet durchsucht zum Beispiel alle Segmente des gesamten Projekts und zeigt, sofern eine Übersetzung existiert, die Quelle und das Ziel des Segments an:</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
+  </section>
+</section>

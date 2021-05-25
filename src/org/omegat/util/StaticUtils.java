@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -438,6 +439,16 @@ public final class StaticUtils {
             haystack.replace(globIndex, globIndex + 1, replacement);
             current = globIndex + replacement.length();
         }
+    }
+
+    /**
+     * Download a file to memory.
+     * @Deprecated
+     * This method is replaced to HttpConnectionUtils.getURL(url, timeout)
+     */
+    @Deprecated
+    public static String downloadFileToString(URL url, int timeout) throws IOException {
+        return HttpConnectionUtils.getURL(url, timeout);
     }
 
     /**

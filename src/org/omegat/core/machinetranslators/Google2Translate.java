@@ -44,7 +44,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.net.HttpConnectionUtils;
+import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Support of Google Translate API v.2 machine translation.
@@ -129,7 +129,7 @@ public class Google2Translate extends BaseTranslate {
 
         tr = unescapeHTML(tr);
 
-        tr = cleanSpacesAroundTags(tr, text);
+        tr = cleanSpacesAroundTags(tr, trText);
 
         putToCache(sLang, tLang, trText, tr);
         return tr;

@@ -1,7 +1,7 @@
 "JRELoadError" = "No s'ha pogut carregar l'entorn d'execució del Java.";
 "JRExLoadError" = "No s'ha pogut carregar l'entorn d'execució del Java %d.";
-"JRExLoadFullError" = "Aquesta aplicació necessita que tingueu instal·lat el Java %d o una versió posterior en l'ordinador. Baixeu i instal·leu la versió més recent del Java de www.java.com i torneu-ho a provar.";
-"JDKxLoadFullError" = "Aquesta aplicació necessita que tingueu instal·lat el Java %d JDK o una versió posterior en l'ordinador. Baixeu i instal·leu la versió més recent del Java JDK d'Oracle.com i torneu-ho a provar.";
+"JRExLoadFullError" = "Aquesta aplicació requereix que tingueu instal·lat el Java %d o una versió posterior en l'ordinador. Baixeu i instal·leu la versió més recent del Java de www.java.com i torneu-ho a provar.";
+"JDKxLoadFullError" = "Aquesta aplicació requereix que tingueu instal·lat el Java %d JDK o una versió posterior en l'ordinador. Baixeu i instal·leu la versió més recent del Java JDK d'Oracle.com i torneu-ho a provar.";
 "MainClassNameRequired" = "El nom de la classe principal és obligatori.";
 "JavaDirectoryNotFound" = "No s'ha pogut enumerar el contingut del directori del Java.";
 "BundlePathContainsColon" = "No es pot iniciar des d'una carpeta que contingut \"/\" en el nom.";

@@ -119,28 +119,31 @@
         <equals arg1="${language}" arg2="en"/>
     </condition>
 
-    <target name="chunk" depends="include">
+    <target name="xhtml5-chunk" depends="include">
         <java dir="."
               fork="true"
               failonerror="true"
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="${language}/index.xml" />
-            <arg value="${dbk}/html/chunk.xsl" />
+            <arg value="${dbk}/xhtml5/chunk.xsl" />
             <arg value="use.id.as.filename=1" />
-            <arg value="base.dir=../docs/${language}/" />
+            <arg value="html.ext=.html"/>
+            <arg value="base.dir=${language}/xhtml5" />
             <arg value="chunk.section.depth=0" />
             <arg value="chunk.first.sections=0" />
             <arg value="chunker.output.encoding=UTF-8" />
             <arg value="chunker.output.indent=yes" />
             <arg value="use.extensions=1" />
-            <arg value="chapter.autolabel=1" />
-            <arg value="section.autolabel=1" />
+            <arg value="chapter.autolabel=0" />
+            <arg value="section.autolabel=0" />
             <arg value="tablecolumns.extension=0" />
             <arg value="toc.max.depth=2" />
             <arg value="generate.toc=book toc,title,figure,table chapter toc appendix toc" />
             <arg value="generate.index=1" />
-            <arg value="html.stylesheet=OmegaT.css" />
+            <arg value="root.filename=index_" />
+            <arg value="html.stylesheet=OmegaT_webhelp.css" />
+            <arg value="docbook.css.link=0" />
             <arg value="saxon.character.representation=native;decimal"/>
             <classpath>
                 <pathelement location="${saxon}" />
@@ -150,6 +153,12 @@
         <copy file="${language}/${version.properties.filename}"
               tofile="../docs/${language}/${version.properties.filename}" />
     </target>
+
+    <target name="css">
+      <copy file="OmegaT.css"
+            tofile="../docs/${language}/OmegaT_webhelp.css" />
+    </target>
+
 
     <target name="instant-start">
         <java dir="."
@@ -178,14 +187,96 @@
             </classpath>
         </java>
         <copy file="${language}/OmegaT.css" tofile="../docs/${language}/OmegaT.css" />
+    </target>
+
+    <target name="pictures">
         <copy todir="../docs/${language}/images">
-             <fileset dir="${language}/images" />
+            <fileset dir="${language}/images" />
         </copy>
     </target>
 
-    <target name="html" depends="chunk,instant-start">
+    <target name="whc-toc" depends="xhtml5-chunk">
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              classname="com.icl.saxon.StyleSheet" >
+            <arg value="-o" />
+            <arg value="${language}/xhtml5/toc.xml" />
+            <arg value="${language}/xhtml5/index_.html" />
+            <arg value="whc-toc.xsl" />
+            <arg value="language=${language}"/>
+            <classpath>
+                <pathelement location="${saxon}" />
+                <pathelement path="${saxon}" />
+            </classpath>
+        </java>
     </target>
 
+    <target name="whc-index" depends="xhtml5-chunk">
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              classname="com.icl.saxon.StyleSheet" >
+            <arg value="-o" />
+            <arg value="${language}/xhtml5/index.html" />
+            <arg value="${language}/xhtml5/index_.html" />
+            <arg value="whc-index.xsl" />
+            <arg value="language=${language}"/>
+            <classpath>
+                <pathelement location="${saxon}" />
+                <pathelement path="${saxon}" />
+            </classpath>
+        </java>
+        <delete file="${language}/xhtml5/index_.html"/>
+    </target>
+
+    <target name="whc-header">
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              classname="com.icl.saxon.StyleSheet" >
+            <arg value="-o" />
+            <arg value="${language}/xhtml5/header.xhtml" />
+            <arg value="${language}/index.xml" />
+            <arg value="whc-header.xsl" />
+            <arg value="language=${language}"/>
+            <classpath>
+                <pathelement location="${saxon}" />
+                <pathelement path="${saxon}" />
+            </classpath>
+        </java>
+        <copy file="../images/OmegaT.svg" tofile="../docs/${language}/images/omegat.svg"/>
+    </target>
+
+    <target name="whc" depends="whc-toc,whc-header,whc-index">
+        <fileset id="dist.contents" dir="${language}/xhtml5" includes="*.html"/>
+        <pathconvert property="prop.dist.contents" refid="dist.contents" pathsep=" "/>
+
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              jar="${whc}" >
+            <arg line="-p layout simple"/>
+            <arg line="-p user-header ${language}/xhtml5/header.xhtml"/>
+            <arg line="-p --navigation-background-color #FDFDFD"/>
+            <arg line="-p --field-background-color #FDFDFD"/>
+            <arg line="-p --panel-background-color #FDFDFD"/>
+            <arg line="-p local-jquery yes"/>
+            <arg value="-toc"/>
+            <arg value="${language}/xhtml5/toc.xml"/>
+            <arg value="-index"/>
+            <arg value="${language}/xhtml5/index.html"/>
+            <arg value="../docs/${language}"/>
+            <arg line="${prop.dist.contents}"/>
+        </java>
+        <delete file="${language}/xhtml5/index_.html"/>
+    </target>
+
+    <target name="html5" depends="pictures,css,whc" />
 
     <target name="javahelp" depends="include"> <!-- Not yet operationnal -->
         <java dir="."
@@ -214,6 +305,6 @@
          </copy>
      </target>
 
-    <target name="all" depends="pdf,html" />
+    <target name="all" depends="pdf,html5" />
 
 </project>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>Aprenda a usar o OmegaT em 5 minutos!</title>
+
+  <section id="create.and.open.new.project">
+    <title>Configurar um novo projecto<indexterm class="singular">
+        <primary>Projecto</primary> <secondary>Criar novo/Abrir</secondary>
+      </indexterm></title>
+
+    <para><remark>Nota:</remark> Num Mac Apple, usar a tecla <keycap>Command</keycap> em vez da tecla <keycap>Control</keycap>.</para>
+
+      <indexterm class="singular">
+        <primary>Menu Projecto</primary> <secondary>Novo...</secondary>
+      </indexterm>
+
+    <para>Para começar a utilizar o OmegaT, crie primeiro um projecto que gravará todos os seus ficheiros, tais como o seu ficheiro-fonte, memórias de tradução, glossários e, eventualmente, o seu ficheiro traduzido. No menu <guimenu>Projecto</guimenu>, seleccione <menuchoice><guimenuitem>Novo...</guimenuitem></menuchoice> e escreva um nome para o seu projecto. Lembre-se onde está a criar o projecto, porque terá de regressar ao mesmo later.</para>
+
+    <para>Após dar um nome ao seu projecto, será aberto o diálogo <guilabel>Criar novo projecto</guilabel>. Ao cimo desse diálogo, seleccione o idioma do seu ficheiro-fonte, o idioma que o seu ficheiro traduzido terá e clique em <guibutton>Aceitar</guibutton> para continuar.</para>
+
+    <para>Se estiver interessado noutras definições deste diálogo, pode regressar ao mesmo em qualquer altura, premindo <keycap>Ctrl+E.</keycap></para>
+
+    <para>A seguir, abre-se o diálogo <guilabel>Ficheiros do projecto</guilabel>. Clique em <guibutton>Copiar ficheiros para a pasta-fonte...</guibutton> para seleccionar os seus ficheiros-fonte. O OmegaT vai então copiar os ficheiros seleccionados para a sub-pasta <filename>/source/</filename> do seu projecto recentemente criado. Após os ficheiros-fonte terem sido carregados no <guilabel>Editor</guilabel>, pode fechar o diálogo <guilabel> Ficheiros do projecto</guilabel>.</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>Traduza o ficheiro</title>
+
+    <para>O OmegaT mostra um segmento de cada vez para que possa traduzir. Após ter traduzido cada segmento, prima <keycap>Ctrl+U</keycap> para passar ao próximo segmento não traduzido (ou <keycap>Ctrl+Shift+U</keycap> para passar ao próximo segmento traduzido). Sempre que quiser ver como será a sua tradução no seu formato final, prima <keycap>Ctrl+D</keycap> para gerar os documentos traduzidos, que serão criados na sub-pasta <filename>/target/</filename> da pasta do seu projecto. Durante a tradução, utilize os menus <guimenu>Editar</guimenu> e <guimenu>Ir para</guimenu> para executar várias funções úteis.</para>
+  </section>
+
+  <section>
+    <title>Valide as suas etiquetas</title>
+
+    <para>Se os seus ficheiros-fonte são ficheiros formatados, por exemplo Microsoft Word, LibreOffice Writer ou HTML, o OmegaT converterá a formatação em etiquetas que rodeiam o texto que traduz. Muitas vezes os documentos também terão etiquetas que nada têm a ver com formatação, mas que também são importantes nos ficheiros de origem (e nos ficheiros traduzidos). Uma frase-fonte pode parecer-se com:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+
+    <para>O OmegaT, contudo, mostrará esta frase da seguinte forma:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+    
+    <para>As etiquetas no OmegaT são cinzentas, pelo que são fáceis de reconhecer. Estão protegidas, de modo que não pode modificar o seu conteúdo, mas pode apagá-las, inseri-las à mão ou movê-las na frase-alvo. Contudo, se cometer erros ao digitar as etiquetas de formatação, os seus ficheiros traduzidos podem não conseguir abrir. Portanto, prima <keycap>Ctrl+Shift+V</keycap> antes de gerar os seus ficheiros traduzidos, para verificar se as suas etiquetas estão correctas.</para>
+  </section>
+
+  <section>
+    <title>Gere o ficheiro traduzido</title>
+
+    <para>Depois de se certificar de que não existem erros de etiqueta na sua tradução, prima <keycap>Ctrl+D</keycap> para gerar os ficheiros de destino, que serão criados na sub-pasta <filename>/target/</filename> da pasta do seu projecto.</para>
+  </section>
+
+  <section>
+    <title>Mais algumas coisas para recordar</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Se um ficheiro não for carregado no painel <guilabel>Editor</guilabel>, então pode ser que esteja num formato que não funciona no OmegaT. Ver <menuchoice><guimenuitem>Opções</guimenuitem><guimenuitem>Preferências...</guimenuitem><guimenuitem>Filtros de ficheiro</guimenuitem></menuchoice> para uma lista de formatos de ficheiro que o OmegaT pode tratar.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pode criar um novo projecto para cada novo trabalho, e pode adicionar novos ficheiros-fonte a um projecto em qualquer altura.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Para se lembrar das configurações iniciais do projecto, abra o diálogo de propriedades do projecto, premindo <keycap>Ctrl+E</keycap>. Para ver uma lista de ficheiros no projecto, abra o diálogo <guilabel>Ficheiros do projecto</guilabel>, premindo <keycap>Ctrl+L</keycap>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>No final da sua tradução, o OmegaT exporta três memórias de tradução chamadas <filename>level1</filename>, <filename>level2</filename> e <filename>omegat</filename> para a pasta do seu projecto. As memórias <filename> level1</filename> e <filename>level2</filename> podem ser partilhadas com utilizadores de outros programas de tradução. A memória denominada <filename>omegat</filename> pode ser utilizada pelo próprio OmegaT, em projectos futuros que criar. Se colocar esses ficheiros de memória de tradução na sub-pasta <filename>/tm/</filename> de um projecto, o OmegaT procurá-los-á automaticamente por segmentos semelhantes, chamados &quot;correspondências aproximadas&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pode adicionar um novo termo ao glossário premindo <keycap>Ctrl+Shift+G</keycap>, ou copiar glossários existentes para a sub-pasta <filename>/glossary/</filename> da pasta do seu projecto e o OmegaT procurará automaticamente as palavras neles contidas.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>É frequentemente útil procurar palavras e frases no texto original e na sua tradução, por isso prima <keycap>Ctrl+F</keycap> para abrir o diálogo <guilabel>Procura de texto</guilabel> em qualquer altura.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Para uma introdução mais abrangente ver <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT para principiantes</ulink> no sítio web do OmegaT. Se precisar de assistência com qualquer aspecto do OmegaT, sinta-se à vontade para se juntar ao grupo de utilizadores do <ulink url="https://omegat.org/support">OmegaT.</ulink></para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

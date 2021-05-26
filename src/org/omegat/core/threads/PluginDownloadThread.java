@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -46,11 +47,11 @@ public class PluginDownloadThread extends LongProcessThread {
     private final String archive;
     private final HashMap<String, String> headers = new HashMap<>();
 
-    public PluginDownloadThread(URL url, String username, String token, File targetdir, String filename) {
+    public PluginDownloadThread(URL url, String username, String token, File targetdir, String filename) throws UnsupportedEncodingException {
         this.url = url;
         this.targetdir = targetdir;
         this.archive = filename;
-        String encoding = Base64.getEncoder().encodeToString((username + ":" + token).getBytes());
+        String encoding = Base64.getEncoder().encodeToString((username + ":" + token).getBytes("UTF-8"));
         headers.put("authorization", "Basic " + encoding);
     }
 

@@ -38,7 +38,7 @@ import java.util.Base64;
 import java.util.Formatter;
 import java.util.HashMap;
 
-import org.omegat.util.net.HttpConnectionUtils;
+import org.omegat.util.HttpConnectionUtils;
 
 public class PluginDownloadThread extends LongProcessThread {
 

@@ -63,7 +63,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.net.HttpConnectionUtils;
+import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Plugin information and installation manager.

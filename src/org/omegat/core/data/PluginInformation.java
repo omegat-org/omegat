@@ -73,7 +73,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private final String version;
     private final String author;
     private final String description;
-    private final PluginsManager.PluginType category;
+    private final String category;
     private final String link;
     private final URL url;
     private STATUS status;
@@ -92,7 +92,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         author = findAuthor(mainAttrs);
         description = attrs.getValue(PLUGIN_DESCRIPTION);
         link = attrs.getValue(PLUGIN_LINK);
-        category = findCategory(attrs.getValue(PLUGIN_CATEGORY), attrs.getValue(PLUGIN_TYPE));
+        category = categoryName(attrs.getValue(PLUGIN_CATEGORY), attrs.getValue(PLUGIN_TYPE));
         url = mu;
         action = Action.NONE;
         this.status = status;
@@ -105,21 +105,21 @@ public class PluginInformation implements Comparable<PluginInformation> {
         version = null;
         author = null;
         description = null;
-        category = findCategory(key, null);
+        category = categoryName(key, null);
         link = null;
         url = mu;
         action = Action.NONE;
         this.status = status;
     }
 
-    private PluginsManager.PluginType findCategory(final String key1, final String key2) {
+    private String categoryName(final String key1, final String key2) {
         String key = key1 != null ? key1 : key2;
         Optional<PluginsManager.PluginType> type = Arrays.stream(PluginsManager.PluginType.values()).filter(v ->
                 v.getTypeValue().equals(key)).findFirst();
         if (type.isPresent()) {
-            return type.get();
+            return type.get().getTypeValue();
         }
-        return PluginsManager.PluginType.UNKNOWN;
+        return PluginsManager.PluginType.UNKNOWN.getTypeValue();
     }
 
     private String findId(Attributes attrs) {
@@ -200,11 +200,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         return action;
     }
 
-    public final String getCategoryString() {
-        return category.getTypeValue();
-    }
-
-    public final PluginsManager.PluginType getCategory() {
+    public final String getCategory() {
         return category;
     }
 

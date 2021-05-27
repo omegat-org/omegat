@@ -25,17 +25,13 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.util.List;
 import javax.swing.JComponent;
-import javax.swing.SpinnerListModel;
 
 import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
-import org.omegat.util.gui.UIDesignManager;
 
 /**
  * @author Aaron Madlon-Kay
@@ -44,12 +40,6 @@ public class AppearanceController extends BasePreferencesController {
 
     private AppearancePreferencesPanel panel;
 
-    private static SpinnerListModel themeSpinnerModel= new SpinnerListModel();
-    public static SpinnerListModel getThemeSpinnerModel() {
-        return themeSpinnerModel;
-    }
-
-    
     @Override
     public JComponent getGui() {
         if (panel == null) {
@@ -65,29 +55,21 @@ public class AppearanceController extends BasePreferencesController {
     }
 
     private void initGui() {
-        List<String> themeNames = UIDesignManager.getThemes();
-        themeSpinnerModel.setList(themeNames);
         panel = new AppearancePreferencesPanel();
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
     }
-    
+
     @Override
     protected void initFromPrefs() {
-        String currentTheme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, "Default");
-        // Todo: check theme exist or not, when not exist fallback to default
-        themeSpinnerModel.setValue(currentTheme);
     }
 
     @Override
     public void restoreDefaults() {
-        themeSpinnerModel.setValue("Default");
     }
 
     @Override
     public void persist() {
-        String theme = (String) themeSpinnerModel.getValue();
-        Preferences.setPreference(Preferences.THEME_SELECTED_NAME, theme);
     }
 }

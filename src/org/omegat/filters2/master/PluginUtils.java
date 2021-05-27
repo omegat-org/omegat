@@ -74,9 +74,9 @@ public final class PluginUtils {
 
     enum PluginType {
         FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, UNKNOWN
-    };
+    }
 
-    protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<Class<?>>();
+    protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
     /** Private constructor to disallow creation */
@@ -113,6 +113,14 @@ public final class PluginUtils {
                     if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
                         // found main manifest - not in development mode
                         foundMain = true;
+                    }
+                    if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
+                        String target = mu.toString();
+                        for (URL url : urls) {
+                            if (target.contains(url.toString())) {
+                                THEME_PLUGIN_JARS.add(url);
+                            }
+                        }
                     }
                     loadFromManifest(m, pluginsClassLoader);
                 }
@@ -186,7 +194,7 @@ public final class PluginUtils {
             return false;
         }
         Tokenizer ann = c.getAnnotation(Tokenizer.class);
-        return ann == null ? false : ann.isDefault();
+        return ann != null && ann.isDefault();
     }
 
     private static Class<?> searchForTokenizer(String lang) {
@@ -239,6 +247,10 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
+    public static List<URL> getThemePluginJars() {
+        return THEME_PLUGIN_JARS;
+    }
+
     protected static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
 
     protected static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
@@ -251,6 +263,8 @@ public final class PluginUtils {
 
     protected static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
 
+    protected static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();
+
     /**
      * Parse one manifest file.
      *
@@ -258,7 +272,7 @@ public final class PluginUtils {
      *            manifest
      * @param classLoader
      *            classloader
-     * @throws ClassNotFoundException
+     * @throws ClassNotFoundException when plugin class not found.
      */
     protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader)
             throws ClassNotFoundException {
@@ -285,7 +299,7 @@ public final class PluginUtils {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {
                         PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props));
-                    };
+                    }
 
                 }
             } else {
@@ -324,7 +338,7 @@ public final class PluginUtils {
                 Method load = p.getMethod("unloadPlugins");
                 load.invoke(p);
             } catch (Throwable ex) {
-                Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", p.getClass().getSimpleName(), ex.getMessage());
+                Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", p.getSimpleName(), ex.getMessage());
             }
         }
     }

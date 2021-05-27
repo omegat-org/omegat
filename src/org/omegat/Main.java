@@ -282,6 +282,11 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        MainClassLoader mainClassLoader = (cl instanceof MainClassLoader) ? (MainClassLoader) cl : new MainClassLoader(cl);
+        PluginUtils.getThemePluginJars().forEach(mainClassLoader::add);
+        UIManager.put("ClassLoader", mainClassLoader);
+
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();
@@ -304,16 +309,9 @@ public final class Main {
             // do nothing
         }
 
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            // do nothing
-        }
-
         System.setProperty("swing.aatext", "true");
-
         try {
-            Core.initializeGUI(PARAMS);
+            Core.initializeGUI(mainClassLoader, PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);

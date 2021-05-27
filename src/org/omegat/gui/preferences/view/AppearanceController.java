@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,13 +26,20 @@
 
 package org.omegat.gui.preferences.view;
 
+import java.util.Arrays;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
+import org.omegat.util.gui.DelegatingComboBoxRenderer;
 
 /**
  * @author Aaron Madlon-Kay
@@ -56,6 +64,26 @@ public class AppearanceController extends BasePreferencesController {
 
     private void initGui() {
         panel = new AppearancePreferencesPanel();
+        String[] lafs = Arrays.asList(UIManager.getInstalledLookAndFeels()).stream().map(LookAndFeelInfo::getClassName)
+                .toArray(String[]::new);
+        panel.cbThemeSelect.setModel(new DefaultComboBoxModel<>(lafs));
+        panel.cbThemeSelect.setRenderer(new DelegatingComboBoxRenderer<String, String>() {
+            @Override
+            protected String getDisplayText(String value) {
+                for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                    if (info.getClassName().equals(value)) {
+                        return info.getName();
+                    }
+                }
+                return value;
+            }
+        });
+        panel.cbThemeSelect.addActionListener(e -> {
+            String selected = panel.cbThemeSelect.getSelectedItem().toString();
+            String current = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME,
+                    Preferences.THEME_CLASS_NAME_DEFAULT);
+            setRestartRequired(!selected.equals(current));
+        });
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
@@ -63,13 +91,18 @@ public class AppearanceController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
+        String currentTheme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME,
+                Preferences.THEME_CLASS_NAME_DEFAULT);
+        panel.cbThemeSelect.setSelectedItem(currentTheme);
     }
 
     @Override
     public void restoreDefaults() {
+        panel.cbThemeSelect.setSelectedItem(Preferences.THEME_CLASS_NAME_DEFAULT);
     }
 
     @Override
     public void persist() {
+        Preferences.setPreference(Preferences.THEME_CLASS_NAME, panel.cbThemeSelect.getSelectedItem().toString());
     }
 }

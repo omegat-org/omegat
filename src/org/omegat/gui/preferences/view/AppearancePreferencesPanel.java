@@ -48,17 +48,38 @@ public class AppearancePreferencesPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        cbThemeSelect = new javax.swing.JComboBox<>();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 8), new java.awt.Dimension(0, 8), new java.awt.Dimension(32767, 8));
         restoreWindowButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
+        jPanel1.setAlignmentX(0.0F);
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, bundle.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")); // NOI18N
+        jPanel1.add(jLabel1, java.awt.BorderLayout.WEST);
+
+        cbThemeSelect.setMinimumSize(new java.awt.Dimension(280, 80));
+        jPanel1.add(cbThemeSelect, java.awt.BorderLayout.CENTER);
+
+        add(jPanel1);
+        add(filler1);
+
         org.openide.awt.Mnemonics.setLocalizedText(restoreWindowButton, OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI")); // NOI18N
         add(restoreWindowButton);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JComboBox<String> cbThemeSelect;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     javax.swing.JButton restoreWindowButton;
     // End of variables declaration//GEN-END:variables
 }

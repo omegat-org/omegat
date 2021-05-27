@@ -304,11 +304,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         }
         if (pluginInformation.category != null) {
             if (category == null) {
-                if ("bundle".equals(pluginInformation.category)) {
-                    return 1;
-                } else {
-                    return -1;
-                }
+                return -1;
             } else {
                 score = category.compareTo(pluginInformation.getCategory());
                 if (score != 0) {

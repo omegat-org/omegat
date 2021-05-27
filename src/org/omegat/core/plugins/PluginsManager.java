@@ -43,6 +43,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
@@ -59,11 +60,11 @@ import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.util.FileUtil;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Plugin information and installation manager.
@@ -109,6 +110,7 @@ public final class PluginsManager {
         GLOSSARY("glossary"),
         DICTIONARY("dictionary"),
         MISCELLANEOUS("miscellaneous"),
+        THEME("theme"),
         UNKNOWN("Undefined");
 
         private final String typeValue;
@@ -271,6 +273,18 @@ public final class PluginsManager {
                     });
         }
         return availablePlugins;
+    }
+
+    public PluginInformation getThemePluginInformation(final String target) {
+        Optional<PluginInformation> pluginInformation = installedPlugins.values().stream()
+                .filter(info -> info.getCategory().equals(PluginsManager.PluginType.THEME))
+                .filter(info -> info.getName().equals(target))
+                .findFirst();
+        if (pluginInformation.isPresent()) {
+            return pluginInformation.get();
+        } else {
+            return null;
+        }
     }
 
     private String getPluginInformationKey(PluginInformation info) {

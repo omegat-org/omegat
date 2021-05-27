@@ -49,6 +49,9 @@ public class AppearancePreferencesPanel extends JPanel {
     private void initComponents() {
 
         restoreWindowButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        themeSelectionSpinner = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -56,9 +59,20 @@ public class AppearancePreferencesPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(restoreWindowButton, OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI")); // NOI18N
         add(restoreWindowButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "Theme");
+        jPanel1.add(jLabel1);
+
+        themeSelectionSpinner.setModel(AppearanceController.getThemeSpinnerModel());
+        jPanel1.add(themeSelectionSpinner);
+
+        add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     javax.swing.JButton restoreWindowButton;
+    javax.swing.JSpinner themeSelectionSpinner;
     // End of variables declaration//GEN-END:variables
 }

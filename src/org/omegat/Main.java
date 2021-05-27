@@ -65,6 +65,7 @@ import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.plugins.PluginsManager;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
@@ -83,6 +84,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
+import org.omegat.util.gui.UIDesignManager;
 
 /**
  * The main OmegaT class, used to launch the program.
@@ -181,7 +183,7 @@ public final class Main {
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         Preferences.init();
-        PluginUtils.loadPlugins(PARAMS);
+        PluginsManager.loadPlugins(PARAMS);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
         Preferences.initSegmentation();
@@ -325,14 +327,18 @@ public final class Main {
             // do nothing
         }
 
+        String theme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, "Default");
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            if (!theme.equals("Default") && UIDesignManager.launchThemeLoader(theme)) {
+                // success to load custom theme
+            } else {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            }
         } catch (Exception e) {
             // do nothing
         }
 
         System.setProperty("swing.aatext", "true");
-
         try {
             Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {

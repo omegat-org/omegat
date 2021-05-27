@@ -81,7 +81,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
             PluginInformation info = model.getValueAt(rowIndex);
             localPluginDetailHeader.labelPluginName.setText(info.getName());
-            localPluginDetailHeader.labelCategory.setText(info.getCategory());
+            localPluginDetailHeader.labelCategory.setText(info.getCategoryString());
             if (info.getStatus().equals(PluginInformation.STATUS.UPGRADABLE)) {
                 localPluginDetailHeader.installButton.setText("Upgrade");
                 localPluginDetailHeader.installButton.setEnabled(true);
@@ -105,7 +105,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             AvailablePluginInfoTableModel model = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
             PluginInformation info = model.getValueAt(rowIndex);
             remotePluginDetailHeader.labelPluginName.setText(info.getName());
-            remotePluginDetailHeader.labelCategory.setText(info.getCategory());
+            remotePluginDetailHeader.labelCategory.setText(info.getCategoryString());
             if (info.getStatus().equals(PluginInformation.STATUS.UPGRADABLE)) {
                 remotePluginDetailHeader.installButton.setText("Upgrade");
                 remotePluginDetailHeader.installButton.setEnabled(true);
@@ -257,7 +257,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 returnValue = plugin.getVersion();
                 break;
             case COLUMN_CATEGORY:
-                returnValue = plugin.getCategory();
+                returnValue = plugin.getCategoryString();
                 break;
             case COLUMN_THIRDPARTY:
                 returnValue = !plugin.isBundled();
@@ -327,7 +327,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 returnValue = plugin.getVersion();
                 break;
             case COLUMN_CATEGORY:
-                returnValue = plugin.getCategory();
+                returnValue = plugin.getCategoryString();
                 break;
             case COLUMN_STAT:
                 if (plugin.getStatus() == PluginInformation.STATUS.INSTALLED) {

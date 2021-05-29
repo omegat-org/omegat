@@ -67,8 +67,7 @@ public class AppearanceController extends BasePreferencesController {
     }
 
     private void initGui() {
-        List<String> themeNames = UIDesignManager.getThemes();
-        themeSelectionModel.addAll(themeNames);
+        UIDesignManager.getThemes().forEach(themeSelectionModel::addElement);
         panel = new AppearancePreferencesPanel();
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton

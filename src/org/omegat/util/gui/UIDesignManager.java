@@ -39,8 +39,6 @@ import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
@@ -71,32 +69,35 @@ import org.omegat.util.Platform;
  * @author Alex Buloichik
  * @author Yu Tang
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public final class UIDesignManager {
-
-    private static List<IThemeLoader> themeLoaders = new ArrayList<>();
 
     private UIDesignManager() {
     }
 
     public static List<String> getThemes() {
-        List<String> themes = new ArrayList<>();
-        // Add default themes
-        themes.add("Default");
-        // Add from plugins
-        themes.addAll(themeLoaders.stream().map(t -> t.getName()).collect(Collectors.toList()));
-        return themes;
-    }
-
-    public static void registerThemeloader(IThemeLoader loader) {
-        themeLoaders.add(loader);
-    }
-
-    public static void launchThemeLoader(String name) {
-        Optional<IThemeLoader> loader = themeLoaders.stream().filter(t -> name.equals(t.getName())).findFirst();
-        if (loader.isPresent()) {
-            loader.get().onStartup();
+        List<String> names = new ArrayList<>();
+        names.add("Default");
+        UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
+        for (UIManager.LookAndFeelInfo info: lafInfo) {
+            names.add(info.getName());
         }
+        return names;
+    }
+
+    public static void registerTheme(String name, String className) {
+		UIManager.installLookAndFeel(new UIManager.LookAndFeelInfo( name, className));
+    }
+
+    public static String getThemeClassName(String name) {
+        UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
+        for (UIManager.LookAndFeelInfo info: lafInfo) {
+            if (name.equals(info.getName())) {
+                return info.getClassName();
+            }
+        }
+        return null;
     }
 
     /**

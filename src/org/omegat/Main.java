@@ -287,9 +287,10 @@ public final class Main {
 
         String theme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, "Default");
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            if (!theme.equals("Default")) {
-                UIDesignManager.launchThemeLoader(theme);
+            if (theme.equals("Default")) {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } else {
+                UIManager.setLookAndFeel(UIDesignManager.getThemeClassName(theme));
             }
         } catch (Exception ex) {
             Log.log(ex);

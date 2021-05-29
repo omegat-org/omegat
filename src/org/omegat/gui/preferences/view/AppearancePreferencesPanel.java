@@ -60,10 +60,12 @@ public class AppearancePreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(restoreWindowButton, OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI")); // NOI18N
         add(restoreWindowButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "Theme");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, bundle.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")); // NOI18N
         jPanel1.add(jLabel1);
 
         themeSelectionSpinner.setModel(AppearanceController.getThemeSpinnerModel());
+        themeSelectionSpinner.setPreferredSize(new java.awt.Dimension(146, 28));
         jPanel1.add(themeSelectionSpinner);
 
         add(jPanel1);

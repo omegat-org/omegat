@@ -35,6 +35,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.net.MalformedURLException;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -45,11 +46,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
-
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.vlsolutions.swing.docking.DockingDesktop;
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
 import org.omegat.convert.ConvertConfigs;
@@ -81,8 +82,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.UIDesignManager;
-
-import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * The main OmegaT class, used to launch the program.
@@ -117,6 +116,14 @@ public final class Main {
             System.out.println(StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"),
                     OStrings.getNameAndVersion()));
             System.exit(0);
+        }
+
+        ClassLoader loader = ClassLoader.getSystemClassLoader();
+        MainClassLoader mainClassLoader = (MainClassLoader) loader;
+        try {
+            mainClassLoader.addJarToClasspath("/opt/OmegaT-default/plugins/omegat-laf-0.0.1.jar");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
 
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
@@ -280,13 +287,13 @@ public final class Main {
 
         String theme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, "Default");
         try {
-            if (!theme.equals("Default") && UIDesignManager.launchThemeLoader(theme)) {
-                // success to load custom theme
-            } else {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            if (!theme.equals("Default")) {
+                UIDesignManager.launchThemeLoader(theme);
             }
-        } catch (Exception e) {
-            // do nothing
+        } catch (Exception ex) {
+            Log.log(ex);
+            showError(ex);
         }
 
         System.setProperty("swing.aatext", "true");

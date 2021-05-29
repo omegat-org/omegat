@@ -7,4 +7,4 @@ JAVA="java"
 BUNDLED_JAVA="${REALOMEGATPATH}/jre/bin/java"
 [ -f "${BUNDLED_JAVA}" ] && JAVA="${BUNDLED_JAVA}"
 
-"${JAVA}" -jar -Xmx1024M "${REALOMEGATPATH}/@JAR_SUBST@" "$@"
+"${JAVA}" -Djava.system.class.loader=org.omegat.MainClassLoader -jar -Xmx1024M "${REALOMEGATPATH}/@JAR_SUBST@" "$@"

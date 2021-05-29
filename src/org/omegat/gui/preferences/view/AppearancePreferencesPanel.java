@@ -51,7 +51,7 @@ public class AppearancePreferencesPanel extends JPanel {
         restoreWindowButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        themeSelectionSpinner = new javax.swing.JSpinner();
+        themeSelectCB = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -64,9 +64,9 @@ public class AppearancePreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, bundle.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")); // NOI18N
         jPanel1.add(jLabel1);
 
-        themeSelectionSpinner.setModel(AppearanceController.getThemeSpinnerModel());
-        themeSelectionSpinner.setPreferredSize(new java.awt.Dimension(146, 28));
-        jPanel1.add(themeSelectionSpinner);
+        themeSelectCB.setModel(AppearanceController.getComboBoxModel());
+        themeSelectCB.setPreferredSize(new java.awt.Dimension(180, 28));
+        jPanel1.add(themeSelectCB);
 
         add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
@@ -75,6 +75,6 @@ public class AppearancePreferencesPanel extends JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     javax.swing.JButton restoreWindowButton;
-    javax.swing.JSpinner themeSelectionSpinner;
+    javax.swing.JComboBox<String> themeSelectCB;
     // End of variables declaration//GEN-END:variables
 }

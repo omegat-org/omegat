@@ -45,11 +45,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
+
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import com.vlsolutions.swing.docking.DockingDesktop;
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
 import org.omegat.convert.ConvertConfigs;
@@ -81,6 +81,8 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.UIDesignManager;
+
+import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * The main OmegaT class, used to launch the program.
@@ -255,7 +257,7 @@ public final class Main {
      */
     protected static int runGUI() {
         ClassLoader cl = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader = (cl instanceof MainClassLoader)? (MainClassLoader) cl: new MainClassLoader(cl);
+        MainClassLoader mainClassLoader = (cl instanceof MainClassLoader) ? (MainClassLoader) cl : new MainClassLoader(cl);
         PluginUtils.getThemePluginJars().forEach(mainClassLoader::add);
         UIManager.put("ClassLoader", mainClassLoader);
 
@@ -295,7 +297,7 @@ public final class Main {
                 }
             }
         } catch (Exception ex) {
-            // Something become wrong!!
+            // Something went wrong!!
             Log.log(ex);
             showError(ex);
         }

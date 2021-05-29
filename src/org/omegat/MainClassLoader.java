@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2021 Hiroshi Miura
-               2018 Mordechai Meisels(Original licensed Apache-2.0)
+               2018 Mordechai Meisels (Original licensed Apache-2.0)
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 

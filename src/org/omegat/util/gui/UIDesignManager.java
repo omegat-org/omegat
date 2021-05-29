@@ -38,7 +38,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
@@ -73,6 +75,14 @@ import org.omegat.util.Platform;
  */
 public final class UIDesignManager {
 
+    private static final Set<String> BLACKLIST = new HashSet<>();
+
+    static {
+        BLACKLIST.add("CDE/Motif");
+        BLACKLIST.add("Metal");
+        BLACKLIST.add("GTK+");
+    }
+
     private UIDesignManager() {
     }
 
@@ -81,7 +91,9 @@ public final class UIDesignManager {
         names.add("Default");
         UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
         for (UIManager.LookAndFeelInfo info: lafInfo) {
-            names.add(info.getName());
+            if (!BLACKLIST.contains(info.getName())) {
+                names.add(info.getName());
+            }
         }
         return names;
     }

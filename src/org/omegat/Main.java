@@ -35,7 +35,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.MalformedURLException;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -117,7 +116,6 @@ public final class Main {
                     OStrings.getNameAndVersion()));
             System.exit(0);
         }
-
 
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
@@ -256,13 +254,9 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
-        ClassLoader loader = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader = (MainClassLoader) loader;
-        try {
-            mainClassLoader.addJarToClasspath("/opt/OmegaT-default/plugins/omegat-laf-0.0.1.jar");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        MainClassLoader mainClassLoader = (cl instanceof MainClassLoader)? (MainClassLoader) cl: new MainClassLoader(cl);
+        PluginUtils.getThemePluginJars().forEach(mainClassLoader::add);
         UIManager.put("ClassLoader", mainClassLoader);
 
         // macOS-specific - they must be set BEFORE any GUI calls
@@ -292,9 +286,16 @@ public final class Main {
             if (theme.equals("Default")) {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } else {
-                UIManager.setLookAndFeel(UIDesignManager.getThemeClassName(theme));
+                try {
+                    UIManager.setLookAndFeel(UIDesignManager.getThemeClassName(theme));
+                } catch (Exception e) {
+                    Log.log(e);
+                    // fallback to default theme
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                }
             }
         } catch (Exception ex) {
+            // Something become wrong!!
             Log.log(ex);
             showError(ex);
         }

@@ -100,6 +100,7 @@ public final class PluginUtils {
             URL[] urls = new URL[fs.size()];
             for (int i = 0; i < urls.length; i++) {
                 urls[i] = fs.get(i).toURI().toURL();
+                THEME_PLUGIN_JARS.add(urls[i]); // FIXME: only required files should be added
                 Log.logInfoRB("PLUGIN_LOAD_JAR", urls[i].toString());
             }
             boolean foundMain = false;
@@ -113,6 +114,9 @@ public final class PluginUtils {
                     if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
                         // found main manifest - not in development mode
                         foundMain = true;
+                    }
+                    if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
+                        // FIXME: add jar file to list
                     }
                     loadFromManifest(m, pluginsClassLoader);
                 }
@@ -239,6 +243,10 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
+    public static List<URL> getThemePluginJars() {
+        return THEME_PLUGIN_JARS;
+    }
+
     protected static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
 
     protected static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
@@ -250,6 +258,8 @@ public final class PluginUtils {
     protected static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
 
     protected static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
+
+    protected static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();
 
     /**
      * Parse one manifest file.

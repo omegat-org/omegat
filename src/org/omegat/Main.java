@@ -118,13 +118,6 @@ public final class Main {
             System.exit(0);
         }
 
-        ClassLoader loader = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader = (MainClassLoader) loader;
-        try {
-            mainClassLoader.addJarToClasspath("/opt/OmegaT-default/plugins/omegat-laf-0.0.1.jar");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
 
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
@@ -263,6 +256,15 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
+        ClassLoader loader = ClassLoader.getSystemClassLoader();
+        MainClassLoader mainClassLoader = (MainClassLoader) loader;
+        try {
+            mainClassLoader.addJarToClasspath("/opt/OmegaT-default/plugins/omegat-laf-0.0.1.jar");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        UIManager.put("ClassLoader", mainClassLoader);
+
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();

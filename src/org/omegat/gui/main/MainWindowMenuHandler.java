@@ -368,8 +368,9 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    /** Restart OmegaT */
-    public void projectRestartMenuItemActionPerformed() {
+    protected void restartExitAction(boolean restart) {
+        // Bug #902: commit the current entry first
+        // We do it before checking project status, so that it can eventually change it
         if (Core.getProject().isProjectLoaded()) {
             Core.getEditor().commitAndLeave();
         }
@@ -377,7 +378,8 @@ public final class MainWindowMenuHandler {
         if (Core.getProject().isProjectLoaded()) {
             projectModified = Core.getProject().isProjectModified();
         }
-        // Add Yes/No Warning before OmegaT restart
+        // RFE 1302358
+        // Add Yes/No Warning before OmegaT quits
         if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
             if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow,
                     OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
@@ -416,7 +418,11 @@ public final class MainWindowMenuHandler {
                     String[] projectDir = (String[]) get();
                     MainWindowUI.saveScreenLayout(mainWindow);
                     Preferences.save();
-                    Main.restartGUI(projectDir[0]);
+                    if (restart) {
+                        Main.restartGUI(projectDir[0]);
+                    } else {
+                        System.exit(0);
+                    }
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -425,70 +431,14 @@ public final class MainWindowMenuHandler {
         }.execute();
     }
 
+    /** Restart OmegaT */
+    public void projectRestartMenuItemActionPerformed() {
+        restartExitAction(true);
+    }
+
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
-         // Bug #902: commit the current entry first
-        // We do it before checking project status, so that it can eventually change it
-        if (Core.getProject().isProjectLoaded()) {
-            Core.getEditor().commitAndLeave();
-        }
-
-        boolean projectModified = false;
-        if (Core.getProject().isProjectLoaded()) {
-            projectModified = Core.getProject().isProjectModified();
-        }
-        // RFE 1302358
-        // Add Yes/No Warning before OmegaT quits
-        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow,
-                    OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
-                    JOptionPane.YES_NO_OPTION)) {
-                return;
-            }
-        }
-
-        SegmentExportImport.flushExportedSegments();
-
-        new SwingWorker<Object, Void>() {
-            @Override
-            protected Object doInBackground() throws Exception {
-                if (Core.getProject().isProjectLoaded()) {
-                    // Save the list of learned and ignore words
-                    ISpellChecker sc = Core.getSpellChecker();
-                    sc.saveWordLists();
-                    try {
-                        Core.executeExclusively(true, () -> {
-                            Core.getProject().saveProject(true);
-                            ProjectFactory.closeProject();
-                        });
-                    } catch (KnownException ex) {
-                        // hide exception on shutdown
-                    }
-                }
-
-                CoreEvents.fireApplicationShutdown();
-
-                PluginUtils.unloadPlugins();
-
-                return null;
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    get();
-
-                    MainWindowUI.saveScreenLayout(mainWindow);
-
-                    Preferences.save();
-
-                    System.exit(0);
-                } catch (Exception ex) {
-                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                }
-            }
-        }.execute();
+        restartExitAction(false);
     }
 
     public void editUndoMenuItemActionPerformed() {

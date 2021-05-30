@@ -217,9 +217,7 @@ public final class Main {
     }
 
     public static void restartGUI(String projectDir) {
-        Log.log("===============================================================");
-        Log.log("===              Restart OmegaT                            ====");
-        Log.log("===============================================================");
+        Log.log("===         Restart OmegaT           ===");
         final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
         try {
             final File currentJar;

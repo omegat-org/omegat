@@ -34,6 +34,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -100,7 +101,6 @@ public final class PluginUtils {
             URL[] urls = new URL[fs.size()];
             for (int i = 0; i < urls.length; i++) {
                 urls[i] = fs.get(i).toURI().toURL();
-                THEME_PLUGIN_JARS.add(urls[i]); // FIXME: only required files should be added
                 Log.logInfoRB("PLUGIN_LOAD_JAR", urls[i].toString());
             }
             boolean foundMain = false;
@@ -116,7 +116,8 @@ public final class PluginUtils {
                         foundMain = true;
                     }
                     if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
-                        // FIXME: add jar file to list
+                        String target = mu.toString();
+                        Arrays.stream(urls).filter(url -> target.contains(url.toString())).forEach(url -> THEME_PLUGIN_JARS.add(url));
                     }
                     loadFromManifest(m, pluginsClassLoader);
                 }

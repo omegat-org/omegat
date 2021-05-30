@@ -218,7 +218,7 @@ public final class Main {
 
     public static void restartGUI(String projectDir) {
         Log.log("===         Restart OmegaT           ===");
-        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        final String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
         try {
             /* Build command: java -cp ... org.omegat.Main */
             final ArrayList<String> command = new ArrayList<>();

@@ -28,6 +28,8 @@ package org.omegat.gui.preferences.view;
 
 import java.awt.Component;
 import java.util.Map;
+import java.util.Set;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -93,8 +95,8 @@ public class AppearanceController extends BasePreferencesController {
     }
 
     private boolean setSelection(String key) {
-        Map<String, String> themes = UIDesignManager.getThemes();
-        if (themes.keySet().contains(key)) {
+        Set<String> themes = UIDesignManager.getThemeKeySet();
+        if (themes.contains(key)) {
             for (int i = 0; i < themeSelectionModel.getSize(); i++) {
                 ThemeLabel obj = themeSelectionModel.getElementAt(i);
                 if (key.equals(obj.getKey())) {
@@ -112,7 +114,7 @@ public class AppearanceController extends BasePreferencesController {
         Preferences.setPreference(Preferences.THEME_SELECTED_NAME, theme.getKey());
     }
 
-    private static DefaultComboBoxModel<ThemeLabel> themeSelectionModel = new DefaultComboBoxModel<>();
+    private static final DefaultComboBoxModel<ThemeLabel> themeSelectionModel = new DefaultComboBoxModel<>();
 
     @SuppressWarnings("serial")
     static class ListThemeRenderer extends JLabel implements ListCellRenderer<ThemeLabel> {

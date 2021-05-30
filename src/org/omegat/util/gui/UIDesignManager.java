@@ -80,7 +80,7 @@ public final class UIDesignManager {
     public static final String THEME_DEFAULT_ICON = "thumb_default.png";
     public static final String THEME_UNKNOWN_ICON = "thumb_unknown.png";
 
-    private static Map<String, URL> themeImages = new HashMap<>();
+    private static final Map<String, URL> themeImages = new HashMap<>();
 
     static {
         themeImages.put(Preferences.THEME_DEFAULT, ResourcesUtil.getResourceURL(THEME_DEFAULT_ICON));
@@ -117,6 +117,7 @@ public final class UIDesignManager {
         }
     }
 
+    @SuppressWarnings("unused")
     public static void registerTheme(String name, String className) {
         registerTheme(name, className, ResourcesUtil.getResourceURL(THEME_UNKNOWN_ICON));
     }

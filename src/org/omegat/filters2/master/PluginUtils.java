@@ -75,9 +75,9 @@ public final class PluginUtils {
 
     enum PluginType {
         FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, UNKNOWN
-    };
+    }
 
-    protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<Class<?>>();
+    protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
     /** Private constructor to disallow creation */
@@ -117,7 +117,8 @@ public final class PluginUtils {
                     }
                     if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
                         String target = mu.toString();
-                        Arrays.stream(urls).filter(url -> target.contains(url.toString())).forEach(url -> THEME_PLUGIN_JARS.add(url));
+                        Arrays.stream(urls).filter(url -> target.contains(url.toString()))
+                                .forEach(THEME_PLUGIN_JARS::add);
                     }
                     loadFromManifest(m, pluginsClassLoader);
                 }
@@ -191,7 +192,7 @@ public final class PluginUtils {
             return false;
         }
         Tokenizer ann = c.getAnnotation(Tokenizer.class);
-        return ann == null ? false : ann.isDefault();
+        return ann != null && ann.isDefault();
     }
 
     private static Class<?> searchForTokenizer(String lang) {
@@ -269,7 +270,7 @@ public final class PluginUtils {
      *            manifest
      * @param classLoader
      *            classloader
-     * @throws ClassNotFoundException
+     * @throws ClassNotFoundException when plugin class not found.
      */
     protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader)
             throws ClassNotFoundException {
@@ -296,7 +297,7 @@ public final class PluginUtils {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {
                         PLUGIN_INFORMATIONS.add(new PluginInformation(clazz, props));
-                    };
+                    }
 
                 }
             } else {
@@ -335,7 +336,7 @@ public final class PluginUtils {
                 Method load = p.getMethod("unloadPlugins");
                 load.invoke(p);
             } catch (Throwable ex) {
-                Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", p.getClass().getSimpleName(), ex.getMessage());
+                Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", p.getSimpleName(), ex.getMessage());
             }
         }
     }

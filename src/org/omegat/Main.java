@@ -220,7 +220,7 @@ public final class Main {
         Log.log("===============================================================");
         Log.log("===              Restart OmegaT                            ====");
         Log.log("===============================================================");
-        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        final String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
         try {
             final File currentJar;
             /* Build command: java -cp ... org.omegat.Main */

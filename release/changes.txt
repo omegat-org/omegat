@@ -1,12 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.6.0
 ----------------------------------------------------------------------
-  0 Enhancements
+  1 Enhancements
   0 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.6.0 vs 5.5.0
 
+  Implemented requests:
+
+  - Add short progress summary in the standard statistics window
+  https://sourceforge.net/p/omegat/feature-requests/1571/
 
 ----------------------------------------------------------------------
  OmegaT 5.5.0 (2021-05-18)

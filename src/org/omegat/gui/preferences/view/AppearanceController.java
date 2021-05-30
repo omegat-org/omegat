@@ -29,6 +29,7 @@ package org.omegat.gui.preferences.view;
 import java.awt.Component;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -50,19 +51,6 @@ public class AppearanceController extends BasePreferencesController {
 
     private AppearancePreferencesPanel panel;
 
-    private static DefaultComboBoxModel<AppearancePreferencesThemeLabel> themeSelectionModel = new DefaultComboBoxModel<>();
-
-    @SuppressWarnings("serial")
-    static class ListThemeRenderer extends JLabel implements ListCellRenderer<AppearancePreferencesThemeLabel> {
-
-        @Override
-        public Component getListCellRendererComponent(JList<? extends AppearancePreferencesThemeLabel> jList, AppearancePreferencesThemeLabel data, int i, boolean isSelected, boolean b) {
-            setText(data.getText());
-            setIcon(data.getIcon());
-            return this;
-        }
-    }
-
     @Override
     public JComponent getGui() {
         if (panel == null) {
@@ -80,7 +68,8 @@ public class AppearanceController extends BasePreferencesController {
     private void initGui() {
         panel = new AppearancePreferencesPanel();
         Map<String, String> themes = UIDesignManager.getThemes();
-        themes.forEach((key, value) -> themeSelectionModel.addElement(new AppearancePreferencesThemeLabel(key, value, new ImageIcon(UIDesignManager.getThemeImage(key)))));
+        themes.forEach((key, value) -> themeSelectionModel
+                .addElement(new ThemeLabel(key, value, new ImageIcon(UIDesignManager.getThemeImage(key)))));
         panel.cbThemeSelect.setModel(themeSelectionModel);
         ListThemeRenderer renderer = new ListThemeRenderer();
         panel.cbThemeSelect.setRenderer(renderer);
@@ -91,7 +80,8 @@ public class AppearanceController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        String currentTheme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, Preferences.THEME_DEFAULT);
+        String currentTheme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME,
+                Preferences.THEME_DEFAULT);
         if (!setSelection(currentTheme)) {
             restoreDefaults();
         }
@@ -106,7 +96,7 @@ public class AppearanceController extends BasePreferencesController {
         Map<String, String> themes = UIDesignManager.getThemes();
         if (themes.keySet().contains(key)) {
             for (int i = 0; i < themeSelectionModel.getSize(); i++) {
-                AppearancePreferencesThemeLabel obj = themeSelectionModel.getElementAt(i);
+                ThemeLabel obj = themeSelectionModel.getElementAt(i);
                 if (key.equals(obj.getKey())) {
                     themeSelectionModel.setSelectedItem(obj);
                     return true;
@@ -118,7 +108,49 @@ public class AppearanceController extends BasePreferencesController {
 
     @Override
     public void persist() {
-        AppearancePreferencesThemeLabel theme = (AppearancePreferencesThemeLabel) themeSelectionModel.getSelectedItem();
+        ThemeLabel theme = (ThemeLabel) themeSelectionModel.getSelectedItem();
         Preferences.setPreference(Preferences.THEME_SELECTED_NAME, theme.getKey());
+    }
+
+    private static DefaultComboBoxModel<ThemeLabel> themeSelectionModel = new DefaultComboBoxModel<>();
+
+    @SuppressWarnings("serial")
+    static class ListThemeRenderer extends JLabel implements ListCellRenderer<ThemeLabel> {
+
+        @Override
+        public Component getListCellRendererComponent(
+                JList<? extends ThemeLabel> jList,
+                ThemeLabel data,
+                int i,
+                boolean isSelected,
+                boolean b) {
+            setText(data.getText());
+            setIcon(data.getIcon());
+            return this;
+        }
+    }
+    public static class ThemeLabel {
+
+        String text;
+        Icon icon;
+        String key;
+
+        ThemeLabel(String key, String text, Icon icon) {
+            this.key = key;
+            this.text = text;
+            this.icon = icon;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public Icon getIcon() {
+            return icon;
+        }
+
+        public String getKey() {
+            return key;
+        }
     }
 }

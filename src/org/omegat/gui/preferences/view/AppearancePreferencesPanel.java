@@ -71,7 +71,7 @@ public class AppearancePreferencesPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JComboBox<AppearancePreferencesThemeLabel> cbThemeSelect;
+    javax.swing.JComboBox<AppearanceController.ThemeLabel> cbThemeSelect;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     javax.swing.JButton restoreWindowButton;

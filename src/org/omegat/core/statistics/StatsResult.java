@@ -42,19 +42,27 @@ import org.omegat.util.gui.TextUtil;
  */
 public class StatsResult {
     public static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
-            OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
-            OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files") };
+            OStrings.getString("CT_STATS_Words"),
+            OStrings.getString("CT_STATS_Characters_NOSP"),
+            OStrings.getString("CT_STATS_Characters"),
+            OStrings.getString("CT_STATS_Files") };
 
     private static final String[] HT_ROWS = { OStrings.getString("CT_STATS_Total"),
-            OStrings.getString("CT_STATS_Remaining"), OStrings.getString("CT_STATS_Unique"),
+            OStrings.getString("CT_STATS_Remaining"),
+            OStrings.getString("CT_STATS_Unique"),
             OStrings.getString("CT_STATS_Unique_Remaining") };
     private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
 
     public static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
-            OStrings.getString("CT_STATS_FILE_Total_Segments"), OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
+            OStrings.getString("CT_STATS_FILE_Unique_Words"),
+            OStrings.getString("CT_STATS_FILE_Unique_Characters"),
+            OStrings.getString("CT_STATS_FILE_Unique_Segments"),
+            OStrings.getString("CT_STATS_FILE_Total_Segments"),
+            OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Remaining_Segments"),
-            OStrings.getString("CT_STATS_FILE_Total_Words"), OStrings.getString("CT_STATS_FILE_Remaining_Words"),
+            OStrings.getString("CT_STATS_FILE_Total_Words"),
+            OStrings.getString("CT_STATS_FILE_Remaining_Words"),
             OStrings.getString("CT_STATS_FILE_Unique_Words"),
             OStrings.getString("CT_STATS_FILE_Unique_Remaining_Words"),
             OStrings.getString("CT_STATS_FILE_Total_Characters_NOSP"),
@@ -66,8 +74,8 @@ public class StatsResult {
             OStrings.getString("CT_STATS_FILE_Unique_Characters"),
             OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters"), };
 
-    private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true, true, true, true, true,
-            true, true, true, true, true, };
+    private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, };
 
     private StatCount total = new StatCount();
     private StatCount remaining = new StatCount();
@@ -150,27 +158,30 @@ public class StatsResult {
     }
 
     public String[][] getFilesTable(final ProjectProperties config) {
-        String[][] table = new String[counts.size()][17];
+        String[][] table = new String[counts.size()][20];
 
         int r = 0;
         for (FileData numbers : counts) {
             table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, config.getSourceRoot());
-            table[r][1] = Integer.toString(numbers.total.segments);
-            table[r][2] = Integer.toString(numbers.remaining.segments);
-            table[r][3] = Integer.toString(numbers.unique.segments);
-            table[r][4] = Integer.toString(numbers.remainingUnique.segments);
-            table[r][5] = Integer.toString(numbers.total.words);
-            table[r][6] = Integer.toString(numbers.remaining.words);
-            table[r][7] = Integer.toString(numbers.unique.words);
-            table[r][8] = Integer.toString(numbers.remainingUnique.words);
-            table[r][9] = Integer.toString(numbers.total.charsWithoutSpaces);
-            table[r][10] = Integer.toString(numbers.remaining.charsWithoutSpaces);
-            table[r][11] = Integer.toString(numbers.unique.charsWithoutSpaces);
-            table[r][12] = Integer.toString(numbers.remainingUnique.charsWithoutSpaces);
-            table[r][13] = Integer.toString(numbers.total.charsWithSpaces);
-            table[r][14] = Integer.toString(numbers.remaining.charsWithSpaces);
-            table[r][15] = Integer.toString(numbers.unique.charsWithSpaces);
-            table[r][16] = Integer.toString(numbers.remainingUnique.charsWithSpaces);
+            table[r][1] = Integer.toString(numbers.unique.words)+"/"+Integer.toString(numbers.remainingUnique.words);
+            table[r][2] = Integer.toString(numbers.unique.charsWithSpaces)+"/"+Integer.toString(numbers.remainingUnique.charsWithSpaces);
+            table[r][3] = Integer.toString(numbers.unique.segments)+"/"+Integer.toString(numbers.remainingUnique.segments);
+            table[r][4] = Integer.toString(numbers.total.segments);
+            table[r][5] = Integer.toString(numbers.remaining.segments);
+            table[r][6] = Integer.toString(numbers.unique.segments);
+            table[r][7] = Integer.toString(numbers.remainingUnique.segments);
+            table[r][8] = Integer.toString(numbers.total.words);
+            table[r][9] = Integer.toString(numbers.remaining.words);
+            table[r][10] = Integer.toString(numbers.unique.words);
+            table[r][11] = Integer.toString(numbers.remainingUnique.words);
+            table[r][12] = Integer.toString(numbers.total.charsWithoutSpaces);
+            table[r][13] = Integer.toString(numbers.remaining.charsWithoutSpaces);
+            table[r][14] = Integer.toString(numbers.unique.charsWithoutSpaces);
+            table[r][15] = Integer.toString(numbers.remainingUnique.charsWithoutSpaces);
+            table[r][16] = Integer.toString(numbers.total.charsWithSpaces);
+            table[r][17] = Integer.toString(numbers.remaining.charsWithSpaces);
+            table[r][18] = Integer.toString(numbers.unique.charsWithSpaces);
+            table[r][19] = Integer.toString(numbers.remainingUnique.charsWithSpaces);
             r++;
         }
         return table;

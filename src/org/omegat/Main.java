@@ -220,7 +220,6 @@ public final class Main {
         Log.log("===         Restart OmegaT           ===");
         final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
         try {
-            final File currentJar;
             /* Build command: java -cp ... org.omegat.Main */
             final ArrayList<String> command = new ArrayList<>();
             command.add(javaBin);
@@ -230,7 +229,11 @@ public final class Main {
             command.add(Main.class.getName());
             PARAMS.forEach((k, v) -> {
                 if (!k.equals(CLIParameters.PROJECT_DIR)) {
-                    command.add(k + "=" + v);
+                    if (v != null) {
+                        command.add("--" + k + "=" + v);
+                    } else {
+                        command.add("--" + k);
+                    }
                 }
             });
             if (projectDir != null) {

@@ -37,9 +37,11 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
@@ -74,25 +76,61 @@ import org.omegat.util.Platform;
  */
 public final class UIDesignManager {
 
+    private static Map<String, URL> themeImages = new HashMap<>();
+
+    private static Map<String, URL> systemThemeImages = new HashMap<>();
+
+    static {
+        themeImages.put("Default", ResourcesUtil.getResourceURL("thumb_default.png"));
+        for (UIManager.LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()) {
+            String key = info.toString();
+            String icon = "thumb_" + info.getName().toLowerCase().replace("/", "_").replace("+", "_") + ".png";
+            URL thumbURL = ResourcesUtil.getResourceURL(icon);
+            if (thumbURL == null) thumbURL = ResourcesUtil.getResourceURL("thumb_unknown.png");
+            themeImages.put(key, thumbURL);
+        }
+    }
+
     private UIDesignManager() {
     }
 
-    public static List<String> getThemes() {
-        List<String> names = new ArrayList<>();
-        names.add("Default");
+    public static Map<String, String> getThemes() {
+        Map<String, String> themes = new TreeMap<>();
+        themes.put("Default", OStrings.getString("PREFS_THEME_NAME_DEFAULT"));
         UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
-        Arrays.stream(lafInfo).map(UIManager.LookAndFeelInfo::getName).forEach(names::add);
-        return names;
+        for (UIManager.LookAndFeelInfo lookAndFeelInfo : lafInfo) {
+            String name = lookAndFeelInfo.getName();
+            String key = lookAndFeelInfo.toString();
+            themes.put(key, name);
+        }
+        return themes;
+    }
+
+    public static void registerTheme(String name, String className, URL image) {
+        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(name, className);
+        UIManager.installLookAndFeel(info);
+        if (image != null) {
+            String key = info.toString();
+            themeImages.put(key, image);
+        }
     }
 
     public static void registerTheme(String name, String className) {
-		UIManager.installLookAndFeel(new UIManager.LookAndFeelInfo(name, className));
+        registerTheme(name, className, ResourcesUtil.getResourceURL("thumb_unknown.png"));
     }
 
-    public static String getThemeClassName(String name) {
+    public static Set<String> getThemeKeySet() {
+        return themeImages.keySet();
+    }
+
+    public static URL getThemeImage(String key) {
+        return themeImages.getOrDefault(key, ResourcesUtil.getResourceURL("thumb_unknown.png"));
+    }
+
+    public static String getThemeClassName(String key) {
         UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
         for (UIManager.LookAndFeelInfo info: lafInfo) {
-            if (name.equals(info.getName())) {
+            if (key.equals(info.toString())) {
                 return info.getClassName();
             }
         }

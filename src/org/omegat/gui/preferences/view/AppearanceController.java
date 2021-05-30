@@ -25,9 +25,14 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.util.List;
+import java.awt.Component;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
 import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
@@ -44,7 +49,18 @@ public class AppearanceController extends BasePreferencesController {
 
     private AppearancePreferencesPanel panel;
 
-    private static DefaultComboBoxModel<String> themeSelectionModel = new DefaultComboBoxModel<>();
+    private static DefaultComboBoxModel<AppearancePreferencesThemeLabel> themeSelectionModel = new DefaultComboBoxModel<>();
+
+    @SuppressWarnings("serial")
+    static class ListThemeRenderer extends JLabel implements ListCellRenderer<AppearancePreferencesThemeLabel> {
+
+        @Override
+        public Component getListCellRendererComponent(JList<? extends AppearancePreferencesThemeLabel> jList, AppearancePreferencesThemeLabel data, int i, boolean isSelected, boolean b) {
+            setText(data.getText());
+            setIcon(data.getIcon());
+            return this;
+        }
+    }
 
     @Override
     public JComponent getGui() {
@@ -62,32 +78,46 @@ public class AppearanceController extends BasePreferencesController {
 
     private void initGui() {
         panel = new AppearancePreferencesPanel();
-        UIDesignManager.getThemes().forEach(themeSelectionModel::addElement);
-        panel.themeSelectCB.setModel(themeSelectionModel);
+        Map<String, String> themes = UIDesignManager.getThemes();
+        themes.forEach((key, value) -> themeSelectionModel.addElement(new AppearancePreferencesThemeLabel(key, value, new ImageIcon(UIDesignManager.getThemeImage(key)))));
+        panel.cbThemeSelect.setModel(themeSelectionModel);
+        ListThemeRenderer renderer = new ListThemeRenderer();
+        panel.cbThemeSelect.setRenderer(renderer);
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
     }
-    
+
     @Override
     protected void initFromPrefs() {
         String currentTheme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, "Default");
-        List<String> themeNames = UIDesignManager.getThemes();
-        if (themeNames.contains(currentTheme)) {
-            themeSelectionModel.setSelectedItem(currentTheme);
-        } else {
+        if (!setSelection(currentTheme)) {
             restoreDefaults();
         }
     }
 
     @Override
     public void restoreDefaults() {
-        themeSelectionModel.setSelectedItem("Default");
+        setSelection("Default");
+    }
+
+    private boolean setSelection(String key) {
+        Map<String, String> themes = UIDesignManager.getThemes();
+        if (themes.keySet().contains(key)) {
+            for (int i = 0; i < themeSelectionModel.getSize(); i++) {
+                AppearancePreferencesThemeLabel obj = themeSelectionModel.getElementAt(i);
+                if (key.equals(obj.getKey())) {
+                    themeSelectionModel.setSelectedItem(obj);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public void persist() {
-        String theme = (String) themeSelectionModel.getSelectedItem();
-        Preferences.setPreference(Preferences.THEME_SELECTED_NAME, theme);
+        AppearancePreferencesThemeLabel theme = (AppearancePreferencesThemeLabel) themeSelectionModel.getSelectedItem();
+        Preferences.setPreference(Preferences.THEME_SELECTED_NAME, theme.getKey());
     }
 }

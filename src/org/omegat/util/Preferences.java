@@ -503,7 +503,7 @@ public final class Preferences {
     public static final String VERSION_CHECK_AUTOMATIC = "automatically_check_version";
     public static final boolean VERSION_CHECK_AUTOMATIC_DEFAULT = true;
 
-    public static final String THEME_SELECTED_NAME = "theme_selected_name";
+    public static final String THEME_SELECTED_NAME = "theme";
 
     /** Private constructor, because this file is singleton */
     private Preferences() {

@@ -51,7 +51,7 @@ public class AppearancePreferencesPanel extends JPanel {
         restoreWindowButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        themeSelectCB = new javax.swing.JComboBox<>();
+        cbThemeSelect = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -64,16 +64,16 @@ public class AppearancePreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, bundle.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")); // NOI18N
         jPanel1.add(jLabel1);
 
-        themeSelectCB.setPreferredSize(new java.awt.Dimension(180, 28));
-        jPanel1.add(themeSelectCB);
+        cbThemeSelect.setMinimumSize(new java.awt.Dimension(280, 80));
+        jPanel1.add(cbThemeSelect);
 
         add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JComboBox<AppearancePreferencesThemeLabel> cbThemeSelect;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     javax.swing.JButton restoreWindowButton;
-    javax.swing.JComboBox<String> themeSelectCB;
     // End of variables declaration//GEN-END:variables
 }

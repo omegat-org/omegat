@@ -504,6 +504,7 @@ public final class Preferences {
     public static final boolean VERSION_CHECK_AUTOMATIC_DEFAULT = true;
 
     public static final String THEME_SELECTED_NAME = "theme";
+    public static final String THEME_DEFAULT = "Default";
 
     /** Private constructor, because this file is singleton */
     private Preferences() {

@@ -59,6 +59,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
+import org.omegat.util.Preferences;
 
 /**
  * UI Design Manager.
@@ -76,17 +77,18 @@ import org.omegat.util.Platform;
  */
 public final class UIDesignManager {
 
+    public static final String THEME_DEFAULT_ICON = "thumb_default.png";
+    public static final String THEME_UNKNOWN_ICON = "thumb_unknown.png";
+
     private static Map<String, URL> themeImages = new HashMap<>();
 
-    private static Map<String, URL> systemThemeImages = new HashMap<>();
-
     static {
-        themeImages.put("Default", ResourcesUtil.getResourceURL("thumb_default.png"));
+        themeImages.put(Preferences.THEME_DEFAULT, ResourcesUtil.getResourceURL(THEME_DEFAULT_ICON));
         for (UIManager.LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()) {
             String key = info.toString();
             String icon = "thumb_" + info.getName().toLowerCase().replace("/", "_").replace("+", "_") + ".png";
             URL thumbURL = ResourcesUtil.getResourceURL(icon);
-            if (thumbURL == null) thumbURL = ResourcesUtil.getResourceURL("thumb_unknown.png");
+            if (thumbURL == null) thumbURL = ResourcesUtil.getResourceURL(THEME_UNKNOWN_ICON);
             themeImages.put(key, thumbURL);
         }
     }
@@ -116,7 +118,7 @@ public final class UIDesignManager {
     }
 
     public static void registerTheme(String name, String className) {
-        registerTheme(name, className, ResourcesUtil.getResourceURL("thumb_unknown.png"));
+        registerTheme(name, className, ResourcesUtil.getResourceURL(THEME_UNKNOWN_ICON));
     }
 
     public static Set<String> getThemeKeySet() {
@@ -124,7 +126,7 @@ public final class UIDesignManager {
     }
 
     public static URL getThemeImage(String key) {
-        return themeImages.getOrDefault(key, ResourcesUtil.getResourceURL("thumb_unknown.png"));
+        return themeImages.getOrDefault(key, ResourcesUtil.getResourceURL(THEME_UNKNOWN_ICON));
     }
 
     public static String getThemeClassName(String key) {

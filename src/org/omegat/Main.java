@@ -302,8 +302,8 @@ public final class Main {
             // do nothing
         }
 
-        String theme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, "Default");
-        if (theme.equals("Default")) {
+        String theme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, Preferences.THEME_DEFAULT);
+        if (theme.equals(Preferences.THEME_DEFAULT)) {
             setDefaultTheme();
         } else {
             setTheme(theme);

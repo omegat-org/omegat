@@ -38,9 +38,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
@@ -75,14 +74,6 @@ import org.omegat.util.Platform;
  */
 public final class UIDesignManager {
 
-    private static final Set<String> BLACKLIST = new HashSet<>();
-
-    static {
-        BLACKLIST.add("CDE/Motif");
-        BLACKLIST.add("Metal");
-        BLACKLIST.add("GTK+");
-    }
-
     private UIDesignManager() {
     }
 
@@ -90,16 +81,12 @@ public final class UIDesignManager {
         List<String> names = new ArrayList<>();
         names.add("Default");
         UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
-        for (UIManager.LookAndFeelInfo info: lafInfo) {
-            if (!BLACKLIST.contains(info.getName())) {
-                names.add(info.getName());
-            }
-        }
+        Arrays.stream(lafInfo).map(UIManager.LookAndFeelInfo::getName).forEach(names::add);
         return names;
     }
 
     public static void registerTheme(String name, String className) {
-		UIManager.installLookAndFeel(new UIManager.LookAndFeelInfo( name, className));
+		UIManager.installLookAndFeel(new UIManager.LookAndFeelInfo(name, className));
     }
 
     public static String getThemeClassName(String name) {

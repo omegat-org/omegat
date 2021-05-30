@@ -26,7 +26,6 @@
 package org.omegat.gui.preferences.view;
 
 import java.util.List;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 
@@ -47,11 +46,6 @@ public class AppearanceController extends BasePreferencesController {
 
     private static DefaultComboBoxModel<String> themeSelectionModel = new DefaultComboBoxModel<>();
 
-    public static ComboBoxModel<String> getComboBoxModel() {
-        return themeSelectionModel;
-    }
-
-    
     @Override
     public JComponent getGui() {
         if (panel == null) {
@@ -67,8 +61,9 @@ public class AppearanceController extends BasePreferencesController {
     }
 
     private void initGui() {
-        UIDesignManager.getThemes().forEach(themeSelectionModel::addElement);
         panel = new AppearancePreferencesPanel();
+        UIDesignManager.getThemes().forEach(themeSelectionModel::addElement);
+        panel.themeSelectCB.setModel(themeSelectionModel);
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));

@@ -64,7 +64,6 @@ public class AppearancePreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, bundle.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")); // NOI18N
         jPanel1.add(jLabel1);
 
-        themeSelectCB.setModel(AppearanceController.getComboBoxModel());
         themeSelectCB.setPreferredSize(new java.awt.Dimension(180, 28));
         jPanel1.add(themeSelectCB);
 

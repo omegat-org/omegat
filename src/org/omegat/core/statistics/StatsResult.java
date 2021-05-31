@@ -42,19 +42,24 @@ import org.omegat.util.gui.TextUtil;
  */
 public class StatsResult {
     public static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
-            OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
-            OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files") };
+            OStrings.getString("CT_STATS_Words"),
+            OStrings.getString("CT_STATS_Characters_NOSP"),
+            OStrings.getString("CT_STATS_Characters"),
+            OStrings.getString("CT_STATS_Files") };
 
     private static final String[] HT_ROWS = { OStrings.getString("CT_STATS_Total"),
-            OStrings.getString("CT_STATS_Remaining"), OStrings.getString("CT_STATS_Unique"),
+            OStrings.getString("CT_STATS_Remaining"),
+            OStrings.getString("CT_STATS_Unique"),
             OStrings.getString("CT_STATS_Unique_Remaining") };
     private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
 
     public static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
-            OStrings.getString("CT_STATS_FILE_Total_Segments"), OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
+            OStrings.getString("CT_STATS_FILE_Total_Segments"),
+            OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Remaining_Segments"),
-            OStrings.getString("CT_STATS_FILE_Total_Words"), OStrings.getString("CT_STATS_FILE_Remaining_Words"),
+            OStrings.getString("CT_STATS_FILE_Total_Words"),
+            OStrings.getString("CT_STATS_FILE_Remaining_Words"),
             OStrings.getString("CT_STATS_FILE_Unique_Words"),
             OStrings.getString("CT_STATS_FILE_Unique_Remaining_Words"),
             OStrings.getString("CT_STATS_FILE_Total_Characters_NOSP"),

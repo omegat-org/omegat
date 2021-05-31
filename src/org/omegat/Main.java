@@ -262,12 +262,14 @@ public final class Main {
         }
     }
 
-    protected static void setTheme(String theme) {
+    protected static String setTheme(String theme) {
         try {
             UIManager.setLookAndFeel(UIDesignManager.getThemeClassName(theme));
+            return theme;
         } catch (Exception e) {
             Log.log(e);
             setDefaultTheme();
+            return Preferences.THEME_DEFAULT;
         }
     }
 
@@ -306,12 +308,12 @@ public final class Main {
         if (theme.equals(Preferences.THEME_DEFAULT)) {
             setDefaultTheme();
         } else {
-            setTheme(theme);
+            theme = setTheme(theme);
         }
 
         System.setProperty("swing.aatext", "true");
         try {
-            Core.initializeGUI(PARAMS);
+            Core.initializeGUI(theme, PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);

@@ -228,15 +228,7 @@ public final class Main {
         command.add("-cp");
         command.add(ManagementFactory.getRuntimeMXBean().getClassPath());
         command.add(Main.class.getName());
-        PARAMS.forEach((k, v) -> {
-            if (!k.equals(CLIParameters.PROJECT_DIR)) {
-                if (v == null) {
-                    command.add("--" + k);
-                } else {
-                    command.add("--" + k + "=" + v);
-                }
-            }
-        });
+        command.addAll(CLIParameters.unparseArgs(PARAMS));
         if (projectDir != null) {
             command.add(projectDir);
         }

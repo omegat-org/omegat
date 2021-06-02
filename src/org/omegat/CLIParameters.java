@@ -26,10 +26,13 @@
 package org.omegat;
 
 import java.io.File;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;
@@ -156,7 +159,7 @@ public final class CLIParameters {
          * Parse command line arguments info map.
          *
          * IMPORTANT: If new argument formats are introduced (e.g. short args
-         * like -x), the logic in Main#restartGUI will need to be adjusted!
+         * like -x), the logic in unparseArgs will need to be adjusted!
          */
         for (String arg : args) {
             // Normalize Unicode here because e.g. OS X filesystem is NFD while
@@ -180,5 +183,23 @@ public final class CLIParameters {
         }
 
         return params;
+    }
+
+    /**
+     * "Unparse" a map obtained from {@link #parseArgs(String...)}, i.e. reconstruct
+     * the list of string arguments originally passed. Note, however, that
+     * {@link #PROJECT_DIR} is not included.
+     *
+     * @param args such as from {@link #parseArgs(String...)}
+     * @return list of reconstructed args like {@code --foo=bar}
+     */
+    static List<String> unparseArgs(Map<String, String> args) {
+        return args.entrySet().stream().filter(e -> !e.getKey().equals(PROJECT_DIR)).map(e -> {
+            if (e.getValue() == null) {
+                return "--" + e.getKey();
+            } else {
+                return "--" + e.getKey() + "=" + e.getValue();
+            }
+        }).collect(Collectors.toList());
     }
 }

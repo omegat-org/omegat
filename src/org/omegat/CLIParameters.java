@@ -154,6 +154,9 @@ public final class CLIParameters {
 
         /*
          * Parse command line arguments info map.
+         *
+         * IMPORTANT: If new argument formats are introduced (e.g. short args
+         * like -x), the logic in Main#restartGUI will need to be adjusted!
          */
         for (String arg : args) {
             // Normalize Unicode here because e.g. OS X filesystem is NFD while

@@ -64,8 +64,8 @@
 
         <guimenuitem>Editing Behavior...</guimenuitem>
       </menuchoice> dialog window. For instance (if the default is accepted),
-    the translation from the ancillary TM is accepted and prefixed
-    with<emphasis> [fuzzy]</emphasis>, so that the translator can review the
+    the translation from the ancillary TM is accepted and prefixed with
+    <emphasis>[fuzzy]</emphasis>, so that the translator can review the
     translations at a later stage and check whether the segments tagged this
     way, have been translated correctly.</para>
 
@@ -83,9 +83,9 @@
       <title>tm/auto</title>
 
       <para>If it is clear from the very start, that translations in a given
-      TM (or TMs) are all correct, one can put them into the<emphasis
-      role="bold"> tm/auto</emphasis> folder and avoid confirming a lot
-      of<emphasis> [fuzzy]</emphasis> cases.</para>
+      TM (or TMs) are all correct, one can put them into the <emphasis
+      role="bold"> tm/auto </emphasis> folder and avoid confirming a lot
+      of<emphasis> [fuzzy] </emphasis> cases.</para>
 
       <para><orderedlist>
           <listitem>
@@ -197,7 +197,7 @@
 
     <para>The <emphasis role="bold">omegat</emphasis> subfolder contains at
     least one and possibly several other files. The most important file here
-    is the <filename>project_save.tmx, </filename>that is the working
+    is the <filename>project_save.tmx</filename>, that is the working
     translation memory for the project. Backups of this file (with extension
     bak) are added progressively to this subfolder, first at the beginning of
     the translation session, at its end, and while the translation
@@ -226,7 +226,8 @@
           <para>are created and used by the spell checker. If you already have
           collected words you wish the spell checker to ignore / accept, you
           just need to copy the corresponding two files into the
-          <filename>omegat</filename>subfolder of your current project.</para>
+          <filename>omegat</filename> subfolder of your current
+          project.</para>
         </listitem>
       </varlistentry>
 

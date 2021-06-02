@@ -369,6 +369,21 @@ public final class MainWindowMenuHandler {
         }
     }
 
+    /** Quits OmegaT */
+    public void projectExitMenuItemActionPerformed() {
+        prepareForExit(() -> System.exit(0));
+    }
+
+    /** Restart OmegaT */
+    public void projectRestartMenuItemActionPerformed() {
+        String projectDir = Core.getProject().isProjectLoaded()
+                ? Core.getProject().getProjectProperties().getProjectRoot()
+                : null;
+        prepareForExit(() -> {
+            Main.restartGUI(projectDir);
+        });
+    }
+
     protected void prepareForExit(Runnable onCompletion) {
         // Bug #902: commit the current entry first
         // We do it before checking project status, so that it can eventually change it
@@ -432,21 +447,6 @@ public final class MainWindowMenuHandler {
                 }
             }
         }.execute();
-    }
-
-    /** Restart OmegaT */
-    public void projectRestartMenuItemActionPerformed() {
-        String projectDir = Core.getProject().isProjectLoaded()
-                ? Core.getProject().getProjectProperties().getProjectRoot()
-                : null;
-        prepareForExit(() -> {
-            Main.restartGUI(projectDir);
-        });
-    }
-
-    /** Quits OmegaT */
-    public void projectExitMenuItemActionPerformed() {
-        prepareForExit(() -> System.exit(0));
     }
 
     public void editUndoMenuItemActionPerformed() {

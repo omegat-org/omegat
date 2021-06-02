@@ -369,12 +369,13 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    protected void restartExitAction(boolean restart) {
+    protected void prepareForExit(Runnable onCompletion) {
         // Bug #902: commit the current entry first
         // We do it before checking project status, so that it can eventually change it
         if (Core.getProject().isProjectLoaded()) {
             Core.getEditor().commitAndLeave();
         }
+
         boolean projectModified = false;
         if (Core.getProject().isProjectLoaded()) {
             projectModified = Core.getProject().isProjectModified();
@@ -388,12 +389,12 @@ public final class MainWindowMenuHandler {
                 return;
             }
         }
+
         SegmentExportImport.flushExportedSegments();
 
-        new SwingWorker<Object, Void>() {
+        new SwingWorker<Void, Void>() {
             @Override
-            protected String[] doInBackground() throws Exception {
-                final String[] projectDir = {null};
+            protected Void doInBackground() throws Exception {
                 if (Core.getProject().isProjectLoaded()) {
                     // Save the list of learned and ignore words
                     ISpellChecker sc = Core.getSpellChecker();
@@ -401,29 +402,28 @@ public final class MainWindowMenuHandler {
                     try {
                         Core.executeExclusively(true, () -> {
                             Core.getProject().saveProject(true);
-                            projectDir[0] = Core.getProject().getProjectProperties().getProjectRoot();
                             ProjectFactory.closeProject();
                         });
                     } catch (KnownException ex) {
                         // hide exception on shutdown
                     }
                 }
+
                 CoreEvents.fireApplicationShutdown();
+
                 PluginUtils.unloadPlugins();
-                return projectDir;
+
+                return null;
             }
 
             @Override
             protected void done() {
                 try {
-                    String[] projectDir = (String[]) get();
+                    get();
+
                     MainWindowUI.saveScreenLayout(mainWindow);
                     Preferences.save();
-                    if (restart) {
-                        Main.restartGUI(projectDir[0]);
-                    } else {
-                        System.exit(0);
-                    }
+                    onCompletion.run();
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -434,12 +434,17 @@ public final class MainWindowMenuHandler {
 
     /** Restart OmegaT */
     public void projectRestartMenuItemActionPerformed() {
-        restartExitAction(true);
+        String projectDir = Core.getProject().isProjectLoaded()
+                ? Core.getProject().getProjectProperties().getProjectRoot()
+                : null;
+        prepareForExit(() -> {
+            Main.restartGUI(projectDir);
+        });
     }
 
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
-        restartExitAction(false);
+        prepareForExit(() -> System.exit(0));
     }
 
     public void editUndoMenuItemActionPerformed() {

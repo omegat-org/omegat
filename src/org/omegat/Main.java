@@ -220,28 +220,28 @@ public final class Main {
 
     public static void restartGUI(String projectDir) {
         Log.log("===         Restart OmegaT           ===");
-        final String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
-        try {
-            /* Build command: java -cp ... org.omegat.Main */
-            final ArrayList<String> command = new ArrayList<>();
-            command.add(javaBin);
-            command.addAll(JVMPARAMS);
-            command.add("-cp");
-            command.add(ManagementFactory.getRuntimeMXBean().getClassPath());
-            command.add(Main.class.getName());
-            PARAMS.forEach((k, v) -> {
-                if (!k.equals(CLIParameters.PROJECT_DIR)) {
-                    if (v != null) {
-                        command.add("--" + k + "=" + v);
-                    } else {
-                        command.add("--" + k);
-                    }
+        String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
+        // Build command: java -cp ... org.omegat.Main
+        List<String> command = new ArrayList<>();
+        command.add(javaBin);
+        command.addAll(JVMPARAMS);
+        command.add("-cp");
+        command.add(ManagementFactory.getRuntimeMXBean().getClassPath());
+        command.add(Main.class.getName());
+        PARAMS.forEach((k, v) -> {
+            if (!k.equals(CLIParameters.PROJECT_DIR)) {
+                if (v == null) {
+                    command.add("--" + k);
+                } else {
+                    command.add("--" + k + "=" + v);
                 }
-            });
-            if (projectDir != null) {
-                command.add(projectDir);
             }
-            final ProcessBuilder builder = new ProcessBuilder(command);
+        });
+        if (projectDir != null) {
+            command.add(projectDir);
+        }
+        final ProcessBuilder builder = new ProcessBuilder(command);
+        try {
             builder.start();
             System.exit(0);
         } catch (IOException e) {

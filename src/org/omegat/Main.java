@@ -240,7 +240,7 @@ public final class Main {
         if (projectDir != null) {
             command.add(projectDir);
         }
-        final ProcessBuilder builder = new ProcessBuilder(command);
+        ProcessBuilder builder = new ProcessBuilder(command);
         try {
             builder.start();
             System.exit(0);

@@ -37,9 +37,9 @@
     whether translated or not, are then generated here, with the same
     hierarchy as present in the source subfolder. The contents of the target
     subfolder will reflect the current state of the translation, as present in
-    the project translation memory, saved in the current <emphasis
-    role="bold">/omegat/project_save.tmx</emphasis>. Untranslated segments
-    will hereby remain in the source language.</para>
+    the project translation memory, saved in the current
+    <filename>/omegat/project_save.tmx</filename>. Untranslated segments will
+    hereby remain in the source language.</para>
   </section>
 
   <section id="projectfolder.tm">

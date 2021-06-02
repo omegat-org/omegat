@@ -422,7 +422,9 @@ public final class MainWindowMenuHandler {
                     get();
 
                     MainWindowUI.saveScreenLayout(mainWindow);
+
                     Preferences.save();
+
                     onCompletion.run();
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

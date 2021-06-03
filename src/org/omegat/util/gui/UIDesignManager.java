@@ -78,8 +78,8 @@ import org.omegat.util.Preferences;
  */
 public final class UIDesignManager {
 
-    private static final Set<String> themeKeySet = new HashSet<>();
-    private static final Map<String, IThemeInitializer> themeInitilizer = new HashMap<>();
+    private static final Set<String> THEME_KEY_SET = new HashSet<>();
+    private static final Map<String, IThemeInitializer> THEME_INITIALIZER = new HashMap<>();
 
     private UIDesignManager() {
     }
@@ -98,19 +98,19 @@ public final class UIDesignManager {
     public static void registerTheme(IThemeInitializer initializer) {
         UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(initializer.getName(), initializer.getClassName());
         UIManager.installLookAndFeel(info);
-        themeKeySet.add(info.toString());
-        themeInitilizer.put(info.toString(), initializer);
+        THEME_KEY_SET.add(info.toString());
+        THEME_INITIALIZER.put(info.toString(), initializer);
     }
 
     @SuppressWarnings("unused")
     public static void registerTheme(String name, String className) {
         UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(name, className);
         UIManager.installLookAndFeel(info);
-        themeKeySet.add(info.toString());
+        THEME_KEY_SET.add(info.toString());
     }
 
     public static Set<String> getThemeKeySet() {
-        return themeKeySet;
+        return THEME_KEY_SET;
     }
 
     public static String getThemeClassName(String key) {
@@ -195,7 +195,7 @@ public final class UIDesignManager {
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
         UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
 
-        IThemeInitializer initializer = themeInitilizer.get(theme);
+        IThemeInitializer initializer = THEME_INITIALIZER.get(theme);
         if (initializer != null) {
             initializer.setup();
         } else {

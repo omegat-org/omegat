@@ -285,9 +285,9 @@ public final class Main {
 
         String theme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, Preferences.THEME_DEFAULT);
         if (theme.equals(Preferences.THEME_DEFAULT)) {
-            UIDesignManager.setDefaultTheme();
+            UIDesignManager.setDefaultTheme(mainClassLoader);
         } else {
-            theme = UIDesignManager.setTheme(theme);
+            theme = UIDesignManager.setTheme(theme, mainClassLoader);
         }
 
         System.setProperty("swing.aatext", "true");

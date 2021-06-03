@@ -45,6 +45,7 @@ import java.util.TreeMap;
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
+import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 import javax.swing.plaf.ColorUIResource;
@@ -123,9 +124,9 @@ public final class UIDesignManager {
         return null;
     }
 
-    public static void setDefaultTheme() {
+    public static void setDefaultTheme(ClassLoader classLoader) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            setLookAndFeel(UIManager.getSystemLookAndFeelClassName(), classLoader);
         } catch (Exception ex) {
             // Something went wrong!!
             Log.log(ex);
@@ -133,15 +134,20 @@ public final class UIDesignManager {
         }
     }
 
-    public static String setTheme(String theme) {
+    public static String setTheme(String theme, ClassLoader classLoader) {
         try {
-            UIManager.setLookAndFeel(getThemeClassName(theme));
+            setLookAndFeel(theme, classLoader);
             return theme;
         } catch (Exception e) {
             Log.log(e);
-            setDefaultTheme();
+            setDefaultTheme(classLoader);
             return Preferences.THEME_DEFAULT;
         }
+    }
+
+    private static void setLookAndFeel(String laf, ClassLoader classLoader) throws Exception {
+        Class<?> clazz = classLoader.loadClass(getThemeClassName(laf));
+        UIManager.setLookAndFeel((LookAndFeel) clazz.getConstructor().newInstance());
     }
 
     /**

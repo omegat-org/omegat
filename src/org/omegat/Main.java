@@ -252,27 +252,6 @@ public final class Main {
         }
     }
 
-    protected static void setDefaultTheme() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            // Something went wrong!!
-            Log.log(ex);
-            showError(ex);
-        }
-    }
-
-    protected static String setTheme(String theme) {
-        try {
-            UIManager.setLookAndFeel(UIDesignManager.getThemeClassName(theme));
-            return theme;
-        } catch (Exception e) {
-            Log.log(e);
-            setDefaultTheme();
-            return Preferences.THEME_DEFAULT;
-        }
-    }
-
     /**
      * Execute standard GUI.
      */
@@ -306,9 +285,9 @@ public final class Main {
 
         String theme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, Preferences.THEME_DEFAULT);
         if (theme.equals(Preferences.THEME_DEFAULT)) {
-            setDefaultTheme();
+            UIDesignManager.setDefaultTheme();
         } else {
-            theme = setTheme(theme);
+            theme = UIDesignManager.setTheme(theme);
         }
 
         System.setProperty("swing.aatext", "true");

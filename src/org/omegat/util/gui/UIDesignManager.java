@@ -36,8 +36,8 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -55,7 +55,9 @@ import com.vlsolutions.swing.docking.DockableContainerFactory;
 import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
-import org.omegat.gui.theme.IThemeDesigner;
+import org.omegat.Main;
+import org.omegat.gui.theme.IThemeInitializer;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
@@ -76,29 +78,14 @@ import org.omegat.util.Preferences;
  */
 public final class UIDesignManager {
 
-    public static final String THEME_DEFAULT_ICON = "thumb_default.png";
-    public static final String THEME_UNKNOWN_ICON = "thumb_unknown.png";
-
-    private static final Map<String, URL> themeImages = new HashMap<>();
-    private static final Map<String, IThemeDesigner> themeInitilizer = new HashMap<>();
-
-    static {
-        themeImages.put(Preferences.THEME_DEFAULT, ResourcesUtil.getResourceURL(THEME_DEFAULT_ICON));
-        for (UIManager.LookAndFeelInfo info: UIManager.getInstalledLookAndFeels()) {
-            String key = info.toString();
-            String icon = "thumb_" + info.getName().toLowerCase().replace("/", "_").replace("+", "_") + ".png";
-            URL thumbURL = ResourcesUtil.getResourceURL(icon);
-            if (thumbURL == null) thumbURL = ResourcesUtil.getResourceURL(THEME_UNKNOWN_ICON);
-            themeImages.put(key, thumbURL);
-        }
-    }
+    private static final Set<String> themeKeySet = new HashSet<>();
+    private static final Map<String, IThemeInitializer> themeInitilizer = new HashMap<>();
 
     private UIDesignManager() {
     }
 
     public static Map<String, String> getThemes() {
         Map<String, String> themes = new TreeMap<>();
-        themes.put("Default", OStrings.getString("PREFS_THEME_NAME_DEFAULT"));
         UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
         for (UIManager.LookAndFeelInfo lookAndFeelInfo : lafInfo) {
             String name = lookAndFeelInfo.getName();
@@ -108,32 +95,22 @@ public final class UIDesignManager {
         return themes;
     }
 
-    @SuppressWarnings("unused")
-    public static void registerTheme(IThemeDesigner designer) {
-        registerTheme(designer.getName(), designer.getClassName(), designer.getIcon());
-        themeInitilizer.put(designer.getName(), designer);
-    }
-
-    public static void registerTheme(String name, String className, URL image) {
-        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(name, className);
+    public static void registerTheme(IThemeInitializer initializer) {
+        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(initializer.getName(), initializer.getClassName());
         UIManager.installLookAndFeel(info);
-        if (image != null) {
-            String key = info.toString();
-            themeImages.put(key, image);
-        }
+        themeKeySet.add(info.toString());
+        themeInitilizer.put(info.toString(), initializer);
     }
 
     @SuppressWarnings("unused")
     public static void registerTheme(String name, String className) {
-        registerTheme(name, className, ResourcesUtil.getResourceURL(THEME_UNKNOWN_ICON));
+        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(name, className);
+        UIManager.installLookAndFeel(info);
+        themeKeySet.add(info.toString());
     }
 
     public static Set<String> getThemeKeySet() {
-        return themeImages.keySet();
-    }
-
-    public static URL getThemeImage(String key) {
-        return themeImages.getOrDefault(key, ResourcesUtil.getResourceURL(THEME_UNKNOWN_ICON));
+        return themeKeySet;
     }
 
     public static String getThemeClassName(String key) {
@@ -144,6 +121,27 @@ public final class UIDesignManager {
             }
         }
         return null;
+    }
+
+    public static void setDefaultTheme() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            // Something went wrong!!
+            Log.log(ex);
+            Main.showError(ex);
+        }
+    }
+
+    public static String setTheme(String theme) {
+        try {
+            UIManager.setLookAndFeel(getThemeClassName(theme));
+            return theme;
+        } catch (Exception e) {
+            Log.log(e);
+            setDefaultTheme();
+            return Preferences.THEME_DEFAULT;
+        }
     }
 
     /**
@@ -193,21 +191,16 @@ public final class UIDesignManager {
         UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
 
-        // Classic design overridden by flat design
-        //installClassicDesign();
+        // Panel notification (blinking tabs/headers) settings
+        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
+        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
 
-        // call through theme plugin
-        //installFlatDesign();
-        IThemeDesigner initializer = themeInitilizer.get(theme);
+        IThemeInitializer initializer = themeInitilizer.get(theme);
         if (initializer != null) {
             initializer.setup();
         } else {
             installClassicDesign();
         }
-
-        // Panel notification (blinking tabs/headers) settings
-        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
 
         ensureTitlebarReadability();
     }

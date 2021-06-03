@@ -24,15 +24,11 @@
  **************************************************************************/
 package org.omegat.gui.theme;
 
-import java.net.URL;
-
-public interface IThemeDesigner {
+public interface IThemeInitializer {
 
     String getName();
 
     String getClassName();
-
-    URL getIcon();
 
     void setup();
 }

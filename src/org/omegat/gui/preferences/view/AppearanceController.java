@@ -31,8 +31,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -71,7 +69,7 @@ public class AppearanceController extends BasePreferencesController {
         panel = new AppearancePreferencesPanel();
         Map<String, String> themes = UIDesignManager.getThemes();
         themes.forEach((key, value) -> themeSelectionModel
-                .addElement(new ThemeLabel(key, value, new ImageIcon(UIDesignManager.getThemeImage(key)))));
+                .addElement(new ThemeLabel(key, value)));
         panel.cbThemeSelect.setModel(themeSelectionModel);
         ListThemeRenderer renderer = new ListThemeRenderer();
         panel.cbThemeSelect.setRenderer(renderer);
@@ -127,28 +125,21 @@ public class AppearanceController extends BasePreferencesController {
                 boolean isSelected,
                 boolean b) {
             setText(data.getText());
-            setIcon(data.getIcon());
             return this;
         }
     }
     public static class ThemeLabel {
 
         String text;
-        Icon icon;
         String key;
 
-        ThemeLabel(String key, String text, Icon icon) {
+        ThemeLabel(String key, String text) {
             this.key = key;
             this.text = text;
-            this.icon = icon;
         }
 
         public String getText() {
             return text;
-        }
-
-        public Icon getIcon() {
-            return icon;
         }
 
         public String getKey() {

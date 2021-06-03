@@ -27,7 +27,6 @@ package org.omegat.gui.theme;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
@@ -52,22 +51,16 @@ public class DefaultFlatTheme {
     public static void unloadPlugins() {
     }
 
-    public static class DefaultFlatThemeDesignInstall implements IThemeDesigner {
+    public static class DefaultFlatThemeDesignInstall implements IThemeInitializer {
 
         @Override
         public String getName() {
             return Preferences.THEME_DEFAULT;
-
         }
 
         @Override
         public String getClassName() {
             return defaultLaf;
-        }
-
-        @Override
-        public URL getIcon() {
-            return ResourcesUtil.getResourceURL("thubm_default.png");
         }
 
         @Override

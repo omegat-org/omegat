@@ -191,16 +191,16 @@ public final class UIDesignManager {
         UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
 
-        // Panel notification (blinking tabs/headers) settings
-        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
-
         IThemeInitializer initializer = THEME_INITIALIZER.get(theme);
         if (initializer != null) {
             initializer.setup();
         } else {
             installClassicDesign();
         }
+
+        // Panel notification (blinking tabs/headers) settings
+        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
+        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
 
         ensureTitlebarReadability();
     }

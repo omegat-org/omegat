@@ -73,7 +73,6 @@
         <array>
             <string>-Xdock:name=OmegaT</string>
             <!-- <string>-Xmx6g</string> -->
-            <string>-Djava.system.class.loader=org.omegat.MainClassLoader</string>
         </array>
         <key>JVMDefaultOptions</key>
         <dict>

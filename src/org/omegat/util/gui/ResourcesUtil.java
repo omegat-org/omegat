@@ -66,16 +66,6 @@ public final class ResourcesUtil {
     }
 
     /**
-     * Get Resource URL of image.
-     *
-     * @param imageName icon file name
-     * @return icon URL when found, otherwise null
-     */
-    public static URL getResourceURL(final String imageName) {
-        return ResourcesUtil.class.getResource(RESOURCES + imageName);
-    }
-
-    /**
      * Load icon from classpath.
      *
      * @param imageName

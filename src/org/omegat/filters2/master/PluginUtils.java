@@ -34,7 +34,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -117,8 +116,11 @@ public final class PluginUtils {
                     }
                     if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
                         String target = mu.toString();
-                        Arrays.stream(urls).filter(url -> target.contains(url.toString()))
-                                .forEach(THEME_PLUGIN_JARS::add);
+                        for (URL url : urls) {
+                            if (target.contains(url.toString())) {
+                                THEME_PLUGIN_JARS.add(url);
+                            }
+                        }
                     }
                     loadFromManifest(m, pluginsClassLoader);
                 }

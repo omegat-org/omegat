@@ -14,8 +14,9 @@
     <itemizedlist>
       <listitem>
         <para>Search for the required language combination - for instance on
-        the <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">dictionary links given by the OmegaT
-        Wiki</ulink>.</para>
+        the <ulink
+        url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">dictionary
+        links given by the OmegaT Wiki</ulink>.</para>
       </listitem>
     </itemizedlist>
 
@@ -23,20 +24,20 @@
       <listitem>
         <para>Download the file - it should be a <filename>tarball</filename>
         archive (extension <emphasis>tar.bz</emphasis> or
-        <emphasis>tar.bz2</emphasis>).</para>
+        <emphasis>tar.bz2</emphasis>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Use untar utility (or its equivalent, for instance<filename>
+        <para>Use untar utility (or its equivalent, for instance <filename>
         winrar</filename> in Windows) to extract its contents into the project
-        folder &quot;Dictionary&quot;. There should be three files, with extensions
-        <emphasis>dz, idx </emphasis>and <emphasis>ifo</emphasis>.</para>
+        folder "Dictionary". There should be three files, with extensions
+        <emphasis>dz, idx</emphasis> and <emphasis>ifo</emphasis>.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Note that in addition to &quot;source-target&quot; dictionaries you can, using
+    <para>Note that in addition to "source-target" dictionaries you can, using
     the Dictionary feature, obtain access to information such as:</para>
 
     <itemizedlist>
@@ -63,10 +64,10 @@
       </listitem>
     </itemizedlist>
 
-    <para>Some of the dictionaries have no strings attached - i.e. are &quot;Free
-    to use&quot;, and others, like the selection above, are under the GPL license.
-    The following example shows Merriam Webster 10th dictionary &quot;in
-    action&quot;:</para>
+    <para>Some of the dictionaries have no strings attached - i.e. are "Free
+    to use", and others, like the selection above, are under the GPL license.
+    The following example shows Merriam Webster 10th dictionary "in
+    action":</para>
 
     <figure id="Dict.Merriam.Webster">
       <title>Merriam Webster dictionary - use</title>

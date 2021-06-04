@@ -354,7 +354,7 @@ public class RealProject implements IProject {
 
             loadFilterSettings();
             loadSegmentationSettings();
-            loadTranslations();
+            loadTranslations();  //load projectsave.tmx
             loadSourceFiles();
 
             // This MUST happen after calling loadTranslations()
@@ -363,11 +363,15 @@ public class RealProject implements IProject {
                 rebaseAndCommitProject(true);
             }
 
+            //after loadSourcefiles, the entries are filled. The list can now (and only now) be readonly.
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
+            //and now we can set the importHandler, used by loadTM
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);
 
+            //imports translation from source files into ProjectTMX
             importTranslationsFromSources();
 
+            //loads external tmx, and auto/enfoce tmx'es (appending to projectTMX)
             loadTM();
 
             loadOtherLanguages();
@@ -1309,8 +1313,11 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Locates and loads external TMX files with legacy translations. Uses directory monitor for check file
-     * updates.
+     * Locates and loads external TMX files with translations from same source language into different target languages.
+     * (These are used to show to the translator as reference, either to see what other translators did in other languages,
+     * or to better understand the source language if he doesn't master the source language, but he does know the extra
+     * target language)
+     * Uses directory monitor for check file updates.
      */
     private void loadOtherLanguages() {
         File tmOtherLanguagesRoot = new File(config.getTMOtherLangRoot());
@@ -1345,9 +1352,9 @@ public class RealProject implements IProject {
     /**
      * Append new translation from auto TMX.
      */
-    void appendFromAutoTMX(ExternalTMX tmx, boolean isEnforcedTMX) {
+    void appendFromAutoTMX(ExternalTMX autoTmx, boolean isEnforcedTMX) {
         synchronized (projectTMX) {
-            importHandler.process(tmx, isEnforcedTMX);
+            importHandler.process(autoTmx, isEnforcedTMX);
         }
     }
 

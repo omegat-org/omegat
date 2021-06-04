@@ -37,7 +37,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -47,7 +46,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
-import javax.swing.border.MatteBorder;
 import javax.swing.plaf.ColorUIResource;
 
 import com.vlsolutions.swing.docking.AutoHidePolicy;
@@ -79,7 +77,6 @@ import org.omegat.util.Preferences;
  */
 public final class UIDesignManager {
 
-    private static final Set<String> THEME_KEY_SET = new HashSet<>();
     private static final Map<String, IThemeInitializer> THEME_INITIALIZER = new HashMap<>();
 
     private UIDesignManager() {
@@ -99,19 +96,11 @@ public final class UIDesignManager {
     public static void registerTheme(IThemeInitializer initializer) {
         UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(initializer.getName(), initializer.getClassName());
         UIManager.installLookAndFeel(info);
-        THEME_KEY_SET.add(info.toString());
         THEME_INITIALIZER.put(info.toString(), initializer);
     }
 
-    @SuppressWarnings("unused")
-    public static void registerTheme(String name, String className) {
-        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(name, className);
-        UIManager.installLookAndFeel(info);
-        THEME_KEY_SET.add(info.toString());
-    }
-
     public static Set<String> getThemeKeySet() {
-        return THEME_KEY_SET;
+        return THEME_INITIALIZER.keySet();
     }
 
     public static String getThemeClassName(String key) {
@@ -197,57 +186,13 @@ public final class UIDesignManager {
         UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
 
-        IThemeInitializer initializer = THEME_INITIALIZER.get(theme);
-        if (initializer != null) {
-            initializer.setup();
-        } else {
-            installClassicDesign();
-        }
+        THEME_INITIALIZER.get(theme).setup();
 
         // Panel notification (blinking tabs/headers) settings
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);
         UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
 
         ensureTitlebarReadability();
-    }
-
-    @SuppressWarnings("unused")
-    private static void installClassicDesign() {
-        UIManager.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
-
-        UIManager.put("DockViewTitleBar.hide", getIcon("minimize.gif"));
-        UIManager.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif"));
-        UIManager.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif"));
-        UIManager.put("DockViewTitleBar.maximize", getIcon("maximize.gif"));
-        UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("maximize.rollover.gif"));
-        UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("maximize.pressed.gif"));
-        UIManager.put("DockViewTitleBar.restore", getIcon("restore.gif"));
-        UIManager.put("DockViewTitleBar.restore.rollover", getIcon("restore.rollover.gif"));
-        UIManager.put("DockViewTitleBar.restore.pressed", getIcon("restore.pressed.gif"));
-        UIManager.put("DockViewTitleBar.dock", getIcon("restore.gif"));
-        UIManager.put("DockViewTitleBar.dock.rollover", getIcon("restore.rollover.gif"));
-        UIManager.put("DockViewTitleBar.dock.pressed", getIcon("restore.pressed.gif"));
-        UIManager.put("DockViewTitleBar.float", getIcon("undock.gif"));
-        UIManager.put("DockViewTitleBar.float.rollover", getIcon("undock.rollover.gif"));
-        UIManager.put("DockViewTitleBar.float.pressed", getIcon("undock.pressed.gif"));
-        UIManager.put("DockViewTitleBar.attach", getIcon("dock.gif"));
-        UIManager.put("DockViewTitleBar.attach.rollover", getIcon("dock.rollover.gif"));
-        UIManager.put("DockViewTitleBar.attach.pressed", getIcon("dock.pressed.gif"));
-
-        UIManager.put("DockViewTitleBar.menu.hide", getIcon("minimize.gif"));
-        UIManager.put("DockViewTitleBar.menu.maximize", getIcon("maximize.gif"));
-        UIManager.put("DockViewTitleBar.menu.restore", getIcon("restore.gif"));
-        UIManager.put("DockViewTitleBar.menu.dock", getIcon("restore.gif"));
-        UIManager.put("DockViewTitleBar.menu.float", getIcon("undock.gif"));
-        UIManager.put("DockViewTitleBar.menu.attach", getIcon("dock.gif"));
-
-        UIManager.put("DockTabbedPane.menu.hide", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.maximize", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.float", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif"));
-
-        UIManager.put("DragControler.detachCursor", getIcon("undock.gif").getImage());
     }
 
     private static void ensureTitlebarReadability() {

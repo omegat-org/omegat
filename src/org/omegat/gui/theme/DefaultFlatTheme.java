@@ -3,7 +3,14 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021 Hiroshi Miura
+ Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
+                         Benjamin Siband, and Kim Bruning
+               2007 Zoltan Bartko
+               2008 Andrzej Sawula, Alex Buloichik
+               2009-2010 Alex Buloichik
+               2014 Yu Tang
+               2015 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -40,9 +47,10 @@ import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.RoundedCornerBorder;
 import org.omegat.util.gui.UIDesignManager;
 
+
 public class DefaultFlatTheme {
 
-    private static final String defaultLaf = UIManager.getSystemLookAndFeelClassName();
+    private static final String DEFAULT_LAF_CLASS = UIManager.getSystemLookAndFeelClassName();
 
     public static void loadPlugins() {
         UIDesignManager.registerTheme(new DefaultFlatThemeDesignInstall());
@@ -51,19 +59,12 @@ public class DefaultFlatTheme {
     public static void unloadPlugins() {
     }
 
-    public static class DefaultFlatThemeDesignInstall implements IThemeInitializer {
+    public static class DefaultFlatThemeDesignInstall extends UIManager.LookAndFeelInfo implements IThemeInitializer {
 
-        @Override
-        public String getName() {
-            return Preferences.THEME_DEFAULT;
+        public DefaultFlatThemeDesignInstall() {
+            super(Preferences.THEME_DEFAULT, DEFAULT_LAF_CLASS);
         }
 
-        @Override
-        public String getClassName() {
-            return defaultLaf;
-        }
-
-        @Override
         public void setup() {
             installFlatDesign();
         }

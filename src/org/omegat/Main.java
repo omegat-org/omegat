@@ -110,9 +110,6 @@ public final class Main {
     /** Execution command line parameters. */
     protected static final Map<String, String> PARAMS = new TreeMap<>();
 
-    /** JVM parameters. */
-    protected static final List<String> JVMPARAMS = new ArrayList<>();
-
     /** Execution mode. */
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
@@ -127,10 +124,6 @@ public final class Main {
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
         }
-
-        // retrieve JVM parameters.
-        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-        JVMPARAMS.addAll(runtimeMxBean.getInputArguments());
 
         // Workaround for bug #812. Remove this when appropriate; see
         // https://sourceforge.net/p/omegat/bugs/812/
@@ -219,6 +212,10 @@ public final class Main {
     }
 
     public static void restartGUI(String projectDir) {
+        // retrieve JVM parameters.
+        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+        List<String> JVMPARAMS = runtimeMxBean.getInputArguments();
+
         Log.log("===         Restart OmegaT           ===");
         final String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
         try {

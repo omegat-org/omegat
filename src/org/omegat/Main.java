@@ -217,28 +217,20 @@ public final class Main {
         List<String> JVMPARAMS = runtimeMxBean.getInputArguments();
 
         Log.log("===         Restart OmegaT           ===");
-        final String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
+        String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
+        // Build command: java -cp ... org.omegat.Main
+        List<String> command = new ArrayList<>();
+        command.add(javaBin);
+        command.addAll(JVMPARAMS);
+        command.add("-cp");
+        command.add(ManagementFactory.getRuntimeMXBean().getClassPath());
+        command.add(Main.class.getName());
+        command.addAll(CLIParameters.unparseArgs(PARAMS));
+        if (projectDir != null) {
+            command.add(projectDir);
+        }
+        ProcessBuilder builder = new ProcessBuilder(command);
         try {
-            /* Build command: java -cp ... org.omegat.Main */
-            final ArrayList<String> command = new ArrayList<>();
-            command.add(javaBin);
-            command.addAll(JVMPARAMS);
-            command.add("-cp");
-            command.add(ManagementFactory.getRuntimeMXBean().getClassPath());
-            command.add(Main.class.getName());
-            PARAMS.forEach((k, v) -> {
-                if (!k.equals(CLIParameters.PROJECT_DIR)) {
-                    if (v != null) {
-                        command.add("--" + k + "=" + v);
-                    } else {
-                        command.add("--" + k);
-                    }
-                }
-            });
-            if (projectDir != null) {
-                command.add(projectDir);
-            }
-            final ProcessBuilder builder = new ProcessBuilder(command);
             builder.start();
             System.exit(0);
         } catch (IOException e) {

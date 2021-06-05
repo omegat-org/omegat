@@ -68,7 +68,7 @@ public final class GlossaryReaderCSV {
                 if (s.startsWith("#")) {
                     continue;
                 }
-                // divide lines on tabs
+                // tokenize lines with parseLine
                 String[] tokens = parseLine(s);
                 // check token list to see if it has a valid string
                 if (tokens.length < 2 || tokens[0].isEmpty()) {

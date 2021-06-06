@@ -284,10 +284,15 @@ public final class Main {
         }
 
         String theme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, Preferences.THEME_DEFAULT);
+        String result;
         if (theme.equals(Preferences.THEME_DEFAULT)) {
-            UIDesignManager.setDefaultTheme(mainClassLoader);
+            result = UIDesignManager.setDefaultTheme(mainClassLoader);
         } else {
-            theme = UIDesignManager.setTheme(theme, mainClassLoader);
+            result = UIDesignManager.setTheme(theme, mainClassLoader);
+        }
+        if (result !=null && !theme.equals(result)) {
+            Preferences.setPreference(Preferences.THEME_SELECTED_NAME, result);
+            theme = result;
         }
 
         System.setProperty("swing.aatext", "true");

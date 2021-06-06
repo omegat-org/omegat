@@ -55,11 +55,11 @@ import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
 import org.omegat.Main;
+import org.omegat.gui.theme.DefaultFlatTheme;
 import org.omegat.gui.theme.IThemeInitializer;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
-import org.omegat.util.Preferences;
 
 /**
  * UI Design Manager.
@@ -113,14 +113,22 @@ public final class UIDesignManager {
         return null;
     }
 
-    public static void setDefaultTheme(ClassLoader classLoader) {
+    public static String setDefaultTheme(ClassLoader classLoader) {
+        String theme = getDefaultThemeKey();
         try {
-            setLookAndFeel(UIManager.getSystemLookAndFeelClassName(), classLoader);
+            setLookAndFeel(theme, classLoader);
         } catch (Exception ex) {
             // Something went wrong!!
             Log.log(ex);
             Main.showError(ex);
         }
+        return theme;
+    }
+
+    private static String getDefaultThemeKey() {
+        IThemeInitializer initializer = new DefaultFlatTheme.DefaultFlatThemeDesignInstall();
+        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(initializer.getName(), initializer.getClassName());
+        return info.toString();
     }
 
     public static String setTheme(String theme, ClassLoader classLoader) {
@@ -129,13 +137,12 @@ public final class UIDesignManager {
             return theme;
         } catch (Exception e) {
             Log.log(e);
-            setDefaultTheme(classLoader);
-            return Preferences.THEME_DEFAULT;
+            return setDefaultTheme(classLoader);
         }
     }
 
-    private static void setLookAndFeel(String laf, ClassLoader classLoader) throws Exception {
-        Class<?> clazz = classLoader.loadClass(getThemeClassName(laf));
+    private static void setLookAndFeel(String theme, ClassLoader classLoader) throws Exception {
+        Class<?> clazz = classLoader.loadClass(getThemeClassName(theme));
         UIManager.setLookAndFeel((LookAndFeel) clazz.getConstructor().newInstance());
     }
 

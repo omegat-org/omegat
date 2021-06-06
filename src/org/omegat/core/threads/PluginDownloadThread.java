@@ -34,7 +34,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.Formatter;
 import java.util.HashMap;
 
@@ -45,27 +44,23 @@ public class PluginDownloadThread extends LongProcessThread {
     private final URL url;
     private final File targetdir;
     private final String archive;
+    private final String checksum;
     private final HashMap<String, String> headers = new HashMap<>();
 
-    public PluginDownloadThread(URL url, String username, String token, File targetdir, String filename) throws UnsupportedEncodingException {
+    public PluginDownloadThread(URL url, String sha256Sum, File targetdir, String filename) throws UnsupportedEncodingException {
         this.url = url;
         this.targetdir = targetdir;
+        this.checksum = sha256Sum;
         this.archive = filename;
-        String encoding = Base64.getEncoder().encodeToString((username + ":" + token).getBytes("UTF-8"));
-        headers.put("authorization", "Basic " + encoding);
     }
 
     @Override
     public void run() {
         try {
-            String jarChecksumUrl = url.toString() + ".sha256";
-            HashMap<String, String> params = new HashMap<>();
-            String expected = HttpConnectionUtils.get(jarChecksumUrl, params, headers);
-
             File targetFilePath = new File(targetdir, archive);
             boolean result = HttpConnectionUtils.downloadBinaryFile(url, headers, targetFilePath);
             checkInterrupted();
-            if (!result || !expected.equals(calculateSha256(targetFilePath))) {
+            if (!result || !checksum.equals(calculateSha256(targetFilePath))) {
                 // todo: remove download files and show warning
             }
         } catch (IOException | NoSuchAlgorithmException e) {

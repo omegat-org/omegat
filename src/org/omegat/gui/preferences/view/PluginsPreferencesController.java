@@ -30,6 +30,7 @@ package org.omegat.gui.preferences.view;
 import java.net.URI;
 import java.util.Map;
 import java.util.Vector;
+
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -40,6 +41,7 @@ import javax.swing.table.TableRowSorter;
 import org.omegat.Main;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
+import org.omegat.core.data.RemotePluginInformation;
 import org.omegat.core.plugins.PluginInstaller;
 import org.omegat.core.plugins.PluginsManager;
 import org.omegat.gui.dialogs.ChoosePluginFile;
@@ -182,6 +184,11 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 }
             }
         });
+
+        remotePluginDetailHeader.installButton.addActionListener(e ->{
+            int row = panel.tableAvailablePluginsInfo.getSelectedRow();
+            PluginsManager.downloadAndInstallPlugin(availableModel.getValueAt(row));
+        });
     }
 
     @Override
@@ -272,7 +279,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
     static class AvailablePluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 52734789123814035L;
         private static final String[] COLUMN_NAMES = { "STAT", "CATEGORY", "NAME", "VERSION" };
-        private final Map<String, PluginInformation> listPlugins;
+        private final Map<String, RemotePluginInformation> listPlugins;
 
         public static final int COLUMN_STAT = 0;
         public static final int COLUMN_CATEGORY = 1;
@@ -284,7 +291,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             listPlugins = pluginsManager.getAvailablePluginInformation();
         }
 
-        public final PluginInformation getValueAt(int rowIndex) {
+        public final RemotePluginInformation getValueAt(int rowIndex) {
             return new Vector<>(listPlugins.values()).get(rowIndex);
 
         }
@@ -344,6 +351,5 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
             return returnValue;
         }
-
     }
 }

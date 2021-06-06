@@ -56,14 +56,15 @@ import java.util.stream.Stream;
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
+import org.omegat.core.data.RemotePluginInformation;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.util.FileUtil;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Plugin information and installation manager.
@@ -72,13 +73,9 @@ import org.omegat.util.HttpConnectionUtils;
  */
 public final class PluginsManager {
 
-    /**
-     * FIXME: Plugin list download URL.
-     * It should be under the omegat.org control.
-     */
-    private static final String LIST_URL = "https://raw.githubusercontent.com/omegat-org/omegat-plugins/main/plugins.MF";
+    private static final String LIST_URL = "https://github.com/omegat-org/omegat-plugins/releases/download/continuous-release/plugins.MF";
 
-    private Map<String, PluginInformation> availablePlugins = null;
+    private Map<String, RemotePluginInformation> availablePlugins = null;
     private final Map<String, PluginInformation> installedPlugins;
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
     protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
@@ -134,8 +131,8 @@ public final class PluginsManager {
      * Download plugin list from github repository.
      * @return set of PluginInformation
      */
-    private static Set<PluginInformation> getPluginsList() {
-        Set<PluginInformation> pluginInfo = new TreeSet<>();
+    private static Set<RemotePluginInformation> getPluginsList() {
+        Set<RemotePluginInformation> pluginInfo = new TreeSet<>();
         String raw_value;
         try {
             raw_value = HttpConnectionUtils.getURL(new URL(LIST_URL));
@@ -153,7 +150,7 @@ public final class PluginsManager {
                             if (clazz.trim().isEmpty()) {
                                 continue;
                             }
-                            pluginInfo.add(new PluginInformation(clazz, m, null, PluginInformation.STATUS.UNINSTALLED));
+                            pluginInfo.add(new RemotePluginInformation(clazz, m));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -250,7 +247,7 @@ public final class PluginsManager {
      * It can has plugins that has already installed.
      * @return Map of PluginInformation
      */
-     public Map<String, PluginInformation> getAvailablePluginInformation() {
+     public Map<String, RemotePluginInformation> getAvailablePluginInformation() {
         if (availablePlugins == null) {
             availablePlugins = new TreeMap<>();
             getPluginsList().stream()
@@ -271,6 +268,18 @@ public final class PluginsManager {
                     });
         }
         return availablePlugins;
+    }
+
+    public static void downloadAndInstallPlugin(final RemotePluginInformation info) {
+        try {
+            URL downloadUrl = new URL(info.getRemoteJarFileUrl());
+            String jarFilename = info.getJarFilename();
+            String sha256sum = info.getSha256Sum();
+            PluginDownloadThread downloadThread = new PluginDownloadThread(downloadUrl, sha256sum, homePluginsDir, jarFilename);
+            downloadThread.checkInterrupted();
+        } catch (IOException ex) {
+            Log.log(ex);
+        }
     }
 
     private String getPluginInformationKey(PluginInformation info) {

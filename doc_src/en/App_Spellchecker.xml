@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.spellchecker">
   <title>Spell checker</title>
 
@@ -26,9 +27,9 @@
     <itemizedlist>
       <listitem>
         <para>In OmegaT, select <guimenuitem>Options &gt; Spell
-        Checking</guimenuitem>, then click <guibutton>Choose
-        </guibutton> beside the Dictionary file folder field. Navigate to and
-        select the folder you created for dictionaries.</para>
+        Checking</guimenuitem>, then click <guibutton>Choose </guibutton>
+        beside the Dictionary file folder field. Navigate to and select the
+        folder you created for dictionaries.</para>
       </listitem>
     </itemizedlist>
 
@@ -37,9 +38,9 @@
         <para>Place the dictionary files you wish to use in this folder. There
         are essentially two ways in which you can do this. You can either copy
         files manually, i.e. from elsewhere on your system, using your file
-        manager; or you can use OmegaT's <emphasis role="bold">&quot;Install new
-        dictionary&quot;</emphasis> function to provide a list of available
-        dictionaries to select from. Note that the &quot;Install&quot; function requires
+        manager; or you can use OmegaT's <emphasis role="bold">"Install new
+        dictionary"</emphasis> function to provide a list of available
+        dictionaries to select from. Note that the "Install" function requires
         an Internet connection. The selected languages will then be installed
         and will eventually appear in your spell checker setup window (this
         may take a while).</para>
@@ -47,10 +48,10 @@
     </itemizedlist>
 
     <para>Copying the files manually makes sense if you already have suitable
-    dictionary files on your system, for instance as part of your Apache OpenOffice,
-    LibreOffice, Firefox or Thunderbird installation. It is simpler, however, to look for
-    dictionaries online, using the <emphasis role="bold">URL of online
-    dictionaries</emphasis> field:</para>
+    dictionary files on your system, for instance as part of your Apache
+    OpenOffice, LibreOffice, Firefox or Thunderbird installation. It is
+    simpler, however, to look for dictionaries online, using the <emphasis
+    role="bold">URL of online dictionaries</emphasis> field:</para>
 
     <figure id="spellchecker.setup">
       <title>Spellchecker setup</title>
@@ -119,7 +120,7 @@
     <title>Hints</title>
 
     <para>If the spell checker is not working, then make sure first that the
-    check box <guilabel>&quot;Automatically check the spelling of text&quot;</guilabel>
+    check box <guilabel>"Automatically check the spelling of text"</guilabel>
     in the spell checker dialog (<guisubmenu>Options &gt; Spell
     checking...)</guisubmenu> is checked.</para>
 

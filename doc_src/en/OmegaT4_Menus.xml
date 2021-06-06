@@ -6,16 +6,18 @@
 
   <xi:include href="Menus_Project.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <xi:include href="Menus_Edit.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <xi:include href="Menus_GoTo.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <xi:include href="Menus_View.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_Edit.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_GoTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_View.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Menus_Tools.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="Menus_Options.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  <xi:include href="Menus_Help.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Menus_Help.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </chapter>

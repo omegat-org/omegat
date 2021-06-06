@@ -4,7 +4,8 @@
 <section id="howto.useteamproject">
   <title>Use a Team Project</title>
 
-  <para>OmegaT team projects must first be <link linkend="howto.setupteamproject">set up</link> on a server.</para>
+  <para>OmegaT team projects must first be <link
+  linkend="howto.setupteamproject">set up</link> on a server.</para>
 
   <para>To use a team project for the first time, follow the procedure
   provided by the project manager.</para>
@@ -18,7 +19,8 @@
   the remote repository so that the project manager or other translators can
   see and use translations added during that period.</para>
 
-  <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.savingandoutput"><menuchoice>
+  <para>The interval of 3 minutes can be changed in <link
+  linkend="dialogs.preferences.savingandoutput"><menuchoice>
       <guimenuitem>Options</guimenuitem>
 
       <guimenuitem>Preferences</guimenuitem>

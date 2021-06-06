@@ -24,8 +24,9 @@
       </listitem>
     </itemizedlist><itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Replace:</emphasis> operates a &quot;one by
-        one&quot; replacement, by the mean of buttons in the <emphasis role="bold">header of the Editor pane</emphasis>. Click
+        <para><emphasis role="bold">Replace:</emphasis> operates a "one by
+        one" replacement, by the mean of buttons in the <emphasis
+        role="bold">header of the Editor pane</emphasis>. Click
         <emphasis>Replace Next</emphasis> or <emphasis>Skip</emphasis>, then
         end the replacement session with <emphasis>Finish</emphasis>.</para>
       </listitem>
@@ -39,7 +40,8 @@
   <section>
     <title>Search options</title>
 
-    <para>Search options are similar to the ones displayed in <link linkend="windows.textsearch">Search window</link>.</para>
+    <para>Search options are similar to the ones displayed in <link
+    linkend="windows.textsearch">Search window</link>.</para>
 
     <para>Except one: check <emphasis role="bold">Untranslated</emphasis> in
     order to operate Search and replace also on segments that have not been

@@ -19,13 +19,13 @@
   <application>OmegaT</application> project (see the above description). You
   can regard these three tmx files (<filename>-omegat.tmx</filename>,
   <filename>-level1.tmx</filename> and <filename>-level2.tmx</filename>) as an
-  &quot;export translation memory&quot;, i.e. as an export of your current project's
+  "export translation memory", i.e. as an export of your current project's
   content in bilingual form.</para>
 
   <para>Should you wish to reuse a translation memory from a previous project
   (for example because the new project is similar to the previous project, or
   uses terminology which might have been used before), you can use these
-  translation memories as &quot;input translation memories&quot;, i.e. for import into
+  translation memories as "input translation memories", i.e. for import into
   your new project. In this case, place the translation memories you wish to
   use in the <emphasis>/tm</emphasis> or <emphasis>/tm</emphasis>/auto folder
   of your new project: in the former case you will get hits from these
@@ -41,7 +41,7 @@
 
   <itemizedlist>
     <listitem>
-      <para>Create a folder (a &quot;repository folder&quot;) in a convenient location
+      <para>Create a folder (a "repository folder") in a convenient location
       on your hard drive for the translation memories for a particular
       customer or subject.</para>
     </listitem>
@@ -49,7 +49,7 @@
 
   <itemizedlist>
     <listitem>
-      <para>Whenever you finish a project, copy one of the three &quot;export&quot;
+      <para>Whenever you finish a project, copy one of the three "export"
       translation memory files from the root folder of the project to the
       repository folder.</para>
     </listitem>

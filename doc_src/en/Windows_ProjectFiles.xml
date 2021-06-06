@@ -28,8 +28,8 @@
     <listitem>
       <para>the total number of translatable files in the project. These are
       the files present in the /source folder in a format that OmegaT is able
-      to recognize. This number is displayed in brackets, next to the &quot;Project
-      file&quot; title</para>
+      to recognize. This number is displayed in brackets, next to the "Project
+      file" title</para>
     </listitem>
 
     <listitem>
@@ -64,11 +64,11 @@
 
   <para>The set of <emphasis role="bold">Unique </emphasis>segments is
   computed by taking all the segments and removing all duplicate segments.
-  (The definition of “unique” is case-sensitive: &quot;Run&quot; and &quot;run&quot; are treated
+  (The definition of “unique” is case-sensitive: "Run" and "run" are treated
   as being different)</para>
 
-  <para>The difference between &quot;Number of segments&quot; and &quot;Number of unique
-  segments&quot; provides an approximate idea of the number of repetitions in the
+  <para>The difference between "Number of segments" and "Number of unique
+  segments" provides an approximate idea of the number of repetitions in the
   text. Note however that the numbers do not indicate how relevant the
   repetitions are: they could mean relatively long sentences repeated a number
   of times (in which case you are fortunate) or it could describe a table of
@@ -82,10 +82,10 @@
   <emphasis>Segmentation rules</emphasis> for more information.</para>
 
   <para><emphasis role="bold">Adding files to the project: </emphasis>You can
-  add source files to the project by clicking on the &quot;<guimenuitem>Import
-  Source Files...&quot;</guimenuitem> button. This copies the selected files to the
+  add source files to the project by clicking on the "<guimenuitem>Import
+  Source Files..."</guimenuitem> button. This copies the selected files to the
   <filename>source</filename> folder and reloads the project to import the new
   files. You can also add source files from Internet pages, written in
-  MediaWiki, by clicking on<guimenuitem> &quot;Import from MediaWiki&quot;</guimenuitem>
+  MediaWiki, by clicking on<guimenuitem> "Import from MediaWiki"</guimenuitem>
   button and providing the corresponding URL.</para>
 </section>

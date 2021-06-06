@@ -43,7 +43,9 @@
       <term>Dictionary</term>
 
       <listitem>
-        <para>Check the <guimenuitem>Use Fuzzy Matching for Dictionary Entries</guimenuitem> option if you want dictionaries to display words that have the same root.</para>
+        <para>Check the <guimenuitem>Use Fuzzy Matching for Dictionary
+        Entries</guimenuitem> option if you want dictionaries to display words
+        that have the same root.</para>
       </listitem>
     </varlistentry>
 
@@ -54,11 +56,14 @@
         <para>If <guimenuitem>Show Relevant Suggestions
         Automatically</guimenuitem> option is checked, Auto-completer is
         launched automatically by typing the first letters of a translated
-        glossary entry, or by typing &quot;&lt;&quot; in case of tags.</para>
+        glossary entry, or by typing "&lt;" in case of tags.</para>
 
-        <para>Check <guimenuitem>History Completion</guimenuitem> to display suggested words as soon as their first letters are entered.</para>
+        <para>Check <guimenuitem>History Completion</guimenuitem> to display
+        suggested words as soon as their first letters are entered.</para>
 
-        <para>Check <guimenuitem>History Prediction</guimenuitem> to display suggested words that commonly follow the word that has just been entered.</para>
+        <para>Check <guimenuitem>History Prediction</guimenuitem> to display
+        suggested words that commonly follow the word that has just been
+        entered.</para>
       </listitem>
     </varlistentry>
 
@@ -77,11 +82,11 @@
       <term>Segmentation...</term>
 
       <listitem>
-        <para>Opens the <link linkend="dialogs.preferences.segmentationsetup">Segmentation
+        <para>Opens the <link
+        linkend="dialogs.preferences.segmentationsetup">Segmentation
         Setup</link> options in the Preferences dialog.</para>
 
         <para>These settings apply to OmegaT level, to all projects.</para>
-
       </listitem>
     </varlistentry>
 
@@ -89,11 +94,11 @@
       <term>Editor...</term>
 
       <listitem>
-        <para>Opens the <link linkend="dialogs.preferences.editor">Editor</link> options in the
+        <para>Opens the <link
+        linkend="dialogs.preferences.editor">Editor</link> options in the
         Preferences dialog.</para>
 
         <para>These settings apply to OmegaT level, to all projects.</para>
-
       </listitem>
     </varlistentry>
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.shortcut.custom">
   <title>Shortcuts customization</title>
 
@@ -19,7 +20,7 @@
     <para>The shortcut definition file must be named
     <filename>MainMenuShortcuts.properties</filename> and must contain at most
     one shortcut definition per line. Empty lines are accepted and comment
-    lines should start with &quot;//&quot;. Anything after the &quot;//&quot; will be
+    lines should start with "//". Anything after the "//" will be
     ignored.</para>
 
     <para>Once the <filename>MainMenuShortcuts.properties</filename> file is
@@ -32,7 +33,8 @@
     <emphasis>&lt;shortcut&gt;</emphasis> is a combination of pressed keys
     specified by the user<footnote>
         <para>The full syntax for keystrokes (shortcuts) is defined in the
-        following Java 1.6 documentation from Oracle (bottom of page): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java
+        following Java 1.6 documentation from Oracle (bottom of page): <ulink
+        url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java
         1.6 keystrokes shortcuts</ulink></para>
       </footnote>.</para>
 
@@ -59,7 +61,8 @@
           <para>and <code>&lt;key&gt;</code> can be any key available on your
           keyboard<footnote>
               <para>The possible keyevents (keys) are listed in the following
-              Java 1.6 documentation from Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java
+              Java 1.6 documentation from Oracle: <ulink
+              url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java
               1.6 keyEvents description</ulink></para>
             </footnote>.</para>
         </listitem>
@@ -67,11 +70,13 @@
 
     <para>For example, in the default OmegaT shortcuts<footnote>
         <para>The default OmegaT shortcuts are available from Sourceforge:
-        <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
+        <ulink
+        url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
         OmegaT Shortcuts</ulink></para>
 
         <para>The default OmegaT shortcuts for the Mac are also available from
-        Sourceforge, they all use &quot;meta&quot; instead of &quot;ctrl&quot;: <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
+        Sourceforge, they all use "meta" instead of "ctrl": <ulink
+        url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
         OmegaT Shortcuts for the Mac</ulink></para>
       </footnote>, one can find:</para>
 
@@ -727,7 +732,7 @@
     <table>
       <title>View Menu</title>
 
-       <tgroup cols="3" colsep="1">
+      <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>

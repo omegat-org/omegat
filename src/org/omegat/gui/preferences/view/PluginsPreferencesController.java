@@ -27,6 +27,7 @@
 
 package org.omegat.gui.preferences.view;
 
+import java.awt.event.ActionListener;
 import java.net.URI;
 import java.util.Map;
 import java.util.Vector;
@@ -108,6 +109,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
             RemotePluginInformation info = model.getValueAt(rowIndex);
             remotePluginDetailHeader.labelPluginName.setText(info.getName());
             remotePluginDetailHeader.labelCategory.setText(info.getCategory());
+            for(ActionListener act : remotePluginDetailHeader.installButton.getActionListeners()) {
+                remotePluginDetailHeader.installButton.removeActionListener(act);
+            }
             if (info.getStatus().equals(PluginInformation.STATUS.UPGRADABLE)) {
                 remotePluginDetailHeader.installButton.setText("Upgrade");
                 remotePluginDetailHeader.installButton.setEnabled(true);
@@ -118,9 +122,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 remotePluginDetailHeader.installButton.setText("");
                 remotePluginDetailHeader.installButton.setEnabled(false);
             }
-            remotePluginDetailHeader.installButton.addActionListener(e ->{
-                int row = panel.tableAvailablePluginsInfo.getSelectedRow();
-                Boolean result = PluginsManager.downloadAndInstallPlugin(info);
+            remotePluginDetailHeader.installButton.addActionListener(e -> {
+                remotePluginDetailHeader.installButton.setEnabled(false);
+                boolean result = PluginsManager.downloadAndInstallPlugin(info);
                 if (result) {
                     Main.setRestartRequired();
                     panel.restartOmegatButton.setEnabled(true);

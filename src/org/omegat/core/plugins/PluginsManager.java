@@ -57,6 +57,7 @@ import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.core.data.RemotePluginInformation;
+import org.omegat.core.threads.PluginDownloadThread;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.util.FileUtil;
@@ -270,16 +271,19 @@ public final class PluginsManager {
         return availablePlugins;
     }
 
-    public static void downloadAndInstallPlugin(final RemotePluginInformation info) {
+    public static Boolean downloadAndInstallPlugin(final RemotePluginInformation info) {
         try {
             URL downloadUrl = new URL(info.getRemoteJarFileUrl());
             String jarFilename = info.getJarFilename();
             String sha256sum = info.getSha256Sum();
+            Log.log("Start downloading " + jarFilename);
             PluginDownloadThread downloadThread = new PluginDownloadThread(downloadUrl, sha256sum, homePluginsDir, jarFilename);
             downloadThread.checkInterrupted();
         } catch (IOException ex) {
             Log.log(ex);
+            return false;
         }
+        return true;
     }
 
     private String getPluginInformationKey(PluginInformation info) {

@@ -105,7 +105,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             remotePluginDetailsPane.setText("");
         } else {
             AvailablePluginInfoTableModel model = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
-            PluginInformation info = model.getValueAt(rowIndex);
+            RemotePluginInformation info = model.getValueAt(rowIndex);
             remotePluginDetailHeader.labelPluginName.setText(info.getName());
             remotePluginDetailHeader.labelCategory.setText(info.getCategory());
             if (info.getStatus().equals(PluginInformation.STATUS.UPGRADABLE)) {
@@ -118,6 +118,14 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 remotePluginDetailHeader.installButton.setText("");
                 remotePluginDetailHeader.installButton.setEnabled(false);
             }
+            remotePluginDetailHeader.installButton.addActionListener(e ->{
+                int row = panel.tableAvailablePluginsInfo.getSelectedRow();
+                Boolean result = PluginsManager.downloadAndInstallPlugin(info);
+                if (result) {
+                    Main.setRestartRequired();
+                    panel.restartOmegatButton.setEnabled(true);
+                }
+            });
             StringBuilder detailTextBuilder = new StringBuilder(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
             remotePluginDetailsPane.setText(detailTextBuilder.toString());
         }
@@ -183,11 +191,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
                     panel.restartOmegatButton.setEnabled(true);
                 }
             }
-        });
-
-        remotePluginDetailHeader.installButton.addActionListener(e ->{
-            int row = panel.tableAvailablePluginsInfo.getSelectedRow();
-            PluginsManager.downloadAndInstallPlugin(availableModel.getValueAt(row));
         });
     }
 

@@ -38,6 +38,7 @@ import java.util.Formatter;
 import java.util.HashMap;
 
 import org.omegat.util.HttpConnectionUtils;
+import org.omegat.util.Log;
 
 public class PluginDownloadThread extends LongProcessThread {
 
@@ -58,10 +59,16 @@ public class PluginDownloadThread extends LongProcessThread {
     public void run() {
         try {
             File targetFilePath = new File(targetdir, archive);
+            Log.log("Start downloading from " + url.toString());
             boolean result = HttpConnectionUtils.downloadBinaryFile(url, headers, targetFilePath);
-            checkInterrupted();
-            if (!result || !checksum.equals(calculateSha256(targetFilePath))) {
+            if (!result) {
+                Log.log("Failed to download plugin file.");
                 // todo: remove download files and show warning
+            } else if (!checksum.equals(calculateSha256(targetFilePath))) {
+                Log.log("Checksum error of plugin file.");
+                // todo: remove download files and show warning
+            } else {
+                Log.log("Finished downloading to " + targetFilePath.toPath());
             }
         } catch (IOException | NoSuchAlgorithmException e) {
             e.printStackTrace();

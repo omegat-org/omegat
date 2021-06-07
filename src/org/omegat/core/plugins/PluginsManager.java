@@ -271,14 +271,13 @@ public final class PluginsManager {
         return availablePlugins;
     }
 
-    public static Boolean downloadAndInstallPlugin(final RemotePluginInformation info) {
+    public static boolean downloadAndInstallPlugin(final RemotePluginInformation info) {
         try {
             URL downloadUrl = new URL(info.getRemoteJarFileUrl());
             String jarFilename = info.getJarFilename();
             String sha256sum = info.getSha256Sum();
-            Log.log("Start downloading " + jarFilename);
             PluginDownloadThread downloadThread = new PluginDownloadThread(downloadUrl, sha256sum, homePluginsDir, jarFilename);
-            downloadThread.checkInterrupted();
+            downloadThread.start();
         } catch (IOException ex) {
             Log.log(ex);
             return false;

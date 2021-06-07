@@ -142,7 +142,7 @@ public final class HttpConnectionUtils {
         if (responseCode == HttpURLConnection.HTTP_OK) {
             String contentType = httpURLConnection.getContentType();
             int contentLength = httpURLConnection.getContentLength();
-            if (contentType.equals("binary/octet-stream") || contentType.equals("application/jar-archive")) {
+            if (contentType.equals("application/octet-stream") || contentType.equals("application/jar-archive")) {
                 try (InputStream inputStream = httpURLConnection.getInputStream();
                      FileOutputStream outputStream = new FileOutputStream(saveFilePath)) {
                     int bytesRead = -1;
@@ -151,13 +151,18 @@ public final class HttpConnectionUtils {
                     while ((bytesRead = inputStream.read(buffer)) != -1) {
                         outputStream.write(buffer, 0, bytesRead);
                     }
+                    result = true;
+                } catch (Exception ex) {
+                    Log.log("Connection error");
                 } finally {
                     httpURLConnection.disconnect();
                 }
-                result = true;
             } else {
+                Log.log("MIME type is wrong.");
                 httpURLConnection.disconnect();
             }
+        } else {
+            Log.log("Response is not HTTP 200");
         }
         return result;
     }

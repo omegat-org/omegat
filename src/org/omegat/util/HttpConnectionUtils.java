@@ -147,8 +147,7 @@ public final class HttpConnectionUtils {
                      FileOutputStream outputStream = new FileOutputStream(saveFilePath)) {
                     long transferred = IOUtils.copy(inputStream, outputStream, BUFFER_SIZE);
                     if (transferred != contentLength) {
-                        throw new FlakyDownloadException(
-                                new Exception("Downloaded file length and content length of header is differ."));
+                        throw new FlakyDownloadException("Downloaded file length and content length of header is differ.");
                     }
                     result = true;
                 } catch (Exception ex) {
@@ -401,6 +400,10 @@ public final class HttpConnectionUtils {
     @SuppressWarnings("serial")
     public static class FlakyDownloadException extends RuntimeException {
         public FlakyDownloadException(Exception cause) {
+            super(cause);
+        }
+
+        public FlakyDownloadException(String cause) {
             super(cause);
         }
     }

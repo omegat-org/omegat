@@ -141,18 +141,12 @@ public final class HttpConnectionUtils {
         int responseCode = httpURLConnection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             String contentType = httpURLConnection.getContentType();
-            int contentLength = httpURLConnection.getContentLength();
+            long contentLength = httpURLConnection.getContentLength();
             if (contentType.equals("application/octet-stream") || contentType.equals("application/jar-archive")) {
                 try (InputStream inputStream = httpURLConnection.getInputStream();
                      FileOutputStream outputStream = new FileOutputStream(saveFilePath)) {
-                    int bytesRead = -1;
-                    int readLength = 0;
-                    byte[] buffer = new byte[BUFFER_SIZE];
-                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                        readLength += bytesRead;
-                        outputStream.write(buffer, 0, bytesRead);
-                    }
-                    assert (contentLength == readLength);
+                    long transferred = IOUtils.copy(inputStream, outputStream, BUFFER_SIZE);
+                    assert(transferred == contentLength);
                     result = true;
                 } catch (Exception ex) {
                     Log.log(ex);

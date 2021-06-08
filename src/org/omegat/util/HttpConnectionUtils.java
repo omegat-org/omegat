@@ -43,6 +43,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 
@@ -126,27 +127,33 @@ public final class HttpConnectionUtils {
 
     /**
      * Downloads a binary file from a URL.
-     * @param jarFileURL HTTP URL of the file to be downloaded
+     * @param fileURL HTTP URL of the file to be downloaded
+     * @param headers Additional HTTP headers
+     * @param expectedMime Mime type expected and check against such as ["application/octet-stream",
+     *                    "application/jar-archive"]. If getting type is differed, return false.
      * @param saveFilePath path of the file
-     * @throws IOException raise when connection failed.
+     * @return true when succeeded, otherwise false.
+     * @throws IOException raise when connection and file write failed.
+     * @throws FlakyDownloadException raise when downloaded file length differs from expected content length.
      */
-    public static boolean downloadBinaryFile(final URL jarFileURL, final Map<String, String> headers,
-                                             final File saveFilePath)
-            throws IOException {
+    public static boolean downloadBinaryFile(final URL fileURL, final Map<String, String> headers,
+                                             final Set<String> expectedMime, final File saveFilePath)
+            throws IOException, FlakyDownloadException {
         boolean result = false;
-        HttpURLConnection httpURLConnection = (HttpURLConnection) jarFileURL.openConnection();
-        headers.forEach((key, value) -> httpURLConnection.setRequestProperty(key, value));
+        HttpURLConnection httpURLConnection = (HttpURLConnection) fileURL.openConnection();
+        headers.forEach(httpURLConnection::setRequestProperty);
         httpURLConnection.setConnectTimeout(TIMEOUT_MS);
         httpURLConnection.setReadTimeout(TIMEOUT_MS);
         int responseCode = httpURLConnection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             String contentType = httpURLConnection.getContentType();
             long contentLength = httpURLConnection.getContentLength();
-            if (contentType.equals("application/octet-stream") || contentType.equals("application/jar-archive")) {
+            if (expectedMime.contains(contentType)) {
                 try (InputStream inputStream = httpURLConnection.getInputStream();
                      FileOutputStream outputStream = new FileOutputStream(saveFilePath)) {
                     long transferred = IOUtils.copy(inputStream, outputStream, BUFFER_SIZE);
                     if (transferred != contentLength) {
+                        httpURLConnection.disconnect();
                         throw new FlakyDownloadException("Downloaded file length differs from expected content length reported in header.");
                     }
                     result = true;
@@ -156,8 +163,8 @@ public final class HttpConnectionUtils {
                     httpURLConnection.disconnect();
                 }
             } else {
-                Log.logErrorRB("HCU_MIME_ERROR" , contentType);
                 httpURLConnection.disconnect();
+                Log.logErrorRB("HCU_MIME_ERROR" , contentType);
             }
         } else {
             Log.logErrorRB("HCU_RESPONSE_ERROR", responseCode);
@@ -397,6 +404,9 @@ public final class HttpConnectionUtils {
         }
     }
 
+    /**
+     * Downloaded file error.
+     */
     @SuppressWarnings("serial")
     public static class FlakyDownloadException extends RuntimeException {
         public FlakyDownloadException(Exception cause) {

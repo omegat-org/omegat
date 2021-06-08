@@ -173,8 +173,8 @@
       <term>Search and Replace...</term>
 
       <listitem>
-        <para>Opens a new <link linkend="windows.textreplace">Search and
-        replace window</link>.</para>
+        <para>Opens a new <link linkend="windows.textreplace">Search
+        and replace window</link>.</para>
 
         <para>If you select a text string (in any pane) before pressing
         <keycombo>
@@ -190,9 +190,7 @@
       <term>Search Dictionaries</term>
 
       <listitem>
-        <para>If <link linkend="dialogs.preferences.dictionary">automatic
-        searching in dictionaries</link> is disabled, this function allows you
-        to search for the selected word in the dictionaries.</para>
+        <para>If <link linkend="dialogs.preferences.dictionary">automatic searching in dictionaries</link> is disabled, this function allows you to search for the selected word in the dictionaries.</para>
       </listitem>
     </varlistentry>
 
@@ -267,8 +265,7 @@
 
       <listitem>
         <para>Use this command to register the translation to be identical to
-        the source, even if <link
-        linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Allow
+        the source, even if <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Allow
         translation to be equal to source</guilabel></link> is not
         checked.</para>
       </listitem>

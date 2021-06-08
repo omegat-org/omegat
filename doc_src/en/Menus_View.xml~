@@ -27,8 +27,7 @@
       <term>Mark Paragraph delimitations</term>
 
       <listitem>
-        <para>If checked, the separations between paragraphs in the source
-        document are indicated visually.</para>
+        <para>If checked, the separations between paragraphs in the source document are indicated visually.</para>
       </listitem>
     </varlistentry>
 
@@ -83,8 +82,7 @@
       <term>Mark Bidirectional Algorithm Control Characters</term>
 
       <listitem>
-        <para>This option displays <ulink
-        url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional
+        <para>This option displays <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional
         control characters</ulink></para>
       </listitem>
     </varlistentry>
@@ -95,15 +93,13 @@
       <listitem>
         <para>If checked, the background of all segments where the target
         segment has been auto-populated (from TMXs placed in
-        <filename>./tm/auto</filename> for example) are displayed in colour.
-        The colours are displayed as long as the <link
-        linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Save
+        <filename>/tm/auto</filename> for example) are displayed in colour.
+        The colours are displayed as long as the <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Save
         auto-populated status</guimenuitem></link> option is checked. Usual
         translations inserted from the auto folder are displayed in orange.
         Other translations, identified specifically in the TMX, can be
         displayed using different colours. For technical details, see the
-        <ulink
-        url="http://sourceforge.net/p/omegat/feature-requests/963/">Request
+        <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request
         For Enhancement</ulink>.</para>
       </listitem>
     </varlistentry>

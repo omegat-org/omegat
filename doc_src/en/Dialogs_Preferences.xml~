@@ -1078,7 +1078,7 @@
         <listitem>
           <para>By default, OmegaT does not execute the commands specified in
           the project-specific settings (the <filename>finder.xml</filename>
-          file in the <filename>./omegat</filename> folder), because they may
+          file in the <filename>omegat</filename> folder), because they may
           have a critical impact on the machine's security.</para>
 
           <para>Only activate this option if you know what you are doing, and
@@ -1208,7 +1208,7 @@
           <para>The text export function exports data from within the current
           <application>OmegaT</application> project to plain text files. The
           data are exported when the segment is opened. The files appear in
-          the ./script subfolder in the OmegaT user files folder, and
+          the /script subfolder in the OmegaT user files folder, and
           include:</para>
 
           <itemizedlist>
@@ -1556,7 +1556,7 @@
     <title>Plugins</title>
 
     <para>Gives access to the list of plugins available. Plugins are installed
-    in the <filename>./plugins</filename> folder under the OmegaT installation
+    in the <filename>/plugins</filename> folder under the OmegaT installation
     folder or the platform-specific OmegaT user preferences folder.</para>
   </section>
 

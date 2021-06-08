@@ -53,8 +53,7 @@
 
   <para><orderedlist>
       <listitem>
-        <para>copy the files to the <filename>./source</filename>
-        folder</para>
+        <para>copy the files to the <filename>/source</filename> folder</para>
       </listitem>
 
       <listitem>

@@ -42,10 +42,10 @@
     </varlistentry>
 
     <varlistentry>
-      <term>Copy Files to ./Source Folder...</term>
+      <term>Copy Files to Source Folder...</term>
 
       <listitem>
-        <para>Copies the selected files to the <filename>./source</filename>
+        <para>Copies the selected files to the <filename>source</filename>
         folder and reloads the project to load the new files.</para>
       </listitem>
     </varlistentry>
@@ -54,34 +54,27 @@
       <term>Download MediaWiki Page...</term>
 
       <listitem>
-        <para>To translate the contents of a Wikipedia page (for
-        example):</para>
+        <para>To translate the contents of a Wikipedia page (for example):</para>
 
         <orderedlist>
           <listitem>
-            <para>Click the <guilabel>Edit</guilabel> tab on the Wikipedia
-            page.</para>
+            <para>Click the <guilabel>Edit</guilabel> tab on the Wikipedia page.</para>
           </listitem>
 
           <listitem>
-            <para>Copy the URL of the page (ending with
-            <guilabel>action=edit</guilabel>) and paste it into
-            <application>OmegaT</application>.</para>
+            <para>Copy the URL of the page (ending with <guilabel>action=edit</guilabel>) and paste it into <application>OmegaT</application>.</para>
           </listitem>
         </orderedlist>
 
-        <para>When you have finished your translation, to import it into
-        Wikipedia:</para>
+        <para>When you have finished your translation, to import it into Wikipedia:</para>
 
         <orderedlist>
           <listitem>
-            <para>Open the <filename>.UTF8</filename> file generated in the
-            <filename>./target</filename> folder.</para>
+            <para>Open the <filename>.UTF8</filename> file generated in the <filename>/target</filename> folder.</para>
           </listitem>
 
           <listitem>
-            <para>Copy the text and paste it into the translated version of
-            the Wikipedia page.</para>
+            <para>Copy the text and paste it into the translated version of the Wikipedia page.</para>
           </listitem>
         </orderedlist>
       </listitem>
@@ -94,9 +87,7 @@
         <para>Reloads the project to take external changes in source files and
         project settings into account.</para>
 
-        <para>New translation memories placed in the <filename>./tm</filename>
-        folder while translating are loaded automatically as soon as the
-        cursor moves from one segment to another.</para>
+        <para>New translation memories placed in the <filename>/tm</filename> folder while translating are loaded automatically as soon as the cursor moves from one segment to another.</para>
       </listitem>
     </varlistentry>
 
@@ -116,8 +107,7 @@
         automatically saves translations every 3 minutes as well as when you
         close the project or quit OmegaT.</para>
 
-        <para>The interval of 3 minutes can be changed in <link
-        linkend="dialogs.preferences.savingandoutput"><menuchoice>
+        <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.savingandoutput"><menuchoice>
             <guimenuitem>Options</guimenuitem>
 
             <guimenuitem>Preferences</guimenuitem>
@@ -132,8 +122,7 @@
 
       <listitem>
         <para>Uploads to the repository the files that have been added or
-        modified locally in the <filename>./source</filename>
-        directory.</para>
+        modified locally in the <filename>source</filename> directory.</para>
 
         <para>This function is specific to team projects.</para>
       </listitem>
@@ -144,7 +133,7 @@
 
       <listitem>
         <para>Uploads to the repository the files that have been created
-        locally in the <filename>./target</filename> directory.</para>
+        locally in the <filename>target</filename> directory.</para>
 
         <para>This function is specific to team projects.</para>
       </listitem>
@@ -156,7 +145,7 @@
       <listitem>
         <para>Creates the target documents based on your translation. The
         created target documents are located in the
-        <filename>./target</filename> folder.</para>
+        <filename>target</filename> folder.</para>
       </listitem>
     </varlistentry>
 
@@ -173,8 +162,7 @@
       <term>Open MED Project...</term>
 
       <listitem>
-        <para>Opens a project package in the MED format defined by the EU
-        Directorate-General for Translation.</para>
+        <para>Opens a project package in the MED format defined by the EU Directorate-General for Translation.</para>
       </listitem>
     </varlistentry>
 

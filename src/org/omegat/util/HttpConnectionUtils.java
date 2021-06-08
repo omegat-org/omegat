@@ -146,7 +146,9 @@ public final class HttpConnectionUtils {
                 try (InputStream inputStream = httpURLConnection.getInputStream();
                      FileOutputStream outputStream = new FileOutputStream(saveFilePath)) {
                     long transferred = IOUtils.copy(inputStream, outputStream, BUFFER_SIZE);
-                    assert(transferred == contentLength);
+                    if (transferred != contentLength) {
+                        throw new FlakyDownloadException("Downloaded file length differs from expected content length reported in header.");
+                    }
                     result = true;
                 } catch (Exception ex) {
                     Log.log(ex);
@@ -398,6 +400,10 @@ public final class HttpConnectionUtils {
     @SuppressWarnings("serial")
     public static class FlakyDownloadException extends RuntimeException {
         public FlakyDownloadException(Exception cause) {
+            super(cause);
+        }
+
+        public FlakyDownloadException(String cause) {
             super(cause);
         }
     }

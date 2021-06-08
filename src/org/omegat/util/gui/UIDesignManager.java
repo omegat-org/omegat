@@ -37,6 +37,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -76,7 +77,7 @@ import org.omegat.util.Platform;
  * @author Hiroshi Miura
  */
 public final class UIDesignManager {
-
+    private static final Set<String> THEME_KEY_SET = new HashSet<>();
     private static final Map<String, IThemeInitializer> THEME_INITIALIZER = new HashMap<>();
 
     private UIDesignManager() {
@@ -96,11 +97,18 @@ public final class UIDesignManager {
     public static void registerTheme(IThemeInitializer initializer) {
         UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(initializer.getName(), initializer.getClassName());
         UIManager.installLookAndFeel(info);
+        THEME_KEY_SET.add(info.toString());
         THEME_INITIALIZER.put(info.toString(), initializer);
     }
 
+    public static void registerTheme(final String name, final String className) {
+        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(name, className);
+        UIManager.installLookAndFeel(info);
+        THEME_KEY_SET.add(info.toString());
+    }
+
     public static Set<String> getThemeKeySet() {
-        return THEME_INITIALIZER.keySet();
+        return THEME_KEY_SET;
     }
 
     public static String getThemeClassName(String key) {
@@ -193,7 +201,10 @@ public final class UIDesignManager {
         UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
 
-        THEME_INITIALIZER.get(theme).setup();
+        IThemeInitializer themeInitializer = THEME_INITIALIZER.getOrDefault(theme, null);
+        if (themeInitializer != null) {
+            themeInitializer.setup();
+        }
 
         // Panel notification (blinking tabs/headers) settings
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);

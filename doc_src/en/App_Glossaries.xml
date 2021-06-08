@@ -12,7 +12,7 @@
   the OmegaT user interface.</para>
 
   <para>Regardless of the number of glossaries in a project, any term in a
-  segment that has a match in a glossary will be displayed in the Glossary
+  segment that has a match in a glossary will be displayed in the ./Glossary
   pane.</para>
 
   <section id="glossaries.defaultglossary">
@@ -25,7 +25,7 @@
     <para>Its name and location can be modified in the project properties
     dialog but its extension must be <filename>.txt</filename> or
     <filename>.utf8</filename> and its location must be contained in the
-    <filename>/glossary</filename> project folder.</para>
+    <filename>./glossary</filename> project folder.</para>
 
     <para>The file does not need to exist when setting it, it will be created
     when adding the first glossary entry. If the file already exists, no
@@ -38,7 +38,7 @@
     <title>Usage</title>
 
     <para>To use an existing glossary, simply place it in the
-    <filename>/glossary</filename> folder after creating the project.
+    .<filename>/glossary</filename> folder after creating the project.
     <application>OmegaT</application> automatically detects glossary files in
     this folder when a project is opened.</para>
 

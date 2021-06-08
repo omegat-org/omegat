@@ -147,7 +147,7 @@ public final class HttpConnectionUtils {
                      FileOutputStream outputStream = new FileOutputStream(saveFilePath)) {
                     long transferred = IOUtils.copy(inputStream, outputStream, BUFFER_SIZE);
                     if (transferred != contentLength) {
-                        throw new FlakyDownloadException("Downloaded file length and content length of header is differ.");
+                        throw new FlakyDownloadException("Downloaded file length differs from expected content length reported in header.");
                     }
                     result = true;
                 } catch (Exception ex) {

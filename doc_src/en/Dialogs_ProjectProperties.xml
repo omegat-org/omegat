@@ -129,7 +129,7 @@
           project-specific File filters, which will be stored together with
           the project and will be valid for the current project only. To
           create a project-specific set of file filters, click on the
-          <guibutton>File filter ... </guibutton>button, then activate
+          <guibutton>File filter ... </guibutton> button, then activate
           <guimenuitem>Enable project specific filters</guimenuitem> check box
           in the window that opens. A copy of the changed filters
           configuration will be stored with the project. To delete project

@@ -119,8 +119,7 @@
       </menuchoice>, add the following line to your
     <filename>MainMenuShortcuts.properties</filename>:<code/></para>
 
-    <para><code> toolsShowStatisticsStandardMenuItem=shift meta
-    S</code></para>
+    <para><code>toolsShowStatisticsStandardMenuItem=shift meta S</code></para>
 
     <para>Save then the file and relaunch <application>OmegaT</application>.
     Your new shortcuts should now appear next to the menu items you have

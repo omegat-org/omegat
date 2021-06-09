@@ -940,9 +940,8 @@
     <title>Building <application>OmegaT</application> From Source</title>
 
     <para>The sources of the current version can be retrieved with a Git
-    client from the ./repository <ulink
-    url="https://git.code.sf.net/p/omegat/code">folder</ulink> or directly on
-    <ulink
+    client from the repository <ulink
+    url="https://git.code.sf.net/p/omegat/code"/> or directly on <ulink
     url="https://sourceforge.net/p/omegat/code/ci/master/tarball?path=">SourceForge</ulink>.</para>
 
     <para>Once the code is downloaded, open a command in the source folder and

@@ -121,7 +121,7 @@
       <listitem>
         <para>Glossary pane: Dropped files with known glossary extensions
         (<filename>.txt</filename>, <filename>.tab</filename>, etc.) will be
-        copied to the <filename>glossary</filename> folder.</para>
+        copied to the <filename>./glossary</filename> folder.</para>
       </listitem>
     </itemizedlist></para>
 

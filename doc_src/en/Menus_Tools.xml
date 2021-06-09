@@ -16,7 +16,8 @@
 
         <itemizedlist>
           <listitem>
-            <para>missing or displaced tags, including <link linkend="dialogs.preferences.tagprocessing">custom tags</link>.
+            <para>missing or displaced tags, including <link
+            linkend="dialogs.preferences.tagprocessing">custom tags</link>.
             The <guilabel>Tag Issues</guilabel> option is always
             selected.</para>
           </listitem>
@@ -101,7 +102,8 @@
 
       <listitem>
         <para>Select the two files to be aligned (the source file and its
-        translation) and click OK to open the <link linkend="windows.aligner"><guilabel>Align</guilabel>
+        translation) and click OK to open the <link
+        linkend="windows.aligner"><guilabel>Align</guilabel>
         window</link>.</para>
 
         <para>The supported file formats are those listed in <menuchoice>
@@ -122,7 +124,8 @@
       <term>Scripting...</term>
 
       <listitem>
-        <para>Opens the <link linkend="windows.scripts"><guilabel>Scripting</guilabel>
+        <para>Opens the <link
+        linkend="windows.scripts"><guilabel>Scripting</guilabel>
         window</link>, where the location of scripts can be set, and where
         scripts can be written, run and associated with a shortcut.</para>
       </listitem>
@@ -157,7 +160,10 @@
       <term>(external search commands)</term>
 
       <listitem>
-        <para>If commands to perform external searches have been defined in the <link linkend="dialogs.preferences.externalsearch">Preferences</link>, they are listed and accessible here.</para>
+        <para>If commands to perform external searches have been defined in
+        the <link
+        linkend="dialogs.preferences.externalsearch">Preferences</link>, they
+        are listed and accessible here.</para>
       </listitem>
     </varlistentry>
   </variablelist>

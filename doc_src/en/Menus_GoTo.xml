@@ -33,7 +33,8 @@
         segment in a file, it moves to the first segment of the next
         file.</para>
 
-        <para>Note: <keycap>Enter</keycap> is an alternate shortcut if <link linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
+        <para>Note: <keycap>Enter</keycap> is an alternate shortcut if <link
+        linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
         Advance</link> option is not selected.</para>
       </listitem>
     </varlistentry>
@@ -50,7 +51,8 @@
             <keycap>Ctrl</keycap>
 
             <keycap>Enter</keycap>
-          </keycombo> is an alternate shortcut if <link linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
+          </keycombo> is an alternate shortcut if <link
+        linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
         Advance</link> option is not selected.</para>
       </listitem>
     </varlistentry>

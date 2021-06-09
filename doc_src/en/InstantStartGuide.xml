@@ -38,11 +38,19 @@
     return to it any time by pressing <keycap>Ctrl+E.</keycap></para>
 
     <para>Next, the <guilabel>Project Files</guilabel> dialog opens. Click on
+<<<<<<< HEAD
     <guibutton>Copy Files to ./Source Folder...</guibutton> to select your
     source files. OmegaT will then copy the selected files to the ./source
     subfolder of your newly created project. After the source files have
     loaded in the <guilabel>Editor</guilabel> pane, you can close the
     <guilabel>Project Files</guilabel> dialog.</para>
+=======
+    <guibutton>Copy Files to Source Folder...</guibutton> to select your
+    source files. OmegaT will then copy the selected files to the
+    <filename>./source</filename> subfolder of your newly created project.
+    After the source files have loaded in the <guilabel>Editor</guilabel>
+    pane, you can close the <guilabel>Project Files</guilabel> dialog.</para>
+>>>>>>> 4a668160085123b48a34d36c177fcde90690e1f8
   </section>
 
   <section id="translate.the.segments.one.by.one">

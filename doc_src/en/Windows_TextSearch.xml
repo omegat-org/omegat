@@ -137,7 +137,7 @@
           any order. Select keyword search to search for any number of
           individual full words, in any order. OmegaT displays a list of all
           segments containing all of the words specified. Keyword searches are
-          similar to a search &quot;with all of the words&quot; in an Internet search
+          similar to a search "with all of the words" in an Internet search
           engine such as Google (AND logic). Using keyword search with
           <emphasis><literal>open file</literal></emphasis> will thus find all
           occurrences of the string <emphasis><literal>open
@@ -154,7 +154,8 @@
           <para>The search string will be treated as a regular expression. The
           search string - [a-zA-Z]+[öäüqwß] - in the example above for
           instance looks for words in the target segment, containing
-          questionable characters from German keyboard. <link linkend="appendix.regexp">Regular expressions</link> are a powerful
+          questionable characters from German keyboard. <link
+          linkend="appendix.regexp">Regular expressions</link> are a powerful
           way to look for instances of a string.</para>
         </listitem>
       </varlistentry>
@@ -265,7 +266,8 @@
     the bottom, untranslated segments are displayed as the source only.</para>
 
     <para>Double-clicking on a segment opens it in the Editor for
-    modifications (one single click does it when <emphasis role="bold">Auto-sync with Editor</emphasis> option is checked). You can
+    modifications (one single click does it when <emphasis
+    role="bold">Auto-sync with Editor</emphasis> option is checked). You can
     then switch back to the Search window for the next segment found, for
     instance to check and, if necessary, correct the terminology.</para>
 

@@ -18,9 +18,9 @@
 
     <itemizedlist>
       <listitem>
-        <para>In your file manager, create a new folder in a suitable location
-        in which to store spelling dictionaries (D:\Translations\spellcheckers
-        in the example below).</para>
+        <para>In your file manager, create a new ./folder in a suitable
+        location in which to store spelling dictionaries
+        (D:\Translations\spellcheckers in the example below).</para>
       </listitem>
     </itemizedlist>
 

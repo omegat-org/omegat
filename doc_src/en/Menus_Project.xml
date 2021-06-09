@@ -42,10 +42,10 @@
     </varlistentry>
 
     <varlistentry>
-      <term>Copy Files to Source Folder...</term>
+      <term>Copy Files to ./Source Folder...</term>
 
       <listitem>
-        <para>Copies the selected files to the <filename>source</filename>
+        <para>Copies the selected files to the <filename>./source</filename>
         folder and reloads the project to load the new files.</para>
       </listitem>
     </varlistentry>
@@ -76,7 +76,7 @@
         <orderedlist>
           <listitem>
             <para>Open the <filename>.UTF8</filename> file generated in the
-            <filename>/target</filename> folder.</para>
+            <filename>./target</filename> folder.</para>
           </listitem>
 
           <listitem>
@@ -94,7 +94,7 @@
         <para>Reloads the project to take external changes in source files and
         project settings into account.</para>
 
-        <para>New translation memories placed in the <filename>/tm</filename>
+        <para>New translation memories placed in the <filename>./tm</filename>
         folder while translating are loaded automatically as soon as the
         cursor moves from one segment to another.</para>
       </listitem>
@@ -132,7 +132,8 @@
 
       <listitem>
         <para>Uploads to the repository the files that have been added or
-        modified locally in the <filename>source</filename> directory.</para>
+        modified locally in the <filename>./source</filename>
+        directory.</para>
 
         <para>This function is specific to team projects.</para>
       </listitem>
@@ -143,7 +144,7 @@
 
       <listitem>
         <para>Uploads to the repository the files that have been created
-        locally in the <filename>target</filename> directory.</para>
+        locally in the <filename>./target</filename> directory.</para>
 
         <para>This function is specific to team projects.</para>
       </listitem>
@@ -155,7 +156,7 @@
       <listitem>
         <para>Creates the target documents based on your translation. The
         created target documents are located in the
-        <filename>target</filename> folder.</para>
+        <filename>./target</filename> folder.</para>
       </listitem>
     </varlistentry>
 

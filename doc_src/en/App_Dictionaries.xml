@@ -31,9 +31,10 @@
     <itemizedlist>
       <listitem>
         <para>Use untar utility (or its equivalent, for instance <filename>
-        winrar</filename> in Windows) to extract its contents into the project
-        folder "Dictionary". There should be three files, with extensions
-        <emphasis>dz, idx</emphasis> and <emphasis>ifo</emphasis>.</para>
+        winrar</filename> in Windows) to extract its contents into the
+        ./project folder "Dictionary". There should be three files, with
+        extensions <emphasis>dz, idx</emphasis> and
+        <emphasis>ifo</emphasis>.</para>
       </listitem>
     </itemizedlist>
 

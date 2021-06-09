@@ -802,7 +802,7 @@
                 <para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
 
                 <para>In this mode, OmegaT will attempt to translate the files
-                in <filename>/source/</filename> with the available
+                in <filename>./source</filename> with the available
                 translation memories. This is useful to run OmegaT on a server
                 with TMX files automatically fed to a project.</para>
               </listitem>

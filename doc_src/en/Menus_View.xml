@@ -94,9 +94,9 @@
 
       <listitem>
         <para>If checked, the background of all segments where the target
-        segment has been auto-populated (from TMXs placed in
-        <filename>./tm/auto</filename> for example) are displayed in colour.
-        The colours are displayed as long as the <link
+        segment has been auto-populated (from TMXs placed in ./tm/auto for
+        example) are displayed in colour. The colours are displayed as long as
+        the <link
         linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Save
         auto-populated status</guimenuitem></link> option is checked. Usual
         translations inserted from the auto folder are displayed in orange.

@@ -27,7 +27,7 @@
   uses terminology which might have been used before), you can use these
   translation memories as "input translation memories", i.e. for import into
   your new project. In this case, place the translation memories you wish to
-  use in the <emphasis>/tm</emphasis> or <emphasis>/tm</emphasis>/ auto folder
+  use in the <emphasis>/tm</emphasis> or <emphasis>/tm</emphasis>/auto folder
   of your new project: in the former case you will get hits from these
   translation memories in the fuzzy matches viewer, and in the latter case
   these TMs will be used to pre-translate your source text.</para>

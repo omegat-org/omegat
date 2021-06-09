@@ -99,8 +99,8 @@
   <para>You can overlap panes if desired. When this is done the panes display
   a tab at the top. The separators between the panes can be dragged to resize
   panes. Should you lose track of your changes to the user interface, you can
-  use <guimenuitem> Options → Restore the main window</guimenuitem> any time to
-  return to the original layout.</para>
+  use <guimenuitem> Options → Restore the main window</guimenuitem> any time
+  to return to the original layout.</para>
 
   <para>It is possible to drag and drop files to each pane, which will react
   accordingly. <itemizedlist>
@@ -109,7 +109,8 @@
         (<filename>omegat.project</filename>) is dropped on this pane, the
         corresponding project will be opened, closing first any opened
         project. Other dropped files will be copied to the
-        <filename>source</filename> folder. This applies also to the <link linkend="windows.projectfiles">Project files</link> window.</para>
+        <filename>./source</filename> folder. This applies also to the <link
+        linkend="windows.projectfiles">Project files</link> window.</para>
       </listitem>
 
       <listitem>
@@ -138,10 +139,10 @@
     <para>One of the above segments is the current segment. It is the segment
     that is displayed in two parts. The upper part is in the source language,
     in bold characters with a green background color, the lower part is the
-    editing field, ended by a marker: the marker is <literal>&lt;segment nnnn&gt;</literal> where
-    nnnn is a number of the segment in the project. Use the upper part as a
-    reference and replace or modify the contents of the editing field with
-    your translation.</para>
+    editing field, ended by a marker: the marker is <literal>&lt;segment
+    nnnn&gt;</literal> where nnnn is a number of the segment in the project.
+    Use the upper part as a reference and replace or modify the contents of
+    the editing field with your translation.</para>
 
     <para>Note: the segment marker displays <literal>&lt;segment
     nnnn +yy more&gt; when the segment is non-unique. In that case, yy is the
@@ -188,9 +189,9 @@
     <para>By default, it is not possible to select words in the source segment
     using the keyboard rather than the mouse. Pressing <keycap>F2</keycap> key
     allows to move the cursor into the source segment (or anywhere in the
-    editor) with the keyboard arrows. In this mode, &quot;<guilabel>Cursor lock
-    off</guilabel>&quot; is displayed at the bottom of the pane. To come back to
-    the standard mode &quot;<guilabel>Cursor lock on</guilabel>&quot;, press
+    editor) with the keyboard arrows. In this mode, "<guilabel>Cursor lock
+    off</guilabel>" is displayed at the bottom of the pane. To come back to
+    the standard mode "<guilabel>Cursor lock on</guilabel>", press
     <keycap>F2</keycap> again.</para>
   </section>
 
@@ -211,44 +212,45 @@
 
         <keycap>5</keycap>
       </keycombo> will have no effect, if there is no match #5. To use the
-    selected match in your translation, use
-    <guimenuitem>Ctrl+R</guimenuitem> to replace the target field with the match or use
-    <guimenuitem>Ctrl+I </guimenuitem> to insert it at the cursor position.</para>
+    selected match in your translation, use <guimenuitem>Ctrl+R</guimenuitem>
+    to replace the target field with the match or use <guimenuitem>Ctrl+I
+    </guimenuitem> to insert it at the cursor position.</para>
 
     <para>The three matching percentages are in the following order:
     <itemizedlist>
-      <listitem>
-		  <para>the percentage calculated with stemming<footnote>
-		  <para>See <ulink
-		  url="https://en.wikipedia.org/wiki/Stemming">https://en.wikipedia.org/wiki/Stemming</ulink></para>
-		  </footnote> and ignoring tags and numbers (generally the
-		  highest)</para>
-	  </listitem>
-      <listitem>
-		  <para>the percentage calculated without stemming and still ignoring
-		  tags and numbers (generally slightly lower)</para>
-	  </listitem>
-      <listitem>
-		  <para>the percentage calculated with the full text, including tags and
-		  numbers (generally the lowest)
-		  </para>
-	  </listitem>
-    </itemizedlist>
-    </para>
+        <listitem>
+          <para>the percentage calculated with stemming<footnote>
+              <para>See <ulink
+              url="https://en.wikipedia.org/wiki/Stemming">https://en.wikipedia.org/wiki/Stemming</ulink></para>
+            </footnote> and ignoring tags and numbers (generally the
+          highest)</para>
+        </listitem>
+
+        <listitem>
+          <para>the percentage calculated without stemming and still ignoring
+          tags and numbers (generally slightly lower)</para>
+        </listitem>
+
+        <listitem>
+          <para>the percentage calculated with the full text, including tags
+          and numbers (generally the lowest)</para>
+        </listitem>
+      </itemizedlist></para>
 
     <para>It is possible to modify the sort order of the three percentages but
     not which is used to select the fuzzy matches.</para>
 
     <para>The selected fuzzy match is highlighted in bold, words that are
     missing in the segment you are translating are colored blue and words
-    adjacent to the missing parts green. In the above example the source segment
-    is <emphasis role="bold">Context menu command</emphasis>. The top match is
-    100%, because all words match. So do the next two matches, and the match #4
-    is similar, but different. The line with the matching percentage also
-    includes the name of the translation memory containing the match. If there's
-    no file name displayed, the source is the internal project translation
-    memory. Orphan segments (match #2) describe segments in the default project
-    translation memory that have no corresponding source segment.</para>
+    adjacent to the missing parts green. In the above example the source
+    segment is <emphasis role="bold">Context menu command</emphasis>. The top
+    match is 100%, because all words match. So do the next two matches, and
+    the match #4 is similar, but different. The line with the matching
+    percentage also includes the name of the translation memory containing the
+    match. If there's no file name displayed, the source is the internal
+    project translation memory. Orphan segments (match #2) describe segments
+    in the default project translation memory that have no corresponding
+    source segment.</para>
   </section>
 
   <section id="panes.glossary">
@@ -276,7 +278,8 @@
 
     <para>Dictionaries are the electronic equivalents of printed dictionaries
     like Merriam Webster, Duden, Larousse etc., that you may have on your
-    desk. See more about them in the chapter on <link linkend="appendix.dictionaries">Dictionaries</link></para>
+    desk. See more about them in the chapter on <link
+    linkend="appendix.dictionaries">Dictionaries</link></para>
   </section>
 
   <section id="panes.machinetranslation">

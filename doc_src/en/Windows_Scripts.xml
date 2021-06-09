@@ -41,9 +41,9 @@
       </listitem>
     </itemizedlist>
 
-    <para>By default, scripts are stored in the <filename>./scripts</filename>
-    folder located in the OmegaT installation folder (the folder that contains
-    the <filename>OmegaT.jar</filename> file).</para>
+    <para>By default, scripts are stored in the ./scripts folder located in
+    the OmegaT installation folder (the folder that contains the
+    <filename>OmegaT.jar</filename> file).</para>
 
     <para>If you add new scripts there, they will appear in the list of
     available scripts in the <guilabel>Scripting</guilabel> window.</para>

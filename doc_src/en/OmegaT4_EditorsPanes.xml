@@ -108,9 +108,9 @@
         <para>Editor pane: If an OmegaT project file
         (<filename>omegat.project</filename>) is dropped on this pane, the
         corresponding project will be opened, closing first any opened
-        project. Other dropped files will be copied to the
-        <filename>./source</filename> folder. This applies also to the <link
-        linkend="windows.projectfiles">Project files</link> window.</para>
+        project. Other dropped files will be copied to the ./source folder.
+        This applies also to the <link linkend="windows.projectfiles">Project
+        files</link> window.</para>
       </listitem>
 
       <listitem>

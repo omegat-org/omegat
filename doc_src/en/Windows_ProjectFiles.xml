@@ -47,7 +47,11 @@
       buttons.</para>
 
       <para>Right-clicking on a filename opens a popup that allows to open the
-      source file and (if it exists) the target file.</para>
+      <?xxe-remark FABRI
+2021-06-10T11:39:09Z
+./source file ??>source file and (if it exists) the <?xxe-remark FABRI
+2021-06-10T11:39:26Z
+./target file ??>target file.</para>
     </listitem>
 
     <listitem>

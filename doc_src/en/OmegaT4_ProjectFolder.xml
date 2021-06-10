@@ -33,11 +33,13 @@
         <guimenu>Project</guimenu>
 
         <guimenuitem>Create Translated Documents</guimenuitem>
-      </menuchoice>. Files within the <filename>source</filename> folder,
-    whether translated or not, are then generated here, with the same
-    hierarchy as present in the source subfolder. The contents of the target
-    subfolder will reflect the current state of the translation, as present in
-    the project translation memory, saved in the current
+      </menuchoice>. Files within the <?xxe-remark FABRI
+2021-06-10T11:33:08Z
+./ source folder ??><filename>source</filename> folder, whether translated or
+    not, are then generated here, with the same hierarchy as present in the
+    source subfolder. The contents of the target subfolder will reflect the
+    current state of the translation, as present in the project translation
+    memory, saved in the current
     <filename>/omegat/project_save.tmx</filename>. Untranslated segments will
     hereby remain in the source language.</para>
   </section>
@@ -45,7 +47,9 @@
   <section id="projectfolder.tm">
     <title>tm</title>
 
-    <para>The /tm/ folder can contain any number of ancillary translation
+    <para>The <?xxe-remark FABRI
+2021-06-10T11:33:44Z
+./tm folder ??>/tm/ folder can contain any number of ancillary translation
     memories - i.e. tmx files. Such files can be created in any of the three
     varieties indicated above. Note that other CAT tools can export (and
     import as well) tmx files, usually in all three forms. The best thing of
@@ -70,11 +74,13 @@
     way, have been translated correctly.</para>
 
     <para>It may happen, that translation memories, available in the
-    <filename>tm</filename> subfolder, contain segments with identical source
-    text, but differing targets. TMX files are read sorted by their names and
-    segments within a given TMX file line by line. The last segment with the
-    identical source text will thus prevail (Note: of course it makes more
-    sense to avoid this to happen in the first place).</para>
+    <filename><?xxe-remark FABRI
+2021-06-10T11:34:10Z
+./tm subfolder ??>tm</filename> subfolder, contain segments with identical
+    source text, but differing targets. TMX files are read sorted by their
+    names and segments within a given TMX file line by line. The last segment
+    with the identical source text will thus prevail (Note: of course it makes
+    more sense to avoid this to happen in the first place).</para>
 
     <para>Note that the TMX files in the tm folder can be compressed with
     gzip.</para>
@@ -89,7 +95,9 @@
 
       <para><orderedlist>
           <listitem>
-            <para>Put the TMX in /tm/auto.</para>
+            <para>Put the TMX in <?xxe-remark FABRI
+2021-06-10T11:35:48Z
+./tm/auto ??>/tm/auto.</para>
           </listitem>
 
           <listitem>
@@ -112,12 +120,16 @@
 
       <para>If you have no doubt that a TMX is more accurate than the
       <filename>project_save.tmx</filename> of OmegaT, put this TMX in
-      /tm/enforce to overwrite existing default translations
+      <?xxe-remark FABRI
+2021-06-10T11:36:26Z
+./tm/enforce ??>/tm/enforce to overwrite existing default translations
       unconditionally.</para>
 
       <para><orderedlist>
           <listitem>
-            <para>Put the TMX in /tm/enforce.</para>
+            <para>Put the TMX in <?xxe-remark FABRI
+2021-06-10T11:36:58Z
+./tm/enforce ??>/tm/enforce.</para>
           </listitem>
 
           <listitem>
@@ -134,13 +146,16 @@
             segments:<itemizedlist>
                 <listitem>
                   <para>If they <emphasis>don't need</emphasis> to stay immune
-                  from further changes, then remove the TMX from
-                  /tm/enforce.</para>
+                  from further changes, then remove the TMX from <?xxe-remark FABRI
+2021-06-10T11:37:19Z
+./tm/enforce?>/tm/enforce.</para>
                 </listitem>
 
                 <listitem>
                   <para>If they <emphasis>need</emphasis> to stay immune from
-                  further changes, then keep the TMX in /tm/enforce.</para>
+                  further changes, then keep the TMX in <?xxe-remark FABRI
+2021-06-10T11:37:40Z
+./tm/enforce ??>/tm/enforce.</para>
                 </listitem>
               </itemizedlist></para>
           </listitem>
@@ -178,9 +193,10 @@
     <title>dictionary</title>
 
     <para>Initially empty, this folder will contain dictionaries you have
-    added to the project. See <link
-    linkend="appendix.dictionaries">Dictionaries</link> for more on this
-    subject.</para>
+    added to the project. See <?xxe-remark FABRI
+2021-06-10T11:46:38Z
+./dictionaries ??><link linkend="appendix.dictionaries">Dictionaries</link>
+    for more on this subject.</para>
   </section>
 
   <section id="projectfolder.glossary">
@@ -188,8 +204,9 @@
 
     <para>This folder is initially empty. It will contain glossaries you will
     be using in the project. See <link
-    linkend="appendix.glossaries">Glossaries</link> for more on this
-    subject.</para>
+    linkend="appendix.glossaries"><?xxe-remark FABRI
+2021-06-10T11:47:04Z
+./ glossaries ??>Glossaries</link> for more on this subject.</para>
   </section>
 
   <section id="projectfolder.omegat">
@@ -276,7 +293,7 @@
   </section>
 
   <section id="projectfolder.repositories">
-    <title>.repositories</title>
+    <title>repositories</title>
 
     <para>In a team project, this folder contains a versioned copy of the
     project tree structure linked directly to the remote server.</para>

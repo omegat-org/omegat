@@ -6,9 +6,10 @@
 
   <para>PDF files are a special case. They contain text formatting
   information, but such information cannot be reused by
-  <application>OmegaT</application> in order to create target files. Thus, PDF
-  files are handled as plain text files, and output files are plain text
-  files.</para>
+  <application>OmegaT</application> in order to create <?xxe-remark FABRI
+2021-06-10T11:25:35Z
+./target files ??>target files. Thus, PDF files are handled as plain text
+  files, and output files are plain text files.</para>
 
   <para>If you need to reproduce text formatting (as well as other things such
   as drawings) in your translation, there are three ways to try:</para>

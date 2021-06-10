@@ -167,7 +167,7 @@
       <title><application>Installing OmegaT</application></title>
 
       <para>Unpack/untar the downloaded file. This will create an
-      <filename>omegat/</filename> folder in the working folder in which you
+      <filename>./omegat</filename> folder in the working folder in which you
       will find all the files needed to run <application>OmegaT</application>.
       To untar the <filename>.tar.gz</filename> file:</para>
 
@@ -214,7 +214,7 @@
 
           <listitem>
             <para>Other Icons - Browse, and navigate to the
-            <filename>/images</filename> subfolder in the
+            <filename>./images</filename> subfolder in the
             <application>OmegaT</application> application folder. Select the
             <filename>OmegaT.png</filename> icon.</para>
           </listitem>
@@ -249,7 +249,7 @@
           <listitem>
             <para>Click on the icon button, then hit
             <guibutton>Browse...</guibutton> and navigate to the
-            <filename>/images</filename> subfolder in the
+            <filename>./images</filename> subfolder in the
             <application>OmegaT</application> application folder. Select the
             <filename>OmegaT.png</filename> icon. GNOME may fail to display
             the icon files in the available formats and initially appear to

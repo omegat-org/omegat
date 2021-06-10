@@ -36,11 +36,11 @@
 
   <itemizedlist>
     <listitem>
-      <para><filename>omegat/project_save.tmx</filename></para>
+      <para>./omegat/project_save.tmx</para>
     </listitem>
 
     <listitem>
-      <para><filename>glossary/glossary.txt</filename></para>
+      <para>./glossary/glossary.txt</para>
     </listitem>
   </itemizedlist>
 

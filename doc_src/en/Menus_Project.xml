@@ -131,8 +131,8 @@
       <term>Commit Source Files</term>
 
       <listitem>
-        <para>Uploads to the ./repository folder the files that have been
-        added or modified locally in the ./source directory.</para>
+        <para>Uploads to the repository the files that have been added or
+        modified locally in the ./source directory.</para>
 
         <para>This function is specific to team projects.</para>
       </listitem>

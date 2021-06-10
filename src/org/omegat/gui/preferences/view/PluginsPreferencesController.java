@@ -46,10 +46,11 @@ import org.omegat.core.data.RemotePluginInformation;
 import org.omegat.core.plugins.PluginInstaller;
 import org.omegat.core.plugins.PluginsManager;
 import org.omegat.gui.dialogs.ChoosePluginFile;
+import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DesktopWrapper;
-import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 
 
@@ -169,7 +170,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
             }
         });
         panel.restartOmegatButton.addActionListener(e -> {
-            StaticUIUtils.restartShutdown(panel, true);
+            String projectDir = Core.getProject().isProjectLoaded()
+                    ? Core.getProject().getProjectProperties().getProjectRoot()
+                    : null;
+            MainWindowMenuHandler.prepareForExit((MainWindow) Core.getMainWindow(), () -> {
+                Main.restartGUI(projectDir);
+            });
+
         });
         panel.restartOmegatButton.setEnabled(Main.isRestartRequired());
         InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();

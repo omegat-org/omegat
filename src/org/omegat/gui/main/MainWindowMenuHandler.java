@@ -371,7 +371,8 @@ public final class MainWindowMenuHandler {
 
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
-        prepareForExit(() -> System.exit(0));
+        prepareForExit(mainWindow,
+                () -> System.exit(0));
     }
 
     /** Restart OmegaT */
@@ -379,12 +380,12 @@ public final class MainWindowMenuHandler {
         String projectDir = Core.getProject().isProjectLoaded()
                 ? Core.getProject().getProjectProperties().getProjectRoot()
                 : null;
-        prepareForExit(() -> {
+        prepareForExit(mainWindow, () -> {
             Main.restartGUI(projectDir);
         });
     }
 
-    protected void prepareForExit(Runnable onCompletion) {
+    public static void prepareForExit(MainWindow mainWindow, Runnable onCompletion) {
         // Bug #902: commit the current entry first
         // We do it before checking project status, so that it can eventually change it
         if (Core.getProject().isProjectLoaded()) {

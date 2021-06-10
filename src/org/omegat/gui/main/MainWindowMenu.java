@@ -292,6 +292,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         });
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
         projectRestartMenuItem = createMenuItem("TF_MENU_FILE_RESTART");
+
         projectMenu.addSeparator();
         projectMenu.add(projectRestartMenuItem);
 

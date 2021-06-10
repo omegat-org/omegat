@@ -37,7 +37,6 @@ import java.util.jar.Manifest;
 import org.omegat.core.plugins.PluginsManager;
 
 public class PluginInformation implements Comparable<PluginInformation> {
-    private static final String PLUGIN_ID = "Plugin-Id";
     private static final String PLUGIN_NAME = "Plugin-Name";
     private static final String PLUGIN_VERSION = "Plugin-Version";
     private static final String PLUGIN_AUTHOR = "Plugin-Author";
@@ -68,7 +67,6 @@ public class PluginInformation implements Comparable<PluginInformation> {
     }
 
     private final String className;
-    private final String id;
     private final String name;
     private final String version;
     private final String author;
@@ -86,7 +84,6 @@ public class PluginInformation implements Comparable<PluginInformation> {
         if (attrs == null) {
             attrs = manifest.getMainAttributes();
         }
-        id = findId(attrs);
         name = findName(attrs);
         version = findVersion(attrs, mainAttrs);
         author = findAuthor(mainAttrs);
@@ -100,7 +97,6 @@ public class PluginInformation implements Comparable<PluginInformation> {
 
     public PluginInformation(String className, Properties props, final String key, final URL mu, final STATUS status) {
         this.className = className;
-        id = className;
         name = className.substring(className.lastIndexOf(".") + 1);
         version = null;
         author = null;
@@ -120,14 +116,6 @@ public class PluginInformation implements Comparable<PluginInformation> {
             return type.get().getTypeValue();
         }
         return PluginsManager.PluginType.UNKNOWN.getTypeValue();
-    }
-
-    private String findId(Attributes attrs) {
-        if (attrs.getValue(PLUGIN_ID) != null) {
-            return attrs.getValue(PLUGIN_ID);
-        }
-        // fallback to className
-        return className;
     }
 
     private String findName(Attributes attrs) {
@@ -174,10 +162,6 @@ public class PluginInformation implements Comparable<PluginInformation> {
 
     public final String getClassName() {
         return className;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public final String getName() {

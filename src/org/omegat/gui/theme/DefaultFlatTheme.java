@@ -34,7 +34,6 @@ package org.omegat.gui.theme;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.ImageIcon;
 import javax.swing.LookAndFeel;
@@ -44,113 +43,72 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
-import org.omegat.util.Preferences;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.RoundedCornerBorder;
-import org.omegat.util.gui.UIDesignManager;
 
 
 public class DefaultFlatTheme extends LookAndFeel {
 
-    private static final String NAME = Preferences.THEME_DEFAULT;
-    private static final String CLASS_NAME = "org.omegat.gui.theme.DefaultFlatTheme";
-    private static final String DESCRIPTION = "OmegaT default theme";
-
-    private LookAndFeel systemLookAndFeel;
-
-    public DefaultFlatTheme() {
-        try {
-            Class<?> clazz = getClass().getClassLoader().loadClass(UIManager.getSystemLookAndFeelClassName());
-            systemLookAndFeel = (LookAndFeel) clazz.getConstructor().newInstance();
-            systemLookAndFeel.initialize();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
+    private static final String NAME = OStrings.getString("THEME_OMEGAT_DEFAULT_NAME");
 
     public static void loadPlugins() {
-        UIDesignManager.registerTheme(NAME, CLASS_NAME);
+        UIManager.installLookAndFeel(NAME, DefaultFlatTheme.class.getName());
     }
 
     public static void unloadPlugins() {
     }
 
-    /**
-     * Return a short string that identifies this look and feel, e.g.
-     * "CDE/Motif".  This string should be appropriate for a menu item.
-     * Distinct look and feels should have different names, e.g.
-     * a subclass of MotifLookAndFeel that changes the way a few components
-     * are rendered should be called "CDE/Motif My Way"; something
-     * that would be useful to a user trying to select a L&amp;F from a list
-     * of names.
-     *
-     * @return short identifier for the look and feel
-     */
+    private LookAndFeel systemLookAndFeel;
+
+    public DefaultFlatTheme() throws Exception {
+        systemLookAndFeel = (LookAndFeel) Class.forName(UIManager.getSystemLookAndFeelClassName()).newInstance();
+        systemLookAndFeel.initialize();
+    }
+
     @Override
     public String getName() {
         return NAME;
     }
 
-    /**
-     * Return a string that identifies this look and feel.  This string
-     * will be used by applications/services that want to recognize
-     * well known look and feel implementations.  Presently
-     * the well known names are "Motif", "Windows", "Mac", "Metal".  Note
-     * that a LookAndFeel derived from a well known superclass
-     * that doesn't make any fundamental changes to the look or feel
-     * shouldn't override this method.
-     *
-     * @return identifier for the look and feel
-     */
     @Override
     public String getID() {
-        return "Default";
+        return "OmegaT"; // NOI18N
     }
 
-    /**
-     * Return a one line description of this look and feel implementation,
-     * e.g. "The CDE/Motif Look and Feel".   This string is intended for
-     * the user, e.g. in the title of a window or in a ToolTip message.
-     *
-     * @return short description for the look and feel
-     */
     @Override
     public String getDescription() {
-        return DESCRIPTION;
+        return OStrings.getString("THEME_OMEGAT_DEFAULT_DESCRIPTION");
     }
 
-    /**
-     * If the underlying platform has a "native" look and feel, and
-     * this is an implementation of it, return {@code true}.  For
-     * example, when the underlying platform is Solaris running CDE
-     * a CDE/Motif look and feel implementation would return {@code
-     * true}.
-     *
-     * @return {@code true} if this look and feel represents the underlying
-     * platform look and feel
-     */
     @Override
     public boolean isNativeLookAndFeel() {
-        return false;
+        return systemLookAndFeel.isNativeLookAndFeel();
+    }
+
+    @Override
+    public boolean isSupportedLookAndFeel() {
+        return systemLookAndFeel.isSupportedLookAndFeel();
+    }
+
+    @Override
+    public UIDefaults getDefaults() {
+        // Use system LAF ID because we use the ID to see if it's e.g. Windows
+        return setDefaults(super.getDefaults(), systemLookAndFeel.getID());
     }
 
     /**
-     * Return {@code true} if the underlying platform supports and or permits
-     * this look and feel.  This method returns {@code false} if the look
-     * and feel depends on special resources or legal agreements that
-     * aren't defined for the current platform.
+     * Apply theme default values to the supplied {@link UIDefaults} object.
+     * Suitable for third-party themes that want to modify the default theme.
      *
-     * @return {@code true} if this is a supported look and feel
-     * @see UIManager#setLookAndFeel
+     * @param defaults the {@link UIDefaults} object such as from
+     *                 {@link LookAndFeel#getDefaults()}
+     * @param lafId    the ID of the LAF that will make use of the defaults (from
+     *                 {@link LookAndFeel#getID()})
+     * @return the modified {@link UIDefaults} object
      */
-    @Override
-    public boolean isSupportedLookAndFeel() {
-        return true;
-    }
-
-    public UIDefaults getDefaults() {
-        UIDefaults defaults = systemLookAndFeel.getDefaults();
+    public static UIDefaults setDefaults(UIDefaults defaults, String lafId) {
         // Colors
         // #EEEEEE on Metal & OS X LAF
         Color standardBgColor = defaults.getColor("Panel.background");
@@ -191,7 +149,7 @@ public class DefaultFlatTheme extends LookAndFeel {
         // colors don't appear to be available through the API. These values are from visual inspection.
         if (Platform.isMacOSX()) {
             defaults.put("DockView.tabbedDockableBorder", new MatteBorder(0, 5, 5, 5, new Color(0xE6E6E6)));
-        } else if (isWindowsLAF( systemLookAndFeel.getID()) && !isWindowsClassicLAF( systemLookAndFeel.getID())) {
+        } else if (isWindowsLAF(lafId) && !isWindowsClassicLAF(lafId)) {
             defaults.put("DockView.tabbedDockableBorder", new MatteBorder(2, 5, 5, 5, Color.WHITE));
         } else {
             defaults.put("DockView.tabbedDockableBorder", new MatteBorder(5, 5, 5, 5, standardBgColor));
@@ -300,7 +258,7 @@ public class DefaultFlatTheme extends LookAndFeel {
      * Adjust a color by adding some constant to its RGB values, clamping to the
      * range 0-255.
      */
-    private Color adjustRGB(Color color, int adjustment) {
+    private static Color adjustRGB(Color color, int adjustment) {
         Color result = new Color(Math.max(0, Math.min(255, color.getRed() + adjustment)),
                 Math.max(0, Math.min(255, color.getGreen() + adjustment)),
                 Math.max(0, Math.min(255, color.getBlue() + adjustment)));
@@ -308,17 +266,17 @@ public class DefaultFlatTheme extends LookAndFeel {
     }
 
     // Windows Classic LAF detection from http://stackoverflow.com/a/4386821/448068
-    private boolean isWindowsLAF(String systemID) {
+    private static boolean isWindowsLAF(String systemID) {
         return systemID.equals("Windows");
     }
 
-    private boolean isWindowsClassicLAF(String systemID) {
+    private static boolean isWindowsClassicLAF(String systemID) {
         return isWindowsLAF(systemID) && !(Boolean) Toolkit.getDefaultToolkit().getDesktopProperty("win.xpstyle.themeActive");
     }
 
     // This check fails to detect Windows 10 correctly on Java 1.8 prior to u60.
     // See: https://bugs.openjdk.java.net/browse/JDK-8066504
-    private boolean isFlatWindows() {
+    private static boolean isFlatWindows() {
         return System.getProperty("os.name").startsWith("Windows")
                 && System.getProperty("os.version").matches("6\\.[23]|10\\..*");
     }

@@ -214,7 +214,7 @@ public final class PluginsManager {
      * @param info PluginInformation to show
      * @return HTML text
      */
-    public String formatDetailText(PluginInformation info) {
+    public static String formatDetailText(PluginInformation info) {
         StringBuilder sb = new StringBuilder();
         sb.append("<h4>Author: ");
         if (info.getAuthor() != null) {
@@ -276,7 +276,7 @@ public final class PluginsManager {
             URL downloadUrl = new URL(info.getRemoteJarFileUrl());
             String jarFilename = info.getJarFilename();
             String sha256sum = info.getSha256Sum();
-            PluginDownloadThread downloadThread = new PluginDownloadThread(downloadUrl, sha256sum, homePluginsDir, jarFilename);
+            PluginDownloadThread downloadThread = new PluginDownloadThread(downloadUrl, sha256sum, jarFilename);
             downloadThread.start();
         } catch (IOException ex) {
             Log.log(ex);

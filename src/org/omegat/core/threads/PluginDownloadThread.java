@@ -32,25 +32,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 import java.util.HashMap;
 
+import org.omegat.core.plugins.PluginInstaller;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
 
 public class PluginDownloadThread extends LongProcessThread {
 
     private final URL url;
-    private final File targetdir;
     private final String archive;
     private final String checksum;
     private final HashMap<String, String> headers = new HashMap<>();
 
-    public PluginDownloadThread(URL url, String sha256Sum, File targetdir, String filename) throws UnsupportedEncodingException {
+    public PluginDownloadThread(URL url, String sha256Sum, String filename) throws UnsupportedEncodingException {
         this.url = url;
-        this.targetdir = targetdir;
         this.checksum = sha256Sum;
         this.archive = filename;
     }
@@ -58,17 +59,17 @@ public class PluginDownloadThread extends LongProcessThread {
     @Override
     public void run() {
         try {
-            File targetFilePath = new File(targetdir, archive);
+            Path temporaryDir = Files.createTempDirectory("omegat");
+            File temporaryFilePath = new File(temporaryDir.toFile(), archive);
+            temporaryDir.toFile().deleteOnExit();
             Log.log("Start downloading from " + url.toString());
-            boolean result = HttpConnectionUtils.downloadBinaryFile(url, headers, targetFilePath);
+            boolean result = HttpConnectionUtils.downloadBinaryFile(url, headers, temporaryFilePath);
             if (!result) {
                 Log.log("Failed to download plugin file.");
-                // todo: remove download files and show warning
-            } else if (!checksum.equals(calculateSha256(targetFilePath))) {
+            } else if (!checksum.equals(calculateSha256(temporaryFilePath))) {
                 Log.log("Checksum error of plugin file.");
-                // todo: remove download files and show warning
             } else {
-                Log.log("Finished downloading to " + targetFilePath.toPath());
+                PluginInstaller.install(temporaryFilePath);
             }
         } catch (IOException | NoSuchAlgorithmException e) {
             e.printStackTrace();

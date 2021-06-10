@@ -55,8 +55,9 @@ import org.omegat.util.StaticUtils;
  */
 public final class PluginInstaller {
 
-    public static Boolean install(final PluginsManager pluginsManager, final File pluginFile) {
+    public static Boolean install(final File pluginFile) {
         try {
+            PluginsManager pluginsManager = new PluginsManager();
             // unpack or copy jar to temporary directory
             Path tmporaryDir = Files.createTempDirectory("omegat");
             Path pluginJarFile = unpackPlugin(pluginFile, tmporaryDir);

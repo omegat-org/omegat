@@ -41,17 +41,24 @@ import java.awt.KeyboardFocusManager;
 import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.Main;
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.KnownException;
+import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.core.search.SearchMode;
+import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.align.AlignFilePickerController;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.GoToSegmentDialog;
@@ -81,7 +88,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.gui.DesktopWrapper;
-import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Handler for main menu items.

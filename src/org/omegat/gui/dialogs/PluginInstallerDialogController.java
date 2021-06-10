@@ -56,7 +56,7 @@ public class PluginInstallerDialogController {
         PluginInstallerDialog pluginInstallerDialog = new PluginInstallerDialog(parent, true);
         PluginDetailsPane pluginDetailsPane = new PluginDetailsPane();
         StringBuilder sb = new StringBuilder("<h2>Install a new plugin</h2>");
-        sb.append(pluginInformations.stream().map(pluginsManager::formatDetailText).collect(Collectors.joining()));
+        sb.append(pluginInformations.stream().map(PluginsManager::formatDetailText).collect(Collectors.joining()));
         if (config.get(CURRENT_VERSION) != null) {
             sb.append("<br/>\n Current plugin version is: ").append(config.get(CURRENT_VERSION)).append("<br/>\n");
         }

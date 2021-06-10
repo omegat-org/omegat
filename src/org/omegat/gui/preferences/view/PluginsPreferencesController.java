@@ -60,7 +60,6 @@ import org.omegat.util.gui.TableColumnSizer;
 public class PluginsPreferencesController extends BasePreferencesController {
 
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
-    private final PluginsManager pluginsManager = new PluginsManager();
     private PluginsPreferencesPanel panel;
     private PluginDetailsPane localPluginDetailsPane;
     private PluginDetailsPane remotePluginDetailsPane;
@@ -95,7 +94,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 localPluginDetailHeader.installButton.setText("");
                 localPluginDetailHeader.installButton.setEnabled(false);
             }
-            localPluginDetailsPane.setText(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
+            localPluginDetailsPane.setText(PluginsManager.formatDetailText(model.getValueAt(rowIndex)));
         }
     }
 
@@ -130,7 +129,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                     panel.restartOmegatButton.setEnabled(true);
                 }
             });
-            StringBuilder detailTextBuilder = new StringBuilder(pluginsManager.formatDetailText(model.getValueAt(rowIndex)));
+            StringBuilder detailTextBuilder = new StringBuilder(PluginsManager.formatDetailText(model.getValueAt(rowIndex)));
             remotePluginDetailsPane.setText(detailTextBuilder.toString());
         }
     }
@@ -189,7 +188,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
             int choosePluginFileResult = choosePluginFile.showOpenDialog(Core.getMainWindow().getApplicationFrame());
             if (choosePluginFileResult == JFileChooser.APPROVE_OPTION) {
-                Boolean result = PluginInstaller.install(pluginsManager, choosePluginFile.getSelectedFile());
+                Boolean result = PluginInstaller.install(choosePluginFile.getSelectedFile());
                 if (result) {
                     Main.setRestartRequired();
                     panel.restartOmegatButton.setEnabled(true);

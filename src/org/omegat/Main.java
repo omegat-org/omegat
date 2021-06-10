@@ -227,28 +227,22 @@ public final class Main {
     }
 
     public static void restartGUI(String projectDir) {
-        Log.log("===============================================================");
-        Log.log("===              Restart OmegaT                            ====");
-        Log.log("===============================================================");
-        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        Log.log("===         Restart OmegaT           ===");
+        String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
+        // Build command: java -cp ... org.omegat.Main
+        List<String> command = new ArrayList<>();
+        command.add(javaBin);
+        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+        command.addAll(runtimeMxBean.getInputArguments()); // JVM args
+        command.add("-cp");
+        command.add(runtimeMxBean.getClassPath());
+        command.add(Main.class.getName());
+        command.addAll(CLIParameters.unparseArgs(PARAMS));
+        if (projectDir != null) {
+            command.add(projectDir);
+        }
+        ProcessBuilder builder = new ProcessBuilder(command);
         try {
-            final File currentJar;
-            /* Build command: java -cp ... org.omegat.Main */
-            final ArrayList<String> command = new ArrayList<>();
-            command.add(javaBin);
-            command.addAll(JVMPARAMS);
-            command.add("-cp");
-            command.add(ManagementFactory.getRuntimeMXBean().getClassPath());
-            command.add(Main.class.getName());
-            PARAMS.forEach((k, v) -> {
-                if (!k.equals(CLIParameters.PROJECT_DIR)) {
-                    command.add(k + "=" + v);
-                }
-            });
-            if (projectDir != null) {
-                command.add(projectDir);
-            }
-            final ProcessBuilder builder = new ProcessBuilder(command);
             builder.start();
             System.exit(0);
         } catch (IOException e) {

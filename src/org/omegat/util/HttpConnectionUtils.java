@@ -139,37 +139,37 @@ public final class HttpConnectionUtils {
     public static boolean downloadBinaryFile(final URL fileURL, final Map<String, String> headers,
                                              final Set<String> expectedMime, final File saveFilePath)
             throws IOException, FlakyDownloadException {
-        boolean result = false;
         HttpURLConnection httpURLConnection = (HttpURLConnection) fileURL.openConnection();
         headers.forEach(httpURLConnection::setRequestProperty);
         httpURLConnection.setConnectTimeout(TIMEOUT_MS);
         httpURLConnection.setReadTimeout(TIMEOUT_MS);
-        int responseCode = httpURLConnection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            String contentType = httpURLConnection.getContentType();
-            long contentLength = httpURLConnection.getContentLength();
-            if (expectedMime.contains(contentType)) {
-                try (InputStream inputStream = httpURLConnection.getInputStream();
-                     FileOutputStream outputStream = new FileOutputStream(saveFilePath)) {
-                    long transferred = IOUtils.copy(inputStream, outputStream, BUFFER_SIZE);
-                    if (transferred != contentLength) {
-                        httpURLConnection.disconnect();
-                        throw new FlakyDownloadException("Downloaded file length differs from expected content length reported in header.");
-                    }
-                    result = true;
-                } catch (Exception ex) {
-                    Log.log(ex);
-                } finally {
-                    httpURLConnection.disconnect();
-                }
-            } else {
-                httpURLConnection.disconnect();
-                Log.logErrorRB("HCU_MIME_ERROR" , contentType);
+        try {
+            int responseCode = httpURLConnection.getResponseCode();
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                Log.logErrorRB("HCU_RESPONSE_ERROR", responseCode);
+                return false;
             }
-        } else {
-            Log.logErrorRB("HCU_RESPONSE_ERROR", responseCode);
+            String contentType = httpURLConnection.getContentType();
+            if (!expectedMime.contains(contentType)) {
+                Log.logErrorRB("HCU_MIME_ERROR", contentType);
+                return false;
+            }
+            try (InputStream inputStream = httpURLConnection.getInputStream();
+                    FileOutputStream outputStream = new FileOutputStream(saveFilePath)) {
+                long transferred = IOUtils.copy(inputStream, outputStream, BUFFER_SIZE);
+                if (transferred != httpURLConnection.getContentLength()) {
+                    httpURLConnection.disconnect();
+                    throw new FlakyDownloadException(
+                            "Downloaded file length differs from expected content length reported in header.");
+                }
+                return true;
+            } catch (Exception ex) {
+                Log.log(ex);
+                return false;
+            }
+        } finally {
+            httpURLConnection.disconnect();
         }
-        return result;
     }
 
     /**

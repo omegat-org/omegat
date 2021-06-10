@@ -25,6 +25,9 @@
 
 package svn;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.awt.HeadlessException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -37,9 +40,6 @@ import org.junit.Test;
 import org.omegat.core.plugins.PluginsManager;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TestPreferencesInitializer;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class PluginsTest {
 

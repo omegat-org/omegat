@@ -64,7 +64,6 @@ public class DefaultFlatTheme extends LookAndFeel {
 
     public DefaultFlatTheme() throws Exception {
         systemLookAndFeel = (LookAndFeel) Class.forName(UIManager.getSystemLookAndFeelClassName()).newInstance();
-        systemLookAndFeel.initialize();
     }
 
     @Override

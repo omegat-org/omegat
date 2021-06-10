@@ -36,7 +36,6 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -57,10 +56,10 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
 import org.omegat.Main;
 import org.omegat.gui.theme.DefaultFlatTheme;
-import org.omegat.gui.theme.IThemeInitializer;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
+import org.omegat.util.Preferences;
 
 /**
  * UI Design Manager.
@@ -78,7 +77,6 @@ import org.omegat.util.Platform;
  */
 public final class UIDesignManager {
     private static final Set<String> THEME_KEY_SET = new HashSet<>();
-    private static final Map<String, IThemeInitializer> THEME_INITIALIZER = new HashMap<>();
 
     private UIDesignManager() {
     }
@@ -92,13 +90,6 @@ public final class UIDesignManager {
             themes.put(key, name);
         }
         return themes;
-    }
-
-    public static void registerTheme(IThemeInitializer initializer) {
-        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(initializer.getName(), initializer.getClassName());
-        UIManager.installLookAndFeel(info);
-        THEME_KEY_SET.add(info.toString());
-        THEME_INITIALIZER.put(info.toString(), initializer);
     }
 
     public static void registerTheme(final String name, final String className) {
@@ -122,36 +113,25 @@ public final class UIDesignManager {
     }
 
     public static String setDefaultTheme(ClassLoader classLoader) {
-        String theme = getDefaultThemeKey();
         try {
-            setLookAndFeel(theme, classLoader);
+            UIManager.setLookAndFeel(new DefaultFlatTheme());
         } catch (Exception ex) {
             // Something went wrong!!
             Log.log(ex);
             Main.showError(ex);
         }
-        return theme;
-    }
-
-    private static String getDefaultThemeKey() {
-        IThemeInitializer initializer = new DefaultFlatTheme.DefaultFlatThemeDesignInstall();
-        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(initializer.getName(), initializer.getClassName());
-        return info.toString();
+        return Preferences.THEME_DEFAULT;
     }
 
     public static String setTheme(String theme, ClassLoader classLoader) {
         try {
-            setLookAndFeel(theme, classLoader);
+            Class<?> clazz = classLoader.loadClass(getThemeClassName(theme));
+            UIManager.setLookAndFeel((LookAndFeel) clazz.getConstructor().newInstance());
             return theme;
         } catch (Exception e) {
             Log.log(e);
             return setDefaultTheme(classLoader);
         }
-    }
-
-    private static void setLookAndFeel(String theme, ClassLoader classLoader) throws Exception {
-        Class<?> clazz = classLoader.loadClass(getThemeClassName(theme));
-        UIManager.setLookAndFeel((LookAndFeel) clazz.getConstructor().newInstance());
     }
 
     /**
@@ -200,11 +180,6 @@ public final class UIDesignManager {
         UIManager.put("DockTabbedPane.close.rollover", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
         UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
-
-        IThemeInitializer themeInitializer = THEME_INITIALIZER.getOrDefault(theme, null);
-        if (themeInitializer != null) {
-            themeInitializer.setup();
-        }
 
         // Panel notification (blinking tabs/headers) settings
         UIManager.put("DockingDesktop.notificationBlinkCount", 2);

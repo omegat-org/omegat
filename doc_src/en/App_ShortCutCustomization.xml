@@ -9,10 +9,9 @@
 
     <para>Most of the items that appear in the main menu can have a new
     shortcut assigned. You can change the already assigned shortcuts and add
-    new shortcuts by putting a shortcut definition file in your <?xxe-remark FABRI
-2021-06-10T11:59:05Z
-./omegaT preferences folder ??><application>OmegaT</application> preferences
-    folder (accessible by <menuchoice>
+    new shortcuts by putting a shortcut definition file in your
+    <application>OmegaT</application> preferences folder (accessible by
+    <menuchoice>
         <guimenuitem>Options</guimenuitem>
 
         <guimenuitem>Access Configuration Folder</guimenuitem>

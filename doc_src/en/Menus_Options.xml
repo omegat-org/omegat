@@ -43,10 +43,9 @@
       <term>Dictionary</term>
 
       <listitem>
-        <para>Check the <guimenuitem>Use Fuzzy Matching for <?xxe-remark FABRI
-2021-06-10T11:45:28Z
-./dictionaries ??>Dictionary Entries</guimenuitem> option if you want
-        dictionaries to display words that have the same root.</para>
+        <para>Check the <guimenuitem>Use Fuzzy Matching for Dictionary
+        Entries</guimenuitem> option if you want dictionaries to display words
+        that have the same root.</para>
       </listitem>
     </varlistentry>
 

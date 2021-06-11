@@ -19,7 +19,7 @@
     <title>Default glossary</title>
 
     <para>The default writable glossary is located in the ./glossary project
-    folder and is called glossary.txt.</para>
+    folder and is called <filename>glossary.txt</filename>.</para>
 
     <para>Its name and location can be modified in the project properties
     dialog but its extension must be <filename>.txt</filename> or

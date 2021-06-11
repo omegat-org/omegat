@@ -114,11 +114,9 @@
             <guimenuitem>File Filters</guimenuitem>
           </menuchoice>.</para>
 
-        <para>The <?xxe-remark FABRI
-2021-06-10T11:28:37Z
-./source and ./target files ??>source and target files can have different
-        formats (for example, a <filename>.docx</filename> file can be aligned
-        with a <filename>.pdf</filename> file).</para>
+        <para>The source and target files can have different formats (for
+        example, a <filename>.docx</filename> file can be aligned with a
+        <filename>.pdf</filename> file).</para>
       </listitem>
     </varlistentry>
 

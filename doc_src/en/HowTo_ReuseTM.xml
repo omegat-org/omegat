@@ -13,15 +13,14 @@
   legislation, such as that of the European Community, is a typical
   example.</para>
 
-  <para>When you create the target documents in an <?xxe-remark FABRI
-2021-06-10T13:06:35Z
-./omegaT project ??><application>OmegaT</application> project, the translation
-  memory of the project is output in the form of three files in the root
-  folder of your <application>OmegaT</application> project (see the above
-  description). You can regard these three tmx files
-  (<filename>-omegat.tmx</filename>, <filename>-level1.tmx</filename> and
-  <filename>-level2.tmx</filename>) as an "export translation memory", i.e. as
-  an export of your current project's content in bilingual form.</para>
+  <para>When you create the target documents in an
+  <application>OmegaT</application> project, the translation memory of the
+  project is output in the form of three files in the root folder of your
+  <application>OmegaT</application> project (see the above description). You
+  can regard these three tmx files (<filename>-omegat.tmx</filename>,
+  <filename>-level1.tmx</filename> and <filename>-level2.tmx</filename>) as an
+  "export translation memory", i.e. as an export of your current project's
+  content in bilingual form.</para>
 
   <para>Should you wish to reuse a translation memory from a previous project
   (for example because the new project is similar to the previous project, or

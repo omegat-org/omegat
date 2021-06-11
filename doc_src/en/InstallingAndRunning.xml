@@ -213,10 +213,9 @@
           </listitem>
 
           <listitem>
-            <para>Other Icons - Browse, and navigate to the
-            <filename>./images</filename> subfolder in the
-            <application>OmegaT</application> application folder. Select the
-            <filename>OmegaT.png</filename> icon.</para>
+            <para>Other Icons - Browse, and navigate to the images subfolder
+            in the <application>OmegaT</application> application folder.
+            Select the <filename>OmegaT.png</filename> icon.</para>
           </listitem>
 
           <listitem>
@@ -248,14 +247,13 @@
 
           <listitem>
             <para>Click on the icon button, then hit
-            <guibutton>Browse...</guibutton> and navigate to the
-            <filename>./images</filename> subfolder in the
-            <application>OmegaT</application> application folder. Select the
-            <filename>OmegaT.png</filename> icon. GNOME may fail to display
-            the icon files in the available formats and initially appear to
-            expect an SVG file, but if the folder is selected, the files
-            should appear and <filename>OmegaT.png</filename> can be
-            selected.</para>
+            <guibutton>Browse...</guibutton> and navigate to the images
+            subfolder in the <application>OmegaT</application> application
+            folder. Select the <filename>OmegaT.png</filename> icon. GNOME may
+            fail to display the icon files in the available formats and
+            initially appear to expect an SVG file, but if the folder is
+            selected, the files should appear and
+            <filename>OmegaT.png</filename> can be selected.</para>
           </listitem>
         </itemizedlist>
       </section>

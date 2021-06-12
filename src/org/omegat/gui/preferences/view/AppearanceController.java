@@ -78,6 +78,11 @@ public class AppearanceController extends BasePreferencesController {
                 return value;
             }
         });
+        panel.cbThemeSelect.addActionListener(e -> {
+            String selected = panel.cbThemeSelect.getSelectedItem().toString();
+            String current = UIManager.getLookAndFeel().getClass().getName();
+            setRestartRequired(!selected.equals(current));
+        });
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));

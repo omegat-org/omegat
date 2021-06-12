@@ -169,6 +169,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
         });
+        panel.restartOmegatButton.setText(OStrings.getString("PREFS_PLUGINS_RESTART"));
         panel.restartOmegatButton.addActionListener(e -> {
             String projectDir = Core.getProject().isProjectLoaded()
                     ? Core.getProject().getProjectProperties().getProjectRoot()
@@ -179,18 +180,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         });
         panel.restartOmegatButton.setEnabled(Main.isRestartRequired());
-        InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
-        AvailablePluginInfoTableModel availableModel = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
-        TableRowSorter<InstalledPluginInfoTableModel> sorter = new TableRowSorter<>(model);
-        TableRowSorter<AvailablePluginInfoTableModel> availableSorter = new TableRowSorter<>(availableModel);
-        panel.tablePluginsInfo.setRowSorter(sorter);
-        panel.tableAvailablePluginsInfo.setRowSorter(availableSorter);
 
-        panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
-        panel.tableAvailablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowActionRemote);
-        panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
-        panel.tableAvailablePluginsInfo.setPreferredScrollableViewportSize(panel.tableAvailablePluginsInfo.getPreferredSize());
-
+        panel.installFromDiskButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK"));
         panel.installFromDiskButton.addActionListener(e -> {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
             int choosePluginFileResult = choosePluginFile.showOpenDialog(Core.getMainWindow().getApplicationFrame());
@@ -202,6 +193,18 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 }
             }
         });
+
+        InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
+        AvailablePluginInfoTableModel availableModel = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
+        TableRowSorter<InstalledPluginInfoTableModel> sorter = new TableRowSorter<>(model);
+        TableRowSorter<AvailablePluginInfoTableModel> availableSorter = new TableRowSorter<>(availableModel);
+        panel.tablePluginsInfo.setRowSorter(sorter);
+        panel.tableAvailablePluginsInfo.setRowSorter(availableSorter);
+
+        panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
+        panel.tableAvailablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowActionRemote);
+        panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
+        panel.tableAvailablePluginsInfo.setPreferredScrollableViewportSize(panel.tableAvailablePluginsInfo.getPreferredSize());
     }
 
     @Override

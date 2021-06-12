@@ -35,17 +35,19 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+
+import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
-import org.omegat.gui.dialogs.PluginInstallerDialogController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 
 /**
@@ -65,26 +67,35 @@ public final class PluginInstaller {
             tmporaryDir.toFile().deleteOnExit();
             // check manifest
             Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile.toFile());
-            Optional<PluginInformation> info = pluginInfo.stream().findFirst();
-            PluginInformation currentInfo = null;
+            PluginInformation info = pluginInfo.stream().findFirst().orElse(null);
             final Map<String, String> installConfig = new HashMap<>();
             // detect current installation
-            String currentVersion = null;
-            if (info.isPresent()) {
-                currentInfo = pluginsManager.getInstalledPluginInformation(info.get());
-                if (currentInfo != null) {
-                    installConfig.put(PluginInstallerDialogController.CURRENT_VERSION, currentInfo.getVersion());
-                    installConfig.put(PluginInstallerDialogController.ACTION_NAME, "Update");
+            PluginInformation currentInfo = null;
+            if (info != null) {
+                currentInfo = pluginsManager.getInstalledPluginInformation(info);
+            }
+            String pluginName = pluginInfo.stream().findFirst().map(PluginInformation::getName).orElse("");
+            String version = "";
+            for (PluginInformation plugin : pluginInfo) {
+                if (plugin.getVersion() != null) {
+                    version = plugin.getVersion();
+                    break;
                 }
+            }
+            String message;
+            if (currentInfo != null) {
+                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,
+                        currentInfo.getVersion(), version);
             } else {
-                installConfig.put(PluginInstallerDialogController.CURRENT_VERSION, null);
-                installConfig.put(PluginInstallerDialogController.ACTION_NAME, "Install");
+                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_INSTALL"), pluginName,
+                        version);
             }
             // confirm installation
-            new PluginInstallerDialogController(pluginInfo, pluginsManager,
-                    installConfig).show(Core.getMainWindow().getApplicationFrame());
-            boolean result = Boolean.parseBoolean(installConfig.get(PluginInstallerDialogController.DO_INSTALL_KEY));
-            if (result) {
+            int result = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                    message,
+                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
                 try {
                     if (currentInfo != null) {
                         FileUtils.forceDelete(currentInfo.getJarFile());

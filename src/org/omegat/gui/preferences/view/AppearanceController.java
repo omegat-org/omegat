@@ -26,15 +26,12 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.awt.Component;
-import java.util.Map;
-import java.util.Set;
+import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
@@ -42,7 +39,7 @@ import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.UIDesignManager;
+import org.omegat.util.gui.DelegatingComboBoxRenderer;
 
 /**
  * @author Aaron Madlon-Kay
@@ -67,12 +64,20 @@ public class AppearanceController extends BasePreferencesController {
 
     private void initGui() {
         panel = new AppearancePreferencesPanel();
-        Map<String, String> themes = UIDesignManager.getThemes();
-        themes.forEach((key, value) -> themeSelectionModel
-                .addElement(new ThemeLabel(key, value)));
-        panel.cbThemeSelect.setModel(themeSelectionModel);
-        ListThemeRenderer renderer = new ListThemeRenderer();
-        panel.cbThemeSelect.setRenderer(renderer);
+        String[] lafs = Arrays.asList(UIManager.getInstalledLookAndFeels()).stream().map(LookAndFeelInfo::getClassName)
+                .toArray(String[]::new);
+        panel.cbThemeSelect.setModel(new DefaultComboBoxModel<>(lafs));
+        panel.cbThemeSelect.setRenderer(new DelegatingComboBoxRenderer<String, String>() {
+            @Override
+            protected String getDisplayText(String value) {
+                for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                    if (info.getClassName().equals(value)) {
+                        return info.getName();
+                    }
+                }
+                return value;
+            }
+        });
         // TODO: Properly abstract the restore function
         panel.restoreWindowButton
                 .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
@@ -80,70 +85,18 @@ public class AppearanceController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        String currentTheme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME,
-                Preferences.THEME_DEFAULT);
-        if (!setSelection(currentTheme)) {
-            restoreDefaults();
-        }
+        String currentTheme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME,
+                Preferences.THEME_CLASS_NAME_DEFAULT);
+        panel.cbThemeSelect.setSelectedItem(currentTheme);
     }
 
     @Override
     public void restoreDefaults() {
-        setSelection("Default");
-    }
-
-    private boolean setSelection(String key) {
-        Set<String> themes = UIDesignManager.getThemeKeySet();
-        if (themes.contains(key)) {
-            for (int i = 0; i < themeSelectionModel.getSize(); i++) {
-                ThemeLabel obj = themeSelectionModel.getElementAt(i);
-                if (key.equals(obj.getKey())) {
-                    themeSelectionModel.setSelectedItem(obj);
-                    return true;
-                }
-            }
-        }
-        return false;
+        panel.cbThemeSelect.setSelectedItem(Preferences.THEME_CLASS_NAME_DEFAULT);
     }
 
     @Override
     public void persist() {
-        ThemeLabel theme = (ThemeLabel) themeSelectionModel.getSelectedItem();
-        Preferences.setPreference(Preferences.THEME_SELECTED_NAME, theme.getKey());
-    }
-
-    private static final DefaultComboBoxModel<ThemeLabel> themeSelectionModel = new DefaultComboBoxModel<>();
-
-    @SuppressWarnings("serial")
-    static class ListThemeRenderer extends JLabel implements ListCellRenderer<ThemeLabel> {
-
-        @Override
-        public Component getListCellRendererComponent(
-                JList<? extends ThemeLabel> jList,
-                ThemeLabel data,
-                int i,
-                boolean isSelected,
-                boolean b) {
-            setText(data.getText());
-            return this;
-        }
-    }
-    public static class ThemeLabel {
-
-        String text;
-        String key;
-
-        ThemeLabel(String key, String text) {
-            this.key = key;
-            this.text = text;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public String getKey() {
-            return key;
-        }
+        Preferences.setPreference(Preferences.THEME_CLASS_NAME, panel.cbThemeSelect.getSelectedItem().toString());
     }
 }

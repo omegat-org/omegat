@@ -283,21 +283,12 @@ public final class Main {
             // do nothing
         }
 
-        String theme = Preferences.getPreferenceDefault(Preferences.THEME_SELECTED_NAME, Preferences.THEME_DEFAULT);
-        String result;
-        if (theme.equals(Preferences.THEME_DEFAULT)) {
-            result = UIDesignManager.setDefaultTheme(mainClassLoader);
-        } else {
-            result = UIDesignManager.setTheme(theme, mainClassLoader);
-        }
-        if (result !=null && !theme.equals(result)) {
-            Preferences.setPreference(Preferences.THEME_SELECTED_NAME, result);
-            theme = result;
-        }
+        String theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, Preferences.THEME_CLASS_NAME_DEFAULT);
+        UIDesignManager.setTheme(theme, mainClassLoader);
 
         System.setProperty("swing.aatext", "true");
         try {
-            Core.initializeGUI(theme, PARAMS);
+            Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);

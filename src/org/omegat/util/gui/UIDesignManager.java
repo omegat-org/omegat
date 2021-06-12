@@ -36,10 +36,6 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
@@ -48,18 +44,17 @@ import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
+import org.omegat.util.Preferences;
+
 import com.vlsolutions.swing.docking.AutoHidePolicy;
 import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
 import com.vlsolutions.swing.docking.DockableContainerFactory;
 import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
-import org.omegat.Main;
-import org.omegat.gui.theme.DefaultFlatTheme;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.Platform;
-import org.omegat.util.Preferences;
 
 /**
  * UI Design Manager.
@@ -76,68 +71,28 @@ import org.omegat.util.Preferences;
  * @author Hiroshi Miura
  */
 public final class UIDesignManager {
-    private static final Set<String> THEME_KEY_SET = new HashSet<>();
 
     private UIDesignManager() {
     }
 
-    public static Map<String, String> getThemes() {
-        Map<String, String> themes = new TreeMap<>();
-        UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
-        for (UIManager.LookAndFeelInfo lookAndFeelInfo : lafInfo) {
-            String name = lookAndFeelInfo.getName();
-            String key = lookAndFeelInfo.toString();
-            themes.put(key, name);
-        }
-        return themes;
-    }
-
-    public static void registerTheme(final String name, final String className) {
-        UIManager.LookAndFeelInfo info = new UIManager.LookAndFeelInfo(name, className);
-        UIManager.installLookAndFeel(info);
-        THEME_KEY_SET.add(info.toString());
-    }
-
-    public static Set<String> getThemeKeySet() {
-        return THEME_KEY_SET;
-    }
-
-    public static String getThemeClassName(String key) {
-        UIManager.LookAndFeelInfo[] lafInfo = UIManager.getInstalledLookAndFeels();
-        for (UIManager.LookAndFeelInfo info: lafInfo) {
-            if (key.equals(info.toString())) {
-                return info.getClassName();
+    public static String setTheme(String lafClassName, ClassLoader classLoader) {
+        try {
+            Class<?> clazz = classLoader.loadClass(lafClassName);
+            UIManager.setLookAndFeel((LookAndFeel) clazz.getConstructor().newInstance());
+            return lafClassName;
+        } catch (Exception e) {
+            Log.log(e);
+            if (!lafClassName.equals(Preferences.THEME_CLASS_NAME_DEFAULT)) {
+                return setTheme(Preferences.THEME_CLASS_NAME_DEFAULT, classLoader);
             }
         }
         return null;
     }
 
-    public static String setDefaultTheme(ClassLoader classLoader) {
-        try {
-            UIManager.setLookAndFeel(new DefaultFlatTheme());
-        } catch (Exception ex) {
-            // Something went wrong!!
-            Log.log(ex);
-            Main.showError(ex);
-        }
-        return Preferences.THEME_DEFAULT;
-    }
-
-    public static String setTheme(String theme, ClassLoader classLoader) {
-        try {
-            Class<?> clazz = classLoader.loadClass(getThemeClassName(theme));
-            UIManager.setLookAndFeel((LookAndFeel) clazz.getConstructor().newInstance());
-            return theme;
-        } catch (Exception e) {
-            Log.log(e);
-            return setDefaultTheme(classLoader);
-        }
-    }
-
     /**
      * Initialize docking subsystem.
      */
-    public static void initialize(final String theme) throws IOException {
+    public static void initialize() throws IOException {
         // load colors defaults
         loadDefaultColors();
 

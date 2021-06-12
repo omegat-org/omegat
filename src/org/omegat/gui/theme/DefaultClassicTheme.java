@@ -42,7 +42,6 @@ import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
 import org.omegat.util.gui.ResourcesUtil;
-import org.omegat.util.gui.UIDesignManager;
 
 
 public class DefaultClassicTheme extends LookAndFeel {
@@ -64,7 +63,7 @@ public class DefaultClassicTheme extends LookAndFeel {
     }
 
     public static void loadPlugins() {
-        UIDesignManager.registerTheme(NAME, CLASS_NAME);
+        UIManager.installLookAndFeel(NAME, DefaultFlatTheme.class.getName());
     }
 
     public static void unloadPlugins() {

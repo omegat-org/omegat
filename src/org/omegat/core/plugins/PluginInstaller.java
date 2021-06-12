@@ -98,7 +98,7 @@ public final class PluginInstaller {
             if (result == JOptionPane.YES_OPTION) {
                 try {
                     if (currentInfo != null) {
-                        FileUtils.forceDelete(currentInfo.getJarFile());
+                        FileUtils.forceDeleteOnExit(currentInfo.getJarFile());
                     }
                     File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
                     FileUtils.copyFileToDirectory(pluginJarFile.toFile(), homePluginsDir, true);

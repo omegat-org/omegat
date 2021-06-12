@@ -80,7 +80,6 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
-import org.omegat.util.gui.UIDesignManager;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -283,12 +282,9 @@ public final class Main {
             // do nothing
         }
 
-        String theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, Preferences.THEME_CLASS_NAME_DEFAULT);
-        UIDesignManager.setTheme(theme, mainClassLoader);
-
         System.setProperty("swing.aatext", "true");
         try {
-            Core.initializeGUI(PARAMS);
+            Core.initializeGUI(mainClassLoader, PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);

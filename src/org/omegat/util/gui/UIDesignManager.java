@@ -75,30 +75,32 @@ public final class UIDesignManager {
     private UIDesignManager() {
     }
 
-    public static String setTheme(String lafClassName, ClassLoader classLoader) {
+    public static void setTheme(String lafClassName, ClassLoader classLoader) {
         try {
             Class<?> clazz = classLoader.loadClass(lafClassName);
-            UIManager.setLookAndFeel((LookAndFeel) clazz.getConstructor().newInstance());
-            return lafClassName;
+            UIManager.setLookAndFeel((LookAndFeel) clazz.newInstance());
         } catch (Exception e) {
             Log.log(e);
             if (!lafClassName.equals(Preferences.THEME_CLASS_NAME_DEFAULT)) {
-                return setTheme(Preferences.THEME_CLASS_NAME_DEFAULT, classLoader);
+                setTheme(Preferences.THEME_CLASS_NAME_DEFAULT, classLoader);
             }
         }
-        return null;
     }
 
     /**
      * Initialize docking subsystem.
      */
-    public static void initialize() throws IOException {
+    public static void initialize(ClassLoader mainClassLoader) throws IOException {
         // load colors defaults
         loadDefaultColors();
 
         // Install VLDocking defaults
         DockingUISettings.getInstance().installUI();
         DockableContainerFactory.setFactory(new CustomContainerFactory());
+
+        // Set Look And Feel
+        String theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, Preferences.THEME_CLASS_NAME_DEFAULT);
+        UIDesignManager.setTheme(theme, mainClassLoader);
 
         // Enable animated popup when mousing over minimized tab
         AutoHidePolicy.getPolicy().setExpandMode(ExpandMode.EXPAND_ON_ROLLOVER);

@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
 Plugin-Name: Filters for OmegaT
 Plugin-Author: Example Author
+Plugin-Version: 1.0.0
 Plugin-Description: Example Description.
 Plugin-Link: https://example.com
 Plugin-Category: filter

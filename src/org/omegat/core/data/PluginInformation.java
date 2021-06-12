@@ -44,6 +44,7 @@ public class PluginInformation {
     public enum Status {
         INSTALLED,
         BUNDLED,
+        NEW,
     }
 
     private final String className;
@@ -250,7 +251,7 @@ public class PluginInformation {
                     findVersion(targetAttrs),
                     findAuthor(targetAttrs),
                     lookupAttribute(targetAttrs, PLUGIN_DESCRIPTION),
-                    PluginUtils.PluginType.getTypeByValue(findCategoryKey(targetAttrs)),
+                    findCategory(targetAttrs),
                     lookupAttribute(targetAttrs, PLUGIN_LINK), mu, status);
         }
 
@@ -276,8 +277,13 @@ public class PluginInformation {
                     PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status);
         }
 
-        private static String findCategoryKey(Attributes attrs) {
-            return lookupAttribute(attrs, PLUGIN_CATEGORY, PLUGIN_TYPE);
+        private static PluginUtils.PluginType findCategory(Attributes attrs) {
+            String categoryKey;
+            categoryKey = lookupAttribute(attrs, PLUGIN_CATEGORY, PLUGIN_TYPE);
+            if (categoryKey != null) {
+                return PluginUtils.PluginType.getTypeByValue(categoryKey);
+            }
+            return PluginUtils.PluginType.MISCELLANEOUS;
         }
 
         private static String findName(String className, Attributes attrs) {
@@ -293,7 +299,7 @@ public class PluginInformation {
             if (version != null) {
                 return version;
             }
-            return "unknown";
+            return "";
         }
 
         private static String findAuthor(Attributes attrs) {

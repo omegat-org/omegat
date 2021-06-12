@@ -150,6 +150,12 @@ public final class OConsts {
     /** dictionary file extension */
     public static final String SC_DICTIONARY_EXTENSION = ".dic";
 
+    /** jar file extension */
+    public static final String JAR_EXTENSION = ".jar";
+
+    /** zip file extension */
+    public static final String ZIP_EXTENSION = ".zip";
+
     /** The smallest threshold to detect a fuzzy match string */
     public static final int FUZZY_MATCH_THRESHOLD = 30;
 

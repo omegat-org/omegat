@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Plugin-Name: Stax plugin
+Plugin-Version: 2.1.3
+Ant-Version: Apache Ant 1.10.12
+Created-By: 1.8.0_342-8u342-b07-0ubuntu1~22.04-b07 (Private Build)
+OmegaT-Plugin: true
+
+Name: org.omegat.filters4.xml.xliff.Xliff1Filter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters4.xml.xliff.Xliff2Filter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters4.xml.xliff.SdlXliff
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters4.xml.xliff.SdlProject
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters4.xml.xliff.MqXliff
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters4.xml.openxml.MsOfficeFileFilter
+OmegaT-Plugin: filter

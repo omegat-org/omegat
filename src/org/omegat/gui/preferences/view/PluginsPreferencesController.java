@@ -28,10 +28,14 @@ package org.omegat.gui.preferences.view;
 import java.net.URI;
 
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import org.omegat.core.Core;
+import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
+import org.omegat.util.PluginInstaller;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -66,6 +70,16 @@ public class PluginsPreferencesController extends BasePreferencesController {
             } catch (Exception ex) {
                 JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(),
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        panel.installFromDiskButton.addActionListener(e -> {
+            ChoosePluginFile choosePluginFile = new ChoosePluginFile();
+            if (JFileChooser.APPROVE_OPTION == choosePluginFile.showOpenDialog(
+                    Core.getMainWindow().getApplicationFrame())) {
+                if (PluginInstaller.install(choosePluginFile.getSelectedFile())) {
+                    setRestartRequired(true);
+                }
             }
         });
     }

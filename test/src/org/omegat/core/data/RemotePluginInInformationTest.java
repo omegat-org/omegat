@@ -25,6 +25,8 @@
 
 package org.omegat.core.data;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,7 +47,7 @@ public class RemotePluginInInformationTest {
          Manifest m = new Manifest(in);
          String pluginClass = m.getMainAttributes().getValue("OmegaT-Plugins");
          RemotePluginInformation remotePluginInformation = new RemotePluginInformation(pluginClass, m);
-         assert (remotePluginInformation.getJarFilename().equals("omegat-textra-plugin-2020.2.2.jar"));
+         assertEquals("omegat-textra-plugin-2020.2.2.jar", remotePluginInformation.getJarFilename());
       }
    }
 }

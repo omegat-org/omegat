@@ -32,162 +32,95 @@
 package org.omegat.gui.theme;
 
 import java.awt.Color;
-import java.awt.Image;
-import java.lang.reflect.InvocationTargetException;
 
-import javax.swing.ImageIcon;
 import javax.swing.LookAndFeel;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
-import org.omegat.util.gui.ResourcesUtil;
+import org.omegat.util.OStrings;
 
 
-public class DefaultClassicTheme extends LookAndFeel {
+public class DefaultClassicTheme extends DelegatingLookAndFeel {
 
-    private static final String NAME = "Classic";
-    private static final String CLASS_NAME = "org.omegat.gui.theme.DefaultClassicTheme";
-    private static final String DESCRIPTION = "CLassic OmegaT theme";
-
-    private LookAndFeel systemLookAndFeel;
-
-    public DefaultClassicTheme() {
-        try {
-            Class<?> clazz = getClass().getClassLoader().loadClass(UIManager.getSystemLookAndFeelClassName());
-            systemLookAndFeel = (LookAndFeel) clazz.getConstructor().newInstance();
-            systemLookAndFeel.initialize();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
+    private static final String NAME = OStrings.getString("THEME_OMEGAT_CLASSIC_NAME");
 
     public static void loadPlugins() {
-        UIManager.installLookAndFeel(NAME, DefaultFlatTheme.class.getName());
+        UIManager.installLookAndFeel(NAME, DefaultClassicTheme.class.getName());
     }
 
     public static void unloadPlugins() {
     }
 
-    /**
-     * Return a short string that identifies this look and feel, e.g.
-     * "CDE/Motif".  This string should be appropriate for a menu item.
-     * Distinct look and feels should have different names, e.g.
-     * a subclass of MotifLookAndFeel that changes the way a few components
-     * are rendered should be called "CDE/Motif My Way"; something
-     * that would be useful to a user trying to select a L&amp;F from a list
-     * of names.
-     *
-     * @return short identifier for the look and feel
-     */
+    public DefaultClassicTheme() throws Exception {
+        super();
+    }
+
     @Override
     public String getName() {
         return NAME;
     }
 
-    /**
-     * Return a string that identifies this look and feel.  This string
-     * will be used by applications/services that want to recognize
-     * well known look and feel implementations.  Presently
-     * the well known names are "Motif", "Windows", "Mac", "Metal".  Note
-     * that a LookAndFeel derived from a well known superclass
-     * that doesn't make any fundamental changes to the look or feel
-     * shouldn't override this method.
-     *
-     * @return identifier for the look and feel
-     */
     @Override
     public String getID() {
-        return "Classic";
+        return "OmegaT"; // NOI18N
     }
 
-    /**
-     * Return a one line description of this look and feel implementation,
-     * e.g. "The CDE/Motif Look and Feel".   This string is intended for
-     * the user, e.g. in the title of a window or in a ToolTip message.
-     *
-     * @return short description for the look and feel
-     */
     @Override
     public String getDescription() {
-        return DESCRIPTION;
-    }
-
-    /**
-     * If the underlying platform has a "native" look and feel, and
-     * this is an implementation of it, return {@code true}.  For
-     * example, when the underlying platform is Solaris running CDE
-     * a CDE/Motif look and feel implementation would return {@code
-     * true}.
-     *
-     * @return {@code true} if this look and feel represents the underlying
-     * platform look and feel
-     */
-    @Override
-    public boolean isNativeLookAndFeel() {
-        return false;
-    }
-
-    /**
-     * Return {@code true} if the underlying platform supports and or permits
-     * this look and feel.  This method returns {@code false} if the look
-     * and feel depends on special resources or legal agreements that
-     * aren't defined for the current platform.
-     *
-     * @return {@code true} if this is a supported look and feel
-     * @see UIManager#setLookAndFeel
-     */
-    @Override
-    public boolean isSupportedLookAndFeel() {
-        return true;
+        return OStrings.getString("THEME_OMEGAT_CLASSIC_DESCRIPTION");
     }
 
     public UIDefaults getDefaults() {
-        UIDefaults defaults = systemLookAndFeel.getDefaults();
-        defaults.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
-
-        defaults.put("DockViewTitleBar.hide", getIcon("minimize.gif"));
-        defaults.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif"));
-        defaults.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif"));
-        defaults.put("DockViewTitleBar.maximize", getIcon("maximize.gif"));
-        defaults.put("DockViewTitleBar.maximize.rollover", getIcon("maximize.rollover.gif"));
-        defaults.put("DockViewTitleBar.maximize.pressed", getIcon("maximize.pressed.gif"));
-        defaults.put("DockViewTitleBar.restore", getIcon("restore.gif"));
-        defaults.put("DockViewTitleBar.restore.rollover", getIcon("restore.rollover.gif"));
-        defaults.put("DockViewTitleBar.restore.pressed", getIcon("restore.pressed.gif"));
-        defaults.put("DockViewTitleBar.dock", getIcon("restore.gif"));
-        defaults.put("DockViewTitleBar.dock.rollover", getIcon("restore.rollover.gif"));
-        defaults.put("DockViewTitleBar.dock.pressed", getIcon("restore.pressed.gif"));
-        defaults.put("DockViewTitleBar.float", getIcon("undock.gif"));
-        defaults.put("DockViewTitleBar.float.rollover", getIcon("undock.rollover.gif"));
-        defaults.put("DockViewTitleBar.float.pressed", getIcon("undock.pressed.gif"));
-        defaults.put("DockViewTitleBar.attach", getIcon("dock.gif"));
-        defaults.put("DockViewTitleBar.attach.rollover", getIcon("dock.rollover.gif"));
-        defaults.put("DockViewTitleBar.attach.pressed", getIcon("dock.pressed.gif"));
-        defaults.put("DockViewTitleBar.menu.hide", getIcon("minimize.gif"));
-        defaults.put("DockViewTitleBar.menu.maximize", getIcon("maximize.gif"));
-        defaults.put("DockViewTitleBar.menu.restore", getIcon("restore.gif"));
-        defaults.put("DockViewTitleBar.menu.dock", getIcon("restore.gif"));
-        defaults.put("DockViewTitleBar.menu.float", getIcon("undock.gif"));
-        defaults.put("DockViewTitleBar.menu.attach", getIcon("dock.gif"));
-        defaults.put("DockTabbedPane.menu.hide", getIcon("empty.gif"));
-        defaults.put("DockTabbedPane.menu.maximize", getIcon("empty.gif"));
-        defaults.put("DockTabbedPane.menu.float", getIcon("empty.gif"));
-        defaults.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif"));
-        defaults.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif"));
-        defaults.put("DragControler.detachCursor", getIcon("undock.gif").getImage());
-        return defaults;
+        return setDefaults(systemLookAndFeel.getDefaults());
     }
 
     /**
-     * Load icon from classpath.
+     * Apply theme default values to the supplied {@link UIDefaults} object.
+     * Suitable for third-party themes that want to modify the default theme.
      *
-     * @param iconName
-     *            icon file name
-     * @return icon instance
+     * @param defaults the {@link UIDefaults} object such as from
+     *                 {@link LookAndFeel#getDefaults()}
+     * @param lafId    the ID of the LAF that will make use of the defaults (from
+     *                 {@link LookAndFeel#getID()})
+     * @return the modified {@link UIDefaults} object
      */
-    private static ImageIcon getIcon(String iconName) {
-        Image image = ResourcesUtil.getBundledImage(iconName);
-        return image == null ? null : new ImageIcon(image);
+    public static UIDefaults setDefaults(UIDefaults defaults) {
+        defaults.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
+
+        // FIXME: VLDocking values have to be set to the "developer defaults"
+        // not the "LAF defaults" because that's where
+        // DockingUISettings#installUI puts them
+        UIManager.put("DockViewTitleBar.hide", getIcon("minimize.gif"));
+        UIManager.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif"));
+        UIManager.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif"));
+        UIManager.put("DockViewTitleBar.maximize", getIcon("maximize.gif"));
+        UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("maximize.rollover.gif"));
+        UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("maximize.pressed.gif"));
+        UIManager.put("DockViewTitleBar.restore", getIcon("restore.gif"));
+        UIManager.put("DockViewTitleBar.restore.rollover", getIcon("restore.rollover.gif"));
+        UIManager.put("DockViewTitleBar.restore.pressed", getIcon("restore.pressed.gif"));
+        UIManager.put("DockViewTitleBar.dock", getIcon("restore.gif"));
+        UIManager.put("DockViewTitleBar.dock.rollover", getIcon("restore.rollover.gif"));
+        UIManager.put("DockViewTitleBar.dock.pressed", getIcon("restore.pressed.gif"));
+        UIManager.put("DockViewTitleBar.float", getIcon("undock.gif"));
+        UIManager.put("DockViewTitleBar.float.rollover", getIcon("undock.rollover.gif"));
+        UIManager.put("DockViewTitleBar.float.pressed", getIcon("undock.pressed.gif"));
+        UIManager.put("DockViewTitleBar.attach", getIcon("dock.gif"));
+        UIManager.put("DockViewTitleBar.attach.rollover", getIcon("dock.rollover.gif"));
+        UIManager.put("DockViewTitleBar.attach.pressed", getIcon("dock.pressed.gif"));
+        UIManager.put("DockViewTitleBar.menu.hide", getIcon("minimize.gif"));
+        UIManager.put("DockViewTitleBar.menu.maximize", getIcon("maximize.gif"));
+        UIManager.put("DockViewTitleBar.menu.restore", getIcon("restore.gif"));
+        UIManager.put("DockViewTitleBar.menu.dock", getIcon("restore.gif"));
+        UIManager.put("DockViewTitleBar.menu.float", getIcon("undock.gif"));
+        UIManager.put("DockViewTitleBar.menu.attach", getIcon("dock.gif"));
+        UIManager.put("DockTabbedPane.menu.hide", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.maximize", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.float", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif"));
+        UIManager.put("DragControler.detachCursor", getIcon("undock.gif").getImage());
+        return defaults;
     }
 }

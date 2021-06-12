@@ -32,9 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -58,57 +56,73 @@ import org.omegat.util.StringUtil;
 public final class PluginInstaller {
 
     public static Boolean install(final File pluginFile) {
+        Path pluginJarFile;
+        PluginInformation info;
         try {
-            PluginsManager pluginsManager = new PluginsManager();
             // unpack or copy jar to temporary directory
             Path tmporaryDir = Files.createTempDirectory("omegat");
-            Path pluginJarFile = unpackPlugin(pluginFile, tmporaryDir);
+            pluginJarFile = unpackPlugin(pluginFile, tmporaryDir);
             pluginJarFile.toFile().deleteOnExit();
             tmporaryDir.toFile().deleteOnExit();
-            // check manifest
-            Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile.toFile());
-            PluginInformation info = pluginInfo.stream().findFirst().orElse(null);
-            final Map<String, String> installConfig = new HashMap<>();
-            // detect current installation
-            PluginInformation currentInfo = null;
-            if (info != null) {
-                currentInfo = pluginsManager.getInstalledPluginInformation(info);
-            }
-            String pluginName = pluginInfo.stream().findFirst().map(PluginInformation::getName).orElse("");
-            String version = "";
-            for (PluginInformation plugin : pluginInfo) {
-                if (plugin.getVersion() != null) {
-                    version = plugin.getVersion();
-                    break;
-                }
-            }
-            String message;
-            if (currentInfo != null) {
-                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,
-                        currentInfo.getVersion(), version);
-            } else {
-                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_INSTALL"), pluginName,
-                        version);
-            }
-            // confirm installation
-            int result = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                    message,
+        } catch (IOException ex) {
+            // wrong file specified
+            Log.logErrorRB("PREFS_PLUGINS_INSTALATION_FAILED");
+            JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                    OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
                     OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
-            if (result == JOptionPane.YES_OPTION) {
-                try {
-                    if (currentInfo != null) {
-                        FileUtils.forceDeleteOnExit(currentInfo.getJarFile());
-                    }
-                    File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
-                    FileUtils.copyFileToDirectory(pluginJarFile.toFile(), homePluginsDir, true);
-                    return true;
-                } catch (IOException ex) {
-                    Log.log(ex);
+                    JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // check manifest
+        PluginsManager pluginsManager = new PluginsManager();
+        Set<PluginInformation> pluginInfo = pluginsManager.parsePluginJarFileManifest(pluginJarFile.toFile());
+        info = pluginInfo.stream().findFirst().orElse(null);
+        if (info == null) {
+            // it is not a plugin jar file.
+            Log.logErrorRB("PREFS_PLUGINS_INSTALATION_FAILED");
+            JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                    OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
+                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
+                    JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Get plugin name and version to be installed.
+        String pluginName = info.getName();
+        String version = info.getVersion();
+        // detect current installation
+        PluginInformation currentInfo = pluginsManager.getInstalledPluginInformation(info);
+        String message;
+        if (currentInfo != null) {
+            message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,
+                    currentInfo.getVersion(), version);
+        } else {
+            message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_INSTALL"), pluginName,
+                    version);
+        }
+
+        // confirm installation
+        int result = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                message,
+                OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                if (currentInfo != null) {
+                    FileUtils.forceDeleteOnExit(currentInfo.getJarFile());
                 }
+                File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
+                FileUtils.copyFileToDirectory(pluginJarFile.toFile(), homePluginsDir, true);
+                return true;
+            } catch (IOException ex) {
+                Log.logErrorRB("PREFS_PLUGINS_INSTALLATION_FAILED");
+                Log.log(ex);
+                JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                        OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
+                        OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
+                        JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return false;
     }

@@ -286,7 +286,7 @@ public final class PluginsManager {
     }
 
     private String getPluginInformationKey(PluginInformation info) {
-        return info.getId();
+        return info.getClassName();
     }
 
     /**

@@ -37,6 +37,15 @@ import javax.swing.UIManager;
 
 import org.omegat.util.gui.ResourcesUtil;
 
+/**
+ * A LAF class that delegates almost everything to the system LAF.
+ *
+ * Implementers must provide a distinct identity ({@link #getName()},
+ * {@link #getID()}, {@link #getDescription()}). They should also probably
+ * supply novel defaults ({@link #initialize()}, {@link #getDefaults()}).
+ *
+ * @author Aaron Madlon-Kay
+ */
 public abstract class DelegatingLookAndFeel extends LookAndFeel {
     /**
      * Load icon from classpath.

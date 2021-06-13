@@ -91,9 +91,6 @@ public final class UIDesignManager {
      * Initialize docking subsystem.
      */
     public static void initialize(ClassLoader mainClassLoader) throws IOException {
-        // load colors defaults
-        loadDefaultColors();
-
         // Install VLDocking defaults
         DockingUISettings.getInstance().installUI();
         DockableContainerFactory.setFactory(new CustomContainerFactory());
@@ -101,6 +98,9 @@ public final class UIDesignManager {
         // Set Look And Feel
         String theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, Preferences.THEME_CLASS_NAME_DEFAULT);
         UIDesignManager.setTheme(theme, mainClassLoader);
+
+        // load colors defaults
+        loadDefaultColors();
 
         // Enable animated popup when mousing over minimized tab
         AutoHidePolicy.getPolicy().setExpandMode(ExpandMode.EXPAND_ON_ROLLOVER);

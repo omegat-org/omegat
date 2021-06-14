@@ -78,7 +78,7 @@ public final class UIDesignManager {
     public static void setTheme(String lafClassName, ClassLoader classLoader) {
         try {
             Class<?> clazz = classLoader.loadClass(lafClassName);
-            UIManager.setLookAndFeel((LookAndFeel) clazz.newInstance());
+            UIManager.setLookAndFeel((LookAndFeel) clazz.getDeclaredConstructor().newInstance());
         } catch (Exception e) {
             Log.log(e);
             if (!lafClassName.equals(Preferences.THEME_CLASS_NAME_DEFAULT)) {

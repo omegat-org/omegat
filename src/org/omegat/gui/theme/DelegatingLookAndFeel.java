@@ -62,7 +62,8 @@ public abstract class DelegatingLookAndFeel extends LookAndFeel {
     protected final LookAndFeel systemLookAndFeel;
 
     public DelegatingLookAndFeel() throws Exception {
-        systemLookAndFeel = (LookAndFeel) Class.forName(UIManager.getSystemLookAndFeelClassName()).newInstance();
+        systemLookAndFeel = (LookAndFeel) Class.forName(UIManager.getSystemLookAndFeelClassName())
+                .getDeclaredConstructor().newInstance();
     }
 
     @Override

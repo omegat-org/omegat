@@ -38,6 +38,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.omegat.core.plugins.PluginInstaller;
 import org.omegat.util.HttpConnectionUtils;
@@ -49,6 +51,12 @@ public class PluginDownloadThread extends LongProcessThread {
     private final String archive;
     private final String checksum;
     private final HashMap<String, String> headers = new HashMap<>();
+    private static final Set<String> mimetype = new HashSet<>();
+
+    static {
+        mimetype.add("application/octet-stream");
+        mimetype.add("application/java-archive");
+    }
 
     public PluginDownloadThread(URL url, String sha256Sum, String filename) throws UnsupportedEncodingException {
         this.url = url;
@@ -63,7 +71,7 @@ public class PluginDownloadThread extends LongProcessThread {
             File temporaryFilePath = new File(temporaryDir.toFile(), archive);
             temporaryDir.toFile().deleteOnExit();
             Log.log("Start downloading from " + url.toString());
-            boolean result = HttpConnectionUtils.downloadBinaryFile(url, headers, temporaryFilePath);
+            boolean result = HttpConnectionUtils.downloadBinaryFile(url, headers, mimetype, temporaryFilePath);
             if (!result) {
                 Log.log("Failed to download plugin file.");
             } else if (!checksum.equals(calculateSha256(temporaryFilePath))) {

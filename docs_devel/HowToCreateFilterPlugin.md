@@ -38,25 +38,16 @@ left to right as described in the table below:
 | License     | Plugin-License                                         |
 | Category    | Plugin-Category                                        |
 
-These parameters can be set by configuring `grade.properties` file.
-It is like as follows:
 
-```properties
-plugin.name=DocuWiki
-plugin.category=filter
-plugin.link=https://github.com/omegat-org/plugin-skeleton
-plugin.author=OmegaT team
-plugin.description=Sample project for development
-plugin.license=GNU General Public License version 3
-```
-
-### plugins for OmegaT 4.3.0 and up
+### plugins for OmegaT 3.0.1 and up
 A plugin should be declared in `META-INF/MANIFEST.MF`:
 
     [Plugin-Name: …]
     [Plugin-Version: x.y.z]
     [Plugin-Author: …]
     [Plugin-Description: …]
+    [Plugin-Link: https://..]
+    [Plugin-Category: filter]
     OmegaT-Plugins: <classname>
 
 where classname is the fully qualified classname of the plugin's initialization class. Multiple classnames can be defined, 

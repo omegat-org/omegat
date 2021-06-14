@@ -52,6 +52,7 @@ public class PluginDetailHeader extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         labelCategory = new javax.swing.JLabel();
         installButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         labelPluginName = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(32876, 64));
@@ -65,7 +66,7 @@ public class PluginDetailHeader extends javax.swing.JPanel {
         jPanel3.setMaximumSize(new java.awt.Dimension(32767, 32));
         jPanel3.setMinimumSize(new java.awt.Dimension(100, 32));
         jPanel3.setPreferredSize(new java.awt.Dimension(100, 32));
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout();
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT);
         flowLayout1.setAlignOnBaseline(true);
         jPanel3.setLayout(flowLayout1);
 
@@ -77,9 +78,13 @@ public class PluginDetailHeader extends javax.swing.JPanel {
 
         jPanel2.add(jPanel3);
 
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
         labelPluginName.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         labelPluginName.setText("Name");
-        jPanel2.add(labelPluginName);
+        jPanel1.add(labelPluginName);
+
+        jPanel2.add(jPanel1);
 
         add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
@@ -87,6 +92,7 @@ public class PluginDetailHeader extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton installButton;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     javax.swing.JLabel labelCategory;

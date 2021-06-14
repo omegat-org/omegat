@@ -65,7 +65,6 @@ public class PluginsPreferencesPanel extends JPanel {
         browsePluginsButton = new javax.swing.JButton();
         messageLabel = new javax.swing.JLabel();
         operationPanel = new javax.swing.JPanel();
-        restartOmegatButton = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         installFromDiskButton = new javax.swing.JButton();
 
@@ -121,15 +120,6 @@ public class PluginsPreferencesPanel extends JPanel {
         pluginsInfoTab.getAccessibleContext().setAccessibleName("plugins information");
 
         operationPanel.setLayout(new javax.swing.BoxLayout(operationPanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        org.openide.awt.Mnemonics.setLocalizedText(restartOmegatButton, "Restart OmegaT");
-        restartOmegatButton.setToolTipText("Restart OmegaT");
-        restartOmegatButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                restartOmegatButtonActionPerformed(evt);
-            }
-        });
-        operationPanel.add(restartOmegatButton);
         operationPanel.add(filler1);
 
         org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, "Install from Disk");
@@ -137,10 +127,6 @@ public class PluginsPreferencesPanel extends JPanel {
 
         add(operationPanel);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void restartOmegatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartOmegatButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_restartOmegatButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSplitPane availablePlugins;
@@ -157,7 +143,6 @@ public class PluginsPreferencesPanel extends JPanel {
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
     private javax.swing.JTabbedPane pluginsInfoTab;
-    javax.swing.JButton restartOmegatButton;
     private javax.swing.JScrollPane scrollTable;
     javax.swing.JTable tableAvailablePluginsInfo;
     javax.swing.JTable tablePluginsInfo;

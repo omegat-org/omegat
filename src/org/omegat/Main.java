@@ -114,8 +114,6 @@ public final class Main {
     /** Execution mode. */
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
-    private static Boolean restartRequired = false;
-
     public static void main(String[] args) {
         if (args.length > 0 && (CLIParameters.HELP_SHORT.equals(args[0])
                 || CLIParameters.HELP.equals(args[0]))) {
@@ -218,14 +216,6 @@ public final class Main {
         }
     }
 
-    public static void setRestartRequired() {
-        restartRequired = true;
-    }
-
-    public static Boolean isRestartRequired() {
-        return restartRequired;
-    }
-
     public static void restartGUI(String projectDir) {
         Log.log("===         Restart OmegaT           ===");
         String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
@@ -246,7 +236,7 @@ public final class Main {
             builder.start();
             System.exit(0);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.log(e);
         }
     }
 

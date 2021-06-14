@@ -39,15 +39,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import org.omegat.Main;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.core.data.RemotePluginInformation;
 import org.omegat.core.plugins.PluginInstaller;
 import org.omegat.core.plugins.PluginsManager;
 import org.omegat.gui.dialogs.ChoosePluginFile;
-import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DesktopWrapper;
@@ -126,8 +123,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 remotePluginDetailHeader.installButton.setEnabled(false);
                 boolean result = PluginsManager.downloadAndInstallPlugin(info);
                 if (result) {
-                    Main.setRestartRequired();
-                    panel.restartOmegatButton.setEnabled(true);
+                    setRestartRequired(result);
                 }
             });
             StringBuilder detailTextBuilder = new StringBuilder(PluginsManager.formatDetailText(model.getValueAt(rowIndex)));
@@ -169,17 +165,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             }
         });
-        panel.restartOmegatButton.setText(OStrings.getString("PREFS_PLUGINS_RESTART"));
-        panel.restartOmegatButton.addActionListener(e -> {
-            String projectDir = Core.getProject().isProjectLoaded()
-                    ? Core.getProject().getProjectProperties().getProjectRoot()
-                    : null;
-            MainWindowMenuHandler.prepareForExit((MainWindow) Core.getMainWindow(), () -> {
-                Main.restartGUI(projectDir);
-            });
-
-        });
-        panel.restartOmegatButton.setEnabled(Main.isRestartRequired());
 
         panel.installFromDiskButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK"));
         panel.installFromDiskButton.addActionListener(e -> {
@@ -188,8 +173,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             if (choosePluginFileResult == JFileChooser.APPROVE_OPTION) {
                 Boolean result = PluginInstaller.install(choosePluginFile.getSelectedFile());
                 if (result) {
-                    Main.setRestartRequired();
-                    panel.restartOmegatButton.setEnabled(true);
+                    setRestartRequired(result);
                 }
             }
         });

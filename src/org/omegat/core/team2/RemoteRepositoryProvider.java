@@ -157,9 +157,9 @@ public class RemoteRepositoryProvider {
     protected Mapping oneMapping(String path) {
         List<Mapping> mappings = getMappings(path);
         if (mappings.size() > 1) {
-            throw new RuntimeException("Multiple mappings for file '"+path+"'");
+            throw new RuntimeException("Multiple mappings for file '" + path + "'");
         } else if (mappings.isEmpty()) {
-            throw new RuntimeException("There is no mapping for file '"+path+"'");
+            throw new RuntimeException("There is no mapping for file '" + path + "'");
         }
 
         return mappings.get(0);
@@ -428,7 +428,7 @@ public class RemoteRepositoryProvider {
                 copy(from, to, filterPrefix, repoMapping.getIncludes(), excludes, null);
             } else if (!from.exists()) {
                 //e.g. you opened an omegat.properties to download a team project, but it refers to a remote repo location that doesn't exist.
-                throw new RuntimeException("Location '"+withoutLeadingSlash(repoMapping.getRepository())+"' does not exist in repository "+repoDefinition.getUrl());
+                throw new RuntimeException("Location '" + withoutLeadingSlash(repoMapping.getRepository()) + "' does not exist in repository " + repoDefinition.getUrl());
             } else {
                 // file mapping
                 if (!filterPrefix.equals("/")) {

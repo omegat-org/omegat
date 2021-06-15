@@ -88,7 +88,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
 
     @Override
     public void setGlossarySupplier(IMTGlossarySupplier glossarySupplier) {
-    	this.glossarySupplier = glossarySupplier;
+        this.glossarySupplier = glossarySupplier;
     }
 
     @Override

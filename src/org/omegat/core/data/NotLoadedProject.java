@@ -54,10 +54,10 @@ public class NotLoadedProject implements IProject {
     }
 
     @Override
-    public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) 
+    public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception {
     }
-    
+
     @Override
     public void commitSourceFiles() throws Exception {
     }

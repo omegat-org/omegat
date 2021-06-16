@@ -99,6 +99,18 @@ public final class PluginUtils {
         public String getTypeValue() {
             return typeValue;
         }
+
+        public static PluginType getTypeByValue(String str) {
+            String sType = str.toLowerCase(Locale.ENGLISH);
+            for(PluginType v : values())
+            {
+                if(v.getTypeValue().equals(sType))
+                {
+                    return v;
+                }
+            }
+            throw new IllegalArgumentException("undefined : " + str);
+        }
     }
 
     protected static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
@@ -407,7 +419,7 @@ public final class PluginUtils {
             throws ClassNotFoundException {
         PluginType pType;
         try {
-            pType = PluginType.valueOf(sType.toUpperCase(Locale.ENGLISH));
+            pType = PluginType.getTypeByValue(sType);
         } catch (Exception ex) {
             pType = PluginType.UNKNOWN;
         }

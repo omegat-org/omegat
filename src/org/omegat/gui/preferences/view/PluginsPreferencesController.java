@@ -110,13 +110,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
             localPluginDetailHeader.labelPluginName.setText(info.getName());
             localPluginDetailHeader.labelCategory.setText(info.getCategory());
             if (info.getStatus().equals(PluginInformation.STATUS.UPGRADABLE)) {
-                localPluginDetailHeader.installButton.setText("Upgrade");
+                localPluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPGRADE"));
                 localPluginDetailHeader.installButton.setEnabled(true);
             } else if (info.getStatus().equals(PluginInformation.STATUS.BUNDLED)) {
-                localPluginDetailHeader.installButton.setText("Bundled");
+                localPluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_BUNDLED"));
                 localPluginDetailHeader.installButton.setEnabled(false);
             } else {
-                localPluginDetailHeader.installButton.setText("");
+                localPluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPTODATE"));
                 localPluginDetailHeader.installButton.setEnabled(false);
             }
             localPluginDetailsPane.setText(formatDetailText(model.getValueAt(rowIndex)));
@@ -136,14 +136,14 @@ public class PluginsPreferencesController extends BasePreferencesController {
             for(ActionListener act : remotePluginDetailHeader.installButton.getActionListeners()) {
                 remotePluginDetailHeader.installButton.removeActionListener(act);
             }
-            if (info.getStatus().equals(PluginInformation.STATUS.UPGRADABLE)) {
-                remotePluginDetailHeader.installButton.setText("Upgrade");
+            if (info.getStatus().equals(PluginInformation.STATUS.UNINSTALLED)) {
+                remotePluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL"));
                 remotePluginDetailHeader.installButton.setEnabled(true);
-            } else if (info.getStatus().equals(PluginInformation.STATUS.UNINSTALLED)) {
-                remotePluginDetailHeader.installButton.setText("Install");
+            } else if (info.getStatus().equals(PluginInformation.STATUS.UPGRADABLE)) {
+                remotePluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPGRADE"));
                 remotePluginDetailHeader.installButton.setEnabled(true);
             } else {
-                remotePluginDetailHeader.installButton.setText("");
+                remotePluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPTODATE"));
                 remotePluginDetailHeader.installButton.setEnabled(false);
             }
             remotePluginDetailHeader.installButton.addActionListener(e -> {
@@ -233,7 +233,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     static class InstalledPluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 5345248154613009632L;
-        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION", "THIRDPARTY"};
+        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION", "THIRDPARTY"};  // NOI18N
         private final Map<String, PluginInformation> listPlugins;
 
         public static final int COLUMN_CATEGORY = 0;
@@ -305,7 +305,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     static class AvailablePluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 52734789123814035L;
-        private static final String[] COLUMN_NAMES = { "STAT", "CATEGORY", "NAME", "VERSION" };
+        private static final String[] COLUMN_NAMES = { "STAT", "CATEGORY", "NAME", "VERSION" };  // NOI18N
         private final Map<String, RemotePluginInformation> listPlugins;
 
         public static final int COLUMN_STAT = 0;
@@ -364,11 +364,11 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 break;
             case COLUMN_STAT:
                 if (plugin.getStatus() == PluginInformation.STATUS.INSTALLED) {
-                    returnValue = "Installed";
+                    returnValue = OStrings.getString("PREFS_PLUGINS_UPTODATE");
                 } else if (plugin.getStatus() == PluginInformation.STATUS.UPGRADABLE){
-                    returnValue = "Upgradable";
+                    returnValue = OStrings.getString("PREFS_PLUGINS_UPGRADABLE");
                 } else {
-                    returnValue = "  ";
+                    returnValue = OStrings.getString("PREFS_PLUGINS_NEW");
                 }
                 break;
             default:

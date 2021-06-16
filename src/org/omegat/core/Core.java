@@ -83,6 +83,7 @@ import org.omegat.gui.properties.SegmentPropertiesArea;
 import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.UIDesignManager;
 
 /**
  * Class which contains all components instances.
@@ -226,13 +227,16 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(final Map<String, String> params) throws Exception {
+    public static void initializeGUI(ClassLoader classLoader, final Map<String, String> params) throws Exception {
         cmdLineParams = params;
 
         // 1. Initialize project
         currentProject = new NotLoadedProject();
 
-        // 2. Initialize application frame
+        // 2. Initialize theme
+        UIDesignManager.initialize(classLoader);
+
+        // 3. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
 
@@ -253,7 +257,7 @@ public final class Core {
         segmenter = new Segmenter(Preferences.getSRX());
         filterMaster = new FilterMaster(Preferences.getFilters());
 
-        // 3. Initialize other components. They add themselves to the main window.
+        // 4. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);
         tagValidation = new TagValidationTool();
         issuesWindow = new IssuesPanelController(me);

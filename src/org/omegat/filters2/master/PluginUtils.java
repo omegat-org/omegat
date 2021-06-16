@@ -87,6 +87,7 @@ public final class PluginUtils {
         GLOSSARY("glossary"),
         DICTIONARY("dictionary"),
         MISCELLANEOUS("miscellaneous"),
+        THEME("theme"),
         UNKNOWN("Undefined");
 
         private final String typeValue;
@@ -147,6 +148,14 @@ public final class PluginUtils {
                         loadFromManifest(m, pluginsClassLoader, null);
                     } else {
                         loadFromManifest(m, pluginsClassLoader, mu);
+                    }
+                    if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
+                        String target = mu.toString();
+                        for (URL url : urls) {
+                            if (target.contains(url.toString())) {
+                                THEME_PLUGIN_JARS.add(url);
+                            }
+                        }
                     }
                 }
             }
@@ -272,12 +281,18 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
+    public static List<URL> getThemePluginJars() {
+        return THEME_PLUGIN_JARS;
+    }
+
     protected static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
     protected static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
     protected static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
     protected static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
     protected static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
     protected static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
+
+    protected static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();
 
     /**
      * Parse one manifest file.
@@ -286,7 +301,7 @@ public final class PluginUtils {
      *            manifest
      * @param classLoader
      *            classloader
-     * @throws ClassNotFoundException when fails to load class.
+     * @throws ClassNotFoundException when plugin class not found.
      */
     protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader, final URL mu)
             throws ClassNotFoundException {
@@ -355,7 +370,7 @@ public final class PluginUtils {
                 Method load = p.getMethod("unloadPlugins");
                 load.invoke(p);
             } catch (Throwable ex) {
-                Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", p.getClass().getSimpleName(), ex.getMessage());
+                Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", p.getSimpleName(), ex.getMessage());
             }
         }
     }

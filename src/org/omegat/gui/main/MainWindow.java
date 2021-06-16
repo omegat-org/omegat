@@ -116,7 +116,6 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     /** Creates new form MainWindow */
     public MainWindow() throws IOException {
-        UIDesignManager.initialize();
 
         menu = new MainWindowMenu(this, new MainWindowMenuHandler(this));
 

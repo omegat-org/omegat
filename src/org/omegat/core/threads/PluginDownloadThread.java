@@ -50,6 +50,7 @@ public class PluginDownloadThread extends LongProcessThread {
     private final URL url;
     private final String archive;
     private final String checksum;
+    private final PluginInstaller caller;
     private final HashMap<String, String> headers = new HashMap<>();
     private static final Set<String> mimetype = new HashSet<>();
 
@@ -58,15 +59,17 @@ public class PluginDownloadThread extends LongProcessThread {
         mimetype.add("application/java-archive");
     }
 
-    public PluginDownloadThread(URL url, String sha256Sum, String filename) throws UnsupportedEncodingException {
+    public PluginDownloadThread(URL url, String sha256Sum, String filename, PluginInstaller caller) throws UnsupportedEncodingException {
         this.url = url;
         this.checksum = sha256Sum;
         this.archive = filename;
+        this.caller = caller;
     }
 
     @Override
     public void run() {
         try {
+            caller.setThread(this);
             Path temporaryDir = Files.createTempDirectory("omegat");
             File temporaryFilePath = new File(temporaryDir.toFile(), archive);
             temporaryDir.toFile().deleteOnExit();
@@ -77,7 +80,7 @@ public class PluginDownloadThread extends LongProcessThread {
             } else if (!checksum.equals(calculateSha256(temporaryFilePath))) {
                 Log.log("Checksum error of plugin file.");
             } else {
-                PluginInstaller.install(temporaryFilePath, false);
+                caller.install(temporaryFilePath, true);
             }
         } catch (IOException | NoSuchAlgorithmException e) {
             e.printStackTrace();

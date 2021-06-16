@@ -77,7 +77,7 @@ public class PluginDownloadThread extends LongProcessThread {
             } else if (!checksum.equals(calculateSha256(temporaryFilePath))) {
                 Log.log("Checksum error of plugin file.");
             } else {
-                PluginInstaller.install(temporaryFilePath);
+                PluginInstaller.install(temporaryFilePath, false);
             }
         } catch (IOException | NoSuchAlgorithmException e) {
             e.printStackTrace();

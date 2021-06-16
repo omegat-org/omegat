@@ -55,7 +55,7 @@ import org.omegat.util.StringUtil;
  */
 public final class PluginInstaller {
 
-    public static Boolean install(final File pluginFile) {
+    public static Boolean install(final File pluginFile, final boolean foreground) {
         Path pluginJarFile;
         PluginInformation info;
         try {
@@ -67,10 +67,6 @@ public final class PluginInstaller {
         } catch (IOException ex) {
             // wrong file specified
             Log.logErrorRB("PREFS_PLUGINS_INSTALATION_FAILED");
-            JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                    OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
-                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                    JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -81,10 +77,6 @@ public final class PluginInstaller {
         if (info == null) {
             // it is not a plugin jar file.
             Log.logErrorRB("PREFS_PLUGINS_INSTALATION_FAILED");
-            JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                    OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
-                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                    JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -103,11 +95,11 @@ public final class PluginInstaller {
         }
 
         // confirm installation
-        int result = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                message,
-                OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
+        if (foreground ||
+                JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                    message,
+                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE)) {
             try {
                 if (currentInfo != null) {
                     FileUtils.forceDeleteOnExit(currentInfo.getJarFile());
@@ -118,10 +110,6 @@ public final class PluginInstaller {
             } catch (IOException ex) {
                 Log.logErrorRB("PREFS_PLUGINS_INSTALLATION_FAILED");
                 Log.log(ex);
-                JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                        OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
-                        OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                        JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
             }
         }
         return false;

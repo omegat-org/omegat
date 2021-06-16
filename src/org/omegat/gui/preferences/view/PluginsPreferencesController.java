@@ -28,7 +28,9 @@
 package org.omegat.gui.preferences.view;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.util.Map;
 import java.util.Vector;
 
@@ -44,8 +46,10 @@ import org.omegat.core.data.PluginInformation;
 import org.omegat.core.data.RemotePluginInformation;
 import org.omegat.core.plugins.PluginInstaller;
 import org.omegat.core.plugins.PluginsManager;
+import org.omegat.core.threads.PluginDownloadThread;
 import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
@@ -121,9 +125,15 @@ public class PluginsPreferencesController extends BasePreferencesController {
             }
             remotePluginDetailHeader.installButton.addActionListener(e -> {
                 remotePluginDetailHeader.installButton.setEnabled(false);
-                boolean result = PluginsManager.downloadAndInstallPlugin(info);
-                if (result) {
-                    setRestartRequired(result);
+                try {
+                    URL downloadUrl = new URL(info.getRemoteJarFileUrl());
+                    String jarFilename = info.getJarFilename();
+                    String sha256sum = info.getSha256Sum();
+                    PluginDownloadThread downloadThread = new PluginDownloadThread(downloadUrl, sha256sum, jarFilename);
+                    downloadThread.start();
+                    setRestartRequired(true);
+                } catch (IOException ex) {
+                    Log.log(ex);
                 }
             });
             StringBuilder detailTextBuilder = new StringBuilder(PluginsManager.formatDetailText(model.getValueAt(rowIndex)));
@@ -171,9 +181,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
             int choosePluginFileResult = choosePluginFile.showOpenDialog(Core.getMainWindow().getApplicationFrame());
             if (choosePluginFileResult == JFileChooser.APPROVE_OPTION) {
-                Boolean result = PluginInstaller.install(choosePluginFile.getSelectedFile());
-                if (result) {
-                    setRestartRequired(result);
+                if (PluginInstaller.install(choosePluginFile.getSelectedFile(), true)) {
+                    setRestartRequired(true);
+                } else {
+                    JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                            OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
+                            OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
+                            JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

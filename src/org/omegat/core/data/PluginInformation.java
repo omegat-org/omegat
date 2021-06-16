@@ -34,7 +34,7 @@ import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import org.omegat.core.plugins.PluginsManager;
+import org.omegat.filters2.master.PluginUtils;
 
 public class PluginInformation implements Comparable<PluginInformation> {
     private static final String PLUGIN_NAME = "Plugin-Name";
@@ -110,12 +110,12 @@ public class PluginInformation implements Comparable<PluginInformation> {
 
     private String categoryName(final String key1, final String key2) {
         String key = key1 != null ? key1 : key2;
-        Optional<PluginsManager.PluginType> type = Arrays.stream(PluginsManager.PluginType.values()).filter(v ->
+        Optional<PluginUtils.PluginType> type = Arrays.stream(PluginUtils.PluginType.values()).filter(v ->
                 v.getTypeValue().equals(key)).findFirst();
         if (type.isPresent()) {
             return type.get().getTypeValue();
         }
-        return PluginsManager.PluginType.UNKNOWN.getTypeValue();
+        return PluginUtils.PluginType.UNKNOWN.getTypeValue();
     }
 
     private String findName(Attributes attrs) {

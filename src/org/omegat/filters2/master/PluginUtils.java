@@ -298,10 +298,15 @@ public final class PluginUtils {
     }
 
     protected static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
+
     protected static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
+
     protected static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
+
     protected static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
+
     protected static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
+
     protected static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
 
     protected static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();

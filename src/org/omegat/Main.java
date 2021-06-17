@@ -48,11 +48,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
+
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import com.vlsolutions.swing.docking.DockingDesktop;
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
 import org.omegat.convert.ConvertConfigs;
@@ -84,6 +84,8 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
 
+import com.vlsolutions.swing.docking.DockingDesktop;
+
 /**
  * The main OmegaT class, used to launch the program.
  *
@@ -108,9 +110,6 @@ public final class Main {
     /** Execution command line parameters. */
     protected static final Map<String, String> PARAMS = new TreeMap<>();
 
-    /** JVM parameters. */
-    protected static final List<String> JVMPARAMS = new ArrayList<>();
-
     /** Execution mode. */
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
@@ -125,10 +124,6 @@ public final class Main {
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
         }
-
-        // retrieve JVM parameters.
-        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-        JVMPARAMS.addAll(runtimeMxBean.getInputArguments());
 
         // Workaround for bug #812. Remove this when appropriate; see
         // https://sourceforge.net/p/omegat/bugs/812/

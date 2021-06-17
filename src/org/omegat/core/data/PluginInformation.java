@@ -44,9 +44,9 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private static final String PLUGIN_CATEGORY = "Plugin-Category";
     private static final String PLUGIN_LINK = "Plugin-Link";
     private static final String PLUGIN_TYPE = "OmegaT-Plugin";
-    private final String PLUGIN_JAR_URL = "Plugin-Download-Url";
-    private final String PLUGIN_JAR_FILENAME = "Plugin-Jar-Filename";
-    private final String PLUGIN_SHA256SUM = "Plugin-Sha256Sum";
+    private static final String PLUGIN_JAR_URL = "Plugin-Download-Url";
+    private static final String PLUGIN_JAR_FILENAME = "Plugin-Jar-Filename";
+    private static final String PLUGIN_SHA256SUM = "Plugin-Sha256Sum";
 
     private static final String IMPLEMENTATION_VENDOR = "Implementation-Vendor";
     private static final String IMPLEMENTATION_TITLE = "Implementation-Title";
@@ -54,13 +54,6 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private static final String BUNDLE_VERSION = "Bundle-Version";
     private static final String BUNDLE_NAME = "Bundle-Name";
     private static final String BUILT_BY = "Built-By";
-
-    public enum Action {
-        NONE,
-        REMOVE,
-        INSTALL,
-        UPGRADE
-    }
 
     public enum Status {
         INSTALLED,
@@ -77,10 +70,9 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private final String category;
     private final String link;
     private final URL url;
-    private Status status;
-    private Action action;
 
-    // rmeote Plugin information
+    // for manage and install
+    private Status status;
     private String remoteJarFileUrl;
     private String jarFilename;
     private String sha256Sum;
@@ -99,7 +91,6 @@ public class PluginInformation implements Comparable<PluginInformation> {
         link = attrs.getValue(PLUGIN_LINK);
         category = categoryName(attrs.getValue(PLUGIN_CATEGORY), attrs.getValue(PLUGIN_TYPE));
         url = mu;
-        action = Action.NONE;
         this.status = status;
 
         // rmeote plugin information
@@ -117,7 +108,6 @@ public class PluginInformation implements Comparable<PluginInformation> {
         category = categoryName(key, null);
         link = null;
         url = mu;
-        action = Action.NONE;
         this.status = status;
         remoteJarFileUrl = null;
         jarFilename = null;
@@ -195,60 +185,52 @@ public class PluginInformation implements Comparable<PluginInformation> {
         return null;
     }
 
-    public final String getClassName() {
+    public String getClassName() {
         return className;
     }
 
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
-    public final String getVersion() {
+    public String getVersion() {
         return version;
     }
 
-    public final String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public final String getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public final Enum<Action> getAction() {
-        return action;
-    }
-
-    public final String getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public final String getLink() {
+    public String getLink() {
         return link;
     }
 
-    public final File getJarFile() {
+    public File getJarFile() {
         return new File(url.getPath().substring(5, url.getPath().indexOf("!")));
     }
 
-    public final boolean isBundled() {
+    public boolean isBundled() {
         return status == Status.BUNDLED;
     }
 
-    public final boolean isInstalled() {
+    public boolean isInstalled() {
         return status == Status.INSTALLED || status == Status.BUNDLED;
     }
 
-    public final Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public final void setStatus(Status s) {
+    public void setStatus(Status s) {
         status = s;
-    }
-
-    public final void setAction(Action a) {
-        action = a;
     }
 
     public String getRemoteJarFileUrl() {
@@ -264,7 +246,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("PluginInformation [className=").append(className).append(", name=").append(name)
                 .append(", version=").append(version).append(", author=").append(author).append(", description=")
@@ -273,7 +255,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((author == null) ? 0 : author.hashCode());
@@ -284,7 +266,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
     }
 
     @Override
-    public final boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -324,7 +306,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
     }
 
     @Override
-    public final int compareTo(PluginInformation pluginInformation) {
+    public int compareTo(PluginInformation pluginInformation) {
         int score;
         if (this == pluginInformation || className.equals(pluginInformation.getClass().getName())) {
             return version.compareTo(pluginInformation.getVersion());

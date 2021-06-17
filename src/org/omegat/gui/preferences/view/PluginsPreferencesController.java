@@ -28,7 +28,6 @@
 package org.omegat.gui.preferences.view;
 
 import java.awt.event.ActionListener;
-import java.net.URI;
 import java.util.Map;
 import java.util.Vector;
 
@@ -41,12 +40,10 @@ import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
-import org.omegat.core.data.RemotePluginInformation;
 import org.omegat.core.plugins.PluginInstaller;
 import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 
 
@@ -58,10 +55,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
     private PluginsPreferencesPanel panel;
-    private PluginDetailsPane localPluginDetailsPane;
-    private PluginDetailsPane remotePluginDetailsPane;
-    private PluginDetailHeader localPluginDetailHeader;
-    private PluginDetailHeader remotePluginDetailHeader;
+    private PluginDetailsPane pluginDetailsPane;
+    private PluginDetailHeader pluginDetailHeader;
     private PluginInstaller pluginInstaller;
 
     /**
@@ -101,57 +96,36 @@ public class PluginsPreferencesController extends BasePreferencesController {
     }
 
     final void selectRowAction(ListSelectionEvent evt) {
-        int rowIndex = panel.tablePluginsInfo.convertRowIndexToModel(panel.tablePluginsInfo.getSelectedRow());
+        int rowIndex = panel.tablePluginsInfo.convertRowIndexToModel(
+                panel.tablePluginsInfo.getSelectedRow());
         if (rowIndex == -1) {
-            localPluginDetailsPane.setText("");
+            pluginDetailsPane.setText("");
         } else {
-            InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
+            PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
             PluginInformation info = model.getValueAt(rowIndex);
-            localPluginDetailHeader.labelPluginName.setText(info.getName());
-            localPluginDetailHeader.labelCategory.setText(info.getCategory());
-            if (info.getStatus().equals(PluginInformation.Status.UPGRADABLE)) {
-                localPluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPGRADE"));
-                localPluginDetailHeader.installButton.setEnabled(true);
-            } else if (info.getStatus().equals(PluginInformation.Status.BUNDLED)) {
-                localPluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_BUNDLED"));
-                localPluginDetailHeader.installButton.setEnabled(false);
-            } else {
-                localPluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPTODATE"));
-                localPluginDetailHeader.installButton.setEnabled(false);
+            pluginDetailHeader.labelPluginName.setText(info.getName());
+            pluginDetailHeader.labelCategory.setText(info.getCategory());
+            for(ActionListener act : pluginDetailHeader.installButton.getActionListeners()) {
+                pluginDetailHeader.installButton.removeActionListener(act);
             }
-            localPluginDetailsPane.setText(formatDetailText(model.getValueAt(rowIndex)));
-        }
-    }
-
-    final void selectRowActionRemote(ListSelectionEvent evt) {
-        int rowIndex = panel.tableAvailablePluginsInfo.convertRowIndexToModel(
-                panel.tableAvailablePluginsInfo.getSelectedRow());
-        if (rowIndex == -1) {
-            remotePluginDetailsPane.setText("");
-        } else {
-            AvailablePluginInfoTableModel model = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
-            RemotePluginInformation info = model.getValueAt(rowIndex);
-            remotePluginDetailHeader.labelPluginName.setText(info.getName());
-            remotePluginDetailHeader.labelCategory.setText(info.getCategory());
-            for(ActionListener act : remotePluginDetailHeader.installButton.getActionListeners()) {
-                remotePluginDetailHeader.installButton.removeActionListener(act);
-            }
+            pluginDetailHeader.installButton.setEnabled(true);
             if (info.getStatus().equals(PluginInformation.Status.UNINSTALLED)) {
-                remotePluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL"));
-                remotePluginDetailHeader.installButton.setEnabled(true);
+                pluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL"));
             } else if (info.getStatus().equals(PluginInformation.Status.UPGRADABLE)) {
-                remotePluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPGRADE"));
-                remotePluginDetailHeader.installButton.setEnabled(true);
+                pluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPGRADE"));
+            } else if (info.getStatus().equals(PluginInformation.Status.BUNDLED)) {
+                pluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_BUNDLED"));
+                pluginDetailHeader.installButton.setEnabled(false);
             } else {
-                remotePluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPTODATE"));
-                remotePluginDetailHeader.installButton.setEnabled(false);
+                pluginDetailHeader.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPTODATE"));
+                pluginDetailHeader.installButton.setEnabled(false);
             }
-            remotePluginDetailHeader.installButton.addActionListener(e -> {
-                remotePluginDetailHeader.installButton.setEnabled(false);
+            pluginDetailHeader.installButton.addActionListener(e -> {
+                pluginDetailHeader.installButton.setEnabled(false);
                 pluginInstaller.installFromRemote(this, info);
             });
             StringBuilder detailTextBuilder = new StringBuilder(formatDetailText(model.getValueAt(rowIndex)));
-            remotePluginDetailsPane.setText(detailTextBuilder.toString());
+            pluginDetailsPane.setText(detailTextBuilder.toString());
         }
     }
 
@@ -160,8 +134,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
         return OStrings.getString("PREFS_TITLE_PLUGINS");
     }
 
-    static InstalledPluginInfoTableModel getInstalledPluginInfoTableModel() {
-        return new InstalledPluginInfoTableModel();
+    static PluginInfoTableModel getInstalledPluginInfoTableModel() {
+        return new PluginInfoTableModel();
     }
 
     static AvailablePluginInfoTableModel getAvailablePluginInfoTableModel() {
@@ -170,26 +144,12 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new PluginsPreferencesPanel();
-        localPluginDetailHeader = new PluginDetailHeader();
-        localPluginDetailsPane = new PluginDetailsPane();
-        remotePluginDetailHeader = new PluginDetailHeader();
-        remotePluginDetailsPane = new PluginDetailsPane();
-        panel.panelPluginDetails.add(localPluginDetailHeader);
-        panel.panelPluginDetails.add(localPluginDetailsPane);
-        panel.panelAvailablePluginDetails.add(remotePluginDetailHeader);
-        panel.panelAvailablePluginDetails.add(remotePluginDetailsPane);
+        pluginDetailHeader = new PluginDetailHeader();
+        pluginDetailsPane = new PluginDetailsPane();
+        panel.panelPluginDetails.add(pluginDetailHeader);
+        panel.panelPluginDetails.add(pluginDetailsPane);
 
         TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
-        TableColumnSizer.autoSize(panel.tableAvailablePluginsInfo, 0, true);
-        panel.browsePluginsButton.addActionListener(e -> {
-            try {
-                DesktopWrapper.browse(URI.create(PLUGINS_WIKI_URL));
-            } catch (Exception ex) {
-                JOptionPane.showConfirmDialog(panel, ex.getLocalizedMessage(),
-                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
         panel.installFromDiskButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK"));
         panel.installFromDiskButton.addActionListener(e -> {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
@@ -206,17 +166,11 @@ public class PluginsPreferencesController extends BasePreferencesController {
             }
         });
 
-        InstalledPluginInfoTableModel model = (InstalledPluginInfoTableModel) panel.tablePluginsInfo.getModel();
-        AvailablePluginInfoTableModel availableModel = (AvailablePluginInfoTableModel) panel.tableAvailablePluginsInfo.getModel();
-        TableRowSorter<InstalledPluginInfoTableModel> sorter = new TableRowSorter<>(model);
-        TableRowSorter<AvailablePluginInfoTableModel> availableSorter = new TableRowSorter<>(availableModel);
+        PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
+        TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
         panel.tablePluginsInfo.setRowSorter(sorter);
-        panel.tableAvailablePluginsInfo.setRowSorter(availableSorter);
-
         panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
-        panel.tableAvailablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowActionRemote);
         panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
-        panel.tableAvailablePluginsInfo.setPreferredScrollableViewportSize(panel.tableAvailablePluginsInfo.getPreferredSize());
     }
 
     @Override
@@ -231,17 +185,17 @@ public class PluginsPreferencesController extends BasePreferencesController {
     public void persist() {
     }
 
-    static class InstalledPluginInfoTableModel extends DefaultTableModel {
+    static class PluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 5345248154613009632L;
-        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION", "THIRDPARTY"};  // NOI18N
+        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION"}; // NOI18N
         private final Map<String, PluginInformation> listPlugins;
 
-        public static final int COLUMN_CATEGORY = 0;
-        public static final int COLUMN_NAME = 1;
-        public static final int COLUMN_VERSION = 2;
-        public static final int COLUMN_THIRDPARTY = 3;
+        public static final int COLUMN_STAT = 0;
+        public static final int COLUMN_CATEGORY = 1;
+        public static final int COLUMN_NAME = 2;
+        public static final int COLUMN_VERSION = 3;
 
-        public InstalledPluginInfoTableModel() {
+        public PluginInfoTableModel() {
             listPlugins = PluginInstaller.getInstalledPlugins();
         }
 
@@ -251,7 +205,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         @Override
         public final Class<?> getColumnClass(int columnIndex) {
-            if (columnIndex < COLUMN_THIRDPARTY) {
+            if (columnIndex < COLUMN_VERSION) {
                 return String.class;
             } else {
                 return Boolean.class;
@@ -293,8 +247,14 @@ public class PluginsPreferencesController extends BasePreferencesController {
             case COLUMN_CATEGORY:
                 returnValue = plugin.getCategory();
                 break;
-            case COLUMN_THIRDPARTY:
-                returnValue = !plugin.isBundled();
+            case COLUMN_STAT:
+                if (plugin.getStatus() == PluginInformation.Status.INSTALLED) {
+                    returnValue = OStrings.getString("PREFS_PLUGINS_UPTODATE");
+                } else if (plugin.getStatus() == PluginInformation.Status.UPGRADABLE){
+                    returnValue = OStrings.getString("PREFS_PLUGINS_UPGRADABLE");
+                } else {
+                    returnValue = OStrings.getString("PREFS_PLUGINS_NEW");
+                }
                 break;
             default:
                 throw new IllegalArgumentException("Invalid column index");
@@ -306,7 +266,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
     static class AvailablePluginInfoTableModel extends DefaultTableModel {
         private static final long serialVersionUID = 52734789123814035L;
         private static final String[] COLUMN_NAMES = { "STAT", "CATEGORY", "NAME", "VERSION" };  // NOI18N
-        private final Map<String, RemotePluginInformation> listPlugins;
+        private final Map<String, PluginInformation> listPlugins;
 
         public static final int COLUMN_STAT = 0;
         public static final int COLUMN_CATEGORY = 1;
@@ -314,10 +274,10 @@ public class PluginsPreferencesController extends BasePreferencesController {
         public static final int COLUMN_VERSION = 3;
 
         public AvailablePluginInfoTableModel() {
-            listPlugins = PluginInstaller.getAvailablePluginInformation();
+            listPlugins = PluginInstaller.getPluginInformations();
         }
 
-        public final RemotePluginInformation getValueAt(int rowIndex) {
+        public final PluginInformation getValueAt(int rowIndex) {
             return new Vector<>(listPlugins.values()).get(rowIndex);
 
         }

@@ -50,20 +50,11 @@ public class PluginsPreferencesPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pluginsInfoTab = new javax.swing.JTabbedPane();
-        installPlugins = new javax.swing.JSplitPane();
+        listPlugins = new javax.swing.JSplitPane();
         panelPluginsInfo = new javax.swing.JPanel();
         scrollTable = new javax.swing.JScrollPane();
         tablePluginsInfo = new javax.swing.JTable();
         panelPluginDetails = new javax.swing.JPanel();
-        availablePlugins = new javax.swing.JSplitPane();
-        panelAvalablePluginsInfo = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableAvailablePluginsInfo = new javax.swing.JTable();
-        panelAvailablePluginDetails = new javax.swing.JPanel();
-        otherInfoPanel = new javax.swing.JPanel();
-        browsePluginsButton = new javax.swing.JButton();
-        messageLabel = new javax.swing.JLabel();
         operationPanel = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         installFromDiskButton = new javax.swing.JButton();
@@ -83,41 +74,12 @@ public class PluginsPreferencesPanel extends JPanel {
 
         panelPluginsInfo.add(scrollTable);
 
-        installPlugins.setLeftComponent(panelPluginsInfo);
+        listPlugins.setLeftComponent(panelPluginsInfo);
 
         panelPluginDetails.setLayout(new javax.swing.BoxLayout(panelPluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
-        installPlugins.setRightComponent(panelPluginDetails);
+        listPlugins.setRightComponent(panelPluginDetails);
 
-        pluginsInfoTab.addTab("Installed plugins", installPlugins);
-
-        panelAvalablePluginsInfo.setLayout(new javax.swing.BoxLayout(panelAvalablePluginsInfo, javax.swing.BoxLayout.LINE_AXIS));
-
-        tableAvailablePluginsInfo.setAutoCreateRowSorter(true);
-        tableAvailablePluginsInfo.setModel(PluginsPreferencesController.getAvailablePluginInfoTableModel());
-        tableAvailablePluginsInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tableAvailablePluginsInfo);
-
-        panelAvalablePluginsInfo.add(jScrollPane1);
-
-        availablePlugins.setLeftComponent(panelAvalablePluginsInfo);
-
-        panelAvailablePluginDetails.setLayout(new javax.swing.BoxLayout(panelAvailablePluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
-        availablePlugins.setRightComponent(panelAvailablePluginDetails);
-
-        pluginsInfoTab.addTab("Available plugins", availablePlugins);
-
-        org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
-        browsePluginsButton.setAlignmentY(0.0F);
-        otherInfoPanel.add(browsePluginsButton);
-
-        org.openide.awt.Mnemonics.setLocalizedText(messageLabel, OStrings.getString("PREFS_PLUGINS_AVAILABLE_ONLINE")); // NOI18N
-        messageLabel.setAlignmentY(0.0F);
-        otherInfoPanel.add(messageLabel);
-
-        pluginsInfoTab.addTab("Other plugin information", otherInfoPanel);
-
-        add(pluginsInfoTab);
-        pluginsInfoTab.getAccessibleContext().setAccessibleName("plugins information");
+        add(listPlugins);
 
         operationPanel.setLayout(new javax.swing.BoxLayout(operationPanel, javax.swing.BoxLayout.LINE_AXIS));
         operationPanel.add(filler1);
@@ -129,22 +91,13 @@ public class PluginsPreferencesPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSplitPane availablePlugins;
-    javax.swing.JButton browsePluginsButton;
     private javax.swing.Box.Filler filler1;
     javax.swing.JButton installFromDiskButton;
-    private javax.swing.JSplitPane installPlugins;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel messageLabel;
+    private javax.swing.JSplitPane listPlugins;
     private javax.swing.JPanel operationPanel;
-    private javax.swing.JPanel otherInfoPanel;
-    javax.swing.JPanel panelAvailablePluginDetails;
-    private javax.swing.JPanel panelAvalablePluginsInfo;
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
-    private javax.swing.JTabbedPane pluginsInfoTab;
     private javax.swing.JScrollPane scrollTable;
-    javax.swing.JTable tableAvailablePluginsInfo;
     javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

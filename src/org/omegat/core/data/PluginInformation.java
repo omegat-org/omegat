@@ -44,6 +44,9 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private static final String PLUGIN_CATEGORY = "Plugin-Category";
     private static final String PLUGIN_LINK = "Plugin-Link";
     private static final String PLUGIN_TYPE = "OmegaT-Plugin";
+    private final String PLUGIN_JAR_URL = "Plugin-Download-Url";
+    private final String PLUGIN_JAR_FILENAME = "Plugin-Jar-Filename";
+    private final String PLUGIN_SHA256SUM = "Plugin-Sha256Sum";
 
     private static final String IMPLEMENTATION_VENDOR = "Implementation-Vendor";
     private static final String IMPLEMENTATION_TITLE = "Implementation-Title";
@@ -77,6 +80,11 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private Status status;
     private Action action;
 
+    // rmeote Plugin information
+    private String remoteJarFileUrl;
+    private String jarFilename;
+    private String sha256Sum;
+
     public PluginInformation(final String className, final Manifest manifest, final URL mu, final Status status) {
         this.className = className;
         Attributes mainAttrs = manifest.getMainAttributes();
@@ -93,6 +101,11 @@ public class PluginInformation implements Comparable<PluginInformation> {
         url = mu;
         action = Action.NONE;
         this.status = status;
+
+        // rmeote plugin information
+        remoteJarFileUrl = attrs.getValue(PLUGIN_JAR_URL);
+        jarFilename = getJarFilename(attrs);
+        sha256Sum = attrs.getValue(PLUGIN_SHA256SUM);
     }
 
     public PluginInformation(String className, Properties props, final String key, final URL mu, final Status status) {
@@ -106,6 +119,9 @@ public class PluginInformation implements Comparable<PluginInformation> {
         url = mu;
         action = Action.NONE;
         this.status = status;
+        remoteJarFileUrl = null;
+        jarFilename = null;
+        sha256Sum = null;
     }
 
     private String categoryName(final String key1, final String key2) {
@@ -156,6 +172,25 @@ public class PluginInformation implements Comparable<PluginInformation> {
             return attrs.getValue(IMPLEMENTATION_VENDOR);
         } else if (attrs.getValue(BUILT_BY) != null) {
             return attrs.getValue(BUILT_BY);
+        }
+        return null;
+    }
+
+    private String getJarFilename(Attributes attrs) {
+        String attrsName = attrs.getValue(PLUGIN_JAR_FILENAME);
+        if (attrsName != null) {
+            return attrsName;
+        }
+        if (attrs.getValue(PLUGIN_JAR_URL) != null) {
+            int from = remoteJarFileUrl.lastIndexOf("/");
+            int to = remoteJarFileUrl.indexOf("?");
+            if (from != -1) {
+                if (to == -1) {
+                    return remoteJarFileUrl.substring(from + 1);
+                } else {
+                    return remoteJarFileUrl.substring(from + 1, to);
+                }
+            }
         }
         return null;
     }
@@ -214,6 +249,18 @@ public class PluginInformation implements Comparable<PluginInformation> {
 
     public final void setAction(Action a) {
         action = a;
+    }
+
+    public String getRemoteJarFileUrl() {
+        return remoteJarFileUrl;
+    }
+
+    public String getJarFilename() {
+        return jarFilename;
+    }
+
+    public String getSha256Sum() {
+        return sha256Sum;
     }
 
     @Override

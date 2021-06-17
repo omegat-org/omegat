@@ -53,7 +53,6 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
-import org.omegat.core.data.RemotePluginInformation;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.core.threads.PluginDownloadThread;
 import org.omegat.filters2.master.PluginUtils;
@@ -83,7 +82,7 @@ public final class PluginInstaller {
         checkStop = thread;
     }
 
-    public void installFromRemote(final PluginsPreferencesController controller, final RemotePluginInformation info) {
+    public void installFromRemote(final PluginsPreferencesController controller, final PluginInformation info) {
         try {
             URL downloadUrl = new URL(info.getRemoteJarFileUrl());
             String jarFilename = info.getJarFilename();
@@ -245,8 +244,8 @@ public final class PluginInstaller {
      * Download plugin list from github repository.
      * @return set of PluginInformation
      */
-    static Set<RemotePluginInformation> getPluginsList() {
-        Set<RemotePluginInformation> pluginInfo = new TreeSet<>();
+    static Set<PluginInformation> getPluginsList() {
+        Set<PluginInformation> pluginInfo = new TreeSet<>();
         String raw_value;
         try {
             raw_value = HttpConnectionUtils.getURL(new URL(LIST_URL));
@@ -264,7 +263,7 @@ public final class PluginInstaller {
                             if (clazz.trim().isEmpty()) {
                                 continue;
                             }
-                            pluginInfo.add(new RemotePluginInformation(clazz, m));
+                            pluginInfo.add(new PluginInformation(clazz, m, null, PluginInformation.Status.UNINSTALLED));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -284,24 +283,21 @@ public final class PluginInstaller {
      * It can has plugins that has already installed.
      * @return Map of PluginInformation
      */
-     public static Map<String, RemotePluginInformation> getAvailablePluginInformation() {
-        Map<String, RemotePluginInformation> availablePlugins = new TreeMap<>();
-        getPluginsList().stream()
+     public static Map<String, PluginInformation> getPluginInformations() {
+          Map<String, PluginInformation> plugins = getInstalledPlugins();
+          getPluginsList().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
                 .forEach(info -> {
                     String key = info.getClassName();
-                    PluginInformation installed = getInstalledPlugins().get(key);
-                    if (installed != null) {
-                        if (info.compareTo(installed) > 0) {
+                    if (plugins.get(key) != null) {
+                        if (info.compareTo(plugins.get(key)) > 0) {
                             info.setStatus(PluginInformation.Status.UPGRADABLE);
                         } else {
                             info.setStatus(PluginInformation.Status.INSTALLED);
                         }
-                    } else {
-                        info.setStatus(PluginInformation.Status.UNINSTALLED);
+                        plugins.put(key, info);
                     }
-                    availablePlugins.put(key, info);
                 });
-        return availablePlugins;
+          return plugins;
     }
 }

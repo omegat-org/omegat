@@ -121,20 +121,13 @@ public final class PluginUtils {
     }
 
     /**
-     * plugin folder in program installation folder.
-     */
-    public static final File pluginsDir = new File(StaticUtils.installDir(), "plugins");
-    /**
-     * plugin folder for user installation.
-     */
-    public static final File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
-
-    /**
      * Loads all plugins from main classloader and from /plugins/ dir. We should
      * load all jars from /plugins/ dir first, because some plugin can use more
      * than one jar.
      */
     public static void loadPlugins(final Map<String, String> params) {
+        File pluginsDir = new File(StaticUtils.installDir(), "plugins");
+        File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
         try {
             // list all jars in /plugins/
             FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");

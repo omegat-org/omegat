@@ -231,7 +231,7 @@ public final class Main {
             builder.start();
             System.exit(0);
         } catch (IOException e) {
-            Log.log(e);
+            e.printStackTrace();
         }
     }
 

@@ -384,7 +384,7 @@ public final class MainWindowMenuHandler {
         });
     }
 
-    public void prepareForExit(Runnable onCompletion) {
+    protected void prepareForExit(Runnable onCompletion) {
         // Bug #902: commit the current entry first
         // We do it before checking project status, so that it can eventually change it
         if (Core.getProject().isProjectLoaded()) {

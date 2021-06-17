@@ -59,7 +59,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         UPGRADE
     }
 
-    public enum STATUS {
+    public enum Status {
         INSTALLED,
         BUNDLED,
         UPGRADABLE,
@@ -74,10 +74,10 @@ public class PluginInformation implements Comparable<PluginInformation> {
     private final String category;
     private final String link;
     private final URL url;
-    private STATUS status;
+    private Status status;
     private Action action;
 
-    public PluginInformation(final String className, final Manifest manifest, final URL mu, final STATUS status) {
+    public PluginInformation(final String className, final Manifest manifest, final URL mu, final Status status) {
         this.className = className;
         Attributes mainAttrs = manifest.getMainAttributes();
         Attributes attrs = manifest.getEntries().get(className);
@@ -95,7 +95,7 @@ public class PluginInformation implements Comparable<PluginInformation> {
         this.status = status;
     }
 
-    public PluginInformation(String className, Properties props, final String key, final URL mu, final STATUS status) {
+    public PluginInformation(String className, Properties props, final String key, final URL mu, final Status status) {
         this.className = className;
         name = className.substring(className.lastIndexOf(".") + 1);
         version = null;
@@ -197,18 +197,18 @@ public class PluginInformation implements Comparable<PluginInformation> {
     }
 
     public final boolean isBundled() {
-        return status == STATUS.BUNDLED;
+        return status == Status.BUNDLED;
     }
 
     public final boolean isInstalled() {
-        return status == STATUS.INSTALLED || status == STATUS.BUNDLED;
+        return status == Status.INSTALLED || status == Status.BUNDLED;
     }
 
-    public final STATUS getStatus() {
+    public final Status getStatus() {
         return status;
     }
 
-    public final void setStatus(STATUS s) {
+    public final void setStatus(Status s) {
         status = s;
     }
 

@@ -208,7 +208,7 @@ public final class PluginInstaller {
                             if (clazz.trim().isEmpty()) {
                                 continue;
                             }
-                            pluginInfo.add(new PluginInformation(clazz, m, null, PluginInformation.STATUS.UNINSTALLED));
+                            pluginInfo.add(new PluginInformation(clazz, m, null, PluginInformation.Status.UNINSTALLED));
                         }
                     }
                 }
@@ -293,12 +293,12 @@ public final class PluginInstaller {
                     PluginInformation installed = getInstalledPlugins().get(key);
                     if (installed != null) {
                         if (info.compareTo(installed) > 0) {
-                            info.setStatus(PluginInformation.STATUS.UPGRADABLE);
+                            info.setStatus(PluginInformation.Status.UPGRADABLE);
                         } else {
-                            info.setStatus(PluginInformation.STATUS.INSTALLED);
+                            info.setStatus(PluginInformation.Status.INSTALLED);
                         }
                     } else {
-                        info.setStatus(PluginInformation.STATUS.UNINSTALLED);
+                        info.setStatus(PluginInformation.Status.UNINSTALLED);
                     }
                     availablePlugins.put(key, info);
                 });

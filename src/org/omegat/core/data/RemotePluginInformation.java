@@ -38,7 +38,7 @@ public class RemotePluginInformation extends PluginInformation {
     private final String sha256Sum;
 
     public RemotePluginInformation(String className, Manifest manifest) {
-        super(className, manifest, null, PluginInformation.STATUS.UNINSTALLED);
+        super(className, manifest, null, Status.UNINSTALLED);
         Attributes attrs = manifest.getMainAttributes();
         remoteJarFileUrl = attrs.getValue(PLUGIN_JAR_URL);
         jarFilename = attrs.getValue(PLUGIN_JAR_FILENAME);

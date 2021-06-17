@@ -27,15 +27,15 @@
 
 package org.omegat.gui.preferences.view;
 
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
+
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.util.Map;
-import java.util.Vector;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.Core;
@@ -134,24 +134,27 @@ public class PluginsPreferencesController extends BasePreferencesController {
         return OStrings.getString("PREFS_TITLE_PLUGINS");
     }
 
-    static PluginInfoTableModel getInstalledPluginInfoTableModel() {
-        return new PluginInfoTableModel();
-    }
-
-    static AvailablePluginInfoTableModel getAvailablePluginInfoTableModel() {
-        return new AvailablePluginInfoTableModel();
-    }
-
     private void initGui() {
         panel = new PluginsPreferencesPanel();
+        panel.tablePluginsInfo.setAutoCreateRowSorter(true);
+        panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_NAME).setPreferredWidth(100);
+        panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
         pluginDetailHeader = new PluginDetailHeader();
         pluginDetailsPane = new PluginDetailsPane();
         panel.panelPluginDetails.add(pluginDetailHeader);
         panel.panelPluginDetails.add(pluginDetailsPane);
+        panel.scrollTable.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
+        panel.scrollTable.getViewport().setViewSize(new Dimension(250, 350));
 
+        PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
+        TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
+        panel.tablePluginsInfo.setRowSorter(sorter);
+        panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
+        panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
         TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
-        panel.installFromDiskButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK"));
-        panel.installFromDiskButton.addActionListener(e -> {
+
+        panel.installPluginsButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK"));
+        panel.installPluginsButton.addActionListener(e -> {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
             int choosePluginFileResult = choosePluginFile.showOpenDialog(Core.getMainWindow().getApplicationFrame());
             if (choosePluginFileResult == JFileChooser.APPROVE_OPTION) {
@@ -165,12 +168,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 }
             }
         });
-
-        PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
-        TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
-        panel.tablePluginsInfo.setRowSorter(sorter);
-        panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
-        panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
     }
 
     @Override
@@ -183,159 +180,5 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     @Override
     public void persist() {
-    }
-
-    static class PluginInfoTableModel extends DefaultTableModel {
-        private static final long serialVersionUID = 5345248154613009632L;
-        private static final String[] COLUMN_NAMES = { "CATEGORY", "NAME", "VERSION"}; // NOI18N
-        private final Map<String, PluginInformation> listPlugins;
-
-        public static final int COLUMN_STAT = 0;
-        public static final int COLUMN_CATEGORY = 1;
-        public static final int COLUMN_NAME = 2;
-        public static final int COLUMN_VERSION = 3;
-
-        public PluginInfoTableModel() {
-            listPlugins = PluginInstaller.getInstalledPlugins();
-        }
-
-        public final PluginInformation getValueAt(int rowIndex) {
-            return new Vector<>(listPlugins.values()).get(rowIndex);
-        }
-
-        @Override
-        public final Class<?> getColumnClass(int columnIndex) {
-            if (columnIndex < COLUMN_VERSION) {
-                return String.class;
-            } else {
-                return Boolean.class;
-            }
-        }
-
-        @Override
-        public final boolean isCellEditable(int rowIndex, int columnIndex) {
-            return false;
-        }
-
-        @Override
-        public final int getColumnCount() {
-            return COLUMN_NAMES.length;
-        }
-
-        @Override
-        public final int getRowCount() {
-            return listPlugins == null ? 0 : listPlugins.size();
-        }
-
-        @Override
-        public final String getColumnName(int column) {
-            return OStrings.getString("PREFS_PLUGINS_COL_" + COLUMN_NAMES[column]);
-        }
-
-        @Override
-        public final Object getValueAt(int rowIndex, int columnIndex) {
-            PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
-            Object returnValue;
-
-            switch (columnIndex) {
-            case COLUMN_NAME:
-                returnValue = plugin.getName();
-                break;
-            case COLUMN_VERSION:
-                returnValue = plugin.getVersion();
-                break;
-            case COLUMN_CATEGORY:
-                returnValue = plugin.getCategory();
-                break;
-            case COLUMN_STAT:
-                if (plugin.getStatus() == PluginInformation.Status.INSTALLED) {
-                    returnValue = OStrings.getString("PREFS_PLUGINS_UPTODATE");
-                } else if (plugin.getStatus() == PluginInformation.Status.UPGRADABLE){
-                    returnValue = OStrings.getString("PREFS_PLUGINS_UPGRADABLE");
-                } else {
-                    returnValue = OStrings.getString("PREFS_PLUGINS_NEW");
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid column index");
-            }
-            return returnValue;
-        }
-    }
-
-    static class AvailablePluginInfoTableModel extends DefaultTableModel {
-        private static final long serialVersionUID = 52734789123814035L;
-        private static final String[] COLUMN_NAMES = { "STAT", "CATEGORY", "NAME", "VERSION" };  // NOI18N
-        private final Map<String, PluginInformation> listPlugins;
-
-        public static final int COLUMN_STAT = 0;
-        public static final int COLUMN_CATEGORY = 1;
-        public static final int COLUMN_NAME = 2;
-        public static final int COLUMN_VERSION = 3;
-
-        public AvailablePluginInfoTableModel() {
-            listPlugins = PluginInstaller.getPluginInformations();
-        }
-
-        public final PluginInformation getValueAt(int rowIndex) {
-            return new Vector<>(listPlugins.values()).get(rowIndex);
-
-        }
-
-        @Override
-        public final Class<?> getColumnClass(int columnIndex) {
-            return String.class;
-        }
-
-        @Override
-        public final boolean isCellEditable(int rowIndex, int columnIndex) {
-            return false;
-        }
-
-        @Override
-        public final int getColumnCount() {
-            return COLUMN_NAMES.length;
-        }
-
-        @Override
-        public final int getRowCount() {
-            return listPlugins == null ? 0 : listPlugins.size();
-        }
-
-        @Override
-        public final String getColumnName(int column) {
-            return OStrings.getString("PREFS_PLUGINS_COL_" + COLUMN_NAMES[column]);
-        }
-
-        @Override
-        public final Object getValueAt(int rowIndex, int columnIndex) {
-            PluginInformation plugin = new Vector<>(listPlugins.values()).get(rowIndex);
-            Object returnValue;
-
-            switch (columnIndex) {
-            case COLUMN_NAME:
-                returnValue = plugin.getName();
-                break;
-            case COLUMN_VERSION:
-                returnValue = plugin.getVersion();
-                break;
-            case COLUMN_CATEGORY:
-                returnValue = plugin.getCategory();
-                break;
-            case COLUMN_STAT:
-                if (plugin.getStatus() == PluginInformation.Status.INSTALLED) {
-                    returnValue = OStrings.getString("PREFS_PLUGINS_UPTODATE");
-                } else if (plugin.getStatus() == PluginInformation.Status.UPGRADABLE){
-                    returnValue = OStrings.getString("PREFS_PLUGINS_UPGRADABLE");
-                } else {
-                    returnValue = OStrings.getString("PREFS_PLUGINS_NEW");
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid column index");
-            }
-
-            return returnValue;
-        }
     }
 }

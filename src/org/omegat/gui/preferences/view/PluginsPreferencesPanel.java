@@ -26,11 +26,9 @@
 package org.omegat.gui.preferences.view;
 
 import javax.swing.JPanel;
-
 import org.omegat.util.OStrings;
 
 /**
- * @author Hiroshi Miura
  * @author Aaron Madlon-Kay
  * @author Briac Pilpre
  */
@@ -50,54 +48,66 @@ public class PluginsPreferencesPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        listPlugins = new javax.swing.JSplitPane();
+        panelInfo = new javax.swing.JPanel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
+        installPluginsButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         panelPluginsInfo = new javax.swing.JPanel();
         scrollTable = new javax.swing.JScrollPane();
         tablePluginsInfo = new javax.swing.JTable();
         panelPluginDetails = new javax.swing.JPanel();
-        operationPanel = new javax.swing.JPanel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        installFromDiskButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
-        panelPluginsInfo.setMinimumSize(new java.awt.Dimension(150, 23));
-        panelPluginsInfo.setPreferredSize(new java.awt.Dimension(252, 426));
-        panelPluginsInfo.setLayout(new javax.swing.BoxLayout(panelPluginsInfo, javax.swing.BoxLayout.PAGE_AXIS));
+        panelInfo.add(filler1);
+
+        org.openide.awt.Mnemonics.setLocalizedText(installPluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
+        installPluginsButton.setAlignmentY(0.0F);
+        installPluginsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                installPluginsButtonActionPerformed(evt);
+            }
+        });
+        panelInfo.add(installPluginsButton);
+
+        add(panelInfo);
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(65534, 600));
+        jPanel1.setMinimumSize(new java.awt.Dimension(200, 23));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 2));
+
+        panelPluginsInfo.setLayout(new java.awt.GridLayout());
+
+        scrollTable.setPreferredSize(new java.awt.Dimension(452, 452));
 
         tablePluginsInfo.setAutoCreateRowSorter(true);
-        tablePluginsInfo.setModel(PluginsPreferencesController.getInstalledPluginInfoTableModel());
-        tablePluginsInfo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablePluginsInfo.setModel(new PluginInfoTableModel());
         scrollTable.setViewportView(tablePluginsInfo);
 
         panelPluginsInfo.add(scrollTable);
 
-        listPlugins.setLeftComponent(panelPluginsInfo);
+        jPanel1.add(panelPluginsInfo);
 
         panelPluginDetails.setLayout(new javax.swing.BoxLayout(panelPluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
-        listPlugins.setRightComponent(panelPluginDetails);
+        jPanel1.add(panelPluginDetails);
 
-        add(listPlugins);
-
-        operationPanel.setLayout(new javax.swing.BoxLayout(operationPanel, javax.swing.BoxLayout.LINE_AXIS));
-        operationPanel.add(filler1);
-
-        org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, "Install from Disk");
-        operationPanel.add(installFromDiskButton);
-
-        add(operationPanel);
+        add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void installPluginsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installPluginsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_installPluginsButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
-    javax.swing.JButton installFromDiskButton;
-    private javax.swing.JSplitPane listPlugins;
-    private javax.swing.JPanel operationPanel;
+    javax.swing.JButton installPluginsButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel panelInfo;
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
-    private javax.swing.JScrollPane scrollTable;
+    javax.swing.JScrollPane scrollTable;
     javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

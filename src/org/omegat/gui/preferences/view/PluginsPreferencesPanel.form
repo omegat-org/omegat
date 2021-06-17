@@ -50,7 +50,7 @@
         <Component class="javax.swing.JButton" name="installPluginsButton">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="PREFS_PLUGINS_BROWSE_ONLINE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="org/omegat/Bundle.properties" key="PREFS_PLUGINS_INSTALL_FROM_DISK" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="alignmentY" type="float" value="0.0"/>
           </Properties>

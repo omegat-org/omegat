@@ -63,7 +63,7 @@ public class PluginsPreferencesPanel extends JPanel {
 
         panelInfo.add(filler1);
 
-        org.openide.awt.Mnemonics.setLocalizedText(installPluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(installPluginsButton, OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK")); // NOI18N
         installPluginsButton.setAlignmentY(0.0F);
         installPluginsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +78,7 @@ public class PluginsPreferencesPanel extends JPanel {
         jPanel1.setMinimumSize(new java.awt.Dimension(200, 23));
         jPanel1.setLayout(new java.awt.GridLayout(1, 2));
 
-        panelPluginsInfo.setLayout(new java.awt.GridLayout());
+        panelPluginsInfo.setLayout(new java.awt.GridLayout(1, 0));
 
         scrollTable.setPreferredSize(new java.awt.Dimension(452, 452));
 

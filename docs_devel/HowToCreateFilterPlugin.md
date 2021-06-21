@@ -22,11 +22,14 @@ OmegaT file filter plugin.
 ## manifest
 There must be a manifest file that indicates that it is an OmegaT plugin. There are two flavors, see below. 
 Omegat 5.3.0 also supports to provide additional information (valid for both flavors) that can be displayed in the UI. 
-You can **optionally** provide name, version, author and description. 
+You can **optionally** provide name, version, author and description.
 OmegaT 5.5.0 show plugin name, and author in preference dialog. You are recommended to set these parameters.
-You can **optionally** provide an URL of your plugin home page, license and category.
-For each there are different manifest entry alternatives, and OmegaT will pick the first one present in the order from 
+For each there are different manifest entry alternatives, and OmegaT will pick the first one present in the order from
 left to right as described in the table below:
+You can **optionally** provide an URL of your plugin home page, license and category.
+OmegaT x.x.x show plugin home page URL, license and category. You are recommended to set these parameters.
+OmegaT x.x.x supports installation of plugins from remote, which provide all the attributes in a way of OmegaT 3.0.1 and up,
+and set necessary information on plugins database on github.
 
 | Attribute   | Manifest entry (pick one)                              | 
 |-------------|--------------------------------------------------------| 
@@ -324,3 +327,43 @@ If you really need to debug in the context of a running OmegaT instance (for som
 more relevant), you can 'run' `org.omegat.Main`. Make sure all dependent 3rd party libraries are in the classpath.
 Since you did not compile a .jar file, you have to make sure there is a correct META-INF/MANIFEST.MF file
 (which is missing if you rely on e.g. maven-jar plugin to generate it for you) 
+
+# register your project to plugins database
+
+To register your plugin to plugins database and support remote installation, you need to register your plugin manifest
+to database project.
+You can visit database repository at
+https://github.com/omegat-org/omegat-plugins
+
+There is following directory structure;
+
+   manifests/
+      omegat-browser/
+          MANIFEST.MF
+      omegat-plugins-epwing/
+          MANIFEST.MF
+      omegat-plugins-A/
+          MANIFEST.MF
+      omegat-B/
+          MANIFEST.MF
+
+You can fork project and add directory that have your plugin name, and add plugin MANIFEST.MF, then
+send Pull-Request to the project.
+These MANIFESTs are bundled into single release file which users OmegaT download.
+It is automatically generated through continous integration feature when your Pull-Request merged.
+
+You can check a resulted file at web page https://github.com/omegat-org/omegat-plugins/releases/
+and the file URL is
+https://github.com/omegat-org/omegat-plugins/releases/download/continuous-release/plugins.MF
+
+You need to add additional information to allow OmegaT to download and validate the plugin jar.
+
+| Attribute         | Manifest entry                                   | 
+|-------------------|--------------------------------------------------| 
+| Download URL      | Plugin-Download-Url                              |
+| SHA256Sum         | Plugin-Sha256Sum                                 |
+| Jar Filename      | Plugin-Jar-Filename                              |
+
+Download URL should be an URL of your plugin jar file. OmegaT will validate downloaded binary
+with SHA256Sum specified. OmegaT will store the plugin into users plugin directory with a filename
+specified by Plugin-Jar-Filename parameter.

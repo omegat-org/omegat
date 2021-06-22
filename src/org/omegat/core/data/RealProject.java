@@ -35,6 +35,7 @@
 
 package org.omegat.core.data;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -60,6 +61,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import gen.core.filters.Filters;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.CLIParameters;
@@ -103,8 +105,6 @@ import org.omegat.util.TMXReader2;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.xml.sax.SAXParseException;
-
-import gen.core.filters.Filters;
 
 /**
  * Loaded project implementation. Only translation could be changed after project will be loaded and set by
@@ -279,8 +279,14 @@ public class RealProject implements IProject {
             createDirectory(config.getDictRoot(), OConsts.DEFAULT_DICT);
             createDirectory(config.getTargetRoot(), OConsts.DEFAULT_TARGET);
             //createDirectory(m_config.getTMOtherLangRoot(), OConsts.DEFAULT_OTHERLANG);
-
             saveProjectProperties();
+
+            File glossaries = config.getWritableGlossaryFile().getAsFile();
+            if (glossaries.createNewFile()) {
+                try (BufferedWriter writer = Files.newBufferedWriter(glossaries.toPath())) {
+                    writer.write("# Glossaries with tab separation -*- coding: utf-8 -*-");
+                }
+            }
 
             // Set project specific segmentation rules if they exist, or
             // defaults otherwise.

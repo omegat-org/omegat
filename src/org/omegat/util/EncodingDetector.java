@@ -25,6 +25,8 @@
 
 package org.omegat.util;
 
+import static com.google.common.primitives.Bytes.indexOf;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -54,17 +56,32 @@ public final class EncodingDetector {
      * @see <a href="https://github.com/amake/juniversalchardet">Fork</a>
      */
     public static String detectEncoding(InputStream stream) throws IOException {
-        UniversalDetector detector = new UniversalDetector(null);
 
+        byte[] signature = {'-', '*', '-', ' ', 'c', 'o', 'd', 'i', 'n', 'g',
+        ':', ' ', 'u', 't', 'f', '-', '8', ' ', '-', '*', '-'};  //  -*- coding: utf-8 -*-
+        byte[] eol = {0x0a};
         byte[] buffer = new byte[4096];
         int read;
-        while ((read = stream.read(buffer)) > 0 && !detector.isDone()) {
+        String encoding;
+
+        read = stream.read(buffer);
+        if (read > 22) {
+            int signature_position;
+            if ((signature_position = indexOf(buffer, signature)) > 0) {
+                if (indexOf(buffer, eol) > signature_position) {
+                    return "UTF-8";
+                }
+            }
+        }
+        UniversalDetector detector = new UniversalDetector(null);
+        while (read > 0 && !detector.isDone()) {
             detector.handleData(buffer, 0, read);
+            read = stream.read(buffer);
         }
 
         detector.dataEnd();
 
-        String encoding = detector.getDetectedCharset();
+        encoding = detector.getDetectedCharset();
         detector.reset();
 
         return encoding;

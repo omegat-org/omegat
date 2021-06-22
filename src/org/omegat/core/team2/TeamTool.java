@@ -96,7 +96,12 @@ public final class TeamTool {
         // Create project internal directories
         props.autocreateDirectories();
         // Create version-controlled glossary file
-        props.getWritableGlossaryFile().getAsFile().createNewFile();
+        File glossaries = props.getWritableGlossaryFile().getAsFile();
+        if (glossaries.createNewFile()) {
+            try (BufferedWriter writer = Files.newBufferedWriter(glossaries.toPath())) {
+                writer.write("# Glossaries with tab separation -*- coding: utf-8 -*-");
+            }
+        }
         ProjectFileStorage.writeProjectFile(props);
 
         // Create empty project TM

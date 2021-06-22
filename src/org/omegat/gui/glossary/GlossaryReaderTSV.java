@@ -28,6 +28,7 @@
 package org.omegat.gui.glossary;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -37,11 +38,15 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.omegat.util.EncodingDetector;
+import org.omegat.util.Log;
+import org.omegat.util.MagicComment;
 import org.omegat.util.OConsts;
 import org.omegat.util.StringUtil;
 
@@ -58,6 +63,27 @@ public final class GlossaryReaderTSV {
     private GlossaryReaderTSV() {
     }
 
+    /**
+     * Create a new empty TSV glossary file with a leading comment
+     * @param file
+     * @return true if the file was created successfully
+     * @throws IOException
+     */
+    public static boolean createEmpty(File file) throws IOException {
+        if (file.exists()) {
+            return false;
+        }
+        file.getParentFile().mkdirs();
+        if (file.createNewFile()) {
+            try (BufferedWriter writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8)) {
+                writer.write("# Glossary in tab-separated format -*- coding: utf-8 -*-");
+                writer.write(System.lineSeparator());
+            }
+            return true;
+        }
+        return false;
+    }
+
     public static String getFileEncoding(final File file) throws IOException {
         return getFileEncoding(file, Charset.defaultCharset().name());
     }
@@ -67,8 +93,21 @@ public final class GlossaryReaderTSV {
         if (fnameLower.endsWith(OConsts.EXT_TSV_UTF8)) {
             return StandardCharsets.UTF_8.name();
         } else {
-            return EncodingDetector.detectEncodingDefault(file, defaultEncoding);
+            return detectEncodingDefault(file, defaultEncoding);
         }
+    }
+
+    private static String detectEncodingDefault(final File inFile, final String defaultEncoding) {
+        try {
+            Map<String, String> magic = MagicComment.parse(inFile);
+            String detected = magic.get("coding");
+            if (detected != null) {
+                return detected;
+            }
+        } catch (IOException e) {
+            Log.log(e);
+        }
+        return EncodingDetector.detectEncodingDefault(inFile, defaultEncoding);
     }
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws IOException {

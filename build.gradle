@@ -1074,7 +1074,11 @@ publishing {
 
 signing {
     sign publishing.publications.mavenJava
+    if (!findProperty("signing.keyId") || findProperty("signing.keyId").equals("")) {
+        useGpgCmd()
+    }
 }
+
 
 remotes {
     sourceforgeWeb {

@@ -41,6 +41,10 @@ signing.keyId=
 signing.password=
 # Exported as e.g. `gpg --export-secret-keys > secring.gpg`
 signing.secretKeyRingFile=
+## When you want to use GnuPG command instead of exported keyring
+## uncommented and add key ID
+#signing.gnupg.keyName=
+#signing.gnupg.executable=gpg
 
 ## SourceForge web
 sourceforgeWebUser=

@@ -1074,6 +1074,9 @@ publishing {
 
 signing {
     sign publishing.publications.mavenJava
+    if (!findProperty("signing.keyId")) {
+        useGpgCmd()
+    }
 }
 
 remotes {

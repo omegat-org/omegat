@@ -41,10 +41,21 @@ signing.keyId=
 signing.password=
 # Exported as e.g. `gpg --export-secret-keys > secring.gpg`
 signing.secretKeyRingFile=
-## When you want to use GnuPG command instead of exported keyring
-## uncommented and add key ID
-#signing.gnupg.keyName=
-#signing.gnupg.executable=gpg
+
+# When you don't define signing.keyId, gradle try to use GnuPG command
+# (GnupgSignatory) instead of the default PgpSignatory.
+# The GnupgSignatory relies on the gpg2 program to sign the artifacts.
+# Please see https://docs.gradle.org/current/userguide/signing_plugin.html#sec:sec:gnupg_signatory_configuration
+# for configurations details.
+#
+# - signing.gnupg.executable=gpg
+#    The gpg executable that is invoked for signing.
+# - signing.gnupg.keyName=
+#    The id of the key that should be used for signing. If not given then
+#    the default key configured in GnuPG will be used.
+# - signing.gnupg.passphrase
+#    The passphrase for unlocking the secret key. If not given then
+#    the gpg-agent program is used for getting the passphrase.
 
 ## SourceForge web
 sourceforgeWebUser=

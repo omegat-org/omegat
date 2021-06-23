@@ -1,4 +1,3 @@
-
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
@@ -73,4 +72,3 @@ public class TokenTest extends TestCore {
         assertNotEquals(strTokens[0], glosTokens[0]);
     }
 }
-

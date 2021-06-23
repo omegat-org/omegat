@@ -96,7 +96,6 @@ public class GlossarySearcherTest extends TestCore {
     @Test
     public void testGlossarySearcherJapanese2() {
         String sourceText = "\u5834\u6240";
-        String translationText = "translation";
         String commentText = "comment";
         Language language = new Language("ja");
         setupProject(language);
@@ -105,6 +104,21 @@ public class GlossarySearcherTest extends TestCore {
         entries.add(new GlossaryEntry("\u5857\u5E03", "wrong", commentText, true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, entries);
         assertEquals(0, result.size());
+    }
+
+    @Test
+    public void testGlossarySearcherJapaneseLongText() {
+        Language language = new Language("ja");
+        setupProject(language);
+        ITokenizer tok = new LuceneJapaneseTokenizer();
+        List<GlossaryEntry> entries = new ArrayList<>();
+        entries.add(new GlossaryEntry("\u307E\u3050\u308D", "tuna", "", true, ""));
+        entries.add(new GlossaryEntry("\u7FFB\u8A33", "translation", "", true, ""));
+        entries.add(new GlossaryEntry("\u591A\u8A00\u8A9E", "multi-languages", "", true, ""));
+        entries.add(new GlossaryEntry("\u5730\u57DF\u5316", "localization", "", true, ""));
+        String sourceText = "OmegaT\u306E\u30E6\u30FC\u30B6\u30FC\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\u3084\u30D8\u30EB\u30D7\u30C6\u30AD\u30B9\u30C8\u3092\u3001\u3055\u307E\u3056\u307E\u306A\u8A00\u8A9E\u3078\u7FFB\u8A33\u3057\u3066\u304F\u3060\u3055\u3063\u305F\u65B9\u3005\u306B\u611F\u8B1D\u3057\u307E\u3059\u3002\u305D\u3057\u3066\u3001\u7FFB\u8A33\u304C\u306A\u3055\u308C\u3066\u3044\u306A\u3044\u8A00\u8A9E\u304C\u307E\u3060\u6570\u5343\u6B8B\u3063\u3066\u3044\u307E\u3059\uFF01OmegaT \u306E\u591A\u8A00\u8A9E\u3078\u306E\u5730\u57DF\u5316\u306F\u3001\u6301\u7D9A\u7684\u306A\u4F5C\u696D\u3067\u3082\u3042\u308A\u307E\u3059\u3002\u306A\u305C\u306A\u3089\u3001\u65B0\u3057\u3044\u6A5F\u80FD\u304C\u7D76\u3048\u305A\u8FFD\u52A0\u3055\u308C\u3066\u3044\u308B\u304B\u3089\u3067\u3059\u3002OmegaT\u306E\u30ED\u30FC\u30AB\u30E9\u30A4\u30BA/\u7FFB\u8A33\u306B\u95A2\u3059\u308B\u8A73\u7D30\u306B\u3064\u3044\u3066\u306F\u3001OmegaT\u30ED\u30FC\u30AB\u30EA\u30BC\u30FC\u30B7\u30E7\u30F3\u30B3\u30FC\u30C7\u30A3\u30CD\u30FC\u30BF\u30FC\u306B\u304A\u554F\u3044\u5408\u308F\u305B\u304F\u3060\u3055\u3044\u3002";
+        List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, entries);
+        assertEquals(3, result.size());
     }
 
     private void setupProject(Language language) {
@@ -119,134 +133,133 @@ public class GlossarySearcherTest extends TestCore {
             }
         };
 
-            Core.setProject(new
-
-        IProject() {
-            public void setTranslation (SourceTextEntry entry, PrepareTMXEntry trans,
-            boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked){
+        Core.setProject(new IProject() {
+            public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans,
+                                       boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked) {
             }
 
-            public void setTranslation (SourceTextEntry entry, PrepareTMXEntry trans,
-            boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked,
-            AllTranslations previousTranslations){
+            public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans,
+                                       boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked,
+                                       AllTranslations previousTranslations) {
             }
 
-            public void setNote (SourceTextEntry entry, TMXEntry oldTrans, String note){
+            public void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note) {
             }
 
-            public void saveProjectProperties () {
+            public void saveProjectProperties() {
             }
 
-            public void saveProject ( boolean doTeamSync){
+            public void saveProject(boolean doTeamSync) {
             }
 
-            public void iterateByMultipleTranslations (MultipleTranslationsIterator it){
+            public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
             }
 
-            public void iterateByDefaultTranslations (DefaultTranslationsIterator it){
+            public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
             }
 
-            public boolean isProjectModified () {
+            public boolean isProjectModified() {
                 return false;
             }
 
-            public boolean isProjectLoaded () {
+            public boolean isProjectLoaded() {
                 return true;
             }
 
-            public boolean isOrphaned (EntryKey entry){
+            public boolean isOrphaned(EntryKey entry) {
                 return false;
             }
 
-            public boolean isOrphaned (String source){
+            public boolean isOrphaned(String source) {
                 return false;
             }
 
-            public TMXEntry getTranslationInfo (SourceTextEntry ste){
+            public TMXEntry getTranslationInfo(SourceTextEntry ste) {
                 return null;
             }
 
-            public AllTranslations getAllTranslations (SourceTextEntry ste){
+            public AllTranslations getAllTranslations(SourceTextEntry ste) {
                 return null;
             }
 
-            public Map<String, ExternalTMX> getTransMemories () {
+            public Map<String, ExternalTMX> getTransMemories() {
                 return null;
             }
 
-            public ITokenizer getTargetTokenizer () {
+            public ITokenizer getTargetTokenizer() {
                 return null;
             }
 
-            public StatisticsInfo getStatistics () {
+            public StatisticsInfo getStatistics() {
                 return null;
             }
 
-            public ITokenizer getSourceTokenizer () {
+            public ITokenizer getSourceTokenizer() {
                 return null;
             }
 
-            public ProjectProperties getProjectProperties () {
+            public ProjectProperties getProjectProperties() {
                 return props;
             }
 
-            public List<IProject.FileInfo> getProjectFiles () {
+            public List<IProject.FileInfo> getProjectFiles() {
                 return null;
             }
 
-            public Map<Language, ProjectTMX> getOtherTargetLanguageTMs () {
+            public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
                 return null;
             }
 
-            public List<SourceTextEntry> getAllEntries () {
+            public List<SourceTextEntry> getAllEntries() {
                 return null;
             }
 
-            public void compileProject (String sourcePattern){
+            public void compileProject(String sourcePattern) {
             }
 
-            public void closeProject () {
+            public void closeProject() {
             }
 
-            public List<String> getSourceFilesOrder () {
+            public List<String> getSourceFilesOrder() {
                 return null;
             }
 
-            public void setSourceFilesOrder (List < String > filesList) {
+            public void setSourceFilesOrder(List<String> filesList) {
             }
 
             @Override
-            public String getTargetPathForSourceFile (String sourceFile){
+            public String getTargetPathForSourceFile(String sourceFile) {
                 return null;
             }
 
             @Override
-            public boolean isTeamSyncPrepared () {
+            public boolean isTeamSyncPrepared() {
                 return false;
             }
 
             @Override
-            public void teamSync () {
+            public void teamSync() {
             }
 
             @Override
-            public void teamSyncPrepare () {
+            public void teamSyncPrepare() {
             }
 
             @Override
-            public boolean isRemoteProject () {
+            public boolean isRemoteProject() {
                 return false;
             }
 
             @Override
-            public void commitSourceFiles () {
+            public void commitSourceFiles() {
             }
 
             @Override
-            public void compileProjectAndCommit (String sourcePattern,boolean doPostProcessing, boolean commitTargetFiles){
+            public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles) {
             }
         });
     }
+
     private List<GlossaryEntry> glossarySearcherCommon(String sourceText, ITokenizer tok, Language language,
                                                        List<GlossaryEntry> entries) {
         EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");

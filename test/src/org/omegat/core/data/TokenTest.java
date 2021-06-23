@@ -42,8 +42,8 @@ public class TokenTest {
     @Test
     public void testGlossaryTokenEqualityJapanese() {
         ITokenizer tok = new LuceneJapaneseTokenizer();
-        String str = "場所";
-        String glos = "塗布";
+        String str = "\u5834\u6240";
+        String glos = "\u5857\u5E03";
         Token[] fullTextTokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.GLOSSARY);
         Token[] glosTokens = tok.tokenizeWords(glos, ITokenizer.StemmingMode.GLOSSARY);
         assertFalse(fullTextTokens[0].deepEquals(glosTokens[0]));

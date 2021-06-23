@@ -57,13 +57,13 @@ public class GlossarySearcherTest extends TestCore {
 
     @Test
     public void testIsCjkMatchJapanese() {
-        String sourceText = "場所";
+        String sourceText = "\u5834\u6240";
         assertTrue(GlossarySearcher.isCjkMatch(sourceText, sourceText));
     }
 
     @Test
     public void testGlossarySearcherJapanese1() {
-        String sourceText = "場所";
+        String sourceText = "\u5834\u6240";
         String translationText = "translation";
         String commentText = "comment";
         ITokenizer tok = new LuceneJapaneseTokenizer();
@@ -79,13 +79,13 @@ public class GlossarySearcherTest extends TestCore {
 
     @Test
     public void testGlossarySearcherJapanese2() {
-        String sourceText = "場所";
+        String sourceText = "\u5834\u6240";
         String translationText = "translation";
         String commentText = "comment";
         ITokenizer tok = new LuceneJapaneseTokenizer();
         Language language = new Language("ja");
         List<GlossaryEntry> entries = new ArrayList<>();
-        entries.add(new GlossaryEntry("塗布", "wrong", commentText, true, "origin"));
+        entries.add(new GlossaryEntry("\u5857\u5E03", "wrong", commentText, true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, translationText, commentText, tok, language, entries);
         assertEquals(0, result.size());
     }

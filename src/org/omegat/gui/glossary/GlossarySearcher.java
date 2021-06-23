@@ -148,7 +148,7 @@ public class GlossarySearcher {
         return true;
     }
 
-    private static boolean isCjkMatch(String fullText, String term) {
+    protected static boolean isCjkMatch(String fullText, String term) {
         // This is a CJK word and our source language is not space-delimited, so include if
         // word appears anywhere in source string.
         IProject project = Core.getProject();

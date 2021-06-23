@@ -31,11 +31,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
+import org.omegat.core.TestCore;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneJapaneseTokenizer;
 import org.omegat.util.Token;
 
-public class TokenTest {
+public class TokenTest extends TestCore {
 
     /**
      * Basic Token class test.

@@ -131,7 +131,17 @@ public class GlossarySearcher {
                 Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT);
         List<Token[]> foundTokens = DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
         foundTokens.removeIf(toks -> !keepMatch(toks, fullText, term));
+        foundTokens.removeIf(toks -> !rawMatch(toks, fullText, term));
         return foundTokens;
+    }
+
+    private static boolean rawMatch(Token[] tokens, String srcTxt, String term) {
+        for (Token token : tokens) {
+            if (token.getTextFromString(srcTxt).equals(term.substring(token.getLength()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean keepMatch(Token[] tokens, String srcTxt, String locTxt) {

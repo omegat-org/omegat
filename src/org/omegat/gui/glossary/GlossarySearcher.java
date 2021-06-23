@@ -131,7 +131,19 @@ public class GlossarySearcher {
                 Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT);
         List<Token[]> foundTokens = DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
         foundTokens.removeIf(toks -> !keepMatch(toks, fullText, term));
+        if (StringUtil.isCJK(term)) {
+            foundTokens.removeIf(toks -> !rawMatch(toks, fullText, term));
+        }
         return foundTokens;
+    }
+
+    private static boolean rawMatch(Token[] tokens, String srcTxt, String term) {
+        for (Token token : tokens) {
+            if (token.getTextFromString(srcTxt).equals(term.substring(token.getLength()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean keepMatch(Token[] tokens, String srcTxt, String locTxt) {
@@ -148,7 +160,7 @@ public class GlossarySearcher {
         return true;
     }
 
-    private static boolean isCjkMatch(String fullText, String term) {
+    protected static boolean isCjkMatch(String fullText, String term) {
         // This is a CJK word and our source language is not space-delimited, so include if
         // word appears anywhere in source string.
         IProject project = Core.getProject();

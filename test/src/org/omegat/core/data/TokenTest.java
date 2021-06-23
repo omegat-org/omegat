@@ -26,6 +26,7 @@
 
 package org.omegat.core.data;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
@@ -37,18 +38,38 @@ import org.omegat.util.Token;
 public class TokenTest {
 
     /**
-     * Test case of BUG#1034
+     * Basic Token class test.
+     * <p>
+     * This uses GLOSSARY stemming mode.
+     * </p>
      */
     @Test
+    public void testGlossaryTokenEqualityEnglish() {
+        ITokenizer tok = new LuceneJapaneseTokenizer();
+        String str = "source and target";
+        String glos = "target";
+        Token[] strTokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.GLOSSARY);
+        Token[] glosTokens = tok.tokenizeWords(glos, ITokenizer.StemmingMode.GLOSSARY);
+        assertEquals(3, strTokens.length);
+        assertEquals(1, glosTokens.length);
+        assertFalse(strTokens[0].deepEquals(glosTokens[0]));
+        assertFalse(strTokens[2].deepEquals(glosTokens[0]));
+        assertNotEquals(strTokens[0], glosTokens[0]);
+        assertEquals(strTokens[2], glosTokens[0]);
+    }
+
+    /**
+     * Test case of BUG#1034
+     */
+    @Test(expected = AssertionError.class)
     public void testGlossaryTokenEqualityJapanese() {
         ITokenizer tok = new LuceneJapaneseTokenizer();
         String str = "\u5834\u6240";
         String glos = "\u5857\u5E03";
-        Token[] fullTextTokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.GLOSSARY);
+        Token[] strTokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.GLOSSARY);
         Token[] glosTokens = tok.tokenizeWords(glos, ITokenizer.StemmingMode.GLOSSARY);
-        assertFalse(fullTextTokens[0].deepEquals(glosTokens[0]));
-        assertNotEquals(fullTextTokens[0], glosTokens[0]);
+        assertFalse(strTokens[0].deepEquals(glosTokens[0]));
+        assertNotEquals(strTokens[0], glosTokens[0]);
     }
-
 }
 

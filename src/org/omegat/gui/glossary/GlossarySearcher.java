@@ -131,7 +131,9 @@ public class GlossarySearcher {
                 Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT);
         List<Token[]> foundTokens = DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
         foundTokens.removeIf(toks -> !keepMatch(toks, fullText, term));
-        foundTokens.removeIf(toks -> !rawMatch(toks, fullText, term));
+        if (StringUtil.isCJK(term)) {
+            foundTokens.removeIf(toks -> !rawMatch(toks, fullText, term));
+        }
         return foundTokens;
     }
 

@@ -1074,7 +1074,7 @@ publishing {
 
 signing {
     sign publishing.publications.mavenJava
-    if (!findProperty("signing.keyId") || findProperty("signing.keyId").equals("")) {
+    if (!findProperty("signing.keyId")) {
         useGpgCmd()
     }
 }

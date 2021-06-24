@@ -8,6 +8,7 @@ plugins {
     id 'signing'
     id 'eclipse'
     id 'checkstyle'
+    id 'jacoco'
     id 'com.github.spotbugs' version '4.7.0'
     id 'de.gliderpilot.jnlp' version '1.2.6'
     id 'org.hidetake.ssh' version '2.10.1'
@@ -905,6 +906,18 @@ task spotlessChangedApply {
         spotlessJava.target = changedOnBranch.files.findAll {
             it.path.endsWith('.java')
         }
+    }
+}
+
+jacoco {
+    toolVersion="0.8.6"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.enabled = true  // coveralls plugin depends on xml format report
+        html.enabled = true
     }
 }
 

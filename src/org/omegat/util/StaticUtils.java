@@ -145,10 +145,10 @@ public final class StaticUtils {
     public static String[] getUnicodeFontNames() {
         int sp;
         Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-        final int dspcp = "\uD83D\uDE03".codePointAt(0); // facemark in Emoji-1.0 specification
+        final String dspstr = "a\uD83D\uDE03"; // facemark in Emoji-1.0 specification
         Set<String> fontNames = new HashSet<>();
         for (Font font : fonts)
-            if (font.canDisplay(dspcp)) fontNames.add(font.getFamily());
+            if (font.canDisplay(dspstr.codePointAt(0)) && font.canDisplay(dspstr.codePointAt(1))) fontNames.add(font.getFamily());
         return fontNames.toArray(new String[0]);
     }
 

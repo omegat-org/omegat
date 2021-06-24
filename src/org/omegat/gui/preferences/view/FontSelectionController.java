@@ -28,6 +28,7 @@
 package org.omegat.gui.preferences.view;
 
 import java.awt.Font;
+import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
@@ -64,9 +65,18 @@ public class FontSelectionController extends BasePreferencesController {
 
     private void initGui() {
         panel = new FontSelectionPanel();
-        panel.fontComboBox.setModel(new DefaultComboBoxModel<>(StaticUtils.getFontNames()));
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(StaticUtils.getFontNames());
+        panel.fontComboBox.setModel(model);
         panel.fontComboBox.addActionListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
         panel.sizeSpinner.addChangeListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
+        panel.limitFontsUnicodeCheckBox.addActionListener(e -> {
+            model.removeAllElements();
+            if (panel.applyToProjectFilesCheckBox.isSelected()) {
+                Arrays.stream(StaticUtils.getUnicodeFontNames()).forEach(model::addElement);
+            } else {
+                Arrays.stream(StaticUtils.getFontNames()).forEach(model::addElement);
+            }
+        });
     }
 
     @Override
@@ -87,6 +97,7 @@ public class FontSelectionController extends BasePreferencesController {
         panel.fontComboBox.setSelectedItem(oldFont.getName());
         panel.sizeSpinner.setValue(oldFont.getSize());
         panel.applyToProjectFilesCheckBox.setSelected(false);
+        panel.limitFontsUnicodeCheckBox.setSelected(false);
     }
 
     private Font getSelectedFont() {

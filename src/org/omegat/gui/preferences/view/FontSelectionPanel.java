@@ -57,6 +57,7 @@ public class FontSelectionPanel extends javax.swing.JPanel {
         sizeLabel = new javax.swing.JLabel();
         previewTextArea = new javax.swing.JTextArea();
         applyToProjectFilesCheckBox = new javax.swing.JCheckBox();
+        limitFontsUnicodeCheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -81,7 +82,7 @@ public class FontSelectionPanel extends javax.swing.JPanel {
         add(fontLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -90,7 +91,7 @@ public class FontSelectionPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(sizeLabel, OStrings.getString("TF_SELECT_FONTSIZE")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -105,29 +106,54 @@ public class FontSelectionPanel extends javax.swing.JPanel {
         previewTextArea.setPreferredSize(new java.awt.Dimension(116, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(previewTextArea, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(applyToProjectFilesCheckBox, OStrings.getString("TF_APPLY_TO_PROJECT_FILES")); // NOI18N
+        applyToProjectFilesCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyToProjectFilesCheckBoxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         add(applyToProjectFilesCheckBox, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(limitFontsUnicodeCheckBox, "Show only fonts that can display emoji");
+        limitFontsUnicodeCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limitFontsUnicodeCheckBoxActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        add(limitFontsUnicodeCheckBox, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.weighty = 1.0;
         add(filler1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void applyToProjectFilesCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyToProjectFilesCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_applyToProjectFilesCheckBoxActionPerformed
+
+    private void limitFontsUnicodeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limitFontsUnicodeCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_limitFontsUnicodeCheckBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox applyToProjectFilesCheckBox;
     private javax.swing.Box.Filler filler1;
     javax.swing.JComboBox<String> fontComboBox;
     private javax.swing.JLabel fontLabel;
+    javax.swing.JCheckBox limitFontsUnicodeCheckBox;
     javax.swing.JTextArea previewTextArea;
     private javax.swing.JLabel sizeLabel;
     javax.swing.JSpinner sizeSpinner;

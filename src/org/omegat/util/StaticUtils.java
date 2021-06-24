@@ -31,6 +31,7 @@
 
 package org.omegat.util;
 
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -42,8 +43,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -133,6 +136,20 @@ public final class StaticUtils {
         GraphicsEnvironment graphics;
         graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
         return graphics.getAvailableFontFamilyNames();
+    }
+
+    /**
+     * Returns the names of all font which can display emoji.
+     * @return Set of names.
+     */
+    public static String[] getUnicodeFontNames() {
+        int sp;
+        Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+        final int dspcp = "\uD83D\uDE03".codePointAt(0); // facemark in Emoji-1.0 specification
+        Set<String> fontNames = new HashSet<>();
+        for (Font font : fonts)
+            if (font.canDisplay(dspcp)) fontNames.add(font.getFamily());
+        return fontNames.toArray(new String[0]);
     }
 
     /** Caching install dir */

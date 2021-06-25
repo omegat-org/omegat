@@ -43,6 +43,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -133,9 +134,7 @@ public final class StaticUtils {
      * Returns the names of all font families available.
      */
     public static String[] getFontNames() {
-        GraphicsEnvironment graphics;
-        graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        return graphics.getAvailableFontFamilyNames();
+        return getFontNamesCanShow(Arrays.asList("a", "1", "ó"));
     }
 
     /**
@@ -143,12 +142,16 @@ public final class StaticUtils {
      * @return Set of names.
      */
     public static String[] getUnicodeFontNames() {
-        int sp;
+        return getFontNamesCanShow(Arrays.asList("a", "\uD83D\uDE03")); // facemark in Emoji-1.0 specification
+    }
+
+    private static String[] getFontNamesCanShow(List<String> dispstr) {
         Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-        final String dspstr = "a\uD83D\uDE03"; // facemark in Emoji-1.0 specification
         Set<String> fontNames = new HashSet<>();
-        for (Font font : fonts)
-            if (font.canDisplay(dspstr.codePointAt(0)) && font.canDisplay(dspstr.codePointAt(1))) fontNames.add(font.getFamily());
+        for (Font font : fonts) {
+            if (dispstr.stream().allMatch(str -> font.canDisplay(str.codePointAt(0))))
+                fontNames.add(font.getFamily());
+        }
         return fontNames.toArray(new String[0]);
     }
 

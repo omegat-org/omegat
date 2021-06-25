@@ -48,6 +48,8 @@ public class FontSelectionController extends BasePreferencesController {
 
     private FontSelectionPanel panel;
     private Font oldFont;
+    private String[] unicodeFontNames;
+    private String[] fontNames;
 
     @Override
     public JComponent getGui() {
@@ -65,16 +67,19 @@ public class FontSelectionController extends BasePreferencesController {
 
     private void initGui() {
         panel = new FontSelectionPanel();
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(StaticUtils.getFontNames());
+        fontNames = StaticUtils.getFontNames();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(fontNames);
         panel.fontComboBox.setModel(model);
         panel.fontComboBox.addActionListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
         panel.sizeSpinner.addChangeListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
         panel.limitFontsUnicodeCheckBox.addActionListener(e -> {
             model.removeAllElements();
-            if (panel.applyToProjectFilesCheckBox.isSelected()) {
-                Arrays.stream(StaticUtils.getUnicodeFontNames()).forEach(model::addElement);
+            if (panel.limitFontsUnicodeCheckBox.isSelected()) {
+                if (unicodeFontNames == null)
+                    unicodeFontNames = StaticUtils.getUnicodeFontNames();
+                Arrays.stream(unicodeFontNames).forEach(model::addElement);
             } else {
-                Arrays.stream(StaticUtils.getFontNames()).forEach(model::addElement);
+                Arrays.stream(fontNames).forEach(model::addElement);
             }
         });
     }

@@ -86,8 +86,11 @@ public final class GlossaryReaderTSV {
         String detected = null;
         try (FileInputStream stream = new FileInputStream(inFile)) {
             String line = StaticUtils.getFirstLine(stream, 200);
-            if (line != null) {
-                detected = StringUtil.parseCodingCommand(line);
+            if (line != null && line.startsWith("#")) {
+                String value = StringUtil.parseMagicComment(line).getOrDefault("coding", "").toUpperCase();
+                if (Charset.isSupported(value)) {
+                    detected = value;
+                }
             }
         } catch (IOException e) {
             // ignore

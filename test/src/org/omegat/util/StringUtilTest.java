@@ -414,8 +414,7 @@ public class StringUtilTest {
         // TODO: junit5 parameterized test.
         List<String> cases = Arrays.asList(
                 "# -*- coding: UTF-8 -*-",
-                "# comment -*- coding: UTF-8 -*-",
-                "<!-- HTML case -*- coding: UTF-8 -*- -->"
+                "# comment -*- coding: UTF-8 -*-"
         );
         for (String testCase: cases) {
             Map<String, String> result = StringUtil.parseMagicComment(testCase);

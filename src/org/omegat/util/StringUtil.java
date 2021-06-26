@@ -36,10 +36,8 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.text.Normalizer;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -994,9 +992,6 @@ public final class StringUtil {
         return str.substring(start + Character.charCount(separator), str.length());
     }
 
-    private static final String magicString = "([^\\s\'\":;]+)\\s*:\\s*(\"(?:\\\\.|[^\"])*\"|[^\"\\s;]+)[\\s;]*";
-    private static final Pattern magicRegexp = Pattern.compile(magicString);
-
     /**
      * Parse magic comment(-*- coding: utf-8 -*-).
      * @param str input string.
@@ -1004,49 +999,21 @@ public final class StringUtil {
      */
     public static Map<String, String> parseMagicComment(final String str) {
         HashMap<String, String> result = new HashMap<>();
-        String magicComment = parseComment(str);
-        Matcher matcher = magicRegexp.matcher(magicComment);
-        List<String> pragma = new ArrayList<>();
-        while(matcher.find()) {
-            pragma.add(matcher.group());
+        if (str == null || str.length() < 11) {  // minimum = "-*- a:b -*-".length()
+            return result;
         }
-        for (String item: pragma) {
+        int start = str.indexOf("-*-");
+        int end;
+        if (start < 0 || (end = str.substring(start + 3).indexOf("-*-")) < 0) {
+            return result;
+        }
+        Pattern regex = Pattern.compile("([^\\s:;]+)\\s*:\\s*([^\\s:;]+)[\\s;]*");
+        Matcher matcher = regex.matcher(str.substring(start + 3, start + end + 3));
+        while (matcher.find()) {
+            String item = matcher.group();
             String[] p = item.split(":");
             result.put(p[0].trim(), p[1].trim());
         }
         return result;
-    }
-
-    private static String parseComment(final String str) {
-        int length = str.length();
-
-        if (length <= 7) return null;
-        int beg = magicCommentMarker(str, 0);
-        if (beg < 0) return null;
-        int end = magicCommentMarker(str, beg);
-        if (end < 0) return null;
-
-        return str.substring(beg, end);
-    }
-
-    private static int magicCommentMarker(String str, int start) {
-        int pos = str.substring(start).indexOf("-*-");
-        if (pos >= 0) {
-            return pos + start + 2;
-        } else {
-            return -1;
-        }
-    }
-
-    public static String parseCodingCommand(String line) {
-        if (!line.startsWith("#")) return null;
-        Map<String, String> result = parseMagicComment(line);
-        String value = result.get("coding");
-        if (value != null) {
-            if (Charset.isSupported(value.toUpperCase())) {
-                    return value.toUpperCase();
-            }
-        }
-        return null;
     }
 }

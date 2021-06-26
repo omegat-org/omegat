@@ -28,6 +28,7 @@
 package org.omegat.gui.glossary;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -37,6 +38,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -55,6 +57,14 @@ import org.omegat.util.StringUtil;
 public final class GlossaryReaderTSV {
 
     private GlossaryReaderTSV() {
+    }
+
+    public static void createEmpty(File file) throws IOException {
+        if (file.createNewFile()) {
+            try (BufferedWriter writer = Files.newBufferedWriter(file.toPath())) {
+                writer.write("# Glossaries with tab separation -*- coding: utf-8 -*-");
+            }
+        }
     }
 
     public static String getFileEncoding(final File file) throws IOException {

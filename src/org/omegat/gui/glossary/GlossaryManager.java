@@ -30,11 +30,9 @@ package org.omegat.gui.glossary;
 
 import static com.google.common.primitives.Bytes.indexOf;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -211,7 +209,6 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * produced by local files only.
      *
      * @return all entries
-     * @param src
      */
     public List<GlossaryEntry> getLocalEntries() {
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
@@ -241,8 +238,6 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     /**
      * Get all glossary entries with source terms found in the provided string.
      *
-     * @param src
-     *            The text to search
      * @return A list of matching glossary entries
      */
     public List<GlossaryEntry> searchSourceMatches(SourceTextEntry ste) {
@@ -300,17 +295,14 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     /**
-     * Create new writable glossary file with encoding hint.
+     * Create new default writable glossary file.
      * @param writableGlossaryFile a file to be created.
      * @throws IOException when there is a problem to create file.
      */
     public static void createNewWritableGlossaryFile(ProjectPath writableGlossaryFile) throws IOException {
         File glossaries = writableGlossaryFile.getAsFile();
-        if (glossaries.createNewFile()) {
-            try (BufferedWriter writer = Files.newBufferedWriter(glossaries.toPath())) {
-                writer.write("# Glossaries with tab separation -*- coding: utf-8 -*-");
-            }
-        }
+        // default glossary .txt file is TSV
+        GlossaryReaderTSV.createEmpty(glossaries);
     }
 
     /**

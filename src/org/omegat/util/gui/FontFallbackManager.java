@@ -28,7 +28,9 @@ package org.omegat.util.gui;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.font.FontRenderContext;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -39,10 +41,29 @@ import java.util.stream.Stream;
 import org.omegat.util.Platform;
 
 public final class FontFallbackManager {
-
     public static final FontRenderContext DEFAULT_CONTEXT = new FontRenderContext(null, false, false);
 
+    private static final String BOLD_SUFFIX = ".bold";
+    private static final String ITALIC_SUFFIX = ".italic";
+    private static final List<String> myFontFamilyNames = new ArrayList<>();
+
+    static {
+        String[] fontFamilies = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        for (final String fontName : fontFamilies) {
+            if (!fontName.endsWith(BOLD_SUFFIX) && !fontName.endsWith(ITALIC_SUFFIX)) {
+                myFontFamilyNames.add(fontName);
+            }
+        }
+    }
+
     private FontFallbackManager() {
+    }
+
+    /**
+     * Returns the names of all font families available.
+     */
+    public static String[] getFontNames() {
+        return myFontFamilyNames.toArray(new String[0]);
     }
 
     /**

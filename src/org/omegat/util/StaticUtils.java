@@ -31,7 +31,6 @@
 
 package org.omegat.util;
 
-import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -124,15 +123,6 @@ public final class StaticUtils {
      */
     public static boolean isKey(KeyEvent e, int code, int modifiers) {
         return e.getKeyCode() == code && e.getModifiersEx() == modifiers;
-    }
-
-    /**
-     * Returns the names of all font families available.
-     */
-    public static String[] getFontNames() {
-        GraphicsEnvironment graphics;
-        graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        return graphics.getAvailableFontFamilyNames();
     }
 
     /** Caching install dir */

@@ -63,7 +63,6 @@ import org.omegat.util.Platform.OsType;
  * @author Alex Buloichik
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
- * @author Hiroshi Miura
  */
 public final class StaticUtils {
 

@@ -150,21 +150,23 @@ public final class FontFallbackManager {
     }
 
     /**
-     * Detect specified codePoint can display with specified font.
-     * @param font check against.
-     * @param codePoint character to display.
-     * @return true when specifed character can display on font, otherwise false.
+     * Check a character displayable with font.
+     * @param font target font
+     * @param codePoint character to check
+     * @return true when codePoint can be displayed, otherwise false.
      */
     public static boolean canDisplay(Font font, final int codePoint) {
-        if (!Character.isValidCodePoint(codePoint)) return false;
-        if (Platform.isMacOSX()) {
-            // We detect it by own to work around a bug on macOS whereby all fonts always claim to support all
-            // codepoints; see bug#1051 (https://sourceforge.net/p/omegat/bugs/1051/)
-            int glyphCode = font.createGlyphVector(DEFAULT_CONTEXT, new String(new int[]{codePoint}, 0, 1)).getGlyphCode(0);
-            return (0 < glyphCode && glyphCode <= 0x00ffffff);
-        } else {
+        if (!Character.isValidCodePoint(codePoint)) {
+            return false;
+        }
+        if (!Platform.isMacOSX()) {
             return font.canDisplay(codePoint);
         }
+        // We detect it by own to work around a bug on macOS whereby all
+        // fonts always claim to support all codepoints;
+        // see bug#1051 (https://sourceforge.net/p/omegat/bugs/1051/)
+        int glyphCode = font.createGlyphVector(DEFAULT_CONTEXT, Character.toChars(codePoint)).getGlyphCode(0);
+        return 0 < glyphCode && glyphCode <= 0x00ffffff;
     }
 
     public static Font getCapableFont(int cp) {

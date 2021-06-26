@@ -73,6 +73,7 @@ public final class FontFallbackManager {
 
     /**
      * Detect specified codePoints can display with specified font.
+     * Copied from standard Font class.
      */
     public static int canDisplayUpTo(Font font, String str) {
         int len = str.length();

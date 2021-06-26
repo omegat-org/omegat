@@ -33,6 +33,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -410,7 +411,14 @@ public class StringUtilTest {
 
     @Test
     public void testParseMagicComment() {
-        Map<String, String> result = StringUtil.parseMagicComment("# -*- coding: UTF-8 -*-");
-        assertEquals("Parse coding command", "UTF-8", result.get("coding"));
+        List<String> cases = Arrays.asList(
+                "# -*- coding: UTF-8 -*-",
+                "# comment -*- coding: UTF-8 -*-",
+                "<!-- HTML case -*- coding: UTF-8 -*- -->"
+        );
+        for (String testCase: cases) {
+            Map<String, String> result = StringUtil.parseMagicComment(testCase);
+            assertEquals("Parse coding command", "UTF-8", result.get("coding"));
+        }
     }
 }

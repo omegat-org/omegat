@@ -30,10 +30,8 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.font.FontRenderContext;
 import java.text.CharacterIterator;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -68,29 +66,9 @@ public final class FontFallbackManager {
     private static int lastFontIndex = 0;
     private static final Map<Integer, Font> CACHE = new ConcurrentHashMap<>();
 
-    private static final String BOLD_SUFFIX = ".bold";
-    private static final String ITALIC_SUFFIX = ".italic";
-    private static final List<String> myFontFamilyNames = new ArrayList<>();
-
     private static final FontRenderContext DEFAULT_CONTEXT = new FontRenderContext(null, false, false);
 
-    static {
-        String[] fontFamilies = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-        for (final String fontName : fontFamilies) {
-            if (!fontName.endsWith(BOLD_SUFFIX) && !fontName.endsWith(ITALIC_SUFFIX)) {
-                myFontFamilyNames.add(fontName);
-            }
-        }
-    }
-
     private FontFallbackManager() {
-    }
-
-    /**
-     * Returns the names of all font families available.
-     */
-    public static String[] getFontNames() {
-        return myFontFamilyNames.toArray(new String[0]);
     }
 
     /**
@@ -191,12 +169,10 @@ public final class FontFallbackManager {
         for (int testIndex, i = 0; i < RECENT_FONTS.length; i++) {
             testIndex = (lastFontIndex - i + RECENT_FONTS.length) % RECENT_FONTS.length;
             Font font = RECENT_FONTS[testIndex];
-            if (font != null) {
-                if (canDisplay(font, cp)) {
-                    lastFontIndex = testIndex;
-                    CACHE.put(cp, font);
-                    return font;
-                }
+            if (font != null && canDisplay(font, cp)) {
+                lastFontIndex = testIndex;
+                CACHE.put(cp, font);
+                return font;
             }
         }
         // Try cache in case we've seen this codepoint before.

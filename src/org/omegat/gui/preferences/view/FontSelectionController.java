@@ -36,7 +36,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.FontFallbackManager;
+import org.omegat.util.StaticUtils;
 
 /**
  * @author Maxym Mykhalchuk
@@ -64,7 +64,7 @@ public class FontSelectionController extends BasePreferencesController {
 
     private void initGui() {
         panel = new FontSelectionPanel();
-        panel.fontComboBox.setModel(new DefaultComboBoxModel<>(FontFallbackManager.getFontNames()));
+        panel.fontComboBox.setModel(new DefaultComboBoxModel<>(StaticUtils.getFontNames()));
         panel.fontComboBox.addActionListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
         panel.sizeSpinner.addChangeListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
     }

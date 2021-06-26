@@ -49,7 +49,7 @@ import javax.swing.SwingUtilities;
 import org.omegat.core.Core;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.FontFallbackManager;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -196,7 +196,7 @@ public abstract class AlphabeticalMarkers extends JPanel {
     }
 
     private static Font getTitleFont() {
-        boolean fontAvailable = Arrays.asList(FontFallbackManager.getFontNames())
+        boolean fontAvailable = Arrays.asList(StaticUtils.getFontNames())
                 .contains(DEFAULT_MARKER_FONT_NAME);
         String fontName = fontAvailable ? DEFAULT_MARKER_FONT_NAME : Font.SERIF;
         int fontSize = Preferences.getPreferenceDefault(

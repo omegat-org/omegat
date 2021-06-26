@@ -31,6 +31,7 @@
 
 package org.omegat.util;
 
+import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -62,8 +63,23 @@ import org.omegat.util.Platform.OsType;
  * @author Alex Buloichik
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public final class StaticUtils {
+
+    private static final List<String> myFontFamilyNames = new ArrayList<>();
+
+    private static final String BOLD_SUFFIX = ".bold";
+    private static final String ITALIC_SUFFIX = ".italic";
+
+    static {
+        String[] fontFamilies = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        for (final String fontName : fontFamilies) {
+            if (!fontName.endsWith(BOLD_SUFFIX) && !fontName.endsWith(ITALIC_SUFFIX)) {
+                StaticUtils.myFontFamilyNames.add(fontName);
+            }
+        }
+    }
 
     private StaticUtils() {
     }
@@ -123,6 +139,13 @@ public final class StaticUtils {
      */
     public static boolean isKey(KeyEvent e, int code, int modifiers) {
         return e.getKeyCode() == code && e.getModifiersEx() == modifiers;
+    }
+
+    /**
+     * Returns the names of all font families available.
+     */
+    public static String[] getFontNames() {
+        return myFontFamilyNames.toArray(new String[0]);
     }
 
     /** Caching install dir */

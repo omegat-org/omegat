@@ -411,6 +411,7 @@ public class StringUtilTest {
 
     @Test
     public void testParseMagicComment() {
+        // TODO: junit5 parameterized test.
         List<String> cases = Arrays.asList(
                 "# -*- coding: UTF-8 -*-",
                 "# comment -*- coding: UTF-8 -*-",

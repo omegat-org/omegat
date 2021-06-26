@@ -27,6 +27,8 @@
 
 package org.omegat.gui.glossary;
 
+import static com.google.common.primitives.Bytes.indexOf;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -43,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.omegat.util.EncodingDetector;
 import org.omegat.util.OConsts;
 import org.omegat.util.StringUtil;
 
@@ -55,6 +58,10 @@ import org.omegat.util.StringUtil;
  * @author Aaron Madlon-Kay
  */
 public final class GlossaryReaderTSV {
+
+    private final static byte[] signature = {'-', '*', '-', ' ', 'c', 'o', 'd', 'i', 'n', 'g',
+            ':', ' ', 'u', 't', 'f', '-', '8', ' ', '-', '*', '-'};  //  -*- coding: utf-8 -*-
+    private final static byte[] eol = {0x0a};
 
     private GlossaryReaderTSV() {
     }
@@ -76,8 +83,30 @@ public final class GlossaryReaderTSV {
         if (fnameLower.endsWith(OConsts.EXT_TSV_UTF8)) {
             return StandardCharsets.UTF_8.name();
         } else {
-            return GlossaryManager.detectEncodingDefault(file, defaultEncoding);
+            return detectEncodingDefault(file, defaultEncoding);
         }
+    }
+
+    private static String detectEncodingDefault(final File inFile, final String defaultEncoding) {
+        String detected = null;
+        try (FileInputStream stream = new FileInputStream(inFile)) {
+            byte[] buffer = new byte[4096];
+            int read;
+            read = stream.read(buffer);
+            if (read > signature.length) {
+                int signature_position;
+                if ((signature_position = indexOf(buffer, signature)) > 0) {
+                    if (indexOf(buffer, eol) > signature_position) {
+                        return StandardCharsets.UTF_8.name();
+                    }
+                }
+            }
+            stream.reset();
+            return EncodingDetector.detectEncoding(stream);
+        } catch (IOException ignored) {
+            // ignore exception here.
+        }
+        return detected == null ? defaultEncoding : detected;
     }
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws IOException {

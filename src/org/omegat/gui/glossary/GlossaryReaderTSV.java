@@ -32,7 +32,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -43,10 +42,10 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.OConsts;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -83,23 +82,13 @@ public final class GlossaryReaderTSV {
         }
     }
 
-    private static String parseCodingCommand(String line) {
-        if (!line.startsWith("#")) return null;
-        Map<String, String> result = StringUtil.parseMagicComment(line);
-        String value = result.get("coding");
-        if (value != null) {
-            if (Charset.isSupported(value.toUpperCase())) {
-                    return value.toUpperCase();
-            }
-        }
-        return null;
-    }
-
     private static String detectEncodingDefault(final File inFile, final String defaultEncoding) {
         String detected = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(inFile.toString()))) {
-            String line = br.readLine();
-            detected = parseCodingCommand(line);
+        try (FileInputStream stream = new FileInputStream(inFile)) {
+            String line = StaticUtils.getFirstLine(stream, 200);
+            if (line != null) {
+                detected = StringUtil.parseCodingCommand(line);
+            }
         } catch (IOException e) {
             // ignore
         }

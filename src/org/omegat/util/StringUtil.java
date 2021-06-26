@@ -1037,4 +1037,16 @@ public final class StringUtil {
             return -1;
         }
     }
+
+    public static String parseCodingCommand(String line) {
+        if (!line.startsWith("#")) return null;
+        Map<String, String> result = parseMagicComment(line);
+        String value = result.get("coding");
+        if (value != null) {
+            if (Charset.isSupported(value.toUpperCase())) {
+                    return value.toUpperCase();
+            }
+        }
+        return null;
+    }
 }

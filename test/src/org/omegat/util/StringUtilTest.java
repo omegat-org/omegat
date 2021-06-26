@@ -416,7 +416,7 @@ public class StringUtilTest {
                 "# -*- coding: UTF-8 -*-",
                 "# comment -*- coding: UTF-8 -*-"
         );
-        for (String testCase: cases) {
+        for (String testCase : cases) {
             Map<String, String> result = StringUtil.parseMagicComment(testCase);
             assertEquals("Parse coding command", "UTF-8", result.get("coding"));
         }

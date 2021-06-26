@@ -35,6 +35,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -405,5 +406,11 @@ public class StringUtilTest {
         // Test that behavior changes for Turkish
         assertEquals("Istanbul", StringUtil.replaceCase("\\uistanbul", Locale.ENGLISH)); // English version
         assertEquals("\u0130stanbul", StringUtil.replaceCase("\\uistanbul", new Locale("tr"))); // Turkish version
+    }
+
+    @Test
+    public void testParseMagicComment() {
+        Map<String, String> result = StringUtil.parseMagicComment("# -*- coding: UTF-8 -*-");
+        assertEquals("Parse coding command", "UTF-8", result.get("coding"));
     }
 }

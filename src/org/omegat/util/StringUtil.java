@@ -36,8 +36,14 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -986,5 +992,49 @@ public final class StringUtil {
             }
         }
         return str.substring(start + Character.charCount(separator), str.length());
+    }
+
+    private static final String magicString = "([^\\s\'\":;]+)\\s*:\\s*(\"(?:\\\\.|[^\"])*\"|[^\"\\s;]+)[\\s;]*";
+    private static final Pattern magicRegexp = Pattern.compile(magicString);
+
+    /**
+     * Parse magic comment(-*- codding: utf-8 -*-).
+     * @param str input string.
+     * @return Key-Value map of String.
+     */
+    public static Map<String, String> parseMagicComment(final String str) {
+        HashMap<String, String> result = new HashMap<>();
+        String magicComment = parseComment(str);
+        Matcher matcher = magicRegexp.matcher(magicComment);
+        List<String> pragma = new ArrayList<>();
+        while(matcher.find()) {
+            pragma.add(matcher.group());
+        }
+        for (String item: pragma) {
+            String[] p = item.split(":");
+            result.put(p[0].trim(), p[1].trim());
+        }
+        return result;
+    }
+
+    private static String parseComment(final String str) {
+        int length = str.length();
+
+        if (length <= 7) return null;
+        int beg = magicCommentMarker(str, 0);
+        if (beg < 0) return null;
+        int end = magicCommentMarker(str, beg);
+        if (end < 0) return null;
+
+        return str.substring(beg, end);
+    }
+
+    private static int magicCommentMarker(String str, int start) {
+        int pos = str.substring(start).indexOf("-*-");
+        if (pos >= 0) {
+            return pos + start + 2;
+        } else {
+            return -1;
+        }
     }
 }

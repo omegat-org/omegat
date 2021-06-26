@@ -60,7 +60,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import gen.core.filters.Filters;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.CLIParameters;
@@ -104,6 +103,8 @@ import org.omegat.util.TMXReader2;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.xml.sax.SAXParseException;
+
+import gen.core.filters.Filters;
 
 /**
  * Loaded project implementation. Only translation could be changed after project will be loaded and set by

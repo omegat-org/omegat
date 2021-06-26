@@ -43,11 +43,35 @@ import java.util.stream.Stream;
 import org.omegat.util.Platform;
 
 public final class FontFallbackManager {
-    public static final FontRenderContext DEFAULT_CONTEXT = new FontRenderContext(null, false, false);
+
+    /**
+     * List of fonts that are not supported. All font names
+     * must be suffixed with ";" (even the last one).
+     * <p>
+     * Apple Color Emoji is blacklisted because it requires Apple-specific
+     * rendering techniques that Swing does not support.
+     * <p>
+     * Known working emoji fonts:
+     * <ul><li>Segoe UI Emoji (bundled with Windows 7 and later)
+     * <li><a href="https://github.com/googlei18n/noto-emoji">Noto Emoji</a>
+     * </ul>
+     */
+    private static final Set<String> FONT_BLACKLIST = new HashSet<>(
+            Arrays.asList("Apple Color Emoji", "Noto Color Emoji")
+    );
+    private static final Font FONT_UNAVAILABLE = new Font("", Font.PLAIN, 0);
+
+    private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());
+
+    private static final Font[] RECENT_FONTS = new Font[8];
+    private static int lastFontIndex = 0;
+    private static final Map<Integer, Font> CACHE = new ConcurrentHashMap<>();
 
     private static final String BOLD_SUFFIX = ".bold";
     private static final String ITALIC_SUFFIX = ".italic";
     private static final List<String> myFontFamilyNames = new ArrayList<>();
+
+    private static final FontRenderContext DEFAULT_CONTEXT = new FontRenderContext(null, false, false);
 
     static {
         String[] fontFamilies = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
@@ -68,6 +92,9 @@ public final class FontFallbackManager {
         return myFontFamilyNames.toArray(new String[0]);
     }
 
+    /**
+     * Detect specified codePoints can display with specified font.
+     */
     public static int canDisplayUpTo(Font font, String str) {
         int len = str.length();
         for (int i = 0; i < len; i++) {
@@ -103,9 +130,6 @@ public final class FontFallbackManager {
         return -1;
     }
 
-    /**
-     * Detect specified codePoints can display with specified font.
-     */
     public static int canDisplayUpTo(Font font, CharacterIterator iter, int start, int limit) {
         char c = iter.setIndex(start);
         for (int i = start; i < limit; i++, c = iter.next()) {
@@ -142,29 +166,6 @@ public final class FontFallbackManager {
             return font.canDisplay(codePoint);
         }
     }
-
-    /**
-     * List of fonts that are not supported. All font names
-     * must be suffixed with ";" (even the last one).
-     * <p>
-     * Apple Color Emoji is blacklisted because it requires Apple-specific
-     * rendering techniques that Swing does not support.
-     * <p>
-     * Known working emoji fonts:
-     * <ul><li>Segoe UI Emoji (bundled with Windows 7 and later)
-     * <li><a href="https://github.com/googlei18n/noto-emoji">Noto Emoji</a>
-     * </ul>
-     */
-    private static final Set<String> FONT_BLACKLIST = new HashSet<>(
-            Arrays.asList("Apple Color Emoji", "Noto Color Emoji")
-    );
-    private static final Font FONT_UNAVAILABLE = new Font("", Font.PLAIN, 0);
-
-    private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());
-
-    private static final Font[] RECENT_FONTS = new Font[8];
-    private static int lastFontIndex = 0;
-    private static final Map<Integer, Font> CACHE = new ConcurrentHashMap<>();
 
     public static Font getCapableFont(int cp) {
         // Skip variation selectors

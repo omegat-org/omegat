@@ -67,20 +67,6 @@ import org.omegat.util.Platform.OsType;
  */
 public final class StaticUtils {
 
-    private static final List<String> myFontFamilyNames = new ArrayList<>();
-
-    private static final String BOLD_SUFFIX = ".bold";
-    private static final String ITALIC_SUFFIX = ".italic";
-
-    static {
-        String[] fontFamilies = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-        for (final String fontName : fontFamilies) {
-            if (!fontName.endsWith(BOLD_SUFFIX) && !fontName.endsWith(ITALIC_SUFFIX)) {
-                StaticUtils.myFontFamilyNames.add(fontName);
-            }
-        }
-    }
-
     private StaticUtils() {
     }
 
@@ -145,7 +131,9 @@ public final class StaticUtils {
      * Returns the names of all font families available.
      */
     public static String[] getFontNames() {
-        return myFontFamilyNames.toArray(new String[0]);
+        GraphicsEnvironment graphics;
+        graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        return graphics.getAvailableFontFamilyNames();
     }
 
     /** Caching install dir */

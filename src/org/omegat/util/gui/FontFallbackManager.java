@@ -28,6 +28,7 @@ package org.omegat.util.gui;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.font.FontRenderContext;
+import java.text.CharacterIterator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,6 +65,65 @@ public final class FontFallbackManager {
      */
     public static String[] getFontNames() {
         return myFontFamilyNames.toArray(new String[0]);
+    }
+
+    public static int canDisplayUpTo(Font font, String str) {
+        int len = str.length();
+        for (int i = 0; i < len; i++) {
+            char c = str.charAt(i);
+            if (canDisplay(font, c)) {
+                continue;
+            }
+            if (!Character.isHighSurrogate(c)) {
+                return i;
+            }
+            if (!canDisplay(font, str.codePointAt(i))) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    public static int canDisplayUpTo(Font font, char[] text, int start, int limit) {
+        for (int i = start; i < limit; i++) {
+            char c = text[i];
+            if (canDisplay(font, c)) {
+                continue;
+            }
+            if (!Character.isHighSurrogate(c)) {
+                return i;
+            }
+            if (!canDisplay(font, Character.codePointAt(text, i, limit))) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    /**
+     * Detect specified codePoints can display with specified font.
+     */
+    public static int canDisplayUpTo(Font font, CharacterIterator iter, int start, int limit) {
+        char c = iter.setIndex(start);
+        for (int i = start; i < limit; i++, c = iter.next()) {
+            if (canDisplay(font, c)) {
+                continue;
+            }
+            if (!Character.isHighSurrogate(c)) {
+                return i;
+            }
+            char c2 = iter.next();
+            if (!Character.isLowSurrogate(c2)) {
+                return i;
+            }
+            if (!canDisplay(font, Character.toCodePoint(c, c2))) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
     }
 
     /**

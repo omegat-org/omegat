@@ -59,8 +59,8 @@ public class FontFallbackMarker implements IMarker {
             return null;
         }
 
-        int srcGlyphMissing = sourceText == null ? -1 : editorFont.canDisplayUpTo(sourceText);
-        int trgGlyphMissing = translationText == null ? -1 : editorFont.canDisplayUpTo(translationText);
+        int srcGlyphMissing = sourceText == null ? -1 : FontFallbackManager.canDisplayUpTo(editorFont, sourceText);
+        int trgGlyphMissing = translationText == null ? -1 : FontFallbackManager.canDisplayUpTo(editorFont, translationText);
 
         if (srcGlyphMissing == -1 && trgGlyphMissing == -1) {
             return null;
@@ -84,7 +84,7 @@ public class FontFallbackMarker implements IMarker {
     private void createMarks(List<Mark> acc, Mark.ENTRY_PART part, String text, int firstMissing) {
         char[] chars = text.toCharArray();
         int i = firstMissing;
-        while ((i = editorFont.canDisplayUpTo(chars, i, chars.length)) != -1) {
+        while ((i = FontFallbackManager.canDisplayUpTo(editorFont, chars, i, chars.length)) != -1) {
             int cp = Character.codePointAt(chars, i);
             int start = i;
             i += Character.charCount(cp);
@@ -96,7 +96,7 @@ public class FontFallbackMarker implements IMarker {
             for (int cpn, ccn, j = i; j < chars.length; j += ccn) {
                 cpn = Character.codePointAt(chars, j);
                 ccn = Character.charCount(cpn);
-                if (!editorFont.canDisplay(cpn) && font.canDisplay(cpn)) {
+                if (!FontFallbackManager.canDisplay(editorFont, cpn) && FontFallbackManager.canDisplay(font, cpn)) {
                     i += ccn;
                 } else {
                     break;

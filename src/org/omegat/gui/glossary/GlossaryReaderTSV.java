@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.omegat.util.EncodingDetector;
 import org.omegat.util.OConsts;
 import org.omegat.util.StringUtil;
 
@@ -67,7 +66,7 @@ public final class GlossaryReaderTSV {
         if (fnameLower.endsWith(OConsts.EXT_TSV_UTF8)) {
             return StandardCharsets.UTF_8.name();
         } else {
-            return EncodingDetector.detectEncodingDefault(file, defaultEncoding);
+            return GlossaryManager.detectEncodingDefault(file, defaultEncoding);
         }
     }
 

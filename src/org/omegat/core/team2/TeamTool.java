@@ -37,6 +37,7 @@ import org.eclipse.jgit.api.Git;
 import org.omegat.CLIParameters;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -96,12 +97,8 @@ public final class TeamTool {
         // Create project internal directories
         props.autocreateDirectories();
         // Create version-controlled glossary file
-        File glossaries = props.getWritableGlossaryFile().getAsFile();
-        if (glossaries.createNewFile()) {
-            try (BufferedWriter writer = Files.newBufferedWriter(glossaries.toPath())) {
-                writer.write("# Glossaries with tab separation -*- coding: utf-8 -*-");
-            }
-        }
+        GlossaryManager.createNewWritableGlossaryFile(props.getWritableGlossaryFile());
+
         ProjectFileStorage.writeProjectFile(props);
 
         // Create empty project TM

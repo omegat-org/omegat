@@ -998,7 +998,7 @@ public final class StringUtil {
     private static final Pattern magicRegexp = Pattern.compile(magicString);
 
     /**
-     * Parse magic comment(-*- codding: utf-8 -*-).
+     * Parse magic comment(-*- coding: utf-8 -*-).
      * @param str input string.
      * @return Key-Value map of String.
      */

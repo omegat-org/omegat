@@ -104,7 +104,6 @@ dependencies {
     } else {
         implementation 'commons-io:commons-io:2.7'
         implementation 'commons-lang:commons-lang:2.6'
-        implementation 'com.google.guava:guava:16.0.1'
         api 'org.slf4j:slf4j-api:1.7.25'
         implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 

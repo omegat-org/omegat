@@ -40,7 +40,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.ProjectProperties.ProjectPath;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.glossaries.IGlossary;
@@ -292,13 +291,11 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
 
     /**
      * Create new default writable glossary file.
-     * @param writableGlossaryFile a file to be created.
+     * @param file a file to be created.
      * @throws IOException when there is a problem to create file.
      */
-    public static void createNewWritableGlossaryFile(ProjectPath writableGlossaryFile) throws IOException {
-        File glossaries = writableGlossaryFile.getAsFile();
-        // default glossary .txt file is TSV
-        GlossaryReaderTSV.createEmpty(glossaries);
+    public static void createNewWritableGlossaryFile(File file) throws IOException {
+        GlossaryReaderTSV.createEmpty(file);
     }
 
     private GlossarySearcher buildSearcher(ITokenizer tokenizer, Language language) {

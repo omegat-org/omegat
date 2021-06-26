@@ -60,10 +60,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import gen.core.filters.Filters;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
-import org.xml.sax.SAXParseException;
-
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -85,7 +84,6 @@ import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
@@ -105,8 +103,7 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
-
-import gen.core.filters.Filters;
+import org.xml.sax.SAXParseException;
 
 /**
  * Loaded project implementation. Only translation could be changed after project will be loaded and set by
@@ -281,7 +278,6 @@ public class RealProject implements IProject {
             createDirectory(config.getDictRoot(), OConsts.DEFAULT_DICT);
             createDirectory(config.getTargetRoot(), OConsts.DEFAULT_TARGET);
             //createDirectory(m_config.getTMOtherLangRoot(), OConsts.DEFAULT_OTHERLANG);
-            GlossaryManager.createNewWritableGlossaryFile(config.getWritableGlossaryFile());
 
             saveProjectProperties();
 

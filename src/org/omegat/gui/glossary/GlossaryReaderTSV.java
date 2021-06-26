@@ -64,7 +64,7 @@ public final class GlossaryReaderTSV {
     public static void createEmpty(File file) throws IOException {
         if (file.createNewFile()) {
             try (BufferedWriter writer = Files.newBufferedWriter(file.toPath())) {
-                writer.write("# Glossaries with tab separation -*- coding: utf-8 -*-");
+                writer.write("# Glossary in tab-separated format -*- coding: utf-8 -*-");
             }
         }
     }

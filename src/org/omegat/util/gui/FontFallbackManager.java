@@ -73,9 +73,15 @@ public final class FontFallbackManager {
 
     /**
      * Detect specified codePoints can display with specified font.
-     * Copied from standard Font class.
+     * Wrapper of Font class methods.
      */
     public static int canDisplayUpTo(Font font, String str) {
+        if (!Platform.isMacOSX()) {
+            return font.canDisplayUpTo(str);
+        }
+        // This implementation is copied from java.awt.Font; we use it to work
+        // around a bug on macOS whereby all fonts always claim to support all
+        // codepoints; see bug#1051 (https://sourceforge.net/p/omegat/bugs/1051/)
         int len = str.length();
         for (int i = 0; i < len; i++) {
             char c = str.charAt(i);
@@ -94,6 +100,12 @@ public final class FontFallbackManager {
     }
 
     public static int canDisplayUpTo(Font font, char[] text, int start, int limit) {
+        if (!Platform.isMacOSX()) {
+            return font.canDisplayUpTo(text, start, limit);
+        }
+        // This implementation is copied from java.awt.Font; we use it to work
+        // around a bug on macOS whereby all fonts always claim to support all
+        // codepoints; see bug#1051 (https://sourceforge.net/p/omegat/bugs/1051/)
         for (int i = start; i < limit; i++) {
             char c = text[i];
             if (canDisplay(font, c)) {
@@ -111,6 +123,12 @@ public final class FontFallbackManager {
     }
 
     public static int canDisplayUpTo(Font font, CharacterIterator iter, int start, int limit) {
+        if (!Platform.isMacOSX()) {
+            return font.canDisplayUpTo(iter, start, limit);
+        }
+        // This implementation is copied from java.awt.Font; we use it to work
+        // around a bug on macOS whereby all fonts always claim to support all
+        // codepoints; see bug#1051 (https://sourceforge.net/p/omegat/bugs/1051/)
         char c = iter.setIndex(start);
         for (int i = start; i < limit; i++, c = iter.next()) {
             if (canDisplay(font, c)) {
@@ -140,6 +158,8 @@ public final class FontFallbackManager {
     public static boolean canDisplay(Font font, final int codePoint) {
         if (!Character.isValidCodePoint(codePoint)) return false;
         if (Platform.isMacOSX()) {
+            // We detect it by own to work around a bug on macOS whereby all fonts always claim to support all
+            // codepoints; see bug#1051 (https://sourceforge.net/p/omegat/bugs/1051/)
             int glyphCode = font.createGlyphVector(DEFAULT_CONTEXT, new String(new int[]{codePoint}, 0, 1)).getGlyphCode(0);
             return (0 < glyphCode && glyphCode <= 0x00ffffff);
         } else {

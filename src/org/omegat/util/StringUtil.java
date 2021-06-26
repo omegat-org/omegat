@@ -993,7 +993,13 @@ public final class StringUtil {
     }
 
     /**
-     * Parse magic comment(-*- coding: utf-8 -*-).
+     * Parse magic comment.
+     * <p>
+     *  magic comment: <mark> <command> [; <command> [...]] <mark>
+     *  mark: "-*-"
+     *  command: <key> : <value>
+     *  key and value: string w/ alphabet, number, underscore, hyphen
+     * </p>
      * @param str input string.
      * @return Key-Value map of String.
      */
@@ -1007,7 +1013,7 @@ public final class StringUtil {
         if (start < 0 || (end = str.substring(start + 3).indexOf("-*-")) < 0) {
             return result;
         }
-        Pattern regex = Pattern.compile("([^\\s:;]+)\\s*:\\s*([^\\s:;]+)[\\s;]*");
+        Pattern regex = Pattern.compile("([\\w-]+)\\s*:\\s*([\\w-]+)[\\s;]*");
         Matcher matcher = regex.matcher(str.substring(start + 3, start + end + 3));
         while (matcher.find()) {
             String item = matcher.group();

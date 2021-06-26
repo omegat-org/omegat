@@ -30,7 +30,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.font.FontRenderContext;
 import java.text.CharacterIterator;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -154,7 +155,9 @@ public final class FontFallbackManager {
      * <li><a href="https://github.com/googlei18n/noto-emoji">Noto Emoji</a>
      * </ul>
      */
-    private static final Set<String> FONT_BLACKLIST = Collections.singleton("Apple Color Emoji");
+    private static final Set<String> FONT_BLACKLIST = new HashSet<>(
+            Arrays.asList("Apple Color Emoji", "Noto Color Emoji")
+    );
     private static final Font FONT_UNAVAILABLE = new Font("", Font.PLAIN, 0);
 
     private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());

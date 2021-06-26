@@ -27,6 +27,7 @@ package org.omegat.util.gui;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.font.FontRenderContext;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -35,9 +36,29 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import org.omegat.util.Platform;
+
 public final class FontFallbackManager {
 
+    public static final FontRenderContext DEFAULT_CONTEXT = new FontRenderContext(null, false, false);
+
     private FontFallbackManager() {
+    }
+
+    /**
+     * Detect specified codePoint can display with specified font.
+     * @param font check against.
+     * @param codePoint character to display.
+     * @return true when specifed character can display on font, otherwise false.
+     */
+    public static boolean canDisplay(Font font, final int codePoint) {
+        if (!Character.isValidCodePoint(codePoint)) return false;
+        if (Platform.isMacOSX()) {
+            int glyphCode = font.createGlyphVector(DEFAULT_CONTEXT, new String(new int[]{codePoint}, 0, 1)).getGlyphCode(0);
+            return (0 < glyphCode && glyphCode <= 0x00ffffff);
+        } else {
+            return font.canDisplay(codePoint);
+        }
     }
 
     /**
@@ -53,7 +74,7 @@ public final class FontFallbackManager {
      * </ul>
      */
     private static final Set<String> FONT_BLACKLIST = Collections.singleton("Apple Color Emoji");
-    private static final Font FONT_UNAVAILABLE = new Font("", 0, 0);
+    private static final Font FONT_UNAVAILABLE = new Font("", Font.PLAIN, 0);
 
     private static final Logger LOGGER = Logger.getLogger(FontFallbackManager.class.getName());
 
@@ -84,10 +105,12 @@ public final class FontFallbackManager {
         for (int testIndex, i = 0; i < RECENT_FONTS.length; i++) {
             testIndex = (lastFontIndex - i + RECENT_FONTS.length) % RECENT_FONTS.length;
             Font font = RECENT_FONTS[testIndex];
-            if (font != null && font.canDisplay(cp)) {
-                lastFontIndex = testIndex;
-                CACHE.put(cp, font);
-                return font;
+            if (font != null) {
+                if (canDisplay(font, cp)) {
+                    lastFontIndex = testIndex;
+                    CACHE.put(cp, font);
+                    return font;
+                }
             }
         }
         // Try cache in case we've seen this codepoint before.
@@ -105,9 +128,8 @@ public final class FontFallbackManager {
         LOGGER.fine(() -> String.format("Searching %d fonts for one supporting U+%h %s", allFonts.length, cp,
                 String.valueOf(Character.toChars(cp))));
         long start = System.currentTimeMillis();
-        Optional<Font> font = Stream.of(allFonts).parallel().filter(f -> {
-            return f.canDisplay(cp) && !FONT_BLACKLIST.contains(f.getFamily());
-        }).findFirst();
+        Optional<Font> font = Stream.of(allFonts).parallel().filter(f ->
+                canDisplay(f, cp) && !FONT_BLACKLIST.contains(f.getFamily())).findFirst();
         CACHE.put(cp, font.orElse(FONT_UNAVAILABLE));
         font.ifPresent(FontFallbackManager::addRecentFont);
         LOGGER.fine(() -> font.isPresent()

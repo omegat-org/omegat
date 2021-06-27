@@ -1004,10 +1004,10 @@ public final class StringUtil {
      * @return Key-Value map of String.
      */
     public static Map<String, String> parseMagicComment(final String str) {
-        HashMap<String, String> result = new HashMap<>();
         if (str == null || str.length() < 11) {  // minimum = "-*- a:b -*-".length()
-            return result;
+            return Collections.emptyMap();
         }
+        HashMap<String, String> result = new HashMap<>();
         int start = str.indexOf("-*-");
         int end;
         if (start < 0 || (end = str.substring(start + 3).indexOf("-*-")) < 0) {

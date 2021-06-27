@@ -95,10 +95,10 @@ public final class GlossaryReaderTSV {
         } catch (IOException e) {
             // ignore
         }
-        if (detected == null) {
-            return EncodingDetector.detectEncodingDefault(inFile, defaultEncoding);
+        if (detected != null) {
+            return detected;
         }
-        return detected;
+        return EncodingDetector.detectEncodingDefault(inFile, defaultEncoding);
     }
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws IOException {

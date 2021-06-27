@@ -141,9 +141,7 @@ public final class FontFallbackManager {
         if (!CAN_DISPLAY_IS_BROKEN) {
             return font.canDisplayUpTo(iter, start, limit);
         }
-        // This implementation is copied from java.awt.Font; we use it to work
-        // around a bug on macOS whereby all fonts always claim to support too
-        // many SMP codepoints; see https://sourceforge.net/p/omegat/bugs/1051/
+        // This implementation is copied from java.awt.Font
         char c = iter.setIndex(start);
         for (int i = start; i < limit; i++, c = iter.next()) {
             if (canDisplay(font, c)) {

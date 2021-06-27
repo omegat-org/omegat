@@ -40,7 +40,6 @@ import java.io.PushbackInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -576,22 +575,6 @@ public final class StaticUtils {
             if (!Objects.equals(haystack[i + offset], needles[i])) {
                 return false;
             }
-        }
-        return true;
-    }
-
-    public static String getFirstLine(InputStream stream, int maxLength) throws IOException {
-        byte[] data = new byte[maxLength];
-        int read = stream.read(data);
-        if (isAsciiBytes(data, read)) {
-            return new String(data, StandardCharsets.US_ASCII);
-        }
-        return null;
-    }
-
-    private static boolean isAsciiBytes(byte[] data, int size) {
-        for (int i = 0; i < size; i++) {
-            if (data[i] < 0) return false;
         }
         return true;
     }

@@ -45,7 +45,6 @@ import java.util.Locale;
 
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.OConsts;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -83,17 +82,24 @@ public final class GlossaryReaderTSV {
     }
 
     private static String detectEncodingDefault(final File inFile, final String defaultEncoding) {
-        String detected = null;
-        try (FileInputStream stream = new FileInputStream(inFile)) {
-            String line = StaticUtils.getFirstLine(stream, 200);
-            if (line != null && line.startsWith("#")) {
-                String value = StringUtil.parseMagicComment(line).getOrDefault("coding", "").toUpperCase();
-                if (Charset.isSupported(value)) {
-                    detected = value;
+        StringBuilder sb = new StringBuilder();
+        try (InputStreamReader reader =  new InputStreamReader(new FileInputStream(inFile), StandardCharsets.US_ASCII)) {
+            for (int i = 0; i < 80; i++) {
+                int c = reader.read();
+                if (c < 0 || c > 127 || c == 0x0a) {
+                    break;
                 }
+                sb.append(c);
             }
-        } catch (IOException e) {
-            // ignore
+        } catch (IOException ignored) {
+        }
+        String line = sb.toString();
+        String detected = null;
+       if (line.startsWith("#")) {
+            String value = StringUtil.parseMagicComment(line).getOrDefault("coding", "").toUpperCase();
+            if (Charset.isSupported(value)) {
+                detected = value;
+            }
         }
         if (detected != null) {
             return detected;

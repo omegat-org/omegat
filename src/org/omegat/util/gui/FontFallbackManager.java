@@ -42,8 +42,7 @@ import java.util.stream.Stream;
 public final class FontFallbackManager {
 
     /**
-     * List of fonts that are not supported. All font names
-     * must be suffixed with ";" (even the last one).
+     * List of fonts that are not supported.
      * <p>
      * Apple Color Emoji is blacklisted because it requires Apple-specific
      * rendering techniques that Swing does not support.

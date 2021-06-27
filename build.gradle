@@ -915,9 +915,6 @@ jacoco {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
-}
-
-tasks.jacocoTestReport {
     reports {
         xml.enabled = true  // coveralls plugin depends on xml format report
         html.enabled = true

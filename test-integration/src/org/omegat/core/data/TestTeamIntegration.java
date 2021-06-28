@@ -26,8 +26,7 @@
 package org.omegat.core.data;
 
 import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +35,8 @@ import java.util.Optional;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
+import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
@@ -61,9 +62,6 @@ import org.tmatesoft.svn.core.wc.ISVNOptions;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
-
-import gen.core.project.RepositoryDefinition;
-import gen.core.project.RepositoryMapping;
 
 /**
  * This is test for team project concurrent modification. It doesn't simple
@@ -326,19 +324,15 @@ public final class TestTeamIntegration {
 
         Run(String source, File dir, int delay) throws Exception {
             this.source = source;
-            URLClassLoader cl = (URLClassLoader) TestTeamIntegration.class.getClassLoader();
-            List<String> cp = new ArrayList<String>();
-            for (URL u : cl.getURLs()) {
-                cp.add(u.getFile());
-            }
+            String cp = ManagementFactory.getRuntimeMXBean().getClassPath();
             FileUtils.copyFile(new File(DIR + "/repo/omegat.project"), new File(DIR + "/" + source
                     + "/omegat.project"));
             new File(DIR + "/" + source + "/omegat/").mkdirs();
 
             System.err.println("Execute: " + source + " " + (PROCESS_SECONDS * 1000) + " "
                     + dir.getAbsolutePath() + " " + REPO + " " + delay + " " + SEG_COUNT);
-            ProcessBuilder pb = new ProcessBuilder("java", "-Duser.name=" + source, "-cp", merge(cp,
-                    File.pathSeparatorChar), TestTeamIntegrationChild.class.getName(), source,
+            ProcessBuilder pb = new ProcessBuilder("java", "-Duser.name=" + source, "-cp", cp,
+                    TestTeamIntegrationChild.class.getName(), source,
                     Long.toString(PROCESS_SECONDS * 1000), dir.getAbsolutePath(), REPO,
                     Integer.toString(delay), Integer.toString(SEG_COUNT));
             pb.inheritIO();

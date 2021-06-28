@@ -63,12 +63,20 @@ public final class GlossaryReaderTSV {
     private GlossaryReaderTSV() {
     }
 
-    public static void createEmpty(File file) throws IOException {
+    /**
+     * Create a new empty TSV glossary file with a leading comment
+     * @param file
+     * @return true if the file was created successfully
+     * @throws IOException
+     */
+    public static boolean createEmpty(File file) throws IOException {
         if (file.createNewFile()) {
             try (BufferedWriter writer = Files.newBufferedWriter(file.toPath())) {
                 writer.write("# Glossary in tab-separated format -*- coding: utf-8 -*-");
             }
+            return true;
         }
+        return false;
     }
 
     public static String getFileEncoding(final File file) throws IOException {

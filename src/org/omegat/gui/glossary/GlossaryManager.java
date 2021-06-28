@@ -39,6 +39,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
@@ -63,6 +64,29 @@ import org.omegat.util.Token;
  * @author Didier Briel
  */
 public class GlossaryManager implements DirectoryMonitor.Callback {
+
+    /**
+     * Create new default writable glossary file.
+     * @param file a file to be created.
+     * @return true if the file was successfully created
+     * @throws IOException when there is a problem to create file.
+     */
+    public static boolean createNewWritableGlossaryFile(File file) throws IOException {
+        if (file.exists()) {
+            return false;
+        }
+        String ext = "." + FilenameUtils.getExtension(file.getPath()).toLowerCase(Locale.ENGLISH);
+        switch (ext) {
+        case OConsts.EXT_TSV_DEF: // fallthrough
+        case OConsts.EXT_TSV_TSV: // fallthrough
+        case OConsts.EXT_TSV_TXT: // fallthrough
+        case OConsts.EXT_TSV_UTF8:
+            return GlossaryReaderTSV.createEmpty(file);
+        default:
+            // Creation not supported
+            return false;
+        }
+    }
 
     protected DirectoryMonitor monitor;
 
@@ -287,15 +311,6 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         GlossarySearcher searcher = buildSearcher(tok, Core.getProject().getProjectProperties().getTargetLanguage());
 
         return searcher.searchTargetMatches(trg, protectedParts, entry);
-    }
-
-    /**
-     * Create new default writable glossary file.
-     * @param file a file to be created.
-     * @throws IOException when there is a problem to create file.
-     */
-    public static void createNewWritableGlossaryFile(File file) throws IOException {
-        GlossaryReaderTSV.createEmpty(file);
     }
 
     private GlossarySearcher buildSearcher(ITokenizer tokenizer, Language language) {

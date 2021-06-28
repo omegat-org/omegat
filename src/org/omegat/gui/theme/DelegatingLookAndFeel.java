@@ -66,8 +66,8 @@ public abstract class DelegatingLookAndFeel extends LookAndFeel {
         // Calling Class.forName(UIManager.getSystemLookAndFeelClassName()).newInstance()
         // on Java16 throw error "java.desktop does not export com.sun.java.swing.plaf.gtk"
         // on Linux, and for aqua LaF on macOS. (Bug#1052)
-         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-         systemLookAndFeel = UIManager.getLookAndFeel();
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        systemLookAndFeel = UIManager.getLookAndFeel();
     }
 
     @Override

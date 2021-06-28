@@ -37,12 +37,7 @@ import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.text.Normalizer;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -991,43 +986,5 @@ public final class StringUtil {
             }
         }
         return str.substring(start + Character.charCount(separator), str.length());
-    }
-
-    private static final Pattern MAGIC_COMMENT_PATTERN = Pattern.compile("(?<key>[\\w-]+)\\s*:\\s*(?<value>[\\w-]+)(?:\\s*;)?");
-
-    /**
-     * Parse magic comment.
-     * <pre>{@code
-     *  magic-comment = "-*-" , commands , "-*-" ;
-     *  commands: command , { ";" , command } ;
-     *  command: key , ":" value ;
-     *  key and value: ? string w/ alphabet, number, underscore, hyphen ? ;
-     * }</pre>
-     * @param str input string.
-     * @return Key-Value map of String.
-     */
-    public static Map<String, String> parseMagicComment(final String str) {
-        if (str == null || str.length() < 11) {  // minimum = "-*- a:b -*-".length()
-            return Collections.emptyMap();
-        }
-        int startMarker = str.indexOf("-*- ");
-        if (startMarker < 0) {
-            return Collections.emptyMap();
-        }
-        int start = startMarker + 4; // add length of "-*- "
-        int end = str.indexOf(" -*-", start);
-        if (end < 0) {
-            return Collections.emptyMap();
-        }
-        HashMap<String, String> result = new HashMap<>();
-        Matcher m = MAGIC_COMMENT_PATTERN.matcher(str);
-        int i = start;
-        while (m.find(i) && i < end) {
-            String key = m.group("key");
-            String value = m.group("value");
-            result.put(key, value);
-            i = m.end();
-        }
-        return result;
     }
 }

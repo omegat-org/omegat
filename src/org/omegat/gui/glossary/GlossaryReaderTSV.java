@@ -42,8 +42,11 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.omegat.util.EncodingDetector;
+import org.omegat.util.Log;
+import org.omegat.util.MagicComment;
 import org.omegat.util.OConsts;
 import org.omegat.util.StringUtil;
 
@@ -82,24 +85,12 @@ public final class GlossaryReaderTSV {
     }
 
     private static String detectEncodingDefault(final File inFile, final String defaultEncoding) {
-        StringBuilder sb = new StringBuilder();
-        try (InputStreamReader reader =  new InputStreamReader(new FileInputStream(inFile), StandardCharsets.US_ASCII)) {
-            for (int i = 0; i < 80; i++) {
-                int c = reader.read();
-                if (c < 0 || c > 127 || c == 0x0a) {
-                    break;
-                }
-                sb.append(c);
-            }
-        } catch (IOException ignored) {
-        }
-        String line = sb.toString();
         String detected = null;
-       if (line.startsWith("#")) {
-            String value = StringUtil.parseMagicComment(line).getOrDefault("coding", "").toUpperCase();
-            if (Charset.isSupported(value)) {
-                detected = value;
-            }
+        try {
+            Map<String, String> magic = MagicComment.parse(inFile);
+            detected = magic.get("coding");
+        } catch (IOException e) {
+            Log.log(e);
         }
         if (detected != null) {
             return detected;

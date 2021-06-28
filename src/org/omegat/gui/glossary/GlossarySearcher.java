@@ -132,6 +132,13 @@ public class GlossarySearcher {
         List<Token[]> foundTokens = DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
         foundTokens.removeIf(toks -> !keepMatch(toks, fullText, term));
         if (StringUtil.isCJK(term)) {
+            // This is a workaround for a high reported hash collision rate for
+            // short Japanese strings. This assumes that every matched term will
+            // have at least one token that is a prefix of the term itself; this
+            // doesn't necessarily hold in general for stemming/lemmatizing for
+            // all languages, but it seems probably OK for CJK.
+            //
+            // See https://sourceforge.net/p/omegat/bugs/1034/
             foundTokens.removeIf(toks -> !rawMatch(toks, fullText, term));
         }
         return foundTokens;

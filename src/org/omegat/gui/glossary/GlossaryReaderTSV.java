@@ -85,15 +85,14 @@ public final class GlossaryReaderTSV {
     }
 
     private static String detectEncodingDefault(final File inFile, final String defaultEncoding) {
-        String detected = null;
         try {
             Map<String, String> magic = MagicComment.parse(inFile);
-            detected = magic.get("coding");
+            String detected = magic.get("coding");
+            if (detected != null) {
+                return detected;
+            }
         } catch (IOException e) {
             Log.log(e);
-        }
-        if (detected != null) {
-            return detected;
         }
         return EncodingDetector.detectEncodingDefault(inFile, defaultEncoding);
     }

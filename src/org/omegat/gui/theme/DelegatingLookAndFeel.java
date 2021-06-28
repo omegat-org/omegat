@@ -62,20 +62,12 @@ public abstract class DelegatingLookAndFeel extends LookAndFeel {
     protected final LookAndFeel systemLookAndFeel;
 
     public DelegatingLookAndFeel() throws Exception {
-        // When loading GTK LaF on Java16 / Linux by Class#forName method,
-        // it cause error "java.desktop does not export com.sun.java.swing.plaf.gtk"
-        // (Bug#1052)
-        String systemLaF = UIManager.getSystemLookAndFeelClassName();
-        if (systemLaF.equals("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")) {
-             try {
-                UIManager.setLookAndFeel(systemLaF);
-             } catch (Exception ignore) {
-             }
-             systemLookAndFeel = UIManager.getLookAndFeel();
-        } else {
-            systemLookAndFeel = (LookAndFeel) Class.forName(UIManager.getSystemLookAndFeelClassName())
-                    .getDeclaredConstructor().newInstance();
-        }
+        // Get System LaF instance.
+        // Calling Class.forName(UIManager.getSystemLookAndFeelClassName()).newInstance()
+        // on Java16 throw error "java.desktop does not export com.sun.java.swing.plaf.gtk"
+        // on Linux, and for aqua LaF on macOS. (Bug#1052)
+         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+         systemLookAndFeel = UIManager.getLookAndFeel();
     }
 
     @Override

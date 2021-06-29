@@ -161,6 +161,10 @@ public final class GlossaryReaderTSV {
         } else {
             encoding = Charset.forName(getFileEncoding(file, StandardCharsets.UTF_8.name()));
         }
+        // UTF-8 is a superset of ASCII, so always prefer UTF-8
+        if (encoding.equals(StandardCharsets.US_ASCII)) {
+            encoding = StandardCharsets.UTF_8;
+        }
         try (BufferedWriter wr = Files.newBufferedWriter(file.toPath(), encoding, StandardOpenOption.APPEND)) {
             wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());
             if (!StringUtil.isEmpty(newEntry.getCommentText())) {

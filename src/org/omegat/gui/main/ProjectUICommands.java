@@ -86,6 +86,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
 
+import static org.omegat.util.ProjectFileStorage.loadPropertiesFile;
+
 /**
  * Handler for project UI commands, like open, save, compile, etc.
  *
@@ -475,24 +477,28 @@ public final class ProjectUICommands {
                 }
 
                 try {
+                    // open LOCAL copy of "omegat.project"
                     File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                     boolean needToSaveProperties = false;
-                    File restoreOnFail = null;
+                    File rewriteOnSuccess = null;
+                    // Here, 'props' is the current project setting read from local copy of omegat.project
                     if (props.hasRepositories()) { // This is a remote project
+                        // We can open a teamwork project as local only non-teamwork by passing 'no-team' to command line.
                         if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
-                            // Save repository mapping
+                            // Save the currently effective repository mapping from LOCAL to variable 'repos'.
                             List<RepositoryDefinition> repos = props.getRepositories();
-                            // Update project.properties
+                            // Now let us update project.properties from REMOTE copy of omegat.project in the following.
                             mainWindow.showStatusMessageRB("TEAM_OPEN");
                             try {
                                 RemoteRepositoryProvider remoteRepositoryProvider = 
                                         new RemoteRepositoryProvider(props.getProjectRootDir(), props.getRepositories(), props);
                                 remoteRepositoryProvider.switchToVersion(OConsts.FILE_PROJECT, null);
-                                restoreOnFail = FileUtil.backupFile(projectFile);
-                                // Overwrite omegat.project
-                                remoteRepositoryProvider.copyFilesFromReposToProject(OConsts.FILE_PROJECT);
-                                // Reload project properties
-                                props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
+                                // Copy the content of remote omegat.project to top-level/omegat.project.NEW
+                                remoteRepositoryProvider.copyFilesFromReposToProjectTempNew(OConsts.FILE_PROJECT);
+                                rewriteOnSuccess = new File(projectRootFolder.getAbsoluteFile(), OConsts.FILE_PROJECT + ".NEW");
+                                // We should now load it from omegaT.project.NEW, instead.
+                                // We call loadPropertiesFile(... ) with "omegat.project.NEW".
+                                props = ProjectFileStorage.loadPropertiesFile(projectRootFolder.getAbsoluteFile(), new File(projectRootFolder.getAbsoluteFile(), OConsts.FILE_PROJECT + ".NEW"));
                                 /*
                                  * Repositories with a project by default have no mapping. When they are downloaded,
                                  * the mapping is added locally.
@@ -502,7 +508,15 @@ public final class ProjectUICommands {
                                  * If the repository already contains the omegat.project file with mappings, then we
                                  * use those. Local changes are overwritten like any other setting.
                                  */
-                                if (props.getRepositories() == null) { // We have a project without mappings
+                                // if the remote omegat.project fails to have the git setup at all, the next
+                                // if succeeds. props.repositories == null.  This is where we should warn loudly.
+                                // Future: We may want to make sure that the remote props.GetRepositories match the previous current setup,
+                                //         but this does not seem to be the intention of the current mapping usage.
+                                if (props.getRepositories() == null) { // We have a project without git setting at all  (mappings included)
+                                    // Warn.
+                                    Log.logWarningRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
+                                    // Should use dialog to warn the user directly, too.
+                                    Core.getMainWindow().displayWarningRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
                                     props.setRepositories(repos);      // so we restore the mapping we just lost
                                     needToSaveProperties = true;
                                 }
@@ -537,19 +551,49 @@ public final class ProjectUICommands {
                     }
 
                     final ProjectProperties propsP = props;
-                    final File restoreOnFailFinal = restoreOnFail;
+                    final File rewriteOnSuccessFinal = rewriteOnSuccess;
+                    final boolean needToSavePropertiesFinal = needToSaveProperties;
+                    // We have to extract the processing related to needToSaveProperties{,Final}
+                    // out of  the code block of  Core.executeExclusively()
+                    // and place it here, so that we can change the value of needToSaveProperties
+                    // in our update scheme for teamwork setting.
+                    // Sanity check of possibly modified new project property.
+                    final boolean succeeded = ProjectFactory.loadProject(propsP, true);
+                    if (rewriteOnSuccessFinal != null) { // teamwork case.
+                        if (succeeded) {    // remote content with minor mods seems sane.
+                            if (needToSavePropertiesFinal) {
+                                Log.logWarningRB("REMOTE_PROJECT_CONTENT_WAS_MODIFIED_TO_ADD_MAPPING_SO_NOT_USED");
+                                // Do not save the content of the remote file because we missed mapping.
+                                // So in our new scheme of backup and updating, we don't need to save the file
+                                // after this code block any more.
+                                needToSaveProperties = false;
+                                Files.deleteIfExists(rewriteOnSuccessFinal.toPath()); // remove "omegat.project.NEW"
+                            }
+                        }
+                    }
+                    // Renaming is done inside a critical region using Core.executeExclusively().
                     Core.executeExclusively(true, () -> {
-                        boolean succeeded = ProjectFactory.loadProject(propsP, true);
-                        if (restoreOnFailFinal != null) {
-                            if (succeeded) {
-                                Files.deleteIfExists(restoreOnFailFinal.toPath());
-                            } else {
-                                Files.move(restoreOnFailFinal.toPath(), projectFile.toPath(),
-                                        StandardCopyOption.REPLACE_EXISTING);
+                        if (rewriteOnSuccessFinal != null) { // teamwork case.
+                            if (succeeded) {    // remote content with minor mods seems sane.
+                                if (needToSavePropertiesFinal) {
+                                    // This part is moved out of this lambda and put in the preceding position because
+                                    // we need to modify needToSaveProperties to false.
+                                } else {
+                                    Log.logWarningRB("REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT");
+                                    // New: back up the original project file with as omegat.project.timestamp.bak
+                                    FileUtil.backupFile(projectFile);
+                                    // Rename omegat.project.NEW to omegat.project
+                                    Files.move(rewriteOnSuccessFinal.toPath(), projectFile.toPath(),
+                                            StandardCopyOption.REPLACE_EXISTING);
+                                }
+                            } else { // no, the old copy should stay intact. Delete omegat.project.NEW
+                                Log.logWarningRB("CURRENT_LOCAL_PROJECT_FILE_SHOULD_STAY_INTACT");
+                                Files.deleteIfExists(rewriteOnSuccessFinal.toPath());
                             }
                         }
                     });
-                    if (needToSaveProperties) {
+                    if (needToSaveProperties) { // This writes out the currently effective project setting to "omegat.project"
+                        Log.logWarningRB("SAVING_CURRENT_PROJECT_PROPERTIS_TO_PROJECT_FILE");
                         Core.getProject().saveProjectProperties();
                     }
                     RecentProjects.add(projectRootFolder.getAbsolutePath());

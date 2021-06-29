@@ -70,6 +70,10 @@ public final class GlossaryReaderTSV {
      * @throws IOException
      */
     public static boolean createEmpty(File file) throws IOException {
+        if (file.exists()) {
+            return false;
+        }
+        file.getParentFile().mkdirs();
         if (file.createNewFile()) {
             try (BufferedWriter writer = Files.newBufferedWriter(file.toPath())) {
                 writer.write("# Glossary in tab-separated format -*- coding: utf-8 -*-");

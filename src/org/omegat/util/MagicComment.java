@@ -75,7 +75,7 @@ public class MagicComment {
                 new BOMInputStream(new FileInputStream(file)), StandardCharsets.US_ASCII))) {
             line = reader.readLine();
         }
-        if (line.startsWith("#")) {
+        if (line != null && line.startsWith("#")) {
             return parse(line);
         } else {
             return Collections.emptyMap();

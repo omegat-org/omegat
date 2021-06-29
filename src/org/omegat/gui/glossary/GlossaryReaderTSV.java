@@ -77,6 +77,7 @@ public final class GlossaryReaderTSV {
         if (file.createNewFile()) {
             try (BufferedWriter writer = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8)) {
                 writer.write("# Glossary in tab-separated format -*- coding: utf-8 -*-");
+                writer.write(System.lineSeparator());
             }
             return true;
         }

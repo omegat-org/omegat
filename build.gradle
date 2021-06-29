@@ -153,7 +153,8 @@ dependencies {
         implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        implementation 'org.eclipse.jgit:org.eclipse.jgit:4.11.8.201904181247-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit:5.11.1.202105131744-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.11.1.202105131744-r'
         implementation 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
         // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
         implementation 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'

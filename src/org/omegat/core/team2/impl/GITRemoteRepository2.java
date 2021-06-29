@@ -248,7 +248,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     public String[] getRecentlyDeletedFiles() throws Exception {
         final ArrayList<String> deleted = new ArrayList<>();
 
-        ObjectId head = repository.getAllRefs().get("HEAD").getObjectId();
+        ObjectId head = repository.getRefDatabase().findRef("HEAD").getObjectId();
 
         String settingKey = "lastDeleteCheckForName" + localDirectory.getName();
         String sinceRevisionString = projectTeamSettings.get(settingKey);

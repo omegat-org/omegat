@@ -75,37 +75,37 @@ public abstract class DelegatingLookAndFeel extends LookAndFeel {
     public boolean isSupportedLookAndFeel() {
         return systemLookAndFeel.isSupportedLookAndFeel();
     }
-    
+
     @Override
     public LayoutStyle getLayoutStyle() {
         return systemLookAndFeel.getLayoutStyle();
     }
-    
+
     @Override
     public Icon getDisabledIcon(JComponent component, Icon icon) {
         return systemLookAndFeel.getDisabledIcon(component, icon);
     }
-    
+
     @Override
     public Icon getDisabledSelectedIcon(JComponent component, Icon icon) {
         return systemLookAndFeel.getDisabledSelectedIcon(component, icon);
     }
-    
+
     @Override
     public boolean getSupportsWindowDecorations() {
         return systemLookAndFeel.getSupportsWindowDecorations();
     }
-    
+
     @Override
     public void provideErrorFeedback(Component component) {
         systemLookAndFeel.provideErrorFeedback(component);
     }
-    
+
     @Override
     public void initialize() {
         systemLookAndFeel.initialize();
     }
-    
+
     @Override
     public void uninitialize() {
         systemLookAndFeel.uninitialize();

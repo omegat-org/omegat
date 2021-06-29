@@ -31,14 +31,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -156,14 +154,14 @@ public final class GlossaryReaderTSV {
      * @throws IOException
      */
     public static synchronized void append(final File file, GlossaryEntry newEntry) throws IOException {
-        String encoding = StandardCharsets.UTF_8.name();
+        Charset encoding;
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            createEmpty(file);
+            encoding = StandardCharsets.UTF_8;
         } else {
-            encoding = getFileEncoding(file, StandardCharsets.UTF_8.name());
+            encoding = Charset.forName(getFileEncoding(file, StandardCharsets.UTF_8.name()));
         }
-        try (Writer wr = new OutputStreamWriter(new FileOutputStream(file, true), encoding)) {
+        try (BufferedWriter wr = Files.newBufferedWriter(file.toPath(), encoding, StandardOpenOption.APPEND)) {
             wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());
             if (!StringUtil.isEmpty(newEntry.getCommentText())) {
                 wr.append('\t').append(newEntry.getCommentText());

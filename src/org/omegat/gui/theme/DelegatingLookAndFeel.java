@@ -34,7 +34,9 @@ import javax.swing.JComponent;
 import javax.swing.LayoutStyle;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
+import org.madlonkay.desktopsupport.DesktopSupport;
 import org.omegat.util.gui.ResourcesUtil;
 
 /**
@@ -62,8 +64,18 @@ public abstract class DelegatingLookAndFeel extends LookAndFeel {
     protected final LookAndFeel systemLookAndFeel;
 
     public DelegatingLookAndFeel() throws Exception {
-        systemLookAndFeel = (LookAndFeel) Class.forName(UIManager.getSystemLookAndFeelClassName())
-                .getDeclaredConstructor().newInstance();
+        String systemLafClass = UIManager.getSystemLookAndFeelClassName();
+        String systemLafName = null;
+        for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if (info.getClassName().equals(systemLafClass)) {
+                systemLafName = info.getName();
+            }
+        }
+        if (systemLafName == null) {
+            // Should never happen: system LAF is guaranteed to be installed
+            throw new RuntimeException("Could not identify system LAF name");
+        }
+        systemLookAndFeel = DesktopSupport.getSupport().createLookAndFeel(systemLafName);
     }
 
     @Override

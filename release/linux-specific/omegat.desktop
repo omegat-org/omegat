@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=OmegaT
+Comment=the free translation memory tool
+Type=Application
+Categories=Office;
+Icon=omegat
+Exec=omegat %f
+Terminal=false

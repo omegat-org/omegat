@@ -89,6 +89,14 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
 
     private void initGui() {
         panel = new MachineTranslationPreferencesPanel();
+        panel.autoFetchCheckBox.addActionListener(e -> {
+            boolean mtAutoFetch = panel.autoFetchCheckBox.isSelected();
+            if (mtAutoFetch) {
+                panel.untranslatedOnlyCheckBox.setEnabled(mtAutoFetch);
+            } else {
+                panel.untranslatedOnlyCheckBox.setEnabled(mtAutoFetch);
+            }
+        });
         Dimension tableSize = panel.mtProviderTable.getPreferredSize();
         panel.mtProviderTable.setPreferredScrollableViewportSize(
                 new Dimension(tableSize.width, panel.mtProviderTable.getRowHeight() * MAX_ROW_COUNT));
@@ -139,8 +147,10 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
 
     @Override
     protected void initFromPrefs() {
-        panel.autoFetchCheckBox.setSelected(Preferences.isPreference(Preferences.MT_AUTO_FETCH));
+        boolean mtAutoFetch = Preferences.isPreference(Preferences.MT_AUTO_FETCH);
+        panel.autoFetchCheckBox.setSelected(mtAutoFetch);
         panel.untranslatedOnlyCheckBox.setSelected(Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED));
+        panel.untranslatedOnlyCheckBox.setEnabled(mtAutoFetch);
         List<IMachineTranslation> mtProviders = MachineTranslators.getMachineTranslators();
         mtProviders.stream().forEach(p -> providerStatus.put(p.getName(), p.isEnabled()));
         panel.mtProviderTable.setModel(new ProvidersTableModel(mtProviders));
@@ -151,6 +161,7 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
     public void restoreDefaults() {
         panel.autoFetchCheckBox.setSelected(false);
         panel.untranslatedOnlyCheckBox.setSelected(false);
+        panel.untranslatedOnlyCheckBox.setEnabled(false);
         List<IMachineTranslation> mtProviders = MachineTranslators.getMachineTranslators();
         mtProviders.stream().forEach(p -> providerStatus.put(p.getName(), false));
         panel.mtProviderTable.setModel(new ProvidersTableModel(mtProviders));

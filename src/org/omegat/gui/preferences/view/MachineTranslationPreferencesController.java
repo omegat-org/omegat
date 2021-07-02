@@ -90,12 +90,7 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
     private void initGui() {
         panel = new MachineTranslationPreferencesPanel();
         panel.autoFetchCheckBox.addActionListener(e -> {
-            boolean mtAutoFetch = panel.autoFetchCheckBox.isSelected();
-            if (mtAutoFetch) {
-                panel.untranslatedOnlyCheckBox.setEnabled(mtAutoFetch);
-            } else {
-                panel.untranslatedOnlyCheckBox.setEnabled(mtAutoFetch);
-            }
+            panel.untranslatedOnlyCheckBox.setEnabled(panel.autoFetchCheckBox.isSelected());
         });
         Dimension tableSize = panel.mtProviderTable.getPreferredSize();
         panel.mtProviderTable.setPreferredScrollableViewportSize(

@@ -45,6 +45,7 @@ import org.omegat.core.data.ProjectTMX.CheckOrphanedCallback;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.core.team2.impl.GITRemoteRepository2;
 import org.omegat.core.team2.impl.SVNAuthenticationManager;
 import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
@@ -400,7 +401,7 @@ public final class TestTeamIntegration {
         public void update() throws Exception {
             try (Git git = new Git(repository)) {
                 git.fetch().call();
-                git.checkout().setName("origin/master").call();
+                git.checkout().setName(GITRemoteRepository2.getDefaultBranchName(repository)).call();
             }
         }
 

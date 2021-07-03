@@ -28,7 +28,11 @@ package org.omegat.core.team2.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -79,8 +83,7 @@ import gen.core.project.RepositoryDefinition;
 public class GITRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
 
-    protected static final String LOCAL_BRANCH = "master";
-    protected static final String REMOTE_BRANCH = "origin/master";
+    protected static final String DEFAULT_LOCAL_BRANCH = "master";
     protected static final String REMOTE = "origin";
 
     protected static final int TIMEOUT = 30; // seconds
@@ -200,16 +203,17 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public void switchToVersion(String version) throws Exception {
         try (Git git = new Git(repository)) {
+            String defaultBranch = getDefaultBranchName(repository);
             if (version == null) {
-                version = REMOTE_BRANCH;
+                version = String.join("/", REMOTE, defaultBranch);
                 // TODO fetch
                 git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }
             Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
             git.reset().setMode(ResetType.HARD).call();
             git.checkout().setName(version).call();
-            git.branchDelete().setForce(true).setBranchNames(LOCAL_BRANCH).call();
-            git.checkout().setCreateBranch(true).setName(LOCAL_BRANCH).setStartPoint(version).call();
+            git.branchDelete().setForce(true).setBranchNames(defaultBranch).call();
+            git.checkout().setCreateBranch(true).setName(defaultBranch).setStartPoint(version).call();
         } catch (TransportException e) {
             throw new NetworkException(e);
         }
@@ -321,8 +325,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         Log.logInfoRB("GIT_START", "upload");
         try (Git git = new Git(repository)) {
             RevCommit commit = git.commit().setMessage(comment).call();
-            Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE).add(LOCAL_BRANCH)
-                    .call();
+            Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE)
+                    .add(getDefaultBranchName(repository)).call();
             List<Status> statuses = StreamSupport.stream(results.spliterator(), false)
                     .flatMap(r -> r.getRemoteUpdates().stream()).map(RemoteRefUpdate::getStatus)
                     .collect(Collectors.toList());
@@ -380,6 +384,43 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             }
         }
         return (path.delete());
+    }
+
+    /**
+     * Retrieve default branch name from repository.
+     * @param repository target repository.
+     * @return default branch name, ordinary "main" (recent popular) or "master" (old default)
+     */
+    public static String getDefaultBranchName(final Repository repository) {
+        try {
+            String branch = repository.getBranch();
+            // `getBranch()` is equivalent of
+            // `shortenRefName(exactRef(Constants.HEAD).getTarget().getName())`
+            if (branch != null) {
+                return branch;
+            }
+            // According to Repository#getFullBranch (called by #getBranch) the
+            // result should only be null for a corrupt repository. In that case
+            // we probably have bigger problems, but we attempt to handle that
+            // case here anyway.
+            String repositoryUrl = repository.getConfig().getString("remote", REMOTE, "url");
+            Map<String, Ref> gitMap = Git.lsRemoteRepository().setRemote(repositoryUrl).callAsMap();
+            Ref head = gitMap.get(Constants.HEAD);
+            if (head == null) {
+                return DEFAULT_LOCAL_BRANCH;
+            }
+            if (head.isSymbolic()) {
+                return Repository.shortenRefName(head.getTarget().getName());
+            }
+            for (String refname : gitMap.keySet()) {
+                if (refname.startsWith(Constants.R_HEADS)
+                        && head.getObjectId().equals(gitMap.get(refname).getObjectId())) {
+                    return Repository.shortenRefName(refname);
+                }
+            }
+        } catch (GitAPIException | IOException ignore) {
+        }
+        return DEFAULT_LOCAL_BRANCH;
     }
 
     /**

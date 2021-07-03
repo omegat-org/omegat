@@ -84,7 +84,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
 
     protected static final String DEFAULT_LOCAL_BRANCH = "master";
-    protected static final String REMOTE = "origin";
+    protected static final String REMOTE = Constants.DEFAULT_REMOTE_NAME;
 
     protected static final int TIMEOUT = 30; // seconds
 
@@ -134,10 +134,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     deleteDirectory(localDirectory);
                 }
                 Throwable cause = e.getCause();
-                if (cause != null && cause instanceof org.eclipse.jgit.errors.NoRemoteRepositoryException) {
-                    BadRepositoryException bre = new BadRepositoryException(
-                            ((org.eclipse.jgit.errors.NoRemoteRepositoryException) cause)
-                                    .getLocalizedMessage());
+                if (cause instanceof org.eclipse.jgit.errors.NoRemoteRepositoryException) {
+                    BadRepositoryException bre = new BadRepositoryException(cause.getLocalizedMessage());
                     bre.initCause(e);
                     throw bre;
                 }
@@ -194,8 +192,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     protected String getCurrentVersion() throws IOException {
         try (RevWalk walk = new RevWalk(repository)) {
-            Ref localBranch = repository.findRef("HEAD");
-            RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
+            RevCommit headCommit = walk.lookupCommit(repository.resolve("HEAD"));
             return headCommit.getName();
         }
     }
@@ -440,16 +437,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             return !result.isEmpty();
         } catch (TransportException ex) {
             String message = ex.getMessage();
-            if (message.endsWith("not authorized") || message.endsWith("Auth fail")
+            return message.endsWith("not authorized") || message.endsWith("Auth fail")
                     || message.contains("Too many authentication failures")
-                    || message.contains("Authentication is required")) {
-                return true;
-            }
-            return false;
-        } catch (GitAPIException ex) {
-            return false;
-        } catch (JGitInternalException ex) {
-            // Happens if the URL is a Subversion URL like svn://...
+                    || message.contains("Authentication is required");
+        } catch (GitAPIException | JGitInternalException ex) {
+            // JGitInternalException happens if the URL is a Subversion URL like svn://...
             return false;
         }
     }

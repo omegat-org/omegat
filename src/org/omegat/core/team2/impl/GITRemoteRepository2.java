@@ -199,7 +199,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     public void switchToVersion(String version) throws Exception {
         try (Git git = new Git(repository)) {
             if (version == null) {
-                version = REMOTE + "/" + getDefaultBranchName(repositoryURL);
+                version = String.join("/", REMOTE, getDefaultBranchName(repositoryURL));
                 // TODO fetch
                 git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }

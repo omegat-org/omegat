@@ -33,6 +33,7 @@ package org.omegat.gui.theme;
 
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import javax.swing.LookAndFeel;
 import javax.swing.UIDefaults;
@@ -106,6 +107,13 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         defaults.put("OmegaTBorder.color", borderColor);
         // #EEEEEE -> #575757; Darkest border
         Color statusAreaColor = adjustRGB(standardBgColor, 0x57 - 0xEE);
+
+        // load default colors
+        try {
+            loadDefaultColors(defaults);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // General highlight & shadow used in a lot of places
         //

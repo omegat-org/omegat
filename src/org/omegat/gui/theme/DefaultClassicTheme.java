@@ -32,6 +32,7 @@
 package org.omegat.gui.theme;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import javax.swing.LookAndFeel;
 import javax.swing.UIDefaults;
@@ -81,13 +82,15 @@ public class DefaultClassicTheme extends DelegatingLookAndFeel {
      *
      * @param defaults the {@link UIDefaults} object such as from
      *                 {@link LookAndFeel#getDefaults()}
-     * @param lafId    the ID of the LAF that will make use of the defaults (from
-     *                 {@link LookAndFeel#getID()})
      * @return the modified {@link UIDefaults} object
      */
     public static UIDefaults setDefaults(UIDefaults defaults) {
         defaults.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
-
+        try {
+            loadDefaultColors(defaults);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // FIXME: VLDocking values have to be set to the "developer defaults"
         // not the "LAF defaults" because that's where
         // DockingUISettings#installUI puts them

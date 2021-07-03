@@ -42,10 +42,12 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.RoundedCornerBorder;
+import org.omegat.util.gui.UIDesignManager;
 
 
 public class DefaultFlatTheme extends DelegatingLookAndFeel {
@@ -110,9 +112,9 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
 
         // load default colors
         try {
-            loadDefaultColors(defaults);
+            UIDesignManager.loadDefaultColors(defaults);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.log(e);
         }
 
         // General highlight & shadow used in a lot of places

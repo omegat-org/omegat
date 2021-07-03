@@ -79,6 +79,7 @@ import gen.core.project.RepositoryDefinition;
 public class GITRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
 
+    protected static final String DEFAULT_LOCAL_BRANCH = "master";
     protected static final String REMOTE = "origin";
 
     protected static final int TIMEOUT = 30; // seconds
@@ -197,17 +198,18 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public void switchToVersion(String version) throws Exception {
+        String defaultBranch = getDefaultBranchName(repositoryURL);
         try (Git git = new Git(repository)) {
             if (version == null) {
-                version = String.join("/", REMOTE, getDefaultBranchName(repositoryURL));
+                version = String.join("/", REMOTE, defaultBranch);
                 // TODO fetch
                 git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }
             Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
             git.reset().setMode(ResetType.HARD).call();
             git.checkout().setName(version).call();
-            git.branchDelete().setForce(true).setBranchNames(getDefaultBranchName(repositoryURL)).call();
-            git.checkout().setCreateBranch(true).setName(getDefaultBranchName(repositoryURL)).setStartPoint(version).call();
+            git.branchDelete().setForce(true).setBranchNames(defaultBranch).call();
+            git.checkout().setCreateBranch(true).setName(defaultBranch).setStartPoint(version).call();
         } catch (TransportException e) {
             throw new NetworkException(e);
         }
@@ -389,23 +391,21 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         try {
             Map<String, Ref> gitMap = Git.lsRemoteRepository().setRemote(repositoryUrl).callAsMap();
             Ref head = gitMap.get("HEAD");
+            if (head == null) {
+                return DEFAULT_LOCAL_BRANCH;
+            }
             if (head.isSymbolic()) {
-                return getBranchFromRef(head.getTarget().getName());
-            } else {
-                for (String refname : gitMap.keySet()) {
-                    if (refname.startsWith("refs/heads/")
-                            && head.getObjectId().equals(gitMap.get(refname).getObjectId())) {
-                        return getBranchFromRef(refname);
-                    }
+                return head.getTarget().getName().substring(11);  // 11 = "refs/heads/".size
+            }
+            for (String refname : gitMap.keySet()) {
+                if (refname.startsWith("refs/heads/")
+                        && head.getObjectId().equals(gitMap.get(refname).getObjectId())) {
+                    return refname.substring(11);
                 }
             }
-        } catch (NullPointerException | GitAPIException ignore) {
+        } catch (GitAPIException ignore) {
         }
-        return "master";
-    }
-
-    private static String getBranchFromRef(String refName) {
-        return refName.substring(refName.lastIndexOf('/') + 1);
+        return DEFAULT_LOCAL_BRANCH;
     }
 
     /**

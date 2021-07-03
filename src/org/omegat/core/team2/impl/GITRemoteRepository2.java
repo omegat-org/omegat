@@ -46,6 +46,7 @@ import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.dircache.DirCache;
 import org.eclipse.jgit.dircache.DirCacheIterator;
+import org.eclipse.jgit.lib.AnyObjectId;
 import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.CoreConfig.AutoCRLF;
@@ -79,8 +80,6 @@ import gen.core.project.RepositoryDefinition;
 public class GITRemoteRepository2 implements IRemoteRepository2 {
     private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
 
-    protected static final String LOCAL_BRANCH = "master";
-    protected static final String REMOTE_BRANCH = "origin/master";
     protected static final String REMOTE = "origin";
 
     protected static final int TIMEOUT = 30; // seconds
@@ -201,15 +200,15 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     public void switchToVersion(String version) throws Exception {
         try (Git git = new Git(repository)) {
             if (version == null) {
-                version = REMOTE_BRANCH;
+                version = REMOTE + "/" + getDefaultBranchName(repositoryURL);
                 // TODO fetch
                 git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }
             Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
             git.reset().setMode(ResetType.HARD).call();
             git.checkout().setName(version).call();
-            git.branchDelete().setForce(true).setBranchNames(LOCAL_BRANCH).call();
-            git.checkout().setCreateBranch(true).setName(LOCAL_BRANCH).setStartPoint(version).call();
+            git.branchDelete().setForce(true).setBranchNames(getDefaultBranchName(repositoryURL)).call();
+            git.checkout().setCreateBranch(true).setName(getDefaultBranchName(repositoryURL)).setStartPoint(version).call();
         } catch (TransportException e) {
             throw new NetworkException(e);
         }
@@ -321,8 +320,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         Log.logInfoRB("GIT_START", "upload");
         try (Git git = new Git(repository)) {
             RevCommit commit = git.commit().setMessage(comment).call();
-            Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE).add(LOCAL_BRANCH)
-                    .call();
+            Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE)
+                    .add(getDefaultBranchName(repositoryURL)).call();
             List<Status> statuses = StreamSupport.stream(results.spliterator(), false)
                     .flatMap(r -> r.getRemoteUpdates().stream()).map(RemoteRefUpdate::getStatus)
                     .collect(Collectors.toList());
@@ -380,6 +379,29 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             }
         }
         return (path.delete());
+    }
+
+    /**
+     * Retrieve default branch name from remote origin HEAD, or from git config.
+     * @param repositoryUrl Remote repository URL
+     * @return default branch name, ordinary "main"(recent popular) or "master"(old default)
+     */
+    public static String getDefaultBranchName(final String repositoryUrl) {
+        String branch;
+        try {
+            Ref head = Git.lsRemoteRepository().setRemote(repositoryUrl).callAsMap().get("HEAD");
+            if (head != null) {
+                if (head.isSymbolic()) {
+                    String b = head.getTarget().getName();
+                    return b.substring(b.lastIndexOf('/') + 1);
+                } else {
+                    AnyObjectId id = head.getObjectId();
+                    return id.getName();
+                }
+            }
+        } catch (GitAPIException ignore) {
+        }
+        return "master";
     }
 
     /**

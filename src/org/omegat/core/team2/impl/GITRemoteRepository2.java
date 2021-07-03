@@ -385,7 +385,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     /**
      * Retrieve default branch name from remote origin HEAD.
      * @param repositoryUrl Remote repository URL
-     * @return default branch name, ordinary "main"(recent popular) or "master"(old default)
+     * @return default branch name, ordinary "main" (recent popular) or "master" (old default)
      */
     public static String getDefaultBranchName(final String repositoryUrl) {
         try {

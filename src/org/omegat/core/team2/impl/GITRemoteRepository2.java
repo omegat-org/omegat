@@ -389,14 +389,21 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     public static String getDefaultBranchName(final String repositoryUrl) {
         String branch;
         try {
-            Ref head = Git.lsRemoteRepository().setRemote(repositoryUrl).callAsMap().get("HEAD");
+            Map<String, Ref> gitMap = Git.lsRemoteRepository().setRemote(repositoryUrl).callAsMap();
+            Ref head = gitMap.get("HEAD");
             if (head != null) {
                 if (head.isSymbolic()) {
                     String b = head.getTarget().getName();
                     return b.substring(b.lastIndexOf('/') + 1);
                 } else {
                     AnyObjectId id = head.getObjectId();
-                    return id.getName();
+                    for (String b : gitMap.keySet()) {
+                        if (b.startsWith("refs/heads/")) {
+                            if (id.equals(gitMap.get(b).getObjectId())) {
+                                return b.substring(b.lastIndexOf('/') + 1);
+                            }
+                        }
+                    }
                 }
             }
         } catch (GitAPIException ignore) {

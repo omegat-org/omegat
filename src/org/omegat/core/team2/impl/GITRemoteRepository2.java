@@ -46,7 +46,6 @@ import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.dircache.DirCache;
 import org.eclipse.jgit.dircache.DirCacheIterator;
-import org.eclipse.jgit.lib.AnyObjectId;
 import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.CoreConfig.AutoCRLF;
@@ -382,33 +381,31 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     /**
-     * Retrieve default branch name from remote origin HEAD, or from git config.
+     * Retrieve default branch name from remote origin HEAD.
      * @param repositoryUrl Remote repository URL
      * @return default branch name, ordinary "main"(recent popular) or "master"(old default)
      */
     public static String getDefaultBranchName(final String repositoryUrl) {
-        String branch;
         try {
             Map<String, Ref> gitMap = Git.lsRemoteRepository().setRemote(repositoryUrl).callAsMap();
             Ref head = gitMap.get("HEAD");
-            if (head != null) {
-                if (head.isSymbolic()) {
-                    String b = head.getTarget().getName();
-                    return b.substring(b.lastIndexOf('/') + 1);
-                } else {
-                    AnyObjectId id = head.getObjectId();
-                    for (String b : gitMap.keySet()) {
-                        if (b.startsWith("refs/heads/")) {
-                            if (id.equals(gitMap.get(b).getObjectId())) {
-                                return b.substring(b.lastIndexOf('/') + 1);
-                            }
-                        }
+            if (head.isSymbolic()) {
+                return getBranchFromRef(head.getTarget().getName());
+            } else {
+                for (String refname : gitMap.keySet()) {
+                    if (refname.startsWith("refs/heads/")
+                            && head.getObjectId().equals(gitMap.get(refname).getObjectId())) {
+                        return getBranchFromRef(refname);
                     }
                 }
             }
-        } catch (GitAPIException ignore) {
+        } catch (NullPointerException | GitAPIException ignore) {
         }
         return "master";
+    }
+
+    private static String getBranchFromRef(String refName) {
+        return refName.substring(refName.lastIndexOf('/') + 1);
     }
 
     /**

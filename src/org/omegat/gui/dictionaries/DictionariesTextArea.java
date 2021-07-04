@@ -242,7 +242,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         }
         StringBuilder txt = new StringBuilder();
         boolean wasPrev = false;
-        boolean onceSet = false;
         int textLength = 0;
         setEditable(true);
         for (int i = 0, size = data.size(); i < size; i++) {
@@ -262,18 +261,17 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
             if (i % 30 == 0) {
                 String out = txt.toString();
-                if (onceSet) {
+                if (textLength > 0) {
                     moveCaretPosition(textLength);
                     replaceSelection(out);
                 } else {
                     setText(out);
-                    onceSet = true;
                 }
                 txt = new StringBuilder();
                 textLength = out.length();
             }
         }
-        if (onceSet) {
+        if (textLength > 0) {
             moveCaretPosition(textLength);
             replaceSelection(txt.toString());
         } else {

@@ -198,8 +198,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public void switchToVersion(String version) throws Exception {
-        String defaultBranch = getDefaultBranchName(repositoryURL);
         try (Git git = new Git(repository)) {
+            String defaultBranch = getDefaultBranchName(repository, repositoryURL);
             if (version == null) {
                 version = String.join("/", REMOTE, defaultBranch);
                 // TODO fetch
@@ -322,7 +322,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         try (Git git = new Git(repository)) {
             RevCommit commit = git.commit().setMessage(comment).call();
             Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE)
-                    .add(getDefaultBranchName(repositoryURL)).call();
+                    .add(getDefaultBranchName(repository, repositoryURL)).call();
             List<Status> statuses = StreamSupport.stream(results.spliterator(), false)
                     .flatMap(r -> r.getRemoteUpdates().stream()).map(RemoteRefUpdate::getStatus)
                     .collect(Collectors.toList());
@@ -383,27 +383,34 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     }
 
     /**
-     * Retrieve default branch name from remote origin HEAD.
+     * Retrieve default branch name from repository.
+     * @param repository target repository.
      * @param repositoryUrl Remote repository URL
      * @return default branch name, ordinary "main"(recent popular) or "master"(old default)
      */
-    public static String getDefaultBranchName(final String repositoryUrl) {
+    public static String getDefaultBranchName(final Repository repository, final String repositoryUrl) {
         try {
+            String branch = repository.getBranch();
+            // `getBranch()` is equivalent of
+            // `shortenRefName(exactRef(Constants.HEAD).getTarget().getName())`
+            if (branch != null) {
+                return branch;
+            }
             Map<String, Ref> gitMap = Git.lsRemoteRepository().setRemote(repositoryUrl).callAsMap();
-            Ref head = gitMap.get("HEAD");
+            Ref head = gitMap.get(Constants.HEAD);
             if (head == null) {
                 return DEFAULT_LOCAL_BRANCH;
             }
             if (head.isSymbolic()) {
-                return head.getTarget().getName().substring(11);  // 11 = "refs/heads/".size
+                return Repository.shortenRefName(head.getTarget().getName());
             }
             for (String refname : gitMap.keySet()) {
-                if (refname.startsWith("refs/heads/")
+                if (refname.startsWith(Constants.R_HEADS)
                         && head.getObjectId().equals(gitMap.get(refname).getObjectId())) {
-                    return refname.substring(11);
+                    return Repository.shortenRefName(refname);
                 }
             }
-        } catch (GitAPIException ignore) {
+        } catch (GitAPIException | IOException ignore) {
         }
         return DEFAULT_LOCAL_BRANCH;
     }

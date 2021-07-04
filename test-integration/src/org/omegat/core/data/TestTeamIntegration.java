@@ -403,7 +403,7 @@ public final class TestTeamIntegration {
         public void update() throws Exception {
             try (Git git = new Git(repository)) {
                 git.fetch().call();
-                git.checkout().setName(GITRemoteRepository2.getDefaultBranchName(repositoryUrl)).call();
+                git.checkout().setName(GITRemoteRepository2.getDefaultBranchName(repository, repositoryUrl)).call();
             }
         }
 

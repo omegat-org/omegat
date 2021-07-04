@@ -91,7 +91,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
     protected final DictionariesManager manager = new DictionariesManager(this);
 
-    protected final List<String> displayedWords = new ArrayList<String>();
+    protected final List<String> displayedWords = new ArrayList<>();
 
     protected ITokenizer tokenizer;
 
@@ -240,11 +240,13 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         if (!data.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_HITS)) {
             scrollPane.notify(true);
         }
-
         StringBuilder txt = new StringBuilder();
         boolean wasPrev = false;
-        int i = 0;
-        for (DictionaryEntry de : data) {
+        boolean onceSet = false;
+        int textLength = 0;
+        setEditable(true);
+        for (int i = 0, size = data.size(); i < size; i++) {
+            DictionaryEntry de = data.get(i);
             if (wasPrev) {
                 txt.append("<br><hr>");
             } else {
@@ -257,8 +259,27 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
             displayedWords.add(de.getWord().toLowerCase());
             i++;
+
+            if (i % 30 == 0) {
+                String out = txt.toString();
+                if (onceSet) {
+                    moveCaretPosition(textLength);
+                    replaceSelection(out);
+                } else {
+                    setText(out);
+                    onceSet = true;
+                }
+                txt = new StringBuilder();
+                textLength = out.length();
+            }
         }
-        setText(txt.toString());
+        if (onceSet) {
+            moveCaretPosition(textLength);
+            replaceSelection(txt.toString());
+        } else {
+            setText(txt.toString());
+        }
+        setEditable(false);
     }
 
     protected final transient MouseAdapter mouseCallback = new MouseAdapter() {

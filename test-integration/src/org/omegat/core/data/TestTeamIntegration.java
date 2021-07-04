@@ -298,7 +298,7 @@ public final class TestTeamIntegration {
         File repoDir = Stream.of(new File(dir, RemoteRepositoryProvider.REPO_SUBDIR).listFiles())
                 .filter(File::isDirectory).findFirst().get();
         if (url.startsWith("git") || url.endsWith(".git")) {
-            return new GitTeam(repoDir, url);
+            return new GitTeam(repoDir);
         } else if (url.startsWith("svn") || url.startsWith("http") || url.endsWith(".svn")) {
             return new SvnTeam(repoDir, url);
         } else {
@@ -376,13 +376,11 @@ public final class TestTeamIntegration {
 
     public static class GitTeam implements Team {
         final Repository repository;
-        final String repositoryUrl;
         final File dir;
 
-        public GitTeam(File dir, String url) throws Exception {
+        public GitTeam(File dir) throws Exception {
             this.dir = dir;
             repository = Git.open(dir).getRepository();
-            repositoryUrl = url;
         }
 
         public List<String> listRevisions(String from) throws Exception {
@@ -403,7 +401,7 @@ public final class TestTeamIntegration {
         public void update() throws Exception {
             try (Git git = new Git(repository)) {
                 git.fetch().call();
-                git.checkout().setName(GITRemoteRepository2.getDefaultBranchName(repository, repositoryUrl)).call();
+                git.checkout().setName(GITRemoteRepository2.getDefaultBranchName(repository)).call();
             }
         }
 

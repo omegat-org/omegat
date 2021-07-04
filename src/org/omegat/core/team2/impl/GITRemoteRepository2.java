@@ -199,7 +199,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public void switchToVersion(String version) throws Exception {
         try (Git git = new Git(repository)) {
-            String defaultBranch = getDefaultBranchName(repository, repositoryURL);
+            String defaultBranch = getDefaultBranchName(repository);
             if (version == null) {
                 version = String.join("/", REMOTE, defaultBranch);
                 // TODO fetch
@@ -322,7 +322,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         try (Git git = new Git(repository)) {
             RevCommit commit = git.commit().setMessage(comment).call();
             Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE)
-                    .add(getDefaultBranchName(repository, repositoryURL)).call();
+                    .add(getDefaultBranchName(repository)).call();
             List<Status> statuses = StreamSupport.stream(results.spliterator(), false)
                     .flatMap(r -> r.getRemoteUpdates().stream()).map(RemoteRefUpdate::getStatus)
                     .collect(Collectors.toList());
@@ -385,10 +385,9 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     /**
      * Retrieve default branch name from repository.
      * @param repository target repository.
-     * @param repositoryUrl Remote repository URL
      * @return default branch name, ordinary "main" (recent popular) or "master" (old default)
      */
-    public static String getDefaultBranchName(final Repository repository, final String repositoryUrl) {
+    public static String getDefaultBranchName(final Repository repository) {
         try {
             String branch = repository.getBranch();
             // `getBranch()` is equivalent of
@@ -396,6 +395,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             if (branch != null) {
                 return branch;
             }
+            String repositoryUrl = repository.getConfig().getString("remote", "origin", "url");
             Map<String, Ref> gitMap = Git.lsRemoteRepository().setRemote(repositoryUrl).callAsMap();
             Ref head = gitMap.get(Constants.HEAD);
             if (head == null) {

@@ -89,7 +89,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         implements IDictionaries, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
-    private static final int textBatch = 30;
+    private static final int TEXT_BATCH = 30;
 
     protected final DictionariesManager manager = new DictionariesManager(this);
 
@@ -243,7 +243,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             scrollPane.notify(true);
         }
         boolean wasPrev = false;
-        int pos = 0;
         StringBuilder txt = new StringBuilder();
         for (int i = 0, size = data.size(); i < size; i++) {
             DictionaryEntry de = data.get(i);
@@ -259,15 +258,16 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
             displayedWords.add(de.getWord().toLowerCase());
             i++;
-            if (i % textBatch == 0) {
-                pos = pos + addText(pos, txt.toString());
+            if (i % TEXT_BATCH == 0) {
+                addText(txt.toString());
                 txt = new StringBuilder();
             }
         }
-        addText(pos, txt.toString());
+        addText(txt.toString());
     }
 
-    private int addText(final int pos, final String txt) {
+    private void addText(final String txt) {
+        int pos = getDocument().getLength();
         if (pos > 0) {
             try {
                 getDocument().insertString(pos, txt, SimpleAttributeSet.EMPTY);
@@ -277,7 +277,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         } else {
             setText(txt);
         }
-        return txt.length();
     }
 
     protected final transient MouseAdapter mouseCallback = new MouseAdapter() {

@@ -49,6 +49,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
+import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.StyleSheet;
 
@@ -243,7 +244,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         StringBuilder txt = new StringBuilder();
         boolean wasPrev = false;
         int textLength = 0;
-        setEditable(true);
         for (int i = 0, size = data.size(); i < size; i++) {
             DictionaryEntry de = data.get(i);
             if (wasPrev) {
@@ -262,8 +262,11 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             if (i % 30 == 0) {
                 String out = txt.toString();
                 if (textLength > 0) {
-                    moveCaretPosition(textLength);
-                    replaceSelection(out);
+                    try {
+                        getDocument().insertString(textLength, out, SimpleAttributeSet.EMPTY);
+                    } catch (BadLocationException e) {
+                        Log.log(e);
+                    }
                 } else {
                     setText(out);
                 }
@@ -271,13 +274,16 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 textLength = out.length();
             }
         }
+        String out = txt.toString();
         if (textLength > 0) {
-            moveCaretPosition(textLength);
-            replaceSelection(txt.toString());
+            try {
+                getDocument().insertString(textLength, out, SimpleAttributeSet.EMPTY);
+            } catch (BadLocationException e) {
+                Log.log(e);
+            }
         } else {
-            setText(txt.toString());
+            setText(out);
         }
-        setEditable(false);
     }
 
     protected final transient MouseAdapter mouseCallback = new MouseAdapter() {

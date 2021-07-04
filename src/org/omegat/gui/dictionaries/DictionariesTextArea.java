@@ -89,6 +89,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         implements IDictionaries, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
+    private static final int textBatch = 30;
 
     protected final DictionariesManager manager = new DictionariesManager(this);
 
@@ -241,9 +242,9 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         if (!data.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_HITS)) {
             scrollPane.notify(true);
         }
-        StringBuilder txt = new StringBuilder();
         boolean wasPrev = false;
-        int textLength = 0;
+        int pos = 0;
+        StringBuilder txt = new StringBuilder();
         for (int i = 0, size = data.size(); i < size; i++) {
             DictionaryEntry de = data.get(i);
             if (wasPrev) {
@@ -258,32 +259,25 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
             displayedWords.add(de.getWord().toLowerCase());
             i++;
-
-            if (i % 30 == 0) {
-                String out = txt.toString();
-                if (textLength > 0) {
-                    try {
-                        getDocument().insertString(textLength, out, SimpleAttributeSet.EMPTY);
-                    } catch (BadLocationException e) {
-                        Log.log(e);
-                    }
-                } else {
-                    setText(out);
-                }
+            if (i % textBatch == 0) {
+                pos = pos + addText(pos, txt.toString());
                 txt = new StringBuilder();
-                textLength = out.length();
             }
         }
-        String out = txt.toString();
-        if (textLength > 0) {
+        addText(pos, txt.toString());
+    }
+
+    private int addText(final int pos, final String txt) {
+        if (pos > 0) {
             try {
-                getDocument().insertString(textLength, out, SimpleAttributeSet.EMPTY);
+                getDocument().insertString(pos, txt, SimpleAttributeSet.EMPTY);
             } catch (BadLocationException e) {
                 Log.log(e);
             }
         } else {
-            setText(out);
+            setText(txt);
         }
+        return txt.length();
     }
 
     protected final transient MouseAdapter mouseCallback = new MouseAdapter() {

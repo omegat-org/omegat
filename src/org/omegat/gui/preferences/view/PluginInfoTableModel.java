@@ -32,7 +32,7 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 import org.omegat.core.data.PluginInformation;
-import org.omegat.core.plugins.PluginInstaller;
+import org.omegat.util.PluginInstaller;
 import org.omegat.util.OStrings;
 
 public class PluginInfoTableModel extends DefaultTableModel {

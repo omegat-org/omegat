@@ -23,7 +23,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.plugins;
+package org.omegat.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -53,16 +53,8 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
-import org.omegat.core.threads.LongProcessThread;
-import org.omegat.core.threads.PluginDownloadThread;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
-import org.omegat.util.HttpConnectionUtils;
-import org.omegat.util.Log;
-import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
-import org.omegat.util.StringUtil;
 
 
 /**
@@ -73,30 +65,11 @@ import org.omegat.util.StringUtil;
 public final class PluginInstaller {
 
     private static final String LIST_URL = "https://github.com/omegat-org/omegat-plugins/releases/download/continuous-release/plugins.MF";
-    private LongProcessThread checkStop;
 
-    public PluginInstaller() {
+    private PluginInstaller() {
     }
 
-    public void setThread(LongProcessThread thread) {
-        checkStop = thread;
-    }
-
-    public void installFromRemote(final PluginsPreferencesController controller, final PluginInformation info) {
-        try {
-            URL downloadUrl = new URL(info.getRemoteJarFileUrl());
-            String jarFilename = info.getJarFilename();
-            String sha256sum = info.getSha256Sum();
-            PluginDownloadThread downloadThread = new PluginDownloadThread(downloadUrl, sha256sum, jarFilename, this);
-            downloadThread.start();
-            checkStop.checkInterrupted();
-            controller.setRestartRequired(true);
-        } catch (IOException ex) {
-            Log.log(ex);
-        }
-    }
-
-    public Boolean install(final File pluginFile, final boolean background) {
+    public static boolean install(final File pluginFile, final boolean background) {
         Path pluginJarFile;
         PluginInformation info;
         try {
@@ -124,7 +97,7 @@ public final class PluginInstaller {
         String pluginName = info.getName();
         String version = info.getVersion();
         // detect current installation
-        PluginInformation currentInfo = getInstalledPluginInformation(info);
+        PluginInformation currentInfo = getInstalledPlugins().getOrDefault(info.getClassName(), null);
         String message;
         if (currentInfo != null) {
             message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,
@@ -134,25 +107,63 @@ public final class PluginInstaller {
                     version);
         }
 
+        if (background) {
+            return doInstall(currentInfo, pluginJarFile.toFile());
+        }
         // confirm installation
-        if (background ||
-                JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                     message,
                     OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE)) {
-            try {
-                if (currentInfo != null) {
-                    FileUtils.forceDeleteOnExit(currentInfo.getJarFile());
-                }
-                File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
-                FileUtils.copyFileToDirectory(pluginJarFile.toFile(), homePluginsDir, true);
+            if (doInstall(currentInfo, pluginJarFile.toFile())) {
                 return true;
-            } catch (IOException ex) {
-                Log.logErrorRB("PREFS_PLUGINS_INSTALLATION_FAILED");
-                Log.log(ex);
             }
+            JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                    OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
+                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
+                    JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
         }
         return false;
+    }
+
+    private static boolean doInstall(PluginInformation currentInfo, File file) {
+        try {
+            if (currentInfo != null) {
+                FileUtils.forceDeleteOnExit(currentInfo.getJarFile());
+            }
+            File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
+            FileUtils.copyFileToDirectory(file, homePluginsDir, true);
+            return true;
+        } catch (IOException ex) {
+            Log.logErrorRB("PREFS_PLUGINS_INSTALLATION_FAILED");
+            Log.log(ex);
+        }
+        return false;
+    }
+
+    /**
+     * Return known available plugins.
+     * It can has plugins that has already installed.
+     * @return Map of PluginInformation
+     */
+    public static Map<String, PluginInformation> getPluginInformations() {
+        Map<String, PluginInformation> plugins = getInstalledPlugins();
+        getPluginsList().stream()
+                .sorted(Comparator.comparing(PluginInformation::getClassName))
+                .forEach(info -> {
+                    String key = info.getClassName();
+                    if (plugins.get(key) != null) {
+                        if (info.compareTo(plugins.get(key)) > 0) {
+                            info.setStatus(PluginInformation.Status.UPGRADABLE);
+                        } else {
+                            info.setStatus(PluginInformation.Status.INSTALLED);
+                        }
+                    } else {
+                        info.setStatus(PluginInformation.Status.UNINSTALLED);
+                    }
+                    plugins.put(key, info);
+                });
+        return plugins;
     }
 
     /**
@@ -163,7 +174,7 @@ public final class PluginInstaller {
      * @return installed plugin jar file path.
      * @throws IOException when source file is corrupted.
      */
-    static Path unpackPlugin(File sourceFile, Path targetPath) throws IOException {
+    private static Path unpackPlugin(File sourceFile, Path targetPath) throws IOException {
         Path target;
         if (sourceFile.getName().endsWith(".jar")) {
             target = targetPath.resolve(sourceFile.getName());
@@ -189,7 +200,7 @@ public final class PluginInstaller {
      * @param pluginJarFile plugin jar file
      * @return PluginInformation
      */
-    public static Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) {
+    private static Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         try {
             URL[] urls = new URL[1];
@@ -222,7 +233,7 @@ public final class PluginInstaller {
      * Return installed plugins.
      * @return Set of PluginInformation
      */
-    public static Map<String, PluginInformation> getInstalledPlugins() {
+    private static Map<String, PluginInformation> getInstalledPlugins() {
         Map<String, PluginInformation> installedPlugins = new TreeMap<>();
         PluginUtils.getPluginInformations().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
@@ -232,19 +243,10 @@ public final class PluginInstaller {
     }
 
     /**
-     * Get plugin information installed to system specified by parameter.
-     * @param info PluginInformation to search
-     * @return PluginInformation when found, otherwise return null
-     */
-    public static PluginInformation getInstalledPluginInformation(PluginInformation info) {
-        return getInstalledPlugins().getOrDefault(info.getClassName(), null);
-    }
-
-    /**
      * Download plugin list from github repository.
      * @return set of PluginInformation
      */
-    static Set<PluginInformation> getPluginsList() {
+    private static Set<PluginInformation> getPluginsList() {
         Set<PluginInformation> pluginInfo = new TreeSet<>();
         String raw_value;
         try {
@@ -276,30 +278,5 @@ public final class PluginInstaller {
             e.printStackTrace();
         }
         return pluginInfo;
-    }
-
-    /**
-     * Return known available plugins.
-     * It can has plugins that has already installed.
-     * @return Map of PluginInformation
-     */
-     public static Map<String, PluginInformation> getPluginInformations() {
-          Map<String, PluginInformation> plugins = getInstalledPlugins();
-          getPluginsList().stream()
-                .sorted(Comparator.comparing(PluginInformation::getClassName))
-                .forEach(info -> {
-                    String key = info.getClassName();
-                    if (plugins.get(key) != null) {
-                        if (info.compareTo(plugins.get(key)) > 0) {
-                            info.setStatus(PluginInformation.Status.UPGRADABLE);
-                        } else {
-                            info.setStatus(PluginInformation.Status.INSTALLED);
-                        }
-                    } else {
-                        info.setStatus(PluginInformation.Status.UNINSTALLED);
-                    }
-                    plugins.put(key, info);
-                });
-          return plugins;
     }
 }

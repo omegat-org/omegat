@@ -30,19 +30,22 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URL;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableRowSorter;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
-import org.omegat.core.plugins.PluginInstaller;
+import org.omegat.core.threads.PluginDownloadThread;
 import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.preferences.BasePreferencesController;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.PluginInstaller;
 import org.omegat.util.gui.TableColumnSizer;
 
 
@@ -52,11 +55,9 @@ import org.omegat.util.gui.TableColumnSizer;
  */
 public class PluginsPreferencesController extends BasePreferencesController {
 
-    public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
     private PluginsPreferencesPanel panel;
     private PluginDetailsPane pluginDetailsPane;
     private PluginDetailHeader pluginDetailHeader;
-    private PluginInstaller pluginInstaller;
 
     /**
      * Format plugin information for details pane of UI.
@@ -87,7 +88,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
     @Override
     public JComponent getGui() {
         if (panel == null) {
-            pluginInstaller = new PluginInstaller();
             initGui();
             initFromPrefs();
         }
@@ -121,7 +121,16 @@ public class PluginsPreferencesController extends BasePreferencesController {
             }
             pluginDetailHeader.installButton.addActionListener(e -> {
                 pluginDetailHeader.installButton.setEnabled(false);
-                pluginInstaller.installFromRemote(this, info);
+                try {
+                    URL downloadUrl = new URL(info.getRemoteJarFileUrl());
+                    String jarFilename = info.getJarFilename();
+                    String sha256sum = info.getSha256Sum();
+                    PluginDownloadThread downloadThread = new PluginDownloadThread(downloadUrl, sha256sum, jarFilename);
+                    downloadThread.start();
+                } catch (IOException ex) {
+                    Log.log(ex);
+                }
+                setRestartRequired(true);
             });
             StringBuilder detailTextBuilder = new StringBuilder(formatDetailText(model.getValueAt(rowIndex)));
             pluginDetailsPane.setText(detailTextBuilder.toString());
@@ -155,15 +164,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.installPluginsButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK"));
         panel.installPluginsButton.addActionListener(e -> {
             ChoosePluginFile choosePluginFile = new ChoosePluginFile();
-            int choosePluginFileResult = choosePluginFile.showOpenDialog(Core.getMainWindow().getApplicationFrame());
-            if (choosePluginFileResult == JFileChooser.APPROVE_OPTION) {
-                if (pluginInstaller.install(choosePluginFile.getSelectedFile(), false)) {
+            if (JFileChooser.APPROVE_OPTION == choosePluginFile.showOpenDialog(Core.getMainWindow().getApplicationFrame())) {
+                if (PluginInstaller.install(choosePluginFile.getSelectedFile(), false)) {
                     setRestartRequired(true);
-                } else {
-                    JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                            OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
-                            OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                            JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

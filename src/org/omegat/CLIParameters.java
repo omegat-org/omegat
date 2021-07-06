@@ -50,7 +50,9 @@ public final class CLIParameters {
     private CLIParameters() {
     }
 
-    /** Regexp for parse parameters. */
+    /**
+     * Regexp for parse parameters.
+     */
     protected static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
 
     // Help
@@ -59,7 +61,9 @@ public final class CLIParameters {
 
     public static final String PROJECT_DIR = "project";
 
-    /** CLI parameter to specify a remote project to load instead of a local one */
+    /**
+     * CLI parameter to specify a remote project to load instead of a local one
+     */
     public static final String REMOTE_PROJECT = "remote-project";
 
     // All modes
@@ -69,11 +73,17 @@ public final class CLIParameters {
     public static final String CONFIG_DIR = "config-dir";
     public static final String DISABLE_PROJECT_LOCKING = "disable-project-locking";
     public static final String DISABLE_LOCATION_SAVE = "disable-location-save";
-    /** CLI parameter to disable team functionality (treat as local project) */
+    /**
+     * CLI parameter to disable team functionality (treat as local project)
+     */
     public static final String NO_TEAM = "no-team";
-    /** CLI parameter to specify source tokenizer */
+    /**
+     * CLI parameter to specify source tokenizer
+     */
     public static final String TOKENIZER_SOURCE = "ITokenizer";
-    /** CLI parameter to specify target tokenizer */
+    /**
+     * CLI parameter to specify target tokenizer
+     */
     public static final String TOKENIZER_TARGET = "ITokenizerTarget";
     // TODO: Document this; see RealProject.patchFileNameForEntryKey()
     public static final String ALTERNATE_FILENAME_FROM = "alternate-filename-from";
@@ -106,6 +116,7 @@ public final class CLIParameters {
      */
     enum RUN_MODE {
         GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN;
+
         public static RUN_MODE parse(String s) {
             try {
                 return valueOf(normalize(s));
@@ -123,6 +134,7 @@ public final class CLIParameters {
      */
     public enum PSEUDO_TRANSLATE_TYPE {
         EQUAL, EMPTY;
+
         public static PSEUDO_TRANSLATE_TYPE parse(String s) {
             try {
                 return valueOf(normalize(s));
@@ -138,6 +150,7 @@ public final class CLIParameters {
      */
     public enum TAG_VALIDATION_MODE {
         IGNORE, WARN, ABORT;
+
         public static TAG_VALIDATION_MODE parse(String s) {
             try {
                 return valueOf(normalize(s));

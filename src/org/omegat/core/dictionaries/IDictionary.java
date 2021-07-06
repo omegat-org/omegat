@@ -83,5 +83,5 @@ public interface IDictionary extends AutoCloseable {
     /**
      * Dispose IDictionary. Default is no action.
      */
-    default void close() throws IOException {}
+    default void close() throws IOException { }
 }

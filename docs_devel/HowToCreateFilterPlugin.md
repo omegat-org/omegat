@@ -22,9 +22,11 @@ OmegaT file filter plugin.
 ## manifest
 There must be a manifest file that indicates that it is an OmegaT plugin. There are two flavors, see below. 
 Omegat 5.3.0 also supports to provide additional information (valid for both flavors) that can be displayed in the UI. 
-You can **optionally** provide name, version, author and description.
-OmegaT 5.5.0 show plugin name, and author in preference dialog. You are recommended to set these parameters.
-For each there are different manifest entry alternatives, and OmegaT will pick the first one present in the order from
+You can **optionally** provide name, version, author and description. 
+
+OmegaT 5.5.0 can show the plugin name and author in Preferences. You are recommended to set these parameters.
+
+For each there are different manifest entry alternatives, and OmegaT will pick the first one present in the order from 
 left to right as described in the table below:
 You can **optionally** provide an URL of your plugin home page, license and category.
 OmegaT x.x.x show plugin home page URL, license and category. You are recommended to set these parameters.

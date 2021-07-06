@@ -119,7 +119,7 @@ public final class LastSegmentManager {
         } catch (IOException e) {
             Log.logDebug(LOGGER, "Could not load last segment info", e.getMessage());
             return 1;
-    	}
+        }
 
         Core.getMainWindow().showStatusMessageRB("MW_JUMPING_LAST_ENTRY");
         int lastEntryNumber = 1;

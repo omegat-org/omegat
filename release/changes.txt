@@ -1,12 +1,30 @@
 ----------------------------------------------------------------------
  OmegaT 5.6.0
 ----------------------------------------------------------------------
-  0 Enhancements
-  0 Bug fixes
+  3 Enhancements
+  2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.6.0 vs 5.5.0
 
+  Bug fixes:
+
+  - Glossary collisions with short Japanese terms
+  https://sourceforge.net/p/omegat/bugs/1034/
+
+  - Aggressive Font Fallback doesn't work on Java 11
+  https://sourceforge.net/p/omegat/bugs/1051/
+
+  Implemented requests:
+
+  - Restart application from Project menu
+  https://sourceforge.net/p/omegat/feature-requests/1564/
+
+  - Support theme plugins, choose theme in preferences
+  https://sourceforge.net/p/omegat/feature-requests/1567/
+
+  - Detect TSV glossary encoding via magic comment
+  https://sourceforge.net/p/omegat/feature-requests/1579/
 
 ----------------------------------------------------------------------
  OmegaT 5.5.0 (2021-05-18)

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -86,7 +87,7 @@ public class FontFallbackListener implements DocumentListener {
                     while (nleft > 0) {
                         doc.getText(offs, nleft, seg);
                         int i = seg.getBeginIndex();
-                        while ((i = defaultFont.canDisplayUpTo(seg, i, seg.getEndIndex())) != -1) {
+                        while ((i = FontFallbackManager.canDisplayUpTo(defaultFont, seg, i, seg.getEndIndex())) != -1) {
                             int cp = Character.codePointAt(seg, i - seg.getBeginIndex());
                             int start = i;
                             i += Character.charCount(cp);
@@ -98,7 +99,7 @@ public class FontFallbackListener implements DocumentListener {
                             for (int cpn, ccn, j = i; j < seg.getEndIndex(); j += ccn) {
                                 cpn = Character.codePointAt(seg, j - seg.getBeginIndex());
                                 ccn = Character.charCount(cpn);
-                                if (!defaultFont.canDisplay(cpn) && font.canDisplay(cpn)) {
+                                if (!FontFallbackManager.canDisplay(defaultFont, cpn) && FontFallbackManager.canDisplay(font, cpn)) {
                                     i += ccn;
                                 } else {
                                     break;

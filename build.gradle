@@ -8,6 +8,7 @@ plugins {
     id 'signing'
     id 'eclipse'
     id 'checkstyle'
+    id 'jacoco'
     id 'com.github.spotbugs' version '4.7.0'
     id 'de.gliderpilot.jnlp' version '1.2.6'
     id 'org.hidetake.ssh' version '2.10.1'
@@ -108,14 +109,14 @@ dependencies {
         implementation 'org.slf4j:slf4j-jdk14:1.7.25'
 
         // macOS integration
-        implementation 'org.madlonkay:desktopsupport:0.4.0'
+        implementation 'org.madlonkay:desktopsupport:0.6.0'
 
         api 'javax.xml.bind:jaxb-api:2.3.1'
         implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
         implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
 
         // PDF Filter
-        implementation 'org.apache.pdfbox:pdfbox:2.0.23'
+        implementation 'org.apache.pdfbox:pdfbox:2.0.24'
 
         // Aligner
         implementation 'net.loomchild:maligna:3.0.0'
@@ -152,7 +153,8 @@ dependencies {
         implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        implementation 'org.eclipse.jgit:org.eclipse.jgit:4.11.8.201904181247-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit:5.11.1.202105131744-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.11.1.202105131744-r'
         implementation 'com.jcraft:jsch.agentproxy.jsch:0.0.9'
         // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
         implementation 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
@@ -908,6 +910,18 @@ task spotlessChangedApply {
     }
 }
 
+jacoco {
+    toolVersion="0.8.6"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.enabled = true  // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
+
 task manualPdfs {
     description = 'Build PDF manuals for all languages. Requires Docker.'
 }
@@ -1074,6 +1088,9 @@ publishing {
 
 signing {
     sign publishing.publications.mavenJava
+    if (!findProperty("signing.keyId")) {
+        useGpgCmd()
+    }
 }
 
 remotes {

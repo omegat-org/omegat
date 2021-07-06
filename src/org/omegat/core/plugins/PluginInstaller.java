@@ -295,8 +295,10 @@ public final class PluginInstaller {
                         } else {
                             info.setStatus(PluginInformation.Status.INSTALLED);
                         }
-                        plugins.put(key, info);
+                    } else {
+                        info.setStatus(PluginInformation.Status.UNINSTALLED);
                     }
+                    plugins.put(key, info);
                 });
           return plugins;
     }

@@ -48,7 +48,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
     private final Map<String, PluginInformation> listPlugins;
 
     public PluginInfoTableModel() {
-        listPlugins = PluginInstaller.getInstalledPlugins();
+        listPlugins = PluginInstaller.getPluginInformations();
     }
 
     @Override

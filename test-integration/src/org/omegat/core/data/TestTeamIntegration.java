@@ -26,8 +26,7 @@
 package org.omegat.core.data;
 
 import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,6 +45,7 @@ import org.omegat.core.data.ProjectTMX.CheckOrphanedCallback;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.core.team2.impl.GITRemoteRepository2;
 import org.omegat.core.team2.impl.SVNAuthenticationManager;
 import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
@@ -237,15 +237,6 @@ public final class TestTeamIntegration {
         System.err.print("                  ".substring(0, 14 - s.length()) + s + " ");
     }
 
-    static String merge(List<String> cp, char separator) {
-        String o = "";
-        for (String c : cp) {
-            o += separator;
-            o += c;
-        }
-        return o.substring(1);
-    }
-
     /**
      * Prepare repository.
      */
@@ -326,19 +317,15 @@ public final class TestTeamIntegration {
 
         Run(String source, File dir, int delay) throws Exception {
             this.source = source;
-            URLClassLoader cl = (URLClassLoader) TestTeamIntegration.class.getClassLoader();
-            List<String> cp = new ArrayList<String>();
-            for (URL u : cl.getURLs()) {
-                cp.add(u.getFile());
-            }
+            String cp = ManagementFactory.getRuntimeMXBean().getClassPath();
             FileUtils.copyFile(new File(DIR + "/repo/omegat.project"), new File(DIR + "/" + source
                     + "/omegat.project"));
             new File(DIR + "/" + source + "/omegat/").mkdirs();
 
             System.err.println("Execute: " + source + " " + (PROCESS_SECONDS * 1000) + " "
                     + dir.getAbsolutePath() + " " + REPO + " " + delay + " " + SEG_COUNT);
-            ProcessBuilder pb = new ProcessBuilder("java", "-Duser.name=" + source, "-cp", merge(cp,
-                    File.pathSeparatorChar), TestTeamIntegrationChild.class.getName(), source,
+            ProcessBuilder pb = new ProcessBuilder("java", "-Duser.name=" + source, "-cp", cp,
+                    TestTeamIntegrationChild.class.getName(), source,
                     Long.toString(PROCESS_SECONDS * 1000), dir.getAbsolutePath(), REPO,
                     Integer.toString(delay), Integer.toString(SEG_COUNT));
             pb.inheritIO();
@@ -414,7 +401,7 @@ public final class TestTeamIntegration {
         public void update() throws Exception {
             try (Git git = new Git(repository)) {
                 git.fetch().call();
-                git.checkout().setName("origin/master").call();
+                git.checkout().setName(GITRemoteRepository2.getDefaultBranchName(repository)).call();
             }
         }
 

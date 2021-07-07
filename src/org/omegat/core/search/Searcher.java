@@ -329,7 +329,8 @@ public class Searcher {
             searchMemory();
             searchExternalTM();
             searchGlossary();
-        } catch (SearchLimitReachedException ignore) {}
+        } catch (SearchLimitReachedException ignore) {
+        }
     }
 
     private void searchGlossary() throws SearchLimitReachedException {
@@ -700,7 +701,7 @@ public class Searcher {
                                 // replace with empty string.
                                 substitution = "";
                             }
-                            substitution = substitution.replace("\\","\\\\").replace("$","\\$");	// avoid re-eval inside replaceCase;
+                            substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");    // avoid re-eval inside replaceCase;
                             repl = repl.substring(0, replaceMatcher.start()) + replaceMatcher.group(1) + substitution
                                     + repl.substring(replaceMatcher.end());
                             replaceMatcher.reset(repl);

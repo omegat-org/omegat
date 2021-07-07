@@ -37,6 +37,7 @@ import org.eclipse.jgit.api.Git;
 import org.omegat.CLIParameters;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -96,7 +97,8 @@ public final class TeamTool {
         // Create project internal directories
         props.autocreateDirectories();
         // Create version-controlled glossary file
-        props.getWritableGlossaryFile().getAsFile().createNewFile();
+        GlossaryManager.createNewWritableGlossaryFile(props.getWritableGlossaryFile().getAsFile());
+
         ProjectFileStorage.writeProjectFile(props);
 
         // Create empty project TM

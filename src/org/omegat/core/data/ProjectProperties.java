@@ -403,7 +403,7 @@ public class ProjectProperties {
     /**
      * Loads segmentation.conf if found in the /omegat folder of the project
      */
-    public void loadProjectSRX(){
+    public void loadProjectSRX() {
         this.projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
     }
 
@@ -414,10 +414,10 @@ public class ProjectProperties {
     public void setProjectFilters(Filters projectFilters) {
         this.projectFilters = projectFilters;
     }
-    
+
     /**
      * Loads filters.xml if found in the /omegat filter of the project
-     * @throws IOException 
+     * @throws IOException
      */
     public void loadProjectFilters() throws IOException {
         projectFilters = FilterMaster.loadConfig(new File(getProjectInternal(), FilterMaster.FILE_FILTERS));

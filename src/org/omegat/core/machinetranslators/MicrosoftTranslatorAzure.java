@@ -171,7 +171,7 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
     /**
      * Whether or not to use the new Neural Machine Translation System
      *
-     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1366/">Add support for 
+     * @see <a href="https://sourceforge.net/p/omegat/feature-requests/1366/">Add support for
      * Microsoft neural machine translation</a>
      */
     private boolean isNeural() {
@@ -179,7 +179,7 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
                 Preferences.getPreference(PROPERTY_NEURAL));
         return Boolean.parseBoolean(value);
     }
-    
+
     @Override
     public boolean isConfigurable() {
         return true;

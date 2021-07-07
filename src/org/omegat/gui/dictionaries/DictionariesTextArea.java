@@ -88,10 +88,11 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         implements IDictionaries, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
+    private static final int TEXT_BATCH = 30;
 
     protected final DictionariesManager manager = new DictionariesManager(this);
 
-    protected final List<String> displayedWords = new ArrayList<String>();
+    protected final List<String> displayedWords = new ArrayList<>();
 
     protected ITokenizer tokenizer;
 
@@ -257,8 +258,27 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
             displayedWords.add(de.getWord().toLowerCase());
             i++;
+            if (i % TEXT_BATCH == 0) {
+                appendText(txt.toString());
+                txt = new StringBuilder();
+            }
         }
-        setText(txt.toString());
+        appendText(txt.toString());
+    }
+
+    private void appendText(final String txt) {
+        Document doc = getDocument();
+        if (doc.getLength() == 0) {
+            // Appending to an empty document results in treating HTML tags as
+            // plain text for some reason
+            setText(txt);
+        } else {
+            try {
+                doc.insertString(doc.getLength(), txt, null);
+            } catch (BadLocationException e) {
+                Log.log(e);
+            }
+        }
     }
 
     protected final transient MouseAdapter mouseCallback = new MouseAdapter() {

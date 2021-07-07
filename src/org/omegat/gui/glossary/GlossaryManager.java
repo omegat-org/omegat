@@ -29,6 +29,7 @@
 package org.omegat.gui.glossary;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,6 +39,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.commons.io.FilenameUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
@@ -62,6 +64,29 @@ import org.omegat.util.Token;
  * @author Didier Briel
  */
 public class GlossaryManager implements DirectoryMonitor.Callback {
+
+    /**
+     * Create new default writable glossary file.
+     * @param file a file to be created.
+     * @return true if the file was successfully created
+     * @throws IOException when there is a problem to create file.
+     */
+    public static boolean createNewWritableGlossaryFile(File file) throws IOException {
+        if (file.exists()) {
+            return false;
+        }
+        String ext = "." + FilenameUtils.getExtension(file.getPath()).toLowerCase(Locale.ENGLISH);
+        switch (ext) {
+        case OConsts.EXT_TSV_DEF: // fallthrough
+        case OConsts.EXT_TSV_TSV: // fallthrough
+        case OConsts.EXT_TSV_TXT: // fallthrough
+        case OConsts.EXT_TSV_UTF8:
+            return GlossaryReaderTSV.createEmpty(file);
+        default:
+            // Creation not supported
+            return false;
+        }
+    }
 
     protected DirectoryMonitor monitor;
 
@@ -203,7 +228,6 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * produced by local files only.
      *
      * @return all entries
-     * @param src
      */
     public List<GlossaryEntry> getLocalEntries() {
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
@@ -233,8 +257,6 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     /**
      * Get all glossary entries with source terms found in the provided string.
      *
-     * @param src
-     *            The text to search
      * @return A list of matching glossary entries
      */
     public List<GlossaryEntry> searchSourceMatches(SourceTextEntry ste) {

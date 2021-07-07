@@ -80,8 +80,7 @@ public class AppearanceController extends BasePreferencesController {
         });
         panel.cbThemeSelect.addActionListener(e -> {
             String selected = panel.cbThemeSelect.getSelectedItem().toString();
-            String current = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME,
-                    Preferences.THEME_CLASS_NAME_DEFAULT);
+            String current = UIManager.getLookAndFeel().getClass().getName();
             setRestartRequired(!selected.equals(current));
         });
         // TODO: Properly abstract the restore function
@@ -91,9 +90,7 @@ public class AppearanceController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        String currentTheme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME,
-                Preferences.THEME_CLASS_NAME_DEFAULT);
-        panel.cbThemeSelect.setSelectedItem(currentTheme);
+        panel.cbThemeSelect.setSelectedItem(UIManager.getLookAndFeel().getClass().getName());
     }
 
     @Override

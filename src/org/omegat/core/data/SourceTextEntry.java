@@ -59,7 +59,7 @@ public class SourceTextEntry {
 
     /** Translation from source files is fuzzy. */
     private boolean sourceTranslationFuzzy;
-    
+
     /** Flag indicating if the segment is located at the start of a paragraph. */
     private boolean paragraphStart;
 
@@ -126,7 +126,7 @@ public class SourceTextEntry {
         this.duplicates = null;
         this.firstInstance = null;
     }
-    
+
     public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts) {
         this(key,  entryNum, props, sourceTranslation, protectedParts, true);
     }

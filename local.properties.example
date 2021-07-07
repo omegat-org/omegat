@@ -36,6 +36,11 @@ ossrhUser=
 ossrhKey=
 
 ## Signing for Maven Central
+#
+# Option 1: Supply key ID and password directly in this file
+# Option 2: Leave signing.* properties blank to use the system gpg2 command; see
+#   https://docs.gradle.org/current/userguide/signing_plugin.html#sec:sec:gnupg_signatory_configuration
+#
 # Last 8 characters of full key ID
 signing.keyId=
 signing.password=

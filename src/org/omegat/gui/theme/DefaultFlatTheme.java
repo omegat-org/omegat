@@ -33,6 +33,7 @@ package org.omegat.gui.theme;
 
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import javax.swing.LookAndFeel;
 import javax.swing.UIDefaults;
@@ -41,10 +42,12 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.RoundedCornerBorder;
+import org.omegat.util.gui.UIDesignManager;
 
 
 public class DefaultFlatTheme extends DelegatingLookAndFeel {
@@ -106,6 +109,13 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         defaults.put("OmegaTBorder.color", borderColor);
         // #EEEEEE -> #575757; Darkest border
         Color statusAreaColor = adjustRGB(standardBgColor, 0x57 - 0xEE);
+
+        // load default colors
+        try {
+            UIDesignManager.loadDefaultColors(defaults);
+        } catch (IOException e) {
+            Log.log(e);
+        }
 
         // General highlight & shadow used in a lot of places
         //

@@ -67,6 +67,8 @@ public final class ExternalTMFactory {
                     .setUseSlash(Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH))
                     .setDoSegmenting(props.isSentenceSegmentingEnabled())
                     .setKeepForeignMatches(Preferences.isPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH))
+                    .setKeepDifferentSourceRegion(
+                            Preferences.isPreferenceDefault(Preferences.EXT_TMX_KEEP_DIFFERENT_SOURCE_REGION, true))
                     .load(props.getSourceLanguage(), props.getTargetLanguage());
         } else if (BifileLoader.isSupported(file)) {
             return new BifileLoader(file).setRemoveTags(props.isRemoveTags())
@@ -94,6 +96,7 @@ public final class ExternalTMFactory {
         private boolean useSlash;
         private boolean doSegmenting;
         private boolean keepForeignMatches;
+        private boolean keepDifferentSourceRegion;
 
         public TMXLoader(File file) {
             this.file = file;
@@ -119,6 +122,11 @@ public final class ExternalTMFactory {
             return this;
         }
 
+        public TMXLoader setKeepDifferentSourceRegion(boolean keepDifferentSourceRegion) {
+            this.keepDifferentSourceRegion = keepDifferentSourceRegion;
+            return this;
+        }
+
         public ExternalTMX load(Language sourceLang, Language targetLang) throws Exception {
             return new ExternalTMX(file.getName(), loadImpl(sourceLang, targetLang));
         }
@@ -128,7 +136,7 @@ public final class ExternalTMFactory {
 
             TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
                 public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                        TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                                       TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
 
                     if (tuvSource == null) {
                         return false;
@@ -136,8 +144,13 @@ public final class ExternalTMFactory {
 
                     // Keep all the Tuvs matching at least the target language
                     for (TMXReader2.ParsedTuv tuvTarget2 : tu.tuvs) {
-                        // Skip entries from the same source language/country
+                        // Skip entries from the same source language/region
                         if (sourceLang.equals(new Language(tuvTarget2.lang))) {
+                            continue;
+                        }
+                        // skip entries from the same source language when keep different region
+                        if (keepDifferentSourceRegion &&
+                                sourceLang.getLanguageCode().equals(new Language(tuvTarget2.lang).getLanguageCode())) {
                             continue;
                         }
                         // Matching entries for foreign languages are included with a penalty
@@ -187,7 +200,7 @@ public final class ExternalTMFactory {
             };
 
             TMXReader2 reader = new TMXReader2();
-            reader.readTMX(file, sourceLang, targetLang, doSegmenting, false, extTmxLevel2, useSlash, loader);
+            reader.readTMX(file, sourceLang, targetLang, doSegmenting, false, extTmxLevel2, useSlash, loader, keepDifferentSourceRegion);
 
             return entries;
         }

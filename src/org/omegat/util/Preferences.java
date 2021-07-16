@@ -361,6 +361,8 @@ public final class Preferences {
     public static final String EXT_TMX_SORT_KEY = "ext_tmx_sort_key";
     /** External TMX options: Whether to show fuzzy matches from foreign (non-target language) matches. */
     public static final String EXT_TMX_KEEP_FOREIGN_MATCH = "keep_foreign_matches";
+    /** External TMX options: Whether to use TM that source language region is different from project. */
+    public static final String EXT_TMX_KEEP_DIFFERENT_SOURCE_REGION = "ext_tmx_keep_different_source_region";
     /** External TMX options: Fuzzy Threshold **/
     public static final String EXT_TMX_FUZZY_MATCH_THRESHOLD = "ext_tmx_fuzzy_match_threshold";
 

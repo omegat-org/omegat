@@ -51,11 +51,11 @@ public class TMXReaderTest extends TestCore {
         new TMXReader2().readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"),
                 new Language("be"), false, false, false, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                                           TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         tr.put(tuvSource.text, tuvTarget.text);
                         return true;
                     }
-                });
+                }, true);
         assertEquals("betuv", tr.get("entuv"));
         assertEquals("tr1", tr.get("lang1"));
         assertEquals("tr2", tr.get("lang2"));
@@ -68,11 +68,11 @@ public class TMXReaderTest extends TestCore {
         new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx"), new Language("en-US"),
                 new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                                           TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         tr.put(tuvSource.text, tuvTarget.text);
                         return true;
                     }
-                });
+                }, true);
         assertEquals("betuv", tr.get("entuv"));
         assertEquals("tr", tr.get("2 <a0> zz <t1>xx</t1>"));
         assertEquals("tr", tr.get("3 <n0>xx</n0>"));
@@ -85,7 +85,7 @@ public class TMXReaderTest extends TestCore {
                 false, false, true, false, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
                     tr.put(tuvSource.text, tuvTarget.text);
                     return true;
-                });
+                }, true);
         // Same content as test-level2.tmx
         assertFalse(tr.isEmpty());
         assertEquals("betuv", tr.get("entuv"));
@@ -97,10 +97,10 @@ public class TMXReaderTest extends TestCore {
     public void testZip() throws Exception {
         final Map<String, String> tr = new TreeMap<>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx.zip"), new Language("en"), new Language("be"),
-                false, false, true, false, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
+                false, false, true, false, (tu, tuvSource, tuvTarget, isParagraphSegtyp) -> {
                     tr.put(tuvSource.text, tuvTarget.text);
                     return true;
-                });
+                }, true);
         // Same content as test-level2.tmx
         assertFalse(tr.isEmpty());
         assertEquals("betuv", tr.get("entuv"));
@@ -114,11 +114,11 @@ public class TMXReaderTest extends TestCore {
         new TMXReader2().readTMX(new File("test/data/tmx/invalid.tmx"), new Language("en"),
                 new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                                           TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         tr.put(tuvSource.text, tuvTarget.text);
                         return true;
                     }
-                });
+                }, true);
     }
 
     @Test
@@ -127,11 +127,11 @@ public class TMXReaderTest extends TestCore {
         new TMXReader2().readTMX(new File("test/data/tmx/test-SMP.tmx"), new Language("en"),
                 new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                                           TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         tr.put(tuvSource.text, tuvTarget.text);
                         return true;
                     }
-                });
+                }, true);
         assertFalse(tr.isEmpty());
         // Assert contents are {"ABC": "DEF"} where letters are MATHEMATICAL BOLD CAPITALs (U+1D400-)
         assertEquals("\uD835\uDC03\uD835\uDC04\uD835\uDC05", tr.get("\uD835\uDC00\uD835\uDC01\uD835\uDC02"));
@@ -213,7 +213,7 @@ public class TMXReaderTest extends TestCore {
                         return true;
                     }
                     return false;
-                });
+                }, true);
         // Make sure everything is loaded despite TU missing source TUV
         assertFalse(tr.isEmpty());
         assertEquals(3, tr.size());

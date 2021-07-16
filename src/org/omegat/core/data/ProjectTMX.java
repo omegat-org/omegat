@@ -102,7 +102,7 @@ public class ProjectTMX {
                 false,
                 true,
                 Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
-                new Loader(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled));
+                new Loader(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled), false);
     }
 
     /**
@@ -286,7 +286,7 @@ public class ProjectTMX {
         }
 
         public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                               TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
             if (tuvSource == null) {
                 // source Tuv not found
                 return false;

@@ -222,7 +222,7 @@ public class TMXWriterTest extends TestFilterBase {
         new TMXReader2().readTMX(outFile, new Language("en-US"), new Language("be-BY"), false, false,
                 extLevel2, useSlash, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                                           TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         if (sources != null) {
                             sources.add(tuvSource.text);
                         }
@@ -231,7 +231,7 @@ public class TMXWriterTest extends TestFilterBase {
                         }
                         return true;
                     }
-                });
+                }, true);
     }
 
     static int tagNumber = 0;

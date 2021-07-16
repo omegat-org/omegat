@@ -90,6 +90,7 @@ public class TMXReader2 {
     private boolean extTmxLevel2;
     private boolean useSlash;
     private boolean isSegmentingEnabled;
+    private boolean allowDifferentRegion;
 
     private int errorsCount, warningsCount;
 
@@ -141,11 +142,12 @@ public class TMXReader2 {
      * Read TMX file.
      */
     public void readTMX(File file, final Language sourceLanguage, final Language targetLanguage,
-            boolean isSegmentingEnabled, final boolean forceOmegaTMX, final boolean extTmxLevel2,
-            final boolean useSlash, final LoadCallback callback) throws Exception {
+                        boolean isSegmentingEnabled, final boolean forceOmegaTMX, final boolean extTmxLevel2,
+                        final boolean useSlash, final LoadCallback callback, boolean allowDifferentRegion) throws Exception {
         this.extTmxLevel2 = extTmxLevel2;
         this.useSlash = useSlash;
         this.isSegmentingEnabled = isSegmentingEnabled;
+        this.allowDifferentRegion = allowDifferentRegion;
 
         // log the parsing attempt
         Log.logRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
@@ -163,9 +165,13 @@ public class TMXReader2 {
                         parseTu(eStart);
                         ParsedTuv origTuv = getTuvByLang(sourceLanguage);
                         ParsedTuv targetTuv = getTuvByLang(targetLanguage);
-                        allFound = callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype) && allFound;
+                        allFound = callback.onEntry(
+                                currentTu, origTuv, targetTuv, isParagraphSegtype
+                        ) && allFound;
                     } else if ("header".equals(eStart.getName().getLocalPart())) {
-                        parseHeader(eStart, sourceLanguage);
+                        if (!parseHeader(eStart, sourceLanguage)) {
+                            break;  // when source language is wrong, skip it
+                        }
                     }
                     break;
                 }
@@ -204,7 +210,8 @@ public class TMXReader2 {
         }
     }
 
-    protected void parseHeader(StartElement element, final Language sourceLanguage) {
+    protected boolean parseHeader(StartElement element, final Language sourceLanguage) {
+        boolean result = true;
         isParagraphSegtype = SEG_PARAGRAPH.equals(getAttributeValue(element, "segtype"));
         isOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
 
@@ -218,14 +225,23 @@ public class TMXReader2 {
         // different from the project source language
         String tmxSourceLanguage = getAttributeValue(element, "srclang");
         if (!sourceLanguage.getLanguage().equalsIgnoreCase(tmxSourceLanguage)) {
-            Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage,
-                    sourceLanguage);
+            if (sourceLanguage.getLanguageCode().equals(new Language(tmxSourceLanguage).getLanguageCode())) {
+                Log.logWarningRB("TMXR_WARNING_UNMATCH_SOURCE_LANG_COUNTRY", tmxSourceLanguage,
+                        sourceLanguage);
+                result = allowDifferentRegion;
+            } else {
+                Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG_SKIP", tmxSourceLanguage,
+                        sourceLanguage);
+                result = false;
+            }
         }
 
         // give a warning that TMX file will be upgraded to sentence segmentation
         if (isSegmentingEnabled && isParagraphSegtype) {
             Log.logWarningRB("TMXR_WARNING_UPGRADE_SENTSEG");
         }
+
+        return result;
     }
 
     protected void parseTu(StartElement element) throws Exception {

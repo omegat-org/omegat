@@ -39,7 +39,9 @@ import java.util.stream.StreamSupport;
 
 import javax.xml.namespace.QName;
 
+import org.eclipse.jgit.api.CheckoutCommand;
 import org.eclipse.jgit.api.CloneCommand;
+import org.eclipse.jgit.api.CreateBranchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LsRemoteCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
@@ -89,6 +91,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     protected static final int TIMEOUT = 30; // seconds
 
     String repositoryURL;
+    String branch;
+    Boolean trackBranch = false;
     File localDirectory;
 
     protected Repository repository;
@@ -101,7 +105,15 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
-        repositoryURL = repo.getUrl();
+        if (repo.getUrl().contains("#")) {
+            repositoryURL = repo.getUrl().substring(0, repo.getUrl().indexOf("#") - 1);
+            branch = repo.getUrl().substring(repo.getUrl().indexOf("#") + 1);
+            trackBranch = true;
+        } else {
+            repositoryURL = repo.getUrl();
+            branch = getDefaultBranchName(repository);
+            trackBranch = false;
+        }
         localDirectory = dir;
         projectTeamSettings = teamSettings;
 
@@ -116,6 +128,9 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         if (gitDir.exists() && gitDir.isDirectory()) {
             // already cloned
             repository = Git.open(localDirectory).getRepository();
+            if (trackBranch) {
+                repository.resolve(branch);
+            }
             configRepo();
             try (Git git = new Git(repository)) {
                 git.submoduleInit().call();
@@ -143,6 +158,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             }
             repository = Git.open(localDirectory).getRepository();
             try (Git git = new Git(repository)) {
+                if (trackBranch) {
+                    git.branchCreate().setName(branch).setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.TRACK).setStartPoint("origin/" + branch).call();
+                    CheckoutCommand checkout = git.checkout();
+                    checkout.setName(branch);
+                    checkout.call();
+                }
                 git.submoduleInit().call();
                 git.submoduleUpdate().setTimeout(TIMEOUT).call();
             }
@@ -200,7 +221,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public void switchToVersion(String version) throws Exception {
         try (Git git = new Git(repository)) {
-            String defaultBranch = getDefaultBranchName(repository);
+            String defaultBranch = trackBranch ? branch : getDefaultBranchName(repository);
             if (version == null) {
                 version = String.join("/", REMOTE, defaultBranch);
                 // TODO fetch

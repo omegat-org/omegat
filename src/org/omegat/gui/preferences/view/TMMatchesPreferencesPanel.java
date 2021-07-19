@@ -55,23 +55,26 @@ public class TMMatchesPreferencesPanel extends JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         sortMatchesLabel = new javax.swing.JLabel();
         sortMatchesList = new javax.swing.JComboBox<>();
         fuzzyThresholdLabel = new javax.swing.JLabel();
         fuzzyMatchThreshold = new javax.swing.JSpinner();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel7 = new javax.swing.JPanel();
         tagHandlingLabel = new javax.swing.JLabel();
         displayLevel2Tags = new javax.swing.JCheckBox();
         useSlash = new javax.swing.JCheckBox();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel5 = new javax.swing.JPanel();
         keepForeignMatches = new javax.swing.JCheckBox();
         foreignPenaltyPanel = new javax.swing.JPanel();
         foreignPenaltyLabel = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         foreignPenaltySpinner = new javax.swing.JSpinner();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel3 = new javax.swing.JPanel();
         templateLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -81,38 +84,32 @@ public class TMMatchesPreferencesPanel extends JPanel {
         variablesList = new javax.swing.JComboBox<>();
         insertButton = new javax.swing.JButton();
 
-        setLayout(new java.awt.BorderLayout());
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWeights = new double[] { 0.2, 1.0 };
-        jPanel1.setLayout(jPanel1Layout);
+        jPanel1.setAlignmentX(0.0F);
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(sortMatchesLabel, OStrings.getString("EXT_TMX_SORT_KEY")); // NOI18N
-        GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(sortMatchesLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.weightx = 1.0;
         jPanel1.add(sortMatchesList, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(fuzzyThresholdLabel,
-                OStrings.getString("EXT_TMX_FUZZY_THRESHOLD_KEY")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(fuzzyThresholdLabel, OStrings.getString("EXT_TMX_FUZZY_THRESHOLD_KEY")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         jPanel1.add(fuzzyThresholdLabel, gridBagConstraints);
 
         fuzzyMatchThreshold.setModel(new javax.swing.SpinnerNumberModel(100, 0, 100, 5));
@@ -120,10 +117,11 @@ public class TMMatchesPreferencesPanel extends JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         jPanel1.add(fuzzyMatchThreshold, gridBagConstraints);
 
-        jPanel2.add(jPanel1, java.awt.BorderLayout.NORTH);
+        add(jPanel1);
+        add(filler2);
 
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.Y_AXIS));
 
@@ -138,7 +136,8 @@ public class TMMatchesPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(useSlash, OStrings.getString("EXT_TMX_USE_XML")); // NOI18N
         jPanel7.add(useSlash);
 
-        jPanel2.add(jPanel7, java.awt.BorderLayout.LINE_START);
+        add(jPanel7);
+        add(filler3);
 
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.Y_AXIS));
 
@@ -159,14 +158,14 @@ public class TMMatchesPreferencesPanel extends JPanel {
 
         jPanel5.add(foreignPenaltyPanel);
 
-        jPanel2.add(jPanel5, java.awt.BorderLayout.SOUTH);
+        add(jPanel5);
+        add(filler4);
 
-        add(jPanel2, java.awt.BorderLayout.NORTH);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        jPanel3.setAlignmentX(0.0F);
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(templateLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE")); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(templateLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE")); // NOI18N
         jPanel3.add(templateLabel, java.awt.BorderLayout.NORTH);
 
         jScrollPane1.setMinimumSize(new java.awt.Dimension(525, 25));
@@ -180,22 +179,24 @@ public class TMMatchesPreferencesPanel extends JPanel {
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(variablesLabel,
-                OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
         jPanel4.add(variablesLabel, java.awt.BorderLayout.WEST);
         jPanel4.add(variablesList, java.awt.BorderLayout.CENTER);
 
-        org.openide.awt.Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(insertButton, bundle.getString("BUTTON_INSERT")); // NOI18N
         jPanel4.add(insertButton, java.awt.BorderLayout.EAST);
 
         jPanel3.add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
-        add(jPanel3, java.awt.BorderLayout.CENTER);
+        add(jPanel3);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox displayLevel2Tags;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
     private javax.swing.JLabel foreignPenaltyLabel;
     javax.swing.JPanel foreignPenaltyPanel;
     javax.swing.JSpinner foreignPenaltySpinner;
@@ -203,7 +204,6 @@ public class TMMatchesPreferencesPanel extends JPanel {
     private javax.swing.JLabel fuzzyThresholdLabel;
     javax.swing.JButton insertButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

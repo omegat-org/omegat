@@ -28,8 +28,7 @@
 
 package org.omegat.core.machinetranslators;
 
-import java.util.Map;
-
+import com.fasterxml.jackson.databind.JsonNode;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -65,7 +64,7 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
             return prev;
         }
 
-        Map<String, Object> jsonResponse;
+        JsonNode jsonResponse;
 
         // Get MyMemory response in JSON format
         try {
@@ -77,8 +76,8 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         String translation = "";
         try {
             // responseData/translatedText contains the best match.
-            Map<String, Object> dataNode = (Map<String, Object>) jsonResponse.get("responseData");
-            translation = dataNode.get("translatedText").toString();
+            JsonNode dataNode = jsonResponse.get("responseData");
+            translation = dataNode.get("translatedText").asText();
         } catch (NullPointerException e) {
             return null;
         }

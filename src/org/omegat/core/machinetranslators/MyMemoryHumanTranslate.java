@@ -73,15 +73,8 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
             return e.getLocalizedMessage();
         }
 
-        String translation = "";
-        try {
-            // responseData/translatedText contains the best match.
-            JsonNode dataNode = jsonResponse.get("responseData");
-            translation = dataNode.get("translatedText").asText();
-        } catch (NullPointerException e) {
-            return null;
-        }
-
+        // responseData/translatedText contains the best match.
+        String translation = jsonResponse.get("responseData").get("translatedText").asText();
         putToCache(sLang, tLang, text, translation);
         return translation;
     }

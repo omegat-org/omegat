@@ -39,12 +39,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
-import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -169,7 +170,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      *             If unable to determine the server's supported languages
      */
     private void init(Language sourceLang, Language targetLang) throws Exception {
-        List<Object> serverLanguages = getSupportedLanguages();
+        JsonNode serverLanguages = getSupportedLanguages();
         this.sourceLang = negotiateLanguage(serverLanguages, sourceLang);
         this.targetLang = negotiateLanguage(serverLanguages, targetLang);
         Log.log("Negotiated LanguageTool source language: " + this.sourceLang);
@@ -230,30 +231,30 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         try (InputStream in = conn.getInputStream()) {
             json = IOUtils.toString(in, StandardCharsets.UTF_8);
         }
+        ObjectMapper mapper = new ObjectMapper();
 
-        Map<String, Object> response = (Map<String, Object>) JsonParser.parse(json);
-        Map<String, Object> software = (Map<String, Object>) response.get("software");
-        String apiVersion = String.valueOf(software.get("apiVersion"));
+        JsonNode response = mapper.readTree(json);
+        String apiVersion = response.get("software").get("apiVersion").asText();
 
         if (!API_VERSION.equals(apiVersion)) {
             Log.logWarningRB("LT_API_VERSION_MISMATCH");
         }
 
-        List<Map<String, Object>> matches = (List<Map<String, Object>>) response.get("matches");
+        JsonNode matches = response.get("matches");
 
-        return matches.stream().map(match -> {
-            String message = addSuggestionTags((String) match.get("message"));
-            int start = (int) match.get("offset");
-            int end = start + (int) match.get("length");
-            Map<String, Object> rule = (Map<String, Object>) match.get("rule");
-            String ruleId = (String) rule.get("id");
-            String ruleDescription = (String) rule.get("description");
+        return StreamSupport.stream(matches.spliterator(), true).map(match -> {
+            String message = addSuggestionTags(match.get("message").asText());
+            int start = match.get("offset").asInt();
+            int end = start + match.get("length").asInt();
+            JsonNode rule = match.get("rule");
+            String ruleId = rule.get("id").asText();
+            String ruleDescription = rule.get("description").asText();
             return new LanguageToolResult(message, start, end, ruleId, ruleDescription);
         }).collect(Collectors.toList());
     }
 
     @SuppressWarnings("unchecked")
-    protected List<Object> getSupportedLanguages() throws Exception {
+    protected JsonNode getSupportedLanguages() throws Exception {
         // This is a really stupid way to get the /languages endpoint URL, but it'll do for now.
         String langsUrl = serverUrl.replace(CHECK_PATH, LANGS_PATH);
 
@@ -269,7 +270,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             json = IOUtils.toString(in, StandardCharsets.UTF_8);
         }
 
-        return (List<Object>) JsonParser.parse(json);
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readTree(json);
     }
 
     static void checkHttpError(URLConnection conn) throws Exception {
@@ -367,27 +369,24 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      * @return The best-matching language, or null if no languages matched at all
      */
     @SuppressWarnings("unchecked")
-    static Language negotiateLanguage(List<Object> serverLangs, Language desiredLang) {
+    static Language negotiateLanguage(JsonNode serverLangs, Language desiredLang) {
         // Search for full xx-YY match
         String omLocale = desiredLang.getLanguage();
-        for (Object obj : serverLangs) {
-            Map<String, String> lang = (Map<String, String>) obj;
-            if (omLocale.equalsIgnoreCase(lang.get("longCode"))) {
+        for (JsonNode lang : serverLangs) {
+            if (omLocale.equalsIgnoreCase(lang.get("longCode").asText())) {
                 return desiredLang;
             }
         }
 
         // Search for just xx match
         String omLang = desiredLang.getLanguageCode();
-        for (Object obj : serverLangs) {
-            Map<String, String> lang = (Map<String, String>) obj;
-            if (omLang.equalsIgnoreCase(lang.get("longCode"))) {
+        for (JsonNode lang: serverLangs) {
+            if (omLang.equalsIgnoreCase(lang.get("longCode").asText())) {
                 return new Language(desiredLang.getLanguageCode());
             }
         }
-        for (Object obj : serverLangs) {
-            Map<String, String> lang = (Map<String, String>) obj;
-            if (omLang.equalsIgnoreCase(lang.get("code"))) {
+        for (JsonNode lang : serverLangs) {
+            if (omLang.equalsIgnoreCase(lang.get("code").asText())) {
                 return new Language(desiredLang.getLanguageCode());
             }
         }

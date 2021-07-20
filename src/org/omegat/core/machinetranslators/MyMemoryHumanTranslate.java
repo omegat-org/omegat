@@ -7,6 +7,7 @@
                2013 Martin Wunderlich
                2015 Didier Briel
                2017 Briac Pilpre
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,8 +29,7 @@
 
 package org.omegat.core.machinetranslators;
 
-import java.util.Map;
-
+import com.fasterxml.jackson.databind.JsonNode;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -39,6 +39,7 @@ import org.omegat.util.Preferences;
  * @author Didier Briel
  * @author Martin Wunderlich
  * @author Briac Pilpre
+ * @author Hiroshi Miura
  */
 public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
 
@@ -65,7 +66,7 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
             return prev;
         }
 
-        Map<String, Object> jsonResponse;
+        JsonNode jsonResponse;
 
         // Get MyMemory response in JSON format
         try {
@@ -74,15 +75,8 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
             return e.getLocalizedMessage();
         }
 
-        String translation = "";
-        try {
-            // responseData/translatedText contains the best match.
-            Map<String, Object> dataNode = (Map<String, Object>) jsonResponse.get("responseData");
-            translation = dataNode.get("translatedText").toString();
-        } catch (NullPointerException e) {
-            return null;
-        }
-
+        // responseData/translatedText contains the best match.
+        String translation = jsonResponse.get("responseData").get("translatedText").asText();
         putToCache(sLang, tLang, text, translation);
         return translation;
     }

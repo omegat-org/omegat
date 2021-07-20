@@ -121,6 +121,10 @@ dependencies {
         // Data: inline data URL handler
         implementation 'tokyo.northside:url-protocol-handler:0.1.4'
 
+        // JSON parser
+        implementation "com.fasterxml.jackson.core:jackson-core:2.12.3"
+        implementation "com.fasterxml.jackson.core:jackson-databind:2.12.3"
+
         // PDF Filter
         implementation 'org.apache.pdfbox:pdfbox:2.0.24'
 

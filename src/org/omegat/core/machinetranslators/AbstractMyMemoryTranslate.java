@@ -30,15 +30,15 @@
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
-import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.omegat.gui.exttrans.MTConfigDialog;
-import org.omegat.util.JsonParser;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * @author Ibai Lakunza Velasco
@@ -74,7 +74,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
     protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
 
     @SuppressWarnings("unchecked")
-    protected Map<String, Object> getMyMemoryResponse(Language sLang, Language tLang, String text) throws Exception {
+    protected JsonNode getMyMemoryResponse(Language sLang, Language tLang, String text) throws Exception {
 
         String targetLang = tLang.getLocaleLCID();
         String sourceLang = sLang.getLocaleLCID();
@@ -116,21 +116,12 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
             params.put("de", email);
         }
 
-        Map<String, String> headers = new TreeMap<String, String>();
+        Map<String, String> headers = new TreeMap<>();
 
         // Get the results from MyMemory
-        String myMemoryJson = "";
-        try {
-            myMemoryJson = HttpConnectionUtils.get(GT_URL, params, headers);
-        } catch (IOException e) {
-            throw e;
-        }
-
-        try {
-            return (Map<String, Object>) JsonParser.parse(myMemoryJson);
-        } catch (Exception e) {
-            throw e;
-        }
+        ObjectMapper mapper = new ObjectMapper();
+        String response = HttpConnectionUtils.get(GT_URL, params, headers);
+        return mapper.readTree(response);
     }
 
     @Override

@@ -111,9 +111,13 @@ dependencies {
         // macOS integration
         implementation 'org.madlonkay:desktopsupport:0.6.0'
 
+        // XML/JSON parser
         api 'javax.xml.bind:jaxb-api:2.3.1'
-        implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-        implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
+        implementation "com.fasterxml.jackson.core:jackson-core:2.12.4"
+        implementation "com.fasterxml.jackson.core:jackson-annotations:2.12.4"
+        implementation "com.fasterxml.jackson.core:jackson-databind:2.12.4"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.4"
+        implementation "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.12.4"
 
         // PDF Filter
         implementation 'org.apache.pdfbox:pdfbox:2.0.24'

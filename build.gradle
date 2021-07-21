@@ -929,8 +929,8 @@ jacoco {
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
     reports {
-        xml.enabled = true  // coveralls plugin depends on xml format report
-        html.enabled = true
+        xml.required = true  // coveralls plugin depends on xml format report
+        html.required = true
     }
 }
 
@@ -1005,7 +1005,7 @@ instantStartXmls.each { xml ->
 
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
-    main = mainClassName
+    mainClass = mainClassName
     classpath = sourceSets.main.runtimeClasspath
     debug true
 }
@@ -1022,7 +1022,7 @@ test {
 
 task testIntegration(type: JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
-    main = 'org.omegat.core.data.TestTeamIntegration'
+    mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     systemProperties = System.properties
 }

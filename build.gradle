@@ -348,7 +348,7 @@ distributions {
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
             }
             into('lib/provided') {
-                from configurations.runtime
+                from configurations.runtimeClasspath
             }
         }
         sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"

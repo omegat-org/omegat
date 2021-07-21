@@ -1003,18 +1003,6 @@ instantStartXmls.each { xml ->
     instantStartGuides.dependsOn taskName
 }
 
-task jar2(type: Sync) {
-    description = 'Create minimal executable output for debugging.'
-    destinationDir = file("${buildDir}/install/jar2")
-    from jar
-    from(configurations.runtime) {
-        into 'lib'
-    }
-    from('scripts') {
-        into 'scripts'
-    }
-}
-
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
     main = mainClassName

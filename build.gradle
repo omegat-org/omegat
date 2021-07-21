@@ -216,11 +216,12 @@ jar {
     def omtPlugins = loadProperties(file('Plugins.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': project.version,
-                'Permissions': 'all-permissions',
-                'OmegaT-Plugins': omtPlugins.plugin,
-                'OmegaT-Plugin': 'true',
-                'Main-Class': mainClassName)
+                   'Implementation-Version': project.version,
+                   'Permissions': 'all-permissions',
+                   'OmegaT-Plugins': omtPlugins.plugin,
+                   'OmegaT-Plugin': 'true',
+                   'Main-Class': mainClassName,
+                   'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' '))
         omtPlugins.each { key, val ->
             if (key != 'plugin') {
                 val.tokenize().each { cls ->
@@ -228,12 +229,6 @@ jar {
                 }
             }
         }
-    }
-    doFirst {
-        // Set this attribute at execution time because accessing configurations.runtime as an
-        // instance forces configuration blocks to be evaluated and this causes problems like
-        // introducing ordering dependencies on various definitions in this file.
-        manifest.attributes 'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' ')
     }
     // Don't include extra stuff like version number in JAR name
     archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"

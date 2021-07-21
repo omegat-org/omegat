@@ -17,41 +17,41 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;all>
- *         &lt;element name="source_dir" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="source_dir_excludes" type="{}masks" minOccurs="0"/>
- *         &lt;element name="target_dir" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="tm_dir" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="glossary_dir" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="glossary_file" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="dictionary_dir" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="source_lang" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="target_lang" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="source_tok" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="target_tok" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="sentence_seg" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="support_default_translations" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="remove_tags" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="external_command" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="repositories" minOccurs="0">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;sequence>
- *                   &lt;element name="repository" type="{}RepositoryDefinition" maxOccurs="unbounded" minOccurs="0"/>
- *                 &lt;/sequence>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
- *         &lt;/element>
- *       &lt;/all>
- *       &lt;attribute name="version" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;all&gt;
+ *         &lt;element name="source_dir" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="source_dir_excludes" type="{}masks" minOccurs="0"/&gt;
+ *         &lt;element name="target_dir" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="tm_dir" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="glossary_dir" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="glossary_file" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="dictionary_dir" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="source_lang" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="target_lang" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="source_tok" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="target_tok" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="sentence_seg" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="support_default_translations" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="remove_tags" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
+ *         &lt;element name="external_command" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="repositories" minOccurs="0"&gt;
+ *           &lt;complexType&gt;
+ *             &lt;complexContent&gt;
+ *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *                 &lt;sequence&gt;
+ *                   &lt;element name="repository" type="{}RepositoryDefinition" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *                 &lt;/sequence&gt;
+ *               &lt;/restriction&gt;
+ *             &lt;/complexContent&gt;
+ *           &lt;/complexType&gt;
+ *         &lt;/element&gt;
+ *       &lt;/all&gt;
+ *       &lt;attribute name="version" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -512,15 +512,15 @@ public class Project {
      * <p>The following schema fragment specifies the expected content contained within this class.
      * 
      * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element name="repository" type="{}RepositoryDefinition" maxOccurs="unbounded" minOccurs="0"/>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
+     * &lt;complexType&gt;
+     *   &lt;complexContent&gt;
+     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+     *       &lt;sequence&gt;
+     *         &lt;element name="repository" type="{}RepositoryDefinition" maxOccurs="unbounded" minOccurs="0"/&gt;
+     *       &lt;/sequence&gt;
+     *     &lt;/restriction&gt;
+     *   &lt;/complexContent&gt;
+     * &lt;/complexType&gt;
      * </pre>
      * 
      * 

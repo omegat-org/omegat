@@ -62,19 +62,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RepositoryMapping }
-     * 
-     */
-    public RepositoryMapping createRepositoryMapping() {
-        return new RepositoryMapping();
-    }
-
-    /**
      * Create an instance of {@link RepositoryDefinition }
      * 
      */
     public RepositoryDefinition createRepositoryDefinition() {
         return new RepositoryDefinition();
+    }
+
+    /**
+     * Create an instance of {@link RepositoryMapping }
+     * 
+     */
+    public RepositoryMapping createRepositoryMapping() {
+        return new RepositoryMapping();
     }
 
 }

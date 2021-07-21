@@ -91,6 +91,8 @@ configurations {
     }
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
 
+    testIntegrationImplementation.extendsFrom implementation
+
     jaxb
 }
 
@@ -207,7 +209,7 @@ dependencies {
     jaxb 'javax.xml.bind:jaxb-api:2.3.1'
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
 
-    testIntegrationImplementation sourceSets.main.output, sourceSets.test.output, configurations.implementation
+    testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
 }
 
 jar {

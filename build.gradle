@@ -342,7 +342,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'docs/**', 'images/**', 'lib/**', 'release/**',
+                include 'config/**', 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'

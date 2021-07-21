@@ -92,6 +92,7 @@ configurations {
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
     testIntegration
     testIntegrationImplementation.extendsFrom testImplementation
+    implementation.canBeResolved=true
 }
 
 ext {

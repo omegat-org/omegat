@@ -209,7 +209,6 @@ dependencies {
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
     jaxb "com.fasterxml.jackson.core:jackson-core:2.12.4"
-    jaxb "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.4"
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output, configurations.implementation
 }

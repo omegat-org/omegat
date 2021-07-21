@@ -90,10 +90,10 @@ configurations {
         exclude group: 'org.apache.lucene', module: 'lucene-core'
     }
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
-    testIntegration
-    testIntegrationImplementation.extendsFrom testImplementation
-    api.canBeResolved(true)
-    implementation.canBeResolved(true)
+
+    testIntegrationImplementation.extendsFrom implementation
+
+    jaxb
 }
 
 ext {
@@ -116,8 +116,7 @@ dependencies {
         implementation 'org.madlonkay:desktopsupport:0.6.0'
 
         api 'javax.xml.bind:jaxb-api:2.3.1'
-        implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-        implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
+        implementation 'com.sun.xml.bind:jaxb-impl:2.3.4'
 
         // PDF Filter
         implementation 'org.apache.pdfbox:pdfbox:2.0.24'
@@ -206,6 +205,9 @@ dependencies {
     // WebStart-only
     jnlp webstartDocsJar.outputs.files
 
+    // JAXB codegen only
+    jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
+
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
 }
 
@@ -213,11 +215,12 @@ jar {
     def omtPlugins = loadProperties(file('Plugins.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': project.version,
-                'Permissions': 'all-permissions',
-                'OmegaT-Plugins': omtPlugins.plugin,
-                'OmegaT-Plugin': 'true',
-                'Main-Class': mainClassName)
+                   'Implementation-Version': project.version,
+                   'Permissions': 'all-permissions',
+                   'OmegaT-Plugins': omtPlugins.plugin,
+                   'OmegaT-Plugin': 'true',
+                   'Main-Class': mainClassName,
+                   'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' '))
         omtPlugins.each { key, val ->
             if (key != 'plugin') {
                 val.tokenize().each { cls ->
@@ -225,12 +228,6 @@ jar {
                 }
             }
         }
-    }
-    doFirst {
-        // Set this attribute at execution time because accessing configurations.runtime as an
-        // instance forces configuration blocks to be evaluated and this causes problems like
-        // introducing ordering dependencies on various definitions in this file.
-        manifest.attributes 'Class-Path': configurations.runtimeClasspath.collect { "lib/${it.name}" }.join(' ')
     }
     // Don't include extra stuff like version number in JAR name
     archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
@@ -341,14 +338,13 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'docs/**', 'images/**', 'lib/**', 'release/**',
+                include 'config/**', 'docs/**', 'images/**', 'lib/**', 'release/**',
                     'src/**', 'test/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
                     'gradle/**', 'gradlew*', '*.gradle', 'README.md', '*.properties'
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
             }
             into('lib/provided') {
-                from configurations.implementation, configurations.api
-
+                from configurations.runtimeClasspath
             }
         }
         sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
@@ -807,24 +803,31 @@ task checksums {
 
 task genJAXB {
     description = 'Generate classes for loading and manipulating XML formats'
-    outputs.dir 'src/gen'
-    doLast {
-        ['gen.core.segmentation': 'src/schemas/srx20.xsd',
-         'gen.core.filters': 'src/schemas/filters.xsd',
-         'gen.core.tbx': 'src/schemas/tbx.xsd',
-         'gen.core.project': 'src/schemas/project_properties.xsd'].each { pkg, xsd ->
-            exec {
-                commandLine 'xjc', '-no-header', '-d', 'src', '-p', pkg, xsd
-            }
-        }
-        [[p: 'gen.core.tmx14', b: 'src/schemas/tmx14.xjb', xsd: 'src/schemas/tmx14.xsd'],
-            [p: 'gen.taas', b: 'src/schemas/taas.xjb', xsd: 'src/schemas/taas.xsd']].each { cfg ->
-            exec {
-                commandLine 'xjc', '-no-header', '-d', 'src', '-p', cfg.p, '-b', cfg.b, cfg.xsd
-            }
-        }
-    }
 }
+
+ext.makeJaxbTask = { args ->
+    def taskName = "gen${args.name.capitalize()}"
+    task(type: JavaExec, taskName) {
+        classpath = configurations.jaxb
+        mainClass = 'com.sun.tools.xjc.XJCFacade'
+        delegate.args args.args
+        outputs.dir args.outdir
+    }
+    genJAXB.dependsOn taskName
+}
+
+makeJaxbTask(name: 'segmentation', outdir: 'src/gen/core/segmentation',
+             args: ['-no-header', '-d', 'src', '-p', 'gen.core.segmentation', 'src/schemas/srx20.xsd'])
+makeJaxbTask(name: 'filters', outdir: 'src/gen/core/filters',
+             args: ['-no-header', '-d', 'src', '-p', 'gen.core.filters', 'src/schemas/filters.xsd'])
+makeJaxbTask(name: 'tbx', outdir: 'src/gen/core/tbx',
+             args: ['-no-header', '-d', 'src', '-p', 'gen.core.tbx', 'src/schemas/tbx.xsd'])
+makeJaxbTask(name: 'project', outdir: 'src/gen/core/project',
+             args: ['-no-header', '-d', 'src', '-p', 'gen.core.project', 'src/schemas/project_properties.xsd'])
+makeJaxbTask(name: 'tmx14', outdir: 'src/gen/core/tmx14',
+             args: ['-no-header', '-d', 'src', '-p', 'gen.core.tmx14', '-b', 'src/schemas/tmx14.xjb', 'src/schemas/tmx14.xsd'])
+makeJaxbTask(name: 'taas', outdir: 'src/gen/taas',
+             args: ['-no-header', '-d', 'src', '-p', 'gen.taas', '-b', 'src/schemas/taas.xjb', 'src/schemas/taas.xsd'])
 
 task genMac {
     description = 'Generate the Mac .app skeleton. Requires AppBundler (https://bitbucket.org/infinitekind/appbundler) ' +
@@ -922,8 +925,8 @@ jacoco {
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
     reports {
-        xml.enabled = true  // coveralls plugin depends on xml format report
-        html.enabled = true
+        xml.required = true  // coveralls plugin depends on xml format report
+        html.required = true
     }
 }
 
@@ -996,21 +999,9 @@ instantStartXmls.each { xml ->
     instantStartGuides.dependsOn taskName
 }
 
-task jar2(type: Sync) {
-    description = 'Create minimal executable output for debugging.'
-    destinationDir = file("${buildDir}/install/jar2")
-    from jar
-    from(configurations.runtimeOnly) {
-        into 'lib'
-    }
-    from('scripts') {
-        into 'scripts'
-    }
-}
-
 task debug(type: JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
-    main = mainClassName
+    mainClass = mainClassName
     classpath = sourceSets.main.runtimeClasspath
     debug true
 }
@@ -1027,7 +1018,7 @@ test {
 
 task testIntegration(type: JavaExec) {
     description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
-    main = 'org.omegat.core.data.TestTeamIntegration'
+    mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     systemProperties = System.properties
 }

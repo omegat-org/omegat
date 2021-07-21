@@ -90,6 +90,8 @@ configurations {
         exclude group: 'org.apache.lucene', module: 'lucene-core'
     }
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
+    testIntegration
+    testIntegraitonImplementation.extendsFrom testImplementation
 }
 
 ext {
@@ -202,7 +204,7 @@ dependencies {
     // WebStart-only
     jnlp webstartDocsJar.outputs.files
 
-    testIntegrationImplementation sourceSets.main.output, sourceSets.test.output, configurations.implementation
+    testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
 }
 
 jar {
@@ -343,7 +345,7 @@ distributions {
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
             }
             into('lib/provided') {
-                from configurations.runtime
+                from configurations.runtimeOnly
             }
         }
         sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
@@ -995,7 +997,7 @@ task jar2(type: Sync) {
     description = 'Create minimal executable output for debugging.'
     destinationDir = file("${buildDir}/install/jar2")
     from jar
-    from(configurations.runtime) {
+    from(configurations.runtimeOnly) {
         into 'lib'
     }
     from('scripts') {

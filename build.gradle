@@ -91,7 +91,7 @@ configurations {
     }
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
     testIntegration
-    testIntegraitonImplementation.extendsFrom testImplementation
+    testIntegrationImplementation.extendsFrom testImplementation
 }
 
 ext {
@@ -345,7 +345,7 @@ distributions {
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'local.properties'
             }
             into('lib/provided') {
-                from configurations.runtimeOnly
+                from configurations.implementation
             }
         }
         sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"

@@ -493,7 +493,7 @@ task hunspellJarSignedContents(type: Sync) {
 
 task hunspellSignedJar(type: Jar) {
     from hunspellJarSignedContents.outputs
-    archiveFileName = hunspellJar.name
+    archiveFileName = 'hunspell-native-libs'
 }
 
 task installMacSignedDist(type: Sync) {

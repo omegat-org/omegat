@@ -89,17 +89,16 @@ configurations {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/813/
         exclude group: 'org.apache.lucene', module: 'lucene-core'
     }
-    nativeLibs
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
 
     testIntegrationImplementation.extendsFrom implementation
 
+    hunspell
     jaxb
 }
 
 ext {
     providedLibsDir = file('lib/provided')
-    nativeLibsDir = file('lib/provided/native')
     languageToolVersion = '3.5'
     luceneVersion = '5.2.1'
 }
@@ -107,9 +106,8 @@ ext {
 dependencies {
     // Libs are provided in the "source" distribution only
     if (providedLibsDir.directory) {
-        implementation fileTree(dir: providedLibsDir, include: '*.jar')
-        // nativeLibs 'org.languagetool:hunspell-native-libs:2.9'  // this works with original `def hunspellJar`
-        nativeLibs fileTree(dir: nativeLibsDir, include: '*.jar')
+        implementation fileTree(dir: providedLibsDir, include: '*.jar', exclude: 'hunspell*.jar')
+        hunspell fileTree(dir: providedLibsDir, include: 'hunspell*.jar')
     } else {
         implementation 'commons-io:commons-io:2.7'
         implementation 'commons-lang:commons-lang:2.6'
@@ -149,7 +147,7 @@ dependencies {
             exclude module: 'lucene-gosen-ipadic'
         }
         runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
-        nativeLibs 'org.languagetool:hunspell-native-libs:2.9'
+        hunspell 'org.languagetool:hunspell-native-libs:2.9'
 
         // Lucene for tokenizers
         // Temporary use of custom lucene-core; see https://sourceforge.net/p/omegat/bugs/813/
@@ -214,6 +212,7 @@ dependencies {
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
 }
+project.getDependencies().add('runtimeOnly', configurations.hunspell)
 
 jar {
     def omtPlugins = loadProperties(file('Plugins.properties'))
@@ -329,9 +328,6 @@ distributions {
             from('lib/licenses') {
                 into 'lib'
             }
-            from(configurations.nativeLibs) {
-                into 'lib'
-            }
             eachFile {
                 // Move main JAR up one level from lib.
                 if (it.name == jar.archiveName) {
@@ -352,9 +348,6 @@ distributions {
             }
             into('lib/provided') {
                 from configurations.runtimeClasspath
-            }
-            into('lib/provided/native') {
-                from configurations.nativeLibs
             }
         }
         sourceDistZip.archiveFileName = "${applicationName}_${version}${omtVersion.beta}_Source.zip"
@@ -469,7 +462,7 @@ installMacDist {
     }
 }
 
-def hunspellJar = configurations.nativeLibs.files.asType(List).get(0)
+def hunspellJar = configurations.hunspell.files.asType(List).get(0)
 
 task hunspellJarSignedContents(type: Sync) {
     onlyIf {

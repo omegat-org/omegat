@@ -93,7 +93,6 @@ configurations {
 
     testIntegrationImplementation.extendsFrom implementation
 
-    hunspell
     jaxb
 }
 
@@ -106,8 +105,7 @@ ext {
 dependencies {
     // Libs are provided in the "source" distribution only
     if (providedLibsDir.directory) {
-        implementation fileTree(dir: providedLibsDir, include: '*.jar', exclude: 'hunspell*.jar')
-        hunspell fileTree(dir: providedLibsDir, include: 'hunspell*.jar')
+        implementation fileTree(dir: providedLibsDir, include: '**/*.jar')
     } else {
         implementation 'commons-io:commons-io:2.7'
         implementation 'commons-lang:commons-lang:2.6'
@@ -147,7 +145,7 @@ dependencies {
             exclude module: 'lucene-gosen-ipadic'
         }
         runtimeOnly 'org.omegat.lucene:lucene-gosen:5.0.0:ipadic'
-        hunspell 'org.languagetool:hunspell-native-libs:2.9'
+        runtimeOnly 'org.languagetool:hunspell-native-libs:2.9'
 
         // Lucene for tokenizers
         // Temporary use of custom lucene-core; see https://sourceforge.net/p/omegat/bugs/813/
@@ -212,7 +210,6 @@ dependencies {
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
 }
-project.getDependencies().add('runtimeOnly', configurations.hunspell)
 
 jar {
     def omtPlugins = loadProperties(file('Plugins.properties'))
@@ -462,7 +459,7 @@ installMacDist {
     }
 }
 
-def hunspellJar = configurations.hunspell.files.asType(List).get(0)
+def hunspellJar = configurations.runtimeClasspath.files.find {it.path.contains("hunspell-native-libs")}
 
 task hunspellJarSignedContents(type: Sync) {
     onlyIf {

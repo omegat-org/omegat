@@ -459,9 +459,9 @@ installMacDist {
     }
 }
 
-def hunspellJar = configurations.runtimeClasspath.fileCollection {
-    it.name == 'hunspell-native-libs'
-}.singleFile
+def hunspellJar = configurations.runtimeClasspath.files.find {
+    it.name.startsWith('hunspell-native-libs')
+}
 
 task hunspellJarSignedContents(type: Sync) {
     onlyIf {

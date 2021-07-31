@@ -43,7 +43,6 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
@@ -348,8 +347,9 @@ public class ProjectTMX {
                         // When default entries of previous versions projectTMX files,
                         // generate an internal_id.
                         // Use hash of source, creator and create date
-                        id = StaticUtils.getInternalId(te.source, creator, created);
+                        id = DataUtils.generateInternalId(te.source, creator, created);
                     }
+                    DataUtils.putInternalId(id);
                     te.internal_id = id;
 
                     EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source,

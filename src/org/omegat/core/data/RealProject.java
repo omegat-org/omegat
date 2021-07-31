@@ -1478,7 +1478,7 @@ public class RealProject implements IProject {
             trans.creationDate = trans.changeDate;
             trans.creator = trans.changer;
             if (defaultTranslation || defaultEntry == null) {
-                trans.internal_id = StaticUtils.getInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
+                trans.internal_id = DataUtils.generateInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
             } else {
                 trans.internal_id = defaultEntry.internal_id;
             }
@@ -1488,7 +1488,7 @@ public class RealProject implements IProject {
             if (prevTrEntry.internal_id != null) {
                 trans.internal_id = prevTrEntry.internal_id;
             } else {
-                trans.internal_id = StaticUtils.getInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
+                trans.internal_id = DataUtils.generateInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
             }
         }
 

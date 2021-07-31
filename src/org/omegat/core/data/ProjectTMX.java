@@ -43,6 +43,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
@@ -196,6 +197,11 @@ public class ProjectTMX {
                         p.add("auto");
                     }
                 }
+                String internal_id = en.getValue().internal_id;
+                if (internal_id != null) {
+                    p.add(PROP_ID);
+                    p.add(internal_id);
+                }
                 wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), p);
             }
 
@@ -333,6 +339,14 @@ public class ProjectTMX {
                         // present
                         id = te.getPropValue(ATTR_TUID);
                     }
+
+                    if (id == null && te.otherProperties == null) {
+                        // When default entries of previous versions projectTMX files,
+                        // generate an internal_id.
+                        // Use hash of source, creator and create date
+                        id = StaticUtils.getInternalId(te.source, creator, created);
+                    }
+                    te.internal_id = id;
 
                     EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source,
                             id, te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),

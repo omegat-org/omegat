@@ -55,6 +55,7 @@ public class TMXEntry {
     public final String creator;
     public final long creationDate;
     public final String note;
+    public final String internal_id;
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
 
@@ -66,6 +67,7 @@ public class TMXEntry {
         this.creator = from.creator;
         this.creationDate = from.creationDate;
         this.note = from.note;
+        this.internal_id = from.internal_id;
 
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;

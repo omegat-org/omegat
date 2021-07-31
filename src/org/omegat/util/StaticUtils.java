@@ -579,4 +579,9 @@ public final class StaticUtils {
         return true;
     }
 
+    public static String getInternalId(String source, String creator, long created) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(source).append(creator).append(created);
+        return Integer.toHexString(sb.hashCode());
+    }
 } // StaticUtils

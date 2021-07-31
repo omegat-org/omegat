@@ -1144,8 +1144,9 @@ public class EditorController implements IEditor {
         TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
 
         PrepareTMXEntry newen = new PrepareTMXEntry();
-        newen.source = sb.ste.getSrcText();
+        newen.source = entry.getSrcText();
         newen.note = Core.getNotes().getNoteText();
+        newen.internal_id = oldTE.internal_id;
         if (forceTranslation != null) { // there is force translation
             switch (forceTranslation) {
             case UNTRANSLATED:

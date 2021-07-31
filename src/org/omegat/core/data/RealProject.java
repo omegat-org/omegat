@@ -1477,9 +1477,11 @@ public class RealProject implements IProject {
             prevTrEntry = EMPTY_TRANSLATION;
             trans.creationDate = trans.changeDate;
             trans.creator = trans.changer;
+            trans.internal_id = StaticUtils.getInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
         } else {
             trans.creationDate = prevTrEntry.creationDate;
             trans.creator = prevTrEntry.creator;
+            trans.internal_id = prevTrEntry.internal_id;
         }
 
         if (StringUtil.isEmpty(trans.note)) {

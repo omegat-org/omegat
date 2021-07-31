@@ -52,6 +52,7 @@ public class PrepareTMXEntry {
     public String creator;
     public long creationDate;
     public String note;
+    public String internal_id;
     public List<TMXProp> otherProperties;
 
     public PrepareTMXEntry() {
@@ -65,6 +66,7 @@ public class PrepareTMXEntry {
         creator = e.creator;
         creationDate = e.creationDate;
         note = e.note;
+        internal_id = e.internal_id;
     }
 
     public String getPropValue(String propType) {

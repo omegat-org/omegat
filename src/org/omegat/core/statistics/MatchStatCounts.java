@@ -108,8 +108,7 @@ public class MatchStatCounts {
     /**
      * Extract first two rows result to text table.
      *
-     * @param result
-     *            result
+     * @param rows an array of rows
      * @return text table
      */
     public String[][] calcTableWithoutPercentage(String[] rows) {

@@ -46,8 +46,10 @@ public class RepositoryDefinition {
     protected String type;
     @XmlAttribute(name = "url", required = true)
     protected String url;
+    @XmlAttribute(name = "branch")
+    protected String branch;
     @XmlAnyAttribute
-    private Map<QName, String> otherAttributes = new HashMap<QName, String>();
+    private Map<QName, String> otherAttributes = new HashMap<>();
 
     /**
      * Gets the value of the mapping property.
@@ -124,6 +126,14 @@ public class RepositoryDefinition {
      */
     public void setUrl(String value) {
         this.url = value;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(final String branch) {
+        this.branch = branch;
     }
 
     /**

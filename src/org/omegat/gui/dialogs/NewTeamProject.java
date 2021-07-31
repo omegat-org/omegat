@@ -115,6 +115,14 @@ public class NewTeamProject extends javax.swing.JDialog {
     public String getSaveLocation() {
         return txtDirectory.getText().trim();
     }
+    
+    public boolean isUsingNonDefaultBranch() {
+        return nonDefaultBranchCB.isSelected();
+    }
+    
+    public String getBranchName() {
+        return txtBranchName.getText();
+    }
 
     private synchronized void detectRepoOrFile() {
         if (repoType != null || isDetectingRepo()) {
@@ -250,11 +258,14 @@ public class NewTeamProject extends javax.swing.JDialog {
         txtRepositoryOrProjectFileURL = new javax.swing.JTextField();
         detectedRepoOrProjectFileLabel = new javax.swing.JLabel();
         localFolderLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         txtDirectory = new javax.swing.JTextField();
         btnDirectory = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnOk = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        txtBranchName = new javax.swing.JTextField();
+        nonDefaultBranchCB = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("TEAM_NEW_HEADER")); // NOI18N
@@ -303,6 +314,12 @@ public class NewTeamProject extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(localFolderLabel, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "Branch Name");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        getContentPane().add(jLabel1, gridBagConstraints);
 
         txtDirectory.setToolTipText("");
         txtDirectory.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -360,6 +377,19 @@ public class NewTeamProject extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         getContentPane().add(jPanel2, gridBagConstraints);
 
+        txtBranchName.setColumns(40);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        getContentPane().add(txtBranchName, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(nonDefaultBranchCB, "use non default branch");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        getContentPane().add(nonDefaultBranchCB, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -416,8 +446,11 @@ public class NewTeamProject extends javax.swing.JDialog {
     private javax.swing.JButton btnDirectory;
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel detectedRepoOrProjectFileLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel localFolderLabel;
+    public javax.swing.JCheckBox nonDefaultBranchCB;
+    public javax.swing.JTextField txtBranchName;
     public javax.swing.JTextField txtDirectory;
     public javax.swing.JTextField txtRepositoryOrProjectFileURL;
     private javax.swing.JLabel urlLabel;

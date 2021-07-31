@@ -105,15 +105,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
-        if (repo.getUrl().contains("#")) {
-            repositoryURL = repo.getUrl().substring(0, repo.getUrl().indexOf("#") - 1);
-            branch = repo.getUrl().substring(repo.getUrl().indexOf("#") + 1);
-            trackBranch = true;
-        } else {
-            repositoryURL = repo.getUrl();
-            branch = getDefaultBranchName(repository);
-            trackBranch = false;
-        }
+        repositoryURL = repo.getUrl();
+        String defaultBranch = getDefaultBranchName(repository);
+        branch = repo.getBranch() == null? defaultBranch : repo.getBranch();
+        trackBranch = !(branch.equals(defaultBranch));
         localDirectory = dir;
         projectTeamSettings = teamSettings;
 

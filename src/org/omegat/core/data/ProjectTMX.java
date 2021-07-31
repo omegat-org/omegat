@@ -212,7 +212,11 @@ public class ProjectTMX {
                 p.add(PROP_FILE);
                 p.add(k.file);
                 p.add(PROP_ID);
-                p.add(k.id);
+                if (k.id == null) {
+                    p.add(en.getValue().internal_id);
+                } else {
+                    p.add(k.id);
+                }
                 p.add(PROP_PREV);
                 p.add(k.prev);
                 p.add(PROP_NEXT);

@@ -349,8 +349,11 @@ public class ProjectTMX {
                         // Use hash of source, creator and create date
                         id = DataUtils.generateInternalId(te.source, creator, created);
                     }
-                    DataUtils.putInternalId(id);
-                    te.internal_id = id;
+
+                    if (id != null) {
+                        DataUtils.putInternalId(id);
+                        te.internal_id = id;
+                    }
 
                     EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source,
                             id, te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),

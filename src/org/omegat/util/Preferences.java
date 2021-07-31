@@ -93,6 +93,8 @@ public final class Preferences {
     public static final String MT_AUTO_FETCH = "mt_auto_fetch";
     /** Whether to restrict automatic MT requests to only untranslated segments */
     public static final String MT_ONLY_UNTRANSLATED = "mt_only_untranslated";
+    /** Whether to automatically add note which MT engine's translation is used */
+    public static final String MT_ADD_NOTE_WHICH_ENGINE = "mt_add_note_which_mt_engine_used";
 
     public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";
     public static final boolean GLOSSARY_TBX_DISPLAY_CONTEXT_DEFAULT = true;

@@ -69,8 +69,10 @@ import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SegmentExportImport;
+import org.omegat.gui.exttrans.MachineTranslationInfo;
 import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.issues.IssueProvidersSelectorController;
+import org.omegat.gui.notes.INotes;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
 import org.omegat.gui.search.SearchWindowController;
@@ -476,11 +478,18 @@ public final class MainWindowMenuHandler {
     }
 
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {
-        String tr = Core.getMachineTranslatePane().getDisplayedTranslation();
+        MachineTranslationInfo tr = Core.getMachineTranslatePane().getDisplayedTranslation();
         if (tr == null) {
             Core.getMachineTranslatePane().forceLoad();
-        } else if (!StringUtil.isEmpty(tr)) {
-            Core.getEditor().replaceEditText(tr);
+        } else if (!StringUtil.isEmpty(tr.result)) {
+            Core.getEditor().replaceEditText(tr.result);
+            if (Preferences.isPreferenceDefault(Preferences.MT_ADD_NOTE_WHICH_ENGINE, false)) {
+                INotes note = Core.getNotes();
+                String noteText = note.getNoteText();
+                StringBuilder sb = new StringBuilder(noteText != null ? noteText : "");
+                sb.append("(Use MT from: ").append(tr.translatorName).append(")");
+                note.setNoteText(sb.toString());
+            }
         }
     }
 

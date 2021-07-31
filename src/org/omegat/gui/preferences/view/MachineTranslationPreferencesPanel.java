@@ -50,6 +50,7 @@ public class MachineTranslationPreferencesPanel extends JPanel {
 
         autoFetchCheckBox = new javax.swing.JCheckBox();
         untranslatedOnlyCheckBox = new javax.swing.JCheckBox();
+        addNoteOfMTNameCheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel1 = new javax.swing.JPanel();
         mtProviderScrollPane = new javax.swing.JScrollPane();
@@ -68,6 +69,10 @@ public class MachineTranslationPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(untranslatedOnlyCheckBox, OStrings.getString("PREFS_MT_ONLY_UNTRANSLATED")); // NOI18N
         untranslatedOnlyCheckBox.setActionCommand(OStrings.getString("PREFS_MT_ONLY_UNTRANSLATED")); // NOI18N
         add(untranslatedOnlyCheckBox);
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(addNoteOfMTNameCheckBox, bundle.getString("PREFS_MT_ADD_NOTE_WHICH_MT_ENGINE_USED")); // NOI18N
+        add(addNoteOfMTNameCheckBox);
         add(filler1);
 
         jPanel1.setAlignmentX(0.0F);
@@ -95,6 +100,7 @@ public class MachineTranslationPreferencesPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JCheckBox addNoteOfMTNameCheckBox;
     javax.swing.JCheckBox autoFetchCheckBox;
     javax.swing.JButton configureButton;
     private javax.swing.Box.Filler filler1;

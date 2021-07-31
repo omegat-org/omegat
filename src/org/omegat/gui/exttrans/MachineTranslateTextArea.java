@@ -108,14 +108,14 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     /** Cycle getDisplayedTranslation **/
     private Iterator<MachineTranslationInfo> cycle;
 
-    public String getDisplayedTranslation() {
+    public MachineTranslationInfo getDisplayedTranslation() {
         if ((cycle == null) || (!cycle.hasNext())) {
             cycle = displayed.iterator();
         }
         if (!cycle.hasNext()) { // only possible if displayed.isEmpty()
             return null;
         }
-        return cycle.next().result;
+        return cycle.next();
     }
 
     @Override

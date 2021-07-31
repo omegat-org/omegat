@@ -1456,7 +1456,6 @@ public class EditorController implements IEditor {
 
     /**
      * Find the next unique entry.
-     * @param findTranslated should the next entry be translated or not.
      */
     public void nextUniqueEntry() {
         iterateToEntry(true, ste -> ste.getDuplicate() != DUPLICATE.NEXT);

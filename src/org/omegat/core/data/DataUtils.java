@@ -25,12 +25,7 @@
 
 package org.omegat.core.data;
 
-import java.util.Set;
-import java.util.TreeSet;
-
 public final class DataUtils {
-
-    private static final Set<String> INTERNAL_IDS = new TreeSet<>();
 
     private DataUtils() {
     }
@@ -39,20 +34,4 @@ public final class DataUtils {
         return ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT && te.defaultTranslation;
     }
 
-    static void putInternalId(final String id) {
-        INTERNAL_IDS.add(id);
-    }
-
-    static String generateInternalId(String source, String creator, long created) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(source).append(creator).append(created);
-        String id = Integer.toHexString(sb.hashCode());
-        if (INTERNAL_IDS.contains(id)) {
-            String original_id = id;
-            for (int i = 0; INTERNAL_IDS.contains(id) || i < Integer.MAX_VALUE; i++) {
-                id = original_id + "-" + Integer.toHexString(i);
-            }
-        }
-        return id;
-    }
 }

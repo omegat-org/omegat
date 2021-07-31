@@ -33,7 +33,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -83,11 +85,14 @@ public class ProjectTMX {
 
     final CheckOrphanedCallback checkOrphanedCallback;
 
+    private Set<String> internal_ids;
+
     public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
             File file, CheckOrphanedCallback callback) throws Exception {
         this.checkOrphanedCallback = callback;
-        alternatives = new HashMap<EntryKey, TMXEntry>();
-        defaults = new HashMap<String, TMXEntry>();
+        alternatives = new HashMap<>();
+        defaults = new HashMap<>();
+        internal_ids = new TreeSet<>();
 
         if (file == null || !file.exists()) {
             // file not exist - new project
@@ -109,9 +114,23 @@ public class ProjectTMX {
      * Constructor for TMX delta.
      */
     public ProjectTMX() {
-        alternatives = new HashMap<EntryKey, TMXEntry>();
-        defaults = new HashMap<String, TMXEntry>();
+        alternatives = new HashMap<>();
+        defaults = new HashMap<>();
+        internal_ids = new TreeSet<>();
         checkOrphanedCallback = null;
+    }
+
+    String generateInternalId(String source, String creator, long created) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(source).append(creator).append(created);
+        String id = Integer.toHexString(sb.hashCode());
+        if (internal_ids.contains(id)) {
+            String original_id = id;
+            for (int i = 0; internal_ids.contains(id) || i < Integer.MAX_VALUE; i++) {
+                id = original_id + "-" + Integer.toHexString(i);
+            }
+        }
+        return id;
     }
 
     /**
@@ -347,11 +366,11 @@ public class ProjectTMX {
                         // When default entries of previous versions projectTMX files,
                         // generate an internal_id.
                         // Use hash of source, creator and create date
-                        id = DataUtils.generateInternalId(te.source, creator, created);
+                        id = generateInternalId(te.source, creator, created);
                     }
 
                     if (id != null) {
-                        DataUtils.putInternalId(id);
+                        internal_ids.add(id);
                         te.internal_id = id;
                     }
 

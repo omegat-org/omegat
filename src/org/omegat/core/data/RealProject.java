@@ -1472,23 +1472,25 @@ public class RealProject implements IProject {
                 System.getProperty("user.name"));
         trans.changeDate = System.currentTimeMillis();
 
-        if (prevTrEntry == null) {
-            // there was no translation yet
-            prevTrEntry = EMPTY_TRANSLATION;
-            trans.creationDate = trans.changeDate;
-            trans.creator = trans.changer;
-            if (defaultTranslation || defaultEntry == null) {
-                trans.internal_id = DataUtils.generateInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
+        synchronized (projectTMX) {
+            if (prevTrEntry == null) {
+                // there was no translation yet
+                prevTrEntry = EMPTY_TRANSLATION;
+                trans.creationDate = trans.changeDate;
+                trans.creator = trans.changer;
+                if (defaultTranslation || defaultEntry == null) {
+                    trans.internal_id = projectTMX.generateInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
+                } else {
+                    trans.internal_id = defaultEntry.internal_id;
+                }
             } else {
-                trans.internal_id = defaultEntry.internal_id;
-            }
-        } else {
-            trans.creationDate = prevTrEntry.creationDate;
-            trans.creator = prevTrEntry.creator;
-            if (prevTrEntry.internal_id != null) {
-                trans.internal_id = prevTrEntry.internal_id;
-            } else {
-                trans.internal_id = DataUtils.generateInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
+                trans.creationDate = prevTrEntry.creationDate;
+                trans.creator = prevTrEntry.creator;
+                if (prevTrEntry.internal_id != null) {
+                    trans.internal_id = prevTrEntry.internal_id;
+                } else {
+                    trans.internal_id = projectTMX.generateInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
+                }
             }
         }
 

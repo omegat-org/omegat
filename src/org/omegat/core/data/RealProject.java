@@ -1465,8 +1465,8 @@ public class RealProject implements IProject {
             throw new IllegalArgumentException("RealProject.setTranslation(tr) can't be null");
         }
 
-        TMXEntry prevTrEntry = defaultTranslation ? projectTMX.getDefaultTranslation(entry.getSrcText())
-                : projectTMX.getMultipleTranslation(entry.getKey());
+        TMXEntry defaultEntry = projectTMX.getDefaultTranslation(entry.getSrcText());
+        TMXEntry prevTrEntry = defaultTranslation ? defaultEntry : projectTMX.getMultipleTranslation(entry.getKey());
 
         trans.changer = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
                 System.getProperty("user.name"));
@@ -1477,11 +1477,19 @@ public class RealProject implements IProject {
             prevTrEntry = EMPTY_TRANSLATION;
             trans.creationDate = trans.changeDate;
             trans.creator = trans.changer;
-            trans.internal_id = StaticUtils.getInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
+            if (defaultTranslation || defaultEntry == null) {
+                trans.internal_id = StaticUtils.getInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
+            } else {
+                trans.internal_id = defaultEntry.internal_id;
+            }
         } else {
             trans.creationDate = prevTrEntry.creationDate;
             trans.creator = prevTrEntry.creator;
-            trans.internal_id = prevTrEntry.internal_id;
+            if (prevTrEntry.internal_id != null) {
+                trans.internal_id = prevTrEntry.internal_id;
+            } else {
+                trans.internal_id = StaticUtils.getInternalId(entry.getSrcText(), trans.creator, trans.creationDate);
+            }
         }
 
         if (StringUtil.isEmpty(trans.note)) {

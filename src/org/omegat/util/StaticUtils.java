@@ -578,4 +578,5 @@ public final class StaticUtils {
         }
         return true;
     }
+
 } // StaticUtils

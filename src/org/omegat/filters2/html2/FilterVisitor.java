@@ -153,25 +153,25 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitTag(Tag tag) {
 
-        boolean intactTag = isIntactTag(tag);
+        boolean keepIntact = keepIntact(tag);
 
-        if (!intactTag) { // If it's an intact tag, no reason to check
-            // Decide whether this tag should be intact, based on the key-value pairs stored in the
+        if (!keepIntact) {
+            // Decide whether this tag should be kept intact, based on the key-value pairs stored in the
             // configuration
             Vector<?> tagAttributes = tag.getAttributesEx();
             Iterator<?> i = tagAttributes.iterator();
-            while (i.hasNext() && !intactTag) {
+            while (i.hasNext() && !keepIntact) {
                 Attribute attribute = (Attribute) i.next();
                 String name = attribute.getName();
                 String value = attribute.getValue();
                 if (name == null || value == null) {
                     continue;
                 }
-                intactTag = this.filter.checkIgnoreTags(name, value);
+                keepIntact = this.filter.checkIgnoreTags(name, value);
             }
         }
 
-        if (intactTag) {
+        if (keepIntact) {
             if (text) {
                 endup();
             } else {
@@ -396,7 +396,7 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     /** Should a contents of this tag be kept intact? */
-    private boolean isIntactTag(Tag tag) {
+    private boolean keepIntact(Tag tag) {
         String tagname = tag.getTagName();
         return tagname.equals("!DOCTYPE")
                 || tagname.equals("STYLE")

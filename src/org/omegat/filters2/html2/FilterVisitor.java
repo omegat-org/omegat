@@ -86,8 +86,7 @@ public class FilterVisitor extends NodeVisitor {
 
     /** Do we collect the translatable text now. */
     protected boolean text = false;
-    /** The translatable text being collected. */
-    // StringBuffer paragraph;
+
     /** Did the PRE block start (it means we mustn't compress the spaces). */
     protected boolean preformatting = false;
 
@@ -429,7 +428,7 @@ public class FilterVisitor extends NodeVisitor {
         // detecting the first starting tag in 'befors'
         // that has its ending in the paragraph
         // all before this "first good" are simply written out
-        List<Node> all = new ArrayList<Node>();
+        List<Node> all = new ArrayList<>();
         all.addAll(befors);
         all.addAll(translatable);
         int firstgoodlimit = befors.size();

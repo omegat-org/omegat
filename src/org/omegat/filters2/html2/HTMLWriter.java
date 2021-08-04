@@ -36,6 +36,7 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
+import org.jetbrains.annotations.NotNull;
 import org.omegat.util.PatternConsts;
 
 /**
@@ -46,7 +47,7 @@ import org.omegat.util.PatternConsts;
  * XML header). Next it writes out to the file.
  * <p>
  * Note that if <code>encoding</code> parameter of the
- * {@link #HTMLWriter(String, String) constructor} is null, no encoding
+ * {@link #HTMLWriter(String, String, HTMLOptions) constructor} is null, no encoding
  * declaration is added, and the file is written in OS-default encoding. This is
  * done to fix a bug <a href="https://sourceforge.net/p/omegat/bugs/101/">[1.6
  * RC2] Bug with Target Encoding set to &lt;auto&gt; for (x)HTML</a>.
@@ -211,7 +212,7 @@ public class HTMLWriter extends Writer {
      * @throws IOException
      *             - If an I/O error occurs
      */
-    public void write(char[] cbuf, int off, int len) throws IOException {
+    public void write(@NotNull char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
         if (writer.getBuffer().length() >= MAX_BUFFER_SIZE) {
             flush();

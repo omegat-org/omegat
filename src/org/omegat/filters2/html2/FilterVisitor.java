@@ -185,7 +185,7 @@ public class FilterVisitor extends NodeVisitor {
             if (isParagraphTag(tag) && text) {
                 endup();
             }
-            if (isPreformattingTag(tag) || Core.getFilterMaster().getConfig().isPreserveSpaces()) {
+            if (isPreformattingTag(tag)) {
                 preformatting = true;
             }
             // Translate attributes of tags if they are not null.
@@ -596,7 +596,9 @@ public class FilterVisitor extends NodeVisitor {
         // https://sourceforge.net/p/omegat/bugs/108/
         // The spaces that are around the segment are not removed, unless
         // compressWhitespace option is enabled. Then the spaces are compressed to max 1.
-        // (This changes the layout, therefore it is an option)
+        // (This changes the layout, therefore it is an option. NB: an alternative implementation is to compress by
+        // default, and use Core.getFilterMaster().getConfig().isPreserveSpaces() option instead to compress if
+        // not checked.)
         if (!preformatting) {
 
             spacePrefix = HTMLUtils.getSpacePrefix(uncompressed, options.getCompressWhitespace());

@@ -110,14 +110,50 @@ public class HTMLFilter2Test extends TestFilterBase {
 
     @Test
     public void testLayout() throws Exception {
-        translateText(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2-layout.html");
+        Map<String, String> config = new HashMap<>();
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "NEVER");
+
+        String filename = "test/data/filters/html/file-HTMLFilter2-layout.html";
+        translateText(new HTMLFilter2(), filename, config);
+
+        testExtractedSTEForLayoutTest(config);
     }
+
     @Test
     public void testLayoutTrimWhitespace() throws Exception {
         Map<String, String> config = new HashMap<>();
         config.put(HTMLOptions.OPTION_COMPRESS_WHITESPACE, "true");
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "NEVER");
         translate(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2-layout.html", config);
         compareBinary(new File("test/data/filters/html/file-HTMLFilter2-layout-compressed.html"), outFile);
+
+        testExtractedSTEForLayoutTest(config);
+    }
+    @Test
+    public void testLayoutPreserveWhitespace() throws Exception {
+        boolean preserveSpacesOrig = Core.getFilterMaster().getConfig().isPreserveSpaces();
+        Core.getFilterMaster().getConfig().setPreserveSpaces(true);
+
+        //preserving whitespace is the default, so nothing changes when enabling this, compared to testLayout() test.
+        testLayout();
+
+        Core.getFilterMaster().getConfig().setPreserveSpaces(preserveSpacesOrig);
+    }
+
+    private void testExtractedSTEForLayoutTest(Map<String, String> filterOptions) throws Exception {
+        String filename = "test/data/filters/html/file-HTMLFilter2-layout.html";
+        IProject.FileInfo fi = loadSourceFiles(new HTMLFilter2(), filename, filterOptions);
+        int i=0;
+        assertEquals("test", fi.entries.get(i++).getSrcText());
+        assertEquals("ltr", fi.entries.get(i++).getSrcText());
+        assertEquals("test spaces", fi.entries.get(i++).getSrcText());
+        assertEquals("test spaces", fi.entries.get(i++).getSrcText());
+        assertEquals("outoftags", fi.entries.get(i++).getSrcText());
+        assertEquals("This <b0>is bold</b0>!", fi.entries.get(i++).getSrcText());
+        //empty segments are skipped
+        assertEquals("formatted\n    text", fi.entries.get(i++).getSrcText());
+        assertEquals("a", fi.entries.get(i++).getSrcText());
+        assertEquals(i, fi.entries.size());
     }
 
 }

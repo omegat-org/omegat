@@ -171,8 +171,11 @@ public class HTMLWriter extends Writer {
                     htmlMeta += ">";
                 }
                 Matcher matcherEnc = PatternConsts.HTML_ENCODING.matcher(contents);
+                Matcher matcherEncHtml5 = PatternConsts.HTML5_ENCODING.matcher(contents);
                 if (matcherEnc.find()) {
                     contents = matcherEnc.replaceFirst(htmlMeta);
+                } else if (matcherEncHtml5.find()) {
+                    contents = matcherEncHtml5.replaceFirst("<meta charset=\""+encoding+"\">");
                 } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFMETA) {
                     Matcher matcherHead = PatternConsts.HTML_HEAD.matcher(contents);
                     if (matcherHead.find()) {

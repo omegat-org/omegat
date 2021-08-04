@@ -212,4 +212,22 @@ public class HTMLFilter2Test extends TestFilterBase {
         compareBinary(new File(addedHeaderFile), outFile);
     }
 
+    @Test
+    public void testAddCharsetHeaderHtml5WhenExistingMeta() throws Exception {
+        Map<String, String> config = new HashMap<>();
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "ALWAYS");
+        String noHeaderFile="test/data/filters/html/file-HTMLFilter2-HTML5-headerdifferentcharset.html";
+        String addedHeaderFile="test/data/filters/html/file-HTMLFilter2-HTML5-added-charset.html";
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(addedHeaderFile), outFile);
+
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "IFHEADER");
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(addedHeaderFile), outFile);
+
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "IFMETA");
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(addedHeaderFile), outFile);
+    }
+
 }

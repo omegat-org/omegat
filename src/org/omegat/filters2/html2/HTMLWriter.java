@@ -149,6 +149,12 @@ public class HTMLWriter extends Writer {
             String contents = buffer.toString();
 
             if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.NEVER) {
+                String EOL = "";
+                Matcher matcherLineending = PatternConsts.LINE_ENDING.matcher(contents);
+                if (matcherLineending.find()) {
+                    EOL = matcherLineending.group();
+                }
+
                 Matcher matcherHeader = PatternConsts.XML_HEADER.matcher(contents);
                 boolean xhtml = false;
                 if (matcherHeader.find()) {
@@ -170,14 +176,14 @@ public class HTMLWriter extends Writer {
                 } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFMETA) {
                     Matcher matcherHead = PatternConsts.HTML_HEAD.matcher(contents);
                     if (matcherHead.find()) {
-                        contents = matcherHead.replaceFirst("<head>\n    " + htmlMeta);
+                        contents = matcherHead.replaceFirst("$0"+EOL+"    " + htmlMeta);
                     } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFHEADER) {
                         Matcher matcherHtml = PatternConsts.HTML_HTML.matcher(contents);
                         if (matcherHtml.find()) {
                             contents = matcherHtml
-                                    .replaceFirst("<html>\n<head>\n    " + htmlMeta + "\n</head>\n");
+                                    .replaceFirst("$0"+EOL+"<head>"+EOL+"    " + htmlMeta + ""+EOL+"</head>");
                         } else {
-                            contents = "<html>\n<head>\n    " + htmlMeta + "\n</head>\n" + contents;
+                            contents = "<html>"+EOL+"<head>"+EOL+"    " + htmlMeta + EOL+"</head>"+EOL+ contents;
                         }
                     }
                 }

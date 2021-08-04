@@ -46,9 +46,10 @@ public class HTMLFilter2Test extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
         List<String> entries = parse(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2.html");
-        assertEquals(entries.size(), 2);
-        assertEquals("This is first line.", entries.get(0));
-        assertEquals("This is second line.", entries.get(1));
+        assertEquals(3, entries.size());
+        assertEquals("en", entries.get(0));
+        assertEquals("This is first line.", entries.get(1));
+        assertEquals("This is second line.", entries.get(2));
     }
 
     @Test
@@ -65,7 +66,8 @@ public class HTMLFilter2Test extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
-        checkMulti("This is first line.", null, null, "", "This is second line.", null);
+        checkMulti("en", null, null, "", "This is first line.", "Tag: HTML Attribute: lang");
+        checkMulti("This is first line.", null, null, "en", "This is second line.", null);
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
 
@@ -154,6 +156,60 @@ public class HTMLFilter2Test extends TestFilterBase {
         assertEquals("formatted\n    text", fi.entries.get(i++).getSrcText());
         assertEquals("a", fi.entries.get(i++).getSrcText());
         assertEquals(i, fi.entries.size());
+    }
+
+    @Test
+    public void testAddCharsetHeaderWhenNoHeader() throws Exception {
+        Map<String, String> config = new HashMap<>();
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "ALWAYS");
+        String noHeaderFile="test/data/filters/html/file-HTMLFilter2.html";
+        String addedHeaderFile="test/data/filters/html/file-HTMLFilter2-added-charset.html";
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(addedHeaderFile), outFile);
+
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "IFHEADER");
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(noHeaderFile), outFile);
+
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "IFMETA");
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(noHeaderFile), outFile);
+    }
+
+    @Test
+    public void testAddCharsetHeaderWhenExistingHeader() throws Exception {
+        Map<String, String> config = new HashMap<>();
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "ALWAYS");
+        String noHeaderFile="test/data/filters/html/file-HTMLFilter2-headernocharset.html";
+        String addedHeaderFile="test/data/filters/html/file-HTMLFilter2-added-charset.html";
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(addedHeaderFile), outFile);
+
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "IFHEADER");
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(addedHeaderFile), outFile);
+
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "IFMETA");
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(noHeaderFile), outFile);
+    }
+
+    @Test
+    public void testAddCharsetHeaderWhenExistingMeta() throws Exception {
+        Map<String, String> config = new HashMap<>();
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "ALWAYS");
+        String noHeaderFile="test/data/filters/html/file-HTMLFilter2-headerdifferentcharset.html";
+        String addedHeaderFile="test/data/filters/html/file-HTMLFilter2-added-charset.html";
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(addedHeaderFile), outFile);
+
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "IFHEADER");
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(addedHeaderFile), outFile);
+
+        config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "IFMETA");
+        translate(new HTMLFilter2(), noHeaderFile, config);
+        compareBinary(new File(addedHeaderFile), outFile);
     }
 
 }

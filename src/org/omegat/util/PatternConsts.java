@@ -177,6 +177,9 @@ public final class PatternConsts {
     /** Pattern for regular expression variable : $n, where n is a number, but should not be preceded by backslash */
     public static final Pattern REGEX_VARIABLE = Pattern.compile("(?<!\\\\)((?:\\\\\\\\)*)\\$(\\d+)");
 
+    /** compiled pattern to match line ending win/mac/linux */
+    public static final Pattern LINE_ENDING = Pattern.compile("\r?\n|\r[^\n]");
+
     /**
      * Pattern for detecting the placeholders in a printf-function string which
      * can occur in languages like php, C and others. placeholder ::= "%"

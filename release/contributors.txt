@@ -19,6 +19,7 @@ Chihiro Hio
 Eric Hsieh
 Thomas Huriaux
 Marc Riera Irigoyen
+Chiaki Ishikawa
 Hans-Peter Jacobs
 Kyle Katarn
 Piotr Kulik

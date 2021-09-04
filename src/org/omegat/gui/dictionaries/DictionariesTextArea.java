@@ -45,6 +45,7 @@ import java.util.stream.Stream;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -242,6 +243,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             scrollPane.notify(true);
         }
 
+        final int old = scrollPane.getVerticalScrollBarPolicy();
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         StringBuilder txt = new StringBuilder();
         boolean wasPrev = false;
         int i = 0;
@@ -264,6 +267,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             }
         }
         appendText(txt.toString());
+        scrollPane.setVerticalScrollBarPolicy(old);
     }
 
     private void appendText(final String txt) {

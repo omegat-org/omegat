@@ -34,14 +34,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.input.BOMInputStream;
+
 import org.omegat.util.Language;
 
 /**
@@ -55,8 +56,28 @@ import org.omegat.util.Language;
  * @author Hiroshi Miura
  */
 public class LingvoDSL implements IDictionaryFactory {
-    protected static final Pattern RE_SKIP = Pattern.compile("\\[.+?\\]");
     protected static final String[] EMPTY_RESULT = new String[0];
+
+    static private class RegMap {
+        public String regex;
+        public String replacement;
+
+        public RegMap(String regex, String replacement) {
+            this.regex = regex;
+            this.replacement = replacement;
+        }
+    }
+
+    protected static final List<RegMap> RE_MAP = new ArrayList<>();
+
+    static {
+        RE_MAP.add(new RegMap("\\[b\\](.+?)\\[/b\\]", "<strong>$1</strong>"));
+        RE_MAP.add(new RegMap("\\[i\\](.+?)\\[/i\\]", "<span style='font-style: italic'>$1</span>"));
+        RE_MAP.add(new RegMap("\\[trn\\]", ""));
+        RE_MAP.add(new RegMap("\\[/trn\\]", ""));
+        RE_MAP.add(new RegMap("\\[t\\]", ""));
+        RE_MAP.add(new RegMap("\\[/t\\]", ""));
+    }
 
     @Override
     public boolean isSupportedFile(File file) {
@@ -96,11 +117,19 @@ public class LingvoDSL implements IDictionaryFactory {
             }
         }
 
+        private String replaceTag(final String line) {
+            String result = line;
+            for (RegMap regMap : RE_MAP) {
+                result = result.replaceAll(regMap.regex, regMap.replacement);
+            }
+            return result.replaceAll("\\[\\[(.+?)\\]\\]", "[$1]");
+        }
+
         private void loadData(Stream<String> stream) {
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
             stream.filter(line -> !line.isEmpty() && !line.startsWith("#"))
-                    .map(line -> RE_SKIP.matcher(line).replaceAll("")).forEach(line -> {
+                    .forEach(line -> { line = replaceTag(line);
                 if (Character.isWhitespace(line.codePointAt(0))) {
                     trans.append(line.trim()).append('\n');
                 } else {

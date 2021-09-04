@@ -35,10 +35,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.font.TextAttribute;
 import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -48,8 +53,10 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.EditorKit;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
 import org.omegat.core.Core;
@@ -88,7 +95,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         implements IDictionaries, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
-    private static final int TEXT_BATCH = 30;
 
     protected final DictionariesManager manager = new DictionariesManager(this);
 
@@ -101,10 +107,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     public DictionariesTextArea(IMainWindow mw) {
         super(true);
 
-        setContentType("text/html");
-        ((HTMLDocument) getDocument()).setPreservesUnknownTags(false);
         setFont(getFont());
-
+        initDocument();
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Dictionary");
         scrollPane = new DockableScrollPane("DICTIONARY", title, this, true);
         mw.addDockable(scrollPane);
@@ -129,20 +133,32 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     }
 
     @Override
-    public void setFont(Font font) {
-        super.setFont(font);
-        Document doc = getDocument();
-        if (!(doc instanceof HTMLDocument)) {
-            return;
+    public void setFont(final Font font) {
+        Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+        attributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
+        super.setFont(font.deriveFont(attributes));
+        if (displayedWords != null && !displayedWords.isEmpty()) {
+            initDocument();
+            refresh();
         }
-        StyleSheet styleSheet = ((HTMLDocument) doc).getStyleSheet();
-        styleSheet.addRule("body { font-family: " + font.getName() + "; "
+    }
+
+    @SuppressWarnings({"avoidinlineconditionals"})
+    private void initDocument() {
+        StyleSheet baseStyleSheet = new StyleSheet();
+        HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
+        baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add default styles
+        Font font = getFont();
+        baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "
                 + " font-size: " + font.getSize() + "; "
                 + " font-style: " + (font.getStyle() == Font.BOLD ? "bold"
                         : font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
                 + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + "; "
-                + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + "; "
-                + " }");
+                + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + ";} "
+                + ".word {font-size: " + (2 + font.getSize()) + "; font-style: bold; }"
+                );
+        htmlEditorKit.setStyleSheet(baseStyleSheet);
+        setEditorKit(htmlEditorKit);
     }
 
     @Override
@@ -175,27 +191,34 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
      */
     protected void callDictionary(String word) {
         UIThreadsUtil.mustBeSwingThread();
-
         HTMLDocument doc = (HTMLDocument) getDocument();
 
-        int i = displayedWords.indexOf(word.toLowerCase());
-        if (i == -1) {
+        int index = displayedWords.indexOf(word.toLowerCase());
+        if (index == -1) {
             return;
         }
-        Element el = doc.getElement(Integer.toString(i));
+        Element el = doc.getElement(Integer.toString(index));
         if (el == null) {
             return;
         }
+        int start = el.getStartOffset();
+        int end = el.getEndOffset();
         try {
-            // rectangle to be visible
-            Rectangle rect = Java8Compat.modelToView(this, el.getStartOffset());
-            // show 2 lines
-            if (rect != null) {
-                rect.height *= 2;
-                scrollRectToVisible(rect);
+            // Start position of article
+            Rectangle startRect = Java8Compat.modelToView(this, start);
+            // End position of article
+            Rectangle endRect = Java8Compat.modelToView(this, end);
+            // To show maximum extent possible, scroll to end and then to start.
+            // Scrolling to startRect.union(endRect) will not show the start
+            // when initiating scroll from below the target article.
+            if (endRect != null) {
+                scrollRectToVisible(endRect);
+            }
+            if (startRect != null) {
+                scrollRectToVisible(startRect);
             }
         } catch (BadLocationException ex) {
-            // shouldn't be throwed
+            // Shouldn't be thrown
         }
     }
 
@@ -251,34 +274,32 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             } else {
                 wasPrev = true;
             }
-            txt.append("<b><span id=\"" + i + "\">");
+            txt.append("<div id =\"").append(i).append("\"><b><span class=\"word\">");
             txt.append(de.getWord());
             txt.append("</span></b>");
             txt.append(" - ").append(de.getArticle());
-
+            txt.append("</div>");
             displayedWords.add(de.getWord().toLowerCase());
             i++;
-            if (i % TEXT_BATCH == 0) {
-                appendText(txt.toString());
-                txt = new StringBuilder();
-            }
         }
         txt.append("</html>");
-        appendText(txt.toString());
+        fastReplaceContent(txt.toString());
     }
 
-    private void appendText(final String txt) {
+    // Previously we were incrementally adding to the current document and later
+    // batching updates to the current document, but it turns out that
+    // recreating the document from scratch is actually faster for very large
+    // content. See https://sourceforge.net/p/omegat/bugs/1068/
+    private void fastReplaceContent(final String txt) {
         Document doc = getDocument();
-        if (doc.getLength() == 0) {
-            // Appending to an empty document results in treating HTML tags as
-            // plain text for some reason
-            setText(txt);
-        } else {
-            try {
-                doc.insertString(doc.getLength(), txt, null);
-            } catch (BadLocationException e) {
-                Log.log(e);
-            }
+        try {
+            EditorKit editorKit = getEditorKit();
+            doc = editorKit.createDefaultDocument();
+            ((HTMLDocument) doc).setPreservesUnknownTags(false);
+            editorKit.read(new StringReader(txt), doc, 0);
+            setDocument(doc);
+        } catch (IOException | BadLocationException  e) {
+            Log.log(e);
         }
     }
 

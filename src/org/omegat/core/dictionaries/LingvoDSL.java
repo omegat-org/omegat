@@ -73,10 +73,8 @@ public class LingvoDSL implements IDictionaryFactory {
     static {
         RE_MAP.add(new RegMap("\\[b\\](.+?)\\[/b\\]", "<strong>$1</strong>"));
         RE_MAP.add(new RegMap("\\[i\\](.+?)\\[/i\\]", "<span style='font-style: italic'>$1</span>"));
-        RE_MAP.add(new RegMap("\\[trn\\]", ""));
-        RE_MAP.add(new RegMap("\\[/trn\\]", ""));
-        RE_MAP.add(new RegMap("\\[t\\]", ""));
-        RE_MAP.add(new RegMap("\\[/t\\]", ""));
+        RE_MAP.add(new RegMap("\\[trn\\](.+?)\\[/trn\\]", "<br>&nbsp;-&nbsp;$1"));
+        RE_MAP.add(new RegMap("\\[t\\](.+?)\\[/t\\]", "$1&nbsp;"));
     }
 
     @Override

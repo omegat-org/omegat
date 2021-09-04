@@ -36,6 +36,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,6 +52,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.EditorKit;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.StyleSheet;
@@ -89,7 +93,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         implements IDictionaries, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
-    private static final int TEXT_BATCH = 30;
 
     protected final DictionariesManager manager = new DictionariesManager(this);
 
@@ -261,10 +264,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
             displayedWords.add(de.getWord().toLowerCase());
             i++;
-            if (i % TEXT_BATCH == 0) {
-                appendText(txt.toString());
-                txt = new StringBuilder();
-            }
         }
         appendText(txt.toString());
         scrollPane.setVerticalScrollBarPolicy(old);
@@ -272,16 +271,23 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
     private void appendText(final String txt) {
         Document doc = getDocument();
-        if (doc.getLength() == 0) {
+        EditorKit kit = getEditorKit();
+        try {
+            Reader r;
+            if (doc.getLength() == 0) {
+                r = new StringReader(txt);
+            } else {
+                StringBuilder sb = new StringBuilder(doc.getText(0, doc.getLength())).append(txt);
+                r = new StringReader(sb.toString());
+            }
             // Appending to an empty document results in treating HTML tags as
             // plain text for some reason
-            setText(txt);
-        } else {
-            try {
-                doc.insertString(doc.getLength(), txt, null);
-            } catch (BadLocationException e) {
-                Log.log(e);
-            }
+            doc = kit.createDefaultDocument();
+            ((HTMLDocument) doc).setPreservesUnknownTags(false);
+            kit.read(r, doc, 0);
+            setDocument(doc);
+        } catch (IOException | BadLocationException  e) {
+            Log.log(e);
         }
     }
 

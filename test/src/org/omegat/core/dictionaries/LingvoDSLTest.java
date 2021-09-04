@@ -53,7 +53,7 @@ public class LingvoDSLTest {
     @Test
     public void testReadFileDict() throws Exception {
         LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
-        assertEquals(6, dict.data.size());
+        assertEquals(10, dict.data.size());
 
         String word = "space";
         List<Entry<String, String>> data = dict.data.lookUp(word);
@@ -61,7 +61,7 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("Only a single white space on first character\n", result.get(0).getArticle());
+        assertEquals("<p style=\"text-indent: 30px\">Only a single white space on first character</p>\n", result.get(0).getArticle());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("Translation line also can have a single TAB char\n", result.get(0).getArticle());
+        assertEquals("<p style=\"text-indent: 30px\">Translation line also can have a single TAB char</p>\n", result.get(0).getArticle());
     }
 
     @Test
@@ -81,7 +81,51 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result.get(0).getArticle());
+        assertEquals("<p style=\"text-indent: 30px\">\u0441\u0442\u0430\u043d\u043e\u043a</p>\n", result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadArticleChinese() throws Exception {
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        String word = "\u4e00\u4e2a\u6837";
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("&#91;y\u012B ge y\u00E0ng&#93;&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B y\u00E0ng&nbsp;, the same\n", result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadArticleFontStyles() throws Exception {
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        String word = "italic";
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("Here is an <span style='font-style: italic'>italic</span> <strong>word</strong>.\n",
+                result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadArticleIndentStyles() throws Exception {
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        String word = "abandon";
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("<p style=\"text-indent: 30px\"><strong>1.</strong> \u043E\u0442\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C\u0441\u044F" +
+                        " (<span style='font-style: italic'>\u043E\u0442 \u0447\u0435\u0433\u043E-\u043B.</span>)," +
+                        " \u043F\u0440\u0435\u043A\u0440\u0430\u0449\u0430\u0442\u044C " +
+                        "(<span style='font-style: italic'>\u043F\u043E\u043F\u044B\u0442\u043A\u0438 \u0438 \u0442." +
+                        " \u043F.</span>)</p>\n" +
+                        "<p style=\"text-indent: 30px\"><strong>2.</strong> \u043F\u043E\u043A\u0438\u0434\u0430\u0442\u044C," +
+                        " \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C</p>\n" +
+                        "<p style=\"text-indent: 60px\">to abandon attempts</p>\n" +
+                        "<p style=\"text-indent: 60px\">to abandon a claim</p>\n" +
+                        "<p style=\"text-indent: 60px\">to abandon convertibility</p>\n" +
+                        "<p style=\"text-indent: 60px\">to abandon the &#91;gold&#93; standard</p>\n" +
+                        "<p style=\"text-indent: 60px\">to abandon price control</p>\n" +
+                        "<p style=\"text-indent: 60px\">to abandon a right</p>\n",
+                result.get(0).getArticle());
     }
 
     @Test

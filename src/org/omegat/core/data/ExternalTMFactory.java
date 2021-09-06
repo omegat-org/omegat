@@ -137,7 +137,7 @@ public final class ExternalTMFactory {
                     // Keep all the Tuvs matching at least the target language
                     for (TMXReader2.ParsedTuv tuvTarget2 : tu.tuvs) {
                         // Skip entries from the same source language/country
-                        if (sourceLang.equals(new Language(tuvTarget2.lang))) {
+                        if(tuvSource.lang.equals(tuvTarget2.lang)){
                             continue;
                         }
                         // Matching entries for foreign languages are included with a penalty

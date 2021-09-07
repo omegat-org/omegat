@@ -165,25 +165,21 @@ public class ExternalTMFactoryTest extends TestCore {
         tmx = ExternalTMFactory.load(tmxFile);
 
         // All foreign translations are present
-        assertEquals(14, tmx.getEntries().size());
+        assertEquals(11, tmx.getEntries().size());
 
         matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!"))
                 .collect(Collectors.toList());
-        assertEquals(8, matchingEntries.size());
+        assertEquals(7, matchingEntries.size());
 
         matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("This is an english sentence."))
                 .collect(Collectors.toList());
-        assertEquals(3, matchingEntries.size());
+        assertEquals(2, matchingEntries.size());
 
         PrepareTMXEntry entry = matchingEntries.get(0);
-        assertEquals("EN-US", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE));
-        assertEquals("true", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH));
-
-        entry = matchingEntries.get(1);
         assertEquals("DE", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE));
         assertEquals("true", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH));
 
-        entry = matchingEntries.get(2);
+        entry = matchingEntries.get(1);
         assertEquals("ES", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE));
         assertEquals("true", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH));
     }

@@ -145,8 +145,9 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 + " font-style: " + (font.getStyle() == Font.BOLD ? "bold"
                         : font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
                 + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + "; "
-                + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + "; "
-                + " }");
+                + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + ";} "
+                + ".word {font-size: " + (2 + font.getSize()) + "; font-style: bold; }"
+                );
     }
 
     @Override
@@ -191,12 +192,16 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             return;
         }
         try {
-            // rectangle to be visible
-            Rectangle rect = Java8Compat.modelToView(this, el.getStartOffset());
-            // show 2 lines
-            if (rect != null) {
-                rect.height *= 2;
-                scrollRectToVisible(rect);
+            // start position to be visible
+            Rectangle rect1 = Java8Compat.modelToView(this, el.getStartOffset());
+            // end position of article
+            Rectangle rect2 = Java8Compat.modelToView(this, el.getEndOffset());
+            // to show maximum text of selected, by moving to end of article then show start position,
+            if (rect2 != null) {
+                scrollRectToVisible(rect2);
+            }
+            if (rect1 != null) {
+                scrollRectToVisible(rect1);
             }
         } catch (BadLocationException ex) {
             // shouldn't be throwed
@@ -251,20 +256,22 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         StringBuilder txt = new StringBuilder();
         boolean wasPrev = false;
         int i = 0;
+        txt.append("<html>");
         for (DictionaryEntry de : data) {
             if (wasPrev) {
                 txt.append("<br><hr>");
             } else {
                 wasPrev = true;
             }
-            txt.append("<b><span id=\"" + i + "\">");
+            txt.append("<div id =\"" + i + "\"><b><span class=\"word\">");
             txt.append(de.getWord());
             txt.append("</span></b>");
             txt.append(" - ").append(de.getArticle());
-
+            txt.append("</div>");
             displayedWords.add(de.getWord().toLowerCase());
             i++;
         }
+        txt.append("</html>");
         appendText(txt.toString());
         scrollPane.setVerticalScrollBarPolicy(old);
     }

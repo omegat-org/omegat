@@ -207,12 +207,24 @@
     </varlistentry>
 
     <varlistentry>
+      <term>Restart</term>
+
+      <listitem>
+        <para>Saves the project and restarts <application>OmegaT</application>.
+        If you haven't yet saved the project, this manually confirms whether
+        you really wish to quit.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
       <term>Quit</term>
 
       <listitem>
         <para>Saves the project and quits <application>OmegaT</application>.
         If you haven't yet saved the project, this manually confirms whether
         you really wish to quit.</para>
+
+		<para>In macOS, this menu item is listed in the application menu.</para>
       </listitem>
     </varlistentry>
   </variablelist>

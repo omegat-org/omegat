@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.6.0
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   Implemented requests:
 
+  - Support using arbitrary git branch name
+  https://sourceforge.net/p/omegat/feature-requests/1531/
+  
   - Restart application from Project menu
   https://sourceforge.net/p/omegat/feature-requests/1564/
 

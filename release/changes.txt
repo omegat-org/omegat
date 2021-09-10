@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 5.6.0
 ----------------------------------------------------------------------
-  3 Enhancements
-  2 Bug fixes
+  5 Enhancements
+  6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.6.0 vs 5.5.0
@@ -15,7 +15,22 @@
   - Aggressive Font Fallback doesn't work on Java 11
   https://sourceforge.net/p/omegat/bugs/1051/
 
+  - html2 filter displays empty segments in preserve space mode
+  https://sourceforge.net/p/omegat/bugs/1062/
+
+  - html2 filter rewrite encoding issues
+  https://sourceforge.net/p/omegat/bugs/1064/
+
+  - Effect of "Untranslated segments only" unclear
+  https://sourceforge.net/p/omegat/bugs/995/
+
   Implemented requests:
+
+  - Add extra ignore patterns for ".git", ".hg", and ".repositories"
+  https://sourceforge.net/p/omegat/feature-requests/1589/
+
+  - Support using arbitrary git branch name
+  https://sourceforge.net/p/omegat/feature-requests/1531/
 
   - Restart application from Project menu
   https://sourceforge.net/p/omegat/feature-requests/1564/

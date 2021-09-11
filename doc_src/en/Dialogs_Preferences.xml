@@ -105,6 +105,23 @@
           <para>If this option is checked, the glossary will only display one entry, even if the same word exists in several forms (e.g. with and without capital letters) in the glossary.</para>
         </listitem>
       </varlistentry>
+
+	  <varlistentry>
+        <term>Glossary layout</term>
+
+        <listitem>
+          <para>You can select a glossary pane contents layout. Layout variations can be added as plugins.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Merge alternate definition for the same term</term>
+
+        <listitem>
+          <para>If a glossary item has alternate definitions, they will be displayed on the same line.</para>
+        </listitem>
+      </varlistentry>
+	  
     </variablelist>
 
     <section>
@@ -174,6 +191,14 @@
     <title>Appearance</title>
 
     <variablelist>
+	  <varlistentry>
+        <term>Theme</term>
+
+        <listitem>
+          <para>You can select a theme for OmegaT's user interface. Theme can also be added as plugins.</para>
+        </listitem>
+      </varlistentry>
+
       <varlistentry>
         <term>Restore Main Window</term>
 
@@ -181,6 +206,7 @@
           <para>Restores the components of the main OmegaT window to their default state. Use this feature when you have undocked, moved or hidden one or more components and you are unable to restore the desired arrangement. It can also be used when panes do not appear as expected following an OmegaT upgrade.</para>
         </listitem>
       </varlistentry>
+
     </variablelist>
 
     <section>

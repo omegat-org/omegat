@@ -35,6 +35,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.font.TextAttribute;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
@@ -42,6 +43,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -133,8 +135,11 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     }
 
     @Override
-    public void setFont(Font font) {
-        super.setFont(font);
+    @SuppressWarnings({"avoidinlineconditionals", "unchecked", "rawtypes"})
+    public void setFont(final Font font) {
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
+        super.setFont(font.deriveFont(attributes));
         Document doc = getDocument();
         if (!(doc instanceof HTMLDocument)) {
             return;

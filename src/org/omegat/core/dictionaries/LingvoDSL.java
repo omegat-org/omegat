@@ -132,7 +132,7 @@ public class LingvoDSL implements IDictionaryFactory {
         RE_MAP.add(new RegMap("\\[video\\]", ""));
         RE_MAP.add(new RegMap("\\[/video\\]", ""));
         //The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress) with a red letter (the default behavior in Lingvo). Check the syntax: does ' need to be escaped?
-        RE_MAP.add(new RegMap("\\['\\].[/'\\]", "<span style='color:red'>$1</span>"));
+        RE_MAP.add(new RegMap("\\['\\].\\[/'\\]", "<span style='color:red'>$1</span>"));
         // In the following two lines, the asterisk symbols are escaped. Maybe, it is superfluous.
         RE_MAP.add(new RegMap("\\[\\*\\]", ""));
         RE_MAP.add(new RegMap("\\[/\\*\\]", ""));

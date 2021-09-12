@@ -75,6 +75,67 @@ public class LingvoDSL implements IDictionaryFactory {
         RE_MAP.add(new RegMap("\\[i\\](.+?)\\[/i\\]", "<span style='font-style: italic'>$1</span>"));
         RE_MAP.add(new RegMap("\\[trn\\](.+?)\\[/trn\\]", "<br>&nbsp;-&nbsp;$1"));
         RE_MAP.add(new RegMap("\\[t\\](.+?)\\[/t\\]", "$1&nbsp;"));
+        RE_MAP.add(new RegMap("\\[br\\]", "<br/>"));
+        //The following line tries to replace [c]text[/c] with green text (default color in Lingvo)
+        RE_MAP.add(new RegMap("\\[c\\](.+?)\\[/c\\]", "<span style='color:green'>$1</span>"));
+        //The following line tries to replace [c value]text[/c] with text colored as per the value. Since the color names are plain words like 'red', or 'blue', or 'steelgray' etc., I use the ([a-z]+?) regular expression, but am not sure if it is correct.
+        RE_MAP.add(new RegMap("\\[c\\s([a-z]+?)\\](.+?)\\[/c\\]", "<span style='color:$1'>$2</span>"));
+        RE_MAP.add(new RegMap("\\[com\\]", ""));
+        RE_MAP.add(new RegMap("\\[/com\\]", ""));
+        RE_MAP.add(new RegMap("\\[ex\\]", ""));
+        RE_MAP.add(new RegMap("\\[/ex\\]", ""));
+        RE_MAP.add(new RegMap("\\[lang\\]", ""));
+        RE_MAP.add(new RegMap("\\[/lang\\]", ""));
+        RE_MAP.add(new RegMap("\\[m\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m\\]", ""));
+        RE_MAP.add(new RegMap("\\[m1\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m1\\]", ""));
+        RE_MAP.add(new RegMap("\\[m2\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m2\\]", ""));
+        RE_MAP.add(new RegMap("\\[m3\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m3\\]", ""));
+        RE_MAP.add(new RegMap("\\[m4\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m4\\]", ""));
+        RE_MAP.add(new RegMap("\\[m5\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m5\\]", ""));
+        RE_MAP.add(new RegMap("\\[m6\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m6\\]", ""));
+        RE_MAP.add(new RegMap("\\[m7\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m7\\]", ""));
+        RE_MAP.add(new RegMap("\\[m8\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m8\\]", ""));
+        RE_MAP.add(new RegMap("\\[m9\\]", ""));
+        RE_MAP.add(new RegMap("\\[/m9\\]", ""));
+        RE_MAP.add(new RegMap("\\[p\\]", ""));
+        RE_MAP.add(new RegMap("\\[/p\\]", ""));
+        RE_MAP.add(new RegMap("\\[preview\\]", ""));
+        RE_MAP.add(new RegMap("\\[/preview\\]", ""));
+        RE_MAP.add(new RegMap("\\[ref\\]", ""));
+        RE_MAP.add(new RegMap("\\[/ref\\]", ""));
+        RE_MAP.add(new RegMap("\\[s\\]", ""));
+        RE_MAP.add(new RegMap("\\[/s\\]", ""));
+        //The following line tries to replace [sub]text[/sub] with subscript text
+        RE_MAP.add(new RegMap("\\[sub\\](.+?)\\[/sub\\]", "<sub>$1</sub>"));
+        //The following line tries to replace [sup]text[/sup] with superscript text
+        RE_MAP.add(new RegMap("\\[sup\\](.+?)\\[/sup\\]", "<sup>$1</sup>"));
+        RE_MAP.add(new RegMap("\\[trn1\\]", ""));
+        RE_MAP.add(new RegMap("\\[/trn1\\]", ""));
+        RE_MAP.add(new RegMap("\\[trs\\]", ""));
+        RE_MAP.add(new RegMap("\\[/trs\\]", ""));
+        // In the following two lines, the exclamation marks are escaped. Maybe, it is superfluous.
+        RE_MAP.add(new RegMap("\\[\\!trs\\]", ""));
+        RE_MAP.add(new RegMap("\\[/\\!trs\\]", ""));
+        //The following line tries to replace [u]text[/u] with underlined text
+        RE_MAP.add(new RegMap("\\[u\\](.+?)\\[/u\\]", "<span style='text-decoration:underline'>$1</span>"));
+        //The following line tries to replace [url]text[/url] with a hyperlink
+        RE_MAP.add(new RegMap("\\[url\\](.+?)\\[/url\\]", "<a href='$1'>$1</a>"));
+        RE_MAP.add(new RegMap("\\[video\\]", ""));
+        RE_MAP.add(new RegMap("\\[/video\\]", ""));
+        //The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress) with a red letter (the default behavior in Lingvo). Check the syntax: does ' need to be escaped?
+        RE_MAP.add(new RegMap("\\['\\].[/'\\]", "<span style='color:red'>$1</span>"));
+        // In the following two lines, the asterisk symbols are escaped. Maybe, it is superfluous.
+        RE_MAP.add(new RegMap("\\[\\*\\]", ""));
+        RE_MAP.add(new RegMap("\\[/\\*\\]", ""));
     }
 
     @Override

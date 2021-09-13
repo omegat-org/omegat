@@ -245,6 +245,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         StringBuilder txt = new StringBuilder();
         boolean wasPrev = false;
         int i = 0;
+        txt.append("<html>");
         for (DictionaryEntry de : data) {
             if (wasPrev) {
                 txt.append("<br><hr>");
@@ -263,6 +264,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 txt = new StringBuilder();
             }
         }
+        txt.append("</html>");
         appendText(txt.toString());
     }
 

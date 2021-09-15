@@ -63,11 +63,10 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
                 }
                 continue;
             }
-            if (i > 0) {
-                trg.append(", ");
-            }
-
             SimpleAttributeSet attrs = new SimpleAttributeSet(TARGET_ATTRIBUTES);
+            if (i > 0) {
+                trg.append(", ", attrs);
+            }
             if (priorities[i]) {
                 StyleConstants.setBold(attrs, true);
             }

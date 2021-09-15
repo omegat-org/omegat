@@ -53,7 +53,7 @@ public class LingvoDSLTest {
     @Test
     public void testReadFileDict() throws Exception {
         LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
-        assertEquals(6, dict.data.size());
+        assertEquals(7, dict.data.size());
 
         String word = "space";
         List<Entry<String, String>> data = dict.data.lookUp(word);
@@ -82,6 +82,17 @@ public class LingvoDSLTest {
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
         assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadArticleFontStyles() throws Exception {
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        String word = "italic";
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("Here is an <span style='font-style: italic'>italic</span> <strong>word</strong>.\n",
+                result.get(0).getArticle());
     }
 
     @Test

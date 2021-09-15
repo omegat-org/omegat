@@ -152,7 +152,7 @@ public class LingvoDSL implements IDictionaryFactory {
         static {
             RE_LIST.add(new RE("\\[b\\](.+?)\\[/b\\]", "<strong>$1</strong>"));
             RE_LIST.add(new RE("\\[i\\](.+?)\\[/i\\]", "<span style='font-style: italic'>$1</span>"));
-            RE_LIST.add(new RE("\\[trn\\](.+?)\\[/trn\\]", "<br>&nbsp;-&nbsp;$1"));
+            RE_LIST.add(new RE("\\[trn\\](.+?)\\[/trn\\]", "$1"));
             RE_LIST.add(new RE("\\[t\\](.+?)\\[/t\\]", "$1&nbsp;"));
             RE_LIST.add(new RE("\\[br\\]", "<br/>"));
             // Green is default color in Lingvo

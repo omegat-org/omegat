@@ -53,7 +53,7 @@ public class LingvoDSLTest {
     @Test
     public void testReadFileDict() throws Exception {
         LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
-        assertEquals(9, dict.data.size());
+        assertEquals(10, dict.data.size());
 
         String word = "space";
         List<Entry<String, String>> data = dict.data.lookUp(word);
@@ -102,6 +102,29 @@ public class LingvoDSLTest {
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
         assertEquals("Here is an <span style='font-style: italic'>italic</span> <strong>word</strong>.\n",
+                result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadArticleIndentStyles() throws Exception {
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        String word = "abandon";
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("<strong>1.</strong> \u043E\u0442\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C\u0441\u044F" +
+                        " (<span style='font-style: italic'>\u043E\u0442 \u0447\u0435\u0433\u043E-\u043B.</span>)," +
+                        " \u043F\u0440\u0435\u043A\u0440\u0430\u0449\u0430\u0442\u044C " +
+                        "(<span style='font-style: italic'>\u043F\u043E\u043F\u044B\u0442\u043A\u0438 \u0438 \u0442." +
+                        " \u043F.</span>)\n" +
+                        "<strong>2.</strong> \u043F\u043E\u043A\u0438\u0434\u0430\u0442\u044C," +
+                        " \u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0442\u044C\n" +
+                        "&nbsp;to abandon attempts\n" +
+                        "&nbsp;to abandon a claim\n" +
+                        "&nbsp;to abandon convertibility\n" +
+                        "&nbsp;to abandon the gold standard\n" +
+                        "&nbsp;to abandon price control\n" +
+                        "&nbsp;to abandon a right\n",
                 result.get(0).getArticle());
     }
 

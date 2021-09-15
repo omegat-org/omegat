@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
@@ -73,20 +74,8 @@ public class LingvoDSL implements IDictionaryFactory {
         return new LingvoDSLDict(file, language);
     }
 
-    @SuppressWarnings("visibilitymodifier")
-    static class RE {
-        public String regex;
-        public String replacement;
-
-        public RE(final String regex, final String replacement) {
-            this.regex = regex;
-            this.replacement = replacement;
-        }
-    }
-
     static class LingvoDSLDict implements IDictionary {
         protected final DictionaryData<String> data;
-        protected static final List<RE> RE_LIST;
 
         LingvoDSLDict(File file, Language language) throws Exception {
             data = new DictionaryData<>(language);
@@ -101,37 +90,30 @@ public class LingvoDSL implements IDictionaryFactory {
                     // Detect charset
                     Charset charset = bis.hasBOM() ? StandardCharsets.UTF_8 : StandardCharsets.UTF_16;
                     try (InputStreamReader isr = new InputStreamReader(bis, charset);
-                            BufferedReader reader = new BufferedReader(isr)) {
+                         BufferedReader reader = new BufferedReader(isr)) {
                         loadData(reader.lines());
                     }
                 }
             }
         }
 
-        private String replaceTag(final String line) {
-            String result = line;
-            for (RE re : RE_LIST) {
-                result = result.replaceAll(re.regex, re.replacement);
-            }
-            return result.replaceAll("\\[\\[(.+?)\\]\\]", "[$1]");
-        }
-
         private void loadData(Stream<String> stream) {
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
-            stream.filter(line -> !line.isEmpty() && !line.startsWith("#"))
-                    .forEach(line -> { line = replaceTag(line);
-                if (Character.isWhitespace(line.codePointAt(0))) {
-                    trans.append(line.trim()).append('\n');
-                } else {
-                    if (word.length() > 0) {
-                        data.add(word.toString(), trans.toString());
-                        word.setLength(0);
-                        trans.setLength(0);
-                    }
-                    word.append(line);
-                }
-            });
+            stream.filter(line -> !line.isEmpty()).filter(line -> !line.startsWith("#"))
+                    .map(LingvoDSLTag::replaceTag)
+                    .forEach(line -> {
+                        if (Character.isWhitespace(line.codePointAt(0))) {
+                            trans.append(line.trim()).append('\n');
+                        } else {
+                            if (word.length() > 0) {
+                                data.add(word.toString(), trans.toString());
+                                word.setLength(0);
+                                trans.setLength(0);
+                            }
+                            word.append(line);
+                        }
+                    });
             if (word.length() > 0) {
                 data.add(word.toString(), trans.toString());
             }
@@ -148,6 +130,29 @@ public class LingvoDSL implements IDictionaryFactory {
         public List<DictionaryEntry> readArticlesPredictive(String word) {
             return data.lookUpPredictive(word).stream().map(e -> new DictionaryEntry(e.getKey(), e.getValue()))
                     .collect(Collectors.toList());
+        }
+    }
+
+    @SuppressWarnings("visibilitymodifier")
+    static class RE {
+        public Pattern pattern;
+        public String replacement;
+
+        public RE(final String regex, final String replacement) {
+            pattern = Pattern.compile(regex);
+            this.replacement = replacement;
+        }
+    }
+
+    static class LingvoDSLTag {
+        private static final List<RE> RE_LIST;
+
+        static String replaceTag(final String line) {
+            String result = line;
+            for (RE re : RE_LIST) {
+                result = re.pattern.matcher(result).replaceAll(re.replacement);
+            }
+            return result.replaceAll("\\[\\[(.+?)\\]\\]", "[$1]");
         }
 
         static {

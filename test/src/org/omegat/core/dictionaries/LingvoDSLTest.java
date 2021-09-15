@@ -53,7 +53,7 @@ public class LingvoDSLTest {
     @Test
     public void testReadFileDict() throws Exception {
         LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
-        assertEquals(7, dict.data.size());
+        assertEquals(9, dict.data.size());
 
         String word = "space";
         List<Entry<String, String>> data = dict.data.lookUp(word);
@@ -82,6 +82,16 @@ public class LingvoDSLTest {
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
         assertEquals("\u0441\u0442\u0430\u043d\u043e\u043a\n", result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadArticleChinese() throws Exception {
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        String word = "\u4e00\u4e2a\u6837";
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertFalse(result.isEmpty());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("[y\u012B ge y\u00E0ng]&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B y\u00E0ng&nbsp;, the same\n", result.get(0).getArticle());
     }
 
     @Test

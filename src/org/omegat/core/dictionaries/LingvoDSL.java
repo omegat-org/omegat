@@ -35,6 +35,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -85,7 +86,7 @@ public class LingvoDSL implements IDictionaryFactory {
 
     static class LingvoDSLDict implements IDictionary {
         protected final DictionaryData<String> data;
-        protected static final List<RE> RE_LIST = new ArrayList<>();
+        protected static final List<RE> RE_LIST;
 
         LingvoDSLDict(File file, Language language) throws Exception {
             data = new DictionaryData<>(language);
@@ -150,71 +151,73 @@ public class LingvoDSL implements IDictionaryFactory {
         }
 
         static {
-            RE_LIST.add(new RE("\\[b\\](.+?)\\[/b\\]", "<strong>$1</strong>"));
-            RE_LIST.add(new RE("\\[i\\](.+?)\\[/i\\]", "<span style='font-style: italic'>$1</span>"));
-            RE_LIST.add(new RE("\\[trn\\](.+?)\\[/trn\\]", "$1"));
-            RE_LIST.add(new RE("\\[t\\](.+?)\\[/t\\]", "$1&nbsp;"));
-            RE_LIST.add(new RE("\\[br\\]", "<br/>"));
+            List<RE> reList = new ArrayList<>();
+            reList.add(new RE("\\[b\\](.+?)\\[/b\\]", "<strong>$1</strong>"));
+            reList.add(new RE("\\[i\\](.+?)\\[/i\\]", "<span style='font-style: italic'>$1</span>"));
+            reList.add(new RE("\\[trn\\](.+?)\\[/trn\\]", "$1"));
+            reList.add(new RE("\\[t\\](.+?)\\[/t\\]", "$1&nbsp;"));
+            reList.add(new RE("\\[br\\]", "<br/>"));
             // Green is default color in Lingvo
-            RE_LIST.add(new RE("\\[c\\](.+?)\\[/c\\]", "<span style='color:green'>$1</span>"));
+            reList.add(new RE("\\[c\\](.+?)\\[/c\\]", "<span style='color:green'>$1</span>"));
             // The following line tries to replace [c value]text[/c] with text colored as per the value.
             // Since the color names are plain words like 'red', or 'blue', or 'steelgray' etc.,
             // FIXME: I use the ([a-z]+?) regular expression, but am not sure if it is correct.
-            RE_LIST.add(new RE("\\[c\\s([a-z]+?)\\](.+?)\\[/c\\]", "<span style='color:$1'>$2</span>"));
-            RE_LIST.add(new RE("\\[com\\]", ""));
-            RE_LIST.add(new RE("\\[/com\\]", ""));
-            RE_LIST.add(new RE("\\[ex\\]", ""));
-            RE_LIST.add(new RE("\\[/ex\\]", ""));
-            RE_LIST.add(new RE("\\[lang\\]", ""));
-            RE_LIST.add(new RE("\\[/lang\\]", ""));
-            RE_LIST.add(new RE("\\[m\\]", ""));
-            RE_LIST.add(new RE("\\[/m\\]", ""));
-            RE_LIST.add(new RE("\\[m1\\]", ""));
-            RE_LIST.add(new RE("\\[/m1\\]", ""));
-            RE_LIST.add(new RE("\\[m2\\]", ""));
-            RE_LIST.add(new RE("\\[/m2\\]", ""));
-            RE_LIST.add(new RE("\\[m3\\]", ""));
-            RE_LIST.add(new RE("\\[/m3\\]", ""));
-            RE_LIST.add(new RE("\\[m4\\]", ""));
-            RE_LIST.add(new RE("\\[/m4\\]", ""));
-            RE_LIST.add(new RE("\\[m5\\]", ""));
-            RE_LIST.add(new RE("\\[/m5\\]", ""));
-            RE_LIST.add(new RE("\\[m6\\]", ""));
-            RE_LIST.add(new RE("\\[/m6\\]", ""));
-            RE_LIST.add(new RE("\\[m7\\]", ""));
-            RE_LIST.add(new RE("\\[/m7\\]", ""));
-            RE_LIST.add(new RE("\\[m8\\]", ""));
-            RE_LIST.add(new RE("\\[/m8\\]", ""));
-            RE_LIST.add(new RE("\\[m9\\]", ""));
-            RE_LIST.add(new RE("\\[/m9\\]", ""));
-            RE_LIST.add(new RE("\\[p\\]", ""));
-            RE_LIST.add(new RE("\\[/p\\]", ""));
-            RE_LIST.add(new RE("\\[preview\\]", ""));
-            RE_LIST.add(new RE("\\[/preview\\]", ""));
-            RE_LIST.add(new RE("\\[ref\\]", ""));
-            RE_LIST.add(new RE("\\[/ref\\]", ""));
-            RE_LIST.add(new RE("\\[s\\]", ""));
-            RE_LIST.add(new RE("\\[/s\\]", ""));
-            RE_LIST.add(new RE("\\[sub\\](.+?)\\[/sub\\]", "<sub>$1</sub>"));
-            RE_LIST.add(new RE("\\[sup\\](.+?)\\[/sup\\]", "<sup>$1</sup>"));
-            RE_LIST.add(new RE("\\[trn1\\]", ""));
-            RE_LIST.add(new RE("\\[/trn1\\]", ""));
-            RE_LIST.add(new RE("\\[trs\\]", ""));
-            RE_LIST.add(new RE("\\[/trs\\]", ""));
+            reList.add(new RE("\\[c\\s([a-z]+?)\\](.+?)\\[/c\\]", "<span style='color:$1'>$2</span>"));
+            reList.add(new RE("\\[com\\]", ""));
+            reList.add(new RE("\\[/com\\]", ""));
+            reList.add(new RE("\\[ex\\]", ""));
+            reList.add(new RE("\\[/ex\\]", ""));
+            reList.add(new RE("\\[lang\\]", ""));
+            reList.add(new RE("\\[/lang\\]", ""));
+            reList.add(new RE("\\[m\\]", ""));
+            reList.add(new RE("\\[/m\\]", ""));
+            reList.add(new RE("\\[m1\\]", ""));
+            reList.add(new RE("\\[/m1\\]", ""));
+            reList.add(new RE("\\[m2\\]", ""));
+            reList.add(new RE("\\[/m2\\]", ""));
+            reList.add(new RE("\\[m3\\]", ""));
+            reList.add(new RE("\\[/m3\\]", ""));
+            reList.add(new RE("\\[m4\\]", ""));
+            reList.add(new RE("\\[/m4\\]", ""));
+            reList.add(new RE("\\[m5\\]", ""));
+            reList.add(new RE("\\[/m5\\]", ""));
+            reList.add(new RE("\\[m6\\]", ""));
+            reList.add(new RE("\\[/m6\\]", ""));
+            reList.add(new RE("\\[m7\\]", ""));
+            reList.add(new RE("\\[/m7\\]", ""));
+            reList.add(new RE("\\[m8\\]", ""));
+            reList.add(new RE("\\[/m8\\]", ""));
+            reList.add(new RE("\\[m9\\]", ""));
+            reList.add(new RE("\\[/m9\\]", ""));
+            reList.add(new RE("\\[p\\]", ""));
+            reList.add(new RE("\\[/p\\]", ""));
+            reList.add(new RE("\\[preview\\]", ""));
+            reList.add(new RE("\\[/preview\\]", ""));
+            reList.add(new RE("\\[ref\\]", ""));
+            reList.add(new RE("\\[/ref\\]", ""));
+            reList.add(new RE("\\[s\\]", ""));
+            reList.add(new RE("\\[/s\\]", ""));
+            reList.add(new RE("\\[sub\\](.+?)\\[/sub\\]", "<sub>$1</sub>"));
+            reList.add(new RE("\\[sup\\](.+?)\\[/sup\\]", "<sup>$1</sup>"));
+            reList.add(new RE("\\[trn1\\]", ""));
+            reList.add(new RE("\\[/trn1\\]", ""));
+            reList.add(new RE("\\[trs\\]", ""));
+            reList.add(new RE("\\[/trs\\]", ""));
             // FIXME: In the following two lines, the exclamation marks are escaped. Maybe, it is superfluous.
-            RE_LIST.add(new RE("\\[\\!trs\\]", ""));
-            RE_LIST.add(new RE("\\[/\\!trs\\]", ""));
-            RE_LIST.add(new RE("\\[u\\](.+?)\\[/u\\]",
+            reList.add(new RE("\\[\\!trs\\]", ""));
+            reList.add(new RE("\\[/\\!trs\\]", ""));
+            reList.add(new RE("\\[u\\](.+?)\\[/u\\]",
                     "<span style='text-decoration:underline'>$1</span>"));
-            RE_LIST.add(new RE("\\[url\\](.+?)\\[/url\\]", "<a href='$1'>$1</a>"));
-            RE_LIST.add(new RE("\\[video\\]", ""));
-            RE_LIST.add(new RE("\\[/video\\]", ""));
+            reList.add(new RE("\\[url\\](.+?)\\[/url\\]", "<a href='$1'>$1</a>"));
+            reList.add(new RE("\\[video\\]", ""));
+            reList.add(new RE("\\[/video\\]", ""));
             // The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress)
             // with a red letter (the default behavior in Lingvo).
-            RE_LIST.add(new RE("\\['\\].\\[/'\\]", "<span style='color:red'>$1</span>"));
+            reList.add(new RE("\\['\\].\\[/'\\]", "<span style='color:red'>$1</span>"));
             // FIXME: In the following two lines, the asterisk symbols are escaped. Maybe, it is superfluous.
-            RE_LIST.add(new RE("\\[\\*\\]", ""));
-            RE_LIST.add(new RE("\\[/\\*\\]", ""));
+            reList.add(new RE("\\[\\*\\]", ""));
+            reList.add(new RE("\\[/\\*\\]", ""));
+            RE_LIST = Collections.unmodifiableList(reList);
         }
     }
 }

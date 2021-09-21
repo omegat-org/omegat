@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   5 Enhancements
   6 Bug fixes
-  0 Localisation updates
+  1 Localisation update
 ----------------------------------------------------------------------
 5.6.0 vs 5.5.0
 
@@ -40,6 +40,10 @@
 
   - Detect TSV glossary encoding via magic comment
   https://sourceforge.net/p/omegat/feature-requests/1579/
+
+  Localisation Updates:
+
+  - Dutch localisation updated to 5.6 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 5.5.0 (2021-05-18)

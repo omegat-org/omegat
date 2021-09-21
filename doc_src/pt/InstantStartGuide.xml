@@ -8,13 +8,13 @@
         <primary>Projecto</primary> <secondary>Criar novo/Abrir</secondary>
       </indexterm></title>
 
-    <para><remark>Nota:</remark> Num Mac Apple, usar a tecla <keycap>Command</keycap> em vez da tecla <keycap>Control</keycap>.</para>
+    <para><remark>Nota:</remark> num Mac Apple, usar a tecla <keycap>Command</keycap> em vez da tecla <keycap>Control</keycap>.</para>
 
       <indexterm class="singular">
         <primary>Menu Projecto</primary> <secondary>Novo...</secondary>
       </indexterm>
 
-    <para>Para começar a utilizar o OmegaT, crie primeiro um projecto que gravará todos os seus ficheiros, tais como o seu ficheiro-fonte, memórias de tradução, glossários e, eventualmente, o seu ficheiro traduzido. No menu <guimenu>Projecto</guimenu>, seleccione <menuchoice><guimenuitem>Novo...</guimenuitem></menuchoice> e escreva um nome para o seu projecto. Lembre-se onde está a criar o projecto, porque terá de regressar ao mesmo later.</para>
+    <para>Para começar a utilizar o OmegaT, crie primeiro um projecto que gravará todos os seus ficheiros, tais como o seu ficheiro-fonte, memórias de tradução, glossários e, eventualmente, o seu ficheiro traduzido. No menu <guimenu>Projecto</guimenu>, seleccione <menuchoice><guimenuitem>Novo...</guimenuitem></menuchoice> e escreva um nome para o seu projecto. Lembre-se onde está a criar o projecto, porque terá de regressar ao mesmo mais tarde.</para>
 
     <para>Após dar um nome ao seu projecto, será aberto o diálogo <guilabel>Criar novo projecto</guilabel>. Ao cimo desse diálogo, seleccione o idioma do seu ficheiro-fonte, o idioma que o seu ficheiro traduzido terá e clique em <guibutton>Aceitar</guibutton> para continuar.</para>
 

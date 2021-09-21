@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   5 Enhancements
   6 Bug fixes
-  1 Localisation update
+  2 Localisation updates
 ----------------------------------------------------------------------
 5.6.0 vs 5.5.0
 
@@ -44,6 +44,7 @@
   Localisation Updates:
 
   - Dutch localisation updated to 5.6 (UI)
+  - German localisation updated to 5.6 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 5.5.0 (2021-05-18)

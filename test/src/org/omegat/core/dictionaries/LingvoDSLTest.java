@@ -122,7 +122,7 @@ public class LingvoDSLTest {
                         "<p style=\"text-indent: 60px\">to abandon attempts</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon a claim</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon convertibility</p>\n" +
-                        "<p style=\"text-indent: 60px\">to abandon the gold standard</p>\n" +
+                        "<p style=\"text-indent: 60px\">to abandon the &#91;gold&#93; standard</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon price control</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon a right</p>\n",
                 result.get(0).getArticle());

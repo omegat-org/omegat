@@ -55,7 +55,7 @@
               </imageobject>
             </inlinemediaobject></entry>
 
-          <entry>restaure la mise en page qui existait avant l'étape d'agrandissement</entry>
+          <entry>restaure la mise en page avant l'étape d'agrandissement</entry>
         </row>
 
         <row>
@@ -126,7 +126,7 @@
   <section>
     <title>Correspondances</title>
 
-    <para>Le volet Correspondances affiche les segments les plus proches provenant de la mémoire de traduction interne au projet qui est créée en temps réel au cours de votre traduction et des mémoires de traduction secondaires que vous avez importées depuis vos travaux précédents ou que vous avez reçues de la part de votre client ou de votre agence de traduction.</para>
+    <para>Le volet Correspondances affiche les segments les plus proches provenant de la mémoire de traduction, à la fois interne au projet qui est créée en temps réel au cours de votre traduction, et des mémoires de traduction secondaires que vous avez importées depuis vos travaux précédents ou que vous avez reçues de la part de votre client ou de votre agence de traduction.</para>
 
     <para>Lorsque vous passez au segment suivant, la première correspondance (celle ayant le meilleur pourcentage de correspondance) est sélectionnée automatiquement. Vous pouvez sélectionner une correspondance différente en appuyant sur <guimenuitem>Ctrl+2, 3, 4, ou 5</guimenuitem>. Bien sûr, s'il n'existe pas de correspondance n° 5, appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> n'aura aucun effet. Pour utiliser la correspondance sélectionnée dans votre traduction, appuyez sur <guimenuitem>Ctrl+R</guimenuitem> pour remplacer la ligne d'édition par la correspondance ou appuyez sur <guimenuitem>Ctrl+I</guimenuitem> pour l'insérer à l'emplacement du curseur.</para>
 
@@ -134,7 +134,7 @@
       <listitem>
 		  <para>le pourcentage calculé avec lemmatisation<footnote>
 		  <para>Voir <ulink url="https://fr.wikipedia.org/wiki/Racinisation">https://fr.wikipedia.org/wiki/Racinisation</ulink></para>
-		  </footnote>et sans les balises ni les nombres (en général le pourcentage le plus haut)</para>
+		  </footnote>et sans les balises ni les nombres (en général le plus haut)</para>
 	  </listitem>
       <listitem>
 		  <para>le pourcentage calculé sans lemmatisation, sans balises ni nombres (en général légèrement inférieur)</para>
@@ -153,7 +153,7 @@
   <section>
     <title>Glossaires</title>
 
-    <para>Le volet Glossaires vous permet d'accéder à votre propre collection d'expressions et de terminologies spécialisées (que vous avez créées et enregistrées dans vos fichiers glossaires). Il montre la traduction des termes présents dans le segment en cours. Le segment source de l'exemple ci-dessous était « <emphasis>Commande de menu contextuel</emphasis> » (comme dans l'exemple du volet Correspondances ci-dessus) et les termes affichés se trouvaient dans les glossaires disponibles (Microsoft's Term collection et le glossaire slovène du groupe d'utilisateurs Linux).</para>
+    <para>Le volet Glossaires vous permet d'accéder à votre propre collection d'expressions et de terminologies spécialisées (que vous avez créées et enregistrées dans vos fichiers glossaires). Il montre la traduction des termes présents dans le segment en cours. Le segment source de l'exemple ci-dessous était « <emphasis>Commande de menu contextuel</emphasis> », comme dans l'exemple du volet Correspondances ci-dessus, et les termes affichés se trouvaient dans les glossaires disponibles (Microsoft's Term collection et le glossaire slovène du groupe d'utilisateurs Linux).</para>
 
     <para>Si l'option TransTips est activée (<guimenuitem>Options → TransTips</guimenuitem>), un clic droit sur le mot souligné dans le segment source permet d'ouvrir un menu contextuel qui suggère les traductions proposées par votre glossaire. Sélectionner l'une de ces traductions permet de l'insérer à l'endroit où se trouve le curseur dans le segment cible. Il est également possible de surligner votre alternative préférée dans le volet Glossaires et de l'insérer dans le segment cible avec un clic droit sur la sélection.</para>
   </section>
@@ -161,7 +161,7 @@
   <section>
     <title>Dictionnaires</title>
 
-    <para>Les dictionnaires sont les équivalents électroniques des dictionnaires papier (comme Merriam Webster, Duden, Larousse etc.) que vous pouvez avoir sur votre bureau. Pour plus de détails, voir le chapitre : <link linkend="appendix.dictionaries">Dictionnaires</link></para>
+    <para>Les dictionnaires sont les équivalents électroniques des dictionnaires papier comme Merriam Webster, Duden, Larousse, etc. que vous pouvez avoir sur votre bureau. Pour plus de détails, voir le chapitre : <link linkend="appendix.dictionaries">Dictionnaires</link></para>
   </section>
 
   <section>
@@ -205,13 +205,13 @@
           <row>
             <entry>27/27</entry>
 
-            <entry>Nombre de segments traduits / Nombre total de segments du fichier en cours</entry>
+            <entry>Nombre de segments traduits vs totaux pour le fichier en cours</entry>
           </row>
 
           <row>
             <entry>9319/16338</entry>
 
-            <entry>nombre de segments uniques traduits / nombre total de segments uniques du projet</entry>
+            <entry>nombre de segments uniques traduits vs totaux du projet</entry>
           </row>
 
           <row>
@@ -223,7 +223,7 @@
           <row>
             <entry>103/114</entry>
 
-            <entry>Nombre de caractères source / nombre de caractères cible dans le segment en cours</entry>
+            <entry>Nombre de caractères source et cible dans le segment en cours</entry>
           </row>
         </tbody>
       </tgroup>

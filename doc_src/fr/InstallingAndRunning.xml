@@ -62,7 +62,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Installer sur l'installation existante.</emphasis> Pour ce faire, sélectionnez simplement le même dossier d'installation que l'installation existante lors de l'installation de la nouvelle version. L'« ancienne » version d'OmegaT sera écrasée, mais tous ses paramètres seront conservés. Cela inclut les préférences définies dans OmegaT, toutes les modifications que vous avez apportées à votre fichier <filename> OmegaT.l4J.ini </filename>, ainsi que votre script de lancement (fichier <filename> .bat </filename>), si vous en utilisez un.</para>
+          <para><emphasis role="bold"> Installer sur l'installation existante. </emphasis> Pour ce faire, sélectionnez simplement le même dossier d'installation que l'installation existante lors de l'installation de la nouvelle version. L'« ancienne » version d'OmegaT sera écrasée, mais tous ses paramètres seront conservés. Cela inclut les préférences définies dans OmegaT, toutes les modifications que vous avez apportées à votre fichier <filename> OmegaT.l4J.ini </filename>, ainsi que votre script de lancement (fichier <filename> .bat </filename>), si vous en utiliser un.</para>
         </listitem>
       </itemizedlist>
 
@@ -516,7 +516,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><literal>.*\.html</literal></para>
+                <para><literal>. *\.html</literal></para>
 
                 <para>Tous les fichiers HTML seront traduits. Notez que le point généralement présent dans les fichiers <literal>*.html</literal> doit être neutralisé (<literal>\.</literal>) comme le précisent les règles utilisées pour les expressions régulières</para>
               </listitem>

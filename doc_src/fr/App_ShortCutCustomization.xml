@@ -58,7 +58,7 @@
 
     <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
 
-    <para>Si vous travaillez sur macOS, pour ajouter un raccourci <keycombo> <keycap>Maj</keycap> <keycap>Commande</keycap> <keycap>S</keycap> </keycombo> correspondant à <menuchoice> <guimenu>Outils</guimenu> <guimenuitem>Statistiques</guimenuitem> </menuchoice>, ajoutez la ligne suivante à votre <filename>MainMenuShortcuts.properties</filename>:<code/></para>
+    <para>Si vous travaillez sur macOS, pour ajouter un raccourci <keycombo> <keycap>Maj</keycap> <keycap>Commande</keycap> <keycap>S</keycap> </keycombo> correspondant à <menuchoice> <guimenu>Outils</guimenu> <guimenuitem>Statistiques</guimenuitem> </menuchoice>, ajoutez la ligne suivante à votre <filename>MainMenuShortcuts.properties</filename> :<code/></para>
 
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>

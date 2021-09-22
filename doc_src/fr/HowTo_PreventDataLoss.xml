@@ -3,7 +3,7 @@
 <section id="howto.preventdataloss">
   <title>Prévenir les pertes de données</title>
 
-  <para><application>OmegaT</application> est une application puissante. Cependant, lorsque vous utilisez <application>OmegaT</application>, soyez prudents en ce qui concerne les pertes de données (tout comme vous le seriez avec d'autres applications). Lorsque vous traduisez vos fichiers, <application>OmegaT</application> conserve toutes les évolutions du projet dans la mémoire de traduction <literal>project_save.tmx</literal> qui se trouve dans le sous-dossier <literal>/omegat</literal> du projet.</para>
+  <para><application>OmegaT</application> est une application puissante. Cependant, lorsque vous utilisez <application>OmegaT</application>, soyez prudents en ce qui concerne les pertes de données (tout comme vous le seriez avec d'autres applications). Lorsque vous traduisez vos fichiers, <application>OmegaT</application> conserve toutes les évolutions du projet dans la mémoire de traduction <literal>project_save.tmx</literal> qui se trouve dans le sous-dossier <literal>./omegat</literal> du projet.</para>
 
   <para>OmegaT fait également une sauvegarde de la mémoire de traduction sous la forme de fichier project_save.tmx.ANNÉEMMJJHHMN.bak dans le même sous-dossier à chaque fois que le projet est ouvert ou rechargé. ANNÉE correspond aux quatre chiffres de l'année, MM correspond au mois, JJ au jour du mois, et HH et MN sont les heures et les minutes de la sauvegarde de la mémoire de traduction précédente.</para>
 
@@ -19,7 +19,7 @@
     </listitem>
 
     <listitem>
-      <para>sélectionnez la sauvegarde de la mémoire de traduction qui contient le plus probablement les données que vous cherchez</para>
+      <para>sélectionnez la mémoire de traduction de sauvegarde la plus susceptible de contenir les données que vous recherchez</para>
     </listitem>
 
     <listitem>

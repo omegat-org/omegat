@@ -14,7 +14,7 @@
   <section>
     <title>target</title>
 
-    <para>À l'origine, ce sous-dossier est vide. Pour y ajouter du contenu, sélectionnez<menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Projet</guimenu> <guimenuitem>Créer les documents traduits</guimenuitem> </menuchoice>. Les fichiers contenus dans le dossier <filename>source</filename> (qu'ils soient traduits ou non) sont alors produits dans le dossier target (cible) et présentent la même hiérarchie que celle du dossier source. Le contenu du sous-dossier target (cible) montre l'état actuel de la traduction, telle qu'on la trouve dans la mémoire de traduction du projet (qui est sauvegardée dans le fichier<emphasis role="bold">./omegat/project_save.tmx</emphasis> en cours). Les segments non traduits resteront donc dans la langue source.</para>
+    <para>À l'origine, ce sous-dossier est vide. Pour y ajouter du contenu, sélectionnez <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Projet</guimenu> <guimenuitem>Créer les documents traduits</guimenuitem> </menuchoice>. Les fichiers contenus dans le dossier <filename>source</filename> (qu'ils soient traduits ou non) sont alors produits dans le dossier target (cible) et présentent la même hiérarchie que celle du dossier source. Le contenu du sous-dossier target (cible) montre l'état actuel de la traduction, telle qu'on la trouve dans la mémoire de traduction du projet (qui est sauvegardée dans le fichier <emphasis role="bold">./omegat/project_save.tmx</emphasis> en cours). Les segments non traduits resteront donc dans la langue source.</para>
   </section>
 
   <section>
@@ -37,7 +37,7 @@
 
       <para><orderedlist>
           <listitem>
-            <para>Placez la TMX dans /tm/auto.</para>
+            <para>Placez la TMX dans ./tm/auto.</para>
           </listitem>
 
           <listitem>
@@ -49,7 +49,7 @@
           </listitem>
         </orderedlist></para>
 
-      <para>Note : si la TMX est supprimée de /tm/auto avant l'étape 3, no aucune traduction supplémentaire n'est ajoutée.</para>
+      <para>Note : si la TMX est supprimée de /tm/auto avant l'étape 3, aucune traduction supplémentaire n'est ajoutée.</para>
     </section>
 
     <section>
@@ -59,7 +59,7 @@
 
       <para><orderedlist>
           <listitem>
-            <para>Placez la TMX dans /tm/enforce.</para>
+            <para>Placez la TMX dans ./tm/enforce.</para>
           </listitem>
 
           <listitem>
@@ -89,7 +89,7 @@
     <section>
       <title>tm/mt</title>
 
-      <para>Dans l'Éditeur, lorsqu'une correspondance est insérée depuis une TMX contenu dans un dossier nommé <filename>mt</filename>, l'arrière-plan du segment actuel passe en rouge. L'arrière-plan revient à la normale lorsque l'utilisateur quitte le segment.</para>
+      <para>Dans l'Éditeur, lorsqu'une correspondance est insérée depuis une TMX contenue dans un dossier nommé <filename>mt</filename>, l'arrière-plan du segment actuel passe en rouge. L'arrière-plan revient à la normale lorsque l'utilisateur quitte le segment.</para>
     </section>
 
     <section>
@@ -114,7 +114,7 @@
   <section id="folder.omegat">
     <title>omegat</title>
 
-    <para>Le sous-dossier<emphasis role="bold">omegat</emphasis> contient au moins un fichier (peut en contenir plus). Le fichier le plus important est <filename>project_save.tmx, </filename>. Il s'agit de la mémoire de traduction du projet actuellement travaillée. Des sauvegardes de ce fichier (avec l'extension bak) sont ajoutées progressivement au sous-dossier : au début, pendant et à la fin de la session de traduction.</para>
+    <para>Le sous-dossier <emphasis role="bold">omegat</emphasis> contient au moins un fichier (peut en contenir plus). Le fichier le plus important est <filename>project_save.tmx, </filename> Il s'agit de la mémoire de traduction du projet actuellement travaillée. Des sauvegardes de ce fichier (avec l'extension bak) sont ajoutées progressivement au sous-dossier : au début, pendant et à la fin de la session de traduction.</para>
 
     <para>Au cours de la traduction, il est possible que des fichiers supplémentaires soient créés dans ce dossier comme suit</para>
 

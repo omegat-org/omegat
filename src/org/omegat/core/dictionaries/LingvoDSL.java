@@ -157,9 +157,9 @@ public class LingvoDSL implements IDictionaryFactory {
 
         static {
             List<RE> reList = new ArrayList<>();
-            reList.add(new RE("\\[\\[(.+?)\\]\\]", "&lbrack;$1&rbrack;"));
-            reList.add(new RE("\\\\\\[", "&lbrack;"));
-            reList.add(new RE("\\\\\\]", "&rbrack;"));
+            reList.add(new RE("\\[\\[(.+?)\\]\\]", "&#91;$1&#93;"));
+            reList.add(new RE("\\\\\\[", "&#91;"));
+            reList.add(new RE("\\\\\\]", "&#93;"));
             reList.add(new RE("\\[b\\](.+?)\\[/b\\]", "<strong>$1</strong>"));
             reList.add(new RE("\\[i\\](.+?)\\[/i\\]", "<span style='font-style: italic'>$1</span>"));
             reList.add(new RE("\\[trn\\](.+?)\\[/trn\\]", "$1"));

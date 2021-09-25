@@ -91,7 +91,7 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("&lbrack;y\u012B ge y\u00E0ng&rbrack;&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B y\u00E0ng&nbsp;, the same\n", result.get(0).getArticle());
+        assertEquals("&#91;y\u012B ge y\u00E0ng&#93;&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B y\u00E0ng&nbsp;, the same\n", result.get(0).getArticle());
     }
 
     @Test
@@ -122,7 +122,7 @@ public class LingvoDSLTest {
                         "<p style=\"text-indent: 60px\">to abandon attempts</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon a claim</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon convertibility</p>\n" +
-                        "<p style=\"text-indent: 60px\">to abandon the &lbrack;gold&rbrack; standard</p>\n" +
+                        "<p style=\"text-indent: 60px\">to abandon the &#91;gold&#93; standard</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon price control</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon a right</p>\n",
                 result.get(0).getArticle());

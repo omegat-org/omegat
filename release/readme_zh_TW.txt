@@ -81,7 +81,7 @@ Linux使用者需注意OmegaT並無法與免費的Java開放源碼軟體一起�
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 欲提供其他協助，請先至下列網址加入使用者群組：
-      http://tech.groups.yahoo.com/group/omegat/
+      https://omegat.org/support
 
 您可在使用者群組中瞭解OmegaT世界的新鮮事。
 

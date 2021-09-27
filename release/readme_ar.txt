@@ -155,7 +155,7 @@ Submenu.
 ‏http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 لتقديم أي نوع آخر من المشاركة، تفضل بالانخراط في مجموعة المستخدمين على الرابط التالي:
-‏‏http://tech.groups.yahoo.com/group/omegat/
+https://omegat.org/support
 
 و ألق نظرة بنفسك عما يدور في عالم أوميجاتي...
 

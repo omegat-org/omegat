@@ -8663,6 +8663,7 @@ Bug fix release:
 
 - Fixed Bad Segmentation of some files,
   as documented in: http://groups.yahoo.com/group/OmegaT/message/672
+  (https://sourceforge.net/p/omegat/mailman/message/36811754/)
 
 - (minor) .properties file handler had off-by-one error when
   parsing Unicode symbols of a form \uXXXX.

@@ -63,8 +63,9 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
      * Lucene 3.0 and earlier.
      *
      * @see <a href=
-     *      "https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/28395">
+	 *      "https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/28395">
      *      User group discussion</a>
+     * @see <a href="https://sourceforge.net/p/omegat/mailman/message/36839317/">Sourceforge archive</a>
      * @see <a href=
      *      "https://github.com/apache/lucene-solr/blob/e8e4245d9b36123446546ff15967ac95429ea2b0/lucene/analysis/common/src/java/org/apache/lucene/analysis/de/GermanAnalyzer.java#L172">
      *      Behavior before version branching was removed</a>

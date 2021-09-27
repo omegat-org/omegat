@@ -140,7 +140,7 @@ Na seznam prevajalcev se prijavite takole:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 Za druge vrste sodelovanja se najprej prijavite v uporabniško skupino::
-      http://tech.groups.yahoo.com/group/omegat/
+      https://omegat.org/support
 
  kjer boste lahko dobili občutek, kako se pri OmegaT svet vrti...
 

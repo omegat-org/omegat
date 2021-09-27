@@ -156,7 +156,7 @@ A prihláste sa do konferencie pre prekladateľov:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 Pre akýkoľvek iný príspevok sa najprv prihláste do používateľskej skupiny na:
-      http://tech.groups.yahoo.com/group/omegat/
+      https://omegat.org/support
 
 A zistite čo sa deje vo svete OmegaT...
 

@@ -18,7 +18,7 @@ Oppdatert informasjon om OmegaT finner du her
       http://www.omegat.org/
 
 Brukerstøtte i Yahoo-brukergruppen (flerspråklig). Du kan søke i arkivene uten å være medlem:
-     http://tech.groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Forespørsler om forbedringer (på engelsk) på SourceForge-siden:
      https://sourceforge.net/p/omegat/feature-requests/

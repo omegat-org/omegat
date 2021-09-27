@@ -161,7 +161,7 @@ Emellett iratkozzon fel a fordítói levelezőlistára:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 Egyéb jellegű hozzájárulás céljából először iratkozzon fel a felhasználói csoporta:
-      http://tech.groups.yahoo.com/group/omegat/
+      https://omegat.org/support
 
 és ismerkedjen meg az OmegaT világával...
 

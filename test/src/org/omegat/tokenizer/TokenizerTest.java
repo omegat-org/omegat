@@ -188,6 +188,7 @@ public class TokenizerTest {
      * @see <a href=
      *      "https://groups.yahoo.com/neo/groups/OmegaT/conversations/messages/28395">
      *      User group discussion</a>
+     * @see <a href="https://sourceforge.net/p/omegat/mailman/message/36839317/">Sourceforge archive</a>
      */
     @Test
     public void testGerman() {

@@ -136,7 +136,7 @@ I upišite se na listu njenih prevodilaca:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
 Ukoliko imate u vidu neke druge vrste doprinosa, upišite se na listu korisnika ovog programa, na:
-      http://tech.groups.yahoo.com/group/omegat/
+      https://omegat.org/support
 
 Na taj način upoznaćete se sa zbivanjima u društvenom okruženju OmegaT...
 

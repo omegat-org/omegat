@@ -57,7 +57,6 @@ import org.omegat.util.Language;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Hiroshi Miura
-
  * @see <a href="http://lingvo.helpmax.net/en/troubleshooting/dsl-compiler/">DSL
  * Documentation (English)</a>
  * @see <a href="http://www.dsleditor.narod.ru/art_03.htm">DSL documentation
@@ -69,6 +68,9 @@ public class LingvoDSL implements IDictionaryFactory {
     private static final TreeMap<Pattern, String> TAG_REPLACEMENTS = new TreeMap<>(
             Comparator.comparing(Pattern::pattern));
 
+    // A sentinel that is replaced with the absolute path of the dictionary in
+    // {@link #loadData}
+    private static final String DICT_DIR_TAG = "@dir@";
     private static final int BLOCKSIZE = 8192;
 
     @Override
@@ -88,10 +90,12 @@ public class LingvoDSL implements IDictionaryFactory {
 
     static class LingvoDSLDict implements IDictionary {
         protected final DictionaryData<String> data;
+        private final String dictionaryDir;
 
         LingvoDSLDict(File file, Language language) throws Exception {
             data = new DictionaryData<>(language);
             readDslFile(file);
+            dictionaryDir = file.getParent();
         }
 
         private void readDslFile(File file) throws IOException {
@@ -117,7 +121,7 @@ public class LingvoDSL implements IDictionaryFactory {
                   .map(LingvoDSL::replaceTag)
                   .forEach(line -> {
                         if (Character.isWhitespace(line.codePointAt(0))) {
-                            trans.append(line.trim()).append('\n');
+                            trans.append(line.trim().replaceAll(DICT_DIR_TAG, dictionaryDir)).append('\n');
                         } else {
                             if (word.length() > 0) {
                                 data.add(word.toString(), trans.toString());
@@ -182,6 +186,17 @@ public class LingvoDSL implements IDictionaryFactory {
                 "\\[c\\s(?<color>[a-z]+?)](?<content>.+?)\\[/c]"), "<span style='color:${color}'>${content}</span>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[sub](?<content>.+?)\\[/sub]"), "<sub>${content}</sub>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[sup](?<content>.+?)\\[/sup]"), "<sup>${content}</sup>");
+        // Media and image files are converted into hyperlink or image tags.
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[s](?<media>.+?\\.wav)\\[/s]"), "<a href=\"file://" + DICT_DIR_TAG + "/${media}\">${media}</a>");
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[s](?<media>.+?\\.jpg)\\[/s]"), "<img src=\"file://" + DICT_DIR_TAG + "/${media}\"/>");
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[s](?<media>.+?\\.png)\\[/s]"), "<img src=\"file://" + DICT_DIR_TAG + "/${media}\"/>");
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[video](?<media>.+?)\\[/video]"), "<a href=\"file://" + DICT_DIR_TAG + "/${media}\">${media}</a>");
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[s](?<media>.+?)\\[/s]"), "<a href=\"file://" + DICT_DIR_TAG + "/${media}\">${media}</a>");
         // Line feed and indents
         TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("[br]")), "<br/>");
         // Ignore tag 'm" but "m1" to indent 1 level, "m2" to indent 2 level and
@@ -191,9 +206,9 @@ public class LingvoDSL implements IDictionaryFactory {
         TAG_REPLACEMENTS.put(Pattern.compile(
                 "\\[m2](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 60px\">${content}</p>");
         TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[(m3|m4|m5|m6|m7|m8|m9)](?<content>.+?)\\[/m]"), "<p style=\\\"text-indent: 90px\">${content}</p>");
+                "\\[(m3|m4|m5|m6|m7|m8|m9)](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 90px\">${content}</p>");
         // External link may launch external browser
-        TAG_REPLACEMENTS.put(Pattern.compile( "\\[url](?<link>.+?)\\[/url]"), "<a href='${link}'>${link}</a>");
+        TAG_REPLACEMENTS.put(Pattern.compile("\\[url](?<link>.+?)\\[/url]"), "<a href=\"${link}\">${link}</a>");
         // The following line tries to replace a letter surrounded by ['][/']
         // tags (indicating stress) with a red letter (the default behavior in
         // Lingvo).

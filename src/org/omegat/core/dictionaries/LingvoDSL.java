@@ -88,10 +88,12 @@ public class LingvoDSL implements IDictionaryFactory {
 
     static class LingvoDSLDict implements IDictionary {
         protected final DictionaryData<String> data;
+        private final String dictionaryDir;
 
         LingvoDSLDict(File file, Language language) throws Exception {
             data = new DictionaryData<>(language);
             readDslFile(file);
+            dictionaryDir = file.getParent();
         }
 
         private void readDslFile(File file) throws IOException {
@@ -117,7 +119,7 @@ public class LingvoDSL implements IDictionaryFactory {
                   .map(LingvoDSL::replaceTag)
                   .forEach(line -> {
                         if (Character.isWhitespace(line.codePointAt(0))) {
-                            trans.append(line.trim()).append('\n');
+                            trans.append(line.trim().replaceAll("@dir@", dictionaryDir)).append('\n');
                         } else {
                             if (word.length() > 0) {
                                 data.add(word.toString(), trans.toString());
@@ -182,6 +184,14 @@ public class LingvoDSL implements IDictionaryFactory {
                 "\\[c\\s(?<color>[a-z]+?)](?<content>.+?)\\[/c]"), "<span style='color:${color}'>${content}</span>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[sub](?<content>.+?)\\[/sub]"), "<sub>${content}</sub>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[sup](?<content>.+?)\\[/sup]"), "<sup>${content}</sup>");
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[s](?<media>.+?\\.wav)\\[/s]"), "<a href=\"file://@dir@/${media}\">SOUND: ${media}</a>");
+        TAG_REPLACEMENTS.put(Pattern.compile("\\[s](?<media>.+?\\.jpg)\\[/s]"), "<img src=\"file://@dir@/${media}\"/>");
+        TAG_REPLACEMENTS.put(Pattern.compile("\\[s](?<media>.+?\\.png)\\[/s]"), "<img src=\"file://@dir@/${media}\"/>");
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[video](?<media>.+?)\\[/video]"), "<a href=\"file://@dir@/${media}\">VIDEO: ${media}</a>");
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[s](?<media>.+?)\\[/s]"), "<a href=\"file://@dir@/${media}\">MEDIA: ${media}</a>");
         // Line feed and indents
         TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("[br]")), "<br/>");
         // Ignore tag 'm" but "m1" to indent 1 level, "m2" to indent 2 level and

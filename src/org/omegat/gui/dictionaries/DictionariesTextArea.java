@@ -268,7 +268,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             } else {
                 wasPrev = true;
             }
-            txt.append("<div id =\"" + i + "\"><b><span class=\"word\">");
+            txt.append("<div id =\"").append(i).append("\"><b><span class=\"word\">");
             txt.append(de.getWord());
             txt.append("</span></b>");
             txt.append(" - ").append(de.getArticle());

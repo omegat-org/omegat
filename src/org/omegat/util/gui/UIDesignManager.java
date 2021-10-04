@@ -98,7 +98,12 @@ public final class UIDesignManager {
 
         // Set Look And Feel
         String theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, Preferences.THEME_CLASS_NAME_DEFAULT);
-        UIDesignManager.setTheme(theme, mainClassLoader);
+        setTheme(theme, mainClassLoader);
+
+        if (UIManager.getColor("OmegaT.source") == null) {
+            // Theme apparently did not load default colors so we do so now
+            loadDefaultColors(UIManager.getDefaults());
+        }
 
         // Enable animated popup when mousing over minimized tab
         AutoHidePolicy.getPolicy().setExpandMode(ExpandMode.EXPAND_ON_ROLLOVER);

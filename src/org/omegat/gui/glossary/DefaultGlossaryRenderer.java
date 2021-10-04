@@ -57,7 +57,7 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
             if (i > 0 && targets[i].equals(targets[i - 1])) {
                 if (!comments[i].equals("")) {
                     commentsBuf.append("\n");
-                    commentsBuf.append(String.valueOf(commentIndex));
+                    commentsBuf.append(commentIndex);
                     commentsBuf.append(". ");
                     commentsBuf.append(comments[i]);
                 }
@@ -76,7 +76,7 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
             commentIndex++;
             if (!comments[i].equals("")) {
                 commentsBuf.append("\n");
-                commentsBuf.append(String.valueOf(commentIndex));
+                commentsBuf.append(commentIndex);
                 commentsBuf.append(". ");
                 commentsBuf.append(comments[i]);
             }

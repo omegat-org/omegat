@@ -24,6 +24,9 @@
   - Effect of "Untranslated segments only" unclear
   https://sourceforge.net/p/omegat/bugs/995/
 
+  - Glossary translation color not applied to term separator
+  https://sourceforge.net/p/omegat/bugs/1071/
+
   Implemented requests:
 
   - Add extra ignore patterns for ".git", ".hg", and ".repositories"

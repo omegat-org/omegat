@@ -242,10 +242,9 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             scrollPane.notify(true);
         }
 
-        StringBuilder txt = new StringBuilder();
+        StringBuilder txt = new StringBuilder("<html>");
         boolean wasPrev = false;
         int i = 0;
-        txt.append("<html>");
         for (DictionaryEntry de : data) {
             if (wasPrev) {
                 txt.append("<br><hr>");

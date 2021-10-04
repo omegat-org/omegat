@@ -38,7 +38,7 @@ Lanciate u prugramma d’installazione.
 Installazione d’OmegaT (Mac)
 ============================
 
-Spacchittate l’archiviu .zip d’OmegaT per ottene un cartulare chì cuntenerà un schedariu di ducumentazione è l’appiecazione OmegaT. Dispiazzate u cartulare ver di una lucalizazione apposta cum’è u cartulare Appiecazioni.
+Spacchittate l’archiviu .zip d’OmegaT per ottene un cartulare chì cuntenerà un schedariu di ducumentazione è l’appiecazione OmegaT. Dispiazzate u cartulare in un locu appostu cum’è u cartulare Appiecazioni.
 
 
 
@@ -47,7 +47,7 @@ Installazione d’OmegaT (Linux)
 
 Piazzate l’archiviu in u cartulare di a vostra scelta è spacchittatelu. Tandu OmegaT hè prontu à esse lanciatu.
 
-Pudete quantunque ottene un’installazione più netta è più piacevule grazia à u scrittu d’installazione (linux-install.sh). Per impiegalu, aprite una finestra di terminale (cunsola), andate in u cartulare chì cuntene OmegaT.jar è u scrittu linux-install.sh, è eseguitelu cù ./linux-install.sh.
+Pudete quantunque ottene un’installazione più netta è più piacevule grazia à u scenariu d’installazione (linux-install.sh). Per impiegalu, aprite una finestra di terminale (cunsola), andate in u cartulare chì cuntene OmegaT.jar è u scenariu linux-install.sh, è eseguitelu cù ./linux-install.sh.
 
 
 
@@ -76,7 +76,7 @@ Lanciu d’OmegaT (Windows)
 
 S’è, durante l’installazione, avete creatu un accurtatoghju nant’à u scagnu, fate un doppiu-cliccu nant’à st’accurtatoghju.
 
-U prugramma d’installazione pò creà accurtatoghji per voi in u listinu « démarrer », nant’à u scagnu o in a barra di lanciu rapidu. Pudete dinù fà sguillà manualmente u schedariu OmegaT.exe ver di u listinu « démarrer », nant’à u scagnu o in a barra di lanciu rapidu per creacci l’accurtatoghji.
+U prugramma d’installazione pò creà accurtatoghji per voi in u listinu « démarrer », nant’à u scagnu o in a barra di lanciu rapidu. Pudete dinù fà sguillà manualmente u schedariu OmegaT.exe in u listinu « démarrer », nant’à u scagnu o in a barra di lanciu rapidu per creacci l’accurtatoghji.
 
 S’ellu vi hè pussibule di fighjà u schedariu OmegaT ma micca OmegaT.exe in u vostru ghjestiunariu di schedariu (Espluratore WIndows), mudificate e preferenze per chì l’estensioni sianu affissate.
 
@@ -94,7 +94,7 @@ Pudete fà sguillà OmegaT.app nant’à u vostru Dock o nant’à a barra d’a
 Lanciu d’OmegaT (Linux)
 =======================
 
-S’è vo avete impiegatu u scrittu linux-install.sh, duveriate pudè lancià OmegaT cusì :
+S’è vo avete impiegatu u scenariu linux-install.sh, duveriate pudè lancià OmegaT cusì :
 
     Alt+F2
 
@@ -102,7 +102,7 @@ eppò :
 
     omegat
 
-Per pudè impegà OmegaT d’una manera più faciule, pudete impiegà u scrittu Kaptain pruvistu (omegat.kaptn). Per impiegallu, duvete installà Kaptain in primu locu. È dopu, pudete lancià u scrittu Kaptain cusì :
+Per lancià OmegaT d’una manera più faciule, pudete impiegà u scrittu Kaptain pruvistu (omegat.kaptn). Per impiegallu, duvete installà Kaptain in primu locu. È dopu, pudete lancià u scenariu Kaptain cusì :
 
     Alt+F2
 
@@ -166,8 +166,8 @@ I precedente cuntribuenti includenu :
 
 
 
-Leie ghjuvevule
-===============
+Liami ghjuvevule
+================
 
 L’infurmazione a più recente apprupositu d’OmegaT si trova à :
 

@@ -34,8 +34,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
-import tokyo.northside.protocol.URLProtocolHandler;
-
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
@@ -260,7 +258,6 @@ public final class Core {
         filterMaster = new FilterMaster(Preferences.getFilters());
 
         // 4. Initialize other components. They add themselves to the main window.
-        URLProtocolHandler.install();
         editor = new EditorController(me);
         tagValidation = new TagValidationTool();
         issuesWindow = new IssuesPanelController(me);

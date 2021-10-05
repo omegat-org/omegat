@@ -2,7 +2,7 @@
  OmegaT 5.6.0
 ----------------------------------------------------------------------
   5 Enhancements
-  7 Bug fixes
+  8 Bug fixes
   9 Localisation updates
 ----------------------------------------------------------------------
 5.6.0 vs 5.5.0
@@ -29,6 +29,9 @@
 
   - Short freeze when displaying dictionary entries
   https://sourceforge.net/p/omegat/bugs/1056/
+
+  - Properties notification color is too bright in dark mode
+  https://sourceforge.net/p/omegat/bugs/1055/
 
   Implemented requests:
 

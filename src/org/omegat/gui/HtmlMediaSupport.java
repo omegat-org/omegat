@@ -22,15 +22,15 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.dictionaries;
+package org.omegat.gui;
 
 import tokyo.northside.protocol.URLProtocolHandler;
 
 /**
  * @author Hiroshi Miura
  */
-public class DictionaryPaneExtension {
-    private DictionaryPaneExtension() {
+public class HtmlMediaSupport {
+    private HtmlMediaSupport() {
     }
 
     /**

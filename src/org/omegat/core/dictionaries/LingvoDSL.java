@@ -148,33 +148,27 @@ public class LingvoDSL implements IDictionaryFactory {
         TREE_MAP.put(Pattern.compile("\\[\\[(.+?)]]"), "&#91;$1&#93;");
         TREE_MAP.put(Pattern.compile("\\\\\\["), "&#91;");
         TREE_MAP.put(Pattern.compile("\\\\]"), "&#93;");
-        TREE_MAP.put(Pattern.compile("\\[b](.+?)\\[/b]"), "<strong>$1</strong>");
-        TREE_MAP.put(Pattern.compile("\\[i](.+?)\\[/i]"), "<span style='font-style: italic'>$1</span>");
-        TREE_MAP.put(Pattern.compile("\\[trn](.+?)\\[/trn]"), "$1");
-        TREE_MAP.put(Pattern.compile("\\[t](.+?)\\[/t]"), "$1&nbsp;");
+        TREE_MAP.put(Pattern.compile("\\[b](?<content>.+?)\\[/b]"), "<strong>${content}</strong>");
+        TREE_MAP.put(Pattern.compile("\\[i](?<content>.+?)\\[/i]"), "<span style='font-style: italic'>${content}</span>");
+        TREE_MAP.put(Pattern.compile("\\[t](?<content>.+?)\\[/t]"), "${content}&nbsp;");
         TREE_MAP.put(Pattern.compile("\\[br]"), "<br/>");
-        TREE_MAP.put(Pattern.compile("\\[c](.+?)\\[/c]"), "<span style='color:green'>$1</span>");
+        TREE_MAP.put(Pattern.compile("\\[c](?<content>.+?)\\[/c]"), "<span style='color:green'>${content}</span>");
         // The following line tries to replace [c value]text[/c] with text colored as per the value.
         // Since the color names are plain words like 'red', or 'blue', or 'steelgray' etc.,
-        TREE_MAP.put(Pattern.compile("\\[c\\s([a-z]+?)](.+?)\\[/c]"), "<span style='color:$1'>$2</span>");
-        TREE_MAP.put(Pattern.compile("\\[m](.+?)\\[/m]"), "$1");
-        TREE_MAP.put(Pattern.compile("\\[m1](.+?)\\[/m]"), "<p style=\"text-indent: 30px\">$1</p>");
-        TREE_MAP.put(Pattern.compile("\\[m2](.+?)\\[/m]"), "<p style=\"text-indent: 60px\">$1</p>");
-        TREE_MAP.put(Pattern.compile("\\[m3](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
-        TREE_MAP.put(Pattern.compile("\\[m4](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
-        TREE_MAP.put(Pattern.compile("\\[m5](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
-        TREE_MAP.put(Pattern.compile("\\[m6](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
-        TREE_MAP.put(Pattern.compile("\\[m7](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
-        TREE_MAP.put(Pattern.compile("\\[m8](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
-        TREE_MAP.put(Pattern.compile("\\[m9](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
-        TREE_MAP.put(Pattern.compile("\\[sub](.+?)\\[/sub]"), "<sub>$1</sub>");
-        TREE_MAP.put(Pattern.compile("\\[sup](.+?)\\[/sup]"), "<sup>$1</sup>");
+        TREE_MAP.put(Pattern.compile("\\[c\\s(?<color>[a-z]+?)](?<content>.+?)\\[/c]"),
+                "<span style='color:${color}'>${content}</span>");
+        TREE_MAP.put(Pattern.compile("\\[m1](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 30px\">${content}</p>");
+        TREE_MAP.put(Pattern.compile("\\[m2](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 60px\">${content}</p>");
+        TREE_MAP.put(Pattern.compile("\\[(m3|m4|m5|m6|m7|m8|m9)](?<content>.+?)\\[/m]"),
+                "<p style=\\\"text-indent: 90px\">${content}</p>");
+        TREE_MAP.put(Pattern.compile("\\[sub](?<content>.+?)\\[/sub]"), "<sub>${content}</sub>");
+        TREE_MAP.put(Pattern.compile("\\[sup](?<content>.+?)\\[/sup]"), "<sup>${content}</sup>");
         TREE_MAP.put(Pattern.compile("\\[u](.+?)\\[/u]"), "<span style='text-decoration:underline'>$1</span>");
         TREE_MAP.put(Pattern.compile("\\[url](.+?)\\[/url]"), "<a href='$1'>$1</a>");
         // The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress)
         // with a red letter (the default behavior in Lingvo).
         TREE_MAP.put(Pattern.compile("\\['].\\[/']"), "<span style='color:red'>$1</span>");
-        // ignore com, ex, lang, p, preview, ref, s, trn1, trs, !trs, video and other unknown
+        TREE_MAP.put(Pattern.compile("\\[(?<tag>m|com|ex|lang|p|preview|ref|s|trn|trn1|trs|!trs|video)](?<content>.+?)\\[/\\k<tag>]"), "${content}");
         TREE_MAP.put(Pattern.compile("\\[.+]"), "");
     }
 }

@@ -34,10 +34,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -58,6 +58,8 @@ import org.omegat.util.Language;
  * @author Hiroshi Miura
  */
 public class LingvoDSL implements IDictionaryFactory {
+
+    private static final TreeMap<Pattern, String> TREE_MAP = new TreeMap<>();
 
     @Override
     public boolean isSupportedFile(File file) {
@@ -101,7 +103,7 @@ public class LingvoDSL implements IDictionaryFactory {
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
             stream.filter(line -> !line.isEmpty()).filter(line -> !line.startsWith("#"))
-                    .map(LingvoDSLTag::replaceTag)
+                    .map(LingvoDSL::replaceTag)
                     .forEach(line -> {
                         if (Character.isWhitespace(line.codePointAt(0))) {
                             trans.append(line.trim()).append('\n');
@@ -133,89 +135,45 @@ public class LingvoDSL implements IDictionaryFactory {
         }
     }
 
-    @SuppressWarnings("visibilitymodifier")
-    static class RE {
-        public Pattern pattern;
-        public String replacement;
-
-        public RE(final String regex, final String replacement) {
-            pattern = Pattern.compile(regex);
-            this.replacement = replacement;
+    private static String replaceTag(final String line) {
+        String result = line;
+        for (Map.Entry<Pattern, String> entry : TREE_MAP.entrySet()) {
+            result = entry.getKey().matcher(result).replaceAll(entry.getValue());
         }
+        return result;
     }
 
-    static class LingvoDSLTag {
-        private static final List<RE> RE_LIST;
-
-        static String replaceTag(final String line) {
-            String result = line;
-            for (RE re : RE_LIST) {
-                result = re.pattern.matcher(result).replaceAll(re.replacement);
-            }
-            return result;
-        }
-
-        static {
-            List<RE> reList = new ArrayList<>();
-            reList.add(new RE("\\[\\[(.+?)\\]\\]", "&#91;$1&#93;"));
-            reList.add(new RE("\\\\\\[", "&#91;"));
-            reList.add(new RE("\\\\\\]", "&#93;"));
-            reList.add(new RE("\\[b\\](.+?)\\[/b\\]", "<strong>$1</strong>"));
-            reList.add(new RE("\\[i\\](.+?)\\[/i\\]", "<span style='font-style: italic'>$1</span>"));
-            reList.add(new RE("\\[trn\\](.+?)\\[/trn\\]", "$1"));
-            reList.add(new RE("\\[t\\](.+?)\\[/t\\]", "$1&nbsp;"));
-            reList.add(new RE("\\[br\\]", "<br/>"));
-            // Green is default color in Lingvo
-            reList.add(new RE("\\[c\\](.+?)\\[/c\\]", "<span style='color:green'>$1</span>"));
-            // The following line tries to replace [c value]text[/c] with text colored as per the value.
-            // Since the color names are plain words like 'red', or 'blue', or 'steelgray' etc.,
-            // FIXME: I use the ([a-z]+?) regular expression, but am not sure if it is correct.
-            reList.add(new RE("\\[c\\s([a-z]+?)\\](.+?)\\[/c\\]", "<span style='color:$1'>$2</span>"));
-            reList.add(new RE("\\[com\\]", ""));
-            reList.add(new RE("\\[/com\\]", ""));
-            reList.add(new RE("\\[ex\\]", ""));
-            reList.add(new RE("\\[/ex\\]", ""));
-            reList.add(new RE("\\[lang\\]", ""));
-            reList.add(new RE("\\[/lang\\]", ""));
-            reList.add(new RE("\\[m\\](.+?)\\[/m\\]", "$1"));
-            reList.add(new RE("\\[m1\\](.+?)\\[/m\\]", "<p style=\"text-indent: 30px\">$1</p>"));
-            reList.add(new RE("\\[m2\\](.+?)\\[/m\\]", "<p style=\"text-indent: 60px\">$1</p>"));
-            reList.add(new RE("\\[m3\\](.+?)\\[/m\\]", "<p style=\"text-indent: 90px\">$1</p>"));
-            reList.add(new RE("\\[m4\\](.+?)\\[/m\\]", "<p style=\"text-indent: 90px\">$1</p>"));
-            reList.add(new RE("\\[m5\\](.+?)\\[/m\\]", "<p style=\"text-indent: 90px\">$1</p>"));
-            reList.add(new RE("\\[m6\\](.+?)\\[/m\\]", "<p style=\"text-indent: 90px\">$1</p>"));
-            reList.add(new RE("\\[m7\\](.+?)\\[/m\\]", "<p style=\"text-indent: 90px\">$1</p>"));
-            reList.add(new RE("\\[m8\\](.+?)\\[/m\\]", "<p style=\"text-indent: 90px\">$1</p>"));
-            reList.add(new RE("\\[m9\\](.+?)\\[/m\\]", "<p style=\"text-indent: 90px\">$1</p>"));
-            reList.add(new RE("\\[p\\]", ""));
-            reList.add(new RE("\\[/p\\]", ""));
-            reList.add(new RE("\\[preview\\]", ""));
-            reList.add(new RE("\\[/preview\\]", ""));
-            reList.add(new RE("\\[ref\\]", ""));
-            reList.add(new RE("\\[/ref\\]", ""));
-            reList.add(new RE("\\[s\\]", ""));
-            reList.add(new RE("\\[/s\\]", ""));
-            reList.add(new RE("\\[sub\\](.+?)\\[/sub\\]", "<sub>$1</sub>"));
-            reList.add(new RE("\\[sup\\](.+?)\\[/sup\\]", "<sup>$1</sup>"));
-            reList.add(new RE("\\[trn1\\]", ""));
-            reList.add(new RE("\\[/trn1\\]", ""));
-            reList.add(new RE("\\[trs\\]", ""));
-            reList.add(new RE("\\[/trs\\]", ""));
-            // FIXME: In the following two lines, the exclamation marks are escaped. Maybe, it is superfluous.
-            reList.add(new RE("\\[\\!trs\\]", ""));
-            reList.add(new RE("\\[/\\!trs\\]", ""));
-            reList.add(new RE("\\[u\\](.+?)\\[/u\\]",
-                    "<span style='text-decoration:underline'>$1</span>"));
-            reList.add(new RE("\\[url\\](.+?)\\[/url\\]", "<a href='$1'>$1</a>"));
-            reList.add(new RE("\\[video\\]", ""));
-            reList.add(new RE("\\[/video\\]", ""));
-            // The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress)
-            // with a red letter (the default behavior in Lingvo).
-            reList.add(new RE("\\['\\].\\[/'\\]", "<span style='color:red'>$1</span>"));
-            // FIXME: In the following two lines, the asterisk symbols are escaped. Maybe, it is superfluous.
-            reList.add(new RE("\\[\\*\\]", ""));
-            reList.add(new RE("\\[/\\*\\]", ""));
-            RE_LIST = Collections.unmodifiableList(reList);
-        }
+    static {
+        TREE_MAP.put(Pattern.compile("\\[\\[(.+?)]]"), "&#91;$1&#93;");
+        TREE_MAP.put(Pattern.compile("\\\\\\["), "&#91;");
+        TREE_MAP.put(Pattern.compile("\\\\]"), "&#93;");
+        TREE_MAP.put(Pattern.compile("\\[b](.+?)\\[/b]"), "<strong>$1</strong>");
+        TREE_MAP.put(Pattern.compile("\\[i](.+?)\\[/i]"), "<span style='font-style: italic'>$1</span>");
+        TREE_MAP.put(Pattern.compile("\\[trn](.+?)\\[/trn]"), "$1");
+        TREE_MAP.put(Pattern.compile("\\[t](.+?)\\[/t]"), "$1&nbsp;");
+        TREE_MAP.put(Pattern.compile("\\[br]"), "<br/>");
+        TREE_MAP.put(Pattern.compile("\\[c](.+?)\\[/c]"), "<span style='color:green'>$1</span>");
+        // The following line tries to replace [c value]text[/c] with text colored as per the value.
+        // Since the color names are plain words like 'red', or 'blue', or 'steelgray' etc.,
+        TREE_MAP.put(Pattern.compile("\\[c\\s([a-z]+?)](.+?)\\[/c]"), "<span style='color:$1'>$2</span>");
+        TREE_MAP.put(Pattern.compile("\\[m](.+?)\\[/m]"), "$1");
+        TREE_MAP.put(Pattern.compile("\\[m1](.+?)\\[/m]"), "<p style=\"text-indent: 30px\">$1</p>");
+        TREE_MAP.put(Pattern.compile("\\[m2](.+?)\\[/m]"), "<p style=\"text-indent: 60px\">$1</p>");
+        TREE_MAP.put(Pattern.compile("\\[m3](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
+        TREE_MAP.put(Pattern.compile("\\[m4](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
+        TREE_MAP.put(Pattern.compile("\\[m5](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
+        TREE_MAP.put(Pattern.compile("\\[m6](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
+        TREE_MAP.put(Pattern.compile("\\[m7](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
+        TREE_MAP.put(Pattern.compile("\\[m8](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
+        TREE_MAP.put(Pattern.compile("\\[m9](.+?)\\[/m]"), "<p style=\"text-indent: 90px\">$1</p>");
+        TREE_MAP.put(Pattern.compile("\\[sub](.+?)\\[/sub]"), "<sub>$1</sub>");
+        TREE_MAP.put(Pattern.compile("\\[sup](.+?)\\[/sup]"), "<sup>$1</sup>");
+        TREE_MAP.put(Pattern.compile("\\[u](.+?)\\[/u]"), "<span style='text-decoration:underline'>$1</span>");
+        TREE_MAP.put(Pattern.compile("\\[url](.+?)\\[/url]"), "<a href='$1'>$1</a>");
+        // The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress)
+        // with a red letter (the default behavior in Lingvo).
+        TREE_MAP.put(Pattern.compile("\\['].\\[/']"), "<span style='color:red'>$1</span>");
+        // ignore com, ex, lang, p, preview, ref, s, trn1, trs, !trs, video and other unknown
+        TREE_MAP.put(Pattern.compile("\\[.+]"), "");
     }
 }

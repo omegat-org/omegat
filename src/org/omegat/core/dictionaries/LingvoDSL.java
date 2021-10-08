@@ -102,20 +102,21 @@ public class LingvoDSL implements IDictionaryFactory {
         private void loadData(Stream<String> stream) {
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
-            stream.filter(line -> !line.isEmpty()).filter(line -> !line.startsWith("#"))
-                    .map(LingvoDSL::replaceTag)
-                    .forEach(line -> {
-                        if (Character.isWhitespace(line.codePointAt(0))) {
-                            trans.append(line.trim()).append('\n');
-                        } else {
-                            if (word.length() > 0) {
-                                data.add(word.toString(), trans.toString());
-                                word.setLength(0);
-                                trans.setLength(0);
-                            }
-                            word.append(line);
+            stream.filter(line -> !line.isEmpty())
+                .filter(line -> !line.startsWith("#"))
+                .map(LingvoDSL::replaceTag)
+                .forEach(line -> {
+                    if (Character.isWhitespace(line.codePointAt(0))) {
+                        trans.append(line.trim()).append('\n');
+                    } else {
+                        if (word.length() > 0) {
+                            data.add(word.toString(), trans.toString());
+                            word.setLength(0);
+                            trans.setLength(0);
                         }
-                    });
+                        word.append(line);
+                    }
+                });
             if (word.length() > 0) {
                 data.add(word.toString(), trans.toString());
             }

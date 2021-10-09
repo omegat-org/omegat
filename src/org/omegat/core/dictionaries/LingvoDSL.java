@@ -165,12 +165,15 @@ public class LingvoDSL implements IDictionaryFactory {
                 "<p style=\\\"text-indent: 90px\">${content}</p>");
         TREE_MAP.put(Pattern.compile("\\[sub](?<content>.+?)\\[/sub]"), "<sub>${content}</sub>");
         TREE_MAP.put(Pattern.compile("\\[sup](?<content>.+?)\\[/sup]"), "<sup>${content}</sup>");
-        TREE_MAP.put(Pattern.compile("\\[u](.+?)\\[/u]"), "<span style='text-decoration:underline'>$1</span>");
+        TREE_MAP.put(Pattern.compile("\\[u](?<content>.+?)\\[/u]"), "<span style='text-decoration:underline'>${content}</span>");
         TREE_MAP.put(Pattern.compile("\\[url](?<link>.+?)\\[/url]"), "<a href='${link}'>Link</a>");
         // The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress)
         // with a red letter (the default behavior in Lingvo).
         TREE_MAP.put(Pattern.compile("\\['](?<content>.+?)\\[/']"), "<span style='color:red'>${content}</span>");
-        TREE_MAP.put(Pattern.compile("\\[(?<tag>m|com|ex|lang|p|preview|ref|s|trn|trn1|trs|!trs|video)](?<content>.+?)\\[/\\k<tag>]"), "${content}");
-        TREE_MAP.put(Pattern.compile("\\[\\*]|\\[/\\*]"), "");
+        // silently ignored these tags that can be arbitrary nested.
+        String[] IGNORED_TAGS={"\\*", "m", "com", "ex", "lang", "p", "preview", "ref", "s", "trn", "trn1", "trs", "!trs", "video"};
+        for (String tag: IGNORED_TAGS) {
+            TREE_MAP.put(Pattern.compile("\\[(?<tag>" + tag + ")](?<content>.+?)\\[/\\k<tag>]"), "${content}");
+        }
     }
 }

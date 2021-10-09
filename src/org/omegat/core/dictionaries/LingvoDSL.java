@@ -48,7 +48,6 @@ import java.util.zip.GZIPInputStream;
 import org.apache.commons.io.input.BOMInputStream;
 
 import org.omegat.util.Language;
-import org.omegat.util.OStrings;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
@@ -67,7 +66,6 @@ public class LingvoDSL implements IDictionaryFactory {
     private static final TreeMap<Pattern, String> TAG_REPLACEMENTS = new TreeMap<>(
             Comparator.comparing(Pattern::pattern));
 
-    private static final String DSL_LINK_TEXT = "DICTIONARY_DSL_LINK";
     private static final int BLOCKSIZE = 8192;
 
     @Override
@@ -191,9 +189,7 @@ public class LingvoDSL implements IDictionaryFactory {
         TAG_REPLACEMENTS.put(Pattern.compile(
                 "\\[(m3|m4|m5|m6|m7|m8|m9)](?<content>.+?)\\[/m]"), "<p style=\\\"text-indent: 90px\">${content}</p>");
         // external link may launch external browser
-        TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[url](?<link>.+?)\\[/url]"),
-                "<a href='${link}'>" + OStrings.getString(DSL_LINK_TEXT) + "</a>");
+        TAG_REPLACEMENTS.put(Pattern.compile( "\\[url](?<link>.+?)\\[/url]"), "<a href='${link}'>${link}</a>");
         // The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress)
         // with a red letter (the default behavior in Lingvo).
         TAG_REPLACEMENTS.put(

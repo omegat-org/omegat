@@ -48,6 +48,7 @@ import java.util.zip.GZIPInputStream;
 import org.apache.commons.io.input.BOMInputStream;
 
 import org.omegat.util.Language;
+import org.omegat.util.OStrings;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
@@ -64,6 +65,8 @@ public class LingvoDSL implements IDictionaryFactory {
 
     // An ordered list of Pair of Regex pattern and replacement string
     private static final TreeMap<Pattern, String> TAG_REPLACEMENTS = new TreeMap<>(Comparator.comparing(Pattern::pattern));
+
+    private static final String DSL_LINK_TEXT = "DICTIONARY_DSL_LINK";
 
     @Override
     public boolean isSupportedFile(File file) {
@@ -166,20 +169,22 @@ public class LingvoDSL implements IDictionaryFactory {
         TAG_REPLACEMENTS.put(Pattern.compile("\\[i](?<content>.+?)\\[/i]"), "<span style='font-style: italic'>${content}</span>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[t](?<content>.+?)\\[/t]"), "${content}&nbsp;");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[c](?<content>.+?)\\[/c]"), "<span style='color:green'>${content}</span>");
+        TAG_REPLACEMENTS.put(Pattern.compile("\\[u](?<content>.+?)\\[/u]"), "<span style='text-decoration:underline'>${content}</span>");
         // The following line tries to replace [c value]text[/c] with text colored as per the value.
         // Since the color names are plain words like 'red', or 'blue', or 'steelgray' etc.,
         TAG_REPLACEMENTS.put(Pattern.compile("\\[c\\s(?<color>[a-z]+?)](?<content>.+?)\\[/c]"),
                 "<span style='color:${color}'>${content}</span>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[sub](?<content>.+?)\\[/sub]"), "<sub>${content}</sub>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[sup](?<content>.+?)\\[/sup]"), "<sup>${content}</sup>");
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[u](?<content>.+?)\\[/u]"), "<span style='text-decoration:underline'>${content}</span>");
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[br]"), "<br/>");
+        // line feed and indents
+        TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("[br]")), "<br/>");
         // ignore tag 'm" but "m1" to indent 1 level, "m2" to indent 2 level and "m3" and more to indent 3 level.
         TAG_REPLACEMENTS.put(Pattern.compile("\\[m1](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 30px\">${content}</p>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[m2](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 60px\">${content}</p>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[(m3|m4|m5|m6|m7|m8|m9)](?<content>.+?)\\[/m]"),
                 "<p style=\\\"text-indent: 90px\">${content}</p>");
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[url](?<link>.+?)\\[/url]"), "<a href='${link}'>Link</a>");
+        // external link may launch external browser
+        TAG_REPLACEMENTS.put(Pattern.compile("\\[url](?<link>.+?)\\[/url]"), "<a href='${link}'>" + OStrings.getString(DSL_LINK_TEXT) + "</a>");
         // The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress)
         // with a red letter (the default behavior in Lingvo).
         TAG_REPLACEMENTS.put(Pattern.compile("\\['](?<content>.+?)\\[/']"), "<span style='color:red'>${content}</span>");

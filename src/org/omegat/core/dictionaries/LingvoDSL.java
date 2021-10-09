@@ -34,6 +34,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -49,7 +50,7 @@ import org.omegat.util.Language;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
- *
+ * <p>
  * Lingvo DSL format described in Lingvo help. See also
  * http://www.dsleditor.narod.ru/art_03.htm(russian).
  *
@@ -59,7 +60,8 @@ import org.omegat.util.Language;
  */
 public class LingvoDSL implements IDictionaryFactory {
 
-    private static final TreeMap<Pattern, String> TREE_MAP = new TreeMap<>();
+    // An ordered list of Pair of Regex pattern and replacement string
+    private static final TreeMap<Pattern, String> TREE_MAP = new TreeMap<>(Comparator.comparing(Pattern::pattern));
 
     @Override
     public boolean isSupportedFile(File file) {
@@ -103,20 +105,20 @@ public class LingvoDSL implements IDictionaryFactory {
             StringBuilder word = new StringBuilder();
             StringBuilder trans = new StringBuilder();
             stream.filter(line -> !line.isEmpty())
-                .filter(line -> !line.startsWith("#"))
-                .map(LingvoDSL::replaceTag)
-                .forEach(line -> {
-                    if (Character.isWhitespace(line.codePointAt(0))) {
-                        trans.append(line.trim()).append('\n');
-                    } else {
-                        if (word.length() > 0) {
-                            data.add(word.toString(), trans.toString());
-                            word.setLength(0);
-                            trans.setLength(0);
+                  .filter(line -> !line.startsWith("#"))
+                  .map(LingvoDSL::replaceTag)
+                  .forEach(line -> {
+                        if (Character.isWhitespace(line.codePointAt(0))) {
+                            trans.append(line.trim()).append('\n');
+                        } else {
+                            if (word.length() > 0) {
+                                data.add(word.toString(), trans.toString());
+                                word.setLength(0);
+                                trans.setLength(0);
+                            }
+                            word.append(line);
                         }
-                        word.append(line);
-                    }
-                });
+                  });
             if (word.length() > 0) {
                 data.add(word.toString(), trans.toString());
             }
@@ -164,11 +166,11 @@ public class LingvoDSL implements IDictionaryFactory {
         TREE_MAP.put(Pattern.compile("\\[sub](?<content>.+?)\\[/sub]"), "<sub>${content}</sub>");
         TREE_MAP.put(Pattern.compile("\\[sup](?<content>.+?)\\[/sup]"), "<sup>${content}</sup>");
         TREE_MAP.put(Pattern.compile("\\[u](.+?)\\[/u]"), "<span style='text-decoration:underline'>$1</span>");
-        TREE_MAP.put(Pattern.compile("\\[url](.+?)\\[/url]"), "<a href='$1'>$1</a>");
+        TREE_MAP.put(Pattern.compile("\\[url](?<link>.+?)\\[/url]"), "<a href='${link}'>Link</a>");
         // The following line tries to replace a letter surrounded by ['][/'] tags (indicating stress)
         // with a red letter (the default behavior in Lingvo).
-        TREE_MAP.put(Pattern.compile("\\['].\\[/']"), "<span style='color:red'>$1</span>");
+        TREE_MAP.put(Pattern.compile("\\['](?<content>.+?)\\[/']"), "<span style='color:red'>${content}</span>");
         TREE_MAP.put(Pattern.compile("\\[(?<tag>m|com|ex|lang|p|preview|ref|s|trn|trn1|trs|!trs|video)](?<content>.+?)\\[/\\k<tag>]"), "${content}");
-        TREE_MAP.put(Pattern.compile("\\[.+]"), "");
+        TREE_MAP.put(Pattern.compile("\\[\\*]|\\[/\\*]"), "");
     }
 }

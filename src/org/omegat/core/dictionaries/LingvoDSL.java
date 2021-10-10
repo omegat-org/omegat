@@ -184,6 +184,8 @@ public class LingvoDSL implements IDictionaryFactory {
                 "\\[c\\s(?<color>[a-z]+?)](?<content>.+?)\\[/c]"), "<span style='color:${color}'>${content}</span>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[sub](?<content>.+?)\\[/sub]"), "<sub>${content}</sub>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[sup](?<content>.+?)\\[/sup]"), "<sup>${content}</sup>");
+        // Media and image files are converted into hyperlink or image tags.
+        // @dir@ is a special tag that is replaced absolute path of dictionary in loadData() method.
         TAG_REPLACEMENTS.put(Pattern.compile(
                 "\\[s](?<media>.+?\\.wav)\\[/s]"), "<a href=\"file://@dir@/${media}\">SOUND: ${media}</a>");
         TAG_REPLACEMENTS.put(Pattern.compile("\\[s](?<media>.+?\\.jpg)\\[/s]"), "<img src=\"file://@dir@/${media}\"/>");

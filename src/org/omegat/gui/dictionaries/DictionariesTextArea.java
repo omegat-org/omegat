@@ -53,10 +53,11 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Document;
-import javax.swing.text.EditorKit;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
 import org.omegat.core.Core;
@@ -101,7 +102,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     protected final List<String> displayedWords = new ArrayList<>();
 
     protected ITokenizer tokenizer;
-
+    private final HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
     private final DockableScrollPane scrollPane;
 
     public DictionariesTextArea(IMainWindow mw) {
@@ -110,7 +111,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         setContentType("text/html");
         ((HTMLDocument) getDocument()).setPreservesUnknownTags(false);
         setFont(getFont());
-
+        setStyle();
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Dictionary");
         scrollPane = new DockableScrollPane("DICTIONARY", title, this, true);
         mw.addDockable(scrollPane);
@@ -144,8 +145,13 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         if (!(doc instanceof HTMLDocument)) {
             return;
         }
-        StyleSheet styleSheet = ((HTMLDocument) doc).getStyleSheet();
-        styleSheet.addRule("body { font-family: " + font.getName() + "; "
+    }
+
+    @SuppressWarnings({"avoidinlineconditionals"})
+    private void setStyle() {
+        Font font = getFont();
+        StyleSheet baseStyleSheet = new StyleSheet();
+        baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "
                 + " font-size: " + font.getSize() + "; "
                 + " font-style: " + (font.getStyle() == Font.BOLD ? "bold"
                         : font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
@@ -153,6 +159,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + ";} "
                 + ".word {font-size: " + (2 + font.getSize()) + "; font-style: bold; }"
                 );
+        htmlEditorKit.setStyleSheet(baseStyleSheet);
+        setEditorKit(htmlEditorKit);
     }
 
     @Override
@@ -185,22 +193,24 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
      */
     protected void callDictionary(String word) {
         UIThreadsUtil.mustBeSwingThread();
-
+        boolean debug = false;
         HTMLDocument doc = (HTMLDocument) getDocument();
 
-        int i = displayedWords.indexOf(word.toLowerCase());
-        if (i == -1) {
+        int index = displayedWords.indexOf(word.toLowerCase());
+        if (index == -1) {
             return;
         }
-        Element el = doc.getElement(Integer.toString(i));
+        Element el = doc.getElement(Integer.toString(index));
         if (el == null) {
             return;
         }
+        int pos1 = el.getStartOffset();
+        int pos2 = el.getEndOffset();
         try {
             // start position to be visible
-            Rectangle rect1 = Java8Compat.modelToView(this, el.getStartOffset());
+            Rectangle rect1 = Java8Compat.modelToView(this, pos1);
             // end position of article
-            Rectangle rect2 = Java8Compat.modelToView(this, el.getEndOffset());
+            Rectangle rect2 = Java8Compat.modelToView(this, pos2);
             // to show maximum text of selected, by moving to end of article then show start position,
             if (rect2 != null) {
                 scrollRectToVisible(rect2);
@@ -208,6 +218,12 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             if (rect1 != null) {
                 scrollRectToVisible(rect1);
             }
+            if (debug) {
+                // debug with highlight article
+                getHighlighter().removeAllHighlights();
+                getHighlighter().addHighlight(pos1, pos2, DefaultHighlighter.DefaultPainter);
+            }
+
         } catch (BadLocationException ex) {
             // shouldn't be throwed
         }
@@ -286,7 +302,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
     private void appendText(final String txt) {
         Document doc = getDocument();
-        EditorKit kit = getEditorKit();
         try {
             Reader r;
             if (doc.getLength() == 0) {
@@ -298,14 +313,9 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             // Updating document trigger to recalculation of display and redraw.
             // Recreating new document and set content before displaying reduce
             // rendering duration.
-            // We set style sheet again because new document don't have previous
-            // style sheet.
-            StyleSheet oldStylesheet = ((HTMLDocument) doc).getStyleSheet();
-            doc = kit.createDefaultDocument();
+            doc = htmlEditorKit.createDefaultDocument();
             ((HTMLDocument) doc).setPreservesUnknownTags(false);
-            StyleSheet styleSheet = ((HTMLDocument) doc).getStyleSheet();
-            styleSheet.addStyleSheet(oldStylesheet);
-            kit.read(r, doc, 0);
+            htmlEditorKit.read(r, doc, 0);
             setDocument(doc);
         } catch (IOException | BadLocationException  e) {
             Log.log(e);

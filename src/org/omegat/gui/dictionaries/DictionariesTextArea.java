@@ -294,8 +294,11 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             }
             // Appending to an empty document results in treating HTML tags as
             // plain text for some reason
+            StyleSheet ss = ((HTMLDocument) doc).getStyleSheet();
             doc = kit.createDefaultDocument();
             ((HTMLDocument) doc).setPreservesUnknownTags(false);
+            StyleSheet styleSheet = ((HTMLDocument) doc).getStyleSheet();
+            styleSheet.addStyleSheet(ss);
             kit.read(r, doc, 0);
             setDocument(doc);
         } catch (IOException | BadLocationException  e) {

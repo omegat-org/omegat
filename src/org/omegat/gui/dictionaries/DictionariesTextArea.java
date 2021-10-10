@@ -300,11 +300,11 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             // rendering duration.
             // We set style sheet again because new document don't have previous
             // style sheet.
-            StyleSheet ss = ((HTMLDocument) doc).getStyleSheet();
+            StyleSheet oldStylesheet = ((HTMLDocument) doc).getStyleSheet();
             doc = kit.createDefaultDocument();
             ((HTMLDocument) doc).setPreservesUnknownTags(false);
             StyleSheet styleSheet = ((HTMLDocument) doc).getStyleSheet();
-            styleSheet.addStyleSheet(ss);
+            styleSheet.addStyleSheet(oldStylesheet);
             kit.read(r, doc, 0);
             setDocument(doc);
         } catch (IOException | BadLocationException  e) {

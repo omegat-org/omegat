@@ -256,6 +256,9 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             scrollPane.notify(true);
         }
 
+        // When updating content, JScrollPane recalculate whether scrollbar required or not.
+        // Among updating text, to reduce computation time, we set a scrollbar policy to
+        // fixed value, and restore when all done.
         final int old = scrollPane.getVerticalScrollBarPolicy();
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         StringBuilder txt = new StringBuilder();
@@ -292,8 +295,11 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 StringBuilder sb = new StringBuilder(doc.getText(0, doc.getLength())).append(txt);
                 r = new StringReader(sb.toString());
             }
-            // Appending to an empty document results in treating HTML tags as
-            // plain text for some reason
+            // Updating document trigger to recalculation of display and redraw.
+            // Recreating new document and set content before displaying reduce
+            // rendering duration.
+            // We set style sheet again because new document don't have previous
+            // style sheet.
             StyleSheet ss = ((HTMLDocument) doc).getStyleSheet();
             doc = kit.createDefaultDocument();
             ((HTMLDocument) doc).setPreservesUnknownTags(false);

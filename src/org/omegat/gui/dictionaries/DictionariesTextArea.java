@@ -282,24 +282,20 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             i++;
         }
         txt.append("</html>");
-        appendText(txt.toString());
+        fastReplaceContent(txt.toString());
     }
 
-    private void appendText(final String txt) {
+    // Previously we were incrementally adding to the current document and later
+    // batching updates to the current document, but it turns out that
+    // recreating the document from scratch is actually faster for very large
+    // content. See https://sourceforge.net/p/omegat/bugs/1068/
+    private void fastReplaceContent(final String txt) {
         Document doc = getDocument();
         try {
-            String newContent;
-            if (doc.getLength() == 0) {
-                newContent = txt;
-            } else {
-                newContent = doc.getText(0, doc.getLength()) + txt;
-            }
-            // Recreating the document is actually faster for very large
-            // documents
             EditorKit editorKit = getEditorKit();
             doc = editorKit.createDefaultDocument();
             ((HTMLDocument) doc).setPreservesUnknownTags(false);
-            editorKit.read(new StringReader(newContent), doc, 0);
+            editorKit.read(new StringReader(txt), doc, 0);
             setDocument(doc);
         } catch (IOException | BadLocationException  e) {
             Log.log(e);

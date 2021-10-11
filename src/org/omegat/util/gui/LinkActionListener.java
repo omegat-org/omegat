@@ -69,7 +69,7 @@ public class LinkActionListener implements HyperlinkListener {
     public void hyperlinkUpdate(final HyperlinkEvent hyperlinkEvent) {
         if (HyperlinkEvent.EventType.ACTIVATED.equals(hyperlinkEvent.getEventType()) {
             URL url = hyperlinkEvent.getURL();
-            if (url.getProtocol().equals("file")) {
+            if ("file".equals(url.getProtocol()) {
                 try {
                     String path = url.toURI().getPath();
                     if (path.endsWith(".wav") || path.endsWith(".WAV")) {

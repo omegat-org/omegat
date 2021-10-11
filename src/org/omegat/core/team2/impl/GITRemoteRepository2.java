@@ -106,9 +106,6 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
         repositoryURL = repo.getUrl();
-        String defaultBranch = getDefaultBranchName(repository);
-        branch = repo.getBranch() == null? defaultBranch : repo.getBranch();
-        trackBranch = !(branch.equals(defaultBranch));
         localDirectory = dir;
         projectTeamSettings = teamSettings;
 
@@ -119,10 +116,14 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 predefinedUser, predefinedPass, predefinedFingerprint);
         ((GITCredentialsProvider) CredentialsProvider.getDefault()).setTeamSettings(teamSettings);
 
+
         File gitDir = new File(localDirectory, ".git");
         if (gitDir.exists() && gitDir.isDirectory()) {
             // already cloned
             repository = Git.open(localDirectory).getRepository();
+            String defaultBranch = getDefaultBranchName(repository);
+            branch = repo.getBranch() == null? defaultBranch : repo.getBranch();
+            trackBranch = !(branch.equals(defaultBranch));
             if (trackBranch) {
                 repository.resolve(branch);
             }
@@ -152,9 +153,16 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 throw e;
             }
             repository = Git.open(localDirectory).getRepository();
+            String defaultBranch = getDefaultBranchName(repository);
+            branch = repo.getBranch() == null? defaultBranch : repo.getBranch();
+            trackBranch = !(branch.equals(defaultBranch));
+            configRepo();
             try (Git git = new Git(repository)) {
                 if (trackBranch) {
-                    git.branchCreate().setName(branch).setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.TRACK).setStartPoint("origin/" + branch).call();
+                    git.branchCreate().setName(branch)
+                            .setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.TRACK)
+                            .setStartPoint(String.join("/", REMOTE, branch))
+                            .call();
                     CheckoutCommand checkout = git.checkout();
                     checkout.setName(branch);
                     checkout.call();
@@ -162,7 +170,6 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 git.submoduleInit().call();
                 git.submoduleUpdate().setTimeout(TIMEOUT).call();
             }
-            configRepo();
             Log.logInfoRB("GIT_FINISH", "clone");
         }
 

@@ -143,7 +143,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     @SuppressWarnings({"avoidinlineconditionals"})
     private void initDocument() {
         StyleSheet baseStyleSheet = new StyleSheet();
-        HTMLEditorKit htmlEditorKit = (HTMLEditorKit) getEditorKit();
+        HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
         baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add default styles
         Font font = getFont();
         baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "

@@ -262,11 +262,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             scrollPane.notify(true);
         }
 
-        // When updating content, JScrollPane recalculate whether scrollbar required or not.
-        // Among updating text, to reduce computation time, we set a scrollbar policy to
-        // fixed value, and restore when all done.
-        final int old = scrollPane.getVerticalScrollBarPolicy();
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         StringBuilder txt = new StringBuilder("<html>");
         boolean wasPrev = false;
         int i = 0;
@@ -286,10 +281,15 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         }
         txt.append("</html>");
         appendText(txt.toString());
-        scrollPane.setVerticalScrollBarPolicy(old);
     }
 
     private void appendText(final String txt) {
+        // When updating content, JScrollPane recalculates whether the scrollbar
+        // is required or not. To reduce computation we use a fixed policy and
+        // restore when complete.
+        final int oldScrollBarPolicy = scrollPane.getVerticalScrollBarPolicy();
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
         Document doc = getDocument();
         try {
             String newContent;
@@ -308,6 +308,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             setDocument(doc);
         } catch (IOException | BadLocationException  e) {
             Log.log(e);
+        } finally {
+            scrollPane.setVerticalScrollBarPolicy(oldScrollBarPolicy);
         }
     }
 

@@ -50,7 +50,6 @@ import java.util.stream.Stream;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -287,12 +286,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     }
 
     private void appendText(final String txt) {
-        // When updating content, JScrollPane recalculates whether the scrollbar
-        // is required or not. To reduce computation we use a fixed policy and
-        // restore when complete.
-        final int oldScrollBarPolicy = scrollPane.getVerticalScrollBarPolicy();
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
         Document doc = getDocument();
         try {
             String newContent;
@@ -310,8 +303,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             setDocument(doc);
         } catch (IOException | BadLocationException  e) {
             Log.log(e);
-        } finally {
-            scrollPane.setVerticalScrollBarPolicy(oldScrollBarPolicy);
         }
     }
 

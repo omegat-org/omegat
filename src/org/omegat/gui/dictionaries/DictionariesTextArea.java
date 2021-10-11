@@ -101,6 +101,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     protected final List<String> displayedWords = new ArrayList<>();
 
     protected ITokenizer tokenizer;
+
     private final DockableScrollPane scrollPane;
 
     public DictionariesTextArea(IMainWindow mw) {

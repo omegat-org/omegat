@@ -201,22 +201,24 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         if (el == null) {
             return;
         }
-        int pos1 = el.getStartOffset();
-        int pos2 = el.getEndOffset();
+        int start = el.getStartOffset();
+        int end = el.getEndOffset();
         try {
-            // start position to be visible
-            Rectangle rect1 = Java8Compat.modelToView(this, pos1);
-            // end position of article
-            Rectangle rect2 = Java8Compat.modelToView(this, pos2);
-            // to show maximum text of selected, by moving to end of article then show start position,
-            if (rect2 != null) {
-                scrollRectToVisible(rect2);
+            // Start position of article
+            Rectangle startRect = Java8Compat.modelToView(this, start);
+            // End position of article
+            Rectangle endRect = Java8Compat.modelToView(this, end);
+            // To show maximum extent possible, scroll to end and then to start.
+            // Scrolling to startRect.union(endRect) will not show the start
+            // when initiating scroll from below the target article.
+            if (endRect != null) {
+                scrollRectToVisible(endRect);
             }
-            if (rect1 != null) {
-                scrollRectToVisible(rect1);
+            if (startRect != null) {
+                scrollRectToVisible(startRect);
             }
         } catch (BadLocationException ex) {
-            // shouldn't be throwed
+            // Shouldn't be thrown
         }
     }
 

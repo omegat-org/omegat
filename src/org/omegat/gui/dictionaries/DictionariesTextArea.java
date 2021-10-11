@@ -298,9 +298,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             } else {
                 newContent = doc.getText(0, doc.getLength()) + txt;
             }
-            // Updating document trigger to recalculation of display and redraw.
-            // Recreating new document and set content before displaying reduce
-            // rendering duration.
+            // Recreating the document is actually faster for very large
+            // documents
             EditorKit editorKit = getEditorKit();
             doc = editorKit.createDefaultDocument();
             ((HTMLDocument) doc).setPreservesUnknownTags(false);

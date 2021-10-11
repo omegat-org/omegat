@@ -159,7 +159,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 );
         htmlEditorKit.setStyleSheet(baseStyleSheet);
         setEditorKit(htmlEditorKit);
-        ((HTMLDocument) getDocument()).setPreservesUnknownTags(false);
     }
 
     @Override

@@ -138,6 +138,10 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
         attributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
         super.setFont(font.deriveFont(attributes));
+        if (displayedWords != null && !displayedWords.isEmpty()) {
+            initDocument();
+            refresh();
+        }
     }
 
     @SuppressWarnings({"avoidinlineconditionals"})

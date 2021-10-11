@@ -38,7 +38,6 @@ import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,6 +54,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.EditorKit;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
@@ -293,20 +293,19 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     private void appendText(final String txt) {
         Document doc = getDocument();
         try {
-            Reader r;
+            String newContent;
             if (doc.getLength() == 0) {
-                r = new StringReader(txt);
+                newContent = txt;
             } else {
-                StringBuilder sb = new StringBuilder(doc.getText(0, doc.getLength())).append(txt);
-                r = new StringReader(sb.toString());
+                newContent = doc.getText(0, doc.getLength()) + txt;
             }
             // Updating document trigger to recalculation of display and redraw.
             // Recreating new document and set content before displaying reduce
             // rendering duration.
-            HTMLEditorKit htmlEditorKit = (HTMLEditorKit) getEditorKit();
-            doc = htmlEditorKit.createDefaultDocument();
+            EditorKit editorKit = getEditorKit();
+            doc = editorKit.createDefaultDocument();
             ((HTMLDocument) doc).setPreservesUnknownTags(false);
-            htmlEditorKit.read(r, doc, 0);
+            editorKit.read(new StringReader(newContent), doc, 0);
             setDocument(doc);
         } catch (IOException | BadLocationException  e) {
             Log.log(e);

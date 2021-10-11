@@ -53,7 +53,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
@@ -102,7 +101,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     protected final List<String> displayedWords = new ArrayList<>();
 
     protected ITokenizer tokenizer;
-    private final HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
     private final DockableScrollPane scrollPane;
 
     public DictionariesTextArea(IMainWindow mw) {
@@ -141,16 +139,14 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         Map attributes = font.getAttributes();
         attributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
         super.setFont(font.deriveFont(attributes));
-        Document doc = getDocument();
-        if (!(doc instanceof HTMLDocument)) {
-            return;
-        }
     }
 
     @SuppressWarnings({"avoidinlineconditionals"})
     private void setStyle() {
-        Font font = getFont();
         StyleSheet baseStyleSheet = new StyleSheet();
+        HTMLEditorKit htmlEditorKit = (HTMLEditorKit) getEditorKit();
+        baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add default styles
+        Font font = getFont();
         baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "
                 + " font-size: " + font.getSize() + "; "
                 + " font-style: " + (font.getStyle() == Font.BOLD ? "bold"
@@ -193,7 +189,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
      */
     protected void callDictionary(String word) {
         UIThreadsUtil.mustBeSwingThread();
-        boolean debug = false;
         HTMLDocument doc = (HTMLDocument) getDocument();
 
         int index = displayedWords.indexOf(word.toLowerCase());
@@ -218,12 +213,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             if (rect1 != null) {
                 scrollRectToVisible(rect1);
             }
-            if (debug) {
-                // debug with highlight article
-                getHighlighter().removeAllHighlights();
-                getHighlighter().addHighlight(pos1, pos2, DefaultHighlighter.DefaultPainter);
-            }
-
         } catch (BadLocationException ex) {
             // shouldn't be throwed
         }
@@ -313,6 +302,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             // Updating document trigger to recalculation of display and redraw.
             // Recreating new document and set content before displaying reduce
             // rendering duration.
+            HTMLEditorKit htmlEditorKit = (HTMLEditorKit) getEditorKit();
             doc = htmlEditorKit.createDefaultDocument();
             ((HTMLDocument) doc).setPreservesUnknownTags(false);
             htmlEditorKit.read(r, doc, 0);

@@ -267,10 +267,9 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         // fixed value, and restore when all done.
         final int old = scrollPane.getVerticalScrollBarPolicy();
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        StringBuilder txt = new StringBuilder();
+        StringBuilder txt = new StringBuilder("<html>");
         boolean wasPrev = false;
         int i = 0;
-        txt.append("<html>");
         for (DictionaryEntry de : data) {
             if (wasPrev) {
                 txt.append("<br><hr>");

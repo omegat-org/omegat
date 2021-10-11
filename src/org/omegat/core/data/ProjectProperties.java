@@ -76,6 +76,7 @@ public class ProjectProperties {
             "**/desktop.ini",
             "**/Thumbs.db",
             "**/.DS_Store",
+            "**/~$*" // MS Office owner file; see https://superuser.com/a/405258/93651
             };
 
     public static List<String> getDefaultExcludes() {

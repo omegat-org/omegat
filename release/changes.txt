@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.7.0
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancement
   0 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
 5.7.0 vs 5.6.0
 
   Implemented requests:
+
+  - Add extra ignore patterns for opened MS Open XML files
+  https://sourceforge.net/p/omegat/feature-requests/1596/
 
   - Improve support for markup in DSL dictionaries
   https://sourceforge.net/p/omegat/feature-requests/1594

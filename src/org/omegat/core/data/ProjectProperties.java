@@ -76,6 +76,11 @@ public class ProjectProperties {
             "**/desktop.ini",
             "**/Thumbs.db",
             "**/.DS_Store",
+            "**/~$*.ppt?",
+            "**/~$*.doc?",
+            "**/~$*.xls?",
+            "**/~$*.dot?",
+            "**/~$*.vsdx"
             };
 
     public static List<String> getDefaultExcludes() {

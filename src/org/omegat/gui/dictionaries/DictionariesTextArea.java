@@ -42,6 +42,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -135,9 +136,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     }
 
     @Override
-    @SuppressWarnings({"avoidinlineconditionals", "unchecked", "rawtypes"})
     public void setFont(final Font font) {
-        Map attributes = font.getAttributes();
+        Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
         attributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
         super.setFont(font.deriveFont(attributes));
     }

@@ -67,7 +67,7 @@ public class LinkActionListener implements HyperlinkListener {
      */
     @Override
     public void hyperlinkUpdate(final HyperlinkEvent hyperlinkEvent) {
-        if (hyperlinkEvent.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
+        if (HyperlinkEvent.EventType.ACTIVATED.equals(hyperlinkEvent.getEventType()) {
             URL url = hyperlinkEvent.getURL();
             if (url.getProtocol().equals("file")) {
                 try {

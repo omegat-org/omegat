@@ -108,8 +108,6 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     public DictionariesTextArea(IMainWindow mw) {
         super(true);
 
-        setContentType("text/html");
-        ((HTMLDocument) getDocument()).setPreservesUnknownTags(false);
         setFont(getFont());
         setStyle();
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Dictionary");
@@ -158,6 +156,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 );
         htmlEditorKit.setStyleSheet(baseStyleSheet);
         setEditorKit(htmlEditorKit);
+        ((HTMLDocument) getDocument()).setPreservesUnknownTags(false);
     }
 
     @Override

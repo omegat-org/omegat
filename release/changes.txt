@@ -7,6 +7,10 @@
 ----------------------------------------------------------------------
 5.7.0 vs 5.6.0
 
+  Implemented requests:
+  - Add extra ignore patterns for opened MS Open XML files
+  https://sourceforge.net/p/omegat/feature-requests/1596/
+
   Localisation Updates:
 
   - Italian localisation updated to 5.6 (UI)

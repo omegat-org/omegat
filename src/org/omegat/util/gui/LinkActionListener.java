@@ -31,6 +31,7 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.SwingWorker;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
@@ -42,20 +43,26 @@ import javax.swing.event.HyperlinkListener;
 public class LinkActionListener implements HyperlinkListener {
 
     /**
-     * Play specified file on defualt device.
+     * Play specified file on default device.
      * @param file media file.
      */
     public static synchronized void playSound(final File file) {
-        new Thread(() -> {
-            try {
-                Clip clip = AudioSystem.getClip();
+        new SwingWorker<Void, Void>() {
+            Clip clip;
+            @Override
+            protected Void doInBackground() throws Exception {
+                clip = AudioSystem.getClip();
                 AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
                 clip.open(inputStream);
                 clip.start();
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
+                return null;
             }
-        }).start();
+            @Override
+            protected void done() {
+                clip.drain();
+                clip.close();
+            }
+        }.execute();
     }
 
     /**
@@ -67,12 +74,12 @@ public class LinkActionListener implements HyperlinkListener {
      */
     @Override
     public void hyperlinkUpdate(final HyperlinkEvent hyperlinkEvent) {
-        if (HyperlinkEvent.EventType.ACTIVATED.equals(hyperlinkEvent.getEventType()) {
+        if (HyperlinkEvent.EventType.ACTIVATED.equals(hyperlinkEvent.getEventType())) {
             URL url = hyperlinkEvent.getURL();
-            if ("file".equals(url.getProtocol()) {
+            if ("file".equals(url.getProtocol())) {
                 try {
                     String path = url.toURI().getPath();
-                    if (path.endsWith(".wav") || path.endsWith(".WAV")) {
+                    if (path != null && (path.endsWith(".wav") || path.endsWith(".WAV"))) {
                         playSound(new File(path));
                     }
                 } catch (URISyntaxException ignored) {

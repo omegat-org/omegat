@@ -109,7 +109,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         super(true);
 
         setFont(getFont());
-        setStyle();
+        initDocument();
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Dictionary");
         scrollPane = new DockableScrollPane("DICTIONARY", title, this, true);
         mw.addDockable(scrollPane);
@@ -141,7 +141,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     }
 
     @SuppressWarnings({"avoidinlineconditionals"})
-    private void setStyle() {
+    private void initDocument() {
         StyleSheet baseStyleSheet = new StyleSheet();
         HTMLEditorKit htmlEditorKit = (HTMLEditorKit) getEditorKit();
         baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add default styles

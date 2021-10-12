@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.7.0
 ----------------------------------------------------------------------
-  2 Enhancement
+  3 Enhancements
   0 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Improve support for markup in DSL dictionaries
   https://sourceforge.net/p/omegat/feature-requests/1594
+
+  - Display images in Dictionary pane
+  https://sourceforge.net/p/omegat/feature-requests/1595/
 
   Localisation Updates:
 

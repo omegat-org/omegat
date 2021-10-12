@@ -189,9 +189,9 @@ public class LingvoDSL implements IDictionaryFactory {
         TAG_REPLACEMENTS.put(Pattern.compile(
                 "\\[s](?<media>.+?\\.wav)\\[/s]"), "<a href=\"file://" + DICT_DIR_TAG + "/${media}\">${media}</a>");
         TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[s](?<media>.+?\\.jpg)\\[/s]"), "<img src=\"file://"+ DICT_DIR_TAG + "/${media}\"/>");
+                "\\[s](?<media>.+?\\.jpg)\\[/s]"), "<img src=\"file://" + DICT_DIR_TAG + "/${media}\"/>");
         TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[s](?<media>.+?\\.png)\\[/s]"), "<img src=\"file://"+ DICT_DIR_TAG + "/${media}\"/>");
+                "\\[s](?<media>.+?\\.png)\\[/s]"), "<img src=\"file://" + DICT_DIR_TAG + "/${media}\"/>");
         TAG_REPLACEMENTS.put(Pattern.compile(
                 "\\[video](?<media>.+?)\\[/video]"), "<a href=\"file://" + DICT_DIR_TAG + "/${media}\">${media}</a>");
         TAG_REPLACEMENTS.put(Pattern.compile(

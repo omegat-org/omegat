@@ -24,8 +24,6 @@
  **************************************************************************/
 package org.omegat.util.gui;
 
-import static java.awt.Desktop.getDesktop;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -44,9 +42,9 @@ public class ExternalBrowserLaunchingLinkListener implements HyperlinkListener {
     public void hyperlinkUpdate(final HyperlinkEvent hyperlinkEvent) {
         if (HyperlinkEvent.EventType.ACTIVATED.equals(hyperlinkEvent.getEventType())) {
             URL url = hyperlinkEvent.getURL();
-            if ("https".equals(url.getProtocol())) {
+            if ("https".equals(url.getProtocol()) || "http".equals(url.getProtocol())) {
                 try {
-                    getDesktop().browse(url.toURI());
+                    DesktopWrapper.browse(url.toURI());
                 } catch (IOException | URISyntaxException ignore) {
                 }
             }

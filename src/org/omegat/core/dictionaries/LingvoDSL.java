@@ -5,7 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                2015 Aaron Madlon-Kay
-               2021 Aaron Madlon-Kay, Gabix, Hiroshi Miura
+               2021 Aaron Madlon-Kay, Dmitri Gabinski, Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 

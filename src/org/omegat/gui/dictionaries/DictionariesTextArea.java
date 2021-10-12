@@ -78,6 +78,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.ExternalBrowserLaunchingLinkListener;
 import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles.EditorColor;
@@ -114,6 +115,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         mw.addDockable(scrollPane);
 
         addMouseListener(mouseCallback);
+        addHyperlinkListener(new ExternalBrowserLaunchingLinkListener());
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);

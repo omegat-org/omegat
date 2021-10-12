@@ -55,11 +55,11 @@ public class SoundActionListener implements HyperlinkListener {
                 AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
                 clip.open(inputStream);
                 clip.start();
+                clip.drain();
                 return null;
             }
             @Override
             protected void done() {
-                clip.drain();
                 clip.close();
             }
         }.execute();

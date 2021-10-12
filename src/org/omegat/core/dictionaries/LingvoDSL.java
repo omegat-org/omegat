@@ -68,7 +68,7 @@ public class LingvoDSL implements IDictionaryFactory {
     // An ordered list of Pair of Regex pattern and replacement string
     private static final TreeMap<Pattern, String> TAG_REPLACEMENTS = new TreeMap<>(
             Comparator.comparing(Pattern::pattern));
-
+    private static final String DICT_DIR_TAG = "@dir@";
     private static final int BLOCKSIZE = 8192;
 
     @Override
@@ -119,7 +119,7 @@ public class LingvoDSL implements IDictionaryFactory {
                   .map(LingvoDSL::replaceTag)
                   .forEach(line -> {
                         if (Character.isWhitespace(line.codePointAt(0))) {
-                            trans.append(line.trim().replaceAll("@dir@", dictionaryDir)).append('\n');
+                            trans.append(line.trim().replaceAll(DICT_DIR_TAG, dictionaryDir)).append('\n');
                         } else {
                             if (word.length() > 0) {
                                 data.add(word.toString(), trans.toString());
@@ -187,13 +187,15 @@ public class LingvoDSL implements IDictionaryFactory {
         // Media and image files are converted into hyperlink or image tags.
         // @dir@ is a special tag that is replaced absolute path of dictionary in loadData() method.
         TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[s](?<media>.+?\\.wav)\\[/s]"), "<a href=\"file://@dir@/${media}\">SOUND: ${media}</a>");
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[s](?<media>.+?\\.jpg)\\[/s]"), "<img src=\"file://@dir@/${media}\"/>");
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[s](?<media>.+?\\.png)\\[/s]"), "<img src=\"file://@dir@/${media}\"/>");
+                "\\[s](?<media>.+?\\.wav)\\[/s]"), "<a href=\"file://" + DICT_DIR_TAG + "/${media}\">${media}</a>");
         TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[video](?<media>.+?)\\[/video]"), "<a href=\"file://@dir@/${media}\">VIDEO: ${media}</a>");
+                "\\[s](?<media>.+?\\.jpg)\\[/s]"), "<img src=\"file://"+ DICT_DIR_TAG + "/${media}\"/>");
         TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[s](?<media>.+?)\\[/s]"), "<a href=\"file://@dir@/${media}\">MEDIA: ${media}</a>");
+                "\\[s](?<media>.+?\\.png)\\[/s]"), "<img src=\"file://"+ DICT_DIR_TAG + "/${media}\"/>");
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[video](?<media>.+?)\\[/video]"), "<a href=\"file://" + DICT_DIR_TAG + "/${media}\">${media}</a>");
+        TAG_REPLACEMENTS.put(Pattern.compile(
+                "\\[s](?<media>.+?)\\[/s]"), "<a href=\"file://" + DICT_DIR_TAG + "/${media}\">${media}</a>");
         // Line feed and indents
         TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("[br]")), "<br/>");
         // Ignore tag 'm" but "m1" to indent 1 level, "m2" to indent 2 level and
@@ -203,9 +205,9 @@ public class LingvoDSL implements IDictionaryFactory {
         TAG_REPLACEMENTS.put(Pattern.compile(
                 "\\[m2](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 60px\">${content}</p>");
         TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[(m3|m4|m5|m6|m7|m8|m9)](?<content>.+?)\\[/m]"), "<p style=\\\"text-indent: 90px\">${content}</p>");
+                "\\[(m3|m4|m5|m6|m7|m8|m9)](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 90px\">${content}</p>");
         // External link may launch external browser
-        TAG_REPLACEMENTS.put(Pattern.compile( "\\[url](?<link>.+?)\\[/url]"), "<a href='${link}'>${link}</a>");
+        TAG_REPLACEMENTS.put(Pattern.compile( "\\[url](?<link>.+?)\\[/url]"), "<a href=\"${link}\">${link}</a>");
         // The following line tries to replace a letter surrounded by ['][/']
         // tags (indicating stress) with a red letter (the default behavior in
         // Lingvo).

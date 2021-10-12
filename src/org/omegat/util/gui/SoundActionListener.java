@@ -40,7 +40,7 @@ import javax.swing.event.HyperlinkListener;
  *
  * @author Hiroshi Miura
  */
-public class LinkActionListener implements HyperlinkListener {
+public class SoundActionListener implements HyperlinkListener {
 
     /**
      * Play specified file on default device.

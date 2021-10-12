@@ -72,7 +72,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.IPaneMenu;
-import org.omegat.util.gui.LinkActionListener;
+import org.omegat.util.gui.SoundActionListener;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -111,7 +111,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         mw.addDockable(scrollPane);
 
         addMouseListener(mouseCallback);
-        addHyperlinkListener(new LinkActionListener());
+        addHyperlinkListener(new SoundActionListener());
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);

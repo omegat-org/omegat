@@ -19,7 +19,7 @@ Pode atopar información máis actualizada de OmegaT en
 
 Pode atopar asistencia para o usuario no grupo de usuarios de Yahoo, onde se 
 pode buscar nos arquivos sen precisar subscrición:
-     http://tech.groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Se quere facer algunha petición de mellora (en inglés), pode facelo no sitio de SourceForge:
      https://sourceforge.net/p/omegat/feature-requests/

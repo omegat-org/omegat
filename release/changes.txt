@@ -1,9 +1,30 @@
 ----------------------------------------------------------------------
- OmegaT 5.6.0
+ OmegaT 5.7.0
 ----------------------------------------------------------------------
-  3 Enhancements
-  2 Bug fixes
-  0 Localisation updates
+  2 Enhancements
+  0 Bug fixes
+  1 Localisation updates
+----------------------------------------------------------------------
+5.7.0 vs 5.6.0
+
+  Implemented requests:
+
+  - Improve support for markup in DSL dictionaries
+  https://sourceforge.net/p/omegat/feature-requests/1594
+
+  - Display images in Dictionary pane
+  https://sourceforge.net/p/omegat/feature-requests/1595/
+
+  Localisation Updates:
+
+  - Italian localisation updated to 5.6 (UI)
+
+----------------------------------------------------------------------
+ OmegaT 5.6.0 (2021-10-05)
+----------------------------------------------------------------------
+  5 Enhancements
+  8 Bug fixes
+  9 Localisation updates
 ----------------------------------------------------------------------
 5.6.0 vs 5.5.0
 
@@ -15,7 +36,31 @@
   - Aggressive Font Fallback doesn't work on Java 11
   https://sourceforge.net/p/omegat/bugs/1051/
 
+  - HTML2 filter displays empty segments in preserve space mode
+  https://sourceforge.net/p/omegat/bugs/1062/
+
+  - HTML2 filter rewrite encoding issues
+  https://sourceforge.net/p/omegat/bugs/1064/
+
+  - Effect of "Untranslated segments only" unclear
+  https://sourceforge.net/p/omegat/bugs/995/
+
+  - Glossary translation color not applied to term separator
+  https://sourceforge.net/p/omegat/bugs/1071/
+
+  - Short freeze when displaying dictionary entries
+  https://sourceforge.net/p/omegat/bugs/1056/
+
+  - Properties notification color is too bright in dark mode
+  https://sourceforge.net/p/omegat/bugs/1055/
+
   Implemented requests:
+
+  - Add extra ignore patterns for ".git", ".hg", and ".repositories"
+  https://sourceforge.net/p/omegat/feature-requests/1589/
+
+  - Support using arbitrary git branch name
+  https://sourceforge.net/p/omegat/feature-requests/1531/
 
   - Restart application from Project menu
   https://sourceforge.net/p/omegat/feature-requests/1564/
@@ -25,6 +70,18 @@
 
   - Detect TSV glossary encoding via magic comment
   https://sourceforge.net/p/omegat/feature-requests/1579/
+
+  Localisation Updates:
+
+  - Corsican localisation updated to 5.6 (UI, readme, scripts)
+  - Dutch localisation updated to 5.6 (UI)
+  - French localisation updated to 5.6 (UI, documentation)
+  - German localisation updated to 5.6 (UI, readme)
+  - Japanese localisation updated to 5.6 (UI)
+  - Portuguese localisation updated to 5.6 (UI, Instant Start)
+  - Russian localisation updated to 5.6 (UI)
+  - Simplified Chinese localisation updated to 5.6 (UI)
+  - Ukrainian localisation updated to 5.6 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 5.5.0 (2021-05-18)
@@ -8636,6 +8693,7 @@ Bug fix release:
 
 - Fixed Bad Segmentation of some files,
   as documented in: http://groups.yahoo.com/group/OmegaT/message/672
+  (https://sourceforge.net/p/omegat/mailman/message/36811754/)
 
 - (minor) .properties file handler had off-by-one error when
   parsing Unicode symbols of a form \uXXXX.

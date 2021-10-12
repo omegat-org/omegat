@@ -22,7 +22,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Utilisez l'utilitaire de désarchivage « untar » (ou l'un de ses équivalents, par exemple<filename> winrar</filename> pour Windows) pour extraire le contenu du fichier dans le dossier « dictionnary » (dictionnaire) du projet. Trois fichiers comportant les extensions <emphasis>dz, idx </emphasis>et <emphasis>ifo</emphasis> doivent s'y trouver.</para>
+        <para>Utilisez l'utilitaire de désarchivage « untar » (ou l'un de ses équivalents, par exemple<filename>winrar</filename> pour Windows) pour extraire le contenu du fichier dans le dossier « dictionary » (dictionnaire) du projet. Trois fichiers comportant les extensions <emphasis>dz, idx </emphasis>et <emphasis>ifo</emphasis> doivent s'y trouver.</para>
       </listitem>
     </itemizedlist>
 

@@ -16,7 +16,7 @@ OmegaT에 대한 최신 정보는 아래에서 찾을 수 있습니다.
       http://www.omegat.org/
 
 야후 사용자 그룹(다국어)의 사용자 지원, 기록 보관소는 가입하지 않고 검색할 수 있습니다. :
-     http://tech.groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 SourceForge 사이트에서 개선점 요청(영어로)  :
      https://sourceforge.net/p/omegat/feature-requests/

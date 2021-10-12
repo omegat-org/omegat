@@ -41,7 +41,7 @@
         <term>Supprimer les balises</term>
 
         <listitem>
-          <para>Lorsque cette option est activée, toutes les balises de formatage sont retirées des segments source. Cela est particulièrement utile pour des textes dont le formatage intégré n'est pas vraiment utile (par exemple des PDF passés par la reconnaissance optique de caractères, des documents .odt ou .docx mal convertis, etc). Normalement, il doit toujours être possible d'ouvrir les documents cibles puisque seuls les balises intégrées sont supprimées. Le formatage non visible (c'est-à-dire qui n'apparaît pas sous forme de balises dans l'Éditeur d'OmegaT) est conservé dans les documents cibles.</para>
+          <para>Lorsque cette option est activée, toutes les balises de formatage sont retirées des segments source. Cela est particulièrement utile pour des textes dont le formatage intégré n'est pas vraiment utile (par exemple, des PDF passés par la reconnaissance optique de caractères, des documents .odt ou .docx mal convertis, etc.) Normalement, il doit toujours être possible d'ouvrir les documents cibles puisque seuls les balises intégrées sont supprimées. Le formatage non visible (c'est-à-dire qui n'apparaît pas sous forme de balises dans l'Éditeur d'OmegaT) est conservé dans les documents cibles.</para>
         </listitem>
       </varlistentry>
 

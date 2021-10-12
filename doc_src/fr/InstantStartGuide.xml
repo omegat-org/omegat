@@ -32,8 +32,7 @@
   <section>
     <title>Validation des balises</title>
 
-    <para>Si vos fichiers sources sont des fichiers formatés, par exemple au format Microsoft Word, LibreOffice Writer ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises essentielles sans rapport direct avec le formatage mais qui sont importantes dans les fichiers sources (ainsi que dans les fichiers traduits). Une phrase peut se présenter comme ceci :
-<mediaobject>
+    <para>Si vos fichiers sources sont des fichiers formatés, par exemple au format Microsoft Word, LibreOffice Writer ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises essentielles sans rapport direct avec le formatage mais qui sont importantes dans les fichiers sources (ainsi que dans les fichiers traduits). Une phrase peut se présenter comme ceci :<mediaobject>
       <imageobject role="html">
         <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
       </imageobject>
@@ -43,8 +42,7 @@
     </mediaobject>
     </para>
 
-    <para>Et OmegaT va la représenter de la manière suivante :
-<mediaobject>
+    <para>Et OmegaT va la représenter de la manière suivante :<mediaobject>
       <imageobject role="html">
         <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
       </imageobject>

@@ -40,7 +40,7 @@
   <section>
     <title>Format de fichier</title>
 
-    <para>Les fichiers glossaire d'OmegaT sont de simples fichiers texte brut contenant trois colonnes, avec le terme source dans la première colonne, le terme cible optionnel dans la deuxième colonne et un commentaire optionnel dans la troisième colonne.</para>
+    <para>Les fichiers glossaire d'OmegaT sont de simples fichiers texte brut contenant trois colonnes, avec le terme source dans la première colonne, un terme cible optionnel dans la deuxième colonne et un commentaire optionnel dans la troisième colonne.</para>
 
     <para>Les glossaires en texte brut peuvent être des fichiers « tab separated values » (TSV, ou « valeurs séparées par des tabulations »), ou des « comma separated values » (CSV, ou « valeurs séparées par des virgules »). Une troisième possibilité est le standard ISO TBX (TermBase eXchange).</para>
 

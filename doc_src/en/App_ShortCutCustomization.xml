@@ -316,6 +316,14 @@
           </row>
 
           <row>
+            <entry>Restart</entry>
+
+            <entry/>
+
+            <entry>projectRestartMenuItem</entry>
+          </row>
+
+          <row>
             <entry>Quit</entry>
 
             <entry><keycap>Ctrl+Q</keycap></entry>

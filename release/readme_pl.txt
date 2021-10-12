@@ -18,7 +18,7 @@ Najświeższe informacje o programie OmegaT znajdziesz na:
       http://www.omegat.org/
 
 Wsparcie użytkowników znajdziesz na (wielojęzycznej) grupie Yahoo, gdzie znajdują się archiwa, które możesz przeglądać bez subskrybowania do grupy:
-     http://tech.groups.yahoo.com/group/OmegaT/
+     https://omegat.org/support
 
 Prośby o usprawnienia programu (w języku angielskim) znajdują się w domenie SourceForge:
      https://sourceforge.net/p/omegat/feature-requests/

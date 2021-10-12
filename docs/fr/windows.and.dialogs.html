@@ -317,7 +317,7 @@
                         <span class="term">Supprimer les balises</span>
                      </dt>
                      <dd>
-                        <p>Lorsque cette option est activée, toutes les balises de formatage sont retirées des segments source. Cela est particulièrement utile pour des textes dont le formatage intégré n'est pas vraiment utile (par exemple des PDF passés par la reconnaissance optique de caractères, des documents .odt ou .docx mal convertis, etc). Normalement, il doit toujours être possible d'ouvrir les documents cibles puisque seuls les balises intégrées sont supprimées. Le formatage non visible (c'est-à-dire qui n'apparaît pas sous forme de balises dans l'Éditeur d'OmegaT) est conservé dans les documents cibles.</p>
+                        <p>Lorsque cette option est activée, toutes les balises de formatage sont retirées des segments source. Cela est particulièrement utile pour des textes dont le formatage intégré n'est pas vraiment utile (par exemple, des PDF passés par la reconnaissance optique de caractères, des documents .odt ou .docx mal convertis, etc.) Normalement, il doit toujours être possible d'ouvrir les documents cibles puisque seuls les balises intégrées sont supprimées. Le formatage non visible (c'est-à-dire qui n'apparaît pas sous forme de balises dans l'Éditeur d'OmegaT) est conservé dans les documents cibles.</p>
                      </dd>
                      <dt>
                         <span class="term">Commande de post-traitement externe</span>
@@ -450,7 +450,7 @@
             <p>
                <span class="bold">
                   <strong>Ajouter des fichiers au projet : </strong>
-               </span>Il est possible d'ajouter des fichiers source au projet en cliquant sur « <span class="guimenuitem">Importer des fichiers source...</span> ». Ceci copie les fichiers sélectionnés dans le dossier <code class="filename">source</code> et recharge le projet pour importer les nouveaux fichiers. Il est également possible d'ajouter des fichiers source provenant de pages internet, écrits dans MediaWiki, en cliquant sur <span class="guimenuitem">Importer depuis MediaWiki</span> et en saisissant l'URL correspondant.</p>
+               </span>Il est possible d'ajouter des fichiers source au projet en cliquant sur « <span class="guimenuitem">Importer des fichiers source...</span> ». Ceci copie les fichiers sélectionnés dans le dossier <code class="filename">source</code> et recharge le projet pour importer les nouveaux fichiers. Il est également possible d'ajouter des fichiers source provenant de pages internet , écrits dans MediaWiki, en cliquant sur <span class="guimenuitem">Importer depuis MediaWiki</span>» et en saisissant l'URL correspondant.</p>
          </section>
          <section class="section" id="windows.textsearch">
             <div class="titlepage">
@@ -615,7 +615,7 @@
                         <p>
                            <span class="bold">
                               <strong>Respecter la casse</strong>
-                           </span> : la recherche sera effectuée pour la chaîne de caractères exactement spécifiée, c'est-à-dire que la recherche tient compte de la casse (majuscule, minuscule).</p>
+                           </span> : la recherche sera effectuée pour la chaîne de caractères exactement spécifiée, c'est-à-dire que la recherche tient compte de la casse.</p>
                      </li>
                      <li class="listitem">
                         <p>
@@ -1272,8 +1272,8 @@
                         <li class="listitem">
                            <p>
                               <span class="emphasis">
-                                 <em>Permet les traductions vides dans le fichier cible </em>
-                              </span>:</p>
+                                 <em>Permet les traductions vides dans le fichier cible</em>
+                              </span> :</p>
                            <p>S'il est activé, lorsqu'un segment d'un fichier PO (qui peut représenter un paragraphe entier) n'est pas traduit, la traduction sera vide dans le fichier cible. De façon pratique, cela signifie que le segment <code class="code">msgstr</code> dans le fichier cible PO, s'il est créé, sera laissé vide. Ceci étant le comportement standard pour les fichiers PO, il est activé par défaut. Si cette option est désactivée, le texte source sera copié dans le segment cible.</p>
                         </li>
                      </ul>
@@ -1548,9 +1548,9 @@
                            </div>
                         </div>
                      </div>
-                     <p>Lorsqu'OmegaT rencontre un fichier dans le dossier source, il tente de sélectionner le filtre basé sur l'extension du fichier. Plus exactement, OmegaT tente de faire correspondre chaque masque de nom de fichier de fichier source avec le nom de fichier. Par exemple, le masque <code class="literal">*.xhtml </code> correspond à tous les fichiers possédant l'extension <code class="literal">.xhtml</code>. Si le filtre approprié est trouvé, le fichier lui est attribué pour qu'il puisse le traiter. Par exemple, par défaut, les filtres XHTML sont utilisés pour traiter les fichiers qui portent l'extension .xhtml. Vous pouvez changer ou ajouter des masques de nom de fichier pour spécifier les fichiers devant être traités par chaque filtre de fichiers. Les masques de nom de fichier source utilisent des caractères génériques similaires à ceux utilisés dans<span class="bold">
-                           <strong>Rechercher... </strong>
-                        </span>Le caractère « * » correspond à zéro, un ou plusieurs caractères. Le caractère « ? » correspond à exactement un caractère. Tous les autres caractères ne correspondent qu'à eux-même. Par exemple, si vous souhaitez que le filtre texte traite les fichiers lisez-moi (=<code class="literal">readme, read.me</code>, et <code class="literal">readme.txt</code>) vous devez utiliser le masque <code class="literal">read*</code>.</p>
+                     <p>Lorsqu'OmegaT rencontre un fichier dans le dossier source, il tente de sélectionner le filtre basé sur l'extension du fichier. Plus exactement, OmegaT tente de faire correspondre chaque masque de nom de fichier de fichier source avec le nom de fichier. Par exemple, le masque <code class="literal">*.xhtml </code> correspond à tous les fichiers possédant l'extension <code class="literal">.xhtml</code>. Si le filtre approprié est trouvé, le fichier lui est attribué pour qu'il puisse le traiter. Par exemple, par défaut, les filtres XHTML sont utilisés pour traiter les fichiers qui portent l'extension .xhtml. Vous pouvez changer ou ajouter des masques de nom de fichier pour spécifier les fichiers devant être traités par chaque filtre de fichiers. Les masques de nom de fichier source utilisent des caractères génériques similaires à ceux utilisés dans <span class="bold">
+                           <strong> Rechercher... </strong>
+                        </span>Le caractère « * » correspond à zéro, un ou plusieurs caractères. Le caractère « ? » correspond à exactement un caractère. Tous les autres caractères ne correspondent qu'à eux-mêmes. Par exemple, si vous souhaitez que le filtre texte traite les fichiers lisez-moi (=<code class="literal">readme, read.me</code>, et <code class="literal">readme.txt</code>) vous devez utiliser le masque <code class="literal">read*</code>.</p>
                   </section>
                   <section class="section" id="source.and.target.files.encoding">
                      <div class="titlepage">
@@ -1647,7 +1647,7 @@
                            </li>
                            <li class="listitem">
                               <p>
-                                 <code class="literal">${timestamp-????}</code> – date et heure du système au moment de la génération des différents masques</p>
+                                 <code class="literal">${timestamp-????}</code> – date et heure du système au moment de la génération des différents masques de temps</p>
                               <p>Voir la <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">documentation Oracle</a>pour des exemples de masques « SimpleDateFormat »</p>
                            </li>
                            <li class="listitem">
@@ -1756,11 +1756,11 @@
                      </div>
                   </div>
                   <p>Le processus de segmentation peut être représenté comme ceci : le curseur se déplace le long du texte, un caractère à la fois. A chaque position du curseur, des règles (consistant en masques <span class="bold">
-                        <strong>Avant </strong>
-                     </span>et <span class="bold">
-                        <strong>Après </strong>
+                        <strong>Avant</strong>
+                     </span> et <span class="bold">
+                        <strong>Après</strong>
                      </span>) sont appliquées dans leur ordre donné pour voir si les masques <span class="bold">
-                        <strong> Avant</strong>
+                        <strong>Avant</strong>
                      </span> sont valides pour le texte à gauche du curseur et si les masques <span class="bold">
                         <strong>Après</strong>
                      </span> correspondant le sont pour le texte situé à sa droite. Si la règle correspond, soit le curseur continue sans créer de rupture de segment (règle d'exception), soit une nouvelle interruption de segment est créée là où se trouve le curseur (règle de segmentation).</p>
@@ -1783,7 +1783,7 @@
                            <span class="term">Règle d'exception</span>
                         </dt>
                         <dd>
-                           <p>spécifie quelles parties du texte ne doivent PAS être séparées. Malgré le point, <span class="emphasis">
+                           <p>Spécifie quelles parties du texte ne doivent PAS être séparées. Malgré le point, <span class="emphasis">
                                  <em>« Mrs. Dalloway »</em>
                               </span> ne doit pas être séparé en deux segments. Il est donc nécessaire d'établir une règle d'exception pour le terme Mrs (ainsi que pour M, Dr, prof etc) suivi d'un point. Pour définir une règle comme étant une règle d'exception, décochez la case Segmentation/Exception.</p>
                         </dd>
@@ -1799,7 +1799,7 @@
                         </div>
                      </div>
                   </div>
-                  <p>Tous les groupes de règles de segmentation s'appliquant à un masque de langue sont actifs et sont appliqués dans l'ordre de priorité donné, de sorte que les règles spécifiques à la langue pratiquée passent avant les règles par défaut. Par exemple, les règles relatives à l'anglais américain (EN-US) passent avant les règles relatives à l'anglais (EN.*), et avant les règles par défaut (.*). Ainsi, lors de traduction partant de l'anglais américain, les règles relatives à l'anglais américain (s'il y en a) seront appliquées les premières, suivies par les règles relatives à l'anglais suivies, enfin, par les règles par défaut.</p>
+                  <p>Tous les groupes de règles de segmentation s'appliquant à un masque de langue sont actifs et sont appliqués dans l'ordre de priorité donné, de sorte que les règles spécifiques à la langue pratiquée passent avant les règles par défaut. Par exemple, les règles relatives à l'anglais américain (EN-US) passent avant les règles relatives à l'anglais (EN.*), et avant les règles par défaut (.*). Ainsi, lors de traduction partant de l'anglais américain, les règles relatives à l'anglais américain (s'il y en a) seront appliquées les premières, suivies des règles relatives à l'anglais, suivies, enfin, des règles par défaut.</p>
                </section>
                <section class="section" id="creating.new.rule">
                   <div class="titlepage">
@@ -1848,10 +1848,10 @@
                         </thead>
                         <tbody>
                            <tr>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Définissez le segment comme commençant après un point (« . ») suivit d'un espace, d'une tabulation...</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Définissez le segment comme commençant après un point (« . ») suivi d'une espace, d'une tabulation...</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
-                              <td style="text-align: left; border-bottom: 1px solid ; ">« \. » représente le point en tant que caractère. « \s » représente tous les caractères espaces blanc (espace, tabulation, nouvelle page etc.)</td>
+                              <td style="text-align: left; border-bottom: 1px solid ; ">« \. » représente le point en tant que caractère. « \s » représente tous les caractères espaces (espace, tabulation, nouvelle page, etc.)</td>
                            </tr>
                            <tr>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ne pas segmenter après M. (Monsieur)</td>
@@ -2075,7 +2075,7 @@
                         <span class="term">Autoriser la modification des balises</span>
                      </dt>
                      <dd>
-                        <p>Décochez cette option pour empêcher les balises d'être endommagées (par exemple par une suppression partielle) durant les modifications. Supprimmer une balises entière reste possible dans ce cas, en utilisant Ctrl+Retour arrière/Suppr ou en la sélectionnant entièrement (Ctrl+Maj+Gauche/Droite) puis en la supprimant (Suppr ou Ctrl+X).</p>
+                        <p>Décochez cette option pour empêcher les balises d'être endommagées (par exemple par une suppression partielle) durant les modifications. Supprimmer une balise entière reste possible dans ce cas, en utilisant Ctrl+Retour arrière/Suppr ou en la sélectionnant entièrement (Ctrl+Maj+Gauche/Droite) puis en la supprimant (Suppr ou Ctrl+X).</p>
                      </dd>
                   </dl>
                </div>
@@ -2165,7 +2165,7 @@
                      </dt>
                      <dd>
                         <p>Par défaut, les premières propositions affichées dans le volet <span class="guilabel">Correspondances</span> sont déterminées en utilisant la lématisation.</p>
-                        <p>Pour avoir des correspondances plus littérales et proches de 100%, sélectionner plutôt l'option <span class="guilabel">Texte complet, y compris balises et nombres</span>.</p>
+                        <p>Pour avoir des correspondances plus littérales et proches de 100 %, sélectionner plutôt l'option <span class="guilabel">Texte complet, y compris balises et nombres</span>.</p>
                      </dd>
                      <dt>
                         <span class="term">Tags of non-OmegaT TMXs displaying</span>

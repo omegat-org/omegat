@@ -52,7 +52,7 @@
           <listitem>Les exécutions (éléments textes) sont définies en RTL</listitem>
         </itemizedlist></para>
 
-      <para>Pour éviter que les paramètres d'affichage des fichiers cible ne changent à chaque fois que les fichiers sont ouverts, il est possible de changer les paramètres d'affichage des fichiers source de sorte que les fichiers cible héritent de ces paramètres. De telles modification sont possibles, par exemple, dans les fichiers ODF.</para>
+      <para>Pour éviter que les paramètres d'affichage des fichiers cible ne changent à chaque fois que les fichiers sont ouverts, il est possible de changer les paramètres d'affichage des fichiers source de sorte que les fichiers cible héritent de ces paramètres. De telles modifications sont possibles, par exemple, dans les fichiers ODF.</para>
 
   </section>
 </section>

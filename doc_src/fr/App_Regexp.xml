@@ -492,7 +492,7 @@
       </mediaobject>
     </figure>
 
-    <para>Voir<ulink url="http://weitz.de/regex-coach/">Le Regex Coach</ulink> pour les versions Windows, Linux et FreeBSD d'un outil autonome. Cela ressemble beaucoup à l'exemple ci-dessus.</para>
+    <para>Voir <ulink url="http://weitz.de/regex-coach/">Le Regex Coach</ulink> pour les versions Windows, Linux et FreeBSD d'un outil autonome. Cela ressemble beaucoup à l'exemple ci-dessus.</para>
 
     <para>De nombreux cas d'expressions régulières utiles peuvent être trouvés dans <application>OmegaT</application> même (voir Options &gt; Segmentation). La liste suivante inclut des expressions qui pourront vous être utiles si vous effectuez des recherches dans la mémoire de traduction :</para>
 

@@ -88,7 +88,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Respecter la casse</emphasis> : la recherche sera effectuée pour la chaîne de caractères exactement spécifiée, c'est-à-dire que la recherche tient compte de la casse (majuscule, minuscule).</para>
+        <para><emphasis role="bold">Respecter la casse</emphasis> : la recherche sera effectuée pour la chaîne de caractères exactement spécifiée, c'est-à-dire que la recherche tient compte de la casse.</para>
       </listitem>
 
       <listitem>

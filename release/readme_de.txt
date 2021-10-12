@@ -194,8 +194,9 @@ Zu den früheren Mitwirkenden gehören:
 
 und viele, viele andere sehr hilfsbereite Personen
 
-(If you think you have significantly contributed to the OmegaT Project but you
-don't see your name on the lists, feel free to contact us.)
+(Wenn Sie der Meinung sind, dass Sie einen wichtigen Beitrag zum OmegaT-Projekt
+geleistet haben, aber Ihren Namen nicht auf den Listen sehen, können Sie uns
+gerne kontaktieren.)
 
 
 

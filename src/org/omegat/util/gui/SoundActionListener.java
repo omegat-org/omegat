@@ -25,6 +25,7 @@
 package org.omegat.util.gui;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -48,18 +49,27 @@ public class SoundActionListener implements HyperlinkListener {
      */
     public static synchronized void playSound(final File file) {
         new SwingWorker<Void, Void>() {
-            Clip clip;
+
+            private Clip clip;
+            private AudioInputStream inputStream;
+
             @Override
             protected Void doInBackground() throws Exception {
                 clip = AudioSystem.getClip();
-                AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
+                inputStream = AudioSystem.getAudioInputStream(file);
                 clip.open(inputStream);
                 clip.start();
                 clip.drain();
                 return null;
             }
+
             @Override
             protected void done() {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    // Ignore
+                }
                 clip.close();
             }
         }.execute();

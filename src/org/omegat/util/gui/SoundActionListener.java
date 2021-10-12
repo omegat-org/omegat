@@ -88,9 +88,9 @@ public class SoundActionListener implements HyperlinkListener {
             URL url = hyperlinkEvent.getURL();
             if ("file".equals(url.getProtocol())) {
                 try {
-                    String path = url.toURI().getPath();
+                    String path = url.getPath();
                     if (path != null && (path.endsWith(".wav") || path.endsWith(".WAV"))) {
-                        playSound(new File(path));
+                        playSound(new File(url.toURI()));
                     }
                 } catch (URISyntaxException ignored) {
                 }

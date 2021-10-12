@@ -207,7 +207,7 @@ public class LingvoDSL implements IDictionaryFactory {
         TAG_REPLACEMENTS.put(Pattern.compile(
                 "\\[(m3|m4|m5|m6|m7|m8|m9)](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 90px\">${content}</p>");
         // External link may launch external browser
-        TAG_REPLACEMENTS.put(Pattern.compile( "\\[url](?<link>.+?)\\[/url]"), "<a href=\"${link}\">${link}</a>");
+        TAG_REPLACEMENTS.put(Pattern.compile("\\[url](?<link>.+?)\\[/url]"), "<a href=\"${link}\">${link}</a>");
         // The following line tries to replace a letter surrounded by ['][/']
         // tags (indicating stress) with a red letter (the default behavior in
         // Lingvo).

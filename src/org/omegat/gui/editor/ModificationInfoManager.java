@@ -167,8 +167,8 @@ public final class ModificationInfoManager {
             // do not modify template directly, so that we can reuse for another change
             String localTemplate = this.template;
 
-            localTemplate = localTemplate.replace(VAR_CREATION_ID, trans.getCreator() == null
-                    ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.getCreator());
+            localTemplate = localTemplate.replace(VAR_CREATION_ID, trans.get(TMXEntry.Prop.CREATOR) == null
+                    ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.get(TMXEntry.Prop.CREATOR));
             localTemplate = localTemplate.replace(VAR_CREATION_DATE,
                     trans.creationDate == 0 ? "" : DATE_FORMAT.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_DATE_COUNTRY,
@@ -186,8 +186,8 @@ public final class ModificationInfoManager {
             localTemplate = localTemplate.replace(VAR_CREATION_TIME_SHORT_COUNTRY,
                     trans.creationDate == 0 ? "" : TIME_FORMAT_SHORT_COUNTRY.format(creationDate));
 
-            localTemplate = localTemplate.replace(VAR_CHANGED_ID, trans.getChanger() == null
-                    ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.getChanger());
+            localTemplate = localTemplate.replace(VAR_CHANGED_ID, trans.get(TMXEntry.Prop.CHANGER) == null
+                    ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.get(TMXEntry.Prop.CHANGER));
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE,
                     trans.changeDate == 0 ? "" : DATE_FORMAT.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE_COUNTRY,

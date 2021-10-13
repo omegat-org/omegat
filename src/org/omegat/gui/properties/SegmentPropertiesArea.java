@@ -341,12 +341,12 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setProperty(KEY_CHANGED, dateFormat.format(new Date(entry.changeDate)) + " "
                     + timeFormat.format(new Date(entry.changeDate)));
         }
-        setProperty(KEY_CHANGER, entry.getChanger());
+        setProperty(KEY_CHANGER, entry.get(Prop.CHANGER));
         if (entry.creationDate != 0) {
             setProperty(KEY_CREATED, dateFormat.format(new Date(entry.creationDate)) + " "
                     + timeFormat.format(new Date(entry.creationDate)));
         }
-        setProperty(KEY_CREATOR, entry.getCreator());
+        setProperty(KEY_CREATOR, entry.get(Prop.CREATOR));
         if (!entry.defaultTranslation) {
             setProperty(KEY_ISALT, true);
         }

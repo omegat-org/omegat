@@ -1480,7 +1480,7 @@ public class RealProject implements IProject {
             trans.creator = trans.changer;
         } else {
             trans.creationDate = prevTrEntry.creationDate;
-            trans.creator = prevTrEntry.getCreator();
+            trans.creator = prevTrEntry.get(TMXEntry.Prop.CREATOR);
         }
 
         if (StringUtil.isEmpty(trans.note)) {

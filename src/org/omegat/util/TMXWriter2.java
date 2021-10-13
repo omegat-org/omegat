@@ -160,8 +160,8 @@ public class TMXWriter2 {
      */
     public void writeEntry(String source, String translation, TMXEntry entry, List<String> propValues)
             throws Exception {
-        writeEntry(source, translation, entry.getNote(), entry.getCreator(), entry.creationDate, entry.getChanger(),
-                entry.changeDate, propValues);
+        writeEntry(source, translation, entry.get(TMXEntry.Prop.NOTE), entry.get(TMXEntry.Prop.CREATOR),
+                entry.creationDate, entry.get(TMXEntry.Prop.CHANGER), entry.changeDate, propValues);
     }
 
     public void writeEntry(String source, String translation, String note, String creator, long creationDate,

@@ -385,7 +385,8 @@ public class Searcher {
                 SourceTextEntry ste = allEntries.get(i);
                 TMXEntry te = m_project.getTranslationInfo(ste);
 
-                checkEntry(ste.getSrcText(), te.translation, te.getNote(), ste.getRawProperties(), te, i, null);
+                checkEntry(ste.getSrcText(), te.translation, te.get(TMXEntry.Prop.NOTE), ste.getRawProperties()
+                        , te, i, null);
                 checkStop.checkInterrupted();
             }
 
@@ -401,7 +402,8 @@ public class Searcher {
                         }
                         checkStop.checkInterrupted();
                         if (m_project.isOrphaned(source)) {
-                            checkEntry(en.source, en.translation, en.getNote(), null, en, ENTRY_ORIGIN_ORPHAN, file);
+                            checkEntry(en.source, en.translation, en.get(TMXEntry.Prop.NOTE), null, en,
+                                    ENTRY_ORIGIN_ORPHAN, file);
                         }
                     }
                 });
@@ -416,7 +418,8 @@ public class Searcher {
                         }
                         checkStop.checkInterrupted();
                         if (m_project.isOrphaned(source)) {
-                            checkEntry(en.source, en.translation, en.getNote(), null, en, ENTRY_ORIGIN_ORPHAN, file);
+                            checkEntry(en.source, en.translation, en.get(TMXEntry.Prop.NOTE), null, en,
+                                    ENTRY_ORIGIN_ORPHAN, file);
                         }
                     }
                 });
@@ -475,7 +478,8 @@ public class Searcher {
             // and real translation
             // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
             // which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.getNote(), null, null, ENTRY_ORIGIN_ALTERNATIVE, tmxID);
+            checkEntry(tm.source, tm.translation, tm.get(TMXEntry.Prop.NOTE), null, null,
+                    ENTRY_ORIGIN_ALTERNATIVE, tmxID);
 
             checkStop.checkInterrupted();
         }
@@ -777,18 +781,18 @@ public class Searcher {
 
         if (m_author.pattern().pattern().equals("")) {
             // Handle search for null author.
-            return te.getChanger() == null && te.getCreator() == null;
+            return te.get(TMXEntry.Prop.CHANGER) == null && te.get(TMXEntry.Prop.CREATOR) == null;
         }
 
-        if (te.getChanger() != null) {
-            m_author.reset(te.getChanger());
+        if (te.get(TMXEntry.Prop.CHANGER) != null) {
+            m_author.reset(te.get(TMXEntry.Prop.CHANGER));
             if (m_author.find()) {
                 return true;
             }
         }
 
-        if (te.getCreator() != null) {
-            m_author.reset(te.getCreator());
+        if (te.get(TMXEntry.Prop.CREATOR) != null) {
+            m_author.reset(te.get(TMXEntry.Prop.CREATOR));
             if (m_author.find()) {
                 return true;
             }

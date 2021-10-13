@@ -190,7 +190,8 @@ public class FindMatches {
                     }
                     String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
                     processEntry(null, source, trans.translation, NearString.MATCH_SOURCE.MEMORY, false, 0,
-                            fileName, trans.getCreator(), trans.creationDate, trans.getChanger(), trans.changeDate,
+                            fileName, trans.get(TMXEntry.Prop.CREATOR), trans.creationDate, trans.get(TMXEntry.Prop.CHANGER),
+                                    trans.changeDate,
                             null);
                 }
             });
@@ -207,8 +208,8 @@ public class FindMatches {
                 }
                 String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
                 processEntry(source, source.sourceText, trans.translation, NearString.MATCH_SOURCE.MEMORY,
-                        false, 0, fileName, trans.getCreator(), trans.creationDate, trans.getChanger(),
-                        trans.changeDate, null);
+                        false, 0, fileName, trans.get(TMXEntry.Prop.CREATOR), trans.creationDate,
+                        trans.get(TMXEntry.Prop.CHANGER), trans.changeDate, null);
             }
         });
 
@@ -309,8 +310,6 @@ public class FindMatches {
     /**
      * Compare one entry with original entry.
      *
-     * @param candEntry
-     *            entry to compare
      */
     protected void processEntry(final EntryKey key, final String source, final String translation,
             NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int penalty, final String tmxName,

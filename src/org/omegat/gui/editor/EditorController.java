@@ -859,7 +859,7 @@ public class EditorController implements IEditor {
         // forget about old marks
         builder.createSegmentElement(true, currentTranslation);
 
-        Core.getNotes().setNoteText(currentTranslation.getNote());
+        Core.getNotes().setNoteText(currentTranslation.get(TMXEntry.Prop.NOTE));
 
         // then add new marks
         markerController.reprocessImmediately(builder);
@@ -1190,7 +1190,8 @@ public class EditorController implements IEditor {
         boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
-        boolean noteChanged = !StringUtil.nvl(oldTE.getNote(), "").equals(StringUtil.nvl(newen.note, ""));
+        boolean noteChanged = !StringUtil.nvl(
+                oldTE.get(TMXEntry.Prop.NOTE), "").equals(StringUtil.nvl(newen.note, ""));
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {
             // Only note was changed, and we are not making a new alt translation.

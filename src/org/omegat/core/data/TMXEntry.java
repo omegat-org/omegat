@@ -80,25 +80,13 @@ public class TMXEntry {
         if (from.otherProperties != null) {
             for (int i = 0; i < from.otherProperties.size(); i++) {
                 TMXProp prop = from.otherProperties.get(i);
-                if (prop.getType().equals("mt_source")) {
+                if (prop.getType().equals("mt-source")) {
                     props[Prop.MTSOURCE.idx] = prop.getValue();
                 }
             }
         }
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
-    }
-
-    public String getChanger() {
-        return get(Prop.CHANGER);
-    }
-
-    public String getCreator() {
-        return get(Prop.CREATOR);
-    }
-
-    public String getNote() {
-        return get(Prop.NOTE);
     }
 
     public boolean has(final Prop key) {

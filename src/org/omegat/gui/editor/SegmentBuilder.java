@@ -526,8 +526,8 @@ public class SegmentBuilder {
         if (Preferences.isPreference(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE)) {
              text = ModificationInfoManager.apply(trans);
         } else {
-            String author = (trans.getChanger() == null ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR")
-                    : trans.getChanger());
+            String author = (trans.get(TMXEntry.Prop.CHANGER) == null ? OStrings.getString(
+                    "TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.get(TMXEntry.Prop.CHANGER));
             String template;
             if (trans.changeDate != 0) {
                 template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR_DATE");

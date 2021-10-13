@@ -63,35 +63,30 @@ public class MagicCommentTest {
         assertEquals(Collections.emptyMap(), MagicComment.parse((String) null));
     }
 
-    @SuppressWarnings("serial")
     @Test
     public void testParseFile() throws IOException {
         Map<String, String> result = MagicComment.parse(new File("test/data/glossaries/test-magiccomment.tab"));
-        assertEquals(new HashMap<String, String>() {{ put("coding", "utf-8"); }}, result);
+        assertEquals(Collections.singletonMap("coding", "utf-8"), result);
     }
 
-    @SuppressWarnings("serial")
     @Test
     public void testParseFileBom() throws IOException {
         Map<String, String> result = MagicComment.parse(new File("test/data/glossaries/test-magiccomment-bom.tab"));
-        assertEquals(new HashMap<String, String>() {{ put("coding", "utf-8"); }}, result);
+        assertEquals(Collections.singletonMap("coding", "utf-8"), result);
     }
 
-    @SuppressWarnings("serial")
     @Test
     public void testParseEmpty() throws IOException {
         Map<String, String> result = MagicComment.parse(new File("test/data/glossaries/empty.txt"));
         assertEquals(Collections.emptyMap(), result);
     }
 
-    @SuppressWarnings("serial")
     @Test
     public void testParseFileTab() throws IOException {
         Map<String, String> result = MagicComment.parse(new File("test/data/glossaries/test.tab"));
         assertEquals(Collections.emptyMap(), result);
     }
 
-    @SuppressWarnings("serial")
     @Test
     public void testParseFileUTF16() throws IOException {
         Map<String, String> result = MagicComment.parse(new File("test/data/glossaries/testUTF16LE.txt"));

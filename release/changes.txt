@@ -1,11 +1,27 @@
 ----------------------------------------------------------------------
  OmegaT 5.7.0
 ----------------------------------------------------------------------
-  0 Enhancements
-  0 Bug fixes
+  3 Enhancements
+  1 Bug fix
   1 Localisation updates
 ----------------------------------------------------------------------
 5.7.0 vs 5.6.0
+
+  Bug fixes:
+
+  - Dictionary pane update is extremely slow for large articles
+  https://sourceforge.net/p/omegat/bugs/1068/
+
+  Implemented requests:
+
+  - Ignore Microsoft Office temporary files
+  https://sourceforge.net/p/omegat/feature-requests/1596/
+
+  - Improve support for markup in DSL dictionaries
+  https://sourceforge.net/p/omegat/feature-requests/1594
+
+  - Display images in Dictionary pane
+  https://sourceforge.net/p/omegat/feature-requests/1595/
 
   Localisation Updates:
 

@@ -7,6 +7,7 @@
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik, Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,7 +29,10 @@
 
 package org.omegat.core.data;
 
+import java.util.Arrays;
 import java.util.Objects;
+
+import org.omegat.util.TMXProp;
 
 /**
  * Storage for TMX entry.
@@ -41,6 +45,7 @@ import java.util.Objects;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public class TMXEntry {
     public enum ExternalLinked {
@@ -48,27 +53,64 @@ public class TMXEntry {
         xICE, x100PC, xAUTO, xENFORCED
     };
 
+    public enum Prop {
+        CHANGER(0), CREATOR(1), NOTE(2), MTSOURCE(3);
+        public final int idx;
+        Prop(int i) {
+            idx = i;
+        }
+    }
+
     public final String source;
     public final String translation;
-    public final String changer;
     public final long changeDate;
-    public final String creator;
     public final long creationDate;
-    public final String note;
+    private final String[] props = new String[Prop.values().length];
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
 
     TMXEntry(PrepareTMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
         this.source = from.source;
         this.translation = from.translation;
-        this.changer = from.changer;
         this.changeDate = from.changeDate;
-        this.creator = from.creator;
         this.creationDate = from.creationDate;
-        this.note = from.note;
-
+        props[Prop.CHANGER.idx] = from.changer;
+        props[Prop.CREATOR.idx] = from.creator;
+        props[Prop.NOTE.idx] = from.note;
+        if (from.otherProperties != null) {
+            for (int i = 0; i < from.otherProperties.size(); i++) {
+                TMXProp prop = from.otherProperties.get(i);
+                if (prop.getType().equals("mt_source")) {
+                    props[Prop.MTSOURCE.idx] = prop.getValue();
+                }
+            }
+        }
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
+    }
+
+    public String getChanger() {
+        return get(Prop.CHANGER);
+    }
+
+    public String getCreator() {
+        return get(Prop.CREATOR);
+    }
+
+    public String getNote() {
+        return get(Prop.NOTE);
+    }
+
+    public boolean has(final Prop key) {
+        return props[key.idx] != null;
+    }
+
+    public String get(final Prop key) {
+        return props[key.idx];
+    }
+
+    public void set(final Prop key, final String value) {
+        props[key.idx] = value;
     }
 
     public boolean isTranslated() {
@@ -76,7 +118,7 @@ public class TMXEntry {
     }
 
     public boolean hasNote() {
-        return note != null;
+        return has(Prop.NOTE);
     }
 
     @Override
@@ -104,25 +146,22 @@ public class TMXEntry {
         if (!equalsTranslation(other)) {
             return false;
         }
-        if (!Objects.equals(changer, other.changer)) {
+        if (!Objects.equals(props[Prop.CHANGER.idx], other.props[Prop.CHANGER.idx])) {
             return false;
         }
-        if (!Objects.equals(creator, other.creator)) {
+        if (!Objects.equals(props[Prop.CREATOR.idx], other.props[Prop.CREATOR.idx])) {
             return false;
         }
         if (defaultTranslation != other.defaultTranslation) {
             return false;
         }
-        if (!Objects.equals(source, other.source)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(source, other.source);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, linked, changer, creator,
-                defaultTranslation, source);
+        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, Arrays.hashCode(props),
+                linked, defaultTranslation, source);
     }
 
     /**
@@ -136,12 +175,12 @@ public class TMXEntry {
         if (!Objects.equals(translation, other.translation)) {
             return false;
         }
-        if (!Objects.equals(note, other.note)) {
+        if (!Objects.equals(props[Prop.NOTE.idx], other.props[Prop.NOTE.idx])) {
             return false;
         }
-        if (!Objects.equals(linked, other.linked)) {
+        if (!Objects.equals(props[Prop.MTSOURCE.idx], other.props[Prop.MTSOURCE.idx])) {
             return false;
         }
-        return true;
+        return Objects.equals(linked, other.linked);
     }
 }

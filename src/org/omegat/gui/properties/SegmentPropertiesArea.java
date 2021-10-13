@@ -58,6 +58,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.TMXEntry.Prop;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
@@ -91,6 +92,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_CREATOR = "creator";
     private static final String KEY_ISALT = "isAlt";
     private static final String KEY_LINKED = "linked";
+    private static final String KEY_MTSOURCE = "MT-used";
 
     final List<String> properties = new ArrayList<>();
 
@@ -329,7 +331,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         if (entry == null) {
             return;
         }
-        if (entry.hasNote()) {
+        if (entry.has(Prop.NOTE)) {
             setProperty(KEY_HASNOTE, true);
         }
         if (!entry.isTranslated()) {
@@ -339,15 +341,18 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setProperty(KEY_CHANGED, dateFormat.format(new Date(entry.changeDate)) + " "
                     + timeFormat.format(new Date(entry.changeDate)));
         }
-        setProperty(KEY_CHANGER, entry.changer);
+        setProperty(KEY_CHANGER, entry.getChanger());
         if (entry.creationDate != 0) {
             setProperty(KEY_CREATED, dateFormat.format(new Date(entry.creationDate)) + " "
                     + timeFormat.format(new Date(entry.creationDate)));
         }
-        setProperty(KEY_CREATOR, entry.creator);
+        setProperty(KEY_CREATOR, entry.getCreator());
         if (!entry.defaultTranslation) {
             setProperty(KEY_ISALT, true);
         }
         setProperty(KEY_LINKED, entry.linked);
+        if (entry.has(Prop.MTSOURCE)) {
+            setProperty(KEY_MTSOURCE, entry.get(Prop.MTSOURCE));
+        }
     }
 }

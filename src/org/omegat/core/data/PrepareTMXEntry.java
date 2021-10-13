@@ -28,6 +28,7 @@
 
 package org.omegat.core.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.util.TMXProp;
@@ -60,11 +61,15 @@ public class PrepareTMXEntry {
     public PrepareTMXEntry(TMXEntry e) {
         source = e.source;
         translation = e.translation;
-        changer = e.changer;
+        changer = e.getChanger();
         changeDate = e.changeDate;
-        creator = e.creator;
+        creator = e.getCreator();
         creationDate = e.creationDate;
-        note = e.note;
+        note = e.getNote();
+        if (e.has(TMXEntry.Prop.MTSOURCE)) {
+            otherProperties = new ArrayList<>();
+            otherProperties.add(new TMXProp("mt_source", e.get(TMXEntry.Prop.MTSOURCE)));
+        }
     }
 
     public String getPropValue(String propType) {

@@ -190,7 +190,7 @@ public class FindMatches {
                     }
                     String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
                     processEntry(null, source, trans.translation, NearString.MATCH_SOURCE.MEMORY, false, 0,
-                            fileName, trans.creator, trans.creationDate, trans.changer, trans.changeDate,
+                            fileName, trans.getCreator(), trans.creationDate, trans.getChanger(), trans.changeDate,
                             null);
                 }
             });
@@ -207,7 +207,7 @@ public class FindMatches {
                 }
                 String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
                 processEntry(source, source.sourceText, trans.translation, NearString.MATCH_SOURCE.MEMORY,
-                        false, 0, fileName, trans.creator, trans.creationDate, trans.changer,
+                        false, 0, fileName, trans.getCreator(), trans.creationDate, trans.getChanger(),
                         trans.changeDate, null);
             }
         });

@@ -506,6 +506,8 @@ public final class Preferences {
     public static final String THEME_CLASS_NAME = "theme_class_name";
     public static final String THEME_CLASS_NAME_DEFAULT = "org.omegat.gui.theme.DefaultFlatTheme";
 
+    public static final String TEAM_JSCH_DOT_SSH = "team_jsch_dot_ssh";
+
     /** Private constructor, because this file is singleton */
     private Preferences() {
     }

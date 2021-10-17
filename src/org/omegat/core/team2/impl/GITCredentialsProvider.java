@@ -27,6 +27,7 @@
 
 package org.omegat.core.team2.impl;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,21 +35,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
-
-import org.eclipse.jgit.errors.UnsupportedCredentialItem;
-import org.eclipse.jgit.transport.CredentialItem;
-import org.eclipse.jgit.transport.CredentialsProvider;
-import org.eclipse.jgit.transport.JschConfigSessionFactory;
-import org.eclipse.jgit.transport.OpenSshConfig;
-import org.eclipse.jgit.transport.SshSessionFactory;
-import org.eclipse.jgit.transport.URIish;
-import org.eclipse.jgit.util.FS;
-import org.omegat.core.Core;
-import org.omegat.core.KnownException;
-import org.omegat.core.team2.ProjectTeamSettings;
-import org.omegat.core.team2.TeamSettings;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 
 import com.jcraft.jsch.IdentityRepository;
 import com.jcraft.jsch.JSch;
@@ -61,6 +47,23 @@ import com.jcraft.jsch.agentproxy.RemoteIdentityRepository;
 import com.jcraft.jsch.agentproxy.USocketFactory;
 import com.jcraft.jsch.agentproxy.connector.SSHAgentConnector;
 import com.jcraft.jsch.agentproxy.usocket.JNAUSocketFactory;
+import org.eclipse.jgit.errors.UnsupportedCredentialItem;
+import org.eclipse.jgit.transport.CredentialItem;
+import org.eclipse.jgit.transport.CredentialsProvider;
+import org.eclipse.jgit.transport.JschConfigSessionFactory;
+import org.eclipse.jgit.transport.OpenSshConfig;
+import org.eclipse.jgit.transport.SshSessionFactory;
+import org.eclipse.jgit.transport.URIish;
+import org.eclipse.jgit.util.FS;
+
+import org.omegat.core.Core;
+import org.omegat.core.KnownException;
+import org.omegat.core.team2.ProjectTeamSettings;
+import org.omegat.core.team2.TeamSettings;
+import org.omegat.util.Log;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 
 /**
  * Git repository credentials provider. One credentials provider created for all git instances.
@@ -104,10 +107,26 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 }
                 JSch jsch = super.createDefaultJSch(fs);
                 if (con != null) {
+                    // identities from connectionAgent
                     JSch.setConfig("PreferredAuthentications", "publickey");
                     IdentityRepository irepo = new RemoteIdentityRepository(con);
-                    jsch.setIdentityRepository(irepo);
+                    if (irepo.getIdentities().size() > 0) {
+                        jsch.setIdentityRepository(irepo);
+                        return jsch;
+                    }
                 }
+                // manually add known identities
+                jsch.setIdentityRepository(null);
+                jsch.removeAllIdentity();
+                File dotSshDir = new File(FS.DETECTED.userHome(),
+                        Preferences.getPreferenceDefault(Preferences.TEAM_JSCH_DOT_SSH, OConsts.JSCH_DOT_SSH_DIR));
+                for (String privateKeyName: OConsts.JSCH_PRIVATE_KEY_FILES.split(",")) {
+                    File privateKey = new File(dotSshDir, privateKeyName);
+                    if (privateKey.exists()) {
+                        jsch.addIdentity(privateKey.getAbsolutePath());
+                    }
+                }
+                // identities will override by .ssh/config configuration
                 return jsch;
             }
         };
@@ -120,7 +139,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
     //private ProjectTeamSettings teamSettings;
     /** Predefined in the omegat.project file. */
-    private final Map<String, String> predefined = Collections.synchronizedMap(new HashMap<String, String>());
+    private final Map<String, String> predefined = Collections.synchronizedMap(new HashMap<>());
 
     public void setTeamSettings(ProjectTeamSettings teamSettings) {
         //this.teamSettings = teamSettings;
@@ -361,6 +380,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
         credentials.password = null;
         saveCredentials(uri, credentials);
     }
+
 
     private static String extractFingerprint(String text) {
         Pattern p = Pattern

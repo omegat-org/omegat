@@ -381,7 +381,6 @@ public class GITCredentialsProvider extends CredentialsProvider {
         saveCredentials(uri, credentials);
     }
 
-
     private static String extractFingerprint(String text) {
         Pattern p = Pattern
                 .compile("The authenticity of host '.*' can't be established\\.\\nRSA key fingerprint is (([0-9a-f]{2}:){15}[0-9a-f]{2})\\.\\nAre you sure you want to continue connecting\\?");

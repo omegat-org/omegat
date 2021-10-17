@@ -39,6 +39,7 @@ import java.util.stream.StreamSupport;
 
 import javax.xml.namespace.QName;
 
+import org.apache.sshd.client.SshClient;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LsRemoteCommand;
@@ -65,9 +66,15 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
+import org.eclipse.jgit.transport.SshSessionFactory;
+import org.eclipse.jgit.transport.sshd.JGitKeyCache;
+import org.eclipse.jgit.transport.sshd.SshdSessionFactory;
+import org.eclipse.jgit.transport.sshd.SshdSessionFactoryBuilder;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
+import org.eclipse.jgit.util.FS;
+
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
@@ -95,8 +102,17 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     ProjectTeamSettings projectTeamSettings;
 
+    protected static SshClient client;
+
     static {
-        CredentialsProvider.setDefault(new GITCredentialsProvider());
+        client = SshClient.setUpDefaultClient();
+        SshdSessionFactory sshdSessionFactory = new SshdSessionFactoryBuilder()
+                .setPreferredAuthentications("publickey,keyboard-interactive")
+                .setHomeDirectory(FS.detect().userHome())
+                .setSshDirectory(new File(FS.detect().userHome(), ".ssh"))
+                .build(new JGitKeyCache());
+        SshSessionFactory.setInstance(sshdSessionFactory);
+        GITCredentialsProvider.install();
     }
 
     @Override
@@ -112,47 +128,52 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 predefinedUser, predefinedPass, predefinedFingerprint);
         ((GITCredentialsProvider) CredentialsProvider.getDefault()).setTeamSettings(teamSettings);
 
-        File gitDir = new File(localDirectory, ".git");
-        if (gitDir.exists() && gitDir.isDirectory()) {
-            // already cloned
-            repository = Git.open(localDirectory).getRepository();
-            configRepo();
-            try (Git git = new Git(repository)) {
-                git.submoduleInit().call();
-                git.submoduleUpdate().setTimeout(TIMEOUT).call();
-            }
-        } else {
-            Log.logInfoRB("GIT_START", "clone");
-            CloneCommand c = Git.cloneRepository();
-            c.setURI(repositoryURL);
-            c.setDirectory(localDirectory);
-            c.setTimeout(TIMEOUT);
-            try {
-                c.call();
-            } catch (InvalidRemoteException e) {
-                if (localDirectory.exists()) {
-                    deleteDirectory(localDirectory);
+        try {
+            client.start();
+            File gitDir = new File(localDirectory, ".git");
+            if (gitDir.exists() && gitDir.isDirectory()) {
+                // already cloned
+                repository = Git.open(localDirectory).getRepository();
+                configRepo();
+                try (Git git = new Git(repository)) {
+                    git.submoduleInit().call();
+                    git.submoduleUpdate().setTimeout(TIMEOUT).call();
                 }
-                Throwable cause = e.getCause();
-                if (cause instanceof org.eclipse.jgit.errors.NoRemoteRepositoryException) {
-                    BadRepositoryException bre = new BadRepositoryException(cause.getLocalizedMessage());
-                    bre.initCause(e);
-                    throw bre;
+            } else {
+                Log.logInfoRB("GIT_START", "clone");
+                CloneCommand c = Git.cloneRepository();
+                c.setURI(repositoryURL);
+                c.setDirectory(localDirectory);
+                c.setTimeout(TIMEOUT);
+                try {
+                    c.call();
+                } catch (InvalidRemoteException e) {
+                    if (localDirectory.exists()) {
+                        deleteDirectory(localDirectory);
+                    }
+                    Throwable cause = e.getCause();
+                    if (cause instanceof org.eclipse.jgit.errors.NoRemoteRepositoryException) {
+                        BadRepositoryException bre = new BadRepositoryException(cause.getLocalizedMessage());
+                        bre.initCause(e);
+                        throw bre;
+                    }
+                    throw e;
                 }
-                throw e;
+                repository = Git.open(localDirectory).getRepository();
+                try (Git git = new Git(repository)) {
+                    git.submoduleInit().call();
+                    git.submoduleUpdate().setTimeout(TIMEOUT).call();
+                }
+                configRepo();
+                Log.logInfoRB("GIT_FINISH", "clone");
             }
-            repository = Git.open(localDirectory).getRepository();
-            try (Git git = new Git(repository)) {
-                git.submoduleInit().call();
-                git.submoduleUpdate().setTimeout(TIMEOUT).call();
-            }
-            configRepo();
-            Log.logInfoRB("GIT_FINISH", "clone");
-        }
 
-        // cleanup repository
-        try (Git git = new Git(repository)) {
-            git.reset().setMode(ResetType.HARD).call();
+            // cleanup repository
+            try (Git git = new Git(repository)) {
+                git.reset().setMode(ResetType.HARD).call();
+            }
+        } finally {
+            client.stop();
         }
     }
 
@@ -260,20 +281,21 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             sinceRevision = ObjectId.fromString(sinceRevisionString);
         }
 
-        Git git = new Git(repository);
-        AbstractTreeIterator startTreeIterator = getTreeIterator(git, sinceRevision);
-        AbstractTreeIterator headTreeIterator = new FileTreeIterator(git.getRepository());
-        List<DiffEntry> diffEntries = git.diff().setOldTree(startTreeIterator).setNewTree(headTreeIterator).call();
-        for (DiffEntry diffEntry : diffEntries) {
-            if (diffEntry.getChangeType().equals(DiffEntry.ChangeType.DELETE)) {
-                deleted.add(diffEntry.getOldPath().replace('/', File.separatorChar));
+        try (Git git = new Git(repository)) {
+            AbstractTreeIterator startTreeIterator = getTreeIterator(git, sinceRevision);
+            AbstractTreeIterator headTreeIterator = new FileTreeIterator(git.getRepository());
+            List<DiffEntry> diffEntries = git.diff().setOldTree(startTreeIterator).setNewTree(headTreeIterator).call();
+            for (DiffEntry diffEntry : diffEntries) {
+                if (diffEntry.getChangeType().equals(DiffEntry.ChangeType.DELETE)) {
+                    deleted.add(diffEntry.getOldPath().replace('/', File.separatorChar));
+                }
             }
+
+            projectTeamSettings.set(settingKey, head.getName());
+
+            String[] result = new String[deleted.size()];
+            return deleted.toArray(result);
         }
-
-        projectTeamSettings.set(settingKey, head.getName());
-
-        String[] result = new String[deleted.size()];
-        return deleted.toArray(result);
     }
 
     private AbstractTreeIterator getTreeIterator(Git git, ObjectId objectId) throws IOException {
@@ -433,6 +455,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
     public static boolean isGitRepository(String url) {
         // Heuristics to save some waiting time
         try {
+            client.start();
             Collection<Ref> result = new LsRemoteCommand(null).setRemote(url).setTimeout(TIMEOUT).call();
             return !result.isEmpty();
         } catch (TransportException ex) {
@@ -443,6 +466,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         } catch (GitAPIException | JGitInternalException ex) {
             // JGitInternalException happens if the URL is a Subversion URL like svn://...
             return false;
+        } finally {
+            client.stop();
         }
     }
 }

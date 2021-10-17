@@ -6,6 +6,7 @@
  Copyright (C) 2012 Alex Buloichik
                2014 Alex Buloichik, Aaron Madlon-Kay
                2015 Hiroshi Miura, Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -38,29 +39,14 @@ import javax.swing.JOptionPane;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
-import org.eclipse.jgit.transport.JschConfigSessionFactory;
-import org.eclipse.jgit.transport.OpenSshConfig;
-import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.URIish;
-import org.eclipse.jgit.util.FS;
+
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.TeamSettings;
-import org.omegat.util.Log;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.OStrings;
-
-import com.jcraft.jsch.IdentityRepository;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
-import com.jcraft.jsch.agentproxy.AgentProxyException;
-import com.jcraft.jsch.agentproxy.Connector;
-import com.jcraft.jsch.agentproxy.ConnectorFactory;
-import com.jcraft.jsch.agentproxy.RemoteIdentityRepository;
-import com.jcraft.jsch.agentproxy.USocketFactory;
-import com.jcraft.jsch.agentproxy.connector.SSHAgentConnector;
-import com.jcraft.jsch.agentproxy.usocket.JNAUSocketFactory;
 
 /**
  * Git repository credentials provider. One credentials provider created for all git instances.
@@ -69,50 +55,15 @@ import com.jcraft.jsch.agentproxy.usocket.JNAUSocketFactory;
  * <ul>
  * <li>file://
  * <li>ssh://
- * <li>git://
  * <li>http://
  * </ul>
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @see <a href="http://www.codeaffine.com/2014/12/09/jgit-authentication/">JGit Authentication Explained</a>
+ * @see <a href="https://github.com/apache/mina-sshd/blob/master/docs/git.md">MINA-SSHD Git support</a>
  */
 public class GITCredentialsProvider extends CredentialsProvider {
-
-    static {
-        // Set up ssh-agent support
-        JschConfigSessionFactory sessionFactory = new JschConfigSessionFactory() {
-
-            @Override
-            protected void configure(OpenSshConfig.Host host, Session session) {
-                session.setConfig("StrictHostKeyChecking", "true");
-            }
-
-            @Override
-            protected JSch createDefaultJSch(FS fs) throws JSchException {
-                Connector con = null;
-                try {
-                    if (SSHAgentConnector.isConnectorAvailable()) {
-                        USocketFactory usf = new JNAUSocketFactory();
-                        con = new SSHAgentConnector(usf);
-                    } else {
-                        ConnectorFactory cf = ConnectorFactory.getDefault();
-                        con = cf.createConnector();
-                    }
-                } catch (AgentProxyException e) {
-                    Log.log(e);
-                }
-                JSch jsch = super.createDefaultJSch(fs);
-                if (con != null) {
-                    JSch.setConfig("PreferredAuthentications", "publickey");
-                    IdentityRepository irepo = new RemoteIdentityRepository(con);
-                    jsch.setIdentityRepository(irepo);
-                }
-                return jsch;
-            }
-        };
-        SshSessionFactory.setInstance(sessionFactory);
-    }
 
     static final String KEY_USERNAME_SUFFIX = "username";
     static final String KEY_PASSWORD_SUFFIX = "password";
@@ -120,7 +71,12 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
     //private ProjectTeamSettings teamSettings;
     /** Predefined in the omegat.project file. */
-    private final Map<String, String> predefined = Collections.synchronizedMap(new HashMap<String, String>());
+    private final Map<String, String> predefined = Collections.synchronizedMap(new HashMap<>());
+
+    public static void install() {
+        final GITCredentialsProvider c = new GITCredentialsProvider();
+        CredentialsProvider.setDefault(c);
+    }
 
     public void setTeamSettings(ProjectTeamSettings teamSettings) {
         //this.teamSettings = teamSettings;
@@ -253,28 +209,37 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     throw new UnsupportedCredentialItem(uri, "Wrong fingerprint pattern");
                 }
                 if (predefinedFingerprint != null) {
-                    if (promptedFingerprint.equals(predefinedFingerprint)) {
-                        ((CredentialItem.YesNoType) i).setValue(true);
-                    } else {
-                        ((CredentialItem.YesNoType) i).setValue(false);
-                    }
+                    ((CredentialItem.YesNoType) i).setValue(promptedFingerprint.equals(predefinedFingerprint));
                     continue;
                 }
                 if (promptedFingerprint.equals(storedFingerprint)) {
                     ((CredentialItem.YesNoType) i).setValue(true);
                     continue;
                 }
-                int choice = Core.getMainWindow().showConfirmDialog(promptText, null,
-                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (choice == JOptionPane.YES_OPTION) {
+                IMainWindow mw = Core.getMainWindow();
+                if (mw != null) {  // on GUI application
+                    int choice = mw.showConfirmDialog(promptText, null,
+                            JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (choice == JOptionPane.YES_OPTION) {
+                        ((CredentialItem.YesNoType) i).setValue(true);
+                        saveFingerprint(uri, promptedFingerprint);
+                    } else {
+                        ((CredentialItem.YesNoType) i).setValue(false);
+                    }
+                } else {
+                    // FIXME: implement me.
+                    // current silently agreed
                     ((CredentialItem.YesNoType) i).setValue(true);
                     saveFingerprint(uri, promptedFingerprint);
-                } else {
-                    ((CredentialItem.YesNoType) i).setValue(false);
                 }
                 continue;
             } else if (i instanceof CredentialItem.InformationalMessage) {
-                Core.getMainWindow().showMessageDialog(i.getPromptText());
+                IMainWindow mw = Core.getMainWindow();
+                if (mw != null) {  // on GUI application
+                    mw.showMessageDialog(i.getPromptText());
+                } else {
+                    // implement me. show message to console
+                }
                 continue;
             }
             throw new UnsupportedCredentialItem(uri, i.getClass().getName() + ":" + i.getPromptText());
@@ -290,11 +255,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     @Override
     public boolean supports(CredentialItem... items) {
         for (CredentialItem i : items) {
-            if (i instanceof CredentialItem.Username) {
-                continue;
-            } else if (i instanceof CredentialItem.Password) {
-                continue;
-            } else {
+            if (!(i instanceof CredentialItem.Username || i instanceof CredentialItem.Password)) {
                 return false;
             }
         }
@@ -307,28 +268,34 @@ public class GITCredentialsProvider extends CredentialsProvider {
      * @return true when entered, false on cancel.
      */
     private Credentials askCredentials(URIish uri, Credentials credentials) {
-        GITUserPassDialog userPassDialog = new GITUserPassDialog(Core.getMainWindow().getApplicationFrame());
-        userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
-        userPassDialog.descriptionTextArea.setText(OStrings
-                .getString(credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG", uri.getHumanishName()));
-        // if username is already available in uri, then we will not be asked for an username, so we cannot
-        // change it.
-        if (uri.getUser() != null && !"".equals(uri.getUser())) {
-            userPassDialog.userText.setText(uri.getUser());
-            userPassDialog.userText.setEditable(false);
-            userPassDialog.userText.setEnabled(false);
-        }
-        if (credentials.username != null) {
-            userPassDialog.userText.setText(credentials.username);
-        }
-        userPassDialog.setVisible(true);
-        if (userPassDialog.getReturnStatus() == GITUserPassDialog.RET_OK) {
-            credentials.username = userPassDialog.userText.getText();
-            credentials.password = new String(userPassDialog.passwordField.getPassword());
-            return credentials;
+        IMainWindow mw = Core.getMainWindow();
+        if (mw != null) {  // when GUI omegat application
+            GITUserPassDialog userPassDialog = new GITUserPassDialog(mw.getApplicationFrame());
+            userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
+            userPassDialog.descriptionTextArea.setText(OStrings
+                    .getString(credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG", uri.getHumanishName()));
+            // if username is already available in uri, then we will not be asked for an username, so we cannot
+            // change it.
+            if (uri.getUser() != null && !"".equals(uri.getUser())) {
+                userPassDialog.userText.setText(uri.getUser());
+                userPassDialog.userText.setEditable(false);
+                userPassDialog.userText.setEnabled(false);
+            }
+            if (credentials.username != null) {
+                userPassDialog.userText.setText(credentials.username);
+            }
+            userPassDialog.setVisible(true);
+            if (userPassDialog.getReturnStatus() == GITUserPassDialog.RET_OK) {
+                credentials.username = userPassDialog.userText.getText();
+                credentials.password = new String(userPassDialog.passwordField.getPassword());
+                return credentials;
+            } else {
+                return null;
+            }
         } else {
-            return null;
+            // FIXME: ask to user on console
         }
+        return null;
     }
 
     private String askPassphrase(String prompt) {
@@ -363,6 +330,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private static String extractFingerprint(String text) {
+        // FIXME: update pattern for MINA-SSHD
         Pattern p = Pattern
                 .compile("The authenticity of host '.*' can't be established\\.\\nRSA key fingerprint is (([0-9a-f]{2}:){15}[0-9a-f]{2})\\.\\nAre you sure you want to continue connecting\\?");
         Matcher fingerprintMatcher = p.matcher(text);
@@ -371,7 +339,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
             int end = fingerprintMatcher.end(1);
             return text.substring(start, end);
         }
-        return null;
+        return text;
     }
 
     public static class Credentials {

@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik
                2011 Didier Briel
                2015 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -58,16 +59,17 @@ import org.omegat.util.Preferences;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public class DictionariesManager implements DirectoryMonitor.Callback {
     public static final String IGNORE_FILE = "ignore.txt";
-    public static final String DICTIONARY_SUBDIR = "dictionary";
 
     private final IDictionaries pane;
     protected DirectoryMonitor monitor;
-    protected final List<IDictionaryFactory> factories = new ArrayList<IDictionaryFactory>();
-    protected final Map<String, IDictionary> dictionaries = new TreeMap<String, IDictionary>();
-    protected final Set<String> ignoreWords = new TreeSet<String>();
+    protected final List<IDictionaryFactory> factories = new ArrayList<>();
+    protected final Map<String, IDictionary> dictionaries = new TreeMap<>();
+    protected final List<IDictionary> onlineDictionaries = new ArrayList<>();
+    protected final Set<String> ignoreWords = new TreeSet<>();
 
     private Language indexLanguage;
     private ITokenizer tokenizer;
@@ -80,6 +82,10 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         tokenizer = new DefaultTokenizer();
     }
 
+    /**
+     * Add dictionary factory.
+     * @param dict factory to register.
+     */
     public void addDictionaryFactory(IDictionaryFactory dict) {
         synchronized (factories) {
             factories.add(dict);
@@ -90,9 +96,33 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         }
     }
 
+    /**
+     * Remove dictionary Factory.
+     * @param factory factory to unregister.
+     */
     public void removeDictionaryFactory(IDictionaryFactory factory) {
         synchronized (factories) {
             factories.remove(factory);
+        }
+    }
+
+    /**
+     * Add online dictionary(dictionary without local data).
+     * @param dict dictionary lookup driver.
+     */
+    public void addOnlineDictionary(IDictionary dict) {
+        synchronized (onlineDictionaries) {
+            onlineDictionaries.add(dict);
+        }
+    }
+
+    /**
+     * Remove online dictionary.
+     * @param dict dictionary lookup driver to remove from registration.
+     */
+    public void removeOnlineDictionary(IDictionary dict) {
+        synchronized (onlineDictionaries) {
+            onlineDictionaries.remove(dict);
         }
     }
 
@@ -230,7 +260,8 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
     public List<DictionaryEntry> findWords(Collection<String> words) {
         List<IDictionary> dicts;
         synchronized (this) {
-            dicts = new ArrayList<IDictionary>(dictionaries.values());
+            dicts = new ArrayList<>(dictionaries.values());
+            dicts.addAll(onlineDictionaries);
         }
         return words.stream().filter(word -> !isIgnoreWord(word)).flatMap(word -> {
             return dicts.stream().flatMap(dict -> doLookUp(dict, word).stream());

@@ -65,6 +65,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.dictionaries.DictionariesManager;
 import org.omegat.core.dictionaries.DictionaryEntry;
+import org.omegat.core.dictionaries.IDictionary;
 import org.omegat.core.dictionaries.IDictionaryFactory;
 import org.omegat.core.events.IEditorEventListener;
 import org.omegat.gui.common.EntryInfoSearchThread;
@@ -444,6 +445,16 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     @Override
     public void removeDictionaryFactory(IDictionaryFactory factory) {
         manager.removeDictionaryFactory(factory);
+    }
+
+    @Override
+    public void addDictionary(IDictionary dictionary) {
+        manager.addOnlineDictionary(dictionary);
+    }
+
+    @Override
+    public void removeDictionary(IDictionary dictionary) {
+        manager.removeOnlineDictionary(dictionary);
     }
 
     @Override

@@ -152,20 +152,18 @@ dependencies {
         implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        implementation 'org.eclipse.jgit:org.eclipse.jgit:5.13.1.202206130422-r'
-        // Original JSch is unmaintained and dead, so we use forked version, mwiede/jsch
-        // to fix BUGS#1075, and to support elliptic curve ciphers and improved ssh agent
-        implementation 'com.github.mwiede:jsch:0.2.3'
-        // https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit.ssh.jsch
-        implementation ('org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.13.1.202206130422-r') {
-            exclude module: 'jsch'
-        }
-        // For ed25519 and ecdsa support of jsch, java16+ or BC
-        implementation 'org.bouncycastle:bcprov-jdk15on:1.69'
-        // For ssh agent support of jsch, Java16+ or junixsocket
-        implementation 'com.kohlschutter.junixsocket:junixsocket-core:2.4.0'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.5.0.202303070854-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache.agent:6.5.0.202303070854-r'
+        implementation 'org.apache.sshd:sshd-git:2.9.2'
+        // For ed25519 and ecdsa support of ssh, java16+ or BC
+        implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+        implementation 'org.bouncycastle:bcpg-jdk15on:1.70'
+        implementation 'org.bouncycastle:bcpkix-jdk15on:1.70'
+        implementation 'net.i2p.crypto:eddsa:0.3.0'
         // For gpg signing
-        implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:5.11.1.202105131744-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:6.5.0.202303070854-r'
+
         // For subversion
         implementation 'org.tmatesoft.svnkit:svnkit:1.10.9'
 

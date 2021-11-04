@@ -165,6 +165,8 @@ dependencies {
         // Specify the following two here just to make sure all jsch.agentproxy libs are the same version.
         implementation 'com.jcraft:jsch.agentproxy.connector-factory:0.0.9'
         implementation 'com.jcraft:jsch.agentproxy.svnkit-trilead-ssh2:0.0.9'
+        // For gpg signing
+        implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:5.11.1.202105131744-r'
         implementation 'org.tmatesoft.svnkit:svnkit:1.8.14'
 
         // Team project conflict resolution

@@ -27,6 +27,9 @@
 
 package org.omegat.core.team2.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +38,13 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
+import com.jcraft.jsch.AgentIdentityRepository;
+import com.jcraft.jsch.AgentProxyException;
+import com.jcraft.jsch.IdentityRepository;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.SSHAgentConnector;
+import com.jcraft.jsch.Session;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -43,24 +53,14 @@ import org.eclipse.jgit.transport.OpenSshConfig;
 import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
+
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-
-import com.jcraft.jsch.IdentityRepository;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
-import com.jcraft.jsch.agentproxy.AgentProxyException;
-import com.jcraft.jsch.agentproxy.Connector;
-import com.jcraft.jsch.agentproxy.ConnectorFactory;
-import com.jcraft.jsch.agentproxy.RemoteIdentityRepository;
-import com.jcraft.jsch.agentproxy.USocketFactory;
-import com.jcraft.jsch.agentproxy.connector.SSHAgentConnector;
-import com.jcraft.jsch.agentproxy.usocket.JNAUSocketFactory;
 
 /**
  * Git repository credentials provider. One credentials provider created for all git instances.
@@ -90,23 +90,32 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
             @Override
             protected JSch createDefaultJSch(FS fs) throws JSchException {
-                Connector con = null;
-                try {
-                    if (SSHAgentConnector.isConnectorAvailable()) {
-                        USocketFactory usf = new JNAUSocketFactory();
-                        con = new SSHAgentConnector(usf);
-                    } else {
-                        ConnectorFactory cf = ConnectorFactory.getDefault();
-                        con = cf.createConnector();
+           		final JSch jsch = new JSch();
+                final File home = fs.userHome();
+                if (home != null) {
+                    final File sshdir = new File(home, OConsts.JSCH_DOT_SSH_DIR);
+                    if (sshdir.isDirectory()) {
+                        try (FileInputStream in = new FileInputStream(new File(sshdir, OConsts.JSCH_KNOWN_HOSTS))) {
+                            jsch.setKnownHosts(in);
+                        } catch (IOException ignored) {
+                        }
+                        for (String privateKeyName: OConsts.JSCH_PRIVATE_KEY_FILES.split(",")) {
+                            File privateKey = new File(sshdir, privateKeyName);
+                            if (privateKey.isFile()) {
+                                try {
+                                    jsch.addIdentity(privateKey.getAbsolutePath());
+                                } catch (JSchException ignored) {
+                                }
+                            }
+                        }
                     }
+                }
+                try {
+                    JSch.setConfig("PreferredAuthentications", "publickey");
+                    IdentityRepository irepo = new AgentIdentityRepository(new SSHAgentConnector());
+                    jsch.setIdentityRepository(irepo);
                 } catch (AgentProxyException e) {
                     Log.log(e);
-                }
-                JSch jsch = super.createDefaultJSch(fs);
-                if (con != null) {
-                    JSch.setConfig("PreferredAuthentications", "publickey");
-                    IdentityRepository irepo = new RemoteIdentityRepository(con);
-                    jsch.setIdentityRepository(irepo);
                 }
                 return jsch;
             }

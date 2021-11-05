@@ -40,6 +40,7 @@ import java.util.stream.StreamSupport;
 import javax.xml.namespace.QName;
 
 import org.eclipse.jgit.api.CloneCommand;
+import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LsRemoteCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
@@ -53,6 +54,8 @@ import org.eclipse.jgit.dircache.DirCacheIterator;
 import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.CoreConfig.AutoCRLF;
+import org.eclipse.jgit.lib.GpgConfig;
+import org.eclipse.jgit.lib.GpgSigner;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Ref;
@@ -97,6 +100,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     static {
         CredentialsProvider.setDefault(new GITCredentialsProvider());
+        GpgSigner.setDefault(new GITExternalGpgSigner());
     }
 
     @Override
@@ -320,8 +324,16 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             return null;
         }
         Log.logInfoRB("GIT_START", "upload");
+        boolean sign = true;
         try (Git git = new Git(repository)) {
-            RevCommit commit = git.commit().setMessage(comment).call();
+            CommitCommand commitCommand = git.commit();
+            commitCommand.setMessage(comment);
+            commitCommand.setSign(sign);
+            if (sign) {
+                GpgConfig cfg = new GpgConfig(repository.getConfig());
+                commitCommand.setGpgConfig(cfg);
+            }
+            RevCommit commit = commitCommand.call();
             Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE)
                     .add(getDefaultBranchName(repository)).call();
             List<Status> statuses = StreamSupport.stream(results.spliterator(), false)

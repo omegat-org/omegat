@@ -74,6 +74,7 @@ import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
+import org.omegat.util.Preferences;
 
 import gen.core.project.RepositoryDefinition;
 
@@ -324,7 +325,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             return null;
         }
         Log.logInfoRB("GIT_START", "upload");
-        boolean sign = true;
+        boolean sign = Preferences.isPreferenceDefault(Preferences.GIT_SIGNER_USE_EXTERNAL_GPG, false);
         try (Git git = new Git(repository)) {
             CommitCommand commitCommand = git.commit();
             commitCommand.setMessage(comment);

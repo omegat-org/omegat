@@ -57,21 +57,30 @@ public class TeamOptionsController extends BasePreferencesController {
 
     private void initGui() {
         panel = new TeamOptionsPanel();
+        panel.ignoreSigningCheckBox.addActionListener(e ->
+                panel.useExternalGpgCheckBox.setEnabled(!panel.ignoreSigningCheckBox.isSelected()));
     }
 
     @Override
     protected void initFromPrefs() {
         panel.authorText
                 .setText(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name")));
+        panel.ignoreSigningCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GIT_SIGNER_IGNORE, true));
+        panel.useExternalGpgCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GIT_SIGNER_USE_EXTERNAL_GPG, false));
+        panel.useExternalGpgCheckBox.setEnabled(!panel.ignoreSigningCheckBox.isSelected());
     }
 
     @Override
     public void restoreDefaults() {
         panel.authorText.setText(System.getProperty("user.name"));
+        panel.ignoreSigningCheckBox.setSelected(true);
+        panel.useExternalGpgCheckBox.setSelected(false);
     }
 
     @Override
     public void persist() {
         Preferences.setPreference(Preferences.TEAM_AUTHOR, panel.authorText.getText());
+        Preferences.setPreference(Preferences.GIT_SIGNER_IGNORE, panel.ignoreSigningCheckBox.isSelected());
+        Preferences.setPreference(Preferences.GIT_SIGNER_USE_EXTERNAL_GPG, panel.useExternalGpgCheckBox.isSelected());
     }
 }

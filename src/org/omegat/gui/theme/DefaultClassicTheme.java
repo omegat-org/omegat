@@ -44,6 +44,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.gui.UIDesignManager;
 
 
+@SuppressWarnings("serial")
 public class DefaultClassicTheme extends DelegatingLookAndFeel {
 
     private static final String NAME = OStrings.getString("THEME_OMEGAT_CLASSIC_NAME");

@@ -50,6 +50,7 @@ import org.omegat.util.gui.RoundedCornerBorder;
 import org.omegat.util.gui.UIDesignManager;
 
 
+@SuppressWarnings("serial")
 public class DefaultFlatTheme extends DelegatingLookAndFeel {
 
     private static final String NAME = OStrings.getString("THEME_OMEGAT_DEFAULT_NAME");

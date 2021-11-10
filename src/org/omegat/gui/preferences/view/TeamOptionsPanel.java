@@ -55,8 +55,6 @@ public class TeamOptionsPanel extends JPanel {
         descriptionLabel = new javax.swing.JLabel();
         authorLabel = new javax.swing.JLabel();
         authorText = new javax.swing.JTextField();
-        ignoreSigningCheckBox = new javax.swing.JCheckBox();
-        useExternalGpgCheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -87,18 +85,6 @@ public class TeamOptionsPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         add(authorText, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(ignoreSigningCheckBox, OStrings.getString("PREFS_TEAM_IGNORE_GIT_SIGN"));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        add(ignoreSigningCheckBox, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(useExternalGpgCheckBox, OStrings.getString("PREFS_TEAM_USE_EXTERNAL_GPG"));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        add(useExternalGpgCheckBox, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -115,7 +101,5 @@ public class TeamOptionsPanel extends JPanel {
     javax.swing.JTextField authorText;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.Box.Filler filler1;
-    javax.swing.JCheckBox ignoreSigningCheckBox;
-    javax.swing.JCheckBox useExternalGpgCheckBox;
     // End of variables declaration//GEN-END:variables
 }

@@ -506,9 +506,6 @@ public final class Preferences {
     public static final String THEME_CLASS_NAME = "theme_class_name";
     public static final String THEME_CLASS_NAME_DEFAULT = "org.omegat.gui.theme.DefaultFlatTheme";
 
-    public static final String GIT_SIGNER_IGNORE = "team_git_sign_ignore_config";
-    public static final String GIT_SIGNER_USE_EXTERNAL_GPG = "team_git_sign_use_external_gpg";
-
     /** Private constructor, because this file is singleton */
     private Preferences() {
     }

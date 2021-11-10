@@ -70,6 +70,7 @@ import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
+
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
@@ -99,7 +100,6 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     static {
         CredentialsProvider.setDefault(new GITCredentialsProvider());
-        GpgSigner.setDefault(new GITExternalGpgSigner());
     }
 
     @Override
@@ -151,6 +151,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             }
             configRepo();
             Log.logInfoRB("GIT_FINISH", "clone");
+        }
+
+        String externalGpg = repository.getConfig().getString("user", null, "program");
+        if ("gpg".equalsIgnoreCase(externalGpg)) {
+            GpgSigner.setDefault(new GITExternalGpgSigner());
         }
 
         // cleanup repository

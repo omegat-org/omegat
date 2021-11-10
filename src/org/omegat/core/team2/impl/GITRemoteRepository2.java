@@ -54,7 +54,6 @@ import org.eclipse.jgit.dircache.DirCacheIterator;
 import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.CoreConfig.AutoCRLF;
-import org.eclipse.jgit.lib.GpgConfig;
 import org.eclipse.jgit.lib.GpgSigner;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
@@ -324,15 +323,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             return null;
         }
         Log.logInfoRB("GIT_START", "upload");
-        boolean sign = true;
         try (Git git = new Git(repository)) {
             CommitCommand commitCommand = git.commit();
             commitCommand.setMessage(comment);
-            commitCommand.setSign(sign);
-            if (sign) {
-                GpgConfig cfg = new GpgConfig(repository.getConfig());
-                commitCommand.setGpgConfig(cfg);
-            }
+            commitCommand.setSign(null);  // read from git config
             RevCommit commit = commitCommand.call();
             Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE)
                     .add(getDefaultBranchName(repository)).call();

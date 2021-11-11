@@ -33,26 +33,25 @@
         <guimenu>Project</guimenu>
 
         <guimenuitem>Create Translated Documents</guimenuitem>
-      </menuchoice>. Files within the <filename>source</filename> folder,
+      </menuchoice>. Files within the <filename class="directory">source</filename> folder,
     whether translated or not, are then generated here, with the same
     hierarchy as present in the source subfolder. The contents of the target
     subfolder will reflect the current state of the translation, as present in
-    the project translation memory, saved in the current <emphasis
-    role="bold">/omegat/project_save.tmx</emphasis>. Untranslated segments
+    the project translation memory, saved in the current <filename>/omegat/project_save.tmx</filename>. Untranslated segments
     will hereby remain in the source language.</para>
   </section>
 
   <section id="projectfolder.tm">
     <title>tm</title>
 
-    <para>The /tm/ folder can contain any number of ancillary translation
+    <para>The <filename class="directory">tm</filename> folder can contain any number of ancillary translation
     memories - i.e. tmx files. Such files can be created in any of the three
     varieties indicated above. Note that other CAT tools can export (and
     import as well) tmx files, usually in all three forms. The best thing of
     course is to use OmegaT-specific TMX files (see above), so that the
     in-line formatting within the segment is retained.</para>
 
-    <para>The contents of translation memories in the tm subfolder serve to
+    <para>The contents of translation memories in the <filename class="directory">tm</filename> subfolder serve to
     generate suggestions for the text(s) to be translated. Any text, already
     translated and stored in those files, will appear among the fuzzy matches,
     if it is sufficiently similar to the text currently being
@@ -65,31 +64,30 @@
         <guimenuitem>Editing Behavior...</guimenuitem>
       </menuchoice> dialog window. For instance (if the default is accepted),
     the translation from the ancillary TM is accepted and prefixed
-    with<emphasis> [fuzzy]</emphasis>, so that the translator can review the
+    with <emphasis>[fuzzy]</emphasis>, so that the translator can review the
     translations at a later stage and check whether the segments tagged this
     way, have been translated correctly.</para>
 
     <para>It may happen, that translation memories, available in the
-    <filename>tm</filename> subfolder, contain segments with identical source
+    <filename class="directory">tm</filename> subfolder, contain segments with identical source
     text, but differing targets. TMX files are read sorted by their names and
     segments within a given TMX file line by line. The last segment with the
     identical source text will thus prevail (Note: of course it makes more
     sense to avoid this to happen in the first place).</para>
 
-    <para>Note that the TMX files in the tm folder can be compressed with
+    <para>Note that the TMX files in the <filename class="directory">tm</filename> folder can be compressed with
     gzip.</para>
 
     <section id="projectfolder.tmauto">
       <title>tm/auto</title>
 
       <para>If it is clear from the very start, that translations in a given
-      TM (or TMs) are all correct, one can put them into the<emphasis
-      role="bold"> tm/auto</emphasis> folder and avoid confirming a lot
-      of<emphasis> [fuzzy]</emphasis> cases.</para>
+      TM (or TMs) are all correct, one can put them into the <filename class="directory">tm/auto</filename> folder and avoid confirming a lot
+      of <emphasis>[fuzzy]</emphasis> cases.</para>
 
       <para><orderedlist>
           <listitem>
-            <para>Put the TMX in /tm/auto.</para>
+            <para>Put the TMX in <filename class="directory">tm/auto</filename>.</para>
           </listitem>
 
           <listitem>
@@ -103,7 +101,7 @@
           </listitem>
         </orderedlist></para>
 
-      <para>Note: if TMX is removed from /tm/auto before step 3, no extra
+      <para>Note: if TMX is removed from <filename class="directory">tm/auto</filename> before step 3, no extra
       Translation Unit is added.</para>
     </section>
 
@@ -112,12 +110,12 @@
 
       <para>If you have no doubt that a TMX is more accurate than the
       <filename>project_save.tmx</filename> of OmegaT, put this TMX in
-      /tm/enforce to overwrite existing default translations
+      <filename class="directory">tm/enforce</filename> to overwrite existing default translations
       unconditionally.</para>
 
       <para><orderedlist>
           <listitem>
-            <para>Put the TMX in /tm/enforce.</para>
+            <para>Put the TMX in <filename class="directory">tm/enforce</filename>.</para>
           </listitem>
 
           <listitem>
@@ -135,18 +133,18 @@
                 <listitem>
                   <para>If they <emphasis>don't need</emphasis> to stay immune
                   from further changes, then remove the TMX from
-                  /tm/enforce.</para>
+                  <filename class="directory">tm/enforce</filename>.</para>
                 </listitem>
 
                 <listitem>
                   <para>If they <emphasis>need</emphasis> to stay immune from
-                  further changes, then keep the TMX in /tm/enforce.</para>
+                  further changes, then keep the TMX in <filename class="directory">tm/enforce</filename>.</para>
                 </listitem>
               </itemizedlist></para>
           </listitem>
         </orderedlist></para>
 
-      <para>Note: if TMX is removed from /tm/enforce before step 3,
+      <para>Note: if TMX is removed from <filename class="directory">tm/enforce</filename> before step 3,
       enforcements aren't kept at all.</para>
     </section>
 
@@ -154,7 +152,7 @@
       <title>tm/mt</title>
 
       <para>In the editor pane, when a match is inserted from a TMX contained
-      in a folder named <filename>mt</filename>, the background of the active
+      in a folder named <filename class="directory">mt</filename>, the background of the active
       segment is changed to red. The background is restored to normal when the
       segment is left.</para>
     </section>
@@ -165,10 +163,10 @@
       <para>Sometimes, it is useful to distinguish between high-quality
       translation memories and those that are, because of the subject matter,
       client, revision status, etc., less reliable. For translation memories
-      in folders with a name <filename>penalty-xxx</filename> (with xxx
+      in folders with a name <filename class="directory">penalty-xxx</filename> (with xxx
       between 0 and 100), matches will be degraded according to the name of
       the folder: a 100% match in any of TMs, residing in a folder called
-      <filename>penalty-30</filename> for instance, will be lowered to a 70%
+      <filename class="directory">penalty-30</filename> for instance, will be lowered to a 70%
       match. The penalty applies to all three match percentages: matches 75,
       80, 90 will in this case be lowered to 45, 50, 60.</para>
     </section>
@@ -195,9 +193,9 @@
   <section id="projectfolder.omegat">
     <title>omegat</title>
 
-    <para>The <emphasis role="bold">omegat</emphasis> subfolder contains at
+    <para>The <filename class="directory">omegat</filename> subfolder contains at
     least one and possibly several other files. The most important file here
-    is the <filename>project_save.tmx, </filename>that is the working
+    is the <filename>project_save.tmx</filename>, that is the working
     translation memory for the project. Backups of this file (with extension
     bak) are added progressively to this subfolder, first at the beginning of
     the translation session, at its end, and while the translation
@@ -212,8 +210,7 @@
 
         <listitem>
           <para>contains the current statistics of the current project. You
-          can view it by selecting <guimenuitem>Tools &gt;
-          Statistics</guimenuitem></para>
+          can view it by selecting <menuchoice><guimenu>Tools</guimenu><guilabel>Statistics</guilabel></menuchoice></para>
         </listitem>
       </varlistentry>
 
@@ -226,7 +223,7 @@
           <para>are created and used by the spell checker. If you already have
           collected words you wish the spell checker to ignore / accept, you
           just need to copy the corresponding two files into the
-          <filename>omegat</filename>subfolder of your current project.</para>
+          <filename class="directory">omegat</filename> subfolder of your current project.</para>
         </listitem>
       </varlistentry>
 
@@ -235,7 +232,7 @@
 
         <listitem>
           <para>contains the latest project match statistics, generated by
-          <guimenuitem>Tools &gt; Match Statistics</guimenuitem></para>
+          <menuchoice><guimenu>Tools</guimenu><guilabel>Match Statistics</guilabel></menuchoice></para>
         </listitem>
       </varlistentry>
 

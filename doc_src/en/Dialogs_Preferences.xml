@@ -42,7 +42,7 @@
         <term>Automatically fetch translations</term>
 
         <listitem>
-          <para>For confidentiality reasons, you may want to not send all the segments to the Machine Translation engine. If you uncheck this option, machine translations will be fetched only when you press <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> (<keycombo> <keycap>Cmd</keycap> <keycap>M</keycap> </keycombo> on OS X) in the current segment. You must then press <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> again to insert the suggestion.</para>
+          <para>For confidentiality reasons, you may want to not send all the segments to the Machine Translation engine. If you uncheck this option, machine translations will be fetched only when you press <keycombo><keycap>Ctrl</keycap><keycap>M</keycap></keycombo> (<keycombo><keycap>Cmd</keycap><keycap>M</keycap></keycombo> on OS X) in the current segment. You must then press <keycombo><keycap>Ctrl</keycap><keycap>M</keycap> </keycombo> again to insert the suggestion.</para>
         </listitem>
       </varlistentry>
 
@@ -150,7 +150,7 @@
           <term>Browse TaaS Collections...</term>
 
           <listitem>
-            <para>This button enables you to browse and download the collections that exist for the project's source and target languages. Private collections are displayed in bold. The collections are downloaded as TBX glossaries and stored in the current glossary folder.</para>
+            <para>This button enables you to browse and download the collections that exist for the project's source and target languages. Private collections are displayed in bold. The collections are downloaded as TBX glossaries and stored in the current <filename class="directory">glossary</filename> folder.</para>
           </listitem>
         </varlistentry>
 
@@ -229,42 +229,40 @@
   <section id="dialogs.preferences.filefilters">
     <title>File Filters</title>
 
-    <para>This dialog lists the file filters available. The filters used by the current project are displayed in bold. If you prefer not to use OmegaT to translate files of a certain type, you can turn off the corresponding filter by deactivating the check box beside its name. OmegaT will then omit the corresponding files when loading projects, and will copy them unmodified to the target folder when creating target documents. When you wish to use the filter again, just tick the check box. Click <emphasis role="bold">Defaults</emphasis> to reset the file filters to the default settings. To edit the files and encodings a filter is used for, select the filter in the list and click <emphasis role="bold">Edit.</emphasis></para>
+    <para>This dialog lists the file filters available. The filters used by the current project are displayed in bold. If you prefer not to use OmegaT to translate files of a certain type, you can turn off the corresponding filter by deactivating the check box beside its name. OmegaT will then omit the corresponding files when loading projects, and will copy them unmodified to the <filename class="directory">target</filename> folder when creating target documents. When you wish to use the filter again, just tick the check box. Click <guilabel>Defaults</guilabel> to reset the file filters to the default settings. To edit the files and encodings a filter is used for, select the filter in the list and click <guilabel>Edit</guilabel>.</para>
 
     <para>The dialog allows you to enable or disable the following options:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Remove leading and trailing tags: uncheck this option to display all the tags, including tags at the beginning and end of the segment. Warning: in Microsoft Open XML formats (docx, xlsx, etc.), if all tags are displayed, DO NOT place any text before the first tag – it is a technical tag that must always begin the segment.</para>
+        <para><guilabel>Remove leading and trailing tags</guilabel>: uncheck this option to display all the tags, including tags at the beginning and end of the segment. Warning: in Microsoft Open XML formats (docx, xlsx, etc.), if all tags are displayed, DO NOT place any text before the first tag – it is a technical tag that must always begin the segment.</para>
       </listitem>
 
       <listitem>
-        <para>Remove leading and trailing whitespace in non-segmented
-        projects: by default, OmegaT removes leading and trailing whitespace.
+        <para><guilabel>Remove leading and trailing whitespace in non-segmented projects</guilabel>: by default, OmegaT removes leading and trailing whitespace.
         In non-segmented projects, it is possible to keep it by unchecking
         this option.</para>
       </listitem>
 
       <listitem>
-        <para>Preserve spaces for all tags: check this option if the source documents contain significant spaces used to control the layout that must not be ignored.</para>
+        <para><guilabel>Preserve spaces for all tags</guilabel>: check this option if the source documents contain significant spaces used to control the layout that must not be ignored.</para>
       </listitem>
 
       <listitem>
-        <para>Ignore file context when identifying segments with alternate translations: by default, OmegaT uses the source file name as part of the identification of an alternative translation. If the option is checked, the source file name will not be used, and alternative translations will take effect in any file as long as the other context (previous/next segments or some sort of segment identifier, depending on the file format) matches.</para>
+        <para><guilabel>Ignore file context when identifying segments with alternate translations</guilabel>: by default, OmegaT uses the source file name as part of the identification of an alternative translation. If the option is checked, the source file name will not be used, and alternative translations will take effect in any file as long as the other context (previous/next segments or some sort of segment identifier, depending on the file format) matches.</para>
       </listitem>
     </itemizedlist>
 
     <section id="filters.options">
       <title>Filter options</title>
 
-      <para>Several filters (text files, XHTML files, HTML and XHTML files, OpenDocument files and Microsoft Open XML files) have one or more specific options. To modify the options, select the filter in the list and click <emphasis role="bold">Options</emphasis>. The available options are:</para>
+      <para>Several filters (text files, XHTML files, HTML and XHTML files, OpenDocument files and Microsoft Open XML files) have one or more specific options. To modify the options, select the filter in the list and click <guibutton>Options...</guibutton>. The available options are:</para>
 
       <para><emphasis role="bold">Text files</emphasis></para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Paragraph segmentation on line breaks, empty lines
-          or never:</emphasis></para>
+          <para><guilabel>Segment source text into paragraphs on:</guilabel></para>
 
           <para>if sentence segmentation rules are active, the text will be segmented further according to the option selected here.</para>
         </listitem>
@@ -274,8 +272,8 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Allow blank translations in the target
-          file</emphasis>:</para>
+          <para><guilabel>Allow blank translations in the target
+          file</guilabel>:</para>
 
           <para>If selected, when a segment in a PO file (which may be a whole paragraph) is not translated, the translation will be empty in the target file. Technically speaking, the <code>msgstr</code> segment in the PO target file, if created, will be left empty. As this is the standard behaviour for PO files, it is selected by default. If the option is off, the source text will be copied to the target segment.</para>
         </listitem>
@@ -283,7 +281,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Skip PO header</emphasis></para>
+          <para><guilabel>Skip PO header</guilabel></para>
 
           <para>The PO header will be skipped and left unchanged if this option is checked.</para>
         </listitem>
@@ -291,8 +289,8 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;'
-          in header</emphasis></para>
+          <para><guilabel>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;'
+          in header</guilabel></para>
 
           <para><emphasis>This option allows OmegaT to override the specification in the PO file header and use the default for the selected target language.</emphasis></para>
         </listitem>
@@ -302,7 +300,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Translate the following attributes</emphasis>: the
+          <para><guilabel>Translate the following attributes</guilabel>: the
           selected attributes will appear as segments in the Editor
           window.</para>
         </listitem>
@@ -310,25 +308,25 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Start a new paragraph on</emphasis>: the &lt;br&gt; HTML tag will constitute a paragraph break for segmentation purposes.</para>
+          <para><guilabel>Start a new paragraph on</guilabel>: the &lt;br&gt; HTML tag will constitute a paragraph break for segmentation purposes.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Skip text matching regular expression</emphasis>: any text matching the regular expression is skipped. It is shown in red in the tag validator. Text in source segments that matches is shown in italics.</para>
+          <para><guilabel>Skip text matching regular expression</guilabel>: any text matching the regular expression is skipped. It is shown in red in the tag validator. Text in source segments that matches is shown in italics.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Do not translate the content attribute of meta-tags ...:</emphasis> The meta-tags in the box will not be translated.</para>
+          <para><guilabel>Do not translate the content attribute of meta-tags ...</guilabel>: the meta-tags in the box will not be translated.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Do not translate the content of tags with the following attribute key-value pairs (separate with commas)</emphasis>: if a tag matches the list of key-value pairs, its content will be ignored.</para>
+          <para><guilabel>Do not translate the content of tags with the following attribute key-value pairs (separate with commas)</guilabel>: if a tag matches the list of key-value pairs, its content will be ignored.</para>
 
           <para>It is sometimes useful to be able make certain tags untranslatable based on the values of their attributes. For example, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. You can define key-value pairs for tags to be left untranslated. For the example above, the field would contain: <literal>class=hide, translate=no </literal>.</para>
         </listitem>
@@ -374,11 +372,11 @@
 
           <itemizedlist>
             <listitem>
-              <para><emphasis>Aggregate tags</emphasis>: if checked, tags with no translatable text between them will be aggregated into a single tag.</para>
+              <para><guilabel>Aggregate tags</guilabel>: if checked, tags with no translatable text between them will be aggregated into a single tag.</para>
             </listitem>
 
             <listitem>
-              <para><emphasis>Preserve spaces for all tags</emphasis>: if checked, &quot;white space&quot; (i.e. spaces and newlines) will be preserved, even if this option is not defined in the document.</para>
+              <para><guilabel>Preserve spaces for all tags</guilabel>: if checked, &quot;white space&quot; (i.e. spaces and newlines) will be preserved, even if this option is not defined in the document.</para>
             </listitem>
           </itemizedlist>
         </listitem>
@@ -388,13 +386,13 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Add or rewrite encoding declaration in HTML and XHTML files</emphasis>: the target files often need to have a different character set encoding from the one in the source file (whether it is explicitly defined or implied). Using this option, the translator can specify whether the target files should have the encoding declaration included. For instance, if the file filter specifies UTF8 as the encoding scheme for the target files, selecting Always will ensure that this information is included in the translated files.</para>
+          <para><guilabel>Add or rewrite encoding declaration in HTML and XHTML files</guilabel>: the target files often need to have a different character set encoding from the one in the source file (whether it is explicitly defined or implied). Using this option, the translator can specify whether the target files should have the encoding declaration included. For instance, if the file filter specifies UTF8 as the encoding scheme for the target files, selecting Always will ensure that this information is included in the translated files.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Translate the following attributes</emphasis>: the
+          <para><guilabel>Translate the following attributes</guilabel>: the
           selected attributes will appear as segments in the Editor
           window.</para>
         </listitem>
@@ -402,35 +400,35 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Start a new paragraph on</emphasis>: the &lt;br&gt; HTML tag will constitute a paragraph break for segmentation purposes.</para>
+          <para><guilabel>Start a new paragraph on</guilabel>: the &lt;br&gt; HTML tag will constitute a paragraph break for segmentation purposes.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Skip text matching regular expression</emphasis>: any text matching the regular expression is skipped. It is shown in red in the tag validator. Text in source segments that matches is shown in italics.</para>
+          <para><guilabel>Skip text matching regular expression</guilabel>: any text matching the regular expression is skipped. It is shown in red in the tag validator. Text in source segments that matches is shown in italics.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Do not translate the content attribute of meta-tags ...:</emphasis> The meta-tags in the box will not be translated.</para>
+          <para><guilabel>Do not translate the content attribute of meta-tags ...:</guilabel> The meta-tags in the box will not be translated.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis>Do not translate the content of tags with the following attribute key-value pairs (separate with commas)</emphasis>: if a tag matches the list of key-value pairs, its content will be ignored.</para>
+          <para><guilabel>Do not translate the content of tags with the following attribute key-value pairs (separate with commas)</guilabel>: if a tag matches the list of key-value pairs, its content will be ignored.</para>
 
           <para>It is sometimes useful to be able make certain tags untranslatable based on the values of their attributes. For example, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>. You can define key-value pairs for tags to be left untranslated. For the example above, the field would contain: <literal>class=hide, translate=no </literal>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>Compress whitespace in translated document</emphasis>: multiple continuous whitespace characters will be converted into one single whitespace in the translated document.</para>
+          <para><guilabel>Compress whitespace in translated document</guilabel>: multiple continuous whitespace characters will be converted into one single whitespace in the translated document.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis>Remove HTML comments in translated document</emphasis>: commented parts (between &lt;!-- and --&gt;) will not be copied into the translated document.</para>
+          <para><guilabel>Remove HTML comments in translated document</guilabel>: commented parts (between &lt;!-- and --&gt;) will not be copied into the translated document.</para>
         </listitem>
       </itemizedlist>
 
@@ -451,18 +449,18 @@
     <section id="edit.filter.dialog">
       <title>Edit filter dialog</title>
 
-      <para>This dialog enables you to specify the source filename patterns for files to be processed by the filter, customize the filenames of translated files and select which encodings should be used for loading the source file and saving the translation. To modify a file filter pattern, either modify the fields directly or click <emphasis role="bold">Edit</emphasis>. To add a new file filter pattern, click <emphasis role="bold">Add</emphasis>. The same dialog is used to add a pattern or to edit a particular pattern. The dialog includes a special target filename pattern editor, which you can use to customize the names of output files.</para>
+      <para>This dialog enables you to specify the source filename patterns for files to be processed by the filter, customize the filenames of translated files and select which encodings should be used for loading the source file and saving the translation. To modify a file filter pattern, either modify the fields directly or click <guibutton>Edit</guibutton>. To add a new file filter pattern, click <guibutton>Add</guibutton>. The same dialog is used to add a pattern or to edit a particular pattern. The dialog includes a special target filename pattern editor, which you can use to customize the names of output files.</para>
 
       <section id="source.filetype.and.filename.pattern">
         <title>Source file type, filename pattern</title>
 
-        <para>When OmegaT encounters a file in its source folder, it attempts to select the filter based upon the file's extension. More precisely, OmegaT attempts to match each filter's source filename patterns against the filename. For example, the pattern <literal>*.xhtml </literal>matches any file with the <literal>.xhtml</literal> extension. If the appropriate filter is found, the file is assigned to it for processing. For example, by default, the XHTML filter is used to process files with the .xhtml extension. You can change or add filename patterns for files to be handled by each file filter. Source filename patterns use wild card characters similar to those used in <emphasis role="bold">Searches. </emphasis>The '*' character matches zero or more characters. The '?' character matches exactly one character. All other characters represent themselves. For example, if you wish the text filter to handle readme files (<literal>readme, read.me</literal>, and <literal>readme.txt</literal>) you should use the pattern <literal>read*</literal>.</para>
+        <para>When OmegaT encounters a file in its <filename class="directory">source</filename> folder, it attempts to select the filter based upon the file's extension. More precisely, OmegaT attempts to match each filter's source filename patterns against the filename. For example, the pattern <literal>*.xhtml </literal>matches any file with the <literal>.xhtml</literal> extension. If the appropriate filter is found, the file is assigned to it for processing. For example, by default, the XHTML filter is used to process files with the .xhtml extension. You can change or add filename patterns for files to be handled by each file filter. Source filename patterns use wild card characters similar to those used in <emphasis role="bold">Searches</emphasis>. The '*' character matches zero or more characters. The '?' character matches exactly one character. All other characters represent themselves. For example, if you wish the text filter to handle readme files (<literal>readme, read.me</literal>, and <literal>readme.txt</literal>) you should use the pattern <literal>read*</literal>.</para>
       </section>
 
       <section id="source.and.target.files.encoding">
         <title>Source and Translated file encoding</title>
 
-        <para>Only a limited number of file formats specify a mandatory encoding. File formats that do not specify their encoding will use the encoding you set up for the extension that matches their name. For example, by default <literal>.txt</literal> files will be loaded using the default encoding of your operating system. You can change the source encoding for each different source filename pattern. Target files can also be written in any encoding. By default, the translated file encoding is the same as the source file encoding. The source and target encoding fields use drop-down menus containing all the supported encodings. &lt;auto&gt; leaves the choice of encoding to <application>OmegaT</application>. This is how it works:</para>
+        <para>Only a limited number of file formats specify a mandatory encoding. File formats that do not specify their encoding will use the encoding you set up for the extension that matches their name. For example, by default <literal>.txt</literal> files will be loaded using the default encoding of your operating system. You can change the source encoding for each different source filename pattern. Target files can also be written in any encoding. By default, the translated file encoding is the same as the source file encoding. The source and target encoding fields use drop-down menus containing all the supported encodings. &lt;auto&gt; leaves the choice of encoding to OmegaT. This is how it works:</para>
 
         <itemizedlist>
           <listitem>
@@ -618,7 +616,7 @@
     <title>Segmentation Setup</title>
 
     <para>Translation memory tools work with textual units called segments.
-    <application>OmegaT</application> has two ways to segment a text: by
+    OmegaT has two ways to segment a text: by
     paragraph or by sentence segmentation (also referred to as “rule-based
     segmentation”). In order to select the type of segmentation, select
     <menuchoice>
@@ -652,7 +650,7 @@
     segments. If you change segmentation options when a project is open, you
     must reload the project in order for the changes to take effect.</para>
 
-    <para><application>OmegaT</application> uses the following sequence of
+    <para>OmegaT uses the following sequence of
     steps:</para>
 
     <variablelist>
@@ -660,7 +658,7 @@
         <term>Structure level segmentation</term>
 
         <listitem>
-          <para><application>OmegaT</application> first parses the text for
+          <para>OmegaT first parses the text for
           structure-level segmentation. During this process it is only the
           structure of the source file that is used to produce
           segments.</para>
@@ -678,7 +676,7 @@
 
         <listitem>
           <para>After segmenting the source file into structural units,
-          <application>OmegaT</application> will segment these blocks further
+          OmegaT will segment these blocks further
           into sentences.</para>
         </listitem>
       </varlistentry>
@@ -865,7 +863,7 @@
     <para>Click on <guimenuitem>Character Table...</guimenuitem> to set the
     Character table auto-completer options.</para>
 
-    <para>Auto-completer is launched within the target segment via <emphasis role="bold">Ctrl+Space</emphasis> shortcut.</para>
+    <para>Auto-completer is launched within the target segment via <keycombo><keycap>Ctrl</keycap><keycap>Space</keycap></keycombo> shortcut.</para>
 
     <para>If <emphasis role="bold">Show Relevant Suggestions
     Automatically</emphasis> option is checked, Auto-completer is launched
@@ -914,7 +912,7 @@
         <term>Enable project-specific commands</term>
 
         <listitem>
-          <para>By default, OmegaT does not execute the commands specified in the project-specific settings (the <filename>finder.xml</filename> file in the <filename>omegat</filename> folder), because they may have a critical impact on the machine's security.</para>
+          <para>By default, OmegaT does not execute the commands specified in the project-specific settings (the <filename>finder.xml</filename> file in the <filename class="directory">omegat</filename> folder), because they may have a critical impact on the machine's security.</para>
 
           <para>Only activate this option if you know what you are doing, and only for projects from trusted sources.</para>
         </listitem>
@@ -952,15 +950,13 @@
         <listitem>
           <para>OmegaT leaves the editing field blank. This option allows you
           to enter the translation without the need to remove the source text,
-          thus saving you two keystrokes (<emphasis role="bold">Ctrl+A
-          </emphasis>and <emphasis role="bold">Del). </emphasis> Empty
-          translations are now allowed. They are displayed as &lt;EMPTY&gt; in
+          thus saving you two keystrokes (<keycombo><keycap>Ctrl</keycap><keycap>A</keycap></keycombo> and <keycap>Del</keycap>).  Empty translations are now allowed. They are displayed as &lt;EMPTY&gt; in
           the Editor. To create one, right-click in a segment, and select
-          &quot;<emphasis role="bold">Set empty translation</emphasis>&quot;. The entry
-          <emphasis role="bold">Remove translation</emphasis> in the same pop
+          <guilabel>Set empty translation</guilabel>. The entry
+          <guilabel>Remove translation</guilabel> in the same pop
           up menu also allows to delete the existing translation of the
           current segment. You achieve the same by clearing the target segment
-          and pressing <guibutton>Enter.</guibutton></para>
+          and pressing <guibutton>Enter</guibutton>.</para>
         </listitem>
       </varlistentry>
 
@@ -1037,9 +1033,9 @@
 
         <listitem>
           <para>The text export function exports data from within the current
-          <application>OmegaT</application> project to plain text files. The
+          OmegaT project to plain text files. The
           data are exported when the segment is opened. The files appear in
-          the /script subfolder in the OmegaT user files folder, and
+          the <filename class="directory">script</filename> subfolder in the OmegaT user files folder, and
           include:</para>
 
           <itemizedlist>
@@ -1055,8 +1051,7 @@
 
             <listitem>
               <para>The text highlighted by the user, when
-              <keycap>Ctrl+Shift+C</keycap> is pressed or <guimenuitem>Edit
-              &gt; Export Selection</guimenuitem> is selected
+              <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>C</keycap></keycombo> is pressed or <menuchoice><guimenu>Edit</guimenu><guimenuitem>Export Selection</guimenuitem></menuchoice> is selected
               (<filename>selection.txt</filename>).</para>
             </listitem>
           </itemizedlist>
@@ -1349,13 +1344,13 @@
   <section>
     <title>Plugins</title>
 
-    <para>Gives access to the list of plugins available. Plugins are installed in the <filename>/plugins</filename>
+    <para>Gives access to the list of plugins available. Plugins are installed in the <filename class="directory">plugins</filename>
       folder under the OmegaT installation folder or the platform-specific OmegaT user preferences folder.</para>
   </section>
 
   <section>
     <title>Updates</title>
 
-    <para>Enables automatic notification of <application>OmegaT</application> updates.</para>
+    <para>Enables automatic notification of OmegaT updates.</para>
   </section>
 </section>

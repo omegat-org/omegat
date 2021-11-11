@@ -14,9 +14,9 @@
   example.</para>
 
   <para>When you create the target documents in an
-  <application>OmegaT</application> project, the translation memory of the
+  OmegaT project, the translation memory of the
   project is output in the form of three files in the root folder of your
-  <application>OmegaT</application> project (see the above description). You
+  OmegaT project (see the above description). You
   can regard these three tmx files (<filename>-omegat.tmx</filename>,
   <filename>-level1.tmx</filename> and <filename>-level2.tmx</filename>) as an
   &quot;export translation memory&quot;, i.e. as an export of your current project's
@@ -27,13 +27,13 @@
   uses terminology which might have been used before), you can use these
   translation memories as &quot;input translation memories&quot;, i.e. for import into
   your new project. In this case, place the translation memories you wish to
-  use in the <emphasis>/tm</emphasis> or <emphasis>/tm</emphasis>/auto folder
+  use in the <filename class="directory">/tm</filename> or <filename class="directory">tm/auto</filename> folder
   of your new project: in the former case you will get hits from these
   translation memories in the fuzzy matches viewer, and in the latter case
   these TMs will be used to pre-translate your source text.</para>
 
-  <para>By default, the /tm folder is below the project's root folder (e.g.
-  ...<emphasis>/MyProject/tm</emphasis>), but you can choose a different
+  <para>By default, the <filename class="directory">tm</filename> folder is below the project's root folder (e.g.
+  ...<filename class="directory">MyProject/tm</filename>), but you can choose a different
   folder in the project properties dialog if you wish. This is useful if you
   frequently use translation memories produced in the past, for example
   because they are on the same subject or for the same customer. In this case,
@@ -121,14 +121,14 @@
     <itemizedlist>
       <listitem>
         <para>Copy the documents, you need the translation memory for, into
-        the source folder of the project.</para>
+        the <filename class="directory">source</filename> folder of the project.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para>Copy the translation memories, containing the translations of
-        the documents above, into <filename>tm/auto</filename> subfolder of
+        the documents above, into <filename class="directory">tm/auto</filename> subfolder of
         the new project.</para>
       </listitem>
     </itemizedlist>
@@ -136,9 +136,9 @@
     <itemizedlist>
       <listitem>
         <para>Start the project. Check for possible Tag errors with
-        <keycap>Ctrl+T </keycap>and untranslated segments with
-        <keycap>Ctrl+U</keycap>. To check everything is as expected, you may
-        press <keycap>Ctrl+D</keycap> to create the target documents and check
+        <keycombo><keycap>Ctrl</keycap><keycap>T</keycap></keycombo> and untranslated segments with
+        <keycombo><keycap>Ctrl</keycap><keycap>U</keycap></keycombo>. To check everything is as expected, you may
+        press <keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo> to create the target documents and check
         their contents.</para>
       </listitem>
     </itemizedlist>
@@ -185,7 +185,7 @@
     can serve as a go-between to help generate NL to ZH translation.</para>
 
     <para>The solution in our example is to copy the existing translation
-    memory into the tm/tmx2source/ subfolder and rename it to ZH_CN.tmx to
+    memory into the <filename class="directory">tm/tmx2source/</filename> subfolder and rename it to ZH_CN.tmx to
     indicate the target language of the tmx. The translator will be shown
     English translations for source segments in Dutch and use them to create
     the Chinese translation.</para>

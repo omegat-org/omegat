@@ -31,7 +31,7 @@
 
         <listitem>
           <para>The segmentation settings only address the way the source
-          files are handled by <application>OmegaT</application>. The
+          files are handled by OmegaT. The
           predominant way of segmenting the sources is the sentence-level
           segmenting, so this check box should in a normal case be left
           checked.</para>
@@ -166,13 +166,13 @@
 
     <para>Here you can select different subfolders, for instance the subfolder
     with source files, subfolder for target files etc. If you enter names of
-    folders that do not exist yet, <application>OmegaT</application> creates
+    folders that do not exist yet, OmegaT creates
     them for you. In case you decide to modify project folders, keep in mind
     that this will not move existing files from old folders to the new
     location.</para>
 
     <para>Clic on <guibutton>Exclusions...</guibutton> to define the files or
-    folders that will be ignored by <application>OmegaT</application>. An
+    folders that will be ignored by OmegaT. An
     ignored file or folder:</para>
 
     <itemizedlist>
@@ -185,7 +185,7 @@
       </listitem>
 
       <listitem>
-        <para>is not copied in /target folder during the translated files
+        <para>is not copied in <filename class="directory">target</filename> folder during the translated files
         creation process.</para>
       </listitem>
     </itemizedlist>

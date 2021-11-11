@@ -6,7 +6,7 @@
 
   <para>Alignment involves creating a bilingual translation memory from monolingual documents that have already been translated.</para>
 
-  <para>To access this window, select <menuchoice> <guimenuitem>Tools</guimenuitem> <guimenuitem>Align Files...</guimenuitem> </menuchoice>.</para>
+  <para>To access this window, select <menuchoice><guimenu>Tools</guimenu><guimenuitem>Align Files...</guimenuitem></menuchoice>.</para>
 
   <section>
     <title>Step 1: Adjust the alignment parameters</title>
@@ -38,7 +38,7 @@
       </listitem>
 
       <listitem>
-        <para>Press the space bar (shortcut for <menuchoice> <guimenuitem>Edit</guimenuitem> <guimenuitem>Start Pinpoint Align</guimenuitem> </menuchoice>).</para>
+        <para>Press the space bar (shortcut for <menuchoice><guimenu>Edit</guimenu><guimenuitem>Start Pinpoint Align</guimenuitem> </menuchoice>).</para>
       </listitem>
 
       <listitem>
@@ -46,7 +46,7 @@
       </listitem>
     </orderedlist>
 
-    <para>After several of these operations, select <menuchoice> <guimenuitem>Edit</guimenuitem> <guimenuitem>Realign pending</guimenuitem> </menuchoice> to update the alignment of the other segments.</para>
+    <para>After several of these operations, select <menuchoice><guimenu>Edit</guimenu><guimenuitem>Realign pending</guimenuitem> </menuchoice> to update the alignment of the other segments.</para>
 
     <para>To modify the position of one or more segments individually, select the segment(s) and press <userinput>U</userinput> (<guilabel>Move Up</guilabel>) or <userinput>D</userinput> (<guilabel>Move Down</guilabel>).</para>
 

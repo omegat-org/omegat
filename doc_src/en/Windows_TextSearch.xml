@@ -9,19 +9,19 @@
 
       <keycap>F</keycap>
     </keycombo> and enter the word or phrase you wish to search for in the
-  <emphasis>Search for</emphasis> box.</para>
+  <guilabel>Search for</guilabel> box.</para>
 
   <para>Alternatively, you can select a word or phrase in the Editor pane,
   Fuzzy matches pane or Glossary pane and hit <keycombo>
       <keycap>Ctrl</keycap>
 
       <keycap>F</keycap>
-    </keycombo>. The word or phrase is entered in the <emphasis>Search
-  for</emphasis> box automatically. You can have several Search windows open
+    </keycombo>. The word or phrase is entered in the <guilabel>Search
+  for</guilabel> box automatically. You can have several Search windows open
   at the same time, but close them when they are no longer needed so that they
   do not clutter your desktop.</para>
 
-  <para>Click the dropdown arrow of the <emphasis>Search for</emphasis> box to
+  <para>Click the dropdown arrow of the <guilabel>Search for</guilabel> box to
   access the last 10 searches.</para>
 
   <para>The Search window has its own menus:</para>
@@ -165,82 +165,82 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">case sensitive</emphasis>: the search will
+        <para><guilabel>case sensitive</guilabel>: the search will
         be performed for the exact string specified; i.e. capitalization is
         observed.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Space matches nbsp</emphasis>: when this
+        <para><guilabel>Space matches nbsp</guilabel>: when this
         option is checked, a space character put in search entry can match
         either a normal space character or a non-breacking space (\u00A)
         character.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">in source: </emphasis>search in the source
+        <para><guilabel>in source</guilabel>: search in the source
         segments</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">in translations: </emphasis>search in the
+        <para><guilabel>in translations</guilabel>: search in the
         target segments</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">in notes: </emphasis>search in notes to
+        <para><guilabel>in notes</guilabel>: search in notes to
         segments</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">in comments: </emphasis>search in comments
+        <para><guilabel>in comments</guilabel>: search in comments
         to segments</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Translated or untranslated:
-        </emphasis>search in both translated and untranslated segments.</para>
+        <para><guilabel>Translated or untranslated</guilabel>:
+        search in both translated and untranslated segments.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Translated: </emphasis>search only in
+        <para><guilabel>Translated</guilabel>: search only in
         translated segments.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Untranslated: </emphasis>search only in
+        <para><guilabel>Untranslated</guilabel>: search only in
         untranslated segments.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Display: all matching segments:
-        </emphasis>if checked, all the segments are displayed one by one, even
+        <para><guilabel>Display: all matching segments</guilabel>:
+        if checked, all the segments are displayed one by one, even
         if they are present several times in the same document or in different
         documents.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Display: file names: </emphasis>if
+        <para><guilabel>Display: file names</guilabel>: if
         checked, the name of the file where each segment is found is displayed
         above each result.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Search in Project</emphasis>: check
-        <emphasis>Memory</emphasis> to include the project memory
-        (project_save.tmx file) in the search. Check <emphasis>TMs</emphasis>
+        <para><guilabel>Search in Project</guilabel>: check
+        <guilabel>Memory</guilabel> to include the project memory
+        (<filename>project_save.tmx</filename> file) in the search. Check <guilabel>TMs</guilabel>
         to include the translation memories located in the
-        <filename>tm</filename> folder in the search. Check
-        <emphasis>Glossaries</emphasis> to include the glossaries located in
-        the <filename>glossary</filename> folder in the search.</para>
+        <filename class="directory">tm</filename> folder in the search. Check
+        <guilabel>Glossaries</guilabel> to include the glossaries located in
+        the <filename class="directory">glossary</filename> folder in the search.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Search in Files: </emphasis>search in a
+        <para><guilabel>Search in Files</guilabel>: search in a
         single file or a folder containing a set of files. When searching
         through files (as opposed to translation memories), OmegaT restricts
         the search to files in source file formats. Consequently, although
-        OmegaT is quite able to handle<filename> tmx</filename> files, it does
+        OmegaT is quite able to handle <filename>tmx</filename> files, it does
         not include them in the Search files search.</para>
       </listitem>
     </itemizedlist>
@@ -248,7 +248,7 @@
     <para>If you click on the button <guibutton>Advanced options</guibutton>
     additional criteria (author or changer of the translation, date
     translated, excluding orphan segments, etc) can be selected. When
-    <emphasis>Full/Half width char insensitive</emphasis> option is checked,
+    <guilabel>Full/Half width char insensitive</guilabel> option is checked,
     searches for fullwidth forms (CJK characters) will match halfwidth forms
     and vice versa.</para>
   </section>
@@ -258,14 +258,14 @@
 
     <para>Pressing the search button after entering a string in the search
     field displays all the segments in the project that include the entered
-    string. As <application>OmegaT</application> handles identical segments as
+    string. As OmegaT handles identical segments as
     one single entity, only the first unique segment is shown. The segments
     are displayed in order of appearance in the project. Translated segments
     are displayed with the original text at the top and the translated text at
     the bottom, untranslated segments are displayed as the source only.</para>
 
     <para>Double-clicking on a segment opens it in the Editor for
-    modifications (one single click does it when <emphasis role="bold">Auto-sync with Editor</emphasis> option is checked). You can
+    modifications (one single click does it when <guilabel role="bold">Auto-sync with Editor</guilabel> option is checked). You can
     then switch back to the Search window for the next segment found, for
     instance to check and, if necessary, correct the terminology.</para>
 
@@ -288,7 +288,7 @@
     <title>Filter entries in editor according to search</title>
 
     <para>For easier navigation in the search result set, you can apply the
-    search to the editor. Press the <emphasis role="bold">Filter</emphasis>
+    search to the editor. Press the <guibutton>Filter</guibutton>
     button on the bottom to limit the shown entries in the editor window to
     those that match the current search. You can use normal navigation to go
     to e.g. the next (untranslated) segment that matches the search
@@ -314,7 +314,6 @@
       </listitem>
     </itemizedlist>
 
-    <para>To remove a filter, press the <emphasis role="bold">Remove
-    filter</emphasis> button, or reload a project.</para>
+    <para>To remove a filter, press the <guibutton>Remove filter</guibutton> button, or reload a project.</para>
   </section>
 </section>

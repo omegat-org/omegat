@@ -520,7 +520,7 @@
     This is much the same as the above example.</para>
 
     <para>A nice collection of useful regex cases can be found in
-    <application>OmegaT</application> itself (see Options &gt; Segmentation).
+    OmegaT itself (see Options &gt; Segmentation).
     The following list includes expressions you may find useful when searching
     through the translation memory:</para>
 

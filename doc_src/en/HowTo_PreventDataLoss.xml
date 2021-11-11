@@ -4,12 +4,12 @@
 <section id="howto.preventdataloss">
   <title>Prevent data loss</title>
 
-  <para><application>OmegaT</application> is a robust application. However,
+  <para>OmegaT is a robust application. However,
   you should take precautions against data loss when using
-  <application>OmegaT</application>, just as with any other application. When
-  you translate your files, <application>OmegaT</application> stores all your
-  progress in the translation memory <literal>project_save.tmx</literal> that
-  resides in the project's <literal>/omegat</literal> subfolder.</para>
+  OmegaT, just as with any other application. When
+  you translate your files, OmegaT stores all your
+  progress in the translation memory <filename>project_save.tmx</filename> that
+  resides in the project's <filename class="directory">omegat</filename> subfolder.</para>
 
   <para>OmegaT also backs up the translation memory to
   project_save.tmx.YEARMMDDHHNN.bak in the same subfolder each time a project
@@ -37,7 +37,7 @@
     </listitem>
 
     <listitem>
-      <para>rename it <literal>project_save.tmx</literal></para>
+      <para>rename it <filename>project_save.tmx</filename></para>
     </listitem>
 
     <listitem>
@@ -49,21 +49,21 @@
 
   <itemizedlist>
     <listitem>
-      <para>Make regular copies of the file /omegat/project_save.tmx to backup
+      <para>Make regular copies of the file <filename>/omegat/project_save.tmx</filename> to backup
       media, such as CD or DVD.</para>
     </listitem>
 
     <listitem>
-      <para>Until you are familiar with <application>OmegaT</application>,
+      <para>Until you are familiar with OmegaT,
       create translated files at regular intervals and check that the
       translated file contains the latest version of your translation.</para>
     </listitem>
 
     <listitem>
       <para>Take particular care when making changes to the files in
-      <literal>/source</literal> while in the middle of a project. If the
+      <filename class="directory">source</filename> while in the middle of a project. If the
       source file is modified after you have begun translating,
-      <application>OmegaT</application> may be unable to find a segment that
+      OmegaT may be unable to find a segment that
       you have already translated.</para>
     </listitem>
   </itemizedlist>
@@ -71,7 +71,7 @@
   <itemizedlist>
     <listitem>
       <para>Use these Help texts to get started. Should you run into problems,
-      post a message in the <ulink url="https://omegat.org/support"><application>OmegaT</application>
+      post a message in the <ulink url="https://omegat.org/support">OmegaT
       user group</ulink>. Do not hesitate to post in the language you feel the
       most familiar with.</para>
     </listitem>

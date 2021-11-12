@@ -154,9 +154,7 @@
     whether translated or not, are then generated here, with the same
     hierarchy as present in the source subfolder. The contents of the target
     subfolder will reflect the current state of the translation, as present in
-    the project translation memory, saved in the current <span class="bold">
-                  <strong>/omegat/project_save.tmx</strong>
-               </span>. Untranslated segments
+    the project translation memory, saved in the current <code class="filename">/omegat/project_save.tmx</code>. Untranslated segments
     will hereby remain in the source language.</p>
          </section>
          <section class="section" id="projectfolder.tm">
@@ -167,13 +165,13 @@
                   </div>
                </div>
             </div>
-            <p>The /tm/ folder can contain any number of ancillary translation
+            <p>The <code class="filename">tm</code> folder can contain any number of ancillary translation
     memories - i.e. tmx files. Such files can be created in any of the three
     varieties indicated above. Note that other CAT tools can export (and
     import as well) tmx files, usually in all three forms. The best thing of
     course is to use OmegaT-specific TMX files (see above), so that the
     in-line formatting within the segment is retained.</p>
-            <p>The contents of translation memories in the tm subfolder serve to
+            <p>The contents of translation memories in the <code class="filename">tm</code> subfolder serve to
     generate suggestions for the text(s) to be translated. Any text, already
     translated and stored in those files, will appear among the fuzzy matches,
     if it is sufficiently similar to the text currently being
@@ -181,8 +179,8 @@
             <p>If the source segment in one of the ancillary TMs is identical to
     the text being translated, OmegaT acts as defined in the <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> dialog window. For instance (if the default is accepted),
     the translation from the ancillary TM is accepted and prefixed
-    with<span class="emphasis">
-                  <em> [fuzzy]</em>
+    with <span class="emphasis">
+                  <em>[fuzzy]</em>
                </span>, so that the translator can review the
     translations at a later stage and check whether the segments tagged this
     way, have been translated correctly.</p>
@@ -192,7 +190,7 @@
     segments within a given TMX file line by line. The last segment with the
     identical source text will thus prevail (Note: of course it makes more
     sense to avoid this to happen in the first place).</p>
-            <p>Note that the TMX files in the tm folder can be compressed with
+            <p>Note that the TMX files in the <code class="filename">tm</code> folder can be compressed with
     gzip.</p>
             <section class="section" id="projectfolder.tmauto">
                <div class="titlepage">
@@ -203,16 +201,14 @@
                   </div>
                </div>
                <p>If it is clear from the very start, that translations in a given
-      TM (or TMs) are all correct, one can put them into the<span class="bold">
-                     <strong> tm/auto</strong>
-                  </span> folder and avoid confirming a lot
-      of<span class="emphasis">
-                     <em> [fuzzy]</em>
+      TM (or TMs) are all correct, one can put them into the <code class="filename">tm/auto</code> folder and avoid confirming a lot
+      of <span class="emphasis">
+                     <em>[fuzzy]</em>
                   </span> cases.</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
-                        <p>Put the TMX in /tm/auto.</p>
+                        <p>Put the TMX in <code class="filename">tm/auto</code>.</p>
                      </li>
                      <li class="listitem">
                         <p>Open the project. The changes are displayed.</p>
@@ -224,7 +220,7 @@
                      </li>
                   </ol>
                </div>
-               <p>Note: if TMX is removed from /tm/auto before step 3, no extra
+               <p>Note: if TMX is removed from <code class="filename">tm/auto</code> before step 3, no extra
       Translation Unit is added.</p>
             </section>
             <section class="section" id="projectfolder.tmenforce">
@@ -237,12 +233,12 @@
                </div>
                <p>If you have no doubt that a TMX is more accurate than the
       <code class="filename">project_save.tmx</code> of OmegaT, put this TMX in
-      /tm/enforce to overwrite existing default translations
+      <code class="filename">tm/enforce</code> to overwrite existing default translations
       unconditionally.</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
-                        <p>Put the TMX in /tm/enforce.</p>
+                        <p>Put the TMX in <code class="filename">tm/enforce</code>.</p>
                      </li>
                      <li class="listitem">
                         <p>Open the project. The changes are displayed.</p>
@@ -261,20 +257,20 @@
                                        <em>don't need</em>
                                     </span> to stay immune
                   from further changes, then remove the TMX from
-                  /tm/enforce.</p>
+                  <code class="filename">tm/enforce</code>.</p>
                               </li>
                               <li class="listitem">
                                  <p>If they <span class="emphasis">
                                        <em>need</em>
                                     </span> to stay immune from
-                  further changes, then keep the TMX in /tm/enforce.</p>
+                  further changes, then keep the TMX in <code class="filename">tm/enforce</code>.</p>
                               </li>
                            </ul>
                         </div>
                      </li>
                   </ol>
                </div>
-               <p>Note: if TMX is removed from /tm/enforce before step 3,
+               <p>Note: if TMX is removed from <code class="filename">tm/enforce</code> before step 3,
       enforcements aren't kept at all.</p>
             </section>
             <section class="section" id="projectfolder.tmmt">
@@ -341,11 +337,9 @@
                   </div>
                </div>
             </div>
-            <p>The <span class="bold">
-                  <strong>omegat</strong>
-               </span> subfolder contains at
+            <p>The <code class="filename">omegat</code> subfolder contains at
     least one and possibly several other files. The most important file here
-    is the <code class="filename">project_save.tmx, </code>that is the working
+    is the <code class="filename">project_save.tmx</code>, that is the working
     translation memory for the project. Backups of this file (with extension
     bak) are added progressively to this subfolder, first at the beginning of
     the translation session, at its end, and while the translation
@@ -359,8 +353,7 @@
                   </dt>
                   <dd>
                      <p>contains the current statistics of the current project. You
-          can view it by selecting <span class="guimenuitem">Tools &gt;
-          Statistics</span>
+          can view it by selecting <span class="guimenu">Tools</span>+<span class="guilabel">Statistics</span>
                      </p>
                   </dd>
                   <dt>
@@ -371,14 +364,14 @@
                      <p>are created and used by the spell checker. If you already have
           collected words you wish the spell checker to ignore / accept, you
           just need to copy the corresponding two files into the
-          <code class="filename">omegat</code>subfolder of your current project.</p>
+          <code class="filename">omegat</code> subfolder of your current project.</p>
                   </dd>
                   <dt>
                      <span class="term">project_stats_match.txt</span>
                   </dt>
                   <dd>
                      <p>contains the latest project match statistics, generated by
-          <span class="guimenuitem">Tools &gt; Match Statistics</span>
+          <span class="guimenu">Tools</span>+<span class="guilabel">Match Statistics</span>
                      </p>
                   </dd>
                   <dt>

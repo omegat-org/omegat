@@ -197,6 +197,5 @@ public final class OConsts {
 
     /** SSH known default private key directory and files. */
     public static final String JSCH_DOT_SSH_DIR = ".ssh";
-    public static final String JSCH_KNOWN_HOSTS = "known_hosts";
     public static final String JSCH_PRIVATE_KEY_FILES = "identity,id_rsa,id_ecdsa,id_ed25519";
 }

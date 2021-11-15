@@ -28,8 +28,6 @@
 package org.omegat.core.team2.impl;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,16 +88,14 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
             @Override
             protected JSch createDefaultJSch(FS fs) throws JSchException {
-           		final JSch jsch = new JSch();
+                JSch jsch = super.createDefaultJSch(fs);
                 final File home = fs.userHome();
                 if (home != null) {
                     final File sshdir = new File(home, OConsts.JSCH_DOT_SSH_DIR);
                     if (sshdir.isDirectory()) {
-                        try (FileInputStream in = new FileInputStream(new File(sshdir, OConsts.JSCH_KNOWN_HOSTS))) {
-                            jsch.setKnownHosts(in);
-                        } catch (IOException ignored) {
-                        }
-                        for (String privateKeyName: OConsts.JSCH_PRIVATE_KEY_FILES.split(",")) {
+                        // Override the JGit/JSch key name defaults
+                        jsch.removeAllIdentity();
+                        for (String privateKeyName : OConsts.JSCH_PRIVATE_KEY_FILES.split(",")) {
                             File privateKey = new File(sshdir, privateKeyName);
                             if (privateKey.isFile()) {
                                 try {
@@ -111,12 +107,14 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     }
                 }
                 try {
-                    JSch.setConfig("PreferredAuthentications", "publickey");
+                    // Use ssh-agent connector class provided by forked JSch project.
                     IdentityRepository irepo = new AgentIdentityRepository(new SSHAgentConnector());
+                    JSch.setConfig("PreferredAuthentications", "publickey");
                     jsch.setIdentityRepository(irepo);
                 } catch (AgentProxyException e) {
                     Log.log(e);
                 }
+
                 return jsch;
             }
         };

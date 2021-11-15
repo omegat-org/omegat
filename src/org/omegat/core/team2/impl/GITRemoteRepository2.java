@@ -126,10 +126,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             CloneCommand c = Git.cloneRepository();
             c.setURI(repositoryURL);
             c.setDirectory(localDirectory);
-            // BUGS#1075 - When set timeout, JSch expect to check result of setEnv('GIT_PROTOCOL=version=2')
-            // and throw exception when failed, but it should ignored.
-            // It is JSch bug but we avoid it by not setting timeout here.
-            // c.setTimeout(TIMEOUT);
+            c.setTimeout(TIMEOUT);
             try {
                 c.call();
             } catch (InvalidRemoteException e) {

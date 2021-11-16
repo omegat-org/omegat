@@ -194,8 +194,4 @@ public final class OConsts {
 
     /** Max number of recent projects to remember */
     public static final int MAX_RECENT_PROJECTS = 10;
-
-    /** SSH known default private key directory and files. */
-    public static final String JSCH_DOT_SSH_DIR = ".ssh";
-    public static final String JSCH_PRIVATE_KEY_FILES = "identity,id_rsa,id_ecdsa,id_ed25519";
 }

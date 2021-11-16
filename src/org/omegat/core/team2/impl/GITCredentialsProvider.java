@@ -28,6 +28,8 @@
 package org.omegat.core.team2.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +59,6 @@ import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
 /**
@@ -78,7 +79,6 @@ import org.omegat.util.OStrings;
 public class GITCredentialsProvider extends CredentialsProvider {
 
     static {
-        // Set up ssh-agent support
         JschConfigSessionFactory sessionFactory = new JschConfigSessionFactory() {
 
             @Override
@@ -86,26 +86,13 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 session.setConfig("StrictHostKeyChecking", "true");
             }
 
+            /**
+             * Add ssh-agent support configuration to default JSch instance.
+             * @param jsch
+             */
             @Override
-            protected JSch createDefaultJSch(FS fs) throws JSchException {
-                JSch jsch = super.createDefaultJSch(fs);
-                final File home = fs.userHome();
-                if (home != null) {
-                    final File sshdir = new File(home, OConsts.JSCH_DOT_SSH_DIR);
-                    if (sshdir.isDirectory()) {
-                        // Override the JGit/JSch key name defaults
-                        jsch.removeAllIdentity();
-                        for (String privateKeyName : OConsts.JSCH_PRIVATE_KEY_FILES.split(",")) {
-                            File privateKey = new File(sshdir, privateKeyName);
-                            if (privateKey.isFile()) {
-                                try {
-                                    jsch.addIdentity(privateKey.getAbsolutePath());
-                                } catch (JSchException ignored) {
-                                }
-                            }
-                        }
-                    }
-                }
+            protected void configureJSch(final JSch jsch) {
+                super.configureJSch(jsch);
                 try {
                     // Use ssh-agent connector class provided by forked JSch project.
                     IdentityRepository irepo = new AgentIdentityRepository(new SSHAgentConnector());
@@ -114,8 +101,60 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 } catch (AgentProxyException e) {
                     Log.log(e);
                 }
+            }
 
+            /**
+             * Default JSch instance creator.
+             *
+             * default key names; identity, id_rsa, id_ecdsa, and id_ed25519.
+             * It solves BUG#1075, and realizes RFE#1598
+             */
+            @Override
+            protected JSch createDefaultJSch(FS fs) throws JSchException {
+                // Note: it should not call super.createDefaultJSch().
+                // we create instance from scratch to avoid
+                // the forked JSch and JGit combination issue that
+                // lead NPE.
+                JSch jsch = new JSch();
+                configureJSch(jsch);
+                knownHosts(jsch, fs);
+                identities(jsch, fs);
                 return jsch;
+            }
+
+            private void knownHosts(JSch jsch, FS fs) throws JSchException {
+                final File home = fs.userHome();
+                if (home == null)
+                    return;
+                final File known_hosts = new File(new File(home, ".ssh"), "known_hosts");
+                try (FileInputStream in = new FileInputStream(known_hosts)) {
+                    jsch.setKnownHosts(in);
+                } catch (IOException ignored) {
+                }
+            }
+
+            private void identities(final JSch jsch, final FS fs) {
+                final File home = fs.userHome();
+                if (home == null) {
+                    return;
+                }
+                final File sshdir = new File(home, ".ssh");
+                if (sshdir.isDirectory()) {
+                    //  Add more default key names; id_ecdsa and id_ed25519
+                    loadIdentity(jsch, new File(sshdir, "identity"));
+                    loadIdentity(jsch, new File(sshdir, "id_rsa"));
+                    loadIdentity(jsch, new File(sshdir, "id_ecdsa"));
+                    loadIdentity(jsch, new File(sshdir, "id_ed25519"));
+                }
+            }
+
+            private void loadIdentity(JSch sch, File priv) {
+                if (priv.isFile()) {
+                    try {
+                        sch.addIdentity(priv.getAbsolutePath());
+                    } catch (JSchException ignored) {
+                    }
+                }
             }
         };
         SshSessionFactory.setInstance(sessionFactory);

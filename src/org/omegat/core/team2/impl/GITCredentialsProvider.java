@@ -28,8 +28,6 @@
 package org.omegat.core.team2.impl;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -79,7 +77,7 @@ import org.omegat.util.OStrings;
 public class GITCredentialsProvider extends CredentialsProvider {
 
     static {
-        JschConfigSessionFactory sessionFactory = new JschConfigSessionFactory() {
+        JschConfigSessionFactory sessionFactory = new OJschConfigSessionFactory() {
 
             @Override
             protected void configure(OpenSshConfig.Host host, Session session) {
@@ -106,49 +104,27 @@ public class GITCredentialsProvider extends CredentialsProvider {
             /**
              * Default JSch instance creator.
              *
-             * default key names; identity, id_rsa, id_ecdsa, and id_ed25519.
-             * It solves BUG#1075, and realizes RFE#1598
+             * Add id_ecdsa and id_ed25519 as default key.
+             * Resolve RFE#1598
              */
             @Override
-            protected JSch createDefaultJSch(FS fs) throws JSchException {
-                // Note: it should not call super.createDefaultJSch().
-                // we create instance from scratch to avoid
-                // the forked JSch and JGit combination issue that
-                // lead NPE.
-                JSch jsch = new JSch();
-                configureJSch(jsch);
-                knownHosts(jsch, fs);
-                identities(jsch, fs);
+            protected JSch createDefaultJSch(final FS fs) throws JSchException {
+                JSch jsch = super.createDefaultJSch(fs);
+                overrideIdentities(jsch, fs);
                 return jsch;
             }
 
-            private void knownHosts(JSch jsch, FS fs) throws JSchException {
-                final File home = fs.userHome();
-                if (home == null)
-                    return;
-                final File known_hosts = new File(new File(home, ".ssh"), "known_hosts");
-                try (FileInputStream in = new FileInputStream(known_hosts)) {
-                    jsch.setKnownHosts(in);
-                } catch (IOException ignored) {
-                }
-            }
-
-            private void identities(final JSch jsch, final FS fs) {
+            private void overrideIdentities(final JSch jsch, final FS fs) {
                 final File home = fs.userHome();
                 if (home == null) {
                     return;
                 }
                 final File sshdir = new File(home, ".ssh");
-                if (sshdir.isDirectory()) {
-                    //  Add more default key names; id_ecdsa and id_ed25519
-                    loadIdentity(jsch, new File(sshdir, "identity"));
-                    loadIdentity(jsch, new File(sshdir, "id_rsa"));
-                    loadIdentity(jsch, new File(sshdir, "id_ecdsa"));
-                    loadIdentity(jsch, new File(sshdir, "id_ed25519"));
-                }
+                loadIdentity(jsch, new File(sshdir, "id_ecdsa"));
+                loadIdentity(jsch, new File(sshdir, "id_ed25519"));
             }
 
-            private void loadIdentity(JSch sch, File priv) {
+            private void loadIdentity(final JSch sch, final File priv) {
                 if (priv.isFile()) {
                     try {
                         sch.addIdentity(priv.getAbsolutePath());

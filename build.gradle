@@ -160,11 +160,12 @@ dependencies {
 
         // Team project server support
         implementation 'org.eclipse.jgit:org.eclipse.jgit:5.11.1.202105131744-r'
-        // JSch is unmaintained and dead, so we use forked version, mwiede/jsch
+        // Original JSch is unmaintained and dead, so we use forked version, mwiede/jsch
+        // to fix BUGS#1075, and to support elliptic curve ciphers and improved ssh agent
+        implementation 'com.github.mwiede:jsch:0.1.70'
         implementation ('org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.11.1.202105131744-r') {
             exclude module: 'jsch'
         }
-        implementation 'com.github.mwiede:jsch:0.1.70'
         // For ed25519 and ecdsa support of jsch, java16+ or BC
         implementation 'org.bouncycastle:bcprov-jdk15on:1.69'
         // For ssh agent support of jsch, Java16+ or junixsocket

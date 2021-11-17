@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   4 Enhancements
   2 Bug fixes
-  1 Localisation updates
+  1 Localisation update
 ----------------------------------------------------------------------
 5.7.0 vs 5.6.0
 
@@ -24,7 +24,7 @@
   https://sourceforge.net/p/omegat/feature-requests/1593/
 
   - Improve support for markup in DSL dictionaries
-  https://sourceforge.net/p/omegat/feature-requests/1594
+  https://sourceforge.net/p/omegat/feature-requests/1594/
 
   - Display images in Dictionary pane
   https://sourceforge.net/p/omegat/feature-requests/1595/

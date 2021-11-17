@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.7.0
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   2 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
@@ -19,6 +19,9 @@
 
   - Ignore Microsoft Office temporary files
   https://sourceforge.net/p/omegat/feature-requests/1596/
+
+  - Support sound links in Dictionary pane
+  https://sourceforge.net/p/omegat/feature-requests/1593/
 
   - Improve support for markup in DSL dictionaries
   https://sourceforge.net/p/omegat/feature-requests/1594

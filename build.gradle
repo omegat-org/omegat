@@ -107,7 +107,7 @@ dependencies {
     if (providedLibsDir.directory) {
         implementation fileTree(dir: providedLibsDir, include: '**/*.jar')
     } else {
-        implementation 'commons-io:commons-io:2.7'
+        implementation 'commons-io:commons-io:2.11.0'
         implementation 'commons-lang:commons-lang:2.6'
         api 'org.slf4j:slf4j-api:1.7.25'
         implementation 'org.slf4j:slf4j-jdk14:1.7.25'

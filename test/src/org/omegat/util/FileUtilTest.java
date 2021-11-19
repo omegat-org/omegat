@@ -42,6 +42,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
@@ -57,6 +58,8 @@ import org.omegat.util.FileUtil.ICollisionCallback;
  */
 public class FileUtilTest {
 
+    private static final Logger LOGGER = Logger.getLogger(FileUtilTest.class.getName());
+
     private File base;
 
     @Before
@@ -66,7 +69,17 @@ public class FileUtilTest {
 
     @After
     public final void tearDown() throws Exception {
-        FileUtils.deleteDirectory(base);
+        safeDeleteDirectory(base);
+    }
+
+    private void safeDeleteDirectory(File file) {
+        try {
+            FileUtils.deleteDirectory(file);
+        } catch (Exception e) {
+            // Apache Commons IO 2.8.0+ seem to be quite strict and fails
+            // cleaning up tmp files on macOS
+            LOGGER.warning("Failed to clean up " + file + ": " + e.getLocalizedMessage());
+        }
     }
 
     @Test
@@ -465,7 +478,7 @@ public class FileUtilTest {
             // system
         }
 
-        FileUtils.deleteDirectory(tempDir);
+        safeDeleteDirectory(tempDir);
     }
 
     @Test

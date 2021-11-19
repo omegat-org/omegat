@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -146,7 +146,6 @@ public final class TestTeamIntegrationChild {
             keyC = new EntryKey("file", CONCURRENT_NAME, null, null, null, null);
             steC = new SourceTextEntry(keyC, 0, null, null, new ArrayList<ProtectedPart>());
 
-            Random rnd = new Random();
             v = new long[segCount];
             mc: while (true) {
                 for (int c = 1; c < segCount; c++) {
@@ -156,11 +155,11 @@ public final class TestTeamIntegrationChild {
                         break mc;
                     }
                     // change /0 segment
-                    Thread.sleep(rnd.nextInt(maxDelaySeconds * 1000) + 10);
+                    Thread.sleep(ThreadLocalRandom.current().nextInt(maxDelaySeconds * 1000) + 10);
                     checksavecheck(0);
 
                     // change /1..N segment
-                    Thread.sleep(rnd.nextInt(maxDelaySeconds * 1000) + 10);
+                    Thread.sleep(ThreadLocalRandom.current().nextInt(maxDelaySeconds * 1000) + 10);
                     checksavecheck(c);
                 }
             }

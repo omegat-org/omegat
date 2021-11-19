@@ -263,7 +263,7 @@ public class DictionaryInstallerDialog extends JDialog {
                     showError(OStrings.getString("GUI_SPELLCHECKER_ERROR_ON_INSTALL"));
                 } catch (Exception ex) {
                     Log.log(ex);
-                    showError(ex.getLocalizedMessage());
+                    showError(ex.toString());
                 }
             }
             return completed;

@@ -48,7 +48,7 @@ import org.omegat.util.StringUtil;
 public class OmegaTLogFormatter extends Formatter {
 
     // Line mark is a five-character random number
-    protected static final String LINE_MARK = String.format("%05d", ThreadLocalRandom.current().nextInt(99999));
+    protected static final String LINE_MARK = String.format("%05d", ThreadLocalRandom.current().nextInt(100000));
 
     private String logMask;
     private boolean isMaskContainsMark;

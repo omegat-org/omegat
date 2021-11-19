@@ -125,7 +125,7 @@ dependencies {
         implementation 'org.apache.pdfbox:pdfbox:2.0.24'
 
         // Aligner
-        implementation 'net.loomchild:maligna:3.0.0'
+        implementation 'net.loomchild:maligna:3.0.1'
 
         // Dictionary
         implementation 'io.github.dictzip:dictzip:0.9.5'

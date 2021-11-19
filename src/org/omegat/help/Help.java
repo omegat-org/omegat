@@ -38,7 +38,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Properties;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -116,7 +116,7 @@ public final class Help {
 
     // immortalize the BeOS 404 messages (some modified a bit for context)
     public static String errorHaiku() {
-        int id = new Random().nextInt(11) + 1;
+        int id = ThreadLocalRandom.current().nextInt(11) + 1;
         return OStrings.getString("HF_HAIKU_" + id);
     }
 

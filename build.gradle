@@ -22,7 +22,7 @@ applicationName = 'OmegaT'
 mainClassName = 'org.omegat.Main'
 
 ext {
-    javaVersion = '1.8'
+    javaVersion = '11'
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
     omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
     omtWebsite = 'https://omegat.org'
@@ -37,7 +37,7 @@ ext {
     }
 }
 
-sourceCompatibility = javaVersion
+sourceCompatibility = '1.8'
 targetCompatibility = javaVersion
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
@@ -69,6 +69,7 @@ sourceSets {
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 task webstartDocsJar(type: Jar) {
@@ -159,11 +160,12 @@ dependencies {
         implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        implementation 'org.eclipse.jgit:org.eclipse.jgit:5.13.0.202109080827-r'
+        implementation 'org.eclipse.jgit:org.eclipse.jgit:6.0.0.202111161950-m3'
         // Original JSch is unmaintained and dead, so we use forked version, mwiede/jsch
         // to fix BUGS#1075, and to support elliptic curve ciphers and improved ssh agent
+        // JGit v6.0.0.202111161950-m3 fix the bug with forked version
         implementation 'com.github.mwiede:jsch:0.1.70'
-        implementation ('org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.13.0.202109080827-r') {
+        implementation ('org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.0.0.202111161950-m3') {
             exclude module: 'jsch'
         }
         // For ed25519 and ecdsa support of jsch, java16+ or BC

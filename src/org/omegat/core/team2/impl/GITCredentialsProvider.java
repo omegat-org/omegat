@@ -46,8 +46,8 @@ import com.jcraft.jsch.Session;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
-import org.eclipse.jgit.transport.JschConfigSessionFactory;
-import org.eclipse.jgit.transport.OpenSshConfig;
+import org.eclipse.jgit.transport.ssh.jsch.JschConfigSessionFactory;
+import org.eclipse.jgit.transport.ssh.jsch.OpenSshConfig;
 import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.util.FS;
@@ -77,7 +77,7 @@ import org.omegat.util.OStrings;
 public class GITCredentialsProvider extends CredentialsProvider {
 
     static {
-        JschConfigSessionFactory sessionFactory = new OJschConfigSessionFactory() {
+        JschConfigSessionFactory sessionFactory = new JschConfigSessionFactory() {
 
             @Override
             protected void configure(OpenSshConfig.Host host, Session session) {

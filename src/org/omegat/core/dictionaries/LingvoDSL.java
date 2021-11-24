@@ -170,8 +170,8 @@ public class LingvoDSL implements IDictionaryFactory {
         TAG_REPLACEMENTS.put(Pattern.compile("\\[\\[(?<content>.+?)]]"), "&#91;${content}&#93;");
         TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("\\[")), "&#91;");
         TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("\\]")), "&#93;");
-        // lang tag
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[lang id=(.+?)]"), "");
+        // Ignore lang tag with arg
+        TAG_REPLACEMENTS.put(Pattern.compile("\\[lang[^]]+](?<content>.+?)\\[/lang]"), "${content}");
         // Styling tags
         TAG_REPLACEMENTS.put(Pattern.compile("\\[b](?<content>.+?)\\[/b]"), "<strong>${content}</strong>");
         TAG_REPLACEMENTS.put(Pattern.compile(
@@ -217,12 +217,14 @@ public class LingvoDSL implements IDictionaryFactory {
         TAG_REPLACEMENTS.put(
                 Pattern.compile("\\['](?<content>.+?)\\[/']"), "<span style='color:red'>${content}</span>");
         // Silently ignore these tags that can be arbitrarily nested
-        String[] ignoreTags = {"\\*", "m", "com", "ex", "lang", "p", "preview", "ref", "s", "trn", "trn1", "trs",
-                "!trs", "video"};
+        String[] ignoreTags = {"\\*", "m", "com", "ex", "p", "preview", "ref", "s", "trn", "trn1", "trs", "!trs",
+                "video"};
         for (String tag : ignoreTags) {
             TAG_REPLACEMENTS.put(Pattern.compile("\\[(?<tag>" + tag + ")](?<content>.+?)\\[/\\k<tag>]"), "${content}");
         }
-        // remove orphan trn tag
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[trn]"), "");
+        // remove orphan tags
+        for (String tag : ignoreTags) {
+            TAG_REPLACEMENTS.put(Pattern.compile("\\[" + tag + "]"), "");
+        }
     }
 }

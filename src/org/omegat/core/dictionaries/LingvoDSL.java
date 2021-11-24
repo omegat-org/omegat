@@ -170,6 +170,8 @@ public class LingvoDSL implements IDictionaryFactory {
         TAG_REPLACEMENTS.put(Pattern.compile("\\[\\[(?<content>.+?)]]"), "&#91;${content}&#93;");
         TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("\\[")), "&#91;");
         TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("\\]")), "&#93;");
+        // lang tag
+        TAG_REPLACEMENTS.put(Pattern.compile("\\[lang id=(.+?)]"), "");
         // Styling tags
         TAG_REPLACEMENTS.put(Pattern.compile("\\[b](?<content>.+?)\\[/b]"), "<strong>${content}</strong>");
         TAG_REPLACEMENTS.put(Pattern.compile(
@@ -220,5 +222,7 @@ public class LingvoDSL implements IDictionaryFactory {
         for (String tag : ignoreTags) {
             TAG_REPLACEMENTS.put(Pattern.compile("\\[(?<tag>" + tag + ")](?<content>.+?)\\[/\\k<tag>]"), "${content}");
         }
+        // remove orphan trn tag
+        TAG_REPLACEMENTS.put(Pattern.compile("\\[trn]"), "");
     }
 }

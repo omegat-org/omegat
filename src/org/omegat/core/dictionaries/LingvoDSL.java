@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 import io.github.eb4j.dsl.DslArticle;
 import io.github.eb4j.dsl.DslDictionary;
 import io.github.eb4j.dsl.visitor.DslVisitor;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
@@ -90,7 +91,7 @@ public class LingvoDSL implements IDictionaryFactory {
      */
     public static class HtmlVisitor extends DslVisitor<String> {
 
-        private static final String[] IMAGE_EXTS = new String[] {".png", ".jpg", ".PNG", ".JPG"};
+        private static final String[] IMAGE_EXTS = new String[] {"png", "jpg", "PNG", "JPG"};
 
         private StringBuilder sb;
         private boolean delayText;
@@ -178,8 +179,9 @@ public class LingvoDSL implements IDictionaryFactory {
         }
 
         private boolean isMediaImage() {
-            for (String ext: IMAGE_EXTS) {
-                if (previousText.endsWith(ext)) {
+            String ext = FilenameUtils.getExtension(previousText);
+            for (String e : IMAGE_EXTS) {
+                if (e.equals(ext)) {
                     return true;
                 }
             }

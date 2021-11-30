@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2015 Hiroshi Miura
+ Copyright (C) 2015,2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -31,12 +31,11 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map.Entry;
 
+import io.github.eb4j.dsl.DslResult;
 import org.junit.Test;
+
 import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
-import org.omegat.util.Language;
 
 /**
  * Dictionary test
@@ -46,18 +45,13 @@ import org.omegat.util.Language;
  */
 public class LingvoDSLTest {
 
-    private static final Language ENGLISH = new Language(Locale.ENGLISH);
     private static final File TEST_DICT = new File("test/data/dicts-lingvo/test.dsl");
     private static final File TEST_DICT_DZ = new File("test/data/dicts-lingvo-dz/test.dsl.dz");
 
     @Test
     public void testReadFileDict() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
-        assertEquals(10, dict.data.size());
-
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
         String word = "space";
-        List<Entry<String, String>> data = dict.data.lookUp(word);
-        assertNotNull(data);
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
@@ -66,7 +60,7 @@ public class LingvoDSLTest {
 
     @Test
     public void testReadArticle1() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
         String word = "tab";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
@@ -76,7 +70,7 @@ public class LingvoDSLTest {
 
     @Test
     public void testReadArticleRussian() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
         String word = "tool";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
@@ -86,28 +80,29 @@ public class LingvoDSLTest {
 
     @Test
     public void testReadArticleChinese() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
         String word = "\u4e00\u4e2a\u6837";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("&#91;y\u012B ge y\u00E0ng&#93;&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B y\u00E0ng&nbsp;, the same\n", result.get(0).getArticle());
+        assertEquals("[y\u012B ge y\u00E0ng]&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B " +
+                "y\u00E0ng&nbsp;, the same\n", result.get(0).getArticle());
     }
 
     @Test
     public void testReadArticleFontStyles() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
         String word = "italic";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("Here is an <span style='font-style: italic'>italic</span> <strong>word</strong>.\n",
+        assertEquals("<p>Here is an <span style='font-style: italic'>italic</span> <strong>word</strong>.</p>\n",
                 result.get(0).getArticle());
     }
 
     @Test
     public void testReadArticleIndentStyles() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT, ENGLISH);
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT);
         String word = "abandon";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
@@ -122,7 +117,7 @@ public class LingvoDSLTest {
                         "<p style=\"text-indent: 60px\">to abandon attempts</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon a claim</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon convertibility</p>\n" +
-                        "<p style=\"text-indent: 60px\">to abandon the &#91;gold&#93; standard</p>\n" +
+                        "<p style=\"text-indent: 60px\">to abandon the [gold] standard</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon price control</p>\n" +
                         "<p style=\"text-indent: 60px\">to abandon a right</p>\n",
                 result.get(0).getArticle());
@@ -130,10 +125,9 @@ public class LingvoDSLTest {
 
     @Test
     public void testReadFileDictDz() throws Exception {
-        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT_DZ, ENGLISH);
-        assertEquals(6, dict.data.size());
+        LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT_DZ);
         String word = "space";
-        List<Entry<String, String>> data = dict.data.lookUp(word);
+        DslResult data = dict.data.lookup(word);
         assertNotNull(data);
     }
 }

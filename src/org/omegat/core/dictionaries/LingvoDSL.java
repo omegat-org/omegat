@@ -47,6 +47,7 @@ import org.apache.commons.io.FilenameUtils;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Hiroshi Miura
+ * @see <a href="https://github.com/eb4j/dsl4j">DSL4j library</a>
  * @see <a href="http://lingvo.helpmax.net/en/troubleshooting/dsl-compiler/">DSL
  * Documentation (English)</a>
  * @see <a href="http://www.dsleditor.narod.ru/art_03.htm">DSL documentation
@@ -55,12 +56,12 @@ import org.apache.commons.io.FilenameUtils;
 public class LingvoDSL implements IDictionaryFactory {
 
     @Override
-    public final boolean isSupportedFile(File file) {
+    public final boolean isSupportedFile(final File file) {
         return file.getPath().endsWith(".dsl") || file.getPath().endsWith(".dsl.dz");
     }
 
     @Override
-    public final IDictionary loadDict(File file) throws Exception {
+    public final IDictionary loadDict(final File file) throws Exception {
         return new LingvoDSLDict(file);
     }
 
@@ -68,22 +69,41 @@ public class LingvoDSL implements IDictionaryFactory {
         protected final DslDictionary data;
         private final HtmlVisitor htmlVisitor;
 
-        LingvoDSLDict(File file) throws Exception {
+        /**
+         * Constructor of LingvoDSL Dictionary driver.
+         * @param file *.dsl file object.
+         * @throws Exception when loading dictionary failed.
+         */
+        LingvoDSLDict(final File file) throws Exception {
             data = DslDictionary.loadDictionary(file);
             htmlVisitor = new HtmlVisitor(file.getParent());
         }
 
+        /**
+         * read article with exact match.
+         * @param word
+         *            The word to look up in the dictionary
+         *
+         * @return list of results.
+         */
         @Override
-        public List<DictionaryEntry> readArticles(String word) {
+        public List<DictionaryEntry> readArticles(final String word) {
             return readEntries(data.lookup(word));
         }
 
+        /**
+         * read article with predictive match.
+         * @param word
+         *            The word to look up in the dictionary
+         *
+         * @return list of results.
+         */
         @Override
-        public List<DictionaryEntry> readArticlesPredictive(String word) {
+        public List<DictionaryEntry> readArticlesPredictive(final String word) {
             return readEntries(data.lookupPredictive(word));
         }
 
-        private List<DictionaryEntry> readEntries(DslResult dslResult) {
+        private List<DictionaryEntry> readEntries(final DslResult dslResult) {
             List<DictionaryEntry> list = new ArrayList<>();
             for (Map.Entry<String, String> e : dslResult.getEntries(htmlVisitor)) {
                 DictionaryEntry dictionaryEntry = new DictionaryEntry(e.getKey(), e.getValue());
@@ -119,11 +139,23 @@ public class LingvoDSL implements IDictionaryFactory {
             delayText = false;
         }
 
+        /**
+         * Start of accept.
+         * <p>
+         *     super#visit(ElementSequence) call this.
+         * </p>
+         */
         @Override
         public void start() {
             sb = new StringBuilder();
         }
 
+        /**
+         * End of accept.
+         * <p>
+         *     super#visit(ElementSequence) call this.
+         * </p>
+         */
         @Override
         public void finish() {
         }
@@ -244,7 +276,8 @@ public class LingvoDSL implements IDictionaryFactory {
         @Override
         public String getObject() {
             if (sb == null) {
-                throw new RuntimeException("DSL: call getObject before calling start.");
+                // should not happened, but check null to avoid findbugs error.
+                throw new RuntimeException();
             }
             return sb.toString();
         }

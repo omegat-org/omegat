@@ -29,11 +29,13 @@ package org.omegat.core.dictionaries;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import io.github.eb4j.dsl.DslArticle;
 import io.github.eb4j.dsl.DslDictionary;
+import io.github.eb4j.dsl.DslResult;
 import io.github.eb4j.dsl.visitor.DslVisitor;
 import org.apache.commons.io.FilenameUtils;
 
@@ -73,16 +75,21 @@ public class LingvoDSL implements IDictionaryFactory {
 
         @Override
         public List<DictionaryEntry> readArticles(String word) {
-            return data.lookup(word).getEntries(htmlVisitor).stream()
-                    .map(e -> new DictionaryEntry(e.getKey(), e.getValue()))
-                    .collect(Collectors.toList());
+            return readEntries(data.lookup(word));
         }
 
         @Override
         public List<DictionaryEntry> readArticlesPredictive(String word) {
-            return data.lookupPredictive(word).getEntries(htmlVisitor).stream()
-                    .map(e -> new DictionaryEntry(e.getKey(), e.getValue()))
-                    .collect(Collectors.toList());
+            return readEntries(data.lookupPredictive(word));
+        }
+
+        private List<DictionaryEntry> readEntries(DslResult dslResult) {
+            List<DictionaryEntry> list = new ArrayList<>();
+            for (Map.Entry<String, String> e : dslResult.getEntries(htmlVisitor)) {
+                DictionaryEntry dictionaryEntry = new DictionaryEntry(e.getKey(), e.getValue());
+                list.add(dictionaryEntry);
+            }
+            return list;
         }
     }
 
@@ -237,7 +244,7 @@ public class LingvoDSL implements IDictionaryFactory {
         @Override
         public String getObject() {
             if (sb == null) {
-                return "";
+                throw new RuntimeException("DSL: call getObject before calling start.");
             }
             return sb.toString();
         }

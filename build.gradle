@@ -69,7 +69,6 @@ sourceSets {
 
 repositories {
     mavenCentral()
-    mavenLocal()
 }
 
 task webstartDocsJar(type: Jar) {
@@ -160,12 +159,13 @@ dependencies {
         implementation "org.apache.lucene:lucene-analyzers-stempel:${luceneVersion}"
 
         // Team project server support
-        implementation 'org.eclipse.jgit:org.eclipse.jgit:6.0.0.202111161950-m3'
+        // JGit 6 requires Java11
+        implementation 'org.eclipse.jgit:org.eclipse.jgit:6.0.0.202111291000-r'
         // Original JSch is unmaintained and dead, so we use forked version, mwiede/jsch
         // to fix BUGS#1075, and to support elliptic curve ciphers and improved ssh agent
-        // JGit v6.0.0.202111161950-m3 fix the bug with forked version
+        // JGit v6.0.0.202111291000-r fixes the bug with forked version of Jsch.
         implementation 'com.github.mwiede:jsch:0.1.70'
-        implementation ('org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.0.0.202111161950-m3') {
+        implementation ('org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.0.0.202111291000-r') {
             exclude module: 'jsch'
         }
         // For ed25519 and ecdsa support of jsch, java16+ or BC

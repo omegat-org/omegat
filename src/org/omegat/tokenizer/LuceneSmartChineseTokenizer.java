@@ -40,6 +40,15 @@ import org.omegat.util.Token;
 @Tokenizer(languages = { "zh" }, isDefault = true)
 public class LuceneSmartChineseTokenizer extends BaseTokenizer {
 
+    /*
+     * The SmartChineseAnalyzer/HMMChineseTokenizer can't be used in verbatim
+     * scenarios because it replaces all punctuation with `,`. See
+     * https://sourceforge.net/p/omegat/feature-requests/1602/#24f1/daa9/a82f/6568
+     *
+     * However the default tokenizeVerbatim{,ToStrings} implementation will only
+     * break at script-change boundaries, which is much too coarse for most
+     * uses. Hence we tokenize by code point.
+     */
     @Override
     public Token[] tokenizeVerbatim(String strOrig) {
         return tokenizeByCodePoint(strOrig);

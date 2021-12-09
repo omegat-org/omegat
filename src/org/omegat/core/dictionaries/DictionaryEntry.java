@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -31,12 +32,24 @@ package org.omegat.core.dictionaries;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class DictionaryEntry implements Comparable<DictionaryEntry> {
+    private final String query;
     private final String word;
     private final String article;
 
     public DictionaryEntry(final String word, final String article) {
+        this.query = word.toLowerCase();
         this.word = word;
         this.article = article;
+    }
+
+    public DictionaryEntry(final String query, final String word, final String article) {
+        this.query = query;
+        this.word = word;
+        this.article = article;
+    }
+
+    public String getQuery() {
+        return query;
     }
 
     public String getWord() {
@@ -49,6 +62,10 @@ public class DictionaryEntry implements Comparable<DictionaryEntry> {
 
     @Override
     public int compareTo(DictionaryEntry o) {
-        return word.compareTo(o.word);
+        if (query.equals(o.query)) {
+            return word.compareTo(o.word);
+        } else {
+            return query.compareTo(o.query);
+        }
     }
 }

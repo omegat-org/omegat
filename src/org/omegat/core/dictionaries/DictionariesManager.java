@@ -238,7 +238,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
     }
 
     private List<DictionaryEntry> doLookUp(IDictionary dict, String word) {
-        String[] stemmed = tokenizer.tokenizeWordsToStrings(word, StemmingMode.MATCHING);
+        String[] stemmed = getStemmedWords(word);
         if (stemmed.length == 0) {
             // Stop word. Skip.
             return Collections.emptyList();
@@ -266,8 +266,11 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         this.tokenizer = tokenizer;
     }
 
-    // Implemented as method for testing purposes
-    protected boolean doFuzzyMatching() {
+    public boolean doFuzzyMatching() {
         return Preferences.isPreferenceDefault(Preferences.DICTIONARY_FUZZY_MATCHING, true);
+    }
+
+    public String[] getStemmedWords(final String word) {
+        return tokenizer.tokenizeWordsToStrings(word, StemmingMode.MATCHING);
     }
 }

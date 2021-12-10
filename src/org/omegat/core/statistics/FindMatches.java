@@ -65,7 +65,7 @@ import org.omegat.util.Token;
 /**
  * Class to find matches by specified criteria.
  *
- * Since we can use stemmers to prepare tokens, we should use 3-pass comparison of similarity. Similarity will
+ * Since we can use stemmer to prepare tokens, we should use 3-pass comparison of similarity. Similarity will
  * be calculated in 3 steps:
  *
  * 1. Split original segment into word-only tokens using stemmer (with stop words list), then compare tokens.
@@ -213,9 +213,9 @@ public class FindMatches {
         });
 
 
-        /**
-         * Penalty applied for fuzzy matches in another language (if no match in the
-         * target language was found.)
+        /*
+          Penalty applied for fuzzy matches in another language (if no match in the
+          target language was found).
          */
         int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
@@ -309,8 +309,30 @@ public class FindMatches {
     /**
      * Compare one entry with original entry.
      *
-     * @param candEntry
+     * @param key
      *            entry to compare
+     * @param source
+     *            source text
+     * @param translation
+     *            translation text
+     * @param comesFrom
+     *            match source
+     * @param fuzzy
+     *            is it fuzzy or not
+     * @param penalty
+     *            penalty score
+     * @param tmxName
+     *            tmx name
+     * @param creator
+     *            translation creator
+     * @param creationDate
+     *            creation date of translation
+     * @param changer
+     *            last editor name
+     * @param changedDate
+     *            last change date
+     * @param props
+     *            TMX properties
      */
     protected void processEntry(final EntryKey key, final String source, final String translation,
             NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int penalty, final String tmxName,

@@ -41,6 +41,7 @@ import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.html2.HTMLOptions;
 import org.omegat.filters2.html2.HTMLUtils;
 import org.omegat.util.Language;
+import org.omegat.util.OStrings;
 
 public class HTMLFilter2Test extends TestFilterBase {
     @Test
@@ -66,7 +67,10 @@ public class HTMLFilter2Test extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
-        checkMulti("en", null, null, "", "This is first line.", "Tag: HTML Attribute: lang");
+        checkMulti("en", null, null, "", "This is first line.",
+                   String.format("%s HTML %s lang",
+                                 OStrings.getString("HTMLFILTER_TAG"),
+                                 OStrings.getString("HTMLFILTER_ATTRIBUTE")));
         checkMulti("This is first line.", null, null, "en", "This is second line.", null);
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();

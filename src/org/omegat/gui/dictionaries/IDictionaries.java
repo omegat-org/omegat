@@ -25,6 +25,7 @@
 
 package org.omegat.gui.dictionaries;
 
+import org.omegat.core.dictionaries.IDictionary;
 import org.omegat.core.dictionaries.IDictionaryFactory;
 
 public interface IDictionaries {
@@ -36,6 +37,10 @@ public interface IDictionaries {
     void addDictionaryFactory(IDictionaryFactory factory);
 
     void removeDictionaryFactory(IDictionaryFactory factory);
+
+    void addDictionary(IDictionary dictionary);
+
+    void removeDictionary(IDictionary dictionary);
 
     void searchText(String text);
 }

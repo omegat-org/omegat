@@ -70,7 +70,7 @@ public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
                 attrs.addAttribute(TooltipAttribute.ATTRIBUTE_KEY, new TooltipAttribute(origins[i]));
                 trg.append(bracketEntry(targets[i]), attrs);
                 if (i < targets.length - 1) {
-                    trg.append(",", null);
+                    trg.append(", ", null);
                 }
                 if (hasComments) {
                     if (trg instanceof HtmlTarget) {

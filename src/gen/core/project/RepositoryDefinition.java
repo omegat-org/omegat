@@ -27,6 +27,7 @@ import javax.xml.namespace.QName;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="type" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="url" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="branch" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;anyAttribute/&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -46,6 +47,8 @@ public class RepositoryDefinition {
     protected String type;
     @XmlAttribute(name = "url", required = true)
     protected String url;
+    @XmlAttribute(name = "branch")
+    protected String branch;
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
@@ -124,6 +127,30 @@ public class RepositoryDefinition {
      */
     public void setUrl(String value) {
         this.url = value;
+    }
+
+    /**
+     * Gets the value of the branch property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getBranch() {
+        return branch;
+    }
+
+    /**
+     * Sets the value of the branch property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBranch(String value) {
+        this.branch = value;
     }
 
     /**

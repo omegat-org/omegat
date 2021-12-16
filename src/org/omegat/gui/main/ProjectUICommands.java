@@ -333,6 +333,9 @@ public final class ProjectUICommands {
                 repos.add(repo);
                 repo.setType(dialog.getRepoType());
                 repo.setUrl(dialog.getRepoUrl());
+                if (dialog.isUsingNonDefaultBranch()) {
+                    repo.setBranch(dialog.getBranchName());
+                }
                 RepositoryMapping mapping = new RepositoryMapping();
                 mapping.setLocal("");
                 mapping.setRepository("");

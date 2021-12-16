@@ -51,6 +51,7 @@
         </xs:sequence>
         <xs:attribute name="type" type="xs:string" use="required" />
         <xs:attribute name="url" type="xs:string" use="required" />
+		<xs:attribute name="branch" type="xs:string" />
         <xs:anyAttribute/>
     </xs:complexType>
     <xs:complexType name="RepositoryMapping">

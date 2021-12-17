@@ -51,6 +51,8 @@ public interface IGlossaryRenderer {
 
         void append(String str, AttributeSet attr);
 
+        void appendStartIndent(AttributeSet attr);
+
         T get();
     }
 
@@ -75,6 +77,11 @@ public interface IGlossaryRenderer {
                 Logger.getLogger(DefaultGlossaryRenderer.class.getName()).log(Level.SEVERE,
                         e.getLocalizedMessage(), e);
             }
+        }
+
+        @Override
+        public void appendStartIndent(AttributeSet attr) {
+            append("\n  ", attr);
         }
 
         @Override
@@ -121,6 +128,11 @@ public interface IGlossaryRenderer {
                     buf.append("</b>");
                 }
             }
+        }
+
+        @Override
+        public void appendStartIndent(AttributeSet attr) {
+            append("&nbsp;&nbsp;", attr);
         }
 
         @Override

@@ -57,11 +57,8 @@ public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
         for (int i = 0; i < targets.length; i++) {
             if (i == 0 || (!targets[i].equals(targets[i - 1]))) {
                 if (hasComments) {
-                    if (trg instanceof HtmlTarget) {
-                        trg.append("\n<span style=\"text-indent: 10px\">");
-                    } else {
-                        trg.append("\n  ");
-                    }
+                    trg.appendStartIndent(null);
+                    hasComments = false;
                 }
                 SimpleAttributeSet attrs = new SimpleAttributeSet(TARGET_ATTRIBUTES);
                 if (priorities[i]) {
@@ -72,19 +69,10 @@ public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
                 if (i < targets.length - 1) {
                     trg.append(", ", null);
                 }
-                if (hasComments) {
-                    if (trg instanceof HtmlTarget) {
-                        trg.append("</span>");
-                    }
-                    hasComments = false;
-                }
             }
             if (!comments[i].equals("")) {
-                if (trg instanceof HtmlTarget) {
-                    trg.append("\n<span style=\"text-indent: 10px\">- " + comments[i] + "</span>", NOTES_ATTRIBUTES);
-                } else {
-                    trg.append("\n  - " + comments[i], NOTES_ATTRIBUTES);
-                }
+                trg.appendStartIndent(NOTES_ATTRIBUTES);
+                trg.append("- " + comments[i], NOTES_ATTRIBUTES);
                 hasComments = true;
             }
         }

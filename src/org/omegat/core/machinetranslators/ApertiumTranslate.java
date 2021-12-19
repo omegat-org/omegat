@@ -34,19 +34,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Locale;
-import java.util.Map;
+
 import javax.swing.JCheckBox;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.omegat.gui.exttrans.MTConfigDialog;
-import org.omegat.util.JsonParser;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * @author Ibai Lakunza Velasco
@@ -135,31 +137,23 @@ public class ApertiumTranslate extends BaseTranslate {
 
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
-        Map<String, Object> rootNode;
+        JsonNode rootNode;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
+            rootNode = mapper.readTree(json);
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_JSON_ERROR");
         }
 
-        Integer code = 0;
-        String tr = null;
-        if (rootNode.containsKey("responseStatus")) {
-            code = (Integer) rootNode.get("responseStatus");
-        } else {
-            return OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID");
-        }
-
-        if (rootNode.containsKey("responseData")) {
-            Map<String, Object> data = (Map<String, Object>) rootNode.get("responseData");
-            tr = (String) data.get("translatedText");
-        }
+        Integer code = rootNode.get("responseStatus").asInt();
+        // return OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID");
+        String tr = rootNode.get("responseData").get("translatedText").asText();
 
         // Returns an error message if there's no translatedText or if there was
         // a problem
         if (tr == null || code != 200) {
-            String details = (String) rootNode.get("responseDetails");
+            String details = rootNode.get("responseDetails").asText();
             return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
         }
 

@@ -30,7 +30,6 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -38,13 +37,15 @@ import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.omegat.gui.exttrans.MTConfigDialog;
-import org.omegat.util.JsonParser;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Support of Google Translate API v.2 machine translation.
@@ -155,22 +156,15 @@ public class Google2Translate extends BaseTranslate {
 
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
-        Map<String, Object> rootNode;
+        JsonNode rootNode;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
+            rootNode = mapper.readTree(json);
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_JSON_ERROR");
         }
-
-        try {
-            Map<String, Object> dataNode = (Map<String, Object>) rootNode.get("data");
-            List<Object> translationsList = (List<Object>) dataNode.get("translations");
-            Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);
-            return translationNode.get("translatedText");
-        } catch (NullPointerException e) {
-            return null;
-        }
+        return rootNode.get("data").get("translations").get(0).get("translatedText").asText();
     }
 
     /**

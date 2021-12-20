@@ -7,6 +7,7 @@
                2011 Briac Pilpre, Alex Buloichik
                2013 Didier Briel
                2016 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,6 +31,7 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -37,7 +39,6 @@ import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
@@ -54,8 +55,9 @@ import org.omegat.util.Preferences;
  * @author Didier Briel
  * @author Briac Pilpre
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  *
- * @see <a href="https://cloud.google.com/translate/docs/getting-started">Translation API</a>
+ * @see <a href="https://cloud.google.com/translate/docs/basic/setup-basic">Translation API</a>
  */
 public class Google2Translate extends BaseTranslate {
     protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
@@ -156,15 +158,18 @@ public class Google2Translate extends BaseTranslate {
 
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
-        JsonNode rootNode;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = mapper.readTree(json);
+            Response response = mapper.readValue(json, Response.class);
+            List<Translation> translations = response.getData().getTranslations();
+            if (translations.size() > 0) {
+                return translations.get(0).getTranslatedText();
+            }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_JSON_ERROR");
         }
-        return rootNode.get("data").get("translations").get(0).get("translatedText").asText();
+        return null;
     }
 
     /**
@@ -212,5 +217,72 @@ public class Google2Translate extends BaseTranslate {
         dialog.panel.itemsPanel.add(premiumCheckBox);
 
         dialog.show();
+    }
+
+    public static class Response {
+        private Data data;
+
+        public Data getData() {
+            return data;
+        }
+
+        public void setData(Data data) {
+            this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return "Response{" +
+                    "data=" + data +
+                    '}';
+        }
+    }
+
+    public static class Data {
+        private List<Translation> translations;
+
+        public List<Translation> getTranslations() {
+            return translations;
+        }
+
+        public void setTranslations(List<Translation> translations) {
+            this.translations = translations;
+        }
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "translations=" + translations +
+                    '}';
+        }
+    }
+
+    public static class Translation {
+        private String translatedText;
+        private String detectedSourceLanguage;
+
+        public String getTranslatedText() {
+            return translatedText;
+        }
+
+        public void setTranslatedText(String translatedText) {
+            this.translatedText = translatedText;
+        }
+
+        public String getDetectedSourceLanguage() {
+            return detectedSourceLanguage;
+        }
+
+        public void setDetectedSourceLanguage(String detectedSourceLanguage) {
+            this.detectedSourceLanguage = detectedSourceLanguage;
+        }
+
+        @Override
+        public String toString() {
+            return "Translation{" +
+                    "translatedText='" + translatedText + '\'' +
+                    ", detectedSourceLanguage='" + detectedSourceLanguage + '\'' +
+                    '}';
+        }
     }
 }

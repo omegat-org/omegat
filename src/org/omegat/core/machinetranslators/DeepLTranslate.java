@@ -148,17 +148,19 @@ public class DeepLTranslate extends BaseTranslate {
 
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
-        JsonNode rootNode;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = mapper.readTree(json);
+            // { "translations": [ { "detected_source_language": "DE", "text": "Hello World!" } ] }
+            JsonNode rootNode = mapper.readTree(json);
+            JsonNode translations = rootNode.get("translations");
+            if (translations.has(0)) {
+                return translations.get(0).get("text").asText();
+            }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_JSON_ERROR");
         }
-
-        // { "translations": [ { "detected_source_language": "DE", "text": "Hello World!" } ] }
-        return rootNode.get("translations").get(0).get("text").asText();
+        return null;
     }
 
     @Override

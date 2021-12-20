@@ -108,8 +108,8 @@ The location of dbk must also be set in `docbook-utf8.xsl`:
 
     <xsl:import href="file:///c:\dbk\html\docbook.xsl"/>
 
-Both `doc_src_paths.xml` and `docbook-utf8.xsl` must be copied at the
-same level as your OmegaT development folder.
+Both `doc_src_paths.xml` and `docbook-utf8.xsl` must be copied at the same level
+as your OmegaT development folder.
 
     C:\dev\doc_src_paths.xml
     C:\dev\docbook-utf8.xsl
@@ -123,7 +123,7 @@ The ones available in `doc_src` are only there for reference.
 All the dependencies can be installed through
 [MacPorts](https://www.macports.org/) except for saxon and whc.
 
-    sudo port ant docbook-xml-4.5 docbook-xsl-nons fop install libxml2
+    sudo port install apache-ant docbook-xml-4.5 docbook-xsl-nons fop libxml2
 
 - Saxon 6-5-5 ("saxon")
   https://sourceforge.net/projects/saxon/files/saxon6/
@@ -131,8 +131,8 @@ All the dependencies can be installed through
 - XMLmind Web Help Compiler ("whc")
   https://www.xmlmind.com/ditac/whc.shtml
 
-Unzip the downloaded packages and put them in your prefered location. The example
-below uses the `/Applications` folder.
+Unzip the downloaded packages and put them in your prefered location. The
+example below uses the `/Applications` folder.
 
 #### Paths
 
@@ -150,25 +150,17 @@ and the `docbook-utf8.xsl` settings are:
     <xsl:import href="file:///opt/local/share/xsl/docbook-xsl-nons/html/docbook.xsl"/>
 
 #### DocBook 4.5 installation
-	
-1. unzip `docbook-xml-4.5-5.0_1.darwin_20.noarch.tbz2` found in
-  /opt/local/var/macports/software/docbook-xml-4.5/
-  
-    sudo tar -xf docbook-xml-4.5-5.0_1.darwin_20.noarch.tbz2
-  
-2. create a symbolic link from the `4.5` repertory therein to the
-   location where the build process will look for the DocBook DTD: the
-   folder "above" `doc_src` in the OmegaT source tree:
 
-    /path/to/omegat/doc_src/en/
-       └─────/docbook-xml-4.5/
+Create a symbolic link from the installed DocBook 4.5 files to the location
+where the build process will look for the DocBook DTD: the folder "above"
+`doc_src` in the OmegaT source tree:
 
-    ln -s /opt/local/var/macports/software/docbook-xml-4.5/opt/local/share/xml/docbook/4.5/ /path/to/
-	mv /path/to/4.5 /path/to/docbook-xml-4.5
+    ln -s /opt/local/share/xml/docbook/4.5 /path/to/omegat/docbook-xml-4.5
 
 #### Settings files
-The modified `doc_src_paths.xml` and `docbook-utf8.xsl` must be copied
-to the same location as `docbook-xml-4.5`.
+
+The modified `doc_src_paths.xml` and `docbook-utf8.xsl` must be copied to the
+same location as `docbook-xml-4.5`.
 
     /path/to/omegat/doc_src/en/
        └────/docbook-xml-4.5/
@@ -186,8 +178,8 @@ The following fonts must be installed:
 
 # Usage
 
-All the scripts require the language folder as argument and must be
-run from the `doc_src` directory.
+All the scripts require the language folder as argument and must be run from the
+`doc_src` directory.
 
 Note: Replace `ant` with `docgen` if you are using the `docgen` script.
 

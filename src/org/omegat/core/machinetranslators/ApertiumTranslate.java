@@ -137,27 +137,27 @@ public class ApertiumTranslate extends BaseTranslate {
 
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
-        JsonNode rootNode;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = mapper.readTree(json);
+            JsonNode rootNode = mapper.readTree(json);
+            if (!rootNode.has("responseStatus")) {
+                return OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID");
+            }
+            int code = rootNode.get("responseStatus").asInt();
+            if (code == 200) {
+                String tr = rootNode.get("responseData").get("translatedText").asText();
+                if (tr != null) {
+                    return tr;
+                }
+            }
+            // Returns an error message if there's no translatedText or if there was
+            // a problem
+            String details = rootNode.get("responseDetails").asText();
+            return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_JSON_ERROR");
         }
-
-        Integer code = rootNode.get("responseStatus").asInt();
-        // return OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID");
-        String tr = rootNode.get("responseData").get("translatedText").asText();
-
-        // Returns an error message if there's no translatedText or if there was
-        // a problem
-        if (tr == null || code != 200) {
-            String details = rootNode.get("responseDetails").asText();
-            return StringUtil.format(OStrings.getString("APERTIUM_ERROR"), code, details);
-        }
-
-        return tr;
     }
 
     /**

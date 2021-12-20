@@ -73,6 +73,9 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
     @Override
     protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
 
+    /**
+     * Query MyMemory API and return parsed JsonNode object.
+     */
     @SuppressWarnings("unchecked")
     protected JsonNode getMyMemoryResponse(Language sLang, Language tLang, String text) throws Exception {
 
@@ -82,7 +85,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
         String apiKey = getCredential(MYMEMORY_API_KEY);
         String email = getCredential(MYMEMORY_API_EMAIL);
 
-        Map<String, String> params = new TreeMap<String, String>();
+        Map<String, String> params = new TreeMap<>();
 
         // The sentence you want to translate. Use UTF-8. Max 500 bytes
         params.put("q", text);
@@ -124,11 +127,17 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
         return mapper.readTree(response);
     }
 
+    /**
+     * MyMemory driver is configurable.
+     */
     @Override
     public boolean isConfigurable() {
         return true;
     }
 
+    /**
+     * Default configuration UI.
+     */
     @Override
     public void showConfigurationUI(Window parent) {
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {

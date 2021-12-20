@@ -66,6 +66,7 @@ public class DeepLTranslate extends BaseTranslate {
     // See https://www.deepl.com/docs-api/accessing-the-api/api-versions/
     protected static final String DEEPL_URL = "https://api.deepl.com/v1/translate";
     protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
+    private final static int MAX_TEXT_LENGTH = 5000;
 
     @Override
     protected String getPreferenceName() {
@@ -79,7 +80,7 @@ public class DeepLTranslate extends BaseTranslate {
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String trText = text.length() > 5000 ? text.substring(0, 4997) + "..." : text;
+        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
         String prev = getFromCache(sLang, tLang, trText);
         if (prev != null) {
             return prev;
@@ -146,6 +147,12 @@ public class DeepLTranslate extends BaseTranslate {
         return text;
     }
 
+    /**
+     * Parse API response and return translated text.
+     * @param json API response json string.
+     * @return
+     *        translation, or null when API returns empty result, or error message when parse failed.
+     */
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
         ObjectMapper mapper = new ObjectMapper();

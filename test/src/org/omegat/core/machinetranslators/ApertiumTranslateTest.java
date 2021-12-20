@@ -41,7 +41,10 @@ public class ApertiumTranslateTest extends TestCore {
     public void testGetJsonResults() {
         Preferences.setPreference(Preferences.ALLOW_APERTIUM_TRANSLATE, true);
         ApertiumTranslate apertiumTranslate = new ApertiumTranslate();
-        String json = "{\"responseData\": {\"translatedText\": \"Abc\"}, \"responseDetails\": null, \"responseStatus\": 200}";
+        String json = "{\"responseData\": "
+                + "{\"translatedText\": \"Abc\"}, "
+                + "\"responseDetails\": null, "
+                + "\"responseStatus\": 200}";
         String result = apertiumTranslate.getJsonResults(json);
         assertEquals("Abc", result);
     }

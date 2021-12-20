@@ -64,20 +64,37 @@ public class Google2Translate extends BaseTranslate {
     protected static final String PROPERTY_API_KEY = "google.api.key";
     protected static final String GT_URL = "https://translation.googleapis.com/language/translate/v2";
     protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
+    private static final int MAX_TEXT_LENGTH = 5000;
 
+    /**
+     * Return GOOGLE2 preference constant.
+     * @return ALLOW_GOOGLE2_TRANSLATE
+     */
     @Override
     protected String getPreferenceName() {
         return Preferences.ALLOW_GOOGLE2_TRANSLATE;
     }
 
+    /**
+     * Return Google2 engine name.
+     * @return localized name.
+     */
     @Override
     public String getName() {
         return OStrings.getString("MT_ENGINE_GOOGLE2");
     }
 
+    /**
+     * Query google translate API and return translation text.
+     * @param sLang source language.
+     * @param tLang target language.
+     * @param text source text.
+     * @return translation.
+     * @throws Exception when error occurred.
+     */
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String trText = text.length() > 5000 ? text.substring(0, 4997) + "..." : text;
+        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
 
         String prev = getFromCache(sLang, tLang, trText);
         if (prev != null) {
@@ -156,6 +173,11 @@ public class Google2Translate extends BaseTranslate {
         return text;
     }
 
+    /**
+     * Parse response and return translation.
+     * @param json response string.
+     * @return translation text.
+     */
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
         ObjectMapper mapper = new ObjectMapper();
@@ -184,11 +206,19 @@ public class Google2Translate extends BaseTranslate {
         return Boolean.parseBoolean(value);
     }
 
+    /**
+     * Engine is configurable.
+     * @return true
+     */
     @Override
     public boolean isConfigurable() {
         return true;
     }
 
+    /**
+     * Default configuration UI.
+     * @param parent main window.
+     */
     @Override
     public void showConfigurationUI(Window parent) {
         JCheckBox premiumCheckBox = new JCheckBox(OStrings.getString("MT_ENGINE_GOOGLE2_PREMIUM_LABEL"));
@@ -219,7 +249,10 @@ public class Google2Translate extends BaseTranslate {
         dialog.show();
     }
 
-    public static class Response {
+    /**
+     * Data schema class for Google2 translate API response.
+     */
+    public static final class Response {
         private Data data;
 
         public Data getData() {
@@ -232,13 +265,14 @@ public class Google2Translate extends BaseTranslate {
 
         @Override
         public String toString() {
-            return "Response{" +
-                    "data=" + data +
-                    '}';
+            return "Response{" + "data=" + data + '}';
         }
     }
 
-    public static class Data {
+    /**
+     * Data schema class.
+     */
+    public static final class Data {
         private List<Translation> translations;
 
         public List<Translation> getTranslations() {
@@ -251,13 +285,14 @@ public class Google2Translate extends BaseTranslate {
 
         @Override
         public String toString() {
-            return "Data{" +
-                    "translations=" + translations +
-                    '}';
+            return "Data{" + "translations=" + translations + '}';
         }
     }
 
-    public static class Translation {
+    /**
+     * Data schema class.
+     */
+    public static final class Translation {
         private String translatedText;
         private String detectedSourceLanguage;
 
@@ -279,10 +314,8 @@ public class Google2Translate extends BaseTranslate {
 
         @Override
         public String toString() {
-            return "Translation{" +
-                    "translatedText='" + translatedText + '\'' +
-                    ", detectedSourceLanguage='" + detectedSourceLanguage + '\'' +
-                    '}';
+            return "Translation{" + "translatedText='" + translatedText + '\'' + ", detectedSourceLanguage='"
+                    + detectedSourceLanguage + '\'' + '}';
         }
     }
 }

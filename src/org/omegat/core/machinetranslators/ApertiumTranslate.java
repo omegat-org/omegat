@@ -55,6 +55,9 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  */
 public class ApertiumTranslate extends BaseTranslate {
+
+    private static final int HTTP_OK = 200;
+
     protected static final String PROPERTY_APERTIUM_MARKUNKNOWN = "apertium.server.markunknown";
     protected static final String PROPERTY_APERTIUM_SERVER_CUSTOM = "apertium.server.custom";
     protected static final String PROPERTY_APERTIUM_SERVER_URL = "apertium.server.url";
@@ -69,6 +72,10 @@ public class ApertiumTranslate extends BaseTranslate {
         return Preferences.ALLOW_APERTIUM_TRANSLATE;
     }
 
+    /**
+     * Apertium engine name.
+     * @return engine name.
+     */
     public String getName() {
         return OStrings.getString("MT_ENGINE_APERTIUM");
     }
@@ -135,6 +142,11 @@ public class ApertiumTranslate extends BaseTranslate {
         return tr;
     }
 
+    /**
+     * Parse response and return translation text.
+     * @param json response string.
+     * @return translation text, or null when engine returns empty result, or error message when parse failed.
+     */
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
         ObjectMapper mapper = new ObjectMapper();
@@ -144,7 +156,7 @@ public class ApertiumTranslate extends BaseTranslate {
                 return OStrings.getString("APERTIUM_CUSTOM_SERVER_INVALID");
             }
             int code = rootNode.get("responseStatus").asInt();
-            if (code == 200) {
+            if (code == HTTP_OK) {
                 String tr = rootNode.get("responseData").get("translatedText").asText();
                 if (tr != null) {
                     return tr;
@@ -161,7 +173,7 @@ public class ApertiumTranslate extends BaseTranslate {
     }
 
     /**
-     * Whether or not to use the markUnknown feature
+     * Whether or not to use the markUnknown feature.
      */
     private boolean useMarkUnknown() {
         String value = System.getProperty(PROPERTY_APERTIUM_MARKUNKNOWN,
@@ -170,7 +182,7 @@ public class ApertiumTranslate extends BaseTranslate {
     }
 
     /**
-     * Whether or not to use a custom Apertium server
+     * Whether or not to use a custom Apertium server.
      */
     private boolean useCustomServer() {
         String value = System.getProperty(PROPERTY_APERTIUM_SERVER_CUSTOM,
@@ -179,7 +191,7 @@ public class ApertiumTranslate extends BaseTranslate {
     }
 
     /**
-     * Get the custom server URL
+     * Get the custom server URL.
      */
     private String getCustomServerUrl() {
         String value = System.getProperty(PROPERTY_APERTIUM_SERVER_URL,
@@ -187,11 +199,21 @@ public class ApertiumTranslate extends BaseTranslate {
         return value;
     }
 
+    /**
+     * Apertium engine is configurable.
+     * @return true
+     */
     @Override
     public boolean isConfigurable() {
         return true;
     }
 
+    private static final int CONFIG_URL_COLUMN_WIDTH = 20;
+
+    /**
+     * Show configuration UI.
+     * @param parent main window.
+     */
     @Override
     public void showConfigurationUI(Window parent) {
 
@@ -261,7 +283,7 @@ public class ApertiumTranslate extends BaseTranslate {
         dialog.panel.itemsPanel.add(apiCheckBox, 1);
         dialog.panel.valueLabel1.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_URL_LABEL"));
         dialog.panel.valueField1.setText(getCustomServerUrl());
-        dialog.panel.valueField1.setColumns(20);
+        dialog.panel.valueField1.setColumns(CONFIG_URL_COLUMN_WIDTH);
         dialog.panel.valueLabel2.setText(OStrings.getString("APERTIUM_CUSTOM_SERVER_KEY_LABEL"));
         dialog.panel.valueField2.setText(getCredential(PROPERTY_APERTIUM_SERVER_KEY));
         dialog.panel.temporaryCheckBox.setSelected(isCredentialStoredTemporarily(PROPERTY_APERTIUM_SERVER_KEY));

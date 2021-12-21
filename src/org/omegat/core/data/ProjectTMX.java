@@ -66,7 +66,7 @@ public class ProjectTMX {
     protected static final String PROP_XICE = "x-ice";
     protected static final String PROP_X100PC = "x-100pc";
     protected static final String PROP_XAUTO = "x-auto";
-    protected static final String PROP_MT_SOURCE = "mt-source";
+    protected static final String PROP_MT_SOURCE = "mtsource";
 
     /**
      * Storage for default translations for current project.

@@ -39,19 +39,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.ParseEntry;
-import org.omegat.core.data.ParseEntry.ParseEntryResult;
-import org.omegat.core.data.ProtectedPart;
-import org.omegat.filters2.FilterContext;
-import org.omegat.filters2.IFilter;
-import org.omegat.filters2.IParseCallback;
-import org.omegat.util.Language;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
-import org.omegat.util.TMXWriter2;
-
 import net.loomchild.maligna.calculator.Calculator;
 import net.loomchild.maligna.calculator.length.NormalDistributionCalculator;
 import net.loomchild.maligna.calculator.length.PoissonDistributionCalculator;
@@ -67,6 +54,19 @@ import net.loomchild.maligna.filter.aligner.align.hmm.fb.ForwardBackwardAlgorith
 import net.loomchild.maligna.filter.aligner.align.hmm.viterbi.ViterbiAlgorithm;
 import net.loomchild.maligna.matrix.FullMatrixFactory;
 import net.loomchild.maligna.matrix.MatrixFactory;
+
+import org.omegat.core.Core;
+import org.omegat.core.data.ParseEntry;
+import org.omegat.core.data.ParseEntry.ParseEntryResult;
+import org.omegat.core.data.ProtectedPart;
+import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.IFilter;
+import org.omegat.filters2.IParseCallback;
+import org.omegat.util.Language;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
+import org.omegat.util.TMXWriter2;
 
 /**
  * Class to drive alignment of input files. Responsible for filtering and performing automatic alignment with
@@ -386,7 +386,7 @@ public class Aligner {
         try {
             writer = new TMXWriter2(outFile, srcLang, trgLang, true, true, false);
             for (Entry<String, String> e : pairs) {
-                writer.writeEntry(e.getKey(), e.getValue(), null, creator, time, null, 0L, null);
+                writer.writeEntry(e.getKey(), e.getValue(), null, creator, time, null, 0L, null, null);
             }
         } finally {
             if (writer != null) {

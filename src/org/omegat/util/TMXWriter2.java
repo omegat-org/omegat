@@ -89,7 +89,6 @@ public class TMXWriter2 {
      * @param sentenceSegmentingEnabled
      * @param levelTwo
      *            When true, the tmx is made compatible with level 2 (TMX version 1.4)
-     * @param callback
      * @throws Exception
      */
     public TMXWriter2(File file, final Language sourceLanguage, final Language targetLanguage,
@@ -161,11 +160,13 @@ public class TMXWriter2 {
     public void writeEntry(String source, String translation, TMXEntry entry, List<String> propValues)
             throws Exception {
         writeEntry(source, translation, entry.get(TMXEntry.Prop.NOTE), entry.get(TMXEntry.Prop.CREATOR),
-                entry.creationDate, entry.get(TMXEntry.Prop.CHANGER), entry.changeDate, propValues);
+                entry.creationDate, entry.get(TMXEntry.Prop.CHANGER), entry.changeDate,
+                entry.get(TMXEntry.Prop.MTSOURCE), propValues);
     }
 
-    public void writeEntry(String source, String translation, String note, String creator, long creationDate,
-            String changer, long changeDate, List<String> propValues) throws Exception {
+    public void writeEntry(String source, String translation, String note, final String creator,
+                           final long creationDate, final String changer, final long changeDate, final String mtsource,
+                           final List<String> propValues) throws Exception {
         if (source == null && translation == null) {
             throw new NullPointerException(
                     "The TMX spec requires at least one <tuv> per <tu>. Source and translation can't both be null.");
@@ -218,6 +219,14 @@ public class TMXWriter2 {
             xml.writeStartElement("note");
             xml.writeCharacters(platformLineSeparator(note));
             xml.writeEndElement(); // note
+            xml.writeCharacters(lineSeparator);
+        }
+
+        if (!StringUtil.isEmpty(mtsource)) {
+            xml.writeCharacters("      ");
+            xml.writeStartElement("mtsource");
+            xml.writeCharacters(platformLineSeparator(StringUtil.removeXMLInvalidChars(mtsource)));
+            xml.writeEndElement(); // mtsource
             xml.writeCharacters(lineSeparator);
         }
 

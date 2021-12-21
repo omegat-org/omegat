@@ -240,6 +240,10 @@ public class TMXReader2 {
         if (tuid != null) {
             currentTu.props.add(new TMXProp("tuid", getAttributeValue(element, "tuid")));
         }
+        String mtsource = getAttributeValue(element, "mtsource");
+        if (mtsource != null) {
+            currentTu.props.add(new TMXProp("mtsource", getAttributeValue(element, "mtsource")));
+        }
 
         while (true) {
             XMLEvent e = xml.nextEvent();
@@ -655,7 +659,7 @@ public class TMXReader2 {
         public String creationid;
         public long creationdate;
         public String note;
-        public List<TMXProp> props = new ArrayList<TMXProp>();
+        public List<TMXProp> props = new ArrayList<>();
         public List<ParsedTuv> tuvs = new ArrayList<ParsedTuv>();
 
         void clear() {
@@ -663,7 +667,7 @@ public class TMXReader2 {
             changedate = 0;
             creationid = null;
             creationdate = 0;
-            props = new ArrayList<TMXProp>(); // do not CLEAR, because it may be shared
+            props = new ArrayList<>(); // do not CLEAR, because it may be shared
             tuvs = new ArrayList<ParsedTuv>();
             note = null;
         }

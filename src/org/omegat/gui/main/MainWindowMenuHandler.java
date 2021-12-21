@@ -482,11 +482,9 @@ public final class MainWindowMenuHandler {
             Core.getMachineTranslatePane().forceLoad();
         } else if (!StringUtil.isEmpty(tr.result)) {
             Core.getEditor().replaceEditText(tr.result);
-            if (Preferences.isPreferenceDefault(Preferences.MT_ADD_NOTE_WHICH_ENGINE, false)) {
-                SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-                TMXEntry en = Core.getProject().getTranslationInfo(ste);
-                en.set(TMXEntry.Prop.MTSOURCE, tr.translatorName);
-            }
+            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+            TMXEntry en = Core.getProject().getTranslationInfo(ste);
+            en.set(TMXEntry.Prop.MTSOURCE, tr.translatorName);
         }
     }
 

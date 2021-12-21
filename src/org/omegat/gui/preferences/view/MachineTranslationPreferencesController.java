@@ -146,7 +146,6 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
         panel.autoFetchCheckBox.setSelected(mtAutoFetch);
         panel.untranslatedOnlyCheckBox.setSelected(Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED));
         panel.untranslatedOnlyCheckBox.setEnabled(mtAutoFetch);
-        panel.addNoteOfMTNameCheckBox.setSelected(Preferences.isPreference(Preferences.MT_ADD_NOTE_WHICH_ENGINE));
         List<IMachineTranslation> mtProviders = MachineTranslators.getMachineTranslators();
         mtProviders.stream().forEach(p -> providerStatus.put(p.getName(), p.isEnabled()));
         panel.mtProviderTable.setModel(new ProvidersTableModel(mtProviders));
@@ -158,7 +157,6 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
         panel.autoFetchCheckBox.setSelected(false);
         panel.untranslatedOnlyCheckBox.setSelected(false);
         panel.untranslatedOnlyCheckBox.setEnabled(false);
-        panel.addNoteOfMTNameCheckBox.setSelected(false);
         List<IMachineTranslation> mtProviders = MachineTranslators.getMachineTranslators();
         mtProviders.stream().forEach(p -> providerStatus.put(p.getName(), false));
         panel.mtProviderTable.setModel(new ProvidersTableModel(mtProviders));
@@ -169,7 +167,6 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
     public void persist() {
         Preferences.setPreference(Preferences.MT_AUTO_FETCH, panel.autoFetchCheckBox.isSelected());
         Preferences.setPreference(Preferences.MT_ONLY_UNTRANSLATED, panel.untranslatedOnlyCheckBox.isSelected());
-        Preferences.setPreference(Preferences.MT_ADD_NOTE_WHICH_ENGINE, panel.addNoteOfMTNameCheckBox.isSelected());
         MachineTranslators.getMachineTranslators().stream().forEach(p -> {
             Boolean status = providerStatus.get(p.getName());
             if (status != null) {

@@ -5,7 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
                2019 Marc Riera Irigoyen
-               2021 Kevin Brubeck Unhammer
+               2021 Kevin Brubeck Unhammer, Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 

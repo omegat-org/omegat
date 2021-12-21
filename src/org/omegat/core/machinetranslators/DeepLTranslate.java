@@ -7,6 +7,7 @@
                2011 Briac Pilpre, Alex Buloichik
                2013 Didier Briel
                2016 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -53,6 +54,7 @@ import org.omegat.util.Preferences;
  * @author Didier Briel
  * @author Briac Pilpre
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  *
  * @see <a href="https://www.deepl.com/api.html">Translation API</a>
  */

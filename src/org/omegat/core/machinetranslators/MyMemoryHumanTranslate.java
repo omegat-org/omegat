@@ -7,6 +7,7 @@
                2013 Martin Wunderlich
                2015 Didier Briel
                2017 Briac Pilpre
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -38,6 +39,7 @@ import org.omegat.util.Preferences;
  * @author Didier Briel
  * @author Martin Wunderlich
  * @author Briac Pilpre
+ * @author Hiroshi Miura
  */
 public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
 

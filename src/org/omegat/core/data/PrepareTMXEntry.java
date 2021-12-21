@@ -68,7 +68,7 @@ public class PrepareTMXEntry {
         note = e.note;
         if (e.has(TMXEntry.Prop.MTSOURCE)) {
             otherProperties = new ArrayList<>();
-            otherProperties.add(new TMXProp("mt_source", e.get(TMXEntry.Prop.MTSOURCE)));
+            otherProperties.add(new TMXProp("mtsource", e.get(TMXEntry.Prop.MTSOURCE)));
         }
     }
 

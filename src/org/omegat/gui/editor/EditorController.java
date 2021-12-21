@@ -1190,8 +1190,7 @@ public class EditorController implements IEditor {
         boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
-        boolean noteChanged = !StringUtil.nvl(
-                oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
+        boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {
             // Only note was changed, and we are not making a new alt translation.

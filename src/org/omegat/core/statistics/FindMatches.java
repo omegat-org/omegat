@@ -309,6 +309,8 @@ public class FindMatches {
     /**
      * Compare one entry with original entry.
      *
+     * @param candEntry
+     *            entry to compare
      */
     protected void processEntry(final EntryKey key, final String source, final String translation,
             NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int penalty, final String tmxName,

@@ -62,8 +62,6 @@ import java.util.stream.Collectors;
 
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
-import org.xml.sax.SAXParseException;
-
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -104,6 +102,7 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
+import org.xml.sax.SAXParseException;
 
 import gen.core.filters.Filters;
 

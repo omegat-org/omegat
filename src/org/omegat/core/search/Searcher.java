@@ -385,7 +385,7 @@ public class Searcher {
                 SourceTextEntry ste = allEntries.get(i);
                 TMXEntry te = m_project.getTranslationInfo(ste);
 
-                checkEntry(ste.getSrcText(), te.translation, te.note, ste.getRawProperties() , te, i, null);
+                checkEntry(ste.getSrcText(), te.translation, te.note, ste.getRawProperties(), te, i, null);
                 checkStop.checkInterrupted();
             }
 
@@ -401,8 +401,7 @@ public class Searcher {
                         }
                         checkStop.checkInterrupted();
                         if (m_project.isOrphaned(source)) {
-                            checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN,
-                                    file);
+                            checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
                         }
                     }
                 });

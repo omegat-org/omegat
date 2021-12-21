@@ -164,25 +164,25 @@ public class IBMWatsonTranslate extends BaseTranslate {
         return url;
     }
 
+    /**
+     * Parse Watson response and return translated text.
+     * @param json response.
+     * @return translated text.
+     */
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
-        JsonNode rootNode;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = mapper.readTree(json);
+            JsonNode rootNode = mapper.readTree(json);
+            JsonNode translations = rootNode.get("translations");
+            if (translations.has(0)) {
+                return translations.get(0).get("translation").asText();
+            }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_JSON_ERROR");
         }
-
-        //    {
-        //        "translations": [{
-        //          "translation": "translated text goes here."
-        //        }],
-        //        "word_count": 4,
-        //        "character_count": 53
-        //      }
-        return rootNode.get("translations").get(0).get("translation").asText();
+        return null;
     }
 
     /** Convert entities to character. Ex: "&#39;" to "'". */

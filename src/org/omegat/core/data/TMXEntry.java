@@ -54,7 +54,7 @@ public class TMXEntry {
     };
 
     public enum Prop {
-        CHANGER(0), CREATOR(1), NOTE(2), MTSOURCE(3);
+        MTSOURCE(0);
         public final int idx;
         Prop(int i) {
             idx = i;
@@ -63,8 +63,11 @@ public class TMXEntry {
 
     public final String source;
     public final String translation;
+    public final String changer;
     public final long changeDate;
+    public final String creator;
     public final long creationDate;
+    public final String note;
     private final String[] props = new String[Prop.values().length];
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
@@ -72,15 +75,15 @@ public class TMXEntry {
     TMXEntry(PrepareTMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
         this.source = from.source;
         this.translation = from.translation;
+        this.changer = from.changer;
         this.changeDate = from.changeDate;
+        this.creator = from.creator;
         this.creationDate = from.creationDate;
-        props[Prop.CHANGER.idx] = from.changer;
-        props[Prop.CREATOR.idx] = from.creator;
-        props[Prop.NOTE.idx] = from.note;
+        this.note = from.note;
         if (from.otherProperties != null) {
             for (int i = 0; i < from.otherProperties.size(); i++) {
                 TMXProp prop = from.otherProperties.get(i);
-                if (prop.getType().equals("mt-source")) {
+                if (prop.getType().equals("mtsource")) {
                     props[Prop.MTSOURCE.idx] = prop.getValue();
                 }
             }
@@ -106,7 +109,7 @@ public class TMXEntry {
     }
 
     public boolean hasNote() {
-        return has(Prop.NOTE);
+        return note != null;
     }
 
     @Override
@@ -134,10 +137,10 @@ public class TMXEntry {
         if (!equalsTranslation(other)) {
             return false;
         }
-        if (!Objects.equals(props[Prop.CHANGER.idx], other.props[Prop.CHANGER.idx])) {
+        if (!Objects.equals(changer, other.changer)) {
             return false;
         }
-        if (!Objects.equals(props[Prop.CREATOR.idx], other.props[Prop.CREATOR.idx])) {
+        if (!Objects.equals(creator, other.creator)) {
             return false;
         }
         if (defaultTranslation != other.defaultTranslation) {
@@ -148,8 +151,8 @@ public class TMXEntry {
 
     @Override
     public int hashCode() {
-        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, Arrays.hashCode(props),
-                linked, defaultTranslation, source);
+        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, linked, changer, creator,
+                Arrays.hashCode(props), defaultTranslation, source);
     }
 
     /**
@@ -163,7 +166,7 @@ public class TMXEntry {
         if (!Objects.equals(translation, other.translation)) {
             return false;
         }
-        if (!Objects.equals(props[Prop.NOTE.idx], other.props[Prop.NOTE.idx])) {
+        if (!Objects.equals(note, other.note)) {
             return false;
         }
         if (!Objects.equals(props[Prop.MTSOURCE.idx], other.props[Prop.MTSOURCE.idx])) {

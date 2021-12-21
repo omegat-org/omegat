@@ -159,8 +159,7 @@ public class TMXWriter2 {
      */
     public void writeEntry(String source, String translation, TMXEntry entry, List<String> propValues)
             throws Exception {
-        writeEntry(source, translation, entry.get(TMXEntry.Prop.NOTE), entry.get(TMXEntry.Prop.CREATOR),
-                entry.creationDate, entry.get(TMXEntry.Prop.CHANGER), entry.changeDate,
+        writeEntry(source, translation, entry.note, entry.creator, entry.creationDate, entry.changer, entry.changeDate,
                 entry.get(TMXEntry.Prop.MTSOURCE), propValues);
     }
 

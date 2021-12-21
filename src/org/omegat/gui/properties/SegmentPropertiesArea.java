@@ -331,7 +331,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         if (entry == null) {
             return;
         }
-        if (entry.has(Prop.NOTE)) {
+        if (entry.hasNote()) {
             setProperty(KEY_HASNOTE, true);
         }
         if (!entry.isTranslated()) {
@@ -341,12 +341,12 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setProperty(KEY_CHANGED, dateFormat.format(new Date(entry.changeDate)) + " "
                     + timeFormat.format(new Date(entry.changeDate)));
         }
-        setProperty(KEY_CHANGER, entry.get(Prop.CHANGER));
+        setProperty(KEY_CHANGER, entry.changer);
         if (entry.creationDate != 0) {
             setProperty(KEY_CREATED, dateFormat.format(new Date(entry.creationDate)) + " "
                     + timeFormat.format(new Date(entry.creationDate)));
         }
-        setProperty(KEY_CREATOR, entry.get(Prop.CREATOR));
+        setProperty(KEY_CREATOR, entry.creator);
         if (!entry.defaultTranslation) {
             setProperty(KEY_ISALT, true);
         }

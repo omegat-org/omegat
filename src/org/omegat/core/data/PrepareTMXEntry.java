@@ -61,11 +61,11 @@ public class PrepareTMXEntry {
     public PrepareTMXEntry(TMXEntry e) {
         source = e.source;
         translation = e.translation;
-        changer = e.get(TMXEntry.Prop.CHANGER);
+        changer = e.changer;
         changeDate = e.changeDate;
-        creator = e.get(TMXEntry.Prop.CREATOR);
+        creator = e.creator;
         creationDate = e.creationDate;
-        note = e.get(TMXEntry.Prop.NOTE);
+        note = e.note;
         if (e.has(TMXEntry.Prop.MTSOURCE)) {
             otherProperties = new ArrayList<>();
             otherProperties.add(new TMXProp("mt_source", e.get(TMXEntry.Prop.MTSOURCE)));

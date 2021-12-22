@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.util.TMXProp;
+import org.omegat.util.TMXWriter2;
 
 /**
  * Class for prepare TMXEntry content before save unchangeable copy in the ProjectTMX. We can't use just
@@ -68,7 +69,7 @@ public class PrepareTMXEntry {
         note = e.note;
         if (e.has(TMXEntry.Prop.MTSOURCE)) {
             otherProperties = new ArrayList<>();
-            otherProperties.add(new TMXProp(ProjectTMX.PROP_MTSOURCE, e.get(TMXEntry.Prop.MTSOURCE)));
+            otherProperties.add(new TMXProp(TMXWriter2.PROP_MTSOURCE, e.get(TMXEntry.Prop.MTSOURCE)));
         }
     }
 

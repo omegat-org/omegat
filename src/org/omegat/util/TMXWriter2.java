@@ -60,6 +60,7 @@ public class TMXWriter2 {
     static String lineSeparator = System.lineSeparator();
 
     public static final String PROP_ID = "id";
+    public static final String PROP_MTSOURCE = "x-mtsource";
 
     private static final XMLOutputFactory FACTORY;
 
@@ -223,7 +224,7 @@ public class TMXWriter2 {
 
         if (!StringUtil.isEmpty(mtsource)) {
             xml.writeCharacters("      ");
-            xml.writeStartElement("mtsource");
+            xml.writeStartElement(PROP_MTSOURCE);
             xml.writeCharacters(platformLineSeparator(StringUtil.removeXMLInvalidChars(mtsource)));
             xml.writeEndElement(); // mtsource
             xml.writeCharacters(lineSeparator);

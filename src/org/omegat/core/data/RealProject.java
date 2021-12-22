@@ -101,6 +101,7 @@ import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
 import org.omegat.util.TMXReader2;
+import org.omegat.util.TMXWriter2;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.xml.sax.SAXParseException;
@@ -1483,7 +1484,7 @@ public class RealProject implements IProject {
             trans.creator = prevTrEntry.creator;
             if (prevTrEntry.has(TMXEntry.Prop.MTSOURCE)) {
                 trans.otherProperties = new ArrayList<>();
-                trans.otherProperties.add(new TMXProp(ProjectTMX.PROP_MTSOURCE,
+                trans.otherProperties.add(new TMXProp(TMXWriter2.PROP_MTSOURCE,
                         prevTrEntry.get(TMXEntry.Prop.MTSOURCE)));
             }
         }

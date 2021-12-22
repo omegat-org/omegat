@@ -66,7 +66,7 @@ public class ProjectTMX {
     protected static final String PROP_XICE = "x-ice";
     protected static final String PROP_X100PC = "x-100pc";
     protected static final String PROP_XAUTO = "x-auto";
-    protected static final String PROP_MT_SOURCE = "mtsource";
+    protected static final String PROP_MTSOURCE = "mtsource";
 
     /**
      * Storage for default translations for current project.
@@ -198,7 +198,7 @@ public class ProjectTMX {
                     }
                 }
                 if (en.getValue().has(TMXEntry.Prop.MTSOURCE)) {
-                    p.add(PROP_MT_SOURCE);
+                    p.add(PROP_MTSOURCE);
                     p.add(en.getValue().get(TMXEntry.Prop.MTSOURCE));
                 }
                 wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), p);
@@ -369,7 +369,7 @@ public class ProjectTMX {
             id = te.getPropValue(ATTR_TUID);
         }
         TMXEntry.ExternalLinked externalLinked = null;
-        if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
+        if (te.hasPropValue(PROP_XICE, id)) {
             externalLinked = TMXEntry.ExternalLinked.xICE;
         }
         if (externalLinked == null && te.hasPropValue(PROP_X100PC, id)) {
@@ -411,7 +411,7 @@ public class ProjectTMX {
     @Override
     public String toString() {
         return "[" + Stream.concat(
-                defaults.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey))
+                defaults.entrySet().stream().sorted(Map.Entry.comparingByKey())
                         .map(e -> e.getKey() + ": " + e.getValue().translation),
                 alternatives.entrySet().stream().sorted(Comparator.comparing(e -> e.getKey().sourceText))
                         .map(e -> e.getKey().sourceText + ": " + e.getValue().translation))

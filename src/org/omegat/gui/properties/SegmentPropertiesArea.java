@@ -92,7 +92,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_CREATOR = "creator";
     private static final String KEY_ISALT = "isAlt";
     private static final String KEY_LINKED = "linked";
-    private static final String KEY_MTSOURCE = "MT-used";
+    private static final String KEY_MTSOURCE = "mtsource";
 
     final List<String> properties = new ArrayList<>();
 
@@ -353,6 +353,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         setProperty(KEY_LINKED, entry.linked);
         if (entry.has(Prop.MTSOURCE)) {
             setProperty(KEY_MTSOURCE, entry.get(Prop.MTSOURCE));
+        } else {
+            setProperty(KEY_MTSOURCE, OStrings.getString("SEGPROP_MT_USED_UNKNOWN"));
         }
     }
 }

@@ -197,9 +197,9 @@ public class ProjectTMX {
                         p.add("auto");
                     }
                 }
-                if (en.getValue().has(TMXEntry.Prop.MTSOURCE)) {
+                if (en.getValue().hasMTSource()) {
                     p.add(PROP_MTSOURCE);
-                    p.add(en.getValue().get(TMXEntry.Prop.MTSOURCE));
+                    p.add(en.getValue().getMTSource());
                 }
                 wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), p);
             }

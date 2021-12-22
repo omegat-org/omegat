@@ -1482,10 +1482,9 @@ public class RealProject implements IProject {
         } else {
             trans.creationDate = prevTrEntry.creationDate;
             trans.creator = prevTrEntry.creator;
-            if (prevTrEntry.has(TMXEntry.Prop.MTSOURCE)) {
+            if (prevTrEntry.hasMTSource()) {
                 trans.otherProperties = new ArrayList<>();
-                trans.otherProperties.add(new TMXProp(ProjectTMX.PROP_MTSOURCE,
-                        prevTrEntry.get(TMXEntry.Prop.MTSOURCE)));
+                trans.otherProperties.add(new TMXProp(ProjectTMX.PROP_MTSOURCE, prevTrEntry.getMTSource()));
             }
         }
 

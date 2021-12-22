@@ -484,7 +484,7 @@ public final class MainWindowMenuHandler {
             Core.getEditor().replaceEditText(tr.result);
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
             TMXEntry en = Core.getProject().getTranslationInfo(ste);
-            en.set(TMXEntry.Prop.MTSOURCE, tr.translatorName);
+            en.setMTSource(tr.translatorName);
         }
     }
 

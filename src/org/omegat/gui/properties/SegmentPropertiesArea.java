@@ -58,7 +58,6 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
-import org.omegat.core.data.TMXEntry.Prop;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
@@ -351,8 +350,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setProperty(KEY_ISALT, true);
         }
         setProperty(KEY_LINKED, entry.linked);
-        if (entry.has(Prop.MTSOURCE)) {
-            setProperty(KEY_MTSOURCE, entry.get(Prop.MTSOURCE));
+        if (entry.hasMTSource()) {
+            setProperty(KEY_MTSOURCE, entry.getMTSource());
         } else {
             setProperty(KEY_MTSOURCE, OStrings.getString("SEGPROP_MT_USED_UNKNOWN"));
         }

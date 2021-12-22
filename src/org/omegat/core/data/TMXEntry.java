@@ -29,7 +29,6 @@
 
 package org.omegat.core.data;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 import org.omegat.util.TMXProp;
@@ -53,14 +52,6 @@ public class TMXEntry {
         xICE, x100PC, xAUTO, xENFORCED
     };
 
-    public enum Prop {
-        MTSOURCE(0);
-        public final int idx;
-        Prop(int i) {
-            idx = i;
-        }
-    }
-
     public final String source;
     public final String translation;
     public final String changer;
@@ -68,7 +59,7 @@ public class TMXEntry {
     public final String creator;
     public final long creationDate;
     public final String note;
-    private final String[] props = new String[Prop.values().length];
+    public String mtsource;
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
 
@@ -84,7 +75,8 @@ public class TMXEntry {
             for (int i = 0; i < from.otherProperties.size(); i++) {
                 TMXProp prop = from.otherProperties.get(i);
                 if (prop.getType().equals(ProjectTMX.PROP_MTSOURCE)) {
-                    props[Prop.MTSOURCE.idx] = prop.getValue();
+                    this.mtsource = prop.getValue();
+                    break;
                 }
             }
         }
@@ -92,16 +84,16 @@ public class TMXEntry {
         this.linked = linked;
     }
 
-    public boolean has(final Prop key) {
-        return props[key.idx] != null;
+    public boolean hasMTSource() {
+        return mtsource != null;
     }
 
-    public String get(final Prop key) {
-        return props[key.idx];
+    public String getMTSource() {
+        return mtsource;
     }
 
-    public void set(final Prop key, final String value) {
-        props[key.idx] = value;
+    public void setMTSource(final String value) {
+        mtsource = value;
     }
 
     public boolean isTranslated() {
@@ -152,7 +144,7 @@ public class TMXEntry {
     @Override
     public int hashCode() {
         return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, linked, changer, creator,
-                Arrays.hashCode(props), defaultTranslation, source);
+                mtsource, defaultTranslation, source);
     }
 
     /**
@@ -169,7 +161,7 @@ public class TMXEntry {
         if (!Objects.equals(note, other.note)) {
             return false;
         }
-        if (!Objects.equals(props[Prop.MTSOURCE.idx], other.props[Prop.MTSOURCE.idx])) {
+        if (!Objects.equals(mtsource, other.mtsource)) {
             return false;
         }
         return Objects.equals(linked, other.linked);

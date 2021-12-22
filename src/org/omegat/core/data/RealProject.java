@@ -99,6 +99,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TMXProp;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -1480,6 +1481,11 @@ public class RealProject implements IProject {
         } else {
             trans.creationDate = prevTrEntry.creationDate;
             trans.creator = prevTrEntry.creator;
+            if (prevTrEntry.has(TMXEntry.Prop.MTSOURCE)) {
+                trans.otherProperties = new ArrayList<>();
+                trans.otherProperties.add(new TMXProp(ProjectTMX.PROP_MTSOURCE,
+                        prevTrEntry.get(TMXEntry.Prop.MTSOURCE)));
+            }
         }
 
         if (StringUtil.isEmpty(trans.note)) {

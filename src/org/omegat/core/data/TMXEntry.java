@@ -33,7 +33,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import org.omegat.util.TMXProp;
-import org.omegat.util.TMXWriter2;
 
 /**
  * Storage for TMX entry.
@@ -84,7 +83,7 @@ public class TMXEntry {
         if (from.otherProperties != null) {
             for (int i = 0; i < from.otherProperties.size(); i++) {
                 TMXProp prop = from.otherProperties.get(i);
-                if (prop.getType().equals(TMXWriter2.PROP_MTSOURCE)) {
+                if (prop.getType().equals(ProjectTMX.PROP_MTSOURCE)) {
                     props[Prop.MTSOURCE.idx] = prop.getValue();
                 }
             }

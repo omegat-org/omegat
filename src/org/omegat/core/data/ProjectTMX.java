@@ -66,6 +66,7 @@ public class ProjectTMX {
     protected static final String PROP_XICE = "x-ice";
     protected static final String PROP_X100PC = "x-100pc";
     protected static final String PROP_XAUTO = "x-auto";
+    protected static final String PROP_MTSOURCE = TMXWriter2.PROP_MTSOURCE;
 
     /**
      * Storage for default translations for current project.
@@ -197,7 +198,7 @@ public class ProjectTMX {
                     }
                 }
                 if (en.getValue().has(TMXEntry.Prop.MTSOURCE)) {
-                    p.add(TMXWriter2.PROP_MTSOURCE);
+                    p.add(PROP_MTSOURCE);
                     p.add(en.getValue().get(TMXEntry.Prop.MTSOURCE));
                 }
                 wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), p);

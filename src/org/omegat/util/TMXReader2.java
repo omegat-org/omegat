@@ -240,9 +240,10 @@ public class TMXReader2 {
         if (tuid != null) {
             currentTu.props.add(new TMXProp("tuid", getAttributeValue(element, "tuid")));
         }
-        String mtsource = getAttributeValue(element, "mtsource");
+        String mtsource = getAttributeValue(element, TMXWriter2.PROP_MTSOURCE);
         if (mtsource != null) {
-            currentTu.props.add(new TMXProp("mtsource", getAttributeValue(element, "mtsource")));
+            currentTu.props.add(new TMXProp("mtsource", getAttributeValue(element,
+                    TMXWriter2.PROP_MTSOURCE)));
         }
 
         while (true) {

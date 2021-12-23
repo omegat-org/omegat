@@ -31,8 +31,6 @@ package org.omegat.core.data;
 
 import java.util.Objects;
 
-import org.omegat.util.TMXProp;
-
 /**
  * Storage for TMX entry.
  *
@@ -71,15 +69,7 @@ public class TMXEntry {
         this.creator = from.creator;
         this.creationDate = from.creationDate;
         this.note = from.note;
-        if (from.otherProperties != null) {
-            for (int i = 0; i < from.otherProperties.size(); i++) {
-                TMXProp prop = from.otherProperties.get(i);
-                if (prop.getType().equals(ProjectTMX.PROP_MTSOURCE)) {
-                    this.mtsource = prop.getValue();
-                    break;
-                }
-            }
-        }
+        this.mtsource = from.mtsource;
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
     }

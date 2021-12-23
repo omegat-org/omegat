@@ -28,9 +28,11 @@
 
 package org.omegat.core.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.util.TMXProp;
+import org.omegat.util.TMXWriter2;
 
 /**
  * Class for prepare TMXEntry content before save unchangeable copy in the ProjectTMX. We can't use just
@@ -52,7 +54,6 @@ public class PrepareTMXEntry {
     public String creator;
     public long creationDate;
     public String note;
-    public String mtsource;
     public List<TMXProp> otherProperties;
 
     public PrepareTMXEntry() {
@@ -66,7 +67,10 @@ public class PrepareTMXEntry {
         creator = e.creator;
         creationDate = e.creationDate;
         note = e.note;
-        mtsource = e.mtsource;
+        if (e.mtsource != null) {
+            otherProperties = new ArrayList<>();
+            otherProperties.add(new TMXProp(TMXWriter2.PROP_MTSOURCE, e.mtsource));
+        }
     }
 
     public String getPropValue(String propType) {
@@ -106,8 +110,7 @@ public class PrepareTMXEntry {
         builder.append("PrepareTMXEntry [source=").append(source).append(", translation=").append(translation)
                 .append(", creator=").append(creator).append(", changer=").append(changer).append(", creationDate=")
                 .append(creationDate).append(", changeDate=").append(changeDate).append(", note=").append(note)
-                .append(", mtsource=").append(mtsource).append(", otherProperties=").append(otherProperties)
-                .append("]");
+                .append(", otherProperties=").append(otherProperties).append("]");
         return builder.toString();
     }
 

@@ -31,6 +31,8 @@ package org.omegat.core.data;
 
 import java.util.Objects;
 
+import org.omegat.util.TMXWriter2;
+
 /**
  * Storage for TMX entry.
  *
@@ -69,7 +71,7 @@ public class TMXEntry {
         this.creator = from.creator;
         this.creationDate = from.creationDate;
         this.note = from.note;
-        this.mtsource = from.mtsource;
+        this.mtsource = from.getPropValue(TMXWriter2.PROP_MTSOURCE);
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
     }

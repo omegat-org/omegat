@@ -33,17 +33,16 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
-import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.languagetools.LanguageToolWrapper.LanguageToolMarker;
@@ -67,15 +66,6 @@ public class FalseFriendsTest extends TestCore {
         };
 
         Core.setProject(new IProject() {
-            public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans,
-                    boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked) {
-            }
-
-            public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans,
-                    boolean defaultTranslation, ExternalLinked externalLinked,
-                    AllTranslations previousTranslations) throws OptimisticLockingFail {
-            }
-
             public void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note) {
             }
 
@@ -145,6 +135,12 @@ public class FalseFriendsTest extends TestCore {
 
             public List<SourceTextEntry> getAllEntries() {
                 return null;
+            }
+
+            public void setTranslation(SourceTextEntry ste, TMXEntry trans) {
+            }
+
+            public void setTranslation(SourceTextEntry entry, TMXEntry trans, AllTranslations previousTranslations) {
             }
 
             public void compileProject(String sourcePattern) throws Exception {

@@ -8,6 +8,7 @@
                2012 Aaron Madlon-Kay
                2013 Kyle Katarn, Aaron Madlon-Kay
                2014 Alex Buloichik
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -59,7 +60,6 @@ import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
@@ -445,17 +445,23 @@ public final class Main {
         }
 
         // prepare tmx
-        Map<String, PrepareTMXEntry> data = new HashMap<>();
+        Map<String, TMXEntry> data = new HashMap<>();
+        TMXEntry entry;
         for (SourceTextEntry ste : entries) {
-            PrepareTMXEntry entry = new PrepareTMXEntry();
-            entry.source = ste.getSrcText();
             switch (pseudoTranslateType) {
-            case EQUAL:
-                entry.translation = ste.getSrcText();
-                break;
-            case EMPTY:
-                entry.translation = "";
-                break;
+                case EQUAL:
+                    entry = new TMXEntry.Builder()
+                            .setSource(ste.getSrcText())
+                            .setTranslation(ste.getSrcText())
+                            .build();
+                    break;
+                case EMPTY:
+                default:
+                    entry = new TMXEntry.Builder()
+                            .setSource(ste.getSrcText())
+                            .setTranslation("")
+                            .build();
+                    break;
             }
             data.put(ste.getSrcText(), entry);
         }
@@ -497,14 +503,8 @@ public final class Main {
         System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
 
         Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
-        Map<String, PrepareTMXEntry> result = new TreeMap<>();
-        for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
-            result.put(en.getKey(), new PrepareTMXEntry(en.getValue()));
-        }
-
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
-
-        TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), result);
+        TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), data);
 
         p.closeProject();
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));

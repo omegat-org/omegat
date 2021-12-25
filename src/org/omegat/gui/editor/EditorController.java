@@ -91,7 +91,6 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.IProject.OptimisticLockingFail;
 import org.omegat.core.data.LastSegmentManager;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
@@ -859,7 +858,7 @@ public class EditorController implements IEditor {
         // forget about old marks
         builder.createSegmentElement(true, currentTranslation);
 
-        Core.getNotes().setNoteText(currentTranslation.note);
+        Core.getNotes().setNoteText(currentTranslation.getNote());
 
         // then add new marks
         markerController.reprocessImmediately(builder);
@@ -1143,69 +1142,74 @@ public class EditorController implements IEditor {
 
         TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
 
-        PrepareTMXEntry newen = new PrepareTMXEntry();
-        newen.source = sb.ste.getSrcText();
-        newen.note = Core.getNotes().getNoteText();
+        TMXEntry.Builder tmxEntryBuilder = new TMXEntry.Builder()
+                .setSource(sb.ste.getSrcText())
+                .setNote(Core.getNotes().getNoteText());
+
         if (forceTranslation != null) { // there is force translation
             switch (forceTranslation) {
             case UNTRANSLATED:
-                newen.translation = null;
+                tmxEntryBuilder.setTranslation(null);
                 break;
             case EMPTY:
-                newen.translation = "";
+                tmxEntryBuilder.setTranslation("");
                 break;
             case EQUALS_TO_SOURCE:
-                newen.translation = newen.source;
+                tmxEntryBuilder.setTranslation(sb.ste.getSrcText());
                 break;
             }
         } else { // translation from editor
             if (newTrans.isEmpty()) { // empty translation
-                if (oldTE.isTranslated() && "".equals(oldTE.translation)) {
+                if (oldTE.isTranslated() && "".equals(oldTE.getTranslation())) {
                     // It's an empty translation which should remain empty
-                    newen.translation = "";
+                    tmxEntryBuilder.setTranslation("");
                 } else {
-                    newen.translation = null; // will be untranslated
+                    tmxEntryBuilder.setTranslation(null); // will be untranslated
                 }
-            } else if (newTrans.equals(newen.source)) { // equals to source
+            } else if (newTrans.equals(sb.ste.getSrcText())) { // equals to source
                 if (Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
                     // translation can be equals to source
-                    newen.translation = newTrans;
+                    tmxEntryBuilder.setTranslation(newTrans);
                 } else {
                     // translation can't be equals to source
-                    if (oldTE.source.equals(oldTE.translation)) {
+                    if (oldTE.getSource().equals(oldTE.getTranslation())) {
                         // but it was equals to source before
-                        newen.translation = oldTE.translation;
+                        tmxEntryBuilder.setTranslation(oldTE.getTranslation());
                     } else {
                         // set untranslated
-                        newen.translation = null;
+                        tmxEntryBuilder.setTranslation(null);
                     }
                 }
             } else {
                 // new translation is not empty and not equals to source - just change
-                newen.translation = newTrans;
+                tmxEntryBuilder.setTranslation(newTrans);
             }
         }
 
+
         boolean defaultTranslation = sb.isDefaultTranslation();
-        boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
-        boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
-        boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
-        boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
+        boolean isNewDefaultTrans = defaultTranslation && !oldTE.isDefaultTranslation();
+        boolean isNewAltTrans = !defaultTranslation && oldTE.isDefaultTranslation();
+
+        TMXEntry newen = tmxEntryBuilder
+                .setDefaultTranslation(defaultTranslation)
+                .build();
+        boolean translationChanged = !Objects.equals(oldTE.getTranslation(), newen.getTranslation());
+        boolean noteChanged = !StringUtil.nvl(oldTE.getNote(), "").equals(StringUtil.nvl(newen.getNote(), ""));
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {
             // Only note was changed, and we are not making a new alt translation.
-            Core.getProject().setNote(entry, oldTE, newen.note);
+            Core.getProject().setNote(entry, oldTE, newen.getNote());
         } else if (isNewDefaultTrans || translationChanged || noteChanged) {
             while (true) {
                 // iterate before optimistic locking will be resolved
                 try {
-                    Core.getProject().setTranslation(entry, newen, defaultTranslation, null,
-                            previousTranslations);
+                    Core.getProject().setTranslation(entry, newen, previousTranslations);
                     break;
                 } catch (OptimisticLockingFail ex) {
                     String result = new ConflictDialogController().show(ex.getOldTranslationText(),
-                            ex.getNewTranslationText(), newen.translation);
-                    if (result == newen.translation) {
+                            ex.getNewTranslationText(), newen.getTranslation());
+                    if (Objects.equals(result, newen.getTranslation())) {
                         // next iteration
                         previousTranslations = ex.getPrevious();
                     } else {
@@ -1225,17 +1229,17 @@ public class EditorController implements IEditor {
                 // current entry, skip
                 continue;
             }
-            SegmentBuilder builder = m_docSegList[i];
-            if (!builder.hasBeenCreated()) {
+            SegmentBuilder segmentBuilder = m_docSegList[i];
+            if (!segmentBuilder.hasBeenCreated()) {
                 // Skip because segment has not been drawn yet
                 continue;
             }
-            if (builder.ste.getSrcText().equals(entry.getSrcText())) {
+            if (segmentBuilder.ste.getSrcText().equals(entry.getSrcText())) {
                 // the same source text - need to update
-                builder.createSegmentElement(false,
-                        Core.getProject().getTranslationInfo(builder.ste), !defaultTranslation);
+                segmentBuilder.createSegmentElement(false,
+                        Core.getProject().getTranslationInfo(segmentBuilder.ste), !defaultTranslation);
                 // then add new marks
-                markerController.reprocessImmediately(builder);
+                markerController.reprocessImmediately(segmentBuilder);
             }
         }
 
@@ -1576,7 +1580,7 @@ public class EditorController implements IEditor {
             } else {
                 // default translation - multiple shouldn't exist for this entry
                 TMXEntry trans = Core.getProject().getTranslationInfo(entries.get(i));
-                if (!trans.isTranslated() || !trans.defaultTranslation) {
+                if (!trans.isTranslated() || !trans.isDefaultTranslation()) {
                     // we need exist alternative translation
                     continue;
                 }

@@ -53,7 +53,6 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ParseEntry;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
@@ -364,8 +363,8 @@ public class Searcher {
                 }
                 for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
-                    searchEntriesAlternative(tmEn.getValue().getDefaults(), langTM.getLanguage());
-                    searchEntriesAlternative(tmEn.getValue().getAlternatives(), langTM.getLanguage());
+                    searchEntries(tmEn.getValue().getDefaults(), langTM.getLanguage());
+                    searchEntries(tmEn.getValue().getAlternatives(), langTM.getLanguage());
                     checkStop.checkInterrupted();
                 }
             }
@@ -448,25 +447,7 @@ public class Searcher {
      * @param tmxID identifier of the TMX. E.g. the filename or language code
      * @throws SearchLimitReachedException when nr of found matches exceeds requested nr of results
      */
-    private void searchEntries(Collection<PrepareTMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
-        for (PrepareTMXEntry tm : tmEn) {
-            // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= searchExpression.numberOfResults) {
-                throw new SearchLimitReachedException();
-            }
-
-            // for alternative translations:
-            // - it is not feasible to get the SourceTextEntry that matches the tm.source, so we cannot get the entryNum
-            // and real translation
-            // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
-            // which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_TRANSLATION_MEMORY, tmxID);
-
-            checkStop.checkInterrupted();
-        }
-    }
-
-    private void searchEntriesAlternative(Collection<TMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
+    private void searchEntries(Collection<TMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
         for (TMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= searchExpression.numberOfResults) {

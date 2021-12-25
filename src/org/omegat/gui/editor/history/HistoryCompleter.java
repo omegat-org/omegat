@@ -77,7 +77,7 @@ public class HistoryCompleter extends AutoCompleterListView {
                 if (lastEntry != null && !wasTranslated) {
                     TMXEntry newTranslation = project.getTranslationInfo(lastEntry);
                     if (newTranslation.isTranslated()) {
-                        trainString(newTranslation.translation);
+                        trainString(newTranslation.getTranslation());
                     }
                 }
                 currentEntry = newEntry;
@@ -102,8 +102,8 @@ public class HistoryCompleter extends AutoCompleterListView {
         }
         long start = System.currentTimeMillis();
         wordCompleter.reset();
-        project.iterateByDefaultTranslations((source, trans) -> trainString(trans.translation));
-        project.iterateByMultipleTranslations((source, trans) -> trainString(trans.translation));
+        project.iterateByDefaultTranslations((source, trans) -> trainString(trans.getTranslation()));
+        project.iterateByMultipleTranslations((source, trans) -> trainString(trans.getTranslation()));
         long time = System.currentTimeMillis() - start;
         LOGGER.finer(() -> String.format("Time to train History Completer: %d ms", time));
     }

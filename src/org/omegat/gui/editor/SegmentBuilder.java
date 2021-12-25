@@ -167,7 +167,7 @@ public class SegmentBuilder {
      * @return OmElementSegment
      */
     public void createSegmentElement(final boolean isActive, TMXEntry trans) {
-        createSegmentElement(isActive, doc.getLength(), trans, trans.defaultTranslation);
+        createSegmentElement(isActive, doc.getLength(), trans, trans.isDefaultTranslation());
     }
 
     public void createSegmentElement(final boolean isActive, TMXEntry trans, final boolean defaultTranslation) {
@@ -175,7 +175,7 @@ public class SegmentBuilder {
     }
 
     public void prependSegmentElement(final boolean isActive, TMXEntry trans) {
-        createSegmentElement(isActive, 0, trans, trans.defaultTranslation);
+        createSegmentElement(isActive, 0, trans, trans.isDefaultTranslation());
     }
 
     public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans, final boolean defaultTranslation) {
@@ -274,7 +274,7 @@ public class SegmentBuilder {
                 TMXEntry altTrans = entry.getValue().getDefaultTranslation(ste.getSrcText());
                 if (altTrans != null && altTrans.isTranslated()) {
                     Language language = entry.getKey();
-                    addOtherLanguagePart(altTrans.translation, language);
+                    addOtherLanguagePart(altTrans.getTranslation(), language);
                 }
             }
 
@@ -283,7 +283,7 @@ public class SegmentBuilder {
 
             if (trans.isTranslated()) {
                 //translation exist
-                translationText = trans.translation;
+                translationText = trans.getTranslation();
             } else {
                 boolean insertSource = !Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT);
                 if (controller.entriesFilter != null && controller.entriesFilter.isSourceAsEmptyTranslation()) {
@@ -347,7 +347,7 @@ public class SegmentBuilder {
 
         if (trans.isTranslated()) {
             // translation exist
-            translationText = trans.translation;
+            translationText = trans.getTranslation();
             if (StringUtil.isEmpty(translationText)) {
                 translationText = OStrings.getString("EMPTY_TRANSLATION");
             }
@@ -526,12 +526,12 @@ public class SegmentBuilder {
         if (Preferences.isPreference(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE)) {
              text = ModificationInfoManager.apply(trans);
         } else {
-            String author = (trans.changer == null ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR")
-                    : trans.changer);
+            String author = (trans.getChanger() == null ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR")
+                    : trans.getChanger());
             String template;
-            if (trans.changeDate != 0) {
+            if (trans.getChangeDate() != 0) {
                 template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR_DATE");
-                Date changeDate = new Date(trans.changeDate);
+                Date changeDate = new Date(trans.getChangeDate());
                 String changeDateString = DateFormat.getDateInstance().format(changeDate);
                 String changeTimeString = DateFormat.getTimeInstance().format(changeDate);
                 Object[] args = { author, changeDateString, changeTimeString };

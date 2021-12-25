@@ -45,6 +45,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.tagvalidation.ErrorReport;
@@ -55,7 +57,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.gui.CharacterWrapEditorKit;
 import org.omegat.util.gui.Styles.EditorColor;
-import org.openide.awt.Mnemonics;
 
 /**
  * A class representing problems with tags in a translation. One instance holds
@@ -206,7 +207,7 @@ public class TagIssue implements IIssue {
     private static boolean doFix(ErrorReport report, String fixed) {
         // Make sure the translation hasn't changed in the editor.
         TMXEntry prevTrans = Core.getProject().getTranslationInfo(report.ste);
-        if (!report.translation.equals(prevTrans.translation)) {
+        if (!report.translation.equals(prevTrans.getTranslation())) {
             return false;
         }
 

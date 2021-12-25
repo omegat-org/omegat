@@ -142,11 +142,11 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
             DisplayedEntry de = new DisplayedEntry();
             de.entry = e;
             de.start = o.length();
-            if (e.entry.translation == null) {
+            if (e.entry.getTranslation() == null) {
                 continue;
             }
             if (e.key != null) {
-                o.append(e.entry.translation).append('\n');
+                o.append(e.entry.getTranslation()).append('\n');
                 o.append('<').append(e.key.file);
                 if (e.key.id != null) {
                     o.append('/').append(e.key.id);
@@ -157,7 +157,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
                     o.append(" <...> ").append(StringUtil.truncate(e.key.next, 10)).append(")\n");
                 }
             } else {
-                o.append(e.entry.translation).append('\n');
+                o.append(e.entry.getTranslation()).append('\n');
             }
             de.end = o.length();
             entries.add(de);
@@ -236,7 +236,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         item.setEnabled(de != null && de.entry.key != null);
         if (de != null && de.entry.key != null) {
             item.addActionListener(e -> {
-                Core.getEditor().replaceEditText(de.entry.entry.translation);
+                Core.getEditor().replaceEditText(de.entry.entry.getTranslation());
                 Core.getEditor().setAlternateTranslationForCurrentEntry(false);
                 Core.getEditor().commitAndLeave();
             });
@@ -245,7 +245,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         item = popup.add(OStrings.getString("MULT_POPUP_REPLACE"));
         item.setEnabled(de != null);
         if (de != null) {
-            item.addActionListener(e -> Core.getEditor().replaceEditText(de.entry.entry.translation));
+            item.addActionListener(e -> Core.getEditor().replaceEditText(de.entry.entry.getTranslation()));
         }
 
         item = popup.add(OStrings.getString("MULT_POPUP_GOTO"));

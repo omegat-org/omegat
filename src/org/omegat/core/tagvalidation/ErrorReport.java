@@ -59,7 +59,7 @@ public class ErrorReport {
         this.ste = ste;
         this.source = ste.getSrcText();
         this.tmxEntry = tmxEntry;
-        this.translation = tmxEntry.translation;
+        this.translation = tmxEntry.getTranslation();
         this.entryNum = ste.entryNum();
     }
 

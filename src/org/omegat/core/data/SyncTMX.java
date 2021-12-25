@@ -85,7 +85,7 @@ public final class SyncTMX implements ITmx {
     }
 
     private Key makeKey(Object entryKey, TMXEntry tmxEntry) {
-        Key key = new Key(tmxEntry.source, entryKey);
+        Key key = new Key(tmxEntry.getSource(), entryKey);
         if (entryKey instanceof EntryKey) {
             EntryKey ek = (EntryKey) entryKey;
             key.addProp("file", ek.file);
@@ -280,7 +280,7 @@ public final class SyncTMX implements ITmx {
 
         @Override
         public String getContent() {
-            return tmxEntry.translation;
+            return tmxEntry.getTranslation();
         }
 
         @Override

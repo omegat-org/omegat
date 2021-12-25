@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.search.SearchMatch;
@@ -108,7 +107,7 @@ public class ReplaceFilter implements IEditorFilter {
                 continue;
             }
             // Avoid to replace more than once with variables when entries have duplicates
-            if ((en.defaultTranslation) && (ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT)) {
+            if ((en.isDefaultTranslation()) && (ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT)) {
                 continue; // Already replaced when we parsed the first entry
             }
             List<SearchMatch> found = getReplacementsForEntry(trans);
@@ -119,9 +118,12 @@ public class ReplaceFilter implements IEditorFilter {
                     o.replace(m.getStart() + off, m.getEnd() + off, m.getReplacement());
                     off += m.getReplacement().length() - m.getLength();
                 }
-                PrepareTMXEntry prepare = new PrepareTMXEntry(en);
-                prepare.translation = o.toString();
-                Core.getProject().setTranslation(ste, prepare, en.defaultTranslation, null);
+                TMXEntry tmxEntry = new TMXEntry.Builder()
+                        .setSource(en.getSource())
+                        .setTranslation(o.toString())
+                        .setDefaultTranslation(en.isDefaultTranslation())
+                        .build();
+                Core.getProject().setTranslation(ste, tmxEntry);
             }
         }
         EditorController ec = (EditorController) Core.getEditor();
@@ -238,7 +240,7 @@ public class ReplaceFilter implements IEditorFilter {
      */
     private String getEntryText(SourceTextEntry ste, TMXEntry en) {
         if (en.isTranslated()) {
-            return en.translation;
+            return en.getTranslation();
         } else if (searcher.getExpression().replaceUntranslated) {
             return ste.getSrcText();
         } else {

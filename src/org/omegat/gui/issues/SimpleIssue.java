@@ -66,7 +66,7 @@ public abstract class SimpleIssue implements IIssue {
     public Component getDetailComponent() {
         IssueDetailSplitPanel panel = new IssueDetailSplitPanel();
         panel.firstTextPane.setText(sourceEntry.getSrcText());
-        panel.lastTextPane.setText(targetEntry.translation);
+        panel.lastTextPane.setText(targetEntry.getTranslation());
         panel.setMinimumSize(new Dimension(0, panel.firstTextPane.getFont().getSize() * 6));
         return panel;
     }

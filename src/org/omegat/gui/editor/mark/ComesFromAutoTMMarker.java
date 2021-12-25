@@ -58,11 +58,11 @@ public class ComesFromAutoTMMarker implements IMarker {
             return null;
         }
         TMXEntry e = Core.getProject().getTranslationInfo(ste);
-        if (e.linked == null) {
+        if (e.getLinked() == null) {
             return null;
         }
         Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
-        switch (e.linked) {
+        switch (e.getLinked()) {
         case xICE:
             m.painter = PAINTER_XICE;
             break;

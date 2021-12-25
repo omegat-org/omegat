@@ -79,7 +79,7 @@ class TerminologyIssueProvider implements IIssueProvider {
             return Collections.emptyList();
         }
         return entries.stream().map(e -> {
-            List<String> trgTerms = Core.getGlossaryManager().searchTargetMatches(tmxEntry.translation,
+            List<String> trgTerms = Core.getGlossaryManager().searchTargetMatches(tmxEntry.getTranslation(),
                     sourceEntry.getProtectedParts(), e);
             return trgTerms.isEmpty() ? new TerminologyIssue(sourceEntry, tmxEntry, e) : null;
         }).filter(Objects::nonNull).collect(Collectors.toList());
@@ -202,7 +202,7 @@ class TerminologyIssueProvider implements IIssueProvider {
         private Component getSplitPanel() {
             IssueDetailSplitPanel splitPanel = new IssueDetailSplitPanel();
             splitPanel.firstTextPane.setText(ste.getSrcText());
-            splitPanel.lastTextPane.setText(tmxEntry.translation);
+            splitPanel.lastTextPane.setText(tmxEntry.getTranslation());
             StyledDocument doc = splitPanel.firstTextPane.getStyledDocument();
             for (Token[] toks : Core.getGlossaryManager().searchSourceMatchTokens(ste, glossaryEntry)) {
                 for (Token tok : toks) {

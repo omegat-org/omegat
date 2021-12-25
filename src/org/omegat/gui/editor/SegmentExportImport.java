@@ -100,7 +100,7 @@ public class SegmentExportImport {
 
         String s1 = ste.getSrcText();
         TMXEntry te = Core.getProject().getTranslationInfo(ste);
-        String s2 = te.isTranslated() ? te.translation : "";
+        String s2 = te.isTranslated() ? te.getTranslation() : "";
 
         File sourceFile = getFile(SOURCE_EXPORT);
         File targetFile = getFile(TARGET_EXPORT);

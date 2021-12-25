@@ -69,7 +69,7 @@ class SpellingIssueProvider implements IIssueProvider {
 
     @Override
     public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
-        List<Token> misspelled = Core.getSpellChecker().getMisspelledTokens(tmxEntry.translation);
+        List<Token> misspelled = Core.getSpellChecker().getMisspelledTokens(tmxEntry.getTranslation());
         return misspelled.isEmpty() ? Collections.emptyList()
                 : Arrays.asList(new SpellingIssue(sourceEntry, tmxEntry, misspelled));
     }
@@ -118,7 +118,7 @@ class SpellingIssueProvider implements IIssueProvider {
 
         @Override
         public String getDescription() {
-            return misspelledTokens.stream().map(tok -> tok.getTextFromString(tmxEntry.translation)).distinct()
+            return misspelledTokens.stream().map(tok -> tok.getTextFromString(tmxEntry.getTranslation())).distinct()
                     .collect(Collectors.joining(OStrings.getString("ISSUES_SPELLING_WORD_DELIMITER")));
         }
 
@@ -126,7 +126,7 @@ class SpellingIssueProvider implements IIssueProvider {
         public Component getDetailComponent() {
             IssueDetailSplitPanel panel = new IssueDetailSplitPanel();
             panel.firstTextPane.setText(ste.getSrcText());
-            panel.lastTextPane.setText(tmxEntry.translation);
+            panel.lastTextPane.setText(tmxEntry.getTranslation());
             StyledDocument doc = panel.lastTextPane.getStyledDocument();
             for (Token tok : misspelledTokens) {
                 doc.setCharacterAttributes(tok.getOffset(), tok.getLength(), ERROR_STYLE, false);
@@ -144,7 +144,7 @@ class SpellingIssueProvider implements IIssueProvider {
         public List<? extends JMenuItem> getMenuComponents() {
             List<JMenuItem> result = new ArrayList<>();
             ISpellChecker checker = Core.getSpellChecker();
-            misspelledTokens.stream().map(tok -> tok.getTextFromString(tmxEntry.translation)).distinct()
+            misspelledTokens.stream().map(tok -> tok.getTextFromString(tmxEntry.getTranslation())).distinct()
                     .forEach(word -> {
                         boolean enabled = !checker.isIgnoredWord(word) && !checker.isLearnedWord(word);
                         JMenuItem item = new JMenuItem(

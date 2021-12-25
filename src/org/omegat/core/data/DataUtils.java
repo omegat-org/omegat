@@ -31,6 +31,6 @@ public final class DataUtils {
     }
 
     public static boolean isDuplicate(SourceTextEntry ste, TMXEntry te) {
-        return ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT && te.defaultTranslation;
+        return ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT && te.isDefaultTranslation();
     }
 }

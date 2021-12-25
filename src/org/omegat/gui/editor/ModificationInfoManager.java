@@ -146,7 +146,7 @@ public final class ModificationInfoManager {
     }
 
     public static String apply(TMXEntry trans) {
-        if (trans.changeDate == 0) {
+        if (trans.getChangeDate() == 0) {
             return defaultTemplateND.apply(trans);
         } else {
             return defaultTemplate.apply(trans);
@@ -161,49 +161,49 @@ public final class ModificationInfoManager {
 
         @Override
         public String expandVariables(TMXEntry trans) {
-            Date creationDate = new Date(trans.creationDate);
-            Date changeDate = new Date(trans.changeDate);
+            Date creationDate = new Date(trans.getCreationDate());
+            Date changeDate = new Date(trans.getChangeDate());
 
             // do not modify template directly, so that we can reuse for another change
             String localTemplate = this.template;
 
-            localTemplate = localTemplate.replace(VAR_CREATION_ID, trans.creator == null
-                    ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.creator);
+            localTemplate = localTemplate.replace(VAR_CREATION_ID, trans.getCreator() == null
+                    ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.getCreator());
             localTemplate = localTemplate.replace(VAR_CREATION_DATE,
-                    trans.creationDate == 0 ? "" : DATE_FORMAT.format(creationDate));
+                    trans.getCreationDate() == 0 ? "" : DATE_FORMAT.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_DATE_COUNTRY,
-                    trans.creationDate == 0 ? "" : DATE_FORMAT_COUNTRY.format(creationDate));
+                    trans.getCreationDate() == 0 ? "" : DATE_FORMAT_COUNTRY.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_DATE_SHORT,
-                    trans.creationDate == 0 ? "" : DATE_FORMAT_SHORT.format(creationDate));
+                    trans.getCreationDate() == 0 ? "" : DATE_FORMAT_SHORT.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_DATE_SHORT_COUNTRY,
-                    trans.creationDate == 0 ? "" : DATE_FORMAT_SHORT_COUNTRY.format(creationDate));
+                    trans.getCreationDate() == 0 ? "" : DATE_FORMAT_SHORT_COUNTRY.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_TIME,
-                    trans.creationDate == 0 ? "" : TIME_FORMAT.format(creationDate));
+                    trans.getCreationDate() == 0 ? "" : TIME_FORMAT.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_TIME_COUNTRY,
-                    trans.creationDate == 0 ? "" : TIME_FORMAT_COUNTRY.format(creationDate));
+                    trans.getCreationDate() == 0 ? "" : TIME_FORMAT_COUNTRY.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_TIME_SHORT,
-                    trans.creationDate == 0 ? "" : TIME_FORMAT_SHORT.format(creationDate));
+                    trans.getCreationDate() == 0 ? "" : TIME_FORMAT_SHORT.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_TIME_SHORT_COUNTRY,
-                    trans.creationDate == 0 ? "" : TIME_FORMAT_SHORT_COUNTRY.format(creationDate));
+                    trans.getCreationDate() == 0 ? "" : TIME_FORMAT_SHORT_COUNTRY.format(creationDate));
 
-            localTemplate = localTemplate.replace(VAR_CHANGED_ID, trans.changer == null
-                    ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.changer);
+            localTemplate = localTemplate.replace(VAR_CHANGED_ID, trans.getChanger() == null
+                    ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.getChanger());
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE,
-                    trans.changeDate == 0 ? "" : DATE_FORMAT.format(changeDate));
+                    trans.getChangeDate() == 0 ? "" : DATE_FORMAT.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE_COUNTRY,
-                    trans.changeDate == 0 ? "" : DATE_FORMAT_COUNTRY.format(changeDate));
+                    trans.getChangeDate() == 0 ? "" : DATE_FORMAT_COUNTRY.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE_SHORT,
-                    trans.changeDate == 0 ? "" : DATE_FORMAT_SHORT.format(changeDate));
+                    trans.getChangeDate() == 0 ? "" : DATE_FORMAT_SHORT.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE_SHORT_COUNTRY,
-                    trans.changeDate == 0 ? "" : DATE_FORMAT_SHORT_COUNTRY.format(changeDate));
+                    trans.getChangeDate() == 0 ? "" : DATE_FORMAT_SHORT_COUNTRY.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_TIME,
-                    trans.changeDate == 0 ? "" : TIME_FORMAT.format(changeDate));
+                    trans.getChangeDate() == 0 ? "" : TIME_FORMAT.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_TIME_COUNTRY,
-                    trans.changeDate == 0 ? "" : TIME_FORMAT_COUNTRY.format(changeDate));
+                    trans.getChangeDate() == 0 ? "" : TIME_FORMAT_COUNTRY.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_TIME_SHORT,
-                    trans.changeDate == 0 ? "" : TIME_FORMAT_SHORT.format(changeDate));
+                    trans.getChangeDate() == 0 ? "" : TIME_FORMAT_SHORT.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_TIME_SHORT_COUNTRY,
-                    trans.changeDate == 0 ? "" : TIME_FORMAT_SHORT_COUNTRY.format(changeDate));
+                    trans.getChangeDate() == 0 ? "" : TIME_FORMAT_SHORT_COUNTRY.format(changeDate));
 
             return localTemplate;
         }

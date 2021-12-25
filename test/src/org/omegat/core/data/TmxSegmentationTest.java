@@ -74,9 +74,9 @@ public class TmxSegmentationTest {
                 .setDoSegmenting(true).load(new Language("en"), new Language("fr"));
 
         assertEquals(2, tmx.getEntries().size());
-        assertEquals("This is test.", tmx.getEntries().get(0).source);
-        assertEquals("Ceci est un test.", tmx.getEntries().get(0).translation);
-        assertEquals("Just a test.", tmx.getEntries().get(1).source);
-        assertEquals("Juste un test.", tmx.getEntries().get(1).translation);
+        assertEquals("This is test.", tmx.getEntries().get(0).getSource());
+        assertEquals("Ceci est un test.", tmx.getEntries().get(0).getTranslation());
+        assertEquals("Just a test.", tmx.getEntries().get(1).getSource());
+        assertEquals("Juste un test.", tmx.getEntries().get(1).getTranslation());
     }
 }

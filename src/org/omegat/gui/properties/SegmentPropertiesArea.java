@@ -335,19 +335,19 @@ public class SegmentPropertiesArea implements IPaneMenu {
         if (!entry.isTranslated()) {
             return;
         }
-        if (entry.changeDate != 0) {
-            setProperty(KEY_CHANGED, dateFormat.format(new Date(entry.changeDate)) + " "
-                    + timeFormat.format(new Date(entry.changeDate)));
+        if (entry.getChangeDate() != 0) {
+            setProperty(KEY_CHANGED, dateFormat.format(new Date(entry.getChangeDate())) + " "
+                    + timeFormat.format(new Date(entry.getChangeDate())));
         }
-        setProperty(KEY_CHANGER, entry.changer);
-        if (entry.creationDate != 0) {
-            setProperty(KEY_CREATED, dateFormat.format(new Date(entry.creationDate)) + " "
-                    + timeFormat.format(new Date(entry.creationDate)));
+        setProperty(KEY_CHANGER, entry.getChanger());
+        if (entry.getCreationDate() != 0) {
+            setProperty(KEY_CREATED, dateFormat.format(new Date(entry.getCreationDate())) + " "
+                    + timeFormat.format(new Date(entry.getCreationDate())));
         }
-        setProperty(KEY_CREATOR, entry.creator);
-        if (!entry.defaultTranslation) {
+        setProperty(KEY_CREATOR, entry.getCreator());
+        if (!entry.isDefaultTranslation()) {
             setProperty(KEY_ISALT, true);
         }
-        setProperty(KEY_LINKED, entry.linked);
+        setProperty(KEY_LINKED, entry.getLinked());
     }
 }

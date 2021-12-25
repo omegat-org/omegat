@@ -519,7 +519,7 @@ public final class MainWindowMenuHandler {
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
             TMXEntry te = Core.getProject().getTranslationInfo(ste);
             if (te.isTranslated()) {
-                selection = te.translation;
+                selection = te.getTranslation();
             } else {
                 selection = ste.getSrcText();
             }

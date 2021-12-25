@@ -5,6 +5,7 @@
 
  Copyright (C) 2012 Alex Buloichik
                2013-2014 Aaron Madlon-Kay, Alex Buloichik
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -44,6 +45,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TMXProp;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
 
@@ -191,12 +193,12 @@ public class ProjectTMX {
             for (Map.Entry<String, TMXEntry> en : new TreeMap<>(tempDefaults).entrySet()) {
                 p.clear();
                 if (Preferences.isPreferenceDefault(Preferences.SAVE_AUTO_STATUS, false)) {
-                    if (en.getValue().linked == TMXEntry.ExternalLinked.xAUTO) {
+                    if (en.getValue().getLinked() == TMXEntry.ExternalLinked.xAUTO) {
                         p.add(PROP_XAUTO);
                         p.add("auto");
                     }
                 }
-                wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), p);
+                wr.writeEntry(en.getKey(), en.getValue().getTranslation(), en.getValue(), p);
             }
 
             wr.writeComment(" Alternative translations ");
@@ -214,15 +216,15 @@ public class ProjectTMX {
                 p.add(PROP_PATH);
                 p.add(k.path);
                 if (Preferences.isPreferenceDefault(Preferences.SAVE_AUTO_STATUS, false)) {
-                    if (en.getValue().linked == TMXEntry.ExternalLinked.xICE) {
+                    if (en.getValue().getLinked() == TMXEntry.ExternalLinked.xICE) {
                         p.add(PROP_XICE);
                         p.add(k.id);
-                    } else if (en.getValue().linked == TMXEntry.ExternalLinked.x100PC) {
+                    } else if (en.getValue().getLinked() == TMXEntry.ExternalLinked.x100PC) {
                         p.add(PROP_X100PC);
                         p.add(k.id);
                     }
                 }
-                wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), p);
+                wr.writeEntry(en.getKey().sourceText, en.getValue().getTranslation(), en.getValue(), p);
             }
         } finally {
             wr.close();
@@ -259,10 +261,10 @@ public class ProjectTMX {
                     alternatives.remove(ste.getKey());
                 }
             } else {
-                if (!ste.getSrcText().equals(te.source)) {
+                if (!ste.getSrcText().equals(te.getSource())) {
                     throw new IllegalArgumentException("Source must be the same as in SourceTextEntry");
                 }
-                if (isDefault != te.defaultTranslation) {
+                if (isDefault != te.isDefaultTranslation()) {
                     throw new IllegalArgumentException("Default/alternative must be the same");
                 }
                 if (isDefault) {
@@ -307,8 +309,8 @@ public class ProjectTMX {
                 translation = tuvTarget.text;
             }
 
-            List<String> sources = new ArrayList<String>();
-            List<String> targets = new ArrayList<String>();
+            List<String> sources = new ArrayList<>();
+            List<String> targets = new ArrayList<>();
             Core.getSegmenter().segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang,
                     tuvSource.text, targetLang, translation, sources, targets);
 
@@ -317,35 +319,34 @@ public class ProjectTMX {
                     String segmentSource = sources.get(i);
                     String segmentTranslation = targets.get(i);
 
-                    PrepareTMXEntry te = new PrepareTMXEntry();
-                    te.source = segmentSource;
-                    te.translation = segmentTranslation;
-                    te.changer = changer;
-                    te.changeDate = changed;
-                    te.creator = creator;
-                    te.creationDate = created;
-                    te.note = tu.note;
-                    te.otherProperties = tu.props;
+                    TMXEntry te = new TMXEntry.Builder()
+                            .setSource(segmentSource)
+                            .setCreator(creator)
+                            .setCreationDate(created)
+                            .setTranslation(segmentTranslation)
+                            .setChanger(changer)
+                            .setChangeDate(changed)
+                            .setNote(tu.note)
+                            .setProperties(tu.props)
+                            .build();
 
-                    String id = te.getPropValue(PROP_ID);
-                    if (id == null) {
+                    String id;
+                    String propId = getProp(tu, PROP_ID);
+                    if (propId != null) {
+                        id = propId;
+                    } else {
                         // Use TMX @tuid if available and "id" prop was not
                         // present
-                        id = te.getPropValue(ATTR_TUID);
+                        id = getProp(tu, ATTR_TUID);
                     }
 
                     EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source,
                             id, te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
                             te.getPropValue(PROP_PATH));
 
-                    TMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(te);
+                    TMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(tu, id);
 
-                    boolean defaultTranslation = key.file == null;
-                    if (te.otherProperties != null && te.otherProperties.isEmpty()) {
-                        te.otherProperties = null;
-                    }
-
-                    if (defaultTranslation) {
+                    if (key.file == null) {
                         // default translation
                         defaults.put(segmentSource, new TMXEntry(te, true, externalLinkedMode));
                     } else {
@@ -358,22 +359,30 @@ public class ProjectTMX {
         }
     };
 
-    private TMXEntry.ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
-        String id = te.getPropValue(PROP_ID);
-        if (id == null) {
-            id = te.getPropValue(ATTR_TUID);
+    private String getProp(final TMXReader2.ParsedTu tu, final String key) {
+        List<TMXProp> props = tu.props;
+        for (int i = 0, propsSize = props.size(); i < propsSize; i++) {
+            TMXProp prop = props.get(i);
+            if (prop.getType().equals(key)) {
+                return prop.getValue();
+            }
         }
-        TMXEntry.ExternalLinked externalLinked = null;
-        if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
-            externalLinked = TMXEntry.ExternalLinked.xICE;
+        return null;
+    }
+
+    private TMXEntry.ExternalLinked calcExternalLinkedMode(final TMXReader2.ParsedTu tu, final String id) {
+        String prop = getProp(tu, PROP_XICE);
+        if (prop != null && prop.equals(id)) {
+            return TMXEntry.ExternalLinked.xICE;
         }
-        if (externalLinked == null && te.hasPropValue(PROP_X100PC, id)) {
-            externalLinked = TMXEntry.ExternalLinked.x100PC;
+        prop = getProp(tu, PROP_X100PC);
+        if (prop != null && prop.equals(id)) {
+            return TMXEntry.ExternalLinked.x100PC;
         }
-        if (externalLinked == null && te.hasPropValue(PROP_XAUTO, null)) {
-            externalLinked = TMXEntry.ExternalLinked.xAUTO;
+        if (getProp(tu, PROP_XAUTO) != null) {
+            return TMXEntry.ExternalLinked.xAUTO;
         }
-        return externalLinked;
+        return null;
     }
 
     /**
@@ -407,9 +416,9 @@ public class ProjectTMX {
     public String toString() {
         return "[" + Stream.concat(
                 defaults.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey))
-                        .map(e -> e.getKey() + ": " + e.getValue().translation),
+                        .map(e -> e.getKey() + ": " + e.getValue().getTranslation()),
                 alternatives.entrySet().stream().sorted(Comparator.comparing(e -> e.getKey().sourceText))
-                        .map(e -> e.getKey().sourceText + ": " + e.getValue().translation))
+                        .map(e -> e.getKey().sourceText + ": " + e.getValue().getTranslation()))
                 .collect(Collectors.joining(", ")) + "]";
     }
 }

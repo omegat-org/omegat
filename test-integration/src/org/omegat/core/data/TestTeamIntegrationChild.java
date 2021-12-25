@@ -178,11 +178,12 @@ public final class TestTeamIntegrationChild {
 
     static void changeConcurrent() throws Exception {
         checkAll();
-
-        PrepareTMXEntry prep = new PrepareTMXEntry();
-        prep.translation = "" + System.currentTimeMillis();
-        Core.getProject().setTranslation(steC, prep, true, null);
-        Log.log("Wrote: " + prep.source + "=" + prep.translation);
+        TMXEntry entry = new TMXEntry.Builder()
+                .setTranslation("" + System.currentTimeMillis())
+                .setDefaultTranslation(true)
+                .build();
+        Core.getProject().setTranslation(steC, entry);
+        Log.log("Wrote: " + entry.getSource() + "=" + entry.getTranslation());
     }
 
     static void checksavecheck(int index) throws Exception {
@@ -211,7 +212,7 @@ public final class TestTeamIntegrationChild {
                 if (prev == null) {
                     prev = 0L;
                 }
-                long curr = Long.parseLong(trans.translation);
+                long curr = Long.parseLong(trans.getTranslation());
                 if (curr < prev) {
                     throw new RuntimeException(source + ": Wrong value in " + source + ": current(" + curr
                             + ") less than previous(" + prev + ")");
@@ -222,7 +223,7 @@ public final class TestTeamIntegrationChild {
 
     static void checkTranslation(int index) {
         TMXEntry en = Core.getProject().getTranslationInfo(ste[index]);
-        String sv = en == null || !en.isTranslated() ? "" : en.translation;
+        String sv = en == null || !en.isTranslated() ? "" : en.getTranslation();
         if (v[index] == 0 && sv.isEmpty()) {
             return;
         }
@@ -230,12 +231,12 @@ public final class TestTeamIntegrationChild {
             return;
         }
         throw new RuntimeException(source + ": Wrong value in " + source + "/" + index + ": expected "
-                + v[index] + " but contains " + en.translation);
+                + v[index] + " but contains " + en.getTranslation());
     }
 
     static void checkTranslationFromFile(ProjectTMX tmx, int index) throws Exception {
         TMXEntry en = tmx.getDefaultTranslation(ste[index].getSrcText());
-        String sv = en == null || !en.isTranslated() ? "" : en.translation;
+        String sv = en == null || !en.isTranslated() ? "" : en.getTranslation();
         if (v[index] == 0 && sv.isEmpty()) {
             return;
         }
@@ -250,10 +251,12 @@ public final class TestTeamIntegrationChild {
      * Save new translation.
      */
     static void saveTranslation(SourceTextEntry ste, long value) {
-        PrepareTMXEntry prep = new PrepareTMXEntry();
-        prep.translation = "" + value;
-        Core.getProject().setTranslation(ste, prep, true, null);
-        Log.log("Wrote: " + prep.source + "=" + prep.translation);
+        TMXEntry en = new TMXEntry.Builder()
+                .setTranslation("" + value)
+                .setDefaultTranslation(true)
+                .build();
+        Core.getProject().setTranslation(ste, en);
+        Log.log("Wrote: " + en.getSource() + "=" + en.getTranslation());
         Core.getProject().saveProject(true);
     }
 
@@ -626,13 +629,13 @@ public final class TestTeamIntegrationChild {
                 use(e);
             }
             for (TMXEntry e : headTMX.getDefaults()) {
-                TMXEntry eb = baseTMX.getDefaultTranslation(e.source);
-                if (CONCURRENT_NAME.equals(e.source)) { // concurrent
+                TMXEntry eb = baseTMX.getDefaultTranslation(e.getSource());
+                if (CONCURRENT_NAME.equals(e.getSource())) { // concurrent
                     if (v(eb) > v(e)) {
                         throw new RuntimeException("Rebase HEAD: wrong concurrent" + s);
                     }
                     use(e);
-                } else if (e.source.startsWith(source + "/")) { // my segments
+                } else if (e.getSource().startsWith(source + "/")) { // my segments
                     if (v(eb) != v(e)) {
                         throw new RuntimeException("Rebase HEAD: not equals for current project" + s);
                     }
@@ -644,12 +647,12 @@ public final class TestTeamIntegrationChild {
                 }
             }
             for (TMXEntry e : projectTMX.getDefaults()) {
-                TMXEntry em = mergedTMX.getDefaultTranslation(e.source);
-                if (CONCURRENT_NAME.equals(e.source)) { // concurrent
+                TMXEntry em = mergedTMX.getDefaultTranslation(e.getSource());
+                if (CONCURRENT_NAME.equals(e.getSource())) { // concurrent
                     if (v(e) > v(em)) {
                         use(e);
                     }
-                } else if (e.source.startsWith(source + "/")) { // my segments
+                } else if (e.getSource().startsWith(source + "/")) { // my segments
                     if (v(e) < v(em)) {
                         throw new RuntimeException("Rebase me: less value" + s);
                     }
@@ -663,8 +666,8 @@ public final class TestTeamIntegrationChild {
         }
 
         void use(TMXEntry en) {
-            EntryKey k = new EntryKey("file", en.source, null, null, null, null);
-            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.source, Collections.emptyList());
+            EntryKey k = new EntryKey("file", en.getSource(), null, null, null, null);
+            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.getSource(), Collections.emptyList());
             mergedTMX.setTranslation(ste, en, true);
         }
 
@@ -672,7 +675,7 @@ public final class TestTeamIntegrationChild {
             if (e == null) {
                 return 0;
             } else {
-                return Long.parseLong(e.translation);
+                return Long.parseLong(e.getTranslation());
             }
         }
 
@@ -680,7 +683,7 @@ public final class TestTeamIntegrationChild {
             if (e == null) {
                 return "null";
             } else {
-                return e.source;
+                return e.getSource();
             }
         }
 
@@ -688,16 +691,16 @@ public final class TestTeamIntegrationChild {
             if (e == null) {
                 return "null";
             } else {
-                return e.translation;
+                return e.getTranslation();
             }
         }
 
         String trans(ProjectTMX tmx, TMXEntry e) {
-            TMXEntry en = tmx.getDefaultTranslation(e.source);
+            TMXEntry en = tmx.getDefaultTranslation(e.getSource());
             if (en == null) {
                 return "null";
             } else {
-                return en.translation;
+                return en.getTranslation();
             }
         }
     }

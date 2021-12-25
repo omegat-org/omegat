@@ -7,6 +7,7 @@
                2008 Alex Buloichik
                2012 Thomas Cordonnier, Martin Fleurke
                2013 Aaron Madlon-Kay, Alex Buloichik
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -185,13 +186,13 @@ public class FindMatches {
                         // skip original==original entry comparison
                         return;
                     }
-                    if (requiresTranslation && trans.translation == null) {
+                    if (requiresTranslation && trans.getTranslation() == null) {
                         return;
                     }
                     String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
-                    processEntry(null, source, trans.translation, NearString.MATCH_SOURCE.MEMORY, false, 0,
-                            fileName, trans.creator, trans.creationDate, trans.changer, trans.changeDate,
-                            null);
+                    processEntry(null, source, trans.getTranslation(), NearString.MATCH_SOURCE.MEMORY, false, 0,
+                            fileName, trans.getCreator(), trans.getCreationDate(), trans.getChanger(),
+                            trans.getChangeDate(), null);
                 }
             });
         }
@@ -202,13 +203,13 @@ public class FindMatches {
                     // skip original==original entry comparison
                     return;
                 }
-                if (requiresTranslation && trans.translation == null) {
+                if (requiresTranslation && trans.getTranslation() == null) {
                     return;
                 }
                 String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
-                processEntry(source, source.sourceText, trans.translation, NearString.MATCH_SOURCE.MEMORY,
-                        false, 0, fileName, trans.creator, trans.creationDate, trans.changer,
-                        trans.changeDate, null);
+                processEntry(source, source.sourceText, trans.getTranslation(), NearString.MATCH_SOURCE.MEMORY,
+                        false, 0, fileName, trans.getCreator(), trans.getCreationDate(), trans.getChanger(),
+                        trans.getChangeDate(), null);
             }
         });
 
@@ -229,11 +230,11 @@ public class FindMatches {
             }
             for (PrepareTMXEntry tmen : en.getValue().getEntries()) {
                 checkStopped(stop);
-                if (tmen.source == null) {
+                if (tmen.getSource() == null) {
                     // Not all TMX entries have a source; in that case there can be no meaningful match, so skip.
                     continue;
                 }
-                if (requiresTranslation && tmen.translation == null) {
+                if (requiresTranslation && tmen.getTranslation() == null) {
                     continue;
                 }
 
@@ -242,9 +243,9 @@ public class FindMatches {
                     tmenPenalty += foreignPenalty;
                 }
 
-                processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, tmenPenalty,
-                        en.getKey(), tmen.creator, tmen.creationDate, tmen.changer, tmen.changeDate,
-                        tmen.otherProperties);
+                processEntry(null, tmen.getSource(), tmen.getTranslation(), NearString.MATCH_SOURCE.TM, false, tmenPenalty,
+                        en.getKey(), tmen.getCreator(), tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(),
+                        tmen.getRawProperties());
             }
         }
 

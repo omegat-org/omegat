@@ -64,12 +64,9 @@ public class AutoTmxTest {
                 .setDoSegmenting(props.isSentenceSegmentingEnabled())
                 .load(props.getSourceLanguage(), props.getTargetLanguage());
 
-        PrepareTMXEntry e1 = autoTMX.getEntries().get(0);
-        checkListValues(e1, ProjectTMX.PROP_XICE, "11");
-
-        PrepareTMXEntry e2 = autoTMX.getEntries().get(1);
-        checkListValues(e2, ProjectTMX.PROP_XICE, "12");
-        checkListValues(e2, ProjectTMX.PROP_X100PC, "10");
+        assertTrue(autoTMX.getEntries().get(0).hasPropValue(ProjectTMX.PROP_XICE, "11"));
+        assertTrue(autoTMX.getEntries().get(1).hasPropValue(ProjectTMX.PROP_XICE, "12"));
+        assertTrue(autoTMX.getEntries().get(1).hasPropValue(ProjectTMX.PROP_X100PC, "10"));
 
         Core.initializeConsole(new HashMap<String, String>());
 
@@ -133,15 +130,11 @@ public class AutoTmxTest {
         return new SourceTextEntry(ek, 0, null, null, new ArrayList<ProtectedPart>());
     }
 
-    void checkListValues(PrepareTMXEntry en, String propType, String propValue) {
-        assertTrue(en.hasPropValue(propType, propValue));
-    }
-
     void checkTranslation(SourceTextEntry ste, String expectedTranslation,
             TMXEntry.ExternalLinked expectedExternalLinked) {
         TMXEntry e = p.getTranslationInfo(ste);
         assertTrue(e.isTranslated());
-        assertEquals(expectedTranslation, e.translation);
-        assertEquals(expectedExternalLinked, e.linked);
+        assertEquals(expectedTranslation, e.getTranslation());
+        assertEquals(expectedExternalLinked, e.getLinked());
     }
 }

@@ -7,6 +7,7 @@
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,6 +29,7 @@
 
 package org.omegat.core.data;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.omegat.util.TMXProp;
@@ -44,7 +46,8 @@ import org.omegat.util.TMXProp;
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
-public class PrepareTMXEntry {
+@Deprecated
+public class PrepareTMXEntry implements ITranslationEntry {
     public String source;
     public String translation;
     public String changer;
@@ -57,14 +60,15 @@ public class PrepareTMXEntry {
     public PrepareTMXEntry() {
     }
 
-    public PrepareTMXEntry(TMXEntry e) {
-        source = e.source;
-        translation = e.translation;
-        changer = e.changer;
-        changeDate = e.changeDate;
-        creator = e.creator;
-        creationDate = e.creationDate;
-        note = e.note;
+    public PrepareTMXEntry(ITranslationEntry e) {
+        source = e.getSource();
+        translation = e.getTranslation();
+        changer = e.getChanger();
+        changeDate = e.getChangeDate();
+        creator = e.getCreator();
+        creationDate = e.getCreationDate();
+        note = e.getNote();
+        otherProperties = e.getRawProperties();
     }
 
     public String getPropValue(String propType) {
@@ -99,6 +103,20 @@ public class PrepareTMXEntry {
     }
 
     @Override
+    public Iterable<TMXProp> getProperties() {
+        return Collections.unmodifiableCollection(otherProperties);
+    }
+
+    @Override
+    public List<TMXProp> getRawProperties() {
+        return otherProperties;
+    }
+
+    public boolean hasProperties() {
+        return otherProperties != null;
+    }
+
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("PrepareTMXEntry [source=").append(source).append(", translation=").append(translation)
@@ -108,4 +126,48 @@ public class PrepareTMXEntry {
         return builder.toString();
     }
 
+    @Override
+    public String getSource() {
+        return source;
+    }
+
+    @Override
+    public boolean isTranslated() {
+        return translation != null;
+    }
+
+    @Override
+    public String getTranslation() {
+        return translation;
+    }
+
+    @Override
+    public String getChanger() {
+        return changer;
+    }
+
+    @Override
+    public long getChangeDate() {
+        return changeDate;
+    }
+
+    @Override
+    public String getCreator() {
+        return creator;
+    }
+
+    @Override
+    public long getCreationDate() {
+        return creationDate;
+    }
+
+    @Override
+    public String getNote() {
+        return note;
+    }
+
+    @Override
+    public boolean hasNote() {
+        return note != null;
+    }
 }

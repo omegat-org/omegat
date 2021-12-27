@@ -42,7 +42,7 @@ import java.util.Objects;
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
-public class TMXEntry {
+public class TMXEntry implements ITMXEntry {
     public enum ExternalLinked {
         // declares how this entry linked to external TMX in the tm/auto/
         xICE, x100PC, xAUTO, xENFORCED
@@ -71,12 +71,32 @@ public class TMXEntry {
         this.linked = linked;
     }
 
-    public boolean isTranslated() {
-        return translation != null;
+    public String getSourceText() {
+        return source;
     }
 
-    public boolean hasNote() {
-        return note != null;
+    public String getTranslationText() {
+        return translation;
+    }
+    
+    public String getCreator() {
+        return creator;
+    }
+
+    public long getCreationDate() {
+        return creationDate;
+    }
+
+    public String getChanger() {
+        return changer;
+    }
+
+    public long getChangeDate() {
+        return changeDate;
+    }
+
+    public String getNote() {
+        return note;
     }
 
     @Override

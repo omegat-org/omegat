@@ -26,6 +26,7 @@ package org.omegat.core.data;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
@@ -54,44 +55,76 @@ public class MergeTest {
 
     @Test
     public void testEquals() throws Exception {
-        PrepareTMXEntry e1 = new PrepareTMXEntry();
-        e1.translation = "trans";
-        e1.changeDate = 123456999;
-        PrepareTMXEntry e2 = new PrepareTMXEntry();
-        e2.translation = "trans";
-        e2.changeDate = 123456999;
+        TMXEntry e1 = new TMXEntry.Builder()
+                .setTranslation("trans")
+                .setChangeDate(123456999)
+                .setDefaultTranslation(true)
+                .build();
+        TMXEntry e2 = new TMXEntry.Builder()
+                .setTranslation("trans")
+                .setChangeDate(123456999)
+                .setDefaultTranslation(true)
+                .build();
+        TMXEntry e3 = new TMXEntry.Builder()
+                .setTranslation("trans")
+                .setChangeDate(123456000)
+                .setDefaultTranslation(true)
+                .build();
+        TMXEntry e4 = new TMXEntry.Builder()
+                .setTranslation("trans")
+                .setChangeDate(123457000)
+                .setDefaultTranslation(true)
+                .build();
+        TMXEntry e5 = new TMXEntry.Builder()
+                .setTranslation("t")
+                .setChangeDate(123456999)
+                .setDefaultTranslation(true)
+                .build();
+        TMXEntry e6 = new TMXEntry.Builder()
+                .setTranslation("trans")
+                .setChangeDate(123456999)
+                .setDefaultTranslation(true)
+                .setNote("n")
+                .build();
+        TMXEntry e7 = new TMXEntry.Builder()
+                .setTranslation("trans")
+                .setChanger("c")
+                .setChangeDate(123456999)
+                .setDefaultTranslation(true)
+                .build();
+        TMXEntry e8 = new TMXEntry.Builder()
+                .setTranslation("trans")
+                .setChangeDate(123456999)
+                .setDefaultTranslation(true)
+                .setExternalLinked(ExternalLinked.xICE)
+                .build();
+        TMXEntry e9 = new TMXEntry.Builder()
+                .setTranslation("trans")
+                .setChangeDate(123456999)
+                .setDefaultTranslation(true)
+                .setExternalLinked(ExternalLinked.x100PC)
+                .build();
 
         // test equals
-        assertTrue(new TMXEntry(e1, true, null).equals(new TMXEntry(e2, true, null)));
+        assertEquals(e1, e2);
 
-        e2.changeDate = 123456000;
         // test truncated time
-        assertTrue(new TMXEntry(e1, true, null).equals(new TMXEntry(e2, true, null)));
+        assertEquals(e1, e3);
 
-        e2.changeDate = 123457000;
         // test other time
-        assertFalse(new TMXEntry(e1, true, null).equals(new TMXEntry(e2, true, null)));
-        e2.changeDate = 123456999;
+        assertNotEquals(e1, e4);
 
-        e2.translation = "t";
         // test different translation
-        assertFalse(new TMXEntry(e1, true, null).equalsTranslation(new TMXEntry(e2, true, null)));
-        e2.translation = "trans";
+        assertFalse(e1.equalsTranslation(e5));
 
-        e2.note = "n";
         // test different note
-        assertFalse(new TMXEntry(e1, true, null).equalsTranslation(new TMXEntry(e2, true, null)));
-        e2.note = null;
+        assertFalse(e1.equalsTranslation(e6));
 
-        e2.changer = "c";
         // test different changer
-        assertTrue(new TMXEntry(e1, true, null).equalsTranslation(new TMXEntry(e2, true, null)));
-        e2.changer = null;
+        assertTrue(e1.equalsTranslation(e7));
 
         // test different linked
-        assertFalse(new TMXEntry(e1, true, ExternalLinked.xICE).equalsTranslation(new TMXEntry(e2, true,
-                ExternalLinked.x100PC)));
-        assertFalse(new TMXEntry(e1, true, ExternalLinked.xICE)
-                .equalsTranslation(new TMXEntry(e2, true, null)));
+        assertFalse(e8.equalsTranslation(e9));
+        assertFalse(e8.equalsTranslation(e2));
     }
 }

@@ -7,6 +7,7 @@
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik, Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,7 +29,10 @@
 
 package org.omegat.core.data;
 
+import java.util.List;
 import java.util.Objects;
+
+import org.omegat.util.TMXProp;
 
 /**
  * Storage for TMX entry.
@@ -55,10 +59,16 @@ public class TMXEntry {
     public final String creator;
     public final long creationDate;
     public final String note;
+    public final List<TMXProp> otherProperties;
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
 
     TMXEntry(PrepareTMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
+        this(from, defaultTranslation, linked, null);
+    }
+
+    TMXEntry(final PrepareTMXEntry from, final boolean defaultTranslation, final ExternalLinked linked,
+        final List<TMXProp> prop) {
         this.source = from.source;
         this.translation = from.translation;
         this.changer = from.changer;
@@ -66,17 +76,49 @@ public class TMXEntry {
         this.creator = from.creator;
         this.creationDate = from.creationDate;
         this.note = from.note;
-
+        this.otherProperties = prop;
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
     }
 
+    /**
+     * Check entry already have translation.
+     * @return true when entry has translated text, otherwise false.
+     */
     public boolean isTranslated() {
         return translation != null;
     }
 
+    /**
+     * Check entry has note.
+     * @return true when entry has note, otherwise false.
+     */
     public boolean hasNote() {
         return note != null;
+    }
+
+    /**
+     * Check entry have specified type of property, and that is specified value.
+     * @param propType property type to check.
+     * @param propValue value to check equality.
+     * @return true when entry have specified type of propety that is as same as specified value.
+     */
+    public boolean hasPropValue(String propType, String propValue) {
+        if (otherProperties == null) {
+            return false;
+        }
+        for (int i = 0; i < otherProperties.size(); i++) {
+            TMXProp kv = otherProperties.get(i);
+            if (propType.equals(kv.getType())) {
+                if (propValue == null) {
+                    return true;
+                }
+                if (propValue.equals(kv.getValue())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -125,9 +167,8 @@ public class TMXEntry {
                 defaultTranslation, source);
     }
 
-    /**
-     * Two TMXEntrys are considered interchangeable if this method returns true,
-     * even if equals() != true.
+    /* Two TMXEntrys are considered interchangeable if this method returns true,
+       even if equals() != true.
      */
     public boolean equalsTranslation(TMXEntry other) {
         if (other == null) {

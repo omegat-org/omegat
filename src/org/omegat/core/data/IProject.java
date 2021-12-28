@@ -7,6 +7,7 @@
                2010 Didier Briel
                2014-2015 Alex Buloichik
                2017 Didier Briel
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -142,15 +143,42 @@ public interface IProject {
     /**
      * Set translation for entry.
      *
+     * @param ste source text entry.
+     * @param tmxEntry tmx entry.
+     */
+    void setTranslation(SourceTextEntry ste, TMXEntry tmxEntry);
+
+    /**
+     * Set translation for entry.
+     *
      * Optimistic locking will not be checked.
+     * for backward compatibility.
      *
      * @param entry
      *            entry
      * @param trans
      *            translation. It can't be null
      */
-    void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            TMXEntry.ExternalLinked externalLinked);
+    default void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
+                               TMXEntry.ExternalLinked externalLinked) {
+        setTranslation(entry, new TMXEntry(trans, defaultTranslation, externalLinked));
+    }
+
+    /**
+     * Set translation for entry with optimistic lock checking: if previous translation is not the same like
+     * in storage, OptimisticLockingFail exception will be generated. Use when user has typed a new
+     * translation.
+     * for backward compatibility.
+     *
+     * @param entry
+     *            entry
+     * @param trans
+     *            translation. It can't be null
+     */
+    default void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
+                               TMXEntry.ExternalLinked externalLinked, AllTranslations previous) throws OptimisticLockingFail {
+        setTranslation(entry, new TMXEntry(trans, defaultTranslation, externalLinked), previous);
+    }
 
     /**
      * Set translation for entry with optimistic lock checking: if previous translation is not the same like
@@ -162,8 +190,7 @@ public interface IProject {
      * @param trans
      *            translation. It can't be null
      */
-    void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            TMXEntry.ExternalLinked externalLinked, AllTranslations previousTranslations)
+    void setTranslation(SourceTextEntry entry, TMXEntry trans, AllTranslations previousTranslations)
             throws OptimisticLockingFail;
 
     /**

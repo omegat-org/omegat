@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
 import org.omegat.tokenizer.ITokenizer;
@@ -139,12 +138,11 @@ public class NotLoadedProject implements IProject {
     public void saveProjectProperties() throws IOException {
     }
 
-    public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            ExternalLinked externalLinked) {
+    public void setTranslation(SourceTextEntry ste, TMXEntry trans) {
     }
 
-    public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            ExternalLinked externalLinked, AllTranslations previousTranslations) throws OptimisticLockingFail {
+    public void setTranslation(SourceTextEntry entry, TMXEntry trans, AllTranslations previousTranslations)
+            throws OptimisticLockingFail {
     }
 
     public ITokenizer getSourceTokenizer() {

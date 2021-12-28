@@ -161,19 +161,19 @@ public class RealProjectTest {
     private void setDefault(String source, String translation) {
         EntryKey key = new EntryKey(null, source, null, null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, new ArrayList<ProtectedPart>());
-        PrepareTMXEntry tr = new PrepareTMXEntry();
-        tr.source = source;
-        tr.translation = translation;
-        tmx.setTranslation(ste, new TMXEntry(tr, true, null), true);
+        PrepareTMXEntry prepare = new PrepareTMXEntry();
+        prepare.source = source;
+        prepare.translation = translation;
+        tmx.setTranslation(ste, prepare.toTMXEntry(true, null), true);
     }
 
     private void setAlternative(String id, String source, String translation) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, new ArrayList<ProtectedPart>());
-        PrepareTMXEntry tr = new PrepareTMXEntry();
-        tr.source = source;
-        tr.translation = translation;
-        tmx.setTranslation(ste, new TMXEntry(tr, false, null), false);
+        PrepareTMXEntry prepare = new PrepareTMXEntry();
+        prepare.source = source;
+        prepare.translation = translation;
+        tmx.setTranslation(ste, prepare.toTMXEntry(false, null), false);
     }
 
     private void checkDefault(String source, String translation) {
@@ -220,6 +220,6 @@ public class RealProjectTest {
     }
 
     public static TMXEntry createEmptyTMXEntry() {
-        return new TMXEntry(new PrepareTMXEntry(), true, null);
+        return new PrepareTMXEntry().toTMXEntry();
     }
 }

@@ -206,4 +206,156 @@ public class TMXEntry {
         }
         return true;
     }
+
+    /* provide builder for TMXEntry.
+       other classes can build TMXEntry by calling such as
+       TMXEntry::Builder.setSource(source).setTranslation(translation).build();
+     */
+    private TMXEntry(final String source, final String translation, final String changer, final long changeDate,
+                     final String creator, final long creationDate, final String note,
+                     final List<TMXProp> otherProperties,
+                     final boolean defaultTranslation,
+                     final ExternalLinked linked) {
+        this.source = source;
+        this.translation = translation;
+        this.changer = changer;
+        this.changeDate = changeDate;
+        this.creator = creator;
+        this.creationDate = creationDate;
+        this.note = note;
+        this.otherProperties = otherProperties;
+        this.defaultTranslation = defaultTranslation;
+        this.linked = linked;
+    }
+
+    /**
+     * TMXEntry object builder.
+     */
+    public static final class Builder {
+        private String source;
+        private String translation;
+        private String changer;
+        private long changeDate;
+        private String creator;
+        private long creationDate;
+        private String note;
+        public List<TMXProp> otherProperties;
+        private boolean defaultTranslation;
+        private ExternalLinked linked;
+
+        public Builder() {
+        }
+
+        /**
+         * build method for TMXEntry object.
+         * @return TMXEntry object.
+         */
+        public TMXEntry build() {
+            return new TMXEntry(source, translation, changer, changeDate, creator, creationDate, note,
+                    otherProperties, defaultTranslation, linked);
+        }
+
+        /**
+         * Set source text.
+         * @param source text.
+         * @return builder.
+         */
+        public Builder setSource(final String source) {
+            this.source = source;
+            return this;
+        }
+
+        /**
+         * Set translation text.
+         * @param translation text.
+         * @return builder.
+         */
+        public Builder setTranslation(final String translation) {
+            this.translation = translation;
+            return this;
+        }
+
+        /**
+         * Set changer name.
+         * @param changer name.
+         * @return builder.
+         */
+        public Builder setChanger(final String changer) {
+            this.changer = changer;
+            return this;
+        }
+
+        /**
+         * Set change date.
+         * @param changeDate long date value.
+         * @return builder.
+         */
+        public Builder setChangeDate(final long changeDate) {
+            this.changeDate = changeDate;
+            return this;
+        }
+
+        /**
+         * Set creator name
+         * @param creator name.
+         * @return builder.
+         */
+        public Builder setCreator(final String creator) {
+            this.creator = creator;
+            return this;
+        }
+
+        /**
+         * Set creation date.
+         * @param creationDate long value of date.
+         * @return builder.
+         */
+        public Builder setCreationDate(final long creationDate) {
+            this.creationDate = creationDate;
+            return this;
+        }
+
+        /**
+         * Set note.
+         * @param note text.
+         * @return builder.
+         */
+        public Builder setNote(final String note) {
+            this.note = note;
+            return this;
+        }
+
+        /**
+         * Set whether it is default translation.
+         * @param defaultTranslation true when defualt translation.
+         * @return builder.
+         */
+        public Builder setDefaultTranslation(final boolean defaultTranslation) {
+            this.defaultTranslation = defaultTranslation;
+            return this;
+        }
+
+        /**
+         * Set external link.
+         * @param linked external link.
+         * @return builder.
+         */
+        public Builder setExternalLinked(final ExternalLinked linked) {
+            this.linked = linked;
+            return this;
+        }
+
+        public Builder setProperties(final List<TMXProp> properties) {
+            otherProperties = properties;
+            return this;
+        }
+
+        public Builder setProperty(String propType, String propValue) {
+            if (otherProperties == null) {
+                otherProperties = new ArrayList<>();
+            }
+            otherProperties.add(new TMXProp(propType, propValue));
+            return this;
+        }
+    }
 }

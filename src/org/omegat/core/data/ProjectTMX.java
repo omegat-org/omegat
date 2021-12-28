@@ -5,6 +5,7 @@
 
  Copyright (C) 2012 Alex Buloichik
                2013-2014 Aaron Madlon-Kay, Alex Buloichik
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -44,6 +45,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TMXProp;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
 
@@ -307,8 +309,8 @@ public class ProjectTMX {
                 translation = tuvTarget.text;
             }
 
-            List<String> sources = new ArrayList<String>();
-            List<String> targets = new ArrayList<String>();
+            List<String> sources = new ArrayList<>();
+            List<String> targets = new ArrayList<>();
             Core.getSegmenter().segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang,
                     tuvSource.text, targetLang, translation, sources, targets);
 
@@ -317,63 +319,72 @@ public class ProjectTMX {
                     String segmentSource = sources.get(i);
                     String segmentTranslation = targets.get(i);
 
-                    PrepareTMXEntry te = new PrepareTMXEntry();
-                    te.source = segmentSource;
-                    te.translation = segmentTranslation;
-                    te.changer = changer;
-                    te.changeDate = changed;
-                    te.creator = creator;
-                    te.creationDate = created;
-                    te.note = tu.note;
-                    te.otherProperties = tu.props;
-
-                    String id = te.getPropValue(PROP_ID);
-                    if (id == null) {
+                    String id;
+                    String propId = getProp(tu, PROP_ID);
+                    if (propId != null) {
+                        id = propId;
+                    } else {
                         // Use TMX @tuid if available and "id" prop was not
                         // present
-                        id = te.getPropValue(ATTR_TUID);
+                        id = getProp(tu, ATTR_TUID);
                     }
 
-                    EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source,
-                            id, te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
-                            te.getPropValue(PROP_PATH));
+                    EntryKey key = new EntryKey(getProp(tu, PROP_FILE), segmentSource,
+                            id, getProp(tu, PROP_PREV), getProp(tu, PROP_NEXT), getProp(tu, PROP_PATH));
 
-                    TMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(te);
+                    TMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(tu, id);
 
                     boolean defaultTranslation = key.file == null;
-                    if (te.otherProperties != null && te.otherProperties.isEmpty()) {
-                        te.otherProperties = null;
-                    }
-
                     if (defaultTranslation) {
                         // default translation
-                        defaults.put(segmentSource, new TMXEntry(te, true, externalLinkedMode));
+                        TMXEntry defaultEntry = new TMXEntry.Builder()
+                                .setSource(segmentSource)
+                                .setCreator(creator)
+                                .setCreationDate(created)
+                                .setTranslation(segmentTranslation)
+                                .setChanger(changer)
+                                .setChangeDate(changed)
+                                .setNote(tu.note)
+                                .setProperties(tu.props)
+                                .setDefaultTranslation(true)
+                                .setExternalLinked(externalLinkedMode)
+                                .build();
+                        defaults.put(segmentSource, defaultEntry);
                     } else {
                         // multiple translation
-                        alternatives.put(key, new TMXEntry(te, false, externalLinkedMode));
+                        TMXEntry alternateTranslation = new TMXEntry.Builder()
+                                .setSource(segmentSource)
+                                .setCreator(creator)
+                                .setCreationDate(created)
+                                .setTranslation(segmentTranslation)
+                                .setChanger(changer)
+                                .setChangeDate(changed)
+                                .setNote(tu.note)
+                                .setProperties(tu.props)
+                                .setDefaultTranslation(false)
+                                .setExternalLinked(externalLinkedMode)
+                                .build();
+                        alternatives.put(key, alternateTranslation);
                     }
                 }
             }
             return true;
         }
-    };
+    }
 
-    private TMXEntry.ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
-        String id = te.getPropValue(PROP_ID);
-        if (id == null) {
-            id = te.getPropValue(ATTR_TUID);
+    private TMXEntry.ExternalLinked calcExternalLinkedMode(final TMXReader2.ParsedTu tu, final String id) {
+        String prop = getProp(tu, PROP_XICE);
+        if (prop != null && prop.equals(id)) {
+            return TMXEntry.ExternalLinked.xICE;
         }
-        TMXEntry.ExternalLinked externalLinked = null;
-        if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
-            externalLinked = TMXEntry.ExternalLinked.xICE;
+        prop = getProp(tu, PROP_X100PC);
+        if (prop != null && prop.equals(id)) {
+            return TMXEntry.ExternalLinked.x100PC;
         }
-        if (externalLinked == null && te.hasPropValue(PROP_X100PC, id)) {
-            externalLinked = TMXEntry.ExternalLinked.x100PC;
+        if (getProp(tu, PROP_XAUTO) != null) {
+            return TMXEntry.ExternalLinked.xAUTO;
         }
-        if (externalLinked == null && te.hasPropValue(PROP_XAUTO, null)) {
-            externalLinked = TMXEntry.ExternalLinked.xAUTO;
-        }
-        return externalLinked;
+        return null;
     }
 
     /**
@@ -388,6 +399,17 @@ public class ProjectTMX {
      */
     public Collection<TMXEntry> getAlternatives() {
         return alternatives.values();
+    }
+
+    private String getProp(final TMXReader2.ParsedTu tu, final String key) {
+        List<TMXProp> props = tu.props;
+        for (int i = 0, propsSize = props.size(); i < propsSize; i++) {
+            TMXProp prop = props.get(i);
+            if (prop.getType().equals(key)) {
+                return prop.getValue();
+            }
+        }
+        return null;
     }
 
     public interface CheckOrphanedCallback {

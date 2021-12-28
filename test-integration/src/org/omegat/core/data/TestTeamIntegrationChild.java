@@ -178,11 +178,12 @@ public final class TestTeamIntegrationChild {
 
     static void changeConcurrent() throws Exception {
         checkAll();
-
-        PrepareTMXEntry prep = new PrepareTMXEntry();
-        prep.translation = "" + System.currentTimeMillis();
-        Core.getProject().setTranslation(steC, prep, true, null);
-        Log.log("Wrote: " + prep.source + "=" + prep.translation);
+        TMXEntry entry = new TMXEntry.Builder()
+                .setTranslation("" + System.currentTimeMillis())
+                .setDefaultTranslation(true)
+                .build();
+        Core.getProject().setTranslation(steC, entry);
+        Log.log("Wrote: " + entry.source + "=" + entry.translation);
     }
 
     static void checksavecheck(int index) throws Exception {
@@ -250,10 +251,12 @@ public final class TestTeamIntegrationChild {
      * Save new translation.
      */
     static void saveTranslation(SourceTextEntry ste, long value) {
-        PrepareTMXEntry prep = new PrepareTMXEntry();
-        prep.translation = "" + value;
-        Core.getProject().setTranslation(ste, prep, true, null);
-        Log.log("Wrote: " + prep.source + "=" + prep.translation);
+        TMXEntry en = new TMXEntry.Builder()
+                .setTranslation("" + value)
+                .setDefaultTranslation(true)
+                .build();
+        Core.getProject().setTranslation(ste, en);
+        Log.log("Wrote: " + en.source + "=" + en.translation);
         Core.getProject().saveProject(true);
     }
 

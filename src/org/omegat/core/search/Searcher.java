@@ -358,7 +358,7 @@ public class Searcher {
             if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
                     final String fileTM = tmEn.getKey();
-                    searchEntries(tmEn.getValue().getEntries(), fileTM);
+                    searchEntriesAlternative(tmEn.getValue().getEntries(), fileTM);
                     checkStop.checkInterrupted();
                 }
                 for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {

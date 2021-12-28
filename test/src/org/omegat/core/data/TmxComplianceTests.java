@@ -34,6 +34,7 @@ import java.util.TreeMap;
 
 import org.junit.Ignore;
 import org.junit.Test;
+
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.html2.HTMLOptions;
@@ -389,9 +390,9 @@ public class TmxComplianceTests extends TmxComplianceBase {
     }
 
     TMXEntry createTMXEntry(String source, String translation, boolean def) {
-        PrepareTMXEntry tr = new PrepareTMXEntry();
-        tr.source = source;
-        tr.translation = translation;
-        return new TMXEntry(tr, def, null);
+        PrepareTMXEntry prepare = new PrepareTMXEntry();
+        prepare.source = source;
+        prepare.translation = translation;
+        return prepare.toTMXEntry(def, null);
     }
 }

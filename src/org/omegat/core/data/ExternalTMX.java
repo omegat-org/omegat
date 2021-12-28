@@ -7,6 +7,7 @@
                2012 Thomas CORDONNIER
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -43,9 +44,9 @@ public class ExternalTMX {
 
     private final String name;
 
-    private final List<PrepareTMXEntry> entries;
+    private final List<TMXEntry> entries;
 
-    ExternalTMX(String name, List<PrepareTMXEntry> entries) {
+    ExternalTMX(String name, List<TMXEntry> entries) {
         this.name = name;
         this.entries = entries;
     }
@@ -54,7 +55,7 @@ public class ExternalTMX {
         return name;
     }
 
-    public List<PrepareTMXEntry> getEntries() {
+    public List<TMXEntry> getEntries() {
         return Collections.unmodifiableList(entries);
     }
 }

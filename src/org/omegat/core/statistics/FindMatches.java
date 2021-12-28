@@ -44,7 +44,6 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.DefaultTranslationsIterator;
 import org.omegat.core.data.IProject.MultipleTranslationsIterator;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IStopped;
@@ -227,7 +226,7 @@ public class FindMatches {
             if (matcher.find()) {
                 penalty = Integer.parseInt(matcher.group(1));
             }
-            for (PrepareTMXEntry tmen : en.getValue().getEntries()) {
+            for (TMXEntry tmen : en.getValue().getEntries()) {
                 checkStopped(stop);
                 if (tmen.source == null) {
                     // Not all TMX entries have a source; in that case there can be no meaningful match, so skip.

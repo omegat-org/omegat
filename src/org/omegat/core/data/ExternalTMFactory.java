@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,7 +28,6 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -123,8 +123,8 @@ public final class ExternalTMFactory {
             return new ExternalTMX(file.getName(), loadImpl(sourceLang, targetLang));
         }
 
-        private List<PrepareTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
-            List<PrepareTMXEntry> entries = new ArrayList<>();
+        private List<TMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
+            List<TMXEntry> entries = new ArrayList<>();
 
             TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
                 public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
@@ -166,22 +166,21 @@ public final class ExternalTMFactory {
                             tuvSource.text, targetLang, tuvTarget.text, sources, targets);
 
                     for (int i = 0; i < sources.size(); i++) {
-                        PrepareTMXEntry te = new PrepareTMXEntry();
-                        te.source = sources.get(i);
-                        te.translation = targets.get(i);
-                        te.changer = changer;
-                        te.changeDate = changed;
-                        te.creator = creator;
-                        te.creationDate = created;
-                        te.note = tu.note;
-                        te.otherProperties = new ArrayList<TMXProp>(tu.props);
-                        te.otherProperties.add(new TMXProp(PROP_SOURCE_LANGUAGE, tuvSource.lang));
-                        te.otherProperties.add(new TMXProp(PROP_TARGET_LANGUAGE, tuvTarget.lang));
+                        TMXEntry.Builder builder = new TMXEntry.Builder()
+                                .setSource(sources.get(i))
+                                .setCreator(creator)
+                                .setCreationDate(created)
+                                .setTranslation(targets.get(i))
+                                .setChanger(changer)
+                                .setChangeDate(changed)
+                                .setNote(tu.note)
+                                .setProperties(tu.props)
+                                .setProperty(PROP_SOURCE_LANGUAGE, tuvSource.lang)
+                                .setProperty(PROP_TARGET_LANGUAGE, tuvTarget.lang);
                         if (nonTarget) {
-                            te.otherProperties.add(new TMXProp(PROP_FOREIGN_MATCH, "true"));
+                            builder.setProperty(PROP_FOREIGN_MATCH, "true");
                         }
-
-                        entries.add(te);
+                        entries.add(builder.build());
                     }
                 }
             };
@@ -231,8 +230,8 @@ public final class ExternalTMFactory {
             return new ExternalTMX(file.getName(), loadImpl(sourceLang, targetLang));
         }
 
-        private List<PrepareTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
-            List<PrepareTMXEntry> entries = new ArrayList<>();
+        private List<TMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
+            List<TMXEntry> entries = new ArrayList<>();
             ParseEntryResult throwaway = new ParseEntryResult();
             Core.getFilterMaster().loadFile(file.getPath(),
                     new FilterContext(sourceLang, targetLang, true).setRemoveAllTags(removeTags),
@@ -299,7 +298,7 @@ public final class ExternalTMFactory {
 
     public static final class Builder {
         private final String name;
-        private final List<PrepareTMXEntry> entries = new ArrayList<>();
+        private final List<TMXEntry> entries = new ArrayList<>();
 
         public Builder(String name) {
             this.name = name;
@@ -316,27 +315,25 @@ public final class ExternalTMFactory {
         }
     }
 
-    private static PrepareTMXEntry makeEntry(String source, String target, String id, String comment, String path,
+    private static TMXEntry makeEntry(String source, String target, String id, String comment, String path,
             String[] props) {
-        PrepareTMXEntry entry = new PrepareTMXEntry();
-        entry.source = source;
-        entry.translation = target;
-        entry.note = comment;
-        List<TMXProp> tmxProps = Collections.emptyList();
+        TMXEntry.Builder builder = new TMXEntry.Builder()
+                .setSource(source)
+                .setTranslation(target)
+                .setNote(comment);
         if (props != null) {
-            tmxProps = propsToList(props);
+            builder.setProperties(propsToList(props));
             if (id != null) {
-                tmxProps.add(new TMXProp("id", id));
+                builder.setProperty("id", id);
             }
             if (path != null) {
-                tmxProps.add(new TMXProp("path", path));
+                builder.setProperty("path", path);
             }
-            if (entry.note == null) {
-                entry.note = SegmentProperties.getProperty(props, SegmentProperties.COMMENT);
+            if (comment == null) {
+                builder.setNote(SegmentProperties.getProperty(props, SegmentProperties.COMMENT));
             }
         }
-        entry.otherProperties = tmxProps;
-        return entry;
+        return builder.build();
     }
 
     private static List<TMXProp> propsToList(String[] props) {

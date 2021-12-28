@@ -7,6 +7,7 @@
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik, Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,7 +29,11 @@
 
 package org.omegat.core.data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import org.omegat.util.TMXProp;
 
 /**
  * Storage for TMX entry.
@@ -55,8 +60,21 @@ public class TMXEntry {
     public final String creator;
     public final long creationDate;
     public final String note;
+    public List<TMXProp> otherProperties;
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
+
+    TMXEntry(TMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
+        this.source = from.source;
+        this.translation = from.translation;
+        this.changer = from.changer;
+        this.changeDate = from.changeDate;
+        this.creator = from.creator;
+        this.creationDate = from.creationDate;
+        this.note = from.note;
+        this.linked = linked;
+        this.defaultTranslation = defaultTranslation;
+    }
 
     TMXEntry(PrepareTMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
         this.source = from.source;
@@ -77,6 +95,24 @@ public class TMXEntry {
 
     public boolean hasNote() {
         return note != null;
+    }
+
+    public boolean hasPropValue(String propType, String propValue) {
+        if (otherProperties == null) {
+            return false;
+        }
+        for (int i = 0; i < otherProperties.size(); i++) {
+            TMXProp kv = otherProperties.get(i);
+            if (propType.equals(kv.getType())) {
+                if (propValue == null) {
+                    return true;
+                }
+                if (propValue.equals(kv.getValue())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

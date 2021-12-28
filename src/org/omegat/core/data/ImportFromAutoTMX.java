@@ -6,6 +6,7 @@
  Copyright (C) 2014 Alex Buloichik, Didier Briel
                2019 Aaron Madlon-Kay
                2020 Briac Pilpre
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
 
 /**
@@ -66,7 +66,7 @@ public class ImportFromAutoTMX {
      */
     void process(ExternalTMX tmx, boolean isEnforcedTMX) {
 
-        for (PrepareTMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
+        for (TMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
             List<SourceTextEntry> list = existEntries.get(e.source);
             if (list == null) {
                 continue; // there is no entries for this source
@@ -128,7 +128,7 @@ public class ImportFromAutoTMX {
         }
     }
 
-    private boolean isAltTranslation(PrepareTMXEntry entry) {
+    private boolean isAltTranslation(TMXEntry entry) {
         if (entry.otherProperties == null) {
             return false;
         }
@@ -148,7 +148,7 @@ public class ImportFromAutoTMX {
         return EntryKey.isIgnoreFileContext() ? hasOtherProp : hasFileProp;
     }
 
-    private boolean altTranslationMatches(PrepareTMXEntry entry, EntryKey key) {
+    private boolean altTranslationMatches(TMXEntry entry, EntryKey key) {
         if (entry.otherProperties == null) {
             return false;
         }
@@ -172,21 +172,16 @@ public class ImportFromAutoTMX {
         return key.equals(new EntryKey(file, entry.source, id, prev, next, path));
     }
 
-    private void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            TMXEntry.ExternalLinked externalLinked) {
-        if (StringUtil.isEmpty(trans.note)) {
-            trans.note = null;
-        }
-
-        trans.source = entry.getSrcText();
-
+    private void setTranslation(SourceTextEntry entry, TMXEntry trans, boolean defaultTranslation,
+                                TMXEntry.ExternalLinked externalLinkedMode) {
         TMXEntry newTrEntry;
-
         if (trans.translation == null && trans.note == null) {
             // no translation, no note
             newTrEntry = null;
         } else {
-            newTrEntry = new TMXEntry(trans, defaultTranslation, externalLinked);
+            // create new entry with default translation flag and external link mode.
+            PrepareTMXEntry prepare = new PrepareTMXEntry(trans);
+            newTrEntry = prepare.toTMXEntry(defaultTranslation, externalLinkedMode);
         }
         project.projectTMX.setTranslation(entry, newTrEntry, defaultTranslation);
     }

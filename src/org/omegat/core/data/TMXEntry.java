@@ -28,7 +28,10 @@
 
 package org.omegat.core.data;
 
+import java.util.List;
 import java.util.Objects;
+
+import org.omegat.util.TMXProp;
 
 /**
  * Storage for TMX entry.
@@ -58,14 +61,14 @@ public class TMXEntry implements ITMXEntry {
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
 
-    TMXEntry(PrepareTMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
-        this.source = from.source;
-        this.translation = from.translation;
-        this.changer = from.changer;
-        this.changeDate = from.changeDate;
-        this.creator = from.creator;
-        this.creationDate = from.creationDate;
-        this.note = from.note;
+    TMXEntry(ITMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
+        this.source = from.getSourceText();
+        this.translation = from.getTranslationText();
+        this.changer = from.getChanger();
+        this.changeDate = from.getChangeDate();
+        this.creator = from.getCreator();
+        this.creationDate = from.getCreationDate();
+        this.note = from.getNote();
 
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
@@ -163,5 +166,21 @@ public class TMXEntry implements ITMXEntry {
             return false;
         }
         return true;
+    }
+
+    public boolean hasProperties() {
+        return false;
+    }
+
+    public String getPropValue(String propType) {
+        return null; // for the moment internal entries do not store properties
+    }
+
+    public boolean hasPropValue(String propType, String propValue) {
+        return false; // for the moment internal entries do not store properties
+    }
+
+    public List<TMXProp> getProperties() {
+        return null; // for the moment internal entries do not store properties
     }
 }

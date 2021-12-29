@@ -44,7 +44,7 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.DefaultTranslationsIterator;
 import org.omegat.core.data.IProject.MultipleTranslationsIterator;
-import org.omegat.core.data.PrepareTMXEntry;
+import org.omegat.core.data.ITMXEntry;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IStopped;
@@ -227,13 +227,13 @@ public class FindMatches {
             if (matcher.find()) {
                 penalty = Integer.parseInt(matcher.group(1));
             }
-            for (PrepareTMXEntry tmen : en.getValue().getEntries()) {
+            for (ITMXEntry tmen : en.getValue().getEntries()) {
                 checkStopped(stop);
-                if (tmen.source == null) {
+                if (tmen.getSourceText() == null) {
                     // Not all TMX entries have a source; in that case there can be no meaningful match, so skip.
                     continue;
                 }
-                if (requiresTranslation && tmen.translation == null) {
+                if (requiresTranslation && tmen.getTranslationText() == null) {
                     continue;
                 }
 
@@ -242,9 +242,9 @@ public class FindMatches {
                     tmenPenalty += foreignPenalty;
                 }
 
-                processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, tmenPenalty,
-                        en.getKey(), tmen.creator, tmen.creationDate, tmen.changer, tmen.changeDate,
-                        tmen.otherProperties);
+                processEntry(null, tmen.getSourceText(), tmen.getTranslationText(), NearString.MATCH_SOURCE.TM, false, tmenPenalty,
+                        en.getKey(), tmen.getCreator(), tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(),
+                        tmen.getProperties());
             }
         }
 

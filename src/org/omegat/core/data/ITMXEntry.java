@@ -25,6 +25,9 @@
 
 package org.omegat.core.data;
 
+import java.util.List;
+
+import org.omegat.util.TMXProp;
 
 /**
  * Common interface for any object storing a pair source / translation text
@@ -62,4 +65,14 @@ public interface ITMXEntry extends ITranslationEntry {
     default boolean hasNote() {
         return getNote() != null;
     }
+
+    /* --------------------- Properties ------------ */
+
+    boolean hasProperties();
+
+    String getPropValue(String propType);
+
+    boolean hasPropValue(String propType, String propValue);
+
+    List<TMXProp> getProperties();
 }

@@ -95,6 +95,14 @@ public class PrepareTMXEntry implements ITMXEntry {
         return note;
     }
 
+    public boolean hasProperties() {
+        return (otherProperties != null) && (otherProperties.size() > 0);
+    }
+
+    public List<TMXProp> getProperties() {
+        return otherProperties;
+    }
+
     public String getPropValue(String propType) {
         if (otherProperties == null) {
             return null;

@@ -1278,7 +1278,8 @@ public class RealProject implements IProject {
                 return;
             }
             // create new translation memories map
-            Map<String, ExternalTMX> newTransMemories = new TreeMap<>(new FileUtil.TmFileComparator(config.getTmDir().getAsFile()));
+            Map<String, ExternalTMX> newTransMemories =
+                    new TreeMap<>(new FileUtil.TmFileComparator(config.getTmDir().getAsFile()));
             newTransMemories.putAll(transMemories);
             if (file.exists()) {
                 try {
@@ -1310,9 +1311,10 @@ public class RealProject implements IProject {
 
     /**
      * Locates and loads external TMX files with translations from same source language into different target languages.
-     * (These are used to show to the translator as reference, either to see what other translators did in other languages,
-     * or to better understand the source language if he doesn't master the source language, but he does know the extra
-     * target language)
+     *
+     * These are used to show to the translator as reference, either to see what other translators did in other
+     * languages, or to better understand the source language if he doesn't master the source language,
+     * but he does know the extra target language.
      * Uses directory monitor for check file updates.
      */
     private void loadOtherLanguages() {
@@ -1357,10 +1359,15 @@ public class RealProject implements IProject {
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<SourceTextEntry> getAllEntries() {
         return allProjectEntries;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public TMXEntry getTranslationInfo(SourceTextEntry ste) {
         if (projectTMX == null) {
             return EMPTY_TRANSLATION;
@@ -1375,6 +1382,10 @@ public class RealProject implements IProject {
         return r;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public AllTranslations getAllTranslations(SourceTextEntry ste) {
         AllTranslations r = new AllTranslations();
         synchronized (projectTMX) {
@@ -1418,6 +1429,11 @@ public class RealProject implements IProject {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * Set translation from TMXEntry trans.
+     */
     @Override
     public void setTranslation(SourceTextEntry entry, TMXEntry trans, AllTranslations previous)
             throws OptimisticLockingFail {
@@ -1455,10 +1471,9 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Set translation for entry.
+     * {@inheritDoc}
      *
-     * @param entry     source text entry.
-     * @param trans     tmx translation entry.
+     * Set translation from TMXEntry trans.
      */
     @Override
     public void setTranslation(final SourceTextEntry entry, final TMXEntry trans) {
@@ -1473,11 +1488,12 @@ public class RealProject implements IProject {
             projectTMX.setTranslation(entry, null, trans.defaultTranslation);
         } else {
             boolean isDefaultTranslation = trans.defaultTranslation;
+            String changer = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name"));
             TMXEntry.Builder builder = new TMXEntry.Builder()
                     .setSource(entry.getSrcText())
                     .setTranslation(trans.translation)
                     .setDefaultTranslation(isDefaultTranslation)
-                    .setChanger(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name")))
+                    .setChanger(changer)
                     .setChangeDate(System.currentTimeMillis())
                     .setExternalLinked(trans.linked);
             if (prevTrEntry == null) {
@@ -1504,6 +1520,9 @@ public class RealProject implements IProject {
                 Math.min(hotStat.numberOfUniqueSegments, hotStat.numberOfTranslatedSegments + diff));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setNote(final SourceTextEntry entry, final TMXEntry oldTE, String note) {
         if (oldTE == null) {

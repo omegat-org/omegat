@@ -89,14 +89,28 @@ public class TMXEntry {
         this.linked = linked;
     }
 
+    /**
+     * Check entry already have translation.
+     * @return true when entry has translated text, otherwise false.
+     */
     public boolean isTranslated() {
         return translation != null;
     }
 
+    /**
+     * Check entry has note.
+     * @return true when entry has note, otherwise false.
+     */
     public boolean hasNote() {
         return note != null;
     }
 
+    /**
+     * Check entry have specified type of property, and that is specified value.
+     * @param propType property type to check.
+     * @param propValue value to check equality.
+     * @return true when entry have specified type of propety that is as same as specified value.
+     */
     public boolean hasPropValue(String propType, String propValue) {
         if (otherProperties == null) {
             return false;
@@ -161,9 +175,8 @@ public class TMXEntry {
                 defaultTranslation, source);
     }
 
-    /**
-     * Two TMXEntrys are considered interchangeable if this method returns true,
-     * even if equals() != true.
+    /* Two TMXEntrys are considered interchangeable if this method returns true,
+       even if equals() != true.
      */
     public boolean equalsTranslation(TMXEntry other) {
         if (other == null) {
@@ -182,8 +195,9 @@ public class TMXEntry {
     }
 
     /* provide builder for TMXEntry.
-       other classes can build TMXEntry by calling such as
+       other classes can build TMXEntry by calling builder methods such as
        TMXEntry::Builder.setSource(source).setTranslation(translation).build();
+       Here is a private constructor called from build method.
      */
     private TMXEntry(final String source, final String translation, final String changer, final long changeDate,
                      final String creator, final long creationDate, final String note,
@@ -203,7 +217,7 @@ public class TMXEntry {
     }
 
     /**
-     * TMXEntry object builder.
+     * TMXEntry object builder class.
      */
     public static final class Builder {
         private String source;
@@ -221,7 +235,7 @@ public class TMXEntry {
         }
 
         /**
-         * build method for TMXEntry object.
+         * Build TMXEntry object.
          * @return TMXEntry object.
          */
         public TMXEntry build() {

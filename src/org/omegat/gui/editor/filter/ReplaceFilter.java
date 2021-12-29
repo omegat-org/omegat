@@ -113,14 +113,14 @@ public class ReplaceFilter implements IEditorFilter {
             List<SearchMatch> found = getReplacementsForEntry(trans);
             if (found != null) {
                 int off = 0;
-                StringBuilder o = new StringBuilder(trans);
+                StringBuilder sb = new StringBuilder(trans);
                 for (SearchMatch m : found) {
-                    o.replace(m.getStart() + off, m.getEnd() + off, m.getReplacement());
+                    sb.replace(m.getStart() + off, m.getEnd() + off, m.getReplacement());
                     off += m.getReplacement().length() - m.getLength();
                 }
                 TMXEntry tmxEntry = new TMXEntry.Builder()
                         .setSource(en.source)
-                        .setTranslation(o.toString())
+                        .setTranslation(sb.toString())
                         .setDefaultTranslation(en.defaultTranslation)
                         .build();
                 Core.getProject().setTranslation(ste, tmxEntry);

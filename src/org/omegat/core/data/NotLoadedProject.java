@@ -90,6 +90,8 @@ public class NotLoadedProject implements IProject {
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
     }
 
+    /** {@inheritDoc} */
+    @Override
     public void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note) {
     }
 
@@ -101,6 +103,8 @@ public class NotLoadedProject implements IProject {
         return false;
     }
 
+    /** {@inheritDoc} */
+    @Override
     public Map<String, ExternalTMX> getTransMemories() {
         return null;
     }
@@ -138,9 +142,13 @@ public class NotLoadedProject implements IProject {
     public void saveProjectProperties() throws IOException {
     }
 
+    /** {@inheritDoc} */
+    @Override
     public void setTranslation(SourceTextEntry ste, TMXEntry trans) {
     }
 
+    /** {@inheritDoc} */
+    @Override
     public void setTranslation(SourceTextEntry entry, TMXEntry trans, AllTranslations previousTranslations)
             throws OptimisticLockingFail {
     }

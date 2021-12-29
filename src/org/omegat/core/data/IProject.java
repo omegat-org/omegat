@@ -176,7 +176,8 @@ public interface IProject {
      *            translation. It can't be null
      */
     default void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-                               TMXEntry.ExternalLinked externalLinked, AllTranslations previous) throws OptimisticLockingFail {
+                               TMXEntry.ExternalLinked externalLinked, AllTranslations previous)
+            throws OptimisticLockingFail {
         setTranslation(entry, new TMXEntry(trans, defaultTranslation, externalLinked), previous);
     }
 

@@ -34,9 +34,11 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,6 +46,7 @@ import java.util.regex.Pattern;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.TMXEntry;
 
 /**
@@ -145,6 +148,23 @@ public class TMXWriter2 {
         }
     }
 
+    public static void buildTMXFile(final String filename, final boolean forceValidTMX,
+                                    final boolean levelTwo, final ProjectProperties config,
+                                    final Map<String, TMXEntry> data) throws Exception {
+        TMXWriter2 wr = new TMXWriter2(new File(filename), config.getSourceLanguage(), config.getTargetLanguage(),
+                config.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);
+        List<String> p = new ArrayList<>();
+        try {
+            for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
+                TMXEntry transEntry = en.getValue();
+                wr.writeEntry(en.getKey(), transEntry.translation, transEntry.note, transEntry.creator,
+                        transEntry.creationDate, transEntry.changer, transEntry.changeDate, p);
+            }
+        } finally {
+            wr.close();
+        }
+    }
+
     public void writeComment(String comment) throws Exception {
         xml.writeComment(comment);
         xml.writeCharacters(lineSeparator);
@@ -160,8 +180,8 @@ public class TMXWriter2 {
      */
     public void writeEntry(String source, String translation, TMXEntry entry, List<String> propValues)
             throws Exception {
-        writeEntry(source, translation, entry.getNote(), entry.getCreator(), entry.getCreationDate(),
-                entry.getChanger(), entry.getChangeDate(), propValues);
+        writeEntry(source, translation, entry.note, entry.creator, entry.creationDate, entry.changer, entry.changeDate,
+                propValues);
     }
 
     public void writeEntry(String source, String translation, String note, String creator, long creationDate,

@@ -81,7 +81,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.TMXWriter;
+import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -468,7 +468,7 @@ public final class Main {
 
         try {
             // Write OmegaT-project-compatible TMX:
-            TMXWriter.buildTMXFile(fname, false, false, config, data);
+            TMXWriter2.buildTMXFile(fname, false, false, config, data);
         } catch (IOException e) {
             Log.logErrorRB("CT_ERROR_CREATING_TMX");
             Log.log(e);
@@ -504,7 +504,7 @@ public final class Main {
 
         Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
-        TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), data);
+        TMXWriter2.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), data);
 
         p.closeProject();
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));

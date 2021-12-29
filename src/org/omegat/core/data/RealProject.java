@@ -1486,6 +1486,7 @@ public class RealProject implements IProject {
             boolean isDefaultTranslation = trans.isDefaultTranslation();
             TMXEntry.Builder builder = new TMXEntry.Builder()
                     .setSource(entry.getSrcText())
+                    .setTranslation(trans.getTranslation())
                     .setDefaultTranslation(isDefaultTranslation)
                     .setChanger(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name")))
                     .setChangeDate(System.currentTimeMillis())

@@ -26,15 +26,23 @@
 package org.omegat.core.data;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.core.Core;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.TestPreferencesInitializer;
@@ -48,11 +56,18 @@ public class RealProjectTest {
     ProjectTMX tmx;
     RealProjectWithTMXAccess project;
     IProject.FileInfo fi;
+    Path tempDir;
 
     @Before
     public final void setUp() throws Exception {
-        Core.initializeConsole(new TreeMap<String, String>());
+        tempDir = Files.createTempDirectory("omegat-core-ut");
+        Core.initializeConsole(new TreeMap<>());
         TestPreferencesInitializer.init();
+    }
+
+    @After
+    public final void tearDown() throws Exception {
+        FileUtils.deleteDirectory(tempDir.toFile());
     }
 
     /**
@@ -60,7 +75,7 @@ public class RealProjectTest {
      * be using the same default translation.
      */
     @Test
-    public void testImportSameTranslations() {
+    public void testImportSameTranslations() throws Exception {
         createProject(true);
         addSTE(fi, "id1", "List of sections in %s", "Liste des sections de %s", false);
         addSTE(fi, "id2", "List of sections in %s", "Liste des sections de %s", false);
@@ -92,7 +107,7 @@ public class RealProjectTest {
      * Fuzzy shouldn't be loaded.
      */
     @Test
-    public void testImportFuzzy() {
+    public void testImportFuzzy() throws Exception {
         createProject(true);
         addSTE(fi, "id1", "List of sections in %s", "Liste des sections de %s", true);
 
@@ -113,7 +128,7 @@ public class RealProjectTest {
      * Exist translation should be overwritten.
      */
     @Test
-    public void testImportOverwrite() {
+    public void testImportOverwrite() throws Exception {
         createProject(true);
         setDefault("List of sections in %s", "exist");
 
@@ -138,8 +153,8 @@ public class RealProjectTest {
         assertEquals("Translation imported, but shouldn't", tmx.getMultipleTranslation(entryKey).translation, "exist");
     }
 
-    private void createProject(boolean supportDefaultTranslations) {
-        ProjectProperties props = new ProjectProperties();
+    private void createProject(boolean supportDefaultTranslations) throws Exception {
+        ProjectProperties props = new ProjectProperties(tempDir.toFile());
         props.setSupportDefaultTranslations(supportDefaultTranslations);
         props.setTargetTokenizer(DefaultTokenizer.class);
         project = new RealProjectWithTMXAccess(props);
@@ -199,6 +214,79 @@ public class RealProjectTest {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         TMXEntry tr = tmx.getMultipleTranslation(key);
         assertNull("Alternative translation of '" + source + "' (id='" + id + "') imported, but shouldn't", tr);
+    }
+
+    @Test
+    public void saveProjectProperties() throws Exception {
+        createProject(true);
+        project.saveProjectProperties();
+        assertTrue(Files.exists(tempDir.resolve("omegat.project")));
+    }
+
+    @Test
+    public void getTranslationInfo() throws Exception {
+        createProject(true);
+        String source = "List of sections in %s";
+        String translation = "Liste des sections de %s";
+        addSTE(fi, "id1", source, translation, false);
+        project.importTranslationsFromSources();
+        EntryKey key = new EntryKey("test", source, "id1", null, null, null);
+        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() , null, translation, new ArrayList<>());
+        TMXEntry entry = project.getTranslationInfo(ste);
+        assertEquals(source, entry.source);
+        assertEquals(translation, entry.translation);
+    }
+
+    @Test
+    public void getProjectProperties() throws Exception {
+        createProject(true);
+        ProjectProperties prop = project.getProjectProperties();
+        assertEquals(tempDir.toFile(), prop.projectRootDir.getAbsoluteFile());
+        assertEquals(tempDir.getFileName().toString(), prop.getProjectName());
+        assertEquals(tempDir.resolve("omegat"), Paths.get(prop.getProjectInternal()));
+    }
+
+    @Test
+    public void setTranslation() throws Exception {
+        createProject(true);
+        assertFalse(project.isProjectModified());
+        String source = "List of sections in %s";
+        String translation = "Liste des sections de %s";
+        SourceTextEntry ste = setDefault2(source, translation);
+        assertTrue(project.isProjectModified());
+        TMXEntry entry = project.getTranslationInfo(ste);
+        assertEquals(source, entry.source);
+        assertEquals(translation, entry.translation);
+    }
+
+    @Test
+    public void setNote() throws Exception {
+        createProject(true);
+        String source = "List of sections in %s";
+        String translation = "Liste des sections de %s";
+        SourceTextEntry ste = setDefault2(source, translation);
+        project.setNote(ste, getTMXEntry(source, translation), "Note");
+        TMXEntry entry = project.getTranslationInfo(ste);
+        assertTrue(entry.hasNote());
+        assertEquals("Note", entry.note);
+    }
+
+    private SourceTextEntry setDefault2(final String source, final String translation) {
+        EntryKey key = new EntryKey("test", source, null, null, null, null);
+        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() , null, translation, new ArrayList<>());
+        project.setTranslation(ste, getPrepareTMXEntry(source, translation), true, null);
+        return ste;
+    }
+
+    private TMXEntry getTMXEntry(final String source, final String translation) {
+        return new TMXEntry(getPrepareTMXEntry(source, translation), true, null);
+    }
+
+    private PrepareTMXEntry getPrepareTMXEntry(final String source, final String translation) {
+        PrepareTMXEntry tr = new PrepareTMXEntry();
+        tr.source = source;
+        tr.translation = translation;
+        return tr;
     }
 
     /**

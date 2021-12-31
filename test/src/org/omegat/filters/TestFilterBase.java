@@ -48,6 +48,7 @@ import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;

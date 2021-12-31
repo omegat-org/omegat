@@ -3,11 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
-               2012 Thomas CORDONNIER
-               2013 Aaron Madlon-Kay
-               2014 Alex Buloichik
-               2021 Hiroshi Miura
+ Copyright (C) 2021 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -26,36 +22,57 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
+
 package org.omegat.core.data;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
- * Class for store data from TMs from the <code>/tm</code> folder. They are used only for fuzzy matches.
- * <p>
- * Note that the name includes "TMX" for historical reasons; the source may not have been an actual TMX file.
+ * Common interface for any object storing a pair source / translation text
+ * with date and author
  *
- * @author Alex Buloichik (alex73mail@gmail.com)
- * @author Thomas CORDONNIER
- * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
-public class ExternalTMX {
+public interface ITMXEntry {
 
-    private final String name;
+    /**
+     * Gets the source text
+     */
+    String getSourceText();
 
-    private final List<ExternalTMXEntry> entries;
+    /**
+     * Gets translation text
+     */
+    String getTranslationText();
 
-    ExternalTMX(String name, List<ExternalTMXEntry> entries) {
-        this.name = name;
-        this.entries = entries;
+    /**
+     * Check whenever there is a translation
+     */
+    default boolean isTranslated() {
+        return getTranslationText() != null;
     }
 
-    public String getName() {
-        return name;
-    }
+    /**
+     * Gets the initial creator of the entry
+     */
+    String getCreator();
 
-    public List<ExternalTMXEntry> getEntries() {
-        return Collections.unmodifiableList(entries);
-    }
+    /**
+     * Gets the initial creation date as an EPOCH timestamp
+     */
+    long getCreationDate();
+
+    /**
+     * Gets the author of last change in the entry
+     */
+    String getChanger();
+
+    /**
+     * Gets the EPOCH timestamp for last change in this entry
+     */
+    long getChangeDate();
+
+    /**
+     * Gets text note (markup &lt;note&gt; in TMX format)
+     */
+    String getNote();
+
 }

@@ -7,6 +7,7 @@
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik, Aaron Madlon-Kay
+               2021 Hiroshi Miura, Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -42,7 +43,7 @@ import java.util.Objects;
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
-public class TMXEntry {
+public class TMXEntry implements ITMXEntry {
     public enum ExternalLinked {
         // declares how this entry linked to external TMX in the tm/auto/
         xICE, x100PC, xAUTO, xENFORCED
@@ -58,7 +59,7 @@ public class TMXEntry {
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
 
-    TMXEntry(PrepareTMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
+    TMXEntry(final PrepareTMXEntry from, final boolean defaultTranslation, final ExternalLinked linked) {
         this.source = from.source;
         this.translation = from.translation;
         this.changer = from.changer;
@@ -66,15 +67,78 @@ public class TMXEntry {
         this.creator = from.creator;
         this.creationDate = from.creationDate;
         this.note = from.note;
-
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
     }
 
+    /**
+     * Gets the source text
+     */
+    @Override
+    public String getSourceText() {
+        return source;
+    }
+
+    /**
+     * Gets translation text
+     */
+    @Override
+    public String getTranslationText() {
+        return translation;
+    }
+
+    /**
+     * Check entry already have translation.
+     * @return true when entry has translated text, otherwise false.
+     */
     public boolean isTranslated() {
         return translation != null;
     }
 
+    /**
+     * Gets the initial creator of the entry
+     */
+    @Override
+    public String getCreator() {
+        return creator;
+    }
+
+    /**
+     * Gets the initial creation date as an EPOCH timestamp
+     */
+    @Override
+    public long getCreationDate() {
+        return creationDate;
+    }
+
+    /**
+     * Gets the author of last change in the entry
+     */
+    @Override
+    public String getChanger() {
+        return changer;
+    }
+
+    /**
+     * Gets the EPOCH timestamp for last change in this entry
+     */
+    @Override
+    public long getChangeDate() {
+        return changeDate;
+    }
+
+    /**
+     * Gets text note (markup &lt;note&gt; in TMX format)
+     */
+    @Override
+    public String getNote() {
+        return note;
+    }
+
+    /**
+     * Check entry has note.
+     * @return true when entry has note, otherwise false.
+     */
     public boolean hasNote() {
         return note != null;
     }
@@ -125,8 +189,7 @@ public class TMXEntry {
                 defaultTranslation, source);
     }
 
-    /**
-     * Two TMXEntrys are considered interchangeable if this method returns true,
+    /** Two TMXEntrys are considered interchangeable if this method returns true,
      * even if equals() != true.
      */
     public boolean equalsTranslation(TMXEntry other) {

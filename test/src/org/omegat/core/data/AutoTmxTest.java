@@ -64,10 +64,10 @@ public class AutoTmxTest {
                 .setDoSegmenting(props.isSentenceSegmentingEnabled())
                 .load(props.getSourceLanguage(), props.getTargetLanguage());
 
-        PrepareTMXEntry e1 = autoTMX.getEntries().get(0);
+        ExternalTMXEntry e1 = autoTMX.getEntries().get(0);
         checkListValues(e1, ProjectTMX.PROP_XICE, "11");
 
-        PrepareTMXEntry e2 = autoTMX.getEntries().get(1);
+        ExternalTMXEntry e2 = autoTMX.getEntries().get(1);
         checkListValues(e2, ProjectTMX.PROP_XICE, "12");
         checkListValues(e2, ProjectTMX.PROP_X100PC, "10");
 
@@ -133,7 +133,7 @@ public class AutoTmxTest {
         return new SourceTextEntry(ek, 0, null, null, new ArrayList<ProtectedPart>());
     }
 
-    void checkListValues(PrepareTMXEntry en, String propType, String propValue) {
+    void checkListValues(ExternalTMXEntry en, String propType, String propValue) {
         assertTrue(en.hasPropValue(propType, propValue));
     }
 

@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.segmentation.SRX;
@@ -156,9 +157,9 @@ public class ExternalTMFactoryTest extends TestCore {
         // Only 5 FR translations
         assertEquals(5, tmx.getEntries().size());
 
-        List<PrepareTMXEntry> matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!"))
-                .collect(Collectors.toList());
-        assertEquals(3, matchingEntries.size());
+
+        assertEquals(3,
+                tmx.getEntries().stream().filter(t -> t.source.equals("Hello " + "World!")).count());
         
         // Set the EXT_TMX_KEEP_FOREIGN_MATCH prop
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
@@ -167,24 +168,21 @@ public class ExternalTMFactoryTest extends TestCore {
         // All foreign translations are present
         assertEquals(14, tmx.getEntries().size());
 
-        matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!"))
-                .collect(Collectors.toList());
-        assertEquals(8, matchingEntries.size());
+        assertEquals(8,
+                tmx.getEntries().stream().filter(t -> t.source.equals("Hello World!")).count());
 
-        matchingEntries = tmx.getEntries().stream().filter(t -> t.source.equals("This is an english sentence."))
+        List<ExternalTMXEntry> matchingEntries = tmx.getEntries().stream()
+                .filter(t -> t.source.equals("This is an english sentence."))
                 .collect(Collectors.toList());
         assertEquals(3, matchingEntries.size());
 
-        PrepareTMXEntry entry = matchingEntries.get(0);
-        assertEquals("EN-US", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE));
-        assertEquals("true", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH));
+        assertTrue(matchingEntries.get(0).hasPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE, "EN-US"));
+        assertTrue(matchingEntries.get(0).hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true"));
 
-        entry = matchingEntries.get(1);
-        assertEquals("DE", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE));
-        assertEquals("true", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH));
+        assertTrue(matchingEntries.get(1).hasPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE, "DE"));
+        assertTrue(matchingEntries.get(1).hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true"));
 
-        entry = matchingEntries.get(2);
-        assertEquals("ES", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE));
-        assertEquals("true", entry.getPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH));
+        assertTrue(matchingEntries.get(2).hasPropValue(ExternalTMFactory.TMXLoader.PROP_TARGET_LANGUAGE, "ES"));
+        assertTrue(matchingEntries.get(2).hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true"));
     }
 }

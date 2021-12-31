@@ -38,7 +38,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -51,8 +50,8 @@ import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
+import org.omegat.core.data.ITMXEntry;
 import org.omegat.core.data.ParseEntry;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
@@ -85,6 +84,7 @@ import org.omegat.util.StringUtil;
  * @author Aaron Madlon-Kay
  * @author Piotr Kulik
  * @author Thomas Cordonnier
+ * @author Hiroshi Miura
  */
 public class Searcher {
 
@@ -358,13 +358,19 @@ public class Searcher {
             if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
                     final String fileTM = tmEn.getKey();
-                    searchEntries(tmEn.getValue().getEntries(), fileTM);
+                    for (ITMXEntry en: tmEn.getValue().getEntries()) {
+                        searchEntry(en, fileTM);
+                    }
                     checkStop.checkInterrupted();
                 }
                 for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
-                    searchEntriesAlternative(tmEn.getValue().getDefaults(), langTM.getLanguage());
-                    searchEntriesAlternative(tmEn.getValue().getAlternatives(), langTM.getLanguage());
+                    for (ITMXEntry en: tmEn.getValue().getDefaults()) {
+                        searchEntry(en, langTM.getLanguage());
+                    }
+                    for (ITMXEntry en: tmEn.getValue().getAlternatives()) {
+                        searchEntry(en, langTM.getLanguage());
+                    }
                     checkStop.checkInterrupted();
                 }
             }
@@ -441,44 +447,24 @@ public class Searcher {
      * If max nr of hits have been reached or search has been stopped,
      * the function stops and returns false. Else it finishes and returns true;
      *
-     * @param tmEn collection of TMX Entries to check.
+     * @param tm TMX Entry to check.
      * @param tmxID identifier of the TMX. E.g. the filename or language code
      * @throws SearchLimitReachedException when nr of found matches exceeds requested nr of results
      */
-    private void searchEntries(Collection<PrepareTMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
-        for (PrepareTMXEntry tm : tmEn) {
-            // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= searchExpression.numberOfResults) {
-                throw new SearchLimitReachedException();
-            }
-
-            // for alternative translations:
-            // - it is not feasible to get the SourceTextEntry that matches the tm.source, so we cannot get the entryNum
-            // and real translation
-            // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
-            // which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_TRANSLATION_MEMORY, tmxID);
-
-            checkStop.checkInterrupted();
+    private void searchEntry(ITMXEntry tm, final String tmxID) throws SearchLimitReachedException {
+        // stop searching if the max. nr of hits has been reached
+        if (m_numFinds >= searchExpression.numberOfResults) {
+            throw new SearchLimitReachedException();
         }
-    }
 
-    private void searchEntriesAlternative(Collection<TMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
-        for (TMXEntry tm : tmEn) {
-            // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= searchExpression.numberOfResults) {
-                throw new SearchLimitReachedException();
-            }
-
-            // for alternative translations:
-            // - it is not feasible to get the SourceTextEntry that matches the tm.source, so we cannot get the entryNum
-            // and real translation
-            // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
-            // which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_ALTERNATIVE, tmxID);
-
-            checkStop.checkInterrupted();
-        }
+        // for alternative translations:
+        // - it is not feasible to get the SourceTextEntry that matches the tm.source, so we cannot get the entryNum
+        // and real translation
+        // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
+        // which real source it belongs
+        checkEntry(tm.getSourceText(), tm.getTranslationText(), tm.getNote(), null, null,
+                ENTRY_ORIGIN_TRANSLATION_MEMORY , tmxID);
+        checkStop.checkInterrupted();
     }
 
     /**

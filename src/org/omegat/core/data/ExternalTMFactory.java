@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -123,8 +124,8 @@ public final class ExternalTMFactory {
             return new ExternalTMX(file.getName(), loadImpl(sourceLang, targetLang));
         }
 
-        private List<PrepareTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
-            List<PrepareTMXEntry> entries = new ArrayList<>();
+        private List<ExternalTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
+            List<ExternalTMXEntry> entries = new ArrayList<>();
 
             TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
                 public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
@@ -180,8 +181,7 @@ public final class ExternalTMFactory {
                         if (nonTarget) {
                             te.otherProperties.add(new TMXProp(PROP_FOREIGN_MATCH, "true"));
                         }
-
-                        entries.add(te);
+                        entries.add(te.toExternalTMXEntry());
                     }
                 }
             };
@@ -231,8 +231,8 @@ public final class ExternalTMFactory {
             return new ExternalTMX(file.getName(), loadImpl(sourceLang, targetLang));
         }
 
-        private List<PrepareTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
-            List<PrepareTMXEntry> entries = new ArrayList<>();
+        private List<ExternalTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
+            List<ExternalTMXEntry> entries = new ArrayList<>();
             ParseEntryResult throwaway = new ParseEntryResult();
             Core.getFilterMaster().loadFile(file.getPath(),
                     new FilterContext(sourceLang, targetLang, true).setRemoveAllTags(removeTags),
@@ -299,7 +299,7 @@ public final class ExternalTMFactory {
 
     public static final class Builder {
         private final String name;
-        private final List<PrepareTMXEntry> entries = new ArrayList<>();
+        private final List<ExternalTMXEntry> entries = new ArrayList<>();
 
         public Builder(String name) {
             this.name = name;
@@ -316,7 +316,7 @@ public final class ExternalTMFactory {
         }
     }
 
-    private static PrepareTMXEntry makeEntry(String source, String target, String id, String comment, String path,
+    private static ExternalTMXEntry makeEntry(String source, String target, String id, String comment, String path,
             String[] props) {
         PrepareTMXEntry entry = new PrepareTMXEntry();
         entry.source = source;
@@ -331,12 +331,12 @@ public final class ExternalTMFactory {
             if (path != null) {
                 tmxProps.add(new TMXProp("path", path));
             }
-            if (entry.note == null) {
+            if (comment == null) {
                 entry.note = SegmentProperties.getProperty(props, SegmentProperties.COMMENT);
             }
         }
         entry.otherProperties = tmxProps;
-        return entry;
+        return entry.toExternalTMXEntry();
     }
 
     private static List<TMXProp> propsToList(String[] props) {

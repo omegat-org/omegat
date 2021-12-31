@@ -33,16 +33,29 @@ import java.util.List;
 import org.omegat.util.TMXProp;
 
 /**
- * Class for prepare TMXEntry content before save unchangeable copy in the ProjectTMX. We can't use just
- * parameters in the setTranslation() method since count of parameters is too much. Structure of this class is
- * almost the save like TMXEntry.
- *
+ * Factory class for TMXEntry and ExternalTMXEntry, that shares interface ITMXEntry.
+ * It prepare TMXEntry/ExternalTMXEntry content before save contents in the ProjectTMX.
+ * We can't use just parameters in the setTranslation() method since count of parameters is too much.
  * Instead, we will set all parameters into this class, then ProjectTMX will convert in into TMXEntry than
  * save internally.
+ *
+ * An ExternalTMXEntry hold as same parameters as TMXEntry and hold additional properties.
+ * The fields of this class is almost the same like TMXEntry and as same as ExternalTMXEntry.
+ *
+ * We will set necessary parameters into this class, then call toTMXEntry to produce TMXEntry or
+ * call toExternalTMXEntry to produce ExternalTMXEntry object.
+ * ProjectTMX will accept these through setTranslation() call then manage these objects internally.
+ *
+ * Currently all fields are public, mutable and set/get directly from any place in OmegaT and plugins.
+ * This is because historical reason and to keep backward compatibility for plugins/scripts.
+ *
+ * If plugins use PrepareTMXEntry as data vehicle class for TM data,
+ * please consider to use ExternalTMXEntry class for the purpose.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public class PrepareTMXEntry {
     public String source;
@@ -55,6 +68,16 @@ public class PrepareTMXEntry {
     public List<TMXProp> otherProperties;
 
     public PrepareTMXEntry() {
+    }
+
+    public PrepareTMXEntry(ITMXEntry e) {
+        source = e.getSourceText();
+        translation = e.getTranslationText();
+        changer = e.getChanger();
+        changeDate = e.getChangeDate();
+        creator = e.getCreator();
+        creationDate = e.getCreationDate();
+        note = e.getNote();
     }
 
     public PrepareTMXEntry(TMXEntry e) {
@@ -96,6 +119,14 @@ public class PrepareTMXEntry {
             }
         }
         return false;
+    }
+
+    public ExternalTMXEntry toExternalTMXEntry() {
+        return new ExternalTMXEntry(this, otherProperties);
+    }
+
+    public TMXEntry toTMXEntry(final boolean defaultTranslation, final TMXEntry.ExternalLinked linked) {
+        return new TMXEntry(this, defaultTranslation, linked);
     }
 
     @Override

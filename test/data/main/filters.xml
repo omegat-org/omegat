@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<filters removeTags="true" removeSpacesNonseg="true" preserveSpaces="false" ignoreFileContext="false">
+    <filter className="org.omegat.filters2.text.TextFilter" enabled="true">
+        <files sourceFilenameMask="*.txt" targetFilenamePattern="${filename}"/>
+        <files sourceFilenameMask="*.txt1" targetFilenamePattern="${filename}" sourceEncoding="ISO-8859-1" targetEncoding="ISO-8859-1"/>
+        <files sourceFilenameMask="*.txt2" targetFilenamePattern="${filename}" sourceEncoding="ISO-8859-2" targetEncoding="ISO-8859-2"/>
+        <files sourceFilenameMask="*.utf8" targetFilenamePattern="${filename}" sourceEncoding="UTF-8" targetEncoding="UTF-8"/>
+        <option name="lineLength" value="0"/>
+        <option name="maxLineLength" value="0"/>
+        <option name="segmentOn" value="NEVER"/>
+    </filter>
+    <filter className="org.omegat.filters2.text.bundles.ResourceBundleFilter" enabled="true">
+        <files sourceFilenameMask="*.properties" targetFilenamePattern="${nameOnly}_${targetLocale}.${extension}" sourceEncoding="US-ASCII" targetEncoding="US-ASCII"/>
+    </filter>
+</filters>

@@ -44,6 +44,7 @@ import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.madlonkay.supertmxmerge.data.ITuv;
 import org.madlonkay.supertmxmerge.data.Key;
 import org.madlonkay.supertmxmerge.data.ResolutionStrategy;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
@@ -178,10 +179,9 @@ public final class TestTeamIntegrationChild {
 
     static void changeConcurrent() throws Exception {
         checkAll();
-
         PrepareTMXEntry prep = new PrepareTMXEntry();
         prep.translation = "" + System.currentTimeMillis();
-        Core.getProject().setTranslation(steC, prep, true, null);
+        Core.getProject().setTranslation(steC, prep.toTMXEntry());
         Log.log("Wrote: " + prep.source + "=" + prep.translation);
     }
 
@@ -252,7 +252,7 @@ public final class TestTeamIntegrationChild {
     static void saveTranslation(SourceTextEntry ste, long value) {
         PrepareTMXEntry prep = new PrepareTMXEntry();
         prep.translation = "" + value;
-        Core.getProject().setTranslation(ste, prep, true, null);
+        Core.getProject().setTranslation(ste, prep.toTMXEntry());
         Log.log("Wrote: " + prep.source + "=" + prep.translation);
         Core.getProject().saveProject(true);
     }

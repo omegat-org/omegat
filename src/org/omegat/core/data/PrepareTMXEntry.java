@@ -98,6 +98,23 @@ public class PrepareTMXEntry {
         return false;
     }
 
+    public TMXEntry toTMXEntry() {
+        return toTMXEntry(true, null);
+    }
+
+    public TMXEntry toTMXEntry(final boolean defaultTranslation, final TMXEntry.ExternalLinked linked) {
+        return toTMXEntry(defaultTranslation, linked, false);
+    }
+
+    public TMXEntry toTMXEntry(final boolean defaultTranslation, final TMXEntry.ExternalLinked linked,
+                               final boolean withProp) {
+        if (withProp) {
+            return new TMXEntry(this, defaultTranslation, linked, otherProperties);
+        } else {
+            return new TMXEntry(this, defaultTranslation, linked, null);
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

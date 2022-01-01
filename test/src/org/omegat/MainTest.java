@@ -58,6 +58,12 @@ import org.omegat.util.TMXReader2;
 
 public class MainTest {
 
+    /**
+     *  Flag whether TMXWriter or TMXWriter2 is used in Main functions
+     *  to alter expectations according to its difference.
+     */
+    private static final boolean USE_WRITER2 = false;
+
     private static Path tmpDir;
     private static Path confDir;
 
@@ -185,7 +191,13 @@ public class MainTest {
         compareXML(expectedFile.toFile(), targetFile.toFile());
     }
 
+    /* TMXWriter and TMXWriter2 produce different version string for creationtoolversion attribute.
+     */
     private String getVersion() {
+        if (USE_WRITER2) {
+            return OStrings.getVersion();
+        }
+        // version by old TMXWriter
         String version = OStrings.VERSION;
         if (!OStrings.UPDATE.equals("0")) {
             version = version + "_" + OStrings.UPDATE;

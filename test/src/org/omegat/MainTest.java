@@ -50,10 +50,14 @@ import org.junit.Test;
 import org.xml.sax.InputSource;
 
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXReader2;
 
 public class MainTest {
@@ -79,15 +83,14 @@ public class MainTest {
         out.println("<omegat><preference version=\"1.0\">");
         out.println("</preference></omegat>");
         out.close();
-        FileUtils.copyFile(
-                Paths.get("test/data/main/segmentation.conf").toFile(),
-                confDir.resolve("segmentation.conf").toFile());
-        FileUtils.copyFile(
-                Paths.get("test/data/main/filters.xml").toFile(),
-                confDir.resolve("filters.xml").toFile());
+        RuntimePreferences.setConfigDir(confDir.toAbsolutePath().toString());
+        File filtersFile = new File(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
+        File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
+        FileUtils.copyFile(Paths.get("test/data/main/segmentation.conf").toFile(), srxFile);
+        FileUtils.copyFile(Paths.get("test/data/main/filters.xml").toFile(), filtersFile);
         assertTrue(prefsFile.canRead());
-        assertTrue(confDir.resolve("filters.xml").toFile().canRead());
-        assertTrue(confDir.resolve("segmentation.conf").toFile().canRead());
+        assertTrue(confDir.resolve(FilterMaster.FILE_FILTERS).toFile().canRead());
+        assertTrue(confDir.resolve(SRX.CONF_SENTSEG).toFile().canRead());
     }
 
     @AfterClass

@@ -86,6 +86,7 @@ public class MainTest {
         FileUtils.copyFile(Paths.get("test/data/main/segmentation.conf").toFile(), confDir.resolve(SRX.CONF_SENTSEG).toFile());
         FileUtils.copyFile(Paths.get("test/data/main/filters.xml").toFile(), confDir.resolve(FilterMaster.FILE_FILTERS).toFile());
         assertTrue(prefsFile.canRead());
+        RuntimePreferences.setConfigDir(confDir.toAbsolutePath().toString());
     }
 
     @AfterClass
@@ -99,12 +100,12 @@ public class MainTest {
         XMLUnit.setControlEntityResolver(TMXReader2.TMX_DTD_RESOLVER);
         XMLUnit.setTestEntityResolver(TMXReader2.TMX_DTD_RESOLVER);
         XMLUnit.setIgnoreWhitespace(true);
-        RuntimePreferences.setConfigDir(confDir.toAbsolutePath().toString());
-        String runtimeConfigDir = StaticUtils.getConfigDir();
-        assertTrue(String.format("OmegaT configuration %s/%s cannot read", runtimeConfigDir, FilterMaster.FILE_FILTERS),
-                Paths.get(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS).toFile().canRead());
-        assertTrue(String.format("OmegaT configuration %s/%s cannot read", runtimeConfigDir, SRX.CONF_SENTSEG),
-                Paths.get(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG).toFile().canRead());
+        Path filters = Paths.get(StaticUtils.getConfigDir(), FilterMaster.FILE_FILTERS);
+        Path sentseg = Paths.get(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
+        Path prefs = Paths.get(StaticUtils.getConfigDir(), Preferences.FILE_PREFERENCES);
+        assertTrue(String.format("OmegaT configuration %s cannot read", filters), filters.toFile().canRead());
+        assertTrue(String.format("OmegaT configuration %s cannot read", sentseg), sentseg.toFile().canRead());
+        assertTrue(String.format("OmegaT configuration %s cannot read", prefs), prefs.toFile().canRead());
     }
 
     @After

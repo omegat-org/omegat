@@ -83,10 +83,6 @@ public final class TMXWriter {
         PrintWriter out = new PrintWriter(osw); // PW is easier to use than
                                                 // Buff.Writer
 
-        String version = OStrings.VERSION;
-        if (!OStrings.UPDATE.equals("0")) {
-            version = version + "_" + OStrings.UPDATE;
-        }
         // Write TMX header
         out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         if (levelTwo) {
@@ -101,7 +97,7 @@ public final class TMXWriter {
         }
         out.println("  <header");
         out.println("    creationtool=\"OmegaT\"");
-        out.println("    creationtoolversion=\"" + version + "\"");
+        out.println("    creationtoolversion=\"" + OStrings.getVersion() + "\"");
         out.println("    segtype=\"" + segmenting + "\"");
         out.println("    o-tmf=\"OmegaT TMX\"");
         out.println("    adminlang=\"EN-US\"");

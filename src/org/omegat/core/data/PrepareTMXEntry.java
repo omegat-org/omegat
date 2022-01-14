@@ -147,5 +147,12 @@ public class PrepareTMXEntry implements ITMXEntry {
                 .append(", otherProperties=").append(otherProperties).append("]");
         return builder.toString();
     }
+    
+    ExternalTMXEntry toExternalTMXEntry() {
+        return new ExternalTMXEntry(this);
+    }
 
+    ProjectTMXEntry toProjectTMXEntry(boolean defaultTranslation, ProjectTMXEntry.ExternalLinked linked) {
+        return new ProjectTMXEntry(this, defaultTranslation, linked);
+    }
 }

@@ -181,7 +181,7 @@ public final class ExternalTMFactory {
                             te.otherProperties.add(new TMXProp(PROP_FOREIGN_MATCH, "true"));
                         }
 
-                        entries.add(new ExternalTMXEntry(te));
+                        entries.add(te.toExternalTMXEntry());
                     }
                 }
             };
@@ -336,7 +336,7 @@ public final class ExternalTMFactory {
             }
         }
         entry.otherProperties = tmxProps;
-        return new ExternalTMXEntry(entry);
+        return entry.toExternalTMXEntry();
     }
 
     private static List<TMXProp> propsToList(String[] props) {

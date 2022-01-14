@@ -45,7 +45,7 @@ public class ExternalTMX {
 
     private final List<? extends ITMXEntry> entries;
 
-    ExternalTMX(String name, List<PrepareTMXEntry> entries) {
+    ExternalTMX(String name, List<? extends ITMXEntry> entries) {
         this.name = name;
         this.entries = entries;
     }

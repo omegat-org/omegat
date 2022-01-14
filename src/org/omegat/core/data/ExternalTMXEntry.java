@@ -6,7 +6,8 @@
  Copyright (C) 2010 Alex Buloichik
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
-               2014 Alex Buloichik
+               2014 Alex Buloichik, Aaron Madlon-Kay
+               2021 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,85 +29,75 @@
 
 package org.omegat.core.data;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.omegat.util.TMXProp;
 
 /**
- * Class for prepare TMXEntry content before save unchangeable copy anywhere. We can't use just
- * parameters in the setTranslation() method since count of parameters is too much. Structure of this class is
- * almost the save like TMXEntry.
+ * Storage for TMX entry.
  *
- * Instead, we will set all parameters into this class, then ProjectTMX will convert in into TMXEntry than
- * save internally.
+ * Variables in this class can be changed only before store to ProjectTMX. After that, all values must be
+ * unchangeable.
  *
- * In the past, entries read from tm/ folder were kept as instances of PrepareTMXEntry. 
- * This usage is deprecated in profit of immutable class ExternalTMXEntry.
- * However, the usage is still allowed and ITMXEntry is implemented to preserve compatibility with old code (plugins).
+ * Only RealProject can create and change TMXEntry objects.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
-public class PrepareTMXEntry implements ITMXEntry {
-    public String source;
-    public String translation;
-    public String changer;
-    public long changeDate;
-    public String creator;
-    public long creationDate;
-    public String note;
+public class ExternalTMXEntry extends TMXEntry {
     public List<TMXProp> otherProperties;
 
-    public PrepareTMXEntry() {
+    ExternalTMXEntry(ITMXEntry from) {
+        super(from);
+
+        this.otherProperties = from.getProperties();
     }
 
-    public PrepareTMXEntry(TMXEntry e) {
-        source = e.source;
-        translation = e.translation;
-        changer = e.changer;
-        changeDate = e.changeDate;
-        creator = e.creator;
-        creationDate = e.creationDate;
-        note = e.note;
+    @Override
+    public boolean equals(Object obj) {
+        if (! super.equals(obj)) {
+            return false;
+        }
+        // Now compare properties
+        try {
+            ITMXEntry other = (ITMXEntry) obj;
+            if (other.getProperties() == null) {
+                return (this.otherProperties == null) || (this.otherProperties.size() == 0);
+            } else if (this.otherProperties == null) {
+                return (other.getProperties() == null) || (other.getProperties().size() == 0);
+            } else if (other.getProperties().size() != this.otherProperties.size()) {
+                return false;
+            } else {
+                // same properties in same order
+                for (int i = 0; i < otherProperties.size(); i++) {
+                    if (! otherProperties.get(i).equals(other.getProperties().get(i))) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        } catch (ClassCastException cc) {
+            return false;
+        }
     }
 
-    public String getSourceText() {
-        return source;
+    @Override
+    public int hashCode() {
+        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, changer, creator,
+                source);
     }
-
-    public String getTranslationText() {
-        return translation;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public long getCreationDate() {
-        return creationDate;
-    }
-
-    public String getChanger() {
-        return changer;
-    }
-
-    public long getChangeDate() {
-        return changeDate;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
+    
     public boolean hasProperties() {
         return (otherProperties != null) && (otherProperties.size() > 0);
     }
-
+    
     public List<TMXProp> getProperties() {
-        return otherProperties;
+        return Collections.unmodifiableList(otherProperties);
     }
-
+    
     public String getPropValue(String propType) {
         if (otherProperties == null) {
             return null;
@@ -119,7 +110,7 @@ public class PrepareTMXEntry implements ITMXEntry {
         }
         return null;
     }
-
+    
     public boolean hasPropValue(String propType, String propValue) {
         if (otherProperties == null) {
             return false;
@@ -137,15 +128,4 @@ public class PrepareTMXEntry implements ITMXEntry {
         }
         return false;
     }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("PrepareTMXEntry [source=").append(source).append(", translation=").append(translation)
-                .append(", creator=").append(creator).append(", changer=").append(changer).append(", creationDate=")
-                .append(creationDate).append(", changeDate=").append(changeDate).append(", note=").append(note)
-                .append(", otherProperties=").append(otherProperties).append("]");
-        return builder.toString();
-    }
-
 }

@@ -221,7 +221,7 @@ public final class TestTeamIntegrationChild {
     }
 
     static void checkTranslation(int index) {
-        TMXEntry en = Core.getProject().getTranslationInfo(ste[index]);
+        ProjectTMXEntry en = Core.getProject().getTranslationInfo(ste[index]);
         String sv = en == null || !en.isTranslated() ? "" : en.translation;
         if (v[index] == 0 && sv.isEmpty()) {
             return;
@@ -234,7 +234,7 @@ public final class TestTeamIntegrationChild {
     }
 
     static void checkTranslationFromFile(ProjectTMX tmx, int index) throws Exception {
-        TMXEntry en = tmx.getDefaultTranslation(ste[index].getSrcText());
+        ProjectTMXEntry en = tmx.getDefaultTranslation(ste[index].getSrcText());
         String sv = en == null || !en.isTranslated() ? "" : en.translation;
         if (v[index] == 0 && sv.isEmpty()) {
             return;
@@ -555,11 +555,11 @@ public final class TestTeamIntegrationChild {
                     .setResolutionStrategy(new ResolutionStrategy() {
                         @Override
                         public ITuv resolveConflict(Key key, ITuv baseTuv, ITuv projectTuv, ITuv headTuv) {
-                            TMXEntry enBase = baseTuv != null ? (TMXEntry) baseTuv
+                            ProjectTMXEntry enBase = baseTuv != null ? (ProjectTMXEntry) baseTuv
                                     .getUnderlyingRepresentation() : null;
-                            TMXEntry enProject = projectTuv != null ? (TMXEntry) projectTuv
+                            ProjectTMXEntry enProject = projectTuv != null ? (ProjectTMXEntry) projectTuv
                                     .getUnderlyingRepresentation() : null;
-                            TMXEntry enHead = headTuv != null ? (TMXEntry) headTuv
+                            ProjectTMXEntry enHead = headTuv != null ? (ProjectTMXEntry) headTuv
                                     .getUnderlyingRepresentation() : null;
                             String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
                                     + tr(enHead) + " project=" + tr(enProject);
@@ -622,11 +622,11 @@ public final class TestTeamIntegrationChild {
             this.baseTMX = baseTMX;
             this.headTMX = headTMX;
             String s = "info";
-            for (TMXEntry e : baseTMX.getDefaults()) {
+            for (ProjectTMXEntry e : baseTMX.getDefaults()) {
                 use(e);
             }
-            for (TMXEntry e : headTMX.getDefaults()) {
-                TMXEntry eb = baseTMX.getDefaultTranslation(e.source);
+            for (ProjectTMXEntry e : headTMX.getDefaults()) {
+                ProjectTMXEntry eb = baseTMX.getDefaultTranslation(e.source);
                 if (CONCURRENT_NAME.equals(e.source)) { // concurrent
                     if (v(eb) > v(e)) {
                         throw new RuntimeException("Rebase HEAD: wrong concurrent" + s);
@@ -643,8 +643,8 @@ public final class TestTeamIntegrationChild {
                     use(e);
                 }
             }
-            for (TMXEntry e : projectTMX.getDefaults()) {
-                TMXEntry em = mergedTMX.getDefaultTranslation(e.source);
+            for (ProjectTMXEntry e : projectTMX.getDefaults()) {
+                ProjectTMXEntry em = mergedTMX.getDefaultTranslation(e.source);
                 if (CONCURRENT_NAME.equals(e.source)) { // concurrent
                     if (v(e) > v(em)) {
                         use(e);
@@ -662,13 +662,13 @@ public final class TestTeamIntegrationChild {
             projectTMX.replaceContent(mergedTMX);
         }
 
-        void use(TMXEntry en) {
+        void use(ProjectTMXEntry en) {
             EntryKey k = new EntryKey("file", en.source, null, null, null, null);
             SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.source, Collections.emptyList());
             mergedTMX.setTranslation(ste, en, true);
         }
 
-        long v(TMXEntry e) {
+        long v(ProjectTMXEntry e) {
             if (e == null) {
                 return 0;
             } else {
@@ -676,7 +676,7 @@ public final class TestTeamIntegrationChild {
             }
         }
 
-        String src(TMXEntry e) {
+        String src(ProjectTMXEntry e) {
             if (e == null) {
                 return "null";
             } else {
@@ -684,7 +684,7 @@ public final class TestTeamIntegrationChild {
             }
         }
 
-        String tr(TMXEntry e) {
+        String tr(ProjectTMXEntry e) {
             if (e == null) {
                 return "null";
             } else {
@@ -692,8 +692,8 @@ public final class TestTeamIntegrationChild {
             }
         }
 
-        String trans(ProjectTMX tmx, TMXEntry e) {
-            TMXEntry en = tmx.getDefaultTranslation(e.source);
+        String trans(ProjectTMX tmx, ProjectTMXEntry e) {
+            ProjectTMXEntry en = tmx.getDefaultTranslation(e.source);
             if (en == null) {
                 return "null";
             } else {

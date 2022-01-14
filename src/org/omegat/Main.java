@@ -61,6 +61,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.ProjectTMXEntry;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
@@ -496,9 +497,9 @@ public final class Main {
 
         System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
 
-        Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
+        Map<String, ProjectTMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
         Map<String, PrepareTMXEntry> result = new TreeMap<>();
-        for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
+        for (Map.Entry<String, ProjectTMXEntry> en : data.entrySet()) {
             result.put(en.getKey(), new PrepareTMXEntry(en.getValue()));
         }
 

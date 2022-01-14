@@ -283,7 +283,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         config.put(HTMLOptions.OPTION_TRANSLATE_SRC, "false");
         config.put(HTMLOptions.OPTION_SKIP_META, "true");
 
-        Map<String, TMXEntry> fix = new TreeMap<String, TMXEntry>();
+        Map<String, ProjectTMXEntry> fix = new TreeMap<String, ProjectTMXEntry>();
         fix.put("Picture:", createTMXEntry("Picture:", "Image:", true));
         translateUsingTmx(new HTMLFilter2(), config, "ImportTest2A.htm", "UTF-8", "ImportTest2A.tmx",
                 "windows-1252", props, fix);
@@ -312,7 +312,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         config.put(HTMLOptions.OPTION_TRANSLATE_SRC, "false");
         config.put(HTMLOptions.OPTION_SKIP_META, "true");
 
-        Map<String, TMXEntry> fix = new TreeMap<String, TMXEntry>();
+        Map<String, ProjectTMXEntry> fix = new TreeMap<String, ProjectTMXEntry>();
         fix.put("Picture:", createTMXEntry("Picture:", "Image:", true));
         translateUsingTmx(new HTMLFilter2(), config, "ImportTest2A.htm", "UTF-8", "ImportTest2A-0index.tmx",
                 "windows-1252", props, fix);
@@ -388,10 +388,10 @@ public class TmxComplianceTests extends TmxComplianceBase {
         compareTMX(tmxFile, outFile, 12);
     }
 
-    TMXEntry createTMXEntry(String source, String translation, boolean def) {
+    ProjectTMXEntry createTMXEntry(String source, String translation, boolean def) {
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;
-        return new TMXEntry(tr, def, null);
+        return new ProjectTMXEntry(tr, def, null);
     }
 }

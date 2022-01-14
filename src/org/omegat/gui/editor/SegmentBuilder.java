@@ -44,7 +44,7 @@ import javax.swing.text.Position;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.ProjectTMXEntry;
 import org.omegat.gui.editor.MarkerController.MarkInfo;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -166,19 +166,19 @@ public class SegmentBuilder {
      *            document
      * @return OmElementSegment
      */
-    public void createSegmentElement(final boolean isActive, TMXEntry trans) {
+    public void createSegmentElement(final boolean isActive, ProjectTMXEntry trans) {
         createSegmentElement(isActive, doc.getLength(), trans, trans.defaultTranslation);
     }
 
-    public void createSegmentElement(final boolean isActive, TMXEntry trans, final boolean defaultTranslation) {
+    public void createSegmentElement(final boolean isActive, ProjectTMXEntry trans, final boolean defaultTranslation) {
         createSegmentElement(isActive, doc.getLength(), trans, defaultTranslation);
     }
 
-    public void prependSegmentElement(final boolean isActive, TMXEntry trans) {
+    public void prependSegmentElement(final boolean isActive, ProjectTMXEntry trans) {
         createSegmentElement(isActive, 0, trans, trans.defaultTranslation);
     }
 
-    public void createSegmentElement(final boolean isActive, int initialOffset, TMXEntry trans, final boolean defaultTranslation) {
+    public void createSegmentElement(final boolean isActive, int initialOffset, ProjectTMXEntry trans, final boolean defaultTranslation) {
         UIThreadsUtil.mustBeSwingThread();
 
         displayVersion = globalVersions.incrementAndGet();
@@ -258,7 +258,7 @@ public class SegmentBuilder {
     /**
      * Create active segment for given entry
      */
-    private void createActiveSegmentElement(TMXEntry trans) throws BadLocationException {
+    private void createActiveSegmentElement(ProjectTMXEntry trans) throws BadLocationException {
         try {
             if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())
                     || EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(settings
@@ -271,7 +271,7 @@ public class SegmentBuilder {
 
             Map<Language, ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
             for (Map.Entry<Language, ProjectTMX> entry : otherLanguageTMs.entrySet()) {
-                TMXEntry altTrans = entry.getValue().getDefaultTranslation(ste.getSrcText());
+                ProjectTMXEntry altTrans = entry.getValue().getDefaultTranslation(ste.getSrcText());
                 if (altTrans != null && altTrans.isTranslated()) {
                     Language language = entry.getKey();
                     addOtherLanguagePart(altTrans.translation, language);
@@ -333,7 +333,7 @@ public class SegmentBuilder {
      * @param trans TMX entry with translation
      * @throws BadLocationException
      */
-    private void createInactiveSegmentElement(TMXEntry trans) throws BadLocationException {
+    private void createInactiveSegmentElement(ProjectTMXEntry trans) throws BadLocationException {
         if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())) {
             addModificationInfoPart(trans);
         }
@@ -518,7 +518,7 @@ public class SegmentBuilder {
      *            The translation entry (can be null)
      * @throws BadLocationException
      */
-    private void addModificationInfoPart(TMXEntry trans) throws BadLocationException {
+    private void addModificationInfoPart(ProjectTMXEntry trans) throws BadLocationException {
         if (!trans.isTranslated()) {
             return;
         }

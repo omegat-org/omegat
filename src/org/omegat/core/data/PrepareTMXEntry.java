@@ -33,7 +33,7 @@ import java.util.List;
 import org.omegat.util.TMXProp;
 
 /**
- * Class for prepare TMXEntry content before save unchangeable copy in the ProjectTMX. We can't use just
+ * Class for prepare TMXEntry content before save unchangeable copy anywhere. We can't use just
  * parameters in the setTranslation() method since count of parameters is too much. Structure of this class is
  * almost the save like TMXEntry.
  *

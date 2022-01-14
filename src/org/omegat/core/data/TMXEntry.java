@@ -34,23 +34,16 @@ import java.util.Objects;
 import org.omegat.util.TMXProp;
 
 /**
- * Storage for TMX entry.
+ * Immutable storage for TMX entry.
  *
- * Variables in this class can be changed only before store to ProjectTMX. After that, all values must be
+ * Variables in this class can be changed only before they are stored. After that, all values must be
  * unchangeable.
- *
- * Only RealProject can create and change TMXEntry objects.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
-public class TMXEntry implements ITMXEntry {
-    public enum ExternalLinked {
-        // declares how this entry linked to external TMX in the tm/auto/
-        xICE, x100PC, xAUTO, xENFORCED
-    };
-
+public abstract class TMXEntry implements ITMXEntry {
     public final String source;
     public final String translation;
     public final String changer;
@@ -58,10 +51,8 @@ public class TMXEntry implements ITMXEntry {
     public final String creator;
     public final long creationDate;
     public final String note;
-    public final boolean defaultTranslation;
-    public final ExternalLinked linked;
 
-    TMXEntry(ITMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
+    TMXEntry(ITMXEntry from) {
         this.source = from.getSourceText();
         this.translation = from.getTranslationText();
         this.changer = from.getChanger();
@@ -69,9 +60,6 @@ public class TMXEntry implements ITMXEntry {
         this.creator = from.getCreator();
         this.creationDate = from.getCreationDate();
         this.note = from.getNote();
-
-        this.defaultTranslation = defaultTranslation;
-        this.linked = linked;
     }
 
     public String getSourceText() {
@@ -133,19 +121,10 @@ public class TMXEntry implements ITMXEntry {
         if (!Objects.equals(creator, other.creator)) {
             return false;
         }
-        if (defaultTranslation != other.defaultTranslation) {
-            return false;
-        }
         if (!Objects.equals(source, other.source)) {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, linked, changer, creator,
-                defaultTranslation, source);
     }
 
     /**
@@ -162,25 +141,6 @@ public class TMXEntry implements ITMXEntry {
         if (!Objects.equals(note, other.note)) {
             return false;
         }
-        if (!Objects.equals(linked, other.linked)) {
-            return false;
-        }
         return true;
-    }
-
-    public boolean hasProperties() {
-        return false;
-    }
-
-    public String getPropValue(String propType) {
-        return null; // for the moment internal entries do not store properties
-    }
-
-    public boolean hasPropValue(String propType, String propValue) {
-        return false; // for the moment internal entries do not store properties
-    }
-
-    public List<TMXProp> getProperties() {
-        return null; // for the moment internal entries do not store properties
     }
 }

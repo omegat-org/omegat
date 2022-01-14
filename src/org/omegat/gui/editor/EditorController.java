@@ -95,6 +95,7 @@ import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
+import org.omegat.core.data.ProjectTMXEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
@@ -855,7 +856,7 @@ public class EditorController implements IEditor {
         }
 
         previousTranslations = Core.getProject().getAllTranslations(ste);
-        TMXEntry currentTranslation = previousTranslations.getCurrentTranslation();
+        ProjectTMXEntry currentTranslation = previousTranslations.getCurrentTranslation();
         // forget about old marks
         builder.createSegmentElement(true, currentTranslation);
 
@@ -1141,7 +1142,7 @@ public class EditorController implements IEditor {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
         SourceTextEntry entry = sb.ste;
 
-        TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
+        ProjectTMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
 
         PrepareTMXEntry newen = new PrepareTMXEntry();
         newen.source = sb.ste.getSrcText();
@@ -1575,7 +1576,7 @@ public class EditorController implements IEditor {
                 }
             } else {
                 // default translation - multiple shouldn't exist for this entry
-                TMXEntry trans = Core.getProject().getTranslationInfo(entries.get(i));
+                ProjectTMXEntry trans = Core.getProject().getTranslationInfo(entries.get(i));
                 if (!trans.isTranslated() || !trans.defaultTranslation) {
                     // we need exist alternative translation
                     continue;

@@ -38,7 +38,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.DataUtils;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.ProjectTMXEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.Preferences;
@@ -102,7 +102,7 @@ public class TagValidationTool implements ITagValidation {
         return Core.getProject().getProjectFiles().stream()
                 .filter(StreamUtil.patternFilter(sourcePattern, fi -> fi.filePath))
                 .flatMap(fi -> fi.entries.stream().map(ste -> {
-                    TMXEntry te = Core.getProject().getTranslationInfo(ste);
+                    ProjectTMXEntry te = Core.getProject().getTranslationInfo(ste);
                     if (sourcePattern.equals(ALL_FILES_PATTERN) && DataUtils.isDuplicate(ste, te)) {
                         return null;
                     } else {
@@ -128,7 +128,7 @@ public class TagValidationTool implements ITagValidation {
      * @return An {@link ErrorReport} summarizing the results (will be empty if
      *         no issues found)
      */
-    private ErrorReport checkEntry(FileInfo fi, SourceTextEntry ste, TMXEntry te) {
+    private ErrorReport checkEntry(FileInfo fi, SourceTextEntry ste, ProjectTMXEntry te) {
 
         ErrorReport report = new ErrorReport(ste, te);
 

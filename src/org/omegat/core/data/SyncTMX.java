@@ -66,7 +66,7 @@ public final class SyncTMX implements ITmx {
     private void generateMaps() {
         tuvMap = new HashMap<Key, ITuv>();
         tuMap = new HashMap<Key, ITu>();
-        for (Entry<String, TMXEntry> e : tmx.defaults.entrySet()) {
+        for (Entry<String, ProjectTMXEntry> e : tmx.defaults.entrySet()) {
             ITu tu = new SyncTu(e.getValue(), targetLanguage);
             Key key = makeKey(e.getKey(), e.getValue());
             assert (!tuMap.containsKey(key));
@@ -74,7 +74,7 @@ public final class SyncTMX implements ITmx {
             tuMap.put(key, tu);
             tuvMap.put(key, tu.getTargetTuv());
         }
-        for (Entry<EntryKey, TMXEntry> e : tmx.alternatives.entrySet()) {
+        for (Entry<EntryKey, ProjectTMXEntry> e : tmx.alternatives.entrySet()) {
             ITu tu = new SyncTu(e.getValue(), targetLanguage);
             Key key = makeKey(e.getKey(), e.getValue());
             assert (!tuMap.containsKey(key));
@@ -84,7 +84,7 @@ public final class SyncTMX implements ITmx {
         }
     }
 
-    private Key makeKey(Object entryKey, TMXEntry tmxEntry) {
+    private Key makeKey(Object entryKey, ProjectTMXEntry tmxEntry) {
         Key key = new Key(tmxEntry.source, entryKey);
         if (entryKey instanceof EntryKey) {
             EntryKey ek = (EntryKey) entryKey;
@@ -125,10 +125,10 @@ public final class SyncTMX implements ITmx {
         }
         for (Entry<Key, ITuv> e : resolution.toReplace.entrySet()) {
             remove(e.getKey());
-            add(e.getKey(), (TMXEntry) e.getValue().getUnderlyingRepresentation());
+            add(e.getKey(), (ProjectTMXEntry) e.getValue().getUnderlyingRepresentation());
         }
         for (Entry<Key, ITu> e : resolution.toAdd.entrySet()) {
-            add(e.getKey(), (TMXEntry) e.getValue().getUnderlyingRepresentation());
+            add(e.getKey(), (ProjectTMXEntry) e.getValue().getUnderlyingRepresentation());
         }
         ProjectTMX modifiedData = tmx;
         this.tmx = originalData;
@@ -137,7 +137,7 @@ public final class SyncTMX implements ITmx {
         return new SyncTMX(modifiedData, this.name, this.sourceLanguage, this.targetLanguage);
     }
 
-    private void add(Key key, TMXEntry tuv) {
+    private void add(Key key, ProjectTMXEntry tuv) {
         if (key.foreignKey instanceof String) {
             tmx.defaults.put((String) key.foreignKey, tuv);
         } else if (key.foreignKey instanceof EntryKey) {
@@ -161,10 +161,10 @@ public final class SyncTMX implements ITmx {
 
     private static ProjectTMX clone(ProjectTMX tmx) {
         ProjectTMX newTmx = new ProjectTMX();
-        for (Entry<EntryKey, TMXEntry> e : tmx.alternatives.entrySet()) {
+        for (Entry<EntryKey, ProjectTMXEntry> e : tmx.alternatives.entrySet()) {
             newTmx.alternatives.put(e.getKey(), e.getValue());
         }
-        for (Entry<String, TMXEntry> e : tmx.defaults.entrySet()) {
+        for (Entry<String, ProjectTMXEntry> e : tmx.defaults.entrySet()) {
             newTmx.defaults.put(e.getKey(), e.getValue());
         }
         return newTmx;
@@ -247,10 +247,10 @@ public final class SyncTMX implements ITmx {
 
     private static class SyncTu implements ITu {
 
-        private final TMXEntry tmxEntry;
+        private final ProjectTMXEntry tmxEntry;
         private final String targetLanguage;
 
-        SyncTu(TMXEntry tmxEntry, String targetLanguage) {
+        SyncTu(ProjectTMXEntry tmxEntry, String targetLanguage) {
             this.tmxEntry = tmxEntry;
             this.targetLanguage = targetLanguage;
         }
@@ -269,11 +269,11 @@ public final class SyncTMX implements ITmx {
 
     private static class SyncTuv implements ITuv {
 
-        private final TMXEntry tmxEntry;
+        private final ProjectTMXEntry tmxEntry;
         private final String language;
         private Map<String, String> props;
 
-        SyncTuv(TMXEntry tmxEntry, String language) {
+        SyncTuv(ProjectTMXEntry tmxEntry, String language) {
             this.tmxEntry = tmxEntry;
             this.language = language;
         }

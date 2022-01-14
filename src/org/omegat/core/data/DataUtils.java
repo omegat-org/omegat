@@ -30,7 +30,7 @@ public final class DataUtils {
     private DataUtils() {
     }
 
-    public static boolean isDuplicate(SourceTextEntry ste, TMXEntry te) {
+    public static boolean isDuplicate(SourceTextEntry ste, ProjectTMXEntry te) {
         return ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT && te.defaultTranslation;
     }
 }

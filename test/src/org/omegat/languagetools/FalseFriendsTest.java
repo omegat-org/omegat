@@ -42,8 +42,8 @@ import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
-import org.omegat.core.data.TMXEntry.ExternalLinked;
+import org.omegat.core.data.ProjectTMXEntry;
+import org.omegat.core.data.ProjectTMXEntry.ExternalLinked;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.languagetools.LanguageToolWrapper.LanguageToolMarker;
@@ -68,7 +68,7 @@ public class FalseFriendsTest extends TestCore {
 
         Core.setProject(new IProject() {
             public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans,
-                    boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked) {
+                    boolean defaultTranslation, ProjectTMXEntry.ExternalLinked externalLinked) {
             }
 
             public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans,
@@ -76,7 +76,7 @@ public class FalseFriendsTest extends TestCore {
                     AllTranslations previousTranslations) throws OptimisticLockingFail {
             }
 
-            public void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note) {
+            public void setNote(SourceTextEntry entry, ProjectTMXEntry oldTrans, String note) {
             }
 
             public void saveProjectProperties() throws Exception {
@@ -107,7 +107,7 @@ public class FalseFriendsTest extends TestCore {
                 return false;
             }
 
-            public TMXEntry getTranslationInfo(SourceTextEntry ste) {
+            public ProjectTMXEntry getTranslationInfo(SourceTextEntry ste) {
                 return null;
             }
 

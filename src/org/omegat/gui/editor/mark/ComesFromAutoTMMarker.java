@@ -33,7 +33,7 @@ import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.ProjectTMXEntry;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -57,7 +57,7 @@ public class ComesFromAutoTMMarker implements IMarker {
         if (!Core.getEditor().getSettings().isMarkAutoPopulated()) {
             return null;
         }
-        TMXEntry e = Core.getProject().getTranslationInfo(ste);
+        ProjectTMXEntry e = Core.getProject().getTranslationInfo(ste);
         if (e.linked == null) {
             return null;
         }

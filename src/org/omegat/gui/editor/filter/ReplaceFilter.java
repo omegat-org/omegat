@@ -38,7 +38,7 @@ import java.util.Set;
 import org.omegat.core.Core;
 import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.ProjectTMXEntry;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.Searcher;
 import org.omegat.gui.editor.EditorController;
@@ -102,7 +102,7 @@ public class ReplaceFilter implements IEditorFilter {
      */
     public void replaceAll() {
         for (SourceTextEntry ste : entries.values()) {
-            TMXEntry en = Core.getProject().getTranslationInfo(ste);
+            ProjectTMXEntry en = Core.getProject().getTranslationInfo(ste);
             String trans = getEntryText(ste, en);
             if (trans == null) {
                 continue;
@@ -172,7 +172,7 @@ public class ReplaceFilter implements IEditorFilter {
             if (ste == null) {
                 continue; // entry not filtered
             }
-            TMXEntry en = Core.getProject().getTranslationInfo(ste);
+            ProjectTMXEntry en = Core.getProject().getTranslationInfo(ste);
             String trans = getEntryText(ste, en);
             if (trans == null) {
                 continue;
@@ -193,7 +193,7 @@ public class ReplaceFilter implements IEditorFilter {
             if (ste == null) {
                 continue; // entry not filtered
             }
-            TMXEntry en = Core.getProject().getTranslationInfo(ste);
+            ProjectTMXEntry en = Core.getProject().getTranslationInfo(ste);
             String trans = getEntryText(ste, en);
             if (trans == null) {
                 continue;
@@ -236,7 +236,7 @@ public class ReplaceFilter implements IEditorFilter {
      * Returns text of entry where replacement should be found. It can be translation or source text depends
      * on settings, or null if entry should be skipped.
      */
-    private String getEntryText(SourceTextEntry ste, TMXEntry en) {
+    private String getEntryText(SourceTextEntry ste, ProjectTMXEntry en) {
         if (en.isTranslated()) {
             return en.translation;
         } else if (searcher.getExpression().replaceUntranslated) {

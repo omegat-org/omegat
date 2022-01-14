@@ -72,22 +72,22 @@ public class ProjectTMX {
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    Map<String, TMXEntry> defaults;
+    Map<String, ProjectTMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    Map<EntryKey, TMXEntry> alternatives;
+    Map<EntryKey, ProjectTMXEntry> alternatives;
 
     final CheckOrphanedCallback checkOrphanedCallback;
 
     public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
             File file, CheckOrphanedCallback callback) throws Exception {
         this.checkOrphanedCallback = callback;
-        alternatives = new HashMap<EntryKey, TMXEntry>();
-        defaults = new HashMap<String, TMXEntry>();
+        alternatives = new HashMap<EntryKey, ProjectTMXEntry>();
+        defaults = new HashMap<String, ProjectTMXEntry>();
 
         if (file == null || !file.exists()) {
             // file not exist - new project
@@ -109,8 +109,8 @@ public class ProjectTMX {
      * Constructor for TMX delta.
      */
     public ProjectTMX() {
-        alternatives = new HashMap<EntryKey, TMXEntry>();
-        defaults = new HashMap<String, TMXEntry>();
+        alternatives = new HashMap<EntryKey, ProjectTMXEntry>();
+        defaults = new HashMap<String, ProjectTMXEntry>();
         checkOrphanedCallback = null;
     }
 
@@ -163,8 +163,8 @@ public class ProjectTMX {
         TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);
         try {
-            Map<String, TMXEntry> tempDefaults = new TreeMap<>();
-            Map<EntryKey, TMXEntry> tempAlternatives = new TreeMap<>();
+            Map<String, ProjectTMXEntry> tempDefaults = new TreeMap<>();
+            Map<EntryKey, ProjectTMXEntry> tempAlternatives = new TreeMap<>();
 
             synchronized (this) {
                 if (useOrphaned) {
@@ -173,12 +173,12 @@ public class ProjectTMX {
                     tempAlternatives.putAll(alternatives);
                 } else {
                     // slow call - copy non-orphaned only
-                    for (Map.Entry<String, TMXEntry> en : defaults.entrySet()) {
+                    for (Map.Entry<String, ProjectTMXEntry> en : defaults.entrySet()) {
                         if (checkOrphanedCallback.existSourceInProject(en.getKey())) {
                             tempDefaults.put(en.getKey(), en.getValue());
                         }
                     }
-                    for (Map.Entry<EntryKey, TMXEntry> en : alternatives.entrySet()) {
+                    for (Map.Entry<EntryKey, ProjectTMXEntry> en : alternatives.entrySet()) {
                         if (checkOrphanedCallback.existEntryInProject(en.getKey())) {
                             tempAlternatives.put(en.getKey(), en.getValue());
                         }
@@ -188,10 +188,10 @@ public class ProjectTMX {
 
             List<String> p = new ArrayList<>();
             wr.writeComment(" Default translations ");
-            for (Map.Entry<String, TMXEntry> en : new TreeMap<>(tempDefaults).entrySet()) {
+            for (Map.Entry<String, ProjectTMXEntry> en : new TreeMap<>(tempDefaults).entrySet()) {
                 p.clear();
                 if (Preferences.isPreferenceDefault(Preferences.SAVE_AUTO_STATUS, false)) {
-                    if (en.getValue().linked == TMXEntry.ExternalLinked.xAUTO) {
+                    if (en.getValue().linked == ProjectTMXEntry.ExternalLinked.xAUTO) {
                         p.add(PROP_XAUTO);
                         p.add("auto");
                     }
@@ -200,7 +200,7 @@ public class ProjectTMX {
             }
 
             wr.writeComment(" Alternative translations ");
-            for (Map.Entry<EntryKey, TMXEntry> en : new TreeMap<>(tempAlternatives).entrySet()) {
+            for (Map.Entry<EntryKey, ProjectTMXEntry> en : new TreeMap<>(tempAlternatives).entrySet()) {
                 EntryKey k = en.getKey();
                 p.clear();
                 p.add(PROP_FILE);
@@ -214,10 +214,10 @@ public class ProjectTMX {
                 p.add(PROP_PATH);
                 p.add(k.path);
                 if (Preferences.isPreferenceDefault(Preferences.SAVE_AUTO_STATUS, false)) {
-                    if (en.getValue().linked == TMXEntry.ExternalLinked.xICE) {
+                    if (en.getValue().linked == ProjectTMXEntry.ExternalLinked.xICE) {
                         p.add(PROP_XICE);
                         p.add(k.id);
-                    } else if (en.getValue().linked == TMXEntry.ExternalLinked.x100PC) {
+                    } else if (en.getValue().linked == ProjectTMXEntry.ExternalLinked.x100PC) {
                         p.add(PROP_X100PC);
                         p.add(k.id);
                     }
@@ -232,7 +232,7 @@ public class ProjectTMX {
     /**
      * Get default translation or null if not exist.
      */
-    public TMXEntry getDefaultTranslation(String source) {
+    public ProjectTMXEntry getDefaultTranslation(String source) {
         synchronized (this) {
             return defaults.get(source);
         }
@@ -241,7 +241,7 @@ public class ProjectTMX {
     /**
      * Get multiple translation or null if not exist.
      */
-    public TMXEntry getMultipleTranslation(EntryKey ek) {
+    public ProjectTMXEntry getMultipleTranslation(EntryKey ek) {
         synchronized (this) {
             return alternatives.get(ek);
         }
@@ -250,7 +250,7 @@ public class ProjectTMX {
     /**
      * Set new translation.
      */
-    public void setTranslation(SourceTextEntry ste, TMXEntry te, boolean isDefault) {
+    public void setTranslation(SourceTextEntry ste, ProjectTMXEntry te, boolean isDefault) {
         synchronized (this) {
             if (te == null) {
                 if (isDefault) {
@@ -338,7 +338,7 @@ public class ProjectTMX {
                             id, te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
                             te.getPropValue(PROP_PATH));
 
-                    TMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(te);
+                    ProjectTMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(te);
 
                     boolean defaultTranslation = key.file == null;
                     if (te.otherProperties != null && te.otherProperties.isEmpty()) {
@@ -347,10 +347,10 @@ public class ProjectTMX {
 
                     if (defaultTranslation) {
                         // default translation
-                        defaults.put(segmentSource, new TMXEntry(te, true, externalLinkedMode));
+                        defaults.put(segmentSource, new ProjectTMXEntry(te, true, externalLinkedMode));
                     } else {
                         // multiple translation
-                        alternatives.put(key, new TMXEntry(te, false, externalLinkedMode));
+                        alternatives.put(key, new ProjectTMXEntry(te, false, externalLinkedMode));
                     }
                 }
             }
@@ -358,20 +358,20 @@ public class ProjectTMX {
         }
     };
 
-    private TMXEntry.ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
+    private ProjectTMXEntry.ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
         String id = te.getPropValue(PROP_ID);
         if (id == null) {
             id = te.getPropValue(ATTR_TUID);
         }
-        TMXEntry.ExternalLinked externalLinked = null;
+        ProjectTMXEntry.ExternalLinked externalLinked = null;
         if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
-            externalLinked = TMXEntry.ExternalLinked.xICE;
+            externalLinked = ProjectTMXEntry.ExternalLinked.xICE;
         }
         if (externalLinked == null && te.hasPropValue(PROP_X100PC, id)) {
-            externalLinked = TMXEntry.ExternalLinked.x100PC;
+            externalLinked = ProjectTMXEntry.ExternalLinked.x100PC;
         }
         if (externalLinked == null && te.hasPropValue(PROP_XAUTO, null)) {
-            externalLinked = TMXEntry.ExternalLinked.xAUTO;
+            externalLinked = ProjectTMXEntry.ExternalLinked.xAUTO;
         }
         return externalLinked;
     }
@@ -379,14 +379,14 @@ public class ProjectTMX {
     /**
      * Returns the collection of TMX entries that have a default translation
      */
-    public Collection<TMXEntry> getDefaults() {
+    public Collection<ProjectTMXEntry> getDefaults() {
         return defaults.values();
     }
     /**
      * Returns the collection of TMX entries that have an alternative translation
      * @return
      */
-    public Collection<TMXEntry> getAlternatives() {
+    public Collection<ProjectTMXEntry> getAlternatives() {
         return alternatives.values();
     }
 

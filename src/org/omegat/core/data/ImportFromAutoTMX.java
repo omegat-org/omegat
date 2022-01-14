@@ -71,7 +71,7 @@ public class ImportFromAutoTMX {
                 continue; // there is no entries for this source
             }
             for (SourceTextEntry ste : list) { // for each TMX entry - get all sources in project
-                TMXEntry existTranslation = project.getTranslationInfo(ste);
+                ProjectTMXEntry existTranslation = project.getTranslationInfo(ste);
 
                 String id = ste.getKey().id;
                 boolean hasICE = id != null && e.hasPropValue(ProjectTMX.PROP_XICE, id);
@@ -92,34 +92,34 @@ public class ImportFromAutoTMX {
                         continue;
                     }
                     if (isEnforcedTMX && (!existTranslation.isTranslated()
-                            || existTranslation.linked != TMXEntry.ExternalLinked.xENFORCED)) {
+                            || existTranslation.linked != ProjectTMXEntry.ExternalLinked.xENFORCED)) {
                         // If there's no translation or if the existing translation doesn't
                         // come from an enforced TM.
-                        setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xENFORCED);
+                        setTranslation(ste, e, isDefaultTranslation, ProjectTMXEntry.ExternalLinked.xENFORCED);
                     } else if (!existTranslation.isTranslated()) {
                         // default translation not exist - use from auto tmx
-                        setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
+                        setTranslation(ste, e, isDefaultTranslation, ProjectTMXEntry.ExternalLinked.xAUTO);
                     }
                 } else { // TMXEntry with x-ids
                     if (!existTranslation.isTranslated() || existTranslation.defaultTranslation) {
                         // need to update if id in xICE or x100PC
                         if (hasICE) {
-                            setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
+                            setTranslation(ste, e, false, ProjectTMXEntry.ExternalLinked.xICE);
                         } else if (has100PC) {
-                            setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
+                            setTranslation(ste, e, false, ProjectTMXEntry.ExternalLinked.x100PC);
                         }
-                    } else if (existTranslation.linked == TMXEntry.ExternalLinked.xICE
-                            || existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
+                    } else if (existTranslation.linked == ProjectTMXEntry.ExternalLinked.xICE
+                            || existTranslation.linked == ProjectTMXEntry.ExternalLinked.x100PC) {
                         // already contains x-ice
                         if (hasICE
                                 && !Objects.equals(existTranslation.getTranslationText(), e.getTranslationText())) {
-                            setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
+                            setTranslation(ste, e, false, ProjectTMXEntry.ExternalLinked.xICE);
                         }
-                    } else if (existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
+                    } else if (existTranslation.linked == ProjectTMXEntry.ExternalLinked.x100PC) {
                         // already contains x-100pc
                         if (has100PC
                                 && !Objects.equals(existTranslation.getTranslationText(), e.getTranslationText())) {
-                            setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
+                            setTranslation(ste, e, false, ProjectTMXEntry.ExternalLinked.x100PC);
                         }
                     }
                 }
@@ -172,14 +172,14 @@ public class ImportFromAutoTMX {
     }
 
     private void setTranslation(SourceTextEntry entry, ITMXEntry trans, boolean defaultTranslation,
-            TMXEntry.ExternalLinked externalLinked) {
-        TMXEntry newTrEntry;
+            ProjectTMXEntry.ExternalLinked externalLinked) {
+        ProjectTMXEntry newTrEntry;
 
         if ((!trans.isTranslated()) && (!trans.hasNote())) {
             // no translation, no note
             newTrEntry = null;
         } else {
-            newTrEntry = new TMXEntry(trans, defaultTranslation, externalLinked);
+            newTrEntry = new ProjectTMXEntry(trans, defaultTranslation, externalLinked);
         }
         project.projectTMX.setTranslation(entry, newTrEntry, defaultTranslation);
     }

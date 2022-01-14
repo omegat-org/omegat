@@ -121,7 +121,7 @@ public abstract class TmxComplianceBase {
 
     protected void translateAndCheckTextUsingTmx(String fileTextIn, String inCharset, String fileTMX,
             String fileTextOut, String outCharset, String sourceLang, String targetLang,
-            Map<String, TMXEntry> tmxPatch) throws Exception {
+            Map<String, ProjectTMXEntry> tmxPatch) throws Exception {
         TextFilter f = new TextFilter();
         Map<String, String> c = new TreeMap<String, String>();
         c.put(TextFilter.OPTION_SEGMENT_ON, TextFilter.SEGMENT_BREAKS);
@@ -134,7 +134,7 @@ public abstract class TmxComplianceBase {
 
     protected void translateUsingTmx(IFilter filter, Map<String, String> config, final String fileTextIn,
             String inCharset, String fileTMX, String outCharset, ProjectProperties props,
-            Map<String, TMXEntry> tmxPatch) throws Exception {
+            Map<String, ProjectTMXEntry> tmxPatch) throws Exception {
         final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
                 orphanedCallback);
@@ -149,7 +149,7 @@ public abstract class TmxComplianceBase {
             @Override
             protected String getSegmentTranslation(String id, int segmentIndex, String segmentSource,
                     String prevSegment, String nextSegment, String path) {
-                TMXEntry e = tmx.getDefaultTranslation(segmentSource);
+                ProjectTMXEntry e = tmx.getDefaultTranslation(segmentSource);
                 assertNotNull(e);
                 return e.translation;
             }
@@ -207,7 +207,7 @@ public abstract class TmxComplianceBase {
         ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
 
-        for (Map.Entry<String, TMXEntry> en : callback.data.entrySet()) {
+        for (Map.Entry<String, ProjectTMXEntry> en : callback.data.entrySet()) {
             tmx.defaults.put(en.getKey(), en.getValue());
         }
 

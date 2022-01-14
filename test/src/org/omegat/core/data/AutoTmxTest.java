@@ -90,9 +90,9 @@ public class AutoTmxTest {
         p.allProjectEntries.add(ste12 = createSTE("12", "Edit"));
         p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
         p.appendFromAutoTMX(autoTMX, false);
-        checkTranslation(ste10, "Modifier", TMXEntry.ExternalLinked.x100PC);
-        checkTranslation(ste11, "Edition", TMXEntry.ExternalLinked.xICE);
-        checkTranslation(ste12, "Modifier", TMXEntry.ExternalLinked.xICE);
+        checkTranslation(ste10, "Modifier", ProjectTMXEntry.ExternalLinked.x100PC);
+        checkTranslation(ste11, "Edition", ProjectTMXEntry.ExternalLinked.xICE);
+        checkTranslation(ste12, "Modifier", ProjectTMXEntry.ExternalLinked.xICE);
     }
 
     @Test
@@ -125,7 +125,7 @@ public class AutoTmxTest {
         checkTranslation(ste, "foobar", null);
         p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
         p.appendFromAutoTMX(enforceTMX, true);
-        checkTranslation(ste, "bizbaz", TMXEntry.ExternalLinked.xENFORCED);
+        checkTranslation(ste, "bizbaz", ProjectTMXEntry.ExternalLinked.xENFORCED);
     }
 
     SourceTextEntry createSTE(String id, String source) {
@@ -138,8 +138,8 @@ public class AutoTmxTest {
     }
 
     void checkTranslation(SourceTextEntry ste, String expectedTranslation,
-            TMXEntry.ExternalLinked expectedExternalLinked) {
-        TMXEntry e = p.getTranslationInfo(ste);
+            ProjectTMXEntry.ExternalLinked expectedExternalLinked) {
+        ProjectTMXEntry e = p.getTranslationInfo(ste);
         assertTrue(e.isTranslated());
         assertEquals(expectedTranslation, e.translation);
         assertEquals(expectedExternalLinked, e.linked);

@@ -87,7 +87,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.DataUtils;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.ProjectTMXEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
@@ -558,19 +558,19 @@ public class IssuesPanelController implements IIssues {
             return result;
         }
 
-        Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
+        Map.Entry<SourceTextEntry, ProjectTMXEntry> makeEntryPair(SourceTextEntry ste) {
             IProject project = Core.getProject();
             if (!project.isProjectLoaded()) {
                 return null;
             }
-            TMXEntry tmxEntry = project.getTranslationInfo(ste);
+            ProjectTMXEntry tmxEntry = project.getTranslationInfo(ste);
             if (!tmxEntry.isTranslated()) {
                 return null;
             }
             if (isShowingAllFiles() && DataUtils.isDuplicate(ste, tmxEntry)) {
                 return null;
             }
-            return new AbstractMap.SimpleImmutableEntry<SourceTextEntry, TMXEntry>(ste, tmxEntry);
+            return new AbstractMap.SimpleImmutableEntry<SourceTextEntry, ProjectTMXEntry>(ste, tmxEntry);
         }
 
         boolean progressFilter(SourceTextEntry ste) {

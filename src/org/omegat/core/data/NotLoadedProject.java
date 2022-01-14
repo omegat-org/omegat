@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.omegat.core.data.TMXEntry.ExternalLinked;
+import org.omegat.core.data.ProjectTMXEntry.ExternalLinked;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
 import org.omegat.tokenizer.ITokenizer;
@@ -77,7 +77,7 @@ public class NotLoadedProject implements IProject {
         return null;
     }
 
-    public TMXEntry getTranslationInfo(SourceTextEntry ste) {
+    public ProjectTMXEntry getTranslationInfo(SourceTextEntry ste) {
         return null;
     }
 
@@ -91,7 +91,7 @@ public class NotLoadedProject implements IProject {
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
     }
 
-    public void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note) {
+    public void setNote(SourceTextEntry entry, ProjectTMXEntry oldTrans, String note) {
     }
 
     public boolean isOrphaned(String source) {

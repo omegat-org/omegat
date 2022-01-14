@@ -150,7 +150,7 @@ public interface IProject {
      *            translation. It can't be null
      */
     void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            TMXEntry.ExternalLinked externalLinked);
+            ProjectTMXEntry.ExternalLinked externalLinked);
 
     /**
      * Set translation for entry with optimistic lock checking: if previous translation is not the same like
@@ -163,7 +163,7 @@ public interface IProject {
      *            translation. It can't be null
      */
     void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            TMXEntry.ExternalLinked externalLinked, AllTranslations previousTranslations)
+            ProjectTMXEntry.ExternalLinked externalLinked, AllTranslations previousTranslations)
             throws OptimisticLockingFail;
 
     /**
@@ -176,7 +176,7 @@ public interface IProject {
      * @param note
      *            note text
      */
-    void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note);
+    void setNote(SourceTextEntry entry, ProjectTMXEntry oldTrans, String note);
 
     /**
      * Get statistics for project.
@@ -195,7 +195,7 @@ public interface IProject {
      *            source entry
      * @return translation
      */
-    TMXEntry getTranslationInfo(SourceTextEntry ste);
+    ProjectTMXEntry getTranslationInfo(SourceTextEntry ste);
 
     /**
      * Get default and alternative translations for optimistic locking.
@@ -295,19 +295,19 @@ public interface IProject {
      * These translations can't be null. Only value or EMPTY_TRANSLATION.
      */
     class AllTranslations {
-        protected TMXEntry defaultTranslation;
-        protected TMXEntry alternativeTranslation;
-        protected TMXEntry currentTranslation;
+        protected ProjectTMXEntry defaultTranslation;
+        protected ProjectTMXEntry alternativeTranslation;
+        protected ProjectTMXEntry currentTranslation;
 
-        public TMXEntry getDefaultTranslation() {
+        public ProjectTMXEntry getDefaultTranslation() {
             return defaultTranslation;
         }
 
-        public TMXEntry getAlternativeTranslation() {
+        public ProjectTMXEntry getAlternativeTranslation() {
             return alternativeTranslation;
         }
 
-        public TMXEntry getCurrentTranslation() {
+        public ProjectTMXEntry getCurrentTranslation() {
             return currentTranslation;
         }
     }

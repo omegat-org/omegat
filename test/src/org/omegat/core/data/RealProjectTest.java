@@ -164,7 +164,7 @@ public class RealProjectTest {
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;
-        tmx.setTranslation(ste, new TMXEntry(tr, true, null), true);
+        tmx.setTranslation(ste, new ProjectTMXEntry(tr, true, null), true);
     }
 
     private void setAlternative(String id, String source, String translation) {
@@ -173,23 +173,23 @@ public class RealProjectTest {
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;
-        tmx.setTranslation(ste, new TMXEntry(tr, false, null), false);
+        tmx.setTranslation(ste, new ProjectTMXEntry(tr, false, null), false);
     }
 
     private void checkDefault(String source, String translation) {
-        TMXEntry tr = tmx.getDefaultTranslation(source);
+        ProjectTMXEntry tr = tmx.getDefaultTranslation(source);
         assertNotNull("Default translation of '" + source + "' not imported", tr);
         assertEquals("Default translation of '" + source + "' imported wrong", tr.translation, translation);
     }
 
     private void checkNoDefault(String source) {
-        TMXEntry tr = tmx.getDefaultTranslation(source);
+        ProjectTMXEntry tr = tmx.getDefaultTranslation(source);
         assertNull("Default translation of '" + source + "' imported, but shouldn't", tr);
     }
 
     private void checkAlternative(String id, String source, String translation) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
-        TMXEntry tr = tmx.getMultipleTranslation(key);
+        ProjectTMXEntry tr = tmx.getMultipleTranslation(key);
         assertNotNull("Alternative translation of '" + source + "' (id='" + id + "') not imported", tr);
         assertEquals("Alternative translation of '" + source + "' (id='" + id + "') imported wrong", tr.translation,
                 translation);
@@ -197,7 +197,7 @@ public class RealProjectTest {
 
     private void checkNoAlternative(String id, String source) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
-        TMXEntry tr = tmx.getMultipleTranslation(key);
+        ProjectTMXEntry tr = tmx.getMultipleTranslation(key);
         assertNull("Alternative translation of '" + source + "' (id='" + id + "') imported, but shouldn't", tr);
     }
 
@@ -219,7 +219,7 @@ public class RealProjectTest {
         }
     }
 
-    public static TMXEntry createEmptyTMXEntry() {
-        return new TMXEntry(new PrepareTMXEntry(), true, null);
+    public static ProjectTMXEntry createEmptyTMXEntry() {
+        return new ProjectTMXEntry(new PrepareTMXEntry(), true, null);
     }
 }

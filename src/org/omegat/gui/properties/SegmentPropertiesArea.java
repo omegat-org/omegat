@@ -57,7 +57,7 @@ import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
-import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.ProjectTMXEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
@@ -310,7 +310,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setKeyProperties(ste.getKey());
             IProject project = Core.getProject();
             if (project.isProjectLoaded()) {
-                TMXEntry trg = project.getTranslationInfo(ste);
+                ProjectTMXEntry trg = project.getTranslationInfo(ste);
                 setTranslationProperties(trg);
             }
         }
@@ -325,7 +325,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         setProperty(KEY_PATH, key.path);
     }
 
-    private void setTranslationProperties(TMXEntry entry) {
+    private void setTranslationProperties(ProjectTMXEntry entry) {
         if (entry == null) {
             return;
         }

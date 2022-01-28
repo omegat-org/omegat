@@ -211,7 +211,7 @@ public final class TestTeamIntegrationChild {
                 if (prev == null) {
                     prev = 0L;
                 }
-                long curr = Long.parseLong(trans.translation);
+                long curr = Long.parseLong(trans.getTranslationText());
                 if (curr < prev) {
                     throw new RuntimeException(source + ": Wrong value in " + source + ": current(" + curr
                             + ") less than previous(" + prev + ")");
@@ -222,7 +222,7 @@ public final class TestTeamIntegrationChild {
 
     static void checkTranslation(int index) {
         ProjectTMXEntry en = Core.getProject().getTranslationInfo(ste[index]);
-        String sv = en == null || !en.isTranslated() ? "" : en.translation;
+        String sv = en == null || !en.isTranslated() ? "" : en.getTranslationText();
         if (v[index] == 0 && sv.isEmpty()) {
             return;
         }
@@ -230,12 +230,12 @@ public final class TestTeamIntegrationChild {
             return;
         }
         throw new RuntimeException(source + ": Wrong value in " + source + "/" + index + ": expected "
-                + v[index] + " but contains " + en.translation);
+                + v[index] + " but contains " + en.getTranslationText());
     }
 
     static void checkTranslationFromFile(ProjectTMX tmx, int index) throws Exception {
         ProjectTMXEntry en = tmx.getDefaultTranslation(ste[index].getSrcText());
-        String sv = en == null || !en.isTranslated() ? "" : en.translation;
+        String sv = en == null || !en.isTranslated() ? "" : en.getTranslationText();
         if (v[index] == 0 && sv.isEmpty()) {
             return;
         }
@@ -563,7 +563,7 @@ public final class TestTeamIntegrationChild {
                                     .getUnderlyingRepresentation() : null;
                             String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
                                     + tr(enHead) + " project=" + tr(enProject);
-                            if (enProject != null && CONCURRENT_NAME.equals(enProject.source)) {
+                            if (enProject != null && CONCURRENT_NAME.equals(enProject.getSourceText())) {
                                 if (v(enHead) < v(enBase)) {
                                     throw new RuntimeException("Rebase HEAD: wrong concurrent: " + s);
                                 }
@@ -626,13 +626,13 @@ public final class TestTeamIntegrationChild {
                 use(e);
             }
             for (ProjectTMXEntry e : headTMX.getDefaults()) {
-                ProjectTMXEntry eb = baseTMX.getDefaultTranslation(e.source);
-                if (CONCURRENT_NAME.equals(e.source)) { // concurrent
+                ProjectTMXEntry eb = baseTMX.getDefaultTranslation(e.getSourceText());
+                if (CONCURRENT_NAME.equals(e.getSourceText())) { // concurrent
                     if (v(eb) > v(e)) {
                         throw new RuntimeException("Rebase HEAD: wrong concurrent" + s);
                     }
                     use(e);
-                } else if (e.source.startsWith(source + "/")) { // my segments
+                } else if (e.getSourceText().startsWith(source + "/")) { // my segments
                     if (v(eb) != v(e)) {
                         throw new RuntimeException("Rebase HEAD: not equals for current project" + s);
                     }
@@ -644,12 +644,12 @@ public final class TestTeamIntegrationChild {
                 }
             }
             for (ProjectTMXEntry e : projectTMX.getDefaults()) {
-                ProjectTMXEntry em = mergedTMX.getDefaultTranslation(e.source);
-                if (CONCURRENT_NAME.equals(e.source)) { // concurrent
+                ProjectTMXEntry em = mergedTMX.getDefaultTranslation(e.getSourceText());
+                if (CONCURRENT_NAME.equals(e.getSourceText())) { // concurrent
                     if (v(e) > v(em)) {
                         use(e);
                     }
-                } else if (e.source.startsWith(source + "/")) { // my segments
+                } else if (e.getSourceText().startsWith(source + "/")) { // my segments
                     if (v(e) < v(em)) {
                         throw new RuntimeException("Rebase me: less value" + s);
                     }
@@ -663,8 +663,8 @@ public final class TestTeamIntegrationChild {
         }
 
         void use(ProjectTMXEntry en) {
-            EntryKey k = new EntryKey("file", en.source, null, null, null, null);
-            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.source, Collections.emptyList());
+            EntryKey k = new EntryKey("file", en.getSourceText(), null, null, null, null);
+            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.getSourceText(), Collections.emptyList());
             mergedTMX.setTranslation(ste, en, true);
         }
 
@@ -672,7 +672,7 @@ public final class TestTeamIntegrationChild {
             if (e == null) {
                 return 0;
             } else {
-                return Long.parseLong(e.translation);
+                return Long.parseLong(e.getTranslationText());
             }
         }
 
@@ -680,7 +680,7 @@ public final class TestTeamIntegrationChild {
             if (e == null) {
                 return "null";
             } else {
-                return e.source;
+                return e.getSourceText();
             }
         }
 
@@ -688,16 +688,16 @@ public final class TestTeamIntegrationChild {
             if (e == null) {
                 return "null";
             } else {
-                return e.translation;
+                return e.getTranslationText();
             }
         }
 
         String trans(ProjectTMX tmx, ProjectTMXEntry e) {
-            ProjectTMXEntry en = tmx.getDefaultTranslation(e.source);
+            ProjectTMXEntry en = tmx.getDefaultTranslation(e.getSourceText());
             if (en == null) {
                 return "null";
             } else {
-                return en.translation;
+                return en.getTranslationText();
             }
         }
     }

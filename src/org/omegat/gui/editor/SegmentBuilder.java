@@ -167,7 +167,7 @@ public class SegmentBuilder {
      * @return OmElementSegment
      */
     public void createSegmentElement(final boolean isActive, ProjectTMXEntry trans) {
-        createSegmentElement(isActive, doc.getLength(), trans, trans.defaultTranslation);
+        createSegmentElement(isActive, doc.getLength(), trans, trans.isDefaultTranslation());
     }
 
     public void createSegmentElement(final boolean isActive, ProjectTMXEntry trans, final boolean defaultTranslation) {
@@ -175,7 +175,7 @@ public class SegmentBuilder {
     }
 
     public void prependSegmentElement(final boolean isActive, ProjectTMXEntry trans) {
-        createSegmentElement(isActive, 0, trans, trans.defaultTranslation);
+        createSegmentElement(isActive, 0, trans, trans.isDefaultTranslation());
     }
 
     public void createSegmentElement(final boolean isActive, int initialOffset, ProjectTMXEntry trans, final boolean defaultTranslation) {

@@ -7,6 +7,7 @@
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik, Aaron Madlon-Kay
+               2021-2022 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -42,9 +43,9 @@ import org.omegat.util.TMXProp;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
 public abstract class TMXEntry implements ITMXEntry {
-    public final String source;
     public final String translation;
     public final String changer;
     public final long changeDate;
@@ -53,17 +54,12 @@ public abstract class TMXEntry implements ITMXEntry {
     public final String note;
 
     TMXEntry(ITMXEntry from) {
-        this.source = from.getSourceText();
         this.translation = from.getTranslationText();
         this.changer = from.getChanger();
         this.changeDate = from.getChangeDate();
         this.creator = from.getCreator();
         this.creationDate = from.getCreationDate();
         this.note = from.getNote();
-    }
-
-    public String getSourceText() {
-        return source;
     }
 
     public String getTranslationText() {
@@ -119,9 +115,6 @@ public abstract class TMXEntry implements ITMXEntry {
             return false;
         }
         if (!Objects.equals(creator, other.creator)) {
-            return false;
-        }
-        if (!Objects.equals(source, other.source)) {
             return false;
         }
         return true;

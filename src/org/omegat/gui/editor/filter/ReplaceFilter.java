@@ -108,7 +108,7 @@ public class ReplaceFilter implements IEditorFilter {
                 continue;
             }
             // Avoid to replace more than once with variables when entries have duplicates
-            if ((en.defaultTranslation) && (ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT)) {
+            if ((en.isDefaultTranslation()) && (ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT)) {
                 continue; // Already replaced when we parsed the first entry
             }
             List<SearchMatch> found = getReplacementsForEntry(trans);
@@ -121,7 +121,7 @@ public class ReplaceFilter implements IEditorFilter {
                 }
                 PrepareTMXEntry prepare = new PrepareTMXEntry(en);
                 prepare.translation = o.toString();
-                Core.getProject().setTranslation(ste, prepare, en.defaultTranslation, null);
+                Core.getProject().setTranslation(ste, prepare, en.isDefaultTranslation(), null);
             }
         }
         EditorController ec = (EditorController) Core.getEditor();

@@ -259,10 +259,10 @@ public class ProjectTMX {
                     alternatives.remove(ste.getKey());
                 }
             } else {
-                if (!ste.getSrcText().equals(te.source)) {
+                if (!ste.getSrcText().equals(te.getSourceText())) {
                     throw new IllegalArgumentException("Source must be the same as in SourceTextEntry");
                 }
-                if (isDefault != te.defaultTranslation) {
+                if (isDefault != te.isDefaultTranslation()) {
                     throw new IllegalArgumentException("Default/alternative must be the same");
                 }
                 if (isDefault) {
@@ -347,10 +347,10 @@ public class ProjectTMX {
 
                     if (defaultTranslation) {
                         // default translation
-                        defaults.put(segmentSource, new ProjectTMXEntry(te, true, externalLinkedMode));
+                        defaults.put(segmentSource, te.toProjectTMXEntry(true, null, externalLinkedMode));
                     } else {
                         // multiple translation
-                        alternatives.put(key, new ProjectTMXEntry(te, false, externalLinkedMode));
+                        alternatives.put(key, te.toProjectTMXEntry(false, key, externalLinkedMode));
                     }
                 }
             }

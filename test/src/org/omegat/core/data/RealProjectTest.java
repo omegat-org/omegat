@@ -164,7 +164,7 @@ public class RealProjectTest {
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;
-        tmx.setTranslation(ste, new ProjectTMXEntry(tr, true, null), true);
+        tmx.setTranslation(ste, tr.toProjectTMXEntry(true, key, null), true);
     }
 
     private void setAlternative(String id, String source, String translation) {
@@ -173,7 +173,7 @@ public class RealProjectTest {
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;
-        tmx.setTranslation(ste, new ProjectTMXEntry(tr, false, null), false);
+        tmx.setTranslation(ste, tr.toProjectTMXEntry(false, key, null), false);
     }
 
     private void checkDefault(String source, String translation) {
@@ -220,6 +220,6 @@ public class RealProjectTest {
     }
 
     public static ProjectTMXEntry createEmptyTMXEntry() {
-        return new ProjectTMXEntry(new PrepareTMXEntry(), true, null);
+        return new DefaultProjectTMXEntry(new PrepareTMXEntry(), null);
     }
 }

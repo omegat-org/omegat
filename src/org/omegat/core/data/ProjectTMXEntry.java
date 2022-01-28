@@ -7,6 +7,7 @@
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik, Aaron Madlon-Kay
+               2021-2022 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -44,44 +45,23 @@ import org.omegat.util.TMXProp;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
-public class ProjectTMXEntry extends TMXEntry {
+public abstract class ProjectTMXEntry extends TMXEntry {
     public enum ExternalLinked {
         // declares how this entry linked to external TMX in the tm/auto/
         xICE, x100PC, xAUTO, xENFORCED
     };
 
-    public final boolean defaultTranslation;
     public final ExternalLinked linked;
 
-    ProjectTMXEntry(ITMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
+    ProjectTMXEntry(ITMXEntry from, ExternalLinked linked) {
         super(from);
 
-        this.defaultTranslation = defaultTranslation;
         this.linked = linked;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (! super.equals(obj)) {
-            return false;
-        }
-        try {
-            ProjectTMXEntry other = (ProjectTMXEntry) obj;
-            if (defaultTranslation != other.defaultTranslation) {
-                return false;
-            }
-            return true;
-        } catch (ClassCastException cc) {
-            return false;
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, linked, changer, creator,
-                defaultTranslation, source);
-    }
+    
+    public abstract boolean isDefaultTranslation();
 
     /**
      * Two TMXEntrys are considered interchangeable if this method returns true,
@@ -103,18 +83,6 @@ public class ProjectTMXEntry extends TMXEntry {
     }
     
     public boolean hasProperties() {
-        return false;
-    }
-    
-    public String getPropValue(String propType) {
-        return null; // for the moment internal entries do not store properties
-    }
-    
-    public boolean hasPropValue(String propType, String propValue) {
-        return false; // for the moment internal entries do not store properties
-    }
-    
-    public List<TMXProp> getProperties() {
-        return null; // for the moment internal entries do not store properties
-    }
+        return linked != null;
+    }    
 }

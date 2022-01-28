@@ -7,7 +7,7 @@
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
                2014 Alex Buloichik, Aaron Madlon-Kay
-               2021 Thomas Cordonnier
+               2021-2022 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -29,14 +29,13 @@
 
 package org.omegat.core.data;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import org.omegat.util.TMXProp;
 
 /**
- * Storage for TMX entry.
+ * Storage for TMX entry for project memory
  *
  * Variables in this class can be changed only before store to ProjectTMX. After that, all values must be
  * unchangeable.
@@ -46,18 +45,22 @@ import org.omegat.util.TMXProp;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
-public class ExternalTMXEntry extends TMXEntry {
+public class DefaultProjectTMXEntry extends ProjectTMXEntry {
     public final String source;
-    public List<TMXProp> otherProperties;
 
-    ExternalTMXEntry(ITMXEntry from) {
-        super(from);
+    DefaultProjectTMXEntry(ITMXEntry from, ExternalLinked linked) {
+        super(from, linked);
 
         this.source = from.getSourceText();
-        this.otherProperties = from.getProperties();
     }
 
+    @Override
+    public boolean isDefaultTranslation() {
+        return false;
+    }
+    
     public String getSourceText() {
         return source;
     }
@@ -67,24 +70,9 @@ public class ExternalTMXEntry extends TMXEntry {
         if (! super.equals(obj)) {
             return false;
         }
-        // Now compare properties
         try {
             ITMXEntry other = (ITMXEntry) obj;
-            if (other.getProperties() == null) {
-                return (this.otherProperties == null) || (this.otherProperties.size() == 0);
-            } else if (this.otherProperties == null) {
-                return (other.getProperties() == null) || (other.getProperties().size() == 0);
-            } else if (other.getProperties().size() != this.otherProperties.size()) {
-                return false;
-            } else {
-                // same properties in same order
-                for (int i = 0; i < otherProperties.size(); i++) {
-                    if (! otherProperties.get(i).equals(other.getProperties().get(i))) {
-                        return false;
-                    }
-                }
-            }
-            return true;
+            return other.getSourceText().equals(this.source);
         } catch (ClassCastException cc) {
             return false;
         }
@@ -92,46 +80,33 @@ public class ExternalTMXEntry extends TMXEntry {
 
     @Override
     public int hashCode() {
-        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, changer, creator,
+        return Objects.hash(changeDate / 1000, creationDate / 1000, translation, note, linked, changer, creator,
                 source);
     }
     
-    public boolean hasProperties() {
-        return (otherProperties != null) && (otherProperties.size() > 0);
-    }
-    
-    public List<TMXProp> getProperties() {
-        return Collections.unmodifiableList(otherProperties);
-    }
-    
     public String getPropValue(String propType) {
-        if (otherProperties == null) {
-            return null;
-        }
-        for (int i = 0; i < otherProperties.size(); i++) {
-            TMXProp kv = otherProperties.get(i);
-            if (propType.equals(kv.getType())) {
-                return kv.getValue();
+        if (ProjectTMX.PROP_XAUTO.equals(propType)) {
+            switch (linked) {
+                case xAUTO: case xENFORCED: return "auto";
             }
         }
-        return null;
+        return null; // for the moment internal entries do not store properties
     }
     
     public boolean hasPropValue(String propType, String propValue) {
-        if (otherProperties == null) {
-            return false;
-        }
-        for (int i = 0; i < otherProperties.size(); i++) {
-            TMXProp kv = otherProperties.get(i);
-            if (propType.equals(kv.getType())) {
-                if (propValue == null) {
-                    return true;
-                }
-                if (propValue.equals(kv.getValue())) {
-                    return true;
-                }
+        if (ProjectTMX.PROP_XAUTO.equals(propType)) {
+            switch (linked) {
+                case xAUTO: case xENFORCED: return "auto".equals(propValue);
             }
         }
-        return false;
+        return false; // for the moment internal entries do not store properties
+    }
+    
+    public List<TMXProp> getProperties() {
+        if (linked == null) {
+            return null;
+        } else {
+             return List.of(new TMXProp(ProjectTMX.PROP_XAUTO, "auto"));
+        }
     }
 }

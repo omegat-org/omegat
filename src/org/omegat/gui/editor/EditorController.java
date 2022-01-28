@@ -1173,7 +1173,7 @@ public class EditorController implements IEditor {
                     newen.translation = newTrans;
                 } else {
                     // translation can't be equals to source
-                    if (oldTE.source.equals(oldTE.translation)) {
+                    if (oldTE.getSourceText().equals(oldTE.translation)) {
                         // but it was equals to source before
                         newen.translation = oldTE.translation;
                     } else {
@@ -1188,8 +1188,8 @@ public class EditorController implements IEditor {
         }
 
         boolean defaultTranslation = sb.isDefaultTranslation();
-        boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
-        boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
+        boolean isNewDefaultTrans = defaultTranslation && !oldTE.isDefaultTranslation();
+        boolean isNewAltTrans = !defaultTranslation && oldTE.isDefaultTranslation();
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
 
@@ -1577,7 +1577,7 @@ public class EditorController implements IEditor {
             } else {
                 // default translation - multiple shouldn't exist for this entry
                 ProjectTMXEntry trans = Core.getProject().getTranslationInfo(entries.get(i));
-                if (!trans.isTranslated() || !trans.defaultTranslation) {
+                if (!trans.isTranslated() || !trans.isDefaultTranslation()) {
                     // we need exist alternative translation
                     continue;
                 }

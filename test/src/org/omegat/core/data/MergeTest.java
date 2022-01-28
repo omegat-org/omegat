@@ -62,36 +62,36 @@ public class MergeTest {
         e2.changeDate = 123456999;
 
         // test equals
-        assertTrue(new ProjectTMXEntry(e1, true, null).equals(new ProjectTMXEntry(e2, true, null)));
+        assertTrue(new DefaultProjectTMXEntry(e1, null).equals(new DefaultProjectTMXEntry(e2, null)));
 
         e2.changeDate = 123456000;
         // test truncated time
-        assertTrue(new ProjectTMXEntry(e1, true, null).equals(new ProjectTMXEntry(e2, true, null)));
+        assertTrue(new DefaultProjectTMXEntry(e1, null).equals(new DefaultProjectTMXEntry(e2, null)));
 
         e2.changeDate = 123457000;
         // test other time
-        assertFalse(new ProjectTMXEntry(e1, true, null).equals(new ProjectTMXEntry(e2, true, null)));
+        assertFalse(new DefaultProjectTMXEntry(e1, null).equals(new DefaultProjectTMXEntry(e2, null)));
         e2.changeDate = 123456999;
 
         e2.translation = "t";
         // test different translation
-        assertFalse(new ProjectTMXEntry(e1, true, null).equalsTranslation(new ProjectTMXEntry(e2, true, null)));
+        assertFalse(new DefaultProjectTMXEntry(e1, null).equalsTranslation(new DefaultProjectTMXEntry(e2, null)));
         e2.translation = "trans";
 
         e2.note = "n";
         // test different note
-        assertFalse(new ProjectTMXEntry(e1, true, null).equalsTranslation(new ProjectTMXEntry(e2, true, null)));
+        assertFalse(new DefaultProjectTMXEntry(e1, null).equalsTranslation(new DefaultProjectTMXEntry(e2, null)));
         e2.note = null;
 
         e2.changer = "c";
         // test different changer
-        assertTrue(new ProjectTMXEntry(e1, true, null).equalsTranslation(new ProjectTMXEntry(e2, true, null)));
+        assertTrue(new DefaultProjectTMXEntry(e1, null).equalsTranslation(new DefaultProjectTMXEntry(e2, null)));
         e2.changer = null;
 
         // test different linked
-        assertFalse(new ProjectTMXEntry(e1, true, ExternalLinked.xICE).equalsTranslation(new ProjectTMXEntry(e2, true,
+        assertFalse(new DefaultProjectTMXEntry(e1, ExternalLinked.xICE).equalsTranslation(new DefaultProjectTMXEntry(e2, 
                 ExternalLinked.x100PC)));
-        assertFalse(new ProjectTMXEntry(e1, true, ExternalLinked.xICE)
-                .equalsTranslation(new ProjectTMXEntry(e2, true, null)));
+        assertFalse(new DefaultProjectTMXEntry(e1, ExternalLinked.xICE)
+                .equalsTranslation(new DefaultProjectTMXEntry(e2, null)));
     }
 }

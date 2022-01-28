@@ -85,7 +85,7 @@ public final class SyncTMX implements ITmx {
     }
 
     private Key makeKey(Object entryKey, ProjectTMXEntry tmxEntry) {
-        Key key = new Key(tmxEntry.source, entryKey);
+        Key key = new Key(tmxEntry.getSourceText(), entryKey);
         if (entryKey instanceof EntryKey) {
             EntryKey ek = (EntryKey) entryKey;
             key.addProp("file", ek.file);

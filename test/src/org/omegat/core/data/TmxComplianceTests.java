@@ -392,6 +392,6 @@ public class TmxComplianceTests extends TmxComplianceBase {
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;
-        return new ProjectTMXEntry(tr, def, null);
+        return tr.toProjectTMXEntry(def, null, null);
     }
 }

@@ -402,7 +402,7 @@ public class Searcher {
                         }
                         checkStop.checkInterrupted();
                         if (m_project.isOrphaned(source)) {
-                            checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
+                            checkEntry(en.getSourceText(), en.getTranslationText(), en.getNote(), null, en, ENTRY_ORIGIN_ORPHAN, file);
                         }
                     }
                 });
@@ -417,7 +417,7 @@ public class Searcher {
                         }
                         checkStop.checkInterrupted();
                         if (m_project.isOrphaned(source)) {
-                            checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
+                            checkEntry(en.getSourceText(), en.getTranslationText(), en.getNote(), null, en, ENTRY_ORIGIN_ORPHAN, file);
                         }
                     }
                 });

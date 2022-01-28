@@ -25,9 +25,12 @@
  **************************************************************************/
 package org.omegat.core.data;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 import org.omegat.util.StringUtil;
+import org.omegat.util.TMXProp;
 
 /**
  * Class for store full entry's identifier, including file, id, src, etc.
@@ -127,4 +130,14 @@ public class EntryKey implements Comparable<EntryKey> {
     public static boolean isIgnoreFileContext() {
         return ignoreFileContext;
     }
+    
+   public List<TMXProp> toProperties() {
+        return List.of(
+            new TMXProp(ProjectTMX.PROP_FILE, file),
+            new TMXProp(ProjectTMX.PROP_ID, id),
+            new TMXProp(ProjectTMX.PROP_PREV, prev),
+            new TMXProp(ProjectTMX.PROP_NEXT, next),
+            new TMXProp(ProjectTMX.PROP_PATH, path)
+        );
+   }    
 }

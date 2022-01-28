@@ -204,7 +204,7 @@ public class RealProject implements IProject {
     static {
         PrepareTMXEntry empty = new PrepareTMXEntry();
         empty.source = "";
-        EMPTY_TRANSLATION = empty.toProjectTMXEntry(true, null);
+        EMPTY_TRANSLATION = empty.toProjectTMXEntry(true, null, null);
     }
 
     private final boolean allowTranslationEqualToSource = Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
@@ -1240,7 +1240,7 @@ public class RealProject implements IProject {
                     if (enDefault == null) {
                         // default not exist yet - yes, we can
                         prepare.translation = ste.getSourceTranslation();
-                        projectTMX.setTranslation(ste, prepare.toProjectTMXEntry(true, null), true);
+                        projectTMX.setTranslation(ste, prepare.toProjectTMXEntry(true, ste.getKey(), null), true);
                         allowToImport.put(ste.getSrcText(), ste.getSourceTranslation());
                     } else {
                         // default translation already exist - did we just
@@ -1251,7 +1251,7 @@ public class RealProject implements IProject {
                             // we just imported default and it doesn't equals to
                             // current - import as alternative
                             prepare.translation = ste.getSourceTranslation();
-                            projectTMX.setTranslation(ste, prepare.toProjectTMXEntry(false, null), false);
+                            projectTMX.setTranslation(ste, prepare.toProjectTMXEntry(false, ste.getKey(), null), false);
                         }
                     }
                 } else { // project without default translations
@@ -1259,7 +1259,7 @@ public class RealProject implements IProject {
                     if (en == null) {
                         // not exist yet - yes, we can
                         prepare.translation = ste.getSourceTranslation();
-                        projectTMX.setTranslation(ste, prepare.toProjectTMXEntry(false, null), false);
+                        projectTMX.setTranslation(ste, prepare.toProjectTMXEntry(false, ste.getKey(), null), false);
                     }
                 }
             }
@@ -1494,7 +1494,7 @@ public class RealProject implements IProject {
             // no translation, no note
             newTrEntry = null;
         } else {
-            newTrEntry = trans.toProjectTMXEntry(defaultTranslation, externalLinked);
+            newTrEntry = trans.toProjectTMXEntry(defaultTranslation, entry.getKey(), externalLinked);
         }
 
         setProjectModified(true);
@@ -1521,20 +1521,20 @@ public class RealProject implements IProject {
             note = null;
         }
 
-        ProjectTMXEntry prevTrEntry = oldTE.defaultTranslation ? projectTMX
+        ProjectTMXEntry prevTrEntry = oldTE.isDefaultTranslation() ? projectTMX
                 .getDefaultTranslation(entry.getSrcText()) : projectTMX
                 .getMultipleTranslation(entry.getKey());
         if (prevTrEntry != null) {
             PrepareTMXEntry en = new PrepareTMXEntry(prevTrEntry);
             en.note = note;
-            projectTMX.setTranslation(entry, en.toProjectTMXEntry(prevTrEntry.defaultTranslation,
-                    prevTrEntry.linked), prevTrEntry.defaultTranslation);
+            projectTMX.setTranslation(entry, en.toProjectTMXEntry(prevTrEntry.isDefaultTranslation(),
+                    entry.getKey(), prevTrEntry.linked), prevTrEntry.isDefaultTranslation());
         } else {
             PrepareTMXEntry en = new PrepareTMXEntry();
             en.source = entry.getSrcText();
             en.note = note;
             en.translation = null;
-            projectTMX.setTranslation(entry, en.toProjectTMXEntry(true, null), true);
+            projectTMX.setTranslation(entry, en.toProjectTMXEntry(true, entry.getKey(), null), true);
         }
 
         setProjectModified(true);
@@ -1838,7 +1838,7 @@ public class RealProject implements IProject {
                         }
                         tr.source = sourceS;
                         tr.translation = transS;
-                        data.put(sourceS, tr.toProjectTMXEntry(true, null));
+                        data.put(sourceS, tr.toProjectTMXEntry(true, null, null));
                     } else {
                         for (short i = 0; i < segmentsSource.size(); i++) {
                             String oneSrc = segmentsSource.get(i);
@@ -1848,7 +1848,7 @@ public class RealProject implements IProject {
                             }
                             tr.source = oneSrc;
                             tr.translation = oneTrans;
-                            data.put(sourceS, tr.toProjectTMXEntry(true, null));
+                            data.put(sourceS, tr.toProjectTMXEntry(true, null, null));
                         }
                     }
                 } else {
@@ -1857,7 +1857,7 @@ public class RealProject implements IProject {
                     }
                     tr.source = sourceS;
                     tr.translation = transS;
-                    data.put(sourceS, tr.toProjectTMXEntry(true, null));
+                    data.put(sourceS, tr.toProjectTMXEntry(true, null, null));
                 }
             }
         }

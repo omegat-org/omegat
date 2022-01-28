@@ -83,7 +83,7 @@ public class ImportFromAutoTMX {
                 }
                 if (!hasICE && !has100PC) { // TMXEntry without x-ids
                     boolean isDefaultTranslation = !isAltTranslation(e);
-                    if (!existTranslation.defaultTranslation && isDefaultTranslation) {
+                    if (!existTranslation.isDefaultTranslation() && isDefaultTranslation) {
                         // Existing translation is alt but the TMX entry is not.
                         continue;
                     }
@@ -101,7 +101,7 @@ public class ImportFromAutoTMX {
                         setTranslation(ste, e, isDefaultTranslation, ProjectTMXEntry.ExternalLinked.xAUTO);
                     }
                 } else { // TMXEntry with x-ids
-                    if (!existTranslation.isTranslated() || existTranslation.defaultTranslation) {
+                    if (!existTranslation.isTranslated() || existTranslation.isDefaultTranslation()) {
                         // need to update if id in xICE or x100PC
                         if (hasICE) {
                             setTranslation(ste, e, false, ProjectTMXEntry.ExternalLinked.xICE);
@@ -179,7 +179,11 @@ public class ImportFromAutoTMX {
             // no translation, no note
             newTrEntry = null;
         } else {
-            newTrEntry = new ProjectTMXEntry(trans, defaultTranslation, externalLinked);
+            if (defaultTranslation) {
+                newTrEntry = new DefaultProjectTMXEntry(trans, externalLinked);
+            } else {
+                newTrEntry = new AlternativeProjectTMXEntry(trans, entry.getKey(), externalLinked);            
+            }
         }
         project.projectTMX.setTranslation(entry, newTrEntry, defaultTranslation);
     }

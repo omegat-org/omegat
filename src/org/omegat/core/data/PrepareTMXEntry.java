@@ -28,6 +28,7 @@
 
 package org.omegat.core.data;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.omegat.util.TMXProp;
@@ -61,14 +62,15 @@ public class PrepareTMXEntry implements ITMXEntry {
     public PrepareTMXEntry() {
     }
 
-    public PrepareTMXEntry(TMXEntry e) {
-        source = e.source;
-        translation = e.translation;
-        changer = e.changer;
-        changeDate = e.changeDate;
-        creator = e.creator;
-        creationDate = e.creationDate;
-        note = e.note;
+    public PrepareTMXEntry(ITMXEntry e) {
+        source = e.getSourceText();
+        translation = e.getTranslationText();
+        changer = e.getChanger();
+        changeDate = e.getChangeDate();
+        creator = e.getCreator();
+        creationDate = e.getCreationDate();
+        note = e.getNote();
+        otherProperties = Collections.unmodifiableList(e.getProperties());
     }
 
     public String getSourceText() {
@@ -152,7 +154,11 @@ public class PrepareTMXEntry implements ITMXEntry {
         return new ExternalTMXEntry(this);
     }
 
-    ProjectTMXEntry toProjectTMXEntry(boolean defaultTranslation, ProjectTMXEntry.ExternalLinked linked) {
-        return new ProjectTMXEntry(this, defaultTranslation, linked);
+    ProjectTMXEntry toProjectTMXEntry(boolean defaultTranslation, EntryKey key, ProjectTMXEntry.ExternalLinked linked) {
+        if (defaultTranslation) {
+            return new DefaultProjectTMXEntry(this, linked);
+        } else {
+            return new AlternativeProjectTMXEntry(this, key, linked);        
+        }
     }
 }

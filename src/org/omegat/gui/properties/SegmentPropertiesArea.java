@@ -345,7 +345,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
                     + timeFormat.format(new Date(entry.creationDate)));
         }
         setProperty(KEY_CREATOR, entry.creator);
-        if (!entry.defaultTranslation) {
+        if (!entry.isDefaultTranslation()) {
             setProperty(KEY_ISALT, true);
         }
         setProperty(KEY_LINKED, entry.linked);

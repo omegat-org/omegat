@@ -66,7 +66,7 @@ public class LingvoDSL implements IDictionaryFactory {
     public final IDictionary loadDict(final File file) throws Exception {
         Path dictPath = Paths.get(file.toURI());
         Path indexPath = Paths.get(dictPath + ".idx");
-        return new LingvoDSLDict(dictPath, indexPath);
+        return new LingvoDSLDict(dictPath, indexPath, false);
     }
 
     static class LingvoDSLDict implements IDictionary {
@@ -79,8 +79,8 @@ public class LingvoDSL implements IDictionaryFactory {
          * @param indexPath index cache file.
          * @throws Exception when loading dictionary failed.
          */
-        LingvoDSLDict(final Path dictPath, final Path indexPath) throws Exception {
-            data = DslDictionary.loadDictionary(dictPath, indexPath);
+        LingvoDSLDict(final Path dictPath, final Path indexPath, final boolean validateIndexAbsPath) throws Exception {
+            data = DslDictionary.loadDictionary(dictPath, indexPath, validateIndexAbsPath);
             htmlVisitor = new HtmlVisitor(dictPath.getParent().toString());
         }
 
@@ -212,7 +212,7 @@ public class LingvoDSL implements IDictionaryFactory {
                 }
             } else if (tag.isTagName("'")) {
                 sb.append("<span style=\"color: red\">");
-            } else if (tag.isTagName("url") || tag.isTagName("s") || tag.isTagName("video")) {
+            } else if (tag.isTagName("url") || tag.isTagName("s") || tag.isTagName("video") || tag.isTagName("*")) {
                 delayText = true;
             }
             // no output for t
@@ -253,6 +253,11 @@ public class LingvoDSL implements IDictionaryFactory {
                     }
                 } else if (endTag.isTagName("url")) {
                     sb.append("<a href=\"").append(previousText).append("\">").append(previousText).append("</a>");
+                } else if (endTag.isTagName("*")) {
+                    // you can set detailed content such like sb.append("<details>").append(previousText).append
+                    // ("</details>"); when jTextPane can support details tag.
+                    // Now we skip contents of [*]..[/*] and just put [*]
+                    sb.append("[*]");
                 }
                 delayText = false;
                 previousText = null;

@@ -62,10 +62,11 @@ public class DictionaryEntry implements Comparable<DictionaryEntry> {
 
     @Override
     public int compareTo(DictionaryEntry o) {
-        if (query.equals(o.query)) {
-            return word.compareTo(o.word);
+        int queryComparison = query.compareTo(o.query);
+        if (queryComparison != 0) {
+            return queryComparison;
         } else {
-            return query.compareTo(o.query);
+            return word.compareTo(o.word);
         }
     }
 }

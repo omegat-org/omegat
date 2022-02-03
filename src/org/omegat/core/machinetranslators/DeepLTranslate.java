@@ -7,6 +7,7 @@
                2011 Briac Pilpre, Alex Buloichik
                2013 Didier Briel
                2016 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,20 +31,21 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.omegat.core.Core;
 import org.omegat.gui.exttrans.MTConfigDialog;
-import org.omegat.util.JsonParser;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Support of DeepL machine translation.
@@ -52,6 +54,7 @@ import org.omegat.util.HttpConnectionUtils;
  * @author Didier Briel
  * @author Briac Pilpre
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  *
  * @see <a href="https://www.deepl.com/api.html">Translation API</a>
  */
@@ -65,6 +68,7 @@ public class DeepLTranslate extends BaseTranslate {
     // See https://www.deepl.com/docs-api/accessing-the-api/api-versions/
     protected static final String DEEPL_URL = "https://api.deepl.com/v1/translate";
     protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
+    private final static int MAX_TEXT_LENGTH = 5000;
 
     @Override
     protected String getPreferenceName() {
@@ -78,7 +82,7 @@ public class DeepLTranslate extends BaseTranslate {
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String trText = text.length() > 5000 ? text.substring(0, 4997) + "..." : text;
+        String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
         String prev = getFromCache(sLang, tLang, trText);
         if (prev != null) {
             return prev;
@@ -145,24 +149,27 @@ public class DeepLTranslate extends BaseTranslate {
         return text;
     }
 
+    /**
+     * Parse API response and return translated text.
+     * @param json API response json string.
+     * @return
+     *        translation, or null when API returns empty result, or error message when parse failed.
+     */
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
-        Map<String, Object> rootNode;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
+            // { "translations": [ { "detected_source_language": "DE", "text": "Hello World!" } ] }
+            JsonNode rootNode = mapper.readTree(json);
+            JsonNode translations = rootNode.get("translations");
+            if (translations.has(0)) {
+                return translations.get(0).get("text").asText();
+            }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_JSON_ERROR");
         }
-
-        // { "translations": [ { "detected_source_language": "DE", "text": "Hello World!" } ] }
-        try {
-            List<Object> translationsList = (List<Object>) rootNode.get("translations");
-            Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);
-            return translationNode.get("text");
-        } catch (NullPointerException e) {
-            return null;
-        }
+        return null;
     }
 
     @Override

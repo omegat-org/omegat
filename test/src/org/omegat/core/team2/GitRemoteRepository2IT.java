@@ -1,11 +1,11 @@
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
- with fuzzy matching, translation memory, keyword search,
- glossaries, and translation leveraging into updated projects.
+          with fuzzy matching, translation memory, keyword search,
+          glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay, Alex Buloichik
- Home page: http://www.omegat.org/
- Support center: https://omegat.org/support
+               Home page: http://www.omegat.org/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -25,62 +25,62 @@
 
 package org.omegat.core.team2;
 
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.omegat.core.team2.impl.GITRemoteRepository2;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
 
-public class GitRemoteRepository2IT extends AbstractRemoteRepository2IT {
+import org.omegat.core.team2.impl.GITRemoteRepository2;
 
-	@Override
-	void prepareLocalRepo() throws IOException, GitAPIException {
-		Git git = Git.init().setDirectory( tempRepoDir.toFile() ).call();
-		String originalFile = createFile(tempRepoDir.toFile());
-		git.add().addFilepattern(originalFile).call();
-		git.commit().setMessage("init").setAuthor("OmegaT unit test", "test@test.nl").call();
-	}
+public final class GitRemoteRepository2IT extends AbstractRemoteRepository2IT {
 
-	@Override
-	IRemoteRepository2 getRr2() {
-		return new GITRemoteRepository2();
-	}
+    @Override
+    void prepareLocalRepo() throws IOException, GitAPIException {
+        Git git = Git.init().setDirectory(tempRepoDir.toFile()).call();
+        String originalFile = createFile(tempRepoDir.toFile());
+        git.add().addFilepattern(originalFile).call();
+        git.commit().setMessage("init").setAuthor("OmegaT unit test", "test@test.nl").call();
+    }
 
-	@Override
-	void configureRepositoryDefinition() {
-		repositoryDefinition.setType("GIT");
-		repositoryDefinition.setUrl("file://" + tempRepoDir.toString());
-	}
+    @Override
+    IRemoteRepository2 getRr2() {
+        return new GITRemoteRepository2();
+    }
 
-	void testDelSubdir() throws Exception {
-		String dirToDelete = "subdir";
-		String newFile2 = createFileInSubdir(localCheckoutDir, dirToDelete);
+    @Override
+    void configureRepositoryDefinition() {
+        repositoryDefinition.setType("GIT");
+        repositoryDefinition.setUrl("file://" + tempRepoDir.toString());
+    }
 
-		rr2.addForCommit(toRr2Notation(newFile2));
-		rr2.commit(null, "add so we can delete");
-		String[] deletedFiles = rr2.getRecentlyDeletedFiles();
-		assertEquals(0, deletedFiles.length);
+    void testDelSubdir() throws Exception {
+        String dirToDelete = "subdir";
+        String newFile2 = createFileInSubdir(localCheckoutDir, dirToDelete);
 
-		rr2.addForDeletion(toRr2Notation(dirToDelete));
-		rr2.commit(null, "test delete dir");
-		deletedFiles = rr2.getRecentlyDeletedFiles();
-		assertEquals(1, deletedFiles.length);
+        rr2.addForCommit(toRr2Notation(newFile2));
+        rr2.commit(null, "add so we can delete");
+        String[] deletedFiles = rr2.getRecentlyDeletedFiles();
+        assertEquals(0, deletedFiles.length);
 
-	}
+        rr2.addForDeletion(toRr2Notation(dirToDelete));
+        rr2.commit(null, "test delete dir");
+        deletedFiles = rr2.getRecentlyDeletedFiles();
+        assertEquals(1, deletedFiles.length);
+
+    }
 
 
+    String toRr2Notation(String file) {
+        //on windows, we still have to use '/' as separator, because jgit requires that.
+        return file.replace(File.separator, "/");
+    }
 
-	String toRr2Notation(String file) {
-		//on windows, we still have to use '/' as separator, because jgit requires that.
-		return file.replace(File.separator, "/");
-	}
-
-	@Override
-	void assertFileOrDirDeleted(String dir, String fileInDir, String actual) {
-		assertEquals("the file itself is deleted", fileInDir, actual);
-	}
+    @Override
+    void assertFileOrDirDeleted(String dir, String fileInDir, String actual) {
+        assertEquals("the file itself is deleted", fileInDir, actual);
+    }
 
 }

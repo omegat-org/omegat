@@ -31,7 +31,6 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -41,13 +40,16 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.omegat.gui.exttrans.MTConfigDialog;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.HttpConnectionUtils;
 
 
 /**
@@ -212,10 +214,11 @@ public class YandexCloudTranslate extends BaseTranslate {
 
     @SuppressWarnings("unchecked")
     private String extractErrorMessage(final String json) {
-        Map<String, Object> rootNode;
+        JsonNode rootNode;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
-            return (String) rootNode.get("message");
+            rootNode = mapper.readTree(json);
+            return rootNode.get("message").asText();
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_ENGINE_YANDEX_CLOUD_BAD_ERROR_REPORT");
             return null;
@@ -224,12 +227,11 @@ public class YandexCloudTranslate extends BaseTranslate {
 
     @SuppressWarnings("unchecked")
     private String extractTranslation(final String json) {
+        JsonNode rootNode;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            Map<String, Object> rootNode;
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
-            List<Object> translationsList = (List<Object>) rootNode.get("translations");
-            Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);
-            return translationNode.get("text");
+            rootNode = mapper.readTree(json);
+            return rootNode.get("translations").get(0).get("text").asText();
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
@@ -242,7 +244,8 @@ public class YandexCloudTranslate extends BaseTranslate {
 
             String request = "{\"yandexPassportOauthToken\":\"" + oAuthToken + "\"}";
             String response;
-            Map<String, Object> rootNode;
+            JsonNode rootNode;
+            ObjectMapper mapper = new ObjectMapper();
 
             try {
                 response = HttpConnectionUtils.postJSON(IAM_TOKEN_URL, request, null);
@@ -259,8 +262,8 @@ public class YandexCloudTranslate extends BaseTranslate {
             }
 
             try {
-                rootNode = (Map<String, Object>) JsonParser.parse(response);
-                cachedIAMToken = (String) rootNode.get("iamToken");
+                rootNode = mapper.readTree(response);
+                cachedIAMToken = rootNode.get("iamToken").asText();
                 lastIAMTokenTime = System.currentTimeMillis();
             } catch (Exception e) {
                 Log.logErrorRB(e, "MT_ENGINE_YANDEX_CLOUD_BAD_IAM_RESPONSE");

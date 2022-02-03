@@ -57,7 +57,7 @@ public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
         for (int i = 0; i < targets.length; i++) {
             if (i == 0 || (!targets[i].equals(targets[i - 1]))) {
                 if (hasComments) {
-                    trg.append("\n\t");
+                    trg.startIndent(null);
                     hasComments = false;
                 }
                 SimpleAttributeSet attrs = new SimpleAttributeSet(TARGET_ATTRIBUTES);
@@ -67,11 +67,12 @@ public class DictionaryGlossaryRenderer implements IGlossaryRenderer {
                 attrs.addAttribute(TooltipAttribute.ATTRIBUTE_KEY, new TooltipAttribute(origins[i]));
                 trg.append(bracketEntry(targets[i]), attrs);
                 if (i < targets.length - 1) {
-                    trg.append(",", null);
+                    trg.append(", ", null);
                 }
             }
             if (!comments[i].equals("")) {
-                trg.append("\n\t- " + comments[i], NOTES_ATTRIBUTES);
+                trg.startIndent(NOTES_ATTRIBUTES);
+                trg.append("- " + comments[i], NOTES_ATTRIBUTES);
                 hasComments = true;
             }
         }

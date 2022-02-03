@@ -33,7 +33,6 @@ import java.awt.Window;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -43,13 +42,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.omegat.gui.exttrans.MTConfigDialog;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Support of IBM Watson machine translation.
@@ -162,31 +164,25 @@ public class IBMWatsonTranslate extends BaseTranslate {
         return url;
     }
 
+    /**
+     * Parse Watson response and return translated text.
+     * @param json response.
+     * @return translated text.
+     */
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
-        Map<String, Object> rootNode;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
+            JsonNode rootNode = mapper.readTree(json);
+            JsonNode translations = rootNode.get("translations");
+            if (translations.has(0)) {
+                return translations.get(0).get("translation").asText();
+            }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_JSON_ERROR");
         }
-
-        //    {
-        //        "translations": [{
-        //          "translation": "translated text goes here."
-        //        }],
-        //        "word_count": 4,
-        //        "character_count": 53
-        //      }
-
-        try {
-            List<Object> translationsList = (List<Object>) rootNode.get("translations");
-            Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);
-            return translationNode.get("translation");
-        } catch (NullPointerException e) {
-            return null;
-        }
+        return null;
     }
 
     /** Convert entities to character. Ex: "&#39;" to "'". */

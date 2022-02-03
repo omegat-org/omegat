@@ -40,6 +40,7 @@ import java.util.stream.StreamSupport;
 import javax.xml.namespace.QName;
 
 import org.eclipse.jgit.api.CloneCommand;
+import org.eclipse.jgit.api.CommitCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LsRemoteCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
@@ -53,6 +54,7 @@ import org.eclipse.jgit.dircache.DirCacheIterator;
 import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.CoreConfig.AutoCRLF;
+import org.eclipse.jgit.lib.GpgSigner;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Ref;
@@ -68,6 +70,7 @@ import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
+
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
@@ -148,6 +151,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             }
             configRepo();
             Log.logInfoRB("GIT_FINISH", "clone");
+        }
+
+        String externalGpg = repository.getConfig().getString("user", null, "program");
+        if ("gpg".equalsIgnoreCase(externalGpg)) {
+            GpgSigner.setDefault(new GITExternalGpgSigner());
         }
 
         // cleanup repository
@@ -321,7 +329,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
         Log.logInfoRB("GIT_START", "upload");
         try (Git git = new Git(repository)) {
-            RevCommit commit = git.commit().setMessage(comment).call();
+            CommitCommand commitCommand = git.commit();
+            commitCommand.setMessage(comment);
+            commitCommand.setSign(null);  // read from git config
+            RevCommit commit = commitCommand.call();
             Iterable<PushResult> results = git.push().setTimeout(TIMEOUT).setRemote(REMOTE)
                     .add(getDefaultBranchName(repository)).call();
             List<Status> statuses = StreamSupport.stream(results.spliterator(), false)

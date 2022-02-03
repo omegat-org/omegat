@@ -7,6 +7,7 @@
                2013 Martin Wunderlich, Didier Briel
                2015 Didier Briel
                2017 Briac Pilpre
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,9 +29,7 @@
 
 package org.omegat.core.machinetranslators;
 
-import java.util.List;
-import java.util.Map;
-
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -41,6 +40,7 @@ import org.omegat.util.Preferences;
  * @author Didier Briel
  * @author Martin Wunderlich
  * @author Briac Pilpre
+ * @author Hiroshi Miura
  */
 public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     @Override
@@ -65,7 +65,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
             return prev;
         }
 
-        Map<String, Object> jsonResponse;
+        JsonNode jsonResponse;
 
         // Get MyMemory response in JSON format
         try {
@@ -78,19 +78,16 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         // this text. If there is a MT translation, it will always take
         // precedence.
         double bestScore = 0d;
-        Map<String, Object> bestEntry = null;
-        Map<String, Object> mtEntry = null;
+        JsonNode bestEntry = null;
+        JsonNode mtEntry = null;
 
-        @SuppressWarnings("unchecked")
-        List<Map<String, Object>> matches = (List<Map<String, Object>>) jsonResponse.get("matches");
-        for (Map<String, Object> entry : matches) {
-            double score = ((Number) entry.get("match")).doubleValue();
-            String createdBy = (String) entry.get("created-by");
-            if ("MT!".equals(createdBy)) {
+        JsonNode entries = jsonResponse.get("matches");
+        for (JsonNode entry : entries) {
+            if ("MT!".equals(entry.get("created-by").asText())) {
                 mtEntry = entry;
-            } else if (score > bestScore) {
+            } else if (entry.get("match").asDouble() > bestScore) {
                 bestEntry = entry;
-                bestScore = score;
+                bestScore = entry.get("match").asDouble();
             }
         }
 
@@ -98,8 +95,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
             bestEntry = mtEntry;
         }
 
-        String translation = (String) bestEntry.get("translation");
-        translation = StringEscapeUtils.unescapeHtml(translation);
+        String translation = StringEscapeUtils.unescapeHtml(bestEntry.get("translation").asText());
 
         putToCache(sLang, tLang, text, translation);
         return translation;

@@ -30,15 +30,15 @@
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
-import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.omegat.gui.exttrans.MTConfigDialog;
-import org.omegat.util.JsonParser;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * @author Ibai Lakunza Velasco
@@ -73,8 +73,11 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
     @Override
     protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
 
+    /**
+     * Query MyMemory API and return parsed JsonNode object.
+     */
     @SuppressWarnings("unchecked")
-    protected Map<String, Object> getMyMemoryResponse(Language sLang, Language tLang, String text) throws Exception {
+    protected JsonNode getMyMemoryResponse(Language sLang, Language tLang, String text) throws Exception {
 
         String targetLang = tLang.getLocaleLCID();
         String sourceLang = sLang.getLocaleLCID();
@@ -82,7 +85,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
         String apiKey = getCredential(MYMEMORY_API_KEY);
         String email = getCredential(MYMEMORY_API_EMAIL);
 
-        Map<String, String> params = new TreeMap<String, String>();
+        Map<String, String> params = new TreeMap<>();
 
         // The sentence you want to translate. Use UTF-8. Max 500 bytes
         params.put("q", text);
@@ -116,28 +119,25 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
             params.put("de", email);
         }
 
-        Map<String, String> headers = new TreeMap<String, String>();
+        Map<String, String> headers = new TreeMap<>();
 
         // Get the results from MyMemory
-        String myMemoryJson = "";
-        try {
-            myMemoryJson = HttpConnectionUtils.get(GT_URL, params, headers);
-        } catch (IOException e) {
-            throw e;
-        }
-
-        try {
-            return (Map<String, Object>) JsonParser.parse(myMemoryJson);
-        } catch (Exception e) {
-            throw e;
-        }
+        ObjectMapper mapper = new ObjectMapper();
+        String response = HttpConnectionUtils.get(GT_URL, params, headers);
+        return mapper.readTree(response);
     }
 
+    /**
+     * MyMemory driver is configurable.
+     */
     @Override
     public boolean isConfigurable() {
         return true;
     }
 
+    /**
+     * Default configuration UI.
+     */
     @Override
     public void showConfigurationUI(Window parent) {
         MTConfigDialog dialog = new MTConfigDialog(parent, getName()) {

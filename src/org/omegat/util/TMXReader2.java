@@ -580,7 +580,7 @@ public class TMXReader2 {
     /**
      * Get ParsedTuv from list of Tuv for specific language.
      *
-     * Language choosed by:<br>
+     * Language chosen by:<br>
      * - with the same language+country<br>
      * - if not exist, then with the same language but without country<br>
      * - if not exist, then with the same language with whatever country<br>

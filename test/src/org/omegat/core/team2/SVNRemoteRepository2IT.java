@@ -1,11 +1,11 @@
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
- with fuzzy matching, translation memory, keyword search,
- glossaries, and translation leveraging into updated projects.
+          with fuzzy matching, translation memory, keyword search,
+          glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2015 Aaron Madlon-Kay, Alex Buloichik
- Home page: http://www.omegat.org/
- Support center: https://omegat.org/support
+               Home page: http://www.omegat.org/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -25,14 +25,7 @@
 
 package org.omegat.core.team2;
 
-import gen.core.project.RepositoryDefinition;
-import org.apache.commons.io.FileUtils;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.omegat.core.team2.impl.SVNRemoteRepository2;
-import org.tmatesoft.svn.core.SVNURL;
-import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
-import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -40,7 +33,16 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
+import org.apache.commons.io.FileUtils;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
+import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+
+import org.omegat.core.team2.impl.SVNRemoteRepository2;
+
+import gen.core.project.RepositoryDefinition;
 
 @RunWith(Parameterized.class)
 public class SVNRemoteRepository2IT extends AbstractRemoteRepository2IT {

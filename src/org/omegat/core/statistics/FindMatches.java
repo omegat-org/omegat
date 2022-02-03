@@ -213,9 +213,9 @@ public class FindMatches {
         });
 
 
-        /**
-         * Penalty applied for fuzzy matches in another language (if no match in the
-         * target language was found.)
+        /*
+          Penalty applied for fuzzy matches in another language (if no match in the
+          target language was found).
          */
         int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
@@ -309,8 +309,30 @@ public class FindMatches {
     /**
      * Compare one entry with original entry.
      *
-     * @param candEntry
+     * @param key
      *            entry to compare
+     * @param source
+     *            source text
+     * @param translation
+     *            translation text
+     * @param comesFrom
+     *            match source
+     * @param fuzzy
+     *            is it fuzzy or not
+     * @param penalty
+     *            penalty score
+     * @param tmxName
+     *            tmx name
+     * @param creator
+     *            translation creator
+     * @param creationDate
+     *            creation date of translation
+     * @param changer
+     *            last editor name
+     * @param changedDate
+     *            last change date
+     * @param props
+     *            TMX properties
      */
     protected void processEntry(final EntryKey key, final String source, final String translation,
             NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int penalty, final String tmxName,

@@ -24,14 +24,26 @@ See also:
 
 ## The hard way
 
+### Dependencies
+
 The creation of the documentation requires a number of tools:
 
-- DocBook XSL Stylesheets 1.75.2 ("dbk")
-- DocBook XML 4.5
-- fop 1.1
-- libxml2 2-2.7.7
-- Saxon 6-5-5
-- Ant 1.7.1 or above
+- DocBook XSL Stylesheets 1.75.2 ("dbk") or above
+  https://github.com/docbook/xslt10-stylesheets
+- DocBook XML 4.5 ("docbook-xml-4.5")
+  https://docbook.org/xml/4.5/
+- fop 1.1 ("fop-1.1")
+  https://xmlgraphics.apache.org/fop/1.1/
+- libxml2 2-2.7.7 ("libxml2-2.7.7")
+  http://xmlsoft.org
+- Saxon 6-5-5 ("saxon")
+  https://sourceforge.net/projects/saxon/files/saxon6/
+- XMLmind Web Help Compiler ("whc")
+  https://www.xmlmind.com/ditac/whc.shtml
+- Ant 1.7.1 or above ("apache-ant")
+  https://ant.apache.org
+
+### Path to the DTD
 
 For efficiency reason, the path to the DTD in the DocBook files (e.g.,
 `AboutOmegaT.xml`) has been changed to a local path
@@ -106,44 +118,54 @@ The ones available in `doc_src` are only there for reference.
 
 ### macOS
 
-All the dependencies can be installed through MacPorts except for Saxon 6-5-5:
+#### Dependencies
 
-- [MacPorts](https://www.macports.org/)
-- [Saxon 6-5-5](https://sourceforge.net/projects/saxon/files/saxon6/6.5.5/)
+All the dependencies can be installed through
+[MacPorts](https://www.macports.org/) except for saxon and whc.
 
-Unzip the downloaded package and put it in your prefered location. The example
-below uses the `/Applications` folder.
+    sudo port install apache-ant docbook-xml-4.5 docbook-xsl-nons fop libxml2
+
+- Saxon 6-5-5 ("saxon")
+  https://sourceforge.net/projects/saxon/files/saxon6/
+
+- XMLmind Web Help Compiler ("whc")
+  https://www.xmlmind.com/ditac/whc.shtml
+
+Unzip the downloaded packages and put them in your prefered location. The
+example below uses the `/Applications` folder.
+
+#### Paths
 
 If you use Macports, the `doc_src_paths.xml` settings are:
 
-    <property name="fop.home" value="/opt/local/share/java/fop/1.0" />
-    <property name="dbk" value="/opt/local/share/xsl/docbook-xsl" />
-    <property name="saxon" value="/Applications/saxon6-5-5/saxon.jar" />
+    <project>
+        <property name="fop.home" value="/opt/local/share/java/fop/1.1" />
+        <property name="dbk" value="/opt/local/share/xsl/docbook-xsl-nons" />
+        <property name="saxon" value="/Applications/saxon6-5-5/saxon.jar" />
+	    <property name="whc" value="/Application/whc-3_3_0/lib/whc.jar" />
+    </project>
 
 and the `docbook-utf8.xsl` settings are:
 
-    <xsl:import href="file:///opt/local/share/xsl/docbook-xsl/html/docbook.xsl"/>
+    <xsl:import href="file:///opt/local/share/xsl/docbook-xsl-nons/html/docbook.xsl"/>
 
-The DocBook 4.5 DTD is located here:
+#### DocBook 4.5 installation
 
-    /opt/local/var/macports/software/docbook-xml-4.5/4.5_0/opt/local/share/xml/docbook/4.5/
+Create a symbolic link from the installed DocBook 4.5 files to the location
+where the build process will look for the DocBook DTD: the folder "above"
+`doc_src` in the OmegaT source tree:
 
-Copy the `4.5` folder to the folder that is three folders "higher" than the
-DocBook documentation source files in your folder tree and rename it
-`/docbook-xml-4.5`.
+    ln -s /opt/local/share/xml/docbook/4.5 /path/to/omegat/docbook-xml-4.5
 
-So, if you have your DocBook documentation source files in:
+#### Settings files
 
-    /path/to/omegat/branches/release-2-3/doc_src/hu/
+The modified `doc_src_paths.xml` and `docbook-utf8.xsl` must be copied to the
+same location as `docbook-xml-4.5`.
 
-The `/docbook-xml-4.5` folder should be copied inside `branches`:
-
-    /path/to/omegat/branches/docbook-xml-4.5/
-
-Both `doc_src_paths.xml` and `docbook-utf8.xsl` must be copied at the same level
-as `docbook-xml-4.5`.
-
-The ones available in `doc_src` are only there for reference.
+    /path/to/omegat/doc_src/en/
+       └────/docbook-xml-4.5/
+       └────/doc_src_paths.xml
+	   └────/docbook-utf8.xsl
 
 # Fonts
 The following fonts must be installed:
@@ -156,7 +178,8 @@ The following fonts must be installed:
 
 # Usage
 
-All the scripts require the language folder as argument.
+All the scripts require the language folder as argument and must be run from the
+`doc_src` directory.
 
 Note: Replace `ant` with `docgen` if you are using the `docgen` script.
 
@@ -170,7 +193,7 @@ Note: Replace `ant` with `docgen` if you are using the `docgen` script.
 
 ## Building HTML
 
-    ant -Dlanguage=en html
+    ant -Dlanguage=en html5
 
 ## Building PDF
 

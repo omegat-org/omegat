@@ -37,9 +37,7 @@ public class DictionaryEntry implements Comparable<DictionaryEntry> {
     private final String article;
 
     public DictionaryEntry(final String word, final String article) {
-        this.query = word.toLowerCase();
-        this.word = word;
-        this.article = article;
+        this(word.toLowerCase(), word, article);
     }
 
     public DictionaryEntry(final String query, final String word, final String article) {

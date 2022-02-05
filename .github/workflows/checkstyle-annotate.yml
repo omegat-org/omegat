@@ -1,0 +1,18 @@
+name: Run checkstyle
+
+on: [push, pull_request]
+
+jobs:
+  checkstyle:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v2.4.0
+      with:
+        distribution: 'temurin'
+        java-version: '8'
+    - uses: kiancross/checkstyle-annotations-action@v1
+    - name: run checkstyle
+      uses: gradle/gradle-build-action@v2.1.2
+      with:
+        arguments: checkstyleMain checkstyleTest

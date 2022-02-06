@@ -58,7 +58,8 @@ import org.omegat.util.Log;
 /**
  * Dictionary implementation for StarDict format.
  * <p>
- * StarDict format described on http://code.google.com/p/babiloo/wiki/StarDict_format
+ * StarDict format described on
+ * https://github.com/huzheng001/stardict-3/blob/master/dict/doc/StarDictFileFormat
  * <p>
  * <h1>Files</h1>
  * Every dictionary consists of these files:
@@ -104,8 +105,6 @@ public class StarDict implements IDictionaryFactory {
          * Field in StarDict .ifo file, added in version 3.0.0. This must be
          * retained in order to support idxoffsetbits=64 dictionaries (not yet
          * implemented).
-         *
-         * See http://www.stardict.org/StarDictFileFormat
          */
         int idxoffsetbits = 32;
         if ("3.0.0".equals(version)) {

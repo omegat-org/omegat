@@ -185,25 +185,25 @@ public class LingvoDSL implements IDictionaryFactory {
             } else if (tag.isTagName("sub")) {
                 sb.append("<sub>");
             } else if (tag.isTagName("m")) {
-                sb.append("<p>");
+                sb.append("<div>");
             } else if (tag.isTagName("m1")) {
-                sb.append("<p style=\"text-indent: 30px\">");
+                sb.append("<div style=\"text-indent: 30px\">");
             } else if (tag.isTagName("m2")) {
-                sb.append("<p style=\"text-indent: 60px\">");
+                sb.append("<div style=\"text-indent: 60px\">");
             } else if (tag.isTagName("m3")) {
-                sb.append("<p style=\"text-indent: 90px\">");
+                sb.append("<div style=\"text-indent: 90px\">");
             } else if (tag.isTagName("m4")) {
-                sb.append("<p style=\"text-indent: 90px\">");
+                sb.append("<div style=\"text-indent: 90px\">");
             } else if (tag.isTagName("m5")) {
-                sb.append("<p style=\"text-indent: 90px\">");
+                sb.append("<div style=\"text-indent: 90px\">");
             } else if (tag.isTagName("m6")) {
-                sb.append("<p style=\"text-indent: 90px\">");
+                sb.append("<div style=\"text-indent: 90px\">");
             } else if (tag.isTagName("m7")) {
-                sb.append("<p style=\"text-indent: 90px\">");
+                sb.append("<div style=\"text-indent: 90px\">");
             } else if (tag.isTagName("m8")) {
-                sb.append("<p style=\"text-indent: 90px\">");
+                sb.append("<div style=\"text-indent: 90px\">");
             } else if (tag.isTagName("m9")) {
-                sb.append("<p style=\"text-indent: 90px\">");
+                sb.append("<div style=\"text-indent: 90px\">");
             } else if (tag.isTagName("c")) {
                 if (tag.hasAttribute()) {
                     sb.append("<span style=\"color: ").append(tag.getAttribute().getValue()).append("\">");
@@ -274,7 +274,7 @@ public class LingvoDSL implements IDictionaryFactory {
             } else if (endTag.isTagName("sub")) {
                 sb.append("</sub>");
             } else if (endTag.isTagName("m")) {
-                sb.append("</p>");
+                sb.append("</div>");
             }
         }
 

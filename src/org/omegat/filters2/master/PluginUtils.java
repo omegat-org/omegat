@@ -29,6 +29,7 @@ package org.omegat.filters2.master;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -91,22 +92,28 @@ public final class PluginUtils {
     public static void loadPlugins(final Map<String, String> params) {
         File pluginsDir = new File(StaticUtils.installDir(), "plugins");
         File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
-        try {
-            // list all jars in /plugins/
-            FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
-            List<File> fs = Stream.of(pluginsDir, homePluginsDir)
-                    .flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
-                    .collect(Collectors.toList());
-            URL[] urls = new URL[fs.size()];
-            for (int i = 0; i < urls.length; i++) {
-                urls[i] = fs.get(i).toURI().toURL();
-                Log.logInfoRB("PLUGIN_LOAD_JAR", urls[i].toString());
+        // list all jars in /plugins/
+        FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
+        List<File> fs = Stream.of(pluginsDir, homePluginsDir)
+                .flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
+                .collect(Collectors.toList());
+        List<URL> urlList = new ArrayList<>();
+        for (File f : fs) {
+            try {
+                URL url = f.toURI().toURL();
+                urlList.add(url);
+                Log.logInfoRB("PLUGIN_LOAD_JAR", url.toString());
+            } catch (IOException ex) {
+                Log.log(ex);
             }
-            boolean foundMain = false;
-            // look on all manifests
-            URLClassLoader pluginsClassLoader = new URLClassLoader(urls, PluginUtils.class.getClassLoader());
-            for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
-                    .hasMoreElements();) {
+        }
+        boolean foundMain = false;
+        // look on all manifests
+        URLClassLoader pluginsClassLoader = new URLClassLoader(urlList.toArray(new URL[0]),
+                PluginUtils.class.getClassLoader());
+        try {
+            Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF");
+            while (mlist.hasMoreElements()) {
                 URL mu = mlist.nextElement();
                 try (InputStream in = mu.openStream()) {
                     Manifest m = new Manifest(in);
@@ -114,17 +121,23 @@ public final class PluginUtils {
                         // found main manifest - not in development mode
                         foundMain = true;
                     }
+                    loadFromManifest(m, pluginsClassLoader);
                     if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
                         String target = mu.toString();
-                        for (URL url : urls) {
+                        for (URL url : urlList) {
                             if (target.contains(url.toString())) {
                                 THEME_PLUGIN_JARS.add(url);
                             }
                         }
                     }
-                    loadFromManifest(m, pluginsClassLoader);
+                } catch (ClassNotFoundException e) {
+                    Log.log(e);
                 }
             }
+        } catch (IOException ex) {
+            Log.log(ex);
+        }
+        try {
             if (!foundMain) {
                 // development mode - load from dev-manifests CLI arg
                 String manifests = params.get(CLIParameters.DEV_MANIFESTS);
@@ -143,7 +156,7 @@ public final class PluginUtils {
                     }
                 }
             }
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException | IOException ex) {
             Log.log(ex);
         }
 

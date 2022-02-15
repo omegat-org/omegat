@@ -31,21 +31,21 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
-import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -92,7 +92,7 @@ public class YandexCloudTranslate extends BaseTranslate {
     }
 
     @Override
-    public String translate(Language sLang, Language tLang, String text) {
+    public String translate(Language sLang, Language tLang, String text) throws JsonProcessingException {
         if (!enabled) {
             return null;
         }
@@ -118,30 +118,14 @@ public class YandexCloudTranslate extends BaseTranslate {
             return IAMErrorMessage;
         }
 
-        StringBuilder requestBuilder = new StringBuilder("{")
-                .append("\"sourceLanguageCode\":\"").append(sLang.getLanguageCode().toLowerCase()).append("\",")
-                .append("\"targetLanguageCode\":\"").append(tLang.getLanguageCode().toLowerCase()).append("\",")
-                .append("\"folderId\": \"").append(folderId).append("\",");
-
-        if (Preferences.isPreference(PROPERTY_KEEP_TAGS)) {
-            requestBuilder.append("\"format\": \"HTML\",");
-        }
-
-        if (Preferences.isPreference(PROPERTY_USE_GLOSSARY)) {
-            Map<String, String> glossaryTerms = glossarySupplier.get();
-            if (!glossaryTerms.isEmpty()) {
-                requestBuilder.append(getGlossaryConfigPart(glossaryTerms));
-            }
-        }
-
-        requestBuilder.append("\"texts\": [").append(JsonParser.quote(trText)).append("]}");
+        String request = createJsonRequest(sLang, tLang, trText, folderId);
 
         Map<String, String> headers = new TreeMap<>();
         headers.put("Authorization", "Bearer " + IAMToken);
 
         String response;
         try {
-            response = HttpConnectionUtils.postJSON(TRANSLATE_URL, requestBuilder.toString(), headers);
+            response = HttpConnectionUtils.postJSON(TRANSLATE_URL, request, headers);
         } catch (HttpConnectionUtils.ResponseError e) {
             String errorMessage = extractErrorMessage(e.body);
             if (errorMessage == null) {
@@ -225,8 +209,28 @@ public class YandexCloudTranslate extends BaseTranslate {
         }
     }
 
+    protected String createJsonRequest(final Language sLang, final Language tLang, final String trText,
+                                       final String folderId) throws JsonProcessingException {
+
+        Map<String, Object> params = new TreeMap<>();
+        params.put("sourceLanguageCode", sLang.getLanguageCode().toLowerCase());
+        params.put("targetLanguageCode", tLang.getLanguageCode().toLowerCase());
+        params.put("folderId", folderId);
+        if (Preferences.isPreference(PROPERTY_KEEP_TAGS)) {
+            params.put("format", "HTML");
+        }
+        if (Preferences.isPreference(PROPERTY_USE_GLOSSARY)) {
+            Map<String, String> glossaryTerms = glossarySupplier.get();
+            if (!glossaryTerms.isEmpty()) {
+                params.put("glossaryConfig", getGlossaryConfigPart(glossaryTerms));
+            }
+        }
+        params.put("texts", Collections.singletonList(trText));
+        return new ObjectMapper().writeValueAsString(params);
+    }
+
     @SuppressWarnings("unchecked")
-    private String extractTranslation(final String json) {
+    protected String extractTranslation(final String json) {
         JsonNode rootNode;
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -274,17 +278,19 @@ public class YandexCloudTranslate extends BaseTranslate {
         return cachedIAMToken;
     }
 
-    private String getGlossaryConfigPart(Map<String, String> glossaryTerms) {
-        StringBuilder sb = new StringBuilder("\"glossaryConfig\":{\"glossaryData\":{\"glossaryPairs\":[");
-
-        String termsJson = glossaryTerms.entrySet().stream().limit(MAX_GLOSSARY_TERMS)
-                .map(e -> buildOneGlossaryJson(e.getKey(), e.getValue())).collect(Collectors.joining(","));
-
-        return sb.append(termsJson).append("]}},").toString();
+    private Map<String, Object> getGlossaryConfigPart(Map<String, String> glossaryTerms) {
+        long limit = MAX_GLOSSARY_TERMS;
+        Map<String, String> pairs = new TreeMap<>();
+        for (Map.Entry<String, String> e : glossaryTerms.entrySet()) {
+            if (limit-- == 0) break;
+            pairs.put("sorceText", e.getKey());
+            pairs.put("translatedText", e.getValue());
+        }
+        Map<String, Object> params = new TreeMap<>();
+        Map<String, Object> data = new TreeMap<>();
+        data.put("glossaryPairs", pairs);
+        params.put("glossaryData", data);
+        return params;
     }
 
-    private String buildOneGlossaryJson(String sourceText, String targetText) {
-        return new StringBuilder("{\"sourceText\":").append(JsonParser.quote(sourceText))
-                .append(",\"translatedText\":").append(JsonParser.quote(targetText)).append("}").toString();
-    }
 }

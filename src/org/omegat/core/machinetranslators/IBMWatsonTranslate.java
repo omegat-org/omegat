@@ -33,6 +33,7 @@ import java.awt.Window;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -42,12 +43,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
 import org.omegat.util.HttpConnectionUtils;
-import org.omegat.util.JsonParser;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -105,17 +106,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
             apiPassword = apiLogin;
             apiLogin = "apikey";
         }
-
-        StringBuilder json = new StringBuilder();
-        json.append("{");
-        json.append("\"text\":[" + JsonParser.quote(trText) + "],");
-
-        String modelId = getModelId();
-        if (modelId != null && !modelId.isEmpty()) {
-            json.append("\"model_id\":" + JsonParser.quote(modelId) + ",");
-        }
-        json.append("\"source\":" + JsonParser.quote(sLang.getLanguageCode().toUpperCase()) + ",");
-        json.append("\"target\":" + JsonParser.quote(tLang.getLanguageCode().toUpperCase()) + "}");
+        String json = createJsonRequest(sLang, tLang, trText);
 
         Map<String, String> headers = new TreeMap<>();
 
@@ -133,7 +124,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
 
         String v;
         try {
-            v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json.toString(), headers);
+            v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json, headers);
         } catch (IOException e) {
             return e.getLocalizedMessage();
         }
@@ -162,6 +153,21 @@ public class IBMWatsonTranslate extends BaseTranslate {
             url = WATSON_URL;
         }
         return url;
+    }
+
+    /**
+     * Create Watson request and return as json string.
+     */
+    protected String createJsonRequest(Language sLang, Language tLang, String trText) throws JsonProcessingException {
+        Map<String, Object> params = new TreeMap<>();
+        params.put("text", Collections.singletonList(trText));
+        String modelId = getModelId();
+        if (modelId != null && !modelId.isEmpty()) {
+            params.put("model_id", modelId);
+        }
+        params.put("source", sLang.getLanguageCode().toUpperCase());
+        params.put("target", tLang.getLanguageCode().toUpperCase());
+        return new ObjectMapper().writeValueAsString(params);
     }
 
     /**

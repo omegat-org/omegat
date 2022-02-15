@@ -31,7 +31,9 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -222,7 +224,7 @@ public class YandexCloudTranslate extends BaseTranslate {
         if (Preferences.isPreference(PROPERTY_USE_GLOSSARY)) {
             Map<String, String> glossaryTerms = glossarySupplier.get();
             if (!glossaryTerms.isEmpty()) {
-                params.put("glossaryConfig", getGlossaryConfigPart(glossaryTerms));
+                createGlossaryConfigPart(params, glossaryTerms);
             }
         }
         params.put("texts", Collections.singletonList(trText));
@@ -278,19 +280,52 @@ public class YandexCloudTranslate extends BaseTranslate {
         return cachedIAMToken;
     }
 
-    private Map<String, Object> getGlossaryConfigPart(Map<String, String> glossaryTerms) {
-        long limit = MAX_GLOSSARY_TERMS;
-        Map<String, String> pairs = new TreeMap<>();
+    /**
+     * create glossary config part of request json.
+     * we make visibility to protected for test purpose.
+     * @param params result map to put glossary part.
+     * @param glossaryTerms glossary map.
+     */
+    protected void createGlossaryConfigPart(Map<String, Object> params, Map<String, String> glossaryTerms) {
+        List<GlossaryPair> pairs = new ArrayList<>();
         for (Map.Entry<String, String> e : glossaryTerms.entrySet()) {
-            if (limit-- == 0) break;
-            pairs.put("sorceText", e.getKey());
-            pairs.put("translatedText", e.getValue());
+            pairs.add(new GlossaryPair(e.getKey(), e.getValue()));
+            if (pairs.size() >= MAX_GLOSSARY_TERMS) {
+                break;
+            }
         }
-        Map<String, Object> params = new TreeMap<>();
-        Map<String, Object> data = new TreeMap<>();
-        data.put("glossaryPairs", pairs);
-        params.put("glossaryData", data);
-        return params;
+        params.put("glossaryConfig", new GlossaryConfig(new GlossaryData(pairs)));
     }
 
+    /**
+     * Json definition: glossaryConfig.
+     */
+    static class GlossaryConfig {
+        public GlossaryData glossaryData;
+        GlossaryConfig(GlossaryData glossaryData) {
+            this.glossaryData = glossaryData;
+        }
+    }
+
+    /**
+     * Json definition: glossaryData.
+     */
+    static class GlossaryData {
+        public List<GlossaryPair> glossaryPairs;
+        GlossaryData(List<GlossaryPair> glossaryPairs) {
+            this.glossaryPairs = glossaryPairs;
+        }
+    }
+
+    /**
+     * Json definition: glossaryPair.
+     */
+    static class GlossaryPair {
+        public String sourceText;
+        public String translatedText;
+        GlossaryPair(String sourceText, String translatedText) {
+            this.sourceText = sourceText;
+            this.translatedText = translatedText;
+        }
+    }
 }

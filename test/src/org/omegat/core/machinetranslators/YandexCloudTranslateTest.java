@@ -30,6 +30,9 @@ package org.omegat.core.machinetranslators;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -50,7 +53,6 @@ public class YandexCloudTranslateTest extends TestCore {
 
     @Test
     public void createJsonRequest() throws JsonProcessingException {
-
         Preferences.setPreference("yandex.cloud.keep-tags", true);
         Preferences.setPreference("yandex.cloud.use-glossary", false);
         YandexCloudTranslate yandexCloudTranslate = new YandexCloudTranslate();
@@ -62,6 +64,25 @@ public class YandexCloudTranslateTest extends TestCore {
         ObjectMapper mapper = new ObjectMapper();
         String expected = "{\"folderId\":\"ID\",\"format\":\"HTML\",\"sourceLanguageCode\":\"en\","
                 + "\"targetLanguageCode\":\"fr\",\"texts\":[\"Translation text.\"]}";
+        assertEquals(mapper.readTree(expected), mapper.readTree(json));
+    }
+
+    @Test
+    public void createGlossaryConfigPartTest() throws JsonProcessingException {
+        YandexCloudTranslate yandexCloudTranslate = new YandexCloudTranslate();
+        Map<String, Object> params = new TreeMap<>();
+        Map<String, String> glossaryTerms = new TreeMap<>();
+        glossaryTerms.put("source1", "translation1");
+        glossaryTerms.put("source2", "translation2");
+        yandexCloudTranslate.createGlossaryConfigPart(params, glossaryTerms);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(params);
+        String expected = "{\"glossaryConfig\":{\"glossaryData\":{\"glossaryPairs\":"
+                + "["
+                + "{\"sourceText\":\"source1\",\"translatedText\":\"translation1\"},"
+                + "{\"sourceText\":\"source2\",\"translatedText\":\"translation2\"}"
+                + "]"
+                + "}}}";
         assertEquals(mapper.readTree(expected), mapper.readTree(json));
     }
 }

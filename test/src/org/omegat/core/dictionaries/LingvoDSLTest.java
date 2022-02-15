@@ -30,9 +30,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import io.github.eb4j.dsl.DslResult;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
@@ -47,6 +52,20 @@ public class LingvoDSLTest {
 
     private static final File TEST_DICT = new File("test/data/dicts-lingvo/test.dsl");
     private static final File TEST_DICT_DZ = new File("test/data/dicts-lingvo-dz/test.dsl.dz");
+    private static final Path TEST_DICT_IDX = Paths.get(Paths.get(TEST_DICT.toURI()) + ".idx");
+    private static final Path TEST_DICT_DZ_IDX = Paths.get(Paths.get(TEST_DICT_DZ.toURI()) + ".idx");
+
+    @AfterClass
+    public static void cleanUp() {
+        try {
+            Files.deleteIfExists(TEST_DICT_IDX);
+        } catch (IOException ignored) {
+        }
+        try {
+            Files.deleteIfExists(TEST_DICT_DZ_IDX);
+        } catch (IOException ignored) {
+        }
+    }
 
     @Test
     public void testReadFileDict() throws Exception {

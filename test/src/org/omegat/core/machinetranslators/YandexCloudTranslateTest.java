@@ -4,7 +4,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2021 Hiroshi Miura.
+ *  Copyright (C) 2022.
  *                Home page: http://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -30,6 +30,9 @@ package org.omegat.core.machinetranslators;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -38,31 +41,48 @@ import org.omegat.core.TestCore;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 
-public class IBMWatsonTranslateTest extends TestCore {
+public class YandexCloudTranslateTest extends TestCore {
 
     @Test
     public void getJsonResults() {
-        Preferences.setPreference(Preferences.ALLOW_IBMWATSON_TRANSLATE, true);
-        IBMWatsonTranslate ibmWatsonTranslate = new IBMWatsonTranslate();
-        String json = "{\"translations\": ["
-                + "  {\"translation\": \"translated text goes here.\" }"
-                + "],"
-                + " \"word_count\": 4, \"character_count\": 53 }";
-        String translation = ibmWatsonTranslate.getJsonResults(json);
+        YandexCloudTranslate yandexCloudTranslate = new YandexCloudTranslate();
+        String json = "{\"translations\": [{\"text\": \"translated text goes here.\" }]}";
+        String translation = yandexCloudTranslate.extractTranslation(json);
         assertEquals("translated text goes here.", translation);
     }
 
     @Test
     public void createJsonRequest() throws JsonProcessingException {
-        System.setProperty(IBMWatsonTranslate.PROPERTY_MODEL, "MODEL");
-        IBMWatsonTranslate ibmWatsonTranslate = new IBMWatsonTranslate();
+        Preferences.setPreference("yandex.cloud.keep-tags", true);
+        Preferences.setPreference("yandex.cloud.use-glossary", false);
+        YandexCloudTranslate yandexCloudTranslate = new YandexCloudTranslate();
         Language sLang = new Language("EN");
         Language tLang = new Language("FR");
         String trText = "Translation text.";
-        String json = ibmWatsonTranslate.createJsonRequest(sLang, tLang, trText);
+        String folderId = "ID";
+        String json = yandexCloudTranslate.createJsonRequest(sLang, tLang, trText, folderId);
         ObjectMapper mapper = new ObjectMapper();
-        String expected = "{\"model_id\":\"MODEL\",\"source\":\"EN\","
-                + "\"target\":\"FR\",\"text\":[\"Translation text.\"]}";
+        String expected = "{\"folderId\":\"ID\",\"format\":\"HTML\",\"sourceLanguageCode\":\"en\","
+                + "\"targetLanguageCode\":\"fr\",\"texts\":[\"Translation text.\"]}";
+        assertEquals(mapper.readTree(expected), mapper.readTree(json));
+    }
+
+    @Test
+    public void createGlossaryConfigPartTest() throws JsonProcessingException {
+        YandexCloudTranslate yandexCloudTranslate = new YandexCloudTranslate();
+        Map<String, Object> params = new TreeMap<>();
+        Map<String, String> glossaryTerms = new TreeMap<>();
+        glossaryTerms.put("source1", "translation1");
+        glossaryTerms.put("source2", "translation2");
+        params.put("glossaryConfig", yandexCloudTranslate.createGlossaryConfigPart(glossaryTerms));
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(params);
+        String expected = "{\"glossaryConfig\":{\"glossaryData\":{\"glossaryPairs\":"
+                + "["
+                + "{\"sourceText\":\"source1\",\"translatedText\":\"translation1\"},"
+                + "{\"sourceText\":\"source2\",\"translatedText\":\"translation2\"}"
+                + "]"
+                + "}}}";
         assertEquals(mapper.readTree(expected), mapper.readTree(json));
     }
 }

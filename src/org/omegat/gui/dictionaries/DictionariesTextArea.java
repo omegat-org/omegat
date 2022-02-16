@@ -159,7 +159,9 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                         : font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
                 + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + "; "
                 + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + ";} "
-                + ".word {font-size: " + (2 + font.getSize()) + "; font-style: bold; }"
+                + ".word {font-size: " + (2 + font.getSize()) + "; font-style: bold;} "
+                + ".entry {line-height: 1.1;} "
+                + ".article {font-size: " + font.getSize() + ";}"
                 );
         htmlEditorKit.setStyleSheet(baseStyleSheet);
         setEditorKit(htmlEditorKit);
@@ -274,14 +276,13 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         int i = 0;
         for (DictionaryEntry de : data) {
             if (wasPrev) {
-                txt.append("<br><hr>");
+                txt.append("<hr style=\"line-height: 1.3; color: #777\">");
             } else {
                 wasPrev = true;
             }
-            txt.append("<div id =\"").append(i).append("\"><b><span class=\"word\">");
-            txt.append(de.getWord());
-            txt.append("</span></b>");
-            txt.append(" - ").append(de.getArticle());
+            txt.append("<div id=\"").append(i).append("\" class=\"entry\">");
+            txt.append("<b><span class=\"word\">").append(de.getWord()).append("</span></b>");
+            txt.append(" - <span class=\"article\">").append(de.getArticle()).append("</span>");
             txt.append("</div>");
             displayedWords.add(de.getWord().toLowerCase());
             i++;

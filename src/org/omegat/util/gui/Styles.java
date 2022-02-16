@@ -110,7 +110,8 @@ public final class Styles {
         COLOR_ALIGNER_ACCEPTED(UIManager.getColor("OmegaT.alignerAccepted")),
         COLOR_ALIGNER_NEEDSREVIEW(UIManager.getColor("OmegaT.alignerNeedsReview")),
         COLOR_ALIGNER_HIGHLIGHT(UIManager.getColor("OmegaT.alignerHighlight")),
-        COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT(UIManager.getColor("OmegaT.alignerTableRowHighlight"));
+        COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT(UIManager.getColor("OmegaT.alignerTableRowHighlight")),
+        COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT(UIManager.getColor("OmegaT.machinetranslateSelectedHighlight"));
 
         private static final String DEFAULT_COLOR = "__DEFAULT__";
         private Color color;

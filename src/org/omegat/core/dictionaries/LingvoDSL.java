@@ -93,7 +93,7 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticles(final String word) throws IOException {
-            return readEntries(data.lookup(word));
+            return readEntries(word, data.lookup(word));
         }
 
         /**
@@ -105,13 +105,13 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticlesPredictive(final String word) throws IOException {
-            return readEntries(data.lookupPredictive(word));
+            return readEntries(word, data.lookupPredictive(word));
         }
 
-        private List<DictionaryEntry> readEntries(final DslResult dslResult) {
+        private List<DictionaryEntry> readEntries(final String word, final DslResult dslResult) {
             List<DictionaryEntry> list = new ArrayList<>();
             for (Map.Entry<String, String> e : dslResult.getEntries(htmlVisitor)) {
-                DictionaryEntry dictionaryEntry = new DictionaryEntry(e.getKey(), e.getValue());
+                DictionaryEntry dictionaryEntry = new DictionaryEntry(word, e.getKey(), e.getValue());
                 list.add(dictionaryEntry);
             }
             return list;

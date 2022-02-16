@@ -77,7 +77,7 @@ public class DictionariesManagerTest {
 
         }) {
             @Override
-            protected boolean doFuzzyMatching() {
+            public boolean doFuzzyMatching() {
                 return true;
             }
         };

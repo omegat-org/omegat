@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik
                2012 Jean-Christophe Helary
                2015 Aaron Madlon-Kay
+               2021 Aaron Madlon-Kay, Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -199,16 +200,28 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         UIThreadsUtil.mustBeSwingThread();
         HTMLDocument doc = (HTMLDocument) getDocument();
 
+        // multiple entry can be existed for each query words,
+        // try to get first one.
         int index = displayedWords.indexOf(word.toLowerCase());
-        if (index == -1) {
-            return;
+        if (index == -1 && manager.doFuzzyMatching()) {
+            // when not found and fuzzy matching allowed,retry with stemmed word
+            String[] stemmed = manager.getStemmedWords(word);
+            if (stemmed.length == 0) {
+                return;
+            }
+            index = displayedWords.indexOf(stemmed[0]);
+            if (index == -1) {
+                return;
+            }
         }
         Element el = doc.getElement(Integer.toString(index));
         if (el == null) {
             return;
         }
         int start = el.getStartOffset();
-        int end = el.getEndOffset();
+        // When trying to select the last word, Swing cannot make the rectangle
+        // if the end is pointing past the last character.
+        int end = Math.max(el.getEndOffset() - 1, start);
         try {
             // Start position of article
             Rectangle startRect = Java8Compat.modelToView(this, start);
@@ -224,7 +237,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 scrollRectToVisible(startRect);
             }
         } catch (BadLocationException ex) {
-            // Shouldn't be thrown
+            Log.log(ex);
         }
     }
 
@@ -284,7 +297,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             txt.append("<b><span class=\"word\">").append(de.getWord()).append("</span></b>");
             txt.append(" - <span class=\"article\">").append(de.getArticle()).append("</span>");
             txt.append("</div>");
-            displayedWords.add(de.getWord().toLowerCase());
+            displayedWords.add(de.getQuery());
             i++;
         }
         txt.append("</html>");

@@ -6,6 +6,7 @@
  Copyright (C) 2012 Alex Buloichik, Didier Briel
                2016-2017 Aaron Madlon-Kay
                2018 Didier Briel
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -31,18 +32,19 @@ import java.awt.Window;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.swing.JCheckBox;
 
 import org.omegat.gui.exttrans.MTConfigDialog;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Support for Microsoft Translator API machine translation.
@@ -77,42 +79,34 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
 
     @Override
     protected synchronized String translate(Language sLang, Language tLang, String text) throws Exception {
-        text = text.length() > 10000 ? text.substring(0, 9997) + "..." : text;
-        String prev = getFromCache(sLang, tLang, text);
+        String prev = getFromCache(sLang, tLang, text.length() > 10000 ? text.substring(0, 9997) + "..." : text);
         if (prev != null) {
             return prev;
         }
 
         String langFrom = checkMSLang(sLang);
         String langTo = checkMSLang(tLang);
-        try {
-            String translation;
-            if (accessToken == null) {
-                requestToken();
+        String translation;
+        if (accessToken == null) {
+            requestToken();
+            translation = requestTranslate(langFrom, langTo, text);
+        } else {
+            try {
                 translation = requestTranslate(langFrom, langTo, text);
-            } else {
-                try {
+            } catch (HttpConnectionUtils.ResponseError ex) {
+                if (ex.code == 400) {
+                    Log.logDebug(LOGGER, "Re-fetching Microsoft Translator API token due to 400 response");
+                    requestToken();
                     translation = requestTranslate(langFrom, langTo, text);
-                } catch (HttpConnectionUtils.ResponseError ex) {
-                    if (ex.code == 400) {
-                        LOGGER.finer("Re-fetching Microsoft Translator API token due to 400 response");
-                        requestToken();
-                        translation = requestTranslate(langFrom, langTo, text);
-                    } else {
-                        throw ex;
-                    }
+                } else {
+                    throw ex;
                 }
             }
-            if (translation != null) {
-                putToCache(sLang, tLang, text, translation);
-            }
-            return translation;
-        } catch (HttpConnectionUtils.ResponseError ex) {
-            return ex.getLocalizedMessage();
-        } catch (Exception ex) {
-            LOGGER.log(Level.FINE, ex.getLocalizedMessage(), ex);
-            return ex.getLocalizedMessage();
         }
+        if (translation != null) {
+            putToCache(sLang, tLang, text, translation);
+        }
+        return translation;
     }
 
     /**
@@ -163,7 +157,7 @@ public class MicrosoftTranslatorAzure extends BaseTranslate {
             translatedText = translatedText.replace("&gt;", ">");
             return translatedText;
         } else {
-            LOGGER.warning(OStrings.getString("MT_ENGINE_MICROSOFT_WRONG_RESPONSE"));
+            Log.logWarningRB("MT_ENGINE_MICROSOFT_WRONG_RESPONSE");
             return null;
         }
     }

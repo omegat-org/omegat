@@ -30,6 +30,7 @@
 package org.omegat.core.machinetranslators;
 
 import com.fasterxml.jackson.databind.JsonNode;
+
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -60,7 +61,7 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected String translate(Language sLang, Language tLang, String text) throws Exception {
+    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
         String prev = getFromCache(sLang, tLang, text);
         if (prev != null) {
             return prev;
@@ -69,16 +70,11 @@ public final class MyMemoryHumanTranslate extends AbstractMyMemoryTranslate {
         JsonNode jsonResponse;
 
         // Get MyMemory response in JSON format
-        try {
-            jsonResponse = getMyMemoryResponse(sLang, tLang, text);
-        } catch (Exception e) {
-            return e.getLocalizedMessage();
-        }
+        jsonResponse = getMyMemoryResponse(sLang, tLang, text);
 
         // responseData/translatedText contains the best match.
         String translation = jsonResponse.get("responseData").get("translatedText").asText();
         putToCache(sLang, tLang, text, translation);
         return translation;
     }
-
 }

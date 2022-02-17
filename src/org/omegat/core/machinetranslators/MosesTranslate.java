@@ -41,9 +41,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
-import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
+
 import org.omegat.core.Core;
 import org.omegat.filters2.html2.HTMLUtils;
 import org.omegat.gui.exttrans.MTConfigDialog;
@@ -73,11 +73,9 @@ public class MosesTranslate extends BaseTranslate {
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-
         String server = getServerUrl();
-
         if (server == null) {
-            return OStrings.getString("MT_ENGINE_MOSES_URL_NOTFOUND");
+            throw new Exception(OStrings.getString("MT_ENGINE_MOSES_URL_NOTFOUND"));
         }
 
         XmlRpcClient client = getClient(new URL(server));
@@ -86,13 +84,8 @@ public class MosesTranslate extends BaseTranslate {
         mosesParams.put("text", mosesPreprocess(text, sLang.getLocale()));
 
         Object[] xmlRpcParams = { mosesParams };
-
-        try {
-            HashMap<?, ?> response = (HashMap<?, ?>) client.execute("translate", xmlRpcParams);
-            return mosesPostprocess((String) response.get("text"), tLang);
-        } catch (XmlRpcException e) {
-            return e.getLocalizedMessage();
-        }
+        HashMap<?, ?> response = (HashMap<?, ?>) client.execute("translate", xmlRpcParams);
+        return mosesPostprocess((String) response.get("text"), tLang);
     }
 
     private XmlRpcClient getClient(URL url) {

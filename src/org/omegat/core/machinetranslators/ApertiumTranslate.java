@@ -125,7 +125,6 @@ public class ApertiumTranslate extends BaseTranslate {
             apiKey = APERTIUM_SERVER_KEY_DEFAULT;
         }
         String markUnknownVal = useMarkUnknown() ? "yes" : "no";
-
         String url = String.format(APERTIUM_SERVER_URL_FORMAT, server, URLEncoder.encode(trText, "UTF-8"),
                 markUnknownVal, sourceLang, targetLang, apiKey);
         String v;
@@ -133,7 +132,7 @@ public class ApertiumTranslate extends BaseTranslate {
             v = HttpConnectionUtils.getURL(new URL(url));
         } catch (IOException e) {
             Log.logErrorRB(e, "APERTIUM_CUSTOM_SERVER_NOTFOUND");
-            return OStrings.getString("APERTIUM_CUSTOM_SERVER_NOTFOUND");
+            throw new Exception(OStrings.getString("APERTIUM_CUSTOM_SERVER_NOTFOUND"));
         }
 
         String tr = getJsonResults(v);

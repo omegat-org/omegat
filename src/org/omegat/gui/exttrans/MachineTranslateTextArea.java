@@ -190,7 +190,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             return result == null ? null : new MachineTranslationInfo(translator.getName(), result);
         }
 
-        private String getTranslation(Language source, Language target) throws Exception {
+        private String getTranslation(Language source, Language target) {
             if (!force) {
                 if (!Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, true)) {
                     return translator.getCachedTranslation(source, target, src);
@@ -202,7 +202,14 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                     }
                 }
             }
-            return translator.getTranslation(source, target, src);
+            try {
+                return translator.getTranslation(source, target, src);
+            } catch (Exception e) {
+                Log.log(e);
+                Core.getMainWindow()
+                        .showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(), e.getLocalizedMessage());
+                return null;
+            }
         }
     }
 

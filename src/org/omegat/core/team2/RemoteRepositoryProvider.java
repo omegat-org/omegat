@@ -250,34 +250,27 @@ public class RemoteRepositoryProvider {
      *            directory name or file name
      */
     public void copyFilesFromReposToProject(String localPath) throws IOException {
-        String[] myForceExcludes = "".equals(localPath) ? forceExcludes : new String[]{};
-        for (Mapping m : getMappings(localPath, myForceExcludes)) {
-            m.copyFromRepoToProject();
-            if ("".equals(localPath)) {
-                m.propagateDeletes();
-            }
-        }
+        copyFilesFromReposToProject(localPath, "", true);
     }
 
     /**
-     * Copy omegat.project from remote git server mapped to local
-     * directory under the name, omegat.project.NEW
-     *
-     * This is used only for that purpose, but follows the code of
-     * copyFilesFromReposToProject() because we have to go through the
-     * hoops of mapping to find out where the remote omegat.project
-     * file is.
+     * Copies all files under specified path that are mapped to local directory.
+     * <p>
+     * If propagateDelete flag is set true and path is empty (i.e. full project),
+     * also file deletions since last copy are propagated, i.e. if remote repo has
+     * file deletions, those files are deleted locally as well.
      *
      * @param localPath
-     *            directory name or file name. This has to be "omegat.project".
+     *            directory name or file name
      */
-    public void copyFilesFromReposToProjectTempNew(String localPath) throws IOException {
+    public void copyFilesFromReposToProject(final String localPath, final String postfix,
+                                            final boolean propagateDelete) throws IOException {
         String[] myForceExcludes = "".equals(localPath) ? forceExcludes : new String[]{};
         for (Mapping m : getMappings(localPath, myForceExcludes)) {
-            m.copyFromRepoToProjectTempNew();
-            // if ("".equals(localPath)) {
-            //    m.propagateDeletes();
-            //}
+            m.copyFromRepoToProject(postfix);
+            if (propagateDelete && "".equals(localPath)) {
+                m.propagateDeletes();
+            }
         }
     }
 
@@ -435,6 +428,10 @@ public class RemoteRepositoryProvider {
         }
 
         public void copyFromRepoToProject() throws IOException {
+            copyFromRepoToProject("");
+        }
+
+        public void copyFromRepoToProject(final String postfix) throws IOException {
             if (!matches()) {
                 throw new RuntimeException("Path doesn't match with mapping");
             }
@@ -447,7 +444,7 @@ public class RemoteRepositoryProvider {
                 // directory mapping
                 List<String> excludes = new ArrayList<>(repoMapping.getExcludes());
                 excludes.addAll(forceExcludes);
-                copy(from, to, filterPrefix, repoMapping.getIncludes(), excludes, null);
+                copy(from, to, filterPrefix, postfix, repoMapping.getIncludes(), excludes, null);
             } else if (!from.exists()) {
                 //e.g. you opened an omegat.properties to download a team project, but it refers to a remote repo location that doesn't exist.
                 throw new RuntimeException("Location '" + withoutLeadingSlash(repoMapping.getRepository()) + "' does not exist in repository " + repoDefinition.getUrl());
@@ -460,40 +457,6 @@ public class RemoteRepositoryProvider {
                 copyFile(from, to, null);
             }
         }
-      //
-      // This function is only used to copy remote omegat.project to local omegat.project.NEW
-      //
-        public void copyFromRepoToProjectTempNew() throws IOException {
-            if (!matches()) {
-                throw new RuntimeException("Path doesn't match with mapping");
-            }
-            // Remove leading slashes on child args to avoid doing `new
-            // File("foo", "/")` which treats the "/" as an actual child element
-            // name and prevents proper slash normalization later on.
-            File from = new File(getRepositoryDir(repoDefinition), withoutLeadingSlash(repoMapping.getRepository()));
-            // originally to was directory, but here we want to copy remote "omegat.project" to "omegat.project.NEW".
-            File to = new File(projectRoot, withoutLeadingSlash(repoMapping.getLocal()) + "omegat.project.NEW");
-
-
-            if (from.isDirectory()) {
-                // directory mapping
-                List<String> excludes = new ArrayList<>(repoMapping.getExcludes());
-                excludes.addAll(forceExcludes);
-                copyTempNew(from, to, filterPrefix, repoMapping.getIncludes(), excludes, null);
-            } else if (!from.exists()) {
-                //e.g. you opened an omegat.properties to download a team project, but it refers to a remote repo location that doesn't exist.
-                throw new RuntimeException("Location '"+withoutLeadingSlash(repoMapping.getRepository())+"' does not exist in repository "+repoDefinition.getUrl());
-            } else {
-                // file mapping
-                if (!filterPrefix.equals("/")) {
-                    throw new RuntimeException(
-                            "Filter prefix should have been / for file mapping, but was " + filterPrefix);
-                }
-                copyFile(from, to, null);
-            }
-        }
-
-
 
         public void copyFromProjectToRepo(String eolConversionCharset) throws Exception {
             if (!matches()) {
@@ -536,53 +499,31 @@ public class RemoteRepositoryProvider {
             return repo.getFileVersion(new File(repoMapping.getRepository(), filterPrefix).getPath());
         }
 
-
-        /**
-         * Specialized version of copy() to copy omegat.project in remote repository to
-         * omegat.project.NEW
-         *
-         * @return Relative paths of copied files, <em>with <code>/</code> at
-         *         start and end</em>
-         */
-        protected List<String> copyTempNew(File from, File to, String prefix, List<String> includes,
+        protected List<String> copy(File from, File to, String prefix, List<String> includes,
                                     List<String> excludes, String eolConversionCharset) throws IOException {
-            prefix = withSlashes(prefix);
-            List<String> relativeFiles = FileUtil.buildRelativeFilesList(from, includes, excludes);
-            List<String> copied = new ArrayList<>();
-            for (String rf : relativeFiles) {
-                rf = withSlashes(rf);
-                if (rf.startsWith("/.repositories/")) {
-                    continue; // list from root - shouldn't travel to .repositories/
-                }
-                if (prefix.isEmpty() || prefix.equals("/") || rf.startsWith(prefix)) {
-                    // rf was /omegat.project/
-                    // from: /projectrootdir/.repositories/https_git.example.com_remote_repostory.git
-                    // to:   /projectrootdir/omegat.project.NEW
-                    // So the next line should be copyFile(new File(from, rf), new File(to, ""), eolConversionCharset);
-                    // Instead of copyFile(new File(from, rf), new File(to, rf), eolConversionCharset);
-                    copyFile(new File(from, rf), new File(to, ""), eolConversionCharset);
-                    copied.add(rf);
-                }
-            }
-            return copied;
+             return copy(from, to, prefix, "", includes, excludes, eolConversionCharset);
         }
 
         /**
          * @return Relative paths of copied files, <em>with <code>/</code> at
          *         start and end</em>
          */
-        protected List<String> copy(File from, File to, String prefix, List<String> includes,
+        protected List<String> copy(File from, File to, String prefix, String postfix, List<String> includes,
                 List<String> excludes, String eolConversionCharset) throws IOException {
             prefix = withSlashes(prefix);
             List<String> relativeFiles = FileUtil.buildRelativeFilesList(from, includes, excludes);
             List<String> copied = new ArrayList<>();
             for (String rf : relativeFiles) {
-                rf = withSlashes(rf);
-                if (rf.startsWith("/.repositories/")) {
+                String srf = withSlashes(rf);
+                if (srf.startsWith("/.repositories/")) {
                     continue; // list from root - shouldn't travel to .repositories/
                 }
-                if (prefix.isEmpty() || prefix.equals("/") || rf.startsWith(prefix)) {
-                    copyFile(new File(from, rf), new File(to, rf), eolConversionCharset);
+                if (prefix.equals("/") || srf.startsWith(prefix)) {
+                    if (postfix.isEmpty()) {
+                        copyFile(new File(from, rf), new File(to, srf), eolConversionCharset);
+                    } else {
+                        copyFile(new File(from, rf), new File(to, rf + postfix), eolConversionCharset);
+                    }
                     copied.add(rf);
                 }
             }

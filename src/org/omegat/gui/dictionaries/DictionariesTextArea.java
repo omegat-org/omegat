@@ -34,8 +34,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
@@ -53,7 +53,7 @@ import java.util.stream.Stream;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollBar;
+import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -101,8 +101,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         implements IDictionaries, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
-    private static final int beforeItems = 5;
-    private static final int afterItems = 10;
+    private static final int beforeItems = 15;
+    private static final int afterItems = 30;
     private static final int viewItems = beforeItems + afterItems;
 
     protected final DictionariesManager manager = new DictionariesManager(this);
@@ -127,8 +127,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         addMouseListener(mouseCallback);
         addHyperlinkListener(new ExternalBrowserLaunchingLinkListener());
         addHyperlinkListener(new SoundActionListener());
-        // XXX: FIXME
-        // scrollPane.getVerticalScrollBar().addAdjustmentListener(scrollCallback);
+        addComponentListener(scrollCallback);
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
@@ -147,29 +146,39 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         Preferences.addPropertyChangeListener(Preferences.DICTIONARY_AUTO_SEARCH, e -> refresh());
     }
 
-    protected transient final AdjustmentListener scrollCallback = new AdjustmentListener() {
-        // XXX: FIXME
-        /**
-         * Invoked when the value of the adjustable has changed.
-         *
-         * @param e the event to be processed
-         */
+    protected transient final ComponentListener scrollCallback = new ComponentListener() {
         @Override
-        public void adjustmentValueChanged(AdjustmentEvent e) {
-            if (viewItems < dictionaryEntries.size()) {
-                JScrollBar scrollBar = (JScrollBar) e.getSource();
-                if (scrollBar.getValue() == scrollBar.getMaximum()) {
-                    if (currentIndex < dictionaryEntries.size() - afterItems) {
-                        currentIndex = Math.min(currentIndex + afterItems, dictionaryEntries.size() - 1);
-                        callDictionary();
-                    }
-                } else if (scrollBar.getValue() == scrollBar.getMinimum()) {
-                    if (currentIndex > beforeItems) {
-                        currentIndex = Math.max(currentIndex - beforeItems, 0);
-                        callDictionary();
-                    }
+        public void componentResized(ComponentEvent e) {
+        }
+
+        @Override
+        public void componentMoved(ComponentEvent e) {
+            if (viewItems < dictionaryEntries.size() && currentIndex > beforeItems) {
+                JViewport viewport = scrollPane.getViewport();
+                Rectangle viewRect = viewport.getViewRect();
+                Point p = viewRect.getLocation();
+                int startPos = Java8Compat.viewToModel(DictionariesTextArea.this, p);
+                int startIndex = getIndexAtOffset(startPos);
+                p.x += viewRect.width;
+                p.y += viewRect.height;
+                int endPos = Java8Compat.viewToModel(DictionariesTextArea.this, p);
+                int endIndex = getIndexAtOffset(endPos - 1);
+                if (endIndex > currentIndex + afterItems - 2) {
+                    currentIndex = endIndex;
+                    callDictionary();
+                } else if (startIndex < currentIndex - beforeItems + 2) {
+                    currentIndex = startIndex;
+                    callDictionary();
                 }
             }
+        }
+
+        @Override
+        public void componentShown(ComponentEvent e) {
+        }
+
+        @Override
+        public void componentHidden(ComponentEvent e) {
         }
     };
 

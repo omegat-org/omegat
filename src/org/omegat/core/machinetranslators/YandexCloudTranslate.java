@@ -94,11 +94,7 @@ public class YandexCloudTranslate extends BaseTranslate {
     }
 
     @Override
-    public String translate(Language sLang, Language tLang, String text) throws JsonProcessingException {
-        if (!enabled) {
-            return null;
-        }
-
+    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
         String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
         String prev = getFromCache(sLang, tLang, trText);
         if (prev != null) {
@@ -107,17 +103,17 @@ public class YandexCloudTranslate extends BaseTranslate {
 
         String oAuthToken = getCredential(PROPERTY_OAUTH_TOKEN);
         if (oAuthToken == null || oAuthToken.isEmpty()) {
-            return OStrings.getString("MT_ENGINE_YANDEX_CLOUD_OAUTH_TOKEN_NOT_FOUND");
+            throw new Exception(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_OAUTH_TOKEN_NOT_FOUND"));
         }
 
         String folderId = getCredential(PROPERTY_FOLDER_ID);
         if (folderId == null || folderId.isEmpty()) {
-            return OStrings.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_NOT_FOUND");
+            throw new Exception(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_NOT_FOUND"));
         }
 
         String IAMToken = getIAMToken(oAuthToken);
         if (IAMToken == null) {
-            return IAMErrorMessage;
+            throw new Exception(IAMErrorMessage);
         }
 
         String request = createJsonRequest(sLang, tLang, trText, folderId);
@@ -132,18 +128,17 @@ public class YandexCloudTranslate extends BaseTranslate {
             String errorMessage = extractErrorMessage(e.body);
             if (errorMessage == null) {
                 errorMessage = OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
+                throw new Exception(errorMessage);
             }
-            return errorMessage;
-        } catch (IOException e) {
-            return e.getLocalizedMessage();
+            throw e;
         }
-
+        if (response == null) {
+            return null;
+        }
         String tr = extractTranslation(response);
-
         if (tr == null) {
-            return "";
+            return null;
         }
-
         tr = cleanSpacesAroundTags(tr, trText);
         putToCache(sLang, tLang, trText, tr);
         return tr;
@@ -213,7 +208,6 @@ public class YandexCloudTranslate extends BaseTranslate {
 
     protected String createJsonRequest(final Language sLang, final Language tLang, final String trText,
                                        final String folderId) throws JsonProcessingException {
-
         Map<String, Object> params = new TreeMap<>();
         params.put("sourceLanguageCode", sLang.getLanguageCode().toLowerCase());
         params.put("targetLanguageCode", tLang.getLanguageCode().toLowerCase());

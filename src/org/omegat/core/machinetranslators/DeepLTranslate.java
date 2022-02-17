@@ -30,11 +30,8 @@
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
-import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,7 +64,6 @@ public class DeepLTranslate extends BaseTranslate {
     //
     // See https://www.deepl.com/docs-api/accessing-the-api/api-versions/
     protected static final String DEEPL_URL = "https://api.deepl.com/v1/translate";
-    protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
     private final static int MAX_TEXT_LENGTH = 5000;
 
     @Override
@@ -91,10 +87,10 @@ public class DeepLTranslate extends BaseTranslate {
         String apiKey = getCredential(PROPERTY_API_KEY);
 
         if (apiKey == null || apiKey.isEmpty()) {
-            return OStrings.getString("DEEPL_API_KEY_NOTFOUND");
+            throw new Exception(OStrings.getString("DEEPL_API_KEY_NOTFOUND"));
         }
 
-        Map<String, String> params = new TreeMap<String, String>();
+        Map<String, String> params = new TreeMap<>();
 
         // No check is done, but only "EN", "DE", "FR", "ES", "IT", "NL", "PL" are supported right now.
 
@@ -108,45 +104,17 @@ public class DeepLTranslate extends BaseTranslate {
         params.put("preserve_formatting", "1");
         params.put("auth_key", apiKey);
 
-        Map<String, String> headers = new TreeMap<String, String>();
+        Map<String, String> headers = new TreeMap<>();
 
-        String v;
-        try {
-            v = HttpConnectionUtils.get(DEEPL_URL, params, headers, "UTF-8");
-        } catch (IOException e) {
-            return e.getLocalizedMessage();
-        }
-
+        String v = HttpConnectionUtils.get(DEEPL_URL, params, headers, "UTF-8");
         String tr = getJsonResults(v);
-
         if (tr == null) {
-            return "";
+            return null;
         }
-
         tr = unescapeHTML(tr);
-
         tr = cleanSpacesAroundTags(tr, trText);
-
         putToCache(sLang, tLang, trText, tr);
         return tr;
-    }
-
-    /** Convert entities to character. Ex: "&#39;" to "'". */
-    private String unescapeHTML(String text) {
-
-        text = text.replace("&quot;", "\"")
-                .replace("&gt;", ">")
-                .replace("&lt;", "<")
-                .replace("&amp;", "&");
-
-        Matcher m = RE_HTML.matcher(text);
-        while (m.find()) {
-            String g = m.group();
-            int codePoint = Integer.parseInt(m.group(1));
-            String cpString = String.valueOf(Character.toChars(codePoint));
-            text = text.replace(g, cpString);
-        }
-        return text;
     }
 
     /**

@@ -34,6 +34,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
@@ -51,6 +53,7 @@ import java.util.stream.Stream;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollBar;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -98,14 +101,19 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         implements IDictionaries, IPaneMenu {
 
     private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
+    private static final int beforeItems = 5;
+    private static final int afterItems = 10;
+    private static final int viewItems = beforeItems + afterItems;
 
     protected final DictionariesManager manager = new DictionariesManager(this);
 
-    protected final List<String> displayedWords = new ArrayList<>();
+    protected final List<DictionaryEntry> dictionaryEntries = new ArrayList<>();
 
     protected ITokenizer tokenizer;
 
     private final DockableScrollPane scrollPane;
+
+    private int currentIndex;
 
     public DictionariesTextArea(IMainWindow mw) {
         super(true);
@@ -119,6 +127,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         addMouseListener(mouseCallback);
         addHyperlinkListener(new ExternalBrowserLaunchingLinkListener());
         addHyperlinkListener(new SoundActionListener());
+        // XXX: FIXME
+        // scrollPane.getVerticalScrollBar().addAdjustmentListener(scrollCallback);
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
@@ -137,12 +147,38 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         Preferences.addPropertyChangeListener(Preferences.DICTIONARY_AUTO_SEARCH, e -> refresh());
     }
 
+    protected transient final AdjustmentListener scrollCallback = new AdjustmentListener() {
+        // XXX: FIXME
+        /**
+         * Invoked when the value of the adjustable has changed.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void adjustmentValueChanged(AdjustmentEvent e) {
+            if (viewItems < dictionaryEntries.size()) {
+                JScrollBar scrollBar = (JScrollBar) e.getSource();
+                if (scrollBar.getValue() == scrollBar.getMaximum()) {
+                    if (currentIndex < dictionaryEntries.size() - afterItems) {
+                        currentIndex = Math.min(currentIndex + afterItems, dictionaryEntries.size() - 1);
+                        callDictionary();
+                    }
+                } else if (scrollBar.getValue() == scrollBar.getMinimum()) {
+                    if (currentIndex > beforeItems) {
+                        currentIndex = Math.max(currentIndex - beforeItems, 0);
+                        callDictionary();
+                    }
+                }
+            }
+        }
+    };
+
     @Override
     public void setFont(final Font font) {
         Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
         attributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
         super.setFont(font.deriveFont(attributes));
-        if (displayedWords != null && !displayedWords.isEmpty()) {
+        if (dictionaryEntries != null && !dictionaryEntries.isEmpty()) {
             initDocument();
             refresh();
         }
@@ -190,31 +226,19 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     @Override
     public void clear() {
         super.clear();
-        displayedWords.clear();
+        dictionaryEntries.clear();
+        currentIndex = 0;
     }
 
     /**
-     * Move position in pane to the currently selected word.
+     * Move position in pane to the currently selected index.
      */
-    protected void callDictionary(String word) {
+    protected void callDictionary() {
         UIThreadsUtil.mustBeSwingThread();
+        putEntriesToPane();
+        // doc should be get after update pane.
         HTMLDocument doc = (HTMLDocument) getDocument();
-
-        // multiple entry can be existed for each query words,
-        // try to get first one.
-        int index = displayedWords.indexOf(word.toLowerCase());
-        if (index == -1 && manager.doFuzzyMatching()) {
-            // when not found and fuzzy matching allowed,retry with stemmed word
-            String[] stemmed = manager.getStemmedWords(word);
-            if (stemmed.length == 0) {
-                return;
-            }
-            index = displayedWords.indexOf(stemmed[0]);
-            if (index == -1) {
-                return;
-            }
-        }
-        Element el = doc.getElement(Integer.toString(index));
+        Element el = doc.getElement(Integer.toString(currentIndex));
         if (el == null) {
             return;
         }
@@ -239,6 +263,42 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         } catch (BadLocationException ex) {
             Log.log(ex);
         }
+    }
+
+    /**
+     * Move position in pane to the currently selected word.
+     */
+    protected void callDictionary(String word) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        // multiple entry can be existed for each query words,
+        // try to get first one.
+        int index = indexOfEntry(word.toLowerCase());
+        if (index == -1 && manager.doFuzzyMatching()) {
+            // when not found and fuzzy matching allowed,retry with stemmed word
+            String[] stemmed = manager.getStemmedWords(word);
+            if (stemmed.length == 0) {
+                return;
+            }
+            index = indexOfEntry(stemmed[0]);
+            if (index == -1) {
+                return;
+            }
+        }
+        currentIndex = index;
+        callDictionary();
+    }
+
+    private int indexOfEntry(final String word) {
+        int i =0;
+        while (i < dictionaryEntries.size()) {
+            DictionaryEntry de = dictionaryEntries.get(i);
+            if (de.getQuery().equals(word)) {
+                break;
+            }
+            i++;
+        }
+        return i;
     }
 
     @Override
@@ -273,35 +333,15 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     @Override
     protected void setFoundResult(final SourceTextEntry se, final List<DictionaryEntry> data) {
         UIThreadsUtil.mustBeSwingThread();
-
         clear();
-
         if (data == null) {
             return;
         }
-
         if (!data.isEmpty() && Preferences.isPreference(Preferences.NOTIFY_DICTIONARY_HITS)) {
             scrollPane.notify(true);
         }
-
-        StringBuilder txt = new StringBuilder("<html>");
-        boolean wasPrev = false;
-        int i = 0;
-        for (DictionaryEntry de : data) {
-            if (wasPrev) {
-                txt.append("<hr style=\"line-height: 1.3; color: #777\">");
-            } else {
-                wasPrev = true;
-            }
-            txt.append("<div id=\"").append(i).append("\" class=\"entry\">");
-            txt.append("<b><span class=\"word\">").append(de.getWord()).append("</span></b>");
-            txt.append(" - <span class=\"article\">").append(de.getArticle()).append("</span>");
-            txt.append("</div>");
-            displayedWords.add(de.getQuery());
-            i++;
-        }
-        txt.append("</html>");
-        fastReplaceContent(txt.toString());
+        dictionaryEntries.addAll(data);
+        putEntriesToPane();
     }
 
     // Previously we were incrementally adding to the current document and later
@@ -354,18 +394,46 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         }
     };
 
-    private String getWordAtOffset(int offset) {
+    private int getIndexAtOffset(int offset) {
         HTMLDocument doc = (HTMLDocument) getDocument();
-        for (int i = 0; i < displayedWords.size(); i++) {
+        for (int i = 0; i < dictionaryEntries.size(); i++) {
             Element el = doc.getElement(Integer.toString(i));
             if (el == null) {
                 continue;
             }
             if (el.getStartOffset() <= offset && el.getEndOffset() >= offset) {
-                return displayedWords.get(i);
+                return i;
             }
         }
-        return null;
+        return -1;
+    }
+
+    private String getWordAtOffset(int offset) {
+        int index = getIndexAtOffset(offset);
+        if (index == -1) {
+            return null;
+        }
+        return dictionaryEntries.get(index).getQuery();
+    }
+
+    private void putEntriesToPane() {
+        StringBuilder txt = new StringBuilder("<html>");
+        boolean wasPrev = false;
+        int start = Math.max(0, currentIndex - beforeItems);
+        int end = Math.min(dictionaryEntries.size(), currentIndex + afterItems);
+        for (int i = start; i < end; i++) {
+            if (wasPrev) {
+                txt.append("<hr style=\"line-height: 1.3; color: #777\">");
+            } else {
+                wasPrev = true;
+            }
+            txt.append("<div id=\"").append(i).append("\" class=\"entry\">");
+            txt.append("<b><span class=\"word\">").append(dictionaryEntries.get(i).getWord()).append("</span></b>");
+            txt.append(" - <span class=\"article\">").append(dictionaryEntries.get(i).getArticle()).append("</span>");
+            txt.append("</div>");
+        }
+        txt.append("</html>");
+        fastReplaceContent(txt.toString());
     }
 
     /**

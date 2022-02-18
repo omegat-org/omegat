@@ -108,6 +108,9 @@ public final class Preferences {
     public static final boolean GLOSSARY_MERGE_ALTERNATE_DEFINITIONS_DEFAULT = true;
     public static final String DICTIONARY_FUZZY_MATCHING = "dictionary_fuzzy_matching";
     public static final String DICTIONARY_AUTO_SEARCH = "dictionary_auto_search";
+    public static final String DICTIONARY_CONDENSED_VIEW = "dictionary_condensed_view";
+    public static final String DICTIONARY_USE_FONT = "dictionary_use_font";
+    public static final String TF_DICTIONARY_FONT_SIZE = "dictionary_font_size";
 
     public static final String MAINWINDOW_GEOMETRY_PREFIX = "screen";
     public static final String MAINWINDOW_LAYOUT = "docking_layout";

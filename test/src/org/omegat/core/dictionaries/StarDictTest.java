@@ -82,14 +82,14 @@ public class StarDictTest extends TestCore {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertEquals(1, result.size());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
 
         // Test case normalization
         word = word.toUpperCase(FRENCH.getLocale());
         result = dict.readArticles(word);
         assertEquals(1, result.size());
         assertEquals("testudo", result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
 
         // Test prediction
         word = "testu";
@@ -98,7 +98,7 @@ public class StarDictTest extends TestCore {
         result = dict.readArticlesPredictive(word);
         assertEquals(1, result.size());
         assertEquals("testudo", result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
     }
 
     @Test
@@ -110,6 +110,6 @@ public class StarDictTest extends TestCore {
         assertEquals(1, result.size());
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
     }
 }

@@ -67,6 +67,14 @@ public class FontSelectionController extends BasePreferencesController {
         panel.fontComboBox.setModel(new DefaultComboBoxModel<>(StaticUtils.getFontNames()));
         panel.fontComboBox.addActionListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
         panel.sizeSpinner.addChangeListener(e -> panel.previewTextArea.setFont(getSelectedFont()));
+        panel.applyToDictionaryPaneCheckBox.addChangeListener(e -> {
+            if (panel.applyToDictionaryPaneCheckBox.isSelected()) {
+                panel.sizeDictionarySpinner.setValue(panel.sizeSpinner.getValue());
+                panel.sizeDictionarySpinner.setEnabled(false);
+            } else {
+                panel.sizeDictionarySpinner.setEnabled(true);
+            }
+        });
     }
 
     @Override
@@ -77,7 +85,16 @@ public class FontSelectionController extends BasePreferencesController {
         panel.previewTextArea.setFont(oldFont);
         panel.fontComboBox.setSelectedItem(oldFont.getName());
         panel.sizeSpinner.setValue(oldFont.getSize());
+        int dictionaryFontSize = Preferences.getPreferenceDefault(Preferences.TF_DICTIONARY_FONT_SIZE,
+                oldFont.getSize());
+        panel.sizeDictionarySpinner.setValue(dictionaryFontSize);
         panel.applyToProjectFilesCheckBox.setSelected(Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT));
+        panel.applyToDictionaryPaneCheckBox.setSelected(
+                Preferences.isPreferenceDefault(Preferences.DICTIONARY_USE_FONT, true));
+        if (panel.applyToDictionaryPaneCheckBox.isSelected()) {
+            panel.sizeDictionarySpinner.setValue(panel.sizeSpinner.getValue());
+            panel.sizeDictionarySpinner.setEnabled(false);
+        }
     }
 
     @Override
@@ -86,7 +103,10 @@ public class FontSelectionController extends BasePreferencesController {
         panel.previewTextArea.setFont(oldFont);
         panel.fontComboBox.setSelectedItem(oldFont.getName());
         panel.sizeSpinner.setValue(oldFont.getSize());
+        panel.sizeDictionarySpinner.setValue(oldFont.getSize());
         panel.applyToProjectFilesCheckBox.setSelected(false);
+        panel.applyToDictionaryPaneCheckBox.setSelected(true);
+        panel.sizeDictionarySpinner.setEnabled(false);
     }
 
     private Font getSelectedFont() {
@@ -97,12 +117,20 @@ public class FontSelectionController extends BasePreferencesController {
     @Override
     public void persist() {
         boolean applyToProjFiles = panel.applyToProjectFilesCheckBox.isSelected();
+        boolean applyToDicitonaryPane = panel.applyToDictionaryPaneCheckBox.isSelected();
         Font newFont = getSelectedFont();
         if (!newFont.equals(oldFont)
-                || applyToProjFiles != Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
+                || applyToProjFiles != Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)
+                || applyToDicitonaryPane != Preferences.isPreference(Preferences.DICTIONARY_USE_FONT)) {
             Preferences.setPreference(Preferences.PROJECT_FILES_USE_FONT, applyToProjFiles);
             Preferences.setPreference(Preferences.TF_SRC_FONT_NAME, newFont.getName());
             Preferences.setPreference(Preferences.TF_SRC_FONT_SIZE, newFont.getSize());
+            Preferences.setPreference(Preferences.DICTIONARY_USE_FONT, applyToDicitonaryPane);
+            if (applyToDicitonaryPane) {
+                Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE, newFont.getSize());
+            } else {
+                Preferences.setPreference(Preferences.TF_DICTIONARY_FONT_SIZE, panel.sizeDictionarySpinner.getValue());
+            }
             CoreEvents.fireFontChanged(newFont);
         }
     }

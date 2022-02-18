@@ -37,6 +37,7 @@ import java.util.stream.Collectors;
 import io.github.eb4j.stardict.StarDictDictionary;
 
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
 
 /**
  * StarDict Dictionary support.
@@ -100,6 +101,9 @@ public class StarDict implements IDictionaryFactory {
                     .collect(Collectors.toList());
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public List<DictionaryEntry> readArticlesPredictive(String word) {
             List<StarDictDictionary.Entry> result = dictionary.readArticlesPredictive(word);
@@ -120,8 +124,30 @@ public class StarDict implements IDictionaryFactory {
         }
 
         private static DictionaryEntry convertEntry(StarDictDictionary.Entry entry) {
-            return new DictionaryEntry(entry.getWord(), entry.getArticle().replace("\n", "<br>"));
+            boolean condensed = Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false);
+            StringBuilder sb = new StringBuilder();
+            if (entry.getType().equals(StarDictDictionary.EntryType.MEAN)) {
+                    String[] lines = entry.getArticle().split("\n");
+                    if (condensed) {
+                        for (int i = 0; i < lines.length; i++) {
+                            if (i > 0) {
+                                sb.append("<span class=\"paragraph-start\">&nbsp;\u00b6</span><span>");
+                            } else {
+                                sb.append("<span>");
+                            }
+                            sb.append(lines[i]).append("</span>");
+                        }
+                    } else {
+                        for (String line : lines) {
+                            sb.append("<div>").append(line).append("</div>");
+                        }
+                    }
+            } else if (entry.getType().equals(StarDictDictionary.EntryType.PHONETIC)) {
+                sb.append("<span>(").append(entry.getArticle()).append(")</span>");
+            } else if (entry.getType().equals(StarDictDictionary.EntryType.HTML)) {
+                sb.append(entry.getArticle());
+            }
+            return new DictionaryEntry(entry.getWord(), sb.toString());
         }
-
     }
 }

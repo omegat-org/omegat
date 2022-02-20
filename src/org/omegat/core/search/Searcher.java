@@ -10,7 +10,7 @@
                2013 Aaron Madlon-Kay, Alex Buloichik
                2014 Alex Buloichik, Piotr Kulik, Aaron Madlon-Kay
                2015 Aaron Madlon-Kay
-               2017-2018 Thomas Cordonnier
+               2017-2021 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -51,6 +51,7 @@ import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
+import org.omegat.core.data.ITMXEntry;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
@@ -358,13 +359,13 @@ public class Searcher {
             if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
                     final String fileTM = tmEn.getKey();
-                    searchEntries(tmEn.getValue().getEntries(), fileTM);
+                    searchEntries(tmEn.getValue().getEntries(), ENTRY_ORIGIN_TRANSLATION_MEMORY, fileTM);
                     checkStop.checkInterrupted();
                 }
                 for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
-                    searchEntriesAlternative(tmEn.getValue().getDefaults(), langTM.getLanguage());
-                    searchEntriesAlternative(tmEn.getValue().getAlternatives(), langTM.getLanguage());
+                    searchEntries(tmEn.getValue().getDefaults(), ENTRY_ORIGIN_ALTERNATIVE, langTM.getLanguage());
+                    searchEntries(tmEn.getValue().getAlternatives(), ENTRY_ORIGIN_ALTERNATIVE, langTM.getLanguage());
                     checkStop.checkInterrupted();
                 }
             }
@@ -445,8 +446,8 @@ public class Searcher {
      * @param tmxID identifier of the TMX. E.g. the filename or language code
      * @throws SearchLimitReachedException when nr of found matches exceeds requested nr of results
      */
-    private void searchEntries(Collection<PrepareTMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
-        for (PrepareTMXEntry tm : tmEn) {
+    private void searchEntries(Iterable<? extends ITMXEntry> tmEn, int origin, final String tmxID) throws SearchLimitReachedException {
+        for (ITMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= searchExpression.numberOfResults) {
                 throw new SearchLimitReachedException();
@@ -457,25 +458,7 @@ public class Searcher {
             // and real translation
             // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
             // which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_TRANSLATION_MEMORY, tmxID);
-
-            checkStop.checkInterrupted();
-        }
-    }
-
-    private void searchEntriesAlternative(Collection<TMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
-        for (TMXEntry tm : tmEn) {
-            // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= searchExpression.numberOfResults) {
-                throw new SearchLimitReachedException();
-            }
-
-            // for alternative translations:
-            // - it is not feasible to get the SourceTextEntry that matches the tm.source, so we cannot get the entryNum
-            // and real translation
-            // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
-            // which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_ALTERNATIVE, tmxID);
+            checkEntry(tm.getSourceText(), tm.getTranslationText(), tm.getNote(), null, null, origin, tmxID);
 
             checkStop.checkInterrupted();
         }

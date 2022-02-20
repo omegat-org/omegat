@@ -33,7 +33,7 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 import org.omegat.core.data.ExternalTMX;
-import org.omegat.core.data.PrepareTMXEntry;
+import org.omegat.core.data.ITMXEntry;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -82,14 +82,14 @@ public class POFilterTest extends TestFilterBase {
         ExternalTMX tmEntries = fi.referenceEntries;
         assertEquals(2, tmEntries.getEntries().size());
         {
-            PrepareTMXEntry entry = tmEntries.getEntries().get(0);
-            assertEquals("True fuzzy!", entry.source);
-            assertEquals("trans5", entry.translation);
+            ITMXEntry entry = tmEntries.getEntries().get(0);
+            assertEquals("True fuzzy!", entry.getSourceText());
+            assertEquals("trans5", entry.getTranslationText());
         }
         {
-            PrepareTMXEntry entry = tmEntries.getEntries().get(1);
-            assertEquals("True fuzzy 2!", entry.source);
-            assertEquals("trans6", entry.translation);
+            ITMXEntry entry = tmEntries.getEntries().get(1);
+            assertEquals("True fuzzy 2!", entry.getSourceText());
+            assertEquals("trans6", entry.getTranslationText());
         }
     }
 

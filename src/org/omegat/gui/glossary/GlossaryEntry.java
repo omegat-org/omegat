@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import org.omegat.core.data.ITranslationEntry;
 import org.omegat.util.StringUtil;
 
 /**
@@ -40,7 +41,7 @@ import org.omegat.util.StringUtil;
  * @author Aaron Madlon-Kay
  * @author Alex Buloichik
  */
-public class GlossaryEntry {
+public class GlossaryEntry implements ITranslationEntry {
     public GlossaryEntry(String src, String[] loc, String[] com, boolean[] fromPriorityGlossary, String[] origins) {
         mSource = StringUtil.normalizeUnicode(src);
         mTargets = loc;
@@ -58,6 +59,16 @@ public class GlossaryEntry {
 
     public String getSrcText() {
         return mSource;
+    }
+
+    /* Method for ITranslationEntry */
+    public String getSourceText() {
+        return mSource;
+    }
+
+    /* Method for ITranslationEntry */
+    public String getTranslationText() {
+        return mTargets.length > 0 ? mTargets[0] : "";
     }
 
     /**

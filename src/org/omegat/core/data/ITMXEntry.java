@@ -3,10 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
-               2012 Thomas CORDONNIER
-               2013 Aaron Madlon-Kay
-               2014 Alex Buloichik
+ Copyright (C) 2021 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,36 +22,57 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
+
 package org.omegat.core.data;
 
-import java.util.Collections;
 import java.util.List;
 
+import org.omegat.util.TMXProp;
+
 /**
- * Class for store data from TMs from the <code>/tm</code> folder. They are used only for fuzzy matches.
- * <p>
- * Note that the name includes "TMX" for historical reasons; the source may not have been an actual TMX file.
+ * Common interface for any object storing a pair source / translation text
+ * with date and author
  *
- * @author Alex Buloichik (alex73mail@gmail.com)
- * @author Thomas CORDONNIER
- * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
-public class ExternalTMX {
+public interface ITMXEntry extends ITranslationEntry {
 
-    private final String name;
+    /**
+     * Gets the initial creator of the entry
+     */
+    String getCreator();
 
-    private final List<? extends ITMXEntry> entries;
+    /**
+     * Gets the initial creation date as an EPOCH timestamp
+     */
+    long getCreationDate();
 
-    ExternalTMX(String name, List<PrepareTMXEntry> entries) {
-        this.name = name;
-        this.entries = entries;
+    /**
+     * Gets the author of last change in the entry
+     */
+    String getChanger();
+
+    /**
+     * Gets the EPOCH timestamp for last change in this entry
+     */
+    long getChangeDate();
+
+    /**
+     * Gets text note (markup &lt;note&gt; in TMX format)
+     */
+    String getNote();
+
+    default boolean hasNote() {
+        return getNote() != null;
     }
 
-    public String getName() {
-        return name;
-    }
+    /* --------------------- Properties ------------ */
 
-    public List<ITMXEntry> getEntries() {
-        return Collections.unmodifiableList(entries);
-    }
+    boolean hasProperties();
+
+    String getPropValue(String propType);
+
+    boolean hasPropValue(String propType, String propValue);
+
+    List<TMXProp> getProperties();
 }

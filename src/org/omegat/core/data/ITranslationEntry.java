@@ -3,10 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
-               2012 Thomas CORDONNIER
-               2013 Aaron Madlon-Kay
-               2014 Alex Buloichik
+ Copyright (C) 2021 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,36 +22,32 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
+
 package org.omegat.core.data;
 
-import java.util.Collections;
-import java.util.List;
 
 /**
- * Class for store data from TMs from the <code>/tm</code> folder. They are used only for fuzzy matches.
- * <p>
- * Note that the name includes "TMX" for historical reasons; the source may not have been an actual TMX file.
+ * Common interface for any object storing a pair source / translation text
  *
- * @author Alex Buloichik (alex73mail@gmail.com)
- * @author Thomas CORDONNIER
- * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
-public class ExternalTMX {
+public interface ITranslationEntry {
 
-    private final String name;
+    /**
+     * Gets the source text
+     */
+    String getSourceText();
 
-    private final List<? extends ITMXEntry> entries;
+    /**
+     * Gets translation text
+     */
+    String getTranslationText();
 
-    ExternalTMX(String name, List<PrepareTMXEntry> entries) {
-        this.name = name;
-        this.entries = entries;
+    /**
+     * Check whenever there is a translation
+     */
+    default boolean isTranslated() {
+        return getTranslationText() != null;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public List<ITMXEntry> getEntries() {
-        return Collections.unmodifiableList(entries);
-    }
 }

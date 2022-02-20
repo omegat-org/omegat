@@ -139,7 +139,12 @@ If you would like to submit a patch, the recommended procedure is as follows:
 3. Patches/PRs will be reviewed by a core developer. If accepted, the changes
    will be committed to master by the reviewer.
 
+4. OmegaT project use git for source code management, and core developers prefers
+   a strategy of rebase-and-merge or squash-and-merge for git history.
+   Developers can examine and bisect a single line of change history easily.
 
+Note: Because core developers don't use github merge feature, your PR will marked as
+close-without-merge on github but it is not a problem.
 
 About Files in This Directory
 =============================

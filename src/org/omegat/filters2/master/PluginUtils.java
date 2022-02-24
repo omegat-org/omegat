@@ -121,6 +121,7 @@ public final class PluginUtils {
                         // found main manifest - not in development mode
                         foundMain = true;
                     }
+                    loadFromManifest(m, pluginsClassLoader);
                     if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
                         String target = mu.toString();
                         for (URL url : urlList) {
@@ -129,7 +130,6 @@ public final class PluginUtils {
                             }
                         }
                     }
-                    loadFromManifest(m, pluginsClassLoader);
                 } catch (ClassNotFoundException e) {
                     Log.log(e);
                 }

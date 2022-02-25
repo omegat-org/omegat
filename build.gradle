@@ -132,9 +132,9 @@ dependencies {
         implementation 'net.loomchild:maligna:3.0.1'
 
         // Dictionary
-        implementation 'io.github.dictzip:dictzip:0.11.2'
+        implementation 'io.github.dictzip:dictzip:0.12.1'
         implementation 'com.github.takawitter:trie4j:0.9.8'
-        implementation 'io.github.eb4j:dsl4j:0.4.5'
+        implementation 'io.github.eb4j:dsl4j:0.5.0'
         implementation 'io.github.eb4j:stardict4j:0.3.0'
 
         // Encoding dectection

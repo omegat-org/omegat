@@ -50,6 +50,8 @@ import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
  */
 public class LingvoDSLTest {
 
+    private final static String LINE_SEPARATOR = System.getProperty("line.separator");
+
     private static final File TEST_DICT = new File("test/data/dicts-lingvo/test.dsl");
     private static final File TEST_DICT_DZ = new File("test/data/dicts-lingvo-dz/test.dsl.dz");
     private static final Path TEST_DICT_IDX = Paths.get(Paths.get(TEST_DICT.toURI()) + ".idx");
@@ -74,7 +76,7 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("<div style=\"text-indent: 30px\">Only a single white space on first character</div>\n",
+        assertEquals("<div style=\"text-indent: 30px\">Only a single white space on first character</div>",
                 result.get(0).getArticle());
     }
 
@@ -85,7 +87,8 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("<div style=\"text-indent: 30px\">Translation line also can have a single TAB char</div>\n", result.get(0).getArticle());
+        assertEquals("<div style=\"text-indent: 30px\">Translation line also can have a single TAB char</div>",
+                result.get(0).getArticle());
     }
 
     @Test
@@ -95,7 +98,8 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("<div style=\"text-indent: 30px\">\u0441\u0442\u0430\u043d\u043e\u043a</div>\n", result.get(0).getArticle());
+        assertEquals("<div style=\"text-indent: 30px\">\u0441\u0442\u0430\u043d\u043e\u043a</div>",
+                result.get(0).getArticle());
     }
 
     @Test
@@ -104,9 +108,9 @@ public class LingvoDSLTest {
         String word = "\u4e00\u4e2a\u6837";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
-        assertEquals(word, result.get(0).getWord());
+        assertEquals("\u4E00\u500B\u6A23"+ LINE_SEPARATOR + "\u4E00\u4E2A\u6837", result.get(0).getWord());
         assertEquals("[y\u012B ge y\u00E0ng]&nbsp;\nsame as \u4E00\u6A23|\u4E00\u6837 y\u012B " +
-                "y\u00E0ng&nbsp;, the same\n", result.get(0).getArticle());
+                "y\u00E0ng&nbsp;, the same", result.get(0).getArticle());
     }
 
     @Test
@@ -116,7 +120,7 @@ public class LingvoDSLTest {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("<div>Here is an <span style='font-style: italic'>italic</span> <strong>word</strong>.</div>\n",
+        assertEquals("<div>Here is an <span style='font-style: italic'>italic</span> <strong>word</strong>.</div>",
                 result.get(0).getArticle());
     }
 
@@ -139,7 +143,7 @@ public class LingvoDSLTest {
                         "<div style=\"text-indent: 60px\">to abandon convertibility</div>\n" +
                         "<div style=\"text-indent: 60px\">to abandon the [gold] standard</div>\n" +
                         "<div style=\"text-indent: 60px\">to abandon price control</div>\n" +
-                        "<div style=\"text-indent: 60px\">to abandon a right</div>\n",
+                        "<div style=\"text-indent: 60px\">to abandon a right</div>",
                 result.get(0).getArticle());
     }
 

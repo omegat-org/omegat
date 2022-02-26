@@ -158,6 +158,14 @@
           <para>Defines the project-specific external search resources.</para>
         </listitem>
       </varlistentry>
+
+      <varlistentry>
+        <term>TMs to export</term>
+
+        <listitem>
+          <para>Defines the translation memory formats that will be exported when you execute the Create Translated Documents command. Note that this option is located under the <emphasis role="bold">Export Translation Memory Folder</emphasis> file location.</para>
+        </listitem>
+      </varlistentry>
     </variablelist>
   </section>
 

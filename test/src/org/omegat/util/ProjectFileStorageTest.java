@@ -82,6 +82,7 @@ public class ProjectFileStorageTest {
         assertTrue(props.getWriteableGlossary().endsWith("glossary/glossary.txt"));
         assertTrue(props.getTMRoot().endsWith("tm/"));
         assertTrue(props.getDictRoot().endsWith("dictionary/"));
+        assertEquals(props.getExportTMRoot(), props.getProjectRoot());
         assertEquals(tempDir.getName(), props.getProjectName());
         assertEquals(new Language("en-us"), props.getSourceLanguage());
         assertEquals(new Language("fr-fr"), props.getTargetLanguage());
@@ -90,6 +91,9 @@ public class ProjectFileStorageTest {
         assertTrue(props.isSentenceSegmentingEnabled());
         assertTrue(props.isSupportDefaultTranslations());
         assertFalse(props.isRemoveTags());
+        assertTrue(props.isExportTm("level1"));
+        assertTrue(props.isExportTm("level2"));
+        assertTrue(props.isExportTm("omegat"));
         assertTrue(props.getExternalCommand().isEmpty());
         List<String> excludes = props.getSourceRootExcludes();
         assertEquals(6, excludes.size());
@@ -124,6 +128,34 @@ public class ProjectFileStorageTest {
     }
 
     @Test
+    public void testLoadProjectWithNonDefaultExportTMLevels() throws Exception {
+        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
+                new File(PROJECT_DIR, "nondefaultexporttmoptions.project"));
+        props.autocreateDirectories();
+        props.verifyProject();
+        assertTrue(props.isExportTm("level1"));
+        assertFalse(props.isExportTm("level2"));
+        assertFalse(props.isExportTm("omegat"));
+    }
+
+    @Test
+    public void testWriteProjectWithExportTMLevelsChanged() throws Exception {
+        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
+                new File(PROJECT_DIR, "defaultdirs.project"));
+        props.autocreateDirectories();
+        props.verifyProject();
+        props.setExportTmLevels(Arrays.asList("level1"));
+
+        // Write the project file and read it again to verify that export TM
+        // levels were set correctly
+        ProjectFileStorage.writeProjectFile(props);
+        props = ProjectFileStorage.loadPropertiesFile(tempDir, new File(props.getProjectRoot(), OConsts.FILE_PROJECT));
+        assertTrue(props.isExportTm("level1"));
+        assertFalse(props.isExportTm("level2"));
+        assertFalse(props.isExportTm("omegat"));
+    }
+
+    @Test
     public void testNearAbsolutePaths() throws Exception {
         File projFile = new File(PROJECT_DIR, "defaultdirs.project");
         Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
@@ -140,14 +172,16 @@ public class ProjectFileStorageTest {
             File dictDir = new File(tempDir, "dictionary").getAbsoluteFile();
             File glosDir = new File(tempDir, "glossary").getAbsoluteFile();
             File tmDir = new File(tempDir, "tm").getAbsoluteFile();
+            File exportTmDir = new File(tempDir, "export_tm").getAbsoluteFile();
             omt.getProject().setSourceDir(srcDir.getPath());
             omt.getProject().setTargetDir(trgDir.getPath());
             omt.getProject().setDictionaryDir(dictDir.getPath());
             omt.getProject().setGlossaryDir(glosDir.getPath());
             omt.getProject().setTmDir(tmDir.getPath());
+            omt.getProject().setExportTmDir(exportTmDir.getPath());
 
             // Make all the actual folders
-            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir).forEach(File::mkdirs);
+            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
 
             // Load the ProjectProperties and verify that the project folders
             // are resolved correctly
@@ -167,6 +201,7 @@ public class ProjectFileStorageTest {
             assertEquals(relPrefix + dictDir.getName(), outOmt.getProject().getDictionaryDir());
             assertEquals(relPrefix + glosDir.getName(), outOmt.getProject().getGlossaryDir());
             assertEquals(relPrefix + tmDir.getName(), outOmt.getProject().getTmDir());
+            assertEquals(relPrefix + exportTmDir.getName(), outOmt.getProject().getExportTmDir());
         }
     }
 
@@ -185,15 +220,17 @@ public class ProjectFileStorageTest {
             File dictDir = new File(tempDir, "dictionary").getAbsoluteFile();
             File glosDir = new File(tempDir, "glossary").getAbsoluteFile();
             File tmDir = new File(tempDir, "tm").getAbsoluteFile();
+            File exportTmDir = new File(tempDir, "export_tm").getAbsoluteFile();
             String prefix = repeat(i + 1, "../");
             omt.getProject().setSourceDir(prefix + srcDir.getName());
             omt.getProject().setTargetDir(prefix + trgDir.getName());
             omt.getProject().setDictionaryDir(prefix + dictDir.getName());
             omt.getProject().setGlossaryDir(prefix + glosDir.getName());
             omt.getProject().setTmDir(prefix + tmDir.getName());
+            omt.getProject().setExportTmDir(prefix + exportTmDir.getName());
 
             // Make all the actual folders
-            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir).forEach(File::mkdirs);
+            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
 
             // Load the ProjectProperties and verify that the project folders
             // are resolved correctly
@@ -206,6 +243,7 @@ public class ProjectFileStorageTest {
             assertFalse(props.getDictRoot().contains("../"));
             assertFalse(props.getGlossaryRoot().contains("../"));
             assertFalse(props.getTMRoot().contains("../"));
+            assertFalse(props.getExportTMRoot().contains("../"));
 
             // Write the project file out and read it again to make sure the
             // paths are correctly round-tripped. Since these are "near" paths
@@ -219,6 +257,7 @@ public class ProjectFileStorageTest {
             assertEquals(prefix + dictDir.getName(), outOmt.getProject().getDictionaryDir());
             assertEquals(prefix + glosDir.getName(), outOmt.getProject().getGlossaryDir());
             assertEquals(prefix + tmDir.getName(), outOmt.getProject().getTmDir());
+            assertEquals(prefix + exportTmDir.getName(), outOmt.getProject().getExportTmDir());
         }
     }
 
@@ -237,14 +276,16 @@ public class ProjectFileStorageTest {
         File dictDir = new File(tempDir, "dictionary").getAbsoluteFile();
         File glosDir = new File(tempDir, "glossary").getAbsoluteFile();
         File tmDir = new File(tempDir, "tm").getAbsoluteFile();
+        File exportTmDir = new File(tempDir, "export_tm").getAbsoluteFile();
         omt.getProject().setSourceDir(srcDir.getPath());
         omt.getProject().setTargetDir(trgDir.getPath());
         omt.getProject().setDictionaryDir(dictDir.getPath());
         omt.getProject().setGlossaryDir(glosDir.getPath());
         omt.getProject().setTmDir(tmDir.getPath());
+        omt.getProject().setExportTmDir(exportTmDir.getPath());
 
         // Make all the actual folders
-        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir).forEach(File::mkdirs);
+        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
 
         // Load the ProjectProperties and verify that the project folders
         // are resolved correctly
@@ -263,6 +304,7 @@ public class ProjectFileStorageTest {
         assertEquals(ProjectFileStorage.normalizeSlashes(dictDir.getPath()), outOmt.getProject().getDictionaryDir());
         assertEquals(ProjectFileStorage.normalizeSlashes(glosDir.getPath()), outOmt.getProject().getGlossaryDir());
         assertEquals(ProjectFileStorage.normalizeSlashes(tmDir.getPath()), outOmt.getProject().getTmDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(exportTmDir.getPath()), outOmt.getProject().getExportTmDir());
     }
 
     @Test
@@ -280,15 +322,17 @@ public class ProjectFileStorageTest {
         File dictDir = new File(tempDir, "dictionary").getAbsoluteFile();
         File glosDir = new File(tempDir, "glossary").getAbsoluteFile();
         File tmDir = new File(tempDir, "tm").getAbsoluteFile();
+        File exportTmDir = new File(tempDir, "export_tm").getAbsoluteFile();
         String relPrefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL + 1, "../");
         omt.getProject().setSourceDir(relPrefix + srcDir.getName());
         omt.getProject().setTargetDir(relPrefix + trgDir.getName());
         omt.getProject().setDictionaryDir(relPrefix + dictDir.getName());
         omt.getProject().setGlossaryDir(relPrefix + glosDir.getName());
         omt.getProject().setTmDir(relPrefix + tmDir.getName());
+        omt.getProject().setExportTmDir(relPrefix + exportTmDir.getName());
 
         // Make all the actual folders
-        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir).forEach(File::mkdirs);
+        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
 
         // Load the ProjectProperties and verify that the project folders
         // are resolved correctly
@@ -301,6 +345,7 @@ public class ProjectFileStorageTest {
         assertFalse(props.getDictRoot().contains("../"));
         assertFalse(props.getGlossaryRoot().contains("../"));
         assertFalse(props.getTMRoot().contains("../"));
+        assertFalse(props.getExportTMRoot().contains("../"));
 
         // Write the project file out and read it again to make sure the
         // paths are correctly round-tripped. Since these are "far" paths
@@ -314,6 +359,7 @@ public class ProjectFileStorageTest {
         assertEquals(ProjectFileStorage.normalizeSlashes(dictDir.getPath()), outOmt.getProject().getDictionaryDir());
         assertEquals(ProjectFileStorage.normalizeSlashes(glosDir.getPath()), outOmt.getProject().getGlossaryDir());
         assertEquals(ProjectFileStorage.normalizeSlashes(tmDir.getPath()), outOmt.getProject().getTmDir());
+        assertEquals(ProjectFileStorage.normalizeSlashes(exportTmDir.getPath()), outOmt.getProject().getExportTmDir());
     }
 
     @Test
@@ -328,6 +374,7 @@ public class ProjectFileStorageTest {
         assertTrue(props.getDictRoot().endsWith(OConsts.DEFAULT_DICT + '/'));
         assertTrue(props.getGlossaryRoot().endsWith(OConsts.DEFAULT_GLOSSARY + '/'));
         assertTrue(props.getTMRoot().endsWith(OConsts.DEFAULT_TM + '/'));
+        assertTrue(props.getExportTMRoot().endsWith(OConsts.DEFAULT_EXPORT_TM + '/'));
     }
 
     private static String repeat(int n, String s) {

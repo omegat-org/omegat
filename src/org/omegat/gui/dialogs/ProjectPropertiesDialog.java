@@ -31,6 +31,7 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -559,6 +560,34 @@ public class ProjectPropertiesDialog extends JDialog {
         dirsBox.add(bLoc);
         dirsBox.add(locRootField);
 
+        JLabel exportTMRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(exportTMRootLabel, OStrings.getString("PP_EXPORT_TM_ROOT"));
+        Box bExpTM = Box.createHorizontalBox();
+        bExpTM.setBorder(emptyBorder);
+        bExpTM.add(exportTMRootLabel);
+        bExpTM.add(Box.createHorizontalGlue());
+        JButton exportTMBrowse = new JButton();
+        Mnemonics.setLocalizedText(exportTMBrowse, OStrings.getString("PP_BUTTON_BROWSE_EXP_TM"));
+        bExpTM.add(exportTMBrowse);
+        final JTextField exportTMRootField = new JTextField();
+        // Supply check boxes to choose which TM formats to export
+        final JCheckBox exportTMOmegaTCheckBox = new JCheckBox(OStrings.getString("PP_EXPORT_TM_OMEGAT"));
+        final JCheckBox exportTMLevel1CheckBox = new JCheckBox(OStrings.getString("PP_EXPORT_TM_LEVEL1"));
+        final JCheckBox exportTMLevel2CheckBox = new JCheckBox(OStrings.getString("PP_EXPORT_TM_LEVEL2"));
+
+        JPanel exportTMPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
+        JLabel cbExportLabel = new JLabel(OStrings.getString("PP_EXPORT_TM_LEVELS"));
+
+        dirsBox.add(bExpTM);
+        dirsBox.add(exportTMRootField);
+        exportTMPanel.add(cbExportLabel);
+        exportTMPanel.add(exportTMOmegaTCheckBox);
+        exportTMPanel.add(exportTMLevel1CheckBox);
+        exportTMPanel.add(exportTMLevel2CheckBox);
+        dirsBox.add(exportTMPanel);
+
+
+
         centerBox.add(dirsBox);
 
         JScrollPane scrollPane = new JScrollPane(centerBox);
@@ -588,7 +617,8 @@ public class ProjectPropertiesDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 doOK(sourceLocaleField, targetLocaleField, sourceTokenizerField, targetTokenizerField,
                         sentenceSegmentingCheckBox, srcRootField, locRootField, glosRootField,
-                        writeableGlosField, tmRootField, dictRootField, allowDefaultsCheckBox,
+                        writeableGlosField, tmRootField, exportTMRootField, exportTMOmegaTCheckBox,
+                        exportTMLevel1CheckBox, exportTMLevel2CheckBox, dictRootField, allowDefaultsCheckBox,
                         removeTagsCheckBox, externalCommandTextArea);
             }
         });
@@ -653,6 +683,13 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         });
 
+        exportTMBrowse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                doBrowseDirectoy(7, exportTMRootField);
+            }
+        });
+
         dictBrowse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -714,6 +751,12 @@ public class ProjectPropertiesDialog extends JDialog {
         writeableGlosField.setText(projectProperties.getWriteableGlossary());
         tmRootField.setText(projectProperties.getTMRoot());
         dictRootField.setText(projectProperties.getDictRoot());
+
+        exportTMRootField.setText(projectProperties.getExportTMRoot());
+        exportTMOmegaTCheckBox.setSelected(projectProperties.isExportTm("omegat"));
+        exportTMLevel1CheckBox.setSelected(projectProperties.isExportTm("level1"));
+        exportTMLevel2CheckBox.setSelected(projectProperties.isExportTm("level2"));
+
         sentenceSegmentingCheckBox.setSelected(projectProperties.isSentenceSegmentingEnabled());
         allowDefaultsCheckBox.setSelected(projectProperties.isSupportDefaultTranslations());
         removeTagsCheckBox.setSelected(projectProperties.isRemoveTags());
@@ -731,6 +774,9 @@ public class ProjectPropertiesDialog extends JDialog {
             externalCommandTextArea.setEnabled(false);
             insertButton.setEnabled(false);
             variablesList.setEnabled(false);
+            exportTMOmegaTCheckBox.setEnabled(false);
+            exportTMLevel1CheckBox.setEnabled(false);
+            exportTMLevel2CheckBox.setEnabled(false);
 
             // marking missing folder RED
             File f = new File(srcRootField.getText());
@@ -754,6 +800,10 @@ public class ProjectPropertiesDialog extends JDialog {
             f = new File(tmRootField.getText());
             if (!f.isDirectory()) {
                 tmRootField.setForeground(Color.RED);
+            }
+            f = new File(exportTMRootField.getText());
+            if (!f.isDirectory()) {
+                exportTMRootField.setForeground(Color.RED);
             }
             f = new File(dictRootField.getText());
             if (!f.isDirectory()) {
@@ -826,6 +876,9 @@ public class ProjectPropertiesDialog extends JDialog {
             title = OStrings.getString("PP_BROWSE_W_GLOS");
             break;
 
+        case 7:
+            title = OStrings.getString("PP_BROWSE_TITLE_EXPORT_TM");
+            break;
         default:
             return;
         }
@@ -880,6 +933,10 @@ public class ProjectPropertiesDialog extends JDialog {
 
             case 6:
                 curDir = Preferences.getPreference(Preferences.GLOSSARY_FILE);
+                break;
+
+            case 7:
+                curDir = Preferences.getPreference(Preferences.EXPORT_TM_FOLDER);
                 break;
 
             }
@@ -989,6 +1046,15 @@ public class ProjectPropertiesDialog extends JDialog {
             }
             break;
 
+        case 7:
+            Preferences.setPreference(Preferences.EXPORT_TM_FOLDER, browser.getSelectedFile().getParent());
+            projectProperties.setExportTMRoot(str);
+            field.setText(projectProperties.getExportTMRoot());
+            if (new File(projectProperties.getExportTMRoot()).exists()
+                    && new File(projectProperties.getExportTMRoot()).isDirectory()) {
+                field.setForeground(java.awt.SystemColor.textText);
+            }
+            break;
         }
     }
 
@@ -996,8 +1062,9 @@ public class ProjectPropertiesDialog extends JDialog {
             JComboBox<Class<?>> sourceTokenizerField, JComboBox<Class<?>> targetTokenizerField,
             JCheckBox sentenceSegmentingCheckBox, JTextField srcRootField, JTextField locRootField,
             JTextField glosRootField, JTextField writeableGlosField, JTextField tmRootField,
-            JTextField dictRootField, JCheckBox allowDefaultsCheckBox, JCheckBox removeTagsCheckBox,
-            JTextArea customCommandTextArea) {
+            JTextField exportTMRootField, JCheckBox exportTMOmegaTCheckBox, JCheckBox exportTMLevel1CheckBox,
+            JCheckBox exportTMLevel2CheckBox, JTextField dictRootField, JCheckBox allowDefaultsCheckBox,
+            JCheckBox removeTagsCheckBox, JTextArea customCommandTextArea) {
         if (!Language.verifySingleLangCode(sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
@@ -1033,6 +1100,10 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setSupportDefaultTranslations(allowDefaultsCheckBox.isSelected());
 
         projectProperties.setRemoveTags(removeTagsCheckBox.isSelected());
+
+        projectProperties.setExportTmLevels(exportTMOmegaTCheckBox.isSelected(),
+                                            exportTMLevel1CheckBox.isSelected(),
+                                            exportTMLevel2CheckBox.isSelected());
 
         projectProperties.setExternalCommand(customCommandTextArea.getText());
 
@@ -1100,6 +1171,17 @@ public class ProjectPropertiesDialog extends JDialog {
             return;
         }
 
+        projectProperties.setExportTMRoot(exportTMRootField.getText());
+        if (!projectProperties.getExportTMRoot().endsWith(File.separator)) {
+            projectProperties.setExportTMRoot(projectProperties.getExportTMRoot() + File.separator);
+        }
+        if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getExportTMRoot()).exists()) {
+            JOptionPane.showMessageDialog(this, OStrings.getString("NP_EXPORT_TMDIR_DOESNT_EXIST"),
+                    OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+            exportTMRootField.requestFocusInWindow();
+            return;
+        }
+
         projectProperties.setDictRoot(dictRootField.getText());
         if (!projectProperties.getDictRoot().endsWith(File.separator)) {
             projectProperties.setDictRoot(projectProperties.getDictRoot() + File.separator);
@@ -1110,6 +1192,9 @@ public class ProjectPropertiesDialog extends JDialog {
             dictRootField.requestFocusInWindow();
             return;
         }
+
+        projectProperties.setExportTmLevels(exportTMOmegaTCheckBox.isSelected(), exportTMLevel1CheckBox.isSelected(),
+                                       exportTMLevel2CheckBox.isSelected());
 
         projectProperties.setProjectSRX(srx);
         projectProperties.setProjectFilters(filters);

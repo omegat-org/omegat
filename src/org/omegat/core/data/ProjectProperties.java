@@ -102,7 +102,10 @@ public class ProjectProperties {
         setGlossaryRoot(getProjectRoot() + OConsts.DEFAULT_GLOSSARY + File.separator);
         setWriteableGlossary(getProjectRoot() + OConsts.DEFAULT_GLOSSARY + File.separator + OConsts.DEFAULT_W_GLOSSARY);
         setTMRoot(getProjectRoot() + OConsts.DEFAULT_TM + File.separator);
+        setExportTMRoot(getProjectRoot() + File.separator);
         setDictRoot(getProjectRoot() + OConsts.DEFAULT_DICT + File.separator);
+
+        setExportTmLevels(StringUtil.convertToList(OConsts.DEFAULT_EXPORT_TM_LEVELS.toLowerCase()));
 
         setSentenceSegmentingEnabled(true);
         setSupportDefaultTranslations(true);
@@ -191,9 +194,19 @@ public class ProjectProperties {
         return tmDir.getAsString();
     }
 
+    /** Returns The Translation Memory (TMX) Files Directory */
+    public String getExportTMRoot() {
+        return exportTMDir.getAsString();
+    }
+
     /** Sets The Translation Memory (TMX) Files Directory */
     public void setTMRoot(String tmRoot) {
         tmDir.setRelativeOrAbsolute(tmRoot);
+    }
+
+    /** Sets The Export Translation Memory (TMX) Files Directory */
+    public void setExportTMRoot(String exportTMRoot) {
+        exportTMDir.setRelativeOrAbsolute(exportTMRoot);
     }
 
     /** Returns The Translation Memory (TMX) with translations to other languages Files Directory */
@@ -368,6 +381,36 @@ public class ProjectProperties {
         this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
     }
 
+    /**
+     * Sets level(s) of TMs to be exported by project.
+     * Accepts three booleans as arguments, corresponding to
+     * OmegaT, Level 1 and Level 2
+     */
+    public void setExportTmLevels(boolean omT, boolean level1, boolean level2) {
+        List<String> exportTmLevels = new ArrayList<String>();
+        if (omT) exportTmLevels.add("omegat");
+        if (level1) exportTmLevels.add("level1");
+        if (level2) exportTmLevels.add("level2");
+        this.exportTmLevels = exportTmLevels;
+    }
+
+    /**
+     * Sets level(s) of TMs to be exported by project.
+     * Accepts list of levels
+     */
+    public void setExportTmLevels(List<String> levels) {
+        this.exportTmLevels = levels;
+    }
+
+    public List<String> getExportTmLevels() {
+        return this.exportTmLevels;
+    }
+
+    /** Returns whether a given TM level will be exported **/
+    public boolean isExportTm(String level) {
+        return this.exportTmLevels.contains(level.toLowerCase());
+    }
+
     public boolean isSupportDefaultTranslations() {
         return supportDefaultTranslations;
     }
@@ -482,6 +525,12 @@ public class ProjectProperties {
             throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_TM_FOLDER"), tmxDir));
         }
 
+        String exportTMXDir = getExportTMRoot();
+        File exportTMX = new File(exportTMXDir);
+        if (!exportTMX.exists()) {
+            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_EXPORT_TM_FOLDER"), exportTMXDir));
+        }
+
         // Dictionary folder is always created automatically when it does not exist, for ascending
         // compatibility reasons.
         // There is no exception handling when a failure occurs during folder creation.
@@ -500,6 +549,7 @@ public class ProjectProperties {
         autocreateOneDirectory(targetDir.getAsFile());
         autocreateOneDirectory(glossaryDir.getAsFile());
         autocreateOneDirectory(tmDir.getAsFile());
+        autocreateOneDirectory(exportTMDir.getAsFile());
         autocreateOneDirectory(dictDir.getAsFile());
     }
 
@@ -523,6 +573,7 @@ public class ProjectProperties {
     private boolean sentenceSegmentingEnabled;
     private boolean supportDefaultTranslations;
     private boolean removeTags;
+    private List<String> exportTmLevels;
 
     private SRX projectSRX;
     private Filters projectFilters;
@@ -535,6 +586,7 @@ public class ProjectProperties {
     protected ProjectPath glossaryDir = new ProjectPath(true);
     protected ProjectPath writableGlossaryFile = new ProjectPath(false);
     protected ProjectPath tmDir = new ProjectPath(true);
+    protected ProjectPath exportTMDir = new ProjectPath(true);
     protected ProjectPath dictDir = new ProjectPath(true);
 
     /**

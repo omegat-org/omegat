@@ -304,6 +304,14 @@ public final class MainWindowMenuHandler {
         openFile(new File(path));
     }
 
+    public void projectAccessExportTMMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String path = Core.getProject().getProjectProperties().getExportTMRoot();
+        openFile(new File(path));
+    }
+
     public void projectAccessCurrentSourceDocumentMenuItemActionPerformed(int modifier) {
         if (!Core.getProject().isProjectLoaded()) {
             return;

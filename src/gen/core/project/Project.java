@@ -28,6 +28,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="glossary_dir" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="glossary_file" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="dictionary_dir" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="export_tm_dir" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="export_tm_levels" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="source_lang" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="target_lang" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="source_tok" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
@@ -77,6 +79,10 @@ public class Project {
     protected String glossaryFile;
     @XmlElement(name = "dictionary_dir", required = true)
     protected String dictionaryDir;
+    @XmlElement(name = "export_tm_dir", required = true)
+    protected String exportTmDir;
+    @XmlElement(name = "export_tm_levels", required = true)
+    protected String exportTmLevels;
     @XmlElement(name = "source_lang", required = true)
     protected String sourceLang;
     @XmlElement(name = "target_lang", required = true)
@@ -263,6 +269,54 @@ public class Project {
      */
     public void setDictionaryDir(String value) {
         this.dictionaryDir = value;
+    }
+
+    /**
+     * Gets the value of the exportTmDir property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getExportTmDir() {
+        return exportTmDir;
+    }
+
+    /**
+     * Sets the value of the exportTmDir property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setExportTmDir(String value) {
+        this.exportTmDir = value;
+    }
+
+    /**
+     * Gets the value of the exportTmLevels property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getExportTmLevels() {
+        return exportTmLevels;
+    }
+
+    /**
+     * Sets the value of the exportTmLevels property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setExportTmLevels(String value) {
+        this.exportTmLevels = value;
     }
 
     /**

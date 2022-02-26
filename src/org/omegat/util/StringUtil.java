@@ -37,6 +37,8 @@ import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.text.Normalizer;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.xml.bind.DatatypeConverter;
@@ -986,5 +988,17 @@ public final class StringUtil {
             }
         }
         return str.substring(start + Character.charCount(separator), str.length());
+    }
+
+
+    /**
+     * For a string containing a space-separated list of items, convert that string into an ArrayList
+     *
+     * @param str
+     *            The string, with items separated by whitespace
+     * @return An ArrayList of the items in the original space-separated list
+     */
+    public static List<String> convertToList(String str) {
+        return new ArrayList<String>(Arrays.asList(str.trim().split("\\s+")));
     }
 }

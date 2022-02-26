@@ -280,6 +280,20 @@ public final class RemoteRepositoryProviderTest {
         checkCopyEnd();
     }
 
+    /**
+     * Test a case when remote omegat.project is removed, and OmegaT downloads team project.
+     * Only a few project files are copied.
+     * @throws Exception
+     */
+    @Test
+    public void testCopyAndDeletePropergateReposToProject() throws Exception {
+        createRemoteRepoFiles();
+        map_normalRemoteRepoAndExtraremoteRepoWithExcludesWithoutDirectorySeparatorPrefix();
+        provider.copyFilesFromReposToProject("omegat.project", ".NEW", false);
+        checkCopy(testProjectRepositoryDir + remoteSubdir + "omegat.project", testProjectRoot + "omegat.project.NEW");
+        checkCopyEnd();
+    }
+
     @Before
     public void setUp() throws Exception {
         File dir = new File("build/testdata/repotest");

@@ -61,7 +61,8 @@ import org.omegat.util.gui.StaticUIUtils;
 public class SpellcheckerConfigurationController extends BasePreferencesController {
 
     private static final String OLD_DICT_URL = "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/";
-    public static final String DICT_URL = "http://download.services.openoffice.org/files/contrib/dictionaries/";
+    public static final String OLD_DICT_URL_2 = "http://download.services.openoffice.org/files/contrib/dictionaries/";
+    public static final String DICT_URL = "https://sourceforge.net/projects/openofficeorg.mirror/files/contrib/dictionaries/";
 
     private SpellcheckerConfigurationPanel panel;
 

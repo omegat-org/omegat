@@ -30,7 +30,10 @@
 package org.omegat.gui.preferences.view;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
@@ -60,8 +63,10 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class SpellcheckerConfigurationController extends BasePreferencesController {
 
-    private static final String OLD_DICT_URL = "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/";
-    public static final String DICT_URL = "http://download.services.openoffice.org/files/contrib/dictionaries/";
+    public static final List<String> OLD_DICT_URLS = Collections.unmodifiableList(
+            Arrays.asList("http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/",
+                    "http://download.services.openoffice.org/files/contrib/dictionaries/"));
+    public static final String DICT_URL = "https://sourceforge.net/projects/openofficeorg.mirror/files/contrib/dictionaries/";
 
     private SpellcheckerConfigurationPanel panel;
 
@@ -278,7 +283,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         if (dictionaryUrl.isEmpty() || // string below was default prior to
                                        // 2.5.0 update 5, but is not working.
                                        // Override with new default.
-                OLD_DICT_URL.equalsIgnoreCase(dictionaryUrl)) {
+                OLD_DICT_URLS.contains(dictionaryUrl.toLowerCase(Locale.ENGLISH))) {
             dictionaryUrl = DICT_URL;
         }
         panel.dictionaryUrlTextField.setText(dictionaryUrl);

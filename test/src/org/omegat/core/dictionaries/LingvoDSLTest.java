@@ -36,11 +36,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import io.github.eb4j.dsl.DslResult;
 import org.junit.AfterClass;
 import org.junit.Test;
-
 import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
+
+import io.github.eb4j.dsl.DslResult;
 
 /**
  * Dictionary test
@@ -50,7 +50,7 @@ import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
  */
 public class LingvoDSLTest {
 
-    private final static String LINE_SEPARATOR = System.getProperty("line.separator");
+    private final static String LINE_SEPARATOR = System.lineSeparator();
 
     private static final File TEST_DICT = new File("test/data/dicts-lingvo/test.dsl");
     private static final File TEST_DICT_DZ = new File("test/data/dicts-lingvo-dz/test.dsl.dz");

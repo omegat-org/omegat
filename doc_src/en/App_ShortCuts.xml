@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.shortcut.custom">
-  <title>Shortcuts customization</title>
-
+  <title>Shortcuts description</title>
+  <section id="ch04.shortcuts.use">
+	<para>OmegaT does not use buttons to give you access to its functions. The
+	functions are available from the menus and most of them have been assigned
+	default shortcuts. You will only need a few minutes of working with OmegaT
+	to remember the most frequent shortcuts, and you will always be able to
+	verify the menus to learn new ones.</para>
+	
   <section id="ch04.shortcuts.customization">
     <title>Shortcuts customization</title>
 

@@ -51,6 +51,6 @@
   <xi:include href="App_Regexp.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="App_ShortCutCustomization.xml"
+  <xi:include href="App_ShortCuts.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </book>

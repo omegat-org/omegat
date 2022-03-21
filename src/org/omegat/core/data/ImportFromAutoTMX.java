@@ -92,9 +92,12 @@ public class ImportFromAutoTMX {
                         continue;
                     }
                     if (isEnforcedTMX && (!existTranslation.isTranslated()
-                            || existTranslation.linked != TMXEntry.ExternalLinked.xENFORCED)) {
-                        // If there's no translation or if the existing translation doesn't
-                        // come from an enforced TM.
+                            || existTranslation.linked != TMXEntry.ExternalLinked.xENFORCED
+                            || (!isDefaultTranslation && existTranslation.defaultTranslation))) {
+                        // If there's
+                        // - no translation or
+                        // - the existing translation doesn't come from an enforced TM or
+                        // - the existing enforced translation was a default translation but this one is not
                         setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xENFORCED);
                     } else if (!existTranslation.isTranslated()) {
                         // default translation not exist - use from auto tmx

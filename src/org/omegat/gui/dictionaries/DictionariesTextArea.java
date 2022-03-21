@@ -156,11 +156,11 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         Font font = getFont();
         baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "
                 + " font-size: " + font.getSize() + "; "
-                + " font-style: " + (font.getStyle() == Font.BOLD ? "bold"
-                        : font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
+                + " font-style: " + (font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
+                + " font-weight: " + (font.getStyle() == Font.BOLD ? "bold" : "normal") + "; "
                 + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + "; "
                 + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + ";} "
-                + ".word {font-size: " + (2 + font.getSize()) + "; font-style: bold;} "
+                + ".word {font-size: " + (2 + font.getSize()) + "; font-weight: bold;} "
                 + ".entry {line-height: 1.1;} "
                 + ".article {font-size: " + font.getSize() + ";}"
                 );

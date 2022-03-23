@@ -32,10 +32,10 @@ package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 import javax.swing.JMenuItem;
@@ -89,7 +89,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
      *  List displayed hold entries. An index shall be as same as ID attribute value of HTML.
      *  Actual displayed entries are sorted, and the order is different from the List.
      */
-    protected List<MachineTranslationInfo> displayed = new ArrayList<>();
+    protected List<MachineTranslationInfo> displayed = new CopyOnWriteArrayList<>();
 
     public MachineTranslateTextArea(IMainWindow mw) {
         super(true);
@@ -203,7 +203,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         UIThreadsUtil.mustBeSwingThread();
         if (data != null && data.result != null) {
             displayed.add(data);
-            Collections.sort(displayed);
+            displayed.sort(Comparator.comparing(info -> info.translatorName));
             StringBuilder sb = new StringBuilder("<html>");
             for (int i = 0; i < displayed.size(); i++) {
                 sb.append("<div id=\"").append(i).append("\">");

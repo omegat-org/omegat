@@ -206,10 +206,11 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             displayed.sort(Comparator.comparing(info -> info.translatorName));
             StringBuilder sb = new StringBuilder("<html>");
             for (int i = 0; i < displayed.size(); i++) {
+                MachineTranslationInfo info = displayed.get(i);
                 sb.append("<div id=\"").append(i).append("\">");
-                sb.append(displayed.get(i).result);
+                sb.append(info.result);
                 sb.append("<div class=\"engine\">&lt;");
-                sb.append(displayed.get(i).translatorName);
+                sb.append(info.translatorName);
                 sb.append("&gt;</div></div>");
             }
             sb.append("</html>");

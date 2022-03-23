@@ -100,6 +100,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
+        selectedIndex = -1;
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_MachineTranslate");
         mw.addDockable(new DockableScrollPane("MACHINE_TRANSLATE", title, this, true));
@@ -223,7 +224,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         super.clear();
         getHighlighter().removeAllHighlights();
         displayed.clear();
-        selectedIndex = 0;
+        selectedIndex = -1;
     }
 
     protected class FindThread extends EntryInfoSearchThread<MachineTranslationInfo> {

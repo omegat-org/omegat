@@ -32,48 +32,12 @@ package org.omegat.gui.exttrans;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
-public class MachineTranslationInfo implements Comparable<MachineTranslationInfo> {
+public class MachineTranslationInfo {
     public final String translatorName;
     public final String result;
 
     public MachineTranslationInfo(String translatorName, String result) {
         this.translatorName = translatorName;
         this.result = result;
-    }
-
-    /**
-     * Compares this object with the translator name, then result.
-     * Returns a negative integer, zero, or a positive integer
-     * as this object is less than, equal to, or greater than the specified object.
-     */
-    @Override
-    public int compareTo(final MachineTranslationInfo o) {
-        int compare = translatorName.compareTo(o.translatorName);
-        if (compare != 0) {
-            return compare;
-        }
-        return result.compareTo(o.result);
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        final MachineTranslationInfo that = (MachineTranslationInfo) o;
-        if (!translatorName.equals(that.translatorName)) {
-            return false;
-        }
-        return result.equals(that.result);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = translatorName.hashCode();
-        hash = 31 * hash + result.hashCode();
-        return hash;
     }
 }

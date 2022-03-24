@@ -141,14 +141,14 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     /** Cycle getDisplayedTranslation **/
     private int selectedIndex;
 
-    public String getDisplayedTranslation() {
+    public MachineTranslationInfo getDisplayedTranslation() {
         if (displayed.size() == 0) {
             return null;
         }
         selectedIndex = (selectedIndex + 1) % displayed.size();
         MachineTranslationInfo info = displayed.get(selectedIndex);
         highlightSelected(selectedIndex, info);
-        return info.result;
+        return info;
     }
 
     private void highlightSelected(final int selectedIndex, final MachineTranslationInfo info) {

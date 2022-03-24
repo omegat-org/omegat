@@ -39,6 +39,7 @@ package org.omegat.gui.main;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -50,7 +51,9 @@ import org.omegat.Main;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectFactory;
+import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
@@ -69,6 +72,7 @@ import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SegmentExportImport;
+import org.omegat.gui.exttrans.MachineTranslationInfo;
 import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.issues.IssueProvidersSelectorController;
 import org.omegat.gui.preferences.PreferencesWindowController;
@@ -85,6 +89,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TMXProp;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.gui.DesktopWrapper;
@@ -106,6 +111,8 @@ import org.omegat.util.gui.DesktopWrapper;
  * @author Aaron Madlon-Kay
  */
 public final class MainWindowMenuHandler {
+    private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
+
     private final MainWindow mainWindow;
 
     public MainWindowMenuHandler(final MainWindow mainWindow) {
@@ -476,11 +483,19 @@ public final class MainWindowMenuHandler {
     }
 
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {
-        String tr = Core.getMachineTranslatePane().getDisplayedTranslation();
+        MachineTranslationInfo tr = Core.getMachineTranslatePane().getDisplayedTranslation();
         if (tr == null) {
             Core.getMachineTranslatePane().forceLoad();
-        } else if (!StringUtil.isEmpty(tr)) {
-            Core.getEditor().replaceEditText(tr);
+        } else if (!StringUtil.isEmpty(tr.result)) {
+            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+            PrepareTMXEntry prepareTMXEntry = new PrepareTMXEntry(Core.getProject().getTranslationInfo(ste));
+            prepareTMXEntry.translation = tr.result;
+            if (prepareTMXEntry.otherProperties == null) {
+                prepareTMXEntry.otherProperties = new ArrayList<>();
+            }
+            prepareTMXEntry.otherProperties.add(new TMXProp(PROP_ORIGIN, tr.translatorName));
+            Core.getProject().setTranslation(ste, prepareTMXEntry,true, null);
+            Core.getEditor().replaceEditText(tr.result);
         }
     }
 

@@ -67,6 +67,8 @@ public class ProjectTMX {
     protected static final String PROP_X100PC = "x-100pc";
     protected static final String PROP_XAUTO = "x-auto";
 
+    public static final String PROP_ORIGIN = "origin";
+
     /**
      * Storage for default translations for current project.
      *
@@ -195,6 +197,10 @@ public class ProjectTMX {
                         p.add(PROP_XAUTO);
                         p.add("auto");
                     }
+                }
+                if (en.getValue().getPropValue(PROP_ORIGIN) != null) {
+                    p.add(PROP_ORIGIN);
+                    p.add(en.getValue().getPropValue(PROP_ORIGIN));
                 }
                 wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), p);
             }

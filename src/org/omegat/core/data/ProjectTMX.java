@@ -198,9 +198,11 @@ public class ProjectTMX {
                         p.add("auto");
                     }
                 }
-                if (en.getValue().getPropValue(PROP_ORIGIN) != null) {
-                    p.add(PROP_ORIGIN);
-                    p.add(en.getValue().getPropValue(PROP_ORIGIN));
+                if (Preferences.isPreference(Preferences.SAVE_ORIGIN)) {
+                    if (en.getValue().getPropValue(PROP_ORIGIN) != null) {
+                        p.add(PROP_ORIGIN);
+                        p.add(en.getValue().getPropValue(PROP_ORIGIN));
+                    }
                 }
                 wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), p);
             }

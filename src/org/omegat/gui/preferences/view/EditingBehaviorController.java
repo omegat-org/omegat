@@ -92,9 +92,9 @@ public class EditingBehaviorController extends BasePreferencesController {
         panel.allowTagEditing.setSelected(Preferences.isPreference(Preferences.ALLOW_TAG_EDITING));
         panel.tagValidateOnLeave.setSelected(Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE));
         panel.cbSaveAutoStatus.setSelected(Preferences.isPreference(Preferences.SAVE_AUTO_STATUS));
+        panel.cbSaveOrigin.setSelected(Preferences.isPreference(Preferences.SAVE_ORIGIN));
         panel.initialSegCountSpinner.setValue(Preferences.getPreferenceDefault(
                 Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT, Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT));
-
         panel.paraMarkText.setText(Preferences.getPreferenceDefault(
                 Preferences.MARK_PARA_TEXT, Preferences.MARK_PARA_TEXT_DEFAULT));
         updateEnabledness();
@@ -116,6 +116,7 @@ public class EditingBehaviorController extends BasePreferencesController {
         panel.allowTagEditing.setSelected(false);
         panel.tagValidateOnLeave.setSelected(false);
         panel.cbSaveAutoStatus.setSelected(false);
+        panel.cbSaveOrigin.setSelected(false);
         panel.initialSegCountSpinner.setValue(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT);
         panel.paraMarkText.setText(Preferences.MARK_PARA_TEXT_DEFAULT);
 
@@ -149,6 +150,7 @@ public class EditingBehaviorController extends BasePreferencesController {
         Preferences.setPreference(Preferences.ALLOW_TAG_EDITING, panel.allowTagEditing.isSelected());
         Preferences.setPreference(Preferences.TAG_VALIDATE_ON_LEAVE, panel.tagValidateOnLeave.isSelected());
         Preferences.setPreference(Preferences.SAVE_AUTO_STATUS, panel.cbSaveAutoStatus.isSelected());
+        Preferences.setPreference(Preferences.SAVE_ORIGIN, panel.cbSaveOrigin.isSelected());
 
         int segCount = Math.max(0, (Integer) panel.initialSegCountSpinner.getValue());
         Preferences.setPreference(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT, segCount);

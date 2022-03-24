@@ -487,13 +487,14 @@ public final class MainWindowMenuHandler {
         if (tr == null) {
             Core.getMachineTranslatePane().forceLoad();
         } else if (!StringUtil.isEmpty(tr.result)) {
+            // set MachineTranslate result as target translation and record translation engine name as origin.
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
             PrepareTMXEntry prepareTMXEntry = new PrepareTMXEntry(Core.getProject().getTranslationInfo(ste));
             prepareTMXEntry.translation = tr.result;
             if (prepareTMXEntry.otherProperties == null) {
                 prepareTMXEntry.otherProperties = new ArrayList<>();
             }
-            prepareTMXEntry.otherProperties.add(new TMXProp(PROP_ORIGIN, tr.translatorName));
+            prepareTMXEntry.otherProperties.add(new TMXProp(PROP_ORIGIN, String.format("MT:[%s]", tr.translatorName)));
             Core.getProject().setTranslation(ste, prepareTMXEntry,true, null);
             Core.getEditor().replaceEditText(tr.result);
         }

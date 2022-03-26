@@ -43,3 +43,13 @@ Documentation: https://sourceforge.net/p/omegat/documentation/ -->
 
 <!-- Any other information that is important to this PR, such as
 before-and-after screenshots -->
+
+## Tasklist
+
+ - [ ] ADD YOUR TASKS HERE
+ - [ ] Add test case(s)
+ - [ ] Add documentation
+ - [ ] Adjust checkstyle warnings on your change
+ - [ ] Review
+ - [ ] Adjust for comments
+ - [ ] All CI builds and checks have passed

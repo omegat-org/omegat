@@ -353,22 +353,6 @@ public final class ProjectUICommands {
                 }
                 // We write in all cases, because we might have added default excludes, for instance
                 ProjectFileStorage.writeProjectFile(props);
-
-                //String projectFileURL = dialog.txtRepositoryOrProjectFileURL.getText();
-                //File localDirectory = new File(dialog.txtDirectory.getText());
-//                try {
-//                    localDirectory.mkdirs();
-//                    byte[] projectFile = WikiGet.getURLasByteArray(projectFileURL);
-//                    FileUtils.writeByteArrayToFile(new File(localDirectory, OConsts.FILE_PROJECT), projectFile);
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                    Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR");
-//                    mainWindow.setCursor(oldCursor);
-//                    return null;
-//                }
-
-//                projectOpen(localDirectory);
-
                 mainWindow.setCursor(oldCursor);
                 oldCursor=null;
                 return null;

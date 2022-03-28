@@ -474,7 +474,11 @@ public final class ProjectUICommands {
                          2. Save the currently effective repository mapping from LOCAL to variable 'repos'.
                          3. Update project.properties from REMOTE copy of omegat.project in the following.
                          3.1. Copy the content of remote omegat.project to top-level/omegat.project.NEW
-                         3.2. In order to Load properties from omegat.project.NEW instead of existent omegat.project,
+                         3.2. Check root project mapping in omegat.project.NEW; if there is an entry,
+                           3.2.1 Compare the protocol and the URL, if these are equals, skip next step and goto 3.3
+                           3.2.2 If different, in order to use local configured protocol and URL, we now replace
+                                 omegat.project.NEW mapping entry for root.
+                         3.3. In order to Load properties from omegat.project.NEW instead of existent omegat.project,
                             call loadPropertiesFile(... ) with "omegat.project.NEW".
                          4. Handles mappings of four cases.
                              a. no mapping
@@ -510,7 +514,26 @@ public final class ProjectUICommands {
                                     Core.getMainWindow().displayWarningRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
                                     props.setRepositories(repos); // restore the mapping we just lost
                                     needToSaveProperties = true;
+                                } else {
+                                    // override repository URL when project URL is git type.
+                                    String repoUrl = null;
+                                    for (RepositoryDefinition repo: repos) {
+                                        if (repo.getMapping().get(0).getLocal().equals("/") && repo.getMapping().get(0).getRepository().equals("/") && repo.getType().equals("git")) {
+                                            repoUrl = repo.getUrl();
+                                            break;
+                                        }
+                                    }
+                                    if (repoUrl != null) {
+                                        for (RepositoryDefinition def : props.getRepositories()) {
+                                            if (def.getMapping().get(0).getLocal().equals("/") && def.getMapping().get(0).getRepository().equals("/") && def.getType().equals("git")) {
+                                                def.setUrl(repoUrl);
+                                                props.getRepositories().set(0, def);
+                                                break;
+                                            }
+                                        }
+                                    }
                                 }
+
                             } catch (IRemoteRepository2.NetworkException ignore) {
                                 // Do nothing. Network errors are handled in RealProject.
                             } catch (Exception e) {

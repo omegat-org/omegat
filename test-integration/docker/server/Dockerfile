@@ -24,16 +24,20 @@
 #  **************************************************************************/
 #
 FROM debian:bullseye-slim
-RUN apt-get -y update && apt-get install -y openssh-server git inotify-tools
+ENV SUPERVISORDCONF=/etc/supervisor/conf.d/supervisord.conf
+RUN apt-get -y update && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor
 RUN (adduser --system --shell /bin/bash git && mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh \
     && echo "AcceptEnv LANG LC_* GIT_PROTOCOL" >> /etc/ssh/sshd_config)
-RUN (mkdir /home/git/template && git init /home/git/template && touch /home/git/template/README \
+RUN (mkdir -p /home/git/template && git init /home/git/template && echo "source content" > /home/git/template/README \
     && cd /home/git/template && git config user.name git && git config user.email git@example.com \
+    && git config init.defaultBranch main \
     && git add . && git commit -m first && git clone . /home/git/omegat-test.git --bare \
     && touch /home/git/.ssh/authorized_keys && chmod 600 /home/git/.ssh/authorized_keys \
-    && chown git -R /home/git && mkdir /run/sshd/)
+    && chown git -R /home/git && mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor )
+RUN (mkdir -p /var/www/html && cp /home/git/template/README /var/www/html && chown -R www-data.www-data /var/www/html)
+COPY supervisord.conf /etc/supervisor/conf.d/
 
-EXPOSE 22 80
+EXPOSE 22 80 443
 CMD ([ -f /keys/id_rsa.pub ] || inotifywait -e attrib /keys ) \
  && cat /keys/id_rsa.pub >> /home/git/.ssh/authorized_keys \
- && echo "start ssh server" && ssh-keygen -A && exec /usr/sbin/sshd -D -e
+ && echo "start servers" && ssh-keygen -A && exec /usr/bin/supervisord

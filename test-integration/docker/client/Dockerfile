@@ -27,11 +27,9 @@
 FROM debian:bullseye-slim
 RUN apt-get -y update && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools
 RUN adduser --shell /bin/bash omegat
-RUN mkdir -p /home/omegat/.ssh && chmod 700 /home/omegat/.ssh \
-  && echo -ne "Host server\n Hostname server\n StrictHostKeyChecking accept-new\n" > /home/omegat/.ssh/config \
-  && echo -ne " User git\n IdentityFile ~/.ssh/id_rsa\n" >> /home/omegat/.ssh/config \
-  && echo -ne " UserKnownHostsFile /dev/null\n" >> /home/omegat/.ssh/config
-RUN chown -R omegat /home/omegat
+RUN mkdir -p /home/omegat/.ssh
+COPY ssh_config /home/omegat/.ssh/config
+RUN chmod 700 /home/omegat/.ssh && chown -R omegat /home/omegat
 
 USER omegat
 
@@ -40,4 +38,4 @@ CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
   && chmod 600 /home/omegat/.ssh/id_rsa && chown omegat /home/omegat/.ssh/id_rsa \
   && echo "start test-integration" \
   && (cd /code \
-    && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} )
+    && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} -Domegat.test.maprepo=${MAPREPO} -Domegat.test.mapfile=${MAPFILE})

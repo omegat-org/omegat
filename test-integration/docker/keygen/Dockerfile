@@ -28,5 +28,5 @@ FROM debian:bullseye-slim
 RUN apt-get -y update && apt-get install -y openssh-client
 
 CMD ssh-keygen -q -t rsa -m PEM -b 4096 -N '' -f /tmp/id_rsa \
-  && install -m 666 /tmp/id_rsa /tmp/id_rsa.pub /keys/ && rm /tmp/id_rsa /tmp/id_rsa.pub \
+  && install -m 666 /tmp/id_rsa /tmp/id_rsa.pub /keys/ \
   && tail -f /dev/null

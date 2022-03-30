@@ -4,6 +4,8 @@ services:
     build: test-integration/docker/keygen
     volumes:
       - keygen:/keys
+    tmpfs:
+      - /tmp
   server:
     build: test-integration/docker/server
     expose:
@@ -20,8 +22,13 @@ services:
     volumes:
       - .:/code
       - keygen:/keys
+    tmpfs:
+      - /tmp
     environment:
       DURATION: ${DURATION:-2400}
       REPO: "git@server:omegat-test.git"
+      MAPREPO: "http://server/"
+      MAPFILE: "README"
+
 volumes:
   keygen:

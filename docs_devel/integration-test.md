@@ -157,8 +157,8 @@ An integration test prepare a team project with a specified mapping.
 
 ```console
 ./gradlew testIntegration -Domegat.test.repo=<URL of repo> \
- -Domegat.test.maprepo=<URL of mapping target directory> \
- -Domegat.test.mapfile=<Filename of mapping target>
+ -Domegat.test.map.repo=<URL of mapping target directory> \
+ -Domegat.test.map.file=<Filename of mapping target>
 ```
 
 For example, when you have a repository in Github user example repository omegat-test.git
@@ -166,8 +166,8 @@ and mapping target `https://example.com/index.html` as `source/index.html`
 
 ```bash
 ./gradlew testIntegration -Domegat.test.repo=git@github.com:example/omegat-test.git \
- -Domegat.test.maprepo=https://example.com/ \
- -Domegat.test.mapfile=index.html
+ -Domegat.test.map.repo=https://example.com/ \
+ -Domegat.test.map.file=index.html
 ````
 
 #### Multiple scheme test
@@ -177,7 +177,7 @@ both ssh+git and git smart http(s) access for the repositories.
 You can test a situation that team project members access both protocols.
 
 ```console
-./gradlew testIntegration -Domegat.test.repo=<URL of repo> -Domegat.test.repo1=<another URL of repo>
+./gradlew testIntegration -Domegat.test.repo=<URL of repo> -Domegat.test.repo.alt=<another URL of repo>
 ```
 
 It is worth testing with configuration of both mapping and multiple protocol scheme,
@@ -186,5 +186,19 @@ OmegaT v5.7 or before override local access URL scheme by remote URL.
 When you clone team project with git+ssh to local work folder, then omegat access team repository,
 that is `https` URL in remote `omegat.project`, you are forced to use `https` instead of `git+ssh`.
 
-An integration with a configuration of mapping and multiple protocol scheme will detect
-a behavior.
+An integration with a configuration of mapping and multiple protocol scheme will detect a behavior.
+
+### Team repository schema
+
+OmegaT supports git and subversion repository URL.
+
+#### Git
+
+* git@example.com:user/trans.git
+* ssh+git://user@example.com/user/trans.git
+* https://user:pass@example.net/user/trans.git
+
+#### Subversion
+
+* "svn+ssh://user@svn.example.net/test/"
+* "https://example.com/user/trans/trunk/"

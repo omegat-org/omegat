@@ -35,9 +35,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import javax.xml.namespace.QName;
+
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.Repository;
@@ -113,11 +118,11 @@ public final class TestTeamIntegration {
 
     private TestTeamIntegration() {
     }
+    private final static String regex = "http(s)?://(?<username>.+?)(:(?<password>.+?))?@.+";
+    private final static Pattern URL_PATTERN = Pattern.compile(regex);
 
     static final String DIR = "/tmp/teamtest";
-    static final String REPO = System.getProperty("omegat.test.repo", "git@github.com:alex73/trans.git");
-    // static final String REPO = "svn+ssh://alex73@svn.code.sf.net/p/mappy/test/";
-    // static final String REPO = "https://github.com/alex73/trans/trunk/";
+    static final List<String> REPO = new ArrayList<>();
     static final String MAP_REPO = System.getProperty("omegat.test.maprepo", null);
     static final String MAP_REPO_TYPE = System.getProperty("omegat.test.maptype", "http");
     static final String MAP_FILE = System.getProperty("omegat.test.mapfile", null);
@@ -134,11 +139,18 @@ public final class TestTeamIntegration {
     static Team repo;
 
     public static void main(String[] args) throws Exception {
+        REPO.add(System.getProperty("omegat.test.repo", "git@github.com:alex73/trans.git"));
+        String repo1 = System.getProperty("omegat.test.repo1", null);
+        if (repo1 != null) {
+            REPO.add(repo1);
+        }
+        // REPO.add("svn+ssh://alex73@svn.code.sf.net/p/mappy/test/");
+        // REPO.add("https://github.com/alex73/trans/trunk/");
         String startVersion = prepareRepo();
 
         Run[] runs = new Run[THREADS.length];
         for (int i = 0; i < THREADS.length; i++) {
-            runs[i] = new Run(THREADS[i], new File(DIR, THREADS[i]), MAX_DELAY_SECONDS);
+            runs[i] = new Run(THREADS[i], new File(DIR, THREADS[i]), MAX_DELAY_SECONDS, REPO.get(i % REPO.size()));
         }
         for (int i = 0; i < THREADS.length; i++) {
             runs[i].start();
@@ -162,7 +174,7 @@ public final class TestTeamIntegration {
             Thread.sleep(500);
         } while (alive);
 
-        repo = createRepo2(REPO, new File(DIR, "repo"));
+        repo = createRepo2(REPO.get(0), new File(DIR, "repo"));
         repo.update();
 
         System.err.println("Check repo");
@@ -259,7 +271,7 @@ public final class TestTeamIntegration {
             throw new Exception("Impossible to create test dir");
         }
 
-        ProjectProperties config = createConfig(REPO, origDir);
+        ProjectProperties config = createConfig(REPO.get(0), origDir);
 
         RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(),
                 config.getRepositories(), config);
@@ -308,6 +320,19 @@ public final class TestTeamIntegration {
         RepositoryDefinition def = new RepositoryDefinition();
         RepositoryMapping m = new RepositoryMapping();
         def.setType(type);
+        if (type.equals("git") && repoUrl.contains("@")) {
+            Matcher matcher = URL_PATTERN.matcher(repoUrl);
+            if (matcher.find()) {
+                String username = matcher.group("username");
+                if (!StringUtils.isEmpty(username)) {
+                    def.getOtherAttributes().put(new QName("gitUsername"), username);
+                }
+                String password = matcher.group("password");
+                if (!StringUtils.isEmpty(password)) {
+                    def.getOtherAttributes().put(new QName("gitPassword"), password);
+                }
+            }
+        }
         def.setUrl(repoUrl);
         m.setLocal(local);
         m.setRepository(remote);
@@ -343,7 +368,7 @@ public final class TestTeamIntegration {
         volatile boolean finished;
         String source;
 
-        Run(String source, File dir, int delay) throws Exception {
+        Run(String source, File dir, int delay, final String repo) throws Exception {
             this.source = source;
             String cp = ManagementFactory.getRuntimeMXBean().getClassPath();
             FileUtils.copyFile(new File(DIR + "/repo/omegat.project"), new File(DIR + "/" + source
@@ -353,10 +378,10 @@ public final class TestTeamIntegration {
             }
 
             System.err.println("Execute: " + source + " " + (PROCESS_SECONDS * 1000) + " "
-                    + dir.getAbsolutePath() + " " + REPO + " " + delay + " " + SEG_COUNT);
+                    + dir.getAbsolutePath() + " " + repo + " " + delay + " " + SEG_COUNT);
             ProcessBuilder pb = new ProcessBuilder("java", "-Duser.name=" + source, "-cp", cp,
                     TestTeamIntegrationChild.class.getName(), source,
-                    Long.toString(PROCESS_SECONDS * 1000L), dir.getAbsolutePath(), REPO,
+                    Long.toString(PROCESS_SECONDS * 1000L), dir.getAbsolutePath(), repo,
                     Integer.toString(delay), Integer.toString(SEG_COUNT));
             pb.inheritIO();
             p = pb.start();

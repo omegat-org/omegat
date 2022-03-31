@@ -24,18 +24,23 @@
 #  **************************************************************************/
 #
 FROM debian:bullseye-slim
-ENV SUPERVISORDCONF=/etc/supervisor/conf.d/supervisord.conf
-RUN apt-get -y update && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor
-RUN (adduser --system --shell /bin/bash git && mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh \
-    && echo "AcceptEnv LANG LC_* GIT_PROTOCOL" >> /etc/ssh/sshd_config)
-RUN (mkdir -p /home/git/template && git init /home/git/template && echo "source content" > /home/git/template/README \
-    && cd /home/git/template && git config user.name git && git config user.email git@example.com \
-    && git config init.defaultBranch main \
-    && git add . && git commit -m first && git clone . /home/git/omegat-test.git --bare \
-    && touch /home/git/.ssh/authorized_keys && chmod 600 /home/git/.ssh/authorized_keys \
-    && chown git -R /home/git && mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor )
-RUN (mkdir -p /var/www/html && cp /home/git/template/README /var/www/html && chown -R www-data.www-data /var/www/html)
+RUN apt-get -y update && apt-get -y upgrade \
+    && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor apache2-suexec-pristine \
+    && adduser --system --group --shell /bin/bash git && mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh \
+    && a2dissite default-ssl && a2enmod ssl cgi env alias suexec && htpasswd -b -c /home/git/htpasswd git gitpass \
+    && mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor \
+    && mkdir -p /var/www/git /var/www/html && echo "AcceptEnv LANG LC_* GIT_PROTOCOL" >> /etc/ssh/sshd_config
+COPY git-http.conf /etc/apache2/sites-enabled/
 COPY supervisord.conf /etc/supervisor/conf.d/
+COPY git-http-backend-wrapper.cgi /var/www/git/
+RUN chmod 755 /var/www/git/git-http-backend-wrapper.cgi \
+    && touch /home/git/.ssh/authorized_keys && chmod 600 /home/git/.ssh/authorized_keys \
+    && mkdir -p /tmp/template && git init /tmp/template && echo "source content" > /tmp/template/README \
+    && (cd /tmp/template && git config user.name git && git config user.email git@example.com \
+        && git config init.defaultBranch main && git add . && git commit -m first ) \
+    && git clone /tmp/template /home/git/omegat-test.git --bare \
+    && cp /tmp/template/README /var/www/html && chown -R www-data.www-data /var/www/html \
+    && chown -R git.git /home/git /var/www/git
 
 EXPOSE 22 80 443
 CMD ([ -f /keys/id_rsa.pub ] || inotifywait -e attrib /keys ) \

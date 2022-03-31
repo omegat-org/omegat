@@ -39,4 +39,4 @@ CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
   && git config --global http.sslVerify false \
   && echo "start test-integration" \
   && (cd /code \
-    && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} -Domegat.test.maprepo=${MAPREPO} -Domegat.test.mapfile=${MAPFILE})
+    && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} -Domegat.test.repo1=${REPO1} -Domegat.test.maprepo=${MAPREPO} -Domegat.test.mapfile=${MAPFILE})

@@ -29,8 +29,8 @@ services:
     environment:
       DURATION: ${DURATION:-2400}
       REPO: "git@server:omegat-test.git"
+      REPO1: "https://git:gitpass@server/omegat-test.git"
       MAPREPO: "http://server/"
       MAPFILE: "README"
-
 volumes:
   keygen:

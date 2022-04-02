@@ -50,41 +50,73 @@ test setup and execution in one line command, `docker-compose up`
 
 ### How to run
 
-```bash
-docker-compose up
+WARNING: You should operate all command from project root directory.
+
+Before you start test, you need to build test containers,
+
+```console
+docker-compose -f test-integration/docker/compose.yml build
+```
+
+then you can run with default settings
+
+```console
+docker-compose -f test-integration/docker/compose.yml up
 ```
 
 You can stop integration test processes by press Ctrl-C key.
 
 Default duration of execution is 4200 second (= 40 min.)
-When you want to specify duration you can set environment variable
+When you want to specify duration, you can set environment variable
+and give docker-compose option to stop servers after test finished.
 
-```bash
-env DURATION=600 docker-compose up
+```console
+env DURATION=600 \
+  docker-compose -f test-integration/docker/compose.yml up \
+    --abort-on-container-exit
 ```
 
-This case specifies duration as 10 min.
+This case specifies duration as 10 min. and will exit all three container when 
+integration test finished.
+
+When you want to run the test in CI environment,
+and want to get exit code from the test, we can get exit code
+by adding an option like;
+
+```console
+env DURATION=600 \
+  docker-compose -f test-integration/docker/compose.yml up \
+    --abort-on-container-exit --exit-code-from client
+```
 
 ### check logs
 
 You can check execution log with docker-compose command.
-```bash
-docker-compose logs client
+
+```console
+docker-compose -f test-integration/docker/compose.yml logs client
 ```
+
+When you want to monitor log, you can add `-f` option.
 
 ### Stop test setup
 
 You can also stop test setup and remove image from another shell.
 
-```bash
-docker-compose stop
+```console
+docker-compose -f test-integration/docker/compose.yml stop
 ```
 
 This stop container execution and you can see logs afterword.
 This is as same as enter Ctrl-C key in executed shell.
 
-```bash
-docker-compose down
+### Clean up resources
+
+After end of tests, images of containers are on disk.
+You can clean up resources with a command
+
+```console
+docker-compose -f test-integration/docker/compose.yml down
 ```
 
 This clean up container resources.
@@ -99,7 +131,17 @@ The way you do the integration test is:
 
 ### How to run
 
-```bash
+#### Prepare repository server
+
+You need to prepare repository server where test against.
+It can not be empty, but omegat team project will be overwrite by integration test.
+
+#### Simple integration test
+
+To run simple integration test to check update integrity in concurrent edits,
+you can run it simply
+
+```console
 ./gradlew testIntegration -Domegat.test.repo=<URL of repo>.
 ```
 
@@ -107,3 +149,42 @@ The way you do the integration test is:
    (default is 14,400s = 4 hours)
 2. Wait
 3. Check the result
+
+#### Mapping test
+
+To run with mapping configuration, you can give mapping property to the test.
+An integration test prepare a team project with a specified mapping.
+
+```console
+./gradlew testIntegration -Domegat.test.repo=<URL of repo> \
+ -Domegat.test.maprepo=<URL of mapping target directory> \
+ -Domegat.test.mapfile=<Filename of mapping target>
+```
+
+For example, when you have a repository in Github user example repository omegat-test.git
+and mapping target `https://example.com/index.html` as `source/index.html`
+
+```bash
+./gradlew testIntegration -Domegat.test.repo=git@github.com:example/omegat-test.git \
+ -Domegat.test.maprepo=https://example.com/ \
+ -Domegat.test.mapfile=index.html
+````
+
+#### Multiple scheme test
+
+Some popular public git repository services such as Github and Gitlab support
+both ssh+git and git smart http(s) access for the repositories.
+You can test a situation that team project members access both protocols.
+
+```console
+./gradlew testIntegration -Domegat.test.repo=<URL of repo> -Domegat.test.repo1=<another URL of repo>
+```
+
+It is worth testing with configuration of both mapping and multiple protocol scheme,
+Because OmegaT embeds a repository URL in remote `omegat.project` file when mapping feature is used,
+OmegaT v5.7 or before override local access URL scheme by remote URL.
+When you clone team project with git+ssh to local work folder, then omegat access team repository,
+that is `https` URL in remote `omegat.project`, you are forced to use `https` instead of `git+ssh`.
+
+An integration with a configuration of mapping and multiple protocol scheme will detect
+a behavior.

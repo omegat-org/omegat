@@ -286,7 +286,7 @@ public final class RemoteRepositoryProviderTest {
      * @throws Exception
      */
     @Test
-    public void testCopyAndDeletePropergateReposToProject() throws Exception {
+    public void testCopyAndDeletePropagateReposToProject() throws Exception {
         createRemoteRepoFiles();
         map_normalRemoteRepoAndExtraremoteRepoWithExcludesWithoutDirectorySeparatorPrefix();
         provider.copyFilesFromReposToProject("omegat.project", ".NEW", false);

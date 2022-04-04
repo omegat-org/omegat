@@ -12,8 +12,12 @@
     have been assigned default shortcuts. You will only need a few minutes of
     working with OmegaT to remember the most frequent shortcuts, and you will
     always be able to learn new shortcuts from the menus.</para>
-	<para>Almost all of OmegaT's shortcuts are customizable. You will just need to manually modify a settings file and copy it to your configuration folder. The whole procedure is explained below.</para>
-	<para>OmegaT runs on mostly 3 platforms (Linux, macOS, Windows) and the shortcut slightly vary depending on the platform. To make reading easier in the manual we have adopted the following presentation to discuss shortcuts:
+	<para>Almost all of OmegaT's shortcuts are customizable. You will just need
+	to manually modify a settings file and copy it to your configuration
+	folder. The whole procedure is explained below.</para>
+	<para>OmegaT runs on mostly 3 platforms (Linux, macOS, Windows) and the
+	shortcut slightly vary depending on the platform. To make reading easier in
+	the manual we have adopted the following presentation to discuss shortcuts:
 
 	<table id="shortcut_description">
 	  <title>Shortcut description</title>
@@ -50,10 +54,13 @@
 	  </tgroup>
 	</table>
 
-	where the modifier keys are in upper case letters and the modified key is in lower case letter.
+	where the modifier keys are in upper case letters and the modified key is in
+	lower case letter.
 	</para>
 
-	<para>For example, the shortcut that is displayed as
+	<para>For example, the shortcut that corresponds to the function "Open
+	Project" (<guilabel>Open...</guilabel> in the <guilabel>Project</guilabel>
+	menu) that is displayed as
 
 	<keycombo>
       <keycap>Ctrl</keycap>
@@ -74,8 +81,20 @@
         <keycap>o</keycap>
       </keycombo>
 	  
-	  in this manual, so that <keycap>C</keycap> always mean the <keycap>Control</keycap> key for Linux and Windows users and the <keycap>Command</keycap> (or <keycap>⌘</keycap>) key for macOS users.
+	in this manual.</para>
+	<para>
+	  We chose this description method so that <keycap>C</keycap> always mean
+	  the <keycap>Control</keycap> key for Linux and Windows users and the
+	  <keycap>Command</keycap> (or <keycap>⌘</keycap>) key for macOS users.
 	  
+	</para>
+
+	<para>The difference between macOS shortcuts and Linux/Windows shortcuts
+	rests mostly on the use of <keycap>Command</keycap> (<keycap>⌘</keycap>) as
+	the macOS equivalent to <keycap>Control</keycap> on Linux/Windows. In the
+	few cases where macOS shortcuts do use the <keycap>Control</keycap> key, we
+	will use <keycap>Ctrl</keycap> to describe the macOS specific use of that
+	key.
 	</para>
 	
   </section>

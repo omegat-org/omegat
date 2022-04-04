@@ -1,22 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.shortcut.custom">
   <title>Shortcuts description</title>
+
   <section id="ch04.shortcuts.use">
-	<para>OmegaT does not use buttons to give you access to its functions. The
-	functions are available from the menus and most of them have been assigned
-	default shortcuts. You will only need a few minutes of working with OmegaT
-	to remember the most frequent shortcuts, and you will always be able to
-	verify the menus to learn new ones.</para>
+      <title>OmegaT and shortcuts</title>
+
+    <para>OmegaT generally does not use buttons to give you access to its
+    functions. The functions are available from the menus and most of them
+    have been assigned default shortcuts. You will only need a few minutes of
+    working with OmegaT to remember the most frequent shortcuts, and you will
+    always be able to learn new shortcuts from the menus.</para>
+	<para>Almost all of OmegaT's shortcuts are customizable. You will just need to manually modify a settings file and copy it to your configuration folder. The whole procedure is explained below.</para>
+	<para>OmegaT runs on mostly 3 platforms (Linux, macOS, Windows) and the shortcut slightly vary depending on the platform. To make reading easier in the manual we have adopted the following presentation to discuss shortcuts:
+
+	<table id="shortcut_description">
+	  <title>Shortcut description</title>
+	  <tgroup cols="3">
+		<thead>
+		  <row>
+			<entry>Linux/Windows</entry>
+			<entry>macOS</entry>
+			<entry>Key description</entry>
+		  </row>
+		</thead>
+		<tbody>
+		  <row>
+			<entry>Control key</entry>
+			<entry>Command or ⌘ key</entry>
+			<entry>C</entry>
+		  </row>
+		  <row>
+			<entry>Shift key</entry>
+			<entry>Shift or ⇧ key</entry>
+			<entry>S</entry>
+		  </row>
+		  <row>
+			<entry>Alt key</entry>
+			<entry>Alt / option or ⌥ key</entry>
+			<entry>A</entry>
+		  </row>
+		  <row>
+			<entry></entry>
+			<entry>Control or ⌃ key</entry>
+			<entry>Ctrl</entry>
+		  </row>
+		</tbody>
+	  </tgroup>
+	</table>
+
+	where the modifier keys are in upper case letters and the modified key is in lower case letter.
+	</para>
+
+	<para>For example, the shortcut that is displayed as
+
+	<keycombo>
+      <keycap>Ctrl</keycap>
+      <keycap>O</keycap>
+    </keycombo>
+
+	in Linux and Windows menus or as
+
+	<keycombo>
+      <keycap>⌘</keycap>
+      <keycap>O</keycap>
+    </keycombo>
+
+	  in macOS menus, will be described this way:
+
+	  <keycombo>
+        <keycap>C</keycap>
+        <keycap>o</keycap>
+      </keycombo>
+	  
+	  in this manual, so that <keycap>C</keycap> always mean the <keycap>Control</keycap> key for Linux and Windows users and the <keycap>Command</keycap> (or <keycap>⌘</keycap>) key for macOS users.
+	  
+	</para>
 	
+  </section>
+
   <section id="ch04.shortcuts.customization">
     <title>Shortcuts customization</title>
 
     <para>Most of the items that appear in the main menu can have a new
     shortcut assigned. You can change the already assigned shortcuts and add
-    new shortcuts by putting a shortcut definition file in your
-    OmegaT preferences folder (accessible by
-    <menuchoice>
+    new shortcuts by putting a shortcut definition file in your OmegaT
+    preferences folder (accessible by <menuchoice>
         <guimenuitem>Options</guimenuitem>
 
         <guimenuitem>Access Configuration Folder</guimenuitem>
@@ -25,12 +95,12 @@
     <para>The shortcut definition file must be named
     <filename>MainMenuShortcuts.properties</filename> and must contain at most
     one shortcut definition per line. Empty lines are accepted and comment
-    lines should start with &quot;//&quot;. Anything after the &quot;//&quot; will be
+    lines should start with "//". Anything after the "//" will be
     ignored.</para>
 
     <para>Once the <filename>MainMenuShortcuts.properties</filename> file is
-    modified, OmegaT must be relaunched to take the
-    new shortcuts into account.</para>
+    modified, OmegaT must be relaunched to take the new shortcuts into
+    account.</para>
 
     <para>The shortcut definition syntax is the following: <code>&lt;menu item
     code&gt;=&lt;shortcut&gt;</code>, where <emphasis>&lt;menu item
@@ -38,7 +108,8 @@
     <emphasis>&lt;shortcut&gt;</emphasis> is a combination of pressed keys
     specified by the user<footnote>
         <para>The full syntax for keystrokes (shortcuts) is defined in the
-        following Java 1.6 documentation from Oracle (bottom of page): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java
+        following Java 1.6 documentation from Oracle (bottom of page): <ulink
+        url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java
         1.6 keystrokes shortcuts</ulink></para>
       </footnote>.</para>
 
@@ -65,7 +136,8 @@
           <para>and <code>&lt;key&gt;</code> can be any key available on your
           keyboard<footnote>
               <para>The possible keyevents (keys) are listed in the following
-              Java 1.6 documentation from Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java
+              Java 1.6 documentation from Oracle: <ulink
+              url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java
               1.6 keyEvents description</ulink></para>
             </footnote>.</para>
         </listitem>
@@ -73,11 +145,13 @@
 
     <para>For example, in the default OmegaT shortcuts<footnote>
         <para>The default OmegaT shortcuts are available from Sourceforge:
-        <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
+        <ulink
+        url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
         OmegaT Shortcuts</ulink></para>
 
         <para>The default OmegaT shortcuts for the Mac are also available from
-        Sourceforge, they all use &quot;meta&quot; instead of &quot;ctrl&quot;: <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
+        Sourceforge, they all use "meta" instead of "ctrl": <ulink
+        url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
         OmegaT Shortcuts for the Mac</ulink></para>
       </footnote>, one can find:</para>
 
@@ -123,10 +197,10 @@
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>
 
-    <para>Save then the file and relaunch OmegaT.
-    Your new shortcuts should now appear next to the menu items you have
-    modified. If they do not conflict with system shortcuts, they should be
-    available from within OmegaT.</para>
+    <para>Save then the file and relaunch OmegaT. Your new shortcuts should
+    now appear next to the menu items you have modified. If they do not
+    conflict with system shortcuts, they should be available from within
+    OmegaT.</para>
   </section>
 
   <section id="ch04.shortcuts.ProjectMenu">
@@ -741,7 +815,7 @@
     <table>
       <title>View Menu</title>
 
-       <tgroup cols="3" colsep="1">
+      <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>

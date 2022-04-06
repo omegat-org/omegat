@@ -44,6 +44,7 @@ import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.madlonkay.supertmxmerge.data.ITuv;
 import org.madlonkay.supertmxmerge.data.Key;
 import org.madlonkay.supertmxmerge.data.ResolutionStrategy;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
@@ -66,6 +67,7 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
 
 import com.vlsolutions.swing.docking.Dockable;
+import gen.core.project.RepositoryDefinition;
 
 /**
  * Child process for concurrent modification.
@@ -169,12 +171,26 @@ public final class TestTeamIntegrationChild {
             ProjectFactory.loadProject(projectProperties, true);
             checkAll();
 
+            // check projectProperties
+            checkRepoUrl(projectProperties);
+
             System.exit(200);
         } catch (Throwable ex) {
             ex.printStackTrace();
             System.exit(1);
         }
     }
+
+    static void checkRepoUrl(ProjectProperties prop) {
+        for (RepositoryDefinition repository : prop.getRepositories()) {
+            if (repository.getUrl().equals(repo)) {
+                return;
+            }
+        }
+        throw new RuntimeException("Wrong url in repository. expected: " + repo
+                + ": actual: " + prop.getRepositories().get(0).getUrl());
+    }
+
 
     static void changeConcurrent() throws Exception {
         checkAll();

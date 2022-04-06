@@ -45,8 +45,8 @@ A test setup requires three containers.
 2. server: ssh+git server container to provide team repository
 3. client: omegat test instance container to run integration test.
 
-OmegaT project provide `docker-compose.yml` compose configuration that orchestrate
-test setup and execution in one line command, `docker-compose up`
+OmegaT project provide `.docker-compose.yml` compose configuration that orchestrate
+test setup and execution in one line command.
 
 ### How to run
 
@@ -55,13 +55,13 @@ WARNING: You should operate all command from project root directory.
 Before you start test, you need to build test containers,
 
 ```console
-docker-compose -f test-integration/docker/compose.yml build
+docker-compose -f .docker-compose.yml build
 ```
 
 then you can run with default settings
 
 ```console
-docker-compose -f test-integration/docker/compose.yml up
+docker-compose -f .docker-compose.yml up
 ```
 
 You can stop integration test processes by press Ctrl-C key.
@@ -72,7 +72,7 @@ and give docker-compose option to stop servers after test finished.
 
 ```console
 env DURATION=600 \
-  docker-compose -f test-integration/docker/compose.yml up \
+  docker-compose -f .docker-compose.yml up \
     --abort-on-container-exit
 ```
 
@@ -85,7 +85,7 @@ by adding an option like;
 
 ```console
 env DURATION=600 \
-  docker-compose -f test-integration/docker/compose.yml up \
+  docker-compose -f .docker-compose.yml up \
     --abort-on-container-exit --exit-code-from client
 ```
 
@@ -94,7 +94,7 @@ env DURATION=600 \
 You can check execution log with docker-compose command.
 
 ```console
-docker-compose -f test-integration/docker/compose.yml logs client
+docker-compose -f .docker-compose.yml logs client
 ```
 
 When you want to monitor log, you can add `-f` option.
@@ -104,7 +104,7 @@ When you want to monitor log, you can add `-f` option.
 You can also stop test setup and remove image from another shell.
 
 ```console
-docker-compose -f test-integration/docker/compose.yml stop
+docker-compose -f ./docker-compose.yml stop
 ```
 
 This stop container execution and you can see logs afterword.
@@ -116,7 +116,7 @@ After end of tests, images of containers are on disk.
 You can clean up resources with a command
 
 ```console
-docker-compose -f test-integration/docker/compose.yml down
+docker-compose -f .docker-compose.yml down
 ```
 
 This clean up container resources.

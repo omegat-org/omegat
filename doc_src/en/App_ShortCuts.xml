@@ -62,17 +62,11 @@
 	Project" (<guilabel>Open...</guilabel> in the <guilabel>Project</guilabel>
 	menu) that is displayed as
 
-	<keycombo>
-      <keycap>Ctrl</keycap>
-      <keycap>O</keycap>
-    </keycombo>
+      <keycap>Ctrl-O</keycap>
 
 	in Linux and Windows menus or as
 
-	<keycombo>
-      <keycap>⌘</keycap>
-      <keycap>O</keycap>
-    </keycombo>
+      <keycap>⌘ O</keycap>
 
 	  in macOS menus, will be described this way:
 

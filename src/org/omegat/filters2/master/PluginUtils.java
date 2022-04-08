@@ -99,10 +99,12 @@ public final class PluginUtils {
         }
 
         public static PluginType getTypeByValue(String str) {
-            String sType = str.toLowerCase(Locale.ENGLISH);
-            for (PluginType v : values()) {
-                if (v.getTypeValue().equals(sType)) {
-                    return v;
+            if (!StringUtil.isEmpty(str)) {
+                String sType = str.toLowerCase(Locale.ENGLISH);
+                for (PluginType v : values()) {
+                    if (v.getTypeValue().equals(sType)) {
+                        return v;
+                    }
                 }
             }
             return UNKNOWN;

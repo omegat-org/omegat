@@ -123,9 +123,9 @@ public final class TestTeamIntegration {
 
     static final String DIR = "/tmp/teamtest";
     static final List<String> REPO = new ArrayList<>();
-    static final String MAP_REPO = System.getProperty("omegat.test.maprepo", null);
-    static final String MAP_REPO_TYPE = System.getProperty("omegat.test.maptype", "http");
-    static final String MAP_FILE = System.getProperty("omegat.test.mapfile", null);
+    static final String MAP_REPO = System.getProperty("omegat.test.map.repo", null);
+    static final String MAP_REPO_TYPE = System.getProperty("omegat.test.map.type", "http");
+    static final String MAP_FILE = System.getProperty("omegat.test.map.file", null);
     static final int PROCESS_SECONDS = Optional.ofNullable(System.getProperty("omegat.test.duration"))
             .map(Integer::parseInt).orElse(4 * 60 * 60);
     static final int MAX_DELAY_SECONDS = 15;
@@ -139,13 +139,16 @@ public final class TestTeamIntegration {
     static Team repo;
 
     public static void main(String[] args) throws Exception {
-        REPO.add(System.getProperty("omegat.test.repo", "git@github.com:alex73/trans.git"));
-        String repo1 = System.getProperty("omegat.test.repo1", null);
-        if (repo1 != null) {
-            REPO.add(repo1);
+        String repository = System.getProperty("omegat.test.repo", null);
+        if (repository == null) {
+            System.err.println("Property omegat.test.repo is mandatory.");
+            System.exit(1);
         }
-        // REPO.add("svn+ssh://alex73@svn.code.sf.net/p/mappy/test/");
-        // REPO.add("https://github.com/alex73/trans/trunk/");
+        REPO.add(repository);
+        String altRepo = System.getProperty("omegat.test.repo.alt", null);
+        if (altRepo != null) {
+            REPO.add(altRepo);
+        }
         String startVersion = prepareRepo();
 
         Run[] runs = new Run[THREADS.length];

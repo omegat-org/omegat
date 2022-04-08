@@ -282,9 +282,9 @@ public class MainWindow extends JFrame implements IMainWindow {
             if (near.comesFrom == NearString.MATCH_SOURCE.TM
                     && FileUtil.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"),
                             new File(near.projs[0]))) {
-                Core.getEditor().replaceEditTextAndMark(translation);
+                Core.getEditor().replaceEditTextAndMark(translation, "TM:[tm/mt]");
             } else {
-                Core.getEditor().replaceEditText(translation);
+                Core.getEditor().replaceEditText(translation, "TM:[generic]");
             }
             Core.getEditor().requestFocus();
         }

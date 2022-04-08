@@ -346,6 +346,10 @@ public abstract class TestCore {
             }
 
             @Override
+            public void replaceEditTextAndMark(final String text, final String origin) {
+            }
+
+            @Override
             public void removeFilter() {
             }
 
@@ -509,6 +513,11 @@ public abstract class TestCore {
 
             @Override
             public void changeCase(CHANGE_CASE_TO newCase) {
+            }
+
+            @Override
+            public void replaceEditText(final String text, final String origin) {
+
             }
 
             @Override

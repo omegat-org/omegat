@@ -39,7 +39,6 @@ package org.omegat.gui.main;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -51,7 +50,6 @@ import org.omegat.Main;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
@@ -89,7 +87,6 @@ import org.omegat.util.Preferences;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.TMXProp;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.gui.DesktopWrapper;
@@ -487,16 +484,7 @@ public final class MainWindowMenuHandler {
         if (tr == null) {
             Core.getMachineTranslatePane().forceLoad();
         } else if (!StringUtil.isEmpty(tr.result)) {
-            // set MachineTranslate result as target translation and record translation engine name as origin.
-            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            PrepareTMXEntry prepareTMXEntry = new PrepareTMXEntry(Core.getProject().getTranslationInfo(ste));
-            prepareTMXEntry.translation = tr.result;
-            if (prepareTMXEntry.otherProperties == null) {
-                prepareTMXEntry.otherProperties = new ArrayList<>();
-            }
-            prepareTMXEntry.otherProperties.add(new TMXProp(PROP_ORIGIN, String.format("MT:[%s]", tr.translatorName)));
-            Core.getProject().setTranslation(ste, prepareTMXEntry,true, null);
-            Core.getEditor().replaceEditText(tr.result);
+            Core.getEditor().replaceEditText(tr.result, String.format("MT:[%s]", tr.translatorName));
         }
     }
 

@@ -288,6 +288,9 @@ public final class TestTeamIntegrationChild {
         public void replaceEditText(String text) {
         }
 
+        public void replaceEditTextAndMark(final String text, final String origin) {
+        }
+
         public void removeFilter() {
         }
 
@@ -402,6 +405,11 @@ public final class TestTeamIntegrationChild {
         }
 
         public void changeCase(CHANGE_CASE_TO newCase) {
+        }
+
+        @Override
+        public void replaceEditText(final String text, final String origin) {
+
         }
 
         public void activateEntry() {

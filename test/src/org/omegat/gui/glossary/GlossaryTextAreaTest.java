@@ -38,7 +38,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyledDocument;
 
+import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.util.Preferences;
@@ -50,14 +52,19 @@ import org.omegat.util.Preferences;
  * @author Aaron Madlon-Kay
  */
 public class GlossaryTextAreaTest extends TestCore {
+    @Before
+    public final void setUp() {
+        // TestCore#setUpCore initialize Preferences with temporary configDir
+        Preferences.setPreference(Preferences.GLOSSARY_LAYOUT, DefaultGlossaryRenderer.class.getCanonicalName());
+        Preferences.setPreference(Preferences.MARK_GLOSSARY_MATCHES, false);
+    }
+
     /**
      * Testing setGlossaryEntries of org.omegat.gui.main.GlossaryTextArea.
      */
     @Test
     public void testSetGlossaryEntries() throws Exception {
-        Preferences.setPreference(org.omegat.util.Preferences.MARK_GLOSSARY_MATCHES, false);
-
-        final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
+        final List<GlossaryEntry> entries = new ArrayList<>();
         entries.add(new GlossaryEntry("source1", "translation1", "", false, null));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2", false, null));
         final GlossaryTextArea gta = new GlossaryTextArea(Core.getMainWindow());
@@ -80,9 +87,7 @@ public class GlossaryTextAreaTest extends TestCore {
      */
     @Test
     public void testClear() throws Exception {
-        Preferences.setPreference(org.omegat.util.Preferences.MARK_GLOSSARY_MATCHES, false);
-
-        final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
+        final List<GlossaryEntry> entries = new ArrayList<>();
         entries.add(new GlossaryEntry("source1", "translation1", "", false, null));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2", false, null));
         final GlossaryTextArea gta = new GlossaryTextArea(Core.getMainWindow());

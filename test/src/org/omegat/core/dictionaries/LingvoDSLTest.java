@@ -38,9 +38,11 @@ import java.util.List;
 
 import io.github.eb4j.dsl.DslResult;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.omegat.core.dictionaries.LingvoDSL.LingvoDSLDict;
+import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
@@ -57,6 +59,12 @@ public class LingvoDSLTest {
     private static final File TEST_DICT_DZ = new File("test/data/dicts-lingvo-dz/test.dsl.dz");
     private static final Path TEST_DICT_IDX = Paths.get(Paths.get(TEST_DICT.toURI()) + ".idx");
     private static final Path TEST_DICT_DZ_IDX = Paths.get(Paths.get(TEST_DICT_DZ.toURI()) + ".idx");
+
+    @BeforeClass
+    public static void setUp() throws Exception {
+        TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.DICTIONARY_CONDENSED_VIEW, false);
+    }
 
     @AfterClass
     public static void cleanUp() {

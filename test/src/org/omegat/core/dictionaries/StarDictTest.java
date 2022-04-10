@@ -35,10 +35,12 @@ import java.util.List;
 import java.util.Locale;
 
 import io.github.eb4j.stardict.StarDictDictionary;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import org.omegat.core.TestCore;
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 /**
  * Dictionary test
@@ -47,9 +49,15 @@ import org.omegat.util.Language;
  * @author Hiroshi Miura
  * @author Aaron Madlon-Kay
  */
-public class StarDictTest extends TestCore {
+public class StarDictTest {
 
     private static final Language FRENCH = new Language(Locale.FRENCH);
+
+    @BeforeClass
+    public static void setUp() throws Exception {
+        TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.DICTIONARY_CONDENSED_VIEW, false);
+    }
 
     @Test
     public void testStardict4j() throws Exception {

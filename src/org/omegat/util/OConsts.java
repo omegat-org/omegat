@@ -8,6 +8,7 @@
                2009 Didier Briel
                2013 Guido Leenders
                2014 Aaron Madlon-Kay
+               2021-2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 

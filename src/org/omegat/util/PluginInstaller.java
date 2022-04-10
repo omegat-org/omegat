@@ -25,19 +25,23 @@
 
 package org.omegat.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Predicate;
@@ -55,7 +59,7 @@ import org.omegat.gui.preferences.view.PluginsPreferencesController;
 
 
 /**
- * Plugin installer utility class.
+ * Plugin installer singleton class.
  *
  * @author Hiroshi Miura
  */
@@ -64,11 +68,23 @@ public final class PluginInstaller {
     private static final String PLUGIN_NAME = "Plugin-Name";
     private static final String PLUGIN_VERSION = "Plugin-Version";
     private static final String PLUGIN_TYPE = "OmegaT-Plugin";
+    private static final String LIST_URL =
+            "https://github.com/omegat-org/omegat-plugins/releases/download/continuous-release/plugins.MF";
+
+    private List<PluginInformation> pluginInformationList;
+
+    private static class SingletonHelper {
+        private static final PluginInstaller INSTANCE = new PluginInstaller();
+    }
+
+    public static PluginInstaller getInstance() {
+        return SingletonHelper.INSTANCE;
+    }
 
     private PluginInstaller() {
     }
 
-    public static boolean install(final File pluginFile) {
+    public boolean install(File pluginFile, boolean background) {
         Path pluginJarFile;
         PluginInformation info;
         try {
@@ -94,6 +110,7 @@ public final class PluginInstaller {
                     e.getLocalizedMessage());
             return false;
         }
+
         // Get plugin name and version to be installed.
         String pluginName = info.getName();
         String version = info.getVersion();
@@ -108,6 +125,9 @@ public final class PluginInstaller {
                     version);
         }
 
+        if (background) {
+            return doInstall(currentInfo, pluginJarFile.toFile());
+        }
         // confirm installation
         if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                     message,
@@ -146,6 +166,37 @@ public final class PluginInstaller {
             Log.log(ex);
         }
         return false;
+    }
+
+    /**
+     * Return known available plugins.
+     * It can has plugins that has already installed.
+     * @return Map of PluginInformation
+     */
+    public List<PluginInformation> getPluginList() {
+        if (pluginInformationList != null) {
+            return pluginInformationList;
+        }
+        Map<String, PluginInformation> listPlugins = getInstalledPlugins();
+        getPluginsList().stream()
+                .sorted(Comparator.comparing(PluginInformation::getClassName))
+                .map(info -> {
+                    String key = info.getClassName();
+                    PluginInformation.Status status;
+                    String version = info.getVersion();
+                    PluginInformation installed = listPlugins.get(key);
+                    if (installed == null) {
+                        status = PluginInformation.Status.UNINSTALLED;
+                    } else if (!installed.getVersion().equals(info.getVersion())) {
+                        status = PluginInformation.Status.UPGRADABLE;
+                    } else {
+                        status = PluginInformation.Status.INSTALLED;
+                    }
+                    return PluginInformation.Builder.copy(info, status);
+                })
+                .forEach(info -> listPlugins.put(info.getClassName(), info));
+        pluginInformationList = new ArrayList<>(listPlugins.values());
+        return pluginInformationList;
     }
 
     /**
@@ -247,5 +298,47 @@ public final class PluginInstaller {
                 .filter(info -> !installedPlugins.containsKey(info.getClassName()))
                 .forEach(info -> installedPlugins.put(info.getClassName(), info));
         return installedPlugins;
+    }
+
+    /**
+     * Download plugin list from github repository.
+     * @return set of PluginInformation
+     */
+    private List<PluginInformation> getPluginsList() {
+        List<PluginInformation> pluginInfo = new ArrayList<>();
+        String raw_value;
+        try {
+            raw_value = HttpConnectionUtils.getURL(new URL(LIST_URL));
+            Scanner scanner = new Scanner(raw_value);
+            StringBuilder sb = new StringBuilder();
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (!line.equals("")) {
+                    sb.append(line).append("\n");
+                } else {
+                    try {
+                        Manifest m = new Manifest(new ByteArrayInputStream(sb.toString().getBytes(StandardCharsets.UTF_8)));
+                        String pluginClasses = m.getMainAttributes().getValue("OmegaT-Plugins");
+                        if (pluginClasses == null) {
+                            continue;
+                        }
+                        for (String clazz : pluginClasses.split("\\s+")) {
+                            if (clazz.trim().isEmpty()) {
+                                continue;
+                            }
+                            pluginInfo.add(PluginInformation.Builder.fromManifest(clazz, m, null,
+                                PluginInformation.Status.UNINSTALLED));
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    sb = new StringBuilder();
+                }
+            }
+            scanner.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return pluginInfo;
     }
 }

@@ -26,6 +26,7 @@
 
 package org.omegat.core.data;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Properties;
 import java.util.jar.Attributes;
@@ -45,6 +46,8 @@ public class PluginInformation {
         INSTALLED,
         BUNDLED,
         NEW,
+        UPGRADABLE,
+        UNINSTALLED,
     }
 
     private final String className;
@@ -56,10 +59,16 @@ public class PluginInformation {
     private final String link;
     private final URL url;
     private final Status status;
+    // for manage and install
+    private final String remoteJarFileUrl;
+    private final String jarFilename;
+    private final String sha256Sum;
 
-    /* The class is recommend to build from builder. */
+
+    /* The class is recommended to build from builder. */
     private PluginInformation(String className, String name, String version, String author, String description,
-                             PluginUtils.PluginType category, String link, URL url, Status status) {
+                             PluginUtils.PluginType category, String link, URL url, Status status,
+                              String remoteJarFileUrl, String jarFilename, String sha256Sum) {
         this.className = className;
         this.name = name;
         this.version = version;
@@ -69,6 +78,9 @@ public class PluginInformation {
         this.link = link;
         this.url = url;
         this.status = status;
+        this.remoteJarFileUrl = remoteJarFileUrl;
+        this.jarFilename = jarFilename;
+        this.sha256Sum = sha256Sum;
     }
 
     /**
@@ -134,6 +146,26 @@ public class PluginInformation {
         return status == Status.BUNDLED;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public File getJarFile() {
+        return new File(url.getPath().substring(5, url.getPath().indexOf("!")));
+    }
+
+    public String getRemoteJarFileUrl() {
+        return remoteJarFileUrl;
+    }
+
+    public String getJarFilename() {
+        return jarFilename;
+    }
+
+    public String getSha256Sum() {
+        return sha256Sum;
+    }
+
     /**
      * @return string expression of PluginInformation class.
      */
@@ -193,7 +225,6 @@ public class PluginInformation {
         return true;
     }
 
-
     /**
      * Builder class.
      */
@@ -211,11 +242,22 @@ public class PluginInformation {
         private static final String BUNDLE_VERSION = "Bundle-Version";
         private static final String BUNDLE_NAME = "Bundle-Name";
         private static final String BUILT_BY = "Built-By";
+        private static final String PLUGIN_JAR_URL = "Plugin-Download-Url";
+        private static final String PLUGIN_JAR_FILENAME = "Plugin-Jar-Filename";
+        private static final String PLUGIN_SHA256SUM = "Plugin-Sha256Sum";
+
 
         /**
          * Disable default constructor.
          */
         private Builder() {
+        }
+
+        public static PluginInformation copy(final PluginInformation info, final Status status) {
+            return new PluginInformation(info.getClassName(), info.getName(), info.getVersion(),
+                    info.getAuthor(), info.getDescription(), info.getCategory(), info.getLink(),
+                    info.getUrl(), status, info.getRemoteJarFileUrl(), info.getJarFilename(),
+                    info.getSha256Sum());
         }
 
         /**
@@ -246,13 +288,36 @@ public class PluginInformation {
             if (attrs != null) {
                 targetAttrs.putAll(attrs);
             }
+            String remoteJarFileUrl = targetAttrs.getValue(PLUGIN_JAR_URL);
             return new PluginInformation(className,
                     findName(className, targetAttrs),
                     findVersion(targetAttrs),
                     findAuthor(targetAttrs),
                     lookupAttribute(targetAttrs, PLUGIN_DESCRIPTION),
                     findCategory(targetAttrs),
-                    lookupAttribute(targetAttrs, PLUGIN_LINK), mu, status);
+                    lookupAttribute(targetAttrs, PLUGIN_LINK), mu, status,
+                    remoteJarFileUrl,
+                    getJarFilename(targetAttrs, remoteJarFileUrl),
+                    targetAttrs.getValue(PLUGIN_SHA256SUM));
+        }
+
+        private static String getJarFilename(Attributes attrs, String remoteJarFileUrl) {
+            String attrsName = attrs.getValue(PLUGIN_JAR_FILENAME);
+            if (attrsName != null) {
+                return attrsName;
+            }
+            if (attrs.getValue(PLUGIN_JAR_URL) != null) {
+                int from = remoteJarFileUrl.lastIndexOf("/");
+                int to = remoteJarFileUrl.indexOf("?");
+                if (from != -1) {
+                    if (to == -1) {
+                        return remoteJarFileUrl.substring(from + 1);
+                    } else {
+                        return remoteJarFileUrl.substring(from + 1, to);
+                    }
+                }
+            }
+            return null;
         }
 
         private static final String AUTHOR = "OmegaT team";
@@ -274,7 +339,8 @@ public class PluginInformation {
                                                        final String key, final URL mu, final Status status) {
             return new PluginInformation(className, key, OStrings.getSimpleVersion(), AUTHOR,
                     props.getProperty(String.format("plugin.desc.%s", key)),
-                    PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status);
+                    PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status,
+                    null, null, null);
         }
 
         private static PluginUtils.PluginType findCategory(Attributes attrs) {

@@ -98,7 +98,7 @@ public final class PluginUtils {
         THEME("theme"),
         /** Misc plugins, such as GUI extension like web browser spport. */
         MISCELLANEOUS("miscellaneous"),
-        /** When plugin does not defined any of above. */
+        /** When plugin does not define any of above. */
         UNKNOWN("Undefined");
 
         private final String typeValue;

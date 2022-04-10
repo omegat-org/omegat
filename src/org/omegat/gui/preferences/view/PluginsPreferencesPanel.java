@@ -26,6 +26,7 @@
 package org.omegat.gui.preferences.view;
 
 import javax.swing.JPanel;
+
 import org.omegat.util.OStrings;
 
 /**
@@ -47,72 +48,60 @@ public class PluginsPreferencesPanel extends JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        panelInfo = new javax.swing.JPanel();
-        messageLabel = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(32767, 5));
-        browsePluginsButton = new javax.swing.JButton();
-        installFromDiskButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         panelPluginsInfo = new javax.swing.JPanel();
-        labelTableTitle = new javax.swing.JLabel();
         scrollTable = new javax.swing.JScrollPane();
         tablePluginsInfo = new javax.swing.JTable();
+        panelPluginDetails = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        browsePluginsButton = new javax.swing.JButton();
+        installFromDiskButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(messageLabel, OStrings.getString("PREFS_PLUGINS_AVAILABLE_ONLINE")); // NOI18N
-        messageLabel.setAlignmentY(0.0F);
-        panelInfo.add(messageLabel);
-        panelInfo.add(filler1);
+        jPanel1.setMaximumSize(new java.awt.Dimension(65534, 600));
+        jPanel1.setMinimumSize(new java.awt.Dimension(200, 23));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 2));
 
-        org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
-        browsePluginsButton.setAlignmentY(0.0F);
-        panelInfo.add(browsePluginsButton);
+        panelPluginsInfo.setLayout(new java.awt.GridLayout(1, 0));
 
-        org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK")); // NOI18N
-        panelInfo.add(installFromDiskButton);
-
-        add(panelInfo);
-
-        panelPluginsInfo.setLayout(new java.awt.GridBagLayout());
-
-        org.openide.awt.Mnemonics.setLocalizedText(labelTableTitle, OStrings.getString("PREFS_PLUGINS_LIST")); // NOI18N
-        labelTableTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
-        panelPluginsInfo.add(labelTableTitle, gridBagConstraints);
+        scrollTable.setPreferredSize(new java.awt.Dimension(452, 452));
 
         tablePluginsInfo.setAutoCreateRowSorter(true);
         tablePluginsInfo.setModel(new PluginInfoTableModel());
-        tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_CLASS).setPreferredWidth(100);
-        tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
         scrollTable.setViewportView(tablePluginsInfo);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        panelPluginsInfo.add(scrollTable, gridBagConstraints);
+        panelPluginsInfo.add(scrollTable);
 
-        add(panelPluginsInfo);
+        jPanel1.add(panelPluginsInfo);
+
+        panelPluginDetails.setLayout(new javax.swing.BoxLayout(panelPluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
+        jPanel1.add(panelPluginDetails);
+
+        add(jPanel1);
+
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
+        jPanel2.add(browsePluginsButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK")); // NOI18N
+        jPanel2.add(installFromDiskButton);
+
+        add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton browsePluginsButton;
-    private javax.swing.Box.Filler filler1;
     javax.swing.JButton installFromDiskButton;
-    private javax.swing.JLabel labelTableTitle;
-    private javax.swing.JLabel messageLabel;
-    private javax.swing.JPanel panelInfo;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
-    private javax.swing.JScrollPane scrollTable;
+    javax.swing.JScrollPane scrollTable;
     javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

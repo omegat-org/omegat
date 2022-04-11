@@ -71,7 +71,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
 
     @Override
     public int getRowCount() {
-        return listPlugins.size();
+       return listPlugins == null ? 0 : listPlugins.size();
     }
 
     @Override

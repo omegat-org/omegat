@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+  <header creationtool="Translate Toolkit" creationtoolversion="2.5.0" segtype="sentence" o-tmf="UTF-8" adminlang="en" srclang="en-US" datatype="PlainText"/>
+  <body>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>XXX</seg>
+      </tuv>
+      <tuv xml:lang="sr">
+        <seg>YYY</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

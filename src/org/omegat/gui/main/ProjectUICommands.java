@@ -11,6 +11,8 @@
                2015 Aaron Madlon-Kay, Yu Tang
                2016 Alex Buloichik             
                2017 Didier Briel
+               2021 ISHIKAWA,chiaki
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -94,6 +96,8 @@ import gen.core.project.RepositoryMapping;
  * @author Thomas Cordonnier
  * @author Aaron Madlon-Kay
  * @author Didier Briel
+ * @author ISHIKAWA, chiaki
+ * @author Hiroshi Miura
  */
 public final class ProjectUICommands {
 
@@ -472,27 +476,19 @@ public final class ProjectUICommands {
                          1. When opening a teamwork project as local only non-teamwork by passing 'no-team' to
                          command line, skip teamwork treatment.
                          2. Save the currently effective repository mapping from LOCAL to variable 'repos'.
-                         3. Update project.properties from REMOTE copy of omegat.project in the following.
-                         3.1. Copy the content of remote omegat.project to top-level/omegat.project.NEW
-                         3.2. Check root project mapping in omegat.project.NEW; if there is an entry,
-                           3.2.1 Compare the protocol and the URL, if these are equals, skip next step and goto 3.3
-                           3.2.2 If different, in order to use local configured protocol and URL, we now replace
-                                 omegat.project.NEW mapping entry for root.
-                         3.3. In order to Load properties from omegat.project.NEW instead of existent omegat.project,
-                            call loadPropertiesFile(... ) with "omegat.project.NEW".
+                         3. Update project.properties from REMOTE copy of omegat.project that has postfix .NEW
+                            by calling loadPropertiesFile(... ) with "omegat.project.NEW".
+                            It respect local root repository URL than remote mapping configuration
                          4. Handles mappings of four cases.
                              a. no mapping
                              b. no remote mapping, there are local mapping(s)
+                                the locally defined mapping(s) are merged into local omegat.project.
                              c. remote mapping, no local mapping(s)
                              d. remote and local mappings
-                         4.1 case a and b: Repositories with a project by default have no mapping.
-                              When they are downloaded, the mapping is added locally.
-                         4.2. case b: When we lose the locally defined mapping(s),
-                              We need to restore them and save the updated omegat.properties to disk.
-                         4.3. case c and d: If the repository already contains the omegat.project file with mappings,
-                              then we use those. Local changes are overwritten like any other setting.
+                                Local mapping changes are overwritten except for root repository mapping.
                          5. If the remote omegat.project fails to have the git setup at all
                             we should warn loudly.
+                         6. We save the original project file with as omegat.project.timestamp.bak
                          @note: We may want to make sure that the remote props.GetRepositories match
                           the previous current setup, but this does not seem to be the intention of
                           the current mapping usage.
@@ -589,12 +585,8 @@ public final class ProjectUICommands {
                     Core.executeExclusively(true, () -> {
                         if (rewriteOnSuccessFinal != null) { // teamwork case.
                             if (succeeded) {    // remote content with minor mods seems sane.
-                                if (needToSavePropertiesFinal) {
-                                    // This part is moved out of this lambda and put in the preceding position because
-                                    // we need to modify needToSaveProperties to false.
-                                } else {
+                                if (!needToSavePropertiesFinal) {
                                     Log.logWarningRB("REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT");
-                                    // New: back up the original project file with as omegat.project.timestamp.bak
                                     FileUtil.backupFile(projectFile);
                                     // Rename omegat.project.NEW to omegat.project
                                     Files.move(rewriteOnSuccessFinal.toPath(), projectFile.toPath(),
@@ -606,7 +598,7 @@ public final class ProjectUICommands {
                             }
                         }
                     });
-                    if (needToSaveProperties) { // This writes out the currently effective project setting to "omegat.project"
+                    if (needToSaveProperties) {
                         Log.logWarningRB("SAVING_CURRENT_PROJECT_PROPERTIS_TO_PROJECT_FILE");
                         Core.getProject().saveProjectProperties();
                     }

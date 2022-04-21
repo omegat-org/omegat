@@ -32,6 +32,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import org.apache.commons.io.IOUtils;
+
 import org.omegat.core.Core;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -93,21 +94,15 @@ public class BelazarTranslate extends BaseTranslate {
         conn.setUseCaches(false);
         conn.setDoInput(true);
         conn.setDoOutput(true);
-        OutputStream out = conn.getOutputStream();
-        try {
+        String result;
+        try (OutputStream out = conn.getOutputStream(); InputStream in = conn.getInputStream()) {
             out.write(db);
             out.flush();
-        } finally {
-            out.close();
-        }
-        String result;
-        InputStream in = conn.getInputStream();
-        try {
             result = IOUtils.toString(in, CHARSET);
-        } finally {
-            in.close();
         }
-
+        if (result == null) {
+            return null;
+        }
         putToCache(sLang, tLang, text, result);
         return result;
     }

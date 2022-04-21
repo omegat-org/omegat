@@ -117,6 +117,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TMXProp;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.IDropInfo;
 import org.omegat.util.gui.StaticUIUtils;
@@ -209,6 +210,9 @@ public class EditorController implements IEditor {
     private Component entriesFilterControlComponent;
 
     private SegmentExportImport segmentExportImport;
+
+    protected String currentEntryOrigin;
+    protected String translationFromOrigin;
 
     /**
      * Previous translations. Used for optimistic locking.
@@ -1183,6 +1187,12 @@ public class EditorController implements IEditor {
             } else {
                 // new translation is not empty and not equals to source - just change
                 newen.translation = newTrans;
+                if (currentEntryOrigin != null && newTrans.equals(translationFromOrigin)) {
+                    if (newen.otherProperties == null) {
+                        newen.otherProperties = new ArrayList<>();
+                    }
+                    newen.otherProperties.add(new TMXProp(ProjectTMX.PROP_ORIGIN, currentEntryOrigin));
+                }
             }
         }
 
@@ -1191,6 +1201,7 @@ public class EditorController implements IEditor {
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
+        resetOrigin();
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {
             // Only note was changed, and we are not making a new alt translation.
@@ -1295,6 +1306,7 @@ public class EditorController implements IEditor {
         }
 
         doc.stopEditMode();
+        resetOrigin();
     }
 
     /**
@@ -1693,9 +1705,18 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     @Override
-    public void replaceEditText(String text) {
+    public void replaceEditText(final String text) {
+        replaceEditText(text, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void replaceEditText(String text, final String origin) {
         UIThreadsUtil.mustBeSwingThread();
 
+        setOrigin(text, origin);
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
             text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste),
@@ -1718,6 +1739,7 @@ public class EditorController implements IEditor {
     public void replacePartOfText(final String text, int start, int end) {
         UIThreadsUtil.mustBeSwingThread();
 
+        resetOrigin();
         CalcMarkersThread thread = markerController.markerThreads[markerController
                 .getMarkerIndex(ComesFromMTMarker.class.getName())];
         ((ComesFromMTMarker) thread.marker).setMark(null, null);
@@ -1727,14 +1749,21 @@ public class EditorController implements IEditor {
         editor.select(start + off, end + off);
         editor.replaceSelection(text);
     }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void replaceEditTextAndMark(final String text, final String origin) {
+        replaceEditText(text, origin);
+        markAsComesFromMT(text);
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void replaceEditTextAndMark(String text) {
-        replaceEditText(text);
-        markAsComesFromMT(text);
+        replaceEditTextAndMark(text, null);
     }
 
     private void markAsComesFromMT(String text) {
@@ -1808,7 +1837,7 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         editor.checkAndFixCaret();
-
+        resetOrigin();
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
             text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste),
@@ -1899,6 +1928,20 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         return dockableSelected ? editor.getSelectedText() : null;
+    }
+
+    private void setOrigin(final String text, final String origin) {
+        if (origin != null) {
+            currentEntryOrigin = origin;
+            translationFromOrigin = text;
+        } else {
+            resetOrigin();
+        }
+    }
+
+    private void resetOrigin() {
+        currentEntryOrigin = null;
+        translationFromOrigin = null;
     }
 
     /** Loads Instant start article */

@@ -9,6 +9,20 @@
 
 
 ----------------------------------------------------------------------
+OmegaT 5.7.1 (2022-03-19)
+----------------------------------------------------------------------
+  0 Enhancements
+  1 Bug fix
+  0 Localisation updates
+----------------------------------------------------------------------
+5.7.1 vs 5.7.0
+
+  Bug fixes:
+
+  - Spelling dictionaries download site closed
+  https://sourceforge.net/p/omegat/bugs/1086/
+
+----------------------------------------------------------------------
  OmegaT 5.7.0 (2021-11-17)
 ----------------------------------------------------------------------
   4 Enhancements
@@ -509,6 +523,20 @@
   - Russian localisation updated to 5.0.0 (UI)
   - Simplified Chinese localisation updated to 5.0.0 (UI, scripts)
   - Ukrainian localisation updated to 5.0.0 (UI, Instant Start, scripts, readme)
+
+----------------------------------------------------------------------
+ OmegaT 4.3.3 (2022-03-18)
+----------------------------------------------------------------------
+  0 Enhancements
+  1 Bug fix
+  0 Localisation updates
+----------------------------------------------------------------------
+4.3.3 vs 4.3.1
+
+  Bug fixes:
+
+  - Spelling dictionaries download site closed
+  https://sourceforge.net/p/omegat/bugs/1086/
 
 ----------------------------------------------------------------------
  OmegaT 4.3.2 (2020-01-26)

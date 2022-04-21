@@ -154,15 +154,20 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
         baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add default styles
         Font font = getFont();
-        baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "
-                + " font-size: " + font.getSize() + "; "
-                + " font-style: " + (font.getStyle() == Font.BOLD ? "bold"
-                        : font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
-                + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + "; "
-                + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + ";} "
-                + ".word {font-size: " + (2 + font.getSize()) + "; font-style: bold;} "
-                + ".entry {line-height: 1.1;} "
-                + ".article {font-size: " + font.getSize() + ";}"
+        int fontSize;
+        if (Preferences.isPreferenceDefault(Preferences.DICTIONARY_USE_FONT, true)) {
+            fontSize = font.getSize();
+        } else {
+            fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_DICTIONARY_FONT_SIZE));
+        }
+        baseStyleSheet.addRule("body { font-family: " + font.getName() + "; font-size: " + fontSize + ";"
+                + " font-style: " + (font.getStyle() == Font.ITALIC ? "italic" : "normal") + ";"
+                + " font-weight: " + (font.getStyle() == Font.BOLD ? "bold" : "normal") + ";"
+                + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + ";"
+                + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + ";}"
+                + " .word {font-size: 1.2em ; font-weight: bold;} .entry {line-height: 1.1;} "
+                + " .article {font-size: 1.0em ;} .details {font-size: 0.8em ;}"
+                + " .paragraph-start {font-size: 0.8em ; color: " + EditorColor.COLOR_PARAGRAPH_START + ";} "
                 );
         htmlEditorKit.setStyleSheet(baseStyleSheet);
         setEditorKit(htmlEditorKit);
@@ -251,7 +256,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     protected void startSearchThread(SourceTextEntry newEntry) {
         if (!Preferences.isPreferenceDefault(Preferences.DICTIONARY_AUTO_SEARCH, true)) {
             return;
-        };
+        }
         new DictionaryEntriesSearchThread(newEntry).start();
     }
 
@@ -294,7 +299,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 wasPrev = true;
             }
             txt.append("<div id=\"").append(i).append("\" class=\"entry\">");
-            txt.append("<b><span class=\"word\">").append(de.getWord()).append("</span></b>");
+            txt.append("<b><span class=\"word\">");
+            txt.append(de.getWord().replaceAll("\n", " ")).append("</span></b>");
             txt.append(" - <span class=\"article\">").append(de.getArticle()).append("</span>");
             txt.append("</div>");
             displayedWords.add(de.getQuery());

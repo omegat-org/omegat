@@ -1,0 +1,36 @@
+version: '3'
+services:
+  keygen:
+    build: test-integration/docker/keygen
+    volumes:
+      - keygen:/keys
+    tmpfs:
+      - /tmp
+  server:
+    build: test-integration/docker/server
+    expose:
+      - "22"
+    volumes:
+      - keygen:/keys
+    depends_on:
+      - keygen
+    tmpfs:
+      - /tmp
+  client:
+    build: test-integration/docker/client
+    depends_on:
+      - keygen
+      - server
+    volumes:
+      - .:/code
+      - keygen:/keys
+    tmpfs:
+      - /tmp
+    environment:
+      DURATION: ${DURATION:-2400}
+      REPO: "git@server:omegat-test.git"
+      ALTREPO: "https://git:gitpass@server/omegat-test.git"
+      MAPREPO: "http://server/"
+      MAPFILE: "README"
+volumes:
+  keygen:

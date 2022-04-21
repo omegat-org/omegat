@@ -109,6 +109,9 @@ public final class Preferences {
     public static final boolean GLOSSARY_MERGE_ALTERNATE_DEFINITIONS_DEFAULT = true;
     public static final String DICTIONARY_FUZZY_MATCHING = "dictionary_fuzzy_matching";
     public static final String DICTIONARY_AUTO_SEARCH = "dictionary_auto_search";
+    public static final String DICTIONARY_CONDENSED_VIEW = "dictionary_condensed_view";
+    public static final String DICTIONARY_USE_FONT = "dictionary_use_font";
+    public static final String TF_DICTIONARY_FONT_SIZE = "dictionary_font_size";
 
     public static final String MAINWINDOW_GEOMETRY_PREFIX = "screen";
     public static final String MAINWINDOW_LAYOUT = "docking_layout";
@@ -257,6 +260,8 @@ public final class Preferences {
     public static final String CONVERT_NUMBERS = "wf_convertNumbers";
     /** Workflow Option: Save auto-populated status */
     public static final String SAVE_AUTO_STATUS = "save_auto_status";
+    /** Workflow Option: Save MT origin */
+    public static final String SAVE_ORIGIN = "save_origin";
     /** Workflow Option: Number of segments to load initially in editor */
     public static final String EDITOR_INITIAL_SEGMENT_LOAD_COUNT = "editor_initial_segment_load_count";
     public static final int EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT = 2000;

@@ -8,6 +8,7 @@
                2012 Jean-Christophe Helary
                2015 Aaron Madlon-Kay
                2018 Thomas Cordonnier
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,14 +31,21 @@
 package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.awt.Font;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Element;
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
@@ -58,6 +66,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -68,6 +77,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Jean-Christophe Helary
  * @author Aaron Madlon-Kay
  * @author Thomas Cordonnier
+ * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
 public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo>
@@ -75,16 +85,22 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
     private static final String EXPLANATION = OStrings.getString("GUI_MACHINETRANSLATESWINDOW_explanation");
 
-    protected Set<MachineTranslationInfo> displayed = new HashSet<>();
+    /**
+     *  List displayed hold entries. An index shall be as same as ID attribute value of HTML.
+     *  Actual displayed entries are sorted, and the order is different from the List.
+     */
+    protected List<MachineTranslationInfo> displayed = new CopyOnWriteArrayList<>();
 
     public MachineTranslateTextArea(IMainWindow mw) {
         super(true);
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
+        initDocument();
 
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
+        selectedIndex = -1;
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_MachineTranslate");
         mw.addDockable(new DockableScrollPane("MACHINE_TRANSLATE", title, this, true));
@@ -105,17 +121,56 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                 .collect(Collectors.toMap(GlossaryEntry::getSrcText, GlossaryEntry::getLocText));
     }
 
-    /** Cycle getDisplayedTranslation **/
-    private Iterator<MachineTranslationInfo> cycle;
+    private void initDocument() {
+        StyleSheet baseStyleSheet = new StyleSheet();
+        HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
+        baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add default styles
+        Font font = getFont();
+        baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "
+                + " font-size: " + font.getSize() + "; "
+                + " font-style: " + (font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
+                + " font-weight: " + (font.getStyle() == Font.BOLD ? "bold" : "normal") + "; "
+                + " color: " + Styles.EditorColor.COLOR_FOREGROUND.toHex() + "; "
+                + " background: " + Styles.EditorColor.COLOR_BACKGROUND.toHex() + ";} "
+                + ".engine {font-style: italic; text-align: right;}"
+                );
+        htmlEditorKit.setStyleSheet(baseStyleSheet);
+        setEditorKit(htmlEditorKit);
+    }
 
-    public String getDisplayedTranslation() {
-        if ((cycle == null) || (!cycle.hasNext())) {
-            cycle = displayed.iterator();
-        }
-        if (!cycle.hasNext()) { // only possible if displayed.isEmpty()
+    /** Cycle getDisplayedTranslation **/
+    private int selectedIndex;
+
+    public MachineTranslationInfo getDisplayedTranslation() {
+        if (displayed.size() == 0) {
             return null;
         }
-        return cycle.next().result;
+        selectedIndex = (selectedIndex + 1) % displayed.size();
+        MachineTranslationInfo info = displayed.get(selectedIndex);
+        highlightSelected(selectedIndex, info);
+        return info;
+    }
+
+    private void highlightSelected(final int selectedIndex, final MachineTranslationInfo info) {
+        UIThreadsUtil.mustBeSwingThread();
+        HTMLDocument doc = (HTMLDocument) getDocument();
+        Element rootElement = doc.getDefaultRootElement();
+        if (rootElement == null) {
+            return;
+        }
+        Element el = doc.getElement(rootElement, HTML.Attribute.ID,  String.valueOf(selectedIndex));
+        if (el == null) {
+            return;
+        }
+        int pos = el.getStartOffset();
+        try {
+            getHighlighter().removeAllHighlights();
+            getHighlighter().addHighlight(pos, pos + info.result.length(),
+                    new DefaultHighlighter.DefaultHighlightPainter(
+                            Styles.EditorColor.COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT.getColor()));
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
     }
 
     @Override
@@ -147,18 +202,29 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     @Override
     protected void setFoundResult(final SourceTextEntry se, final MachineTranslationInfo data) {
         UIThreadsUtil.mustBeSwingThread();
-
         if (data != null && data.result != null) {
-            displayed.add (data);
-            setText(getText() + data.result + "\n<" + data.translatorName + ">\n\n");
+            displayed.add(data);
+            displayed.sort(Comparator.comparing(info -> info.translatorName));
+            StringBuilder sb = new StringBuilder("<html>");
+            for (int i = 0; i < displayed.size(); i++) {
+                MachineTranslationInfo info = displayed.get(i);
+                sb.append("<div id=\"").append(i).append("\">");
+                sb.append(info.result);
+                sb.append("<div class=\"engine\">&lt;");
+                sb.append(info.translatorName);
+                sb.append("&gt;</div></div>");
+            }
+            sb.append("</html>");
+            setText(sb.toString());
         }
     }
 
     @Override
     public void clear() {
         super.clear();
+        getHighlighter().removeAllHighlights();
         displayed.clear();
-        cycle = null;
+        selectedIndex = -1;
     }
 
     protected class FindThread extends EntryInfoSearchThread<MachineTranslationInfo> {
@@ -190,7 +256,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             return result == null ? null : new MachineTranslationInfo(translator.getName(), result);
         }
 
-        private String getTranslation(Language source, Language target) throws Exception {
+        private String getTranslation(Language source, Language target) {
             if (!force) {
                 if (!Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, true)) {
                     return translator.getCachedTranslation(source, target, src);
@@ -202,7 +268,14 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                     }
                 }
             }
-            return translator.getTranslation(source, target, src);
+            try {
+                return translator.getTranslation(source, target, src);
+            } catch (Exception e) {
+                Log.log(e);
+                Core.getMainWindow()
+                        .showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(), e.getLocalizedMessage());
+                return null;
+            }
         }
     }
 

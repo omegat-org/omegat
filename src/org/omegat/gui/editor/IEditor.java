@@ -278,11 +278,28 @@ public interface IEditor {
     void changeCase(CHANGE_CASE_TO newCase);
 
     /**
+     * Replaces the entire edit area with a given text which origin is origin.
+     * <p>
+     *     when manual edit and origin is unknown, origin will be null.
+     *
+     * Must be called only from UI thread.
+     */
+    void replaceEditText(String text, String origin);
+
+    /**
      * Replaces the entire edit area with a given text.
      *
      * Must be called only from UI thread.
      */
     void replaceEditText(String text);
+
+    /**
+     * Replace text and mark as to be changed by the translator from origin,
+     * i.e, background of segment should be marked
+     *
+     * Must be called only from UI thread.
+     */
+    void replaceEditTextAndMark(String text, String origin);
 
     /**
      * Inserts text at the cursor position and mark as to be changed

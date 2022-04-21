@@ -31,11 +31,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.omegat.util.Language;
-import org.omegat.util.StringUtil;
 import org.trie4j.MapTrie;
 import org.trie4j.doublearray.MapDoubleArray;
 import org.trie4j.patricia.MapPatriciaTrie;
+
+import org.omegat.util.Language;
+import org.omegat.util.StringUtil;
 
 /**
  * A class that encapsulates the storage and retrieval of string-keyed data.
@@ -43,7 +44,7 @@ import org.trie4j.patricia.MapPatriciaTrie;
  * <ol>
  * <li>Instantiate and insert data with {@link #add(String, Object)}
  * <li>Call {@link #done()} when done adding data (required!)
- * <li>Retrieve data with {@link #lookUp(String, boolean)}
+ * <li>Retrieve data with {@link #lookUp(String)}
  * </ol>
  *
  * @author Aaron Madlon-Kay

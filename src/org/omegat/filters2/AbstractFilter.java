@@ -33,13 +33,10 @@ import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -338,13 +335,13 @@ public abstract class AbstractFilter implements IFilter {
      */
     protected BufferedReader createReader(File inFile, String inEncoding)
             throws UnsupportedEncodingException, IOException, TranslationException {
-        InputStreamReader isr;
-        if (inEncoding == null) {
-            isr = new InputStreamReader(new FileInputStream(inFile), Charset.defaultCharset());
+        Charset charset;
+        if (inEncoding != null) {
+            charset = Charset.forName(inEncoding);
         } else {
-            isr = new InputStreamReader(new FileInputStream(inFile), inEncoding);
+            charset = Charset.defaultCharset();
         }
-        return new BufferedReader(isr);
+        return Files.newBufferedReader(inFile.toPath(), charset);
     }
 
     /**
@@ -362,13 +359,13 @@ public abstract class AbstractFilter implements IFilter {
      */
     protected BufferedWriter createWriter(File outFile, String outEncoding)
             throws UnsupportedEncodingException, IOException {
-        OutputStreamWriter osw;
-        if (outEncoding == null) {
-            osw = new OutputStreamWriter(new FileOutputStream(outFile), Charset.defaultCharset());
+        Charset charset;
+        if (outEncoding != null) {
+            charset = Charset.forName(outEncoding);
         } else {
-            osw = new OutputStreamWriter(new FileOutputStream(outFile), outEncoding);
+            charset = Charset.defaultCharset();
         }
-        return new BufferedWriter(osw);
+        return Files.newBufferedWriter(outFile.toPath(), charset);
     }
 
     /**
@@ -396,8 +393,8 @@ public abstract class AbstractFilter implements IFilter {
      * @throws IOException
      *             In case of any I/O error.
      */
-    protected abstract void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException;
+    protected abstract void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException;
 
     /**
      * Processes a single file given an input and output files (output file may be null while loading files).
@@ -409,13 +406,13 @@ public abstract class AbstractFilter implements IFilter {
      * {@link #processEntry(String)} method.
      * <p>
      * If you override this method and do all the processing here, you should simply implement
-     * {@link #processFile(BufferedReader,BufferedWriter)} with a stub.
+     * {@link #processFile(BufferedReader,BufferedWriter, FilterContext)} with a stub.
      * <p>
      * Default implementation calls {@link #createReader(File,String)} to create a reader,
      * <code>new BufferedWriter(new StringWriter())</code> to create a writer for <code>null</code> output
      * file, or {@link #createWriter(File,String)} to create a writer if output file is not <code>null</code>;
-     * then calls {@link #processFile(BufferedReader,BufferedWriter)} to process source file, and then closes
-     * reader and writer.
+     * then calls {@link #processFile(BufferedReader,BufferedWriter, FilterContext)} to process source file,
+     * and then closes reader and writer.
      *
      * @param inFile
      *            The source file.
@@ -432,25 +429,20 @@ public abstract class AbstractFilter implements IFilter {
     protected void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
         String encoding = getInputEncoding(fc, inFile);
-        BufferedReader reader = createReader(inFile, encoding);
-        inEncodingLastParsedFile = encoding == null ? Charset.defaultCharset().name() : encoding;
-        try {
+        try (BufferedReader reader = createReader(inFile, encoding)) {
+            inEncodingLastParsedFile = encoding == null ? Charset.defaultCharset().name() : encoding;
             BufferedWriter writer;
-
             if (outFile != null) {
                 String outEncoding = getOutputEncoding(fc);
                 writer = createWriter(outFile, outEncoding);
             } else {
                 writer = new NullBufferedWriter();
             }
-
             try {
                 processFile(reader, writer, fc);
             } finally {
                 writer.close();
             }
-        } finally {
-            reader.close();
         }
     }
 

@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
@@ -142,8 +142,7 @@ public abstract class AbstractRemoteRepository2IT {
      */
     @NotNull
     protected final String createFile(File basedir) throws IOException {
-        Random random = new Random();
-        String newFile = "file" + random.nextInt();
+        String newFile = "file" + ThreadLocalRandom.current().nextInt();
         File f = new File(basedir, newFile);
         FileUtils.writeStringToFile(f, "Files in Java might be tricky, but it is fun enough!", "UTF-8");
         return newFile;

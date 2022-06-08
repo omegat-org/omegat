@@ -404,9 +404,10 @@ public class EditorController implements IEditor {
         }
         int loadFrom = lastLoaded + 1;
         int loadTo = Math.min(m_docSegList.length - 1, loadFrom + count - 1);
+        Document3 doc = editor.getOmDocument();
         for (int i = loadFrom; i <= loadTo; i++) {
             SegmentBuilder builder = m_docSegList[i];
-            insertStartParagraphMark(editor.getOmDocument(), builder);
+            insertStartParagraphMark(doc, builder, doc.getLength());
             builder.createSegmentElement(false, Core.getProject().getTranslationInfo(builder.ste));
             builder.addSegmentSeparator();
         }
@@ -430,6 +431,7 @@ public class EditorController implements IEditor {
             // offsets changing as content is prepended, but I (AMK) have not
             // properly investigated.
             markerController.reprocessImmediately(builder);
+            insertStartParagraphMark(editor.getOmDocument(), builder, 0);
         }
         firstLoaded = loadTo;
     };
@@ -762,7 +764,7 @@ public class EditorController implements IEditor {
         for (int i = 0; i < m_docSegList.length; i++) {
             if (i >= firstLoaded && i <= lastLoaded) {
                 SegmentBuilder sb = m_docSegList[i];
-                insertStartParagraphMark(doc, sb);
+                insertStartParagraphMark(doc, sb, doc.getLength());
                 sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.ste));
                 sb.addSegmentSeparator();
             }
@@ -802,15 +804,20 @@ public class EditorController implements IEditor {
         editor.repaint();
     }
 
-    private void insertStartParagraphMark(Document3 doc, SegmentBuilder sb) {
+    private void insertStartParagraphMark(Document3 doc, SegmentBuilder sb, int startOffset) {
         if (Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS, false)) {
             if (sb.getSourceTextEntry().isParagraphStart()) {
+                doc.trustedChangesInProgress = true;
+                StaticUIUtils.setCaretUpdateEnabled(editor, false);
                 try {
-                    doc.insertString(doc.getLength(), Preferences.getPreferenceDefault(
+                    doc.insertString(startOffset, Preferences.getPreferenceDefault(
                             Preferences.MARK_PARA_TEXT, Preferences.MARK_PARA_TEXT_DEFAULT) + "\n\n",
                             settings.getParagraphStartAttributeSet());
                 } catch (BadLocationException ex) {
                     throw new RuntimeException(ex);
+                } finally {
+                    doc.trustedChangesInProgress = false;
+                    StaticUIUtils.setCaretUpdateEnabled(editor, true);
                 }
             }
         }

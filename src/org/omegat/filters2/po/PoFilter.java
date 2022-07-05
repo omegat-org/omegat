@@ -321,8 +321,8 @@ public class PoFilter extends AbstractFilter {
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
 
-        String disallowBlankStr = processOptions.get(OPTION_ALLOW_BLANK);
-        allowBlank = disallowBlankStr == null || disallowBlankStr.equalsIgnoreCase("true");
+        String allowBlankStr = processOptions.get(OPTION_ALLOW_BLANK);
+        allowBlank = allowBlankStr == null || allowBlankStr.equalsIgnoreCase("true");
 
         String allowEditingBlankSegmentStr = processOptions.get(OPTION_ALLOW_EDITING_BLANK_SEGMENT);
         allowEditingBlankSegment = allowEditingBlankSegmentStr == null

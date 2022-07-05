@@ -30,3 +30,7 @@ msgstr[2] ""
 msgstr[3] ""
 "\n"
 "Змінено %d клавішу"
+
+#: ../foo/boo.c, 123
+msgid ""
+msgstr ""

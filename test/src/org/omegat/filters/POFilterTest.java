@@ -131,6 +131,27 @@ public class POFilterTest extends TestFilterBase {
                 OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 2) + "\n");
         checkMulti("Changed %d keys", null, "[3]", null, null,
                 OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 3) + "\n");
+        checkMulti("../foo/boo.c, 123", null, "", null, null,
+                OStrings.getString("POFILTER_REFERENCES") + "\n" + "../foo/boo.c, 123\n" + "\n");
+        checkMultiEnd();
+    }
+
+    @Test
+    public void testLoad3() throws Exception {
+        String f = "test/data/filters/po/file-POFilter-multiple2.po";
+        Map<String, String> options = new HashMap<>();
+        options.put(PoFilter.OPTION_SKIP_HEADER, "true");
+        options.put(PoFilter.OPTION_ALLOW_EDITING_BLANK_SEGMENT, "false");
+        TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
+
+        checkMultiStart(fi, f);
+        checkMulti("Changed %d key", null, "", null, null, null);
+        checkMulti("Changed %d keys", null, "[1]", null, null,
+                OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 1) + "\n");
+        checkMulti("Changed %d keys", null, "[2]", null, null,
+                OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 2) + "\n");
+        checkMulti("Changed %d keys", null, "[3]", null, null,
+                OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 3) + "\n");
         checkMultiEnd();
     }
 }

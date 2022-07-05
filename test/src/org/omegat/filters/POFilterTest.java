@@ -27,11 +27,13 @@ package org.omegat.filters;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.junit.Test;
+
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.ITMXEntry;
 import org.omegat.filters2.po.PoFilter;
@@ -111,5 +113,45 @@ public class POFilterTest extends TestFilterBase {
     public void testTranslate() throws Exception {
         // translateText(new PoFilter(),
         // "test/data/filters/po/file-POFilter-be.po");
+    }
+
+    @Test
+    public void testLoad2() throws Exception {
+        String f = "test/data/filters/po/file-POFilter-multiple2.po";
+        Map<String, String> options = new HashMap<>();
+        options.put(PoFilter.OPTION_SKIP_HEADER, "true");
+        options.put(PoFilter.OPTION_ALLOW_EDITING_BLANK_SEGMENT, "true");
+        TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
+
+        checkMultiStart(fi, f);
+        checkMulti("Changed %d key", null, "", null, null, null);
+        checkMulti("Changed %d keys", null, "[1]", null, null,
+                OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 1) + "\n");
+        checkMulti("Changed %d keys", null, "[2]", null, null,
+                OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 2) + "\n");
+        checkMulti("Changed %d keys", null, "[3]", null, null,
+                OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 3) + "\n");
+        checkMulti("../foo/boo.c, 123", null, "", null, null,
+                OStrings.getString("POFILTER_REFERENCES") + "\n" + "../foo/boo.c, 123\n" + "\n");
+        checkMultiEnd();
+    }
+
+    @Test
+    public void testLoad3() throws Exception {
+        String f = "test/data/filters/po/file-POFilter-multiple2.po";
+        Map<String, String> options = new HashMap<>();
+        options.put(PoFilter.OPTION_SKIP_HEADER, "true");
+        options.put(PoFilter.OPTION_ALLOW_EDITING_BLANK_SEGMENT, "false");
+        TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
+
+        checkMultiStart(fi, f);
+        checkMulti("Changed %d key", null, "", null, null, null);
+        checkMulti("Changed %d keys", null, "[1]", null, null,
+                OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 1) + "\n");
+        checkMulti("Changed %d keys", null, "[2]", null, null,
+                OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 2) + "\n");
+        checkMulti("Changed %d keys", null, "[3]", null, null,
+                OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 3) + "\n");
+        checkMultiEnd();
     }
 }

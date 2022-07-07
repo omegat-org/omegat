@@ -8,6 +8,7 @@
                2012 Martin Fleurke, Hans-Peter Jacobs
                2015 Aaron Madlon-Kay
                2019 Briac Pilpre
+               2022 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -67,6 +68,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Martin Fleurke
  * @author Hans-Peter Jacobs
  * @author Aaron Madlon-Kay
+ * @author Thomas Cordonnier
  */
 public class SegmentBuilder {
     /** Attributes for show text. */
@@ -271,7 +273,10 @@ public class SegmentBuilder {
 
             Map<Language, ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
             for (Map.Entry<Language, ProjectTMX> entry : otherLanguageTMs.entrySet()) {
-                TMXEntry altTrans = entry.getValue().getDefaultTranslation(ste.getSrcText());
+                TMXEntry altTrans = entry.getValue().getMultipleTranslation(ste.getKey());
+                if (altTrans == null) {
+                    altTrans = entry.getValue().getDefaultTranslation(ste.getSrcText());
+                }
                 if (altTrans != null && altTrans.isTranslated()) {
                     Language language = entry.getKey();
                     addOtherLanguagePart(altTrans.translation, language);

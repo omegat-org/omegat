@@ -7,6 +7,7 @@
                2011 Briac Pilpre, Alex Buloichik
                2013 Didier Briel
                2016 Aaron Madlon-Kay
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,13 +31,11 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.GridBagConstraints;
 import java.awt.Window;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JLabel;
@@ -96,7 +95,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
         String apiPassword = getCredential(PROPERTY_PASSWORD);
 
         if (apiLogin == null || apiLogin.isEmpty()) {
-            return OStrings.getString("IBMWATSON_API_KEY_NOTFOUND");
+            throw new Exception(OStrings.getString("IBMWATSON_API_KEY_NOTFOUND"));
         }
 
         // If the instance uses IAM authentication (https://console.bluemix.net/docs/services/watson/getting-started-iam.html)
@@ -118,27 +117,20 @@ public class IBMWatsonTranslate extends BaseTranslate {
         // Let's opt out then.
         headers.put("X-Watson-Learning-Opt-Out", "true");
 
-        String authentication = "Basic " + Base64.getMimeEncoder(-1, new byte[] {}).encodeToString((apiLogin + ":" + apiPassword).getBytes(StandardCharsets.ISO_8859_1));
+        String authentication = "Basic " + Base64
+                .getMimeEncoder(-1, new byte[] {})
+                .encodeToString((apiLogin + ":" + apiPassword).getBytes(StandardCharsets.ISO_8859_1));
         headers.put("Authorization", authentication);
         headers.put("Accept", "application/json");
 
-        String v;
-        try {
-            v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json, headers);
-        } catch (IOException e) {
-            return e.getLocalizedMessage();
-        }
-
+        String v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json,
+                headers);
         String tr = getJsonResults(v);
-
         if (tr == null) {
-            return "";
+            return null;
         }
-
         tr = unescapeHTML(tr);
-
         tr = cleanSpacesAroundTags(tr, trText);
-
         putToCache(sLang, tLang, trText, tr);
         return tr;
     }
@@ -189,21 +181,6 @@ public class IBMWatsonTranslate extends BaseTranslate {
             return OStrings.getString("MT_JSON_ERROR");
         }
         return null;
-    }
-
-    /** Convert entities to character. Ex: "&#39;" to "'". */
-    private String unescapeHTML(String text) {
-
-        text = text.replace("&quot;", "\"").replace("&gt;", ">").replace("&lt;", "<").replace("&amp;", "&");
-
-        Matcher m = RE_HTML.matcher(text);
-        while (m.find()) {
-            String g = m.group();
-            int codePoint = Integer.parseInt(m.group(1));
-            String cpString = String.valueOf(Character.toChars(codePoint));
-            text = text.replace(g, cpString);
-        }
-        return text;
     }
 
     @Override

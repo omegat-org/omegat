@@ -31,20 +31,23 @@ package org.omegat.util;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.ITMXEntry;
 
 /**
  * Helper for write TMX files, using StAX.
@@ -56,7 +59,7 @@ import org.omegat.core.data.TMXEntry;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  */
-public class TMXWriter2 {
+public class TMXWriter2 implements AutoCloseable {
     static String lineSeparator = System.lineSeparator();
 
     public static final String PROP_ID = "id";
@@ -83,16 +86,15 @@ public class TMXWriter2 {
 
     /**
      *
-     * @param file
-     * @param sourceLanguage
-     * @param targetLanguage
-     * @param sentenceSegmentingEnabled
+     * @param file to write TMX entries.
+     * @param sourceLanguage language of source.
+     * @param targetLanguage language of target.
+     * @param sentenceSegmentingEnabled true when sentence segmenting enabled, otherwise false.
      * @param levelTwo
      *            When true, the tmx is made compatible with level 2 (TMX version 1.4)
-     * @param callback
-     * @throws Exception
+     * @throws Exception when error occurred.
      */
-    public TMXWriter2(File file, final Language sourceLanguage, final Language targetLanguage,
+    public TMXWriter2(final File file, final Language sourceLanguage, final Language targetLanguage,
             boolean sentenceSegmentingEnabled, boolean levelTwo, boolean forceValidTMX) throws Exception {
         this.levelTwo = levelTwo;
         this.forceValidTMX = forceValidTMX;
@@ -129,7 +131,7 @@ public class TMXWriter2 {
         tmxDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
-    public void close() throws Exception {
+    public void close() throws XMLStreamException, IOException {
         try {
             xml.writeCharacters("  ");
             xml.writeEndElement(); // body
@@ -151,17 +153,30 @@ public class TMXWriter2 {
     }
 
     /**
+     * Write entries.
+     * @param entries Map of SourceTextEntry and TMXEntry to output.
+     * @throws Exception when i/o error or XMLStream error happened.
+     */
+    public void writeEntries(final Map<String, ? extends ITMXEntry> entries) throws Exception {
+        for (Map.Entry<String, ? extends ITMXEntry> en : entries.entrySet()) {
+            writeEntry(en.getKey(), en.getValue().getTranslationText(), en.getValue(), null);
+        }
+    }
+
+    /**
      * Write one entry.
      *
-     * @param source
-     * @param translation
+     * @param source source text to write.
+     * @param translation translation text to write.
+     * @param entry that has interface ITMXEntry.
      * @param propValues
      *            pairs with property name and values
      */
-    public void writeEntry(String source, String translation, TMXEntry entry, List<String> propValues)
+    public void writeEntry(final String source, final String translation, final ITMXEntry entry,
+                           final List<String> propValues)
             throws Exception {
-        writeEntry(source, translation, entry.note, entry.creator, entry.creationDate, entry.changer, entry.changeDate,
-                propValues);
+        writeEntry(source, translation, entry.getNote(), entry.getCreator(), entry.getCreationDate(),
+                entry.getChanger(), entry.getChangeDate(), propValues);
     }
 
     public void writeEntry(String source, String translation, String note, String creator, long creationDate,

@@ -50,6 +50,7 @@ public class DictionaryPreferencesPanel extends JPanel {
 
         autoCheckSegmentsCheckBox = new javax.swing.JCheckBox();
         fuzzyMatchingCheckBox = new javax.swing.JCheckBox();
+        condensedViewCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -60,10 +61,15 @@ public class DictionaryPreferencesPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(fuzzyMatchingCheckBox, OStrings.getString("PREFS_DICTIONARY_FUZZY")); // NOI18N
         add(fuzzyMatchingCheckBox);
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(condensedViewCheckBox, bundle.getString("PREFS_DICTIONARY_CONDENSED")); // NOI18N
+        add(condensedViewCheckBox);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox autoCheckSegmentsCheckBox;
+    javax.swing.JCheckBox condensedViewCheckBox;
     javax.swing.JCheckBox fuzzyMatchingCheckBox;
     // End of variables declaration//GEN-END:variables
 }

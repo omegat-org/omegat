@@ -35,10 +35,12 @@ import java.util.List;
 import java.util.Locale;
 
 import io.github.eb4j.stardict.StarDictDictionary;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import org.omegat.core.TestCore;
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 /**
  * Dictionary test
@@ -47,9 +49,15 @@ import org.omegat.util.Language;
  * @author Hiroshi Miura
  * @author Aaron Madlon-Kay
  */
-public class StarDictTest extends TestCore {
+public class StarDictTest {
 
     private static final Language FRENCH = new Language(Locale.FRENCH);
+
+    @BeforeClass
+    public static void setUp() throws Exception {
+        TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.DICTIONARY_CONDENSED_VIEW, false);
+    }
 
     @Test
     public void testStardict4j() throws Exception {
@@ -82,14 +90,14 @@ public class StarDictTest extends TestCore {
         List<DictionaryEntry> result = dict.readArticles(word);
         assertEquals(1, result.size());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
 
         // Test case normalization
         word = word.toUpperCase(FRENCH.getLocale());
         result = dict.readArticles(word);
         assertEquals(1, result.size());
         assertEquals("testudo", result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
 
         // Test prediction
         word = "testu";
@@ -98,7 +106,7 @@ public class StarDictTest extends TestCore {
         result = dict.readArticlesPredictive(word);
         assertEquals(1, result.size());
         assertEquals("testudo", result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
     }
 
     @Test
@@ -110,6 +118,6 @@ public class StarDictTest extends TestCore {
         assertEquals(1, result.size());
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
     }
 }

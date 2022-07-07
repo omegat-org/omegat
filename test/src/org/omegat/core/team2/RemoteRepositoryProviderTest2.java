@@ -61,7 +61,7 @@ public class RemoteRepositoryProviderTest2 {
     }
 
     @Test
-    public void testWithoutslashes() {
+    public void testWithoutSlashes() {
         assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("/aa/"));
         assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("aa"));
         assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("aa/"));

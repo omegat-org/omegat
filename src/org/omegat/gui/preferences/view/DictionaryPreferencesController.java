@@ -59,18 +59,23 @@ public class DictionaryPreferencesController extends BasePreferencesController {
     @Override
     protected void initFromPrefs() {
         panel.fuzzyMatchingCheckBox.setSelected(Preferences.isPreference(Preferences.DICTIONARY_FUZZY_MATCHING));
-        panel.autoCheckSegmentsCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_AUTO_SEARCH, true));
+        panel.autoCheckSegmentsCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_AUTO_SEARCH,
+                true));
+        panel.condensedViewCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW,
+                false));
     }
 
     @Override
     public void restoreDefaults() {
         panel.fuzzyMatchingCheckBox.setSelected(false);
         panel.autoCheckSegmentsCheckBox.setSelected(true);
+        panel.condensedViewCheckBox.setSelected(false);
     }
 
     @Override
     public void persist() {
         Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING, panel.fuzzyMatchingCheckBox.isSelected());
         Preferences.setPreference(Preferences.DICTIONARY_AUTO_SEARCH, panel.autoCheckSegmentsCheckBox.isSelected());
+        Preferences.setPreference(Preferences.DICTIONARY_CONDENSED_VIEW, panel.condensedViewCheckBox.isSelected());
     }
 }

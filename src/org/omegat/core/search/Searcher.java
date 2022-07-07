@@ -356,9 +356,10 @@ public class Searcher {
             // Search TM entries, unless we search for date or author.
             // They are not loaded from external TM, so skip the search in
             // that case.
+            Path projectRoot = Paths.get(m_project.getProjectProperties().getProjectRoot());
             if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
-                    final String fileTM = tmEn.getKey();
+                    final String fileTM = searchExpression.fileNames ? projectRoot.relativize(Paths.get(tmEn.getKey())).toString() : null;
                     searchEntries(tmEn.getValue().getEntries(), ENTRY_ORIGIN_TRANSLATION_MEMORY, fileTM);
                     checkStop.checkInterrupted();
                 }

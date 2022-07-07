@@ -51,6 +51,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
+import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
@@ -69,6 +70,7 @@ import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SegmentExportImport;
+import org.omegat.gui.exttrans.MachineTranslationInfo;
 import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.issues.IssueProvidersSelectorController;
 import org.omegat.gui.preferences.PreferencesWindowController;
@@ -106,6 +108,8 @@ import org.omegat.util.gui.DesktopWrapper;
  * @author Aaron Madlon-Kay
  */
 public final class MainWindowMenuHandler {
+    private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
+
     private final MainWindow mainWindow;
 
     public MainWindowMenuHandler(final MainWindow mainWindow) {
@@ -476,11 +480,11 @@ public final class MainWindowMenuHandler {
     }
 
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {
-        String tr = Core.getMachineTranslatePane().getDisplayedTranslation();
+        MachineTranslationInfo tr = Core.getMachineTranslatePane().getDisplayedTranslation();
         if (tr == null) {
             Core.getMachineTranslatePane().forceLoad();
-        } else if (!StringUtil.isEmpty(tr)) {
-            Core.getEditor().replaceEditText(tr);
+        } else if (!StringUtil.isEmpty(tr.result)) {
+            Core.getEditor().replaceEditText(tr.result, String.format("MT:[%s]", tr.translatorName));
         }
     }
 

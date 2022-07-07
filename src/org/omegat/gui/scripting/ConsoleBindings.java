@@ -169,7 +169,17 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
     }
 
     @Override
+    public void replaceEditText(final String text, final String origin) {
+
+    }
+
+    @Override
     public void replaceEditText(String text) {
+
+    }
+
+    @Override
+    public void replaceEditTextAndMark(final String text, final String origin) {
 
     }
 

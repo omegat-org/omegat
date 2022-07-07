@@ -55,6 +55,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
@@ -91,6 +92,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_CREATOR = "creator";
     private static final String KEY_ISALT = "isAlt";
     private static final String KEY_LINKED = "linked";
+    private static final String KEY_ORIGIN = "origin";
+    private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     final List<String> properties = new ArrayList<>();
 
@@ -349,5 +352,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setProperty(KEY_ISALT, true);
         }
         setProperty(KEY_LINKED, entry.linked);
+        if (entry.getPropValue(PROP_ORIGIN) != null) {
+            setProperty(KEY_ORIGIN, entry.getPropValue(PROP_ORIGIN));
+        } else {
+            setProperty(KEY_ORIGIN, OStrings.getString("SEGPROP_ORIGIN_UNKNOWN"));
+        }
     }
 }

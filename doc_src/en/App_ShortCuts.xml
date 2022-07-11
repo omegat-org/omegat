@@ -98,7 +98,7 @@
     <para>Most of the items that appear in the main menu can have a new
     shortcut assigned. You can change the already assigned shortcuts and add
     new shortcuts by putting a shortcut definition file in your
-	OmegaT preferences folder (accessible by
+    OmegaT preferences folder (accessible by
     <menuchoice>
         <guimenuitem>Options</guimenuitem>
 
@@ -160,8 +160,7 @@
         OmegaT Shortcuts</ulink></para>
 
         <para>The default OmegaT shortcuts for the Mac are also available from
-        Sourceforge, they all use "meta" instead of "ctrl": <ulink
-        url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
+        Sourceforge, they all use "meta" instead of "ctrl": <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
         OmegaT Shortcuts for the Mac</ulink></para>
       </footnote>, one can find:</para>
 
@@ -219,7 +218,7 @@
     <table>
       <title>Project Menu</title>
 
-      <tgroup cols="3" colsep="1">
+       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>

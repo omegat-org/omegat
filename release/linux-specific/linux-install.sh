@@ -125,4 +125,15 @@ sudo ln -s -b /opt/omegat/OmegaT-default/omegat.kaptn /usr/local/bin/omegat.kapt
 
 sudo chmod +x /usr/local/bin/omegat /usr/local/bin/omegat.kaptn
 
+# install icons
+icon_sizes=( 32 128 256 512 )
+for size in "${icon_sizes[@]}"
+do
+	sudo xdg-icon-resource install --novendor --noupdate --mode system --size $size /opt/omegat/OmegaT-default/images/OmegaT.iconset/icon_$size\x$size.png omegat
+done
+sudo xdg-icon-resource forceupdate --mode system
+
+# install desktop file
+sudo xdg-desktop-menu install --novendor --mode system /opt/omegat/OmegaT-default/omegat.desktop
+
 exit

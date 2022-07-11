@@ -28,6 +28,7 @@
 
 package org.omegat.core.data;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,6 +51,7 @@ public class TMXEntry implements ITMXEntry {
         // declares how this entry linked to external TMX in the tm/auto/
         xICE, x100PC, xAUTO, xENFORCED
     };
+    private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     public final String source;
     public final String translation;
@@ -60,6 +62,7 @@ public class TMXEntry implements ITMXEntry {
     public final String note;
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
+    public final String origin;
 
     TMXEntry(ITMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
         this.source = from.getSourceText();
@@ -72,6 +75,7 @@ public class TMXEntry implements ITMXEntry {
 
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
+        this.origin = from.getPropValue(PROP_ORIGIN);
     }
 
     public String getSourceText() {
@@ -168,19 +172,47 @@ public class TMXEntry implements ITMXEntry {
         return true;
     }
 
+    /**
+     * We only hold origin property in TMXEntry.
+     * @return true when has origin property, otherwise false.
+     */
     public boolean hasProperties() {
+        return origin != null;
+    }
+
+    /**
+     * Return origin property when requested.
+     * @param propType property type. Currently we just support origin.
+     * @return mtsource when requested, otherwise null.
+     */
+    public String getPropValue(String propType) {
+        if (origin != null && propType.equals(PROP_ORIGIN)) {
+            return origin;
+        }
+        return null;
+    }
+
+    /**
+     * Query specified property type/value combination.
+     * @param propType property type.
+     * @param propValue expected value.
+     * @return true when hold a queried type/value, otherwise false.
+    */
+    public boolean hasPropValue(String propType, String propValue) {
+        if (origin != null && propType.equals(PROP_ORIGIN)) {
+            return origin.equals(propValue);
+        }
         return false;
     }
 
-    public String getPropValue(String propType) {
-        return null; // for the moment internal entries do not store properties
-    }
-
-    public boolean hasPropValue(String propType, String propValue) {
-        return false; // for the moment internal entries do not store properties
-    }
-
+    /**
+     * return properties.
+     * @return singletonList of mtsource when it has, otherwise null.
+     */
     public List<TMXProp> getProperties() {
-        return null; // for the moment internal entries do not store properties
+        if (origin != null) {
+            return Collections.singletonList(new TMXProp(PROP_ORIGIN, origin));
+        }
+        return null;
     }
 }

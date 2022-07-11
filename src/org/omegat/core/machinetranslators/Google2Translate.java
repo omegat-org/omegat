@@ -30,12 +30,9 @@
 package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 
@@ -63,7 +60,6 @@ public class Google2Translate extends BaseTranslate {
     protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
     protected static final String PROPERTY_API_KEY = "google.api.key";
     protected static final String GT_URL = "https://translation.googleapis.com/language/translate/v2";
-    protected static final Pattern RE_HTML  = Pattern.compile("&#([0-9]+);");
     private static final int MAX_TEXT_LENGTH = 5000;
 
     /**
@@ -113,7 +109,7 @@ public class Google2Translate extends BaseTranslate {
         String googleKey = getCredential(PROPERTY_API_KEY);
 
         if (googleKey == null || googleKey.isEmpty()) {
-            return OStrings.getString("GOOGLE_API_KEY_NOTFOUND");
+            throw new Exception(OStrings.getString("GOOGLE_API_KEY_NOTFOUND"));
         }
 
         Map<String, String> params = new TreeMap<String, String>();
@@ -134,43 +130,15 @@ public class Google2Translate extends BaseTranslate {
         Map<String, String> headers = new TreeMap<String, String>();
         headers.put("X-HTTP-Method-Override", "GET");
 
-        String v;
-        try {
-            v = HttpConnectionUtils.post(GT_URL, params, headers);
-        } catch (IOException e) {
-            return e.getLocalizedMessage();
-        }
-
+        String v = HttpConnectionUtils.post(GT_URL, params, headers);
         String tr = getJsonResults(v);
-
         if (tr == null) {
-            return "";
+            return null;
         }
-
         tr = unescapeHTML(tr);
-
         tr = cleanSpacesAroundTags(tr, trText);
-
         putToCache(sLang, tLang, trText, tr);
         return tr;
-    }
-
-    /** Convert entities to character. Ex: "&#39;" to "'". */
-    private String unescapeHTML(String text) {
-
-        text = text.replace("&quot;", "\"")
-                   .replace("&gt;", ">")
-                   .replace("&lt;", "<")
-                   .replace("&amp;", "&");
-
-        Matcher m = RE_HTML.matcher(text);
-        while (m.find()) {
-            String g = m.group();
-            int codePoint = Integer.parseInt(m.group(1));
-            String cpString = String.valueOf(Character.toChars(codePoint));
-            text = text.replace(g, cpString);
-        }
-        return text;
     }
 
     /**

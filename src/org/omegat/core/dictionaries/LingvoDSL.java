@@ -38,8 +38,12 @@ import java.util.Map;
 import io.github.eb4j.dsl.DslArticle;
 import io.github.eb4j.dsl.DslDictionary;
 import io.github.eb4j.dsl.DslResult;
+import io.github.eb4j.dsl.data.LanguageCode;
+import io.github.eb4j.dsl.data.LanguageName;
 import io.github.eb4j.dsl.visitor.DslVisitor;
 import org.apache.commons.io.FilenameUtils;
+
+import org.omegat.util.Preferences;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
@@ -79,9 +83,11 @@ public class LingvoDSL implements IDictionaryFactory {
          * @param indexPath index cache file.
          * @throws Exception when loading dictionary failed.
          */
-        LingvoDSLDict(final Path dictPath, final Path indexPath, final boolean validateIndexAbsPath) throws Exception {
+        LingvoDSLDict(final Path dictPath, final Path indexPath, final boolean validateIndexAbsPath)
+                throws Exception {
             data = DslDictionary.loadDictionary(dictPath, indexPath, validateIndexAbsPath);
-            htmlVisitor = new HtmlVisitor(dictPath.getParent().toString());
+            htmlVisitor = new HtmlVisitor(dictPath.getParent().toString(),
+                    Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false));
         }
 
         /**
@@ -124,24 +130,31 @@ public class LingvoDSL implements IDictionaryFactory {
     public static class HtmlVisitor extends DslVisitor<String> {
 
         private static final String[] IMAGE_EXTS = new String[] { "png", "jpg", "PNG", "JPG" };
+        private static final LanguageCode LANG_CODE = new LanguageCode();
+        private static final LanguageName LANG_NAME = new LanguageName();
+
+        private final boolean condensedView;
+        private final File basePath;
 
         private StringBuilder sb;
         private boolean delayText;
         private String previousText;
-        private final File basePath;
+        private boolean inDetails;
 
         /**
          * Constructor with media path.
          * @param dirPath media base path.
          * @throws IOException when given directory not found.
          */
-        public HtmlVisitor(final String dirPath) throws IOException {
+        public HtmlVisitor(final String dirPath, final boolean condensedView) throws IOException {
             File dir = new File(dirPath);
             if (!dir.isDirectory()) {
                 throw new IOException("Directory not found!");
             }
             basePath = dir;
             delayText = false;
+            inDetails = false;
+            this.condensedView = condensedView;
         }
 
         /**
@@ -172,6 +185,9 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public void visit(final DslArticle.Tag tag) {
+            if (inDetails && condensedView) {
+                return;
+            }
             if (tag.isTagName("b")) {
                 sb.append("<strong>");
             } else if (tag.isTagName("br")) {
@@ -184,26 +200,6 @@ public class LingvoDSL implements IDictionaryFactory {
                 sb.append("<sup>");
             } else if (tag.isTagName("sub")) {
                 sb.append("<sub>");
-            } else if (tag.isTagName("m")) {
-                sb.append("<div>");
-            } else if (tag.isTagName("m1")) {
-                sb.append("<div style=\"text-indent: 30px\">");
-            } else if (tag.isTagName("m2")) {
-                sb.append("<div style=\"text-indent: 60px\">");
-            } else if (tag.isTagName("m3")) {
-                sb.append("<div style=\"text-indent: 90px\">");
-            } else if (tag.isTagName("m4")) {
-                sb.append("<div style=\"text-indent: 90px\">");
-            } else if (tag.isTagName("m5")) {
-                sb.append("<div style=\"text-indent: 90px\">");
-            } else if (tag.isTagName("m6")) {
-                sb.append("<div style=\"text-indent: 90px\">");
-            } else if (tag.isTagName("m7")) {
-                sb.append("<div style=\"text-indent: 90px\">");
-            } else if (tag.isTagName("m8")) {
-                sb.append("<div style=\"text-indent: 90px\">");
-            } else if (tag.isTagName("m9")) {
-                sb.append("<div style=\"text-indent: 90px\">");
             } else if (tag.isTagName("c")) {
                 if (tag.hasAttribute()) {
                     sb.append("<span style=\"color: ").append(tag.getAttribute().getValue()).append("\">");
@@ -212,8 +208,64 @@ public class LingvoDSL implements IDictionaryFactory {
                 }
             } else if (tag.isTagName("'")) {
                 sb.append("<span style=\"color: red\">");
-            } else if (tag.isTagName("url") || tag.isTagName("s") || tag.isTagName("video") || tag.isTagName("*")) {
+            } else if (tag.isTagName("url") || tag.isTagName("s") || tag.isTagName("video")) {
                 delayText = true;
+            } else if (tag.isTagName("lang")) {
+                if (tag.hasAttribute() && tag.getAttribute().getKey().equals("id")) {
+                    int i = Integer.parseInt(tag.getAttribute().getValue());
+                    if (LANG_CODE.containsKey(i)) {
+                        sb.append("<span class=\"lang_").append(LANG_CODE.get(i)).append("\">");
+                        return;
+                    }
+                } else if (tag.hasAttribute() && tag.getAttribute().getKey().equals("name")) {
+                    if (LANG_NAME.containsKey(tag.getAttribute().getValue())) {
+                        sb.append("<span class=\"lang_").append(LANG_NAME.get(tag.getAttribute().getValue()))
+                                .append("\">");
+                        return;
+                    }
+                }
+                sb.append("<span>");
+            } else if (tag.isTagName("*")) {
+                inDetails = true;
+                if (!condensedView) {
+                    sb.append("<span class=\"details\">");
+                }
+            } else {
+                if (condensedView) {
+                    if (tag.isTagName("m")) {
+                        sb.append("<span>");
+                    } else if (tag.isTagName("m1")) {
+                        sb.append("<span class=\"paragraph-start\">\u00b6</span><span>");
+                    } else if (tag.isTagName("m2")) {
+                        sb.append("<span class=\"paragraph-start\">\u204b</span><span>");
+                    } else if (tag.isTagName("m3") || tag.isTagName("m4") || tag.isTagName("m5")
+                            || tag.isTagName("m6") || tag.isTagName("m7") || tag.isTagName("m8")
+                            || tag.isTagName("m9")) {
+                        sb.append("<span class=\"paragraph-start\">\u00a7</span><span>");
+                    }
+                } else {
+                    if (tag.isTagName("m")) {
+                        sb.append("<div>");
+                    } else if (tag.isTagName("m1")) {
+                        sb.append("<div style=\"text-indent: 30px\">");
+                    } else if (tag.isTagName("m2")) {
+                        sb.append("<div style=\"text-indent: 60px\">");
+                    } else if (tag.isTagName("m3")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m4")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m5")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m6")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m7")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m8")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m9")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    }
+                }
             }
             // no output for t
         }
@@ -239,33 +291,41 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public void visit(final DslArticle.EndTag endTag) {
+            if (endTag.isTagName("*")) {
+                inDetails = false;
+                if (!condensedView) {
+                    sb.append("</span>");
+                }
+                return;
+            }
+            if (inDetails && condensedView) {
+                return;
+            }
             if (delayText) {
                 if (previousText == null) {
                     return;
                 }
                 if (endTag.isTagName("video")) {
-                    sb.append("<a href=\"").append(getMediaUrl()).append("\">").append(previousText).append("</a>");
+                    sb.append("<a href=\"").append(getMediaUrl()).append("\">")
+                            .append(previousText).append("</a>");
                 } else if (endTag.isTagName("s")) {
                     if (isMediaImage()) {
                         sb.append("<img src=\"").append(getMediaUrl()).append("\" />");
                     } else {  // sound and unknown files
-                        sb.append("<a href=\"").append(getMediaUrl()).append("\" >").append(previousText).append("</a>");
+                        sb.append("<a href=\"").append(getMediaUrl()).append("\" >")
+                                .append(previousText).append("</a>");
                     }
                 } else if (endTag.isTagName("url")) {
-                    sb.append("<a href=\"").append(previousText).append("\">").append(previousText).append("</a>");
-                } else if (endTag.isTagName("*")) {
-                    // you can set detailed content such like sb.append("<details>").append(previousText).append
-                    // ("</details>"); when jTextPane can support details tag.
-                    // Now we skip contents of [*]..[/*] and just put [*]
-                    sb.append("[*]");
+                    sb.append("<a href=\"").append(previousText).append("\">")
+                            .append(previousText).append("</a>");
                 }
                 delayText = false;
                 previousText = null;
             }
             if (endTag.isTagName("b")) {
                 sb.append("</strong>");
-            } else if (endTag.isTagName("u") || endTag.isTagName("i") ||
-                    endTag.isTagName("c") || endTag.isTagName("'")) {
+            } else if (endTag.isTagName("u") || endTag.isTagName("i") || endTag.isTagName("c")
+                    || endTag.isTagName("'") || endTag.isTagName("lang")) {
                 sb.append("</span>");
             } else if (endTag.isTagName("t")) {
                 sb.append("&nbsp;");
@@ -274,7 +334,11 @@ public class LingvoDSL implements IDictionaryFactory {
             } else if (endTag.isTagName("sub")) {
                 sb.append("</sub>");
             } else if (endTag.isTagName("m")) {
-                sb.append("</div>");
+                if (condensedView) {
+                    sb.append("</span>&nbsp;");
+                } else {
+                    sb.append("</div>");
+                }
             }
         }
 
@@ -299,6 +363,9 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public void visit(final DslArticle.Text t) {
+            if (inDetails && condensedView) {
+                return;
+            }
             previousText = t.getText();
             if (!delayText) {
                 sb.append(t);
@@ -321,6 +388,9 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public void visit(final DslArticle.Newline n) {
+            if (inDetails && condensedView) {
+                return;
+            }
             sb.append("\n");
         }
     }

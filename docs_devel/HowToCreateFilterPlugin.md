@@ -25,7 +25,7 @@ Omegat 5.3.0 also supports to provide additional information (valid for both fla
 You can **optionally** provide name, version, author and description. 
 
 OmegaT 5.5.0 can show the plugin name and author in Preferences. You are recommended to set these parameters.
-
+You can **optionally** provide an URL of your plugin home page, license and category.
 For each there are different manifest entry alternatives, and OmegaT will pick the first one present in the order from 
 left to right as described in the table below:
 
@@ -35,6 +35,9 @@ left to right as described in the table below:
 | Version     | Plugin-Version, Bundle-Version, Implementation-Version |
 | Author      | Plugin-Author, Implementation-Vendor, Built-By         |
 | Description | Plugin-Description                                     |
+| Link        | Plugin-Link                                            |
+| License     | Plugin-License                                         |
+| Category    | Plugin-Category                                        |
 
 ### plugins for OmegaT 2.1.3 and up
 A plugin should be declared in `META-INF/MANIFEST.MF`:
@@ -58,6 +61,8 @@ A plugin should be declared in `META-INF/MANIFEST.MF`:
     [Plugin-Version: x.y.z]
     [Plugin-Author: …]
     [Plugin-Description: …]
+    [Plugin-Link: https://..]
+    [Plugin-Category: filter]
     OmegaT-Plugins: <classname>
 
 where classname is the fully qualified classname of the plugin's initialization class. Multiple classnames can be defined, 
@@ -114,6 +119,28 @@ and next checks the version number.
 The `loadPlugins()` method shouldn't execute any long operations.
 The `unloadPlugins()` method executes on application shutdown. Usually, it should be just an empty method, but it can 
 be used to free some resources.
+
+## Plugin categories
+
+Plugin manifest has a mandatory entry `Plugin-Category`:
+
+    [Plugin-Category: filter]
+
+You can choose a value from following list. A value is not affected the plugin behavior
+but it is used when showing a plugin list on preference dialog.
+
+1. filter
+2. tokenizer
+3. marker
+4. machinetranslator
+5. base
+6. glossary
+7. dictionary
+8. miscellaneous
+
+When plugin has a value other than above, OmegaT will show it as 'unknown' category.
+The list of values above is a superset of possible values for 'Omegat-Plugin:' field in
+OmegaT 2.1.3 above definition.
 
 # Set up your development project
 When you develop your plugin, you will extend classes from the OmegaT project, or call methods. To be able to compile 

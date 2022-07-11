@@ -31,6 +31,7 @@ package org.omegat.core.machinetranslators;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.lang.StringEscapeUtils;
+
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -59,20 +60,15 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     }
 
     @Override
-    protected String translate(Language sLang, Language tLang, String text) throws Exception {
+    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
         String prev = getFromCache(sLang, tLang, text);
         if (prev != null) {
             return prev;
         }
-
         JsonNode jsonResponse;
 
         // Get MyMemory response in JSON format
-        try {
-            jsonResponse = getMyMemoryResponse(sLang, tLang, text);
-        } catch (Exception e) {
-            return e.getLocalizedMessage();
-        }
+        jsonResponse = getMyMemoryResponse(sLang, tLang, text);
 
         // Find the best Human translation if no MT translation is provided for
         // this text. If there is a MT translation, it will always take
@@ -90,15 +86,12 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
                 bestScore = entry.get("match").asDouble();
             }
         }
-
         if (mtEntry != null) {
             bestEntry = mtEntry;
         }
-
+        assert bestEntry != null;
         String translation = StringEscapeUtils.unescapeHtml(bestEntry.get("translation").asText());
-
         putToCache(sLang, tLang, text, translation);
         return translation;
     }
-
 }

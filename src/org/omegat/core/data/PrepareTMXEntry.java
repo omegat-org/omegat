@@ -28,6 +28,7 @@
 
 package org.omegat.core.data;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.omegat.util.TMXProp;
@@ -100,7 +101,10 @@ public class PrepareTMXEntry implements ITMXEntry {
     }
 
     public List<TMXProp> getProperties() {
-        return otherProperties;
+        if (otherProperties == null) {
+            return null;
+        }
+        return Collections.unmodifiableList(otherProperties);
     }
 
     public String getPropValue(String propType) {

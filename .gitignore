@@ -13,3 +13,6 @@ local.properties
 
 # Docs
 .fop
+
+# XML
+.xml~

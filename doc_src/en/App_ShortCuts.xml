@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.shortcut.custom">
   <title>Shortcuts description</title>
 
@@ -99,7 +98,8 @@
     <para>Most of the items that appear in the main menu can have a new
     shortcut assigned. You can change the already assigned shortcuts and add
     new shortcuts by putting a shortcut definition file in your OmegaT
-    preferences folder (accessible by <menuchoice>
+    preferences folder (accessible by
+	<menuchoice>
         <guimenuitem>Options</guimenuitem>
 
         <guimenuitem>Access Configuration Folder</guimenuitem>
@@ -108,12 +108,12 @@
     <para>The shortcut definition file must be named
     <filename>MainMenuShortcuts.properties</filename> and must contain at most
     one shortcut definition per line. Empty lines are accepted and comment
-    lines should start with "//". Anything after the "//" will be
+    lines should start with &quot;//&quot;. Anything after the &quot;//&quot; will be
     ignored.</para>
 
     <para>Once the <filename>MainMenuShortcuts.properties</filename> file is
-    modified, OmegaT must be relaunched to take the new shortcuts into
-    account.</para>
+    modified, OmegaT must be relaunched to take the
+	new shortcuts into account.</para>
 
     <para>The shortcut definition syntax is the following: <code>&lt;menu item
     code&gt;=&lt;shortcut&gt;</code>, where <emphasis>&lt;menu item
@@ -121,8 +121,7 @@
     <emphasis>&lt;shortcut&gt;</emphasis> is a combination of pressed keys
     specified by the user<footnote>
         <para>The full syntax for keystrokes (shortcuts) is defined in the
-        following Java 1.6 documentation from Oracle (bottom of page): <ulink
-        url="https://docs.oracle.com/javase/8/docs/api/javax/swing/KeyStroke.html#getKeyStroke-java.lang.String-">Java
+        following Java 1.6 documentation from Oracle (bottom of page): <ulink url="https://docs.oracle.com/javase/8/docs/api/javax/swing/KeyStroke.html#getKeyStroke-java.lang.String-">Java
         8 keystrokes syntax</ulink></para>
       </footnote>.</para>
 
@@ -210,10 +209,10 @@
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>
 
-    <para>Save then the file and relaunch OmegaT. Your new shortcuts should
-    now appear next to the menu items you have modified. If they do not
-    conflict with system shortcuts, they should be available from within
-    OmegaT.</para>
+    <para>Save then the file and relaunch OmegaT.
+	Your new shortcuts should now appear next to the menu items you have modified.
+	If they do not conflict with system shortcuts, they should be
+	available from within OmegaT.</para>
   </section>
 
   <section id="ch04.shortcuts.ProjectMenu">
@@ -222,7 +221,7 @@
     <table>
       <title>Project Menu</title>
 
-      <tgroup cols="3" colsep="1">
+       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>

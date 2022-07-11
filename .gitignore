@@ -14,5 +14,5 @@ local.properties
 # Docs
 .fop
 
-# XML
-.xml~
+# emacs backup files
+*~

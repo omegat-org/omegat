@@ -97,9 +97,9 @@
 
     <para>Most of the items that appear in the main menu can have a new
     shortcut assigned. You can change the already assigned shortcuts and add
-    new shortcuts by putting a shortcut definition file in your OmegaT
-    preferences folder (accessible by
-	<menuchoice>
+    new shortcuts by putting a shortcut definition file in your
+	OmegaT preferences folder (accessible by
+    <menuchoice>
         <guimenuitem>Options</guimenuitem>
 
         <guimenuitem>Access Configuration Folder</guimenuitem>
@@ -113,7 +113,7 @@
 
     <para>Once the <filename>MainMenuShortcuts.properties</filename> file is
     modified, OmegaT must be relaunched to take the
-	new shortcuts into account.</para>
+    new shortcuts into account.</para>
 
     <para>The shortcut definition syntax is the following: <code>&lt;menu item
     code&gt;=&lt;shortcut&gt;</code>, where <emphasis>&lt;menu item
@@ -148,8 +148,7 @@
           <para>and <code>&lt;key&gt;</code> can be any key available on your
           keyboard<footnote>
               <para>The possible keyevents (keys) are listed in the following
-              Java 8 documentation from Oracle: <ulink
-              url="https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyEvent.html#field.summary">Java
+              Java 8 documentation from Oracle: <ulink url="https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyEvent.html#field.summary">Java
               8 keyEvents description</ulink></para>
             </footnote>.</para>
         </listitem>
@@ -157,8 +156,7 @@
 
     <para>For example, in the default OmegaT shortcuts<footnote>
         <para>The default OmegaT shortcuts are available from Sourceforge:
-        <ulink
-        url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
+        <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
         OmegaT Shortcuts</ulink></para>
 
         <para>The default OmegaT shortcuts for the Mac are also available from
@@ -210,9 +208,9 @@
     S</code></para>
 
     <para>Save then the file and relaunch OmegaT.
-	Your new shortcuts should now appear next to the menu items you have modified.
-	If they do not conflict with system shortcuts, they should be
-	available from within OmegaT.</para>
+    Your new shortcuts should now appear next to the menu items you have
+    modified. If they do not conflict with system shortcuts, they should be
+    available from within OmegaT.</para>
   </section>
 
   <section id="ch04.shortcuts.ProjectMenu">
@@ -221,7 +219,7 @@
     <table>
       <title>Project Menu</title>
 
-       <tgroup cols="3" colsep="1">
+      <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1"/>
 
         <colspec align="left" colname="2" colnum="2"/>

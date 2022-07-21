@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="configuration.folder">
+  <title id="configuration.folder.title">Configuration folder</title>
+
+  <para>The configuration folder is where most of the OmegaT parameters are stored.</para>
+
+  <section id="projectfolder.source">
+    <title>source</title>
+
+    <para>The source subfolder contains files to be translated. You can add
+    the files to it later. Note that the structure of the source subfolder may
+    take any form you like. If the files to be translated are parts of a tree
+    structure (as in a website), you need only specify the top-level subfolder
+    and OmegaT will maintain the entire contents, while keeping the tree
+    structure intact.</para>
+  </section>
+
+</chapter>

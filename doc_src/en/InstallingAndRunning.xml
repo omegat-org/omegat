@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+"../../../docbook-xml-4.5/docbookx.dtd"
+
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+
 <chapter id="chapter.installing.and.running">
   <title>Installing and running OmegaT</title>
 
@@ -17,12 +23,12 @@
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <filename>OmegaT_4.n.n_Windows_without_JRE.exe</filename>.</para>
+          <filename>OmegaT_&vernb;_Windows_without_JRE.exe</filename>.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">No / I don't know:</emphasis> download
-          <filename>OmegaT_4.n.n_Windows.exe</filename>.</para>
+          <filename>OmegaT_&vernb;_Windows.exe</filename>.</para>
 
           <para>This package is bundled with Oracle's Java Runtime
           Environment. This JRE will not interfere with other Java
@@ -149,12 +155,12 @@
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <filename>OmegaT_4.n.n_Without_JRE.zip</filename>.</para>
+          <filename>OmegaT_&vernb;_Without_JRE.zip</filename>.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">No / I don't know:</emphasis> download
-          <filename>OmegaT_4.n.n_Linux.tar.bz2</filename>.</para>
+          <filename>OmegaT_&vernb;_Linux.tar.bz2</filename>.</para>
 
           <para>This package is bundled with Oracle's Java Runtime
           Environment. This JRE will not interfere with other Java
@@ -282,18 +288,18 @@
 
       <para>OmegaT contains the Java JRE 1.8</para>
 
-      <para>Download <filename>OmegaT_4.n.n_Mac.zip</filename>.</para>
+      <para>Download <filename>OmegaT_&vernb;_Mac.zip</filename>.</para>
     </section>
 
     <section id="OmegaT.installation.OSX">
       <title>Installing OmegaT</title>
 
-      <para>Double click on <filename>OmegaT_4.n.n_Mac.zip</filename> to unpack
+      <para>Double click on <filename>OmegaT_&vernb;_Mac.zip</filename> to unpack
       it. This creates a folder called <filename>OmegaT</filename>. The folder
       contains 2 files: <filename>index.html</filename> and
       <filename>OmegaT.app</filename>. Copy the folder to a suitable folder
       (e.g. Applications). Once you have done this, you can delete the
-      <filename>OmegaT_4.n.n_Mac.zip</filename> file, it is no longer
+      <filename>OmegaT_&vernb;_Mac.zip</filename> file, it is no longer
       needed.</para>
     </section>
 
@@ -380,7 +386,7 @@
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes:</emphasis> download
-          <filename>OmegaT_4.n.n_Windows_without_JRE.zip</filename>. This
+          <filename>OmegaT_&vernb;_Windows_without_JRE.zip</filename>. This
           package can be used on any platform where a Java 8 compatible JRE
           is installed.</para>
         </listitem>
@@ -395,7 +401,7 @@
         <listitem>
           <para><emphasis role="bold">No:</emphasis> obtain a Java JRE for your
           system (see below) and download
-          <filename>OmegaT_4.n.n_Without_JRE.zip</filename>.</para>
+          <filename>OmegaT_&vernb;_Without_JRE.zip</filename>.</para>
 
           <para>Oracle provides JREs for Solaris SPARC/x86 (Java 8) and for
           Linux x64, Solaris x64, Windows x64 (Java 8) at <ulink
@@ -414,8 +420,8 @@
       <title>Installing OmegaT</title>
 
       <para>To install OmegaT, simply unpack the
-      <filename>OmegaT_4.n.n_Without_JRE.zip</filename> file. This
-      creates an <filename>./OmegaT_4.n.n_Without_JRE/</filename> folder in
+      <filename>OmegaT_&vernb;_Without_JRE.zip</filename> file. This
+      creates an <filename>./OmegaT_&vernb;_Without_JRE/</filename> folder in
       the working folder with all the files necessary to run
       OmegaT.</para>
     </section>
@@ -452,6 +458,7 @@
     double-clicking on an <filename>omegat.project</filename> file.</para>
   </section>
 
+  <!-- Remove Java WebStart 
   <section id="using.Java.Web.Start">
     <title>Using Java Web Start</title>
 
@@ -484,10 +491,11 @@
 
     <para>Note that if you need or wish to use any of the launch command
     arguments (see above), you must use the normal installation.</para>
-  </section>
+	</section>
+	-->
 
   <section id="commandline.launching">
-    <title>Starting OmegaT from the command
+    <title id="commandline.launching.title">Starting OmegaT from the command
     line</title>
 
     <para>Normally, it is not necessary to start

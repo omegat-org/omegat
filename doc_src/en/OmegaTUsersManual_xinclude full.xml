@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+"../../../docbook-xml-4.5/docbookx.dtd"
+
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+
 <book lang="en">
   <bookinfo>
-    <title>OmegaT 4.3.1 - User's Guide</title>
+    <title>OmegaT &vernb; - User's Guide</title>
 
     <author>
       <firstname>OmegaT team</firstname>
@@ -21,23 +27,26 @@
   <xi:include href="InstallingAndRunning.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_Menus.xml"
+  <xi:include href="OmegaT5_Menus.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_WindowsAndDialogs.xml"
+  <xi:include href="OmegaT5_WindowsAndDialogs.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_EditorsPanes.xml"
+  <xi:include href="OmegaT5_EditorsPanes.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_ProjectFolder.xml"
+  <xi:include href="OmegaT5_ProjectFolder.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT4_HowTo.xml"
+  <xi:include href="OmegaT5_ConfigurationFolder.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-<!--   <xi:include href="OmegaT4_Troubleshooting.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
+  <xi:include href="OmegaT5_HowTo.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="OmegaT5_Troubleshooting.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Dictionaries.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

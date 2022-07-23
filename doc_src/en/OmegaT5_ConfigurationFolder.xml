@@ -6,7 +6,7 @@
 
   <para>The configuration folder is where most of the OmegaT parameters are stored.</para>
 
-  <section id="projectfolder.source">
+  <section id="">
     <title>source</title>
 
     <para>The source subfolder contains files to be translated. You can add

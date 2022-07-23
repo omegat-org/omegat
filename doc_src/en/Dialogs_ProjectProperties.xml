@@ -104,15 +104,15 @@
         <listitem>
           <para>The segmentation rules are generally valid across all the
           projects. The user, however, may need to generate a set of rules,
-          specific to the project in question. Use this button to open a
-          dialog, activate the check box <guimenuitem>Project specific
-          segmentation rules</guimenuitem>, then proceed to adjust the
-          segmentation rules as desired. The new set of rules will be stored
-          together with the project and will not interfere with the general
-          set of segmentation rules. To delete project specific segmentation
-          rules, uncheck the check box. See <link linkend="dialogs.preferences.segmentationsetup">Segmentation Setup
-          preferences</link> for more information on segmentation
-          rules.</para>
+          specific to the project in question. Use this button to open a dialog,
+          activate the check box <guimenuitem>Project specific segmentation
+          rules</guimenuitem>, then proceed to adjust the segmentation rules as
+          desired. The new set of rules will be stored together with the project
+          and will not interfere with the general set of segmentation rules. To
+          delete project specific segmentation rules, uncheck the check box. See
+          <link linkend="dialogs.preferences.segmentationsetup"
+          endterm="dialogs.preferences.segmentationsetup.title"/> for
+          details.</para>
 
           <para><emphasis>Hint:</emphasis> the set of segmentation rules for a
           given project is stored as

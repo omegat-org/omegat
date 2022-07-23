@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="howto.managerighttoleft">
-  <title>Manage Right-To-Left languages</title>
+  <title id="howto.managerighttoleft.title">Manage Right-To-Left languages</title>
 
    <para>Justification of source and target segments depends upon the project
     languages. By default, left justification is used for Left-To-Right (LTR)

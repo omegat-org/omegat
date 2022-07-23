@@ -3,6 +3,7 @@
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.view">
   <title>View</title>
+  <note><para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut_description"/></para></note>
 
   <variablelist>
     <varlistentry>
@@ -11,6 +12,7 @@
       <listitem>
         <para>If checked, the translated segments will be marked in
         yellow.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -20,6 +22,7 @@
       <listitem>
         <para>If checked, the untranslated segments will be marked in
         violet.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -27,7 +30,9 @@
       <term>Mark Paragraph delimitations</term>
 
       <listitem>
-        <para>If checked, the separations between paragraphs in the source document are indicated visually.</para>
+        <para>If checked, the separations between paragraphs in the source
+        document are indicated visually. See </para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -37,6 +42,7 @@
       <listitem>
         <para>If checked, source segments will be shown and marked in green.
         If not checked, source segments will not be shown.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -46,6 +52,7 @@
       <listitem>
         <para>If checked, non-unique segments will be marked in pale
         grey.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -57,6 +64,7 @@
         marking has priority over <guimenuitem>Mark Translated
         Segments</guimenuitem> and <guimenuitem>Mark Untranslated
         Segments</guimenuitem>.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -66,6 +74,7 @@
       <listitem>
         <para>If checked, non-breakable spaces will be displayed with a grey
         background.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -75,6 +84,7 @@
       <listitem>
         <para>If checked, white spaces will be displayed with a small
         dot.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -84,6 +94,7 @@
       <listitem>
         <para>This option displays <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional
         control characters</ulink></para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -93,8 +104,10 @@
       <listitem>
         <para>If checked, the background of all segments where the target
         segment has been auto-populated (from TMXs placed in
-        <filename class="directory">/tm/auto</filename> for example) are displayed in colour.
-        The colours are displayed as long as the <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Save
+        <filename class="directory">/tm/auto</filename> for example) are displayed in colour.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
+
+        <para>The colours are displayed as long as the <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Save
         auto-populated status</guimenuitem></link> option is checked. Usual
         translations inserted from the <filename class="directory">auto</filename> folder are displayed in orange.
         Other translations, identified specifically in the TMX, can be
@@ -105,15 +118,42 @@
     </varlistentry>
 
     <varlistentry>
+      <term>Mark Glossary Matches</term>
+
+      <listitem>
+        <para>Underlines source terms that have a match in the
+        glossaries. Hovering on an underlined term displays the matching target
+        term. Right-clicking on an underlined term displays the matching target
+        term and allows for selection and insertion at the cursor position in
+        the target field.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Language Checker</term>
+
+      <listitem>
+        <para>Underlines parts of the target where LanguageTool has found
+        errors. See <link linkend="dialog.preferences.languagetool.plugin"
+        endterm="dialog.preferences.languagetool.plugin.title"/> for
+        details.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
+      </listitem>
+    </varlistentry>
+	
+    <varlistentry>
       <term>Aggressive Font Fallback</term>
 
       <listitem>
         <para>Check this option in case OmegaT does
         not display some glyphs properly (even if the fonts containing the
-        relevant glyphs are installed on your machine). Note: on Windows it
-        seems that this manual font fallback mechanism can interfere with
-        standard font fallback, causing undesirable font substitution. For
-        that reason, it is OFF by default.</para>
+        relevant glyphs are installed on your machine).</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
+
+		<note><para>On Windows it seems that this manual font fallback mechanism
+		can interfere with standard font fallback, causing undesirable font
+		substitution. For that reason, it is OFF by default.</para></note>
       </listitem>
     </varlistentry>
 
@@ -126,6 +166,15 @@
         change in the current segment. Setting it to <guimenuitem>All
         segments</guimenuitem> shows this information for all segments and
         <guimenuitem>None</guimenuitem> turns this option off.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
+      </listitem>
+    </varlistentry>
+	    <varlistentry>
+      <term>Restore Main Window</term>
+
+      <listitem>
+        <para>OmegaT's main window layout is restored to its default values, with the <guilabel>Editor</guilabel> pane on the left, the <guilabel>Fuzzy Matches</guilabel> pane at the top right and the <guilabel>Glossary</guilabel> pane at the bottom right. All the other panes are minimized. Use this function when you have trouble reorganizing the window layout.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
   </variablelist>

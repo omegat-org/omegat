@@ -4,7 +4,26 @@
 <section id="menus.goto">
   <title>Go To</title>
 
-  <para>This menu displays entries only when a project is open.</para>
+  <note><para>This menu displays entries only when a project is open.</para>
+  <para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut_description"/></para>
+    <example><title>Next Untranslated Segment</title>
+  		<para>In this manual:
+		  <keycombo>
+			<keycap>C</keycap><keycap>u</keycap>
+		  </keycombo>
+		</para>
+		<para>On Windows and Linux:
+		  <keycombo>
+			<keycap>Control</keycap><keycap>U</keycap>
+		  </keycombo>
+		</para>
+		<para>On macOS:
+		  <keycombo>
+			<keycap>Command</keycap><keycap>U</keycap>
+		  </keycombo>
+		</para>
+		</example>
+</note>
 
   <variablelist>
     <varlistentry>
@@ -13,6 +32,11 @@
       <listitem>
         <para>Moves to the next segment that has no equivalent in the
         translation memory.</para>
+		<para>
+		  <keycombo>
+			<keycap>C</keycap><keycap>u</keycap>
+		  </keycombo>
+		</para>
       </listitem>
     </varlistentry>
 
@@ -22,6 +46,11 @@
       <listitem>
         <para>Moves to the next already translated segment, ignoring
         untranslated segments.</para>
+		<para>
+		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>u</keycap>
+		  </keycombo>
+		</para>
       </listitem>
     </varlistentry>
 
@@ -32,9 +61,23 @@
         <para>Moves to the next segment. If the current segment is the last
         segment in a file, it moves to the first segment of the next
         file.</para>
+		<para>
+		  <keycombo>
+			<keycap>C</keycap><keycap>n</keycap>
+		  </keycombo>
+		</para>
+		<para>
+		  <keycombo>
+			<keycap>Enter</keycap>
+		  </keycombo>
+		</para>
 
-        <para>Note: <keycap>Enter</keycap> is an alternate shortcut if <link linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
-        Advance</link> option is not selected.</para>
+        <note><para><keycap>TAB</keycap> replaces <keycap>Enter</keycap> as an
+        alternate shortcut if <link
+        linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
+        Advance</link> option is selected.</para>
+		<para>This is useful for character entry systems that use
+		<keycap>Enter</keycap> to validate input.</para></note>
       </listitem>
     </varlistentry>
 
@@ -45,13 +88,24 @@
         <para>Moves to the previous segment. If the current segment is the
         first one in a file, it moves to the last segment of the previous
         file.</para>
+		<para>
+		  <keycombo>
+			<keycap>C</keycap><keycap>p</keycap>
+		  </keycombo>
+		</para>
+		<para>
+		  <keycombo>
+			<keycap>C</keycap><keycap>Enter</keycap>
+		  </keycombo>
+		</para>
 
-        <para>Note: <keycombo>
-            <keycap>Ctrl</keycap>
-
-            <keycap>Enter</keycap>
-          </keycombo> is an alternate shortcut if <link linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
-        Advance</link> option is not selected.</para>
+        <note><para><keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo>
+        replaces <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo>
+        as an alternate shortcut if <link
+        linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
+        Advance</link> option is selected.</para>
+		<para>This is useful for character entry systems that use
+		<keycap>Enter</keycap> to validate input.</para></note>
       </listitem>
     </varlistentry>
 
@@ -61,6 +115,11 @@
       <listitem>
         <para>The segment is opened when either its segment call-out or
         segment number is entered.</para>
+		<para>
+		  <keycombo>
+			<keycap>C</keycap><keycap>j</keycap>
+		  </keycombo>
+		</para>
       </listitem>
     </varlistentry>
 
@@ -69,6 +128,7 @@
 
       <listitem>
         <para>The next segment with a note attached to it, will open.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
@@ -77,6 +137,21 @@
 
       <listitem>
         <para>The previous segment with a note will open.</para>
+		<para><emphasis>No default key shortcut</emphasis></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Next Unique Segment</term>
+
+      <listitem>
+        <para>Moves to the next unique segment.</para>
+		<para>
+		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>q</keycap>
+		  </keycombo>
+		</para>
+
       </listitem>
     </varlistentry>
 
@@ -86,6 +161,12 @@
       <listitem>
         <para>Moves to the segment that does correspond to the current
         selected match in the <guilabel>Fuzzy matches</guilabel> pane.</para>
+		<para>
+		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>m</keycap>
+		  </keycombo>
+		</para>
+
       </listitem>
     </varlistentry>
 
@@ -93,20 +174,33 @@
       <term>Forward in history...</term>
 
       <listitem>
-        <para>OmegaT remembers the segments
-        executed. With this command you can step forward to the segment, you
-        have previously left by the <guimenuitem>Back in
-        history</guimenuitem>... command.</para>
+        <para>OmegaT remembers the segments your segment navigation
+        history.</para>
+		<para>With this command you can move forward one segment at a time to
+		the segments that you have previously visited with <link
+		linkend="menu.goto.backinhistory"
+		endterm="menu.goto.backinhistory"/>.</para>
+		<para>
+		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>n</keycap>
+		  </keycombo>
+		</para>
       </listitem>
     </varlistentry>
 
     <varlistentry>
-      <term>Back in history...</term>
+      <term id="menu.goto.backinhistory">Back in history...</term>
 
       <listitem>
-        <para>With this command you can move backward one segment at a time,
-        to return later to the current segment using <guimenuitem>Forward in
-        history...</guimenuitem>command below.</para>
+        <para>OmegaT remembers the segments your segment navigation
+        history.</para>
+        <para>With this command you can move backward one segment at a time to
+        the segments that your have previously visited.</para>
+		<para>
+		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>p</keycap>
+		  </keycombo>
+		</para>
       </listitem>
     </varlistentry>
   </variablelist>

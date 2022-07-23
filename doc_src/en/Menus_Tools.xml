@@ -3,6 +3,24 @@
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.tools">
   <title>Tools</title>
+  <note>
+	<para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut_description"/></para>
+	<example><title>Check Issues...</title>
+	<para>In this manual:
+	<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>v</keycap></keycombo>
+	</para>
+	<para>On Windows and Linux:
+	<keycombo>
+	  <keycap>Shift</keycap><keycap>Control</keycap><keycap>V</keycap>
+	</keycombo>
+	</para>
+	<para>On macOS:
+	<keycombo>
+	  <keycap>Shift</keycap><keycap>Command</keycap><keycap>V</keycap>
+	</keycombo>
+	</para>
+	</example>
+  </note>
 
   <variablelist>
     <varlistentry>
@@ -11,6 +29,11 @@
       <listitem>
         <para>Quality assurance tool that carries out all the automatic checks
         in one go and displays the results in a window.</para>
+		<para>
+		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>v</keycap>
+		  </keycombo>
+		</para>
 
         <para>Four types of issues are detected:</para>
 
@@ -105,12 +128,12 @@
         window</link>.</para>
 
         <para>The supported file formats are those listed in <menuchoice>
-            <guimenuitem>Project</guimenuitem>
+        <guimenuitem>Project</guimenuitem>
 
-            <guimenuitem>Properties</guimenuitem>
+        <guimenuitem>Properties</guimenuitem>
 
-            <guimenuitem>File Filters</guimenuitem>
-          </menuchoice>.</para>
+        <guimenuitem>File Filters</guimenuitem>
+        </menuchoice>.</para>
 
         <para>The source and target files can have different formats (for
         example, a <filename>.docx</filename> file can be aligned with a
@@ -125,39 +148,32 @@
         <para>Opens the <link linkend="windows.scripts"><guilabel>Scripting</guilabel>
         window</link>, where the location of scripts can be set, and where
         scripts can be written, run and associated with a shortcut.</para>
+
+		<para>The list below this item displays 12 potential slots for scripts. Clicking on an assigned slot launches the script assigned to that slot.</para>
+
+		<note>
+		  <para>To associate a script with a number:</para>
+          <orderedlist>
+			<listitem>
+              <para>Open the Scripting window</para>
+			</listitem>
+			<listitem>
+              <para>Select the script you want from the list on the left</para>
+			</listitem>
+			<listitem>
+              <para>At the bottom of the window, right-click on a free number
+              and select <guilabel>Add Script</guilabel>.</para>
+			</listitem>
+          </orderedlist>
+		</note>
       </listitem>
     </varlistentry>
 
     <varlistentry>
-      <term>n - (script name)</term>
+      <term>External search commands</term>
 
       <listitem>
-        <para>Launches scripts that have been associated with a number.</para>
-
-        <para>To associate a script with a number:</para>
-
-        <orderedlist>
-          <listitem>
-            <para>Open the Scripting window</para>
-          </listitem>
-
-          <listitem>
-            <para>Select the script you want from the list on the left</para>
-          </listitem>
-
-          <listitem>
-            <para>At the bottom of the window, right-click on a free number
-            and select <guilabel>Add Script</guilabel>.</para>
-          </listitem>
-        </orderedlist>
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>(external search commands)</term>
-
-      <listitem>
-        <para>If commands to perform external searches have been defined in the <link linkend="dialogs.preferences.externalsearch">Preferences</link>, they are listed and accessible here.</para>
+        <para>If commands to perform external searches have been defined in <link linkend="dialogs.preferences.externalsearch" endterm="dialogs.preferences.externalsearch.title"/>, they are listed and accessible here.</para>
       </listitem>
     </varlistentry>
   </variablelist>

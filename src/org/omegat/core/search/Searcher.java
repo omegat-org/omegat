@@ -10,7 +10,7 @@
                2013 Aaron Madlon-Kay, Alex Buloichik
                2014 Alex Buloichik, Piotr Kulik, Aaron Madlon-Kay
                2015 Aaron Madlon-Kay
-               2017-2021 Thomas Cordonnier
+               2017-2022 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -645,6 +645,7 @@ public class Searcher {
 
         foundMatches.clear();
         // check the text against all matchers
+        OUT_LOOP:
         for (Matcher matcher : m_matchers) {
             // check the text against the current matcher
             // if one of the search strings is not found, don't
@@ -654,17 +655,21 @@ public class Searcher {
                 return false;
             }
 
-            // Check if we searched a string of different length from the
-            // original. If so, then we give up on highlighting this hit
-            // because the offsets and length will not match. We still return
-            // true so the hit will still be recorded.
-            //noinspection StringEquality
-            if (text != origText && text.length() != origText.length()) {
-                continue;
-            }
             while (true) {
                 int start = matcher.start();
                 int end = matcher.end();
+                if (!text.substring(start, end).equals(origText.substring(start, end))) {
+                    // In case of normalization, check whenever the string to search is still present but shifted
+                    int find = origText.indexOf(text.substring(start, end));
+                    if (find >= 0) {
+                        end = find + (end - start);
+                        start = find;
+                    } else {
+                        // If the string to search contains normalized characters, then we cannot find this match
+                        // Then this one will not be highlighted, but we continue to give a chance to other matches
+                        continue OUT_LOOP;
+                    }
+                }
                 if (searchExpression.mode == SearchMode.REPLACE) {
                     if (searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
                         if ((end == start) && (start > 0)) {

@@ -61,7 +61,7 @@
         <para>Copies the selected files to the <filename
         class="directory">source</filename> folder and reloads the project to
         load the new files. See <link
-        linkend="projectfolder.source"><guilabel>Source Files
+        linkend="project.folder.source"><guilabel>Source Files
         Folder</guilabel></link> for details.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
@@ -143,7 +143,7 @@
 
       <listitem>
         <para>Saves the internal translation memory to the hard disk. See <link
-        linkend="projectfolder.omegat">omegat Folder</link> for
+        linkend="project.folder.omegat">omegat Folder</link> for
         details.</para>
 		<para>
 		  <keycombo>
@@ -153,7 +153,7 @@
 		<para>OmegaT automatically saves translations every 3 minutes as well as
 		when you close the project or quit OmegaT.</para>
 
-        <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.savingandoutput"><menuchoice>
+        <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.saving.and.output"><menuchoice>
         <guimenu>Options</guimenu>
 
         <guimenuitem>Preferences</guimenuitem>
@@ -199,7 +199,7 @@
         <para>Creates the target documents based on your translation. The
         created target documents are located in the <filename
         class="directory">target</filename> folder. See <link
-        linkend="projectfolder.target"><guilabel>Target Files
+        linkend="project.folder.target"><guilabel>Target Files
         Folder</guilabel></link> for details.</para>
 		<para>
 		  <keycombo>
@@ -216,7 +216,7 @@
         <para>Creates the target document corresponding to the current document
         in translation. The created target document is located in the <filename
         class="directory">target</filename> folder. See <link
-        linkend="projectfolder.target"><guilabel>Target Files
+        linkend="project.folder.target"><guilabel>Target Files
         Folder</guilabel></link> for details.</para>
 		<para>
 		  <keycombo>
@@ -273,8 +273,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Access Project Contents</term>
+    <varlistentry id="menus.project.access.project.contents">
+      <term id="menus.project.access.project.contents.title">Access Project Contents</term>
 
       <listitem>
         <para>Gives access to the project folders. See <link
@@ -292,31 +292,31 @@
 			</listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="projectfolder.dictionary">Dictionaries</link></term>
+			<term><link linkend="project.folder.dictionary">Dictionaries</link></term>
 			<listitem>
 			  <para><emphasis>No default key shortcut</emphasis></para>
 			</listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="projectfolder.glossary">Glossaries</link></term>
+			<term><link linkend="project.folder.glossary">Glossaries</link></term>
 			<listitem>
 			  <para><emphasis>No default key shortcut</emphasis></para>
 			</listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="projectfolder.source">Source Files</link></term>
+			<term><link linkend="project.folder.source">Source Files</link></term>
 			<listitem>
 			  <para><emphasis>No default key shortcut</emphasis></para>
 			</listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="projectfolder.target">Target Files</link></term>
+			<term><link linkend="project.folder.target">Target Files</link></term>
 			<listitem>
 			  <para><emphasis>No default key shortcut</emphasis></para>
 			</listitem>
 		  </varlistentry>
 		  <varlistentry>
-			<term><link linkend="projectfolder.tm">TMs</link></term>
+			<term><link linkend="project.folder.tm">TMs</link></term>
 			<listitem>
 			  <para><emphasis>No default key shortcut</emphasis></para>
 			</listitem>
@@ -325,7 +325,7 @@
 			<term>Current Source Document</term>
 			<listitem>
 			  <para>The current source document is located in <link
-			  linkend="projectfolder.source">Source Files</link>.</para>
+			  linkend="project.folder.source">Source Files</link>.</para>
 			  <para><emphasis>No default key shortcut</emphasis></para>
 			</listitem>
 		  </varlistentry>
@@ -333,7 +333,7 @@
 			<term>Current Target Document</term>
 			<listitem>
 			  <para>The current target document is located in <link
-			  linkend="projectfolder.target">Target Files</link>.</para>
+			  linkend="project.folder.target">Target Files</link>.</para>
 			  <para><emphasis>No default key shortcut</emphasis></para>
 			</listitem>
 		  </varlistentry>
@@ -341,7 +341,7 @@
 			<term>Writable Glossary</term>
 			<listitem>
 			  <para>The writable glossary is located in <link
-			  linkend="projectfolder.glossary">Glossary</link>.</para>
+			  linkend="project.folder.glossary">Glossary</link>.</para>
 			  <para><emphasis>No default key shortcut</emphasis></para>
 			</listitem>
 		  </varlistentry>

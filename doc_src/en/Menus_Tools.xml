@@ -39,7 +39,7 @@
 
         <itemizedlist>
           <listitem>
-            <para>missing or displaced tags, including <link linkend="dialogs.preferences.tagprocessing">custom tags</link>.
+            <para>missing or displaced tags, including <link linkend="dialogs.preferences.tag.processing">custom tags</link>.
             The <guilabel>Tag Issues</guilabel> option is always
             selected.</para>
           </listitem>
@@ -173,7 +173,7 @@
       <term>External search commands</term>
 
       <listitem>
-        <para>If commands to perform external searches have been defined in <link linkend="dialogs.preferences.externalsearch" endterm="dialogs.preferences.externalsearch.title"/>, they are listed and accessible here.</para>
+        <para>If commands to perform external searches have been defined in <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, they are listed and accessible here.</para>
       </listitem>
     </varlistentry>
   </variablelist>

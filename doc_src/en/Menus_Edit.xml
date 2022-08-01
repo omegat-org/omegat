@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.edit">
-  <title>Edit</title>
+  <title id="menus.edit.title">Edit</title>
 
   <note><para>This menu displays entries only when a project is open.</para>
   <para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut_description"/></para>
@@ -56,11 +56,12 @@
       <listitem>
         <para>Replaces the whole target segment with the currently selected
         fuzzy match (by default the first match is selected). See <link
-        linkend="panes.fuzzymatches">Fuzzy Matches</link> for details.</para>
+        linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> for
+        details.</para>
 
-        <para>Any text selected in the <guilabel>Fuzzy Matches</guilabel> pane
-        will have priority over the selected match and will replace the whole
-        target segment.</para>
+        <para>Any text selected in the <link linkend="panes.fuzzy.matches"
+        endterm="panes.fuzzy.matches.title"/> pane will have priority over the
+        selected match and will replace the whole target segment.</para>
 		<para>
 		  <keycombo>
 			<keycap>C</keycap><keycap>r</keycap>
@@ -77,9 +78,10 @@
         <para>Inserts the currently selected fuzzy match at the cursor
         position. If part of the target segment has been selected, this
         function overwrites the selected portion. See <link
-        linkend="panes.fuzzymatches">Fuzzy Matches</link> for details.</para>
+        linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> for details.</para>
 
-        <para>Any text selected in the <guilabel>Fuzzy Matches</guilabel> pane
+        <para>Any text selected in the <link
+        linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pane
         will have priority over the selected match and will be inserted at the
         cursor position.</para>
 		<para>
@@ -182,8 +184,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Create Glossary Entry</term>
+    <varlistentry id="menus.edit.create.glossary.entry">
+      <term id="menus.edit.create.glossary.entry.title">Create Glossary Entry</term>
 
       <listitem>
         <para>Allows the user create an entry in the default glossary
@@ -416,8 +418,8 @@
       </listitem>
 	</varlistentry>
 
-	<varlistentry>
-      <term>Use as Default Translation</term>
+	<varlistentry id="menus.edit.use.as.default.translation">
+      <term id="menus.edit.use.as.default.translation.title">Use as Default Translation</term>
 
       <listitem>
 		<para>If there's several alternative translations available for the
@@ -428,8 +430,8 @@
       </listitem>
 	</varlistentry>
 
-	<varlistentry>
-      <term>Create Alternative Translation</term>
+	<varlistentry id="menus.edit.create.alternative.translation">
+      <term id="menus.edit.create.alternative.translation.title">Create Alternative Translation</term>
 
       <listitem>
 		<para>The one and the same segment may, depending on the context,
@@ -466,7 +468,7 @@
 
       <listitem>
 		<para>Use this command to register the translation to be identical to
-		the source, even if <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Allow
+		the source, even if <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source"><guilabel>Allow
 		translation to be equal to source</guilabel></link> is not
 		checked.</para>
 		  <para>

@@ -26,8 +26,8 @@
 </note>
 
   <variablelist>
-    <varlistentry>
-      <term>Next Untranslated Segment</term>
+    <varlistentry id="menus.goto.next.untranslated.segment">
+      <term id="menus.goto.next.untranslated.segment.title">Next Untranslated Segment</term>
 
       <listitem>
         <para>Moves to the next segment that has no equivalent in the
@@ -40,8 +40,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Next Translated Segment</term>
+    <varlistentry id="menus.goto.next.translated.segment">
+      <term id="menus.goto.next.translated.segment.title">Next Translated Segment</term>
 
       <listitem>
         <para>Moves to the next already translated segment, ignoring
@@ -54,8 +54,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Next Segment</term>
+    <varlistentry id="menus.goto.next.segment">
+      <term id="menus.goto.next.segment.title">Next Segment</term>
 
       <listitem>
         <para>Moves to the next segment. If the current segment is the last
@@ -74,7 +74,7 @@
 
         <note><para><keycap>TAB</keycap> replaces <keycap>Enter</keycap> as an
         alternate shortcut if <link
-        linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
+        linkend="dialogs.preferences.general.use.tab.to.advance">Use TAB to
         Advance</link> option is selected.</para>
 		<para>This is useful for character entry systems that use
 		<keycap>Enter</keycap> to validate input.</para></note>
@@ -102,7 +102,7 @@
         <note><para><keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo>
         replaces <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo>
         as an alternate shortcut if <link
-        linkend="dialogs.preferences.general.usetabtoadvance">Use TAB to
+        linkend="dialogs.preferences.general.use.tab.to.advance">Use TAB to
         Advance</link> option is selected.</para>
 		<para>This is useful for character entry systems that use
 		<keycap>Enter</keycap> to validate input.</para></note>

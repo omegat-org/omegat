@@ -666,8 +666,26 @@ public class Searcher {
                         start = find;
                     } else {
                         // If the string to search contains normalized characters, then we cannot find this match
-                        // Then this one will not be highlighted, but we continue to give a chance to other matches
-                        continue OUT_LOOP;
+                        // Try to find it using normalization of substrings
+                        boolean found = false;
+                        String foundText = text.substring(start, end);
+                        IN_LOOP:
+                        for (find = 0; find < origText.length(); find++) {
+                            if (StringUtil.normalizeWidth(origText.substring(find)).startsWith(foundText)) {
+                                start = end = find;
+                                while (end < origText.length()) {
+                                    end++;
+                                    if (StringUtil.normalizeWidth(origText.substring(start,end)).equals(foundText)) {
+                                        found = true;
+                                        break IN_LOOP;
+                                    }
+                                }
+                            }
+                        }
+                        if (! found) {
+                            // No way, we cannot find the match at all. Do not highlight but return true
+                            break OUT_LOOP;
+                        }
                     }
                 }
                 if (searchExpression.mode == SearchMode.REPLACE) {

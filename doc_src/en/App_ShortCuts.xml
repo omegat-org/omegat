@@ -2,7 +2,7 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.shortcut">
-  <title>OmegaT shortcuts</title>
+  <title id="appendix.shortcut.title">OmegaT shortcuts</title>
 
   <section id="appendix.shortcut.use">
     <title>Shortcuts description in this manual</title>
@@ -100,7 +100,7 @@
     <para>There are 2 shortcuts definition files.</para>
 	<variablelist>
 	  <varlistentry><term id="MainMenuShortcuts.properties">MainMenuShortcuts.properties</term>
-	  <listitem><para>The shortcut definition file for the menus.</para></listitem></varlistentry>
+	  <listitem><para>The shortcut definition file for the menus and a few other items.</para></listitem></varlistentry>
 	  <varlistentry><term id="EditorShortcuts.properties">EditorShortcuts.properties</term>
 	  <listitem><para>The shortcut definition file for the Editor.</para></listitem></varlistentry>
 	</variablelist>
@@ -258,7 +258,7 @@
           </thead>
 
           <tbody>
-            <row>
+            <row id="shortcuts.open.contextual.menu">
               <entry>Open Contextual Menu</entry>
               <entry>editorContextMenu</entry>
               <entry>CONTEXT_MENU</entry>
@@ -531,7 +531,40 @@
       </table>
     </section>	
 	
-    <section id="appendix.function.codes.projectmenu">
+    <section id="appendix.function.codes.searchwindow">
+      <title>Search Window Codes</title>
+
+      <table>
+        <title>Search Window</title>
+
+        <tgroup cols="4" colsep="1">
+          <colspec align="left" colname="1" colnum="1"/>
+          <colspec align="left" colname="2" colnum="2"/>
+          <colspec align="center" colname="3" colnum="3"/>
+          <colspec align="center" colname="4" colnum="4"/>
+
+          <thead>
+            <row>
+              <entry>Menu item</entry>
+              <entry>Function code</entry>
+              <entry>Windows/Linux</entry>
+              <entry>macOS</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>Jump to Entry in Editor</entry>
+              <entry>jumpToEntryInEditor</entry>
+			  <entry>ctrl J</entry>
+              <entry>meta J</entry>
+            </row>
+		  </tbody>
+		</tgroup>
+	  </table>
+	</section>
+
+	<section id="appendix.function.codes.projectmenu">
       <title>Project Menu Codes</title>
 
       <table>

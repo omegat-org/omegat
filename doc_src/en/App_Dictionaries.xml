@@ -2,14 +2,14 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.dictionaries">
-  <title>Dictionaries</title>
+  <title id="appendix.dictionaries.title">Dictionaries</title>
 
-  <section>
-    <title>How to download and install dictionaries</title>
+  <section id="appendix.dictionaries.download.install">
+    <title id="appendix.dictionaries.download.install.title">How to download and install dictionaries</title>
 
-    <para>Dictionaries in OmegaT are based on the
-    StarDict or on the Lingvo DSL format. To install the necessary files for
-    the StarDict format, proceed as follows:</para>
+    <para>Dictionaries in OmegaT are based on the StarDict or on the Lingvo DSL
+    format. To install the necessary files for the StarDict format, proceed as
+    follows:</para>
 
     <itemizedlist>
       <listitem>
@@ -28,8 +28,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Use untar utility (or its equivalent, for instance<filename>
-        winrar</filename> in Windows) to extract its contents into the <filename class="directory">dictionary</filename> project
+        <para>Extract its contents into the <filename class="directory">dictionary</filename> project
         folder. There should be three files, with extensions
         <filename>dz, idx </filename>and <filename>ifo</filename>.</para>
       </listitem>
@@ -63,44 +62,19 @@
     </itemizedlist>
 
     <para>Some of the dictionaries have no strings attached - i.e. are &quot;Free
-    to use&quot;, and others, like the selection above, are under the GPL license.
-    The following example shows Merriam Webster 10th dictionary &quot;in
-    action&quot;:</para>
-
-    <figure id="Dict.Merriam.Webster">
-      <title>Merriam Webster dictionary - use</title>
-
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/DictMerriamWebster.png"/>
-        </imageobject>
-
-        <imageobject role="fo">
-          <imagedata fileref="images/DictMerriamWebster.png" width="60%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
+    to use&quot;, and others, like the selection above, are under the GPL license.</para>
   </section>
 
-  <section>
-    <title>Problems with dictionaries</title>
+  <section id="appendix.dictionaries.problems">
+    <title id="appendix.dictionaries.problems.title">Problems with dictionaries</title>
 
     <itemizedlist>
       <listitem>
         <para>Check that your dict files are in the correct folder (or in a
-        subfolder below it). Check in <menuchoice>
-            <shortcut>
-              <keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>E</keycap>
-              </keycombo>
-            </shortcut>
-
-            <guimenu>Project</guimenu>
-
-            <guimenuitem>Properties</guimenuitem>
-          </menuchoice>.</para>
+        subfolder below it). Access your dictionary folder with <link
+        linkend="menus.project.access.project.contents"
+        endterm="menus.project.access.project.contents.title"/> in the <link
+        linkend="menus.project" endterm="menus.project.title"/> menu.</para>
       </listitem>
     </itemizedlist>
 

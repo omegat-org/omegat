@@ -4,91 +4,28 @@
 <section id="howto.createnewproject">
   <title>Create a new Project</title>
 
-  <para>OmegaT team projects must first be <link linkend="howto.setupteamproject">set up</link> on a server.</para>
+    <para>To start using OmegaT, first create a project that will hold all
+    your files, such as your source file, translation memories, glossaries,
+    and eventually your translated file. In the <guimenu>Project</guimenu>
+    menu, select <menuchoice><guimenuitem>New...</guimenuitem></menuchoice> 
+    and type a name for your project. Remember where you are
+    creating the project, because you will need to return to it later.</para>
 
-  <para>To use a team project for the first time, follow the procedure
-  provided by the project manager.</para>
+    <para>After you give your project a name, the <guilabel>Create New Project</guilabel> dialog
+    will open. At the top of that dialog, select your source file's language
+    and the language that your translated file will be, and click
+    <guibutton>OK</guibutton> to continue.</para>
 
-  <para>Once the project has been opened, translation proceeds in the same way
-  as for a non-team project, except the following points.</para>
+    <para>If you are interested in other settings of this dialog, you can return
+    to it any time by pressing
+    <keycombo><keycap>Ctrl</keycap><keycap>E</keycap></keycombo>.</para>
 
-  <para><emphasis role="bold">Automatic saving</emphasis></para>
+    <para>Next, the <guilabel>Project Files</guilabel> dialog opens. Click on
+    <guibutton>Copy Files to Source Folder...</guibutton> to select your source
+    files. OmegaT will then copy the selected files to the <filename
+    class="directory">source</filename> subfolder of your newly created
+    project. After the source files have loaded in the
+    <guilabel>Editor</guilabel> pane, you can close the <guilabel>Project
+    Files</guilabel> dialog.</para>
+  </section>
 
-  <para>Every 3 minutes (by default), the local project is synchronised with
-  the remote repository so that the project manager or other translators can
-  see and use translations added during that period.</para>
-
-  <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.savingandoutput"><menuchoice>
-      <guimenu>Options</guimenu>
-
-      <guimenuitem>Preferences</guimenuitem>
-
-      <guimenuitem>Saving and Output</guimenuitem>
-    </menuchoice></link>.</para>
-
-  <para><emphasis role="bold">Synchronised files</emphasis></para>
-
-  <para>Whenever the project is automatically saved, but also when it is
-  opened, closed and reloaded, only two files are actually
-  synchronised:</para>
-
-  <itemizedlist>
-    <listitem>
-      <para>omegat/project_save.tmx</para>
-    </listitem>
-
-    <listitem>
-      <para>glossary/glossary.txt</para>
-    </listitem>
-  </itemizedlist>
-
-  <para>All other files will be replaced by the files in the remote
-  repository.</para>
-
-  <para><emphasis role="bold">Adding new source files</emphasis></para>
-
-  <para>To add a new source file:</para>
-
-  <para><orderedlist>
-      <listitem>
-        <para>copy the files to the <filename class="directory">source</filename> folder</para>
-      </listitem>
-
-      <listitem>
-        <para>use <menuchoice>
-            <guimenu>Project</guimenu>
-
-            <guimenuitem>Commit Source Files</guimenuitem>
-          </menuchoice></para>
-      </listitem>
-    </orderedlist>Existing source files can be modified, but the commit
-  operation must be carried out before an automatic save and before the
-  project is reloaded or closed.</para>
-
-  <para><emphasis role="bold">Deleting source files</emphasis></para>
-
-  <para>Files must be deleted by the project manager.</para>
-
-  <para><emphasis role="bold">Changing segmentation rules or file
-  filters</emphasis></para>
-
-  <para>Project parameters must be changed by the project manager.</para>
-
-  <para><emphasis role="bold">Working offline</emphasis></para>
-
-  <para>A team project can be opened and translated offline. All the changes
-  will be synchronised the next time a connection is available.</para>
-
-  <para>To work offline:</para>
-
-  <itemizedlist>
-    <listitem>
-      <para>Disconnect from the network before opening the project,</para>
-    </listitem>
-
-    <listitem>
-      <para>or open the project with the command line using the
-      <command>--no-team</command> option.</para>
-    </listitem>
-  </itemizedlist>
-</section>

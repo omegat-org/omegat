@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.reusetm">
-  <title>Reuse Translation Memories</title>
+<section id="howto.reuse.tm">
+  <title id="howto.reuse.tm.title">Reuse Translation Memories</title>
 
   <para>Initially, that is when the project is created, the main TM of the
   project, <filename>project_save.tmx</filename> is empty. This TM gradually

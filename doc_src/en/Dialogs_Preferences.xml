@@ -17,7 +17,7 @@
 
     <variablelist>
       <varlistentry>
-        <term id="dialogs.preferences.general.usetabtoadvance">Use TAB to
+        <term id="dialogs.preferences.general.use.tab.to.advance">Use TAB to
         Advance</term>
 
         <listitem>
@@ -28,7 +28,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term id="dialogs.preferences.general.alwaysconfirmquit">Always
+        <term id="dialogs.preferences.general.always.confirm.quit">Always
         Confirm Quit</term>
 
         <listitem>
@@ -44,7 +44,7 @@
     <variablelist>
       <varlistentry>
         <term
-			id="dialogs.preferences.mt.automaticallyfetchtrasnlations">Automatically
+			id="dialogs.preferences.mt.automatically.fetch.trasnlations">Automatically
         fetch translations</term>
 
         <listitem>
@@ -64,7 +64,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term id="dialogs.preferences.mtuntranslatedsegmentsonly">Untranslated
+        <term id="dialogs.preferences.mt.untranslated.segments.only">Untranslated
         segments only</term>
 
         <listitem>
@@ -89,7 +89,7 @@
     <variablelist>
       <varlistentry>
         <term
-			id="dialogs.preferences.glossary.displaycontextdescriptionfortbxglossaries">Display
+			id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">Display
         context description for TBX glossaries</term>
 
         <listitem>
@@ -100,7 +100,7 @@
 
       <varlistentry>
         <term
-			id="dialogs.preferences.glossary.usetermsappearingseparatelyinthesourcetext">Use
+			id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text">Use
         terms appearing separately in the source text</term>
 
         <listitem>
@@ -115,7 +115,7 @@
 
       <varlistentry>
         <term
-			id="dialogs.preferences.glossary.usestemmingforglossaryentries">Use
+			id="dialogs.preferences.glossary.use.stemming.for.glossary.entries">Use
         stemming for glossary entries</term>
 
         <listitem>
@@ -126,12 +126,12 @@
 
       <varlistentry>
         <term
-			id="dialogs.preferences.glossary.replaceglossaryhitswheninsertingsourcetext">Replace
+			id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text">Replace
         glossary hits when inserting source text</term>
 
         <listitem>
           <para>If both this option and the <link
-          linkend="dialogs.preferences.editor.insertthesourcetext">
+          linkend="dialogs.preferences.editor.insert.the.source.text">
           <guilabel>Insert the source text</guilabel>
           </link> option are selected, all words with a corresponding
           glossary entry will be translated automatically when the source text
@@ -141,7 +141,7 @@
 
       <varlistentry>
         <term
-			id="dialogs.preferences.glossary.ignorehitswithverydifferentcase">Ignore
+			id="dialogs.preferences.glossary.ignore.hits.with.very.different.case">Ignore
         hits with very different case (e.g. FOO vs foo)</term>
 
         <listitem>
@@ -152,7 +152,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term id="dialogs.preferences.glossary.glossarylayout">Glossary
+        <term id="dialogs.preferences.glossary.glossary.layout">Glossary
         layout</term>
 
         <listitem>
@@ -163,7 +163,7 @@
 
       <varlistentry>
         <term
-			id="dialogs.preferences.glossary.mergealternatedefinitionsforthesameterm">Merge
+			id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">Merge
         alternate definition for the same term</term>
 
         <listitem>
@@ -179,7 +179,7 @@
 
       <variablelist>
         <varlistentry>
-          <term id="dialogs.preferences.taasterminology.getapikey">Get API
+          <term id="dialogs.preferences.taasterminology.get.api.key">Get API
           Key</term>
 
           <listitem>
@@ -194,7 +194,7 @@
 
         <varlistentry>
           <term
-			  id="dialogs.preferences.taasterminology.storeforthissessiononly">Store
+			  id="dialogs.preferences.taasterminology.store.for.this.session.only">Store
           for this session only</term>
 
           <listitem>
@@ -205,7 +205,7 @@
 
         <varlistentry>
           <term
-			  id="dialogs.preferences.taasterminology.browsetaascollections">Browse
+			  id="dialogs.preferences.taasterminology.browse.taas.collections">Browse
           TaaS Collections...</term>
 
           <listitem>
@@ -220,7 +220,7 @@
 
         <varlistentry>
           <term
-			  id="dialogs.preferences.taasterminology.selecttaasterminologydomain">Select
+			  id="dialogs.preferences.taasterminology.select.taas.terminology.domain">Select
           TaaS Terminology Lookup Domain...</term>
 
           <listitem>
@@ -238,7 +238,7 @@
     <variablelist>
       <varlistentry>
         <term
-			id="dialogs.preferences.dictionary.automaticallysearchsegment">Automatically
+			id="dialogs.preferences.dictionary.automatically.search.segment">Automatically
         search segment text in dictionary</term>
 
         <listitem>
@@ -249,7 +249,7 @@
 
       <varlistentry>
         <term
-			id="dialogs.preferences.dictionary.usefuzzymatchingfordictionaryentries">Use
+			id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">Use
         fuzzy matching for dictionary entries</term>
 
         <listitem>
@@ -274,7 +274,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term id="dialogs.preferences.appearance.restoremainwindow">Restore
+        <term id="dialogs.preferences.appearance.restore.main.window">Restore
         Main Window</term>
 
         <listitem>
@@ -775,8 +775,8 @@
             generation time in various patterns</para>
 
             <para>See <ulink
-            url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">Oracle
-            documentation</ulink> for examples of the "SimpleDateFormat"
+            url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">TODO
+            Oracle documentation</ulink> for examples of the "SimpleDateFormat"
             patterns</para>
           </listitem>
 
@@ -1125,14 +1125,14 @@
 	  </variablelist>
 	</section>
 
-	<section id="dialogs.preferences.externalsearch">
-	  <title id="dialogs.preferences.externalsearch.title">External
-	  Search</title>
+	<section id="dialogs.preferences.external.searches">
+	  <title id="dialogs.preferences.external.searches.title">External
+	  Searches</title>
 	  <!-- TODO décrire comment enregistrer des recherches externes -->
 	  <variablelist>
 		<varlistentry>
 		  <term
-			  id="dialogs.preferences.externalsearch.enableproject-specificcommands">Enable
+			  id="dialogs.preferences.external.search.enable.project.specific.commands">Enable
 		  project-specific commands</term>
 
 		  <listitem>
@@ -1149,7 +1149,7 @@
 
 		<varlistentry>
 		  <term
-			  id="dialogs.preferences.externalsearch.contextmenupriority">Context
+			  id="dialogs.preferences.external.search.context.menu.priority">Context
 		  Menu Priority:</term>
 
 		  <listitem>
@@ -1168,8 +1168,8 @@
 	  <title id="dialogs.preferences.editor.title">Editor</title>
 
 	  <variablelist>
-		<varlistentry>
-		  <term id="dialogs.preferences.editor.insertthesourcetext">Insert the
+		<varlistentry id="dialogs.preferences.editor.insert.the.source.text">
+		  <term id="dialogs.preferences.editor.insert.the.source.text.title">Insert the
 		  source text</term>
 
 		  <listitem>
@@ -1179,8 +1179,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialogs.preferences.editor.leavethesegmentempty">Leave the
+		<varlistentry id="dialogs.preferences.editor.leave.the.segment.empty">
+		  <term id="dialogs.preferences.editor.leave.the.segment.empty.title">Leave the
 		  segment empty</term>
 
 		  <listitem>
@@ -1201,8 +1201,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialogs.preferences.editor.insertthebestfuzzymatch">Insert
+		<varlistentry id="dialogs.preferences.editor.insert.the.best.fuzzy.match">
+		  <term id="dialogs.preferences.editor.insert.the.best.fuzzy.match.title">Insert
 		  the best fuzzy match</term>
 
 		  <listitem>
@@ -1220,9 +1220,9 @@
 	  following purpose:</para>
 
 	  <variablelist>
-		<varlistentry>
+		<varlistentry id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match">
 		  <term
-			  id="dialogs.preferences.editor.attempttoconvertnumberswheninsertingafuzzymatch">Attempt
+			  id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match.title">Attempt
 		  to convert numbers when inserting a fuzzy match</term>
 
 		  <listitem>
@@ -1251,9 +1251,9 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
+		<varlistentry id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source">
 		  <term
-			  id="dialogs.preferences.editor.allowtranslationtobeequaltosource">Allow
+			  id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title">Allow
 		  translation to be equal to source</term>
 
 		  <listitem>
@@ -1270,9 +1270,9 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
+		<varlistentry id="dialogs.preferences.editor.export.the.segment.to.text.files">
 		  <term
-			  id="dialogs.preferences.editor.exportthesegmenttotextfiles">Export the
+			  id="dialogs.preferences.editor.export.the.segment.to.text.files.title">Export the
 		  segment to text files</term>
 
 		  <listitem>
@@ -1320,9 +1320,9 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
+		<varlistentry id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation">
 		  <term
-			  id="dialogs.preferences.editor.gotonextuntranslatedsegmentstopswherethereisatleastonealternativetranslation">Go
+		  id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title">Go
 		  To Next Untranslated Segment stops where there is at least one
 		  alternative translation</term>
 
@@ -1335,8 +1335,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialogs.preferences.editor.allowtagediting">Allow tag
+		<varlistentry id="dialogs.preferences.editor.allow.tag.editing">
+		  <term id="dialogs.preferences.editor.allow.tag.editing.title">Allow tag
 		  editing</term>
 
 		  <listitem>
@@ -1348,9 +1348,9 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
+		<varlistentry id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment">
 		  <term
-			  id="dialogs.preferences.editor.validatetagswhenleavingasegment">Validate
+			  id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title">Validate
 		  tags when leaving a segment</term>
 
 		  <listitem>
@@ -1360,8 +1360,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialogs.preferences.editor.saveautopopulatedstatus">Save
+		<varlistentry id="dialogs.preferences.editor.save.auto-populated.status">
+		  <term id="dialogs.preferences.editor.save.auto-populated.status.title">Save
 		  auto-populated status</term>
 
 		  <listitem>
@@ -1373,8 +1373,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialogs.preferences.editor.saveorginoftranslation">[TODO]
+		<varlistentry id="dialogs.preferences.editor.save.orgin.of.translation">
+		  <term id="dialogs.preferences.editor.save.orgin.of.translation.title">[TODO]
 		  Save origin of translation</term>
 
 		  <listitem>
@@ -1382,9 +1382,9 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
+		<varlistentry id="dialogs.preferences.editor.initially.load.this.many.segments">
 		  <term
-			  id="dialogs.preferences.editor.initiallyloadthismanysegments">Initially
+			  id="dialogs.preferences.editor.initially.load.this.many.segments.title">Initially
 		  load this many segments</term>
 
 		  <listitem>
@@ -1395,44 +1395,80 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
+		<varlistentry id="dialogs.preferences.editor.paragraph.delimitation.format">
 		  <term
-			  id="dialogs.preferences.editor.paragraphdelimitationformat">Paragraph
+			  id="dialogs.preferences.editor.paragraph.delimitation.format.title">Paragraph
 		  delimitation format</term>
 
 		  <listitem>
-			<para>[TODO]</para>
+			<para>This string is used to delimitate "paragraphs" in the source text. This is useful when you have segmented the source but need to see which segment belongs to which paragraph.</para>
 		  </listitem>
 		</varlistentry>
 	  </variablelist>
 	</section>
 
-	<section id="dialogs.preferences.tagprocessing">
-	  <title id="dialogs.preferences.tagprocessing.title">Tag Processing</title>
+	<section id="dialogs.preferences.tag.processing">
+	  <title id="dialogs.preferences.tag.processing.title">Tag Processing</title>
 
-	  <para>When translating software-related files, you can configure the Tag
-	  Validator options to also check programming (%...) variables or
-	  placeholders ({0}), if the file filter doesn't do it out of the box
-	  already. The PO filter already handles %.. and Java™ Resource Bundle
-	  filter already handles {#} tags, so you only need this for other file
-	  types.</para>
+	  <variablelist>
+		<varlistentry id="dialogs.preferences.tag.processing.programming.variables">
+		  <term id="dialogs.preferences.tag.processing.programming.variables.title">Programming variables</term>
+		  <listitem><para>When translating software-related files, you can
+		  configure the Tag Validator options to also check programming (%...)
+		  variables or placeholders ({0}), if the file filter doesn't do it out
+		  of the box already. The PO filter already handles %.. and Java™
+		  Resource Bundle filter already handles {#} tags, so you only need this
+		  for other file types.</para></listitem>
+		</varlistentry>
+		
+		<varlistentry id="dialogs.preferences.tag.processing.simple.java.messageformat">
+		  <term id="dialogs.preferences.tag.processing.simple.java.messageformat.title">Check simple java MessageFormat patterns</term>
+		  <listitem><para></para></listitem>
+		</varlistentry>
 
-	  <para>You can also define various options relating to tag validation and
-	  define custom tags.</para>
+		<varlistentry id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order">
+		  <term id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order.title">Allow translated tags to be in a different order</term>
+		  <listitem><para></para></listitem>
+		</varlistentry>
 
-	  <para>For example, if you enter <userinput>\d+</userinput> into the
-	  <guilabel>Regular expression for custom tags</guilabel> field, all numbers
-	  will be considered as tags, enabling you to check that numbers have not
-	  been changed by mistake during translation.</para>
+		<varlistentry id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues">
+		  <term id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title">Do not allow creating translated texts with tag issues</term>
+		  <listitem><para></para></listitem>
+		</varlistentry>
 
-	  <para>Similarly, enter <userinput>&lt;.*?&gt;</userinput> to make sure
-	  that HTML tags (for example) entered into the source text are preserved
-	  without modification in the translation.</para>
+		<varlistentry id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
+		  <term id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title">Count protected text and custom tags in statistics</term>
+		  <listitem><para></para></listitem>
+		</varlistentry>
 
-	  <para>Note: these two instructions can be combined by writing
-	  <userinput>(&lt;.*?&gt;)|(\d+)</userinput>.</para>
+		<varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
+		  <term id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title">Regular expressions for custom tags</term>
+
+		  <listitem><para>You can also define various options relating to tag
+		  validation and define custom tags.</para>
+
+		  <para>For example, if you enter <userinput>\d+</userinput> into the
+		  field, all numbers will be considered as tags, enabling you to check
+		  that numbers have not been changed by mistake during
+		  translation.</para>
+
+		  <para>Similarly, enter <userinput>&lt;.*?&gt;</userinput> to make sure
+		  that HTML tags (for example) entered into the source text are
+		  preserved without modification in the translation.</para>
+
+		  <para>Note: these two instructions can be combined by writing
+		  <userinput>(&lt;.*?&gt;)|(\d+)</userinput>.</para>
+		  </listitem>
+		</varlistentry>
+		
+		<varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+		  <term id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title">Regular expressions for fragments that should be removed from translation</term>
+		  <listitem><para></para></listitem>
+		</varlistentry>
+
+	  </variablelist>
 	</section>
-
+	
 	<section id="dialog.preferences.team">
 	  <title id="dialog.preferences.team.title">Team</title>
 
@@ -1440,8 +1476,8 @@
 	  translated by you.</para>
 
 	  <variablelist>
-		<varlistentry>
-		  <term id="dialog.preferences.team.title.repositorycredentials">Repository Credentials</term>
+		<varlistentry id="dialog.preferences.team.title.repository.credentials">
+		  <term id="dialog.preferences.team.title.repository.credentials.title">Repository Credentials</term>
 
 		  <listitem>
 			<para>List of projects for which login details are stored in OmegaT.
@@ -1456,8 +1492,8 @@
 	  <title id="dialog.preferences.tm.matches.title">TM Matches</title>
 
 	  <variablelist>
-		<varlistentry>
-		  <term id="dialog.preferences.tm.matches.sortfuzzymatchesby">Sort fuzzy matches by:</term>
+		<varlistentry id="dialog.preferences.tm.matches.sort.fuzzy.matches.by">
+		  <term id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title">Sort fuzzy matches by:</term>
 
 		  <listitem>
 			<para>By default, the closest matches displayed in the
@@ -1470,8 +1506,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialog.preferences.tm.matches.displayingtagsinnon-omegattmxs">Displaying tags in
+		<varlistentry id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs">
+		  <term id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs.title">Displaying tags in
 		  non-OmegaT TMXs</term>
 
 		  <listitem>
@@ -1480,8 +1516,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialog.preferences.tm.matches.matchdisplaytemplate">Match display template</term>
+		<varlistentry id="dialog.preferences.tm.matches.match.display.template">
+		  <term id="dialog.preferences.tm.matches.match.display.template.title">Match display template</term>
 
 		  <listitem>
 			<para>Change how fuzzy matches are displayed, through the use of
@@ -1589,9 +1625,9 @@
 	  in different ways.</para>
 
 	  <variablelist>
-		<varlistentry>
+		<varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non-unique.segments">
 		  <term
-			  id="dialog.preferences.view.includethefirstnon-uniquesegmentwhenmarkingnon-uniquesegments">Include
+			  id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non-unique.segments.title">Include
 		  the first non-unique segment when marking non-unique segments</term>
 
 		  <listitem>
@@ -1603,13 +1639,13 @@
 	  </variablelist>
 	</section>
 
-	<section id="dialogs.preferences.savingandoutput">
-	  <title id="dialogs.preferences.savingandoutput.title">Saving and
+	<section id="dialogs.preferences.saving.and.output">
+	  <title id="dialogs.preferences.saving.and.output.title">Saving and
 	  Output</title>
 
 	  <variablelist>
-		<varlistentry>
-		  <term id="dialog.preferences.savingandoutput.interval">Saving interval</term>
+		<varlistentry id="dialog.preferences.saving.and.output.interval">
+		  <term id="dialog.preferences.saving.and.output.interval.title">Saving interval</term>
 		  <listitem>
 			<para>Allows the user select the interval - in minutes and seconds -
 			between consecutive automatic saves of the project.</para>
@@ -1631,8 +1667,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialogs.preferences.savingandoutput.externalpost-processingcommand">External Post-processing
+		<varlistentry id="dialogs.preferences.saving.and.output.external.post-processing.command">
+		  <term id="dialogs.preferences.saving.and.output.external.post-processing.command.title">External Post-processing
 		  Command</term>
 
 		  <listitem>
@@ -1646,8 +1682,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialogs.preferences.savingandoutput.alsoallowper-projectexternalcommands">Also allow per-project
+		<varlistentry id="dialogs.preferences.saving.and.output.also.allow.per-project.external.commands">
+		  <term id="dialogs.preferences.saving.and.output.also.allow.per-project.external.commands.title">Also allow per-project
 		  external commands</term>
 
 		  <listitem>

@@ -5,9 +5,13 @@
   <title>Project folder</title>
 
   <para>An OmegaT project is a folder containing files and subfolders.</para>
+  <para>You can access the project folder and all its subfolders by using <link
+  linkend="menus.project.access.project.contents"
+  endterm="menus.project.access.project.contents.title"/> in the <link
+  linkend="menus.project" endterm="menus.project.title"/> menu.</para>
 
-  <section id="projectfolder.source">
-    <title>source</title>
+  <section id="project.folder.source">
+    <title id="project.folder.source.title">source</title>
 
     <para>The source subfolder contains files to be translated. You can add
     the files to it later. Note that the structure of the source subfolder may
@@ -17,8 +21,8 @@
     structure intact.</para>
   </section>
 
-  <section id="projectfolder.target">
-    <title>target</title>
+  <section id="project.folder.target">
+    <title id="project.folder.target.title">target</title>
 
     <para>This subfolder is initially empty. To add contents to it, select
     <menuchoice>
@@ -41,15 +45,16 @@
     will hereby remain in the source language.</para>
   </section>
 
-  <section id="projectfolder.tm">
-    <title>tm</title>
+  <section id="project.folder.tm">
+    <title id="project.folder.tm.title">tm</title>
 
-    <para>The <filename class="directory">tm</filename> folder can contain any number of ancillary translation
-    memories - i.e. tmx files. Such files can be created in any of the three
-    varieties indicated above. Note that other CAT tools can export (and
-    import as well) tmx files, usually in all three forms. The best thing of
-    course is to use OmegaT-specific TMX files (see above), so that the
-    in-line formatting within the segment is retained.</para>
+    <para>The <filename class="directory">tm</filename> folder can contain any
+    number of ancillary translation memories - i.e. tmx files. Such files can be
+    created in any of the three varieties indicated above. Note that other CAT
+    tools can export (and import as well) tmx files, usually in all three
+    forms. The best thing of course is to use OmegaT-specific TMX files (see
+    above), so that the in-line formatting within the segment is
+    retained.</para>
 
     <para>The contents of translation memories in the <filename class="directory">tm</filename> subfolder serve to
     generate suggestions for the text(s) to be translated. Any text, already
@@ -78,8 +83,8 @@
     <para>Note that the TMX files in the <filename class="directory">tm</filename> folder can be compressed with
     gzip.</para>
 
-    <section id="projectfolder.tmauto">
-      <title>tm/auto</title>
+    <section id="project.folder.tm.auto">
+      <title id="project.folder.tm.auto.title">tm/auto</title>
 
       <para>If it is clear from the very start, that translations in a given
       TM (or TMs) are all correct, one can put them into the <filename class="directory">tm/auto</filename> folder and avoid confirming a lot
@@ -105,8 +110,8 @@
       Translation Unit is added.</para>
     </section>
 
-    <section id="projectfolder.tmenforce">
-      <title>tm/enforce</title>
+    <section id="project.folder.tm.enforce">
+      <title id="project.folder.tm.enforce.title">tm/enforce</title>
 
       <para>If you have no doubt that a TMX is more accurate than the
       <filename>project_save.tmx</filename> of OmegaT, put this TMX in
@@ -148,8 +153,8 @@
       enforcements aren't kept at all.</para>
     </section>
 
-    <section id="projectfolder.tmmt">
-      <title>tm/mt</title>
+    <section id="project.folder.tm.mt">
+      <title id="project.folder.tm.mt.title">tm/mt</title>
 
       <para>In the editor pane, when a match is inserted from a TMX contained
       in a folder named <filename class="directory">mt</filename>, the background of the active
@@ -157,8 +162,8 @@
       segment is left.</para>
     </section>
 
-    <section id="projectfolder.tmpenalty">
-      <title>tm/penalty-xxx</title>
+    <section id="project.folder.tm.penalty">
+      <title id="project.folder.tm.penalty.title">tm/penalty-xxx</title>
 
       <para>Sometimes, it is useful to distinguish between high-quality
       translation memories and those that are, because of the subject matter,
@@ -172,8 +177,8 @@
     </section>
   </section>
 
-  <section id="projectfolder.dictionary">
-    <title>dictionary</title>
+  <section id="project.folder.dictionary">
+    <title id="project.folder.dictionary.title">dictionary</title>
 
     <para>Initially empty, this folder will contain dictionaries you have
     added to the project. See <link
@@ -181,8 +186,8 @@
     subject.</para>
   </section>
 
-  <section id="projectfolder.glossary">
-    <title>glossary</title>
+  <section id="project.folder.glossary">
+    <title id="project.folder.glossary.title">glossary</title>
 
     <para>This folder is initially empty. It will contain glossaries you will
     be using in the project. See <link
@@ -190,8 +195,8 @@
     subject.</para>
   </section>
 
-  <section id="projectfolder.omegat">
-    <title>omegat</title>
+  <section id="project.folder.omegat">
+    <title id="project.folder.omegat.title">omegat</title>
 
     <para>The <filename class="directory">omegat</filename> subfolder contains at
     least one and possibly several other files. The most important file here
@@ -216,7 +221,6 @@
 
       <varlistentry>
         <term>ignored_words.txt.</term>
-
         <term>learned_words.txt</term>
 
         <listitem>
@@ -263,16 +267,16 @@
     </variablelist>
   </section>
 
-  <section id="projectfolder.omegat.project">
-    <title>omegat.project (file)</title>
+  <section id="project.folder.omegat.project">
+    <title id="project.folder.omegat.project.title">omegat.project (file)</title>
 
     <para>Contains project parameters as defined in the <link
     linkend="dialogs.projectproperties">Project properties</link>
     dialog.</para>
   </section>
 
-  <section id="projectfolder.repositories">
-    <title>.repositories</title>
+  <section id="project.folder.repositories">
+    <title id="project.folder.repositories.title">.repositories</title>
 
     <para>In a team project, this folder contains a versioned copy of the
     project tree structure linked directly to the remote server.</para>

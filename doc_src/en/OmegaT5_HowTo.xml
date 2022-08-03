@@ -7,22 +7,29 @@
   <xi:include href="HowTo_CreateNewProject.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
   
-  <xi:include href="HowTo_SetUpTeamProject.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="HowTo_UseTeamProject.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
   <xi:include href="HowTo_ReuseTM.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="HowTo_PreventDataLoss.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="HowTo_TranslatePDF.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
   <xi:include href="HowTo_ManageRTL.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
+  <xi:include href="HowTo_TranslatePDF.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<xi:include href="HowTo_CommandLine.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+<xi:include href="HowTo_SetUpTeamProject.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="HowTo_UseTeamProject.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+
+  <xi:include href="HowTo_Troubleshooting.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
 </chapter>

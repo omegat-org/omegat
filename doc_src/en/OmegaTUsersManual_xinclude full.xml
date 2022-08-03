@@ -45,9 +45,6 @@
   <xi:include href="OmegaT5_HowTo.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Troubleshooting.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
   <xi:include href="App_Dictionaries.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

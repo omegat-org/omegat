@@ -10,14 +10,15 @@
 <chapter id="installing.and.running.omegat">
   <title id="installing.and.running.omegat.title">Installing and running OmegaT</title>
 
-  <para>TODO OmegaT requires a &javaversionlong; installed on your machine to
+  <para>OmegaT requires a &javaversionlong; installed on your machine to
   run. The download system proposes you packages that include one already
-  bundled or generic packages that rely on you having a
-  &javaversionlong; installed system-wide.</para>
+  bundled or generic packages that rely on you having a &javaversionlong;
+  installed system-wide. For licencing considerations, OmegaT prefers the &preferedopenjdk;
+  but any OpenJDK compatible runtime environment should work.</para>
 
   <para>OmegaT comes in 2 versions: the standard version, that is suitable to run every day and that comes with an updated reference manual and the code version, that includes all the current developments and is more suitable for testing new features.</para>
 
-  <para>The download site is TODO here and all the packages indicated below are linked to that site.</para>
+  <para>The download site is <ulink url="https://omegat.org/download"><citetitle>here</citetitle></ulink> and all the packages indicated below are available from that site.</para>
 
   <section id="installing.omegat">
 	<title id="installing.omegat.title">Installing OmegaT</title>
@@ -214,49 +215,30 @@
 	<section id="installing.omegat.other.systems">
 	  <title>Other systems</title>
 
-	  <para>TODO This information applies to systems such as Solaris SPARC/x86/x64,
+	  <para>This information applies to systems such as Solaris SPARC/x86/x64,
 	  Linux x64/PowerPC, Windows x64.</para>
 
+	  <para>For other systems, only the generic non-bundled OmegaT version is
+	  offered. Make sure that your system has a Java version compatible with
+	  &javaversionlong;.</para>
+
 	  <section id="installing.omegat.other.systems.download.the.package">
-		<title>Download the right
-		package</title>
+		<title>The OmegaT generic package</title>
 
-		<para>Users of other systems must have a &javaversionlong; on
-		their system to be able to use OmegaT.</para>
+			<para>Download
+			<filename>OmegaT_&vernb;_Without_JRE.zip</filename>. This package
+			can be used on any system where a &javaversionlong; is
+			installed.</para>
 
-		<para>[TODO] Do you have a Java implementation compatible with &javaversionlong;?</para>
-
-		<itemizedlist>
-		  <listitem>
-			<para><emphasis role="bold">Yes:</emphasis> download
-			<filename>OmegaT_&vernb;_Windows_without_JRE.zip</filename>. This
-			package can be used on any system where a &javaversionlong;
-			is installed.</para>
-		  </listitem>
-
-		  <listitem>
-			<para><emphasis role="bold">I don't know:</emphasis> open a terminal
-			and type <command>java -version</command>. If a "command not found" or
-			similar message is returned, it is likely that Java is not installed
-			on your system.</para>
-		  </listitem>
-
-		  <listitem>
-			<para><emphasis role="bold">No:</emphasis> obtain a &javaversionlong; for your
-			system (see below) and download
-			<filename>OmegaT_&vernb;_Without_JRE.zip</filename>.</para>
-
-			<para>[TODO] The Eclipse Foundation provides OpenJDK Runtime
+			<para>The Eclipse Foundation provides OpenJDK Runtime
 			Environments JREs for other systems at <ulink
-			url="http://www.oracle.com/technetwork/java/archive-139210.html"/>.</para>
+			url="&eclipsedownloads;"/>.</para>
 
-			<para>[TODO] IBM provides JREs for Linux PowerPC at <ulink
-			url="http://www.ibm.com/developerworks/java/jdk/linux/download.html"/>.</para>
+			<para>IBM provides JREs for Linux PowerPC at <ulink
+			url="&ibmdownloads;"/>.</para>
 
 			<para>Follow the installation instructions of the package you
 			need.</para>
-		  </listitem>
-		</itemizedlist>
 	  </section>
 
 	  <section id="installing.omegat.other.systems.install.the.package">

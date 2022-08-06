@@ -1,12 +1,68 @@
+/* reset some of the wh styesheet */
+
+* {
+}
+
+
+/* default color as variables */
+:root {
+	--main-color:#77A43B;
+	--insert-background:#F5F5F5; /* note, warning */
+	--link-color:#DE5B17;
+	--hover-color:#AB5421;
+	--normal-font:#3F3F3F;
+	--normal-background:#FDFDFD;
+	--accent-line:#BCBCBC;
+	--warning-header:#ff5555;
+	--caps-border:#408000;
+	--term-match:blue;
+	--match-background:#BFFFBC;
+	--replace-color:#FD8A00;
+	
+	--intro-color:#77A43B;
+	--panes-color:#DE5B17;
+	--menus-color:#179ADE;
+	--windows-color:#DEBF17;
+	--project-color:#DE1737;
+	--prefs-color:#0059B3;
+	--howto-color:#B300B3;
+	--appendices-color:#00B3B3;
+	--support-border:solid 6px;
+}
+
+/*
+#EBEBEB
+#DE5B17
+#AB5421
+#2F3A2F
+*/
+
+h1, h2, h3, h4, dt {
+    color: var(--main-color);
+}
+
+#wh-navigation {
+	margin-right:3em;
+}
+#wh-toc a.wh-toc-selected {
+	color:var(--normal-font) !important;
+	border-bottom-width:0px !important;
+	font-weight:bold;
+	font-size: 1.1em;
+}
+
 #wh-content {
     font-family: sans-serif;
-    font-size: 10pt;
-    background-color: #FDFDFD;
+	/*    font-size: 10pt; */
+    background-color: var(--normal-background);
     line-height: 1.5;
-    color:#212925;
-    text-align:justify;
+    color:var(--normal-font);
+    text-align:left;
     clip-path: padding-box;
+}
 
+#wh-toc a {
+	font-style: normal;
 }
 
 
@@ -17,66 +73,60 @@
     display:none;
 }
 
-
 .chapter,
 .appendix {
     margin-left:3em;
-    margin-right:10em;
+    margin-right:6em;
     padding-bottom: 5em;
 
 }
 
 
 @media screen and (max-width: 640px) {
-.chapter,
-.appendix {
-    margin-left:1em;
-    margin-right:2em;
-    padding-bottom: 5em;
-}
+	.chapter,
+	.appendix {
+		margin-left:1em;
+		margin-right:2em;
+		padding-bottom: 5em;
+	}
 }
 
 @media screen and (min-width: 641px) and (max-width: 1072px) {
-.chapter,
-.appendix {
-    margin-left:1em;
-    margin-right:3em;
-    padding-bottom: 5em;
+	.chapter,
+	.appendix {
+		margin-left:1em;
+		margin-right:3em;
+		padding-bottom: 5em;
+	}
 }
-}
-h1, h2, h3, h4, dt {
-    color: #006c6c;
-}
+
 
 h1 {
     /*
     position:fixed;
     margin-top: 150px;
     width:100%;
-    background-color:#FDFDFD;
-
-    */
+    background-color:var(--normal-background);
+   */
 
     line-height: 1.13;
     margin-top : 0;
     padding-bottom: .3em;
     margin-bottom: 0;
     padding-left:3em;
-    border-bottom:1px solid teal;
     margin-left:-3em;
     margin-right:0em;
 }
 
 
 @media screen and (max-width: 640px) {
-h1 {
-    padding-left:1em;
-    margin-left:-1em;
-    margin-right:-1rem;
+	h1 {
+		padding-left:1em;
+		margin-left:-1em;
+		margin-right:-1rem;
 
+	}
 }
-}
-
 
 
 h2 {
@@ -84,7 +134,7 @@ h2 {
     line-height: 1.2;
     margin: 0.8em 0;
     padding-top: 1em;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid var(--accent-line);
 }
 
 h3 {
@@ -113,23 +163,10 @@ h6:first-child {
 
 
 
-.keycap {
-    display:inline-block;
-    font-size: .6rem;
-    border: 1px solid black;
-    border-radius:4px;
-    background: #ececec;
-    padding-left:.15rem;
-    padding-right:.15rem;
-    padding-top:.1rem;
-    margin-right:.1rem;
-    white-space:nowrap;
-}
-
 
 /*
 code, .code {
-    color: black;;
+    color: var(--normal-font);;
     background: #ffffcc;
     border-style: solid;
     border-width: 1px;
@@ -137,6 +174,7 @@ code, .code {
     vertical-align: baseline;
 }
 */
+
 p,
 pre,
 ol,
@@ -150,7 +188,7 @@ hr {
 hr {
     height: 1px;
     border-style: none;
-    background-color: #D0D0D0;
+    background-color: var(--accent-line);
 }
 
 blockquote {
@@ -158,17 +196,18 @@ blockquote {
 }
 
 code.filename {
-    color: #333;
-    font-weight:800;
-    font-size:1.1em;
+	color:var(--main-color);
 }
 
 .programlisting,
 .literallayout {
-    border: 1px solid teal ;
-    background: #F0F0F0;
+	background-color:var(--normal-background);
+	font-weight: 100;
+	font-size: 1em;	
+	text-align:left;		
+
+    border: 1px solid var(--accent-line) ;
     padding: 1em;
-    font-weight: bold;
     border-radius: 5px;
 }
 
@@ -176,28 +215,25 @@ code.filename {
     font-weight: bold;
 }
 
-
-
 code,
 tt,
 kbd,
 samp,
 var,
 pre {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: 1.1em;
-    line-height: 1.63;
+    font-family: monospace;
+    font-size: 1.3em;
 }
 
 kbd {
     font-weight: bold;
-    border: 1px solid #808080;
+    border: 1px solid var(--hearder-bottom);
     border-radius: 3px;
     padding: 0.125em 0.25em;
 }
 
 samp {
-    background-color: #F0F0F0;
+    background-color: var(--insert-background);
     padding: 0.125em 0.25em;
 }
 
@@ -216,13 +252,13 @@ cite {
 
 dfn {
     font-style: italic;
-    border-bottom: 1px dotted #808080;
+    border-bottom: 1px dotted var(--hearder-bottom);
 }
 
 pre {
-    white-space: pre;
-    background-color: #F0F0F0;
-    border: 1px dotted #D0D0D0;
+    var(--normal-background)-space: pre;
+    background-color: var(--insert-background);
+    border: 1px dotted var(--hearder-bottom);
     padding: 0.5em;
     margin: 1.1em 0; /* 1/0.917 */
 }
@@ -294,8 +330,6 @@ dd {
 }
 
 
-
-
 .new {
     font-size: x-small;
     color: red;
@@ -308,26 +342,29 @@ dd {
 }
 
 .note {
-    font-size: small;
-    color: black;
-    background-color: white;
-    border: 1px solid #808080;
+	/*    font-size: small; */
+	font-size: 0.9em;
+    color: var(--normal-font);
+    background-color:var(--insert-background);
+    border: 1px solid var(--accent-line);
     border-radius:5px;
     margin-bottom:1em;
     padding:0 1em;
 }
+
 .note h3 {
     display:inline-block;
     margin:.5em 0 0 0;
 }
 
 .warning {
-    font-size: small;
-    color: black;
-    background: white;
-    border: 1px solid #FFA0A0;
+	/*    font-size: small; */
+	font-size: 0.9em;
+    color: var(--normal-font);
+    background: var(--insert-background);
+    border: .1px solid var(--accent-line);
     border-radius:5px;
-    margin-bottom:1em;
+    margin:2em 0;
     padding:0 1em;
 
 }
@@ -335,57 +372,77 @@ dd {
 .warning h3 {
     display:inline-block;
     margin:.5em 0 0 0;
-    color:red;
+    color:var(--warning-header);
 }
 
-.guimenu {
-    background-color:#F0F0F0;
-    padding:0 .5em;
-    font-family:monospace;
-    font-weight:bold;
 
-}
 
-/* liens */
+/* links */
+
 
 a {
-    text-decoration:none;
+	color: var(--link-color);
+	text-decoration-color: var(--link-color);
+	text-decoration-line: underline;
+	text-decoration-style: dotted;
 }
-a:link {
-    color:teal;
-}
-a:visited{
-    color:slategrey;
-}
-a.ulink:link {
-    color:steelblue;
-}
-a.ulink:visited {
-    color:midnightblue;
-}
+
 a:hover {
-    text-decoration:underline;
+	color:var(--hover-color);
+	text-decoration-color: var(--hover-color);
+	text-decoration-line: underline;
+	text-decoration-style: dotted;
+}
+
+a:visited {
+}
+a.ulink::after {
+	content: " ↗️";
 }
 
 
-/* tableaux */
+.toc a:link {
+	text-decoration:none;
+}
+
+
+a.ulink:link {
+    color:var(--caps-border);
+	text-decoration-color: var(--caps-border);	
+}
+
+a.ulink:visited {
+    color:var(--caps-border);
+	text-decoration-color: var(--caps-border);	
+}
+
+/* tables */
 
 .table-title {
     font-style:italic;
-    color: teal;
+    color: var(--main-color);
     font-size : .9em;
     margin-bottom: .75em;
 }
 
+
 td,th {
     padding: .5em 1em;
+}
+
+.table[id*="app.shortcuts.lists.function.codes"] .table-contents {
+	font-size:0.6em;
+}
+
+.table[id*="app.shortcuts.lists.function.codes"] table {
+	width:100%;
 }
 
 /* figures */
 
 .figure-title {
     font-style:italic;
-    color: teal;
+    color: var(--main-color);
     font-size : .9em;
     margin-bottom: .75em;
 }
@@ -394,6 +451,23 @@ td,th {
     max-width: 100%;
     height: auto;
 
+}
+
+/* examples */
+
+.example-title {
+    font-style:italic;
+    color: var(--main-color);
+    font-size : .9em;
+    margin-bottom: .75em;
+}
+
+.example-contents {
+    border-style: solid;
+    border-width: 1px;
+    border-radius:3px;
+    padding: 2px 1em;
+    vertical-align: baseline;
 }
 
 /* code */
@@ -405,9 +479,62 @@ pre.programlisting em.parameter {
 pre.programlisting {
     overflow-x : auto;
     text-align:left;
-    padding: 1.2em 0.5em 0 1.5em;
+	/*    padding: 1.2em 0.5em 0 1.5em; */
 }
 
+a[href^="appendix"], a[href^="how.to"] {
+	font-style: italic;
+}
+
+/* gui items */
+
+span.guimenu, span.guimenuitem, span.guilabel {
+	font-style: italic;
+    font-size: 1.2 em;
+    padding: 0 .3rem;
+    margin: 0 .2rem;
+    color: var(--normal-font);
+}
+
+span.guibutton {
+    font-family:monospace;
+	font-size: 1.2em;
+    border: .1px solid var(--normal-font);
+    border-radius:4px;
+    padding: 0 .3rem;
+    margin: 0 .2rem;
+    background: var(--insert-background);
+    color: var(--normal-font);
+}
+
+/* keycaps */
+
+.keycap,
+td>span.keycaps,
+span.term>span.keycap {
+    display:inline-block;
+    font-size: .8rem;
+    border: 1px solid var(--normal-font);
+    border-radius:4px;
+    margin: 0 .2rem;
+    background: var(--insert-background);
+    color: var(--normal-font);
+	padding-left:.3rem;
+	padding-right:1.2rem; 
+}
+
+section.section>p>span.keycap:last-of-type, 
+p span.keycap:last-of-type, 
+dd span.keycap:last-of-type, 
+li.listitem span.keycap:last-of-type, 
+span.term>span.keycap:last-of-type, 
+div.example-contents span.keycap:last-of-type, 
+p > span.keycap:last-child  {
+    background: var(--main-color);
+    color: var(--normal-background);
+    border-color: var(--caps-border);
+    padding: 0 .3rem;
+} 
 
 /* index page */
 #wh-content .book  div.toc {
@@ -442,9 +569,9 @@ pre.programlisting {
 
     width: 45%;
 
-    border: 1px solid #D0D0D0;
+    border: 1px solid var(--accent-line);
     border-radius:3px;
-    background:white;
+    background:var(--normal-background);
     margin-right:3%;
     margin-top:30px;
     padding-bottom:20px;
@@ -453,7 +580,7 @@ pre.programlisting {
 
 #wh-content .book  div.toc h2 {
     font-size: 1.2em;
-    color:teal;
+    color:var(--main-color);
     font-weight:bold;
     margin:.8rem 1rem 0 1rem;
 }
@@ -481,10 +608,10 @@ pre.programlisting {
 
 #wh-header {
     border-bottom-width: 1px;
-    border-bottom-color: #DDE1E4;
+    border-bottom-color: var(--accent-line);
     border-bottom-style: solid;
-    background-color:teal;
-    color:white;
+    background-color:var(--main-color);
+    color:var(--normal-background);
 }
 
 #wh-header .logo {
@@ -494,7 +621,8 @@ pre.programlisting {
 
 #wh-header .title {
     display:inline;
-    font-size:18pt;
+	/*    font-size:18pt; */
+	font-size:1.8em;
     font-family: sans-serif;
     font-weight:bold;
     vertical-align: middle;
@@ -502,6 +630,319 @@ pre.programlisting {
 
 }
 #wh-header .title a {
-    color:white;
+    color:var(--normal-background);
     text-decoration:none;
+}
+
+/* 
+.chapter > .titlepage {
+    position: -webkit-sticky;
+    position: sticky;
+    top: -1em;
+    padding-top: 1em;
+    background-color: var(--normal-background);
+}
+*/
+
+
+/* introduction side color */
+a[href="chapter.instant.start.guide.html"] ~ ul {
+	border-left: var(--support-border) var(--intro-color);
+}
+
+h2:has(a[href="chapter.instant.start.guide.html"]) ~ ul {
+	border-right: var(--support-border) var(--intro-color);
+	padding-right: 1em;
+}
+
+
+#chapter\.instant\.start\.guide {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--intro-color);
+	border-bottom: var(--support-border) var(--intro-color);
+}
+
+/* panes side color */
+a[href="panes.html"] ~ ul {
+	border-left: var(--support-border) var(--panes-color);
+}
+
+h2:has(a[href="panes.html"]) ~ ul {
+	border-right: var(--support-border) var(--panes-color);
+	padding-right: 1em;
+}
+
+#panes {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--panes-color);
+	border-bottom: var(--support-border) var(--panes-color);
+}
+
+/* menus side color */
+a[href="menus.html"] ~ ul {
+	border-left: var(--support-border) var(--menus-color);
+}
+
+h2:has(a[href="menus.html"]) ~ ul {
+	border-right: var(--support-border) var(--menus-color);
+	padding-right: 1em;
+}
+#menus {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--menus-color);
+	border-bottom: var(--support-border) var(--menus-color);
+}
+
+/* href="windows.and.dialogs.html" */
+
+a[href="windows.and.dialogs.html"] ~ ul {
+	border-left: var(--support-border) var(--windows-color);
+}
+
+h2:has(a[href="windows.and.dialogs.html"]) ~ ul {
+	border-right: var(--support-border) var(--windows-color);
+	padding-right: 1em;
+}
+#windows\.and\.dialogs {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--windows-color);
+	border-bottom: var(--support-border) var(--windows-color);
+}
+
+/* href="project.folder.html" */
+
+a[href="project.folder.html"] ~ ul {
+	border-left: var(--support-border) var(--project-color);
+}
+
+h2:has(a[href="project.folder.html"]) ~ ul {
+	border-right: var(--support-border) var(--project-color);
+	padding-right: 1em;
+}
+#project\.folder {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--project-color);
+	border-bottom: var(--support-border) var(--project-color);
+}
+
+/* href="configuration.folder.html" */
+
+a[href="configuration.folder.html"] ~ ul {
+	border-left: var(--support-border) var(--config-color);
+}
+
+h2:has(a[href="configuration.folder.html"]) ~ ul {
+	border-right: var(--support-border) var(--config-color);
+	padding-right: 1em;
+}
+#configuration\.folder {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--config-color);
+	border-bottom: var(--support-border) var(--config-color);
+}
+
+/* href="dialogs.preferences.html" */
+
+a[href="dialogs.preferences.html"] ~ ul {
+	border-left: var(--support-border) var(--prefs-color);
+}
+
+h2:has(a[href="dialogs.preferences.html"]) ~ ul {
+	border-right: var(--support-border) var(--prefs-color);
+	padding-right: 1em;
+}
+#dialogs\.preferences {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--prefs-color);
+	border-bottom: var(--support-border) var(--prefs-color);
+}
+
+/* href="how.to.html" */
+
+a[href="how.to.html"] ~ ul {
+	border-left: var(--support-border) var(--howto-color);
+}
+
+h2:has(a[href="how.to.html"]) ~ ul {
+	border-right: var(--support-border) var(--howto-color);
+	padding-right: 1em;
+}
+#how\.to {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--howto-color);
+	border-bottom: var(--support-border) var(--howto-color);
+}
+
+/* href="appendices.html" */
+
+a[href="appendices.html"] ~ ul {
+	border-left: var(--support-border) var(--appendices-color);
+}
+
+h2:has(a[href="appendices.html"]) ~ ul {
+	border-right: var(--support-border) var(--appendices-color);
+	padding-right: 1em;
+}
+#appendices {
+	padding-right: 2em;
+	border-right: var(--support-border) var(--appendices-color);
+	border-bottom: var(--support-border) var(--appendices-color);
+}
+
+/* specific items */
+
+.example-contents {
+	background-color:var(--insert-background);
+}
+
+/* status bar */
+
+/* messages */
+#panes\.statusbar\.messages > div.example-contents {
+	background-color:var(--normal-background);	
+}
+																
+#panes\.statusbar\.widgets > div.example-contents > p {
+	background-color:var(--insert-background);
+    border: 0.1px solid var(--normal-font) ;
+	border-radius: 0px;
+	text-align: left;
+}
+
+#panes\.statusbar\.messages > div.example-contents > p > .literal {
+	background-color:var(--insert-background);
+    border: 0.1px solid var(--normal-font) ;
+    padding: 0.5em 5em 0.5em 1em;
+	box-shadow: 0.5px 0.5px;
+	font-size:1em;
+}
+
+/* widget */
+
+#panes\.statusbar\.widgets > div.example-contents {
+	background-color:var(--normal-background);
+}
+
+#panes\.statusbar\.widgets > div.example-contents > p  {
+	background-color:var(--insert-background);
+    border: 0.1px solid var(--normal-font) ;
+    padding: 0.5em 5em 0.5em 1em;
+	box-shadow: 0.5px 0.5px;
+	text-align: left;
+}
+
+#panes\.statusbar\.widgets > div.example-contents > p > .literal {
+	font-size:1em;	
+}
+
+#panes\.statusbar\.widgets > div.example-contents > p > .literal > .token {
+    border: 0.1px solid var(--normal-font) ;
+    padding: 3px;	
+}
+
+/* widget with % */
+#panes\.statusbar\.widgets\.percentage > div.example-contents {
+	background-color:var(--normal-background);	
+}
+
+#panes\.statusbar\.widgets\.percentage > div.example-contents > p {
+	background-color:var(--insert-background);
+    border: 0.1px solid var(--normal-font) ;
+    padding: 0.5em 5em 0.5em 1em;
+	box-shadow: 0.5px 0.5px;
+	text-align: left;
+	font-size:1em;
+}
+
+#panes\.statusbar\.widgets\.percentage > div.example-contents > p > .literal {
+		font-size:1em;
+}
+
+#panes\.statusbar\.widgets\.percentage > div.example-contents > p > .literal > .token {
+    border: 0.1px solid var(--normal-font) ;
+    padding: 3px;	
+}
+
+
+/* fuzzy match */
+
+#the\.first\.match .token {
+	color:var(--term-match);
+}
+
+/* glossary match */ 
+
+#glossary\.matches .token {
+	font-weight:bold;
+}
+
+#glossary\.matches > div.example-contents > pre > span:nth-child(2) {
+	font-weight:100;	
+}
+
+#no\.source\.file\.display > div.example-contents > pre > span {
+	font-weight:bold;
+}
+
+/* search */
+#search\.for\.doitsu > div.example-contents > pre > .token {
+	color:var(--term-match);
+	font-weight:bold;
+}
+
+
+#select\.second\.match > div.example-contents > pre > span.action {
+	background-color:var(--match-background);
+}
+
+/* replace */
+
+#replace\.with\.allemand > div.example-contents > pre > span:nth-child(1) {
+	color:var(--term-match);	
+}
+
+#replace\.with\.allemand > div.example-contents > pre > span:nth-child(2) {
+	color:var(--replace-color);
+}
+
+/* convert match numbers */
+
+#convert\.match\.numbers > div.example-contents .token {
+	font-weight:bold;	
+}
+
+/* bridge two languages */
+
+#bridge\.english\.and\.french\.with\.japanese > div.example-contents > pre > span:nth-child(1) {
+	background-color:var(--match-background);
+	font-weight:bold;
+}
+
+#bridge\.english\.and\.french\.with\.japanese > div.example-contents > pre > span:nth-child(2) {
+	font-weight:bold;
+}
+
+/* editor pane */
+
+#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre {
+	border-left: 10px solid lightgrey;
+}
+
+#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(1) {
+	background-color:var(--match-background);
+	font-weight:bold;	
+}
+
+#panes\.editor\.default\.editor\.writing\.space > div.example-contents > pre > span:nth-child(2) {
+	font-weight:bold;	
+}
+
+#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre  {
+}
+#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(2) {
+	float:left;
+}
+
+#panes\.editor\.modified\.editor\.target\.field > div.example-contents > pre > span:nth-child(4) {
+	float:left;	
 }

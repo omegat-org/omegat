@@ -4,8 +4,8 @@
 <appendix id="appendix.shortcut">
   <title id="appendix.shortcut.title">OmegaT shortcuts</title>
 
-  <section id="appendix.shortcut.use">
-    <title>Shortcuts description in this manual</title>
+  <section id="appendix.shortcut.description">
+    <title id="appendix.shortcut.description.title">Shortcuts description in this manual</title>
 
     <para>OmegaT generally does not use buttons to give you access to its
     functions. The functions are available from the menus and most of them have

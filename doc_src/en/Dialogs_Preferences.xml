@@ -4,13 +4,11 @@
 <section id="dialogs.preferences">
   <title id="dialogs.preferences.title">General Preferences</title>
 
-  <para>This dialog is accessible by selecting <menuchoice>
-  <guimenuitem>Options</guimenuitem>
+  <para>This dialog is accessible by selecting <link linkend="menus.options.preferences" endterm="menus.options.preferences.title"/> in the <link linkend="menus.options" endterm="menus.options.title"/> menu.</para>
 
-  <guimenuitem>Preferences...</guimenuitem>
-  </menuchoice></para>
+  <para>Preferences set here apply to all the translation projects.</para>
 
-  <para>It allows parameters to be set for all translation projects.</para>
+  <note><para>Preferences are stored in the default configuration folder. See <link linkend="configuration.folder" endterm="configuration.folder.title"/> for details. It is possible to have OmegaT use a different configuration folder, for exemple to use project-specific configurations. See <link linkend="launch.with.command.line.omegat.command.arguments.starting.in.console.mode" endterm="launch.with.command.line.omegat.command.arguments.starting.in.console.mode.title"/> for details. If you use such a configuration folder, all the modifications made in this dialog will be stored in that folder.</para></note>
 
   <section id="dialogs.preferences.general">
     <title id="dialogs.preferences.general.title">General</title>
@@ -400,26 +398,18 @@
           the option is off, the source text will be copied to the target
           segment.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para>
             <guilabel>Skip PO header</guilabel>
           </para>
-
           <para>The PO header will be skipped and left unchanged if this
           option is checked.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para>
             <guilabel>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;' in
             header</guilabel>
           </para>
-
           <para>
             <emphasis>This option allows OmegaT to override the specification
             in the PO file header and use the default for the selected target
@@ -438,40 +428,27 @@
           selected attributes will appear as segments in the Editor
           window.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><guilabel>Start a new paragraph on</guilabel>: the &lt;br&gt;
           HTML tag will constitute a paragraph break for segmentation
           purposes.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><guilabel>Skip text matching regular expression</guilabel>:
           any text matching the regular expression is skipped. It is shown in
           red in the tag validator. Text in source segments that matches is
           shown in italics.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><guilabel>Do not translate the content attribute of meta-tags
           ...</guilabel>: the meta-tags in the box will not be
           translated.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><guilabel>Do not translate the content of tags with the
           following attribute key-value pairs (separate with
           commas)</guilabel>: if a tag matches the list of key-value pairs,
           its content will be ignored.</para>
-
           <para>It is sometimes useful to be able make certain tags
           untranslatable based on the values of their attributes. For example,
           <literal>&lt;div class="hide"&gt; &lt;span
@@ -493,30 +470,18 @@
           <para><emphasis role="bold">Word:</emphasis> non-visible instruction
           text, comments, footnotes, endnotes, footers</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Excel: </emphasis>comments, sheet
           names</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Power Point</emphasis>: slide comments,
           slide masters, slide layouts</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Global:</emphasis> charts, diagrams,
           drawings, WordArt</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para>
             <emphasis role="bold">Other Options:</emphasis>
@@ -528,7 +493,6 @@
               no translatable text between them will be aggregated into a
               single tag.</para>
             </listitem>
-
             <listitem>
               <para><guilabel>Preserve spaces for all tags</guilabel>: if
               checked, "white space" (i.e. spaces and newlines) will be
@@ -555,48 +519,32 @@
           selecting Always will ensure that this information is included in
           the translated files.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><guilabel>Translate the following attributes</guilabel>: the
           selected attributes will appear as segments in the Editor
           window.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><guilabel>Start a new paragraph on</guilabel>: the &lt;br&gt;
           HTML tag will constitute a paragraph break for segmentation
           purposes.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><guilabel>Skip text matching regular expression</guilabel>:
           any text matching the regular expression is skipped. It is shown in
           red in the tag validator. Text in source segments that matches is
           shown in italics.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><guilabel>Do not translate the content attribute of meta-tags
           ...:</guilabel> The meta-tags in the box will not be
           translated.</para>
         </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
         <listitem>
           <para><guilabel>Do not translate the content of tags with the
           following attribute key-value pairs (separate with
           commas)</guilabel>: if a tag matches the list of key-value pairs,
           its content will be ignored.</para>
-
           <para>It is sometimes useful to be able make certain tags
           untranslatable based on the values of their attributes. For example,
           <literal>&lt;div class="hide"&gt; &lt;span
@@ -604,14 +552,12 @@
           tags to be left untranslated. For the example above, the field would
           contain: <literal>class=hide, translate=no </literal>.</para>
         </listitem>
-
         <listitem>
           <para><guilabel>Compress whitespace in translated
           document</guilabel>: multiple continuous whitespace characters will
           be converted into one single whitespace in the translated
           document.</para>
         </listitem>
-
         <listitem>
           <para><guilabel>Remove HTML comments in translated
           document</guilabel>: commented parts (between &lt;!-- and --&gt;)
@@ -627,7 +573,6 @@
         <listitem>
           <para>You can select which of the following items are to be
           translated:</para>
-
           <para>index entries, bookmarks, bookmark references, notes,
           comments, presentation notes, links (URL), sheet names</para>
         </listitem>
@@ -775,7 +720,7 @@
             generation time in various patterns</para>
 
             <para>See <ulink
-            url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">TODO
+            url="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">
             Oracle documentation</ulink> for examples of the "SimpleDateFormat"
             patterns</para>
           </listitem>

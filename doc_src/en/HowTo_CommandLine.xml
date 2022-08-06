@@ -258,7 +258,7 @@
 	  </section>
 
 	  <section id="launch.with.command.line.omegat.command.arguments.starting.in.console.mode">
-		<title>Starting in console mode</title>
+		<title id="launch.with.command.line.omegat.command.arguments.starting.in.console.mode.title">Starting in console mode</title>
 
 		<para>To start OmegaT in console mode, some
 		extra parameters have to be passed to it on startup. The most important

@@ -160,7 +160,7 @@ blockquote {
 code.filename {
     color: #333;
     font-weight:800;
-    font-size:1.1em;
+/*    font-size:1.1em; */
 }
 
 .programlisting,
@@ -185,8 +185,8 @@ samp,
 var,
 pre {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: 1.1em;
-    line-height: 1.63;
+/*    font-size: 1.1em;
+    line-height: 1.63; */
 }
 
 kbd {
@@ -405,7 +405,7 @@ pre.programlisting em.parameter {
 pre.programlisting {
     overflow-x : auto;
     text-align:left;
-    padding: 1.2em 0.5em 0 1.5em;
+/*    padding: 1.2em 0.5em 0 1.5em; */
 }
 
 

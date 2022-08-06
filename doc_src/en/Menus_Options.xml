@@ -7,7 +7,7 @@
 
   <variablelist>
     <varlistentry id="menus.options.preferences">
-      <term>Preferences...</term>
+      <term id="menus.options.preferences.title">Preferences...</term>
 
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences">Preferences</link>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
   <title>Project folder</title>
@@ -271,7 +271,7 @@
     <title id="project.folder.omegat.project.title">omegat.project (file)</title>
 
     <para>Contains project parameters as defined in the <link
-    linkend="dialogs.projectproperties">Project properties</link>
+    linkend="dialogs.project.properties">Project properties</link>
     dialog.</para>
   </section>
 

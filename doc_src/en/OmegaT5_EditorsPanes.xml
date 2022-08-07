@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="panes">
   <title id="panes.title">Panes</title>
@@ -303,8 +303,8 @@
     memories, both from internal project translation memory created in real time
     as you translate your project and from ancillary translation memories you
     have imported from your earlier jobs, or received from your client or
-    translation agency. See <link linkend="howto.reuse.tm"
-    endterm="howto.reuse.tm.title"/> for details.</para>
+    translation agency. See <link linkend="how.to.reuse.tm"
+    endterm="how.to.reuse.tm.title"/> for details.</para>
 
     <para>When you move to the next segment, the first fuzzy match (the one with
     the best matching percentage) is automatically selected. You may select a

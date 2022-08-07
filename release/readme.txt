@@ -1,4 +1,4 @@
-﻿@TRANSLATION_NOTICE@
+@TRANSLATION_NOTICE@
 
 
 What is OmegaT?
@@ -155,12 +155,11 @@ Contributors
 
 OmegaT is the original work of Keith Godfrey.
 
-Aaron Madlon-Kay is the OmegaT project manager.
+Jean-Christophe Helary is the OmegaT project manager.
 
 Current team:
 (alphabetical order)
 
-- Vincent Bidaux (documentation manager)
 - Marco Cevoli (Telegram community manager)
 - Jean-Christophe Helary (Twitter community manager)
 - Kos Ivantsof (localisation manager)
@@ -174,11 +173,12 @@ Previous contributors include:
 (alphabetical order)
 
 - Anthony Baldwin (localisation manager)
+- Vincent Bidaux (documentation manager)
 - Didier Briel (project manager)
 - Alex Buloichik (lead developer)
 - Sabine Cretella
 - Dmitri Gabinski
-- Jean-Christophe Helary (support group owner, localisation manager)
+- Aaron Madlon-Kay (project manager)
 - Maxym Mykhalchuk (lead developer)
 - Samuel Murray
 - Henry Pijffers (release manager)

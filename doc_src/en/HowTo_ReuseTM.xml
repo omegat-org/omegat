@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.reuse.tm">
-  <title id="howto.reuse.tm.title">Reuse Translation Memories</title>
+<section id="how.to.reuse.tm">
+  <title id="how.to.reuse.tm.title">Reuse Translation Memories</title>
 
   <para>Initially, that is when the project is created, the main TM of the
   project, <filename>project_save.tmx</filename> is empty. This TM gradually
@@ -70,8 +70,8 @@
   removing those that are not required any more, once you have used their
   contents to fill up the <filename>project-save.tmx</filename> file.</para>
 
-  <section>
-    <title>Importing and exporting translation memories</title>
+  <section id="how.to.reuse.tm.importing.and.exporting">
+    <title id="how.to.reuse.tm.importing.and.exporting.title">Importing and exporting translation memories</title>
 
     <para>OmegaT supports imported tmx versions 1.1-1.4b (both level 1 and
     level 2). This enables the translation memories produced by other tools to
@@ -101,8 +101,8 @@
     created.</para>
   </section>
 
-  <section>
-    <title>Creating a translation memory for selected documents</title>
+  <section id="how.to.reuse.tm.creating.a.tm.for.selected.documents">
+    <title id="how.to.reuse.tm.creating.a.tm.for.selected.documents.title">Creating a translation memory for selected documents</title>
 
     <para>In case translators need to share their TMX bases while excluding
     some of their parts or including just translations of certain files,
@@ -161,8 +161,8 @@
     </itemizedlist>
   </section>
 
-  <section>
-    <title>Sharing translation memories</title>
+  <section id="how.to.reuse.tm.sharing.translation.memories">
+    <title id="how.to.reuse.tm.sharing.translation.memories.title">Sharing translation memories</title>
 
     <para>In cases where a team of translators is involved, translators will
     prefer to share common translation memories rather than distribute their
@@ -175,8 +175,8 @@
     settings etc - are managed by the selected RCS. see more in Chapter</para>
   </section>
 
-  <section>
-    <title>Using TMX with alternative language</title>
+  <section id="how.to.reuse.tm.using.tmx.with.alternative.languages">
+    <title id="how.to.reuse.tm.using.tmx.with.alternative.languages.title">Using TMX with alternative language</title>
 
     <para>There may be cases where you have done a project with e.g. Dutch
     sources, and a translation in say English. Then you need a translation in

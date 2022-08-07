@@ -238,7 +238,7 @@
       <term>Search Project...</term>
 
       <listitem>
-        <para>Opens a new <link linkend="windows.textsearch">Search
+        <para>Opens a new <link linkend="windows.text.search">Search
         window</link>.</para>
 
 		<para>
@@ -264,7 +264,7 @@
       <term>Search and Replace...</term>
 
       <listitem>
-        <para>Opens a new <link linkend="windows.textreplace">Search
+        <para>Opens a new <link linkend="windows.text.replace">Search
         and replace window</link>.</para>
 
 		<para>
@@ -397,7 +397,7 @@
 
 	<varlistentry>
       <term>Insert Unicode Control Character</term>
-	  <listitem><para>Inserts the selected Unicode control character. See <link linkend="howto.managerighttoleft" endterm="howto.managerighttoleft.title"/> for details.</para>
+	  <listitem><para>Inserts the selected Unicode control character. See <link linkend="how.to.manage.right.to.left" endterm="how.to.manage.right.to.left.title"/> for details.</para>
 		<itemizedlist>
 		  <listitem><para><guilabel>Left-to-Right Mark (LRM U+200E)</guilabel></para>
 		  <para><emphasis>No default key shortcut</emphasis></para>

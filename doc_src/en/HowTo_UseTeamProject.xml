@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.useteamproject">
-  <title>Use a Team Project</title>
+<section id="how.to.use.team.project">
+  <title id="how.to.use.team.project.title">Use a Team Project</title>
 
-  <para>OmegaT team projects must first be <link linkend="howto.setupteamproject">set up</link> on a server.</para>
+  <para>OmegaT team projects must first be <link linkend="how.to.setup.team.project">set up</link> on a server.</para>
 
   <para>To use a team project for the first time, follow the procedure
   provided by the project manager.</para>

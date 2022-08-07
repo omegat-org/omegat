@@ -145,11 +145,10 @@
         <para>The reference to the URL is specified as below (here to a Git
         repository):</para>
 
-        <programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;git&quot; url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting>
+        <programlisting>&lt;repositories&gt; &lt;repository type=&quot;git&quot;
+        url=&quot;https://repo_for_OmegaT_team_project.git&quot;&gt; &lt;mapping
+        local=&quot;&quot; repository=&quot;&quot;/&gt; &lt;/repository&gt;
+        &lt;/repositories&gt;</programlisting>
       </listitem>
     </itemizedlist>
 
@@ -181,9 +180,10 @@
     several translators share the project_save.tmx file but not (all of) the (source)
     files.</para>
 
-    <para>In this case, the procedure is the same, but the project manager
-    does not add (all) files to version-controlled project. Instead, the translators copy the files themselves,
-        or add mappings to synchronize files from other locations.
+    <para>In this case, the procedure is the same, but the project manager does
+    not add (all) files to version-controlled project. Instead, the translators
+    copy the files themselves, or add mappings to synchronize files from other
+    locations.
     </para>
 
       <para>The mappings can be added via the UI:
@@ -241,7 +241,9 @@
           <para>Add patterns using wildcards (Apache Ant style): *, ?,
           **. Separate different patterns with a semicolon.</para>
 
-          <para>Example: <userinput>**/excludedfolder/**;*.txt</userinput> excludes files that have /excludedfolder/ in the path, and files with .txt extension.</para>
+          <para>Example: <userinput>**/excludedfolder/**;*.txt</userinput>
+          excludes files that have /excludedfolder/ in the path, and files with
+          .txt extension.</para>
         </listitem>
       </varlistentry>
 
@@ -252,65 +254,72 @@
           <para>As above.</para>
 
           <para>Example: <userinput>**/*.docx</userinput> to add all .docx
-          files, wherever they are located in the project, even in excluded folders</para>
+          files, wherever they are located in the project, even in excluded
+          folders</para>
 
-          <para>By default, all files that are not excluded are included. You only need to specify this to
-              override some exclusions.</para>
+          <para>By default, all files that are not excluded are included. You
+          only need to specify this to override some exclusions.</para>
         </listitem>
       </varlistentry>
     </variablelist>
   </section>
 
-  <section>
-    <title>Example mappings</title>
+  <section id="how.to.setup.team.project.example.mappings">
+    <title id="how.to.setup.team.project.example.mappings.title">Example
+    mappings</title>
 
     <para>Default project mapping: <programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_OmegaT_team_project&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
+    &lt;repository type=&quot;svn&quot;
+    url=&quot;https://repo_for_OmegaT_team_project&quot;&gt; &lt;mapping
+    local=&quot;&quot; repository=&quot;&quot;/&gt; &lt;/repository&gt;
+    &lt;/repositories&gt;</programlisting></para>
 
     <para>All the contents of
     <filename>https://repo_for_OmegaT_team_project</filename> are mapped to
     the local OmegaT project</para>
 
-    <para>Mapping for projects in a subdirectory of the repository: <programlisting>&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt;
-  &lt;mapping local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
+    <para>Mapping for projects in a subdirectory of the repository:
+    <programlisting>&lt;repositories&gt; &lt;repository type=&quot;svn&quot;
+    url=&quot;https://repo_for_All_OmegaT_team_projects&quot;&gt; &lt;mapping
+    local=&quot;&quot; repository=&quot;En-US_DE_project&quot;/&gt;
+    &lt;/repository&gt; &lt;/repositories&gt;</programlisting></para>
 
     <para>All the contents of
     <filename>https://repo_for_All_OmegaT_team_projects/En-US_DE_project</filename>
     are mapped to the local OmegaT project.</para>
 
-    <para>Mapping for additional sources from remote repository, with filters: <programlisting>
-&lt;repositories&gt;
- &lt;repository type=&quot;svn&quot; url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
-  &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
-   &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
-   &lt;includes&gt;readme.bak&lt;/includes&gt;
-  &lt;/mapping&gt;
- &lt;/repository&gt;
-&lt;/repositories&gt;</programlisting></para>
+    <para>Mapping for additional sources from remote repository, with filters:
+    <programlisting> &lt;repositories&gt; &lt;repository type=&quot;svn&quot;
+    url=&quot;https://repo_for_All_OmegaT_team_project_sources&quot;&gt;
+    &lt;mapping local=&quot;source/subdir&quot; repository=&quot;&quot;&gt;
+    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+    &lt;includes&gt;readme.bak&lt;/includes&gt; &lt;/mapping&gt;
+    &lt;/repository&gt; &lt;/repositories&gt;</programlisting></para>
 
     <para>All the contents of
-      <filename>https://repo_for_All_OmegaT_team_project_sources</filename>
-      are mapped to the local OmegaT project source folder, except all *.bak files but readme.bak.
+    <filename>https://repo_for_All_OmegaT_team_project_sources</filename> are
+    mapped to the local OmegaT project source folder, except all *.bak files but
+    readme.bak.
     </para>
 
-    <para><programlisting>Mapping for extra source files from the web: &lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/Bundle.properties&quot; repository=&quot;src/org/omegat/Bundle.properties&quot;/>
-&lt;/repository&gt;</programlisting></para>
+    <para><programlisting>Mapping for extra source files from the web:
+    &lt;repository type=&quot;http&quot;
+    url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+    &lt;mapping local=&quot;source/Bundle.properties&quot;
+    repository=&quot;src/org/omegat/Bundle.properties&quot;/>
+    &lt;/repository&gt;</programlisting></para>
 
     <para>The remote file
     <filename>https://github.com/omegat-org/omegat/raw/master/src/org/omegat/Bundle.properties</filename>
     is mapped to the local file
     <filename>source/Bundle.properties</filename>.</para>
 
-    <para>Mapping with renaming: <programlisting>&lt;repository type=&quot;http&quot; url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
- &lt;mapping local=&quot;source/readme_tr.txt&quot; repository=&quot;release/readme.txt&quot;/&gt;
-&lt;/repository&gt;</programlisting></para>
+    <para>Mapping with renaming: <programlisting>&lt;repository
+    type=&quot;http&quot;
+    url=&quot;https://github.com/omegat-org/omegat/raw/master/&quot;&gt;
+    &lt;mapping local=&quot;source/readme_tr.txt&quot;
+    repository=&quot;release/readme.txt&quot;/&gt;
+    &lt;/repository&gt;</programlisting></para>
 
     <para>The remote file
     <filename>https://github.com/omegat-org/omegat/raw/master/release/readme.txt</filename>
@@ -319,32 +328,41 @@
 
     <para>This makes it possible to rename the file to be translated.</para>
 
-    <para>Local file mapping: <programlisting>&lt;repository type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt;
- &lt;mapping local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
- &lt;mapping local=&quot;source/file2.txt&quot; repository=&quot;some/file.txt&quot;/&gt;
-&lt;/repository&gt;</programlisting></para>
+    <para>Local file mapping: <programlisting>&lt;repository
+    type=&quot;file&quot; url=&quot;/home/me/myfiles&quot;&gt; &lt;mapping
+    local=&quot;source/file.txt&quot; repository=&quot;my/file.txt&quot;/&gt;
+    &lt;mapping local=&quot;source/file2.txt&quot;
+    repository=&quot;some/file.txt&quot;/&gt;
+    &lt;/repository&gt;</programlisting></para>
 
-    <para>The local file
-        <filename>/home/me/myfiles/my/file.txt</filename>
-        is mapped to the local file
-        <filename>source/file.txt</filename> and <filename>/home/me/myfiles/some/file.txt</filename> is mapped to the local file <filename>source/file2.txt</filename>.
+    <para>The local file <filename>/home/me/myfiles/my/file.txt</filename> is
+    mapped to the local file <filename>source/file.txt</filename> and
+    <filename>/home/me/myfiles/some/file.txt</filename> is mapped to the local
+    file <filename>source/file2.txt</filename>.
     </para>
 
     <para>Warning: if a file does not exist, the project won't load.</para>
-    <para>You can add as many mappings as you want, but only in the context of a team project, i.e. one of the mappings includes omegat.project.
-    This feature is intended for gathering source files, but you're not restricted to source files.</para>
+    <para>You can add as many mappings as you want, but only in the context of a
+    team project, i.e. one of the mappings includes omegat.project.  This
+    feature is intended for gathering source files, but you're not restricted to
+    source files.</para>
   </section>
-  <section>
-    <title>Note about omegat.project and mappings</title>
-    <para>When you create a new project and commit that to a repository, the <filename>omegat.project</filename> file
-        doesn't contain any mapping.
-        When you download the project, the project is converted to a team project locally and a default mapping is added.
+  <section id="how.to.setup.team.project.note">
+    <title id="how.to.setup.team.project.note.title">Note about omegat.project
+    and mappings</title>
+    <para>When you create a new project and commit that to a repository, the
+    <filename>omegat.project</filename> file doesn't contain any mapping.  When
+    you download the project, the project is converted to a team project locally
+    and a default mapping is added.
     </para>
-    <para>Note that the omegat.project file in the repository is not changed automatically and still doesn't contain
-        the mappings. When you load a project, all changes in the repository are copied to the local project, including
-        the <filename>omegat.project</filename> file with project settings. If the file doesn't contain mappings, the
-        existing local mappings are re-applied, and only those. All other local changes to the project are reverted.
-      If the file does contain mappings, then local changes to mappings are lost.
+    <para>Note that the omegat.project file in the repository is not changed
+    automatically and still doesn't contain the mappings. When you load a
+    project, all changes in the repository are copied to the local project,
+    including the <filename>omegat.project</filename> file with project
+    settings. If the file doesn't contain mappings, the existing local mappings
+    are re-applied, and only those. All other local changes to the project are
+    reverted.  If the file does contain mappings, then local changes to mappings
+    are lost.
     </para>
   </section>
 

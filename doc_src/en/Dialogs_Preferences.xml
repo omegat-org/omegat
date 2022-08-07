@@ -4,11 +4,21 @@
 <section id="dialogs.preferences">
   <title id="dialogs.preferences.title">General Preferences</title>
 
-  <para>This dialog is accessible by selecting <link linkend="menus.options.preferences" endterm="menus.options.preferences.title"/> in the <link linkend="menus.options" endterm="menus.options.title"/> menu.</para>
+  <para>This dialog is accessible by selecting <link
+  linkend="menus.options.preferences"
+  endterm="menus.options.preferences.title"/> in the <link
+  linkend="menus.options" endterm="menus.options.title"/> menu.</para>
 
   <para>Preferences set here apply to all the translation projects.</para>
 
-  <note><para>Preferences are stored in the default configuration folder. See <link linkend="configuration.folder" endterm="configuration.folder.title"/> for details. It is possible to have OmegaT use a different configuration folder, for exemple to use project-specific configurations. See <link linkend="launch.with.command.line.omegat.command.arguments.starting.in.console.mode" endterm="launch.with.command.line.omegat.command.arguments.starting.in.console.mode.title"/> for details. If you use such a configuration folder, all the modifications made in this dialog will be stored in that folder.</para></note>
+  <note><para>Preferences are stored in the default configuration folder. See
+  <link linkend="configuration.folder" endterm="configuration.folder.title"/>
+  for details. It is possible to have OmegaT use a different configuration
+  folder, for exemple to use project-specific configurations. See <link
+  linkend="launch.with.command.line.omegat.command.arguments.starting.in.console.mode"
+  endterm="launch.with.command.line.omegat.command.arguments.starting.in.console.mode.title"/>
+  for details. If you use such a configuration folder, all the modifications
+  made in this dialog will be stored in that folder.</para></note>
 
   <section id="dialogs.preferences.general">
     <title id="dialogs.preferences.general.title">General</title>
@@ -392,9 +402,9 @@
 
           <para>If selected, when a segment in a PO file (which may be a whole
           paragraph) is not translated, the translation will be empty in the
-          target file. Technically speaking, the <code>msgstr</code> segment
-          in the PO target file, if created, will be left empty. As this is
-          the standard behaviour for PO files, it is selected by default. If
+          target file. Technically speaking, the <emphasis>msgstr</emphasis>
+          segment in the PO target file, if created, will be left empty. As this
+          is the standard behaviour for PO files, it is selected by default. If
           the option is off, the source text will be copied to the target
           segment.</para>
         </listitem>
@@ -414,7 +424,7 @@
             <emphasis>This option allows OmegaT to override the specification
             in the PO file header and use the default for the selected target
             language.</emphasis>
-          </para>
+		  </para>
         </listitem>
       </itemizedlist>
 

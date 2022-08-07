@@ -115,11 +115,11 @@
       <para>For .docx files, a number of changes are however done
       automatically: <itemizedlist>
           <listitem>
-            Paragraphs, sections and tables are set to bidi
+            <para>Paragraphs, sections and tables are set to bidi</para>
           </listitem>
 
           <listitem>
-            Runs (text elements) are set to RTL
+            <para>Runs (text elements) are set to RTL</para>
           </listitem>
         </itemizedlist></para>
 

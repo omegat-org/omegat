@@ -147,7 +147,7 @@
         <term>Repository Mapping...</term>
 
         <listitem>
-          <para>When working on a team project, this window allows you to define the mapping between remote folders and local folders (see examples <link linkend="howto.setupteamproject.mappingparameters">here</link>).</para>
+          <para>When working on a team project, this window allows you to define the mapping between remote folders and local folders (see examples <link linkend="how.to.setup.team.project.mapping.parameters">here</link>).</para>
         </listitem>
       </varlistentry>
 

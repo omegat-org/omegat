@@ -285,16 +285,16 @@
       </varlistentry>
     </variablelist>
 
-    <section>
-      <title>Font</title>
+    <section id="dialogs.preferences.fonts">
+      <title id="dialogs.preferences.fonts.title">Font</title>
 
       <para>Shows the dialog to modify the text display font. Users of old
       computers who feel window resizing is very slow can try changing the
       font. See font settings in Miscellanea</para>
     </section>
 
-    <section>
-      <title>Colours</title>
+    <section id="dialogs.preferences.colours">
+      <title id="dialogs.preferences.colours.title">Colours</title>
 
       <para>This page allows you to choose different colours for each part of
       the user interface.</para>
@@ -1471,7 +1471,7 @@
 			<table colsep="0" rowsep="0">
 			  <title>Match pane setup</title>
 
-			  <tgroup title="Match pane setup" cols="2" colsep="1" rowsep="1">
+			  <tgroup cols="2" colsep="1" rowsep="1">
 				<colspec align="left"/>
 
 				<colspec align="left"/>

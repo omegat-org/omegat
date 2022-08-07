@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.textsearch">
+<section id="windows.text.search">
   <title>Text Search</title>
 
   <para>Open the Search window with <keycombo>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.textreplace">
-  <title>Text Replace</title>
+<section id="windows.text.replace">
+  <title id="windows.text.replace.title">Text Replace</title>
 
   <para>Open the Search and replace window with <keycombo>
       <keycap>Ctrl</keycap>
@@ -36,10 +36,10 @@
       </listitem>
     </itemizedlist></para>
 
-  <section>
-    <title>Search options</title>
+  <section id="windows.text.replace.options">
+    <title id="windows.text.replace.options.title">Search options</title>
 
-    <para>Search options are similar to the ones displayed in <link linkend="windows.textsearch">Search window</link>.</para>
+    <para>Search options are similar to the ones displayed in <link linkend="windows.text.search">Search window</link>.</para>
 
     <para>Except one: check <guilabel>Untranslated</guilabel> in
     order to operate Search and replace also on segments that have not been

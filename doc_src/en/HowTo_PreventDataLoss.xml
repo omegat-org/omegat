@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.preventdataloss">
-  <title>Prevent data loss</title>
+<section id="how.to.prevent.data.loss">
+  <title id="how.to.prevent.data.loss.title">Prevent data loss</title>
 
   <para>OmegaT is a robust application. However,
   you should take precautions against data loss when using

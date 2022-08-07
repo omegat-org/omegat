@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.translatepdf">
-  <title>Translate a PDF file</title>
+<section id="how.to.translate.pdf">
+  <title id="how.to.translate.pdf.title">Translate a PDF file</title>
 
 <para>PDF files are a special case. They contain text formatting
   information, but such information cannot be reused by

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="dialogs.projectproperties">
-  <title>Project Properties</title>
+<section id="dialogs.project.properties">
+  <title id="dialogs.project.properties.title">Project Properties</title>
 
   <para>This dialog is accessible by selecting <menuchoice>
       <guimenuitem>Project</guimenuitem>
@@ -10,8 +10,8 @@
       <guimenuitem>Properties...</guimenuitem>
     </menuchoice></para>
 
-  <section>
-    <title>Languages</title>
+  <section id="dialogs.project.properties.languages">
+    <title id="dialogs.project.properties.languages.title">Languages</title>
 
     <para>You can either enter the source and target languages by hand or use
     the drop down menus. Bear in mind that changing the languages may render
@@ -22,8 +22,8 @@
     displayed.</para>
   </section>
 
-  <section>
-    <title>Options</title>
+  <section id="dialogs.project.properties.options">
+    <title id="dialogs.project.properties.options.title">Options</title>
 
     <variablelist>
       <varlistentry>
@@ -161,8 +161,8 @@
     </variablelist>
   </section>
 
-  <section>
-    <title>File locations</title>
+  <section id="dialogs.project.properties.file.locations">
+    <title id="dialogs.project.properties.file.locations.title">File locations</title>
 
     <para>Here you can select different subfolders, for instance the subfolder
     with source files, subfolder for target files etc. If you enter names of

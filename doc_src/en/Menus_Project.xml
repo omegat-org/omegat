@@ -10,7 +10,7 @@
       <term><guimenuitem>New...</guimenuitem></term>
       <listitem>
         <para>Creates and opens a new project. See <link
-        linkend="howto.createnewproject">Create a new project</link> for
+        linkend="how.to.create.new.project">Create a new project</link> for
         details.</para>
 		<para>
 		  <keycombo>
@@ -25,7 +25,7 @@
 
       <listitem>
         <para>Creates a local copy of a remote OmegaT project. See <link
-        linkend="howto.useteamproject">Use a team project</link> for
+        linkend="how.to.use.team.project">Use a team project</link> for
         details.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
@@ -169,7 +169,7 @@
       <listitem>
         <caution><para>This function is specific to team
         projects. <emphasis>Only the team project manager should use this
-        function</emphasis>. See <link linkend="howto.useteamproject">Use a team
+        function</emphasis>. See <link linkend="how.to.use.team.project">Use a team
         project</link> for details.</para></caution>
         <para>Uploads to the repository the files that have been added or
         modified locally in the <filename class="directory">source</filename>
@@ -184,7 +184,7 @@
       <listitem>
         <caution><para>This function is specific to team
         projects. <emphasis>Only the team project manager should use this
-        function</emphasis>. See <link linkend="howto.useteamproject">Use a team
+        function</emphasis>. See <link linkend="how.to.use.team.project">Use a team
         project</link> for details.</para></caution>
         <para>Uploads to the repository the files that have been created
         locally in the <filename class="directory">target</filename> folder.</para>
@@ -248,7 +248,7 @@
       <term>Properties...</term>
 
       <listitem>
-        <para>Displays the <link linkend="dialogs.projectproperties">Project
+        <para>Displays the <link linkend="dialogs.project.properties">Project
         properties</link> dialog to edit project languages and folder
         locations.</para>
 		<para>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.setupteamproject">
-  <title>Set up a Team Project</title>
+<section id="how.to.setup.team.project">
+  <title id="how.to.setup.team.project.title">Set up a Team Project</title>
 
   <para>Setting up a team project requires some knowledge of servers and the
   SVN or Git versioning systems. It should thus be carried out by a project
@@ -12,8 +12,9 @@
   won't describe how they work here, but only how OmegaT works with
   them.</para>
 
-  <section>
-    <title>Step 1: Create an empty project on a server</title>
+  <section id="how.to.setup.team.project.create.an.empty.project">
+    <title id="how.to.setup.team.project.create.an.empty.project.title">Step 1:
+    Create an empty project on a server</title>
 
     <para><emphasis role="bold">Creating an empty project on a
     server</emphasis></para>
@@ -72,8 +73,9 @@
     versioning system and published on the server.</para>
   </section>
 
-  <section>
-    <title>Step 2: Add files to translate and other resources</title>
+  <section id="how.to.setup.team.project.add.files.to.translate">
+    <title id="how.to.setup.team.project.add.files.to.translate.title">Step 2:
+    Add files to translate and other resources</title>
 
     <para>Use an SVN or Git client to add the files to translate.</para>
 
@@ -117,8 +119,9 @@
     opened, closed, saved or reloaded.</para>
   </section>
 
-  <section>
-    <title>Step 3: Send an invitation to the translator</title>
+  <section id="how.to.setup.team.project.send.an.invitation">
+    <title id="how.to.setup.team.project.send.an.invitation.title">Step 3: Send
+    an invitation to the translator</title>
 
     <para>Once the project is set up on the server, the project manager can
     invite the translator to work on it in either of two different
@@ -165,8 +168,9 @@
     control.</para>
   </section>
 
-  <section>
-    <title>Special case: selective sharing</title>
+  <section id="how.to.setup.team.project.selective.sharing">
+    <title id="how.to.setup.team.project.selective.sharing.title">Special case:
+    selective sharing</title>
 
     <para>The process above describes the usual case, where the project
     manager wants to have full control of the project and where the files (and
@@ -192,7 +196,7 @@
       </para>
   </section>
 
-  <section id="howto.setupteamproject.mappingparameters">
+  <section id="how.to.setup.team.project.mapping.parameters">
     <title>Mapping parameters</title>
 
     <variablelist>

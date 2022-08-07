@@ -2,14 +2,14 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
-  <title>Aligner</title>
+  <title id="windows.aligner.title">Aligner</title>
 
   <para>Alignment involves creating a bilingual translation memory from monolingual documents that have already been translated.</para>
 
   <para>To access this window, select <menuchoice><guimenu>Tools</guimenu><guimenuitem>Align Files...</guimenuitem></menuchoice>.</para>
 
-  <section>
-    <title>Step 1: Adjust the alignment parameters</title>
+  <section id="windows.aligner.adjust">
+    <title id="windows.aligner.adjust.title">Step 1: Adjust the alignment parameters</title>
 
     <para>If the alignment looks as if it could be improved, try changing the parameters. In most cases, the lower the <guilabel>Average score</guilabel> is, better the alignment will be.</para>
 
@@ -22,8 +22,8 @@
     <para>Click <guibutton>Continue</guibutton> to access the next step.</para>
   </section>
 
-  <section>
-    <title>Step 2: Make manual corrections</title>
+  <section id="windows.aligner.manual.corrections">
+    <title id="windows.aligner.manual.corrections.title">Step 2: Make manual corrections</title>
 
     <para>After the automatic process, the alignment of two files generally requires manual corrections.</para>
 

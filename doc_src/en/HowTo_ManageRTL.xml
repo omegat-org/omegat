@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="howto.managerighttoleft">
-  <title id="howto.managerighttoleft.title">Manage Right-To-Left languages</title>
+<section id="how.to.manage.right.to.left">
+  <title id="how.to.manage.right.to.left.title">Manage Right-To-Left languages</title>
 
    <para>Justification of source and target segments depends upon the project
     languages. By default, left justification is used for Left-To-Right (LTR)
@@ -66,8 +66,8 @@
       </keycombo> shortcut and not
     <keycombo><keycap>cmd</keycap><keycap>Ctrl</keycap><keycap>O</keycap></keycombo>.</para>
 
-    <section>
-      <title>Mixing RTL and LTR strings in segments</title>
+    <section id="how.to.manage.right.to.left.mixing.rtl.and.ltr">
+      <title id="how.to.manage.right.to.left.mixing.rtl.and.ltr.title">Mixing RTL and LTR strings in segments</title>
 
       <para>When writing purely RTL text, the default (LTR) view may be used.
       In many cases, however, it is necessary to embed LTR text in RTL text.
@@ -83,8 +83,8 @@
       modes.</para>
     </section>
 
-    <section>
-      <title>OmegaT tags in RTL segments</title>
+    <section id="how.to.manage.right.to.left.omegat.tags.and.rtl">
+      <title id="how.to.manage.right.to.left.omegat.tags.and.rtl.title">OmegaT tags in RTL segments</title>
 
       <para>As stated above, OmegaT tags are LTR strings. When translating
       between RTL and LTR languages, correctly reading the tags from the
@@ -102,8 +102,8 @@
       out to be less hassle.</para>
     </section>
 
-    <section>
-      <title>Creating translated RTL documents</title>
+    <section id="how.to.manage.right.to.left.creating.translated.rtl.documents">
+      <title id="how.to.manage.right.to.left.creating.translated.rtl.documents.title">Creating translated RTL documents</title>
 
       <para>When the translated document is created, its display direction
       will be the same as that of the original document. If the original

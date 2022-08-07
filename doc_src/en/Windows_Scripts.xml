@@ -10,8 +10,8 @@
       <guimenuitem>Scripting...</guimenuitem>
     </menuchoice></para>
 
-  <section>
-    <title>Use</title>
+  <section id="windows.scripts.use">
+    <title id="windows.scripts.use.title">Use</title>
 
     <para>The Scripting window allows you to load an existing script into the text area and run it against the current opened project. To customize the scripting feature, do the following:</para>
 
@@ -41,8 +41,8 @@
     Scripts</ulink></para>
   </section>
 
-  <section>
-    <title>Scripting languages</title>
+  <section id="windows.scripts.languages">
+    <title id="windows.scripts.languages.title">Scripting languages</title>
 
     <para>The following scripting languages have been implemented:</para>
 

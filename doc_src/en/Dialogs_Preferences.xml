@@ -298,7 +298,7 @@
     <section id="dialogs.preferences.fonts">
       <title id="dialogs.preferences.fonts.title">Font</title>
 
-      <para>Shows the dialog to modify the text display font. Users of old
+      <para>TODO Shows the dialog to modify the text display font. Users of old
       computers who feel window resizing is very slow can try changing the
       font. See font settings in Miscellanea</para>
     </section>

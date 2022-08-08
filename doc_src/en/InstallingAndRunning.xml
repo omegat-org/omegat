@@ -395,54 +395,7 @@
 	  linkend="launch.with.command.line" endterm="launch.with.command.line.title"/>
 	  for details.</para>
 	</section>
-
   </section>
-
-
-  <section id="opening.project.drag.and.drop">
-	<title>Drag and drop</title>
-
-	<para>In most systems, it is possible to open a project by dropping an
-	<filename>omegat.project</filename> file onto the OmegaT icon on the
-	desktop. It might also be possible to open an OmegaT project by
-	double-clicking on an <filename>omegat.project</filename> file.</para>
-  </section>
-
-  <!-- Remove Java WebStart 
-	   <section id="using.Java.Web.Start">
-	   <title>Using Java Web Start</title>
-
-<para>Java Web Start technology (part of Java 8 and above) can be used to
-deploy standalone Java software applications with a single click over the
-network. Java Web Start ensures that the latest version of the application
-will be deployed, as well as the correct version of the Java Runtime
-Environment (JRE) used. To start OmegaT for the first time with Java Web
-Start, load the following URL in your browser:</para>
-
-<para><ulink url="https://omegat.sourceforge.io/webstart/OmegaT.jnlp"/></para>
-
-<para>Download the file <filename>OmegaT.jnlp</filename> and then click on
-it. During the installation, depending on your operating system, you may
-receive several security warnings. The permissions you give to this version
-(which may appear as "unrestricted access to the computer") are identical to
-the permissions you give to the local version, i.e., they allow access to
-the hard drive of the computer. Subsequent clicks on
-<filename>OmegaT.jnlp</filename> will check for any upgrades, install them,
-if there are any, and then start OmegaT. After
-the initial installation you can, of course, also use
-<filename>OmegaT.jnlp</filename> also when you are offline.</para>
-
-<para><emphasis role="bold">Privacy</emphasis>:
-OmegaT Java Web Start does not save any of your
-information beyond the computer on which you are running it. The application
-runs on your machine only. Your documents and translation memories remain on
-your computer, and the OmegaT project will have
-no access to your work or information.</para>
-
-<para>Note that if you need or wish to use any of the launch command
-arguments (see above), you must use the normal installation.</para>
-</section>
-  -->
 
   <section id="build.omegat.from.source">
 	<title>Building OmegaT From Source</title>
@@ -453,8 +406,7 @@ arguments (see above), you must use the normal installation.</para>
 
 	<para>Once the code is downloaded, open a command in the source folder and
 	type:</para>
-
-	<programlisting>gradlew assembleDist</programlisting>
+	<programlisting>./gradlew assembleDist</programlisting>
 
 	<para>This will create a full distribution of OmegaT in the
 	<filename>build/distributions/</filename> folder, where you will find a zip
@@ -463,8 +415,10 @@ arguments (see above), you must use the normal installation.</para>
 
 	<para>You can also run directly the application with the following
 	command:</para>
+	<programlisting>./gradlew run</programlisting>
 
-	<programlisting>gradlew run</programlisting>
+	<para>You can find all the tasks available by typing:</para>
+	<programlisting>./gradlew tasks</programlisting>
 
 	<para>Detailed instructions on building are in the docs_devel <ulink
 	url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">readme</ulink>.</para>
@@ -473,18 +427,46 @@ arguments (see above), you must use the normal installation.</para>
   <section id="update.and.erase.omegat">
     <title id="update.and.erase.omegat.title">Upgrading and erasing OmegaT</title>
 
-	<para>OmegaT can tell you when a new version is available. See <link linkend="dialogs.preferences.updates" endterm="dialogs.preferences.updates.title"/> in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> dialog for details.</para>
-	<para>The changes between your version and the current version are documented in the development site's <ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">change.txt</ulink> file.</para>
+	<para>OmegaT can tell you when a new version is available. See <link
+	linkend="dialogs.preferences.updates"
+	endterm="dialogs.preferences.updates.title"/> in the <link
+	linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> dialog
+	for details.</para>
+	<para>The changes between your version and the current version are
+	documented in the development site's <ulink
+	url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">change.txt</ulink>
+	file.</para>
 	<note>
-	  <para>If you decide to install a new version, keep the following in mind:</para>
+	  <para>If you decide to install a new version, keep the following in
+	  mind:</para>
 	  <itemizedlist>
 		<listitem>
-		  <para>OmegaT's preferences stored in the configuration folder will <emphasis>not</emphasis> be modified by the new version. See <link linkend="configuration.folder" endterm="configuration.folder.title"/> for details.</para>
+		  <para>OmegaT's preferences stored in the configuration folder will
+		  <emphasis>not</emphasis> be modified by the new version. See <link
+		  linkend="configuration.folder" endterm="configuration.folder.title"/>
+		  for details.</para>
 		</listitem>
 		<listitem>
-		  <para>Projects that you have created in the past or are currently using will <emphasis>not</emphasis> be modified or erased. OmegaT projects are <emphasis>not</emphasis> stored inside OmegaT. They are separate objects that have no physical connection to the OmegaT application itself.</para>
+		  <para>Projects that you have created in the past or are currently
+		  using will <emphasis>not</emphasis> be modified or erased. OmegaT
+		  projects are <emphasis>not</emphasis> stored inside OmegaT. They are
+		  separate objects that have no physical connection to the OmegaT
+		  application itself.</para>
 		</listitem>
-		<listitem><para>Parameter files that are included in the downloaded OmegaT package  (especially the <filename>OmegaT.l4J.ini</filename> for <link linkend="running.omegat.on.windows" endterm="running.omegat.on.windows.title"/> and the <filename>Configuration.properties</filename> and <filename>Info.plist</filename> files for <link linkend="running.omegat.on.macos" endterm="running.omegat.on.macos.title"/> packages) might be overwritten or erased, so you may want to create a backup before upgrading OmegaT if you have been using these files to modify OmegaT's launch parameters.</para></listitem>
+		<listitem><para>Parameter files that are included in the downloaded
+		OmegaT package (especially the <filename>OmegaT.l4J.ini</filename> for
+		<link linkend="running.omegat.on.windows"
+		endterm="running.omegat.on.windows.title"/> and the
+		<filename>Configuration.properties</filename> and
+		<filename>Info.plist</filename> files for <link
+		linkend="running.omegat.on.macos"
+		endterm="running.omegat.on.macos.title"/> packages) might be overwritten
+		or erased, so you may want to create a backup before upgrading, if
+		you have been using these files to modify OmegaT's launch
+		parameters.</para></listitem>
+		<listitem><para>The <filename>plugins/</filename> and
+		<filename>script/</filename> folders might be overwritten, so you may
+		want to create a backup before upgrading.</para></listitem>
 	</itemizedlist></note>
 
 	<section id="update.and.erase.omegat.over.existing.package">
@@ -492,40 +474,16 @@ arguments (see above), you must use the normal installation.</para>
 	  over an existing version</title>
 	  <para>To do this, simply select the same installation folder as the
 	  existing installation when installing the new version. The "old" version
-	  of OmegaT will be overwritten, but any settings from it will be
-	  retained. This includes preferences set from within OmegaT, any changes
-	  you have made to your <filename>OmegaT.l4J.ini</filename> file, and also
-	  your launch script (<filename>.bat</filename> file), if you are using
-	  one.</para>
-      <para>With this method, you may also download the "Windows without JRE"
-      version, since the new installation will use your existing JRE.</para>
+	  of OmegaT will be overwritten, but settings made from the OmegaT interface will be retained in the various configurations folders (see above).</para>
 	</section>
 	
 	<section id="update.and.erase.omegat.along.existing.package">
-	  <title id="update.and.erase.omegat.along.existing.package.title">Install alongside an existing version</title>
+	  <title id="update.and.erase.omegat.along.existing.package.title">Install
+	  alongside an existing version</title>
 	  <para>
 	  </para>
-	  <para><emphasis role="bold">Install to a new folder.</emphasis> This
-      will enable you to keep both versions side-by-side, which you may wish
-      to do until you feel comfortable with the new version. This method
-      will also use preferences and settings you have made from within
-      OmegaT. In this case, however:</para>
-
-      <itemizedlist>
-        <listitem>
-          <para>If you have made changes to your
-          <filename>OmegaT.l4J.ini</filename> file and/or are using a .bat
-          file, you must copy these over.</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>If your existing OmegaT installation is a "Windows with
-          JRE" version, the new version must also be a "Windows with JRE"
-          version.</para>
-        </listitem>
-      </itemizedlist>
+	  <para>This will enable you to keep any number of versions side-by-side, which you
+	  may wish to do until you feel comfortable with the new version.</para>
     </section>
   </section>
 </chapter>

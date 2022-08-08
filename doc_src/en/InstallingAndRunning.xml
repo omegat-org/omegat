@@ -441,7 +441,7 @@
 	  mind:</para>
 	  <itemizedlist>
 		<listitem>
-		  <para>OmegaT's preferences stored in the configuration folder will
+		  <para>OmegaT's preferences are stored in the configuration folder and will
 		  <emphasis>not</emphasis> be modified by the new version. See <link
 		  linkend="configuration.folder" endterm="configuration.folder.title"/>
 		  for details.</para>
@@ -480,10 +480,18 @@
 	<section id="update.and.erase.omegat.along.existing.package">
 	  <title id="update.and.erase.omegat.along.existing.package.title">Install
 	  alongside an existing version</title>
-	  <para>
-	  </para>
 	  <para>This will enable you to keep any number of versions side-by-side, which you
 	  may wish to do until you feel comfortable with the new version.</para>
+	  <para>All the parameters located in the <link
+	  linkend="configuration.folder" endterm="configuration.folder.title"/> will
+	  be shared. All the parameters located in a <link linkend="project.folder"
+	  endterm="project.folder.title"/> will apply to that project regardless of
+	  which version of OmegaT opens it.</para>
     </section>
+
+	<section id="update.and.erase.omegat.erase">
+	  <title id="update.and.erase.omegat.erase.title">Erase OmegaT</title>
+	  <para>Use your operating system standard procedure to erase OmegaT.</para>
+	</section>
   </section>
 </chapter>

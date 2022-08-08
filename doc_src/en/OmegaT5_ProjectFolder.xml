@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
-  <title>Project folder</title>
+  <title id="project.folder.title">Project folder</title>
 
   <para>An OmegaT project is a folder containing files and subfolders.</para>
   <para>You can access the project folder and all its subfolders by using <link

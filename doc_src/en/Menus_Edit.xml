@@ -5,7 +5,7 @@
   <title id="menus.edit.title">Edit</title>
 
   <note><para>This menu displays entries only when a project is open.</para>
-  <para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut_description"/></para>
+  <para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para>
   <example><title id="example.undo.last.action.title">Undo Last Action</title>
   		<para>In this manual:
 		  <keycombo><keycap>C</keycap><keycap>z</keycap></keycombo>

@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.instant.start.guide">
-  <title>Learn to use OmegaT in 5 minutes!</title>
+  <title id="chapter.instant.start.guide.title">Learn to use OmegaT in 5 minutes!</title>
 
   <section id="introduction.note.on.shortcuts">
 	<title id="introduction.note.on.shortcuts.title">A note on key shortcuts in this manual</title>
@@ -10,7 +10,7 @@
     key. On Windows and Linux, the equivalent function uses the <keycap>Control</keycap> key.</para>
 	<para>To avoid confusion, key shortcuts are described the following way in
 	the manual: </para>
-  <example><title>Project > Properties...</title>
+  <example><title id="example.project.properties.title">Project > Properties...</title>
 		<para>On Windows and Linux:
 		  <keycombo><keycap>Control</keycap><keycap>E</keycap></keycombo>
 		</para>
@@ -82,7 +82,7 @@
     look like:</para>
     
 	<example>
-	  <title>Source segment with decorations</title>
+	  <title id="example.source.segment.with.decorations.title">Source segment with decorations</title>
 	  <para>OmegaT is an <emphasis role="bold">easy to use</emphasis> program
 	  for <emphasis>eager</emphasis> translators</para>
 	</example>
@@ -91,7 +91,7 @@
     fashion:</para>
 
 	<example>
-	  <title>How decorations are displayed in OmegaT</title>
+	  <title id="example.how.decorations.are.displayed.title">How decorations are displayed in OmegaT</title>
 	  <para>OmegaT is an &lt;t0/&gt;easy to use&lt;t1/&gt; program for
 	  &lt;t2/&gt;eager&lt;t3/&gt; translators</para>
     </example>

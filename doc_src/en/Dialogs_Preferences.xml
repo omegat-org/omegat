@@ -1478,8 +1478,8 @@
 			<para>Change how fuzzy matches are displayed, through the use of
 			pre-configured variables:</para>
 
-			<table colsep="0" rowsep="0">
-			  <title>Match pane setup</title>
+			<table id="table.match.pane.setup" colsep="0" rowsep="0">
+			  <title id="table.match.pane.setup.title">Match pane setup</title>
 
 			  <tgroup cols="2" colsep="1" rowsep="1">
 				<colspec align="left"/>

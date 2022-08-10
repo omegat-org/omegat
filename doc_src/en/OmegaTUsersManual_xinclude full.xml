@@ -2,9 +2,9 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd"
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
-<book lang="en">
+<book lang="en" id="book.user.guide">
   <bookinfo>
-    <title>OmegaT &vernb; - User's Guide</title>
+    <title id="book.user.guide.title">OmegaT &vernb; - User's Guide</title>
     <author>
       <firstname>OmegaT team</firstname>
     </author>

@@ -2,7 +2,7 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.spellchecker">
-  <title>Spell checker</title>
+  <title id="appendix.spellchecker.title">Spell checker</title>
 
   <para>OmegaT has a built-in spell checker based on the spelling checker used
   in Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
@@ -10,7 +10,7 @@
   available for these applications.</para>
 
   <section id="spellchecker.installingdictionaries">
-    <title>Installing spelling dictionaries</title>
+    <title id="spellchecker.installingdictionaries.title">Installing spelling dictionaries</title>
 
     <para>Before the spell check function can be used, a suitable dictionary
     or dictionaries (i.e. for your target language) must be installed. To
@@ -54,7 +54,7 @@
     dictionaries</emphasis> field:</para>
 
     <figure id="spellchecker.setup">
-      <title>Spellchecker setup</title>
+      <title id="spellchecker.setup.title">Spellchecker setup</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -82,8 +82,8 @@
     standard (Castillian) rather than for Mexican Spanish.</para>
   </section>
 
-  <section id="spellchecker.usingdictionaries">
-    <title>Using spelling dictionaries</title>
+  <section id="spellchecker.using.dictionaries">
+    <title id="spellchecker.using.dictionaries.title">Using spelling dictionaries</title>
 
     <para>There is no need to instruct OmegaT to use a particular spelling
     dictionary; OmegaT will use the correct language dictionary based upon the
@@ -97,7 +97,7 @@
     spelling of text</guilabel> check box (see above).</para>
 
     <figure id="spellchecker.in.action">
-      <title>Using spellchecker</title>
+      <title id="spellchecker.in.action.title">Using spellchecker</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -117,7 +117,7 @@
   </section>
 
   <section id="spellchecker.hints">
-    <title>Hints</title>
+    <title id="spellchecker.hints.title">Hints</title>
 
     <para>If the spell checker is not working, then make sure first that the
     check box <guilabel>&quot;Automatically check the spelling of text&quot;</guilabel>

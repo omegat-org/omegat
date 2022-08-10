@@ -23,8 +23,8 @@
     (Windows, macOS, Linux being the most mainstream). The modifier keys that
     compose the shortcuts vary slightly depending on the platform. To make
     reading easier we have adopted the following presentation for modifier keyx:
-	<table id="shortcut_description">
-      <title>Modifier key description</title>
+	<table id="shortcut.description">
+      <title id="shortcut.description.title">Modifier key description</title>
 
       <tgroup cols="3">
         <thead>
@@ -202,8 +202,8 @@
       </listitem>
     </itemizedlist>
 
-    <example>
-      <title><guilabel>Open Project</guilabel> shortcut modification</title>
+    <example id="example.shortcut.modification">
+      <title id="example.shortcut.modification.title"><guilabel>Open Project</guilabel> shortcut modification</title>
 
       <para>The default shortcut for <guilabel>Open Project</guilabel> is
       defined this way:</para>
@@ -238,9 +238,9 @@
     <title id="appendix.function.codes.title">Function codes</title>
 
     <section id="appendix.function.codes.editor">
-      <title>Editor functions codes</title>
-      <table>
-        <title>Editor</title>
+      <title id="appendix.function.codes.editor.title">Editor functions codes</title>
+      <table id="appendix.function.codes.editor.table">
+        <title id="appendix.function.codes.editor.table.title">Editor</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -382,9 +382,9 @@
       </table>
     </section>
     <section id="appendix.function.codes.autocompleter">
-      <title>Autocompleter functions codes</title>
-      <table>
-        <title>Autocompleter</title>
+      <title id="appendix.function.codes.autocompleter.title">Autocompleter functions codes</title>
+      <table id="appendix.function.codes.autocompleter.table">
+        <title id="appendix.function.codes.autocompleter.table.title">Autocompleter</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -531,11 +531,11 @@
       </table>
     </section>	
 	
-    <section id="appendix.function.codes.searchwindow">
-      <title>Search Window Codes</title>
+    <section id="appendix.function.codes.search.window">
+      <title id="appendix.function.codes.search.window.title">Search Window Codes</title>
 
-      <table>
-        <title>Search Window</title>
+      <table id="appendix.function.codes.search.window.table">
+        <title id="appendix.function.codes.search.window.table.title">Search Window</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -564,11 +564,11 @@
 	  </table>
 	</section>
 
-	<section id="appendix.function.codes.projectmenu">
-      <title>Project Menu Codes</title>
+	<section id="appendix.function.codes.project.menu">
+      <title id="appendix.function.codes.project.menu.title">Project Menu Codes</title>
 
-      <table>
-        <title>Project Menu</title>
+      <table id="appendix.function.codes.project.menu.table">
+        <title id="appendix.function.codes.project.menu.table.title">Project Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -724,11 +724,11 @@
       </table>
     </section>
 
-    <section id="appendix.function.codes.editmenu">
-      <title>Edit Menu Codes</title>
+    <section id="appendix.function.codes.edit.menu">
+      <title id="appendix.function.codes.edit.menu.title">Edit Menu Codes</title>
 
-      <table>
-        <title>Edit Menu</title>
+      <table id="appendix.function.codes.edit.menu.table">
+        <title id="appendix.function.codes.edit.menu.table.title">Edit Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -950,11 +950,11 @@
       </table>
     </section>
 
-    <section id="appendix.function.codes.gotomenu">
-      <title>GoTo Menu Codes</title>
+    <section id="appendix.function.codes.goto.menu">
+      <title id="appendix.function.codes.goto.menu.title">GoTo Menu Codes</title>
 
-      <table>
-        <title>GoTo Menu</title>
+      <table id="appendix.function.codes.goto.menu.table">
+        <title id="appendix.function.codes.goto.menu.table.title">GoTo Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1049,11 +1049,11 @@
       </table>
     </section>
 
-    <section id="appendix.function.codes.viewmenu">
-      <title>View Menu Codes</title>
+    <section id="appendix.function.codes.view.menu">
+      <title id="appendix.function.codes.view.menu.title">View Menu Codes</title>
 
-      <table>
-        <title>View Menu</title>
+      <table id="appendix.function.codes.view.menu.table">
+        <title id="appendix.function.codes.view.menu.table.title">View Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1135,11 +1135,11 @@
       </table>
     </section>
 
-    <section id="appendix.function.codes.toolsmenu">
-      <title>Tools Menu</title>
+    <section id="appendix.function.codes.tools.menu">
+      <title id="appendix.function.codes.tools.menu.title">Tools Menu</title>
 
-      <table>
-        <title>Tools Menu Codes</title>
+      <table id="appendix.function.codes.tools.menu.table">
+        <title id="appendix.function.codes.tools.menu.table.title">Tools Menu Codes</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1188,11 +1188,11 @@
       </table>
     </section>
 
-    <section id="appendix.function.codes.optionmenu">
-      <title>Options Menu Codes</title>
+    <section id="appendix.function.codes.option.menu">
+      <title id="appendix.function.codes.option.menu.title">Options Menu Codes</title>
 
-      <table>
-        <title>Options Menu</title>
+      <table id="appendix.function.codes.option.menu.table">
+        <title id="appendix.function.codes.option.menu.table.title">Options Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1336,11 +1336,11 @@
       </table>
     </section>
 
-    <section id="appendix.function.codes.helpmenu">
-      <title>Help Menu Codes</title>
+    <section id="appendix.function.codes.help.menu">
+      <title id="appendix.function.codes.help.menu.title">Help Menu Codes</title>
 
-      <table>
-        <title>Help Menu</title>
+      <table id="appendix.function.codes.help.menu.table">
+        <title id="appendix.function.codes.help.menu.table.title">Help Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>

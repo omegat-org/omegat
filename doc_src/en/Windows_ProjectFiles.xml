@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.projectfiles">
-  <title>Project Files</title>
+  <title id="windows.projectfiles.title">Project Files</title>
 
   <para>This window is displayed automatically when OmegaT loads a project,
   and at any time by pressing <menuchoice>

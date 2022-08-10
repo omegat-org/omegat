@@ -38,7 +38,7 @@
 
 
   <section id="other.file.formats">
-    <title>Other file formats</title>
+    <title id="other.file.formats.title">Other file formats</title>
 
     <para>Other plain text or formatted text file formats suitable for
     processing in OmegaT may also exist.</para>

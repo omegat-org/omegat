@@ -197,7 +197,7 @@
   </section>
 
   <section id="how.to.setup.team.project.mapping.parameters">
-    <title>Mapping parameters</title>
+    <title id="how.to.setup.team.project.mapping.parameters.title">Mapping parameters</title>
 
     <variablelist>
       <varlistentry>

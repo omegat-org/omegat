@@ -21,8 +21,8 @@
 	<para>Depending on the pane status, different signs can appear at its top right
 	corner:</para>
 
-	<table>
-      <title>Pane widgets</title>
+	<table id="table.pane.widgets">
+      <title id="table.pane.widgets.title">Pane widgets</title>
       <tgroup cols="2">
 		<colspec align="left" colnum="1"/>
 		<tbody>
@@ -134,7 +134,7 @@
   </section>
 
   <section id="panes.editor">
-    <title>Editor</title>
+    <title id="panes.editor.title">Editor</title>
 
     <para>This is where you type and edit your translation.</para>
 
@@ -142,7 +142,7 @@
 	the document and double-click on any segment to open and edit it.</para>
 	
     <figure id="default.editor.target.field">
-      <title>The default editor writing space</title>
+      <title id="default.editor.target.field.title">The default editor writing space</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -188,7 +188,7 @@
 	<note>
 	  <para>You are invited to modify the Editor display to fit your workflow.</para>
       <figure id="modified.editor.target.field">
-		<title>A modified editor writing space</title>
+		<title id="modified.editor.target.field.title">A modified editor writing space</title>
 
 		<mediaobject>
           <imageobject role="html">
@@ -366,7 +366,7 @@
   </section>
 
   <section id="panes.dictionary">
-    <title>Dictionary</title>
+    <title id="panes.dictionary.title">Dictionary</title>
 
     <para>Dictionaries are the electronic equivalents of printed dictionaries
     like Merriam Webster, Duden, Larousse etc., that you may have on your
@@ -375,7 +375,7 @@
   </section>
 
   <section id="panes.machinetranslation">
-    <title>Machine Translation</title>
+    <title id="panes.machinetranslation.title">Machine Translation</title>
 
     <para>The machine translation pane, when opened, contains the suggestions by
     machine translation tools for the current segment. Use 
@@ -387,7 +387,7 @@
   </section>
 
   <section id="panes.multipletranslations">
-    <title>Multiple Translations</title>
+    <title id="panes.multipletranslations.title">Multiple Translations</title>
 
     <para>A given source segment may require several different translations,
     depending on the context. If the current translation of the segment does not
@@ -405,7 +405,7 @@
   </section>
 
   <section id="panes.notes">
-    <title>Notes</title>
+    <title id="panes.notes.title">Notes</title>
 
     <para>The translator can add notes to the opened segment, for instance to
     come back later to the segment and redo the translation, check that
@@ -414,7 +414,7 @@
   </section>
 
   <section id="panes.comments">
-    <title>Comments</title>
+    <title id="panes.comments.title">Comments</title>
 
     <para>Some of the file formats, specialized for translation work, for
     instance PO, allow the inclusion of comments. This way the translator can
@@ -424,7 +424,7 @@
   </section>
 
   <section id="panes.statusbar">
-    <title>Status bar</title>
+    <title id="panes.statusbar.title">Status bar</title>
 
     <para>The status bar displays work-flow related messages at the bottom of
     the main window. This bar gives the user feedback on specific operations
@@ -435,8 +435,8 @@
     the translation (numbers in the left hand column refer to the figure
     above):</para>
 
-    <table>
-      <title>Main Window - counters</title>
+    <table id="table.main.window.counters">
+      <title id="table.main.window.counters.title">Main Window - counters</title>
 
       <tgroup cols="2">
         <colspec align="left" colnum="1"/>

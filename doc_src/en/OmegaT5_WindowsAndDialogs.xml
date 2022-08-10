@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="windows.and.dialogs">
-  <title>Windows and dialogs</title>
+  <title id="windows.and.dialogs.title">Windows and dialogs</title>
 
   <para>The difference is thin: we call "Window" a window that can stay open
   next to the editor and interact with it, and "dialog" a window where you

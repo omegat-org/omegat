@@ -23,10 +23,10 @@
   <section id="installing.omegat">
 	<title id="installing.omegat.title">Installing OmegaT</title>
 	<section id="installing.omegat.windows">
-	  <title>Windows</title>
+	  <title id="installing.omegat.windows.title">Windows</title>
 
       <section id="installing.omegat.windows.download.the.package">
-		<title>Download the package</title>
+		<title id="installing.omegat.windows.download.the.package.title">Download the package</title>
 
 		<para>Do you want OmegaT bundled with Java?</para>
 
@@ -52,7 +52,7 @@
       </section>
 
       <section id="installing.omegat.windows.install.the.package">
-		<title>Install OmegaT</title>
+		<title id="installing.omegat.windows.install.the.package.title">Install OmegaT</title>
 
 		<para>Double-click on the package you have downloaded.</para>
 
@@ -63,10 +63,10 @@
 
 	</section>
 	<section id="installing.omegat.linux.intel">
-      <title>Linux (Intel)</title>
+      <title id="installing.omegat.linux.intel.title">Linux (Intel)</title>
 
       <section id="installing.omegat.linux.intel.download.the.package">
-		<title>Download the package</title>
+		<title id="installing.omegat.linux.intel.download.the.package.title">Download the package</title>
 
 		<para>Do you want OmegaT bundled with Java?</para>
 
@@ -93,7 +93,7 @@
       </section>
 
       <section id="installing.omegat.linux.intel.install.the.package">
-		<title>Install OmegaT</title>
+		<title id="installing.omegat.linux.intel.install.the.package.title">Install OmegaT</title>
 
 		<para>Unpack/untar the downloaded file.  To untar the
 		<filename>.tar.gz</filename> file:</para>
@@ -114,10 +114,10 @@
       </section>
 
       <section id="installing.omegat.linux.intel.add..to.your.menus.or.panels">
-		<title>Add OmegaT to your menus (KDE) or panels (Gnome)</title>
+		<title id="installing.omegat.linux.intel.add.to.your.menus.or.panels.title">Add OmegaT to your menus (KDE) or panels (Gnome)</title>
 
 		<section id="installing.omegat.linux.intel.add..to.your.menus.or.panels.kde">
-          <title>KDE 4</title>
+          <title id="installing.omegat.linux.intel.add.to.your.menus.or.panels.kde.title">KDE 4</title>
 
           <para>You can add OmegaT to your menus as follows:</para>
 
@@ -162,8 +162,8 @@
           </itemizedlist>
 		</section>
 
-		<section id="installing.omegat.linux.intel.add..to.your.menus.or.panels.gnome">
-          <title>GNOME</title>
+		<section id="installing.omegat.linux.intel.add.to.your.menus.or.panels.gnome">
+          <title id="installing.omegat.linux.intel.add.to.your.menus.or.panels.gnome.title">GNOME</title>
 
           <para>You can add OmegaT to your menus as follows:</para>
 
@@ -196,10 +196,10 @@
       </section>
 	</section>
 	<section id="Installing.omegat.macos">
-	  <title>macOS</title>
+	  <title id="Installing.omegat.macos.title">macOS</title>
 
 	  <section id="installing.omegat.macos.download.the.package">
-		<title>Download the package</title>
+		<title id="installing.omegat.macos.download.the.package.title">Download the package</title>
 
 		<para>The macOS package contains &bundledjavaversion;</para>
 
@@ -208,7 +208,7 @@
 	  </section>
 
 	  <section id="installing.omegat.macos.install.the.package">
-		<title>Install OmegaT</title>
+		<title id="installing.omegat.macos.install.the.package.title">Install OmegaT</title>
 
 		<para>Double click on
 		<filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> to unpack
@@ -223,7 +223,7 @@
 	  </section>
 
 	  <section id="installing.omegat.macos.add.to.the.dock">
-		<title>Add OmegaT to the Dock</title>
+		<title id="installing.omegat.macos.add.to.the.dock.title">Add OmegaT to the Dock</title>
 
 		<para>Drag and drop <filename>OmegaT.app</filename> onto the Dock.</para>
 	  </section>
@@ -231,7 +231,7 @@
 	</section>
 
 	<section id="installing.omegat.other.systems">
-	  <title>Other systems</title>
+	  <title id="installing.omegat.other.systems.title">Other systems</title>
 
 	  <para>This information applies to systems such as Solaris SPARC/x86/x64,
 	  Linux x64/PowerPC, Windows x64.</para>
@@ -241,7 +241,7 @@
 	  &javaversionlong;.</para>
 
 	  <section id="installing.omegat.other.systems.download.the.package">
-		<title>The OmegaT generic package</title>
+		<title id="installing.omegat.other.systems.download.the.package.title">The OmegaT generic package</title>
 
 		<para>Download
 		<filename>OmegaT_&vernb;_Without_JRE.zip</filename>. This package
@@ -260,7 +260,7 @@
 	  </section>
 
 	  <section id="installing.omegat.other.systems.install.the.package">
-		<title>Install OmegaT</title>
+		<title id="installing.omegat.other.systems.install.the.package.title">Install OmegaT</title>
 
 		<para>To install OmegaT, simply unpack the
 		<filename>OmegaT_&vernb;_Without_JRE.zip</filename> file. This creates
@@ -269,7 +269,7 @@
 	  </section>
 
 	  <section id="installing.omegat.other.systems.install.convenient.shortcuts">
-		<title>Install convenient shortcuts</title>
+		<title id="installing.omegat.other.systems.install.convenient.shortcuts.title">Install convenient shortcuts</title>
 
 		<para>Follow your system's instructions to install
 		OmegaT shortcuts in convenient places of your
@@ -374,7 +374,7 @@
 
 
       <section id="running.omegat.on.macos.goodies">
-		<title>macOS Services</title>
+		<title id="running.omegat.on.macos.goodies.title">macOS Services</title>
 
 		<para><filename>OmegaT.app</filename> can make use of macOS
 		Services. You can also use AppleScript, Automator or Shortcuts to create
@@ -383,7 +383,7 @@
     </section>
 
 	<section id="running.omegat.on.other.systems">
-	  <title>Other systems</title>
+	  <title id="running.omegat.on.other.systems.title">Other systems</title>
 
 	  <para>Once OmegaT is installed, you can launch
 	  it directly from the command line, you can create a script that includes
@@ -398,7 +398,7 @@
   </section>
 
   <section id="build.omegat.from.source">
-	<title>Building OmegaT From Source</title>
+	<title id="build.omegat.from.source.title">Building OmegaT From Source</title>
 
 	<para>The sources of the current version can be retrieved with a Git client
 	from the repository <ulink url="https://git.code.sf.net/p/omegat/code"/>

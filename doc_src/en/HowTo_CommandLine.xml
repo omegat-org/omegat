@@ -12,7 +12,7 @@
     line.</para>
 
     <section id="launch.with.command.line.open.commandline.window">
-	  <title>Opening a command line window</title>
+	  <title id="launch.with.command.line.open.commandline.window.title">Opening a command line window</title>
 
 	  <para>A command line window is also referred to as a "terminal window".
 	  On Windows it is called an "MS-DOS window" and is available from the Start
@@ -69,7 +69,7 @@
 	</section>
 
 	<section id="launch.with.command.line.java.command.arguments">
-	  <title>java command arguments</title>
+	  <title id="launch.with.command.line.java.command.arguments.title">java command arguments</title>
 
 	  <para>The basic command has already been mentioned above. Changes to this
 	  command involve the addition of "arguments" to it. Arguments are added
@@ -212,7 +212,7 @@
 	</section>
 
 	<section id="launch.with.command.line.omegat.command.arguments">
-	  <title>OmegaT command argument</title>
+	  <title id="launch.with.command.line.omegat.command.arguments.title">OmegaT command argument</title>
 
 	  <para>The purpose of the console mode is to use OmegaT as a translation
 	  tool in a scripting environment. When started in console mode, no GUI is
@@ -220,7 +220,7 @@
 	  automatically processed as requested.</para>
 
 	  <section id="launch.with.command.line.omegat.command.arguments.console.mode.prerequisites">
-		<title>Prerequisites</title>
+		<title id="launch.with.command.line.omegat.command.arguments.console.mode.prerequisites.title">Prerequisites</title>
 
 		<para>To run OmegaT in the command line
 		mode, a valid OmegaT project must be
@@ -427,7 +427,7 @@
 	  </section>
 
 	  <section id="launch.with.command.line.omegat.command.arguments.console.mode.option.quiet">
-		<title>Quiet option</title>
+		<title id="launch.with.command.line.omegat.command.arguments.console.mode.option.quiet.title">Quiet option</title>
 
 		<para>An extra command line parameter specific to console mode:
 		<literal>--quiet</literal>. In the quiet mode, less info is logged to

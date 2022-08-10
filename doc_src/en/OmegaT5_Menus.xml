@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="menus">
-  <title>Menus</title>
+  <title id="menus.title">Menus</title>
   <para>Menus are where you access most of OmegaT's functions. Most of the menu items are associated with keyboard shortcuts. If you want to modify or add keyboard shortcuts, see <link linkend="appendix.shortcut.customization" endterm="appendix.shortcut.customization.title"/> for details.</para>
   
   <xi:include href="Menus_Project.xml"

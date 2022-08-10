@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.text.search">
-  <title>Text Search</title>
+  <title id="windows.text.search.title">Text Search</title>
 
   <para>Open the Search window with <keycombo>
       <keycap>Ctrl</keycap>
@@ -77,7 +77,7 @@
   </itemizedlist>
 
   <section id="using.wild.cards">
-    <title>Using wild cards</title>
+    <title id="using.wild.cards.title">Using wild cards</title>
 
     <para>In both exact and keyword searches, the wild card search characters
     '*' and '?' can be used. They have the meaning, familiar to Word
@@ -108,7 +108,7 @@
   </section>
 
   <section id="search.methoids">
-    <title>Search methods and options</title>
+    <title id="search.methoids.title">Search methods and options</title>
 
     <para>Select the method using the radio buttons. The following search
     methods are available:</para>
@@ -254,7 +254,7 @@
   </section>
 
   <section id="search.result.display">
-    <title>Search results display</title>
+    <title id="search.result.display.title">Search results display</title>
 
     <para>Pressing the search button after entering a string in the search
     field displays all the segments in the project that include the entered
@@ -285,7 +285,7 @@
   </section>
 
   <section id="search.filter">
-    <title>Filter entries in editor according to search</title>
+    <title id="search.filter.title">Filter entries in editor according to search</title>
 
     <para>For easier navigation in the search result set, you can apply the
     search to the editor. Press the <guibutton>Filter</guibutton>

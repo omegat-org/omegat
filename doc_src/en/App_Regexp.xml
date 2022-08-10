@@ -2,7 +2,7 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.regexp">
-  <title>Regular expressions</title>
+  <title id="appendix.regexp.title">Regular expressions</title>
 
   <para>The regular expressions (or regex for short) used in searches and
   segmentation rules are those supported by Java. Should you need more
@@ -16,8 +16,8 @@
     powerful key search items.</para>
   </note>
 
-  <table>
-    <title>Regex - Flags</title>
+  <table id="regex.flags">
+    <title id="regex.flags.title">Regex - Flags</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -41,8 +41,8 @@
     </tgroup>
   </table>
 
-  <table>
-    <title>Regex - Character</title>
+  <table id="regex.characters">
+    <title id="regex.characters.title">Regex - Character</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -139,8 +139,8 @@
     </tgroup>
   </table>
 
-  <table>
-    <title>Regex - Quotation</title>
+  <table id="regex.quotation">
+    <title id="regex.quotation.title">Regex - Quotation</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -183,8 +183,8 @@
     </tgroup>
   </table>
 
-  <table>
-    <title>Regex - Classes for Unicode blocks and categories</title>
+  <table id="regex.unicode.blocs">
+    <title id="regex.unicode.blocs.title">Regex - Classes for Unicode blocks and categories</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -234,8 +234,8 @@
     </tgroup>
   </table>
 
-  <table>
-    <title>Regex - Character classes</title>
+  <table id="regex.classes">
+    <title id="regex.classes.title">Regex - Character classes</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -270,8 +270,8 @@
     </tgroup>
   </table>
 
-  <table>
-    <title>Regex - Predefined character classes</title>
+  <table id="regex.predefines.classes">
+    <title id="regex.predefines.classes.title">Regex - Predefined character classes</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -330,8 +330,8 @@
     </tgroup>
   </table>
 
-  <table>
-    <title>Regex - Boundary matchers</title>
+  <table id="regex.boundary.matchers">
+    <title id="regex.boundary.matchers.title">Regex - Boundary matchers</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -372,8 +372,8 @@
     </tgroup>
   </table>
 
-  <table>
-    <title>Regex - Greedy quantifiers</title>
+  <table id="regex.greedy.quantifiers">
+    <title id="regex.greedy.quantifiers.title">Regex - Greedy quantifiers</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -414,8 +414,8 @@
     <emphasis>aaabbb</emphasis></para>
   </note>
 
-  <table>
-    <title>Regex - Reluctant (non-greedy) quantifiers</title>
+  <table id="regex.non.greedy.quantifiers">
+    <title id="regex.non.greedy.quantifiers.title">Regex - Reluctant (non-greedy) quantifiers</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -456,8 +456,8 @@
     <emphasis>a</emphasis> in <emphasis>aaabbb</emphasis></para>
   </note>
 
-  <table>
-    <title>Regex - Logical operators</title>
+  <table id="regex.logical.operators">
+    <title id="regex.logical.operators.title">Regex - Logical operators</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -493,7 +493,7 @@
   </table>
 
   <section id="regex.tools.and.examples.of.use">
-    <title>Regex tools and examples of use</title>
+    <title id="regex.tools.and.examples.of.use.title">Regex tools and examples of use</title>
 
     <para>A number of interactive tools are available to develop and test
     regular expressions. They generally follow much the same pattern (for an
@@ -502,7 +502,7 @@
     yielding the hits, shown in the result Text box.</para>
 
     <figure id="regerx.tester">
-      <title>Regex Tester</title>
+      <title id="regerx.tester.title">Regex Tester</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -524,8 +524,8 @@
     The following list includes expressions you may find useful when searching
     through the translation memory:</para>
 
-    <table>
-      <title>Regex - Examples of regular expressions in translations</title>
+    <table id="regex.examples">
+      <title id="regex.examples.title">Regex - Examples of regular expressions in translations</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1"/>

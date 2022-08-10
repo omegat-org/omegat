@@ -2,7 +2,7 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.glossaries">
-  <title>Glossaries</title>
+  <title id="appendix.glossaries.title">Glossaries</title>
 
   <para>Glossaries are terminology files. They can be created and updated
   manually or imported from other projects.</para>
@@ -15,8 +15,8 @@
   segment that has a match in a glossary will be displayed in the Glossary
   pane.</para>
 
-  <section id="glossaries.defaultglossary">
-    <title>Default glossary</title>
+  <section id="glossaries.default.glossary">
+    <title id="glossaries.default.glossary.title">Default glossary</title>
 
     <para>The default writable glossary is located in the the
     <filename class="directory">glossary</filename> project folder and is called
@@ -35,7 +35,7 @@
   </section>
 
   <section id="glossaries.usage">
-    <title>Usage</title>
+    <title id="glossaries.usage.title">Usage</title>
 
     <para>To use an existing glossary, simply place it in the
     <filename class="directory">glossary</filename> folder after creating the project.
@@ -73,7 +73,7 @@
   </section>
 
   <section id="glossaries.fileformat">
-    <title>File format</title>
+    <title id="glossaries.fileformat.title">File format</title>
 
     <para>OmegaT glossary files are simple plain text three-column lists with
     the source term in the first column, an optional target term in the second
@@ -170,8 +170,8 @@
     recognized.</para>
   </section>
 
-  <section id="glossaries.commonproblems">
-    <title>Common glossary problems</title>
+  <section id="glossaries.common.problems">
+    <title id="glossaries.common.problems.title">Common glossary problems</title>
 
     <para><emphasis role="bold">Problem: No glossary terms are displayed -
     possible causes:</emphasis></para>

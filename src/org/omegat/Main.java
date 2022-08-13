@@ -554,7 +554,7 @@ public final class Main {
      * @return the project.
      */
     private static RealProject selectProjectConsoleMode(boolean loadProject) {
-        Log.log(OStrings.getString("CONSOLE_LOADING_PROJECT"));
+        System.out.println(OStrings.getString("CONSOLE_LOADING_PROJECT"));
 
         // check if project okay
         ProjectProperties projectProperties = null;

@@ -8,6 +8,7 @@
                2012 Aaron Madlon-Kay
                2013 Kyle Katarn, Aaron Madlon-Kay
                2014 Alex Buloichik
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -29,15 +30,24 @@
 
 package org.omegat;
 
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
+import static java.nio.file.StandardOpenOption.WRITE;
+
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,6 +73,8 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.statistics.CalcStandardStatistics;
+import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
@@ -94,6 +106,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  * @author Kyle Katarn
+ * @author Hiroshi Miura
  */
 public final class Main {
 
@@ -195,6 +208,10 @@ public final class Main {
                 break;
             case CONSOLE_ALIGN:
                 result = runConsoleAlign();
+                PluginUtils.unloadPlugins();
+                break;
+            case CONSOLE_STATS:
+                result = runConsoleStats();
                 PluginUtils.unloadPlugins();
                 break;
             default:
@@ -370,6 +387,69 @@ public final class Main {
         executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
 
+        return 0;
+    }
+
+    /**
+     * Displays or writes project statistics.
+     * <p>
+     *     takes two optional arguments
+     * <code>[--output-file=(file path) [--stats-type=[XML|JSON|TEXT]]]</code>
+     * when omitted, display stats text(localized).
+     * When file I/O error occurred, especially when parent directory does not exist
+     * warns it and return 1.
+     */
+    private static int runConsoleStats() throws Exception {
+        Log.log("Console project stats mode");
+        Log.log("");
+
+        Core.initializeConsole(PARAMS);
+
+        RealProject p = selectProjectConsoleMode(true);
+        StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
+
+        if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
+            // no output file specified, print to console.
+            System.out.println(projectStats.getTextData());
+            p.closeProject();
+            return 0;
+        }
+
+        String outputFilename = PARAMS.get(CLIParameters.STATS_OUTPUT);
+        String statsMode;
+        if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
+            statsMode = PARAMS.get(CLIParameters.STATS_MODE);
+        } else {
+            // when no stats type specified, try to detect from file extension, otherwise XML.
+            if (outputFilename.endsWith(".json") || outputFilename.endsWith(".JSON")) {
+                statsMode = "JSON";
+            } else if (outputFilename.endsWith(".xml") || outputFilename.endsWith(".XML")) {
+                statsMode = "XML";
+            } else if (outputFilename.endsWith(".txt") || outputFilename.endsWith(".TXT")) {
+                statsMode = "TXT";
+            } else {
+                statsMode = "XML";
+            }
+        }
+        try (OutputStreamWriter writer = new OutputStreamWriter(
+                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)),
+                        CREATE, TRUNCATE_EXISTING, WRITE),
+                StandardCharsets.UTF_8)) {
+            if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
+                writer.write(projectStats.getTextData());
+            } else if ("JSON".equalsIgnoreCase(statsMode)) {
+                writer.write(projectStats.getJsonData());
+            } else if ("XML".equalsIgnoreCase(statsMode)){
+                writer.write(projectStats.getXmlData());
+            } else {
+                Log.log("Specified UNKNOWN file type for statistics. aborted.");
+            }
+        } catch (NoSuchFileException nsfe) {
+            Log.log("Got directory/file open error. Does specified directory exist?");
+            return 1;
+        } finally {
+            p.closeProject();
+        }
         return 0;
     }
 

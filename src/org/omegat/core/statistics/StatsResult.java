@@ -29,10 +29,24 @@
 
 package org.omegat.core.statistics;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.TimeZone;
 
-import org.omegat.core.data.ProjectProperties;
+import javax.xml.bind.JAXB;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SequenceWriter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;
@@ -40,6 +54,7 @@ import org.omegat.util.gui.TextUtil;
 /**
  * @author Vladimir Bychkov
  */
+@XmlRootElement(name="omegat-stats")
 public class StatsResult {
     public static final String[] HT_HEADERS = {
         "",
@@ -82,16 +97,42 @@ public class StatsResult {
     private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true, true, true, true, true,
             true, true, true, true, true, };
 
-    private StatCount total = new StatCount();
-    private StatCount remaining = new StatCount();
-    private StatCount unique = new StatCount();
-    private StatCount remainingUnique = new StatCount();
+    @JsonProperty("project")
+    private StatProjectProperties props;
+
+    private StatCount total;
+    private StatCount remaining;
+    private StatCount unique;
+    @JsonProperty("unique-remaining")
+    private StatCount remainingUnique;
 
     private Set<String> translated;
+    @JsonProperty("files")
     private List<FileData> counts;
 
+    @JsonProperty("date")
+    private String date;
+
+    public StatsResult() {
+        props = new StatProjectProperties();
+        total = new StatCount();
+        remaining = new StatCount();
+        unique = new StatCount();
+        remainingUnique = new StatCount();
+    }
+
+    /**
+     * Constructor.
+     * @param total
+     * @param remaining
+     * @param unique
+     * @param remainingUnique
+     * @param translated
+     * @param counts
+     */
     public StatsResult(StatCount total, StatCount remaining, StatCount unique, StatCount remainingUnique,
             Set<String> translated, List<FileData> counts) {
+        props = new StatProjectProperties();
         this.total = total;
         this.remaining = remaining;
         this.unique = unique;
@@ -101,6 +142,10 @@ public class StatsResult {
         this.counts = counts;
     }
 
+    /**
+     * Update given hosStat with current stats data.
+     * @param hotStat StatisticsInfo data object.
+     */
     public void updateStatisticsInfo(StatisticsInfo hotStat) {
         hotStat.numberOfSegmentsTotal = total.segments;
         hotStat.numberOfTranslatedSegments = translated.size();
@@ -111,27 +156,67 @@ public class StatsResult {
         }
     }
 
+    @XmlElement(name="date")
+    public String getDate() {
+        return date;
+    }
+
+    @XmlElement(name="project")
+    public StatProjectProperties getProps() {
+        return props;
+    }
+
+    /**
+     * Return total number of segments.
+     * @return
+     */
+    @XmlElement(name="total")
     public StatCount getTotal() {
         return total;
     }
 
+    /**
+     * Return remaining number of segments that needs translation.
+     * @return
+     */
+    @XmlElement(name="remaining")
     public StatCount getRemaining() {
         return remaining;
     }
 
+    /**
+     * Return a number of unique segments.
+     * @return
+     */
+    @XmlElement(name="unique")
     public StatCount getUnique() {
         return unique;
     }
 
+    /**
+     * Return a number of remaining unique segments.
+     * @return
+     */
+    @XmlElement(name="unique-remaining")
     public StatCount getRemainingUnique() {
         return remainingUnique;
     }
 
+    /**
+     * return a statistics of each source/target files.
+     * @return
+     */
+    @XmlElement(name="files")
     public List<FileData> getCounts() {
         return counts;
     }
 
-    public String getTextData(final ProjectProperties config) {
+    /**
+     * Return pretty printed statistics data.
+     * @return pretty-printed string.
+     */
+    @JsonIgnore
+    public String getTextData() {
         StringBuilder result = new StringBuilder();
 
         result.append(OStrings.getString("CT_STATS_Project_Statistics"));
@@ -143,10 +228,45 @@ public class StatsResult {
         // STATISTICS BY FILE
         result.append(OStrings.getString("CT_STATS_FILE_Statistics"));
         result.append("\n\n");
-        result.append(TextUtil.showTextTable(FT_HEADERS, getFilesTable(config), FT_ALIGN));
+        result.append(TextUtil.showTextTable(FT_HEADERS, getFilesTable(), FT_ALIGN));
         return result.toString();
     }
 
+    /**
+     * Return JSON expression of stats data.
+     * @return JSON string data.
+     * @throws IOException when export failed.
+     */
+    @JsonIgnore
+    public String getJsonData() throws IOException {
+        setDate();
+        StringWriter result = new StringWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        SequenceWriter writer = mapper.writer().writeValues(result);
+        writer.write(this);
+        writer.close();
+        return result.toString();
+    }
+
+    /**
+     * Return XML expression of Stats data.
+     * @return XML expression of stats data as String.
+     */
+    @JsonIgnore
+    public String getXmlData() {
+        setDate();
+        StringWriter result = new StringWriter();
+        JAXB.marshal(this, result);
+        return result.toString();
+    }
+
+    private void setDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        date = dateFormat.format(new Date());
+    }
+
+    @JsonIgnore
     public String[][] getHeaderTable() {
         StatCount[] result = new StatCount[] { total, remaining, unique, remainingUnique };
         String[][] table = new String[result.length][6];
@@ -162,12 +282,13 @@ public class StatsResult {
         return table;
     }
 
-    public String[][] getFilesTable(final ProjectProperties config) {
+    @JsonIgnore
+    public String[][] getFilesTable() {
         String[][] table = new String[counts.size()][17];
 
         int r = 0;
         for (FileData numbers : counts) {
-            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, config.getSourceRoot());
+            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, props.getSourceRoot());
             table[r][1] = Integer.toString(numbers.total.segments);
             table[r][2] = Integer.toString(numbers.remaining.segments);
             table[r][3] = Integer.toString(numbers.unique.segments);

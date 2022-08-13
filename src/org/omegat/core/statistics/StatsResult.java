@@ -205,15 +205,15 @@ public class StatsResult {
                 "unique-remaining-characters" };
 
         String[][] filesTable = getFilesTable(props);
-        for (int f = 0; f < filesTable.length; f++) {
+        for (String[] strings : filesTable) {
             xml.writeStartElement("file");
-            xml.writeAttribute(fileAttrs[0], filesTable[f][0]); // name
+            xml.writeAttribute(fileAttrs[0], strings[0]); // name
             xml.writeCharacters(System.lineSeparator());
             for (int h = 0; h < headers.length; h++) {
                 xml.writeEmptyElement(headers[h]);
 
                 for (int a = 0; a < attrs.length; a++) {
-                    xml.writeAttribute(attrs[a], filesTable[f][1 + a + (h * attrs.length)]);
+                    xml.writeAttribute(attrs[a], strings[1 + a + (h * attrs.length)]);
                 }
                 xml.writeCharacters(System.lineSeparator());
             }

@@ -30,15 +30,13 @@
 package org.omegat;
 
 import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -391,27 +389,22 @@ public final class Main {
 
         RealProject p = selectProjectConsoleMode(true);
         ProjectProperties config = p.getProjectProperties();
-        String outputMode = null;
-
-        if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
-            outputMode = PARAMS.get(CLIParameters.STATS_MODE).toUpperCase();
-        }
-
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
 
         if (PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
             File outputXML = new File(PARAMS.get(CLIParameters.STATS_OUTPUT));
-            FileWriter fw = new FileWriter(outputXML);
-            if ("XML".equals(outputMode)) {
-                fw.write(projectStats.getXmlData(config));
-            } else {
-                fw.write(projectStats.getTextData(config));
+            try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputXML.toPath()),
+                    StandardCharsets.UTF_8)) {
+                if (PARAMS.containsKey(CLIParameters.STATS_MODE) &&
+                        "XML".equalsIgnoreCase(PARAMS.get(CLIParameters.STATS_MODE))) {
+                    writer.write(projectStats.getXmlData(config));
+                } else {
+                    writer.write(projectStats.getTextData(config));
+                }
             }
-            fw.close();
         } else {
             System.out.println(projectStats.getTextData(config));
         }
-
         p.closeProject();
         return 0;
     }

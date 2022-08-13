@@ -33,6 +33,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
@@ -63,6 +64,8 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.statistics.CalcStandardStatistics;
+import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
@@ -195,6 +198,10 @@ public final class Main {
                 break;
             case CONSOLE_ALIGN:
                 result = runConsoleAlign();
+                PluginUtils.unloadPlugins();
+                break;
+            case CONSOLE_STATS:
+                result = runConsoleStats();
                 PluginUtils.unloadPlugins();
                 break;
             default:
@@ -374,6 +381,42 @@ public final class Main {
     }
 
     /**
+     * Displays statistics from a project.
+     */
+    private static int runConsoleStats() throws Exception {
+        Log.log("Console project stats mode");
+        Log.log("");
+
+        Core.initializeConsole(PARAMS);
+
+        RealProject p = selectProjectConsoleMode(true);
+        ProjectProperties config = p.getProjectProperties();
+        String outputMode = null;
+
+        if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
+            outputMode = PARAMS.get(CLIParameters.STATS_MODE).toUpperCase();
+        }
+
+        StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
+
+        if (PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
+            File outputXML = new File(PARAMS.get(CLIParameters.STATS_OUTPUT));
+            FileWriter fw = new FileWriter(outputXML);
+            if ("XML".equals(outputMode)) {
+                fw.write(projectStats.getXmlData(config));
+            } else {
+                fw.write(projectStats.getTextData(config));
+            }
+            fw.close();
+        } else {
+            System.out.println(projectStats.getTextData(config));
+        }
+
+        p.closeProject();
+        return 0;
+    }
+
+    /**
      * Validates tags according to command line specs:
      * <code>--tag-validation=[abort|warn]</code>
      * <p>
@@ -511,7 +554,7 @@ public final class Main {
      * @return the project.
      */
     private static RealProject selectProjectConsoleMode(boolean loadProject) {
-        System.out.println(OStrings.getString("CONSOLE_LOADING_PROJECT"));
+        Log.log(OStrings.getString("CONSOLE_LOADING_PROJECT"));
 
         // check if project okay
         ProjectProperties projectProperties = null;

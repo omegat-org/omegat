@@ -29,13 +29,23 @@
 
 package org.omegat.core.statistics;
 
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.TimeZone;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;
+
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 
 /**
  * @author Vladimir Bychkov
@@ -144,6 +154,80 @@ public class StatsResult {
         result.append(OStrings.getString("CT_STATS_FILE_Statistics"));
         result.append("\n\n");
         result.append(TextUtil.showTextTable(FT_HEADERS, getFilesTable(config), FT_ALIGN));
+        return result.toString();
+    }
+
+    public String getXmlData(final ProjectProperties props) throws XMLStreamException {
+
+        StringWriter result = new StringWriter();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        XMLStreamWriter xml = XMLOutputFactory.newInstance().createXMLStreamWriter(result);
+
+        xml.writeStartDocument(StandardCharsets.UTF_8.name(), "1.0");
+        xml.writeCharacters(System.lineSeparator());
+
+        xml.writeStartElement("omegat-stats");
+        xml.writeAttribute("date", dateFormat.format(new Date()));
+        xml.writeCharacters(System.lineSeparator());
+
+        xml.writeStartElement("project");
+        xml.writeAttribute("name", props.getProjectName());
+        xml.writeAttribute("root", props.getProjectRoot());
+        xml.writeAttribute("source", props.getSourceLanguage().toString());
+        xml.writeAttribute("target", props.getTargetLanguage().toString());
+        xml.writeCharacters(System.lineSeparator());
+
+        // Header stats
+        String[][] headerTable = getHeaderTable();
+        String[] headers = { "segments", "words", "characters-nosp", "characters" };
+        String[] attrs = { "total", "remaining", "unique", "unique-remaining" };
+
+        for (int h = 0; h < headers.length; h++) {
+            xml.writeEmptyElement(headers[h]);
+
+            for (int a = 1; a < attrs.length; a++) {
+                xml.writeAttribute(attrs[a], headerTable[h][a]);
+            }
+            xml.writeCharacters(System.lineSeparator());
+        }
+        xml.writeEndElement();
+        xml.writeCharacters(System.lineSeparator());
+
+        // STATISTICS BY FILE
+        xml.writeStartElement("files");
+        xml.writeCharacters(System.lineSeparator());
+
+        String[] fileAttrs = { "name", "total-segments", "remaining-segments", "unique-segments",
+                "unique-remaining-segments", "total-words", "remaining-words", "unique-words", "unique-remaining-words",
+                "total-characters-nosp", "remaining-characters-nosp", "unique-characters-nosp",
+                "unique-remaining-characters-nosp", "total-characters", "remaining-characters", "unique-characters",
+                "unique-remaining-characters" };
+
+        String[][] filesTable = getFilesTable(props);
+        for (int f = 0; f < filesTable.length; f++) {
+            xml.writeStartElement("file");
+            xml.writeAttribute(fileAttrs[0], filesTable[f][0]); // name
+            xml.writeCharacters(System.lineSeparator());
+            for (int h = 0; h < headers.length; h++) {
+                xml.writeEmptyElement(headers[h]);
+
+                for (int a = 0; a < attrs.length; a++) {
+                    xml.writeAttribute(attrs[a], filesTable[f][1 + a + (h * attrs.length)]);
+                }
+                xml.writeCharacters(System.lineSeparator());
+            }
+            xml.writeEndElement();
+
+            xml.writeCharacters(System.lineSeparator());
+        }
+
+        xml.writeEndElement();
+
+        xml.writeEndElement();
+        xml.writeEndDocument();
+        xml.close();
+
         return result.toString();
     }
 

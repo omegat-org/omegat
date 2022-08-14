@@ -38,14 +38,14 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
+
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;
-
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 
 /**
  * @author Vladimir Bychkov
@@ -180,7 +180,7 @@ public class StatsResult {
 
         // Header stats
         String[][] headerTable = getHeaderTable();
-        String[] headers = { "segments", "words", "characters-nosp", "characters" };
+        String[] headers = { "segments", "words", "characters-nosp", "characters", "files" };
         String[] attrs = { "total", "remaining", "unique", "unique-remaining" };
 
         for (int h = 0; h < headers.length; h++) {

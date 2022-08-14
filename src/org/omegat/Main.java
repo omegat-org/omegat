@@ -29,7 +29,7 @@
 
 package org.omegat;
 
-import static java.nio.file.StandardOpenOption.CREATE_NEW;
+import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static java.nio.file.StandardOpenOption.WRITE;
 
@@ -412,7 +412,7 @@ public final class Main {
         }
         Path outputXML = new File(PARAMS.get(CLIParameters.STATS_OUTPUT)).toPath().toAbsolutePath();
         try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(outputXML, CREATE_NEW, TRUNCATE_EXISTING, WRITE),
+                Files.newOutputStream(outputXML, CREATE, TRUNCATE_EXISTING, WRITE),
                 StandardCharsets.UTF_8)) {
             // no stats type specified.
             if (statsMode == null) {

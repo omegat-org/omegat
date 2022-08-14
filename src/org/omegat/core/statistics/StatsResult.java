@@ -185,9 +185,8 @@ public class StatsResult {
 
         for (int h = 0; h < headers.length; h++) {
             xml.writeEmptyElement(headers[h]);
-
             for (int a = 1; a < attrs.length; a++) {
-                xml.writeAttribute(attrs[a], headerTable[h][a]);
+                xml.writeAttribute(attrs[a], headerTable[a][h + 1]);
             }
             xml.writeCharacters(System.lineSeparator());
         }
@@ -209,9 +208,8 @@ public class StatsResult {
             xml.writeStartElement("file");
             xml.writeAttribute(fileAttrs[0], strings[0]); // name
             xml.writeCharacters(System.lineSeparator());
-            for (int h = 0; h < headers.length; h++) {
+            for (int h = 0; h < headers.length - 1; h++) {
                 xml.writeEmptyElement(headers[h]);
-
                 for (int a = 0; a < attrs.length; a++) {
                     xml.writeAttribute(attrs[a], strings[1 + a + (h * attrs.length)]);
                 }

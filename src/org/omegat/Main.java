@@ -46,6 +46,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -401,9 +402,9 @@ public final class Main {
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
 
         if (PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
-            File outputXML = new File(PARAMS.get(CLIParameters.STATS_OUTPUT));
+            Path outputXML = new File(PARAMS.get(CLIParameters.STATS_OUTPUT)).toPath();
             try (OutputStreamWriter writer =
-                         new OutputStreamWriter(Files.newOutputStream(outputXML.toPath(), CREATE_NEW,
+                         new OutputStreamWriter(Files.newOutputStream(outputXML.toAbsolutePath(), CREATE_NEW,
                                  TRUNCATE_EXISTING, WRITE), StandardCharsets.UTF_8)) {
                 if (PARAMS.containsKey(CLIParameters.STATS_MODE) &&
                         "XML".equalsIgnoreCase(PARAMS.get(CLIParameters.STATS_MODE))) {

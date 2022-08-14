@@ -401,22 +401,29 @@ public final class Main {
         ProjectProperties config = p.getProjectProperties();
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
 
-        if (PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
-            Path outputXML = new File(PARAMS.get(CLIParameters.STATS_OUTPUT)).toPath();
-            try (OutputStreamWriter writer =
-                         new OutputStreamWriter(Files.newOutputStream(outputXML.toAbsolutePath(), CREATE_NEW,
-                                 TRUNCATE_EXISTING, WRITE), StandardCharsets.UTF_8)) {
-                if (PARAMS.containsKey(CLIParameters.STATS_MODE) &&
-                        "XML".equalsIgnoreCase(PARAMS.get(CLIParameters.STATS_MODE))) {
-                    writer.write(projectStats.getXmlData(config));
-                } else {
-                    writer.write(projectStats.getTextData(config));
-                }
-            } catch (NoSuchFileException nsfe) {
-                Log.log("Got directory/file open error. Does specified directory exist?");
-            }
-        } else {
+        if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) { // no output file specified.
             System.out.println(projectStats.getTextData(config));
+            p.closeProject();
+            return 0;
+        }
+        String statsMode = null;
+        if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
+            statsMode = PARAMS.get(CLIParameters.STATS_MODE);
+        }
+        Path outputXML = new File(PARAMS.get(CLIParameters.STATS_OUTPUT)).toPath().toAbsolutePath();
+        try (OutputStreamWriter writer = new OutputStreamWriter(
+                Files.newOutputStream(outputXML, CREATE_NEW, TRUNCATE_EXISTING, WRITE),
+                StandardCharsets.UTF_8)) {
+            // no stats type specified.
+            if (statsMode == null) {
+                writer.write(projectStats.getXmlData(config));
+            } else if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
+                writer.write(projectStats.getTextData(config));
+            } else {
+                writer.write(projectStats.getXmlData(config));
+            }
+        } catch (NoSuchFileException nsfe) {
+            Log.log("Got directory/file open error. Does specified directory exist?");
         }
         p.closeProject();
         return 0;

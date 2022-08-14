@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.projectfiles">
-  <title id="windows.projectfiles.title">Project Files</title>
+<section id="windows.project.files">
+  <title id="windows.project.files.title">Project Files</title>
 
-  <para>This window is displayed automatically when OmegaT loads a project,
-  and at any time by pressing <menuchoice>
-      <guimenuitem>Project</guimenuitem>
-
-      <guimenuitem>Project Files...</guimenuitem>
-    </menuchoice>.</para>
+  <para>This window is displayed automatically when OmegaT loads a project, and
+  at any time by pressing
+  <menuchoice><guimenuitem>Project</guimenuitem><guimenuitem>Project
+  Files...</guimenuitem></menuchoice>.</para>
 
   <para><remark>Note:</remark> it is possible to inhibit the window displaying
   at opening, by setting <emphasis>project_files_show_on_load</emphasis> to
@@ -20,9 +18,9 @@
       <guimenuitem>Access Configuration Folder</guimenuitem>
     </menuchoice> menu).</para>
 
-  <para>Use <keycombo><keycap>Ctrl</keycap><keycap>L</keycap></keycombo> to open and <keycap>Esc</keycap>
-  to close it. The <guilabel>Project Files</guilabel> Window displays the
-  following information:</para>
+  <para>Use <keycombo><keycap>C</keycap><keycap>l</keycap></keycombo> to open
+  and <keycap>Esc</keycap> to close it. The <guilabel>Project Files</guilabel>
+  window displays the following information:</para>
 
   <itemizedlist>
     <listitem>

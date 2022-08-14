@@ -23,6 +23,16 @@
   </example>
   <para>See <link linkend="appendix.shortcut.description" endterm="appendix.shortcut.description.title"/> for details.</para>
   </section>
+
+  <section id="introduction.omegat.">
+	<title id="introduction.omegat.principles.title">OmegaT principles and definitions</title>
+	<para></para>
+	<variablelist>
+	  <varlistentry><term>Translation project</term><listitem><para></para></listitem></varlistentry>
+	  <varlistentry><term>Translation memories</term><listitem><para></para></listitem></varlistentry>
+	  <varlistentry><term></term><listitem><para></para></listitem></varlistentry>
+	</variablelist>
+  </section>
   
   <section id="introduction.create.and.open.new.project">
     <title id="introduction.create.and.open.new.project.title">Set up a new project</title>
@@ -31,10 +41,11 @@
     files, such as your source files, translation memories, glossaries, and
     eventually your translated files.</para>
 
-	<para>In the <guimenu>Project</guimenu> menu,
-    select <menuchoice><guimenuitem>New...</guimenuitem></menuchoice> and type a
-    name for your project. Remember where you are creating the project, because
-    you will need to return to it later.</para>
+	<para>In the <guimenu>Project</guimenu> menu, select
+	<menuchoice><guimenuitem>New...</guimenuitem></menuchoice> (or hit
+	<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>n</keycap></keycombo>)
+	and type a name for your project. Remember where you are creating the
+	project, because you will need to return to it later.</para>
 
     <para>After you give your project a name, the <guilabel>Create New
     Project</guilabel> dialog will open. At the top of that dialog, select your
@@ -43,32 +54,40 @@
 
     <para>If you are interested in other settings of this dialog, you can return
     to it any time by pressing
-    <keycombo><keycap>C</keycap><keycap>e</keycap></keycombo>.</para>
+    <keycombo><keycap>C</keycap><keycap>e</keycap></keycombo> to display the
+    <link linkend="dialogs.project.properties"
+    endterm="dialogs.project.properties.title"/> dialog.</para>
 
-    <para>Next, the <guilabel>Project Files</guilabel> dialog opens. Click on
+    <para>Next, the <link linkend="windows.project.files"
+    endterm="windows.project.files.title" /> dialog opens. Click on
     <guibutton>Copy Files to Source Folder...</guibutton> to select your source
-    files. OmegaT will then copy the selected files to the <filename
-    class="directory">source</filename> subfolder of your newly created
-    project. After the source files have loaded in the
-    <guilabel>Editor</guilabel> pane, you can close the <guilabel>Project
-    Files</guilabel> dialog.</para>
+    files. OmegaT will then copy the selected files to the <link
+    linkend="project.folder.source" endterm="project.folder.source.title"/>
+    subfolder of your newly created project. After the source files have loaded
+    in the <link linkend="panes.editor" endterm="panes.editor.title" /> pane,
+    you can close the <guilabel>Project Files</guilabel> dialog.</para>
   </section>
 
   <section id="introduction.translate.the.segments.one.by.one">
     <title id="introduction.translate.the.segments.one.by.one.title">Translate the file</title>
 
-    <para>OmegaT will present one segment at a time for you to translate.  After
-    you have translated each segment, press
+    <para>In the <link linkend="panes.editor" endterm="panes.editor.title" />
+    pane, OmegaT will present one segment at a time for you to translate.  After
+    you have translated a segment, press
     <keycombo><keycap>C</keycap><keycap>u</keycap></keycombo> to move to the
-    next untranslated segment (or
-    <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>u</keycap></keycombo>
-    to move to the next translated segment). Whenever you want to see what your
-    translation will look like in its final format, press
-    <keycombo><keycap>C</keycap><keycap>d</keycap></keycombo> to generate the
-    translated documents, which will be created in the <filename
-    class="directory">target</filename> subfolder of your project folder. During
-    translation, use the <guimenu>Edit</guimenu> and <guimenu>Go To</guimenu>
-    menus to perform various useful functions.</para>
+    next untranslated segment. See the <link linkend="menus.goto"
+    endterm="menus.goto.title"/> menu for more navigation options.</para>
+
+	<para>Whenever you want to see what your translation will look like in its
+	final format, press
+	<keycombo><keycap>C</keycap><keycap>d</keycap></keycombo> to generate the
+	translated documents, which will be created in the <link
+	linkend="project.folder.target" endterm="project.folder.target.title"/>
+	subfolder of your project folder.</para>
+
+	<para>During translation, use the <link linkend="menus.edit"
+	endterm="menus.edit.title"/> menu to perform various useful
+	functions.</para>
   </section>
 
   <section id="introduction.validate.your.tags">

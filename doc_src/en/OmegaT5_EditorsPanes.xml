@@ -117,7 +117,8 @@
         project.</para>
 		<para>Other dropped files will be copied to the <filename
 		class="directory">source</filename> folder. This applies also to the
-		<link linkend="windows.projectfiles">Project files</link> window.</para>
+		<link linkend="windows.project.files"
+		endterm="windows.project.files.title"/> window.</para>
       </listitem>
 
       <listitem>

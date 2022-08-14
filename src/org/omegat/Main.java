@@ -29,6 +29,10 @@
 
 package org.omegat;
 
+import static java.nio.file.StandardOpenOption.CREATE_NEW;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
+import static java.nio.file.StandardOpenOption.WRITE;
+
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,6 +45,7 @@ import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -397,14 +402,17 @@ public final class Main {
 
         if (PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
             File outputXML = new File(PARAMS.get(CLIParameters.STATS_OUTPUT));
-            try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputXML.toPath()),
-                    StandardCharsets.UTF_8)) {
+            try (OutputStreamWriter writer =
+                         new OutputStreamWriter(Files.newOutputStream(outputXML.toPath(), CREATE_NEW,
+                                 TRUNCATE_EXISTING, WRITE), StandardCharsets.UTF_8)) {
                 if (PARAMS.containsKey(CLIParameters.STATS_MODE) &&
                         "XML".equalsIgnoreCase(PARAMS.get(CLIParameters.STATS_MODE))) {
                     writer.write(projectStats.getXmlData(config));
                 } else {
                     writer.write(projectStats.getTextData(config));
                 }
+            } catch (NoSuchFileException nsfe) {
+                Log.log("Got directory/file open error. Does specified directory exist?");
             }
         } else {
             System.out.println(projectStats.getTextData(config));

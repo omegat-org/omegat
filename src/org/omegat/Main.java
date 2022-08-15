@@ -419,6 +419,8 @@ public final class Main {
                 writer.write(projectStats.getXmlData(config));
             } else if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
                 writer.write(projectStats.getTextData(config));
+            } else if ("JSON".equalsIgnoreCase(statsMode)) {
+                writer.write(projectStats.getJsonData(config));
             } else {
                 writer.write(projectStats.getXmlData(config));
             }

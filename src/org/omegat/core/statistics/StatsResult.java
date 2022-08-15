@@ -29,6 +29,7 @@
 
 package org.omegat.core.statistics;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -42,6 +43,13 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import com.fasterxml.jackson.annotation.JacksonAnnotation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SequenceWriter;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -92,16 +100,32 @@ public class StatsResult {
     private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true, true, true, true, true,
             true, true, true, true, true, };
 
-    private StatCount total = new StatCount();
-    private StatCount remaining = new StatCount();
-    private StatCount unique = new StatCount();
-    private StatCount remainingUnique = new StatCount();
+    @JsonProperty("project")
+    private StatProjectProperties props;
+
+    private StatCount total;
+    private StatCount remaining;
+    private StatCount unique;
+    private StatCount remainingUnique;
 
     private Set<String> translated;
+    @JsonProperty("files")
     private List<FileData> counts;
+
+    @JsonProperty("date")
+    private String date;
+
+    public StatsResult() {
+        props = new StatProjectProperties();
+        total = new StatCount();
+        remaining = new StatCount();
+        unique = new StatCount();
+        remainingUnique = new StatCount();
+    }
 
     public StatsResult(StatCount total, StatCount remaining, StatCount unique, StatCount remainingUnique,
             Set<String> translated, List<FileData> counts) {
+        props = new StatProjectProperties();
         this.total = total;
         this.remaining = remaining;
         this.unique = unique;
@@ -157,6 +181,29 @@ public class StatsResult {
         return result.toString();
     }
 
+
+    /**
+     * Return JSON expression of stats data.
+     * @param props Project properties.
+     * @return
+     * @throws IOException
+     */
+    public String getJsonData(final ProjectProperties props) throws IOException {
+        setDate();
+        StringWriter result = new StringWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        SequenceWriter writer = mapper.writerWithDefaultPrettyPrinter().writeValues(result);
+        writer.write(this);
+        writer.close();
+        return result.toString();
+    }
+
+    /**
+     * Return XML expression of Stats data.
+     * @param props Project properties
+     * @return XML expression of stats data as String.
+     * @throws XMLStreamException when data is invalid for XML.
+     */
     public String getXmlData(final ProjectProperties props) throws XMLStreamException {
 
         StringWriter result = new StringWriter();
@@ -229,6 +276,13 @@ public class StatsResult {
         return result.toString();
     }
 
+    private void setDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        date = dateFormat.format(new Date());
+    }
+
+    @JsonIgnore
     public String[][] getHeaderTable() {
         StatCount[] result = new StatCount[] { total, remaining, unique, remainingUnique };
         String[][] table = new String[result.length][6];
@@ -244,6 +298,7 @@ public class StatsResult {
         return table;
     }
 
+    @JsonIgnore
     public String[][] getFilesTable(final ProjectProperties config) {
         String[][] table = new String[counts.size()][17];
 

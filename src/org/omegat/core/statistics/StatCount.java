@@ -25,6 +25,7 @@
 
 package org.omegat.core.statistics;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 
@@ -47,7 +48,16 @@ import org.omegat.core.data.SourceTextEntry;
  */
 public class StatCount {
 
-    public int segments, words, charsWithoutSpaces, charsWithSpaces, files;
+    @JsonProperty("segments")
+    public int segments;
+    @JsonProperty("words")
+    public int words;
+    @JsonProperty("characters-without-spaces")
+    public int charsWithoutSpaces;
+    @JsonProperty("characters")
+    public int charsWithSpaces;
+    @JsonProperty("files")
+    public int files;
 
     /**
      * Initialize counts with zeros.

@@ -3,9 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2009 Alex Buloichik
-               2010 Didier Briel
-               2020 Aaron Madlon-Kay
+ Copyright (C) 2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,24 +25,41 @@
 
 package org.omegat.core.statistics;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.omegat.core.Core;
+import org.omegat.core.data.ProjectProperties;
 
-public class FileData {
-    @JsonProperty("filename")
-    public String filename;
-    @JsonProperty("total")
-    public StatCount total;
-    @JsonProperty("unique")
-    public StatCount unique;
-    @JsonProperty("remaining")
-    public StatCount remaining;
-    @JsonProperty("unique-remaining")
-    public StatCount remainingUnique;
+/**
+ * Data class for statistics XML and JSON.
+ * @author Hiroshi Miura
+ */
+public class StatProjectProperties {
 
-    public FileData() {
-        total = new StatCount();
-        unique = new StatCount();
-        remaining = new StatCount();
-        remainingUnique = new StatCount();
+    private final String projectName;
+    private final String projectRoot;
+    private final String sourceLanguage;
+    private final String targetLanguage;
+
+    public StatProjectProperties() {
+        ProjectProperties props = Core.getProject().getProjectProperties();
+        this.projectName = props.getProjectName();
+        this.projectRoot = props.getProjectRoot();
+        this.sourceLanguage = props.getSourceLanguage().getLanguage();
+        this.targetLanguage = props.getTargetLanguage().getLanguage();
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public String getProjectRoot() {
+        return projectRoot;
+    }
+
+    public String getSourceLanguage() {
+        return sourceLanguage;
+    }
+
+    public String getTargetLanguage() {
+        return targetLanguage;
     }
 }

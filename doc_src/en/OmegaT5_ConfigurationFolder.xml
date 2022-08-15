@@ -3,18 +3,78 @@
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="configuration.folder">
   <title id="configuration.folder.title">Configuration folder</title>
+  <para>The configuration folder contains most of the user preferences.</para>
+  <note><para>If anything happens to your OmegaT installation and you can't seem to fix it, the first step is to stop OmegaT, create a backup of the configuration folder's contents, delete the original configuration folder it and restart OmegaT.</para></note>
 
-  <para>The configuration folder is where most of the OmegaT parameters are stored.</para>
-
-  <section id="configuration.folder.contents">
-    <title id="configuration.folder.contents.title">source</title>
-
-    <para>The source subfolder contains files to be translated. You can add
-    the files to it later. Note that the structure of the source subfolder may
-    take any form you like. If the files to be translated are parts of a tree
-    structure (as in a website), you need only specify the top-level subfolder
-    and OmegaT will maintain the entire contents, while keeping the tree
-    structure intact.</para>
+  <section id="configuration.folder.location">
+    <title id="configuration.folder.location.title">Configuration folder location</title>
+	<para>The configuration folder is where most of the OmegaT parameters are
+	stored for a given user.</para>
+	<para>The configuration folder's location depends on your computer (the
+	<emphasis>~</emphasis> character corresponds to the user's home directory):
+	<variablelist>
+	  <varlistentry><term>Linux</term><listitem><para><filename>~/.omegat</filename></para></listitem></varlistentry>
+	  <varlistentry><term>macOS</term><listitem><para><filename>~/Library/Preferences/OmegaT</filename></para></listitem></varlistentry>
+	  <varlistentry><term>Windows</term><listitem><para><filename>~\AppData\Roaming\OmegaT</filename></para></listitem></varlistentry>
+	</variablelist>
+	</para>
+	<para>You can always access the configuration folder directly with <link
+	linkend="menus.options.access.configuration.folder"
+	endterm="menus.options.access.configuration.folder.title"/> from the <link
+	linkend="menus.options" endterm="menus.options.title"/> menu.</para>
   </section>
-
+  
+  <section id="configuration.folder.contents">
+    <title id="configuration.folder.contents.title">Configuration folder contents</title>
+	<variablelist>
+	  <varlistentry><term><filename>omegat.prefs</filename></term><listitem><para>This file includes a number of important user preferences.</para></listitem></varlistentry>
+	  <varlistentry><term><filename>uiLayout.xml</filename></term><listitem><para>This file describes the OmegaT's general layout.</para></listitem></varlistentry>
+	  <varlistentry><term><filename class="directory">logs</filename></term><listitem><para>This
+	  folder contains a number of log files, of which the most current is
+	  <filename>OmegaT.log</filename>.</para><para>This file records Java messages
+	  while OmegaT is running. Should OmegaT appear to be behaving erratically, it
+	  is important to include this file or the relevant part in any bug
+	  report.</para><para>That file is also available from <link
+	  linkend="menus.help.log" endterm="menus.help.log.title"/> in the <link
+	  linkend="menus.help" endterm="menus.help.title"/>
+	  menu.</para></listitem></varlistentry>
+	  <varlistentry><term><filename
+							  class="directory">script</filename></term><listitem><para>This folder can
+	  contain 3 text files:
+	  <variablelist>
+		<varlistentry><term><filename>selection.txt</filename></term><listitem><para>This
+		file contains the selection when <link
+		linkend="menus.edit.export.selection"
+		endterm="menus.edit.export.selection.title"/> in the <link
+		linkend="menus.edit" endterm="menus.edit.title"/> is
+		used. The file contents is updated every time the function is called.</para></listitem></varlistentry>
+		<varlistentry><term><filename>source.txt</filename></term><listitem><para>This
+		file contains the <emphasis>source</emphasis> part of the current segment when <link
+		linkend="dialogs.preferences.editor.export.the.segment.to.text.files"
+		endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/>
+		in the <link linkend="dialogs.preferences"
+		endterm="dialogs.preferences.title"/> menu is
+		set. The file contents is updated every time a new segment is entered.</para></listitem></varlistentry>
+		<varlistentry><term><filename>target.txt</filename></term><listitem><para>This
+		file contains the <emphasis>target</emphasis> part of the current segment when <link
+		linkend="dialogs.preferences.editor.export.the.segment.to.text.files"
+		endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/>
+		in the <link linkend="dialogs.preferences"
+		endterm="dialogs.preferences.title"/> is
+		set. The file contents is updated every time a new segment is entered.</para></listitem></varlistentry>
+	  </variablelist>
+	  The three files can be used as a simple way to access some contents from
+	  OmegaT and to process it with local programs (shell scripts, etc.).
+	  </para></listitem></varlistentry>
+	</variablelist>
+  </section>
+  <section id="configuration.folder.setting">
+	<title id="configuration.folder.setting.title">Configuration folder setting</title>
+	<para>You can specify a configuration folder different from the default one
+	when you start OmegaT from the command line. When you do that, all the
+	preferences set from the <link linkend="dialogs.preferences"
+	endterm="dialogs.preferences.title"/> dialog will be registered in that
+	folder and won't be available to other instances of OmegaT that will start
+	with a different configuration folder. See <link linkend="" endterm=""/> for details.</para>
+  </section>
 </chapter>

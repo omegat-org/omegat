@@ -71,6 +71,7 @@ import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
+import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -131,7 +132,7 @@ public final class Main {
 
         String projectDir = PARAMS.get(CLIParameters.PROJECT_DIR);
         if (projectDir != null) {
-            projectLocation = new File(projectDir);
+            projectLocation = new File(FileUtil.expandTildeHomeDir(projectDir));
         }
         remoteProject = PARAMS.get(CLIParameters.REMOTE_PROJECT);
 
@@ -141,12 +142,12 @@ public final class Main {
 
         String resourceBundle = PARAMS.get(CLIParameters.RESOURCE_BUNDLE);
         if (resourceBundle != null) {
-            OStrings.loadBundle(resourceBundle);
+            OStrings.loadBundle(FileUtil.expandTildeHomeDir(resourceBundle));
         }
 
         String configDir = PARAMS.get(CLIParameters.CONFIG_DIR);
         if (configDir != null) {
-            RuntimePreferences.setConfigDir(configDir);
+            RuntimePreferences.setConfigDir(FileUtil.expandTildeHomeDir(configDir));
         }
 
         if (PARAMS.containsKey(CLIParameters.QUIET)) {
@@ -245,7 +246,7 @@ public final class Main {
         if (path == null) {
             return;
         }
-        File configFile = new File(path);
+        File configFile = new File(FileUtil.expandTildeHomeDir(path));
         if (!configFile.exists()) {
             return;
         }

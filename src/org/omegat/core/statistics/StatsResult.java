@@ -39,9 +39,9 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
+import javax.xml.bind.JAXB;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -54,6 +54,7 @@ import org.omegat.util.gui.TextUtil;
 /**
  * @author Vladimir Bychkov
  */
+@XmlRootElement(name="omegat-stats")
 public class StatsResult {
     public static final String[] HT_HEADERS = {
         "",
@@ -155,10 +156,21 @@ public class StatsResult {
         }
     }
 
+    @XmlElement(name="date")
+    public String getDate() {
+        return date;
+    }
+
+    @XmlElement(name="project")
+    public StatProjectProperties getProps() {
+        return props;
+    }
+
     /**
      * Return total number of segments.
      * @return
      */
+    @XmlElement(name="total")
     public StatCount getTotal() {
         return total;
     }
@@ -167,6 +179,7 @@ public class StatsResult {
      * Return remaining number of segments that needs translation.
      * @return
      */
+    @XmlElement(name="remaining")
     public StatCount getRemaining() {
         return remaining;
     }
@@ -175,6 +188,7 @@ public class StatsResult {
      * Return a number of unique segments.
      * @return
      */
+    @XmlElement(name="unique")
     public StatCount getUnique() {
         return unique;
     }
@@ -183,6 +197,7 @@ public class StatsResult {
      * Return a number of remaining unique segments.
      * @return
      */
+    @XmlElement(name="unique-remaining")
     public StatCount getRemainingUnique() {
         return remainingUnique;
     }
@@ -191,6 +206,7 @@ public class StatsResult {
      * return a statistics of each source/target files.
      * @return
      */
+    @XmlElement(name="files")
     public List<FileData> getCounts() {
         return counts;
     }
@@ -216,7 +232,6 @@ public class StatsResult {
         return result.toString();
     }
 
-
     /**
      * Return JSON expression of stats data.
      * @return JSON string data.
@@ -236,77 +251,12 @@ public class StatsResult {
     /**
      * Return XML expression of Stats data.
      * @return XML expression of stats data as String.
-     * @throws XMLStreamException when data is invalid for XML.
      */
     @JsonIgnore
-    public String getXmlData() throws XMLStreamException {
-
-        StringWriter result = new StringWriter();
-        XMLStreamWriter xml = XMLOutputFactory.newInstance().createXMLStreamWriter(result);
-
-        xml.writeStartDocument(StandardCharsets.UTF_8.name(), "1.0");
-        xml.writeCharacters(System.lineSeparator());
-
-        xml.writeStartElement("omegat-stats");
+    public String getXmlData() {
         setDate();
-        xml.writeAttribute("date", date);
-        xml.writeCharacters(System.lineSeparator());
-
-        xml.writeStartElement("project");
-        xml.writeAttribute("projectName", props.getProjectName());
-        xml.writeAttribute("projectRoot", props.getProjectRoot());
-        xml.writeAttribute("sourceLanguage", props.getSourceLanguage());
-        xml.writeAttribute("targetLanguage", props.getTargetLanguage());
-        xml.writeCharacters(System.lineSeparator());
-
-        // Header stats
-        String[][] headerTable = getHeaderTable();
-        String[] headers = { "segments", "words", "characters-without-spaces", "characters", "files" };
-        String[] attrs = { "total", "remaining", "unique", "unique-remaining" };
-
-        for (int h = 0; h < headers.length; h++) {
-            xml.writeEmptyElement(headers[h]);
-            for (int a = 1; a < attrs.length; a++) {
-                xml.writeAttribute(attrs[a], headerTable[a][h + 1]);
-            }
-            xml.writeCharacters(System.lineSeparator());
-        }
-        xml.writeEndElement();
-        xml.writeCharacters(System.lineSeparator());
-
-        // STATISTICS BY FILE
-        xml.writeStartElement("files");
-        xml.writeCharacters(System.lineSeparator());
-
-        String[] fileAttrs = { "name", "total-segments", "remaining-segments", "unique-segments",
-                "unique-remaining-segments", "total-words", "remaining-words", "unique-words", "unique-remaining-words",
-                "total-characters-nosp", "remaining-characters-nosp", "unique-characters-nosp",
-                "unique-remaining-characters-nosp", "total-characters", "remaining-characters", "unique-characters",
-                "unique-remaining-characters" };
-
-        String[][] filesTable = getFilesTable();
-        for (String[] strings : filesTable) {
-            xml.writeStartElement("file");
-            xml.writeAttribute(fileAttrs[0], strings[0]); // name
-            xml.writeCharacters(System.lineSeparator());
-            for (int h = 0; h < headers.length - 1; h++) {
-                xml.writeEmptyElement(headers[h]);
-                for (int a = 0; a < attrs.length; a++) {
-                    xml.writeAttribute(attrs[a], strings[1 + a + (h * attrs.length)]);
-                }
-                xml.writeCharacters(System.lineSeparator());
-            }
-            xml.writeEndElement();
-
-            xml.writeCharacters(System.lineSeparator());
-        }
-
-        xml.writeEndElement();
-
-        xml.writeEndElement();
-        xml.writeEndDocument();
-        xml.close();
-
+        StringWriter result = new StringWriter();
+        JAXB.marshal(this, result);
         return result.toString();
     }
 

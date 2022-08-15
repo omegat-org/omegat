@@ -414,15 +414,16 @@ public final class Main {
         try (OutputStreamWriter writer = new OutputStreamWriter(
                 Files.newOutputStream(outputXML, CREATE, TRUNCATE_EXISTING, WRITE),
                 StandardCharsets.UTF_8)) {
-            // no stats type specified.
-            if (statsMode == null) {
+            if (statsMode == null) { // no stats type specified. Assume XML.
                 writer.write(projectStats.getXmlData());
             } else if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
                 writer.write(projectStats.getTextData());
             } else if ("JSON".equalsIgnoreCase(statsMode)) {
                 writer.write(projectStats.getJsonData());
-            } else {
+            } else if ("XML".equalsIgnoreCase(statsMode)){
                 writer.write(projectStats.getXmlData());
+            } else {
+                Log.log("Specified UNKNOWN file type for statistics. aborted.");
             }
         } catch (NoSuchFileException nsfe) {
             Log.log("Got directory/file open error. Does specified directory exist?");

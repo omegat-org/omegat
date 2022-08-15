@@ -464,8 +464,8 @@
 		or erased, so you may want to create a backup before upgrading, if
 		you have been using these files to modify OmegaT's launch
 		parameters.</para></listitem>
-		<listitem><para>The <filename>plugins/</filename> and
-		<filename>script/</filename> folders might be overwritten, so you may
+		<listitem><para>The <filename>plugins</filename> and
+		<filename>scripts</filename> folders might be overwritten, so you may
 		want to create a backup before upgrading.</para></listitem>
 	</itemizedlist></note>
 

@@ -494,7 +494,7 @@ public final class Main {
 
         try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(), config.getTargetLanguage(),
                 config.isSentenceSegmentingEnabled(), false, false)) {
-            wr.writeEntries(p.align(p.getProjectProperties(), new File(dir)));
+            wr.writeEntries(p.align(p.getProjectProperties(), new File(FileUtil.expandTildeHomeDir(dir))));
         }
         p.closeProject();
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));

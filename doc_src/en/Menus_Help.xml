@@ -6,9 +6,8 @@
   <note><para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para></note>
 
   <variablelist>
-    <varlistentry>
-      <term>User's Manual...</term>
-
+    <varlistentry id="menus.help.user.manual">
+      <term id="menus.help.user.manual.title">User's Manual...</term>
       <listitem>
         <para>Opens this manual in the default browser.</para>
 		<para>
@@ -16,22 +15,19 @@
 			<keycap>F1</keycap>
 		  </keycombo>
 		</para>
-
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>About...</term>
-
+    <varlistentry id="menus.help.about">
+      <term id="menus.help.about.title">About...</term>
       <listitem>
         <para>Displays copyright, credits and license information.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Last Changes...</term>
-
+    <varlistentry id="menus.help.last.changes">
+      <term id="menus.help.last.changes.title">Last Changes...</term>
       <listitem>
         <para>Displays the list of new functionalities, enhancements and bug
         fixes for each new release.</para>
@@ -39,9 +35,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Log...</term>
-
+    <varlistentry id="menus.help.log">
+      <term id="menus.help.log.title">Log...</term>
       <listitem>
         <para>Displays the current log file. The title of the dialog reflects
         the file actually used (which depends on how many instances of OmegaT
@@ -50,9 +45,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Check for Updates...</term>
-
+    <varlistentry id="menus.help.check.for.updates">
+      <term id="menus.help.check.for.updates.title">Check for Updates...</term>
       <listitem>
         <para>Checks to see whether a more recent version of OmegaT has been released.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>

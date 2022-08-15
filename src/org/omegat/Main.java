@@ -402,7 +402,7 @@ public final class Main {
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
 
         if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) { // no output file specified.
-            System.out.println(projectStats.getTextData(config));
+            System.out.println(projectStats.getTextData());
             p.closeProject();
             return 0;
         }
@@ -416,13 +416,13 @@ public final class Main {
                 StandardCharsets.UTF_8)) {
             // no stats type specified.
             if (statsMode == null) {
-                writer.write(projectStats.getXmlData(config));
+                writer.write(projectStats.getXmlData());
             } else if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
-                writer.write(projectStats.getTextData(config));
+                writer.write(projectStats.getTextData());
             } else if ("JSON".equalsIgnoreCase(statsMode)) {
-                writer.write(projectStats.getJsonData(config));
+                writer.write(projectStats.getJsonData());
             } else {
-                writer.write(projectStats.getXmlData(config));
+                writer.write(projectStats.getXmlData());
             }
         } catch (NoSuchFileException nsfe) {
             Log.log("Got directory/file open error. Does specified directory exist?");

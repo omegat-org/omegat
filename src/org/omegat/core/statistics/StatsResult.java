@@ -43,14 +43,10 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.fasterxml.jackson.annotation.JacksonAnnotation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SequenceWriter;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import org.omegat.core.Core;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;
@@ -106,6 +102,7 @@ public class StatsResult {
     private StatCount total;
     private StatCount remaining;
     private StatCount unique;
+    @JsonProperty("unique-remaining")
     private StatCount remainingUnique;
 
     private Set<String> translated;
@@ -123,6 +120,15 @@ public class StatsResult {
         remainingUnique = new StatCount();
     }
 
+    /**
+     * Constructor.
+     * @param total
+     * @param remaining
+     * @param unique
+     * @param remainingUnique
+     * @param translated
+     * @param counts
+     */
     public StatsResult(StatCount total, StatCount remaining, StatCount unique, StatCount remainingUnique,
             Set<String> translated, List<FileData> counts) {
         props = new StatProjectProperties();
@@ -135,6 +141,10 @@ public class StatsResult {
         this.counts = counts;
     }
 
+    /**
+     * Update given hosStat with current stats data.
+     * @param hotStat StatisticsInfo data object.
+     */
     public void updateStatisticsInfo(StatisticsInfo hotStat) {
         hotStat.numberOfSegmentsTotal = total.segments;
         hotStat.numberOfTranslatedSegments = translated.size();
@@ -145,27 +155,52 @@ public class StatsResult {
         }
     }
 
+    /**
+     * Return total number of segments.
+     * @return
+     */
     public StatCount getTotal() {
         return total;
     }
 
+    /**
+     * Return remaining number of segments that needs translation.
+     * @return
+     */
     public StatCount getRemaining() {
         return remaining;
     }
 
+    /**
+     * Return a number of unique segments.
+     * @return
+     */
     public StatCount getUnique() {
         return unique;
     }
 
+    /**
+     * Return a number of remaining unique segments.
+     * @return
+     */
     public StatCount getRemainingUnique() {
         return remainingUnique;
     }
 
+    /**
+     * return a statistics of each source/target files.
+     * @return
+     */
     public List<FileData> getCounts() {
         return counts;
     }
 
-    public String getTextData(final ProjectProperties config) {
+    /**
+     * Return pretty printed statistics data.
+     * @return pretty-printed string.
+     */
+    @JsonIgnore
+    public String getTextData() {
         StringBuilder result = new StringBuilder();
 
         result.append(OStrings.getString("CT_STATS_Project_Statistics"));
@@ -177,22 +212,22 @@ public class StatsResult {
         // STATISTICS BY FILE
         result.append(OStrings.getString("CT_STATS_FILE_Statistics"));
         result.append("\n\n");
-        result.append(TextUtil.showTextTable(FT_HEADERS, getFilesTable(config), FT_ALIGN));
+        result.append(TextUtil.showTextTable(FT_HEADERS, getFilesTable(), FT_ALIGN));
         return result.toString();
     }
 
 
     /**
      * Return JSON expression of stats data.
-     * @param props Project properties.
-     * @return
-     * @throws IOException
+     * @return JSON string data.
+     * @throws IOException when export failed.
      */
-    public String getJsonData(final ProjectProperties props) throws IOException {
+    @JsonIgnore
+    public String getJsonData() throws IOException {
         setDate();
         StringWriter result = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
-        SequenceWriter writer = mapper.writerWithDefaultPrettyPrinter().writeValues(result);
+        SequenceWriter writer = mapper.writer().writeValues(result);
         writer.write(this);
         writer.close();
         return result.toString();
@@ -200,34 +235,33 @@ public class StatsResult {
 
     /**
      * Return XML expression of Stats data.
-     * @param props Project properties
      * @return XML expression of stats data as String.
      * @throws XMLStreamException when data is invalid for XML.
      */
-    public String getXmlData(final ProjectProperties props) throws XMLStreamException {
+    @JsonIgnore
+    public String getXmlData() throws XMLStreamException {
 
         StringWriter result = new StringWriter();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         XMLStreamWriter xml = XMLOutputFactory.newInstance().createXMLStreamWriter(result);
 
         xml.writeStartDocument(StandardCharsets.UTF_8.name(), "1.0");
         xml.writeCharacters(System.lineSeparator());
 
         xml.writeStartElement("omegat-stats");
-        xml.writeAttribute("date", dateFormat.format(new Date()));
+        setDate();
+        xml.writeAttribute("date", date);
         xml.writeCharacters(System.lineSeparator());
 
         xml.writeStartElement("project");
-        xml.writeAttribute("name", props.getProjectName());
-        xml.writeAttribute("root", props.getProjectRoot());
-        xml.writeAttribute("source", props.getSourceLanguage().toString());
-        xml.writeAttribute("target", props.getTargetLanguage().toString());
+        xml.writeAttribute("projectName", props.getProjectName());
+        xml.writeAttribute("projectRoot", props.getProjectRoot());
+        xml.writeAttribute("sourceLanguage", props.getSourceLanguage());
+        xml.writeAttribute("targetLanguage", props.getTargetLanguage());
         xml.writeCharacters(System.lineSeparator());
 
         // Header stats
         String[][] headerTable = getHeaderTable();
-        String[] headers = { "segments", "words", "characters-nosp", "characters", "files" };
+        String[] headers = { "segments", "words", "characters-without-spaces", "characters", "files" };
         String[] attrs = { "total", "remaining", "unique", "unique-remaining" };
 
         for (int h = 0; h < headers.length; h++) {
@@ -250,7 +284,7 @@ public class StatsResult {
                 "unique-remaining-characters-nosp", "total-characters", "remaining-characters", "unique-characters",
                 "unique-remaining-characters" };
 
-        String[][] filesTable = getFilesTable(props);
+        String[][] filesTable = getFilesTable();
         for (String[] strings : filesTable) {
             xml.writeStartElement("file");
             xml.writeAttribute(fileAttrs[0], strings[0]); // name
@@ -299,12 +333,12 @@ public class StatsResult {
     }
 
     @JsonIgnore
-    public String[][] getFilesTable(final ProjectProperties config) {
+    public String[][] getFilesTable() {
         String[][] table = new String[counts.size()][17];
 
         int r = 0;
         for (FileData numbers : counts) {
-            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, config.getSourceRoot());
+            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, props.getSourceRoot());
             table[r][1] = Integer.toString(numbers.total.segments);
             table[r][2] = Integer.toString(numbers.remaining.segments);
             table[r][3] = Integer.toString(numbers.unique.segments);

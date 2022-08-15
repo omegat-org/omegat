@@ -298,6 +298,16 @@ public final class FileUtil {
         }
     }
 
+    /**
+     * Expand tilde(~) in first character in path string.
+     * @param path path string
+     * @return expanded path string
+     */
+    public static String expandTildeHomeDir(final String path){
+        String homedir = FileUtils.getUserDirectoryPath();
+        return path.replaceFirst("^~", Matcher.quoteReplacement(homedir));
+    }
+
     public interface ICollisionCallback {
         boolean isCanceled();
 

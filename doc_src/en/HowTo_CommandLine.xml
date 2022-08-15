@@ -8,27 +8,54 @@
     line</title>
 
     <para>The command-line alternative allows the user to control and modify the
-    program's behavior. There are two ways of launching OmegaT using the command
-    line.</para>
+    program's behavior. Once you have defined a set of options, you can save
+    them in a script file and launch OmegaT from that script like you would have
+    from the default application.</para>
 
-    <section id="launch.with.command.line.open.commandline.window">
-	  <title id="launch.with.command.line.open.commandline.window.title">Opening a command line window</title>
 
-	  <para>A command line window is also referred to as a "terminal window".
-	  On Windows it is called an "MS-DOS window" and is available from the Start
-	  Menu, inside Programs, through the "MS-DOS" item. The macOS equivalent is
-	  the application Terminal located in
-	  <filename>Applications/Utilities</filename>.</para>
+	<section id="launch.with.command.line.tutorial">
+	  <title id="launch.with.command.line.tutorial.title">A very short command line tutorial</title>
 
-	  <para>To launch OmegaT, you must normally
-	  type two commands. The first of these is:</para>
+	  <para>The command line interface (CLI) was the only way to interact with a
+	  computer until the 80's and is now a complement to the graphical interface
+	  that we use daily. To access it, you need a "terminal window" where you
+	  will give orders to the computer with a syntax that is close to
+	  <emphasis>imperative verb + complements</emphasis> which is generally
+	  described as <code>command + parameters</code>.</para>
+	  
+	  <para>On Windows the command line interface is called the
+	  <application>Command Prompt</application> and is available from the
+	  <guilabel>Start Menu</guilabel>. The macOS equivalent is the
+	  <application>Terminal</application> located in
+	  <filename>/Applications/Utilities/</filename>. On Linux, a
+	  <application>Terminal</application> application is usually installed by
+	  default and is available from the application menus. To simplify our
+	  descriptions we will call the CLI window the
+	  <emphasis>terminal</emphasis>.</para>
+
+	  <para>Once launched, the terminal requires typed text
+	  commands to do the equivalent of what would be done with the mouse in a
+	  graphical environment, but by associating commands with various parameters
+	  also allows access to functions not available to normal graphical
+	  interaction.</para>
+
+	  <para>The most important concept to understand when using the terminal is
+	  that the terminal knows some commands by default because it knows where to
+	  look for the application that corresponds to the <code>command</code>
+	  that's typed. The terminal does not know new commands by default because
+	  unless the commands correspond to applications that are located in a known
+	  location, it won't know where to look for the application to run when
+	  ordered a command.</para>
+
+	  <para>Hence, to launch OmegaT, you must normally type two commands. The first of
+	  these is:</para>
 
 	  <programlisting>cd <parameter>folder</parameter></programlisting>
 
 	  <para>where <parameter>folder</parameter> is the name of the folder, with
-	  complete path, in which your OmegaT program -
-	  specifically, the file <filename>OmegaT.jar</filename> - is located.  In
-	  practice, this command will therefore be something like this:</para>
+	  complete path, in which your OmegaT program - specifically, the file
+	  <filename>OmegaT.jar</filename> - is located.  In practice, this command
+	  will therefore be something like this:</para>
 
 	  <para>On Windows</para>
 
@@ -36,16 +63,16 @@
 
 	  <para>On macOS</para>
 
-	  <programlisting>cd <parameter>&lt;OmegaT.app location&gt;</parameter>/OmegaT.app/Contents/Resources/Java/</programlisting>
+	  <programlisting>cd <parameter>&lt;OmegaT.app
+	  location&gt;</parameter>/OmegaT.app/Contents/Resources/Java/</programlisting>
 
 	  <para>On Linux</para>
 
 	  <programlisting>cd /usr/local/omegat</programlisting>
 
 	  <para>This command changes the folder to the folder containing the
-	  executable OmegaT file. The second command is
-	  the command which actually launches OmegaT.
-	  In its most basic form, this command is:</para>
+	  executable OmegaT file. The second command is the command which actually
+	  launches OmegaT.  In its most basic form, this command is:</para>
 
 	  <programlisting>java -jar OmegaT.jar</programlisting>
 
@@ -54,8 +81,8 @@
 	  <literal>OmegaT</literal>!</para>
 
 	  <para>This method has a particular benefit of being suitable for finding
-	  causes of problems: if an error occurs during use of the program, an
-	  error message is output in the terminal window which may contain useful
+	  causes of problems: if an error occurs during use of the program, an error
+	  message is output in the terminal window which may contain useful
 	  information on the cause of the error.</para>
 
 	  <para>The above method somewhat impractical way of launching a program
@@ -86,8 +113,7 @@
 
 	  <itemizedlist>
 		<listitem>
-		  <para><emphasis role="bold">User interface language
-		  </emphasis></para>
+		  <para><emphasis role="bold">User interface language </emphasis></para>
 
 		  <para><emphasis
 					role="bold"><literal>-Duser.language=<parameter>XX</parameter></literal></emphasis>
@@ -103,12 +129,11 @@
 		  English. This is the standard behavior.</para>
 
 		  <para>The <literal>-Duser.language=<parameter>XX</parameter></literal>
-		  argument causes OmegaT to use the language
-		  specified rather than the language of the user's operating
-		  system. <parameter>XX</parameter> in the command stands for the
-		  two-digit code of the desired language. To launch
-		  OmegaT with a French interface (for example
-		  on a Russian operating system), the command would therefore be:</para>
+		  argument causes OmegaT to use the language specified rather than the
+		  language of the user's operating system. <parameter>XX</parameter> in
+		  the command stands for the two-digit code of the desired language. To
+		  launch OmegaT with a French interface (for example on a Russian
+		  operating system), the command would therefore be:</para>
 
 		  <programlisting>java -Duser.language=fr -jar OmegaT.jar</programlisting>
 		</listitem>
@@ -119,7 +144,7 @@
 		  <para><emphasis role="bold">User country</emphasis></para>
 
 		  <para><emphasis
-					role="bold">-Duser.country=<parameter>XX</parameter></emphasis>
+		  role="bold">-Duser.country=<parameter>XX</parameter></emphasis>
 		  Besides the language, you can also specify the country, for example
 		  <literal>CN</literal> or <literal>TW</literal> in case of the Chinese
 		  language. To display the instant start guide in the desired language,
@@ -134,13 +159,12 @@
 		  <para><emphasis role="bold">Memory assignment</emphasis></para>
 
 		  <para><emphasis
-					role="bold"><literal>-Xmx<parameter>??</parameter>M</literal></emphasis>This
-		  command assigns more memory to OmegaT. By
-		  default, 1024 MB are assigned, so there is no advantage in assigning
-		  less than this figure. <parameter>??</parameter> stands for the amount
-		  of memory assigned, in megabytes. The command to launch
-		  OmegaT with assignment of 2048 MB (2 GB) of
-		  memory is therefore:</para>
+		  role="bold"><literal>-Xmx<parameter>??</parameter>M</literal></emphasis>This
+		  command assigns more memory to OmegaT. By default, 1024 MB are
+		  assigned, so there is no advantage in assigning less than this
+		  figure. <parameter>??</parameter> stands for the amount of memory
+		  assigned, in megabytes. The command to launch OmegaT with assignment
+		  of 2048 MB (2 GB) of memory is therefore:</para>
 
 		  <programlisting>java -Xmx2048M -jar OmegaT.jar</programlisting>
 		</listitem>
@@ -149,7 +173,7 @@
 		  <para><emphasis role="bold">Proxy host IP address</emphasis></para>
 
 		  <para><emphasis
-					role="bold"><literal>-Dhttp.proxyHost=<parameter>nnn.nnn.nnn.nnn</parameter></literal></emphasis>
+		  role="bold"><literal>-Dhttp.proxyHost=<parameter>nnn.nnn.nnn.nnn</parameter></literal></emphasis>
 		  The IP address of your proxy server, if your system uses a
 		  proxy.</para>
 		</listitem>
@@ -158,7 +182,7 @@
 		  <para><emphasis role="bold">Proxy host port number</emphasis></para>
 
 		  <para><emphasis
-					role="bold"><literal>-Dhttp.proxyPort=<parameter>NNNN</parameter></literal></emphasis>
+		  role="bold"><literal>-Dhttp.proxyPort=<parameter>NNNN</parameter></literal></emphasis>
 		  The port number your system uses to access the proxy server.</para>
 		</listitem>
 
@@ -166,7 +190,7 @@
 		  <para><emphasis role="bold">Google Translate V2</emphasis></para>
 
 		  <para><emphasis
-					role="bold"><literal>-Dgoogle.api.key=<parameter>A123456789B123456789C123456789D12345678</parameter></literal></emphasis>
+		  role="bold"><literal>-Dgoogle.api.key=<parameter>A123456789B123456789C123456789D12345678</parameter></literal></emphasis>
 		  If you have signed up for the Google Translate services, enter your
 		  private Google API key here. Note that the key is 38 characters
 		  long.</para>
@@ -178,11 +202,11 @@
 		  <para>Make sure that you have a free Microsoft account. You’ll need
 		  this to sign-in to <ulink
 		  url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows
-		  Azure Marketplace</ulink> and use the Translator service. Note that
-		  up to 2M characters per month are free of charge. The two entries
+		  Azure Marketplace</ulink> and use the Translator service. Note that up
+		  to 2M characters per month are free of charge. The two entries
 		  required are available in your <ulink
-		  url="https://datamarket.azure.com/account">account page</ulink>
-		  under Primary account key and Customer-ID:</para>
+		  url="https://datamarket.azure.com/account">account page</ulink> under
+		  Primary account key and Customer-ID:</para>
 
 		  <programlisting>-Dmicrosoft.api.client_id=<parameter>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</parameter></programlisting>
 
@@ -204,15 +228,17 @@
 		</listitem>
 	  </itemizedlist>
 
-	  <para>Arguments can be combined: to launch
-	  OmegaT with all the examples described above,
-	  the command would be:</para>
+	  <para>Arguments can be combined: to launch OmegaT with all the examples
+	  described above, the command would be:</para>
 
-	  <programlisting>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx2048M -Dhttp.proxyHost=192.168.1.1 -Dhttp.proxyport=3128 -jar -OmegaT.jar</programlisting>
+	  <programlisting>java -Dswing.aatext=true -Duser.language=pt
+	  -Duser.country=BR -Xmx2048M -Dhttp.proxyHost=192.168.1.1
+	  -Dhttp.proxyport=3128 -jar -OmegaT.jar</programlisting>
 	</section>
 
 	<section id="launch.with.command.line.omegat.command.arguments">
-	  <title id="launch.with.command.line.omegat.command.arguments.title">OmegaT command argument</title>
+	  <title id="launch.with.command.line.omegat.command.arguments.title">OmegaT
+	  command argument</title>
 
 	  <para>The purpose of the console mode is to use OmegaT as a translation
 	  tool in a scripting environment. When started in console mode, no GUI is
@@ -220,12 +246,12 @@
 	  automatically processed as requested.</para>
 
 	  <section id="launch.with.command.line.omegat.command.arguments.console.mode.prerequisites">
-		<title id="launch.with.command.line.omegat.command.arguments.console.mode.prerequisites.title">Prerequisites</title>
+		<title
+		id="launch.with.command.line.omegat.command.arguments.console.mode.prerequisites.title">Prerequisites</title>
 
-		<para>To run OmegaT in the command line
-		mode, a valid OmegaT project must be
-		present. The location does not matter, since you have to add it to the
-		command line at the start-up anyway.</para>
+		<para>To run OmegaT in the command line mode, a valid OmegaT project
+		must be present. The location does not matter, since you have to add it
+		to the command line at the start-up anyway.</para>
 
 		<para>If you need altered settings, the configuration files must be
 		available. This can be achieved in two ways:</para>
@@ -239,14 +265,13 @@
 		  </listitem>
 
 		  <listitem>
-			<para>If you can't run OmegaT normally
-			(no graphical environment available): copy the settings files from
-			some other OmegaT installation on another
-			machine to a specific folder. The location does not matter, since
-			you can add it to the command line at startup. The relevant files
-			are <filename>filters.conf</filename> and
-			<filename>segmentation.conf</filename> and can be found in the user
-			home folder (e.g. <filename>C:\Documents and
+			<para>If you can't run OmegaT normally (no graphical environment
+			available): copy the settings files from some other OmegaT
+			installation on another machine to a specific folder. The location
+			does not matter, since you can add it to the command line at
+			startup. The relevant files are <filename>filters.conf</filename>
+			and <filename>segmentation.conf</filename> and can be found in the
+			user home folder (e.g. <filename>C:\Documents and
 			Settings\<parameter>user</parameter>\OmegaT</filename> under
 			Windows, <filename>~/.omegat/</filename> under Linux).</para>
 		  </listitem>
@@ -254,18 +279,21 @@
 	  </section>
 
 	  <section id="launch.with.command.line.omegat.command.arguments.starting.in.console.mode">
-		<title id="launch.with.command.line.omegat.command.arguments.starting.in.console.mode.title">Starting in console mode</title>
+		<title
+		id="launch.with.command.line.omegat.command.arguments.starting.in.console.mode.title">Starting
+		in console mode</title>
 
-		<para>To start OmegaT in console mode, some
-		extra parameters have to be passed to it on startup. The most important
-		is <literal>/path/to/project</literal>, and optionally
+		<para>To start OmegaT in console mode, some extra parameters have to be
+		passed to it on startup. The most important is
+		<literal>/path/to/project</literal>, and optionally
 		<literal>--config-dir=<parameter>/path/to/config-files/</parameter></literal>. Example:</para>
 
-		<programlisting>java -jar OmegaT.jar <parameter>/path/to/project</parameter> \
+		<programlisting>java -jar OmegaT.jar
+		<parameter>/path/to/project</parameter> \
 		--config-dir=<parameter>/path/to/config-files/</parameter> \
 		--config-file=<parameter>/path/to/config-file/</parameter> \
-		--mode=<parameter>console-translate|console-createpseudotranslatetmx|console-align</parameter> \
-		--source-pattern=<parameter>regexp</parameter></programlisting>
+		--mode=<parameter>console-translate|console-createpseudotranslatetmx|console-align</parameter>
+		\ --source-pattern=<parameter>regexp</parameter></programlisting>
 
 		<para>Note that all parameters start with a double <literal>-</literal>
 		character.</para>
@@ -274,40 +302,36 @@
 
 		<itemizedlist>
 		  <listitem>
-			<para><literal>/path/to/project</literal> tells
-			OmegaT where to find the project to
-			translate. If given, OmegaT starts in
-			console mode and will translate the given project.</para>
+			<para><literal>/path/to/project</literal> tells OmegaT where to find
+			the project to translate. If given, OmegaT starts in console mode
+			and will translate the given project.</para>
 		  </listitem>
 		</itemizedlist>
 
 		<itemizedlist>
 		  <listitem>
-			<para><literal>--config-dir=<parameter>/path/to/config-files/</parameter></literal>
-			tells OmegaT in which folder the
-			configuration files are stored. If not given,
-			OmegaT reverts to default values
-			(OmegaT folder under user home or, if
-			unavailable, the current working folder). Note the double
-			<literal>-</literal> character.</para>
+			<para><parameter>--config-dir=/path/to/config-files/</parameter>
+			tells OmegaT in which folder the configuration files are stored. If
+			not given, OmegaT reverts to default values (OmegaT folder under
+			user home or, if unavailable, the current working folder). Note the
+			double <literal>-</literal> character.</para>
 		  </listitem>
 
 		  <listitem>
-			<para><literal>--config-file=<parameter>/path/to/config-file/</parameter></literal>
-			tells OmegaT what configuration file to
-			use.</para>
+			<para><parameter>--config-file=/Path/to/config-file/</parameter>
+			tells OmegaT what configuration file to use.</para>
 		  </listitem>
 		</itemizedlist>
 
 		<itemizedlist>
 		  <listitem>
-			<para><emphasis><literal>--mode=<parameter>...</parameter></literal></emphasis>
-			OmegaT starts in console mode to perform
-			one of the following services automatically</para>
+			<para><parameter>--mode=...</parameter>
+			OmegaT starts in console mode to perform one of the following
+			services automatically</para>
 
 			<itemizedlist>
 			  <listitem>
-				<para><emphasis><literal>--mode=console-translate</literal></emphasis></para>
+				<para><parameter>--mode=console-translate</parameter></para>
 
 				<para>In this mode, OmegaT will attempt to translate the files
 				in <filename>/source/</filename> with the available translation
@@ -316,31 +340,33 @@
 			  </listitem>
 
 			  <listitem>
-				<para><literal>--mode=console-createpseudotranslatetmx</literal></para>
+				<para><parameter>--mode=console-createpseudotranslatetmx</parameter></para>
 
 				<para>In this mode OmegaT will create a TMX for the whole
 				project, based on the source files only. You specify the TMX
 				file to be created with</para>
 
-				<para><literal>--pseudotranslatetmx=<parameter>allsegments.tmx</parameter>
-				--pseudotranslatetype=<parameter>equal|empty</parameter></literal></para>
+				<para><parameter>--pseudotranslatetmx=allsegments.tmx
+				--pseudotranslatetype=equal|empty</parameter></para>
 
-				<para>The argument <emphasis>pseudotranslatetype</emphasis>
+				<para>The argument <parameter>pseudotranslatetype</parameter>
 				specifies, whether the target segments are to be equal to the
 				source, or left empty.</para>
 			  </listitem>
 
 			  <listitem>
-				<para><literal>--mode=console-align</literal></para>
+				<para><parameter>--mode=console-align</parameter></para>
 
-				<para>In this mode, OmegaT will align files
-				found in the <filename>/source/</filename> folder of the project
-				with the contents found at the specified location. The resulting
-				TMX is stored in the <filename>/omegat/</filename> folder under
-				the name <filename>align.tmx</filename>. Which files are used for alignment depends on if the file
-				filter supports it. Some supported filters: ILIAS Language File, Java(TM) Resource Bundles,
-				Key=Value Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles,
-				Windows Resources</para>
+				<para>In this mode, OmegaT will align files found in the
+				<filename>/source/</filename> folder of the project with the
+				contents found at the specified location. The resulting TMX is
+				stored in the <filename>/omegat/</filename> folder under the
+				name <filename>align.tmx</filename>. Which files are used for
+				alignment depends on if the file filter supports it. Some
+				supported filters: ILIAS Language File, Java(TM) Resource
+				Bundles, Key=Value Text, Magento CE Locale CSV, MoodlePHP,
+				Mozilla DTD, Mozilla FTL, PO, RC, SubRip Subtitles, Windows
+				Resources</para>
 
 				<para>Additional parameter is required in this case,
 				specifying the location of the target data:</para>
@@ -380,8 +406,8 @@
 				<para><literal>test\.html</literal></para>
 
 				<para>Only the file test.html at the root of the source folder
-				will be translated. If there are other files named test.html
-				in other folders, they will be ignored.</para>
+				will be translated. If there are other files named test.html in
+				other folders, they will be ignored.</para>
 			  </listitem>
 
 			  <listitem>
@@ -427,7 +453,9 @@
 	  </section>
 
 	  <section id="launch.with.command.line.omegat.command.arguments.console.mode.option.quiet">
-		<title id="launch.with.command.line.omegat.command.arguments.console.mode.option.quiet.title">Quiet option</title>
+		<title
+		id="launch.with.command.line.omegat.command.arguments.console.mode.option.quiet.title">Quiet
+		option</title>
 
 		<para>An extra command line parameter specific to console mode:
 		<literal>--quiet</literal>. In the quiet mode, less info is logged to

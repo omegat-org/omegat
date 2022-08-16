@@ -24,12 +24,12 @@
 	linkend="menus.options" endterm="menus.options.title"/> menu.</para>
   </section>
   
-  <section id="configuration.folder.contents">
-    <title id="configuration.folder.contents.title">Configuration folder contents</title>
+  <section id="configuration.folder.default.contents">
+    <title id="configuration.folder.default.contents.title">Configuration folder default contents</title>
 	<variablelist>
 	  <varlistentry><term><filename>omegat.prefs</filename></term><listitem><para>This file includes a number of important user preferences.</para></listitem></varlistentry>
 	  <varlistentry><term><filename>uiLayout.xml</filename></term><listitem><para>This file describes the OmegaT's general layout.</para></listitem></varlistentry>
-	  <varlistentry><term><filename class="directory">logs</filename></term><listitem><para>This
+	  <varlistentry><term><filename class="directory">logs/</filename></term><listitem><para>This
 	  folder contains a number of log files, of which the most current is
 	  <filename>OmegaT.log</filename>.</para><para>This file records Java messages
 	  while OmegaT is running. Should OmegaT appear to be behaving erratically, it
@@ -39,7 +39,7 @@
 	  linkend="menus.help" endterm="menus.help.title"/>
 	  menu.</para></listitem></varlistentry>
 	  <varlistentry><term><filename
-							  class="directory">script</filename></term><listitem><para>This folder can
+							  class="directory">script/</filename></term><listitem><para>This folder can
 	  contain 3 text files:
 	  <variablelist>
 		<varlistentry><term><filename>selection.txt</filename></term><listitem><para>This
@@ -75,6 +75,6 @@
 	preferences set from the <link linkend="dialogs.preferences"
 	endterm="dialogs.preferences.title"/> dialog will be registered in that
 	folder and won't be available to other instances of OmegaT that will start
-	with a different configuration folder. See <link linkend="" endterm=""/> for details.</para>
+	with a different configuration folder. See <link linkend="launch.with.command.line.omegat.parameters" endterm="launch.with.command.line.omegat.parameters.title"/> for details.</para>
   </section>
 </chapter>

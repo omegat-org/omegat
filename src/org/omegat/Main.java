@@ -8,6 +8,7 @@
                2012 Aaron Madlon-Kay
                2013 Kyle Katarn, Aaron Madlon-Kay
                2014 Alex Buloichik
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -46,7 +47,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -105,6 +106,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  * @author Kyle Katarn
+ * @author Hiroshi Miura
  */
 public final class Main {
 
@@ -389,7 +391,13 @@ public final class Main {
     }
 
     /**
-     * Displays statistics from a project.
+     * Displays or writes project statistics.
+     * <p>
+     *     takes two optional arguments
+     * <code>[--output-file=(file path) [--stats-type=[XML|JSON|TEXT]]]</code>
+     * when omitted, display stats text(localized).
+     * When file I/O error occurred, especially when parent directory does not exist
+     * warns it and return 1.
      */
     private static int runConsoleStats() throws Exception {
         Log.log("Console project stats mode");
@@ -398,25 +406,35 @@ public final class Main {
         Core.initializeConsole(PARAMS);
 
         RealProject p = selectProjectConsoleMode(true);
-        ProjectProperties config = p.getProjectProperties();
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
 
-        if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) { // no output file specified.
+        if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
+            // no output file specified, print to console.
             System.out.println(projectStats.getTextData());
             p.closeProject();
             return 0;
         }
-        String statsMode = null;
+
+        String outputFilename = PARAMS.get(CLIParameters.STATS_OUTPUT);
+        String statsMode;
         if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
             statsMode = PARAMS.get(CLIParameters.STATS_MODE);
+        } else {
+            // when no stats type specified, try to detect from file extension, otherwise XML.
+            if (outputFilename.endsWith(".json") || outputFilename.endsWith(".JSON")) {
+                statsMode = "JSON";
+            } else if (outputFilename.endsWith(".xml") || outputFilename.endsWith(".XML")) {
+                statsMode = "XML";
+            } else if (outputFilename.endsWith(".txt") || outputFilename.endsWith(".TXT")) {
+                statsMode = "TXT";
+            } else {
+                statsMode = "XML";
+            }
         }
-        Path outputXML = new File(PARAMS.get(CLIParameters.STATS_OUTPUT)).toPath().toAbsolutePath();
         try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(outputXML, CREATE, TRUNCATE_EXISTING, WRITE),
+                Files.newOutputStream(Paths.get(outputFilename), CREATE, TRUNCATE_EXISTING, WRITE),
                 StandardCharsets.UTF_8)) {
-            if (statsMode == null) { // no stats type specified. Assume XML.
-                writer.write(projectStats.getXmlData());
-            } else if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
+            if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
                 writer.write(projectStats.getTextData());
             } else if ("JSON".equalsIgnoreCase(statsMode)) {
                 writer.write(projectStats.getJsonData());
@@ -427,8 +445,10 @@ public final class Main {
             }
         } catch (NoSuchFileException nsfe) {
             Log.log("Got directory/file open error. Does specified directory exist?");
+            return 1;
+        } finally {
+            p.closeProject();
         }
-        p.closeProject();
         return 0;
     }
 

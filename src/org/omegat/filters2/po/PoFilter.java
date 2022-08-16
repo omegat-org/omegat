@@ -265,6 +265,7 @@ public class PoFilter extends AbstractFilter {
     protected static final Pattern COMMENT_FUZZY = Pattern.compile("#, fuzzy");
     protected static final Pattern COMMENT_FUZZY_OTHER = Pattern.compile("#,.* fuzzy.*");
     protected static final Pattern COMMENT_FUZZY_MSGID = Pattern.compile("#\\|.* msgid.*\"(.*)\"");
+    protected static final Pattern COMMENT_FUZZY_MSGCTX = Pattern.compile("#\\|.* msgctxt\\s+\"(.*)\"");
     protected static final Pattern COMMENT_NOWRAP = Pattern.compile("#,.* no-wrap.*");
     protected static final Pattern COMMENT_TRANSLATOR = Pattern.compile("# (.*)");
     protected static final Pattern COMMENT_EXTRACTED = Pattern.compile("#\\. (.*)");
@@ -418,6 +419,12 @@ public class PoFilter extends AbstractFilter {
             if (mTrueFuzzy.matches()) {
                 fuzzyTrue = true;
                 sourceFuzzyTrue.append(mTrueFuzzy.group(1));
+                continue;
+            }
+
+            // ignore a fuzzy context
+            Matcher mFuzzyCtx = COMMENT_FUZZY_MSGCTX.matcher(s);
+            if (mFuzzyCtx.matches()) {
                 continue;
             }
 

@@ -15,8 +15,8 @@
   <link linkend="configuration.folder" endterm="configuration.folder.title"/>
   for details. It is possible to have OmegaT use a different configuration
   folder, for exemple to use project-specific configurations. See <link
-  linkend="launch.with.command.line.omegat.command.arguments.starting.in.console.mode"
-  endterm="launch.with.command.line.omegat.command.arguments.starting.in.console.mode.title"/>
+  linkend="launch.with.command.line.omegat.terminal.command.syntax"
+  endterm="launch.with.command.line.omegat.terminal.command.syntax.title"/>
   for details. If you use such a configuration folder, all the modifications
   made in this dialog will be stored in that folder.</para></note>
 

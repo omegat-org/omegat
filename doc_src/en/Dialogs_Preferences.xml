@@ -315,8 +315,8 @@
     </section>
   </section>
 
-  <section id="dialogs.preferences.filefilters">
-    <title id="dialogs.preferences.filefilters.title">File Filters</title>
+  <section id="dialogs.preferences.file.filters">
+    <title id="dialogs.preferences.file.filters.title">File Filters</title>
 
     <para>This dialog lists the file filters available. The filters used by
     the current project are displayed in bold. If you prefer not to use OmegaT
@@ -804,8 +804,8 @@
     </section>
   </section>
 
-  <section id="dialogs.preferences.segmentationsetup">
-	<title id="dialogs.preferences.segmentationsetup.title">Segmentation Setup</title>
+  <section id="dialogs.preferences.segmentation.setup">
+	<title id="dialogs.preferences.segmentation.setup.title">Segmentation Setup</title>
 
 	<para>Translation memory tools work with textual units called segments.
 	OmegaT has two ways to segment a text: by paragraph or by sentence
@@ -845,7 +845,7 @@
 	<variablelist>
       <varlistentry>
 		<term
-			id="dialogs.preferences.segmentationsetup.structurelevelsegmentation">Structure
+			id="dialogs.preferences.segmentation.setup.structure.level.segmentation">Structure
 		level segmentation</term>
 
 		<listitem>
@@ -863,7 +863,7 @@
 
       <varlistentry>
 		<term
-			id="dialogs.preferences.segmentationsetup.sentencelevelsegmentation">Sentence
+			id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">Sentence
 		level segmentation</term>
 
 		<listitem>

@@ -1043,14 +1043,13 @@
 	  or by typing "&lt;" in case of tags.</para>
 	</section>
 
-	<section id="dialog.preferences.spelchecker">
-	  <title id="dialog.preferences.spelchecker.title">Spellchecker</title>
+	<section id="dialog.preferences.spellchecker">
+	  <title id="dialog.preferences.spellchecker.title">Spellchecker</title>
 
-	  <para>OmegaT has a built-in spell checker based on the <link
-	  linkend="appendix.spellchecker">spelling checker</link> used in Apache
-	  OpenOffice, LibreOffice, Firefox and Thunderbird. It is consequently able
-	  to use the huge range of free spelling dictionaries available for these
-	  applications.</para>
+	  <para>OmegaT has a built-in spell checker based on the spelling checker
+	  used in Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
+	  consequently able to use the huge range of free spelling dictionaries
+	  available for these applications.</para>
 	</section>
 
 	<section id="dialog.preferences.languagetool.plugin">
@@ -1678,6 +1677,7 @@
 	  in the <filename class="directory">plugins</filename> folder under the
 	  OmegaT installation folder or the platform-specific OmegaT user
 	  preferences folder.</para>
+	  <para>You can find plugins from the <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development site</ulink> site.</para>
 	</section>
 
 	<section id="dialogs.preferences.updates">

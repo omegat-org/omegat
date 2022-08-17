@@ -455,6 +455,7 @@ public final class ProjectUICommands {
                 ProjectProperties props;
                 try {
                     props = ProjectFileStorage.loadProjectProperties(projectRootFolder.getAbsoluteFile());
+                    // Here, 'props' is the current project setting read from local copy of omegat.project
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -467,10 +468,7 @@ public final class ProjectUICommands {
                     File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
                     boolean needToSaveProperties = false;
                     File rewriteOnSuccess = null;
-                    // Here, 'props' is the current project setting read from local copy of omegat.project
-                    if (props.hasRepositories()) {
-                        /*
-                         This is a remote project.
+                    if (props.hasRepositories()) {  /* This a remote project
                          Every time we reopen the project, we copy omegat.project from the remote project,
                          We take following strategy and procedure to open the project.
                          1. When opening a teamwork project as local only non-teamwork by passing 'no-team' to
@@ -478,7 +476,7 @@ public final class ProjectUICommands {
                          2. Save the currently effective repository mapping from LOCAL to variable 'repos'.
                          3. Update project.properties from REMOTE copy of omegat.project that has postfix .NEW
                             by calling loadPropertiesFile(... ) with "omegat.project.NEW".
-                            It respect local root repository URL than remote mapping configuration
+                            It respects a local root repository URL than remote mapping configuration
                          4. Handles mappings of four cases.
                              a. no mapping
                              b. no remote mapping, there are local mapping(s)
@@ -502,13 +500,14 @@ public final class ProjectUICommands {
                                 remoteRepositoryProvider.switchToVersion(OConsts.FILE_PROJECT, null);
                                 remoteRepositoryProvider.copyFilesFromReposToProject(OConsts.FILE_PROJECT,
                                          ".NEW", false);
-                                rewriteOnSuccess = new File(projectRootFolder.getAbsoluteFile(), OConsts.FILE_PROJECT + ".NEW");
+                                rewriteOnSuccess = new File(projectRootFolder.getAbsoluteFile(),
+                                        OConsts.FILE_PROJECT + ".NEW");
                                 props = ProjectFileStorage.loadPropertiesFile(projectRootFolder.getAbsoluteFile(),
                                         new File(projectRootFolder.getAbsoluteFile(), OConsts.FILE_PROJECT + ".NEW"));
-                                if (props.getRepositories() == null) {
-                                    Log.logWarningRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
-                                    Core.getMainWindow().displayWarningRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
-                                    props.setRepositories(repos); // restore the mapping we just lost
+                                // Here, 'props' is the REMOTE project setting read from the remote omegat.project
+                                if (props.getRepositories() == null) {  // We have a project without mapping
+                                    Log.logInfoRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
+                                    props.setRepositories(repos); // So we restore the mapping we just lost
                                     needToSaveProperties = true;
                                 } else {
                                     // override repository URL when project URL is git type.

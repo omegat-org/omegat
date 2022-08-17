@@ -36,10 +36,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -47,9 +44,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.io.ByteOrderMark;
-import org.apache.commons.io.input.BOMInputStream;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SegmentProperties;
@@ -285,7 +279,7 @@ public class PoFilter extends AbstractFilter {
 
     enum MODE {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL, MSGCTX
-    }
+    };
 
     private StringBuilder[] sources, targets;
     private StringBuilder translatorComments, extractedComments, references, sourceFuzzyTrue;
@@ -306,37 +300,6 @@ public class PoFilter extends AbstractFilter {
         return new Instance[]
         { new Instance("*.po", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()),
                 new Instance("*.pot", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
-    }
-
-    @Override
-    protected BufferedReader createReader(File inFile, String inEncoding) throws IOException {
-        BOMInputStream bomInputStream = new BOMInputStream(Files.newInputStream(inFile.toPath()),
-                ByteOrderMark.UTF_8, ByteOrderMark.UTF_16LE);
-        ByteOrderMark bom = bomInputStream.getBOM();
-        String charset;
-        if (bom != null) {
-            charset = bom.getCharsetName();
-        } else if (inEncoding == null) {
-            charset = Charset.defaultCharset().name();
-        } else {
-            charset = inEncoding;
-        }
-        return new BufferedReader(new InputStreamReader(bomInputStream, charset));
-    }
-
-    @Override
-    protected BufferedWriter createWriter(File outFile, String outEncoding)
-            throws IOException {
-        if (outFile == null) {
-            return null;
-        }
-        Charset charset;
-        if (outEncoding != null) {
-            charset = Charset.forName(outEncoding);
-        } else {
-            charset = Charset.defaultCharset();
-        }
-        return Files.newBufferedWriter(outFile.toPath(), charset);
     }
 
     @Override
@@ -375,19 +338,49 @@ public class PoFilter extends AbstractFilter {
         formatMonolingual = "true".equalsIgnoreCase(formatMonolingualStr);
 
         inEncodingLastParsedFile = fc.getInEncoding();
-        try (BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
-             BufferedWriter writer = createWriter(outFile, fc.getOutEncoding())) {
-            processFile(reader, writer, fc);
+        BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
+        try {
+            BufferedWriter writer;
+
+            if (outFile != null) {
+                writer = createWriter(outFile, fc.getOutEncoding());
+            } else {
+                writer = null;
+            }
+
+            try {
+                processFile(reader, writer, fc);
+            } finally {
+                if (writer != null) {
+                    writer.close();
+                }
+            }
+        } finally {
+            reader.close();
         }
     }
 
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
+        // BOM (byte order mark) bugfix
+        translatedFile.mark(1);
+        int ch = translatedFile.read();
+        if (ch != 0xFEFF) {
+            translatedFile.reset();
+        }
+        this.out = null;
         processPoFile(translatedFile, fc);
     }
 
     @Override
     public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc) throws IOException {
+        // BOM (byte order mark) bugfix
+        in.mark(1);
+        int ch = in.read();
+        if (ch != 0xFEFF) {
+            in.reset();
+        }
+        this.out = out;
         processPoFile(in, fc);
     }
 

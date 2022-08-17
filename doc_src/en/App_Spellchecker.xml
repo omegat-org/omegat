@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.spellchecker">
-  <title id="appendix.spellchecker.title">Spell checker</title>
+<appendix id="spellchecker">
+  <title id="spellchecker.title">Spell checker</title>
 
   <para>OmegaT has a built-in spell checker based on the spelling checker used
   in Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
   consequently able to use the huge range of free spelling dictionaries
   available for these applications.</para>
 
-  <section id="spellchecker.installingdictionaries">
-    <title id="spellchecker.installingdictionaries.title">Installing spelling dictionaries</title>
+  <section id="spellchecker.installing.dictionaries">
+    <title id="spellchecker.installing.dictionaries.title">Installing spelling dictionaries</title>
 
     <para>Before the spell check function can be used, a suitable dictionary
     or dictionaries (i.e. for your target language) must be installed. To

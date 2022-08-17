@@ -31,13 +31,9 @@ import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -99,15 +95,13 @@ public class MozillaDTDFilter extends AbstractFilter {
     }
 
     @Override
-    protected BufferedReader createReader(File inFile, String inEncoding)
-            throws UnsupportedEncodingException, IOException {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(inFile), StandardCharsets.UTF_8));
+    protected BufferedReader createReader(File inFile, String inEncoding) throws IOException {
+        return Files.newBufferedReader(inFile.toPath(), StandardCharsets.UTF_8);
     }
 
     @Override
-    protected BufferedWriter createWriter(File outFile, String outEncoding)
-            throws UnsupportedEncodingException, IOException {
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
+    protected BufferedWriter createWriter(File outFile, String outEncoding) throws IOException {
+        return Files.newBufferedWriter(outFile.toPath(), StandardCharsets.UTF_8);
     }
 
     @Override
@@ -116,11 +110,7 @@ public class MozillaDTDFilter extends AbstractFilter {
 
         String removeStringsUntranslatedStr = processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED);
         // If the value is null the default is false
-        if ((removeStringsUntranslatedStr != null) && (removeStringsUntranslatedStr.equalsIgnoreCase("true"))) {
-            removeStringsUntranslated = true;
-        } else {
-            removeStringsUntranslated = false;
-        }
+        removeStringsUntranslated = "true".equalsIgnoreCase(removeStringsUntranslatedStr);
 
         StringBuilder block = new StringBuilder();
         boolean isInBlock = false;

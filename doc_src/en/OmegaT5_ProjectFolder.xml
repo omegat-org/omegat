@@ -27,22 +27,18 @@
     <para>This subfolder is initially empty. To add contents to it, select
     <menuchoice>
         <shortcut>
-          <keycombo>
-            <keycap>Ctrl</keycap>
-
-            <keycap>D</keycap>
-          </keycombo>
+          <keycombo><keycap>C</keycap><keycap>d</keycap></keycombo>
         </shortcut>
-
         <guimenu>Project</guimenu>
-
         <guimenuitem>Create Translated Documents</guimenuitem>
-      </menuchoice>. Files within the <filename class="directory">source</filename> folder,
-    whether translated or not, are then generated here, with the same
-    hierarchy as present in the source subfolder. The contents of the target
-    subfolder will reflect the current state of the translation, as present in
-    the project translation memory, saved in the current <filename>/omegat/project_save.tmx</filename>. Untranslated segments
-    will hereby remain in the source language.</para>
+        </menuchoice>. Files within the <link linkend="project.folder.source"
+        endterm="project.folder.source.title"/> folder, whether fully translated
+        or not, are then generated here, with the same hierarchy as present in
+        the source subfolder.</para>
+	<para>The contents of the target subfolder will reflect the current state of
+	the translation, as present in the project translation memory, saved in the
+	current <filename>/omegat/project_save.tmx</filename>. Untranslated segments
+	will hereby remain in the source language.</para>
   </section>
 
   <section id="project.folder.tm">

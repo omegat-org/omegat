@@ -81,9 +81,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Previous Segment</term>
-
+    <varlistentry id="menus.goto.previous.segment">
+      <term id="menus.goto.previous.segment.title">Previous Segment</term>
       <listitem>
         <para>Moves to the previous segment. If the current segment is the
         first one in a file, it moves to the last segment of the previous
@@ -109,9 +108,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segment number...</term>
-
+    <varlistentry id="menus.goto.segment.number">
+      <term id="menus.goto.segment.number.title">Segment number...</term>
       <listitem>
         <para>The segment is opened when either its segment call-out or
         segment number is entered.</para>
@@ -123,27 +121,24 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Next Note</term>
-
+    <varlistentry id="menus.goto.next.note">
+      <term id="menus.goto.next.note.title">Next Note</term>
       <listitem>
         <para>The next segment with a note attached to it, will open.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Previous Note</term>
-
+    <varlistentry id="menus.goto.previous.note">
+      <term id="menus.goto.previous.note.title">Previous Note</term>
       <listitem>
         <para>The previous segment with a note will open.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Next Unique Segment</term>
-
+    <varlistentry id="menus.goto.next.unique.segment">
+      <term id="menus.goto.next.unique.segment.title">Next Unique Segment</term>
       <listitem>
         <para>Moves to the next unique segment.</para>
 		<para>
@@ -151,13 +146,11 @@
 			<keycap>S</keycap><keycap>C</keycap><keycap>q</keycap>
 		  </keycombo>
 		</para>
-
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Source of Selected Match</term>
-
+    <varlistentry id="menus.goto.source.of.selected.match">
+      <term id="menus.goto.source.of.selected.match.title">Source of Selected Match</term>
       <listitem>
         <para>Moves to the segment that does correspond to the current
         selected match in the <guilabel>Fuzzy matches</guilabel> pane.</para>
@@ -166,13 +159,11 @@
 			<keycap>S</keycap><keycap>C</keycap><keycap>m</keycap>
 		  </keycombo>
 		</para>
-
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Forward in history...</term>
-
+    <varlistentry id="menus.goto.forward.in.history">
+      <term id="menus.goto.forward.in.history.title">Forward in history...</term>
       <listitem>
         <para>OmegaT remembers the segments your segment navigation
         history.</para>
@@ -188,9 +179,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term id="menu.goto.backinhistory">Back in history...</term>
-
+    <varlistentry id="menus.goto.back.in.history">
+      <term id="menus.goto.back.in.history.title">Back in history...</term>
       <listitem>
         <para>OmegaT remembers the segments your segment navigation
         history.</para>

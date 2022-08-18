@@ -346,7 +346,7 @@ dd {
 
 }
 
-/* liens */
+/* links */
 
 a {
     text-decoration:none;
@@ -368,7 +368,7 @@ a:hover {
 }
 
 
-/* tableaux */
+/* tables */
 
 .table-title {
     font-style:italic;
@@ -394,6 +394,23 @@ td,th {
     max-width: 100%;
     height: auto;
 
+}
+
+/* examples */
+
+.example-title {
+    font-style:italic;
+    color: teal;
+    font-size : .9em;
+    margin-bottom: .75em;
+}
+
+.example-contents {
+    border-style: solid;
+    border-width: 1px;
+    border-radius:3px;
+    padding: 2px 1em;
+    vertical-align: baseline;
 }
 
 /* code */

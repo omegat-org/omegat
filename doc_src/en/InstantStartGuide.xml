@@ -4,13 +4,51 @@
 <chapter id="chapter.instant.start.guide">
   <title id="chapter.instant.start.guide.title">Learn to use OmegaT in 5 minutes!</title>
 
-  <section id="introduction.note.on.shortcuts">
+  <section id="introduction.omegat.">
+	<title id="introduction.omegat.principles.title">OmegaT principles</title>
+	<para>OmegaT is a Computer Aided Translation tool that offers great
+	flexibility and performance, along with features beyond what commercial
+	tools offer, even to the beginning translator.</para>
+	<variablelist>
+	  <varlistentry><term>Translation project</term><listitem><para>An OmegaT
+	  translation project is a folder in which a number of ressources are stored
+	  in separate subfolders. The translator can modify the contents of the
+	  subfolders at any time during the translation as easily as copying or
+	  deleting a file.</para>
+	  <para>Ressources include at the minimum the project's translation memory,
+	  which is automatically created at the time of the project's creation, and
+	  the files to translate. It can include reference translation memories,
+	  glossaries, and other reference files.</para>
+	  </listitem></varlistentry>
+	  <varlistentry><term>Translation memories</term><listitem><para>Translators
+	  do not have to <emphasis>create</emphasis> or
+	  <emphasis>associate</emphasis> a translation memory to a new
+	  project. OmegaT <emphasis>automatically</emphasis> does
+	  that.</para>
+	  <para>Translators can very easily reuse an old project's translation
+	  memory by simply adding new translation files to the old project, or by
+	  copying the old translation memory to the new project's folder.</para>
+	  <para>There is no limit to the number of translation memories that can be
+	  used as reference in a translation project and OmegaT offers very simple
+	  ways to give different priorities to the added
+	  memories.</para></listitem></varlistentry>
+	  <varlistentry><term>Working in teams</term><listitem><para>Translators can
+	  easily work in teams.</para><para>Team work synchronizes the project's
+	  translation memory and the project's main glossary between all the team
+	  participants and allows conflicts between different translations to be
+	  easily solved.</para></listitem></varlistentry>
+	</variablelist>
+  </section>
+
+    <section id="introduction.note.on.shortcuts">
 	<title id="introduction.note.on.shortcuts.title">A note on key shortcuts in this manual</title>
-	  <para>On macOS most key shortcuts use the <keycap>Command</keycap> 
-    key. On Windows and Linux, the equivalent function uses the <keycap>Control</keycap> key.</para>
+	  <para>On macOS most key shortcuts use the <keycap>Command</keycap> key. On
+	  Windows and Linux, the equivalent function uses the
+	  <keycap>Control</keycap> key.</para>
 	<para>To avoid confusion, key shortcuts are described the following way in
 	the manual: </para>
-  <example><title id="example.project.properties.title">Project > Properties...</title>
+  <example id="example.project.properties"><title
+  id="example.project.properties.title">Project > Properties...</title>
 		<para>On Windows and Linux:
 		  <keycombo><keycap>Control</keycap><keycap>E</keycap></keycombo>
 		</para>
@@ -21,19 +59,11 @@
 		  <keycombo><keycap>C</keycap><keycap>e</keycap></keycombo>
 		</para>
   </example>
-  <para>See <link linkend="appendix.shortcut.description" endterm="appendix.shortcut.description.title"/> for details.</para>
+  <para>See <link linkend="appendix.shortcut.description"
+  endterm="appendix.shortcut.description.title"/> for details.</para>
   </section>
 
-  <section id="introduction.omegat.">
-	<title id="introduction.omegat.principles.title">OmegaT principles and definitions</title>
-	<para></para>
-	<variablelist>
-	  <varlistentry><term>Translation project</term><listitem><para></para></listitem></varlistentry>
-	  <varlistentry><term>Translation memories</term><listitem><para></para></listitem></varlistentry>
-	  <varlistentry><term></term><listitem><para></para></listitem></varlistentry>
-	</variablelist>
-  </section>
-  
+
   <section id="introduction.create.and.open.new.project">
     <title id="introduction.create.and.open.new.project.title">Set up a new project</title>
 
@@ -93,15 +123,15 @@
   <section id="introduction.validate.your.tags">
     <title id="introduction.validate.your.tags.title">Validate your tags</title>
 
-    <para>If your source files are formatted files, e.g. Microsoft Word,
-    LibreOffice Writer or HTML, OmegaT will convert the formatting into tags
-    that surround the text that you translate. Often documents will also have
-    tags that have nothing to do with formatting, but which are also important
-    in the source files (and in the translated files). A source sentence might
-    look like:</para>
+    <para>If your source files are decorated with bold, italics, etc., OmegaT
+    will convert the decorations into tags that surround the decorated
+    text. Such files include LibreOffice files, HTML files, Microsoft Office
+    files, etc. Often documents will also have tags that have nothing to do with
+    decorations, but which are also important in the source files (and in the
+    translated files). A source sentence might look like:</para>
     
-	<example>
-	  <title id="example.source.segment.with.decorations.title">Source segment with decorations</title>
+	<example id="example.source.segment.with.decorations">
+	  <title id="example.source.segment.with.decorations.title">Sentence with decorations</title>
 	  <para>OmegaT is an <emphasis role="bold">easy to use</emphasis> program
 	  for <emphasis>eager</emphasis> translators</para>
 	</example>

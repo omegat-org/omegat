@@ -432,7 +432,8 @@ public final class Main {
             }
         }
         try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(Paths.get(outputFilename), CREATE, TRUNCATE_EXISTING, WRITE),
+                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)),
+                        CREATE, TRUNCATE_EXISTING, WRITE),
                 StandardCharsets.UTF_8)) {
             if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
                 writer.write(projectStats.getTextData());

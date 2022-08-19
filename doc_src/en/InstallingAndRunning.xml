@@ -148,15 +148,15 @@
 
             <programlisting>$ unzip <filename>OmegaT_&vernb;_Without_JRE.zip</filename></programlisting>
 
-             (you may need to install the 
+             <para>(you may need to install the 
 
             <filename>unzip</filename>
 
-             package first) or
+             package first) or</para>
 
             <programlisting>$ tar xf OmegaT_&vernb;_Linux_64.tar.bz2</programlisting>
 
-             This will create a new folder in the current folder. This new folder will named after the package you downloaded, and contain all the files needed to run OmegaT.
+             <para>This will create a new folder in the current folder. This new folder will named after the package you downloaded, and contain all the files needed to run OmegaT.</para>
           </listitem>
 
           <listitem>

@@ -60,7 +60,7 @@
     <varlistentry id="menus.options.file.filters">
       <term id="menus.options.file.filters.title">File Filters...</term>
       <listitem>
-        <para>Opens the <link linkend="dialogs.preferences.filefilters">File
+        <para>Opens the <link linkend="dialogs.preferences.file.filters">File
         Filters</link> options in the Preferences dialog.</para>
         <para>These settings apply to OmegaT level, to all projects.</para>
       </listitem>
@@ -70,8 +70,7 @@
       <term id="menus.options.segmentation.title">Segmentation...</term>
       <listitem>
         <para>Opens the <link
-        linkend="dialogs.preferences.segmentationsetup">Segmentation
-        Setup</link> options in the Preferences dialog.</para>
+        linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> options in the Preferences dialog.</para>
         <para>These settings apply to OmegaT level, to all projects.</para>
       </listitem>
     </varlistentry>

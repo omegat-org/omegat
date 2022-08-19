@@ -15,8 +15,8 @@
   <link linkend="configuration.folder" endterm="configuration.folder.title"/>
   for details. It is possible to have OmegaT use a different configuration
   folder, for exemple to use project-specific configurations. See <link
-  linkend="launch.with.command.line.omegat.command.arguments.starting.in.console.mode"
-  endterm="launch.with.command.line.omegat.command.arguments.starting.in.console.mode.title"/>
+  linkend="launch.with.command.line.omegat.terminal.command.syntax"
+  endterm="launch.with.command.line.omegat.terminal.command.syntax.title"/>
   for details. If you use such a configuration folder, all the modifications
   made in this dialog will be stored in that folder.</para></note>
 
@@ -315,8 +315,8 @@
     </section>
   </section>
 
-  <section id="dialogs.preferences.filefilters">
-    <title id="dialogs.preferences.filefilters.title">File Filters</title>
+  <section id="dialogs.preferences.file.filters">
+    <title id="dialogs.preferences.file.filters.title">File Filters</title>
 
     <para>This dialog lists the file filters available. The filters used by
     the current project are displayed in bold. If you prefer not to use OmegaT
@@ -804,8 +804,8 @@
     </section>
   </section>
 
-  <section id="dialogs.preferences.segmentationsetup">
-	<title id="dialogs.preferences.segmentationsetup.title">Segmentation Setup</title>
+  <section id="dialogs.preferences.segmentation.setup">
+	<title id="dialogs.preferences.segmentation.setup.title">Segmentation Setup</title>
 
 	<para>Translation memory tools work with textual units called segments.
 	OmegaT has two ways to segment a text: by paragraph or by sentence
@@ -845,7 +845,7 @@
 	<variablelist>
       <varlistentry>
 		<term
-			id="dialogs.preferences.segmentationsetup.structurelevelsegmentation">Structure
+			id="dialogs.preferences.segmentation.setup.structure.level.segmentation">Structure
 		level segmentation</term>
 
 		<listitem>
@@ -863,7 +863,7 @@
 
       <varlistentry>
 		<term
-			id="dialogs.preferences.segmentationsetup.sentencelevelsegmentation">Sentence
+			id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">Sentence
 		level segmentation</term>
 
 		<listitem>
@@ -1019,8 +1019,8 @@
 	  </informaltable>
 	</section>
 
-	<section id="dialog.preferences.auto-completion">
-	  <title id="dialog.preferences.auto-completion.title">Auto-Completion</title>
+	<section id="dialog.preferences.auto.completion">
+	  <title id="dialog.preferences.auto.completion.title">Auto-Completion</title>
 
 	  <para>Click on <guimenuitem>Glossary...</guimenuitem> to configure the
 	  Auto-completer Glossary View.</para>
@@ -1043,14 +1043,13 @@
 	  or by typing "&lt;" in case of tags.</para>
 	</section>
 
-	<section id="dialog.preferences.spelchecker">
-	  <title id="dialog.preferences.spelchecker.title">Spellchecker</title>
+	<section id="dialog.preferences.spellchecker">
+	  <title id="dialog.preferences.spellchecker.title">Spellchecker</title>
 
-	  <para>OmegaT has a built-in spell checker based on the <link
-	  linkend="appendix.spellchecker">spelling checker</link> used in Apache
-	  OpenOffice, LibreOffice, Firefox and Thunderbird. It is consequently able
-	  to use the huge range of free spelling dictionaries available for these
-	  applications.</para>
+	  <para>OmegaT has a built-in spell checker based on the spelling checker
+	  used in Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
+	  consequently able to use the huge range of free spelling dictionaries
+	  available for these applications.</para>
 	</section>
 
 	<section id="dialog.preferences.languagetool.plugin">
@@ -1678,6 +1677,7 @@
 	  in the <filename class="directory">plugins</filename> folder under the
 	  OmegaT installation folder or the platform-specific OmegaT user
 	  preferences folder.</para>
+	  <para>You can find plugins from the <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development site</ulink> site.</para>
 	</section>
 
 	<section id="dialogs.preferences.updates">

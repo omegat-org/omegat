@@ -5,17 +5,15 @@
   <title id="windows.text.search.title">Text Search</title>
 
   <para>Open the Search window with <keycombo>
-      <keycap>Ctrl</keycap>
-
-      <keycap>F</keycap>
+      <keycap>C</keycap>
+      <keycap>f</keycap>
     </keycombo> and enter the word or phrase you wish to search for in the
   <guilabel>Search for</guilabel> box.</para>
-
+  
   <para>Alternatively, you can select a word or phrase in the Editor pane,
   Fuzzy matches pane or Glossary pane and hit <keycombo>
-      <keycap>Ctrl</keycap>
-
-      <keycap>F</keycap>
+      <keycap>C</keycap>
+      <keycap>f</keycap>
     </keycombo>. The word or phrase is entered in the <guilabel>Search
   for</guilabel> box automatically. You can have several Search windows open
   at the same time, but close them when they are no longer needed so that they
@@ -29,49 +27,49 @@
   <itemizedlist>
     <listitem>
       <para>File &gt; Search for selection (<keycombo>
-          <keycap>Ctrl</keycap>
+          <keycap>C</keycap>
 
-          <keycap>F</keycap>
+          <keycap>f</keycap>
         </keycombo>): refocus on the search field and select all its
       contents.</para>
     </listitem>
 
     <listitem>
       <para>File &gt; Close (<keycombo>
-          <keycap>Ctrl</keycap>
+          <keycap>C</keycap>
 
-          <keycap>W</keycap>
+          <keycap>w</keycap>
         </keycombo>): close the search window (in the same way as
       <keycap>Esc</keycap>)</para>
     </listitem>
 
     <listitem>
       <para>Edit &gt; Insert source (<keycombo>
-          <keycap>Ctrl</keycap>
+          <keycap>S</keycap>
 
-          <keycap>Shift</keycap>
+          <keycap>C</keycap>
 
-          <keycap>I</keycap>
+          <keycap>i</keycap>
         </keycombo>): insert current segment source.</para>
     </listitem>
 
     <listitem>
       <para>Edit &gt; Replace with source (<keycombo>
-          <keycap>Ctrl</keycap>
+          <keycap>S</keycap>
 
-          <keycap>Shift</keycap>
+          <keycap>C</keycap>
 
-          <keycap>R</keycap>
+          <keycap>r</keycap>
         </keycombo>): replace with current segment source.</para>
     </listitem>
 
     <listitem>
       <para>Edit &gt; Create Glossary Entry (<keycombo>
-          <keycap>Ctrl</keycap>
+          <keycap>S</keycap>
 
-          <keycap>Shift</keycap>
+          <keycap>C</keycap>
 
-          <keycap>G</keycap>
+          <keycap>g</keycap>
         </keycombo>): add a new glossary item.</para>
     </listitem>
   </itemizedlist>
@@ -270,13 +268,13 @@
     instance to check and, if necessary, correct the terminology.</para>
 
     <para>In the Search window, you can use standard shortcuts (<keycombo>
-        <keycap>Ctrl</keycap>
+        <keycap>C</keycap>
 
-        <keycap>N</keycap>
+        <keycap>n</keycap>
       </keycombo>, <keycombo>
-        <keycap>Ctrl</keycap>
+        <keycap>C</keycap>
 
-        <keycap>P</keycap>
+        <keycap>p</keycap>
       </keycombo>) to move from one segment to another.</para>
 
     <para>You may have several Search windows open at the same time. You can

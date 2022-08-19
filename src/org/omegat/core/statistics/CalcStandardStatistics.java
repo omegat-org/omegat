@@ -75,8 +75,8 @@ public class CalcStandardStatistics extends LongProcessThread {
         IProject p = Core.getProject();
         StatsResult result = buildProjectStats(p);
         callback.setProjectTableData(StatsResult.HT_HEADERS, result.getHeaderTable());
-        callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable(p.getProjectProperties()));
-        callback.setTextData(result.getTextData(p.getProjectProperties()));
+        callback.setFilesTableData(StatsResult.FT_HEADERS, result.getFilesTable());
+        callback.setTextData(result.getTextData());
         callback.finishData();
 
         String internalDir = p.getProjectProperties().getProjectInternal();
@@ -91,7 +91,7 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         // now dump file based word counts to disk
         String fn = internalDir + OConsts.STATS_FILENAME;
-        Statistics.writeStat(fn, result.getTextData(p.getProjectProperties()));
+        Statistics.writeStat(fn, result.getTextData());
         callback.setDataFile(fn);
     }
 

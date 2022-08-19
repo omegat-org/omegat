@@ -72,6 +72,14 @@ public class DictionariesManagerTest {
             }
 
             @Override
+            public void addDictionary(IDictionary dictionary) {
+            }
+
+            @Override
+            public void removeDictionary(IDictionary dictionary) {
+            }
+
+            @Override
             public void searchText(String text) {
             }
 

@@ -148,11 +148,7 @@
 
             <programlisting>$ unzip <filename>OmegaT_&vernb;_Without_JRE.zip</filename></programlisting>
 
-             <para>(you may need to install the 
-
-            <filename>unzip</filename>
-
-             package first) or</para>
+             <para>(you may need to install the <filename>unzip</filename>package first) or</para>
 
             <programlisting>$ tar xf OmegaT_&vernb;_Linux_64.tar.bz2</programlisting>
 
@@ -167,13 +163,7 @@
 $ ./linux-install</programlisting>
 
             <para>The script checks for an existing installation of the same
-            OmegaT version in <filename>/opt/omegat/. If there isn't one, it
-            installs the program in <filename>/opt/omegat/&lt;OmegaT
-            version&gt;</filename></filename> and sets it as the default
-            version. (You will have to enter <filename>sudo</filename>
-            password.) The installation script is available <ulink
-            url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/release/linux-specific/linux-install.sh">here</ulink>,
-            for your perusal before use.</para>
+            OmegaT version in <filename>/opt/omegat/</filename>. If there isn't one, it installs the program in <filename>/opt/omegat/&lt;OmegaT version&gt;</filename> and sets it as the default version. (You will have to enter <filename>sudo</filename> password.) The installation script is available <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/release/linux-specific/linux-install.sh">here</ulink>, for your perusal before use.</para>
           </listitem>
         </orderedlist>
       </section>
@@ -285,17 +275,11 @@ $ ./linux-install</programlisting>
         <title id="installing.omegat.macos.install.the.package.title">Install
         OmegaT</title>
 
-        <para>Double click on
-        <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> to unpack it.
-        This creates a folder called <filename>OmegaT</filename>. The folder
-        contains 2 files: <filename>index.html</filename> (the manual index)
+        <para>Double click on <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> to unpack it. This creates a folder called <filename>OmegaT</filename>. The folder contains two files: <filename>index.html</filename> (the manual index)
         and <filename>OmegaT.app</filename> (the application). Copy the folder
-        to a suitable location (e.g.
-        <filename>Applications</filename>).</para>
+        to a suitable location (e.g. <filename>Applications</filename>).</para>
 
-        <para>Once you have done this, you can delete the
-        <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> file, it is no
-        longer needed.</para>
+        <para>Once you have done this, you can delete the <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> file, it is no longer needed.</para>
       </section>
 
       <section id="installing.omegat.macos.add.to.the.dock">
@@ -582,8 +566,8 @@ $ ./linux-install</programlisting>
   </section>
 
   <section id="build.omegat.from.source">
-    <title id="build.omegat.from.source.title">Building OmegaT From
-    Source</title>
+    <title id="build.omegat.from.source.title">Building OmegaT from
+    source</title>
 
     <para>The sources of the current version can be retrieved with a Git
     client from the <ulink url="https://git.code.sf.net/p/omegat/code"/>

@@ -144,12 +144,10 @@
 	
     <figure id="default.editor.target.field">
       <title id="default.editor.target.field.title">The default editor writing space</title>
-
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultEditorDisplay.png"/>
         </imageobject>
-
         <imageobject role="fo">
           <imagedata fileref="images/defaultEditorDisplay.png" width="60%"/>
         </imageobject>
@@ -190,18 +188,15 @@
 	  <para>You are invited to modify the Editor display to fit your workflow.</para>
       <figure id="modified.editor.target.field">
 		<title id="modified.editor.target.field.title">A modified editor writing space</title>
-
 		<mediaobject>
           <imageobject role="html">
 			<imagedata fileref="images/modifiedEditorDisplay.png"/>
           </imageobject>
-
           <imageobject role="fo">
 			<imagedata fileref="images/modifiedEditorDisplay.png" width="60%"/>
           </imageobject>
 		</mediaobject>
       </figure>
-
 	  <para>Modifications here include:
 	  <itemizedlist>
 		<listitem><para><link linkend="dialogs.preferences.fonts" endterm="dialogs.preferences.fonts.title"/></para></listitem>
@@ -233,7 +228,10 @@
 	
 	<section id="panes.editor.contextual.menu">
 	  <title id="panes.editor.contextual.menu.title">Editor contextual menu</title>
-
+	  <para>The default key shortcut to display the contextual menu is
+	  <keycap>Menu</keycap> key on Windows and Linux, and
+	  <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo> on
+	  macOS.</para>
 	  <para>The Editor pane contextual menu offers:
 	  <itemizedlist>
 		<listitem><para>
@@ -251,12 +249,20 @@
 	  and other
 	  functions that have their equivalent in the <link linkend="menus.edit"
 	  endterm="menus.edit.title"/> menu.</para>
-
 	  <para>If you have selected text and defined <link
 	  linkend="dialogs.preferences.external.searches"
 	  endterm="dialogs.preferences.external.searches.title"/>, they will
 	  also be displayed here.</para>
+	</section>
 
+	<section id="panes.editor.auto.completion.menu">
+	  <title id="panes.editor.auto.completion.menu.title">Auto-completion menu</title>
+	  <para>The default key shortcut to display the auto-completion menu is
+	  <keycombo><keycap>C</keycap><keycap>Space</keycap></keycombo> on Windows
+	  and Linux, and <keycap>Esc</keycap> on macOS.</para>
+	  <para>The Editor pane auto-completion menu offers the auto-completion
+	  options set in <link linkend="dialog.preferences.auto.completion"
+	  endterm="dialog.preferences.auto.completion.title"/>.</para>
 	</section>
 
 	<section id="panes.editor.dragging.and.selecting">

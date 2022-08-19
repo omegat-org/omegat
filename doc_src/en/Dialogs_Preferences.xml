@@ -1019,8 +1019,8 @@
 	  </informaltable>
 	</section>
 
-	<section id="dialog.preferences.auto-completion">
-	  <title id="dialog.preferences.auto-completion.title">Auto-Completion</title>
+	<section id="dialog.preferences.auto.completion">
+	  <title id="dialog.preferences.auto.completion.title">Auto-Completion</title>
 
 	  <para>Click on <guimenuitem>Glossary...</guimenuitem> to configure the
 	  Auto-completer Glossary View.</para>

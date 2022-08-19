@@ -169,8 +169,8 @@
         history.</para>
 		<para>With this command you can move forward one segment at a time to
 		the segments that you have previously visited with <link
-		linkend="menu.goto.backinhistory"
-		endterm="menu.goto.backinhistory"/>.</para>
+		linkend="menus.goto.back.in.history"
+		endterm="menus.goto.back.in.history.title"/>.</para>
 		<para>
 		  <keycombo>
 			<keycap>S</keycap><keycap>C</keycap><keycap>n</keycap>

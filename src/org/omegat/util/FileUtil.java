@@ -39,6 +39,7 @@ import java.nio.charset.Charset;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -296,6 +297,29 @@ public final class FileUtil {
         } catch (IOException ex) {
             return false;
         }
+    }
+
+    /**
+     * Expand tilde(~) in first character in path string.
+     * @param path path string
+     * @return expanded path string
+     */
+    public static String expandTildeHomeDir(final String path){
+        if (path.startsWith("~+/") || path.equals("~+")) {
+            Path currentRelativePath = Paths.get("");
+            String pwd = currentRelativePath.toAbsolutePath().toString();
+            return path.replaceFirst("^~+", Matcher.quoteReplacement(pwd));
+        } else if (path.startsWith("~-/") || path.equals("~-")) {
+            String oldpwd = System.getenv("OLDPWD");
+            if (oldpwd != null) {
+                return path.replaceFirst("^~-", Matcher.quoteReplacement(oldpwd));
+            }
+        } else if (path.startsWith("~/") || path.equals("~")) {
+            String homedir = FileUtils.getUserDirectoryPath();
+            return path.replaceFirst("^~", Matcher.quoteReplacement(homedir));
+        }
+        // when all condition not passed, don't touch
+        return path;
     }
 
     public interface ICollisionCallback {

@@ -1,6 +1,5 @@
 msgid ""
-msgstr ""
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+msgstr "POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: l10n team <team@example.org>\n"
 "Language-Team: l10n <i18n@example.org>\n"
@@ -8,16 +7,11 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: be\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#, fuzzy
-#| msgid "True fuzzy 2!"
 msgid "source"
-msgstr "translate"
+msgstr "source"
 
 #: path
-#, fuzzy
-#| msgctxt "context"
-#| msgid "old message ID"
 msgid "new message ID"
-msgstr "old message string"
+msgstr "new message ID"

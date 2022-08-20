@@ -25,8 +25,11 @@
 
 package org.omegat.core.statistics;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
+
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * Bean for store counts in statistics.
@@ -47,7 +50,21 @@ import org.omegat.core.data.SourceTextEntry;
  */
 public class StatCount {
 
-    public int segments, words, charsWithoutSpaces, charsWithSpaces, files;
+    @JsonProperty("segments")
+    @XmlAttribute(name="segments")
+    public int segments;
+    @JsonProperty("words")
+    @XmlAttribute(name="words")
+    public int words;
+    @JsonProperty("characters-without-spaces")
+    @XmlAttribute(name="characters-without-spaces")
+    public int charsWithoutSpaces;
+    @JsonProperty("characters")
+    @XmlAttribute(name="characters")
+    public int charsWithSpaces;
+    @JsonProperty("files")
+    @XmlAttribute(name="files")
+    public int files;
 
     /**
      * Initialize counts with zeros.

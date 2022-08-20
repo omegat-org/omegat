@@ -105,6 +105,10 @@ public final class CLIParameters {
     // CONSOLE_ALIGN mode
     public static final String ALIGNDIR = "alignDir";
 
+    // CONSOLE_STATS mode
+    public static final String STATS_OUTPUT = "output-file";
+    public static final String STATS_MODE = "stats-type";
+
     // Development
     public static final String DEV_MANIFESTS = "dev-manifests";
 
@@ -115,7 +119,7 @@ public final class CLIParameters {
      * Application execution mode. Value of {@link #MODE}.
      */
     enum RUN_MODE {
-        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN;
+        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN, CONSOLE_STATS;
 
         public static RUN_MODE parse(String s) {
             try {

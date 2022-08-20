@@ -27,6 +27,8 @@
 package org.omegat.core.dictionaries;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -76,8 +78,25 @@ public interface IDictionary extends AutoCloseable {
      * @return List of entries. May be empty, but cannot be null.
      */
     default List<DictionaryEntry> readArticlesPredictive(String word) throws Exception {
-        // Default implementation for backwards compatibility
         return readArticles(word);
+    }
+
+    default List<DictionaryEntry> retrieveArticles(Collection<String> words) throws Exception {
+        // Default implementation for backwards compatibility
+        List<DictionaryEntry> result = new ArrayList<>();
+        for (String word : words) {
+            result.addAll(readArticles(word));
+        }
+        return result;
+    }
+
+    default List<DictionaryEntry> retrieveArticlesPredictive(Collection<String> words) throws Exception {
+        // Default implementation for backwards compatibility
+        List<DictionaryEntry> result = new ArrayList<>();
+        for (String word : words) {
+            result.addAll(readArticlesPredictive(word));
+        }
+        return result;
     }
 
     /**

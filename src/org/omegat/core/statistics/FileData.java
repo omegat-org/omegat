@@ -27,9 +27,19 @@
 
 package org.omegat.core.statistics;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class FileData {
+    @JsonProperty("filename")
     public String filename;
-    public StatCount total, unique, remaining, remainingUnique;
+    @JsonProperty("total")
+    public StatCount total;
+    @JsonProperty("unique")
+    public StatCount unique;
+    @JsonProperty("remaining")
+    public StatCount remaining;
+    @JsonProperty("unique-remaining")
+    public StatCount remainingUnique;
 
     public FileData() {
         total = new StatCount();

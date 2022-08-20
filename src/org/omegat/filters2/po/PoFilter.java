@@ -309,6 +309,15 @@ public class PoFilter extends AbstractFilter {
                 new Instance("*.pot", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 
+    /**
+     * return BufferdReader for PoFile reading.
+     * @param inFile
+     *            The source file.
+     * @param inEncoding
+     *            Encoding of the input file, if the filter supports it. Otherwise null.
+     * @return
+     * @throws IOException
+     */
     @Override
     protected BufferedReader createReader(File inFile, String inEncoding) throws IOException {
         BOMInputStream bomInputStream = new BOMInputStream(Files.newInputStream(inFile.toPath()),
@@ -384,11 +393,13 @@ public class PoFilter extends AbstractFilter {
 
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
+        this.out = null;
         processPoFile(translatedFile, fc);
     }
 
     @Override
     public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc) throws IOException {
+        this.out = out;
         processPoFile(in, fc);
     }
 

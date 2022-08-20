@@ -62,7 +62,6 @@ import javax.xml.stream.events.XMLEvent;
 import org.apache.commons.io.input.XmlStreamReader;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 /**
  * Helper for read TMX files, using StAX.
@@ -117,8 +116,7 @@ public class TMXReader2 {
         factory.setXMLReporter(new XMLReporter() {
             public void report(String message, String errorType, Object info, Location location)
                     throws XMLStreamException {
-                Log.logWarningRB("TMXR_WARNING_WHILE_PARSING",
-                        location.getLineNumber(),
+                Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
                         location.getColumnNumber());
                 Log.log(message + ": " + info);
                 warningsCount++;
@@ -163,7 +161,8 @@ public class TMXReader2 {
                         parseTu(eStart);
                         ParsedTuv origTuv = getTuvByLang(sourceLanguage);
                         ParsedTuv targetTuv = getTuvByLang(targetLanguage);
-                        allFound = callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype) && allFound;
+                        allFound = callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype)
+                                && allFound;
                     } else if ("header".equals(eStart.getName().getLocalPart())) {
                         parseHeader(eStart, sourceLanguage);
                     }
@@ -218,11 +217,11 @@ public class TMXReader2 {
         // different from the project source language
         String tmxSourceLanguage = getAttributeValue(element, "srclang");
         if (!sourceLanguage.getLanguage().equalsIgnoreCase(tmxSourceLanguage)) {
-            Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage,
-                    sourceLanguage);
+            Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG", tmxSourceLanguage, sourceLanguage);
         }
 
-        // give a warning that TMX file will be upgraded to sentence segmentation
+        // give a warning that TMX file will be upgraded to sentence
+        // segmentation
         if (isSegmentingEnabled && isParagraphSegtype) {
             Log.logWarningRB("TMXR_WARNING_UPGRADE_SENTSEG");
         }
@@ -276,7 +275,7 @@ public class TMXReader2 {
         // find 'lang' or 'xml:lang' attribute
         for (Iterator<?> it = element.getAttributes(); it.hasNext();) {
             Attribute a = (Attribute) it.next();
-            if ("lang".equals(a.getName().getLocalPart())) {
+            if ("lang".equals(a.getName().getLocalPart()) || "xml:lang".equals(a.getName().getLocalPart())) {
                 tuv.lang = a.getValue();
                 break;
             }
@@ -543,8 +542,8 @@ public class TMXReader2 {
                 }
                 if (tagN == null) {
                     // check error of TMX reading
-                    Log.logErrorRB("TMX_ERROR_READING_LEVEL2", e.getLocation().getLineNumber(), e
-                            .getLocation().getColumnNumber());
+                    Log.logErrorRB("TMX_ERROR_READING_LEVEL2", e.getLocation().getLineNumber(),
+                            e.getLocation().getColumnNumber());
                     errorsCount++;
                     segContent.setLength(0);
                     return;
@@ -587,7 +586,8 @@ public class TMXReader2 {
      */
     protected ParsedTuv getTuvByLang(Language lang) {
         ParsedTuv tuvLC = null; // Tuv with the same language+country
-        ParsedTuv tuvL = null; // Tuv with the same language only, without country
+        ParsedTuv tuvL = null; // Tuv with the same language only, without
+                               // country
         ParsedTuv tuvLW = null; // Tuv with the same language+whatever country
         for (int i = 0; i < currentTu.tuvs.size(); i++) {
             ParsedTuv tuv = currentTu.tuvs.get(i);
@@ -604,7 +604,7 @@ public class TMXReader2 {
                 tuvLC = tuv;
             } else {
                 // other country
-                if (tuvLW == null) {  // take first occurrence
+                if (tuvLW == null) { // take first occurrence
                     tuvLW = tuv;
                 }
             }
@@ -665,7 +665,8 @@ public class TMXReader2 {
             changedate = 0;
             creationid = null;
             creationdate = 0;
-            props = new ArrayList<TMXProp>(); // do not CLEAR, because it may be shared
+            props = new ArrayList<TMXProp>(); // do not CLEAR, because it may be
+                                              // shared
             tuvs = new ArrayList<ParsedTuv>();
             note = null;
         }
@@ -681,7 +682,7 @@ public class TMXReader2 {
     }
 
     public static final EntityResolver TMX_DTD_RESOLVER = new EntityResolver() {
-        public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
+        public InputSource resolveEntity(String publicId, String systemId) {
             if (systemId.endsWith("tmx11.dtd")) {
                 return new InputSource(TMXReader2.class.getResourceAsStream("/schemas/tmx11.dtd"));
             } else if (systemId.endsWith("tmx14.dtd")) {

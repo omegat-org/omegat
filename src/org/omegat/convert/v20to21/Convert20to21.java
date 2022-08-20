@@ -36,8 +36,8 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 
 import gen.core.filters.Files;
 import gen.core.filters.Filter;
@@ -60,7 +60,6 @@ public final class Convert20to21 {
      *            old config file
      * @param toFile
      *            new config file
-     * @throws Exception
      */
     public static void convertFiltersConfig(final File fromFile, final File toFile) throws Exception {
         if (!fromFile.exists()) {
@@ -68,11 +67,9 @@ public final class Convert20to21 {
         }
         String c = read(fromFile);
         org.omegat.convert.v20to21.data.Filters filters;
-        XMLDecoder xmldec = new XMLDecoder(new ByteArrayInputStream(c.getBytes("UTF-8")));
-        try {
+        try (XMLDecoder xmldec = new XMLDecoder(
+                new ByteArrayInputStream(c.getBytes(StandardCharsets.UTF_8)))) {
             filters = (org.omegat.convert.v20to21.data.Filters) xmldec.readObject();
-        } finally {
-            xmldec.close();
         }
 
         Filters res = new Filters();
@@ -108,10 +105,9 @@ public final class Convert20to21 {
         convertTextFilter(res);
         convertHTMLFilter2(res);
 
-        JAXBContext ctx = JAXBContext.newInstance(Filters.class);
-        Marshaller m = ctx.createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.marshal(res, toFile);
+        XmlMapper mapper = new XmlMapper();
+        mapper.registerModule(new JaxbAnnotationModule());
+        mapper.writeValue(toFile, res);
     }
 
     /**
@@ -133,8 +129,8 @@ public final class Convert20to21 {
         }
         String res = r.toString();
         res = res.replace("org.omegat.filters2.master.Filters", "org.omegat.convert.v20to21.data.Filters");
-        res = res
-                .replace("org.omegat.filters2.master.OneFilter", "org.omegat.convert.v20to21.data.OneFilter");
+        res = res.replace("org.omegat.filters2.master.OneFilter",
+                "org.omegat.convert.v20to21.data.OneFilter");
         res = res.replace("org.omegat.filters2.Instance", "org.omegat.convert.v20to21.data.Instance");
         res = res.replace("org.omegat.filters2.html2.HTMLOptions",
                 "org.omegat.convert.v20to21.data.HTMLOptions");

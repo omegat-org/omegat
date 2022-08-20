@@ -38,14 +38,17 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
-import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SequenceWriter;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;
@@ -55,46 +58,36 @@ import org.omegat.util.gui.TextUtil;
  */
 @XmlRootElement(name = "omegat-stats")
 public class StatsResult {
-    public static final String[] HT_HEADERS = {
-        "",
-        OStrings.getString("CT_STATS_Segments"),
-        OStrings.getString("CT_STATS_Words"),
-        OStrings.getString("CT_STATS_Characters_NOSP"),
-        OStrings.getString("CT_STATS_Characters"),
-        OStrings.getString("CT_STATS_Files"),
-    };
+    public static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
+            OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
+            OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files"), };
 
-    private static final String[] HT_ROWS = {
-        OStrings.getString("CT_STATS_Total"),
-        OStrings.getString("CT_STATS_Remaining"),
-        OStrings.getString("CT_STATS_Unique"),
-        OStrings.getString("CT_STATS_Unique_Remaining"),
-    };
+    private static final String[] HT_ROWS = { OStrings.getString("CT_STATS_Total"),
+            OStrings.getString("CT_STATS_Remaining"), OStrings.getString("CT_STATS_Unique"),
+            OStrings.getString("CT_STATS_Unique_Remaining"), };
 
     private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
 
-    public static final String[] FT_HEADERS = {
-        OStrings.getString("CT_STATS_FILE_Name"),
-        OStrings.getString("CT_STATS_FILE_Total_Segments"),
-        OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
-        OStrings.getString("CT_STATS_FILE_Unique_Segments"),
-        OStrings.getString("CT_STATS_FILE_Unique_Remaining_Segments"),
-        OStrings.getString("CT_STATS_FILE_Total_Words"),
-        OStrings.getString("CT_STATS_FILE_Remaining_Words"),
-        OStrings.getString("CT_STATS_FILE_Unique_Words"),
-        OStrings.getString("CT_STATS_FILE_Unique_Remaining_Words"),
-        OStrings.getString("CT_STATS_FILE_Total_Characters_NOSP"),
-        OStrings.getString("CT_STATS_FILE_Remaining_Characters_NOSP"),
-        OStrings.getString("CT_STATS_FILE_Unique_Characters_NOSP"),
-        OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters_NOSP"),
-        OStrings.getString("CT_STATS_FILE_Total_Characters"),
-        OStrings.getString("CT_STATS_FILE_Remaining_Characters"),
-        OStrings.getString("CT_STATS_FILE_Unique_Characters"),
-        OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters"),
-    };
+    public static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
+            OStrings.getString("CT_STATS_FILE_Total_Segments"),
+            OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
+            OStrings.getString("CT_STATS_FILE_Unique_Segments"),
+            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Segments"),
+            OStrings.getString("CT_STATS_FILE_Total_Words"),
+            OStrings.getString("CT_STATS_FILE_Remaining_Words"),
+            OStrings.getString("CT_STATS_FILE_Unique_Words"),
+            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Words"),
+            OStrings.getString("CT_STATS_FILE_Total_Characters_NOSP"),
+            OStrings.getString("CT_STATS_FILE_Remaining_Characters_NOSP"),
+            OStrings.getString("CT_STATS_FILE_Unique_Characters_NOSP"),
+            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters_NOSP"),
+            OStrings.getString("CT_STATS_FILE_Total_Characters"),
+            OStrings.getString("CT_STATS_FILE_Remaining_Characters"),
+            OStrings.getString("CT_STATS_FILE_Unique_Characters"),
+            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters"), };
 
-    private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true, true, true, true, true,
-            true, true, true, true, true, };
+    private static final boolean[] FT_ALIGN = { false, true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, };
 
     @JsonProperty("project")
     private StatProjectProperties props;
@@ -122,6 +115,7 @@ public class StatsResult {
 
     /**
      * Constructor.
+     * 
      * @param total
      * @param remaining
      * @param unique
@@ -143,7 +137,9 @@ public class StatsResult {
 
     /**
      * Update given hosStat with current stats data.
-     * @param hotStat StatisticsInfo data object.
+     * 
+     * @param hotStat
+     *            StatisticsInfo data object.
      */
     public void updateStatisticsInfo(StatisticsInfo hotStat) {
         hotStat.numberOfSegmentsTotal = total.segments;
@@ -167,6 +163,7 @@ public class StatsResult {
 
     /**
      * Return total number of segments.
+     * 
      * @return
      */
     @XmlElement(name = "total")
@@ -176,6 +173,7 @@ public class StatsResult {
 
     /**
      * Return remaining number of segments that needs translation.
+     * 
      * @return
      */
     @XmlElement(name = "remaining")
@@ -185,6 +183,7 @@ public class StatsResult {
 
     /**
      * Return a number of unique segments.
+     * 
      * @return
      */
     @XmlElement(name = "unique")
@@ -194,6 +193,7 @@ public class StatsResult {
 
     /**
      * Return a number of remaining unique segments.
+     * 
      * @return
      */
     @XmlElement(name = "unique-remaining")
@@ -203,6 +203,7 @@ public class StatsResult {
 
     /**
      * return a statistics of each source/target files.
+     * 
      * @return
      */
     @XmlElement(name = "files")
@@ -212,25 +213,25 @@ public class StatsResult {
 
     /**
      * Return pretty printed statistics data.
+     * 
      * @return pretty-printed string.
      */
     @JsonIgnore
     public String getTextData() {
-        return OStrings.getString("CT_STATS_Project_Statistics") +
-                "\n\n" +
-                TextUtil.showTextTable(HT_HEADERS, getHeaderTable(), HT_ALIGN) +
-                "\n\n" +
+        return OStrings.getString("CT_STATS_Project_Statistics") + "\n\n"
+                + TextUtil.showTextTable(HT_HEADERS, getHeaderTable(), HT_ALIGN) + "\n\n" +
 
                 // STATISTICS BY FILE
-                OStrings.getString("CT_STATS_FILE_Statistics") +
-                "\n\n" +
-                TextUtil.showTextTable(FT_HEADERS, getFilesTable(), FT_ALIGN);
+                OStrings.getString("CT_STATS_FILE_Statistics") + "\n\n"
+                + TextUtil.showTextTable(FT_HEADERS, getFilesTable(), FT_ALIGN);
     }
 
     /**
      * Return JSON expression of stats data.
+     * 
      * @return JSON string data.
-     * @throws IOException when export failed.
+     * @throws IOException
+     *             when export failed.
      */
     @JsonIgnore
     public String getJsonData() throws IOException {
@@ -245,14 +246,16 @@ public class StatsResult {
 
     /**
      * Return XML expression of Stats data.
+     * 
      * @return XML expression of stats data as String.
      */
     @JsonIgnore
-    public String getXmlData() {
+    public String getXmlData() throws JsonProcessingException {
         setDate();
-        StringWriter result = new StringWriter();
-        JAXB.marshal(this, result);
-        return result.toString();
+        XmlMapper mapper = XmlMapper.xmlBuilder().enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
+                .build();
+        mapper.registerModule(new JaxbAnnotationModule());
+        return mapper.writeValueAsString(this);
     }
 
     private void setDate() {

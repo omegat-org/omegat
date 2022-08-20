@@ -28,9 +28,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,11 +51,12 @@ import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProjectTest;
 import org.omegat.filters.TestFilterBase;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * @author Alex Buloichik
@@ -151,42 +153,34 @@ public class TMXWriterTest extends TestFilterBase {
         // which should be treated as a beginning tag even when
         // useSlash = true so that we can match after segmenting,
         // such as in TmxComplianceTests#testImport2A:
-        // "First <b0>sentence. Second</b0> sentence." -> ["First <b0>sentence.", "Second</b0> sentence."]
+        // "First <b0>sentence. Second</b0> sentence." -> ["First
+        // <b0>sentence.", "Second</b0> sentence."]
         assertEquals("6<a0>7", sources.get(3));
     }
 
     @Test
     public void testEOLwrite() throws Exception {
         String eol = TMXWriter2.lineSeparator;
-        try {
-            TMXWriter2.lineSeparator = "\r\n";
+        TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
+                false);
+        wr.writeEntry("source", "tar\nget", RealProjectTest.createEmptyTMXEntry(), null);
+        wr.close();
 
-            TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false,
-                    true, false);
-            wr.writeEntry("source", "tar\nget", RealProjectTest.createEmptyTMXEntry(), null);
-            wr.close();
-
-            StringBuilder text = new StringBuilder();
-            try (Reader rd = new InputStreamReader(new FileInputStream(outFile), "UTF-8")) {
-                char[] buffer = new char[512];
-                while (true) {
-                    int len = rd.read(buffer);
-                    if (len < 0) {
-                        break;
-                    }
-                    text.append(buffer, 0, len);
+        StringBuilder text = new StringBuilder();
+        try (Reader rd = new InputStreamReader(Files.newInputStream(outFile.toPath()),
+                StandardCharsets.UTF_8)) {
+            char[] buffer = new char[512];
+            while (true) {
+                int len = rd.read(buffer);
+                if (len < 0) {
+                    break;
                 }
+                text.append(buffer, 0, len);
             }
-            assertTrue(text.toString().contains("tar\r\nget"));
-
-            final List<String> trs = new ArrayList<String>();
-            load(null, trs, true, false);
-            assertTrue(trs.get(0).contains("tar\nget"));
-        } finally {
-            TMXWriter2.lineSeparator = eol;
         }
+        assertTrue(text.toString().contains("tar" + eol + "get"));
 
-        final List<String> trs = new ArrayList<String>();
+        final List<String> trs = new ArrayList<>();
         load(null, trs, true, false);
         assertTrue(trs.get(0).contains("tar\nget"));
     }

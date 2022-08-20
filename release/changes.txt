@@ -5,8 +5,63 @@
   0 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
-5.8.0 vs 5.7.0
+5.8.0 vs 5.7.1
 
+  Bug fixes:
+
+  - CLI commands does not expand tilde(~) to home directory
+  https://sourceforge.net/p/omegat/bugs/1106/
+
+  - PO filter: target files should not keep #| msgctxt
+  https://sourceforge.net/p/omegat/bugs/1103/
+
+  - No ID-bound matching in /tm/tmx2source
+  https://sourceforge.net/p/omegat/bugs/1101/
+
+  - Searcher to show path in relative
+  https://sourceforge.net/p/omegat/bugs/1099/
+  https://sourceforge.net/p/omegat/bugs/1098/
+
+  - Enforced ID-bound alternative translations not recognized
+  https://sourceforge.net/p/omegat/bugs/1092/
+
+  - ArrayIndexOutOfBoundsException on loading a PO-project with multi-line plurals
+  https://sourceforge.net/p/omegat/bugs/1082/
+
+  - Team projects fail to commit with enabled signing
+  https://sourceforge.net/p/omegat/bugs/1077/
+
+  - Dictionary fails to jump to selected word
+  https://sourceforge.net/p/omegat/bugs/1074/
+
+  Implemented requests:
+
+  - CLI option to print the project stats to the console (text, xml or json)
+  https://sourceforge.net/p/omegat/feature-requests/1624/
+
+  - Dictionary: support condensed view
+  https://sourceforge.net/p/omegat/feature-requests/1609/
+
+  - Skip candidates from machine translators which returned 403: Forbidden on Ctrl+M.
+  https://sourceforge.net/p/omegat/feature-requests/1605/
+
+  - Dictionary: Oxford dictionary online API support
+  https://sourceforge.net/p/omegat/feature-requests/1597/
+
+  - Glossary pane. Dictionary Layout. Fix indentation
+  https://sourceforge.net/p/omegat/feature-requests/1588/
+
+  - Glossary pane. Dictionary Layout. Fix comma-space.
+  https://sourceforge.net/p/omegat/feature-requests/1587/
+
+  - Able to add note which MT engine used
+  https://sourceforge.net/p/omegat/feature-requests/1584/
+
+  - Notify which Machine Translation was picked
+  https://sourceforge.net/p/omegat/feature-requests/1477/
+
+  - Machine translation results sorting
+  https://sourceforge.net/p/omegat/feature-requests/1467/
 
 ----------------------------------------------------------------------
 OmegaT 5.7.1 (2022-03-19)

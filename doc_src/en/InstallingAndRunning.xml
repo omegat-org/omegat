@@ -148,22 +148,39 @@
 
             <programlisting>$ unzip <filename>OmegaT_&vernb;_Without_JRE.zip</filename></programlisting>
 
-             <para>(you may need to install the <filename>unzip</filename>package first) or</para>
+            <para>(you may need to install the <filename>unzip</filename>
+            package first) or</para>
 
             <programlisting>$ tar xf OmegaT_&vernb;_Linux_64.tar.bz2</programlisting>
 
-             <para>This will create a new folder in the current folder. This new folder will named after the package you downloaded, and contain all the files needed to run OmegaT.</para>
+            <para>This will create a new folder in the current folder. The new
+            folder will named after the package you downloaded, and contain
+            all the files needed to run OmegaT.</para>
           </listitem>
 
           <listitem>
             <para>Navigate to the newly created folder and run the
             <filename>linux-install.sh</filename> script found there.</para>
 
-            <programlisting>$ cd OmegaT_&vernb;_<parameter>&lt;version_you_downloaded&gt;</parameter>
+            <programlisting>$ cd OmegaT_&vernb;_<parameter>&lt;package_you_downloaded&gt;</parameter>
 $ ./linux-install</programlisting>
 
+            <para>Running the script will require you to enter your
+            <filename>sudo</filename> password.</para>
+
             <para>The script checks for an existing installation of the same
-            OmegaT version in <filename>/opt/omegat/</filename>. If there isn't one, it installs the program in <filename>/opt/omegat/&lt;OmegaT version&gt;</filename> and sets it as the default version. (You will have to enter <filename>sudo</filename> password.) The installation script is available <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/release/linux-specific/linux-install.sh">here</ulink>, for your perusal before use.</para>
+            OmegaT version in <filename>/opt/omegat/</filename>. If there
+            isn't one, it installs the program in
+            <filename>/opt/omegat/OmegaT-&vernb;</filename> and sets it as the
+            default version (in
+            <filename>/opt/omegat/OmegaT-default</filename>). The installation
+            script is available <ulink
+            url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/release/linux-specific/linux-install.sh">here</ulink>,
+            for your perusal before use.</para>
+
+            <para>After the installation is complete, you can safely delete
+            the <filename>.zip</filename> or <filename>.tar.bz2</filename>
+            file.</para>
           </listitem>
         </orderedlist>
       </section>
@@ -200,8 +217,14 @@ $ ./linux-install</programlisting>
             </listitem>
 
             <listitem>
-              <para>Enter "OmegaT in the <emphasis
-              role="bold">Command</emphasis> field.</para>
+              <para>In the <emphasis role="bold">Command</emphasis> field, use
+              the browse button to select the OmegaT launch script (copied to
+              <filename>/usr/local/bin/omegat</filename> by the installation
+              script. Alternatively can also choose the
+              <filename>omegat</filename> file in
+              <filename><literal>opt/omegat/OmegaT-default</literal></filename>
+              or in <filename>opt/omegat/OmegaT-&vernb;)</filename>. Click
+              <emphasis role="bold">OK</emphasis> to confirm.</para>
             </listitem>
 
             <listitem>
@@ -236,10 +259,14 @@ $ ./linux-install</programlisting>
 
             <listitem>
               <para>Enter "OmegaT" in the <guilabel>Name</guilabel> field; in
-              the <guilabel>Command</guilabel> field, use the navigation
-              button to find your OmegaT launch script (the file named
-              <filename>OmegaT</filename> in the unpacked folder). Select it
-              and confirm with OK.</para>
+              the <guilabel>Command</guilabel> field, use the browse button to
+              select the OmegaT launch script (copied to
+              <filename>/usr/local/bin/omegat</filename> by the installation
+              script. Alternatively can also choose the
+              <filename>omegat</filename> file in
+              <filename><literal>opt/omegat/OmegaT-default</literal></filename>
+              or in <filename>opt/omegat/OmegaT-&vernb;)</filename>. Click
+              <emphasis role="bold">OK</emphasis> to confirm.</para>
             </listitem>
 
             <listitem>
@@ -275,11 +302,17 @@ $ ./linux-install</programlisting>
         <title id="installing.omegat.macos.install.the.package.title">Install
         OmegaT</title>
 
-        <para>Double click on <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> to unpack it. This creates a folder called <filename>OmegaT</filename>. The folder contains two files: <filename>index.html</filename> (the manual index)
+        <para>Double click on
+        <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> to unpack it.
+        This creates a folder called <filename>OmegaT</filename>. The folder
+        contains two files: <filename>index.html</filename> (the manual index)
         and <filename>OmegaT.app</filename> (the application). Copy the folder
-        to a suitable location (e.g. <filename>Applications</filename>).</para>
+        to a suitable location (e.g.
+        <filename>Applications</filename>).</para>
 
-        <para>Once you have done this, you can delete the <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> file, it is no longer needed.</para>
+        <para>Once you have done this, you can delete the
+        <filename>OmegaT_&vernb;_Mac_Notarized.zip</filename> file as it is no
+        longer needed.</para>
       </section>
 
       <section id="installing.omegat.macos.add.to.the.dock">
@@ -468,8 +501,8 @@ $ ./linux-install</programlisting>
     </section>
   </section>
 
-  <section id="update.and.erase.omegat">
-    <title id="update.and.erase.omegat.title">Upgrading and deleting
+  <section id="update.and.delete.omegat">
+    <title id="update.and.delete.omegat.title">Upgrading and deleting
     OmegaT</title>
 
     <para>OmegaT can tell you when a new version is available. See <link
@@ -497,7 +530,7 @@ $ ./linux-install</programlisting>
 
         <listitem>
           <para>Projects that you have created in the past or are currently
-          using will <emphasis>not</emphasis> be modified or erased. OmegaT
+          using will <emphasis>not</emphasis> be modified or deleted. OmegaT
           projects are <emphasis>not</emphasis> stored inside OmegaT. They are
           separate objects that have no physical connection to the OmegaT
           application itself.</para>
@@ -512,7 +545,7 @@ $ ./linux-install</programlisting>
           <filename>Info.plist</filename> files for <link
           endterm="running.omegat.on.macos.title"
           linkend="running.omegat.on.macos"/> packages) might be overwritten
-          or erased, so you may want to create a backup before upgrading, if
+          or deleted, so you may want to create a backup before upgrading, if
           you have been using these files to modify OmegaT's launch
           parameters.</para>
         </listitem>
@@ -525,8 +558,8 @@ $ ./linux-install</programlisting>
       </itemizedlist>
     </note>
 
-    <section id="update.and.erase.omegat.over.existing.package">
-      <title id="update.and.erase.omegat.over.existing.package.title">Install
+    <section id="update.and.delete.omegat.over.existing.package">
+      <title id="update.and.delete.omegat.over.existing.package.title">Install
       over an existing version</title>
 
       <para>To do this, simply select the same installation folder as the
@@ -536,8 +569,9 @@ $ ./linux-install</programlisting>
       above).</para>
     </section>
 
-    <section id="update.and.erase.omegat.along.existing.package">
-      <title id="update.and.erase.omegat.along.existing.package.title">Install
+    <section id="update.and.delete.omegat.along.existing.package">
+      <title
+      id="update.and.delete.omegat.along.existing.package.title">Install
       alongside an existing version</title>
 
       <para>This will enable you to keep any number of versions side-by-side,
@@ -546,13 +580,13 @@ $ ./linux-install</programlisting>
 
       <para>All the parameters located in the <link
       endterm="configuration.folder.title" linkend="configuration.folder"/>
-      will be shared. All the parameters located in a <link
+      will be shared unless you specify a  different configuration folder with the <literal>--config-dir=&lt;path&gt;</literal> option from the <link endterm="launch.with.command.line.omegat.parameters.title" linkend="launch.with.command.line.omegat.parameters"></link> on the command line . All the parameters located in a <link
       endterm="project.folder.title" linkend="project.folder"/> will apply to
       that project regardless of which version of OmegaT opens it.</para>
     </section>
 
-    <section id="update.and.erase.omegat.erase">
-      <title id="update.and.erase.omegat.erase.title">Delete OmegaT</title>
+    <section id="update.and.delete.omegat.delete">
+      <title id="update.and.delete.omegat.delete.title">Delete OmegaT</title>
 
       <para>Use your operating system's standard procedure to remove OmegaT.
       If you want to remove OmegaT completely, you will also have to delete
@@ -574,8 +608,7 @@ $ ./linux-install</programlisting>
     repository or directly from <ulink
     url="https://sourceforge.net/p/omegat/code/ci/master/tarball?path=">SourceForge</ulink>.</para>
 
-    <para>Once the code is downloaded, open a command in the source folder and
-    type:</para>
+    <para>Once the code is downloaded, open a terminal in the source folder (<filename>/omegat/src</filename>) and type:</para>
 
     <programlisting>./gradlew assembleDist</programlisting>
 
@@ -583,12 +616,12 @@ $ ./linux-install</programlisting>
     <filename>build/distributions/</filename> folder, where you will find a
     zip containing everything needed to run OmegaT.</para>
 
-    <para>You can also run directly the application with the following
+    <para>You can also run the application directly with the following
     command:</para>
 
     <programlisting>./gradlew run</programlisting>
 
-    <para>You can find all the tasks available by typing:</para>
+    <para>You can get a list of all available tasks by typing:</para>
 
     <programlisting>./gradlew tasks</programlisting>
 

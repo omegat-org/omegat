@@ -1,6 +1,6 @@
 #wh-content {
     font-family: sans-serif;
-    font-size: 10pt;
+/*    font-size: 10pt; */
     background-color: #FDFDFD;
     line-height: 1.5;
     color:#212925;
@@ -511,7 +511,8 @@ pre.programlisting {
 
 #wh-header .title {
     display:inline;
-    font-size:18pt;
+/*    font-size:18pt; */
+	font-size:1.8em;
     font-family: sans-serif;
     font-weight:bold;
     vertical-align: middle;

@@ -135,8 +135,8 @@
     <keycombo><keycap>C</keycap><keycap>u</keycap></keycombo> to move to the
     next untranslated segment. Once you leave the segment, its translation is
     automatically stored into the project translation memory located in the
-    <link linkend="project.folder.omegat"
-    endterm="project.folder.omegat.title"/> folder of the project and will be
+    <link linkend="project.folder.omegat.folder"
+    endterm="project.folder.omegat.folder.title"/> folder of the project and will be
     used as reference for the rest of your translation. You can manually
     register glossary items that you want to later use in the translation with
     <link linkend="menus.edit.create.glossary.entry"
@@ -265,8 +265,8 @@
 	folder of your project.</para>
 
 	<note><para>You translation is always stored in your project translation
-	memory, located in the <link linkend="project.folder.omegat"
-	endterm="project.folder.omegat.title"/> folder of your
+	memory, located in the <link linkend="project.folder.omegat.folder"
+	endterm="project.folder.omegat.folder.title"/> folder of your
 	project. Erasing the contents of the <link
 	linkend="project.folder.target" endterm="project.folder.target.title"/>
 	folder will <emphasis>never</emphasis> impact your translation.</para></note>
@@ -353,7 +353,7 @@
 		be used in other translation projects as reference translation
 		memories. In the case of an OmegaT translation project, they would be
 		put in the <link linkend="project.folder.tm"
-		endterm="project.folder.tm.title"/> folder or a new project.</para>
+		endterm="project.folder.tm.title"/> folder of a new project.</para>
 
 		<para>The <filename>level1</filename> and <filename>level2</filename>
 		suffixes refer to the TMX standard (see <ulink

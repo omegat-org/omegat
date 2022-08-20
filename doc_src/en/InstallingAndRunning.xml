@@ -8,7 +8,7 @@
   <title id="installing.and.running.omegat.title">Installing and Running
   OmegaT</title>
 
-  <para>OmegaT requires a &javaversionlong; (JRE) to run.</para>
+  <para>OmegaT &vernb; requires a &javaversionlong; (JRE) to run.</para>
 
   <para>OmegaT packages are available both in versions bundled with Java, and
   versions without it. Packages without Java rely on your having a

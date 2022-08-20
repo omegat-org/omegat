@@ -178,7 +178,7 @@
       <term id="menus.goto.back.in.history.title">Back in history...</term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>
-        <para>This command allows you to move backward one segment at a time to segments that your have previously visited.</para>
+        <para>This command allows you to move backward one segment at a time to segments that you have previously visited.</para>
 		<para>
 		  <keycombo>
 			<keycap>S</keycap><keycap>C</keycap><keycap>p</keycap>

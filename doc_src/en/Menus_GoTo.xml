@@ -4,7 +4,7 @@
 <section id="menus.goto">
   <title id="menus.goto.title">Go To</title>
 
-  <note><para>This menu displays entries only when a project is open.</para>
+  <note><para>This menu only displays entries when a project is open.</para>
   <para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para>
     <example><title id="example.next.untranslated.segment.title">Next Untranslated Segment</title>
   		<para>In this manual:
@@ -30,7 +30,7 @@
       <term id="menus.goto.next.untranslated.segment.title">Next Untranslated Segment</term>
 
       <listitem>
-        <para>Moves to the next segment that has no equivalent in the
+        <para>Moves to the next segment with no target language entry in the
         translation memory.</para>
 		<para>
 		  <keycombo>
@@ -58,9 +58,8 @@
       <term id="menus.goto.next.segment.title">Next Segment</term>
 
       <listitem>
-        <para>Moves to the next segment. If the current segment is the last
-        segment in a file, it moves to the first segment of the next
-        file.</para>
+        <para>Moves to the next segment, or to the first segment of the next
+        file if the current segment is the last one in the file.</para>
 		<para>
 		  <keycombo>
 			<keycap>C</keycap><keycap>n</keycap>
@@ -73,7 +72,7 @@
 		</para>
 
         <note><para><keycap>TAB</keycap> replaces <keycap>Enter</keycap> as an
-        alternate shortcut if <link
+        alternate shortcut if the <link
         linkend="dialogs.preferences.general.use.tab.to.advance">Use TAB to
         Advance</link> option is selected.</para>
 		<para>This is useful for character entry systems that use
@@ -84,9 +83,8 @@
     <varlistentry id="menus.goto.previous.segment">
       <term id="menus.goto.previous.segment.title">Previous Segment</term>
       <listitem>
-        <para>Moves to the previous segment. If the current segment is the
-        first one in a file, it moves to the last segment of the previous
-        file.</para>
+        <para>Moves to the previous segment, or to the last segment of the previous
+        file if the current segment is the first one in the file.</para>
 		<para>
 		  <keycombo>
 			<keycap>C</keycap><keycap>p</keycap>
@@ -111,8 +109,7 @@
     <varlistentry id="menus.goto.segment.number">
       <term id="menus.goto.segment.number.title">Segment number...</term>
       <listitem>
-        <para>The segment is opened when either its segment call-out or
-        segment number is entered.</para>
+        <para>Jumps to the segment whose call-out or number is entered.</para>
 		<para>
 		  <keycombo>
 			<keycap>C</keycap><keycap>j</keycap>
@@ -124,7 +121,7 @@
     <varlistentry id="menus.goto.next.note">
       <term id="menus.goto.next.note.title">Next Note</term>
       <listitem>
-        <para>The next segment with a note attached to it, will open.</para>
+        <para>Moves to the next segment with a note.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
@@ -132,7 +129,7 @@
     <varlistentry id="menus.goto.previous.note">
       <term id="menus.goto.previous.note.title">Previous Note</term>
       <listitem>
-        <para>The previous segment with a note will open.</para>
+        <para>Moves to the previous segment with a note.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
@@ -152,7 +149,7 @@
     <varlistentry id="menus.goto.source.of.selected.match">
       <term id="menus.goto.source.of.selected.match.title">Source of Selected Match</term>
       <listitem>
-        <para>Moves to the segment that does correspond to the current
+        <para>Moves to the segment that corresponds to the currently
         selected match in the <guilabel>Fuzzy matches</guilabel> pane.</para>
 		<para>
 		  <keycombo>
@@ -165,10 +162,8 @@
     <varlistentry id="menus.goto.forward.in.history">
       <term id="menus.goto.forward.in.history.title">Forward in history...</term>
       <listitem>
-        <para>OmegaT remembers the segments your segment navigation
-        history.</para>
-		<para>With this command you can move forward one segment at a time to
-		the segments that you have previously visited with <link
+        <para>OmegaT remembers your segment navigation history.</para>
+        <para>This command allows you to move forward one segment at a time to segments that you have previously visited with <link
 		linkend="menus.goto.back.in.history"
 		endterm="menus.goto.back.in.history.title"/>.</para>
 		<para>
@@ -182,10 +177,8 @@
     <varlistentry id="menus.goto.back.in.history">
       <term id="menus.goto.back.in.history.title">Back in history...</term>
       <listitem>
-        <para>OmegaT remembers the segments your segment navigation
-        history.</para>
-        <para>With this command you can move backward one segment at a time to
-        the segments that your have previously visited.</para>
+        <para>OmegaT remembers your segment navigation history.</para>
+        <para>This command allows you to move backward one segment at a time to segments that your have previously visited.</para>
 		<para>
 		  <keycombo>
 			<keycap>S</keycap><keycap>C</keycap><keycap>p</keycap>

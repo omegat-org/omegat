@@ -3,17 +3,54 @@
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
   <title id="project.folder.title">Project folder</title>
+  <para>An OmegaT project is a set of folders and files that contain the
+  ressources that you will use during the translation.</para>
+  <para>A project is a folder that at least contains the following:
+  <variablelist>
+	<varlistentry><term>omegat/</term><listitem><para>is a folder that contains
+	<filename>project_save.tmx</filename>, the project translation memory, and
+	<filename>project_stats.txt</filename>, the statistics data file for the
+	project.</para>
+	<para>The folder will contain other files over the course of a translation
+	project.</para></listitem></varlistentry>
+	<varlistentry><term>omegat.project</term><listitem><para>is a file that acts
+	as an <emphasis>address book</emphasis> where the other project ressources
+	locations are listed. By default, a newly created standard project will contain all the above
+  ressources within its folder, and the ressources will have default names:
+  	<itemizedlist>
+	  <listitem><para>the folder that contains the source files = <filename>source/</filename></para></listitem>
+	  <listitem><para>the folder where the target files will be created = <filename>target/</filename></para></listitem>
+	  <listitem><para>the folder that contains the glossaries = <filename>glossary/</filename></para></listitem>
+	  <listitem><para>the project writable glossary = <filename>glossary/glossary.txt</filename></para></listitem>
+	  <listitem><para>the folder that contains the reference translation memories = <filename>tm/</filename></para></listitem>
+	  <listitem><para>the folder that contains the dictionaries = <filename>dictionary/</filename></para></listitem>
+	</itemizedlist>
+	The file also contains a number of preferences like the source and target
+	language, etc.</para></listitem></varlistentry>
+  </variablelist>
+	When you create a project, or when you modify it over the course of its
+	existence, you can give the various ressources non-default locations. For
+	example,
+	<itemizedlist><listitem><para>you can ask OmegaT to create your translated files in a shared
+	folder outside the project folder, in a location where your reviewer will
+	easily access them,</para></listitem>
+	<listitem><para>you can ask OmegaT to use a glossary folder from a
+	separate but related project,</para></listitem>
+	<listitem><para>you can ask OmegaT to use a reference translation memory folder,</para></listitem>
+	</itemizedlist>
+	etc.</para>
 
-  <para>An OmegaT project is a folder containing files and subfolders.</para>
   <para>You can access the project folder and all its subfolders by using <link
   linkend="menus.project.access.project.contents"
   endterm="menus.project.access.project.contents.title"/> in the <link
   linkend="menus.project" endterm="menus.project.title"/> menu.</para>
 
+<para>A project structure is not fixed at creation. You can easily remove or add
+files to it.</para>
+  
   <section id="project.folder.source">
     <title id="project.folder.source.title">source</title>
-
-    <para>The source subfolder contains files to be translated. You can add
+    <para>The source subfolder contains the files to be translated. You can add
     the files to it later. Note that the structure of the source subfolder may
     take any form you like. If the files to be translated are parts of a tree
     structure (as in a website), you need only specify the top-level subfolder

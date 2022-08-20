@@ -361,7 +361,7 @@
 		Specification</ulink>) and can be shared with users of other translation
 		programs.</para>
 
-		<para>The memory named <filename>omegat</filename> can be used by
+		<para>The memory labelled <filename>omegat</filename> can be used by
 		OmegaT itself, in future projects that you create.</para>
       </listitem>
 

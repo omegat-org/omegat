@@ -245,7 +245,7 @@
 	endterm="project.folder.omegat.title"/> folder of your
 	project. Deleting the contents of the <link
 	linkend="project.folder.target" endterm="project.folder.target.title"/>
-	folder will <emphasis>never</emphasis> impact your translation.</para></note>
+	folder will <emphasis>never</emphasis> impact your translations.</para></note>
 
 	<para>Once the translated files have been created, you can open them in
 	their original application to check their contents and eventually further
@@ -262,9 +262,8 @@
 
 	<para>Modifications made outside OmegaT can be reinserted in OmegaT (and
 	thus in the project translation memory, to keep it up to date) either
-	by entering them manually in the relevant segments, or by aligning the original file and the final translated file to create a new translation memory (TMX) file that will be put in the <link
-	linkend="project.folder.tm.enforce"
-	endterm="project.folder.tm.enforce.title"/> of your project folder. See
+	by entering them manually in the relevant segments, or by aligning the original file and the final translated file to create a new translation memory (TMX) file that will be put in the <link linkend="project.folder.tm.enforce"
+	endterm="project.folder.tm.enforce.title"/> subfolder of your project folder. See
 	<link linkend="windows.aligner" endterm="windows.aligner.title"/> for
 	details.</para>
 	

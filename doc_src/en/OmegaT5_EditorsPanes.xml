@@ -95,10 +95,10 @@
 	the original layout.</para>
   </section>
 
-  <section id="panes.contextual.menus">
-	<title id="panes.contextual.menus.title">Contextual menus</title>
-  	<para>Almost all the panes are associated with specific contextual menus. You
-  	can call the contextual menus either with the OS defined methods or with the
+  <section id="panes.context.menus">
+	<title id="panes.context.menus.title">context menus</title>
+  	<para>Almost all the panes are associated with specific context menus. You
+  	can call the context menus either with the OS defined methods or with the
   	OmegaT defined shortcuts (see <link linkend="appendix.shortcut"
   	endterm="appendix.shortcut.title"/> for details).</para>
   </section>
@@ -226,13 +226,13 @@
 	  for details.</para>
 	</section>
 	
-	<section id="panes.editor.contextual.menu">
-	  <title id="panes.editor.contextual.menu.title">Editor contextual menu</title>
-	  <para>The default key shortcut to display the contextual menu is
+	<section id="panes.editor.context.menu">
+	  <title id="panes.editor.context.menu.title">Editor context menu</title>
+	  <para>The default key shortcut to display the context menu is
 	  <keycap>Menu</keycap> key on Windows and Linux, and
 	  <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo> on
 	  macOS.</para>
-	  <para>The Editor pane contextual menu offers:
+	  <para>The Editor pane context menu offers:
 	  <itemizedlist>
 		<listitem><para>
 		  <emphasis role="bold">Cut,

@@ -159,7 +159,7 @@
             <para>Navigate to the newly created folder and run the
             <filename>linux-install.sh</filename> script found there.</para>
 
-            <programlisting>$ cd OmegaT_&vernb;_<emphasis>&lt;version_you_downloaded&gt;</emphasis>
+            <programlisting>$ cd OmegaT_&vernb;_<parameter>&lt;version_you_downloaded&gt;</parameter>
 $ ./linux-install</programlisting>
 
             <para>The script checks for an existing installation of the same

@@ -2,12 +2,15 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
   14 Enhancements
-  12 Bug fixes
+  14 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Bug fixes:
+
+  - OpenSSH new key format and ECDSA/ED25519 keys
+  https://sourceforge.net/p/omegat/bugs/1107/
 
   - CLI commands does not expand tilde(~) to home directory
   https://sourceforge.net/p/omegat/bugs/1106/
@@ -33,6 +36,9 @@
 
   - Team projects fail to commit with enabled signing
   https://sourceforge.net/p/omegat/bugs/1077/
+
+  - Unable to check-out or open/save team projects
+  https://sourceforge.net/p/omegat/bugs/1075/
 
   - Dictionary fails to jump to selected word
   https://sourceforge.net/p/omegat/bugs/1074/

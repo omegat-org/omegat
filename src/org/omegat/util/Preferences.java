@@ -80,6 +80,7 @@ public final class Preferences {
     public static final String SOURCE_FOLDER = "source_folder";
     public static final String TARGET_FOLDER = "target_folder";
     public static final String TM_FOLDER = "tm_folder";
+    public static final String EXPORT_TM_FOLDER = "export_tm_folder";
     public static final String DICT_FOLDER = "dict_folder";
     public static final String GLOSSARY_FOLDER = "glossary_folder";
     public static final String GLOSSARY_FILE = "glossary_file";

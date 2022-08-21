@@ -20,6 +20,8 @@
 				<xs:element name="glossary_dir" type="xs:string"/>
 				<xs:element name="glossary_file" type="xs:string"/>
 				<xs:element name="dictionary_dir" type="xs:string"/>
+				<xs:element name="export_tm_dir" type="xs:string"/>
+				<xs:element name="export_tm_levels" type="xs:string"/>
 				<xs:element name="source_lang" type="xs:string"/>
 				<xs:element name="target_lang" type="xs:string"/>
 				<xs:element name="source_tok" type="xs:string"/>

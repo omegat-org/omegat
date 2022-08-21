@@ -263,6 +263,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectAccessProjectFilesMenu.add(projectAccessSourceMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_SOURCE"));
         projectAccessProjectFilesMenu.add(projectAccessTargetMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_TARGET"));
         projectAccessProjectFilesMenu.add(projectAccessTMMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_TM"));
+        projectAccessProjectFilesMenu.add(projectAccessExportTMMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_EXPORT_TM"));
         projectAccessProjectFilesMenu.addSeparator();
         projectAccessProjectFilesMenu.add(projectAccessCurrentSourceDocumentMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT"));
         projectAccessProjectFilesMenu.add(projectAccessCurrentTargetDocumentMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT"));
@@ -841,6 +842,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectAccessSourceMenuItem;
     JMenuItem projectAccessTargetMenuItem;
     JMenuItem projectAccessTMMenuItem;
+    JMenuItem projectAccessExportTMMenuItem;
     JMenuItem projectAccessCurrentSourceDocumentMenuItem;
     JMenuItem projectAccessCurrentTargetDocumentMenuItem;
     JMenuItem projectAccessWriteableGlossaryMenuItem;

@@ -4,10 +4,9 @@
 <chapter id="windows.and.dialogs">
   <title id="windows.and.dialogs.title">Windows and dialogs</title>
 
-  <para>The difference is thin: we call "Window" a window that can stay open
-  next to the editor and interact with it, and "dialog" a window where you
-  must select parameters before closing it and pursuing your translation
-  activity.</para>
+  <para>A <emphasis>window</emphasis> can stay open next to the editor and
+  interact with it. A <emphasis>dialog</emphasis> requires interaction before
+  closing it and pursuing your translation activity.</para>
 
   <xi:include href="Dialogs_ProjectProperties.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

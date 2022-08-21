@@ -119,8 +119,8 @@
     <keycombo><keycap>C</keycap><keycap>u</keycap></keycombo> to move to the
     next untranslated segment. Once you leave the segment, its translation is
     automatically stored into the project translation memory located in the
-    <link linkend="project.folder.omegat"
-    endterm="project.folder.omegat.title"/> folder of the project and will be
+    <link linkend="project.folder.omegat.folder"
+    endterm="project.folder.omegat.folder.title"/> folder of the project and will be
     used as reference for the rest of your translation. You can manually
     register glossary items that you want to later use in the translation with
     <link linkend="menus.edit.create.glossary.entry"

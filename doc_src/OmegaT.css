@@ -308,7 +308,8 @@ dd {
 }
 
 .note {
-    font-size: small;
+/*    font-size: small; */
+	font-size: 0.9em;
     color: black;
     background-color: white;
     border: 1px solid #808080;
@@ -322,7 +323,8 @@ dd {
 }
 
 .warning {
-    font-size: small;
+/*    font-size: small; */
+	font-size: 0.9em;
     color: black;
     background: white;
     border: 1px solid #FFA0A0;

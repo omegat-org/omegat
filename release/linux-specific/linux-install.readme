@@ -1,0 +1,84 @@
+Here's an outline of how the current OmegaT installer script for Linux works, together with suggested changes.
+
+OmegaT core code:
+-----------------
+
+When run for the first time, the installer places the core program files in /opt/omegat/OMTVERSION. It creates a "default" symlink pointing to this directory. 
+
+When run again to install a newer version of OmegaT, the previous version (or versions) isn't deleted or overwritten. Instead, the newly installed version is placed in its own, new directory (again, /opt/omegat/OMTVERSION). To "upgrade" to the new version, the installer simply changes the "default" symlink to point to the directory of the newly installed version.
+
+The advantage of this arrangement is that no core OmegaT code is deleted when a new version is installed, and it is therefore fairly easy to revert to an earlier version if desired. The drawback is the use of more drive space. 
+
+The principle of retaining all old versions does not apply to scripts, plugins and Java Runtime Environments (JREs) shipped with the OmegaT package.
+
+Scripts and plugins:
+--------------------
+
+When run for the first time, the installer creates a universal (cross-version) directory for scripts at /opt/omegat/scripts. It moves the scripts from /opt/omegat/OMTVERSION/scripts to this directory and creates a symlink in the original (version-specific) script directory pointing to the "universal" scripts directory.
+
+(The same is done by analogy with plugins, although to my knowledge plugins have never been shipped with OmegaT packages; this would become relevant however if that were to happen.)
+
+The logic behind this arrangement was that users would manage scripts themselves, manually, including by writing their own. The scripts directory shouldn't therefore be overwritten by future OmegaT upgrades. The drawback is that scripts are only ever installed the first time OmegaT is installed; any new scripts shipped with successive versions of OmegaT are not installed, and in fact they are deleted by the installer.
+
+(The same applies in theory to plugins, although as a already mentioned, plugins have probably never been shipped with an OmegaT package.)
+
+SUGGESTED CHANGE: The basic arrangement of universal (cross-version) directories for scripts (and plugins) should be retained, but with the following modifications:
+
+* Where an OmegaT version installed in the past by the installation script already exists, the scripts of the new OmegaT version to be installed (files in /opt/omegat/OMTVERSION/scripts) should be moved to the "universal" scripts directory, overwriting any existing script files of the same name in this directory.
+
+* Symlinks should be created from the scripts directory of the OmegaT installation to the corresponding universal directory, overwriting symlinks for older versions.
+
+The advantages of this change are:
+
+* It's simple.
+* New and updated scripts shipped with newer OmegaT version packages are made available to the user in OmegaT, besides being retained in the event of an upgrade.
+* Users can place their own or third-party scripts in the cross-version directory, and they are not deleted by upgrades.
+
+The drawbacks:
+
+* If a user has modified an existing script shipped with the system but not changed its name, or has by coincidence created their own script with a name that is used by a future script shipped with OmegaT, it will be overwritten with the shipped version at the next upgrade. There is however no easy solution to handling these scenarios.
+
+* It is not economical use of disk space; having said that, the script repository isn't large, and users can always delete legacy versions of OmegaT manually.
+
+* Arguably, user scripts and plugins should be installed in user space (e.g. /home/<user>/.omegat/scripts etc.) However, this raises further issues, beginning with whether third-party scripts should be regarded as system or user scripts in the first place.
+
+The above suggestion would also apply in principle by analogy to plugins.
+
+JRE:
+----
+
+Analogous to the "cross-version" scripts and plugins folders, a cross-version JRE folder is also created at /omegat/opt/jre during the initial installation of OmegaT. The JRE of the OmegaT version being installed is moved from /omegat/opt/OMTVERSION to /omegat/opt/jre.
+
+When future OmegaT versions are installed however, whereas for the scripts and plugins folders the legacy scripts and plugins are retained and the new scripts and plugins deleted, the reverse is the case with the JRE: when an OmegaT version with JRE is installed, the "local" JRE in /opt/omegat/jre is deleted and replaced with the JRE shipped with the new version of OmegaT. Having the correct JRE available for the most recent OmegaT and economical use of drive space thus have priority over retaining the JREs shipped with earlier versions.
+
+Launch script:
+--------------
+
+OmegaT is currently shipped with two launch scripts for Linux, namely:
+OmegaT
+omegat.kaptn
+
+These scripts are left in their original locations (/opt/omegat/OMTVERSION/OmegaT etc.) and executable symlinks to them are created to /usr/local/bin (i.e. in the system's execution path). Installing a newer version of OmegaT simply changes the symlinks to point to the scripts in the newly installed version of OmegaT.
+
+The scripts can thus be called up by the familiar Linux convention(s), e.g. F2 > omegat.
+
+OmegaT is a bash script that should function on virtually any Linux system, certainly any Linux system capable of running Java and OmegaT.
+
+omegat.kaptn is a user-friendly Kaptain script that provides access to a number of command-line options on Linux systems employing the KDE desktop environment. Kaptain doesn't work on other Linux desktop environments than KDE (at least, not without installing a huge volume of additional libraries); the Kaptain project is now defunct and it hasn't been supported on newer Linux distributions for some time; and the OmegaT Kaptain script hasn't been updated for some time, either. Furthermore, Kaptain has its own obscure, object-oriented script language, which is fascinating but doesn't lend itself to user modification.
+
+SUGGESTED CHANGE:
+
+omegat.kaptn should be dropped and the tcl/tk launch script (omegat.tcl) for OmegaT shipped in its place. This script is much more up to date with respect to changes in OmegaT, only requires tcl/tk to run (readily available and easily installed on Linux) and is much more intuitive for users to modify.
+
+
+Desktop integration:
+--------------------
+
+The Linux installer does not provide any desktop integration, other than instructions in the documentation.
+
+SUGGESTED CHANGE:
+
+Inclusion of a desktop configuration file with OmegaT and copying to /usr/share/applications based on Manuel's suggestion.
+
+
+

@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
-OMTVERSION="OmegaT_@VERSION_NUMBER_SUBST@"
+
+# OmegaT installation script for Linux
+# Marc Prior
+# Last modified: 2022-08-21
+
+
+OMTVERSION="OmegaT_x.x.x"
 
 # check whether /opt/omegat/<OmegaT version> exists
 # exit if it does
@@ -32,58 +38,75 @@ fi
 
 if  [ -d /opt/omegat/plugins ] ; then
 
-   # /opt/omegat/plugins exists,
-   # delete /opt/omegat/<OmegaT version>/plugins
+   # /opt/omegat/plugins already exists
 
-   sudo rm -d -f -r /opt/omegat/$OMTVERSION/plugins
+   echo "/opt/omegat/plugins already exists"
 
 else
 
-   # /opt/omegat/plugins does not exist,
-   # move plugins folder from within application
+   # /opt/omegat/plugins does not exist; create
 
-   sudo mv /opt/omegat/$OMTVERSION/plugins /opt/omegat
+   sudo mkdir -p /opt/omegat/plugins
 
 fi
 
-# symlink from /opt/omegat/plugins to plugins folder within OmegaT
+   # move all files from /opt/omegat/OMTVERSION 
+   # to /opt/omegat/plugins (overwriting identical file names)
 
-sudo ln -s /opt/omegat/plugins /opt/omegat/$OMTVERSION/plugins
+   sudo cp -r -f /opt/omegat/$OMTVERSION/plugins /opt/omegat
+
+   sudo rm -r /opt/omegat/$OMTVERSION/plugins
+
+   # create symlink from /opt/omegat/plugins to /opt/omegat/$OMTVERSION/plugins 
+   # (overwriting symlinks with same name)
+
+   sudo ln -s -f /opt/omegat/plugins /opt/omegat/$OMTVERSION/plugins
+
 
 # handling scripts folder
 
 if  [ -d /opt/omegat/scripts ] ; then
 
-   # /opt/omegat/scripts exists,
-   # delete /opt/omegat/<OmegaT version>/scripts
+   # /opt/omegat/scripts already exists
 
-   sudo rm -d -f -r /opt/omegat/$OMTVERSION/scripts
+   echo "/opt/omegat/scripts already exists"
 
 else
 
-   # /opt/omegat/scripts does not exist,
-   # move scripts folder from within application
+   # /opt/omegat/scripts does not exist; create
 
-   sudo mv /opt/omegat/$OMTVERSION/scripts /opt/omegat
+   sudo mkdir -p /opt/omegat/scripts
 
 fi
 
-# symlink from /opt/omegat/scripts to scripts folder within OmegaT
+   # move all files from /opt/omegat/OMTVERSION 
+   # to /opt/omegat/scripts (overwriting identical file names)
 
-sudo ln -s /opt/omegat/scripts /opt/omegat/$OMTVERSION/scripts
+   sudo cp -r -f /opt/omegat/$OMTVERSION/scripts /opt/omegat
+
+   sudo rm -r /opt/omegat/$OMTVERSION/scripts
+
+   # create symlink from /opt/omegat/scripts tp /opt/omegat/$OMTVERSION/scripts
+   # (overwriting symlinks with same name)
+
+   sudo ln -s -f /opt/omegat/scripts /opt/omegat/$OMTVERSION/scripts
+
 
 # handling jre folder
 
 if  [ -d /opt/omegat/$OMTVERSION/jre ] ; then
 
    # user is installing OmegaT with JRE
-   # deletes old local JRE, if present
-   # move jre folder from within application
-   # symlink from /opt/omegat/jre to jre folder within OmegaT
 
+   # delete old local JRE, if present
+   
    sudo rm -d -f -r /opt/omegat/jre
 
-   sudo mv /opt/omegat/$OMTVERSION/jre /opt/omegat
+   # move???? jre folder from within application
+
+   sudo cp -r /opt/omegat/$OMTVERSION/jre /opt/omegat
+
+   # create symlink from /opt/omegat/jre to /opt/omegat/$OMTVERSION/jre
 
    sudo ln -s /opt/omegat/jre /opt/omegat/$OMTVERSION/jre
 
@@ -95,7 +118,7 @@ else
    if  [ -d /opt/omegat/jre ] ; then
 
       # /opt/omegat/jre exists,
-      # symlink from /opt/omegat/jre to jre folder within OmegaT
+      # create symlink from /opt/omegat/jre to jre folder within /opt/omegat/$OMTVERSION/jre
 
       sudo ln -s /opt/omegat/jre /opt/omegat/$OMTVERSION/jre
 
@@ -109,31 +132,17 @@ else
 
 fi
 
-## symlink just installed version to /opt/omegat/OmegaT-default
+## symlink /opt/omegat/$OMTVERSION (version just installed) to /opt/omegat/OmegaT-default (default directory)
 
 sudo ln -s -b -T /opt/omegat/$OMTVERSION /opt/omegat/OmegaT-default
 
 # symlink bash OmegaT launch script
 # from <OmegaT version> to /usr/local/bin
+# copy omegat.desktop configuration file 
+# to /usr/share/applications/
 
 sudo ln -s -b /opt/omegat/OmegaT-default/OmegaT /usr/local/bin/omegat
 
-# symlink Kaptain OmegaT launch script
-# from <OmegaT version> to /usr/local/bin
-
-sudo ln -s -b /opt/omegat/OmegaT-default/omegat.kaptn /usr/local/bin/omegat.kaptn
-
-sudo chmod +x /usr/local/bin/omegat /usr/local/bin/omegat.kaptn
-
-# install icons
-icon_sizes=( 32 128 256 512 )
-for size in "${icon_sizes[@]}"
-do
-	sudo xdg-icon-resource install --novendor --noupdate --mode system --size $size /opt/omegat/OmegaT-default/images/OmegaT.iconset/icon_$size\x$size.png omegat
-done
-sudo xdg-icon-resource forceupdate --mode system
-
-# install desktop file
-sudo xdg-desktop-menu install --novendor --mode system /opt/omegat/OmegaT-default/omegat.desktop
+sudo cp omegat.desktop /usr/share/applications/
 
 exit

@@ -7,7 +7,11 @@ services:
     tmpfs:
       - /tmp
   server:
-    build: test-integration/docker/server
+    build:
+      context: test-integration/docker/server
+      args:
+        DEFAULT_BRANCH: master
+        REPO_NAME: omegat-test
     expose:
       - "22"
     volumes:
@@ -28,7 +32,7 @@ services:
       - /tmp
     environment:
       DURATION: ${DURATION:-2400}
-      REPO: "git@server:omegat-test.git"
+      REPO: "git:gitpass@server:omegat-test.git"
       ALTREPO: "https://git:gitpass@server/omegat-test.git"
       MAPREPO: "http://server/"
       MAPFILE: "README"

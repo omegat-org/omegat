@@ -24,6 +24,8 @@
 #  **************************************************************************/
 #
 FROM debian:bullseye-slim
+ARG DEFAULT_BRANCH=main
+ARG REPO_NAME=omegat-test
 RUN apt-get -y update && apt-get -y upgrade \
     && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor apache2-suexec-pristine \
     && adduser --system --group --shell /bin/bash git && mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh \
@@ -37,8 +39,8 @@ RUN chmod 755 /var/www/git/git-http-backend-wrapper.cgi \
     && touch /home/git/.ssh/authorized_keys && chmod 600 /home/git/.ssh/authorized_keys \
     && mkdir -p /tmp/template && git init /tmp/template && echo "source content" > /tmp/template/README \
     && (cd /tmp/template && git config user.name git && git config user.email git@example.com \
-        && git config init.defaultBranch main && git add . && git commit -m first ) \
-    && git clone /tmp/template /home/git/omegat-test.git --bare \
+        && git config init.defaultBranch ${DEFAULT_BRANCH} && git add . && git commit -m first ) \
+    && git clone /tmp/template /home/git/${REPO_NAME}.git --bare \
     && cp /tmp/template/README /var/www/html && chown -R www-data.www-data /var/www/html \
     && chown -R git.git /home/git /var/www/git
 

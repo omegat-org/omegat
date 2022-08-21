@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.options">
   <title id="menus.options.title">Options</title>
   <note><para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para></note>
@@ -17,43 +16,32 @@
     <varlistentry id="menus.options.mt">
       <term id="menus.options.mt.title">Machine Translate</term>
       <listitem>
-        <para>Allows you to activate/deactivate the Machine Translation tools
-        offered.</para>
-        <para>If several translation engines are selected, then
-        <keycombo><keycap>C</keycap><keycap>m</keycap></keycombo> is also used
-        to switch between them and insert the last one selected.</para>
+        <para>Allows you to activate/deactivate the available machine translation engines.</para>
+        <para>If several translation engines are selected, you can also use <keycombo><keycap>C</keycap><keycap>m</keycap></keycombo>  to switch between them and insert the last one selected.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.glossary">
       <term id="menus.options.glossary.title">Glossary</term>
       <listitem>
-        <para>Select <guimenuitem>Taas Terminology Lookup</guimenuitem> to
-        activate this lookup.</para>
+        <para>Select <guimenuitem>Taas Terminology Lookup</guimenuitem> to activate it.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.dictionary">
       <term id="menus.options.dictionary.title">Dictionary</term>
       <listitem>
-        <para>Check the <guimenuitem>Use Fuzzy Matching for Dictionary
-        Entries</guimenuitem> option if you want dictionaries to display words
-        that have the same root.</para>
+        <para>Check the <guimenuitem>Use Fuzzy Matching for Dictionary Entries</guimenuitem> option if you want dictionaries to display words sharing the same root.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.autocompletion">
       <term id="menus.options.autocompletion.title">Auto-completion</term>
       <listitem>
-        <para>If <guimenuitem>Show Relevant Suggestions
-        Automatically</guimenuitem> option is checked, Auto-completer is
-        launched automatically by typing the first letters of a translated
-        glossary entry, or by typing &quot;&lt;&quot; in case of tags.</para>
+        <para>If the <guimenuitem>Show Relevant Suggestions Automatically</guimenuitem> option is checked, the auto-completer is triggered automatically by typing the first letters of a glossary entry, or &quot;&lt;&quot; for tags.</para>
         <para>Check <guimenuitem>History Completion</guimenuitem> to display
         suggested words as soon as their first letters are entered.</para>
-        <para>Check <guimenuitem>History Prediction</guimenuitem> to display
-        suggested words that commonly follow the word that has just been
-        entered.</para>
+        <para>Check <guimenuitem>History Prediction</guimenuitem> to display suggested words that often follow the word that has just been entered.</para>
       </listitem>
     </varlistentry>
 
@@ -62,16 +50,15 @@
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences.file.filters">File
         Filters</link> options in the Preferences dialog.</para>
-        <para>These settings apply to OmegaT level, to all projects.</para>
+        <para>These are general OmegaT settings that to all projects.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.segmentation">
       <term id="menus.options.segmentation.title">Segmentation...</term>
       <listitem>
-        <para>Opens the <link
-        linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> options in the Preferences dialog.</para>
-        <para>These settings apply to OmegaT level, to all projects.</para>
+        <para>Opens the <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> options in the Preferences dialog.</para>
+        <para>These are general OmegaT settings that to all projects.</para>
       </listitem>
     </varlistentry>
 
@@ -80,7 +67,7 @@
       <listitem>
         <para>Opens the <link linkend="dialogs.preferences.editor">Editor</link>
         options in the Preferences dialog.</para>
-        <para>These settings apply to OmegaT level, to all projects.</para>
+        <para>These are general OmegaT settings that to all projects.</para>
       </listitem>
     </varlistentry>
 
@@ -88,9 +75,7 @@
       <term id="menus.options.access.configuration.folder.title">Access
       Configuration Folder</term>
       <listitem>
-        <para>Opens the local directory where OmegaT configuration files are
-        stored (depends on the Operating system and on the launch
-        options).</para>
+        <para>Opens the local folder where OmegaT configuration files are stored (the location depends on the operating system and launch options).</para>
       </listitem>
     </varlistentry>
   </variablelist>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.help">
   <title id="menus.help.title">Help</title>
   <note><para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para></note>
@@ -29,8 +28,7 @@
     <varlistentry id="menus.help.last.changes">
       <term id="menus.help.last.changes.title">Last Changes...</term>
       <listitem>
-        <para>Displays the list of new functionalities, enhancements and bug
-        fixes for each new release.</para>
+        <para>Displays the list of new functionality, enhancements and bug fixes for each new release.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>		
       </listitem>
     </varlistentry>
@@ -38,9 +36,7 @@
     <varlistentry id="menus.help.log">
       <term id="menus.help.log.title">Log...</term>
       <listitem>
-        <para>Displays the current log file. The title of the dialog reflects
-        the file actually used (which depends on how many instances of OmegaT
-        are running concurrently).</para>
+        <para>Displays the current log file. The title of the dialog reflects the file currently in use (which depends on the number of concurrently running OmegaT instances).</para>
 		<para><emphasis>No default key shortcut</emphasis></para>		
       </listitem>
     </varlistentry>
@@ -48,7 +44,7 @@
     <varlistentry id="menus.help.check.for.updates">
       <term id="menus.help.check.for.updates.title">Check for Updates...</term>
       <listitem>
-        <para>Checks to see whether a more recent version of OmegaT has been released.</para>
+        <para>Checks to see if a newer version of OmegaT is available.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>

@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="dialogs.project.properties">
   <title id="dialogs.project.properties.title">Project Properties</title>
 
-  <para>This dialog is accessible by selecting <link
-  linkend="menus.project.properties" endterm="menus.project.properties.title"/>
+  <para>This dialog is accessible by selecting <link linkend="menus.project.properties" endterm="menus.project.properties.title"/>
   in the <link linkend="menus.project" endterm="menus.project.title"/>
   menu.</para>
 
   <section id="dialogs.project.properties.languages">
     <title id="dialogs.project.properties.languages.title">Languages</title>
 
-    <para>You can either enter the source and target languages by hand or use
-    the drop down menus. Bear in mind that changing the languages may render
-    the currently used translation memories useless since their language pair
-    may not longer match the new languages.</para>
+    <para>You can either enter the source and target languages by hand, or use the drop down menus. Bear in mind that changing the languages of an active project may render the existing translation memories useless since their language pair may no longer match the new languages.</para>
 
     <para>Tokenizers corresponding to the selected languages are
     displayed.</para>
@@ -26,30 +21,12 @@
 
     <variablelist>
       <varlistentry id="dialogs.project.properties.options.segmentation">
-        <term id="dialogs.project.properties.options.segmentation.title">Enable Sentence-level segmentation</term>
+        <term id="dialogs.project.properties.options.segmentation.title">Enable Sentence-level Segmenting</term>
         <listitem>
-          <para>Sentence-level segmentation splits the source files contents in
-          segments based on the rules defined in <link
-          linkend="dialogs.preferences.segmentation.setup"
-          endterm="dialogs.preferences.segmentation.setup.title"/>. The rules
-          can be modified by using regular expressions. See <link
-          linkend="appendix.regexp" endterm="appendix.regexp.title"/> for
-          details.</para>
-          <para>If no segmenting is prefered (or rather paragraph-level
-          segmentation) leave this box unchecked.</para>
-		  <para>Changing this setting during a translation does not modify the
-          segmentation of already existing translation memories. If you decide
-          mid-translation to switch from sentence to paragraph translation,
-          the internal translation memory of the project will not be changed
-          (OmegaT may upgrade old translation memories that did not use
-          sentence segmentation, but not vice versa), but OmegaT will attempt
-          to create paragraph fuzzy matches by gluing together existing
-          sentence translations.</para>
-          <warning><para>Changing segmentation settings may cause some already
-          translated segments to be split or merged. This will effectively
-          return them to the &quot;untranslated&quot; status, as they will no longer
-          match segments recorded in the project memory, even though their
-          original translation is still there.</para></warning>
+          <para>Sentence-level segmentation splits the source files contents in segments based on the rules defined in <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>. The rules can be modified using regular expressions. See <link linkend="appendix.regexp" endterm="appendix.regexp.title"/> for details.</para>
+          <para>Leave the box unchecked if you prefer not to segment the text (or, more specifically, segment it a the paragraph).</para>
+		  <para>Changing this setting during a translation does not modify the segmentation of already existing translation memories. Switching from sentence to paragraph segmentation mid-translation will not change the internal translation memory of the project. (OmegaT may upgrade old translation memories that did not use sentence segmentation, but not vice versa) However, OmegaT will attempt to create fuzzy matches for paragraphs by combining existing sentence translations.</para>
+          <warning><para>Changing the segmentation settings may split or merge some already translated segments. This will effectively return them to the &quot;untranslated&quot; status, as they will no longer match segments recorded in the project memory, even though their original translation is still there.</para></warning>
         </listitem>
       </varlistentry>
 
@@ -57,18 +34,11 @@
         <term id="dialogs.project.properties.auto.propagation.title">Auto-propagation of Translations</term>
 
         <listitem>
-          <para>In case there are non-unique segments in source documents, if
-          checked, the first translated segment will be assumed to be the
-          default translation and its target text will be automatically used for
-          the other repetitions.</para>
+          <para>If there are non-unique segments in the source documents, checking this option will set the first translated segment as the default translation and automatically use the same target text in the remaining repeated segments.</para>
 
-		  <para>Segments that require a different translation can be assigned
-		  and alternative translation with <link
-		  linkend="menus.edit.create.alternative.translation"
-		  endterm="menus.edit.create.alternative.translation.title"/>.</para>
+		  <para>You can use <link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/> to assign  an alternative translation to segments that require a different translation.</para>
 
-		  <para>If not checked, all the segments can be assigned a different
-		  translation.</para>
+		  <para>If not checked, all segments can be assigned a different translation.</para>
         </listitem>
       </varlistentry>
 
@@ -76,14 +46,9 @@
         <term id="dialogs.project.properties.remove.tags.title">Remove Tags</term>
 
         <listitem>
-          <para>If checked, no formatting (inline) tags will be displayed in the
-          source segments. This is especially useful when dealing with texts
-          where inline formatting is not really useful (e.g., OCRed PDF, bad
-          converted .odt or .docx, etc.)</para>
+          <para>If checked, no formatting (inline) tags will be displayed in the source segments. This is especially useful when dealing with texts where inline formatting is not particularly useful (e.g., OCRed PDF, or poorly converted .odt or .docx files.)</para>
 
-		  <note><para>Tags are not really removed from the document, they are stacked
-		  at the end of the segment. In most cases this should not keep the
-		  translated file from opening.</para></note>
+		  <note><para>The tags are not really removed from the document, but rather stacked at the end of the segment. In most cases, this should not keep the translated file from opening.</para></note>
         </listitem>
       </varlistentry>
 
@@ -91,51 +56,23 @@
         <term id="dialogs.project.properties.external.processing.command.title">External Post-processing Command</term>
 
         <listitem>
-          <para>This area allows entering an external post-processing command
-          (for instance, a script to rename files) that will be applied each
-          time <link linkend="menus.project.create.translated.documents"
-          endterm="menus.project.create.translated.documents.title"/> is
-          used. This external command cannot include pipes, etc.,
-          which is why calling a script is recommended.</para>
+          <para>This area allows you to enter an external post-processing command (a script to rename files, for instance) that will be applied each time <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> is used. Calling a script is recommended because the external command does not allow the use of pipes or similar features.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.segmentation">
         <term id="dialogs.project.properties.segmentation.title">Segmentation...</term>
         <listitem>
-          <para>Segmentation rules are generally valid across all the projects
-          and are found in <link
-          linkend="dialogs.preferences.segmentation.setup"
-          endterm="dialogs.preferences.segmentation.setup.title"/> in the <link
-          linkend="dialogs.preferences"
-          endterm="dialogs.preferences.title"/>.</para>
-		  <para>The user, however, may need to generate a set of rules, specific
-		  to the project in question. Use this button to open the
-		  <guilabel>Project Specific Segmentation Setup</guilabel> dialog and
-		  check the <guilabel>Make the segmentation rules project
-		  specific</guilabel> box, then proceed to adjust the segmentation rules
-		  as desired.</para>
-		  <para>The new set of rules will be stored in the <link
-		  linkend="project.folder.omegat.segmentation"
-		  endterm="project.folder.omegat.segmentation.title"/> file of the <link
-		  linkend="project.folder.omegat.folder"
-		  endterm="project.folder.omegat.folder.title"/> folder of that project and
-		  will be applied instead of the general set of segmentation
-		  rules.</para>
+          <para>Segmentation rules are generally valid across all projects and found in <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/>.</para>
+		  <para>The user, however, may need to generate a set of rules specific to the current project. Use this button to open the <guilabel>Project Specific Segmentation Setup</guilabel> dialog. Check the <guilabel>Make the segmentation rules project specific</guilabel> box, and adjust the segmentation rules as desired.</para>
+		  <para>The new set of rules will be stored in the <link linkend="project.folder.omegat.segmentation" endterm="project.folder.omegat.segmentation.title"/> file of the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> folder of the project and will supersede the general set of segmentation rules.</para>
 		  <note><para>To delete project specific segmentation rules, uncheck the
 		  box or remove that file.</para></note>
 
-		  <warning><para>The options displayed in the <link
-		  linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> or
-		  in the <link linkend="menus.options" endterm="menus.options.title"/>
-		  are always the general options and never the project specific
-		  options.</para>
-		  <para>If you have project specific settings but try to modify the same
-		  settings there, the modifications will not be taken into
-		  account.</para></warning>
+		  <warning><para>The options displayed in <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> or  <link linkend="menus.options" endterm="menus.options.title"/> are always the general options and never the project specific options.</para>
+		  <para>If you have project specific settings, any modifications you make to the same settings from those will not be taken into account.</para></warning>
 
-		  <para>See <link linkend="dialogs.preferences.segmentation.setup"
-		  endterm="dialogs.preferences.segmentation.setup.title"/> for
+		  <para>See <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> for
 		  details.</para>
         </listitem>
       </varlistentry>
@@ -143,38 +80,16 @@
       <varlistentry id="dialogs.project.properties.filters">
         <term id="dialogs.project.properties.filters.title">File Filters...</term>
         <listitem>
-          <para>File filters are generally valid across all the projects
-          and are found in <link
-          linkend="dialogs.preferences.file.filters.title"
-          endterm="dialogs.preferences.file.filters.title"/> in the <link
-          linkend="dialogs.preferences"
-          endterm="dialogs.preferences.title"/>.</para>
-		  <para>The user, however, may need to generate a set of filters,
-		  specific to the project in question. Use this button to open the
-		  <guilabel>Project Specific File Filters</guilabel> dialog and check
-		  the <guilabel>Make the file filter settings project
-		  specific</guilabel> box, then proceed to adjust the filters as
-		  desired.</para>
-		  <para>The new set of filters will be stored in the <link
-		  linkend="project.folder.omegat.filters"
-		  endterm="project.folder.omegat.filters.title"/> file of the <link
-		  linkend="project.folder.omegat.folder"
-		  endterm="project.folder.omegat.folder.title"/> folder of that project and
-		  will be applied instead of the general set of file filters.</para>
+          <para>File filters are generally valid across all projects and found in <link linkend="dialogs.preferences.file.filters.title" endterm="dialogs.preferences.file.filters.title"/> in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/>.</para>
+		  <para>The user, however, may need to generate a set of rules specific to the current project. Use this button to open the <guilabel>Project Specific File Filters</guilabel> dialog. Check the <guilabel>Make the file filter settings project specific</guilabel> box, and adjust the filters as desired.</para>
+		  <para>The new set of filters will be stored in the <link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/> file of the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> folder of the project and will supersede the general set of file filters.</para>
 		  <note><para>To delete project specific file filters, uncheck the
 		  box or remove that file.</para></note>
 
-		  <warning><para>The options displayed in the <link
-		  linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> or
-		  in the <link linkend="menus.options" endterm="menus.options.title"/>
-		  are always the general options and never the project specific
-		  options.</para>
-		  <para>If you have project specific settings but try to modify the same
-		  settings there, the modifications will not be taken into
-		  account.</para></warning>
+		  <warning><para>The options displayed in <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> or  <link linkend="menus.options" endterm="menus.options.title"/> are always the general options and never the project specific options.</para>
+		  <para>If you have project specific settings, any modifications you make to the same settings from those will not be taken into account.</para></warning>
 		  
-		  <para>See <link linkend="dialogs.preferences.file.filters"
-		  endterm="dialogs.preferences.file.filters.title"/> for
+		  <para>See <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> for
 		  details.</para>
         </listitem>
       </varlistentry>
@@ -183,38 +98,20 @@
         <term id="dialogs.project.properties.repository.mapping.title">Repository Mapping...</term>
 
         <listitem>
-          <para>When working on a team project, this window allows you to define
-          the mapping between remote folders and local folders.See <link
-          linkend="how.to.setup.team.project.mapping.parameters"
-          endterm="how.to.setup.team.project.mapping.parameters.title"/> for
-          details.</para>
+          <para>When working on a team project, this window allows you to define the mapping between the remote and local folders. See <link linkend="how.to.setup.team.project.mapping.parameters" endterm="how.to.setup.team.project.mapping.parameters.title"/> for details.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.searches">
         <term id="dialogs.project.properties.external.searches.title">External Search...</term>
         <listitem>
-          <para>External searches are generally valid across all the projects
-          and are found in <link
-          linkend="dialogs.preferences.external.searches"
-          endterm="dialogs.preferences.external.searches.title"/> in the <link
-          linkend="dialogs.preferences"
-          endterm="dialogs.preferences.title"/>.</para>
-		  <para>The user, however, may need to generate a set of external
-		  searches, specific to the project in question. Use this button to open
-		  the <guilabel>Project Specific External Search</guilabel> dialog, then
-		  proceed to add the searches as desired.</para>
-		  <para>The new set of searches will be stored in the <link
-		  linkend="project.folder.omegat.finder"
-		  endterm="project.folder.omegat.finder.title"/> file of the <link
-		  linkend="project.folder.omegat.folder"
-		  endterm="project.folder.omegat.folder.title"/> folder of that project and
-		  will be applied instead of the general set of searches.</para>
+          <para>External searches are generally valid across all projects and found in <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/>.</para>
+		  <para>The user, however, may need to generate a set of external searches specific to the current project. Use this button to open the <guilabel>Project Specific External Search</guilabel> dialog, and add the desired searches.</para>
+		  <para>The new set of searches will be stored in the <link linkend="project.folder.omegat.finder" endterm="project.folder.omegat.finder.title"/> file of the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> folder of the project and will supersede the general set of searches.</para>
 		  <note><para>To delete project specific external searches, click on the
 		  <guilabel>Remove</guilabel> button or remove that file.</para></note>
 		  
-		  <para>See <link linkend="dialogs.preferences.external.searches"
-		  endterm="dialogs.preferences.external.searches.title"/> for
+		  <para>See <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> for
 		  details.</para>
         </listitem>
       </varlistentry>
@@ -224,16 +121,9 @@
   <section id="dialogs.project.properties.file.locations">
     <title id="dialogs.project.properties.file.locations.title">File locations</title>
 
-    <para>An OmegaT translation project is a set of folders that contain the
-    ressources used in the translation. The location of these folders are set
-    and can be modified here. In case you decide to modify project folders,
-    keep in mind that this will not move existing files from old folders to the
-    new location.</para>
+    <para>An OmegaT translation project consists of a folder hierarchy that contains the resources used in the translation. The location of these folders is predefined, but can be modified here. Keep in mind that modify the project folders will not move existing files from the old location to the new one.</para>
 
-	<para>The location of all the ressources is stored in the <link
-	linkend="project.folder.omegat.project"
-	endterm="project.folder.omegat.project.title"/> file of the <link
-	linkend="project.folder" endterm="project.folder.title"/>.</para>
+	<para>The location of all resources is stored in the <link linkend="project.folder.omegat.project" endterm="project.folder.omegat.project.title"/> file of the <link linkend="project.folder" endterm="project.folder.title"/>.</para>
 
     <para>Click on <guibutton>Exclusions...</guibutton> to define the files or
     folders that will be ignored by OmegaT. An ignored file or folder:</para>
@@ -243,18 +133,13 @@
         <para>is not displayed in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane,</para>
       </listitem>
       <listitem>
-        <para>is not taken into account in <link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>,</para>
+        <para>is not taken into account in the <link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> window, and</para>
       </listitem>
       <listitem>
-        <para>is not copied in <link linkend="project.folder.target" endterm="project.folder.target.title"/> folder when the translated files
-        are created.</para>
+        <para>is not copied to the <link linkend="project.folder.target" endterm="project.folder.target.title"/> folder when the translated files are created.</para>
       </listitem>
     </itemizedlist>
 
-    <para>In the Exclusion patterns dialog, it is possible to Add or Remove a
-    pattern, or edit one by selecting a line and pressing F2. It is possible to
-    use wildcards, using the <ulink
-    url="https://ant.apache.org/manual/dirtasks.html#patterns">ant
-    syntax</ulink>.</para>
+    <para>The Exclusion patterns dialog, allows you to add or remove a pattern, or to edit one by double-clicking it, or selecting it and pressing F2. You can use wildcards that follow the <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant syntax</ulink>.</para>
   </section>
 </section>

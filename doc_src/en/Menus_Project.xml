@@ -11,8 +11,7 @@
       <term id="menus.project.new.title">New...</term>
       <listitem>
         <para>Creates and opens a new project. See <link
-        linkend="how.to.create.new.project" endterm="how.to.create.new.project.title"/> for
-        details.</para>
+        linkend="how.to.create.new.project" endterm="how.to.create.new.project.title"/> for details.</para>
 		<para>
 		  <keycombo>
 			<keycap>S</keycap><keycap>C</keycap><keycap>n</keycap>
@@ -46,8 +45,8 @@
     <varlistentry id="menus.project.open.recent">
       <term id="menus.project.open.recent.title">Open Recent Project</term>
       <listitem>
-        <para>Gives access to the ten last edited projects. Clicking on one will
-        save the current project, close it and open the other project.</para>
+        <para>Gives access to the last ten edited projects. Clicking one will
+        save the current project, close it and open the selected project.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>		
       </listitem>
     </varlistentry>
@@ -66,8 +65,7 @@
     <varlistentry id="menus.project.download.mediawiki.page">
       <term id="menus.project.download.mediawiki.page.title">Download MediaWiki Page...</term>
       <listitem>
-		<para>Opens a dialog where you can paste the URL of the mediawiki "Edit"
-		tab of the page you want to translate.</para>
+		<para>Opens a dialog where you can paste the URL of the <emphasis>Edit</emphasis> tab of the mediawiki page you want to translate.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
         <note><para>To translate the contents of a Wikipedia page (for
         example):</para>
@@ -81,8 +79,7 @@
             <guilabel>action=edit</guilabel>) and paste it into OmegaT.</para>
           </listitem>
         </orderedlist>
-        <para>When you have finished your translation, to import it into
-        Wikipedia:</para>
+        <para>To import your translation into Wikipedia when it is finished:</para>
         <orderedlist>
           <listitem>
             <para>Open the <filename>.UTF8</filename> file generated in the
@@ -112,7 +109,7 @@
         from one segment to another. Similarly, the contents of the <link
         linkend="project.folder.glossary"
         endterm="project.folder.glossary.title"/> folder are automatically
-        recognized and do not require the project to be reloaded.</para></note>
+        recognized and do not require reloading the project.</para></note>
       </listitem>
     </varlistentry>
 
@@ -150,13 +147,8 @@
     <varlistentry id="menus.project.commit.source.files">
       <term id="menus.project.commit.source.files.title">Commit Source Files</term>
       <listitem>
-        <warning><para>This function is specific to team
-        projects. <emphasis>Only the team project manager should use this
-        function</emphasis>. See <link linkend="how.to.use.team.project"
-        endterm="how.to.use.team.project.title"/> for details.</para></warning>
-        <para>Uploads to the repository the files that have been added or
-        modified locally in the <filename class="directory">source</filename>
-        folder.</para>
+        <warning><para>This function is specific to team projects. <emphasis>Only the team project manager should use this function</emphasis>. See <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> for details.</para></warning>
+        <para>Uploads locally added or modified files in the <filename class="directory">source</filename> folder to the team project repository.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
@@ -164,13 +156,9 @@
     <varlistentry id="menus.project.commit.target.files">
       <term id="menus.project.commit.target.files.title">Commit Target Files</term>
       <listitem>
-        <warning><para>This function is specific to team
-        projects. <emphasis>Only the team project manager should use this
-        function</emphasis>. See <link linkend="how.to.use.team.project"
-        endterm="how.to.use.team.project.title"/> for details.</para></warning>
-        <para>Uploads to the repository the files that have been created locally
-        in the <link linkend="project.folder.target"
-        endterm="project.folder.target.title"/> folder.</para>
+        <warning><para>This function is specific to team projects. <emphasis>Only the team project manager should use this function</emphasis>. See <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> for details.</para></warning>
+        <para>Uploads locally created in the <link linkend="project.folder.target"
+        endterm="project.folder.target.title"/> folder to the team project repository.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
@@ -192,8 +180,7 @@
     <varlistentry id="menus.project.create.current.translated.document">
       <term id="menus.project.create.current.translated.document.title">Create Current Translated Document</term>
       <listitem>
-        <para>Creates the target document corresponding to the current document
-        in translation. The created target document is located in the <link
+        <para>Creates the target document corresponding to source document currently being translated. The resulting document is located in the <link
         linkend="project.folder.target" endterm="project.folder.target.title"/>
         folder.</para>
 		<para>
@@ -227,7 +214,7 @@
       <term id="menus.project.properties.title">Properties...</term>
       <listitem>
         <para>Displays the <link linkend="dialogs.project.properties">Project
-        properties</link> dialog to edit project languages and folder
+        properties</link> dialog to edit the project languages and folder
         locations.</para>
 		<para>
 		  <keycombo>
@@ -254,12 +241,11 @@
       <term id="menus.project.access.project.contents.title">Access Project
       Contents</term>
       <listitem>
-        <para>Gives access to the project folders. See <link
+        <para>Gives access to the various project folders. See <link
         linkend="project.folder">Project folder</link> for more details.</para>
-        <para>In addition, three menu entries allow opening directly the current
-        source and target documents and the writable glossary. The documents are
-        opened by the application chosen by the operating system. If the
-        documents do not exist yet, the options are greyed out.</para>
+        <para>In addition, there are three menu entries that directly open the current
+        source or target documents, or the writable glossary. The documents are
+        opened in the default application set by the operating system. The options are greyed out if the documents do not exist yet.</para>
 
 		<variablelist>
 		  <varlistentry>
@@ -331,9 +317,7 @@
     <varlistentry id="menus.project.restart">
       <term id="menus.project.restart.title">Restart</term>
       <listitem>
-        <para>Saves the project and restarts OmegaT.  If you haven't yet saved
-        the project, this manually confirms whether you really wish to
-        quit.</para>
+        <para>Saves the project and restarts OmegaT. You are asked to confirm that you really want to quit if you have not yet saved the project.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
       </listitem>
     </varlistentry>
@@ -341,9 +325,8 @@
     <varlistentry id="menus.project.quit">
       <term id="menus.project.quit.title">Quit</term>
       <listitem>
-        <para>Saves the project and quits OmegaT.  If you haven't yet saved the
-        project, this manually confirms whether you really wish to quit.</para>
-		<para>In macOS, this menu item is listed under the Application menu.</para>
+        <para>Saves the project and quits OmegaT. You are asked to confirm that you really want to quit if you have not yet saved the project.</para>
+		<para>In macOS, this menu item is found under the <guimenu>Application</guimenu> menu.</para>
 		<para>
 		  <keycombo>
 			<keycap>C</keycap><keycap>q</keycap>

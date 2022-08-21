@@ -123,22 +123,23 @@
 
     <para>An OmegaT translation project consists of a folder hierarchy that contains the resources used in the translation. The location of these folders is predefined, but can be modified here. Keep in mind that modify the project folders will not move existing files from the old location to the new one.</para>
 
-	<para>The location of all resources is stored in the <link linkend="project.folder.omegat.project" endterm="project.folder.omegat.project.title"/> file of the project <link linkend="project.folder" endterm="project.folder.title"/>.</para>
+	<para>The location of all resources is stored in the <link linkend="project.folder.omegat.project" endterm="project.folder.omegat.project.title"/> file of the <link linkend="project.folder" endterm="project.folder.title"/>.</para>
 
-    <para>Click on <guibutton>Exclusions...</guibutton> to define files or folders that will be ignored by OmegaT. An ignored file or folder:</para>
+    <para>Click on <guibutton>Exclusions...</guibutton> to define the files or
+    folders that will be ignored by OmegaT. An ignored file or folder:</para>
 
     <itemizedlist>
       <listitem>
-        <para>is not displayed in the Editor pane,</para>
+        <para>is not displayed in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane,</para>
       </listitem>
       <listitem>
-        <para>is not taken into account in the statistics, and</para>
+        <para>is not taken into account in the <link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> window, and</para>
       </listitem>
       <listitem>
-        <para>is not copied in <filename class="directory">target</filename> folder during the process of generating the translated files.</para>
+        <para>is not copied to the <link linkend="project.folder.target" endterm="project.folder.target.title"/> folder when the translated files are created.</para>
       </listitem>
     </itemizedlist>
 
-    <para>The Exclusion patterns dialog, allows to add or remove a pattern, or to edit one by double-clicking it, or selecting it and pressing F2. You can use wildcards that follow the <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant syntax</ulink>.</para>
+    <para>The Exclusion patterns dialog, allows you to add or remove a pattern, or to edit one by double-clicking it, or selecting it and pressing F2. You can use wildcards that follow the <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant syntax</ulink>.</para>
   </section>
 </section>

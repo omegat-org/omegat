@@ -3,21 +3,13 @@
 <section id="windows.project.files">
   <title id="windows.project.files.title">Project Files</title>
 
-  <para>This window is displayed automatically when OmegaT loads a project. It
-  can also be called at any time by selecting <link
-  linkend="menus.project.project.files"
-  endterm="menus.project.project.files.title"/> in the <link
-  linkend="menus.project" endterm="menus.project.title"/> menu.</para>
+  <para>This window is displayed automatically when OmegaT loads a project. It can also be called at any time by selecting <link linkend="menus.project.project.files" endterm="menus.project.project.files.title"/> in the <link linkend="menus.project" endterm="menus.project.title"/> menu.</para>
 
   <para>The window displays the following information:</para>
 
   <itemizedlist>
     <listitem>
-      <para>The total number of translatable files in the project, which are the
-      files in the <link linkend="project.folder.source"
-      endterm="project.folder.source.title"/> folder in a format recognized by
-      OmegaT. This number is displayed in parentheses in the window
-      title.</para>
+      <para>The total number of translatable files in the project, which are the files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder in a format recognized by OmegaT. This number is displayed in parentheses in the window title.</para>
     </listitem>
 
     <listitem>
@@ -25,32 +17,26 @@
 	</listitem>
 
 	<listitem>
-      <para>The file list entries include the name, filter type, encoding and
-      number of segments of the file</para>
+      <para>The file list entries include the name, filter type, encoding and number of segments of the file</para>
     </listitem>
 
     <listitem>
-      <para>The total number of segments, the number of unique segments in the
-      entire project, and the number of unique segments already translated are
-      shown at the bottom of the file list.</para>
+      <para>The total number of segments, the number of unique segments in the entire project, and the number of unique segments already translated are shown at the bottom of the file list.</para>
     </listitem>
   </itemizedlist>
 	  
   <para>You can:
   <itemizedlist>
 	<listitem>
-	  <para>click on any file to open it for translation in the <link
-	  linkend="panes.editor" endterm="panes.editor.title"/>,</para>
+	  <para>click on any file to open it for translation in the <link linkend="panes.editor" endterm="panes.editor.title"/>,</para>
 	</listitem>
 
 	<listitem>
-      <para>select a file using the <keycap>Up</keycap> and
-      <keycap>Down</keycap> keys,</para>
+      <para>select a file using the <keycap>Up</keycap> and <keycap>Down</keycap> keys,</para>
 	</listitem>
 
 	<listitem>
-	  <para>type a string to filter the list on files with that string in their
-	  name,</para>
+	  <para>type a string to filter the list on files with that string in their name,</para>
 	</listitem>
 
 	<listitem>
@@ -58,48 +44,26 @@
 	</listitem>
 
 	<listitem>
-	  <para>select one or more files in the list and, use one of the
-	  <guibutton>Move...</guibutton> buttons on reorder the selected file or
-	  files,</para>
+	  <para>select one or more files in the list and, use one of the <guibutton>Move...</guibutton> buttons on reorder the selected file or files,</para>
 	</listitem>
 
 	<listitem>
-      <para><keycap>right-click</keycap> on a filename to open a context menu
-      from which you can open the source file and (if it exists) the target
-      file, or</para>
+      <para><keycap>right-click</keycap> on a filename to open a context menu from which you can open the source file and (if it exists) the target file, or</para>
 	</listitem>
 
-	<listitem><para>use
-	<keycombo><keycap>C</keycap><keycap>Right-click</keycap></keycombo> to open
-	their location.</para>
+	<listitem><para>use <keycombo><keycap>C</keycap><keycap>Right-click</keycap></keycombo> to open their location.</para>
 	</listitem>
   </itemizedlist>
   </para>
 
-  <para>The number of <emphasis role="bold">unique</emphasis> segments is
-  calculated by taking all segments and subtracting all duplicate
-  segments.</para>
+  <para>The number of <emphasis role="bold">unique</emphasis> segments is calculated by taking all segments and subtracting all duplicate segments.</para>
 
-  <warning><para>Modifying the segmentation rules will modify the number of
-  segments and unique segments.</para></warning>
+  <warning><para>Modifying the segmentation rules will modify the number of segments and unique segments.</para></warning>
 
-  <para>The difference between the &quot;Number of segments&quot; and
-  &quot;Number of unique segments&quot; gives an approximate idea of the number
-  of repetitions in the text. The <link linkend="project.folder.project.stats"
-  endterm="project.folder.project.stats.title"/> file located in the <link
-  linkend="project.folder.omegat.folder"
-  endterm="project.folder.omegat.folder.title"/> folder of your project contains
-  more detailed segment information, broken down by source file.</para>
+  <para>The difference between the &quot;Number of segments&quot; and &quot;Number of unique segments&quot; gives an approximate idea of the number of repetitions in the text. The <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/> file located in the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> folder of your project contains more detailed segment information, broken down by source file.</para>
 
-  <para>The <guilabel>Copy Files To Source Folder</guilabel> and the
-  <guilabel>Download MediaWiki Page</guilabel> buttons perform the same function
-  as the equivalent item in the <link linkend="menus.project"
-  endterm="menus.project.title"/> menu.</para>
+  <para>The <guilabel>Copy Files To Source Folder</guilabel> and the <guilabel>Download MediaWiki Page</guilabel> buttons perform the same function as the equivalent item in the <link linkend="menus.project" endterm="menus.project.title"/> menu.</para>
 
-    <note><para>It is possible to stop the window from displaying automatically
-    by setting the <code>project_files_show_on_load</code> option to
-    <code>false</code> in <link
-    linkend="configuration.folder.default.contents.omegat.prefs"
-    endterm="configuration.folder.default.contents.omegat.prefs.title"/>.</para></note>
+    <note><para>It is possible to stop the window from displaying automatically by setting the <code>project_files_show_on_load</code> option to <code>false</code> in <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/>.</para></note>
 
 </section>

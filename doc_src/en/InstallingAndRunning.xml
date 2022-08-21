@@ -390,14 +390,14 @@ $ ./linux-install</programlisting>
       GB of memory, requests French as the user language and Canada as the
       country:</para>
 
-      <para><programlisting># OmegaT.exe runtime configuration
+      <programlisting># OmegaT.exe runtime configuration
 # To use a parameter, remove the '#' before the '-'
 # Memory
 -Xmx1024M
 # Language
 -Duser.language=FR
 # Country
--Duser.country=CA</programlisting></para>
+-Duser.country=CA</programlisting>
 
       <para>Advice: if OmegaT works slowly in Remote Desktop sessions under
       Windows, you may use this option:</para>

@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  0 Enhancements
-  0 Bug fixes
+  12 Enhancements
+  9 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -35,6 +35,14 @@
   https://sourceforge.net/p/omegat/bugs/1074/
 
   Implemented requests:
+
+  - New project properties options for export TM directory and which TMs should be exported
+  https://sourceforge.net/p/omegat/feature-requests/1611/
+
+  - Option to export project's master TMs when pressing Ctrl+D
+  https://sourceforge.net/p/omegat/feature-requests/1591/
+
+  - Changing the flow of updating teamwork omegat.project
 
   - CLI option to print the project stats to the console (text, xml or json)
   https://sourceforge.net/p/omegat/feature-requests/1624/

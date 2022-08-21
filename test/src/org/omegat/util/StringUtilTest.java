@@ -32,6 +32,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -405,5 +406,13 @@ public class StringUtilTest {
         // Test that behavior changes for Turkish
         assertEquals("Istanbul", StringUtil.replaceCase("\\uistanbul", Locale.ENGLISH)); // English version
         assertEquals("\u0130stanbul", StringUtil.replaceCase("\\uistanbul", new Locale("tr"))); // Turkish version
+    }
+
+    @Test
+    public void testConvertToList() {
+        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("omegat level1 level2"));
+        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("omegat  level1  level2"));
+        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("  omegat level1 level2  "));
+        assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("  omegat   level1  level2  "));
     }
 }

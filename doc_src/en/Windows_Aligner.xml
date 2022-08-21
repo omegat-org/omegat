@@ -6,7 +6,9 @@
 
   <para>Alignment involves creating a bilingual translation memory from monolingual documents that have already been translated.</para>
 
-  <para>To access this window, select <menuchoice><guimenu>Tools</guimenu><guimenuitem>Align Files...</guimenuitem></menuchoice>.</para>
+  <para>To access this window, use <link linkend="menus.tools.align.files"
+  endterm="menus.tools.align.files.title"/> in the <link linkend="menus.tools"
+  endterm="menus.tools.title"/> menu.</para>
 
   <section id="windows.aligner.adjust">
     <title id="windows.aligner.adjust.title">Step 1: Adjust the alignment parameters</title>

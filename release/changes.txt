@@ -2,7 +2,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
   12 Enhancements
-  9 Bug fixes
+  11 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -33,6 +33,12 @@
 
   - Dictionary fails to jump to selected word
   https://sourceforge.net/p/omegat/bugs/1074/
+
+  - Highlight found text even if normalized text (for feature "full/half width insensitive") 
+    differs from original
+
+  - Display other language translations also for alternative translations
+  https://sourceforge.net/p/omegat/bugs/1101/
 
   Implemented requests:
 

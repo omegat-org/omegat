@@ -24,8 +24,8 @@
     <title id="dialogs.preferences.general.title">General</title>
 
     <variablelist>
-      <varlistentry>
-        <term id="dialogs.preferences.general.use.tab.to.advance">Use TAB to
+      <varlistentry id="dialogs.preferences.general.use.tab.to.advance">
+        <term id="dialogs.preferences.general.use.tab.to.advance.title">Use TAB to
         Advance</term>
 
         <listitem>
@@ -35,8 +35,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term id="dialogs.preferences.general.always.confirm.quit">Always
+      <varlistentry id="dialogs.preferences.general.always.confirm.quit">
+        <term id="dialogs.preferences.general.always.confirm.quit.title">Always
         Confirm Quit</term>
 
         <listitem>
@@ -50,9 +50,8 @@
     <title id="dialogs.preferences.mt.title">Machine Translation</title>
 
     <variablelist>
-      <varlistentry>
-        <term
-			id="dialogs.preferences.mt.automatically.fetch.trasnlations">Automatically
+      <varlistentry id="dialogs.preferences.mt.automatically.fetch.trasnlations">
+        <term id="dialogs.preferences.mt.automatically.fetch.trasnlations.title">Automatically
         fetch translations</term>
 
         <listitem>
@@ -71,8 +70,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term id="dialogs.preferences.mt.untranslated.segments.only">Untranslated
+      <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">
+        <term id="dialogs.preferences.mt.untranslated.segments.only.title">Untranslated
         segments only</term>
 
         <listitem>
@@ -86,18 +85,14 @@
     <guibutton>Configure</guibutton> to enter the identification details
     provided by the supplier.</para>
 
-    <para>[TODO] The procedures for configuring access to the Microsoft
-    Translator and Google Translate services are described <ulink
-    url="https://sourceforge.net/p/omegat/wiki/Configuring Machine Translation Services">here</ulink>.</para>
   </section>
 
   <section id="dialogs.preferences.glossary">
     <title id="dialogs.preferences.glossary.title">Glossary</title>
 
     <variablelist>
-      <varlistentry>
-        <term
-			id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">Display
+      <varlistentry id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">
+        <term id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title">Display
         context description for TBX glossaries</term>
 
         <listitem>
@@ -106,9 +101,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term
-			id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text">Use
+      <varlistentry id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text">
+        <term id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text.title">Use
         terms appearing separately in the source text</term>
 
         <listitem>
@@ -121,9 +115,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term
-			id="dialogs.preferences.glossary.use.stemming.for.glossary.entries">Use
+      <varlistentry id="dialogs.preferences.glossary.use.stemming.for.glossary.entries">
+        <term id="dialogs.preferences.glossary.use.stemming.for.glossary.entries.title">Use
         stemming for glossary entries</term>
 
         <listitem>
@@ -132,9 +125,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term
-			id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text">Replace
+      <varlistentry id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text">
+        <term id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text.title">Replace
         glossary hits when inserting source text</term>
 
         <listitem>
@@ -147,9 +139,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term
-			id="dialogs.preferences.glossary.ignore.hits.with.very.different.case">Ignore
+      <varlistentry id="dialogs.preferences.glossary.ignore.hits.with.very.different.case">
+        <term id="dialogs.preferences.glossary.ignore.hits.with.very.different.case.title">Ignore
         hits with very different case (e.g. FOO vs foo)</term>
 
         <listitem>
@@ -159,8 +150,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term id="dialogs.preferences.glossary.glossary.layout">Glossary
+      <varlistentry id="dialogs.preferences.glossary.glossary.layout">
+        <term id="dialogs.preferences.glossary.glossary.layout.title">Glossary
         layout</term>
 
         <listitem>
@@ -169,9 +160,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term
-			id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">Merge
+      <varlistentry id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">
+        <term id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title">Merge
         alternate definition for the same term</term>
 
         <listitem>
@@ -186,8 +176,8 @@
       Terminology</title>
 
       <variablelist>
-        <varlistentry>
-          <term id="dialogs.preferences.taasterminology.get.api.key">Get API
+        <varlistentry id="dialogs.preferences.taasterminology.get.api.key">
+          <term id="dialogs.preferences.taasterminology.get.api.key.title">Get API
           Key</term>
 
           <listitem>
@@ -200,9 +190,8 @@
           </listitem>
         </varlistentry>
 
-        <varlistentry>
-          <term
-			  id="dialogs.preferences.taasterminology.store.for.this.session.only">Store
+        <varlistentry id="dialogs.preferences.taasterminology.store.for.this.session.only">
+          <term id="dialogs.preferences.taasterminology.store.for.this.session.only.title">Store
           for this session only</term>
 
           <listitem>
@@ -211,9 +200,8 @@
           </listitem>
         </varlistentry>
 
-        <varlistentry>
-          <term
-			  id="dialogs.preferences.taasterminology.browse.taas.collections">Browse
+        <varlistentry id="dialogs.preferences.taasterminology.browse.taas.collections">
+          <term id="dialogs.preferences.taasterminology.browse.taas.collections.title">Browse
           TaaS Collections...</term>
 
           <listitem>
@@ -226,9 +214,8 @@
           </listitem>
         </varlistentry>
 
-        <varlistentry>
-          <term
-			  id="dialogs.preferences.taasterminology.select.taas.terminology.domain">Select
+        <varlistentry id="dialogs.preferences.taasterminology.select.taas.terminology.domain">
+          <term id="dialogs.preferences.taasterminology.select.taas.terminology.domain.title">Select
           TaaS Terminology Lookup Domain...</term>
 
           <listitem>
@@ -244,9 +231,8 @@
     <title id="dialogs.preferences.dictionary.title">Dictionary</title>
 
     <variablelist>
-      <varlistentry>
-        <term
-			id="dialogs.preferences.dictionary.automatically.search.segment">Automatically
+      <varlistentry id="dialogs.preferences.dictionary.automatically.search.segment">
+        <term id="dialogs.preferences.dictionary.automatically.search.segment.title">Automatically
         search segment text in dictionary</term>
 
         <listitem>
@@ -255,9 +241,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term
-			id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">Use
+      <varlistentry id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
+        <term id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title">Use
         fuzzy matching for dictionary entries</term>
 
         <listitem>
@@ -272,8 +257,8 @@
     <title id="dialogs.preferences.appearance.title">Appearance</title>
 
     <variablelist>
-      <varlistentry>
-        <term id="dialogs.preferences.appearance.theme">Theme</term>
+      <varlistentry id="dialogs.preferences.appearance.theme">
+        <term id="dialogs.preferences.appearance.theme.title">Theme</term>
 
         <listitem>
           <para>You can select a theme for OmegaT's user interface. Theme can
@@ -281,8 +266,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term id="dialogs.preferences.appearance.restore.main.window">Restore
+      <varlistentry id="dialogs.preferences.appearance.restore.main.window">
+        <term id="dialogs.preferences.appearance.restore.main.window.title">Restore
         Main Window</term>
 
         <listitem>
@@ -843,9 +828,8 @@
 	<para>OmegaT uses the following sequence of steps:</para>
 
 	<variablelist>
-      <varlistentry>
-		<term
-			id="dialogs.preferences.segmentation.setup.structure.level.segmentation">Structure
+      <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
+		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Structure
 		level segmentation</term>
 
 		<listitem>
@@ -861,9 +845,8 @@
 		</listitem>
       </varlistentry>
 
-      <varlistentry>
-		<term
-			id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">Sentence
+      <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
+		<term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Sentence
 		level segmentation</term>
 
 		<listitem>
@@ -890,8 +873,8 @@
       <para>The two types of rules behave as follows:</para>
 
       <variablelist>
-		<varlistentry>
-          <term id="segmentation.rules.breakrule">Break rule</term>
+		<varlistentry id="segmentation.rules.breakrule">
+          <term id="segmentation.rules.breakrule.title">Break rule</term>
 
           <listitem>
 			<para>Separates the source text into segments. For example,
@@ -905,8 +888,8 @@
       </variablelist>
 
       <variablelist>
-		<varlistentry>
-          <term id="segmentation.rules.exceptionrule">Exception rule</term>
+		<varlistentry id="segmentation.rules.exceptionrule">
+          <term id="segmentation.rules.exceptionrule.title">Exception rule</term>
 
           <listitem>
 			<para>specify what parts of text should NOT be separated. In spite
@@ -1056,8 +1039,8 @@
 	  <title id="dialog.preferences.languagetool.plugin.title">LanguageTool plug-in</title>
 
 	  <variablelist>
-		<varlistentry>
-		  <term id="dialog.preferences.languagetool.plugin.servicetype">Service type</term>
+		<varlistentry id="dialog.preferences.languagetool.plugin.servicetype">
+		  <term id="dialog.preferences.languagetool.plugin.servicetype.title">Service type</term>
 
 		  <listitem>
 			<para>Select the location of the language checker.</para>
@@ -1068,8 +1051,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term id="dialog.preferences.languagetool.plugin.rules">Rules</term>
+		<varlistentry id="dialog.preferences.languagetool.plugin.rules">
+		  <term id="dialog.preferences.languagetool.plugin.rules.title">Rules</term>
 
 		  <listitem>
 			<para>Check or uncheck the rules depending on whether they are
@@ -1084,9 +1067,8 @@
 	  Searches</title>
 	  <!-- TODO décrire comment enregistrer des recherches externes -->
 	  <variablelist>
-		<varlistentry>
-		  <term
-			  id="dialogs.preferences.external.search.enable.project.specific.commands">Enable
+		<varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
+		  <term id="dialogs.preferences.external.search.enable.project.specific.commands.title">Enable
 		  project-specific commands</term>
 
 		  <listitem>
@@ -1101,9 +1083,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry>
-		  <term
-			  id="dialogs.preferences.external.search.context.menu.priority">Context
+		<varlistentry id="dialogs.preferences.external.search.context.menu.priority">
+		  <term id="dialogs.preferences.external.search.context.menu.priority.title">Context
 		  Menu Priority:</term>
 
 		  <listitem>
@@ -1175,8 +1156,7 @@
 
 	  <variablelist>
 		<varlistentry id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match">
-		  <term
-			  id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match.title">Attempt
+		  <term id="dialogs.preferences.editor.attempt.to.convert.numbers.when.inserting.a.fuzzy.match.title">Attempt
 		  to convert numbers when inserting a fuzzy match</term>
 
 		  <listitem>
@@ -1206,8 +1186,7 @@
 		</varlistentry>
 
 		<varlistentry id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source">
-		  <term
-			  id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title">Allow
+		  <term id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title">Allow
 		  translation to be equal to source</term>
 
 		  <listitem>
@@ -1225,8 +1204,7 @@
 		</varlistentry>
 
 		<varlistentry id="dialogs.preferences.editor.export.the.segment.to.text.files">
-		  <term
-			  id="dialogs.preferences.editor.export.the.segment.to.text.files.title">Export the
+		  <term id="dialogs.preferences.editor.export.the.segment.to.text.files.title">Export the
 		  segment to text files</term>
 
 		  <listitem>
@@ -1303,8 +1281,7 @@
 		</varlistentry>
 
 		<varlistentry id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment">
-		  <term
-			  id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title">Validate
+		  <term id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title">Validate
 		  tags when leaving a segment</term>
 
 		  <listitem>
@@ -1337,8 +1314,7 @@
 		</varlistentry>
 
 		<varlistentry id="dialogs.preferences.editor.initially.load.this.many.segments">
-		  <term
-			  id="dialogs.preferences.editor.initially.load.this.many.segments.title">Initially
+		  <term id="dialogs.preferences.editor.initially.load.this.many.segments.title">Initially
 		  load this many segments</term>
 
 		  <listitem>
@@ -1350,8 +1326,7 @@
 		</varlistentry>
 
 		<varlistentry id="dialogs.preferences.editor.paragraph.delimitation.format">
-		  <term
-			  id="dialogs.preferences.editor.paragraph.delimitation.format.title">Paragraph
+		  <term id="dialogs.preferences.editor.paragraph.delimitation.format.title">Paragraph
 		  delimitation format</term>
 
 		  <listitem>
@@ -1580,8 +1555,7 @@
 
 	  <variablelist>
 		<varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non-unique.segments">
-		  <term
-			  id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non-unique.segments.title">Include
+		  <term id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non-unique.segments.title">Include
 		  the first non-unique segment when marking non-unique segments</term>
 
 		  <listitem>

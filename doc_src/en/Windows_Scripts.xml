@@ -4,11 +4,11 @@
 <section id="windows.scripts">
   <title id="windows.scripts.title">Scripts</title>
 
-  <para>This window is accessible by selecting <menuchoice>
-      <guimenuitem>Tools</guimenuitem>
-
-      <guimenuitem>Scripting...</guimenuitem>
-    </menuchoice></para>
+  <para>Scripts are user developped extensions of OmegaT that can be written in any language understood by the underlying Java virtual machine. OmegaT distributes a number of scripts developed by OmegaT contributors. You can open them, run them, modify them directly from this window.</para>
+	
+  <para>The script editor is accessible by using <link linkend="menus.tools.scripts" endterm="menus.tools.scripts.title"/>
+in the <link linkend="menus.tools" endterm="menus.tools.title"/>
+</para>
 
   <section id="windows.scripts.use">
     <title id="windows.scripts.use.title">Use</title>

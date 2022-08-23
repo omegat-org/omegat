@@ -3,13 +3,13 @@
 <section id="windows.text.search">
   <title id="windows.text.search.title">Text Search</title>
 
-  <para>Open a new search window with <keycombo> <keycap>C</keycap> <keycap>f</keycap> </keycombo> and enter the word or phrase you wish to search for in the search box.</para>
+  <para>Open a new search window with <keycombo> <keycap>C</keycap> <keycap>f</keycap> </keycombo> and enter the word or phrase you wish to search for in the search field.</para>
   
-  <para>Alternatively, select a word or phrase in the <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane and hit <keycombo><keycap>C</keycap><keycap>f</keycap></keycombo>. The selection is automatically entered in the search box.</para>
+  <para>Alternatively, select a word or phrase in the <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane and hit <keycombo><keycap>C</keycap><keycap>f</keycap></keycombo>. The selection is automatically entered in the search field.</para>
 
   <para>You can have several search windows open at the same time. Use <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>f</keycap></keycombo> to call the last search window.</para>
 
-  <para>Click the dropdown arrow of the <guilabel>Search for:</guilabel> box to access the last ten searches.</para>
+  <para>Click the dropdown arrow of the <guilabel>Search for:</guilabel> field to access the last ten searches.</para>
 
   <para>Click on <guilabel>Search</guilabel> or hit <keycap>Enter</keycap> when the search field is selected to start the search.</para>
   
@@ -150,6 +150,6 @@
   <section id="search.filter">
     <title id="search.filter.title">Filter</title>
 
-	<para>Click on the <guibutton>Filter</guibutton> button to show only the matching search result segments in the <link linkend="panes.editor" endterm="panes.editor.title"/>. To remove the filter, click the <guibutton>Remove Filter</guibutton> button or reload the project.</para>
+	<para>Click on the Filter button to show only the matching search result segments in the <link linkend="panes.editor" endterm="panes.editor.title"/>. To remove the filter, click the <guibutton>Remove Filter</guibutton> button or reload the project.</para>
   </section>
 </section>

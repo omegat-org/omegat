@@ -1,89 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.text.replace">
   <title id="windows.text.replace.title">Text Replace</title>
 
-  <para>Open a new Replace window with <keycombo>
-      <keycap>C</keycap>
-      <keycap>k</keycap>
-    </keycombo> and enter the word or phrase you wish to replace in the
-  search box.</para>
+  <para>Open a new replace window with <keycombo> <keycap>C</keycap> <keycap>k</keycap> </keycombo> and enter the word or phrase you wish to replace in the <guilabel>Search for:</guilabel>field.</para>
   
-  <para>Alternatively, select a word or phrase in the <link
-  linkend="panes.editor" endterm="panes.editor.title"/> pane, <link
-  linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> pane or
-  <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane and hit
-  <keycombo><keycap>C</keycap><keycap>k</keycap></keycombo>. The selection is
-  automatically entered in the search box.</para>
+  <para>Alternatively, select a word or phrase in the <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane and hit <keycombo><keycap>C</keycap><keycap>f</keycap></keycombo>. The selection is automatically entered in the search field.</para>
 
-  <para>You can have several Replace windows open at the same time.</para>
+  <para>You can have several replace windows open at the same time.</para>
 
-  <para>Click the dropdown arrow of the <guilabel>Search for</guilabel> or
-  <guilabel>Replace with</guilabel> boxes to access the last 10 items.</para>
+  <para>Click the dropdown arrow of the <guilabel>Search for:</guilabel> or <guilabel>Replace with:</guilabel> fields to access the last ten items.</para>
 
-  <para>Enter the string to replace your search to in the <guilabel>Replace
-  with</guilabel> field and click on <guilabel>Search</guilabel>, or hit
-  <keycap>Enter</keycap> if the cursor is still in the field.</para>
+  <para>Enter the string you want to insert to replace your search term in the <guilabel>Replace with:</guilabel> field and click on <guilabel>Search</guilabel>, or hit <keycap>Enter</keycap> if the cursor is still in the field.</para>
 
-  <para>The search matches will be displayed in blue and the replacing strings
-  will be displayed in orange to show the result of the replacement.</para>
+  <para>Search matches are displayed in bold blue characters, and the modified strings are displayed in orange to show the result of the replacement.</para>
 
-  <note><para>At that stage, the replacement has not yet taken place.</para></note>
+  <note><para>At this stage, no replacements have been made yet.</para></note>
 
   <para>Click one of the following options: <itemizedlist>
       <listitem>
-        <para><guilabel>Replace All</guilabel>: operates
-        replacement of all occurrences (after displaying a confirmation window
-        where the number of occurrences is shown).</para>
+        <para><guilabel>Replace All</guilabel>: replace every occurrences (after displaying a confirmation window showing the number of occurrences).</para>
       </listitem>
     </itemizedlist><itemizedlist>
       <listitem>
-        <para><guilabel>Replace:</guilabel> operates a &quot;one by
-        one&quot; replacement in the Editor pane.</para>
-		<para>Click <guilabel>Replace Next</guilabel> or
-		<guilabel>Skip</guilabel>, then end the replacement session with
-		<guilabel>Finish</guilabel>.</para>
+        <para><guilabel>Replace:</guilabel> replaces each entry one at a time in the Editor pane.</para>
+		<para>Click <guilabel>Replace Next</guilabel> or <guilabel>Skip</guilabel>, to move to the next entry, and click <guilabel>Finish</guilabel> to end the replacement operation.</para>
       </listitem>
     </itemizedlist><itemizedlist>
       <listitem>
-        <para><guilabel>Close</guilabel>: close the window without
-        any change.</para>
+        <para><guilabel>Close</guilabel>: close the window without making any changes.</para>
       </listitem>
     </itemizedlist></para>
 
   
-  <para>The Replace window has its own menus:</para>
+  <para>The replace window has its own menus:</para>
   <itemizedlist>
     <listitem>
-      <para>File &gt; Search for selection (<keycombo>
-          <keycap>C</keycap>
-          <keycap>f</keycap>
-        </keycombo>): the current selection is inserted in the search field.</para>
+      <para>File &gt; Search for Selection (<keycombo> <keycap>C</keycap> <keycap>f</keycap> </keycombo>): the current selection is inserted in the search field.</para>
     </listitem>
 
     <listitem>
-      <para>File &gt; Close (<keycombo>
-          <keycap>C</keycap>
-          <keycap>w</keycap>
-        </keycombo>): close the search window (in the same way as
-      <keycap>Esc</keycap>)</para>
+      <para>File &gt; Close (<keycombo> <keycap>C</keycap> <keycap>w</keycap> </keycombo>): close the search window (same as <keycap>Esc</keycap>).</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Insert source (<keycombo>
-          <keycap>S</keycap>
-          <keycap>C</keycap>
-          <keycap>i</keycap>
-        </keycombo>): insert current segment source.</para>
+      <para>Edit &gt; Insert Source (<keycombo> <keycap>S</keycap> <keycap>C</keycap> <keycap>i</keycap> </keycombo>): insert the content of the current source segment.</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Replace with source (<keycombo>
-          <keycap>S</keycap>
-          <keycap>C</keycap>
-          <keycap>r</keycap>
-        </keycombo>): replace with current segment source.</para>
+      <para>Edit &gt; Replace with Source (<keycombo> <keycap>S</keycap> <keycap>C</keycap> <keycap>r</keycap> </keycombo>): replace the contents of the search field with those of the  current source segment.</para>
     </listitem>
 
     <listitem>
@@ -95,33 +60,29 @@
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Reset Options: reset the Search window options.</para>
+      <para>Edit &gt; Reset Options: reset the search window options.</para>
     </listitem>
   </itemizedlist>
 
   <section id="windows.text.search.methods">
-    <title id="windows.text.search.methods.title">Search methods and options</title>
+    <title id="windows.text.search.methods.title">Search types and options</title>
 
-    <para>Select the method using the radio buttons. The following search
-    methods are available:</para>
+    <para>Use the  radio buttons to select the type of search. The following search types are available:</para>
 
     <variablelist>
       <varlistentry id="search.methods.exact">
         <term id="search.methods.exact.title">Exact search</term>
         <listitem>
-          <para>Search for the string exactly as it has been entered in the search field.</para>
-		  <para>It is the equivalent of a web search surrounded by quotation marks.</para>
+          <para>Search for the string exactly as it was entered in the search field.</para>
+		  <para>It is equivalent to a web search enclosed in quotation marks.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="search.methods.regex">
         <term id="search.methods.regex.title">Regular expressions</term>
         <listitem>
-          <para>The search string will be treated as a regular expression.</para>
-		  <para>Regular expressions are a very powerful way to search for
-		  complex or general patterns and not exact strings. See <link
-		  linkend="appendix.regexp" endterm="appendix.regexp.title"/> for
-		  details.</para>
+          <para>Treat the search string as a regular expression.</para>
+		  <para>Regular expressions are a very powerful way to search for general or  complex patterns rather than exact strings. See <link linkend="appendix.regexp" endterm="appendix.regexp.title"/> for details.</para>
 		  <para>The replacement string supports references to groups defined in
 		  the search string. Use <code>$n</code> to refer to the
 		  <code>nth</code> group.</para>
@@ -129,79 +90,49 @@
       </varlistentry>
     </variablelist>
 
-    <para>In exact searches, the wild card search characters
-    <code>*</code> and <code>?</code> can be used:</para>
+    <para>The <code>*</code> and <code>?</code> wild card search characters can be used in exact searches:</para>
 
     <itemizedlist>
       <listitem>
-        <para>'*' matches zero or more characters, from the current position
-        in a given word to its end. The search term <literal>'run*'</literal>
-        for example would match words <literal>'run'</literal>,
-        <literal>'runs'</literal> and <literal>'running'</literal>.</para>
+        <para>'*' matches zero or more characters, from the current position up to the end of a word. The search term <literal>'run*'</literal>, for example, matches <literal>'run'</literal>, <literal>'runs'</literal> and <literal>'running'</literal>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>'?' matches any single character. For instance,
-        <literal>'run?'</literal> would match the word
-        <literal>'runs'</literal> and <literal>'runn'</literal> in the word
-        <literal>'running'</literal>.</para>
+        <para>'?' matches any single character. For instance, <literal>'run?'</literal> matches <literal>'runs'</literal>, as well as <literal> the 'runn'</literal> portion of <literal>'running'</literal> or <literal>'runner'</literal>.</para>
       </listitem>
     </itemizedlist>
-<warning><para>'*' and '?'  have a special meaning in regular expressions, so wild
-card search, as described here, applies to exact search only.</para></warning>
+<warning><para>The '*' and '?' characters have a special meaning in regular expressions. Therefore, the wild card searches described above only apply to exact searches.</para></warning>
   </section>
 
   <section id="windows.text.search.options">
 	<title id="windows.text.search.options.title">Options</title>
 	
   <variablelist>
-	<varlistentry><term>Case sensitive</term><listitem><para>letter case is
-	observed.</para></listitem></varlistentry>
+	<varlistentry><term>Case sensitive</term><listitem><para>Only returns results with the same letter case as the search terms.</para></listitem></varlistentry>
 	
-	<varlistentry><term>Space matches nbsp</term><listitem><para>a space
-	character put in search entry can match either a normal space character or a
-	non-breacking space (\u00A) character.</para></listitem></varlistentry>
+	<varlistentry><term>Space matches nbsp</term><listitem><para>Space characters in search terms with match both a normal space and a non-breacking space (\u00A) character.</para></listitem></varlistentry>
 
-	<varlistentry><term>Untranslated</term><listitem><para>search
-	<emphasis>also</emphasis> in untranslated
-	segments.</para></listitem></varlistentry>
+	<varlistentry><term>Untranslated</term><listitem><para><emphasis>Also</emphasis>  search in untranslated segments.</para></listitem></varlistentry>
   </variablelist>
  
-    <para>If you click on the button <guibutton>Advanced options</guibutton>
-    additional criteria such as: person who authored or changed the translation, date
-	of translation (modification) can be selected.</para>
+    <para>You can click on the <guibutton>Show Advanced Options</guibutton> button  to select additional criteria such as the person who authored or changed the translation, or the date and time of translation (modification).</para>
 
-	<para>When <guilabel>Full/Half width char insensitive</guilabel> option is
-	checked, searches for fullwidth forms (CJK characters) will match halfwidth
-	forms and vice versa.</para>
+	<para>Checking the <guilabel>Full/Half width char insensitive</guilabel> option will return results that match both the full- and half-width forms (CJK characters) of the characters in the search terms.</para>
   </section>
 
   <section id="search.result.display">
     <title id="search.result.display.title">Search results display</title>
 
-    <para>Matches are displayed in order of appearance in the
-    project. Translated segments are displayed with the original text at the top
-    and the translated text at the bottom, untranslated segments are displayed
-    as the source only.</para>
+    <para>Matches are displayed in their order of appearance in the project. For translated segments, the original text is displayed above the translated text. Only the source text is displayed for untranslated segments.</para>
 
-    <para>In the search window, you can use standard shortcuts (<keycombo>
-        <keycap>C</keycap>
-        <keycap>n</keycap>
-      </keycombo>, <keycombo>
-        <keycap>C</keycap>
-        <keycap>p</keycap>
-      </keycombo>) to move from one segment to another.</para>
+    <para>You can use the standard (<keycombo> <keycap>C</keycap> <keycap>n</keycap> </keycombo>, <keycombo> <keycap>C</keycap> <keycap>p</keycap> </keycombo>) shortcuts to move from one segment to another in the search window.</para>
 
-    <para>Double-click on a segment to open it in the <link
-    linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+    <para>Double-click on a segment to open it in the <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
 
-  	<para>Check <guilabel>Auto-sync with Editor</guilabel> to have
-  	selected segments automatically opened in the Editor.</para>
+  	<para>Check the <guilabel>Auto-sync with Editor</guilabel> box at the bottom of the search window to have selected segments open in the Editor automatically.</para>
 
-  	<para>Check <guilabel>Back to the initial segment on close</guilabel> to
-  	automatically go back to the segment where you were when you started the
-  	search, after you close the window.</para>
+  	<para>Check the <guilabel>Back to the initial segment on close</guilabel> box to automatically return to the segment you were in when you started the search after you close the window.</para>
   </section>  
 </section>

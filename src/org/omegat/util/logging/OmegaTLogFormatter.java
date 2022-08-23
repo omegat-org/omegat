@@ -30,7 +30,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -47,7 +47,8 @@ import org.omegat.util.StringUtil;
  */
 public class OmegaTLogFormatter extends Formatter {
 
-    protected static final String LINE_MARK;
+    // Line mark is a five-character random number
+    protected static final String LINE_MARK = String.format("%05d", ThreadLocalRandom.current().nextInt(100000));
 
     private String logMask;
     private boolean isMaskContainsMark;
@@ -70,27 +71,6 @@ public class OmegaTLogFormatter extends Formatter {
             return new SimpleDateFormat(defaultTimeFormat);
         }
     };
-
-    static {
-        // get a positive random number
-        Random generator = new Random();
-        generator.setSeed(System.currentTimeMillis()); // use current time as
-        // seed
-        int random = generator.nextInt(Integer.MAX_VALUE);
-
-        // convert the number to string, 5 chars max, pad with zero's if
-        // necessary
-        String sessionID = String.valueOf(random);
-        if (sessionID.length() > 5) {
-            sessionID = sessionID.substring(0, 5);
-        } else if (sessionID.length() < 5) {
-            for (int i = 5; i > sessionID.length(); i++) {
-                sessionID = "0" + sessionID;
-            }
-        }
-
-        LINE_MARK = sessionID;
-    }
 
     /**
      * Initialize formatter.

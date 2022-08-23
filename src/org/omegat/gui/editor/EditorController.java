@@ -117,6 +117,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TMXProp;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.IDropInfo;
 import org.omegat.util.gui.StaticUIUtils;
@@ -209,6 +210,9 @@ public class EditorController implements IEditor {
     private Component entriesFilterControlComponent;
 
     private SegmentExportImport segmentExportImport;
+
+    protected String currentEntryOrigin;
+    protected String translationFromOrigin;
 
     /**
      * Previous translations. Used for optimistic locking.
@@ -400,9 +404,10 @@ public class EditorController implements IEditor {
         }
         int loadFrom = lastLoaded + 1;
         int loadTo = Math.min(m_docSegList.length - 1, loadFrom + count - 1);
+        Document3 doc = editor.getOmDocument();
         for (int i = loadFrom; i <= loadTo; i++) {
             SegmentBuilder builder = m_docSegList[i];
-            insertStartParagraphMark(editor.getOmDocument(), builder);
+            insertStartParagraphMark(doc, builder, doc.getLength());
             builder.createSegmentElement(false, Core.getProject().getTranslationInfo(builder.ste));
             builder.addSegmentSeparator();
         }
@@ -426,6 +431,7 @@ public class EditorController implements IEditor {
             // offsets changing as content is prepended, but I (AMK) have not
             // properly investigated.
             markerController.reprocessImmediately(builder);
+            insertStartParagraphMark(editor.getOmDocument(), builder, 0);
         }
         firstLoaded = loadTo;
     };
@@ -758,7 +764,7 @@ public class EditorController implements IEditor {
         for (int i = 0; i < m_docSegList.length; i++) {
             if (i >= firstLoaded && i <= lastLoaded) {
                 SegmentBuilder sb = m_docSegList[i];
-                insertStartParagraphMark(doc, sb);
+                insertStartParagraphMark(doc, sb, doc.getLength());
                 sb.createSegmentElement(false, Core.getProject().getTranslationInfo(sb.ste));
                 sb.addSegmentSeparator();
             }
@@ -798,15 +804,20 @@ public class EditorController implements IEditor {
         editor.repaint();
     }
 
-    private void insertStartParagraphMark(Document3 doc, SegmentBuilder sb) {
+    private void insertStartParagraphMark(Document3 doc, SegmentBuilder sb, int startOffset) {
         if (Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS, false)) {
             if (sb.getSourceTextEntry().isParagraphStart()) {
+                doc.trustedChangesInProgress = true;
+                StaticUIUtils.setCaretUpdateEnabled(editor, false);
                 try {
-                    doc.insertString(doc.getLength(), Preferences.getPreferenceDefault(
+                    doc.insertString(startOffset, Preferences.getPreferenceDefault(
                             Preferences.MARK_PARA_TEXT, Preferences.MARK_PARA_TEXT_DEFAULT) + "\n\n",
                             settings.getParagraphStartAttributeSet());
                 } catch (BadLocationException ex) {
                     throw new RuntimeException(ex);
+                } finally {
+                    doc.trustedChangesInProgress = false;
+                    StaticUIUtils.setCaretUpdateEnabled(editor, true);
                 }
             }
         }
@@ -1183,6 +1194,12 @@ public class EditorController implements IEditor {
             } else {
                 // new translation is not empty and not equals to source - just change
                 newen.translation = newTrans;
+                if (currentEntryOrigin != null && newTrans.equals(translationFromOrigin)) {
+                    if (newen.otherProperties == null) {
+                        newen.otherProperties = new ArrayList<>();
+                    }
+                    newen.otherProperties.add(new TMXProp(ProjectTMX.PROP_ORIGIN, currentEntryOrigin));
+                }
             }
         }
 
@@ -1191,6 +1208,7 @@ public class EditorController implements IEditor {
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
         boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
+        resetOrigin();
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {
             // Only note was changed, and we are not making a new alt translation.
@@ -1295,6 +1313,7 @@ public class EditorController implements IEditor {
         }
 
         doc.stopEditMode();
+        resetOrigin();
     }
 
     /**
@@ -1693,9 +1712,18 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     @Override
-    public void replaceEditText(String text) {
+    public void replaceEditText(final String text) {
+        replaceEditText(text, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void replaceEditText(String text, final String origin) {
         UIThreadsUtil.mustBeSwingThread();
 
+        setOrigin(text, origin);
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
             text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste),
@@ -1718,6 +1746,7 @@ public class EditorController implements IEditor {
     public void replacePartOfText(final String text, int start, int end) {
         UIThreadsUtil.mustBeSwingThread();
 
+        resetOrigin();
         CalcMarkersThread thread = markerController.markerThreads[markerController
                 .getMarkerIndex(ComesFromMTMarker.class.getName())];
         ((ComesFromMTMarker) thread.marker).setMark(null, null);
@@ -1727,14 +1756,21 @@ public class EditorController implements IEditor {
         editor.select(start + off, end + off);
         editor.replaceSelection(text);
     }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void replaceEditTextAndMark(final String text, final String origin) {
+        replaceEditText(text, origin);
+        markAsComesFromMT(text);
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void replaceEditTextAndMark(String text) {
-        replaceEditText(text);
-        markAsComesFromMT(text);
+        replaceEditTextAndMark(text, null);
     }
 
     private void markAsComesFromMT(String text) {
@@ -1808,7 +1844,7 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         editor.checkAndFixCaret();
-
+        resetOrigin();
         SegmentBuilder builder = m_docSegList[displayedEntryIndex];
         if (builder.hasRTL && targetLangIsRTL) {
             text = EditorUtils.addBidiAroundTags(EditorUtils.removeDirectionCharsAroundTags(text, builder.ste),
@@ -1899,6 +1935,20 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         return dockableSelected ? editor.getSelectedText() : null;
+    }
+
+    private void setOrigin(final String text, final String origin) {
+        if (origin != null) {
+            currentEntryOrigin = origin;
+            translationFromOrigin = text;
+        } else {
+            resetOrigin();
+        }
+    }
+
+    private void resetOrigin() {
+        currentEntryOrigin = null;
+        translationFromOrigin = null;
     }
 
     /** Loads Instant start article */

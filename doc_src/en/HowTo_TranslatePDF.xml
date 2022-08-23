@@ -6,7 +6,7 @@
 
 <para>PDF files are a special case. They contain text formatting
   information, but such information cannot be reused by
-  <application>OmegaT</application> in order to create target files.
+  OmegaT in order to create target files.
   Thus, PDF files are handled as plain text files, and output files are
   plain text files.</para>
   <para>If you need to reproduce text formatting (as well as other

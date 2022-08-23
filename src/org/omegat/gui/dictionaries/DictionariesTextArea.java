@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik
                2012 Jean-Christophe Helary
                2015 Aaron Madlon-Kay
+               2021 Aaron Madlon-Kay, Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -65,6 +66,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.dictionaries.DictionariesManager;
 import org.omegat.core.dictionaries.DictionaryEntry;
+import org.omegat.core.dictionaries.IDictionary;
 import org.omegat.core.dictionaries.IDictionaryFactory;
 import org.omegat.core.events.IEditorEventListener;
 import org.omegat.gui.common.EntryInfoSearchThread;
@@ -80,6 +82,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.ExternalBrowserLaunchingLinkListener;
 import org.omegat.util.gui.IPaneMenu;
+import org.omegat.util.gui.SoundActionListener;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -116,6 +119,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 
         addMouseListener(mouseCallback);
         addHyperlinkListener(new ExternalBrowserLaunchingLinkListener());
+        addHyperlinkListener(new SoundActionListener());
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
@@ -151,13 +155,20 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
         baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add default styles
         Font font = getFont();
-        baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "
-                + " font-size: " + font.getSize() + "; "
-                + " font-style: " + (font.getStyle() == Font.BOLD ? "bold"
-                        : font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
-                + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + "; "
-                + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + ";} "
-                + ".word {font-size: " + (2 + font.getSize()) + "; font-style: bold; }"
+        int fontSize;
+        if (Preferences.isPreferenceDefault(Preferences.DICTIONARY_USE_FONT, true)) {
+            fontSize = font.getSize();
+        } else {
+            fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_DICTIONARY_FONT_SIZE));
+        }
+        baseStyleSheet.addRule("body { font-family: " + font.getName() + "; font-size: " + fontSize + ";"
+                + " font-style: " + (font.getStyle() == Font.ITALIC ? "italic" : "normal") + ";"
+                + " font-weight: " + (font.getStyle() == Font.BOLD ? "bold" : "normal") + ";"
+                + " color: " + EditorColor.COLOR_FOREGROUND.toHex() + ";"
+                + " background: " + EditorColor.COLOR_BACKGROUND.toHex() + ";}"
+                + " .word {font-size: 1.2em ; font-weight: bold;} .entry {line-height: 1.1;} "
+                + " .article {font-size: 1.0em ;} .details {font-size: 0.8em ;}"
+                + " .paragraph-start {font-size: 0.8em ; color: " + EditorColor.COLOR_PARAGRAPH_START + ";} "
                 );
         htmlEditorKit.setStyleSheet(baseStyleSheet);
         setEditorKit(htmlEditorKit);
@@ -195,16 +206,28 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         UIThreadsUtil.mustBeSwingThread();
         HTMLDocument doc = (HTMLDocument) getDocument();
 
+        // multiple entry can be existed for each query words,
+        // try to get first one.
         int index = displayedWords.indexOf(word.toLowerCase());
-        if (index == -1) {
-            return;
+        if (index == -1 && manager.doFuzzyMatching()) {
+            // when not found and fuzzy matching allowed,retry with stemmed word
+            String[] stemmed = manager.getStemmedWords(word);
+            if (stemmed.length == 0) {
+                return;
+            }
+            index = displayedWords.indexOf(stemmed[0]);
+            if (index == -1) {
+                return;
+            }
         }
         Element el = doc.getElement(Integer.toString(index));
         if (el == null) {
             return;
         }
         int start = el.getStartOffset();
-        int end = el.getEndOffset();
+        // When trying to select the last word, Swing cannot make the rectangle
+        // if the end is pointing past the last character.
+        int end = Math.max(el.getEndOffset() - 1, start);
         try {
             // Start position of article
             Rectangle startRect = Java8Compat.modelToView(this, start);
@@ -220,7 +243,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 scrollRectToVisible(startRect);
             }
         } catch (BadLocationException ex) {
-            // Shouldn't be thrown
+            Log.log(ex);
         }
     }
 
@@ -234,7 +257,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     protected void startSearchThread(SourceTextEntry newEntry) {
         if (!Preferences.isPreferenceDefault(Preferences.DICTIONARY_AUTO_SEARCH, true)) {
             return;
-        };
+        }
         new DictionaryEntriesSearchThread(newEntry).start();
     }
 
@@ -272,16 +295,16 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         int i = 0;
         for (DictionaryEntry de : data) {
             if (wasPrev) {
-                txt.append("<br><hr>");
+                txt.append("<hr style=\"line-height: 1.3; color: #777\">");
             } else {
                 wasPrev = true;
             }
-            txt.append("<div id =\"").append(i).append("\"><b><span class=\"word\">");
-            txt.append(de.getWord());
-            txt.append("</span></b>");
-            txt.append(" - ").append(de.getArticle());
+            txt.append("<div id=\"").append(i).append("\" class=\"entry\">");
+            txt.append("<b><span class=\"word\">");
+            txt.append(de.getWord().replaceAll("\n", " ")).append("</span></b>");
+            txt.append(" - <span class=\"article\">").append(de.getArticle()).append("</span>");
             txt.append("</div>");
-            displayedWords.add(de.getWord().toLowerCase());
+            displayedWords.add(de.getQuery());
             i++;
         }
         txt.append("</html>");
@@ -444,6 +467,16 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     @Override
     public void removeDictionaryFactory(IDictionaryFactory factory) {
         manager.removeDictionaryFactory(factory);
+    }
+
+    @Override
+    public void addDictionary(IDictionary dictionary) {
+        manager.addOnlineDictionary(dictionary);
+    }
+
+    @Override
+    public void removeDictionary(IDictionary dictionary) {
+        manager.removeOnlineDictionary(dictionary);
     }
 
     @Override

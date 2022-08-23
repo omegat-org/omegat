@@ -517,7 +517,7 @@ return this;
 })(jQuery);
 var wh = (function () {
 var toc_entries = [
-["Installing and running OmegaT\n                     ","chapter.installing.and.running.html",[
+["Installing and running OmegaT","chapter.installing.and.running.html",[
 ["Windows Users","chapter.installing.and.running.html#Windows.users",null],
 ["Linux (Intel) Users","chapter.installing.and.running.html#Linux.Intel.users",null],
 ["macOS Users","chapter.installing.and.running.html#MAC.OSX.users",null],

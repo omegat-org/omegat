@@ -29,12 +29,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -104,8 +103,11 @@ public class MozillaLangFilter extends AbstractFilter {
     @Override
     public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
             IOException {
+        if (outfile == null) {
+            return null;
+        }
         // lang file use UTF8 encoding
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), StandardCharsets.UTF_8));
+        return Files.newBufferedWriter(outfile.toPath(), StandardCharsets.UTF_8);
     }
 
     @Override
@@ -128,25 +130,9 @@ public class MozillaLangFilter extends AbstractFilter {
             TranslationException {
 
         inEncodingLastParsedFile = fc.getInEncoding();
-        BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
-        try {
-            BufferedWriter writer;
-
-            if (outFile != null) {
-                writer = createWriter(outFile, fc.getOutEncoding());
-            } else {
-                writer = null;
-            }
-
-            try {
-                processFile(reader, writer, fc);
-            } finally {
-                if (writer != null) {
-                    writer.close();
-                }
-            }
-        } finally {
-            reader.close();
+        try (BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
+             BufferedWriter writer = createWriter(outFile, fc.getOutEncoding())) {
+            processFile(reader, writer, fc);
         }
     }
 

@@ -67,7 +67,7 @@ ext {
         if (!remote.empty) {
             remote
         } else {
-            logger.warning("Could not detect git remote name. Assuming 'origin'.")
+            logger.warn("Could not detect git remote name. Assuming 'origin'.")
             'origin'
         }
     }

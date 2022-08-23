@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
 
 /**
@@ -66,8 +65,8 @@ public class ImportFromAutoTMX {
      */
     void process(ExternalTMX tmx, boolean isEnforcedTMX) {
 
-        for (PrepareTMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
-            List<SourceTextEntry> list = existEntries.get(e.source);
+        for (ITMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
+            List<SourceTextEntry> list = existEntries.get(e.getSourceText());
             if (list == null) {
                 continue; // there is no entries for this source
             }
@@ -93,9 +92,12 @@ public class ImportFromAutoTMX {
                         continue;
                     }
                     if (isEnforcedTMX && (!existTranslation.isTranslated()
-                            || existTranslation.linked != TMXEntry.ExternalLinked.xENFORCED)) {
-                        // If there's no translation or if the existing translation doesn't
-                        // come from an enforced TM.
+                            || existTranslation.linked != TMXEntry.ExternalLinked.xENFORCED
+                            || (!isDefaultTranslation && existTranslation.defaultTranslation))) {
+                        // If there's
+                        // - no translation or
+                        // - the existing translation doesn't come from an enforced TM or
+                        // - the existing enforced translation was a default translation but this one is not
                         setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xENFORCED);
                     } else if (!existTranslation.isTranslated()) {
                         // default translation not exist - use from auto tmx
@@ -113,13 +115,13 @@ public class ImportFromAutoTMX {
                             || existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-ice
                         if (hasICE
-                                && !Objects.equals(existTranslation.translation, e.translation)) {
+                                && !Objects.equals(existTranslation.getTranslationText(), e.getTranslationText())) {
                             setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
                         }
                     } else if (existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-100pc
                         if (has100PC
-                                && !Objects.equals(existTranslation.translation, e.translation)) {
+                                && !Objects.equals(existTranslation.getTranslationText(), e.getTranslationText())) {
                             setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
                         }
                     }
@@ -128,13 +130,13 @@ public class ImportFromAutoTMX {
         }
     }
 
-    private boolean isAltTranslation(PrepareTMXEntry entry) {
-        if (entry.otherProperties == null) {
+    private boolean isAltTranslation(ITMXEntry entry) {
+        if (!entry.hasProperties()) {
             return false;
         }
         boolean hasFileProp = false;
         boolean hasOtherProp = false;
-        for (TMXProp p : entry.otherProperties) {
+        for (TMXProp p : entry.getProperties()) {
             if (p.getType().equals(ProjectTMX.PROP_FILE)) {
                 hasFileProp = true;
             } else if (p.getType().equals(ProjectTMX.PROP_ID)
@@ -148,12 +150,12 @@ public class ImportFromAutoTMX {
         return EntryKey.isIgnoreFileContext() ? hasOtherProp : hasFileProp;
     }
 
-    private boolean altTranslationMatches(PrepareTMXEntry entry, EntryKey key) {
-        if (entry.otherProperties == null) {
+    private boolean altTranslationMatches(ITMXEntry entry, EntryKey key) {
+        if (!entry.hasProperties()) {
             return false;
         }
         String file = null, id = null, next = null, prev = null, path = null;
-        for (TMXProp p : entry.otherProperties) {
+        for (TMXProp p : entry.getProperties()) {
             if (ProjectTMX.PROP_FILE.equals(p.getType())) {
                 file = p.getValue();
             } else if (ProjectTMX.PROP_ID.equals(p.getType())) {
@@ -169,20 +171,14 @@ public class ImportFromAutoTMX {
                 path = p.getValue();
             }
         }
-        return key.equals(new EntryKey(file, entry.source, id, prev, next, path));
+        return key.equals(new EntryKey(file, entry.getSourceText(), id, prev, next, path));
     }
 
-    private void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
+    private void setTranslation(SourceTextEntry entry, ITMXEntry trans, boolean defaultTranslation,
             TMXEntry.ExternalLinked externalLinked) {
-        if (StringUtil.isEmpty(trans.note)) {
-            trans.note = null;
-        }
-
-        trans.source = entry.getSrcText();
-
         TMXEntry newTrEntry;
 
-        if (trans.translation == null && trans.note == null) {
+        if ((!trans.isTranslated()) && (!trans.hasNote())) {
             // no translation, no note
             newTrEntry = null;
         } else {

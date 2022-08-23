@@ -36,6 +36,7 @@ import org.junit.Test;
 
 public class JsonParserTest {
 
+    @Deprecated
     @Test
     public void testParse() throws Exception {
         {
@@ -53,11 +54,13 @@ public class JsonParserTest {
         }
     }
 
+    @Deprecated
     @Test(expected = ScriptException.class)
     public void testParseEmpty() throws Exception {
         JsonParser.parse("");
     }
 
+    @Deprecated
     @Test(expected = ScriptException.class)
     public void testParseInvalid() throws Exception {
         // Trailing comma is invalid

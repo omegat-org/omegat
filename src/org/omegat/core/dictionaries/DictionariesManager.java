@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik
                2011 Didier Briel
                2015 Aaron Madlon-Kay
+               2021 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -58,16 +59,17 @@ import org.omegat.util.Preferences;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public class DictionariesManager implements DirectoryMonitor.Callback {
     public static final String IGNORE_FILE = "ignore.txt";
-    public static final String DICTIONARY_SUBDIR = "dictionary";
 
     private final IDictionaries pane;
     protected DirectoryMonitor monitor;
-    protected final List<IDictionaryFactory> factories = new ArrayList<IDictionaryFactory>();
-    protected final Map<String, IDictionary> dictionaries = new TreeMap<String, IDictionary>();
-    protected final Set<String> ignoreWords = new TreeSet<String>();
+    protected final List<IDictionaryFactory> factories = new ArrayList<>();
+    protected final Map<String, IDictionary> dictionaries = new TreeMap<>();
+    protected final List<IDictionary> onlineDictionaries = new ArrayList<>();
+    protected final Set<String> ignoreWords = new TreeSet<>();
 
     private Language indexLanguage;
     private ITokenizer tokenizer;
@@ -80,6 +82,10 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         tokenizer = new DefaultTokenizer();
     }
 
+    /**
+     * Add dictionary factory.
+     * @param dict factory to register.
+     */
     public void addDictionaryFactory(IDictionaryFactory dict) {
         synchronized (factories) {
             factories.add(dict);
@@ -90,9 +96,33 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         }
     }
 
+    /**
+     * Remove dictionary Factory.
+     * @param factory factory to unregister.
+     */
     public void removeDictionaryFactory(IDictionaryFactory factory) {
         synchronized (factories) {
             factories.remove(factory);
+        }
+    }
+
+    /**
+     * Add online dictionary(dictionary without local data).
+     * @param dict dictionary lookup driver.
+     */
+    public void addOnlineDictionary(IDictionary dict) {
+        synchronized (onlineDictionaries) {
+            onlineDictionaries.add(dict);
+        }
+    }
+
+    /**
+     * Remove online dictionary.
+     * @param dict dictionary lookup driver to remove from registration.
+     */
+    public void removeOnlineDictionary(IDictionary dict) {
+        synchronized (onlineDictionaries) {
+            onlineDictionaries.remove(dict);
         }
     }
 
@@ -230,32 +260,52 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
     public List<DictionaryEntry> findWords(Collection<String> words) {
         List<IDictionary> dicts;
         synchronized (this) {
-            dicts = new ArrayList<IDictionary>(dictionaries.values());
+            dicts = new ArrayList<>(dictionaries.values());
+            dicts.addAll(onlineDictionaries);
         }
-        return words.stream().filter(word -> !isIgnoreWord(word)).flatMap(word -> {
-            return dicts.stream().flatMap(dict -> doLookUp(dict, word).stream());
-        }).collect(Collectors.toList());
+        Collection<String> queryWords = words.stream()
+                .filter(word -> !isIgnoreWord(word) && !isStopWord(word))
+                .collect(Collectors.toList());
+        return dicts.parallelStream()
+                .map(dict -> doLookUp(dict, queryWords))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
-    private List<DictionaryEntry> doLookUp(IDictionary dict, String word) {
-        String[] stemmed = tokenizer.tokenizeWordsToStrings(word, StemmingMode.MATCHING);
-        if (stemmed.length == 0) {
-            // Stop word. Skip.
+    private List<DictionaryEntry> doLookUp(IDictionary dict, Collection<String> words) {
+        List<DictionaryEntry> result;
+        try {
+            result = dict.retrieveArticles(words);
+        } catch (Exception ex) {
+            Log.log(ex);
             return Collections.emptyList();
         }
+        if (!doFuzzyMatching()) {
+            return result;
+        }
+        // The verbatim word didn't get any hits; try the stem.
         try {
-            List<DictionaryEntry> result = dict.readArticles(word);
-            if (!result.isEmpty()) {
-                return result;
+            List<String> notFound = new ArrayList<>(words);
+            notFound.removeAll(result.stream().map(DictionaryEntry::getQuery).collect(Collectors.toSet()));
+            List<String> predictive = new ArrayList<>();
+            for (String word : notFound) {
+                String[] stemmed = tokenizer.tokenizeWordsToStrings(word, StemmingMode.MATCHING);
+                if (stemmed.length > 1) {
+                    predictive.add(stemmed[0]);
+                }
             }
-            // The verbatim word didn't get any hits; try the stem.
-            if (stemmed.length > 1 && doFuzzyMatching()) {
-                return dict.readArticlesPredictive(stemmed[0]);
+            if (predictive.size() > 0) {
+                result.addAll(dict.retrieveArticlesPredictive(predictive));
             }
         } catch (Exception ex) {
             Log.log(ex);
         }
-        return Collections.emptyList();
+        return result;
+    }
+
+    private boolean isStopWord(final String word) {
+        String[] stemmed = tokenizer.tokenizeWordsToStrings(word, StemmingMode.MATCHING);
+        return stemmed.length == 0;
     }
 
     public void setIndexLanguage(Language indexLanguage) {
@@ -266,8 +316,11 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
         this.tokenizer = tokenizer;
     }
 
-    // Implemented as method for testing purposes
-    protected boolean doFuzzyMatching() {
+    public boolean doFuzzyMatching() {
         return Preferences.isPreferenceDefault(Preferences.DICTIONARY_FUZZY_MATCHING, true);
+    }
+
+    public String[] getStemmedWords(final String word) {
+        return tokenizer.tokenizeWordsToStrings(word, StemmingMode.MATCHING);
     }
 }

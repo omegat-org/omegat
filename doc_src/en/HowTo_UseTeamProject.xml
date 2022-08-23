@@ -19,7 +19,7 @@
   see and use translations added during that period.</para>
 
   <para>The interval of 3 minutes can be changed in <link linkend="dialogs.preferences.savingandoutput"><menuchoice>
-      <guimenuitem>Options</guimenuitem>
+      <guimenu>Options</guimenu>
 
       <guimenuitem>Preferences</guimenuitem>
 
@@ -34,11 +34,11 @@
 
   <itemizedlist>
     <listitem>
-      <para><filename>omegat/project_save.tmx</filename></para>
+      <para>omegat/project_save.tmx</para>
     </listitem>
 
     <listitem>
-      <para><filename>glossary/glossary.txt</filename></para>
+      <para>glossary/glossary.txt</para>
     </listitem>
   </itemizedlist>
 
@@ -51,12 +51,12 @@
 
   <para><orderedlist>
       <listitem>
-        <para>copy the files to the <filename>/source</filename> folder</para>
+        <para>copy the files to the <filename class="directory">source</filename> folder</para>
       </listitem>
 
       <listitem>
         <para>use <menuchoice>
-            <guimenuitem>Project</guimenuitem>
+            <guimenu>Project</guimenu>
 
             <guimenuitem>Commit Source Files</guimenuitem>
           </menuchoice></para>

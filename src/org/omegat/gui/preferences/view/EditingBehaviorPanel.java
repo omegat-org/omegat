@@ -9,6 +9,7 @@
                2012 Didier Briel
                2016 Aaron Madlon-Kay
                2019 Briac Pilpre
+	       2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -65,8 +66,6 @@ public class EditingBehaviorPanel extends JPanel {
         similarityLabel = new javax.swing.JLabel();
         similaritySpinner = new javax.swing.JSpinner();
         prefixLabel = new javax.swing.JLabel();
-        paraMarkText = new javax.swing.JTextField();
-        paraMarkLabel = new javax.swing.JLabel();
         prefixText = new javax.swing.JTextField();
         convertNumbers = new javax.swing.JCheckBox();
         allowTranslationEqualToSource = new javax.swing.JCheckBox();
@@ -75,9 +74,12 @@ public class EditingBehaviorPanel extends JPanel {
         allowTagEditing = new javax.swing.JCheckBox();
         tagValidateOnLeave = new javax.swing.JCheckBox();
         cbSaveAutoStatus = new javax.swing.JCheckBox();
+        cbSaveOrigin = new javax.swing.JCheckBox();
         initialSegCountLabel = new javax.swing.JLabel();
         initialSegCountSpinner = new javax.swing.JSpinner();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        paraMarkLabel = new javax.swing.JLabel();
+        paraMarkText = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new java.awt.GridBagLayout());
@@ -87,7 +89,6 @@ public class EditingBehaviorPanel extends JPanel {
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setText(OStrings.getString("GUI_WORKFLOW_DESCRIPTION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
-        descriptionTextArea.setDragEnabled(false);
         descriptionTextArea.setFocusable(false);
         descriptionTextArea.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -253,12 +254,22 @@ public class EditingBehaviorPanel extends JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         add(cbSaveAutoStatus, gridBagConstraints);
 
+        org.openide.awt.Mnemonics.setLocalizedText(cbSaveOrigin, OStrings.getString("WG_SAVE_ORIGIN")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        add(cbSaveOrigin, gridBagConstraints);
+
         initialSegCountLabel.setLabelFor(initialSegCountSpinner);
         org.openide.awt.Mnemonics.setLocalizedText(initialSegCountLabel, OStrings.getString("WG_INITIAL_SEGMENT_LOAD_COUNT")); // NOI18N
         initialSegCountLabel.setToolTipText(OStrings.getString("WG_INITIAL_SEGMENT_LOAD_COUNT_TOOLTIP")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
         add(initialSegCountLabel, gridBagConstraints);
@@ -266,35 +277,35 @@ public class EditingBehaviorPanel extends JPanel {
         initialSegCountSpinner.setToolTipText(OStrings.getString("WG_INITIAL_SEGMENT_LOAD_COUNT_TOOLTIP")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(initialSegCountSpinner, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 16;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         add(filler1, gridBagConstraints);
-        
-        // Paragraph mark
+
         paraMarkLabel.setLabelFor(paraMarkText);
         org.openide.awt.Mnemonics.setLocalizedText(paraMarkLabel, OStrings.getString("WG_PARA_MARK")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
         add(paraMarkLabel, gridBagConstraints);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 15;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipadx = 250;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         add(paraMarkText, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -306,6 +317,7 @@ public class EditingBehaviorPanel extends JPanel {
     javax.swing.JCheckBox allowTagEditing;
     javax.swing.JCheckBox allowTranslationEqualToSource;
     javax.swing.JCheckBox cbSaveAutoStatus;
+    javax.swing.JCheckBox cbSaveOrigin;
     javax.swing.JCheckBox convertNumbers;
     javax.swing.JRadioButton defaultRadio;
     private javax.swing.JTextArea descriptionTextArea;
@@ -313,11 +325,11 @@ public class EditingBehaviorPanel extends JPanel {
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel initialSegCountLabel;
     javax.swing.JSpinner initialSegCountSpinner;
-    private javax.swing.JLabel paraMarkLabel;
-    javax.swing.JTextField paraMarkText;
     javax.swing.JCheckBox insertFuzzyCheckBox;
     javax.swing.JRadioButton leaveEmptyRadio;
     private javax.swing.ButtonGroup ourButtonGroup;
+    javax.swing.JLabel paraMarkLabel;
+    javax.swing.JTextField paraMarkText;
     javax.swing.JLabel prefixLabel;
     javax.swing.JTextField prefixText;
     javax.swing.JLabel similarityLabel;

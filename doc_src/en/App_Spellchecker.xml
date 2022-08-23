@@ -128,19 +128,19 @@
     target language code to determine the language to be used : if the target
     language is Brazilian Portuguese (PT_BR), the subfolder with vocabularies
     must contain the two vocabulary files, called
-    <emphasis>pt_br.aff</emphasis> and <emphasis>pt_br.dic</emphasis>.</para>
+    <filename>pt_br.aff</filename> and <filename>pt_br.dic</filename>.</para>
 
     <para>If you have already translated a large body of text, and then
     realize the target language code of the project does not match the spell
     checker's language code (you specified pt_BR as the language, but there
     are no pt_BR vocabularies, for instance) you can simply copy the two
     corresponding files and rename them (e.g. from
-    <emphasis>pt_PT.aff</emphasis> and <emphasis>pt_PT.dic</emphasis> to
-    <emphasis>pt_BR.aff</emphasis> and <emphasis>pt_BR.dic</emphasis>). Of
+    <filename>pt_PT.aff</filename> and <filename>pt_PT.dic</filename> to
+    <filename>pt_BR.aff</filename> and <filename>pt_BR.dic</filename>). Of
     course it is much wiser, to take a short break and download the correct
     versions of the spell checker.</para>
 
-    <para>Note that <filename>Remove</filename> physically removes the
+    <para>Note that <guibutton>Remove</guibutton> physically removes the
     selected vocabularies. If they are used by some other application on your
     system, they will disappear from that application, too. If, for whatever
     reason, you need to do this from time to time, it may make sense to copy

@@ -250,10 +250,25 @@ public class RemoteRepositoryProvider {
      *            directory name or file name
      */
     public void copyFilesFromReposToProject(String localPath) throws IOException {
+        copyFilesFromReposToProject(localPath, "", true);
+    }
+
+    /**
+     * Copies all files under specified path that are mapped to local directory.
+     * <p>
+     * If propagateDelete flag is set true and path is empty (i.e. full project),
+     * also file deletions since last copy are propagated, i.e. if remote repo has
+     * file deletions, those files are deleted locally as well.
+     *
+     * @param localPath
+     *            directory name or file name
+     */
+    public void copyFilesFromReposToProject(final String localPath, final String postfix,
+                                            final boolean propagateDelete) throws IOException {
         String[] myForceExcludes = "".equals(localPath) ? forceExcludes : new String[]{};
         for (Mapping m : getMappings(localPath, myForceExcludes)) {
-            m.copyFromRepoToProject();
-            if ("".equals(localPath)) {
+            m.copyFromRepoToProject(postfix);
+            if (propagateDelete && "".equals(localPath)) {
                 m.propagateDeletes();
             }
         }
@@ -413,6 +428,10 @@ public class RemoteRepositoryProvider {
         }
 
         public void copyFromRepoToProject() throws IOException {
+            copyFromRepoToProject("");
+        }
+
+        public void copyFromRepoToProject(final String postfix) throws IOException {
             if (!matches()) {
                 throw new RuntimeException("Path doesn't match with mapping");
             }
@@ -425,7 +444,7 @@ public class RemoteRepositoryProvider {
                 // directory mapping
                 List<String> excludes = new ArrayList<>(repoMapping.getExcludes());
                 excludes.addAll(forceExcludes);
-                copy(from, to, filterPrefix, repoMapping.getIncludes(), excludes, null);
+                copy(from, to, filterPrefix, postfix, repoMapping.getIncludes(), excludes, null);
             } else if (!from.exists()) {
                 //e.g. you opened an omegat.properties to download a team project, but it refers to a remote repo location that doesn't exist.
                 throw new RuntimeException("Location '" + withoutLeadingSlash(repoMapping.getRepository()) + "' does not exist in repository " + repoDefinition.getUrl());
@@ -480,22 +499,31 @@ public class RemoteRepositoryProvider {
             return repo.getFileVersion(new File(repoMapping.getRepository(), filterPrefix).getPath());
         }
 
+        protected List<String> copy(File from, File to, String prefix, List<String> includes,
+                                    List<String> excludes, String eolConversionCharset) throws IOException {
+             return copy(from, to, prefix, "", includes, excludes, eolConversionCharset);
+        }
+
         /**
          * @return Relative paths of copied files, <em>with <code>/</code> at
          *         start and end</em>
          */
-        protected List<String> copy(File from, File to, String prefix, List<String> includes,
+        protected List<String> copy(File from, File to, String prefix, String postfix, List<String> includes,
                 List<String> excludes, String eolConversionCharset) throws IOException {
             prefix = withSlashes(prefix);
             List<String> relativeFiles = FileUtil.buildRelativeFilesList(from, includes, excludes);
             List<String> copied = new ArrayList<>();
             for (String rf : relativeFiles) {
-                rf = withSlashes(rf);
-                if (rf.startsWith("/.repositories/")) {
+                String srf = withSlashes(rf);
+                if (srf.startsWith("/.repositories/")) {
                     continue; // list from root - shouldn't travel to .repositories/
                 }
-                if (prefix.isEmpty() || prefix.equals("/") || rf.startsWith(prefix)) {
-                    copyFile(new File(from, rf), new File(to, rf), eolConversionCharset);
+                if (prefix.equals("/") || srf.startsWith(prefix)) {
+                    if (postfix.isEmpty()) {
+                        copyFile(new File(from, rf), new File(to, srf), eolConversionCharset);
+                    } else {
+                        copyFile(new File(from, rf), new File(to, rf + postfix), eolConversionCharset);
+                    }
                     copied.add(rf);
                 }
             }

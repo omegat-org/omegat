@@ -7,6 +7,7 @@
                2011 Briac Pilpre, Alex Buloichik
                2013 Didier Briel
                2016 Aaron Madlon-Kay
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -30,26 +31,27 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.GridBagConstraints;
 import java.awt.Window;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.List;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.omegat.gui.exttrans.MTConfigDialog;
-import org.omegat.util.JsonParser;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Support of IBM Watson machine translation.
@@ -93,7 +95,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
         String apiPassword = getCredential(PROPERTY_PASSWORD);
 
         if (apiLogin == null || apiLogin.isEmpty()) {
-            return OStrings.getString("IBMWATSON_API_KEY_NOTFOUND");
+            throw new Exception(OStrings.getString("IBMWATSON_API_KEY_NOTFOUND"));
         }
 
         // If the instance uses IAM authentication (https://console.bluemix.net/docs/services/watson/getting-started-iam.html)
@@ -103,17 +105,7 @@ public class IBMWatsonTranslate extends BaseTranslate {
             apiPassword = apiLogin;
             apiLogin = "apikey";
         }
-
-        StringBuilder json = new StringBuilder();
-        json.append("{");
-        json.append("\"text\":[" + JsonParser.quote(trText) + "],");
-
-        String modelId = getModelId();
-        if (modelId != null && !modelId.isEmpty()) {
-            json.append("\"model_id\":" + JsonParser.quote(modelId) + ",");
-        }
-        json.append("\"source\":" + JsonParser.quote(sLang.getLanguageCode().toUpperCase()) + ",");
-        json.append("\"target\":" + JsonParser.quote(tLang.getLanguageCode().toUpperCase()) + "}");
+        String json = createJsonRequest(sLang, tLang, trText);
 
         Map<String, String> headers = new TreeMap<>();
 
@@ -125,27 +117,20 @@ public class IBMWatsonTranslate extends BaseTranslate {
         // Let's opt out then.
         headers.put("X-Watson-Learning-Opt-Out", "true");
 
-        String authentication = "Basic " + Base64.getMimeEncoder(-1, new byte[] {}).encodeToString((apiLogin + ":" + apiPassword).getBytes(StandardCharsets.ISO_8859_1));
+        String authentication = "Basic " + Base64
+                .getMimeEncoder(-1, new byte[] {})
+                .encodeToString((apiLogin + ":" + apiPassword).getBytes(StandardCharsets.ISO_8859_1));
         headers.put("Authorization", authentication);
         headers.put("Accept", "application/json");
 
-        String v;
-        try {
-            v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json.toString(), headers);
-        } catch (IOException e) {
-            return e.getLocalizedMessage();
-        }
-
+        String v = HttpConnectionUtils.postJSON(getWatsonUrl() + "/v3/translate?version=" + WATSON_VERSION, json,
+                headers);
         String tr = getJsonResults(v);
-
         if (tr == null) {
-            return "";
+            return null;
         }
-
         tr = unescapeHTML(tr);
-
         tr = cleanSpacesAroundTags(tr, trText);
-
         putToCache(sLang, tLang, trText, tr);
         return tr;
     }
@@ -162,46 +147,40 @@ public class IBMWatsonTranslate extends BaseTranslate {
         return url;
     }
 
+    /**
+     * Create Watson request and return as json string.
+     */
+    protected String createJsonRequest(Language sLang, Language tLang, String trText) throws JsonProcessingException {
+        Map<String, Object> params = new TreeMap<>();
+        params.put("text", Collections.singletonList(trText));
+        String modelId = getModelId();
+        if (modelId != null && !modelId.isEmpty()) {
+            params.put("model_id", modelId);
+        }
+        params.put("source", sLang.getLanguageCode().toUpperCase());
+        params.put("target", tLang.getLanguageCode().toUpperCase());
+        return new ObjectMapper().writeValueAsString(params);
+    }
+
+    /**
+     * Parse Watson response and return translated text.
+     * @param json response.
+     * @return translated text.
+     */
     @SuppressWarnings("unchecked")
     protected String getJsonResults(String json) {
-        Map<String, Object> rootNode;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
+            JsonNode rootNode = mapper.readTree(json);
+            JsonNode translations = rootNode.get("translations");
+            if (translations.has(0)) {
+                return translations.get(0).get("translation").asText();
+            }
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_JSON_ERROR");
         }
-
-        //    {
-        //        "translations": [{
-        //          "translation": "translated text goes here."
-        //        }],
-        //        "word_count": 4,
-        //        "character_count": 53
-        //      }
-
-        try {
-            List<Object> translationsList = (List<Object>) rootNode.get("translations");
-            Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);
-            return translationNode.get("translation");
-        } catch (NullPointerException e) {
-            return null;
-        }
-    }
-
-    /** Convert entities to character. Ex: "&#39;" to "'". */
-    private String unescapeHTML(String text) {
-
-        text = text.replace("&quot;", "\"").replace("&gt;", ">").replace("&lt;", "<").replace("&amp;", "&");
-
-        Matcher m = RE_HTML.matcher(text);
-        while (m.find()) {
-            String g = m.group();
-            int codePoint = Integer.parseInt(m.group(1));
-            String cpString = String.valueOf(Character.toChars(codePoint));
-            text = text.replace(g, cpString);
-        }
-        return text;
+        return null;
     }
 
     @Override

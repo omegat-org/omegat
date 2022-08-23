@@ -28,6 +28,7 @@
 
 package org.omegat.core.data;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.omegat.util.TMXProp;
@@ -44,7 +45,7 @@ import org.omegat.util.TMXProp;
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
-public class PrepareTMXEntry {
+public class PrepareTMXEntry implements ITMXEntry {
     public String source;
     public String translation;
     public String changer;
@@ -65,6 +66,45 @@ public class PrepareTMXEntry {
         creator = e.creator;
         creationDate = e.creationDate;
         note = e.note;
+    }
+
+    public String getSourceText() {
+        return source;
+    }
+
+    public String getTranslationText() {
+        return translation;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public long getCreationDate() {
+        return creationDate;
+    }
+
+    public String getChanger() {
+        return changer;
+    }
+
+    public long getChangeDate() {
+        return changeDate;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public boolean hasProperties() {
+        return (otherProperties != null) && (otherProperties.size() > 0);
+    }
+
+    public List<TMXProp> getProperties() {
+        if (otherProperties == null) {
+            return null;
+        }
+        return Collections.unmodifiableList(otherProperties);
     }
 
     public String getPropValue(String propType) {

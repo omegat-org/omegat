@@ -11,7 +11,7 @@
 
   <note>
     <para>If you can not see all the panes (be it opened or minimized),
-    pressing <guisubmenu> Options &gt; Restore Main Window </guisubmenu>will
+    pressing <menuchoice><guimenu>Options</guimenu><guilabel>Restore Main Window</guilabel></menuchoice> will
     restore them to the state, defined in the installation.</para>
   </note>
 
@@ -99,7 +99,7 @@
   <para>You can overlap panes if desired. When this is done the panes display
   a tab at the top. The separators between the panes can be dragged to resize
   panes. Should you lose track of your changes to the user interface, you can
-  use <guimenuitem> Options → Restore the main window</guimenuitem> any time to
+  use <menuchoice><guimenu>Options</guimenu><guilabel>Restore Main Window</guilabel></menuchoice> any time to
   return to the original layout.</para>
 
   <para>It is possible to drag and drop files to each pane, which will react
@@ -109,18 +109,18 @@
         (<filename>omegat.project</filename>) is dropped on this pane, the
         corresponding project will be opened, closing first any opened
         project. Other dropped files will be copied to the
-        <filename>source</filename> folder. This applies also to the <link linkend="windows.projectfiles">Project files</link> window.</para>
+        <filename class="directory">source</filename> folder. This applies also to the <link linkend="windows.projectfiles">Project files</link> window.</para>
       </listitem>
 
       <listitem>
         <para>Fuzzy Matches pane: Dropped <filename>.tmx</filename> files will
-        be copied to the <filename>tm</filename> folder.</para>
+        be copied to the <filename class="directory">tm</filename> folder.</para>
       </listitem>
 
       <listitem>
         <para>Glossary pane: Dropped files with known glossary extensions
         (<filename>.txt</filename>, <filename>.tab</filename>, etc.) will be
-        copied to the <filename>glossary</filename> folder.</para>
+        copied to the <filename class="directory">glossary</filename> folder.</para>
       </listitem>
     </itemizedlist></para>
 
@@ -154,7 +154,7 @@
     When you move to another segment, the translation is validated and stored.
     If you want the translation to be the same as the source, simply make the
     editing field empty by removing all the text (select all with
-    <keycap>Ctrl+A</keycap> and delete with <keycap>Del</keycap>). OmegaT is
+    <keycombo><keycap>Ctrl</keycap><keycap>A</keycap></keycombo> and delete with <keycap>Del</keycap>). OmegaT is
     able to store translations that are identical to the source. This is
     useful for documents that contain trade marks, names or other proper
     nouns, or parts in a third language that do not require translation. See
@@ -212,8 +212,8 @@
         <keycap>5</keycap>
       </keycombo> will have no effect, if there is no match #5. To use the
     selected match in your translation, use
-    <guimenuitem>Ctrl+R</guimenuitem> to replace the target field with the match or use
-    <guimenuitem>Ctrl+I </guimenuitem> to insert it at the cursor position.</para>
+    <keycombo><keycap>Ctrl</keycap><keycap>R</keycap></keycombo> to replace the target field with the match or use
+    <keycombo><keycap>Ctrl</keycap><keycap>I</keycap></keycombo> to insert it at the cursor position.</para>
 
     <para>The three matching percentages are in the following order:
     <itemizedlist>
@@ -262,8 +262,7 @@
     terms shown were found in the glossaries, available (Microsoft's Term
     collection and Slovenian Linux User group Glossary).</para>
 
-    <para>If you have TransTips option activated (<guimenuitem>Options →
-    TransTips</guimenuitem>), you can right click on the highlighted word in
+    <para>If you have TransTips option activated (<menuchoice><guimenu>Options</guimenu><guilabel>TransTips</guilabel></menuchoice>), you can right click on the highlighted word in
     the source segment to open a pop-up menu with suggested translation, as
     offered by your glossary. Selecting one of them will insert it at the
     current cursor position into the target segment. You can also highlight
@@ -284,7 +283,7 @@
 
     <para>The machine translation pane, when opened, contains the suggestions
     by machine translation tools for the current segment. Press
-    <keysym>Ctrl+M</keysym> to replace the translation of the current segment
+    <keycombo><keycap>Ctrl</keycap><keycap>M</keycap></keycombo> to replace the translation of the current segment
     with the suggested translation.</para>
   </section>
 
@@ -293,12 +292,10 @@
 
     <para>A given source segment may require several different translations,
     depending on the context. If the current translation of the segment does
-    not fit, the user can select <guisubmenu>Edit → Create Alternative
-    Translation</guisubmenu>. The target text entered after that will be
+    not fit, the user can select <menuchoice><guimenu>Edit</guimenu><guilabel>Create Alternative Translation</guilabel></menuchoice>. The target text entered after that will be
     treated as an alternative translation of the source segment. You can
     define one of the alternative - for instance the most probable among them
-    - as default translation by selecting <guisubmenu>Edit → Use as Default
-    Translation</guisubmenu></para>
+    - as default translation by selecting <menuchoice><guimenu>Edit</guimenu><guilabel>Use as Default Translation</guilabel></menuchoice></para>
   </section>
 
   <section id="panes.notes">
@@ -307,9 +304,7 @@
     <para>The translator can add notes to the opened segment, for instance to
     come back later to the segment and redo the translation, check that
     alternative translations are correct or to ask colleagues for their
-    opinion. You can browse through notes using <guisubmenu>GoTo → Next
-    Note</guisubmenu> and <guisubmenu>GoTo → Previous
-    Note</guisubmenu>.</para>
+    opinion. You can browse through notes using <menuchoice><guimenu>GoTo</guimenu><guilabel>Next Note</guilabel></menuchoice> and <menuchoice><guimenu>GoTo</guimenu><guilabel>Previous Note</guilabel></menuchoice>.</para>
   </section>
 
   <section id="panes.comments">

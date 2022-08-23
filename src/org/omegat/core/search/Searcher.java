@@ -10,7 +10,7 @@
                2013 Aaron Madlon-Kay, Alex Buloichik
                2014 Alex Buloichik, Piotr Kulik, Aaron Madlon-Kay
                2015 Aaron Madlon-Kay
-               2017-2018 Thomas Cordonnier
+               2017-2022 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -51,6 +51,7 @@ import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
+import org.omegat.core.data.ITMXEntry;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
@@ -355,16 +356,17 @@ public class Searcher {
             // Search TM entries, unless we search for date or author.
             // They are not loaded from external TM, so skip the search in
             // that case.
+            Path projectRoot = Paths.get(m_project.getProjectProperties().getProjectRoot());
             if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
-                    final String fileTM = tmEn.getKey();
-                    searchEntries(tmEn.getValue().getEntries(), fileTM);
+                    final String fileTM = searchExpression.fileNames ? projectRoot.relativize(Paths.get(tmEn.getKey())).toString() : null;
+                    searchEntries(tmEn.getValue().getEntries(), ENTRY_ORIGIN_TRANSLATION_MEMORY, fileTM);
                     checkStop.checkInterrupted();
                 }
                 for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
-                    searchEntriesAlternative(tmEn.getValue().getDefaults(), langTM.getLanguage());
-                    searchEntriesAlternative(tmEn.getValue().getAlternatives(), langTM.getLanguage());
+                    searchEntries(tmEn.getValue().getDefaults(), ENTRY_ORIGIN_ALTERNATIVE, langTM.getLanguage());
+                    searchEntries(tmEn.getValue().getAlternatives(), ENTRY_ORIGIN_ALTERNATIVE, langTM.getLanguage());
                     checkStop.checkInterrupted();
                 }
             }
@@ -445,8 +447,8 @@ public class Searcher {
      * @param tmxID identifier of the TMX. E.g. the filename or language code
      * @throws SearchLimitReachedException when nr of found matches exceeds requested nr of results
      */
-    private void searchEntries(Collection<PrepareTMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
-        for (PrepareTMXEntry tm : tmEn) {
+    private void searchEntries(Iterable<? extends ITMXEntry> tmEn, int origin, final String tmxID) throws SearchLimitReachedException {
+        for (ITMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= searchExpression.numberOfResults) {
                 throw new SearchLimitReachedException();
@@ -457,25 +459,7 @@ public class Searcher {
             // and real translation
             // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
             // which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_TRANSLATION_MEMORY, tmxID);
-
-            checkStop.checkInterrupted();
-        }
-    }
-
-    private void searchEntriesAlternative(Collection<TMXEntry> tmEn, final String tmxID) throws SearchLimitReachedException {
-        for (TMXEntry tm : tmEn) {
-            // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= searchExpression.numberOfResults) {
-                throw new SearchLimitReachedException();
-            }
-
-            // for alternative translations:
-            // - it is not feasible to get the SourceTextEntry that matches the tm.source, so we cannot get the entryNum
-            // and real translation
-            // - although the 'translation' is used as 'source', we search it as translation, else we cannot show to
-            // which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_ALTERNATIVE, tmxID);
+            checkEntry(tm.getSourceText(), tm.getTranslationText(), tm.getNote(), null, null, origin, tmxID);
 
             checkStop.checkInterrupted();
         }
@@ -661,6 +645,7 @@ public class Searcher {
 
         foundMatches.clear();
         // check the text against all matchers
+        OUT_LOOP:
         for (Matcher matcher : m_matchers) {
             // check the text against the current matcher
             // if one of the search strings is not found, don't
@@ -670,17 +655,39 @@ public class Searcher {
                 return false;
             }
 
-            // Check if we searched a string of different length from the
-            // original. If so, then we give up on highlighting this hit
-            // because the offsets and length will not match. We still return
-            // true so the hit will still be recorded.
-            //noinspection StringEquality
-            if (text != origText && text.length() != origText.length()) {
-                continue;
-            }
             while (true) {
                 int start = matcher.start();
                 int end = matcher.end();
+                if (!text.substring(start, end).equals(origText.substring(start, end))) {
+                    // In case of normalization, check whenever the string to search is still present but shifted
+                    int find = origText.indexOf(text.substring(start, end));
+                    if (find >= 0) {
+                        end = find + (end - start);
+                        start = find;
+                    } else {
+                        // If the string to search contains normalized characters, then we cannot find this match
+                        // Try to find it using normalization of substrings
+                        boolean found = false;
+                        String foundText = text.substring(start, end);
+                        IN_LOOP:
+                        for (find = 0; find < origText.length(); find++) {
+                            if (StringUtil.normalizeWidth(origText.substring(find)).startsWith(foundText)) {
+                                start = end = find;
+                                while (end < origText.length()) {
+                                    end++;
+                                    if (StringUtil.normalizeWidth(origText.substring(start,end)).equals(foundText)) {
+                                        found = true;
+                                        break IN_LOOP;
+                                    }
+                                }
+                            }
+                        }
+                        if (! found) {
+                            // No way, we cannot find the match at all. Do not highlight but return true
+                            break OUT_LOOP;
+                        }
+                    }
+                }
                 if (searchExpression.mode == SearchMode.REPLACE) {
                     if (searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
                         if ((end == start) && (start > 0)) {

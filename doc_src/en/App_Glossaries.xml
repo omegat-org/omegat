@@ -19,13 +19,13 @@
     <title>Default glossary</title>
 
     <para>The default writable glossary is located in the the
-    <filename>/glossary</filename> project folder and is called
+    <filename class="directory">glossary</filename> project folder and is called
     <filename>glossary.txt</filename>.</para>
 
     <para>Its name and location can be modified in the project properties
     dialog but its extension must be <filename>.txt</filename> or
     <filename>.utf8</filename> and its location must be contained in the
-    <filename>/glossary</filename> project folder.</para>
+    <filename class="directory">glossary</filename> project folder.</para>
 
     <para>The file does not need to exist when setting it, it will be created
     when adding the first glossary entry. If the file already exists, no
@@ -38,8 +38,8 @@
     <title>Usage</title>
 
     <para>To use an existing glossary, simply place it in the
-    <filename>/glossary</filename> folder after creating the project.
-    <application>OmegaT</application> automatically detects glossary files in
+    <filename class="directory">glossary</filename> folder after creating the project.
+    OmegaT automatically detects glossary files in
     this folder when a project is opened.</para>
 
     <para>To add a new term to the writable glossary use
@@ -165,7 +165,7 @@
       </tbody>
     </table>
 
-    <para>Glossaries must be located in the <filename>/glossary</filename>
+    <para>Glossaries must be located in the <filename class="directory">glossary</filename>
     project folder. Glossaries located in nested folders are also
     recognized.</para>
   </section>
@@ -178,7 +178,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>No glossary file found in the "glossary" folder.</para>
+        <para>No glossary file found in the <filename class="directory">glossary</filename> folder.</para>
       </listitem>
     </itemizedlist>
 

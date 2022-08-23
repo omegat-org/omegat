@@ -380,7 +380,7 @@ public class RealProject implements IProject {
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
             String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData(config));
+            Statistics.writeStat(fn, stat.getTextData());
 
             loaded = true;
 
@@ -597,27 +597,33 @@ public class RealProject implements IProject {
         UIThreadsUtil.mustNotBeSwingThread();
 
         Pattern filePattern = Pattern.compile(sourcePattern);
+        String fname;
 
-        // build 3 TMX files:
+        // Build TMX files specified as output TMXs in the config file
         // - OmegaT-specific, with inline OmegaT formatting tags
         // - TMX Level 1, without formatting tags
         // - TMX Level 2, with OmegaT formatting tags wrapped in TMX inline tags
         try {
-            // build TMX with OmegaT tags
-            String fname = config.getProjectRoot() + config.getProjectName() + OConsts.OMEGAT_TMX
-                    + OConsts.TMX_EXTENSION;
+            if (config.isExportTm("omegat")) {
+                // build TMX with OmegaT tags
+                fname = config.getExportTMRoot() + config.getProjectName() + OConsts.OMEGAT_TMX
+                        + OConsts.TMX_EXTENSION;
+                projectTMX.exportTMX(config, new File(fname), false, false, false);
+            }
 
-            projectTMX.exportTMX(config, new File(fname), false, false, false);
+            if (config.isExportTm("level1")) {
+                // build TMX level 1 compliant file
+                fname = config.getExportTMRoot() + config.getProjectName() + OConsts.LEVEL1_TMX
+                        + OConsts.TMX_EXTENSION;
+                projectTMX.exportTMX(config, new File(fname), true, false, false);
+            }
 
-            // build TMX level 1 compliant file
-            fname = config.getProjectRoot() + config.getProjectName() + OConsts.LEVEL1_TMX
-                    + OConsts.TMX_EXTENSION;
-            projectTMX.exportTMX(config, new File(fname), true, false, false);
-
-            // build three-quarter-assed TMX level 2 file
-            fname = config.getProjectRoot() + config.getProjectName() + OConsts.LEVEL2_TMX
-                    + OConsts.TMX_EXTENSION;
-            projectTMX.exportTMX(config, new File(fname), false, true, false);
+            if (config.isExportTm("level2")) {
+                // build three-quarter-assed TMX level 2 file
+                fname = config.getExportTMRoot() + config.getProjectName() + OConsts.LEVEL2_TMX
+                        + OConsts.TMX_EXTENSION;
+                projectTMX.exportTMX(config, new File(fname), false, true, false);
+            }
         } catch (Exception e) {
             Log.logErrorRB("CT_ERROR_CREATING_TMX");
             Log.log(e);
@@ -799,7 +805,7 @@ public class RealProject implements IProject {
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
                 String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-                Statistics.writeStat(fn, stat.getTextData(config));
+                Statistics.writeStat(fn, stat.getTextData());
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }
@@ -1814,7 +1820,7 @@ public class RealProject implements IProject {
             this.config = props;
         }
 
-        Map<String, TMXEntry> data = new HashMap<>();
+        Map<String, TMXEntry> data = new TreeMap<>();
         private ProjectProperties config;
 
         @Override

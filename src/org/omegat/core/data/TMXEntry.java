@@ -28,7 +28,11 @@
 
 package org.omegat.core.data;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+
+import org.omegat.util.TMXProp;
 
 /**
  * Storage for TMX entry.
@@ -42,11 +46,12 @@ import java.util.Objects;
  * @author Guido Leenders
  * @author Aaron Madlon-Kay
  */
-public class TMXEntry {
+public class TMXEntry implements ITMXEntry {
     public enum ExternalLinked {
         // declares how this entry linked to external TMX in the tm/auto/
         xICE, x100PC, xAUTO, xENFORCED
     };
+    private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     public final String source;
     public final String translation;
@@ -57,26 +62,48 @@ public class TMXEntry {
     public final String note;
     public final boolean defaultTranslation;
     public final ExternalLinked linked;
+    public final String origin;
 
-    TMXEntry(PrepareTMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
-        this.source = from.source;
-        this.translation = from.translation;
-        this.changer = from.changer;
-        this.changeDate = from.changeDate;
-        this.creator = from.creator;
-        this.creationDate = from.creationDate;
-        this.note = from.note;
+    TMXEntry(ITMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
+        this.source = from.getSourceText();
+        this.translation = from.getTranslationText();
+        this.changer = from.getChanger();
+        this.changeDate = from.getChangeDate();
+        this.creator = from.getCreator();
+        this.creationDate = from.getCreationDate();
+        this.note = from.getNote();
 
         this.defaultTranslation = defaultTranslation;
         this.linked = linked;
+        this.origin = from.getPropValue(PROP_ORIGIN);
     }
 
-    public boolean isTranslated() {
-        return translation != null;
+    public String getSourceText() {
+        return source;
     }
 
-    public boolean hasNote() {
-        return note != null;
+    public String getTranslationText() {
+        return translation;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public long getCreationDate() {
+        return creationDate;
+    }
+
+    public String getChanger() {
+        return changer;
+    }
+
+    public long getChangeDate() {
+        return changeDate;
+    }
+
+    public String getNote() {
+        return note;
     }
 
     @Override
@@ -143,5 +170,49 @@ public class TMXEntry {
             return false;
         }
         return true;
+    }
+
+    /**
+     * We only hold origin property in TMXEntry.
+     * @return true when has origin property, otherwise false.
+     */
+    public boolean hasProperties() {
+        return origin != null;
+    }
+
+    /**
+     * Return origin property when requested.
+     * @param propType property type. Currently we just support origin.
+     * @return mtsource when requested, otherwise null.
+     */
+    public String getPropValue(String propType) {
+        if (origin != null && propType.equals(PROP_ORIGIN)) {
+            return origin;
+        }
+        return null;
+    }
+
+    /**
+     * Query specified property type/value combination.
+     * @param propType property type.
+     * @param propValue expected value.
+     * @return true when hold a queried type/value, otherwise false.
+    */
+    public boolean hasPropValue(String propType, String propValue) {
+        if (origin != null && propType.equals(PROP_ORIGIN)) {
+            return origin.equals(propValue);
+        }
+        return false;
+    }
+
+    /**
+     * return properties.
+     * @return singletonList of mtsource when it has, otherwise null.
+     */
+    public List<TMXProp> getProperties() {
+        if (origin != null) {
+            return Collections.singletonList(new TMXProp(PROP_ORIGIN, origin));
+        }
+        return null;
     }
 }

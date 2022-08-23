@@ -32,10 +32,10 @@
     <guibutton>OK</guibutton> to continue.</para>
 
     <para>If you are interested in other settings of this dialog,
-    you can return to it any time by pressing <keycap>Ctrl+E.</keycap></para>
+    you can return to it any time by pressing <keycombo><keycap>Ctrl</keycap><keycap>E</keycap></keycombo>.</para>
 
     <para>Next, the <guilabel>Project Files</guilabel> dialog opens. Click on <guibutton>Copy Files to Source Folder...</guibutton> to select your source files. OmegaT will then copy the selected
-    files to the <filename>/source/</filename> subfolder of your newly created
+    files to the <filename class="directory">source</filename> subfolder of your newly created
     project. After the source files have loaded in the <guilabel>Editor</guilabel> pane, you can
     close the <guilabel>Project Files</guilabel> dialog.</para>
   </section>
@@ -44,12 +44,12 @@
     <title>Translate the file</title>
 
     <para>OmegaT will present one segment at a time for you to translate.
-    After you have translated each segment, press <keycap>Ctrl+U</keycap> to
-    move to the next untranslated segment (or <keycap>Ctrl+Shift+U</keycap> to
+    After you have translated each segment, press <keycombo><keycap>Ctrl</keycap><keycap>U</keycap></keycombo> to
+    move to the next untranslated segment (or <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>U</keycap></keycombo> to
     move to the next translated segment). Whenever you want to see what your
     translation will look like in its final format, press
-    <keycap>Ctrl+D</keycap> to generate the translated documents, which will be
-    created in the <filename>/target/</filename> subfolder of your project folder. During
+    <keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo> to generate the translated documents, which will be
+    created in the <filename class="directory">target</filename> subfolder of your project folder. During
     translation, use the <guimenu>Edit</guimenu> and <guimenu>Go To</guimenu>
     menus to perform various useful functions.</para>
   </section>
@@ -93,7 +93,7 @@
     are protected, so that you cannot modify their contents, but you can delete them, enter them by hand or move
     them around in the target sentence. However, if you made mistakes when you
     typed the formatting tags, your translated files might fail to open.
-    Therefore, press <keycap>Ctrl+Shift+V</keycap> before you generate your
+    Therefore, press <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo> before you generate your
     translated files, to validate that your tags are correct.</para>
   </section>
 
@@ -101,8 +101,8 @@
     <title>Generate the translated file</title>
 
     <para>Once you have made certain that there are no tag errors in your
-    translation, press <keycap>Ctrl+D</keycap> to generate the target files,
-    which will be created in the <filename>/target/</filename> subfolder of
+    translation, press <keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo> to generate the target files,
+    which will be created in the <filename class="directory">target</filename> subfolder of
     your project folder.</para>
   </section>
 
@@ -126,9 +126,9 @@
     <itemizedlist>
       <listitem>
         <para>To remind yourself of the project's initial settings, open the
-        project properties dialog by pressing <keycap>Ctrl+E</keycap>. To see a
+        project properties dialog by pressing <keycombo><keycap>Ctrl</keycap><keycap>E</keycap></keycombo>. To see a
         list of files in the project, open the <guilabel>Project Files</guilabel> dialog by
-        pressing <keycap>Ctrl+L</keycap>.</para>
+        pressing <keycombo><keycap>Ctrl</keycap><keycap>L</keycap></keycombo>.</para>
       </listitem>
     </itemizedlist>
 
@@ -139,7 +139,7 @@
         folder. The <filename>level1</filename> and <filename>level2</filename> memories can be shared with users of
         other translation programs. The memory named <filename>omegat</filename> can be used by
         OmegaT itself, in future projects that you create. If you place such
-        translation memory files in the <filename>/tm/</filename> subfolder of a project,
+        translation memory files in the <filename class="directory">tm</filename> subfolder of a project,
         OmegaT will automatically search them for similar segments, called
         "fuzzy matches".</para>
       </listitem>
@@ -148,8 +148,8 @@
     <itemizedlist>
       <listitem>
         <para>You can add a new term to the glossary by pressing
-        <keycap>Ctrl+Shift+G</keycap>, or copy existing glossaries to
-        the <filename>/glossary/</filename> subfolder of your project folder,
+        <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>G</keycap></keycombo>, or copy existing glossaries to
+        the <filename class="directory">glossary</filename> subfolder of your project folder,
         and OmegaT will automatically look up words in them.</para>
       </listitem>
     </itemizedlist>
@@ -157,7 +157,7 @@
     <itemizedlist>
       <listitem>
         <para>It is often useful to search for words and phrases in the source
-        text and in your translation, so press <keycap>Ctrl+F</keycap> for the
+        text and in your translation, so press <keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo> for the
         <guilabel>Text Search</guilabel> dialog at any time.</para>
       </listitem>
     </itemizedlist>

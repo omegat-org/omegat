@@ -36,7 +36,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +47,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.io.ByteOrderMark;
+import org.apache.commons.io.input.BOMInputStream;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SegmentProperties;
@@ -78,7 +84,7 @@ import org.omegat.util.TagUtil;
 public class PoFilter extends AbstractFilter {
 
     public static final String OPTION_ALLOW_BLANK = "disallowBlank";
-    public static final String OPTION_ALLOW_EDITING_BLANK_SEGMENT = "disallowEditingBlankSegment";
+    public static final String OPTION_ALLOW_EDITING_BLANK_SEGMENT = "allowEditingBlankSegment";
     public static final String OPTION_SKIP_HEADER = "skipHeader";
     public static final String OPTION_AUTO_FILL_IN_PLURAL_STATEMENT = "autoFillInPluralStatement";
     public static final String OPTION_FORMAT_MONOLINGUAL = "monolingualFormat";
@@ -265,6 +271,7 @@ public class PoFilter extends AbstractFilter {
     protected static final Pattern COMMENT_FUZZY = Pattern.compile("#, fuzzy");
     protected static final Pattern COMMENT_FUZZY_OTHER = Pattern.compile("#,.* fuzzy.*");
     protected static final Pattern COMMENT_FUZZY_MSGID = Pattern.compile("#\\|.* msgid.*\"(.*)\"");
+    protected static final Pattern COMMENT_FUZZY_MSGCTX = Pattern.compile("#\\|.* msgctxt\\s+\"(.*)\"");
     protected static final Pattern COMMENT_NOWRAP = Pattern.compile("#,.* no-wrap.*");
     protected static final Pattern COMMENT_TRANSLATOR = Pattern.compile("# (.*)");
     protected static final Pattern COMMENT_EXTRACTED = Pattern.compile("#\\. (.*)");
@@ -279,13 +286,14 @@ public class PoFilter extends AbstractFilter {
 
     enum MODE {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL, MSGCTX
-    };
+    }
 
     private StringBuilder[] sources, targets;
     private StringBuilder translatorComments, extractedComments, references, sourceFuzzyTrue;
     private int plurals = 2;
     private String path;
     private boolean nowrap, fuzzy, fuzzyTrue;
+    private boolean headerProcessed;
 
     private BufferedWriter out;
 
@@ -299,6 +307,46 @@ public class PoFilter extends AbstractFilter {
         return new Instance[]
         { new Instance("*.po", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()),
                 new Instance("*.pot", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
+    }
+
+    /**
+     * return BufferdReader for PoFile reading.
+     * @param inFile
+     *            The source file.
+     * @param inEncoding
+     *            Encoding of the input file, if the filter supports it. Otherwise null.
+     * @return
+     * @throws IOException
+     */
+    @Override
+    protected BufferedReader createReader(File inFile, String inEncoding) throws IOException {
+        BOMInputStream bomInputStream = new BOMInputStream(Files.newInputStream(inFile.toPath()),
+                ByteOrderMark.UTF_8, ByteOrderMark.UTF_16LE);
+        ByteOrderMark bom = bomInputStream.getBOM();
+        String charset;
+        if (bom != null) {
+            charset = bom.getCharsetName();
+        } else if (inEncoding == null) {
+            charset = Charset.defaultCharset().name();
+        } else {
+            charset = inEncoding;
+        }
+        return new BufferedReader(new InputStreamReader(bomInputStream, charset));
+    }
+
+    @Override
+    protected BufferedWriter createWriter(File outFile, String outEncoding)
+            throws IOException {
+        if (outFile == null) {
+            return null;
+        }
+        Charset charset;
+        if (outEncoding != null) {
+            charset = Charset.forName(outEncoding);
+        } else {
+            charset = Charset.defaultCharset();
+        }
+        return Files.newBufferedWriter(outFile.toPath(), charset);
     }
 
     @Override
@@ -320,12 +368,12 @@ public class PoFilter extends AbstractFilter {
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
 
-        String disallowBlankStr = processOptions.get(OPTION_ALLOW_BLANK);
-        allowBlank = disallowBlankStr == null || disallowBlankStr.equalsIgnoreCase("true");
+        String allowBlankStr = processOptions.get(OPTION_ALLOW_BLANK);
+        allowBlank = allowBlankStr == null || allowBlankStr.equalsIgnoreCase("true");
 
-        String disallowEditingBlankSegmentStr = processOptions.get(OPTION_ALLOW_EDITING_BLANK_SEGMENT);
-        allowEditingBlankSegment = disallowEditingBlankSegmentStr == null
-                || disallowEditingBlankSegmentStr.equalsIgnoreCase("true");
+        String allowEditingBlankSegmentStr = processOptions.get(OPTION_ALLOW_EDITING_BLANK_SEGMENT);
+        allowEditingBlankSegment = allowEditingBlankSegmentStr == null
+                || allowEditingBlankSegmentStr.equalsIgnoreCase("true");
 
         String skipHeaderStr = processOptions.get(OPTION_SKIP_HEADER);
         skipHeader = "true".equalsIgnoreCase(skipHeaderStr);
@@ -337,48 +385,20 @@ public class PoFilter extends AbstractFilter {
         formatMonolingual = "true".equalsIgnoreCase(formatMonolingualStr);
 
         inEncodingLastParsedFile = fc.getInEncoding();
-        BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
-        try {
-            BufferedWriter writer;
-
-            if (outFile != null) {
-                writer = createWriter(outFile, fc.getOutEncoding());
-            } else {
-                writer = null;
-            }
-
-            try {
-                processFile(reader, writer, fc);
-            } finally {
-                if (writer != null) {
-                    writer.close();
-                }
-            }
-        } finally {
-            reader.close();
+        try (BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
+             BufferedWriter writer = createWriter(outFile, fc.getOutEncoding())) {
+            processFile(reader, writer, fc);
         }
     }
 
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
-        // BOM (byte order mark) bugfix
-        translatedFile.mark(1);
-        int ch = translatedFile.read();
-        if (ch != 0xFEFF) {
-            translatedFile.reset();
-        }
         this.out = null;
         processPoFile(translatedFile, fc);
     }
 
     @Override
     public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc) throws IOException {
-        // BOM (byte order mark) bugfix
-        in.mark(1);
-        int ch = in.read();
-        if (ch != 0xFEFF) {
-            in.reset();
-        }
         this.out = out;
         processPoFile(in, fc);
     }
@@ -389,6 +409,7 @@ public class PoFilter extends AbstractFilter {
         nowrap = false;
         MODE currentMode = null;
         int currentPlural = 0;
+        headerProcessed = false;
 
         sources = new StringBuilder[2];
         sources[0] = new StringBuilder();
@@ -416,6 +437,12 @@ public class PoFilter extends AbstractFilter {
             if (mTrueFuzzy.matches()) {
                 fuzzyTrue = true;
                 sourceFuzzyTrue.append(mTrueFuzzy.group(1));
+                continue;
+            }
+
+            // ignore a fuzzy context
+            Matcher mFuzzyCtx = COMMENT_FUZZY_MSGCTX.matcher(s);
+            if (mFuzzyCtx.matches()) {
                 continue;
             }
 
@@ -477,8 +504,8 @@ public class PoFilter extends AbstractFilter {
                 // Hack to be able to translate empty segments
                 // If the source segment is empty and there is a reference then
                 // it copies the reference of the segment and the localization note into the source segment
-                if (allowEditingBlankSegment && sources[0].length() == 0 && references.length() > 0) {
-                    String aux = references.toString() + extractedComments.toString();
+                if (allowEditingBlankSegment && sources[0].length() == 0 && references.length() > 0 && headerProcessed) {
+                    String aux = references + extractedComments.toString();
                     sources[0].append(aux);
                 }
 
@@ -665,6 +692,7 @@ public class PoFilter extends AbstractFilter {
 
     protected void flushTranslation(MODE currentMode, FilterContext fc) throws IOException {
         if (sources[0].length() == 0 && path.isEmpty()) {
+            headerProcessed = true;
             if (targets[0].length() == 0) {
                 // there is no text to translate yet
                 return;

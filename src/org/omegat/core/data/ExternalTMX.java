@@ -43,7 +43,7 @@ public class ExternalTMX {
 
     private final String name;
 
-    private final List<PrepareTMXEntry> entries;
+    private final List<? extends ITMXEntry> entries;
 
     ExternalTMX(String name, List<PrepareTMXEntry> entries) {
         this.name = name;
@@ -54,7 +54,7 @@ public class ExternalTMX {
         return name;
     }
 
-    public List<PrepareTMXEntry> getEntries() {
+    public List<ITMXEntry> getEntries() {
         return Collections.unmodifiableList(entries);
     }
 }

@@ -25,12 +25,11 @@
 
 package org.omegat.core.team2;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
+
 import org.junit.Test;
-
-import java.io.*;
-import java.nio.file.Files;
-
-import static org.junit.Assert.*;
 
 public class RemoteRepositoryProviderTest2 {
 
@@ -38,22 +37,31 @@ public class RemoteRepositoryProviderTest2 {
     @Test
     public void testRelativeRemoteToAbsoluteLocal() {
         String base = System.getProperty("java.io.tmpdir") + File.separator;
-        assertEquals(new File(base + "file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "/", "/"));
-        assertEquals(new File(base + "file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "", ""));
-        assertEquals(new File(base + "file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "", "/"));
-        assertEquals(new File(base + "file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "/", ""));
+        assertEquals(new File(base + "file.txt"),
+                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "/", "/"));
+        assertEquals(new File(base + "file.txt"),
+                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "", ""));
+        assertEquals(new File(base + "file.txt"),
+                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "", "/"));
+        assertEquals(new File(base + "file.txt"),
+                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("file.txt", new File(base), "/", ""));
 
-        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir", "source"));
-        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir", "source/"));
-        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir/", "source"));
-        assertEquals(new File(base + "source/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/somedir/", "source"));
+        assertEquals(new File(base + "source/file.txt"),
+                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir", "source"));
+        assertEquals(new File(base + "source/file.txt"),
+                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir", "source/"));
+        assertEquals(new File(base + "source/file.txt"),
+                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "somedir/", "source"));
+        assertEquals(new File(base + "source/file.txt"),
+                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/somedir/", "source"));
 
-        assertEquals(new File(base + "source/somedir/file.txt"), RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/", "/source"));
+        assertEquals(new File(base + "source/somedir/file.txt"),
+                RemoteRepositoryProvider.relativeRemoteToAbsoluteLocal("somedir/file.txt", new File(base), "/", "/source"));
 
     }
 
     @Test
-    public void testWithoutslashes() {
+    public void testWithoutSlashes() {
         assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("/aa/"));
         assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("aa"));
         assertEquals("aa", RemoteRepositoryProvider.withoutSlashes("aa/"));

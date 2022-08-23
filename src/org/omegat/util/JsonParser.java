@@ -34,12 +34,14 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 /**
+ * JsonParser#parse is deprecated. You are recommended to use Jackson for JSON parsing.
+ * <p>
  * A thin wrapper around the built-in Nashorn JavaScript engine, providing a convenience method for
  * <code>Java.asJSONCompatible(JSON.parse(json))</code>. Use this instead of merely <code>eval</code>-ing
  * untrusted input.
- * <p>
- * <b>Note:</b> Java.asJSONCompatible is only available in Java 1.8.0_60 or later.
- *
+ * Nashorn Javascript engine is deprecated in Java 11 and removed in Java 15.
+ * @see <a href="https://openjdk.java.net/jeps/335">JEP 335: Deprecate the Nashorn JavaScript Engine</a>
+ * @see <a href="https://openjdk.java.net/jeps/372">JEP 372: Remove the Nashorn JavaScript Engine</a>
  * @see <a href="http://www.oracle.com/technetwork/java/javase/8u60-relnotes-2620227.html">Java 8u60 release
  *      notes</a>
  * @author Aaron Madlon-Kay
@@ -62,7 +64,11 @@ public final class JsonParser {
         INVOCABLE = invocable;
     }
 
+    @Deprecated
     public static Object parse(String json) throws Exception {
+        if (INVOCABLE == null) {
+            return null;
+        }
         return INVOCABLE.invokeFunction("parse", json);
     }
 

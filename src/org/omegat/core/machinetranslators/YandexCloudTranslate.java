@@ -31,23 +31,27 @@ package org.omegat.core.machinetranslators;
 
 import java.awt.Window;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.omegat.gui.exttrans.MTConfigDialog;
-import org.omegat.util.JsonParser;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.HttpConnectionUtils;
 
 
 /**
@@ -90,11 +94,7 @@ public class YandexCloudTranslate extends BaseTranslate {
     }
 
     @Override
-    public String translate(Language sLang, Language tLang, String text) {
-        if (!enabled) {
-            return null;
-        }
-
+    protected String translate(final Language sLang, final Language tLang, final String text) throws Exception {
         String trText = text.length() > MAX_TEXT_LENGTH ? text.substring(0, MAX_TEXT_LENGTH - 3) + "..." : text;
         String prev = getFromCache(sLang, tLang, trText);
         if (prev != null) {
@@ -103,59 +103,42 @@ public class YandexCloudTranslate extends BaseTranslate {
 
         String oAuthToken = getCredential(PROPERTY_OAUTH_TOKEN);
         if (oAuthToken == null || oAuthToken.isEmpty()) {
-            return OStrings.getString("MT_ENGINE_YANDEX_CLOUD_OAUTH_TOKEN_NOT_FOUND");
+            throw new Exception(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_OAUTH_TOKEN_NOT_FOUND"));
         }
 
         String folderId = getCredential(PROPERTY_FOLDER_ID);
         if (folderId == null || folderId.isEmpty()) {
-            return OStrings.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_NOT_FOUND");
+            throw new Exception(OStrings.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_NOT_FOUND"));
         }
 
         String IAMToken = getIAMToken(oAuthToken);
         if (IAMToken == null) {
-            return IAMErrorMessage;
+            throw new Exception(IAMErrorMessage);
         }
 
-        StringBuilder requestBuilder = new StringBuilder("{")
-                .append("\"sourceLanguageCode\":\"").append(sLang.getLanguageCode().toLowerCase()).append("\",")
-                .append("\"targetLanguageCode\":\"").append(tLang.getLanguageCode().toLowerCase()).append("\",")
-                .append("\"folderId\": \"").append(folderId).append("\",");
-
-        if (Preferences.isPreference(PROPERTY_KEEP_TAGS)) {
-            requestBuilder.append("\"format\": \"HTML\",");
-        }
-
-        if (Preferences.isPreference(PROPERTY_USE_GLOSSARY)) {
-            Map<String, String> glossaryTerms = glossarySupplier.get();
-            if (!glossaryTerms.isEmpty()) {
-                requestBuilder.append(getGlossaryConfigPart(glossaryTerms));
-            }
-        }
-
-        requestBuilder.append("\"texts\": [").append(JsonParser.quote(trText)).append("]}");
+        String request = createJsonRequest(sLang, tLang, trText, folderId);
 
         Map<String, String> headers = new TreeMap<>();
         headers.put("Authorization", "Bearer " + IAMToken);
 
         String response;
         try {
-            response = HttpConnectionUtils.postJSON(TRANSLATE_URL, requestBuilder.toString(), headers);
+            response = HttpConnectionUtils.postJSON(TRANSLATE_URL, request, headers);
         } catch (HttpConnectionUtils.ResponseError e) {
             String errorMessage = extractErrorMessage(e.body);
             if (errorMessage == null) {
                 errorMessage = OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
+                throw new Exception(errorMessage);
             }
-            return errorMessage;
-        } catch (IOException e) {
-            return e.getLocalizedMessage();
+            throw e;
         }
-
+        if (response == null) {
+            return null;
+        }
         String tr = extractTranslation(response);
-
         if (tr == null) {
-            return "";
+            return null;
         }
-
         tr = cleanSpacesAroundTags(tr, trText);
         putToCache(sLang, tLang, trText, tr);
         return tr;
@@ -212,24 +195,43 @@ public class YandexCloudTranslate extends BaseTranslate {
 
     @SuppressWarnings("unchecked")
     private String extractErrorMessage(final String json) {
-        Map<String, Object> rootNode;
+        JsonNode rootNode;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
-            return (String) rootNode.get("message");
+            rootNode = mapper.readTree(json);
+            return rootNode.get("message").asText();
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_ENGINE_YANDEX_CLOUD_BAD_ERROR_REPORT");
             return null;
         }
     }
 
+    protected String createJsonRequest(final Language sLang, final Language tLang, final String trText,
+                                       final String folderId) throws JsonProcessingException {
+        Map<String, Object> params = new TreeMap<>();
+        params.put("sourceLanguageCode", sLang.getLanguageCode().toLowerCase());
+        params.put("targetLanguageCode", tLang.getLanguageCode().toLowerCase());
+        params.put("folderId", folderId);
+        if (Preferences.isPreference(PROPERTY_KEEP_TAGS)) {
+            params.put("format", "HTML");
+        }
+        if (Preferences.isPreference(PROPERTY_USE_GLOSSARY)) {
+            Map<String, String> glossaryTerms = glossarySupplier.get();
+            if (!glossaryTerms.isEmpty()) {
+                params.put("glossaryConfig", createGlossaryConfigPart(glossaryTerms));
+            }
+        }
+        params.put("texts", Collections.singletonList(trText));
+        return new ObjectMapper().writeValueAsString(params);
+    }
+
     @SuppressWarnings("unchecked")
-    private String extractTranslation(final String json) {
+    protected String extractTranslation(final String json) {
+        JsonNode rootNode;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            Map<String, Object> rootNode;
-            rootNode = (Map<String, Object>) JsonParser.parse(json);
-            List<Object> translationsList = (List<Object>) rootNode.get("translations");
-            Map<String, String> translationNode = (Map<String, String>) translationsList.get(0);
-            return translationNode.get("text");
+            rootNode = mapper.readTree(json);
+            return rootNode.get("translations").get(0).get("text").asText();
         } catch (Exception e) {
             Log.logErrorRB(e, "MT_JSON_ERROR");
             return OStrings.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
@@ -242,7 +244,8 @@ public class YandexCloudTranslate extends BaseTranslate {
 
             String request = "{\"yandexPassportOauthToken\":\"" + oAuthToken + "\"}";
             String response;
-            Map<String, Object> rootNode;
+            JsonNode rootNode;
+            ObjectMapper mapper = new ObjectMapper();
 
             try {
                 response = HttpConnectionUtils.postJSON(IAM_TOKEN_URL, request, null);
@@ -259,8 +262,8 @@ public class YandexCloudTranslate extends BaseTranslate {
             }
 
             try {
-                rootNode = (Map<String, Object>) JsonParser.parse(response);
-                cachedIAMToken = (String) rootNode.get("iamToken");
+                rootNode = mapper.readTree(response);
+                cachedIAMToken = rootNode.get("iamToken").asText();
                 lastIAMTokenTime = System.currentTimeMillis();
             } catch (Exception e) {
                 Log.logErrorRB(e, "MT_ENGINE_YANDEX_CLOUD_BAD_IAM_RESPONSE");
@@ -271,17 +274,51 @@ public class YandexCloudTranslate extends BaseTranslate {
         return cachedIAMToken;
     }
 
-    private String getGlossaryConfigPart(Map<String, String> glossaryTerms) {
-        StringBuilder sb = new StringBuilder("\"glossaryConfig\":{\"glossaryData\":{\"glossaryPairs\":[");
-
-        String termsJson = glossaryTerms.entrySet().stream().limit(MAX_GLOSSARY_TERMS)
-                .map(e -> buildOneGlossaryJson(e.getKey(), e.getValue())).collect(Collectors.joining(","));
-
-        return sb.append(termsJson).append("]}},").toString();
+    /**
+     * create glossary config part of request json.
+     * we make visibility to protected for test purpose.
+     * @param glossaryTerms glossary map.
+     */
+    protected GlossaryConfig createGlossaryConfigPart(Map<String, String> glossaryTerms) {
+        List<GlossaryPair> pairs = new ArrayList<>();
+        for (Map.Entry<String, String> e : glossaryTerms.entrySet()) {
+            pairs.add(new GlossaryPair(e.getKey(), e.getValue()));
+            if (pairs.size() >= MAX_GLOSSARY_TERMS) {
+                break;
+            }
+        }
+        return new GlossaryConfig(new GlossaryData(pairs));
     }
 
-    private String buildOneGlossaryJson(String sourceText, String targetText) {
-        return new StringBuilder("{\"sourceText\":").append(JsonParser.quote(sourceText))
-                .append(",\"translatedText\":").append(JsonParser.quote(targetText)).append("}").toString();
+    /**
+     * Json definition: glossaryConfig.
+     */
+    static class GlossaryConfig {
+        public final GlossaryData glossaryData;
+        GlossaryConfig(GlossaryData glossaryData) {
+            this.glossaryData = glossaryData;
+        }
+    }
+
+    /**
+     * Json definition: glossaryData.
+     */
+    static class GlossaryData {
+        public final List<GlossaryPair> glossaryPairs;
+        GlossaryData(List<GlossaryPair> glossaryPairs) {
+            this.glossaryPairs = Collections.unmodifiableList(glossaryPairs);
+        }
+    }
+
+    /**
+     * Json definition: glossaryPair.
+     */
+    static class GlossaryPair {
+        public final String sourceText;
+        public final String translatedText;
+        GlossaryPair(String sourceText, String translatedText) {
+            this.sourceText = sourceText;
+            this.translatedText = translatedText;
+        }
     }
 }

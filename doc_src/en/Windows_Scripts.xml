@@ -29,11 +29,11 @@
 
     <itemizedlist>
       <listitem>
-        <para>When you left-click the number, the selected script will run. You can also start the selected macros from the main menu by using their entries in the <guisubmenu>Tools </guisubmenu>menu or by pressing<keycap> Ctrl+Alt+F#</keycap> (# 1 to 12).</para>
+        <para>When you left-click the number, the selected script will run. You can also start the selected macros from the main menu by using their entries in the <guisubmenu>Tools</guisubmenu> menu or by pressing <keycombo><keycap>Ctrl</keycap><keycap>Alt</keycap><keycap>F#</keycap></keycombo> (# 1 to 12).</para>
       </listitem>
     </itemizedlist>
 
-    <para>By default, scripts are stored in the <filename>scripts</filename> folder located in the OmegaT installation folder (the folder that contains the <filename>OmegaT.jar</filename> file).</para>
+    <para>By default, scripts are stored in the <filename class="directory">scripts</filename> folder located in the OmegaT installation folder (the folder that contains the <filename>OmegaT.jar</filename> file).</para>
 
     <para>If you add new scripts there, they will appear in the list of available scripts in the <guilabel>Scripting</guilabel> window.</para>
 

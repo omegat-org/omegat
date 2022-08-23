@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -44,6 +44,7 @@ import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.madlonkay.supertmxmerge.data.ITuv;
 import org.madlonkay.supertmxmerge.data.Key;
 import org.madlonkay.supertmxmerge.data.ResolutionStrategy;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
@@ -66,6 +67,7 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
 
 import com.vlsolutions.swing.docking.Dockable;
+import gen.core.project.RepositoryDefinition;
 
 /**
  * Child process for concurrent modification.
@@ -146,7 +148,6 @@ public final class TestTeamIntegrationChild {
             keyC = new EntryKey("file", CONCURRENT_NAME, null, null, null, null);
             steC = new SourceTextEntry(keyC, 0, null, null, new ArrayList<ProtectedPart>());
 
-            Random rnd = new Random();
             v = new long[segCount];
             mc: while (true) {
                 for (int c = 1; c < segCount; c++) {
@@ -156,11 +157,11 @@ public final class TestTeamIntegrationChild {
                         break mc;
                     }
                     // change /0 segment
-                    Thread.sleep(rnd.nextInt(maxDelaySeconds * 1000) + 10);
+                    Thread.sleep(ThreadLocalRandom.current().nextInt(maxDelaySeconds * 1000) + 10);
                     checksavecheck(0);
 
                     // change /1..N segment
-                    Thread.sleep(rnd.nextInt(maxDelaySeconds * 1000) + 10);
+                    Thread.sleep(ThreadLocalRandom.current().nextInt(maxDelaySeconds * 1000) + 10);
                     checksavecheck(c);
                 }
             }
@@ -170,12 +171,26 @@ public final class TestTeamIntegrationChild {
             ProjectFactory.loadProject(projectProperties, true);
             checkAll();
 
+            // check projectProperties
+            checkRepoUrl(projectProperties);
+
             System.exit(200);
         } catch (Throwable ex) {
             ex.printStackTrace();
             System.exit(1);
         }
     }
+
+    static void checkRepoUrl(ProjectProperties prop) {
+        for (RepositoryDefinition repository : prop.getRepositories()) {
+            if (repository.getUrl().equals(repo)) {
+                return;
+            }
+        }
+        throw new RuntimeException("Wrong url in repository. expected: " + repo
+                + ": actual: " + prop.getRepositories().get(0).getUrl());
+    }
+
 
     static void changeConcurrent() throws Exception {
         checkAll();
@@ -287,6 +302,9 @@ public final class TestTeamIntegrationChild {
         }
 
         public void replaceEditText(String text) {
+        }
+
+        public void replaceEditTextAndMark(final String text, final String origin) {
         }
 
         public void removeFilter() {
@@ -403,6 +421,11 @@ public final class TestTeamIntegrationChild {
         }
 
         public void changeCase(CHANGE_CASE_TO newCase) {
+        }
+
+        @Override
+        public void replaceEditText(final String text, final String origin) {
+
         }
 
         public void activateEntry() {

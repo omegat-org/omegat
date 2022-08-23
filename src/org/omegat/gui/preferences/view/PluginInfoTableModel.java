@@ -51,7 +51,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
     public PluginInfoTableModel() {
         PluginUtils.getPluginInformations().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
-                .forEach(info -> listPlugins.add(info));
+                .forEach(listPlugins::add);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
 
     @Override
     public int getRowCount() {
-        return listPlugins == null ? 0 : listPlugins.size();
+       return listPlugins == null ? 0 : listPlugins.size();
     }
 
     @Override

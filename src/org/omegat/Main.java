@@ -8,6 +8,7 @@
                2012 Aaron Madlon-Kay
                2013 Kyle Katarn, Aaron Madlon-Kay
                2014 Alex Buloichik
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -29,15 +30,24 @@
 
 package org.omegat;
 
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
+import static java.nio.file.StandardOpenOption.WRITE;
+
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,12 +69,12 @@ import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.statistics.CalcStandardStatistics;
+import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
@@ -73,6 +83,7 @@ import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
+import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -81,7 +92,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
-import org.omegat.util.TMXWriter;
+import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -95,6 +106,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  * @author Kyle Katarn
+ * @author Hiroshi Miura
  */
 public final class Main {
 
@@ -133,7 +145,7 @@ public final class Main {
 
         String projectDir = PARAMS.get(CLIParameters.PROJECT_DIR);
         if (projectDir != null) {
-            projectLocation = new File(projectDir);
+            projectLocation = new File(FileUtil.expandTildeHomeDir(projectDir));
         }
         remoteProject = PARAMS.get(CLIParameters.REMOTE_PROJECT);
 
@@ -143,12 +155,12 @@ public final class Main {
 
         String resourceBundle = PARAMS.get(CLIParameters.RESOURCE_BUNDLE);
         if (resourceBundle != null) {
-            OStrings.loadBundle(resourceBundle);
+            OStrings.loadBundle(FileUtil.expandTildeHomeDir(resourceBundle));
         }
 
         String configDir = PARAMS.get(CLIParameters.CONFIG_DIR);
         if (configDir != null) {
-            RuntimePreferences.setConfigDir(configDir);
+            RuntimePreferences.setConfigDir(FileUtil.expandTildeHomeDir(configDir));
         }
 
         if (PARAMS.containsKey(CLIParameters.QUIET)) {
@@ -196,6 +208,10 @@ public final class Main {
                 break;
             case CONSOLE_ALIGN:
                 result = runConsoleAlign();
+                PluginUtils.unloadPlugins();
+                break;
+            case CONSOLE_STATS:
+                result = runConsoleStats();
                 PluginUtils.unloadPlugins();
                 break;
             default:
@@ -247,7 +263,7 @@ public final class Main {
         if (path == null) {
             return;
         }
-        File configFile = new File(path);
+        File configFile = new File(FileUtil.expandTildeHomeDir(path));
         if (!configFile.exists()) {
             return;
         }
@@ -375,6 +391,69 @@ public final class Main {
     }
 
     /**
+     * Displays or writes project statistics.
+     * <p>
+     *     takes two optional arguments
+     * <code>[--output-file=(file path) [--stats-type=[XML|JSON|TEXT]]]</code>
+     * when omitted, display stats text(localized).
+     * When file I/O error occurred, especially when parent directory does not exist
+     * warns it and return 1.
+     */
+    private static int runConsoleStats() throws Exception {
+        Log.log("Console project stats mode");
+        Log.log("");
+
+        Core.initializeConsole(PARAMS);
+
+        RealProject p = selectProjectConsoleMode(true);
+        StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
+
+        if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
+            // no output file specified, print to console.
+            System.out.println(projectStats.getTextData());
+            p.closeProject();
+            return 0;
+        }
+
+        String outputFilename = PARAMS.get(CLIParameters.STATS_OUTPUT);
+        String statsMode;
+        if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
+            statsMode = PARAMS.get(CLIParameters.STATS_MODE);
+        } else {
+            // when no stats type specified, try to detect from file extension, otherwise XML.
+            if (outputFilename.endsWith(".json") || outputFilename.endsWith(".JSON")) {
+                statsMode = "JSON";
+            } else if (outputFilename.endsWith(".xml") || outputFilename.endsWith(".XML")) {
+                statsMode = "XML";
+            } else if (outputFilename.endsWith(".txt") || outputFilename.endsWith(".TXT")) {
+                statsMode = "TXT";
+            } else {
+                statsMode = "XML";
+            }
+        }
+        try (OutputStreamWriter writer = new OutputStreamWriter(
+                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)),
+                        CREATE, TRUNCATE_EXISTING, WRITE),
+                StandardCharsets.UTF_8)) {
+            if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
+                writer.write(projectStats.getTextData());
+            } else if ("JSON".equalsIgnoreCase(statsMode)) {
+                writer.write(projectStats.getJsonData());
+            } else if ("XML".equalsIgnoreCase(statsMode)){
+                writer.write(projectStats.getXmlData());
+            } else {
+                Log.log("Specified UNKNOWN file type for statistics. aborted.");
+            }
+        } catch (NoSuchFileException nsfe) {
+            Log.log("Got directory/file open error. Does specified directory exist?");
+            return 1;
+        } finally {
+            p.closeProject();
+        }
+        return 0;
+    }
+
+    /**
      * Validates tags according to command line specs:
      * <code>--tag-validation=[abort|warn]</code>
      * <p>
@@ -444,25 +523,19 @@ public final class Main {
             fname = "";
         }
 
-        // prepare tmx
-        Map<String, PrepareTMXEntry> data = new HashMap<>();
-        for (SourceTextEntry ste : entries) {
-            PrepareTMXEntry entry = new PrepareTMXEntry();
-            entry.source = ste.getSrcText();
-            switch (pseudoTranslateType) {
-            case EQUAL:
-                entry.translation = ste.getSrcText();
-                break;
-            case EMPTY:
-                entry.translation = "";
-                break;
+        // Write OmegaT-project-compatible TMX:
+        try (TMXWriter2 wr = new TMXWriter2(new File(fname), config.getSourceLanguage(), config.getTargetLanguage(),
+                config.isSentenceSegmentingEnabled(), false, false)) {
+            for (SourceTextEntry ste : entries) {
+                switch (pseudoTranslateType) {
+                    case EQUAL:
+                        wr.writeEntry(ste.getSrcText(), ste.getSrcText(), null, null, 0, null, 0, null);
+                        break;
+                    case EMPTY:
+                        wr.writeEntry(ste.getSrcText(), "", null, null, 0, null, 0, null);
+                        break;
+                }
             }
-            data.put(ste.getSrcText(), entry);
-        }
-
-        try {
-            // Write OmegaT-project-compatible TMX:
-            TMXWriter.buildTMXFile(fname, false, false, config, data);
         } catch (IOException e) {
             Log.logErrorRB("CT_ERROR_CREATING_TMX");
             Log.log(e);
@@ -496,16 +569,13 @@ public final class Main {
 
         System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
 
-        Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
-        Map<String, PrepareTMXEntry> result = new TreeMap<>();
-        for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
-            result.put(en.getKey(), new PrepareTMXEntry(en.getValue()));
-        }
-
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
+        ProjectProperties config = p.getProjectProperties();
 
-        TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), result);
-
+        try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(), config.getTargetLanguage(),
+                config.isSentenceSegmentingEnabled(), false, false)) {
+            wr.writeEntries(p.align(p.getProjectProperties(), new File(FileUtil.expandTildeHomeDir(dir))));
+        }
         p.closeProject();
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
         return 0;

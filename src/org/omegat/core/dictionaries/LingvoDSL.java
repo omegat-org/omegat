@@ -27,27 +27,23 @@
 
 package org.omegat.core.dictionaries;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Comparator;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.io.input.BOMInputStream;
+import io.github.eb4j.dsl.DslArticle;
+import io.github.eb4j.dsl.DslDictionary;
+import io.github.eb4j.dsl.DslResult;
+import io.github.eb4j.dsl.data.LanguageCode;
+import io.github.eb4j.dsl.data.LanguageName;
+import io.github.eb4j.dsl.visitor.DslVisitor;
+import org.apache.commons.io.FilenameUtils;
 
-import org.omegat.util.Language;
+import org.omegat.util.Preferences;
 
 /**
  * Dictionary implementation for Lingvo DSL format.
@@ -57,7 +53,7 @@ import org.omegat.util.Language;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Hiroshi Miura
-
+ * @see <a href="https://github.com/eb4j/dsl4j">DSL4j library</a>
  * @see <a href="http://lingvo.helpmax.net/en/troubleshooting/dsl-compiler/">DSL
  * Documentation (English)</a>
  * @see <a href="http://www.dsleditor.narod.ru/art_03.htm">DSL documentation
@@ -65,145 +61,337 @@ import org.omegat.util.Language;
  */
 public class LingvoDSL implements IDictionaryFactory {
 
-    // An ordered list of Pair of Regex pattern and replacement string
-    private static final TreeMap<Pattern, String> TAG_REPLACEMENTS = new TreeMap<>(
-            Comparator.comparing(Pattern::pattern));
-
-    private static final int BLOCKSIZE = 8192;
-
     @Override
-    public final boolean isSupportedFile(File file) {
+    public final boolean isSupportedFile(final File file) {
         return file.getPath().endsWith(".dsl") || file.getPath().endsWith(".dsl.dz");
     }
 
     @Override
-    public final IDictionary loadDict(File file) throws Exception {
-        return loadDict(file, new Language(Locale.getDefault()));
-    }
-
-    @Override
-    public final IDictionary loadDict(File file, Language language) throws Exception {
-        return new LingvoDSLDict(file, language);
+    public final IDictionary loadDict(final File file) throws Exception {
+        Path dictPath = Paths.get(file.toURI());
+        Path indexPath = Paths.get(dictPath + ".idx");
+        return new LingvoDSLDict(dictPath, indexPath, false);
     }
 
     static class LingvoDSLDict implements IDictionary {
-        protected final DictionaryData<String> data;
+        protected final DslDictionary data;
+        private final HtmlVisitor htmlVisitor;
 
-        LingvoDSLDict(File file, Language language) throws Exception {
-            data = new DictionaryData<>(language);
-            readDslFile(file);
+        /**
+         * Constructor of LingvoDSL Dictionary driver.
+         * @param dictPath *.dsl file object.
+         * @param indexPath index cache file.
+         * @throws Exception when loading dictionary failed.
+         */
+        LingvoDSLDict(final Path dictPath, final Path indexPath, final boolean validateIndexAbsPath)
+                throws Exception {
+            data = DslDictionary.loadDictionary(dictPath, indexPath, validateIndexAbsPath);
+            htmlVisitor = new HtmlVisitor(dictPath.getParent().toString(),
+                    Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false));
         }
 
-        private void readDslFile(File file) throws IOException {
-            try (FileInputStream fis = new FileInputStream(file)) {
-                // Un-gzip if necessary
-                InputStream is = file.getName().endsWith(".dz") ? new GZIPInputStream(fis, BLOCKSIZE) : fis;
-                try (BOMInputStream bis = new BOMInputStream(is)) {
-                    // Detect charset
-                    Charset charset = bis.hasBOM() ? StandardCharsets.UTF_8 : StandardCharsets.UTF_16;
-                    try (InputStreamReader isr = new InputStreamReader(bis, charset);
-                         BufferedReader reader = new BufferedReader(isr)) {
-                        loadData(reader.lines());
+        /**
+         * read article with exact match.
+         * @param word
+         *            The word to look up in the dictionary
+         *
+         * @return list of results.
+         */
+        @Override
+        public List<DictionaryEntry> readArticles(final String word) throws IOException {
+            return readEntries(word, data.lookup(word));
+        }
+
+        /**
+         * read article with predictive match.
+         * @param word
+         *            The word to look up in the dictionary
+         *
+         * @return list of results.
+         */
+        @Override
+        public List<DictionaryEntry> readArticlesPredictive(final String word) throws IOException {
+            return readEntries(word, data.lookupPredictive(word));
+        }
+
+        private List<DictionaryEntry> readEntries(final String word, final DslResult dslResult) {
+            List<DictionaryEntry> list = new ArrayList<>();
+            for (Map.Entry<String, String> e : dslResult.getEntries(htmlVisitor)) {
+                DictionaryEntry dictionaryEntry = new DictionaryEntry(word, e.getKey(), e.getValue());
+                list.add(dictionaryEntry);
+            }
+            return list;
+        }
+    }
+
+    /**
+     * Simple HTML filter for LingvoDSL parser.
+     */
+    public static class HtmlVisitor extends DslVisitor<String> {
+
+        private static final String[] IMAGE_EXTS = new String[] { "png", "jpg", "PNG", "JPG" };
+        private static final LanguageCode LANG_CODE = new LanguageCode();
+        private static final LanguageName LANG_NAME = new LanguageName();
+
+        private final boolean condensedView;
+        private final File basePath;
+
+        private StringBuilder sb;
+        private boolean delayText;
+        private String previousText;
+        private boolean inDetails;
+
+        /**
+         * Constructor with media path.
+         * @param dirPath media base path.
+         * @throws IOException when given directory not found.
+         */
+        public HtmlVisitor(final String dirPath, final boolean condensedView) throws IOException {
+            File dir = new File(dirPath);
+            if (!dir.isDirectory()) {
+                throw new IOException("Directory not found!");
+            }
+            basePath = dir;
+            delayText = false;
+            inDetails = false;
+            this.condensedView = condensedView;
+        }
+
+        /**
+         * Start of accept.
+         * <p>
+         *     super#visit(ElementSequence) call this.
+         * </p>
+         */
+        @Override
+        public void start() {
+            sb = new StringBuilder();
+        }
+
+        /**
+         * End of accept.
+         * <p>
+         *     super#visit(ElementSequence) call this.
+         * </p>
+         */
+        @Override
+        public void finish() {
+        }
+
+        /**
+         * Visit a tag.
+         *
+         * @param tag to visit.
+         */
+        @Override
+        public void visit(final DslArticle.Tag tag) {
+            if (inDetails && condensedView) {
+                return;
+            }
+            if (tag.isTagName("b")) {
+                sb.append("<strong>");
+            } else if (tag.isTagName("br")) {
+                sb.append("<br/>");
+            } else if (tag.isTagName("u")) {
+                sb.append("<span style='text-decoration:underline'>");
+            } else if (tag.isTagName("i")) {
+                sb.append("<span style='font-style: italic'>");
+            } else if (tag.isTagName("sup")) {
+                sb.append("<sup>");
+            } else if (tag.isTagName("sub")) {
+                sb.append("<sub>");
+            } else if (tag.isTagName("c")) {
+                if (tag.hasAttribute()) {
+                    sb.append("<span style=\"color: ").append(tag.getAttribute().getValue()).append("\">");
+                } else {
+                    sb.append("<span style=\"color: green\">");
+                }
+            } else if (tag.isTagName("'")) {
+                sb.append("<span style=\"color: red\">");
+            } else if (tag.isTagName("url") || tag.isTagName("s") || tag.isTagName("video")) {
+                delayText = true;
+            } else if (tag.isTagName("lang")) {
+                if (tag.hasAttribute() && tag.getAttribute().getKey().equals("id")) {
+                    int i = Integer.parseInt(tag.getAttribute().getValue());
+                    if (LANG_CODE.containsKey(i)) {
+                        sb.append("<span class=\"lang_").append(LANG_CODE.get(i)).append("\">");
+                        return;
                     }
+                } else if (tag.hasAttribute() && tag.getAttribute().getKey().equals("name")) {
+                    if (LANG_NAME.containsKey(tag.getAttribute().getValue())) {
+                        sb.append("<span class=\"lang_").append(LANG_NAME.get(tag.getAttribute().getValue()))
+                                .append("\">");
+                        return;
+                    }
+                }
+                sb.append("<span>");
+            } else if (tag.isTagName("*")) {
+                inDetails = true;
+                if (!condensedView) {
+                    sb.append("<span class=\"details\">");
+                }
+            } else {
+                if (condensedView) {
+                    if (tag.isTagName("m")) {
+                        sb.append("<span>");
+                    } else if (tag.isTagName("m1")) {
+                        sb.append("<span class=\"paragraph-start\">\u00b6</span><span>");
+                    } else if (tag.isTagName("m2")) {
+                        sb.append("<span class=\"paragraph-start\">\u204b</span><span>");
+                    } else if (tag.isTagName("m3") || tag.isTagName("m4") || tag.isTagName("m5")
+                            || tag.isTagName("m6") || tag.isTagName("m7") || tag.isTagName("m8")
+                            || tag.isTagName("m9")) {
+                        sb.append("<span class=\"paragraph-start\">\u00a7</span><span>");
+                    }
+                } else {
+                    if (tag.isTagName("m")) {
+                        sb.append("<div>");
+                    } else if (tag.isTagName("m1")) {
+                        sb.append("<div style=\"text-indent: 30px\">");
+                    } else if (tag.isTagName("m2")) {
+                        sb.append("<div style=\"text-indent: 60px\">");
+                    } else if (tag.isTagName("m3")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m4")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m5")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m6")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m7")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m8")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    } else if (tag.isTagName("m9")) {
+                        sb.append("<div style=\"text-indent: 90px\">");
+                    }
+                }
+            }
+            // no output for t
+        }
+
+        private String getMediaUrl() {
+            return new File(basePath, previousText).toURI().toString();
+        }
+
+        private boolean isMediaImage() {
+            String ext = FilenameUtils.getExtension(previousText);
+            for (String e : IMAGE_EXTS) {
+                if (e.equals(ext)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /**
+         * Visit an EndTag.
+         *
+         * @param endTag to visit.
+         */
+        @Override
+        public void visit(final DslArticle.EndTag endTag) {
+            if (endTag.isTagName("*")) {
+                inDetails = false;
+                if (!condensedView) {
+                    sb.append("</span>");
+                }
+                return;
+            }
+            if (inDetails && condensedView) {
+                return;
+            }
+            if (delayText) {
+                if (previousText == null) {
+                    return;
+                }
+                if (endTag.isTagName("video")) {
+                    sb.append("<a href=\"").append(getMediaUrl()).append("\">")
+                            .append(previousText).append("</a>");
+                } else if (endTag.isTagName("s")) {
+                    if (isMediaImage()) {
+                        sb.append("<img src=\"").append(getMediaUrl()).append("\" />");
+                    } else {  // sound and unknown files
+                        sb.append("<a href=\"").append(getMediaUrl()).append("\" >")
+                                .append(previousText).append("</a>");
+                    }
+                } else if (endTag.isTagName("url")) {
+                    sb.append("<a href=\"").append(previousText).append("\">")
+                            .append(previousText).append("</a>");
+                }
+                delayText = false;
+                previousText = null;
+            }
+            if (endTag.isTagName("b")) {
+                sb.append("</strong>");
+            } else if (endTag.isTagName("u") || endTag.isTagName("i") || endTag.isTagName("c")
+                    || endTag.isTagName("'") || endTag.isTagName("lang")) {
+                sb.append("</span>");
+            } else if (endTag.isTagName("t")) {
+                sb.append("&nbsp;");
+            } else if (endTag.isTagName("sup")) {
+                sb.append("</sup>");
+            } else if (endTag.isTagName("sub")) {
+                sb.append("</sub>");
+            } else if (endTag.isTagName("m")) {
+                if (condensedView) {
+                    sb.append("</span>&nbsp;");
+                } else {
+                    sb.append("</div>");
                 }
             }
         }
 
-        private void loadData(Stream<String> stream) {
-            StringBuilder word = new StringBuilder();
-            StringBuilder trans = new StringBuilder();
-            stream.filter(line -> !line.isEmpty())
-                  .filter(line -> !line.startsWith("#"))
-                  .map(LingvoDSL::replaceTag)
-                  .forEach(line -> {
-                        if (Character.isWhitespace(line.codePointAt(0))) {
-                            trans.append(line.trim()).append('\n');
-                        } else {
-                            if (word.length() > 0) {
-                                data.add(word.toString(), trans.toString());
-                                word.setLength(0);
-                                trans.setLength(0);
-                            }
-                            word.append(line);
-                        }
-                    });
-            if (word.length() > 0) {
-                data.add(word.toString(), trans.toString());
+        /**
+         * Return result.
+         *
+         * @return result.
+         */
+        @Override
+        public String getObject() {
+            if (sb == null) {
+                // should not happened, but check null to avoid findbugs error.
+                throw new RuntimeException();
             }
-            data.done();
+            return sb.toString();
         }
 
+        /**
+         * Visit a text.
+         *
+         * @param t Text object to process.
+         */
         @Override
-        public List<DictionaryEntry> readArticles(String word) {
-            return data.lookUp(word).stream().map(e -> new DictionaryEntry(e.getKey(), e.getValue()))
-                    .collect(Collectors.toList());
+        public void visit(final DslArticle.Text t) {
+            if (inDetails && condensedView) {
+                return;
+            }
+            previousText = t.getText();
+            if (!delayText) {
+                sb.append(t);
+            }
         }
 
+        /**
+         * Visit an Attribute.
+         *
+         * @param a Attribute object to visit.
+         */
         @Override
-        public List<DictionaryEntry> readArticlesPredictive(String word) {
-            return data.lookUpPredictive(word).stream().map(e -> new DictionaryEntry(e.getKey(), e.getValue()))
-                    .collect(Collectors.toList());
+        public void visit(final DslArticle.Attribute a) {
         }
-    }
 
-    private static String replaceTag(final String line) {
-        String result = line;
-        for (Map.Entry<Pattern, String> entry : TAG_REPLACEMENTS.entrySet()) {
-            result = entry.getKey().matcher(result).replaceAll(entry.getValue());
-        }
-        return result;
-    }
-
-    // TODO: Make a real parser
-    //
-    // The DSL language is not context-free: it allows arbitrary nesting (and
-    // also the meaning of e.g. [/m] is context-dependent) so this approach of
-    // replacing regex patterns is doomed to fail at at least some cases. The
-    // only way to handle this language robustly is to make a real parser.
-    static {
-        // Following 3 lines replace "[[...]]" and "\[..\]" into "[...]" but
-        // using HTML entity to avoid further matching.
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[\\[(?<content>.+?)]]"), "&#91;${content}&#93;");
-        TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("\\[")), "&#91;");
-        TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("\\]")), "&#93;");
-        // Styling tags
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[b](?<content>.+?)\\[/b]"), "<strong>${content}</strong>");
-        TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[i](?<content>.+?)\\[/i]"), "<span style='font-style: italic'>${content}</span>");
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[t](?<content>.+?)\\[/t]"), "${content}&nbsp;");
-        TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[c](?<content>.+?)\\[/c]"), "<span style='color:green'>${content}</span>");
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[u](?<content>.+?)\\[/u]"),
-                "<span style='text-decoration:underline'>${content}</span>");
-        // The following line tries to replace [c value]text[/c] with text
-        // colored as per the value. Since the color names are plain words like
-        // 'red', or 'blue', or 'steelgray' etc.,
-        TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[c\\s(?<color>[a-z]+?)](?<content>.+?)\\[/c]"), "<span style='color:${color}'>${content}</span>");
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[sub](?<content>.+?)\\[/sub]"), "<sub>${content}</sub>");
-        TAG_REPLACEMENTS.put(Pattern.compile("\\[sup](?<content>.+?)\\[/sup]"), "<sup>${content}</sup>");
-        // Line feed and indents
-        TAG_REPLACEMENTS.put(Pattern.compile(Pattern.quote("[br]")), "<br/>");
-        // Ignore tag 'm" but "m1" to indent 1 level, "m2" to indent 2 level and
-        // "m3" and more to indent 3 level.
-        TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[m1](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 30px\">${content}</p>");
-        TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[m2](?<content>.+?)\\[/m]"), "<p style=\"text-indent: 60px\">${content}</p>");
-        TAG_REPLACEMENTS.put(Pattern.compile(
-                "\\[(m3|m4|m5|m6|m7|m8|m9)](?<content>.+?)\\[/m]"), "<p style=\\\"text-indent: 90px\">${content}</p>");
-        // External link may launch external browser
-        TAG_REPLACEMENTS.put(Pattern.compile( "\\[url](?<link>.+?)\\[/url]"), "<a href='${link}'>${link}</a>");
-        // The following line tries to replace a letter surrounded by ['][/']
-        // tags (indicating stress) with a red letter (the default behavior in
-        // Lingvo).
-        TAG_REPLACEMENTS.put(
-                Pattern.compile("\\['](?<content>.+?)\\[/']"), "<span style='color:red'>${content}</span>");
-        // Silently ignore these tags that can be arbitrarily nested
-        String[] ignoreTags = {"\\*", "m", "com", "ex", "lang", "p", "preview", "ref", "s", "trn", "trn1", "trs",
-                "!trs", "video"};
-        for (String tag : ignoreTags) {
-            TAG_REPLACEMENTS.put(Pattern.compile("\\[(?<tag>" + tag + ")](?<content>.+?)\\[/\\k<tag>]"), "${content}");
+        /**
+         * Visit a NewLine.
+         *
+         * @param n NewLine object to visit.
+         */
+        @Override
+        public void visit(final DslArticle.Newline n) {
+            if (inDetails && condensedView) {
+                return;
+            }
+            sb.append("\n");
         }
     }
 }

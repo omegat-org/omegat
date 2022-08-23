@@ -1,9 +1,102 @@
 ----------------------------------------------------------------------
- OmegaT 5.7.0
+ OmegaT 5.8.0
 ----------------------------------------------------------------------
-  3 Enhancements
+  12 Enhancements
+  11 Bug fixes
+  0 Localisation updates
+----------------------------------------------------------------------
+5.8.0 vs 5.7.1
+
+  Bug fixes:
+
+  - CLI commands does not expand tilde(~) to home directory
+  https://sourceforge.net/p/omegat/bugs/1106/
+
+  - PO filter: target files should not keep #| msgctxt
+  https://sourceforge.net/p/omegat/bugs/1103/
+
+  - No ID-bound matching in /tm/tmx2source
+  https://sourceforge.net/p/omegat/bugs/1101/
+
+  - Searcher to show path in relative
+  https://sourceforge.net/p/omegat/bugs/1099/
+  https://sourceforge.net/p/omegat/bugs/1098/
+
+  - Enforced ID-bound alternative translations not recognized
+  https://sourceforge.net/p/omegat/bugs/1092/
+
+  - ArrayIndexOutOfBoundsException on loading a PO-project with multi-line plurals
+  https://sourceforge.net/p/omegat/bugs/1082/
+
+  - Team projects fail to commit with enabled signing
+  https://sourceforge.net/p/omegat/bugs/1077/
+
+  - Dictionary fails to jump to selected word
+  https://sourceforge.net/p/omegat/bugs/1074/
+
+  - Highlight found text even if normalized text (for feature "full/half width insensitive") 
+    differs from original
+
+  - Display other language translations also for alternative translations
+  https://sourceforge.net/p/omegat/bugs/1101/
+
+  Implemented requests:
+
+  - New project properties options for export TM directory and which TMs should be exported
+  https://sourceforge.net/p/omegat/feature-requests/1611/
+
+  - Option to export project's master TMs when pressing Ctrl+D
+  https://sourceforge.net/p/omegat/feature-requests/1591/
+
+  - Changing the flow of updating teamwork omegat.project
+
+  - CLI option to print the project stats to the console (text, xml or json)
+  https://sourceforge.net/p/omegat/feature-requests/1624/
+
+  - Dictionary: support condensed view
+  https://sourceforge.net/p/omegat/feature-requests/1609/
+
+  - Skip candidates from machine translators which returned 403: Forbidden on Ctrl+M.
+  https://sourceforge.net/p/omegat/feature-requests/1605/
+
+  - Dictionary: Oxford dictionary online API support
+  https://sourceforge.net/p/omegat/feature-requests/1597/
+
+  - Glossary pane. Dictionary Layout. Fix indentation
+  https://sourceforge.net/p/omegat/feature-requests/1588/
+
+  - Glossary pane. Dictionary Layout. Fix comma-space.
+  https://sourceforge.net/p/omegat/feature-requests/1587/
+
+  - Able to add note which MT engine used
+  https://sourceforge.net/p/omegat/feature-requests/1584/
+
+  - Notify which Machine Translation was picked
+  https://sourceforge.net/p/omegat/feature-requests/1477/
+
+  - Machine translation results sorting
+  https://sourceforge.net/p/omegat/feature-requests/1467/
+
+----------------------------------------------------------------------
+OmegaT 5.7.1 (2022-03-19)
+----------------------------------------------------------------------
+  0 Enhancements
   1 Bug fix
-  1 Localisation updates
+  0 Localisation updates
+----------------------------------------------------------------------
+5.7.1 vs 5.7.0
+
+  Bug fixes:
+
+  - Spelling dictionaries download site closed
+  https://sourceforge.net/p/omegat/bugs/1086/
+
+----------------------------------------------------------------------
+ OmegaT 5.7.0 (2021-11-17)
+----------------------------------------------------------------------
+  4 Enhancements
+  2 Bug fixes
+  1 Localisation update
 ----------------------------------------------------------------------
 5.7.0 vs 5.6.0
 
@@ -12,13 +105,19 @@
   - Dictionary pane update is extremely slow for large articles
   https://sourceforge.net/p/omegat/bugs/1068/
 
+  - Menus don't get keyboard focus after opening
+  https://sourceforge.net/p/omegat/bugs/1073/
+
   Implemented requests:
 
   - Ignore Microsoft Office temporary files
   https://sourceforge.net/p/omegat/feature-requests/1596/
 
+  - Support sound links in Dictionary pane
+  https://sourceforge.net/p/omegat/feature-requests/1593/
+
   - Improve support for markup in DSL dictionaries
-  https://sourceforge.net/p/omegat/feature-requests/1594
+  https://sourceforge.net/p/omegat/feature-requests/1594/
 
   - Display images in Dictionary pane
   https://sourceforge.net/p/omegat/feature-requests/1595/
@@ -493,6 +592,20 @@
   - Russian localisation updated to 5.0.0 (UI)
   - Simplified Chinese localisation updated to 5.0.0 (UI, scripts)
   - Ukrainian localisation updated to 5.0.0 (UI, Instant Start, scripts, readme)
+
+----------------------------------------------------------------------
+ OmegaT 4.3.3 (2022-03-18)
+----------------------------------------------------------------------
+  0 Enhancements
+  1 Bug fix
+  0 Localisation updates
+----------------------------------------------------------------------
+4.3.3 vs 4.3.1
+
+  Bug fixes:
+
+  - Spelling dictionaries download site closed
+  https://sourceforge.net/p/omegat/bugs/1086/
 
 ----------------------------------------------------------------------
  OmegaT 4.3.2 (2020-01-26)

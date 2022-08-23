@@ -33,12 +33,14 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 
+import io.github.eb4j.stardict.StarDictDictionary;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.omegat.core.TestCore;
-import org.omegat.core.dictionaries.StarDict.StarDictBaseDict;
+
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
+import org.omegat.util.TestPreferencesInitializer;
 
 /**
  * Dictionary test
@@ -47,30 +49,26 @@ import org.omegat.util.Language;
  * @author Hiroshi Miura
  * @author Aaron Madlon-Kay
  */
-public class StarDictTest extends TestCore {
+public class StarDictTest {
 
     private static final Language FRENCH = new Language(Locale.FRENCH);
 
+    @BeforeClass
+    public static void setUp() throws Exception {
+        TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.DICTIONARY_CONDENSED_VIEW, false);
+    }
+
     @Test
-    public void testReadFileDict() throws Exception {
-        StarDictBaseDict dict = (StarDictBaseDict) new StarDict().loadDict(new File("test/data/dicts/latin-francais.ifo"),
-                FRENCH);
-        assertEquals(11964, dict.data.size());
+    public void testStardict4j() throws Exception {
+        StarDictDictionary dict = StarDictDictionary.loadDictionary(
+                new File("test/data/dicts/latin-francais.ifo"));
+        assertEquals(10451, dict.getInformation().getWordCount());
 
         String word = "testudo";
-        List<Entry<String, StarDict.Entry>> data = dict.data.lookUp(word);
-        assertEquals(1, data.size());
-
-        List<DictionaryEntry> result = dict.readArticles(word);
+        List<StarDictDictionary.Entry> result = dict.readArticles(word);
         assertEquals(1, result.size());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
-
-        // Test case normalization
-        word = word.toUpperCase(FRENCH.getLocale());
-        result = dict.readArticles(word);
-        assertEquals(1, result.size());
-        assertEquals("testudo", result.get(0).getWord());
         assertEquals("dinis, f. : tortue", result.get(0).getArticle());
 
         // Test prediction
@@ -84,18 +82,42 @@ public class StarDictTest extends TestCore {
     }
 
     @Test
-    public void testReadZipDict() throws Exception {
-        StarDictBaseDict dict = (StarDictBaseDict) new StarDict()
-                .loadDict(new File("test/data/dicts-zipped/latin-francais.ifo"), FRENCH);
-        assertEquals(11964, dict.data.size());
+    public void testReadFileDict() throws Exception {
+        StarDict.StarDictDict dict = new StarDict.StarDictDict(
+                new File("test/data/dicts/latin-francais.ifo"), FRENCH);
 
         String word = "testudo";
-        List<Entry<String, StarDict.Entry>> data = dict.data.lookUp(word);
-        assertEquals(1, data.size());
+        List<DictionaryEntry> result = dict.readArticles(word);
+        assertEquals(1, result.size());
+        assertEquals(word, result.get(0).getWord());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+
+        // Test case normalization
+        word = word.toUpperCase(FRENCH.getLocale());
+        result = dict.readArticles(word);
+        assertEquals(1, result.size());
+        assertEquals("testudo", result.get(0).getWord());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+
+        // Test prediction
+        word = "testu";
+        result = dict.readArticles(word);
+        assertTrue(result.isEmpty());
+        result = dict.readArticlesPredictive(word);
+        assertEquals(1, result.size());
+        assertEquals("testudo", result.get(0).getWord());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
+    }
+
+    @Test
+    public void testReadZipDict() throws Exception {
+        StarDict.StarDictDict dict = new StarDict.StarDictDict(
+                new File("test/data/dicts-zipped/latin-francais.ifo"), FRENCH);
+        String word = "testudo";
         List<DictionaryEntry> result = dict.readArticles(word);
         assertEquals(1, result.size());
         assertFalse(result.isEmpty());
         assertEquals(word, result.get(0).getWord());
-        assertEquals("dinis, f. : tortue", result.get(0).getArticle());
+        assertEquals("<div>dinis, f. : tortue</div>", result.get(0).getArticle());
     }
 }

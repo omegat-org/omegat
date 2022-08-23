@@ -35,6 +35,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -147,6 +148,8 @@ public final class ProjectFileStorage {
             result.getSourceRootExcludes().addAll(ProjectProperties.getDefaultExcludes());
         }
         result.setTMRoot(normalizeLoadedPath(om.getProject().getTmDir(), OConsts.DEFAULT_TM));
+        result.setExportTMRoot(normalizeLoadedPath(om.getProject().getExportTmDir(), OConsts.DEFAULT_EXPORT_TM));
+        result.setExportTmLevels(normalizeLoadedExportTmLevels(om.getProject().getExportTmLevels(), OConsts.DEFAULT_EXPORT_TM_LEVELS));
 
         result.setGlossaryRoot(normalizeLoadedPath(om.getProject().getGlossaryDir(), OConsts.DEFAULT_GLOSSARY));
 
@@ -207,6 +210,8 @@ public final class ProjectFileStorage {
         om.getProject().getSourceDirExcludes().getMask().addAll(props.getSourceRootExcludes());
         om.getProject().setTargetDir(getPathForStoring(root, props.getTargetRoot(), OConsts.DEFAULT_TARGET));
         om.getProject().setTmDir(getPathForStoring(root, props.getTMRoot(), OConsts.DEFAULT_TM));
+        om.getProject().setExportTmDir(getPathForStoring(root, props.getExportTMRoot(), OConsts.DEFAULT_EXPORT_TM));
+        om.getProject().setExportTmLevels(String.join(" ", props.getExportTmLevels()));
         String glossaryDir = getPathForStoring(root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
         om.getProject().setGlossaryDir(glossaryDir);
 
@@ -246,6 +251,20 @@ public final class ProjectFileStorage {
         } else {
             return normalizeSlashes(path);
         }
+    }
+
+    private static List<String> normalizeLoadedExportTmLevels(String levels, String defaultValue) {
+        // Older project files can be missing the information of which TM levels
+        // to export, in which case levels will be null here. In that case
+        // return the default (converted to ArrayList)
+        String normalizedLevels = levels;
+        if (levels == null) {
+            normalizedLevels = defaultValue;
+        }
+
+        // Convert space-separated items into ArrayList,
+        // downcasing first
+        return StringUtil.convertToList(normalizedLevels.toLowerCase());
     }
 
     /**

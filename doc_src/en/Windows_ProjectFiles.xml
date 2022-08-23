@@ -15,19 +15,19 @@
   at opening, by setting <emphasis>project_files_show_on_load</emphasis> to
   <emphasis>false</emphasis> in <filename>omegat.prefs</filename> file
   (accessible by <menuchoice>
-      <guimenuitem>Options</guimenuitem>
+      <guimenu>Options</guimenu>
 
       <guimenuitem>Access Configuration Folder</guimenuitem>
     </menuchoice> menu).</para>
 
-  <para>Use <guimenuitem>Ctrl+L</guimenuitem> to open and <keycap>Esc</keycap>
+  <para>Use <keycombo><keycap>Ctrl</keycap><keycap>L</keycap></keycombo> to open and <keycap>Esc</keycap>
   to close it. The <guilabel>Project Files</guilabel> Window displays the
   following information:</para>
 
   <itemizedlist>
     <listitem>
       <para>the total number of translatable files in the project. These are
-      the files present in the /source folder in a format that OmegaT is able
+      the files present in the <filename class="directory">source</filename> folder in a format that OmegaT is able
       to recognize. This number is displayed in brackets, next to the &quot;Project
       file&quot; title</para>
     </listitem>
@@ -43,7 +43,7 @@
 
       <para>Note: filenames (in first column) can be sorted alphabetically by
       clicking in the header. It also possible to change the position of a
-      filename, by clicking on it and pressing <emphasis>Move ...</emphasis>
+      filename, by clicking on it and pressing <guibutton>Move ...</guibutton>
       buttons.</para>
 
       <para>Right-clicking on a filename opens a popup that allows to open the
@@ -62,7 +62,7 @@
     </listitem>
   </itemizedlist>
 
-  <para>The set of <emphasis role="bold">Unique </emphasis>segments is
+  <para>The set of <emphasis role="bold">Unique</emphasis> segments is
   computed by taking all the segments and removing all duplicate segments.
   (The definition of “unique” is case-sensitive: &quot;Run&quot; and &quot;run&quot; are treated
   as being different)</para>
@@ -73,7 +73,7 @@
   repetitions are: they could mean relatively long sentences repeated a number
   of times (in which case you are fortunate) or it could describe a table of
   keywords (not so fortunate). The <filename>project_stats.txt</filename>
-  located in the omegat folder of your project contains more detailed segment
+  located in the <filename class="directory">omegat</filename> folder of your project contains more detailed segment
   information, broken down by file.</para>
 
   <para>Modifying the segmentation rules may have the effect of modifying the
@@ -81,11 +81,11 @@
   avoided once you have started translating the project. See the chapter
   <emphasis>Segmentation rules</emphasis> for more information.</para>
 
-  <para><emphasis role="bold">Adding files to the project: </emphasis>You can
-  add source files to the project by clicking on the &quot;<guimenuitem>Import
-  Source Files...&quot;</guimenuitem> button. This copies the selected files to the
-  <filename>source</filename> folder and reloads the project to import the new
+  <para><emphasis role="bold">Adding files to the project:</emphasis> You can
+  add source files to the project by clicking on the <guimenuitem>Import
+  Source Files...</guimenuitem> button. This copies the selected files to the
+  <filename class="directory">source</filename> folder and reloads the project to import the new
   files. You can also add source files from Internet pages, written in
-  MediaWiki, by clicking on<guimenuitem> &quot;Import from MediaWiki&quot;</guimenuitem>
+  MediaWiki, by clicking on <guimenuitem>Import from MediaWiki</guimenuitem>
   button and providing the corresponding URL.</para>
 </section>

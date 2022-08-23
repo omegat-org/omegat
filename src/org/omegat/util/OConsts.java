@@ -94,6 +94,11 @@ public final class OConsts {
     public static final String DEFAULT_W_GLOSSARY_SUFF = "-glossary.txt";
     /** Project subfolder for legacy translation memories default name. */
     public static final String DEFAULT_TM = "tm";
+    /** Project subfolder for exported translation memories. */
+    public static final String DEFAULT_EXPORT_TM = "";
+    /** Translation memory levels, space-separated string, to include zero or 
+        more of the following values: "omegat", "level1" and/or "level2"). */
+    public static final String DEFAULT_EXPORT_TM_LEVELS = "omegat level1 level2";
     /** Project subfolder for automatically applied translation memories within the tm folder. */
     public static final String AUTO_TM = "auto";
     /** Project subfolder for automatically applied translation memories within the tm folder. Existing

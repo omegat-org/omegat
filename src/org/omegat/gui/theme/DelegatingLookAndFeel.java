@@ -33,8 +33,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.LayoutStyle;
 import javax.swing.LookAndFeel;
+import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.plaf.basic.BasicLookAndFeel;
 
 import org.madlonkay.desktopsupport.DesktopSupport;
 import org.omegat.util.gui.ResourcesUtil;
@@ -48,7 +50,8 @@ import org.omegat.util.gui.ResourcesUtil;
  *
  * @author Aaron Madlon-Kay
  */
-public abstract class DelegatingLookAndFeel extends LookAndFeel {
+@SuppressWarnings("serial")
+public abstract class DelegatingLookAndFeel extends BasicLookAndFeel {
     /**
      * Load icon from classpath.
      *
@@ -121,5 +124,10 @@ public abstract class DelegatingLookAndFeel extends LookAndFeel {
     @Override
     public void uninitialize() {
         systemLookAndFeel.uninitialize();
+    }
+
+    @Override
+    public UIDefaults getDefaults() {
+        return systemLookAndFeel.getDefaults();
     }
 }

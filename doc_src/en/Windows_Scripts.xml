@@ -4,32 +4,27 @@
 <section id="windows.scripts">
   <title id="windows.scripts.title">Scripts</title>
 
-  <para>Scripts are user developped extensions of OmegaT that can be written in any language understood by the underlying Java virtual machine. OmegaT distributes a number of scripts developed by OmegaT contributors. You can open them, run them, modify them directly from this window.</para>
+  <para>Scripts are user developped extensions of OmegaT that can be written in any language understood by the underlying Java virtual machine. OmegaT distributes a number of scripts developed by OmegaT contributors. You can open them, run them, modify them directly from this window. You can also write new scripts here for your own use.</para>
 	
-  <para>The script editor is accessible by using <link linkend="menus.tools.scripts" endterm="menus.tools.scripts.title"/>
-in the <link linkend="menus.tools" endterm="menus.tools.title"/>
-</para>
+  <para>The script editor is accessible by using <link
+  linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/> in the
+  <link linkend="menus.tools" endterm="menus.tools.title"/> menu.</para>
 
   <section id="windows.scripts.use">
     <title id="windows.scripts.use.title">Use</title>
 
-    <para>The Scripting window allows you to load an existing script into the text area and run it against the current opened project. To customize the scripting feature, do the following:</para>
+    <para>The Scripting window allows you to load an existing script into the
+    text area and run it against the current opened project.</para>
 
     <itemizedlist>
       <listitem>
         <para>Load a script into the editor by clicking its name in the list in the left-hand panel.</para>
       </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
       <listitem>
         <para>Right-click a button from <guilabel>&lt;1&gt;</guilabel> to <guilabel>&lt;12&gt;</guilabel> in the bottom panel and select <guilabel>Add Script</guilabel>.</para>
       </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
       <listitem>
-        <para>When you left-click the number, the selected script will run. You can also start the selected macros from the main menu by using their entries in the <guisubmenu>Tools</guisubmenu> menu or by pressing <keycombo><keycap>Ctrl</keycap><keycap>Alt</keycap><keycap>F#</keycap></keycombo> (# 1 to 12).</para>
+        <para>When you left-click the number, the selected script will run. You can also start the selected macros from the main menu by using their entries in the <guisubmenu>Tools</guisubmenu> menu or by pressing <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F#</keycap></keycombo> (# 1 to 12).</para>
       </listitem>
     </itemizedlist>
 
@@ -41,20 +36,166 @@ in the <link linkend="menus.tools" endterm="menus.tools.title"/>
     Scripts</ulink></para>
   </section>
 
+  <section id="windows.scripts.distribution">
+	<title id="windows.scripts.distribution.title">Scripts distributed with OmegaT</title>
+	<para>Follow the instructions given in the script text.</para>
+	  <variablelist>
+		<varlistentry><term>Adapt standard tags</term>
+		    <listitem>
+		        <para>Adapt standard tags when Replace with Match command invoked</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Auto Open Last Project</term>
+		    <listitem>
+		        <para>Allow to automatically open last used OmegaT project</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Check Same Segment</term>
+		    <listitem>
+		        <para>Check for identical segments (case sensitive)</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Currency Translator</term>
+		    <listitem>
+		      <para>Translate currencies representation according to source and target locale.</para>
+			  <para>This will translate a string like "$123,399.99" to "123 399,99 USD"</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Example - GUI Scripting</term>
+		    <listitem>
+		        <para>Example of GUI scripting</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Example - Key Binding</term>
+		    <listitem>
+		        <para>Example of keybinding event</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Example - Modify Segment</term>
+		    <listitem>
+		        <para>Example of segment modification</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Example - Search and Replace</term>
+		    <listitem>
+		        <para>Simple search and replace script</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>External spellcheck</term>
+		    <listitem>
+		        <para>Writes all segments in a file named [project_name].doc and opens it</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Extract Text Content</term>
+		    <listitem>
+		        <para>Extracts the content of the projects in a single text file
+		        (one line per segment).  See <ulink
+		        url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182
+		        Extracts the content of the projects to text file</ulink></para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Non-breaking space</term>
+		    <listitem>
+		        <para>Replace spaces with non-breakable spaces where appropriate in French</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Open Current File</term>
+		    <listitem>
+		        <para>Open the current source file</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Open Glossary</term>
+		    <listitem>
+		        <para>Open the writeable glossary in an editor</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Open Project Folder</term>
+		    <listitem>
+		        <para>Open the project folder in the operating system</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Open TM Folder</term>
+		    <listitem>
+		        <para>Open the /tm folder</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Open project_save.tmx</term>
+		    <listitem>
+		        <para>Open project_save.tmx in an editor</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>QA - Check Rules</term>
+		    <listitem>
+		        <para>QA script</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>QA - Identical Segments</term>
+		    <listitem>
+		        <para>Checks for identical segments (case sensitive).</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>SVN - Cleanup (recursive)</term>
+		    <listitem>
+		        <para>Perform SVN cleanup on current project or any folder (recursively)</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Show Same Segments</term>
+		    <listitem>
+		        <para>Display a list of segments where source and target identical content</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Spellcheck</term>
+		    <listitem>
+		        <para>Global spell checking</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Strip Bidi Marks</term>
+		    <listitem>
+		        <para>Remove bidi mark in the current target or in selection</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Strip tags</term>
+		    <listitem>
+		        <para>Remove tags in the current target or in selection</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Switch Colour Theme</term>
+		    <listitem>
+		        <para>Switch Editor Colour Theme</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Tag-Free Match</term>
+		    <listitem>
+		        <para>Replace current target with tag-free match</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Tagwipe</term>
+		    <listitem>
+		        <para>Remove tags from docx documents</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>issue_provider_sample.groovy</term>
+		    <listitem>
+		        <para>(no description)</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>toolbar.groovy</term>
+		    <listitem>
+		        <para>(no description)</para>
+		    </listitem>
+		</varlistentry>
+	  </variablelist>
+  </section>
+  
   <section id="windows.scripts.languages">
     <title id="windows.scripts.languages.title">Scripting languages</title>
 
-    <para>The following scripting languages have been implemented:</para>
+	<variablelist>
+	  <varlistentry><term>Groovy</term><listitem><para>a dynamic language for the Java Virtual machine. It builds upon the strengths of Java but has additional power features inspired by languages like Python, Ruby and Smalltalk. See <ulink url="https://groovy-lang.org">Apache Groovy</ulink> for details.</para></listitem></varlistentry>
+	  <varlistentry><term>JavaScript</term><listitem><para>a prototype-based scripting language that is dynamic, weakly typed and has first-class functions. It is a multi-paradigm language, supporting object-oriented, imperative, and functional programming styles. See <ulink url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, and Nashorn</ulink></para></listitem></varlistentry>
+	</variablelist>
 
-    <para><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): a dynamic language for the Java Virtual machine. It builds upon the strengths of Java but has additional power features inspired by languages like Python, Ruby and Smalltalk.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">JavaScript</emphasis> (sometimes abbreviated JS, not to be confused with Java): a prototype-based scripting language that is dynamic, weakly typed and has first-class functions. It is a multi-paradigm language, supporting object-oriented, imperative, and functional programming styles. Being the language behind popular software such as Firefox, it is a familiar and preferred programming tool in the open-source domain.</para>
-        </listitem>
-      </itemizedlist>All the languages have access to the OmegaT object model, with the project as the top object. For example, the following Groovy code snippet scans through all the segments in all the files in the current project and, if a translation exists, prints out the source and the target of the segment:</para>
+	  <para>All the languages have access to the OmegaT object model, with the project as the top object. For example, the following Groovy code snippet scans through all the segments in all the files in the current project and, if a translation exists, prints out the source and the target of the segment:</para>
 
     <programlisting>    files = project.projectFiles;
     for (i in 0 ..&lt; files.size())

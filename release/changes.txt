@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  12 Enhancements
+  13 Enhancements
   11 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
@@ -41,6 +41,9 @@
   https://sourceforge.net/p/omegat/bugs/1101/
 
   Implemented requests:
+
+  - Support Git branch in Team Project
+  https://sourceforge.net/p/omegat/feature-requests/918/
 
   - New project properties options for export TM directory and which TMs should be exported
   https://sourceforge.net/p/omegat/feature-requests/1611/

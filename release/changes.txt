@@ -21,7 +21,7 @@
   - Paragraph marks not showing when loading partial pages-
   https://sourceforge.net/p/omegat/bugs/1102/
 
-  - No ID-bound matching in /tm/tmx2source
+  - Display other language translations also for alternative translations
   https://sourceforge.net/p/omegat/bugs/1101/
 
   - Searcher to show path in relative
@@ -45,9 +45,6 @@
 
   - Highlight found text even if normalized text (for feature "full/half width insensitive") 
     differs from original
-
-  - Display other language translations also for alternative translations
-  https://sourceforge.net/p/omegat/bugs/1101/
 
   Implemented requests:
 

@@ -35,6 +35,7 @@ USER omegat
 CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
   && cp /keys/id_rsa /home/omegat/.ssh/id_rsa \
   && chmod 600 /home/omegat/.ssh/id_rsa && chown omegat /home/omegat/.ssh/id_rsa \
+  && touch /home/omegat/.ssh/known_hosts \
   && git config --global user.name example && git config --global user.email ex@example.com \
   && git config --global http.sslVerify false \
   && echo "start test-integration" \

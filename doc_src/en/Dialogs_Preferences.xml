@@ -283,37 +283,51 @@
     <section id="dialogs.preferences.fonts">
       <title id="dialogs.preferences.fonts.title">Font</title>
 
-      <para>TODO Shows the dialog to modify the text display font. Users of old
-      computers who feel window resizing is very slow can try changing the
-      font. See font settings in Miscellanea</para>
+      <para>Changes the display font. If characters appear as squares, modify
+      the setting to select a font that has the corresponding glyph.</para>
     </section>
 
     <section id="dialogs.preferences.colours">
       <title id="dialogs.preferences.colours.title">Colours</title>
 
-      <para>This page allows you to choose different colours for each part of
-      the user interface.</para>
+      <para>A number of items in the user interface can be set with a different color.</para>
 
       <para>Pre-defined themes can be set using scripts. A script bundled with
       OmegaT called Switch Colour Themes provides a default "Dark"
-      theme.</para>
+      theme. See <link linkend="windows.scripts" endterm="windows.scripts.title"/> for details.</para>
     </section>
   </section>
 
   <section id="dialogs.preferences.file.filters">
     <title id="dialogs.preferences.file.filters.title">File Filters</title>
 
-    <para>This dialog lists the file filters available. The filters used by
-    the current project are displayed in bold. If you prefer not to use OmegaT
-    to translate files of a certain type, you can turn off the corresponding
-    filter by deactivating the check box beside its name. OmegaT will then
-    omit the corresponding files when loading projects, and will copy them
-    unmodified to the <filename class="directory">target</filename> folder
-    when creating target documents. When you wish to use the filter again,
-    just tick the check box. Click <guilabel>Defaults</guilabel> to reset the
-    file filters to the default settings. To edit the files and encodings a
-    filter is used for, select the filter in the list and click
-    <guilabel>Edit</guilabel>.</para>
+    <para>This dialog lists the available file filters. The filters used by the
+    current project are displayed in bold. If you prefer not to use OmegaT to
+    translate files of a certain type, you can turn off the corresponding filter
+    by unchecking the box beside its name. OmegaT will then omit the
+    corresponding files when loading projects, and will copy them unmodified to
+    the <link linkend="project.folder.target"
+    endterm="project.folder.target.title"/> folder when creating target
+    documents. When you wish to use the filter again, just tick the check
+    box. Click <guilabel>Defaults</guilabel> to reset the file filters to the
+    default settings. To edit the files and encodings a filter is used for,
+    select the filter in the list and click <guilabel>Edit</guilabel>.</para>
+
+	<para>Modified file filter preferences are saved in <link
+	linkend="configuration.folder.extra.contents.filters"
+	endterm="configuration.folder.extra.contents.filters.title"/>, in the
+	configuration folder. See <link
+	linkend="configuration.folder"
+	endterm="configuration.folder.title"/> for
+	details.</para>
+
+	<para>You can enable project specific file filters in <link
+	linkend="dialogs.project.properties.filters"
+	endterm="dialogs.project.properties.filters.title"/>. In this case, the
+	<link linkend="configuration.folder.extra.contents.filters"
+	endterm="configuration.folder.extra.contents.filters.title"/> will be
+	located in the project folder. See <link linkend="project.folder"
+	endterm="project.folder.title"/> for details.</para>
 
     <para>The dialog allows you to enable or disable the following
     options:</para>
@@ -352,6 +366,220 @@
       </listitem>
     </itemizedlist>
 
+    <section id="edit.filter.dialog">
+      <title id="edit.filter.dialog.title">Edit filter dialog</title>
+
+      <para>This dialog enables you to specify the source filename patterns
+      for files to be processed by the filter, customize the filenames of
+      translated files and select which encodings should be used for loading
+      the source file and saving the translation. To modify a file filter
+      pattern, either modify the fields directly or click
+      <guibutton>Edit</guibutton>. To add a new file filter pattern, click
+      <guibutton>Add</guibutton>. The same dialog is used to add a pattern or
+      to edit a particular pattern. The dialog includes a special target
+      filename pattern editor, which you can use to customize the names of
+      output files.</para>
+
+      <section id="source.filetype.and.filename.pattern">
+        <title id="source.filetype.and.filename.pattern.title">Source file
+        type, filename pattern</title>
+
+        <para>When OmegaT encounters a file in its <filename
+        class="directory">source</filename> folder, it attempts to select the
+        filter based upon the file's extension. More precisely, OmegaT
+        attempts to match each filter's source filename patterns against the
+        filename. For example, the pattern <literal>*.xhtml </literal>matches
+        any file with the <literal>.xhtml</literal> extension. If the
+        appropriate filter is found, the file is assigned to it for
+        processing. For example, by default, the XHTML filter is used to
+        process files with the .xhtml extension. You can change or add
+        filename patterns for files to be handled by each file filter. Source
+        filename patterns use wild card characters similar to those used in
+        <emphasis role="bold">Searches</emphasis>. The '*' character matches
+        zero or more characters. The '?' character matches exactly one
+        character. All other characters represent themselves. For example, if
+        you wish the text filter to handle readme files (<literal>readme,
+        read.me</literal>, and <literal>readme.txt</literal>) you should use
+        the pattern <literal>read*</literal>.</para>
+      </section>
+
+      <section id="source.and.target.files.encoding">
+        <title id="source.and.target.files.encoding.title">Source and
+        Translated file encoding</title>
+
+        <para>Only a limited number of file formats specify a mandatory
+        encoding. File formats that do not specify their encoding will use the
+        encoding you set up for the extension that matches their name. For
+        example, by default <literal>.txt</literal> files will be loaded using
+        the default encoding of your operating system. You can change the
+        source encoding for each different source filename pattern. Target
+        files can also be written in any encoding. By default, the translated
+        file encoding is the same as the source file encoding. The source and
+        target encoding fields use drop-down menus containing all the
+        supported encodings. &lt;auto&gt; leaves the choice of encoding to
+        OmegaT. This is how it works:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT identifies the source file encoding by using its
+            encoding declaration, if present (HTML files, XML based
+            files).</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT is instructed to use a mandatory encoding for certain
+            file formats (Java properties etc).</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para>OmegaT uses the default encoding of the operating system for
+            text files.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="target.name">
+        <title id="target.name.title">Translated filename</title>
+
+        <para>Sometimes you may wish to rename the files you translate
+        automatically, for example adding a language code after the file name.
+        The target filename pattern uses a special syntax, so if you want to
+        edit this field, you must click <emphasis
+        role="bold">Edit...</emphasis>and use the Edit Pattern Dialog. If you
+        want to revert to the filter's default configuration, click <emphasis
+        role="bold">Defaults.</emphasis> You can also modify the name directly
+        in the target filename pattern field of the file filters dialog. The
+        Edit Pattern Dialog offers among others the following options:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Default is <literal>${filename}</literal>– full filename of
+            the source file with extension: in this case the name of the
+            translated file is the same as that of the source file.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${nameOnly}</literal>– allows you to insert only
+            the name of the source file without the extension.</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension} </literal>- the original file
+            extension</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLocale}</literal>– target locale code (of a
+            form "xx_YY").</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLanguage}</literal>– the target language
+            and country code together (of a form "XX-YY").</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetLanguageCode}</literal> – the target
+            language - only "XX"</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${targetCountryCode}</literal>– the target country
+            - only "YY"</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${timestamp-????}</literal> – system date time at
+            generation time in various patterns</para>
+
+            <para>See <ulink
+            url="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">
+            Oracle documentation</ulink> for examples of the "SimpleDateFormat"
+            patterns</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-os-name}</literal> - operating system of
+            the computer used</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-user-name}</literal> - system user
+            name</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${system-host-name}</literal> - system host
+            name</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${file-source-encoding}</literal> - source file
+            encoding</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${file-target-encoding}</literal> - target file
+            encoding</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${targetLocaleLCID}</literal> - Microsoft target
+            locale</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Additional variants are available for variables ${nameOnly} and
+        ${Extension}. In case the file name has ambivalent name, one can apply
+        variables of the form <literal>${name
+        only</literal><emphasis>-extension number</emphasis>} and
+        <literal>${extension</literal>-<emphasis>extension number}
+        </emphasis>. If for example the original file is named
+        Document.xx.docx, the following variables will give the following
+        results:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>${nameOnly-0}</literal> Document</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${nameOnly-1}</literal> Document.xx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${nameOnly-2}</literal> Document.xx.docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-0}</literal> docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-1}</literal> xx.docx</para>
+          </listitem>
+
+          <listitem>
+            <para><literal>${extension-2}</literal> Document.xx.docx</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>	
+	
     <section id="filters.options">
       <title id="filters.options.title">Filter options</title>
 
@@ -572,220 +800,6 @@
           comments, presentation notes, links (URL), sheet names</para>
         </listitem>
       </itemizedlist>
-    </section>
-
-    <section id="edit.filter.dialog">
-      <title id="edit.filter.dialog.title">Edit filter dialog</title>
-
-      <para>This dialog enables you to specify the source filename patterns
-      for files to be processed by the filter, customize the filenames of
-      translated files and select which encodings should be used for loading
-      the source file and saving the translation. To modify a file filter
-      pattern, either modify the fields directly or click
-      <guibutton>Edit</guibutton>. To add a new file filter pattern, click
-      <guibutton>Add</guibutton>. The same dialog is used to add a pattern or
-      to edit a particular pattern. The dialog includes a special target
-      filename pattern editor, which you can use to customize the names of
-      output files.</para>
-
-      <section id="source.filetype.and.filename.pattern">
-        <title id="source.filetype.and.filename.pattern.title">Source file
-        type, filename pattern</title>
-
-        <para>When OmegaT encounters a file in its <filename
-        class="directory">source</filename> folder, it attempts to select the
-        filter based upon the file's extension. More precisely, OmegaT
-        attempts to match each filter's source filename patterns against the
-        filename. For example, the pattern <literal>*.xhtml </literal>matches
-        any file with the <literal>.xhtml</literal> extension. If the
-        appropriate filter is found, the file is assigned to it for
-        processing. For example, by default, the XHTML filter is used to
-        process files with the .xhtml extension. You can change or add
-        filename patterns for files to be handled by each file filter. Source
-        filename patterns use wild card characters similar to those used in
-        <emphasis role="bold">Searches</emphasis>. The '*' character matches
-        zero or more characters. The '?' character matches exactly one
-        character. All other characters represent themselves. For example, if
-        you wish the text filter to handle readme files (<literal>readme,
-        read.me</literal>, and <literal>readme.txt</literal>) you should use
-        the pattern <literal>read*</literal>.</para>
-      </section>
-
-      <section id="source.and.target.files.encoding">
-        <title id="source.and.target.files.encoding.title">Source and
-        Translated file encoding</title>
-
-        <para>Only a limited number of file formats specify a mandatory
-        encoding. File formats that do not specify their encoding will use the
-        encoding you set up for the extension that matches their name. For
-        example, by default <literal>.txt</literal> files will be loaded using
-        the default encoding of your operating system. You can change the
-        source encoding for each different source filename pattern. Target
-        files can also be written in any encoding. By default, the translated
-        file encoding is the same as the source file encoding. The source and
-        target encoding fields use drop-down menus containing all the
-        supported encodings. &lt;auto&gt; leaves the choice of encoding to
-        OmegaT. This is how it works:</para>
-
-        <itemizedlist>
-          <listitem>
-            <para>OmegaT identifies the source file encoding by using its
-            encoding declaration, if present (HTML files, XML based
-            files).</para>
-          </listitem>
-        </itemizedlist>
-
-        <itemizedlist>
-          <listitem>
-            <para>OmegaT is instructed to use a mandatory encoding for certain
-            file formats (Java properties etc).</para>
-          </listitem>
-        </itemizedlist>
-
-        <itemizedlist>
-          <listitem>
-            <para>OmegaT uses the default encoding of the operating system for
-            text files.</para>
-          </listitem>
-        </itemizedlist>
-      </section>
-
-      <section id="target.name">
-        <title id="target.name.title">Translated filename</title>
-
-        <para>Sometimes you may wish to rename the files you translate
-        automatically, for example adding a language code after the file name.
-        The target filename pattern uses a special syntax, so if you want to
-        edit this field, you must click <emphasis
-        role="bold">Edit...</emphasis>and use the Edit Pattern Dialog. If you
-        want to revert to the filter's default configuration, click <emphasis
-        role="bold">Defaults.</emphasis> You can also modify the name directly
-        in the target filename pattern field of the file filters dialog. The
-        Edit Pattern Dialog offers among others the following options:</para>
-
-        <itemizedlist>
-          <listitem>
-            <para>Default is <literal>${filename}</literal>– full filename of
-            the source file with extension: in this case the name of the
-            translated file is the same as that of the source file.</para>
-          </listitem>
-        </itemizedlist>
-
-        <itemizedlist>
-          <listitem>
-            <para><literal>${nameOnly}</literal>– allows you to insert only
-            the name of the source file without the extension.</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${extension} </literal>- the original file
-            extension</para>
-          </listitem>
-        </itemizedlist>
-
-        <itemizedlist>
-          <listitem>
-            <para><literal>${targetLocale}</literal>– target locale code (of a
-            form "xx_YY").</para>
-          </listitem>
-        </itemizedlist>
-
-        <itemizedlist>
-          <listitem>
-            <para><literal>${targetLanguage}</literal>– the target language
-            and country code together (of a form "XX-YY").</para>
-          </listitem>
-        </itemizedlist>
-
-        <itemizedlist>
-          <listitem>
-            <para><literal>${targetLanguageCode}</literal> – the target
-            language - only "XX"</para>
-          </listitem>
-        </itemizedlist>
-
-        <itemizedlist>
-          <listitem>
-            <para><literal>${targetCountryCode}</literal>– the target country
-            - only "YY"</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${timestamp-????}</literal> – system date time at
-            generation time in various patterns</para>
-
-            <para>See <ulink
-            url="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html">
-            Oracle documentation</ulink> for examples of the "SimpleDateFormat"
-            patterns</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${system-os-name}</literal> - operating system of
-            the computer used</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${system-user-name}</literal> - system user
-            name</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${system-host-name}</literal> - system host
-            name</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${file-source-encoding}</literal> - source file
-            encoding</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${file-target-encoding}</literal> - target file
-            encoding</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${targetLocaleLCID}</literal> - Microsoft target
-            locale</para>
-          </listitem>
-        </itemizedlist>
-
-        <para>Additional variants are available for variables ${nameOnly} and
-        ${Extension}. In case the file name has ambivalent name, one can apply
-        variables of the form <literal>${name
-        only</literal><emphasis>-extension number</emphasis>} and
-        <literal>${extension</literal>-<emphasis>extension number}
-        </emphasis>. If for example the original file is named
-        Document.xx.docx, the following variables will give the following
-        results:</para>
-
-        <itemizedlist>
-          <listitem>
-            <para><literal>${nameOnly-0}</literal> Document</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${nameOnly-1}</literal> Document.xx</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${nameOnly-2}</literal> Document.xx.docx</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${extension-0}</literal> docx</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${extension-1}</literal> xx.docx</para>
-          </listitem>
-
-          <listitem>
-            <para><literal>${extension-2}</literal> Document.xx.docx</para>
-          </listitem>
-        </itemizedlist>
-      </section>
     </section>
   </section>
 

@@ -205,12 +205,12 @@
           TaaS Collections...</term>
 
           <listitem>
-            <para>This button enables you to browse and download the
-            collections that exist for the project's source and target
-            languages. Private collections are displayed in bold. The
-            collections are downloaded as TBX glossaries and stored in the
-            current <filename class="directory">glossary</filename>
-            folder.</para>
+            <para>This button enables you to browse and download the collections
+            that exist for the project's source and target languages. Private
+            collections are displayed in bold. The collections are downloaded as
+            TBX glossaries and stored in the current <link
+            linkend="project.folder.glossary"
+            endterm="project.folder.glossary.title"/> folder.</para>
           </listitem>
         </varlistentry>
 
@@ -284,7 +284,7 @@
       <title id="dialogs.preferences.fonts.title">Font</title>
 
       <para>Changes the display font. If characters appear as squares, modify
-      the setting to select a font that has the corresponding glyph.</para>
+      the setting to select a font that has the corresponding glyphs.</para>
     </section>
 
     <section id="dialogs.preferences.colours">
@@ -806,44 +806,53 @@
   <section id="dialogs.preferences.segmentation.setup">
 	<title id="dialogs.preferences.segmentation.setup.title">Segmentation Setup</title>
 
-	<para>Translation memory tools work with textual units called segments.
-	OmegaT has two ways to segment a text: by paragraph or by sentence
-	segmentation (also referred to as “rule-based segmentation”). In order to
-	select the type of segmentation, select <menuchoice>
-    <guimenu>Project</guimenu>
+	<para>Translation memory tools work with textual units called segments. When
+	the translation occurs, a translated segment is stored with its translation
+	in the project memory and will be used for matching purposes later in the
+	translation.</para>
 
-    <guimenuitem>Properties...</guimenuitem>
-    </menuchoice> from the main menu and tick or untick the check box
-	provided. Paragraph segmentation is advantageous in certain cases, such as
-	highly creative or stylistic translations in which the translator may wish
-	to change the order of entire sentences; for the majority of projects,
-	however, sentence segmentation is a choice to be preferred, since it
-	delivers better matches from previous translations. If sentence segmentation
-	has been selected, you can setup the rules by selecting <menuchoice>
-    <guimenu>Options</guimenu>
+	<para>Not segmenting a document is equivalent to selecting a
+	<emphasis>paragraph</emphasis> segmentation. In that case, each paragraph
+	(as paragraphs are defined in the original document format) is displayed as
+	one segment and the translator is free to reorganize the sentences within
+	the segment during the translation. This setting works well with more
+	litterary documents and generally with documents where translation memory
+	matches are not so important.</para>
 
-    <guimenuitem>Segmentation...</guimenuitem>
-    </menuchoice>from the main menu.</para>
+	<para>Using sentences as the basis for segmentation requires using a number
+	of rules (called <emphasis>segmentation rules</emphasis>) that define what a
+	sentence can be in the source language. This setting works well with
+	documents where repetition of similar sentences is common, for exemple
+	technical or legal documents. The rules are generally pre-defined and can be
+	modified by the translator by using <emphasis>regular
+	expressions</emphasis>. See <link linkend="menus.options.segmentation"
+	endterm="menus.options.segmentation.title"/> in the <link
+	linkend="menus.options" endterm="menus.options.title"/> menu.</para>
+	
+	<para>In order to select the type of segmentation, select <link
+	linkend="menus.project.properties"
+	endterm="menus.project.properties.title"/> from the <link
+	linkend="menus.project" endterm="menus.project.title"/> menu and tick or
+	untick the check box provided.</para>
 
-	<para>Dependable segmentation rules are already available for many
-	languages, so it is likely that you will not need to get involved with
-	writing your own segmentation rules. On the other hand this functionality
-	can be very useful in special cases, where you can increase your
-	productivity by tuning the segmentation rules to the text to be
-	translated.</para>
+	<section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
+	  <title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Rules based segmentation</title>
+	  <para>Dependable segmentation rules are already available for many
+	  languages, so it is likely that you will not need to get involved with
+	  writing your own segmentation rules. On the other hand this functionality
+	  can be very useful in special cases, where you can increase your
+	  productivity by tuning the segmentation rules to the text to be
+	  translated.</para>
 
-	<para><emphasis role="bold">Warning: </emphasis>because the text will
-	segment differently after filter options have been changed, so you may have
-	to start translating from scratch. At the same time the previous valid
-	segments in the project translation memory will turn into orphan segments.
-	If you change segmentation options when a project is open, you must reload
-	the project in order for the changes to take effect.</para>
+	  <warning><para>If you change the segmentation during translation, the
+	  project must be reloaded for the new segmentation to be taken into account
+	  and some previously translated segments will appear split or merged and
+	  thus won't be considered translated anymore.</para></warning>
 
-	<para>OmegaT uses the following sequence of steps:</para>
-
-	<variablelist>
-      <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
-		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Structure
+	  <variablelist>
+		<varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
+		<term
+			id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Structure
 		level segmentation</term>
 
 		<listitem>
@@ -915,11 +924,6 @@
           </listitem>
 		</varlistentry>
       </variablelist>
-
-      <para>The predefined break rules should be sufficient for most European
-      languages and Japanese. In view of the flexibility, you may consider
-      defining more exception rules for your source language in order to provide
-      more meaningful and coherent segments.</para>
 	</section>
 
 	<section id="rules.priority">
@@ -958,9 +962,9 @@
       <para>Add the <emphasis role="bold">Before</emphasis> and<emphasis
       role="bold"> After</emphasis> patterns. To check their syntax and their
       applicability, it is advisable to use tools which allow you to see their
-      effect directly. See <link linkend="appendix.regexp">Regular
-      expressions</link>. A good starting point will always be the existing
-      rules.</para>
+      effect directly. See <link linkend="appendix.regexp"
+      endterm="appendix.regexp.title"/> for details. A good starting point will
+      always be the existing rules.</para>
 	</section>
 
 	<section id="segmentation.simple.examples">
@@ -1015,29 +1019,32 @@
 		</tgroup>
 	  </informaltable>
 	</section>
+	</section>
 
 	<section id="dialog.preferences.auto.completion">
 	  <title id="dialog.preferences.auto.completion.title">Auto-Completion</title>
 
-	  <para>Click on <guimenuitem>Glossary...</guimenuitem> to configure the
+	  <para>Click on <guilabel>Glossary...</guilabel> to configure the
 	  Auto-completer Glossary View.</para>
 
-	  <para>Click on <guimenuitem>Auto-text...</guimenuitem> to configure
+	  <para>Click on <guilabel>Auto-text...</guilabel> to configure
 	  Auto-text options and to add or remove entries.</para>
 
-	  <para>Click on <guimenuitem>Character Table...</guimenuitem> to set the
+	  <para>Click on <guilabel>Character Table...</guilabel> to set the
 	  Character table auto-completer options.</para>
 
-	  <para>Auto-completer is launched within the target segment via <keycombo>
-	  <keycap>Ctrl</keycap>
+	  <para>Click on <guilabel>Enable history completion</guilabel> or
+	  <guilabel>Enable history prediction</guilabel> to set history based
+	  completions</para>
 
-	  <keycap>Space</keycap>
-	  </keycombo> shortcut.</para>
+	  <warning><para>Absolutely none of your data (history, etc.) is
+	  <emphasis>ever</emphasis> sent online by OmegaT  for processing. All the
+	  prediction/completion is computed locally.</para></warning>
 
-	  <para>If <emphasis role="bold">Show Relevant Suggestions
-	  Automatically</emphasis> option is checked, Auto-completer is launched
-	  automatically by typing the first letter of a translated glossary entry,
-	  or by typing "&lt;" in case of tags.</para>
+	  <para>If <emphasis>Show Relevant Suggestions Automatically</emphasis>
+	  option is checked, Auto-completer is launched automatically after typing
+	  the first letter of a translated glossary entry, or "&lt;" in
+	  case of tags, etc.</para>
 	</section>
 
 	<section id="dialog.preferences.spellchecker">
@@ -1046,7 +1053,8 @@
 	  <para>OmegaT has a built-in spell checker based on the spelling checker
 	  used in Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
 	  consequently able to use the huge range of free spelling dictionaries
-	  available for these applications.</para>
+	  available for these applications. See <link linkend="spellchecker"
+	  endterm="spellchecker.title"/> for details.</para>
 	</section>
 
 	<section id="dialog.preferences.languagetool.plugin">

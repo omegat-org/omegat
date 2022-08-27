@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -47,6 +48,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ITMXEntry;
 
 /**
@@ -157,9 +159,20 @@ public class TMXWriter2 implements AutoCloseable {
      * @param entries Map of SourceTextEntry and TMXEntry to output.
      * @throws Exception when i/o error or XMLStream error happened.
      */
-    public void writeEntries(final Map<String, ? extends ITMXEntry> entries) throws Exception {
-        for (Map.Entry<String, ? extends ITMXEntry> en : entries.entrySet()) {
-            writeEntry(en.getKey(), en.getValue().getTranslationText(), en.getValue(), null);
+    public void writeEntries(final Map<EntryKey, ? extends ITMXEntry> entries, boolean addProp) throws Exception {
+        List<String> propList = new ArrayList<>();
+        for (Map.Entry<EntryKey, ? extends ITMXEntry> en : entries.entrySet()) {
+            EntryKey k = en.getKey();
+            if (addProp) {
+                propList.clear();
+                propList.add("file");
+                propList.add(k.file);
+                propList.add("id");
+                propList.add(k.id);
+                writeEntry(k.sourceText, en.getValue().getTranslationText(), en.getValue(), propList);
+            } else {
+                writeEntry(k.sourceText, en.getValue().getTranslationText(), en.getValue(), null);
+            }
         }
     }
 

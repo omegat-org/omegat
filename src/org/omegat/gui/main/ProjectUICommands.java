@@ -51,6 +51,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.io.FileUtils;
+
 import org.omegat.CLIParameters;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
@@ -67,10 +68,11 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.ChooseMedProject;
 import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
-import org.omegat.gui.dialogs.NewTeamProject;
+import org.omegat.gui.dialogs.NewTeamProjectController;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -79,7 +81,6 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.WikiGet;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
@@ -304,27 +305,20 @@ public final class ProjectUICommands {
         if (Core.getProject().isProjectLoaded()) {
             return;
         }
+
         new SwingWorker<Void, Void>() {
             File projectRoot;
             IMainWindow mainWindow;
             Cursor oldCursor;
             protected Void doInBackground() throws Exception {
-                Core.getMainWindow().showStatusMessageRB(null);
-
-                final NewTeamProject dialog = new NewTeamProject(Core.getMainWindow().getApplicationFrame());
-                dialog.setVisible(true);
-
-                if (!dialog.ok) {
-                    Core.getMainWindow().showStatusMessageRB("TEAM_CANCELLED");
-                    return null;
-                }
-
-                File dir = new File(dialog.getSaveLocation());
-                if (!ensureProjectDir(dir)) {
-                    return null;
-                }
-
                 mainWindow = Core.getMainWindow();
+                mainWindow.showStatusMessageRB(null);
+                NewTeamProjectController newTeamProjectController = new NewTeamProjectController(mainWindow);
+                File dir = newTeamProjectController.show();
+                if (dir == null || !ensureProjectDir(dir)) {
+                    return null;
+                }
+
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
                 oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
@@ -333,10 +327,8 @@ public final class ProjectUICommands {
                 // retrieve omegat.project
                 projectRoot = dir;
                 List<RepositoryDefinition> repos = new ArrayList<>();
-                RepositoryDefinition repo = new RepositoryDefinition();
+                RepositoryDefinition repo = newTeamProjectController.getRepo();
                 repos.add(repo);
-                repo.setType(dialog.getRepoType());
-                repo.setUrl(dialog.getRepoUrl());
                 RepositoryMapping mapping = new RepositoryMapping();
                 mapping.setLocal("");
                 mapping.setRepository("");

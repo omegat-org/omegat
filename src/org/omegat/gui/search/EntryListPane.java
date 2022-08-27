@@ -487,6 +487,9 @@ class EntryListPane extends JTextPane {
             public void actionPerformed(ActionEvent e) {
                 if (!autoSyncWithEditor && !entryList.isEmpty()) {
                     getActiveDisplayedEntry().gotoEntryInEditor();
+                    JFrame frame = Core.getMainWindow().getApplicationFrame();
+                    frame.setState(JFrame.NORMAL);
+                    frame.toFront();
                 }
             }
         });

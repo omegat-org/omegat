@@ -2,7 +2,7 @@
  OmegaT 5.8.0
 ----------------------------------------------------------------------
   14 Enhancements
-  14 Bug fixes
+  15 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -88,6 +88,9 @@
 
   - In mode=console-align, generate tmx with mutiples translations
   https://sourceforge.net/p/omegat/feature-requests/1408/
+
+  - Allow jumping to the selected segment from Search using a keyboard shortcut
+ https://sourceforge.net/p/omegat/feature-requests/1603/
 
 ----------------------------------------------------------------------
 OmegaT 5.7.1 (2022-03-19)

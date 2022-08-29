@@ -166,6 +166,7 @@ public class ProjectPropertiesDialog extends JDialog {
      * @param dialogTypeValue
      *            type of the dialog ({@link Mode#NEW_PROJECT}, {@link Mode#RESOLVE_DIRS} or {@link Mode#EDIT_PROJECT}).
      */
+    // CHECKSTYLE:OFF
     public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties, String projFileName,
             Mode dialogTypeValue) {
         super(parent, true);
@@ -829,6 +830,7 @@ public class ProjectPropertiesDialog extends JDialog {
         StaticUIUtils.fitInScreen(this);
         setLocationRelativeTo(parent);
     }
+    // CHECKSTYLE:ON
 
     /**
      * Browses for the directory.

@@ -30,59 +30,37 @@
 
       <listitem>
         <para>Click the <guibutton>Run</guibutton> button at the bottom of the
-        window, or press <keycombo>
-            <keycap>C</keycap>
-
-            <keycap>R</keycap>
-          </keycombo> to launch the script immediately.</para>
+        window, or press <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> to launch the script immediately.</para>
       </listitem>
 
       <listitem>
-        <para>If you use a script frequently, you can right-click one of the
-        <guilabel>&lt;1&gt;</guilabel> to <guilabel>&lt;12&gt;</guilabel>
-        buttons at the bottom of the window and select <guilabel>Add
-        Script</guilabel> to assign the script to that number.</para>
+        <para>If you use a script frequently, you can right-click one of the <guilabel>&lt;1&gt;</guilabel> to <guilabel>&lt;12&gt;</guilabel> buttons at the bottom of the window and select <guilabel>Add Script</guilabel> to assign the script to that number.</para>
       </listitem>
 
       <listitem>
-        <para>You can then left-click on the number to run its assigned
-        script. You can also run an assigned script from the menu by selecting
-        the applicable entry in the <guisubmenu>Tools</guisubmenu> menu or
-        pressing <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F#</keycap></keycombo> (the F1 to F12 key corresponding to the assigned
-        number).</para>
+        <para>You can then left-click on the number to run its assigned script. You can also run an assigned script from the menu by selecting the applicable entry in the <guisubmenu>Tools</guisubmenu> menu or pressing <keycombo> <keycap>C</keycap><keycap>A</keycap><keycap>F#</keycap></keycombo> (the F1 to F12 key corresponding to the assigned number).</para>
       </listitem>
     </itemizedlist>
 
-    <para>By default, scripts are stored in the <filename
-    class="directory">scripts</filename> subfolder of the OmegaT installation
-    folder (the folder that contains the <filename>OmegaT.jar</filename>
-    file).</para>
+    <para>By default, scripts are stored in the <filename class="directory">scripts</filename> subfolder of the OmegaT installation folder (the folder that contains the <filename>OmegaT.jar</filename> file).</para>
 
-    <para>New scripts added there will appear in the list of available scripts
-    in the <guilabel>Scripting</guilabel> window.</para>
+    <para>New scripts added there will appear in the list of available scripts in the <guilabel>Scripting</guilabel> window.</para>
 
     <important>
-      <para>Depending on the configuration of your operating system, you may
-      not have permission to write to the default scripts folder
-      location.</para>
+      <para>Depending on the configuration of your operating system, you may not have permission to write to the default scripts folder location.</para>
 
-      <para>In such cases, you will have to copy or move the scripts subfolder
-      to a location for which you do have write permissions, such as the
-      <link linkend="configuration.folder.location" endterm="configuration.folder.location.title"/> if you want to add or write new script, or modify existing scripts.</para>
+      <para>In such cases, you will have to copy or move the scripts subfolder to a location for which you do have write permissions, such as the <link endterm="configuration.folder.location.title" linkend="configuration.folder.location"/>, if you want to write your own scripts, add new ones, or modify existing ones.</para>
     </important>
 
-	<warning>
-		<para>If you do have permission to write to the default folder, make sure you change the name of any scripts you modify, or make a backup, as those scripts will be overwritten when OmegaT is updated.</para>
-	</warning>
+    <warning>
+      <para>If you do have permission to write to the default folder, make sure you change the name, or make a backup, of any scripts you modify, as they will be overwritten when OmegaT is updated.</para>
+    </warning>
 
-    <para>Some additional scripts can be found here: <ulink
-    url="https://sourceforge.net/projects/omegatscripts/">OmegaT
-    Scripts</ulink></para>
+    <para>Additional scripts can be found here: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts.</ulink></para>
   </section>
 
   <section id="windows.scripts.distribution">
-    <title id="windows.scripts.distribution.title">Scripts distributed with
-    OmegaT</title>
+    <title id="windows.scripts.distribution.title">Scripts distributed with OmegaT</title>
 
     <para>Follow the instructions provided in the script itself.</para>
 
@@ -91,8 +69,7 @@
         <term>Adapt standard tags</term>
 
         <listitem>
-          <para>Adapt standard tags when the Replace with Match command
-          invoked.</para>
+          <para>Adapt standard tags when the Replace with Match command invoked.</para>
         </listitem>
       </varlistentry>
 
@@ -116,8 +93,7 @@
         <term>Currency Translator</term>
 
         <listitem>
-          <para>Translate currencies representation according to the source
-          and target locales.</para>
+          <para>Translate currencies representation according to the source and target locales.</para>
 
           <para>This will translate a string like “$123,399.99” to “123 399,99
           USD”, for example.</para>
@@ -144,7 +120,7 @@
         <term>Example - Modify Segment</term>
 
         <listitem>
-          <para>Example of modifying a segment.</para>
+          <para>Example showing how to modify a segment.</para>
         </listitem>
       </varlistentry>
 
@@ -160,8 +136,7 @@
         <term>External spellcheck</term>
 
         <listitem>
-          <para>Writes all segments to a file named [project_name].doc and
-          opens it.</para>
+          <para>Writes all segments to a file named <filename>[project_name].doc</filename> and opens it in the default word processor for the system. (Note that the file is a plain text file. The <filename>.doc</filename> extension simply ensures it opens in the word processor.</para>
         </listitem>
       </varlistentry>
 
@@ -169,10 +144,7 @@
         <term>Extract Text Content</term>
 
         <listitem>
-          <para>Extracts the content of the project to a single text file (one
-          line per segment). See <ulink
-          url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182
-          Extracts the content of the projects to text file</ulink></para>
+          <para>Extracts the content of the project to a single text file (one line per segment). See <ulink url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182 Extracts the content of the projects to text file</ulink></para>
         </listitem>
       </varlistentry>
 
@@ -180,8 +152,7 @@
         <term>Non-breaking space</term>
 
         <listitem>
-          <para>Replace spaces with non-breakable spaces where appropriate in
-          French.</para>
+          <para>Replace spaces with non-breakable spaces where appropriate in French.</para>
         </listitem>
       </varlistentry>
 
@@ -245,8 +216,7 @@
         <term>SVN - Cleanup (recursive)</term>
 
         <listitem>
-          <para>Perform SVN cleanup on current project or any folder
-          (recursively)</para>
+          <para>Perform SVN cleanup on current project or any folder (recursively).</para>
         </listitem>
       </varlistentry>
 
@@ -254,8 +224,7 @@
         <term>Show Same Segments</term>
 
         <listitem>
-          <para>Display a list of segments where the source and target have
-          identical content.</para>
+          <para>Display a list of segments where the source and target have identical content.</para>
         </listitem>
       </varlistentry>
 
@@ -333,11 +302,7 @@
         <term>Groovy</term>
 
         <listitem>
-          <para>A dynamic language for the Java Virtual machine. It builds
-          upon the strengths of Java, and adds power features inspired by
-          languages like Python, Ruby and Smalltalk. See <ulink
-          url="https://groovy-lang.org">Apache Groovy</ulink> for
-          details.</para>
+          <para>A dynamic language for the Java Virtual machine. It builds upon the strengths of Java, and adds powerful features inspired by languages like Python, Ruby and Smalltalk. See <ulink url="https://groovy-lang.org">Apache Groovy</ulink> for details.</para>
         </listitem>
       </varlistentry>
 
@@ -345,24 +310,16 @@
         <term>JavaScript</term>
 
         <listitem>
-          <para>A prototype-based scripting language that is dynamic, weakly
-          typed and has first-class functions. It is a multi-paradigm language
-          that supports the object-oriented, imperative, and functional
-          programming styles. See <ulink
-          url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical
-          Nashorn, Part 1: Introducing JavaScript, ECMAScript, and
-          Nashorn</ulink></para>
+          <para>A prototype-based scripting language that is dynamic, weakly typed and has first-class functions. It is a multi-paradigm language that supports the object-oriented, imperative, and functional programming styles. See <ulink
+          url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, and Nashorn</ulink></para>
         </listitem>
       </varlistentry>
     </variablelist>
 
-    <para>All languages have access to the OmegaT object model, with the
-    project as the top object. For example, the following Groovy code snippet
-    scans through all segments in every file in the current project and prints
-    out the source and the target text of segments that contain a
-    translation.</para>
+    <para>All languages have access to the OmegaT object model, with the project as the top object. For example, the following Groovy code snippet scans through all segments in every file in the current project and prints out the source and the target text of segments that contain a translation.</para>
 
-    <programlisting>    files = project.projectFiles;
+    <programlisting>
+    files = project.projectFiles;
     for (i in 0 ..&lt; files.size())
     {
         for (j in 0 ..&lt; files[i].entries.size())

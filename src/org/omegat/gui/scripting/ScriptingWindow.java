@@ -88,6 +88,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import org.apache.commons.io.FilenameUtils;
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
@@ -101,7 +103,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
-import org.openide.awt.Mnemonics;
 
 /**
  * Scripting window
@@ -308,6 +309,7 @@ public class ScriptingWindow {
         });
     }
 
+    // CHECKSTYLE:OFF
     private void initWindowLayout() {
         // set default size and position
         frame.setBounds(50, 80, 1150, 650);
@@ -376,6 +378,7 @@ public class ScriptingWindow {
 
         frame.setJMenuBar(createMenuBar());
     }
+    // CHECKSTYLE:ON
 
     private AbstractScriptEditor getScriptEditor() {
 
@@ -1077,6 +1080,7 @@ public class ScriptingWindow {
         //m_scriptList.setListData(items.toArray(new ScriptItem[items.size()]));
     }
 
+    // CHECKSTYLE:OFF
     public static final String DEFAULT_SCRIPTS_DIR = "scripts";
 
     protected static final int NUMBERS_OF_QUICK_SCRIPTS = 12;
@@ -1101,5 +1105,5 @@ public class ScriptingWindow {
     private final String[] m_quickScripts = new String[NUMBERS_OF_QUICK_SCRIPTS];
     private final JMenuItem[] m_quickMenus = new JMenuItem[NUMBERS_OF_QUICK_SCRIPTS];
     private final JButton[] m_quickScriptButtons = new JButton[NUMBERS_OF_QUICK_SCRIPTS];
-
+    // CHECKSTYLE:ON
 }

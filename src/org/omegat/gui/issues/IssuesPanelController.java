@@ -106,7 +106,7 @@ import org.omegat.util.gui.TableColumnSizer;
  * @author Aaron Madlon-Kay
  *
  */
-public class IssuesPanelController implements IIssues {
+public final class IssuesPanelController implements IIssues {
 
     static final String ACTION_KEY_JUMP_TO_SELECTED_ISSUE = "jumpToSelectedIssue";
     static final String ACTION_KEY_FOCUS_ON_TYPES_LIST = "focusOnTypesList";

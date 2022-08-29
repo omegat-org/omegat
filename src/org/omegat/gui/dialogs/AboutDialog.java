@@ -71,9 +71,9 @@ public class AboutDialog extends JDialog {
 
         versionLabel.setText(getVersionString());
 
-        Object[] args = { Runtime.getRuntime().totalMemory() / 1024 / 1024,
-                Runtime.getRuntime().freeMemory() / 1024 / 1024,
-                Runtime.getRuntime().maxMemory() / 1024 / 1024 };
+        Object[] args = { getMB(Runtime.getRuntime().totalMemory()),
+                getMB(Runtime.getRuntime().freeMemory()),
+                getMB(Runtime.getRuntime().maxMemory())};
         String memoryUsage = StringUtil.format(OStrings.getString("MEMORY_USAGE"), args);
         memoryusage.setText(memoryUsage);
 
@@ -94,7 +94,7 @@ public class AboutDialog extends JDialog {
         if (contributorsUri != null) {
             try {
                 result = IOUtils.toString(contributorsUri, StandardCharsets.UTF_8);
-                result = wrap(result, 78).replaceAll("(?m)^", "  ");
+                result = StringUtil.wrap(result, 78).replaceAll("(?m)^", "  ");
             } catch (IOException e) {
                 // Ignore
             }
@@ -102,24 +102,6 @@ public class AboutDialog extends JDialog {
         return result;
     }
 
-    private static String wrap(String text, int length) {
-        StringBuilder sb = new StringBuilder();
-        for (String line : text.split("\\n")) {
-            if (sb.length() > 0) {
-                sb.append(',');
-            }
-            for (String token : line.split("\\s")) {
-                if (sb.length() + 1 + token.length() - sb.lastIndexOf("\n") > length) {
-                    sb.append('\n');
-                }
-                if (sb.length() > 0 && sb.charAt(sb.length() - 1) != '\n') {
-                    sb.append(' ');
-                }
-                sb.append(token);
-            }
-        }
-        return sb.toString();
-    }
 
     private String getVersionString() {
         if (!StringUtil.isEmpty(OStrings.UPDATE) && !OStrings.UPDATE.equals("0")) {
@@ -133,12 +115,16 @@ public class AboutDialog extends JDialog {
 
     private void copySupportInfo() {
         Runtime runtime = Runtime.getRuntime();
-        String memory = String.format("%dMiB total / %dMiB free / %dMiB max", runtime.totalMemory() / 1024 / 1024,
-                runtime.freeMemory() / 1024 / 1024, runtime.maxMemory() / 1024 / 1024);
+        String memory = String.format("%dMiB total / %dMiB free / %dMiB max",
+                getMB(runtime.totalMemory()), getMB(runtime.freeMemory()), getMB(runtime.maxMemory()));
         String info = String.format("Version: %s\nPlatform: %s %s\nJava: %s %s\nMemory: %s",
                 OStrings.getNameAndVersion(), System.getProperty("os.name"), System.getProperty("os.version"),
                 System.getProperty("java.version"), System.getProperty("os.arch"), memory);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(info), null);
+    }
+
+    private int getMB(long bytes) {
+        return (int)(bytes << 20);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

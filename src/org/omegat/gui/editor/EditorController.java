@@ -147,7 +147,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Piotr Kulik
  * @author Yu Tang
  */
-public class EditorController implements IEditor {
+public final class EditorController implements IEditor {
 
     /** Local logger. */
     private static final Logger LOGGER = Logger.getLogger(EditorController.class.getName());

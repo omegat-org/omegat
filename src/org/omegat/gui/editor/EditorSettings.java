@@ -48,7 +48,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Hans-Peter Jacobs
  * @author Aaron Madlon-Kay
  */
-public class EditorSettings implements IEditorSettings {
+public final class EditorSettings implements IEditorSettings {
     private final EditorController parent;
 
     private boolean useTabForAdvance;

@@ -29,7 +29,6 @@
 
 package org.omegat.gui.search;
 
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -37,6 +36,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -582,8 +582,8 @@ class EntryListPane extends JTextPane {
                 beginPos = offsetList.get(index - 1) + ENTRY_SEPARATOR.length();
                 int endPos = offsetList.get(index);
                 try {
-                    Rectangle endRect = Java8Compat.modelToView(EntryListPane.this, endPos);
-                    scrollRectToVisible(endRect);
+                    Rectangle2D endRect = EntryListPane.this.modelToView2D(endPos);
+                    scrollRectToVisible(endRect.getBounds());
                 } catch (BadLocationException ex) {
                     // Eat exception silently
                 }

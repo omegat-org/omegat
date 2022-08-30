@@ -52,7 +52,6 @@ import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -222,7 +221,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
                 return;
             }
             JPopupMenu popup = new JPopupMenu();
-            populateContextMenu(popup, Java8Compat.viewToModel(MultipleTransPane.this, p));
+            populateContextMenu(popup, MultipleTransPane.this.viewToModel2D(p));
             popup.show(MultipleTransPane.this, p.x, p.y);
         }
     };
@@ -278,7 +277,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
             JPopupMenu popup = new JPopupMenu();
             Caret caret = getCaret();
             Point p = caret == null ? getMousePosition() : caret.getMagicCaretPosition();
-            populateContextMenu(popup, Java8Compat.viewToModel(MultipleTransPane.this, p));
+            populateContextMenu(popup, MultipleTransPane.this.viewToModel2D(p));
             popup.show(this, (int) p.getX(), (int) p.getY());
             e.consume();
         }

@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 5.8.0
 ----------------------------------------------------------------------
-  12 Enhancements
-  9 Bug fixes
+  15 Enhancements
+  14 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
 
   Bug fixes:
+
+  - OpenSSH new key format and ECDSA/ED25519 keys
+  https://sourceforge.net/p/omegat/bugs/1107/
 
   - CLI commands does not expand tilde(~) to home directory
   https://sourceforge.net/p/omegat/bugs/1106/
@@ -15,7 +18,10 @@
   - PO filter: target files should not keep #| msgctxt
   https://sourceforge.net/p/omegat/bugs/1103/
 
-  - No ID-bound matching in /tm/tmx2source
+  - Paragraph marks not showing when loading partial pages-
+  https://sourceforge.net/p/omegat/bugs/1102/
+
+  - Display other language translations also for alternative translations
   https://sourceforge.net/p/omegat/bugs/1101/
 
   - Searcher to show path in relative
@@ -31,10 +37,19 @@
   - Team projects fail to commit with enabled signing
   https://sourceforge.net/p/omegat/bugs/1077/
 
+  - Unable to check-out or open/save team projects
+  https://sourceforge.net/p/omegat/bugs/1075/
+
   - Dictionary fails to jump to selected word
   https://sourceforge.net/p/omegat/bugs/1074/
 
+  - Highlight found text even if normalized text (for feature "full/half width insensitive") 
+    differs from original
+
   Implemented requests:
+
+  - Support Git branch in Team Project
+  https://sourceforge.net/p/omegat/feature-requests/918/
 
   - New project properties options for export TM directory and which TMs should be exported
   https://sourceforge.net/p/omegat/feature-requests/1611/
@@ -70,6 +85,12 @@
 
   - Machine translation results sorting
   https://sourceforge.net/p/omegat/feature-requests/1467/
+
+  - In mode=console-align, generate tmx with mutiples translations
+  https://sourceforge.net/p/omegat/feature-requests/1408/
+
+  - Allow jumping to the selected segment from Search using a keyboard shortcut
+ https://sourceforge.net/p/omegat/feature-requests/1603/
 
 ----------------------------------------------------------------------
 OmegaT 5.7.1 (2022-03-19)

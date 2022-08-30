@@ -399,6 +399,7 @@ $ ./linux-install</programlisting>
 # Country
 -Duser.country=CA</programlisting>
 
+
       <para>Advice: if OmegaT works slowly in Remote Desktop sessions under
       Windows, you may use this option:</para>
 

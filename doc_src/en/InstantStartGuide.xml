@@ -108,6 +108,11 @@
         </imageobject>
       </mediaobject>
     </figure>
+
+	<para>Only files supported by OmegaT's file filters will be displayed in the
+	<link linkend="windows.project.files" endterm="windows.project.files.title"
+	/> dialog. See <link linkend="dialogs.preferences.file.filters"
+	endterm="dialogs.preferences.file.filters.title"/> for details.</para>
   </section>
 
   <section id="introduction.translate.the.segments.one.by.one">

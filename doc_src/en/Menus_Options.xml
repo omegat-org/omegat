@@ -2,7 +2,8 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.options">
   <title id="menus.options.title">Options</title>
-  <note><para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para></note>
+  <note><para>Key shortcut description reminder: <link
+  linkend="appendix.shortcut" endterm="shortcut.description"/></para></note>
 
   <variablelist>
     <varlistentry id="menus.options.preferences">
@@ -16,32 +17,43 @@
     <varlistentry id="menus.options.mt">
       <term id="menus.options.mt.title">Machine Translate</term>
       <listitem>
-        <para>Allows you to activate/deactivate the available machine translation engines.</para>
-        <para>If several translation engines are selected, you can also use <keycombo><keycap>C</keycap><keycap>m</keycap></keycombo>  to switch between them and insert the last one selected.</para>
+        <para>Allows you to activate/deactivate the available machine
+        translation engines.</para>
+        <para>If several translation engines are selected, you can also use
+        <keycombo><keycap>C</keycap><keycap>m</keycap></keycombo> to switch
+        between them and insert the last one selected.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.glossary">
       <term id="menus.options.glossary.title">Glossary</term>
       <listitem>
-        <para>Select <guimenuitem>Taas Terminology Lookup</guimenuitem> to activate it.</para>
+        <para>Select <guimenuitem>Taas Terminology Lookup</guimenuitem> to
+        activate it.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.dictionary">
       <term id="menus.options.dictionary.title">Dictionary</term>
       <listitem>
-        <para>Check the <guimenuitem>Use Fuzzy Matching for Dictionary Entries</guimenuitem> option if you want dictionaries to display words sharing the same root.</para>
+        <para>Check the <guimenuitem>Use Fuzzy Matching for Dictionary
+        Entries</guimenuitem> option if you want dictionaries to display words
+        sharing the same root.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.autocompletion">
       <term id="menus.options.autocompletion.title">Auto-completion</term>
       <listitem>
-        <para>If the <guimenuitem>Show Relevant Suggestions Automatically</guimenuitem> option is checked, the auto-completer is triggered automatically by typing the first letters of a glossary entry, or &quot;&lt;&quot; for tags.</para>
+        <para>If the <guimenuitem>Show Relevant Suggestions
+        Automatically</guimenuitem> option is checked, the auto-completer is
+        triggered automatically by typing the first letters of a glossary entry,
+        or &quot;&lt;&quot; for tags.</para>
         <para>Check <guimenuitem>History Completion</guimenuitem> to display
         suggested words as soon as their first letters are entered.</para>
-        <para>Check <guimenuitem>History Prediction</guimenuitem> to display suggested words that often follow the word that has just been entered.</para>
+        <para>Check <guimenuitem>History Prediction</guimenuitem> to display
+        suggested words that often follow the word that has just been
+        entered.</para>
       </listitem>
     </varlistentry>
 
@@ -57,7 +69,9 @@
     <varlistentry id="menus.options.segmentation">
       <term id="menus.options.segmentation.title">Segmentation...</term>
       <listitem>
-        <para>Opens the <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> options in the Preferences dialog.</para>
+        <para>Opens the <link linkend="dialogs.preferences.segmentation.setup"
+        endterm="dialogs.preferences.segmentation.setup.title"/> options in the
+        Preferences dialog.</para>
         <para>These are general OmegaT settings that to all projects.</para>
       </listitem>
     </varlistentry>

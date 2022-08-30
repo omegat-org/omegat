@@ -43,6 +43,7 @@ RUN chmod 755 /var/www/git/git-http-backend-wrapper.cgi \
     && chown -R git.git /home/git /var/www/git
 
 EXPOSE 22 80 443
-CMD ([ -f /keys/id_rsa.pub ] || inotifywait -e attrib /keys ) \
+CMD ssh-keygen -q -t rsa -m PEM -b 4096 -N '' -f /tmp/id_rsa && ssh-keygen -A \
+ && install -m 666 /tmp/id_rsa /tmp/id_rsa.pub /keys/ \
  && cat /keys/id_rsa.pub >> /home/git/.ssh/authorized_keys \
- && echo "start servers" && ssh-keygen -A && exec /usr/bin/supervisord
+ && echo "start servers" && exec /usr/bin/supervisord

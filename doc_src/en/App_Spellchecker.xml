@@ -22,18 +22,14 @@
         in which to store spelling dictionaries (D:\Translations\spellcheckers
         in the example below).</para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
         <para>In OmegaT, select <guimenuitem>Options &gt; Spell
         Checking</guimenuitem>, then click <guibutton>Choose
         </guibutton> beside the Dictionary file folder field. Navigate to and
         select the folder you created for dictionaries.</para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
         <para>Place the dictionary files you wish to use in this folder. There
         are essentially two ways in which you can do this. You can either copy

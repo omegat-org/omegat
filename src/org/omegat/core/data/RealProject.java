@@ -12,6 +12,7 @@
                2014 Aaron Madlon-Kay, Didier Briel
                2015 Aaron Madlon-Kay
                2017-2018 Didier Briel
+               2018 Enrique Estevez Fernandez
                2019 Thomas Cordonnier
                2020 Briac Pilpre
                Home page: http://www.omegat.org/
@@ -62,6 +63,8 @@ import java.util.stream.Collectors;
 
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
+import org.xml.sax.SAXParseException;
+
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -102,7 +105,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
-import org.xml.sax.SAXParseException;
 
 import gen.core.filters.Filters;
 
@@ -443,7 +445,7 @@ public class RealProject implements IProject {
     /**
      * Align project.
      */
-    public Map<String, TMXEntry> align(final ProjectProperties props, final File translatedDir)
+    public Map<EntryKey, ITMXEntry> align(final ProjectProperties props, final File translatedDir)
             throws Exception {
         FilterMaster fm = Core.getFilterMaster();
 
@@ -456,8 +458,7 @@ public class RealProject implements IProject {
         for (File file : srcFileList) {
             // shorten filename to that which is relative to src root
             String midName = file.getPath().substring(srcRoot.length());
-
-            fm.alignFile(srcRoot, midName, translatedDir.getPath(), new FilterContext(props),
+            fm.alignFile(root.toString(), midName, translatedDir.getPath(), new FilterContext(props),
                     alignFilesCallback);
         }
         return alignFilesCallback.data;
@@ -1820,17 +1821,24 @@ public class RealProject implements IProject {
             this.config = props;
         }
 
-        Map<String, TMXEntry> data = new TreeMap<>();
-        private ProjectProperties config;
+        Map<EntryKey, ITMXEntry> data = new TreeMap<>();
+        private final ProjectProperties config;
+        List<String> sources = new ArrayList<>();
 
         @Override
-        public void addTranslation(String id, String source, String translation, boolean isFuzzy, String path,
+        public void addTranslation(String id, String source, String translation, boolean isFuzzy, String sourcePath,
                 IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
                 boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
                 String sourceS = ParseEntry.stripSomeChars(source, spr, config.isRemoveTags(), removeSpaces);
                 String transS = ParseEntry.stripSomeChars(translation, spr, config.isRemoveTags(), removeSpaces);
+                if (config.isSupportDefaultTranslations()) {
+                    if (sources.contains(sourceS)) {
+                        return;
+                    }
+                }
+                sources.add(sourceS);
 
                 PrepareTMXEntry tr = new PrepareTMXEntry();
                 if (config.isSentenceSegmentingEnabled()) {
@@ -1844,7 +1852,7 @@ public class RealProject implements IProject {
                         }
                         tr.source = sourceS;
                         tr.translation = transS;
-                        data.put(sourceS, new TMXEntry(tr, true, null));
+                        data.put(new EntryKey(sourcePath, sourceS, id, "", "", ""), tr);
                     } else {
                         for (short i = 0; i < segmentsSource.size(); i++) {
                             String oneSrc = segmentsSource.get(i);
@@ -1854,7 +1862,7 @@ public class RealProject implements IProject {
                             }
                             tr.source = oneSrc;
                             tr.translation = oneTrans;
-                            data.put(sourceS, new TMXEntry(tr, true, null));
+                            data.put(new EntryKey(sourcePath, oneSrc, id, "", "", ""), tr);
                         }
                     }
                 } else {
@@ -1863,7 +1871,7 @@ public class RealProject implements IProject {
                     }
                     tr.source = sourceS;
                     tr.translation = transS;
-                    data.put(sourceS, new TMXEntry(tr, true, null));
+                    data.put(new EntryKey(sourcePath, sourceS, id, "", "", ""), tr);
                 }
             }
         }

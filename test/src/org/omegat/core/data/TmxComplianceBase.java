@@ -207,8 +207,12 @@ public abstract class TmxComplianceBase {
         ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
 
-        for (Map.Entry<String, TMXEntry> en : callback.data.entrySet()) {
-            tmx.defaults.put(en.getKey(), en.getValue());
+        for (Map.Entry<EntryKey, ITMXEntry> en : callback.data.entrySet()) {
+            if (en.getValue() instanceof TMXEntry) {
+                tmx.defaults.put(en.getKey().sourceText, (TMXEntry) en.getValue());
+            } else if (en.getValue() instanceof PrepareTMXEntry) {
+                tmx.defaults.put(en.getKey().sourceText, new TMXEntry(en.getValue(), true, null));
+            }
         }
 
         tmx.exportTMX(props, outFile, false, false, true);

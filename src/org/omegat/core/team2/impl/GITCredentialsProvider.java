@@ -6,6 +6,7 @@
  Copyright (C) 2012 Alex Buloichik
                2014 Alex Buloichik, Aaron Madlon-Kay
                2015 Hiroshi Miura, Aaron Madlon-Kay
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -35,6 +36,13 @@ import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
+import com.jcraft.jsch.AgentIdentityRepository;
+import com.jcraft.jsch.AgentProxyException;
+import com.jcraft.jsch.IdentityRepository;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.SSHAgentConnector;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.Slf4jLogger;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -42,7 +50,7 @@ import org.eclipse.jgit.transport.JschConfigSessionFactory;
 import org.eclipse.jgit.transport.OpenSshConfig;
 import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.URIish;
-import org.eclipse.jgit.util.FS;
+
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
@@ -50,65 +58,63 @@ import org.omegat.core.team2.TeamSettings;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
-import com.jcraft.jsch.IdentityRepository;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
-import com.jcraft.jsch.agentproxy.AgentProxyException;
-import com.jcraft.jsch.agentproxy.Connector;
-import com.jcraft.jsch.agentproxy.ConnectorFactory;
-import com.jcraft.jsch.agentproxy.RemoteIdentityRepository;
-import com.jcraft.jsch.agentproxy.USocketFactory;
-import com.jcraft.jsch.agentproxy.connector.SSHAgentConnector;
-import com.jcraft.jsch.agentproxy.usocket.JNAUSocketFactory;
-
 /**
- * Git repository credentials provider. One credentials provider created for all git instances.
+ * Git repository credentials provider. One credential provider created for all git instances.
  * <p>
  * Git supports these protocols:
  * <ul>
  * <li>file://
  * <li>ssh://
  * <li>git://
- * <li>http://
+ * <li>https://
  * </ul>
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
- * @see <a href="http://www.codeaffine.com/2014/12/09/jgit-authentication/">JGit Authentication Explained</a>
+ * @author Hiroshi Miura
+ * @see <a href="https://www.codeaffine.com/2014/12/09/jgit-authentication/">JGit Authentication Explained</a>
+ * @see <a href="https://www.matez.de/index.php/2020/06/22/the-future-of-jsch-without-ssh-rsa/">matez blog</a>
  */
 public class GITCredentialsProvider extends CredentialsProvider {
 
+    private static final String PROMPT_REGEX =
+            "The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
+                    /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
+                    /* key fprint */ "(([0-9a-f]{2}:){15}[0-9a-f]{2})" + "\\.\\n" +
+                    "Are you sure you want to continue connecting\\?";
+
     static {
         // Set up ssh-agent support
+        JSch.setLogger(new Slf4jLogger());
         JschConfigSessionFactory sessionFactory = new JschConfigSessionFactory() {
 
+            /**
+             * Configure ssh+git session preference.
+             * @param host
+             *            host configuration
+             * @param session
+             *            session to configure
+             */
             @Override
             protected void configure(OpenSshConfig.Host host, Session session) {
                 session.setConfig("StrictHostKeyChecking", "true");
             }
 
+            /**
+             * Add ssh-agent support configuration to default JSch instance.
+             * @param jsch JSch instance.
+             */
             @Override
-            protected JSch createDefaultJSch(FS fs) throws JSchException {
-                Connector con = null;
+            protected void configureJSch(final JSch jsch) {
+                super.configureJSch(jsch);
                 try {
-                    if (SSHAgentConnector.isConnectorAvailable()) {
-                        USocketFactory usf = new JNAUSocketFactory();
-                        con = new SSHAgentConnector(usf);
-                    } else {
-                        ConnectorFactory cf = ConnectorFactory.getDefault();
-                        con = cf.createConnector();
-                    }
+                    // Use ssh-agent connector class provided by forked JSch project.
+                    IdentityRepository irepo = new AgentIdentityRepository(new SSHAgentConnector());
+                    JSch.setConfig("PreferredAuthentications", "publickey");
+                    jsch.setIdentityRepository(irepo);
                 } catch (AgentProxyException e) {
                     Log.log(e);
                 }
-                JSch jsch = super.createDefaultJSch(fs);
-                if (con != null) {
-                    JSch.setConfig("PreferredAuthentications", "publickey");
-                    IdentityRepository irepo = new RemoteIdentityRepository(con);
-                    jsch.setIdentityRepository(irepo);
-                }
-                return jsch;
             }
         };
         SshSessionFactory.setInstance(sessionFactory);
@@ -119,8 +125,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
     static final String KEY_FINGERPRINT_SUFFIX = "fingerprint";
 
     //private ProjectTeamSettings teamSettings;
-    /** Predefined in the omegat.project file. */
-    private final Map<String, String> predefined = Collections.synchronizedMap(new HashMap<String, String>());
+    /** Predefined in the `omegat.project` file. */
+    private final Map<String, String> predefined = Collections.synchronizedMap(new HashMap<>());
 
     public void setTeamSettings(ProjectTeamSettings teamSettings) {
         //this.teamSettings = teamSettings;
@@ -243,6 +249,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     }
                 }
             } else if (i instanceof CredentialItem.YesNoType) {
+                // @see constant variable PROMPT_REGEX
                 // e.g.: The authenticity of host 'mygitserver' can't be established.
                 // RSA key fingerprint is e2:d3:84:d5:86:e7:68:69:a0:aa:a6:ad:a3:a0:ab:a2.
                 // Are you sure you want to continue connecting?
@@ -310,9 +317,9 @@ public class GITCredentialsProvider extends CredentialsProvider {
         GITUserPassDialog userPassDialog = new GITUserPassDialog(Core.getMainWindow().getApplicationFrame());
         userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
         userPassDialog.descriptionTextArea.setText(OStrings
-                .getString(credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG", uri.getHumanishName()));
-        // if username is already available in uri, then we will not be asked for an username, so we cannot
-        // change it.
+                .getString(credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG",
+                        uri.getHumanishName()));
+        // if username is already available in uri, then we will not be asked for a username, so we cannot change it.
         if (uri.getUser() != null && !"".equals(uri.getUser())) {
             userPassDialog.userText.setText(uri.getUser());
             userPassDialog.userText.setEditable(false);
@@ -363,8 +370,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private static String extractFingerprint(String text) {
-        Pattern p = Pattern
-                .compile("The authenticity of host '.*' can't be established\\.\\nRSA key fingerprint is (([0-9a-f]{2}:){15}[0-9a-f]{2})\\.\\nAre you sure you want to continue connecting\\?");
+        Pattern p = Pattern.compile(PROMPT_REGEX);
         Matcher fingerprintMatcher = p.matcher(text);
         if (fingerprintMatcher.find()) {
             int start = fingerprintMatcher.start(1);

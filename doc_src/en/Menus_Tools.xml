@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.tools">
   <title id="menus.tools.title">Tools</title>
   <note>
@@ -25,7 +26,8 @@
     <varlistentry id="menus.tools.check.issues">
       <term id="menus.tools.check.issues.title">Check Issues...</term>
       <listitem>
-        <para>This quality assurance tool carries out all automatic checks in one go and displays the results in a window.</para>
+        <para>This quality assurance tool carries out all automatic checks in
+        one go and displays the results in a window.</para>
 		<para>
 		  <keycombo>
 			<keycap>S</keycap><keycap>C</keycap><keycap>v</keycap>
@@ -34,7 +36,8 @@
         <para>Four types of issues can be detected:</para>
         <itemizedlist>
           <listitem>
-            <para>missing or displaced tags, including <link linkend="dialogs.preferences.tag.processing">custom tags</link>.
+            <para>missing or displaced tags, including <link
+            linkend="dialogs.preferences.tag.processing">custom tags</link>.
             The <guilabel>Tag Issues</guilabel> option is always
             selected.</para>
           </listitem>
@@ -59,14 +62,17 @@
             <para>clicking a column header changes the sort order for that column,</para>
           </listitem>
           <listitem>
-            <para>selecting a row, or moving the mouse over it, displays a context menu icon in the last column;  clicking that icon presents actions available to correct or ignore the error.</para>
+            <para>selecting a row, or moving the mouse over it, displays a
+            context menu icon in the last column; clicking that icon presents
+            actions available to correct or ignore the error.</para>
           </listitem>
         </itemizedlist>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.tools.check.issues.for.current.document">
-      <term id="menus.tools.check.issues.for.current.document.title">Check Issues for Current Document</term>
+      <term id="menus.tools.check.issues.for.current.document.title">Check
+      Issues for Current Document</term>
       <listitem>
         <para>As above, but only for the document currently displayed in the
         Editor pane.</para>
@@ -76,7 +82,9 @@
     <varlistentry id="menus.tools.statistics">
       <term id="menus.tools.statistics.title">Statistics</term>
       <listitem>
-        <para>Opens a new window and displays project statistics such as the overall project word count or segment totals, and totals for every file in the project.</para>
+        <para>Opens a new window and displays project statistics such as the
+        overall project word count or segment totals, and totals for every file
+        in the project.</para>
       </listitem>
     </varlistentry>
 
@@ -101,8 +109,13 @@
     <varlistentry id="menus.tools.align.files">
       <term id="menus.tools.align.files.title">Align Files...</term>
       <listitem>
-        <para>Select the two files to align (the source file and its translation) and click OK to open the <link linkend="windows.aligner"><guilabel>Align</guilabel> window</link>.</para>
-        <para>The supported file formats are the same as those listed in <menuchoice> <guimenuitem>Project</guimenuitem> <guimenuitem>Properties</guimenuitem> <guimenuitem>File Filters</guimenuitem> </menuchoice>.</para>
+        <para>Select the two files to align (the source file and its
+        translation) and click OK to open the <link
+        linkend="windows.aligner"><guilabel>Align</guilabel>
+        window</link>.</para>
+        <para>The supported file formats are the same as those listed in <link
+        linkend="dialogs.preferences.file.filters"
+        endterm="dialogs.preferences.file.filters.title"/>.</para>
         <para>The source and target files can have different formats (for
         example, a <filename>.docx</filename> file can be aligned with a
         <filename>.pdf</filename> file).</para>
@@ -112,7 +125,10 @@
     <varlistentry id="menus.tools.scripting">
       <term id="menus.tools.scripting.title">Scripting...</term>
       <listitem>
-        <para>Opens the <link linkend="windows.scripts"><guilabel>Scripting</guilabel> window</link>, which allows you to set the location where scripts are stored, as well was write and run scripts, and assign them a shortcut.</para>
+        <para>Opens the <link linkend="windows.scripts"
+        endterm="windows.scripts.title"/> window, which allows you to set the
+        location where scripts are stored, as well was write and run scripts,
+        and assign them a shortcut.</para>
 		<para>The list below this item displays 12 potential slots for
 		scripts. Clicking on an assigned slot launches the script assigned to
 		that slot.</para>
@@ -126,7 +142,8 @@
               <para>Select the script you want from the list on the left.</para>
 			</listitem>
 			<listitem>
-              <para>At the bottom of the window, right-click on an unassigned number and select <guilabel>Add Script</guilabel>.</para>
+              <para>At the bottom of the window, right-click on an unassigned
+              number and select <guilabel>Add Script</guilabel>.</para>
 			</listitem>
           </orderedlist>
 		</note>
@@ -134,10 +151,12 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.external.search.commands">
-      <term id="menus.tools.external.search.commands.title">External search commands</term>
+      <term id="menus.tools.external.search.commands.title">External search
+      commands</term>
       <listitem>
         <para>If commands to perform external searches have been defined in
-        <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>, they are listed
+        <link linkend="dialogs.preferences.external.searches"
+        endterm="dialogs.preferences.external.searches.title"/>, they are listed
         and accessible here.</para>
       </listitem>
     </varlistentry>

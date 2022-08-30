@@ -207,6 +207,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
      * Initialize menu items.
      */
     @SuppressWarnings("serial")
+    // CHECKSTYLE:OFF
     JMenuBar initComponents() {
         mainMenu = new JMenuBar();
         mainMenu.add(projectMenu = createMenu("TF_MENU_FILE"));
@@ -498,6 +499,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         return mainMenu;
     }
+    // CHECKSTYLE:ON
 
     private JMenuItem getItemForPreference(String preference) {
         switch (preference) {

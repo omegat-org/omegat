@@ -31,7 +31,6 @@ package org.omegat.core.statistics;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -54,7 +53,7 @@ import org.omegat.util.gui.TextUtil;
 /**
  * @author Vladimir Bychkov
  */
-@XmlRootElement(name="omegat-stats")
+@XmlRootElement(name = "omegat-stats")
 public class StatsResult {
     public static final String[] HT_HEADERS = {
         "",
@@ -156,12 +155,12 @@ public class StatsResult {
         }
     }
 
-    @XmlElement(name="date")
+    @XmlElement(name = "date")
     public String getDate() {
         return date;
     }
 
-    @XmlElement(name="project")
+    @XmlElement(name = "project")
     public StatProjectProperties getProps() {
         return props;
     }
@@ -170,7 +169,7 @@ public class StatsResult {
      * Return total number of segments.
      * @return
      */
-    @XmlElement(name="total")
+    @XmlElement(name = "total")
     public StatCount getTotal() {
         return total;
     }
@@ -179,7 +178,7 @@ public class StatsResult {
      * Return remaining number of segments that needs translation.
      * @return
      */
-    @XmlElement(name="remaining")
+    @XmlElement(name = "remaining")
     public StatCount getRemaining() {
         return remaining;
     }
@@ -188,7 +187,7 @@ public class StatsResult {
      * Return a number of unique segments.
      * @return
      */
-    @XmlElement(name="unique")
+    @XmlElement(name = "unique")
     public StatCount getUnique() {
         return unique;
     }
@@ -197,7 +196,7 @@ public class StatsResult {
      * Return a number of remaining unique segments.
      * @return
      */
-    @XmlElement(name="unique-remaining")
+    @XmlElement(name = "unique-remaining")
     public StatCount getRemainingUnique() {
         return remainingUnique;
     }
@@ -206,7 +205,7 @@ public class StatsResult {
      * return a statistics of each source/target files.
      * @return
      */
-    @XmlElement(name="files")
+    @XmlElement(name = "files")
     public List<FileData> getCounts() {
         return counts;
     }
@@ -217,19 +216,15 @@ public class StatsResult {
      */
     @JsonIgnore
     public String getTextData() {
-        StringBuilder result = new StringBuilder();
+        return OStrings.getString("CT_STATS_Project_Statistics") +
+                "\n\n" +
+                TextUtil.showTextTable(HT_HEADERS, getHeaderTable(), HT_ALIGN) +
+                "\n\n" +
 
-        result.append(OStrings.getString("CT_STATS_Project_Statistics"));
-        result.append("\n\n");
-
-        result.append(TextUtil.showTextTable(HT_HEADERS, getHeaderTable(), HT_ALIGN));
-        result.append("\n\n");
-
-        // STATISTICS BY FILE
-        result.append(OStrings.getString("CT_STATS_FILE_Statistics"));
-        result.append("\n\n");
-        result.append(TextUtil.showTextTable(FT_HEADERS, getFilesTable(), FT_ALIGN));
-        return result.toString();
+                // STATISTICS BY FILE
+                OStrings.getString("CT_STATS_FILE_Statistics") +
+                "\n\n" +
+                TextUtil.showTextTable(FT_HEADERS, getFilesTable(), FT_ALIGN);
     }
 
     /**
@@ -266,6 +261,7 @@ public class StatsResult {
         date = dateFormat.format(new Date());
     }
 
+    // CHECKSTYLE:OFF
     @JsonIgnore
     public String[][] getHeaderTable() {
         StatCount[] result = new StatCount[] { total, remaining, unique, remainingUnique };
@@ -309,4 +305,5 @@ public class StatsResult {
         }
         return table;
     }
+    // CHECKSTYLE:ON
 }

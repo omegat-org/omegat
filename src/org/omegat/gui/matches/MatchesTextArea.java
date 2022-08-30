@@ -76,7 +76,7 @@ import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.tokenizer.ITokenizer;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -537,7 +537,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             int clickedItem = -1;
 
             // where did we click?
-            int mousepos = Java8Compat.viewToModel(MatchesTextArea.this, p);
+            int mousepos = Java11Compat.viewToModel(MatchesTextArea.this, p);
 
             for (int i = 0; i < delimiters.size() - 1; i++) {
                 int start = delimiters.get(i);

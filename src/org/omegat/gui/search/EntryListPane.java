@@ -67,7 +67,7 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -116,7 +116,7 @@ class EntryListPane extends JTextPane {
         // Add KeyStrokes: Enter, Ctrl+Enter (Cmd+Enter for MacOS)
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), KEY_GO_TO_NEXT_SEGMENT);
         map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,
-                Java8Compat.getMenuShortcutKeyMaskEx()), KEY_GO_TO_PREVIOUS_SEGMENT);
+                Java11Compat.getMenuShortcutKeyMaskEx()), KEY_GO_TO_PREVIOUS_SEGMENT);
         return map;
     }
 
@@ -582,7 +582,7 @@ class EntryListPane extends JTextPane {
                 beginPos = offsetList.get(index - 1) + ENTRY_SEPARATOR.length();
                 int endPos = offsetList.get(index);
                 try {
-                    Rectangle endRect = Java8Compat.modelToView(EntryListPane.this, endPos);
+                    Rectangle endRect = Java11Compat.modelToView(EntryListPane.this, endPos);
                     scrollRectToVisible(endRect);
                 } catch (BadLocationException ex) {
                     // Eat exception silently

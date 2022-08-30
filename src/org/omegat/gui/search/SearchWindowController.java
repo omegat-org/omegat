@@ -75,7 +75,7 @@ import org.omegat.gui.editor.IEditor.CaretPosition;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 import org.omegat.gui.editor.filter.SearchFilter;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -360,7 +360,7 @@ public class SearchWindowController {
 
         // Set up undo/redo handling
         KeyStroke undoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                Java8Compat.getMenuShortcutKeyMaskEx(), false);
+                Java11Compat.getMenuShortcutKeyMaskEx(), false);
         map.put(undoKey, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -370,7 +370,7 @@ public class SearchWindowController {
             }
         });
         KeyStroke redoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
-                Java8Compat.getMenuShortcutKeyMaskEx(), false);
+                Java11Compat.getMenuShortcutKeyMaskEx(), false);
         map.put(redoKey, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

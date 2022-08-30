@@ -65,7 +65,7 @@ import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 import javax.swing.undo.UndoManager;
 
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -426,7 +426,7 @@ public final class StaticUIUtils {
         comp.getDocument().addUndoableEditListener(manager);
 
         // Handle undo (Ctrl/Cmd+Z);
-        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Java8Compat.getMenuShortcutKeyMaskEx(),
+        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Java11Compat.getMenuShortcutKeyMaskEx(),
                 false);
         Action undoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -439,7 +439,7 @@ public final class StaticUIUtils {
         comp.getActionMap().put("UNDO", undoAction);
 
         // Handle redo (Ctrl/Cmd+Y);
-        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Java8Compat.getMenuShortcutKeyMaskEx(),
+        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Java11Compat.getMenuShortcutKeyMaskEx(),
                 false);
         Action redoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {

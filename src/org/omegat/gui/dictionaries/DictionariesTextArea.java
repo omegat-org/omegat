@@ -75,7 +75,7 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -230,9 +230,9 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         int end = Math.max(el.getEndOffset() - 1, start);
         try {
             // Start position of article
-            Rectangle startRect = Java8Compat.modelToView(this, start);
+            Rectangle startRect = Java11Compat.modelToView(this, start);
             // End position of article
-            Rectangle endRect = Java8Compat.modelToView(this, end);
+            Rectangle endRect = Java11Compat.modelToView(this, end);
             // To show maximum extent possible, scroll to end and then to start.
             // Scrolling to startRect.union(endRect) will not show the start
             // when initiating scroll from below the target article.
@@ -347,7 +347,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             UIThreadsUtil.mustBeSwingThread();
 
             JPopupMenu popup = new JPopupMenu();
-            int mousepos = Java8Compat.viewToModel(DictionariesTextArea.this, p);
+            int mousepos = Java11Compat.viewToModel(DictionariesTextArea.this, p);
             final String word = getWordAtOffset(mousepos);
             if (word != null) {
                 JMenuItem item = popup.add(StringUtil.format(OStrings.getString("DICTIONARY_HIDE"), word));

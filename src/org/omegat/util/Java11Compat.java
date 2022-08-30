@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2019 Aaron Madlon-Kay
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,36 +29,34 @@ package org.omegat.util;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 
 import javax.swing.plaf.TextUI;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
+import javax.swing.text.Position;
 
+/**
+ * Compatibility class for java 11 and later.
+ * All deprecated java library class and methods which OmegaT depends are managed
+ * in the compatibility class.
+ */
 @SuppressWarnings("deprecation")
-public class Java8Compat {
+public class Java11Compat {
 
     public static int getMenuShortcutKeyMaskEx() {
-        int mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-        switch (mask) {
-        case KeyEvent.CTRL_MASK:
-            return KeyEvent.CTRL_DOWN_MASK;
-        case KeyEvent.META_MASK:
-            return KeyEvent.META_DOWN_MASK;
-        default:
-            return mask;
-        }
+        // getMenuShortcutKeyMaskEx() is introduced in Java10
+        return Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
     }
 
     public static Rectangle modelToView(JTextComponent comp, int pos) throws BadLocationException {
-        return comp.modelToView(pos);
+        return comp.modelToView2D(pos).getBounds();
     }
 
     public static Rectangle modelToView(TextUI ui, JTextComponent comp, int pos) throws BadLocationException {
-        return ui.modelToView(comp, pos);
+        return ui.modelToView2D(comp, pos, Position.Bias.Forward).getBounds();
     }
 
     public static int viewToModel(JTextComponent comp, Point pt) {
-        return comp.viewToModel(pt);
+        return comp.viewToModel2D(pt);
     }
 }

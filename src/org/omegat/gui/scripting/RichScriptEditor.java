@@ -61,7 +61,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 
@@ -196,25 +196,25 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
         JMenuItem item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_FIND"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, Java8Compat.getMenuShortcutKeyMaskEx()));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, Java11Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowFindDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_REPLACE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, Java8Compat.getMenuShortcutKeyMaskEx()));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, Java11Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowReplaceDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
         Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_GOTO_LINE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, Java8Compat.getMenuShortcutKeyMaskEx()));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, Java11Compat.getMenuShortcutKeyMaskEx()));
         item.addActionListener(new GoToLineAction());
         menu.add(item);
 
         menu.addSeparator();
 
-        int metaShiftMask = Java8Compat.getMenuShortcutKeyMaskEx() | InputEvent.SHIFT_DOWN_MASK;
+        int metaShiftMask = Java11Compat.getMenuShortcutKeyMaskEx() | InputEvent.SHIFT_DOWN_MASK;
         KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F, metaShiftMask);
         Action a = m_csp.addBottomComponent(ks, m_findToolBar);
         a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_FIND_BAR"));

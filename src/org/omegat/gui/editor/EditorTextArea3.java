@@ -67,7 +67,7 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.StaticUIUtils;
@@ -235,7 +235,7 @@ public class EditorTextArea3 extends JEditorPane {
 
             // Handle double-click
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
-                int mousepos = Java8Compat.viewToModel(EditorTextArea3.this, e.getPoint());
+                int mousepos = Java11Compat.viewToModel(EditorTextArea3.this, e.getPoint());
                 boolean changed = controller.goToSegmentAtLocation(getCaretPosition());
                 if (!changed) {
                     if (selectTag(mousepos)) {
@@ -260,7 +260,7 @@ public class EditorTextArea3 extends JEditorPane {
         }
 
         private void doPopup(Point p) {
-            int mousepos = Java8Compat.viewToModel(EditorTextArea3.this, p);
+            int mousepos = Java11Compat.viewToModel(EditorTextArea3.this, p);
             JPopupMenu popup = makePopupMenu(mousepos);
             if (popup.getComponentCount() > 0) {
                 popup.show(EditorTextArea3.this, p.x, p.y);
@@ -509,7 +509,7 @@ public class EditorTextArea3 extends JEditorPane {
             // otherwise half of the caret is shown.
             try {
                 OvertypeCaret caret = (OvertypeCaret) getCaret();
-                Rectangle r = Java8Compat.modelToView(this, caret.getDot());
+                Rectangle r = Java11Compat.modelToView(this, caret.getDot());
                 caret.damage(r);
             } catch (BadLocationException e) {
                 e.printStackTrace();
@@ -783,7 +783,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     @Override
     public String getToolTipText(MouseEvent event) {
-        int pos = Java8Compat.viewToModel(EditorTextArea3.this, event.getPoint());
+        int pos = Java11Compat.viewToModel(EditorTextArea3.this, event.getPoint());
         int s = controller.getSegmentIndexAtLocation(pos);
         return s < 0 ? null : controller.markerController.getToolTips(s, pos);
     }

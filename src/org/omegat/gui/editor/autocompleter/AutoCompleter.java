@@ -51,7 +51,7 @@ import org.omegat.gui.editor.chartable.CharTableAutoCompleterView;
 import org.omegat.gui.editor.history.HistoryCompleter;
 import org.omegat.gui.editor.history.HistoryPredictor;
 import org.omegat.gui.glossary.GlossaryAutoCompleterView;
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -243,8 +243,8 @@ public class AutoCompleter implements IAutoCompleter {
         int fontSize = editor.getFont().getSize();
         try {
             int pos = Math.min(editor.getCaret().getDot(), editor.getCaret().getMark());
-            x = Java8Compat.modelToView(editor.getUI(), editor, pos).x;
-            y = Java8Compat.modelToView(editor.getUI(), editor, editor.getCaret().getDot()).y + fontSize;
+            x = Java11Compat.modelToView(editor.getUI(), editor, pos).x;
+            y = Java11Compat.modelToView(editor.getUI(), editor, editor.getCaret().getDot()).y + fontSize;
         } catch (BadLocationException e) {
             // this should never happen!!!
             Log.log(e);

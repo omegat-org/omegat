@@ -38,7 +38,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 
-import org.omegat.util.Java8Compat;
+import org.omegat.util.Java11Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
@@ -104,7 +104,7 @@ public class EditingPanelController {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER
-                        && ((e.getModifiersEx() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0)) {
+                        && ((e.getModifiersEx() & Java11Compat.getMenuShortcutKeyMaskEx()) != 0)) {
                     panel.okButton.doClick();
                 }
             }

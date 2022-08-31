@@ -66,8 +66,8 @@ public class AboutDialog extends JDialog {
         initComponents();
 
         StaticUIUtils.setCaretUpdateEnabled(abouttext, false);
-        abouttext.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"), getContributors(),
-                OStrings.getString("ABOUTDIALOG_LIBRARIES")));
+        abouttext.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"),
+                getContributors(), getLibraries()));
 
         versionLabel.setText(getVersionString());
 
@@ -86,6 +86,20 @@ public class AboutDialog extends JDialog {
 
         StaticUIUtils.fitInScreen(this);
         setLocationRelativeTo(parent);
+    }
+
+    private static String getLibraries() {
+        URI librariesUri = Help.getHelpFileURI(OConsts.LIBRARIES_FILE);
+        String result = OStrings.getString("ABOUTDIALOG_LIBRARIES_UNAVAILABLE");
+        if (librariesUri != null) {
+            try {
+                result = IOUtils.toString(librariesUri, StandardCharsets.UTF_8);
+                result = wrap(result, 78).replaceAll("(?m)^", "  ");
+            } catch (IOException ignored) {
+                // ignore
+            }
+        }
+        return result;
     }
 
     private static String getContributors() {

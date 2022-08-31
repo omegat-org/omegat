@@ -34,11 +34,15 @@ import java.util.Collections;
 import java.util.logging.Level;
 
 import org.eclipse.jgit.api.Git;
+import org.tmatesoft.svn.core.SVNDepth;
+import org.tmatesoft.svn.core.SVNPropertyValue;
+import org.tmatesoft.svn.core.wc.SVNClientManager;
+
 import org.omegat.CLIParameters;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
-import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -46,9 +50,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
-import org.tmatesoft.svn.core.SVNDepth;
-import org.tmatesoft.svn.core.SVNPropertyValue;
-import org.tmatesoft.svn.core.wc.SVNClientManager;
 
 /**
  * A utility class implementing useful tools related to team projects. Intended
@@ -120,7 +121,9 @@ public final class TeamTool {
                 writer.write("*.tmx text\n");
                 writer.write("*.txt text\n");
             }
-            Git.open(dir).add().addFilepattern(".").call();
+            try (Git git = Git.open(dir)) {
+                git.add().addFilepattern(".").call();
+            }
         }
 
         System.out.println(StringUtil.format(OStrings.getString("TEAM_TOOL_INIT_COMPLETE"), srcLang, trgLang));

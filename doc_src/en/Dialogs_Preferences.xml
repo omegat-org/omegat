@@ -398,7 +398,7 @@
           </listitem>
 
           <listitem>
-            <para><literal>${nameOnly-1}</literal>: Document.xx</filename></para>
+            <para><literal>${nameOnly-1}</literal>: <filename>Document.xx</filename></para>
           </listitem>
 
           <listitem>
@@ -1202,7 +1202,7 @@
 		  Command</term>
 
 		  <listitem>
-			<para>Specify commands to run after using the <menuchoice><guimenuitem>Create Translated Documents</guimenuitem> command.</para></menuchoice>
+			<para>Specify commands to run after using the <menuchoice><guimenuitem>Create Translated Documents</guimenuitem></menuchoice> command.</para>
 
 			<para>An example use of this feature would be to send translated documents automatically to the client's FTP server.</para>
 		  </listitem>

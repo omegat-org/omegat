@@ -5,6 +5,7 @@
 
  Copyright (C) 2012 Alex Buloichik
                2014 Alex Buloichik, Aaron Madlon-Kay
+               2022 Hiroshi Miura
                Home page: http://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -76,6 +77,7 @@ import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.util.Log;
+import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
 
@@ -175,8 +177,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             Log.logInfoRB("GIT_FINISH", "clone");
         }
 
-        String externalGpg = repository.getConfig().getString("user", null, "program");
-        if ("gpg".equalsIgnoreCase(externalGpg)) {
+        String signingkey  = repository.getConfig().getString("user", null, "signingkey");
+        if (!StringUtil.isEmpty(signingkey)) {
             GpgSigner.setDefault(new GITExternalGpgSigner());
         }
 

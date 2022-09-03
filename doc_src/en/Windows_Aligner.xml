@@ -292,37 +292,43 @@
       <para>The shortcut keys are well worth remembering if you use the aligner often or work on large documents, as they allow you to carry out ctions very quickly.</para>
     </note>
 
-    <para>The available actions are described below.</para>
+    <para>To perform an action, select the applicable segement or block of consecutive segments. Individual segments can be selected with the mouse or the arrow keys. Segment blocks can be selected with the mouse by clicking the first segment, and holding the <keycap>S</keycap> key while clicking the last segment. Alternatively, you can press the <keycap>Up</keycap> or <keycap>Down</keycap>Down key while holding <keycap>S</keycap> to select consecutive segments. The available actions are presented below.</para>
 
     <variablelist>
       <varlistentry>
-        <term><guimenuitem>Move Up</guimenuitem> (<keycap>U</keycap>)</term>
+        <term><guimenuitem>Move Up</guimenuitem> (<keycap>u</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>Moves the selected segment, or block of consecutive segments, up one row.</para>
+          <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Move Down</guimenuitem> (<keycap>D</keycap>)</term>
+        <term><guimenuitem>Move Down</guimenuitem> (<keycap>d</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>Moves the selected segment, or block of consecutive segments, down one row.</para>
+          <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Split</guimenuitem> (<keycap>S</keycap>)</term>
+        <term><guimenuitem>Split</guimenuitem> (<keycap>s</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>If a single segment is selected, this command opens the <guilabel>Split Text</guilabel> dialog. Use the mouse or arrow keys to place the cusor at the location where you want to split the text, and click <guibutton>OK</guibutton> or press <keycap>Enter</keycap>.</para>
+          <para>If two or more segments occupying separate cells in the same row (segments that do not have a <guilabel>Keep</guilabel> check box on the same line as their cell) are selected, this command will split them the selected cells back into separate rows (with a <guilabel>Keep</guilabel> check box).</para>
+          <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Merge</guimenuitem> (<keycap>M</keycap>)</term>
+        <term><guimenuitem>Merge</guimenuitem> (<keycap>m</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>If only one segment is selected, the aligner will merge it with the following segment. If two or more segments are selected, they will all be merged, but remain in separate cells. Calling the command one more time on the selection merges the contents of each cell into a single cell.</para>
+          <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Edit</guimenuitem> (<keycap>E</keycap>)</term>
+        <term><guimenuitem>Edit</guimenuitem> (<keycap>e</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>This command can only be performed on a single segment. Calling this command opens the <guilabel>Edit Text</guilabel> dialog, which allows you to make changes to the text of the segment. Use the <guibutton>OK</guibutton> button to close the dialog when finished. (In this dialog, the <keycap>Enter</keycap> enters a line break in the text. Use <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo> to close it wihtout using the mouse.</para>
+          <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
       <varlistentry>

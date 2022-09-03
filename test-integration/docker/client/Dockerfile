@@ -40,5 +40,7 @@ CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
   && git config --global http.sslVerify false \
   && echo "start test-integration" \
   && (cd /code \
-    && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
-     -Domegat.test.repo.alt=${ALTREPO} -Domegat.test.map.repo=${MAPREPO} -Domegat.test.map.file=${MAPFILE})
+    && [ "${TYPE}" = "GIT" ] && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=git@server:omegat-test.git \
+     -Domegat.test.repo.alt=https://git:gitpass@server/omegat-test.git -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README \
+    || ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=svn+ssh://git:gitpass@server/omegat-test/trunk \
+     -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README )

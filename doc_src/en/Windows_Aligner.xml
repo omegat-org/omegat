@@ -395,7 +395,10 @@
     </warning>
 
     <para>In addition to the <guibutton>Save TMX...</guibutton> button, the bottom part of the <guilabel>Align</guilabel> windowin the manual correction step features the same <guilabel>Highlight</guilabel> check box and <guibutton>Pattern...</guibutton> button as in Step 1. This option is also accessible from the <guimenu>View</guimenu> menu.</para>
-    <para>There is also a <guibutton>Reset</guibutton> button at the bottom of the window. <emphasis role="bold-italic">Use it with caution!</emphasis>. Clicking this button will discard all your changes and bring you back to Step 1.</para>
+
+    <warning>
+      <para>There is also a <guibutton>Reset</guibutton> button at the bottom of the window. <emphasis role="bold">Use it with caution!</emphasis> Clicking this button will discard all your changes and bring you back to Step 1.</para>
+    </warning>    
     
   </section>
 </section>

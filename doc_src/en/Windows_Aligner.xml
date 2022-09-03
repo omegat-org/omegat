@@ -5,7 +5,11 @@
   <title id="windows.aligner.title">Aligner</title>
 
   <para>Alignment is the process of creating a bilingual translation memory
-  from a pair of already translated monolingual documents. Aligning the contents of the files is a two-step process. First, the files are read by the aligner, which attempts to match the segments that correspond to one another in the original and translated texts. Next, the translator reviews the results and makes any necessary manual adjustments.</para>
+  from a pair of already translated monolingual documents. Aligning the
+  contents of the files is a two-step process. First, the files are read by
+  the aligner, which attempts to match the segments that correspond to one
+  another in the original and translated texts. Next, the translator reviews
+  the results and makes any necessary manual adjustments.</para>
 
   <para>The aligner can read all the file formats supported by OmegaT. Select
   <link endterm="menus.tools.align.files.title"
@@ -20,25 +24,28 @@
     project-specific segmentation rules, if any.</para>
   </note>
 
-  <para>Clicking the <guibutton>OK</guibutton> button in the<guilabel>Align Files</guilabel> dialog brings up the <guilabel>Align</guilabel> window, which shows the results of the automatic alignment.</para>
+  <para>Clicking the <guibutton>OK</guibutton> button in the<guilabel>Align
+  Files</guilabel> dialog brings up the <guilabel>Align</guilabel> window,
+  which shows the results of the automatic alignment.</para>
 
   <para>The main part of the window is divided into three columns:
-    <itemizedlist>
-        <listitem>
-          <para><guilabel>Keep</guilabel>: The segment pairs in rows that have this check box ticked are saved to the translation memory file. Unticked rows are discarded.</para>
-        </listitem>
+  <itemizedlist>
+      <listitem>
+        <para><guilabel>Keep</guilabel>: The segment pairs in rows that have
+        this check box ticked are saved to the translation memory file.
+        Unticked rows are discarded.</para>
+      </listitem>
 
-        <listitem>
-          <para><guilabel>Source</guilabel>: The segments from the original
-          text.</para>
-        </listitem>
+      <listitem>
+        <para><guilabel>Source</guilabel>: The segments from the original
+        text.</para>
+      </listitem>
 
-        <listitem>
-          <para><guilabel>Target</guilabel>: The segments from the translated
-          text.</para>
-        </listitem>
-      </itemizedlist>
-  </para>
+      <listitem>
+        <para><guilabel>Target</guilabel>: The segments from the translated
+        text.</para>
+      </listitem>
+    </itemizedlist></para>
 
   <section id="windows.aligner.adjust">
     <title id="windows.aligner.adjust.title">Step 1: Adjust alignment
@@ -46,123 +53,228 @@
 
     <para>In this step, the bottom part of the window presents various
     parameters and options you can change if the initial alignment looks like
-    it could be improved. It also shows an <guilabel>Average score</guilabel> result for the alignement. As a rule of thumb, the lower
-    that score, the more accurate the alignment. Changing a parameter immediately recalculates the alignment, allowing you to quickly try different combinations to obtain the best results.</para>
-    
+    it could be improved. It also shows an <guilabel>Average score</guilabel>
+    result for the alignment. As a rule of thumb, the lower that score, the
+    more accurate the alignment. Changing a parameter immediately recalculates
+    the alignment, allowing you to quickly try different combinations to
+    obtain the best results.</para>
+
     <para>The available parameters and options are:</para>
 
     <variablelist>
       <para><emphasis>Parameters</emphasis></para>
+
       <varlistentry>
-        <term><guilabel>Comparison mode</guilabel></term>        
-          <listitem>
-            <itemizedlist>
-              <listitem>
-                <para><guilabel>Heapwise</guilabel>: This mode compares the documents globally.</para>
-              </listitem>
-              <listitem>
-                <para><guilabel>Parsewise</guilabel>: This mode compares the documents segment by segment. It is only shown when it is available for the files being aligned.</para>
-              </listitem>
-              <listitem>
-                <para><guilabel>ID</guilabel>: This mode applies to files consisting of <literal>key = value</literal> entries. This works even if the order of the keys differ in each file, and when the files have a different number of entries. It is only shown when both selected files are recognized as key=value files.</para>
-              </listitem>            
-            </itemizedlist>
-          </listitem>
-        </varlistentry>
+        <term><guilabel>Comparison mode</guilabel></term>
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Heapwise</guilabel>: This mode compares the
+              documents globally.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Parsewise</guilabel>: This mode compares the
+              documents segment by segment. It is only shown when it is
+              available for the files being aligned.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>ID</guilabel>: This mode applies to files
+              consisting of <literal>key = value</literal> entries. This works
+              even if the order of the keys differ in each file, and when the
+              files have a different number of entries. It is only shown when
+              both selected files are recognized as key=value files.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
       <varlistentry>
         <term><guilabel>Algorithm:</guilabel></term>
-          <listitem>
-            <itemizedlist>
-              <listitem>
-                <para><guilabel>Viterbi</guilabel>: The default algorithms used to align the documents.</para> 
-              </listitem>
-              <listitem><para><guilabel>Forward-Backward</guilabel>: An alternative algorithm that can be used to align the documents.</para></listitem>
-              </itemizedlist>
-              <para>There is no hard and fast rule on which algorithm is you should choose. Try both, and use the one that yields the better results for your files.</para>
-          </listitem>        
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Viterbi</guilabel>: The default algorithms used
+              to align the documents.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Forward-Backward</guilabel>: An alternative
+              algorithm that can be used to align the documents.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>There is no hard and fast rule on which algorithm is you
+          should choose. Try both, and use the one that yields the better
+          results for your files.</para>
+        </listitem>
       </varlistentry>
+
       <varlistentry>
         <term><guilabel>Calculator:</guilabel></term>
-          <listitem>
-            <itemizedlist>
-              <listitem>
-                <para><guilabel>Normal</guilabel>: The default statistical distribution used to align the documents.</para>
-              </listitem>
-              <listitem>
-                <para><guilabel>Poisson</guilabel>: An alternative statistical distribution that can be used to align the documents.</para>
-              </listitem>
-            </itemizedlist>
-            <para>As with the algorithms, there is no hard and fast rule on which statistical distribution you should choose. Try both and use the one that yields the better results for your files.</para>
-          </listitem>        
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Normal</guilabel>: The default statistical
+              distribution used to align the documents.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Poisson</guilabel>: An alternative statistical
+              distribution that can be used to align the documents.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>As with the algorithms, there is no hard and fast rule on
+          which statistical distribution you should choose. Try both and use
+          the one that yields the better results for your files.</para>
+        </listitem>
       </varlistentry>
+
       <varlistentry>
         <term><guilabel>Counter:</guilabel></term>
-          <listitem>
-            <itemizedlist>
-              <listitem>
-                <para><guilabel>Character</guilabel>: The basic unit used to determine the size of segments in languages that do not use a space to delimit words.</para>
-              </listitem>
-              <listitem>
-                <para><guilabel>Word</guilabel>: The basic unit used to determine the size of segments in languages that use a space to delimit words.</para>
-              </listitem>
-            </itemizedlist>
-            <para>The aligner automatically selects the counter based on the source and target languages of files to align. It defaults to <guilabel>Character</guilabel> if at least one of the languages involved does not delimit words with spaces, and to <guilabel>Word</guilabel> otherwise. If you are working with one of each, you can try to switch between the two to see which one yields better results.</para>          
-          </listitem>        
+
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Character</guilabel>: The basic unit used to
+              determine the size of segments in languages that do not use a
+              space to delimit words.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Word</guilabel>: The basic unit used to
+              determine the size of segments in languages that use a space to
+              delimit words.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>The aligner automatically selects the counter based on the
+          source and target languages of files to align. It defaults to
+          <guilabel>Character</guilabel> if at least one of the languages
+          involved does not delimit words with spaces, and to
+          <guilabel>Word</guilabel> otherwise. If you are working with one of
+          each, you can try to switch between the two to see which one yields
+          better results.</para>
+        </listitem>
       </varlistentry>
     </variablelist>
-  
-  <variablelist>
-    <para><emphasis>Options</emphasis></para>
-    <varlistentry>
-      <term><guilabel>Segment</guilabel></term>
+
+    <variablelist>
+      <para><emphasis>Options</emphasis></para>
+
+      <varlistentry>
+        <term><guilabel>Segment</guilabel></term>
+
+        <listitem>
+          <para>The aligner uses sentence segmentation by default. Untick the
+          check box to use paragraph segmentation (see <link
+          endterm="dialogs.preferences.segmentation.setup.title"
+          linkend="dialogs.preferences.segmentation.setup"/></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guilabel>Remove Tags</guilabel></term>
+
+        <listitem>
+          <para>The aligner includes tags in the segments by default. Untick
+          the check box to apply the <link
+          endterm="dialogs.project.properties.remove.tags.title"
+          linkend="dialogs.project.properties.remove.tags"/> option.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guilabel>Highlight</guilabel></term>
+
+        <listitem>
+          <para>By default, the aligner highlights all numbers in the source
+          and target segments. Untick the check box to turn off
+          highlighting.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>Rules...</guibutton></term>
+
+        <listitem>
+          <para>Clicking this button lets you edit the <link
+          endterm="segementation.rules.title" linkend="segmentation.rules"/>.
+          The general OmegaT rules are edited unless you launched the aligner
+          from a project containing project-specific segmentation rules. This
+          option can be useful if you defined project-specific rules to match
+          the text of the source language and need to apply similar
+          segmentation to the target language to get better matches.</para>
+
+          <warning>
+            <para>If you modify the segmentation rules, you will be asked if
+            you want to save those changes when you exit the aligner. The
+            default choice is <guibutton>Yes</guibutton>, which may not be
+            what you want if you edited the general OmegaT segmentation
+            rules.</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>Filters...</guibutton></term>
+
+        <listitem>
+          <para>This option lets you modify the <link
+          endterm="dialogs.preferences.file.filters.title"
+          linkend="dialogs.preferences.file.filters"/>. As with segmentation,
+          the general OmegaT filters will be modified unless you have launched
+          the aligner from an OmegaT project with project-specific file filter
+          options.</para>
+
+          <warning>
+            <para>If you modify the file filters, you will be asked if you
+            want to save those changes when you exit the aligner. The default
+            choice is <guibutton>Yes</guibutton>, which may not be what you
+            want if you edited the general OmegaT file filters.</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><guibutton>Pattern...</guibutton></term>
+
+        <listitem>
+          <para>This option lets you enter a regular expression define the
+          pattern used for highlighting text in the source and target
+          segments. By default, the aligner uses the <literal>\d+</literal> to
+          highlight numbers. If your texts contain other elements, such as
+          trademarks, that would be useful to highlight, you can modify the
+          regular expression in this dialog to include those elements.</para>
+          <para><emphasis role="bold">Example:</emphasis> To highlight a trademark in addition to numbers, you can change the regular expression in the dialog to <literal>\d+|&lt;trademark&gt;</literal>. (Replace &lt;trademark&gt; with the actual trademark name.)</para>
+        </listitem>
+      </varlistentry>      
+    </variablelist>
+
+    <para>You can also access the <guilabel>Highlight</guilabel> option and the dialog to modify the pattern from the <guimenu>View</guimenu> menu, and the other options from the <guimenu>Options</guimenu>menu.</para>
+
+    <para>In addition, the <guimenu>File</guimenu> menu provides the following commands:</para>
+    <itemizedlist>
       <listitem>
-        <para>The aligner uses sentence segmentation by default. Untick the check box to use paragraph segmentation (see <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/></para>
+        <para><guimenuitem>Save TMX...</guimenuitem>: This item is greyed out until the next step is complete.</para>
       </listitem>
-    </varlistentry>
-    <varlistentry>
-      <term><guilabel>Remove Tags</guilabel></term>
       <listitem>
-        <para>The aligner includes tags in the segments by default. Untick the check box to apply the <link linkend="dialogs.project.properties.remove.tags" endterm="dialogs.project.properties.remove.tages.title"/> option.</para>
+        <para><guimenuitem>Reset</guimenuitem>: This command restores all parameters to their default value. It can also be called by clicking the <guibutton>Reset</guibutton> at the bottom right of the window or pressing <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>r</keycap></keycombo></para>
       </listitem>
-    </varlistentry>
-    <varlistentry>
-      <term><guilabel>Highlight</guilabel></term>
       <listitem>
-        <para>By default, the aligner highlights all numbers in the source and target segments. Untick the check box to turn off highlighting.</para>
+        <para><guimenuitem>Reload</guimenuitem>: This command reloads the file from the disk. You can use this command to parse and align the files again if you had to modify their contents.</para>
       </listitem>
-    </varlistentry>
-    <varlistentry>
-      <term><guibutton>Rules...</guibutton></term>
       <listitem>
-        <para>Clicking this button lets you edit the <link linkend="segmentation.rules" endterm="segementation.rules.title"/>. The general OmegaT rules are edited unless you launched the aligner from a project containing project-specific segmentation rules. This option can be useful if you defined project-specific rules to match the text of the source language and need to apply similar segmentation to the target language to get better matches.</para>
-        <warning>
-          <para>If you modify the segmentation rules, you will be asked if you want to save those changes when you exit the aligner. The default choice is <guibutton>Yes</guibutton>, which may not be what you want if you edited the general OmegaT segmentation rules.</para>
-        </warning>
+        <para><guimenuitem>Close</guimenuitem>: This closes the <guilabel>Align</guilabel> dialog. Doing so in this step cancels the alignment without saving any data to a translation memory file. You can also call this command by pressing <keycombo><keycap>C</keycap><keycap>w</keycap></keycombo>.</para>
       </listitem>
-    </varlistentry>
-    <varlistentry>
-      <term><guibutton>Filters...</guibutton></term>
-      <listitem>
-        <para>This option lets you modify the <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>. As with segmentation, the general OmegaT filters will be modified unless you have launched the aligner from an OmegaT project with project-specific file filter options.</para>
-        <warning>
-          <para>If you modify the file filters, you will be asked if you want to save those changes when you exit the aligner. The default choice is <guibutton>Yes</guibutton>, which may not be what you want if you edited the general OmegaT file filters.</para>
-        </warning>
-      </listitem>
-    </varlistentry>
-    <varlistentry>
-      <term><guibutton>Pattern...</guibutton></term>
-      <listitem>
-        <para>This option lets you enter a regular expression define the pattern used for highlighting text in the source and target segments. By default, the aligner uses the <literal>\d+</literal> to highlight numbers. If your texts contain other elements, such as trademarks, that would be useful to highlight, you can modify the regular expression in this dialog to inlcude those elements.</para>
-        <example>
-          <para>To highlight a trademark in addition to numbers, you can change the regular expression in the dialog to <literal>\d+|<emphasis>>trademark</emphasis></literal>. (Replace <emphasis>trademark</emphasis> with the actual trademark name.)</para>
-          
-        </example>
-      </listitem>
-    </varlistentry>
-  </variablelist>
-    
-    <para>Click <guibutton>Continue</guibutton> to proceed to the next
-    step.</para>
+    </itemizedlist>
+
+      <para>Once you are satisfied with the results of this step, click the <guibutton>Continue</guibutton> button to proceed to the next one.</para>
   </section>
 
   <section id="windows.aligner.manual.corrections">
@@ -183,7 +295,11 @@
       </listitem>
 
       <listitem>
-        <para>Press the space bar (the shortcut for <menuchoice><guimenu>Edit</guimenu><guimenuitem>Start Pinpoint Align</guimenuitem></menuchoice>).</para>
+        <para>Press the space bar (the shortcut for <menuchoice>
+            <guimenu>Edit</guimenu>
+
+            <guimenuitem>Start Pinpoint Align</guimenuitem>
+          </menuchoice>).</para>
       </listitem>
 
       <listitem>
@@ -191,7 +307,15 @@
       </listitem>
     </orderedlist>
 
-    <para>After repeating the process a few times, press <keycombo><keycap>C</keycap><keycap>r</keycap></keycombo> (or select <menuchoice><guimenu>Edit</guimenu><guimenuitem>Realign pending</guimenuitem></menuchoice> )to update the alignment of the remaining segments.</para>
+    <para>After repeating the process a few times, press <keycombo>
+        <keycap>C</keycap>
+
+        <keycap>r</keycap>
+      </keycombo> (or select <menuchoice>
+        <guimenu>Edit</guimenu>
+
+        <guimenuitem>Realign pending</guimenuitem>
+      </menuchoice> )to update the alignment of the remaining segments.</para>
 
     <para>To move one or more segments individually, select them and press
     <userinput>U</userinput> or <userinput>D</userinput> (or click the

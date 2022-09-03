@@ -78,19 +78,35 @@
               </listitem>
               <listitem><para><guilabel>Forward-Backward</guilabel>: An alternative algorithm that can be used to align the documents.</para></listitem>
               </itemizedlist>
-              <para>There is no hard and fast rule on which algorithm is better. Try both, and use the one that yields the better results for your files.</para>
+              <para>There is no hard and fast rule on which algorithm is you should choose. Try both, and use the one that yields the better results for your files.</para>
           </listitem>        
       </varlistentry>
       <varlistentry>
         <term><guilabel>Calculator:</guilabel></term>
           <listitem>
-            <para></para>            
+            <itemizedlist>
+              <listitem>
+                <para><guilabel>Normal</guilabel>: The default statistical distribution used to align the documents.</para>
+              </listitem>
+              <listitem>
+                <para><guilabel>Poisson</guilabel>: An alternative statistical distribution that can be used to align the documents.</para>
+              </listitem>
+            </itemizedlist>
+            <para>As with the algorithms, there is no hard and fast rule on which statistical distribution you should choose. Try both and use the one that yields the better results for your files.</para>
           </listitem>        
       </varlistentry>
       <varlistentry>
         <term><guilabel>Counter:</guilabel></term>
           <listitem>
-            <para></para>            
+            <itemizedlist>
+              <listitem>
+                <para><guilabel>Character</guilabel>: The basic unit used to determine the size of segments in languages that do not use a space to delimit words.</para>
+              </listitem>
+              <listitem>
+                <para><guilabel>Word</guilabel>: The basic unit used to determine the size of segments in languages that use a space to delimit words.</para>
+              </listitem>
+            </itemizedlist>
+            <para>The aligner automatically selects the counter based on the source and target languages of files to align. It defaults to <guilabel>Character</guilabel> if at least one of the languages involved does not delimit words with spaces, and to <guilabel>Word</guilabel> otherwise. If you are working with one of each, you can try to switch between the two to see which one yields better results.</para>          
           </listitem>        
       </varlistentry>
     </variablelist>
@@ -100,37 +116,47 @@
     <varlistentry>
       <term><guilabel>Segment</guilabel></term>
       <listitem>
-        <para></para>
+        <para>The aligner uses sentence segmentation by default. Untick the check box to use paragraph segmentation (see <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/></para>
       </listitem>
     </varlistentry>
     <varlistentry>
       <term><guilabel>Remove Tags</guilabel></term>
       <listitem>
-        <para></para>
+        <para>The aligner includes tags in the segments by default. Untick the check box to apply the <link linkend="dialogs.project.properties.remove.tags" endterm="dialogs.project.properties.remove.tages.title"/> option.</para>
       </listitem>
     </varlistentry>
     <varlistentry>
       <term><guilabel>Highlight</guilabel></term>
       <listitem>
-        <para></para>
+        <para>By default, the aligner highlights all numbers in the source and target segments. Untick the check box to turn off highlighting.</para>
       </listitem>
     </varlistentry>
     <varlistentry>
       <term><guibutton>Rules...</guibutton></term>
       <listitem>
-        <para></para>
+        <para>Clicking this button lets you edit the <link linkend="segmentation.rules" endterm="segementation.rules.title"/>. The general OmegaT rules are edited unless you launched the aligner from a project containing project-specific segmentation rules. This option can be useful if you defined project-specific rules to match the text of the source language and need to apply similar segmentation to the target language to get better matches.</para>
+        <warning>
+          <para>If you modify the segmentation rules, you will be asked if you want to save those changes when you exit the aligner. The default choice is <guibutton>Yes</guibutton>, which may not be what you want if you edited the general OmegaT segmentation rules.</para>
+        </warning>
       </listitem>
     </varlistentry>
     <varlistentry>
       <term><guibutton>Filters...</guibutton></term>
       <listitem>
-        <para></para>
+        <para>This option lets you modify the <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>. As with segmentation, the general OmegaT filters will be modified unless you have launched the aligner from an OmegaT project with project-specific file filter options.</para>
+        <warning>
+          <para>If you modify the file filters, you will be asked if you want to save those changes when you exit the aligner. The default choice is <guibutton>Yes</guibutton>, which may not be what you want if you edited the general OmegaT file filters.</para>
+        </warning>
       </listitem>
     </varlistentry>
     <varlistentry>
       <term><guibutton>Pattern...</guibutton></term>
       <listitem>
-        <para></para>
+        <para>This option lets you enter a regular expression define the pattern used for highlighting text in the source and target segments. By default, the aligner uses the <literal>\d+</literal> to highlight numbers. If your texts contain other elements, such as trademarks, that would be useful to highlight, you can modify the regular expression in this dialog to inlcude those elements.</para>
+        <example>
+          <para>To highlight a trademark in addition to numbers, you can change the regular expression in the dialog to <literal>\d+|<emphasis>>trademark</emphasis></literal>. (Replace <emphasis>trademark</emphasis> with the actual trademark name.)</para>
+          
+        </example>
       </listitem>
     </varlistentry>
   </variablelist>

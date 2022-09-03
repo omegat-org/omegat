@@ -274,7 +274,9 @@
       </listitem>
     </itemizedlist>
 
-      <para>Once you are satisfied with the results of this step, click the <guibutton>Continue</guibutton> button to proceed to the next one.</para>
+    <para>The <guimenu>Edit</guimenu> menu is greyed out in this step.</para>
+
+    <para>Once you are satisfied with the results of this step, click the <guibutton>Continue</guibutton> button to proceed to the next one.</para>
   </section>
 
   <section id="windows.aligner.manual.corrections">
@@ -282,10 +284,96 @@
     corrections</title>
 
     <para>Manual adjustments are generally required after the initial
-    automatic alignment process.</para>
+    automatic alignment process. This generally involves moving segments up or down to align them with the correct segments in the other language, as well as splitting or merging segments. The aligner also allows you to edit the contents of a segment, which can be useful if you notice errors such as a spelling mistake in a segment.</para>
 
-    <para>The manual step window presents the original and translated text in
-    the source and target columns, respectively.</para>
+    <para>All available actions can be accessed from the <guimenu>Edit</guimenu> menu or by pressing the corresponding shortcut key. The most common actions are also accessible from the buttons to the right of the main pane.</para>
+
+    <note>
+      <para>The shortcut keys are well worth remembering if you use the aligner often or work on large documents, as they allow you to carry out ctions very quickly.</para>
+    </note>
+
+    <para>The available actions are described below.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term><guimenuitem>Move Up</guimenuitem> (<keycap>U</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Move Down</guimenuitem> (<keycap>D</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Split</guimenuitem> (<keycap>S</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Merge</guimenuitem> (<keycap>M</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Edit</guimenuitem> (<keycap>E</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Mark Accepted</guimenuitem> (<keycap>A</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Mark Needs Review</guimenuitem> (<keycap>R</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Clear Mark</guimenuitem> (<keycap>C</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Realign Pending</guimenuitem> (<keycombo><keycap>C</keycap><keycap>r</keycap></keycombo>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Keep All</guimenuitem></term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Keep None</guimenuitem></term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Toggle Selected</guimenuitem> (<keycap>K</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><guimenuitem>Start Pinpoint Align</guimenuitem> (<keycap>Space</keycap>)</term>
+        <listitem>
+          <para></para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
 
     <para>To align a source and target segment found in different rows:</para>
 

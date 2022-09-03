@@ -38,9 +38,9 @@ CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
   && touch /home/omegat/.ssh/known_hosts \
   && git config --global user.name example && git config --global user.email ex@example.com \
   && git config --global http.sslVerify false \
-  && echo "start test-integration" \
-  && (cd /code \
-    && [ "${TYPE}" = "GIT" ] && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=git@server:omegat-test.git \
-     -Domegat.test.repo.alt=https://git:gitpass@server/omegat-test.git -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README \
-    || ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=svn+ssh://git:gitpass@server/omegat-test/trunk \
-     -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README )
+  && [ "${TYPE}" = "SVN" ] \
+     && (cd /code && echo "start test-integration for svn" &&./gradlew testIntegration -Domegat.test.duration=${DURATION} \
+       -Domegat.test.repo=svn+ssh://git:gitpass@server/omegat-test/trunk/ \
+       -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README) \
+     || (cd /code && echo "start test-integration for git" && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=git@server:omegat-test.git \
+       -Domegat.test.repo.alt=https://git:gitpass@server/omegat-test.git -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README)

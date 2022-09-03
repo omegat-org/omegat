@@ -25,7 +25,7 @@
 #
 FROM debian:bullseye-slim
 RUN apt-get -y update && apt-get -y upgrade \
-    && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor apache2-suexec-pristine subversion \
+    && apt-get install -y openssh-server git inotify-tools apache2 apache2-utils supervisor apache2-suexec-pristine subversion libapache2-mod-svn \
     && adduser --system --group --shell /bin/bash git && (echo 'git:gitpass' | chpasswd) && mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh \
     && a2dissite default-ssl && a2enmod ssl cgi env alias suexec && htpasswd -b -c /home/git/htpasswd git gitpass \
     && mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor \

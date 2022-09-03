@@ -36,9 +36,9 @@ COPY supervisord.conf /etc/supervisor/conf.d/
 COPY git-http-backend-wrapper.cgi /var/www/git/
 RUN chmod 755 /var/www/git/git-http-backend-wrapper.cgi \
     && touch /home/git/.ssh/authorized_keys && chmod 600 /home/git/.ssh/authorized_keys \
-    && mkdir -p /tmp/template && git init /tmp/template && echo "source content" > /tmp/template/README \
-    && (cd /home/git && svnadmin create omegat-test && svn import /tmp/template file:///home/git/omegat-test/trunk/ -m first ) \
-    && (cd /tmp/template && git config user.name git && git config user.email git@example.com \
+    && mkdir -p /tmp/template && echo "source content" > /tmp/template/README && mkdir -p /home/git/svn \
+    && (cd /home/git/svn && svnadmin create omegat-test.svn && svn import /tmp/template file:///home/git/svn/omegat-test.svn/trunk/ -m first ) \
+    && git init /tmp/template && (cd /tmp/template && git config user.name git && git config user.email git@example.com \
         && git config init.defaultBranch main && git add . && git commit -m first ) \
     && git clone /tmp/template /home/git/omegat-test.git --bare && (cd /home/git/omegat-test.git && git remote remove origin ) \
     && cp /tmp/template/README /var/www/html && chown -R www-data.www-data /var/www/html \

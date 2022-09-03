@@ -38,7 +38,7 @@ CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
   && touch /home/omegat/.ssh/known_hosts \
   && git config --global user.name example && git config --global user.email ex@example.com \
   && git config --global http.sslVerify false \
-  && [ "${TYPE}" = "SVN" ] && export REPO=svn+ssh://git:gitpass@server/omegat-test/trunk/ REPO2=http://git:gitpass@server/svn/omegat-test \
+  && [ "${TYPE}" = "SVN" ] && export REPO2=svn+ssh://git:gitpass@server/svn/omegat-test.svn REPO=http://git:gitpass@server/svn/omegat-test.svn \
      || export REPO=git@server:omegat-test.git REPO2=https://git:gitpass@server/omegat-test.git \
   && cd /code && ./gradlew testIntegration -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
        -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README

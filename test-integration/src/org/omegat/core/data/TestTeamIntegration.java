@@ -118,8 +118,9 @@ public final class TestTeamIntegration {
 
     private TestTeamIntegration() {
     }
-    private final static String regex = "http(s)?://(?<username>.+?)(:(?<password>.+?))?@.+";
-    private final static Pattern URL_PATTERN = Pattern.compile(regex);
+
+    private final static Pattern GIT_URL_PATTERN = Pattern.compile("http(s)?://(?<username>.+?)(:(?<password>.+?))?@.+");
+    private final static Pattern SVN_URL_PATTERN = Pattern.compile("svn(\\+ssh)?://(?<username>.+?)(:(?<password>.+?))?@.+");
 
     static final String DIR = "/tmp/teamtest";
     static final List<String> REPO = new ArrayList<>();
@@ -301,15 +302,15 @@ public final class TestTeamIntegration {
         config.setTargetLanguage(TRG_LANG);
         config.setRepositories(new ArrayList<>());
         if (MAP_REPO == null || MAP_FILE == null) {
-            config.getRepositories().add(getDef(repoUrl, predictMainTyep(repoUrl), "", ""));
+            config.getRepositories().add(getDef(repoUrl, predictMainType(repoUrl), "", ""));
         } else {
-            config.getRepositories().add(getDef(repoUrl, predictMainTyep(repoUrl), "/", "/"));
+            config.getRepositories().add(getDef(repoUrl, predictMainType(repoUrl), "/", "/"));
             config.getRepositories().add(getDef(MAP_REPO, MAP_REPO_TYPE, MAP_FILE, "source/" + MAP_FILE));
         }
         return config;
     }
 
-    static String predictMainTyep(String repoUrl) {
+    static String predictMainType(String repoUrl) {
         if (repoUrl.startsWith("git") || repoUrl.endsWith(".git")) {
             return "git";
         } else if (repoUrl.startsWith("svn") || repoUrl.startsWith("http") || repoUrl.endsWith(".svn")) {
@@ -324,7 +325,7 @@ public final class TestTeamIntegration {
         RepositoryMapping m = new RepositoryMapping();
         def.setType(type);
         if (type.equals("git") && repoUrl.contains("@")) {
-            Matcher matcher = URL_PATTERN.matcher(repoUrl);
+            Matcher matcher = GIT_URL_PATTERN.matcher(repoUrl);
             if (matcher.find()) {
                 String username = matcher.group("username");
                 if (!StringUtils.isEmpty(username)) {
@@ -333,6 +334,19 @@ public final class TestTeamIntegration {
                 String password = matcher.group("password");
                 if (!StringUtils.isEmpty(password)) {
                     def.getOtherAttributes().put(new QName("gitPassword"), password);
+                }
+            }
+        }
+        if (type.equals("svn") && repoUrl.contains("@")) {
+            Matcher matcher = SVN_URL_PATTERN.matcher(repoUrl);
+            if (matcher.find()) {
+                String username = matcher.group("username");
+                if (!StringUtils.isEmpty(username)) {
+                    def.getOtherAttributes().put(new QName("svnUsername"), username);
+                }
+                String password = matcher.group("password");
+                if (!StringUtils.isEmpty(password)) {
+                    def.getOtherAttributes().put(new QName("svnPassword"), password);
                 }
             }
         }

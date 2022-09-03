@@ -334,92 +334,65 @@
       <varlistentry>
         <term><guimenuitem>Mark Accepted</guimenuitem> (<keycap>A</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>Use this command to confirm that the alignment of the segments in the selected row or block of rows is correct. This highlights the corresponding <guilabel>Keep</guilabel> column in green.</para>          
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Mark Needs Review</guimenuitem> (<keycap>R</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>Use this command to identify a row or block of rows in which the alignment of the segments is in doubt. This highlights the corresponding <guilabel>Keep</guilabel> column in red.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Clear Mark</guimenuitem> (<keycap>C</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>Use this command to remove the mark set by the <guilabel>Mark Accepted</guilabel> or <guilabel>Mark Needs Review</guilabel> commands.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Realign Pending</guimenuitem> (<keycombo><keycap>C</keycap><keycap>r</keycap></keycombo>)</term>
         <listitem>
-          <para></para>
+          <para>If any rows have been marked as accepted, use this command to redo the alignment for the remaining rows.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Keep All</guimenuitem></term>
         <listitem>
-          <para></para>
+          <para>Use this command to tick the <guilabel>check box</guilabel> for all rows.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Keep None</guimenuitem></term>
         <listitem>
-          <para></para>
+          <para>Use this command to untick the <guilabel>Keep</guilabel> check box for all rows.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Toggle Selected</guimenuitem> (<keycap>K</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>Use this command to switch the <guilabel>Keep</guilabel> of the selected row or block of rows from ticked to unticked, or vice-versa.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Start Pinpoint Align</guimenuitem> (<keycap>Space</keycap>)</term>
         <listitem>
-          <para></para>
+          <para>If the corresponding segments are several rows apart, you can use this command to align them quickly. Select a segment, and press <keycap>Space</keycap> or select <menuchoice><guimenu>Edit</guimenu><guimenuitem>Start Pinpoint Align</guimenuitem></menuchoice> to set the first segment, and then click on the corresponding segment in the other column. (You can also use the arrow keys and press <keycap>Space</keycap> in the corresponding segment.)</para>
+          <para>Segments aligned with this method are automatically marked as accepted.</para>
+          <para>It can be helpful to run the <guimenuitem>Realign Pending</guimenuitem> command after using pinpoint align a few times.</para>
         </listitem>
       </varlistentry>
     </variablelist>
 
-    <para>To align a source and target segment found in different rows:</para>
+    <para>After you finish aligning the two columns, click the <guibutton>Save
+    TMX...</guibutton> button to create the translation memory.</para>
 
-    <orderedlist>
-      <listitem>
-        <para>Select the first segment.</para>
-      </listitem>
+    <note>
+      <para>Only rows with a ticked <guilabel>Keep</guilabel> check box in the first column are saved to the translation memory.</para>
+    </note>
 
-      <listitem>
-        <para>Press the space bar (the shortcut for <menuchoice>
-            <guimenu>Edit</guimenu>
-
-            <guimenuitem>Start Pinpoint Align</guimenuitem>
-          </menuchoice>).</para>
-      </listitem>
-
-      <listitem>
-        <para>Click on the corresponding segment in the other column.</para>
-      </listitem>
-    </orderedlist>
-
-    <para>After repeating the process a few times, press <keycombo>
-        <keycap>C</keycap>
-
-        <keycap>r</keycap>
-      </keycombo> (or select <menuchoice>
-        <guimenu>Edit</guimenu>
-
-        <guimenuitem>Realign pending</guimenuitem>
-      </menuchoice> )to update the alignment of the remaining segments.</para>
-
-    <para>To move one or more segments individually, select them and press
-    <userinput>U</userinput> or <userinput>D</userinput> (or click the
-    <guilabel>Move Up</guilabel> or <guilabel>Move Down</guilabel>
-    button).</para>
-
-    <para>Only rows with the <guilabel>Keep</guilabel> box ticked in the first
-    column are saved to the translation memory.</para>
-
-    <para>After you finish aligning the two columns, click <guibutton>Save
-    TMX...</guibutton> to create the translation memory.</para>
+    <warning>
+      <para>The aligner does not allow you to save you work partway through an alignment. Therefore, it is recommended that you divide the files to align into shorter files that you can comfortably align in a single session. Doing so has the added benefit of reducing mismatches in the initial automatic alignment, making the manual correction step smoother.</para>
+    </warning>
+    
   </section>
 </section>

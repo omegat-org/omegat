@@ -393,6 +393,9 @@
     <warning>
       <para>The aligner does not allow you to save you work partway through an alignment. Therefore, it is recommended that you divide the files to align into shorter files that you can comfortably align in a single session. Doing so has the added benefit of reducing mismatches in the initial automatic alignment, making the manual correction step smoother.</para>
     </warning>
+
+    <para>In addition to the <guibutton>Save TMX...</guibutton> button, the bottom part of the <guilabel>Align</guilabel> windowin the manual correction step features the same <guilabel>Highlight</guilabel> check box and <guibutton>Pattern...</guibutton> button as in Step 1. This option is also accessible from the <guimenu>View</guimenu> menu.</para>
+    <para>There is also a <guibutton>Reset</guibutton> button at the bottom of the window. <emphasis role="bold-italic">Use it with caution!</emphasis>. Clicking this button will discard all your changes and bring you back to Step 1.</para>
     
   </section>
 </section>

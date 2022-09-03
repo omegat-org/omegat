@@ -31,6 +31,7 @@ RUN apt-get -y update && apt-get -y upgrade \
     && mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor \
     && mkdir -p /var/www/git /var/www/html && echo "AcceptEnv LANG LC_* GIT_PROTOCOL" >> /etc/ssh/sshd_config
 COPY git-http.conf /etc/apache2/sites-enabled/
+COPY svn-http.conf /etc/apache2/mods-enabled/
 COPY supervisord.conf /etc/supervisor/conf.d/
 COPY git-http-backend-wrapper.cgi /var/www/git/
 RUN chmod 755 /var/www/git/git-http-backend-wrapper.cgi \

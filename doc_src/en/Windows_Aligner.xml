@@ -289,7 +289,7 @@
     <para>All available actions can be accessed from the <guimenu>Edit</guimenu> menu or by pressing the corresponding shortcut key. The most common actions are also accessible from the buttons to the right of the main pane.</para>
 
     <note>
-      <para>The shortcut keys are well worth remembering if you use the aligner often or work on large documents, as they allow you to carry out ctions very quickly.</para>
+      <para>The shortcut keys are well worth remembering if you use the aligner often or work on large documents, as they allow you to carry out actions very quickly.</para>
     </note>
 
     <para>To perform an action, select the applicable segement or block of consecutive segments. Individual segments can be selected with the mouse or the arrow keys. Segment blocks can be selected with the mouse by clicking the first segment, and holding the <keycap>S</keycap> key while clicking the last segment. Alternatively, you can press the <keycap>Up</keycap> or <keycap>Down</keycap>Down key while holding <keycap>S</keycap> to select consecutive segments. The available actions are presented below.</para>

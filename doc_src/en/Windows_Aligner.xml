@@ -24,7 +24,7 @@
     project-specific segmentation rules, if any.</para>
   </note>
 
-  <para>Clicking the <guibutton>OK</guibutton> button in the<guilabel>Align
+  <para>Clicking the <guibutton>OK</guibutton> button in the <guilabel>Align
   Files</guilabel> dialog brings up the <guilabel>Align</guilabel> window,
   which shows the results of the automatic alignment.</para>
 
@@ -107,9 +107,9 @@
             </listitem>
           </itemizedlist>
 
-          <para>There is no hard and fast rule on which algorithm is you
+          <para>There is no hard and fast rule on which algorithm you
           should choose. Try both, and use the one that yields the better
-          results for your files.</para>
+          result for your files.</para>
         </listitem>
       </varlistentry>
 
@@ -131,7 +131,7 @@
 
           <para>As with the algorithms, there is no hard and fast rule on
           which statistical distribution you should choose. Try both and use
-          the one that yields the better results for your files.</para>
+          the one that yields the better result for your files.</para>
         </listitem>
       </varlistentry>
 
@@ -174,7 +174,7 @@
           <para>The aligner uses sentence segmentation by default. Untick the
           check box to use paragraph segmentation (see <link
           endterm="dialogs.preferences.segmentation.setup.title"
-          linkend="dialogs.preferences.segmentation.setup"/></para>
+          linkend="dialogs.preferences.segmentation.setup"/>)</para>
         </listitem>
       </varlistentry>
 
@@ -203,13 +203,7 @@
         <term><guibutton>Rules...</guibutton></term>
 
         <listitem>
-          <para>Clicking this button lets you edit the <link
-          endterm="segementation.rules.title" linkend="segmentation.rules"/>.
-          The general OmegaT rules are edited unless you launched the aligner
-          from a project containing project-specific segmentation rules. This
-          option can be useful if you defined project-specific rules to match
-          the text of the source language and need to apply similar
-          segmentation to the target language to get better matches.</para>
+          <para>Clicking this button lets you edit the <link linkend="segmentation.rules">segmentation rules</link>. The general OmegaT rules are edited unless you launched the aligner from a project containing project-specific segmentation rules. This option can be useful if you defined project-specific rules to match the text of the source language and need to apply similar segmentation to the target language to get better matches.</para>
 
           <warning>
             <para>If you modify the segmentation rules, you will be asked if
@@ -218,6 +212,7 @@
             what you want if you edited the general OmegaT segmentation
             rules.</para>
           </warning>
+
         </listitem>
       </varlistentry>
 
@@ -225,9 +220,8 @@
         <term><guibutton>Filters...</guibutton></term>
 
         <listitem>
-          <para>This option lets you modify the <link
-          endterm="dialogs.preferences.file.filters.title"
-          linkend="dialogs.preferences.file.filters"/>. As with segmentation,
+          <para>This option lets you modify the <link          
+          linkend="dialogs.preferences.file.filters">file filters</link>. As with segmentation,
           the general OmegaT filters will be modified unless you have launched
           the aligner from an OmegaT project with project-specific file filter
           options.</para>
@@ -292,7 +286,7 @@
       <para>The shortcut keys are well worth remembering if you use the aligner often or work on large documents, as they allow you to carry out actions very quickly.</para>
     </note>
 
-    <para>To perform an action, select the applicable segement or block of consecutive segments. Individual segments can be selected with the mouse or the arrow keys. Segment blocks can be selected with the mouse by clicking the first segment, and holding the <keycap>S</keycap> key while clicking the last segment. Alternatively, you can press the <keycap>Up</keycap> or <keycap>Down</keycap>Down key while holding <keycap>S</keycap> to select consecutive segments. The available actions are presented below.</para>
+    <para>To perform an action, select the applicable segment or block of consecutive segments. Individual segments can be selected with the mouse or the arrow keys. Segment blocks can be selected with the mouse by clicking the first segment, and holding the <keycap>S</keycap> key while clicking the last segment. Alternatively, you can press the <keycap>Up</keycap> or <keycap>Down</keycap>Down key while holding <keycap>S</keycap> to select consecutive segments. The available actions are presented below.</para>
 
     <variablelist>
       <varlistentry>
@@ -320,7 +314,7 @@
       <varlistentry>
         <term><guimenuitem>Merge</guimenuitem> (<keycap>m</keycap>)</term>
         <listitem>
-          <para>If only one segment is selected, the aligner will merge it with the following segment. If two or more segments are selected, they will all be merged, but remain in separate cells. Calling the command one more time on the selection merges the contents of each cell into a single cell.</para>
+          <para>If only one segment is selected, the aligner will merge it with the following segment. If two or more segments are selected, they will all be merged, but remain in separate cells. Calling the command  on the same selection one more time merges the contents of all selected cells into a single cell.</para>
           <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
@@ -340,25 +334,25 @@
       <varlistentry>
         <term><guimenuitem>Mark Needs Review</guimenuitem> (<keycap>R</keycap>)</term>
         <listitem>
-          <para>Use this command to identify a row or block of rows in which the alignment of the segments is in doubt. This highlights the corresponding <guilabel>Keep</guilabel> column in red.</para>
+          <para>Use this command to identify a row or block of rows for which the alignment of the segments is in doubt. This highlights the corresponding <guilabel>Keep</guilabel> column in red.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Clear Mark</guimenuitem> (<keycap>C</keycap>)</term>
         <listitem>
-          <para>Use this command to remove the mark set by the <guilabel>Mark Accepted</guilabel> or <guilabel>Mark Needs Review</guilabel> commands.</para>
+          <para>Use this command to remove one or more marks set by the <guilabel>Mark Accepted</guilabel> or <guilabel>Mark Needs Review</guilabel> commands.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Realign Pending</guimenuitem> (<keycombo><keycap>C</keycap><keycap>r</keycap></keycombo>)</term>
         <listitem>
-          <para>If any rows have been marked as accepted, use this command to redo the alignment for the remaining rows.</para>
+          <para>If any rows have been marked as accepted, use this command to update the alignment for the remaining rows.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term><guimenuitem>Keep All</guimenuitem></term>
         <listitem>
-          <para>Use this command to tick the <guilabel>check box</guilabel> for all rows.</para>
+          <para>Use this command to tick the <guilabel>Keep</guilabel> check box for all rows.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -370,7 +364,7 @@
       <varlistentry>
         <term><guimenuitem>Toggle Selected</guimenuitem> (<keycap>K</keycap>)</term>
         <listitem>
-          <para>Use this command to switch the <guilabel>Keep</guilabel> of the selected row or block of rows from ticked to unticked, or vice-versa.</para>
+          <para>Use this command to switch the <guilabel>Keep</guilabel> check box of the selected row or block of rows from ticked to unticked, or vice-versa.</para>
         </listitem>
       </varlistentry>
       <varlistentry>

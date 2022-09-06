@@ -173,7 +173,7 @@ public class SpellChecker implements ISpellChecker {
         }
 
         try {
-            ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictBasename.getPath());
+            ISpellCheckerProvider result = new SpellCheckerLangToolHunspell(dictionaryName, affixName);
             Log.log("Initialized LanguageTool Hunspell spell checker for language '" + language
                     + "' dictionary " + dictionaryName);
             return Optional.of(result);

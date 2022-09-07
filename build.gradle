@@ -121,10 +121,6 @@ dependencies {
         // Data: inline data URL handler
         implementation 'tokyo.northside:url-protocol-handler:0.1.4'
 
-        // JSON parser
-        implementation "com.fasterxml.jackson.core:jackson-core:2.12.3"
-        implementation "com.fasterxml.jackson.core:jackson-databind:2.12.3"
-
         // PDF Filter
         implementation 'org.apache.pdfbox:pdfbox:2.0.24'
 
@@ -137,7 +133,7 @@ dependencies {
         implementation 'io.github.eb4j:dsl4j:0.5.2'
         implementation 'io.github.eb4j:stardict4j:0.3.2'
 
-        // Encoding dectection
+        // Encoding detections
         implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
 
         // Legacy projects re-hosted on Maven Central

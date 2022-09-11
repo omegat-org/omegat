@@ -959,23 +959,36 @@ public final class ProjectUICommands {
         }.execute();
     }
 
+    /**
+     * Open remote project specified by url.
+     * @param url remote project repository.
+     */
     public static void projectRemote(String url) {
-        String dir = url.replace("/", "_").replace(':', '_');
-        File projectDir = new File(StaticUtils.getConfigDir() + "/remoteProjects/" + dir);
-        File projectFile = new File(projectDir, OConsts.FILE_PROJECT);
-
-        byte[] data;
+        File projectDir;
         try {
-            projectDir.mkdirs();
-            data = HttpConnectionUtils.getURLasByteArray(url);
-            FileUtils.writeByteArrayToFile(projectFile, data);
-        } catch (Exception ex) {
+            projectDir = projectRemoteOpen(url);
+        } catch (IOException ex) {
             Log.logErrorRB(ex, "TEAM_REMOTE_RETRIEVE_ERROR", url);
             Core.getMainWindow().displayErrorRB(ex, "TEAM_REMOTE_RETRIEVE_ERROR", url);
             return;
         }
-
         projectOpen(projectDir);
+    }
+
+    private static File projectRemoteOpen(String url) throws IOException {
+        String dir = url.replace("/", "_").replace(':', '_');
+        File projectDir = new File(StaticUtils.getConfigDir() + "/remoteProjects/" + dir);
+        File projectFile = new File(projectDir, OConsts.FILE_PROJECT);
+        boolean res = projectDir.mkdirs();
+        if (!res) {
+            throw new IOException("Failed to create project directory.");
+        }
+        byte[] data = HttpConnectionUtils.getURLasByteArray(url);
+        if (data == null) {
+            throw new IOException("Data retrieval error");
+        }
+        FileUtils.writeByteArrayToFile(projectFile, data);
+        return projectDir;
     }
 
     /**

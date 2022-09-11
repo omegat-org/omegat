@@ -334,5 +334,6 @@
     </table>
 
     <para>From a practical standpoint, the second pair of numbers is the most important since it show how much you have done so far with respect to the total number of segments to translate. The project in the example is evidently finished, as all the unique segments have been translated.</para>
+    <para>You can also click on the counters to switch to a percentage-based indication of your progress. In that case, the first pair of numbers shows you the percentage of the current file that has been completed, with the number of remaining segments for that file given in parentheses. Similarly, the second pair gives you a completion percentage for the entire project, along with the number of total remaining segments in parentheses. In projects with a large number of segments of very different lengths, this can be a more useful indicator of progress than a simple segment count.</para>
   </section>
 </chapter>

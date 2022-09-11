@@ -11,7 +11,7 @@
       <para>If you can not see all panes (opened or minimized), you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu to restore them to their default state.</para>
 	</note>
 
-	<para>The top right corner of a pane will show different icons depending on its the type of pane and its current status:</para>
+	<para>The top right corner of a pane will show different icons depending on the type of pane and its current status:</para>
 
 	<table id="table.pane.widgets">
       <title id="table.pane.widgets.title">Pane widgets</title>
@@ -77,12 +77,12 @@
       </tgroup>
 	</table>
 
-	<para>You can group panes in the same area of the windows. Doing so  shows a tab with the name of the panes the top of the groups. You can drag the separators between the panes to resize them. Should you lose track of your changes to the user interface, you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu any time to go back to the default layout.</para>
+	<para>You can group panes in the same area of the window. Doing so shows a tab with the name of the panes the top of the groups. You can drag the separators between the panes to resize them. Should you lose track of the changes you made to the user interface, you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu any time to go back to the default layout.</para>
   </section>
 
   <section id="panes.context.menus">
 	<title id="panes.context.menus.title">Context menus</title>
-  	<para>Some panes have a specific associated context menu. You can call that menu using the standard method for your OS  or with the OmegaT defined shortcuts (see <link linkend="appendix.shortcut" endterm="appendix.shortcut.title"/> for details).</para>
+  	<para>Some panes have a specific associated context menu. You can call that menu using the standard method for your OS, or with the OmegaT defined shortcuts (see <link linkend="appendix.shortcut" endterm="appendix.shortcut.title"/> for details).</para>
   </section>
 
 
@@ -175,7 +175,7 @@
 	
 	<section id="panes.editor.context.menu">
 	  <title id="panes.editor.context.menu.title">Editor context menu</title>
-	  <para>The default shortcut key to display the context menu is the <keycap>Menu</keycap> key on Windows and Linux, and <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo> on macOS. You can bring up the menu by right clicking the mouse (<keycombo><keycap>C</keycap>clicking</keycombo> on macOS).</para>
+	  <para>The default shortcut key to display the context menu is the <keycap>Menu</keycap> key on Windows and Linux, and <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo> on macOS. You can bring up the menu by right clicking the mouse (<keycombo><keycap>C</keycap></keycombo>click on macOS).</para>
 	  <para>The Editor pane context menu offers:
 	  <itemizedlist>
 		<listitem><para>
@@ -183,7 +183,7 @@
 		Copy, Paste</emphasis> functions,</para></listitem>
 		<listitem><para><guilabel>Go To Segment</guilabel> (to jump to the segment under the pointer),</para></listitem>
 		<listitem><para><guilabel>Search
-		Dictionaries</guilabel> (to search a selected term in an installed
+		Dictionaries</guilabel> (to search for the selected term in an installed
 		dictionary),</para></listitem>
 		<listitem><para><guilabel>Add Glossary Entry</guilabel> (equivalent to
 		<link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>),</para></listitem>
@@ -201,7 +201,7 @@
 
 	<section id="panes.editor.dragging.and.selecting">
 	  <title id="panes.editor.dragging.and.selecting.title">Dragging, selecting, overwriting</title>
-	  <para>It is possible to drag text from anywhere in the main window and drop it into the segment. Text dragged from outside the target segment is copied, while text dragged from within the segment is moved.</para>
+	  <para>It is possible to drag text from anywhere in the main window and drop it into the active segment. Text dragged from outside the target segment is copied, while text dragged from within the segment is moved.</para>
 
 	  <para>By default, the cursor is locked into the target text editing field, and the arrow keys cannot be used to move in the source text.</para>
 
@@ -209,9 +209,9 @@
 
 	  <para>The cursor status (locked or unlocked) is shown at the right of the status bar. Use the same key to lock the cursor again.</para>
 
-	  <para>By default, typing text inserts the new text after the cursor in the typing direction. If you want to overwrite the existing text, use <keycap>INSERT</keycap> on Windows and Linux, or <keycap>F3</keycap> on macOS, to toggle overwrite mode.</para>
+	  <para>By default, typing text inserts the new text after the cursor in the typing direction. If you want to overwrite the existing text, use <keycap>INSERT</keycap> on Windows and Linux, or <keycap>F3</keycap> on macOS, to switch to overwrite mode.</para>
 
-	  <para>The writing mode (overwrite or insert) is shown at the right of the status bar. Use the same key to toggle or untoggle the mode.</para>
+	  <para>The writing mode (overwrite or insert) is shown at the right of the status bar. Use the same key to switch back and forth between each mode.</para>
 
 	</section>
   </section>

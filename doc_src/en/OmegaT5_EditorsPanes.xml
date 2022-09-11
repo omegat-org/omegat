@@ -8,7 +8,7 @@
 	<para>The main window consists of several panes, the main menu, and a status bar. You can change the position of a pane, or even undock it as a separate window, by clicking and holding its name and dragging it.</para>
 
     <note>
-      <para>If you can not see all panes (opened or minimized), you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu to restore them to their default state.</para>
+      <para>If you cannot see all panes (opened or minimized), you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu to restore them to their default state.</para>
 	</note>
 
 	<para>The top right corner of a pane will show different icons depending on the type of pane and its current status:</para>
@@ -77,7 +77,7 @@
       </tgroup>
 	</table>
 
-	<para>You can group panes in the same area of the window. Doing so shows a tab with the name of the panes the top of the groups. You can drag the separators between the panes to resize them. Should you lose track of the changes you made to the user interface, you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu any time to go back to the default layout.</para>
+	<para>You can group panes in the same area of the window. Doing so shows a tab with the name of the panes the top of the group. Panes can be resized by dragging the separators between them. Should you lose track of the changes you made to the user interface, you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu any time to go back to the default layout.</para>
   </section>
 
   <section id="panes.context.menus">
@@ -168,14 +168,14 @@
 
 	<section id="panes.editor.empty.translations">
 	  <title id="panes.editor.empty.translations.title">Empty translations</title>
-	  <para>If you leave the translation field empty, OmegaT will treat it as untranslated and retain it in the original language when it creates the translated documents.</para>
+	  <para>If you leave the translation field empty, OmegaT will treat it as untranslated and keep it in the original language when it creates the translated documents.</para>
 
 	  <para>OmegaT is can store translations that are identical to the source text. This can be useful for documents that contain trademarks, names or other proper nouns, or sections in a third language that do not require translation. See <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/> for details.</para>
 	</section>
 	
 	<section id="panes.editor.context.menu">
 	  <title id="panes.editor.context.menu.title">Editor context menu</title>
-	  <para>The default shortcut key to display the context menu is the <keycap>Menu</keycap> key on Windows and Linux, and <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo> on macOS. You can bring up the menu by right clicking the mouse (<keycombo><keycap>C</keycap></keycombo>click on macOS).</para>
+	  <para>The default shortcut key to display the context menu is the <keycap>Menu</keycap> key on Windows and Linux, and <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo> on macOS. You can also bring up the menu by right clicking the mouse (<keycap>C</keycap> + click on macOS).</para>
 	  <para>The Editor pane context menu offers:
 	  <itemizedlist>
 		<listitem><para>
@@ -200,7 +200,7 @@
 	</section>
 
 	<section id="panes.editor.dragging.and.selecting">
-	  <title id="panes.editor.dragging.and.selecting.title">Dragging, selecting, overwriting</title>
+	  <title id="panes.editor.dragging.and.selecting.title">Dragging, selecting, and overwriting</title>
 	  <para>It is possible to drag text from anywhere in the main window and drop it into the active segment. Text dragged from outside the target segment is copied, while text dragged from within the segment is moved.</para>
 
 	  <para>By default, the cursor is locked into the target text editing field, and the arrow keys cannot be used to move in the source text.</para>

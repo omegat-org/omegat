@@ -123,7 +123,7 @@
 	<varlistentry><term>Search in: Project</term><listitem><para>You can check <guilabel>Memory</guilabel> to include the project memory (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>), <guilabel>TMs</guilabel> to include other translation memories located in the <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder, and <guilabel>Glossaries</guilabel> to include the glossaries located in the <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder, in the search.</para></listitem></varlistentry>
 
 	<varlistentry><term>Search in: Files</term><listitem><para>Search in a single file or in a folder containing several files.</para>
-	<para>File searches (unlike translation memories), are limited to files in source file formats supported by OmegaT. Consequently,  <filename>tmx</filename> files are excluded from file searches since OmegaT does not recognize them as a source file format despite supporting them for translation memories.</para></listitem></varlistentry>
+	<para>File searches (unlike translation memories), are limited to files in source file formats supported by OmegaT. Consequently,  <filename>TMX</filename> files are excluded from file searches since OmegaT does not recognize them as a source file format despite supporting them for translation memories.</para></listitem></varlistentry>
   </variablelist>
  
     <para>You can click on the <guibutton>Show Advanced Options</guibutton> button  to select additional criteria such as the person who authored or changed the translation, the date and time of translation (modification), or whether to exclude orphan segments.</para>

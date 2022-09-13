@@ -98,7 +98,7 @@
       <listitem>
         <para>If checked, segments with an auto-populated translation (from TMXs placed in <filename class="directory">/tm/auto</filename> for example) are marked in various colours.</para>
 		<para><emphasis>No default key shortcut</emphasis></para>
-        <para>That colours marking is shown as long as the <link linkend="dialogs.preferences.editor.save.auto-populated.status"><guimenuitem>Save auto-populated status</guimenuitem></link> option is checked. Normal translations inserted from the <filename class="directory">auto</filename> folder are marked in orange. Other translations specifically identified in the TMX, can be marked in different colours. See the <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink>fFor technical details.</para>
+        <para>That colours marking is shown as long as the <link linkend="dialogs.preferences.editor.save.auto-populated.status"><guimenuitem>Save auto-populated status</guimenuitem></link> option is checked. Normal translations inserted from the <filename class="directory">auto</filename> folder are marked in orange. Other translations specifically identified in the TMX, can be marked in different colours. See the <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink> for technical details.</para>
       </listitem>
     </varlistentry>
 

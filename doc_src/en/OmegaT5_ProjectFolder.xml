@@ -63,9 +63,9 @@
             <para>Make and confirm a minor change anywhere in the project. This will add the translations loaded from the tm/auto subfolder to the main <filename>project_save.tmx</filename> file.</para>
           </listitem>
         </orderedlist></para>
-      <note>
+      <warning>
         <para>If you remove a TMX file from <filename class="directory">tm/auto</filename> before Step 3, the translations it contains will not be retained in the project or saved in the project_save.tmx file.</para>
-    </note>
+      </warning>    
     </section>
 
     <section id="project.folder.tm.enforce">
@@ -92,9 +92,9 @@
               </itemizedlist></para>
           </listitem>
         </orderedlist></para>
-      <note>
+      <warning>
         <para>If  you remove aTMX file from <filename class="directory">tm/enforce</filename> before Step 3, none of the enforced translations are kept.</para>
-    </note>
+      </warning>    
     </section>
 
     <section id="project.folder.tm.mt">

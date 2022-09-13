@@ -54,10 +54,10 @@
       <para>Translations from TMX files placed in this folder are automatically inserted in matching segments without the <emphasis>[fuzzy]</emphasis> prefix, making it unnecessary to confirm these segments. This is useful if you already have one or more reliable TMX files with translations you already know are correct.</para>
       <para><orderedlist>
           <listitem>
-            <para>Put the applicable memories  in the <filename class="directory">tm/auto</filename> subfolder.</para>
+            <para>Put the applicable memories in the <filename class="directory">tm/auto</filename> subfolder.</para>
           </listitem>
           <listitem>
-            <para>Open the project. You will see that segments identical to source segments in those memories are already filled in. They will be highlighted in orange if you have checked the Mark Auto-Populated Segments option in the View menu.</para>
+            <para>Open the project. You will see that segments identical to source segments in those memories are already filled in. They will be highlighted in orange if you have checked the <link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/> option in the <link linkend="menus.view" endterm="menus.view.title"/> menu.</para>
           </listitem>
           <listitem>
             <para>Make and confirm a minor change anywhere in the project. This will add the translations loaded from the tm/auto subfolder to the main <filename>project_save.tmx</filename> file.</para>
@@ -73,10 +73,10 @@
       <para>If you have no doubt that a given TMX contains more accurate translations than the current <filename>project_save.tmx</filename> file, put that TMX in the <filename class="directory">tm/enforce</filename> subfolder to overwrite the existing translations unconditionally.</para>
       <para><orderedlist>
           <listitem>
-            <para>Put the applicable memory in the <filename class="directory">tm/enforce</filename> subfolder.</para>
+            <para>Put the applicable memories in the <filename class="directory">tm/enforce</filename> subfolder.</para>
           </listitem>
           <listitem>
-            <para>Open the project. You will see that segments identical to source segments in those memories are already filled in. They will be highlighted in orange if you have checked the Mark Auto-Populated Segments option in the View menu.</para>
+            <para>Open the project. You will see that segments identical to source segments in those memories are already filled in.</para>
           </listitem>
           <listitem>
             <para>Make and confirm a minor change anywhere in the project. This updates the <filename>project_save.tmx</filename> file.</para>
@@ -99,7 +99,7 @@
 
     <section id="project.folder.tm.mt">
       <title id="project.folder.tm.mt.title">tm/mt</title>
-      <para>The background of the active segment changes to read a match is inserted from a TMX contained in the <filename class="directory">mt</filename> subfolder. The background is restored to normal when you leave the segment.</para>
+      <para>The background of the active segment changes to red when a match is inserted from a TMX contained in the <filename class="directory">mt</filename> subfolder. The background is restored to normal when you leave the segment.</para>
     </section>
 
     <section id="project.folder.tm.penalty">

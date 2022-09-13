@@ -289,7 +289,7 @@
   <section id="panes.comments">
     <title id="panes.comments.title">Comments</title>
 
-    <para>Certain specialized translation or localization file formats, such as the  PO format, allow the inclusion of comments to give the translator instructions or provide additional context about the segment. In the example below, the author of the PO file notified the translator of the need to check the length of the translation:</para>
+    <para>Certain specialized translation or localization file formats, such as the  PO format, allow the inclusion of comments to give the translator instructions or provide additional context about the segment. One example below is the author of the PO file using comments to inform the translator of length limits that must be respected in the translation.</para>
   </section>
 
   <section id="panes.statusbar">

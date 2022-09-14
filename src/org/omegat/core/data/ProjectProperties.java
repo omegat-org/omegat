@@ -52,8 +52,10 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.StringUtil;
 
+import gen.core.filters.Filter;
 import gen.core.filters.Filters;
 import gen.core.project.RepositoryDefinition;
+import gen.core.project.RepositoryMapping;
 
 /**
  * Storage for project properties. May read and write project from/to disk.
@@ -678,62 +680,12 @@ public class ProjectProperties {
 
         final ProjectProperties that = (ProjectProperties) o;
 
-        if (sentenceSegmentingEnabled != that.sentenceSegmentingEnabled) {
-            return false;
-        }
-        if (supportDefaultTranslations != that.supportDefaultTranslations) {
-            return false;
-        }
-        if (removeTags != that.removeTags) {
-            return false;
-        }
-        if (!projectName.equals(that.projectName)) {
-            return false;
-        }
         for (int i = 0; i < sourceRootExcludes.size(); i++) {
             if (!sourceRootExcludes.get(i).equals(that.sourceRootExcludes.get(i))) {
                 return false;
             }
         }
-        if (!sourceLanguage.getLocaleCode().equals(that.sourceLanguage.getLocaleCode())) {
-            return false;
-        }
-        if (!targetLanguage.getLocaleCode().equals(that.targetLanguage.getLocaleCode())) {
-            return false;
-        }
-        if (!sourceTokenizer.getCanonicalName().equals(that.sourceTokenizer.getCanonicalName())) {
-            return false;
-        }
-        if (!targetTokenizer.getCanonicalName().equals(that.targetTokenizer.getCanonicalName())) {
-            return false;
-        }
-        if (!exportTmLevels.equals(that.exportTmLevels)) {
-            return false;
-        }
-        if (!externalCommand.equals(that.externalCommand)) {
-            return false;
-        }
-        if (!projectRootDir.equals(that.projectRootDir)) {
-            return false;
-        }
-        if (!sourceDir.underRoot.equals(that.sourceDir.underRoot)) {
-            return false;
-        }
-        if (!targetDir.underRoot.equals(that.targetDir.underRoot)) {
-            return false;
-        }
-        if (!glossaryDir.underRoot.equals(that.glossaryDir.underRoot)) {
-            return false;
-        }
-        if (!writableGlossaryFile.underRoot.equals(that.writableGlossaryFile.underRoot)) {
-            return false;
-        }
-        if (!tmDir.underRoot.equals(that.tmDir.underRoot)) {
-            return false;
-        }
-        if (!exportTMDir.underRoot.equals(that.exportTMDir.underRoot)) {
-            return false;
-        }
+
         if (!new EqualsBuilder()
                 .append(projectFilters.isRemoveTags(), that.projectFilters.isRemoveTags())
                 .append(projectFilters.isRemoveSpacesNonseg(), that.projectFilters.isRemoveSpacesNonseg())
@@ -743,12 +695,12 @@ public class ProjectProperties {
             return false;
         }
         for (int i = 0; i < projectFilters.getFilters().size(); i++) {
+            Filter thisFilter = projectFilters.getFilters().get(i);
+            Filter thatFilter = that.projectFilters.getFilters().get(i);
             if (!new EqualsBuilder()
-                    .append(projectFilters.getFilters().get(i).getClassName(),
-                            that.projectFilters.getFilters().get(i).getClassName())
-                    .append(projectFilters.getFilters().get(i).isEnabled(),
-                            that.projectFilters.getFilters().get(i).isEnabled())
-            .isEquals())
+                    .append(thisFilter.getClassName(), thatFilter.getClassName())
+                    .append(thisFilter.isEnabled(), thatFilter)
+                    .isEquals())
                 return false;
         }
         for (int i = 0; i < repositories.size(); i++) {
@@ -762,15 +714,36 @@ public class ProjectProperties {
                 return false;
             }
             for (int j = 0; j < repositories.get(i).getMapping().size(); j ++) {
+                RepositoryMapping thisMap = repositories.get(i).getMapping().get(j);
+                RepositoryMapping thatMap = that.repositories.get(i).getMapping().get(j);
                 if (!new EqualsBuilder()
-                        .append(repositories.get(i).getMapping().get(j).getLocal(),
-                                that.repositories.get(i).getMapping().get(j).getLocal())
+                        .append(thisMap.getLocal(), thatMap.getLocal())
+                        .append(thisMap.getRepository(), thatMap.getRepository())
                         .isEquals()) {
                     return false;
                 }
             }
         }
-        return dictDir.underRoot.equals(that.dictDir.underRoot);
+        return new EqualsBuilder()
+                .append(sentenceSegmentingEnabled, that.sentenceSegmentingEnabled)
+                .append(supportDefaultTranslations, that.supportDefaultTranslations)
+                .append(removeTags, that.removeTags)
+                .append(projectName, that.projectName)
+                .append(sourceLanguage.getLocaleCode(), that.sourceLanguage.getLocaleCode())
+                .append(targetLanguage.getLocaleCode(), that.targetLanguage.getLocaleCode())
+                .append(sourceTokenizer.getCanonicalName(), that.sourceTokenizer.getCanonicalName())
+                .append(targetTokenizer.getCanonicalName(), that.targetTokenizer.getCanonicalName())
+                .append(exportTmLevels, that.exportTmLevels)
+                .append(externalCommand, that.externalCommand)
+                .append(projectRootDir, that.projectRootDir)
+                .append(sourceDir.underRoot, that.sourceDir.underRoot)
+                .append(targetDir.underRoot, that.targetDir.underRoot)
+                .append(glossaryDir.underRoot, that.glossaryDir.underRoot)
+                .append(writableGlossaryFile.underRoot, that.writableGlossaryFile.underRoot)
+                .append(tmDir.underRoot, that.tmDir.underRoot)
+                .append(exportTMDir.underRoot, that.exportTMDir.underRoot)
+                .append(dictDir.underRoot, that.dictDir.underRoot)
+                .isEquals();
     }
 
     @Override

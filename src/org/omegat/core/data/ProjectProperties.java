@@ -39,6 +39,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -663,5 +665,138 @@ public class ProjectProperties {
         public String getUnderRoot() {
             return underRoot;
         }
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        final ProjectProperties that = (ProjectProperties) o;
+
+        if (sentenceSegmentingEnabled != that.sentenceSegmentingEnabled) {
+            return false;
+        }
+        if (supportDefaultTranslations != that.supportDefaultTranslations) {
+            return false;
+        }
+        if (removeTags != that.removeTags) {
+            return false;
+        }
+        if (!projectName.equals(that.projectName)) {
+            return false;
+        }
+        for (int i = 0; i < sourceRootExcludes.size(); i++) {
+            if (!sourceRootExcludes.get(i).equals(that.sourceRootExcludes.get(i))) {
+                return false;
+            }
+        }
+        if (!sourceLanguage.getLocaleCode().equals(that.sourceLanguage.getLocaleCode())) {
+            return false;
+        }
+        if (!targetLanguage.getLocaleCode().equals(that.targetLanguage.getLocaleCode())) {
+            return false;
+        }
+        if (!sourceTokenizer.getCanonicalName().equals(that.sourceTokenizer.getCanonicalName())) {
+            return false;
+        }
+        if (!targetTokenizer.getCanonicalName().equals(that.targetTokenizer.getCanonicalName())) {
+            return false;
+        }
+        if (!exportTmLevels.equals(that.exportTmLevels)) {
+            return false;
+        }
+        if (!externalCommand.equals(that.externalCommand)) {
+            return false;
+        }
+        if (!projectRootDir.equals(that.projectRootDir)) {
+            return false;
+        }
+        if (!sourceDir.underRoot.equals(that.sourceDir.underRoot)) {
+            return false;
+        }
+        if (!targetDir.underRoot.equals(that.targetDir.underRoot)) {
+            return false;
+        }
+        if (!glossaryDir.underRoot.equals(that.glossaryDir.underRoot)) {
+            return false;
+        }
+        if (!writableGlossaryFile.underRoot.equals(that.writableGlossaryFile.underRoot)) {
+            return false;
+        }
+        if (!tmDir.underRoot.equals(that.tmDir.underRoot)) {
+            return false;
+        }
+        if (!exportTMDir.underRoot.equals(that.exportTMDir.underRoot)) {
+            return false;
+        }
+        if (!new EqualsBuilder()
+                .append(projectFilters.isRemoveTags(), that.projectFilters.isRemoveTags())
+                .append(projectFilters.isRemoveSpacesNonseg(), that.projectFilters.isRemoveSpacesNonseg())
+                .append(projectFilters.isPreserveSpaces(), that.projectFilters.isPreserveSpaces())
+                .append(projectFilters.isIgnoreFileContext(), that.projectFilters.isIgnoreFileContext())
+                .isEquals()) {
+            return false;
+        }
+        for (int i = 0; i < projectFilters.getFilters().size(); i++) {
+            if (!new EqualsBuilder()
+                    .append(projectFilters.getFilters().get(i).getClassName(),
+                            that.projectFilters.getFilters().get(i).getClassName())
+                    .append(projectFilters.getFilters().get(i).isEnabled(),
+                            that.projectFilters.getFilters().get(i).isEnabled())
+            .isEquals())
+                return false;
+        }
+        for (int i = 0; i < repositories.size(); i++) {
+            if (!new EqualsBuilder()
+                    .append(repositories.get(i).getType(), that.repositories.get(i).getType())
+                    .append(repositories.get(i).getUrl(), that.repositories.get(i).getUrl())
+                    .append(repositories.get(i).getBranch(), that.repositories.get(i).getBranch())
+                    .append(repositories.get(i).getMapping().size(),
+                            that.repositories.get(i).getMapping().size())
+                    .isEquals()) {
+                return false;
+            }
+            for (int j = 0; j < repositories.get(i).getMapping().size(); j ++) {
+                if (!new EqualsBuilder()
+                        .append(repositories.get(i).getMapping().get(j).getLocal(),
+                                that.repositories.get(i).getMapping().get(j).getLocal())
+                        .isEquals()) {
+                    return false;
+                }
+            }
+        }
+        return dictDir.underRoot.equals(that.dictDir.underRoot);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = projectName.hashCode();
+        result = 31 * result + sourceRootExcludes.hashCode();
+        result = 31 * result + repositories.hashCode();
+        result = 31 * result + sourceLanguage.hashCode();
+        result = 31 * result + targetLanguage.hashCode();
+        result = 31 * result + sourceTokenizer.hashCode();
+        result = 31 * result + targetTokenizer.hashCode();
+        result = 31 * result + (sentenceSegmentingEnabled ? 1 : 0);
+        result = 31 * result + (supportDefaultTranslations ? 1 : 0);
+        result = 31 * result + (removeTags ? 1 : 0);
+        result = 31 * result + exportTmLevels.hashCode();
+        result = 31 * result + projectSRX.hashCode();
+        result = 31 * result + projectFilters.hashCode();
+        result = 31 * result + externalCommand.hashCode();
+        result = 31 * result + projectRootDir.hashCode();
+        result = 31 * result + sourceDir.hashCode();
+        result = 31 * result + targetDir.hashCode();
+        result = 31 * result + glossaryDir.hashCode();
+        result = 31 * result + writableGlossaryFile.hashCode();
+        result = 31 * result + tmDir.hashCode();
+        result = 31 * result + exportTMDir.hashCode();
+        result = 31 * result + dictDir.hashCode();
+        return result;
     }
 }

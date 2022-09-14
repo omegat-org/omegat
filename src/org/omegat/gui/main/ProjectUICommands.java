@@ -482,6 +482,7 @@ public final class ProjectUICommands {
                           the current mapping usage.
                         */
                         if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
+                            ProjectProperties localProps = props;
                             List<RepositoryDefinition> repos = props.getRepositories();
                             mainWindow.showStatusMessageRB("TEAM_OPEN");
                             try {
@@ -498,6 +499,7 @@ public final class ProjectUICommands {
                                 if (props.getRepositories() == null) {  // We have a project without mapping
                                     Log.logInfoRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
                                     props.setRepositories(repos); // So we restore the mapping we just lost
+                                    requestSaveProjectProperties = !props.equals(localProps);
                                 } else {
                                     // use mapping from remote configuration but
                                     // override repository URL when project URL is git type
@@ -507,9 +509,9 @@ public final class ProjectUICommands {
                                     if (repoUrl != null && !repoUrl.equals(newUrl)) {
                                         setRootGitRepositoryMapping(props.getRepositories(), repoUrl);
                                     }
+                                    requestSaveProjectProperties = !props.equals(localProps);
                                 }
-                                requestSaveProjectProperties = true;
-                                requestBackup = true;
+                                requestBackup = requestSaveProjectProperties;
                             } catch (IRemoteRepository2.NetworkException ignore) {
                                 // Do nothing. Network errors are handled in RealProject.
                             } catch (Exception e) {

@@ -323,7 +323,7 @@ distributions {
                 into 'images'
             }
             from('release') {
-                exclude 'changes.txt', 'contributors.txt', 'libraries.txt'
+                exclude 'contributors.txt', 'libraries.txt'
                 include '*.txt', '*.html'
                 filter(ReplaceTokens, tokens: [TRANSLATION_NOTICE: ''])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))

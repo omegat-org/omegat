@@ -67,7 +67,7 @@ public final class OConsts {
     public static final String HELP_LANG_INDEX = "languageIndex.html";
 
     // licenses
-    public static final String LICENSE_FILE = "OmegaT-license.txt";
+    public static final String LICENSE_FILE = "doc-license.txt";
 
     // Last changes
     public static final String LAST_CHANGES_FILE = "changes.txt";

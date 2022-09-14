@@ -313,7 +313,7 @@ distributions {
             }
             from('release') {
                 into 'docs'
-                include 'changes.txt', 'doc-license.txt', 'OmegaT-license.txt', 'contributors.txt', 'libraries.txt'
+                include 'changes.txt', 'doc-license.txt', 'contributors.txt', 'libraries.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
             from('scripts') {
@@ -323,7 +323,7 @@ distributions {
                 into 'images'
             }
             from('release') {
-                exclude 'contributors.txt', 'libraries.txt'
+                exclude 'changes.txt', 'doc-license.txt', 'contributors.txt', 'libraries.txt'
                 include '*.txt', '*.html'
                 filter(ReplaceTokens, tokens: [TRANSLATION_NOTICE: ''])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))

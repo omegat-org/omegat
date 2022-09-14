@@ -29,7 +29,6 @@ Source: "OmegaT.exe"; DestDir: "{app}"
 Source: "OmegaT.l4J.ini"; DestDir: "{app}"; AfterInstall: SetUserLanguage; Flags: onlyifdoesntexist
 Source: "OmegaT.jar"; DestDir: "{app}"
 Source: "OmegaT-license.txt"; DestDir: "{app}"
-Source: "doc-license.txt"; DestDir: "{app}"
 Source: "readme.txt"; DestDir: "{app}"; Flags: isreadme;
 Source: "readme_ar.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ar
 Source: "readme_ca.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ca
@@ -66,7 +65,6 @@ Source: "readme_zh_TW.txt"; DestDir: "{app}"; Flags: isreadme; Languages: zh_TW
 Source: "readme*.txt"; DestDir: "{app}";
 Source: "join.html"; DestDir: "{app}"
 Source: "index.html"; DestDir: "{app}"
-Source: "changes.txt"; DestDir: "{app}"; Flags: isreadme;
 Source: "omegat.prefs"; DestDir: "{app}"; Flags: skipifsourcedoesntexist;
 #if DirExists("jre")
   Source: "jre\*"; DestDir: "{app}\jre"; Flags: recursesubdirs

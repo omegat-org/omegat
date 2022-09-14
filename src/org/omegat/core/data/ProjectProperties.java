@@ -685,15 +685,6 @@ public class ProjectProperties {
                 return false;
             }
         }
-
-        if (!new EqualsBuilder()
-                .append(projectFilters.isRemoveTags(), that.projectFilters.isRemoveTags())
-                .append(projectFilters.isRemoveSpacesNonseg(), that.projectFilters.isRemoveSpacesNonseg())
-                .append(projectFilters.isPreserveSpaces(), that.projectFilters.isPreserveSpaces())
-                .append(projectFilters.isIgnoreFileContext(), that.projectFilters.isIgnoreFileContext())
-                .isEquals()) {
-            return false;
-        }
         for (int i = 0; i < projectFilters.getFilters().size(); i++) {
             Filter thisFilter = projectFilters.getFilters().get(i);
             Filter thatFilter = that.projectFilters.getFilters().get(i);
@@ -725,6 +716,10 @@ public class ProjectProperties {
             }
         }
         return new EqualsBuilder()
+                .append(projectFilters.isRemoveTags(), that.projectFilters.isRemoveTags())
+                .append(projectFilters.isRemoveSpacesNonseg(), that.projectFilters.isRemoveSpacesNonseg())
+                .append(projectFilters.isPreserveSpaces(), that.projectFilters.isPreserveSpaces())
+                .append(projectFilters.isIgnoreFileContext(), that.projectFilters.isIgnoreFileContext())
                 .append(sentenceSegmentingEnabled, that.sentenceSegmentingEnabled)
                 .append(supportDefaultTranslations, that.supportDefaultTranslations)
                 .append(removeTags, that.removeTags)

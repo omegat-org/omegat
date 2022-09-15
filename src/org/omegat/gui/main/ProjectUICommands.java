@@ -457,7 +457,7 @@ public final class ProjectUICommands {
                 try {
                     // open LOCAL copy of "omegat.project"
                     File projectFile = new File(projectRootFolder, OConsts.FILE_PROJECT);
-                    boolean requestSaveProjectProperties = false;
+                    boolean needToSaveProperties = false;
                     boolean requestBackup = false;
                     File newProjectFile = null;
                     if (props.hasRepositories()) {  /* This a remote project
@@ -499,7 +499,6 @@ public final class ProjectUICommands {
                                 if (props.getRepositories() == null) {  // We have a project without mapping
                                     Log.logInfoRB("TF_REMOTE_PROJECT_LACKS_GIT_SETTING");
                                     props.setRepositories(repos); // So we restore the mapping we just lost
-                                    requestSaveProjectProperties = !props.equals(localProps);
                                 } else {
                                     // use mapping from remote configuration but
                                     // override repository URL when project URL is git type
@@ -509,9 +508,8 @@ public final class ProjectUICommands {
                                     if (repoUrl != null && !repoUrl.equals(newUrl)) {
                                         setRootGitRepositoryMapping(props.getRepositories(), repoUrl);
                                     }
-                                    requestSaveProjectProperties = !props.equals(localProps);
                                 }
-                                requestBackup = requestSaveProjectProperties;
+                                needToSaveProperties = !props.equals(localProps);
                             } catch (IRemoteRepository2.NetworkException ignore) {
                                 // Do nothing. Network errors are handled in RealProject.
                             } catch (Exception e) {
@@ -524,7 +522,6 @@ public final class ProjectUICommands {
                     } else {
                         // not a team project - ask for non-exist directories
                         while (!props.isProjectValid()) {
-                            requestSaveProjectProperties = true;
                             // something wrong with the project - display open dialog to fix it
                             ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
                                     Core.getMainWindow().getApplicationFrame(), props,
@@ -539,24 +536,28 @@ public final class ProjectUICommands {
                                 return null;
                             }
                         }
+                        needToSaveProperties = true;
                     }
-                    // loading modified new project property
-                    final boolean succeeded = ProjectFactory.loadProject(props, true);
-                    // make backup and save omegat.project file when required
-                    final boolean finalRequestBackup = requestBackup;
+                    final ProjectProperties propsP = props;
                     final File finalNewProjectFile = newProjectFile;
-                    if (finalNewProjectFile != null) {
-                        if (succeeded && finalRequestBackup) {
-                            File backup = FileUtil.backupFile(projectFile);
-                            FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
-                            Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",
-                                    backup.getName());
+                    final boolean finalNeedToSaveProperties = needToSaveProperties;
+                    Core.executeExclusively(true, () -> {
+                        // loading modified new project property
+                        boolean succeeded = ProjectFactory.loadProject(propsP, true);
+                        // make backup and save omegat.project file when required
+                        if (finalNewProjectFile != null) {
+                            if (succeeded && finalNeedToSaveProperties) {
+                                File backup = FileUtil.backupFile(projectFile);
+                                FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
+                                Log.logWarningRB("PP_REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT",
+                                        backup.getName());
+                            }
+                            Files.deleteIfExists(finalNewProjectFile.toPath());
                         }
-                        Files.deleteIfExists(finalNewProjectFile.toPath());
-                    }
-                    if (succeeded && requestSaveProjectProperties) {
-                        Core.getProject().saveProjectProperties();
-                    }
+                        if (succeeded && finalNeedToSaveProperties) {
+                            Core.getProject().saveProjectProperties();
+                        }
+                    });
                     RecentProjects.add(projectRootFolder.getAbsolutePath());
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

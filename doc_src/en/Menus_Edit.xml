@@ -36,12 +36,14 @@
       <term id="menus.edit.redo.last.action.title">Redo Last Action</term>
       <listitem>
         <para>Restores the status before the last editing action was
-        cancelledentire This command cannot restore that status after the user moves to a different segment.</para>
-		<para>
-		  <keycombo>
-			<keycap>C</keycap><keycap>y</keycap>
-		  </keycombo>
-		</para>
+        cancelled. This command cannot restore that status after the user
+        moves to a different segment.</para>
+
+        <para><keycombo>
+            <keycap>C</keycap>
+
+            <keycap>y</keycap>
+          </keycombo></para>
       </listitem>
     </varlistentry>
 

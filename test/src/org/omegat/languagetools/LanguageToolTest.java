@@ -55,7 +55,6 @@ import org.omegat.util.TestPreferencesInitializer;
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-@SuppressWarnings("deprecation")
 public class LanguageToolTest {
     private static final Language SOURCE_LANG = new Language(Locale.FRENCH);
     private static final Language TARGET_LANG = new Language(Locale.ENGLISH);
@@ -66,6 +65,7 @@ public class LanguageToolTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void testExecute() throws Exception {
         JLanguageTool lt = new JLanguageTool(new org.languagetool.language.Belarusian());
 
@@ -156,6 +156,7 @@ public class LanguageToolTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void testLanguageMapping() {
         {
             org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-US"));

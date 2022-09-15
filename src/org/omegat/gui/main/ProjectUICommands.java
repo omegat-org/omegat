@@ -579,6 +579,7 @@ public final class ProjectUICommands {
                                 if (!needToSavePropertiesFinal) {
                                     Log.logWarningRB("REMOTE_PROJECT_CONTENT_OVERRIDES_THE_CURRENT_PROJECT");
                                     FileUtil.backupFile(projectFile);
+                                    FileUtil.removeOldBackups(projectFile, OConsts.MAX_BACKUPS);
                                     // Rename omegat.project.NEW to omegat.project
                                     Files.move(rewriteOnSuccessFinal.toPath(), projectFile.toPath(),
                                             StandardCopyOption.REPLACE_EXISTING);

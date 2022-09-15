@@ -281,7 +281,9 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 }
                 continue;
             } else if (i instanceof CredentialItem.InformationalMessage) {
-                Core.getMainWindow().showMessageDialog(i.getPromptText());
+                Log.logInfoRB("GIT_CREDENTIAL_MESSAGE", i.getPromptText());
+                Core.getMainWindow()
+                        .showTimedStatusMessageRB("GIT_CREDENTIAL_MESSAGE", i.getPromptText());
                 continue;
             }
             throw new UnsupportedCredentialItem(uri, i.getClass().getName() + ":" + i.getPromptText());

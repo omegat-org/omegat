@@ -83,7 +83,8 @@ public class LanguageToolTest {
     public void testFrench() throws Exception {
         JLanguageTool lt = new JLanguageTool(new French());
 
-        List<RuleMatch> matches = lt.check("Directeur production du groupe");
+        // example from https://github.com/languagetool-org/languagetool/issues/2852
+        List<RuleMatch> matches = lt.check("Il est par cons\u00E9quent perdue.");
         assertEquals(1, matches.size());
         assertTrue(matches.get(0).getRule() instanceof PatternRule);
     }

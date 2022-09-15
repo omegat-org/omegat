@@ -153,7 +153,6 @@ public class SpellChecker implements ISpellChecker {
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 DEFAULT_DICTIONARY_DIR.getPath());
 
-        File dictBasename = new File(dictionaryDir, language);
         File affixName = new File(dictionaryDir, language + OConsts.SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + OConsts.SC_DICTIONARY_EXTENSION);
 

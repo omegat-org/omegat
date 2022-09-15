@@ -43,9 +43,7 @@ import org.languagetool.language.CanadianEnglish;
 import org.languagetool.language.English;
 import org.languagetool.language.French;
 import org.languagetool.rules.RuleMatch;
-import org.languagetool.rules.UppercaseSentenceStartRule;
 import org.languagetool.rules.patterns.PatternRule;
-import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
 import org.languagetool.server.HTTPServer;
 
 import org.omegat.util.Language;
@@ -66,17 +64,15 @@ public class LanguageToolTest {
 
     @Test
     @SuppressWarnings("deprecation")
-    public void testExecute() throws Exception {
+    public void testExecuteLanguageToolCheck() throws Exception {
         JLanguageTool lt = new JLanguageTool(new org.languagetool.language.Belarusian());
 
         // The test string is Belarusian; originally it was actual UTF-8,
         // but that causes the test to fail when environment encodings aren't set
         // correctly, so we are now using Unicode literals.
         List<RuleMatch> matches = lt.check("\u0441\u043F\u0440\u0430\u0443\u0434\u0437\u0456\u043C.");
-        assertEquals(3, matches.size());
-        assertTrue(matches.get(0).getRule() instanceof MorfologikSpellerRule);
-        assertTrue(matches.get(1).getRule() instanceof UppercaseSentenceStartRule);
-        assertTrue(matches.get(2).getRule() instanceof PatternRule);
+        assertEquals(1, matches.size());
+        assertTrue(matches.get(0).getRule() instanceof PatternRule);
     }
 
     @Test

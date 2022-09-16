@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd'>
 <section id="how.to.create.new.project">
-  <title id="how.to.create.new.project.title">Create a new Project</title>
+  <title id="how.to.create.new.project.title">Create a New Project</title>
 
-    <para>To start using OmegaT, first create a project that will hold all
-    your files, such as your source file, translation memories, glossaries,
-    and eventually your translated file. In the <guimenu>Project</guimenu>
-    menu, select <menuchoice><guimenuitem>New...</guimenuitem></menuchoice> 
-    and type a name for your project. Remember where you are
-    creating the project, because you will need to return to it later.</para>
+    <para>To start using OmegaT, you first have to create a project to hold all your files, such as your source files, translation memories, glossaries, and eventually your translated files. To create a new project, select <menuchoice><guimenuitem>New...</guimenuitem></menuchoice> in the <guimenu>Project</guimenu> menu (or press <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>n</keycap></keycombo>), select a folder, and type a name for your project.</para>
 
-    <para>After you give your project a name, the <guilabel>Create New Project</guilabel> dialog
-    will open. At the top of that dialog, select your source file's language
-    and the language that your translated file will be, and click
-    <guibutton>OK</guibutton> to continue.</para>
+    <note>
+      <para>Since an OmegaT project is simply a set of folders and subfolders, you are entering the name of the folder that will hold your project. Alternatively, you can choose an existing <emphasis>empty</emphasis> folder created beforehand. Keep in mind that OmegaT cannot create a project in a folder that already contains files or subfolders.</para>
+    </note>
 
-    <para>If you are interested in other settings of this dialog, you can return
+    <para>Remember where you are creating the project, because you will need to return to it later.</para>
+
+    <para>The <guilabel>Create New Project</guilabel> dialog opens after you have named your project. At the top of that dialog, select the languages of your source and translated files, and click the <guibutton>OK</guibutton> button to continue.</para>
+
+    <para>If you are interested in other settings in this dialog, you can return
     to it any time by pressing
     <keycombo><keycap>Ctrl</keycap><keycap>E</keycap></keycombo>.</para>
 
-    <para>Next, the <guilabel>Project Files</guilabel> dialog opens. Click on
-    <guibutton>Copy Files to Source Folder...</guibutton> to select your source
-    files. OmegaT will then copy the selected files to the <filename
-    class="directory">source</filename> subfolder of your newly created
-    project. After the source files have loaded in the
-    <guilabel>Editor</guilabel> pane, you can close the <guilabel>Project
-    Files</guilabel> dialog.</para>
+    <para>The <guilabel>Project Files</guilabel> dialog opens next. Click on <guibutton>Copy Files to Source Folder...</guibutton> and select your source files. OmegaT will then copy the selected files to the <filename class="directory">source</filename> subfolder of your newly created project. You can close the <guilabel>Project Files</guilabel> dialog after the source files have loaded in the <guilabel>Editor</guilabel> pane,.</para>
   </section>
-

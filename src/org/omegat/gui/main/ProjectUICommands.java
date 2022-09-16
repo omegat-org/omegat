@@ -345,6 +345,12 @@ public final class ProjectUICommands {
                 ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectRoot);
                 if (props.getRepositories() == null) { // We assume it's a project with no repository mapping,
                     props.setRepositories(repos);      // so we add root repository mapping
+                } else {
+                    String remoteUrl = getRootGitRepositoryMapping(props.getRepositories());
+                    if (remoteUrl != null && !remoteUrl.equals(repo.getUrl())) {
+                        // when remote repository config is different with opening url, respect local one
+                        setRootGitRepositoryMapping(props.getRepositories(), repo.getUrl());
+                    }
                 }
                 // We write in all cases, because we might have added default excludes, for instance
                 ProjectFileStorage.writeProjectFile(props);

@@ -770,7 +770,7 @@
 
 	<section id="dialogs.preferences.external.searches">
 	  <title id="dialogs.preferences.external.searches.title">External Search</title>
-	  <!-- TODO décrire comment enregistrer des recherches externes -->
+	  <para></para>
 	  <variablelist>
 		<varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
 		  <term id="dialogs.preferences.external.search.enable.project.specific.commands.title">Enable

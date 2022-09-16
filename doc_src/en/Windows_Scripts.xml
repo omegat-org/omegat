@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd'>
 <section id="windows.scripts">
   <title id="windows.scripts.title">Scripts</title>
 
@@ -16,6 +15,11 @@
   command in the <link endterm="menus.tools.title" linkend="menus.tools"/>
   menu.</para>
 
+  <warning><para>If a list of scripts is not displayed on the left side of the
+  script editor window, it means that OmegaT does not know where to look for the
+  scripts.</para>
+  <para>TODO default location?</para></warning>
+  
   <section id="windows.scripts.use">
     <title id="windows.scripts.use.title">Use</title>
 
@@ -65,32 +69,32 @@
     <para>Follow the instructions provided in the script itself.</para>
 
     <variablelist>
-      <varlistentry>
-        <term>Adapt standard tags</term>
+      <varlistentry id="windows.scripts.distribution.adapt.standard.tags">
+        <term id="windows.scripts.distribution.adapt.standard.tags.title">Adapt standard tags</term>
 
         <listitem>
           <para>Adapt standard tags when the Replace with Match command invoked.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Auto Open Last Project</term>
+      <varlistentry id="windows.scripts.distribution.auto.open.last.project">
+        <term id="windows.scripts.distribution.auto.open.last.project.title">Auto Open Last Project</term>
 
         <listitem>
           <para>Automatically open the last used OmegaT project.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Check Same Segment</term>
+      <varlistentry id="windows.scripts.distribution.check.same.segment">
+        <term id="windows.scripts.distribution.check.same.segment.title">Check Same Segment</term>
 
         <listitem>
           <para>Check for identical segments (case sensitive)</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Currency Translator</term>
+      <varlistentry id="windows.scripts.distribution.currency.translator">
+        <term id="windows.scripts.distribution.currency.translator.title">Currency Translator</term>
 
         <listitem>
           <para>Translate currencies representation according to the source and target locales.</para>
@@ -100,192 +104,192 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Example - GUI Scripting</term>
+      <varlistentry id="windows.scripts.distribution.example.gui.scripting">
+        <term id="windows.scripts.distribution.example.gui.scripting.title">Example - GUI Scripting</term>
 
         <listitem>
           <para>Example of GUI scripting</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Example - Key Binding</term>
+      <varlistentry id="windows.scripts.distribution.example.key.binding">
+        <term id="windows.scripts.distribution.example.key.binding.title">Example - Key Binding</term>
 
         <listitem>
           <para>Example of using a keybinding event.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Example - Modify Segment</term>
+      <varlistentry id="windows.scripts.distribution.example.modify.segment">
+        <term id="windows.scripts.distribution.example.modify.segment.title">Example - Modify Segment</term>
 
         <listitem>
           <para>Example showing how to modify a segment.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Example - Search and Replace</term>
+      <varlistentry id="windows.scripts.distribution.example.search.and.replace">
+        <term id="windows.scripts.distribution.example.search.and.replace.title">Example - Search and Replace</term>
 
         <listitem>
           <para>A simple search and replace script.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>External spellcheck</term>
+      <varlistentry id="windows.scripts.distribution.external.spellcheck">
+        <term id="windows.scripts.distribution.external.spellcheck.title">External spellcheck</term>
 
         <listitem>
           <para>Writes all segments to a file named <filename>[project_name].doc</filename> and opens it in the default word processor for the system. (Note that the file is a plain text file. The <filename>.doc</filename> extension simply ensures it opens in the word processor.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Extract Text Content</term>
+      <varlistentry id="windows.scripts.distribution.extract.text.content">
+        <term id="windows.scripts.distribution.extract.text.content.title">Extract Text Content</term>
 
         <listitem>
           <para>Extracts the content of the project to a single text file (one line per segment). See <ulink url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182 Extracts the content of the projects to text file</ulink></para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Non-breaking space</term>
+      <varlistentry id="windows.scripts.distribution.non.breaking.space">
+        <term id="windows.scripts.distribution.non.breaking.space.title">Non-breaking space</term>
 
         <listitem>
           <para>Replace spaces with non-breakable spaces where appropriate in French.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Open Current File</term>
+      <varlistentry id="windows.scripts.distribution.open.current.file">
+        <term id="windows.scripts.distribution.open.current.file.title">Open Current File</term>
 
         <listitem>
           <para>Open the current source file.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Open Glossary</term>
+      <varlistentry id="windows.scripts.distribution.open.glossary">
+        <term id="windows.scripts.distribution.open.glossary.title">Open Glossary</term>
 
         <listitem>
           <para>Open the writeable glossary in an editor.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Open Project Folder</term>
+      <varlistentry id="windows.scripts.distribution.open.project.folder">
+        <term id="windows.scripts.distribution.open.project.folder.title">Open Project Folder</term>
 
         <listitem>
           <para>Open the project folder in the operating system.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Open TM Folder</term>
+      <varlistentry id="windows.scripts.distribution.open.tm.folder">
+        <term id="windows.scripts.distribution.open.tm.folder.title">Open TM Folder</term>
 
         <listitem>
           <para>Open the /tm folder.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Open project_save.tmx.</term>
+      <varlistentry id="windows.scripts.distribution.open.project.save.tmx">
+        <term id="windows.scripts.distribution.open.project.save.tmx.title">Open project_save.tmx.</term>
 
         <listitem>
           <para>Open project_save.tmx in a text editor.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>QA - Check Rules</term>
+      <varlistentry id="windows.scripts.distribution.qa.check.rules">
+        <term id="windows.scripts.distribution.qa.check.rules.title">QA - Check Rules</term>
 
         <listitem>
           <para>QA script.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>QA - Identical Segments</term>
+      <varlistentry id="windows.scripts.distribution.qa.identical.segments">
+        <term id="windows.scripts.distribution.qa.identical.segments.title">QA - Identical Segments</term>
 
         <listitem>
           <para>Check for identical segments (case sensitive).</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>SVN - Cleanup (recursive)</term>
+      <varlistentry id="windows.scripts.distribution.svn.cleanup.recursive">
+        <term id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN - Cleanup (recursive)</term>
 
         <listitem>
           <para>Perform SVN cleanup on current project or any folder (recursively).</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Show Same Segments</term>
+      <varlistentry id="windows.scripts.distribution.show.same.segments">
+        <term id="windows.scripts.distribution.show.same.segments.title">Show Same Segments</term>
 
         <listitem>
           <para>Display a list of segments where the source and target have identical content.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Spellcheck</term>
+      <varlistentry id="windows.scripts.distribution.spellcheck">
+        <term id="windows.scripts.distribution.spellcheck.title">Spellcheck</term>
 
         <listitem>
           <para>Global spell checking.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Strip Bidi Marks</term>
+      <varlistentry id="windows.scripts.distribution.strip.bidi.marks">
+        <term id="windows.scripts.distribution.strip.bidi.marks.title">Strip Bidi Marks</term>
 
         <listitem>
           <para>Remove bidi mark in the current target or in selection.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Strip tags</term>
+      <varlistentry id="windows.scripts.distribution.strip.tags">
+        <term id="windows.scripts.distribution.strip.tags.title">Strip tags</term>
 
         <listitem>
           <para>Remove tags in the current target or selection.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Switch Colour Theme</term>
+      <varlistentry id="windows.scripts.distribution.switch.colour.theme">
+        <term id="windows.scripts.distribution.switch.colour.theme.title">Switch Colour Theme</term>
 
         <listitem>
           <para>Switch the colour theme used in the editor.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Tag-Free Match</term>
+      <varlistentry id="windows.scripts.distribution.tag.free.match">
+        <term id="windows.scripts.distribution.tag.free.match.title">Tag-Free Match</term>
 
         <listitem>
           <para>Replace current target with a tag-free match.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Tagwipe</term>
+      <varlistentry id="windows.scripts.distribution.tagwipe">
+        <term id="windows.scripts.distribution.tagwipe.title">Tagwipe</term>
 
         <listitem>
           <para>Remove extraneous tags from docx documents.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>issue_provider_sample.groovy</term>
+      <varlistentry id="windows.scripts.distribution.issue.provider.sample.groovy">
+        <term id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
 
         <listitem>
           <para>(no description)</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>toolbar.groovy</term>
+      <varlistentry id="windows.scripts.distribution.toolbar.groovy">
+        <term id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
 
         <listitem>
           <para>(no description)</para>

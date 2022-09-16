@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd'>
 <section id="dialogs.project.properties">
   <title id="dialogs.project.properties.title">Project Properties</title>
 
@@ -12,12 +12,20 @@
     <title id="dialogs.project.properties.languages.title">Languages</title>
 
     <para>You can either enter the source and target languages by hand, or use
-    the drop down menus. Bear in mind that changing the languages of an active
-    project may render the existing translation memories useless since their
-    language pair may no longer match the new languages.</para>
-
-    <para>Tokenizers corresponding to the selected languages are
-    displayed.</para>
+    the drop down menus.</para>
+	<para>Language codes are used for the <link linkend="panes.fuzzy.matches"
+	endterm="panes.fuzzy.matches.title"/>, the <link
+	linkend="dialogs.preferences.segmentation.setup"
+	endterm="dialogs.preferences.segmentation.setup.title"/>, the <link
+	linkend="dialog.preferences.spellchecker"
+	endterm="dialog.preferences.spellchecker.title"/>, the <link
+	linkend="dialog.preferences.languagetool.plugin"
+	endterm="dialog.preferences.languagetool.plugin.title"/>, etc.</para>
+	
+    <para>OmegaT automatically selects the tokenizers corresponding to the
+    source and target languages but you can manually modify the
+    settings. Tokenizers are useful to provide better matches since they each
+    correspond to a specific language.</para>
   </section>
 
   <section id="dialogs.project.properties.options">
@@ -35,15 +43,16 @@
           can be modified using regular expressions. See <link
           linkend="appendix.regexp" endterm="appendix.regexp.title"/> for
           details.</para>
-          <para>Leave the box unchecked if you prefer not to segment the text
-          (or, more specifically, segment it a the paragraph).</para>
+          <para>Leave the box unchecked if you prefer not to segment the
+          paragraphs.</para>
 		  <para>Changing this setting during a translation does not modify the
-		  segmentation of already existing translation memories. Switching from
-		  sentence to paragraph segmentation mid-translation will not change the
-		  internal translation memory of the project. (OmegaT may upgrade old
-		  translation memories that did not use sentence segmentation, but not
-		  vice versa) However, OmegaT will attempt to create fuzzy matches for
-		  paragraphs by combining existing sentence translations.</para>
+		  segmentation of already existing translation memories.</para>
+		  <para>Switching from sentence to paragraph segmentation
+		  mid-translation will not change the internal translation memory of the
+		  project. (OmegaT may upgrade old translation memories that did not use
+		  sentence segmentation, but not vice versa) However, OmegaT will
+		  attempt to create fuzzy matches for paragraphs by combining existing
+		  sentence translations.</para>
           <warning><para>Changing the segmentation settings may split or merge
           some already translated segments. This will effectively return them to
           the &quot;untranslated&quot; status, as they will no longer match
@@ -86,7 +95,12 @@
 
 		  <note><para>The tags are not really removed from the document, but
 		  rather stacked at the end of the segment. In most cases, this should
-		  not keep the translated file from opening.</para></note>
+		  not keep the translated file from opening. If you just need to reduce
+		  the number of tags, you can use the <link
+		  linkend="windows.scripts.distribution.tagwipe"
+		  endterm="windows.scripts.distribution.tagwipe.title"/> script. See
+		  <link linkend="windows.scripts" endterm="windows.scripts.title"/> for
+		  details.</para></note>
         </listitem>
       </varlistentry>
 

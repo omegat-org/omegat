@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd'>
 <section id="dialogs.preferences">
   <title id="dialogs.preferences.title">General Preferences</title>
 
@@ -857,14 +857,14 @@
 
 	<section id="dialogs.preferences.external.searches">
 	  <title id="dialogs.preferences.external.searches.title">External Search</title>
-	  <!-- TODO décrire comment enregistrer des recherches externes -->
+	  <para>External searches are either web searches or local commands that take the string selected in the Editor as a parameter. The web searches are opened in the default browser and the commands are equivalent to items launched on the command line.</para>
 	  <variablelist>
 		<varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
 		  <term id="dialogs.preferences.external.search.enable.project.specific.commands.title">Enable
 		  project-specific commands</term>
 
 		  <listitem>
-			<para>By default, OmegaT does not execute commands specified in the project-specific settings (the <filename>finder.xml</filename> file in the <filename class="directory">omegat</filename> folder), because they could have a critical impact on system security.</para>
+			<para>By default, OmegaT does not execute commands specified in the project-specific settings (the <link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/> file in the <link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/> folder), because they could have a critical impact on system security.</para>
 
 			<para>Only activate this option if you know what you are doing, and can trust the source of the project.</para>
 		  </listitem>
@@ -877,8 +877,34 @@
 		  <listitem>
 			<para>This option enables you to change the order of the commands in the context (right-click) menu. Values around 100 display commands at the top, and values around 900 display them at the bottom.</para>
 
-			<para>You will need to restart OmegaT for this change to take
-			effect.</para>
+			<warning><para>You will need to restart OmegaT for this change to take
+			effect.</para></warning>
+		  </listitem>
+		  </varlistentry>
+		  <varlistentry  id="dialogs.preferences.external.search.items">
+			<term id="dialogs.preferences.external.search.items.title">Items</term>
+			  <listitem>
+				<para>Each item represents a group of web searches or local commands that are launched simultaneously.</para>
+				<para>An item must be given a name. The name will be displayed
+				at the bottom of the <link linkend="menus.tools"
+				endterm="menus.tools.title"/> menu. If you check <guilabel>Show
+				in Editor context menu</guilabel>, the name will also be
+				displayed in the <link linkend="panes.editor.context.menu"
+				endterm="panes.editor.context.menu.title"/> if a string is selected.</para>
+				<para>URL searches as well as commands must contain the string
+				<guilabel>{target}</guilabel> to be accepted. The {target} placeholder will be replaced by the string that was selected in the Editor.</para>
+				<para>URLs are opened with the default web browser, one per tab.</para>
+				<example><title>URL search example</title>
+				<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee+-reverso+-glosbe+-larousse+-amazon+-dictionnaire+-docplayer+-pinterest+-translation</programlisting>
+				<para>This opens a search for the {target} term on DuckDuckGo with a number of search parameters.</para></example>
+				<para>Commands are opened on the command line. The
+				<guilabel>Delimiter</guilabel> is used to define the delimiter
+				for parameters. The default delimiter is <code>|</code>.</para>
+				<example><title>Command example</title>
+				<programlisting>/usr/bin/open|dict://{target}</programlisting>
+				<para>This opens the dictionary application that implements the
+				<code>dict</code> protocol on your machine looking for the
+				{target} term.</para></example>
 		  </listitem>
 		</varlistentry>
 	  </variablelist>

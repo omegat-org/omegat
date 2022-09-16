@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd'>
 <section id="menus.options">
   <title id="menus.options.title">Options</title>
   <note><para>Key shortcut description reminder: <link
@@ -20,7 +20,7 @@
         <para>Allows you to activate/deactivate the available machine
         translation engines.</para>
         <para>If several translation engines are selected, you can also use
-        <keycombo><keycap>C</keycap><keycap>m</keycap></keycombo> to switch
+        <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to switch
         between them and insert the last one selected.</para>
       </listitem>
     </varlistentry>

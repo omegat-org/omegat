@@ -115,14 +115,13 @@ h6:first-child {
 
 .keycap {
     display:inline-block;
-    font-size: .6rem;
+    font-size: .8rem;
     border: 1px solid black;
     border-radius:4px;
-    background: #ececec;
-    padding-left:.15rem;
-    padding-right:.15rem;
-    padding-top:.1rem;
-    margin-right:.1rem;
+    background: gainsboro;
+    padding-left:.3rem;
+    padding-right:.3rem;
+    margin:.2rem;
     white-space:nowrap;
 }
 
@@ -176,7 +175,16 @@ code.filename {
     font-weight: bold;
 }
 
+span.keycap:last-of-type {
+    color: white;
+    background-color: LightSeaGreen;
+    font-weight: bold;
+}
 
+table span.keycap:last-of-type {
+    background-color: gainsboro;
+    color: black;
+}
 
 code,
 tt,

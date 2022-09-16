@@ -11,42 +11,52 @@
 	offerings, even for beginning translators.</para>
 	<variablelist>
 	  <varlistentry><term>Translation project</term><listitem><para>An OmegaT
-	  translation project consists of a folder that stores a number of resources in separate subfolders. Translators can easily modify the contents of the
+	  translation project consists of a folder that stores a number of resources
+	  in separate subfolders. Translators can easily modify the contents of the
 	  subfolders at any time during the translation simply by copying, moving or
 	  deleting files.</para>
-	  <para>At a minimum, resources include at the minimum the project's translation memory, which is automatically upon project creation, and the files to translate. It can also include reference translation memories, glossaries, and other reference files.</para>
+	  <para>At a minimum, resources include at the minimum the project's
+	  translation memory, which is automatically upon project creation, and the
+	  files to translate. It can also include reference translation memories,
+	  glossaries, and other reference files.</para>
 	  </listitem></varlistentry>
 	  <varlistentry><term>Translation memories</term><listitem><para>Translators
 	  do not have to <emphasis>create</emphasis> a translation memory or
-	  <emphasis>associate</emphasis> one to a new project. OmegaT takes care of that <emphasis>automatically</emphasis>.</para>
+	  <emphasis>associate</emphasis> one to a new project. OmegaT takes care of
+	  that <emphasis>automatically</emphasis>.</para>
 	  <para>Translators can very easily reuse an existing project's translation
 	  memory by simply adding new translation files to the old project, or by
 	  copying the old translation memory to the new project's folder.</para>
 	  <para>There is no limit to the number of translation memories that can be
-	  used as reference in a translation project, and OmegaT makes it very easy to assign different levels of priority to these additional memories.</para></listitem></varlistentry>
+	  used as reference in a translation project, and OmegaT makes it very easy
+	  to assign different levels of priority to these additional
+	  memories.</para></listitem></varlistentry>
 	  <varlistentry><term>Working in teams</term><listitem><para>Translators can
-	  easily collaborate on a project.</para><para>The team functionality synchronizes the project's translation memory and main glossary between all participants, and allows easy resolution of conflicts between different translations.</para></listitem></varlistentry>
+	  easily collaborate on a project.</para><para>The team functionality
+	  synchronizes the project's translation memory and main glossary between
+	  all participants, and allows easy resolution of conflicts between
+	  different translations.</para></listitem></varlistentry>
 	</variablelist>
   </section>
 
-    <section id="introduction.note.on.shortcuts">
+  <section id="introduction.note.on.shortcuts">
 	<title id="introduction.note.on.shortcuts.title">A note on key shortcuts in this manual</title>
-	  <para>On macOS most key shortcuts use the <keycap>Command</keycap> key. On
-	  Windows and Linux, the equivalent function uses the
-	  <keycap>Control</keycap> key.</para>
-	<para>To avoid confusion, the following convention is adopted in this manual:</para>
-  <example id="example.project.properties"><title id="example.project.properties.title">[!] Project Properties</title>
-		<para>On Windows and Linux:
-		  <keycombo><keycap>Control</keycap><keycap>E</keycap></keycombo>
-		</para>
-		<para>On macOS:
-		  <keycombo><keycap>Command</keycap><keycap>E</keycap></keycombo>
-		</para>
-  		<para>In this manual:
-		  <keycombo><keycap>C</keycap><keycap>e</keycap></keycombo>
-		</para>
-  </example>
-  <para>See <link linkend="appendix.shortcut.description" endterm="appendix.shortcut.description.title"/> for details.</para>
+	<para>To avoid duplication of shortcut description, we have adopted the
+	following notation in this manual: <example
+	id="example.introduction.note.on.shortcuts"><title
+	id="example.introduction.note.on.shortcuts.title">Single letters are used
+	as a common name for modifiers.</title>
+  	<para>In this manual:
+	<keycombo><keycap>C</keycap><keycap>E</keycap></keycombo>
+	</para>
+	<para>On Windows and Linux:
+	<keycombo><keycap>Control</keycap><keycap>E</keycap></keycombo>
+	</para>
+	<para>On macOS:
+	<keycombo><keycap>Command</keycap><keycap>E</keycap></keycombo>
+	</para>
+	</example></para>
+	<para>See <link linkend="menus" endterm="menus.title"/> and <link linkend="appendix.shortcut.description" endterm="appendix.shortcut.description.title"/> for details.</para>
   </section>
 
   <section id="introduction.create.and.open.new.project">
@@ -56,23 +66,37 @@
     files, such as your source files, translation memories, glossaries, and
     eventually your translated files.</para>
 
-	<para>In the <link linkend="menus.project" endterm="menus.project.title"/> menu, select <link linkend="menus.project.new" endterm="menus.project.new.title"/> (or press <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>n</keycap></keycombo>) and enter a name for your project. Remember where you are creating the project, because you will need to return to it later.</para>
+	<para>In the <link linkend="menus.project" endterm="menus.project.title"/>
+	menu, use <link linkend="menus.project.new"
+	endterm="menus.project.new.title"/> and enter a name for your
+	project. Remember where you are creating the project, because you will need
+	to return to it later.</para>
 
-    <para>The <guilabel>Create New Project</guilabel> dialog opens after you have named your project. At the top of that dialog, select the languages of your source and translated files, and click the <guibutton>OK</guibutton> button to continue.</para>
+    <para>The <guilabel>Create New Project</guilabel> dialog opens after you
+    have named your project. At the top of that dialog, select the languages of
+    your source and translated files, and click the <guibutton>OK</guibutton>
+    button to continue.</para>
 
     <para>If you are interested in other settings of this dialog, you can return
-    to it any time by pressing
-    <keycombo><keycap>C</keycap><keycap>e</keycap></keycombo> to display the
-    <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> dialog.</para>
+    to it any time by using <link linkend="menus.project.properties"
+    endterm="menus.project.properties.title"/> to display the <link
+    linkend="dialogs.project.properties"
+    endterm="dialogs.project.properties.title"/> dialog.</para>
 
-    <para>Next, the <link linkend="windows.project.files" endterm="windows.project.files.title"/> dialog opens. Click on <link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> to select your
-    source files. OmegaT will then copy the selected files to the <link linkend="project.folder.source" endterm="project.folder.source.title"/>
-    folder of your newly created project. After the source files have loaded
-    in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane,
-    you can close the <link linkend="windows.project.files" endterm="windows.project.files.title"/> dialog.</para>
+    <para>Next, the <link linkend="windows.project.files"
+    endterm="windows.project.files.title"/> dialog opens. Click on <link
+    linkend="menus.project.copy.files.to.source.folder"
+    endterm="menus.project.copy.files.to.source.folder.title"/> to select your
+    source files. OmegaT will then copy the selected files to the <link
+    linkend="project.folder.source" endterm="project.folder.source.title"/>
+    folder of your newly created project. After the source files have loaded in
+    the <link linkend="panes.editor" endterm="panes.editor.title"/> pane, you
+    can close the <link linkend="windows.project.files"
+    endterm="windows.project.files.title"/> dialog.</para>
 
 	<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Default OmegaT layout on macOS</title>
+      <title id="default.omegat.layout.title">Default OmegaT layout on
+      macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -84,7 +108,8 @@
     </figure>
 
 	<figure id="modified.omegat.layout">
-      <title id="modified.omegat.layout.title">Modified OmegaT layout with auto-completion</title>
+      <title id="modified.omegat.layout.title">Modified OmegaT layout with
+      auto-completion</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/modifiedOmegaTLayout.png"/>
@@ -97,60 +122,88 @@
   </section>
 
   <section id="introduction.translate.the.segments.one.by.one">
-    <title id="introduction.translate.the.segments.one.by.one.title">Translate your files</title>
+    <title id="introduction.translate.the.segments.one.by.one.title">Translate
+    your files</title>
 
     <para>In the <link linkend="panes.editor" endterm="panes.editor.title"/>
     pane, OmegaT will present one segment at a time for you to translate.  After
-    you have typed the translation of a segment, press
-    <keycombo><keycap>C</keycap><keycap>u</keycap></keycombo> to move to the
-    next untranslated segment. Once you leave the segment, its translation is
+    you have typed the translation of a segment, use <link
+    linkend="menus.goto.next.untranslated.segment"
+    endterm="menus.goto.next.untranslated.segment.title"/> to move to the next
+    untranslated segment. Once you leave the segment, its translation is
     automatically stored into the project translation memory located in the
-    <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> folder of the project and will be
+    <link linkend="project.folder.omegat"
+		  endterm="project.folder.omegat.title"/> folder of the project and will be
     used as reference for the rest of your translation. You can manually
     register glossary items that you want to later use in the translation with
-    <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>.</para>
+    <link linkend="menus.edit.create.glossary.entry"
+		  endterm="menus.edit.create.glossary.entry.title"/>.</para>
 
 	<para>See the <link linkend="menus.goto" endterm="menus.goto.title"/> menu
 	for more navigation options.</para>
 
 	<para>When you enter a segment that matches some of the content of the
-	project translation memories, OmegaT displays the matches in the <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>
-	pane. Similarly, if there are terms matching the contents of the glossaries, the
-	terms and their translations are displayed in the <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
+	project translation memories, OmegaT displays the matches in the <link
+	linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>
+	pane. Similarly, if there are terms matching the contents of the glossaries,
+	the terms and their translations are displayed in the <link
+	linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para>
 
 	<para>Use the <link linkend="menus.edit" endterm="menus.edit.title"/> menu
 	to manage translation memory matches and perform other various useful
-	functions. Use <link linkend="menus.view.mark.glossary.matches" endterm="menus.view.mark.glossary.matches.title"/> in the <link linkend="menus.view" endterm="menus.view.title"/> menu and <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> to
+	functions. Use <link linkend="menus.view.mark.glossary.matches"
+	endterm="menus.view.mark.glossary.matches.title"/> in the <link
+	linkend="menus.view" endterm="menus.view.title"/> menu and <link
+	linkend="dialog.preferences.auto.completion"
+	endterm="dialog.preferences.auto.completion.title"/> in the <link
+	linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> to
 	manage glossary matches.</para>
 
-	<para>With <keycombo><keycap>C</keycap><keycap>f</keycap></keycombo>, you
-	can search the whole project for terms, sentence fragments and so on, using exact, keyword, or regular expression searches, as well as narrow the scope of the based on information such as author or date. You can also focus only on the results by filtering them in the Editor. See
+	<para>With <link linkend="menus.edit.search.project"
+	endterm="menus.edit.search.project.title"/>, you can search the whole
+	project for terms, sentence fragments and so on, using exact, keyword, or
+	regular expression searches, as well as narrow the scope of the based on
+	information such as author or date. You can also focus only on the results
+	by filtering them in the Editor. See
 	<link linkend="windows.text.search" endterm="windows.text.search.title"/>
-	for details. You can replace terms with
-	<keycombo><keycap>C</keycap><keycap>k</keycap></keycombo> by using a similar
-	dialog. See <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> for details.</para>
+	for details. You can replace terms with <link
+	linkend="menus.edit.search.and.replace"
+	endterm="menus.edit.search.and.replace.title"/> by using a similar
+	dialog. See <link linkend="windows.text.replace"
+	endterm="windows.text.replace.title"/> for details.</para>
 
-	<para>You can leave notes to yourself or team members in the <link linkend="panes.notes" endterm="panes.notes.title"/> pane while you translate, and go back to annotated segments with <link linkend="menus.goto.next.note" endterm="menus.goto.next.note.title"/> or <link linkend="menus.goto.previous.note" endterm="menus.goto.previous.note.title"/> in the <link linkend="menus.goto" endterm="menus.goto.title"/> menu, or from the <link linkend="windows.text.search" endterm="windows.text.search.title"/> window.</para>
+	<para>You can leave notes to yourself or team members in the <link
+	linkend="panes.notes" endterm="panes.notes.title"/> pane while you
+	translate, and go back to annotated segments with <link
+	linkend="menus.goto.next.note" endterm="menus.goto.next.note.title"/> or
+	<link linkend="menus.goto.previous.note"
+		  endterm="menus.goto.previous.note.title"/> in the <link linkend="menus.goto"
+		  endterm="menus.goto.title"/> menu, or from the <link
+		  linkend="windows.text.search" endterm="windows.text.search.title"/>
+	window.</para>
 
 	<para>The various panes give easy access to some frequently used function
-	through a context menu. The context menu is generally available with
-	<keycombo><keycap>C</keycap><keycap>click</keycap></keycombo>,
-	<keycap>Right-click</keycap>, the <keycap>Menu</keycap> key on Linux and
-	Windows or <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo> on
-	macOS. See <link linkend="panes.editor.context.menu" endterm="panes.editor.context.menu.title"/> for details. The
-	auto-completion menu is also available in the Editor pane. See <link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/> for details.</para>
-	  </section>
+	through a context menu. See <link linkend="panes.editor.context.menu"
+	endterm="panes.editor.context.menu.title"/> for details. The auto-completion
+	menu is also available in the Editor pane. See <link
+	linkend="panes.editor.auto.completion.menu"
+	endterm="panes.editor.auto.completion.menu.title"/> for details.</para>
+  </section>
 
   <section id="introduction.manage.your.tags">
     <title id="introduction.manage.your.tags.title">Manage your tags</title>
 
-    <para>If the documents you translate use bold, italics, or other decorative elements, OmegaT will convert them into tags that enclose the decorated
+    <para>If the documents you translate use bold, italics, or other decorative
+    elements, OmegaT will convert them into tags that enclose the decorated
     text. Such files include LibreOffice files, HTML files, Microsoft Office
-    files, etc. Documents will often also contain tags that have nothing to do with
-    decorations, but are nevertheless important in the source files (and, consequently, in the translated files as well). A source sentence might look like:</para>
+    files, etc. Documents will often also contain tags that have nothing to do
+    with decorations, but are nevertheless important in the source files (and,
+    consequently, in the translated files as well). A source sentence might look
+    like:</para>
     
 	<example id="example.source.segment.with.decorations">
-	  <title id="example.source.segment.with.decorations.title">Sentence with decorative formatting</title>
+	  <title id="example.source.segment.with.decorations.title">Sentence with
+	  decorative formatting</title>
 	  <para>OmegaT is an <emphasis role="bold">easy to use</emphasis> program
 	  for <emphasis>eager</emphasis> translators</para>
 	</example>
@@ -161,67 +214,105 @@
 	<example id="example.how.decorations.are.displayed">
 	  <title id="example.how.decorations.are.displayed.title">How decorations
 	  are displayed in OmegaT</title>
-	  <para>OmegaT is an <code role="tag">&lt;t0/&gt;</code>easy to use<code role="tag">&lt;t1/&gt;</code> program for <code role="tag">&lt;t2/&gt;</code>eager<code role="tag">&lt;t3/&gt;</code>
+	  <para>OmegaT is an <code role="tag">&lt;t0/&gt;</code>easy to use<code
+	  role="tag">&lt;t1/&gt;</code> program for <code
+	  role="tag">&lt;t2/&gt;</code>eager<code role="tag">&lt;t3/&gt;</code>
 	  translators</para>
     </example>
 	
-    <para>The tags in OmegaT are greyed, making them easy to recognize. They are protected to prevent you from modifying their contents, but you can delete them, enter them by hand or move them around in the target sentence. See <link linkend="menus.edit.insert.missing.source.tag" endterm="menus.edit.insert.missing.source.tag.title"/> and <link linkend="menus.edit.insert.next.missing.tag" endterm="menus.edit.insert.next.missing.tag.title"/> for details.</para>
+    <para>The tags in OmegaT are greyed, making them easy to recognize. They are
+    protected to prevent you from modifying their contents, but you can delete
+    them, enter them by hand or move them around in the target sentence. See
+    <link linkend="menus.edit.insert.missing.source.tag"
+		  endterm="menus.edit.insert.missing.source.tag.title"/> and <link
+		  linkend="menus.edit.insert.next.missing.tag"
+		  endterm="menus.edit.insert.next.missing.tag.title"/> for details.</para>
 
 	<para>You can define custom tags that will be managed in the same
-	manner. See <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
-	for details. You can also define strings that OmegaT should warn you about if
-	you leave them in a translation. See <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
+	manner. See <link
+	linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
+	endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
+	for details. You can also define strings that OmegaT should warn you about
+	if you leave them in a translation. See <link
+	linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
+	endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
 	for details.</para>
 
 	<para>If you make mistakes when you type the formatting tags, your
-	translated files might fail to open. Press
-	<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>v</keycap></keycombo> to validate that your tags are correct before you generate your translated files.</para>
+	translated files might fail to open. Use
+	<link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>
+	to validate that your tags are correct before you generate your translated
+	files.</para>
 
 	<warning><para>If a file refuses to open in LibreOffice, Word or other
-	application, it is often due to errors in the management of OmegaT tags. Return to OmegaT, validate the tags and recreate the translated file.</para></warning>
+	application, it is often due to errors in the management of OmegaT
+	tags. Return to OmegaT, validate the tags and recreate the translated
+	file.</para></warning>
 
-	<para>See <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> in the <link linkend="menus.tools" endterm="menus.tools.title"/> menu for details.</para>
   </section>
 
   <section id="introduction.generate.the.translated.file">
     <title id="introduction.generate.the.translated.file.title">Generate the translated files</title>
 	<para>Whenever you want to see what your translation will look like in its
-	final format, press
-	<keycombo><keycap>C</keycap><keycap>d</keycap></keycombo> to generate the
-	translated documents, which will be created in the <link linkend="project.folder.target" endterm="project.folder.target.title"/>
+	final format, use <link linkend="menus.project.create.translated.documents"
+	endterm="menus.project.create.translated.documents.title"/> to generate the
+	translated documents, which will be created in the <link
+	linkend="project.folder.target" endterm="project.folder.target.title"/>
 	folder of your project.</para>
 
 	<note><para>You translations are always stored in the project translation
-	memory, located in the <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/> folder of your
-	project. Deleting the contents of the <link linkend="project.folder.target" endterm="project.folder.target.title"/>
-	folder will <emphasis>never</emphasis> impact your translations.</para></note>
+	memory, located in the <link linkend="project.folder.omegat"
+	endterm="project.folder.omegat.title"/> folder of your project. Deleting the
+	contents of the <link linkend="project.folder.target"
+	endterm="project.folder.target.title"/> folder will
+	<emphasis>never</emphasis> impact your translations.</para></note>
 
 	<para>Once the translated files have been created, you can open them in
 	their original application to check their contents and eventually further
-	modify them. Such modifications will <emphasis>not</emphasis> be reflected in OmegaT.</para>
+	modify them. Such modifications will <emphasis>not</emphasis> be reflected
+	in OmegaT.</para>
 
-	<para>It is common practice to review a translation in OmegaT, with the <link linkend="spellchecker" endterm="spellchecker.title"/>, the <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> function (that includes grammatical checks), as well as by making changes to the <link linkend="panes" endterm="panes.title"/> layout and <link linkend="menus.view" endterm="menus.view.title"/> options, and to then create the translated files to further review them in their original application.</para>
+	<para>It is common practice to review a translation in OmegaT, with the
+	<link linkend="spellchecker" endterm="spellchecker.title"/>, the <link
+	linkend="menus.tools.check.issues"
+	endterm="menus.tools.check.issues.title"/> function (that includes
+	grammatical checks), as well as by making changes to the <link
+	linkend="panes" endterm="panes.title"/> layout and <link
+	linkend="menus.view" endterm="menus.view.title"/> options, and to then
+	create the translated files to further review them in their original
+	application.</para>
 
 	<para>Modifications made outside OmegaT can be reinserted in OmegaT (and
-	thus in the project translation memory, to keep it up to date) either
-	by entering them manually in the relevant segments, or by aligning the original file and the final translated file to create a new translation memory (TMX) file that will be put in the <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> subfolder of your project folder. See
-	<link linkend="windows.aligner" endterm="windows.aligner.title"/> for
-	details.</para>
+	thus in the project translation memory, to keep it up to date) either by
+	entering them manually in the relevant segments, or by aligning the original
+	file and the final translated file to create a new translation memory (TMX)
+	file that will be put in the <link linkend="project.folder.tm.enforce"
+	endterm="project.folder.tm.enforce.title"/> subfolder of your project
+	folder. See <link linkend="windows.aligner"
+	endterm="windows.aligner.title"/> for details.</para>
 	
-	<warning><para>Any time you create the translated files, any previously created
-	files with the same name will be overwritten. If you want to keep files from
-	being overwritten, change their name after you created them, or automate the
-	name modification with <link linkend="edit.filter.dialog" endterm="edit.filter.dialog.title"/> of the <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>
+	<warning><para>Any time you create the translated files, any previously
+	created files with the same name will be overwritten. If you want to keep
+	files from being overwritten, change their name after you created them, or
+	automate the name modification with <link linkend="edit.filter.dialog"
+	endterm="edit.filter.dialog.title"/> of the <link
+	linkend="dialogs.preferences.file.filters"
+	endterm="dialogs.preferences.file.filters.title"/>
 	preferences.</para></warning>
   </section>
 
   <section id="introduction.one.more.thing">
-    <title id="introduction.one.more.thing.title">A few more things to note</title>
+    <title id="introduction.one.more.thing.title">A few more things to
+    note</title>
 
     <itemizedlist>
       <listitem>
-        <para>If a file does not appear into the <link linkend="panes.editor" endterm="panes.editor.title"/> pane, then it could be that it is in a
-        format that doesn't work in OmegaT. See <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> for
+        <para>If a file does not appear into the <link linkend="panes.editor"
+        endterm="panes.editor.title"/> pane, then it could be that it is in a
+        format that doesn't work in OmegaT. See <link
+        linkend="dialogs.preferences.file.filters"
+        endterm="dialogs.preferences.file.filters.title"/> in the <link
+        linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> for
         a list of file formats that OmegaT can handle.</para>
       </listitem>
 
@@ -232,31 +323,48 @@
       </listitem>
 
       <listitem>
-        <para>You can access the project settings by pressing
-        <keycombo><keycap>C</keycap><keycap>e</keycap></keycombo> (<link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>). To see the list of files
-        in the project, press
-        <keycombo><keycap>C</keycap><keycap>l</keycap></keycombo> (<link linkend="windows.project.files" endterm="windows.project.files.title"/>).</para>
+        <para>You can access and modify the project settings with <link
+        linkend="menus.project.properties"
+        endterm="menus.project.properties.title"/>. To see the list of files in
+        the project, use <link linkend="menus.project.project.files"
+        endterm="menus.project.project.files.title"/>.</para>
       </listitem>
 
       <listitem>
-        <para>Every time you create the translated files (see <link linkend="introduction.generate.the.translated.file" endterm="introduction.generate.the.translated.file.title"/>, above),
+        <para>Every time you create the translated files (see <link
+        linkend="introduction.generate.the.translated.file"
+        endterm="introduction.generate.the.translated.file.title"/>, above),
         OmegaT creates three translation memories that contain the state of the
-        translation of the files currently in the <link linkend="project.folder.source" endterm="project.folder.source.title"/>
+        translation of the files currently in the <link
+        linkend="project.folder.source" endterm="project.folder.source.title"/>
         folder.</para>
 
-		<para>The three files are located inside the <link linkend="project.folder" endterm="project.folder.title"/> folder and are called <filename>(project name)-level1.tmx</filename>, <filename>(project name)-level2.tmx</filename> and <filename>(project name)-omegat.tmx</filename>. They can be used as reference translation memories in other projects.</para>
+		<para>The three files are located inside the <link
+		linkend="project.folder" endterm="project.folder.title"/> folder and are
+		called <filename>(project name)-level1.tmx</filename>,
+		<filename>(project name)-level2.tmx</filename> and <filename>(project
+		name)-omegat.tmx</filename>. They can be used as reference translation
+		memories in other projects.</para>
 
 		<para>The <filename>level1</filename> and <filename>level2</filename>
-		suffixes refer to the TMX standard (see <ulink url="https://www.gala-global.org/tmx-14b">TMX 1.4b
-		Specification</ulink>). You can share these files with users of other translation programs.</para>
+		suffixes refer to the TMX standard (see <ulink
+		url="https://www.gala-global.org/tmx-14b">TMX 1.4b
+		Specification</ulink>). You can share these files with users of other
+		translation programs.</para>
 
-		<para>You can use the file with the <filename>omegat</filename> suffix in other (current or future) OmegaT translation projects as a reference translation memory simply by copying it to the <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder or a new project.</para>
+		<para>You can use the file with the <filename>omegat</filename> suffix
+		in other (current or future) OmegaT translation projects as a reference
+		translation memory simply by copying it to the <link
+		linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
+		or a new project.</para>
       </listitem>
 
       <listitem>
-        <para>For a more comprehensive introduction see <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for
+        <para>For a more comprehensive introduction see <ulink
+        url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for
         beginners</ulink> on the OmegaT web site. If you need assistance with
-        any aspect of OmegaT, feel free to join the <ulink url="https://omegat.org/support">OmegaT user group.</ulink></para>
+        any aspect of OmegaT, feel free to join the <ulink
+        url="https://omegat.org/support">OmegaT user group.</ulink></para>
       </listitem>
     </itemizedlist>
   </section>

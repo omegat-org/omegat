@@ -22,7 +22,9 @@
     <varlistentry id="menus.edit.undo.last.action">
       <term id="menus.edit.undo.last.action.title">Undo Last Action <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
-        <para>Restores the status before the last edit made in the current segment. This command cannot restore that status after the user moves to a different segment.</para>
+        <para>Restores the status before the last edit made in the current
+        segment. This command cannot restore that status after the user moves to
+        a different segment.</para>
       </listitem>
     </varlistentry>
 

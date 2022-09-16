@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE chapter PUBLIC '-//OASIS//DTD DocBook XML V4.5//EN' 'http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd'>
 <chapter id="project.folder">
   <title id="project.folder.title">Project Folder</title>
   <para>An OmegaT project consists of a set of folders and files that contain the resources used for translating.</para>
@@ -157,7 +157,7 @@
         <term id="project.folder.omegat.ignored.words.title">ignored_words.txt and</term>
         <term id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>
-          <para>These files are created and used by the spellchecker. You can also create them by right clicking on a word marked as incorrect and selecting Ignore All (for words to skip during spellchecking), or Add to Dictionary (for words to accept as correct), respectively,  from the context menu. If you already have a collection of words you want the spellchecker to ignore or accept, simply save them in text files with the corresponding names, and copy those files to the <filename class="directory">omegat</filename> subfolder of your current project.</para>
+          <para>These files are created and used by the spellchecker. You can also create them by right clicking on a word marked as incorrect and selecting Ignore All (for words to skip during spellchecking), or Add to Dictionary (for words to accept as correct), respectively,  from the context menu. If you already have a collection of words you want the spellchecker to ignore or accept, simply save them in text files with the corresponding names, and copy those files to the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> subfolder of your current project.</para>
         </listitem>
       </varlistentry>
 

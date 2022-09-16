@@ -3,159 +3,86 @@
 <section id="how.to.reuse.tm">
   <title id="how.to.reuse.tm.title">Reuse Translation Memories</title>
 
-  <para>Initially, that is when the project is created, the main TM of the
-  project, <filename>project_save.tmx</filename> is empty. This TM gradually
-  becomes filled during the translation. To speed up this process, existing
-  translations can be reused. If a given sentence has already been translated
-  once, and translated correctly, there is no need for it to be retranslated.
-  Translation memories may also contain reference translations: multinational
-  legislation, such as that of the European Community, is a typical
-  example.</para>
+  <para>When a project is initially created, its main translation memory,  the <filename>project_save.tmx</filename> file, is empty. It is gradually filled as your translation progresses. You can reuse existing translations to speed up this process. If a given sentence has already been translated once—correctly, of course— there is no need to retranslate it . Translation memories may also contain reference translations. Multinational legislation, such as that of the European Community, is a typical example.</para>
 
-  <para>When you create the target documents in an
-  OmegaT project, the translation memory of the
-  project is output in the form of three files in the root folder of your
-  OmegaT project (see the above description). You
-  can regard these three tmx files (<filename>-omegat.tmx</filename>,
-  <filename>-level1.tmx</filename> and <filename>-level2.tmx</filename>) as an
-  &quot;export translation memory&quot;, i.e. as an export of your current project's
-  content in bilingual form.</para>
+  <para>When you create the target documents for a project, OmegaT also outputs three translation memories for the current files in the source folder in the root folder of your OmegaT project (see <link linkend="project.folder" endterm="project.folder.title"/>). Those three files are named after the project followed by  <filename>-level1.tmx</filename>,  <filename>-level2.tmx</filename>, and <filename>-omegat.tmx</filename>. You can think of these three tmx files as export translation memories. Put another way, they constitute a bilingual export of the current content of your project.</para>
 
-  <para>Should you wish to reuse a translation memory from a previous project
-  (for example because the new project is similar to the previous project, or
-  uses terminology which might have been used before), you can use these
-  translation memories as &quot;input translation memories&quot;, i.e. for import into
-  your new project. In this case, place the translation memories you wish to
-  use in the <filename class="directory">/tm</filename> or <filename class="directory">tm/auto</filename> folder
-  of your new project: in the former case you will get hits from these
-  translation memories in the fuzzy matches viewer, and in the latter case
-  these TMs will be used to pre-translate your source text.</para>
+  <para>If you want to reuse a translation memory from a previous project (because the new project is similar to the previous one, or might use terminology you have used in the past), you can also import those translation memories in your new project as input translation memories. To do so, place the translation memories you wish to use in the <filename class="directory">/tm</filename> or <filename class="directory">tm/auto</filename> subfolders of your new project. Hits from translation memories in the  former are shown in the fuzzy matches viewer, while hits from translation memories in the latter are used to automatically pretranslate segments in your source text that are identical to those in the translation memories.</para>
 
-  <para>By default, the <filename class="directory">tm</filename> folder is below the project's root folder (e.g.
-  ...<filename class="directory">MyProject/tm</filename>), but you can choose a different
-  folder in the project properties dialog if you wish. This is useful if you
-  frequently use translation memories produced in the past, for example
-  because they are on the same subject or for the same customer. In this case,
-  a useful procedure would be:</para>
+  <para>The <filename class="directory">tm</filename> subfolder is created under the project folder by default (e.g. ...<filename class="directory">MyProject/tm</filename>), but you can choose a different folder in the project properties dialog. This is useful if you frequently use past translation memories for projects on the same topic or for the same customer. The basic procedure is outlined below.</para>
 
   <itemizedlist>
     <listitem>
-      <para>Create a folder (a &quot;repository folder&quot;) in a convenient location
-      on your hard drive for the translation memories for a particular
-      customer or subject.</para>
+      <para>Create a folder (acting as a central repository) to hold translation memories for a particular subject or customer in a convenient location on your system.</para>
     </listitem>
   </itemizedlist>
 
   <itemizedlist>
     <listitem>
-      <para>Whenever you finish a project, copy one of the three &quot;export&quot;
-      translation memory files from the root folder of the project to the
-      repository folder.</para>
+      <para>Every time you complete a project, copy one of the three export translation memory files from the root folder of the project to your central repository.</para>
     </listitem>
   </itemizedlist>
 
   <itemizedlist>
     <listitem>
-      <para>When you begin a new project on the same subject or for the same
-      customer, navigate to the repository folder in the <guimenuitem>Project
-      &gt; Properties &gt; Edit Project dialog</guimenuitem> and select it as
-      the translation memory folder.</para>
+      <para>When you start a new project on that subject, or for that customer, use the <guibutton>Browse</guibutton> button of the <guilabel>Translation Memory Folder</guilabel> setting in the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> dialog to select your repository folder and designate it as the translation memory folder.</para>
     </listitem>
   </itemizedlist>
 
-  <para>Note that all the tmx files in the /tm repository are parsed when the
-  project is opened, so putting all different TMs you may have on hand into
-  this folder may unnecessarily slow OmegaT down. You may even consider
-  removing those that are not required any more, once you have used their
-  contents to fill up the <filename>project-save.tmx</filename> file.</para>
+  <note>
+    <para>Since all TMX files in the /tm folder are parsed when the project is opened, putting each and every translation memory you have at hand into your central folder could slow OmegaT down unnecessarily. Conversely, it might be a good idea to remove files that are no longer needed after you have used them to fill the <filename>project-save.tmx</filename> file.</para>
+  </note>
 
   <section id="how.to.reuse.tm.importing.and.exporting">
     <title id="how.to.reuse.tm.importing.and.exporting.title">Importing and exporting translation memories</title>
 
-    <para>OmegaT supports imported tmx versions 1.1-1.4b (both level 1 and
-    level 2). This enables the translation memories produced by other tools to
-    be read by OmegaT. However, OmegaT does not fully support imported level 2
-    tmx files (these store not only the translation, but also the formatting).
-    Level 2 tmx files will still be imported and their textual content can be
-    seen in OmegaT, but the quality of fuzzy matches will be somewhat
-    lower.</para>
+    <para>OmegaT can import both levels1 and 2 of TMX versions 1.1 to 1.4b, enabling it to read translation memories produced by other tools. However, level 2 TMX files (which store formatting information along with the text) are not fully supported. OmegaT will still read them and display their textual content, but the quality of fuzzy matches will be somewhat lower.</para>
 
-    <para>OmegaT follows very strict procedures when loading translation
-    memory (tmx) files. If an error is found in such a file, OmegaT will
-    indicate the position within the defective file at which the error is
-    located.</para>
+    <para>OmegaT follows very strict validation procedures for loading translation memory files. If an error is found in a file, OmegaT will indicate the line number of that error within the defective file.</para>
 
-    <para>Some tools are known to produce invalid tmx files under certain
-    conditions. If you wish to use such files as reference translations in
-    OmegaT, they must be repaired, or OmegaT will report an error and fail to
-    load them. Fixes are trivial operations and OmegaT assists troubleshooting
-    with the related error message. You can ask the user group for advice if
-    you have problems.</para>
+    <para>Some tools produce invalid TMX files under certain conditions. You will have to fix them if you want to use them as reference memories, otherwise OmegaT will report an error and fail to load them. Fixes are generally simple, and the error message provided by OmegaT will help you pinpoint the error. You can also ask the user group for advice if you have problems.</para>
 
-    <para>OmegaT exports version 1.4 TMX files (both level 1 and level 2). The
-    level 2 export is not fully compliant with the level 2 standard, but is
-    sufficiently close and will generate correct matches in other translation
-    memory tools supporting TMX Level 2. If you only need textual information
-    (and not formatting information), use the level 1 file that OmegaT has
-    created.</para>
+    <para>OmegaT exports both level 1 and level 2 version 1.4 TMX files. Although the level 2 export is not fully compliant with the standard, it is sufficiently close, and will generate correct matches in other translation memory tools that supporting such files. If you only need textual information (without formatting information), use the level 1 file produced by OmegaT.</para>
   </section>
 
   <section id="how.to.reuse.tm.creating.a.tm.for.selected.documents">
-    <title id="how.to.reuse.tm.creating.a.tm.for.selected.documents.title">Creating a translation memory for selected documents</title>
+    <title id="how.to.reuse.tm.creating.a.tm.for.selected.documents.title">Creating a translation memory specific to selected documents</title>
 
-    <para>In case translators need to share their TMX bases while excluding
-    some of their parts or including just translations of certain files,
-    sharing the complete <filename>ProjectName-omegat.tmx</filename> is out of
-    question. The following recipe is just one of the possibilities, but
-    simple enough to follow and without any dangers for the assets.</para>
+    <para>In situations where a translator needs to share a TMX that contain only the text from certain specific files and excludes other content, sharing the complete <filename>ProjectName-omegat.tmx</filename> is not possible. The following procedure presents one way of doing so that is simple to follow and does endanger any of the resources in the project.</para>
 
     <itemizedlist>
       <listitem>
-        <para>Create a project, separate for other projects, in the desired
-        language pair, with an appropriate name - note that the TMXs created
-        will include this name.</para>
+        <para>Create a new completely separate project in the desired language pair and give it an appropriate name. Remember that by default, the generated TMX files will include that name.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Copy the documents, you need the translation memory for, into
-        the <filename class="directory">source</filename> folder of the project.</para>
+        <para>Copy the documents for which you want to create a translation memory into the <filename class="directory">source</filename> folder of this new project.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Copy the translation memories, containing the translations of
-        the documents above, into <filename class="directory">tm/auto</filename> subfolder of
-        the new project.</para>
+        <para>Copy the translation memories with the translations those documents above into <filename class="directory">tm/auto</filename> subfolder of the new project.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Start the project. Check for possible Tag errors with
-        <keycombo><keycap>Ctrl</keycap><keycap>T</keycap></keycombo> and untranslated segments with
-        <keycombo><keycap>Ctrl</keycap><keycap>U</keycap></keycombo>. To check everything is as expected, you may
-        press <keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo> to create the target documents and check
-        their contents.</para>
+        <para>Open the project. Use <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>  to check for possible tag errors, and <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo> to find any untranslated segments. Finally,  press <keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo> to create the TMX files for export along with the target documents. You can also check the contents of the latter to make sure everything worked as expected.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>When you exit the project. the TMX files in the main project
-        folder (see above) now contain the translations in the selected
-        language pair, for the files, you have copied into the source folder.
-        Copy them to a safe place for future referrals.</para>
+        <para>The TMX files in the main project folder (see above) now contain only the original and translated text, in the selected language pair, of the files you copied into the source folder. Copy them to a safe place for future reference.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>To avoid reusing the project and thus possibly polluting future
-        cases, delete the project folder or archive it away from your
-        workplace.</para>
+        <para>Delete the project folder,  or archive it outside your main working folder, to avoid accidentally reusing that project and possibly polluting future TMX files.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -163,38 +90,18 @@
   <section id="how.to.reuse.tm.sharing.translation.memories">
     <title id="how.to.reuse.tm.sharing.translation.memories.title">Sharing translation memories</title>
 
-    <para>In cases where a team of translators is involved, translators will
-    prefer to share common translation memories rather than distribute their
-    local versions.</para>
+    <para>For large jobs involving a team of translators, it is easier for everyone involved to share common translation memories rather than pass local versions back and forth.</para>
 
-    <para>OmegaT interfaces to SVN and Git, two common team software
-    versioning and revision control systems (RCS), available under an open
-    source license. In case of OmegaT complete project folders - in other
-    words the translation memories involved as well as source folders, project
-    settings etc - are managed by the selected RCS. see more in Chapter</para>
+    <para>OmegaT is capable of interfacing with SVN and Git, two common version control systems (VCS) that are offered under an open source license. The chosen VCS manages the entire OmegaT project folder—which means the translations memories it includes, as well as the source and other subfolders, project settings, and so on. Refer to the <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> and <link linkend="how.to.use.team.project" endterm="how.to.use.team.project.title"/> sections of this chapter for more information.</para>
   </section>
 
   <section id="how.to.reuse.tm.using.tmx.with.alternative.languages">
-    <title id="how.to.reuse.tm.using.tmx.with.alternative.languages.title">Using TMX with alternative language</title>
+    <title id="how.to.reuse.tm.using.tmx.with.alternative.languages.title">Using TMX with an alternative language</title>
 
-    <para>There may be cases where you have done a project with e.g. Dutch
-    sources, and a translation in say English. Then you need a translation in
-    e.g. Chinese, but your translator does not understand Dutch; she, however,
-    understands perfectly English. In this case, the NL-EN translation memory
-    can serve as a go-between to help generate NL to ZH translation.</para>
+    <para>Some projects may require the same source text to be translated in more than one language. For example, you may have translated a Dutch text to English. However, you also need a translation to Chinese, but you cannot find a Chinese translator who understands Dutch. You do, however, know one who understands English perfectly. In this case, you can use the NL-EN translation memory as a go-between to produce an NL to ZH translation.</para>
 
-    <para>The solution in our example is to copy the existing translation
-    memory into the <filename class="directory">tm/tmx2source/</filename> subfolder and rename it to ZH_CN.tmx to
-    indicate the target language of the tmx. The translator will be shown
-    English translations for source segments in Dutch and use them to create
-    the Chinese translation.</para>
+    <para>To do so, create a subfolder called <filename class="directory">tmx2source</filename> in the <filename class="directory">tm</filename>  subfolder, copy your NL-EN translation memory file to the newly created <filename class="directory">tm/tmx2source/</filename> subfolder, and rename it <filename>ZH_CN.tmx</filename> to indicate the target language of the tmx. The translator will be see the English translation under the Dutch source segments, and use it to create the Chinese translation.</para>
 
-    <para><emphasis role="bold">Important: </emphasis>the supporting TMX must
-    be renamed XX_YY.tmx, where XX_YY is the target language of the tmx, for
-    instance to ZH_CN.tmx in the example above. The project and TMX source
-    languages should of course be identical - NL in our example. Note that
-    only one TMX for a given language pair is possible, so if several
-    translation memories should be involved, you will need to merge them all
-    into the XX_YY.tmx.</para>
+    <para><emphasis role="bold">Important: </emphasis>the intermediate TMX must be renamed <filename>XX_YY.tmx</filename>, where <emphasis>XX_YY</emphasis> represents the target language for that translation memory (<filename>ZH_CN.tmx</filename>in the above example). The source languages of the project and TMX file should, of course, be identical (NL in this example). Note that only one TMX file can be used for any given language pair. If  you need to use several translation memories in that pair, you will have to merge them all into a single <filename>XX_YY.tmx</filename> file.</para>
   </section>
 </section>

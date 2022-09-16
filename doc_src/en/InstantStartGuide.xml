@@ -39,24 +39,24 @@
 	</variablelist>
   </section>
 
-    <section id="introduction.note.on.shortcuts">
+  <section id="introduction.note.on.shortcuts">
 	<title id="introduction.note.on.shortcuts.title">A note on key shortcuts in this manual</title>
-	  <para>To avoid duplication of shortcut description, we have adopted the
-	  following notation in this manual: <example
-	  id="example.introduction.note.on.shortcuts"><title
-	  id="example.introduction.note.on.shortcuts.title">Single letters are used
-	  as a common name for modifiers.</title>
-  		<para>In this manual:
-		  <keycombo><keycap>C</keycap><keycap>E</keycap></keycombo>
-		</para>
-		<para>On Windows and Linux:
-		  <keycombo><keycap>Control</keycap><keycap>E</keycap></keycombo>
-		</para>
-		<para>On macOS:
-		  <keycombo><keycap>Command</keycap><keycap>E</keycap></keycombo>
-		</para>
-  </example></para>
-  <para>See <link linkend="menus" endterm="menus.title"/> and <link linkend="appendix.shortcut.description" endterm="appendix.shortcut.description.title"/> for details.</para>
+	<para>To avoid duplication of shortcut description, we have adopted the
+	following notation in this manual: <example
+	id="example.introduction.note.on.shortcuts"><title
+	id="example.introduction.note.on.shortcuts.title">Single letters are used
+	as a common name for modifiers.</title>
+  	<para>In this manual:
+	<keycombo><keycap>C</keycap><keycap>E</keycap></keycombo>
+	</para>
+	<para>On Windows and Linux:
+	<keycombo><keycap>Control</keycap><keycap>E</keycap></keycombo>
+	</para>
+	<para>On macOS:
+	<keycombo><keycap>Command</keycap><keycap>E</keycap></keycombo>
+	</para>
+	</example></para>
+	<para>See <link linkend="menus" endterm="menus.title"/> and <link linkend="appendix.shortcut.description" endterm="appendix.shortcut.description.title"/> for details.</para>
   </section>
 
   <section id="introduction.create.and.open.new.project">
@@ -133,11 +133,11 @@
     untranslated segment. Once you leave the segment, its translation is
     automatically stored into the project translation memory located in the
     <link linkend="project.folder.omegat"
-    endterm="project.folder.omegat.title"/> folder of the project and will be
+		  endterm="project.folder.omegat.title"/> folder of the project and will be
     used as reference for the rest of your translation. You can manually
     register glossary items that you want to later use in the translation with
     <link linkend="menus.edit.create.glossary.entry"
-    endterm="menus.edit.create.glossary.entry.title"/>.</para>
+		  endterm="menus.edit.create.glossary.entry.title"/>.</para>
 
 	<para>See the <link linkend="menus.goto" endterm="menus.goto.title"/> menu
 	for more navigation options.</para>
@@ -177,9 +177,9 @@
 	translate, and go back to annotated segments with <link
 	linkend="menus.goto.next.note" endterm="menus.goto.next.note.title"/> or
 	<link linkend="menus.goto.previous.note"
-	endterm="menus.goto.previous.note.title"/> in the <link linkend="menus.goto"
-	endterm="menus.goto.title"/> menu, or from the <link
-	linkend="windows.text.search" endterm="windows.text.search.title"/>
+		  endterm="menus.goto.previous.note.title"/> in the <link linkend="menus.goto"
+		  endterm="menus.goto.title"/> menu, or from the <link
+		  linkend="windows.text.search" endterm="windows.text.search.title"/>
 	window.</para>
 
 	<para>The various panes give easy access to some frequently used function
@@ -188,7 +188,7 @@
 	menu is also available in the Editor pane. See <link
 	linkend="panes.editor.auto.completion.menu"
 	endterm="panes.editor.auto.completion.menu.title"/> for details.</para>
-	  </section>
+  </section>
 
   <section id="introduction.manage.your.tags">
     <title id="introduction.manage.your.tags.title">Manage your tags</title>
@@ -224,9 +224,9 @@
     protected to prevent you from modifying their contents, but you can delete
     them, enter them by hand or move them around in the target sentence. See
     <link linkend="menus.edit.insert.missing.source.tag"
-    endterm="menus.edit.insert.missing.source.tag.title"/> and <link
-    linkend="menus.edit.insert.next.missing.tag"
-    endterm="menus.edit.insert.next.missing.tag.title"/> for details.</para>
+		  endterm="menus.edit.insert.missing.source.tag.title"/> and <link
+		  linkend="menus.edit.insert.next.missing.tag"
+		  endterm="menus.edit.insert.next.missing.tag.title"/> for details.</para>
 
 	<para>You can define custom tags that will be managed in the same
 	manner. See <link
@@ -331,24 +331,40 @@
       </listitem>
 
       <listitem>
-        <para>Every time you create the translated files (see <link linkend="introduction.generate.the.translated.file" endterm="introduction.generate.the.translated.file.title"/>, above),
+        <para>Every time you create the translated files (see <link
+        linkend="introduction.generate.the.translated.file"
+        endterm="introduction.generate.the.translated.file.title"/>, above),
         OmegaT creates three translation memories that contain the state of the
-        translation of the files currently in the <link linkend="project.folder.source" endterm="project.folder.source.title"/>
+        translation of the files currently in the <link
+        linkend="project.folder.source" endterm="project.folder.source.title"/>
         folder.</para>
 
-		<para>The three files are located inside the <link linkend="project.folder" endterm="project.folder.title"/> folder and are called <filename>(project name)-level1.tmx</filename>, <filename>(project name)-level2.tmx</filename> and <filename>(project name)-omegat.tmx</filename>. They can be used as reference translation memories in other projects.</para>
+		<para>The three files are located inside the <link
+		linkend="project.folder" endterm="project.folder.title"/> folder and are
+		called <filename>(project name)-level1.tmx</filename>,
+		<filename>(project name)-level2.tmx</filename> and <filename>(project
+		name)-omegat.tmx</filename>. They can be used as reference translation
+		memories in other projects.</para>
 
 		<para>The <filename>level1</filename> and <filename>level2</filename>
-		suffixes refer to the TMX standard (see <ulink url="https://www.gala-global.org/tmx-14b">TMX 1.4b
-		Specification</ulink>). You can share these files with users of other translation programs.</para>
+		suffixes refer to the TMX standard (see <ulink
+		url="https://www.gala-global.org/tmx-14b">TMX 1.4b
+		Specification</ulink>). You can share these files with users of other
+		translation programs.</para>
 
-		<para>You can use the file with the <filename>omegat</filename> suffix in other (current or future) OmegaT translation projects as a reference translation memory simply by copying it to the <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder or a new project.</para>
+		<para>You can use the file with the <filename>omegat</filename> suffix
+		in other (current or future) OmegaT translation projects as a reference
+		translation memory simply by copying it to the <link
+		linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder
+		or a new project.</para>
       </listitem>
 
       <listitem>
-        <para>For a more comprehensive introduction see <ulink url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for
+        <para>For a more comprehensive introduction see <ulink
+        url="https://omegat.org/files/OmegaT_for_Beginners.pdf">OmegaT for
         beginners</ulink> on the OmegaT web site. If you need assistance with
-        any aspect of OmegaT, feel free to join the <ulink url="https://omegat.org/support">OmegaT user group.</ulink></para>
+        any aspect of OmegaT, feel free to join the <ulink
+        url="https://omegat.org/support">OmegaT user group.</ulink></para>
       </listitem>
     </itemizedlist>
   </section>

@@ -22,7 +22,7 @@
     <para>OmegaT runs on any platform that runs a Java Runtime Environment
     (Windows, macOS, Linux being the most mainstream). The modifier keys that
     compose the shortcuts vary slightly depending on the platform. To make
-    reading easier we have adopted the following presentation for modifier keyx:
+    reading easier we have adopted the following presentation for modifier keys:
 	<table id="shortcut.description">
       <title id="shortcut.description.title">Modifier key description</title>
 
@@ -62,27 +62,27 @@
           </row>
         </tbody>
       </tgroup>
-      </table> The modifier keys are always in <emphasis>upper case</emphasis> characters. The
-    modified keys are always in <emphasis>lower case</emphasis> characters.</para>
+      </table></para>
+      
+      <para>We can thus use only the <emphasis role="bold">Key description</emphasis> codes above to avoid repeating multiple notations.</para>
 
-    <para>For example, the shortcut that corresponds to the function <link
-    endterm="menus.project.open" linkend="menus.project.open"/> (under the <link
-    linkend="menus.project" endterm="menus.project.title"/> menu) is displayed
-    as <keycap>Ctrl-O</keycap> in Linux and Windows and as <keycap>⌘ O</keycap>
-    in macOS.</para>
-
-    <para>To avoid repeating the two notations in this manual, we use
-	<keycombo><keycap>C</keycap><keycap>o</keycap></keycombo>.</para>
-
-    <para>We chose this description method so that <keycap>C</keycap> always
-    means the <keycap>Control</keycap> key to Linux and Windows users and the
-    <keycap>Command</keycap> / <keycap>⌘</keycap> key to macOS
-    users.</para>
-
-    <para>macOS shortcuts use <keycap>Command</keycap> / <keycap>⌘</keycap>
-    where Linux/Windows shortcuts use <keycap>Control</keycap>. In the few cases
-    where macOS shortcuts do use the <keycap>Control</keycap> key, we will use
-    <keycap>Ctrl</keycap> to describe the macOS specific use of that key.</para>
+          <example><title id="example.next.untranslated.segment.title">How we avoid repeating multiple notations:</title>
+		<para>On Windows and Linux:
+		  <keycombo>
+			<keycap>Shift</keycap><keycap>Control</keycap><keycap>N</keycap>
+		  </keycombo>
+		</para>
+		<para>On macOS:
+		  <keycombo>
+			<keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap>
+		  </keycombo>
+		</para>
+  		<para>In this manual:
+		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>N</keycap>
+		  </keycombo>
+		</para>
+		</example>
   </section>
 
   <section id="appendix.shortcut.customization">

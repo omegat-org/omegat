@@ -9,7 +9,7 @@
     <example><title id="example.next.untranslated.segment.title">Next Untranslated Segment</title>
   		<para>In this manual:
 		  <keycombo>
-			<keycap>C</keycap><keycap>u</keycap>
+			<keycap>C</keycap><keycap>U</keycap>
 		  </keycombo>
 		</para>
 		<para>On Windows and Linux:
@@ -27,51 +27,45 @@
 
   <variablelist>
     <varlistentry id="menus.goto.next.untranslated.segment">
-      <term id="menus.goto.next.untranslated.segment.title">Next Untranslated Segment</term>
+      <term id="menus.goto.next.untranslated.segment.title">Next Untranslated Segment		  <keycombo>
+			<keycap>C</keycap><keycap>U</keycap>
+		  </keycombo>
+</term>
 
       <listitem>
         <para>Moves to the next segment with no target language entry in the
         translation memory.</para>
-		<para>
-		  <keycombo>
-			<keycap>C</keycap><keycap>u</keycap>
-		  </keycombo>
-		</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.next.translated.segment">
-      <term id="menus.goto.next.translated.segment.title">Next Translated Segment</term>
+      <term id="menus.goto.next.translated.segment.title">Next Translated Segment		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>U</keycap>
+		  </keycombo>
+</term>
 
       <listitem>
         <para>Moves to the next already translated segment, ignoring
         untranslated segments.</para>
-		<para>
-		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>u</keycap>
-		  </keycombo>
-		</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.next.segment">
-      <term id="menus.goto.next.segment.title">Next Segment</term>
+      <term id="menus.goto.next.segment.title">Next Segment		  <keycombo>
+			<keycap>C</keycap><keycap>N</keycap>
+		  </keycombo>
+</term>
 
       <listitem>
         <para>Moves to the next segment, or to the first segment of the next
         file if the current segment is the last one in the file.</para>
 		<para>
 		  <keycombo>
-			<keycap>C</keycap><keycap>n</keycap>
-		  </keycombo>
-		</para>
-		<para>
-		  <keycombo>
 			<keycap>Enter</keycap>
 		  </keycombo>
 		</para>
 
-        <note><para><keycap>TAB</keycap> replaces <keycap>Enter</keycap> as an
+        <note><para><keycap>TAB</keycap> can be used as an
         alternate shortcut if the <link
         linkend="dialogs.preferences.general.use.tab.to.advance">Use TAB to
         Advance</link> option is selected.</para>
@@ -97,8 +91,7 @@
 		</para>
 
         <note><para><keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo>
-        replaces <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo>
-        as an alternate shortcut if <link
+        can be used as an alternate shortcut if <link
         linkend="dialogs.preferences.general.use.tab.to.advance">Use TAB to
         Advance</link> option is selected.</para>
 		<para>This is useful for character entry systems that use
@@ -107,83 +100,69 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.segment.number">
-      <term id="menus.goto.segment.number.title">Segment number...</term>
+      <term id="menus.goto.segment.number.title">Segment number...		  <keycombo>
+			<keycap>C</keycap><keycap>J</keycap>
+		  </keycombo>
+</term>
       <listitem>
         <para>Jumps to the segment whose call-out or number is entered.</para>
-		<para>
-		  <keycombo>
-			<keycap>C</keycap><keycap>j</keycap>
-		  </keycombo>
-		</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.next.note">
       <term id="menus.goto.next.note.title">Next Note</term>
       <listitem>
-        <para>Moves to the next segment with a note.</para>
-		<para><emphasis>No default key shortcut</emphasis></para>
-      </listitem>
+        <para>Moves to the next segment with a note.</para>      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.previous.note">
       <term id="menus.goto.previous.note.title">Previous Note</term>
       <listitem>
-        <para>Moves to the previous segment with a note.</para>
-		<para><emphasis>No default key shortcut</emphasis></para>
-      </listitem>
+        <para>Moves to the previous segment with a note.</para>      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.next.unique.segment">
-      <term id="menus.goto.next.unique.segment.title">Next Unique Segment</term>
+      <term id="menus.goto.next.unique.segment.title">Next Unique Segment		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>Q</keycap>
+		  </keycombo>
+</term>
       <listitem>
         <para>Moves to the next unique segment.</para>
-		<para>
-		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>q</keycap>
-		  </keycombo>
-		</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.source.of.selected.match">
-      <term id="menus.goto.source.of.selected.match.title">Source of Selected Match</term>
+      <term id="menus.goto.source.of.selected.match.title">Source of Selected Match		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>M</keycap>
+		  </keycombo>
+</term>
       <listitem>
         <para>Moves to the segment that corresponds to the currently
         selected match in the <guilabel>Fuzzy matches</guilabel> pane.</para>
-		<para>
-		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>m</keycap>
-		  </keycombo>
-		</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.forward.in.history">
-      <term id="menus.goto.forward.in.history.title">Forward in history...</term>
+      <term id="menus.goto.forward.in.history.title">Forward in history...		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>N</keycap>
+		  </keycombo>
+</term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>
         <para>This command allows you to move forward one segment at a time to segments that you have previously visited with <link
 		linkend="menus.goto.back.in.history"
 		endterm="menus.goto.back.in.history.title"/>.</para>
-		<para>
-		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>n</keycap>
-		  </keycombo>
-		</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.back.in.history">
-      <term id="menus.goto.back.in.history.title">Back in history...</term>
+      <term id="menus.goto.back.in.history.title">Back in history...		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>P</keycap>
+		  </keycombo>
+</term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>
         <para>This command allows you to move backward one segment at a time to segments that you have previously visited.</para>
-		<para>
-		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>p</keycap>
-		  </keycombo>
-		</para>
       </listitem>
     </varlistentry>
   </variablelist>

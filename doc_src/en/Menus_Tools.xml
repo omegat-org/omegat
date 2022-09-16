@@ -7,7 +7,7 @@
 	<para>Key shortcut description reminder: <link linkend="appendix.shortcut" endterm="shortcut.description"/></para>
 	<example><title id="example.check.issues.title">Check Issues...</title>
 	<para>In this manual:
-	<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>v</keycap></keycombo>
+	<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>V</keycap></keycombo>
 	</para>
 	<para>On Windows and Linux:
 	<keycombo>
@@ -24,15 +24,13 @@
 
   <variablelist>
     <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title">Check Issues...</term>
+      <term id="menus.tools.check.issues.title">Check Issues...		  <keycombo>
+			<keycap>S</keycap><keycap>C</keycap><keycap>V</keycap>
+		  </keycombo>
+</term>
       <listitem>
         <para>This quality assurance tool carries out all automatic checks in
         one go and displays the results in a window.</para>
-		<para>
-		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>v</keycap>
-		  </keycombo>
-		</para>
         <para>Four types of issues can be detected:</para>
         <itemizedlist>
           <listitem>

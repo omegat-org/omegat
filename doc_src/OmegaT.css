@@ -175,10 +175,15 @@ code.filename {
     font-weight: bold;
 }
 
-dt span.keycap:nth-last-child(1), div.example-contents span.keycap:nth-last-child(1) {
+span.keycap:last-of-type {
     color: white;
     background-color: LightSeaGreen;
     font-weight: bold;
+}
+
+table span.keycap:last-of-type {
+    background-color: gainsboro;
+    color: black;
 }
 
 code,

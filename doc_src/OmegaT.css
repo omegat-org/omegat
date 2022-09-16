@@ -177,7 +177,7 @@ code.filename {
 
 dt span.keycap:nth-last-child(1), div.example-contents span.keycap:nth-last-child(1) {
     color: white;
-    background-color: teal;
+    background-color: LightSeaGreen;
     font-weight: bold;
 }
 

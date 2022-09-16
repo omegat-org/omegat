@@ -33,7 +33,8 @@
 </term>
       <listitem>
         <para>Restores the status before the last editing action was
-        cancelledentire This command cannot restore that status after the user moves to a different segment.</para>
+        cancelled. This command cannot restore that status after the user
+        moves to a different segment.</para>
       </listitem>
     </varlistentry>
 

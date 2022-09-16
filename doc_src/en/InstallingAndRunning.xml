@@ -11,11 +11,12 @@
 
   <para>OmegaT packages are available both in versions bundled with Java, and
   versions without it. Packages without Java rely on your having a
-  &javaversionlong; installed system-wide.</para>
+  &javaversionlong; installed system-wide. OmegaT 5.8.0 and later also support
+  Java 11 Runtime Environment on any platforms.</para>
 
   <para>Due to licencing considerations, the OmegaT team recommends the Java
-  runtime provided by the &preferedopenjdk;, but any Java 8 compatible runtime
-  environment should work.</para>
+  runtime Eclipse Temurin provided by the &preferedopenjdk;, but any Java 8
+  compatible runtime environment should work.</para>
 
   <para>OmegaT comes in two editions:</para>
 
@@ -162,7 +163,7 @@
             <filename>linux-install.sh</filename> script found there.</para>
 
             <programlisting>$ cd OmegaT_&vernb;_<parameter>&lt;package_you_downloaded&gt;</parameter>
-$ ./linux-install</programlisting>
+$ ./linux-install.sh</programlisting>
 
             <para>Running the script will require you to enter your
             <filename>sudo</filename> password.</para>
@@ -170,7 +171,7 @@ $ ./linux-install</programlisting>
             <para>The script checks for an existing installation of the same
             OmegaT version in <filename>/opt/omegat/</filename>. If there
             isn't one, it installs the program in
-            <filename>/opt/omegat/OmegaT-&vernb;</filename> and sets it as the
+            <filename>/opt/omegat/OmegaT_&vernb;</filename> and sets it as the
             default version (in
             <filename>/opt/omegat/OmegaT-default</filename>). The installation
             script is available <ulink
@@ -222,7 +223,7 @@ $ ./linux-install</programlisting>
               script. Alternatively can also choose the
               <filename>omegat</filename> file in
               <filename><literal>opt/omegat/OmegaT-default</literal></filename>
-              or in <filename>opt/omegat/OmegaT-&vernb;)</filename>. Click
+              or in <filename>opt/omegat/OmegaT_&vernb;)</filename>. Click
               <emphasis role="bold">OK</emphasis> to confirm.</para>
             </listitem>
 
@@ -264,14 +265,14 @@ $ ./linux-install</programlisting>
               script. Alternatively can also choose the
               <filename>omegat</filename> file in
               <filename><literal>opt/omegat/OmegaT-default</literal></filename>
-              or in <filename>opt/omegat/OmegaT-&vernb;)</filename>. Click
+              or in <filename>opt/omegat/OmegaT_&vernb;)</filename>. Click
               <emphasis role="bold">OK</emphasis> to confirm.</para>
             </listitem>
 
             <listitem>
               <para>Click on the icon button, then hit
               <guilabel>Browse...</guilabel> and navigate to the
-              <filename>images</filename> subfolder in the OmegaT application
+              <filename>images</filename> sub-folder in the OmegaT application
               folder. Select the <filename>OmegaT.png</filename> icon. GNOME
               may fail to display the icon files in the available formats and
               initially appear to expect an SVG file, but if the folder is

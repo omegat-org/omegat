@@ -185,7 +185,10 @@
         <term id="dialogs.preferences.dictionary.use.condensed.view.title">Use condensed view</term>
 
         <listitem>
-          <para>Select this option if you want a more condensed presentation of the contents.</para>
+          <para>Select this option if you want a more condensed presentation
+          of the contents. Not all dictionary driver supports condensed view.
+          Some dictionary driver provided as plugins may show fluent
+          description even when select the option. </para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -199,7 +202,11 @@
         <term id="dialogs.preferences.appearance.theme.title">Theme</term>
 
         <listitem>
-          <para>You can select a theme for the OmegaT user interface. Additional themes can be added as plugins.</para>
+          <para>You can select a theme for the OmegaT user interface.
+          Additional themes can be added as plugins. The theme also provide
+          predefined set of default colours. OmegaT allow users to select Java
+          standard themes (Look-and-feel) but OmegaT does not give any
+          warranty for OmegaT operations and views against Java LaFs.</para>
         </listitem>
       </varlistentry>
 
@@ -429,7 +436,25 @@
 
       <itemizedlist>
         <listitem>
-          <para><guilabel>Segment source text into paragraphs on:</guilabel></para>
+          <para><emphasis role="bold">Options to set the line length in target
+          documents (0 = no limit)</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><guilabel>Segment source text into paragraphs
+          on:</guilabel></para>
+
+          <para>If sentence segmenting is active, the text will be segmented
+          further according to the option selected here.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">MozillaDTD</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><guilabel>Remove untranslated strings in the target
+          files:</guilabel></para>
 
           <para>If sentence segmenting is active, the text will be segmented further according to the option selected here.</para>
         </listitem>
@@ -439,7 +464,30 @@
 
       <itemizedlist>
         <listitem>
-          <para><guilabel>Allow blank translations in the target file</guilabel>:</para>
+          <para><emphasis role="bold">Allow translating blank source
+          segments</emphasis></para>
+
+          <para>PO files should not have black source segment other than
+          header block. Sometimes it exists with contexts information. When
+          check this option you can add a translation for such segment.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Format:</emphasis></para>
+
+          <itemizedlist>
+            <listitem>
+              <para>You can specify how to treat PO file: <emphasis
+              role="bold">Standard: </emphasis>handle as bilingual standard
+              file<emphasis role="bold">, Monolingual: </emphasis>use only
+              msgid as source segment </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+
+        <listitem>
+          <para><guilabel>Allow blank translations in the target
+          file</guilabel>:</para>
 
           <para>Selecting this option will result in an empty translation in the target file when a segment in a PO file (which may be a whole paragraph) is not translated. Technically speaking, the <emphasis>msgstr</emphasis> segment in the PO target file will be left empty if it is created. This option is selected by default as it constitutes standard behaviour for PO files. Turning off this option will copy the source to the target segment.</para>
         </listitem>
@@ -561,9 +609,48 @@
 
       <itemizedlist>
         <listitem>
-          <para>You can select which of the following items will be translated:</para>
+          <para>You can select which of the following items will be
+          translated:</para>
 
-          <para>Index entries, bookmarks, bookmark references, notes, comments, presentation notes, links (URL), and sheet names.</para>
+          <para>Index entries, bookmarks, bookmark references, notes,
+          comments, presentation notes, links (URL), and sheet names.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><emphasis role="bold">XLIFF</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Identifier used for alternative translations</emphasis></para>
+
+          <para>User can select from three options, Previous and next
+          paragraphs, &lt;trans unit&gt; ID, or, &lt;trans-unit&gt; resname
+          attribute when available, when unavailable, the ID will be used as a
+          fallback.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Specify state attribute handling
+          behavior</emphasis></para>
+
+          <para>if checked, OmegaT changes the state to
+          "needs-review-translation" instead of "translated"</para>
+        </listitem>
+      </itemizedlist>
+
+
+      <para><emphasis role="bold">Java Resource bundle</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>You can select a behavior when loading and saving java
+          resource bundle file</para>
+
+          <para><emphasis role="bold">Do not unescape Unicode literals
+          (\\uXXXX)</emphasis></para>
+
+          <para><emphasis role="bold">Remove untranslated strings in the
+          target files</emphasis></para>
         </listitem>
       </itemizedlist>
     </section>
@@ -963,16 +1050,19 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="dialogs.preferences.editor.save.orgin.of.translation">
-		  <term id="dialogs.preferences.editor.save.orgin.of.translation.title">[TODO]
-		  Save origin of translation</term>
+        <varlistentry id="dialogs.preferences.editor.save.orgin.of.translation">
+          <term
+          id="dialogs.preferences.editor.save.orgin.of.translation.title">Save
+          origin of translation</term>
 
 		  <!-- TODO Identifier et décrire le rôle de cette option. -->
 
-		  <listitem>
-			<para>Check this option to…</para>
-		  </listitem>
-		</varlistentry>
+          <listitem>
+            <para>Check this option to save origin of translation when
+            translator uses Machine Translation, OmegaT records the name what
+            engine translator uses.</para>
+          </listitem>
+        </varlistentry>
 
 		<varlistentry id="dialogs.preferences.editor.initially.load.this.many.segments">
 		  <term id="dialogs.preferences.editor.initially.load.this.many.segments.title">Initially

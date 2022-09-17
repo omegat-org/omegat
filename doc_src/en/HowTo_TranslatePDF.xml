@@ -1,88 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.translate.pdf">
-  <title id="how.to.translate.pdf.title">Translate a PDF file</title>
+  <title id="how.to.translate.pdf.title">Translate PDF files or files in formats not recognized by OmegaT</title>
 
-<para>PDF files are a special case. They contain text formatting
-  information, but such information cannot be reused by
-  OmegaT in order to create target files.
-  Thus, PDF files are handled as plain text files, and output files are
-  plain text files.</para>
-  <para>If you need to reproduce text formatting (as well as other
-  things such as drawings) in your translation, there are three ways
-  to try:</para>
+<para>Since the PDF format is designed for layout rather than handling text, translating PDF files a thorny issue. The text formatting information in such files cannot be used by OmegaT to create target files. Consequently, PDF files are handled as plain text files both for reading the source and creating the translation.</para>
+  <para>You have a few options if you need to reproduce the format (and other visual elements such as drawings) in the final translation.</para>
   <orderedlist>
     <listitem>
-      <para>Use <application>OmegaT’s</application> default filter
-      (PDF input), translate, create a target file (it will be a plain
-      text file), add relevant formatting and items manually.</para>
+      <para>Use the default <application>OmegaT</application>  PDF input filter to translate the document to a plain text file, and manually recreate the formatting after loading that text in a suitable application.</para>
     </listitem>
     <listitem>
       <para>Use the Iceni Infix filter.
       See <ulink url="https://omegat.org/howtos/iceni_infix.html">Howto - Translating PDF files with Iceni Infix and OmegaT</ulink>.</para>
     </listitem>
     <listitem>
-      <para>Import the source file to
-      <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>,
-      save it as an ODG file, translate, export to PDF as needed.</para>
+      <para>Import the source file in <ulink url="https://www.libreoffice.org/discover/draw/">LibreOffice Draw</ulink>, save it as an ODG file, translate it, and export the final version to PDF if necessary.</para>
+    </listitem>
+    <listitem>
+      <para>Convert the PDF to another suitable file format from Adobe Acrobat, if available, or using third-party tools. After the translation is complete, convert the final version to PDF.</para>
     </listitem>
   </orderedlist>
-  <para><emphasis role="bold">Note:</emphasis> the above information
-  applies only to PDF files with a text layer. If you have a PDF file
-  made of scanned pages (sometimes such files are referred to as ‘dead’
-  PDFs), you need to use an OCR (optical character recognition) program
-  to recognize the text and convert it to a format that can be handled
-  by OmegaT.</para>
+  <note>
+    <para>The above information assumes the PDF file contains a text layer. If you have a PDF file consisting of scanned pages (sometimes called a &quot;dead&quot; PDF), you will first have to need to use an optical character recognition (OCR) program to convert the pages into machine-readable text that can be handled by OmegaT.</para>
+  </note>
 
+  <section id="non-supported.file.formats">
+    <title id="non-supported.file.formats.title">Files in a formats not supported by OmegaT</title>
 
+    <para>You will have to convert files for which OmegaT does not have a <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title">filter</link> to a supported format to translate them in OmegaT.</para>
 
-  <section id="other.file.formats">
-    <title id="other.file.formats.title">Other file formats</title>
-
-    <para>Other plain text or formatted text file formats suitable for
-    processing in OmegaT may also exist.</para>
-
-    <para>External tools can be used to convert files to supported
-    formats. The translated files will then need to be converted back to the
-    original format. For example, if you have an outdated Microsoft Word
-    version, that does not handle the ODT format, here's a round trip for Word
-    files with the DOC extension:</para>
+    <para>The original application, or a third-party tool, can often perform such conversions. You will probably also have to convert the translated files back to the original format. For example, if you have received a document in the outdated Microsoft Word <filename>.doc</filename> format, which is not supported by OmegaT, you can follow the steps below to perform a round trip for the translation.</para>
 
     <itemizedlist>
       <listitem>
-        <para>import the file into ODF writer</para>
+        <para>Load the file in Word (2007 or later), LibreOffice, or other modern application that can read <filename>.doc</filename> files.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>save the file in ODT format</para>
+        <para>Save the file in <filename>.docx</filename> or <filename>.odt</filename> format.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>translate it into the target ODT file</para>
+        <para>Translate the file and generate the target <filename>.docx</filename> or <filename>.odt</filename> document.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>load the target file in ODF writer</para>
+        <para>After you have proofread everything, load the target file in the application you used for the initial conversion.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>save the file as a DOC file</para>
+        <para>Save the file back into the <filename>.doc</filename> format.</para>
       </listitem>
     </itemizedlist>
 
-    <para>The quality of formatting of the translated file will depend on the
-    quality of the round-trip conversion. Before proceeding with such
-    conversions, be sure to test all options. Check the <ulink
-    url="http://www.omegat.org">OmegaT home page</ulink> for an up-to-date
-    listing of auxiliary translation tools.</para>
+    <para>The quality of the formatting of the translated file will depend on the quality of the round-trip conversion. Investigate the various available options to choose the best one for your specific situation. Check the <ulink url="https://omegat.org">OmegaT home page</ulink> for an up-to-date listing of auxiliary tools.</para>
 </section>
 </section>

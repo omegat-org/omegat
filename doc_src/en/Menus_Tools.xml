@@ -24,9 +24,8 @@
 
   <variablelist>
     <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title">Check Issues...		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>V</keycap>
-		  </keycombo>
+      <term id="menus.tools.check.issues.title">Check Issues...	(<keycombo>
+			<keycap>C</keycap><keycap>S</keycap><keycap>v</keycap></keycombo>)
 </term>
       <listitem>
         <para>This quality assurance tool carries out all automatic checks in

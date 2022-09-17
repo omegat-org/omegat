@@ -147,7 +147,7 @@
             <para>Unpack/untar the file you downloaded using the command
             appropriate to the file you downloaded:</para>
 
-            <programlisting>$ unzip <filename>OmegaT_&vernb;_Without_JRE.zip</filename></programlisting>
+            <programlisting>$ unzip OmegaT_&vernb;_Without_JRE.zip</programlisting>
 
             <para>(you may need to install the <filename>unzip</filename>
             package first) or</para>

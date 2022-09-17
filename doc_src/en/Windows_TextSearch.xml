@@ -53,24 +53,24 @@
     <para>Use the  radio buttons to select the type of search. The following search types are available:</para>
 
     <variablelist>
-      <varlistentry id="search.methods.exact">
-        <term id="search.methods.exact.title">Exact search</term>
+      <varlistentry id="windows.text.search.methods.exact">
+        <term id="windows.text.search.methods.exact.title">Exact search</term>
         <listitem>
           <para>Search for the string exactly as it was entered in the search field.</para>
 		  <para>It is equivalent to a web search enclosed in quotation marks.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="search.methods.keyword">
-        <term id="search.methods.keyword.title">Keyword search</term>
+      <varlistentry id="windows.text.search.methods.keyword">
+        <term id="windows.text.search.methods.keyword.title">Keyword search</term>
         <listitem>
           <para>Search for segments containing each of the search terms separated by a space.</para>
 		  <para>It is equivalent to a web search without quotation marks.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="search.methods.regex">
-        <term id="search.methods.regex.title">Regular expressions</term>
+      <varlistentry id="windows.text.search.methods.regex">
+        <term id="windows.text.search.methods.regex.title">Regular expressions</term>
         <listitem>
           <para>Treat the search string as a regular expression.</para>
 		  <para>Regular expressions are a very powerful way to search for general or  complex patterns rather than exact strings. See <link linkend="appendix.regexp" endterm="appendix.regexp.title"/> for details.</para>
@@ -133,8 +133,8 @@
 	<para><guilabel>Number of matching segments</guilabel> sets the maximum number of matches displayed in the search result area.</para>
   </section>
 
-  <section id="search.result.display">
-    <title id="search.result.display.title">Search results display</title>
+  <section id="windows.text.search.result.display">
+    <title id="windows.text.search.result.display.title">Search results display</title>
 
     <para>Matches are displayed in their order of appearance in the project. For translated segments, the original text is displayed above the translated text. Only the source text is displayed for untranslated segments.</para>
 
@@ -147,8 +147,8 @@
   	<para>Check the <guilabel>Back to the initial segment on close</guilabel> box to automatically return to the segment you were in when you started the search after you close the window.</para>
   </section>
 	
-  <section id="search.filter">
-    <title id="search.filter.title">Filter</title>
+  <section id="windows.text.search.filter">
+    <title id="windows.text.search.filter.title">Filter</title>
 
 	<para>Click on the Filter button to show only the matching search result segments in the <link linkend="panes.editor" endterm="panes.editor.title"/>. To remove the filter, click the <guibutton>Remove Filter</guibutton> button or reload the project.</para>
   </section>

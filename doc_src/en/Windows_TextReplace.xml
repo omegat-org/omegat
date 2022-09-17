@@ -3,15 +3,30 @@
 <section id="windows.text.replace">
   <title id="windows.text.replace.title">Text Replace</title>
 
-  <para>Open a new replace window with <keycombo> <keycap>C</keycap> <keycap>k</keycap> </keycombo> and enter the word or phrase you wish to replace in the <guilabel>Search for:</guilabel>field.</para>
+  <para>Open a new replace window with <keycombo><keycap>C</keycap>
+  <keycap>K</keycap></keycombo> and enter the word or phrase you wish to replace
+  in the <guilabel>Search for:</guilabel> field.</para>
   
-  <para>Alternatively, select a word or phrase in the <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane and hit <keycombo><keycap>C</keycap><keycap>f</keycap></keycombo>. The selection is automatically entered in the search field.</para>
+  <para>Alternatively, select a word or phrase in the <link
+  linkend="panes.editor" endterm="panes.editor.title"/>, <link
+  linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link
+  linkend="panes.glossary" endterm="panes.glossary.title"/> pane and hit
+  <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>. The selection is
+  automatically entered in the search field.</para>
 
   <para>You can have several replace windows open at the same time.</para>
 
-  <para>Click the dropdown arrow of the <guilabel>Search for:</guilabel> or <guilabel>Replace with:</guilabel> fields to access the last ten items.</para>
+  <para>Click the dropdown arrow of the <guilabel>Search for:</guilabel> or
+  <guilabel>Replace with:</guilabel> fields to access the last ten items.</para>
 
-  <para>Enter the string you want to insert to replace your search term in the <guilabel>Replace with:</guilabel> field and click on <guilabel>Search</guilabel>, or hit <keycap>Enter</keycap> if the cursor is still in the field.</para>
+  <para>Enter the string you want to insert to replace your search term in the
+  <guilabel>Replace with:</guilabel> field and click on
+  <guilabel>Search</guilabel>, or hit <keycap>Enter</keycap> if the cursor is
+  still in the field.</para>
+
+  <note><para>The replacement string supports references to groups defined in
+  the search string. Use <code>$n</code> to refer to the <code>nth</code>
+  group.</para></note>
 
   <para>Search matches are displayed in bold blue characters, and the modified strings are displayed in orange to show the result of the replacement.</para>
 
@@ -64,22 +79,22 @@
     </listitem>
   </itemizedlist>
 
-  <section id="windows.text.search.methods">
-    <title id="windows.text.search.methods.title">Search types and options</title>
+  <section id="windows.text.replace.methods">
+    <title id="windows.text.replace.methods.title">Search types and options</title>
 
     <para>Use the  radio buttons to select the type of search. The following search types are available:</para>
 
     <variablelist>
-      <varlistentry id="search.methods.exact">
-        <term id="search.methods.exact.title">Exact search</term>
+      <varlistentry id="windows.text.replace.methods.exact">
+        <term id="windows.text.replace.methods.exact.title">Exact search</term>
         <listitem>
           <para>Search for the string exactly as it was entered in the search field.</para>
 		  <para>It is equivalent to a web search enclosed in quotation marks.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry id="search.methods.regex">
-        <term id="search.methods.regex.title">Regular expressions</term>
+      <varlistentry id="windows.text.replace.methods.regex">
+        <term id="windows.text.replace.methods.regex.title">Regular expressions</term>
         <listitem>
           <para>Treat the search string as a regular expression.</para>
 		  <para>Regular expressions are a very powerful way to search for general or  complex patterns rather than exact strings. See <link linkend="appendix.regexp" endterm="appendix.regexp.title"/> for details.</para>
@@ -106,8 +121,8 @@
 <warning><para>The '*' and '?' characters have a special meaning in regular expressions. Therefore, the wild card searches described above only apply to exact searches.</para></warning>
   </section>
 
-  <section id="windows.text.search.options">
-	<title id="windows.text.search.options.title">Options</title>
+  <section id="windows.text.replace.options">
+	<title id="windows.text.replace.options.title">Options</title>
 	
   <variablelist>
 	<varlistentry><term>Case sensitive</term><listitem><para>Only returns results with the same letter case as the search terms.</para></listitem></varlistentry>
@@ -122,8 +137,8 @@
 	<para>Checking the <guilabel>Full/Half width char insensitive</guilabel> option will return results that match both the full- and half-width forms (CJK characters) of the characters in the search terms.</para>
   </section>
 
-  <section id="search.result.display">
-    <title id="search.result.display.title">Search results display</title>
+  <section id="windows.text.replace.result.display">
+    <title id="windows.text.replace.result.display.title">Search results display</title>
 
     <para>Matches are displayed in their order of appearance in the project. For translated segments, the original text is displayed above the translated text. Only the source text is displayed for untranslated segments.</para>
 

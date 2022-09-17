@@ -1084,8 +1084,13 @@
 		</varlistentry>
 		
 		<varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
-		  <term id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title">Regular expressions for fragments that should be removed from translation</term>
-		  <listitem><para/></listitem>
+		  <term
+		  id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title">Regular
+		  expressions for fragments that should be removed from
+		  translation</term>
+		  <listitem><para>When present in a segment target, they are marked in
+		  red characters by default and are also identified as extraneous tags
+		  for validation purposes. See <link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> for details.</para></listitem>
 		</varlistentry>
 
 	  </variablelist>

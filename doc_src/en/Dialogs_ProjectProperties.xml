@@ -64,7 +64,7 @@
 		  endterm="dialogs.project.properties.segmentation.title"/>, on the
 		  right, or by starting OmegaT from the command line. See <link
 		  linkend="launch.with.command.line"
-		  endterm="launch.with.command.line.title"/> for details.
+		  endterm="launch.with.command.line.title"/> for details.</para>
         </listitem>
       </varlistentry>
 

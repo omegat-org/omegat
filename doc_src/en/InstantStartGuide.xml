@@ -10,32 +10,49 @@
 	flexibility and performance, as well as features beyond those of commercial
 	offerings, even for beginning translators.</para>
 	<variablelist>
-	  <varlistentry><term>Translation project</term><listitem><para>An OmegaT
-	  translation project consists of a folder that stores a number of resources
-	  in separate subfolders. Translators can easily modify the contents of the
-	  subfolders at any time during the translation simply by copying, moving or
-	  deleting files.</para>
-	  <para>At a minimum, resources include at the minimum the project's
-	  translation memory, which is automatically upon project creation, and the
-	  files to translate. It can also include reference translation memories,
-	  glossaries, and other reference files.</para>
-	  </listitem></varlistentry>
-	  <varlistentry><term>Translation memories</term><listitem><para>Translators
-	  do not have to <emphasis>create</emphasis> a translation memory or
-	  <emphasis>associate</emphasis> one to a new project. OmegaT takes care of
-	  that <emphasis>automatically</emphasis>.</para>
-	  <para>Translators can very easily reuse an existing project's translation
-	  memory by simply adding new translation files to the old project, or by
-	  copying the old translation memory to the new project's folder.</para>
-	  <para>There is no limit to the number of translation memories that can be
-	  used as reference in a translation project, and OmegaT makes it very easy
-	  to assign different levels of priority to these additional
-	  memories.</para></listitem></varlistentry>
-	  <varlistentry><term>Working in teams</term><listitem><para>Translators can
-	  easily collaborate on a project.</para><para>The team functionality
-	  synchronizes the project's translation memory and main glossary between
-	  all participants, and allows easy resolution of conflicts between
-	  different translations.</para></listitem></varlistentry>
+	  <varlistentry><term>Translation project</term>
+	  <listitem>
+		<para>An OmegaT translation project consists of a number of resources in
+		separate subfolders, of an <filename>omegat.project</filename> file that
+		stores the location of all the subfolders and of a
+		<filename>project_save.tmx</filename> translation memory file that will
+		contain all the translations made while working on that project.</para>
+		<para>Translators can easily modify the contents of the subfolders at
+		any time during the translation simply by copying, moving or deleting
+		files.</para>
+		<para>By default, resources include the project's translation memory,
+		which is automatically created upon project creation, and the files to
+		translate. It can also include reference translation memories,
+		glossaries, and other reference files.</para>
+	  </listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Translation memories</term>
+		<listitem>
+		  <para>Translators do not have to <emphasis>create</emphasis> a
+		  translation memory or <emphasis>associate</emphasis> one to a new
+		  project. OmegaT takes care of that
+		  <emphasis>automatically</emphasis>.</para>
+		  <para>Translators can very easily reuse an existing project's
+		  translation memory by simply adding new translation files to the old
+		  project, or by copying the old translation memory to the new project's
+		  folder.</para>
+		  <para>There is no limit to the number of translation memories that can
+		  be used as reference in a translation project, and OmegaT makes it
+		  very easy to assign different levels of priority to these additional
+		  memories.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Working in teams</term>
+		<listitem>
+		  <para>Translators can easily collaborate on a project.</para>
+		  <para>The team functionality synchronizes the project's translation
+		  memory and main glossary between all participants, and allows easy
+		  resolution of conflicts between different
+		  translations.</para>
+		</listitem>
+	  </varlistentry>
 	</variablelist>
   </section>
 

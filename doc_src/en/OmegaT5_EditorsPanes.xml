@@ -225,7 +225,7 @@
 
 	<para>The selected fuzzy match is highlighted in bold, with words missing from the segment you are translating shown in blue, and adjacent words shown in green.</para>
 	
-	<para>To use the selected match in your translation, press <keycombo><keycap>C</keycap><keycap>r</keycap></keycombo> to replace the target field with the match, or <keycombo><keycap>C</keycap><keycap>i</keycap></keycombo> to insert it at the cursor position.</para>
+	<para>To use the selected match in your translation, press <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> to replace the target field with the match, or <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> to insert it at the cursor position.</para>
 
     <para>The three different match percentages have the following meaning, in order:<itemizedlist>
       <listitem>
@@ -268,7 +268,7 @@
     <title id="panes.machinetranslation.title">Machine Translation</title>
 
     <para>The machine translation pane, when opened, contains the suggestions produced for the current segment by one or more enabled translation engines. When suggestions from more than one engine are available, the name of the engine will appear after the translated text, and the currently selected translation is highlighted.</para>
-    <para><keycombo><keycap>C</keycap><keycap>m</keycap></keycombo> to replace the translation of the current segment with the selected translation.</para>
+    <para>Press <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to replace the translation of the current segment with the selected translation.</para>
     <para>If there is a connection or authentication error, a status message will be displayed at the bottom of the pane.</para>
     
   </section>

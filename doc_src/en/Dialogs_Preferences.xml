@@ -52,9 +52,16 @@
           <para>Check this box to send only untranslated segments to the machine translation services.</para>
         </listitem>
       </varlistentry>
-    </variablelist>
 
-    <para>Check the enabled column for the desired provider in the list. If necessary, click <guibutton>Configure</guibutton> to enter your authentication details for that provider.</para>
+        <varlistentry id="dialogs.preferences.mt.provider.list">
+          <term id="dialogs.preferences.mt.provider.list.title">Provider list</term>
+
+          <listitem>
+            <para>In the list of machine translation available in OmegaT, tick the <guilabel>Enabled</guilabel> checkbox for each provider you want to access. Use the <guibutton>Configure</guibutton> button to manage your authentication credentials for that provider.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
   </section>
 
   <section id="dialogs.preferences.glossary">
@@ -1321,4 +1328,3 @@
 	  <para>Use this option to choose whether to be automatically notified of updates to OmegaT.</para>
 	</section>
   </section>
-

@@ -40,18 +40,24 @@
   <xi:include href="OmegaT5_HowTo.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="App_Dictionaries.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Glossaries.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-   <xi:include href="App_Spellchecker.xml"
+  <xi:include href="App_Segmentation.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Regexp.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
+  <xi:include href="App_Glossaries.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_Dictionaries.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+   <xi:include href="App_Spellchecker.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="App_ShortCuts.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <!--<xi:include href="OmegaT5_Appendices.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
 </book>

@@ -4,9 +4,5 @@
 <chapter id="chapter.appendices">
   <title id="chapter.appendices.title">Appendices</title>
 
-  <xi:include href="App_Dictionaries.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="App_Glossaries.xml"
-              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </chapter>

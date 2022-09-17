@@ -8,6 +8,14 @@
   in the <link linkend="menus.project" endterm="menus.project.title"/>
   menu.</para>
 
+  <warning><para>The options displayed in <link linkend="dialogs.preferences"
+  endterm="dialogs.preferences.title"/> or <link linkend="menus.options"
+  endterm="menus.options.title"/> are always the global settings and never the
+  project specific settings.</para>
+  <para>If you have defined project specific settings here, they will supercede
+  any modifications you make to the global settings and the later will not be
+  taken into account in your project.</para></warning>
+
   <section id="dialogs.project.properties.languages">
     <title id="dialogs.project.properties.languages.title">Languages</title>
 
@@ -177,12 +185,24 @@
         Post-processing Command</term>
 
         <listitem>
-          <para>This area allows you to enter an external post-processing
+          <para>This area displays the external post-processing
           command (a script to rename files, for instance) that will be applied
           each time <link linkend="menus.project.create.translated.documents"
           endterm="menus.project.create.translated.documents.title"/> is
-          used. Calling a script is recommended because the external command
-          does not allow the use of pipes or similar features.</para>
+          used.</para>
+
+		  <para>By default, post-processing commands are global and are
+		  available to all projects. They are defined in <link
+		  linkend="dialogs.preferences.saving.and.output.external.post-processing.command"
+		  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
+		  <note><para>For security purposes, project based external commands are
+		  disabled by default. You can enable them by checking <link
+		  linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands."
+		  endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>
+		  in the <link linkend="dialogs.preferences.saving.and.output"
+		  endterm="dialogs.preferences.saving.and.output.title"/>
+		  preferences.</para></note>
+		  
         </listitem>
       </varlistentry>
 
@@ -190,33 +210,25 @@
         <term id="dialogs.project.properties.filters.title">File
         Filters...</term>
         <listitem>
-          <para>File filters are generally valid across all projects and found
-          in <link linkend="dialogs.preferences.file.filters.title"
+          <para>By default, file filter settings are global and are shared by
+          all projects. They are found in <link
+          linkend="dialogs.preferences.file.filters.title"
           endterm="dialogs.preferences.file.filters.title"/> in the <link
           linkend="dialogs.preferences"
           endterm="dialogs.preferences.title"/>.</para>
-		  <para>The user, however, may need to generate a set of rules specific
-		  to the current project. Use this button to open the <guilabel>Project
-		  Specific File Filters</guilabel> dialog. Check the <guilabel>Make the
-		  file filter settings project specific</guilabel> box, and adjust the
-		  filters as desired.</para>
+
+		  <para>Use this button to create local file filters specific to your
+		  project. Check the <guilabel>Make the file filter settings project
+		  specific</guilabel> box, and adjust the settings as desired.</para>
+		  
 		  <para>The new set of filters will be stored in the <link
 		  linkend="project.folder.omegat.filters"
 		  endterm="project.folder.omegat.filters.title"/> file of the <link
 		  linkend="project.folder.omegat.folder"
 		  endterm="project.folder.omegat.folder.title"/> folder of the project
 		  and will supersede the general set of file filters.</para>
-		  <note><para>To delete project specific file filters, uncheck the
+		  <note><para>To disable project specific file filters, uncheck the
 		  box or remove that file.</para></note>
-
-		  <warning><para>The options displayed in <link
-		  linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> or
-		  <link linkend="menus.options" endterm="menus.options.title"/> are
-		  always the general options and never the project specific
-		  options.</para>
-		  <para>If you have project specific settings, any modifications you
-		  make to the same settings from those will not be taken into
-		  account.</para></warning>
 		  
 		  <para>See <link linkend="dialogs.preferences.file.filters"
 		  endterm="dialogs.preferences.file.filters.title"/> for details.</para>
@@ -232,24 +244,27 @@
           <para>When working on a team project, this window allows you to define
           the mapping between the remote and local folders. See <link
           linkend="how.to.setup.team.project.mapping.parameters"
-          endterm="how.to.setup.team.project.mapping.parameters.title"/> for
-          details.</para>
+          endterm="how.to.setup.team.project.mapping.parameters.title"/> in
+          <link linkend="how.to.setup.team.project"
+          endterm="how.to.setup.team.project.title"/> for details.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.searches">
         <term id="dialogs.project.properties.external.searches.title">External
         Search...</term>
+
         <listitem>
-          <para>External searches are generally valid across all projects and
-          found in <link linkend="dialogs.preferences.external.searches"
+          <para>By default, external searches are global and are shared by all
+          projects. They are found in <link
+          linkend="dialogs.preferences.external.searches"
           endterm="dialogs.preferences.external.searches.title"/> in the <link
           linkend="dialogs.preferences"
           endterm="dialogs.preferences.title"/>.</para>
-		  <para>The user, however, may need to generate a set of external
-		  searches specific to the current project. Use this button to open the
-		  <guilabel>Project Specific External Search</guilabel> dialog, and add
-		  the desired searches.</para>
+
+		  <para>Use this button to create local external searches specific to your
+		  project and adjust the settings as desired.</para>
+
 		  <para>The new set of searches will be stored in the <link
 		  linkend="project.folder.omegat.finder"
 		  endterm="project.folder.omegat.finder.title"/> file of the <link
@@ -258,40 +273,81 @@
 		  and will supersede the general set of searches.</para>
 		  <note><para>To delete project specific external searches, click on the
 		  <guilabel>Remove</guilabel> button or remove that file.</para></note>
-		  
+		  		  
 		  <para>See <link linkend="dialogs.preferences.external.searches"
 		  endterm="dialogs.preferences.external.searches.title"/> for
 		  details.</para>
         </listitem>
       </varlistentry>
-
-      <varlistentry>
-        <term>TMs to export</term>
-
-        <listitem>
-          <para>Defines the translation memory formats that will be exported
-          when you execute the Create Translated Documents command. Note that
-          this option is located under the <emphasis role="bold">Export
-          Translation Memory Folder</emphasis> file location.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+	</variablelist>
   </section>
 
   <section id="dialogs.project.properties.file.locations">
     <title id="dialogs.project.properties.file.locations.title">File locations</title>
 
-    <para>An OmegaT translation project consists of a folder hierarchy that
-    contains the resources used in the translation. The location of these
-    folders is predefined, but can be modified here. Keep in mind that modify
-    the project folders will not move existing files from the old location to
-    the new one.</para>
+	<para>An OmegaT translation project consists of a number of resources in
+	separate subfolders, of an <filename>omegat.project</filename> file that
+	stores the location of all the subfolders and of a
+	<filename>project_save.tmx</filename> translation memory file that will
+	contain all the translations made while working on that project.</para>
+
+	<para>When a new project is created, OmegaT proposes to create a project
+	folder that contains all the resources used in the translation, but that
+	structure is not compulsory. Ressource subfolders can be located anywhere on
+	your machine, including on shared disks.</para>
+
+	<para>You can modify the structure of your project by adding or removing
+	files from the subfolders, or even by changing the subfolders the project
+	will use, at will, even during the course of the translation.</para>
 
 	<para>The location of all resources is stored in the <link
 	linkend="project.folder.omegat.project"
 	endterm="project.folder.omegat.project.title"/> file of the <link
-	linkend="project.folder" endterm="project.folder.title"/>.</para>
+	linkend="project.folder" endterm="project.folder.title"/>. See <link linkend="project.folder" endterm="project.folder.title"/> for details.</para>
 
+	<variablelist>
+	  <varlistentry>
+		<term>Browse</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Source Files Folder</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Exclusions</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Translation Memories Folder</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Glossaries Folder</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Writeable Glossary File</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Dictionaries Folder</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Translated Files Folder</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Exported Translation Memories Folder</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Translation memories to export</term>
+		<listitem><para></para></listitem>
+	  </varlistentry>
+	</variablelist>
+  
     <para>Click on <guibutton>Exclusions...</guibutton> to define the files or
     folders that will be ignored by OmegaT. An ignored file or folder:</para>
 

@@ -1281,8 +1281,8 @@
 		  </listitem>
 		</varlistentry>
 
-		<varlistentry id="dialogs.preferences.saving.and.output.also.allow.per-project.external.commands">
-		  <term id="dialogs.preferences.saving.and.output.also.allow.per-project.external.commands.title">Also allow per-project
+		<varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
+		  <term id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title">Also allow per-project
 		  external commands</term>
 
 		  <listitem>

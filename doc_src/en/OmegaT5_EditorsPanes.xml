@@ -175,12 +175,19 @@
 	
 	<section id="panes.editor.context.menu">
 	  <title id="panes.editor.context.menu.title">Editor context menu</title>
-	  <para>The default shortcut key to display the context menu is the <keycap>Menu</keycap> key on Windows and Linux, and <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo> on macOS. You can also bring up the menu by right clicking the mouse (<keycap>C</keycap> + click on macOS).</para>
+	  <para>Default shortcut:
+	  <itemizedlist>
+		<listitem><para>On Windows and Linux: <keycap>Menu</keycap></para></listitem>
+		<listitem><para>On macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo>.</para>
+		</listitem>
+	  </itemizedlist>
+	  You can also bring up the menu by right clicking the mouse
+	  (<keycap>C</keycap> + <keycap>click</keycap> on macOS).</para>
+	  
 	  <para>The Editor pane context menu offers:
 	  <itemizedlist>
-		<listitem><para>
-		  <emphasis role="bold">Cut,
-		Copy, Paste</emphasis> functions,</para></listitem>
+		<listitem><para> <emphasis role="bold">Cut, Copy, Paste</emphasis>
+		functions,</para></listitem>
 		<listitem><para><guilabel>Go To Segment</guilabel> (to jump to the segment under the pointer),</para></listitem>
 		<listitem><para><guilabel>Search
 		Dictionaries</guilabel> (to search for the selected term in an installed
@@ -193,25 +200,52 @@
 
 	<section id="panes.editor.auto.completion.menu">
 	  <title id="panes.editor.auto.completion.menu.title">Auto-completion menu</title>
-	  <para>The default key shortcut to display the auto-completion menu is
-	  <keycombo><keycap>C</keycap><keycap>Space</keycap></keycombo> on Windows
-	  and Linux, and <keycap>Esc</keycap> on macOS.</para>
-	  <para>This menu offers the auto-completion options set in <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>.</para>
+	  <para>Default shortcut:
+	  <itemizedlist>
+		<listitem><para>On Windows and Linux:
+		<keycombo><keycap>C</keycap><keycap>Space</keycap></keycombo></para></listitem>
+		<listitem><para>On macOS: <keycap>Esc</keycap>.</para>
+		</listitem>
+	  </itemizedlist></para>
+
+	  <para>This menu offers the auto-completion options set in <link
+	  linkend="dialog.preferences.auto.completion"
+	  endterm="dialog.preferences.auto.completion.title"/>.</para>
 	</section>
 
 	<section id="panes.editor.dragging.and.selecting">
 	  <title id="panes.editor.dragging.and.selecting.title">Dragging, selecting, and overwriting</title>
-	  <para>It is possible to drag text from anywhere in the main window and drop it into the active segment. Text dragged from outside the target segment is copied, while text dragged from within the segment is moved.</para>
+	  <para>It is possible to drag text from anywhere in the main window and
+	  drop it into the active segment. Text dragged from outside the target
+	  segment is copied, while text dragged from within the segment is
+	  moved.</para>
 
-	  <para>By default, the cursor is locked into the target text editing field, and the arrow keys cannot be used to move in the source text.</para>
+	  <para>By default, the cursor is locked into the target text editing field,
+	  and the arrow keys cannot be used to move in the source text.</para>
 
-	  <para>Pressing <keycap>F2</keycap> unlocks the cursor and makes it possible to use the arrow keys to move in the source text (or anywhere else in the editor). This allows you to select text using the keyboard.</para>
+	  <para>Pressing <keycap>F2</keycap> unlocks the cursor and makes it
+	  possible to use the arrow keys to move in the source text (or anywhere
+	  else in the editor). This allows you to select text using the
+	  keyboard.</para>
 
-	  <para>The cursor status (locked or unlocked) is shown at the right of the status bar. Use the same key to lock the cursor again.</para>
+	  <para>The cursor status (locked - <guilabel>LCK</guilabel>) or unlocked -
+	  <guilabel>UNL</guilabel>) is shown at the right of the status bar. Use the
+	  same key to lock the cursor again.</para>
 
-	  <para>By default, typing text inserts the new text after the cursor in the typing direction. If you want to overwrite the existing text, use <keycap>INSERT</keycap> on Windows and Linux, or <keycap>F3</keycap> on macOS, to switch to overwrite mode.</para>
+	  <para>By default, typing text inserts the new text after the cursor in the
+	  typing direction. To overwrite the existing text, use the following keys:</para>
+	  <para>Default shortcut:
+	  <itemizedlist>
+		<listitem><para>On Windows and Linux:
+		<keycombo><keycap>INSERT</keycap></keycombo></para></listitem>
+		<listitem><para>On macOS: <keycap>F3</keycap>.</para>
+		</listitem>
+	  </itemizedlist>
+	  </para>
 
-	  <para>The writing mode (overwrite or insert) is shown at the right of the status bar. Use the same key to switch back and forth between each mode.</para>
+	  <para>The writing mode (overwrite - <guilabel>OVR</guilabel> or insert -
+	  <guilabel>INS</guilabel>) is shown at the right of the status bar. Use the
+	  same key to switch back and forth between each mode.</para>
 
 	</section>
   </section>
@@ -219,13 +253,21 @@
   <section id="panes.fuzzy.matches">
     <title id="panes.fuzzy.matches.title">Fuzzy Matches</title>
 
-    <para>The match viewer shows the most similar segments from your translation memories. This includes both the internal project translation memory you create in real time as you translate the project, and external  memories you have imported from previous projects or received from the client or translation agency. See <link linkend="how.to.reuse.tm" endterm="how.to.reuse.tm.title"/> for details.</para>
+    <para>The match viewer shows the most similar segments from your translation
+    memories. This includes both the internal project translation memory you
+    create in real time as you translate the project, and external memories you
+    have imported from previous projects or received from the client or
+    translation agency. See <link linkend="how.to.reuse.tm"
+    endterm="how.to.reuse.tm.title"/> for details.</para>
 
-    <para>When you enter a segment, the first fuzzy match (the one with the highest match percentage) is automatically selected. You can press <keycombo><keycap>C</keycap><keycap>2, 3, 4, 5</keycap></keycombo> to select a different match. Obviously, this will have no effect if there is no match corresponding to the number pressed.</para>
+    <para>When you enter a segment, the first fuzzy match (the one with the
+    highest match percentage) is automatically selected. You can press
+    <keycombo><keycap>C</keycap><keycap>2, 3, 4, 5</keycap></keycombo> to select
+    a different match.</para>
 
 	<para>The selected fuzzy match is highlighted in bold, with words missing from the segment you are translating shown in blue, and adjacent words shown in green.</para>
 	
-	<para>To use the selected match in your translation, press <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> to replace the target field with the match, or <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo> to insert it at the cursor position.</para>
+	<para>Use <link linkend="menus.edit.replace.with.match.or.selection" endterm="menus.edit.replace.with.match.or.selection.title"/> to replace the target field with the match, or <link linkend="menus.edit.insert.match.or.selection" endterm="menus.edit.insert.match.or.selection.title"/> to insert it at the cursor position.</para>
 
     <para>The three different match percentages have the following meaning, in order:<itemizedlist>
       <listitem>

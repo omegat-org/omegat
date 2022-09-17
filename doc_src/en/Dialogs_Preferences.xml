@@ -268,9 +268,9 @@
     <itemizedlist>
       <listitem>
         <para><guilabel>Remove leading and trailing tags</guilabel>: Uncheck this option to display all tags, including those at the beginning and end of the segment.</para>
-          <warning>
-            <para>Do not put any text before the first tag if all tags are displayed for Microsoft Open XML formats (<filename>.docx</filename>, <filename>.xlsx</filename>, etc.)—it is a technical tag that must always begin the segment.</para>
-          </warning>           
+        <warning>
+          <para>Do not put any text before the first tag if all tags are displayed for Microsoft Open XML formats (<filename>.docx</filename>, <filename>.xlsx</filename>, etc.)—it is a technical tag that must always begin the segment.</para>
+        </warning>           
       </listitem>
 
       <listitem>
@@ -657,152 +657,109 @@
   </section>
 
   <section id="dialogs.preferences.segmentation.setup">
-	<title id="dialogs.preferences.segmentation.setup.title">Segmentation Setup</title>
+	<title id="dialogs.preferences.segmentation.setup.title">Segmentation
+	Setup</title>
 
-	<para>Translation memory tools work with textual units called segments. When a translation is entered, the segment containing the source text is stored with its translation in the project memory, and subsequently used to match other source segments in the project.</para>
+	<para>See <link linkend="appendix.segmentation"
+	endterm="appendix.segmentation.title"/> for general explanations about
+	segmentation (global or local, paragraph or sentence, etc.)</para>
 
-	<para>Not segmenting a document is equivalent to selecting <emphasis>paragraph</emphasis> segmentation. In that type of segmentation, each paragraph (as defined in the original document format) is displayed as a single segment, and the translator is free to reorganize the sentences within the segment in the translation. This setting works well with more literary or creative texts, as well as, more generally, with documents for which translation memory matches are not so important.</para>
+	<section id="dialogs.preferences.segmentation.setup.scope">
+	  <title id="dialogs.preferences.segmentation.setup.scope.title">Language rules</title>
 
-	<para>The use of sentences as the basis for segmentation relies on a number of rules (called <emphasis>segmentation rules</emphasis>) that define what constitutes a sentence in the source language. This setting works well with documents where repetitions or similar sentences are common, such as technical or legal documents. Pre-defined rules are provided, and the translator can use <emphasis>regular expressions</emphasis> to modify them. See <link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/> in the <link linkend="menus.options" endterm="menus.options.title"/> menu.</para>
-	
-	<para>Select the type of segmentation by clicking <link linkend="menus.project.properties" endterm="menus.project.properties.title"/>. in the <link linkend="menus.project" endterm="menus.project.title"/> menu and ticking or unticking the applicable check box.</para>
+	  <para>Only the rules associated to language patterns that correspond to
+	  the source language of your project are applied. See <link
+	  linkend="dialogs.project.properties.languages"
+	  endterm="dialogs.project.properties.languages.title"/> in <link
+	  linkend="dialogs.project.properties"
+	  endterm="dialogs.project.properties.title"/>.</para>
 
-	<section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
-	  <title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Rules-based segmentation</title>
-	  <para>Dependable segmentation rules are already available for many languages, so you are unlikely to have to write your own segmentation rules. However, this function can be very useful in special cases, where you can increase your productivity by fine-tuning the segmentation rules to the text to translate.</para>
+	  <para>For example, for a translation from Japanese,
+	  <emphasis>only</emphasis> the rule set associated to the <code>JA.*</code>
+	  pattern and the rule sets associated to the <code>.*</code> patterns
+	  (those are generic patterns that apply to all languages) will be taken
+	  into account.</para>
 
-	  <warning>
-		<para>If you change the segmentation while translating, you will have to reload the project for the new segmentation to take effect. This will split or merge some previously translated segments, which will therefore no longer be considered translated.</para>
-	  </warning>
+	  <para>When you click on a language pattern in the top half of the dialog,
+	  a list of associated rules will be displayed in the bottom half of the
+	  dialog.</para>
 
-	  <variablelist>
-		<varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
-		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Structure-level segmentation</term>
+	  <para>All segmentation rule sets for a matching language pattern are
+	  active and are applied in order. Rules for specific language regions
+	  should be higher than default ones. For example, the rules for
+	  <emphasis>FR-CA</emphasis> should be set higher than those for
+	  <emphasis>FR.*</emphasis>, which should themselves be higher than the
+	  generic <emphasis>.*</emphasis> set. Thus, when translating from Canadian
+	  French the rules for Canadian French—if any—will apply first, followed by
+	  the rules for French and lastly, by the generic rules.</para>
 
-		<listitem>
-          <para>OmegaT first parses the text for structure-level segmentation. This process relies only on the structure of the source file to produce segments.</para>
+	  <para>If you want to create an empty set of rules for a new language
+	  pattern click the <guibutton>Add</guibutton> button.</para>
 
-          <para>For example, text files may be segmented on line breaks, empty lines, or not at all. Files containing formatting (ODF, HTML, or other documents) are divided at block-level (paragraph) tags. Translatable object attributes in XHTML or HTML files can be extracted as separate segments.</para>
-		</listitem>
-      </varlistentry>
-
-      <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
-        <term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Sentence-level segmentation</term>
-
-        <listitem>
-          <para>After dividing the source file into structural units, OmegaT further divides those units into segments.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-
-    <section id="segmentation.rules">
-      <title id="segmentation.rules.title">Segmentation rules</title>
-
-      <para>You can visualize segmentation as the process of moving the cursor along the text, on character at a time. Each time the cursor moves to the next character, rules consisting of a <emphasis role="bold">Before </emphasis>and <emphasis role="bold">After </emphasis>pattern, are checked, in order, for a match with the <emphasis role="bold"> Before</emphasis> pattern on the left and the corresponding <emphasis role="bold">After</emphasis> pattern on the right. The first matching rule is applied, either by creating a new segment break at the current cursor position (for a break rule), or by moving the cursor to the next position without inserting a segment break (for an exception rule).</para>
-
-      <para>The two types of rules behave as follows:</para>
-
-      <variablelist>
-        <varlistentry id="segmentation.rules.breakrule">
-          <term id="segmentation.rules.breakrule.title">Break rule</term>
-
-          <listitem>
-            <para>Separates the source text into segments. For example, “<emphasis>Did it make sense? I was not sure</emphasis>.” should be split into two segments. This requires a break rule for the “?” character when it is followed by one or more spaces and a word beginning with a capital letter. To define a rule as a break rule, tick the <guilabel>Break/Exception</guilabel> check box.</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-
-      <variablelist>
-        <varlistentry id="segmentation.rules.exceptionrule">
-          <term id="segmentation.rules.exceptionrule.title">Exception rule</term>
-
-          <listitem>
-            <para>Specify text combinations that should <emphasis role="old">not</emphasis> be separated. In spite of the period, the expression <emphasis>&quot;Mrs. Dalloway &quot;</emphasis> should not be split in two segments, so an exception rule is necessary for Mrs (as well as Mr, Dr, prof, etc.), followed by a period. To define an exception rule, leave the <guilabel>Break/Exception </guilabel>check box unticked.</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-	</section>
-
-    <section id="rules.priority">
-      <title id="rules.priority.title">Rule priority</title>
-
-      <para>All segmentation rule sets for a matching language pattern are active and are applied in order of priority. Therefore, rules for specific language should be higher than default ones. For example, the rules for Canadian French (FR-CA) should be set higher than those for French (FR.*), which should themselves be higher than the Default (.*) set. Thus, when translating from Canadian French the rules for Canadian French—if any—will apply first, followed by the rules for French and lastly, by the Default rules.</para>
+	  <para>An empty line will appear at the bottom of the table. Change the
+	  name of the rule set and the language pattern to the desired label and
+	  corresponding pattern. The language pattern is a regular expression. Use
+	  the <guibutton>Move Up</guibutton> button to set the rule set
+	  priority.</para>
     </section>
 
-    <section id="creating.new.rule">
-      <title id="creating.new.rule.title">Creating a new rule</title>
+	<section id="modifying.segmentation.rules">
+	  <title id="modifying.segmentation.rules.title">How to modify segmentation rules</title>
 
-      <para>Major changes to the segmentation rules should be generally avoided, especially after completing a first draft, but minor changes, such as the addition of a recognized abbreviation, can be advantageous.</para>
+      <section id="segmentation.rules">
+		<title id="segmentation.rules.title">Segmentation rules</title>
 
-      <para>Simply click on the desired set of rules in the table in
-      the upper part of the dialog to edit or expand it. The rules for
-      that set will appear in the bottom part of the dialog.</para>
+		<warning><para>Exception rules should be listed
+		<emphasis>above</emphasis> break rules</para></warning>
+		
+		<variablelist>
+          <varlistentry id="segmentation.rules.exceptionrule">
+			<term id="segmentation.rules.exceptionrule.title">Exception rule</term>
 
-      <para>If you want to create an empty set of rules for a new language pattern click the <guibutton>Add</guibutton> button in the upper half of the dialog. An empty line will appear at the bottom of the table in the upper part of the dialog (you may have to scroll down to see it). Change the name of the rule set and the language pattern to the desired language and corresponding code. The syntax of the language pattern conforms to regular expression syntax. If your set of rules handles a language-country pair, we advise you to move it to the top using the <guibutton>Move Up</guibutton> button.</para>
+			<listitem>
+              <para>Specify text combinations that are exceptions to a break
+              rule. For example, <emphasis>Mrs. Dalloway</emphasis> should not
+              be split in two segments even though a break rule for
+              <emphasis>period followed by a space</emphasis> generally defines
+              a sentence.</para>
+			  
+			  <para>To define an exception rule, leave the
+			  <guilabel>Break/Exception </guilabel>check box unticked.</para>
+			</listitem>
+          </varlistentry>
 
-      <para>Add the <emphasis role="bold">Before</emphasis>
-      and<emphasis role="bold"> After</emphasis> patterns. We
-      recommend using tools that allow you to see their effect
-      directly to check their syntax and applicability. See <link linkend="appendix.regexp">Regular expressions</link>. The
-      existing rules always provide a good starting point.</para>
+          <varlistentry id="segmentation.rules.breakrule">
+			<term id="segmentation.rules.breakrule.title">Break rule</term>
+
+			<listitem>
+              <para>Separates the source text into segments. For example,
+              <emphasis>period followed by a space</emphasis> generally defines
+              a sentence end in English.</para>
+			  <para>To define a rule as a break rule, tick the
+			  <guilabel>Break/Exception</guilabel> check box.</para>
+			</listitem>
+          </varlistentry>
+		</variablelist>
+	  </section>
+
+      <section id="creating.new.rule">
+		<title id="creating.new.rule.title">Creating a new rule</title>
+
+		<para>Add the <emphasis role="bold">Before</emphasis>
+		and<emphasis role="bold"> After</emphasis> patterns.</para>
+
+		<para>The <emphasis role="bold">Before</emphasis> and<emphasis
+		role="bold"> After</emphasis> patterns are regular expressions. See
+			<link linkend="appendix.regexp" endterm="appendix.regexp.title"/>
+		for details.</para>
+		
+		<para>The existing rules always provide a good starting point. See also
+		<link linkend="segmentation.simple.examples"
+		endterm="segmentation.simple.examples.title"/>.</para>
+	  </section>
 	</section>
-
-	<section id="segmentation.simple.examples">
-      <title id="segmentation.simple.examples.title">A few simple examples</title>
-
-      <informaltable>
-        <tgroup cols="4">
-          <colspec align="left" colnum="1"/>
-
-          <colspec align="center" colnum="2"/>
-
-          <colspec align="center" colnum="3"/>
-
-          <colspec align="left" colnum="4"/>
-
-          <thead>
-            <row>
-              <entry>Intention</entry>
-
-              <entry align="center">Before</entry>
-
-              <entry align="center">After</entry>
-
-              <entry>Note</entry>
-            </row>
-          </thead>
-
-          <tbody>
-			<row>
-              <entry>Start a new segment start after a period ('.') followed by a space, tab, or other whitespace.</entry>
-			  <entry align="center">\.</entry>
-			  <entry align="center">\s</entry>
-			  <entry>“\.” stands for the period character. “\s” means any whitespace character (space, tab, new page etc.)</entry>
-			</row>
-			<row>
-			  <entry>Do not segment after Mr.</entry>
-			  <entry align="center">Mr\.</entry>
-			  <entry align="center">\s</entry>
-			  <entry>This an exception rule, so the Break/Exception check box must not be ticked.</entry>
-			</row>
-			<row>
-			  <entry>Start a new segment after “。” (Japanese period).</entry>
-			  <entry align="center">。</entry>
-			  <entry align="center"/>
-			  <entry>Note that the <literal>Pattern After</literal> field is empty.</entry>
-			</row>
-			<row>
-			  <entry>Do not segment after M., Mr., Mrs., or Ms.</entry>
-			  <entry align="center">Mr??s??\.</entry>
-			  <entry align="center">\s</entry>
-			  <entry>Exception rule—see the use of ? in regular expressions.</entry>
-			</row>
-		  </tbody>
-		</tgroup>
-	  </informaltable>
-	</section>
-	</section>
-
+  </section>
+  
 	<section id="dialog.preferences.auto.completion">
 	  <title id="dialog.preferences.auto.completion.title">Auto-Completion</title>
 
@@ -880,31 +837,31 @@
 			<warning><para>You will need to restart OmegaT for this change to take
 			effect.</para></warning>
 		  </listitem>
-		  </varlistentry>
-		  <varlistentry  id="dialogs.preferences.external.search.items">
-			<term id="dialogs.preferences.external.search.items.title">Items</term>
-			  <listitem>
-				<para>Each item represents a group of web searches or local commands that are launched simultaneously.</para>
-				<para>An item must be given a name. The name will be displayed
-				at the bottom of the <link linkend="menus.tools"
-				endterm="menus.tools.title"/> menu. If you check <guilabel>Show
-				in Editor context menu</guilabel>, the name will also be
-				displayed in the <link linkend="panes.editor.context.menu"
-				endterm="panes.editor.context.menu.title"/> if a string is selected.</para>
-				<para>URL searches as well as commands must contain the string
-				<guilabel>{target}</guilabel> to be accepted. The {target} placeholder will be replaced by the string that was selected in the Editor.</para>
-				<para>URLs are opened with the default web browser, one per tab.</para>
-				<example><title>URL search example</title>
-				<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee+-reverso+-glosbe+-larousse+-amazon+-dictionnaire+-docplayer+-pinterest+-translation</programlisting>
-				<para>This opens a search for the {target} term on DuckDuckGo with a number of search parameters.</para></example>
-				<para>Commands are opened on the command line. The
-				<guilabel>Delimiter</guilabel> is used to define the delimiter
-				for parameters. The default delimiter is <code>|</code>.</para>
-				<example><title>Command example</title>
-				<programlisting>/usr/bin/open|dict://{target}</programlisting>
-				<para>This opens the dictionary application that implements the
-				<code>dict</code> protocol on your machine looking for the
-				{target} term.</para></example>
+		</varlistentry>
+		<varlistentry  id="dialogs.preferences.external.search.items">
+		  <term id="dialogs.preferences.external.search.items.title">Items</term>
+		  <listitem>
+			<para>Each item represents a group of web searches or local commands that are launched simultaneously.</para>
+			<para>An item must be given a name. The name will be displayed
+			at the bottom of the <link linkend="menus.tools"
+			endterm="menus.tools.title"/> menu. If you check <guilabel>Show
+			in Editor context menu</guilabel>, the name will also be
+			displayed in the <link linkend="panes.editor.context.menu"
+			endterm="panes.editor.context.menu.title"/> if a string is selected.</para>
+			<para>URL searches as well as commands must contain the string
+			<guilabel>{target}</guilabel> to be accepted. The {target} placeholder will be replaced by the string that was selected in the Editor.</para>
+			<para>URLs are opened with the default web browser, one per tab.</para>
+			<example><title>URL search example</title>
+			<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee+-reverso+-glosbe+-larousse+-amazon+-dictionnaire+-docplayer+-pinterest+-translation</programlisting>
+			<para>This opens a search for the {target} term on DuckDuckGo with a number of search parameters.</para></example>
+			<para>Commands are opened on the command line. The
+			<guilabel>Delimiter</guilabel> is used to define the delimiter
+			for parameters. The default delimiter is <code>|</code>.</para>
+			<example><title>Command example</title>
+			<programlisting>/usr/bin/open|dict://{target}</programlisting>
+			<para>This opens the dictionary application that implements the
+			<code>dict</code> protocol on your machine looking for the
+			{target} term.</para></example>
 		  </listitem>
 		</varlistentry>
 	  </variablelist>
@@ -1052,7 +1009,7 @@
 
         <varlistentry id="dialogs.preferences.editor.save.orgin.of.translation">
           <term
-          id="dialogs.preferences.editor.save.orgin.of.translation.title">Save
+			  id="dialogs.preferences.editor.save.orgin.of.translation.title">Save
           origin of translation</term>
 
 		  <!-- TODO Identifier et décrire le rôle de cette option. -->
@@ -1364,4 +1321,4 @@
 	  <para>Use this option to choose whether to be automatically notified of updates to OmegaT.</para>
 	</section>
   </section>
-</section>
+

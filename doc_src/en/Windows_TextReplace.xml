@@ -3,9 +3,9 @@
 <section id="windows.text.replace">
   <title id="windows.text.replace.title">Text Replace</title>
 
-  <para>Open a new replace window with <keycombo><keycap>C</keycap>
-  <keycap>K</keycap></keycombo> and enter the word or phrase you wish to replace
-  in the <guilabel>Search for:</guilabel> field.</para>
+  <para>Use <link linkend="menus.edit.search.and.replace"
+  endterm="menus.edit.search.and.replace.title"/> to open a new replace window and
+  enter the word or phrase you wish to search for in the search field.</para>
   
   <para>Alternatively, select a word or phrase in the <link
   linkend="panes.editor" endterm="panes.editor.title"/>, <link
@@ -14,7 +14,7 @@
   <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>. The selection is
   automatically entered in the search field.</para>
 
-  <para>You can have several replace windows open at the same time.</para>
+  <para>You can have several replacewindows opened at the same time.</para>
 
   <para>Click the dropdown arrow of the <guilabel>Search for:</guilabel> or
   <guilabel>Replace with:</guilabel> fields to access the last ten items.</para>
@@ -29,7 +29,7 @@
   group.</para></note>
 
   <para>Search matches are displayed in bold blue characters, and the modified strings are displayed in orange to show the result of the replacement.</para>
-
+  
   <note><para>At this stage, no replacements have been made yet.</para></note>
 
   <para>Click one of the following options: <itemizedlist>
@@ -49,33 +49,34 @@
 
   
   <para>The replace window has its own menus:</para>
+
   <itemizedlist>
     <listitem>
-      <para>File &gt; Search for Selection (<keycombo> <keycap>C</keycap> <keycap>f</keycap> </keycombo>): the current selection is inserted in the search field.</para>
+      <para><guimenu>File</guimenu> &gt; <guimenuitem>Search for Selection</guimenuitem> (<keycombo> <keycap>C</keycap> <keycap>F</keycap> </keycombo>): the current selection is inserted in the search field.</para>
     </listitem>
 
     <listitem>
-      <para>File &gt; Close (<keycombo> <keycap>C</keycap> <keycap>w</keycap> </keycombo>): close the search window (same as <keycap>Esc</keycap>).</para>
+      <para><guimenu>File</guimenu> &gt; <guimenuitem>Close</guimenuitem> (<keycombo> <keycap>C</keycap> <keycap>W</keycap> </keycombo>): close the search window.</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Insert Source (<keycombo> <keycap>S</keycap> <keycap>C</keycap> <keycap>i</keycap> </keycombo>): insert the content of the current source segment.</para>
+      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Insert Source</guimenuitem> (<keycombo> <keycap>S</keycap> <keycap>C</keycap> <keycap>I</keycap> </keycombo>): insert the content of the current source segment.</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Replace with Source (<keycombo> <keycap>S</keycap> <keycap>C</keycap> <keycap>r</keycap> </keycombo>): replace the contents of the search field with those of the  current source segment.</para>
+      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Replace with Source</guimenuitem> (<keycombo> <keycap>S</keycap> <keycap>C</keycap><keycap>R</keycap> </keycombo>): replace the contents of the search field with those of the  current source segment.</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Create Glossary Entry (<keycombo>
+      <para><guimenu>Edit </guimenu>&gt; <guimenuitem>Create Glossary Entry</guimenuitem> (<keycombo>
           <keycap>S</keycap>
           <keycap>C</keycap>
-          <keycap>g</keycap>
+          <keycap>G</keycap>
         </keycombo>): add a new glossary item. See <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> for details.</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Reset Options: reset the search window options.</para>
+      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Reset Options</guimenuitem>: reset the search window options.</para>
     </listitem>
   </itemizedlist>
 
@@ -140,14 +141,33 @@
   <section id="windows.text.replace.result.display">
     <title id="windows.text.replace.result.display.title">Search results display</title>
 
+  <section id="windows.text.search.result.display">
+    <title id="windows.text.search.result.display.title">Search results display</title>
+
     <para>Matches are displayed in their order of appearance in the project. For translated segments, the original text is displayed above the translated text. Only the source text is displayed for untranslated segments.</para>
 
-    <para>You can use the standard (<keycombo> <keycap>C</keycap> <keycap>n</keycap> </keycombo>, <keycombo> <keycap>C</keycap> <keycap>p</keycap> </keycombo>) shortcuts to move from one segment to another in the search window.</para>
-
+    <para>You can use the following shortcuts in the search results:
+	<variablelist>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+		<listitem><para>Move to the next segment</para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+		<listitem><para>Move to the preceeding segment</para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+		<listitem><para>Jump to the current segment in the editor.</para></listitem>
+	  </varlistentry>
+	</variablelist>
+	</para>
+	
     <para>Double-click on a segment to open it in the <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
 
   	<para>Check the <guilabel>Auto-sync with Editor</guilabel> box at the bottom of the search window to have selected segments open in the Editor automatically.</para>
 
   	<para>Check the <guilabel>Back to the initial segment on close</guilabel> box to automatically return to the segment you were in when you started the search after you close the window.</para>
-  </section>  
+  </section>
+</section>
 </section>

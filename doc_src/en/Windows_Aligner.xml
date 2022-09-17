@@ -258,13 +258,13 @@
         <para><guimenuitem>Save TMX...</guimenuitem>: This item is greyed out until the next step is complete.</para>
       </listitem>
       <listitem>
-        <para><guimenuitem>Reset</guimenuitem>: This command restores all parameters to their default value. It can also be called by clicking the <guibutton>Reset</guibutton> at the bottom right of the window or pressing <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>r</keycap></keycombo></para>
+        <para><guimenuitem>Reset</guimenuitem>: This command restores all parameters to their default value. It can also be called by clicking the <guibutton>Reset</guibutton> at the bottom right of the window or pressing <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo></para>
       </listitem>
       <listitem>
         <para><guimenuitem>Reload</guimenuitem>: This command reloads the file from the disk. You can use this command to parse and align the files again if you had to modify their contents.</para>
       </listitem>
       <listitem>
-        <para><guimenuitem>Close</guimenuitem>: This closes the <guilabel>Align</guilabel> dialog. Doing so in this step cancels the alignment without saving any data to a translation memory file. You can also call this command by pressing <keycombo><keycap>C</keycap><keycap>w</keycap></keycombo>.</para>
+        <para><guimenuitem>Close</guimenuitem>: This closes the <guilabel>Align</guilabel> dialog. Doing so in this step cancels the alignment without saving any data to a translation memory file. You can also call this command by pressing <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>.</para>
       </listitem>
     </itemizedlist>
 
@@ -286,25 +286,26 @@
       <para>The shortcut keys are well worth remembering if you use the aligner often or work on large documents, as they allow you to carry out actions very quickly.</para>
     </note>
 
-    <para>To perform an action, select the applicable segment or block of consecutive segments. Individual segments can be selected with the mouse or the arrow keys. Segment blocks can be selected with the mouse by clicking the first segment, and holding the <keycap>S</keycap> key while clicking the last segment. Alternatively, you can press the <keycap>Up</keycap> or <keycap>Down</keycap>Down key while holding <keycap>S</keycap> to select consecutive segments. The available actions are presented below.</para>
+    <para>To perform an action, select the applicable segment or block of consecutive segments. Individual segments can be selected with the mouse or the arrow keys. Segment blocks can be selected with the mouse by clicking the first segment, and holding the <keycap>Shift</keycap> key while clicking the last segment.</para>
+	<para>Alternatively, you can press the arrow keys while holding <keycap>Shift</keycap> to select consecutive segments. The available actions are presented below.</para>
 
     <variablelist>
       <varlistentry>
-        <term><guimenuitem>Move Up</guimenuitem> (<keycap>u</keycap>)</term>
+        <term><guimenuitem>Move Up</guimenuitem> (<keycap>U</keycap>)</term>
         <listitem>
           <para>Moves the selected segment, or block of consecutive segments, up one row.</para>
           <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Move Down</guimenuitem> (<keycap>d</keycap>)</term>
+        <term><guimenuitem>Move Down</guimenuitem> (<keycap>D</keycap>)</term>
         <listitem>
           <para>Moves the selected segment, or block of consecutive segments, down one row.</para>
           <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Split</guimenuitem> (<keycap>s</keycap>)</term>
+        <term><guimenuitem>Split</guimenuitem> (<keycap>S</keycap>)</term>
         <listitem>
           <para>If a single segment is selected, this command opens the <guilabel>Split Text</guilabel> dialog. Use the mouse or arrow keys to place the cusor at the location where you want to split the text, and click <guibutton>OK</guibutton> or press <keycap>Enter</keycap>.</para>
           <para>If two or more segments occupying separate cells in the same row (segments that do not have a <guilabel>Keep</guilabel> check box on the same line as their cell) are selected, this command will split them the selected cells back into separate rows (with a <guilabel>Keep</guilabel> check box).</para>
@@ -312,16 +313,17 @@
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Merge</guimenuitem> (<keycap>m</keycap>)</term>
+        <term><guimenuitem>Merge</guimenuitem> (<keycap>M</keycap>)</term>
         <listitem>
           <para>If only one segment is selected, the aligner will merge it with the following segment. If two or more segments are selected, they will all be merged, but remain in separate cells. Calling the command  on the same selection one more time merges the contents of all selected cells into a single cell.</para>
           <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Edit</guimenuitem> (<keycap>e</keycap>)</term>
+        <term><guimenuitem>Edit</guimenuitem> (<keycap>E</keycap>)</term>
         <listitem>
-          <para>This command can only be performed on a single segment. Calling this command opens the <guilabel>Edit Text</guilabel> dialog, which allows you to make changes to the text of the segment. Use the <guibutton>OK</guibutton> button to close the dialog when finished. (In this dialog, the <keycap>Enter</keycap> enters a line break in the text. Use <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo> to close it wihtout using the mouse.</para>
+          <para>This command can only be performed on a single segment. Calling this command opens the <guilabel>Edit Text</guilabel> dialog, which allows you to make changes to the text of the segment. Use the <guibutton>OK</guibutton> button to close the dialog when finished. (In this dialog, the <keycap>Enter</keycap> enters a line break in the text.</para>
+		  <para>Use <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo> to close it wihtout using the mouse.</para>
           <para>This command is also available from the button to the right of the main window pane.</para>
         </listitem>
       </varlistentry>
@@ -370,7 +372,9 @@
       <varlistentry>
         <term><guimenuitem>Start Pinpoint Align</guimenuitem> (<keycap>Space</keycap>)</term>
         <listitem>
-          <para>If the corresponding segments are several rows apart, you can use this command to align them quickly. Select a segment, and press <keycap>Space</keycap> or select <menuchoice><guimenu>Edit</guimenu><guimenuitem>Start Pinpoint Align</guimenuitem></menuchoice> to set the first segment, and then click on the corresponding segment in the other column. (You can also use the arrow keys and press <keycap>Space</keycap> in the corresponding segment.)</para>
+          <para>If the corresponding segments are several rows apart, you can use this command to align them quickly. Select a segment, and press <keycap>Space</keycap> or select <menuchoice><guimenu>Edit</guimenu><guimenuitem>Start Pinpoint Align</guimenuitem></menuchoice> to set the first segment, and then click on the corresponding segment in the other column.</para>
+		  <para>You can also use the arrow keys and press <keycap>Space</keycap>
+		  in the corresponding segment.</para>
           <para>Segments aligned with this method are automatically marked as accepted.</para>
           <para>It can be helpful to run the <guimenuitem>Realign Pending</guimenuitem> command after using pinpoint align a few times.</para>
         </listitem>

@@ -3,11 +3,18 @@
 <section id="windows.text.search">
   <title id="windows.text.search.title">Text Search</title>
 
-  <para>Open a new search window with <keycombo> <keycap>C</keycap> <keycap>f</keycap> </keycombo> and enter the word or phrase you wish to search for in the search field.</para>
+  <para>Use <link linkend="menus.edit.search.project"
+  endterm="menus.edit.search.project.title"/> to open a new search window and
+  enter the word or phrase you wish to search for in the search field.</para>
   
-  <para>Alternatively, select a word or phrase in the <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane and hit <keycombo><keycap>C</keycap><keycap>f</keycap></keycombo>. The selection is automatically entered in the search field.</para>
+  <para>Alternatively, select a word or phrase in the <link
+  linkend="panes.editor" endterm="panes.editor.title"/>, <link
+  linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, or <link
+  linkend="panes.glossary" endterm="panes.glossary.title"/> pane and hit
+  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>. The selection is
+  automatically entered in the search field.</para>
 
-  <para>You can have several search windows open at the same time. Use <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>f</keycap></keycombo> to call the last search window.</para>
+  <para>You can have several search windows opened at the same time. Use <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>F</keycap></keycombo> to call the last search window.</para>
 
   <para>Click the dropdown arrow of the <guilabel>Search for:</guilabel> field to access the last ten searches.</para>
 
@@ -19,31 +26,31 @@
 
   <itemizedlist>
     <listitem>
-      <para>File &gt; Search for Selection (<keycombo> <keycap>C</keycap> <keycap>f</keycap> </keycombo>): the current selection is inserted in the search field.</para>
+      <para><guimenu>File</guimenu> &gt; <guimenuitem>Search for Selection</guimenuitem> (<keycombo> <keycap>C</keycap> <keycap>F</keycap> </keycombo>): the current selection is inserted in the search field.</para>
     </listitem>
 
     <listitem>
-      <para>File &gt; Close (<keycombo> <keycap>C</keycap> <keycap>w</keycap> </keycombo>): close the search window (same as <keycap>Esc</keycap>).</para>
+      <para><guimenu>File</guimenu> &gt; <guimenuitem>Close</guimenuitem> (<keycombo> <keycap>C</keycap> <keycap>W</keycap> </keycombo>): close the search window.</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Insert Source (<keycombo> <keycap>S</keycap> <keycap>C</keycap> <keycap>i</keycap> </keycombo>): insert the content of the current source segment.</para>
+      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Insert Source</guimenuitem> (<keycombo> <keycap>S</keycap> <keycap>C</keycap> <keycap>I</keycap> </keycombo>): insert the content of the current source segment.</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Replace with Source (<keycombo> <keycap>S</keycap> <keycap>C</keycap> <keycap>r</keycap> </keycombo>): replace the contents of the search field with those of the  current source segment.</para>
+      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Replace with Source</guimenuitem> (<keycombo> <keycap>S</keycap> <keycap>C</keycap><keycap>R</keycap> </keycombo>): replace the contents of the search field with those of the  current source segment.</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Create Glossary Entry (<keycombo>
+      <para><guimenu>Edit </guimenu>&gt; <guimenuitem>Create Glossary Entry</guimenuitem> (<keycombo>
           <keycap>S</keycap>
           <keycap>C</keycap>
-          <keycap>g</keycap>
+          <keycap>G</keycap>
         </keycombo>): add a new glossary item. See <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> for details.</para>
     </listitem>
 
     <listitem>
-      <para>Edit &gt; Reset Options: reset the search window options.</para>
+      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Reset Options</guimenuitem>: reset the search window options.</para>
     </listitem>
   </itemizedlist>
 
@@ -82,16 +89,21 @@
 
     <itemizedlist>
       <listitem>
-        <para>'*' matches zero or more characters, from the current position up to the end of a word. The search term <literal>'run*'</literal>, for example, matches <literal>'run'</literal>, <literal>'runs'</literal> and <literal>'running'</literal>.</para>
+        <para><code>*</code> matches zero or more characters, from the current
+        position up to the end of a word.</para>
+		<para>The search term <literal>run*</literal>, for example, matches
+		<literal>run</literal>, <literal>runs</literal> and
+		<literal>running</literal>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>'?' matches any single character. For instance, <literal>'run?'</literal> matches <literal>'runs'</literal>, as well as <literal> the 'runn'</literal> portion of <literal>'running'</literal> or <literal>'runner'</literal>.</para>
+        <para><code>?</code> matches any single character.</para>
+		<para>For instance, <literal>run?</literal> matches <literal>runs</literal>, as well as the <literal>runn</literal> portion of <literal>running</literal> or <literal>runner</literal>.</para>
       </listitem>
     </itemizedlist>
-<warning><para>The '*' and '?' characters have a special meaning in regular expressions. Therefore, the wild card searches described above only apply to exact and keyword searches.</para></warning>
+<warning><para>The <code>*</code> and <code>?</code> characters have a special meaning in regular expressions. Therefore, the wild card searches described above only apply to exact and keyword searches.</para></warning>
   </section>
 
   <section id="windows.text.search.options">
@@ -138,8 +150,23 @@
 
     <para>Matches are displayed in their order of appearance in the project. For translated segments, the original text is displayed above the translated text. Only the source text is displayed for untranslated segments.</para>
 
-    <para>You can use the standard (<keycombo> <keycap>C</keycap> <keycap>n</keycap> </keycombo>, <keycombo> <keycap>C</keycap> <keycap>p</keycap> </keycombo>) shortcuts to move from one segment to another in the search window.</para>
-
+    <para>You can use the following shortcuts in the search results:
+	<variablelist>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+		<listitem><para>Move to the next segment</para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+		<listitem><para>Move to the preceeding segment</para></listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+		<listitem><para>Jump to the current segment in the editor.</para></listitem>
+	  </varlistentry>
+	</variablelist>
+	</para>
+	
     <para>Double-click on a segment to open it in the <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
 
   	<para>Check the <guilabel>Auto-sync with Editor</guilabel> box at the bottom of the search window to have selected segments open in the Editor automatically.</para>

@@ -43,12 +43,12 @@
       </listitem>
 
       <listitem>
-        <para>You can then left-click on the number to run its assigned script. You can also run an assigned script from the menu by selecting the applicable entry in the <guisubmenu>Tools</guisubmenu> menu or pressing <keycombo> <keycap>C</keycap><keycap>A</keycap><keycap>F#</keycap></keycombo> (the F1 to F12 key corresponding to the assigned number).</para>
+        <para>You can then left-click on the number to run its assigned script. You can also run an assigned script from the menu by selecting the applicable entry in the <guisubmenu>Tools</guisubmenu> menu or pressing <keycombo> <keycap>C</keycap><keycap>A</keycap><keycap>F1 to F12</keycap></keycombo>.</para>
       </listitem>
     </itemizedlist>
 
     <para>By default, scripts are stored in the <filename class="directory">scripts</filename> subfolder of the OmegaT installation folder (the folder that contains the <filename>OmegaT.jar</filename> file).</para>
-
+<!-- TODO desctiption of the "main" OmegaT folder -->
     <para>New scripts added there will appear in the list of available scripts in the <guilabel>Scripting</guilabel> window.</para>
 
     <important>

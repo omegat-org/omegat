@@ -19,7 +19,10 @@
         <term id="dialogs.preferences.general.use.tab.to.advance.title">Use TAB to Advance</term>
 
         <listitem>
-          <para>Sets the segment validation key to <keycap>Tab</keycap> instead of the default <keycap>Enter</keycap> key. [!] This option is useful with some Chinese, Japanese or Korean character input systems.</para>
+		  <para>The default key to validate and leave a segment is <keycap>Enter</keycap>.</para>
+          <para>This option sets the segment validation key to
+          <keycap>Tab</keycap> instead. This option is useful with some Chinese,
+          Japanese or Korean character input systems.</para>
         </listitem>
       </varlistentry>
 
@@ -255,7 +258,7 @@
 
       <para>This option allows you to choose different colours for the various parts of the user interface.</para>
 
-      <para>Scripts can be used to set predefined themes. OmegaT is bundled with a script called <emphasis>Switch Colour Themes</emphasis> that provides a default dark theme. See <link linkend="windows.scripts" endterm="windows.scripts.title"/> for details.</para>
+      <para>Scripts can be used to set predefined themes. OmegaT is bundled with a script called <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"/> that provides a default dark theme. See <link linkend="windows.scripts" endterm="windows.scripts.title"/> for details.</para>
     </section>
   </section>
 
@@ -883,7 +886,9 @@
 		  source text</term>
 
 		  <listitem>
-			<para>You can have the source text inserted automatically into the editing field. This is useful for texts containing many trademarks or other proper nouns that must be left unchanged.</para>
+			<para>You can have the source text inserted automatically into the
+			editing field. This is useful for texts containing many trademarks
+			or other proper nouns that must be left unchanged.</para>
 		  </listitem>
 		</varlistentry>
 
@@ -892,7 +897,18 @@
 		  segment empty</term>
 
 		  <listitem>
-			<para>OmegaT leaves the editing field blank. This option allows you to enter the translation without the need to remove the source text, thus saving you two keystrokes (<keycombo> <keycap>Ctrl</keycap> <keycap>A</keycap> </keycombo> and <keycap>Del</keycap>). Empty translations are now allowed. They are displayed as <literal>&lt;EMPTY&gt;</literal> in the editor pane. To create one, right-click in a segment, and select <menuchoice><guimenuitem>Set empty translation</guimenuitem></menuchoice>. The entry <menuchoice><guimenuitem>Remove translation</guimenuitem></menuchoice> in the same context menu allows you to delete the existing translation of the current segment. You achieve the same effect by clearing the target segment and pressing the <keycap>Enter</keycap> key.</para>
+			<para>OmegaT leaves the editing field blank. This option allows you
+			to enter the translation without the need to remove the source text,
+			thus saving you two keystrokes (Select All / Delete).</para>
+			<para>Empty translations are now allowed. They are displayed as
+			<literal>&lt;EMPTY&gt;</literal> in the editor pane. To create one,
+			right-click in a segment, and select <menuchoice><guimenuitem>Set
+			empty translation</guimenuitem></menuchoice>. The entry
+			<menuchoice><guimenuitem>Remove
+			translation</guimenuitem></menuchoice> in the same context menu
+			allows you to delete the existing translation of the current
+			segment. You achieve the same effect by clearing the target segment
+			and pressing the <keycap>Enter</keycap> key.</para>
 		  </listitem>
 		</varlistentry>
 
@@ -901,7 +917,17 @@
 		  the best fuzzy match</term>
 
 		  <listitem>
-			<para>OmegaT inserts the translation of the string most similar to the current source, if it exceeds the similarity threshold you set in this dialog. The prefix (empty by default) can be used to identify translations inserted as fuzzy matches. If you add a prefix (for instance [fuzzy]), you can easily track down those translations later to make sure they are correct.</para>
+			<para>OmegaT automatically inserts the translation of the string
+			most similar to the current source, if it exceeds the similarity
+			threshold you set in this dialog.</para>
+			<para>The prefix is used to identify translations inserted as fuzzy
+			matches. You can also se the prefix as a <link
+			linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
+			endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
+			to include it in the validation process.</para>
+			<para>Some scripts are very useful when it comes to matches
+			insertion. See <link linkend="windows.scripts.distribution"
+			endterm="windows.scripts.distribution.title"/> for details.</para>
 		  </listitem>
 		</varlistentry>
 	  </variablelist>
@@ -949,29 +975,58 @@
 		  segment to text files</term>
 
 		  <listitem>
-			<para>The text export function exports data from within the current OmegaT project to plain text files. The data is exported when the segment is opened. The files appear in the <filename class="directory">script</filename> subfolder of the OmegaT user files folder, and include:</para>
+		  <note><para>Although this function allows segment contents to be
+		  exported to text files in a folder named <link
+		  linkend="configuration.folder.default.contents.script"
+		  endterm="configuration.folder.default.contents.script.title"/>, it has
+		  no relation to the <link linkend="windows.scripts.title"
+		  endterm="windows.scripts.title"/> feature and only shares a name for
+		  historical reasons</para></note>
+		  
+			<para>The text export function exports data from within the current
+			OmegaT project to plain text files. The data is exported when the
+			segment is opened. The files appear in the <link
+			linkend="configuration.folder.default.contents.script"
+			endterm="configuration.folder.default.contents.script.title"/>
+			subfolder of the OmegaT user files folder (see <link
+			linkend="configuration.folder"
+			endterm="configuration.folder.title"/> for details), and
+			include:</para>
 
 			<itemizedlist>
 			  <listitem>
 				<para>The content of the segment source text
-				(<filename>source.txt</filename>).</para>
+				(<link linkend="configuration.folder.default.contents.script.source" endterm="configuration.folder.default.contents.script.source.title"/>).</para>
 			  </listitem>
 
 			  <listitem>
 				<para>The content of the segment target text
-				(<filename>target.txt</filename>).</para>
+				(<link linkend="configuration.folder.default.contents.script.target" endterm="configuration.folder.default.contents.script.target.title"/>).</para>
 			  </listitem>
 
 			  <listitem>
-				<para>The text that had been highlighted by the user before pressing <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>C</keycap> </keycombo> or selecting <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Export Selection</guimenuitem> </menuchoice> is selected (<filename>selection.txt</filename>).</para>
+				<para>The text that has been highlighted by the user before
+				using <link linkend="menus.edit.export.selection" endterm="menus.edit.export.selection.title"/> (<link
+				linkend="configuration.folder.default.contents.script.selection"
+				endterm="configuration.folder.default.contents.script.selection.title"/>).</para>
 			  </listitem>
 			</itemizedlist>
 
 			<para>The content of the files is overwritten either when a new
-			segment is opened (<filename>source.txt</filename> and <filename>target.txt</filename>) or when a new
-			selection is exported (<filename>selection.txt</filename>). The files are unformatted plain text files. The whole process can be steered and controlled via Tck/Tcl-based scripting. See <ulink url="http://www.omegat.org/en/howtos/text_export.html">Using the
-			OmegaT text export function</ulink> for specifics, examples and
+			segment is opened or when a new selection is exported.</para>
+
+			<para>The files are unformatted plain text files. The whole process
+			can be steered and controlled via Tck/Tcl-based scripting. See
+			<ulink url="http://www.omegat.org/en/howtos/text_export.html">Using
+			the OmegaT text export function</ulink> for specifics, examples and
 			suggestions.</para>
+
+			<para>The <link
+			linkend="windows.scripts.distribution.extract.text.content"
+			endterm="windows.scripts.distribution.extract.text.content.title"/>
+			script does something similar but for the whole project at once. See
+			<link linkend="windows.scripts"
+			endterm="windows.scripts.title"/>.</para>
 		  </listitem>
 		</varlistentry>
 
@@ -981,7 +1036,12 @@
 		  alternative translation</term>
 
 		  <listitem>
-			<para>Ticking this check box will cause the <emphasis role="bold">Go To Next Untranslated Segment</emphasis> command to stop at each segment with more than one possible translation, irrespective of whether  it has already been translated. This allows you to make sure there are no mistranslations.</para>
+			<para>Ticking this check box will cause <link
+			linkend="example.next.untranslated.segment"
+			endterm="example.next.untranslated.segment.title"/> to stop at each
+			segment with more than one possible translation, irrespective of
+			whether it has already been translated. This allows you to make sure
+			there are no mistranslations.</para>
 		  </listitem>
 		</varlistentry>
 
@@ -990,7 +1050,9 @@
 		  editing</term>
 
 		  <listitem>
-			<para>Leave this option unchecked to prevent any corruption of the tags (such as a partial deletion) during editing. You can still remove a complete tag with <keycombo><keycap>C</keycap><keycap>Backspace</keycap></keycombo>/<keycap>Delete</keycap> or by selecting it (using the mouse or <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>Left</keycap></keycombo>/<keycap>Right</keycap> key combination), and deleting it (<keycap>Delete</keycap> or <keycombo><keycap>C</keycap><keycap>X</keycap></keycombo>).</para>
+			<para>Leave this option unchecked to prevent any corruption of the
+			tags (such as a partial deletion) during editing. You can still
+			remove a complete tag by deleting it.</para>
 		  </listitem>
 		</varlistentry>
 

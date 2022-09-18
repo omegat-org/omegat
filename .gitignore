@@ -16,3 +16,9 @@ local.properties
 
 # emacs backup files
 *~
+
+# temporary 
+en/index.xml
+en/notes.org
+en/xhtml5/
+../docs/

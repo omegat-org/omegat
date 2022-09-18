@@ -1037,8 +1037,8 @@
 
 		  <listitem>
 			<para>Ticking this check box will cause <link
-			linkend="example.next.untranslated.segment"
-			endterm="example.next.untranslated.segment.title"/> to stop at each
+			linkend="menus.goto.next.untranslated.segment"
+			endterm="menus.goto.next.untranslated.segment.title"/> to stop at each
 			segment with more than one possible translation, irrespective of
 			whether it has already been translated. This allows you to make sure
 			there are no mistranslations.</para>

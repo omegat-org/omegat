@@ -197,7 +197,7 @@
 		  endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
 		  <note><para>For security purposes, project based external commands are
 		  disabled by default. You can enable them by checking <link
-		  linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands."
+		  linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands"
 		  endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>
 		  in the <link linkend="dialogs.preferences.saving.and.output"
 		  endterm="dialogs.preferences.saving.and.output.title"/>

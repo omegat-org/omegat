@@ -4,7 +4,7 @@
     background-color: #FDFDFD;
     line-height: 1.5;
     color:#212925;
-    text-align:justify;
+    text-align:left;
     clip-path: padding-box;
 
 }
@@ -44,6 +44,7 @@
     padding-bottom: 5em;
 }
 }
+
 h1, h2, h3, h4, dt {
     color: #006c6c;
 }
@@ -76,7 +77,6 @@ h1 {
 
 }
 }
-
 
 
 h2 {
@@ -113,18 +113,6 @@ h6:first-child {
 
 
 
-.keycap {
-    display:inline-block;
-    font-size: .8rem;
-    border: 1px solid black;
-    border-radius:4px;
-    background: gainsboro;
-    padding-left:.3rem;
-    padding-right:.3rem;
-    margin:.2rem;
-    white-space:nowrap;
-}
-
 
 /*
 code, .code {
@@ -136,6 +124,7 @@ code, .code {
     vertical-align: baseline;
 }
 */
+
 p,
 pre,
 ol,
@@ -157,9 +146,8 @@ blockquote {
 }
 
 code.filename {
-    color: #333;
-    font-weight:800;
-/*    font-size:1.1em; */
+    font-weight:bold;
+    font-size:1.3em;
 }
 
 .programlisting,
@@ -175,24 +163,13 @@ code.filename {
     font-weight: bold;
 }
 
-span.keycap:last-of-type {
-    color: white;
-    background-color: LightSeaGreen;
-    font-weight: bold;
-}
-
-table span.keycap:last-of-type {
-    background-color: gainsboro;
-    color: black;
-}
-
 code,
 tt,
 kbd,
 samp,
 var,
 pre {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: monospace;
 /*    font-size: 1.1em;
     line-height: 1.63; */
 }
@@ -302,8 +279,6 @@ dd {
 }
 
 
-
-
 .new {
     font-size: x-small;
     color: red;
@@ -325,6 +300,7 @@ dd {
     margin-bottom:1em;
     padding:0 1em;
 }
+
 .note h3 {
     display:inline-block;
     margin:.5em 0 0 0;
@@ -348,31 +324,30 @@ dd {
     color:red;
 }
 
-.guimenu {
-    background-color:#F0F0F0;
-    padding:0 .5em;
-    font-family:monospace;
-    font-weight:bold;
 
-}
 
 /* links */
 
 a {
     text-decoration:none;
 }
+
 a:link {
     color:teal;
 }
+
 a:visited{
     color:slategrey;
 }
+
 a.ulink:link {
     color:steelblue;
 }
+
 a.ulink:visited {
     color:midnightblue;
 }
+
 a:hover {
     text-decoration:underline;
 }
@@ -435,6 +410,74 @@ pre.programlisting {
 /*    padding: 1.2em 0.5em 0 1.5em; */
 }
 
+/* gui items */
+
+span.guimenu, span.guimenuitem {
+    display:inline-block;
+    font-family:monospace;
+    border: .1px solid black;
+    border-radius:4px;
+    padding-left:.3rem;
+    padding-right:.3rem;
+    margin:.2rem;
+    background: whitesmoke;
+    color: black;
+}
+
+/* keycaps */
+
+.keycap {
+    display:inline-block;
+    font-size: .8rem;
+    border: 1px solid black;
+    border-radius:4px;
+    padding-left:.3rem;
+    padding-right:.3rem;
+    margin:.2rem;
+    background: gainsboro;
+    color: black;
+}
+
+td>span.keycaps {
+    background: gainsboro;
+    color: black;
+}
+
+span.term>span.keycap {
+    background: gainsboro;
+    color: black;
+}
+
+section.section>p>span.keycap:last-of-type {
+    background: lightseagreen;
+    color: white;
+} 
+p span.keycap:last-of-type {
+    background: lightseagreen;
+    color: white;
+}
+dd span.keycap:last-of-type {
+    background: lightseagreen;
+    color: white;
+}
+li.listitem span.keycap:last-of-type {
+    background: lightseagreen;
+    color: white;
+}
+span.term>span.keycap:last-of-type {
+    background: lightseagreen;
+    color: white;
+}
+
+div.example-contents span.keycap:last-of-type {
+    background: lightseagreen;
+    color: white;
+}
+
+p > span.keycap:last-child  {
+    background: lightseagreen;
+    color: white;
+}
 
 /* index page */
 #wh-content .book  div.toc {

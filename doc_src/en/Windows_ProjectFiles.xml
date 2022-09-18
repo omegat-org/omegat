@@ -69,11 +69,21 @@
   linkend="appendix.segmentation" endterm="appendix.segmentation.title"/> for
   details.</para>
 
-  <para>Use the <guimenuitem>Import Source Files...</guimenuitem> button to add
-  source files to the project. This copies the selected files to the <link
+  <para>The buttons at the bottom can be used to add files to your project:
+  <variablelist>
+	<varlistentry id="windows.project.files.copy.files"><term
+	id="windows.project.files.copy.files.title">Copy Files to Source
+	Folder...</term>
+	<listitem><para>Copies the selected files to the <link
   linkend="project.folder.source.title" endterm="project.folder.source.title"/>
-  folder and reloads the project to take the new files into account. You can also add
-  source files from Internet pages, written in MediaWiki, by clicking on
-  <guimenuitem>Import from MediaWiki</guimenuitem> button and providing the
-  corresponding URL.</para>
+  folder and reloads the project to take the new files into account.</para></listitem>
+	</varlistentry>
+	<varlistentry id="windows.project.files.download.page"><term
+	id="windows.project.files.download.page.title">Download Mediawiki
+	Page...</term>
+	<listitem><para>Asks for the page URL and downloads it into the <link
+  linkend="project.folder.source.title" endterm="project.folder.source.title"/> folder.</para></listitem>
+	</varlistentry>
+  </variablelist>
+  </para>
 </section>

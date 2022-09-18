@@ -357,7 +357,7 @@
         folder.</para>
 
 		<para>The three files are located inside the <link
-		linkend="project.folder" endterm="project.folder.title"/> folder and are
+		linkend="project.folder" endterm="project.folder.title"/> and are
 		called <filename>(project name)-level1.tmx</filename>,
 		<filename>(project name)-level2.tmx</filename> and <filename>(project
 		name)-omegat.tmx</filename>. They can be used as reference translation

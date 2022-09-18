@@ -412,7 +412,7 @@ pre.programlisting {
 
 /* gui items */
 
-span.guimenu, span.guimenuitem {
+span.guimenu, span.guimenuitem, span.guibutton, span.guilabel {
     display:inline-block;
     font-family:monospace;
     border: .1px solid black;

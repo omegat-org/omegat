@@ -1,0 +1,24 @@
+build
+
+# Gradle
+.gradle
+.settings
+.project
+.classpath
+bin
+.nb-gradle
+local.properties
+
+.idea
+
+# Docs
+.fop
+
+# emacs backup files
+*~
+
+# temporary 
+index.xml
+notes.org
+xhtml5/
+docs/

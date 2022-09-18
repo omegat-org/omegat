@@ -311,7 +311,6 @@
 
     <para>The machine translation pane, when opened, contains the suggestions produced for the current segment by one or more enabled translation engines. When suggestions from more than one engine are available, the name of the engine will appear after the translated text, and the currently selected translation is highlighted.</para>
     <para>Press <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> to replace the translation of the current segment with the selected translation.</para>
-    <para>If there is a connection or authentication error, a status message will be displayed at the bottom of the pane.</para>
     
   </section>
 
@@ -339,6 +338,9 @@
     <title id="panes.statusbar.title">Status bar</title>
 
     <para>The status bar displays workflow information at the bottom of the main window. It provides feedback on the progress of specific operations, and also displays the number of fuzzy and glossary matches for the current segment.</para>
+
+    <para>The left side of the status bar shows information or error messages about operations in progress. When machine translation is used, this area displays a status message if there is a connection or authentication error.</para>
+    <para>For example, a message such as <literal>IBMWATSON_API_KEY_NOTFOUND=IBM Watson not available. See OmegaT manual for instructions.</literal> indicates that you should double-check that your <link linkend="dialogs.preferences.mt.provider.list" endterm="dialogs.preferences.mt.provider.list.title">make sure your credentials are entered correctly</link>, while an error such as <literal>MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE=Unable to parse translate service response</literal> suggests that there may be a communication problem between your system and the provider's server.</para>
 
     <para>The counters in the lower right corner keep track of the progress of the translation. (The left-hand column uses the numbers from the above figure):</para>
 

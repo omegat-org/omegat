@@ -372,7 +372,7 @@
       <varlistentry>
         <term><guimenuitem>Start Pinpoint Align</guimenuitem> (<keycap>Space</keycap>)</term>
         <listitem>
-          <para>If the corresponding segments are several rows apart, you can use this command to align them quickly. Select a segment, and press <keycap>Space</keycap> or select <menuchoice><guimenu>Edit</guimenu><guimenuitem>Start Pinpoint Align</guimenuitem></menuchoice> to set the first segment, and then click on the corresponding segment in the other column.</para>
+          <para>If the corresponding segments are several rows apart and you want to quickly align them, use this command to set the first segment and then click on the corresponding segment in the other column.</para>
 		  <para>You can also use the arrow keys and press <keycap>Space</keycap>
 		  in the corresponding segment.</para>
           <para>Segments aligned with this method are automatically marked as accepted.</para>

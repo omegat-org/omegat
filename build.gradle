@@ -10,7 +10,6 @@ plugins {
     id 'checkstyle'
     id 'jacoco'
     id 'com.github.spotbugs' version '4.7.10'
-    id 'de.gliderpilot.jnlp' version '1.2.6'
     id 'org.hidetake.ssh' version '2.10.1'
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
@@ -215,9 +214,6 @@ dependencies {
         testImplementation "org.languagetool:language-${it}:${languageToolVersion}"
     }
     testRuntimeOnly "org.languagetool:language-pl:${languageToolVersion}"
-
-    // WebStart-only
-    jnlp webstartDocsJar.outputs.files
 
     // JAXB codegen only
     jaxb 'com.sun.xml.bind:jaxb-xjc:2.3.4'
@@ -740,51 +736,6 @@ makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE64, arch:
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }
 // Disable .zip distributions for Linux
 tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { it.enabled = false }
-
-jnlp {
-    href "${applicationName}.jnlp"
-    codebase findProperty('jwsCodebase')
-    withXml {
-        information {
-            title applicationName
-            vendor "${applicationName} Development Team"
-            homepage href: omtWebsite
-            shortcut(online: false) {
-                desktop()
-                menu submenu: "${applicationName} from WebStart"
-            }
-        }
-        'offline-allowed'()
-        association 'mime-type': 'application/x-omegat-project', extensions: 'project'
-        security {
-            'all-permissions'()
-        }
-        resources {
-            property name: 'javaws.cfg.jauthenticator', value: true
-        }
-    }
-    signJarAddedManifestEntries = [
-        'Codebase': findProperty('jwsCodebase'),
-        'Permissions': 'all-permissions',
-        'Application-Name': applicationName
-    ]
-    signJarParams = ['keystore', 'storetype', 'alias', 'storepass', 'keypass', 'tsaurl'].collectEntries {
-        [it, findProperty("jws${it.capitalize()}")]
-    }
-}
-
-[webstartDistZip, signJars, generateJnlp].each { task ->
-    task.configure {
-        def requiredProps = ['jwsCodebase', 'jwsKeystore', 'jwsAlias']
-        onlyIf {
-            condition(requiredProps.every { project.hasProperty(it) },
-                      'Java Web Start properties not set')
-        }
-        requiredProps.each {
-            inputs.property it, findProperty(it)
-        }
-    }
-}
 
 processResources {
     def revision = detectRevision()

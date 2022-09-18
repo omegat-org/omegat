@@ -862,7 +862,7 @@
 			<guilabel>{target}</guilabel> to be accepted. The {target} placeholder will be replaced by the string that was selected in the Editor.</para>
 			<para>URLs are opened with the default web browser, one per tab.</para>
 			<example><title>URL search example</title>
-			<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee+-reverso+-glosbe+-larousse+-amazon+-dictionnaire+-docplayer+-pinterest+-translation</programlisting>
+			<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee</programlisting>
 			<para>This opens a search for the {target} term on DuckDuckGo with a number of search parameters.</para></example>
 			<para>Commands are opened on the command line. The
 			<guilabel>Delimiter</guilabel> is used to define the delimiter

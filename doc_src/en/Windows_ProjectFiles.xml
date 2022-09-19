@@ -31,12 +31,12 @@
       arrows to select a file, and open it for translation by pressing
       <keycap>Enter</keycap>.</para>
 
-      <note><para>Filenames (in first column) can be sorted alphabetically by
-      clicking in the header. It also possible to change the position of a
+      <note><para>Filenames (in the first column) can be sorted alphabetically by
+      clicking in the header. It is also possible to change the position of a
       filename, by clicking on it and pressing the <guibutton>Move ...</guibutton>
       buttons on the right.</para></note>
 
-      <para>Right-clicking on a filename opens a popup that allows to open the
+      <para>Right-clicking on a filename opens a popup that allows opening the
       source file and (if it exists) the target file.</para>
     </listitem>
 
@@ -48,7 +48,7 @@
     <listitem>
       <para>The total number of segments, the number of unique segments in the
       whole project, and the number of unique segments already translated are
-      shown at the bottom</para>
+      shown at the bottom.</para>
     </listitem>
   </itemizedlist>
 

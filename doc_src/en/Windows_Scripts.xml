@@ -54,7 +54,7 @@
     <important>
       <para>Depending on the configuration of your operating system, you may not have permission to write to the default scripts folder location.</para>
 
-      <para>In such cases, you will have to copy or move the scripts subfolder to a location for which you do have write permissions, such as the <link endterm="configuration.folder.location.title" linkend="configuration.folder.location"/>, if you want to write your own scripts, add new ones, or modify existing ones.</para>
+      <para>In such cases, you will have to copy or move the script subfolder to a location for which you have write permissions, such as the <link endterm="configuration.folder.location.title" linkend="configuration.folder.location"/>, if you want to write your own scripts, add new ones, or modify existing ones.</para>
     </important>
 
     <warning>

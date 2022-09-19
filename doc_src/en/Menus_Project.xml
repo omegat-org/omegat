@@ -74,7 +74,7 @@
     <varlistentry id="menus.project.download.mediawiki.page">
       <term id="menus.project.download.mediawiki.page.title">Download MediaWiki Page...</term>
       <listitem>
-		<para>Opens a dialog where you can paste the URL of the <emphasis>Edit</emphasis> tab of the mediawiki page you want to translate.</para>
+		<para>Opens a dialog where you can paste the URL of the <emphasis>Edit</emphasis> tab of the Mediawiki page you want to translate.</para>
         <note><para>To translate the contents of a Wikipedia page (for
         example):</para>
         <orderedlist>
@@ -245,7 +245,7 @@
         linkend="project.folder">Project folder</link> for more details.</para>
         <para>In addition, there are three menu entries that directly open the current
         source or target documents, or the writable glossary. The documents are
-        opened in the default application set by the operating system. The options are greyed out if the documents do not exist yet.</para>
+        opened in the default application set by the operating system. The options are grayed out if the documents do not exist yet.</para>
 
 		<variablelist>
 		  <varlistentry>

@@ -145,7 +145,7 @@
 	<itemizedlist>
 	  <listitem><para>The line in bold characters against a green background is the source text to translate.</para></listitem>
 	  <listitem><para>The line below showing the cursor is where you enter the translation.</para></listitem>
-	  <listitem><para>That line ends with a segment marker. In this example, (<literal>&lt;segment 0400 ¶&gt;</literal> is the marker, with <literal>0400</literal> as the number of the segment in the project and a <literal>¶</literal>  symbol identifying that segment as the first in a paragraph.</para></listitem>
+	  <listitem><para>That line ends with a segment marker. In this example, <literal>&lt;segment 0400 ¶&gt;</literal> is the marker, with <literal>0400</literal> as the number of the segment in the project and a <literal>¶</literal>  symbol identifying that segment as the first in a paragraph.</para></listitem>
 	  <listitem><para>You can make changes to any of the content that comes before the segment marker.</para></listitem>
 	  <listitem><para>The line below the segment marker is a different segment in the source language that has not been translated yet.</para></listitem>
 	  <listitem><para>Use <link linkend="menus.goto.next.segment" endterm="menus.goto.next.segment.title"/> or another command that moves to a new segment to:<itemizedlist>
@@ -206,7 +206,7 @@
 		<listitem><para>On macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo>.</para>
 		</listitem>
 	  </itemizedlist>
-	  You can also bring up the menu by right clicking the mouse
+	  You can also bring up the menu by right-clicking the mouse
 	  (<keycap>C</keycap> + <keycap>click</keycap> on macOS).</para>
 	  
 	  <para>The Editor pane context menu offers:
@@ -316,9 +316,9 @@
 
     <para>The Glossary pane shows the translations of terms in the current segment that are present in the glossary files located in the project's <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
 	<para>You can select a term in the glossary pane and right click on it to insert it into the translation.</para>
-    <para>If you have activated <link linkend="menus.view.mark.glossary.matches" endterm="menus.view.mark.glossary.matches.title"/> in the <link linkend="menus.view" endterm="menus.view.title"/> menu, you can right click on the highlighted word in the source segment to open a pop-up menu listing the translations available in your glossaries. Selecting one will insert it in the segment at the current cursor position.</para>
+    <para>If you have activated <link linkend="menus.view.mark.glossary.matches" endterm="menus.view.mark.glossary.matches.title"/> in the <link linkend="menus.view" endterm="menus.view.title"/> menu, you can right-click on the highlighted word in the source segment to open a pop-up menu listing the translations available in your glossaries. Selecting one will insert it in the segment at the current cursor position.</para>
 
-	<para>You can use the glossary preferences to fine tune how the glossaries are displayed. See <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> for details.</para>
+	<para>You can use the glossary preferences to fine-tune how the glossaries are displayed. See <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> for details.</para>
 
 	<para>OmegaT includes one writable glossary file per project. Use <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> in the <link linkend="menus.edit" endterm="menus.edit.title"/> menu to add terms to that file.</para>
 

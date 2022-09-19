@@ -14,9 +14,9 @@
   <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>. The selection is
   automatically entered in the search field.</para>
 
-  <para>You can have several replacewindows opened at the same time.</para>
+  <para>You can have several replace windows opened at the same time.</para>
 
-  <para>Click the dropdown arrow of the <guilabel>Search for:</guilabel> or
+  <para>Click the drop-down arrow of the <guilabel>Search for:</guilabel> or
   <guilabel>Replace with:</guilabel> fields to access the last ten items.</para>
 
   <para>Enter the string you want to insert to replace your search term in the
@@ -34,7 +34,7 @@
 
   <para>Click one of the following options: <itemizedlist>
       <listitem>
-        <para><guilabel>Replace All</guilabel>: replace every occurrences (after displaying a confirmation window showing the number of occurrences).</para>
+        <para><guilabel>Replace All</guilabel>: replace every occurrence (after displaying a confirmation window showing the number of occurrences).</para>
       </listitem>
     </itemizedlist><itemizedlist>
       <listitem>
@@ -128,14 +128,14 @@
   <variablelist>
 	<varlistentry><term>Case sensitive</term><listitem><para>Only returns results with the same letter case as the search terms.</para></listitem></varlistentry>
 	
-	<varlistentry><term>Space matches nbsp</term><listitem><para>Space characters in search terms with match both a normal space and a non-breacking space (\u00A) character.</para></listitem></varlistentry>
+	<varlistentry><term>Space matches nbsp</term><listitem><para>Space characters in search terms will match both a normal space and a non-breaking space (\u00A) character.</para></listitem></varlistentry>
 
 	<varlistentry><term>Untranslated</term><listitem><para>Also  search in untranslated segments.</para></listitem></varlistentry>
   </variablelist>
  
     <para>You can click on the <guibutton>Show Advanced Options</guibutton> button  to select additional criteria such as the person who authored or changed the translation, or the date and time of translation (modification).</para>
 
-	<para>Checking the <guilabel>Full/Half width char insensitive</guilabel> option will return results that match both the full- and half-width forms (CJK characters) of the characters in the search terms.</para>
+	<para>Checking the <guilabel>Full/Half-width char insensitive</guilabel> option will return results that match both the full- and half-width forms (CJK characters) of the characters in the search terms.</para>
   </section>
 
   <section id="windows.text.replace.result.display">
@@ -154,7 +154,7 @@
 	  </varlistentry>
 	  <varlistentry>
 		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
-		<listitem><para>Move to the preceeding segment</para></listitem>
+		<listitem><para>Move to the preceding segment</para></listitem>
 	  </varlistentry>
 	  <varlistentry>
 		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>

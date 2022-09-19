@@ -16,7 +16,7 @@
 
 	<varlistentry id="project.folder.omegat.project.file">
 	  <term id="project.folder.omegat.project.file.title">omegat.project</term>
-	  <listitem><para>This file contains the properties of the project and also acts as an <emphasis>address book</emphasis>that specifies where project resources are located. By default, a newly created project will contain all the required resources within its folder, and those resources are assigned the default names below.
+	  <listitem><para>This file contains the properties of the project and also acts as an <emphasis>address book</emphasis> that specifies where project resources are located. By default, a newly created project will contain all the required resources within its folder, and those resources are assigned the default names below.
 	  
 	  <itemizedlist>
 		<listitem><para><link linkend="project.folder.source" endterm="project.folder.source.title"/>: the folder that contains the source files</para></listitem>
@@ -38,7 +38,7 @@
 
   <para>You can assign locations other than the default ones to the various resources either when you create the project, or later on.</para>
 
-  <para>For example you can
+  <para>For example, you can
 
   <itemizedlist>
 	<listitem><para>instruct OmegaT to create the translated files in a shared folder outside the project folder, in a location easily accessible to your reviewer, or</para></listitem>
@@ -61,7 +61,7 @@
 
   <section id="project.folder.target">
     <title id="project.folder.target.title">target</title>
-    <para>This subfolder is initially empty. It is populated everytime you use <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>. The files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, whether fully translated or not, are then generated here, using the same hierarchy as in the source contents.</para>
+    <para>This subfolder is initially empty. It is populated every time you use <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>. The files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, whether fully translated or not, are then generated here, using the same hierarchy as in the source contents.</para>
 	<para>The files created here will reflect the current state of the translation. Untranslated segments will remain in the source language.</para>
   </section>
 
@@ -215,7 +215,7 @@
         <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
         <term id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>
-          <para>These files are created and used by the spellchecker. You can also create them by right clicking on a word marked as incorrect and selecting Ignore All (for words to skip during spellchecking), or Add to Dictionary (for words to accept as correct), respectively,  from the context menu. If you already have a collection of words you want the spellchecker to ignore or accept, simply save them in text files with the corresponding names, and copy those files to the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> subfolder of your current project.</para>
+          <para>These files are created and used by the spellchecker. You can also create them by right-clicking on a word marked as incorrect and selecting Ignore All (for words to skip during spellchecking), or Add to Dictionary (for words to accept as correct), respectively,  from the context menu. If you already have a collection of words you want the spellchecker to ignore or accept, simply save them in text files with the corresponding names, and copy those files to the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> subfolder of your current project.</para>
         </listitem>
       </varlistentry>
 
@@ -257,7 +257,7 @@
       <varlistentry id="project.folder.omegat.last.entry">
         <term id="project.folder.omegat.last.entry.title">last_entry.properties</term>
         <listitem>
-          <para>This file keeps record of the last segment you visited, including its number, its source contents, the file name and the date, so that you can come back to it when you reload/relaunch the project.</para>
+          <para>This file keeps a record of the last segment you visited, including its number, its source contents, the file name and the date, so that you can come back to it when you reload/relaunch the project.</para>
         </listitem>
       </varlistentry>	  
     </variablelist>
@@ -265,7 +265,7 @@
 
   <section id="project.folder.omegat.project">
     <title id="project.folder.omegat.project.title">omegat.project</title>
-    <para>This files contains the project parameters defined in the <link linkend="dialogs.project.properties">Project properties</link> dialog.</para>
+    <para>This file contains the project parameters defined in the <link linkend="dialogs.project.properties">Project properties</link> dialog.</para>
   </section>
 
   <section id="project.folder.repositories">

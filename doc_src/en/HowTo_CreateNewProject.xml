@@ -27,7 +27,7 @@
     <para>The <guilabel>Create New Project</guilabel> dialog opens after you
     have named your project. The dialog is identical to the <link
     linkend="dialogs.project.properties"
-    endterm="dialogs.project.properties.title"/> dialog, that you access with
+    endterm="dialogs.project.properties.title"/> dialog that you access with
     <link linkend="menus.project.properties"
     endterm="menus.project.properties.title"/>. At the top of that dialog,
     select the languages of your source and translated files, and click the
@@ -38,7 +38,7 @@
     endterm="menus.project.properties.title"/>.</para>
 
 	<note><para>The structure of a project can be modified at any moment during
-	translation. You can point at new ressource folders from that dialog and
+	translation. You can point at new resource folders from that dialog and
 	OmegaT will just ask you to reload the project to take the new locations
 	into account.</para></note>
 	

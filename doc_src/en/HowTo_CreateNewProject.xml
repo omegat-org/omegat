@@ -14,24 +14,25 @@
     <note>
       <para>Since an OmegaT project is simply a set of folders and subfolders,
       you are entering the name of the folder that will hold your
-      project. Alternatively, you can choose an existing
-      <emphasis>empty</emphasis> folder created beforehand. Keep in mind that
-      OmegaT cannot create a project in a folder that already contains files or
-      subfolders.</para>
+      project.</para>
+	  <para>Alternatively, you can choose an existing <emphasis>empty</emphasis>
+	  folder created beforehand. Keep in mind that OmegaT cannot create a
+	  project in a folder that already contains files or subfolders.</para>
     </note>
 
-    <para>If you don't remember where your project is, you can use <link
-    linkend="menus.project.open.recent"
-    endterm="menus.project.open.recent.title"/>.</para>
-
     <para>The <guilabel>Create New Project</guilabel> dialog opens after you
-    have named your project. The dialog is identical to the <link
-    linkend="dialogs.project.properties"
-    endterm="dialogs.project.properties.title"/> dialog that you access with
-    <link linkend="menus.project.properties"
-    endterm="menus.project.properties.title"/>. At the top of that dialog,
-    select the languages of your source and translated files, and click the
-    <guibutton>OK</guibutton> button to continue.</para>
+    have named your project.</para>
+
+	<para>The dialog is identical to the <link
+	linkend="dialogs.project.properties"
+	endterm="dialogs.project.properties.title"/> dialog that you access with
+	<link linkend="menus.project.properties"
+	endterm="menus.project.properties.title"/>. Refer to that section of the
+	manual to understand the various options.</para>
+
+	<para>At the top of that dialog, select the languages of your source and
+	translated files, set the various options, and click the
+	<guibutton>OK</guibutton> button to continue.</para>
 
     <para>Once you have created the project, you can return to this dialog at
     any time by using <link linkend="menus.project.properties"
@@ -55,4 +56,9 @@
 	linkend="windows.project.files" endterm="windows.project.files.title"/>
 	dialog after the source files have loaded in the <link
 	linkend="panes.editor" endterm="panes.editor.title"/> pane.</para>
+
+	<para>If you don't remember where your project is, you can use <link
+    linkend="menus.project.open.recent"
+    endterm="menus.project.open.recent.title"/>.</para>
+
   </section>

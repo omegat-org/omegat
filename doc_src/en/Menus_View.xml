@@ -38,7 +38,7 @@
       Segments</term>
       <listitem>
         <para>If checked, non-unique segments will be marked in pale
-        grey.</para>      </listitem>
+        gray.</para>      </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.segments.with.notes">
@@ -55,7 +55,7 @@
       <term id="menus.view.mark.non.breakable.space.title">Mark Non-breakable
       Spaces</term>
       <listitem>
-        <para>If checked, non-breakable spaces will be displayed with a grey
+        <para>If checked, non-breakable spaces will be displayed with a gray
         background.</para>      </listitem>
     </varlistentry>
 
@@ -78,7 +78,7 @@
       <term id="menus.view.mark.auto.populated.segments.title">Mark
       Auto-Populated Segments</term>
       <listitem>
-        <para>If checked, segments with an auto-populated translation (from TMXs placed in <filename class="directory">/tm/auto</filename> for example) are marked in various colours.</para>        <para>That colours marking is shown as long as the <link linkend="dialogs.preferences.editor.save.auto-populated.status"><guimenuitem>Save auto-populated status</guimenuitem></link> option is checked. Normal translations inserted from the <filename class="directory">auto</filename> folder are marked in orange. Other translations specifically identified in the TMX, can be marked in different colours. See the <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink> for technical details.</para>
+        <para>If checked, segments with an auto-populated translation (from TMXs placed in <filename class="directory">/tm/auto</filename> for example) are marked in various colors.</para>        <para>That colors marking is shown as long as the <link linkend="dialogs.preferences.editor.save.auto-populated.status"><guimenuitem>Save auto-populated status</guimenuitem></link> option is checked. Normal translations inserted from the <filename class="directory">auto</filename> folder are marked in orange. Other translations specifically identified in the TMX, can be marked in different colors. See the <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink> for technical details.</para>
       </listitem>
     </varlistentry>
 
@@ -99,7 +99,7 @@
     <varlistentry id="menus.view.aggressive.font.fallback">
       <term id="menus.view.aggressive.font.fallback.title">Aggressive Font Fallback</term>
       <listitem>
-        <para>Check this option in case OmegaT does not display certain glyphs properly (even if the fonts containing the relevant glyphs are installed on your machine).</para>		<note><para>On Windows this manual font fallback mechanism has been known to interfere with standard font fallback, causing undesirable font substitution. For that reason, it is OFF by default.</para></note>
+        <para>Check this option in case OmegaT does not display certain glyphs properly (even if the fonts containing the relevant glyphs are installed on your machine).</para>		<note><para>On Windows this manual font fallback mechanism has been known to interfere with the standard font fallback, causing undesirable font substitutions. For that reason, it is OFF by default.</para></note>
       </listitem>
     </varlistentry>
 

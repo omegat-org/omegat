@@ -2,11 +2,18 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="configuration.folder">
   <title id="configuration.folder.title">Configuration Folder</title>
-  <para>The configuration folder stores the majority of the OmegaT parameters and preferences for the user.</para>
-  <note>
-		<para>If anything happens to your OmegaT installation and you can't seem to fix it, close OmegaT, make a backup of the contents of the configuration folder, delete the original configuration folder, and restart OmegaT. You can then copy your backed up configuration files to restore your original preferences.</para>
-	  <para>If you are recovering from a corrupt installation, you should copy the backed up files one at a time to make it easier to isolate the problem if it persists.</para>
-</note>
+  <para>The configuration folder stores the majority of the OmegaT parameters
+  and preferences for the user.</para>
+  	<para>You can always access it directly from <link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> in the <link linkend="menus.options" endterm="menus.options.title"/> menu.</para>
+
+  <note><para>If anything happens to your OmegaT installation and you can't seem
+  to fix it, close OmegaT, make a backup of the contents of the configuration
+  folder, delete the original configuration folder, and restart OmegaT. You can
+  then copy your backed up configuration files to restore your original
+  preferences.</para>
+  <para>If you are recovering from a corrupt installation, you should copy the
+  backed up files one at a time to make it easier to isolate the problem if it
+  persists.</para></note>
 
   <section id="configuration.folder.location">
     <title id="configuration.folder.location.title">Configuration folder location</title>	
@@ -16,7 +23,6 @@
 	  <varlistentry><term>Windows</term><listitem><para><filename>~\AppData\Roaming\OmegaT</filename></para></listitem></varlistentry>
 	</variablelist>
 	</para>
-	<para>You can always access the configuration folder directly from the <link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> option of the <link linkend="menus.options" endterm="menus.options.title"/> menu.</para>
   </section>
   
   <section id="configuration.folder.default.contents">
@@ -98,7 +104,7 @@
 
 	<varlistentry id="configuration.folder.extra.contents.repositories">
 	  <term id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
-	  <listitem><para>This file contains the login information for your team project repositories.<warning><para>Its contents are not encrypted.</para></warning>See <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> for details.</para>
+	  <listitem><para>This file contains the login information for your team project repositories.<warning><para>The file contents are not encrypted.</para></warning>See <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> for details.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -123,8 +129,13 @@
 	</section>
 	
   <section id="configuration.folder.setting">
-	<title id="configuration.folder.setting.title">Setting a different configuration</title>
-	<para>You can specify a configuration folder other than the default  when you start OmegaT from the command line.</para>
-	<para>Doing so will save all preferences set in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> dialog to that folder, and those settings will not be available to other instances of OmegaT that use a different configuration folder. See <link linkend="launch.with.command.line.omegat.parameters" endterm="launch.with.command.line.omegat.parameters.title"/> for details.</para>
+	<title id="configuration.folder.setting.title">Using a different configuration folder</title>
+	<para>You can specify a configuration folder other than the default when you
+	start OmegaT from the command line. See <link
+	endterm="launch.with.command.line.title"
+	linkend="launch.with.command.line"/> for details.</para>
+
+	<note><para>Preferences are stored in the default configuration folder. If
+	you specify a different configuration folder, all modifications made in the <link linkend="dialogs.preferences" endterm="dialogs.preferences.title"/> dialog will be stored in the newly specified configuration folder.</para></note>
   </section>
 </chapter>

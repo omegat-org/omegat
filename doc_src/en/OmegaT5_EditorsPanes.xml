@@ -5,7 +5,7 @@
   <section id="panes.manipulation">
 	<title id="panes.manipulation.title">Pane manipulation</title>
 
-	<para>The main window consists of several panes, the main menu, and a status bar. You can change the position of a pane, or even undock it as a separate window, by clicking and holding its name and dragging it.</para>
+	<para>The main window consists of several panes, described here,  the main <link linkend="menus" endterm="menus.title"/>, and a <link linkend="panes.statusbar" endterm="panes.statusbar.title"/>. You can change the position of a pane, or even undock it as a separate window, by clicking and holding its name and dragging it.</para>
 
     <note>
       <para>If you cannot see all panes (opened or minimized), you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu to restore them to their default state.</para>
@@ -18,6 +18,17 @@
       <tgroup cols="2">
 		<colspec align="left" colnum="1"/>
 		<tbody>
+          <row>
+			<entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Settings.png" width="60%"/>
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata fileref="images/Settings.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+			<entry>Lists the various extra actions available in the pane.</entry>
+          </row>
           <row>
 			<entry><inlinemediaobject>
               <imageobject role="html">
@@ -77,7 +88,9 @@
       </tgroup>
 	</table>
 
-	<para>You can group panes in the same area of the window. Doing so shows a tab with the name of the panes the top of the group. Panes can be resized by dragging the separators between them. Should you lose track of the changes you made to the user interface, you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu any time to go back to the default layout.</para>
+	<para>You can group panes in the same area of the window. Doing so shows a tab with the name of the panes the top of the group. Panes can be resized by dragging the separators between them.</para>
+
+	<note><para>Should you lose track of the changes you made to the user interface, you can use the <link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> command in the <link linkend="menus.view" endterm="menus.view.title"/> menu any time to go back to the default layout.</para></note>
   </section>
 
   <section id="panes.context.menus">
@@ -90,20 +103,24 @@
 	<title id="panes.drag.and.drop.title">Dragging and dropping</title>
 	
 	<para>Files can be dragged and dropped on certain panes, with the following results.</para>
-	<itemizedlist>
-      <listitem>
-        <para>Editor pane: Dropping an OmegaT project file (<filename>omegat.project</filename>) onto this pane will open the corresponding project will be opened after closing the currently open project, if any.</para>
-		<para>Dropping other  files will copy them to the <filename class="directory">source</filename> folder. This also applies to the <link linkend="windows.project.files" endterm="windows.project.files.title"/> window.</para>
-      </listitem>
 
-      <listitem>
-        <para>Fuzzy Matches pane: Dropping <filename>.tmx</filename> files onto this pane will copy them to the <filename class="directory">tm</filename> folder.</para>
-      </listitem>
+	<variablelist>
+	  <varlistentry>
+		<term>Editor pane</term>
+		<listitem><para>Dropping an OmegaT project file (<filename>omegat.project</filename>) or a full project onto this pane will open the corresponding project after closing the currently open project, if any.</para>
+		<para>Dropping other  files will copy them to the <filename class="directory">source</filename> folder. This also applies to the <link linkend="windows.project.files" endterm="windows.project.files.title"/> window.</para></listitem>
+	  </varlistentry>
 
-      <listitem>
-        <para>Glossary pane: Dropping files with a recognized glossary extension (<filename>.txt</filename>, <filename>.tab</filename>, etc.) will copy them to the <filename class="directory">glossary</filename> folder.</para>
-      </listitem>
-	</itemizedlist>
+	  <varlistentry>
+		<term>Fuzzy Matches</term>
+		<listitem><para>Dropping <filename>.tmx</filename> files onto this pane will copy them to the <filename class="directory">tm</filename> folder.</para></listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Glossary pane</term>
+		<listitem><para>Dropping files with a recognized glossary extension (<filename>.txt</filename>, <filename>.tab</filename>, etc.) will copy them to the <filename class="directory">glossary</filename> folder.</para></listitem>
+	  </varlistentry>
+	</variablelist>
   </section>
 
   <section id="panes.editor">
@@ -128,17 +145,25 @@
 	<itemizedlist>
 	  <listitem><para>The line in bold characters against a green background is the source text to translate.</para></listitem>
 	  <listitem><para>The line below showing the cursor is where you enter the translation.</para></listitem>
-	  <listitem><para>That line ends with a segment marker. In this example, (<literal>&lt;segment 0400 ¶&gt;</literal> is the marker, with <literal>0400</literal> as the number of the segment in the project and a <literal>¶</literal>  symbol identifying that segment as the first in a paragraph.</para></listitem>
+	  <listitem><para>That line ends with a segment marker. In this example, <literal>&lt;segment 0400 ¶&gt;</literal> is the marker, with <literal>0400</literal> as the number of the segment in the project and a <literal>¶</literal>  symbol identifying that segment as the first in a paragraph.</para></listitem>
 	  <listitem><para>You can make changes to any of the content that comes before the segment marker.</para></listitem>
 	  <listitem><para>The line below the segment marker is a different segment in the source language that has not been translated yet.</para></listitem>
 	  <listitem><para>Use <link linkend="menus.goto.next.segment" endterm="menus.goto.next.segment.title"/> or another command that moves to a new segment to:<itemizedlist>
 		<listitem><para>register the segment in the project translation memory, and</para></listitem>
 		<listitem><para>enter the next segment to translate.</para></listitem>
-	  </itemizedlist></para>
+	  </itemizedlist>
+	  See <link linkend="menus.goto" endterm="menus.goto.title"/> for details.
+	</para>
 	  </listitem>
 	</itemizedlist>
 
-    <para>Depending on your editing behavior settings, entering a new segment may leave the line for translation empty, automatically enter the source text, or automatically enter the existing translation in your memory most similar to the segment to translate. See <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> for details.</para>
+    <para>Depending on the <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> preferences, entering a new segment will:
+	<itemizedlist>
+	  <listitem><para><link linkend="dialogs.preferences.editor.insert.the.source.text" endterm="dialogs.preferences.editor.insert.the.source.text.title"/> (default behavior)</para></listitem>
+	  <listitem><para><link linkend="dialogs.preferences.editor.leave.the.segment.empty" endterm="dialogs.preferences.editor.leave.the.segment.empty.title"/></para></listitem>
+	  <listitem><para><link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/> (if any)</para></listitem>
+	</itemizedlist>
+</para>
 
 	<note>
 	  <para>You are free to modify the Editor display to suit your workflow.</para>
@@ -181,7 +206,7 @@
 		<listitem><para>On macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo>.</para>
 		</listitem>
 	  </itemizedlist>
-	  You can also bring up the menu by right clicking the mouse
+	  You can also bring up the menu by right-clicking the mouse
 	  (<keycap>C</keycap> + <keycap>click</keycap> on macOS).</para>
 	  
 	  <para>The Editor pane context menu offers:
@@ -229,7 +254,7 @@
 	  keyboard.</para>
 
 	  <para>The cursor status (locked - <guilabel>LCK</guilabel>) or unlocked -
-	  <guilabel>UNL</guilabel>) is shown at the right of the status bar. Use the
+	  <guilabel>UNL</guilabel>) is shown at the right of the <link linkend="panes.statusbar" endterm="panes.statusbar.title"/>. Use the
 	  same key to lock the cursor again.</para>
 
 	  <para>By default, typing text inserts the new text after the cursor in the
@@ -244,7 +269,7 @@
 	  </para>
 
 	  <para>The writing mode (overwrite - <guilabel>OVR</guilabel> or insert -
-	  <guilabel>INS</guilabel>) is shown at the right of the status bar. Use the
+	  <guilabel>INS</guilabel>) is shown at the right of the <link linkend="panes.statusbar" endterm="panes.statusbar.title"/>. Use the
 	  same key to switch back and forth between each mode.</para>
 
 	</section>
@@ -257,8 +282,8 @@
     memories. This includes both the internal project translation memory you
     create in real time as you translate the project, and external memories you
     have imported from previous projects or received from the client or
-    translation agency. See <link linkend="how.to.reuse.tm"
-    endterm="how.to.reuse.tm.title"/> for details.</para>
+    translation agency. See <link linkend="how.to.use.tm"
+    endterm="how.to.use.tm.title"/> for details.</para>
 
     <para>When you enter a segment, the first fuzzy match (the one with the
     highest match percentage) is automatically selected. You can press
@@ -291,9 +316,9 @@
 
     <para>The Glossary pane shows the translations of terms in the current segment that are present in the glossary files located in the project's <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> folder.</para>
 	<para>You can select a term in the glossary pane and right click on it to insert it into the translation.</para>
-    <para>If you have activated <link linkend="menus.view.mark.glossary.matches" endterm="menus.view.mark.glossary.matches.title"/> in the <link linkend="menus.view" endterm="menus.view.title"/> menu, you can right click on the highlighted word in the source segment to open a pop-up menu listing the translations available in your glossaries. Selecting one will insert it in the segment at the current cursor position.</para>
+    <para>If you have activated <link linkend="menus.view.mark.glossary.matches" endterm="menus.view.mark.glossary.matches.title"/> in the <link linkend="menus.view" endterm="menus.view.title"/> menu, you can right-click on the highlighted word in the source segment to open a pop-up menu listing the translations available in your glossaries. Selecting one will insert it in the segment at the current cursor position.</para>
 
-	<para>You can use the glossary preferences to fine tune how the glossaries are displayed. See <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> for details.</para>
+	<para>You can use the glossary preferences to fine-tune how the glossaries are displayed. See <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> for details.</para>
 
 	<para>OmegaT includes one writable glossary file per project. Use <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> in the <link linkend="menus.edit" endterm="menus.edit.title"/> menu to add terms to that file.</para>
 
@@ -325,60 +350,86 @@
   <section id="panes.notes">
     <title id="panes.notes.title">Notes</title>
 
-    <para>You can add notes to the currently active segment. This lets you come back to it later to review the translation, check that alternative translations are correct, or ask colleagues for their opinion, for example. You can browse through the notes using the <menuchoice><guimenu>GoTo</guimenu><guilabel>Next Note</guilabel></menuchoice> and <menuchoice><guimenu>GoTo</guimenu><guilabel>Previous Note</guilabel></menuchoice> commands.</para>
+    <para>You can add notes to the currently active segment. This lets you come back to it later to review the translation, check that alternative translations are correct, or ask colleagues for their opinion, for example. You can browse through the notes using <link linkend="menus.goto.next.note" endterm="menus.goto.next.note.title"/> and <link linkend="menus.goto.previous.note" endterm="menus.goto.previous.note.title"/>.</para>
   </section>
 
   <section id="panes.comments">
     <title id="panes.comments.title">Comments</title>
 
-    <para>Certain specialized translation or localization file formats, such as the  PO format, allow the inclusion of comments to give the translator instructions or provide additional context about the segment. One example is the author of the PO file using comments to inform the translator of length limits that must be respected in the translation.</para>
+    <para>Certain specialized translation or localization file formats, such as the  PO format, allow the inclusion of comments to give the translator instructions or provide additional context about the segment.</para>
+	<para>One example is the author of the PO file using comments to inform the translator of length limits that must be respected in the translation.</para>
+	<note><para>This pane displays contents that is included in the file. It is not editable. To write comments about a translation, use the <link linkend="panes.notes" endterm="panes.notes.title"/> pane instead.</para></note>
   </section>
 
   <section id="panes.statusbar">
     <title id="panes.statusbar.title">Status bar</title>
 
-    <para>The status bar displays workflow information at the bottom of the main window. It provides feedback on the progress of specific operations, and also displays the number of fuzzy and glossary matches for the current segment.</para>
+    <para>The left side status bar at the bottom of the main window displays information or error messages on the left, while the right side shows status and progress information.</para>
+		<para>If you use machine translation, you will briefly see a status message on the left side if there is a connection or authentication error.</para>
+		<para>For example, a message such as <literal>IBMWATSON_API_KEY_NOTFOUND=IBM Watson not available. See OmegaT manual for instructions.</literal> indicates that you should double-check that your <link linkend="dialogs.preferences.mt.provider.list" endterm="dialogs.preferences.mt.provider.list.title">make sure your credentials are entered correctly</link>, while an error such as <literal>MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE=Unable to parse translate service response</literal> suggests that there may be a communication problem between your system and the provider's server.</para>
+		<para>The right side shows the <link linkend="panes.editor.dragging.and.selecting" endterm="panes.editor.dragging.and.selecting.title">cursor status</link> followed by progress information.</para>
+		<para>Click on it to alternate between displaying progress as numbers or percentages.</para>
 
-    <para>The left side of the status bar shows information or error messages about operations in progress. When machine translation is used, this area displays a status message if there is a connection or authentication error.</para>
-    <para>For example, a message such as <literal>IBMWATSON_API_KEY_NOTFOUND=IBM Watson not available. See OmegaT manual for instructions.</literal> indicates that you should double-check that your <link linkend="dialogs.preferences.mt.provider.list" endterm="dialogs.preferences.mt.provider.list.title">make sure your credentials are entered correctly</link>, while an error such as <literal>MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE=Unable to parse translate service response</literal> suggests that there may be a communication problem between your system and the provider's server.</para>
-
-    <para>The counters in the lower right corner keep track of the progress of the translation. (The left-hand column uses the numbers from the above figure):</para>
-
-    <table id="table.main.window.counters">
-      <title id="table.main.window.counters.title">Counters in the main window</title>
-
-      <tgroup cols="2">
-        <colspec align="left" colnum="1"/>
-
-        <tbody>
+	<table id="panes.statusbar.widgets">
+      <title id="panes.statusbar.widgets.title">Status bar progress information</title>
+      <tgroup cols="1">
+		<colspec align="left" colnum="1"/>
+		<tbody>
           <row>
-            <entry>27/27</entry>
-
-            <entry>Number of segments: translated/total for the current file</entry>
+			<entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/StatusBarNumbers.png" width="100%"/>
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata fileref="images/StatusBarNumbers.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+		  </row>
+		  <row><entry>
+			<variablelist>
+			  <varlistentry>
+				<term>In the file</term>
+				<listitem><para><emphasis role="bold">257</emphasis> = number of translated segments /  <emphasis role="bold">271</emphasis> = total number of segments</para></listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>In the project</term>
+				<listitem><para><emphasis role="bold">12292</emphasis> = number of unique translated segments / <emphasis role="bold">154896</emphasis> = total number of unique segments, <emphasis role="bold">(177692)</emphasis> = total number of segments</para></listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>In the segment</term>
+				<listitem><para><emphasis role="bold">35</emphasis> = number of characters in the source / <emphasis role="bold">0</emphasis> = number of characters in the target area so far</para></listitem>
+			  </varlistentry>
+			</variablelist></entry>
           </row>
-
           <row>
-            <entry>9319/16338</entry>
-
-            <entry>Number of unique segments: translated/total for the entire project</entry>
+			<entry><inlinemediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/StatusBarPercentages.png" width="100%"/>
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata fileref="images/StatusBarPercentages.png" width="40%"/>
+              </imageobject>
+            </inlinemediaobject></entry>
+		  </row>
+		  <row><entry>
+			<variablelist>
+			  <varlistentry>
+				<term>In the file</term>
+				<listitem><para><emphasis role="bold">94.8%</emphasis> = % of translated segments / <emphasis role="bold">14</emphasis> = number of untranslated segments</para></listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>In the project</term>
+				<listitem><para><emphasis role="bold">7.9%</emphasis> = % of translated segments / <emphasis role="bold">142,604</emphasis> = number of untranslated segments,  <emphasis role="bold">(177,692)</emphasis> = total number of segments</para></listitem>
+			  </varlistentry>
+			  <varlistentry>
+				<term>In the segment</term>
+				<listitem><para><emphasis role="bold">35</emphasis> = number of characters in the source / <emphasis role="bold">0</emphasis> = number of characters in the target area so far</para></listitem>
+			  </varlistentry>
+			</variablelist></entry>
           </row>
-
-          <row>
-            <entry>31175</entry>
-
-            <entry>Total number of segments in the project (including repetitions)</entry>
-          </row>
-
-          <row>
-            <entry>103/114</entry>
-
-            <entry>Number of source and target characters in the current segment</entry>
-          </row>
-        </tbody>
+		</tbody>
       </tgroup>
-    </table>
-
-    <para>From a practical standpoint, the second pair of numbers is the most important since it show how much you have done so far with respect to the total number of segments to translate. The project in the example is evidently finished, as all the unique segments have been translated.</para>
-    <para>You can also click on the counters to switch to a percentage-based indication of your progress. In that case, the first pair of numbers shows you the percentage of the current file that has been completed, with the number of remaining segments for that file given in parentheses. Similarly, the second pair gives you a completion percentage for the entire project, along with the number of total remaining segments in parentheses. In projects with a large number of segments of very different lengths, this can be a more useful indicator of progress than a simple segment count.</para>
+	</table>
+	
   </section>
 </chapter>

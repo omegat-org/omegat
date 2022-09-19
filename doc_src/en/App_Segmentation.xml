@@ -45,11 +45,11 @@
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
 		<term
-			id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Paragraph level
+			id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Paragraph-Level
 		segmentation</term>
 
 		<listitem>
-		  <para>OmegaT first parses the text for paragraph level
+		  <para>OmegaT first parses the text for paragraph-level
 		  segmentation. This process relies only on the structure of the
 		  source file to produce segments.</para>
 
@@ -111,7 +111,7 @@
 
   <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
 	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Rules-based segmentation</title>
-	<para>OmegaT provides pre-defined segmentation rules, and the translator can
+	<para>OmegaT provides predefined segmentation rules, and the translator can
 	use regular expressions to modify them. See <link
 	linkend="appendix.regexp" endterm="appendix.regexp.title"/> for
 	details.</para>

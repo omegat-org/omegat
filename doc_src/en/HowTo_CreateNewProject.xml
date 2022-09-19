@@ -4,19 +4,61 @@
 <section id="how.to.create.new.project">
   <title id="how.to.create.new.project.title">Create a New Project</title>
 
-    <para>To start using OmegaT, you first have to create a project to hold all your files, such as your source files, translation memories, glossaries, and eventually your translated files. To create a new project, select <menuchoice><guimenuitem>New...</guimenuitem></menuchoice> in the <guimenu>Project</guimenu> menu (or press <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>n</keycap></keycombo>), select a folder, and type a name for your project.</para>
+    <para>To start using OmegaT, you first have to create a project to hold all
+    your files, such as your source files, translation memories, glossaries, and
+    eventually your translated files. To create a new project, use <link
+    linkend="menus.project.new"
+    endterm="menus.project.new.title"/>, select a folder, and type a
+    name for your project.</para>
 
     <note>
-      <para>Since an OmegaT project is simply a set of folders and subfolders, you are entering the name of the folder that will hold your project. Alternatively, you can choose an existing <emphasis>empty</emphasis> folder created beforehand. Keep in mind that OmegaT cannot create a project in a folder that already contains files or subfolders.</para>
+      <para>Since an OmegaT project is simply a set of folders and folders,
+      you are entering the name of the folder that will hold your
+      project.</para>
+	  <para>Alternatively, you can choose an existing <emphasis>empty</emphasis>
+	  folder created beforehand. Keep in mind that OmegaT cannot create a
+	  project in a folder that already contains files or folders.</para>
     </note>
 
-    <para>Remember where you are creating the project, because you will need to return to it later.</para>
+    <para>The <guilabel>Create New Project</guilabel> dialog opens after you
+    have named your project.</para>
 
-    <para>The <guilabel>Create New Project</guilabel> dialog opens after you have named your project. At the top of that dialog, select the languages of your source and translated files, and click the <guibutton>OK</guibutton> button to continue.</para>
+	<para>The dialog is identical to the <link
+	linkend="dialogs.project.properties"
+	endterm="dialogs.project.properties.title"/> dialog that you access with
+	<link linkend="menus.project.properties"
+	endterm="menus.project.properties.title"/>. Refer to that section of the
+	manual to understand the various options.</para>
 
-    <para>If you are interested in other settings in this dialog, you can return
-    to it any time by pressing
-    <keycombo><keycap>Ctrl</keycap><keycap>E</keycap></keycombo>.</para>
+	<para>At the top of that dialog, select the languages of your source and
+	translated files, set the various options, and click the
+	<guibutton>OK</guibutton> button to continue.</para>
 
-    <para>The <guilabel>Project Files</guilabel> dialog opens next. Click on <guibutton>Copy Files to Source Folder...</guibutton> and select your source files. OmegaT will then copy the selected files to the <filename class="directory">source</filename> subfolder of your newly created project. You can close the <guilabel>Project Files</guilabel> dialog after the source files have loaded in the <guilabel>Editor</guilabel> pane,.</para>
+    <para>Once you have created the project, you can return to this dialog at
+    any time by using <link linkend="menus.project.properties"
+    endterm="menus.project.properties.title"/>.</para>
+
+	<note><para>The structure of a project can be modified at any moment during
+	translation. You can point at new resource folders from that dialog and
+	OmegaT will just ask you to reload the project to take the new locations
+	into account.</para></note>
+	
+    <para>The <link linkend="windows.project.files"
+    endterm="windows.project.files.title"/> dialog opens next.</para>
+
+	<para>Click on <link linkend="windows.project.files.copy.files"
+	endterm="windows.project.files.copy.files.title"/> or <link
+	linkend="windows.project.files.download.page"
+	endterm="windows.project.files.download.page.title"/> and select your source
+	files. OmegaT will then copy the selected files to the <link
+	linkend="project.folder.source" endterm="project.folder.source.title"/>
+	folder of your newly created project. You can close the <link
+	linkend="windows.project.files" endterm="windows.project.files.title"/>
+	dialog after the source files have loaded in the <link
+	linkend="panes.editor" endterm="panes.editor.title"/> pane.</para>
+
+	<para>If you don't remember where your project is, you can use <link
+    linkend="menus.project.open.recent"
+    endterm="menus.project.open.recent.title"/>.</para>
+
   </section>

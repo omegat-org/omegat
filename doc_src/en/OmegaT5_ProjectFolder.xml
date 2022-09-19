@@ -2,132 +2,205 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="project.folder">
   <title id="project.folder.title">Project Folder</title>
+
   <para>An OmegaT project consists of a set of folders and files that contain the resources used for translating.</para>
-  <para>A project is a folder containing, at a minimum, the following file and folder:<variablelist>
+  <para>A project is a folder containing, at a minimum, the following files and folder:</para>
+  
+  <variablelist>
 	<varlistentry id="project.folder.omegat">
 	  <term id="project.folder.omegat.title">omegat/</term>
-	  <listitem><para>This is the project subfolder that always contains <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, the project translation memory, and <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, the statistics data file for the project.</para>
+	  <listitem><para>This is the project folder that always contains <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, the project translation memory, and <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>, the statistics data file for the project.</para>
 	  <para>Other files will be added over the course of a translation project.</para>
 	  </listitem>
 	</varlistentry>
+
 	<varlistentry id="project.folder.omegat.project.file">
 	  <term id="project.folder.omegat.project.file.title">omegat.project</term>
-	  <listitem><para>This file contains the properties of the project and also acts as an <emphasis>address book</emphasis>that specifies where project resources are located. By default, a newly created project will contain all the required resources within its folder, and those resources are assigned the default names below.<itemizedlist>
-	  <listitem><para><filename>source/</filename>: the folder that contains the source files</para></listitem>
-	  <listitem><para><filename>target/</filename>: the folder where the target files are created</para></listitem>
-	  <listitem><para><filename>glossary/</filename>: the folder that contains the glossaries</para></listitem>
-	  <listitem><para><filename>glossary/glossary.txt</filename>: the project writable glossary</para></listitem>
-	  <listitem><para><filename>tm/</filename>: the folder that contains the reference translation memories</para></listitem>
-	  <listitem><para><filename>dictionary/</filename>: the folder that contains the dictionaries</para></listitem>
-	</itemizedlist>The information contained in the project file includes, notable, the source and target languages, their respective tokenizers, and the type of segmentation used. </para></listitem>
+	  <listitem><para>This file contains the properties of the project and also acts as an <emphasis>address book</emphasis> that specifies where project resources are located. By default, a newly created project will contain all the required resources within its folder, and those resources are assigned the default names below.
+	  
+	  <itemizedlist>
+		<listitem><para><link linkend="project.folder.source" endterm="project.folder.source.title"/>: the folder that contains the source files</para></listitem>
+
+		<listitem><para><link linkend="project.folder.target" endterm="project.folder.target.title"/>: the folder where the target files are created</para></listitem>
+
+		<listitem><para><link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>: the folder that contains the glossaries</para></listitem>
+
+		<listitem><para><link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>: the project writable glossary</para></listitem>
+
+		<listitem><para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>: the folder that contains the reference translation memories</para></listitem>
+
+		<listitem><para><link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/>: the folder that contains the dictionaries</para></listitem>
+	  </itemizedlist>
+
+	  The information contained in <filename>omegat.project</filename> also includes the source and target languages, their respective tokenizers, the type of segmentation used, etc.</para></listitem>
 	</varlistentry>
-  </variablelist>You can assign locations other than the default ones to the various resources either when you create it, or later on. Note that the files in a given location will not be moved automatically if you change it after you have started working on the project. You will have to move any necessary files to the new location manually. For example you can<itemizedlist><listitem><para>instruct OmegaT to create the translated files in a shared folder outside the project folder, in a location easily accessible to your reviewer, or</para></listitem>
+  </variablelist>
+
+  <para>You can assign locations other than the default ones to the various resources either when you create the project, or later on.</para>
+
+  <para>For example, you can
+
+  <itemizedlist>
+	<listitem><para>instruct OmegaT to create the translated files in a shared folder outside the project folder, in a location easily accessible to your reviewer, or</para></listitem>
+
 	<listitem><para>instruct OmegaT to use a glossary folder from a separate but related project, or</para></listitem>
+
 	<listitem><para>instruct OmegaT to use a reference translation memory folder that you have set up for related projects,</para></listitem>
-	</itemizedlist>and so on.</para>
+  </itemizedlist>
+  and so on.</para>
 
-  <para>You can access the project folder and its subfolders with the <link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> command in the <link linkend="menus.project" endterm="menus.project.title"/> menu.</para>
+  <para>You can access the project folder and its folders with the <link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> command in the <link linkend="menus.project" endterm="menus.project.title"/> menu.</para>
 
-<para>Creating a project gives it a core hierarchy, but its final structure is not fixed. You can easily remove or add files and subfolders to the project.</para>
+  <para>Creating a project gives it a core hierarchy, but its final structure is not fixed. You can always remove or add files and folders to the project.</para>
   
   <section id="project.folder.source">
     <title id="project.folder.source.title">source</title>
-    <para>The source subfolder contains the files to translate. You can freely add or remove files from that folder at any time. You can also structure the source subfolder in any form you like. If the files to translate are contained in a tree structure (as in a website), you need only specify the top-level subfolder. OmegaT will maintain the entire contents and while keep the tree structure intact.</para>
+    <para>The source folder contains the files to translate. You can freely add or remove files from that folder at any time. You can also structure the source folder in any form you like.</para>
+	<para>If your translation project involves a number of folders and you feel like working on one folder at a time, change the <link linkend="dialogs.project.properties.file.locations.source.files" endterm="dialogs.project.properties.file.locations.source.files.title"/> as you wish.</para>
   </section>
 
   <section id="project.folder.target">
     <title id="project.folder.target.title">target</title>
-    <para>This subfolder is initially empty. It is populated when you select <menuchoice> <shortcut> <keycombo><keycap>C</keycap><keycap>d</keycap></keycombo> </shortcut> <guimenu>Project</guimenu> <guimenuitem>Create Translated Documents</guimenuitem> </menuchoice>. The files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, whether fully translated or not, are then generated here, using the same hierarchy as in the source subfolder.</para>
-	<para>The contents of the files in the target subfolder will reflect the current state of the translation from the project translation memory saved in the current <filename>/omegat/project_save.tmx</filename> file. Untranslated segments will remain in the source language.</para>
+    <para>This folder is initially empty. It is populated every time you use <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>. The files in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder, whether fully translated or not, are then generated here, using the same hierarchy as in the source contents.</para>
+	<para>The files created here will reflect the current state of the translation. Untranslated segments will remain in the source language.</para>
   </section>
 
   <section id="project.folder.tm">
     <title id="project.folder.tm.title">tm</title>
-    <para>The <filename class="directory">tm</filename> folder can contain any number of reference translation memories(TMX files). Those files can be any of the three varieties described in <link linkend="how.to.reuse.tm" endterm="how.to.reuse.tm.title"/>. Other CAT tools can also export (and import) TMX files. The best choice is, of course, to use the OmegaT-specific TMX files when possible to retain the in-line formatting in the segment.</para>
-    <para>The contents of the translation memories in the <filename class="directory">tm</filename> subfolder present suggestions for the text to translate. Any text with a translation in those files will show up in the Fuzzy Matches pane, if it is sufficiently similar to the text in the current segment.</para>
-    <para>If the source segment in one of the reference memories is identical to the text of the current segment, OmegaT acts in accordance with the settings defined in the  <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title">Editor preferences</link> dialog. With the default setting, for example, translations found in the reference memory are inserted in the corresponding segments and prefixed with <emphasis>[fuzzy]</emphasis> to enable the translator to check whether the translation is correct, and edit it as necessary.</para>
-    <para>The translation memories placed in the <filename class="directory">tm</filename> subfolder sometimes contain segments with identical source text, but different translations. The TMX files are read in the order of their names, and the segments within a file are read sequentially. This means the last segment with identical source text prevails. (Avoiding such situations is, of course, preferable, but may not be possible in the case of files obtained from external sources.)</para>
-    <para>In addition, TMX files in the <filename class="directory">tm</filename> folder compressed in the gzip format can be read by OmegaT.</para>
+    <para>This folder can contain any number of bilingual reference documents (TMX files, but also any file in a bilingual format supported by OmegaT).</para>
+	
+	<para>If you have set <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/> in the Editor preferences, OmegaT will prefix the inserted text with a prefix that you can modify in the same setting, to remind you that the match was inserted by OmegaT and not by you.</para> 
+    <para>The contents of the translation memories present suggestions for the text to translate. Any text with a translation in those files will show up in the Fuzzy Matches pane, if it is sufficiently similar to the text in the current segment.</para>
+    <para>TMX files are read in the order of their names, and the segments within a file are read sequentially.</para>
+    <note><para>TMX files compressed in the gzip format can also be read by OmegaT.</para></note>
 
     <section id="project.folder.tm.auto">
       <title id="project.folder.tm.auto.title">tm/auto</title>
-      <para>Translations from TMX files placed in this folder are automatically inserted in matching segments without the <emphasis>[fuzzy]</emphasis> prefix, making it unnecessary to confirm these segments. This is useful if you already have one or more reliable TMX files with translations you already know are correct.</para>
-      <para><orderedlist>
-          <listitem>
-            <para>Put the applicable memories in the <filename class="directory">tm/auto</filename> subfolder.</para>
-          </listitem>
-          <listitem>
-            <para>Open the project. You will see that segments identical to source segments in those memories are already filled in. They will be highlighted in orange if you have checked the <link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/> option in the <link linkend="menus.view" endterm="menus.view.title"/> menu.</para>
-          </listitem>
-          <listitem>
-            <para>Make and confirm a minor change anywhere in the project. This will add the translations loaded from the tm/auto subfolder to the main <filename>project_save.tmx</filename> file.</para>
-          </listitem>
-        </orderedlist></para>
-      <warning>
-        <para>If you remove a TMX file from <filename class="directory">tm/auto</filename> before Step 3, the translations it contains will not be retained in the project or saved in the project_save.tmx file.</para>
-      </warning>    
+	  <para>This folder is made for reliable references files that can automatically fill exactly matching and not yet translated segments.</para>
+      <para>Translations from TMX files placed in this folder are automatically inserted in matching segments without the automatic prefix, making it unnecessary to confirm these segments. Translations coming from this folder are considered to be <emphasis>as</emphasis> reliable as the current project memory.</para>
+
+	  <note><para>Only the <filename>tm/auto</filename> folder is automatically generated at project creation. You must manually create and fill any other <filename>tm</filename> folder that you want to use.</para></note>
+
+	  <orderedlist>
+        <listitem>
+          <para>Put the applicable memories in the <filename class="directory">tm/auto</filename> folder.</para>
+        </listitem>
+
+        <listitem>
+          <para>Open the project. You will see that segments identical to source segments in those memories are already filled in. They will be highlighted in orange if you have checked the <link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/> option in the <link linkend="menus.view" endterm="menus.view.title"/> menu.</para>
+        </listitem>
+
+        <listitem>
+          <para>Make a minor change anywhere in the project and save it. This will add the translations loaded from the tm/auto folder to the main <filename>project_save.tmx</filename> file.</para>
+        </listitem>
+      </orderedlist>
+	  
+      <warning><para>If you remove a TMX file from <filename class="directory">tm/auto</filename> before Step 3, none of its automatically inserted translations will be kept.</para></warning>    
     </section>
 
     <section id="project.folder.tm.enforce">
       <title id="project.folder.tm.enforce.title">tm/enforce</title>
-      <para>If you have no doubt that a given TMX contains more accurate translations than the current <filename>project_save.tmx</filename> file, put that TMX in the <filename class="directory">tm/enforce</filename> subfolder to overwrite the existing translations unconditionally.</para>
-      <para><orderedlist>
-          <listitem>
-            <para>Put the applicable memories in the <filename class="directory">tm/enforce</filename> subfolder.</para>
-          </listitem>
-          <listitem>
-            <para>Open the project. You will see that segments identical to source segments in those memories are already filled in.</para>
-          </listitem>
-          <listitem>
-            <para>Make and confirm a minor change anywhere in the project. This updates the <filename>project_save.tmx</filename> file.</para>
-          </listitem>
-          <listitem>
-            <para>Make a decision about the immutability of the enforced segments:<itemizedlist>
-                <listitem>
-                  <para>If they <emphasis>don't need</emphasis> to remain immutable to further changes,  remove the TMX from <filename class="directory">tm/enforce</filename>.</para>
-                </listitem>
-                <listitem>
-                  <para>If they <emphasis>do need</emphasis> to remain immutable to further changes, leave the TMX in <filename class="directory">tm/enforce</filename>.</para>
-                </listitem>
-              </itemizedlist></para>
-          </listitem>
-        </orderedlist></para>
-      <warning>
-        <para>If  you remove aTMX file from <filename class="directory">tm/enforce</filename> before Step 3, none of the enforced translations are kept.</para>
-      </warning>    
+	  <para>This folder is made for reliable references files that will automatically overwrite or fill exactly matching segments.</para>
+
+      <para>Translations from TMX files placed in this folder are automatically inserted in matching segments without the automatic prefix, making it unnecessary to confirm these segments. Translations coming from this folder are considered to be <emphasis>more</emphasis> reliable than the current project memory.</para>
+
+      <para>If you have no doubt that a given TMX contains more accurate translations than the current <filename>project_save.tmx</filename> file, put that TMX in the <filename class="directory">tm/enforce</filename> folder to overwrite the existing translations unconditionally.</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Put the applicable memories in the <filename class="directory">tm/enforce</filename> folder.</para>
+        </listitem>
+
+        <listitem>
+          <para>Open the project. You will see that segments identical to source segments in those memories are already filled in.</para>
+        </listitem>
+
+        <listitem>
+          <para>Make a minor change anywhere in the project and save. This updates the <filename>project_save.tmx</filename> file.</para>
+        </listitem>
+
+        <listitem>
+          <para>Make a decision about the immutability of the enforced segments:
+		  <itemizedlist>
+			<listitem>
+              <para>If they <emphasis>don't need</emphasis> to remain immutable to further changes,  remove the TMX from <filename class="directory">tm/enforce</filename>.</para>
+			</listitem>
+
+			<listitem>
+              <para>If they <emphasis>do need</emphasis> to remain immutable to further changes, leave the TMX in <filename class="directory">tm/enforce</filename>. Any modification to the segments that come from these memories will <emphasis>not</emphasis> be taken into account.</para>
+			</listitem>
+          </itemizedlist></para>
+        </listitem>
+      </orderedlist>
+	  
+      <warning><para>If  you remove a TMX file from <filename class="directory">tm/enforce</filename> before Step 3, none of the enforced translations will be kept.</para></warning>
     </section>
 
     <section id="project.folder.tm.mt">
       <title id="project.folder.tm.mt.title">tm/mt</title>
-      <para>The background of the active segment changes to red when a match is inserted from a TMX contained in the <filename class="directory">mt</filename> subfolder. The background is restored to normal when you leave the segment.</para>
+      <para>The background of the active segment changes to red when a match is inserted from a TMX contained in the <filename class="directory">mt</filename> folder. The background is restored to normal when you leave the segment or when you modify the segment.</para>
     </section>
 
     <section id="project.folder.tm.penalty">
       <title id="project.folder.tm.penalty.title">tm/penalty-xxx</title>
-      <para>It can be useful to distinguish between high-quality translation memories and other memories that, due to the subject matter, client, revision status, or other factors,are less reliable. The score of matches from translation memories in subfolders named <filename class="directory">penalty-xxx</filename> (where xxx is a number between 0 and 100), is decreased by an amount corresponding to the value in the name of the subfolder. For example, a 100% match in a TMX, stored in a subfolder called <filename class="directory">penalty-30</filename> becomes a 70% match. The penalty applies to all three match percentages. Scores of 75, 80 and 90 for a match are lowered to 45, 50 and 60.</para>
+      <para>It can be useful to distinguish between high-quality translation memories and other memories that, due to the subject matter, client, revision status, or other factors,are less reliable. The score of matches from translation memories in folders named <filename class="directory">penalty-xxx</filename> (where xxx is a number between 0 and 100), is decreased by an amount corresponding to the value in the name of the folder. For example, a 100% match in a TMX, stored in a folder called <filename class="directory">penalty-30</filename> becomes a 70% match. The penalty applies to all three match percentages. Scores of 75, 80 and 90 for a match are lowered to 45, 50 and 60.</para>
     </section>
+
+    <section id="project.folder.tm.tmx2source">
+      <title id="project.folder.tm.tmx2source.title">tm/tmx2source</title>
+  <para>OmegaT displays fuzzy matches in the <link linkend="panes.fuzzy.matches"
+  endterm="panes.fuzzy.matches.title"/> pane. But such matches are limited to
+  the source and target languages defined in <link
+  linkend="dialogs.project.properties"
+  endterm="dialogs.project.properties.title"/>, even if the reference TMX are
+  multilingual.</para>
+
+  <para>With OmegaT, you can display a third language <emphasis>right
+  under</emphasis> the source segment to use as a third language reference. See
+  <link linkend="how.to.tm.bridge.two.languages"
+  endterm="how.to.tm.bridge.two.languages.title"/> for details.</para>
+    </section>
+	
+	<note><para>You can combine folders to create new functions. For example, a 10% penalty folder within the machine translation folder: <filename>tm/mt/penalty-010</filename> would never generate 100% matches that could otherwise be automatically inserted by OmegaT, and would always set a red background to the match whenever it is inserted.</para></note>
   </section>
 
   <section id="project.folder.dictionary">
     <title id="project.folder.dictionary.title">dictionary</title>
-    <para>This folder is initially empty, and is used to store any dictionaries you add to the project. See <link linkend="appendix.dictionaries">Dictionaries</link> for more information.</para>
+    <para>This folder is initially empty, and is used to store any dictionaries you add to the project. See <link linkend="appendix.dictionaries" endterm="appendix.dictionaries.title"/> for details.</para>
   </section>
 
   <section id="project.folder.glossary">
     <title id="project.folder.glossary.title">glossary</title>
-    <para>This folder is initially empty. It is used to store the default writable glossary and any other glossaries you use in the project. See <link linkend="appendix.glossaries">Glossaries</link> for more information.</para>
+    <para>This folder is initially empty. It is used to store the default writable glossary and any other glossaries you use in the project. See <link linkend="appendix.glossaries" endterm="appendix.glossaries.title"/> for details.</para>
+
+	<variablelist>
+      <varlistentry id="project.folder.glossary.txt">
+        <term id="project.folder.glossary.txt.title">glossary.txt</term>
+        <listitem>
+          <para>This is the project writeable glossary. It is created the first
+          time you use <link linkend="menus.edit.create.glossary.entry"
+          endterm="menus.edit.create.glossary.entry.title"/>.</para>
+		  <para>You can access it with <link
+		  linkend="menus.project.access.project.contents.title"
+		  endterm="menus.project.access.project.contents.title"/>, open it in a
+		  text editor, modify it with a text editor. As soon as you have saved
+		  your modifications, they will be taken into account by OmegaT.</para>
+        </listitem>
+      </varlistentry>
+	</variablelist>
   </section>
 
   <section id="project.folder.omegat.folder">
     <title id="project.folder.omegat.folder.title">omegat</title>
-    <para>The <filename class="directory">omegat</filename> subfolder contains, at a minimum, the <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> and <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/> files. It may also include several other files.</para>
+    <para>The <filename class="directory">omegat</filename> folder contains, at a minimum, the <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> and <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/> files. It may also include several other files.</para>
 
     <variablelist>
       <varlistentry id="project.folder.project.save.tmx">
         <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
         <listitem>
-          <para>This is the most important file in the project. An empty file is automatically generated when you create a new project, and is gradually filled with the translations of the text in files located in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> subfolder.</para>
-		  <para>It constitutes the working translation memory of the project. Backups of this file (with a <filename>.bak</filename> extension) are regularly added to this subfolder, the beginning and end of a translation session, as well as while you work on the translation.</para>
+          <para>This is the most important file in the project. An empty file is automatically generated when you create a new project, and is gradually filled with the translations of the text in files located in the <link linkend="project.folder.source" endterm="project.folder.source.title"/> folder.</para>
+		  <para>It constitutes the working translation memory of the project.</para>
+		  <para>OmegaT creates regular backups of that file (up to 10). They are named <filename>project_save.tmx.[time stamp].bak</filename> and can easily be renamed to <filename>project_save.tmx</filename> in case the project memory is broken and needs replacement.</para> 
         </listitem>
       </varlistentry>
 
@@ -154,10 +227,10 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.ignored.words">
-        <term id="project.folder.omegat.ignored.words.title">ignored_words.txt and</term>
+        <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
         <term id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>
-          <para>These files are created and used by the spellchecker. You can also create them by right clicking on a word marked as incorrect and selecting Ignore All (for words to skip during spellchecking), or Add to Dictionary (for words to accept as correct), respectively,  from the context menu. If you already have a collection of words you want the spellchecker to ignore or accept, simply save them in text files with the corresponding names, and copy those files to the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> subfolder of your current project.</para>
+          <para>These files are created and used by the spellchecker. You can also create them by right-clicking on a word marked as incorrect and selecting Ignore All (for words to skip during spellchecking), or Add to Dictionary (for words to accept as correct), respectively,  from the context menu. If you already have a collection of words you want the spellchecker to ignore or accept, simply save them in text files with the corresponding names, and copy those files to the <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> folder of your current project.</para>
         </listitem>
       </varlistentry>
 
@@ -194,20 +267,27 @@
         <listitem>
           <para>This file is created if you manually change the order of the files in the <link linkend="windows.project.files" endterm="windows.project.files.title"/> window.</para>
         </listitem>
+      </varlistentry>
+
+      <varlistentry id="project.folder.omegat.last.entry">
+        <term id="project.folder.omegat.last.entry.title">last_entry.properties</term>
+        <listitem>
+          <para>This file keeps a record of the last segment you visited, including its number, its source contents, the file name and the date, so that you can come back to it when you reload/relaunch the project.</para>
+        </listitem>
       </varlistentry>	  
     </variablelist>
   </section>
 
   <section id="project.folder.omegat.project">
     <title id="project.folder.omegat.project.title">omegat.project</title>
-    <para>This files contains the project parameters defined in the <link linkend="dialogs.project.properties">Project properties</link> dialog.</para>
+    <para>This file contains the project parameters defined in the <link linkend="dialogs.project.properties">Project properties</link> dialog.</para>
   </section>
 
   <section id="project.folder.repositories">
     <title id="project.folder.repositories.title">.repositories</title>
     <para>In a team project, this folder contains a versioned copy of the
     project tree structure linked directly to the remote server.</para>
-    <para>You can make changes to the remote files (such as deleting or replacing them) by making your changes in this folder and using a Git or SVN client to synchronize them with the remote server.</para>
+    <para>You can make changes to the remote files (such as deleting or replacing them) by making your changes in this folder and using a Git or SVN client to synchronize them with the remote server. See <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> for details.</para>
     <para>In some operating systems, this folder is hidden by default. Turn on the option to show hidden files in your system to make it visible.</para>
   </section>
 </chapter>

@@ -18,7 +18,7 @@
   <section id="glossaries.default.glossary">
     <title id="glossaries.default.glossary.title">Default glossary</title>
 
-    <para>The default writable glossary is located in the the
+    <para>The default writable glossary is located in the
     <filename class="directory">glossary</filename> project folder and is called
     <filename>glossary.txt</filename>.</para>
 
@@ -40,7 +40,7 @@
     <para>To use an existing glossary, simply place it in the
     <filename class="directory">glossary</filename> folder after creating the project.
     OmegaT automatically detects glossary files in
-    this folder when a project is opened.</para>
+    this folder when a project is open.</para>
 
     <para>To add a new term to the writable glossary use
     <guimenuitem>Edit</guimenuitem> &gt; <guimenuitem>Create Glossary
@@ -61,7 +61,7 @@
     Terms from the reference glossaries are displayed in normal face.</para>
 
     <para>To display the <guimenuitem>Autocompletion</guimenuitem> contextual
-    menu for the glossary matches, hit the OS dependant key
+    menu for the glossary matches, hit the OS dependent key
     (<keycap>Escape</keycap> for macOS, <keycap>Ctrl+Space</keycap> for the
     other platforms).</para>
 
@@ -79,8 +79,8 @@
     the source term in the first column, an optional target term in the second
     column and an optional comment in the third column.</para>
 
-    <para>Plain text glossaries can be "tab separated values" (TSV) files or
-    "comma separated values" (CSV) files. A third possible format is the "TBX"
+    <para>Plain text glossaries can be "tab-separated values" (TSV) files or
+    "comma-separated values" (CSV) files. A third possible format is the "TBX"
     (TermBase eXchange) ISO standard.</para>
 
     <para>The project default writable glossary is always a TSV file saved in

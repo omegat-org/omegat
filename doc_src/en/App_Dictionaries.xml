@@ -71,7 +71,7 @@
     <itemizedlist>
       <listitem>
         <para>Check that your dict files are in the correct folder (or in a
-        subfolder below it). Access your dictionary folder with <link
+        folder below it). Access your dictionary folder with <link
         linkend="menus.project.access.project.contents"
         endterm="menus.project.access.project.contents.title"/> in the <link
         linkend="menus.project" endterm="menus.project.title"/> menu.</para>

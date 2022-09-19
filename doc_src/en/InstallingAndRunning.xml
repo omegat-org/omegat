@@ -11,32 +11,32 @@
   <para>OmegaT &vernb; requires a &javaversionlong; (JRE) to run.</para>
 
   <para>OmegaT packages are available both in versions bundled with Java, and
-  versions without it. Packages without Java rely on your having a
-  &javaversionlong; installed system-wide. OmegaT 5.8.0 and later also support
-  Java 11 Runtime Environment on any platforms.</para>
+  versions without it. Packages without Java rely on a &javaversionlong;
+  installed systemwide.</para>
 
-  <para>Due to licencing considerations, the OmegaT team recommends the Java
+  <para>OmegaT 5.8.0 and later also support Java 11 Runtime Environment on any
+  platforms.</para>
+
+  <para>Due to licensing considerations, the OmegaT team recommends the Java
   runtime Eclipse Temurin provided by the &preferedopenjdk;, but any Java 8
   compatible runtime environment should work.</para>
 
   <para>OmegaT comes in two editions:</para>
 
-  <itemizedlist>
-    <listitem>
-      <para><emphasis>Standard</emphasis>: This edition is suitable for
-      everyday use.</para>
-    </listitem>
+  <variablelist>
+	<varlistentry>
+	  <term>Standard</term>
+	  <listitem><para>This edition is suitable for everyday use.</para></listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Developer</term>
+	  <listitem><para>This edition is more suitable for testing new features.</para></listitem>
+	</varlistentry>
+  </variablelist>
 
-    <listitem>
-      <para><emphasis>Developer</emphasis>: This is a cutting-edge edition
-      containing the latest work in progress. It is more suitable for testing
-      new features.</para>
-    </listitem>
-  </itemizedlist>
-
-  <para>The download site is <ulink
-  url="https://omegat.org/download"><citetitle>here</citetitle></ulink>. All
-  the packages listed below are available from that site.</para>
+  <para>The files are downloadable directly from <ulink
+  url="https://omegat.org/download">Sourceforge</ulink>. All the packages listed
+  below are available from that site.</para>
 
   <section id="installing.omegat">
     <title id="installing.omegat.title">Installing OmegaT</title>
@@ -51,28 +51,26 @@
 
         <para>Do you want OmegaT bundled with Java?</para>
 
-        <itemizedlist>
-          <listitem>
-            <para><emphasis role="bold">No: </emphasis>download
-            <filename>OmegaT_&vernb;_Windows_without_JRE.exe</filename>.</para>
-          </listitem>
-
-          <listitem>
-            <para><emphasis role="bold">Yes:</emphasis> download
-            <filename>OmegaT_&vernb;_Windows_64_Signed.exe</filename>.</para>
-
-            <para>This package is bundled with &bundledjavaversion;. This JRE
-            will not interfere with other Java implementations that may
-            already be installed on your system.</para>
-
+  <variablelist>
+	<varlistentry>
+	  <term>No</term>
+	  <listitem><para>download
+	  <filename>OmegaT_&vernb;_Windows_without_JRE.exe</filename></para></listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Yes / I'm not sure</term>
+	  <listitem><para>download
+	  <filename>OmegaT_&vernb;_Windows_64_Signed.exe</filename></para></listitem>
+	</varlistentry>
+  </variablelist>
+		
+		
             <note>
               <para>If you have a 32-bit system (most likely on a pre-2010
               machine), you should download
               <filename>OmegaT_&vernb;_Windows_Signed.exe</filename>
               instead.</para>
             </note>
-          </listitem>
-        </itemizedlist>
       </section>
 
       <section id="installing.omegat.windows.install.the.package">
@@ -111,15 +109,18 @@
 
         <para>Do you want OmegaT bundled with Java?</para>
 
-        <itemizedlist>
-          <listitem>
-            <para><emphasis role="bold">No:</emphasis> download
-            <filename>OmegaT_&vernb;_Without_JRE.zip</filename>.</para>
-          </listitem>
-
-          <listitem>
-            <para><emphasis role="bold">Yes:</emphasis> download
-            <filename>OmegaT_&vernb;_Linux_64.tar.bz2</filename>.</para>
+     <variablelist>
+	<varlistentry>
+	  <term>No</term>
+	  <listitem><para>download
+	  <filename>OmegaT_&vernb;_Without_JRE.zip</filename></para></listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Yes / I'm not sure</term>
+	  <listitem><para>download
+	  <filename>OmegaT_&vernb;_Linux_64.tar.bz2</filename></para></listitem>
+	</varlistentry>
+  </variablelist>
 
             <note>
               <para>If you have a 32-bit system (most likely on a pre-2010
@@ -131,8 +132,6 @@
             <para>This package is bundled with &bundledjavaversion;. This JRE
             will not interfere with other Java implementations that may
             already be installed on your system.</para>
-          </listitem>
-        </itemizedlist>
       </section>
 
       <section id="installing.omegat.linux.intel.install.the.package">
@@ -155,7 +154,7 @@
             <programlisting>$ tar xf OmegaT_&vernb;_Linux_64.tar.bz2</programlisting>
 
             <para>This will create a new folder in the current folder. The new
-            folder will named after the package you downloaded, and contain
+            folder will be named after the package you downloaded, and contain
             all the files needed to run OmegaT.</para>
           </listitem>
 
@@ -202,7 +201,6 @@ $ ./linux-install.sh</programlisting>
             <listitem>
               <para>Press <keycombo>
                   <keycap>Alt</keycap>
-
                   <keycap>F2</keycap>
                 </keycombo> to show KRunner. Type
               <command>kmenuedit+enter</command> to run the command. The
@@ -235,7 +233,7 @@ $ ./linux-install.sh</programlisting>
 
             <listitem>
               <para>Other Icons - Browse, and navigate to the
-              <filename>images</filename> subfolder in the OmegaT application
+              <filename>images</filename> folder in the OmegaT application
               folder. Select the <filename>OmegaT.png</filename> icon.</para>
             </listitem>
 
@@ -273,7 +271,7 @@ $ ./linux-install.sh</programlisting>
             <listitem>
               <para>Click on the icon button, then hit
               <guilabel>Browse...</guilabel> and navigate to the
-              <filename>images</filename> sub-folder in the OmegaT application
+              <filename>images</filename> folder in the OmegaT application
               folder. Select the <filename>OmegaT.png</filename> icon. GNOME
               may fail to display the icon files in the available formats and
               initially appear to expect an SVG file, but if the folder is
@@ -442,7 +440,7 @@ $ ./linux-install.sh</programlisting>
       endterm="launch.with.command.line.title"
       linkend="launch.with.command.line"/> for details.</para>
 
-      <para>You can modify the behaviour of OmegaT.app by editing the
+      <para>You can modify the behavior of OmegaT.app by editing the
       <filename>Configuration.properties</filename> (OmegaT configuration) as
       well as the <filename>Info.plist</filename> (Java configuration) files
       located inside the OmegaT.app package.</para>
@@ -627,7 +625,7 @@ $ ./linux-install.sh</programlisting>
 
     <programlisting>./gradlew tasks</programlisting>
 
-    <para>Detailed instructions on building are in the docs_devel <ulink
-    url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">readme</ulink>.</para>
+    <para>Detailed instructions on building OmegaT are in the docs_devel <ulink
+    url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</ulink> file.</para>
   </section>
 </chapter>

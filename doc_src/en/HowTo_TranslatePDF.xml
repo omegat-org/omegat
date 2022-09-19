@@ -25,7 +25,7 @@
   </note>
 
   <section id="non-supported.file.formats">
-    <title id="non-supported.file.formats.title">Files in a formats not supported by OmegaT</title>
+    <title id="non-supported.file.formats.title">Files in a format not supported by OmegaT</title>
 
     <para>You will have to convert files for which OmegaT does not have a <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title">filter</link> to a supported format to translate them in OmegaT.</para>
 
@@ -33,7 +33,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Load the file in Word (2007 or later), LibreOffice, or other modern application that can read <filename>.doc</filename> files.</para>
+        <para>Load the file in Word (2007 or later), LibreOffice, or other modern applications that can read <filename>.doc</filename> files.</para>
       </listitem>
     </itemizedlist>
 

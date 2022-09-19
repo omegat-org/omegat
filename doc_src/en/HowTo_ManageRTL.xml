@@ -3,7 +3,7 @@
 <section id="how.to.manage.right.to.left">
   <title id="how.to.manage.right.to.left.title">Manage right-to-left languages</title>
 
-   <para>The justification of source and target segments depends on the project languages. By default, left justification is used for left-to-right (LTR) languages and right justification for right-to-left (RTL) languages. You can toggle between the following three justification modes by pressing <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>o</keycap></keycombo>: </para>
+   <para>The justification of source and target segments depends on the project languages. By default, left justification is used for left-to-right (LTR) languages and right justification for right-to-left (RTL) languages. You can toggle between the following three justification modes by pressing <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>O</keycap></keycombo>: </para>
 
     <itemizedlist>
       <listitem>

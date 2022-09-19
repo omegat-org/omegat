@@ -5,10 +5,10 @@
   <title id="menus.project.title">Project</title>
   <note><para>Key shortcut description reminder: <link
   linkend="appendix.shortcut" endterm="shortcut.description"/></para>
-      <example><title id="example.next.untranslated.segment.title">New...</title>
+      <example><title id="example.new.project.shortcut.title">New...</title>
   		<para>In this manual:
 		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>N</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>N</keycap>
 		  </keycombo>
 		</para>
 		<para>On Windows and Linux:
@@ -26,7 +26,7 @@
   <variablelist>
     <varlistentry id="menus.project.new">
       <term id="menus.project.new.title">New...		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>N</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>N</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -74,7 +74,7 @@
     <varlistentry id="menus.project.download.mediawiki.page">
       <term id="menus.project.download.mediawiki.page.title">Download MediaWiki Page...</term>
       <listitem>
-		<para>Opens a dialog where you can paste the URL of the <emphasis>Edit</emphasis> tab of the mediawiki page you want to translate.</para>
+		<para>Opens a dialog where you can paste the URL of the <emphasis>Edit</emphasis> tab of the Mediawiki page you want to translate.</para>
         <note><para>To translate the contents of a Wikipedia page (for
         example):</para>
         <orderedlist>
@@ -121,7 +121,7 @@
 
     <varlistentry id="menus.project.close">
       <term id="menus.project.close.title">Close		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>W</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>W</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -181,7 +181,7 @@
 
     <varlistentry id="menus.project.create.current.translated.document">
       <term id="menus.project.create.current.translated.document.title">Create Current Translated Document		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>D</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>D</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -245,7 +245,7 @@
         linkend="project.folder">Project folder</link> for more details.</para>
         <para>In addition, there are three menu entries that directly open the current
         source or target documents, or the writable glossary. The documents are
-        opened in the default application set by the operating system. The options are greyed out if the documents do not exist yet.</para>
+        opened in the default application set by the operating system. The options are grayed out if the documents do not exist yet.</para>
 
 		<variablelist>
 		  <varlistentry>

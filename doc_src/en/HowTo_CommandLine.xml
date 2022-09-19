@@ -8,7 +8,7 @@
   line</title>
 
   <para>The command-line alternative allows the user to control and modify the
-  program's behavior. Once you have defined a set of options, you can save
+  program’s behavior. Once you have defined a set of options, you can save
   them in a script file and launch OmegaT from that script like you would have
   from the default application.</para>
 
@@ -16,20 +16,20 @@
   <section id="launch.with.command.line.tutorial">
 	<title id="launch.with.command.line.tutorial.title">A very short command line interface tutorial</title>
 
-	<para>The command line interface (CLI) was the only way to interact with a
-	computer until the 80's and is now a complement to the graphical interface
-	that we use daily. To access it, you need a "terminal window" where you will
+	<para>The command-line interface (CLI) was the only way to interact with a
+	computer until the 80s and is now a complement to the graphical interface
+	that we use daily. To access it, you need a “terminal window” where you will
 	give orders to the computer with a syntax that is close to
 	<emphasis>imperative verb + complements</emphasis> which is generally
 	described as <code>command + parameters</code>. The <code>command</code> and
 	the various <code>parameters</code> are separated by
-	<emphasis>spaces</emphasis> and and once all the parameters are typed, the
+	<emphasis>spaces</emphasis> and once all the parameters are typed, the
 	command must be <emphasis>sent</emphasis> to the computer by hitting the
 	<keycap>Enter</keycap> key. The computer then executes the command modified
 	by its parameters and displays results, error messages or other side effects
 	on the screen where the command was sent.</para>
 	
-	<note><para>On Windows, the command line interface is called the
+	<note><para>On Windows, the command-line interface is called the
 	<application>Command Prompt</application> and is available from the
 	<guilabel>Start Menu</guilabel>. The macOS equivalent is the
 	<application>Terminal</application> application located in the
@@ -50,7 +50,7 @@
 
 	<para>The most important concept to understand when using the terminal is
 	that the terminal knows some commands by default because it knows where to
-	look for the application that corresponds to the command that's typed. The
+	look for the application that corresponds to the command that’s typed. The
 	terminal does not know new commands by default because unless the commands
 	correspond to applications that are located in a known location, it won't
 	know where to look for the application to run when given a
@@ -98,7 +98,7 @@
 
 	<para>where <parameter>location</parameter> is the full name of the
 	location in which your OmegaT program - specifically, the file
-	<filename>OmegaT.jar</filename> - is located.  In practice, this command
+	<filename>OmegaT.jar</filename> - is located. In practice, this command
 	will therefore be something like this:
 
 	<variablelist>
@@ -240,7 +240,7 @@
 		language codes. The first LL is the source language, the second LL is
 		the target language.</para></listitem></varlistentry>
 		<varlistentry><term>--disable-project-locking</term>
-		<listitem><para>Do not attempt to lock the project's omegat.project
+		<listitem><para>Do not attempt to lock the project’s omegat.project
 		file.</para><para>By default, under Windows, omegat.project is locked,
 		and an error message is received when trying to open a project already
 		opened in another instance of OmegaT. With that option, no locking
@@ -274,10 +274,10 @@
 	  <variablelist>
 		<varlistentry><term>--source-pattern=&lt;pattern&gt;</term>
 		<listitem><para>A regex whitelist of source files to
-		process.</para><para>Here's few typical examples:
+		process.</para><para>Here’s few typical examples:
 		<variablelist>
 		  <varlistentry><term>.*\.html</term><listitem><para>All HTML files will be
-		  translated - note that since it is a regular expression, the periodmust be
+		  translated - note that since it is a regular expression, the period must be
 		  escaped (\.).</para></listitem></varlistentry>
 		  <varlistentry><term>test\.html</term><listitem><para>Only the file
 		  <filename>test.html</filename> at the root of the source folder will be
@@ -312,7 +312,7 @@
 	  supported filters: ILIAS Language File, Java(TM) Resource Bundles, Key=Value
 	  Text, Magento CE Locale CSV, MoodlePHP, Mozilla DTD, Mozilla FTL, PO, RC,
 	  SubRip Subtitles, Windows Resources.</para>
-	  <para>Additional parameter is required in this case, specifying the location of the target data:
+	  <para>An additional parameter is required in this case, specifying the location of the target data:
 	  <variablelist>
 		<varlistentry><term>--alignDir=&lt;path&gt;</term>
 		<listitem><para>A directory containing the translated

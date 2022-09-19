@@ -70,33 +70,33 @@
 		  OmegaT will attempt to create fuzzy matches for paragraphs by
 		  combining existing sentence translations.</para>
 
-		<para>If you change the segmentation while translating, you will have to
-		reload the project for the new segmentation to take effect. This will
-		split or merge some previously translated segments, which will therefore
-		no longer be considered translated. Nonetheless, their original
-		translation will still be in the project memory.</para></note>
+		  <para>If you change the segmentation while translating, you will have to
+		  reload the project for the new segmentation to take effect. This will
+		  split or merge some previously translated segments, which will therefore
+		  no longer be considered translated. Nonetheless, their original
+		  translation will still be in the project memory.</para></note>
 
-		<para>You can limit the segmentation rules used by the project to that
-		project by either setting local rules with the <link
-		linkend="dialogs.project.properties.segmentation"
-		endterm="dialogs.project.properties.segmentation.title"/> button, on the
-		right, or by starting OmegaT from the command line. See <link
-		linkend="launch.with.command.line"
-		endterm="launch.with.command.line.title"/> for details.</para>
+		  <para>You can limit the segmentation rules used by the project to that
+		  project by either setting local rules with the <link
+		  linkend="dialogs.project.properties.segmentation"
+		  endterm="dialogs.project.properties.segmentation.title"/> button, on the
+		  right, or by starting OmegaT from the command line. See <link
+		  linkend="launch.with.command.line"
+		  endterm="launch.with.command.line.title"/> for details.</para>
 
-		<para>If you use local rules, you can still access the global rules, but
-		modifying them will have no effect on your project.</para>
- 
-		<para>See <link linkend="appendix.segmentation"
-		endterm="appendix.segmentation.title"/> for general explanations about
-		segmentation (global or local, paragraph or sentence, setting, etc.)</para>
-			
+		  <para>If you use local rules, you can still access the global rules, but
+		  modifying them will have no effect on your project.</para>
+		  
+		  <para>See <link linkend="appendix.segmentation"
+		  endterm="appendix.segmentation.title"/> for general explanations about
+		  segmentation (global or local, paragraph or sentence, setting, etc.)</para>
+		  
         </listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.segmentation">
         <term
-        id="dialogs.project.properties.segmentation.title">Segmentation...</term>
+			id="dialogs.project.properties.segmentation.title">Segmentation...</term>
         <listitem>
 		  <para>By default, segmentation rules are global and apply to all
 		  projects.</para>
@@ -131,14 +131,14 @@
 		  <para>See <link linkend="appendix.segmentation"
 		  endterm="appendix.segmentation.title"/> for general explanations about
 		  segmentation (global or local, paragraph or sentence, setting, etc.)</para>
-			
+		  
         </listitem>
       </varlistentry>
 	  
 	  
       <varlistentry id="dialogs.project.properties.auto.propagation">
         <term
-        id="dialogs.project.properties.auto.propagation.title">Auto-propagation
+			id="dialogs.project.properties.auto.propagation.title">Auto-propagation
         of Translations</term>
 
         <listitem>
@@ -181,7 +181,7 @@
 
       <varlistentry id="dialogs.project.properties.external.processing.command">
         <term
-        id="dialogs.project.properties.external.processing.command.title">External
+			id="dialogs.project.properties.external.processing.command.title">External
         Post-processing Command</term>
 
         <listitem>
@@ -237,7 +237,7 @@
 
       <varlistentry id="dialogs.project.properties.repository.mapping">
         <term
-        id="dialogs.project.properties.repository.mapping.title">Repository
+			id="dialogs.project.properties.repository.mapping.title">Repository
         Mapping...</term>
 
         <listitem>
@@ -246,7 +246,7 @@
           linkend="how.to.setup.team.project.mapping.parameters"
           endterm="how.to.setup.team.project.mapping.parameters.title"/> in
           <link linkend="how.to.setup.team.project"
-          endterm="how.to.setup.team.project.title"/> for details.</para>
+				endterm="how.to.setup.team.project.title"/> for details.</para>
         </listitem>
       </varlistentry>
 
@@ -273,7 +273,7 @@
 		  and will supersede the general set of searches.</para>
 		  <note><para>To delete project specific external searches, click on the
 		  <guilabel>Remove</guilabel> button or remove that file.</para></note>
-		  		  
+		  
 		  <para>See <link linkend="dialogs.preferences.external.searches"
 		  endterm="dialogs.preferences.external.searches.title"/> for
 		  details.</para>
@@ -303,7 +303,9 @@
 	<para>The location of all resources is stored in the <link
 	linkend="project.folder.omegat.project"
 	endterm="project.folder.omegat.project.title"/> file of the <link
-	linkend="project.folder" endterm="project.folder.title"/>. See <link linkend="project.folder" endterm="project.folder.title"/> for details.</para>
+	linkend="project.folder" endterm="project.folder.title"/>. See <link
+	linkend="project.folder" endterm="project.folder.title"/> for
+	details.</para>
 
 	<para>You can access all the locations with <link
 	linkend="menus.project.access.project.contents"
@@ -312,22 +314,26 @@
 
 	<variablelist>
 	  <varlistentry id="dialogs.project.properties.file.locations.browse">
-		<term id="dialogs.project.properties.file.locations.browse.title"><guibutton>Browse</guibutton></term>
+		<term
+		id="dialogs.project.properties.file.locations.browse.title"><guibutton>Browse</guibutton></term>
 		<listitem><para>The <guibutton>Browse</guibutton> button is available
 		for all the user-defined project resources.</para>
 		<note><para>Resources do not have to be contained in the default project
-		folder that OmegaT creates. You can select any folder that you want to hold your
-		resources, even folders located on shared disks.</para></note>
+		folder that OmegaT creates. You can select any folder that you want to
+		hold your resources, even folders located on shared disks.</para></note>
 		<para>Click on the button to select the folder that you want to use
 		instead of the default resource folder.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
-		<term id="dialogs.project.properties.file.locations.source.files.title">Source Files Folder</term>
+		<term
+		id="dialogs.project.properties.file.locations.source.files.title">Source
+		Files Folder</term>
 		<listitem><para>OmegaT will consider that this folder contains the files
 		that you want to translate. It will try to read all the files at once,
 		and will display in the editor the translatable contents that it has
-		found. See <link linkend="project.folder.source" endterm="project.folder.source.title"/> for details.</para>
+		found. See <link linkend="project.folder.source"
+		endterm="project.folder.source.title"/> for details.</para>
 		<para>If the folder is empty, if none of the files contain translatable
 		contents, or if there are no files supported by OmegaT's file filters,
 		OmegaT will tell you that the folder is empty. See <link
@@ -337,95 +343,165 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.exclusions">
-		<term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions...</guibutton></term>
+		<term
+		id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions...</guibutton></term>
 		<listitem>
-		  <para>Click on <guibutton>Exclusions...</guibutton> to define the files or
-		  folders that will be ignored by OmegaT. An ignored file or folder:</para>
+		  <para>Click on <guibutton>Exclusions...</guibutton> to define the
+		  files or folders that will be ignored by OmegaT. An ignored file or
+		  folder:</para>
 		  
-    <itemizedlist>
-      <listitem>
-        <para>is not displayed in the <link linkend="panes.editor"
-        endterm="panes.editor.title"/> pane,</para>
-      </listitem>
-      <listitem>
-        <para>is not taken into account in the <link
-        linkend="menus.tools.statistics"
-        endterm="menus.tools.statistics.title"/> window, and</para>
-      </listitem>
-      <listitem>
-        <para>is not copied to the <link linkend="project.folder.target"
-        endterm="project.folder.target.title"/> folder when the translated files
-        are created.</para>
-      </listitem>
-    </itemizedlist>
+		  <itemizedlist>
+			<listitem>
+			  <para>is not displayed in the <link linkend="panes.editor"
+			  endterm="panes.editor.title"/> pane,</para>
+			</listitem>
+			<listitem>
+			  <para>is not taken into account in the <link
+			  linkend="menus.tools.statistics"
+			  endterm="menus.tools.statistics.title"/> window, and</para>
+			</listitem>
+			<listitem>
+			  <para>is not copied to the <link linkend="project.folder.target"
+			  endterm="project.folder.target.title"/> folder when the translated files
+			  are created.</para>
+			</listitem>
+		  </itemizedlist>
 
-    <para>The Exclusion patterns dialog, allows you to add or remove a pattern,
-    or to edit one by double-clicking it, or selecting it and pressing F2. You
-    can use wildcards that follow the <ulink
-    url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant
-    syntax</ulink>.</para>
-</listitem>
+		  <para>The Exclusion patterns dialog, allows you to add or remove a pattern,
+		  or to edit one by double-clicking it, or selecting it and pressing F2. You
+		  can use wildcards that follow the <ulink
+		  url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant
+		  syntax</ulink>.</para>
+		</listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
-		<term id="dialogs.project.properties.file.locations.translation.memories.title">Translation Memories Folder</term>
-		<listitem><para>OmegaT will consider that this folder contains the files that you want to use as reference translation memories. It will try to read all the files at once, and will match their contents to the segment you are translating. See <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> for details.</para>
-		<para>If matches are found, they will be displayed in the <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para></listitem>
+		<term
+		id="dialogs.project.properties.file.locations.translation.memories.title">Translation
+		Memories Folder</term>
+		<listitem><para>OmegaT will consider that this folder contains the files
+		that you want to use as reference translation memories. It will try to
+		read all the files at once, and will match their contents to the segment
+		you are translating. See <link linkend="project.folder.tm"
+		endterm="project.folder.tm.title"/> for details.</para>
+		<para>If matches are found, they will be displayed in the <link
+		linkend="panes.fuzzy.matches"
+		endterm="panes.fuzzy.matches.title"/>.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
-		<term id="dialogs.project.properties.file.locations.glossaries.title">Glossaries Folder</term>
-		<listitem><para>OmegaT will consider that this folder contains the files that you want to use as reference glossaries. It will try to read all the files at once, and will match their contents to the segment you are translating. See <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> for details.</para>
-		<para>If matches are found, they will be displayed in the <link linkend="panes.glossary" endterm="panes.glossary.title"/> pane.</para></listitem>
+		<term
+		id="dialogs.project.properties.file.locations.glossaries.title">Glossaries
+		Folder</term>
+		<listitem><para>OmegaT will consider that this folder contains the files
+		that you want to use as reference glossaries. It will try to read all
+		the files at once, and will match their contents to the segment you are
+		translating. See <link linkend="project.folder.glossary"
+		endterm="project.folder.glossary.title"/> for details.</para>
+		<para>If matches are found, they will be displayed in the <link
+		linkend="panes.glossary" endterm="panes.glossary.title"/>
+		pane.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
-		<term id="dialogs.project.properties.file.locations.writable.glossary.title">Writeable Glossary File</term>
-		<listitem><para>The writeable glossary if the file that OmegaT will use when you want to add translated glossary terms to your project. Use <link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> to add term.</para>
-		<para>Added items are automatically recognized and displayed if they match terms in the current segment. See <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> for details.</para></listitem>
+		<term
+		id="dialogs.project.properties.file.locations.writable.glossary.title">Writeable
+		Glossary File</term>
+		<listitem><para>The writeable glossary if the file that OmegaT will use
+		when you want to add translated glossary terms to your project. Use
+		<link linkend="menus.edit.create.glossary.entry"
+		endterm="menus.edit.create.glossary.entry.title"/> to add term.</para>
+		<para>Added items are automatically recognized and displayed if they
+		match terms in the current segment. See <link
+		linkend="dialogs.preferences.glossary"
+		endterm="dialogs.preferences.glossary.title"/> for
+		details.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
-		<term id="dialogs.project.properties.file.locations.dictionaries.title">Dictionaries Folder</term>
-		<listitem><para>OmegaT will consider that this folder contains the files that you want to use as reference dictionaries. It will try to read all the files at once, and will match their contents to the segment you are translating. See <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> for details.</para>
-		<para>If matches are found, they will be displayed in the <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> pane.</para></listitem>
+		<term
+		id="dialogs.project.properties.file.locations.dictionaries.title">Dictionaries
+		Folder</term>
+		<listitem><para>OmegaT will consider that this folder contains the files
+		that you want to use as reference dictionaries. It will try to read all
+		the files at once, and will match their contents to the segment you are
+		translating. See <link linkend="project.folder.dictionary"
+		endterm="project.folder.dictionary.title"/> for details.</para>
+		<para>If matches are found, they will be displayed in the <link
+		linkend="panes.dictionary" endterm="panes.dictionary.title"/>
+		pane.</para></listitem>
 	  </varlistentry>
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
-		<term id="dialogs.project.properties.file.locations.translated.files.title">Translated Files Folder</term>
-		<listitem><para>This folder is the place where OmegaT will copy the contents of the <link linkend="dialogs.project.properties.file.locations.source.files" endterm="dialogs.project.properties.file.locations.source.files.title"/> folder where all the translated segments will be replaced by their translation and the non-translated segments will be kept in the original language.</para>
-		<para>The subfolder structure will reflect the copied contents and files that are not supported by OmegaT's file filters will be copied without modifications.</para>
-		<para>Use <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> to create the translated files. See <link linkend="project.folder.target" endterm="project.folder.target.title"/> for details.</para></listitem>
+		<term
+		id="dialogs.project.properties.file.locations.translated.files.title">Translated
+		Files Folder</term>
+		<listitem><para>This folder is the place where OmegaT will copy the
+		contents of the <link
+		linkend="dialogs.project.properties.file.locations.source.files"
+		endterm="dialogs.project.properties.file.locations.source.files.title"/>
+		folder where all the translated segments will be replaced by their
+		translation and the non-translated segments will be kept in the original
+		language.</para>
+		<para>The subfolder structure will reflect the copied contents and files
+		that are not supported by OmegaT's file filters will be copied without
+		modifications.</para>
+		<para>Use <link linkend="menus.project.create.translated.documents"
+		endterm="menus.project.create.translated.documents.title"/> or <link
+		linkend="menus.project.create.current.translated.document"
+		endterm="menus.project.create.current.translated.document.title"/> to
+		create the translated files. See <link linkend="project.folder.target"
+		endterm="project.folder.target.title"/> for details.</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.project.properties.file.locations.exported.tms">
-		<term id="dialogs.project.properties.file.locations.exported.tms.title">Exported Translation Memories Folder</term>
-		<listitem><para>This folder is the place where OmegaT will copy the current state of the translation in the form of TMX files.</para>
-		<para>The TMX files will contain only the segments that have been translated at the moment the translated files have been created with <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> or <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para></listitem>
+		<term
+		id="dialogs.project.properties.file.locations.exported.tms.title">Exported
+		Translation Memories Folder</term>
+		<listitem><para>This folder is the place where OmegaT will copy the
+		current state of the translation in the form of TMX files.</para>
+		<para>The TMX files will contain only the segments that have been
+		translated at the moment the translated files have been created with
+		<link linkend="menus.project.create.translated.documents"
+		endterm="menus.project.create.translated.documents.title"/> or <link
+		linkend="menus.project.create.current.translated.document"
+		endterm="menus.project.create.current.translated.document.title"/>.</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
-		<term id="dialogs.project.properties.file.locations.tms.to.export.title">Translation memories to export</term>
-		<listitem><para>This checkbox lists lets you choose in which format you want OmegaT to create the above TMX files. See <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> for details.</para>
+		<term
+		id="dialogs.project.properties.file.locations.tms.to.export.title">Translation
+		memories to export</term>
+		<listitem><para>This checkbox lists lets you choose in which format you
+		want OmegaT to create the above TMX files. See <link
+		linkend="how.to.use.tm" endterm="how.to.use.tm.title"/> for
+		details.</para>
 		<variablelist>
 		  <varlistentry>
 			<term>OmegaT</term>
-			<listitem><para>An "OmegaT" TMX contains the tags that OmegaT created, in a form that can only be properly used by an OmegaT project.</para></listitem>
+			<listitem><para>An "OmegaT" TMX contains the tags that OmegaT
+			created, in a form that can only be properly used by an OmegaT
+			project.</para></listitem>
 		  </varlistentry>
 		  
 		  <varlistentry>
 			<term>TMX Level 1</term>
-			<listitem><para>A "level 1" TMX contains only textual data and has removed all tag information.</para></listitem>
+			<listitem><para>A "level 1" TMX contains only textual data and has
+			removed all tag information.</para></listitem>
 		  </varlistentry>
 
 		  <varlistentry>
 			<term>TMX Level 2</term>
-			<listitem><para>A "level 2" TMX contains textual data along with tags encapsulated in a way that is compatible with other CAT tools.</para></listitem>
+			<listitem><para>A "level 2" TMX contains textual data along with
+			tags encapsulated in a way that is compatible with other CAT
+			tools.</para></listitem>
 		  </varlistentry>
 		</variablelist>
-		<para>See <ulink url="https://www.gala-global.org/tmx-14b#SectionIntroduction">TMX 1.4b Specification</ulink> for details.</para>
+		<para>See <ulink
+		url="https://www.gala-global.org/tmx-14b#SectionIntroduction">TMX 1.4b
+		Specification</ulink> for details.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
-    </section>
+  </section>
 </section>

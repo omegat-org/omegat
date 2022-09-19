@@ -91,7 +91,7 @@
 
     <varlistentry id="menus.edit.replace.with.source">
       <term id="menus.edit.replace.with.source.title">Replace with Source		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>R</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>R</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -101,7 +101,7 @@
 
     <varlistentry id="menus.edit.insert.source">
       <term id="menus.edit.insert.source.title">Insert Source		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>I</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>I</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -111,7 +111,7 @@
 
     <varlistentry id="menus.edit.insert.missing.source.tag">
       <term id="menus.edit.insert.missing.source.tag.title">Insert Missing Source Tags		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>T</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>T</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -132,7 +132,7 @@
 
     <varlistentry id="menus.edit.export.selection">
       <term id="menus.edit.export.selection.title">Export Selection		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>C</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>C</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -144,7 +144,7 @@
 
     <varlistentry id="menus.edit.create.glossary.entry">
       <term id="menus.edit.create.glossary.entry.title">Create Glossary Entry		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>G</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -158,7 +158,7 @@
 		  <listitem><para>Select a text string in any pane</para>
 		  <para>Press
 		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>G</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
 		  </keycombo>
 		  </para>
 		  <para>The selection will be entered in the <guilabel>Source
@@ -166,7 +166,7 @@
 		  <listitem><para>Select a text string in any pane</para>
 		  <para>Press
 		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>G</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
 		  </keycombo>
 		  </para>
 		  <para>The selection will be entered in the <guilabel>Target
@@ -174,7 +174,7 @@
 		  <listitem><para>[Optional] Select a text string in any pane</para>
 		  <para>Press
 		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>G</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>G</keycap>
 		  </keycombo>
 		  </para>
 		  <para>The selection will be entered in the <guilabel>Comment</guilabel> field. You can also enter your comment manually.</para></listitem>
@@ -197,7 +197,7 @@
         for:</guilabel> field.</para>
 		<para>
 		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>F</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>F</keycap>
 		  </keycombo>
 		  reuses the most recent still open Search window (instead of opening a
 		new one).</para>

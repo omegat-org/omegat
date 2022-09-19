@@ -8,7 +8,7 @@
       <example><title id="example.new.project.shortcut.title">New...</title>
   		<para>In this manual:
 		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>N</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>N</keycap>
 		  </keycombo>
 		</para>
 		<para>On Windows and Linux:
@@ -26,7 +26,7 @@
   <variablelist>
     <varlistentry id="menus.project.new">
       <term id="menus.project.new.title">New...		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>N</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>N</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -121,7 +121,7 @@
 
     <varlistentry id="menus.project.close">
       <term id="menus.project.close.title">Close		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>W</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>W</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -181,7 +181,7 @@
 
     <varlistentry id="menus.project.create.current.translated.document">
       <term id="menus.project.create.current.translated.document.title">Create Current Translated Document		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>D</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>D</keycap>
 		  </keycombo>
 </term>
       <listitem>

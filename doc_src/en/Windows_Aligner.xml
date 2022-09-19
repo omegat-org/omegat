@@ -346,7 +346,7 @@
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><guimenuitem>Realign Pending</guimenuitem> (<keycombo><keycap>C</keycap><keycap>r</keycap></keycombo>)</term>
+        <term><guimenuitem>Realign Pending</guimenuitem> (<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
         <listitem>
           <para>If any rows have been marked as accepted, use this command to update the alignment for the remaining rows.</para>
         </listitem>

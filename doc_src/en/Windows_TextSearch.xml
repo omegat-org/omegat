@@ -14,7 +14,7 @@
   <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>. The selection is
   automatically entered in the search field.</para>
 
-  <para>You can have several search windows opened at the same time. Use <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>F</keycap></keycombo> to call the last search window.</para>
+  <para>You can have several search windows opened at the same time. Use <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> to call the last search window.</para>
 
   <para>Click the drop-down arrow of the <guilabel>Search for:</guilabel> field to access the last ten searches.</para>
 

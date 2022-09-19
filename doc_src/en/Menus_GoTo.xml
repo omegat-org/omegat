@@ -40,7 +40,7 @@
 
     <varlistentry id="menus.goto.next.translated.segment">
       <term id="menus.goto.next.translated.segment.title">Next Translated Segment		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>U</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>U</keycap>
 		  </keycombo>
 </term>
 
@@ -123,7 +123,7 @@
 
     <varlistentry id="menus.goto.next.unique.segment">
       <term id="menus.goto.next.unique.segment.title">Next Unique Segment		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>Q</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>Q</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -133,7 +133,7 @@
 
     <varlistentry id="menus.goto.source.of.selected.match">
       <term id="menus.goto.source.of.selected.match.title">Source of Selected Match		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>M</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>M</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -144,7 +144,7 @@
 
     <varlistentry id="menus.goto.forward.in.history">
       <term id="menus.goto.forward.in.history.title">Forward in history...		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>N</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>N</keycap>
 		  </keycombo>
 </term>
       <listitem>
@@ -157,7 +157,7 @@
 
     <varlistentry id="menus.goto.back.in.history">
       <term id="menus.goto.back.in.history.title">Back in history...		  <keycombo>
-			<keycap>S</keycap><keycap>C</keycap><keycap>P</keycap>
+			<keycap>C</keycap><keycap>S</keycap><keycap>P</keycap>
 		  </keycombo>
 </term>
       <listitem>

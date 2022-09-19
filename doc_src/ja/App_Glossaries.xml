@@ -9,20 +9,20 @@
 
   <para>プロジェクト内の用語集の数に関係なく、セグメント内の単語と一致する用語が[用語集]ペインに表示されます。</para>
 
-  <section>
+  <section id="glossaries.defaultglossary">
     <title>デフォルトの用語集</title>
 
-    <para>デフォルトの書き込み可能な用語集は<filename>/glossary</filename>プロジェクトフォルダにあり、<filename>glossary.txt</filename>という名前が付いています。</para>
+    <para>デフォルトの書き込み可能な用語集は<filename class="directory">/glossary</filename>プロジェクトフォルダにあり、<filename>glossary.txt</filename>という名前が付いています。</para>
 
-    <para>名前と場所はプロジェクトのプロパティダイアログで変更できますが、拡張子は<filename>.txt</filename>または<filename>.utf8</filename>で、場所は<filename>/glossary</filename>プロジェクトフォルダに含まれている必要があります。</para>
+    <para>名前と場所はプロジェクトのプロパティダイアログで変更できますが、拡張子は<filename>.txt</filename>または<filename>.utf8</filename>で、場所は<filename class="directory">glossary</filename>プロジェクトフォルダに含まれている必要があります。</para>
 
     <para>ファイルは、設定時に存在する必要はありません。最初の用語集エントリを追加するときに作成されます。ファイルがすでに存在する場合は、ファイルの形式または文字セットの確認は行われません。新しいエントリは常にタブ区切り形式で、ファイルはUTF-8エンコーディングで保存されます。</para>
   </section>
 
-  <section>
+  <section id="glossaries.usage">
     <title>使い方</title>
 
-    <para>既存の用語集を使用するには、プロジェクトの作成後に<filename>/glossary</filename>フォルダに配置します。<application>OmegaT</application>は、プロジェクトを開くと、このフォルダ内の用語集ファイルを自動的に検出します。</para>
+    <para>既存の用語集を使用するには、プロジェクトの作成後に<filename class="directory">glossary</filename>フォルダに配置します。OmegaTは、プロジェクトを開くと、このフォルダ内の用語集ファイルを自動的に検出します。</para>
 
     <para>書き込み可能な用語集に新しい用語を追加するには、<guimenuitem>編集</guimenuitem>&gt;<guimenuitem>用語の追加</guimenuitem>(<keycap>Ctrl+Shift+G</keycap>)を使用します。新しく追加された用語はすぐに認識されます。新しい用語を参照用の用語集に追加するには、外部テキストエディタで編集します。追加した用語は、用語集ファイルの変更が保存され次第、認識されます。</para>
 
@@ -37,7 +37,7 @@
     <para>分節の原文部分で一致する用語に下線を付けるには、<guimenuitem>表示</guimenuitem>&gt;<guimenuitem>用語集の一致をマーク</guimenuitem>を使用します。下線の付いた用語を右クリックし訳文を選択し、分節のターゲット部分のカーソル位置に挿入します。</para>
   </section>
 
-  <section>
+  <section id="glossaries.fileformat">
     <title>ファイル形式</title>
 
     <para>用語集ファイルは単純なテキストファイルで、３つの列（カラム）からなるリストの形をしています。最初の列は原文で、それ以降はオプションで、２番目の列は訳文の用語、3番目はコメントが入ります。</para>
@@ -62,17 +62,17 @@
       </tbody>
     </table>
 
-    <para>用語集は<filename>/glossary</filename>プロジェクトフォルダに配置する必要があります。フォルダ内のさらにフォルダー内にある用語集も認識されます。</para>
+    <para>用語集は<filename class="directory">glossary</filename>プロジェクトフォルダに配置する必要があります。フォルダ内のさらにフォルダー内にある用語集も認識されます。</para>
   </section>
 
-  <section>
+  <section id="glossaries.commonproblems">
     <title>用語集に関するよくある問題</title>
 
     <para><emphasis role="bold">問題：用語が何も表示されません。</emphasis></para>
 
     <itemizedlist>
       <listitem>
-        <para>glossary フォルダーに用語集ファイルがない</para>
+        <para><filename class="directory">glossary</filename> フォルダーに用語集ファイルがない</para>
       </listitem>
     </itemizedlist>
 

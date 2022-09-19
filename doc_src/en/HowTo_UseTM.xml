@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.tm">
-  <title id="how.to.tm.title">Translation Memories</title>
+<section id="how.to.use.tm">
+  <title id="how.to.use.tm.title">Use Translation Memories</title>
 
   <para>When a project is initially created, its translation memory, <link
   linkend="project.folder.project.save.tmx.title"

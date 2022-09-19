@@ -282,8 +282,8 @@
     memories. This includes both the internal project translation memory you
     create in real time as you translate the project, and external memories you
     have imported from previous projects or received from the client or
-    translation agency. See <link linkend="how.to.reuse.tm"
-    endterm="how.to.reuse.tm.title"/> for details.</para>
+    translation agency. See <link linkend="how.to.tm"
+    endterm="how.to.tm.title"/> for details.</para>
 
     <para>When you enter a segment, the first fuzzy match (the one with the
     highest match percentage) is automatically selected. You can press

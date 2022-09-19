@@ -406,7 +406,7 @@
 
 	  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
 		<term id="dialogs.project.properties.file.locations.tms.to.export.title">Translation memories to export</term>
-		<listitem><para>This checkbox lists lets you choose in which format you want OmegaT to create the above TMX files. See <link linkend="how.to.reuse.tm" endterm="how.to.reuse.tm.title"/> for details.</para>
+		<listitem><para>This checkbox lists lets you choose in which format you want OmegaT to create the above TMX files. See <link linkend="how.to.tm" endterm="how.to.tm.title"/> for details.</para>
 		<variablelist>
 		  <varlistentry>
 			<term>OmegaT</term>

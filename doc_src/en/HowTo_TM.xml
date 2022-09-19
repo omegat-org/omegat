@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="how.to.reuse.tm">
-  <title id="how.to.reuse.tm.title">Reuse Translation Memories</title>
+<section id="how.to.tm">
+  <title id="how.to.tm.title">Translation Memories</title>
 
   <para>When a project is initially created, its translation memory, <link
   linkend="project.folder.project.save.tmx.title"
@@ -64,8 +64,8 @@ arises. In which case you will just need to use the appropriate folder as the
   endterm="dialogs.project.properties.file.locations.translation.memories.title"/>
   of your project.</para>
 
-  <section id="how.to.reuse.tm.importing.and.exporting">
-    <title id="how.to.reuse.tm.importing.and.exporting.title">Importing and
+  <section id="how.to.tm.importing.and.exporting">
+    <title id="how.to.tm.importing.and.exporting.title">Importing and
     exporting translation memories</title>
 
     <para>OmegaT can import both levels1 and 2 of TMX versions 1.1 to 1.4b,
@@ -94,9 +94,9 @@ arises. In which case you will just need to use the appropriate folder as the
     produced by OmegaT.</para>
   </section>
 
-  <section id="how.to.reuse.tm.creating.a.tm.for.selected.documents">
+  <section id="how.to.tm.creating.a.tm.for.selected.documents">
     <title
-    id="how.to.reuse.tm.creating.a.tm.for.selected.documents.title">Creating a
+    id="how.to.tm.creating.a.tm.for.selected.documents.title">Creating a
     translation memory specific to selected documents</title>
 
     <para>In situations where a translator needs to share a TMX that contain
@@ -162,8 +162,8 @@ arises. In which case you will just need to use the appropriate folder as the
     </itemizedlist>
   </section>
 
-  <section id="how.to.reuse.tm.sharing.translation.memories">
-    <title id="how.to.reuse.tm.sharing.translation.memories.title">Sharing
+  <section id="how.to.tm.sharing.translation.memories">
+    <title id="how.to.tm.sharing.translation.memories.title">Sharing
     translation memories</title>
 
     <para>For large jobs involving a team of translators, it is easier for
@@ -181,8 +181,8 @@ arises. In which case you will just need to use the appropriate folder as the
     sections of this chapter for more information.</para>
   </section>
 
-  <section id="how.to.reuse.tm.using.tmx.with.alternative.languages">
-    <title id="how.to.reuse.tm.using.tmx.with.alternative.languages.title">Using
+  <section id="how.to.tm.using.tmx.with.alternative.languages">
+    <title id="how.to.tm.using.tmx.with.alternative.languages.title">Using
     TMX with an alternative language</title>
 
     <para>Some projects may require the same source text to be translated in

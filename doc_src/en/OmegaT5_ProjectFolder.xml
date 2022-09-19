@@ -95,7 +95,7 @@
         </listitem>
       </orderedlist>
 	  
-      <warning><para>If you remove a TMX file from <filename class="directory">tm/auto</filename> before Step 3, the translations it contains will not be retained in the project or saved in the project_save.tmx file.</para></warning>    
+      <warning><para>If you remove a TMX file from <filename class="directory">tm/auto</filename> before Step 3, none of its automatically inserted translations will be kept.</para></warning>    
     </section>
 
     <section id="project.folder.tm.enforce">
@@ -133,7 +133,7 @@
         </listitem>
       </orderedlist>
 	  
-      <warning><para>If  you remove aTMX file from <filename class="directory">tm/enforce</filename> before Step 3, none of the enforced translations are kept.</para></warning>
+      <warning><para>If  you remove a TMX file from <filename class="directory">tm/enforce</filename> before Step 3, none of the enforced translations will be kept.</para></warning>
     </section>
 
     <section id="project.folder.tm.mt">
@@ -146,6 +146,21 @@
       <para>It can be useful to distinguish between high-quality translation memories and other memories that, due to the subject matter, client, revision status, or other factors,are less reliable. The score of matches from translation memories in subfolders named <filename class="directory">penalty-xxx</filename> (where xxx is a number between 0 and 100), is decreased by an amount corresponding to the value in the name of the subfolder. For example, a 100% match in a TMX, stored in a subfolder called <filename class="directory">penalty-30</filename> becomes a 70% match. The penalty applies to all three match percentages. Scores of 75, 80 and 90 for a match are lowered to 45, 50 and 60.</para>
     </section>
 
+    <section id="project.folder.tm.tmx2source">
+      <title id="project.folder.tm.tmx2source.title">tm/tmx2source</title>
+  <para>OmegaT displays fuzzy matches in the <link linkend="panes.fuzzy.matches"
+  endterm="panes.fuzzy.matches.title"/> pane. But such matches are limited to
+  the source and target languages defined in <link
+  linkend="dialogs.project.properties"
+  endterm="dialogs.project.properties.title"/>, even if the reference TMX are
+  multilingual.</para>
+
+  <para>With OmegaT, you can display a third language <emphasis>right
+  under</emphasis> the source segment to use as a third language reference. See
+  <link linkend="how.to.tm.bridge.two.languages"
+  endterm="how.to.tm.bridge.two.languages.title"/> for details.</para>
+    </section>
+	
 	<note><para>You can combine subfolders to create new functions. For example, a 10% penalty folder within the machine translation folder: <filename>tm/mt/penalty-010</filename> would never generate 100% matches that could otherwise be automatically inserted by OmegaT, and would always set a red background to the match whenever it is inserted.</para></note>
   </section>
 

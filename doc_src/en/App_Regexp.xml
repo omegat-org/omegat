@@ -4,36 +4,49 @@
 <appendix id="appendix.regexp">
   <title id="appendix.regexp.title">Regular expressions</title>
 
-  <para>Regular expressions are used in many places in OmegaT and knowing how to use them can tremendously improve your productivity:
+  <para>Regular expressions are used in many places in OmegaT and knowing how to
+  use them can tremendously improve your productivity:
+
   <variablelist>
 	<varlistentry>
 	  <term>Searches</term>
 	  <listitem><para>OmegaT searches include a <link
-	  linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/>
-	  option that allows you to make extremely powerful searches across your
-	  files.</para>
-	  <para>An option with the same label in the <link
-	  linkend="windows.text.replace" endterm="windows.text.replace.title"/>
-	  dialog allows you to replace text with regular expression search
-	  matches.</para></listitem>
-	  </varlistentry>
+	  linkend="windows.text.search.methods.regex"
+	  endterm="windows.text.search.methods.regex.title"/> option that allows you
+	  to make extremely powerful searches across your files.</para> <para>An
+	  option with the same label in the <link linkend="windows.text.replace"
+	  endterm="windows.text.replace.title"/> dialog allows you to replace text
+	  with regular expression search matches.</para></listitem>
+	</varlistentry>
+
 	<varlistentry>
 	  <term>Custom tags</term>
 	  <listitem><para>Custom tags are tags that you define using regular
 	  expressions. The tags are handled exactly like OmegaT's native tags. See
 	  <link
-	  linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
-	  endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
+		  linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags"
+		  endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>
 	  for details.</para></listitem>
-	  </varlistentry>
+	</varlistentry>
+
 	<varlistentry>
 	  <term>Controlled strings</term>
-	  <listitem><para><link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> allow you to define strings that OmegaT will mark in red by default, and consider as an extraneous tag for validation purposes.</para></listitem>
-	  </varlistentry>
+	  <listitem><para><link
+	  linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
+	  endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/>
+	  allow you to define strings that OmegaT will mark in red by default, and
+	  consider as an extraneous tag for validation purposes.</para></listitem>
+	</varlistentry>
+
 	<varlistentry>
 	  <term>Segmentation</term>
-	  <listitem><para>Segmentation rules and language patterns are regular expressions. You can modify them at will to better segment a document or add general rule sets. See <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> for details.</para></listitem>
-	  </varlistentry>
+	  <listitem><para>Segmentation rules and language patterns are regular
+	  expressions. You can modify them at will to better segment a document or
+	  add general rule sets. See <link
+	  linkend="dialogs.preferences.segmentation.setup"
+	  endterm="dialogs.preferences.segmentation.setup.title"/> for
+	  details.</para></listitem>
+	</varlistentry>
   </variablelist>
   </para>
 
@@ -45,9 +58,9 @@
   below.</para>
 
   <note>
-    <para>This chapter is intended for advanced users, who need to define
-    their own variants of segmentation rules or devise more complex and
-    powerful key search items.</para>
+	<para>This chapter is intended for advanced users, who need to define their
+	own variants of segmentation rules or devise more complex and powerful key
+	search items.</para>
   </note>
 
   <table id="regex.flags">
@@ -59,7 +72,6 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">... matches the following</entry>
         </row>
       </thead>
@@ -67,7 +79,6 @@
       <tbody>
         <row>
           <entry>(?i)</entry>
-
           <entry>Enables case-insensitive matching (by default, the pattern is
           case-sensitive).</entry>
         </row>
@@ -84,7 +95,6 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">... matches the following</entry>
         </row>
       </thead>
@@ -92,81 +102,67 @@
       <tbody>
         <row>
           <entry>x</entry>
-
           <entry>The character x, except the following...</entry>
         </row>
 
         <row>
           <entry>\uhhhh</entry>
-
           <entry>The character with hexadecimal value 0xhhhh</entry>
         </row>
 
         <row>
           <entry>\t</entry>
-
           <entry>The tab character ('\u0009')</entry>
         </row>
 
         <row>
           <entry>\n</entry>
-
           <entry>The newline (line feed) character ('\u000A')</entry>
         </row>
 
         <row>
           <entry>\r</entry>
-
           <entry>The carriage-return character ('\u000D')</entry>
         </row>
 
         <row>
           <entry>\f</entry>
-
           <entry>The form-feed character ('\u000C')</entry>
         </row>
 
         <row>
           <entry>\a</entry>
-
           <entry>The alert (bell) character ('\u0007')</entry>
         </row>
 
         <row>
           <entry>\e</entry>
-
           <entry>The escape character ('\u001B')</entry>
         </row>
 
         <row>
           <entry>\cx</entry>
-
           <entry>The control character corresponding to x</entry>
         </row>
 
         <row>
           <entry>\0n</entry>
-
           <entry>The character with octal value 0n (0 &lt;= n &lt;= 7)</entry>
         </row>
 
         <row>
           <entry>\0nn</entry>
-
           <entry>The character with octal value 0nn (0 &lt;= n &lt;=
           7)</entry>
         </row>
 
         <row>
-          <entry>\0mnn</entry>
-
-          <entry>The character with octal value 0mnn (0 &lt;= m &lt;= 3, 0
-          &lt;= n &lt;= 7)</entry>
+          <entry>\0mnn</entry> <entry>The character with octal value 0mnn (0
+          &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</entry>
         </row>
 
         <row>
           <entry>\xhh</entry>
-
           <entry>The character with hexadecimal value 0xhh</entry>
         </row>
       </tbody>
@@ -182,35 +178,29 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">...matches the following</entry>
         </row>
       </thead>
 
       <tbody>
         <row>
-          <entry>\</entry>
-
-          <entry>Nothing, but quotes the following character. This is required
-          if you would like to enter any of the meta characters
-          !$()*+.&lt;&gt;?[\]^{|} to match as themselves.</entry>
+          <entry>\</entry> <entry>Nothing, but quotes the following
+          character. This is required if you would like to enter any of the meta
+          characters !$()*+.&lt;&gt;?[\]^{|} to match as themselves.</entry>
         </row>
 
         <row>
           <entry>\\</entry>
-
           <entry>For example, this is the backslash character</entry>
         </row>
 
         <row>
           <entry>\Q</entry>
-
           <entry>Nothing, but quotes all characters until \E</entry>
         </row>
 
         <row>
           <entry>\E</entry>
-
           <entry>Nothing, but ends quoting started by \Q</entry>
         </row>
       </tbody>
@@ -218,7 +208,8 @@
   </table>
 
   <table id="regex.unicode.blocs">
-    <title id="regex.unicode.blocs.title">Regex - Classes for Unicode blocks and categories</title>
+    <title id="regex.unicode.blocs.title">Regex - Classes for Unicode blocks and
+    categories</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -226,7 +217,6 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">...matches the following</entry>
         </row>
       </thead>
@@ -234,34 +224,31 @@
       <tbody>
         <row>
           <entry>\p{InGreek}</entry>
-
-          <entry>A character in the Greek block (simple <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">
+          <entry>A character in the Greek block (simple <ulink
+          url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">
           block</ulink>)</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
-
-          <entry>An uppercase letter (simple <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">
+          <entry>An uppercase letter (simple <ulink
+          url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">
           category</ulink>)</entry>
         </row>
 
         <row>
           <entry>\p{Sc}</entry>
-
           <entry>A currency symbol</entry>
         </row>
 
         <row>
           <entry>\P{InGreek}</entry>
-
           <entry>Any character except one in the Greek block
           (negation)</entry>
         </row>
 
         <row>
           <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
-
           <entry>Any letter except an uppercase letter (subtraction)</entry>
         </row>
       </tbody>
@@ -277,7 +264,6 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">...matches the following</entry>
         </row>
       </thead>
@@ -285,19 +271,16 @@
       <tbody>
         <row>
           <entry>[abc]</entry>
-
           <entry>a, b, or c (simple class)</entry>
         </row>
 
         <row>
           <entry>[^abc]</entry>
-
           <entry>Any character except a, b, or c (negation)</entry>
         </row>
 
         <row>
           <entry>[a-zA-Z]</entry>
-
           <entry>a through z or A through Z, inclusive (range)</entry>
         </row>
       </tbody>
@@ -313,7 +296,6 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">...matches the following</entry>
         </row>
       </thead>
@@ -321,43 +303,36 @@
       <tbody>
         <row>
           <entry>.</entry>
-
           <entry>Any character (except for line terminators)</entry>
         </row>
 
         <row>
           <entry>\d</entry>
-
           <entry>A digit: [0-9]</entry>
         </row>
 
         <row>
           <entry>\D</entry>
-
           <entry>A non-digit: [^0-9]</entry>
         </row>
 
         <row>
           <entry>\s</entry>
-
           <entry>A whitespace character: [ \t\n\x0B\f\r]</entry>
         </row>
 
         <row>
           <entry>\S</entry>
-
           <entry>A non-whitespace character: [^\s]</entry>
         </row>
 
         <row>
           <entry>\w</entry>
-
           <entry>A word character: [a-zA-Z_0-9]</entry>
         </row>
 
         <row>
           <entry>\W</entry>
-
           <entry>A non-word character: [^\w]</entry>
         </row>
       </tbody>
@@ -373,7 +348,6 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">...matches the following</entry>
         </row>
       </thead>
@@ -381,25 +355,21 @@
       <tbody>
         <row>
           <entry>^</entry>
-
           <entry>The beginning of a line</entry>
         </row>
 
         <row>
           <entry>$</entry>
-
           <entry>The end of a line</entry>
         </row>
 
         <row>
           <entry>\b</entry>
-
           <entry>A word boundary</entry>
         </row>
 
         <row>
           <entry>\B</entry>
-
           <entry>A non-word boundary</entry>
         </row>
       </tbody>
@@ -415,7 +385,6 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">...matches the following</entry>
         </row>
       </thead>
@@ -423,19 +392,16 @@
       <tbody>
         <row>
           <entry>X<emphasis>?</emphasis></entry>
-
           <entry>X, once or not at all</entry>
         </row>
 
         <row>
           <entry>X<emphasis>*</emphasis></entry>
-
           <entry>X, zero or more times</entry>
         </row>
 
         <row>
           <entry>X<emphasis>+</emphasis></entry>
-
           <entry>X, one or more times</entry>
         </row>
       </tbody>
@@ -449,7 +415,8 @@
   </note>
 
   <table id="regex.non.greedy.quantifiers">
-    <title id="regex.non.greedy.quantifiers.title">Regex - Reluctant (non-greedy) quantifiers</title>
+    <title id="regex.non.greedy.quantifiers.title">Regex - Reluctant
+    (non-greedy) quantifiers</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -457,7 +424,6 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">...matches the following</entry>
         </row>
       </thead>
@@ -465,19 +431,16 @@
       <tbody>
         <row>
           <entry>X??</entry>
-
           <entry>X, once or not at all</entry>
         </row>
 
         <row>
           <entry>X*?</entry>
-
           <entry>X, zero or more times</entry>
         </row>
 
         <row>
           <entry>X+?</entry>
-
           <entry>X, one or more times</entry>
         </row>
       </tbody>
@@ -499,7 +462,6 @@
       <thead>
         <row>
           <entry align="left">The construct</entry>
-
           <entry align="left">...matches the following</entry>
         </row>
       </thead>
@@ -507,19 +469,16 @@
       <tbody>
         <row>
           <entry>XY</entry>
-
           <entry>X followed by Y</entry>
         </row>
 
         <row>
           <entry>X|Y</entry>
-
           <entry>Either X or Y</entry>
         </row>
 
         <row>
           <entry>(XY)</entry>
-
           <entry>XY as a single group</entry>
         </row>
       </tbody>
@@ -527,7 +486,8 @@
   </table>
 
   <section id="regex.tools.and.examples.of.use">
-    <title id="regex.tools.and.examples.of.use.title">Regex tools and examples of use</title>
+    <title id="regex.tools.and.examples.of.use.title">Regex tools and examples
+    of use</title>
 
     <para>A number of interactive tools are available to develop and test
     regular expressions. They generally follow much the same pattern (for an
@@ -549,17 +509,17 @@
       </mediaobject>
     </figure>
 
-    <para>See <ulink url="http://weitz.de/regex-coach/">The Regex
-    Coach</ulink> for Windows,Linux, FreeBSD versions of a stand-alone tool.
-    This is much the same as the above example.</para>
+    <para>See <ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink>
+    for Windows,Linux, FreeBSD versions of a stand-alone tool.  This is much the
+    same as the above example.</para>
 
-    <para>A nice collection of useful regex cases can be found in
-    OmegaT itself (see Options &gt; Segmentation).
-    The following list includes expressions you may find useful when searching
-    through the translation memory:</para>
+    <para>A nice collection of useful regex cases can be found in OmegaT itself
+    (see Options &gt; Segmentation).  The following list includes expressions
+    you may find useful when searching through the translation memory:</para>
 
     <table id="regex.examples">
-      <title id="regex.examples.title">Regex - Examples of regular expressions in translations</title>
+      <title id="regex.examples.title">Regex - Examples of regular expressions
+      in translations</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1"/>
@@ -567,7 +527,6 @@
         <thead>
           <row>
             <entry>Regular expression</entry>
-
             <entry>Finds the following:</entry>
           </row>
         </thead>
@@ -575,47 +534,39 @@
         <tbody>
           <row>
             <entry>(\b\w+\b)\s\1\b</entry>
-
             <entry>double words</entry>
           </row>
 
           <row>
             <entry>[\.,]\s*[\.,]+</entry>
-
             <entry>comma or a period, followed by spaces and yet another comma
             or period</entry>
           </row>
 
           <row>
             <entry>\. \s+$</entry>
-
-            <entry>extra spaces after the period at the end of the
-            line</entry>
+            <entry>extra spaces after the period at the end of the line</entry>
           </row>
 
           <row>
             <entry>\s+a\s+[aeiou]</entry>
-
             <entry>English: words, beginning with vowels, should generally be
             preceded by &quot;an&quot;, not &quot;a&quot;</entry>
           </row>
 
           <row>
             <entry>\s+an\s+[^aeiou]</entry>
-
             <entry>English: the same check as above, but concerning consonants
             (&quot;a&quot;, not &quot;an&quot;)</entry>
           </row>
 
           <row>
             <entry>\s{2,}</entry>
-
             <entry>more than one space</entry>
           </row>
 
           <row>
             <entry>\.[A-Z]</entry>
-
             <entry>Period, followed by an upper-case letter - possibly a space
             is missing between the period and the start of a new
             sentence?</entry>
@@ -623,7 +574,6 @@
 
           <row>
             <entry>\bis\b</entry>
-
             <entry>search for “is”, not “this” or “isn't” etc.</entry>
           </row>
         </tbody>
